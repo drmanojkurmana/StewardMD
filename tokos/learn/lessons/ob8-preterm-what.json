@@ -3,7 +3,12 @@
   "unit": "ob8",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Preterm labour: who is at risk and how to check the cervix",
     "hi": "समय पूर्व प्रसव: किसे जोखिम है और ग्रीवा कैसे जाँचें"
@@ -13,9 +18,8 @@
     "hi": "[[preterm]] जन्म का मतलब 37 सप्ताह से पहले जन्म है। छोटी ग्रीवा या पहले हुआ समय पूर्व जन्म सबसे साफ़ चेतावनियाँ हैं, और इन पर कार्रवाई हो सकती है।"
   },
   "see": {
-    "diagram": "diagrams/ob8-preterm-what.svg",
-    "w": 480,
-    "h": 300,
+    "w": 1080,
+    "h": 724,
     "alt": {
       "en": "Two womb outlines. The left has a long cervical canal marked by a green measuring arrow. The right has a short canal marked by a red arrow and a yellow stitch around the cervix.",
       "hi": "गर्भाशय की दो रूपरेखाएँ। बाईं में लंबी ग्रीवा नली है जिसे हरा तीर नापता है। दाईं में छोटी नली है जिसे लाल तीर नापता है और ग्रीवा के चारों ओर पीला टाँका है।"
@@ -24,11 +28,11 @@
       "en": "A long cervix on the left, a short cervix held by a stitch on the right.",
       "hi": "बाईं ओर लंबी ग्रीवा, दाईं ओर टाँके से थमी छोटी ग्रीवा।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.25,
-        "y": 0.717,
+        "x": 0.26,
+        "y": 0.68,
         "label": {
           "en": "Long cervix",
           "hi": "लंबी ग्रीवा"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.633,
+        "x": 0.74,
+        "y": 0.66,
         "label": {
           "en": "Short cervix, 25 mm or less",
           "hi": "छोटी ग्रीवा, 25 mm या कम"
@@ -51,17 +55,33 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.613,
+        "x": 0.81,
+        "y": 0.6,
         "label": {
           "en": "Cerclage stitch",
-          "hi": "सर्क्लाज टाँका"
+          "hi": "सरक्लाज टाँका"
         },
         "note": {
           "en": "Offered, or vaginal progesterone, when there was a preterm birth or late loss before and the cervix is short.",
-          "hi": "पहले समय पूर्व जन्म या देर से गर्भपात हुआ हो और ग्रीवा छोटी हो तो यह, या योनि प्रोजेस्ट्रोन, दिया जाता है।"
+          "hi": "पहले समय पूर्व जन्म या देर से गर्भपात हुआ हो और ग्रीवा छोटी हो तो यह, या योनि प्रोजेस्टेरोन, दिया जाता है।"
+        }
+      },
+      {
+        "x": 0.74,
+        "y": 0.53,
+        "label": {
+          "en": "Internal os funneling",
+          "hi": "आंतरिक os का फनलिंग"
+        },
+        "note": {
+          "en": "V-shaped or U-shaped widening of the internal cervical os before true labour starts.",
+          "hi": "सच्चे प्रसव से पहले आंतरिक ग्रीवा os का V-आकार या U-आकार में चौड़ा होना।"
         }
       }
+    ],
+    "img": "learn/media/real/ob8-preterm-what.webp",
+    "more": [
+      "ob8-preterm-what"
     ]
   },
   "why": {

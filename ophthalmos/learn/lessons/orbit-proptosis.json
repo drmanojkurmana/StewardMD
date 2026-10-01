@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Proptosis: an eye pushed forward",
     "hi": "प्रॉप्टोसिस: आगे धकेली गई आँख"
@@ -13,22 +18,21 @@
     "hi": "[[proptosis]] में आँख के पीछे कुछ उसे आगे धकेलता है। इसे नापें, देखें कि आँख किस दिशा में धकेली गई है, और मरीज़ की उम्र पर सोचें।"
   },
   "see": {
-    "diagram": "diagrams/orbit-proptosis.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of both orbits seen from above, with the eyes pointing up. The left eye sits normally. On the right, a red mass lies in the cone of muscles behind the eye. It pushes the eye ahead of its dashed normal place. A blue bracket shows how much further forward its cornea sits. Blue dots mark the outer rims of both orbits.",
-      "hi": "ऊपर से देखी दोनों ऑर्बिट का चित्र, आँखें ऊपर की ओर। बाईं आँख सामान्य जगह पर है। दाईं ओर, आँख के पीछे मांसपेशियों के कोन में एक लाल गाँठ आँख को उसकी डैश वाली सामान्य जगह से आगे धकेलती है। एक नीला ब्रैकेट दिखाता है कि उसका कॉर्निया कितना आगे है। नीले बिंदु दोनों ऑर्बिट के बाहरी किनारे दिखाते हैं।"
+      "en": "Both eye sockets seen from above, with the front at the top. Each eye sits in its socket, wrapped by long red muscles, with the optic nerve running back. On the right, a round purple mass sits inside the cone of muscles behind the eye. It pushes that eye straight forward, so its cornea sits further out than the other.",
+      "hi": "ऊपर से देखे गए आँख के दोनों गड्ढे, आगे का हिस्सा ऊपर है। हर आँख अपने गड्ढे में लंबी लाल माँसपेशियों से घिरी है, और ऑप्टिक नस पीछे जाती है। दाईं ओर, आँख के पीछे माँसपेशियों के शंकु के अंदर एक गोल बैंगनी गाँठ है। यह उस आँख को सीधा आगे धकेलती है, इसलिए उसका कॉर्निया दूसरी से ज़्यादा बाहर है।"
     },
     "caption": {
       "en": "Seen from above: a mass inside the muscle cone pushes the right eye straight forward. Compare both corneas against a line between the outer orbital rims.",
       "hi": "ऊपर से: मांसपेशियों के कोन के अंदर की गाँठ दाईं आँख को सीधे आगे धकेलती है। बाहरी किनारों को जोड़ने वाली रेखा से दोनों कॉर्निया की तुलना करें।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.3,
-        "y": 0.173,
+        "x": 0.27,
+        "y": 0.267,
         "label": {
           "en": "Normal eye",
           "hi": "सामान्य आँख"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.7,
-        "y": 0.08,
+        "x": 0.74,
+        "y": 0.16,
         "label": {
           "en": "Eye pushed forward",
           "hi": "आगे धकेली आँख"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.917,
-        "y": 0.127,
+        "x": 0.69,
+        "y": 0.1,
         "label": {
           "en": "The difference",
           "hi": "अंतर"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.146,
-        "y": 0.393,
+        "x": 0.945,
+        "y": 0.213,
         "label": {
           "en": "Outer orbital rim",
           "hi": "ऑर्बिट का बाहरी किनारा"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.631,
-        "y": 0.587,
+        "x": 0.765,
+        "y": 0.447,
         "label": {
           "en": "Mass in the muscle cone",
           "hi": "मांसपेशियों के कोन में गाँठ"
@@ -86,6 +90,10 @@
           "hi": "आँख की मांसपेशियों के कोन के अंदर की गाँठ आँख को सीधे आगे धकेलती है। इसे एक्सियल (axial) प्रॉप्टोसिस कहते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-proptosis.webp",
+    "more": [
+      "orbit-proptosis"
     ]
   },
   "why": {

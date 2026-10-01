@@ -59,6 +59,7 @@
       render(); return true;
     };
     bindStage();
+    R.said = "";   // the coaching line is repainted empty: say it again
     update();
   }
 
@@ -68,8 +69,8 @@
     var cse = R.mode === "case";
     return '<p class="ret-status' + (cse ? " ret-sr" : "") + '" id="retStatus" aria-live="polite"></p>' +
       '<div class="ret-row"><label for="retStreak">Streak</label><output id="retStreakV">' + R.streak + '°</output>' +
-      '<input type="range" id="retStreak" min="0" max="180" step="1" value="' + R.streak + '" aria-valuetext="' + R.streak + ' degrees"></div>' +
-      '<div class="ret-row"><span id="retLensL">Lens</span><output id="retLensV">' + dstr(R.lens) + " D</output>" +
+      '<input type="range" id="retStreak" min="1" max="180" step="1" value="' + R.streak + '" aria-valuetext="' + R.streak + ' degrees"></div>' +
+      '<div class="ret-row"><span id="retLensL">Lens</span><output id="retLensV" aria-live="polite">' + dstr(R.lens) + " D</output>" +
       '<div class="ret-steps" role="group" aria-labelledby="retLensL">' + [-1, -0.25, 0.25, 1].map(function (d) {
         return '<button class="ret-step" data-act="retlens" data-d="' + d + '" aria-label="' + (d > 0 ? "Add plus " : "Add minus ") + Math.abs(d).toFixed(2) + '">' + dstr(d) + "</button>";
       }).join("") + "</div></div>" +
@@ -79,7 +80,7 @@
       (cse ? "" : '<div class="ret-row ret-wd"><span id="retWdL">Distance</span><output>' + dstr(wdD()) + ' D</output><div class="oph-seg" role="group" aria-labelledby="retWdL">' +
         [67, 50].map(function (w) { return '<button data-act="retwd" data-w="' + w + '" aria-pressed="' + (R.wd === w) + '">' + w + " cm</button>"; }).join("") + "</div></div>") +
       '<div class="ret-cross" id="retCross">' + cross() + "</div>" +
-      '<p class="oph-small ret-how">Drag across the pupil to sweep. Two fingers, the slider or the arrow keys turn the streak.</p>';
+      '<p class="oph-small ret-how">Drag across the pupil to sweep. Two fingers, the slider or Left/Right turn the streak; Up/Down change the lens (Shift for bigger steps); R records neutral; A toggles the auto sweep.</p>';
   }
 
   function foot() {
@@ -105,7 +106,7 @@
   }
 
   function stepper(f, label, val, steps) {
-    return '<div class="ret-row"><span id="retL' + f + '">' + label + '</span><output id="retV' + f + '">' + val + "</output>" +
+    return '<div class="ret-row"><span id="retL' + f + '">' + label + '</span><output id="retV' + f + '" aria-live="polite">' + val + "</output>" +
       '<div class="ret-steps" role="group" aria-labelledby="retL' + f + '">' + steps.map(function (d) {
         var txt = f === "ax" ? (d > 0 ? "+" : "−") + Math.abs(d) + "°" : dstr(d);
         return '<button class="ret-step" data-act="rstep" data-f="' + f + '" data-d="' + d + '" aria-label="' + label + (d > 0 ? " up " : " down ") + Math.abs(d) + '">' + txt + "</button>";
@@ -116,16 +117,17 @@
     return '<h2 class="oph-q" id="retEntryH" tabindex="-1">Prescription, minus cylinder</h2>' +
       stepper("s", "Sphere", entryVal("s"), [-1, -0.25, 0.25, 1]) +
       stepper("c", "Cylinder", entryVal("c"), [-1, -0.25, 0.25, 1]) +
-      stepper("ax", "Axis", entryVal("ax"), [-15, -5, 5, 15]) +
+      stepper("ax", "Axis", entryVal("ax"), [-5, -1, 1, 5]) +
       (R.readings.length ? '<button class="oph-link ret-fill" data-act="retfill">Fill from my neutral points (before the working distance)</button>' : "") +
       '<p class="oph-small">Working distance ' + R.wd + " cm, " + dstr(wdD()) + " D. Back returns to the patient.</p>";
   }
 
   var TEACH = {
     wd: function () { return "You found neutral but did not take off the working distance. At " + R.wd + " cm every neutralizing lens is " + dstr(wdD()) + " D more plus than the prescription, so subtract " + wdD().toFixed(2) + " D from both meridians."; },
-    wd2: function () { return "The working distance went the wrong way. Subtract " + wdD().toFixed(2) + " D from the neutralizing lenses; do not add it."; },
+    wd2: function () { return "You took the working distance off twice. Subtract " + wdD().toFixed(2) + " D once from each neutralizing lens."; },
+    wdadd: function () { return "You added the working distance instead of subtracting it. At " + R.wd + " cm subtract " + wdD().toFixed(2) + " D from each neutralizing lens."; },
     axis90: function () { return "The cylinder axis sits on the wrong meridian. In minus-cylinder form the axis is the more plus meridian: the one that needed the more plus lens."; },
-    axis: function (g) { return "The cylinder power is right; the axis is " + Math.round(g.axisOff) + "° off. Turn the streak until the band lines up with it and the break disappears: that orientation is a principal meridian."; },
+    axis: function (g) { return "The cylinder power is right; the axis is " + Math.round(g.axisOff) + "° off. Turn the streak until the reflex band lies parallel to it and the break disappears: that orientation is a principal meridian."; },
     cyl: function () { return "The spherical equivalent is right but the cylinder is not. Neutralize each principal meridian on its own; the cylinder is the difference between the two lenses."; },
     sph: function (g) { return "Your prescription is " + Math.abs(g.dM).toFixed(2) + " D " + (g.dM > 0 ? "too plus" : "too minus") + ". Check neutral from both sides: with motion just below the neutral lens, against just above it."; }
   };
@@ -140,17 +142,17 @@
     }).join("");
     return '<p class="oph-verdict ' + cls + '" id="retVerdict" tabindex="-1">' + ico(g.ok ? "check" : "close") + " " + head + "</p>" +
       '<dl class="ret-dl"><dt>You</dt><dd>' + esc(rxStr(R.entry)) + "</dd><dt>Patient</dt><dd>" + esc(rxStr(t)) + "</dd>" +
-      "<dt>Off by</dt><dd>" + (Math.abs(g.dM) < 0.005 ? "0.00 D" : Math.abs(g.dM).toFixed(2) + " D " + (g.dM > 0 ? "too plus" : "too minus")) + " in spherical equivalent, " + g.dJ.toFixed(2) + " D of astigmatism</dd></dl>" +
+      "<dt>Off by</dt><dd>" + (Math.abs(g.dM) < 0.005 ? "0.00 D" : Math.abs(g.dM).toFixed(2) + " D " + (g.dM > 0 ? "too plus" : "too minus")) + " in spherical equivalent, " + (2 * g.dJ).toFixed(2) + " D of residual cylinder</dd></dl>" +
       '<p class="ret-teach">' + (g.ok ? "Both meridians neutralized and the working distance taken off." : TEACH[g.type](g)) + "</p>" +
       '<table class="ret-tab"><caption class="ret-sr">Neutral points</caption><thead><tr><th scope="col">Meridian</th><th scope="col">You recorded</th><th scope="col">Neutral lens</th></tr></thead><tbody>' + rows + "</tbody></table>" +
-      '<p class="oph-small">Tolerance: spherical equivalent within 0.25 D and astigmatism within 0.20 D.</p>';
+      '<p class="oph-small">Tolerance: spherical equivalent within 0.25 D and residual cylinder within 0.40 D (cylinder within 0.25 D; the allowed axis error shrinks as the cylinder grows).</p>';
   }
 
   /* ---------- the reflex ---------- */
   function describe(rf) {
     if (rf.motion === "neutral") return "Neutral in the " + rf.meridian + "° meridian: the pupil fills.";
     var s = (rf.motion === "with" ? "With" : "Against") + " motion in the " + rf.meridian + "° meridian";
-    if (Math.abs(rf.breakDeg) >= 5) s += ", band " + Math.round(Math.abs(rf.breakDeg)) + "° " + (rf.breakDeg > 0 ? "counterclockwise" : "clockwise") + " of the streak";
+    if (Math.abs(rf.breakDeg) >= 5 && rf.fill === 0) s += ", band " + Math.round(Math.abs(rf.breakDeg)) + "° " + (rf.breakDeg > 0 ? "counterclockwise" : "clockwise") + " of the streak";
     return s + (rf.bright < 0.55 ? ", dull and slow." : ".");
   }
   // MBBS guided practice: a numbered next-step list read from the model state (recorded meridians, the
@@ -163,7 +165,7 @@
     if (n >= 2) return 4;
     if (n === 1) return 3;
     if (!rf) return 0;
-    return rf.motion === "neutral" ? 2 : Math.abs(rf.breakDeg) >= 5 ? 0 : 1;
+    return rf.motion === "neutral" ? 2 : Math.abs(rf.breakDeg) >= 5 && rf.fill === 0 ? 0 : 1;
   }
   function guideHtml() {
     var at = guideStep();
@@ -173,7 +175,7 @@
   }
   function coach(rf) {
     if (rf.motion === "neutral") return "Neutral in the " + rf.meridian + "° meridian at " + dstr(R.lens) + " D. Record it, then turn the streak 90°.";
-    if (Math.abs(rf.breakDeg) >= 5) return "The band is " + Math.round(Math.abs(rf.breakDeg)) + "° off the streak. Turn the streak " + (rf.breakDeg > 0 ? "counterclockwise" : "clockwise") + " until they line up: that is a principal meridian.";
+    if (Math.abs(rf.breakDeg) >= 5 && rf.fill === 0) return "The band is " + Math.round(Math.abs(rf.breakDeg)) + "° off the streak. Turn the streak " + (rf.breakDeg > 0 ? "counterclockwise" : "clockwise") + " until they line up: that is a principal meridian.";
     return (rf.motion === "with" ? "With motion in the " + rf.meridian + "° meridian: add plus." : "Against motion in the " + rf.meridian + "° meridian: add minus.") +
       (rf.bright < 0.55 ? " The reflex is dull and slow, so the error is large: step by 1.00 D." : "");
   }
@@ -270,7 +272,7 @@
     if (R.ro) { R.ro.disconnect(); R.ro = null; }
     R.ptrs = {}; R.drag = null; R.rot = null;
   }
-  function setStreak(v) { v = Math.round(v) % 180; if (v < 0) v += 180; R.streak = v; update(); }
+  function setStreak(v) { v = Math.round(v) % 180; if (v <= 0) v += 180; R.streak = v; update(); }   // TABO: horizontal is 180, not 0
   function twoAngle() {
     var p = [], id;
     for (id in R.ptrs) p.push(R.ptrs[id]);
@@ -366,7 +368,7 @@
     var tag = e.target && e.target.tagName;
     if (tag === "INPUT" || R.layer) return;
     var big = e.shiftKey;
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); setStreak(R.streak + (e.key === "ArrowRight" ? 1 : -1) * (big ? 1 : 5)); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); setStreak(R.streak + (e.key === "ArrowRight" ? 1 : -1) * (big ? 15 : 5)); }
     else if (e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); lens((e.key === "ArrowUp" ? 1 : -1) * (big ? 1 : 0.25)); }
     else if (e.key === "r" || e.key === "R") { e.preventDefault(); record(); }
     else if (e.key === "a" || e.key === "A") { e.preventDefault(); var b = G.document.querySelector("[data-act=retauto]"); if (b) A.retauto(b); }
@@ -377,7 +379,7 @@
   O._sims.push({
     id: "retino", title: "Retinoscopy", sub: "Streak retinoscope", icon: "target",
     line: function (r) { return r && r.n ? fmt(r.ok) + " of " + fmt(r.n) + " patients within tolerance" : "Practise, then graded patients"; },
-    errs: { wd: "Working distance not subtracted", wd2: "Working distance added", axis90: "Axis on the wrong meridian",
+    errs: { wd: "Working distance not subtracted", wd2: "Working distance subtracted twice", wdadd: "Working distance added", axis90: "Axis on the wrong meridian",
       axis: "Axis off", cyl: "Cylinder power", sph: "Sphere" },
     open: open,
     startCase: function () { open(); startCase(); } // Today's plan: one graded patient

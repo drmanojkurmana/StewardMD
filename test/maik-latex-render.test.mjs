@@ -41,6 +41,23 @@ test("a lone dollar amount is left alone (no false unwrap across lines)", () => 
   assert.match(out, /\$60/);
 });
 
+// Owner screenshots 2026-10-01: "Upstage (IIB \rightarrow IIIA)" in a table cell and a stray "**"
+// from a bold pair the model never closed.
+test("arrows and other macros never print as \\name", () => {
+  const out = md("| Profile | G2 |\n|---|---|\n| TNBC | Upstage (IIB \\rightarrow IIIB) |\n\nmucosa \\to muscle, 37^\\circ C, \\alpha-blocker, \\unknownmacro done");
+  assert.match(out, /IIB → IIIB/);
+  assert.match(out, /mucosa → muscle/);
+  assert.match(out, /37°/);
+  assert.match(out, /α-blocker/);
+  assert.doesNotMatch(out, /\\[a-zA-Z]/);
+});
+
+test("an unpaired ** is dropped, a paired one is still bold", () => {
+  const out = md("- **T is about Boundaries: steps of 2 cm** for epithelial organs\n- size is **cut off");
+  assert.match(out, /<b>T is about Boundaries: steps of 2 cm<\/b>/);
+  assert.doesNotMatch(out, /\*\*/);
+});
+
 test("markdown still works around the unwrap", () => {
   const out = md("**Red flags:** gross hematuria in any adult $>35$ years.");
   assert.match(out, /<b>Red flags:<\/b>/);

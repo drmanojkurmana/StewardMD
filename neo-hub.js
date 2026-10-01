@@ -1,4 +1,8 @@
-/* StewardMD - Neonatal hub (window.SMD_NEO_HUB). Flag smd_neo, DEFAULT OFF. vault/modules/Neonatal.md.
+/* StewardMD - Neonatal hub (window.SMD_NEO_HUB). Flag smd_neo, DEFAULT ON (Beta). vault/modules/Neonatal.md.
+ *
+ * Plain-language pass (owner 2026-10-01: "make it more user friendly, easily understood by anyone, without
+ * removing any function"): tools grouped by task with everyday names, one line on every screen saying what it
+ * does, the baby shown in words, abbreviations explained once in a glossary, answers before workings.
  *
  * One NICU workspace: the baby record (neo-patient.js) is pinned at the top of every screen and
  * editable in one tap; the tools (neo-*.js) register here and read the same record. Shared pieces:
@@ -14,7 +18,7 @@
 (function (G) {
   "use strict";
   var D = G.document, FL = function () { return G.SMD_NEO_FLAGS; };
-  var VER = "neo1";
+  var VER = "neo3";
   var TOOLS = [], root = null, cur = "home", curOpts = null, editing = false;
 
   function on() { return !!(FL() && FL().on()); }
@@ -42,7 +46,7 @@
   function srcLine(doc, item) {
     if (!doc || !item || !item.src) return "";
     var s = (doc.sources || {})[item.src] || {};
-    return '<details class="nh-src"><summary>Source: ' + esc(s.title || item.src) + "</summary>" +
+    return '<details class="nh-src"><summary>Where this comes from</summary><div style="font-weight:600;color:var(--nh-ink)">' + esc(s.title || item.src) + "</div>" +
       (item.quote ? '<blockquote>"' + esc(item.quote) + '"</blockquote>' : "") +
       '<div class="nh-srcm">' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.publisher || s.url) + "</a>" : "") + (s.licence ? " · Licence: " + esc(s.licence) : "") + (s.accessed ? " · Accessed " + esc(s.accessed) : "") + "</div></details>";
   }
@@ -104,13 +108,24 @@
       "#neoHub input:focus,#neoHub select:focus{outline:none;border-color:var(--nh-acc)}",
       "#neoHub .nh-full{grid-column:1/-1}",
       "#neoHub .nh-seg{display:flex;border:1.5px solid var(--nh-line);border-radius:10px;overflow:hidden;min-height:44px}#neoHub .nh-seg button{flex:1;border:0;background:var(--nh-bg);color:var(--nh-ink);font:600 14px var(--nh-f);cursor:pointer;min-height:44px}#neoHub .nh-seg button+button{border-left:1.5px solid var(--nh-line)}#neoHub .nh-seg button[aria-pressed=true]{background:var(--nh-acc);color:#fff}",
+      // Tabs that wrap (growth has six): a grid of pills, never a sideways scroll at 360 px.
+      "#neoHub .nh-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#neoHub .nh-tabs button{border:1.5px solid var(--nh-line);border-radius:10px;background:var(--nh-bg);color:var(--nh-ink);font:600 13.5px var(--nh-f);min-height:44px;padding:4px 6px;cursor:pointer;line-height:1.2}#neoHub .nh-tabs button[aria-pressed=true]{background:var(--nh-acc);border-color:var(--nh-acc);color:#fff}",
       "#neoHub .nh-btn{border:1.5px solid var(--nh-acc);color:var(--nh-acc);background:transparent;border-radius:10px;font:600 14px var(--nh-f);padding:8px 12px;min-height:44px;cursor:pointer}#neoHub .nh-btn.pri{background:var(--nh-acc);color:#fff}",
       "#neoHub .nh-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}",
       "#neoHub .nh-tool{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;border:1px solid var(--nh-line);background:var(--nh-panel);color:var(--nh-ink);border-radius:14px;padding:12px;min-height:84px;cursor:pointer;font:700 15px var(--nh-f);min-width:0}#neoHub .nh-tool small{font:500 12.5px var(--nh-f);color:var(--nh-mut)}#neoHub .nh-tool .material-symbols-rounded{color:var(--nh-acc);font-size:24px}",
+      "#neoHub .nh-beta{display:inline-block;vertical-align:middle;font:700 10px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--nh-acc);border-radius:6px;padding:3px 6px;margin-left:4px}",
       "#neoHub .nh-draft{font:700 10.5px var(--nh-f);letter-spacing:.05em;text-transform:uppercase;color:var(--nh-warn);background:var(--nh-warn-soft);border-radius:999px;padding:3px 8px}",
       "#neoHub .nh-ok{font:700 10.5px var(--nh-f);color:var(--nh-acc);background:var(--nh-acc-soft);border-radius:999px;padding:3px 8px}",
       "#neoHub .nh-val{font:700 24px/1.2 var(--nh-f);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}#neoHub .nh-lbl{font:700 11px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:var(--nh-acc)}",
-      "#neoHub .nh-work{font:500 13px var(--nh-mono);color:var(--nh-mut);overflow-wrap:anywhere}",
+      "#neoHub .nh-work{font:500 13px/1.45 var(--nh-f);color:var(--nh-mut);overflow-wrap:anywhere}",
+      "#neoHub .nh-intro{font:500 14px/1.45 var(--nh-f);color:var(--nh-ink);background:var(--nh-acc-soft);border-radius:12px;padding:10px 12px}",
+      "#neoHub .nh-sec{font:700 12px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:var(--nh-mut);margin:6px 2px -2px}",
+      "#neoHub .nh-facts.sm{gap:2px 6px}#neoHub .nh-facts.sm .nh-fact{border:0;background:none;padding:0;font-size:13px;white-space:normal}#neoHub .nh-facts.sm .nh-fact+.nh-fact::before{content:\"\\00b7  \";color:var(--nh-mut)}#neoHub .nh-facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}#neoHub .nh-fact{font:600 12.5px var(--nh-f);color:var(--nh-ink);background:var(--nh-bg);border:1px solid var(--nh-line);border-radius:999px;padding:3px 9px;white-space:nowrap}#neoHub .nh-fact.miss{color:var(--nh-warn);border-color:var(--nh-warn-soft);background:var(--nh-warn-soft)}",
+      "#neoHub .nh-hint{font:500 12px var(--nh-f);color:var(--nh-mut);margin-top:-2px}",
+      "#neoHub .nh-answer{background:var(--nh-acc-soft);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:4px}#neoHub .nh-answer .nh-val{color:var(--nh-ink)}",
+      "#neoHub .nh-gloss dt{font:700 13px var(--nh-f);margin-top:8px}#neoHub .nh-gloss dd{margin:2px 0 0;font:500 13px/1.45 var(--nh-f);color:var(--nh-mut)}",
+      "#neoHub details>summary{cursor:pointer;min-height:36px;display:flex;align-items:center;font:600 13.5px var(--nh-f);color:var(--nh-acc)}",
+      "#neoHub .nh-chip{display:inline-block;font:700 11px var(--nh-f);border-radius:999px;padding:2px 8px;white-space:nowrap}#neoHub .nh-chip.calc{color:#fff;background:var(--nh-acc)}#neoHub .nh-chip.mono{color:var(--nh-acc);background:var(--nh-acc-soft)}#neoHub .nh-chip.info{color:var(--nh-warn);background:var(--nh-warn-soft)}#neoHub .nh-chip.none{color:var(--nh-mut);background:var(--nh-bg);border:1px solid var(--nh-line)}",
       "#neoHub .nh-row{border-top:1px solid var(--nh-line);padding-top:10px;display:flex;flex-direction:column;gap:6px;min-width:0}#neoHub .nh-row:first-child{border-top:0;padding-top:0}",
       "#neoHub .nh-note{font:500 13px var(--nh-f);color:var(--nh-warn);background:var(--nh-warn-soft);border-radius:9px;padding:7px 10px}#neoHub .nh-note.bad{color:var(--nh-bad);background:var(--nh-bad-soft);font-weight:700}#neoHub .nh-note.info{color:var(--nh-mut);background:var(--nh-bg)}",
       "#neoHub .nh-none{font:600 14px var(--nh-f);color:var(--nh-mut);background:var(--nh-bg);border:1px dashed var(--nh-line);border-radius:10px;padding:10px 12px}",
@@ -121,7 +136,7 @@
       "#neoHub .nh-err{font:600 13.5px var(--nh-f);color:var(--nh-bad);background:var(--nh-bad-soft);border-radius:10px;padding:9px 12px}",
       "#neoHub .nh-tbl{width:100%;border-collapse:collapse;font:500 13.5px var(--nh-f);font-variant-numeric:tabular-nums}#neoHub .nh-tbl th,#neoHub .nh-tbl td{text-align:left;padding:7px 6px;border-top:1px solid var(--nh-line);vertical-align:top;overflow-wrap:anywhere}#neoHub .nh-tbl th{font:700 11.5px var(--nh-f);color:var(--nh-mut);text-transform:uppercase;letter-spacing:.04em}#neoHub .nh-tbl tr.hit td{background:var(--nh-acc-soft)}",
       "#neoHub .nh-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}",
-      "#neoHub .nh-list{display:flex;flex-direction:column}#neoHub .nh-li{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:0;border-top:1px solid var(--nh-line);background:none;color:var(--nh-ink);font:600 15px var(--nh-f);padding:11px 2px;min-height:44px;cursor:pointer;width:100%}#neoHub .nh-li:first-child{border-top:0}#neoHub .nh-li small{font:500 12.5px var(--nh-f);color:var(--nh-mut)}",
+      "#neoHub .nh-list{display:flex;flex-direction:column;min-width:0}#neoHub .nh-li>span{min-width:0;overflow-wrap:anywhere}#neoHub .nh-li>.nh-chip{flex-shrink:0}#neoHub .nh-li{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:0;border-top:1px solid var(--nh-line);background:none;color:var(--nh-ink);font:600 15px var(--nh-f);padding:11px 2px;min-height:44px;cursor:pointer;width:100%}#neoHub .nh-li:first-child{border-top:0}#neoHub .nh-li small{font:500 12.5px var(--nh-f);color:var(--nh-mut)}",
       "#neoHub svg{max-width:100%;height:auto;display:block}",
       "#neoHub .nh-foot{font:500 12px var(--nh-f);color:var(--nh-mut);text-align:center;padding:4px 8px}",
       "@media(min-width:720px){#neoHub .nh-body{max-width:760px;margin:0 auto;width:100%}#neoHub .nh-tools{grid-template-columns:repeat(3,minmax(0,1fr))}}"
@@ -136,51 +151,88 @@
 
   /* ---------------- baby record ---------------- */
   function neo() { return G.SMD_NEO; }
+  /* The baby in words: what was entered and what follows from it, as chips anyone can read. */
+  function facts(d) {
+    var f = [];
+    f.push(d.ga ? ["Born at " + d.ga.w + " weeks" + (d.ga.d ? " " + d.ga.d + " days" : ""), 0] : ["Add weeks at birth", 1]);
+    if (d.pnaDays != null) f.push([(d.pnaDays < 4 ? d.pnaHours + " hours old" : d.pnaDays + " days old") + " (day " + d.dol + " of life)", 0]); else f.push(["Add date of birth", 1]);
+    if (d.pma) f.push(["Corrected age " + d.pma.w + " weeks" + (d.pma.d ? " " + d.pma.d + " days" : ""), 0]);
+    f.push(d.weightG != null ? [Math.round(d.weightG).toLocaleString("en-IN") + " g today", 0] : ["Add today's weight", 1]);
+    if (d.birthWeightG != null) f.push([Math.round(d.birthWeightG).toLocaleString("en-IN") + " g at birth", 0]);
+    if (d.sex) f.push([d.sex === "M" ? "Boy" : "Girl", 0]);
+    return f;
+  }
   function babyBar() {
-    var N = neo(), d = N ? N.derived() : null, sum = d ? N.summary() : "";
-    var sub = !d ? "" : d.errors.length ? d.errors[0] : !d.ga ? "Add gestation at birth" : d.pnaDays == null ? "Add date and time of birth" : !d.weightG ? "Add current weight" : (d.corrected && !d.corrected.beforeTerm ? "Corrected age " + d.corrected.text : d.neonate === false ? "Older than 28 days" : "Baby record (this device, memory only)");
-    return '<div class="nh-baby" data-nh="babybar"><div class="nh-bsum">' + (sum ? esc(sum) : "No baby entered") + "<small>" + esc(sub) + '</small></div><button type="button" class="nh-btn" data-nh="edit">' + (editing ? "Done" : sum ? "Edit" : "Enter baby") + "</button></div>";
+    var N = neo(), d = N ? N.derived() : null, has = N && N.has();
+    var head = has ? "Baby" : "No baby added yet";
+    var chips = has ? '<div class="nh-facts' + (cur !== "home" && !editing ? " sm" : "") + '">' + facts(d).map(function (x) { return '<span class="nh-fact' + (x[1] ? " miss" : "") + '">' + esc(x[0]) + "</span>"; }).join("") + "</div>" : "<small>Add the baby once. Every tool uses these details.</small>";
+    var err = d && d.errors.length ? '<small style="color:var(--nh-bad)">' + esc(d.errors[0]) + "</small>" : "";
+    return '<div class="nh-baby" data-nh="babybar"><div class="nh-bsum">' + esc(head) + chips + err + '<span hidden>' + esc(N ? N.summary() : "") + '</span></div><button type="button" class="nh-btn' + (has ? "" : " pri") + '" data-nh="edit">' + (editing ? "Done" : has ? "Edit" : "Add baby") + "</button></div>";
   }
   function recordHtml() {
     var r = neo().get();
-    function f(k, label, unit, ph, mode) { return '<label>' + label + '<span class="nh-u"><input id="nh_' + k + '" data-rec="' + k + '" inputmode="' + (mode || "numeric") + '" autocomplete="off" value="' + esc(r[k]) + '" placeholder="' + esc(ph || "") + '">' + (unit ? "<span>" + unit + "</span>" : "") + "</span></label>"; }
+    function f(k, label, unit, ph, hint, mode) { return '<label>' + label + '<span class="nh-u"><input id="nh_' + k + '" data-rec="' + k + '" inputmode="' + (mode || "numeric") + '" autocomplete="off" value="' + esc(r[k]) + '" placeholder="' + esc(ph || "") + '">' + (unit ? "<span>" + unit + "</span>" : "") + "</span>" + (hint ? '<span class="nh-hint">' + hint + "</span>" : "") + "</label>"; }
     var d = neo().derived();
-    return '<section class="nh-card" data-nh="record" aria-labelledby="nhRec"><h3 id="nhRec">Baby record</h3><div class="nh-grid">' +
-      f("gaW", "Gestation at birth", "wk", "e.g. 30") + f("gaD", "plus days", "d", "0 to 6") +
+    return '<section class="nh-card" data-nh="record" aria-labelledby="nhRec"><h3 id="nhRec">Baby details</h3>' +
+      '<div class="nh-hint" style="margin:0">Fill in what you know. Tools tell you if they need something else.</div><div class="nh-grid">' +
+      f("gaW", "Weeks of pregnancy at birth", "weeks", "e.g. 30", "Gestational age (GA)") + f("gaD", "and days", "days", "0 to 6", "Extra days, 0 to 6") +
       '<label>Date of birth<input id="nh_dob" data-rec="dob" type="date" value="' + esc(r.dob) + '"></label>' +
-      '<label>Time of birth<input id="nh_tob" data-rec="tob" type="time" value="' + esc(r.tob) + '"></label>' +
-      f("weightG", "Current weight", "g", "e.g. 1250") + f("birthWeightG", "Birth weight", "g", "e.g. 1180") +
-      '<label class="nh-full">Sex<span class="nh-seg" role="group" aria-label="Sex"><button type="button" data-sex="M" aria-pressed="' + (r.sex === "M") + '">Male</button><button type="button" data-sex="F" aria-pressed="' + (r.sex === "F") + '">Female</button></span></label>' +
+      '<label>Time of birth<input id="nh_tob" data-rec="tob" type="time" value="' + esc(r.tob) + '"><span class="nh-hint">Gives age in hours (jaundice)</span></label>' +
+      f("weightG", "Weight today", "grams", "e.g. 1250", "In grams, not kg") + f("birthWeightG", "Birth weight", "grams", "e.g. 1180", "In grams") +
+      '<label class="nh-full">Sex<span class="nh-seg" role="group" aria-label="Sex"><button type="button" data-sex="M" aria-pressed="' + (r.sex === "M") + '">Boy</button><button type="button" data-sex="F" aria-pressed="' + (r.sex === "F") + '">Girl</button></span></label>' +
       "</div>" + (d.errors.length ? d.errors.map(function (e) { return '<div class="nh-err">' + esc(e) + "</div>"; }).join("") : "") +
       '<div class="nh-work" data-nh="derived">' + derivedTxt(d) + "</div>" +
-      '<div class="nh-acts"><button type="button" class="nh-btn" data-nh="prefill">Fill from a patient</button><button type="button" class="nh-btn" data-nh="clear">Clear</button></div>' +
-      '<div class="nh-foot">Weights in grams. Kept in memory on this device only; cleared when you close the app or tap Clear.</div></section>';
+      '<button type="button" class="nh-btn pri" data-nh="edit">Done</button>' +
+      '<div class="nh-acts"><button type="button" class="nh-btn" data-nh="prefill">Use an ICU or OPD patient</button><button type="button" class="nh-btn" data-nh="clear">Clear</button></div>' +
+      '<div class="nh-foot">Kept only on this phone, in memory. Cleared when you close the app or tap Clear.</div></section>';
   }
   function derivedTxt(d) {
     var p = [];
-    if (d.pnaHours != null) p.push("Postnatal age " + d.pnaHours + " h (" + d.pnaDays + " d), day of life " + d.dol + (d.timed ? "" : " (no time of birth: hours count from midnight)"));
-    if (d.pma) p.push("PMA " + d.pma.w + "+" + d.pma.d + " wk");
-    if (d.corrected) p.push("Corrected age " + d.corrected.text);
-    return esc(p.join(" · "));
+    if (d.pnaHours != null) p.push("Age: " + d.pnaHours + " hours, " + d.pnaDays + " days (day " + d.dol + " of life)" + (d.timed ? "" : ". Add the time of birth for exact hours"));
+    if (d.pma) p.push("Corrected age (PMA, weeks at birth plus age): " + d.pma.w + " weeks " + d.pma.d + " days");
+    if (d.corrected && !d.corrected.beforeTerm) p.push("Corrected age after term: " + d.corrected.text);
+    return p.length ? "<b>Worked out for you</b><br>" + p.map(esc).join("<br>") : "";
   }
 
   /* ---------------- screens ---------------- */
   function visibleTools() { return TOOLS.filter(function (t) { return featureOn(t.flag); }).sort(function (a, b) { return (a.order || 99) - (b.order || 99); }); }
   function toolById(id) { for (var i = 0; i < TOOLS.length; i++) if (TOOLS[i].id === id) return TOOLS[i]; return null; }
+  /* Everyday names, groups and a one-line "what this does" for every tool (the tool files keep their ids). */
+  var FRIENDLY = {
+    dose: { g: "Medicines", t: "Drug doses", s: "Any drug, dose for this baby", i: "Search any drug. You get the newborn dose for this baby, worked out from the baby's weight and age, with where it comes from. If there is no newborn dose on file, it says so." },
+    prep: { g: "Medicines", t: "Prepare a dose", s: "Which vial, how to mix, how much to draw", i: "Enter the dose. It picks a vial and tells you how much fluid to add, how many mL to draw up and how many vials you need." },
+    inf: { g: "Medicines", t: "Drip rates", s: "Dose to pump rate (mL/h) and back", i: "For drips such as dopamine or morphine: turn a dose into a pump rate in mL per hour, or a pump rate back into a dose." },
+    tdm: { g: "Medicines", t: "Drug levels", s: "Vancomycin and gentamicin levels", i: "Enter blood levels to see the vancomycin exposure (AUC) or check a gentamicin level against the target." },
+    fluids: { g: "Fluids and feeding", t: "Fluids and sugar", s: "Sugar rate (GIR), daily fluids, make a bag", i: "Work out how much sugar the drip gives (GIR), how much fluid a day, and how to mix a bag from the bottles you have." },
+    growth: { g: "Check and chart", t: "Growth", s: "Centiles, weight gain, milestones, reflexes", i: "See where weight, length and head size sit on the growth charts, how fast the baby is gaining, and which milestones to expect." },
+    bili: { g: "Check and chart", t: "Jaundice", s: "Bilirubin on the treatment chart", i: "Enter the bilirubin level and the age in hours. It shows whether the baby needs phototherapy or more, on the AAP or NICE chart." },
+    scores: { g: "Check and chart", t: "Scores", s: "Withdrawal, pain, gestation, cooling", i: "Bedside scores for newborns: withdrawal (Finnegan), pain and sedation (N-PASS), gestation (Capurro), infection (Rodwell), cooling criteria and more." },
+    ref: { g: "Check and chart", t: "Normal values", s: "Heart rate, breathing, CSF, blood", i: "Normal ranges for this baby's age: heart rate, breathing rate, spinal fluid (CSF) and blood counts." },
+    proc: { g: "Procedures", t: "Lines and tubes", s: "UVC, UAC, breathing tube, PICC, exchange", i: "How far to insert an umbilical line or breathing tube, PICC length, exchange transfusion volume, and step-by-step guides." }
+  };
+  var GROUPS = ["Medicines", "Fluids and feeding", "Check and chart", "Procedures"];
   function homeHtml() {
-    var ts = visibleTools();
-    return '<section class="nh-card"><h3>Neonatal tools ' + badge(null) + '</h3><div class="nh-foot" style="text-align:left">Every number comes from a cited source and shows it. All content is AI-drafted and awaits review by a neonatologist.</div>' +
-      '<div class="nh-tools">' + ts.map(function (t) { return '<button type="button" class="nh-tool" data-tool="' + esc(t.id) + '"><span class="material-symbols-rounded" aria-hidden="true">' + esc(t.icon || "child_care") + "</span>" + esc(t.title) + "<small>" + esc(t.sub || "") + "</small></button>"; }).join("") + "</div></section>";
+    var ts = visibleTools(), h = '<div class="nh-intro">Newborn and NICU tools in one place. Add the baby above once, then pick a tool. Every number shows where it comes from. <b>Beta:</b> written with AI from published sources, not yet checked by a neonatologist. Always double-check.</div>';
+    GROUPS.concat(["Other"]).forEach(function (g) {
+      var mine = ts.filter(function (t) { return (FRIENDLY[t.id] ? FRIENDLY[t.id].g : "Other") === g; }); if (!mine.length) return;
+      h += '<div class="nh-sec">' + esc(g) + '</div><div class="nh-tools">' + mine.map(function (t) { return '<button type="button" class="nh-tool" data-tool="' + esc(t.id) + '"><span class="material-symbols-rounded" aria-hidden="true">' + esc(t.icon || "child_care") + "</span>" + esc(t.title) + "<small>" + esc(t.sub || "") + "</small></button>"; }).join("") + "</div>";
+    });
+    return h + glossaryHtml();
+  }
+  function glossaryHtml() {
+    var G2 = [["GA (gestational age)", "Weeks of pregnancy when the baby was born. A baby born at 34 weeks 5 days counts as 34 weeks."], ["PNA (postnatal age)", "How old the baby is now, in days or hours since birth."], ["Day of life", "The first 24 hours is day 1."], ["PMA (corrected age)", "Weeks at birth plus age now. A baby born at 30 weeks who is 2 weeks old is 32 weeks PMA."], ["GIR", "How much sugar the drip gives, in mg per kg per minute."], ["TSB", "Total serum bilirubin, the jaundice blood test."], ["mL/h", "Pump rate: millilitres per hour."], ["Draft", "Written with AI from the source shown, not yet approved by a neonatologist."]];
+    return '<details class="nh-card nh-gloss"><summary>What do these words mean?</summary><dl>' + G2.map(function (x) { return "<dt>" + esc(x[0]) + "</dt><dd>" + esc(x[1]) + "</dd>"; }).join("") + "</dl></details>";
   }
   var API = null;
   function render() {
     if (!root) return;
     var body = root.querySelector(".nh-body"), t = cur !== "home" ? toolById(cur) : null;
-    root.querySelector(".nh-t").textContent = t ? clean(t.title) : "Neonatal";
-    root.querySelector("[data-nh=back]").textContent = t ? "‹ Tools" : "‹ Close";
+    root.querySelector(".nh-t").innerHTML = esc(t ? t.title : "Neonatal") + ' <span class="nh-beta" title="Beta: AI-drafted from cited sources, awaiting neonatologist review">Beta</span>';
+    root.querySelector("[data-nh=back]").textContent = t ? "‹ All tools" : "‹ Close";
     body.innerHTML = babyBar() + (editing ? recordHtml() : "") + '<div data-nh="screen"></div>';
     var scr = body.querySelector("[data-nh=screen]");
     if (!t) { scr.innerHTML = homeHtml(); return; }
+    if (t.intro) scr.insertAdjacentHTML("beforebegin", '<div class="nh-intro" data-nh="intro">' + esc(t.intro) + "</div>");
     try { t.render(scr, API, curOpts || {}); } catch (e) { scr.innerHTML = '<div class="nh-err">This tool could not open. ' + esc(e && e.message) + "</div>"; }
   }
   function refreshRecordOnly() {
@@ -209,7 +261,7 @@
   function onClick(e) {
     var t = e.target; if (!t || !t.closest) return;
     if (t.closest("[data-nh=back]")) { if (cur !== "home") { cur = "home"; curOpts = null; render(); } else close(); return; }
-    if (t.closest("[data-nh=edit]")) { editing = !editing; haptic(); render(); if (editing) setTimeout(function () { var x = D.getElementById(neo().get().gaW ? "nh_weightG" : "nh_gaW"); if (x) x.focus(); }, 40); return; }
+    if (t.closest("[data-nh=edit]")) { editing = !editing; if (!editing) { var bd = root.querySelector(".nh-body"); if (bd) bd.scrollTop = 0; } haptic(); render(); if (editing) setTimeout(function () { var x = D.getElementById(neo().get().gaW ? "nh_weightG" : "nh_gaW"); if (x) x.focus(); }, 40); return; }
     if (t.closest("[data-nh=clear]")) { neo().clear(); render(); return; }
     if (t.closest("[data-nh=prefill]")) { openPicker(); return; }
     if (t.closest("[data-nh=back2]")) { render(); return; }
@@ -245,7 +297,10 @@
   function close() { if (root) root.hidden = true; D.body.classList.remove("smd-neohub-open"); editing = false; }
   function isOpen() { return !!(root && !root.hidden); }
 
-  function register(t) { if (!t || !t.id || toolById(t.id)) return; TOOLS.push(t); if (isOpen() && cur === "home") render(); }
+  function register(t) {
+    if (!t || !t.id || toolById(t.id)) return;
+    var F = FRIENDLY[t.id]; if (F) { t.techTitle = t.title; t.title = F.t; t.sub = F.s; t.intro = F.i; t.kw = (t.kw || "") + " " + t.techTitle; }
+    TOOLS.push(t); if (isOpen() && cur === "home") render(); }
   function searchItems() {
     if (!on()) return [];
     return [{ id: "neo", title: "Neonatal tools", sub: "NICU: dosing, infusions, fluids, growth, bilirubin", kw: "neonatal nicu newborn neonate preterm baby", open: function () { open(); } }].concat(visibleTools().map(function (t) {

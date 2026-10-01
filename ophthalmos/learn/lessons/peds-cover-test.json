@@ -3,7 +3,12 @@
   "unit": "peds",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The cover test",
     "hi": "कवर टेस्ट"
@@ -13,22 +18,21 @@
     "hi": "एक आँख ढकें और दूसरी को देखें। अगर खुली आँख लक्ष्य को देखने के लिए हिलती है, तो वह मुड़ी हुई थी: [[tropia]]। [[phoria]] तभी दिखता है जब आँख ढकी हो।"
   },
   "see": {
-    "diagram": "diagrams/cover-test.svg",
-    "w": 480,
-    "h": 380,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram in three rows. Row 1: the left-hand eye is turned in. Row 2: a cover sits over the straight right-hand eye. The left-hand eye has moved out to the centre. A blue arrow and a dotted circle show the move. Row 3: two straight eyes, with the cover just lifted off the right-hand eye. A dotted circle shows it had drifted in, and an arrow shows it swinging back.",
-      "hi": "तीन पंक्तियों का चित्र। पंक्ति 1: बाईं ओर की आँख अंदर मुड़ी है। पंक्ति 2: दाईं ओर की सीधी आँख पर कवर रखा है, और बाईं आँख बाहर खिसककर बीच में आ गई है। एक नीला तीर और एक बिंदुदार घेरा यह हलचल दिखाते हैं। पंक्ति 3: दो सीधी आँखें, और दाईं आँख से कवर अभी हटाया गया है। बिंदुदार घेरा दिखाता है कि वह अंदर खिसक गई थी, और तीर दिखाता है कि वह वापस आ रही है।"
+      "en": "Three rows of a child's eyes during the cover test. Top: one eye is turned in toward the nose. Middle: a black cover is held over the straight eye. The turned eye has moved out to look straight ahead. Bottom: the cover is being lifted away, and both eyes look straight.",
+      "hi": "कवर टेस्ट के दौरान एक बच्चे की आँखों की तीन पंक्तियाँ। ऊपर: एक आँख नाक की ओर अंदर मुड़ी है। बीच में: सीधी आँख पर एक काला कवर रखा है, और मुड़ी हुई आँख बाहर हटकर सीधा देखने लगी है। नीचे: कवर हटाया जा रहा है, और दोनों आँखें सीधी देखती हैं।"
     },
     "caption": {
       "en": "Row 2 is a tropia: the uncovered eye moves. Row 3 is a phoria: the covered eye moves as the cover comes off.",
       "hi": "पंक्ति 2 ट्रोपिया है: खुली आँख हिलती है। पंक्ति 3 फ़ोरिया है: कवर हटते ही ढकी आँख हिलती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.396,
-        "y": 0.163,
+        "x": 0.64,
+        "y": 0.194,
         "label": {
           "en": "Turned eye",
           "hi": "मुड़ी हुई आँख"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.604,
-        "y": 0.5,
+        "x": 0.355,
+        "y": 0.509,
         "label": {
           "en": "Cover on the straight eye",
           "hi": "सीधी आँख पर कवर"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.4,
-        "y": 0.415,
+        "x": 0.635,
+        "y": 0.509,
         "label": {
           "en": "It moves out",
           "hi": "यह बाहर खिसकती है"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.604,
-        "y": 0.837,
+        "x": 0.64,
+        "y": 0.857,
         "label": {
           "en": "Eye that was covered",
           "hi": "जो आँख ढकी थी"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.8,
+        "x": 0.835,
+        "y": 0.823,
         "label": {
           "en": "Cover just lifted",
           "hi": "कवर अभी हटाया"
@@ -86,6 +90,10 @@
           "hi": "फ़ोरिया में दोनों आँखें साथ देखें तो सीधी रहती हैं। सिर्फ़ ढकी आँख हिलती है।"
         }
       }
+    ],
+    "img": "learn/media/real/cover-test.webp",
+    "more": [
+      "cover-test"
     ]
   },
   "why": {

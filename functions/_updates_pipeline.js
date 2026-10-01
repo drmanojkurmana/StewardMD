@@ -13,11 +13,11 @@
  */
 import * as repo from "./_updates_repo.js";
 import { summarizeDocument, diffDocument } from "./_summarize.js";
-import { clean, sha256hex, itemHashInput, parseRss, keepItem } from "./_updates_util.js";
+import { clean, sha256hex, itemHashInput, parseRss, keepItem, tidyFeedTitle } from "./_updates_util.js";
 import { fetchLitApi } from "./_litapi.js";
 import { fetchPubMed } from "./_pubmed.js";
 import { fetchOpenFdaApprovals } from "./_openfda.js";
-import { seedJournalSourcesOnce } from "./_journal_sources.js";
+import { seedJournalSourcesOnce, applySourceFixesOnce } from "./_journal_sources.js";
 import { refreshCdscoLists } from "./_cdsco.js";
 import { tinyfishSearch } from "./_search.js";
 
@@ -93,6 +93,7 @@ async function crawlRssSource(env, source, budget) {
   const items = parseRss(xml);
   const maxNew = Math.max(1, parseInt(env.UPDATES_MAX_NEW_PER_SOURCE, 10) || 8);
   for (const it of items) {
+    it.title = tidyFeedTitle(it.title);
     if (acc.new + acc.updated >= maxNew) break;
     if (budget.left <= 0) break;
     if (!keepItem(source.type, it.title, it.desc)) continue;
@@ -207,6 +208,7 @@ function crawlFor(parser) { return CRAWLERS[parser] || crawlRssSource; }
 export async function runPipeline(env) {
   if (!repo.hasDb(env)) return { ok: false, error: "no-db" };
   try { await seedJournalSourcesOnce(env); } catch (e) {}   // best-effort; never blocks the crawl
+  try { await applySourceFixesOnce(env); } catch (e) {}
   const sources = await repo.listSources(env, true);
   const total = { new: 0, updated: 0, unchanged: 0, errors: 0, ai: 0, sources: sources.length, items: [] };
   const budget = { left: Math.max(1, parseInt(env.UPDATES_MAX_AI_PER_RUN, 10) || 20) };

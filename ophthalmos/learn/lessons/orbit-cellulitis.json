@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Swollen lid: preseptal or orbital cellulitis?",
     "hi": "सूजी पलक: प्रीसेप्टल या ऑर्बिटल सेल्युलाइटिस?"
@@ -13,22 +18,21 @@
     "hi": "[[orbital-septum]] सूजी लाल पलक को दो अलग समस्याओं में बाँटता है। इसके आगे, प्रीसेप्टल सेल्युलाइटिस (preseptal cellulitis) हल्का होता है। इसके पीछे, [[orbital-cellulitis]] नज़र और जान ले सकता है।"
   },
   "see": {
-    "diagram": "diagrams/orbit-cellulitis.svg",
-    "w": 480,
-    "h": 260,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram: two side views of the eye in its bony socket, with the front to the left. In both, the lids are red and swollen. A dashed blue line runs from the bony rim into each lid. On the left, the space behind the eye is clear. On the right, red spots fill the space behind the eye. The eye sits further forward than its dashed outline.",
-      "hi": "चित्र: हड्डी के खोल (socket) में आँख के दो बगल वाले दृश्य, आगे का हिस्सा बाईं ओर। दोनों में पलकें लाल और सूजी हैं, और एक नीली डैश वाली रेखा हड्डी के किनारे से हर पलक में जाती है। बाईं ओर आँख के पीछे की जगह साफ़ है। दाईं ओर आँख के पीछे लाल धब्बे भरे हैं, और आँख अपनी डैश वाली रूपरेखा से आगे है।"
+      "en": "Two side cuts through the eye socket. Left: the eyelids are red and swollen, but only in front of a thin sheet behind the lids. The eye and the fat behind it look normal. Right: yellow pus and red, inflamed fat fill the socket behind that sheet. The pus surrounds the optic nerve, and the eye sits a little further forward.",
+      "hi": "आँख के गड्ढे के दो बगल से काट। बाएँ: पलकें लाल और सूजी हुई हैं, पर केवल पलकों के पीछे की एक पतली परत के आगे। आँख और उसके पीछे की चर्बी सामान्य दिखती है। दाएँ: उस परत के पीछे गड्ढे में पीला मवाद और लाल, सूजी चर्बी भरी है। मवाद ऑप्टिक नस को घेरे है, और आँख थोड़ी आगे की ओर है।"
     },
     "caption": {
       "en": "Left: preseptal cellulitis, where the swelling stops at the septum. Right: orbital cellulitis, where infection behind the septum pushes the eye forward.",
       "hi": "बाएँ: प्रीसेप्टल सेल्युलाइटिस, सूजन सेप्टम पर रुक जाती है। दाएँ: ऑर्बिटल सेल्युलाइटिस, सेप्टम के पीछे का संक्रमण आँख को आगे धकेलता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.0625,
-        "y": 0.27,
+        "x": 0.07,
+        "y": 0.28,
         "label": {
           "en": "Swollen lid",
           "hi": "सूजी पलक"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.1125,
-        "y": 0.77,
+        "x": 0.15,
+        "y": 0.287,
         "label": {
           "en": "Orbital septum",
           "hi": "ऑर्बिटल सेप्टम"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.175,
-        "y": 0.508,
+        "x": 0.26,
+        "y": 0.467,
         "label": {
           "en": "Eye is normal",
           "hi": "आँख सामान्य"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.55,
-        "y": 0.508,
+        "x": 0.56,
+        "y": 0.48,
         "label": {
           "en": "Eye pushed forward",
           "hi": "आगे धकेली आँख"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.854,
-        "y": 0.385,
+        "x": 0.9,
+        "y": 0.493,
         "label": {
           "en": "Infection behind the septum",
           "hi": "सेप्टम के पीछे संक्रमण"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.917,
-        "y": 0.53,
+        "x": 0.4,
+        "y": 0.493,
         "label": {
           "en": "Optic nerve",
           "hi": "ऑप्टिक नर्व"
@@ -98,6 +102,10 @@
           "hi": "सूजन [[optic-nerve]] को दबा सकती है। नज़र घटती है और [[rapd]] दिखता है।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-cellulitis.webp",
+    "more": [
+      "orbit-cellulitis"
     ]
   },
   "why": {

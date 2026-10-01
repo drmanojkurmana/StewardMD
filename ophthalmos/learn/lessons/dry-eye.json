@@ -3,7 +3,12 @@
   "unit": "cornea",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Dry eye: when the tear film fails",
     "hi": "ड्राई आई: जब आँसू की परत कमज़ोर हो जाए"
@@ -13,22 +18,21 @@
     "hi": "[[dry-eye]] में [[tear-film]] बहुत जल्दी टूट जाती है। आँखों में किरकिरी और जलन होती है, सबसे ज़्यादा स्क्रीन पर लंबे समय के बाद।"
   },
   "see": {
-    "diagram": "diagrams/tear-film.svg",
-    "w": 400,
-    "h": 240,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Cross-section of the tear film on the cornea. A thin amber oil layer sits on top of a thicker blue watery layer. Fine purple strands rise from the cell surface below. Under them are rows of surface cells. On the right, the layers dip to nothing, leaving a dry spot with wavy arrows rising from it.",
-      "hi": "कॉर्निया पर आँसू की परत का कटा हुआ चित्र। ऊपर पतली पीली तेल की परत, उसके नीचे मोटी नीली पानी की परत। नीचे कोशिकाओं की सतह से बारीक बैंगनी रेशे उठते हैं। उनके नीचे सतह की कोशिकाओं की कतारें हैं। दाईं ओर परतें घटकर ख़त्म हो जाती हैं, एक सूखी जगह बचती है जिससे लहरदार तीर ऊपर उठते हैं।"
+      "en": "A close-up slice of the tear film on the eye surface. A thin golden oil layer sits on top. Below it is a thick clear watery layer. Fine mucus strands rise from the surface cells. On the right the film breaks and the cells dry out. A haze rises there as water evaporates.",
+      "hi": "आँख की सतह पर आँसू की परत का पास से काट। ऊपर एक पतली सुनहरी तेल की परत है। उसके नीचे मोटी पारदर्शी पानी की परत है। सतह की कोशिकाओं से बारीक म्यूकस के रेशे ऊपर उठते हैं। दाईं ओर परत टूट जाती है और कोशिकाएँ सूख जाती हैं। वहाँ पानी उड़ने से हल्की भाप उठती है।"
     },
     "caption": {
       "en": "The tear film in three parts: oil on top, water with mucus below, then the cornea's surface cells. On the right it has broken.",
       "hi": "आँसू की परत के तीन हिस्से: ऊपर तेल, नीचे बलगम वाला पानी, फिर कॉर्निया की सतह की कोशिकाएँ। दाईं ओर यह टूट गई है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.25,
-        "y": 0.196,
+        "x": 0.3,
+        "y": 0.165,
         "label": {
           "en": "Oil layer",
           "hi": "तेल की परत (lipid layer)"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.33,
+        "x": 0.3,
+        "y": 0.35,
         "label": {
           "en": "Watery layer",
           "hi": "पानी की परत (aqueous layer)"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.45,
-        "y": 0.465,
+        "x": 0.25,
+        "y": 0.58,
         "label": {
           "en": "Mucus base",
           "hi": "बलगम की परत (mucin)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.66,
+        "x": 0.3,
+        "y": 0.76,
         "label": {
           "en": "Surface cells",
           "hi": "सतह की कोशिकाएँ (epithelium)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.825,
-        "y": 0.46,
+        "x": 0.72,
+        "y": 0.655,
         "label": {
           "en": "Dry spot",
           "hi": "सूखी जगह"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.825,
-        "y": 0.15,
+        "x": 0.78,
+        "y": 0.3,
         "label": {
           "en": "Evaporation",
           "hi": "भाप बनकर उड़ना"
@@ -98,6 +102,10 @@
           "hi": "तेल की परत पतली हो या पलक कम झपके, तो पानी हवा में उड़ जाता है। पंखा, AC और स्क्रीन इसे तेज़ करते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/tear-film.webp",
+    "more": [
+      "tear-film"
     ]
   },
   "why": {

@@ -103,6 +103,9 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # data/neo/sources.json.gz (provenance snapshots for scripts/neo/validate.mjs) is NOT shipped.
 if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data/neo/"; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
+# India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
+# owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
+if ls data/india/*.json >/dev/null 2>&1; then mkdir -p "$WWW/data/india"; cp data/india/*.json "$WWW/data/india/"; fi
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
 # The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:

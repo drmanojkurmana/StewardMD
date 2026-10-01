@@ -3,7 +3,12 @@
   "unit": "glaucoma",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Where the eye's fluid comes from and goes",
     "hi": "आँख का पानी कहाँ बनता है और कहाँ जाता है"
@@ -13,22 +18,21 @@
     "hi": "[[ciliary-body]] [[aqueous]] बनाती है। यह [[pupil]] से होकर बहता है और [[angle]] से बाहर निकलता है। जब निकास साथ नहीं दे पाता, तो प्रेशर बढ़ता है।"
   },
   "see": {
-    "diagram": "diagrams/gl-aqueous-flow.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram of the upper front of the eye, cut from front to back. The clear cornea curves on the left. The iris hangs down in the middle and the lens bulges on the right. A red ciliary body sits above the lens. Dashed arrows run from it behind the iris and through the pupil. They end at a small drain where cornea meets iris.",
-      "hi": "आँख के ऊपरी अगले हिस्से का चित्र, आगे से पीछे तक कटा हुआ। बाईं ओर साफ़ कॉर्निया का घुमाव है। बीच में आइरिस नीचे लटकती है और दाईं ओर लेंस उभरा है। लेंस के ऊपर लाल सिलियरी बॉडी है। टूटी रेखा वाले तीर वहाँ से आइरिस के पीछे, पुतली से होकर, उस छोटे निकास तक जाते हैं जहाँ कॉर्निया और आइरिस मिलते हैं।"
+      "en": "The upper front of the eye, cut open, with the cornea on the left. A faint shining stream shows the eye's fluid. It starts at the folded ciliary body at the top. It flows behind the iris and out through the pupil. Then it crosses the front chamber to the drain in the angle. From there it leaves into small veins.",
+      "hi": "आँख का ऊपरी आगे का हिस्सा खोलकर दिखाया गया है, कॉर्निया बाईं ओर है। एक हल्की चमकती धारा आँख का तरल दिखाती है। यह ऊपर की मुड़ी हुई सिलियरी बॉडी से शुरू होती है। यह आइरिस के पीछे बहकर पुतली से बाहर आती है। फिर आगे के कक्ष को पार करके कोण की ड्रेन तक पहुँचती है। वहाँ से यह छोटी शिराओं में चली जाती है।"
     },
     "caption": {
       "en": "How aqueous moves. Follow the dashed arrows from where it is made to where it drains.",
       "hi": "एक्वियस कैसे बहता है। बनने की जगह से निकलने की जगह तक टूटी रेखा वाले तीरों को देखें।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.56,
-        "y": 0.25,
+        "x": 0.68,
+        "y": 0.2,
         "label": {
           "en": "Ciliary body",
           "hi": "सिलियरी बॉडी"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.47,
-        "y": 0.6,
+        "x": 0.57,
+        "y": 0.33,
         "label": {
           "en": "Behind the iris",
           "hi": "आइरिस के पीछे"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.46,
-        "y": 0.93,
+        "x": 0.49,
+        "y": 0.565,
         "label": {
           "en": "Pupil",
           "hi": "पुतली"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.22,
-        "y": 0.67,
+        "x": 0.3,
+        "y": 0.6,
         "label": {
           "en": "Front chamber",
           "hi": "आगे का चैंबर"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.345,
-        "y": 0.25,
+        "x": 0.43,
+        "y": 0.3,
         "label": {
           "en": "Drain",
           "hi": "निकास"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.44,
-        "y": 0.09,
+        "x": 0.5,
+        "y": 0.12,
         "label": {
           "en": "To the veins",
           "hi": "नसों की ओर"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.69,
-        "y": 0.73,
+        "x": 0.68,
+        "y": 0.62,
         "label": {
           "en": "Lens",
           "hi": "लेंस"
@@ -110,6 +114,10 @@
           "hi": "लेंस में खून की नलियाँ नहीं होतीं। एक्वियस ही उसे पोषण देता है।"
         }
       }
+    ],
+    "img": "learn/media/real/gl-aqueous-flow.webp",
+    "more": [
+      "gl-aqueous-flow"
     ]
   },
   "why": {

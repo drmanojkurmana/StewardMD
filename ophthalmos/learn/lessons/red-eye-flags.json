@@ -3,7 +3,12 @@
   "unit": "cornea",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Red eye: the danger signs",
     "hi": "लाल आँख: ख़तरे के संकेत"
@@ -13,21 +18,20 @@
     "hi": "ज़्यादातर लाल आँखें नुकसान नहीं करतीं। पर अगर लाल आँख के साथ नज़र कम हो, असली दर्द हो, [[photophobia]] हो या [[ciliary-flush]] दिखे, तो उसी दिन [[ophthalmologist]] को दिखाना ज़रूरी है।"
   },
   "see": {
-    "diagram": "diagrams/red-eye-flush.svg",
-    "w": 440,
-    "h": 200,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Two eyes drawn from the front. In the left eye, red vessels fill the white and are heaviest near the corners, fading toward a clear cornea. In the right eye, a purple-red ring hugs the edge of the cornea. The cornea is slightly hazy with a small white spot, and the pupil is small and irregular.",
-      "hi": "सामने से बनी दो आँखें। बाईं आँख में लाल नलियाँ सफ़ेद हिस्से में भरी हैं, कोनों के पास सबसे ज़्यादा, और साफ़ कॉर्निया की ओर हल्की होती जाती हैं। दाईं आँख में बैंगनी-लाल घेरा कॉर्निया के किनारे से सटा है, कॉर्निया थोड़ा धुंधला है और उस पर एक छोटा सफ़ेद धब्बा है, और पुतली छोटी और टेढ़ी है।"
+      "en": "Two eyes seen from the front. Left, bright red vessels fill the corners but fade near a clear cornea. Right, a deep red ring hugs the cornea, with a hazy white spot and a small pupil.",
+      "hi": "सामने से देखी गई दो आँखें। बाएँ, लाल नलियाँ कोनों में भरी हैं पर साफ़ कॉर्निया के पास हल्की हैं। दाएँ, कॉर्निया पर गहरा लाल घेरा, एक सफ़ेद धब्बा और छोटी पुतली है।"
     },
     "caption": {
       "en": "Left: redness heaviest away from the cornea, as in conjunctivitis. Right: a red ring at the limbus with a hazy cornea, a danger sign.",
       "hi": "बाएँ: लाली कॉर्निया से दूर सबसे ज़्यादा, जैसे कंजंक्टिवाइटिस में। दाएँ: लिम्बस पर लाल घेरा और धुंधला कॉर्निया, ख़तरे का संकेत।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.08,
+        "x": 0.1,
         "y": 0.5,
         "label": {
           "en": "Redness heaviest at the edges",
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.325,
-        "y": 0.39,
+        "x": 0.335,
+        "y": 0.42,
         "label": {
           "en": "Paler next to the cornea",
           "hi": "कॉर्निया के पास हल्की लाली"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.5,
+        "x": 0.254,
+        "y": 0.496,
         "label": {
           "en": "Clear cornea, round pupil",
           "hi": "साफ़ कॉर्निया, गोल पुतली"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.815,
-        "y": 0.37,
+        "x": 0.81,
+        "y": 0.4,
         "label": {
           "en": "Ciliary flush",
           "hi": "सिलियरी फ़्लश (ciliary flush)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.711,
-        "y": 0.595,
+        "x": 0.8,
+        "y": 0.55,
         "label": {
           "en": "White spot on the cornea",
           "hi": "कॉर्निया पर सफ़ेद धब्बा"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.755,
-        "y": 0.49,
+        "x": 0.75,
+        "y": 0.485,
         "label": {
           "en": "Small, odd-shaped pupil",
           "hi": "छोटी, टेढ़ी पुतली"
@@ -99,7 +103,9 @@
         }
       }
     ],
+    "img": "learn/media/real/red-eye-flush.webp",
     "more": [
+      "red-eye-flush",
       "red-eye-map"
     ]
   },

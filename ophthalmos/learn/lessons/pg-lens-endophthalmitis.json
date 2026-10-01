@@ -3,7 +3,12 @@
   "unit": "lens-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Acute endophthalmitis after cataract surgery",
     "hi": "मोतियाबिंद ऑपरेशन के बाद एक्यूट एंडोफ़्थैल्माइटिस"
@@ -13,22 +18,21 @@
     "hi": "एक्यूट [[endophthalmitis]] ऑपरेशन के कुछ दिन बाद दर्द, कम नज़र और [[hypopyon]] के साथ आता है। तुरंत विट्रियस का सैंपल लें और एंटीबायोटिक इंजेक्ट करें। ऑपरेशन के समय आँख में एंटीबायोटिक देने से ख़तरा घटता है।"
   },
   "see": {
-    "diagram": "diagrams/lens-hypopyon.svg",
-    "w": 480,
-    "h": 240,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Front view of an inflamed eye. A deep red ring surrounds a hazy cornea. A white fluid level fills the bottom of the front chamber. Pale strands cross the pupil. A dark line near the top right marks the wound.",
-      "hi": "सूजी हुई आँख का आगे से चित्र। धुंधले कॉर्निया के चारों ओर गहरा लाल घेरा है। आगे के चैंबर के नीचे सफ़ेद तरल की परत है। पुतली पर हल्के रेशे हैं। ऊपर दाईं ओर काली रेखा घाव को दिखाती है।"
+      "en": "Front view of an inflamed right eye after cataract surgery. Deep red vessels cover the white of the eye. A ciliary flush ring surrounds the oedematous cornea. A white hypopyon fluid level lies at the bottom of the front chamber. Fibrin strands cross the pupil, and a small cut marks the upper right margin.",
+      "hi": "मोतियाबिंद ऑपरेशन के बाद सूजी हुई दाहिनी आँख का सामने से दृश्य। आँख के सफ़ेद हिस्से पर गहरी लाल नसें हैं। सूजे कॉर्निया के चारों ओर सिलियरी लाली का घेरा है। आगे के चैंबर के नीचे हाइपोपियॉन की सफ़ेद परत है। पुतली पर फ़ाइब्रिन के रेशे हैं, और ऊपर दाईं ओर छोटा घाव दिखता है।"
     },
     "caption": {
       "en": "Acute post-operative endophthalmitis: hypopyon, fibrin, a hazy cornea and marked injection.",
       "hi": "ऑपरेशन के बाद एक्यूट एंडोफ़्थैल्माइटिस: हाइपोपियॉन, फ़ाइब्रिन, धुंधला कॉर्निया और गहरी लाली।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.5,
-        "y": 0.74,
+        "x": 0.505,
+        "y": 0.63,
         "label": {
           "en": "Hypopyon",
           "hi": "हाइपोपियॉन"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.5,
+        "x": 0.51,
+        "y": 0.49,
         "label": {
           "en": "Fibrin",
           "hi": "फ़ाइब्रिन"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.427,
-        "y": 0.396,
+        "x": 0.45,
+        "y": 0.4,
         "label": {
           "en": "Hazy cornea",
           "hi": "धुंधला कॉर्निया"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.604,
-        "y": 0.29,
+        "x": 0.605,
+        "y": 0.395,
         "label": {
           "en": "Wound",
           "hi": "घाव"
@@ -75,7 +79,7 @@
         }
       },
       {
-        "x": 0.317,
+        "x": 0.36,
         "y": 0.5,
         "label": {
           "en": "Ciliary injection",
@@ -86,6 +90,10 @@
           "hi": "कॉर्निया के किनारे पर गहरी लाली आँख के अंदर सूजन दिखाती है।"
         }
       }
+    ],
+    "img": "learn/media/real/lens-hypopyon.webp",
+    "more": [
+      "lens-hypopyon"
     ]
   },
   "why": {

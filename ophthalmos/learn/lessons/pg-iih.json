@@ -3,7 +3,12 @@
   "unit": "neuro-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Idiopathic intracranial hypertension",
     "hi": "इडियोपैथिक इंट्राक्रैनियल हाइपरटेंशन"
@@ -13,22 +18,21 @@
     "hi": "[[iih]] खोपड़ी में बढ़ा दबाव है, बिना किसी गाँठ या दूसरे कारण के। इसका निदान Friedman 2013 मानदंडों से करें। इलाज की नींव वज़न घटाना है, और एसिटाज़ोलामाइड थोड़ा और फ़ायदा देता है।"
   },
   "see": {
-    "diagram": "diagrams/neuro-iih.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Two rows, each showing an eye from above with its optic nerve, and a bony cup on the right. The top row is normal. Bottom row: the back of the eye is flat and the disc bulges into the eye. The fluid sheath around the nerve is wide. The nerve is kinked. The bony cup is filled with fluid, with the gland pressed flat at the bottom.",
-      "hi": "दो पंक्तियाँ, हर एक में ऊपर से आँख और उसकी ऑप्टिक नर्व, और दाईं ओर हड्डी का एक कप। ऊपर की पंक्ति सामान्य है। नीचे की पंक्ति: आँख का पिछला हिस्सा सपाट है, डिस्क आँख के अंदर उभरी है, और नर्व के चारों ओर तरल की परत चौड़ी है। नर्व मुड़ी हुई है। हड्डी का कप तरल से भरा है, और ग्रंथि नीचे दबकर सपाट है।"
+      "en": "Two rows compare normal and raised brain pressure. Top: a normal eye and a straight optic nerve in a thin sheath. The pituitary gland sits normally in its bony cup. Bottom: the disc is swollen, and the nerve sheath is wide with extra fluid. The nerve bends in waves. The bony cup is filled with fluid, and the gland lies flat at its floor.",
+      "hi": "दो पंक्तियाँ सामान्य और बढ़े हुए दिमाग़ी दबाव की तुलना करती हैं। ऊपर: एक सामान्य आँख, पतले आवरण में सीधी ऑप्टिक नस, और हड्डी के कप में सामान्य पिट्यूटरी ग्रंथि। नीचे: डिस्क सूजी हुई है, और नस का आवरण अतिरिक्त द्रव से चौड़ा है। नस लहरों में मुड़ती है। हड्डी का कप द्रव से भरा है, और ग्रंथि उसके तल पर चपटी पड़ी है।"
     },
     "caption": {
       "en": "Top: normal. Bottom: MRI signs of raised pressure. The back of the globe is flat, the nerve sheath wide, the nerve kinked and the sella empty.",
       "hi": "ऊपर: सामान्य। नीचे: बढ़े दबाव के MRI संकेत। आँख के गोले का पिछला हिस्सा सपाट है, नर्व की परत चौड़ी है, नर्व मुड़ी है और सेला ख़ाली (empty sella) है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.221,
-        "y": 0.74,
+        "x": 0.32,
+        "y": 0.673,
         "label": {
           "en": "Flat globe, swollen disc",
           "hi": "सपाट गोला, सूजी डिस्क"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.354,
-        "y": 0.667,
+        "x": 0.45,
+        "y": 0.627,
         "label": {
           "en": "Wide nerve sheath",
           "hi": "चौड़ी नर्व परत"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.504,
-        "y": 0.74,
+        "x": 0.56,
+        "y": 0.693,
         "label": {
           "en": "Kinked nerve",
           "hi": "मुड़ी नर्व"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.74,
+        "x": 0.83,
+        "y": 0.707,
         "label": {
           "en": "Empty sella",
           "hi": "ख़ाली सेला"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.417,
-        "y": 0.26,
+        "x": 0.48,
+        "y": 0.213,
         "label": {
           "en": "Normal nerve",
           "hi": "सामान्य नर्व"
@@ -86,6 +90,10 @@
           "hi": "ऊपर वाली सामान्य आँख, परत और ग्रंथि से तुलना करें।"
         }
       }
+    ],
+    "img": "learn/media/real/neuro-iih.webp",
+    "more": [
+      "neuro-iih"
     ]
   },
   "why": {
@@ -95,8 +103,8 @@
         "hi": "Friedman 2013 में [[papilloedema]], क्रेनियल नर्व को छोड़कर सामान्य न्यूरो जाँच, और दिमाग की सामान्य इमेजिंग ज़रूरी है।"
       },
       {
-        "en": "The CSF must be normal, with a [[lumbar-puncture]] opening pressure of 250 mm CSF or more in adults.",
-        "hi": "CSF सामान्य होना चाहिए, और वयस्कों में [[lumbar-puncture]] का ओपनिंग प्रेशर 250 mm CSF या ज़्यादा।"
+        "en": "The CSF must be normal. Measure the [[lumbar-puncture]] opening pressure lying on the side. It is 250 mm CSF or more in adults and 280 mm or more in children.",
+        "hi": "CSF सामान्य होना चाहिए। [[lumbar-puncture]] का ओपनिंग प्रेशर करवट लेटाकर नापें। यह वयस्कों में 250 mm CSF या ज़्यादा और बच्चों में 280 mm या ज़्यादा होता है।"
       },
       {
         "en": "Without papilloedema, a definite diagnosis needs a [[sixth-nerve]] palsy. Without either, three of four MRI signs only suggest it.",
@@ -115,8 +123,8 @@
         "hi": "अतिरिक्त फ़ायदा थोड़ा था, लगभग 0.7 dB। पैपिलीडीमा और जीवन की गुणवत्ता भी सुधरी।"
       },
       {
-        "en": "The 2018 consensus guidelines put weight loss first. Worsening vision needs urgent surgery to lower the pressure.",
-        "hi": "2018 की सहमति गाइडलाइन वज़न घटाने को पहले रखती है। बिगड़ती नज़र में दबाव घटाने के लिए तुरंत सर्जरी चाहिए।"
+        "en": "The 2018 consensus guidelines put weight loss first. Worsening vision needs urgent surgery, such as a CSF shunt or optic nerve sheath fenestration.",
+        "hi": "2018 की सहमति गाइडलाइन वज़न घटाने को पहले रखती है। बिगड़ती नज़र में तुरंत सर्जरी चाहिए, जैसे CSF शंट या ऑप्टिक नर्व शीथ फ़ेनेस्ट्रेशन।"
       }
     ],
     "analogy": {

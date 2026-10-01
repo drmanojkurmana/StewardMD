@@ -75,15 +75,15 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1-edit1">
 <link rel="stylesheet" href="/atlas.css?v=atlas6">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d6-fr1">
-<link rel="stylesheet" href="/ophthalmos.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-mcq.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-notes.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-retino.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-neuro.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-tools.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-learn.css?v=oph11">
-<link rel="stylesheet" href="/ophthalmos-explore.css?v=oph11">
-<link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark1">
+<link rel="stylesheet" href="/ophthalmos.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-mcq.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-notes.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-retino.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-neuro.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-tools.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-learn.css?v=oph13">
+<link rel="stylesheet" href="/ophthalmos-explore.css?v=oph13">
+<link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark2">
 <link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1">
 <link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1">
@@ -262,7 +262,7 @@ body.smd-ddi-open #infFab,
 body.smd-ddi-open .ghis-ward-fab,
 body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
-<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2-audA-audB-fr1-mkclose1-tblscroll1-glass1">
+<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2-audA-audB-fr1-mkclose1-tblscroll1-glass1-convo1002">
 <link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1-fr1">
 </head>
 
@@ -2219,7 +2219,8 @@ window.openExternal = function (u) {
 <script src="/engagement.js?v=gold992-fr1" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
-<script src="/toast.js?v=gold363" defer></script>
+<script src="/toast.js?v=gold363-rm1" defer></script>
+<script src="/capture-guard.js?v=cg2" defer></script>
 <script src="/native-auth.js?v=gold363" defer></script>
 <!-- OTA update client (window.SMD_OTA) — Phase 2. Native-only; wires the dormant "Software
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
@@ -2238,11 +2239,11 @@ window.openExternal = function (u) {
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978-sheet1-universal3-cefiderocol1-fr1" defer></script>
 <script defer src="/interaction-rules.js?v=ddiaudit20260925"></script>
-<script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
+<script defer src="/kb/ai/drug-fuzzy.js?v=gold1047-convo1002"></script>
 <!-- Drug names highlighted + linked to their monograph (drug-link.js; lexicon generated from
      data/interaction-rules.json). Flag smd_druglink, default ON. -->
 <script src="/drug-lexicon.js?v=dl2" defer></script>
-<script src="/drug-link.js?v=dl6" defer></script>
+<script src="/drug-link.js?v=dl6-convo1002" defer></script>
 <!-- No emoji in the app (each becomes the matching window.ICONS line icon) and no AI-style dashes
      (emoji-icons.js). Flags smd_noemoji / smd_nodash, default ON; "0" restores either. -->
 <script src="/emoji-icons.js?v=ne10-quoteref1" defer></script>
@@ -2279,7 +2280,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/clinical-docs.css?v=docs5">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002" defer></script>
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
@@ -2293,8 +2294,8 @@ window.openExternal = function (u) {
 <script src="/review-desk.js?v=rev4-bl2-tokos4" defer></script>
 <!-- Clinical Bulletins: signed practice updates on the disease reader (flag smd_kb_bulletins, default off)
      + the Review Desk signing tab. docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md -->
-<script src="/bulletins.js?v=bl5" defer></script>
-<script src="/bulletins-desk.js?v=bl8" defer></script>
+<script src="/bulletins.js?v=bl6" defer></script>
+<script src="/bulletins-desk.js?v=bl10" defer></script>
 <!-- Colleagues (wave 2): referrals, handovers, case rooms, the hospital's version of a kit, kit history.
      Flag smd_kits_share (default OFF, ?share=1); server route /api/kits is off until KITS_SHARE_ON=1. -->
 <script src="/kits-share.js?v=share3-wa1" defer></script>
@@ -2306,11 +2307,11 @@ window.openExternal = function (u) {
 <script src="/specialty-kits.js?v=kits8.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Dose calculator (dose-calc.js): flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it. Rules: data/dose-rules.json.gz (scripts/build-dose-rules.mjs). vault/modules/Dose Calculator.md -->
-<script src="/dose-calc.js?v=dc4" defer></script>
-<!-- Neonatal layer (neo-*.js): master flag smd_neo, DEFAULT OFF (Settings > Experimental Features, ?neo=1).
+<script src="/dose-calc.js?v=dc5" defer></script>
+<!-- Neonatal layer (neo-*.js): master flag smd_neo, DEFAULT ON under a Beta label (owner 2026-10-01); off: Settings > Experimental Features, ?neo=0.
      neo-flags.js loads the rest only when the flag is on. Data: data/neo/*.json (quoted sources,
      ai_drafted). vault/modules/Neonatal.md -->
-<script src="/neo-flags.js?v=neo1" defer></script>
+<script src="/neo-flags.js?v=neo3" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
      smd_privacy_gate=0 (default ON). -->
@@ -2331,7 +2332,7 @@ window.openExternal = function (u) {
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
      reads these globals lazily (only when a maik-lite question is actually asked). -->
-<script src="/kb/ai/maik-lite-rag.js?v=rag1-audOff" defer></script>
+<script src="/kb/ai/maik-lite-rag.js?v=rag1-audOff-convo1002" defer></script>
 <!-- Claim-level grounding verifier (2026-09-18): checks each statement of an on-device answer against the
      retrieved passages on facts (doses, drugs, figures), not wording. Loaded before maik-local.js. -->
 <script src="/kb/ai/maik-grounding.js?v=ground1-nerdrugs1-codedb1-audOff" defer></script>
@@ -2339,7 +2340,7 @@ window.openExternal = function (u) {
      DEFAULT OFF, and fails closed until each checkpoint licence + sha256 is pinned. -->
 <script src="/openmed-ner.js?v=ddiaudit20260925" defer></script>
 <script src="/kb/ai/maik-lite-kb-store.js?v=rag1-audOff" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1-literx1-mlx1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1-literx1-mlx1-convo1002" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -2354,11 +2355,11 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-pf1-edge4" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-pf1-edge4" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<script defer src="/sidebar-redesign.js?v=settingsr925-page3-exp1-clinix3-surgx1-hosp1-ver2-us1-fb1-bugs1-hub1-pfdraw1-help1-neo1"></script>
+<script defer src="/sidebar-redesign.js?v=settingsr925-page3-exp1-clinix3-surgx1-hosp1-ver2-us1-fb1-bugs1-hub1-pfdraw1-help1-neo1-neo2"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
      opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
      Must load after sidebar-redesign.js so the row's action resolves. -->
@@ -3117,20 +3118,20 @@ window.openExternal = function (u) {
 </script>
 <script src="/atlas.js?v=atlas4" defer></script>
 <script src="/atlas3d.js?v=a3d18" defer></script>
-<script src="/ophthalmos-core.js?v=oph11" defer></script>
-<script src="/ophthalmos-data.js?v=oph11" defer></script>
-<script src="/ophthalmos-stage.js?v=oph11" defer></script>
-<script src="/ophthalmos.js?v=oph11" defer></script>
-<script src="/ophthalmos-screens.js?v=oph11" defer></script>
-<script src="/ophthalmos-mcq.js?v=oph11" defer></script>
-<script src="/ophthalmos-notes.js?v=oph11" defer></script>
-<script src="/ophthalmos-retino-model.js?v=oph11" defer></script>
-<script src="/ophthalmos-retino.js?v=oph11" defer></script>
-<script src="/ophthalmos-neuro.js?v=oph11" defer></script>
-<script src="/ophthalmos-tools-model.js?v=oph11" defer></script>
-<script src="/ophthalmos-tools.js?v=oph11" defer></script>
-<script src="/ophthalmos-learn.js?v=oph11" defer></script>
-<script src="/ophthalmos-explore.js?v=oph11" defer></script>
+<script src="/ophthalmos-core.js?v=oph13" defer></script>
+<script src="/ophthalmos-data.js?v=oph13" defer></script>
+<script src="/ophthalmos-stage.js?v=oph13" defer></script>
+<script src="/ophthalmos.js?v=oph13" defer></script>
+<script src="/ophthalmos-screens.js?v=oph13" defer></script>
+<script src="/ophthalmos-mcq.js?v=oph13" defer></script>
+<script src="/ophthalmos-notes.js?v=oph13" defer></script>
+<script src="/ophthalmos-retino-model.js?v=oph13" defer></script>
+<script src="/ophthalmos-retino.js?v=oph13" defer></script>
+<script src="/ophthalmos-neuro.js?v=oph13" defer></script>
+<script src="/ophthalmos-tools-model.js?v=oph13" defer></script>
+<script src="/ophthalmos-tools.js?v=oph13" defer></script>
+<script src="/ophthalmos-learn.js?v=oph13" defer></script>
+<script src="/ophthalmos-explore.js?v=oph13" defer></script>
 <!-- Tokós: only the loader at boot; the engine and Tokós files load on first open (tokos-loader.js) -->
 <script src="/tokos-loader.js?v=tok7" defer></script>
 </body>

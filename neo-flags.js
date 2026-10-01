@@ -1,9 +1,9 @@
 /* StewardMD - neonatal layer flags (window.SMD_NEO_FLAGS). Plan 2026-09-30, vault/modules/Neonatal.md.
  *
- * Master flag smd_neo, DEFAULT OFF: nothing neonatal shows (no Home tile, no All tools entry, no
- * search hit, no neonatal dose path in dose-calc.js, no neonatal scores in Calculators) until it is
- * on. Turn on per device: Settings > Experimental Features > Neonatal layer, ?neo=1, or
- * localStorage smd_neo = "1".
+ * Master flag smd_neo, DEFAULT ON under a Beta label (owner 2026-10-01: "Make it default on for everyone
+ * under beta label"; was default OFF 2026-09-30). Content is still ai_drafted with a Draft badge.
+ * Off per device: Settings > Experimental Features > Neonatal layer, ?neo=0, or localStorage
+ * smd_neo = "0". Off, nothing neonatal shows and dose-calc.js behaves as before the layer.
  *
  * Per-feature flags (default ON, but only take effect while the master is on) let one tool ship or be
  * pulled without the rest: ?neo_<name>=0 or localStorage smd_neo_<name> = "0".
@@ -31,7 +31,7 @@
   function ls(k) { try { return G.localStorage.getItem(k); } catch (e) { return null; } }
   function on() {
     var v = q("neo"); if (v != null) return v;
-    return ls(MASTER) === "1";
+    return ls(MASTER) !== "0";
   }
   function feature(name) {
     if (!on()) return false;
@@ -44,7 +44,7 @@
   }
   /* The layer's scripts load only when the master flag is on, so a device with it off pays nothing
    * beyond this file. Order matters (the record and hub first); async=false keeps insertion order. */
-  var VER = "neo1";
+  var VER = "neo3";
   var FILES = ["neo-patient", "neo-hub", "neo-dose", "neo-prep", "neo-infusions", "neo-fluids", "neo-growth", "neo-bili", "neo-scores", "neo-ref", "neo-proc", "neo-tdm"];
   var loaded = false;
   function load() {

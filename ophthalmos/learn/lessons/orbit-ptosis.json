@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Droopy eyelid (ptosis)",
     "hi": "झुकी हुई पलक (ptosis)"
@@ -13,22 +18,21 @@
     "hi": "ऊपरी पलक के झुकने को [[ptosis]] कहते हैं। पहले नापें कि पलक कितनी नीचे है, फिर कारण ढूँढें। कुछ कारण इमरजेंसी होते हैं।"
   },
   "see": {
-    "diagram": "diagrams/orbit-ptosis.svg",
-    "w": 480,
-    "h": 190,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of two open eyes. On the left, a normal upper lid sits well above a white light dot in the centre of the pupil. A blue bracket marks the gap. On the right, the upper lid is low and red and almost touches the dot. The brow on that side is higher.",
-      "hi": "दो खुली आँखों का चित्र। बाईं ओर, सामान्य ऊपरी पलक पुतली के बीच के सफ़ेद रोशनी के बिंदु से काफ़ी ऊपर है, और एक नीला ब्रैकेट यह दूरी दिखाता है। दाईं ओर, ऊपरी पलक नीची और लाल है और बिंदु को लगभग छू रही है। उस तरफ़ की भौंह ज़्यादा ऊँची है।"
+      "en": "A face seen from the front, looking straight ahead. Each cornea shows a small bright dot of light. On one side, the upper lid sits well above the dot. On the other side, the upper lid droops down close to the dot. The eyebrow above the droopy lid is raised higher than the other.",
+      "hi": "सामने से देखा गया एक चेहरा, जो सीधा आगे देख रहा है। हर कॉर्निया पर रोशनी का एक छोटा चमकीला बिंदु है। एक ओर ऊपरी पलक बिंदु से काफ़ी ऊपर है। दूसरी ओर ऊपरी पलक झुककर बिंदु के पास आ गई है। झुकी पलक के ऊपर की भौंह दूसरी से ज़्यादा ऊँची उठी है।"
     },
     "caption": {
       "en": "Shine a torch and find the bright dot on the cornea. The gap from the dot up to the lid edge is MRD1. Normal is about 4 to 5 mm.",
       "hi": "टॉर्च की रोशनी डालें और कॉर्निया पर चमकता बिंदु ढूँढें। बिंदु से ऊपर पलक के किनारे तक की दूरी MRD1 है। सामान्य लगभग 4 से 5 मिमी होती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.25,
-        "y": 0.684,
+        "x": 0.222,
+        "y": 0.523,
         "label": {
           "en": "Light reflex",
           "hi": "रोशनी का बिंदु"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.383,
-        "y": 0.605,
+        "x": 0.24,
+        "y": 0.43,
         "label": {
           "en": "Normal MRD1",
           "hi": "सामान्य MRD1"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.646,
-        "y": 0.66,
+        "x": 0.87,
+        "y": 0.513,
         "label": {
           "en": "Droopy lid",
           "hi": "झुकी पलक"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.883,
-        "y": 0.668,
+        "x": 0.79,
+        "y": 0.537,
         "label": {
           "en": "Short MRD1",
           "hi": "कम MRD1"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.1,
+        "x": 0.78,
+        "y": 0.213,
         "label": {
           "en": "Raised brow",
           "hi": "ऊपर उठी भौंह"
@@ -86,6 +90,10 @@
           "hi": "मरीज़ पलक को ऊपर खींचने के लिए भौंह उठाता है। उस तरफ़ माथे की लकीरें देखें।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-ptosis.webp",
+    "more": [
+      "orbit-ptosis"
     ]
   },
   "why": {

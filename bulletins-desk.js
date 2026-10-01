@@ -27,6 +27,7 @@
     required: "is required", "too-short": "is too short", "too-long": "is too long", invalid: "is not valid",
     "not-https": "must be an https link", future: "cannot be in the future", unknown: "has a disease the app does not know",
     "too-many": "has more than 5 diseases", "em-dash": "contains an em-dash; use a comma or full stop",
+    "not-applicable-approval": "cannot be Not applicable for an approval; choose approved by CDSCO, not yet approved, or not confirmed",
   };
 
   // "Draft from source": suggestions only. The signer rewrites in their own words and checks every number;
@@ -81,6 +82,69 @@
         " (updated " + esc(isoDate(upd)) + "). That does not prove it is unapproved in India: older approvals and new strengths are published elsewhere.</div>";
     }
     return out + "</div>";
+  }
+
+  /* ---------------- pre-sign checks ----------------
+   * Things a second doctor would catch. They never block signing; the codes the signer saw are sent with the
+   * signature and kept in the audit (functions/_bulletin_rules.js WARNING_CODES), so the numbers can show whether
+   * signing with a warning showing goes with later corrections. */
+  var INDEX_WORDS = { news: 1, "news-events": 1, newsroom: 1, "press-releases": 1, "press-announcements": 1, press: 1, updates: 1,
+    "whats-new": 1, guidelines: 1, publications: 1, index: 1, "index.html": 1, "index.htm": 1, home: 1, homepage: 1, media: 1,
+    announcements: 1, notifications: 1, "public-notices": 1 };
+  // A list or home page, not the item: no path, or a last segment that names a listing (language codes ignored).
+  function isIndexLink(u) {
+    var path;
+    try { path = new G.URL(String(u || "")).pathname; } catch (e) { return false; }
+    var segs = path.split("/").filter(function (x) { return x && !/^[a-z]{2}(-[a-z]{2})?$/i.test(x); });
+    return !segs.length || !!INDEX_WORDS[segs[segs.length - 1].toLowerCase()];
+  }
+  function words(s) { return String(s || "").toLowerCase().replace(/\[\/?[biu]\]/g, "").replace(/[^a-z0-9%.]+/g, " ").trim().split(" ").filter(Boolean); }
+  // Share of the text's 5-word runs that also occur in the source summary (1 = copied).
+  function overlap(text, src) {
+    var a = words(text), b = words(src), n = 5;
+    if (a.length < n || b.length < n) return 0;
+    var set = {}, hit = 0, tot = 0;
+    for (var i = 0; i + n <= b.length; i++) set[b.slice(i, i + n).join(" ")] = 1;
+    for (var j = 0; j + n <= a.length; j++) { tot++; if (set[a.slice(j, j + n).join(" ")]) hit++; }
+    return tot ? hit / tot : 0;
+  }
+  // Numbers in the text whose digits appear nowhere in the source title or summary.
+  function numbersNotIn(text, src) {
+    var have = {};
+    String(src || "").replace(/\d+(?:\.\d+)?/g, function (m) { have[m] = 1; return m; });
+    return numbersIn(text).filter(function (n) {
+      var ds = n.match(/\d+(?:\.\d+)?/g) || [];
+      return ds.length && ds.some(function (d) { return !have[d]; });
+    });
+  }
+  function checksFor(c) {
+    var w = [], s = c._src || {}, src = [s.title, s.summary].join(" "), r = c._cdsco;
+    if (c.source_url && isIndexLink(c.source_url)) w.push(["index_link", "The source link opens a list page, not the item itself. Link the exact announcement or paper."]);
+    if (r && !r.error && (r.checked || []).length) {
+      var q = String(r.q || cdscoQuery(c));
+      if ((r.matches || []).length && (c.india_status === "not_approved_india" || c.india_status === "unknown"))
+        w.push(["cdsco_contradiction", "The CDSCO new-drug lists show a match for " + q + ". Check whether it is the same drug and form before saying it is not approved in India."]);
+      if (!(r.matches || []).length && c.india_status === "cdsco_approved")
+        w.push(["cdsco_unconfirmed", "Not found in the CDSCO new-drug lists. Make sure you confirmed the approval another way."]);
+    }
+    if (s.summary && overlap(c.what_changed, s.summary) >= 0.6) w.push(["ai_verbatim", "What changed is still mostly the AI summary's wording. Rewrite it in your own words."]);
+    if (s.summary) {
+      var nn = numbersNotIn([c.headline, c.what_changed, c.applies_to].join(" "), src);
+      if (nn.length) w.push(["numbers_unsourced", "Not in the source summary: " + nn.join(", ") + ". Check each against the paper."]);
+    }
+    return w;
+  }
+  function checksHtml(w, title) {
+    return w.length ? '<div class="bl-banner warn bl-checks" id="bl_checks">' + ms("warning") + "<div><b>" + esc(title) + "</b><ul>" +
+      w.map(function (x) { return "<li>" + esc(x[1]) + "</li>"; }).join("") + '</ul><span class="bl-hint">These do not stop you signing. What you saw is kept with your signature.</span></div></div>' : "";
+  }
+  // Approvals: look the drug up in the CDSCO lists as soon as the editor opens, so the check above can run.
+  function autoCdsco(c) {
+    if (!c || c.kind !== "approval" || c._cdscoAuto || c._cdsco) return;
+    var q = String(cdscoQuery(c) || "").trim();
+    if (q.length < 4) return;
+    c._cdscoAuto = true;
+    api("GET", "/cdsco?q=" + encodeURIComponent(q)).then(function (r) { if (r.status === 200) { c._cdsco = r.data; if (DS.cur === c || DS.sec === c) rerender(); } });
   }
 
   function draftFromSource(c) {
@@ -209,6 +273,7 @@
       "source_label", "source_url", "source_date", "doi", "pmid", "review_months", "updated_ts", "body_hash", "state"].forEach(function (k) { o[k] = it[k]; });
     o.disease_ids = (it.disease_ids || []).slice();
     o._src = { title: it.u_title, org: it.u_org, url: it.u_url, date: it.u_published_ts, summary: it.u_summary, change: it.source_change };
+    o._returned = it.returned_note || "";
     // Drafts saved before links were auto-filled: fill the gaps from the source item.
     var lf = linkFields(o.source_url || it.u_url, o.doi || it.u_doi, o.pmid || it.u_pmid);
     o.source_url = lf.source_url; o.doi = lf.doi; o.pmid = lf.pmid;
@@ -230,6 +295,9 @@
     if (d.error === "changed" || d.error === "stale") return "The text changed. Review it again before signing.";
     if (d.error === "source-changed") return "The source changed since this draft was saved. Read the source again, save, then sign.";
     if (d.error === "checklist-incomplete") return "Tick every item before signing.";
+    if (d.error === "same-signer") return "You signed this one. A different doctor must be the second reader.";
+    if (d.error === "not-awaiting-second") return "This update no longer needs a second reader. Go back to the queue.";
+    if (d.error === "note-required") return "Write what needs fixing (10 to 500 characters).";
     if (d.reason === "not-a-signer") return "You are not registered as a signer.";
     if (d.error === "offline") return "No connection. Try again when online.";
     return "Could not save (" + (d.error || r.status) + "). Try again in a minute.";
@@ -290,6 +358,7 @@
     if (!(c.disease_ids || []).length) add("disease_ids", "Diseases", "bl_dq");
     if (!c.kind) add("kind", "Type", "bl_sec_kind");
     if (!c.india_status) add("india_status", "India status", "bl_sec_india_status");
+    else if (c.kind === "approval" && c.india_status === "not_applicable") add("india_status", "India status", "bl_sec_india_status", false, true);
     if (!c.evidence_type) add("evidence_type", "Evidence", "bl_sec_evidence_type");
     text("evidence_note", "Evidence note", "bl_evidence_note");
     return out;
@@ -316,6 +385,7 @@
     draft: ["Draft, not signed yet.", "", "edit_note", "Continue"],
   };
   function bucket(it, soon) {
+    if (it.state === "awaiting_second") return it.can_cosign ? "second" : "waiting2";
     if (it.state === "draft" || it.state === "edited") return "draft";
     if (it.state === "live" && !(it.review_due_ts < soon) && !(it.orphaned || []).length) return "live";
     return "check";
@@ -328,6 +398,20 @@
       '<div class="bl-q-act">' + acts + "</div></article>";
   }
   function itemCard(it, soon) {
+    if (it.state === "awaiting_second") {
+      return it.can_cosign
+        ? qCard(it.kind, true, typeChip(it.kind) + metaLine(it.source_label, it.source_date), B().plain(it.headline), (it.disease_ids || []).map(diseaseName).join(", "),
+          ["Signed by " + drName(it.signed_name) + ". Needs a second doctor before it shows.", "warn", "group"],
+          '<button type="button" class="kit-add" data-bl-act="second:' + esc(it.id) + '">' + ms("fact_check") + "Read and confirm</button>")
+        : qCard(it.kind, false, typeChip(it.kind) + metaLine(it.source_label, it.source_date), B().plain(it.headline), (it.disease_ids || []).map(diseaseName).join(", "),
+          ["You signed it. Waiting for a second doctor to confirm.", "", "hourglass_top"],
+          '<button type="button" class="kit-clear" data-bl-act="edit:' + esc(it.id) + '">Open</button>');
+    }
+    if (it.returned_note && (it.state === "draft" || it.state === "edited")) {
+      return qCard(it.kind, true, typeChip(it.kind) + metaLine(it.source_label, it.source_date), B().plain(it.headline), (it.disease_ids || []).map(diseaseName).join(", "),
+        ["Sent back by the second doctor: " + it.returned_note, "warn", "undo"],
+        '<button type="button" class="kit-add" data-bl-act="edit:' + esc(it.id) + '">' + ms("edit") + "Fix and sign again</button>");
+    }
     var note = NOTE[it.state], label = note ? note[3] : "Open", live = it.state === "live";
     if (live) note = it.review_due_ts < soon ? ["Review due " + fmtDate(it.review_due_ts) + ".", "warn", "event_repeat"] : ["On the disease page until " + fmtDate(it.review_due_ts) + ".", "ok", "verified"];
     if (live && it.review_due_ts < soon) label = "Review";
@@ -343,6 +427,8 @@
       '<button type="button" class="kit-add" data-bl-act="new:' + esc(c.id) + '">' + ms("edit_note") + "Write update</button>" +
       '<button type="button" class="kit-clear" data-bl-act="skip:' + esc(c.id) + '" aria-label="Skip: ' + esc(c.title) + '">Skip</button>');
   }
+  function specName(k) { var o = ((DS.me && DS.me.specialtyOptions) || []).filter(function (x) { return x[0] === k; })[0]; return o ? o[1] : k; }
+  function drName(n) { n = String(n || "").replace(/^\s*dr\.?\s+/i, ""); return n ? "Dr " + n : "another doctor"; }
   function group(title, cards) { return cards.length ? '<h3 class="bl-gh">' + esc(title) + '<span class="bl-gn">' + cards.length + '</span></h3><div class="bl-ql">' + cards.join("") + "</div>" : ""; }
   function empty(icon, text) { return '<div class="bl-empty">' + ms(icon) + "<p>" + esc(text) + "</p></div>"; }
 
@@ -350,13 +436,18 @@
     var me = DS.me || {}, q = DS.queue, pd = me.pending;
     var head = tabs + msgHtml();
     if (me.killed) head += '<p class="bl-banner warn" role="status">' + ms("block") + "<span>Practice updates are switched off for everyone.</span></p>";
-    var tools = me.isOwner ? '<div class="bl-tools"><p class="bl-gh">Owner tools</p><div class="kit-row"><button type="button" class="kit-pill" data-bl-act="signers">' + ms("badge") + "Signers</button>" +
-      '<button type="button" class="kit-pill" data-bl-act="kill">' + ms(me.killed ? "toggle_on" : "block") + (me.killed ? "Switch back on" : "Switch off for everyone") + "</button></div></div>" : "";
+    var tools = me.canSign || me.isOwner ? '<div class="bl-tools"><p class="bl-gh">Desk tools</p><div class="kit-row">' +
+      '<button type="button" class="kit-pill" data-bl-act="numbers">' + ms("monitoring") + "Numbers</button>" +
+      (me.isOwner ? '<button type="button" class="kit-pill" data-bl-act="signers">' + ms("badge") + "Signers</button>" +
+        '<button type="button" class="kit-pill" data-bl-act="second-reader">' + ms("group") + "Second reader: " + (me.secondReader === false ? "off" : "on") + "</button>" +
+        '<button type="button" class="kit-pill" data-bl-act="kill">' + ms(me.killed ? "toggle_on" : "block") + (me.killed ? "Switch back on" : "Switch off for everyone") + "</button>" : "") +
+      "</div></div>" : "";
     var waiting = pd && pd.total ? "Waiting for you: " + [
       pd.candidates ? pd.candidates + " new source item" + (pd.candidates === 1 ? "" : "s") : "",
       pd.source_changed ? pd.source_changed + " source change" + (pd.source_changed === 1 ? "" : "s") : "",
       pd.drafts ? pd.drafts + " draft" + (pd.drafts === 1 ? "" : "s") : "",
-      pd.review_due ? pd.review_due + " due for review" : ""].filter(Boolean).join(", ") + "." : "Nothing waiting for you.";
+      pd.review_due ? pd.review_due + " due for review" : "",
+      pd.second_reads ? pd.second_reads + " to read as second doctor" : ""].filter(Boolean).join(", ") + "." : "Nothing waiting for you.";
     head += '<div class="bl-sum"><h2 class="bl-sum-h" tabindex="-1">' + esc(waiting) + '</h2><p class="kit-muted">Nothing reaches a disease page until a doctor signs it.</p></div>';
     if (!me.canSign) {
       return head + '<p class="kit-muted">' + (me.isOwner ? "You can manage signers. Add yourself to sign." : "You are not registered to sign.") + "</p>" + tools;
@@ -369,18 +460,27 @@
       var sk = '<div class="bl-q bl-sk" aria-hidden="true"><span class="bl-sk-l w80"></span><span class="bl-sk-l w50"></span><span class="bl-sk-l w90"></span><span class="bl-sk-b"></span></div>';
       return head + '<p class="bl-vh" role="status">Loading the queue</p><div class="bl-ql">' + sk + sk + "</div>" + tools;
     }
-    var items = q.items || [], cands = q.candidates || [], soon = Date.now() + 30 * 86400000;
-    var check = items.filter(function (i) { return bucket(i, soon) === "check"; }), drafts = items.filter(function (i) { return bucket(i, soon) === "draft"; }),
-      live = items.filter(function (i) { return bucket(i, soon) === "live"; });
-    var todoN = check.length + drafts.length + cands.length, f = DS.filter === "live" ? "live" : "todo";
+    // Specialties: a signer who set theirs sees their items (and items no specialty claims) unless they ask for all.
+    var mySpec = (me.signer && me.signer.specialties) || [], narrow = mySpec.length && !DS.allSpec;
+    var keep = function (x) { return !narrow || x.mine !== false; };
+    var items = (q.items || []).filter(keep), cands = (q.candidates || []).filter(keep), soon = Date.now() + 30 * 86400000;
+    var hidden = (q.items || []).length + (q.candidates || []).length - items.length - cands.length;
+    var by = function (b) { return items.filter(function (i) { return bucket(i, soon) === b; }); };
+    var check = by("check"), drafts = by("draft"), live = by("live"), second = by("second"), waiting2 = by("waiting2");
+    var todoN = check.length + drafts.length + cands.length + second.length, f = DS.filter === "live" ? "live" : "todo";
+    var specLine = mySpec.length ? '<p class="bl-spec" role="status">' + (narrow
+      ? "Your specialties: " + esc(mySpec.map(specName).join(", ")) + (hidden ? ". " + hidden + " other item" + (hidden === 1 ? " is" : "s are") + " hidden." : ".") + ' <button type="button" class="kit-link" data-bl-act="allspec:1">Show all</button>'
+      : 'Showing every specialty. <button type="button" class="kit-link" data-bl-act="allspec:0">Only mine</button>') + "</p>" : "";
     var seg = function (k, label, n) { return '<button type="button" data-bl-act="filter:' + k + '" aria-pressed="' + (f === k) + '">' + label + '<span class="bl-badge">' + n + "</span></button>"; };
     var undo = DS.undo ? '<div class="bl-undo" role="status"><span>Skipped. It leaves the queue for every signer.</span><button type="button" class="kit-link" data-bl-act="unskip:' + esc(DS.undo) + '">Undo</button></div>' : "";
     var card = function (it) { return itemCard(it, soon); };
     var body = f === "live"
       ? (live.length ? group("On the disease page", live.map(card)) : empty("verified", "Nothing is live yet. Updates you sign appear here."))
-      : (todoN ? group("Check again", check.map(card)) + group("Your drafts", drafts.map(card)) + group("New from journals and regulators", cands.map(candCard))
-        : empty("task_alt", "All caught up. New journal and regulator items arrive every day, and you get a reminder on Saturday morning."));
-    return head + '<div class="bl-seg" role="group" aria-label="Show">' + seg("todo", "To do", todoN) + seg("live", "Live", live.length) + "</div>" + undo + body + tools;
+      : (todoN ? group("Read as second doctor", second.map(card)) + group("Check again", check.map(card)) + group("Your drafts", drafts.map(card)) +
+          group("New from journals and regulators", cands.map(candCard))
+        : empty("task_alt", "All caught up. New journal and regulator items arrive every day, and you get a reminder on Saturday morning.")) +
+        group("Waiting for a second doctor", waiting2.map(card));
+    return head + '<div class="bl-seg" role="group" aria-label="Show">' + seg("todo", "To do", todoN) + seg("live", "Live", live.length) + "</div>" + specLine + undo + body + tools;
   }
 
   /* ---------------- editor: 1 read the source, 2 write, 3 classify ---------------- */
@@ -441,7 +541,9 @@
     var Bk = B();
     return '<section class="kit-card bl-step" aria-labelledby="bl_s3">' + stepHead(3, "bl_s3", "Classify") +
       chips("kind", "Type", KIND_OPTS, c.kind) +
-      chips("india_status", "India status", Object.keys(Bk.INDIA).map(function (k) { return [k, Bk.INDIA[k][0]]; }), c.india_status, "Your choice. The CDSCO check below is evidence, not the answer.") +
+      chips("india_status", "India status", Object.keys(Bk.INDIA).map(function (k) { return [k, Bk.INDIA[k][0]]; }), c.india_status,
+        c.kind === "approval" && c.india_status === "not_applicable" ? "An approval always has an India status: approved by CDSCO, not yet approved, or not confirmed."
+          : "Your choice. The CDSCO check below is evidence, not the answer.") +
       cdscoPanel(c) +
       chips("evidence_type", "Evidence", Object.keys(Bk.EVID).map(function (k) { return [k, Bk.EVID[k]]; }), c.evidence_type) +
       chips("regulator", "Regulator", REG_OPTS, c.regulator || "") +
@@ -450,7 +552,9 @@
       "</section>";
   }
   function names(list) { var n = list.map(function (m) { return m.label; }); return n.slice(0, 3).join(", ") + (n.length > 3 ? " and " + (n.length - 3) + " more" : ""); }
-  function barStatus(miss) {
+  function barStatus(miss, checks) {
+    if (!miss.length && (checks || []).length) return '<button type="button" class="bl-left chk" data-bl-act="checks">' + ms("warning") + "<span><b>Ready to sign,</b> with " + checks.length +
+      " check" + (checks.length === 1 ? "" : "s") + " to look at</span>" + ms("arrow_forward") + "</button>";
     if (!miss.length) return '<span class="bl-ready">' + ms("check_circle") + "Ready to sign</span>";
     var fix = miss.filter(function (m) { return m.fix; }), fill = miss.filter(function (m) { return !m.fix; });
     var t = fix.length ? "<b>Fix:</b> " + esc(names(fix)) + (fill.length ? ", then " + fill.length + " more to fill in" : "") : "<b>" + fill.length + " to fill in:</b> " + esc(names(fill));
@@ -479,16 +583,20 @@
   }
 
   function editView() {
-    var c = DS.cur, miss = missing(c), live = c.state === "live" || c.state === "review_due";
+    var c = DS.cur, miss = missing(c), live = c.state === "live" || c.state === "review_due" || c.state === "awaiting_second", checks = checksFor(c);
+    autoCdsco(c);
     return '<div class="bl-editor"><button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
       '<h2 class="dl-h">' + (c.id ? "Edit update" : "New update") + "</h2>" + msgHtml() +
-      (live ? '<p class="bl-banner warn">' + ms("info") + "<span>This update is on the disease page. Saving a change takes it off until you sign it again.</span></p>" : "") +
+      (c._returned ? '<p class="bl-banner warn" role="status">' + ms("undo") + "<span><b>Sent back by the second doctor:</b> " + esc(c._returned) + "</span></p>" : "") +
+      (live ? '<p class="bl-banner warn">' + ms("info") + "<span>" + (c.state === "awaiting_second" ? "This update is waiting for a second doctor. Saving a change means both of you sign again."
+        : "This update is on the disease page. Saving a change takes it off until you sign it again.") + "</span></p>" : "") +
       sourceStep(c, miss) + writeStep(c) + classifyStep(c) +
+      '<div id="bl_checks_wrap">' + (DS._checks = checksHtml(checks, "Checks before signing")) + "</div>" +
       fold("prev", DS.open.prev, '<span class="bl-fold-l">Preview on the disease page</span>', '<div class="bl-preview">' + B().card(previewOf(c)) + "</div>", "bl-prevd") +
       (c.id ? '<div class="bl-retract">' + (c._retracting
         ? field("bl_rreason", "Why is it being retracted? (10 to 300 characters)", txt("bl_rreason", "", 300, 2), true) + '<div class="kit-row"><button type="button" class="kit-clear bl-danger" data-bl-act="retractgo">Retract now</button></div>'
         : '<button type="button" class="kit-clear bl-danger" data-bl-act="retract">' + ms("remove_circle") + "Retract this update</button>") + "</div>" : "") +
-      '<div class="bl-bar"><div class="bl-bar-s" id="bl_bar_s" aria-live="polite">' + (DS._bar = barStatus(miss)) + "</div>" +
+      '<div class="bl-bar"><div class="bl-bar-s" id="bl_bar_s" aria-live="polite">' + (DS._bar = barStatus(miss, checks)) + "</div>" +
       '<div class="bl-bar-b"><button type="button" class="kit-clear" data-bl-act="save"' + (DS.busy ? " disabled" : "") + ">" + (DS.busy && DS.busyAct === "save" ? "Saving…" : "Save draft") + "</button>" +
       '<button type="button" class="kit-add" data-bl-act="savesign"' + (DS.busy ? " disabled" : "") + ">" + ms("verified") + (DS.busy && DS.busyAct === "savesign" ? "Saving…" : "Preview and sign") + "</button></div></div></div>";
   }
@@ -499,8 +607,10 @@
       var el = D.getElementById("bl_cnt_" + k); if (!el) return;
       var n = visLen(c[k]), L = LIM[k]; el.textContent = n + " / " + L[1]; el.className = "bl-cnt" + (n > L[1] || (n > 0 && n < L[0]) ? " bad" : "");
     });
-    var bar = barStatus(missing(c)), s = D.getElementById("bl_bar_s");
+    var ch = checksFor(c), bar = barStatus(missing(c), ch), s = D.getElementById("bl_bar_s");
     if (s && bar !== DS._bar) { s.innerHTML = bar; DS._bar = bar; }
+    var cw = D.getElementById("bl_checks_wrap"), chHtml = checksHtml(ch, "Checks before signing");
+    if (cw && chHtml !== DS._checks) { cw.innerHTML = chHtml; DS._checks = chHtml; }
     var nums = D.getElementById("bl_nums"); if (nums) nums.innerHTML = numbersHtml(c);
     var p = D.querySelector("#smdReview .bl-editor .bl-preview"); if (p) p.innerHTML = B().card(previewOf(c));
   }
@@ -518,12 +628,19 @@
 
   /* ---------------- sign sheet ---------------- */
   function ticked() { var ck = DS.ck || {}; return CHECKS.filter(function (c) { return ck[c[0]]; }).length; }
-  function ckStatus(n) { return n === CHECKS.length ? "All four confirmed. You can sign." : "Tick every item before signing. " + n + " of " + CHECKS.length + " done."; }
+  function ckStatus(n) {
+    var confirm = DS.view === "second";
+    return n === CHECKS.length ? (confirm ? "All four checked. You can confirm." : "All four confirmed. You can sign.")
+      : "Tick every item before " + (confirm ? "confirming" : "signing") + ". " + n + " of " + CHECKS.length + " done.";
+  }
   function signView() {
     var it = DS.saved, s = (DS.me && DS.me.signer) || {}, ck = DS.ck || {}, n = ticked(), all = n === CHECKS.length;
     return '<button type="button" class="kit-link" data-bl-act="toedit">' + ms("arrow_back") + "Back to editing</button>" +
       '<h2 class="dl-h">Sign this update</h2>' + msgHtml() +
       '<p class="kit-muted">Doctors will see exactly this on ' + esc((it.disease_ids || []).map(diseaseName).join(", ")) + ".</p>" +
+      checksHtml(checksFor(it), "Look at these before signing") +
+      (DS.me && DS.me.secondReader !== false && (it.kind === "approval" || it.kind === "safety")
+        ? '<p class="bl-banner">' + ms("group") + "<span>An approval or safety alert also needs a second doctor to confirm it before it shows.</span></p>" : "") +
       '<div class="bl-preview">' + B().card(previewOf(it)) + "</div>" +
       '<fieldset class="bl-cks"><legend class="kit-fl">Before you sign, confirm each point</legend>' + CHECKS.map(function (c) {
         return '<label class="bl-ck" for="bl_ck_' + c[0] + '"><input type="checkbox" id="bl_ck_' + c[0] + '"' + (ck[c[0]] ? " checked" : "") + "><span>" + esc(c[1]) + "</span></label>";
@@ -534,21 +651,117 @@
       (DS.busy ? "Signing…" : "Sign as " + esc(/^dr\.?\s/i.test(s.name || "") ? s.name : "Dr " + (s.name || "")) + ", Reg. No. " + esc(s.regNo || "")) + "</button></div>";
   }
 
+  /* ---------------- second reader ---------------- */
+  function fromSigned(it) {
+    var o = fromItem(it);
+    o._signedName = it.signed_name; o._signedReg = it.signed_reg; o._signedCouncil = it.signed_council; o._signedTs = it.signed_ts; o._due = it.review_due_ts;
+    return o;
+  }
+  function secondPreview(it) {
+    var p = previewOf(it), me = (DS.me && DS.me.signer) || {};
+    p.signed_name = it._signedName; p.signed_reg = it._signedReg; p.signed_council = it._signedCouncil; p.signed_ts = it._signedTs; p.review_due_ts = it._due;
+    p.second_name = me.name || ""; p.second_reg = me.regNo || ""; p.second_council = me.council || "";
+    return p;
+  }
+  function secondView() {
+    var it = DS.sec, ck = DS.ck || {}, n = ticked(), all = n === CHECKS.length, me = (DS.me && DS.me.signer) || {};
+    return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
+      '<h2 class="dl-h">Read as second doctor</h2>' + msgHtml() +
+      '<p class="kit-muted">Signed by ' + esc(drName(it._signedName)) + ", Reg. No. " + esc(it._signedReg || "") + ", on " + esc(fmtDate(it._signedTs)) +
+      ". Read it against the source and confirm only if you would sign it yourself.</p>" +
+      checksHtml(checksFor(it), "Checks") + verifyLinks(it) +
+      '<div class="bl-preview">' + B().card(secondPreview(it)) + "</div>" +
+      ((it._src || {}).summary ? fold("ai2", DS.open.ai2, '<span class="bl-fold-l">AI summary of the source, not reviewed</span>', '<p class="kit-muted bl-ai">' + esc(String(it._src.summary).slice(0, 1500)) + "</p>") : "") +
+      '<fieldset class="bl-cks"><legend class="kit-fl">Before you confirm, check each point yourself</legend>' + CHECKS.map(function (c) {
+        return '<label class="bl-ck" for="bl_ck_' + c[0] + '"><input type="checkbox" id="bl_ck_' + c[0] + '"' + (ck[c[0]] ? " checked" : "") + "><span>" + esc(c[1]) + "</span></label>";
+      }).join("") + "</fieldset>" +
+      '<div class="bl-retract">' + (DS.sendingBack
+        ? field("bl_rnote", "What needs fixing? " + esc(drName(it._signedName)) + " will see this (10 to 500 characters)", txt("bl_rnote", "", 500, 3), true) +
+          '<div class="kit-row"><button type="button" class="kit-clear bl-danger" data-bl-act="sendbackgo">' + ms("undo") + "Send back to " + esc(drName(it._signedName)) + "</button></div>"
+        : '<button type="button" class="kit-clear" data-bl-act="sendback">' + ms("undo") + "Send back with a note</button>") + "</div>" +
+      '<div class="bl-bar bl-signbar"><p id="bl_ck_s" class="bl-ck-s' + (all ? " ok" : "") + '" role="status">' + esc(ckStatus(n)) + "</p>" +
+      '<button type="button" class="kit-add bl-signbtn" data-bl-act="cosigngo"' + (DS.busy || !all ? " disabled" : "") + ">" + ms("verified") +
+      (DS.busy ? "Confirming…" : "Confirm as " + esc(drName(me.name)) + ", Reg. No. " + esc(me.regNo || "")) + "</button></div>";
+  }
+
+  /* ---------------- numbers ---------------- */
+  function loadMetrics() {
+    DS.mLoading = true;
+    return api("GET", "/metrics?days=" + (DS.mWin || 90)).then(function (r) {
+      DS.mLoading = false;
+      DS.metrics = r.status === 200 ? r.data : { error: errText(r) };
+      rerender();
+    });
+  }
+  function pct(a, b) { return b ? Math.round((a / b) * 100) + "%" : "none yet"; }
+  function numbersView() {
+    var m = DS.metrics, win = DS.mWin || 90;
+    if (!m && !DS.mLoading) loadMetrics();
+    var chips = '<div class="bl-chips" role="group" aria-label="Period">' + [30, 90, 365].map(function (d) {
+      return '<button type="button" class="bl-chip' + (d === win ? " on" : "") + '" aria-pressed="' + (d === win) + '" data-bl-act="mwin:' + d + '">' + (d === 365 ? "12 months" : d + " days") + "</button>";
+    }).join("") + "</div>";
+    var head = '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button><h2 class=\"dl-h\">Numbers</h2>" +
+      '<p class="kit-muted">Are signed updates reaching doctors fast, complete and right? From the signing record, last ' + (win === 365 ? "12 months" : win + " days") + ".</p>" + chips;
+    if (!m) return head + '<p class="kit-muted" role="status">Loading…</p>';
+    if (m.error) return head + '<p class="bl-banner err" role="alert">' + ms("error") + "<span>" + esc(m.error) + "</span></p>";
+    var d = m.days_to_page || {}, c = m.correction || {}, v = m.coverage || {}, b = m.backlog || {};
+    var row = function (t, dd, note) { return "<div><dt>" + esc(t) + "</dt><dd>" + dd + (note ? '<span class="bl-hint">' + esc(note) + "</span>" : "") + "</dd></div>"; };
+    var kv = '<dl class="rv-kv bl-num-kv">' +
+      row("Days from publication to the disease page", d.n ? "Median " + esc(d.median) + ", 90% within " + esc(d.p90) + " (" + d.n + " update" + (d.n === 1 ? "" : "s") + ")" : "No signed updates yet") +
+      row("Correction rate", c.of ? esc(c.rate) + "% (" + c.corrected + " of " + c.of + " later edited, sent back or retracted)" : "No signed updates yet", "Aim: under 5%. Second reader is " + (m.second_reader ? "on" : "off") + " for approvals and safety alerts.") +
+      row("Coverage", v.total ? v.signed + " of " + v.total + " source items signed (" + pct(v.signed, v.total) + "), " + v.skipped + " skipped, " + v.waiting + " waiting" : "No source items in this period") +
+      row("Waiting", (b.waiting || 0) + " item" + (b.waiting === 1 ? "" : "s") + (b.oldest_days != null ? ", oldest " + b.oldest_days + " days" : "") + "; " + (b.drafts || 0) + " draft" + (b.drafts === 1 ? "" : "s") + "; " + (b.second_reads || 0) + " second read" + (b.second_reads === 1 ? "" : "s")) +
+      row("Signed with checks showing", String(m.signed_with_warnings || 0), "Signed while a pre-sign check (list-page link, CDSCO mismatch, AI wording, unsourced number) was showing.") +
+      "</dl>";
+    var table = function (cols, rows) {
+      return rows.length ? '<div class="bl-tbl"><table class="kit-table"><thead><tr>' + cols.map(function (x, i) { return "<th" + (i ? ' class="n"' : "") + ">" + esc(x) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+        rows.map(function (r) { return "<tr>" + r.map(function (x, i) { return "<td" + (i ? ' class="n"' : "") + ">" + esc(x) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>" : "";
+    };
+    return head + kv +
+      '<h3 class="bl-gh">By source</h3>' + (table(["Source", "Items", "Signed", "Skipped", "Waiting"], (v.by_source || []).map(function (r) { return [r.source, r.total, r.signed, r.skipped, r.waiting]; })) || '<p class="kit-muted">No source items in this period.</p>') +
+      '<h3 class="bl-gh">Signers</h3>' + (table(["Doctor", "Signed", "Second reads", "Sent back"], (m.signers || []).map(function (r) { return [drName(r.name), r.signs, r.cosigns, r.returns]; })) || '<p class="kit-muted">No active signers.</p>');
+  }
+
+  function secondReaderView() {
+    var on = !(DS.me && DS.me.secondReader === false), m = DS.metrics, c = (m && m.correction) || {};
+    if (!m && !DS.mLoading) loadMetrics();
+    return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button>" +
+      '<h2 class="dl-h">Second reader for approvals and safety alerts</h2>' + msgHtml() +
+      '<p class="kit-muted">' + (on ? "On: a new approval or safety alert shows only after a second doctor confirms the same text. Keep it on until the correction rate stays under 5%."
+        : "Off: one signature is enough. Switching on applies to updates signed from then on.") + "</p>" +
+      '<p class="kit-muted">Correction rate, last 90 days: ' + (c.of ? esc(c.rate) + "% (" + c.corrected + " of " + c.of + ")" : "no signed updates yet") + ".</p>" +
+      (on ? '<p class="bl-banner warn">' + ms("info") + "<span>Switching off releases approvals and safety alerts that are waiting for a second doctor.</span></p>" : "") +
+      field("bl_sreason", "Reason (10 to 300 characters)", txt("bl_sreason", "", 300, 3), true) +
+      '<div class="kit-row"><button type="button" class="' + (on ? "kit-clear" : "kit-add") + '" data-bl-act="srgo">' + (on ? "Switch off" : "Switch on") + "</button></div>";
+  }
+
+  function specChips(sel) {
+    var opts = (DS.me && DS.me.specialtyOptions) || [];
+    return '<div class="bl-grp" role="group" aria-labelledby="bl_lbl_spec"><span class="kit-fl" id="bl_lbl_spec">Specialties they sign for</span>' +
+      '<span class="bl-hint">None chosen: they see every item. Chosen: their specialties first, with Show all one tap away.</span><div class="bl-chips">' +
+      opts.map(function (o) { var on = sel.indexOf(o[0]) >= 0; return '<button type="button" class="bl-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-bl-act="spec:' + esc(o[0]) + '">' + (on ? ms("check") : "") + esc(o[1]) + "</button>"; }).join("") +
+      "</div></div>";
+  }
+
   function signersView() {
     var me = DS.me || {}, L = DS.look;
     if (!DS.signers) loadSigners();
     return '<button type="button" class="kit-link" data-bl-act="back">' + ms("arrow_back") + "Back to the queue</button><h2 class=\"dl-h\">Signers</h2>" + msgHtml() +
       '<p class="kit-muted">Only doctors listed here can sign. Check each name and registration number against the NMC register before saving.</p>' +
       '<div class="rv-list">' + (DS.signers || []).map(function (s) {
-        return '<div class="rv-row"><span class="rv-t">' + esc(s.name) + '</span><span class="rv-s">Reg. No. ' + esc(s.reg_no) + ", " + esc(s.council) + "</span><span>" +
-          (s.active ? '<button type="button" class="kit-clear" data-bl-act="deact:' + esc(s.uid) + '">Remove</button>' : '<span class="rv-pill">Removed</span>') + "</span></div>";
+        var sp = String(s.specialties || "").split(",").filter(Boolean);
+        return '<div class="rv-row"><span class="rv-t">' + esc(s.name) + '</span><span class="rv-s">Reg. No. ' + esc(s.reg_no) + ", " + esc(s.council) + "</span>" +
+          '<span class="rv-s">' + esc(sp.length ? sp.map(specName).join(", ") : "All specialties") + '</span><span class="kit-row">' +
+          (s.active ? '<button type="button" class="kit-clear" data-bl-act="editsigner:' + esc(s.uid) + '">Edit</button><button type="button" class="kit-clear" data-bl-act="deact:' + esc(s.uid) + '">Remove</button>'
+            : '<span class="rv-pill">Removed</span>') + "</span></div>";
       }).join("") + "</div>" +
       '<h3 class="dl-h">Add a signer</h3><div class="kit-row">' + (me.self ? '<button type="button" class="kit-pill" data-bl-act="addme">' + ms("person_add") + "Add me</button>" : "") + "</div>" +
       field("bl_lemail", "Or find a verified doctor by email", '<input id="bl_lemail" type="email" class="kit-inp" autocomplete="off">', true) +
       '<div class="kit-row"><button type="button" class="kit-pill" data-bl-act="lookup">Find</button></div>' +
       (L ? '<div class="kit-grid">' + (L.verified === false ? '<p class="kit-muted" role="alert">This account is not a verified doctor, so it cannot be added.</p>' : "") +
         field("bl_sname", "Name as on the register", txt("bl_sname", L.name, 120), true) + field("bl_sreg", "Registration number", txt("bl_sreg", L.reg_no, 40)) +
-        field("bl_scouncil", "Council", txt("bl_scouncil", L.council, 120)) + '</div><div class="kit-row"><button type="button" class="kit-add" data-bl-act="saveSigner">Save signer</button></div>' : "");
+        field("bl_scouncil", "Council", txt("bl_scouncil", L.council, 120)) + "</div>" + specChips(L.specialties || []) +
+        '<div class="kit-row"><button type="button" class="kit-add" data-bl-act="saveSigner">Save signer</button></div>' : "");
   }
 
   function killView() {
@@ -630,6 +843,15 @@
     "#smdReview .bl-vlink[aria-disabled=true]{border-color:var(--outline-variant);color:var(--on-surface-variant);pointer-events:none}",
     "#smdReview .bl-nums:empty{display:none}#smdReview .bl-nums{display:flex;flex-direction:column;gap:6px}",
     "#smdReview .bl-num{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--bl-amber-bg);color:var(--bl-amber);font:650 12.5px var(--q-sans);font-variant-numeric:tabular-nums}",
+    // specialties, checks, numbers
+    "#smdReview .bl-spec{margin:0;color:var(--on-surface-variant);font:500 13px/1.45 var(--q-sans)}#smdReview .bl-spec .kit-link{min-height:44px;padding:4px 6px;font-size:13px}",
+    "#smdReview .bl-checks ul{margin:4px 0 6px;padding-left:18px;font-weight:500}#smdReview .bl-checks .bl-hint{color:inherit;opacity:.85}",
+    "#smdReview .bl-left.chk,#smdReview .bl-left.chk .kit-ic{color:var(--bl-amber)}",
+    "#smdReview .bl-num-kv dd{display:flex;flex-direction:column;gap:2px;font-variant-numeric:tabular-nums}#smdReview .bl-num-kv .bl-hint{font-weight:500}",
+    "#smdReview .bl-tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--outline-variant);border-radius:12px;background:var(--sc-lowest)}",
+    "#smdReview .bl-tbl .kit-table{width:100%;border-collapse:collapse;font:500 13px/1.4 var(--q-sans)}#smdReview .bl-tbl th,#smdReview .bl-tbl td{padding:8px 10px}",
+    "#smdReview .bl-tbl .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}#smdReview .bl-tbl tr:last-child td{border-bottom:0}",
+    "#smdReview .rv-row .kit-row{gap:8px}",
     // bottom bar
     "#smdReview .bl-bar{position:sticky;bottom:calc(-28px - env(safe-area-inset-bottom,0px));z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px -16px 0;padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--outline-variant);background:var(--bg)}",
     "#smdReview .bl-bar-s{flex:1 1 200px;min-width:0}#smdReview .bl-bar-b{display:flex;flex:1 1 250px;gap:8px}#smdReview .bl-bar-b button{flex:1 1 auto;justify-content:center;min-height:48px}",
@@ -661,6 +883,9 @@
     if (DS.view === "edit" && DS.cur) return editView();
     if (DS.view === "sign" && DS.saved) return signView();
     if (DS.view === "signers") return signersView();
+    if (DS.view === "second" && DS.sec) return secondView();
+    if (DS.view === "numbers") return numbersView();
+    if (DS.view === "second-reader") return secondReaderView();
     if (DS.view === "kill") return killView();
     return listView(tabs || "");
   }
@@ -676,7 +901,7 @@
       DS.busy = false;
       if (r.status !== 200) { say(errText(r)); rerender(); return; }
       var it = r.data.item, src = c._src;
-      DS.cur = fromItem(it); DS.cur._src = src;
+      DS.cur = fromItem(it); DS.cur._src = src; DS.cur._cdsco = c._cdsco; DS.cur._cq = c._cq; DS.cur._cdscoAuto = c._cdscoAuto;
       DS.queue = null;
       if (thenSign) { DS.saved = Object.assign({}, DS.cur); DS.ck = {}; DS.view = "sign"; }
       else say("Draft saved. It is not on the disease page until you sign it.", "ok");
@@ -689,15 +914,18 @@
     CHECKS.forEach(function (c) { var el = D.getElementById("bl_ck_" + c[0]); cl[c[0]] = !!(el && el.checked); if (!cl[c[0]]) missingTick = true; });
     if (missingTick) { say("Tick every item before signing."); rerender(); return; }
     DS.busy = true; say(""); rerender();
-    api("POST", "/" + encodeURIComponent(DS.saved.id) + "/sign", { body_hash: DS.saved.body_hash, checklist: cl }).then(function (r) {
+    var shown = checksFor(DS.saved).map(function (w) { return w[0]; });
+    api("POST", "/" + encodeURIComponent(DS.saved.id) + "/sign", { body_hash: DS.saved.body_hash, checklist: cl, warnings: shown }).then(function (r) {
       DS.busy = false;
       if (r.status !== 200) {
         say(errText(r));
         if (r.status === 409) { DS.view = "edit"; DS.queue = null; }
         rerender(); if (r.status === 409) scrollTop(); return;
       }
-      toast("Signed. It shows on the disease page after the next sync.");
-      DS.view = "list"; DS.cur = null; DS.saved = null; DS.queue = null; say("Signed. It shows on the disease page after the next sync.", "ok");
+      var needs2 = r.data.item && r.data.item.state === "awaiting_second";
+      var done = needs2 ? "Signed. It shows once a second doctor confirms it." : "Signed. It shows on the disease page after the next sync.";
+      toast(done);
+      DS.view = "list"; DS.cur = null; DS.saved = null; DS.queue = null; say(done, "ok");
       try { B().sync(true); } catch (e) {}
       rerender(); scrollTop();
       probe().then(rerender);   // refresh the waiting count on the tab
@@ -724,7 +952,65 @@
     var b = e.target && e.target.closest && e.target.closest("[data-bl-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-bl-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd !== "back" && cmd !== "toedit") collect();
-    if (cmd === "back") { DS.view = "list"; DS.cur = null; say(""); DS.look = null; DS.queue = null; DS.undo = null; rerender(); scrollTop(); return; }
+    if (cmd === "back") { DS.view = "list"; DS.cur = null; DS.sec = null; DS.sendingBack = false; DS.metrics = null; say(""); DS.look = null; DS.queue = null; DS.undo = null; rerender(); scrollTop(); return; }
+    if (cmd === "allspec") { DS.allSpec = arg === "1"; rerender(); return; }
+    if (cmd === "checks") { var ce = D.getElementById("bl_checks"); if (ce) { try { ce.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (x) { ce.scrollIntoView(); } } return; }
+    if (cmd === "second") {
+      var sit = ((DS.queue && DS.queue.items) || []).filter(function (x) { return x.id === arg; })[0];
+      if (sit) { DS.sec = fromSigned(sit); DS.ck = {}; DS.sendingBack = false; DS.view = "second"; say(""); autoCdsco(DS.sec); rerender(); scrollTop(); }
+      return;
+    }
+    if (cmd === "cosigngo" && DS.sec) {
+      var cl2 = {}, gap = false;
+      CHECKS.forEach(function (c) { var el = D.getElementById("bl_ck_" + c[0]); cl2[c[0]] = !!(el && el.checked); if (!cl2[c[0]]) gap = true; });
+      if (gap) { say("Tick every item before confirming."); rerender(); return; }
+      DS.busy = true; say(""); rerender();
+      api("POST", "/" + encodeURIComponent(DS.sec.id) + "/cosign", { body_hash: DS.sec.body_hash, checklist: cl2 }).then(function (r) {
+        DS.busy = false;
+        if (r.status !== 200) { say(errText(r)); rerender(); return; }
+        var ok2 = "Confirmed. It shows on the disease page after the next sync.";
+        toast(ok2); DS.view = "list"; DS.sec = null; DS.queue = null; say(ok2, "ok");
+        try { B().sync(true); } catch (e) {}
+        rerender(); scrollTop(); probe().then(rerender);
+      });
+      return;
+    }
+    if (cmd === "sendback") { DS.sendingBack = true; rerender(); var rn = D.getElementById("bl_rnote"); if (rn) try { rn.focus(); } catch (x) {} return; }
+    if (cmd === "sendbackgo" && DS.sec) {
+      var note = val("bl_rnote").trim();
+      if (note.length < 10) { say("Write what needs fixing (10 to 500 characters)."); rerender(); return; }
+      var who = drName(DS.sec._signedName);
+      api("POST", "/" + encodeURIComponent(DS.sec.id) + "/return", { note: note }).then(function (r) {
+        if (r.status !== 200) { say(errText(r)); rerender(); return; }
+        DS.view = "list"; DS.sec = null; DS.queue = null; say("Sent back to " + who + " with your note.", "ok");
+        rerender(); scrollTop(); probe().then(rerender);
+      });
+      return;
+    }
+    if (cmd === "numbers") { DS.view = "numbers"; DS.metrics = null; say(""); rerender(); scrollTop(); return; }
+    if (cmd === "mwin") { DS.mWin = Number(arg) || 90; DS.metrics = null; rerender(); return; }
+    if (cmd === "second-reader") { DS.view = "second-reader"; DS.metrics = null; say(""); rerender(); scrollTop(); return; }
+    if (cmd === "srgo") {
+      var sr = val("bl_sreason").trim(), turnOn = DS.me && DS.me.secondReader === false;
+      if (sr.length < 10) { say("Give a reason of at least 10 characters."); rerender(); return; }
+      api("POST", "/second-reader", { on: turnOn, reason: sr }).then(function (r) {
+        if (r.status !== 200) { say(errText(r)); rerender(); return; }
+        DS.view = "list"; DS.queue = null; say(turnOn ? "Second reader switched on." : "Second reader switched off.", "ok");
+        probe().then(rerender);
+      });
+      return;
+    }
+    if (cmd === "editsigner") {
+      var sg = (DS.signers || []).filter(function (x) { return x.uid === arg; })[0];
+      if (sg) { DS.look = { uid: sg.uid, name: sg.name, reg_no: sg.reg_no, council: sg.council, verified: true, specialties: String(sg.specialties || "").split(",").filter(Boolean) }; say(""); rerender(); }
+      return;
+    }
+    if (cmd === "spec" && DS.look) {
+      if (D.getElementById("bl_sname")) { DS.look.name = val("bl_sname"); DS.look.reg_no = val("bl_sreg"); DS.look.council = val("bl_scouncil"); }
+      var sp = DS.look.specialties || (DS.look.specialties = []), at = sp.indexOf(arg);
+      if (at >= 0) sp.splice(at, 1); else sp.push(arg);
+      rerender(); return;
+    }
     if (cmd === "toedit") { DS.view = "edit"; say(""); rerender(); scrollTop(); return; }
     if (cmd === "filter") { DS.filter = arg === "live" ? "live" : "todo"; DS.undo = null; say(""); rerender(); return; }
     if (cmd === "skip") { skip(arg, false); return; }
@@ -746,7 +1032,7 @@
     }
     if (cmd === "set" && DS.cur) {
       var j = arg.indexOf(":"), k = arg.slice(0, j), v = arg.slice(j + 1);
-      if (["kind", "india_status", "evidence_type", "regulator", "review_months"].indexOf(k) >= 0) { DS.cur[k] = k === "review_months" ? (Number(v) || 12) : v; rerender(); }
+      if (["kind", "india_status", "evidence_type", "regulator", "review_months"].indexOf(k) >= 0) { DS.cur[k] = k === "review_months" ? (Number(v) || 12) : v; autoCdsco(DS.cur); rerender(); }
       return;
     }
     if (cmd === "jump") { jump(); return; }
@@ -780,20 +1066,20 @@
       return;
     }
     if (cmd === "signers") { DS.view = "signers"; say(""); DS.signers = null; DS.look = null; rerender(); scrollTop(); return; }
-    if (cmd === "addme") { var sf = DS.me.self || {}; DS.look = { uid: sf.uid, name: sf.name || "", reg_no: sf.reg_no || "", council: sf.council || "", verified: true }; rerender(); return; }
+    if (cmd === "addme") { var sf = DS.me.self || {}; DS.look = { uid: sf.uid, name: sf.name || "", reg_no: sf.reg_no || "", council: sf.council || "", verified: true, specialties: [] }; rerender(); return; }
     if (cmd === "lookup") {
       var em = val("bl_lemail").trim();
       if (!em) return;
       api("GET", "/signers/lookup?email=" + encodeURIComponent(em)).then(function (r) {
         if (r.status !== 200) { say(r.data.error === "no-account" ? "No StewardMD account has that email." : errText(r)); DS.look = null; rerender(); return; }
         var p = r.data.prefill || {};
-        DS.look = { uid: r.data.uid, name: p.name || "", reg_no: p.reg_no || "", council: p.council || "", verified: r.data.verified };
+        DS.look = { uid: r.data.uid, name: p.name || "", reg_no: p.reg_no || "", council: p.council || "", verified: r.data.verified, specialties: [] };
         say(""); rerender();
       });
       return;
     }
     if (cmd === "saveSigner" && DS.look) {
-      api("POST", "/signers", { uid: DS.look.uid, name: val("bl_sname"), reg_no: val("bl_sreg"), council: val("bl_scouncil") }).then(function (r) {
+      api("POST", "/signers", { uid: DS.look.uid, name: val("bl_sname"), reg_no: val("bl_sreg"), council: val("bl_scouncil"), specialties: DS.look.specialties || [] }).then(function (r) {
         if (r.status !== 200) { say(r.data.error === "not-verified-doctor" ? "This account is not a verified doctor." : "Check the name, registration number and council."); rerender(); return; }
         DS.look = null; DS.signers = null; say("Signer saved.", "ok");
         probe().then(rerender);
@@ -834,7 +1120,7 @@
   function onChange(e) {
     var el = e.target; if (!el || !/^bl_ck_/.test(el.id || "")) return;
     DS.ck = DS.ck || {}; DS.ck[el.id.slice(6)] = !!el.checked;
-    var n = ticked(), all = n === CHECKS.length, btn = D.querySelector('#smdReview [data-bl-act="signgo"]'), st = D.getElementById("bl_ck_s");
+    var n = ticked(), all = n === CHECKS.length, btn = D.querySelector("#smdReview .bl-signbtn"), st = D.getElementById("bl_ck_s");
     if (btn) btn.disabled = DS.busy || !all;
     if (st) { st.textContent = ckStatus(n); st.className = "bl-ck-s" + (all ? " ok" : ""); }
   }
@@ -852,7 +1138,8 @@
 
   function pendingTotal() { var p = DS.me && DS.me.pending; return (p && p.total) || 0; }
   var API = { probe: probe, html: html, pendingTotal: pendingTotal, reset: function () { DS.view = "list"; DS.queue = null; DS.cur = null; DS.msg = ""; DS.filter = "todo"; DS.undo = null; }, _state: DS, _previewOf: previewOf,
-    _numbersIn: numbersIn, _suggestDiseases: suggestDiseases, _firstSentences: firstSentences, _linkFields: linkFields, _toHttps: toHttps, _missing: missing };
+    _numbersIn: numbersIn, _suggestDiseases: suggestDiseases, _firstSentences: firstSentences, _linkFields: linkFields, _toHttps: toHttps, _missing: missing,
+    _checksFor: checksFor, _isIndexLink: isIndexLink, _overlap: overlap, _numbersNotIn: numbersNotIn };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_BULLETINS_DESK = API;
 })(typeof window !== "undefined" ? window : globalThis);

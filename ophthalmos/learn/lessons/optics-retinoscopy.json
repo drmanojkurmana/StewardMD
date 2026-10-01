@@ -83,12 +83,12 @@
         "hi": "रेटिनोस्कोप आँख में रोशनी डालता है। रोशनी [[retina]] से लौटकर पुतली में लाल रिफ़्लेक्स बनाती है।"
       },
       {
-        "en": "Every eye has a far point, where it is sharply focused. The reflex tells you where that point lies.",
-        "hi": "हर आँख का एक फ़ार पॉइंट होता है, जहाँ उसका फ़ोकस साफ़ होता है। रिफ़्लेक्स बताता है कि वह बिंदु कहाँ है।"
+        "en": "Every eye has a far point: the farthest point it sees clearly with focusing relaxed. The reflex tells you where that point lies.",
+        "hi": "हर आँख का एक फ़ार पॉइंट होता है: फ़ोकस ढीला रखने पर सबसे दूर का वह बिंदु जो साफ़ दिखता है। रिफ़्लेक्स बताता है कि वह बिंदु कहाँ है।"
       },
       {
-        "en": "If the far point lies behind you, or behind the eye, the reflex moves with the streak. Add plus.",
-        "hi": "अगर फ़ार पॉइंट आपके पीछे है, या आँख के पीछे (जैसे hyperopia में), तो रिफ़्लेक्स पट्टी के साथ चलता है। प्लस जोड़ें।"
+        "en": "If the far point lies beyond you, the reflex moves with the streak. This is so at infinity (emmetropia) or behind the eye (hyperopia). Add plus.",
+        "hi": "अगर फ़ार पॉइंट आपसे आगे दूर है, तो रिफ़्लेक्स स्ट्रीक के साथ चलता है। ऐसा अनंत पर (emmetropia) या आँख के पीछे (hyperopia) होने पर होता है। प्लस जोड़ें।"
       },
       {
         "en": "If it lies between you and the patient, the reflex moves against. Add minus.",
@@ -99,16 +99,16 @@
         "hi": "न्यूट्रल पर फ़ार पॉइंट आपकी आँख पर होता है, और पुतली रोशनी से भर जाती है।"
       },
       {
-        "en": "You find neutral at your working distance, not at infinity. At 67 cm, subtract 1.50 [[dioptre]]s from the neutral lens.",
-        "hi": "न्यूट्रल आपकी काम करने की दूरी पर मिलता है, अनंत पर नहीं। 67 सेमी पर न्यूट्रल लेंस से 1.50 [[dioptre]] घटाएँ।"
+        "en": "You find neutral at your working distance, not at infinity. Subtract 1 divided by the distance in metres. That is 1.00 [[dioptre]] at 1 m, 1.50 D at 67 cm and 2.00 D at 50 cm.",
+        "hi": "न्यूट्रल आपकी काम की दूरी पर मिलता है, अनंत पर नहीं। 1 को मीटर में दूरी से भाग देकर घटाएँ। यानी 1 मीटर पर 1.00 [[dioptre]], 67 सेमी पर 1.50 D और 50 सेमी पर 2.00 D।"
       },
       {
         "en": "Example: neutral with +3.00 D at 67 cm. The refraction is +3.00 minus 1.50, which is +1.50 D.",
         "hi": "उदाहरण: 67 सेमी पर +3.00 D से न्यूट्रल। रिफ़्रैक्शन = +3.00 घटा 1.50 = +1.50 D।"
       },
       {
-        "en": "In children, [[cycloplegia]] drops relax focusing first. Otherwise hyperopia is missed.",
-        "hi": "बच्चों में पहले [[cycloplegia]] वाली बूँदों से फ़ोकस को आराम दिया जाता है। वरना हाइपरोपिया छूट जाता है।"
+        "en": "In children, [[cycloplegia]] drops relax focusing first. Otherwise hyperopia is underestimated or missed.",
+        "hi": "बच्चों में पहले [[cycloplegia]] की बूँदें डालकर फ़ोकस ढीला करते हैं। वरना हाइपरोपिया कम आँका जाता है या छूट जाता है।"
       }
     ],
     "analogy": {
@@ -128,6 +128,10 @@
     {
       "en": "Always keep the same working distance, close to the patient's line of sight.",
       "hi": "हमेशा काम की एक ही दूरी रखें, मरीज़ की नज़र की सीध के पास।"
+    },
+    {
+      "en": "These rules are for the plane mirror setting of the sleeve. The concave setting reverses the movement.",
+      "hi": "ये नियम स्लीव की plane mirror सेटिंग के लिए हैं। concave सेटिंग में चाल उलट जाती है।"
     }
   ],
   "todo": [
@@ -137,8 +141,8 @@
     }
   ],
   "remember": {
-    "en": "With: add plus. Against: add minus. At neutral, subtract the working distance: 1.50 D at 67 cm.",
-    "hi": "विद: प्लस जोड़ें। अगेंस्ट: माइनस जोड़ें। न्यूट्रल पर काम की दूरी घटाएँ: 67 सेमी पर 1.50 D।"
+    "en": "With: add plus. Against: add minus. At neutral, subtract the working distance: 1.00 D at 1 m, 1.50 D at 67 cm.",
+    "hi": "विद: प्लस जोड़ें। अगेंस्ट: माइनस जोड़ें। न्यूट्रल पर काम की दूरी घटाएँ: 1 मीटर पर 1.00 D, 67 सेमी पर 1.50 D।"
   },
   "check": [
     {
@@ -162,8 +166,8 @@
       ],
       "a": 0,
       "why": {
-        "en": "With movement means the far point is behind you. Plus lenses bring it forward to your eye.",
-        "hi": "विद मूवमेंट का मतलब है कि फ़ार पॉइंट आपके पीछे है। प्लस लेंस उसे आगे, आपकी आँख तक लाते हैं।"
+        "en": "With movement means the far point is not between you and the patient. It is beyond you, at infinity, or behind the patient's eye. Plus lenses bring it to your eye.",
+        "hi": "विद मूवमेंट का मतलब है कि फ़ार पॉइंट आपके और मरीज़ के बीच नहीं है। वह आपसे आगे दूर, अनंत पर, या मरीज़ की आँख के पीछे है। प्लस लेंस उसे आपकी आँख तक लाते हैं।"
       }
     },
     {

@@ -76,7 +76,10 @@
     if (pmid) src += ' · <a href="https://pubmed.ncbi.nlm.nih.gov/' + esc(pmid) + '/" target="_blank" rel="noopener noreferrer">PubMed</a>';
     var sig = drName(b.signed_name)
       ? "Reviewed by " + esc(drName(b.signed_name)) + ', <span class="smd-bl-nw">Reg. No. ' + esc(b.signed_reg) + "</span>" + (b.signed_council ? ", " + esc(b.signed_council) : "") +
-        ", on " + esc(fmtDate(b.signed_ts)) + ". Review due " + esc(fmtMonth(b.review_due_ts)) + "."
+        ", on " + esc(fmtDate(b.signed_ts)) + "." +
+        (drName(b.second_name) ? " Second reader " + esc(drName(b.second_name)) + ', <span class="smd-bl-nw">Reg. No. ' + esc(b.second_reg) + "</span>" +
+          (b.second_council ? ", " + esc(b.second_council) : "") + "." : "") +
+        " Review due " + esc(fmtMonth(b.review_due_ts)) + "."
       : "Not yet reviewed.";
     return '<section class="smd-bl smd-bl-' + esc(KIND[b.kind] ? b.kind : "guideline") + '" aria-label="Practice update">' +
       '<div class="smd-bl-top"><span class="smd-bl-kind">' + esc(KIND[b.kind] || "Practice update") + '</span><span class="smd-bl-date">' + esc(fmtDate(b.source_date)) + "</span></div>" +
@@ -88,7 +91,68 @@
       '<p class="smd-bl-row"><b>Source:</b> ' + src + "</p>" +
       '<p class="smd-bl-sig">' + sig + "</p>" +
       '<p class="smd-bl-foot">Check your local protocol before acting.</p>' +
+      indiaAccess(b) +
       "</section>";
+  }
+
+  /* India access: which medicines named in the update are on NLEM 2022 (and, once data/india/janaushadhi.json
+   * exists, at what Jan Aushadhi MRP). Reference data from official lists, shown apart from the signed text and
+   * labelled as such. Nothing is shown for a medicine it cannot name exactly (absence is never claimed). */
+  var IND = { nlem: null, ja: null, jaDate: "", loading: false };
+  // US and international names doctors read in FDA and journal sources, mapped to the NLEM (Indian) name.
+  var ALIAS = { acetaminophen: "paracetamol", aspirin: "acetylsalicylic acid", epinephrine: "adrenaline", norepinephrine: "noradrenaline",
+    lidocaine: "lignocaine", albuterol: "salbutamol", glyburide: "glibenclamide", phenobarbital: "phenobarbitone", thiopental: "thiopentone",
+    meperidine: "pethidine", rifampin: "rifampicin", isoproterenol: "isoprenaline", mesalamine: "5-aminosalicylic acid", phytonadione: "phytomenadione" };
+  var SKIP_NAMES = { oxygen: 1, "water for injection": 1, "whole blood": 1, condom: 1, "red blood cells": 1 };
+  var LEVEL = { P: "primary", S: "secondary", T: "tertiary" };
+  function reWord(n) { return new RegExp("(^|[^a-z0-9])" + n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "($|[^a-z0-9])", "i"); }
+  function prepNlem(d) {
+    var byName = {};
+    (d.medicines || []).forEach(function (m) {
+      var base = String(m.name).replace(/\((?:[A-D]|p)\)/g, " ").replace(/\s+/g, " ").trim();
+      var alt = (base.match(/\(([^)]+)\)/) || [])[1];
+      var main = base.replace(/\s*\([^)]*\)\s*/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+      if (main.length < 4 || SKIP_NAMES[main] || /\+/.test(main)) return;              // combinations are not matched in free text
+      var e = { name: base.replace(/\s*\([^)]*\)\s*/g, " ").trim(), levels: m.levels || [], names: [main] };
+      if (alt) alt.split("/").forEach(function (x) { x = x.trim().toLowerCase(); if (x.length >= 4 && !/^vitamin/.test(x)) e.names.push(x); });
+      byName[main] = e;
+    });
+    Object.keys(ALIAS).forEach(function (us) { if (byName[ALIAS[us]]) byName[ALIAS[us]].names.push(us); });
+    return Object.keys(byName).map(function (k) { var e = byName[k]; e.res = e.names.map(reWord); return e; });
+  }
+  function loadIndia() {
+    if (IND.loading || !G.fetch) return;
+    IND.loading = true;
+    G.fetch("/data/india/nlem2022.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { if (d) IND.nlem = prepNlem(d); }, function () {});
+    G.fetch("/data/india/janaushadhi.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (d && Array.isArray(d.products)) { IND.ja = d.products; IND.jaDate = d.fetched || ""; }
+    }, function () {});
+  }
+  function levelText(ls) {
+    var w = (ls || []).map(function (l) { return LEVEL[l]; }).filter(Boolean);
+    return w.length === 3 ? "primary to tertiary care" : w.length ? w.join(" and ") + " care" : "";
+  }
+  function jaFor(name) {
+    if (!IND.ja) return null;
+    var re = reWord(name.toLowerCase()), best = null;
+    IND.ja.forEach(function (p) { if (re.test(p.name) && p.mrp > 0 && (!best || p.mrp < best.mrp)) best = p; });
+    return best;
+  }
+  function indiaAccess(b) {
+    if (!IND.nlem) return "";
+    var t = plain([b.headline, b.what_changed, b.applies_to].join(" ")), hits = [];
+    for (var i = 0; i < IND.nlem.length && hits.length < 3; i++) {
+      var e = IND.nlem[i];
+      if (e.res.some(function (re) { return re.test(t); })) hits.push(e);
+    }
+    if (!hits.length) return "";
+    var parts = hits.map(function (e) {
+      var lv = levelText(e.levels), ja = jaFor(e.name);
+      return "<b>" + esc(e.name) + "</b> is on NLEM 2022" + (lv ? " (" + esc(lv) + ")" : "") +
+        (ja ? '; Jan Aushadhi <span class="smd-bl-nw">' + esc(ja.name) + (ja.unit ? ", " + esc(ja.unit) : "") + ", Rs " + esc(Number(ja.mrp).toFixed(2)) + "</span>" : "") + ".";
+    });
+    return '<div class="smd-bl-ind"><p class="smd-bl-ind-h">India access</p><p>' + parts.join(" ") + '</p><p class="smd-bl-ind-s">From NLEM 2022 (Ministry of Health)' +
+      (IND.ja ? " and the Jan Aushadhi price list of " + esc(fmtDate(IND.jaDate)) : "") + ". Not part of the signed update.</p></div>";
   }
 
   function knownDisease(id) { var b = G.KB_ENRICHMENT && G.KB_ENRICHMENT.byId; return !!(b && Object.prototype.hasOwnProperty.call(b, id)); }
@@ -108,7 +172,7 @@
   /* Markup for the disease reader, or "" when there is nothing to show. */
   function html(diseaseId) {
     if (!flagOn()) return "";
-    injectCSS();
+    injectCSS(); loadIndia();
     var c = readCache(), t = now();
     if (!c || c.enabled === false) { sync(); return ""; }
     if (!(t - Number(c.fetchedAt) <= MAX_AGE)) {
@@ -159,6 +223,9 @@
     ".smd-bl-sig{margin:10px 0 0;font-size:14px;font-style:italic;color:var(--mut,#64748b)}" +
     ".smd-bl-nw{white-space:nowrap}" +
     ".smd-bl-foot{margin:0;font-size:14px;font-style:italic;color:var(--ink,#0f172a)}" +
+    /* India access: reference data under its own dashed rule, visibly apart from the signed note */
+    ".smd-bl-ind{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line,#cbd5e1);font-size:13px;line-height:1.45;color:var(--ink,#0f172a)}" +
+    ".smd-bl-ind p{margin:0}.smd-bl-ind-h{font-weight:600;margin-bottom:2px!important}.smd-bl-ind-s{margin-top:4px!important;font-size:12px;color:var(--mut,#64748b)}" +
     ".smd-bl-stale{margin:0 0 14px;font-size:12px;color:var(--mut,#64748b)}" +
     "body.dark .smd-bl-in.warn{color:#fbbf24}body.dark .smd-bl-safety .smd-bl-kind{color:#fca5a5}";
   function injectCSS() {
@@ -169,6 +236,7 @@
   function boot() {
     if (!flagOn()) return;
     sync();
+    loadIndia();
     try {
       D.addEventListener("visibilitychange", function () { if (D.visibilityState === "visible") sync(); });
       G.addEventListener("online", function () { sync(); });
@@ -180,6 +248,7 @@
     html: html, card: card, sync: sync, flagOn: flagOn, injectCSS: injectCSS,
     KIND: KIND, INDIA: INDIA, EVID: EVID, MAX_AGE: MAX_AGE,
     _select: select, _readCache: readCache, _fmtDate: fmtDate, _httpsUrl: httpsUrl, _fmt: fmt, plain: plain,
+    loadIndia: loadIndia, _india: IND, _prepNlem: prepNlem,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_BULLETINS = API;

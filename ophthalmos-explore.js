@@ -166,8 +166,8 @@
     side: { en: "Side of the lesion", hi: "नुकसान किस ओर" }, sideL: { en: "Left", hi: "बायाँ" }, sideR: { en: "Right", hi: "दायाँ" },
     site: { en: "Where is the lesion?", hi: "नुकसान कहाँ है?" }, noLesion: { en: "No lesion", hi: "कोई नुकसान नहीं" },
     leftEye: { en: "Left eye", hi: "बाईं आँख" }, rightEye: { en: "Right eye", hi: "दाईं आँख" },
-    fieldKey: { en: "Fields drawn as the patient sees them. Blue: right half of vision. Amber: left half. Black: lost.", hi: "Field वैसे बने हैं जैसे मरीज़ देखता है। नीला: नज़र का दायाँ आधा। पीला: बायाँ आधा। काला: गया हुआ हिस्सा।" },
-    pathCap: { en: "Seen from above, left eye on the left. Blue fibres carry the right half of vision, amber the left. Tap a spot on the pathway.", hi: "ऊपर से देखा चित्र, बाईं आँख बाईं ओर। नीले तंतु नज़र का दायाँ आधा ले जाते हैं, पीले बायाँ। रास्ते पर किसी जगह को छुएँ।" },
+    fieldKey: { en: "Fields drawn as the patient sees them. Blue: left half of vision. Amber: right half. Black: lost.", hi: "Field वैसे बने हैं जैसे मरीज़ देखता है। नीला: नज़र का बायाँ आधा। पीला: दायाँ आधा। काला: गया हुआ हिस्सा।" },
+    pathCap: { en: "Seen from above, left eye on the left. Blue fibres carry the left half of vision, amber the right. Tap a spot on the pathway.", hi: "ऊपर से देखा चित्र, बाईं आँख बाईं ओर। नीले तंतु नज़र का बायाँ आधा ले जाते हैं, पीले दायाँ। रास्ते पर किसी जगह को छुएँ।" },
     chiasmMid: { en: "The chiasm sits in the middle, so it has no side.", hi: "काइज़्मा बीच में है, इसलिए इसकी कोई ओर नहीं।" },
     cause: { en: "Common cause", hi: "आम कारण" }, whyH: { en: "Why", hi: "क्यों" },
     // pupil
@@ -717,7 +717,7 @@
   var CAUSE = {
     nerve: T("Optic neuritis, ischaemic optic neuropathy, or injury to one optic nerve.", "एक ऑप्टिक नर्व में सूजन (optic neuritis), खून की कमी (ischaemic optic neuropathy) या चोट।"),
     chiasm: T("A pituitary tumour pressing up on the chiasm from below.", "पिट्यूटरी ट्यूमर जो नीचे से काइज़्मा को दबाता है।"),
-    tract: T("A stroke, tumour or injury just behind the chiasm.", "काइज़्मा के ठीक पीछे stroke, ट्यूमर या चोट।"),
+    tract: T("A stroke, tumour or injury just behind the chiasm. Tract lesions are often incongruous, with an RAPD in the eye that loses its temporal field.", "काइज़्मा के ठीक पीछे stroke, ट्यूमर या चोट। ट्रैक्ट की चोट में कमी अक्सर दोनों आँखों में बराबर नहीं होती, और जिस आँख का बाहरी (temporal) आधा जाता है उसमें RAPD होता है।"),
     lgn: T("A small stroke in the thalamus.", "थैलेमस में छोटा stroke।"),
     meyer: T("A temporal lobe tumour, abscess or surgery.", "टेम्पोरल लोब में ट्यूमर, abscess या ऑपरेशन।"),
     parietal: T("A parietal lobe stroke (middle cerebral artery) or tumour.", "पैराइटल लोब में stroke (middle cerebral artery) या ट्यूमर।"),
@@ -823,7 +823,7 @@
   var PU_TXT = {
     normal: { see: T("Light in either eye makes both pupils constrict equally: the signal reaches both sides of the midbrain.", "किसी भी आँख में रोशनी से दोनों पुतलियाँ बराबर छोटी होती हैं: संकेत midbrain की दोनों ओर पहुँचता है।"),
       why: T("Each optic nerve feeds both sides of the midbrain, and each side sends a third-nerve command to its own pupil.", "हर ऑप्टिक नर्व midbrain की दोनों ओर संकेत देती है, और हर ओर अपनी पुतली को तीसरी नस से आदेश भेजती है।") },
-    rapd: { hit: T("Light on the {s} eye: both pupils dilate. The damaged {s} optic nerve carries a weaker signal than the other eye did.", "{s} आँख पर रोशनी: दोनों पुतलियाँ फैलती हैं। टूटी {s} ऑप्टिक नर्व दूसरी आँख से कमज़ोर संकेत ले जाती है।"),
+    rapd: { hit: T("Light swung onto the {s} eye from the healthy eye: both pupils dilate. The damaged {s} optic nerve carries a weaker signal than the other eye did.", "स्वस्थ आँख से रोशनी {s} आँख पर लाने पर दोनों पुतलियाँ फैलती हैं। ख़राब {s} ऑप्टिक नर्व दूसरी आँख से कमज़ोर संकेत ले जाती है।"),
       miss: T("Light on the healthy eye: both pupils constrict well.", "स्वस्थ आँख पर रोशनी: दोनों पुतलियाँ अच्छी तरह छोटी होती हैं।"),
       off: T("The pupils are equal, because both get the same command from the midbrain. Swing the light to find the defect.", "पुतलियाँ बराबर हैं, क्योंकि दोनों को midbrain से एक ही आदेश मिलता है। कमी ढूँढने के लिए रोशनी घुमाएँ।"),
       why: T("An afferent (incoming) defect: the pupils stay equal; only how strongly each eye's light drives them differs. This is a relative afferent pupillary defect (RAPD).", "Afferent (अंदर आने वाली) कमी: पुतलियाँ बराबर रहती हैं; बस हर आँख की रोशनी का असर अलग है। इसे relative afferent pupillary defect (RAPD) कहते हैं।") },
@@ -845,7 +845,7 @@
       '<figure class="ex-figwrap"><div class="ex-fig ex-face" id="exFace"></div><figcaption class="ex-cap">' + s("faceCap") + '<span id="exLidCap"></span></figcaption></figure>' +
       '<p class="ex-mmrow" id="exMm" aria-hidden="true"></p><p class="oph-sr" id="exPuLive" aria-live="polite"></p></div>' +
       '<div class="ex-panel"><div class="ex-panel" id="exPuPanel">' + puPanel() + '</div><div id="exFlow"></div></div></div>', focusSel);
-    puDraw(); puTexts(); puLoop();
+    puDraw(); puTexts(); puLoop(); puLive();   // announce the pupil sizes on first open too
   }
   function puPanel() {
     var u = EX.pu;

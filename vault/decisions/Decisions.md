@@ -5,6 +5,98 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-01 · Neonatal layer: plain-language screens; drug search covers every monograph
+
+**Decision (owner: "it looks so confusing or clumsy, can you make it more user friendly easily understood by anyone
+without removing any function and make drugs more universal covering all drugs" / "see our drug monographs we
+already have covering all drugs").** No tool or function removed. The hub groups tools under Medicines / Fluids and
+feeding / Check and chart / Procedures with plain names (Drug doses, Drip rates, Fluids and sugar, Jaundice, Normal
+values, Lines and tubes), each with a one-line explainer and a "What do these words mean?" glossary; the baby shows
+as plain chips ("Born at 30 weeks 2 days", "Corrected age ..."), compact on tool screens. Band conditions read as
+sentences (`condText`). Drug doses searches all ~1,540 monograph drugs and labels each: "Newborn dose" (sourced band),
+"Newborn dose (monograph)" (the monograph's own neonate row, computed by dose-calc.js), "Newborn notes only",
+"No newborn dose". Newborn statements are copied verbatim from `worker/data/gold` into
+`data/neo/monograph-neonatal.json` by `scripts/neo/build-monograph-neonatal.mjs` (pregnancy, lactation and
+mother-exposure text left out) and shown under "What our monograph says about newborns", also in the dose calculator.
+**Why.** Clinicians at any level must read the answer first; the band table covered ~70 drugs, the monographs ~1,540.
+**Trade-off.** A monograph neonate row is our monograph's text, not a quoted external source: it is labelled as such
+and never replaces a band. A drug with no newborn row still says "No neonatal dose on file. Do not extrapolate."
+Monograph statements are checked against the monographs (`test/neo-monograph.test.mjs`), not by `validate.mjs`.
+**Status.** Branch `feat/neo-ux`, unit + headless tests; PR open.
+
+## 2026-10-01 · Registers file by the hospital's day (after local 00:00 it is the next day)
+
+**Decision (owner: "Follow standard how they do it. After 00:00 its next day no more same day").** A register entry
+whose date field is a timestamp (MLC `arrivalAt`, POCSO task `raisedAt`, and any other) is filed under the hospital's
+local date (`filingDay()` in `functions/_wardsynq/registers.js`, the hospital clock `offsetMinutes`, IST 330 by
+default): its day, month (`period`) and serial year. Plain dates (YYYY-MM-DD) are kept as entered. Listing works the
+day out again, so entries saved before this follow the same calendar without a migration. NDPS r.52U estimate check
+uses the hospital's year too (#1335).
+**Why.** A case at 00:30 IST on the 1st belongs to that day's and that month's register; the UTC date put it in the
+day (and month, and on 1 January the year) before.
+**Trade-off.** Stored `period`/`eventDate` of older entries stay as written; any reader that skips `listEntries` and
+reads them raw still sees the UTC day. Serials already issued are not renumbered.
+**Status.** Merged with tests (a 00:30 IST case, and the whole register test file with the clock moved across month
+and year ends).
+
+## 2026-09-30 · Capture guard for realistic lesson images (iOS watermark while recording, Android FLAG_SECURE)
+
+**Decision (owner approved 2026-09-30).** `<img>` whose src contains `/learn/media/real/` (Tokós now, Ophthalmós
+later) are guarded by `capture-guard.js` + local plugin `@stewardmd/capacitor-capture-guard`
+(`Capacitor.Plugins.CaptureGuard`). iOS: while the scene is recorded or mirrored
+(`UITraitCollection.sceneCaptureState == .active`, iOS 17+; `UIScreen.isCaptured` is deprecated) `html.smd-cg-on`
+draws a low-opacity tiled diagonal StewardMD mark on each image's container (`[data-smd-cg]::after`,
+`pointer-events:none`); after a screenshot (`userDidTakeScreenshotNotification`) the shared `window.toast` says
+"Images are © StewardMD. Please do not share." (en/hi) on any screenshot taken in the app (owner 2026-10-01). Android: FLAG_SECURE on
+the activity window while such an image is on screen (MutationObserver + scroll/resize, 80 ms debounce), cleared as
+soon as none is. Web/PWA: inert.
+**Why.** iOS cannot block or alter captures; Android can. The owner rejected a permanent heavy watermark as
+unprofessional, so the mark appears only during capture.
+**Trade-off.** Android 14 `ScreenCaptureCallback` was not added: it does not fire while FLAG_SECURE is set, which is
+exactly when a notice would be wanted. Thumbnails count as images (the Learn hub with a real thumbnail is also
+FLAG_SECURE on Android) and FLAG_SECURE blanks the Recents preview while set: both confirmed by the owner 2026-10-01.
+**Status.** Draft PR; needs `npm install` + `npx cap sync` + new App Store / Play builds. Not device-verified.
+
+## 2026-09-30 · Clinical Bulletins: second reader, specialty signers, pre-sign checks, numbers, India access
+
+**Decision (owner: "Do all", after "are we 2x or 10x better than UpToDate?").** Five changes, each aimed at the
+honest gap (trust at scale, one signer) or the real edge (India context):
+1. **Second reader** for approvals and safety alerts (supersedes D5 "one signature" for those kinds): a different
+   active signer confirms the exact signed text (`cosigned_hash = body_hash`) or sends it back with a note. Stored
+   `second_required` at signing; owner switch `bulletin_settings.second_reader` (default on; off releases waiting
+   ones; on applies from the next signing). The 5 bulletins live before this are unaffected (signed without it).
+2. **Specialty signers**: `bulletin_signers.specialties`; item specialties from source branch/workspace, else
+   whole-word terms (`_bulletin_rules.js SPECIALTIES`); queue shows "Mine" first with Show all; the Saturday push
+   is per signer.
+3. **Pre-sign checks** (never blocking): list-page link, CDSCO lists contradict the India status, What changed still
+   the AI wording, numbers not in the source summary. Codes shown are kept in the sign audit.
+4. **Numbers** (`GET /bulletins/metrics`): days from publication to the disease page, correction rate, coverage by
+   source, backlog, per-signer counts. The correction rate is the gauge for switching the second reader off.
+5. **India access** on the card: NLEM 2022 from the official PDF (`data/india/nlem2022.json`, built by
+   `scripts/india/build_nlem.py`, 385 medicines from the PDF's own index); Jan Aushadhi prices once the owner runs
+   `scripts/india/fetch-janaushadhi.mjs` (its API is on port 8443, unreachable from the build sandbox). Shown apart
+   from the signed text, labelled "Not part of the signed update". Indian society and ICMR guidelines join intake
+   (PubMed seed batch 3, 33 a year checked live).
+**Why.** The first 5 live bulletins had 2 needing correction; one signer is a bottleneck; the India layer is what a
+global reference does not give an Indian clinician.
+**Trade-off.** With one signer, new approvals and safety alerts cannot go live until a second doctor joins (or the
+owner switches the rule off). Keyword specialty routing is approximate; "Show all" is one tap. NLEM matching names
+a medicine only on an exact whole-word match (US names mapped), so it may miss some; it never claims absence.
+**Status.** Built and tested (unit, headless UI with design audit); Jan Aushadhi data waits for the owner's run.
+
+## 2026-10-01 · Neonatal layer ON for everyone, labelled Beta
+
+**Decision (owner: "Make it default on for everyone under beta label").** `smd_neo` defaults ON; the Home tile
+carries the BETA label, the hub header a Beta chip, and every data screen keeps its Draft badge. A device opts
+out with the Experimental switch, `?neo=0` or `smd_neo = "0"`. With it on, the dose calculator's
+no-extrapolation rule (neonate: neonatal rows only) now applies to every user.
+**Why.** Owner call, same posture as Ophthalmós (on before sign-off, visibly marked).
+**Trade-off.** Ships before a neonatologist has reviewed any file and before the licence questions in the
+2026-09-30 entry are answered: INTERGROWTH-21st, AAP 2022, NICE outside the UK, WHO 2024 SBI (CC BY-NC-SA IGO),
+ASHP S4S, VON, N-PASS, StatPearls and several CC BY-NC sources are non-commercial or need permission.
+Set `smd_neo` back to OFF in `neo-flags.js` (and `home.js` `neoOn`, `sidebar-redesign.js` `def`) to reverse.
+**Status.** Done 2026-10-01; reaches phones with the next native build / OTA.
+
 ## 2026-09-30 · Neonatal layer: behind `smd_neo` (default OFF), every number quoted from a fetched source
 
 **Decision (owner plan "StewardMD Neonatal Layer").** Ten neonatal tools (dosing by GA/PNA/PMA, preparation,

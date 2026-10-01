@@ -104,7 +104,7 @@
     if (t.beyond) h += A.note("Age is past the published table; the last published value is used.", "info");
     if (t.drawn) h += A.note("Below 38 weeks NICE publishes graphs; this line is drawn from the guideline's stated construction rule.", "info");
     if (tsb != null) {
-      var worst = t.exchange != null && (t.gt ? tsb > t.exchange : tsb >= t.exchange) ? "Exchange transfusion threshold reached" : t.escalation != null && tsb >= t.escalation ? "Escalation-of-care threshold reached" : t.photo != null && (t.gt ? tsb > t.photo : tsb >= t.photo) ? "Phototherapy threshold reached" : "Below the phototherapy threshold";
+      var worst = t.exchange != null && (t.gt ? tsb > t.exchange : tsb >= t.exchange) ? "Exchange transfusion line reached" : t.escalation != null && tsb >= t.escalation ? "Escalation-of-care line reached" : t.photo != null && (t.gt ? tsb > t.photo : tsb >= t.photo) ? "Phototherapy line reached" : "Below the phototherapy line";
       h += '<div class="nh-note' + (/Exchange|Escalation/.test(worst) ? " bad" : /Phototherapy/.test(worst) ? "" : " info") + '">' + esc(worst) + "</div>";
       lines.push("Result: TSB " + tsb + " " + unit + " at " + Math.floor(hours) + " h: " + worst);
     }
@@ -112,7 +112,7 @@
     if (S.guide === "aap") { (t.curves || []).forEach(function (c) { h += A.srcLine(doc, c); }); if (t.escRule) h += A.srcLine(doc, t.escRule); h += A.srcLine(doc, doc.aap.risk_factors); }
     else { h += A.srcLine(doc, t.src); if (t.src && t.src.phototherapy) h += A.srcLine(doc, t.src.phototherapy) + A.srcLine(doc, t.src.phototherapy.before) + A.srcLine(doc, t.src.exchange) + A.srcLine(doc, t.src.exchange.before); }
     var rules = S.guide === "aap" ? doc.aap.rules : doc.nice.rules;
-    h += "<details><summary>Rules in the source</summary>" + (rules || []).map(function (r) { return r.text ? '<div class="nh-work" style="font-family:inherit">' + esc(r.text) + "</div>" + A.srcLine(doc, r) : ""; }).join("") + "</details>";
+    h += "<details><summary>The guideline's rules</summary>" + (rules || []).map(function (r) { return r.text ? '<div class="nh-work" style="font-family:inherit">' + esc(r.text) + "</div>" + A.srcLine(doc, r) : ""; }).join("") + "</details>";
     A.setSheet("bili", { title: "Bilirubin (" + (S.guide === "aap" ? "AAP 2022" : "NICE CG98") + ")", tag: "Neonatal bilirubin", lines: ["Baby: " + G.SMD_NEO.summary()].concat(rows.map(function (r) { return r[0] + ": " + r1(r[1]) + " " + unit; }), lines) });
     return h;
   }
@@ -122,11 +122,11 @@
       var esc = A.esc, d = A.neo();
       if (!doc) { el.innerHTML = '<section class="nh-card"><h3>Bilirubin</h3>' + A.noData("bilirubin thresholds") + "</section>"; return; }
       var unit = S.guide === "aap" ? "mg/dL" : "micromol/L", rfs = (doc.aap && doc.aap.risk_factors && doc.aap.risk_factors.items) || [];
-      el.innerHTML = '<section class="nh-card"><h3>Bilirubin ' + A.badge(doc) + '</h3><span class="nh-seg" role="group" aria-label="Guideline"><button type="button" data-bili-g="aap" aria-pressed="' + (S.guide === "aap") + '">AAP 2022 (35+ wk)</button><button type="button" data-bili-g="nice" aria-pressed="' + (S.guide === "nice") + '">NICE CG98</button></span>' +
-        '<div class="nh-grid"><label>TSB<span class="nh-u"><input inputmode="decimal" data-bili="tsb" value="' + esc(S.tsb) + '"><span>' + esc(unit) + '</span></span></label><label>Age<span class="nh-u"><input inputmode="decimal" data-bili="hours" value="' + esc(S.hours) + '" placeholder="' + esc(d.pnaHours != null ? d.pnaHours + " (record)" : "") + '"><span>hours</span></span></label></div>' +
-        (S.guide === "aap" ? '<div class="nh-work" style="font-family:inherit">Neurotoxicity risk factors:</div>' + rfs.map(function (r) { if (r.ga_wk) return '<div class="nh-work">' + esc(r.label + " (from the baby record)") + "</div>"; return '<label class="nh-2cl" style="flex-direction:row"><input type="checkbox" data-bili-rf="' + esc(r.id) + '"' + (S.rf[r.id] ? " checked" : "") + "> " + esc(r.label) + "</label>"; }).join("") : "") +
-        '<div class="nh-work">Unit lock: AAP in mg/dL, NICE in micromol/L. The app does not convert between them.</div>' +
-        '<div data-bili-out="1"></div>' + A.actionsHtml("bili") + '<button type="button" class="nh-li" data-bili-proto="' + esc(doc.protocol || "neonatal-jaundice") + '"><span>Neonatal jaundice protocol</span><small>Knowledge Library</small></button></section>';
+      el.innerHTML = '<section class="nh-card"><h3>Jaundice (bilirubin) ' + A.badge(doc) + '</h3><div class="nh-work" style="font-family:inherit">Which guideline does your unit follow?</div><span class="nh-seg" role="group" aria-label="Guideline"><button type="button" data-bili-g="aap" aria-pressed="' + (S.guide === "aap") + '">AAP 2022 (born 35 weeks or more)</button><button type="button" data-bili-g="nice" aria-pressed="' + (S.guide === "nice") + '">NICE (UK, any gestation)</button></span>' +
+        '<div class="nh-grid"><label>Bilirubin level (TSB)<span class="nh-u"><input inputmode="decimal" data-bili="tsb" value="' + esc(S.tsb) + '"><span>' + esc(unit) + '</span></span></label><label>Age in hours<span class="nh-u"><input inputmode="decimal" data-bili="hours" value="' + esc(S.hours) + '" placeholder="' + esc(d.pnaHours != null ? d.pnaHours + " (from details)" : "") + '"><span>hours</span></span></label></div>' +
+        (S.guide === "aap" ? '<div class="nh-work" style="font-family:inherit">Neurotoxicity risk factors (tick any that apply):</div>' + rfs.map(function (r) { if (r.ga_wk) return '<div class="nh-work">' + esc(r.label + " (from the baby details)") + "</div>"; return '<label class="nh-2cl" style="flex-direction:row"><input type="checkbox" data-bili-rf="' + esc(r.id) + '"' + (S.rf[r.id] ? " checked" : "") + "> " + esc(r.label) + "</label>"; }).join("") : "") +
+        '<div class="nh-work">Units: AAP uses mg/dL, NICE uses micromol/L. Enter the level in that unit; the app does not convert.</div>' +
+        '<div data-bili-out="1"></div>' + A.actionsHtml("bili") + '<button type="button" class="nh-li" data-bili-proto="' + esc(doc.protocol || "neonatal-jaundice") + '"><span>Newborn jaundice step-by-step guide</span><small>Knowledge Library</small></button></section>';
       function paint() { var o = el.querySelector("[data-bili-out]"); if (o) o.innerHTML = out(A, doc, A.neo()); }
       paint();
       el.oninput = el.onchange = function (e) { var t = e.target; var k = t.getAttribute && t.getAttribute("data-bili"); var rf = t.getAttribute && t.getAttribute("data-bili-rf"); if (k) S[k] = t.value; else if (rf) S.rf[rf] = t.checked; else return; paint(); };

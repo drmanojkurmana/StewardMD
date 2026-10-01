@@ -28,7 +28,17 @@ const STOP = /^(?:the|of|and|for|in|on|with|to|a|an|is|are|vs|or|workup|work-up|
 // A figure that shows how to WORK UP or MANAGE the condition (owner, 2026-09-27, over a strip of ulcer
 // photographs: "I wanted workup flowcharts; if they are absent show this"). Read from the image's alt,
 // title, file name and the caption right after it: a PMC figure is "Figure 2" until its caption.
-const DIAGRAM = /algorithm|flow\s?-?chart|pathway|approach to|work-?up|decision|diagnostic (?:approach|evaluation|strategy)|evaluation of|management of|differential|criteria|classification|staging|schematic|diagram|protocol|step-?wise|\btable\b/i;
+const DIAGRAM = /algorithm|flow\s?-?chart|pathway|approach to|work-?up|decision|diagnostic (?:approach|evaluation|strategy)|evaluation of|management of|differential|criteria|classification|staging|schematic|diagram|protocol|step-?wise/i;   // no bare "table": a study's data table is not a workup figure (breast staging, 2026-10-02)
+
+// Words every page on the subject contains, so matching them proves nothing about WHICH question a
+// figure answers ("AJCC breast staging" -> a breast case report matches "breast"; only ajcc/staging discriminate).
+const GENERIC = /^(?:breast|carcinoma|cancer|tumou?r|neoplasm|disease|syndrome|patients?|clinical|case|cases|study|review|adult|acute|chronic)$/i;
+// Case reports and unusual-site metastasis papers carry study tables, never the reference figure.
+function isCaseReport(title, topic) {
+  const t = String(title || "");
+  if (/case report|\ba case of\b|\bcase series\b/i.test(t)) return true;
+  return !/metasta/i.test(topic) && /\bmetasta\w*\s+(?:from|of)\b.+\bto\b/i.test(t);
+}
 
 function attr(tag, name) {
   const m = new RegExp("\\b" + name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i").exec(tag);
@@ -46,9 +56,12 @@ function absolute(src, pageUrl) {
 function firstSrcset(v) { const m = /^\s*([^\s,]+)/.exec(String(v || "")); return m ? m[1] : ""; }
 
 /* Pure: the best figure on one page for one topic, or null. Exported for the unit test. */
-export function pickFigure(html, pageUrl, topic) {
+export function pickFigure(html, pageUrl, topic, opts) {
   const h = String(html || "").slice(0, PAGE_BYTES);
   const toks = topicTokens(topic);
+  const need = toks.filter((t) => !GENERIC.test(t));   // discriminating tokens (ajcc, staging, hematuria ...)
+  const tm = /<title\b[^>]*>([\s\S]*?)<\/title>/i.exec(h);
+  const pageTitle = ((opts && opts.pageTitle) || "") + " " + (tm ? tm[1] : "");
   const hit = (s) => toks.reduce((n, t) => n + (String(s || "").toLowerCase().includes(t) ? 1 : 0), 0);
   let best = null, bestDiagram = null;
   const re = /<img\b[^>]*>/gi;
@@ -69,12 +82,19 @@ export function pickFigure(html, pageUrl, topic) {
     const own = 3 * hit(alt + " " + title) + 2 * hit(src) + ((FIGURE_HINT.test(src) || FIGURE_HINT.test(alt)) ? 2 : 0) +
                 (FIGURE_CTX.test(before.slice(-200)) ? 2 : 0);
     if (own <= 0) continue;
+    const caption = h.slice(m.index + tag.length, m.index + tag.length + 800).split(/<\/figure>|<img\b/i)[0].replace(/<[^>]+>/g, " ");
+    // The image must be ABOUT the topic: >=1 topic token in its alt, title, file name or caption. The
+    // "looks like a figure" signals (FIGURE_HINT / FIGURE_CTX) only add score, they never qualify it.
+    const about = alt + " " + title + " " + src + " " + caption;
+    // Real journal figures often have alt="" / "Figure 1": there the PAGE title must carry a topic word.
+    if (toks.length && !hit(about) && !(need.length ? need : toks).some((t) => pageTitle.toLowerCase().includes(t))) continue;
+    // When the query has discriminating words, one must appear in the page title or this figure's text.
+    if (need.length && !need.some((t) => (pageTitle + " " + about).toLowerCase().includes(t))) continue;
     let score = own;
     score += hit(before);
     if (/<figure\b/i.test(before) && !/<\/figure>/i.test(before)) score += 2;
     if (w >= 400 || hh >= 300) score += 1;
     if (score <= 0) continue;
-    const caption = h.slice(m.index + tag.length, m.index + tag.length + 800).split(/<\/figure>|<img\b/i)[0].replace(/<[^>]+>/g, " ");
     const diagram = DIAGRAM.test(alt + " " + title + " " + src + " " + caption);
     const c = { img: src, alt: (alt || title || "").slice(0, 160), score, diagram };
     if (!best || score > best.score) best = c;
@@ -88,7 +108,7 @@ export function pickFigure(html, pageUrl, topic) {
     // Must look like an image file: aafp.org's og:image for its pancreatitis review was the article
     // URL itself (text/html), which would have rendered as a broken card (production, 2026-09-18).
     const looksImage = /\.(?:jpe?g|png|webp)(?:\?|$)/i.test(ogSrc) || /\/(?:image|images|media|img)\//i.test(ogSrc);
-    if (ogSrc && looksImage && !JUNK.test(ogSrc) && (hit(ogSrc) || FIGURE_HINT.test(ogSrc))) best = { img: ogSrc, alt: "", score: 1, diagram: DIAGRAM.test(ogSrc) };
+    if (ogSrc && looksImage && !JUNK.test(ogSrc) && hit(ogSrc) && (!need.length || need.some((t) => (pageTitle + ogSrc).toLowerCase().includes(t)))) best = { img: ogSrc, alt: "", score: 1, diagram: DIAGRAM.test(ogSrc) };
   }
   return best;
 }
@@ -139,6 +159,7 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
     if (!isTrustedUrl(p.url)) { d.skip = "untrusted"; continue; }
     if (NO_FIGURES.test(u.hostname)) { d.skip = "no-figures-host"; continue; }
     if (u.pathname === "/" || u.pathname === "") { d.skip = "homepage"; continue; }
+    if (isCaseReport(p.title, q)) { d.skip = "case-report"; continue; }
     eligible.push({ p, d });
   }
   }
@@ -150,7 +171,7 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
       if (!r.ok || !/text\/html/i.test(d.type)) return null;
       const html = (await r.text()).slice(0, PAGE_BYTES);
       d.bytes = html.length; d.imgs = (html.match(/<img\b/gi) || []).length;
-      const f = pickFigure(html, p.url, q);
+      const f = pickFigure(html, p.url, q, { pageTitle: p.title });
       d.pick = f ? f.img : null;
       return f ? { img: f.img, page: p.url, site: host.replace(/^www\./, ""), title: String(p.title || f.alt || host).slice(0, 160), score: f.score, diagram: f.diagram } : null;
     } catch (e) { d.error = String((e && e.message) || e).slice(0, 80); return null; }

@@ -15,8 +15,10 @@
  */
 
 import { cfgFlag, cfgPrice } from "./_billingcfg.js";
-function _day(now) { return new Date(now || Date.now()).toISOString().slice(0, 10); }
-function _nextMidnightMs(now) { const d = new Date(now || Date.now()); return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1); }
+import { istDay, istNextMidnightMs, readSpend } from "./_counters.js";
+// IST day + midnight: the same key the spend writer and /usage use, and what the UI means by "midnight".
+function _day(now) { return istDay(now || Date.now()); }
+function _nextMidnightMs(now) { return istNextMidnightMs(now || Date.now()); }
 function r2(n) { return Math.round(n * 100) / 100; }
 
 export function costCapOn(env) { return String(cfgFlag(env, "AI_COST_CAP_ON")) === "1"; }
@@ -148,6 +150,7 @@ export async function checkCostCap(env, store, doctorId, cap, now) {
   const day = _day(now);
   let dayCost = 0;
   try { const d = await store.get("aiu:doc:" + doctorId + ":" + day, "json"); dayCost = (d && +d.cost) || 0; } catch (e) { return { ok: true }; }
+  dayCost += (await readSpend(env, store, doctorId, day)).cost;   // real spend lives in its own counters (addAiSpend)
   const rec = await getCreditRecord(store, doctorId);
   let dirty = false;
   if (rec.day !== day) { rec.day = day; rec.chargedToday = 0; dirty = true; }   // new day → reset the day's charge tally

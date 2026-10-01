@@ -72,6 +72,19 @@ export const JOURNAL_SOURCES = [
       '"Indian Pediatr"[ta]) AND (' + TRIALS + ' OR "Meta-Analysis"[pt] OR "Practice Guideline"[pt] OR "Guideline"[pt])' + NOT_OPINION,
   },
   {
+    // Checked live 2026-09-30: 34 in 365 days (3 in 30), mostly ISCCM, IAP, ESI, CSI and CCF India guidelines and
+    // position statements. "Indian J Nephrol" and "Int J Diabetes Dev Ctries" match nothing as [ta] and are left out.
+    seed: 3, id: "pubmed-india-guidelines", name: "Indian society and ICMR guidelines, position and consensus statements", type: "guideline",
+    workspace: "internal_medicine", branch: "", parser_type: "pubmed", priority: 58, homepage: PUBMED,
+    query: '("Indian J Crit Care Med"[ta] OR "Indian Heart J"[ta] OR "J Assoc Physicians India"[ta] OR "Indian J Med Res"[ta] OR ' +
+      '"Indian Pediatr"[ta] OR "Lung India"[ta] OR "Indian J Gastroenterol"[ta] OR "Indian J Dermatol Venereol Leprol"[ta] OR ' +
+      '"Indian J Psychiatry"[ta] OR "J Obstet Gynaecol India"[ta] OR "Neurol India"[ta] OR "Indian J Endocrinol Metab"[ta] OR "Natl Med J India"[ta]) AND ' +
+      '("Practice Guideline"[pt] OR "Guideline"[pt] OR "position statement"[ti] OR "consensus statement"[ti] OR ' +
+      '"evidence-based guideline"[ti] OR "clinical practice guideline"[ti] OR "clinical practice guidelines"[ti] OR "guidelines for"[ti] OR ' +
+      '"guideline for"[ti] OR "guideline on"[ti] OR "guidelines on"[ti] OR "recommendations for"[ti] OR "recommendations on"[ti] OR ' +
+      '"expert consensus"[ti]) NOT ("authors\' response"[ti] OR "reply to"[ti])' + NOT_OPINION,
+  },
+  {
     seed: 2, id: "pubmed-meta", name: "NEJM, Lancet, JAMA, BMJ, Annals, JAMA IM: meta-analyses and systematic reviews", type: "trial",
     workspace: "internal_medicine", branch: "", parser_type: "pubmed", priority: 80, homepage: PUBMED,
     query: '("N Engl J Med"[ta] OR "Lancet"[ta] OR "JAMA"[ta] OR "BMJ"[ta] OR "Ann Intern Med"[ta] OR "JAMA Intern Med"[ta]) AND ' +
@@ -79,6 +92,29 @@ export const JOURNAL_SOURCES = [
   },
 ];
 export const SEED_KEY = "seed_journal_sources_v1";
+
+// One-time fixes to rows seeded by functions/db/seed_sources.sql. Each runs once (recorded in bulletin_settings)
+// and only while the row still has the seeded values, so an owner's edit in Admin > Medical Sources wins.
+// ema: the news page was crawled whole (one item titled "EMA News and Updates", linked to the index). EMA's
+// "New medicines: human" feed has one item per medicine with its own EPAR page (checked live 2026-09-30).
+export const SOURCE_FIXES = [
+  { key: "source_fix_ema_epar_v1", sql: "UPDATE sources SET parser_type = 'rss', rss_url = ?, etag = '', last_modified = '', content_length = '' " +
+    "WHERE id = 'ema' AND parser_type = 'head' AND guideline_page = 'https://www.ema.europa.eu/en/news'",
+    args: ["https://www.ema.europa.eu/en/new-human-medicine-new.xml"] },
+];
+export async function applySourceFixesOnce(env) {
+  const db = env && env.UPDATES_DB;
+  if (!db) return [];
+  await ensureBulletinSchema(db);
+  const now = Date.now(), done = [];
+  for (const f of SOURCE_FIXES) {
+    if (await db.prepare("SELECT value FROM bulletin_settings WHERE key = ?").bind(f.key).first()) continue;
+    await db.batch([db.prepare(f.sql).bind(...f.args),
+      db.prepare("INSERT OR IGNORE INTO bulletin_settings (key, value, updated_by, updated_ts) VALUES (?, '1', 'system', ?)").bind(f.key, now)]);
+    done.push(f.key);
+  }
+  return done;
+}
 export function seedKey(n) { return "seed_journal_sources_v" + n; }
 
 // Inserts every batch not yet recorded; returns the batch numbers seeded this call ([] when nothing new).

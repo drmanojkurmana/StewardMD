@@ -79,9 +79,13 @@ function kvWith(entries) {
   return { get: async (k, t) => (m.has(k) ? (t === "json" ? JSON.parse(m.get(k)) : m.get(k)) : null), put: async (k, v) => { m.set(k, v); } };
 }
 
+// The second-reader rule (on by default) is exercised in its own tests; elsewhere a single signature suffices.
 async function fresh(opts) {
   const D = d1();
   D._db.exec(SCHEMA);
+  const secondReader = !!(opts && opts.secondReader);
+  if (opts) { opts = Object.assign({}, opts); delete opts.secondReader; }
+  if (!secondReader) D._db.prepare("INSERT INTO bulletin_settings (key, value) VALUES ('second_reader', '0')").run();
   const env = Object.assign({
     UPDATES_DB: D, UPDATES_ADMIN_TOKEN: "admintok-123456",
     CASES_KV: kvWith({
@@ -198,6 +202,8 @@ test("validation: each clinical rule rejects", () => {
   assert.ok(codes({ doi: "not-a-doi" }).includes("doi:invalid"));
   assert.ok(codes({ pmid: "12ab" }).includes("pmid:invalid"));
   assert.ok(codes({ update_id: "" }).includes("update_id:required"));
+  assert.ok(codes({ kind: "approval", india_status: "not_applicable" }).includes("india_status:not-applicable-approval"), "an approval always has an India status");
+  assert.ok(!codes({ kind: "guideline", india_status: "not_applicable" }).some((c) => c.startsWith("india_status")), "a guideline change may be Not applicable");
 });
 
 test("hash: covers the disease mapping and review interval, ignores key order", async () => {
@@ -500,6 +506,19 @@ test("queue: lists candidates without a bulletin and flags orphaned disease ids"
   assert.ok(pub.data.items[0].disease_ids.includes("REMOVED_FROM_KB"), "server passes it through; the client drops unknown ids");
 });
 
+test("queue: a whole-page digest (head-crawled source page) is never offered as a bulletin source", { skip: SKIP }, async () => {
+  const env = await fresh();
+  await ownerSigner(env);
+  const D = env.UPDATES_DB._db;
+  D.prepare("INSERT INTO sources (id, name, type, homepage, guideline_page, parser_type, created_ts) VALUES ('ema', 'European Medicines Agency', 'drug_approval', 'https://www.ema.europa.eu', 'https://www.ema.europa.eu/en/news', 'rss', 1)").run();
+  await updatesRepo.insertUpdate(env, { id: "u-digest", doc_key: "https://www.ema.europa.eu/en/news", source_id: "ema", type: "drug_approval", title: "EMA News and Updates", content_hash: "hd", published_ts: Date.now() });
+  await updatesRepo.insertUpdate(env, { id: "u-epar", doc_key: "https://www.ema.europa.eu/en/medicines/human/EPAR/inijaq", source_id: "ema", type: "drug_approval", title: "Inijaq (tofacitinib): EMA CHMP opinion", content_hash: "he", published_ts: Date.now() });
+  const q = await call(env, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
+  const ids = q.data.candidates.map((c) => c.id);
+  assert.ok(ids.includes("u-epar"), "a per-medicine item is offered");
+  assert.ok(!ids.includes("u-digest"), "the page digest is not");
+});
+
 test("fail closed: signer routes answer a clean 500 when D1 refuses, never an unhandled throw", { skip: SKIP }, async () => {
   const broken = { prepare: () => { throw new Error("d1 down"); }, batch: async () => { throw new Error("d1 down"); } };
   const r = await call({ UPDATES_DB: broken }, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
@@ -553,4 +572,142 @@ test("skip: a signer takes a source item off the queue (and can undo); audited; 
   assert.equal((await call(env, "POST", "bulletins/skip", { admin: "admintok-123456", body: { update_id: "u1" } })).status, 401);
   assert.equal((await call(env, "POST", "bulletins/skip", { tok: "tok-owner-doc", body: { update_id: "nope" } })).status, 404);
   assert.deepEqual([auditRows(env, "skip").length, auditRows(env, "unskip").length], [1, 1]);
+});
+
+/* ---------------- v2: second reader, specialties, numbers, pre-sign checks ---------------- */
+
+test("schema v2: a database from the first release gains the new columns on the first request", { skip: SKIP }, async () => {
+  const NEW = ["second_required", "cosigned_hash", "cosigned_uid", "cosigned_name", "cosigned_reg", "cosigned_council", "cosigned_ts", "returned_note", "returned_uid", "returned_ts", "specialties"];
+  const old = SCHEMA.split("\n").filter((l) => !NEW.some((c) => new RegExp("^\\s+" + c + "\\s").test(l))).join("\n")
+    .replace(/updated_ts\s+INTEGER NOT NULL DEFAULT 0,\n\);/, "updated_ts INTEGER NOT NULL DEFAULT 0\n);").replace(/added_ts\s+INTEGER NOT NULL,\n\);/, "added_ts INTEGER NOT NULL\n);");
+  const D = d1(); D._db.exec(old);
+  const cols = (t) => D._db.prepare("PRAGMA table_info(" + t + ")").all().map((r) => r.name);
+  assert.ok(cols("bulletins").indexOf("second_required") < 0 && cols("bulletin_signers").indexOf("specialties") < 0, "starts without them");
+  const r = await call({ UPDATES_DB: D }, "GET", "bulletins");
+  assert.equal(r.status, 200);
+  for (const c of NEW.slice(0, 10)) assert.ok(cols("bulletins").includes(c), c);
+  assert.ok(cols("bulletin_signers").includes("specialties"));
+  const fresh1 = new DatabaseSync(":memory:"); fresh1.exec(SCHEMA);
+  const shape = (db, t) => db.prepare("PRAGMA table_info(" + t + ")").all().map((c) => [c.name, c.type, c.notnull, c.dflt_value]);
+  assert.deepEqual(shape(D._db, "bulletins"), shape(fresh1, "bulletins"), "migrated table = fresh table, same column order");
+  assert.deepEqual(shape(D._db, "bulletin_signers"), shape(fresh1, "bulletin_signers"));
+  const V2 = readFileSync(new URL("../functions/db/migrate_bulletins_v2.sql", import.meta.url), "utf8");
+  const E = new DatabaseSync(":memory:"); E.exec(old); E.exec(V2);
+  assert.deepEqual(shape(E, "bulletins"), shape(fresh1, "bulletins"), "the hand-run v2 file gives the same table");
+});
+
+test("second reader: an approval needs a different doctor to confirm the same text before it shows", { skip: SKIP }, async () => {
+  const env = await fresh({ secondReader: true });
+  await ownerSigner(env);
+  await addSigner(env, "u-doc2", "Second Doctor", "TSMC-2", "Telangana State Medical Council");
+  const a = await signedBulletin(env);                                   // approval, signed by the owner
+  assert.deepEqual(await publicIds(env), [], "one signature is not enough for an approval");
+  const bell = async () => (await updatesRepo.getFeed(env, { limit: 10 })).items.find((i) => i.id === "u1").signed_bulletin;
+  assert.equal(await bell(), false, "the bell does not call it a signed bulletin while it waits");
+  const q = await call(env, "GET", "bulletins/queue", { tok: "tok-doc2" });
+  const it = q.data.items.find((i) => i.id === a.id);
+  assert.equal(it.state, "awaiting_second");
+  assert.equal(it.can_cosign, true);
+  assert.equal((await call(env, "GET", "bulletins/queue", { tok: "tok-owner-doc" })).data.items.find((i) => i.id === a.id).can_cosign, false);
+  const self = await call(env, "POST", "bulletins/" + a.id + "/cosign", { tok: "tok-owner-doc", body: { body_hash: a.body_hash, checklist: CHECK } });
+  assert.deepEqual([self.status, self.data.error], [409, "same-signer"], "the first signer cannot be their own second reader");
+  const noList = await call(env, "POST", "bulletins/" + a.id + "/cosign", { tok: "tok-doc2", body: { body_hash: a.body_hash, checklist: {} } });
+  assert.equal(noList.status, 400);
+  const bad = await call(env, "POST", "bulletins/" + a.id + "/cosign", { tok: "tok-doc2", body: { body_hash: "c".repeat(64), checklist: CHECK } });
+  assert.equal(bad.status, 409, "a co-sign of text other than what was signed is refused");
+  const ok = await call(env, "POST", "bulletins/" + a.id + "/cosign", { tok: "tok-doc2", body: { body_hash: a.body_hash, checklist: CHECK } });
+  assert.equal(ok.status, 200, JSON.stringify(ok.data));
+  assert.deepEqual(await publicIds(env), [a.id]);
+  assert.equal(await bell(), true, "confirmed: the bell marks it");
+  const pub = (await call(env, "GET", "bulletins")).data.items[0];
+  assert.deepEqual([pub.signed_name, pub.second_name, pub.second_reg], ["Manoj Kurmana", "Second Doctor", "TSMC-2"]);
+  assert.ok(!("cosigned_uid" in pub) && !("second_uid" in pub), "no uid on the public card");
+  assert.equal(auditRows(env, "cosign").length, 1);
+  // any edit takes it off and needs both signatures again
+  const cur = await call(env, "GET", "bulletins/queue", { tok: "tok-owner-doc" });
+  const row = cur.data.items.find((i) => i.id === a.id);
+  const e = await call(env, "POST", "bulletins", { tok: "tok-owner-doc", body: draft({ id: a.id, updated_ts: row.updated_ts, what_changed: "Regulator approved the agent as add-on therapy after a phase 3 trial with fewer attacks." }) });
+  assert.equal(e.status, 200);
+  const s2 = await call(env, "POST", "bulletins/" + a.id + "/sign", { tok: "tok-owner-doc", body: { body_hash: e.data.item.body_hash, checklist: CHECK } });
+  assert.equal(s2.status, 200);
+  assert.deepEqual(await publicIds(env), [], "the earlier co-sign does not carry over to new text");
+});
+
+test("second reader: sends it back with a note; the first signer sees the note; it counts as a correction", { skip: SKIP }, async () => {
+  const env = await fresh({ secondReader: true });
+  await ownerSigner(env);
+  await addSigner(env, "u-doc2", "Second Doctor", "TSMC-2", "Telangana State Medical Council");
+  const a = await signedBulletin(env);
+  const short = await call(env, "POST", "bulletins/" + a.id + "/return", { tok: "tok-doc2", body: { note: "fix" } });
+  assert.equal(short.status, 400);
+  const own = await call(env, "POST", "bulletins/" + a.id + "/return", { tok: "tok-owner-doc", body: { note: "Please check the India status line." } });
+  assert.equal(own.status, 409, "the first signer edits instead of sending back");
+  const r = await call(env, "POST", "bulletins/" + a.id + "/return", { tok: "tok-doc2", body: { note: "India status says not approved but CDSCO lists it. Please check." } });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  const it = (await call(env, "GET", "bulletins/queue", { tok: "tok-owner-doc" })).data.items.find((i) => i.id === a.id);
+  assert.equal(it.state, "draft");
+  assert.match(it.returned_note, /CDSCO lists it/);
+  assert.equal(auditRows(env, "return").length, 1);
+  const m = await call(env, "GET", "bulletins/metrics", { tok: "tok-owner-doc" });
+  assert.deepEqual([m.data.correction.corrected, m.data.correction.of, m.data.correction.rate], [1, 1, 100]);
+});
+
+test("second reader: guideline and trial updates need one signature; the owner can switch the rule off (audited)", { skip: SKIP }, async () => {
+  const env = await fresh({ secondReader: true });
+  await ownerSigner(env);
+  const g = await signedBulletin(env, { kind: "guideline", evidence_type: "guideline", update_id: "u2" });
+  assert.deepEqual(await publicIds(env), [g.id]);
+  const a = await signedBulletin(env);
+  assert.deepEqual(await publicIds(env), [g.id]);
+  const notOwner = await call(env, "POST", "bulletins/second-reader", { tok: "tok-doc2", body: { on: false, reason: "Only one signer this week" } });
+  assert.equal(notOwner.status, 403);
+  const off = await call(env, "POST", "bulletins/second-reader", { tok: "tok-owner-doc", body: { on: false, reason: "Only one signer this week" } });
+  assert.equal(off.status, 200);
+  assert.deepEqual((await publicIds(env)).sort(), [a.id, g.id].sort(), "switching off releases approvals signed once");
+  assert.equal(auditRows(env, "second_reader_off").length, 1);
+  await call(env, "POST", "bulletins/second-reader", { tok: "tok-owner-doc", body: { on: true, reason: "Second signer has joined" } });
+  assert.deepEqual(await publicIds(env), [g.id], "back on: the approval waits again");
+  assert.equal((await call(env, "GET", "bulletins/me", { tok: "tok-owner-doc" })).data.secondReader, true);
+});
+
+test("specialties: the owner sets them; the queue marks Mine; counts and the Saturday push follow them", { skip: SKIP }, async () => {
+  const env = await fresh();
+  await ownerSigner(env);
+  const r = await call(env, "POST", "bulletins/signers", { tok: "tok-owner-doc", body: { uid: "u-doc2", name: "Second Doctor", reg_no: "TSMC-2", council: "Telangana State Medical Council", specialties: ["cardiology", "not-a-specialty"] } });
+  assert.equal(r.status, 200);
+  assert.equal(r.data.signer.specialties, "cardiology");
+  await updatesRepo.insertUpdate(env, { id: "u-card", doc_key: "k-card", type: "trial", title: "Finerenone in heart failure with preserved ejection fraction", content_hash: "hc", published_ts: Date.now() });
+  await updatesRepo.insertUpdate(env, { id: "u-onc", doc_key: "k-onc", type: "trial", title: "Adjuvant therapy in early breast cancer", content_hash: "ho", published_ts: Date.now() });
+  const q = await call(env, "GET", "bulletins/queue", { tok: "tok-doc2" });
+  const c = (id) => q.data.candidates.find((x) => x.id === id);
+  assert.deepEqual([c("u-card").mine, c("u-onc").mine], [true, false]);
+  assert.deepEqual(c("u-card").specialties, ["cardiology"]);
+  assert.equal(c("u1").mine, true, "an item no specialty claims is everyone's");
+  const me = await call(env, "GET", "bulletins/me", { tok: "tok-doc2" });
+  assert.deepEqual(me.data.signer.specialties, ["cardiology"]);
+  assert.ok(me.data.specialtyOptions.some((o) => o[0] === "cardiology"));
+  const ownerMe = await call(env, "GET", "bulletins/me", { tok: "tok-owner-doc" });
+  assert.ok(ownerMe.data.pending.candidates > me.data.pending.candidates, "a signer with no specialties sees everything");
+});
+
+test("numbers: days to the disease page, coverage by source, backlog, pre-sign warnings", { skip: SKIP }, async () => {
+  const env = await fresh();
+  await ownerSigner(env);
+  const D = env.UPDATES_DB._db;
+  const now = Date.now();
+  D.prepare("UPDATE updates SET published_ts = ? WHERE id = 'u1'").run(now - 4 * 86400000);
+  D.prepare("UPDATE updates SET published_ts = ? WHERE id = 'u2'").run(now - 10 * 86400000);
+  const c = await call(env, "POST", "bulletins", { tok: "tok-owner-doc", body: draft() });
+  const s = await call(env, "POST", "bulletins/" + c.data.item.id + "/sign", { tok: "tok-owner-doc", body: { body_hash: c.data.item.body_hash, checklist: CHECK, warnings: ["ai_verbatim", "not-a-code"] } });
+  assert.equal(s.status, 200);
+  assert.match(auditRows(env, "sign")[0].detail, /\| warnings: ai_verbatim$/, "only known warning codes are kept");
+  const m = (await call(env, "GET", "bulletins/metrics", { tok: "tok-owner-doc" })).data;
+  assert.equal(m.signed, 1);
+  assert.equal(m.days_to_page.n, 1);
+  assert.ok(m.days_to_page.median >= 3.9 && m.days_to_page.median <= 4.1, JSON.stringify(m.days_to_page));
+  assert.equal(m.signed_with_warnings, 1);
+  assert.deepEqual([m.coverage.total, m.coverage.signed, m.coverage.waiting], [2, 1, 1]);
+  assert.equal(m.backlog.oldest_days, 10);
+  assert.deepEqual([m.correction.corrected, m.correction.rate], [0, 0]);
+  assert.equal((await call(env, "GET", "bulletins/metrics", { tok: "tok-unverified" })).status, 403);
 });

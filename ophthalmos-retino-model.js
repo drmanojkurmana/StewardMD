@@ -70,8 +70,9 @@
   function pv(r) { var a = 2 * r.ax * DEG; return { M: r.s + r.c / 2, J0: -r.c / 2 * Math.cos(a), J45: -r.c / 2 * Math.sin(a) }; }
   function pvDist(a, b) { return hyp(a.J0 - b.J0, a.J45 - b.J45); }
 
-  // Clinical tolerance: spherical equivalent within 0.25 D and residual astigmatism within 0.20 D
-  // (0.25 D of cylinder at the right axis, or about 5 degrees of axis on 2 D of cylinder).
+  // Clinical tolerance: spherical equivalent within 0.25 D and residual cylinder 2|dJ| within 0.40 D
+  // (cylinder within 0.25 D at the right axis; the allowed axis error shrinks as the cylinder grows:
+  // about 23 degrees on 0.50 D, 11 on 1 D, 6 on 2 D). dJ is the Thibos J-vector distance.
   function grade(u, t, wd) {
     var pu = pv(u), pt = pv(t), dM = pu.M - pt.M, dJ = pvDist(pu, pt), e = 1e-9;
     var ok = Math.abs(dM) <= 0.25 + e && dJ <= 0.2 + e;
@@ -79,7 +80,8 @@
       axisOff: Math.abs(t.c) >= 0.25 && Math.abs(u.c) >= 0.25 ? Math.abs(odiff(u.ax, t.ax)) : 0 };
     if (ok) return r;
     if (Math.abs(dM - wd) <= 0.25 + e && dJ <= 0.2 + e) r.type = "wd";
-    else if (Math.abs(dM + wd) <= 0.25 + e && dJ <= 0.2 + e) r.type = "wd2";
+    else if (Math.abs(dM + wd) <= 0.25 + e && dJ <= 0.2 + e) r.type = "wd2";        // took the working distance off twice
+    else if (Math.abs(dM - 2 * wd) <= 0.25 + e && dJ <= 0.2 + e) r.type = "wdadd";  // added it instead of subtracting
     else if (Math.abs(t.c) >= 0.5 && Math.abs(dM) <= 0.25 + e && pvDist(pu, pv({ s: t.s, c: t.c, ax: t.ax + 90 })) <= 0.2 + e) r.type = "axis90";
     else if (Math.abs(t.c) >= 0.5 && Math.abs(dM) <= 0.25 + e && Math.abs(Math.abs(u.c) - Math.abs(t.c)) <= 0.25 + e) r.type = "axis";
     else if (Math.abs(dM) <= 0.25 + e) r.type = "cyl";
@@ -87,13 +89,15 @@
     return r;
   }
 
+  // 32-bit integer multiply (Math.imul is ES2015; this is the ES5 equivalent).
+  var imul = Math.imul || function (a, b) { var al = a & 0xffff, bl = b & 0xffff; return (al * bl + ((((a >>> 16) * bl + al * (b >>> 16)) << 16) >>> 0)) | 0; };
   // Deterministic generator (mulberry32) so a case can be replayed from its seed.
   function rng(seed) {
     var a = seed >>> 0;
     return function () {
       a = (a + 0x6D2B79F5) | 0;
-      var t = Math.imul(a ^ (a >>> 15), 1 | a);
-      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      var t = imul(a ^ (a >>> 15), 1 | a);
+      t = (t + imul(t ^ (t >>> 7), 61 | t)) ^ t;
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
   }

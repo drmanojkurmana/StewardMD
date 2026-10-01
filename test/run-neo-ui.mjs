@@ -1,5 +1,5 @@
-// Real-browser test: the neonatal layer (neo-*.js) end to end at phone width. Flag off first, then
-// ?neo=1: baby record, every tool screen, the tenfold guard, the high-alert second check, the dose
+// Real-browser test: the neonatal layer (neo-*.js) end to end at phone width. Default ON (Beta), the
+// switch off, then on again: baby record, every tool screen, the tenfold guard, the high-alert second check, the dose
 // calculator's neonatal path, 360 px overflow, dark mode, and the [hidden] display trap.
 // Expected numbers are read from data/neo/*.json, not typed here.
 //   node test/run-neo-ui.mjs      (CHROME=/path/to/chrome to override the browser)
@@ -43,23 +43,29 @@ try {
   await call('Runtime.enable');
   await call('Emulation.setDeviceMetricsOverride', { width: 360, height: 780, deviceScaleFactor: 1, mobile: true });
 
-  // 0) Flag OFF (default): nothing neonatal loads or shows.
+  // 0) Default ON (owner 2026-10-01, Beta): a fresh device loads the layer with no flag set.
   await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until('!!window.SMD_NEO_FLAGS && !!window.SMD_openRoute', 30000), 'app loaded, neo-flags.js present');
-  await sleep(800);
-  ok(await ev(`SMD_NEO_FLAGS.on()===false && !window.SMD_NEO_HUB && !window.SMD_NEO_DOSE`), 'flag OFF by default: the layer does not load');
-  ok(await ev(`!(window.SMD_HOME_TOOLS&&SMD_HOME_TOOLS().some(t=>t.act==='neo'))`), 'flag OFF: no Neonatal home tool');
-  ok(await ev(`!(MEDCALC._calcs||[]).some(c=>c.cat==='Neonatology')`), 'flag OFF: no neonatal calculators');
-  // The switch lives in Settings > Experimental Features and writes smd_neo.
+  ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO_TDM', 15000) && await ev(`SMD_NEO_FLAGS.on()===true && localStorage.getItem('smd_neo')===null`), 'DEFAULT ON: the layer loads with no flag set');
+  ok(await ev(`(()=>{const t=SMD_HOME_TOOLS().find(t=>t.act==='neo');return !!t})()`), 'Neonatal tile in the home tools registry');
+  // The Experimental switch shows ON and turns it OFF ("0"); OFF, nothing neonatal loads.
   await ev(`window.SMD_openExperimental&&SMD_openExperimental();1`);
-  ok(await until(`!!document.querySelector('#sbrExperimental [data-sbr-tg=neo]')`, 5000), 'Experimental Features lists the Neonatal layer switch');
+  ok(await until(`!!document.querySelector('#sbrExperimental [data-sbr-tg=neo].on')`, 5000), 'Experimental Features shows the Neonatal layer (Beta) switch ON');
+  ok(/Neonatal layer \(Beta\)/.test(await text('#sbrExperimental')), 'switch is labelled Beta');
   await click('#sbrExperimental [data-sbr-tg=neo]');
-  ok(await ev(`localStorage.getItem('smd_neo')==='1' && SMD_NEO_FLAGS.on()`), 'the switch turns smd_neo on (reload to apply)');
-  await ev(`localStorage.removeItem('smd_neo');document.getElementById('sbrExperimental')&&document.getElementById('sbrExperimental').remove();1`);
+  ok(await ev(`localStorage.getItem('smd_neo')==='0' && SMD_NEO_FLAGS.on()===false`), 'the switch turns smd_neo off');
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
+  ok(await until('!!window.SMD_NEO_FLAGS && !!window.SMD_openRoute', 30000), 'reloaded with smd_neo = "0"');
+  await sleep(800);
+  ok(await ev(`SMD_NEO_FLAGS.on()===false && !window.SMD_NEO_HUB && !window.SMD_NEO_DOSE`), 'OFF: the layer does not load');
+  ok(await ev(`!(window.SMD_HOME_TOOLS&&SMD_HOME_TOOLS().some(t=>t.act==='neo'))`), 'OFF: no Neonatal home tool');
+  ok(await ev(`!(MEDCALC._calcs||[]).some(c=>c.cat==='Neonatology')`), 'OFF: no neonatal calculators');
+  await ev(`localStorage.removeItem('smd_neo');1`);
 
-  // 1) Flag ON
-  await call('Page.navigate', { url: `http://localhost:${PORT}/?neo=1` });
-  ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO && !!window.SMD_NEO_DOSE && !!window.SMD_NEO_TDM && !!window.SMD_openRoute', 30000), 'flag ON (?neo=1): the layer loads');
+  // 1) Back to the default (ON)
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
+  ok(await until('!!window.SMD_NEO_HUB && !!window.SMD_NEO && !!window.SMD_NEO_DOSE && !!window.SMD_NEO_TDM && !!window.SMD_openRoute', 30000), 'default ON: the layer loads');
+  ok(await until(`!!document.querySelector('.rnav-tile[data-act=neo] .rnav-tile-beta')`, 10000), 'Neonatal home tile shows the BETA label');
   ok(await ev(`SMD_HOME_TOOLS().some(t=>t.act==='neo')`), 'Neonatal tile in the home tools registry');
   ok(await ev(`SMD_NEO_HUB.tools().length`) >= 10, 'hub lists every tool');
   await ev(`SMD_openRoute('neo');1`);
@@ -72,7 +78,8 @@ try {
   ok(/looks like kilograms/.test(await bodyText()), 'unit lock: 1.2 in a gram field is refused as kilograms');
   await typeIn('#nh_weightG', '1250'); await typeIn('#nh_birthWeightG', '1180'); await click('#neoHub [data-sex=F]');
   const sum = await text('#neoHub .nh-bsum');
-  ok(/GA 30\+2/.test(sum) && /1,250 g/.test(sum) && /Female/.test(sum) && /PMA 30\+6/.test(sum), 'pinned baby summary: ' + sum.split('\n')[0]);
+  ok(/Born at 30 weeks 2 days/.test(sum) && /1,250 g today/.test(sum) && /Girl/.test(sum) && /Corrected age 30 weeks 6 days/.test(sum) && /1,180 g at birth/.test(sum), 'pinned baby in plain words: ' + sum.replace(/\n/g, ' | '));
+  ok(/4 days old \(day 5 of life\)/.test(sum), 'age in days and day of life');
   await click('#neoHub [data-nh=edit]');
   await shot('home');
   ok(await ev(noOverflow), '360 px: no horizontal overflow on the hub');
@@ -101,6 +108,28 @@ try {
   await shot('dose-caffeine');
   await ev(`SMD_NEO_HUB.open('dose',{drug:'aciclovirr'});1`);
   ok(await until(`/No neonatal dose on file/.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000), 'unknown drug: "No neonatal dose on file"');
+
+  // 3b) Every drug in the app is searchable (owner 2026-10-01: "see our drug monographs we already have covering all drugs").
+  await ev(`SMD_NEO_HUB.open('dose');document.querySelector('#neoHub [data-neo-change]')&&document.querySelector('#neoHub [data-neo-change]').click();1`);
+  ok(await until(`!!document.querySelector('#neoHub [data-neo-q]')`, 5000), 'dose tool opens on a drug search');
+  ok(await ev(`SMD_NEO_DOSE.entries().length`) > 1000, 'search covers every monograph drug (' + await ev(`SMD_NEO_DOSE.entries().length`) + ')');
+  await typeIn('#neoHub [data-neo-q]', '');
+  ok(await until(`/Common newborn drugs/i.test(document.querySelector('#neoHub .nh-body').innerText)`, 3000), 'empty search lists the common newborn drugs');
+  await typeIn('#neoHub [data-neo-q]', 'paraceta');
+  ok(await until(`[...document.querySelectorAll('#neoHub [data-neo-drug]')].some(b=>/Paracetamol/i.test(b.innerText))`, 3000), 'search finds a drug outside the band table (paracetamol)');
+  ok(await ev(noOverflow), 'drug search fits 360 px');
+  await shot('dose-search');
+  const pick = (st) => ev(`(()=>{const e=SMD_NEO_DOSE.entries().find(x=>x.status===${JSON.stringify(st)}&&x.mono);return e?e.key:null})()`);
+  const kMono = await pick('mono'), kInfo = await pick('info'), kNone = await pick('none');
+  ok(kMono && kInfo && kNone, `drugs of each kind: ${kMono}, ${kInfo}, ${kNone}`);
+  await ev(`SMD_NEO_HUB.open('dose',{drug:${JSON.stringify(kMono)}});1`);
+  ok(await until(`/Newborn dose \\(monograph\\)/i.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000), 'monograph newborn dose is labelled as such');
+  await shot('dose-monograph');
+  await ev(`SMD_NEO_HUB.open('dose',{drug:${JSON.stringify(kInfo)}});1`);
+  ok(await until(`/What our monograph says about newborns/i.test(document.querySelector('#neoHub .nh-body').innerText) && /No neonatal dose on file/.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000), 'notes-only drug: monograph newborn statements AND "No neonatal dose on file"');
+  await ev(`SMD_NEO_HUB.open('dose',{drug:${JSON.stringify(kNone)}});1`);
+  ok(await until(`/No neonatal dose on file/.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000) && !/What our monograph says/i.test(await bodyText()), 'drug with nothing for newborns: "No neonatal dose on file" only');
+  ok(/Open the full drug page/i.test(await bodyText()), 'link to the full monograph');
 
   // 4) Prepare from a dose (carry-over): vancomycin.
   await ev(`SMD_NEO_HUB.open('dose',{drug:'vancomycin'});1`);
@@ -147,7 +176,7 @@ try {
   await ev(`MEDCALC.close&&MEDCALC.close();1`);
 
   // 8) Search finds individual neonatal tools.
-  ok(await ev(`SMD_NEO_HUB.searchItems().some(x=>/Infusions/.test(x.title))`), 'universal search items for neonatal tools');
+  ok(await ev(`SMD_NEO_HUB.searchItems().some(x=>/Drip rates/.test(x.title)) && SMD_NEO_HUB.searchItems().some(x=>/Infusions/.test(x.kw))`), 'universal search items for neonatal tools');
 
   // 9) Dark mode
   await ev(`document.body.classList.add('dark');SMD_NEO_HUB.open('growth');1`);
@@ -162,6 +191,10 @@ try {
   await shot('dosecalc-neonate');
   await ev(`SMD_DOSECALC.close();SMD_DOSECALC.open({drug:'Levothyroxine',patient:{weight:1.25,age:4,ageUnit:'days',sex:'F'}});1`);
   ok(await until(`/No neonatal dose on file\\. Do not extrapolate\\./.test(document.querySelector('#doseCalc .dc-body').innerText)`, 8000), 'drug with no neonatal row: "No neonatal dose on file. Do not extrapolate."');
+  const infoName = await ev(`(()=>{const e=SMD_NEO_DOSE.entries().find(x=>x.status==='info'&&x.mono&&!x.neoRows);return e?e.mono.n:null})()`);
+  await ev(`SMD_DOSECALC.close();SMD_DOSECALC.open({drug:${JSON.stringify(infoName)},patient:{weight:1.25,age:4,ageUnit:'days',sex:'F'}});1`);
+  ok(await until(`!!document.querySelector('#doseCalc [data-neo-stmt]') && /No neonatal dose on file/.test(document.querySelector('#doseCalc .dc-body').innerText)`, 8000), `dose calculator, ${infoName}: monograph newborn statements beside "No neonatal dose on file"`);
+  await shot('dosecalc-statements');
   await ev(`SMD_DOSECALC.close();1`);
 
   // 11) [hidden] display trap: a closed hub is not painted and does not eat taps.

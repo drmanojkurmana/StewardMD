@@ -3,7 +3,12 @@
   "unit": "uveitis-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Masquerade: when uveitis is not uveitis",
     "hi": "मास्करेड: जब यूवाइटिस असल में यूवाइटिस न हो"
@@ -13,22 +18,21 @@
     "hi": "[[masquerade-syndrome]] यूवाइटिस जैसा दिखता है पर कुछ और होता है, अक्सर कैंसर या संक्रमण। उम्र असामान्य हो या स्टेरॉयड काम न करें, तो इस पर शक करें।"
   },
   "see": {
-    "diagram": "diagrams/masquerade.svg",
-    "w": 400,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Side view of an eye, front on the left. A pale layer lies in the bottom of the front chamber. A lens implant sits behind the iris. Clumps of pale cells float in the jelly. A yellow dome sits on the upper back wall. A white lumpy mass with bright specks sits on the lower back wall. A small grey shard lies on the lower wall.",
-      "hi": "आँख का साइड से दृश्य, आगे का हिस्सा बाईं ओर। आगे के चैंबर के नीचे एक हल्की परत है। आइरिस के पीछे एक लेंस इम्प्लांट है। जेली में हल्की कोशिकाओं के गुच्छे तैर रहे हैं। पीछे की ऊपरी दीवार पर एक पीला उभार है। पीछे की निचली दीवार पर चमकीले कणों वाला सफ़ेद, गाँठदार ढेर है। निचली दीवार पर एक छोटा भूरा टुकड़ा पड़ा है।"
+      "en": "A side cut through one eye, used as a map of five mimics of uveitis. A pale layer lies at the bottom of the front chamber. A lens implant sits behind the iris. White clumps of cells float in the gel. At the back, a dark, dome-shaped mass rises from the upper wall. A white, lumpy mass grows on the lower retina. A small metal fragment lies hidden low in the eye.",
+      "hi": "एक आँख का बगल से काट, जो यूवाइटिस जैसी दिखने वाली पाँच बीमारियों का नक्शा है। आगे के कक्ष के तल पर एक फीकी परत है। आइरिस के पीछे एक कृत्रिम लेंस है। जेल में कोशिकाओं के सफ़ेद गुच्छे तैर रहे हैं। पीछे, ऊपरी दीवार से एक गहरे रंग की गुंबद जैसी गाँठ उठी है। निचले रेटिना पर एक सफ़ेद, गाँठदार गाँठ बढ़ रही है। आँख में नीचे धातु का एक छोटा टुकड़ा छिपा है।"
     },
     "caption": {
       "en": "Five masquerades drawn in one eye, as a map. A real eye usually has only one.",
       "hi": "एक ही आँख में बनाए गए पाँच मास्करेड, नक़्शे की तरह। असली आँख में आम तौर पर एक ही होता है।"
     },
-    "credit": "Original diagram, MAIKNOWLEDGE LLP.",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.33,
-        "y": 0.633,
+        "x": 0.164,
+        "y": 0.679,
         "label": {
           "en": "Layer in the front chamber",
           "hi": "आगे के चैंबर में परत"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.405,
-        "y": 0.5,
+        "x": 0.245,
+        "y": 0.448,
         "label": {
           "en": "Recent surgery",
           "hi": "हाल का ऑपरेशन"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.555,
-        "y": 0.427,
+        "x": 0.518,
+        "y": 0.364,
         "label": {
           "en": "Clumps of vitreous cells",
           "hi": "विट्रियस में कोशिकाओं के गुच्छे"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.688,
-        "y": 0.316,
+        "x": 0.709,
+        "y": 0.17,
         "label": {
           "en": "Choroidal mass",
           "hi": "कोरॉइड की गाँठ"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.652,
-        "y": 0.673,
+        "x": 0.7,
+        "y": 0.715,
         "label": {
           "en": "White retinal mass",
           "hi": "रेटिना पर सफ़ेद गाँठ"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.454,
-        "y": 0.741,
+        "x": 0.577,
+        "y": 0.863,
         "label": {
           "en": "Hidden foreign body",
           "hi": "छिपा बाहरी टुकड़ा"
@@ -98,6 +102,10 @@
           "hi": "हथौड़ा चलाते समय उड़ा धातु का कण आँख में छिपकर सूजन बनाए रख सकता है। लोहा धीरे-धीरे आँख पर दाग़ और ज़हर फैलाता है।"
         }
       }
+    ],
+    "img": "learn/media/real/masquerade.webp",
+    "more": [
+      "masquerade"
     ]
   },
   "why": {

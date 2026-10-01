@@ -3,7 +3,12 @@
   "unit": "glaucoma-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Gonioscopy and the angle-closure spectrum",
     "hi": "गोनियोस्कोपी और एंगल क्लोज़र की श्रेणियाँ"
@@ -13,22 +18,21 @@
     "hi": "[[gonioscopy]] बताती है कि एंगल के कौन से हिस्से दिखते हैं। 180 डिग्री या ज़्यादा हिस्से में आइरिस मेशवर्क को छुए तो एंगल क्लोज़र है। इसे संदिग्ध, [[angle-closure]], या ग्लूकोमा में बाँटें।"
   },
   "see": {
-    "diagram": "diagrams/gl-angle-structures.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Stylised gonioscopy view of an open angle as curved bands. At the top is dark cornea with two fine light lines. Below come a bright white line, a pale brown band and a dark brown band. Then a white band, a dark grey band, and the purple iris with fine strands crossing up.",
-      "hi": "खुले एंगल का गोनियोस्कोपी जैसा सरल चित्र, घुमावदार पट्टियों में। ऊपर से नीचे: दो पतली हल्की रेखाओं वाला गहरा कॉर्निया, एक चमकीली सफ़ेद रेखा, हल्की भूरी पट्टी, गहरी भूरी पट्टी, सफ़ेद पट्टी, गहरी धूसर पट्टी, और नीचे बैंगनी आइरिस जिससे पतले रेशे ऊपर जाते हैं।"
+      "en": "The drainage angle seen through a gonioscopy mirror. At the top, two fine lines meet at the corneal wedge. Below it lie a bright Schwalbe line, a pale band and a brown band of meshwork. Then come a white scleral spur and a dark grey ciliary body band. The iris lies at the bottom, with fine strands crossing up.",
+      "hi": "गोनियोस्कोपी शीशे से दिखता ड्रेनेज कोण। ऊपर दो बारीक रेखाएँ कॉर्नियल वेज पर मिलती हैं। उसके नीचे चमकीली श्वाल्बे रेखा, एक हल्की पट्टी और मेशवर्क की एक भूरी पट्टी है। फिर सफ़ेद स्क्लेरल स्पर और गहरी धूसर सिलियरी बॉडी पट्टी आती है। सबसे नीचे आइरिस है, जिससे बारीक रेशे ऊपर जाते हैं।"
     },
     "caption": {
       "en": "An open angle seen through a gonioscopy lens. The bands run from the cornea (top) to the iris (bottom).",
       "hi": "गोनियोस्कोपी लेंस से दिखता खुला एंगल। पट्टियाँ कॉर्निया (ऊपर) से आइरिस (नीचे) तक जाती हैं।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.125,
-        "y": 0.12,
+        "x": 0.5,
+        "y": 0.11,
         "label": {
           "en": "Corneal wedge",
           "hi": "कॉर्नियल वेज"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.3125,
-        "y": 0.272,
+        "x": 0.5,
+        "y": 0.265,
         "label": {
           "en": "Schwalbe line",
           "hi": "श्वाल्बे लाइन"
@@ -52,7 +56,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.417,
+        "y": 0.47,
         "label": {
           "en": "Pigmented meshwork",
           "hi": "पिगमेंट वाला मेशवर्क"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.6875,
-        "y": 0.492,
+        "x": 0.5,
+        "y": 0.545,
         "label": {
           "en": "Scleral spur",
           "hi": "स्क्लेरल स्पर"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.875,
-        "y": 0.593,
+        "x": 0.5,
+        "y": 0.65,
         "label": {
           "en": "Ciliary body band",
           "hi": "सिलियरी बॉडी बैंड"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.3125,
-        "y": 0.8,
+        "x": 0.5,
+        "y": 0.85,
         "label": {
           "en": "Iris",
           "hi": "आइरिस"
@@ -98,6 +102,10 @@
           "hi": "इसका आकार और जुड़ने की जगह देखें। पतले रेशे सामान्य होते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/gl-angle-structures.webp",
+    "more": [
+      "gl-angle-structures"
     ]
   },
   "why": {

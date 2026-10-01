@@ -3,7 +3,12 @@
   "unit": "ob6",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG10.1"
   ],
@@ -16,22 +21,21 @@
     "hi": "[[abruption]] में प्लेसेंटा जल्दी अलग हो जाती है। दर्द, कोमल कड़ा गर्भाशय, गहरा ख़ून (या छिपा हो तो कुछ नहीं), भ्रूण की तकलीफ़ और दिखते रक्तस्राव से कहीं ज़्यादा शॉक देखिए।"
   },
   "see": {
-    "diagram": "diagrams/ob6-abruption.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "A womb in front view with the placenta on the right wall partly peeled off, and a dark red clot behind it. Purple bruised patches show on the wall on the left. A baby's head sits in the middle. At the lower left a jagged red line shows a struggling heartbeat. At lower right, scattered red drops stand for clotting failure. A thin dark trickle of blood leaves the bottom.",
-      "hi": "गर्भाशय का सामने का चित्र, जिसमें दाईं दीवार पर प्लेसेंटा आंशिक रूप से उखड़ी है और उसके पीछे गहरा लाल थक्का है। बाईं दीवार पर बैंगनी नील के धब्बे हैं। बीच में बच्चे का सिर है। नीचे बाईं ओर दाँतेदार लाल रेखा संघर्ष करती धड़कन दिखाती है। नीचे दाईं ओर बिखरी लाल बूँदें जमने की विफलता दर्शाती हैं। नीचे से ख़ून की पतली गहरी धार निकल रही है।"
+      "en": "Realistic medical illustration showing acute placental abruption in a gravid uterus, with a large dark retroplacental haematoma peeling the placenta off the uterine wall, purplish Couvelaire myometrial bruising, and a fetus in utero.",
+      "hi": "गर्भवती गर्भाशय में तीव्र अपरा पृथक्करण (प्लेसेंटल एब्स्ट्रक्शन) को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र, जिसमें एक बड़ा गहरा रेट्रोप्लेसेंटल हेमेटोमा गर्भाशय की दीवार से प्लेसेंटा को अलग कर रहा है, मायोमेट्रियम में बैंगनी कुवेलेयर चोट के निशान हैं, और गर्भाशय में भ्रूण उपस्थित है।"
     },
     "caption": {
-      "en": "A placenta peeling off with blood trapped behind it, and what follows.",
-      "hi": "उखड़ती प्लेसेंटा जिसके पीछे ख़ून फँसा है, और उसके बाद क्या होता है।"
+      "en": "Placental abruption with retroplacental haematoma and Couvelaire myometrial extravasation.",
+      "hi": "रेट्रोप्लेसेंटल हेमेटोमा और कुवेलेयर मायोमेट्रियल रक्तस्राव के साथ प्लेसेंटल एब्स्ट्रक्शन।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.679,
-        "y": 0.333,
+        "x": 0.65,
+        "y": 0.4,
         "label": {
           "en": "Clot behind the placenta",
           "hi": "प्लेसेंटा के पीछे थक्का"
@@ -42,8 +46,8 @@
         }
       },
       {
-        "x": 0.396,
-        "y": 0.32,
+        "x": 0.64,
+        "y": 0.58,
         "label": {
           "en": "Hard tender womb",
           "hi": "कड़ा कोमल गर्भाशय"
@@ -54,8 +58,8 @@
         }
       },
       {
-        "x": 0.458,
-        "y": 0.5,
+        "x": 0.48,
+        "y": 0.52,
         "label": {
           "en": "Baby in distress",
           "hi": "बच्चा तकलीफ़ में"
@@ -64,31 +68,11 @@
           "en": "Fetal distress or death, because the placenta has stopped working.",
           "hi": "भ्रूण की तकलीफ़ या मृत्यु, क्योंकि प्लेसेंटा काम करना बंद कर चुकी है।"
         }
-      },
-      {
-        "x": 0.183,
-        "y": 0.713,
-        "label": {
-          "en": "Shock",
-          "hi": "शॉक"
-        },
-        "note": {
-          "en": "Shock out of proportion to the visible bleeding is a clue to concealed abruption.",
-          "hi": "दिखते रक्तस्राव से कहीं ज़्यादा शॉक concealed abruption का सुराग़ है।"
-        }
-      },
-      {
-        "x": 0.885,
-        "y": 0.72,
-        "label": {
-          "en": "Clotting failure (DIC)",
-          "hi": "जमने की विफलता (DIC)"
-        },
-        "note": {
-          "en": "Blood does not clot. Check platelets, fibrinogen, PT and PTT and replace blood and blood products.",
-          "hi": "ख़ून जमता नहीं। प्लेटलेट्स, fibrinogen, PT और PTT जाँचिए और खून व blood products से पूर्ति कीजिए।"
-        }
       }
+    ],
+    "img": "learn/media/real/ob6-abruption.webp",
+    "more": [
+      "ob6-abruption"
     ]
   },
   "why": {

@@ -3,7 +3,12 @@
   "unit": "gy8",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Sterilisation and the national basket",
     "hi": "नसबंदी और राष्ट्रीय विकल्पों की टोकरी"
@@ -13,22 +18,21 @@
     "hi": "नसबंदी स्थायी है। जानें कि कौन पात्र है, कब की जाती है, और पुरुष नसबंदी के बाद वीर्य जाँच। भारत सार्वजनिक क्षेत्र में तरीकों की टोकरी मुफ़्त देता है।"
   },
   "see": {
-    "diagram": "diagrams/gy8-sterilisation.svg",
-    "w": 480,
-    "h": 220,
+    "w": 768,
+    "h": 429,
     "alt": {
-      "en": "Two panels. On the left a uterus with both fallopian tubes, each cut by a red mark. On the right two testes with the vas deferens on each side, each cut by a red mark.",
-      "hi": "दो हिस्से। बाईं ओर गर्भाशय और दोनों फैलोपियन नलियाँ, हर एक पर लाल कटान का निशान। दाईं ओर दो अंडकोष और दोनों ओर की वास डिफ़रेंस, हर एक पर लाल कटान का निशान।"
+      "en": "Two-panel medical illustration showing surgical sterilisation methods: on the left, coronal section of the female pelvis and uterus with bilateral fallopian tube occlusion using surgical clips on the isthmus; on the right, respectful anatomical cutaway of the male scrotum showing both vasa deferentia running inside the spermatic cord with bilateral division and ligation at the upper scrotum.",
+      "hi": "सर्जिकल नसबंदी विधियों को दर्शाने वाला दो-पैनल चिकित्सीय चित्र: बाईं ओर महिला श्रोणि और गर्भाशय का कोरोनल काट जिसमें इस्थमस पर सर्जिकल क्लिप द्वारा दोनों फैलोपियन नलियों को बंद किया गया है; दाईं ओर पुरुष अंडकोष का शारीरिक काट जिसमें दोनों वास डिफ़रेंस शुक्राणु रज्जु के भीतर स्थित हैं और ऊपरी अंडकोष में उनका द्विपक्षीय विभाजन और बंधाव दिखाया गया है।"
     },
     "caption": {
       "en": "Female sterilisation blocks both tubes. Vasectomy blocks both vasa.",
       "hi": "महिला नसबंदी दोनों नलियों को बंद करती है। पुरुष नसबंदी दोनों वास को बंद करती है।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.158,
-        "y": 0.3,
+        "x": 0.13,
+        "y": 0.28,
         "label": {
           "en": "Tubal occlusion",
           "hi": "नली बंद करना"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.783,
-        "y": 0.5,
+        "x": 0.67,
+        "y": 0.39,
         "label": {
           "en": "Vasectomy",
           "hi": "पुरुष नसबंदी"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.333,
-        "y": 0.545,
+        "x": 0.38,
+        "y": 0.28,
         "label": {
           "en": "Ectopic risk",
           "hi": "एक्टोपिक जोखिम"
@@ -62,6 +66,10 @@
           "hi": "नसबंदी विफल हो तो गर्भ एक्टोपिक हो सकता है। इसे अलग करें।"
         }
       }
+    ],
+    "img": "learn/media/real/gy8-sterilisation.webp",
+    "more": [
+      "gy8-sterilisation"
     ]
   },
   "why": {

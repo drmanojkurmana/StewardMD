@@ -341,6 +341,15 @@ const PCPNDT_RETENTION = "Kept at least two years from the procedure, or until a
 const FORMF_DECLARATION = "I have neither detected nor disclosed the sex of her foetus to anybody in any manner.";
 /* The hospital's local calendar day of an ISO time (today when there is none). */
 const localDay = (iso, offsetMinutes) => new Date((Number.isFinite(Date.parse(iso)) ? Date.parse(iso) : Date.now()) + (Number.isFinite(offsetMinutes) ? offsetMinutes : 330) * 60000).toISOString().slice(0, 10);
+/* The day a register entry is filed under follows the hospital's calendar (owner 2026-10-01: "after 00:00 it is the next
+ * day"): a plain date (YYYY-MM-DD) as entered; a timestamp (an MLC arrival, a POCSO task raised) turned into the
+ * hospital's local date, so a case at 00:30 IST on the 1st is in that month's register, not last month's UTC one. */
+const filingDay = (value, offsetMinutes) => {
+  const s = str(value);
+  if (!s) return "";
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  return Number.isFinite(Date.parse(s)) ? localDay(s, offsetMinutes) : s.slice(0, 10);
+};
 /* The State/UT portal fields a Form F needs on its procedure date: the submission date where the State/UT requires portal
  * submission, and the acknowledgement unless its configuration says none is required. */
 function formFPortalFields(v, o) {
@@ -1191,13 +1200,13 @@ async function saveEntry(ctx) {
   Object.assign(fields, def.derive ? def.derive(fields, opts) : {});
   const patientId = correcting ? prior.patientId || null : str(ctx.patientId) || null;
   if (def.patient !== "none" && def.patient !== "optional" && !patientId) return { ok: false, status: 422, error: "patient_required", message: "Name the patient this entry is for.", written: 0 };
-  const eventDate = str(fields[def.dateField]).slice(0, 10);
+  const eventDate = filingDay(fields[def.dateField], opts.offsetMinutes);
   const entry = {
     resourceType: type, id, version: (prior ? prior.version : 0) + 1, kind,
     serial: prior ? prior.serial || null : null,
     patientId, encounterId: correcting ? prior.encounterId || null : str(ctx.encounterId) || null,
     links: correcting ? prior.links || {} : (ctx.links && typeof ctx.links === "object" ? ctx.links : {}),
-    period: eventDate ? eventDate.slice(0, 7) : now.slice(0, 7), eventDate: eventDate || null,
+    period: (eventDate || localDay(now, opts.offsetMinutes)).slice(0, 7), eventDate: eventDate || null,
     fields, complete: v.missing.length === 0, missing: v.missing,
     ...(def.rbd ? { formVersion: opts.settings.rbd.formVersion } : {}),
     recordedBy: prior ? prior.recordedBy : str(who.id), recordedAt: prior ? prior.recordedAt : now,
@@ -1218,7 +1227,7 @@ async function saveEntry(ctx) {
       scope.also = also.map((x) => ({ register: x.kind, id: x.id }));
     }
     if (def.serial && !entry.serial) {
-      const year = (eventDate || now).slice(0, 4);
+      const year = (eventDate || localDay(now, opts.offsetMinutes)).slice(0, 4);
       let s;
       try { s = await nextSerial(repo, tenantId, kind, year); } catch { return { ...READ_FAILED, written: 0 }; }
       entry.serial = def.serialFormat ? def.serialFormat(s.n, year) : `${def.serial}/${year}/${String(s.n).padStart(5, "0")}`;
@@ -1250,9 +1259,9 @@ function draftEntry(kind, input, c) {
   if (v.problems.length) throw new Error(`${kind}: ${v.problems.join("; ")}`);
   const fields = { ...v.value };
   for (const [k, val] of Object.entries(input.serverFields || {})) if (def.fields.some((x) => x.key === k && x.server)) fields[k] = val;
-  const eventDate = str(fields[def.dateField]).slice(0, 10);
+  const eventDate = filingDay(fields[def.dateField], c.offsetMinutes);
   return { resourceType: typeOf(kind), id: input.id, version: 1, kind, serial: null, patientId: input.patientId || null, encounterId: input.encounterId || null, links: {},
-    period: (eventDate || c.now).slice(0, 7), eventDate: eventDate || null, fields, complete: v.missing.length === 0, missing: v.missing,
+    period: (eventDate || localDay(c.now, c.offsetMinutes)).slice(0, 7), eventDate: eventDate || null, fields, complete: v.missing.length === 0, missing: v.missing,
     recordedBy: str(c.who.id), recordedAt: c.now, writtenBy: { id: str(c.who.id), role: str(c.who.role) || null, at: c.now } };
 }
 
@@ -1283,7 +1292,10 @@ async function listEntries(ctx) {
   } catch { return READ_FAILED; }
   rows = rows || [];
   const truncated = !str(ctx.patientId) && rows.length >= MAX_LIST;
+  // Entries saved before 2026-10-01 were filed by the UTC date of a timestamp: work the day out again on the hospital clock.
+  const off = ctx.clock && Number.isFinite(ctx.clock.offsetMinutes) ? ctx.clock.offsetMinutes : 330;
   const entries = rows
+    .map((e) => { const d = filingDay(e.fields && e.fields[def.dateField], off); return d && d !== e.eventDate ? { ...e, eventDate: d, period: d.slice(0, 7) } : e; })
     .filter((e) => (!period || e.period === period) && (!from || str(e.eventDate) >= from) && (!to || str(e.eventDate) < to))
     .filter((e) => (typeof ctx.filter === "function" ? ctx.filter(e) : true))
     .sort((a, b) => str(b.eventDate).localeCompare(str(a.eventDate)) || str(b.recordedAt).localeCompare(str(a.recordedAt)));
