@@ -5336,7 +5336,32 @@
     }
     paint();
   }
+  /* Knowledge Base library: when the keyboard opens, WKWebView pans the whole page to keep the focused
+   * field in view, and the overlay (position:fixed; inset:0, laid out against the LAYOUT viewport) is
+   * carried up with it: the search box and the close bar ended up under the status bar, with the text
+   * being typed cut off. The overlay now follows window.visualViewport (the part the doctor can see)
+   * while the keyboard is up, and goes back to inset:0 when it closes. No-op where the WebView resizes. */
+  var _kbVv = false, _kbVvTest = null;
+  function kbFitViewport(vv) {
+    if (vv !== undefined) _kbVvTest = vv;
+    var o = document.getElementById("sbrefOverlay"); if (!o) return;
+    vv = _kbVvTest || window.visualViewport;
+    var live = o.querySelector(".kblib-discover");
+    if (!vv || !vv.height || !live) { o.style.top = o.style.bottom = o.style.height = ""; return; }
+    var ih = window.innerHeight || vv.height, kb = ih - vv.height - (vv.offsetTop || 0);
+    if ((vv.offsetTop || 0) > 1 || kb > 80) { o.style.top = Math.round(vv.offsetTop || 0) + "px"; o.style.bottom = "auto"; o.style.height = Math.round(vv.height) + "px"; }
+    else { o.style.top = o.style.bottom = o.style.height = ""; }
+  }
+  function kbBindViewport() {
+    if (_kbVv || !window.visualViewport) return;
+    _kbVv = true;
+    var f = function () { kbFitViewport(undefined); };
+    try { window.visualViewport.addEventListener("resize", f); window.visualViewport.addEventListener("scroll", f); } catch (e) {}
+    document.addEventListener("focusout", function () { setTimeout(f, 60); }, true);
+  }
+  window.SMD_kbFitViewport = kbFitViewport;
   function kbRenderLibrary() {
+    kbBindViewport();
     var body = document.getElementById("sbrefBody"); if (!body) return;
     body.scrollTop = 0;
     body.className = "sbref-body";
