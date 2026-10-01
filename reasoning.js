@@ -2991,7 +2991,9 @@
     var dxh = "";
     dxh += evSub("Investigations", evList(e.additionalInvestigations));
     dxh += evSub("Other differentials", evList(e.additionalDifferentials));
-    var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []);
+    // A condition listed under both "Other differentials" and mimics is shown once (under differentials).
+    var _dd = {}; (e.additionalDifferentials || []).forEach(function (x) { _dd[String(x).replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
+    var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []).filter(function (x) { return !_dd[String(x).replace(/\s+/g, " ").trim().toLowerCase()]; });
     dxh += evSub("Mimics", evList(mim));
     if (dxh) sections.push({ ic: rIco("steth"), title: "Diagnosis & workup", html: dxh });
     var rf = "";
@@ -3007,10 +3009,10 @@
     var full = "";
     full += evSub("Clinical pearls", rawUl(pearls));
     if (e.pathophysiology) full += evSub("Pathophysiology", '<p>' + medFormat(e.pathophysiology) + '</p>');
-    full += evSub("Investigations", rawUl(e.additionalInvestigations));
+    if (!(_evOmit && _evOmit.investigations)) full += evSub("Investigations", rawUl(e.additionalInvestigations));
     full += evSub("Other differentials", rawUl(e.additionalDifferentials));
     full += evSub("Mimics", rawUl(mim));
-    full += evSub("Red flags", rawUl(e.redFlags));
+    if (!(_evOmit && _evOmit.redFlags)) full += evSub("Red flags", rawUl(e.redFlags));
     full += evSub("Pitfalls", rawUl(e.pitfalls));
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
@@ -3570,11 +3572,16 @@
   }
   var EV_BUILDERS = { harrison: evHarrisonSrc, idsa: evIdsaSrc, sanford: evSanfordSrc };
   // render ALL available sources for a disease, stacked (Harrison first/primary).
+  /* Sections the disease reader already prints in "At a glance" (Red flags, Investigations): the full
+   * reference below leaves them out instead of repeating every item a second time. */
+  var _evOmit = null;
   function evAllSourcesHTML(id, opts) {
     opts = opts || {};
     var html = "", any = false;
     ["harrison", "idsa", "sanford"].forEach(function (k) {
-      var src; try { src = EV_BUILDERS[k](id); } catch (e) { src = null; }
+      var src; _evOmit = opts.omit || null;
+      try { src = EV_BUILDERS[k](id); } catch (e) { src = null; }
+      _evOmit = null;
       if (!src) return;
       src.srcKey = k;
       html += evViewerHTML(src, { expanded: !!opts.expanded && k === "harrison" });
@@ -4302,6 +4309,25 @@
     } catch (e) { return false; }
   }
 
+  /* Nothing on a disease page is said twice (owner, 2026-10-01). The source data sometimes lists the same
+   * sentence under two headings (e.g. Investigations and Management); the first occurrence stays, later
+   * copies are removed, and a list (with its sub-heading) left empty goes too. */
+  function kbDedupeReader(el) {
+    try {
+      var seen = {}, norm = function (n) { return (n.textContent || "").replace(/\s+/g, " ").trim().toLowerCase(); };
+      [].slice.call(el.querySelectorAll("li")).forEach(function (li) {
+        var t = norm(li); if (t.length < 25) return;
+        if (seen[t]) li.parentNode.removeChild(li); else seen[t] = 1;
+      });
+      [].slice.call(el.querySelectorAll("ul,ol")).forEach(function (l) {
+        if (l.querySelector("li")) return;
+        var h = l.previousElementSibling;
+        if (h && /(^|\s)(ev-subh|dx-mgmt-sec)(\s|$)/.test(h.className)) h.parentNode.removeChild(h);
+        var box = l.parentNode; l.parentNode.removeChild(l);
+        if (box && /^(DETAILS|SECTION)$/.test(box.tagName) && !box.querySelector("li,p")) box.parentNode.removeChild(box);
+      });
+    } catch (e) {}
+  }
   function openDiseaseRef(id, opts) {
     kbSaveList("recent", [id].concat(kbReadList("recent").filter(function (x) { return x !== id; })).slice(0, 12));
     try { if (window.SMD_KU) SMD_KU.emit("read", id); } catch (e) {}   // KU: reading clinical content
@@ -4327,6 +4353,22 @@
          + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + medFormat(dm.dispo) + '</p>' : '')
          + (dm && dm.src ? '<div class="dx-mgmt-src">Source: ' + esc(dm.src) + '</div>' : ''))
       : "";
+    /* ONE management place per disease page (owner, 2026-10-01: "keep only one management page, either the
+     * collapse or the open management page"):
+     *   - infective with a stewardship case (SYNDROMES): the "Open full stewardship page" button only;
+     *   - infective reference disease: the numbered Management section in the body (mgmtHtml) only;
+     *   - non-infective: this collapse only. It carries what the separate management page added (how to
+     *     confirm, score calculators, disposition, source); investigations and red flags are already above. */
+    var mgmtFold = "";
+    if (!syn && !refInf) {
+      var mfx = "";
+      if (dm && dm.dx) mfx += '<p><b>How to confirm.</b> ' + medFormat(dm.dx) + '</p>';
+      if (briefTx && briefTx.length) mfx += '<ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ol>';
+      mfx += scoreChipsBlock({ id: id, name: name });
+      if (dm && dm.dispo) mfx += '<p><b>Disposition.</b> ' + medFormat(dm.dispo) + '</p>';
+      if (dm && dm.src) mfx += '<p class="dx-mgmt-src">Source: ' + esc(dm.src) + '</p>';
+      if (mfx) mgmtFold = '<details class="dx-reader-mgmt"><summary>Management' + DX_CHEV + '</summary>' + mfx + '</details>';
+    }
     var el = root.querySelector("#dxMgmt");
     if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
     el.className = "dx-mgmt dx-reader";
@@ -4344,14 +4386,14 @@
           (reason ? '<p>' + medFormat(reason) + '</p>' : '') +
           (H && H.redFlags && H.redFlags.length ? '<section class="dx-reader-alert"><h4>Red flags</h4>' + evList(H.redFlags, "danger") + '</section>' : '') +
           (H && H.additionalInvestigations && H.additionalInvestigations.length ? '<details><summary>Investigations' + DX_CHEV + '</summary>' + evList(H.additionalInvestigations) + '</details>' : '') +
-          (briefTx && briefTx.length && !(refInf && briefTx) ? '<details><summary>Management' + DX_CHEV + '</summary><ul>' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join('') + '</ul></details>' : '') +
+          mgmtFold +
         '</div><div class="dx-reader-content">' +
-        (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
-        mgmtHtml +
-        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
-        (refInf ? '' : '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>') +
+        mgmtHtml +   // "Why this" is not repeated here: the same sentence opens At a glance above
+        (harrisonRef(id, { expanded: true, omit: { redFlags: !!(H && H.redFlags && H.redFlags.length), investigations: !!(H && H.additionalInvestigations && H.additionalInvestigations.length) } }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
+        (syn ? '<button class="dx-select inf" data-sel="' + id + '">Open full stewardship page →</button>' : '') +
         '</div>' +
       '</div>';
+    kbDedupeReader(el);
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
