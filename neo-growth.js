@@ -88,11 +88,11 @@
     return '<div class="nh-row"><div class="nh-lbl">' + A.esc(label) + '</div><div class="nh-val" style="font-size:20px">' + A.esc(zt) + '</div><div class="nh-work">' + A.esc(xText + " on " + (res.chart ? res.chart.name : "")) + (res.interpolated ? A.esc(" (between whole PMA weeks: row values interpolated by day)") : "") + "</div></div>";
   }
   function birthOut(A, doc, d) {
-    var sx = sexKey(d); if (!sx) return A.note("Select the sex in the baby record.");
-    if (d.gaDays == null) return A.note("Enter gestation at birth in the baby record.");
+    var sx = sexKey(d); if (!sx) return A.note("Choose Boy or Girl in the baby details at the top.");
+    if (d.gaDays == null) return A.note("Add the weeks of pregnancy at birth in the baby details at the top.");
     var h = "", bw = d.birthWeightG, lines = [];
     if (bw != null) { var r = atBirth(doc, d.gaDays, sx, "weight", bw / 1000); h += zRow(A, "Birth weight", r, bw + " g"); if (r && r.z != null) lines.push("Result: birth weight z " + r2(r.z)); }
-    else h += A.note("Enter the birth weight in the baby record.", "info");
+    else h += A.note("Add the birth weight in the baby details at the top.", "info");
     if (num(S.len) != null) h += zRow(A, "Length at birth", atBirth(doc, d.gaDays, sx, "length", num(S.len)), num(S.len) + " cm");
     if (num(S.hc) != null) h += zRow(A, "Head circumference at birth", atBirth(doc, d.gaDays, sx, "hc", num(S.hc)), num(S.hc) + " cm");
     var ch = null; (doc.charts || []).forEach(function (c) { var b = c.sexes && c.sexes[sx] && c.sexes[sx].weight; if (c.x === "ga_at_birth" && b) { var iw = b.columns.indexOf("ga_wk"); if (b.table.some(function (r) { return r[iw] === Math.floor(d.gaDays / 7); })) ch = c; } });
@@ -101,7 +101,7 @@
     return h;
   }
   function pnOut(A, doc, d) {
-    var sx = sexKey(d); if (!sx) return A.note("Select the sex in the baby record.");
+    var sx = sexKey(d); if (!sx) return A.note("Choose Boy or Girl in the baby details at the top.");
     if (d.pmaDays == null) return A.note("Enter gestation and date of birth for PMA.");
     var h = "";
     if (d.weightG != null) h += zRow(A, "Weight", postnatal(doc, d.pmaDays, sx, "weight", d.weightG / 1000), d.weightG + " g");
@@ -112,7 +112,7 @@
   function whoOut(A, d) {
     var K = G.SMD_KITS; if (!K || !K._growth) return A.noData("the WHO growth engine");
     if (!WHO) return '<div class="nh-none">Loading WHO tables…</div>';
-    if (!d.sex || d.pnaDays == null) return A.note("Enter sex and date of birth in the baby record.");
+    if (!d.sex || d.pnaDays == null) return A.note("Add Boy or Girl and the date of birth in the baby details at the top.");
     var ageDays = d.pnaDays, usedCorr = false;
     if (S.useCorrected && d.corrected && !d.corrected.beforeTerm) { ageDays = d.corrected.days; usedCorr = true; }
     else if (S.useCorrected && d.corrected && d.corrected.beforeTerm) return A.note("Before term: use the preterm postnatal chart (PMA) instead of WHO.", "info");
@@ -159,12 +159,12 @@
     el.innerHTML = '<section class="nh-card"><div class="nh-none">Loading…</div></section>';
     Promise.all([A.dataOrNull("growth-preterm"), A.dataOrNull("milestones"), A.dataOrNull("reflexes")]).then(function (fs) {
       var gp = fs[0], ms = fs[1], rx = fs[2], d = A.neo(), esc = A.esc;
-      var tabs = [["birth", "At birth"], ["pn", "Preterm"], ["who", "WHO 0-5 y"], ["vel", "Velocity"], ["ms", "Milestones"], ["rx", "Reflexes"]];
-      var inputs = (S.tab === "birth" || S.tab === "pn" || S.tab === "who") ? '<div class="nh-grid"><label>Length<span class="nh-u"><input inputmode="decimal" data-gr="len" value="' + esc(S.len) + '"><span>cm</span></span></label><label>Head circ.<span class="nh-u"><input inputmode="decimal" data-gr="hc" value="' + esc(S.hc) + '"><span>cm</span></span></label></div>' +
-        (S.tab === "who" ? '<label class="nh-2cl" style="flex-direction:row"><input type="checkbox" data-gr="useCorrected"' + (S.useCorrected ? " checked" : "") + "> Use corrected age for a preterm baby</label>" : "") + '<div class="nh-work">Weight comes from the baby record (grams).</div>' :
-        S.tab === "vel" ? '<div class="nh-grid"><label>Earlier weight<span class="nh-u"><input inputmode="decimal" data-gr="w1" value="' + esc(S.w1) + '"><span>g</span></span></label><label>on day<span class="nh-u"><input inputmode="numeric" data-gr="d1" value="' + esc(S.d1) + '"></span></label><label>Later weight<span class="nh-u"><input inputmode="decimal" data-gr="wn" value="' + esc(S.wn) + '"><span>g</span></span></label><label>on day<span class="nh-u"><input inputmode="numeric" data-gr="dn" value="' + esc(S.dn) + '"></span></label></div>' : "";
-      el.innerHTML = '<section class="nh-card"><h3>Growth ' + (gp ? A.badge(gp) : "") + '</h3><div class="nh-scroll"><span class="nh-seg" role="group" aria-label="Growth tool" style="min-width:520px">' + tabs.map(function (t) { return '<button type="button" data-gr-tab="' + t[0] + '" aria-pressed="' + (S.tab === t[0]) + '">' + t[1] + "</button>"; }).join("") + "</span></div>" + inputs + '<div data-gr-out="1"></div>' + (S.tab === "birth" || S.tab === "vel" ? A.actionsHtml("gr") : "") +
-        (S.tab === "birth" || S.tab === "pn" ? '<div class="nh-foot">z between the published SD columns is read by linear interpolation (this app\'s method).</div>' : "") + "</section>";
+      var tabs = [["birth", "Size at birth"], ["pn", "Preterm chart"], ["who", "Chart 0 to 5 years"], ["vel", "Weight gain"], ["ms", "Milestones"], ["rx", "Reflexes"]];
+      var inputs = (S.tab === "birth" || S.tab === "pn" || S.tab === "who") ? '<div class="nh-grid"><label>Length<span class="nh-u"><input inputmode="decimal" data-gr="len" value="' + esc(S.len) + '"><span>cm</span></span></label><label>Head size (around)<span class="nh-u"><input inputmode="decimal" data-gr="hc" value="' + esc(S.hc) + '"><span>cm</span></span></label></div>' +
+        (S.tab === "who" ? '<label class="nh-2cl" style="flex-direction:row"><input type="checkbox" data-gr="useCorrected"' + (S.useCorrected ? " checked" : "") + "> Use corrected age (for a baby born early)</label>" : "") + '<div class="nh-work">Weight comes from the baby details at the top (grams).</div>' :
+        S.tab === "vel" ? '<div class="nh-grid"><label>First weight<span class="nh-u"><input inputmode="decimal" data-gr="w1" value="' + esc(S.w1) + '"><span>g</span></span></label><label>on day<span class="nh-u"><input inputmode="numeric" data-gr="d1" value="' + esc(S.d1) + '"></span></label><label>Latest weight<span class="nh-u"><input inputmode="decimal" data-gr="wn" value="' + esc(S.wn) + '"><span>g</span></span></label><label>on day<span class="nh-u"><input inputmode="numeric" data-gr="dn" value="' + esc(S.dn) + '"></span></label></div>' : "";
+      el.innerHTML = '<section class="nh-card"><h3>Growth ' + (gp ? A.badge(gp) : "") + '</h3><div class="nh-tabs" role="group" aria-label="Growth tool">' + tabs.map(function (t) { return '<button type="button" data-gr-tab="' + t[0] + '" aria-pressed="' + (S.tab === t[0]) + '">' + t[1] + "</button>"; }).join("") + "</div>" + inputs + '<div data-gr-out="1"></div>' + (S.tab === "birth" || S.tab === "vel" ? A.actionsHtml("gr") : "") +
+        (S.tab === "birth" || S.tab === "pn" ? '<div class="nh-foot">Centiles between the published columns are read in a straight line between them (this app\'s method).</div>' : "") + "</section>";
       function paint() {
         d = A.neo(); var o = el.querySelector("[data-gr-out]");
         o.innerHTML = S.tab === "birth" ? (gp ? birthOut(A, gp, d) : A.noData("a preterm size chart")) : S.tab === "pn" ? (gp ? pnOut(A, gp, d) : A.noData("a preterm growth chart")) : S.tab === "who" ? whoOut(A, d) : S.tab === "vel" ? (gp ? velOut(A, gp) : A.noData("growth velocity")) : S.tab === "ms" ? msOut(A, ms, d) : rxOut(A, rx);

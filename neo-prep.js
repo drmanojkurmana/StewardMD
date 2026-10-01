@@ -102,21 +102,21 @@
     var o = r.pick;
     if (!o) return h + A.noData("a presentation that matches " + esc(S.unit || "this unit"));
     var p = o.p;
-    h += '<div class="nh-row"><div class="nh-lbl">1. Vial</div><div class="nh-val" style="font-size:19px">' + esc(presTxt(p)) + "</div>" + A.srcLine(doc, p) + "</div>";
+    h += '<div class="nh-row"><div class="nh-lbl">1. Take this vial</div><div class="nh-val" style="font-size:19px">' + esc(presTxt(p)) + "</div>" + A.srcLine(doc, p) + "</div>";
     lines.push("Dose: " + fmtN(num(S.dose)) + " " + S.unit, "Vial: " + presTxt(p));
     if (o.how === "reconstituted") {
       var rc = o.recon;
-      h += '<div class="nh-row"><div class="nh-lbl">2. Reconstitute</div><div class="nh-val" style="font-size:19px">Add ' + esc(fmtN(rc.add_ml)) + " mL " + esc(rc.diluent || "") + "</div><div class=\"nh-work\">Gives " + esc(fmtN(rc.final_v) + " " + (rc.final_unit || p.unit) + " per " + (rc.final_per_ml && rc.final_per_ml !== 1 ? fmtN(rc.final_per_ml) + " " : "") + "mL") + "</div>" + A.srcLine(doc, rc) + "</div>";
+      h += '<div class="nh-row"><div class="nh-lbl">2. Mix the powder (reconstitute)</div><div class="nh-val" style="font-size:19px">Add ' + esc(fmtN(rc.add_ml)) + " mL " + esc(rc.diluent || "") + "</div><div class=\"nh-work\">Gives " + esc(fmtN(rc.final_v) + " " + (rc.final_unit || p.unit) + " per " + (rc.final_per_ml && rc.final_per_ml !== 1 ? fmtN(rc.final_per_ml) + " " : "") + "mL") + "</div>" + A.srcLine(doc, rc) + "</div>";
       lines.push("Reconstitute: add " + fmtN(rc.add_ml) + " mL " + (rc.diluent || "") + " to give " + fmtN(rc.final_v) + " " + (rc.final_unit || p.unit) + "/" + (rc.final_per_ml && rc.final_per_ml !== 1 ? fmtN(rc.final_per_ml) : "") + "mL");
     } else if (o.how === "solution") {
-      h += '<div class="nh-row"><div class="nh-lbl">2. Concentration</div><div class="nh-work">' + esc(fmtN(o.conc) + " " + S.unit + " per mL (solution as supplied)") + "</div></div>";
-    } else h += '<div class="nh-row"><div class="nh-lbl">2. Reconstitute</div>' + A.noData("reconstituting this vial") + "</div>";
+      h += '<div class="nh-row"><div class="nh-lbl">2. Strength (already a liquid)</div><div class="nh-work">' + esc(fmtN(o.conc) + " " + S.unit + " per mL (solution as supplied)") + "</div></div>";
+    } else h += '<div class="nh-row"><div class="nh-lbl">2. Mix the powder (reconstitute)</div>' + A.noData("reconstituting this vial") + "</div>";
     if (o.conc) {
       h += '<div class="nh-row"><div class="nh-lbl">3. Draw up</div><div class="nh-val">' + esc(fmtN(o.drawR.v)) + ' mL</div><div class="nh-work">' + esc(fmtN(num(S.dose)) + " " + S.unit + " / " + fmtN(o.conc) + " " + S.unit + "/mL = " + fmtN(o.draw) + " mL, " + o.drawR.rule + (o.err ? "; rounding changes the dose by " + (Math.round(o.err * 1000) / 10) + "%" : "")) + "</div></div>";
       lines.push("Draw up: " + fmtN(o.drawR.v) + " mL (" + fmtN(o.conc) + " " + S.unit + "/mL; " + o.drawR.rule + ")");
     }
-    if (o.vials != null) { h += '<div class="nh-row"><div class="nh-lbl">Vials needed</div><div class="nh-val" style="font-size:19px">' + o.vials + "</div></div>"; lines.push("Vials: " + o.vials); }
-    else h += '<div class="nh-row"><div class="nh-lbl">Vials needed</div>' + A.noData("the volume in one vial") + "</div>";
+    if (o.vials != null) { h += '<div class="nh-row"><div class="nh-lbl">How many vials</div><div class="nh-val" style="font-size:19px">' + o.vials + "</div></div>"; lines.push("Vials: " + o.vials); }
+    else h += '<div class="nh-row"><div class="nh-lbl">How many vials</div>' + A.noData("the volume in one vial") + "</div>";
     if (r.dilute && !r.dilute.ok) {
       h += '<div class="nh-row"><div class="nh-lbl">4. Dilute before giving</div><div class="nh-val" style="font-size:19px">Make up to ' + esc(fmtN(r.dilute.total.v)) + " mL</div><div class=\"nh-work\">" + esc("Add " + fmtN(r.dilute.add.v) + " mL so the concentration is at most " + fmtN(r.dilute.maxC) + " " + S.unit + "/mL") + "</div>" + A.srcLine(doc, r.dilute.src) + "</div>";
       lines.push("Dilute: make up to " + fmtN(r.dilute.total.v) + " mL (max " + fmtN(r.dilute.maxC) + " " + S.unit + "/mL)");
@@ -134,13 +134,13 @@
     if (opts && opts.drug) { S.id = opts.drug; if (opts.dose != null) S.dose = String(opts.dose); if (opts.unit) S.unit = opts.unit; S.pickIdx = null; opts.drug = null; }
     el.innerHTML = '<section class="nh-card"><div class="nh-none">Loading…</div></section>';
     A.dataOrNull("prep").then(function (doc) {
-      if (!doc || !(doc.drugs || []).length) { el.innerHTML = '<section class="nh-card"><h3>Preparation</h3>' + A.noData("preparation") + "</section>"; return; }
+      if (!doc || !(doc.drugs || []).length) { el.innerHTML = '<section class="nh-card"><h3>Prepare a dose</h3>' + A.noData("preparation") + "</section>"; return; }
       var drug = null; (doc.drugs || []).forEach(function (x) { if (x.id === S.id) drug = x; });
       var units = {}; if (drug) (drug.presentations || []).forEach(function (p) { if (conv(1, p.unit, "mg") != null) { units.mg = 1; units.mcg = 1; } else units[p.unit] = 1; });
       if (drug && !S.unit) S.unit = Object.keys(units)[0] || "mg";
-      el.innerHTML = '<section class="nh-card"><h3>Preparation ' + A.badge(doc) + "</h3>" +
-        '<label>Drug<select data-prep="id"><option value="">Choose a drug</option>' + doc.drugs.map(function (x) { return '<option value="' + A.esc(x.id) + '"' + (x.id === S.id ? " selected" : "") + ">" + A.esc(x.name) + "</option>"; }).join("") + "</select></label>" +
-        (drug ? '<div class="nh-grid"><label>Dose<span class="nh-u"><input inputmode="decimal" data-prep="dose" value="' + A.esc(S.dose) + '" placeholder="per dose"></span></label><label>Unit<select data-prep="unit">' + Object.keys(units).map(function (u) { return '<option' + (u === S.unit ? " selected" : "") + ">" + A.esc(u) + "</option>"; }).join("") + "</select></label></div>" +
+      el.innerHTML = '<section class="nh-card"><h3>Prepare a dose ' + A.badge(doc) + "</h3>" +
+        '<label>Which drug?<select data-prep="id"><option value="">Choose a drug</option>' + doc.drugs.map(function (x) { return '<option value="' + A.esc(x.id) + '"' + (x.id === S.id ? " selected" : "") + ">" + A.esc(x.name) + "</option>"; }).join("") + "</select></label>" +
+        (drug ? '<div class="nh-grid"><label>Dose to give<span class="nh-u"><input inputmode="decimal" data-prep="dose" value="' + A.esc(S.dose) + '" placeholder="one dose"></span></label><label>Unit<select data-prep="unit">' + Object.keys(units).map(function (u) { return '<option' + (u === S.unit ? " selected" : "") + ">" + A.esc(u) + "</option>"; }).join("") + "</select></label></div>" +
           (G.SMD_NEO_DOSE && G.SMD_NEO_DOSE.find(drug.id) && G.SMD_NEO_DOSE.find(drug.id).highAlert ? A.secondCheckHtml(drug.name) : "") +
           '<div data-prep-out="1">' + resultHtml(A, doc, drug) + "</div>" + A.actionsHtml("prep") : "") +
         '<div class="nh-foot">Check the vial in your hand against the label before drawing up.</div></section>';

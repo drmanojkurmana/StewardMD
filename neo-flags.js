@@ -44,7 +44,7 @@
   }
   /* The layer's scripts load only when the master flag is on, so a device with it off pays nothing
    * beyond this file. Order matters (the record and hub first); async=false keeps insertion order. */
-  var VER = "neo2";
+  var VER = "neo3";
   var FILES = ["neo-patient", "neo-hub", "neo-dose", "neo-prep", "neo-infusions", "neo-fluids", "neo-growth", "neo-bili", "neo-scores", "neo-ref", "neo-proc", "neo-tdm"];
   var loaded = false;
   function load() {

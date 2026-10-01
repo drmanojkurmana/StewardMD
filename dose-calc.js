@@ -413,7 +413,13 @@
     var ND = G.SMD_NEO_DOSE, N = G.SMD_NEO;
     if (!ND.loaded()) { ND.load().then(function () { render(); }, function () {}); return { html: '<div class="dc-der">Loading neonatal doses…</div>', has: false }; }
     var band = ND.find(x.n);
-    if (!band) return { html: "", has: false };
+    if (!band) {
+      // No band: the neonate rows (or "No neonatal dose on file") stand; add what the monograph itself says about newborns.
+      var st = ND.statementsFor ? ND.statementsFor(x.n) : [];
+      if (!st.length) return { html: "", has: false };
+      if (G.SMD_NEO_HUB && G.SMD_NEO_HUB.api.css) G.SMD_NEO_HUB.api.css();
+      return { html: '<div class="neo-blk" data-neo-stmt="1">' + ND.stmtHtml(st, !res.rows.length) + "</div>", has: false, after: true };
+    }
     // The band table needs the baby record (GA, date of birth); weight comes from here if the record has none.
     var rec = N.get(); if (!rec.weightG && num(S.p.weight)) N.fromPatient({ weight: S.p.weight, sex: S.p.sex });
     var d = N.derived();
@@ -425,13 +431,15 @@
   function resultHtml() {
     var x = S.drug, strict = neoOn(), res = compute(x, strict ? withNeo(S.p) : S.p), h = '<section class="dc-card" aria-live="polite"><div class="dc-drug"><b>' + esc(x.n) + '</b><button class="dc-chg" data-dc="change">Change drug</button></div><div class="dc-cls">' + esc(x.c) + "</div>";
     if (res.errors) return h + res.errors.map(function (e) { return '<div class="dc-err">' + esc(e) + "</div>"; }).join("") + "</section>";
+    var nb = null;
     if (res.strictNeo) {
-      var nb = neoBlock(x, res);
+      nb = neoBlock(x, res);
       if (nb.has) return h + nb.html + '<div class="dc-foot">Neonate: the neonatal band table replaces the monograph rows. Decision support: verify before prescribing.</div></section>';
-      if (nb.html) h += nb.html;
+      if (nb.html && !nb.after) h += nb.html;
     }
     if (res.avoid) h += '<div class="dc-avoid">Avoid or do not use at this ' + (res.renal.band && res.renal.band.avoid ? "kidney function" : "liver class") + ": read the note below.</div>";
     res.notes.forEach(function (n) { h += '<div class="dc-note">' + esc(n) + "</div>"; });
+    if (nb && nb.after) h += nb.html;   // the monograph's newborn statements, under "No neonatal dose on file"
     if (!res.weightBased) h += '<span class="dc-pill">Not weight-based</span>';
     res.rows.forEach(function (row) {
       h += '<div class="dc-row"><div class="dc-ctx">' + esc(row.row.ctx || "Dose") + (row.row.rt ? " · " + esc(row.row.rt) : "") + "</div>";
