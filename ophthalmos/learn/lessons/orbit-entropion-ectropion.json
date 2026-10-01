@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Lids that turn in or out",
     "hi": "अंदर या बाहर मुड़ी पलकें"
@@ -13,22 +18,21 @@
     "hi": "[[entropion]] में पलक का किनारा अंदर मुड़ता है और बाल आँख से रगड़ते हैं। [[ectropion]] में पलक बाहर मुड़ती है और आँख से पानी आता है।"
   },
   "see": {
-    "diagram": "diagrams/orbit-entropion-ectropion.svg",
-    "w": 480,
-    "h": 260,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of three lower lids seen from the side, each resting against the curve of the eye on its right. Left: a normal lid with its lashes pointing away. Middle: the lid edge rolls in and the lashes touch the eye, with a red mark where they rub. Right: the lid falls away from the eye and its red inner lining shows. Blue tear drops run down the cheek.",
-      "hi": "बगल से देखी गई तीन निचली पलकों का चित्र, हर एक अपनी दाईं ओर आँख की गोलाई से सटी है। बाएँ: सामान्य पलक, बाल आँख से दूर। बीच में: पलक का किनारा अंदर लुढ़का है और बाल आँख को छूते हैं, जहाँ रगड़ है वहाँ लाल निशान है। दाएँ: पलक आँख से दूर गिरी है, उसकी लाल अंदरूनी परत दिखती है, और आँसू की नीली बूँदें गाल पर बहती हैं।"
+      "en": "Three side views of the same eye. Left: a normal lower lid, with its lashes pointing out and down. Middle: the lower lid edge is rolled inward, so its lashes rub on the eye. Right: the lower lid sags away from the eye. Its red inner lining shows, and tears run down the cheek.",
+      "hi": "एक ही आँख के तीन बगल के दृश्य। बाएँ: सामान्य निचली पलक, जिसके बाल बाहर और नीचे की ओर हैं। बीच में: निचली पलक का किनारा अंदर मुड़ा है, इसलिए उसके बाल आँख पर रगड़ते हैं। दाएँ: निचली पलक आँख से दूर लटक गई है। उसकी लाल भीतरी परत दिखती है, और आँसू गाल पर बहते हैं।"
     },
     "caption": {
       "en": "Normal lid, then entropion (the lashes rub the cornea), then ectropion (the lid falls away and the eye waters).",
       "hi": "सामान्य पलक, फिर एन्ट्रोपियन (बाल कॉर्निया से रगड़ते हैं), फिर एक्ट्रोपियन (पलक दूर गिरती है और आँख से पानी आता है)।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.075,
-        "y": 0.4,
+        "x": 0.12,
+        "y": 0.52,
         "label": {
           "en": "Normal lashes",
           "hi": "सामान्य बाल"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.5125,
-        "y": 0.308,
+        "x": 0.47,
+        "y": 0.453,
         "label": {
           "en": "Lashes on the cornea",
           "hi": "कॉर्निया पर बाल"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.4625,
-        "y": 0.408,
+        "x": 0.43,
+        "y": 0.533,
         "label": {
           "en": "Edge turned in",
           "hi": "अंदर मुड़ा किनारा"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.7375,
-        "y": 0.423,
+        "x": 0.82,
+        "y": 0.6,
         "label": {
           "en": "Lid away from the eye",
           "hi": "आँख से दूर पलक"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.8125,
-        "y": 0.654,
+        "x": 0.87,
+        "y": 0.533,
         "label": {
           "en": "Red inner lining",
           "hi": "लाल अंदरूनी परत"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.7125,
-        "y": 0.6,
+        "x": 0.89,
+        "y": 0.8,
         "label": {
           "en": "Tears spill",
           "hi": "आँसू बहते हैं"
@@ -98,6 +102,10 @@
           "hi": "आँसू निकलने वाले छेद तक नहीं पहुँचते। वे गाल पर बह जाते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-entropion-ectropion.webp",
+    "more": [
+      "orbit-entropion-ectropion"
     ]
   },
   "why": {

@@ -3,7 +3,12 @@
   "unit": "retina",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The retina and the macula",
     "hi": "रेटिना और मैक्युला"
@@ -13,22 +18,21 @@
     "hi": "[[retina]] आँख के पीछे नसों की एक पतली परत है। इसका बीच का हिस्सा, [[macula]], आपको साफ़ और रंगीन नज़र देता है।"
   },
   "see": {
-    "diagram": "diagrams/retina-layers.svg",
-    "w": 480,
-    "h": 320,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram of the retina in cross-section. Light arrives from the top. Layers of nerve cells lie on top, and a dip in the middle marks the fovea. A row of rods and cones sits on a dark cell layer. Under it are round blood vessels of the choroid and the white sclera.",
-      "hi": "रेटिना का आड़ा कटा चित्र। रोशनी ऊपर से आती है। ऊपर नस-कोशिकाओं की परतें हैं, बीच का गड्ढा फ़ोविया है, और रॉड व कोन की एक पंक्ति गहरे रंग की कोशिकाओं की परत पर टिकी है। उसके नीचे कोरॉइड की गोल खून की नलियाँ और सफ़ेद स्क्लेरा है।"
+      "en": "A slice through the retina at the macula. Light comes in from the top. A small blood vessel sits near the surface. Below it lie the nerve fibres and a row of ganglion cells. In the middle the surface dips to form the fovea. Rods and cones stand on a dark pigment layer. Under that are the choroid with its round vessels and the white sclera.",
+      "hi": "मैक्युला पर रेटिना का एक काट। रोशनी ऊपर से आती है। सतह के पास एक छोटी रक्त नली है। उसके नीचे नर्व फ़ाइबर और गैंग्लियन कोशिकाओं की एक पंक्ति है। बीच में सतह नीचे धँसकर फ़ोविया बनाती है। रॉड और कोन एक गहरी रंगद्रव्य परत पर खड़े हैं। उसके नीचे गोल नलियों वाली कोरॉइड और सफ़ेद स्क्लेरा हैं।"
     },
     "caption": {
       "en": "A slice through the retina at the fovea. Light enters from the top and passes through the clear layers to the rods and cones.",
       "hi": "फ़ोविया के पास से रेटिना का एक टुकड़ा। रोशनी ऊपर से आती है और साफ़ परतों से होकर रॉड और कोन तक पहुँचती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.75,
-        "y": 0.0625,
+        "x": 0.5,
+        "y": 0.1,
         "label": {
           "en": "Incoming light",
           "hi": "आती हुई रोशनी"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.146,
-        "y": 0.209,
+        "x": 0.14,
+        "y": 0.13,
         "label": {
           "en": "Retinal blood vessel",
           "hi": "रेटिना की खून की नली"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.3125,
-        "y": 0.181,
+        "x": 0.85,
+        "y": 0.165,
         "label": {
           "en": "Nerve fibre layer",
           "hi": "नर्व फ़ाइबर लेयर"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.6875,
-        "y": 0.23,
+        "x": 0.85,
+        "y": 0.225,
         "label": {
           "en": "Ganglion cells",
           "hi": "गैंग्लियन कोशिकाएँ"
@@ -76,7 +80,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.43,
+        "y": 0.37,
         "label": {
           "en": "Fovea",
           "hi": "फ़ोविया (fovea)"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.625,
+        "x": 0.47,
+        "y": 0.56,
         "label": {
           "en": "Cones",
           "hi": "कोन (cones)"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.79,
-        "y": 0.625,
+        "x": 0.15,
+        "y": 0.5,
         "label": {
           "en": "Rods",
           "hi": "रॉड (rods)"
@@ -111,8 +115,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.7125,
+        "x": 0.85,
+        "y": 0.63,
         "label": {
           "en": "RPE",
           "hi": "RPE (पिगमेंट वाली परत)"
@@ -123,8 +127,8 @@
         }
       },
       {
-        "x": 0.6625,
-        "y": 0.84,
+        "x": 0.55,
+        "y": 0.74,
         "label": {
           "en": "Choroid",
           "hi": "कोरॉइड (choroid)"
@@ -135,8 +139,8 @@
         }
       },
       {
-        "x": 0.3125,
-        "y": 0.94,
+        "x": 0.5,
+        "y": 0.87,
         "label": {
           "en": "Sclera",
           "hi": "स्क्लेरा (sclera)"
@@ -148,8 +152,10 @@
       }
     ],
     "more": [
+      "retina-layers",
       "fovea-section"
-    ]
+    ],
+    "img": "learn/media/real/retina-layers.webp"
   },
   "why": {
     "steps": [

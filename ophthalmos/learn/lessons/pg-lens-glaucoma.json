@@ -3,7 +3,12 @@
   "unit": "lens-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "When the lens causes glaucoma",
     "hi": "जब लेंस से ग्लूकोमा हो"
@@ -13,22 +18,21 @@
     "hi": "सूजा हुआ लेंस एंगल बंद कर सकता है: [[phacomorphic]]। रिसता हुआ, बहुत पका लेंस खुले निकास को जाम कर सकता है: [[phacolytic]]। प्रेशर काबू में लाकर लेंस निकालने से दोनों ठीक होते हैं।"
   },
   "see": {
-    "diagram": "diagrams/lens-phacomorphic.svg",
-    "w": 480,
-    "h": 150,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Two small diagrams of the upper front of the eye. Left: a normal lens with a flat iris and an open drain. Right: a much larger, paler lens pushes the iris forward onto the drain, which is red. A red arrow shows the push.",
-      "hi": "आँख के ऊपरी अगले हिस्से के दो छोटे चित्र। बाएँ: सामान्य लेंस, सीधी आइरिस और खुला निकास। दाएँ: बहुत बड़ा, हल्के रंग का लेंस आइरिस को आगे लाल निकास पर धकेलता है। एक लाल तीर धक्का दिखाता है।"
+      "en": "Two side views through the front of the eye. Left: a normal lens with a flat iris and an open drain. Right: a swollen white lens pushes the iris forward. The iris touches the cornea and closes the drain.",
+      "hi": "आँख के आगे के हिस्से के दो बगल से दृश्य। बाएँ: सामान्य लेंस, सीधी आइरिस और खुला निकास। दाएँ: सूजा हुआ सफ़ेद लेंस आइरिस को आगे धकेलता है। आइरिस कॉर्निया से छूती है और निकास बंद कर देती है।"
     },
     "caption": {
       "en": "Left: normal lens and open angle. Right: a swollen cataract pushes the iris forward and closes the angle.",
       "hi": "बाएँ: सामान्य लेंस और खुला एंगल। दाएँ: सूजा मोतियाबिंद आइरिस को आगे धकेलकर एंगल बंद करता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.173,
-        "y": 0.25,
+        "x": 0.235,
+        "y": 0.235,
         "label": {
           "en": "Open angle",
           "hi": "खुला एंगल"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.344,
-        "y": 0.83,
+        "x": 0.32,
+        "y": 0.5,
         "label": {
           "en": "Normal lens",
           "hi": "सामान्य लेंस"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.844,
-        "y": 0.83,
+        "x": 0.79,
+        "y": 0.5,
         "label": {
           "en": "Swollen lens",
           "hi": "सूजा लेंस"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.683,
-        "y": 0.54,
+        "x": 0.675,
+        "y": 0.45,
         "label": {
           "en": "Iris pushed forward",
           "hi": "आगे धकेली आइरिस"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.673,
-        "y": 0.25,
+        "x": 0.705,
+        "y": 0.26,
         "label": {
           "en": "Closed angle",
           "hi": "बंद एंगल"
@@ -86,6 +90,10 @@
           "hi": "अब आइरिस मेशवर्क पर टिकी है: सेकेंडरी [[angle-closure]]।"
         }
       }
+    ],
+    "img": "learn/media/real/lens-phacomorphic.webp",
+    "more": [
+      "lens-phacomorphic"
     ]
   },
   "why": {

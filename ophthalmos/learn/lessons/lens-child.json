@@ -3,7 +3,12 @@
   "unit": "lens",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "A white pupil in a child",
     "hi": "बच्चे में सफ़ेद पुतली"
@@ -13,22 +18,21 @@
     "hi": "बच्चे में सफ़ेद पुतली या रेड रिफ़्लेक्स न होना इमरजेंसी है। यह [[cataract]] या आँख का कैंसर हो सकता है। बचपन में नज़र रुकने से [[amblyopia]] होता है।"
   },
   "see": {
-    "diagram": "diagrams/lens-bruckner.svg",
-    "w": 480,
-    "h": 220,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "A child's two eyes seen from the front, with a brow line above and a nose line between them. One pupil glows orange-red. The other pupil is white.",
-      "hi": "आगे से देखी गई एक बच्चे की दोनों आँखें, ऊपर भौंह की रेखा और बीच में नाक की रेखा। एक पुतली नारंगी-लाल चमकती है। दूसरी पुतली सफ़ेद है।"
+      "en": "A young child's face lit from the front. The child looks straight ahead. The right pupil glows with a bright orange-red reflex. The left pupil looks cloudy white with no red glow at all.",
+      "hi": "सामने से रोशन एक छोटे बच्चे का चेहरा। बच्चा बिल्कुल सीधा देख रहा है। दाहिनी पुतली चमकीले नारंगी-लाल रिफ़्लेक्स से चमकती है। बाईं पुतली बिना किसी लाल चमक के धुंधली सफ़ेद दिखती है।"
     },
     "caption": {
       "en": "Red reflex test in a child, both eyes at once. One pupil glows red; the other is white.",
       "hi": "बच्चे में रेड रिफ़्लेक्स जाँच, दोनों आँखें एक साथ। एक पुतली लाल चमकती है; दूसरी सफ़ेद है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.3125,
-        "y": 0.5,
+        "x": 0.28,
+        "y": 0.505,
         "label": {
           "en": "Normal red glow",
           "hi": "सामान्य लाल चमक"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.6875,
-        "y": 0.5,
+        "x": 0.72,
+        "y": 0.505,
         "label": {
           "en": "White pupil",
           "hi": "सफ़ेद पुतली"
@@ -52,7 +56,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.68,
+        "y": 0.6,
         "label": {
           "en": "Compare the two",
           "hi": "दोनों की तुलना"
@@ -63,7 +67,9 @@
         }
       }
     ],
+    "img": "learn/media/real/lens-bruckner.webp",
     "more": [
+      "lens-bruckner",
       "cataract-mature"
     ]
   },

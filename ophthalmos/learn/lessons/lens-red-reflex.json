@@ -3,7 +3,12 @@
   "unit": "lens",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Checking the red reflex",
     "hi": "रेड रिफ़्लेक्स की जाँच"
@@ -13,22 +18,21 @@
     "hi": "हाथ भर की दूरी से ऑफ़्थैल्मोस्कोप से [[pupil]] को देखें। साफ़ लेंस लाल चमकता है। मोतियाबिंद काली छाया डालता है; घना मोतियाबिंद पुतली को भूरा-सलेटी या सफ़ेद कर देता है।"
   },
   "see": {
-    "diagram": "diagrams/lens-red-reflex.svg",
-    "w": 480,
-    "h": 220,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Three eyes seen from the front. Left: the pupil glows evenly orange-red. Middle: the red glow has dark wedge shadows and a dark central dot. Right: the pupil is white with no red glow.",
-      "hi": "आगे से देखी गई तीन आँखें। बाएँ: पुतली एक-सी नारंगी-लाल चमकती है। बीच में: लाल चमक में काली फाँकों जैसी छाया और बीच में काला बिंदु है। दाएँ: पुतली सफ़ेद है, कोई लाल चमक नहीं।"
+      "en": "Three eyes seen from the front. Left: the pupil glows with a clear, even orange-red light. Middle: dark spoke shadows break up the red reflex. Right: the pupil looks chalky white with no red reflex at all.",
+      "hi": "सामने से देखी गई तीन आँखें। बाएँ: पुतली साफ़, एक-सी नारंगी-लाल रोशनी से चमकती है। बीच में: काली तीलियों जैसी छाया रेड रिफ़्लेक्स को तोड़ती है। दाएँ: पुतली बिना किसी रेड रिफ़्लेक्स के पूरी सफ़ेद दिखती है।"
     },
     "caption": {
       "en": "The red reflex: clear lens (left), cataract shadows (middle), and no reflex with a white pupil (right).",
       "hi": "रेड रिफ़्लेक्स: साफ़ लेंस (बाएँ), मोतियाबिंद की छाया (बीच में), और बिना रिफ़्लेक्स के सफ़ेद पुतली (दाएँ)।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.175,
-        "y": 0.5,
+        "x": 0.176,
+        "y": 0.495,
         "label": {
           "en": "Even red glow",
           "hi": "एक-सी लाल चमक"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.5,
+        "x": 0.496,
+        "y": 0.495,
         "label": {
           "en": "Dark shadows",
           "hi": "काली छाया"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.825,
-        "y": 0.5,
+        "x": 0.816,
+        "y": 0.495,
         "label": {
           "en": "White pupil",
           "hi": "सफ़ेद पुतली"
@@ -63,7 +67,9 @@
         }
       }
     ],
+    "img": "learn/media/real/lens-red-reflex.webp",
     "more": [
+      "lens-red-reflex",
       "cataract-mature"
     ]
   },

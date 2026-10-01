@@ -144,7 +144,9 @@
   function meta(id) { return (W.ix && W.ix.lessons && W.ix.lessons[id]) || null; }
   function allIds() { var out = []; D.learnUnits(W.ix).forEach(function (u) { out = out.concat(u.lessons); }); return out; }
   function doneCount(ids) { return ids.filter(function (id) { return D.lessonDone(st.store, id); }).length; }
-  function imgSrc(see) { return see.img ? I.imgUrl(see.img) : BASE + "learn/" + see.diagram; }
+  // A lesson picture: bundled Learn media (learn/media/...) loads beside the lessons; anything else is a deck image on the image host.
+  function picUrl(p) { return /^learn\/media\//.test(p) ? BASE + p : I.imgUrl(p); }
+  function imgSrc(see) { return see.img ? picUrl(see.img) : BASE + "learn/" + see.diagram; }
   function deckSize(see) {
     var d = see.deckItem && st.decks[see.deckItem.deck];
     if (d) for (var i = 0; i < d.items.length; i++) if (String(d.items[i].id) === String(see.deckItem.id)) return { w: d.items[i].w, h: d.items[i].h };
@@ -200,7 +202,7 @@
   function firstRun() {
     st.view = "hub"; st.onBack = null; W.again = firstRun;
     var first = W.ix && D.nextLesson(W.ix, st.store), fl = first && meta(first.id);
-    var lthumb = fl && fl.see.img ? '<img src="' + esc(I.imgUrl(fl.see.img)) + '" alt="" loading="lazy" decoding="async">' : tile("book");
+    var lthumb = fl && fl.see.img ? '<img src="' + esc(picUrl(fl.see.img)) + '" alt="" loading="lazy" decoding="async">' : tile("book");
     var tthumb = (st.cfg.tracks || []).slice(0, 3).map(function (t) {
       var d = st.decks[t.id], x = d && d.thumbs && d.thumbs[0];
       return x ? '<img src="' + esc(I.imgUrl(x.img)) + '" alt="" loading="lazy" decoding="async">' : "";

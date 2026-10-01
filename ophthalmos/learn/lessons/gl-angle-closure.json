@@ -3,7 +3,12 @@
   "unit": "glaucoma",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Acute angle closure: an eye emergency",
     "hi": "एक्यूट एंगल क्लोज़र: आँख की इमरजेंसी"
@@ -13,22 +18,21 @@
     "hi": "[[angle-closure]] में आइरिस निकास को बंद कर देती है। कुछ ही घंटों में प्रेशर बढ़ सकता है, और दर्द, लाल आँख व धुंधली नज़र होती है। उसी दिन रेफ़र करें।"
   },
   "see": {
-    "diagram": "diagrams/gl-angle-open-closed.svg",
-    "w": 480,
-    "h": 150,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Two small diagrams of the upper front of the eye. Left: the iris hangs straight and a dashed arrow runs up to an open drain. Right: the iris bows forward and touches the cornea, covering the drain, which is circled in red.",
-      "hi": "आँख के ऊपरी अगले हिस्से के दो छोटे चित्र। बाएँ: आइरिस सीधी लटकी है और एक टूटी रेखा वाला तीर खुले निकास तक जाता है। दाएँ: आइरिस आगे की ओर उभरकर कॉर्निया से छूती है और निकास को ढक देती है, जिसके चारों ओर लाल घेरा है।"
+      "en": "Two close side cuts through the front corner of the eye. Left: the iris lies flat. A wide open gap leads up to the drain, where the cornea meets the iris. Right: the outer iris bulges forward and presses on the inner cornea, covering the drain. The front chamber is shallow, and the iris edge rests on the lens.",
+      "hi": "आँख के आगे के कोने के दो पास के बगल से काट। बाएँ: आइरिस सीधी है, और एक चौड़ा खुला रास्ता निकास तक जाता है, जहाँ कॉर्निया आइरिस से मिलता है। दाएँ: आइरिस का बाहरी हिस्सा आगे उभरकर कॉर्निया के भीतर दबता है और निकास ढक देता है। आगे का कक्ष उथला है, और आइरिस का किनारा लेंस पर टिका है।"
     },
     "caption": {
       "en": "Left: an open angle. Right: a closed angle, with the iris lying on the drain.",
       "hi": "बाएँ: खुला एंगल। दाएँ: बंद एंगल, जिसमें आइरिस निकास पर टिकी है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.173,
-        "y": 0.25,
+        "x": 0.095,
+        "y": 0.38,
         "label": {
           "en": "Open drain",
           "hi": "खुला निकास"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.209,
-        "y": 0.55,
+        "x": 0.26,
+        "y": 0.427,
         "label": {
           "en": "Flat iris",
           "hi": "सीधी आइरिस"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.673,
-        "y": 0.25,
+        "x": 0.64,
+        "y": 0.373,
         "label": {
           "en": "Closed drain",
           "hi": "बंद निकास"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.677,
-        "y": 0.54,
+        "x": 0.76,
+        "y": 0.347,
         "label": {
           "en": "Bowed iris",
           "hi": "उभरी आइरिस"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.723,
-        "y": 0.8,
+        "x": 0.875,
+        "y": 0.44,
         "label": {
           "en": "Iris on lens",
           "hi": "लेंस पर आइरिस"
@@ -88,8 +92,10 @@
       }
     ],
     "more": [
+      "gl-angle-open-closed",
       "red-eye-map"
-    ]
+    ],
+    "img": "learn/media/real/gl-angle-open-closed.webp"
   },
   "why": {
     "steps": [

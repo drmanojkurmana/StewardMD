@@ -3,7 +3,12 @@
   "unit": "uveitis",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "What the slit lamp shows",
     "hi": "स्लिट लैंप में क्या दिखता है"
@@ -13,22 +18,21 @@
     "hi": "[[slit-lamp]] एंटीरियर यूवाइटिस के संकेत दिखाता है: कोशिकाएँ (cells), [[flare]], [[keratic-precipitates]], [[hypopyon]] और [[posterior-synechiae]]।"
   },
   "see": {
-    "diagram": "diagrams/ac-signs.svg",
-    "w": 400,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of the front of an eye seen through a slit lamp. A thin beam of light crosses the brown iris, with white dots floating in it. Small and large pale dots sit on the lower cornea. A white layer with a flat top fills the bottom. The pupil has a notch at the lower right.",
-      "hi": "स्लिट लैंप से दिखती आँख के अगले हिस्से का चित्र। रोशनी की पतली किरण भूरे आइरिस के ऊपर से गुज़रती है, जिसमें सफ़ेद बिंदु तैर रहे हैं। निचले कॉर्निया पर छोटे और बड़े हल्के बिंदु हैं। नीचे सपाट ऊपरी सतह वाली सफ़ेद परत है। पुतली में नीचे दाईं ओर एक खाँचा है।"
+      "en": "A red eye seen through a slit lamp. A thin beam of light crosses the front chamber. Tiny white dots float in the beam, and the beam looks misty. Small dots and larger, greasy white spots sit on the back of the cornea, lower down. A pale layer of pus lies at the bottom of the front chamber. The pupil is uneven where the iris sticks to the lens. A deep red ring circles the cornea.",
+      "hi": "स्लिट लैंप से देखी गई एक लाल आँख। रोशनी की एक पतली किरण आगे के कक्ष को पार करती है। किरण में छोटे सफ़ेद बिंदु तैरते हैं, और किरण धुंधली दिखती है। कॉर्निया के पीछे, नीचे की ओर, छोटे बिंदु और बड़े, चिकने सफ़ेद धब्बे हैं। आगे के कक्ष के तल पर मवाद की एक फीकी परत है। जहाँ आइरिस लेंस से चिपकी है, वहाँ पुतली टेढ़ी है। कॉर्निया के चारों ओर एक गहरा लाल घेरा है।"
     },
     "caption": {
       "en": "The front of the eye in anterior uveitis, as seen through a slit lamp. The signs are drawn together for teaching. Fine and mutton-fat KPs sit side by side here, but one eye usually shows one kind.",
       "hi": "स्लिट लैंप से दिखता एंटीरियर यूवाइटिस वाली आँख का अगला हिस्सा। पढ़ाने के लिए सारे संकेत एक साथ बनाए गए हैं। यहाँ बारीक और मटन-फ़ैट KPs साथ-साथ हैं, पर एक आँख में आमतौर पर एक ही तरह के होते हैं।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.328,
-        "y": 0.267,
+        "x": 0.391,
+        "y": 0.4,
         "label": {
           "en": "Cells",
           "hi": "कोशिकाएँ (cells)"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.31,
-        "y": 0.617,
+        "x": 0.35,
+        "y": 0.303,
         "label": {
           "en": "Flare",
           "hi": "फ़्लेयर (flare)"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.463,
-        "y": 0.717,
+        "x": 0.309,
+        "y": 0.673,
         "label": {
           "en": "Fine KPs",
           "hi": "बारीक KPs"
@@ -63,7 +67,7 @@
         }
       },
       {
-        "x": 0.563,
+        "x": 0.45,
         "y": 0.703,
         "label": {
           "en": "Mutton-fat KPs",
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.84,
+        "x": 0.509,
+        "y": 0.788,
         "label": {
           "en": "Hypopyon",
           "hi": "हाइपोपियॉन (hypopyon)"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.558,
-        "y": 0.569,
+        "x": 0.582,
+        "y": 0.558,
         "label": {
           "en": "Posterior synechia",
           "hi": "पोस्टीरियर साइनेकी (posterior synechia)"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.655,
-        "y": 0.142,
+        "x": 0.8,
+        "y": 0.509,
         "label": {
           "en": "Ciliary flush",
           "hi": "सिलियरी फ़्लश (ciliary flush)"
@@ -112,8 +116,10 @@
       }
     ],
     "more": [
+      "ac-signs",
       "slit-lamp-diffuse"
-    ]
+    ],
+    "img": "learn/media/real/ac-signs.webp"
   },
   "why": {
     "steps": [

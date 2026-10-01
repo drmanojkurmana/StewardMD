@@ -3,7 +3,12 @@
   "unit": "peds",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Cataract in babies",
     "hi": "बच्चों में मोतियाबिंद"
@@ -13,22 +18,21 @@
     "hi": "[[congenital-cataract]] उस समय रोशनी रोकता है जब दिमाग देखना सीख रहा होता है। घने मोतियाबिंद की सर्जरी जीवन के पहले कुछ हफ़्तों में चाहिए, फिर चश्मा और लेज़ी आई का इलाज।"
   },
   "see": {
-    "diagram": "diagrams/congenital-cataract.svg",
-    "w": 480,
-    "h": 270,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram. Left: a side view of a baby's eye. Blue rays enter from the left and hit a dense white spot in the lens. Only faint, scattered rays pass on, and no sharp point forms on the retina. Right: the front of the eye. The pupil shows a white centre with only a thin, dull red rim.",
-      "hi": "चित्र। बाईं ओर: बच्चे की आँख का बगल से दृश्य। नीली किरणें बाईं ओर से आती हैं और लेंस के घने सफ़ेद धब्बे से टकराती हैं। सिर्फ़ हल्की, बिखरी किरणें आगे जाती हैं, और रेटिना पर कोई साफ़ बिंदु नहीं बनता। दाईं ओर: आँख का सामने का हिस्सा। पुतली का बीच सफ़ेद है, और किनारे पर बस पतली, फीकी लाल पट्टी है।"
+      "en": "Left: a side cut through a baby's eye. Beams of light enter the front of the eye and hit a white, cloudy lens. The light breaks up into a spray behind the lens, so no sharp picture reaches the retina. Right: the baby's eye from the front. A round white patch fills the centre of the pupil.",
+      "hi": "बाएँ: एक शिशु की आँख का बगल से काट। रोशनी की किरणें आँख के आगे से अंदर आकर एक सफ़ेद, धुंधले लेंस से टकराती हैं। लेंस के पीछे रोशनी बिखर जाती है, इसलिए रेटिना तक कोई साफ़ तस्वीर नहीं पहुँचती। दाएँ: सामने से शिशु की आँख। पुतली के बीच में एक गोल सफ़ेद धब्बा है।"
     },
     "caption": {
       "en": "The white centre of the lens blocks the light. From the front, the red reflex is dull or lost.",
       "hi": "लेंस का सफ़ेद बीच रोशनी रोकता है। सामने से देखने पर रेड रिफ़्लेक्स फीका या गायब होता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.288,
-        "y": 0.5,
+        "x": 0.21,
+        "y": 0.453,
         "label": {
           "en": "Cloudy lens",
           "hi": "धुंधला लेंस"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.365,
-        "y": 0.4,
+        "x": 0.36,
+        "y": 0.44,
         "label": {
           "en": "Scattered light",
           "hi": "बिखरी रोशनी"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.525,
-        "y": 0.5,
+        "x": 0.49,
+        "y": 0.493,
         "label": {
           "en": "No sharp picture",
           "hi": "कोई साफ़ तस्वीर नहीं"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.817,
-        "y": 0.5,
+        "x": 0.78,
+        "y": 0.487,
         "label": {
           "en": "White centre in the pupil",
           "hi": "पुतली में सफ़ेद बीच"
@@ -76,8 +80,10 @@
       }
     ],
     "more": [
+      "congenital-cataract",
       "cataract-lens"
-    ]
+    ],
+    "img": "learn/media/real/congenital-cataract.webp"
   },
   "why": {
     "steps": [
