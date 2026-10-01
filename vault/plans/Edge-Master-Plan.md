@@ -17,7 +17,7 @@ We add a **small AI on the phone** that does one job: it turns what a doctor typ
 that StewardMD's existing tools already know how to answer**, with every proposed value carrying its
 evidence. The small AI never decides anything medical. StewardMD's calculators, drug database, ICD
 index and rules do the medicine. MaiK only explains. The doctor always confirms before anything is
-saved. The whole programme is scheduled now, in **seven waves over about 26 weeks** (section 8).
+saved. The whole programme is laid out in **seven waves, in order** (section 8); the current sprint is section 16.
 Wave 1 is **typed only, read-only, five workflows, Android 4 GB and up**. Every later wave (voice,
 ICU dictation, Scribe, prescriptions, Code Blue, languages, watch, low-end phones) is planned and
 dated here, and each project still has to pass its own gate before it reaches doctors.
@@ -26,7 +26,7 @@ dated here, and each project still has to pass its own gate before it reaches do
 
 ## 1. Scope
 
-### Wave 1 (weeks 3 to 6): five **typed, read-only** workflows
+### Wave 1 : five **typed, read-only** workflows
 
 | # | Workflow | Example | Engine that answers |
 |---|---|---|---|
@@ -36,7 +36,7 @@ dated here, and each project still has to pass its own gate before it reaches do
 | W4 | ICD candidates | "ICD for CAP with T2DM and CKD" | `SMD_ICD.localSearch` |
 | W5 | Open a module or KB topic | "open antibiogram", "loose motions in a child protocol" | `home.js` ACT map, KB |
 
-### Waves 2 to 6 (weeks 5 to 26): every other project, each with its own gate
+### Waves 2 to 6 : every other project, each with its own gate
 Voice foundation, ICU dictation, Code Blue and Sepsis voice logs, English Scribe fact log, Live Score
 Radar, Silent Safety Net, answer-as-you-type, prescription drafts, Round Mode, say-it logbook, OSCE
 examiner, Hinglish/Tenglish voice, native Telugu/Hindi, SNOMED synonyms, PHI Shield, Apple Watch and
@@ -277,82 +277,71 @@ If Edge adds no measurable benefit, **do not ship it**; Phase 0 stands alone.
 
 ---
 
-## 8. The whole programme (seven waves, about 26 weeks)
+## 8. The whole programme (seven waves, in order)
 
-Waves overlap: the next wave's build starts while the previous wave is in pilot. A wave's release
-never waits on a later wave, and a later wave never ships before its own gate. Effort assumes the
-owner plus Claude sessions, with the 2 reviewing doctors for every release. Estimates, not promises.
+No calendar dates. Waves run in this order; the next wave's build may start while the previous wave
+is in pilot. A wave's release never waits on a later wave, and nothing ships before its own gate.
+The current sprint is in section 16.
 
-```
-Week:        1   3   5   7   9   11  13  15  17  19  21  23  25
-Wave 0       ███                                                   Rules, privacy fixes, Day 1 gates
-Wave 1           ████                                              Typed router, 5 workflows
-Wave 2               █████████                                     Voice foundation, ICU, Code Blue, Sepsis
-Wave 3                       █████████                             Scribe fact log, Score Radar, Safety Net
-Wave 4                               █████████                     Rx drafts, Round Mode, Logbook, OSCE
-Wave 5                                       █████████             Languages, SNOMED, SapBERT
-Wave 6                                               █████████     Watch, 2-3 GB phones, PHI Shield, compiler
-```
-
-### Wave 0. Foundation (weeks 1 to 2)
+### Wave 0. Foundation 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 0.1 Privacy fixes | Speaker gate (`opd-emr.js:4292`, `:4257`); on-device speech APIs (10.5) | Workflow tests: patient speech never fills vitals; no audio leaves the phone when on-device is available | Week 2 |
-| 0.2 Shared parser + evidence records | ES5 module extending `INSULIN_ASK.parse`, with 2.1 records | Appendix C tests + assertion/time tests all pass | Week 2 |
-| 0.3 Rules prefill | W2 from rules only; `maik-brain.js:316` inputs; one Cockcroft-Gault; score version map | Headless UI test per calculator family | Week 2 |
+| 0.1 Privacy fixes | Speaker gate (`opd-emr.js:4292`, `:4257`); on-device speech APIs (10.5) | Workflow tests: patient speech never fills vitals; no audio leaves the phone when on-device is available | After its gate |
+| 0.2 Shared parser + evidence records | ES5 module extending `INSULIN_ASK.parse`, with 2.1 records | Appendix C tests + assertion/time tests all pass | After its gate |
+| 0.3 Rules prefill | W2 from rules only; `maik-brain.js:316` inputs; one Cockcroft-Gault; score version map | Headless UI test per calculator family | After its gate |
 | 0.4 Day 1 gates | 16 KB, process isolation, FunctionGemma grammar, dataset format, back-off, sustained load (A0) | Each gate pass/fail recorded; failing model dropped | Internal |
 | 0.5 Baseline | Score Phase 0 rules on all frozen sets | Baseline report | Internal |
-| 0.6 Other fixes | Cache API wipe, Wear OS plugin registration, `stripIndic` on sources | Unit tests | Week 2 |
+| 0.6 Other fixes | Cache API wipe, Wear OS plugin registration, `stripIndic` on sources | Unit tests | After its gate |
 
-### Wave 1. Typed router (weeks 3 to 6)
+### Wave 1. Typed router 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 1.1 Bake-off | Train both models, calibrate, score on frozen sets and devices | 7.4 met and 7.5 shows benefit | Week 3 |
-| 1.2 Runtime | `edge-runtime.js` (4.2), `edge-router.js`, `edge-grounding.js`, `capacitor-needle` | Runtime contract tests, patient-switch tests | Week 4 |
-| 1.3 Five workflows | W1 to W5 behind `smd_edge` | Pilot 2 weeks: zero unsafe acceptance, zero dead ends | Week 6 |
-| 1.4 Answer-as-you-type | Ghost result in Universal Search from W1 to W3 | Same gate as 1.3, plus keystroke latency under budget | Week 7 |
-| 1.5 MaiK pre-dispatch | Skip the `home.js:6270` pack warm-up when Edge handles the request | Fewer pack loads, no change in MaiK answers | Week 7 |
+| 1.1 Bake-off | Train both models, calibrate, score on frozen sets and devices | 7.4 met and 7.5 shows benefit | After its gate |
+| 1.2 Runtime | `edge-runtime.js` (4.2), `edge-router.js`, `edge-grounding.js`, `capacitor-needle` | Runtime contract tests, patient-switch tests | After its gate |
+| 1.3 Five workflows | W1 to W5 behind `smd_edge` | Pilot 2 weeks: zero unsafe acceptance, zero dead ends | After its gate |
+| 1.4 Answer-as-you-type | Ghost result in Universal Search from W1 to W3 | Same gate as 1.3, plus keystroke latency under budget | After its gate |
+| 1.5 MaiK pre-dispatch | Skip the `home.js:6270` pack warm-up when Edge handles the request | Fewer pack loads, no change in MaiK answers | After its gate |
 
-### Wave 2. Voice foundation and closed-set voice (weeks 5 to 10)
+### Wave 2. Voice foundation and closed-set voice 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 2.1 Voice foundation | Typed workflows by voice: on-device speech, Whisper per bounded utterance, wordsToNumbers, speaker attribution | Speech accuracy per phone tier; attribution tests; noisy-room set | Week 8 |
-| 2.2 ICU dictation | Kind `monitor` gets a local path: Edge fields to `icu.js reviewVoice()` | Units, attribution and correction tests; `parseMonitor()` untouched | Week 9 |
-| 2.3 Code Blue voice log | `logDrug`, `logShock(energyJ:)`, `logRhythm`, `logROSC` on the phone, closed choices only | Tense tests ("prepare" vs "given"), undo, noisy-room set, 100% danger set | Week 10 |
-| 2.4 Sepsis Hour-1 voice log | "Cultures sent", "lactate sent", "fluids started" with timers | Same as 2.3 | Week 10 |
+| 2.1 Voice foundation | Typed workflows by voice: on-device speech, Whisper per bounded utterance, wordsToNumbers, speaker attribution | Speech accuracy per phone tier; attribution tests; noisy-room set | After its gate |
+| 2.2 ICU dictation | Kind `monitor` gets a local path: Edge fields to `icu.js reviewVoice()` | Units, attribution and correction tests; `parseMonitor()` untouched | After its gate |
+| 2.3 Code Blue voice log | `logDrug`, `logShock(energyJ:)`, `logRhythm`, `logROSC` on the phone, closed choices only | Tense tests ("prepare" vs "given"), undo, noisy-room set, 100% danger set | After its gate |
+| 2.4 Sepsis Hour-1 voice log | "Cultures sent", "lactate sent", "fluids started" with timers | Same as 2.3 | After its gate |
 
-### Wave 3. Documentation intelligence (weeks 9 to 14)
+### Wave 3. Documentation intelligence 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 3.1 English Scribe fact log | Per-chunk facts with evidence records; correction events; rules map facts to EMR fields; MaiK keeps prose | ACI-Bench and PriMock57 slices; zero unsupported fields accepted; fewer cloud refines | Week 12 |
-| 3.2 Live Score Radar | Scores light up during the consult from 3.1 facts, each criterion with its quote | Stale-field tests; alert-fatigue review by the 3 doctors | Week 13 |
-| 3.3 Silent Safety Net | Spoken allergy, creatinine or anticoagulant checked against the Rx pad via `scribe-safety.check`, `SMD_SAFETY.renalDoseFor`, `INTERACTIONS` | Zero missed flags on the danger set; false-alarm rate reviewed | Week 14 |
-| 3.4 GLiNER for long transcripts | Extractive spans for drugs, symptoms, durations, in the `openmed-ner.js` ORT slot | Licence verified; span accuracy on ACI-Bench | Week 14 |
+| 3.1 English Scribe fact log | Per-chunk facts with evidence records; correction events; rules map facts to EMR fields; MaiK keeps prose | ACI-Bench and PriMock57 slices; zero unsupported fields accepted; fewer cloud refines | After its gate |
+| 3.2 Live Score Radar | Scores light up during the consult from 3.1 facts, each criterion with its quote | Stale-field tests; alert-fatigue review by the 3 doctors | After its gate |
+| 3.3 Silent Safety Net | Spoken allergy, creatinine or anticoagulant checked against the Rx pad via `scribe-safety.check`, `SMD_SAFETY.renalDoseFor`, `INTERACTIONS` | Zero missed flags on the danger set; false-alarm rate reviewed | After its gate |
+| 3.4 GLiNER for long transcripts | Extractive spans for drugs, symptoms, durations, in the `openmed-ner.js` ORT slot | Licence verified; span accuracy on ACI-Bench | After its gate |
 
-### Wave 4. Orders and education (weeks 13 to 18)
+### Wave 4. Orders and education 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 4.1 Prescription drafts | Dictated lines become pad rows marked `source:"ai"` via `scribe-drugfix`, `SMD_BRANDS`, `scribe-safety`; fixes `parseVoiceRx` first-number guess | Drug, dose, unit, frequency, duration; LASA 100%; read-back and signing gates kept | Week 16 |
-| 4.2 Round Mode | One sentence per bed becomes ordered DRAFT orders in WardSynQ (`wardsynq-actors.js` DRAFT cap) | Ordering tests; stop/start pairs; bed binding | Week 17 |
-| 4.3 Say-it logbook | NMC PG logbook entries from `pglog-quick.js` catalog | Catalog mapping accuracy; resident pilot | Week 17 |
-| 4.4 OSCE examiner | Narrated exam steps tick `clinix-examiner.js` checklists, offline | Checklist mapping accuracy; student pilot | Week 18 |
+| 4.1 Prescription drafts | Dictated lines become pad rows marked `source:"ai"` via `scribe-drugfix`, `SMD_BRANDS`, `scribe-safety`; fixes `parseVoiceRx` first-number guess | Drug, dose, unit, frequency, duration; LASA 100%; read-back and signing gates kept | After its gate |
+| 4.2 Round Mode | One sentence per bed becomes ordered DRAFT orders in WardSynQ (`wardsynq-actors.js` DRAFT cap) | Ordering tests; stop/start pairs; bed binding | After its gate |
+| 4.3 Say-it logbook | NMC PG logbook entries from `pglog-quick.js` catalog | Catalog mapping accuracy; resident pilot | After its gate |
+| 4.4 OSCE examiner | Narrated exam steps tick `clinix-examiner.js` checklists, offline | Checklist mapping accuracy; student pilot | After its gate |
 
-### Wave 5. Languages and terminology (weeks 17 to 22)
+### Wave 5. Languages and terminology 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 5.1 Hinglish/Tenglish voice | Romanised code-mixed speech through Waves 1 to 3, using the owner's word list and MMCQS | Separate gold set per language at the same pass marks | Week 19 |
-| 5.2 Native Telugu/Hindi | IndicXlit romanisation for Needle; FunctionGemma native script; IndicTrans2 for free text if needed | Per-language gold sets; doctor review in each language | Week 21 |
-| 5.3 SNOMED CT synonyms | NRCeS affiliate licence; synonym tables into MaiKScope, `KB_NAMES`, `clinical-vocab` | Licence in hand; KB relevance test stays at 0 mis-routes | Week 20 |
-| 5.4 SapBERT entity linking | English free text to SNOMED concept to ICD-10 map | Linking accuracy on a held-out set | Week 22 |
+| 5.1 Hinglish/Tenglish voice | Romanised code-mixed speech through Waves 1 to 3, using the owner's word list and MMCQS | Separate gold set per language at the same pass marks | After its gate |
+| 5.2 Native Telugu/Hindi | IndicXlit romanisation for Needle; FunctionGemma native script; IndicTrans2 for free text if needed | Per-language gold sets; doctor review in each language | After its gate |
+| 5.3 SNOMED CT synonyms | NRCeS affiliate licence; synonym tables into MaiKScope, `KB_NAMES`, `clinical-vocab` | Licence in hand; KB relevance test stays at 0 mis-routes | After its gate |
+| 5.4 SapBERT entity linking | English free text to SNOMED concept to ICD-10 map | Linking accuracy on a held-out set | After its gate |
 
-### Wave 6. Reach and platform (weeks 21 to 26)
+### Wave 6. Reach and platform 
 | Project | Work | Gate | Ships |
 |---|---|---|---|
-| 6.1 Apple Watch | `watchos-arm64` Needle for Code Blue and calculators on the wrist | Watch memory and battery budgets; same Code Blue gate | Week 23 |
-| 6.2 Wear OS | `android-arm64` Needle in the `android/wear` module | Same as 6.1 | Week 24 |
-| 6.3 2 to 3 GB phones | Needle cut to 4 to 8 layers, typed router only | Section 9 budgets at that tier | Week 24 |
-| 6.4 PHI Shield | On-device redaction of names, phones, addresses before cloud calls, layered on `phi-india.js` | Identifier recall measured; labelled a redaction aid only | Week 25 |
-| 6.5 Tool compiler | CI exports schemas from `MEDCALC._calcs`, `ws-*` syndromes, specialty kits; regenerates data; retrains; ships a new model file | A new calculator gets voice and text access with no hand-written schema; regression sets unchanged | Week 26 |
+| 6.1 Apple Watch | `watchos-arm64` Needle for Code Blue and calculators on the wrist | Watch memory and battery budgets; same Code Blue gate | After its gate |
+| 6.2 Wear OS | `android-arm64` Needle in the `android/wear` module | Same as 6.1 | After its gate |
+| 6.3 2 to 3 GB phones | Needle cut to 4 to 8 layers, typed router only | Section 9 budgets at that tier | After its gate |
+| 6.4 PHI Shield | On-device redaction of names, phones, addresses before cloud calls, layered on `phi-india.js` | Identifier recall measured; labelled a redaction aid only | After its gate |
+| 6.5 Tool compiler | CI exports schemas from `MEDCALC._calcs`, `ws-*` syndromes, specialty kits; regenerates data; retrains; ships a new model file | A new calculator gets voice and text access with no hand-written schema; regression sets unchanged | After its gate |
 
 ### Programme rules
 1. Every project: its own dataset slice, danger set by failure type, 3-doctor review, flag, git tag.
@@ -377,7 +366,7 @@ iPhone. 2 to 3 GB phones are out of v1.
 | Thermal | no SEVERE status in the sustained test | same |
 | Coexistence | normal app use with a MaiK pack installed but idle | same |
 
-Numbers are starting budgets; calibrate them in week 1 and record the final values here before the
+Numbers are starting budgets; calibrate them in the Day 1 device tests and record the final values here before the
 bake-off. A model that misses its budget on the 4 GB tier is not used on that tier.
 
 ---
@@ -440,41 +429,42 @@ deaths; back-off events. A rising "edited" rate on any field is an alarm. Feeds 
 
 | # | Decision | Effect in v2 |
 |---|---|---|
-| Q1 | A working product now | Phase 0 ships in week 2 |
+| Q1 | A working product now | Wave 0 code ships first |
 | Q2 | Bake-off: Needle vs FunctionGemma | Both scored on frozen sets and per-model budgets |
 | Q3 | English + Hinglish/Tenglish in Latin letters | Tested as its own language slice; letters alone prove nothing |
 | Q4 | Cactus for Needle, rented GPU for FunctionGemma | One canonical dataset, two exporters |
 | Q5 | Public datasets | Plus the 150 human lines for testing only |
 | Q6 | Owner + 2 doctors review safety | Every error reviewed before release |
 | Q7 | Android 4 GB and up | 2 to 3 GB out of v1 |
-| Q8 | 4 to 6 weeks to a small group, then the whole programme scheduled (no "later") | Wave 1 typed pilot by week 6; Waves 2 to 6 dated through week 26 |
+| Q8 | Timeline (revised 2026-10-01): **5-day sprint**, owner and Claude working in parallel | Section 16; calendar dates removed from section 8 |
 
 ### Owner's homework
 | Task | Format | Needed by |
 |---|---|---|
-| 50 typed requests each from owner and 2 doctors (test only) | One per line, no patient data | End of week 1 |
-| Tenglish/Hinglish word list | `word = meaning`, 100 to 200 words | End of week 1 |
-| Names of the 2 reviewing doctors | Name + specialty | Before week 4 |
-| Spare 4 GB Android phone | Common model | Week 1 |
+| 50 typed requests each from owner and 2 doctors (test only) | One per line, no patient data | Day 2 |
+| Tenglish/Hinglish word list | `word = meaning`, 100 to 200 words | Day 2 |
+| Names of the 2 reviewing doctors | Name + specialty | Day 4 |
+| Spare 4 GB Android phone | Common model | After its gate |
 
 Files: `vault/plans/edge-data/owner-requests.txt`, `vault/plans/edge-data/indic-words.txt`.
 
-## 16. Weeks 1 to 6 in detail (Waves 0 and 1)
+## 16. The 5-day sprint (started 2026-10-01)
 
-Weeks 7 to 26 follow the wave tables in section 8.
+Two people in parallel. **Claude** writes and tests everything that runs in JavaScript, Node and
+headless Chrome. **Owner** does everything that needs a Mac, a phone, an account or a doctor.
+Quality bar is unchanged: tests before claims, flags default OFF, git tag before merge.
 
-| Week | Work | Done when |
+| Day | Claude (in this repo) | Owner (devices, accounts, people) |
 |---|---|---|
-| **1** | Day 1 gates (A0). Privacy fixes. Shared parser with evidence records. Baseline measured. Sustained-load test. | Gates pass or the failing model is dropped; baseline report written |
-| **2** | **Release Phase 0** (rules prefill, privacy fixes). Freeze test sets. First training runs. | Phase 0 live; sets frozen |
-| **3** | Bake-off on frozen sets and devices; calibration; build runtime, router, grounding | 7.4 met and 7.5 shows benefit, or stop |
-| **4** | Pilot: five typed workflows, owner + 2 doctors | No unsafe acceptance, no dead end |
-| **5** | Fix pilot findings; measure outcomes (7.3) | Outcomes show benefit |
-| **6** | Buffer, then release to a small invited group | Counts healthy for 1 week |
+| **1** | Speaker gate fix; shared parser with evidence records and label check; unit tests | Spare 4 GB Android phone; Cactus account; rented GPU account; start the 150 typed requests |
+| **2** | Calculator prefill from MaiK card, search and MaiKBrain behind a flag; score version map; headless UI tests | Finish the 150 requests and the Tenglish/Hinglish word list; build and run Day 1 gate A0.1 (16 KB) from the runbook |
+| **3** | Dataset pipeline: schema export, generator with assertion/time labels, both exporters, family-hash split, frozen test sets, baseline scorer | Run A0.3 (FunctionGemma grammar) and A0.6 (sustained load) on the phone; upload data to Cactus; start the GPU fine-tune |
+| **4** | Edge runtime, router and grounding behind `smd_edge` with a mock engine; `capacitor-needle` plugin source; runbook | Build the plugin on the Mac; first on-device calls; name the 2 reviewing doctors |
+| **5** | Bake-off scorer over device outputs; fix everything found; sprint report | Run the bake-off on the phone; 3-doctor review of the danger set; decide go or no-go for the Wave 1 pilot |
 
-Slack: whichever model trains first is scored first; a model not ready by end of week 3 drops out of
-v1. If weeks 2 to 3 slip, the pilot moves to week 5. If the decision rule fails, weeks 4 to 6 become
-more Phase 0 work.
+What 5 days can and cannot prove: it can deliver Wave 0 code, the full Wave 1 software, the data
+pipeline and a first bake-off. It cannot replace a 2-week real-use pilot or multi-phone testing;
+those still gate any release to doctors outside the three reviewers.
 
 ## 17. Datasets (licences checked)
 
@@ -518,7 +508,7 @@ Attribution in `licenses/`.
 
 ---
 
-## Appendix A. Week 1 engineering checklist
+## Appendix A. Sprint engineering checklist
 
 Every item: `npm test` plus a headless-browser test for UI changes (CLAUDE.md). Git tag before merge.
 
@@ -542,7 +532,7 @@ Every item: `npm test` plus a headless-browser test for UI changes (CLAUDE.md). 
 6. **Sustained-load test** on the 4 GB phone for each model: 50 calls in a row, then a 30-minute
    mixed session; record the section 9 measures.
 
-### A1. Week 1 items
+### A1. Sprint items
 1. **Speaker gate fix:** `opd-emr.js:4292`, `:4257` stop hard-coding `speaker:"doctor"`.
 2. **On-device speech:** Android `isOnDeviceRecognitionAvailable()` + `createOnDeviceSpeechRecognizer()`
    where available, iOS `requiresOnDeviceRecognition`, visible fallback otherwise
@@ -630,8 +620,8 @@ accepted; "sugar 342 weight 80" weight = 342 rejected; "65M, cr 2.1" weight = 2.
 
 ## Appendix D. What changed in v3 (owner, 2026-10-01: "whole project, one plan, no later")
 
-1. Every project that was "later" or "separate" is now scheduled in section 8: seven waves, about
-   26 weeks, with dependencies, gates and target ship weeks.
+1. Every project that was "later" or "separate" is now scheduled in section 8: seven waves,
+   with dependencies and gates (calendar dates later removed for the 5-day sprint, section 16).
 2. Added projects that were only in [[Needle-Features]]: MaiK pre-dispatch (1.5), Sepsis Hour-1 (2.4),
    GLiNER (3.4), SNOMED CT (5.3), SapBERT (5.4), Wear OS (6.2), 2 to 3 GB phones (6.3), tool compiler (6.5).
 3. Safety discipline unchanged: each project still has its own dataset slice, danger set, 3-doctor
