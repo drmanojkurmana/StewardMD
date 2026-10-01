@@ -1,3 +1,7 @@
+ext {
+    androidxAppCompatVersion = project.hasProperty('androidxAppCompatVersion') ? rootProject.ext.androidxAppCompatVersion : '1.7.1'
+}
+
 buildscript {
     repositories {
         google()
@@ -40,4 +44,6 @@ repositories {
 
 dependencies {
     implementation project(':capacitor-android')
+    // getActivity() returns an AppCompatActivity, so the class must be on the compile path.
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
 }
