@@ -1,0 +1,22 @@
+{
+  "name": "@stewardmd/capacitor-capture-guard",
+  "version": "1.0.0",
+  "description": "Screen-capture guard for realistic lesson images. iOS: reports screen recording / mirroring (UITraitCollection.sceneCaptureState) as captureChange and screenshots as screenshot, so the web layer can watermark and show a notice. Android: setSecure() toggles FLAG_SECURE on the activity window.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "android/src/main",
+    "android/build.gradle",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}

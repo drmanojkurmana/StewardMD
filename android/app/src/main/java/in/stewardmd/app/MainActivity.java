@@ -12,6 +12,7 @@ import com.getcapacitor.Bridge;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebViewClient;
 import com.getcapacitor.community.speechrecognition.SpeechRecognition;
+import in.stewardmd.captureguard.CaptureGuardPlugin;
 import in.stewardmd.whisper.WhisperPlugin;
 
 public class MainActivity extends BridgeActivity {
@@ -30,6 +31,9 @@ public class MainActivity extends BridgeActivity {
         // ASR target on Android too, matching iOS.
         registerPlugin(WhisperPlugin.class);
         registerPlugin(NfcPlugin.class);
+        // Lesson-image capture guard (FLAG_SECURE while a realistic lesson image is on screen).
+        // Registered explicitly like Whisper so it exists even if capacitor.plugins.json is stale.
+        registerPlugin(CaptureGuardPlugin.class);
         super.onCreate(savedInstanceState);
         setupSafeAreaInsets();
         setupRenderProcessRecovery();

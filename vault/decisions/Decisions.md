@@ -5,6 +5,24 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-09-30 · Capture guard for realistic lesson images (iOS watermark while recording, Android FLAG_SECURE)
+
+**Decision (owner approved 2026-09-30).** `<img>` whose src contains `/learn/media/real/` (Tokós now, Ophthalmós
+later) are guarded by `capture-guard.js` + local plugin `@stewardmd/capacitor-capture-guard`
+(`Capacitor.Plugins.CaptureGuard`). iOS: while the scene is recorded or mirrored
+(`UITraitCollection.sceneCaptureState == .active`, iOS 17+; `UIScreen.isCaptured` is deprecated) `html.smd-cg-on`
+draws a low-opacity tiled diagonal StewardMD mark on each image's container (`[data-smd-cg]::after`,
+`pointer-events:none`); after a screenshot (`userDidTakeScreenshotNotification`) the shared `window.toast` says
+"Images are © StewardMD. Please do not share." (en/hi) on any screenshot taken in the app (owner 2026-10-01). Android: FLAG_SECURE on
+the activity window while such an image is on screen (MutationObserver + scroll/resize, 80 ms debounce), cleared as
+soon as none is. Web/PWA: inert.
+**Why.** iOS cannot block or alter captures; Android can. The owner rejected a permanent heavy watermark as
+unprofessional, so the mark appears only during capture.
+**Trade-off.** Android 14 `ScreenCaptureCallback` was not added: it does not fire while FLAG_SECURE is set, which is
+exactly when a notice would be wanted. Thumbnails count as images (the Learn hub with a real thumbnail is also
+FLAG_SECURE on Android) and FLAG_SECURE blanks the Recents preview while set: both confirmed by the owner 2026-10-01.
+**Status.** Draft PR; needs `npm install` + `npx cap sync` + new App Store / Play builds. Not device-verified.
+
 ## 2026-09-30 · Clinical Bulletins: second reader, specialty signers, pre-sign checks, numbers, India access
 
 **Decision (owner: "Do all", after "are we 2x or 10x better than UpToDate?").** Five changes, each aimed at the
