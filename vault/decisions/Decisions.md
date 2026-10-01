@@ -5,6 +5,21 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-01 · Registers file by the hospital's day (after local 00:00 it is the next day)
+
+**Decision (owner: "Follow standard how they do it. After 00:00 its next day no more same day").** A register entry
+whose date field is a timestamp (MLC `arrivalAt`, POCSO task `raisedAt`, and any other) is filed under the hospital's
+local date (`filingDay()` in `functions/_wardsynq/registers.js`, the hospital clock `offsetMinutes`, IST 330 by
+default): its day, month (`period`) and serial year. Plain dates (YYYY-MM-DD) are kept as entered. Listing works the
+day out again, so entries saved before this follow the same calendar without a migration. NDPS r.52U estimate check
+uses the hospital's year too (#1335).
+**Why.** A case at 00:30 IST on the 1st belongs to that day's and that month's register; the UTC date put it in the
+day (and month, and on 1 January the year) before.
+**Trade-off.** Stored `period`/`eventDate` of older entries stay as written; any reader that skips `listEntries` and
+reads them raw still sees the UTC day. Serials already issued are not renumbered.
+**Status.** Merged with tests (a 00:30 IST case, and the whole register test file with the clock moved across month
+and year ends).
+
 ## 2026-09-30 · Capture guard for realistic lesson images (iOS watermark while recording, Android FLAG_SECURE)
 
 **Decision (owner approved 2026-09-30).** `<img>` whose src contains `/learn/media/real/` (Tokós now, Ophthalmós

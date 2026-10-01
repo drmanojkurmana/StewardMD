@@ -117,6 +117,8 @@ async function admitted(sex) {
 const TODAY = new Date().toISOString().slice(0, 10), MONTH = TODAY.slice(0, 7), YEAR = TODAY.slice(0, 4);
 // The hospital's calendar year (IST, the default clock): the NDPS annual return books stock by the hospital's day.
 const HOSPITAL_YEAR = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 4);
+// The hospital's date of a timestamp (IST): registers file timestamp-dated entries by it (after local 00:00 it is the next day).
+const hday = (iso) => new Date(Date.parse(iso) + 330 * 60000).toISOString().slice(0, 10);
 
 const FORMF_OK = {
   firstReportedOn: TODAY, clinicName: "Hospital A Imaging, Main Road", clinicRegistrationNo: "PNDT/123", patientName: "Register Case", patientAge: 28,
@@ -210,8 +212,8 @@ test("medico-legal cases: POST /ward/register-mlc numbers per hospital; GET /war
   seed();
   const adm = await admitted("male");
   const body = { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, fields: MLC_OK() };
-  // MLC serials number per year of arrival (an hour ago: last year in the first hour of 1 January).
-  const MLC_YEAR = body.fields.arrivalAt.slice(0, 4);
+  // MLC serials number per hospital year of arrival (an hour ago: can be last year just after local midnight on 1 January).
+  const MLC_YEAR = hday(body.fields.arrivalAt).slice(0, 4);
   assert.equal((await as(null, "/ward/register-mlc", "POST", body)).__status, 401);
   for (const who of [NURSE, CASHIER, PHARM, RAD]) assert.equal((await as(who, "/ward/register-mlc", "POST", body)).__status, 403, who);
   assert.equal((await as(ROGUE, "/ward/register-mlc", "POST", body)).__status, 403);
@@ -225,8 +227,8 @@ test("medico-legal cases: POST /ward/register-mlc numbers per hospital; GET /war
   const second = await as(DOCTOR, "/ward/register-mlc", "POST", { ...body, patientId: adm2.patientId, encounterId: adm2.encounterId });
   assert.equal(second.entry.serial, `MLC/${MLC_YEAR}/00002`);
 
-  // Cases are filed under their arrival (an hour ago), which is last month in the first hour of a month.
-  const MLC_MONTH = body.fields.arrivalAt.slice(0, 7);
+  // Cases are filed under the hospital's date of arrival (an hour ago): last month just after local midnight on the 1st.
+  const MLC_MONTH = hday(body.fields.arrivalAt).slice(0, 7);
   assert.equal((await as(DOCTOR, "/ward/register-mlc?orgId=" + ORG + "&period=" + MLC_MONTH)).__status, 403, "the register itself is medical records'");
   const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + MLC_MONTH);
   assert.equal(list.__status, 200, JSON.stringify(list));
@@ -658,8 +660,8 @@ test("medico-legal cases (legal review D): Good Samaritan identity optional; POC
   assert.match(opened.freeTreatment, /BNSS s\.397/);
   assert.ok(opened.entry.missing.includes("pocsoReportAt") && opened.entry.missing.includes("policeStation"));
 
-  // The case is filed under its arrival (30 hours ago), which can fall in last month: list that month.
-  const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + arrival.slice(0, 7));
+  // The case is filed under the hospital's date of its arrival (30 hours ago), which can fall in last month: list that month.
+  const list = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + hday(arrival).slice(0, 7));
   assert.equal(list.__status, 200, JSON.stringify(list));
   const clocks = list.entries.find((e) => e.id === opened.entry.id).clocks;
   assert.equal(clocks.find((c) => c.kind === "pocso-report").state, "overdue", "POCSO Rules r.6(5): 24 hours");
@@ -790,4 +792,22 @@ test("NDPS (legal review F): Form 3E registration and the patient's signature pe
   // Renewal applied for, so recognition no longer refuses; the Form 3J estimate of 1 (r.52U) now does, until a revised estimate is named.
   assert.equal((await as(PHARM, "/ward/stock-move", "POST", receipt)).error, "above_form3j_estimate");
   assert.equal((await as(PHARM, "/ward/stock-move", "POST", { ...receipt, revisedEstimateRef: "CD/3J-REV/2" })).__status, 200, "renewal applied for, revised estimate named");
+});
+
+test("registers file a timestamp by the hospital's day (owner 2026-10-01): a case at 00:30 IST is that day's, not the UTC day before", async () => {
+  seed();
+  const adm = await admitted("male");
+  // 19:00 UTC yesterday is 00:30 IST today.
+  const arrivalAt = new Date(Date.parse(TODAY + "T00:00:00Z") - 5 * 3600000).toISOString();
+  const day = hday(arrivalAt);
+  assert.notEqual(day, arrivalAt.slice(0, 10), "the test needs a time whose IST date differs from its UTC date");
+  const opened = await as(DOCTOR, "/ward/register-mlc", "POST", { orgId: ORG, patientId: adm.patientId, encounterId: adm.encounterId, fields: { ...MLC_OK(), arrivalAt } });
+  assert.equal(opened.__status, 200, JSON.stringify(opened));
+  assert.equal(opened.entry.eventDate, day, "filed under the hospital's date");
+  assert.equal(opened.entry.period, day.slice(0, 7));
+  assert.equal(opened.entry.serial, `MLC/${day.slice(0, 4)}/00001`, "numbered in the hospital's year");
+  const inMonth = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&period=" + day.slice(0, 7));
+  assert.ok(inMonth.entries.some((e) => e.id === opened.entry.id), "listed in the hospital's month");
+  const byDay = await as(HIM, "/ward/register-mlc?orgId=" + ORG + "&from=" + day + "&to=" + new Date(Date.parse(day) + 86400000).toISOString().slice(0, 10));
+  assert.ok(byDay.entries.some((e) => e.id === opened.entry.id), "listed on the hospital's day");
 });
