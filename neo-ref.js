@@ -20,7 +20,7 @@
   function screen(el, A) {
     el.innerHTML = '<section class="nh-card"><div class="nh-none">Loading…</div></section>';
     A.dataOrNull("ref-values").then(function (doc) {
-      if (!doc || !(doc.groups || []).length) { el.innerHTML = '<section class="nh-card"><h3>Reference values</h3>' + A.noData("reference values") + "</section>"; return; }
+      if (!doc || !(doc.groups || []).length) { el.innerHTML = '<section class="nh-card"><h3>Normal values</h3>' + A.noData("reference values") + "</section>"; return; }
       var esc = A.esc, d = A.neo(), E = PE(), ctx = E.context(d);
       if (!S.g) S.g = doc.groups[0].id;
       var grp = doc.groups.filter(function (g) { return g.id === S.g; })[0] || doc.groups[0];
@@ -28,10 +28,10 @@
       var shown = S.mine ? rows.filter(function (x) { return x.m.ok !== false; }) : rows;
       var byA = {}, order = [];
       shown.forEach(function (x) { var k = x.r.analyte; if (!byA[k]) { byA[k] = []; order.push(k); } byA[k].push(x); });
-      var h = '<section class="nh-card"><h3>Reference values ' + A.badge(doc) + "</h3>" +
-        '<label>Group<select data-ref="g">' + doc.groups.map(function (g) { return '<option value="' + esc(g.id) + '"' + (g.id === grp.id ? " selected" : "") + ">" + esc(g.title) + "</option>"; }).join("") + "</select></label>" +
+      var h = '<section class="nh-card"><h3>Normal values ' + A.badge(doc) + "</h3>" +
+        '<label>What do you want to check?<select data-ref="g">' + doc.groups.map(function (g) { return '<option value="' + esc(g.id) + '"' + (g.id === grp.id ? " selected" : "") + ">" + esc(g.title) + "</option>"; }).join("") + "</select></label>" +
         '<label class="nh-2cl" style="flex-direction:row"><input type="checkbox" data-ref="mine"' + (S.mine ? " checked" : "") + "> Only rows that can fit this baby</label>" +
-        (S.mine && (d.pnaDays == null || d.gaDays == null) ? A.note("Rows that need the baby's age or gestation stay listed until the baby record has them.", "info") : "");
+        (S.mine && (d.pnaDays == null || d.gaDays == null) ? A.note("Rows that need the baby's age or gestation stay listed until the baby details have them.", "info") : "");
       if (!order.length) h += A.noData("this baby's age in this group");
       order.forEach(function (k) {
         h += '<div class="nh-row"><div class="nh-lbl">' + esc(k) + "</div>";
@@ -41,7 +41,7 @@
         });
         h += "</div>";
       });
-      el.innerHTML = h + '<div class="nh-foot">Ranges differ by method and population; each row names its own.</div></section>';
+      el.innerHTML = h + '<div class="nh-foot">Normal ranges differ by lab method and population; each row names its source.</div></section>';
       el.onchange = function (e) { var k = e.target.getAttribute && e.target.getAttribute("data-ref"); if (!k) return; if (k === "g") S.g = e.target.value; else S.mine = e.target.checked; screen(el, A); };
     });
   }

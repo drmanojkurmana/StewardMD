@@ -78,7 +78,8 @@ try {
   ok(/looks like kilograms/.test(await bodyText()), 'unit lock: 1.2 in a gram field is refused as kilograms');
   await typeIn('#nh_weightG', '1250'); await typeIn('#nh_birthWeightG', '1180'); await click('#neoHub [data-sex=F]');
   const sum = await text('#neoHub .nh-bsum');
-  ok(/GA 30\+2/.test(sum) && /1,250 g/.test(sum) && /Female/.test(sum) && /PMA 30\+6/.test(sum), 'pinned baby summary: ' + sum.split('\n')[0]);
+  ok(/Born at 30 weeks 2 days/.test(sum) && /1,250 g today/.test(sum) && /Girl/.test(sum) && /Corrected age 30 weeks 6 days/.test(sum) && /1,180 g at birth/.test(sum), 'pinned baby in plain words: ' + sum.replace(/\n/g, ' | '));
+  ok(/4 days old \(day 5 of life\)/.test(sum), 'age in days and day of life');
   await click('#neoHub [data-nh=edit]');
   await shot('home');
   ok(await ev(noOverflow), '360 px: no horizontal overflow on the hub');
@@ -107,6 +108,28 @@ try {
   await shot('dose-caffeine');
   await ev(`SMD_NEO_HUB.open('dose',{drug:'aciclovirr'});1`);
   ok(await until(`/No neonatal dose on file/.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000), 'unknown drug: "No neonatal dose on file"');
+
+  // 3b) Every drug in the app is searchable (owner 2026-10-01: "see our drug monographs we already have covering all drugs").
+  await ev(`SMD_NEO_HUB.open('dose');document.querySelector('#neoHub [data-neo-change]')&&document.querySelector('#neoHub [data-neo-change]').click();1`);
+  ok(await until(`!!document.querySelector('#neoHub [data-neo-q]')`, 5000), 'dose tool opens on a drug search');
+  ok(await ev(`SMD_NEO_DOSE.entries().length`) > 1000, 'search covers every monograph drug (' + await ev(`SMD_NEO_DOSE.entries().length`) + ')');
+  await typeIn('#neoHub [data-neo-q]', '');
+  ok(await until(`/Common newborn drugs/i.test(document.querySelector('#neoHub .nh-body').innerText)`, 3000), 'empty search lists the common newborn drugs');
+  await typeIn('#neoHub [data-neo-q]', 'paraceta');
+  ok(await until(`[...document.querySelectorAll('#neoHub [data-neo-drug]')].some(b=>/Paracetamol/i.test(b.innerText))`, 3000), 'search finds a drug outside the band table (paracetamol)');
+  ok(await ev(noOverflow), 'drug search fits 360 px');
+  await shot('dose-search');
+  const pick = (st) => ev(`(()=>{const e=SMD_NEO_DOSE.entries().find(x=>x.status===${JSON.stringify(st)}&&x.mono);return e?e.key:null})()`);
+  const kMono = await pick('mono'), kInfo = await pick('info'), kNone = await pick('none');
+  ok(kMono && kInfo && kNone, `drugs of each kind: ${kMono}, ${kInfo}, ${kNone}`);
+  await ev(`SMD_NEO_HUB.open('dose',{drug:${JSON.stringify(kMono)}});1`);
+  ok(await until(`/Newborn dose \\(monograph\\)/i.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000), 'monograph newborn dose is labelled as such');
+  await shot('dose-monograph');
+  await ev(`SMD_NEO_HUB.open('dose',{drug:${JSON.stringify(kInfo)}});1`);
+  ok(await until(`/What our monograph says about newborns/i.test(document.querySelector('#neoHub .nh-body').innerText) && /No neonatal dose on file/.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000), 'notes-only drug: monograph newborn statements AND "No neonatal dose on file"');
+  await ev(`SMD_NEO_HUB.open('dose',{drug:${JSON.stringify(kNone)}});1`);
+  ok(await until(`/No neonatal dose on file/.test(document.querySelector('#neoHub .nh-body').innerText)`, 5000) && !/What our monograph says/i.test(await bodyText()), 'drug with nothing for newborns: "No neonatal dose on file" only');
+  ok(/Open the full drug page/i.test(await bodyText()), 'link to the full monograph');
 
   // 4) Prepare from a dose (carry-over): vancomycin.
   await ev(`SMD_NEO_HUB.open('dose',{drug:'vancomycin'});1`);
@@ -153,7 +176,7 @@ try {
   await ev(`MEDCALC.close&&MEDCALC.close();1`);
 
   // 8) Search finds individual neonatal tools.
-  ok(await ev(`SMD_NEO_HUB.searchItems().some(x=>/Infusions/.test(x.title))`), 'universal search items for neonatal tools');
+  ok(await ev(`SMD_NEO_HUB.searchItems().some(x=>/Drip rates/.test(x.title)) && SMD_NEO_HUB.searchItems().some(x=>/Infusions/.test(x.kw))`), 'universal search items for neonatal tools');
 
   // 9) Dark mode
   await ev(`document.body.classList.add('dark');SMD_NEO_HUB.open('growth');1`);
@@ -168,6 +191,10 @@ try {
   await shot('dosecalc-neonate');
   await ev(`SMD_DOSECALC.close();SMD_DOSECALC.open({drug:'Levothyroxine',patient:{weight:1.25,age:4,ageUnit:'days',sex:'F'}});1`);
   ok(await until(`/No neonatal dose on file\\. Do not extrapolate\\./.test(document.querySelector('#doseCalc .dc-body').innerText)`, 8000), 'drug with no neonatal row: "No neonatal dose on file. Do not extrapolate."');
+  const infoName = await ev(`(()=>{const e=SMD_NEO_DOSE.entries().find(x=>x.status==='info'&&x.mono&&!x.neoRows);return e?e.mono.n:null})()`);
+  await ev(`SMD_DOSECALC.close();SMD_DOSECALC.open({drug:${JSON.stringify(infoName)},patient:{weight:1.25,age:4,ageUnit:'days',sex:'F'}});1`);
+  ok(await until(`!!document.querySelector('#doseCalc [data-neo-stmt]') && /No neonatal dose on file/.test(document.querySelector('#doseCalc .dc-body').innerText)`, 8000), `dose calculator, ${infoName}: monograph newborn statements beside "No neonatal dose on file"`);
+  await shot('dosecalc-statements');
   await ev(`SMD_DOSECALC.close();1`);
 
   // 11) [hidden] display trap: a closed hub is not painted and does not eat taps.

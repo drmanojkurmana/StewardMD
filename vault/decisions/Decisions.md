@@ -5,6 +5,25 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-01 · Neonatal layer: plain-language screens; drug search covers every monograph
+
+**Decision (owner: "it looks so confusing or clumsy, can you make it more user friendly easily understood by anyone
+without removing any function and make drugs more universal covering all drugs" / "see our drug monographs we
+already have covering all drugs").** No tool or function removed. The hub groups tools under Medicines / Fluids and
+feeding / Check and chart / Procedures with plain names (Drug doses, Drip rates, Fluids and sugar, Jaundice, Normal
+values, Lines and tubes), each with a one-line explainer and a "What do these words mean?" glossary; the baby shows
+as plain chips ("Born at 30 weeks 2 days", "Corrected age ..."), compact on tool screens. Band conditions read as
+sentences (`condText`). Drug doses searches all ~1,540 monograph drugs and labels each: "Newborn dose" (sourced band),
+"Newborn dose (monograph)" (the monograph's own neonate row, computed by dose-calc.js), "Newborn notes only",
+"No newborn dose". Newborn statements are copied verbatim from `worker/data/gold` into
+`data/neo/monograph-neonatal.json` by `scripts/neo/build-monograph-neonatal.mjs` (pregnancy, lactation and
+mother-exposure text left out) and shown under "What our monograph says about newborns", also in the dose calculator.
+**Why.** Clinicians at any level must read the answer first; the band table covered ~70 drugs, the monographs ~1,540.
+**Trade-off.** A monograph neonate row is our monograph's text, not a quoted external source: it is labelled as such
+and never replaces a band. A drug with no newborn row still says "No neonatal dose on file. Do not extrapolate."
+Monograph statements are checked against the monographs (`test/neo-monograph.test.mjs`), not by `validate.mjs`.
+**Status.** Branch `feat/neo-ux`, unit + headless tests; PR open.
+
 ## 2026-10-01 · Registers file by the hospital's day (after local 00:00 it is the next day)
 
 **Decision (owner: "Follow standard how they do it. After 00:00 its next day no more same day").** A register entry

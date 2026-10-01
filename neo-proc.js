@@ -50,6 +50,7 @@
 
   /* ================================ UI ================================ */
   var GUIDES = [["neonatal-intraosseous-access", "Intraosseous access"], ["neonatal-lumbar-puncture", "Lumbar puncture"], ["neonatal-chest-drain", "Chest drain"], ["neonatal-pericardiocentesis", "Pericardiocentesis"], ["neonatal-exchange-transfusion", "Exchange transfusion"]];
+  var LABEL = { UAC: "Umbilical artery line (UAC)", UVC: "Umbilical vein line (UVC)", ETT: "Breathing tube (ETT)", PICC: "PICC line", Exchange: "Exchange transfusion", LP: "Lumbar puncture (LP)", "Chest drain": "Chest drain" };
   var GROUPS = [["UAC", /^uac-|umbilical/], ["UVC", /^uvc-|umbilical/], ["ETT", /^ett-/], ["PICC", /^picc-/], ["Exchange", /^exchange/], ["LP", /^lp-/], ["Chest drain", /^chest/]];
   var S = { grp: "UVC", vals: {}, maturity: "" };
   function recordVals(d) { return { bw_kg: d.birthWeightG != null ? d.birthWeightG / 1000 : null, wt_kg: d.weightG != null ? d.weightG / 1000 : null, ga_wk: d.gaDays != null ? Math.floor(d.gaDays / 7) : null }; }
@@ -66,7 +67,7 @@
     (c.inputs || []).forEach(function (i) {
       if (i.var === "maturity") { h += '<span class="nh-seg" role="group" aria-label="Maturity"><button type="button" data-proc-mat="preterm" aria-pressed="' + (S.maturity === "preterm") + '">Preterm</button><button type="button" data-proc-mat="term" aria-pressed="' + (S.maturity === "term") + '">Term</button></span>'; return; }
       var fromRec = rv[i.var] != null && (S.vals[c.id + ":" + i.var] == null || S.vals[c.id + ":" + i.var] === "");
-      h += '<label>' + esc(i.label) + '<span class="nh-u"><input inputmode="decimal" data-proc="' + esc(c.id + ":" + i.var) + '" value="' + esc(S.vals[c.id + ":" + i.var] || "") + '" placeholder="' + esc(fromRec ? String(rv[i.var]) + " (baby record)" : "") + '"><span>' + esc(i.unit || "") + "</span></span></label>";
+      h += '<label>' + esc(i.label) + '<span class="nh-u"><input inputmode="decimal" data-proc="' + esc(c.id + ":" + i.var) + '" value="' + esc(S.vals[c.id + ":" + i.var] || "") + '" placeholder="' + esc(fromRec ? String(rv[i.var]) + " (from baby details)" : "") + '"><span>' + esc(i.unit || "") + "</span></span></label>";
     });
     var line = "";
     if (r.error) h += A.note(r.error, "info");
@@ -89,17 +90,17 @@
     el.innerHTML = '<section class="nh-card"><div class="nh-none">Loading…</div></section>';
     A.dataOrNull("procedures").then(function (doc) {
       var esc = A.esc, d = A.neo();
-      var h = '<section class="nh-card"><h3>Procedures ' + (doc ? A.badge(doc) : "") + '</h3><div class="nh-scroll"><span class="nh-seg" role="group" aria-label="Procedure" style="min-width:560px">' + GROUPS.map(function (g) { return '<button type="button" data-proc-grp="' + esc(g[0]) + '" aria-pressed="' + (S.grp === g[0]) + '">' + esc(g[0]) + "</button>"; }).join("") + "</span></div>";
+      var h = '<section class="nh-card"><h3>Lines and tubes ' + (doc ? A.badge(doc) : "") + '</h3><div class="nh-work" style="font-family:inherit">Pick what you are doing:</div><div class="nh-tabs" role="group" aria-label="Procedure">' + GROUPS.map(function (g) { return '<button type="button" data-proc-grp="' + esc(g[0]) + '" aria-pressed="' + (S.grp === g[0]) + '">' + esc(LABEL[g[0]] || g[0]) + "</button>"; }).join("") + "</div>";
       if (!doc) h += A.noData("procedures");
       else {
         var re = GROUPS.filter(function (g) { return g[0] === S.grp; })[0][1], lines = [];
         var calcs = (doc.calcs || []).filter(function (c) { return re.test(c.id) && (S.grp !== "UAC" || !/^uvc-/.test(c.id) && (c.catheter !== "UVC")) && (S.grp !== "UVC" || !/^uac-/.test(c.id) && (c.catheter !== "UAC")); });
         if (!calcs.length) h += A.noData(S.grp);
         calcs.forEach(function (c) { var x = calcHtml(A, doc, c, d); h += x.html; if (x.line) lines.push(x.line); });
-        h += A.note("Confirm every catheter and tube tip position on imaging before use.", "info") + A.actionsHtml("proc");
+        h += A.note("Check every line and tube tip on an X-ray or scan before using it.", "info") + A.actionsHtml("proc");
         A.setSheet("proc", { title: S.grp + " calculations", tag: "Neonatal procedures", lines: ["Baby: " + G.SMD_NEO.summary()].concat(lines) });
       }
-      h += '<div class="nh-row"><div class="nh-lbl">Step guides</div>' + GUIDES.map(function (g) { return '<button type="button" class="nh-li" data-proc-guide="' + esc(g[0]) + '"><span>' + esc(g[1]) + "</span><small>Knowledge Library</small></button>"; }).join("") + "</div></section>";
+      h += '<div class="nh-row"><div class="nh-lbl">Step-by-step guides</div>' + GUIDES.map(function (g) { return '<button type="button" class="nh-li" data-proc-guide="' + esc(g[0]) + '"><span>' + esc(g[1]) + "</span><small>Knowledge Library</small></button>"; }).join("") + "</div></section>";
       el.innerHTML = h;
       el.oninput = function (e) { var k = e.target.getAttribute && e.target.getAttribute("data-proc"); if (!k) return; S.vals[k] = e.target.value; var pos = e.target.selectionStart; screen(el, A); setTimeout(function () { var n = el.querySelector('[data-proc="' + k + '"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } }, 0); };
       el.onclick = function (e) {

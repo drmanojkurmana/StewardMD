@@ -57,5 +57,8 @@ Each is an object of `min` (>=), `gt` (>), `max` (<=), `lt` (<), copied as the s
 - `fluids.json`, `growth-preterm.json`, `milestones.json`, `bili.json`, `scores.json`,
   `ref-values.json`, `procedures.json`, `tdm.json`: see the header comment in each file and the
   engine that reads it (`neo-*.js`).
+- `monograph-neonatal.json` (kind `neo-monograph`): generated, do not edit. Newborn statements copied verbatim
+  from our own monographs (`worker/data/gold`) by `scripts/neo/build-monograph-neonatal.mjs`; not an external
+  quote, so `validate.mjs` skips it and `test/neo-monograph.test.mjs` checks it instead.
 - Large published tables (LMS rows, hourly thresholds) go in `{ "table": [[...]], "columns": [...],
   "table_src": "<srcId>" }` blocks; the validator checks every value is present in that snapshot.
