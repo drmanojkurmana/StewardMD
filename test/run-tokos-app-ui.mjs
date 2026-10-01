@@ -4,6 +4,7 @@
  * USAGE: node test/run-tokos-app-ui.mjs   (BASE=http://localhost:8996/ to use a running server)
  */
 import { spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -85,7 +86,12 @@ try {
   // 16 CTG cases + 3 text blocks, plus Tokós 2.0: 40 units, 17 bank topics, 6 drills, the labour room, 13 calculators,
   // 6 explorers, 2 ultrasound clinics; the units holding claims to verify come first
   ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 104;`, 20000), "Review Desk Tokós tab lists every Tokós content item: " + await ev(`return document.querySelectorAll('#smdReview .rv-row').length;`));
-  ok(await ev(`var r=document.querySelectorAll('#smdReview .rv-row'); return r[0].getAttribute("data-rv-act") + "," + r[1].getAttribute("data-rv-act");`) === "sel:unit-ob9,sel:unit-ob12", "units with claims to verify are listed first");
+  // The units holding claims to verify come first, in unit order, then everything else. Which units those are follows
+  // the content (the realistic-image lessons carry a verify note too), so the expected list is read from the index.
+  const tIx = JSON.parse(readFileSync(join(HERE, "..", "tokos/learn/index.json"), "utf8"));
+  const verifyUnits = tIx.units.filter((u) => u.lessons.some((l) => ((tIx.lessons[l] || {}).verify || []).length)).map((u) => "sel:unit-" + u.id);
+  const rvOrder = (await ev(`return [].map.call(document.querySelectorAll('#smdReview .rv-row'), function (r) { return r.getAttribute("data-rv-act"); }).join(",");`)).split(",");
+  ok(verifyUnits.length > 0 && rvOrder.slice(0, verifyUnits.length).join(",") === verifyUnits.join(","), "units with claims to verify are listed first, in unit order (" + verifyUnits.length + "): " + rvOrder.slice(0, 3).join(","));
   await ev(`document.querySelector('#smdReview [data-rv-act="sel:unit-ob12"]').click(); return 1;`);
   await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
   await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
