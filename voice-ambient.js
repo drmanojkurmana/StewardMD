@@ -57,8 +57,43 @@
   // ponytail: re-extract the whole transcript each tick, O(n·ticks). Fine for consult-length text.
   function reduce(transcript, opts) {
     opts = opts || {};
+    // REPORTED-SPEECH GATE (flag smd_scribe_reported_gate, default ON, "0" = off). The OPD ambient
+    // scribe hears doctor AND patient on one mic and passes speaker:"doctor" for everything, so a
+    // patient saying "my BP was 150/90" filled the objective vitals. Clauses that report a reading
+    // (first-person possessive, home/outside reading, or a past-time marker next to a vital) are
+    // pulled out and merged as speaker:"patient", which voice-emr-map drops from objective fields.
+    // When no clause is reported the transcript is processed exactly as before.
+    if (opts.speaker !== "patient" && !flagOff("smd_scribe_reported_gate")) {
+      var split = splitReported(transcript);
+      if (split.reported.length) {
+        var cur = MAP ? MAP.merge(VV ? VV.extract(split.current) : [], opts) : { updates: [], dropped: [] };
+        var pOpts = {}; for (var k in opts) if (Object.prototype.hasOwnProperty.call(opts, k)) pOpts[k] = opts[k];
+        pOpts.speaker = "patient";
+        var rep = MAP ? MAP.merge(VV ? VV.extract(split.reported.join(". ")) : [], pOpts) : { updates: [], dropped: [] };
+        return { updates: cur.updates.concat(rep.updates), dropped: cur.dropped.concat(rep.dropped), reported: split.reported };
+      }
+    }
     var recs = VV ? VV.extract(transcript) : [];
     return MAP ? MAP.merge(recs, opts) : { updates: [], dropped: [] };
+  }
+
+  // A clause "reports" a reading when it carries a vital/measurement word AND either a first-person
+  // possessive ("my BP", "my sugar") or a not-now marker (at home, last week, yesterday, was 150,
+  // before, usually). Third person ("his BP is 130/80") is how doctors dictate exams, so it is NOT
+  // treated as reported. Conservative by design: a removed clause leaves the field empty, never wrong.
+  var VITAL_WORD = /\b(bp|blood pressure|pressure|sugar|sugars|glucose|grbs|rbs|fbs|ppbs|pulse|heart rate|hr|temperature|temp|fever|weight|wt|spo2|sats?|saturation|oxygen|rr|respiratory rate|reading|readings)\b/;
+  var FIRST_PERSON_VITAL = /\b(my|our)\s+(?:\w+\s+){0,2}?(bp|blood pressure|pressure|sugar|sugars|glucose|pulse|heart rate|temperature|temp|fever|weight|spo2|sats?|saturation|oxygen|reading|readings)\b/;
+  var NOT_NOW = /\b(at home|home (?:reading|readings|monitor|machine|check)|outside|other (?:hospital|clinic|doctor)|previous(?:ly)?|last (?:week|month|year|visit|time|night)|yesterday|days? ago|weeks? ago|months? ago|years? ago|usually|normally|used to|before (?:admission|fluids|treatment)|was\s+\d|were\s+\d|had been)\b/;
+  function splitReported(transcript) {
+    var text = String(transcript == null ? "" : transcript);
+    var clauses = text.split(/(?:[.?!;\n]+|,(?=\s)|\s+but\s+)/), keep = [], reported = [];
+    for (var i = 0; i < clauses.length; i++) {
+      var c = clauses[i].trim(); if (!c) continue;
+      var low = c.toLowerCase();
+      if (FIRST_PERSON_VITAL.test(low) || (VITAL_WORD.test(low) && NOT_NOW.test(low))) reported.push(c);
+      else keep.push(c);
+    }
+    return { current: reported.length ? keep.join(". ") : text, reported: reported };
   }
 
   // words the deterministic layer already handles — stripped before judging "is this narrative?"
@@ -476,7 +511,7 @@
     };
   }
 
-  var API = { start: start, reduce: reduce, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, isSilence: isSilence, useFlush: useFlush, probeRoute: probeRoute, _version: "1.0" };
+  var API = { start: start, reduce: reduce, splitReported: splitReported, needsLLM: needsLLM, accumulate: accumulate, needsRefine: needsRefine, detectScript: detectScript, isSilence: isSilence, useFlush: useFlush, probeRoute: probeRoute, _version: "1.0" };
   if (root) root.SMD_AMBIENT = API;
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);
