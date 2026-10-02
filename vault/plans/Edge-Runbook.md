@@ -42,7 +42,7 @@ Fail: report to Cactus, drop Needle from v1, FunctionGemma alone goes forward.
 **Android (2026-10-02):** step 3 PASSED on the full debug APK (build of 874fa71f3 + Needle in package.json,
 locally): all 20 `.so` in `lib/arm64-v8a` have every LOAD segment at `0x4000`; the merged manifest has
 `NeedleService` in `android:process=":edge"`. Step 4 on the real phone (Pixel 9, which runs 4 KB pages):
-Needle loads and calls complete with valid envelopes, but far too slowly (gate A0.2 below). Step 4 on the 16 KB emulator PASSED (2026-10-02,
+Needle loads and calls complete with valid envelopes (slow until the thread fix; re-test under gate A0.2 below). Step 4 on the 16 KB emulator PASSED (2026-10-02,
 `system-images;android-35;google_apis_ps16k;arm64-v8a`, AVD `smd16k`, `getconf PAGE_SIZE` = 16384, the
 Pixel debug APK): app launched with no load errors; `:edge` loaded `libneedle_jni.so` and the weights,
 configure rc 111, one call `success:true` (`engine threads 4 (cpu_capacity, 4 cpus, 4 allowed)`);
