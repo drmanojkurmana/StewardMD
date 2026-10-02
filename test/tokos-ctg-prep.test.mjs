@@ -227,3 +227,41 @@ test("review queue: documents every review field the app reads, lists the conten
   const committed = readFileSync("docs/tokos/review-queue.md", "utf8");
   assert.ok(committed.includes(HAND_MARK) && committed.includes("## How a review is recorded") && committed.includes("Review Desk"), "committed queue carries the generated header and the marker");
 });
+
+// A 60 min trace with a contraction every 3 min; from lateFromMin each one has a late deceleration
+// (gradual 60 s fall to 90 bpm starting 20 s into the contraction, nadir 80 s after its peak).
+function lateTrace(lateFromMin, flat) {
+  const n = 60 * 60 * FS, f = new Float64Array(n), u = new Float64Array(n).fill(10);
+  for (let i = 0; i < n; i++) f[i] = flat ? 140 + Math.sin(i / 7) : 140 + 6 * Math.sin((2 * Math.PI * i) / (FS * 20));
+  for (let s = 0; s < 3600; s += 180) {
+    for (let j = 0; j < 60 * FS; j++) u[s * FS + j] = 60;
+    if (s < lateFromMin * 60) continue;
+    for (let j = 0, d0 = (s + 20) * FS; j < 100 * FS && d0 + j < n; j++) {
+      const t = j / FS, drop = t < 60 ? (50 * t) / 60 : Math.max(0, 50 * (1 - (t - 60) / 40));
+      f[d0 + j] = Math.min(f[d0 + j], 140 - drop);
+    }
+  }
+  return [f, u];
+}
+
+test("FIGO: repetitive late decelerations over 30 min (20 with reduced variability) are pathological", () => {
+  const over30 = extractFIGOFeatures(...lateTrace(25, false), FS);
+  assert.ok(over30.repetitiveLateMin > 30); assert.equal(over30.figoSuggested, "pathological");
+  const under30 = extractFIGOFeatures(...lateTrace(35, false), FS);
+  assert.ok(under30.repetitiveLateMin > 20 && under30.repetitiveLateMin < 30); assert.equal(under30.figoSuggested, "suspicious");
+  const reduced = extractFIGOFeatures(...lateTrace(35, true), FS);
+  assert.equal(reduced.variability.band, "reduced"); assert.equal(reduced.figoSuggested, "pathological");
+});
+
+test("baseline bands are read before the 5 bpm rounding (99 is pathological, 108 bradycardia, 162 tachycardia)", () => {
+  const at = (b) => { const n = 3600 * FS, f = new Float64Array(n); for (let i = 0; i < n; i++) f[i] = b + 6 * Math.sin((2 * Math.PI * i) / (FS * 20)); return extractFIGOFeatures(f, restUc(60), FS); };
+  assert.equal(at(99).figoSuggested, "pathological"); assert.equal(at(99).baselineClass, "severe_bradycardia");
+  assert.equal(at(108).baselineClass, "bradycardia"); assert.equal(at(108).baseline, 108);
+  assert.equal(at(162).baselineClass, "tachycardia"); assert.equal(at(162).baseline, 162);
+  assert.equal(at(141).baseline, 140);
+});
+
+test("a deceleration of exactly 3 min is not yet prolonged (FIGO: more than 3 min)", () => {
+  assert.notEqual(decelSubtype({ durationSec: 180, start: 0, nadir: 200, end: 720 }, [], 4), "prolonged");
+  assert.equal(decelSubtype({ durationSec: 181, start: 0, nadir: 200, end: 724 }, [], 4), "prolonged");
+});

@@ -112,6 +112,12 @@ try {
   ok(await until(`return document.querySelector('[data-act=tkxmop]').disabled===false;`), "a posterior start enables the persistent OP toggle");
   await click("[data-act=tkxmop]"); await click('[data-act=tkxmgo][data-v="7"]');
   ok(await until(`return /Born as OP/.test(document.querySelector(".tkx").textContent);`), "persistent OP is born as OP");
+  await click("[data-act=tkxmop]");
+  await ev(`var s=document.querySelector('[data-xin=start]'); s.value="ROP"; s.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
+  await click('[data-act=tkxmgo][data-v="3"]');
+  ok(await until(`var h=[].map.call(document.querySelectorAll('.tkx-fig [data-view=below] [data-part=head]'),function(g){return g.getAttribute("transform").replace(/.*rotate\\(([-0-9.]+)\\).*/,"$1");}); return h.join()==="135,-90";`),
+    "view from below follows the start: ROP (dashed) turns to OA");
+  await shot("02b-mechanism-rop-dark");
   await slide("[data-xin=station]", 3);
   ok(await text("#tkxLive .tkx-num") === "+3 cm" && /Below the ischial spines/.test(await text("#tkxLive")), "station slider: +3 cm, below the spines (live, no repaint)");
   ok(await ev(`var r=document.querySelector('[data-xin=station]'); return r.value==="3" && r.getAttribute("aria-valuetext")==="+3 cm";`) === true, "slider stays mounted with its spoken value");

@@ -93,3 +93,39 @@ for (const [id, [proto, pins]] of Object.entries(PINS)) {
     }
   });
 }
+
+test("a stage's time is its own clock (spentSec): reading the previous feedback is not charged as slowness", () => {
+  const sh = require("../tokos-models/drill-shoulder.js");
+  // Each step answered 10 s into its own stage clock, with 25 s spent reading the feedback before Continue.
+  let t = 0;
+  const choices = sh.idealPath().map((sid) => {
+    t += 10;
+    const c = { stage: sid, option: sh.stages.find((s) => s.id === sid).options.find((o) => o.correct).id, atSec: t, spentSec: 10 };
+    t += 25;
+    return c;
+  });
+  const r = sh.score({ choices });
+  assert.equal(r.pct, 100); assert.deepEqual(r.criticalMisses, []);
+  // Over the stage's own budget is still late.
+  const slow = structuredClone(choices); slow[1].spentSec = 31;
+  assert.deepEqual(sh.score({ choices: slow }).criticalMisses.map((m) => [m.stage, m.reason]), [["mcroberts", "late"]]);
+});
+
+test("no option without next falls through to an off-path consequence stage", () => {
+  for (const id of IDS) {
+    const d = JSON.parse(read(`tokos/drill/${id}.json`)), ideal = new Set(core.idealPath(d));
+    d.stages.forEach((s, i) => s.options.forEach((o) => {
+      if (o.next) return;
+      const n = d.stages[i + 1];
+      assert.ok(!n || ideal.has(n.id), `${id} ${s.id}.${o.id} falls into ${n && n.id}`);
+    }));
+  }
+});
+
+test("per-step time budgets fit inside each drill's time limit", () => {
+  for (const id of IDS) {
+    const d = JSON.parse(read(`tokos/drill/${id}.json`));
+    const sum = core.idealPath(d).reduce((a, sid) => a + (d.stages.find((s) => s.id === sid).timeSec || 0), 0);
+    assert.ok(!d.timeLimitSec || sum <= d.timeLimitSec, `${id}: ${sum} > ${d.timeLimitSec}`);
+  }
+});

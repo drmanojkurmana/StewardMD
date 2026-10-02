@@ -13,7 +13,7 @@
     title: { en: "Apgar score", hi: "एपगार स्कोर" },
     sources: [{ label: "ACOG Committee Opinion 644 (with AAP): The Apgar Score, Fig. 1 and text", url: "https://www.acog.org/-/media/project/acog/acogorg/clinical/files/committee-opinion/articles/2015/10/the-apgar-score.pdf" }],
     inputs: [
-      item("color", "Color", "रंग", ["Blue or pale", "नीला या पीला"], ["Acrocyanotic", "हाथ-पैर नीले"], ["Completely pink", "पूरा गुलाबी"]),
+      item("color", "Color", "रंग", ["Blue or pale", "नीला या फीका"], ["Acrocyanotic", "हाथ-पैर नीले"], ["Completely pink", "पूरा गुलाबी"]),
       item("heart", "Heart rate", "हृदय गति", ["Absent", "अनुपस्थित"], ["<100 per minute", "<100 प्रति मिनट"], [">100 per minute", ">100 प्रति मिनट"]),
       item("reflex", "Reflex irritability", "रिफ्लेक्स प्रतिक्रिया", ["No response", "कोई प्रतिक्रिया नहीं"], ["Grimace", "मुँह बनाना"], ["Cry or active withdrawal", "रोना या सक्रिय हटना"]),
       item("tone", "Muscle tone", "मांसपेशी तनाव", ["Limp", "ढीला"], ["Some flexion", "थोड़ा मुड़ाव"], ["Active motion", "सक्रिय गति"]),

@@ -193,8 +193,62 @@ test("fetal compromise: CTG goes suspicious then pathological; leaving it over 3
     s = s || x; checked++;
   }
   assert.ok(s, "at least one seed reaches compromise before birth");
-  const now = L.step(s, L.actions(s).includes("instrumental") ? "instrumental" : "caesarean", 0);
+  const path = until(s, (y) => y.fhr.figo === "pathological");
+  const now = L.step(path, L.actions(path).includes("instrumental") ? "instrumental" : "caesarean", 0);
   assert.deepEqual(L.outcome(now).flags, []);
+});
+
+test("fetal compromise shows on the CTG in (almost) every run before birth", () => {
+  let path = 0;
+  for (let seed = 1; seed <= 300; seed++) {
+    let s = L.init(seed, "compromise");
+    while (!s.delivered) s = L.step(s, "observe", 5);
+    if (codes(s).includes("fhr_pathological")) path++;
+  }
+  assert.ok(path >= 290, "pathological in " + path + " of 300");
+});
+
+test("caesarean for a suspicious CTG is flagged; FIGO expedites birth for a pathological one", () => {
+  let n = 0;
+  for (let seed = 1; seed <= 100 && n < 5; seed++) {
+    const s = until(L.init(seed, "compromise"), (y) => y.fhr.figo !== "normal");
+    if (s.delivered || s.stage !== 1 || L.delayed(s)) continue;
+    assert.equal(s.fhr.figo, "suspicious");
+    assert.ok(L.step(s, "caesarean", 0).flags.includes("cs_for_suspicious"));
+    n++;
+  }
+  assert.ok(n > 0);
+});
+
+test("obstructed labour: the arrest is always shown, and caesarean at arrest is not flagged", () => {
+  for (let seed = 1; seed <= 200; seed++) {
+    const s = until(L.init(seed, "obstructed"), (x) => x.sched.arrestFrom != null);
+    assert.ok(codes(s).includes("arrest"), "seed " + seed);
+    const c = L.step(s, "caesarean", 0);
+    assert.deepEqual(L.outcome(c).flags, [], "seed " + seed);
+    assert.equal(L.outcome(c).grade, "good");
+  }
+  const left = until(L.init(3, "obstructed"), (x) => x.sched.arrestFrom != null && x.t - x.sched.arrestFrom >= 120, 400);
+  assert.ok(left.flags.includes("obstruction_neglected"));
+  assert.ok(run(left, 40).maternal.pulse <= 160);
+});
+
+test("vacuum birth without an indication is flagged", () => {
+  const s = until(L.init(7, "normal-primi"), (x) => L.instrumentalOk(x), 400);
+  assert.ok(L.instrumentalOk(s));
+  const v = L.step(s, "instrumental", 0);
+  assert.ok(v.flags.includes("instrumental_not_indicated")); assert.equal(L.outcome(v).grade, "ok");
+});
+
+test("vacuum birth for a merely suspicious CTG is flagged; neglected obstruction is graded as harm", () => {
+  const s = until(L.init(7, "normal-primi"), (x) => L.instrumentalOk(x), 400);
+  const susp = JSON.parse(JSON.stringify(s)); susp.fhr.figo = "suspicious";
+  assert.ok(L.step(susp, "instrumental", 0).flags.includes("instrumental_for_suspicious"));
+  const path = JSON.parse(JSON.stringify(s)); path.fhr.figo = "pathological";
+  const pv = L.step(path, "instrumental", 0);
+  assert.ok(!pv.flags.includes("instrumental_for_suspicious") && !pv.flags.includes("instrumental_not_indicated"));
+  const left = until(L.init(3, "obstructed"), (x) => x.sched.arrestFrom != null && x.t - x.sched.arrestFrom >= 120, 400);
+  assert.equal(L.outcome(L.step(left, "caesarean", 0)).grade, "poor");
 });
 
 test("FHR classes match the CTG clinic deck categories", () => {

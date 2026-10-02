@@ -64,3 +64,14 @@ test("every lesson picture points at a file that exists (see.img and see.diagram
   }
   assert.deepEqual(missing, []);
 });
+
+test("quiz options are whole answers: no option is a bare unit word such as \"hours\" with its number missing", () => {
+  if (!existsSync(LEARN + "lessons")) return;
+  const BARE = /^(seconds|minutes?|hours?|days?|weeks?|months?|years?|mg|g|mcg|ml|units?|iu|percent|times?)$/i;
+  const bad = [];
+  for (const f of readdirSync(LEARN + "lessons").filter((x) => x.endsWith(".json"))) {
+    const l = JSON.parse(readFileSync(LEARN + "lessons/" + f, "utf8"));
+    (l.check || []).forEach((q, qi) => q.o.forEach((o, oi) => { if (BARE.test(o.en.trim()) || !o.en.trim() || !String(o.hi || "").trim()) bad.push(f + " check[" + qi + "].o[" + oi + "] " + JSON.stringify(o.en)); }));
+  }
+  assert.deepEqual(bad, []);
+});

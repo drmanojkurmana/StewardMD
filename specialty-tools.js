@@ -19,7 +19,9 @@
   // Numbers as typed on a phone: a true minus, a decimal comma, spaces. Anything else is NaN.
   function parseNum(v) {
     if (typeof v === "number") return v;
-    var s = String(v == null ? "" : v).replace(/−/g, "-").replace(",", ".").replace(/\s+/g, "");
+    var s = String(v == null ? "" : v).replace(/−/g, "-").replace(/\s+/g, "");
+    // "1,500" or "1,25,000" (thousands, Indian or Western grouping) drops the commas; a lone "12,5" is a decimal comma.
+    s = /^[-+]?[1-9]\d{0,2}(,\d{2,3})*,\d{3}$/.test(s) ? s.replace(/,/g, "") : s.replace(",", ".");
     if (!/^[-+]?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
     return parseFloat(s);
   }
@@ -495,7 +497,7 @@
       var x = stage(R.cur);
       if (R.answered) return;
       R.answered = true; R.picked = optId;
-      R.choices.push({ stage: x.id, option: optId, atSec: Math.round((Date.now() - R.t0) / 1000) });
+      R.choices.push({ stage: x.id, option: optId, atSec: Math.round((Date.now() - R.t0) / 1000), spentSec: Math.round((Date.now() - R.st0) / 1000) });
       var o = pickedOpt(x);
       I.haptic(o && o.correct ? "success" : "error");
       renderStage("#drNext");

@@ -205,6 +205,7 @@ export const CFG = {
   DECEL_DROP: 15, DECEL_MIN_SEC: 15,
   PROLONGED_SEC: 180, PATH_DECEL_SEC: 300,    // FIGO: prolonged over 3 min; pathological over 5 min
   RED_VAR_PATH_MIN: 50, INC_VAR_PATH_MIN: 30, // FIGO: reduced over 50 min, increased over 30 min
+  REP_LATE_PATH_MIN: 30, REP_LATE_REDVAR_MIN: 20, REP_LATE_SUSP_MIN: 10, // the 10 min suspicious floor is a Tokós choice // FIGO: repetitive late or prolonged decelerations over 30 min (20 with reduced variability)
   QUALITY_SUBOPTIMAL_PCT: 30,                 // Tokós threshold, not a FIGO number
 };
 const ok = (v) => v >= CFG.FHR_MIN && v <= CFG.FHR_MAX;
@@ -222,12 +223,18 @@ export function signalQuality(fhr) {
 // Pass 1: mean of the interquartile samples. Pass 2: mean of samples within 10 bpm of pass 1,
 // which drops decelerations and accelerations. Rounded to 5 bpm as FIGO reports baseline.
 export function twoPassBaseline(fhr) {
+  const b = twoPassBaselineExact(fhr);
+  return b == null ? null : Math.round(b / 5) * 5;
+}
+// The same estimate before rounding. FIGO bands are classified on this value, so a true 99, 108 or 162 bpm
+// is not moved across a band edge (100, 110, 160) by the 5 bpm rounding.
+export function twoPassBaselineExact(fhr) {
   const v = Array.from(fhr).filter(ok).sort((a, b) => a - b);
   if (!v.length) return null;
   const q1 = pct(v, 0.25), q3 = pct(v, 0.75);
   const prelim = mean(v.filter((x) => x >= q1 && x <= q3));
   const stable = v.filter((x) => Math.abs(x - prelim) <= 10);
-  return Math.round((stable.length ? mean(stable) : prelim) / 5) * 5;
+  return stable.length ? mean(stable) : prelim;
 }
 
 // Quality of the 30-min strip the learner sees. A lost UC channel reads as flat 0 in this data (see the
@@ -294,7 +301,7 @@ export function minuteVariability(fhr, fs, decels) {
   const inDecel = new Uint8Array(fhr.length);
   decels.forEach((d) => inDecel.fill(1, d.start, d.end));
   const win = fs * 60, ranges = [];
-  let reducedMin = 0, increasedMin = 0;
+  let reducedMin = 0, increasedMin = 0, redRun = 0, incRun = 0, reducedRunMin = 0, increasedRunMin = 0;
   for (let i = 0; i + win <= fhr.length; i += win) {
     const seg = [];
     for (let j = i; j < i + win; j++) if (ok(fhr[j]) && !inDecel[j]) seg.push(fhr[j]);
@@ -304,16 +311,20 @@ export function minuteVariability(fhr, fs, decels) {
     ranges.push(r);
     if (r < 5) reducedMin++;
     else if (r > 25) increasedMin++;
+    // Longest continuous episode, for the reviewer. The category still uses the total minutes: switching it to runs
+    // would move case 1048 (34 increased minutes, longest run 11) from pathological to suspicious; owner to decide.
+    redRun = r < 5 ? redRun + 1 : 0; incRun = r > 25 ? incRun + 1 : 0;
+    reducedRunMin = Math.max(reducedRunMin, redRun); increasedRunMin = Math.max(increasedRunMin, incRun);
   }
   const sorted = ranges.slice().sort((a, b) => a - b);
   const medianRange = sorted.length ? pct(sorted, 0.5) : 0;
   const band = medianRange < 5 ? "reduced" : medianRange > 25 ? "increased" : "normal";
-  return { reducedMin, increasedMin, assessedMin: ranges.length, medianRange: Math.round(medianRange * 10) / 10, band };
+  return { reducedMin, increasedMin, reducedRunMin, increasedRunMin, assessedMin: ranges.length, medianRange: Math.round(medianRange * 10) / 10, band };
 }
 
 // Advisory only (Global Constraints): learners are never graded on this unless a reviewer confirmed it.
 export function decelSubtype(d, contractions, fs) {
-  if (d.durationSec >= CFG.PROLONGED_SEC) return "prolonged";
+  if (d.durationSec > CFG.PROLONGED_SEC) return "prolonged"; // FIGO: prolonged lasts more than 3 min
   if ((d.nadir - d.start) / fs < 30) return "variable";
   const c = contractions.find((k) => d.start <= k.end && d.end >= k.start - 30 * fs);
   if (!c) return "unclassified";
@@ -331,13 +342,31 @@ export function acidosisClass(c) {
   return c.pH < 7.05 && c.BDecf >= 12 ? "metabolic" : "acidaemia_not_metabolic";
 }
 
+// Longest time (minutes) over which more than half of the contractions carry a late or prolonged deceleration,
+// measured from the first to the last such deceleration in a run of contractions. A run ends when two
+// contractions in a row have no late or prolonged deceleration. Same association window as "repetitive".
+export function repetitiveLateMinutes(contr, decels, typed, fs) {
+  let best = 0, first = null, last = null, n = 0, hit = 0, miss = 0;
+  const flush = () => { if (first != null && hit / n > 0.5) best = Math.max(best, (last - first) / fs / 60); first = null; n = 0; hit = 0; miss = 0; };
+  contr.forEach((c) => {
+    let d = null;
+    decels.forEach((x, i) => { if (!d && (typed[i] === "late" || typed[i] === "prolonged") && x.start >= c.start - 30 * fs && x.start <= c.end + 60 * fs) d = x; });
+    if (d) { if (first == null) first = d.start; last = d.end; n++; hit++; miss = 0; }
+    else if (first != null) { n++; if (++miss >= 2) flush(); }
+  });
+  flush();
+  return Math.round(best * 10) / 10;
+}
+
 export function extractFIGOFeatures(fhrAll, ucAll, fs) {
   const n = Math.min(fhrAll.length, CFG.WINDOW_MIN * 60 * fs);
   const fhr = fhrAll.slice(fhrAll.length - n), uc = ucAll.slice(ucAll.length - n);
   const quality = signalQuality(fhr);
   if (quality.lossPct > 70) return null;
-  const baseline = twoPassBaseline(fhr);
-  const bClass = baselineClass(baseline);
+  const exact = twoPassBaselineExact(fhr);
+  const bClass = baselineClass(exact);
+  // Shown rounded to 5 bpm; when that rounding would cross a band edge, show the nearest 1 bpm instead.
+  const baseline = baselineClass(Math.round(exact / 5) * 5) === bClass ? Math.round(exact / 5) * 5 : Math.round(exact);
   const decels = detectDecels(fhr, fs, baseline);
   const variability = minuteVariability(fhr, fs, decels);
   const contr = detectContractions(uc, fs);
@@ -351,20 +380,24 @@ export function extractFIGOFeatures(fhrAll, ucAll, fs) {
   const repetitive = contr.length > 0 && withDecel / contr.length > 0.5;
   const maxDecel = decels.reduce((m, d) => Math.max(m, d.durationSec), 0);
 
+  // FIGO pathological: repetitive late or prolonged decelerations for over 30 min (over 20 min with reduced
+  // variability). Uses the advisory subtypes, so a reviewer confirms it through case.review.figo.
+  const typed = decels.map((d) => decelSubtype(d, contr, fs));
+  const repLateMin = repetitiveLateMinutes(contr, decels, typed, fs);
+  const repLateLimit = variability.band === "reduced" ? CFG.REP_LATE_REDVAR_MIN : CFG.REP_LATE_PATH_MIN;
   let figo = "normal";
-  if (baseline < 100 || variability.reducedMin > CFG.RED_VAR_PATH_MIN || variability.increasedMin > CFG.INC_VAR_PATH_MIN || maxDecel > CFG.PATH_DECEL_SEC) {
+  if (exact < 100 || variability.reducedMin > CFG.RED_VAR_PATH_MIN || variability.increasedMin > CFG.INC_VAR_PATH_MIN ||
+      maxDecel > CFG.PATH_DECEL_SEC || repLateMin > repLateLimit) {
     figo = "pathological";
-  } else if (bClass !== "normal" || variability.band !== "normal" || repetitive || maxDecel >= CFG.PROLONGED_SEC) {
+  } else if (bClass !== "normal" || variability.band !== "normal" || repetitive || maxDecel > CFG.PROLONGED_SEC || repLateMin >= CFG.REP_LATE_SUSP_MIN) {
     figo = "suspicious";
   }
-  // ponytail: "repetitive late or prolonged decelerations for over 30 min" (pathological) needs typed
-  // decelerations; left to the reviewer via case.review.figo until subtype is validated.
   return {
     window: { minutes: Math.round(n / fs / 60) },
     quality, baseline, baselineClass: bClass, variability,
     contractions: { count30, per10, tachysystole: per10 > 5 },
-    decels: decels.map((d) => ({ startSec: Math.round(d.start / fs), durationSec: d.durationSec, depth: d.depth, subtypeSuggested: decelSubtype(d, contr, fs) })),
-    repetitive, figoSuggested: figo,
+    decels: decels.map((d, i) => ({ startSec: Math.round(d.start / fs), durationSec: d.durationSec, depth: d.depth, subtypeSuggested: typed[i] })),
+    repetitive, repetitiveLateMin: repLateMin, figoSuggested: figo,
   };
 }
 

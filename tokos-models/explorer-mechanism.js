@@ -46,8 +46,8 @@
   var MOVEMENTS = [
     { id: "engagement", level: "inlet", parts: ["symphysis", "sacrum", "inlet", "spines", "head", "occiput"],
       title: { en: "Engagement", hi: "Engagement (सिर का श्रोणि में उतरना)" },
-      what: { en: "The widest part of the head, the biparietal diameter, passes through the pelvic inlet. The head usually settles in the transverse position, the widest diameter of the inlet.",
-              hi: "सिर का सबसे चौड़ा हिस्सा (biparietal diameter) pelvic inlet से पार हो जाता है। सिर आमतौर पर transverse स्थिति में बैठता है, जो inlet का सबसे चौड़ा व्यास है।" },
+      what: { en: "The widest part of the head, the biparietal diameter, passes through the pelvic inlet. The head usually settles in the transverse position, the widest diameter of the inlet. Indian textbooks (DC Dutta) describe left occiput anterior, in the right oblique diameter, as the commonest position.",
+              hi: "सिर का सबसे चौड़ा हिस्सा (biparietal diameter) pelvic inlet से पार हो जाता है। सिर आमतौर पर transverse स्थिति में बैठता है, जो inlet का सबसे चौड़ा व्यास है। भारतीय किताबें (DC Dutta) right oblique diameter में left occiput anterior को सबसे आम स्थिति बताती हैं।" },
       why: { en: "Fits the head to the widest diameter available at the inlet.", hi: "सिर को inlet के सबसे चौड़े व्यास में बिठाता है।" } },
     { id: "descent", level: "pelvis", parts: ["symphysis", "sacrum", "spines", "head", "occiput"],
       title: { en: "Descent", hi: "Descent (सिर का नीचे खिसकना)" },
@@ -72,7 +72,7 @@
     { id: "restitution", level: "delivered", parts: ["symphysis", "head", "shoulders", "occiput"],
       title: { en: "Restitution", hi: "Restitution (सिर का वापस घूमना)" },
       what: { en: "After the head is born it turns back toward the oblique position it had before internal rotation, undoing the twist between the head and the shoulders.",
-              hi: "सिर के जन्म के बाद वह उस oblique स्थिति की ओर वापस घूमता है जो internal rotation से पहले थी, यानी सिर और कंधों के बीच का ऐंठन खुल जाता है।" },
+              hi: "सिर के जन्म के बाद वह उस oblique स्थिति की ओर वापस घूमता है जो internal rotation से पहले थी, यानी सिर और कंधों के बीच की ऐंठन खुल जाती है।" },
       why: null },
     { id: "external-rotation", level: "delivered", parts: ["symphysis", "head", "shoulders", "occiput"],
       title: { en: "External rotation", hi: "External rotation (सिर का बाहर घूमना)" },
@@ -114,15 +114,17 @@
     var d = norm(b.angle - a.angle);
     if (d === 0) return { ok: true, degrees: 0, direction: "none", via: [] };
     var dir = d < 180 ? "clockwise" : d > 180 ? "anticlockwise" : "either"; // as seen from below (the right-hand picture)
-    var deg = d > 180 ? 360 - d : d, step = d > 180 ? -45 : 45, via = [], ang = a.angle;
+    // a 180 degree turn has no shorter side; it is drawn past the mother's left, the side this model restitutes to
+    var deg = d > 180 ? 360 - d : d, step = d >= 180 ? -45 : 45, via = [], ang = a.angle;
     for (var k = 1; k < deg / 45; k++) { ang = norm(ang + step); via.push(ORDER_POS[ang / 45]); }
     return { ok: true, degrees: deg, direction: dir, via: via };
   }
   function nearestPos(angle) { return ORDER_POS[Math.round(norm(angle) / 45) % 8]; }
 
   /* The mechanism for a head that engages in position `start`. The occiput turns to OA at internal rotation
-     (persistentOP: it does not turn and stays posterior); restitution turns it back 45 degrees, external rotation
-     completes the turn to the transverse position on the side the occiput started (OA start on the left: LOT). */
+     (persistentOP: it fails to turn forward and turns 45 degrees back to direct OP, born face to pubes); restitution
+     turns it back 45 degrees, external rotation completes the turn to the transverse position on the side the occiput
+     started (OA or OP start: the left, LOT). */
   function sequence(start, opts) {
     opts = opts || {};
     if (!POSITIONS[start]) return { ok: false, error: { en: "Unknown position.", hi: "अज्ञात स्थिति।" } };
@@ -131,7 +133,7 @@
     var i, m, before, after, turn;
     for (i = 0; i < MOVEMENTS.length; i++) {
       m = MOVEMENTS[i]; before = pos; after = pos;
-      if (m.id === "internal-rotation") { after = stayPosterior ? pos : "OA"; }
+      if (m.id === "internal-rotation") { after = stayPosterior ? "OP" : "OA"; }
       else if (m.id === "restitution") { after = side === 1 ? "LOA" : "ROA"; if (stayPosterior) after = pos; }
       else if (m.id === "external-rotation") { after = side === 1 ? "LOT" : "ROT"; if (stayPosterior) after = pos; }
       turn = rotation(before, after);
@@ -139,9 +141,9 @@
       pos = after;
     }
     var notes = [];
-    if (stayPosterior) notes.push({ en: "The occiput did not turn forward: persistent occiput posterior. Restitution and external rotation are not modelled for this course.", hi: "Occiput आगे नहीं घूमा: persistent occiput posterior। इस स्थिति के लिए restitution और external rotation दिखाए नहीं गए।" });
-    if (start === "OA" || start === "OP") notes.push({ en: "The side of restitution is not fixed for a head that starts in the midline; this model uses the left.", hi: "जो सिर midline से शुरू होता है उसके restitution की दिशा तय नहीं होती; यह model बाईं दिशा लेता है।" });
-    return { ok: true, start: start, steps: steps, bornAs: stayPosterior ? start : "OA", notes: notes };
+    if (stayPosterior) notes.push({ en: "The occiput did not turn forward: persistent occiput posterior. It turned back to direct occiput posterior, and the baby is born face to pubes. Restitution and external rotation are not modelled for this course.", hi: "Occiput आगे नहीं घूमा: persistent occiput posterior। वह पीछे घूमकर direct occiput posterior में आया और शिशु face to pubes पैदा होता है। इस स्थिति के लिए restitution और external rotation दिखाए नहीं गए।" });
+    if ((start === "OA" || start === "OP") && !stayPosterior) notes.push({ en: "The side of restitution is not fixed for a head that starts in the midline; this model uses the left.", hi: "जो सिर midline से शुरू होता है उसके restitution की दिशा तय नहीं होती; यह model बाईं दिशा लेता है।" });
+    return { ok: true, start: start, steps: steps, bornAs: stayPosterior ? "OP" : "OA", notes: notes };
   }
 
   return {

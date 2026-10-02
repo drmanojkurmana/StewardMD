@@ -100,3 +100,11 @@ test("reviewComplete: only review.complete === true counts; partial labels keep 
   assert.equal(D.reviewComplete(Object.assign({}, baseCase, { review: { complete: "yes" } })), false);
   assert.equal(D.reviewComplete(Object.assign({}, baseCase, { review: { by: "Dr X", date: "2026-10-01", complete: true } })), true);
 });
+
+test("decelerations key: exactly 3 min is not prolonged (FIGO: more than 3 min); over 5 min is over5", () => {
+  const withDecel = (sec) => D.truthFor(Object.assign({}, baseCase, { features: Object.assign({}, baseCase.features, { decels: [{ durationSec: sec }] }) })).decels;
+  assert.equal(withDecel(180), "present");
+  assert.equal(withDecel(181), "prolonged");
+  assert.equal(withDecel(300), "prolonged");
+  assert.equal(withDecel(301), "over5");
+});

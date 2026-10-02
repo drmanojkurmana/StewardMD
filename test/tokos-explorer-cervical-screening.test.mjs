@@ -52,6 +52,8 @@ test("after referral: eligible for cryotherapy, otherwise biopsy; biopsy by grad
   assert.equal(S.next("refer-gyn", "not-eligible").step.id, "biopsy");
   assert.equal(S.next("cryotherapy", "done").step.id, "followup-1y");
   assert.equal(S.next("biopsy", "cin1").step.id, "cryotherapy-cin1");
+  assert.equal(S.next("biopsy", "normal").step.id, "followup-1y"); // a negative biopsy still has a path
+  assert.match(S.steps["cryotherapy-cin1"].text.en, /ASCCP 2019/);
   assert.equal(S.next("biopsy", "cin2-3").step.id, "leep");
   assert.equal(S.next("biopsy", "cancer").step.id, "refer-tcc");
   assert.equal(S.next("cryotherapy-cin1", "done").step.id, "followup-1y");
@@ -132,4 +134,11 @@ test("learner text: English and Hindi, no em dash, ASCII numerals in Hindi", () 
     assert.ok(!/[०-९]/.test(t.hi));
   }
   for (const s of Object.values(S.steps)) assert.ok(/[ऀ-ॿ]/.test(s.title.hi + s.text.hi), s.id);
+});
+
+test("WHO 2021 note: HPV DNA primary test and VIA every 3 years", () => {
+  assert.match(S.otherTests.who.en, /HPV DNA/);
+  assert.match(S.otherTests.who.en, /every 3 years/);
+  assert.match(S.otherTests.who.en, /Thermal ablation/);
+  assert.ok(S.sources.some((x) => /WHO guideline/.test(x.label)));
 });
