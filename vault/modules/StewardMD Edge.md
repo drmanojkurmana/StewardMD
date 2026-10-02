@@ -74,6 +74,10 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 - Drug and KB options get their slots before the ranked list, or weak word overlaps fill all five.
 - Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing; the
   adapter takes `killable` (default: Android only).
+- Cactus replaced every needle3 binary and the header on `main` on 2026-10-02 (revision f84005f8). Our pins
+  are the 2026-09-28 files, so `fetch-needle.sh` and `test/native-host/run.sh` fetch from revision
+  `27c0a9a5` and keep a copy that already matches. The new upstream build is unaudited; it may change the
+  thread fallback that a62e9fbab works around. Re-audit it before moving the pin.
 - No engine is bundled. `SMD_EDGE.autoEngine()` uses `Capacitor.Plugins.Needle` on native when the
   plugin exists (Day 4 work). Until then only the rules layer answers.
 

@@ -3,9 +3,14 @@
 # on the files audited in vault/plans/Needle-Audit.md). A changed upstream file FAILS here instead
 # of silently shipping a different engine. Run from local-plugins/capacitor-needle/.
 set -euo pipefail
-HF="https://huggingface.co/Cactus-Compute/needle3/resolve/main"
+# Pinned to the repo revision that carries exactly these files: `main` moved on 2026-10-02 (f84005f8,
+# "Replace binaries from production build") and no longer serves them. A new revision is a re-audit.
+HF="https://huggingface.co/Cactus-Compute/needle3/resolve/27c0a9a5b3ca835e0b7dbeaccf555df03dac493d"
 cd "$(dirname "$0")/.."
 fetch() {   # url  dest  sha256
+  # A file already here with the pinned hash is kept: upstream may have moved on (it did on 2026-10-02),
+  # and the pin is what we audited, so a re-run must not need the network or the current upstream file.
+  if [ -f "$2" ] && echo "$3  $2" | sha256sum -c - >/dev/null 2>&1; then echo "ok  $2 (pinned copy)"; return 0; fi
   mkdir -p "$(dirname "$2")"
   curl -fL --retry 3 -o "$2.part" "$1"
   echo "$3  $2.part" | sha256sum -c - >/dev/null || { echo "SHA-256 MISMATCH for $1 (upstream changed: re-audit before updating the pin)"; rm -f "$2.part"; exit 1; }

@@ -116,7 +116,7 @@ needle() {
   local N="$WORK/needle"; mkdir -p "$N"
   bash "$ROOT/local-plugins/capacitor-needle/scripts/fetch-needle.sh" >/dev/null   # header + base weights
   # linux-x86_64 engine, pinned 2026-10-01; same needle.h as the audited android/ios one.
-  fetch "https://huggingface.co/Cactus-Compute/needle3/resolve/main/linux-x86_64/libneedle.a" "$N/libneedle.a" \
+  fetch "https://huggingface.co/Cactus-Compute/needle3/resolve/27c0a9a5b3ca835e0b7dbeaccf555df03dac493d/linux-x86_64/libneedle.a" "$N/libneedle.a" \
     35581b09da9b012637718d74dfb03c6ca563839bd909f2602c1b96764a916566
   clang++-20 -std=c++17 -stdlib=libc++ -O2 -fPIC -shared -I"$ROOT/local-plugins/capacitor-needle/include" -I"$WORK/stub" $JINC \
     "$ROOT/local-plugins/capacitor-needle/android/src/main/cpp/needle_jni.cpp" "$HERE/hashshim.cpp" \
