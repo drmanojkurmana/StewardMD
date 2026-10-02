@@ -8862,7 +8862,9 @@ of compliance.js is untouched.
   written 0: an admission or transfer is refused, not made on a short read. Ward and ED boards name patients from the
   newest 1,000 Patients plus a read by id for any missing (the oldest-first roster left new patients nameless).
 - Checked, audit uncertainty: `checkMasterBed` reads the bed's administrative state only, not occupancy; occupancy is the
-  census scan plus the bed claim. A stay without a claim (imported, migrated, moved by transfer) is seen by the scan only.
+  census scan plus the bed claim. A stay without a claim (imported, migrated) is seen by the scan only. Since Codex F1
+  (2026-10-02) transfer takes the same claim on its destination and releases its source; since F7 a master read that
+  throws is 503 `bed_list_unavailable`, not "unconfigured", and the emergency bed override does not bypass it.
 - ponytail: D1 re-groups every version of the type per page (same GROUP BY as latestByType). The open census is one
   page; a whole-type read is N/1,000 pages. A latest-version flag or table (audit O20) is the upgrade if that is slow.
 - Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,

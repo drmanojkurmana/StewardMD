@@ -69,6 +69,7 @@ async function waitingEvents(repository, tenantId, limit) {
 
 /**
  * Run pending events. consumers: { [topic]: { [consumerName]: async (payload, event) => void } }.
+ * Only topics present in `consumers` are touched; completion means every consumer of that topic acknowledged.
  * Returns what happened, per event. Safe to run concurrently: a lost claim is skipped, not repeated.
  */
 async function drainOutbox(repository, tenantId, consumers, opts) {
@@ -77,7 +78,10 @@ async function drainOutbox(repository, tenantId, consumers, opts) {
   const rows = await waitingEvents(repository, tenantId, o.limit || 200);
   // A claim older than ten minutes belongs to a worker that died; the event is taken over, not stranded.
   const stale = (e) => e.status === "running" && Date.parse(e.claimedAt) + 10 * 60 * 1000 <= nowMs;
-  const due = rows.filter((e) => ((e.status === "pending" || e.status === "retry") && Date.parse(e.nextAttemptAt) <= nowMs) || stale(e))
+  // A worker never claims or completes an event of a topic it has no consumer for: that event stays
+  // waiting for a worker that has one. (An empty handler map is an explicit "nothing to do": it settles.)
+  const owned = (e) => Object.prototype.hasOwnProperty.call(consumers, e.topic);
+  const due = rows.filter((e) => owned(e) && (((e.status === "pending" || e.status === "retry") && Date.parse(e.nextAttemptAt) <= nowMs) || stale(e)))
     .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt)));
   const report = [];
   for (const evt of due) {
@@ -87,7 +91,7 @@ async function drainOutbox(repository, tenantId, consumers, opts) {
     try { await repository.append(tenantId, [claimed], {}); }
     catch (e) { if (e instanceof VersionConflictError) { report.push({ id: evt.id, skipped: "claimed_elsewhere" }); continue; } throw e; }
 
-    const handlers = consumers[evt.topic] || {};
+    const handlers = consumers[evt.topic];
     const done = { ...(evt.consumers || {}) };
     let error = null;
     for (const [name, fn] of Object.entries(handlers)) {

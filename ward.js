@@ -2647,7 +2647,8 @@
 
   function marCard(state) {
     var rows = (state.due || []).map(function (d, i) {
-      var acts = nextFor(d.status).map(function (a) {
+      // Codex F3: the order changed since this dose was checked; the server refuses every step but verifying it again.
+      var acts = nextFor(d.recheckNeeded ? "ordered" : d.status).map(function (a) {
         // The dose is addressed by its INDEX in the loaded round, so the exact dueAt the server
         // computed is the one sent back. Re-deriving a time in the browser is how a click could
         // land on a different dose than the row the nurse is looking at.
@@ -2663,12 +2664,22 @@
          * decided that and said so; the screen only repeats it. A nurse handed a time the policy
          * does not contain, with no reason on the row, would be right to distrust the whole round. */
         (d.adjusted ? "<small>" + wTH("ward.clock-change-does-not-exist-today", "clock change: {from} does not exist today, moved to {to}", { from: esc(d.adjusted.from), to: esc(d.adjusted.to) }, "from to") + "</small>" : "") +
-        '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status ? marWord(d.status) : wT("ward.not-started", "not started")) + "</span>" +
+        // Codex F3: the status the order had when it was checked is no longer true of the order on the chart; say what the row needs.
+        (d.recheckNeeded ? '<span class="w-st recheck">' + wTH("ward.verify-again", "verify again") + "</span>"
+          : '<span class="w-st ' + esc(String(d.status || "notstarted").toLowerCase()) + '">' + esc(d.status ? marWord(d.status) : wT("ward.not-started", "not started")) + "</span>") +
         (d.administeredAt ? "<small>" + wTH("ward.given", "given {administeredAt}", { administeredAt: when(d.administeredAt) }, "administeredAt") +
           (d.administeredBy ? " " + wTH("ward.by-who", "by {who}", { who: staffWho(d.administeredBy, null) }) : "") + "</small>" : "") +
         (d.witnessedBy ? "<small>" + wTH("ward.witness-who", "witness {who}", { who: staffWho(d.witnessedBy, null) }) + "</small>" : "") +
         // Owner 2026-09-16: who held it, recorded the refusal or cancelled it (the dose's current state), by name.
         (d.statusBy && !d.administeredAt && d.status && d.status !== "unknown" ? "<small>" + wTH("ward.by-who", "by {who}", { who: staffWho(d.statusBy, null) }) + "</small>" : "") + "</div>" +
+        /* Sentences, so they sit in a block of their own and not among the one-word chips (a long sentence in a chip is an
+         * unreadable capitalised blob at 390 px). Each leads with an icon and bold words, so colour is never the only signal. */
+        (d.recheckNeeded ? '<div class="w-dose-note" role="note">' + ms("sync_problem") + "<div>" +
+          wTH("ward.order-changed-verify-again", "The order changed after this dose was checked. Verify it again.") + "</div></div>" : "") +
+        // Codex F5: scanned although the allergy and medicine checks did not run, with the nurse's reason.
+        (d.safetyNotRun ? '<div class="w-dose-note" role="note">' + ms("warning") + "<div><b>" + wTH("ward.safety-check-did-not-run", "Safety check did not run") + ".</b> " +
+          '<span lang="en">' + esc(d.safetyNotRun.reason || "") + "</span>" +
+          (d.safetyNotRun.by ? "<small>" + wTH("ward.by-who", "by {who}", { who: staffWho(d.safetyNotRun.by, null) }) + "</small>" : "") + "</div></div>" : "") +
         '<div class="w-dose-a">' + (d.readFailed ? "<small class=\"w-st overdue\">" + wTH("ward.could-not-read-whether-this-dose", "Could not read whether this dose was given. Reload before acting.", null, "", 1) + "</small>"
           : acts || "<small class=\"w-empty\">" + wTH("ward.no-further-action", "No further action.") + "</small>") + "</div></li>";
     }).join("");
@@ -2767,13 +2778,13 @@
       "<label class=\"w-f\"><span>" + wTH("ward.infusion-duration", "Infusion duration") + "</span><input id=\"wMoInfDuration\" type=\"text\" placeholder=\"" + wTA("ward.e-g-3-hrs", "e.g. 3 hrs") + "\"></label>" +
       "</div></div>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.every-safety-and-formulary-check-happens", "Every safety and formulary check happens on the server. A refusal here is shown in full, exactly as the eMAR shows one.", null, "", 1) + "</p>" +
-      (state.moReview ? medOrderReview(state.moReview) : '<button class="w-btn" data-w-act="medorder">' + ms("send") + wTH("ward.prescribe", "Prescribe") + "</button>") + "</div>";
+      (state.moReview ? medOrderReview(state.moReview, state.moSending) : '<button class="w-btn" data-w-act="medorder">' + ms("send") + wTH("ward.prescribe", "Prescribe") + "</button>") + "</div>";
   }
   /* LT-14: WHAT THE SERVER'S SAFETY CHECK FOUND, BEFORE ANYTHING IS WRITTEN. The findings are the engine's
    * own words (recorded clinical content, never translated); only the frame around them is. Nothing is
    * decided here: the prescriber changes the order or prescribes anyway, and a finding that needs a reason
    * gets one, attributed on the server to whoever is signed in. */
-  function medOrderReview(rv) {
+  function medOrderReview(rv, sending) {
     var sf = rv.safety || {};
     /* Retest 2026-09-16: each finding is headed by what the server does with it, never by its code. Hard stop
      * only for what the server refuses (hardStop, migrate-emar.js ORDER_ENTRY_HARD_STOPS); then no Prescribe
@@ -2784,12 +2795,17 @@
     var rows = (sf.blocks || []).map(function (f) { return li(f, "overdue", f.hardStop ? wTH("ward.hard-stop", "Hard stop") : reasonWord); })
       .concat((sf.overridables || []).map(function (f) { return li(f, "overdue", reasonWord); }), (sf.warnings || []).map(function (f) { return li(f, "due", wTH("ward.warning-heading", "Warning")); })).join("");
     var needReason = !stops.length && !!((sf.blocks || []).length || (sf.overridables || []).length);
-    return '<div class="w-sub warn" id="wMoReview" role="alert"><h4>' + ms("health_and_safety") + wTH("ward.safety-check-before-prescribing", "Safety check before prescribing {drug}", { drug: esc(rv.order.drug) }, "drug", 1) + "</h4>" +
+    // Codex F5: a check that could not run is refused by the server without a reason, so the reason is asked here.
+    var unchecked = sf.checked === false;
+    return '<div class="w-sub warn" id="wMoReview" role="alert" tabindex="-1"><h4>' + ms("health_and_safety") + wTH("ward.safety-check-before-prescribing", "Safety check before prescribing {drug}", { drug: esc(rv.order.drug) }, "drug", 1) + "</h4>" +
       (sf.checked === false ? '<p class="w-hint warn">' + ms("error") + wTH("ward.the-safety-check-could-not-run", "The safety check could not run, so nothing about this order was checked.", null, "", 1) + "</p>" : "") +
       (rows ? '<ul class="w-mini">' + rows + "</ul>" : "") +
       (sf.unresolvedDrug ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.this-drug-is-not-recognised-by", "This drug is not recognised by the decision-support content, so no allergy, interaction or dose check ran for it.", null, "", 1) + "</p>" : "") +
       /* An empty pregnancy and lactation table is said where its findings would be, never left to read as checked. */
-      (sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
+      /* Codex F6: what the check could not cover (no renal table, no eGFR, the pregnancy and lactation rules), with the
+       * patient's latest results. The server's own words; this replaces the single pregnancy line when it is sent. */
+      ((sf.coverage || []).length ? '<ul class="w-mini">' + sf.coverage.map(function (f) { return '<li class="w-st due"><b>' + wTH("ward.not-checked", "Not checked") + '</b> <span lang="en">' + esc(f.message || f.code) + "</span></li>"; }).join("") + "</ul>"
+        : sf.pregnancyLactation && sf.pregnancyLactation.rulesLoaded === 0 ? '<p class="w-hint">' + ms("info") + wTH("ward.no-pregnancy-lactation-rules-loaded", "No pregnancy or lactation rules are loaded, so this order was not checked for use in pregnancy or breastfeeding.", null, "", 1) + "</p>" : "") +
       ((sf.unresolvedActiveMeds || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.not-checked-against", "Not checked against: {drugs}", { drugs: esc(sf.unresolvedActiveMeds.join(", ")) }, "drugs", 1) + "</p>" : "") +
       /* THIS HOSPITAL'S OWN REMINDERS, and whether they could be evaluated at all. An unreadable
        * Observation or Condition list used to leave this card silent, which reads as "nothing to say"
@@ -2799,10 +2815,14 @@
         return '<li class="w-st due"><b>' + wTH("ward.mo-hospital-advisory", "Hospital advisory") + "</b> <span lang=\"en\">" + esc(a.message || a.id || "") + (a.action ? " " + esc(a.action) : "") + "</span></li>";
       }).join("") + "</ul>" : "") +
       (rv.replaces ? '<p class="w-hint warn">' + ms("swap_horiz") + wTH("ward.this-replaces-the-active-order", "This replaces the active order for this drug ({dose} {frequency}).", { dose: dose(rv.replaces.dose), frequency: esc(rv.replaces.frequency || "") }, "dose frequency", 1) + "</p>" : "") +
-      (needReason ? "<label class=\"w-f\"><span>" + wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)") + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\"></label>" : "") +
+      (needReason || unchecked ? "<label class=\"w-f\"><span>" + (unchecked ? wTH("ward.reason-for-prescribing-unchecked", "Reason for prescribing without the safety check (required)") : wTH("ward.reason-for-prescribing-anyway", "Reason for prescribing anyway (required)")) + "</span><input id=\"wMoOverride\" type=\"text\" autocomplete=\"off\" maxlength=\"500\" required aria-required=\"true\"></label>" : "") +
       (stops.length ? '<p class="w-hint warn">' + ms("block") + wTH("ward.the-server-refuses-this-order-whatever", "The server refuses this order whatever the reason. Change the dose, the frequency or the drug.", null, "", 1) + "</p>" : "") +
-      '<div class="w-actions">' + (stops.length ? "" : '<button class="w-btn warn" data-w-act="moconfirm">' + ms("send") + wTH("ward.prescribe-anyway", "Prescribe anyway") + "</button>") +
-      '<button class="w-btn ghost" data-w-act="mocancel">' + ms("edit") + wTH("ward.change-the-order", "Change the order") + "</button></div></div>";
+      // aria-disabled, not disabled: a disabled button drops focus, and the repaint after the answer would have nowhere to put it back.
+      // A check that could not run is often a passing outage: the safe act, checking again, comes first and is the plain button.
+      '<div class="w-actions">' + (unchecked ? '<button class="w-btn" data-w-act="medorder"' + (sending ? ' aria-disabled="true"' : "") + ">" + ms("refresh") + wTH("ward.check-again", "Check again") + "</button>" : "") +
+      (stops.length ? "" : '<button class="w-btn warn" data-w-act="moconfirm"' + (sending ? ' aria-disabled="true"' : "") + ">" + ms(sending ? "progress_activity" : "send") +
+        (unchecked ? wTH("ward.prescribe-without-check", "Prescribe without the safety check") : wTH("ward.prescribe-anyway", "Prescribe anyway")) + "</button>") +
+      '<button class="w-btn ghost" data-w-act="mocancel"' + (sending ? ' aria-disabled="true"' : "") + ">" + ms("edit") + wTH("ward.change-the-order", "Change the order") + "</button></div></div>";
   }
 
   /* ORDERING AN INVESTIGATION, AND SEEING WHERE IT STANDS. One card, three honest states: not yet
@@ -12648,7 +12668,15 @@
    * server's safety check is asked first (checkOnly, nothing written); an order it finds nothing against
    * is placed straight away, anything else is shown for the prescriber to decide. Every refusal - formulary,
    * restricted, incomplete - is the server's own and shown verbatim. Nothing about the dose is computed here. */
+  /* The review replaces the Prescribe button, so the focus that was on it is gone: put it where the next act is, on the
+   * reason box when one is asked, else on the review itself (which is announced, tabindex -1). And back on Prescribe
+   * when the review is closed, so a keyboard user is not left at the top of the page. */
+  function focusMoReview() {
+    var el = document.getElementById("wMoOverride") || document.getElementById("wMoReview");
+    if (el) { try { el.focus({ preventScroll: true }); el.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+  }
   function orderMedication() {
+    if (st.moSending) return;
     var f = medOrderFromForm(); if (!f) return;
     if (f.err) { st.err = f.err; paint(); return; }
     st.busy = true; st.moReview = null; paint();
@@ -12663,14 +12691,19 @@
       if (clean) { placeMedOrder(f.order, ""); return; }
       st.moReview = { order: f.order, safety: sf, replaces: r.replaces || null, advisories: r.advisories || [], advisoriesUnavailable: r.advisoriesUnavailable || null };
       paint();
+      focusMoReview();
     }).catch(function () { st.busy = false; st.err = wT("ward.could-not-place-the-order", "Could not place the order."); paint(); });
   }
   function confirmMedOrder() {
-    var rv = st.moReview; if (!rv) return;
+    var rv = st.moReview; if (!rv || st.moSending) return;
     var f = medOrderFromForm();
     // The order on the form changed after it was checked: check what is written now, not what was checked.
     if (!f || f.err || JSON.stringify(f.order) !== JSON.stringify(rv.order)) { orderMedication(); return; }
     var reason = val("wMoOverride");
+    if (rv.safety.checked === false) {
+      if (!reason) { st.err = wT("ward.give-a-reason-unchecked", "Give a reason to prescribe without the safety check. Nothing was prescribed."); paint(); return; }
+      placeMedOrder(rv.order, reason, true); return;
+    }
     if (((rv.safety.blocks || []).length || (rv.safety.overridables || []).length) && !reason) {
       st.err = wT("ward.give-a-reason-to-prescribe-past", "Give a reason to prescribe past these findings. Nothing was prescribed."); paint(); return;
     }
@@ -12705,18 +12738,26 @@
         .catch(function () { st.busy = false; st.err = wT("ward.could-not-stop-the-medication", "Could not stop the medicine."); paint(); });
     }, { danger: true });
   }
-  function placeMedOrder(order, reason) {
-    st.busy = true; paint();
-    apiPost("/ward/medication-order", { orgId: st.orgId, order: order, overrideReason: reason || undefined }).then(function (r) {
-      if (settle(r, r && r.written ? wT("ward.prescribed", "Prescribed {drug}.", { drug: order.drug }) : null)) {
+  function placeMedOrder(order, reason, unchecked) {
+    if (st.moSending) return;   // one order per tap: a second press while the first is in flight is not a second prescription
+    st.busy = true; st.moSending = true; paint();
+    var body = { orgId: st.orgId, order: order };
+    if (unchecked) body.uncheckedReason = reason || undefined; else body.overrideReason = reason || undefined;
+    apiPost("/ward/medication-order", body).then(function (r) {
+      st.moSending = false;
+      // Codex F6: an order placed straight away (nothing to review) still says what the check could not cover.
+      var gaps = r && r.safety && (r.safety.coverage || []).map(function (f) { return f.message || f.code; }).join(" ");
+      if (settle(r, r && r.written ? (gaps ? wT("ward.prescribed-not-checked", "Prescribed {drug}. The check could not cover: {gaps}", { drug: order.drug, gaps: gaps }) : wT("ward.prescribed", "Prescribed {drug}.", { drug: order.drug })) : null)) {
         st.moReview = null;
         ["wMoDrug", "wMoValue", "wMoUnit", "wMoRoute", "wMoFreq", "wMoDiluentVal", "wMoInfDuration", "wMoDays"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });
         Array.prototype.forEach.call(document.querySelectorAll(".wMoInstr"), function (b) { b.checked = false; });
         var dEl = document.getElementById("wMoDiluent"); if (dEl) dEl.value = "";
         // LT-20: the active medicines on the chart and the round both show the new order at once.
+        paint();
+        var po = document.querySelector('[data-w-act="medorder"]'); if (po) { try { po.focus(); } catch (e) {} }
         loadRound(); loadChart();
       } else paint();
-    }).catch(function () { st.busy = false; st.err = wT("ward.could-not-place-the-order", "Could not place the order."); paint(); });
+    }).catch(function () { st.moSending = false; st.busy = false; st.err = wT("ward.could-not-place-the-order", "Could not place the order."); paint(); });
   }
   /* Ordering an investigation, and reloading the two worklists it now shows up on: the collection
    * board (has it been taken yet) and pending-tests (has it been reported yet). */
@@ -15121,14 +15162,35 @@
       st.err = wT("ward.nothing-was-filled-in", "Nothing was filled in."); paint(); return;
     }
 
+    sendConsultation(body);
+  }
+  /* Codex F5: the server refuses a consultation medicine whose safety check did not run (error safety_check_not_run) and
+   * saves nothing. Like the Prescribe review, the doctor may go on only with a reason, which is sent as uncheckedReason
+   * on that medicine; with no reason nothing is sent. Asked once: a second refusal is shown as the result, not asked again. */
+  function consultUncheckedRefused(r, body) {
+    var m = body.medications && body.medications[0];
+    return !!(m && !m.uncheckedReason && r && !r.ok && r.failedAt === "medications" &&
+      (r.results || []).some(function (x) { return x && x.piece === "medications" && !x.ok && x.error === "safety_check_not_run"; }));
+  }
+  function sendConsultation(body) {
     st.busy = true; st.consultationResult = null; paint();
-    apiPost("/ward/consultation", body)
+    return apiPost("/ward/consultation", body)
       .then(function (r) {
         st.busy = false;
         /* The server's own per-piece answer is kept and rendered in full. This deliberately does NOT
          * go through settle(): settle reduces a reply to one success line or one error line, which
          * is precisely the flattening that let a refused prescription hide behind a saved note. */
         st.consultationResult = r || null;
+        if (consultUncheckedRefused(r, body)) {
+          st.err = "";
+          paint();
+          askReason(wTH("ward.safety-check-did-not-run", "Safety check did not run"),
+            wT("ward.consult-unchecked-required", "A reason is required to save this prescription without the safety checks. Nothing was saved."), wTH("ward.save-without-the-checks", "Save without the checks"),
+            function (why) { body.medications[0].uncheckedReason = why; return sendConsultation(body); },
+            { icon: "warning", danger: true, label: wTH("ward.reason-for-prescribing-unchecked", "Reason for prescribing without the safety check (required)"),
+              text: wTH("ward.consult-unchecked-text", "The allergy and medicine checks could not run for {drug}, so the consultation was not saved. Check the patient's allergies and this order by hand, then give a reason to save it without them.", { drug: esc(body.medications[0].drug || "") }, "drug", 1) });
+          return;
+        }
         if (r && r.ok) {
           st.err = "";
           clearConsultationFields();
@@ -16099,6 +16161,18 @@
     return bedsideWrite("mar", body, { label: (d.drug || wT("ward.dose", "Dose")) + " " + marWord(action), patientId: s.patientId, expectedVersion: d.orderVersion },
       function (r) {
         if (r && r.error === "order_changed") { st.busy = false; st.err = wT("ward.not-recorded-this-order-changed-after", "Not recorded: this order changed after the round was loaded. Reload the round and check the order before giving or charting."); paint(); return; }
+        /* Codex F5: the allergy and medicine checks could not run, so the scan was refused. Continuing needs the nurse's reason,
+         * recorded with her name; nothing is sent without one. */
+        if (r && r.error === "refused" && action === "scan" && !body.uncheckedReason && (r.reasons || []).some(function (x) { return x && x.checkNotRun; })) {
+          st.busy = false; paint();
+          // The drug is named, because a nurse with three doses due must know which one this question is about.
+          askReason(wTH("ward.safety-check-did-not-run", "Safety check did not run"),
+            wT("ward.safety-check-did-not-run-required", "A reason is required to continue without the safety checks. Nothing was recorded."), wTH("ward.continue-without-checks", "Continue without the checks"),
+            function (why) { return marSend(action, s, d, Object.assign(body, { uncheckedReason: why })); },
+            { icon: "warning", danger: true, label: wTH("ward.safety-check-did-not-run-reason", "Reason to continue without the checks"),
+              text: wTH("ward.safety-check-did-not-run-for", "The allergy and medicine checks could not run for {drug}. Check the patient's allergies and this order by hand before you give the dose.", { drug: esc(d.drug || "") }, "drug", 1) });
+          return;
+        }
         st.marWarn = r && r.ok && (r.safetyWarnings || []).length ? { drug: d.drug || "", lines: r.safetyWarnings } : null;
         if (settle(r, r && r.to ? action + ": " + r.from + " → " + r.to : null)) loadRound(); else paint();
       }, wT("ward.could-not-reach-the-emar", "Could not reach the eMAR."));
@@ -16400,7 +16474,12 @@
     if (cmd === "admitnew") { admitNew(); return; }
     if (cmd === "medorder") { orderMedication(); return; }
     if (cmd === "moconfirm") { confirmMedOrder(); return; }
-    if (cmd === "mocancel") { st.moReview = null; paint(); return; }
+    if (cmd === "mocancel") {
+      if (st.moSending) return;
+      st.moReview = null; paint();
+      var po = document.querySelector('[data-w-act="medorder"]'); if (po) { try { po.focus(); } catch (e) {} }
+      return;
+    }
     if (cmd === "investigation") { orderInvestigation(); return; }
     if (cmd === "investigations") { loadInvestigations(); return; }
     if (cmd === "flowsheet") { loadFlowsheet(); loadNews2(); return; }

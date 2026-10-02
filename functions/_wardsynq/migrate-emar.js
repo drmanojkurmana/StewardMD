@@ -30,7 +30,7 @@
  * left alone; supplying the real engine is what makes the ward usable rather than what weakens it.
  */
 
-import { MedicationAdministrationRecord, STATES, MedicationSafetyError } from "../../wardsynq/wardsynq-meds.js";
+import { MedicationAdministrationRecord, STATES, TERMINAL, MedicationSafetyError, materialOrderChanges } from "../../wardsynq/wardsynq-meds.js";
 import { SafetyEngine } from "../../wardsynq/wardsynq-safety.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
@@ -42,6 +42,7 @@ import { medicationAdministrationIdFor } from "./opd-identity.js";
 import { roundOrders, doseTimeRefusal } from "./mar-schedule.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
 import { readPregnancyLactation } from "./migrate-maternity.js";
+import { CREATININE_CODES } from "./radiology-protocol.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -52,20 +53,42 @@ const ACTIONS = Object.freeze(["verify", "dispense", "scan", "administer", "hold
  * rather than re-derived so the ward and the vitals mapper cannot disagree about what a weight is. */
 const BODY_WEIGHT_LOINC = "29463-7";
 
+/* Codex F6: the LOINC codes for an estimated GFR (MDRD, CKD-EPI and the 2021 CKD-EPI equations, per 1.73 m2). Read as the
+ * laboratory reported it: nothing here computes an eGFR from a creatinine (radiology-protocol.js says why). */
+const EGFR_CODES = Object.freeze(["33914-3", "48642-3", "48643-1", "50044-7", "62238-1", "69405-9", "88293-6", "88294-4", "98979-8"]);
+/* An eGFR or creatinine older than this is shown with its age and is NOT used by the renal check. Seven days is the age at
+ * which radiology-protocol.js already tells a radiologist a creatinine "describes the patient then, not now"; it is not a
+ * clinical threshold this file invents, and it is listed for the owner to confirm. */
+const RENAL_STALE_DAYS = 7;
+
+/** PURE. The newest result with one of `codes`, with its unit, time and age, or null. Never a number without a date. */
+function latestLab(observations, codes, nowMs) {
+  const rows = (observations || []).filter((o) => o && codes.includes(str(o.code)) && Number.isFinite(Number(o.value)) && o.value !== "" && o.value !== null)
+    .map((o) => ({ value: Number(o.value), unit: o.unit || null, at: (o.meta && o.meta.effectiveAt) || o.effectiveAt || null, code: str(o.code) }))
+    .filter((o) => Number.isFinite(Date.parse(str(o.at))))
+    .sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
+  if (!rows.length) return null;
+  const ageDays = Math.max(0, Math.floor((nowMs - Date.parse(rows[0].at)) / 86400000));
+  return { ...rows[0], ageDays, stale: ageDays >= RENAL_STALE_DAYS };
+}
+
+/** PURE. The renal facts the order check is given: latest eGFR and creatinine, or null when the Observations were unreadable. */
+function renalFrom(observations, nowMs) {
+  if (observations === null) return null;
+  return { egfr: latestLab(observations, EGFR_CODES, nowMs), creatinine: latestLab(observations, CREATININE_CODES, nowMs) };
+}
+
 /** The patient's most recently recorded weight in kg, or undefined when the ward has not weighed them. */
-async function latestWeightKg(svc, patientId) {
-  try {
-    const obs = await svc.byPatient("Observation", patientId);
-    const weights = (obs || [])
-      /* THROUGH THE ONE CONVERSION, never a bare number. This required unit === "kg" and was safe
-       * only because kg was the single unit the recorder could produce; now that a US ward can chart
-       * pounds, a filter would silently drop that patient's weight and a bare read would be 2.2
-       * times wrong. weightInKg is exact for kg and pounds and returns null for anything else, so an
-       * unreadable unit still means "the ward has not weighed them" rather than a wrong number. */
-      .filter((o) => o && o.code === BODY_WEIGHT_LOINC && weightInKg(o.value, o.unit) !== null)
-      .sort((a, b) => String((b.meta && b.meta.effectiveAt) || "").localeCompare(String((a.meta && a.meta.effectiveAt) || "")));
-    return weights.length ? weightInKg(weights[0].value, weights[0].unit) : undefined;
-  } catch { return undefined; }
+function latestWeightKg(obs) {
+  const weights = (obs || [])
+    /* THROUGH THE ONE CONVERSION, never a bare number. This required unit === "kg" and was safe
+     * only because kg was the single unit the recorder could produce; now that a US ward can chart
+     * pounds, a filter would silently drop that patient's weight and a bare read would be 2.2
+     * times wrong. weightInKg is exact for kg and pounds and returns null for anything else, so an
+     * unreadable unit still means "the ward has not weighed them" rather than a wrong number. */
+    .filter((o) => o && o.code === BODY_WEIGHT_LOINC && weightInKg(o.value, o.unit) !== null)
+    .sort((a, b) => String((b.meta && b.meta.effectiveAt) || "").localeCompare(String((a.meta && a.meta.effectiveAt) || "")));
+  return weights.length ? weightInKg(weights[0].value, weights[0].unit) : undefined;
 }
 
 /**
@@ -102,8 +125,11 @@ async function safetyFacts(svc, order) {
    * correct. It is read from the record rather than taken from the request body on purpose: a
    * client-supplied weight is a number that can be typed to make a ceiling pass. If the ward has
    * not weighed the patient there is nothing to send, and the block stands. */
-  const weightKg = await latestWeightKg(svc, patientId);
-  return { allergies: allergies || [], activeMeds, weightKg };
+  // One Observation read for the weight and the renal function. Unreadable is null: no weight (as before) and renal unknown.
+  let observations = null;
+  try { observations = (await svc.byPatient("Observation", patientId)) || []; } catch { observations = null; }
+  const weightKg = latestWeightKg(observations);
+  return { allergies: allergies || [], activeMeds, weightKg, renal: renalFrom(observations, Date.now()) };
 }
 
 /* CLIN-12: a finding the prescriber already answered at order entry (safetyAtOrder, overridden with a reason)
@@ -133,9 +159,28 @@ async function pharmacyQueryWarning(svc, order) {
   }
 }
 
-function bedsideSafetyCheck(svc, rulePack) {
+/* Codex F5: A CHECK THAT DID NOT RUN STOPS THE DOSE, unless a named clinician continues with a reason. It used to come back
+ * allowed with a warning, so a failed allergy read moved through the scan exactly like a clean check. Refused by default
+ * now (a block with checkNotRun: true, so a screen can ask for the reason); `continuation` {reason, by} is that reason,
+ * attributed by the caller to the signed-in actor, and turns the refusal into a warning plus `notRun`, which the eMAR keeps
+ * on the record as safetyNotRun and the round shows. It is never a clean verdict: the warning still says nothing ran. */
+function checkNotRun(code, detail, continuation) {
+  const message = `The allergy, interaction and dose checks could not run${detail ? ` (${detail})` : ""}.`;
+  const reason = str(continuation && continuation.reason).slice(0, 500);
+  if (!reason || !str(continuation && continuation.by)) {
+    return { allowed: false, warnings: [],
+      blocks: [{ code, disposition: "block", checkNotRun: true, message: `${message} Give a reason to continue without them, or wait until they can run.` }] };
+  }
+  const at = new Date().toISOString();
+  return { allowed: true, blocks: [],
+    warnings: [{ code, disposition: "warn", checkNotRun: true, message: `${message} Continued without them: ${reason}` }],
+    notRun: { code, message, reason, by: str(continuation.by), at } };
+}
+
+function bedsideSafetyCheck(svc, rulePack, opts) {
+  const continuation = opts && opts.continuation;
   return async (hookCtx) => {
-    if (!rulePack) return { allowed: true, blocks: [], warnings: [{ code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" }] };
+    if (!rulePack) return checkNotRun("NO_RULE_PACK", "no decision-support content is loaded", continuation);
     try {
       const order = hookCtx && hookCtx.order;
       const { allergies, activeMeds, weightKg } = await safetyFacts(svc, order);
@@ -148,9 +193,8 @@ function bedsideSafetyCheck(svc, rulePack) {
       const verdict = engine.hook()({ order, patient, activeMeds, allergies });
       return withOrderDecisions(verdict, order, await pharmacyQueryWarning(svc, order));
     } catch (e) {
-      // Could not check. Say so as a warning and let the machine's own gates decide; silently
-      // returning "allowed" would be the clean-bill-of-health-for-a-check-that-never-ran failure.
-      return { allowed: true, blocks: [], warnings: [{ code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" }] };
+      // Could not check. Never "allowed": that is the clean bill of health for a check that never ran (Codex F5).
+      return checkNotRun("SAFETY_CHECK_UNAVAILABLE", str(e && e.message) || "decision support unavailable", continuation);
     }
   };
 }
@@ -168,21 +212,48 @@ function bedsideSafetyCheck(svc, rulePack) {
  * finding carries hardStop: true, so a screen labels exactly what the server refuses and nothing else. */
 const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
 
-/* opts.lactationWindowDays: the hospital's postpartum lactation window (wardsynqConfig). The pregnancy and
- * lactation check reads the maternity record only when the pack has rules for it; `pregnancyLactation.rulesLoaded`
- * is on every verdict, so a screen can say "no pregnancy or lactation rules loaded" rather than imply a check. */
+/* Codex F6: WHAT THE ORDER CHECK COULD NOT COVER, SAID AS A FINDING. The engine's renal and pregnancy/lactation checks only
+ * fire from loaded tables (getRulePack loads no renal table; the pregnancy/lactation seed is empty) and from the patient's
+ * measurements; with either missing they returned nothing, which reads as checked and clean. Disposition "warn", never a
+ * block: they report missing content and data, decide nothing clinical, and no table or formula is invented here. */
+function coverageFindings(order, renal, renalTable, plRules, pregnancyStatus) {
+  const out = [];
+  const w = (code, message, extra) => out.push({ code, severity: "moderate", disposition: "warn", message, ...(extra || {}) });
+  const lab = (x, name) => `${name} ${x.value}${x.unit ? " " + x.unit : ""} on ${x.at.slice(0, 10)}${x.stale ? `, ${x.ageDays} days old` : ""}`;
+  const known = renal ? [renal.egfr && lab(renal.egfr, "eGFR"), renal.creatinine && lab(renal.creatinine, "creatinine")].filter(Boolean) : [];
+  const said = known.length ? ` Latest recorded: ${known.join("; ")}.` : "";
+  if (!renalTable) w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: no renal table is loaded, so ${order.drug} was not checked for renal dosing.${said}`);
+  if (renal === null) w("RENAL_FUNCTION_UNREADABLE", "The patient's results could not be read, so renal function is unknown. Do not read this as normal.");
+  else if (!renal.egfr) w("RENAL_FUNCTION_NOT_RECORDED", `No eGFR is recorded for this patient, so no renal dose check can use one.${renal.creatinine ? ` Latest creatinine: ${lab(renal.creatinine, "").trim()}. Nothing here computes an eGFR from it.` : ""}`);
+  else if (renal.egfr.stale) w("RENAL_FUNCTION_STALE", `The latest eGFR is ${renal.egfr.ageDays} days old, so the renal dose check did not use it.`);
+  const s = pregnancyStatus || {};
+  if (!plRules && !(s.pregnant === false && s.lactating === false)) {
+    const recorded = s.pregnant === true ? " The patient is recorded as pregnant." : s.lactating === true ? " The patient is recorded as breastfeeding or within the postpartum lactation window." : "";
+    w("PREGNANCY_LACTATION_CHECK_NOT_AVAILABLE", `Pregnancy and lactation check not available: no pregnancy or lactation rules are loaded, so ${order.drug} was not checked for use in pregnancy or breastfeeding.${recorded}`);
+  }
+  return out;
+}
+
+/* opts.lactationWindowDays: the hospital's postpartum lactation window (wardsynqConfig). The maternity record is read for
+ * every order (Codex F6; it used to be read only when the pack had rules) and `pregnancyLactation.rulesLoaded` is on every
+ * verdict, so a screen can say "no pregnancy or lactation rules loaded" beside what is recorded rather than imply a check. */
 async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
   if (!rulePack) return { checked: false, code: "NO_RULE_PACK", message: "no decision-support content is loaded; nothing was checked" };
   try {
     const rulesLoaded = rulePack.pregnancyLactation ? rulePack.pregnancyLactation.size : 0;
-    const [{ allergies, activeMeds, weightKg }, pregnancyStatus] = await Promise.all([
+    const renalTable = rulePack.renalAdjustments ? rulePack.renalAdjustments.size : 0;
+    // The maternity record is read whether or not rules are loaded (Codex F6): an empty table is only honest beside what is recorded.
+    const [{ allergies, activeMeds, weightKg, renal }, pregnancyStatus] = await Promise.all([
       safetyFacts(svc, order),
-      rulesLoaded ? readPregnancyLactation(svc, order && order.patientId, { lactationWindowDays: opts && opts.lactationWindowDays }) : null,
+      readPregnancyLactation(svc, order && order.patientId, { lactationWindowDays: opts && opts.lactationWindowDays }),
     ]);
+    // The eGFR the record holds, with its time, unit and code; a stale one is shown and not used.
+    const egfr = renal && renal.egfr && !renal.egfr.stale ? renal.egfr.value : undefined;
     // "same-drug" and "pregnancy" only here: order entry is where a second order of an active molecule, or a
     // medicine in pregnancy or breastfeeding, is decided.
     const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug", "pregnancy"] })
-      .evaluate({ order, allergies, activeMeds, weightKg, pregnancyStatus, overrides: overrides || [] });
+      .evaluate({ order, allergies, activeMeds, weightKg, egfr, pregnancyStatus, overrides: overrides || [] });
+    const coverage = coverageFindings(order, renal, renalTable, rulesLoaded, pregnancyStatus);
     const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
       ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
       ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
@@ -193,6 +264,11 @@ async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
       hardStops: blocks.filter((f) => f.hardStop),
       unresolvedDrug: v.unresolvedDrug, unresolvedActiveMeds: v.unresolvedActiveMeds || [],
       pregnancyLactation: { rulesLoaded, ...(pregnancyStatus || {}) },
+      /* Codex F6: what the check could NOT cover, apart from the engine's findings: it is not a rule firing (override
+       * analytics count only those) and it must not turn every order into one that needs a reason. */
+      coverage,
+      // Codex F6: the measurements the renal check was given (null = the results could not be read).
+      renal: { tableLoaded: renalTable, egfr: renal ? renal.egfr : null, creatinine: renal ? renal.creatinine : null, ...(renal ? {} : { unreadable: true }) },
     };
   } catch (e) {
     return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };
@@ -261,7 +337,7 @@ async function medicationRound(request, env, ctx) {
  * One governed transition of one dose.
  *
  * ctx: { migration, action, orderId, dueAt, patient, scan?, reason?, witnessId?, rulePack?,
- *        highAlertDrugs?, expectedOrderVersion?, actorDeps, recordDeps }
+ *        highAlertDrugs?, expectedOrderVersion?, uncheckedReason?, actorDeps, recordDeps }
  */
 async function administerStep(request, env, ctx) {
   const mig = ctx.migration;
@@ -344,8 +420,11 @@ async function administerStep(request, env, ctx) {
     bedsidePatient = { id: order.patientId, mrn: rec.mrn || null, wristbandBarcode: rec.wristbandBarcode || null };
   }
 
+  /* Codex F5: the scanning nurse's reason to continue when the safety check could not run, attributed here to the
+   * signed-in actor (never to anyone the body names) and kept on the dose record as safetyNotRun. */
+  const uncheckedReason = action === "scan" ? str(ctx.uncheckedReason).slice(0, 500) : "";
   const emar = new MedicationAdministrationRecord({
-    safetyCheck: bedsideSafetyCheck(svc, ctx.rulePack),
+    safetyCheck: bedsideSafetyCheck(svc, ctx.rulePack, { continuation: uncheckedReason ? { reason: uncheckedReason, by: resolved.actor.id } : null }),
     highAlertDrugs: ctx.highAlertDrugs || [],
     // CLIN-11: the right-time check runs against this dose's due time; a late dose is charted as late, never early.
     allowLate: true,
@@ -372,6 +451,22 @@ async function administerStep(request, env, ctx) {
   }
 
   const before = record.status;
+  /* Codex F3: EVERY CHECK ON A DOSE IS BOUND TO THE ORDER IT WAS DONE AGAINST. expectedOrderVersion (G2, above) only
+   * catches a stale screen; a round reloaded after the amendment carries the new version and passed it, so a dose scanned
+   * under v1 could be given under v2. Whatever the caller sends, a clinically material change since this dose was
+   * verified, dispensed or scanned (wardsynq-meds.js materialOrderChanges) refuses the next step and nothing is written.
+   * Verifying again is the way on: it voids the earlier checks on the record (back to ORDERED, rebound to the order as it
+   * is now, audited) and verifies, so dispensing and the bedside scan are done again against the new order. */
+  if (existing && !TERMINAL.includes(existing.status) && ["verify", "dispense", "scan", "administer"].includes(action)) {
+    const changed = materialOrderChanges(existing.orderSnapshot, order);
+    if (changed.length && action !== "verify") {
+      return { ...base, ok: false, status: 409, error: "order_changed_recheck", action, from: before, changed, orderId, administrationId: marId, written: 0,
+        detail: `This order was changed (${changed.join(", ")}) after this dose was verified, dispensed or scanned. Verify it again, then dispense and scan it against the order as it is now. Nothing was recorded.`,
+        checkedUnderVersion: (existing.orderSnapshot && existing.orderSnapshot.version) ?? null, currentVersion: order.version,
+        current: { drug: order.drug || null, dose: order.dose || null, route: order.route || null, frequency: order.frequency || null, status: order.status, version: order.version } };
+    }
+    if (changed.length) emar.invalidateForAmendedOrder(record, order, resolved.actor.id);
+  }
   /* A CONTROLLED DRUG IS GIVEN IN FRONT OF A SECOND PERSON (controlled-drugs.js), whatever the high-alert list says.
    * Stricter than the high-alert witness below: the witness must also be an active member of this hospital who may
    * witness one, checked by the route, because this dose is a line in the NDPS register. Refused before the machine
@@ -431,6 +526,7 @@ async function administerStep(request, env, ctx) {
       administeredBy: record.administeredBy || null, administeredAt: record.administeredAt || null,
       witnessedBy: record.witnessedBy || null,
       safetyWarnings: record.safetyWarnings || [],
+      ...(record.safetyNotRun ? { safetyNotRun: record.safetyNotRun } : {}),
       version: out.record.version, actor: resolved.actor.id, role: resolved.role,
     };
   } catch (e) {
@@ -440,4 +536,4 @@ async function administerStep(request, env, ctx) {
   }
 }
 
-export { ACTIONS, ORDER_ENTRY_HARD_STOPS, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };
+export { ACTIONS, ORDER_ENTRY_HARD_STOPS, EGFR_CODES, RENAL_STALE_DAYS, latestLab, renalFrom, coverageFindings, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };

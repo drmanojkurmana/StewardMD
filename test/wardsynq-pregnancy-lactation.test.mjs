@@ -163,13 +163,17 @@ test("order entry (orderEntrySafety): pregnant fires, lactation within window fi
   assert.ok(overridden.warnings.some((w) => w.code === "LACTATION_RISK" && w.overridden));
 });
 
-test("empty table: rulesLoaded 0, no maternity record read, nothing implied; the shipped table is empty and listed for sign-off", async () => {
+/* Codex F6 (2 Oct 2026): with no rules loaded the maternity record is still read, so the order can say "not checked, and
+ * the patient is recorded as pregnant" instead of nothing; it still implies no finding. */
+test("empty table: rulesLoaded 0, status read and shown as not checked, nothing implied; the shipped table is empty and listed for sign-off", async () => {
   const svc = svcFor({ pregnancy: { id: pregnancyIdFor("p1") } });
   const v = await orderEntrySafety(svc, emptyRulePack(), orderRow, [], { lactationWindowDays: 42 });
   assert.equal(v.checked, true);
-  assert.deepEqual(v.pregnancyLactation, { rulesLoaded: 0 });
+  assert.deepEqual(v.pregnancyLactation, { rulesLoaded: 0, pregnant: true, lactating: null, basis: "pregnancy-episode" });
   assert.deepEqual(v.findings, []);
-  assert.ok(!svc.calls.includes("PregnancyEpisode") && !svc.calls.includes("DeliveryRecord"), JSON.stringify(svc.calls));
+  const nc = v.coverage.find((f) => f.code === "PREGNANCY_LACTATION_CHECK_NOT_AVAILABLE");
+  assert.ok(nc && /recorded as pregnant/.test(nc.message), JSON.stringify(v.coverage));
+  assert.equal(nc.disposition, "warn");
 
   assert.deepEqual(Object.keys(PREGNANCY_LACTATION_SEED), [], "shipped empty: no unapproved guidance");
   assert.equal(buildRulePack({ version: "x" }, null).pregnancyLactation.size, 0);

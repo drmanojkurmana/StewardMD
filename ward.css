@@ -181,6 +181,20 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-due { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; }
 #smdWard .w-due .material-symbols-outlined { font-size: 16px; }
 #smdWard .w-st.overdue { background: var(--error-container); color: var(--on-error-container); }
+/* A dose whose order changed after it was checked: the chip says what the row needs, and the sentence below says why. The chip
+ * wraps with its siblings on a phone (it used to sit in a flex row that could not), so nothing is clipped at 390 px. */
+#smdWard .w-dose-s { flex-wrap: wrap; row-gap: 4px; }
+#smdWard .w-st.recheck { background: var(--warn-container); color: var(--on-warn-container); box-shadow: inset 0 0 0 1px currentColor; }
+/* A sentence about a dose (order changed, safety check did not run). Sentence case and its own block, never a capitalised chip:
+ * a long sentence in a pill is unreadable on a phone. The icon and the lead words carry the meaning, the colour only reinforces it. */
+#smdWard .w-dose-note { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; padding: 8px 10px; border-radius: 10px; border-left: 3px solid currentColor;
+  background: var(--warn-container); color: var(--on-warn-container); font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+#smdWard .w-dose-note > .material-symbols-outlined { font-size: 18px; flex: 0 0 auto; margin-top: 1px; }
+#smdWard .w-dose-note > div { min-width: 0; }
+#smdWard .w-dose-note small { display: block; margin-top: 2px; font-size: 12px; color: inherit; }
+#smdWard .w-doses li.overdue .w-dose-note { background: var(--sc-lowest); }
+/* A press that is being answered: still focusable (a disabled button drops focus), but plainly not pressable. */
+#smdWard .w-btn[aria-disabled="true"] { opacity: .55; cursor: progress; }
 
 /* Critical results. The loudest card on the chart, and it sits first — the only thing on this
    screen allowed to outrank the medication round. Restrained even so: a border, a tint and text,
@@ -636,10 +650,12 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
    A pill-shaped, capitalised block of engine text was hard to read (retest 2026-09-16). */
 #smdWard #wMoReview li.w-st { display: block; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 400; border-radius: 10px; padding: 6px 10px; margin: 4px 0; }
 #smdWard #wMoReview li.w-st b { font-weight: 700; }
+/* The act that goes past a safety check wears the warning colour and says so in words; the safe acts stay plain. */
+#smdWard #wMoReview .w-btn.warn { background: var(--error-container); color: var(--on-error-container); box-shadow: inset 0 0 0 1px currentColor; }
 /* A question before a write (ward.js askFor): over the ward, never a browser dialog. */
 #smdWard .w-ask { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 16px;
   background: rgba(0, 0, 0, .45); }
-#smdWard .w-ask > .w-card { width: min(520px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
+#smdWard .w-ask > .w-card { width: min(520px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
 #smdWard .w-ask .w-card-h h3 { margin: 0; }
 #smdWard .w-next { font-size: 12px; font-weight: 600; color: var(--on-surface-variant); }
 #smdWard .w-next.warn { color: var(--on-warn-container); }

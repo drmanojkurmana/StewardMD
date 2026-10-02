@@ -24,7 +24,7 @@
  *
  * STATUS: IMPLEMENTED and TESTED. NOT clinically validated and NOT clinically approved.
  *
- * node --test test/wardsynq-offline.test.mjs
+ * node --test test/wardsynq-offline-journal.test.mjs
  */
 
 const OUTCOME = Object.freeze({

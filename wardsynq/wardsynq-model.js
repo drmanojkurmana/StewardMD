@@ -257,6 +257,15 @@ function MedicationAdministration(input) {
     // consumer cannot rely on. It also lets the administered EVENT be self-describing.
     drug: input.drug || null,
     drugCode: input.drugCode || null,
+    /* Codex F2: what was GIVEN, and against which version of the order. dose {value, unit} and route are the ones the
+     * bedside five-rights check passed (set at the scan); orderVersion is the order version in force at that step and,
+     * once administered, never changes. orderSnapshot is that version's drug, dose, route and frequency as the checks saw
+     * them (wardsynq-meds.js orderSnapshot), so a later amendment can neither rewrite nor obscure this record: the order
+     * gets a new version, this record keeps its own copy. */
+    dose: input.dose ?? null,
+    route: input.route || null,
+    orderVersion: input.orderVersion ?? null,
+    orderSnapshot: input.orderSnapshot || null,
     status: input.status || "ordered", // see wardsynq-meds.js state machine
     scannedPatientBarcode: input.scannedPatientBarcode || null,
     scannedDrugBarcode: input.scannedDrugBarcode || null,
