@@ -25,7 +25,7 @@
  * the two into "three times a day" is how a level-dependent drug drifts.
  */
 
-import { STATES, TERMINAL } from "../../wardsynq/wardsynq-meds.js";
+import { STATES, TERMINAL, materialOrderChanges } from "../../wardsynq/wardsynq-meds.js";
 import { medicationAdministrationIdFor } from "./opd-identity.js";
 import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
@@ -417,15 +417,22 @@ async function marSchedule(request, env, ctx) {
     const t = [...given.values()].filter((m) => m && m.orderId === o.id && m.administeredAt).map((m) => m.administeredAt).sort().pop();
     return t ? { lastGivenAt: t } : {};
   };
-  const recordedRow = (card, m, flag) => ({ ...card, dueAt: m.dueAt, administrationId: m.id, [flag]: true, status: m.status || null,
+  const recordedRow = (card, m, flag, o) => ({ ...card, dueAt: m.dueAt, administrationId: m.id, [flag]: true, status: m.status || null,
     administeredAt: m.administeredAt || null, administeredBy: m.administeredBy || null, witnessedBy: m.witnessedBy || null,
-    statusBy: (m.writtenBy && m.writtenBy.id) || null, overdue: false });
+    statusBy: (m.writtenBy && m.writtenBy.id) || null, overdue: false, ...marChecks(o, m) });
   /* CLIN-17: a dose due BEFORE the window that nobody gave, held, refused or cancelled is still owed, so it stays on
    * the round (and on every worklist built from it) as overdue. The window used to drop it after about 12 hours on
    * the worklist and at local midnight on the chart, with nothing anywhere saying it was missed. Looked back as far
    * as the widest window allowed; the order's own start and this stay (roundOrders) bound it further. */
   const lookbackFrom = new Date(fromMs - MAX_WINDOW_DAYS * 86400000).toISOString();
 
+  /* Codex F3/F5, on the round: a dose whose checks were done under an order that has since changed materially (the
+   * next step is refused until it is verified again), and a dose scanned although the safety check did not run. */
+  const marChecks = (o, mar) => {
+    if (!mar) return {};
+    const changed = !TERMINAL.includes(mar.status) && mar.status !== STATES.ORDERED ? materialOrderChanges(mar.orderSnapshot, o) : [];
+    return { ...(changed.length ? { recheckNeeded: changed } : {}), ...(mar.safetyNotRun ? { safetyNotRun: mar.safetyNotRun } : {}) };
+  };
   for (const o of orders) {
     // orderVersion: the order as the nurse saw it. A dose charted against it is refused if the order changed (G2).
     const card = { orderId: o.id, orderVersion: o.version == null ? null : o.version, drug: o.drug, dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
@@ -433,12 +440,12 @@ async function marSchedule(request, env, ctx) {
     if (!spec) {
       // Named, not omitted. A ward that cannot see this order has no way to know a dose is missing.
       unscheduled.push({ ...card, reason: o.frequency ? "frequency_not_understood" : "no_frequency", ...lastGiven(o) });
-      for (const m of recordedIn(o)) due.push(recordedRow(card, m, "unscheduled"));
+      for (const m of recordedIn(o)) due.push(recordedRow(card, m, "unscheduled", o));
       continue;
     }
     if (spec.kind === "prn") {
       prn.push({ ...card, asNeeded: true, ...lastGiven(o) });
-      for (const m of recordedIn(o)) due.push(recordedRow(card, m, "asNeeded"));
+      for (const m of recordedIn(o)) due.push(recordedRow(card, m, "asNeeded", o));
       continue;
     }
     if (given) {
@@ -472,6 +479,7 @@ async function marSchedule(request, env, ctx) {
         witnessedBy: (mar && mar.witnessedBy) || null,
         statusBy: (mar && mar.writtenBy && mar.writtenBy.id) || null,
         overdue: isOverdue(t, mar && mar.status, nowMs, ctx.graceMinutes),
+        ...marChecks(o, mar),
         /* Only when this dose is NOT at the time the ward's policy names. A nurse handed a time the
          * policy does not contain is owed the reason on the same row, not in a release note. */
         ...(moved.has(t) ? { adjusted: { from: moved.get(t).from, to: moved.get(t).to, reason: moved.get(t).reason } } : {}),

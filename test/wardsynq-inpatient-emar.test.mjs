@@ -2692,8 +2692,9 @@ test("the whole stay exports as a FHIR bundle, from the real record", async () =
   assert.equal(byType.MedicationAdministration[0].status, "completed");
   // The order's canonical id is longer than R4 allows, so the reference carries its hashed FHIR id and the
   // MedicationRequest itself is exported under that same id with the canonical one as an identifier.
-  assert.match(byType.MedicationAdministration[0].request.reference, /^MedicationRequest\/wsq-[0-9a-f]{48}$/);
-  assert.equal(`MedicationRequest/${byType.MedicationRequest[0].id}`, byType.MedicationAdministration[0].request.reference);
+  // Codex F2: the reference names the order VERSION the dose was given under.
+  assert.match(byType.MedicationAdministration[0].request.reference, /^MedicationRequest\/wsq-[0-9a-f]{48}\/_history\/\d+$/);
+  assert.equal(`MedicationRequest/${byType.MedicationRequest[0].id}/_history/${byType.MedicationRequest[0].meta.versionId}`, byType.MedicationAdministration[0].request.reference);
   assert.ok(byType.MedicationRequest[0].identifier.some((i) => i.system === "urn:stewardmd:record-id" && i.value === ord.orderId));
   // The vitals are LOINC-coded observations, because those genuinely are LOINC.
   assert.ok(byType.Observation.some((o) => o.code.coding && o.code.coding[0].system === "http://loinc.org"));

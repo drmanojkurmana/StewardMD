@@ -181,15 +181,22 @@ test("CLIN-11: a dose is charted only at a time the order schedules", async () =
   assert.equal(ahead.error, "not_a_scheduled_dose", "an as-needed dose is not charted hours ahead");
 });
 
-test("CLIN-19: a bedside check that could not run comes back as a warning, and the ward screen shows it", async () => {
+/* Codex F5 (2 Oct 2026): the check that could not run now REFUSES the scan; it continues only with the nurse's reason,
+ * and the warning is still what the ward screen shows. */
+test("CLIN-19: a bedside check that could not run refuses, continues with a reason as a warning, and the ward screen shows it", async () => {
   seed();
   const p = await admittedPatient();
   const { d } = await statDose(p, "Ceftriaxone", 1, "g", "IV");
   await ready(p, d);
   const real = H.RECORD.byPatient.bind(H.RECORD);
   H.RECORD.byPatient = async (tid, type, pid) => { if (type === "AllergyIntolerance") throw new Error("simulated D1 timeout"); return real(tid, type, pid); };
-  let s;
-  try { s = await wardScan(p, d, p.mrn, "Ceftriaxone"); } finally { H.RECORD.byPatient = real; }
+  let refused, s;
+  try {
+    refused = await wardScan(p, d, p.mrn, "Ceftriaxone");
+    s = await mar(p, d, "scan", { uncheckedReason: "urgent first dose", scan: { patientBarcode: p.mrn, drugBarcode: "Ceftriaxone", dose: d.dose, route: d.route } });
+  } finally { H.RECORD.byPatient = real; }
+  assert.equal(refused.__status, 409);
+  assert.ok(refused.reasons.some((r) => r.code === "SAFETY_CHECK_UNAVAILABLE" && r.checkNotRun));
   assert.equal(s.__status, 200);
   assert.ok(s.safetyWarnings.some((w) => w.code === "SAFETY_CHECK_UNAVAILABLE"));
   const src = readFileSync(new URL("../ward.js", import.meta.url), "utf8");

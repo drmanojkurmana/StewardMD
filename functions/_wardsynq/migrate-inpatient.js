@@ -692,7 +692,7 @@ function patientInstructionsRefusal(v) {
  * prescriber's reason for proceeding past overridable findings; it is attributed to the acting actor
  * here, never to anyone a caller names.
  *
- * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, requireSafetyReason?, lactationWindowDays?, actorDeps, recordDeps }.
+ * ctx: { migration, order: {...}, rulePack?, checkOnly?, overrideReason?, uncheckedReason?, requireSafetyReason?, lactationWindowDays?, actorDeps, recordDeps }.
  */
 async function createWardMedicationOrder(request, env, ctx) {
   const mig = ctx.migration;
@@ -804,6 +804,15 @@ async function createWardMedicationOrder(request, env, ctx) {
     return { ...base, ok: false, status: 409, error: "safety_hard_stop", detail: safety.hardStops.map((f) => f.message).join(" "),
       drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
   }
+  /* Codex F5: A CHECK THAT DID NOT RUN IS REFUSED, not saved as checked:false and carried on. The prescriber may continue
+   * only with a reason (uncheckedReason), attributed to them, kept on the order as safetyAtOrder.continuedWithoutCheck,
+   * which the pharmacist and the nurse read. checkOnly above still shows the outage without writing. */
+  const uncheckedReason = str(ctx.uncheckedReason).slice(0, 500);
+  if (!safety.checked && !uncheckedReason) {
+    return { ...base, ok: false, status: 409, error: "safety_check_not_run",
+      detail: "The allergy, interaction and dose checks could not run, so nothing about this order was checked. Give a reason to prescribe without them, or try again when they can run. Nothing was prescribed.",
+      drug: candidate.drug, safety, ...(replaces ? { replaces } : {}), written: 0, actor: resolved.actor.id, role: resolved.role };
+  }
   const overrideReason = str(ctx.overrideReason).slice(0, 500);
   /* CLIN-02: a writer with no review step of its own (the consultation save) cannot rely on a screen
    * having asked for a reason first, as the Prescribe form does (checkOnly, then "Prescribe anyway").
@@ -825,8 +834,12 @@ async function createWardMedicationOrder(request, env, ctx) {
         // ruleId / allergyId (CLIN-12): the bedside clears exactly the finding the prescriber answered, not its code.
         findings: safety.blocks.concat(safety.overridables, safety.warnings).map((f) => ({ code: f.code, disposition: f.disposition, message: f.message, ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}) })),
         unresolvedDrug: !!safety.unresolvedDrug, ...(safety.pregnancyLactation ? { pregnancyLactation: safety.pregnancyLactation } : {}),
+        // Codex F6: what the check could not cover (no renal table, no eGFR, no pregnancy rules), and the renal facts it had.
+        ...((safety.coverage || []).length ? { coverage: safety.coverage.map((f) => ({ code: f.code, message: f.message })) } : {}),
+        ...(safety.renal ? { renal: safety.renal } : {}),
         ...(overrideReason ? { reason: overrideReason, acknowledgedBy: resolved.actor.id } : {}) }
-    : { checked: false, code: safety.code, checkedAt: new Date().toISOString() };
+    : { checked: false, code: safety.code, checkedAt: new Date().toISOString(),
+        continuedWithoutCheck: { reason: uncheckedReason, by: resolved.actor.id, at: new Date().toISOString() } };
 
   let out;
   try {

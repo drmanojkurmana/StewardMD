@@ -2828,7 +2828,7 @@ export async function onRequest(context) {
             idempotencyKey: idemFor(body.idempotencyKey, "vitals", c.index) }),
           problems: (rq, ev, c) => recordProblem(rq, ev, { ...c, problem: c.item, idempotencyKey: idemFor(body.idempotencyKey, "problem", c.index) }),
           // CLIN-02: the same engine and hard stops as /ward/medication-order, and a reason for any finding.
-          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, requireSafetyReason: true,
+          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, uncheckedReason: c.item && c.item.uncheckedReason, requireSafetyReason: true,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
             ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
@@ -3344,7 +3344,7 @@ export async function onRequest(context) {
         const r = await createWardMedicationOrder(request, env, {
           /* LT-14: the safety check runs on the server against the record (never a verdict from the body);
            * checkOnly shows it before anything is written. */
-          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason,
+          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason, uncheckedReason: body.uncheckedReason,
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,
@@ -5721,7 +5721,7 @@ export async function onRequest(context) {
       if (sub === "mar" && method === "POST") {
         const r = await administerStep(request, env, {
           ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt, expectedOrderVersion: body.expectedOrderVersion,
-          patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
+          patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId, uncheckedReason: body.uncheckedReason,
           // CLIN-18: the witness's own staff PIN, checked like a PIN sign-in (same hash, lockout and audit), never stored.
           witnessPinCheck: (id, pin) => verifyWitnessPin({ getMemberAuth: (x) => ORG.getMemberAuth(env, wOrgId, x),
             recordAttempt: (a, nx) => ORG.recordMemberPinAttempt(env, wOrgId, a.identity, nx),

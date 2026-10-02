@@ -321,7 +321,16 @@ function fhirMedicationAdministration(a) {
     context: ref("Encounter", a.encounterId),
     effectiveDateTime: str(a.administeredAt) || undefined,
     performer: a.administeredBy ? [{ actor: practitioner(a.administeredBy) }] : undefined,
-    request: ref("MedicationRequest", a.orderId),
+    /* Codex F2: the order VERSION the dose was given under, so the reference still means the same prescription after
+     * the order is amended (a FHIR versioned reference), and the dose and route that were given, from the record's own
+     * snapshot. The prescription's current dose is never substituted for what this record says was given. */
+    request: a.orderId ? { reference: `MedicationRequest/${fhirId(a.orderId)}${a.orderVersion != null ? `/_history/${a.orderVersion}` : ""}` } : undefined,
+    dosage: a.dose || a.route ? clean({
+      route: a.route ? { text: String(a.route) } : undefined,
+      dose: a.dose && typeof a.dose.value === "number"
+        ? clean({ value: a.dose.value, unit: str(a.dose.unit) || undefined, system: a.dose.unit ? "http://unitsofmeasure.org" : undefined, code: str(a.dose.unit) || undefined })
+        : undefined,
+    }) : undefined,
   });
 }
 
