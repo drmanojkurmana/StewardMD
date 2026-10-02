@@ -268,6 +268,12 @@ re-reading the control:
    hand-built or deserialised actor claiming EXECUTE held it. This sat inside HAZ-AI-01.
 5. `gatherVitals` guarded staleness and not future-dating, so a clock-skewed reading became "the
    latest" and outranked the correct current value.
+6. (2026-10-02) ED unidentified arrivals: `arriveUnknown` (`migrate-ed.js`) wrote the provisional
+   Patient without `expectedVersion: 0`. `svc.put` only refuses an existing id when a version is
+   stated, so an arrival that counted before another one wrote the same sequence became VERSION 2 of
+   that person's Patient: two unidentified people on one MRN, the first overwritten. The concurrent
+   test caught it only by timing (one CI flake); `test/wardsynq-ed.test.mjs` "STALE COUNT" reproduces
+   it every time. Rule: any put that CREATES a record whose id is computed must pass `expectedVersion: 0`.
 
 Five hazards are LOCAL: they are not in the spec's assurance table and were added because the
 omission was real. Three are PARTIAL. Adding them lowered the verified fraction rather than raising it.
