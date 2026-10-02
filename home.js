@@ -2844,7 +2844,13 @@
     kuInjectCSS();
     var chip = document.createElement("button");
     chip.className = "v3-ku"; chip.setAttribute("data-act", "ku"); chip.setAttribute("aria-label", "Knowledge Points");
-    function paint() { chip.innerHTML = '<span class="kudia">◆</span>' + kuFmt(SMD_KU.balance()); chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none"; }
+    var kuNum = document.createElement("span");   // persistent node so SMD_NUM can roll only the digits that changed
+    function paint() {
+      if (!kuNum.parentNode) { chip.innerHTML = '<span class="kudia">◆</span>'; chip.appendChild(kuNum); }
+      var t = kuFmt(SMD_KU.balance());
+      if (window.SMD_NUM) SMD_NUM.set(kuNum, t, { kind: "counter" }); else kuNum.textContent = t;
+      chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none";
+    }
     paint(); try { SMD_KU.onChange(paint); } catch (e) {}
     var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
     if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
@@ -3055,7 +3061,10 @@
       if (!h2) return;                                   // sheet closed while the request was in flight
       if (!data || typeof data !== "object") return fail();
       var openD = {}; Array.prototype.forEach.call(h2.querySelectorAll("details[data-k]"), function (d) { if (d.open) openD[d.getAttribute("data-k")] = 1; });
+      var prevBal = h2.querySelector(".aiu-wallet .bal"); prevBal = prevBal && (window.SMD_NUM && SMD_NUM.text(prevBal) != null ? SMD_NUM.text(prevBal) : prevBal.textContent);
       h2.innerHTML = renderAiUsage(data);
+      var nb = window.SMD_NUM && h2.querySelector(".aiu-wallet .bal");   // wallet balance rolls on a refresh; first load is static
+      if (nb) { var curBal = nb.textContent; if (prevBal && prevBal !== curBal) SMD_NUM.set(nb, prevBal, { kind: "counter" }); SMD_NUM.set(nb, curBal, { kind: "counter" }); }
       Array.prototype.forEach.call(h2.querySelectorAll("details[data-k]"), function (d) { if (openD[d.getAttribute("data-k")]) d.open = true; });
       var rf = document.getElementById("aiuRefresh"); if (rf) rf.onclick = function () { aiuLoad(true); };
       var buy = document.getElementById("aiuBuy");
@@ -5735,7 +5744,7 @@
   --mk-teal:#0f766e;--mk-tsoft:#d7f5ef;--mk-acc:#2563eb;--mk-glow:rgba(20,184,166,.35);
   --mk-userbub:linear-gradient(140deg,#15a89a,#0f766e);--mk-userink:#fff;--mk-usersh:0 4px 12px rgba(15,118,110,.28);
   --mk-send:linear-gradient(140deg,#19b8a8,#0e6e63);
-  position:fixed;left:0;right:0;bottom:0;z-index:999;height:86vh;max-height:86vh;
+  position:fixed;left:0;right:0;bottom:0;z-index:999;height:86vh;max-height:86vh;height:86dvh;max-height:86dvh;
   background:var(--mk-bg);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);
   display:flex;flex-direction:column;overflow:hidden;
   transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);

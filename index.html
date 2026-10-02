@@ -56,7 +56,8 @@
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/redesign-system.css?v=spheretiles2-splashv2e-betachip1-darksphere1-appfeel1-energy1-icons1-fr1-live1-knife1-ox2-alltools1">
-<link rel="stylesheet" href="/motion.css?v=gold1">
+<link rel="stylesheet" href="/motion.css?v=gold1-pf2">
+<script src="/smd-num.js?v=num1" defer></script>
 <link rel="stylesheet" href="/maik-ask.css?v=mkfast2">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
@@ -70,7 +71,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432-sd1">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q13-profilescroll-prio1-fr1">
-<link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1">
+<link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1-pf1">
 <link rel="stylesheet" href="/discharge.css?v=dis4-clinforms-fr1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1-edit1">
 <link rel="stylesheet" href="/atlas.css?v=atlas6">
@@ -85,19 +86,19 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/ophthalmos-explore.css?v=oph13">
 <link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark2">
 <link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1">
-<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1">
+<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm2-fr1">
 <link rel="stylesheet" href="/fundx.css?v=sar1-fr1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark-fr1">
-<link rel="stylesheet" href="/kardiox-screens.css?v=kx7-fr1">
+<link rel="stylesheet" href="/kardiox-screens.css?v=kx7-fr1-pf1">
 <link rel="stylesheet" href="/thorex.css?v=tx2">
-<link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1">
+<link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1-pf1">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm-fr1">
 <link rel="stylesheet" href="/insulin.css?v=ins15-fr1">
 <link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
-<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1">
+<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1-pf1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
 <link rel="stylesheet" href="/icd.css?v=icd1">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
@@ -2224,7 +2225,7 @@ window.openExternal = function (u) {
      no-op that resolved without loading anything, html2canvas stayed undefined, and Save as
      JPEG/PDF did nothing at all. The file is 15 lines and has no dependencies. -->
 <script src="/lazy-load.js?v=ll1"></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1-cel1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1-cel1-pf1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2249,7 +2250,7 @@ window.openExternal = function (u) {
 <script src="/applock.js?v=gold8-relock1" defer></script>
 <script src="/policy.js?v=gold363-abg10" defer></script>
 <script src="/features.js?v=gold997" defer></script>
-<script src="/calculators.js?v=gold1051-r1d-rail1-find1-kits1-fr1-cbac2-neo1" defer></script>
+<script src="/calculators.js?v=gold1051-r1d-rail1-find1-kits1-fr1-cbac2-neo1-pf1" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978-sheet1-universal3-cefiderocol1-fr1" defer></script>
@@ -2271,7 +2272,7 @@ window.openExternal = function (u) {
      page, which is both far cheaper and more accurate on numbers. Loads BEFORE the modules that use it. -->
 <script defer src="/img-compress.js?v=imgc1"></script>
 <script defer src="/ddi-catalog.js?v=ddiaudit20260925"></script>
-<script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1"></script>
+<script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1-pf1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
 <script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1" defer></script>
@@ -2370,7 +2371,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2681,7 +2682,7 @@ window.openExternal = function (u) {
 <script src="/insulin-db.js?v=ins11" defer></script>
 <script src="/insulin-convert.js?v=ins11" defer></script>
 <script src="/insulin-ask.js?v=ins15" defer></script>
-<script src="/insulin.js?v=ins17-cel1" defer></script>
+<script src="/insulin.js?v=ins17-cel1-pf1" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
      (/followcare?t=…), never the app. Engines (pathways/engine/assessment/schedule) also power the
@@ -2736,7 +2737,7 @@ window.openExternal = function (u) {
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
-<script src="/discharge.js?v=dis8-education-scribe18" defer></script>
+<script src="/discharge.js?v=dis8-education-scribe18-pf1" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
 <script src="/onco-dose.js?v=op1" defer></script>
@@ -2813,7 +2814,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot6" defer></script>
-<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1" defer></script>
+<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1" defer></script>
 <script src="/protocol-sheet.js?v=ps6-fr1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is

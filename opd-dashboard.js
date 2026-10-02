@@ -454,7 +454,7 @@
     badge("active", occ.counts.all); badge("recall", ts.recallable); badge("unpaid", ts.unpaid);
     var live = document.getElementById("dzLive"); if (live) { var on = host.isLive(); live.classList.toggle("on", on); live.lastChild.textContent = on ? "Live" : "Refreshes every minute"; }
   }
-  function badge(k, n) { Array.prototype.forEach.call(document.querySelectorAll('[data-dz-badge="' + k + '"]'), function (b) { b.hidden = !n; b.textContent = n || ""; }); }
+  function badge(k, n) { Array.prototype.forEach.call(document.querySelectorAll('[data-dz-badge="' + k + '"]'), function (b) { b.hidden = !n; if (window.SMD_NUM && n) SMD_NUM.set(b, String(n), { kind: "counter" }); else b.textContent = n || ""; }); }
 
   var PAL = null;
   function commands() {
