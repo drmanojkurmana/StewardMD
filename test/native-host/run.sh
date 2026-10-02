@@ -4,26 +4,31 @@
 #   test/native-host/run.sh android   build the Needle, llama and speech plugins; 16 KB alignment, JNI exports,
 #                                     every import resolvable at API 26, no network symbols in Needle
 #   test/native-host/run.sh llama     the REAL llama_jni.cpp + LlamaEngine on this CPU with FunctionGemma,
-#                                     with and without the router grammar
+#                                     with and without the router grammar, and the forced prefix + digit pick
+#                                     (its tokens must be the llama-json target's: {"option": = 14937 4485 1083)
 #   test/native-host/run.sh needle    the REAL needle_jni.cpp + NeedleNative on this CPU with base Needle
 #   test/native-host/run.sh all
 # LIMIT=60 (rows per model run; 0 = all 1,512). WORK=<dir> for downloads and builds (default /tmp/smd-native).
 #
+# `llama` also runs on macOS (arm64) with JAVA_HOME set.
 # Needs: ANDROID_HOME with ndk;27.2.12479018 and cmake;3.22.1, JDK 21, node, clang++-20 + libc++-20-dev
 # (the Needle archive is built against LLVM libc++). Run `node scripts/edge/export.mjs` first.
 # Phone-only facts (real latency, memory, thermal, the :edge kill test) still come from the runbook gates.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"; HERE="$ROOT/test/native-host"
-WORK="${WORK:-/tmp/smd-native}"; LIMIT="${LIMIT:-60}"; MODE="${1:-all}"
+WORK="${WORK:-/tmp/smd-native}"; LIMIT="${LIMIT:-60}"; MODE="${1:-all}"; mkdir -p "$WORK"
 NDK="${ANDROID_HOME:?set ANDROID_HOME}/ndk/27.2.12479018"; TC="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
-JINC="-I${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}/include -I${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}/include/linux"
+JOS="$(uname | tr '[:upper:]' '[:lower:]')"; NPROC="$(getconf _NPROCESSORS_ONLN)"
+JINC="-I${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}/include -I${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}/include/$JOS"
+# A JDK without headers (Android Studio's JBR): the NDK's jni.h is self-contained, use it.
+[ -f "${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk-amd64}/include/jni.h" ] || { mkdir -p "$WORK/jni"; cp "$NDK"/toolchains/llvm/prebuilt/*/sysroot/usr/include/jni.h "$WORK/jni/"; JINC="-I$WORK/jni"; }
+sha256() { if command -v sha256sum >/dev/null; then sha256sum "$@"; else shasum -a 256 "$@"; fi; }
 BAKE="$ROOT/vault/plans/edge-data/dataset/export/bakeoff/test.jsonl"
-mkdir -p "$WORK"
 
 fetch() {  # url dest sha256
-  [ -f "$2" ] && echo "$3  $2" | sha256sum -c - >/dev/null 2>&1 && return 0
+  [ -f "$2" ] && echo "$3  $2" | sha256 -c - >/dev/null 2>&1 && return 0
   mkdir -p "$(dirname "$2")"; curl -fL --retry 3 -o "$2.part" "$1"
-  echo "$3  $2.part" | sha256sum -c - >/dev/null || { echo "SHA-256 MISMATCH: $1"; exit 1; }; mv "$2.part" "$2"
+  echo "$3  $2.part" | sha256 -c - >/dev/null || { echo "SHA-256 MISMATCH: $1"; exit 1; }; mv "$2.part" "$2"
 }
 stubs() {
   mkdir -p "$WORK/stub/android" "$WORK/stublib"
@@ -37,7 +42,7 @@ rows() {  # the exported bake-off prompts with the router's own grammar string, 
     let r=fs.readFileSync(process.argv[1],"utf8").split("\n").filter(Boolean).map(JSON.parse);
     if (lim) r=r.filter((_,i)=>i%Math.max(1,Math.floor(r.length/lim))===0).slice(0,lim);
     const b=(s)=>Buffer.from(s,"utf8").toString("base64");
-    fs.writeFileSync(process.argv[3], r.map(x=>[x.id,b(x.system),b(x.prompt),b(E.grammarFor(x.n_options))].join("\t")).join("\n")+"\n");
+    fs.writeFileSync(process.argv[3], r.map(x=>[x.id,b(x.system),b(x.prompt),b(E.grammarFor(x.n_options)),x.n_options].join("\t")).join("\n")+"\n");
     fs.writeFileSync(process.argv[4], JSON.stringify(E.TOOL_SCHEMA)); fs.writeFileSync(process.argv[5], E.SYSTEM);' "$BAKE" "$LIMIT" "$WORK/rows.tsv" "$WORK/tools.json" "$WORK/system.txt")
 }
 
@@ -87,16 +92,16 @@ llama() {
   stubs; rows
   local L="$WORK/llama"; mkdir -p "$L"
   (cd "$ROOT" && git submodule update --init --depth 1 local-plugins/capacitor-llama/android/src/main/cpp/llama-cpp)
-  cmake -S "$ROOT/local-plugins/capacitor-llama/android/src/main/cpp" -B "$L/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON \
+  cmake -S "$ROOT/local-plugins/capacitor-llama/android/src/main/cpp" -B "$L/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DGGML_METAL=OFF \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_LIBRARY_PATH="$WORK/stublib" -DCMAKE_C_FLAGS="-I$WORK/stub" \
     -DCMAKE_CXX_FLAGS="-I$WORK/stub $JINC -include cstring" >/dev/null
-  cmake --build "$L/build" -j"$(nproc)" --target llama_jni >/dev/null
+  cmake --build "$L/build" -j"$NPROC" --target llama_jni >/dev/null
   # FunctionGemma 270M Q8_0 from ggml-org, pinned by revision and sha256 (Gemma terms of use).
   fetch "https://huggingface.co/ggml-org/functiongemma-270m-it-GGUF/resolve/2566ce14aedfc14fdd0de955ba67346425e67126/functiongemma-270m-it-q8_0.gguf" \
     "$WORK/models/functiongemma-270m-it-q8_0.gguf" 83940d4dd9676710856f43523bed096164a595a96f6b34771610a03937de5270
   local J="$ROOT/local-plugins/capacitor-llama/android/src/main/java/in/stewardmd/llama"
   rm -rf "$L/classes"; javac -d "$L/classes" "$HERE/Log.java" "$J"/LlamaNative.java "$J"/LlamaEngine.java "$J"/LlamaErr.java "$J"/LlamaException.java "$HERE/GrammarHarness.java"
-  for g in on off; do
+  for g in on off pick; do
     java -Djava.library.path="$L/build" -cp "$L/classes" GrammarHarness "$WORK/models/functiongemma-270m-it-q8_0.gguf" "$WORK/rows.tsv" $g > "$WORK/llama-$g.jsonl" 2>/dev/null
   done
   (cd "$ROOT" && node -e '
@@ -107,7 +112,19 @@ llama() {
       const ms=L.map(l=>l.ms).sort((a,b)=>a-b);
       console.log("grammar "+g+": valid {\"option\":n} "+v+"/"+L.length+", p50 "+ms[ms.length>>1]+" ms (this CPU, not a phone)");
       if (g==="on") fs.writeFileSync(process.argv[2], preds.map(p=>JSON.stringify(p)).join("\n")+"\n");
-    }' "$WORK" "$WORK/preds-functiongemma-base.jsonl" "${BAKE%test.jsonl}test.index.jsonl")
+    }
+    // Forced prefix + digit pick: the served tokens must be the llama-json target {"option":n} (training
+    // text, no train/serve drift), and the answer is compared with the grammar run above.
+    const P=fs.readFileSync(process.argv[1]+"/llama-pick.jsonl","utf8").split("\n").filter(Boolean).map(JSON.parse);
+    const on={}; fs.readFileSync(process.argv[1]+"/llama-on.jsonl","utf8").split("\n").filter(Boolean).map(JSON.parse).forEach(l=>{ try { on[l.id]=JSON.parse(l.text).option; } catch(e) {} });
+    const dig={}; let bad=0, same=0;
+    P.forEach(l=>{ if (l.option==null || l.tail.slice(0,3).join(" ")!=="14937 4485 1083") bad++; else { (dig[l.option]=dig[l.option]||new Set()).add(l.tail[3]); if (on[l.id]===l.option) same++; } });
+    const digOk=Object.values(dig).every(s=>s.size===1) && (!dig[3] || dig[3].has(236800));
+    const pm=P.map(l=>l.ms).sort((a,b)=>a-b);
+    console.log("pick: "+(P.length-bad)+"/"+P.length+" end in {\"option\": = 14937 4485 1083, one token per digit "+(digOk?"yes":"NO")+
+      ", same option as the grammar run "+same+"/"+P.length+", p50 "+pm[pm.length>>1]+" ms (this CPU)");
+    if (bad || !digOk) { console.log("PICK: FAIL"); process.exit(1); }
+    ' "$WORK" "$WORK/preds-functiongemma-base.jsonl" "${BAKE%test.jsonl}test.index.jsonl")
   echo "score: node scripts/edge/score.mjs --pred $WORK/preds-functiongemma-base.jsonl"
 }
 

@@ -142,6 +142,22 @@ test("llamaAdapter: per-call grammar limited to the options offered, greedy, par
   await eng.release(); assert.equal(calls.release, 1);
 });
 
+test("llamaAdapter: forced prefix + digit pick, confidence from the plugin, grammar kept as the fallback", async () => {
+  let reply = { text: '{"option":1}', p: 0.42 };
+  const gen = [];
+  const plugin = { load: () => Promise.resolve({ loaded: true }), generate: (a) => { gen.push(a); return Promise.resolve(reply); } };
+  const eng = E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" });
+  const r = await eng.complete({ prompt: "x\nOptions:\n1. a\n2. b\n0. none of these", nOptions: 2 });
+  assert.deepEqual(gen[0].pick, { prefix: '{"option":', choices: ["0", "1", "2"], suffix: "}" }, "same text as the llama-json target");
+  assert.equal(gen[0].grammar, 'root ::= "{\\"option\\":" [0-2] "}"', "an older plugin ignores pick and runs the grammar");
+  assert.deepEqual(r, { option: 1, confidence: 0.42 });
+  assert.deepEqual(E.optionFrom(r), { ok: true, option: 1, confidence: 0.42 }, "below the 0.5 floor, so the router passes");
+  reply = { text: '{"option":2}' };   // grammar fallback: no p, no confidence
+  assert.deepEqual(await eng.complete({ prompt: "y", nOptions: 2 }), { option: 2 });
+  await eng.complete({ prompt: "z", nOptions: 9 });
+  assert.equal(gen[2].pick.choices.length, 6, "never more digits than MAX_OPTIONS allows");
+});
+
 test("bakeoff: production runtime contract, one line per row, timeouts and garbage recorded as no option", async () => {
   const rows = [{ id: "a", prompt: "p1", n_options: 2 }, { id: "b", prompt: "slow", n_options: 2 }, { id: "c", prompt: "junk", n_options: 2 }];
   const eng = { available: () => true, load: () => Promise.resolve(), reset: () => Promise.resolve(), release: () => Promise.resolve(),

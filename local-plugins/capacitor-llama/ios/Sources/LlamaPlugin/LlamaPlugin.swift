@@ -446,6 +446,13 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let stream = call.getBool("stream") ?? true
         let prefillEmptyThink = call.getBool("prefillEmptyThink") ?? false
         let grammar = call.getString("grammar")   // GBNF, root rule "root" (Edge router); nil = unconstrained
+        // Forced prefix + pick (Edge router, A0.3): { prefix, choices: ["0","1",...], suffix }. One prefill,
+        // no decode loop; resolves { text: prefix + choice + suffix, p }. A choice that is not one token
+        // falls back to grammar generation.
+        var pick: Pick? = nil
+        if let o = call.getObject("pick"), let ch = o["choices"] as? [String], !ch.isEmpty {
+            pick = Pick(prefix: o["prefix"] as? String ?? "", choices: ch, suffix: o["suffix"] as? String ?? "")
+        }
 
         let t0 = Date()
         let batcher: TokenBatcher? = stream
@@ -454,7 +461,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         let onToken: ((String) -> Void)? = batcher.map { b in { piece in b.add(piece) } }
 
         engine.generate(system: system, user: prompt, nPredict: nPredict, temperature: temperature,
-                        seed: seed, prefillEmptyThink: prefillEmptyThink, grammar: grammar, onToken: onToken) { [weak self] result in
+                        seed: seed, prefillEmptyThink: prefillEmptyThink, grammar: grammar, pick: pick, onToken: onToken) { [weak self] result in
             batcher?.flush()   // the last pieces land before the promise settles
             // If backgrounding let this generation run past its deadline (T59), the answer landed:
             // release the background task we borrowed to finish it.
@@ -462,7 +469,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
             switch result {
             case .success(let g):
                 self?.armIdleRelease()
-                call.resolve(["text": g.text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "perf": g.dict])
+                var out: [String: Any] = ["text": g.text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "perf": g.dict]
+                if let p = g.p { out["p"] = p }
+                call.resolve(out)
             case .failure(let err):
                 let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)
                 self?.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])

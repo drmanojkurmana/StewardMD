@@ -14,6 +14,7 @@
 #include <jni.h>
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <atomic>
 #include <mutex>
 #include <thread>
@@ -81,6 +82,7 @@ struct GenStats {
     double tokPerSec = 0;
     int thermalStart = 0, thermalEnd = 0;
     bool stoppedHot = false;
+    int pickTail[4] = {0, 0, 0, 0};   // pick(): the last 3 prompt tokens + the chosen choice token
 };
 static GenStats g_stats;
 
@@ -250,10 +252,11 @@ Java_in_stewardmd_llama_LlamaNative_lastStats(JNIEnv* env, jobject) {
     snprintf(buf, sizeof(buf),
              "{\"promptTokens\":%d,\"reusedTokens\":%d,\"prefillMs\":%lld,\"decodeMs\":%lld,\"tokens\":%d,"
              "\"tokPerSec\":%.2f,\"thermalStart\":\"%s\",\"thermalEnd\":\"%s\",\"draftProposed\":%d,"
-             "\"draftAccepted\":%d,\"stoppedHot\":%s,\"kvQ8\":%s,\"flashAttn\":%s}",
+             "\"draftAccepted\":%d,\"stoppedHot\":%s,\"kvQ8\":%s,\"flashAttn\":%s,\"pickTokens\":[%d,%d,%d,%d]}",
              s.promptTokens, s.reusedTokens, s.prefillMs, s.decodeMs, s.tokens, s.tokPerSec,
              thermal_name(s.thermalStart), thermal_name(s.thermalEnd), s.draftProposed, s.draftAccepted,
-             s.stoppedHot ? "true" : "false", g_kv_q8.load() ? "true" : "false", g_flash.load() ? "true" : "false");
+             s.stoppedHot ? "true" : "false", g_kv_q8.load() ? "true" : "false", g_flash.load() ? "true" : "false",
+             s.pickTail[0], s.pickTail[1], s.pickTail[2], s.pickTail[3]);
     return env->NewStringUTF(buf);
 }
 
@@ -587,6 +590,68 @@ Java_in_stewardmd_llama_LlamaNative_generate(
          g_cancel.load() ? " (cancelled)" : "");
     llama_sampler_free(smpl);
     return env->NewStringUTF(full.c_str());
+}
+
+/**
+ * FORCED PREFIX + PICK (StewardMD Edge, gate A0.3). `prompt` already ends with the forced reply prefix
+ * (e.g. the template's model turn + {"option":). ONE prefill, then the next-token distribution over
+ * the single-token `choices` only: no decode loop, no grammar over the 262k vocabulary (that grammar
+ * was about 2/3 of a FunctionGemma call). Tokenised as one string, exactly like the training text.
+ * Returns softmax probabilities per choice, or null when a choice is not exactly one token (the
+ * caller then falls back to the grammar path) or the prefill failed.
+ */
+JNIEXPORT jfloatArray JNICALL
+Java_in_stewardmd_llama_LlamaNative_pick(
+        JNIEnv* env, jobject, jlong ctxHandle, jlong modelHandle, jstring promptStr, jobjectArray choices) {
+    auto* ctx = reinterpret_cast<llama_context*>(ctxHandle);
+    auto* mdl = reinterpret_cast<llama_model*>(modelHandle);
+    if (ctx == nullptr || mdl == nullptr || promptStr == nullptr || choices == nullptr) return nullptr;
+    g_cancel.store(false, std::memory_order_relaxed);
+    const llama_vocab* vocab = llama_model_get_vocab(mdl);
+    const int nc = env->GetArrayLength(choices);
+    if (nc < 1) return nullptr;
+    std::vector<llama_token> ids((size_t) nc);
+    for (int i = 0; i < nc; i++) {
+        auto js = (jstring) env->GetObjectArrayElement(choices, i);
+        const char* c = js ? env->GetStringUTFChars(js, nullptr) : nullptr;
+        llama_token t[2]; int n = c ? llama_tokenize(vocab, c, (int) strlen(c), t, 2, false, false) : 0;
+        if (c) env->ReleaseStringUTFChars(js, c);
+        if (js) env->DeleteLocalRef(js);
+        if (n != 1) { LOGE("pick: choice %d is not one token", i); return nullptr; }
+        ids[(size_t) i] = t[0];
+    }
+    const char* prompt = env->GetStringUTFChars(promptStr, nullptr);
+    if (prompt == nullptr) return nullptr;
+    const int plen = (int) strlen(prompt);
+    int need = -llama_tokenize(vocab, prompt, plen, nullptr, 0, true, true);
+    std::vector<llama_token> toks((size_t) std::max(need, 0));
+    int ntok = need > 0 ? llama_tokenize(vocab, prompt, plen, toks.data(), need, true, true) : 0;
+    env->ReleaseStringUTFChars(promptStr, prompt);
+    if (ntok < 3 || ntok >= (int) llama_n_ctx(ctx)) { LOGE("pick: prompt %d tokens", ntok); return nullptr; }
+    toks.resize((size_t) ntok);
+
+    GenStats st;
+    st.thermalStart = g_thermal.load(std::memory_order_relaxed);
+    const auto t0 = std::chrono::steady_clock::now();
+    const int reused = prefill_reuse(ctx, g_kv, g_kv_ctx, toks, (int) llama_n_batch(ctx));
+    if (reused < 0 || g_cancel.load(std::memory_order_relaxed)) return nullptr;
+    const float* lg = llama_get_logits_ith(ctx, -1);
+    if (lg == nullptr) return nullptr;
+    float mx = lg[ids[0]]; int best = 0;
+    for (int i = 1; i < nc; i++) if (lg[ids[(size_t) i]] > mx) { mx = lg[ids[(size_t) i]]; best = i; }
+    std::vector<float> p((size_t) nc); double z = 0;
+    for (int i = 0; i < nc; i++) z += (p[(size_t) i] = std::exp(lg[ids[(size_t) i]] - mx));
+    for (auto& v : p) v = (float) (v / z);
+    st.prefillMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - t0).count();
+    st.promptTokens = ntok; st.reusedTokens = reused; st.thermalEnd = g_thermal.load(std::memory_order_relaxed);
+    for (int i = 0; i < 3; i++) st.pickTail[i] = toks[(size_t) (ntok - 3 + i)];
+    st.pickTail[3] = ids[(size_t) best];
+    g_stats = st;
+    g_last_prefill_ms.store(st.prefillMs);
+    g_last_prompt_tokens.store(ntok);
+    jfloatArray out = env->NewFloatArray(nc);
+    if (out != nullptr) env->SetFloatArrayRegion(out, 0, nc, p.data());
+    return out;
 }
 
 } // extern "C"

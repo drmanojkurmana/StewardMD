@@ -158,6 +158,29 @@ public final class LlamaEngine {
     }
 
     /**
+     * Forced prefix + pick (Edge router, A0.3): the chat template, then {@code prefix} after the model
+     * turn opens, ONE prefill, and the probability of each single-token choice as the next token.
+     * Returns null when the native side cannot pick (a choice is not one token), so the caller can
+     * fall back to grammar generation.
+     */
+    public float[] pick(String system, String user, String prefix, String[] choices) throws LlamaException {
+        long m, c;
+        synchronized (lock) {
+            if (model == 0 || ctx == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "model not loaded");
+            if (generating) throw new LlamaException(LlamaErr.BUSY, "a generation is already running");
+            generating = true;
+            m = model; c = ctx;
+        }
+        try {
+            String prompt = LlamaNative.applyChatTemplate(m, system == null ? "" : system, user == null ? "" : user);
+            if (prompt == null || prompt.isEmpty()) prompt = ((system == null || system.isEmpty()) ? "" : system + "\n\n") + (user == null ? "" : user);
+            return LlamaNative.pick(c, m, prompt + (prefix == null ? "" : prefix), choices);
+        } finally {
+            generating = false;
+        }
+    }
+
+    /**
      * Answer a question about IMAGES. Same contract as generate(), plus the projector and the images.
      *
      * The media marker has to go inside the USER TURN before the chat template is applied - injecting

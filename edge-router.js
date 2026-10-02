@@ -324,10 +324,18 @@
         return Promise.resolve(plugin.load({ path: o.modelPath, nCtx: o.nCtx || 1024, nThreadsBatch: o.nThreadsBatch || 4 })).then(function () { loaded = true; });
       },
       complete: function (task) {
+        var n = Math.max(0, Math.min(MAX_OPTIONS, (task.nOptions == null ? MAX_OPTIONS : task.nOptions) | 0)), choices = [];
+        for (var d = 0; d <= n; d++) choices.push(String(d));
         return Promise.resolve(loaded ? null : this.load()).then(function () {
+          // `pick`: forced prefix {"option": + ONE prefill + the most likely digit (no decode loop, no grammar
+          // over the whole vocabulary). A plugin without it ignores the key and runs the grammar instead.
           return plugin.generate({ system: task.system || SYSTEM, prompt: task.prompt, nPredict: 8, temperature: 0, stream: false,
-            grammar: grammarFor(task.nOptions == null ? MAX_OPTIONS : task.nOptions) });
-        }).then(function (r) { var t = r && r.text; return typeof t === "string" ? JSON.parse(t) : r; });
+            pick: { prefix: '{"option":', choices: choices, suffix: "}" }, grammar: grammarFor(n) });
+        }).then(function (r) {
+          var t = r && r.text, o = typeof t === "string" ? JSON.parse(t) : r;
+          if (o && typeof r.p === "number") o.confidence = r.p;
+          return o;
+        });
       },
       reset: function () { return null; },
       kill: plugin.cancel ? function () { return plugin.cancel(); } : undefined,

@@ -201,6 +201,53 @@ clinician switch "book linked" OFF (`smd_maik_rag_linked = "0"`), so answers wer
 (mechanical mitral INR "2.0-3.0"; an invented artemether-lumefantrine dose). With the book linked for the
 test (then set back to "0"): INR 2.5-3.5 [1] and ACT [1], first text ~32 s, total 39-59 s.
 
+**A0.3 Android latency PASSED with forced prefix + digit pick (2026-10-03, Pixel 9, wireless adb, charger
+unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce14, sha256 83940d4d).**
+- **Benches first** (`test/native-host/fg-*.cpp`, NDK r27c, arm64-v8a, android-26, the plugin's flags:
+  Release, `armv8.2-a+dotprod+fp16`, CPU only, 4 threads; 117-token prompt; thermal status 0, caps at max
+  1.95/2.6/3.105 GHz on cpu0/4/7). Two runs each:
+
+  | step | grammar over full vocab | no grammar | greedy, then check |
+  |---|---|---|---|
+  | prefill, 117 tokens | 191-221 ms | 236-241 ms | 186-242 ms |
+  | sampling, 8 steps | **368-381 ms (46-48 ms/step)** | 13 ms (1.7 ms/step) | 290-295 ms (36 ms/step) |
+  | decode, 7-8 tokens | 126-154 ms | 212-217 ms | 125-131 ms |
+
+  The grammar sampler is the largest single cost (about half of the ~0.75 s call; host was 2/3), and it
+  also forces 8 steps where the trained reply needs 6. Greedy-then-check does not help the base model (the
+  grammar rejected the greedy pick 6/6). Digit pick (prompt + `{"option":`, ONE prefill, argmax over the
+  digit tokens): **244-279 ms total**, p 0.77. Note the grammar run answered option 3 on this prompt and
+  the pick answered option 1 (eGFR CKD-EPI 2021, the right one): the grammar path tokenises
+  `{"option":` differently from the training text, the pick does not.
+- **Implemented:** `capacitor-llama` `generate({ pick: { prefix, choices, suffix } })` on Android
+  (`llama_jni.cpp` `pick`, `LlamaNative.pick`, `LlamaEngine.pick`, `LlamaPlugin.generate`) and iOS
+  (`LlamaEngine.swift` `Pick`, `LlamaPlugin.swift`). Template, then the prefix after the model turn opens,
+  tokenised as one string like the training text, one prefill with KV prefix reuse, softmax over the
+  single-token choices; resolves `{ text: prefix + choice + suffix, p }`, `perf.pickTokens` = last 3 prompt
+  tokens + the chosen token. A choice that is not one token falls back to grammar generation.
+  `llamaAdapter` sends `pick` (choices `"0"`..n) plus the old `grammar`: a plugin without `pick` ignores
+  the key and runs the grammar, so it is the fallback with no version check. The router gets
+  `{ option, confidence: p }`, so the 0.5 floor can now pass low-confidence picks to the rules layer.
+- **Host check** (`test/native-host/run.sh llama`, now also runs on macOS arm64; 60 rows): pick 60/60
+  end in `{"option":` = 14937 4485 1083 with one token per digit (`3` = 236800), the llama-json target;
+  same option as the grammar run 58/60; p50 54 ms vs 269 ms with the grammar (Mac CPU).
+- **Bake-off, before** (old APK, grammar path, nThreadsBatch 4; unplugged, thermal 0 at start, cpu4/7
+  caps 2.367/3.015 GHz, battery 36.4 C; thermal LIGHT and cpu7 capped at 1.396 GHz after): 0/50 `ok`,
+  50/50 `timeout`, p50 1,224 ms, p95 1,270 ms (the 1.2 s deadline).
+- **Bake-off, after** (APK of this branch, `--engine llama --limit 50`; unplugged, thermal 0 before and
+  after, caps at max before and 2.45/3.015 GHz after, battery 35.6-35.9 C): **50/50 `ok`, p50 120 ms,
+  p95 171 ms, max 1,274 ms** (row 1, the cold load inside the first call; warm max 172 ms). Every row had
+  a confidence (none below 0.5); scored 100% accurate, 0 wrong on the 50 predicted rows (base model, small
+  sample: fine-tuning is still required per the host result). **Gate A0.3 Android latency: PASS, p95 171
+  ms against 1,200 ms.**
+- **iPhone: pending.** No iPhone attached. The Swift compiles (`xcodebuild -scheme StewardmdCapacitorLlama
+  -destination generic/platform=iOS`, Xcode 27.2 beta, BUILD SUCCEEDED); the iPhone bake-off with `pick`
+  is still to run.
+- **Seen on the way:** on the APK bundle the idle app held ~200% CPU (WebView compositor `VizWebView` +
+  GPU thread, home screen in front) and heated the phone from 36 C to 42 C (thermal MODERATE) in ~20
+  minutes; backgrounding the app cooled it. Bundle 167 was not checked for the same. Worth a look before
+  any battery claim.
+
 ## 4. Gate A0.6: sustained load (4 GB phone, each model)
 `--limit 50` back to back, then a 30-minute mixed session (MaiK, Scribe, Edge). Record peak memory,
 temperature, battery drop and the latency line `score.mjs --pred` prints (p50, p95, max).
