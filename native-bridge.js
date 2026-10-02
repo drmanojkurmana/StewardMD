@@ -559,7 +559,8 @@
       var P = plugins(); var SP = P && P.SpeechRecognition;
       if (!(SP && SP.available)) return Promise.resolve({ available: false, onDevice: false });
       return Promise.resolve(SP.available({ language: language || navigator.language || "en-US" })).then(function (r) {
-        return { available: !!(r && r.available), onDevice: !!(r && r.onDevice), onDeviceHow: (r && r.onDeviceHow) || "" };
+        // onDeviceLanguage (Android 13+): "installed" | "downloading" | "downloadable" | "no" | "unknown" for THIS language.
+        return { available: !!(r && r.available), onDevice: !!(r && r.onDevice), onDeviceHow: (r && r.onDeviceHow) || "", onDeviceLanguage: (r && r.onDeviceLanguage) || "" };
       }, function () { return { available: false, onDevice: false }; });
     },
     _finTimer: null,

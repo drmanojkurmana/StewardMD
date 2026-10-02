@@ -386,6 +386,36 @@ Findings: Android `speechOnDevice()` says `onDevice:true` for a language whose m
 (it checks the API, not the language pack); the label shows "On-device" for 20-60 ms before the
 plugin's real mode arrives. Neither sends audio anywhere; both make the first label briefly wrong.
 
+**Both findings FIXED and verified on the Pixel 9 (2026-10-03, Android 17, wireless adb, unplugged):**
+- Fix 1 (`SpeechRecognition.java`): on API 33+ `available({language})` asks the on-device recognizer
+  (`checkRecognitionSupport`) about that language and adds `onDeviceLanguage` ("installed" /
+  "downloading" / "downloadable" / "no", "unknown" if the check fails or takes over 3 s); `onDevice` is true
+  only when installed. `SMD_NATIVE.speechOnDevice()` passes the field through.
+- Fix 2: an on-device session now sends its `recognitionMode` from `onReadyForSpeech`, not at `start()`, so
+  a language the on-device model lacks fails (and, for `prefer`, falls back and says "cloud") before any
+  "On-device" claim. The dictation sheet's first paint is the neutral "Device speech" too (it said
+  "On-device" until `listen()` returned). `test/speech-ondevice.test.mjs` pins `prefer` (15 tests).
+- `speechOnDevice`: en-IN `installed`, en-US `installed`, hi-IN `installed`, **te-IN `no`** ("te-IN not
+  supported on-device"; it used to say `onDevice:true`). 54-148 ms per call.
+- Dictation (`SMD_VOICE.listen`, the OPD/Scribe options, speech from the Mac speaker), label sampled at
+  5/30/60/120/250/500 ms:
+| Language | noCloud (`require`) | Scribe Fast (`prefer`) |
+|---|---|---|
+| en | "Device speech" -> "On-device" at 222-252 ms; "blood pressure 140 over 90" | "Device speech" -> "On-device" at 2.7 s (a second session started 3 s after the last); on-device |
+| hi | -> "On-device" at 548 ms; "ब्लड प्रेशर 140/90" | -> "On-device" at 537 ms; same text |
+| te | stays "Device speech", then `stt-unavailable-ondevice` at 3.2 s; no mode event, nothing sent | "Device speech" -> "Device speech (cloud)" at 408 ms, reason "language not available on-device"; never "On-device" |
+- **Airplane mode, fully offline:** `cmd connectivity airplane-mode enable` and then `svc wifi disable` for
+  45 s from a detached on-phone script, the dictation scheduled inside the app and its result read back after
+  Wi-Fi returned (wireless adb cannot stay up offline; the `adb-tls-connect` mDNS serial reconnects by
+  itself, `192.168.1.24:5555` did not). `navigator.onLine` false, fetch to stewardmd.in failed;
+  noCloud en: "Device speech" -> "On-device" at 545 ms, transcribed on-device ("blood pressure 140
+  overnight"; the same mishearing happened online). Airplane with Wi-Fi back on is NOT offline
+  (`navigator.onLine` true, fetch 200), so it proves nothing on its own.
+- Recognition quality from the Mac speaker varies: with the en_US voice "over ninety" came out as
+  "overnight" in 3 of the 4 runs that produced text; the en_IN voice gave no text or a wrong transcription.
+  The labels were right in every run.
+- iPhone: pending (the Swift side is unchanged by these fixes; the iPhone result above stands).
+
 ## 5. Training
 **Needle on the Cactus platform** (synthetic data only; commands from `cactus-needle` 3.0.6 `llms.txt`):
 ```sh

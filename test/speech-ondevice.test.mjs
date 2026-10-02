@@ -42,19 +42,19 @@ function boot({ flag, plugin }) {
 }
 
 // Mock @capacitor-community/speech-recognition: records start() options, lets the test emit events.
-function mockPlugin({ onDevice = true, reject = null } = {}) {
+function mockPlugin({ onDevice = true, reject = null, emitMode = true, lang = undefined } = {}) {
   const ls = {};
   const p = {
     starts: [], ls,
     requestPermissions: () => Promise.resolve({ speechRecognition: "granted" }),
     addListener: (n, fn) => { (ls[n] = ls[n] || []).push(fn); return { remove() { ls[n] = (ls[n] || []).filter((f) => f !== fn); } }; },
     emit: (n, d) => (ls[n] || []).forEach((f) => f(d)),
-    available: () => Promise.resolve({ available: true, onDevice, onDeviceHow: onDevice ? "createOnDeviceSpeechRecognizer" : "needs Android 12" }),
+    available: () => Promise.resolve(Object.assign({ available: true, onDevice, onDeviceHow: onDevice ? "createOnDeviceSpeechRecognizer" : "needs Android 12" }, lang ? { onDeviceLanguage: lang } : {})),
     start: (o) => {
       p.starts.push(o);
       if (reject) return Promise.reject(Object.assign(new Error(reject.message), { code: reject.code }));
       const wants = o.onDevice === "prefer" || o.onDevice === "require";
-      p.emit("recognitionMode", { onDevice: wants && onDevice, how: "x", reason: wants && onDevice ? "" : "not available on this phone" });
+      if (emitMode) p.emit("recognitionMode", { onDevice: wants && onDevice, how: "x", reason: wants && onDevice ? "" : "not available on this phone" });
       return Promise.resolve();
     },
     stop: () => Promise.resolve()
@@ -133,7 +133,7 @@ test("require + the on-device model lacks the language mid-session: error, no si
 test("speechOnDevice() reports what the phone can do, and false when the plugin is absent", async () => {
   const w = boot({ flag: true, plugin: mockPlugin({ onDevice: true }) });
   // (JSON round-trip: the object comes from another vm context, so its prototype differs)
-  assert.deepEqual(JSON.parse(JSON.stringify(await w.SMD_NATIVE.speechOnDevice("en-IN"))), { available: true, onDevice: true, onDeviceHow: "createOnDeviceSpeechRecognizer" });
+  assert.deepEqual(JSON.parse(JSON.stringify(await w.SMD_NATIVE.speechOnDevice("en-IN"))), { available: true, onDevice: true, onDeviceHow: "createOnDeviceSpeechRecognizer", onDeviceLanguage: "" });
   const w2 = boot({ flag: true, plugin: null });
   assert.equal((await w2.SMD_NATIVE.speechOnDevice()).onDevice, false);
 });
@@ -157,4 +157,42 @@ test("flag ON: the doctor's language reaches the recognizer (not navigator.langu
     listen(w, { noCloud: true, language: pick }); await tick(5);
     assert.equal(p.starts[0].language, want, "pick " + pick);
   }
+});
+
+test("flag ON, PREFER: neutral \"Device speech\" until the plugin reports its mode, then the real engine", async () => {
+  const p = mockPlugin({ onDevice: true }); const w = boot({ flag: true, plugin: p });
+  const { s, seen } = listen(w, {});
+  assert.equal(s.engine, "Device speech", "no claim before the mode is known");
+  assert.equal(seen.states[0], "Device speech");
+  await tick(5);
+  assert.equal(p.starts[0].onDevice, "prefer");
+  assert.equal(s.engine, "On-device"); assert.equal(seen.states[seen.states.length - 1], "On-device");
+});
+
+test("flag ON, PREFER: no mode event yet (Android waits for onReadyForSpeech) -> the label stays neutral", async () => {
+  const p = mockPlugin({ onDevice: true, emitMode: false }); const w = boot({ flag: true, plugin: p });
+  const { s, seen } = listen(w, {});
+  await tick(5);
+  assert.equal(s.engine, "Device speech");
+  assert.ok(!seen.states.includes("On-device"));
+  assert.equal(w.SMD_NATIVE.lastSpeechMode, null);
+});
+
+test("the dictation sheet paints a neutral label before listen() returns (flag ON)", () => {
+  assert.match(SRC_V, /\(engine \|\| \(speechOnDeviceOn\(\) \? "Device speech" : "On-device"\)\)/);
+});
+
+test("speechOnDevice() passes the per-language answer through (Android 13+ checkRecognitionSupport)", async () => {
+  const w = boot({ flag: true, plugin: mockPlugin({ onDevice: false, lang: "downloadable" }) });
+  const r = JSON.parse(JSON.stringify(await w.SMD_NATIVE.speechOnDevice("te-IN")));
+  assert.equal(r.onDevice, false); assert.equal(r.onDeviceLanguage, "downloadable");
+});
+
+test("Android plugin: per-language check on API 33+, and an on-device session reports its mode only once ready", () => {
+  const J = fs.readFileSync(new URL("../local-plugins/capacitor-community-speech-recognition/android/src/main/java/com/getcapacitor/community/speechrecognition/SpeechRecognition.java", import.meta.url), "utf8");
+  assert.match(J, /SDK_INT < 33/);
+  assert.match(J, /checkRecognitionSupport\(/);
+  assert.match(J, /getInstalledOnDeviceLanguages\(\)\)\) return "installed"/);
+  assert.match(J, /if \(this\.onDeviceActive && !showPopup\) this\.modePending = true;/);
+  assert.match(J, /public void onReadyForSpeech\(Bundle params\) \{\s*if \(!isActive\(\) \|\| !SpeechRecognition\.this\.modePending\) return;/);
 });

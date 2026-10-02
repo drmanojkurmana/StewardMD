@@ -505,7 +505,8 @@
         engEl.innerHTML = '<span class="smdv-dot"></span> Recording ' + fmt(elapsed) + " — speak, then tap Done";
       } else if (state === "listening") {   // stream engines (Fast): text appears live as you speak
         recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live");
-        engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || "On-device") + " · speak now";
+        // No engine yet (the tap paints before listen() returns): neutral until the plugin reports its mode.
+        engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || (speechOnDeviceOn() ? "Device speech" : "On-device")) + " · speak now";
       } else if (state === "transcribing") {
         recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live");
         engEl.innerHTML = '<span class="smdv-spin"></span> Transcribing on-device — a few seconds. Please wait…';

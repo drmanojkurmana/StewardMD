@@ -2160,7 +2160,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4" defer></script>
+<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2459,7 +2459,7 @@ window.openExternal = function (u) {
 <script src="/infusion-actions.js?v=gold363-neo1" defer></script>
 <!-- MaiK Scribe voice intake (SMD_VOICE): capture → /api/ai/extract → review-first autofill.
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
-<script src="/voice.js?v=hardlocal3-uigroups1-scribe18-sttfb2-ondev3" defer></script>
+<script src="/voice.js?v=hardlocal3-uigroups1-scribe18-sttfb2-ondev4" defer></script>
 <!-- First-run resource download (bug SMD-DVVJVN): asks once on native to fetch the voice model and the MaiK pack suited to the phone. Flag smd_first_resources. -->
 <script src="/first-resources.js?v=frs1" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
