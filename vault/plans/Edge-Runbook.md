@@ -1,6 +1,6 @@
 ---
 tags: [plan, edge, runbook]
-status: ready for the owner (2026-10-01)
+status: round 2 done on the Pixel 9 (2026-10-03); iPhone parts of A0.3 pick and back-off pending
 ---
 # StewardMD Edge: owner runbook (sprint days 2 to 5)
 
@@ -48,6 +48,31 @@ Pixel debug APK): app launched with no load errors; `:edge` loaded `libneedle_jn
 configure rc 111, one call `success:true` (`engine threads 4 (cpu_capacity, 4 cpus, 4 allowed)`);
 llama.cpp loaded FunctionGemma and returned `{"option":1}`. Emulator timings mean nothing for phones. Needs
 ~7.4 GB free disk to create its userdata.
+
+**Needle linked into the app (Mac prompt 2, item 6), 2026-10-03.** `package.json` has
+`"@stewardmd/capacitor-needle": "file:local-plugins/capacitor-needle"`; `npm install` + `npm run sync`
+added it to `android/capacitor.settings.gradle`, `android/app/capacitor.build.gradle` and
+`ios/App/CapApp-SPM/Package.swift` (relative `../../../local-plugins/...` paths, not the main checkout).
+The tracked `Package.resolved` also took the mlx-swift fork pins and their dependencies, which Xcode
+wrote during item 1. `smd_edge` stays default OFF: nothing calls the plugin and no `:edge` process starts
+while it is off (`ps` on the Pixel after launch).
+- Android (Pixel 9, `install -r`): the APK has `lib/arm64-v8a/libneedle_jni.so` and the `NeedlePlugin`
+  entry in `capacitor.plugins.json`. In the live WebView (OTA bundle 167) `Capacitor.Plugins.Needle.available()`
+  answered `{available:true, isolated:true, killable:true, defaultWeightsPresent:false, lowMemory:false,
+  thermal:0, availMB:2424}`; an unknown method name threw "is not a function".
+- iOS: NOT verified this round. The iPhone 15 Pro came onto USB at 02:24, but the Mac had too little
+  free disk to build the app (2.3 GB, then 0.5 GB as other work filled it; a worktree build needs ~6 GB).
+  The phone still runs an older build (`edge-router.js?v=edge3`, Needle linked from a local
+  `package.json` then): `Capacitor.Plugins.Needle.available()` answered `{available:true, isolated:false,
+  killable:false, lowMemory:false, thermal:0, availMB:6120}` at rest with no model loaded. Rebuild and
+  re-check after the disk is freed.
+- **Every native build now needs the engine first.** A clean checkout must run
+  `local-plugins/capacitor-needle/scripts/fetch-needle.sh` (and `scripts/make-xcframework.sh` for iOS)
+  before Gradle or Xcode, or CMake (`android/libs/arm64-v8a/libneedle.a`) and SwiftPM
+  (`ios/Frameworks/CNeedle.xcframework`) fail. CI builds no native app, so CI is unaffected.
+- Mac note: a Gradle cache cleared by a disk clean-up made the first build fail in `checkDebugAarMetadata`
+  (a missing transform file); `./gradlew --stop` and a rebuild fixed it, and re-downloaded ~1.6 GB.
+
 ## 2. Gate A0.2: process isolation (Android) / serial queue (iOS)
 1. Copy weights (README of the plugin: `run-as ... files/needle/needle3.cact`). Base model is fine here.
 2. Open the app, attach CDP (`adb shell pidof in.stewardmd.app`, then
@@ -132,12 +157,27 @@ adb) before a final drop decision.
   included; the rest max 767 ms). End: thermal 0, 37.7 C, caps cpu0 1.70, cpu4 1.80, cpu7 2.80 GHz
   (Pixel trims clocks below thermal status 1). Close to the plugged-but-cool run (p50 393, p95 617 ms): unplugging
   changes little; the thread count was the cause.
-- **To send to Cactus** (owner): "Needle 3 android-arm64 `fast_core_mask()` counts cores at >= 75% of
-  the max `cpu_capacity`; on SoCs with one prime core (Tensor G4: 1 X4 + 3 A720 + 4 A520) that is 1,
-  so `Engine()` falls back to `hardware_concurrency()` (8) and spins threads on the little cores: ~9 s
-  per call vs ~0.15 s on an iPhone 15 Pro. Please count cores at, say, >= 50% of the max (or take the
-  top two capacity tiers), respect `sched_getaffinity` (an app's background/foreground cpuset excludes
-  the prime core), and expose a thread-count setting in `needle.h`."
+- **Report for Cactus, final text (the owner sends it; not sent):**
+
+  > Subject: Needle 3 on Android picks 8 threads on one-prime-core SoCs (about 25x slower than needed)
+  >
+  > We run Needle 3 (android-arm64 `libneedle.a` from Hugging Face `Cactus-Compute/needle3`, revision
+  > 27c0a9a5, the files of 2026-09-28) in an Android app on a Pixel 9 (Tensor G4: 1 Cortex-X4, 3 A720,
+  > 4 A520). Every `needle_complete` call took 8.5 to 10 s; an iPhone 15 Pro takes about 0.15 s.
+  >
+  > Cause, from the disassembly: `Engine::Engine()` sizes its pool with `fast_core_mask()`, which counts the
+  > cores whose `cpu_capacity` is at least 75% of the largest (70% when it falls back to
+  > `cpuinfo_max_freq`). With one prime core that count is 1, so the fast path is skipped and the engine
+  > uses `std::thread::hardware_concurrency()`, 8 here. The threads spin on the efficiency cores, and an
+  > app's foreground cpuset excludes the prime core anyway, so they oversubscribe 7 allowed cores.
+  >
+  > Our workaround: we link with `-Wl,--wrap` on `hardware_concurrency` and return the cores this process
+  > may use (`sched_getaffinity`) whose capacity is at least half the largest, capped at 4 (3 on the
+  > Pixel). Same weights, unplugged, 50 router prompts: p50 370 ms, p95 747 ms (was 8.5 to 10 s per call).
+  >
+  > Requests: (1) count fast cores at a lower threshold (say 50% of the max) or take the top two capacity
+  > tiers; (2) respect `sched_getaffinity`; (3) expose a thread count in `needle.h` so apps do not need a
+  > linker wrap. We have not yet checked whether your 2026-10-02 build changes this.
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Latency options (2026-10-02):** [[Edge-Options-2026-10-02]]. On a host CPU the grammar sampler over the
@@ -247,7 +287,7 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   a confidence (none below 0.5); scored 100% accurate, 0 wrong on the 50 predicted rows (base model, small
   sample: fine-tuning is still required per the host result). **Gate A0.3 Android latency: PASS, p95 171
   ms against 1,200 ms.**
-- **iPhone: pending.** No iPhone attached. The Swift compiles (`xcodebuild -scheme StewardmdCapacitorLlama
+- **iPhone: pending (2026-10-03).** The phone was on USB, but the Mac had no disk for the rebuild that carries `pick` (the installed build predates it). Before that, no iPhone was attached. The Swift compiles (`xcodebuild -scheme StewardmdCapacitorLlama
   -destination generic/platform=iOS`, Xcode 27.2 beta, BUILD SUCCEEDED); the iPhone bake-off with `pick`
   is still to run.
 - **Seen on the way:** on the APK bundle the idle app held ~200% CPU (WebView compositor `VizWebView` +
@@ -312,7 +352,7 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   96.4 s (297 stream events). Lowest availMB seen with MaiK Lite loaded: **859 MB** (floor 250 MB).
 - Edge after MaiK on a warm phone missed the 1,200 ms deadline (clocks capped); the runtime killed and
   reloaded `:edge` as designed.
-- iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite).
+- iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite). 2026-10-03: the installed build predates the back-off JS (`edge3`), and the Mac had no disk to rebuild; only `Needle.available()` at rest was read (availMB 6,120, thermal 0, no model loaded).
 - **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
 
 **MaiK prefill threads on Android (Mac prompt 2, item 4), 2026-10-03, Pixel 9, unplugged: APPLIED.**
