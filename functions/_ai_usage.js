@@ -79,8 +79,11 @@ export async function setUserLimit(store, email, moduleId, limit) {
 }
 
 // ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Env-overridable (AI_RATE_*).
-// Google's published Standard paid-tier prices (ai.google.dev/gemini-api/docs/pricing, read 2026-10-02),
-// USD per 1M tokens, output includes thinking, converted at Rs 96 per USD (RBI-level rate that day, 96.29):
+// Google's published prices, read 2026-10-02 on BOTH the Vertex AI page (cloud.google.com/vertex-ai/
+// generative-ai/pricing, the one that bills us: express mode = the GLOBAL endpoint, so the "Global"
+// column; non-global regions are +10% on 3.x) and the Gemini API page; the figures below are identical
+// on both. USD per 1M tokens, output includes thinking. Vertex bills 2.5-flash AUDIO input at $1.00
+// (not $0.30). Converted at Rs 96 per USD (rate that day 96.29):
 // INR per 1k = USD per 1M x 0.096. The old figures were 4-28x below these, so cost caps, the budget
 // breaker and the wallet all under-counted (owner chose to price at real cost, 2026-10-02).
 // `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
