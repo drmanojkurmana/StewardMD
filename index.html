@@ -306,8 +306,14 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     <img class="sbs-maik sbs-maik-dark" src="/maik-logo-white.png" alt="MaiK" height="44">
   </div>
 </div>
-<script>/* splash theme — iOS/web: follow OS light/dark; Android: day (06-18)=light, night=dark. Runs pre-paint, no flash. */
-(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;var plat="";try{plat=(window.Capacitor&&Capacitor.getPlatform&&Capacitor.getPlatform())||"";}catch(e){}var ua=navigator.userAgent||"",android=plat==="android"||(/Android/i.test(ua)&&!/iPhone|iPad|iPod/i.test(ua)),dark;if(android){var h=new Date().getHours();dark=!(h>=6&&h<18);}else{dark=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);}if(dark)s.classList.add("sbs-dark");}catch(e){}})();</script>
+<script>/* splash theme + pace. Runs pre-paint, no flash.
+   Theme: every platform follows the OS light/dark (owner decision 2026-10-03; the native launch
+   surface follows the system too, so the two match). Android used a 06-18 clock guess before.
+   Pace (owner decision 2026-10-03): the full three-second branded sequence plays on the FIRST open
+   only. Every later open is fast: a plain surface in the launch color that fades as soon as the app
+   is ready, so the logo never flashes for a split second. If boot is slow the mark appears after
+   700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace. */
+(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast","sbs-blank");setTimeout(function(){s.classList.remove("sbs-blank");},700);}}catch(e){}})();</script>
 <script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
    profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
    Firebase user by account.js) — because Firebase has not booted this early. Signed-in users only;
@@ -355,6 +361,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
+  /* fast (returning) opens: quick fade, and a plain surface until 700ms so the mark never flashes */
+  html #smdBootSplash.sbs-fast{transition:opacity .16s cubic-bezier(.23,1,.32,1)}
+  html #smdBootSplash.sbs-blank>*{visibility:hidden}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
   #smdBootSplash .sbs-logo-stage{position:relative;width:107px;height:107px;flex:0 0 auto}
   #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark,#smdBootSplash .sbs-logo-trace{position:absolute;inset:0;width:100%;height:100%}
@@ -569,9 +578,10 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.72)}
 </style>
 <script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,
-/* One fast three-second sequence for everyone: draw first, then (for returning clinicians) show
-   Loading your workspace inside the same window. CAP is a short fail-open, never a stuck splash. */
-MIN=3000,CAP=6000;
+/* Three-second sequence on the FIRST open only (draw first, then Loading your workspace); every
+   later open has MIN 0 and lifts as soon as ready() (see the splash pace script above, owner decision
+   2026-10-03). CAP is a short fail-open, never a stuck splash. */
+MIN=window.__smdBootFast?0:3000,CAP=6000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
@@ -595,8 +605,8 @@ function ready(){try{
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
 var lockShowing=false;
-function reallyFinish(){done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
-/* App Lock: if a PIN/biometric is configured, the splash holds after its constant 3s frame and
+function reallyFinish(){done=true;try{localStorage.setItem("smd_boot_seen","1");}catch(e){}s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+/* App Lock: if a PIN/biometric is configured, the splash holds after its frame (3s first open, instant later) and
    Face ID / PIN fires by itself instead of revealing the app. Fails open —
    if applock.js hasn't loaded yet (or throws), window.SMD_APPLOCK is undefined/required()
    is false, and boot proceeds exactly as before this existed. */
@@ -615,8 +625,12 @@ function finish(){if(done)return;
    the native splash (which covers this frame until the page has painted), so the hold counts from
    that moment, not from script start. On the web (no native splash) it is script start. */
 function shownAt(){try{return s.classList.contains("sbs-visible")?(window.__smdSplashShownAt||t0):Date.now();}catch(e){return t0;}}
+/* Fast opens can reach ready() before the deferred applock.js has loaded; finishing then would
+   fail open and show the app unlocked. So when a PIN / biometric lock is stored, wait for
+   SMD_APPLOCK (CAP still bounds it). */
+function lockLoaded(){try{var m=localStorage.getItem("smd_applock_method");return !!window.SMD_APPLOCK||(m!=="pin"&&m!=="biometric");}catch(e){return true;}}
 function tick(){if(done)return;var el=Date.now()-shownAt();
-  if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
+  if((ready()&&el>=MIN&&lockLoaded())||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
 <script>/* anti-flash theme boot — mirrors theme-sync.js resolution so the initial paint matches the OS (no flash) */
 (function(){try{var L=localStorage,os=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),stored=L.getItem("stewardmd_theme"),src=L.getItem("stewardmd_theme_source"),on=L.getItem("stewardmd_theme_autosync")!=="0",dark;
@@ -2231,7 +2245,7 @@ window.openExternal = function (u) {
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
 <script src="/email-auth.js?v=gold474-oneform-energy1-pfopen1" defer></script>
-<script src="/applock.js?v=gold8" defer></script>
+<script src="/applock.js?v=gold8-relock1" defer></script>
 <script src="/policy.js?v=gold363-abg10" defer></script>
 <script src="/features.js?v=gold997" defer></script>
 <script src="/calculators.js?v=gold1051-r1d-rail1-find1-kits1-fr1-cbac2-neo1" defer></script>
@@ -2355,7 +2369,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2371,6 +2385,7 @@ window.openExternal = function (u) {
 <!-- Global haptics (SMD_HAPTICS): tactile feedback on every interactive tap. Additive; uses
      @capacitor/haptics on native + navigator.vibrate fallback on web. Pref smd_haptics
      (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
+<script src="/power-state.js?v=pwr1" defer></script>
 <script src="/haptics.js?v=gold348-hap2" defer></script>
 <script src="/antibiogram-flags.js?v=abgf3" defer></script>
 <script src="/antibiogram-v2.js?v=abgv20-pro1-qa2" defer></script>
