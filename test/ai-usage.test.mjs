@@ -44,16 +44,16 @@ test("moduleDailyLimit: default + env override + unlimited", () => {
 });
 
 test("modelRate: known model + fallback + env override", () => {
-  assert.deepEqual(modelRate({}, "gemini-2.5-flash"), { in: 0.007, out: 0.025 });
-  assert.deepEqual(modelRate({}, "unknown-model"), { in: 0.007, out: 0.025 }); // DEFAULT_RATE
+  assert.deepEqual(modelRate({}, "gemini-2.5-flash"), { in: 0.0288, out: 0.24 });   // $0.30 / $2.50 per 1M at Rs 96
+  assert.deepEqual(modelRate({}, "unknown-model"), { in: 0.0288, out: 0.24 }); // DEFAULT_RATE = 2.5-flash
   assert.deepEqual(modelRate({ "AI_RATE_GEMINI_3_5_FLASH_IN": "0.01", "AI_RATE_GEMINI_3_5_FLASH_OUT": "0.03" }, "gemini-3.5-flash"), { in: 0.01, out: 0.03 });
 });
 
 test("estCostInr: tokens + image/audio extras + env cost overrides", () => {
   // 1000 in @0.007 + 1000 out @0.025 = 0.032
-  assert.equal(estCostInr({}, "gemini-2.5-flash", 1000, 1000), 0.032);
+  assert.equal(estCostInr({}, "gemini-2.5-flash", 1000, 1000), 0.2688);
   // + 2 images @ default 0.35 = 0.70
-  assert.equal(estCostInr({}, "gemini-2.5-flash", 1000, 1000, { images: 2 }), 0.732);
+  assert.equal(estCostInr({}, "gemini-2.5-flash", 1000, 1000, { images: 2 }), 0.9688);
   // audio 10s @ 0.02 = 0.20
   assert.equal(estCostInr({}, "gemini-2.5-flash", 0, 0, { audioSeconds: 10 }), 0.2);
   // per-image override

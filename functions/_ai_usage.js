@@ -78,18 +78,21 @@ export async function setUserLimit(store, email, moduleId, limit) {
   return Object.keys(cur).length ? cur : null;
 }
 
-// ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Estimates; env-overridable.
+// ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Env-overridable (AI_RATE_*).
+// Google's published Standard paid-tier prices (ai.google.dev/gemini-api/docs/pricing, read 2026-10-02),
+// USD per 1M tokens, output includes thinking, converted at Rs 96 per USD (RBI-level rate that day, 96.29):
+// INR per 1k = USD per 1M x 0.096. The old figures were 4-28x below these, so cost caps, the budget
+// breaker and the wallet all under-counted (owner chose to price at real cost, 2026-10-02).
+// `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
 export const MODEL_RATES = {
-  "gemini-2.5-flash":       { in: 0.007, out: 0.025 },
-  "gemini-2.5-flash-lite":  { in: 0.003, out: 0.012 },
-  "gemini-2.5-pro":         { in: 0.110, out: 0.880 },
-  // Gemini 3.x — ESTIMATED (Google's exact rates "to follow"); tune via AI_RATE_* env before relying on cost.
-  // `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
-  "gemini-3.5-flash":       { in: 0.008, out: 0.028, est: true },
-  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012, est: true },
-  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012, est: true },
+  "gemini-2.5-flash":       { in: 0.0288, out: 0.240 },   // $0.30 / $2.50
+  "gemini-2.5-flash-lite":  { in: 0.0096, out: 0.0384 },  // $0.10 / $0.40
+  "gemini-2.5-pro":         { in: 0.120, out: 0.960 },    // $1.25 / $10.00 (prompts up to 200k)
+  "gemini-3.5-flash":       { in: 0.144, out: 0.864 },    // $1.50 / $9.00
+  "gemini-3.5-flash-lite":  { in: 0.0288, out: 0.240 },   // $0.30 / $2.50
+  "gemini-3.1-flash-lite":  { in: 0.024, out: 0.144 },    // $0.25 / $1.50
 };
-const DEFAULT_RATE = { in: 0.007, out: 0.025 };
+const DEFAULT_RATE = { in: 0.0288, out: 0.240 };            // = gemini-2.5-flash
 export function modelRate(env, model) {
   const up = "AI_RATE_" + String(model || "").toUpperCase().replace(/[^A-Z0-9]/g, "_");
   const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
