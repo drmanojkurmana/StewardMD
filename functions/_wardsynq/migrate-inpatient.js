@@ -90,6 +90,10 @@ const MATERNITY = "MATERNITY";
 // never a reason to duplicate this file's own admission/bed/transfer/discharge path.
 const PEDIATRICS = "PEDIATRICS", NICU = "NICU";
 const ADMISSION_CLASSES = Object.freeze([IPD, ICU, MATERNITY, PEDIATRICS, NICU]);
+/* Every class whose open encounter HOLDS the bed it names: the admissions, and a PACU recovery bed
+ * (migrate-surgery.js). Used only for bed occupancy; ward lists and discharge stay on ADMISSION_CLASSES. */
+const PACU = "PACU";
+const BED_CLASSES = Object.freeze([...ADMISSION_CLASSES, PACU]);
 const OPEN = "in-progress";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -203,7 +207,7 @@ async function admitPatient(request, env, ctx) {
       if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), written: 0 };
       return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
     }
-    const clash = (open || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
+    const clash = (open || []).find((e) => e && e.id !== candidate.id && BED_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
     if (clash) return bedOccupied(base, candidate);
 
     // TASK 4.2: the bed's own administrative state (blocked/cleaning/maintenance) and any stated
@@ -350,7 +354,9 @@ function bedOccupied(base, candidate) {
  * ONE CLAIM FOR EVERY WAY INTO A BED (Codex F1, 2026-10-02). /ward/transfer takes the same claim
  * on its destination before it writes, and releases its source bed's claim once the move lands. It
  * used to rely on its list-scan alone, so two transfers, or a transfer and an admission, racing for
- * one empty bed could both pass the scan and both land.
+ * one empty bed could both pass the scan and both land. The PACU disposition (migrate-surgery.js)
+ * and every inbound FHIR/HL7 ADT encounter (fhir-inbound.js landBundle, via bedMove/bedOccupant
+ * below) take and release the same claim.
  *
  * STALE CLAIMS SELF-HEAL. A bed a claim points at is read as free the moment the Encounter it
  * names is closed, or open elsewhere for longer than the in-flight window (claimBed). */
@@ -359,7 +365,7 @@ const CLAIM_IN_FLIGHT_MS = 2 * 60 * 1000;
 function bedClaimIdFor(ward, bed) {
   return `wsq-bedclaim-${str(ward).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${str(bed).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 }
-async function claimBed(svc, candidate) {
+async function claimBed(svc, candidate, holderClasses = BED_CLASSES) {
   const { ward, bed } = candidate.location;
   const claimId = bedClaimIdFor(ward, bed);
   const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
@@ -373,7 +379,7 @@ async function claimBed(svc, candidate) {
    * failed admission cannot hold a bed shut. */
   if (latest && latest.encounterId && latest.encounterId !== candidate.id) {
     const holder = await svc.repository.latest(svc.tenantId, "Encounter", latest.encounterId);
-    const open = holder && ADMISSION_CLASSES.includes(holder.class) && holder.status === OPEN;
+    const open = holder && holderClasses.includes(holder.class) && holder.status === OPEN;
     const occupying = open && sameBed(holder.location, candidate.location);
     /* In flight: an admission not written yet (no holder), or a transfer on its way in (holder still
      * open in its old bed), claimed in the last CLAIM_IN_FLIGHT_MS. */
@@ -411,6 +417,23 @@ async function releaseBedClaim(svc, candidate) {
       writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
     }], {});
   } catch (e) { /* the in-flight window frees it */ }
+}
+
+/** PURE. A new version `next` of an encounter over the stored `cur`: the bed it moves INTO and the bed
+ * it moves OUT of, each null when there is none. Only an open encounter of a BED_CLASSES class holds a
+ * bed, so a discharge or a cancellation moves out and in to nothing. Staying put is no move. */
+function bedMove(cur, next) {
+  const held = (e) => (e && BED_CLASSES.includes(e.class) && e.status === OPEN && str(e.location && e.location.bed) ? e.location : null);
+  const from = held(cur), to = held(next);
+  if (from && to && (sameBed(from, to) || bedClaimIdFor(from.ward, from.bed) === bedClaimIdFor(to.ward, to.bed))) return { into: null, out: null };
+  return { into: to, out: from };
+}
+
+/** Another open encounter already in this bed, from the open census, or null. Throws when the census
+ * cannot be read: an unread census is never an empty bed. */
+async function bedOccupant(svc, id, location, classes = BED_CLASSES) {
+  const open = await openEncounters(svc);
+  return (open || []).find((e) => e && e.id !== id && classes.includes(e.class) && e.status === OPEN && sameBed(e.location, location)) || null;
 }
 
 /**
@@ -955,7 +978,7 @@ async function transferPatient(request, env, ctx) {
    * named is allowed - a patient can be on a ward awaiting a bed - and cannot collide. */
   let transferOverride = null;
   if (bed) {
-    const clash = (all || []).find((e) => e && e.id !== encounterId && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, to));
+    const clash = (all || []).find((e) => e && e.id !== encounterId && BED_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, to));
     if (clash) {
       return {
         ...base, ok: false, status: 409, error: "bed_occupied",
@@ -1547,6 +1570,7 @@ export {
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
+  BED_CLASSES, claimBed, releaseBedClaim, bedMove, bedOccupant,   // the one bed claim: migrate-surgery.js (PACU), fhir-inbound.js (FHIR/HL7 ADT)
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
   timelineFromChart, patientTimeline,

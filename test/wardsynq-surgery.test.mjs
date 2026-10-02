@@ -57,7 +57,7 @@ mock.module("../functions/_fbfirestore.js", {
   },
 });
 
-const { MemoryRepository } = await import("../functions/_wardsynq/repository.js");
+const { MemoryRepository, VersionConflictError } = await import("../functions/_wardsynq/repository.js");
 const { identify } = await import("../functions/_usage.js");
 const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
@@ -288,4 +288,82 @@ test("THE THEATRE BOARD lists every open case hospital-wide, and drops one once 
 
   const board2 = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
   assert.ok(!board2.cases.some((c) => c.id === booking.caseId), "a disposed case's encounter is closed, so it leaves the open theatre board");
+});
+
+/* ---- Codex F1 follow-up: the PACU bed takes the same claim admission and transfer take ---------- */
+
+async function signedOutCase(suffix) {
+  const { reg, booking } = await bookedCase(suffix);
+  const caseId = booking.caseId;
+  await as(DOCTOR, "/ward/surgery-consent", "POST", { orgId: ORG, caseId, consent: { procedure: "Appendicectomy", laterality: "not-applicable", signedByPatientOrProxy: true } });
+  await as(DOCTOR, "/ward/surgery-marksite", "POST", { orgId: ORG, caseId, marking: { site: "abdomen", laterality: "not-applicable" } });
+  await as(DOCTOR, "/ward/surgery-signin", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_IN_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable", pacAcknowledgement: "Checkup done on paper, entered later" } });
+  await as(DOCTOR, "/ward/surgery-timeout", "POST", { orgId: ORG, caseId, submission: { items: allOf(TIME_OUT_ITEMS), signatures: THREE, lateralityAsserted: "not-applicable" } });
+  await as(DOCTOR, "/ward/surgery-incise", "POST", { orgId: ORG, caseId });
+  const out = await as(DOCTOR, "/ward/surgery-signout", "POST", { orgId: ORG, caseId, submission: { items: allOf(SIGN_OUT_ITEMS), signatures: THREE } });
+  assert.equal(out.stage, "signed-out", JSON.stringify(out));
+  return { reg, booking, caseId };
+}
+const openInBed = async (ward, bed) => (await RECORD.latestByStatus(TENANT_ROW.id, "Encounter", ["in-progress"], 1000))
+  .filter((e) => String(e.location && e.location.ward).toLowerCase() === ward.toLowerCase() && String(e.location && e.location.bed) === bed);
+
+test("PACU BED (Codex F1): an admission racing a PACU disposition for the same bed - exactly one lands, the loser gets 409", async () => {
+  seedHospital();
+  const { booking, caseId } = await signedOutCase("120");
+  const other = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Racer", mobile: "9876500121", gender: "female", ageYears: 52 });
+
+  // Both requests are held at the open-census read until both arrive, then at the bed-claim read, so
+  // neither sees the other: the claim's own version race decides.
+  const realPage = RECORD.pageByType.bind(RECORD), realLatest = RECORD.latest.bind(RECORD), realAppend = RECORD.append.bind(RECORD);
+  let arrived = 0, claimReads = 0, claimConflicts = 0, openCensus, openClaims;
+  const census = new Promise((r) => { openCensus = r; }), claims = new Promise((r) => { openClaims = r; });
+  const timer = setTimeout(() => { openCensus(); openClaims(); }, 1000);
+  RECORD.pageByType = async (t, type, o) => { if (type === "Encounter") { if (++arrived === 2) openCensus(); await census; } return realPage(t, type, o); };
+  RECORD.latest = async (t, type, id) => { if (type === "_wardsynq_bed_claim") { if (++claimReads === 2) openClaims(); await claims; } return realLatest(t, type, id); };
+  RECORD.append = async (t, records, ctx) => {
+    try { return await realAppend(t, records, ctx); }
+    catch (e) { if (e instanceof VersionConflictError && records.some((r) => r.resourceType === "_wardsynq_bed_claim")) claimConflicts += 1; throw e; }
+  };
+  let pacu, adm;
+  try {
+    [pacu, adm] = await Promise.all([
+      as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId, disposition: "pacu", pacuBed: "P2" }),
+      as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: other.mrn, ward: "PACU", bed: "P2" }),
+    ]);
+  } finally { clearTimeout(timer); RECORD.pageByType = realPage; RECORD.latest = realLatest; RECORD.append = realAppend; }
+
+  assert.equal(claimConflicts, 1, "the shared bed claim decided it: " + JSON.stringify([pacu, adm]));
+  const won = [pacu, adm].filter((r) => r.__status === 200), lost = [pacu, adm].filter((r) => r.__status === 409 && r.error === "bed_occupied");
+  assert.equal(won.length, 1, JSON.stringify([pacu, adm])); assert.equal(lost.length, 1, JSON.stringify([pacu, adm]));
+  assert.equal((await openInBed("PACU", "P2")).length, 1, "exactly one patient in PACU bed P2");
+  if (lost[0] === pacu) {
+    const theatre = await RECORD.latest(TENANT_ROW.id, "Encounter", booking.encounterId);
+    assert.equal(theatre.status, "in-progress", "a refused PACU move wrote nothing: the theatre stay is not closed into nowhere");
+    assert.equal(pacu.written, 0);
+  }
+});
+
+test("PACU BED (Codex F1): a recovery patient holds the bed against a ward admission; a PACU move into an admitted bed is refused before anything is written", async () => {
+  seedHospital();
+  const first = await signedOutCase("122");
+  const moved = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: first.caseId, disposition: "pacu", pacuBed: "P3" });
+  assert.equal(moved.__status, 200, JSON.stringify(moved));
+  const other = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Second", mobile: "9876500123", gender: "male", ageYears: 61 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: other.mrn, ward: "PACU", bed: "P3" });
+  assert.equal(adm.__status, 409, JSON.stringify(adm)); assert.equal(adm.error, "bed_occupied");
+
+  const third = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Third", mobile: "9876500124", gender: "male", ageYears: 63 });
+  const inBed = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: third.mrn, ward: "PACU", bed: "P4" });
+  assert.equal(inBed.__status, 200, JSON.stringify(inBed));
+  const second = await signedOutCase("125");
+  const refused = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: second.caseId, disposition: "pacu", pacuBed: "P4" });
+  assert.equal(refused.__status, 409, JSON.stringify(refused)); assert.equal(refused.error, "bed_occupied"); assert.equal(refused.written, 0);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", second.booking.encounterId)).status, "in-progress", "the theatre stay was not closed");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "SurgicalCase", second.caseId)).stage, "signed-out");
+
+  // DECISION TO CONFIRM: a PACU stay has no close path yet, so an earlier OPEN PACU stay in the bed does
+  // not block the next recovery patient (the ward screen always sends bed "1").
+  const fourth = await signedOutCase("126");
+  const shared = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: fourth.caseId, disposition: "pacu", pacuBed: "P3" });
+  assert.equal(shared.__status, 200, JSON.stringify(shared));
 });
