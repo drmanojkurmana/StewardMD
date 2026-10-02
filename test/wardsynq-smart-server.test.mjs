@@ -7,8 +7,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
   GRANT_TYPE, JWT_BEARER, smartEnabled, findClient, parseScope, grantScopes, readTypesFor, compartmentTypesFor, pkceMatches, randomToken,
-  smartConfiguration, decodeJws, verifyClientAssertion, SmartGrant, grantLive, consentPage, signingKey, publicJwks, signJwt,
+  smartConfiguration, decodeJws, verifyClientAssertion, SmartGrant, grantLive, consentPage, signingKey, publicJwks, signJwt, token,
 } from "../functions/_wardsynq/smart-server.js";
+import { MemoryRepository } from "../functions/_wardsynq/repository.js";
 import { hit, resetMemory, memoryStore } from "../functions/_wardsynq/rate-limit.js";
 import { RESOURCE_TYPES } from "../functions/_wardsynq/service.js";
 import { FHIR_TYPE } from "../functions/_wardsynq/fhir.js";
@@ -190,6 +191,24 @@ test("RATE LIMIT: a fixed window that says which store it is", async () => {
   const broken = { limit: async () => { throw new Error("binding down"); } };
   assert.equal((await hit({ binding: broken, store: memoryStore() }, { key: "c", limit: 1, windowMs: 60000, now: 5000 })).store, "memory");
   assert.equal((await hit({ binding: broken, store: memoryStore() }, { key: "c", limit: 1, windowMs: 60000, now: 5000 })).allowed, false);
+});
+
+test("RATE LIMIT: the SMART limiter counts in MAIK_KV, the store the queue router's limiter shares across isolates", async () => {
+  const fakeKv = () => { const m = new Map(), puts = []; return { puts, get: async (k) => m.get(k) || null, put: async (k, v) => { puts.push(k); m.set(k, v); } }; };
+  const ctx = {
+    migration: { mode: "live", tenantId: "t-smart" },
+    config: { smart: { enabled: true, clients: [{ clientId: "app", redirectUris: ["https://a/cb"], scopes: ["user/*.read"] }] } },
+    form: new URLSearchParams("grant_type=not-a-grant&client_id=app"),
+    recordDeps: { repository: new MemoryRepository(), pseudonym: async () => null },
+  };
+  const kv = fakeKv();
+  try { await token(null, { MAIK_KV: kv }, ctx); } catch { /* only the count matters here */ }
+  assert.equal(kv.puts.length, 1, "production binds MAIK_KV, so the token limit is counted there, not in this isolate's memory");
+  assert.ok(kv.puts[0].startsWith("rl:smart:token:t-smart:app:"), kv.puts[0]);
+  // A dedicated WSQ_RL_KV, if a deployment ever binds one, still wins.
+  const own = fakeKv(), shared = fakeKv();
+  try { await token(null, { WSQ_RL_KV: own, MAIK_KV: shared }, ctx); } catch { /* as above */ }
+  assert.equal(own.puts.length, 1); assert.equal(shared.puts.length, 0);
 });
 
 test("NO WRITES, EVER - said in code, not only in prose; and nothing is signed without the hospital's key", async () => {

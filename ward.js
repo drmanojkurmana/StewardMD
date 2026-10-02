@@ -56,6 +56,7 @@
     // panel is showing. edMrnLookup/edMrnLookupErr: the SAME confirm-before-admit pattern the bed
     // board already uses - nobody arrives on a typed MRN alone.
     ed: null, edErr: "", edArrivalOpen: false, edMrnLookup: null, edMrnLookupErr: "", edAdmitPending: false,
+    recoveryLeave: null,     // a recovery (PACU) patient being moved to a ward bed or unit: {row, outcome, reason}
     resusBundles: null, resusStarting: false,
     demo: false,             // a demonstration hospital, marked on the chart; set by the caller
     /* Which country this hospital is in, from /ward/list. It decides the unit a temperature box is
@@ -902,7 +903,8 @@
 
     var who = state.sel ? esc(state.sel.name || state.sel.mrn || state.sel.patientId || "") : "";
     var mode = moving ? '<p class="w-hint">' + ms("swap_horiz") + wTH("ward.transferring", "Transferring") + " <b>" + who + "</b>" + (state.sel.ward ? " " + wTH("ward.from", "from {ward}", { ward: esc(state.sel.ward) }, "ward") + (state.sel.bed ? ", " + wTH("ward.bed2", "bed {bed}", { bed: esc(state.sel.bed) }, "bed") : "") : "") + ": " + wTH("ward.choose-the-department-then-a-free", "choose the department, then a free bed, or move to a ward with no bed yet.") + "</p>"
-      : state.edAdmitPending && state.sel ? '<p class="w-hint">' + ms("emergency") + wTH("ward.admitting", "Admitting") + " <b>" + who + "</b> " + wTH("ward.from-the-ed-choose-the-department", "from the ED: choose the department, then a free bed.") + "</p>" : "";
+      : state.edAdmitPending && state.sel ? '<p class="w-hint">' + ms("emergency") + wTH("ward.admitting", "Admitting") + " <b>" + who + "</b> " + wTH("ward.from-the-ed-choose-the-department", "from the ED: choose the department, then a free bed.") + "</p>"
+      : state.recoveryLeave ? '<p class="w-hint">' + ms("logout") + "<span>" + wTH("ward.leaving-recovery-choose-bed", "Leaving recovery: {who}. Choose the department, then a free bed.", { who: "<b>" + esc(state.recoveryLeave.row.mrn || state.recoveryLeave.row.patientId || "") + "</b>" }, "who") + "</span></p>" : "";
     var deptPick = depts.length ? "<div class=\"w-filter\"><label class=\"w-f\"><span>" + wTH("ward.department", "Department") + "</span><select id=\"wBoardDept\"><option value=\"\">" + wTH("ward.all-departments", "All departments") + "</option>" +
       depts.map(function (d) { return '<option value="' + esc(d) + '"' + (d === dept ? " selected" : "") + ">" + esc(d) + "</option>"; }).join("") + "</select></label></div>" : "";
     /* BUG-MU072XAL-4EHO: beds are added and taken out of use in Admin Center, Wards (server-side, audited,
@@ -1008,6 +1010,19 @@
         ms("chevron_right") + "</button></li>";
     }).join("");
 
+    /* WHO IS IN RECOVERY, and the way out (leaveRecovery). The bay is the badge, the same place the bed
+     * board puts a bed number; the whole row is the action, like every other row on this board. */
+    var recovery = (state.surgBoard && state.surgBoard.recovery) || [];
+    var recoveryCard = !state.surgBoard || state.surgErr ? "" : '<div class="w-card"><div class="w-card-h">' + ms("airline_seat_flat") + "<h3>" + wTH("ward.in-recovery-pacu", "In recovery (PACU)") + "</h3></div>" +
+      (recovery.length ? '<ul class="w-q w-ed-board">' + recovery.map(function (r) {
+        return "<li>" + '<button class="w-bed rec" data-w-act="leaverecovery:' + esc(r.encounterId) + '">' +
+          '<span class="w-bed-no bay">' + esc(r.bed || "-") + "</span>" +
+          '<span class="w-bed-b"><b>' + esc(r.mrn || r.patientId) + "</b><small>" + (r.procedure ? esc(r.procedure) + " &middot; " : "") + wTH("ward.in-recovery-since", "since {since}", { since: when(r.since) }, "since") + "</small></span>" +
+          '<span class="w-btn tiny">' + ms("logout") + wTH("ward.leave-recovery", "Leave recovery") + "</span></button></li>";
+      }).join("") + "</ul>"
+        : '<p class="w-empty">' + wTH("ward.nobody-is-in-recovery", "Nobody is in recovery.") + "</p>") +
+      "</div>";
+
     var lookup = state.surgMrnLookup;
     var bookPanel = !state.surgBookOpen ? "" :
       '<div class="w-card admit"><div class="w-card-h">' + ms("medical_services") + "<h3>" + wTH("ward.book-a-case", "Book a case") + "</h3>" +
@@ -1036,7 +1051,7 @@
       (state.surgErr ? '<p class="w-hint warn">' + ms("error") + esc(state.surgErr) + wEnglishOf(state.surgErr) + "</p>"
         : rows ? '<ul class="w-q w-ed-board">' + rows + "</ul>"
         : "<p class=\"w-empty\">" + wTH("ward.no-open-cases", "No open cases.") + "</p>") +
-      "</div>" + bookPanel;
+      "</div>" + recoveryCard + bookPanel;
   }
 
   /* THE CASE VIEW. What's shown at any moment is driven entirely by the case's own `stage`, read
@@ -10647,6 +10662,7 @@
     // which is for a patient the board does not already have open.
     /* LT-29: one click on a free bed admitted the ED patient at once, while a ward transfer asks first; a mis-click put
      * the patient in the wrong bed. The same confirmation as transferTo. */
+    if (st.recoveryLeave) { leaveRecoveryPickBed(ward, bed); return; }
     if (st.edAdmitPending) {
       askFor({ icon: "bed", ok: wTH("ward.admit", "Admit"),
         title: wTH("ward.admit-to-bed-confirm", "Admit {name} to {ward}, bed {bed}?", { name: esc((st.sel && (st.sel.name || st.sel.mrn)) || wT("ward.this-patient2", "this patient")), ward: esc(ward), bed: esc(bed || "") }, "name ward bed", 1) },
@@ -11103,15 +11119,73 @@
       .then(function (r) { if (settle(r, wT("ward.note-saved", "Note saved."))) loadSurgeryCase(c.id); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-save-the-note", "Could not save the note."); paint(); });
   }
+  /* TO PACU NAMES A BAY. The hospital's free recovery bays (its bed list for the PACU ward) when it has
+   * one; with none listed the bay is typed, "1" unless somebody names another, because an open recovery
+   * stay now holds its bay against the next patient. An unread list stops here rather than guessing. */
   function surgeryDisposition(disposition) {
     var c = st.surgCase && st.surgCase.case; if (!c) return;
-    st.busy = true; paint();
-    apiPost("/ward/surgery-disposition", { orgId: st.orgId, caseId: c.id, disposition: disposition, pacuBed: disposition === "pacu" ? "1" : undefined })
+    if (disposition !== "pacu") { st.busy = true; paint(); sendDisposition(c, disposition); return; }
+    st.busy = true; st.err = ""; paint();
+    apiGet("/ward/surgery-board?orgId=" + encodeURIComponent(st.orgId))
+      .then(function (b) {
+        st.busy = false;
+        var bays = b && b.ok ? b.pacuBays : false;
+        if (bays === false || bays === undefined) { st.err = wT("ward.recovery-bays-could-not-be-read", "The recovery bay list could not be read. Try again."); paint(); return; }
+        if (bays && !bays.length) { st.err = wT("ward.no-recovery-bay-is-free", "No recovery bay is free on the hospital's bed list."); paint(); return; }
+        paint();
+        askFor({ icon: "airline_seat_flat", ok: wTH("ward.to-pacu", "To PACU"), title: wTH("ward.choose-the-recovery-bay", "Choose the recovery bay"),
+          text: bays ? "" : wTH("ward.no-recovery-bays-listed", "This hospital lists no recovery bays, so bay 1 is used unless you name another."),
+          fields: [bays
+            ? { key: "bay", type: "select", label: wTH("ward.recovery-bay", "Recovery bay"), value: bays[0], options: bays.map(function (n) { return [n, esc(n)]; }) }
+            : { key: "bay", label: wTH("ward.recovery-bay", "Recovery bay"), value: "1", required: wT("ward.name-the-recovery-bay", "Name the recovery bay.") }] },
+          function (v) { return sendDisposition(c, "pacu", v.bay); });
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.recovery-bays-could-not-be-read", "The recovery bay list could not be read. Try again."); paint(); });
+  }
+  function sendDisposition(c, disposition, pacuBed) {
+    return apiPost("/ward/surgery-disposition", { orgId: st.orgId, caseId: c.id, disposition: disposition, pacuBed: disposition === "pacu" ? pacuBed : undefined })
       .then(function (r) {
         if (r && !r.ok && r.error === "not_signed_out") { st.busy = false; st.err = wT("ward.sign-out-has-to-be-complete", "Sign out has to be complete first."); paint(); return; }
         if (settle(r, wT("ward.disposition-recorded", "Disposition recorded."))) { st.view = "surgery"; st.surgCase = null; loadSurgeryBoard(); } else paint();
       })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-disposition", "Could not record the disposition."); paint(); });
+  }
+  /* LEAVING RECOVERY (/ward/surgery-leave-recovery). Home is recorded from the question itself; a ward
+   * bed or a unit is picked on the SAME bed board an admission and an ED admit use, then confirmed. A
+   * refused bed keeps the question open with the server's reason, and the patient stays in recovery. */
+  function leaveRecoveryOpen(encounterId) {
+    var r = ((st.surgBoard && st.surgBoard.recovery) || []).filter(function (x) { return x.encounterId === encounterId; })[0];
+    if (!r) return;
+    askFor({ icon: "logout", ok: wTH("ward.leave-recovery", "Leave recovery"),
+      title: wTH("ward.leaves-recovery", "{who} leaves recovery", { who: esc(r.mrn || r.patientId) }, "who"),
+      text: wTH("ward.leave-recovery-explain", "Home closes the recovery stay now. A ward bed or unit is chosen next, on the bed board."),
+      fields: [
+        { key: "outcome", type: "select", label: wTH("ward.where-does-the-patient-go", "Where does the patient go?"), value: "ward",
+          options: [["ward", wTH("ward.recovery-to-a-ward-bed", "To a ward bed")], ["unit", wTH("ward.recovery-to-icu-or-another-unit", "To ICU or another unit")], ["home", wTH("ward.recovery-home-day-case", "Home (day case)")]] },
+        { key: "reason", type: "textarea", label: wTH("ward.note-optional", "Note (optional)") },
+      ] },
+      function (v) {
+        if (v.outcome === "home") return leaveRecoverySend(r, "home", null, v.reason);
+        st.transferPending = false; st.edAdmitPending = false; st.admitTarget = null; st.boardDept = "";
+        st.recoveryLeave = { row: r, outcome: v.outcome, reason: v.reason };
+        loadBoard();
+      });
+  }
+  function leaveRecoveryPickBed(ward, bed) {
+    var L = st.recoveryLeave, unit = L.outcome === "unit";
+    askFor({ icon: "bed", ok: wTH("ward.move", "Move"),
+      title: wTH("ward.move-from-recovery-to-bed", "Move {who} from recovery to {ward}, bed {bed}?", { who: esc(L.row.mrn || L.row.patientId), ward: esc(ward), bed: esc(bed || "") }, "who ward bed", 1),
+      fields: unit ? [{ key: "cls", type: "select", label: wTH("ward.unit", "Unit"), value: "ICU",
+        options: [["ICU", wTH("ward.critical-care-icu", "Critical care (ICU)")], ["MATERNITY", wTH("ward.maternity", "Maternity")], ["PEDIATRICS", wTH("ward.pediatrics", "Pediatrics")], ["NICU", "NICU"]] }] : [] },
+      function (v) { return leaveRecoverySend(L.row, L.outcome, { ward: ward, bed: bed, "class": unit ? v.cls : undefined }, L.reason); });
+  }
+  function leaveRecoverySend(r, outcome, admission, reason) {
+    return apiPost("/ward/surgery-leave-recovery", { orgId: st.orgId, encounterId: r.encounterId, expectedVersion: r.version, outcome: outcome, admission: admission || undefined, reason: reason || undefined })
+      .then(function (res) {
+        if (settle(res, wT("ward.left-recovery", "Left recovery."))) { st.recoveryLeave = null; st.board = null; loadSurgeryBoard(); }
+        else paint();
+      })
+      .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-that", "Could not record that."); paint(); });
   }
   function pacSave() {
     var d = st.surgCase, c = d && d.case; if (!c || !d.pac) return;
@@ -16450,12 +16524,13 @@
       // pending admit rather than leaving it to fire on some later, unrelated bed pick.
       if (st.view === "board" && st.edAdmitPending) { st.edAdmitPending = false; st.board = null; st.admitTarget = null; st.view = "chart"; paint(); return; }
       if (st.view === "board" && st.transferPending && st.sel) { st.transferPending = false; st.board = null; st.view = "chart"; paint(); return; }
+      if (st.view === "board" && st.recoveryLeave) { st.recoveryLeave = null; st.board = null; loadSurgeryBoard(); return; }
       // A case's own chart backs out to the theatre board, not the ward list - the same reason the
       // ED chart backs out to the ED board rather than to an unrelated ward roster.
       if (st.view === "surgerycase") { st.surgCase = null; loadSurgeryBoard(); return; }
       if (st.view === "theatreuse") { st.theatreUse = null; loadSurgeryBoard(); return; }
       st.view = "list"; st.sel = null; st.marWarn = null; st.due = []; st.problems = []; st.outbox = []; st.downtime = null; st.pcopy = null;
-      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false; st.transferPending = false;
+      st.board = null; st.admitTarget = null; st.mrnLookup = null; st.mrnLookupErr = ""; st.edAdmitPending = false; st.transferPending = false; st.recoveryLeave = null;
       st.flowsheet = null; st.news2 = null; st.investigations = null; st.results = null; st.pathology = null; st.resusBundles = null;
       st.ed = null; st.edArrivalOpen = false; st.edMrnLookup = null; st.edMrnLookupErr = "";
       st.surgBoard = null; st.surgCase = null; st.surgBookOpen = false; st.surgMrnLookup = null; st.surgMrnLookupErr = ""; st.surgErr = "";
@@ -16463,7 +16538,7 @@
       paint(); return;
     }
     // From anywhere but the board itself this is a plain admission: no transfer or ED admit left pending.
-    if (cmd === "board") { if (st.view !== "board") { st.transferPending = false; st.edAdmitPending = false; } loadBoard(); return; }
+    if (cmd === "board") { if (st.view !== "board") { st.transferPending = false; st.edAdmitPending = false; st.recoveryLeave = null; } loadBoard(); return; }
     if (cmd === "transferward") { transferTo(arg, ""); return; }
     if (cmd === "openrota") { if (G.WSQ && G.WSQ.go) G.WSQ.go("rota"); return; }
     if (cmd === "managebeds") { if (G.WSQ && G.WSQ.go) { G.WSQ.state._adminTab = "wards"; G.WSQ.go("admin"); } return; }
@@ -16690,6 +16765,7 @@
     if (cmd === "paccancel") { st.surgPacEdit = false; paint(); return; }
     if (cmd === "surgerynote") { surgeryNote(); return; }
     if (cmd === "surgerydisposition") { surgeryDisposition(arg); return; }
+    if (cmd === "leaverecovery") { leaveRecoveryOpen(arg); return; }
     if (cmd === "anesstart") { anesStart(); return; }
     if (cmd === "anesevent") { anesEvent(); return; }
     if (cmd === "anesend") { anesEnd(); return; }

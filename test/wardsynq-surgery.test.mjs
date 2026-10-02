@@ -361,9 +361,159 @@ test("PACU BED (Codex F1): a recovery patient holds the bed against a ward admis
   assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", second.booking.encounterId)).status, "in-progress", "the theatre stay was not closed");
   assert.equal((await RECORD.latest(TENANT_ROW.id, "SurgicalCase", second.caseId)).stage, "signed-out");
 
-  // DECISION TO CONFIRM: a PACU stay has no close path yet, so an earlier OPEN PACU stay in the bed does
-  // not block the next recovery patient (the ward screen always sends bed "1").
+  // A PACU stay can be closed now (leaveRecovery), so an open one holds its bay against the next recovery patient too.
   const fourth = await signedOutCase("126");
   const shared = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: fourth.caseId, disposition: "pacu", pacuBed: "P3" });
-  assert.equal(shared.__status, 200, JSON.stringify(shared));
+  assert.equal(shared.__status, 409, JSON.stringify(shared)); assert.equal(shared.error, "bed_occupied"); assert.equal(shared.written, 0);
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", fourth.booking.encounterId)).status, "in-progress", "the theatre stay was not closed");
+});
+
+/* ---- leaving recovery: the PACU stay is closed, its bay freed, the patient placed through the ward's own doors ---- */
+
+async function inRecovery(suffix, bay) {
+  const sc = await signedOutCase(suffix);
+  const d = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: sc.caseId, disposition: "pacu", pacuBed: bay });
+  assert.equal(d.__status, 200, JSON.stringify(d));
+  const pacu = await RECORD.latest(TENANT_ROW.id, "Encounter", d.pacuEncounterId);
+  return { ...sc, pacu };
+}
+const leave = (pacu, body) => as(DOCTOR, "/ward/surgery-leave-recovery", "POST", { orgId: ORG, encounterId: pacu.id, expectedVersion: pacu.version, ...body });
+const claimSlug = (x) => x.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const claimOf = (ward, bed) => RECORD.latest(TENANT_ROW.id, "_wardsynq_bed_claim", `wsq-bedclaim-${claimSlug(ward)}-${claimSlug(bed)}`);
+
+test("LEAVE RECOVERY to a ward bed: the patient is admitted through /ward/admit's door, the recovery stay closes and its bay is free again", async () => {
+  seedHospital();
+  const r = await inRecovery("130", "R1");
+  const board = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
+  const row = board.recovery.find((x) => x.encounterId === r.pacu.id);
+  assert.ok(row && row.bed === "R1" && row.caseId === r.caseId && row.mrn === r.reg.mrn && row.version === r.pacu.version, JSON.stringify(board.recovery));
+
+  const out = await leave(r.pacu, { outcome: "ward", admission: { ward: "Surgical Ward", bed: "S5" }, reason: "stable, Aldrete 10" });
+  assert.equal(out.__status, 200, JSON.stringify(out));
+  const closed = await RECORD.latest(TENANT_ROW.id, "Encounter", r.pacu.id);
+  assert.equal(closed.status, "finished"); assert.ok(closed.periodEnd);
+  assert.equal(closed.disposition, "admitted"); assert.equal(closed.dispositionReason, "stable, Aldrete 10");
+  assert.equal(closed.recoveryExit.outcome, "ward"); assert.equal(closed.recoveryExit.bed, "S5"); assert.equal(closed.recoveryExit.class, "IPD");
+  const adm = await RECORD.latest(TENANT_ROW.id, "Encounter", closed.recoveryExit.encounterId);
+  assert.equal(adm.class, "IPD"); assert.equal(adm.status, "in-progress"); assert.equal(adm.patientId, r.pacu.patientId);
+  assert.equal((await claimOf("Surgical Ward", "S5")).encounterId, adm.id, "the destination bed took its claim");
+  assert.equal((await claimOf("PACU", "R1")).encounterId, null, "the bay's claim is released");
+  const after = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
+  assert.ok(!after.recovery.some((x) => x.encounterId === r.pacu.id), "the patient is off the recovery list");
+
+  // A closed stay frees its bay: the next recovery patient takes R1.
+  const next = await inRecovery("131", "R1");
+  assert.equal(next.pacu.location.bed, "R1");
+  // Leaving again is a no-op, not a second admission.
+  const again = await leave(r.pacu, { outcome: "ward", admission: { ward: "Surgical Ward", bed: "S6" } });
+  assert.equal(again.__status, 200); assert.equal(again.skipped, "already_left"); assert.equal(again.written, 0);
+});
+
+test("LEAVE RECOVERY home (day case) and to ICU: each closes the stay; ICU is admitted as class ICU", async () => {
+  seedHospital();
+  const home = await inRecovery("132", "R2");
+  const h = await leave(home.pacu, { outcome: "home" });
+  assert.equal(h.__status, 200, JSON.stringify(h));
+  const hc = await RECORD.latest(TENANT_ROW.id, "Encounter", home.pacu.id);
+  assert.equal(hc.status, "finished"); assert.equal(hc.disposition, "home"); assert.equal(hc.recoveryExit.encounterId, null);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "Encounter", home.pacu.patientId)).filter((e) => e.status === "in-progress").length, 0, "nobody was admitted");
+  assert.equal((await claimOf("PACU", "R2")).encounterId, null);
+
+  const icu = await inRecovery("133", "R3");
+  const noUnit = await leave(icu.pacu, { outcome: "unit", admission: { ward: "ICU", bed: "I1" } });
+  assert.equal(noUnit.__status, 422, JSON.stringify(noUnit)); assert.equal(noUnit.error, "unit_required");
+  const u = await leave(icu.pacu, { outcome: "unit", admission: { ward: "ICU", bed: "I1", class: "ICU" } });
+  assert.equal(u.__status, 200, JSON.stringify(u));
+  const uc = await RECORD.latest(TENANT_ROW.id, "Encounter", icu.pacu.id);
+  assert.equal(uc.status, "finished"); assert.equal(uc.recoveryExit.outcome, "unit");
+  const adm = await RECORD.latest(TENANT_ROW.id, "Encounter", uc.recoveryExit.encounterId);
+  assert.equal(adm.class, "ICU"); assert.equal(adm.location.ward, "ICU"); assert.equal(adm.location.bed, "I1");
+});
+
+test("LEAVE RECOVERY into an occupied ward bed is refused and the patient stays in recovery; a stale version is refused; a nurse cannot", async () => {
+  seedHospital();
+  const r = await inRecovery("134", "R4");
+  const other = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Sitter", mobile: "9876500135", gender: "male", ageYears: 70 });
+  assert.equal((await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: other.mrn, ward: "Surgical Ward", bed: "S7" })).__status, 200);
+
+  const refused = await leave(r.pacu, { outcome: "ward", admission: { ward: "Surgical Ward", bed: "S7" } });
+  assert.equal(refused.__status, 409, JSON.stringify(refused)); assert.equal(refused.error, "bed_occupied"); assert.equal(refused.written, 0);
+  const still = await RECORD.latest(TENANT_ROW.id, "Encounter", r.pacu.id);
+  assert.equal(still.status, "in-progress"); assert.equal(still.version, r.pacu.version, "nothing was written to the recovery stay");
+  assert.equal((await claimOf("PACU", "R4")).encounterId, r.pacu.id, "the bay is still held");
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "Encounter", r.pacu.patientId)).filter((e) => e.class === "IPD").length, 0, "no admission was made");
+
+  const stale = await leave({ ...r.pacu, version: r.pacu.version - 1 }, { outcome: "home" });
+  assert.equal(stale.__status, 409, JSON.stringify(stale)); assert.equal(stale.error, "version_conflict");
+  const noVersion = await as(DOCTOR, "/ward/surgery-leave-recovery", "POST", { orgId: ORG, encounterId: r.pacu.id, outcome: "home" });
+  assert.equal(noVersion.__status, 422); assert.equal(noVersion.error, "expected_version_required");
+  const nurse = await as(NURSE, "/ward/surgery-leave-recovery", "POST", { orgId: ORG, encounterId: r.pacu.id, expectedVersion: r.pacu.version, outcome: "home" });
+  assert.equal(nurse.__status, 403, JSON.stringify(nurse));
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", r.pacu.id)).status, "in-progress");
+});
+
+test("LEAVE RECOVERY for an inpatient goes back through /ward/transfer's door: no second admission, and home is refused while the stay is open", async () => {
+  seedHospital();
+  const { reg, booking, caseId } = await signedOutCase("136");
+  const stay = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "Surgical Ward", bed: "S8", admittedAt: "2026-09-08T08:00:00.000Z" });
+  assert.equal(stay.__status, 200, JSON.stringify(stay));
+  const d = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId, disposition: "pacu", pacuBed: "R5" });
+  const pacu = await RECORD.latest(TENANT_ROW.id, "Encounter", d.pacuEncounterId);
+
+  const home = await leave(pacu, { outcome: "home" });
+  assert.equal(home.__status, 409, JSON.stringify(home)); assert.equal(home.error, "admitted_elsewhere"); assert.equal(home.stayEncounterId, stay.encounterId);
+
+  const back = await leave(pacu, { outcome: "ward", admission: { ward: "Surgical Ward", bed: "S9" } });
+  assert.equal(back.__status, 200, JSON.stringify(back));
+  assert.equal(back.to.encounterId, stay.encounterId, "the existing stay was moved, not a new one opened");
+  const moved = await RECORD.latest(TENANT_ROW.id, "Encounter", stay.encounterId);
+  assert.equal(moved.location.bed, "S9"); assert.ok(moved.movedFrom);
+  assert.equal((await RECORD.byPatient(TENANT_ROW.id, "Encounter", pacu.patientId)).filter((e) => e.class === "IPD").length, 1);
+  assert.equal((await claimOf("Surgical Ward", "S8")).encounterId, null, "the old ward bed's claim is released by the transfer");
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", pacu.id)).status, "finished");
+  void booking;
+});
+
+test("PACU BAY: two recovery patients racing for one bay - the bay claim lets exactly one in", async () => {
+  seedHospital();
+  const a = await signedOutCase("138"), b = await signedOutCase("139");
+  const realPage = RECORD.pageByType.bind(RECORD), realLatest = RECORD.latest.bind(RECORD);
+  let arrived = 0, claimReads = 0, openCensus, openClaims;
+  const census = new Promise((r) => { openCensus = r; }), claims = new Promise((r) => { openClaims = r; });
+  const timer = setTimeout(() => { openCensus(); openClaims(); }, 1000);
+  RECORD.pageByType = async (t, type, o) => { if (type === "Encounter") { if (++arrived === 2) openCensus(); await census; } return realPage(t, type, o); };
+  RECORD.latest = async (t, type, id) => { if (type === "_wardsynq_bed_claim") { if (++claimReads === 2) openClaims(); await claims; } return realLatest(t, type, id); };
+  let ra, rb;
+  try {
+    [ra, rb] = await Promise.all([
+      as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: a.caseId, disposition: "pacu", pacuBed: "R9" }),
+      as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: b.caseId, disposition: "pacu", pacuBed: "R9" }),
+    ]);
+  } finally { clearTimeout(timer); RECORD.pageByType = realPage; RECORD.latest = realLatest; }
+  assert.deepEqual([ra.__status, rb.__status].sort(), [200, 409], JSON.stringify([ra, rb]));
+  assert.equal((await openInBed("PACU", "R9")).length, 1, "exactly one patient in bay R9");
+  const lost = ra.__status === 409 ? a : b;
+  assert.equal((await RECORD.latest(TENANT_ROW.id, "Encounter", lost.booking.encounterId)).status, "in-progress", "the loser stays in theatre");
+});
+
+test("PACU BAYS come from the hospital's bed list for the PACU ward: the board offers the free ones, and a bay not on the list is refused", async () => {
+  seedHospital();
+  const { createWard, createBed } = await import("../functions/_opd_org_store.js");
+  const w = await createWard(ENV, ORG, { name: "PACU" }, "test");
+  for (const name of ["Bay 1", "Bay 2", "Bay 3"]) await createBed(ENV, ORG, { wardId: w.id, name, state: name === "Bay 3" ? "cleaning" : "available" }, "test");
+  const b0 = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
+  assert.deepEqual(b0.pacuBays, ["Bay 1", "Bay 2"], JSON.stringify(b0.pacuBays));
+
+  const sc = await signedOutCase("137");
+  const notListed = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: sc.caseId, disposition: "pacu", pacuBed: "1" });
+  assert.equal(notListed.__status, 422, JSON.stringify(notListed)); assert.equal(notListed.error, "bed_not_found");
+  const ok = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: sc.caseId, disposition: "pacu", pacuBed: "Bay 1" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const b1 = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
+  assert.deepEqual(b1.pacuBays, ["Bay 2"], "a held bay is not offered");
+  assert.equal(b1.recovery.length, 1);
+
+  seedHospital();
+  const none = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
+  assert.equal(none.pacuBays, null, "no PACU beds listed: the screen falls back to bay 1");
 });

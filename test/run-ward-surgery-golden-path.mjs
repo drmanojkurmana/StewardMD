@@ -122,10 +122,16 @@ try {
   ok(await waitFor(`return document.body.textContent.indexOf('disposition') >= 0 || document.body.textContent.indexOf('Disposition') >= 0;`), "once signed out, the disposition card appears");
 
   // ---- 8. Disposition to PACU: back to the theatre board, the case is no longer open. -------------
+  // The hospital lists its recovery bays: To PACU asks which one, from the free bays only.
+  await ev(`window.__pacuBays = ["Bay 2", "Bay 3"]; return true;`);
   await click('[data-w-act="surgerydisposition:pacu"]');
+  ok(await waitFor(`var s=document.querySelector('.w-ask select[data-w-ask="bay"]'); return !!s && s.options.length === 2 && s.options[1].value === "Bay 3";`), "To PACU offers the hospital's free recovery bays");
+  await ev(`var s=document.querySelector('.w-ask select[data-w-ask="bay"]'); s.value = "Bay 3"; s.dispatchEvent(new Event("input", { bubbles: true })); s.dispatchEvent(new Event("change", { bubbles: true })); return true;`);
+  await click('[data-w-act="askok"]');
   ok(await waitFor(`return document.body.textContent.indexOf('No open cases') >= 0;`), "disposing to PACU closes the theatre stay and returns to the (now empty) board");
   const dispBody = await lastBody("/ward/surgery-disposition");
-  ok(dispBody && dispBody.disposition === "pacu", "the disposition posted is the one actually chosen: " + JSON.stringify(dispBody));
+  ok(dispBody && dispBody.disposition === "pacu" && dispBody.pacuBed === "Bay 3", "the disposition posted is the one actually chosen, with the bay picked: " + JSON.stringify(dispBody));
+  ok(await waitFor(`return document.body.textContent.indexOf('In recovery (PACU)') >= 0 && document.body.textContent.indexOf('Bay 3') >= 0;`), "the patient now shows on the board as in recovery, in Bay 3");
 
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }
