@@ -5,12 +5,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.PowerManager;
 import android.os.RemoteException;
 
 import com.getcapacitor.JSObject;
@@ -116,8 +118,22 @@ public class NeedlePlugin extends Plugin {
     @PluginMethod
     public void available(PluginCall call) {
         File w = new File(defaultWeights());
-        call.resolve(new JSObject().put("available", true).put("isolated", true).put("killable", true)
-            .put("defaultWeights", w.getAbsolutePath()).put("defaultWeightsPresent", w.isFile()));
+        // Device state for the Edge back-off (Edge-Master-Plan A0.5; edge-router.js reads it): the system's
+        // own low-memory flag, MB available, and PowerManager's thermal status (0 NONE .. 3 SEVERE .. 6).
+        boolean low = false; long availMB = -1; int thermal = 0;
+        try {
+            ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+            am.getMemoryInfo(mi); low = mi.lowMemory; availMB = mi.availMem / (1024 * 1024);
+        } catch (Throwable ignore) {}
+        try {
+            if (Build.VERSION.SDK_INT >= 29) thermal = ((PowerManager) getContext().getSystemService(Context.POWER_SERVICE)).getCurrentThermalStatus();
+        } catch (Throwable ignore) {}
+        JSObject r = new JSObject().put("available", true).put("isolated", true).put("killable", true)
+            .put("defaultWeights", w.getAbsolutePath()).put("defaultWeightsPresent", w.isFile())
+            .put("lowMemory", low).put("thermal", thermal);
+        if (availMB >= 0) r.put("availMB", availMB);
+        call.resolve(r);
     }
 
     @PluginMethod

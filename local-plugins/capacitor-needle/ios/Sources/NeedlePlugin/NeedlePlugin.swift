@@ -1,4 +1,5 @@
 import Foundation
+import os
 import Capacitor
 import CNeedle
 
@@ -40,8 +41,20 @@ public class NeedlePlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc func available(_ call: CAPPluginCall) {
         let w = defaultWeights()
+        // Device state for the Edge back-off (Edge-Master-Plan A0.5; edge-router.js reads it), on Android's
+        // thermal scale: .serious is reported as 3 (SEVERE), .critical as 4. iOS has no low-memory flag;
+        // availMB is what this process may still allocate before jetsam.
+        let thermal: Int
+        switch ProcessInfo.processInfo.thermalState {
+        case .nominal: thermal = 0
+        case .fair: thermal = 1
+        case .serious: thermal = 3
+        case .critical: thermal = 4
+        @unknown default: thermal = 0
+        }
         call.resolve(["available": true, "isolated": false, "killable": false,
-                      "defaultWeights": w.path, "defaultWeightsPresent": FileManager.default.fileExists(atPath: w.path)])
+                      "defaultWeights": w.path, "defaultWeightsPresent": FileManager.default.fileExists(atPath: w.path),
+                      "lowMemory": false, "availMB": Int(os_proc_available_memory() / (1024 * 1024)), "thermal": thermal])
     }
 
     @objc func load(_ call: CAPPluginCall) {

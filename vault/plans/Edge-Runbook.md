@@ -188,7 +188,7 @@ test (then set back to "0"): INR 2.5-3.5 [1] and ACT [1], first text ~32 s, tota
 temperature, battery drop and the latency line `score.mjs --pred` prints (p50, p95, max).
 Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the cold load.
 
-**iPhone 15 Pro (8 GB, iOS 27.0) PASSED, 2026-10-02 (the 4 GB Android phone is still to do):**
+**iPhone 15 Pro (8 GB, iOS 27.0), 2026-10-02: runbook marks PASSED (no crash, no thermal shutdown, p95 in deadline); plan section 7 thermal mark NOT met ("no SEVERE status in the sustained test": iOS .serious, Android SEVERE's analog, from minute 2, driven by back-to-back MaiK generation):**
 - `--limit 50` back to back: Needle 3 x 50, all `ok`, p50 157 ms, p95 259 ms, max 386 ms (gate A0.2).
   FunctionGemma Q8_0 + grammar: 50/50 `ok` with an integer option, p50 147 ms, p95 221 ms, max 1,280 ms
   (the first call, cold load included; after a reinstall the first load took 1.3 s this time, 19 s once).
@@ -204,11 +204,13 @@ Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the 
   `ChargerData.TimeChargingThermallyLimited` 0 -> 1,640. The llama engine throttles itself at Serious
   (yield per token, budget cap 1,024) and stops at Critical (`LlamaEngine.swift`). Battery drop not
   measurable: on USB the phone held 80% (charge limit) throughout.
-- **Gap found:** `edge-router.js` builds the runtime with `env: G.SMD_EDGE_ENV || {}` and nothing defines
-  `SMD_EDGE_ENV`, so the runtime's memory / thermal / others-busy back-off (`memoryOk`, `thermalOk`,
-  `othersBusy`) never runs in the app. Edge kept answering at Serious while MaiK generated (the one
-  timeout came then). Needs an owner decision on the signals: iOS thermal state is only visible to native
-  code today (`LlamaEngine` reads `ProcessInfo.thermalState`); `othersBusy` could be MaiK's own queue state.
+- **Gap found, then fixed (2026-10-02):** nothing defined `SMD_EDGE_ENV`, so the runtime's back-off never ran.
+  `edge-router.js` now has the plan's A0.5 contract as its default env: skip Edge (rules answer) when
+  memory is low (`lowMemory`, or under 250 MB available), thermal is SEVERE or above (iOS .serious maps
+  to 3), MaiK is generating (`SMD_MAIK_LOCAL.queueState().running`) or Whisper is decoding
+  (`SMD_NATIVE.whisperBusy()`). `Needle.available()` reports `lowMemory` / `availMB` / `thermal` on both
+  platforms. Unit-tested (`test/edge-router.test.mjs`); both plugins compile; not yet run on a phone. With
+  this, the mixed session above would have skipped Edge for most of its 28 Serious minutes.
 
 **Pixel 9 (12 GB, Android 17), 2026-10-02, same conditions as A0.2 Android: stability PASSED, latency
 FAILED.** 50 back to back: Needle 50/50 `timeout` (p50 4.1 s incl. kill + reload), FunctionGemma 50/50

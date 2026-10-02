@@ -698,6 +698,9 @@
     },
     _wToken: 0,
     _wSubs: null,
+    /** True while a Whisper session is live (its listeners are attached until final/error). Edge reads it
+     * to stand aside during a decode (Edge-Master-Plan A0.5). */
+    whisperBusy: function () { return !!(this._wSubs && this._wSubs.length); },
     _removeWhisperSubs: function () {
       var subs = this._wSubs || []; this._wSubs = [];
       subs.forEach(function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} });

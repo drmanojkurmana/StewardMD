@@ -187,10 +187,39 @@
   var engine = null, runtime = null, minConfidence = 0.5;
   var stats = { requests: 0, rules: 0, model: 0, chosen: 0, none: 0, passed: 0 };
 
+  /* Back-off (Edge-Master-Plan A0.5): skip Edge, so the rules answer, when memory is low
+   * (lowMemory, or under 250 MB available), the phone is at thermal SEVERE or above (Android
+   * THERMAL_STATUS_SEVERE = 3; the Needle plugin maps iOS .serious to 3), or MaiK is generating or
+   * Whisper is decoding. The device numbers arrive asynchronously from Needle.available(), so the last
+   * reading is kept and refreshed on every routed request; until one arrives, everything reads "ok".
+   * SMD_EDGE_ENV, when set (tests, harnesses), replaces this whole object. */
+  var device = { lowMemory: false, availMB: null, thermal: 0 };
+  function refreshDevice() {
+    var p = null;
+    try { p = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Needle; } catch (e) {}
+    if (!p || !p.available) return Promise.resolve(device);
+    return Promise.resolve().then(function () { return p.available(); }).then(function (a) {
+      if (a) {
+        if (typeof a.lowMemory === "boolean") device.lowMemory = a.lowMemory;
+        if (typeof a.availMB === "number") device.availMB = a.availMB;
+        if (typeof a.thermal === "number") device.thermal = a.thermal;
+      }
+      return device;
+    }, function () { return device; });
+  }
+  var DEFAULT_ENV = {
+    memoryOk: function () { return !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
+    thermalOk: function () { return device.thermal < 3; },
+    othersBusy: function () {
+      var L = G.SMD_MAIK_LOCAL, N = G.SMD_NATIVE;
+      var q = L && L.queueState ? L.queueState() : null;
+      return !!((q && q.running) || (N && N.whisperBusy && N.whisperBusy()));
+    }
+  };
   function makeRuntime() {
     var RT = G.SMD_EDGE_RUNTIME || (typeof require !== "undefined" ? tryReq("./edge-runtime.js") : null);
     if (!RT || !engine) return null;
-    return RT.create({ engine: engine, deadlineMs: 1200, coldMs: 8000, env: G.SMD_EDGE_ENV || {} });
+    return RT.create({ engine: engine, deadlineMs: 1200, coldMs: 8000, env: G.SMD_EDGE_ENV || DEFAULT_ENV });
   }
   function tryReq(p) { try { return require(p); } catch (e) { return null; } }
 
@@ -225,6 +254,7 @@
     if (layer0(cands)) { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
     if (!available() || !runtime) { stats.passed++; return Promise.resolve(null); }
     if (ctx && ctx.patient_session_id != null) runtime.setSession(ctx.patient_session_id);
+    refreshDevice();          // for the NEXT request: this one reads the last known state
     stats.model++;
     return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }).then(function (r) {
       if (!r || r.status !== "ok") { stats.passed++; return null; }
@@ -347,7 +377,9 @@
     route: route, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
-    session: function (id) { if (runtime) runtime.setSession(id); }, _version: "1.0"
+    session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
+    backoff: function () { return { memoryOk: DEFAULT_ENV.memoryOk(), thermalOk: DEFAULT_ENV.thermalOk(), othersBusy: DEFAULT_ENV.othersBusy(), device: JSON.parse(JSON.stringify(device)) }; },
+    _version: "1.0"
   };
   if (root) {
     root.SMD_EDGE = API;

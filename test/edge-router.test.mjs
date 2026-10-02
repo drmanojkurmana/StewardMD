@@ -178,3 +178,39 @@ test("Layer 0 widened: an exactly named tool or generic drug, in any of the thre
   assert.equal(E.layer0(E.candidates("do not open antibiogram")), false);
   assert.equal(await E.route("do not open antibiogram"), null, "negation still wins");
 });
+
+test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisper decoding skip the model", async () => {
+  store.smd_edge = "1";
+  const pick = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
+  const ask = "show me the resistance patterns antibiogram";
+  let dev = {};
+  globalThis.Capacitor = { Plugins: { Needle: { available: () => Promise.resolve(dev) } } };
+  const reads = async (d) => { dev = d; await E.refreshDevice(); };
+  const runs = async () => { const m = mock(pick); E.setEngine(m); const r = await E.route(ask); return { r, calls: m.prompts.length }; };
+  try {
+    await reads({ thermal: 0, lowMemory: false, availMB: 900 });
+    let o = await runs(); assert.equal(o.calls, 1); assert.equal(o.r && o.r.id, "antibiogram", "all clear: the model answers");
+    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }]) {
+      await reads(d); o = await runs();
+      assert.equal(o.calls, 0, "skipped for " + JSON.stringify(d)); assert.equal(o.r, null, "the caller continues (rules / MaiK)");
+    }
+    await reads({ thermal: 2, lowMemory: false, availMB: 600 }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
+    globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: true, waiting: 0 }) };
+    assert.equal((await runs()).calls, 0, "never during a MaiK generation");
+    globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: false, waiting: 2 }) };
+    assert.equal((await runs()).calls, 1, "queued MaiK work is not generating yet");
+    globalThis.SMD_NATIVE = { whisperBusy: () => true };
+    assert.equal((await runs()).calls, 0, "never during a Whisper decode");
+    globalThis.SMD_NATIVE = { whisperBusy: () => false };
+    assert.equal((await runs()).calls, 1);
+    assert.deepEqual(Object.keys(E.backoff()).sort(), ["device", "memoryOk", "othersBusy", "thermalOk"]);
+    // Layer 0 (rules) is untouched by the back-off: an exact name still answers while busy.
+    globalThis.SMD_NATIVE = { whisperBusy: () => true };
+    const m = mock(pick); E.setEngine(m);
+    const r0 = await E.route("open antibiogram");
+    assert.equal(r0 && r0.source, "rules"); assert.equal(m.prompts.length, 0);
+  } finally {
+    delete globalThis.Capacitor; delete globalThis.SMD_MAIK_LOCAL; delete globalThis.SMD_NATIVE;
+    await E.refreshDevice(); dev = {};
+  }
+});

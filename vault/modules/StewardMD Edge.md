@@ -58,9 +58,10 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 | JS adapters | `edge-router.js` | `needleAdapter(plugin, {weightsPath, calibrated, killable})`, `llamaAdapter(plugin, {modelPath})` (bake-off only: evicts MaiK's pack), `grammarFor(n)`, `bakeoff(rows, engine)`. |
 
 ## Gotchas
-- Nothing defines `window.SMD_EDGE_ENV`, so the runtime's `memoryOk` / `thermalOk` / `othersBusy` back-off
-  never runs in the app (found 2026-10-02; the iPhone sat at thermal "Serious" for 28 minutes while Edge
-  kept answering). iOS thermal state is only read natively today (`LlamaEngine.swift`). Owner decision.
+- Back-off (plan A0.5) is the default env in `edge-router.js` (`SMD_EDGE_ENV`, when set, replaces it):
+  low memory, thermal SEVERE+ (iOS .serious = 3), MaiK generating or Whisper decoding skip the model;
+  Layer 0 rules still answer. Device numbers come from `Needle.available()` and are one request stale.
+  `SMD_EDGE.backoff()` shows the current verdict.
 - llama.cpp does not run a GGUF's Jinja template: `llama_chat_apply_template` detects Gemma and folds the
   system text into the user turn. Training text must match that (`export.mjs` `llama-json`, A0.3 step 4).
 - The delegated chip handler in `home.js` only fires for attributes listed in its `closest(...)`
