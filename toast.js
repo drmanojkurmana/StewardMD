@@ -84,7 +84,8 @@
       "position:absolute", "left:50%", "bottom:0", "width:max-content",
       "max-width:min(calc(100vw - 32px - max(env(safe-area-inset-left,0px),var(--sai-left,0px)) - max(env(safe-area-inset-right,0px),var(--sai-right,0px))),440px)",
       "box-sizing:border-box", "padding:12px 16px", "border-radius:12px",
-      "background:rgba(17,24,39,.96)",              // fixed dark chip: readable in light and dark themes
+      "background:rgb(17,24,39)",                   // fixed dark chip, fully opaque: at .96 the toast behind
+                                                    // and the page bled through as ghost text (rendered 2026-10-03)
       "color:#fff",
       "font:600 13.5px/1.45 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif",
       "box-shadow:0 10px 34px rgba(0,0,0,.30)",
@@ -95,7 +96,7 @@
 
   function setTrans(it, ms) {
     it.el.style.transition = ms
-      ? "opacity " + ms + "ms " + EASE + (still() ? "" : ",transform " + ms + "ms " + EASE)
+      ? "opacity " + ms + "ms " + EASE + ",color " + ms + "ms " + EASE + (still() ? "" : ",transform " + ms + "ms " + EASE)
       : "none";
   }
 
@@ -110,6 +111,9 @@
         it.el.style.opacity = String(rm && i > 0 ? 0 : k.o);   // reduced motion: only the front one shows
       }
       it.el.style.zIndex = String(MAX_VISIBLE + 1 - i);
+      // Only the front toast shows its text; the ones behind read as card edges (Sonner), so a taller
+      // older toast never peeks its words out above a shorter front one.
+      it.el.style.color = i === 0 ? "#fff" : "transparent";
       it.el.style.pointerEvents = i === 0 ? "auto" : "none";
       if (k.vis) live++;
     }
