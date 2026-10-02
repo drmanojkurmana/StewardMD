@@ -40,6 +40,9 @@
     });
   }
   function attr(s) { return esc(s).replace(/\s/g, " "); }
+  // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  function phiIn(kind, text, v) { var P = window.SMD_PRIVACY_MODE; return P && v ? P.wrapIn(kind, text, v) : esc(text); }
   function haptic(k) {
     try {
       if (flag("smd_surgx_haptics") && window.SMD_HAPTICS && SMD_HAPTICS[k]) SMD_HAPTICS[k]();
@@ -1184,7 +1187,7 @@
     var link = n.patient || null;
     var w = P.writability(link);
     var body = '<div class="sgx-row" style="cursor:default">' +
-      '<span class="tx"><span class="tt">' + esc(P.describe(link)) + "</span>" +
+      '<span class="tx"><span class="tt">' + (link ? phiIn(link.name ? "name" : "id", P.describe(link), link.name || link.patientId) : esc(P.describe(link))) + "</span>" +
       '<span class="sb">' + esc(w.canWrite
         ? (w.willCreate ? w.note : "Can be written to the hospital record.")
         : w.reason) + "</span></span></div>";
@@ -1201,7 +1204,7 @@
         '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
     } else if (state.ptPick === "connect") {
       body += '<div class="sgx-fld"><label for="sgxPtQuery">Search ' + esc(state.ptTenantName || "hospital") + '</label>' +
-        '<input id="sgxPtQuery" type="text" data-sgx-ptquery value="' + attr(state.ptQuery || "") + '" placeholder="Name or hospital number"></div>' +
+        '<input id="sgxPtQuery" type="text" data-sgx-ptquery data-phi-input value="' + attr(state.ptQuery || "") + '" placeholder="Name or hospital number"></div>' +
         '<div class="sgx-btnrow"><button class="sgx-btn pri" data-sgx="ptsearch">' + ic("search") + " Search</button>" +
         '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
       if (state.ptBusy) body += '<div class="sgx-disclaim" style="border:none">Searching…</div>';
@@ -1209,15 +1212,15 @@
         body += state.ptResults.length
           ? state.ptResults.map(function (p, i) {
               return '<button class="sgx-row" data-sgx="ptpick" data-idx="' + i + '"><span class="tx">' +
-                '<span class="tt">' + esc(PT().patientLabel(p)) + "</span>" +
-                '<span class="sb">' + esc(PT().patientMrn(p) || "no hospital number") + "</span></span>" +
+                '<span class="tt">' + phi("name", PT().patientLabel(p)) + "</span>" +
+                '<span class="sb">' + phi("id", PT().patientMrn(p), esc(PT().patientMrn(p) || "no hospital number")) + "</span></span>" +
                 '<span class="go">' + ic("chevron_right") + "</span></button>";
             }).join("")
           : '<div class="sgx-disclaim" style="border:none">' + esc(state.ptError || "No patient matched.") + "</div>";
       }
     } else if (state.ptPick === "manual") {
       body += '<div class="sgx-fld"><label for="sgxPtManual">Patient reference (initials or hospital number)</label>' +
-        '<input id="sgxPtManual" type="text" data-sgx-ptmanual value="' + attr((link && link.source === "manual" && link.name) || "") + '" placeholder="e.g. R.K. / 4471"></div>' +
+        '<input id="sgxPtManual" type="text" data-sgx-ptmanual data-phi-input value="' + attr((link && link.source === "manual" && link.name) || "") + '" placeholder="e.g. R.K. / 4471"></div>' +
         '<div class="sgx-btnrow"><button class="sgx-btn pri" data-sgx="ptmanualsave">Use this patient</button>' +
         '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
     } else {
@@ -1461,7 +1464,7 @@
       "</label>";
     if (f.help) h += '<div class="help">' + esc(f.help) + "</div>";
     if (f.type === "text") {
-      h += '<input id="sgxF-' + attr(f.k) + '" type="text" data-sgx-field="' + attr(f.k) + '" value="' + attr(v) +
+      h += '<input id="sgxF-' + attr(f.k) + '" type="text" data-sgx-field="' + attr(f.k) + '"' + (f.k === "patientRef" ? " data-phi-input" : "") + ' value="' + attr(v) +
         '" placeholder="' + attr(f.ph) + '">';
     } else {
       h += '<textarea id="sgxF-' + attr(f.k) + '" rows="' + (f.rows || 2) + '" data-sgx-field="' + attr(f.k) +
@@ -1491,11 +1494,12 @@
     return st.saveNote(n).then(function (r) {
       if (!r.ok) {
         toast(r.reason === "no-crypto" ? "Cannot save: secure storage unavailable" : "Could not save this note");
+        haptic("error");
         return false;
       }
       n.id = r.id;
       if (route() === "note/new") state.stack[state.stack.length - 1] = "note/" + r.id;
-      if (!silent) toast("Saved on this device");
+      if (!silent) { toast("Saved on this device"); haptic("success"); }
       return true;
     });
   }
@@ -1888,6 +1892,7 @@
           });
           D.send(fsDest, fsNote, text, { confirmed: true }).then(function (r) {
             if (r && r.ok) {
+              haptic("success");
               fsNote.audit.push({ a: "sent", to: fsDest });
               saveNote(true);
               try { window.alert(fsDest === "drive" ? "Saved to your Drive."
@@ -1895,6 +1900,7 @@
             } else {
               /* Never let a failed write be silent. The note IS signed; say so, and say why the send
                * failed, in a dialog they cannot miss. */
+              haptic("warning");
               var whyFs = destError(fsDest, r);
               try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyFs + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
               // An expired sign-in is the one failure the clinician can fix right now, so take them there.

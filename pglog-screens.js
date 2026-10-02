@@ -46,6 +46,11 @@
   function attr(s) { return esc(s).replace(/\s+/g, " "); }
   function arr(x) { return Array.isArray(x) ? x : []; }
   function haptic(k) { try { if (window.SMD_HAPTICS && SMD_HAPTICS[k]) SMD_HAPTICS[k](); } catch (e) {} }
+  // The clinician's own progress moment (smd-celebrate.js; plays the success haptic itself). `key` = once ever.
+  function celebrate(title, detail, key) {
+    if (window.SMD_CELEBRATE && window.SMD_CELEBRATE.show({ title: title, detail: detail, key: key })) return;
+    haptic("success");
+  }
   function toast(m) {
     try { if (window.toast) return window.toast(m); } catch (e) {}
     try { if (window.SB && SB.toast) return SB.toast(m); } catch (e) {}
@@ -301,6 +306,9 @@
       "</div>";
   }
   function wrap(inner) { return '<div class="pgl-wrap">' + inner + "</div>"; }
+  // Privacy mode (privacy-mode.js): the case reference (an MRN / IP number) is wrapped so it can be masked on
+  // screen; plain esc() without it.
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function loading() { return '<div class="pgl-wrap pgl-skel"><i></i><i></i><i></i><i></i></div>'; }
   function emptyState(icon, title, sub, action) {
     return '<div class="pgl-state"><div class="ic">' + ic(icon) + "</div>" +
@@ -1507,7 +1515,7 @@
       withMic("procedureText", '<input type="text" data-f="procedureText" value="' + attr(d.procedureText) + '" placeholder="e.g. Central venous access">'),
       cat.length ? "" : (easy() ? "Type the procedure. It is counted the same way." : "Your specialty's NMC guidelines list no procedure catalogue, so type it. It is still counted."), errs);
     h += field("Case reference", "caseRef",
-      '<input type="text" data-f="caseRef" value="' + attr(d.caseRef) + '" placeholder="MRN / IP number" maxlength="32">',
+      '<input type="text" data-f="caseRef" data-phi-input value="' + attr(d.caseRef) + '" placeholder="MRN / IP number" maxlength="32">',
       "Hospital reference only. Never a patient name.", errs);
     h += '<div class="pgl-field"><label>Setting</label><div class="pgl-chips">' +
       ["ot", "ipd", "emergency", "opd", "bedside", "daycare"].map(function (s) {
@@ -1527,7 +1535,7 @@
       }).join("") + "</div></div>";
     h += field("Case / problem", "title", withMic("title", '<input type="text" data-f="title" value="' + attr(d.title) + '" placeholder="e.g. Community-acquired pneumonia">'), "", errs);
     h += field("Diagnosis / category", "diagnosis", withMic("diagnosis", '<input type="text" data-f="diagnosis" value="' + attr(d.diagnosis) + '" placeholder="Optional">'), "", errs);
-    h += field("Case reference", "caseRef", '<input type="text" data-f="caseRef" value="' + attr(d.caseRef) + '" placeholder="MRN / IP number" maxlength="32">',
+    h += field("Case reference", "caseRef", '<input type="text" data-f="caseRef" data-phi-input value="' + attr(d.caseRef) + '" placeholder="MRN / IP number" maxlength="32">',
       "Hospital reference only. Never a patient name.", errs);
     h += '<div class="pgl-field"><label>Age band and sex (optional)</label><div style="display:flex;gap:8px">' +
       selectOf("ageBand", [""].concat(M().AGE_BANDS), d.ageBand, function (v) { return v || "Age band"; }) +
@@ -1716,7 +1724,7 @@
     kv("Reflection", e.body);
     if (rows.length) {
       h.push('<div class="pgl-card"><h3>Details</h3><dl class="pgl-rep-meta">' +
-        rows.map(function (kvp) { return "<dt>" + esc(kvp[0]) + "</dt><dd>" + esc(kvp[1]) + "</dd>"; }).join("") + "</dl></div>");
+        rows.map(function (kvp) { return "<dt>" + esc(kvp[0]) + "</dt><dd>" + (kvp[0] === "Case reference" ? phi("id", kvp[1]) : esc(kvp[1])) + "</dd>"; }).join("") + "</dl></div>");
     }
 
     if (arr(e.requirementIds).length) {
@@ -2410,7 +2418,7 @@
   function screenReport(id) {
     var rep = buildReport(id);
     if (!rep) return wrap(errorState("That report is not available yet."));
-    return wrap(REP().toHtml(rep)) +
+    return (state.includeCaseRef ? '<div data-phi-unmasked>' + wrap(REP().toHtml(rep)) + "</div>" : wrap(REP().toHtml(rep))) +
       '<div class="pgl-actionbar">' +
       '<button class="pgl-btn ghost" data-pgl="print" data-id="' + attr(id) + '">' + ic("print") + "Print / PDF</button>" +
       // CSV is the format a department re-analyses in a spreadsheet; Excel needs the BOM, which
@@ -2751,7 +2759,7 @@
       .forEach(function (kv) { if (kv[1]) rows.push(kv); });
     if (rows.length) {
       h.push('<div class="pgl-card"><dl class="pgl-rep-meta">' +
-        rows.map(function (kv) { return "<dt>" + esc(kv[0]) + "</dt><dd>" + esc(kv[1]) + "</dd>"; }).join("") + "</dl></div>");
+        rows.map(function (kv) { return "<dt>" + esc(kv[0]) + "</dt><dd>" + (kv[0] === "Case reference" ? phi("id", kv[1]) : esc(kv[1])) + "</dd>"; }).join("") + "</dl></div>");
     }
     if (arr(e.requirementIds).length) {
       h.push('<div class="pgl-card"><h3>Claimed requirements</h3>' +
@@ -3656,6 +3664,7 @@
     return st.attest({ residentId: residentId, kind: "monthly", period: period }).then(function () {
       state.attesting = null;
       toast(monthLabel(period) + " authenticated.");
+      celebrate("Logbook month authenticated", monthLabel(period), "pglog-attest:" + residentId + ":" + period);
       // Reload rather than patching locally: the server recomputes which months are still outstanding.
       return Promise.all([loadFaculty(),
         state.resEntries && state.resEntries[residentId] ? loadResidentEntries(residentId) : null]).then(render, render);
@@ -4290,7 +4299,7 @@
       state.certVerifyUrl = r.verifyUrl || state.certVerifyUrl;
       var issued = state.cert && state.cert.status === "issued";
       toast(issued ? "Signed. The logbook is now certified." : "Signed. Waiting on the remaining signatures.");
-      haptic("success");
+      if (issued) celebrate("Logbook certified", "All signatures are in", "pglog-cert:" + id); else haptic("success");
       render();
     }, function (e) {
       state.loading = false;

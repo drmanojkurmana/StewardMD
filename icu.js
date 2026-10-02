@@ -24,6 +24,11 @@
 
   /* ---------------------------------------------------------------- utils */
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen. Without
+  // SMD_PRIVACY_MODE these are plain esc(), so the markup is unchanged. pv() is for toast/confirm text only.
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  function phiIn(kind, text, v, from) { var P = window.SMD_PRIVACY_MODE; return P && v ? P.wrapIn(kind, text, v, from) : esc(text); }
+  function pv(kind, v) { var P = window.SMD_PRIVACY_MODE; return P ? P.screenText(kind, v) : String(v == null ? "" : v); }
   function nowTs() { return Date.now(); }
   // BUG B1 (2026-08-22 ward-round audit): every patient id used to be JUST nowTs() (or a fallback
   // to it), so two patients admitted in the same millisecond collided into ONE record — reproduced:
@@ -889,14 +894,14 @@
     // the manual Save button a per-row confirm() would be the wrong interruption — surface the
     // clash as a toast instead and let the import proceed; the clinician still sees it happened.
     var clash = bedHolder(r, String(entry.bed || "").trim(), id);
-    if (clash && window.toast) toast("Bed " + entry.bed + " is now shared with " + (clash.name || "another patient"));
+    if (clash && window.toast) toast("Bed " + entry.bed + " is now shared with " + (clash.name ? pv("name", clash.name) : "another patient"));
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
     if (!found) r.push(entry);
     // BUG B4: same reasoning as the bed-clash toast above — a bulk import can't stop for a
     // confirm() per row, so name the dropped patient in a toast instead of evicting them silently.
     if (!found && r.length > MAX_CASES) {
       var evicted = r.slice().sort(function (a, b) { return (a.savedAt || 0) - (b.savedAt || 0); })[0];
-      if (evicted && evicted.id !== id && window.toast) toast((evicted.name || "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
+      if (evicted && evicted.id !== id && window.toast) toast((evicted.name ? pv("name", evicted.name) : "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
     }
     saveRoster(capTen(r));
     try { if (ICU.isOpen()) paint(); } catch (e) {}
@@ -2140,7 +2145,7 @@
         : (aiMode
           ? ico("camera","📷") + ' Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
           : ico("camera","📷") + ' Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>')) + ' Nothing is added until you confirm.</div>' +
-      (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
+      (dataUrl ? '<img class="icu-imp-thumb" data-phi-img src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
     smdOcrOverlay(el);
@@ -2218,7 +2223,7 @@
     ) : "";
     el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values' + (note ? ' <span style="font:600 11px var(--font);color:var(--muted)">· ' + esc(note) + '</span>' : '') + '<button class="icu-imp-x" id="icuImpX" aria-label="Close">' + ico("close","✕") + '</button></div>' +
       '<div class="icu-imp-note">' + (aiMode ? ico("camera","📷") + ' Read from your report(s) — <b>verify every value</b> before applying.' : ico("camera","📷") + ' Tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
-      (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
+      (dataUrl ? '<img class="icu-imp-thumb" data-phi-img src="' + dataUrl + '">' : "") +
       '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">' + ico("check","✓") + ' Add to patient context</button></div></div>';
     smdOcrOverlay(el);
@@ -4005,7 +4010,7 @@
     if (!hasData()) return "";
     var p = _raw.patient || {}, lv = mergedVitals(_raw.vitals), mp = curMap();
     var press = (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); });
-    var parts = ['<b>' + esc(p.name || "ICU patient") + "</b>"];
+    var parts = ['<b>' + phi("name", p.name, esc(p.name || "ICU patient")) + "</b>"];
     if (p.icuDay != null) parts.push("ICU day " + esc(p.icuDay));
     if (mp != null) parts.push('<span class="' + (mp < 65 ? "bad" : "") + '">MAP ' + esc(mp) + "</span>");
     if (lv.lactate != null) parts.push('<span class="' + (lv.lactate > 2 ? "bad" : "") + '">Lactate ' + esc(lv.lactate) + "</span>");
@@ -4228,7 +4233,7 @@
     var p = _raw.patient || {}, sev = v2Severity(_raw), snap = v2Snapshot(_raw);
     var meta = [];
     if (p.bed) meta.push("Bed " + esc(p.bed));
-    if (p.mrn) meta.push(esc(mrDisplay(p.mrn)));
+    if (p.mrn) meta.push(phi("id", p.mrn, esc(mrDisplay(p.mrn))));
     if (p.age != null) meta.push(esc(p.age) + (p.sex ? "/" + esc(p.sex) : ""));
     if (p.icuDay != null) meta.push("ICU day " + esc(p.icuDay));
     if (p.dept) meta.push(esc(p.dept));
@@ -4249,7 +4254,7 @@
     return '<div class="icu-v2-banner ' + sev + '"><div class="icu-v2-banner-top">' +
       '<button class="icu-v2-back" data-icu-act="icuboard" aria-label="Back to unit board">‹</button>' +
       '<div class="icu-v2-banner-id">' +
-        '<div class="icu-v2-banner-nm">' + esc(p.name || "ICU patient") + '<span class="icu-v2-banner-pill">' + V2_LABEL[sev] + '</span></div>' +
+        '<div class="icu-v2-banner-nm">' + phi("name", p.name, esc(p.name || "ICU patient")) + '<span class="icu-v2-banner-pill">' + V2_LABEL[sev] + '</span></div>' +
         '<div class="icu-v2-banner-meta">' + (meta.length ? meta.join(" · ") : "Add patient details") + '</div>' +
         (flags.length ? '<div class="icu-v2-banner-flags">' + flags.join("") + '</div>' : '') +
       '</div>' +
@@ -4355,7 +4360,7 @@
       ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
           return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="' + actPrefix + ':' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
             '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
-            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
+            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + phi("name", p.name, esc(p.name || "Patient")) + '</div>' +
             '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || v2ReasonFallback(p)) + '</div></button>';
         }).join("") + '</div>'
       : "";
@@ -4371,7 +4376,7 @@
       var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
       var cardBtn = '<button class="icu-v2-card ' + p.sev + '" data-icu-act="' + actPrefix + ':' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
-        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
+        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + phi("name", p.name, esc(p.name || "Patient")) + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
         '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
         '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
         '<div class="icu-v2-vstrip">' + vits.map(function (v) {
@@ -4467,7 +4472,8 @@
     var list = v2BoardListActive(), rows = [];
     list.forEach(function (p) {
       if (p.sev === "stable") return;
-      rows.push({ id: p.id, sev: p.sev, title: V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · " + (p.name || "Patient"), body: v2Reason(p.snap) || v2ReasonFallback(p) });
+      var pre = V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · ";
+      rows.push({ id: p.id, sev: p.sev, title: pre + (p.name || "Patient"), th: esc(pre) + phi("name", p.name, esc(p.name || "Patient")), body: v2Reason(p.snap) || v2ReasonFallback(p) });
     });
     rows.sort(function (a, b) { return (a.sev === "critical" ? 0 : 1) - (b.sev === "critical" ? 0 : 1); });
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
@@ -4477,7 +4483,7 @@
     var body = rows.length ? rows.map(function (r) {
       return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.sev === "critical" ? "Urgent: " : "") + r.title + ". " + (r.body || "") + " — open patient") + '">' +
         '<span class="icu-v2-alert-ic" aria-hidden="true">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
-        '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + esc(r.title) + (r.sev === "critical" ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
+        '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + (r.th || esc(r.title)) + (r.sev === "critical" ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
         '<span class="icu-v2-alert-b">' + esc(r.body) + '</span></span></button>';
     }).join("") : '<div class="icu-v2-empty2">No active alerts across your patients.</div>';
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + note + body + '</div></div>';
@@ -5083,7 +5089,7 @@
       ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
           return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
             '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
-            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
+            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + phi("name", p.name, esc(p.name || "Patient")) + '</div>' +
             '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || v2ReasonFallback(p)) + '</div></button>';
         }).join("") + '</div>'
       : "";
@@ -5102,7 +5108,7 @@
       var footAgo = esc(fmtAgo((lu && lu.at) || p.savedAt) || fmtWhen((lu && lu.at) || p.savedAt));
       return v2SwipeRow(p.id, '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
-        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
+        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + phi("name", p.name, esc(p.name || "Patient")) + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
         '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
         '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
         '<div class="icu-v2-vstrip">' + vits.map(function (v) {
@@ -5776,14 +5782,16 @@
     var openId = (ptVM && ptVM.patient && ptVM.patient.id) || null, byId = {};
     patients.forEach(function (p) { byId[p.id] = p; });
     function label(p) { return "Bed " + (p.bed || "—") + " · " + (p.name || "Patient"); }
+    // where the name starts in label(p), so the screen can wrap exactly it for privacy mode
+    function nmAt(p) { return ("Bed " + (p.bed || "—") + " · ").length; }
     var rows = [];
     patients.forEach(function (p) {
       var ts = (p.lastUpdate && p.lastUpdate.at) || p.reviewedAt || p.savedAt || now;
-      if (p.sev === "critical") rows.push({ key: "crit:" + p.id + ":" + ts, id: p.id, urgent: true, icon: "⚠️", title: label(p) + " — Critical", body: p.reason || "Deterioration — review this patient", ts: ts });
-      if (p.assignedTo && p.assignedTo === myUid) rows.push({ key: "assign:" + p.id, id: p.id, urgent: false, icon: "🩺", title: label(p) + " — Assigned to you", body: "You are the named clinician for this patient", ts: ts });
+      if (p.sev === "critical") rows.push({ key: "crit:" + p.id + ":" + ts, id: p.id, urgent: true, icon: "⚠️", nm: p.name, nmAt: nmAt(p), title: label(p) + " — Critical", body: p.reason || "Deterioration — review this patient", ts: ts });
+      if (p.assignedTo && p.assignedTo === myUid) rows.push({ key: "assign:" + p.id, id: p.id, urgent: false, icon: "🩺", nm: p.name, nmAt: nmAt(p), title: label(p) + " — Assigned to you", body: "You are the named clinician for this patient", ts: ts });
       // "What changed" from the doc's lastUpdate — skip the OPEN patient (its rich timeline is used).
       if (p.id !== openId && p.lastUpdate && p.lastUpdate.text && !/^updated patient$/i.test(p.lastUpdate.text))
-        rows.push({ key: "lu:" + p.id + ":" + ts, id: p.id, urgent: false, icon: grpNotifIcon(p.lastUpdate.text), title: label(p) + " — " + p.lastUpdate.text, body: (p.lastUpdate.byName ? "by " + p.lastUpdate.byName : "Updated"), ts: ts });
+        rows.push({ key: "lu:" + p.id + ":" + ts, id: p.id, urgent: false, icon: grpNotifIcon(p.lastUpdate.text), nm: p.name, nmAt: nmAt(p), title: label(p) + " — " + p.lastUpdate.text, body: (p.lastUpdate.byName ? "by " + p.lastUpdate.byName : "Updated"), ts: ts });
     });
     if (ptVM && openId && byId[openId]) {
       var op = byId[openId];
@@ -5791,13 +5799,13 @@
         // OVERDUE instruction — urgent alert for the whole team (fires a device notification via the
         // tick). Body flags whether the resident has explained the delay yet.
         if (t.dueAt && t.status !== "done" && now > t.dueAt)
-          rows.push({ key: "overdue:" + t.id, id: openId, urgent: true, icon: "⏰", title: label(op) + " — Task overdue", body: (t.text || "task") + " · " + ((TASK_PRIORITY[t.priority] || {}).label || "") + (t.explanation ? " · explained" : " · explanation needed"), ts: t.dueAt });
-        if (t.assignedTo === myUid && t.status !== "done") rows.push({ key: "task:" + t.id, id: openId, urgent: true, icon: "🩺", title: label(op) + " — Instruction for you", body: t.text || "", ts: t.ts || now });
-        else if (t.status === "done" && t.completedAt) rows.push({ key: "taskdone:" + t.id, id: openId, urgent: false, icon: "✅", title: label(op) + " — Task completed", body: (t.text || "") + (t.completedByName ? " · by " + t.completedByName : ""), ts: t.completedAt });
+          rows.push({ key: "overdue:" + t.id, id: openId, urgent: true, icon: "⏰", nm: op.name, nmAt: nmAt(op), title: label(op) + " — Task overdue", body: (t.text || "task") + " · " + ((TASK_PRIORITY[t.priority] || {}).label || "") + (t.explanation ? " · explained" : " · explanation needed"), ts: t.dueAt });
+        if (t.assignedTo === myUid && t.status !== "done") rows.push({ key: "task:" + t.id, id: openId, urgent: true, icon: "🩺", nm: op.name, nmAt: nmAt(op), title: label(op) + " — Instruction for you", body: t.text || "", ts: t.ts || now });
+        else if (t.status === "done" && t.completedAt) rows.push({ key: "taskdone:" + t.id, id: openId, urgent: false, icon: "✅", nm: op.name, nmAt: nmAt(op), title: label(op) + " — Task completed", body: (t.text || "") + (t.completedByName ? " · by " + t.completedByName : ""), ts: t.completedAt });
       });
       (ptVM.timeline || []).forEach(function (e) {
         var m = grpNotifFromEvent(e); if (!m) return;
-        rows.push({ key: "tl:" + e.id, id: openId, urgent: false, icon: m.icon, title: label(op) + " — " + m.title, body: e.detail || "", ts: e.ts || now });
+        rows.push({ key: "tl:" + e.id, id: openId, urgent: false, icon: m.icon, nm: op.name, nmAt: nmAt(op), title: label(op) + " — " + m.title, body: e.detail || "", ts: e.ts || now });
       });
     }
     rows.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
@@ -5832,7 +5840,7 @@
       for (var i = 0; i < rows.length; i++) {
         var r = rows[i];
         if (r.urgent && (r.ts || 0) > _grpNotifiedTs) {
-          window.SMD_localNotify("⚠ " + (r.title || "ICU alert"), r.body || "Review this patient", "/");
+          window.SMD_localNotify("⚠ " + (r.nm && window.SMD_PRIVACY_MODE && SMD_PRIVACY_MODE.isOn() ? (r.title || "").split(r.nm).join(pv("name", r.nm)) : (r.title || "ICU alert")), r.body || "Review this patient", "/");
           if ((r.ts || 0) > newest) newest = r.ts || 0;
           break;   // one per tick — the in-app feed carries the rest
         }
@@ -6119,7 +6127,7 @@
       var fresh = (r.ts || 0) > seen;
       return '<button class="icu-v2-alert-row ' + (r.urgent ? "critical" : "review") + (fresh ? " fresh" : "") + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.urgent ? "Urgent: " : "") + (fresh ? "New. " : "") + r.title + (r.body ? ". " + r.body : "") + " — open patient") + '">' +
         '<span class="icu-v2-alert-ic" aria-hidden="true">' + esc(r.icon || "🔔") + '</span>' +
-        '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + esc(r.title) + (r.urgent ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
+        '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + (r.nm ? phiIn("name", r.title, r.nm, r.nmAt) : esc(r.title)) + (r.urgent ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
         (r.body ? '<span class="icu-v2-alert-b">' + esc(r.body) + '</span>' : "") +
         '<span class="icu-v2-alert-ago">' + esc(fmtAgo(r.ts) || fmtWhen(r.ts) || "") + '</span></span></button>';
     }).join("") : '<div class="icu-v2-empty2">No new alerts. Critical changes, consultant instructions, completed tasks and new investigations will appear here.</div>';
@@ -6172,7 +6180,7 @@
     var bed = pt.bed || p.bed || "—", nm = pt.name || p.name || "Patient";
     var instr = grpCanInstruct(_grp && _grp.myRole);
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="grproundback" aria-label="Back to rounds">‹</button>' +
-      '<div><div class="icu-v2-shead-h">Add round note</div><div class="icu-v2-shead-s">Bed ' + esc(bed) + ' · ' + esc(nm) + '</div></div></div>';
+      '<div><div class="icu-v2-shead-h">Add round note</div><div class="icu-v2-shead-s">Bed ' + esc(bed) + ' · ' + phi("name", pt.name || p.name, esc(nm)) + '</div></div></div>';
     var intro = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Tap an order — each becomes a tracked task at your chosen priority. Add your own below, and optionally log it under the consultant who gave it.</div>';
     var errNote = _grpErr ? '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") + ' ' + esc(_grpErr) + '</div>' : "";
     var prio = priorityPickerHTML();
@@ -6356,7 +6364,7 @@
       var inp;
       if (f.t === "select") inp = '<select data-k="' + f.k + '"' + attrs + '>' + f.opts.map(function (o) { return '<option' + (String(o) === String(v) ? " selected" : "") + ">" + esc(o || "—") + "</option>"; }).join("") + "</select>";
       else if (f.t === "textarea") inp = '<textarea data-k="' + f.k + '"' + attrs + ' rows="5" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(v) + "</textarea>";
-      else inp = '<input data-k="' + f.k + '"' + attrs + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
+      else inp = '<input data-k="' + f.k + '"' + attrs + (domain === "patient" && (f.k === "name" || f.k === "mrn") ? " data-phi-input" : "") + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
       return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label for="' + fid + '">' + al + "</label>" + inp + "</div>";
     }).join("");
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(F.title) + '</h3>' +
@@ -6695,12 +6703,12 @@
       var inp;
       if (f.t === "select") inp = '<select data-pk="' + f.k + '"' + attrs + '>' + f.opts.map(function (o) { return '<option' + (String(o) === String(v) ? " selected" : "") + ">" + esc(o || "—") + "</option>"; }).join("") + "</select>";
       else if (f.t === "textarea") inp = '<textarea data-pk="' + f.k + '"' + attrs + ' rows="3" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(v) + "</textarea>";
-      else inp = '<input data-pk="' + f.k + '"' + attrs + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
+      else inp = '<input data-pk="' + f.k + '"' + attrs + (f.k === "name" || f.k === "mrn" ? " data-phi-input" : "") + ' type="' + (f.t === "number" ? "number" : "text") + '" step="any"' + (f.t === "number" ? ' inputmode="decimal"' : "") + ' value="' + esc(v) + '">';
       return '<div class="icu-fld" style="' + (f.wide ? "grid-column:1/-1" : "") + '"><label for="' + fid + '">' + al + "</label>" + inp + "</div>";
     }).join("");
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("user", "🧑") + ' Review captured patient details</h3>' +
       '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Read from the photo — verify every field (especially name, age, sex and MRN) before saving. Blank fields were not found; fill them in if you have them. Nothing is applied until you save.</p>' +
-      (dataUrl ? '<img src="' + dataUrl + '" style="max-width:100%;max-height:160px;border-radius:10px;margin-bottom:10px;display:block;object-fit:contain">' : "") +
+      (dataUrl ? '<img data-phi-img src="' + dataUrl + '" style="max-width:100%;max-height:160px;border-radius:10px;margin-bottom:10px;display:block;object-fit:contain">' : "") +
       '<div class="icu-grid2">' + rowsHTML + "</div>" +
       '<button class="icu-btn" data-icu-act="savepatientcap">' + ico("check", "✓") + ' Save to patient</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
     modalEl.classList.add("on");
@@ -6744,7 +6752,7 @@
   function saveRoundNote(k) { if (!modalEl) return; var ta = modalEl.querySelector("[data-k=note]"); var cur = _raw.rounds[k] || {}; STATE.rounds[k] = { done: !!cur.done, note: ta ? ta.value : "" }; closeForm(); }
   function openSummary() {
     ensureModal();
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Daily ICU Summary</h3><pre id="icuSummaryText" style="white-space:pre-wrap;font:500 12.5px/1.55 var(--mono);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--ink);max-height:52vh;overflow:auto">' + esc(buildSummary()) + "</pre>" +
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Daily ICU Summary</h3><pre id="icuSummaryText" style="white-space:pre-wrap;font:500 12.5px/1.55 var(--mono);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--ink);max-height:52vh;overflow:auto">' + (function () { var sm = buildSummary(); return phiIn("name", sm, (_raw.patient || {}).name, sm.indexOf("\n") + 1); })() + "</pre>" +
       '<button class="icu-btn" data-icu-act="copysummary">📋 Copy</button>' +
       '<button class="icu-btn" data-icu-act="sharecase">📤 Share</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
@@ -6832,6 +6840,12 @@
     return d;
   }
   var _dischargeDefaults = {};
+  // The same line as dischargeHeaderLine, as markup with the name and MR wrapped for privacy mode.
+  function dischargeHeaderHtml(p) {
+    return phi("name", p.name, esc(p.name || (ctxLabel() + " patient"))) + esc((p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "")) +
+      (p.mrn ? " · " + phi("id", p.mrn, esc(mrDisplay(p.mrn))) : "") +
+      esc((p.bed ? " · Bed " + p.bed : "") + (_unit.type ? " · " + _unit.type : "") + (p.hospital || _unit.hospital ? " · " + (p.hospital || _unit.hospital) : ""));
+  }
   function dischargeHeaderLine(p) {
     return (p.name || (ctxLabel() + " patient")) + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") +
       (p.mrn ? " · " + mrDisplay(p.mrn) : "") +
@@ -6890,7 +6904,7 @@
       return '<div class="icu-fld" style="' + (fl.wide ? "grid-column:1/-1" : "") + '"><label for="' + fid + '">' + al + '</label>' + inp + '</div>';
     }).join("");
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("rounds", "📝") + ' Discharge Creator <span style="font:700 11px var(--font);color:var(--warn);background:var(--warn-soft);padding:2px 7px;border-radius:999px;vertical-align:middle">DRAFT</span></h3>' +
-      '<div style="font:700 14px var(--font);color:var(--ink);margin:-2px 0 2px">' + esc(dischargeHeaderLine(p)) + '</div>' +
+      '<div style="font:700 14px var(--font);color:var(--ink);margin:-2px 0 2px">' + dischargeHeaderHtml(p) + '</div>' +
       '<p class="icu-doc-sub" style="margin:0 0 12px">Auto-filled from recorded data (incl. discharge meds from the Treatment list). <b>Review &amp; complete every section</b>, then copy, print or share. Nothing is sent anywhere.</p>' +
       disAiBtn() +
       '<div class="icu-grid2">' + fieldsHTML + '</div>' +
@@ -8492,7 +8506,7 @@
     var rChk = loadRoster();
     if (bed) {
       var clash = bedHolder(rChk, bed, id);
-      if (clash && !window.confirm("Bed " + bed + " is already assigned to " + (clash.name || "another patient") + ". Save anyway?")) return;
+      if (clash && !window.confirm("Bed " + bed + " is already assigned to " + (clash.name ? pv("name", clash.name) : "another patient") + ". Save anyway?")) return;
     }
     // BUG B4 (2026-08-22 ward-round audit): saving past MAX_CASES used to silently drop the oldest
     // saved patient's full record (vitals/labs/notes) with nothing said — a doctor could lose an
@@ -8502,7 +8516,7 @@
     var isNewCase = !rChk.some(function (p) { return p.id === id; });
     if (isNewCase && rChk.length >= MAX_CASES) {
       var oldest = rChk.slice().sort(function (a, b) { return (a.savedAt || 0) - (b.savedAt || 0); })[0];
-      if (!window.confirm("You already have " + MAX_CASES + " saved patients (the maximum). Saving this one will remove " + (oldest && oldest.name ? oldest.name : "the oldest saved patient") + "'s saved record. Continue?")) return;
+      if (!window.confirm("You already have " + MAX_CASES + " saved patients (the maximum). Saving this one will remove " + (oldest && oldest.name ? pv("name", oldest.name) : "the oldest saved patient") + "'s saved record. Continue?")) return;
     }
     STATE.patient._id = id;                                  // reactive write persists live state
     var snap = clone(_raw); snap.alerts = [];                // derived; recomputed on load
@@ -8541,10 +8555,10 @@
   function loadPatient(id) {
     var r = loadRoster(), e = null, i;
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { e = r[i]; break; } }
-    if (e && e.state) { applyState(e.state, id); if (window.toast) toast("Loaded " + (e.name || "patient")); return; }
+    if (e && e.state) { applyState(e.state, id); if (window.toast) toast("Loaded " + (e.name ? pv("name", e.name) : "patient")); return; }
     // not held locally → pull the full case from the cloud
     cloudGet(id).then(function (j) {
-      if (j && j.case && j.case.state) { applyState(j.case.state, id); if (window.toast) toast("Loaded " + (j.case.name || "patient")); }
+      if (j && j.case && j.case.state) { applyState(j.case.state, id); if (window.toast) toast("Loaded " + (j.case.name ? pv("name", j.case.name) : "patient")); }
       else if (window.toast) toast("Couldn't load that case");
     });
   }
@@ -8575,7 +8589,7 @@
   function dischargePatient() {
     ensureModal();
     var nm = (_raw.patient && _raw.patient.name) || "this patient";
-    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Discharge or remove patient"><h3>' + ico("trash", "🗑") + ' Discharge / remove ' + esc(nm) + '?</h3>' +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Discharge or remove patient"><h3>' + ico("trash", "🗑") + ' Discharge / remove ' + phi("name", _raw.patient && _raw.patient.name, esc(nm)) + '?</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 14px">Removes this patient from your ICU board and your saved patients on this device (and your cloud copy). This cannot be undone — export or share the case first if you need a record.</p>' +
       '<button class="icu-btn" data-icu-act="dischargeptgo" style="background:var(--danger);background-image:none;box-shadow:none">' + ico("trash", "🗑") + ' Remove patient</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
@@ -8595,7 +8609,7 @@
     if (!api || !grpActive() || !_grpPtId || !api.removePatient) return;
     if (!(api.canInstruct && api.canInstruct(_grp && _grp.myRole))) { if (window.toast) toast("Only instructing roles can remove a patient"); return; }
     var nm = (_raw.patient && _raw.patient.name) || "this patient";
-    if (!window.confirm("Remove " + nm + " from " + ((_grp && _grp.name) || "the unit") + " for everyone? This cannot be undone.")) return;
+    if (!window.confirm("Remove " + (nm === "this patient" ? nm : pv("name", nm)) + " from " + ((_grp && _grp.name) || "the unit") + " for everyone? This cannot be undone.")) return;
     var gid = _grp.id, pid = _grpPtId;
     api.removePatient(gid, pid).then(function () {
       if (window.toast) toast("Patient removed from unit");
@@ -8616,7 +8630,7 @@
       var skey = ((e.name || "") + " " + (e.dx || "") + " " + (e.bed || "") + " " + mrn + " " + (e.id || "")).toLowerCase();
       return '<div class="icu-row" data-s="' + esc(skey) + '" style="align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">' +
         '<button data-icu-act="loadpt:' + esc(e.id) + '" style="flex:1;text-align:left;border:none;background:none;cursor:pointer;color:var(--ink)">' +
-          '<div style="font:800 14px var(--font)">' + esc(e.name || "Unnamed") + (cur ? ' <span style="color:var(--primary);font-size:11px">• current</span>' : "") + '</div>' +
+          '<div style="font:800 14px var(--font)">' + phi("name", e.name, esc(e.name || "Unnamed")) + (cur ? ' <span style="color:var(--primary);font-size:11px">• current</span>' : "") + '</div>' +
           '<div style="font:600 12px var(--font);color:var(--muted)">' + (e.dx ? esc(e.dx) : "No diagnosis") + (e.bed ? " · Bed " + esc(e.bed) : "") + " · " + esc(fmtWhen(e.savedAt)) + '</div>' +
         '</button>' +
         '<button data-icu-act="sharept:' + esc(e.id) + '" aria-label="Share case" title="Share" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:15px;padding:6px">📤</button>' +
@@ -8768,7 +8782,7 @@
       if (!canDel) note = '<p class="icu-doc-sub" style="margin:0 0 10px;color:var(--warn)">Only instructing roles can remove a patient from a shared unit.</p>';
     }
     var eid = encodeURIComponent(id);
-    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Discharge or remove patient"><h3>' + ico("trash", "🗑") + ' ' + esc(nm) + '</h3>' +
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Discharge or remove patient"><h3>' + ico("trash", "🗑") + ' ' + phi("name", p.name, esc(nm)) + '</h3>' +
       '<p class="icu-doc-sub" style="margin:0 0 14px">' + (p.bed ? "Bed " + esc(p.bed) + " · " : "") + 'Write a discharge summary first, or clear this patient from the board. Clearing cannot be undone.</p>' + note +
       '<button class="icu-btn" data-icu-act="ptswdis:' + eid + '">' + ico("rounds", "📝") + ' Discharge — write summary</button>' +
       (canDel ? '<button class="icu-btn ghost" data-icu-act="ptswrm:' + eid + '" style="margin-top:8px;color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Clear patient from board</button>' : "") +
@@ -9630,11 +9644,14 @@
         }
         // Critical value → alert the WHOLE unit immediately (Tier-1 push, bypasses prefs). One push per
         // critical analyte in this burst; server excludes the author + falls back to solo verifiability.
+        var critBuzz = false;
         for (var ci = 0; ci < events.length; ci++) {
           if (events[ci] && events[ci].type === "critical" && events[ci].crit) {
             try { grpNotifyCritical(_grp.id, _grpPtId, events[ci].crit); } catch (e) {}
+            critBuzz = true;
           }
         }
+        if (critBuzz) { try { if (window.SMD_HAPTICS) window.SMD_HAPTICS.warning(); } catch (e) {} }   // one buzz per burst
       } catch (e) {}
     }, 1500);
   });

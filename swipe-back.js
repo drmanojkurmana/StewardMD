@@ -321,24 +321,47 @@
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
-    var sx = 0, sy = 0, t0 = 0, tracking = false, dragging = false, dragEl = null, curDx = 0;
-    var DIST = 70, EDGE = 30, MAXTIME = 800;                  // start ≤30px from the left edge; ≥70px (or 32% width) completes
+    var sx = 0, sy = 0, t0 = 0, tracking = false, dragging = false, dragEl = null, curDx = 0, finishing = false;
+    var lx = 0, lt = 0, vx = 0;                               // last sample + smoothed finger velocity (px/ms)
+    var DIST = 70, EDGE = 30, MAXTIME = 800;                  // start <=30px from the left edge; >=70px (or 32% width) completes
+    var DRAWER = "cubic-bezier(0.32,0.72,0,1)";               // iOS-like settle curve
     function vw() { return window.innerWidth || 360; }
+    // smd_swipe_depth=0 restores the previous gesture exactly (old .18s ease settle, distance-only commit).
+    function depthOn() { try { return window.localStorage.getItem("smd_swipe_depth") !== "0"; } catch (e) { return true; } }
+    /* @pure-begin */
+    // Commit rule: far enough, OR a quick rightward flick that has moved a little. A flick back
+    // toward the edge (negative velocity) cancels even when far, like iOS.
+    function swipeCommit(dx, dt, vx, w, depth) {
+      if (!depth) return dx >= w * 0.32 || (dx >= 70 && dt <= 800);
+      if (vx < -0.3) return false;
+      return dx >= w * 0.4 || (vx > 0.35 && dx >= 24) || (dx >= 70 && dt <= 800 && vx >= 0);
+    }
+    /* @pure-end */
     function setX(el, x, anim) {
       if (!el) return;
-      el.style.transition = anim ? "transform .18s ease" : "none";
+      el.style.transition = anim ? "transform " + (depthOn() ? ".26s " + DRAWER : ".18s ease") : "none";
       el.style.transform = x ? ("translateX(" + x + "px)") : "";
       el.style.boxShadow = x ? "-14px 0 34px -12px rgba(0,0,0,.45)" : "";
     }
+    function clearEl(el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} }
     function endDrag(complete) {
       var el = dragEl; dragging = false; dragEl = null;
-      if (complete) { edgeSwipeAction(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
-      else if (el) { setX(el, 0, true); setTimeout(function () { try { el.style.transition = ""; } catch (e) {} }, 220); }
+      if (complete) {
+        if (el && depthOn()) {
+          // Finish the slide off-screen on the drawer curve, THEN go back, so the screen is not yanked.
+          finishing = true; setX(el, vw(), true);
+          setTimeout(function () { finishing = false; edgeSwipeAction(); clearEl(el); setTimeout(syncHandle, 80); }, 200);
+          return;
+        }
+        edgeSwipeAction(); if (el) clearEl(el); setTimeout(syncHandle, 80);
+      }
+      else if (el) { setX(el, 0, true); setTimeout(function () { try { if (dragEl !== el && el.style.transition !== "none") el.style.transition = ""; } catch (e) {} }, 300); }
     }
     document.addEventListener("touchstart", function (e) {
-      dragging = false; dragEl = null; curDx = 0; tracking = false;
+      if (finishing) return;
+      dragging = false; dragEl = null; curDx = 0; tracking = false; vx = 0;
       if (e.touches.length !== 1) return;
-      var t = e.touches[0]; sx = t.clientX; sy = t.clientY; t0 = Date.now();
+      var t = e.touches[0]; sx = t.clientX; sy = t.clientY; t0 = Date.now(); lx = sx; lt = t0;
       if (sx > EDGE || inHScroll(e.target)) return;           // only a left-edge start can be a back-swipe
       tracking = true;
       var ctrl = topBackControl(); dragEl = ctrl ? overlayRootOf(ctrl) : null;
@@ -353,6 +376,8 @@
         dragging = true;
       }
       curDx = Math.max(0, dx);
+      var nt = Date.now();
+      if (nt > lt) { vx = vx * 0.6 + ((t.clientX - lx) / (nt - lt)) * 0.4; lx = t.clientX; lt = nt; }
       if (dragEl) { setX(dragEl, curDx, false); if (e.cancelable) e.preventDefault(); }   // own the horizontal drag
     }, { passive: false });
     // The SYSTEM can claim a gesture mid-stream — Android's edge back-gesture does exactly this — and
@@ -367,7 +392,7 @@
       if (!tracking) return; tracking = false;
       var t = e.changedTouches && e.changedTouches[0], dt = Date.now() - t0;
       var dx = t ? (t.clientX - sx) : curDx;
-      var far = curDx >= vw() * 0.32 || (dx >= DIST && dt <= MAXTIME);
+      var far = swipeCommit(dx, dt, vx, vw(), depthOn());
       if (dragging) endDrag(far);
       else if (far) edgeSwipeAction();                          // valid edge flick with no draggable overlay (at home: opens the menu)
     }, { passive: true });

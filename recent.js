@@ -123,7 +123,7 @@
     if (window.DX && window.DX.restore) window.DX.restore({ findings: findings, caseId: snap.caseId });
   }
 
-  window.SMD_RECENT = { record: record, newId: newId, get: get, open: open, clear: clear, onChange: onChange, MAX: MAX };
+  window.SMD_RECENT = { record: record, newId: newId, get: get, open: open, clear: clear, onChange: onChange, MAX: MAX, titleHtml: titleHtml, summaryHtml: summaryHtml };
 
   /* ---------------- capture: Clinical decision (classic engine → #outputArea) ---------------- */
   // We can't edit the minified classic engine, so we observe its result surface.
@@ -192,6 +192,18 @@
     icu: { icon: "hospital", label: "ICU", color: "#7C3AED" }
   };
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  /* Privacy mode (privacy-mode.js). Only ICU records carry a patient name, and icuSummary() writes it as the
+   * first " · " part of the summary (name · 45/M · diagnosis), and as the title when there is no diagnosis.
+   * That part is wrapped so it can be masked on screen; the stored record is not touched. A record with no
+   * name and no age leads with its diagnosis, which is then masked too (over-masking, never under). */
+  function recName(c) {
+    if (!c || c.feature !== "icu") return "";
+    var first = String(c.summary || "").split(" \u00b7 ")[0];
+    return first && first !== "ICU case" && !/^\d+(\/[A-Z])?$/.test(first) ? first : "";
+  }
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  function titleHtml(c, fallback) { var n = recName(c), t = (c && c.title) || fallback || ""; return n && t === n ? phi("name", n) : esc(t); }
+  function summaryHtml(c) { var n = recName(c), s = (c && c.summary) || ""; return n && s.indexOf(n) === 0 ? phi("name", n) + esc(s.slice(n.length)) : esc(s); }
   function ago(ts) {
     var s = Math.max(0, Math.round((Date.now() - ts) / 1000));
     if (s < 60) return "just now";
@@ -254,8 +266,8 @@
       return '<button class="rc-card" data-cid="' + esc(c.caseId) + '" style="border-left-color:' + f.color + '">' +
         '<span class="rc-ic" style="color:' + f.color + '">' + rcIco(f.icon) + '</span>' +
         '<span class="rc-main"><span class="rc-feat" style="color:' + f.color + '">' + esc(f.label) + '</span>' +
-        '<span class="rc-title">' + esc(c.title || f.label) + '</span>' +
-        (c.summary ? '<span class="rc-sub">' + esc(c.summary) + '</span>' : '') + '</span>' +
+        '<span class="rc-title">' + titleHtml(c, f.label) + '</span>' +
+        (c.summary ? '<span class="rc-sub">' + summaryHtml(c) + '</span>' : '') + '</span>' +
         '<span class="rc-time">' + ago(c.ts) + '</span></button>';
     }).join("");
     el.querySelectorAll(".rc-card").forEach(function (b) {

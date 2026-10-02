@@ -78,8 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        // Not called: this app uses the UIScene lifecycle (Info.plist UIApplicationSceneManifest), so
+        // UIKit sends resign/become-active to SceneDelegate. The app-switcher privacy cover lives there.
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -140,6 +140,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
+        // Same launch color as LaunchScreen.storyboard and MainViewController (owner decision
+        // 2026-10-03: follows system light/dark), so no black shows behind the web view at launch or
+        // in the corners while the antibiogram grid rotates.
+        window.backgroundColor = UIColor(named: "LaunchBackground")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window.rootViewController = storyboard.instantiateInitialViewController()
         window.makeKeyAndVisible()
@@ -201,7 +205,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ = ApplicationDelegateProxy.shared.application(UIApplication.shared, continue: userActivity, restorationHandler: { _ in })
     }
 
+    // Patient privacy in the app switcher (owner decision 2026-10-03). iOS shows the window as it
+    // stands when the scene goes inactive (app switcher, Control Center, an incoming call) and keeps
+    // that snapshot after backgrounding, so a ward list or a note would sit there in full. A blur
+    // cover goes on top of everything as the scene resigns active and comes off on EVERY activation,
+    // so it can never be left stuck. Found again by tag; the guard stops a double cover.
+    static let privacyCoverTag = 0x534D_4450   // "SMDP"
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        guard let window = window, window.viewWithTag(SceneDelegate.privacyCoverTag) == nil else { return }
+        // Thickest of the adaptive system materials: nothing underneath should be readable.
+        let cover = UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))
+        cover.frame = window.bounds
+        cover.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        cover.tag = SceneDelegate.privacyCoverTag
+        window.addSubview(cover)
+    }
+
     func sceneDidBecomeActive(_ scene: UIScene) {
+        window?.viewWithTag(SceneDelegate.privacyCoverTag)?.removeFromSuperview()
         smdConsumePendingControlRoute()
     }
 }

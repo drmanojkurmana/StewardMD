@@ -27,6 +27,8 @@
   /* ---------------- helpers ---------------- */
   function clean(s) { return String(s == null ? "" : s).replace(/[–—−]/g, "-"); }
   function esc(s) { return clean(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  // Privacy mode (privacy-mode.js): wrap a patient name so it can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function fmt(v, dp) { if (v == null || !isFinite(v)) return ""; var p = Math.pow(10, dp == null ? 2 : dp); return (Math.round(v * p) / p).toLocaleString("en-IN", { maximumFractionDigits: dp == null ? 2 : dp }); }
   var cache = {}, pend = {};
   function data(name) {
@@ -254,7 +256,7 @@
     var list = [];
     try { list = (G.SMD_DOSECALC && G.SMD_DOSECALC.listPatients) ? G.SMD_DOSECALC.listPatients() : []; } catch (e) {}
     var scr = root.querySelector("[data-nh=screen]");
-    scr.innerHTML = '<section class="nh-card"><h3>Fill from a patient</h3>' + (list.length ? '<div class="nh-list">' + list.map(function (x, i) { return '<button type="button" class="nh-li" data-pi="' + i + '"><span>' + esc(x.label) + "<br><small>" + esc([x.src, x.sub].filter(Boolean).join(" · ")) + "</small></span></button>"; }).join("") + "</div>" : '<div class="nh-none">No ICU or OPD patient open on this device. Enter the baby by hand.</div>') + '<button type="button" class="nh-btn" data-nh="back2">Back</button></section>';
+    scr.innerHTML = '<section class="nh-card"><h3>Fill from a patient</h3>' + (list.length ? '<div class="nh-list">' + list.map(function (x, i) { return '<button type="button" class="nh-li" data-pi="' + i + '"><span>' + phi("name", x.label, esc(x.label)) + "<br><small>" + esc([x.src, x.sub].filter(Boolean).join(" · ")) + "</small></span></button>"; }).join("") + "</div>" : '<div class="nh-none">No ICU or OPD patient open on this device. Enter the baby by hand.</div>') + '<button type="button" class="nh-btn" data-nh="back2">Back</button></section>';
     scr._list = list;
   }
 

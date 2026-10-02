@@ -37,8 +37,10 @@ test("full redraw: first frame, any sync (theme, busy, visibility, sheet class),
   assert.match(A, /actualBoundingBoxAscent > CELL_T - m \|\| t\.actualBoundingBoxDescent > 20 - CELL_T - m\) return false;/);
 });
 
-test("the loop's run condition is unchanged (no figure-viewer pause)", () => {
-  assert.match(A, /function active\(\) \{ return !dead && sheet\.isConnected && sheet\.classList\.contains\('on'\) && !document\.hidden && !reduced\.matches; \}/);
+// Low Power Mode / Battery Saver joined the run condition on 2026-10-03 (owner-approved Premium-Feel
+// plan B10, power-state.js); the guard this test exists for, no figure-viewer pause, is unchanged.
+test("the loop's run condition: hidden, reduced motion, low power only (no figure-viewer pause)", () => {
+  assert.match(A, /function active\(\) \{ return !dead && sheet\.isConnected && sheet\.classList\.contains\('on'\) && !document\.hidden && !reduced\.matches && !\(window\.SMD_POWER && window\.SMD_POWER\.low\); \}/);
   assert.doesNotMatch(A, /maik-lb-on/);
 });
 

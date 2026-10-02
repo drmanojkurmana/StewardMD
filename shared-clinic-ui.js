@@ -19,6 +19,8 @@
   var _app = null;                       // live SMD_CLINIC_APP instance once unlocked
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  // Privacy mode (privacy-mode.js): identifiers wrapped so they can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function toast(m) { try { (G.toast || function () {})(m); } catch (e) {} }
   function rand() { try { return Math.floor(Math.random() * 1e9).toString(36); } catch (e) { return "0"; } }
   function uid(pre) { try { return pre + Date.now().toString(36) + rand(); } catch (e) { return pre + rand(); } }
@@ -132,8 +134,8 @@
         '<div class="sc-status' + (conf ? ' warn' : '') + '" data-sc="sync">' + esc(status) + '</div>' +
         '<button class="sc-add" data-sc="new">+ New patient</button>' +
         (pts.length ? '<div class="sc-list">' + pts.map(function (p) {
-          var sub = [p.age && (p.age + "y"), p.sex, p.phone].filter(Boolean).join(" · ");
-          return '<button class="sc-row" data-sc="open:' + esc(p.id) + '"><div class="sc-row-b"><span class="sc-row-n">' + esc(p.name) + '</span>' + (sub ? '<span class="sc-row-s">' + esc(sub) + '</span>' : "") + '</div><span class="sc-row-c">&#8250;</span></button>';
+          var sub = [p.age && esc(p.age + "y"), esc(p.sex), p.phone && phi("phone", p.phone)].filter(Boolean).join(" · ");
+          return '<button class="sc-row" data-sc="open:' + esc(p.id) + '"><div class="sc-row-b"><span class="sc-row-n">' + phi("name", p.name) + '</span>' + (sub ? '<span class="sc-row-s">' + sub + '</span>' : "") + '</div><span class="sc-row-c">&#8250;</span></button>';
         }).join("") + '</div>'
           : '<div class="sc-empty">No patients yet. Tap <b>+ New patient</b> to start. Everything syncs to your clinic devices.</div>') +
         '<div class="sc-foot">Shared across your clinic devices · encrypted · backed up to your clinic Google Drive</div>' +
@@ -145,10 +147,10 @@
     el.innerHTML =
       '<div class="sc-top"><button class="sc-ic" data-sc="list" aria-label="Back">&#8249;</button><div class="sc-ttl">New patient</div><span class="sc-ic"></span></div>' +
       '<div class="sc-body"><form id="scForm" class="sc-form">' +
-        '<label class="sc-f"><span>Name</span><input name="name" autocomplete="off" required></label>' +
+        '<label class="sc-f"><span>Name</span><input data-phi-input name="name" autocomplete="off" required></label>' +
         '<div class="sc-frow"><label class="sc-f"><span>Age</span><input name="age" inputmode="numeric"></label>' +
           '<label class="sc-f"><span>Sex</span><select name="sex"><option value="">-</option><option>Male</option><option>Female</option><option>Other</option></select></label></div>' +
-        '<label class="sc-f"><span>Phone</span><input name="phone" inputmode="tel" autocomplete="off"></label>' +
+        '<label class="sc-f"><span>Phone</span><input data-phi-input name="phone" inputmode="tel" autocomplete="off"></label>' +
         '<button class="sc-add" type="submit">Create + start consult</button>' +
       '</form></div>';
     bindForm("scForm", function (d) { if (!String(d.name || "").trim() || !_app) return; var id = _app.addPatient(d); openConsult(id); });

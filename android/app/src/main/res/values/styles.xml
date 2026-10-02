@@ -13,18 +13,21 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
-        <!-- White window behind the WebView so the moment between the system splash and the white
-             HTML splash stays white (never a dark flash), even in dark mode. -->
-        <item name="android:windowBackground">@android:color/white</item>
+        <!-- Window behind the WebView. Follows the system light/dark mode (owner decision 2026-10-03,
+             replacing the earlier always-white chain): white in light mode, the dark boot-splash
+             teal #08302B in dark mode, so the system splash, this window and the HTML splash read as
+             one surface. Color lives in values/ and values-night/colors.xml. -->
+        <item name="android:windowBackground">@color/launch_background</item>
     </style>
 
 
     <!-- Android requires a system launch surface, but it deliberately carries no mark. The first
-         visible StewardMD logo belongs to the animated HTML splash after the WebView has painted. -->
+         visible StewardMD logo belongs to the animated HTML splash after the WebView has painted.
+         The surface follows the system light/dark mode (owner decision 2026-10-03). -->
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@android:color/white</item>
+        <item name="windowSplashScreenBackground">@color/launch_background</item>
         <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
         <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
-        <item name="android:background">@android:color/white</item>
+        <item name="android:background">@color/launch_background</item>
     </style>
 </resources>

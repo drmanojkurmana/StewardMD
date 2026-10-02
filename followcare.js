@@ -581,8 +581,8 @@
     loadPathwaysThen(function (pw) {
       var sel = h("select", { onchange: function (e) { form.pathwayId = e.target.value; } }, [h("option", { value: "", text: "Select a recovery pathway…" })].concat(pw.map(function (p) { return h("option", { value: p.id, text: p.name }); })));
       if (form.pathwayId) sel.value = form.pathwayId;                                  // preselect mapped pathway
-      var phone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Patient mobile number", value: form.phone, oninput: function (e) { form.phone = e.target.value; } });
-      var name = h("input", { type: "text", placeholder: "Patient name (optional)", value: form.name, oninput: function (e) { form.name = e.target.value; } });
+      var phone = h("input", { type: "tel", inputmode: "numeric", "data-phi-input": "", placeholder: "Patient mobile number", value: form.phone, oninput: function (e) { form.phone = e.target.value; } });
+      var name = h("input", { type: "text", "data-phi-input": "", placeholder: "Patient name (optional)", value: form.name, oninput: function (e) { form.name = e.target.value; } });
       var disc = h("input", { type: "date", value: (form.dischargeMs ? isoDate(form.dischargeMs) : ""), oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
       // "When to follow up" — the doctor sets when the FIRST check-in fires; the rest of the pathway follows
       // at its normal spacing. Empty = the pathway's own timing (unchanged default).
@@ -600,7 +600,7 @@
                    : [h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })]));
       lang.value = form.lang;
       // DPDP §9: enrolling a minor routes ALL messaging to a guardian's phone.
-      var guardianField = h("div", { "class": "fc-field", style: "display:none" }, [h("label", { text: "Guardian's mobile number" }), h("input", { type: "tel", inputmode: "numeric", placeholder: "Guardian mobile (required for a minor)", oninput: function (e) { form.guardianPhone = e.target.value; } })]);
+      var guardianField = h("div", { "class": "fc-field", style: "display:none" }, [h("label", { text: "Guardian's mobile number" }), h("input", { type: "tel", inputmode: "numeric", "data-phi-input": "", placeholder: "Guardian mobile (required for a minor)", oninput: function (e) { form.guardianPhone = e.target.value; } })]);
       var minor = h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:12px" }, [
         h("input", { type: "checkbox", onchange: function (e) { form.isMinor = e.target.checked; guardianField.style.display = e.target.checked ? "block" : "none"; } }),
         document.createTextNode("Patient is a minor (guardian consent)")

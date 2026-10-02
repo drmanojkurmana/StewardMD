@@ -252,7 +252,8 @@
       return true;
     }
 
-    function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches; }
+    // still for hidden, reduced motion, and Low Power Mode / Battery Saver (power-state.js)
+    function active() { return !dead && sheet.isConnected && sheet.classList.contains('on') && !document.hidden && !reduced.matches && !(window.SMD_POWER && window.SMD_POWER.low); }
     function frame(t) {
       raf = 0; if (!sheet.isConnected) { destroy(); return; } if (!active() || plainNow()) return;
       if (t - last >= 24) {
@@ -286,6 +287,7 @@
     themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] }); sheetObserver.observe(sheet, { attributes: true, attributeFilter: ['class'] });
     if (resizeObserver) resizeObserver.observe(sheet); else window.addEventListener('resize', resize);
     document.addEventListener('visibilitychange', sync); if (reduced.addEventListener) reduced.addEventListener('change', sync); else reduced.addListener(sync);
+    window.addEventListener('smd-power', sync);
 
     var inst = {
       syncConfig: function () {
@@ -308,6 +310,7 @@
       var idx = activeInstances.indexOf(inst);
       if (idx >= 0) activeInstances.splice(idx, 1);
       themeObserver.disconnect(); sheetObserver.disconnect(); if (resizeObserver) resizeObserver.disconnect(); else window.removeEventListener('resize', resize);
+      window.removeEventListener('smd-power', sync);
       document.removeEventListener('visibilitychange', sync); if (reduced.removeEventListener) reduced.removeEventListener('change', sync); else reduced.removeListener(sync);
       releaseGL(); layer.remove(); sheet.classList.remove('mk-atmosphere');
     }
