@@ -17,6 +17,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <android/log.h>
+#include <sched.h>
+#include <cstdio>
 #include "needle.h"
 
 #define LOG_TAG "NeedleJNI"
@@ -59,7 +61,51 @@ void fail(const char* where) {
 }
 }  // namespace
 
+/* How many threads the engine gets (Android only; needle.h has no thread setting).
+ * Needle sizes its pool in Engine(): if fast_core_mask() finds >= 2 cores whose cpu_capacity is >= 75%
+ * of the strongest, it uses min(that, 4) pinned threads; otherwise it falls back to
+ * std::thread::hardware_concurrency(). Tensor G4 (Pixel 9) has ONE such core (X4), so the engine fell
+ * back to 8 spinning threads over the efficiency cores, in a process whose cpuset cannot even use the
+ * X4: 8.5-10 s per call instead of ~0.15 s on an iPhone (Edge-Runbook A0.2, 2026-10-02).
+ * CMakeLists links with --wrap for that one symbol, so the fallback asks us instead: the cores THIS
+ * process may run on whose capacity is at least half the strongest core's, capped at kMaxThreads.
+ * Phones where the engine's own fast path applies never reach this function. */
+namespace {
+constexpr int kMaxThreads = 4;     // calibration knob: the engine's own fast-path cap
+unsigned engine_threads() {
+  long cap[64] = {0}, mx = 0; int ncpu = 0; char path[96];
+  snprintf(path, sizeof path, "/sys/devices/system/cpu/cpu0/cpu_capacity");
+  FILE* probe = fopen(path, "re");
+  const char* leaf = probe ? "cpu_capacity" : "cpufreq/cpuinfo_max_freq";
+  if (probe) fclose(probe);
+  for (; ncpu < 64; ncpu++) {
+    snprintf(path, sizeof path, "/sys/devices/system/cpu/cpu%d/%s", ncpu, leaf);
+    FILE* f = fopen(path, "re");
+    if (!f) break;
+    if (fscanf(f, "%ld", &cap[ncpu]) != 1) cap[ncpu] = 0;
+    fclose(f);
+    if (cap[ncpu] > mx) mx = cap[ncpu];
+  }
+  cpu_set_t s; CPU_ZERO(&s);
+  const bool aff = sched_getaffinity(0, sizeof s, &s) == 0;
+  int n = 0;
+  for (int i = 0; i < ncpu; i++) if ((!aff || CPU_ISSET(i, &s)) && mx > 0 && cap[i] * 2 >= mx) n++;
+  if (n < 1) n = aff ? CPU_COUNT(&s) : 1;
+  if (n > kMaxThreads) n = kMaxThreads;
+  if (n < 1) n = 1;
+  LOGI("engine threads %d (%s, %d cpus, %d allowed)", n, leaf, ncpu, aff ? CPU_COUNT(&s) : -1);
+  return (unsigned) n;
+}
+}  // namespace
+
 extern "C" {
+
+// Reached only through -Wl,--wrap=_ZNSt6__ndk16thread20hardware_concurrencyEv (CMakeLists.txt).
+unsigned __wrap__ZNSt6__ndk16thread20hardware_concurrencyEv() {
+  static const unsigned n = engine_threads();
+  return n;
+}
+
 
 JNIEXPORT jint JNICALL
 Java_in_stewardmd_needle_NeedleNative_load(JNIEnv* env, jclass, jstring jpath) {

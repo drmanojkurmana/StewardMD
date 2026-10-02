@@ -19,4 +19,7 @@ find_library(log-lib log)
 # Gate A0.1: libneedle.a has no LOAD segments of its own; OUR .so carries the page alignment, so it is
 # linked for 16 KB pages here and checked with `readelf -lW libneedle_jni.so | grep LOAD` (Align 0x4000).
 target_link_libraries(needle_jni needle ${log-lib} m)
-target_link_options(needle_jni PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,--exclude-libs,ALL")
+# The engine's thread-count fallback (std::thread::hardware_concurrency) is answered by needle_jni.cpp:
+# see engine_threads() there for why (Tensor G4 fell back to 8 spinning threads, ~60x slower).
+target_link_options(needle_jni PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,--exclude-libs,ALL"
+  "-Wl,--wrap=_ZNSt6__ndk16thread20hardware_concurrencyEv")

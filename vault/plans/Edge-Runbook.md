@@ -104,7 +104,26 @@ adb) before a final drop decision.
   `foreground` (cores 0-6: four A520, three A720; the X4 is excluded). Same SIMD as the iOS build (187
   `sdot` in both archives). A local, uncommitted test that pinned `:edge` to cores 4-6 before loading made
   it slower (14-17 s), so the pool is a fixed 8 threads and fewer cores hurt. `needle.h` has no thread
-  knob. Ask Cactus for a thread-count setting; under the plan's rule Needle is out for Android until then.
+  knob. ~~Under the plan's rule Needle is out for Android until then.~~ Owner, 2026-10-02: Needle stays.
+- **Root cause (disassembly of the pinned `libneedle.a`, android-arm64):** `Engine::Engine()` sizes the
+  pool with `fast_core_mask()`: it reads `/sys/devices/system/cpu/cpuN/cpu_capacity` (else
+  `cpufreq/cpuinfo_max_freq`) and counts the cores at >= 75% of the strongest (>= 70% for frequency).
+  With >= 2 such cores and fewer than all, it uses min(count, 4) pinned threads; otherwise it falls back to
+  `std::thread::hardware_concurrency()` clamped to 1-12. Tensor G4 has ONE core at the top (X4), so the
+  fast path is skipped and the engine spins 8 threads across the efficiency cores, in a process whose
+  cpuset excludes the X4 anyway. An iPhone has 2 performance cores and takes the fast path.
+- **Fix (commit after this note, built, NOT yet run on the Pixel):** `needle_jni.cpp` answers the
+  fallback instead: CMake links with `-Wl,--wrap=_ZNSt6__ndk16thread20hardware_concurrencyEv`, and
+  `engine_threads()` returns the cores this process may use whose capacity is at least half the
+  strongest's, capped at 4 (Pixel `:edge`: the three A720s). Phones the engine already handles never call
+  it. Checked in the APK: no `hardware_concurrency` import left in `libneedle_jni.so`, still 16 KB aligned.
+  To verify on the phone: logcat `NeedleJNI: engine threads N`, then the A0.2 runs again.
+- **To send to Cactus** (owner): "Needle 3 android-arm64 `fast_core_mask()` counts cores at >= 75% of
+  the max `cpu_capacity`; on SoCs with one prime core (Tensor G4: 1 X4 + 3 A720 + 4 A520) that is 1,
+  so `Engine()` falls back to `hardware_concurrency()` (8) and spins threads on the little cores: ~9 s
+  per call vs ~0.15 s on an iPhone 15 Pro. Please count cores at, say, >= 50% of the max (or take the
+  top two capacity tiers), respect `sched_getaffinity` (an app's background/foreground cpuset excludes
+  the prime core), and expose a thread-count setting in `needle.h`."
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Mechanism PASSED on a host CPU (2026-10-01, `test/native-host/run.sh llama`):** the real
