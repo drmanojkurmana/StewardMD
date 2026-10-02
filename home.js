@@ -8828,7 +8828,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     /* A tap should be FELT, not just seen.
      *
      * On iOS the missing haptic is most of why a web view reads as a website: every native control
-     * answers the finger. SMD_HAPTICS is iOS-only and already respects the user's own haptics setting,
+     * answers the finger. SMD_HAPTICS (iOS taptic; Android system haptics since 2026-10-03) already respects the user's own haptics setting,
      * so this is additive and silent everywhere else.
      *
      * Distinct feedback per meaning: a light tap for send, a firmer one for stop, because stopping is
