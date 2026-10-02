@@ -2224,13 +2224,14 @@ window.openExternal = function (u) {
      no-op that resolved without loading anything, html2canvas stayed undefined, and Save as
      JPEG/PDF did nothing at all. The file is 15 lines and has no dependencies. -->
 <script src="/lazy-load.js?v=ll1"></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1-cel1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
 <script src="/streak.js?v=gold434-thread" defer></script>
 <script src="/share-card.js?v=gold433" defer></script>
-<script src="/engagement.js?v=gold992-fr1" defer></script>
+<script src="/smd-celebrate.js?v=cel1" defer></script>
+<script src="/engagement.js?v=gold992-fr1-cel1" defer></script>
 <!-- Global toast shim: defines window.toast + window.SMD_toast (many modules call these but
      neither was ever defined, so their feedback was silently dropped). Loaded early; idempotent. -->
 <script src="/toast.js?v=gold363-rm1" defer></script>
@@ -2270,7 +2271,7 @@ window.openExternal = function (u) {
      page, which is both far cheaper and more accurate on numbers. Loads BEFORE the modules that use it. -->
 <script defer src="/img-compress.js?v=imgc1"></script>
 <script defer src="/ddi-catalog.js?v=ddiaudit20260925"></script>
-<script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7"></script>
+<script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
 <script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1" defer></script>
@@ -2383,10 +2384,10 @@ window.openExternal = function (u) {
      home.js + account.js so it can read the home DOM and the signed-in account. -->
 <script src="/onboarding.js?v=logo1003-guides1-demo1-energy1-bugs1-help1" defer></script>
 <!-- Global haptics (SMD_HAPTICS): tactile feedback on every interactive tap. Additive; uses
-     @capacitor/haptics on native + navigator.vibrate fallback on web. Pref smd_haptics
+     @capacitor/haptics on iOS, SmdDevice system haptics on Android, no-op on web. Pref smd_haptics
      (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
 <script src="/power-state.js?v=pwr1" defer></script>
-<script src="/haptics.js?v=gold348-hap2" defer></script>
+<script src="/haptics.js?v=gold348-hap3-and1" defer></script>
 <script src="/antibiogram-flags.js?v=abgf3" defer></script>
 <script src="/antibiogram-v2.js?v=abgv20-pro1-qa2" defer></script>
 <script src="/antibiogram.js?v=gold992-rotate-fix-nobooks1-abg6-pro1" defer></script>
@@ -2407,7 +2408,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=hardlocal3-qa24-fr1r925-pushdiag1-dosecalc1" defer></script>
+<script src="/icu.js?v=hardlocal3-qa24-fr1r925-pushdiag1-dosecalc1-cel1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 
 <!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
@@ -2616,7 +2617,7 @@ window.openExternal = function (u) {
      physiology, profile, examiner, screens; ~590 KB) are NOT tagged here: clinix.js loads them in
      order on the first open (flag smd_clinix_lazy, default ON). Their ?v= tokens live in clinix.js
      SCRIPTS - bump the token THERE when you edit one of them. -->
-<script src="/clinix.js?v=cx13-lazy1-own4-obg1" defer></script>
+<script src="/clinix.js?v=cx13-lazy1-own4-obg1-cel1" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
      SMD_SURGX_* globals. Flag off = clinix-style total no-op: surgx.js never mounts the root and
@@ -2638,7 +2639,7 @@ window.openExternal = function (u) {
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=hardlocal3" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=hardlocal3-allopen1" defer></script>
+<script src="/surgx-screens.js?v=hardlocal3-allopen1-cel1" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -2670,7 +2671,7 @@ window.openExternal = function (u) {
 <script src="/pglog-backup.js?v=pglb1" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag-fr1" defer></script>
 <script src="/pglog-ai.js?v=hardlocal3-easy1" defer></script>
-<script src="/pglog-screens.js?v=pgl27-quick-easy1" defer></script>
+<script src="/pglog-screens.js?v=pgl27-quick-easy1-cel1" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
@@ -2680,7 +2681,7 @@ window.openExternal = function (u) {
 <script src="/insulin-db.js?v=ins11" defer></script>
 <script src="/insulin-convert.js?v=ins11" defer></script>
 <script src="/insulin-ask.js?v=ins15" defer></script>
-<script src="/insulin.js?v=ins17" defer></script>
+<script src="/insulin.js?v=ins17-cel1" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
      (/followcare?t=…), never the app. Engines (pathways/engine/assessment/schedule) also power the
@@ -2753,7 +2754,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1-dosecalc1-cost1002" defer></script>
+<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1-dosecalc1-cost1002-cel1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag

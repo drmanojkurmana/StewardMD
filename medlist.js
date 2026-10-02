@@ -1497,8 +1497,10 @@
       if (seq !== _checkSeq) return;
       _results = window.INTERACTIONS.checkInteractions(getList());
       _view = "results"; _hideMinor = true;
+      // One buzz per completed check (not per re-render): a critical or major interaction is on screen.
+      try { if (_results && (_results.critical.length || _results.major.length) && window.SMD_HAPTICS) window.SMD_HAPTICS.warning(); } catch (e) {}
     }).catch(function () {
-      if (seq === _checkSeq) toast("Could not finish the check. Check your connection and retry.");
+      if (seq === _checkSeq) { toast("Could not finish the check. Check your connection and retry."); try { if (window.SMD_HAPTICS) window.SMD_HAPTICS.error(); } catch (e) {} }
     }).then(function () { clearTimeout(timer); if (seq === _checkSeq) { _checking = false; _checkSeq++; render(); } });
   }
 

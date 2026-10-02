@@ -1829,6 +1829,7 @@
       inputs: snapshot(), calculatedDose: res.rounded, confirmedDose: res.rounded, givenDose: given,
       overridden: given !== res.rounded,
       unit: res.unit, warnings: warns.map(function (w) { return w.id; }), engineVersion: 2, ts: Date.now() });
+    try { if (window.SMD_HAPTICS) window.SMD_HAPTICS.success(); } catch (e) {}   // dose committed to history
     btn.style.display = "none";
     var d = document.getElementById("insDone");
     if (d) {

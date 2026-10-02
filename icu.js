@@ -9630,11 +9630,14 @@
         }
         // Critical value → alert the WHOLE unit immediately (Tier-1 push, bypasses prefs). One push per
         // critical analyte in this burst; server excludes the author + falls back to solo verifiability.
+        var critBuzz = false;
         for (var ci = 0; ci < events.length; ci++) {
           if (events[ci] && events[ci].type === "critical" && events[ci].crit) {
             try { grpNotifyCritical(_grp.id, _grpPtId, events[ci].crit); } catch (e) {}
+            critBuzz = true;
           }
         }
+        if (critBuzz) { try { if (window.SMD_HAPTICS) window.SMD_HAPTICS.warning(); } catch (e) {} }   // one buzz per burst
       } catch (e) {}
     }, 1500);
   });

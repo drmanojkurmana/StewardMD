@@ -2939,7 +2939,7 @@
         return exportRxNow(kind, topic, regNo, signImg, rxv, opts);
       });
     }).catch(function(e){
-      rxToast("Could not build the " + (kind === "pdf" ? "PDF" : "image") + ". Try again, or use Print.");
+      rxToast("Could not build the " + (kind === "pdf" ? "PDF" : "image") + ". Try again, or use Print."); rxHaptic("error");
       try { console.error("[rx] export failed:", e); } catch (_) {}
     });
   }
@@ -2960,6 +2960,7 @@
     }).catch(function(){ try{ n.remove(); }catch(e){} return null; });
   }
 
+  function rxHaptic(k){ try { if (window.SMD_HAPTICS && window.SMD_HAPTICS[k]) window.SMD_HAPTICS[k](); } catch (e) {} }
   function exportRxNow(kind, topic, regNo, signImg, rxv){
     var opts = arguments[5] || {};
     // JPEG is a single image, so the block sits in the document. A PDF can run to several pages, so
@@ -2970,7 +2971,7 @@
     // was an unhandled rejection and the doctor saw nothing happen.
     return window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
-      if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }
+      if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); rxHaptic("success"); return; }
       var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }
       return rxQrStamp(rxv).then(function(stamp){
         var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
@@ -2991,8 +2992,9 @@
           pdf.addPage();
         }
         rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+        rxHaptic("success");
       });
-    }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); });
+    }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); rxHaptic("error"); });
   }
   function signAndExport(topic, regNo){
     function chooser(sig){

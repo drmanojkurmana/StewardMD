@@ -46,6 +46,11 @@
   function attr(s) { return esc(s).replace(/\s+/g, " "); }
   function arr(x) { return Array.isArray(x) ? x : []; }
   function haptic(k) { try { if (window.SMD_HAPTICS && SMD_HAPTICS[k]) SMD_HAPTICS[k](); } catch (e) {} }
+  // The clinician's own progress moment (smd-celebrate.js; plays the success haptic itself). `key` = once ever.
+  function celebrate(title, detail, key) {
+    if (window.SMD_CELEBRATE && window.SMD_CELEBRATE.show({ title: title, detail: detail, key: key })) return;
+    haptic("success");
+  }
   function toast(m) {
     try { if (window.toast) return window.toast(m); } catch (e) {}
     try { if (window.SB && SB.toast) return SB.toast(m); } catch (e) {}
@@ -3656,6 +3661,7 @@
     return st.attest({ residentId: residentId, kind: "monthly", period: period }).then(function () {
       state.attesting = null;
       toast(monthLabel(period) + " authenticated.");
+      celebrate("Logbook month authenticated", monthLabel(period), "pglog-attest:" + residentId + ":" + period);
       // Reload rather than patching locally: the server recomputes which months are still outstanding.
       return Promise.all([loadFaculty(),
         state.resEntries && state.resEntries[residentId] ? loadResidentEntries(residentId) : null]).then(render, render);
@@ -4290,7 +4296,7 @@
       state.certVerifyUrl = r.verifyUrl || state.certVerifyUrl;
       var issued = state.cert && state.cert.status === "issued";
       toast(issued ? "Signed. The logbook is now certified." : "Signed. Waiting on the remaining signatures.");
-      haptic("success");
+      if (issued) celebrate("Logbook certified", "All signatures are in", "pglog-cert:" + id); else haptic("success");
       render();
     }, function (e) {
       state.loading = false;
