@@ -60,12 +60,14 @@ while it is off (`ps` on the Pixel after launch).
   entry in `capacitor.plugins.json`. In the live WebView (OTA bundle 167) `Capacitor.Plugins.Needle.available()`
   answered `{available:true, isolated:true, killable:true, defaultWeightsPresent:false, lowMemory:false,
   thermal:0, availMB:2424}`; an unknown method name threw "is not a function".
-- iOS: NOT verified this round. The iPhone 15 Pro came onto USB at 02:24, but the Mac had too little
-  free disk to build the app (2.3 GB, then 0.5 GB as other work filled it; a worktree build needs ~6 GB).
-  The phone still runs an older build (`edge-router.js?v=edge3`, Needle linked from a local
-  `package.json` then): `Capacitor.Plugins.Needle.available()` answered `{available:true, isolated:false,
-  killable:false, lowMemory:false, thermal:0, availMB:6120}` at rest with no model loaded. Rebuild and
-  re-check after the disk is freed.
+- iOS build PASSED with Needle in `package.json` (2026-10-03, Xcode 27.2, App scheme, incremental in the
+  item 1 DerivedData, signed for the device): the built `App.app` carries `?v=` `edge-router.js?v=edge5`,
+  `voice.js ...-ondev4`, `maik-local.js ...-ntb1`; `App.debug.dylib` defines the `needle_*` symbols and
+  `NeedlePlugin`, and contains the llama `pickTokens` code. **Not installed or run:** the iPhone was off USB
+  (polled `idevice_id -l` every 60 s for 45 min, 03:30 to 04:15). Earlier the same morning it was on USB but
+  the Mac had no disk; the phone still runs an older build (`edge-router.js?v=edge3`), where
+  `Needle.available()` at rest answered `{available:true, isolated:false, killable:false, lowMemory:false,
+  thermal:0, availMB:6120}` with no model loaded.
 - **Every native build now needs the engine first.** A clean checkout must run
   `local-plugins/capacitor-needle/scripts/fetch-needle.sh` (and `scripts/make-xcframework.sh` for iOS)
   before Gradle or Xcode, or CMake (`android/libs/arm64-v8a/libneedle.a`) and SwiftPM
@@ -287,7 +289,7 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   a confidence (none below 0.5); scored 100% accurate, 0 wrong on the 50 predicted rows (base model, small
   sample: fine-tuning is still required per the host result). **Gate A0.3 Android latency: PASS, p95 171
   ms against 1,200 ms.**
-- **iPhone: pending (2026-10-03).** The phone was on USB, but the Mac had no disk for the rebuild that carries `pick` (the installed build predates it). Before that, no iPhone was attached. The Swift compiles (`xcodebuild -scheme StewardmdCapacitorLlama
+- **iPhone: pending (2026-10-03).** An app build with `pick` is ready (it built), but the phone was not on USB to install it (45-minute poll); the installed build predates `pick`. The Swift compiles (`xcodebuild -scheme StewardmdCapacitorLlama
   -destination generic/platform=iOS`, Xcode 27.2 beta, BUILD SUCCEEDED); the iPhone bake-off with `pick`
   is still to run.
 - **Seen on the way:** on the APK bundle the idle app held ~200% CPU (WebView compositor `VizWebView` +
@@ -352,7 +354,7 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   96.4 s (297 stream events). Lowest availMB seen with MaiK Lite loaded: **859 MB** (floor 250 MB).
 - Edge after MaiK on a warm phone missed the 1,200 ms deadline (clocks capped); the runtime killed and
   reloaded `:edge` as designed.
-- iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite). 2026-10-03: the installed build predates the back-off JS (`edge3`), and the Mac had no disk to rebuild; only `Needle.available()` at rest was read (availMB 6,120, thermal 0, no model loaded).
+- iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite). 2026-10-03: the installed build predates the back-off JS (`edge3`); the new build was ready but the phone was off USB. Only `Needle.available()` at rest was read (availMB 6,120, thermal 0, no model loaded).
 - **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
 
 **MaiK prefill threads on Android (Mac prompt 2, item 4), 2026-10-03, Pixel 9, unplugged: APPLIED.**
