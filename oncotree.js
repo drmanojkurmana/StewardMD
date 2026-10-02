@@ -1426,7 +1426,8 @@
   }
 
   function bodyHtml() {
-    if (st.loading) return '<div class="ot-loading">' + ms("progress_activity") + "Loading navigator...</div>";
+    if (st.loading) return window.SMD_SKEL ? '<div class="ot-loading ot-loading-skel">' + SMD_SKEL.html("list", { rows: 5, label: "Loading navigator" }) + "</div>"
+      : '<div class="ot-loading">' + ms("progress_activity") + "Loading navigator...</div>";
     if (st.error) return '<div class="ot-error">' + ms("error") + esc(st.error) + '<button class="ot-btn ghost" data-ot-act="retry">Retry</button></div>';
     if (!st.graph) return pickerHtml();
     var state = evalState();

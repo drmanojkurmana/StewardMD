@@ -625,7 +625,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-top .w-title { flex: 1; text-align: center; }
 #smdWard .w-ic:focus-visible, #smdWard .w-x:focus-visible { background: var(--sc); }
 #smdWard .w-keys { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 5; width: min(380px, calc(100vw - 32px));
-  max-height: calc(100vh - 32px); overflow-y: auto; background: var(--sc-lowest); border: 1px solid var(--outline); border-radius: 16px; padding: 14px;
+  max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; background: var(--sc-lowest); border: 1px solid var(--outline); border-radius: 16px; padding: 14px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, .18); }
 #smdWard .w-keys dl { margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 #smdWard .w-keys dl > div { display: flex; gap: 12px; align-items: baseline; }
@@ -639,7 +639,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* A question before a write (ward.js askFor): over the ward, never a browser dialog. */
 #smdWard .w-ask { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 16px;
   background: rgba(0, 0, 0, .45); }
-#smdWard .w-ask > .w-card { width: min(520px, 100%); max-height: calc(100vh - 32px); overflow-y: auto; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
+#smdWard .w-ask > .w-card { width: min(520px, 100%); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); }
 #smdWard .w-ask .w-card-h h3 { margin: 0; }
 #smdWard .w-next { font-size: 12px; font-weight: 600; color: var(--on-surface-variant); }
 #smdWard .w-next.warn { color: var(--on-warn-container); }

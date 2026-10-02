@@ -1867,7 +1867,7 @@
 ".ml-sheet-close{width:34px;height:34px;border-radius:9px;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);font-size:16px;color:var(--slate,#2d4356);cursor:pointer;flex:0 0 auto}",
 ".ml-sheet-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 16px 14px;min-height:0}",
 // tall search surface so suggestions read as a full, scrollable typeahead list
-".ml-sheet-tall{height:88vh;max-height:88vh}",
+".ml-sheet-tall{height:88vh;max-height:88vh;height:88dvh;max-height:88dvh}",
 "@media(min-width:900px){.ml-sheet-tall{height:78vh;max-height:78vh}}",
 // fixed search bar (input stays put while the suggestion list below it scrolls)
 ".ml-searchbar{flex:0 0 auto;padding:2px 16px 12px;border-bottom:1px solid var(--line,#d7dee3)}",

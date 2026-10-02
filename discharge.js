@@ -542,7 +542,9 @@
 
   function _render(s) {
     if (!s.loaded && !s.err) {
-      return '<div class="d-shell">' + topbar(s) + '<div class="d-canvas"><div class="d-loading">' + ms("hourglass_top") + "<p>" + wTH("ward.dc-reading-the-record", "Reading the record…") + "</p></div></div></div>";
+      return '<div class="d-shell">' + topbar(s) + '<div class="d-canvas">' + (window.SMD_SKEL
+        ? '<div class="d-loading-skel" style="padding:24px 16px">' + SMD_SKEL.html("lines", { rows: 7, label: wTH("ward.dc-reading-the-record", "Reading the record…") }) + "</div>"
+        : '<div class="d-loading">' + ms("hourglass_top") + "<p>" + wTH("ward.dc-reading-the-record", "Reading the record…") + "</p></div>") + "</div></div>";
     }
     if (!s.encounter && s.err) {
       return '<div class="d-shell">' + topbar(s) + '<div class="d-canvas">' + banner(s) + "</div></div>";

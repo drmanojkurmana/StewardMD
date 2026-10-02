@@ -29,7 +29,7 @@
 body:has(#app.opd-dash-on){background:var(--dz-bg)}
 #app.opd-dash-on{--bg:var(--dz-bg);--card:var(--dz-card);--ink:var(--dz-ink);--ink-sec:var(--dz-ink2);--mut:var(--dz-mut);--line:var(--dz-line);--tl:var(--dz-acc);--tl-soft:var(--dz-acc-soft);background:var(--dz-bg);color:var(--dz-ink);font-family:'Inter Variable',-apple-system,system-ui,sans-serif}
 #app.opd-dash-on>header{display:none}
-.opd-dash-on .opd-layout{grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+.opd-dash-on .opd-layout{grid-template-columns:240px minmax(0,1fr);min-height:100vh;min-height:100dvh}
 .opd-dash-on .opd-main{padding:24px 32px 48px;max-width:1680px}
 .opd-dash-on .opd-main>.toolbar{display:none}
 .opd-dash-on.dz-v-overview .opd-main>#opdPulse,.opd-dash-on.dz-v-overview .opd-main>.tot,.opd-dash-on.dz-v-overview .opd-flow-tools,.opd-dash-on.dz-v-overview .opd-flow-board,.opd-dash-on.dz-v-overview .opd-main>.ctl,.opd-dash-on.dz-v-overview .opd-main>.docs,.opd-dash-on.dz-v-overview .opd-main>.empty{display:none!important}
@@ -39,7 +39,7 @@ body:has(#app.opd-dash-on){background:var(--dz-bg)}
 .opd-dash-on :focus-visible{outline:2px solid var(--dz-acc);outline-offset:2px}
 
 /* sidebar */
-.dz-side{position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 12px;background:var(--dz-card);border-right:1px solid var(--dz-line);display:flex;flex-direction:column;gap:2px;box-sizing:border-box}
+.dz-side{position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto;padding:20px 12px;background:var(--dz-card);border-right:1px solid var(--dz-line);display:flex;flex-direction:column;gap:2px;box-sizing:border-box}
 .dz-brand{display:flex;gap:10px;align-items:center;padding:4px 10px 16px}
 .dz-brand .mk{width:32px;height:32px;border-radius:9px;background:var(--dz-tile);position:relative;flex:none}
 .dz-brand .mk::after{content:"";position:absolute;inset:7px;background:var(--dz-tile-ink);-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat}

@@ -159,7 +159,7 @@ html.pgl-lock, html.pgl-lock body { overflow: hidden; }
 /* ── progress ──────────────────────────────────────────────────────────────── */
 #pglogRoot .pgl-bar { height: 6px; border-radius: 999px; background: var(--pgl-surface-2); overflow: hidden; margin-top: 6px; }
 #pglogRoot .pgl-bar i { display: block; height: 100%; border-radius: 999px; background: var(--pgl-primary);
-  transition: width .5s var(--pgl-ease); }
+  transition: width var(--smd-dur-sheet, 320ms) var(--pgl-ease); }
 #pglogRoot .pgl-bar[data-state="behind"] i { background: var(--pgl-bad); }
 #pglogRoot .pgl-bar[data-state="slightly_behind"] i { background: var(--pgl-warn); }
 #pglogRoot .pgl-bar[data-state="met"] i { background: var(--pgl-ok); }
