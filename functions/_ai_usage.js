@@ -119,7 +119,10 @@ export function estCostInr(env, model, inTok, outTok, extras) {
   const r = modelRate(env, model);
   let cost = (Math.max(0, inTok | 0) / 1000) * r.in + (Math.max(0, outTok | 0) / 1000) * r.out;
   const perImg = (env && Number(env.AI_COST_PER_IMAGE_INR)) || 0.35;
-  const perAudioSec = (env && Number(env.AI_COST_PER_AUDIO_SEC_INR)) || 0.02;
+  // Vertex gemini-2.5-flash: 32 audio tokens per second (ai.google.dev/gemini-api/docs/audio) at $1.00
+  // per 1M, plus ~3 transcript tokens per second at $2.50 per 1M = ~$0.00004/s = Rs 0.004/s at Rs 96.
+  // Was Rs 0.02/s (5x high).
+  const perAudioSec = (env && Number(env.AI_COST_PER_AUDIO_SEC_INR)) || 0.004;
   if (extras && extras.images) cost += (extras.images | 0) * perImg;
   if (extras && extras.audioSeconds) cost += Math.max(0, extras.audioSeconds) * perAudioSec;
   return Math.round(cost * 10000) / 10000;

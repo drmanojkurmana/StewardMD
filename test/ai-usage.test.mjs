@@ -55,7 +55,7 @@ test("estCostInr: tokens + image/audio extras + env cost overrides", () => {
   // + 2 images @ default 0.35 = 0.70
   assert.equal(estCostInr({}, "gemini-2.5-flash", 1000, 1000, { images: 2 }), 0.9688);
   // audio 10s @ 0.02 = 0.20
-  assert.equal(estCostInr({}, "gemini-2.5-flash", 0, 0, { audioSeconds: 10 }), 0.2);
+  assert.equal(estCostInr({}, "gemini-2.5-flash", 0, 0, { audioSeconds: 10 }), 0.04);   // Rs 0.004/s (Vertex audio)
   // per-image override
   assert.equal(estCostInr({ AI_COST_PER_IMAGE_INR: "1" }, "gemini-2.5-flash", 0, 0, { images: 1 }), 1);
   assert.equal(estCostInr({}, "gemini-2.5-flash", -5, -5), 0); // negatives clamped

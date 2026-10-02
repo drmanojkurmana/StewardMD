@@ -80,7 +80,7 @@ test("rate card is priced off the same cost model that debits the wallet", () =>
   assert.equal(inrToMt(r.in), 58);                                        // ₹0.0288/1k in
   assert.equal(inrToMt(r.out), 480);                                      // ₹0.24/1k out
   assert.equal(inrToMt(estCostInr(env, model, 0, 0, { images: 1 })), 700);
-  assert.equal(inrToMt(estCostInr(env, model, 0, 0, { audioSeconds: 1 })), 40);
+  assert.equal(inrToMt(estCostInr(env, model, 0, 0, { audioSeconds: 1 })), 8);     // Rs 0.004/s (Vertex audio)
   // A real call: 2k in + 1k out must cost in-rate*2 + out-rate*1.
   assert.equal(inrToMt(estCostInr(env, model, 2000, 1000)), Math.round((0.0288 * 2 + 0.24) * 2000));
   // Env override moves the rate card and the charge together.

@@ -255,7 +255,9 @@ function aiDeadlineMs(env) { const v = Number(env && env.MAIK_AI_DEADLINE_MS); r
 function usageTokens(meta, inChars, outText) {
   const u = meta && meta.usage;
   if (!u || u.promptTokenCount == null) return { inTok: estTokens(inChars), outTok: estTokens(String(outText || "").length) };
-  return { inTok: u.promptTokenCount, outTok: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0), cachedTok: u.cachedContentTokenCount || 0 };
+  // Audio tokens are billed at Vertex's audio rate; recordUsage prices them apart (Scribe, dictation).
+  var audioTok = 0; (u.promptTokensDetails || []).forEach(function (d) { if (d && String(d.modality).toUpperCase() === "AUDIO") audioTok += d.tokenCount | 0; });
+  return { inTok: u.promptTokenCount, outTok: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0), cachedTok: u.cachedContentTokenCount || 0, audioTok: audioTok };
 }
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
