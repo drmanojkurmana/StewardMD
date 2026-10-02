@@ -125,6 +125,13 @@ adb) before a final drop decision.
   7 allowed)`. Direct calls 171-208 ms (load 735 ms, configure 261 ms). Bake-off 20/20 `ok` (p50 402 ms,
   p95 696 ms) and 50/50 `ok` (p50 393 ms, p95 617 ms, max 881 ms). Back-off reading: availMB 2,099,
   thermal 0, all clear. The phone heated to 37-38 C and the clocks were capped again by the llama runs.
+- **Re-time UNPLUGGED, 2026-10-03 00:41 (wireless adb, no charger, APK bundle `edge-router.js?v=edge5`):
+  A0.2 Android latency PASSED.** Start: thermal 0, battery 37.1 C, 94%, caps cpu0 1.95/1.95, cpu4
+  2.37/2.60, cpu7 2.91/3.11 GHz. logcat `NeedleJNI: engine threads 3 (cpu_capacity, 8 cpus, 7 allowed)`.
+  `--limit 50`: 50/50 `ok`, **p50 370 ms, p95 747 ms, max 1,428 ms** (the max is row 1, cold load
+  included; the rest max 767 ms). End: thermal 0, 37.7 C, caps cpu0 1.70, cpu4 1.80, cpu7 2.80 GHz
+  (Pixel trims clocks below thermal status 1). Close to the plugged-but-cool run (p50 393, p95 617 ms): unplugging
+  changes little; the thread count was the cause.
 - **To send to Cactus** (owner): "Needle 3 android-arm64 `fast_core_mask()` counts cores at >= 75% of
   the max `cpu_capacity`; on SoCs with one prime core (Tensor G4: 1 X4 + 3 A720 + 4 A520) that is 1,
   so `Engine()` falls back to `hardware_concurrency()` (8) and spins threads on the little cores: ~9 s
@@ -284,6 +291,29 @@ FAILED.** 50 back to back: Needle 50/50 `timeout` (p50 4.1 s incl. kill + reload
 MaiK 11/11 local (first text p50 5.6 s, max 20.8 s; full answer p50 97 s, max 141 s, slowing as it
 heated), Needle 110/110 `timeout`. App PSS 2.5-3.0 GB with MaiK Lite loaded. Battery 37.3 -> 40.0 C,
 thermal status 1 (light) throughout, on the charger at 100%. Not the 4 GB phone the gate names.
+
+**Back-off (763f0e268) on the Pixel 9, 2026-10-03, unplugged, APK bundle: PASSED.** Typed request
+"show me the resistance patterns antibiogram" (model-routed: 5 candidates, first `tool:antibiogram`,
+not exact), `smd_edge` = "1" in localStorage only for the test (removed after, read back `null`), the
+Needle adapter wrapped to count engine calls.
+| State | `SMD_EDGE.backoff()` | Engine called | route() |
+|---|---|---|---|
+| At rest (thermal 0, 37.7 C) | all ok, availMB 1,469-1,490 (2,100 before the first MaiK load) | yes | 983 / 457 ms, null (base model abstains) |
+| MaiK Lite generating (`queueState().running`) | `othersBusy:true`, availMB 1,197-1,230, thermal 1 | **no** | 211 / 233 ms, null |
+| After the answer | all ok, availMB 859-862, thermal 1 | yes (resumed) | 1,344 ms (timeout), then 4,287 ms (cold reload after the kill), null |
+| Thermal SEVERE (simulated) | `thermalOk:false`, thermal 3 | **no** | 107 / 97 ms, null |
+| After `cmd thermalservice reset` | all ok, thermal 1 | yes (resumed) | 1,835 / 1,119 ms, null |
+A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rules:tool:antibiogram`.
+- SEVERE was **simulated** with `adb shell cmd thermalservice override-status 3` (it locks the status
+  that `PowerManager.getCurrentThermalStatus()` returns, which is what `Needle.available()` reads), then
+  `cmd thermalservice reset`. A real SEVERE was not reachable safely: one MaiK answer took the phone from
+  38.2 to 39.8 C and only to thermal 1 (cpu7 capped to 1.40 GHz).
+- The MaiK answer used for the busy state (unplugged, phone already 38.2 C): first text 18.0 s, total
+  96.4 s (297 stream events). Lowest availMB seen with MaiK Lite loaded: **859 MB** (floor 250 MB).
+- Edge after MaiK on a warm phone missed the 1,200 ms deadline (clocks capped); the runtime killed and
+  reloaded `:edge` as designed.
+- iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite).
+- **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
 
 ## 4b. On-device speech (A1.2, flag `smd_speech_ondevice`)
 Build with this branch (the speech plugin changed on both platforms; Android compiles, Swift untested).
