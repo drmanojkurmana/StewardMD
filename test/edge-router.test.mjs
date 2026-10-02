@@ -135,6 +135,7 @@ test("llamaAdapter: per-call grammar limited to the options offered, greedy, par
   const r = await eng.complete({ prompt: "x\nOptions:\n1. a\n2. b\n3. c\n0. none of these", nOptions: 3 });
   assert.deepEqual(r, { option: 2 });
   assert.equal(calls.load[0].path, "/m/functiongemma.gguf");
+  assert.equal(calls.load[0].nThreadsBatch, 4, "prefill on the big cores only, not every core");
   assert.equal(calls.gen[0].temperature, 0); assert.equal(calls.gen[0].stream, false);
   assert.equal(calls.gen[0].grammar, 'root ::= "{\\"option\\":" [0-3] "}"', "only 0..3 can be produced");
   assert.equal(E.optionFrom(r).option, 2);

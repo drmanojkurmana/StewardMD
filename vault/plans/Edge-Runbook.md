@@ -118,6 +118,11 @@ adb) before a final drop decision.
   strongest's, capped at 4 (Pixel `:edge`: the three A720s). Phones the engine already handles never call
   it. Checked in the APK: no `hardware_concurrency` import left in `libneedle_jni.so`, still 16 KB aligned.
   To verify on the phone: logcat `NeedleJNI: engine threads N`, then the A0.2 runs again.
+- **Re-test with the fix, 2026-10-02 22:17 (Pixel 9, on USB but cool: full clocks, thermal 0, 31.7 C at
+  the start): A0.2 Android latency PASSED.** logcat `NeedleJNI: engine threads 3 (cpu_capacity, 8 cpus,
+  7 allowed)`. Direct calls 171-208 ms (load 735 ms, configure 261 ms). Bake-off 20/20 `ok` (p50 402 ms,
+  p95 696 ms) and 50/50 `ok` (p50 393 ms, p95 617 ms, max 881 ms). Back-off reading: availMB 2,099,
+  thermal 0, all clear. The phone heated to 37-38 C and the clocks were capped again by the llama runs.
 - **To send to Cactus** (owner): "Needle 3 android-arm64 `fast_core_mask()` counts cores at >= 75% of
   the max `cpu_capacity`; on SoCs with one prime core (Tensor G4: 1 X4 + 3 A720 + 4 A520) that is 1,
   so `Engine()` falls back to `hardware_concurrency()` (8) and spins threads on the little cores: ~9 s
@@ -173,6 +178,13 @@ For clinical review (not a regression): the CAP answer gave azithromycin alone a
 5. Pipeline proof: a tiny fine-tune (any 50 rows), convert with llama.cpp `convert_hf_to_gguf.py`,
    quantise with `llama-quantize` to Q8_0 and Q4_K_M, load both on the phone.
 
+**A0.3 Android re-test, 2026-10-02 evening:** the plugin prefills on EVERY core (`threads_batch=8`, its
+default `availableProcessors()`), efficiency cores included. Same calls, decode/prefill threads: 4/8 3.6-4.1 s,
+4/4 1.2-1.4 s, 3/3 1.1-1.4 s, 2/2 1.1-1.2 s (clocks capped, 37 C). `llamaAdapter` now loads with
+`nThreadsBatch: 4` (Edge only; MaiK keeps the plugin default: changing MaiK's prefill threads is an owner
+call, and it likely explains MaiK's slow first text on this phone). Bake-off with 4/4: 2/20 then 0/50 `ok`,
+calls ~1.1-1.4 s against the 1,200 ms deadline while capped. FunctionGemma on this phone's CPU is
+borderline-over when warm; it needs a cool-phone run, the GPU/NPU, or a smaller prompt.
 **A0.3 Android (2026-10-02, Pixel 9, same conditions as A0.2 Android):** grammar works (every reply that
 returned was `{"option":n}`), latency fails: bake-off 20/20 and 50/50 `timeout` at 1,200 ms; direct
 `generate` 2.5-4.8 s (load 1.3 s). llama.cpp log: 54 new prompt tokens in ~3.0-3.4 s (~18 tok/s),

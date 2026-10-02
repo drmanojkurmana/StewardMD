@@ -318,7 +318,10 @@
       available: function () { return !!(plugin && o.modelPath); },
       load: function () {
         loaded = false;
-        return Promise.resolve(plugin.load({ path: o.modelPath, nCtx: o.nCtx || 1024 })).then(function () { loaded = true; });
+        // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
+        // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
+        // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
+        return Promise.resolve(plugin.load({ path: o.modelPath, nCtx: o.nCtx || 1024, nThreadsBatch: o.nThreadsBatch || 4 })).then(function () { loaded = true; });
       },
       complete: function (task) {
         return Promise.resolve(loaded ? null : this.load()).then(function () {
