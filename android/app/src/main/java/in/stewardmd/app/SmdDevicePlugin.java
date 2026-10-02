@@ -39,10 +39,15 @@ public class SmdDevicePlugin extends Plugin {
                 notifyListeners("powerStateChange", powerState());
             }
         };
-        // ACTION_POWER_SAVE_MODE_CHANGED is a protected system broadcast, so no RECEIVER_EXPORTED /
-        // RECEIVER_NOT_EXPORTED flag is needed at targetSdk 34+ (only receivers that can get app
-        // broadcasts must declare one).
-        getContext().registerReceiver(powerReceiver, new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+        // ACTION_POWER_SAVE_MODE_CHANGED is a protected system broadcast, which a not-exported receiver
+        // still gets. Declaring RECEIVER_NOT_EXPORTED explicitly (API 33+) keeps targetSdk 34+'s
+        // registerReceiver check satisfied without relying on the system-broadcast exemption.
+        IntentFilter filter = new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getContext().registerReceiver(powerReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            getContext().registerReceiver(powerReceiver, filter);
+        }
     }
 
     @Override
