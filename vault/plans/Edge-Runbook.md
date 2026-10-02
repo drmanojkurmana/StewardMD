@@ -38,6 +38,13 @@ on the full APK, and the run on an Android 15 16 KB emulator and the phone (no K
    real 4 GB phone. Pass = load and one call succeed on both.
 Fail: report to Cactus, drop Needle from v1, FunctionGemma alone goes forward.
 
+
+**Android (2026-10-02):** step 3 PASSED on the full debug APK (build of 874fa71f3 + Needle in package.json,
+locally): all 20 `.so` in `lib/arm64-v8a` have every LOAD segment at `0x4000`; the merged manifest has
+`NeedleService` in `android:process=":edge"`. Step 4 on the real phone (Pixel 9, which runs 4 KB pages):
+Needle loads and calls complete with valid envelopes, but far too slowly (gate A0.2 below). Step 4 on
+the 16 KB emulator NOT done: `system-images;android-35;google_apis_ps16k;arm64-v8a` + the emulator need
+~5 GB and the Mac had 2 GB free; the download was stopped before it filled the disk.
 ## 2. Gate A0.2: process isolation (Android) / serial queue (iOS)
 1. Copy weights (README of the plugin: `run-as ... files/needle/needle3.cact`). Base model is fine here.
 2. Open the app, attach CDP (`adb shell pidof in.stewardmd.app`, then
@@ -78,6 +85,26 @@ WebView ran this bundle (`?v=clog2/gold476/gold1057`, `edge-router.js?v=edge3`),
   stayed 0 after ~210 Needle + 40 llama calls (phone charging on USB, 46% to 52%). Peak memory NOT
   measured: `xctrace` (Activity Monitor) on this beta lost the device or could not find the app pid.
 - Not done: Android (no phone attached), the 30-minute mixed session (A0.6).
+
+**A0.2 Android: mechanism PASSED, latency FAILED (2026-10-02, Pixel 9 "tokay", Android 17 / SDK 37,
+12 GB, base `needle3.cact`).** Test conditions, for every Android number in this file: phone charging on
+USB from the Mac, CPU capped by Pixel charging thermal mitigation (X4 1.40 of 3.11 GHz, A720 1.80 of
+2.60, A520 1.70 of 1.95; `VIRTUAL-SKIN-CHARGE-PERSIST` flagged), heavy background load at the start
+(WhatsApp 158% CPU, swap 93% full; `am kill-all` freed it to 1.6 GB free). Re-time unplugged (wireless
+adb) before a final drop decision.
+- Build notes: the worktree needs `android/app/google-services.json` (gitignored; copied from the main
+  checkout) or the app dies at launch (`PushNotifications.register`: FirebaseApp not initialized). The
+  phone was serving OTA bundle 167 (`CapacitorUpdater`); `reset()` switched it to the APK's bundle.
+- `adb shell ps -A`: `in.stewardmd.app:edge` runs as its own process. Kill test: `kill -9` of `:edge`
+  mid-call (via `run-as`; shell may not) -> the call rejected "the edge engine process ended" in 2.1 s,
+  the app kept its pid, Android restarted `:edge`. The app also survived ~180 runtime kills (every timed-out Needle call).
+- Latency: `Needle.complete` 8.5-10.0 s per call (load 0.7-0.9 s, configure 0.7-0.8 s); iPhone 15 Pro
+  ~0.15 s, x86 host ~0.5 s. Bake-off 20/20 and 50/50 `timeout` under the 1,200 ms deadline.
+- What is known: the engine runs 8 `needle-engine` threads, all spinning, in `:edge` whose cpuset is
+  `foreground` (cores 0-6: four A520, three A720; the X4 is excluded). Same SIMD as the iOS build (187
+  `sdot` in both archives). A local, uncommitted test that pinned `:edge` to cores 4-6 before loading made
+  it slower (14-17 s), so the pool is a fixed 8 threads and fewer cores hurt. `needle.h` has no thread
+  knob. Ask Cactus for a thread-count setting; under the plan's rule Needle is out for Android until then.
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Mechanism PASSED on a host CPU (2026-10-01, `test/native-host/run.sh llama`):** the real
@@ -127,6 +154,16 @@ For clinical review (not a regression): the CAP answer gave azithromycin alone a
 5. Pipeline proof: a tiny fine-tune (any 50 rows), convert with llama.cpp `convert_hf_to_gguf.py`,
    quantise with `llama-quantize` to Q8_0 and Q4_K_M, load both on the phone.
 
+**A0.3 Android (2026-10-02, Pixel 9, same conditions as A0.2 Android):** grammar works (every reply that
+returned was `{"option":n}`), latency fails: bake-off 20/20 and 50/50 `timeout` at 1,200 ms; direct
+`generate` 2.5-4.8 s (load 1.3 s). llama.cpp log: 54 new prompt tokens in ~3.0-3.4 s (~18 tok/s),
+decode 4.6-5.9 tok/s, CPU only (`n_gpu_layers=0`, Release build, dotprod on). Step 1 PASSED on content:
+`SMD_MAIK_LOCAL.answer` ran on llama with MAiK Lite (already installed under
+`/sdcard/Android/data/in.stewardmd.app/files/maik-models/`). **Safety note:** this phone has the
+clinician switch "book linked" OFF (`smd_maik_rag_linked = "0"`), so answers were ungrounded and wrong
+(mechanical mitral INR "2.0-3.0"; an invented artemether-lumefantrine dose). With the book linked for the
+test (then set back to "0"): INR 2.5-3.5 [1] and ACT [1], first text ~32 s, total 39-59 s.
+
 ## 4. Gate A0.6: sustained load (4 GB phone, each model)
 `--limit 50` back to back, then a 30-minute mixed session (MaiK, Scribe, Edge). Record peak memory,
 temperature, battery drop and the latency line `score.mjs --pred` prints (p50, p95, max).
@@ -136,7 +173,7 @@ Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the 
 - `--limit 50` back to back: Needle 3 x 50, all `ok`, p50 157 ms, p95 259 ms, max 386 ms (gate A0.2).
   FunctionGemma Q8_0 + grammar: 50/50 `ok` with an integer option, p50 147 ms, p95 221 ms, max 1,280 ms
   (the first call, cold load included; after a reinstall the first load took 1.3 s this time, 19 s once).
-- 30-minute mixed session (`test/device/edge-mixed-session-ios.mjs` over the WebKit proxy, MAiK Lite installed): 72 cycles of
+- 30-minute mixed session (`test/device/edge-mixed-session.mjs` over the WebKit proxy, MAiK Lite installed): 72 cycles of
   noCloud dictation (speech from the Mac speaker), one `SMD_MAIK_LOCAL.answer`, and 10 Needle routings
   under the 1,200 ms deadline. Same app process all 30 minutes (no crash). Dictation 72/72 on-device.
   MaiK 72/72 local answers, first text p50 1.6 s / p95 2.3 s, full answer p50 12.8 s / p95 21.5 s /
@@ -153,6 +190,14 @@ Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the 
   `othersBusy`) never runs in the app. Edge kept answering at Serious while MaiK generated (the one
   timeout came then). Needs an owner decision on the signals: iOS thermal state is only visible to native
   code today (`LlamaEngine` reads `ProcessInfo.thermalState`); `othersBusy` could be MaiK's own queue state.
+
+**Pixel 9 (12 GB, Android 17), 2026-10-02, same conditions as A0.2 Android: stability PASSED, latency
+FAILED.** 50 back to back: Needle 50/50 `timeout` (p50 4.1 s incl. kill + reload), FunctionGemma 50/50
+`timeout` (p50 1.23 s). Mixed session (`test/device/edge-mixed-session.mjs --android`, 11 cycles in
+~28 minutes, then the phone was unplugged): same app process throughout, dictation 11/11 on-device,
+MaiK 11/11 local (first text p50 5.6 s, max 20.8 s; full answer p50 97 s, max 141 s, slowing as it
+heated), Needle 110/110 `timeout`. App PSS 2.5-3.0 GB with MaiK Lite loaded. Battery 37.3 -> 40.0 C,
+thermal status 1 (light) throughout, on the charger at 100%. Not the 4 GB phone the gate names.
 
 ## 4b. On-device speech (A1.2, flag `smd_speech_ondevice`)
 Build with this branch (the speech plugin changed on both platforms; Android compiles, Swift untested).
@@ -195,6 +240,17 @@ Findings, and what became of them (2026-10-02, same phone):
 - Note: after the earlier online `prefer` session, iOS downloaded its on-device Hindi model: `hi-IN` now
   reports `onDevice:true` on this phone, and noCloud Hindi dictation runs on the phone.
 Not done: Android (no phone attached).
+
+**Android PASSED (2026-10-02, Pixel 9, Android 17, flag default ON):** `speechOnDevice` en-IN, en-US,
+hi-IN, te-IN all `onDevice:true` (`createOnDeviceSpeechRecognizer`). noCloud (OPD options): en on-device
+("blood pressure 90"), hi on-device (Devanagari "ब्लड प्रेशर 140 ओवर 90", so the language fix works here
+too), te refused in 162 ms with `stt-unavailable-ondevice` (no Telugu on-device model installed), no
+cloud. **Airplane mode** (`adb shell cmd connectivity airplane-mode enable`, navigator.onLine false):
+noCloud en transcribed on-device ("blood pressure 140 over 90"). Scribe Fast (`prefer`): en "On-device";
+te switched to "Device speech (cloud)" at 99 ms with reason "language not available on-device".
+Findings: Android `speechOnDevice()` says `onDevice:true` for a language whose model is not installed
+(it checks the API, not the language pack); the label shows "On-device" for 20-60 ms before the
+plugin's real mode arrives. Neither sends audio anywhere; both make the first label briefly wrong.
 
 ## 5. Training
 **Needle on the Cactus platform** (synthetic data only; commands from `cactus-needle` 3.0.6 `llms.txt`):
