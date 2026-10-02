@@ -44,7 +44,8 @@ import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
 import { resolveCoding } from "./code-sets.js";
 import { theatreSettings } from "./theatre.js";
-import { ADMISSION_CLASSES, bedOccupant, claimBed, releaseBedClaim } from "./migrate-inpatient.js";
+import { ADMISSION_CLASSES, IPD, admitPatient, transferPatient, bedOccupant, checkMasterBed, claimBed, releaseBedClaim } from "./migrate-inpatient.js";
+import { getWardByName, listBeds } from "../_opd_org_store.js";
 
 const CASE_TYPE = "SurgicalCase";
 const ANES_TYPE = "AnesthesiaRecord";
@@ -341,10 +342,9 @@ async function recordOperativeNote(request, env, ctx) {
 }
 
 /**
- * Ends the theatre stay: closes the SURGERY encounter, optionally opens a PACU encounter. Moving
- * from PACU onward to a ward bed reuses the EXISTING /ward/admit call, unchanged - not duplicated
- * here, the same way an ED disposition to "admitted" reuses it too.
- * ctx: { migration, caseId, disposition: "pacu"|"direct-discharge", pacuBed?, actorDeps, recordDeps }
+ * Ends the theatre stay: closes the SURGERY encounter, optionally opens a PACU encounter. The PACU
+ * stay is ended by leaveRecovery() below.
+ * ctx: { migration, caseId, disposition: "pacu"|"direct-discharge", pacuBed?, orgId?, actorDeps, recordDeps }
  */
 async function dispositionCase(request, env, ctx) {
   const mig = ctx.migration;
@@ -373,9 +373,9 @@ async function dispositionCase(request, env, ctx) {
 
   /* THE PACU BED IS CLAIMED BEFORE ANYTHING IS WRITTEN (Codex F1 follow-up), through the same claim
    * admission and transfer take (migrate-inpatient.js claimBed), so a ward admission or transfer racing
-   * this move for the same bed cannot land beside it. Another open PACU stay in the bed is NOT counted:
-   * nothing in WardSynQ closes a PACU stay yet and the ward screen always sends bed "1", so counting it
-   * would shut that bed after the first recovery patient. ponytail: add a PACU exit, then use BED_CLASSES. */
+   * this move for the same bed cannot land beside it. An open PACU stay holds its bay against the next
+   * recovery patient too (BED_CLASSES), now that leaveRecovery() closes one. The bay is checked against
+   * the hospital's bed list for the PACU ward when it has one, the same check admission makes. */
   const pacu = str(ctx.disposition) === "pacu" ? Encounter({
     id: `wsq-pacu-${caseId}`, patientId: c.patientId, class: PACU, status: OPEN,
     identifiers: enc.identifiers, location: { facilityId: null, ward: "PACU", bed: str(ctx.pacuBed) || null },
@@ -384,12 +384,18 @@ async function dispositionCase(request, env, ctx) {
   const pacuBed = pacu && pacu.location.bed;
   if (pacuBed) {
     const occupied = { ...base, ok: false, status: 409, error: "bed_occupied", detail: `PACU bed ${pacuBed} is occupied`, caseId, written: 0 };
-    try { if (await bedOccupant(svc, pacu.id, pacu.location, ADMISSION_CLASSES)) return occupied; }
+    try { if (await bedOccupant(svc, pacu.id, pacu.location)) return occupied; }
     catch (e) {
       if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), caseId, written: 0 };
       return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), caseId, written: 0 };
     }
-    try { await claimBed(svc, pacu, ADMISSION_CLASSES); }
+    if (ctx.orgId) {
+      let sex = null;
+      try { const p = await svc.get("Patient", c.patientId); sex = p && p.sex; } catch {}
+      const m = await checkMasterBed(env, ctx.orgId, PACU, pacuBed, sex, false);
+      if (!m.ok) return { ...base, ok: false, status: m.status, error: m.error, detail: m.detail, caseId, written: 0 };
+    }
+    try { await claimBed(svc, pacu); }
     catch (e) {
       if (e instanceof VersionConflictError) return occupied;
       return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), caseId, written: 0 };
@@ -408,6 +414,83 @@ async function dispositionCase(request, env, ctx) {
   }
 
   return { ...base, ok: true, written, caseId, disposition: str(ctx.disposition) || "direct-discharge", pacuEncounterId, actor: resolved.actor.id, role: resolved.role };
+}
+
+/**
+ * LEAVING RECOVERY. Closes an open PACU stay and frees its bay's claim. Three ways out:
+ *  - "ward": to a ward bed, through the SAME doors a ward uses. A patient with an open inpatient stay
+ *    (admitted before theatre) is moved with transferPatient(); anyone else is admitted with
+ *    admitPatient(). Either way the destination bed takes its claim, and a refusal (bed occupied,
+ *    bed not in use, bed list unreadable) leaves the patient in recovery with nothing written.
+ *  - "unit": the same, into ICU, maternity, paediatrics or NICU; the unit is named as the admission class.
+ *  - "home": a day case discharged from recovery. Refused while the patient has an open inpatient stay,
+ *    which is closed by the ward's own discharge, never from here.
+ * The stay is version-checked against what the screen showed (expectedVersion). The move is made
+ * first and the recovery stay closed after it, as the ED does (edDisposition): if the close then fails
+ * the patient is placed and the screen says to leave recovery again, which finds the stay already made
+ * and only moves it (no second admission).
+ * ctx: { migration, encounterId, outcome, expectedVersion, admission?: {ward, bed?, class?}, reason?, orgId?, actorDeps, recordDeps }
+ */
+const LEAVE_OUTCOMES = Object.freeze(["ward", "unit", "home"]);
+const UNIT_CLASSES = ADMISSION_CLASSES.filter((k) => k !== IPD);
+async function leaveRecovery(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+
+  const encounterId = str(ctx.encounterId), outcome = str(ctx.outcome), reason = str(ctx.reason).slice(0, 500);
+  const adm = ctx.admission || {}, ward = str(adm.ward), bed = str(adm.bed);
+  const cls = outcome === "unit" ? str(adm.class).toUpperCase() : IPD;
+  const refuse = (status, error, detail) => ({ ...base, ok: false, status, error, detail, encounterId, written: 0 });
+  if (!encounterId) return refuse(422, "encounter_required", "name the recovery stay");
+  if (!LEAVE_OUTCOMES.includes(outcome)) return refuse(422, "outcome_required", `say where the patient goes: one of ${LEAVE_OUTCOMES.join(", ")}`);
+  if (!Number.isInteger(ctx.expectedVersion)) return refuse(422, "expected_version_required", "name the version of the recovery stay being closed");
+  if (outcome !== "home" && !ward) return refuse(422, "ward_required", "name the ward the patient goes to");
+  if (outcome === "unit" && !UNIT_CLASSES.includes(cls)) return refuse(422, "unit_required", `name the unit: one of ${UNIT_CLASSES.join(", ")}`);
+
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+
+  let current, stays;
+  try {
+    current = await svc.get("Encounter", encounterId);
+    stays = current ? ((await svc.byPatient("Encounter", current.patientId)) || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN) : [];
+  } catch (e) {
+    if (e instanceof GovernanceError) return { ...base, ...writeFailure(e, { encounterId, written: 0 }) };
+    return refuse(502, "record_read_failed", str(e && e.message));
+  }
+  if (!current) return refuse(404, "encounter_not_found", "no such recovery stay");
+  if (current.class !== PACU) return refuse(409, "not_in_recovery", "this is not a recovery (PACU) stay");
+  if (current.status !== OPEN) return { ...base, ok: true, written: 0, skipped: "already_left", encounterId, disposition: current.disposition || null, version: current.version };
+  if (current.version !== ctx.expectedVersion) return { ...refuse(409, "version_conflict", "this recovery stay changed since it was shown; reload and try again"), version: current.version };
+  const stay = stays.sort((a, b) => String(b.periodStart || "").localeCompare(String(a.periodStart || "")))[0] || null;
+  if (outcome === "home" && stay) return { ...refuse(409, "admitted_elsewhere", `this patient has an open inpatient stay${stay.location && stay.location.ward ? " on " + stay.location.ward : ""}; send them back to it, or discharge that stay`), stayEncounterId: stay.id };
+
+  const at = new Date().toISOString();
+  let moved = null;
+  if (outcome !== "home") {
+    const mrn = ((current.identifiers || []).find((i) => i && i.system === "opd-mrn") || {}).value;
+    moved = stay
+      ? await transferPatient(request, env, { ...ctx, encounterId: stay.id, ward, bed: bed || null, reason: reason || "left recovery", movedAt: at, emergencyOverride: false })
+      : await admitPatient(request, env, { ...ctx, admission: { mrn, ward, bed: bed || undefined, class: cls, admittedAt: at, reason: reason || undefined }, emergencyOverride: false });
+    if (!moved.ok) return { ...moved, recoveryEncounterId: encounterId };   // the bed's own refusal; the patient stays in recovery
+  }
+
+  const closed = Encounter({ ...current, status: FINISHED, periodEnd: at, source: { system: "wardsynq-native", sourceId: `pacu-exit:${current.id}` } });
+  closed.disposition = outcome === "home" ? "home" : "admitted";
+  closed.recoveryExit = { outcome, encounterId: moved ? moved.encounterId : null, ward: ward || null, bed: bed || null, class: moved ? (stay ? stay.class : cls) : null, by: resolved.actor.id, at };
+  if (reason) closed.dispositionReason = reason;
+  try {
+    const out = await svc.put(closed, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:pacu-close` : null });
+    const loc = current.location || {};
+    if (loc.bed) await releaseBedClaim(svc, current);
+    return { ...base, ok: true, written: (moved ? moved.written || 0 : 0) + 1, encounterId, outcome, to: closed.recoveryExit, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
+  } catch (e) {
+    if (!moved) return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
+    return { ...base, ok: false, status: e instanceof VersionConflictError ? 409 : 502, error: "placed_but_recovery_not_closed",
+      detail: "The patient was placed on the ward, but the recovery stay could not be closed. Leave recovery again to close it.",
+      encounterId, placedEncounterId: moved.encounterId, written: moved.written || 0, actor: resolved.actor.id };
+  }
 }
 
 /**
@@ -438,7 +521,26 @@ async function listOpenCases(request, env, ctx) {
     const c = await loadCase(svc, caseId).catch(() => null);
     if (c) cases.push({ ...c, theatre: (enc.location && enc.location.ward) || null });
   }
-  return { ...base, ok: true, cases: cases.sort((a, b) => String(a.ledger?.[0]?.at || "").localeCompare(String(b.ledger?.[0]?.at || ""))) };
+  /* Everyone in recovery, so a stay can be ended from here (leaveRecovery), and the hospital's free
+   * recovery bays to send the next patient to: null when it lists no PACU beds (the screen falls back to
+   * bay "1"), false when the bed list could not be read, never a guess. */
+  const recovery = [];
+  for (const enc of (encounters || []).filter((e) => e && e.class === PACU && e.status === OPEN)) {
+    const caseId = str(enc.id).replace(/^wsq-pacu-/, "");
+    const c = await loadCase(svc, caseId).catch(() => null);
+    const mrn = ((enc.identifiers || []).find((i) => i && i.system === "opd-mrn") || {}).value || (c && c.patientMrn) || null;
+    recovery.push({ encounterId: enc.id, caseId: c ? caseId : null, patientId: enc.patientId, mrn, procedure: (c && c.procedure) || null, bed: (enc.location && enc.location.bed) || null, since: enc.periodStart || null, version: enc.version });
+  }
+  let pacuBays = null;
+  if (ctx.orgId) {
+    try {
+      const w = await getWardByName(env, ctx.orgId, PACU);
+      const beds = w ? (await listBeds(env, ctx.orgId, w.id)).filter((b) => b.active) : [];
+      const held = new Set((encounters || []).filter((e) => e && e.status === OPEN && str(e.location && e.location.ward).toLowerCase() === "pacu" && str(e.location && e.location.bed)).map((e) => str(e.location.bed).toLowerCase()));
+      if (beds.length) pacuBays = beds.filter((b) => b.state === "available" && !held.has(str(b.name).toLowerCase())).map((b) => b.name);
+    } catch { pacuBays = false; }
+  }
+  return { ...base, ok: true, cases: cases.sort((a, b) => String(a.ledger?.[0]?.at || "").localeCompare(String(b.ledger?.[0]?.at || ""))), recovery, pacuBays };
 }
 
 /** ctx: { migration, caseId, actorDeps, recordDeps } */
@@ -755,7 +857,7 @@ async function listImplants(request, env, ctx) {
 export {
   CASE_TYPE, ANES_TYPE, IMPLANT_TYPE, SURGERY, PACU, caseIdFor, encounterIdForCase,
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
-  signOutCase, abandonCase, rescheduleCase, recordTheatreTime, flagUnplannedReturn, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
+  signOutCase, abandonCase, rescheduleCase, recordTheatreTime, flagUnplannedReturn, recordOperativeNote, dispositionCase, leaveRecovery, getSurgicalCase, listSurgicalCases,
   listOpenCases,
   startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants,
