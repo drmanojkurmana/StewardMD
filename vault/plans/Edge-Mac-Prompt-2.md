@@ -118,6 +118,20 @@ After items 1 to 3 pass:
 - Finalise the Cactus report text in the runbook (A0.2 Android) for the owner to send. Do not send it.
 - If a gate fails: stop, report, and drop that model from v1 rather than working around it.
 
+## 8. Take over from the cloud session (it has stopped)
+The cloud session that was driving PR #1342 handed everything to you on 2026-10-02 and stopped.
+- **Own PR #1342** (https://github.com/drmanojkurmana/StewardMD/pull/1342) until it is merged:
+  - watch CI and reviews, fix red CI on this branch, and merge main in again when it conflicts (last time it was only `index.html` cache tokens: keep main's and add our suffix).
+  - `replay` fails on `heldout3.txt.abxSens: 125 (floor 126)`, red on main too. It is reported in PR comment 5940838154. Never lower the floor.
+  - Keep the PR description current.
+- **ABDM pending-link false positive** (not started):
+  - **Bug:** `functions/_wardsynq/abdm-hip.js:355-358` stores `sha10(ref)`. About 0.35% are 10 digits starting 6-9, which `MOBILE_EMBED` in `functions/_connect/abdm/no-phi.js` blocks, so `/ward/abdm-link-stay` returns 502.
+  - **Fix:** store a digit-free form of the same hash and accept the old form on read; keep `sha10` itself, because it builds the `DR-`/`INV-` refs:
+    `const pendTok = async (ref) => (await sha10(ref)).replace(/[0-9]/g, (d) => "ghijklmnop"[d]);`
+    Use it at the write (line 355) and the read (line 385): `pending.includes(await pendTok(r.ref)) || pending.includes(await sha10(r.ref))`.
+  - **Test:** add a regression test pinning a ref whose `sha10` is all digits starting 6-9, then run the full suite with `npm test`.
+- **Benches:** the host build of llama.cpp and both benches are documented in `test/native-host/fg-*.cpp`.
+
 ## Still the owner's call (do NOT do these)
 - MaiK Lite answering with "book linked" OFF gave wrong answers (mechanical mitral INR 2.0-3.0, an invented artemether dose). Whether to block or label those answers.
 - Whether a hot iPhone (thermal Serious) should keep handing all typed requests to the rules layer.
