@@ -32,6 +32,20 @@ Status 2026-10-03 (second pass, owner: "keep doing, then merge"):
   later reconciles into a conflict or a lost write is a patient-safety risk, not polish. Revisit only
   per flow with a server-confirmed state shown separately.
 
+Verification 2026-10-03 (before merge):
+- Android debug APK built (gradle assembleDebug, NDK) and run on the smd16k emulator (API 35): SmdDevice
+  registered; getPowerState / getTextScale / haptic (success performed:true, unknown type rejected);
+  Battery Saver toggles SMD_POWER.low + html.smd-low-power live; font_scale 1.3 makes 16px text 1.3x
+  (24 -> 31.2 px) and 2.0 lays out without clipping; recents card after Home is a blank placeholder
+  (the live tile while leaving the app still shows content, which is Android behavior); dark-mode cold
+  launch recorded frame by frame with no white frame after the boot-splash head guard (it caught ~300ms
+  of unstyled splash first). An ANR seen once was the emulator's software GPU under load (main thread in
+  ThreadedRenderer.syncAndDrawFrame, no app frames). The owner's Pixel was in use, so it was not touched.
+- iOS: App target Swift (MainViewController.swift + AppDelegate.swift) type-checks against the real
+  Capacitor xcframework and the iOS 27.2 SDK; storyboards and asset catalog compiled earlier (ibtool /
+  actool). A full xcodebuild of main currently stops at mlx-swift jit_compiler.cpp ('system' unavailable),
+  because main still pins Layr-Labs 0f4fe40; unrelated to this work.
+
 Correction to B10: `theme-reveal.js` is a one-shot View Transition on a user's theme toggle, not an
 ambient loop, so it needs no power or visibility pause. `thinking-orbs.js` had NO reduced-motion
 path at all; it now holds one still frame for reduced motion and Low Power Mode.
