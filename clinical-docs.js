@@ -208,11 +208,13 @@
     if (S.type === "mlc" || S.type === "mccd") return '<div class="kit-status" role="note">' + ms("gavel") + "<span>Check the format your hospital and state require before signing.</span></div>";
     return "";
   }
+  // Privacy mode (privacy-mode.js): inputs that hold who the patient is draw as dots while it is on.
+  var PHI_F = { name: 1, guardian: 1, address: 1, mlcno: 1, broughtBy: 1 };
   function fieldHtml(f) {
     var id = "dl_" + f[0], v = S.vals[f[0]] == null ? "" : S.vals[f[0]], lab = '<span class="kit-fl">' + esc(f[1]) + "</span>";
     if (f[2] === "select") return '<label class="kit-field" for="' + id + '">' + lab + '<select id="' + id + '" class="kit-inp" data-dl-f="' + f[0] + '"><option value=""></option>' + f[3].map(function (o) { return '<option' + (o === v ? " selected" : "") + ">" + esc(o) + "</option>"; }).join("") + "</select></label>";
     if (f[2] === "textarea") return '<label class="kit-field wide" for="' + id + '">' + lab + '<textarea id="' + id + '" rows="3" class="kit-inp" data-dl-f="' + f[0] + '">' + esc(v) + "</textarea></label>";
-    return '<label class="kit-field" for="' + id + '">' + lab + '<input id="' + id + '" class="kit-inp" type="' + (f[2] === "date" ? "date" : "text") + '" data-dl-f="' + f[0] + '" value="' + esc(v) + '"></label>';
+    return '<label class="kit-field" for="' + id + '">' + lab + '<input id="' + id + '" class="kit-inp" type="' + (f[2] === "date" ? "date" : "text") + '" data-dl-f="' + f[0] + '"' + (PHI_F[f[0]] ? " data-phi-input" : "") + ' value="' + esc(v) + '"></label>';
   }
   function langRow() {
     return '<div class="kit-row" role="group" aria-label="Language">' + ["en", "te", "hi"].map(function (l) {
@@ -327,7 +329,7 @@
       var html = documentHtml(S.type, S.vals, currentX());
       if (cmd === "print") { output(html, S.type); return; }
       var pv = D.querySelector("#smdDocs .dl-preview");
-      if (pv) { pv.hidden = false; pv.innerHTML = '<iframe title="Document preview" class="dl-frame"></iframe>'; var fr = pv.querySelector("iframe"); fr.srcdoc = html; }
+      if (pv) { pv.hidden = false; pv.setAttribute("data-phi-unmasked", ""); pv.innerHTML = '<iframe title="Document preview" class="dl-frame"></iframe>'; var fr = pv.querySelector("iframe"); fr.srcdoc = html; }
     }
   }
   function onInput(e) {

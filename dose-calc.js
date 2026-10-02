@@ -329,6 +329,13 @@
   var D = G.document, root = null;
   var S = { p: { weight: "", age: "", ageUnit: "years", sex: "", height: "", scr: "", crcl: "", childPugh: "", dialysis: false }, drug: null, q: "", source: "" };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  // Privacy mode (privacy-mode.js): wrap a patient name so it can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  // S.source is a patient name, "<name> (edited)", or the word "prefilled" (not a name).
+  function sourceHtml(src) {
+    var ed = / \(edited\)$/.test(src), base = ed ? src.slice(0, -9) : src;
+    return base === "prefilled" ? esc(src) : phi("name", base) + (ed ? " (edited)" : "");
+  }
   function haptic() { try { if (G.SMD_HAPTICS && G.SMD_HAPTICS.light) G.SMD_HAPTICS.light(); } catch (e) {} }
 
   function css() {
@@ -389,7 +396,7 @@
     if (d.bsa) der.push("BSA <b>" + d.bsa + " m²</b>");
     if (d.bmi) der.push("BMI <b>" + d.bmi + "</b>" + (d.obese ? " (obese)" : ""));
     if (d.renal) der.push((d.ageY != null && d.ageY < 18 && d.renal.how !== "entered" ? "eGFR" : "CrCl") + " <b>" + d.renal.value + " mL/min</b> <span>(" + esc(d.renal.how) + ")</span>");
-    return '<section class="dc-card" aria-labelledby="dcPt"><div class="dc-hrow"><h3 id="dcPt">Patient' + (S.source ? " · " + esc(S.source) : "") + '</h3><button class="dc-pick" data-dc="pick">Select patient</button></div>' +
+    return '<section class="dc-card" aria-labelledby="dcPt"><div class="dc-hrow"><h3 id="dcPt">Patient' + (S.source ? " · " + sourceHtml(S.source) : "") + '</h3><button class="dc-pick" data-dc="pick">Select patient</button></div>' +
       '<div class="dc-grid">' +
         field("weight", '<span>Weight (kg) <span class="dc-req">*</span></span>', ' placeholder="e.g. 55"') +
         '<label>Age<span class="dc-age"><input id="dc_age" data-k="age" inputmode="decimal" autocomplete="off" value="' + esc(p.age) + '" placeholder="e.g. 45"><select id="dc_ageUnit" data-k="ageUnit"><option value="years"' + (p.ageUnit === "years" ? " selected" : "") + '>years</option><option value="months"' + (p.ageUnit === "months" ? " selected" : "") + '>months</option><option value="days"' + (p.ageUnit === "days" ? " selected" : "") + '>days</option></select></span></label>' +
@@ -511,7 +518,7 @@
     var list = listPatients(), body = root.querySelector(".dc-body");
     var h = '<section class="dc-card"><div class="dc-hrow"><h3>Select patient</h3><button class="dc-chg" data-dc="back">Back</button></div>';
     if (!list.length) h += '<div class="dc-der">No patients on this device yet. Patients open or saved in ICU, brought in from Ward Sync, or open in OPD appear here. Enter the details by hand for now.</div>';
-    else h += '<div class="dc-plist">' + list.map(function (x, i) { return '<button class="dc-pl" data-pi="' + i + '">' + esc(x.label) + "<small>" + esc([x.src, x.sub].filter(Boolean).join(" · ")) + "</small></button>"; }).join("") + "</div>";
+    else h += '<div class="dc-plist">' + list.map(function (x, i) { return '<button class="dc-pl" data-pi="' + i + '">' + phi("name", x.label) + "<small>" + esc([x.src, x.sub].filter(Boolean).join(" · ")) + "</small></button>"; }).join("") + "</div>";
     body.innerHTML = h + "</section>";
     body._list = list;
   }

@@ -79,6 +79,22 @@ First launch and post-update: keep the full logo trace. App lock prompts immedia
 - Privacy mode: one tap in the header masks patient names, UHIDs, phone numbers and ages to initials
   (for teaching, screen sharing, rounds in public corridors). A CSS class on `<html>` plus a
   `data-phi` attribute on rendered PHI fields, so it is one rule, not per-screen code.
+  **BUILT 2026-10-03 (`privacy-mode.js`, `window.SMD_PRIVACY_MODE`; `SMD_PRIVACY` is privacy-config.js).**
+  Ages are NOT masked (clinical, needed for dosing). Renderers wrap each identifier as
+  `<span data-phi="R. K."><span>real</span></span>`; `html.smd-privacy` under `@media screen` hides the inner
+  span and draws the mask with `::after`, so textContent, print, PDF, export and share keep the real value.
+  Inputs carry `data-phi-input` (dots), patient photos `data-phi-img`. Toggle: home header only
+  (`mountPrivacyToggle`), session-scoped, default off, kill switch `smd_privacy_mode_enabled = "0"`.
+  Persistent cue: a 2 px frame round the viewport; an amber "this screen is not masked" label appears on
+  any screen in `UNMASKED` (`[data-phi-unmasked]`, `#wDicom`, `#icuImpOv`). Covered: ICU board / patient
+  banner / alerts / round note / summary / discharge header / saved patients / dialogs, GHIS Ward Sync
+  list + lab drawer, OPD EMR header, OPD queue + front desk, patient check-in sheet, My Clinic, Shared
+  Clinic, WardSynQ (19 views in `PHI_VIEWS`, the rest flagged unmasked), discharge.js, SURGX patient card,
+  logbook case reference, FollowCare enrol inputs, referrals inbox, home resume/recent/critical banner,
+  Recent cases, My Cases, Connect patient, dose calculator / neonatal patient pickers, clinical-docs inputs,
+  critical-result alert screen. NOT masked: free-text notes and reports, aria-labels (screen reader speech),
+  push-notification text from the server, opd.html staff console (not in the app).
+  Tests: `test/privacy-mode.test.mjs`, `test/run-privacy-mode-ui.mjs`.
 - Turn `smd_applock` ON after the owner's device test.
 
 **B3. Dynamic Type and Android font scale.** Use `@capacitor/text-zoom` (8.0.1 on npm, official,

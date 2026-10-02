@@ -19,6 +19,8 @@
     } catch (e) { return false; }
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+  // Privacy mode (privacy-mode.js): the patient name is wrapped so it can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function toast(m) { try { (G.toast || function () {})(m); } catch (e) {} }
 
   function fb() { return G.firebase; }
@@ -109,7 +111,7 @@
       var badge = r.status === "sent" ? '<span style="background:#0e6e63;color:#fff;font-size:10px;padding:2px 7px;border-radius:999px">NEW</span>' :
         '<span style="color:#94a3b8;font-size:11px">' + esc(r.status) + "</span>";
       return '<div style="border:1px solid #e2e8ec;border-radius:12px;padding:12px;margin:8px 0">' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b>' + esc(r.patient && r.patient.name || "Patient") + "</b>" + badge + "</div>" +
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b>' + phi("name", r.patient && r.patient.name, esc(r.patient && r.patient.name || "Patient")) + "</b>" + badge + "</div>" +
         '<div style="font-size:12.5px;color:#5a7184;margin:3px 0">' + esc(r.dx || "No diagnosis") + (r.patient && r.patient.bed ? " · Bed " + esc(r.patient.bed) : "") + "</div>" +
         (r.reason ? '<div style="font-size:12.5px;margin:4px 0">Reason: ' + esc(r.reason) + "</div>" : "") +
         '<div style="font-size:11.5px;color:#94a3b8;margin:2px 0 8px">From ' + esc(r.fromName || r.fromSmdId || "a doctor") + "</div>" +

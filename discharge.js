@@ -60,6 +60,9 @@
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen (never in print);
+  // plain esc() without it, so the staff console and tests see the markup they always did.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   // aria-hidden: the icon name is a font ligature, not words; without it "verified Sign and finalise" was the button's name (LT-31).
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '" aria-hidden="true">' + name + "</span>"; }
   /* THE STAFF LANGUAGE, as ward.js (owner decision 2026-09-15): every string this screen writes goes through wT (plain),
@@ -315,18 +318,18 @@
     var p = s.patient || {}, e = s.encounter || {};
     var los = stayDays(e.admittedAt, e.dischargedAt);
     var facts = [
-      p.mrn ? { l: "MRN", v: p.mrn, mono: true } : null,
+      p.mrn ? { l: "MRN", v: p.mrn, mono: true, phi: "id" } : null,
       p.sex ? { l: wT("ward.dc-sex", "Sex"), v: p.sex } : null,
       e.ward ? { l: wT("ward.dc-ward", "Ward"), v: e.bed ? wT("ward.dc-ward-bed", "{ward}, bed {bed}", { ward: e.ward, bed: e.bed }) : e.ward } : null,
       { l: wT("ward.dc-admitted", "Admitted"), v: when(e.admittedAt, true, s.print) || wT("ward.dc-not-recorded-lc", "not recorded") },
       { l: wT("ward.dc-discharged", "Discharged"), v: when(e.dischargedAt, true, s.print) || wT("ward.dc-not-yet", "not yet") },
       los === null ? null : { l: wT("ward.dc-stay", "Stay"), v: los === 1 ? wT("ward.dc-stay-day", "{n} day", { n: los }) : wT("ward.dc-stay-days", "{n} days", { n: los }) }
     ].filter(Boolean).map(function (f) {
-      return '<div class="d-fact"><dt>' + esc(f.l) + "</dt><dd" + (f.mono ? ' class="mono"' : "") + ">" + esc(f.v) + "</dd></div>";
+      return '<div class="d-fact"><dt>' + esc(f.l) + "</dt><dd" + (f.mono ? ' class="mono"' : "") + ">" + (f.phi ? phi(f.phi, f.v) : esc(f.v)) + "</dd></div>";
     }).join("");
     return '<div class="d-identity"><div class="d-idmain">' +
       '<span class="d-avatar" aria-hidden="true">' + esc(initials(p.name)) + "</span>" +
-      "<div><h2>" + esc(p.name || s.patientId || wT("ward.dc-unnamed-patient", "Unnamed patient")) + "</h2>" +
+      "<div><h2>" + (p.name ? phi("name", p.name) : s.patientId ? phi("id", s.patientId) : esc(wT("ward.dc-unnamed-patient", "Unnamed patient"))) + "</h2>" +
       // An unmerged trauma record must never read as a confirmed identity on a document that leaves
       // the hospital.
       (p.provisional ? '<span class="d-chip warning">' + ms("help") + wTH("ward.dc-provisional-identity", "Provisional identity, not yet merged") + "</span>" : "") +
