@@ -6,8 +6,27 @@ Dynamic Type, icon process), mapped onto StewardMD `origin/main` at `1afb444b5`,
 the list does not cover. Skills applied: ui-ux-pro-max, anti-ui-slop (polish), impeccable
 (polish, animate), emil-design-eng, mobile-native.
 
-Nothing here is built yet. Every risky item ships behind a flag with a recovery point, per
-`STEWARDMD-KNOWLEDGE.md` section 2.
+Every risky item ships behind a flag with a recovery point, per `STEWARDMD-KNOWLEDGE.md` section 2.
+
+## Owner decisions (2026-10-03)
+
+1. Splash: full 3 s sequence on the FIRST open only, fast on every later open. Built
+   (`index.html` splash pace script; kill switch `smd_splash_fast="0"`).
+2. Launch follows the SYSTEM light/dark mode. Built (native launch colors, web view backgrounds,
+   HTML splash on every platform; Android's 06-18 clock guess removed).
+3. Android haptics: yes, through the system's tuned `performHapticFeedback` constants only.
+   Built (`SmdDevice.haptic`, routed from `haptics.js`).
+4. App lock: as recommended. Built: 5-minute background relock behind an opaque shield, 2 h grace
+   still wins, kill switch `smd_applock_relock="0"`. Correction: the `smd_applock` flag is never read
+   (`flagOn()` is defined but unused); `ensureSetup()` already forces the chooser on every signed-in
+   user (test/run-applock-ui.mjs asserts "forcing is not flag-gated"), so lock-by-default is already
+   live and needs no flag flip.
+5. Insulin dose: swap, not count-up (no intermediate doses on screen).
+6. Celebration: achievements in clinical progress (the clinician's own milestones), never patient events.
+
+Correction to B10: `theme-reveal.js` is a one-shot View Transition on a user's theme toggle, not an
+ambient loop, so it needs no power or visibility pause. `thinking-orbs.js` had NO reduced-motion
+path at all; it now holds one still frame for reduced motion and Low Power Mode.
 
 ## Principles (the Nessie list, adapted for a clinical tool)
 
