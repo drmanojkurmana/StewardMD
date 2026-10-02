@@ -135,6 +135,10 @@ major finding was fixed and checked by an independent verifier. Key changes:
   on the exact baseline, prolonged is over 180 s. No deck key changed (verified against PhysioNet records).
 - Engine: quiz options show in a stable shuffled order per lesson and question (`optOrder` in specialty-learn.js);
   `data-k` keeps the file index and digit keys follow the screen. Keys were 85% in positions A/B before.
+- Realistic images: 9 of 45 rejected as anatomically wrong and reverted to their SVG diagrams (gy1-blood-ureter,
+  ob3-mechanism, ob3-pelvis-head, ob10-instrumental, ob10-episiotomy, ob8-preterm-what, gy8-sterilisation,
+  gy4-pid, gy6-pop-types); 36 remain. SVG fixes: episiotomy cut mirrored to the woman's right, PID liver moved to
+  her right, tubal occlusion marks moved to the isthmus. These 9 can come back only as corrected regenerations.
 - Doses in drills are pinned to `kb/clinical-protocols` (ICMR PPH, FOGSI HDP); lessons name ICMR/FOGSI figures and
   the WHO alternative beside them.
 
