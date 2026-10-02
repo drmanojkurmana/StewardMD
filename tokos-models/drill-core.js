@@ -9,7 +9,9 @@
    - Only the FIRST answer given for a stage counts; a remediation loop lets the learner recover but not re-score.
    - A stage whose correct option is critical is a critical step. It is missed when it is answered wrongly,
      never answered (skipped by a branch or the attempt ended), or answered after its timeSec budget.
-   - timeSec is the budget for that decision, counted from the previous answer (or 0 for the first stage).
+   - timeSec is the budget for that decision. A choice carries spentSec (time on that stage's own clock, which
+     starts when the stage opens, so reading the previous feedback is not charged); without spentSec the time
+     is counted from the previous answer (or 0 for the first stage).
    - pct = round(100 * ideal stages answered correctly and in time / ideal stages). */
 (function (G) {
   "use strict";
@@ -55,7 +57,7 @@
     choices.forEach(function (c) {
       if (!m[c.stage] || first[c.stage]) return;
       var at = typeof c.atSec === "number" ? c.atSec : prevAt;
-      first[c.stage] = { option: c.option, spent: Math.max(0, at - prevAt) };
+      first[c.stage] = { option: c.option, spent: typeof c.spentSec === "number" ? Math.max(0, c.spentSec) : Math.max(0, at - prevAt) };
       prevAt = Math.max(prevAt, at);
     });
     var ok = 0, misses = [], lines = [];

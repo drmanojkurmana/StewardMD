@@ -82,6 +82,7 @@
     line: T("Run a labour hour by hour: watch the chart, act when it needs you.", "प्रसव को घंटे-दर-घंटे चलाएँ: चार्ट देखें, ज़रूरत हो तब कार्रवाई करें।"),
     pickH: T("Choose a labour", "एक प्रसव चुनें"), mbbs: T("MBBS", "MBBS"), resident: T("Resident", "रेज़िडेंट"),
     how: T("Time moves only when you wait. Each wait is watched in 5-minute steps; act between waits.", "समय केवल इंतज़ार करने पर बढ़ता है। हर इंतज़ार 5-मिनट के चरणों में देखा जाता है; इंतज़ारों के बीच कार्रवाई करें।"),
+    delayNote: T("This simulator marks delay at Zhang's 95th percentile for each centimetre. Indian labour rooms use the partograph or the WHO Labour Care Guide 2020. Their time limits per centimetre are longer. Follow your unit's chart.", "यह सिम्युलेटर हर सेंटीमीटर के लिए ज़ांग के 95वें पर्सेंटाइल पर देरी मानता है। भारतीय लेबर रूम पार्टोग्राफ़ या WHO लेबर केयर गाइड 2020 का उपयोग करते हैं। उनकी हर सेंटीमीटर की समय-सीमा लंबी है। अपनी यूनिट का चार्ट मानें।"),
     sources: T("Sources", "स्रोत"), learnOnly: T("For learning, not for clinical decisions. Rule-based, pending specialist review.", "सीखने के लिए, क्लिनिकल निर्णय के लिए नहीं। नियम-आधारित, विशेषज्ञ समीक्षा बाकी।"),
     backTest: T("Back to Test", "टेस्ट पर वापस"), backPick: T("Back to the labours", "प्रसवों पर वापस"),
     since: T("Since admission", "भर्ती से"), stage1: T("First stage", "पहला चरण"), stage2: T("Second stage", "दूसरा चरण"),
@@ -89,7 +90,7 @@
     lgCervix: T("Cervix (cm)", "गर्भाशय-ग्रीवा (cm)"), lgHead: T("Head station", "सिर स्टेशन"), lgUc: T("Contractions /10 min", "संकुचन /10 मिनट"), lgCtg: T("CTG class", "CTG वर्ग"),
     hours: T("hours", "घंटे"),
     obs: T("Now", "अभी"), cervix: T("Cervix", "गर्भाशय-ग्रीवा"), head: T("Head", "सिर"), uc: T("Contractions", "संकुचन"), per10: T("/10 min", "/10 मिनट"),
-    oxy: T("Oxytocin", "ऑक्सीटोसिन"), off: T("Off", "बंद"), fhr: T("Fetal heart", "भ्रूण हृदय गति"), decels: T("Decelerations", "डीसेलरेशन"),
+    oxy: T("Oxytocin", "ऑक्सीटोसिन"), off: T("Off", "बंद"), fhr: T("Fetal heart", "भ्रूण हृदय गति"), decels: T("Decelerations", "डिसेलेरेशन"),
     pulse: T("Pulse", "नाड़ी"), bp: T("BP", "BP"), membranes: T("Membranes", "झिल्ली"),
     intact: T("Intact", "अक्षुण्ण"), clear: T("Ruptured, clear", "फटी, साफ़"), meconium: T("Ruptured, meconium", "फटी, मेकोनियम"),
     dNone: T("None", "कोई नहीं"), dLate: T("Late", "लेट"), dProlonged: T("Prolonged", "लंबा"),
@@ -109,7 +110,7 @@
     "normal-multi": T("Normal labour, second baby", "सामान्य प्रसव, दूसरा शिशु"),
     "slow-primi": T("Slow progress, weak contractions", "धीमी प्रगति, कमज़ोर संकुचन"),
     "epidural-multi": T("She asks for an epidural", "वह एपिड्यूरल माँगती है"),
-    "obstructed": T("Obstructed labour", "रुका हुआ प्रसव"),
+    "obstructed": T("Obstructed labour", "अवरुद्ध प्रसव"),
     "compromise": T("Fetal compromise", "भ्रूण संकट"),
     "tachysystole": T("Tachysystole on oxytocin", "ऑक्सीटोसिन पर टैकीसिस्टोल")
   };
@@ -153,7 +154,7 @@
       '<div class="sp-scroll sp-pad"><div class="sp-col lb-pick"><p class="lb-lede">' + s("line") + "</p>" +
       '<h2 class="sp-h2">' + s("mbbs") + '</h2><ul class="sp-rows">' + group("mbbs") + "</ul>" +
       '<h2 class="sp-h2">' + s("resident") + '</h2><ul class="sp-rows">' + group("resident") + "</ul>" +
-      '<p class="sp-small lb-how">' + s("how") + "</p>" +
+      '<p class="sp-small lb-how">' + s("how") + "</p>" + '<p class="sp-small lb-how">' + s("delayNote") + "</p>" +
       '<h2 class="sp-h2">' + s("sources") + "</h2>" + srcList(m) + '<p class="sp-note">' + s("learnOnly") + "</p></div></div>",
       typeof focusSel === "string" ? focusSel : null);
   }

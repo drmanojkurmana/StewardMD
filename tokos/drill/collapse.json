@@ -57,6 +57,16 @@
           "text": { "en": "Halve the shock energy to protect the fetus.", "hi": "भ्रूण की रक्षा के लिए शॉक ऊर्जा आधी करें।" },
           "feedback": { "en": "Use the same energy as in any adult; the mother's survival saves the fetus.", "hi": "किसी भी वयस्क जैसी ही ऊर्जा दें; माँ का बचना ही भ्रूण को बचाता है।" } }
       ] },
+    { "id": "causes", "src": 0, "timeSec": 60,
+      "prompt": { "en": "While CPR continues: she has been on magnesium sulphate. Reversible causes?", "hi": "CPR जारी रहते हुए: वह मैग्नीशियम सल्फेट पर थी। सुधारे जा सकने वाले कारण?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Stop the magnesium and give 10 mL of 10% calcium gluconate (or 10% calcium chloride) slowly IV, while working through the 4Hs, 4Ts and the pregnancy 4Ps.", "hi": "मैग्नीशियम बंद करें और 10% कैल्शियम ग्लूकोनेट (या 10% कैल्शियम क्लोराइड) 10 mL धीमे IV दें, साथ ही 4H, 4T और गर्भावस्था के 4P देखें।" },
+          "feedback": { "en": "RCOG gives calcium as the antidote to magnesium toxicity. RCUK 4Ps: pre-eclampsia and eclampsia, puerperal sepsis, placental and uterine complications, peripartum cardiomyopathy.", "hi": "RCOG मैग्नीशियम विषाक्तता का प्रतिरोधी कैल्शियम बताता है। RCUK के 4P: प्री-एक्लेम्पसिया व एक्लेम्पसिया, प्रसूति सेप्सिस, प्लेसेंटा व गर्भाशय जटिलताएँ, पेरिपार्टम कार्डियोमायोपैथी।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Give another 4 g of magnesium in case this was a fit.", "hi": "शायद दौरा हो, इसलिए 4 g मैग्नीशियम और दें।" },
+          "feedback": { "en": "Magnesium toxicity is a cause of arrest here. Stop it and give calcium.", "hi": "यहाँ अरेस्ट का एक कारण मैग्नीशियम विषाक्तता है। इसे बंद करें और कैल्शियम दें।" } }
+      ] },
     { "id": "hysterotomy", "src": 0, "timeSec": 30,
       "prompt": { "en": "Four minutes of good CPR and no output. What now?", "hi": "4 मिनट के अच्छे CPR के बाद भी कोई धड़कन नहीं। अब क्या?" },
       "options": [
@@ -69,16 +79,6 @@
         { "id": "c", "correct": false,
           "text": { "en": "Continue CPR for 20 more minutes before considering delivery.", "hi": "प्रसव सोचने से पहले 20 मिनट और CPR जारी रखें।" },
           "feedback": { "en": "Emptying the uterus improves maternal resuscitation; waiting loses mother and baby.", "hi": "गर्भाशय खाली करने से माँ का पुनर्जीवन बेहतर होता है; इंतज़ार से माँ और शिशु दोनों खोते हैं।" } }
-      ] },
-    { "id": "causes", "src": 0, "timeSec": 60,
-      "prompt": { "en": "She has been on magnesium sulphate. Reversible causes?", "hi": "वह मैग्नीशियम सल्फेट पर थी। सुधारे जा सकने वाले कारण?" },
-      "options": [
-        { "id": "a", "correct": true, "critical": true,
-          "text": { "en": "Stop the magnesium and give 10 mL of 10% calcium gluconate (or 10% calcium chloride) slowly IV, while working through the 4Hs, 4Ts and the pregnancy 4Ps.", "hi": "मैग्नीशियम बंद करें और 10% कैल्शियम ग्लूकोनेट (या 10% कैल्शियम क्लोराइड) 10 mL धीमे IV दें, साथ ही 4H, 4T और गर्भावस्था के 4P देखें।" },
-          "feedback": { "en": "RCOG gives calcium as the antidote to magnesium toxicity. RCUK 4Ps: pre-eclampsia and eclampsia, puerperal sepsis, placental and uterine complications, peripartum cardiomyopathy.", "hi": "RCOG मैग्नीशियम विषाक्तता का प्रतिरोधी कैल्शियम बताता है। RCUK के 4P: प्री-एक्लेम्पसिया व एक्लेम्पसिया, प्रसूति सेप्सिस, प्लेसेंटा व गर्भाशय जटिलताएँ, पेरिपार्टम कार्डियोमायोपैथी।" } },
-        { "id": "b", "correct": false,
-          "text": { "en": "Give another 4 g of magnesium in case this was a fit.", "hi": "शायद दौरा हो, इसलिए 4 g मैग्नीशियम और दें।" },
-          "feedback": { "en": "Magnesium toxicity is a cause of arrest here. Stop it and give calcium.", "hi": "यहाँ अरेस्ट का एक कारण मैग्नीशियम विषाक्तता है। इसे बंद करें और कैल्शियम दें।" } }
       ] },
     { "id": "after", "src": 0, "timeSec": 60,
       "prompt": { "en": "Circulation returns after delivery. Next?", "hi": "प्रसव के बाद धड़कन लौट आती है। अगला?" },

@@ -355,9 +355,9 @@
         answered = pick != null;
         body = '<h2 class="ln-h">' + s("check") + "</h2>" + (l.check.length > 1 ? '<p class="sp-small ln-qof">' + s("qOf", { i: qi + 1, n: l.check.length }) + "</p>" : "") +
           '<p class="ln-q" id="lnQ">' + rich(q.q) + "</p>" +
-          '<div class="sp-answers' + (answered ? " done" : "") + '" role="group" aria-labelledby="lnQ">' + q.o.map(function (o, j) {
-            var stt = !answered ? "" : j === q.a ? "right" : j === pick ? "wrong" : "dim";
-            var mk = stt === "right" ? ico("check") || "✓" : stt === "wrong" ? ico("close") || "x" : j + 1;
+          '<div class="sp-answers' + (answered ? " done" : "") + '" role="group" aria-labelledby="lnQ">' + optOrder(l.id, qi, q.o.length).map(function (j, pos) {
+            var o = q.o[j], stt = !answered ? "" : j === q.a ? "right" : j === pick ? "wrong" : "dim";
+            var mk = stt === "right" ? ico("check") || "✓" : stt === "wrong" ? ico("close") || "x" : pos + 1;
             return '<button type="button" class="sp-ans" data-act="lnans" data-k="' + j + '"' + (stt ? ' data-state="' + stt + '" aria-disabled="true"' : "") + '><span class="k" aria-hidden="true">' + mk + "</span>" + tx(o) + "</button>";
           }).join("") + "</div>" +
           '<div id="lnFb" aria-live="polite">' + (answered ? feedback(q, pick) : '<p class="sp-small ln-hint">' + s("answerFirst") + "</p>") + "</div>";
@@ -379,6 +379,16 @@
       if (key === "see") { wireSee(l); fillSvgs(); }
       var ban = G.document.querySelector("#" + cfg.rootId + " .ln-banner img");
       if (ban) ban.addEventListener("error", function () { ban.parentNode.hidden = true; });
+    }
+
+    // Options are shown in a stable shuffled order (same for a lesson and question every time), so the
+    // key's position in the file is no cue. data-k keeps the original index; digit keys follow the screen.
+    function optOrder(id, qi, n) {
+      var h = 0, k = String(id) + ":" + qi, i, r, t, ord = [];
+      for (i = 0; i < k.length; i++) h = (h * 31 + k.charCodeAt(i)) | 0;
+      for (i = 0; i < n; i++) ord.push(i);
+      for (i = n - 1; i > 0; i--) { h = (h * 1103515245 + 12345) | 0; r = (h >>> 16) % (i + 1); t = ord[i]; ord[i] = ord[r]; ord[r] = t; }
+      return ord;
     }
 
     function feedback(q, pick) {
@@ -756,7 +766,11 @@
       var key = W.les && stepKeys(W.les)[W.step];
       if (e.key === "ArrowRight") { var nx = G.document.getElementById("lnNext"); if (nx && !nx.disabled) { e.preventDefault(); renderStep(W.step + 1, true); } }
       else if (e.key === "ArrowLeft" && W.step > 0) { e.preventDefault(); renderStep(W.step - 1, true); }
-      else if (key && key.indexOf("check") === 0 && /^[1-9]$/.test(e.key)) { e.preventDefault(); answer(+e.key - 1, true); }
+      else if (key && key.indexOf("check") === 0 && /^[1-9]$/.test(e.key)) {
+        e.preventDefault();
+        var cq = W.les.check[+key.slice(5)], ord = cq ? optOrder(W.les.id, +key.slice(5), cq.o.length) : [];
+        if (ord[+e.key - 1] != null) answer(ord[+e.key - 1], true);
+      }
     };
     K.lnrevise = function (e) {
       var r = W.rev;

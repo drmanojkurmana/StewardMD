@@ -45,7 +45,7 @@ ok("no emoji chip prefixes remain on the follow-up labels", !/label: "[\u{1F6A9}
 for (const s of ["Thanks, noted.", "Thanks for telling us. This helps.", "Sorry it missed. Please tell us why, so we can improve.",
                  "Almost there, finalizing", "Different topic: search the web", "Saved only on this device. Your history never leaves your phone.",
                  "MaiK took too long to respond. The knowledge search may be busy.", "Clinical workflow: next steps",
-                 "Couldn't load the detail. Ask again for the full answer.", "not directly supported by the cited sources. Verify before acting."]) {
+                 "Couldn't load the detail. Try again", "not directly supported by the cited sources. Verify before acting."]) {
   ok(`de-dashed app string present: "${s.slice(0, 40)}"`, home.includes(s));
 }
 for (const gone of ["Thanks — noted.", "Almost there — finalizing", "Different topic — search the web", "Clinical workflow — next steps",

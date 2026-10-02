@@ -77,6 +77,12 @@ test("bleedingPattern: FIGO System 1 limits, 24 to 38 days, up to 8 days, range 
   assert.deepEqual(f({ durationDays: 9 }), ["prolonged"]);
   assert.deepEqual(f({ regularityRangeDays: 9 }), []);
   assert.deepEqual(f({ regularityRangeDays: 10 }), ["irregular"]);
+  // FIGO 2018: up to 7 days at 26 to 41 years, up to 9 days at 18 to 25 and 42 to 45
+  assert.deepEqual(f({ regularityRangeDays: 8, ageYears: 30 }), ["irregular"]);
+  assert.deepEqual(f({ regularityRangeDays: 7, ageYears: 30 }), []);
+  assert.deepEqual(f({ regularityRangeDays: 8, ageYears: 22 }), []);
+  assert.deepEqual(f({ regularityRangeDays: 8, ageYears: 43 }), []);
+  assert.equal(P.bleedingPattern(Object.assign({}, ok, { ageYears: "30" })).ok, false);
   assert.deepEqual(f({ volume: "heavy", intermenstrual: true }), ["heavy", "intermenstrual"]);
   assert.deepEqual(f({ volume: "light" }), ["light"]);
   const many = P.bleedingPattern({ frequencyDays: 60, durationDays: 12, regularityRangeDays: 20, volume: "heavy" });
@@ -107,7 +113,7 @@ test("vignettes: expected answers pinned independently of classify", () => {
   const want = {
     "polyp-spotting": ["P"], "adenomyosis-painful": ["A"], "fibroid-submucosal": ["L"], "fibroid-intramural": ["L"], "fibroid-hybrid": ["L"],
     "endometrial-carcinoma": ["M"], "coagulopathy-adolescent": ["C"], "ovulatory-pcos": ["O"], "endometrial-primary": ["E"],
-    "iatrogenic-injectable": ["I"], "iatrogenic-anticoagulant": ["I"], "not-classified-avm": ["N"], "ovulatory-plus-hyperplasia": ["M", "O"].sort((a, b) => "PALMCOEIN".indexOf(a) - "PALMCOEIN".indexOf(b)),
+    "iatrogenic-injectable": ["I"], "iatrogenic-anticoagulant": ["C"], "not-classified-avm": ["N"], "ovulatory-plus-hyperplasia": ["M", "O"].sort((a, b) => "PALMCOEIN".indexOf(a) - "PALMCOEIN".indexOf(b)),
     "polyp-plus-fibroid": ["P", "L"], "adenomyosis-plus-subserosal": ["A", "L"], "ovulatory-plus-coagulopathy": ["C", "O"]
   };
   for (const v of data.vignettes) assert.deepEqual(P.classify(v.findings).codes, want[v.id], v.id);
@@ -144,4 +150,15 @@ test("category text: English and Hindi", () => {
     assert.ok(!DASH.test(c.def.en + c.def.hi));
   }
   for (const n of Object.values(P.notes)) assert.ok(n.en && /[ऀ-ॿ]/.test(n.hi) && !DASH.test(n.en + n.hi));
+});
+
+test("hybrid leiomyoma: endometrial side 0 to 3, serosal side 5 to 7", () => {
+  for (const ok of ["0-5", "2-5", "3-7", "1-6"]) assert.equal(P.classify({ leiomyoma: ok }).ok, true, ok);
+  for (const bad of ["6-2", "8-3", "5-2", "2-4", "2-8", "4-6"]) assert.equal(P.classify({ leiomyoma: bad }).ok, false, bad);
+});
+
+test("FIGO 2018: anticoagulant bleeding is AUB-C, and the I definition says so", () => {
+  const c = P.categories.find((x) => x.code === "C"), i = P.categories.find((x) => x.code === "I");
+  assert.match(c.def.en, /anticoagulants/);
+  assert.match(i.def.en, /anticoagulants go under C/);
 });

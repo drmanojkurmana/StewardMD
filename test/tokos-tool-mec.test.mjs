@@ -22,3 +22,6 @@ test("mec: every condition/method pair is either a category 1-4 or an explicit n
     if (r.ok) assert.match(String(r.value), /^[1-4](\/[1-4])?$/); else assert.ok(r.error.en && r.error.hi);
   }
 });
+test("mec: every result states the WHO MEC differences India follows", () => {
+  assert.match(m.compute({ condition: "pp_bf_lt21", method: "dmpa" }).lines.map((l) => l.en).join(" "), /WHO MEC 2015.*48 hours postpartum is category 1/);
+});

@@ -19,6 +19,8 @@
      below 0 station; the model also requires ruptured membranes (RCOG GTG 26 lists it; not opened here).
    - Judgements: oxytocin only for inadequate contractions or confirmed delay and never in obstruction; no
      amniotomy alone to prevent delay; no IV fluids to shorten labour (WHO 2018 recs 28, 30, 32; MCPC).
+     Caesarean or vacuum needs an indication: delay, a pathological CTG (a suspicious one is not enough, FIGO), or
+     obstruction, which is delivered by caesarean at once (MCPC); obstruction left 2 hours or more is flagged.
 
    Teaching simplifications (ponytail: model choices, not clinical data; a reviewer may tune them):
    - No descent before full dilatation; in the second stage the head descends linearly to +3 over the drawn
@@ -65,7 +67,7 @@
       brief: T("First labour at 5 cm; contractions feel weak and infrequent.", "पहला प्रसव, 5 cm; संकुचन कमज़ोर और कम लगते हैं।") },
     "epidural-multi": { level: "mbbs", parity: 2, dil: 5, station: -2, kind: "epidural",
       brief: T("Third baby at 5 cm. She is in pain and asks for an epidural.", "तीसरा शिशु, 5 cm। उसे दर्द है और वह एपिड्यूरल माँगती है।") },
-    "obstructed": { level: "resident", parity: 2, dil: 6, station: -2, kind: "obstruction",
+    "obstructed": { level: "resident", parity: 3, dil: 6, station: -2, kind: "obstruction",
       brief: T("Fourth baby, 6 cm on admission, strong contractions, head high.", "चौथा शिशु, भर्ती पर 6 cm, तेज़ संकुचन, सिर ऊपर।") },
     "compromise": { level: "resident", parity: 1, dil: 7, station: -1, kind: "compromise",
       brief: T("Second baby at 7 cm, contracting well. Watch the CTG.", "दूसरा शिशु, 7 cm, अच्छे संकुचन। CTG पर नज़र रखें।") },
@@ -101,7 +103,7 @@
     refused: T("Not possible now: its prerequisites are not met.", "अभी संभव नहीं: इसकी शर्तें पूरी नहीं हैं।"),
     // judgements (outcome lines)
     oxytocin_not_indicated: T("Oxytocin was started without inadequate contractions or a confirmed delay. WHO does not recommend oxytocin to prevent delay.", "ऑक्सीटोसिन कमज़ोर संकुचन या पुष्ट देरी के बिना शुरू हुआ। WHO देरी रोकने के लिए ऑक्सीटोसिन की सलाह नहीं देता।"),
-    oxytocin_obstruction: T("Oxytocin was given in obstructed labour. Exclude disproportion and obstruction before augmenting: it risks uterine rupture.", "रुके हुए प्रसव में ऑक्सीटोसिन दिया गया। संवर्धन से पहले असमानता और रुकावट खारिज करें: इससे गर्भाशय फटने का खतरा है।"),
+    oxytocin_obstruction: T("Oxytocin was given in obstructed labour. Exclude disproportion and obstruction before augmenting: it risks uterine rupture.", "अवरुद्ध प्रसव में ऑक्सीटोसिन दिया गया। संवर्धन से पहले असमानता और रुकावट खारिज करें: इससे गर्भाशय फटने का खतरा है।"),
     amniotomy_routine: T("Amniotomy alone to prevent delay is not recommended (WHO); consider it with oxytocin for a confirmed delay.", "देरी रोकने के लिए केवल एम्नियोटॉमी की सलाह नहीं है (WHO); पुष्ट देरी में ऑक्सीटोसिन के साथ सोचें।"),
     fluids_not_indicated: T("IV fluids to shorten labour are not recommended (WHO); give them for a reason such as hypotension.", "प्रसव छोटा करने के लिए IV फ़्लूइड की सलाह नहीं है (WHO); इन्हें किसी कारण, जैसे BP गिरने, पर दें।"),
     cs_not_indicated: T("Caesarean without an indication: labour was progressing within Zhang's 95th percentiles and the CTG was normal.", "बिना कारण सिज़ेरियन: प्रसव ज़ांग के 95वें पर्सेंटाइल के भीतर बढ़ रहा था और CTG सामान्य था।"),
@@ -109,16 +111,25 @@
     tachysystole_ignored: T("Tachysystole ran for 30 minutes with oxytocin still on. Stop the oxytocin, turn her to her side, and consider acute tocolysis (FIGO).", "ऑक्सीटोसिन चालू रहते टैकीसिस्टोल 30 मिनट चला। ऑक्सीटोसिन बंद करें, करवट दिलाएँ, और तुरंत टोकोलिसिस पर विचार करें (FIGO)।"),
     pathological_ignored: T("The CTG stayed pathological for more than 30 minutes. FIGO: correct reversible causes at once, or expedite birth.", "CTG 30 मिनट से अधिक पैथोलॉजिकल रहा। FIGO: सुधारे जा सकने वाले कारण तुरंत ठीक करें, या जल्दी प्रसव कराएँ।"),
     analgesia_declined: T("She asked for pain relief. WHO recommends epidural analgesia for women who request it.", "उसने दर्द से राहत माँगी थी। WHO माँगने वाली महिलाओं के लिए एपिड्यूरल की सलाह देता है।"),
+    instrumental_not_indicated: T("Vacuum birth without an indication: the second stage was within Zhang's 95th percentile and the CTG was normal.", "बिना कारण वैक्यूम प्रसव: दूसरा चरण ज़ांग के 95वें पर्सेंटाइल के भीतर था और CTG सामान्य था।"),
+    instrumental_for_suspicious: T("Vacuum birth for a suspicious CTG. FIGO advises correcting reversible causes and close monitoring first.", "संदिग्ध CTG पर वैक्यूम प्रसव। FIGO पहले सुधारे जा सकने वाले कारण ठीक करने और कड़ी निगरानी की सलाह देता है।"),
+    cs_for_suspicious: T("Caesarean for a suspicious CTG. FIGO advises correcting reversible causes and close monitoring first. Expedite birth when the CTG is pathological and cannot be corrected.", "संदिग्ध CTG पर सिज़ेरियन। FIGO पहले सुधारे जा सकने वाले कारण ठीक करने और कड़ी निगरानी की सलाह देता है। CTG पैथोलॉजिकल हो और ठीक न हो, तब प्रसव शीघ्र कराएँ।"),
+    obstruction_neglected: T("Obstructed labour was left for 2 hours or more. Deliver by caesarean as soon as obstruction is recognised (MCPC).", "अवरुद्ध प्रसव को 2 घंटे या अधिक छोड़ा गया। रुकावट पहचानते ही सिज़ेरियन से प्रसव कराएँ (MCPC)।"),
     good: T("Well managed: each intervention had an indication.", "अच्छा प्रबंधन: हर हस्तक्षेप का कारण था।"),
     baby_path: T("Minutes of pathological CTG before birth: ", "जन्म से पहले पैथोलॉजिकल CTG के मिनट: ")
   };
-  var HARM = { oxytocin_obstruction: 1, tachysystole_ignored: 1, pathological_ignored: 1 };
+  var HARM = { oxytocin_obstruction: 1, tachysystole_ignored: 1, pathological_ignored: 1, obstruction_neglected: 1 };
 
   /* ---------- seeded randomness (mulberry32; the generator state lives in the labour state) ---------- */
+  // 32-bit integer multiply in ES5 (Math.imul is ES2015); same result as Math.imul for every input.
+  function imul(a, b) {
+    var ah = (a >>> 16) & 0xffff, al = a & 0xffff, bh = (b >>> 16) & 0xffff, bl = b & 0xffff;
+    return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0)) | 0;
+  }
   function rand(s) {
     var a = (s.rng = (s.rng + 0x6D2B79F5) | 0);
-    var t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    var t = imul(a ^ (a >>> 15), 1 | a);
+    t = (t + imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   }
   function gauss(s) { var u = 0; while (u === 0) u = rand(s); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rand(s)); }
@@ -153,9 +164,8 @@
     s.maternal.pulse = between(s, 76, 92); s.maternal.sbp = between(s, 108, 122); s.maternal.dbp = between(s, 66, 78);
     s.fhr.baseline = between(s, 125, 150);
     if (sc.kind === "obstruction") s.sched.arrestCm = between(s, 6, 7);
-    if (sc.kind === "compromise") s.sched.compromiseAt = between(s, 6, 18) * TICK;
+    if (sc.kind === "compromise") s.sched.compromiseAt = between(s, 2, 4) * TICK;
     if (sc.kind === "sensitive") s.sched.tachyAfter = between(s, 6, 12) * TICK;
-    if (sc.kind === "obstruction" && s.sched.arrestCm === s.dil) s.sched.arrestFrom = 0;
     newInterval(s);
     log(s, "start");
     return s;
@@ -208,11 +218,16 @@
     } else if (a === "fluids") {
       if (s.maternal.hypotension) endHypotension(s); else flag(s, "fluids_not_indicated");
     } else if (a === "instrumental") {
+      if (s.fhr.figo !== "pathological" && !delayed(s)) flag(s, s.fhr.figo === "suspicious" ? "instrumental_for_suspicious" : "instrumental_not_indicated");
       deliver(s, "instrumental");
     } else if (a === "caesarean") {
-      var fetal = s.fhr.figo === "pathological" || s.fhr.figo === "suspicious";
-      if (kind === "hypokinetic" || kind === "sensitive") { if (!fetal && s.oxytocin.since === null) flag(s, "cs_before_augmentation"); }
-      else if (!fetal && !delayed(s)) flag(s, "cs_not_indicated");
+      // FIGO: a pathological CTG that cannot be corrected is a reason to expedite birth; a suspicious one is not.
+      // Obstructed labour (arrest despite strong contractions) is delivered by caesarean at once (MCPC).
+      var path = s.fhr.figo === "pathological", susp = s.fhr.figo === "suspicious";
+      if (kind === "hypokinetic" || kind === "sensitive") {
+        if (!path && !susp && s.oxytocin.since === null) flag(s, "cs_before_augmentation");
+        else if (susp && !delayed(s)) flag(s, "cs_for_suspicious");
+      } else if (!path && !delayed(s) && !arrested(s)) flag(s, susp ? "cs_for_suspicious" : "cs_not_indicated");
       deliver(s, "caesarean");
     }
     if (a !== "observe" && a !== "instrumental" && a !== "caesarean") log(s, a);
@@ -266,7 +281,8 @@
     }
     // obstruction course: maternal distress, then fetal compromise (as in the MCPC partograph example)
     if (s.sched.arrestFrom != null) {
-      if ((s.t - s.sched.arrestFrom) % 60 === 0) s.maternal.pulse += 6;
+      if ((s.t - s.sched.arrestFrom) % 60 === 0) s.maternal.pulse = Math.min(160, s.maternal.pulse + 6);
+      if (s.t - s.sched.arrestFrom >= 120) flag(s, "obstruction_neglected");
       if (s.sched.oxyInObstruction != null && s.oxytocin.on && s.t - s.sched.oxyInObstruction >= 60 && !s.sched.ruptureSigns) {
         s.sched.ruptureSigns = s.t; s.maternal.pulse = Math.max(s.maternal.pulse, 124); log(s, "rupture_signs");
       }

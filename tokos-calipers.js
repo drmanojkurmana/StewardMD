@@ -6,9 +6,9 @@
   var NS = "http://www.w3.org/2000/svg";
   var WORDS = {
     en: { nb: " ", range: "Range", span: "Span", min: "min", s: "s", reduced: "reduced (below 5)", normal: "normal (5 to 25)", increased: "increased (above 25)",
-      short: "shorter than a deceleration (under 15\u00a0s)", decel: "deceleration length (15\u00a0s to 3\u00a0min)", prolonged: "prolonged (3 to 5\u00a0min)", over5: "over 5\u00a0min" },
+      short: "too short for a deceleration (15\u00a0s or less)", decel: "deceleration length (over 15\u00a0s, up to 3\u00a0min)", prolonged: "prolonged (over 3, up to 5\u00a0min)", over5: "over 5\u00a0min" },
     hi: { nb: "\u00a0", range: "रेंज", span: "अवधि", min: "मिनट", s: "सेकंड", reduced: "कम (5 से कम)", normal: "सामान्य (5 से 25)", increased: "अधिक (25 से ऊपर)",
-      short: "डिसेलेरेशन से छोटा (15\u00a0सेकंड से कम)", decel: "डिसेलेरेशन जितना (15\u00a0सेकंड से 3\u00a0मिनट)", prolonged: "लंबा (3 से 5\u00a0मिनट)", over5: "5\u00a0मिनट से अधिक" }
+      short: "डिसेलेरेशन के लिए बहुत छोटा (15\u00a0सेकंड या कम)", decel: "डिसेलेरेशन की अवधि (15\u00a0सेकंड से अधिक, 3\u00a0मिनट तक)", prolonged: "लंबा (3 से अधिक, 5\u00a0मिनट तक)", over5: "5\u00a0मिनट से अधिक" }
   };
   function yForBpm(L, bpm) { return L.yTop + L.hFhr - ((Math.min(Math.max(bpm, L.fhrMin), L.fhrMax) - L.fhrMin) / (L.fhrMax - L.fhrMin)) * L.hFhr; }
   function bpmAt(L, y) { return L.fhrMax - ((y - L.yTop) / L.hFhr) * (L.fhrMax - L.fhrMin); }
@@ -22,7 +22,8 @@
       return w.range + ": " + d + " bpm, " + (d < 5 ? w.reduced : d > 25 ? w.increased : w.normal);
     }
     var s = deltaSec(L, st.x1, st.x2), m = Math.floor(s / 60), r = s % 60;
-    var label = s < 15 ? w.short : s < 180 ? w.decel : s <= 300 ? w.prolonged : w.over5;
+    // FIGO 2015: a deceleration lasts more than 15 s; prolonged is more than 3 min; more than 5 min is pathological
+    var label = s <= 15 ? w.short : s <= 180 ? w.decel : s <= 300 ? w.prolonged : w.over5;
     // number and unit are glued with w.nb (a non-breaking space in Hindi) so "83 सेकंड" never wraps apart
     return w.span + ": " + (m ? m + w.nb + w.min + " " : "") + r + w.nb + w.s + " (" + s + w.nb + w.s + "), " + label;
   }

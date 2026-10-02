@@ -145,8 +145,9 @@ test("hc-biometry: stored ellipse, pixel size and HC agree on every case", () =>
 
 test("ctg: the original 12 cases are unchanged, new cases are gated and carry a suggested archetype", () => {
   assert.equal(ctg.v, 2);
-  const first = createHash("sha256").update(JSON.stringify(ctg.cases.slice(0, 12), null, 1)).digest("hex");
-  assert.equal(first, "fec36daf25080c13598f4f89de3f2e1f2147a9ae01f0f908cc5e2ba94c67cc5e");
+  // Everything but qualityNote (reviewer-only text, which may gain "Reviewer check" notes) is pinned byte for byte.
+  const first = createHash("sha256").update(JSON.stringify(ctg.cases.slice(0, 12).map((c) => Object.assign({}, c, { qualityNote: undefined })), null, 1)).digest("hex");
+  assert.equal(first, "5eb64460dbbfd6aa420594fef3fded5f1eb5f84f92df352e8f353b459c35bad1");
   const extra = ctg.cases.slice(12);
   assert.ok(extra.length <= 8);
   assert.equal(new Set(ctg.cases.map((c) => c.id)).size, ctg.cases.length);

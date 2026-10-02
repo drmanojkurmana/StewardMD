@@ -39,7 +39,7 @@
       uc: rev(r, "uc", "uc") || (f.contractions.tachysystole ? "tachysystole" : "normal"),
       baseline: rev(r, "baselineClass", "baseline") || f.baselineClass,
       variability: rev(r, "variability", "variability") || f.variability.band,
-      decels: rev(r, "decels", "decels") || (!f.decels || !f.decels.length ? "none" : maxD > 300 ? "over5" : maxD >= 180 ? "prolonged" : "present"),
+      decels: rev(r, "decels", "decels") || (!f.decels || !f.decels.length ? "none" : maxD > 300 ? "over5" : maxD > 180 ? "prolonged" : "present"),
       figo: figo, action: figo
     };
     if (rev(r, "decelType", "decelType")) t.decelType = r.decelType;

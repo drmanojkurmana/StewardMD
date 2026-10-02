@@ -100,6 +100,13 @@ try {
   await shot("sidebar-saved");
   await ev(`document.querySelector("#maikSaved [data-sv-back]").click(); document.getElementById("maikSideClose").click(); return 1;`); await sleep(400);
 
+  // Regenerate REPLACES the answer (2026-10-02: it used to stack a second bubble)
+  await ev(STUB(ANSWER.replace("IIIB", "IIIB (regenerated)")));
+  const nAns = await ev(`return document.querySelectorAll("#maikBody .maik-b.ai").length;`);
+  await ev(`var a=document.querySelectorAll("#maikBody .maik-b.ai"), l=a[a.length-1]; [].slice.call(l.querySelectorAll(".maik-fb-b")).filter(function(b){return b.textContent==="Regenerate"})[0].click(); return 1;`);
+  for (let i = 0; i < 30; i++) { await sleep(400); if (await ev(`return /regenerated/.test(document.getElementById("maikBody").textContent);`) === true) break; }
+  ok(await ev(`return /regenerated/.test(document.getElementById("maikBody").textContent);`) === true && await ev(`return document.querySelectorAll("#maikBody .maik-b.ai").length;`) === nAns, "Regenerate replaces the answer in place (no extra bubble)");
+
   // Error -> one bubble with Try again, no action row
   await ev(STUB("", true));
   await ev(`document.getElementById("maikQ").value="Now make ajcc 8th breast cancer staging easy"; document.getElementById("maikSend").click(); return 1;`);

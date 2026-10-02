@@ -3990,11 +3990,13 @@
   // legacy ~2-minute cadence byte-identically (see gatedRefine below, which short-circuits to a bare
   // doRefine() call when this is off).
   function scribeLiveOn() { try { if (G.localStorage && G.localStorage.getItem("smd_scribe_live") === "off") return false; } catch (e) {} return true; }
-  // Configurable cost-guard floor between two BACKGROUND (non-final) LLM refines. Default 45s;
+  // Configurable cost-guard floor between two BACKGROUND (non-final) LLM refines. Default 90s (was 45 s:
+  // each background refine re-sends and re-writes the whole note, so cost grows with the square of the
+  // consult length; the final refine at Pause/Stop is unaffected. Cost audit 2026-10-02);
   // override with localStorage.setItem("smd_scribe_live_mingap_ms","<n>").
   function scribeLiveMinGapMs() {
     try { var v = G.localStorage && G.localStorage.getItem("smd_scribe_live_mingap_ms"); if (v != null && +v > 0) return +v; } catch (e) {}
-    return 45000;
+    return 90000;
   }
   // PURE: cadence gate for a mid-consult (non-final) refine. A doctor-initiated finish (Pause/Stop,
   // isFinal=true - always _finishPending in this file) ALWAYS runs, unguarded: "keep the authoritative
