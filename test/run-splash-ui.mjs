@@ -417,9 +417,9 @@ try {
   await sleep(4200);
   okv(await ev(`return localStorage.getItem("smd_boot_seen");`), "1", "finishing the first open records smd_boot_seen");
   await call("Page.navigate", { url: BASE });
-  await sleep(120);
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-blank");`), true,
-    "later open: fast path, plain surface (no logo flash)");
+  let fastSeen = false;   // the new document can lift its splash within ~100ms, so sample until seen
+  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-blank");`); }
+  okv(fastSeen, true, "later open: fast path, plain surface (no logo flash)");
   okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "hidden",
     "later open: the mark is not shown while it would only flash");
   let goneAt = 0;
