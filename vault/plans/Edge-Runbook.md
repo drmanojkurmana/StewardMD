@@ -42,9 +42,12 @@ Fail: report to Cactus, drop Needle from v1, FunctionGemma alone goes forward.
 **Android (2026-10-02):** step 3 PASSED on the full debug APK (build of 874fa71f3 + Needle in package.json,
 locally): all 20 `.so` in `lib/arm64-v8a` have every LOAD segment at `0x4000`; the merged manifest has
 `NeedleService` in `android:process=":edge"`. Step 4 on the real phone (Pixel 9, which runs 4 KB pages):
-Needle loads and calls complete with valid envelopes, but far too slowly (gate A0.2 below). Step 4 on
-the 16 KB emulator NOT done: `system-images;android-35;google_apis_ps16k;arm64-v8a` + the emulator need
-~5 GB and the Mac had 2 GB free; the download was stopped before it filled the disk.
+Needle loads and calls complete with valid envelopes, but far too slowly (gate A0.2 below). Step 4 on the 16 KB emulator PASSED (2026-10-02,
+`system-images;android-35;google_apis_ps16k;arm64-v8a`, AVD `smd16k`, `getconf PAGE_SIZE` = 16384, the
+Pixel debug APK): app launched with no load errors; `:edge` loaded `libneedle_jni.so` and the weights,
+configure rc 111, one call `success:true` (`engine threads 4 (cpu_capacity, 4 cpus, 4 allowed)`);
+llama.cpp loaded FunctionGemma and returned `{"option":1}`. Emulator timings mean nothing for phones. Needs
+~7.4 GB free disk to create its userdata.
 ## 2. Gate A0.2: process isolation (Android) / serial queue (iOS)
 1. Copy weights (README of the plugin: `run-as ... files/needle/needle3.cact`). Base model is fine here.
 2. Open the app, attach CDP (`adb shell pidof in.stewardmd.app`, then
