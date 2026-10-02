@@ -61,10 +61,17 @@ model. Expect tens of tok/s on an iPhone at best, not hundreds. That is what the
 
 Tests: `test/maik-mlx.test.mjs` (unit), `node test/run-maik-mlx-ui.mjs` (headless Chromium).
 
-Pins (read from the repositories, 2026-09-28):
+Pins (read from the repositories 2026-09-28; moved to the owner's forks 2026-10-03):
 
-- mlx-swift-lm `9f70e68dce563c90ad443fef470a713936bf6a4d` (Layr-Labs main, 2026-09-27)
-- mlx-swift `0f4fe403bef6899e8a72882bc6d4036a7a62ae31` (the revision that mlx-swift-lm commit pins)
+- mlx-swift-lm `7354dce7a8f62142994acd180e2dc134cb46483f` (drmanojkurmana/mlx-swift-lm `stewardmd-ios27`:
+  Layr-Labs main `9f70e68dce563c90ad443fef470a713936bf6a4d` of 2026-09-27 plus one commit that only
+  repoints its mlx-swift dependency at the fork below)
+- mlx-swift `757b0a04aa8ee27b99b7026f6c5d7fc9629f757e` (drmanojkurmana/mlx-swift `stewardmd-ios27`:
+  Layr-Labs `0f4fe403bef6899e8a72882bc6d4036a7a62ae31` plus a verbatim port of ml-explore/mlx-swift
+  `ab924c8`'s jit_compiler change, so Cmlx no longer compiles `cpu/jit_compiler.cpp` on iOS. Its
+  `std::system` call is unavailable in the Xcode 27.2 iOS SDK and broke every iOS build. The code is
+  dead on iOS, since `compiled_conditional.cpp` already picks `no_cpu/compiled.cpp` there.) It must
+  equal the revision the mlx-swift-lm commit pins. Drop both forks once Layr-Labs carries the change.
 - Ternary Bonsai 2 27B MLX: HF `prism-ml/Ternary-Bonsai-2-27B-mlx-2bit` @ `fcba37d2117a7077eac6b613b2668d14d9779edd`
 - Ternary Bonsai 8B MLX: HF `prism-ml/Ternary-Bonsai-8B-mlx-2bit` @ `9260b24298e4211e804663e9f519962cf59f34be`
 
