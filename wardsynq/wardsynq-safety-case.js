@@ -178,7 +178,7 @@ const HAZARDS = Object.freeze([
       summary: "Every write creates a new version and keeps all prior ones; transactions are all-or-nothing; reads and writes are deep-copied. Offline edits go to a DURABLE append-only journal, and record() does not resolve until the entry has reached storage, so a UI can never report a note saved that was not. A failed write reports failure and is not held in memory. On reconnection, edits are compared three-way against the ancestor they were derived from: only disjoint field changes combine automatically, anything signed or administered is never folded into, and the same field changed on both sides becomes a CONFLICT carrying both versions and the ancestor. A conflict cannot be resolved without a named clinician and a rationale, the discarded version is kept, and unresolved conflicts stay in the journal across a restart.",
     },
     verification: {
-      file: "test/wardsynq-store.test.mjs and test/wardsynq-offline.test.mjs",
+      file: "test/wardsynq-store.test.mjs and test/wardsynq-offline-journal.test.mjs",
       tests: [
         "ADVERSARIAL: the same field changed on both sides is a CONFLICT, never last-write-wins",
         "ADVERSARIAL: a signed record is never folded into, even when the fields are disjoint",
@@ -866,6 +866,33 @@ function summarise(assessment) {
   return { total: assessment.length, ...by, verifiedFraction: `${by.verified} of ${assessment.length}` };
 }
 
+/**
+ * Pass or fail for an assurance run (Codex F8). Two independent reasons to fail:
+ *  - the test process itself: a non-zero exit, a signal, a spawn error, a failed or crashed test
+ *    file, a failed test outside any hazard's evidence, or no tests parsed at all;
+ *  - the hazards: any `failing` one always; under `release`, also any `no-evidence`, `partial` or
+ *    `uncontrolled` one. The development report keeps the old policy for those three, which are
+ *    declared gaps in an early build; a release must not ship over them.
+ *
+ * @param {object[]} assessment from assess()
+ * @param {{exitCode: number|null, signal?: string|null, error?: string|null, fileFailures?: string[], failedTests?: string[], testsSeen?: number}} run
+ * @param {{release?: boolean}} [opts]
+ * @returns {{ok: boolean, reasons: string[]}}
+ */
+function gate(assessment, run, opts) {
+  const r = run || {}, reasons = [];
+  if (r.error) reasons.push(`the test process could not run: ${r.error}`);
+  else if (r.signal) reasons.push(`the test process was killed by ${r.signal}`);
+  else if (r.exitCode !== 0) reasons.push(`the test process exited with ${r.exitCode}`);
+  if ((r.fileFailures || []).length) reasons.push(`${r.fileFailures.length} test file(s) failed or crashed: ${r.fileFailures.join(", ")}`);
+  if ((r.failedTests || []).length) reasons.push(`${r.failedTests.length} test(s) failed: ${r.failedTests.slice(0, 5).join("; ")}${r.failedTests.length > 5 ? "; ..." : ""}`);
+  if (!r.testsSeen) reasons.push("no test results were parsed");
+  const blocking = new Set(["failing", ...(opts && opts.release ? ["no-evidence", "partial", "uncontrolled"] : [])]);
+  const bad = assessment.filter((a) => blocking.has(a.status));
+  if (bad.length) reasons.push(`${bad.length} hazard(s) ${opts && opts.release ? "not verified" : "failing"}: ${bad.map((a) => `${a.id} (${a.status})`).join(", ")}`);
+  return { ok: reasons.length === 0, reasons };
+}
+
 /** Plain-text assurance table. Deliberately leads with what is NOT covered. */
 function report(assessment) {
   const s = summarise(assessment);
@@ -896,4 +923,4 @@ function report(assessment) {
   return lines.join("\n");
 }
 
-export { HAZARDS, STATUS, assess, summarise, report };
+export { HAZARDS, STATUS, assess, summarise, gate, report };
