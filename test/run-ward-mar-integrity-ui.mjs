@@ -5,6 +5,8 @@
  *   F5  a dose scanned without the check says so on the round
  *   F3  a dose whose order changed after it was checked offers Verify again, not Administer
  *   F6  what the order check could not cover is shown on the review
+ *   F5  a consultation medicine refused because the check did not run asks the doctor for a reason and re-sends it as uncheckedReason
+ *   UI  the review and both reason questions take focus, name the drug, cannot be sent twice, and nothing clips at 390 px
  * The server contracts are tested for real in test/wardsynq-mar-order-integrity.test.mjs.
  *
  *   node test/run-ward-mar-integrity-ui.mjs      (needs Google Chrome; CHROME=... to point elsewhere)
@@ -42,6 +44,12 @@ const WRAP = `
       return res(200, { ok: true, written: 0, checkOnly: true, drug: body.order.drug,
         safety: { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: "allergy list unreadable",
           coverage: [{ code: "RENAL_CHECK_NOT_AVAILABLE", disposition: "warn", message: "Renal dose check not available: no renal table is loaded." }] } });
+    }
+    if (u.indexOf("/ward/consultation") >= 0 && body && body.medications) {
+      window.__calls.push({ url: u, method: "POST", body: body });
+      if (!body.medications[0].uncheckedReason) return res(422, { ok: false, status: 422, error: "consultation_not_saved", written: 0, failedAt: "medications",
+        results: [{ piece: "medications", index: 0, ok: false, error: "safety_check_not_run", status: 409, detail: "The allergy, interaction and dose checks could not run." }] });
+      return res(200, { ok: true, written: 1, results: [{ piece: "medications", index: 0, ok: true, safety: { checked: false } }] });
     }
     if (u.indexOf("/ward/mar") >= 0 && body && body.action === "scan" && !body.uncheckedReason) {
       window.__calls.push({ url: u, method: "POST", body: body });
@@ -89,14 +97,24 @@ try {
   const review = await ev(`return document.getElementById('wMoReview').innerText;`);
   ok(/could not run/.test(review) && /without the safety check \(required\)/.test(review), "the review says the check did not run and asks for a reason: " + JSON.stringify(review));
   ok(/Renal dose check not available/.test(review), "and shows what the check could not cover");
+  ok(await ev(`return document.activeElement && document.activeElement.id === 'wMoOverride';`), "focus lands on the reason box when the review opens");
+  ok(await ev(`var i=document.getElementById('wMoOverride'); return i.required && i.getAttribute('aria-required')==='true' && i.maxLength===500 && !!i.closest('label');`), "the reason box is a labelled, required field limited to what the server keeps");
+  ok(/Prescribe without the safety check/.test(await ev(`return document.querySelector('[data-w-act="moconfirm"]').innerText;`)) && await ev(`return !!document.querySelector('#wMoReview [data-w-act="medorder"]');`),
+    "the button says what it does, and Check again is offered beside it");
   await ev(`document.querySelector('[data-w-act="moconfirm"]').click(); return true;`);
   await sleep(200);
   ok((await bodies("/ward/medication-order")).filter((b) => !b.checkOnly).length === 0, "Prescribe anyway with no reason sends nothing");
+  await ev(`document.querySelector('[data-w-act="mocancel"]').click(); return true;`);
+  ok(await ev(`return !document.getElementById('wMoReview') && document.activeElement && document.activeElement.getAttribute('data-w-act') === 'medorder';`), "Change the order closes the review and puts focus back on Prescribe");
+  await ev(`document.querySelector('[data-w-act="medorder"]').click(); return true;`);
+  ok(await waitFor(`return !!document.getElementById('wMoOverride');`), "the review opens again");
   await typeInto("wMoOverride", "septic, cannot wait");
-  await ev(`document.querySelector('[data-w-act="moconfirm"]').click(); return true;`);
+  await ev(`var b=document.querySelector('[data-w-act="moconfirm"]'); b.click(); b.click(); return true;`);
   await waitFor(`return window.__calls.some(function(c){return c.url.indexOf('/ward/medication-order')>=0 && c.body && !c.body.checkOnly;});`);
   const placed = (await bodies("/ward/medication-order")).filter((b) => !b.checkOnly).pop();
   ok(placed && placed.uncheckedReason === "septic, cannot wait" && !placed.overrideReason, "the reason goes as uncheckedReason, not as an override: " + JSON.stringify(placed));
+  await sleep(200);
+  ok((await bodies("/ward/medication-order")).filter((b) => !b.checkOnly).length === 1, "two quick taps on Prescribe place one order");
 
   // F5 at the bedside.
   ok(await waitFor(`return !!document.querySelector('[data-w-act^="mar:verify"]');`), "the order is on the round");
@@ -106,7 +124,12 @@ try {
   await waitFor(`return !!document.querySelector('[data-w-act^="mar:scan"]');`);
   await ev(`document.querySelector('[data-w-act^="mar:scan"]').click(); return true;`);
   ok(await waitFor(`return !!document.getElementById('wAsk_reason');`), "a scan refused because the check did not run asks the nurse for a reason");
-  ok(/could not run/.test(await ev(`return document.querySelector('#smdWard .w-ask').innerText;`)), "and says why");
+  const askText = await ev(`return document.querySelector('#smdWard .w-ask').innerText;`);
+  ok(/Safety check did not run/.test(askText) && /could not run for/.test(askText) && /by hand/.test(askText) && /Continue without the checks/.test(askText), "and says why, names the drug and what to do: " + JSON.stringify(askText));
+  ok(await ev(`return document.activeElement && document.activeElement.id === 'wAsk_reason' && !!document.querySelector('#smdWard .w-ask [role=dialog][aria-labelledby=wAskTitle]');`), "focus is in the reason box of a labelled dialog");
+  await ev(`document.querySelector('[data-w-act="askok"]').click(); return true;`);
+  await sleep(150);
+  ok((await bodies("/ward/mar")).filter((b) => b.action === "scan").length === 1 && await ev(`return !!document.getElementById('wAsk_reason') && /reason is required/.test(document.querySelector('.w-ask').innerText);`), "an empty reason is refused where it is asked and nothing is sent");
   await typeInto("wAsk_reason", "doctor at the bedside");
   await ev(`document.querySelector('[data-w-act="askok"]').click(); return true;`);
   await waitFor(`return window.__calls.filter(function(c){return c.url.indexOf('/ward/mar')>=0 && c.body && c.body.action==='scan';}).length >= 2;`);
@@ -117,11 +140,38 @@ try {
   // F5 and F3 on the round.
   await ev(`window.__markRound = true; WARD._dispatch("round"); return true;`);
   ok(await waitFor(`return document.body.textContent.indexOf('Safety check did not run') >= 0 && document.body.textContent.indexOf('doctor at the bedside') >= 0;`), "a dose scanned without the check says so on the round");
-  ok(await ev(`return Array.from(document.querySelectorAll('.w-dose-s small')).some(function(e){return e.textContent.indexOf('Safety check did not run')>=0 && e.offsetHeight>0;});`), "and it is visible on the row");
+  ok(await ev(`return Array.from(document.querySelectorAll('.w-dose-note')).some(function(e){return e.textContent.indexOf('Safety check did not run')>=0 && e.offsetHeight>0;});`), "and it is visible on the row");
   ok(await waitFor(`return Array.from(document.querySelectorAll('.w-doses li')).some(function(li){return li.textContent.indexOf('Ceftriaxone')>=0 && li.textContent.indexOf('The order changed after this dose was checked')>=0 && !!li.querySelector('[data-w-act^="mar:verify"]') && !li.querySelector('[data-w-act^="mar:administer"]');});`),
     "a dose whose order changed offers Verify again and no Administer");
+  ok(await ev(`var li=Array.from(document.querySelectorAll('.w-doses li')).filter(function(l){return l.textContent.indexOf('Ceftriaxone')>=0})[0]; return /verify again/i.test(li.querySelector('.w-st.recheck').textContent) && !li.querySelector('.w-st.scanned');`), "the status chip says verify again, not the stale status");
 
-  for (const w of [375, 768, 1280]) {
+  // 390 px: nothing clipped, and the sentences are sentences (not capitalised chips).
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  await sleep(150);
+  ok(await ev(`var n=document.querySelectorAll('.w-dose-note'); if(n.length<2) return false; return Array.from(n).every(function(e){return e.scrollWidth<=e.clientWidth+1 && e.offsetHeight>0 && getComputedStyle(e).textTransform==='none';});`), "both dose notes fit at 390 px in sentence case");
+  ok(await ev(`return Array.from(document.querySelectorAll('.w-doses li')).every(function(li){return li.scrollWidth<=li.clientWidth+1;});`), "no dose row is clipped at 390 px");
+
+  // F5 on the consultation screen.
+  await ev(`document.querySelector('[data-w-act="consultation"]').click(); return true;`);
+  ok(await waitFor(`return !!document.getElementById('wcMoDrug');`), "the consultation screen opened");
+  await typeInto("wcMoDrug", "Amoxicillin 500mg"); await typeInto("wcMoValue", "500"); await typeInto("wcMoUnit", "mg");
+  await ev(`document.querySelector('[data-w-act="consultationsave"]').click(); return true;`);
+  ok(await waitFor(`return !!document.getElementById('wAsk_reason');`), "a consultation medicine refused because the check did not run asks the doctor for a reason");
+  const cAsk = await ev(`return document.querySelector('#smdWard .w-ask').innerText;`);
+  ok(/Safety check did not run/.test(cAsk) && /Amoxicillin 500mg/.test(cAsk) && /not saved/.test(cAsk) && /Save without the checks/.test(cAsk), "naming the drug and saying nothing was saved: " + JSON.stringify(cAsk));
+  await ev(`document.querySelector('[data-w-act="askok"]').click(); return true;`);
+  await sleep(150);
+  ok((await bodies("/ward/consultation")).length === 1 && await ev(`return !!document.getElementById('wAsk_reason') && /reason is required/.test(document.querySelector('.w-ask').innerText);`), "no reason sends nothing");
+  await typeInto("wAsk_reason", "no allergy list, doctor reviewed by hand");
+  await ev(`var b=document.querySelector('[data-w-act="askok"]'); b.click(); b.click(); return true;`);
+  await waitFor(`return window.__calls.filter(function(c){return c.url.indexOf('/ward/consultation')>=0;}).length >= 2;`);
+  await sleep(300);
+  const cons = await bodies("/ward/consultation");
+  ok(cons.length === 2 && !cons[0].medications[0].uncheckedReason && cons[1].medications[0].uncheckedReason === "no allergy list, doctor reviewed by hand" && !cons[1].medications[0].overrideReason,
+    "the consultation is sent again once, with the reason as uncheckedReason: " + JSON.stringify(cons.map((b) => b.medications[0].uncheckedReason || null)));
+  ok(await waitFor(`return !document.getElementById('wAsk_reason');`), "the question closes once it is answered");
+
+  for (const w of [375, 390, 768, 1280]) {
     await call("Emulation.setDeviceMetricsOverride", { width: w, height: 900, deviceScaleFactor: 1, mobile: w < 768 });
     await sleep(120);
     const overflow = await ev(`return document.documentElement.scrollWidth - window.innerWidth;`);
