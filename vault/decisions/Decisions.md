@@ -11056,3 +11056,10 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 ## 2026-09-29 - Extract the specialty engine now (reverses "duplicate until a third specialty")
 - Tokós 2.0 needs the whole Ophthalmós engine (shell, Learn, bank, explorers, tools, about 3,000 lines), not the 250 lines duplicated in 1.0, and the roadmap names four more specialty modules; copying per specialty would multiply every fix. The engine is extracted once as `specialty-*.js` + `specialty.css` with the host injected (`SPECIALTY.createHost(cfg)`); Ophthalmós files stay byte-identical and may migrate later in their own repo. Tokós is the first host and loads lazily. Reverses the 2026-09-29 "Tokós duplicates the Ophthalmós engine" entry above. [[Specialty Engine]] [[Tokós]]
 
+## 2026-10-02 - Owner Mail is an in-app client over Mailflare's API, not IMAP
+- Owner asked for hello@maiknowledge.com inside StewardMD, owners only, live and synced. Mailflare runs on
+  Workers and cannot serve IMAP/SMTP, and the account-forwarding route needs a paid licence. So the app
+  talks to Mailflare's `/api/v1` through an owner-gated Pages proxy (`functions/api/mail`) holding the API
+  key; Mailflare gained the read/patch/attachment/mailbox v1 routes it lacked. Live = 20 s polling while
+  open. [[Mail]]
+

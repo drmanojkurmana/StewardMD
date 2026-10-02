@@ -44,6 +44,7 @@
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
     chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 11h7M8.5 14h4.5"/>',
     bug: '<rect x="8" y="6" width="8" height="14" rx="4"/><path d="M12 20v-9M8 11H4M16 11h4M8 16H5M16 16h3M9 6.5 7 4M15 6.5 17 4M10 6a2 2 0 0 1 4 0"/>',
+    mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
     flask: '<path d="M10 2v5.5L4.4 18.5A2 2 0 0 0 6.1 21h11.8a2 2 0 0 0 1.7-2.5L14 7.5V2h-4Z"/><path d="M8.5 2h7M7 14h10"/>'
   };
   function svg(name) {
@@ -101,6 +102,7 @@
     wearos: function () { if (window.SMD_WEAROS && SMD_WEAROS.open) return SMD_WEAROS.open(); toast("StewardMD runs on your paired Wear OS watch. Open the app on the watch and sign in there. Your ward session syncs from this phone automatically."); },
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
+    mail: function () { closeSB(); if (window.SMD_MAIL && SMD_MAIL.open) SMD_MAIL.open(); else toast("Mail loading…"); },
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }
     // "settings" is handled specially (expands the Advanced block) — see wiring below.
   };
@@ -351,6 +353,14 @@
       if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) {
         html += '<button data-sbr-act="offlinedb" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:none;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui)">' + svg("pills") +
           '<span style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
+      }
+    } catch (e) {}
+    // Owner-only: the hello@maiknowledge.com mailbox (mail.js). Gated by SMD_MAIL.enabled(), which
+    // checks the owner list and the smd_mail flag; the server's ownerOK is the real gate.
+    try {
+      if (window.SMD_MAIL && SMD_MAIL.enabled()) {
+        html += '<button class="sbr-row" data-sbr-act="mail">' + svg("mail") +
+          '<span style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     // Owner-only: review + approve/decline hospital-add requests.

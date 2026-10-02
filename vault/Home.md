@@ -63,6 +63,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the
   owner picks in Edit Widget; read the `topCritical` contract gotcha before touching the parser.
 - [[Role-Tiers]] - PROPOSED role-based plans (UG Student to Clinician Pro, WardSynQ): who gets what, devices, audit bugs, owner decisions
+- [[Mail]] - owner-only in-app inbox for hello@maiknowledge.com via the Mailflare API (flag `smd_mail`, owners only; needs `MAILFLARE_URL` + `MAILFLARE_API_KEY`)
 - [[Email and Lifecycle]] — every email the app sends (one premium template), unsubscribe, the promo series, phone OTP
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
