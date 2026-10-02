@@ -6294,6 +6294,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+    // Warm the clinical protocol list (one local file in the app bundle) so a treatment question's
+    // package can carry its protocol without waiting.
+    try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.loadProtocols) SMD_MAIK_LOCAL.loadProtocols(); } catch (e) {}
+    // Reopened while an answer is still generating (close() keeps it busy): show Stop, not Send.
+    if (_maikBusy) setTimeout(function () { try { maikSetSendMode(true); } catch (e) {} }, 0);
     try { var _lenBtn = sheet.querySelector("#maikLen"); if (_lenBtn) _lenBtn.addEventListener("click", function (ev) { ev.preventDefault(); maikCycleLen(); }); } catch (e) {}
     // Drug names in questions and answers: bold yellow, tap opens the monograph (drug-link.js).
     try { if (window.SMD_DRUGLINK && body) SMD_DRUGLINK.watch(body); } catch (e) {}
@@ -6390,12 +6395,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       maikBuddyBusy(!!busy);
       if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
       if (was && !busy) { try { maikDocCue("done"); } catch (e) {} try { maikHaptic("done"); } catch (e) {} }   // wave the answer in
-      if (!sendBtn) return;
-      sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
-      sendBtn.classList.toggle("stopping", !!busy);
-      sendBtn.innerHTML = busy ? MK.stop : MK.send;
-      sendBtn.title = busy ? "Stop" : "Send";
-      sendBtn.setAttribute("aria-label", busy ? "Stop generating" : "Send");
+      // The CURRENT sheet's button: a turn started before MaiK was closed and reopened finishes in the
+      // old closure, whose sendBtn is gone.
+      var sb = document.getElementById("maikSend") || sendBtn;
+      if (!sb) return;
+      sb.disabled = false;                      // never disabled: while busy it is the STOP control
+      sb.classList.toggle("stopping", !!busy);
+      sb.innerHTML = busy ? MK.stop : MK.send;
+      sb.title = busy ? "Stop" : "Send";
+      sb.setAttribute("aria-label", busy ? "Stop generating" : "Send");
       if (!busy) _maikStop = null;
     }
 
@@ -6433,9 +6441,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           _maikBodyHTML = body.innerHTML; maikFlushThread(_maikBodyHTML);
         }
       } catch (e) {}
-      // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
-      // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
-      _maikBusy = false;
+      // Unlock only when nothing is in flight. An answer still generating (its bubble carries data-mg)
+      // finishes into the restored thread, and the reopened sheet shows Stop: unlocking here let the
+      // clinician re-ask and pay for the SAME answer twice (duplicate BRCA1 answer, 2026-10-01). A truly
+      // stuck turn is still freed by its watchdog (90 s cloud / 180 s on-device).
+      var _inFlight = false; try { _inFlight = !!(body && body.querySelector("[data-mg]")); } catch (e) {}
+      if (!_inFlight) _maikBusy = false;
       document.removeEventListener("keydown", maikOnKey);
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
@@ -7738,6 +7749,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // The recent turns still travel (a colleague remembers the conversation), but a NEW question must
           // not be merged with the previous condition. The server prompt reads this flag.
           if (pkg && pkg.history && pkg.history.length && !_maikFollowUp) pkg.newTopic = true;
+          // The matching StewardMD clinical protocol for a TREATMENT question (2026-10-02): one ~150-token
+          // summary (sepsis bundle, MgSO4 regimen, ORS plan B) that the KB notes often lack. Same matcher
+          // MaiK Lite uses; null (nothing added) when nothing fits or the list is not loaded yet.
+          try { if (pkg && !pkg.protocol && window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.protocolForQuestion) { var _pr = SMD_MAIK_LOCAL.protocolForQuestion(Object.assign({}, pkg, { question: question })); if (_pr) pkg.protocol = _pr; } } catch (e) {}
           // ASSUME tier: partial KB match → answer the NEAREST topic (grounding already scoped to it)
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
           // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
@@ -7979,6 +7994,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 try { delete _maikCache[maikCacheKey(question, maikActiveCase())]; } catch (e) {}
                 if (_maikBusy) return;
                 _maikRegen = true;
+                // The new answer REPLACES this one (it used to stack a second bubble under the first).
+                try { var _old = host.closest(".maik-b") || host; _old.remove(); } catch (e) {}
                 runClinical(question, retrieval, depth, active, topicLabel);
               }));
               acts.appendChild(act("Edit", function () { try { qEl.value = userQ; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
@@ -8003,7 +8020,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             // same oversized request failed the same way. Retry ONCE without the conversation before
             // showing an error; the answer stands on its own question.
             call = call.then(function (r) {
-              if (!r || !r.error || _maikStopped || _streamStarted || !/server_error|timeout|5\d\d/i.test(String(r.error)) || !(pkg.history && pkg.history.length || pkg.earlier)) return r;
+              // Only a genuine server_error is worth one retry. A timeout or a provider outage means the
+              // provider was slow or down, not that the request was too big, and the first generation is
+              // usually already billed: retrying paid twice for nothing (cost audit 2026-10-02).
+              if (!r || r.error !== "server_error" || /timeout|unavailable|rate|auth/i.test(String(r.reason || "")) || _maikStopped || _streamStarted || !(pkg.history && pkg.history.length || pkg.earlier)) return r;
               try { delete pkg.history; delete pkg.earlier; pkg.newTopic = true; } catch (e) {}
               return window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen }).catch(function () { return r; });
             });
@@ -8422,7 +8442,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           } else if (label === "Regenerate") {
             if (_maikBusy || !q) return;
             try { delete _maikCache[maikCacheKey(q, maikActiveCase())]; } catch (e) {}
-            _maikRegen = true; runClinical(q, q, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(q) : q);
+            _maikRegen = true;
+            try { (host.closest(".maik-b") || host).remove(); } catch (e) {}   // replace, never stack
+            runClinical(q, q, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(q) : q);
           } else if (label === "Edit") {
             try { qEl.value = q; qEl.focus(); qEl.setSelectionRange(q.length, q.length); } catch (e) {}
           } else if (label === "Save") {
@@ -9102,15 +9124,29 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var _lgid = know.getAttribute("data-lazy-gid");
         if (_lgid && _maikLazyCtx[_lgid] && window.SMD_AI && SMD_AI.explainGrounded) {
           var _ctx = _maikLazyCtx[_lgid]; know.textContent = "Loading detail…"; know.disabled = true;
-          SMD_AI.explainGrounded(_ctx.pkg, { tier: 2, depth: "detailed", priorLead: _ctx.lead }).then(function (r) {
-            var _dt = (r && r.text) ? maikStripRefine(String(r.text)).replace(/@@\s*MORE\s*@@/gi, "").trim() : "";
-            if (kdet && _dt) { kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_dt) : maikEscH(_dt); }
-            else if (kdet) { kdet.textContent = "Couldn't load the detail. Ask again for the full answer."; }
-            if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+          var _md = function (s) { return maikStripRefine(String(s || "")).replace(/@@\s*MORE\s*@@/gi, "").trim(); };
+          var _paint = function (s) {
+            if (!kdet || !s) return;
+            kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(s) : maikEscH(s);
+            kdet.hidden = false; kdet.removeAttribute("hidden");
+          };
+          // STREAMED where the platform streams (owner 2026-10-01: "Couldn't load the detail. Ask again",
+          // then a second full answer). The whole-answer call waited for up to 6,000 tokens inside a 28 s
+          // server deadline; streamed, the detail appears as it is written. A failure keeps THIS button
+          // ("Try again") instead of sending the clinician to re-ask, which paid for the answer twice.
+          var _opts = { tier: 2, depth: "detailed", priorLead: _ctx.lead }, _gotAny = false;
+          var _call = (SMD_AI.explainGroundedStream && maikStreamOn())
+            ? SMD_AI.explainGroundedStream(_ctx.pkg, _opts, function (acc) { var s = _md(acc); if (s) { _gotAny = true; _paint(s); } })
+            : SMD_AI.explainGrounded(_ctx.pkg, _opts);
+          _call.then(function (r) {
+            var _dt = (r && r.text) ? _md(r.text) : "";
+            if (!_dt && !_gotAny) { know.textContent = "Couldn't load the detail. Try again"; know.disabled = false; return; }
+            if (_dt) _paint(_dt);
+            if (kdet) { try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
             try { delete _maikLazyCtx[_lgid]; } catch (e) {}
             know.remove();
             try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}   // keep the detail in the saved conversation (audit T17)
-          }).catch(function () { know.textContent = "Know more →"; know.disabled = false; });
+          }).catch(function () { know.textContent = _gotAny ? "Know more →" : "Couldn't load the detail. Try again"; know.disabled = false; });
           return;
         }
         // A reopened conversation has no lazy context (it lived in memory), and its detail was never

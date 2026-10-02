@@ -256,7 +256,11 @@
   function load() {
     if (_data) return Promise.resolve(_data);
     if (_loading) return _loading;
-    _loading = fetch(URL).then(function (r) { if (!r.ok) throw new Error("rules " + r.status); return r.arrayBuffer(); })
+    // Android's asset packaging un-gzips bundled files and drops ".gz" (measured on a Pixel 9,
+    // 2026-10-02: /dose-rules.json.gz 404, /dose-rules.json 200 as plain JSON), so the calculator never
+    // loaded there. Try the stripped name; gunzipText already passes plain JSON through.
+    _loading = fetch(URL).then(function (r) { return r.ok ? r : fetch(URL.replace(/\.gz(\?|$)/, "$1")); })
+      .then(function (r) { if (!r.ok) throw new Error("rules " + r.status); return r.arrayBuffer(); })
       .then(function (ab) { return gunzipText(new Uint8Array(ab)); })
       .then(function (t) {
         var j = JSON.parse(t);

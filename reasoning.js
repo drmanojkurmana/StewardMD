@@ -6422,7 +6422,9 @@
          * Client budgets sit OUTSIDE the server's so the server's clean close always wins the race —
          * a clean close carries the streamed text, a client abort throws it away. Measured device TTFV
          * is p50 3.7s / p95 5.2s, so a 9s first-token backstop never fires on a healthy call. */
-        var NX_FIRST = 9000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
+        // 12 s, not 9: the client budget must sit OUTSIDE the server's 10 s connect window, else a slow but
+        // healthy first token aborted here and fallback() paid for the same answer twice (cost audit 2026-10-02).
+        var NX_FIRST = 12000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
         return aiHeaders().then(function (h) {
           return new Promise(function (resolve) {
             var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;

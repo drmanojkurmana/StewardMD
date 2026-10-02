@@ -55,9 +55,13 @@
     return fflateText(gz);
   }
   function fetchGz(url) {
+    // Android's asset packaging un-gzips bundled files and drops ".gz" (measured on a Pixel 9,
+    // 2026-10-02: /offline-clinical.json.gz 404, /offline-clinical.json 200 as plain JSON): try the
+    // stripped name, and read plain JSON as it is (no gzip magic bytes = nothing to inflate).
     return fetch(url)
+      .then(function (res) { return res.ok ? res : fetch(url.replace(/\.gz(\?|$)/, "$1")); })
       .then(function (res) { if (!res.ok) throw new Error("clinical fetch " + res.status); return res.arrayBuffer(); })
-      .then(function (ab) { return gunzipToText(new Uint8Array(ab)); })
+      .then(function (ab) { var b = new Uint8Array(ab); return (b[0] === 0x1f && b[1] === 0x8b) ? gunzipToText(b) : new TextDecoder().decode(b); })
       .then(function (txt) { return JSON.parse(txt); });
   }
   function ensureData() {

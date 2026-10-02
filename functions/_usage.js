@@ -40,9 +40,12 @@ export function usageConfig(env) {
     costAlertInr: n("MAIK_PROJECT_DAILY_COST_ALERT_INR", 500),
     costHardStopInr: n("MAIK_PROJECT_DAILY_COST_HARD_STOP_INR", 1000),
     guestDaily: n("MAIK_GUEST_DAILY_LIMIT", 15),
-    // model pricing (INR per 1000 tokens) — server-side, estimate only. Override via env.
-    priceInInrPer1k: Number(env.MAIK_PRICE_IN_INR_PER_1K) || 0.007,
-    priceOutInrPer1k: Number(env.MAIK_PRICE_OUT_INR_PER_1K) || 0.025,
+    // model pricing (INR per 1000 tokens), override via env. Vertex AI's published gemini-2.5-flash
+    // prices (global endpoint = express mode), read 2026-10-02, at Rs 96 per USD: text/image input
+    // $0.30, AUDIO input $1.00, output incl. thinking $2.50 per 1M. Was 0.007 / 0.025 (4-10x low).
+    priceInInrPer1k: Number(env.MAIK_PRICE_IN_INR_PER_1K) || 0.0288,
+    priceOutInrPer1k: Number(env.MAIK_PRICE_OUT_INR_PER_1K) || 0.24,
+    priceAudioInInrPer1k: Number(env.MAIK_PRICE_AUDIO_IN_INR_PER_1K) || 0.096,
   };
 }
 
@@ -311,7 +314,10 @@ export async function recordUsage(gate, info) {
    * and bills those input tokens at a 90% discount (usageMetadata.cachedContentTokenCount). Price
    * them at 10% and count them, so the report shows whether the static system prompt is being hit. */
   const cachedTok = Math.min(inTok, Math.max(0, info.cachedTok | 0));
-  const cost = estCostInr(cfg, inTok - cachedTok * 0.9, outTok);
+  // Audio input (Scribe, dictation fallback) is billed at the AUDIO rate, not the text rate: the
+  // audio tokens sit inside inTok, so they get the difference on top (usageTokens reports audioTok).
+  const audioTok = Math.min(inTok, Math.max(0, info.audioTok | 0));
+  const cost = estCostInr(cfg, inTok - cachedTok * 0.9, outTok) + (audioTok / 1000) * Math.max(0, (cfg.priceAudioInInrPer1k || 0) - cfg.priceInInrPer1k);
   const u = gate.u, m = gate.m, g = gate.g;
   /* Only a GENERATED result counts against the per-user daily request caps (T36): a cache hit
    * (status "cache"), a failed call, and a continuation the caller marks noCount (MaiK's tier-2
