@@ -4,14 +4,16 @@ On-device [Needle 3](https://huggingface.co/Cactus-Compute/needle3) router engin
 (`edge-router.js`, flag `smd_edge`, default OFF). One fixed tool (`choose_option`), text in, one JSON
 tool call out. No network: the Android archive has no socket symbols (audited 2026-09-30).
 
-**Status: source written 2026-10-01, NOT yet built or run on a device.** Gates A0.1 and A0.2 in
-[`vault/plans/Edge-Runbook.md`](../../vault/plans/Edge-Runbook.md) are the first real test. It is not
-in the app's `package.json`, so `cap sync` does not pick it up until the owner adds it.
+**Status: built and run on an iPhone 15 Pro and a Pixel 9 (gates A0.1 and A0.2 in
+[`vault/plans/Edge-Runbook.md`](../../vault/plans/Edge-Runbook.md)).** In the app's `package.json` since
+2026-10-03, so `cap sync` links it. Run `scripts/fetch-needle.sh` (and, for iOS,
+`scripts/make-xcframework.sh`) before any native build: the engine binaries are not in git, and Gradle
+and SwiftPM fail without them. Nothing calls the plugin while `smd_edge` is off.
 
 ## JS contract (`Capacitor.Plugins.Needle`, used by `SMD_EDGE.needleAdapter`)
 | Method | Args | Resolves |
 |---|---|---|
-| `available()` | | `{available, isolated, killable, defaultWeights, defaultWeightsPresent}` |
+| `available()` | | `{available, isolated, killable, defaultWeights, defaultWeightsPresent, lowMemory, availMB, thermal}` |
 | `load()` | `{path?}` (default: app files `needle/needle3.cact`) | `{rc}` |
 | `configure()` | `{system, tools}` (tools = JSON string) | `{rc}` (prefix length) |
 | `complete()` | `{text, maxTokens}` (capped at 128) | `{json, ms}`: the engine's envelope |
