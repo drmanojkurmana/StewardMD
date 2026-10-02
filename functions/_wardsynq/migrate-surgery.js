@@ -44,6 +44,7 @@ import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
 import { resolveCoding } from "./code-sets.js";
 import { theatreSettings } from "./theatre.js";
+import { ADMISSION_CLASSES, bedOccupant, claimBed, releaseBedClaim } from "./migrate-inpatient.js";
 
 const CASE_TYPE = "SurgicalCase";
 const ANES_TYPE = "AnesthesiaRecord";
@@ -370,19 +371,40 @@ async function dispositionCase(request, env, ctx) {
   if (enc.attendingId) closed.attendingId = enc.attendingId;
   if (enc.reason) closed.reason = enc.reason;
 
+  /* THE PACU BED IS CLAIMED BEFORE ANYTHING IS WRITTEN (Codex F1 follow-up), through the same claim
+   * admission and transfer take (migrate-inpatient.js claimBed), so a ward admission or transfer racing
+   * this move for the same bed cannot land beside it. Another open PACU stay in the bed is NOT counted:
+   * nothing in WardSynQ closes a PACU stay yet and the ward screen always sends bed "1", so counting it
+   * would shut that bed after the first recovery patient. ponytail: add a PACU exit, then use BED_CLASSES. */
+  const pacu = str(ctx.disposition) === "pacu" ? Encounter({
+    id: `wsq-pacu-${caseId}`, patientId: c.patientId, class: PACU, status: OPEN,
+    identifiers: enc.identifiers, location: { facilityId: null, ward: "PACU", bed: str(ctx.pacuBed) || null },
+    periodStart: now, periodEnd: null, source: { system: "wardsynq-native", sourceId: `pacu-admission:${caseId}` },
+  }) : null;
+  const pacuBed = pacu && pacu.location.bed;
+  if (pacuBed) {
+    const occupied = { ...base, ok: false, status: 409, error: "bed_occupied", detail: `PACU bed ${pacuBed} is occupied`, caseId, written: 0 };
+    try { if (await bedOccupant(svc, pacu.id, pacu.location, ADMISSION_CLASSES)) return occupied; }
+    catch (e) {
+      if (e instanceof ListCeilingError) return { ...base, ok: false, status: 503, error: "too_many_open", detail: str(e.message), caseId, written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), caseId, written: 0 };
+    }
+    try { await claimBed(svc, pacu, ADMISSION_CLASSES); }
+    catch (e) {
+      if (e instanceof VersionConflictError) return occupied;
+      return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), caseId, written: 0 };
+    }
+  }
+  const unclaim = async () => { if (pacuBed) await releaseBedClaim(svc, pacu); };
+
   let written = 0;
   try { await svc.put(closed, { expectedVersion: enc.version, idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:close` : null }); written += 1; }
-  catch (e) { return { ...base, ...writeFailure(e, { written, caseId, actor: resolved.actor.id }) }; }
+  catch (e) { await unclaim(); return { ...base, ...writeFailure(e, { written, caseId, actor: resolved.actor.id }) }; }
 
   let pacuEncounterId = null;
-  if (str(ctx.disposition) === "pacu") {
-    const pacu = Encounter({
-      id: `wsq-pacu-${caseId}`, patientId: c.patientId, class: PACU, status: OPEN,
-      identifiers: enc.identifiers, location: { facilityId: null, ward: "PACU", bed: str(ctx.pacuBed) || null },
-      periodStart: now, periodEnd: null, source: { system: "wardsynq-native", sourceId: `pacu-admission:${caseId}` },
-    });
+  if (pacu) {
     try { await svc.put(pacu, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:pacu` : null }); written += 1; pacuEncounterId = pacu.id; }
-    catch (e) { return { ...base, ...writeFailure(e, { written, caseId, actor: resolved.actor.id }) }; }
+    catch (e) { await unclaim(); return { ...base, ...writeFailure(e, { written, caseId, actor: resolved.actor.id }) }; }
   }
 
   return { ...base, ok: true, written, caseId, disposition: str(ctx.disposition) || "direct-discharge", pacuEncounterId, actor: resolved.actor.id, role: resolved.role };

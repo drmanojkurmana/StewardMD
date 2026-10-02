@@ -66,7 +66,26 @@ try {
   // Length of stay is on the row; the boards moved out of the filter row into their own card.
   ok(await ev(`return document.querySelector('#wRoster .w-bed-b small').textContent.indexOf('day ') > 0;`), "row carries the day of stay");
   ok(await ev(`return !!document.querySelector('.w-tools [data-w-act="board"]') && !document.querySelector('.w-filter [data-w-act="board"]');`), "boards and tools live in their own card, not the filter row");
-  ok(await ev(`return document.querySelectorAll('.w-tools .w-btn').length === 14;`), "all fourteen hospital-wide boards are still reachable");
+  // The tools card is a list that grows, so no count is asserted (it was a fixed 14 and went stale at 20).
+  // Instead every intended action must be present AND work: a click leaves the round for that action's
+  // own view. Each button also carries an action, so none is a dead decoration.
+  const TOOLS = { board: "board", edboard: "ed", surgeryboard: "surgery", inventoryboard: "inventory", critsboard: "critsboard", labboard: "labboard",
+    radboard: "radboard", bedmgmt: "bedmgmt", flowcommand: "flowcommand", dcboard: "dcboard", tcentre: "tcentre", twin: "twin", scheduling: "scheduling",
+    cashier: "cashier", reports: "reports", emergencyadmin: "emergencyadmin", integration: "integration", qualityview: "qualitysafety", recallview: "recall", downtime: "downtime" };
+  const present = JSON.parse(await ev(`return JSON.stringify([].map.call(document.querySelectorAll('.w-tools .w-btn'), function (b) { return b.getAttribute('data-w-act'); }));`) || "[]");
+  ok(!present.includes(null), "every button in the tools card carries an action");
+  const missing = Object.keys(TOOLS).filter((a) => !present.includes(a));
+  ok(missing.length === 0, "every intended hospital-wide tool is present" + (missing.length ? ", missing: " + missing.join(", ") : ""));
+  const dead = [];
+  for (const [act, view] of Object.entries(TOOLS)) {
+    await ev(`window.WARD.close(); window.WARD.open({ orgId: "org-harness" }); return true;`);
+    await waitFor(`return document.querySelectorAll('#wRoster .w-bed').length === 6;`);
+    await click('.w-tools [data-w-act="' + act + '"]');
+    if (!await waitFor(`return window.WARD._st.view === ${JSON.stringify(view)} && !document.getElementById('wRoster');`, 15)) dead.push(act);
+  }
+  ok(dead.length === 0, "each tool opens its own view" + (dead.length ? ", did not: " + dead.join(", ") : ""));
+  await ev(`window.WARD.close(); window.WARD.open({ orgId: "org-harness" }); return true;`);
+  await waitFor(`return document.querySelectorAll('#wRoster .w-bed').length === 6;`);
 
   // A row still opens the chart.
   await click('#wRoster .w-bed');

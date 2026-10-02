@@ -24,9 +24,10 @@ import { VersionConflictError, pagedLatest } from "./repository.js";
 import { dispatchLevel, smsFallbackDue } from "./push-alerts.js";
 
 const RANK = { none: 0, due: 0, overdue: 1, escalate: 2 };
-/* ponytail: no downstream consumer is registered yet, so drained events are marked done. A consumer
- * (billing, analytics, an integration) is added here by topic when one exists. */
-const CONSUMERS = Object.freeze({});
+/* Topics nothing consumes yet are listed with an empty handler map, so any tick settles them. A topic
+ * missing here AND from the caller's consumers is left pending (Codex F4: a worker never completes an
+ * event it has no consumer for). A consumer (billing, analytics, an integration) is added by topic. */
+const CONSUMERS = Object.freeze({ "consultation.saved": Object.freeze({}) });
 /* R4-2: every loop is paged (pagedLatest). The old read was the OLDEST 500 loops, so once a hospital had 500 critical
  * results no NEW one was ever escalated. Past SCAN the newest are not read and the tick says partial. */
 const SCAN = 50000;
@@ -97,7 +98,7 @@ async function runTick(repository, tenantId, opts) {
   const result = { tenantId, at: new Date(o.nowMs || Date.now()).toISOString() };
   try { result.criticals = await escalateCriticals(repository, tenantId, o); }
   catch (e) { result.criticals = { error: String((e && e.message) || e).slice(0, 200) }; }
-  try { result.outbox = await drainOutbox(repository, tenantId, o.consumers || CONSUMERS, { now: () => o.nowMs || Date.now() }); }
+  try { result.outbox = await drainOutbox(repository, tenantId, { ...CONSUMERS, ...o.consumers }, { now: () => o.nowMs || Date.now() }); }
   catch (e) { result.outbox = { error: String((e && e.message) || e).slice(0, 200) }; }
   try { result.anchor = await anchorTick(repository, tenantId, o); }
   catch (e) { result.anchor = { error: String((e && e.message) || e).slice(0, 200) }; }

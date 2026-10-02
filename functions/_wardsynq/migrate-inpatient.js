@@ -90,6 +90,10 @@ const MATERNITY = "MATERNITY";
 // never a reason to duplicate this file's own admission/bed/transfer/discharge path.
 const PEDIATRICS = "PEDIATRICS", NICU = "NICU";
 const ADMISSION_CLASSES = Object.freeze([IPD, ICU, MATERNITY, PEDIATRICS, NICU]);
+/* Every class whose open encounter HOLDS the bed it names: the admissions, and a PACU recovery bed
+ * (migrate-surgery.js). Used only for bed occupancy; ward lists and discharge stay on ADMISSION_CLASSES. */
+const PACU = "PACU";
+const BED_CLASSES = Object.freeze([...ADMISSION_CLASSES, PACU]);
 const OPEN = "in-progress";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -203,7 +207,7 @@ async function admitPatient(request, env, ctx) {
       if (e instanceof ListCeilingError) return { ...base, ...censusRefusal(e), written: 0 };
       return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), written: 0 };
     }
-    const clash = (open || []).find((e) => e && e.id !== candidate.id && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
+    const clash = (open || []).find((e) => e && e.id !== candidate.id && BED_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, candidate.location));
     if (clash) return bedOccupied(base, candidate);
 
     // TASK 4.2: the bed's own administrative state (blocked/cleaning/maintenance) and any stated
@@ -259,8 +263,12 @@ async function admitPatient(request, env, ctx) {
  * created a Ward/Bed master record for a name still admits/transfers into it exactly as before -
  * this only enforces a restriction a human actually configured, the same restraint bedBoard()'s own
  * "beds comes from ORG configuration, none configured, still reports occupied" already applies to
- * free-text config. A lookup failure never blocks a clinical admission - it is reported as
- * unconfigured, not as a refusal nobody asked for. */
+ * free-text config. A LOOKUP THAT THROWS IS NOT "UNCONFIGURED" (Codex F7, 2026-10-02): it used to
+ * be read as one, so a master-data outage let a bed the hospital had marked cleaning, maintenance or
+ * gender-restricted be admitted into. It is refused as 503 bed_list_unavailable instead. A declared
+ * emergency's override does not stand in for the read: it relaxes a bed's administrative state, and an
+ * unread bed list may be hiding a restriction it never relaxes. A ward-only admission or transfer (no
+ * bed named) checks no bed and still goes through, so a patient can be placed on the ward awaiting one. */
 /* TASK 4.15's own EmergencyActivation.relaxations names this exact case: "bed-assignment-conflict-
  * override" is the one relaxation this codebase wires to a real route, and it is deliberately
  * narrow. `occupied` is NEVER in this list - two real patients cannot share a bed regardless of any
@@ -274,11 +282,12 @@ const EMERGENCY_BED_RELAXATION = "bed-assignment-conflict-override";
 
 async function checkMasterBed(env, orgId, wardName, bedName, patientSex, relaxed) {
   if (!orgId || !bedName) return { ok: true };
+  const unavailable = (e) => ({ ok: false, status: 503, error: "bed_list_unavailable", detail: `the hospital's bed list could not be read (${str(e && e.message) || "error"}); try again, or admit to ${wardName} without a bed` });
   let masterWard;
-  try { masterWard = await getWardByName(env, orgId, wardName); } catch { return { ok: true }; }
+  try { masterWard = await getWardByName(env, orgId, wardName); } catch (e) { return unavailable(e); }
   if (!masterWard) return { ok: true };
   let masterBed;
-  try { masterBed = await getBedByName(env, orgId, masterWard.id, bedName); } catch { return { ok: true }; }
+  try { masterBed = await getBedByName(env, orgId, masterWard.id, bedName); } catch (e) { return unavailable(e); }
   if (!masterBed) return { ok: false, status: 422, error: "bed_not_found", detail: `${wardName} has no bed named ${bedName} in the hospital's own bed list` };
   if (!masterBed.active) return { ok: false, status: 409, error: "bed_inactive", detail: `${wardName} bed ${bedName} is retired` };
   if (masterBed.state !== "available") {
@@ -342,17 +351,21 @@ function bedOccupied(base, candidate) {
  * (the Encounter is still the one source of truth for who is admitted where); losing it would cost
  * nothing but this guard.
  *
+ * ONE CLAIM FOR EVERY WAY INTO A BED (Codex F1, 2026-10-02). /ward/transfer takes the same claim
+ * on its destination before it writes, and releases its source bed's claim once the move lands. It
+ * used to rely on its list-scan alone, so two transfers, or a transfer and an admission, racing for
+ * one empty bed could both pass the scan and both land. The PACU disposition (migrate-surgery.js)
+ * and every inbound FHIR/HL7 ADT encounter (fhir-inbound.js landBundle, via bedMove/bedOccupant
+ * below) take and release the same claim.
+ *
  * STALE CLAIMS SELF-HEAL. A bed a claim points at is read as free the moment the Encounter it
- * names is no longer open AT THAT LOCATION - discharged, or moved on by /ward/transfer (which
- * this file deliberately does not touch: transfer keeps its own existing list-scan guard,
- * unchanged, and a patient who has moved away makes their old bed's claim stale by the simple fact
- * that their Encounter's location has changed under it). */
+ * names is closed, or open elsewhere for longer than the in-flight window (claimBed). */
 const BED_CLAIM_TYPE = "_wardsynq_bed_claim";
 const CLAIM_IN_FLIGHT_MS = 2 * 60 * 1000;
 function bedClaimIdFor(ward, bed) {
   return `wsq-bedclaim-${str(ward).toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${str(bed).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 }
-async function claimBed(svc, candidate) {
+async function claimBed(svc, candidate, holderClasses = BED_CLASSES) {
   const { ward, bed } = candidate.location;
   const claimId = bedClaimIdFor(ward, bed);
   const latest = await svc.repository.latest(svc.tenantId, BED_CLAIM_TYPE, claimId);
@@ -366,8 +379,11 @@ async function claimBed(svc, candidate) {
    * failed admission cannot hold a bed shut. */
   if (latest && latest.encounterId && latest.encounterId !== candidate.id) {
     const holder = await svc.repository.latest(svc.tenantId, "Encounter", latest.encounterId);
-    const inFlight = !holder && Date.now() - Date.parse(latest.claimedAt) < CLAIM_IN_FLIGHT_MS;
-    const occupying = holder && ADMISSION_CLASSES.includes(holder.class) && holder.status === OPEN && sameBed(holder.location, candidate.location);
+    const open = holder && holderClasses.includes(holder.class) && holder.status === OPEN;
+    const occupying = open && sameBed(holder.location, candidate.location);
+    /* In flight: an admission not written yet (no holder), or a transfer on its way in (holder still
+     * open in its old bed), claimed in the last CLAIM_IN_FLIGHT_MS. */
+    const inFlight = !occupying && (!holder || open) && Date.now() - Date.parse(latest.claimedAt) < CLAIM_IN_FLIGHT_MS;
     if (inFlight || occupying) throw new VersionConflictError(`${ward} bed ${bed} is claimed by another admission`, { claimId });
   }
   const version = latest ? latest.version + 1 : 1;
@@ -385,8 +401,9 @@ async function claimBed(svc, candidate) {
   }], {});
 }
 
-/** Best-effort: the admission this claim was for did not land, so the claim stops naming it. A newer
- * claim by someone else is left alone, and a failure here leaves the in-flight window to free the bed. */
+/** Best-effort: the admission or transfer this claim was for did not land (or the patient has moved
+ * out of this bed), so the claim stops naming it. A newer claim by someone else is left alone, and a
+ * failure here leaves the in-flight window to free the bed. */
 async function releaseBedClaim(svc, candidate) {
   try {
     const { ward, bed } = candidate.location;
@@ -400,6 +417,23 @@ async function releaseBedClaim(svc, candidate) {
       writtenBy: { id: "system:bed-claim", kind: KIND.SERVICE, tier: TIER.DRAFT, at },
     }], {});
   } catch (e) { /* the in-flight window frees it */ }
+}
+
+/** PURE. A new version `next` of an encounter over the stored `cur`: the bed it moves INTO and the bed
+ * it moves OUT of, each null when there is none. Only an open encounter of a BED_CLASSES class holds a
+ * bed, so a discharge or a cancellation moves out and in to nothing. Staying put is no move. */
+function bedMove(cur, next) {
+  const held = (e) => (e && BED_CLASSES.includes(e.class) && e.status === OPEN && str(e.location && e.location.bed) ? e.location : null);
+  const from = held(cur), to = held(next);
+  if (from && to && (sameBed(from, to) || bedClaimIdFor(from.ward, from.bed) === bedClaimIdFor(to.ward, to.bed))) return { into: null, out: null };
+  return { into: to, out: from };
+}
+
+/** Another open encounter already in this bed, from the open census, or null. Throws when the census
+ * cannot be read: an unread census is never an empty bed. */
+async function bedOccupant(svc, id, location, classes = BED_CLASSES) {
+  const open = await openEncounters(svc);
+  return (open || []).find((e) => e && e.id !== id && classes.includes(e.class) && e.status === OPEN && sameBed(e.location, location)) || null;
 }
 
 /**
@@ -957,7 +991,7 @@ async function transferPatient(request, env, ctx) {
    * named is allowed - a patient can be on a ward awaiting a bed - and cannot collide. */
   let transferOverride = null;
   if (bed) {
-    const clash = (all || []).find((e) => e && e.id !== encounterId && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, to));
+    const clash = (all || []).find((e) => e && e.id !== encounterId && BED_CLASSES.includes(e.class) && e.status === OPEN && sameBed(e.location, to));
     if (clash) {
       return {
         ...base, ok: false, status: 409, error: "bed_occupied",
@@ -979,6 +1013,13 @@ async function transferPatient(request, env, ctx) {
       if (masterCheck.overrideUsed) {
         transferOverride = { activationId: activation && activation.id, relaxation: EMERGENCY_BED_RELAXATION, overriddenState: masterCheck.overriddenState, by: resolved.actor.id, at: new Date().toISOString() };
       }
+    }
+
+    // THE SCAN ABOVE IS THE FAST PATH; THIS IS THE GUARD. The same claim admission takes (claimBed).
+    try { await claimBed(svc, { id: encounterId, patientId: current.patientId, location: to }); }
+    catch (e) {
+      if (e instanceof VersionConflictError) return { ...base, ok: false, status: 409, error: "bed_occupied", detail: `${ward} bed ${bed} is occupied`, encounterId, written: 0 };
+      return { ...base, ok: false, status: 502, error: "record_write_failed", detail: str(e && e.message), encounterId, written: 0 };
     }
   }
 
@@ -1004,6 +1045,8 @@ async function transferPatient(request, env, ctx) {
 
   try {
     const out = await svc.put(next, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey || null });
+    // Not when the names differ only in spelling the claim id folds together: that claim is the new bed's.
+    if (from.bed && bedClaimIdFor(from.ward, from.bed) !== bedClaimIdFor(ward, bed)) await releaseBedClaim(svc, { id: encounterId, location: from });
     if (ctx.orgId) {
       if (from.bed) await freeMasterBed(env, ctx.orgId, from.ward, from.bed, resolved.actor.id);
       if (bed) {
@@ -1013,6 +1056,7 @@ async function transferPatient(request, env, ctx) {
     }
     return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, from, to, movedAt, version: out.record.version, actor: resolved.actor.id, role: resolved.role, ...(transferOverride ? { emergencyOverride: transferOverride } : {}) };
   } catch (e) {
+    if (bed && bedClaimIdFor(from.ward, from.bed) !== bedClaimIdFor(ward, bed)) await releaseBedClaim(svc, { id: encounterId, location: to });
     return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };
   }
 }
@@ -1539,6 +1583,7 @@ export {
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
+  BED_CLASSES, claimBed, releaseBedClaim, bedMove, bedOccupant,   // the one bed claim: migrate-surgery.js (PACU), fhir-inbound.js (FHIR/HL7 ADT)
   freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
   timelineFromChart, patientTimeline,
