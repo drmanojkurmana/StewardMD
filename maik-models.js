@@ -193,6 +193,10 @@
       },
       nCtx: 4096,
       nPredict: 768,   // headroom: the base family sometimes spends tokens reasoning before the answer
+      // Android prefill threads (the plugin default is all 8 cores, little ones included). Pixel 9,
+      // 2026-10-03, five questions each, greedy: first text 9.0 s -> 5.4 s, answers byte-identical.
+      // iOS ignores it. See vault/plans/Edge-Runbook.md (MaiK prefill).
+      nThreadsBatch: 4,
       // The EXACT system prompt this model was fine-tuned with (60% of examples). The shared
       // SYSTEM's dose example ("2 g IV over 20 min") was parroted as a real dose by this model,
       // so its own prompt carries no example dose. Consumed by maik-local.js (pk.system).

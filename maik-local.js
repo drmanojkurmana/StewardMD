@@ -830,14 +830,18 @@
       function loadAt(n) {
         // MLX takes the model directory's files and a context size; the llama.cpp knobs do not apply.
         if (_engine === "mlx") return L.load({ files: pp[0].files, nCtx: n }).then(function (r) { pk._ctx = n; return r; });
-        return L.load({ path: pp[0], nCtx: n,
+        var lo = { path: pp[0], nCtx: n,
           // perf plan #4: a q8_0 KV cache halves the cache and the memory traffic per decoded token;
           // flash attention is what makes a quantised V cache legal. A pack may opt out (kvQ8: false).
           kvQ8: pk.kvQ8 !== false, flashAttn: pk.flashAttn !== false,
           // perf plan #5: prefill knobs per pack; 0 = the plugin's measured default.
           nBatch: pk.nBatch || 0, nUbatch: pk.nUbatch || 0,
           // perf plan #6: same-tokeniser draft for speculative decoding, when it is on disk.
-          draftPath: pp[1] || "" }).then(function (r) { pk._ctx = n; return r; });
+          draftPath: pp[1] || "" };
+        // Prefill threads, only when the pack sets it: an absent key keeps the plugin default (Android:
+        // all cores), while 0 would mean "same as nThreads" in the JNI. iOS ignores the key.
+        if (pk.nThreadsBatch > 0) lo.nThreadsBatch = pk.nThreadsBatch;
+        return L.load(lo).then(function (r) { pk._ctx = n; return r; });
       }
       // A bigger window the device then refuses falls back to the proven size rather than failing.
       var base = pk.nCtx || 4096, want = wantCtx(packId, pk, _mem);

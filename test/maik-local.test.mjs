@@ -19,7 +19,7 @@ const SRC = src("maik-local.js");
  * @param opts.noPlugin simulate the web PWA (no capacitor-llama)
  */
 function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = null, loaded = false,
-               mem = null, availableThrows = false } = {}) {
+               mem = null, availableThrows = false, liteKnobs = {} } = {}) {
   const calls = { load: [], generate: [], listeners: [], removed: 0 };
   let listener = null;
 
@@ -57,7 +57,7 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
         "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 },
         "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true },
         // Entry tier, Qwen3-1.7B based like Apex, so it needs the same thinking suppression.
-        "maik-lite": { label: "MAiK Lite", actual: "MedPsy 1.7B (Q4_K_M, imatrix)", nCtx: 4096, nPredict: 512, noThink: true }
+        "maik-lite": { label: "MAiK Lite", actual: "MedPsy 1.7B (Q4_K_M, imatrix)", nCtx: 4096, nPredict: 512, noThink: true, ...liteKnobs }
       },
       pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf",
       totalBytes: () => 2.5e9
@@ -227,7 +227,16 @@ const { L } = load();
   // passes the draft path only when the draft is on disk (none in this harness).
   ok("load asks for q8 KV + flash attention by default", calls.load[0].kvQ8 === true && calls.load[0].flashAttn === true);
   ok("no draft on disk: draftPath is empty", calls.load[0].draftPath === "");
+  // Edge item 4 (2026-10-03): prefill threads are a pack knob. Absent, the key is not sent, so the
+  // plugin keeps its own default (0 would mean "same as nThreads" in the Android JNI).
+  ok("no pack nThreadsBatch: the key is not sent", !("nThreadsBatch" in calls.load[0]));
   ok("history precedes the evidence in the prompt (KV prefix reuse)", /parts\.history \+ "Reference material from the StewardMD Knowledge Base:/.test(SRC));
+}
+
+{
+  const { L: L2, calls } = load({ liteKnobs: { nThreadsBatch: 4 } });
+  await L2.answer({ question: "hi" }, null, () => {});
+  ok("pack nThreadsBatch is passed to the plugin load", calls.load[0].nThreadsBatch === 4);
 }
 
 // ── the model is loaded once, not per question ──

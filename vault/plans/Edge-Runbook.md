@@ -315,6 +315,24 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
 - iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite).
 - **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
 
+**MaiK prefill threads on Android (Mac prompt 2, item 4), 2026-10-03, Pixel 9, unplugged: APPLIED.**
+`LlamaPlugin.java` defaults `nThreadsBatch` to all 8 cores (the same cause as Edge's slow prefill).
+MaiK Lite (llama.cpp, `smd_maik_rag_linked` "0" as set on this phone), five questions, each asked once
+with the default and once with `nThreadsBatch: 4`, ABBA order, greedy (temperature 0), model warmed
+before the timer, app in the foreground, phone cooled to thermal 0 (35.4-36.1 C) before every run;
+logcat `newContext ... threads=4 ... threads_batch=8|4`.
+| | first text median (range) | total median (range) | prefill, ~278 tokens | decode |
+|---|---|---|---|---|
+| default (8 threads) | **9.05 s** (8.75-9.09) | 45.5 s (39.2-56.3) | 8.7-9.1 s | 7.0-7.8 tok/s |
+| `nThreadsBatch: 4` | **5.44 s** (5.32-5.48) | 39.7 s (35.6-49.8) | 5.3-5.4 s | 7.3-7.8 tok/s |
+- Answers: all five byte-identical between the two settings (same length and text hash; 975-1,442 chars).
+- First text 40% faster on every question; total 3.6-6.6 s shorter (decode unchanged, so the saving is the prefill).
+- Applied as a pack knob: `maik-models.js` `maik-lite.nThreadsBatch: 4`; `maik-local.js` sends
+  `nThreadsBatch` only when a pack sets it, so the plugin default and every other pack are unchanged; iOS
+  and MLX ignore the key. Rebuilt APK checked on the phone: `newContext ... threads_batch=4`.
+- Not measured: the other llama packs (Apex, MxCore); they keep the plugin default until measured.
+- iPhone: not applicable (iOS uses `nThreads` for the batch already).
+
 ## 4b. On-device speech (A1.2, flag `smd_speech_ondevice`)
 Build with this branch (the speech plugin changed on both platforms; Android compiles, Swift untested).
 On each phone (the flag is ON by default; `localStorage.setItem("smd_speech_ondevice","0")` is the kill switch):
