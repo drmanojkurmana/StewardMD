@@ -76,7 +76,7 @@ import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle,
 import { deviceAssociate, deviceDissociate, deviceIngest, deviceStatus, deviceList } from "../../_wardsynq/migrate-device.js";
 import {
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
-  signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
+  signOutCase, abandonCase, recordOperativeNote, dispositionCase, leaveRecovery, getSurgicalCase, listSurgicalCases,
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants, recordPac, getPac, rescheduleCase, recordTheatreTime, flagUnplannedReturn,
 } from "../../_wardsynq/migrate-surgery.js";
@@ -1832,7 +1832,7 @@ export async function onRequest(context) {
         "surgery-book": CAPS.EMR_TREAT, "surgery-consent": CAPS.EMR_TREAT, "surgery-marksite": CAPS.EMR_TREAT,
         "surgery-signin": CAPS.EMR_TREAT, "surgery-timeout": CAPS.EMR_TREAT, "surgery-incise": CAPS.EMR_TREAT,
         "surgery-signout": CAPS.EMR_TREAT, "surgery-abandon": CAPS.EMR_TREAT, "surgery-note": CAPS.EMR_TREAT,
-        "surgery-disposition": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
+        "surgery-disposition": CAPS.EMR_TREAT, "surgery-leave-recovery": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
         "surgery-board": CAPS.EMR_VIEW,
         /* Theatre times, rescheduling and the unplanned-return flag are written on the case, by the team that writes the
          * case (P3, 2026-09-17). Theatre sessions are the theatre's diary, booked on the same authority as the theatre
@@ -3102,6 +3102,10 @@ export async function onRequest(context) {
       }
       if (sub === "surgery-disposition" && method === "POST") {
         const r = await dispositionCase(request, env, { ...deps, caseId: body.caseId, disposition: body.disposition, pacuBed: body.pacuBed, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "surgery-leave-recovery" && method === "POST") {
+        const r = await leaveRecovery(request, env, { ...deps, encounterId: body.encounterId, outcome: body.outcome, expectedVersion: body.expectedVersion, admission: body.admission, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "surgery-get" && method === "GET") {

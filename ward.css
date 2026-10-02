@@ -531,6 +531,12 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* Emergency department. The bed-number badge is repurposed as an acuity badge: colour is urgency,
    never a computed clinical severity - the level is a human's own choice (triageCard, ward.js). */
 #smdWard .w-bed-no.untriaged { background: var(--sc-high); color: var(--on-surface-variant); }
+/* A recovery bay is a name the hospital chose ("Bay 12"), not a bed number: smaller, and it may wrap. */
+#smdWard .w-bed-no.bay { font-size: 12px; line-height: 1.15; padding: 0 3px; text-align: center; overflow-wrap: anywhere; }
+/* A recovery row: the MRN keeps the full width, and the action sits under it, lined up with the text. */
+#smdWard .w-bed.rec { flex-wrap: wrap; row-gap: 8px; }
+#smdWard .w-bed.rec > .w-bed-b { flex-basis: calc(100% - 64px); }
+#smdWard .w-bed.rec > .w-btn { margin-left: 58px; }
 #smdWard .w-bed-no.acuity-1, #smdWard .w-bed-no.acuity-2 { background: var(--error-container); color: var(--on-error-container); }
 #smdWard .w-bed-no.acuity-3 { background: var(--warn-container); color: var(--on-warn-container); }
 #smdWard .w-bed-no.acuity-4, #smdWard .w-bed-no.acuity-5 { background: var(--ok-container); color: var(--on-ok-container); }
