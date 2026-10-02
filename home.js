@@ -542,6 +542,8 @@
     hourglass: '<path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 4 5.5 5 9-1 3.5-5 4.5-5 9M17 3c0 4.5-4 5.5-5 9 1 3.5 5 4.5 5 9"/>',
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
     logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+    // Privacy mode toggle (privacy-mode.js): an eye with a stroke through it.
+    eyeOff: '<path d="M10.6 5.1A10 10 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-2.4 3.2"/><path d="M6.6 6.6A17 17 0 0 0 2.5 12s3.5 7 9.5 7a9.6 9.6 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><line x1="3" y1="3" x2="21" y2="21"/>',
     // App Lock — PIN keypad + biometric fingerprint (no emoji in security UI).
     keypad: '<circle cx="7" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="18" r="1.3" fill="currentColor" stroke="none"/>',
     fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>',
@@ -1892,6 +1894,10 @@
     } catch (e) { return ""; }
   }
   function escV4(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  // Privacy mode (privacy-mode.js): a patient name on the home cards is wrapped so it can be masked on screen.
+  function phiV4(kind, v) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, escV4(v)) : escV4(v); }
+  function recTitleV4(r) { var R = window.SMD_RECENT; return R && R.titleHtml ? R.titleHtml(r, "Case") : escV4(r.title || "Case"); }
+  function recSubV4(r) { var R = window.SMD_RECENT; return R && R.summaryHtml ? R.summaryHtml(r) : escV4(r.summary); }
   function greetLineV4() {
     var f = acctFirstV4(), nm = f ? ", Dr " + escV4(f) : "";
     var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();      // minutes since midnight
@@ -2547,7 +2553,7 @@
         if (crit.length) {
           critShown = true;
           var _cp = (window.ICU_STATE && window.ICU_STATE.patient) || {};
-          var pmeta = [_cp.bed ? "Bed " + escV4(_cp.bed) : "", _cp.name ? escV4(_cp.name) : ""].filter(Boolean).join(" · ");
+          var pmeta = [_cp.bed ? "Bed " + escV4(_cp.bed) : "", _cp.name ? phiV4("name", _cp.name) : ""].filter(Boolean).join(" · ");
           w.innerHTML = '<button class="rds-banner rds-banner--critical rnav-alert" data-act="icu" aria-label="Open ICU critical alerts">' + ric("warning") +
             '<span class="rds-banner-body"><span class="rds-banner-title">' + crit.length + ' critical alert' + (crit.length > 1 ? "s" : "") + '</span>' +
             '<span class="rds-banner-meta">Open ICU workspace' + (pmeta ? ' · ' + pmeta : "") + '</span></span>' + svg("chev") + '</button>';
@@ -2564,12 +2570,12 @@
           var meta = [pt.bed ? "Bed " + escV4(pt.bed) : "", pt.dx ? escV4(pt.dx) : ""].filter(Boolean).join(" · ");
           res.innerHTML = '<button class="rnav-resume rds-card" data-act="icu" aria-label="Resume patient">' +
             '<span class="rnav-resume-ic rds-icon">monitor_heart</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume ICU patient</span>' +
-            '<span class="rnav-resume-nm">' + escV4(pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + svg("chev") + '</button>';
+            '<span class="rnav-resume-nm">' + phiV4("name", pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + svg("chev") + '</button>';
         } else if (recent.length) {
           var r0 = recent[0];
           res.innerHTML = '<button class="rnav-resume rds-card" data-rid="' + escV4(r0.caseId) + '" aria-label="Resume last case">' +
             '<span class="rnav-resume-ic rds-icon">history</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume last case</span>' +
-            '<span class="rnav-resume-nm">' + escV4(r0.title || "Case") + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + escV4(r0.summary) + '</span>' : "") + '</span>' + svg("chev") + '</button>';
+            '<span class="rnav-resume-nm">' + recTitleV4(r0) + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + recSubV4(r0) + '</span>' : "") + '</span>' + svg("chev") + '</button>';
           var rb = res.querySelector("[data-rid]");
           if (rb) rb.addEventListener("click", function () { try { SMD_RECENT.open(rb.getAttribute("data-rid")); } catch (e) {} });
         } else { res.innerHTML = ""; }
@@ -2589,8 +2595,8 @@
           var rows = list.filter(function (it) { var k = (it.title || "") + "|" + (it.summary || ""); if (k === _rprev) return false; _rprev = k; return true; }).slice(0, 5).map(function (it) {
             return '<button class="rds-list-row rnav-recent-row" data-rid="' + escV4(it.caseId) + '">' +
               '<span class="rds-list-lead rds-icon">' + (_rmap[it.feature] || "history") + '</span><span class="rds-list-main">' +
-              '<span class="rnav-recent-tt">' + escV4(it.title || "Case") + '</span>' +
-              (it.summary ? '<span class="rnav-recent-sub">' + escV4(it.summary) + '</span>' : "") + '</span>' +
+              '<span class="rnav-recent-tt">' + recTitleV4(it) + '</span>' +
+              (it.summary ? '<span class="rnav-recent-sub">' + recSubV4(it) + '</span>' : "") + '</span>' +
               (it.ts ? '<span class="rnav-recent-time" style="margin-left:8px;flex:0 0 auto;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);white-space:nowrap">' + _rago(it.ts) + '</span>' : "") +
               '<span class="rds-list-trail">' + svg("chev") + '</span></button>';
           }).join("");
@@ -2671,6 +2677,7 @@
         _sync(); _tb.addEventListener("click", function () { setTimeout(_sync, 40); }); }
     }
     try { mountKuChip(root); } catch (e) {}   // KU: header chip (both header variants)
+    try { mountPrivacyToggle(root); } catch (e) {}   // B2 privacy mode: one tap masks patient identifiers on screen
 
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
@@ -2837,6 +2844,14 @@
       + ".ku-signin{margin-top:14px;border:0;border-radius:999px;background:#f59e0b;color:#fff;font:800 14px var(--hfont,system-ui);padding:10px 18px;cursor:pointer}"
       + ".ku-note{color:var(--hmut,#64748b);font:500 11.5px var(--hfont,system-ui);margin-top:16px;line-height:1.45}";
     document.head.appendChild(s);
+  }
+  function mountPrivacyToggle(root) {
+    var P = window.SMD_PRIVACY_MODE;
+    if (!P || !P.enabled()) return;   // kill switch: localStorage smd_privacy_mode_enabled = "0"
+    var hdr = root.querySelector(".rnav-head, .v3-header"); if (!hdr) return;
+    var rnav = hdr.classList.contains("rnav-head");
+    var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector('[data-act="theme"]') || hdr.querySelector("#v3BellBtn");
+    P.mountToggle(hdr, anchor, rnav ? ric("visibility_off") : svg("eyeOff"), rnav ? "rds-icon-btn" : "v3-ic");
   }
   function mountKuChip(root) {
     if (!window.SMD_KU) return;

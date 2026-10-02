@@ -11063,3 +11063,11 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - iOS blurs the window when the scene resigns active and removes the blur on every activation (`SceneDelegate`); Android 13+ disables the recents screenshot (`setRecentsScreenshotEnabled(false)`), which still allows normal screenshots.
 - App-local plugin `SmdDevice` (iOS in `MainViewController.swift`, Android `SmdDevicePlugin.java`): `getPowerState()` + `powerStateChange` for Low Power Mode / Battery Saver, and Android-only `haptic({type})` through `View.performHapticFeedback` system constants, never raw Vibrator waveforms. iOS `haptic` resolves `{performed:false}`; iOS web code keeps `@capacitor/haptics`.
 
+## 2026-10-03 - Privacy mode masks by CSS over marked-up identifiers, never by rewriting text
+- Plan B2 privacy mode (`privacy-mode.js`) draws masks with `::after { content: attr(data-phi) }` over a hidden
+  inner span. **Why:** the DOM text stays the real value, so code that reads the DOM to copy, save, print or share
+  (ICU summary copy reads `textContent`) can never pick up a mask, and `@media print` never sees one. A JS swap of
+  text nodes would put masks into whatever reads the DOM next. **Trade-off:** every renderer has to wrap its
+  identifiers (one `phi()` helper per module), and screens that are not wrapped must say so; that is what
+  `[data-phi-unmasked]` and the amber label are for. Text that cannot carry markup (toasts, `confirm()`) uses
+  `screenText()`, which masks only at the moment it is shown. [[plans/Premium-Feel]] B2
