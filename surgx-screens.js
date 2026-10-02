@@ -1491,11 +1491,12 @@
     return st.saveNote(n).then(function (r) {
       if (!r.ok) {
         toast(r.reason === "no-crypto" ? "Cannot save: secure storage unavailable" : "Could not save this note");
+        haptic("error");
         return false;
       }
       n.id = r.id;
       if (route() === "note/new") state.stack[state.stack.length - 1] = "note/" + r.id;
-      if (!silent) toast("Saved on this device");
+      if (!silent) { toast("Saved on this device"); haptic("success"); }
       return true;
     });
   }
@@ -1888,6 +1889,7 @@
           });
           D.send(fsDest, fsNote, text, { confirmed: true }).then(function (r) {
             if (r && r.ok) {
+              haptic("success");
               fsNote.audit.push({ a: "sent", to: fsDest });
               saveNote(true);
               try { window.alert(fsDest === "drive" ? "Saved to your Drive."
@@ -1895,6 +1897,7 @@
             } else {
               /* Never let a failed write be silent. The note IS signed; say so, and say why the send
                * failed, in a dialog they cannot miss. */
+              haptic("warning");
               var whyFs = destError(fsDest, r);
               try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyFs + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
               // An expired sign-in is the one failure the clinician can fix right now, so take them there.

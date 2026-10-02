@@ -4586,6 +4586,11 @@
     st.scribeRx = _mergeRxRows(st.scribeRx, parsed);
     var sf = _scribeSafetyCheck(st.scribeRx.rows, _scribeSafetyCtx(st));
     st.scribeSafety = sf ? { findings: _safetyRows(sf.findings), summary: sf.summary } : null;
+    // A critical or major finding was just produced for a newly staged line: one warning buzz (this runs
+    // on staging, never on re-render).
+    try {
+      if (st.scribeSafety && (st.scribeSafety.findings || []).some(function (f) { return f.severity === "critical" || f.severity === "major"; }) && G.SMD_HAPTICS) G.SMD_HAPTICS.warning();
+    } catch (e) {}
   }
   // Hand the staged rows to the prescription pad. toRegimen marks a DICTATED dose source:"ai", which
   // is what makes rx-build flag it unverified - a spoken dose must be read back before signing.
