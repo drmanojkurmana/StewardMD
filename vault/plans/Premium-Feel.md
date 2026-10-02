@@ -24,6 +24,14 @@ Every risky item ships behind a flag with a recovery point, per `STEWARDMD-KNOWL
 5. Insulin dose: swap, not count-up (no intermediate doses on screen).
 6. Celebration: achievements in clinical progress (the clinician's own milestones), never patient events.
 
+Status 2026-10-03 (second pass, owner: "keep doing, then merge"):
+- B3 built without a new dependency: SmdDevice getTextScale / setTextZoom / textScaleChange, applied
+  by power-state.js (iOS -webkit-text-size-adjust, Android WebView textZoom), clamped 85-200%, kill
+  switch smd_text_scale="0".
+- B15 deliberately NOT built. In a clinical record, "saved" must mean saved: an optimistic tick that
+  later reconciles into a conflict or a lost write is a patient-safety risk, not polish. Revisit only
+  per flow with a server-confirmed state shown separately.
+
 Correction to B10: `theme-reveal.js` is a one-shot View Transition on a user's theme toggle, not an
 ambient loop, so it needs no power or visibility pause. `thinking-orbs.js` had NO reduced-motion
 path at all; it now holds one still frame for reduced motion and Low Power Mode.
