@@ -32,6 +32,8 @@ class MainViewController: CAPBridgeViewController {
  *    thinking orbs, theme reveal) goes still while it is on (Premium-Feel plan B10).
  *  - `powerStateChange` {lowPower: Bool} fires when Low Power Mode is switched, on the main thread
  *    (iOS posts NSProcessInfoPowerStateDidChange on an arbitrary thread).
+ *  - getTextScale() resolves {scale} (body point size / 17); `textScaleChange` {scale} fires when the
+ *    user changes Text Size in Settings. The web layer applies it (Premium-Feel plan B3).
  *  - haptic({type}) resolves {performed: false}. Android-only by design (owner decision 2026-10-03):
  *    iOS web code keeps using @capacitor/haptics, so this exists only so JS can call one API on both
  *    platforms.
@@ -44,12 +46,32 @@ public class SmdDevicePlugin: CAPPlugin, CAPBridgedPlugin {
     public let jsName = "SmdDevice"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "getPowerState", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "haptic", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "haptic", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getTextScale", returnType: CAPPluginReturnPromise)
     ]
 
     override public func load() {
         NotificationCenter.default.addObserver(self, selector: #selector(powerStateDidChange),
                                                name: .NSProcessInfoPowerStateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textScaleDidChange),
+                                               name: UIContentSizeCategory.didChangeNotification, object: nil)
+    }
+
+    // System text size as a multiplier of the default 17 pt body (same measure as @capacitor/text-zoom).
+    // The web layer applies it as -webkit-text-size-adjust (Premium-Feel plan B3).
+    private func textScale() -> Double {
+        return Double(UIFont.preferredFont(forTextStyle: .body).pointSize) / 17.0
+    }
+
+    @objc func getTextScale(_ call: CAPPluginCall) {
+        DispatchQueue.main.async { call.resolve(["scale": self.textScale()]) }
+    }
+
+    @objc private func textScaleDidChange() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.notifyListeners("textScaleChange", data: ["scale": self.textScale()])
+        }
     }
 
     @objc func getPowerState(_ call: CAPPluginCall) {

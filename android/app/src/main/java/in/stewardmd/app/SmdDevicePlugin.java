@@ -21,6 +21,8 @@ import com.getcapacitor.annotation.CapacitorPlugin;
  *
  * - getPowerState() resolves {lowPower} from Battery Saver; `powerStateChange` {lowPower} fires
  *   when it is switched. Ambient motion goes still while it is on (Premium-Feel plan B10).
+ * - getTextScale() resolves {scale} (system fontScale); setTextZoom({percent}) applies it to the WebView,
+ *   which otherwise ignores the system font size (Premium-Feel plan B3).
  * - haptic({type}) resolves {performed}. Owner decision 2026-10-03: Android haptics only through
  *   the system's tuned View.performHapticFeedback constants, never raw Vibrator waveforms. It
  *   honours the user's system "touch feedback" setting, so performed=false is a normal answer.
@@ -64,6 +66,32 @@ public class SmdDevicePlugin extends Plugin {
     @PluginMethod
     public void getPowerState(PluginCall call) {
         call.resolve(powerState());
+    }
+
+    // System font scale (Settings > Display > Font size). fontScale is not in the activity's
+    // configChanges, so a change recreates the activity and the web layer reads the new value on boot.
+    @PluginMethod
+    public void getTextScale(PluginCall call) {
+        JSObject ret = new JSObject();
+        ret.put("scale", (double) getContext().getResources().getConfiguration().fontScale);
+        call.resolve(ret);
+    }
+
+    // The WebView ignores the system font scale (textZoom defaults to 100), so the web layer asks for it
+    // here with its own clamp and kill switch (Premium-Feel plan B3).
+    @PluginMethod
+    public void setTextZoom(PluginCall call) {
+        final int percent = Math.max(50, Math.min(300, call.getInt("percent", 100)));
+        final Activity activity = getActivity();
+        final WebView webView = getBridge().getWebView();
+        if (activity == null || webView == null) {
+            call.resolve();
+            return;
+        }
+        activity.runOnUiThread(() -> {
+            webView.getSettings().setTextZoom(percent);
+            call.resolve();
+        });
     }
 
     @PluginMethod
