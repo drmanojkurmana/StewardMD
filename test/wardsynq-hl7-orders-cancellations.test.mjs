@@ -64,7 +64,7 @@ mock.module("../functions/_fbfirestore.js", {
   },
 });
 
-const { MemoryRepository } = await import("../functions/_wardsynq/repository.js");
+const { MemoryRepository, VersionConflictError } = await import("../functions/_wardsynq/repository.js");
 const { identify } = await import("../functions/_usage.js");
 const { verifyStaffSession } = await import("../functions/_opd_auth.js");
 const { orgForTenant, authorizeOrg } = await import("../functions/_wardsynq/org.js");
@@ -319,4 +319,99 @@ test("12. the same order message sent twice is filed once and the sender is TOLD
   assert.match(second.text, /already processed/);
   const sr = await stored("ServiceRequest", srId("P-1013"));
   assert.equal(sr.version, 1, "one version: the replay wrote nothing");
+});
+
+/* ---- 13-15: Codex F1 follow-up. An ADT message moves a patient through the SAME bed claim a native
+ * admission or transfer takes (migrate-inpatient.js claimBed). A message that puts a patient in a bed
+ * another open visit holds is HELD for a person (conflict-bed-occupied, AE), never filed. ------------ */
+const CLAIM = "_wardsynq_bed_claim";
+const claimOf = (ward, bed) => stored(CLAIM, `wsq-bedclaim-${ward.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${bed.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`);
+let regN = 0;
+// A second, different person from the feed (pidSeg names everyone alike, which the matcher would hold as one).
+const asOther = (msg) => msg.replace("Testcase^Feed", "Othercase^Second").replace("|19800101|", "|19920505|");
+async function nativeAdmit(ward, bed) {
+  regN++;
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Native Bed " + regN, mobile: "98765077" + String(regN).padStart(2, "0"), gender: "female", ageYears: 40 });
+  return as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward, bed });
+}
+
+test("13. A02 into a bed another open visit holds is HELD (AE, conflict-bed-occupied); the patient stays where they were", async () => {
+  seed();
+  await grantSource(SOURCE);
+  assert.equal((await hl7(adt("A01", "B1", "MRN-B1", "V-B1", { admit: "20260808100000", location: `MED-A^12^01^${FACILITY}` }))).code, "AA");
+  const b2a = await hl7(asOther(adt("A01", "B2", "MRN-B2", "V-B2", { admit: "20260808100000", location: `MED-A^14^01^${FACILITY}` }))); assert.equal(b2a.code, "AA", b2a.raw);
+
+  const move = await hl7(asOther(adt("A02", "B3", "MRN-B2", "V-B2", { admit: "20260808100000", location: `MED-A^12^01^${FACILITY}` })));
+  assert.equal(move.code, "AE", move.raw);
+  assert.match(move.text, /conflict-bed-occupied/);
+  assert.match(move.text, /nothing was written/);
+  const b2 = await stored("Encounter", encId("V-B2"));
+  assert.equal(b2.version, 1, "the move was not filed");
+  assert.equal(b2.location.bed, "14-01", "the patient is still in their own bed");
+  const ex = await exceptions();
+  const held = ex.open.find((e) => e.reason === "conflict-bed-occupied");
+  assert.ok(held, JSON.stringify(ex.open.map((e) => e.reason)));
+  assert.match(held.detail, /MED-A bed 12-01/);
+
+  // A native admission's bed is held against the feed the same way.
+  const native = await nativeAdmit("MED-A", "20-01");
+  assert.equal(native.__status, 200, JSON.stringify(native));
+  const onto = await hl7(asOther(adt("A02", "B4", "MRN-B2", "V-B2", { admit: "20260808100000", location: `MED-A^20^01^${FACILITY}` })));
+  assert.equal(onto.code, "AE", onto.raw);
+  assert.match(onto.text, /conflict-bed-occupied/);
+});
+
+test("14. A01/A02/A03 take and give back the bed claim: the bed a transfer left and the bed a discharge left are admittable at once", async () => {
+  seed();
+  await grantSource(SOURCE);
+  assert.equal((await hl7(adt("A01", "D1", "MRN-D1", "V-D1", { admit: "20260808100000", location: `MED-A^30^01^${FACILITY}` }))).code, "AA");
+  assert.equal((await claimOf("MED-A", "30-01")).encounterId, encId("V-D1"), "the admission claimed its bed");
+  const blocked = await nativeAdmit("MED-A", "30-01");
+  assert.equal(blocked.__status, 409, JSON.stringify(blocked));
+
+  const move = await hl7(adt("A02", "D2", "MRN-D1", "V-D1", { admit: "20260808100000", location: `MED-A^31^01^${FACILITY}` }));
+  assert.equal(move.code, "AA", move.raw);
+  assert.equal((await claimOf("MED-A", "30-01")).encounterId, null, "the bed left behind stops naming the patient");
+  assert.equal((await claimOf("MED-A", "31-01")).encounterId, encId("V-D1"));
+  assert.equal((await nativeAdmit("MED-A", "30-01")).__status, 200, "the vacated bed is free at once");
+
+  const out = await hl7(adt("A03", "D3", "MRN-D1", "V-D1", { admit: "20260808100000", discharge: "20260809090000", location: `MED-A^31^01^${FACILITY}` }));
+  assert.equal(out.code, "AA", out.raw);
+  assert.equal((await claimOf("MED-A", "31-01")).encounterId, null, "a discharge gives the claim back");
+  assert.equal((await nativeAdmit("MED-A", "31-01")).__status, 200);
+});
+
+test("15. a native admission racing an A01 for the same bed: exactly one lands; the feed's loss is held, not filed", async () => {
+  seed();
+  await grantSource(SOURCE);
+  regN++;
+  const reg = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Race Native", mobile: "98765078" + String(regN).padStart(2, "0"), gender: "male", ageYears: 47 });
+  const realPage = RECORD.pageByType.bind(RECORD), realLatest = RECORD.latest.bind(RECORD), realAppend = RECORD.append.bind(RECORD);
+  let arrived = 0, claimReads = 0, claimConflicts = 0, openCensus, openClaims;
+  const census = new Promise((r) => { openCensus = r; }), claims = new Promise((r) => { openClaims = r; });
+  const timer = setTimeout(() => { openCensus(); openClaims(); }, 1000);
+  RECORD.pageByType = async (t, type, o) => { if (type === "Encounter") { if (++arrived === 2) openCensus(); await census; } return realPage(t, type, o); };
+  RECORD.latest = async (t, type, id) => { if (type === CLAIM) { if (++claimReads === 2) openClaims(); await claims; } return realLatest(t, type, id); };
+  RECORD.append = async (t, records, ctx) => {
+    try { return await realAppend(t, records, ctx); }
+    catch (e) { if (e instanceof VersionConflictError && records.some((r) => r.resourceType === CLAIM)) claimConflicts += 1; throw e; }
+  };
+  let feed, native;
+  try {
+    [feed, native] = await Promise.all([
+      hl7(adt("A01", "R1", "MRN-R1", "V-R1", { admit: "20260808100000", location: `MED-A^40^01^${FACILITY}` })),
+      as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: reg.mrn, ward: "MED-A", bed: "40-01" }),
+    ]);
+  } finally { clearTimeout(timer); RECORD.pageByType = realPage; RECORD.latest = realLatest; RECORD.append = realAppend; }
+
+  assert.equal(claimConflicts, 1, "the shared claim decided it: " + JSON.stringify([feed.raw, native]));
+  const feedWon = feed.code === "AA", nativeWon = native.__status === 200;
+  assert.equal(feedWon + nativeWon, 1, JSON.stringify([feed.raw, native]));
+  if (feedWon) { assert.equal(native.error, "bed_occupied"); }
+  else {
+    assert.equal(feed.code, "AE", feed.raw); assert.match(feed.text, /conflict-bed-occupied/);
+    assert.equal(await stored("Encounter", encId("V-R1")), null, "the feed's admission was not filed");
+  }
+  const open = (await RECORD.latestByStatus(TENANT.id, "Encounter", ["in-progress"], 1000)).filter((e) => e.location && e.location.bed === "40-01");
+  assert.equal(open.length, 1, "exactly one patient in MED-A bed 40-01");
 });

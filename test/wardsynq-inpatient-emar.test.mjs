@@ -6417,7 +6417,8 @@ test("HL7 v2: an A01 carrying THIS hospital's MRN links to the local chart and w
 
   // Same name and date of birth as our patient, a different MRN: probable duplicate, held whole.
   const ours = await RECORD.latest(TENANT_ROW.id, "Patient", adm.patientId);
-  const heldMsg = adt({ mrn: "OTHER-9", family: ours.name.split(" ").pop(), given: ours.name.split(" ")[0], dob: String(ours.dob || "").replace(/-/g, ""), sex: "F", controlId: "MSG-HELD", visit: "V-HELD", extra: ["ZPI|1|keep-me-verbatim"] });
+  const heldMsg = adt({ mrn: "OTHER-9", family: ours.name.split(" ").pop(), given: ours.name.split(" ")[0], dob: String(ours.dob || "").replace(/-/g, ""), sex: "F", controlId: "MSG-HELD", visit: "V-HELD", bed: "14", extra: ["ZPI|1|keep-me-verbatim"] });
+  // Bed 14, not V-LINK's bed 12: since Codex F1 an inbound visit into a bed another open visit holds is held for that reason instead.
   const held = await pushHl7(DOCTOR, heldMsg);
   const ackH = await held.text();
   assert.equal(held.status, 200, "an AE is still a 200: the ACK carries the outcome");
