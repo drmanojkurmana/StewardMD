@@ -265,6 +265,12 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
 <link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2-audA-audB-fr1-mkclose1-tblscroll1-glass1-convo1002">
 <link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1-fr1">
+<style>/* Boot splash first paint. Its full styles sit after the markup in <body>, and a device recording
+   (2026-10-03) caught ~300ms of the unstyled splash (giant black mark on light) before they parsed. Until
+   then it is only a plain surface in the launch color (#FFFFFF / #08302B, same as the native launch). */
+#smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff}
+@media (prefers-color-scheme:dark){#smdBootSplash{background:#08302b}}
+#smdBootSplash>*{visibility:hidden}</style>
 </head>
 
 
@@ -362,6 +368,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
+  #smdBootSplash>*{visibility:visible} /* full styles parsed: undo the head first-paint guard */
   /* fast (returning) opens: quick fade, and a plain surface until 700ms so the mark never flashes */
   html #smdBootSplash.sbs-fast{transition:opacity .16s cubic-bezier(.23,1,.32,1)}
   html #smdBootSplash.sbs-blank>*{visibility:hidden}
