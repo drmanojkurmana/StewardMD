@@ -45,6 +45,10 @@
     s.textContent = [
       "#smdCeleb{position:fixed;left:0;right:0;bottom:0;z-index:100000;display:flex;justify-content:center;padding:0 12px calc(12px + var(--sai-bottom,env(safe-area-inset-bottom,0px)));pointer-events:none}",
       "#smdCeleb .sc-card{pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;display:flex;align-items:center;gap:12px;width:100%;max-width:420px;box-sizing:border-box;padding:10px 16px 10px 10px;border-radius:18px;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border:1px solid var(--hbd,#e6efec);box-shadow:0 10px 28px rgba(6,32,29,.16),0 2px 6px rgba(6,32,29,.08);font-family:var(--hfont,system-ui,-apple-system,sans-serif);--sc-c:#0e6a5f;transform:translateY(0);opacity:1;transition:transform " + EXIT_MS + "ms cubic-bezier(.23,1,.32,1),opacity " + EXIT_MS + "ms cubic-bezier(.23,1,.32,1)}",
+      // the host hangs off <body>, outside #homeV2 / .hv-sheet where the --h* tokens live, so it carries
+      // the home palette itself (home.js #homeV2 + body.dark #homeV2 values)
+      "#smdCeleb{--hpanel:#fff;--hbd:#E2E8F0;--hink:#0F172A;--hmut:#64748B}",
+      "body.dark #smdCeleb,body.v3-dark #smdCeleb{--hpanel:#111B2E;--hbd:#1E2B43;--hink:#E7EDF5;--hmut:#8597AD}",
       "body.dark #smdCeleb .sc-card,body.v3-dark #smdCeleb .sc-card{--sc-c:#4fd6c2;box-shadow:0 10px 28px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3)}",
       "#smdCeleb .sc-card.sc-in{animation:scIn 340ms cubic-bezier(.23,1,.32,1) both}",
       "#smdCeleb .sc-card.sc-out{transform:translateY(24px);opacity:0}",
