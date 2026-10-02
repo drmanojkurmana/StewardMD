@@ -57,24 +57,24 @@ const ENV = Object.freeze({
 
 const rec = (resourceType, body) => ({ resourceType, version: 1, patientId: PID, ...body });
 
-function stayRecords() {
-  const encounter = rec("Encounter", { id: ENC, class: "IPD", status: "finished", periodStart: "2026-09-01T08:00:00.000Z", periodEnd: "2026-09-10T10:00:00.000Z" });
+function stayRecords(enc = ENC) {
+  const encounter = rec("Encounter", { id: enc, class: "IPD", status: "finished", periodStart: "2026-09-01T08:00:00.000Z", periodEnd: "2026-09-10T10:00:00.000Z" });
   const patient = { resourceType: "Patient", id: PID, version: 1, name: "Ramesh Kumar", sex: "male", dob: "1980-05-02", mrn: "MRN-001",
     identifiers: [{ system: "abha-number", value: "91234567890123" }, { system: "abha-address", value: ABHA }] };
-  const summary = rec("ClinicalNote", { id: dischargeSummaryIdFor(ENC), encounterId: ENC, noteType: "discharge-summary", signedBy: "doc-1",
+  const summary = rec("ClinicalNote", { id: dischargeSummaryIdFor(enc), encounterId: enc, noteType: "discharge-summary", signedBy: "doc-1",
     sections: { hospitalCourse: "Treated with antibiotics, improved.", dischargeAdvice: "Review in one week." } });
-  const order = rec("MedicationOrder", { id: "mo-1", encounterId: ENC, status: "active", drug: "Paracetamol", dose: { value: 500, unit: "mg" },
+  const order = rec("MedicationOrder", { id: "mo-1", encounterId: enc, status: "active", drug: "Paracetamol", dose: { value: 500, unit: "mg" },
     route: "oral", frequency: "TDS", drugCode: "387517004", drugCodeSystem: "snomed" });
-  const hb = rec("Observation", { id: "obs-hb", encounterId: ENC, code: "718-7", codeSystem: "loinc", display: "Hemoglobin", value: 13.5, unit: "g/dL", category: "laboratory", effectiveAt: "2026-09-02T06:00:00.000Z" });
-  const wbc = rec("Observation", { id: "obs-wbc", encounterId: ENC, code: "6690-2", codeSystem: LOINC, display: "Leukocytes", value: 7.2, unit: "10*3/uL", category: "laboratory", effectiveAt: "2026-09-02T06:00:00.000Z" });
-  const cbc = rec("DiagnosticReport", { id: "dr-cbc", encounterId: ENC, status: "final", code: "Complete blood count", category: "laboratory", reportedAt: "2026-09-02T09:00:00.000Z", resultObservationIds: ["obs-hb", "obs-wbc"] });
-  const crp = rec("Observation", { id: "obs-crp", encounterId: ENC, code: "1988-5", codeSystem: "loinc", display: "C reactive protein", value: 42, unit: "mg/L", category: "laboratory", effectiveAt: "2026-09-03T06:00:00.000Z" });
-  const crpReport = rec("DiagnosticReport", { id: "dr-crp", encounterId: ENC, status: "corrected", code: "CRP", category: "laboratory", reportedAt: "2026-09-03T09:00:00.000Z", resultObservationIds: ["obs-crp"] });
-  const prelim = rec("DiagnosticReport", { id: "dr-prelim", encounterId: ENC, status: "preliminary", code: "Blood culture", reportedAt: "2026-09-04T09:00:00.000Z", resultObservationIds: [] });
-  const imm = rec("Immunization", { id: "imm-1", encounterId: ENC, status: "completed", vaccine: "Tetanus toxoid", vaccineCode: "333621002", vaccineCodeSystem: "snomed", occurredOn: "2026-09-02" });
-  const invoice = rec("Invoice", openInvoice({ id: "inv-1", patientId: PID, encounterId: ENC, currency: "INR", actorId: "cashier-1", at: "2026-09-10T09:00:00.000Z",
+  const hb = rec("Observation", { id: "obs-hb", encounterId: enc, code: "718-7", codeSystem: "loinc", display: "Hemoglobin", value: 13.5, unit: "g/dL", category: "laboratory", effectiveAt: "2026-09-02T06:00:00.000Z" });
+  const wbc = rec("Observation", { id: "obs-wbc", encounterId: enc, code: "6690-2", codeSystem: LOINC, display: "Leukocytes", value: 7.2, unit: "10*3/uL", category: "laboratory", effectiveAt: "2026-09-02T06:00:00.000Z" });
+  const cbc = rec("DiagnosticReport", { id: "dr-cbc", encounterId: enc, status: "final", code: "Complete blood count", category: "laboratory", reportedAt: "2026-09-02T09:00:00.000Z", resultObservationIds: ["obs-hb", "obs-wbc"] });
+  const crp = rec("Observation", { id: "obs-crp", encounterId: enc, code: "1988-5", codeSystem: "loinc", display: "C reactive protein", value: 42, unit: "mg/L", category: "laboratory", effectiveAt: "2026-09-03T06:00:00.000Z" });
+  const crpReport = rec("DiagnosticReport", { id: "dr-crp", encounterId: enc, status: "corrected", code: "CRP", category: "laboratory", reportedAt: "2026-09-03T09:00:00.000Z", resultObservationIds: ["obs-crp"] });
+  const prelim = rec("DiagnosticReport", { id: "dr-prelim", encounterId: enc, status: "preliminary", code: "Blood culture", reportedAt: "2026-09-04T09:00:00.000Z", resultObservationIds: [] });
+  const imm = rec("Immunization", { id: "imm-1", encounterId: enc, status: "completed", vaccine: "Tetanus toxoid", vaccineCode: "333621002", vaccineCodeSystem: "snomed", occurredOn: "2026-09-02" });
+  const invoice = rec("Invoice", openInvoice({ id: "inv-1", patientId: PID, encounterId: enc, currency: "INR", actorId: "cashier-1", at: "2026-09-10T09:00:00.000Z",
     lines: [{ code: "BED", display: "Ward bed", quantity: 3, amount: 1500, line: 4500 }] }));
-  const condition = rec("Condition", { id: "cond-1", encounterId: ENC, display: "Community acquired pneumonia", clinicalStatus: "active" });
+  const condition = rec("Condition", { id: "cond-1", encounterId: enc, display: "Community acquired pneumonia", clinicalStatus: "active" });
   const allergy = rec("AllergyIntolerance", { id: "alg-1", substance: "Penicillin", criticality: "high" });
   return { encounter, patient, summary, orders: [order], observations: [hb, wbc, crp], reports: [cbc, crpReport, prelim], immunizations: [imm], invoices: [invoice], conditions: [condition], allergies: [allergy] };
 }
@@ -449,6 +449,35 @@ test("linkPendingAfterToken links only the contexts that were waiting for the to
   // The pending list is consumed: the same token again links nothing.
   assert.deepEqual(await linkPendingAfterToken(env, deps, { tenantId: TENANT, hipId: HIP, abhaAddress: ABHA, token: "lt-2" }), { linked: 0 });
   assert.equal(posts.length, 1);
+});
+
+test("pending-link tokens never look like a mobile number, and tokens parked in the old sha10 form still link", async () => {
+  // sha10("IPD:enc-ipd-286:DS") is "9268680427": 10 digits from 6-9, which the KV PHI guard (MOBILE_EMBED) refuses.
+  // Before the letter-mapped token, this stay's /ward/abdm-link-stay failed (502).
+  const PHONE_ENC = "enc-ipd-286";
+  const oldTok = async (s) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)))].slice(0, 5).map((b) => b.toString(16).padStart(2, "0")).join("");
+  assert.equal(await oldTok(`IPD:${PHONE_ENC}:DS`), "9268680427");
+
+  const repo = await seededRepo(stayRecords(PHONE_ENC));
+  const db = makeAbdmDb(), kv = makeMockKv(), f = stubFetch();
+  const env = envWith(db, kv);
+  const out = await linkStayCareContexts(env, { tenantId: TENANT, encounterId: PHONE_ENC, recordDeps: depsOf(repo), trigger: "discharge", fetchImpl: f.fetchImpl, kv });
+  assert.equal(out.state, "token-requested", JSON.stringify(out));
+  const hash = await hmacPseudonym(ENV, TENANT, ABHA);
+  const key = `connect:abdm:linkpending:${HIP}:${hash}`;
+  const parked = JSON.parse(await kv.get(key));
+  assert.equal(parked.length, 6);
+  for (const t of parked) assert.match(t, /^[a-p]{10}$/, "no digit survives, so no token reads as a phone number");
+
+  const posts = [];
+  const deps = { db, kv, gateway: { post: async (k, body, headers) => { posts.push({ k, body, headers }); return { status: 202, body: {}, requestId: "rq-1" }; } } };
+  assert.deepEqual(await linkPendingAfterToken(env, deps, { tenantId: TENANT, hipId: HIP, abhaAddress: ABHA, token: "lt-1" }), { linked: 6 });
+
+  // A pending list written before this change holds raw sha10 tokens; they still link.
+  const refs = db._tables.connect_abdm_carecontext.map((row) => row.ref);
+  await kv.put(key, JSON.stringify(await Promise.all(refs.map(oldTok))));
+  assert.deepEqual(await linkPendingAfterToken(env, deps, { tenantId: TENANT, hipId: HIP, abhaAddress: ABHA, token: "lt-2" }), { linked: 6 });
+  assert.equal(posts.length, 2);
 });
 
 /* ---- the on-generate-token callback ------------------------------------------------------------------ */
