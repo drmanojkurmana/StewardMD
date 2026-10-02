@@ -65,11 +65,10 @@ With the plugin added to `package.json` on a local branch only, `cap sync` regis
 `NeedlePlugin.swift`, `LlamaPlugin.swift` and `LlamaEngine.swift` compiled with 0 errors and 0
 warnings; no Swift change was needed. `NeedlePlugin.o` imports exactly `needle_init/complete/load/
 reset/last_error`, all five defined in `libneedle.a`; `LlamaPlugin.o` imports `llama_sampler_init_grammar`.
-**Build:** the App build needs a LOCAL, uncommitted patch to mlx-swift (`capacitor-mlx`, pinned 0f4fe40):
-`Cmlx/.../backend/cpu/jit_compiler.cpp:212` calls `std::system`, which the iOS 27.2 SDK marks unavailable,
-so ANY iOS build of the app fails with this Xcode, not only Edge. The test build guarded the g++ probe
-with `TARGET_OS_IPHONE` (result 1 = "no compiler", what it returns on a phone anyway). Fix it properly
-(newer mlx-swift pin or a vendored patch) before a store build. Also needed: the Metal Toolchain
+**Build:** no local patch any more (2026-10-03). `capacitor-mlx` pins the owner's forks, branch `stewardmd-ios27`:
+mlx-swift `757b0a0` (Layr-Labs `0f4fe40` + a port of ml-explore/mlx-swift `ab924c8`, so Cmlx no longer compiles
+`cpu/jit_compiler.cpp`, whose `std::system` the iOS 27.2 SDK marks unavailable; dead code on iOS) and
+mlx-swift-lm `7354dce` (Layr-Labs `9f70e68` repointed at that mlx-swift). A clean Xcode 27.2 build passes. Also needed: the Metal Toolchain
 component (`xcodebuild -downloadComponent MetalToolchain`), `-skipPackagePluginValidation` (mlx-swift's
 CudaBuild plugin), about 6 GB free disk for a worktree build, an iPhone on USB (`idevice_id -l`).
 Verified in the built app: `App.debug.dylib` defines the five `needle_*` symbols and NeedlePlugin,

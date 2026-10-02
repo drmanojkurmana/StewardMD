@@ -375,7 +375,10 @@ iOS-only second engine; Android keeps llama.cpp. Decision: Decisions.md 2026-09-
 - `maik-engine.js`: "Faster iPhone engine (Labs)" row under Advanced (`mlxRowHTML`, `data-me-mlx`).
 - `local-plugins/capacitor-mlx`: LINKED (package.json + CapApp-SPM) since the owner's phase 4 call; the app
   is on iOS 17.0 for it (every iPhone `IPHONEOS_DEPLOYMENT_TARGET` must stay >= 17 or `cap sync` writes
-  `.v16` back into CapApp-SPM). Pins: mlx-swift-lm `9f70e68`, mlx-swift `0f4fe40`. DEBUG self-benchmark
+  `.v16` back into CapApp-SPM). Pins (2026-10-03): the drmanojkurmana forks, branch `stewardmd-ios27`: mlx-swift-lm `7354dce`
+  (Layr-Labs `9f70e68` + repoint of mlx-swift), mlx-swift `757b0a0` (Layr-Labs `0f4fe40` + a port of
+  ml-explore/mlx-swift `ab924c8` that stops Cmlx compiling `cpu/jit_compiler.cpp`, whose `std::system`
+  the Xcode 27.2 iOS SDK rejects; dead code on iOS). Both pins must match. DEBUG self-benchmark
   marker `Documents/maik-mlx-selftest`. Uncompiled as of writing; package-lock.json not yet regenerated.
 - Labs switch: "Faster iPhone engine (Labs)" under Advanced (`data-me-mlx="toggle"`), shown when
   `SMD_MAIK_MODELS.mlxAvailable()` (iPhone + Mlx plugin). No background grace on MLX by design (GPU work is
