@@ -1,9 +1,9 @@
 {
-  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27 (audit fixes CLIN-07, CLIN-16, CLIN-24): ward.crit-uncomparable, ward.crit-unit-unchecked, ward.fluid-direction-gaps and ward.second-checker-staff-id are new and not yet through the pipeline. Added 2026-09-27 (billing audit fixes): ward.payment-link-closed-bill-no-longer-owes, ward.the-bill-was-already-paid-when-this-payment and ward.claim-already-open are new and not yet through the pipeline.",
+  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27 (audit fixes CLIN-07, CLIN-16, CLIN-24): ward.crit-uncomparable, ward.crit-unit-unchecked, ward.fluid-direction-gaps and ward.second-checker-staff-id are new and not yet through the pipeline. Added 2026-09-27 (billing audit fixes): ward.payment-link-closed-bill-no-longer-owes, ward.the-bill-was-already-paid-when-this-payment and ward.claim-already-open are new and not yet through the pipeline. Added 2026-10-03 (Codex audit F3, F5, F6): ward.order-changed-verify-again, ward.safety-check-did-not-run, ward.safety-check-did-not-run-reason, ward.safety-check-did-not-run-required, ward.not-checked, ward.reason-for-prescribing-unchecked, ward.give-a-reason-unchecked, ward.prescribed-not-checked are new and not yet through the pipeline.",
   "generated": "2026-09-19",
   "languages": {
     "es": {
-      "count": 213,
+      "count": 221,
       "keys": [
         "fb.no",
         "intake.no",
@@ -217,11 +217,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "te": {
-      "count": 193,
+      "count": 201,
       "keys": [
         "comm.off",
         "comm.whatsapp",
@@ -415,11 +423,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "hi": {
-      "count": 128,
+      "count": 136,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -548,11 +564,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "bn": {
-      "count": 244,
+      "count": 252,
       "keys": [
         "comm.whatsapp",
         "msg.empty",
@@ -797,11 +821,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "kn": {
-      "count": 122,
+      "count": 130,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -924,11 +956,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "ta": {
-      "count": 177,
+      "count": 185,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.erasure",
@@ -1106,11 +1146,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "ml": {
-      "count": 148,
+      "count": 156,
       "keys": [
         "comm.whatsapp",
         "site.abdm.notAvailable",
@@ -1259,11 +1307,19 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     },
     "mr": {
-      "count": 168,
+      "count": 176,
       "keys": [
         "comm.whatsapp",
         "site.admin.ccs.critical.intro",
@@ -1432,7 +1488,15 @@
         "ward.second-checker-staff-id",
         "ward.payment-link-closed-bill-no-longer-owes",
         "ward.the-bill-was-already-paid-when-this-payment",
-        "ward.claim-already-open"
+        "ward.claim-already-open",
+        "ward.order-changed-verify-again",
+        "ward.safety-check-did-not-run",
+        "ward.safety-check-did-not-run-reason",
+        "ward.safety-check-did-not-run-required",
+        "ward.not-checked",
+        "ward.reason-for-prescribing-unchecked",
+        "ward.give-a-reason-unchecked",
+        "ward.prescribed-not-checked"
       ]
     }
   }
