@@ -432,7 +432,10 @@ async function audit(ctx, action, fields) {
 }
 
 const oauthError = (status, error, detail) => ({ ok: false, status, body: { error, error_description: detail } });
-const rateDeps = (env) => ({ kv: env && env.WSQ_RL_KV, binding: env && env.WSQ_RL });
+/* The same deps the queue router's limiter uses (WSQ_RL binding, then MAIK_KV), so a SMART limit is counted
+ * across isolates in production; WSQ_RL_KV still wins if a deployment binds one. It used to be WSQ_RL_KV alone,
+ * which production never binds, so every SMART limit fell back to per-isolate memory. */
+const rateDeps = (env) => ({ kv: env && (env.WSQ_RL_KV || env.MAIK_KV), binding: env && env.WSQ_RL });
 
 /* ---- launch: the ward starts an application for one patient ---------------------------------- */
 
