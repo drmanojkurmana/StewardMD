@@ -134,6 +134,10 @@ adb) before a final drop decision.
   the prime core), and expose a thread-count setting in `needle.h`."
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
+**Latency options (2026-10-02):** [[Edge-Options-2026-10-02]]. On a host CPU the grammar sampler over the
+262,144-token vocabulary is about two thirds of each call; a forced `{"option":` prefix plus a digit pick
+removes it (about 300 ms to 60-90 ms, same answer). Measure the same split on the Pixel before choosing.
+That note also has the mlx-swift `std::system` fix for iOS builds (item 5).
 **Mechanism PASSED on a host CPU (2026-10-01, `test/native-host/run.sh llama`):** the real
 `llama_jni.cpp` + `LlamaEngine` with ggml-org FunctionGemma 270M Q8_0 (rev 2566ce14, sha256 83940d4d):
 grammar on, 1,512/1,512 replies valid `{"option":n}`; grammar off, 0/60 (prose refusals). Base model

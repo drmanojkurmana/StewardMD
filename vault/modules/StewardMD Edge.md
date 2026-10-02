@@ -1,6 +1,6 @@
 ---
 tags: [module, ai, edge]
-status: built (JS + dataset); iPhone gates A0.2/A0.3/A0.6 passed 2026-10-02; Android (Pixel 9) mechanisms pass, both engines miss the 1.2 s deadline
+status: built (JS + dataset); iPhone gates A0.2/A0.3/A0.6 passed 2026-10-02; Android (Pixel 9) mechanisms pass, Needle passes with the thread fix (p95 617 ms), FunctionGemma borderline (1.1-1.4 s); owner options in [[Edge-Options-2026-10-02]]
 flag: smd_edge (default OFF)
 ---
 # StewardMD Edge
