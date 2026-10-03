@@ -1,6 +1,6 @@
 ---
 tags: [plan, edge, runbook]
-status: round 2 done (2026-10-03); Pixel renderer-gone run (first request missed, fixed in edge8, not re-run); Pixel bake-offs with PSS and the 30-minute session not run (phone locked); iPhone back-off during real MaiK generation, real Serious and availMB with MaiK Lite pending
+status: round 2 done (2026-10-03); Pixel 22:30 round: renderer-gone edge8 PASS, Needle p95 797 ms / +123 MB PASS, FunctionGemma p95 395 ms PASS but +575 MB MISS, 30-min unplugged session no SEVERE, battery -8 points, Needle 22/150 timeouts under MaiK load MISS; iPhone back-off during real MaiK generation, real Serious and availMB with MaiK Lite pending
 ---
 # StewardMD Edge: owner runbook (sprint days 2 to 5)
 
@@ -165,6 +165,15 @@ adb) before a final drop decision.
   included; the rest max 767 ms). End: thermal 0, 37.7 C, caps cpu0 1.70, cpu4 1.80, cpu7 2.80 GHz
   (Pixel trims clocks below thermal status 1). Close to the plugged-but-cool run (p50 393, p95 617 ms): unplugging
   changes little; the thread count was the cause.
+- **Re-run with peak memory, 2026-10-03 22:35 (APK of 6b347d25e, `edge8`, bundle `builtin`; on the charger
+  at 100% but cool: thermal 0, battery 33.7-35.5 C, skin 35.1-36.2 C, caps at max 1.95/2.6/3.105 GHz; app in
+  front, `top-app` cpuset): A0.2 Android PASSED, warm p95 inside the 800 ms budget by 3 ms.** logcat
+  `NeedleJNI: engine threads 3 (cpu_capacity, 8 cpus, 7 allowed)`. `--limit 50`: 50/50 `ok`, **p50 547 ms,
+  p95 797 ms, max 1,280 ms** (`score.mjs --pred` latency line; row 1 is the cold load, warm max 815 ms). Base
+  model: all 50 confidences below 0.5, so every row passes to the safe path. **Peak PSS** (`dumpsys meminfo`
+  every ~2 s, 47 samples): app 437 MB, `:edge` 112 MB, app + `:edge` 547 MB. Baseline (fresh launch, same
+  bundle, no `:edge`, 48 samples): app 411-424 MB. **Needle adds ~123 MB: inside the plan's +150 MB budget.**
+  Slower than the 00:41 unplugged run (p50 370, p95 747 ms); same thread count.
 - **Report for Cactus, final text (the owner sends it; not sent):**
 
   > Subject: Needle 3 on Android picks 8 threads on one-prime-core SoCs (about 25x slower than needed)
@@ -295,6 +304,15 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   a confidence (none below 0.5); scored 100% accurate, 0 wrong on the 50 predicted rows (base model, small
   sample: fine-tuning is still required per the host result). **Gate A0.3 Android latency: PASS, p95 171
   ms against 1,200 ms.**
+- **Re-run with peak memory, 2026-10-03 22:36 (APK of 6b347d25e, same conditions as the A0.2 re-run above:
+  charger, thermal 0, skin 37.0-37.3 C): latency PASSED, memory MISSED.** `--engine llama --limit 50`
+  (`llama_jni newContext ... threads=4 threads_batch=4`): 50/50 `ok`, **p50 271 ms, p95 395 ms, max 1,222 ms**
+  (row 1, cold load; warm max 445 ms); no confidence below 0.5; scored 100% accurate, 0 wrong on the 50 rows
+  (coverage 65.5% -> 66.7% with them). Slower than the unplugged 120/171 ms of the morning, but well inside
+  the 1,500 ms warm budget and the 5 s cold budget. **Peak PSS:** FunctionGemma runs in the app process; with
+  it loaded and held (`llamaAdapter.load()`, 29 samples) the app is **996-1,000 MB** against the 411-424 MB
+  baseline: **about +575 MB, over the plan's +400 MB budget (MISS)**. It drops back to ~405 MB after
+  `release()`. The app was relaunched after (the llama plugin had evicted MaiK's pack).
 - **iPhone 15 Pro, 2026-10-03 (build above, over Wi-Fi, ggml-org FunctionGemma 270M Q8_0 rev 2566ce14,
   sha256 83940d4d, copied to `Documents/edge/`; Metal): A0.3 iOS latency PASSED with the pick.**
   - Run 1 (first load after install): 48 `ok`, 2 `unavailable`. Rows 1-2 hit the 8 s cold budget (the
@@ -351,13 +369,35 @@ Pass: no crash, no thermal shutdown, p95 within the 1,200 ms deadline after the 
   platforms. Unit-tested (`test/edge-router.test.mjs`); both plugins compile; not yet run on a phone. With
   this, the mixed session above would have skipped Edge for most of its 28 Serious minutes.
 
-**Pixel 9 (12 GB, Android 17), 2026-10-02, same conditions as A0.2 Android: stability PASSED, latency
-FAILED.** 50 back to back: Needle 50/50 `timeout` (p50 4.1 s incl. kill + reload), FunctionGemma 50/50
-`timeout` (p50 1.23 s). Mixed session (`test/device/edge-mixed-session.mjs --android`, 11 cycles in
-~28 minutes, then the phone was unplugged): same app process throughout, dictation 11/11 on-device,
-MaiK 11/11 local (first text p50 5.6 s, max 20.8 s; full answer p50 97 s, max 141 s, slowing as it
-heated), Needle 110/110 `timeout`. App PSS 2.5-3.0 GB with MaiK Lite loaded. Battery 37.3 -> 40.0 C,
-thermal status 1 (light) throughout, on the charger at 100%. Not the 4 GB phone the gate names.
+**Pixel 9 (12 GB, Android 17), 2026-10-03 22:45-23:16, UNPLUGGED (AC and USB powered false, wireless adb):
+stability PASSED, thermal PASSED, Needle latency under load MISSED, battery mark not judgeable.** Replaces the
+2026-10-02 run (charging, before the Needle thread fix, Needle 110/110 `timeout`). What changed: the JNI thread
+fix (3 threads on the A720s), `edge8`, the phone off the charger, and the harness now runs its Edge step
+under the production back-off (e13344cf5) with app and `:edge` PSS, thermal status, skin and battery
+temperature sampled every ~10 s (206 samples). APK of 6b347d25e, bundle `builtin`, base `needle3.cact`,
+MaiK Lite (`smd_maik_rag_linked` "0" as the phone is set), `smd_edge` "1" for the test only.
+- `test/device/edge-mixed-session.mjs 30 <dir> --android`: 15 cycles in 31.5 minutes (each: noCloud
+  dictation from the Mac speaker, one `SMD_MAIK_LOCAL.answer`, 10 Needle routings at 1,200 ms).
+- Start: thermal 0, skin 38.2 C, battery 36.9 C, 100%. It reached thermal 1 (LIGHT) at 22:46:44 and stayed
+  there; **never SEVERE**. Peak skin 40.96 C, battery 40.0 C. End: 92%.
+- **Battery: 100% -> 92% in 31.5 minutes (8 points), unplugged.** MaiK Lite was generating for most of the
+  session (answers 71-141 s back to back). No baseline-app run under the same load, so the plan's "within
+  3% (Needle) / 5% (FunctionGemma) of baseline" mark cannot be judged from this run.
+- Same app process (pid 30461) all session; `onRenderProcessGone` 0. The `:edge` process was started 15
+  times: the runtime kills it on every timed-out call, by design (A0.2). Read strictly, the plan's "process
+  deaths: 0" mark counts these.
+- **Peak PSS:** app 2,985 MB during the first MaiK Lite load (22:45:30-49), then a flat 1,976-1,989 MB with
+  MaiK Lite loaded; `:edge` 76-119 MB when up. Lowest availMB seen by the back-off: 975 MB (floor 250 MB).
+- **Edge (Needle):** 150 rows: **127 `ok`, 22 `timeout`, 1 `unavailable`** (one cold reload past the 8 s
+  budget, 8,001 ms). Row times p50 1,090 ms, p95 3,438 ms: the slow `ok` rows (2.0-4.1 s) are cold reloads
+  after a timeout kill. Timeouts came in runs right after MaiK answers (cycles 6 and 10: 5 of 10 each).
+  **MISS** against the 800 ms warm p95 under mixed load (the standalone run above passes at 797 ms).
+- **Back-off skips: 0.** The verdict was all clear on every cycle (thermal 1, availMB 975-1,364, MaiK not
+  generating while the Edge step ran: the steps are sequential).
+- MaiK: 15/15 local answers, first text p50 2.0 s (cold first 13.8 s), full answer p50 96.9 s, max 141 s.
+- Dictation: 15/15 on-device, but only 8/15 returned text (7 empty finals; the 2026-10-02 run got 11/11).
+  Not investigated: the phrases came from the Mac speaker, which is placement-sensitive.
+- Not the 4 GB phone the gate names.
 
 **Back-off (763f0e268) on the Pixel 9, 2026-10-03, unplugged, APK bundle: PASSED.** Typed request
 "show me the resistance patterns antibiogram" (model-routed: 5 candidates, first `tool:antibiogram`,
@@ -393,7 +433,7 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   `edge-router.js` skips the model for the rest of the session through `memoryOk` (rules still answer).
   iOS has no app-side hook for the web-content process (Capacitor handles it), so iOS has no such clause.
 - **Renderer-gone on the Pixel 9, 2026-10-03 13:34 (APK of 7e28af40a, `edge7`, on USB, base `needle3.cact`,
-  `smd_edge` "1" for the test only): mechanism PASSED, first request MISSED, fixed in `edge8` (not re-run).**
+  `smd_edge` "1" for the test only): mechanism PASSED, first request MISSED, fixed in `edge8` (re-test PASSED below).**
   - `adb shell kill <renderer pid>` is refused (the renderer runs under an isolated uid: "Operation not
     permitted"). CDP `Page.crash` on the app's page killed it instead.
   - logcat: `W StewardMD: WebView render process gone (didCrash=true); recovering by recreating the activity`.
@@ -404,22 +444,25 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
     request skipped the engine (468 ms, null); "antibiogram kholo" still answered `rules:tool:antibiogram`.
   - `am force-stop` and a relaunch: `rendererGone:false`, the engine is called again.
   - Fix (6b347d25e, `edge8`): `route()` waits for one `Needle.available()` reading on the first model-routed
-    request; later requests keep the one-request-stale refresh. Unit test fails without it. The `edge8` APK
-    is installed on the Pixel but the re-test did not run: the phone stayed locked (below).
+    request; later requests keep the one-request-stale refresh. Unit test fails without it.
+  - **Re-test on `edge8`, 2026-10-03 22:34 (APK of 6b347d25e, phone unlocked, app `top-app`, on the
+    charger): PASSED.** Before: two routes called Needle (1,182 ms cold, 484 ms). `Page.crash` -> logcat
+    `render process gone (didCrash=true)`, same app pid 10243. After the recreate the router started with
+    `rendererGone:false, availMB:null` and the **FIRST** model-routed request skipped the engine (164 ms,
+    null; only `available()` called, no `load`/`complete`); the second skipped too (74 ms); "antibiogram
+    kholo" answered `rules:tool:antibiogram`. `am force-stop` + relaunch: `rendererGone:false`, the engine
+    is called again (1,256 ms cold).
   - Seen on the way: with the screen locked the app sits in the `background` cpuset (cores 0-3, the A520s);
     logcat `NeedleJNI: engine threads 4 (cpu_capacity, 8 cpus, 4 allowed)` and every Needle call timed out
     (routes 4.0-5.7 s). Any Edge timing needs the phone unlocked with the app in front.
-- **Pixel round of 2026-10-03 afternoon: NOT RUN, all PENDING.** The phone stayed behind its lock screen (PIN set)
-  from 13:34 to 19:50; it was not bypassed (locked, the app runs on the A520s only, so numbers would be
-  invalid). PENDING: the renderer-gone re-test on `edge8`, the Needle and
-  FunctionGemma `--limit 50` bake-offs with peak PSS, the 30-minute A0.6 mixed session, the MaiK Lite
-  `nThreadsBatch` re-measure with the book linked (optional). Also PENDING on the iPhone: the MaiK Lite
-  readings (real MaiK-busy back-off, availMB with MaiK Lite loaded); MaiK Lite is staged on the Mac. The earlier Pixel mixed-session result below (2026-10-02,
-  charging, before the thread fix) is still the only one, and it is stale. Ready for the next window: the
-  harness now runs its Edge step under the production back-off (e13344cf5, skips counted), and
-  `/tmp/edge-pixel/sampler.sh` (Mac scratch) logs app and `:edge` PSS, thermal status, skin and battery
-  temperature, level and power every N seconds. Phone left clean (OTA 167 current, `smd_edge` unset,
-  `smd_maik_rag_linked` "0", no test weights, stay-awake off, no forwards, no thermal override).
+- **Pixel round, 2026-10-03:** the phone stayed behind its lock screen (PIN set) from 13:34 to 19:50 and
+  was not bypassed; the owner unlocked it at 22:33 and the round ran then (renderer-gone re-test above,
+  A0.2/A0.3 re-runs with peak PSS, A0.6 Pixel below). The MaiK Lite `nThreadsBatch` re-measure with the book
+  linked (optional) was NOT run: its condition was that everything else pass, and FunctionGemma memory and
+  the mixed-session Needle latency missed. Still PENDING on the iPhone: the MaiK Lite readings (real
+  MaiK-busy back-off, availMB with MaiK Lite loaded); MaiK Lite is staged on the Mac. Phone left clean
+  (OTA 167 current, `smd_edge` unset, `smd_maik_rag_linked` "0", no test weights, stay-awake off, screen
+  timeout back to 30 min, no forwards, no thermal override).
 - Why simulated: MaiK Lite had to be re-downloaded after the reinstall, and the phone's own network gave
   0.01-0.05 MB/s (the Mac got ~0.9 MB/s from the same R2 file); a Mac side-load did not finish before the
   owner had to take the phone. Real Serious was not attempted (it needs sustained MaiK load).
