@@ -120,6 +120,13 @@ public final class LlamaEngine {
     public String generate(String system, String user, int nPredict, float temp, int seed,
                             boolean prefillEmptyThink, LlamaNative.TokenSink sink)
             throws LlamaException {
+        return generate(system, user, nPredict, temp, seed, prefillEmptyThink, null, sink);
+    }
+
+    /** As above, constrained by a GBNF grammar when {@code grammar} is non-empty (Edge router, A0.3). */
+    public String generate(String system, String user, int nPredict, float temp, int seed,
+                            boolean prefillEmptyThink, String grammar, LlamaNative.TokenSink sink)
+            throws LlamaException {
         long m, c;
         synchronized (lock) {
             if (model == 0 || ctx == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "model not loaded");
@@ -139,10 +146,35 @@ public final class LlamaEngine {
              * fixing nothing. Only appending it HERE, after the template has opened the assistant
              * turn, actually pre-empts the model's own thinking. */
             if (prefillEmptyThink) prompt = prompt + "<think>\n\n</think>\n\n";
+            LlamaNative.setGrammar(grammar);
             String out = LlamaNative.generate(c, m, prompt,
                     nPredict > 0 ? nPredict : DEFAULT_N_PREDICT, temp, seed, draftCtx, draftModel, sink);
             if (out == null) throw new LlamaException(LlamaErr.GENERATION_FAILURE, "generation returned null");
             return out;
+        } finally {
+            LlamaNative.setGrammar(null);
+            generating = false;
+        }
+    }
+
+    /**
+     * Forced prefix + pick (Edge router, A0.3): the chat template, then {@code prefix} after the model
+     * turn opens, ONE prefill, and the probability of each single-token choice as the next token.
+     * Returns null when the native side cannot pick (a choice is not one token), so the caller can
+     * fall back to grammar generation.
+     */
+    public float[] pick(String system, String user, String prefix, String[] choices) throws LlamaException {
+        long m, c;
+        synchronized (lock) {
+            if (model == 0 || ctx == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "model not loaded");
+            if (generating) throw new LlamaException(LlamaErr.BUSY, "a generation is already running");
+            generating = true;
+            m = model; c = ctx;
+        }
+        try {
+            String prompt = LlamaNative.applyChatTemplate(m, system == null ? "" : system, user == null ? "" : user);
+            if (prompt == null || prompt.isEmpty()) prompt = ((system == null || system.isEmpty()) ? "" : system + "\n\n") + (user == null ? "" : user);
+            return LlamaNative.pick(c, m, prompt + (prefix == null ? "" : prefix), choices);
         } finally {
             generating = false;
         }

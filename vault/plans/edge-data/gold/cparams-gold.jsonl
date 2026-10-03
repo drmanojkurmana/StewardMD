@@ -1,0 +1,45 @@
+{"id":"g01","text":"72F wt 58kg cr 1.4","lang":"en","expect":{"age_years":72,"sex":"female","weight_kg":58,"scr_mg_dl":1.4},"absent":[],"tags":["compact"]}
+{"id":"g02","text":"65 yo male, weight 80 kg, creatinine 2.1 mg/dl","lang":"en","expect":{"age_years":65,"sex":"male","weight_kg":80,"scr_mg_dl":2.1},"absent":[],"tags":["plain"]}
+{"id":"g03","text":"bp 90/60 rr 24 confused","lang":"en","expect":{"sbp":90,"dbp":60,"rr":24,"confusion":true},"absent":[],"tags":["composite"]}
+{"id":"g04","text":"bp 128 by 78, pulse 96","lang":"en","expect":{"sbp":128,"dbp":78,"hr":96},"absent":[],"tags":["composite"]}
+{"id":"g05","text":"na 132 k 5.8 cl 98 hco3 14","lang":"en","expect":{"sodium":132,"potassium":5.8,"chloride":98,"bicarbonate":14},"absent":[],"tags":["labs"]}
+{"id":"g06","text":"sodium 128 mmol/l, potassium 3.1","lang":"en","expect":{"sodium":128,"potassium":3.1},"absent":[],"tags":["labs"]}
+{"id":"g07","text":"creatinine 124 umol/l","lang":"en","expect":{"scr_mg_dl":1.4},"absent":[],"tags":["wrong-unit","conversion"]}
+{"id":"g08","text":"sugar 10 mmol/l","lang":"en","expect":{"glucose_mg_dl":180},"absent":["urea_mmol_l"],"tags":["wrong-unit","conversion","wrong-field"]}
+{"id":"g09","text":"temp 101 f","lang":"en","expect":{"temp_c":38.3},"absent":[],"tags":["wrong-unit","conversion"]}
+{"id":"g10","text":"weight 154 lb","lang":"en","expect":{"weight_kg":69.9},"absent":[],"tags":["wrong-unit","conversion"]}
+{"id":"g11","text":"creatinine was 1.1 last week","lang":"en","expect":{},"absent":["scr_mg_dl"],"tags":["wrong-time"]}
+{"id":"g12","text":"creatinine was 1.1 last week, now 2.1","lang":"en","expect":{"scr_mg_dl":2.1},"absent":[],"tags":["wrong-time","stale"]}
+{"id":"g13","text":"on admission sodium 120, today 131","lang":"en","expect":{"sodium":131},"absent":[],"tags":["wrong-time","stale"]}
+{"id":"g14","text":"mother has diabetes, her sugar 300","lang":"en","expect":{},"absent":["glucose_mg_dl"],"tags":["wrong-assertion","family"]}
+{"id":"g15","text":"no confusion, rr 18","lang":"en","expect":{"confusion":false,"rr":18},"absent":[],"tags":["wrong-assertion"]}
+{"id":"g16","text":"denies confusion","lang":"en","expect":{"confusion":false},"absent":[],"tags":["wrong-assertion"]}
+{"id":"g17","text":"penicillin allergy, crcl please","lang":"en","expect":{"penicillin_allergy":true},"absent":[],"tags":["boolean"]}
+{"id":"g18","text":"nkda","lang":"en","expect":{"penicillin_allergy":false},"absent":[],"tags":["boolean"]}
+{"id":"g19","text":"crcl for this patient","lang":"en","expect":{},"absent":["age_years","weight_kg","scr_mg_dl","sex"],"tags":["missing-is-not-negative"]}
+{"id":"g20","text":"spo2 88% on room air, rr 30","lang":"en","expect":{"spo2":88,"rr":30},"absent":[],"tags":["vitals"]}
+{"id":"g21","text":"gcs e2v3m5","lang":"en","expect":{"gcs":10},"absent":[],"tags":["composite"]}
+{"id":"g22","text":"gcs 9","lang":"en","expect":{"gcs":9},"absent":[],"tags":["plain"]}
+{"id":"g23","text":"bili 3.2 inr 1.8 cr 1.6 na 129 alb 2.4","lang":"en","expect":{"bilirubin_mg_dl":3.2,"inr":1.8,"scr_mg_dl":1.6,"sodium":129,"albumin_g_dl":2.4},"absent":[],"tags":["labs","slot-swap"]}
+{"id":"g24","text":"inr 1.8 bili 3.2","lang":"en","expect":{"inr":1.8,"bilirubin_mg_dl":3.2},"absent":[],"tags":["slot-swap"]}
+{"id":"g25","text":"hb 7.2 g/dl","lang":"en","expect":{"hb_g_dl":7.2},"absent":[],"tags":["labs"]}
+{"id":"g26","text":"urea 14 rr 32 bp 85/50 age 78","lang":"en","expect":{"urea_mmol_l":14,"rr":32,"sbp":85,"dbp":50,"age_years":78},"absent":[],"tags":["labs","slot-swap"]}
+{"id":"g27","text":"bun 40, cr 2.0","lang":"en","expect":{"bun_mg_dl":40,"scr_mg_dl":2.0},"absent":["urea_mmol_l"],"tags":["wrong-field"]}
+{"id":"g28","text":"my sugar was 250 at home","lang":"en","expect":{},"absent":["glucose_mg_dl"],"tags":["wrong-time","reported"]}
+{"id":"g29","text":"aim sodium 135","lang":"en","expect":{},"absent":["sodium"],"tags":["wrong-time","planned"]}
+{"id":"g30","text":"target sbp below 140","lang":"en","expect":{},"absent":["sbp"],"tags":["wrong-time","planned"]}
+{"id":"g31","text":"stopped metformin, cr 1.9","lang":"en","expect":{"scr_mg_dl":1.9},"absent":[],"tags":["clause"]}
+{"id":"g32","text":"cr 1.4 or 1.8, not sure","lang":"en","expect":{},"absent":["scr_mg_dl"],"tags":["ambiguous"]}
+{"id":"g33","text":"weight 60 kg, height 165 cm","lang":"en","expect":{"weight_kg":60,"height_cm":165},"absent":[],"tags":["plain"]}
+{"id":"g34","text":"8 year old boy 22 kg","lang":"en","expect":{"age_years":8,"sex":"male","weight_kg":22},"absent":[],"tags":["paediatric"]}
+{"id":"g35","text":"calcium 7.8 albumin 2.1","lang":"en","expect":{"calcium_mg_dl":7.8,"albumin_g_dl":2.1},"absent":[],"tags":["labs"]}
+{"id":"g36","text":"rbs 420","lang":"en","expect":{"glucose_mg_dl":420},"absent":[],"tags":["labs"]}
+{"id":"g37","text":"pulse 120 temp 39.2","lang":"en","expect":{"hr":120,"temp_c":39.2},"absent":[],"tags":["vitals"]}
+{"id":"g38","text":"sugar 300 tha kal, aaj 180","lang":"hi-Latn","expect":{"glucose_mg_dl":180},"absent":[],"tags":["hinglish","wrong-time","stale"]}
+{"id":"g39","text":"patient ka bp 90/60 hai, rr 26","lang":"hi-Latn","expect":{"sbp":90,"dbp":60,"rr":26},"absent":[],"tags":["hinglish"]}
+{"id":"g40","text":"creatinine 1.6 undi, weight 70 kg","lang":"te-Latn","expect":{"scr_mg_dl":1.6,"weight_kg":70},"absent":[],"tags":["tenglish"]}
+{"id":"g41","text":"bp 140/90 ki mundu, ippudu 100/70","lang":"te-Latn","expect":{"sbp":100,"dbp":70},"absent":[],"tags":["tenglish","wrong-time","stale"]}
+{"id":"g42","text":"k 5.8","lang":"en","expect":{"potassium":5.8},"absent":[],"tags":["labs"]}
+{"id":"g43","text":"hr 150 bp 70/40 spo2 85","lang":"en","expect":{"hr":150,"sbp":70,"dbp":40,"spo2":85},"absent":[],"tags":["vitals"]}
+{"id":"g44","text":"father had creatinine 3.0","lang":"en","expect":{},"absent":["scr_mg_dl"],"tags":["wrong-assertion","family"]}
+{"id":"g45","text":"previous weight 70 kg, current weight 64 kg","lang":"en","expect":{"weight_kg":64},"absent":[],"tags":["wrong-time","stale"]}

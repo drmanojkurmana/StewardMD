@@ -175,6 +175,31 @@ test("UNIDENTIFIED ARRIVAL, CONCURRENT: two unidentified arrivals of the same se
   assert.notEqual(a.mrn, b.mrn, "the storage layer's own version-uniqueness (VersionConflictError retry, migrate-ed.js) kept the two sequences apart: " + a.mrn + " / " + b.mrn);
 });
 
+test("UNIDENTIFIED ARRIVAL, STALE COUNT: a second arrival that counted before the first wrote still gets the NEXT sequence, never version 2 of the first person's Patient", async () => {
+  // The interleaving the concurrent test above only hits by chance: B lists the Patients before A writes
+  // (so B also starts at 01), A's Patient lands, THEN B writes. Without a create-only write, B's put found
+  // A's record and became version 2 of it: two unidentified people on one MRN, the first one overwritten.
+  seedHospital();
+  const before = await RECORD.latestByType(TENANT_ROW.id, "Patient", 1000, { newest: true });
+  const a = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { unknown: { sex: "female" }, chiefComplaint: "Found down", arrivedAt: "2026-09-09T04:00:00.000Z" } });
+  assert.equal(a.__status, 200, JSON.stringify(a));
+  assert.match(a.mrn, /^TRAUMA-UNKNOWN-FEMALE-20260909-01$/);
+
+  const real = RECORD.latestByType.bind(RECORD);
+  RECORD.latestByType = async (t, type, limit, opts) => (type === "Patient" ? before.slice() : real(t, type, limit, opts));
+  let b;
+  try {
+    b = await as(NURSE, "/ward/ed-arrival", "POST", { orgId: ORG, arrival: { unknown: { sex: "female" }, chiefComplaint: "Second, unresponsive", arrivedAt: "2026-09-09T04:00:01.000Z" } });
+  } finally { RECORD.latestByType = real; }
+  assert.equal(b.__status, 200, JSON.stringify(b));
+  assert.match(b.mrn, /^TRAUMA-UNKNOWN-FEMALE-20260909-02$/, "the stale count started at 01, which was taken, so the next free sequence is used");
+  assert.notEqual(a.patientId, b.patientId, "two unidentified people never share one chart");
+  assert.notEqual(a.encounterId, b.encounterId);
+  const first = await RECORD.history(TENANT_ROW.id, "Patient", a.patientId);
+  assert.equal(first.length, 1, "the first person's provisional Patient was not overwritten by the second arrival");
+  assert.equal(first[0].mrn, a.mrn);
+});
+
 /* ---- RBAC --------------------------------------------------------------------------------------- */
 
 test("RBAC: arrival, triage and disposition are administrative/clinical acts pharmacy does not hold", async () => {

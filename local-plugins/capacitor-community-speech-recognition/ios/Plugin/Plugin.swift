@@ -34,14 +34,20 @@ public class SpeechRecognition: CAPPlugin, CAPBridgedPlugin {
     private var recognitionTask: SFSpeechRecognitionTask?
 
     @objc func available(_ call: CAPPluginCall) {
-        guard let recognizer = SFSpeechRecognizer() else {
+        let language = call.getString("language")
+        guard let recognizer = language.flatMap({ SFSpeechRecognizer(locale: Locale(identifier: $0)) }) ?? SFSpeechRecognizer() else {
             call.resolve([
-                "available": false
+                "available": false,
+                "onDevice": false
             ])
             return
         }
+        // On-device (StewardMD Edge A1.2): audio stays on the phone only when the recognizer supports
+        // it AND the request requires it. Without that, SFSpeechRecognizer may use Apple's servers.
         call.resolve([
-            "available": recognizer.isAvailable
+            "available": recognizer.isAvailable,
+            "onDevice": recognizer.supportsOnDeviceRecognition,
+            "onDeviceHow": recognizer.supportsOnDeviceRecognition ? "requiresOnDeviceRecognition" : "no on-device model for this language"
         ])
     }
 
@@ -68,6 +74,10 @@ public class SpeechRecognition: CAPPlugin, CAPBridgedPlugin {
             let language: String = call.getString("language") ?? "en-US"
             let maxResults: Int = call.getInt("maxResults") ?? self.defaultMatches
             let partialResults: Bool = call.getBool("partialResults") ?? false
+            // "off" (default, unchanged) | "prefer" | "require": see available() and the
+            // "recognitionMode" event below. "require" never falls back to Apple's servers.
+            var onDeviceMode: String = call.getString("onDevice") ?? "off"
+            if onDeviceMode != "prefer" && onDeviceMode != "require" { onDeviceMode = "off" }
 
             if self.recognitionTask != nil {
                 self.recognitionTask?.cancel()
@@ -80,6 +90,11 @@ public class SpeechRecognition: CAPPlugin, CAPBridgedPlugin {
             self.speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: language)) ?? SFSpeechRecognizer()
             guard let recognizer = self.speechRecognizer, recognizer.isAvailable else {
                 call.reject("Speech recognition is not available for \"\(language)\" on this device.")
+                return
+            }
+            let onDeviceActive = onDeviceMode != "off" && recognizer.supportsOnDeviceRecognition
+            if onDeviceMode == "require" && !onDeviceActive {
+                call.reject("On-device speech recognition is not available for \"\(language)\" on this device.", "ON_DEVICE_UNAVAILABLE")
                 return
             }
 
@@ -99,6 +114,12 @@ public class SpeechRecognition: CAPPlugin, CAPBridgedPlugin {
 
             self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
             self.recognitionRequest?.shouldReportPartialResults = partialResults
+            self.recognitionRequest?.requiresOnDeviceRecognition = onDeviceActive
+            self.notifyListeners("recognitionMode", data: [
+                "onDevice": onDeviceActive,
+                "how": onDeviceActive ? "requiresOnDeviceRecognition" : "Apple speech service (may use Apple servers)",
+                "reason": onDeviceActive ? "" : (onDeviceMode == "off" ? "not requested" : "no on-device model for this language")
+            ])
             guard let recognitionRequest = self.recognitionRequest else {
                 call.reject(self.messageUnknown)
                 return

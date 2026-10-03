@@ -1,0 +1,203 @@
+---
+tags: [plan, ai, needle]
+status: proposal
+---
+# Needle x StewardMD: flagship features (CTO proposal)
+
+Companion to [[Needle-Audit]]. Every feature follows the same rule: **Needle turns speech or text into
+an action; deterministic SMD code decides; the clinician confirms.** Needle never produces a dose, a
+score or a diagnosis. All features assume an SMD fine-tune that passes the Phase 1 gate in the audit.
+
+## The category: Clinical Action Model
+
+LLMs answer. StewardMD would be the first clinical app that **acts**: 36 MB, offline, under a second,
+on a phone or a watch, with no cloud call and no PHI leaving the device. Pitch line:
+"The only clinical app you can run by voice, offline, on a Rs 6,000 phone and a watch."
+
+## 1. Code Blue Black Box
+Voice-logged resuscitation. Nobody touches a screen during a code; the record writes itself.
+- "Adrenaline given", "shock 200", "VF", "ROSC" become `logDrug` / `logShock(energyJ:)` /
+  `logRhythm` / `logROSC` (`CodeBlueLiveModel.swift:108-116`) with the existing closed choices from
+  `CommandCenterView.swift` (Epinephrine/Amiodarone/Other, 150/200/360 J). Name only, never a dose.
+- Deterministic timers speak back: "adrenaline due in 40 seconds", "rhythm check in 20".
+- Post-code: auto-built Utstein-style timeline plus a debrief (drug intervals, pause lengths).
+- Runs on the watch: `watchos-arm64/libneedle.a` (1.1 MB). Offline.
+- Same engine, a product line: Sepsis Hour-1 (`SepsisTimerView.swift`: "cultures sent", "lactate
+  sent", "30 ml/kg started"), stroke door-to-needle, STEMI door-to-balloon, WHO surgical checklist.
+- Why only Needle: always-on, sub-second, closed set, works in a basement resus bay with no signal.
+
+## 2. Live Score Radar
+Scores assemble themselves while the doctor talks.
+- The ambient scribe already chunks audio every 15 s (`voice-ambient.js tick()`). Split each chunk
+  into sentences, run Needle per sentence into a `ClinicalFacts` record, validate (bounds, units,
+  label adjacency, negation), merge with `voice-vitals.js`.
+- A computability engine walks `MEDCALC._calcs` (446 calculators, 1,913 inputs) and lights up every
+  score whose inputs are now complete: CURB-65, qSOFA, NEWS2, Wells, CHA2DS2-VASc, CrCl. Each
+  criterion shows the sentence it came from. Pattern already exists in `icu-autoscores.js`.
+- Why only Needle: the LLM refine runs every 45 s on the whole transcript and is cloud; Needle works
+  per sentence, locally, continuously. It fails on long text but is built for short text.
+
+## 3. Silent Safety Net
+The same live facts are cross-checked against the Rx pad before print.
+- Spoken "creatinine 2.8" plus metformin on the pad: renal flag via `SMD_SAFETY.renalDoseFor`.
+- Spoken "penicillin allergic" plus amoxicillin: hard stop via `scribe-safety.check`.
+- Spoken "on warfarin" plus clarithromycin: `INTERACTIONS.checkInteractions`.
+- Needle only supplies facts. Rules decide. The doctor never typed anything.
+
+## 4. Answer-as-you-type
+Spotlight for medicine. Needle WASM runs on each debounced keystroke in Universal Search.
+- Type "crcl 72f 58 1.4": "CrCl 38 mL/min" appears as ghost text before Enter.
+- Type "vanc 70kg crcl 40": dose rows from `SMD_DOSECALC.engine.compute`.
+- Fixes `search.js calcsProvider`, which today matches nothing for numeric queries.
+
+## 5. Round Mode: speak the ward round
+Needle emits multiple calls in order, so one sentence becomes an ordered order-set.
+- "Bed 12: stop ceftriaxone, start pip-taz 4.5 six hourly, repeat CBC tomorrow, get an echo" becomes
+  four DRAFT items on bed 12. WardSynQ already caps AI writes at DRAFT (`wardsynq-actors.js`).
+- The resident sees a checklist per bed, confirms each, and handover pre-fills.
+- Stop/start pairs feed medication reconciliation as proposals, never decisions.
+
+## 6. Say-it Logbook (NMC PG logbook)
+Every PG in India must log procedures. Nobody does it on time.
+- "Did two central lines and an ICD today, supervised by Dr Rao" becomes pglog entries with
+  competency codes from the closed catalog (`pglog-quick.js templatesFor/suggestions`,
+  `pglog-curriculum.js`).
+- Closed catalog, short sentences, English: the best Needle fit in the whole app. A resident-market
+  wedge on its own.
+
+## 7. Offline OSCE Examiner
+Students narrate their exam aloud; Needle maps each utterance to the station checklist.
+- "Inspecting the precordium", "palpating the apex, 5th space mid-clavicular": items tick live
+  (`clinix-examiner.js`, `clinix-content.js`). Score and missed steps at the end. Works in a hostel
+  with no Wi-Fi. Replaces full-Gemini viva calls for checklist stations.
+
+## 8. PHI Shield (the surprise)
+Needle was trained on contacts, bookings, phone numbers, addresses and dates. Those are exactly the
+patient identifiers.
+- A `redact` extraction tool pulls name, phone, address and date spans on device before any Gemini
+  call, layered on top of `phi-india.js` (which handles Aadhaar/ABHA/phone patterns but not free-text
+  names).
+- Fails closed: if either layer flags, the span is masked. Recall must be measured before relying on it.
+
+## 9. Natural-language follow-up
+Date grounding is Needle's most engineered area (`date:` system fact, relative dates, year checks).
+- "Review next Tuesday with fasting sugar", "call her in 3 days if fever persists" become real dates
+  and a reason, feeding FollowCare scheduling and the queue. Fixes the missing follow-up field.
+
+## 10. Wrist-only doctor
+Raise to speak on the watch: "Wells, heart rate 110, prior DVT". Score on the wrist, no phone, no
+network. Uses the existing watch Calculators view plus the watchOS engine.
+
+## 11. Sterile Mode (OT / SURGX)
+Gloved surgeon dictates short lines: "drain placed right flank", "blood loss 200". Needle maps each
+to a SURGX note field (closed set), replacing a cloud call for field placement. Encrypted notes stay
+device-local as today.
+
+## 12. Every screen gets a voice (the moat)
+A build step, not a feature. CI exports tool schemas from `MEDCALC._calcs`, the 83 `ws-*` syndromes,
+the 15 specialty-kit tools and insulin modes; generates synthetic data; fine-tunes on the Cactus
+platform (synthetic only, no PHI); ships the new `.cact` as a model download. Ship a calculator, get
+its voice and natural-language interface for free. Competitors must rebuild this per feature.
+
+## 13. MaiK Mini for the next 500 million phones
+3 to 4 GB Android, zero internet: Needle plus engines plus KB plus Whisper tiny, about 70 MB of models.
+Today these phones get cloud or nothing. This is the India-scale distribution story.
+
+## 14. Edge boxes
+Needle ships linux-armv7/mipsel/riscv engines. A Rs 4,000 board behind the OPD display
+(`opd-display.html`): "token 23 to room 4" by voice, offline.
+
+## Investor demo (90 seconds)
+1. Airplane mode on. Say "crcl 72 female 58 kilo creat 1.4": answer in under a second.
+2. Ambient consult: speak "BP 88 by 50, RR 32, confused, 78 years": CURB-65 5/5 lights up with quotes.
+3. Say "start amoxicillin" after "penicillin allergy": safety net fires before print.
+4. Watch: "adrenaline given", "shock 200", "ROSC": the code record prints itself.
+5. Show the phone: 36 MB model, nothing sent to the network.
+
+## Build order
+1. Phase 0 from the audit (parser unification, calculator prefill). Needed by everything.
+2. Answer-as-you-type + Live Score Radar (WASM, OTA, flag `smd_needle`): biggest demo per effort.
+3. Code Blue Black Box + Sepsis Hour-1 (native, watch).
+4. Say-it Logbook + OSCE Examiner (market wedges).
+5. Round Mode, PHI Shield, the build-time compiler.
+
+## Honest limits
+English only (tokenizer has no Devanagari/Telugu). Base model fails clinical input; every feature
+waits on the fine-tune gate. Needle never refuses on MaiK's behalf and never writes without a tap.
+
+## Adopted from the ChatGPT review (2026-10-01)
+- **Name and API:** ship as "StewardMD Edge", `window.SMD_EDGE` = `{ route, extract, embed, available,
+  load, release }`, native plugin `capacitor-needle`. Never expose "Needle" in the product.
+- **Layers:** L0 deterministic (regex, ontology, engines), L1 Edge (intent, slots, ranking, commands),
+  L2 MaiK (explanation, synthesis, long-form). Metric to track: share of interactions completed without
+  waking a MaiK pack.
+- **Deterministic candidate finder before Needle:** lexical routing narrows to 3 to 5 tools, then Needle
+  fills arguments. Engine constraint: `needle_init` is process-global and binds one toolset, so a fresh
+  toolset per query costs a re-init (0.7 to 3 s measured on x86 for 1 to 5 tools). Use a bank of fixed,
+  pre-indexed category toolsets (renal, sepsis, cardio, hepatology...) and switch only on category change.
+- **Medication list extraction** feeding `medlist.js parseEntry` / `resolveGeneric` and interactions.
+- Watch the duplicates: `meld3`, `meld`, `meld_na` all exist in `calculators.js`; the catalog needs one
+  canonical tool per score.
+
+## Rejected from the same review, with evidence
+- Needle on Telugu/Hindi patient answers (MaiK Ask): tokenizer has no Devanagari or Telugu.
+- Needle on Scribe transcripts: fabricates past about 150 words; per-sentence only.
+- Needle embeddings for feature routing: near-chance on medical synonyms (3/25 top-1).
+- Needle ranking ICD codes: needs code semantics it does not have; candidate IDs change per query
+  (re-init each time); `scribe-icdsug` + `SMD_ICD.localSearch` already cover it.
+- Needle for ICU "run everything": `ICU_AUTOSCORES.compute` already does it deterministically.
+
+## Alternatives for what Needle cannot do (2026-10-01, research only, nothing run)
+- **Pivot to test first: FunctionGemma 270M** (Google, Dec 2025): Gemma 3 270M tuned for function
+  calling, 256K multilingual vocab (covers Devanagari/Telugu), 32K context. The same 270M base already
+  ships as the MedGemma draft (`maik-models.js:139`, `gemma-3-270m-it-Q8_0.gguf`, 291,546,144 B), so it
+  runs on the existing `capacitor-llama` with no new native code. Needs the llama.cpp grammar sampler
+  exposed in the plugin. Gemma terms (already accepted for MedGemma). Telugu quality at 270M unverified.
+- **Indic input:** IndicXlit (~11M, romanise native script) + Needle trained on romanised code-mix;
+  IndicTrans2 indic-en distilled 200M for free text; whisper.cpp translate mode (not on the Telugu
+  specialist; large-v3-turbo is weak at translate); deterministic Telugu/Hindi yes/no/number lexicon.
+- **Long transcripts:** GLiNER-biomed (extractive span NER, zero-shot labels, ONNX) in the
+  `openmed-ner.js` ORT slot; extractive means every output is a substring of the transcript.
+- **Semantic matching:** SNOMED CT (free affiliate licence in India via NRCeS) synonyms + India refsets
+  as deterministic tables; SapBERT for English entity linking to SNOMED; SNOMED to ICD-10 map for
+  deterministic coding; EmbeddingGemma 300M only if multilingual semantic search is needed.
+- **Runtimes:** stay at three. llama.cpp (generative), ORT (encoders), Needle (watch/low-end/always-on).
+
+## Senior engineer review (2026-10-01): adopted
+- **First build = Android-first, read-only local task router** (open calculator, drug/monograph
+  section, real ICD candidates, open module, KB topic). Benchmark against the current deterministic
+  router; if Needle does not materially improve phrasing coverage, drop it. Show-off features follow.
+- **Integrate at the `maik-engine.js` seam** (`route()` / `route0()` / `localCall()`), not per screen.
+- **Needle readiness must not depend on `localReady()`** (which requires an installed MaiK pack),
+  or the low-RAM opportunity is lost.
+- **Components:** `local-plugins/capacitor-needle/` (JNI, statically linked, uniquely named .so),
+  `needle-runtime.js` (serialise init/complete/embed/reset; reset between patients and tasks),
+  `needle-schemas.js`, `needle-router.js`, `needle-grounding.js` (source, catalog, unit, polarity).
+- **No cancel/unload in the C API.** A JS timeout does not stop native work: bound `max_new_tokens`,
+  coalesce superseded jobs, consider a dedicated Android process for hard kill.
+- **ICU dictation is a real gap:** `voice.js:389` sends ICU dictation as kind `monitor`, which has no
+  `REQ`/`LOCAL_IMPL` entry in `maik-engine.js`, so Local mode cannot do it. Needle -> typed fields ->
+  `icu.js reviewVoice()` (`:2259`). Never replace `parseMonitor()` (needs pixel geometry).
+- **Scribe as a source-linked event ledger:** events carry quote, chunk id, speaker, timestamp;
+  deterministic reducer maps to EMR fields; explicit correction events ("doctor corrected X"), which
+  `scribeMerge()` cannot represent today. Infer once per bounded chunk, never per partial.
+- **Field-specific evidence:** "40" somewhere in the transcript is not proof the strength is 40 mg.
+- **Correction to the audit:** `offline-clinical.js installRouting()` (`:218`) wraps `MEDAPI.structured`
+  and `monograph` with bundled data, so `SMD_DOSE` works offline on native. And `route()` fails open to
+  the model when the dose lookup misses, so the short-circuit is not a universal ban on model doses.
+- **Device tiers for testing:** 2-3 GB, 4 GB, 6 GB, flagship. Measure in the real WebView app.
+- **Acceptance cases:** the ten in the review (CURB-65 open, meropenem renal, levothyroxine prefill,
+  "fever 3 days, no vomiting", family vs patient history, ICU vitals, PEEP/FiO2, CAP+T2DM+CKD split,
+  "stopped metformin", child loose-motion protocol) plus bare "MS" must stay a clarification.
+
+## Senior engineer review: corrections from measurement
+- **Embeddings:** `needle_embed` returns **3,072** dims (measured), not 128. Book index = 42,176 x 3,072
+  x 4 B = about 518 MB float32 (about 259 MB fp16), not 21.6 MB. Measured medical synonym top-1 was 3/25,
+  below a character-trigram baseline. Treat the RAG arm as unlikely; prefer SNOMED synonyms / SapBERT.
+- **Telemetry:** verified at symbol level: `android-arm64/libneedle.a` imports no socket/connect/
+  getaddrinfo; embeddable libs contain no URLs. Telemetry lives in the Python package and CLI runner.
+- **Telugu/Hindi:** not a validation question for Needle; the tokenizer has no Devanagari/Telugu.
+  Needs romanisation/translation upstream or FunctionGemma.
+- **Base model:** measured 8/34 routing, and fact extraction put numbers in the wrong fields (29
+  invented fields) that its own grounding check cannot see. The review's acceptance cases are the
+  right gate; expect the base model to fail them until fine-tuned.

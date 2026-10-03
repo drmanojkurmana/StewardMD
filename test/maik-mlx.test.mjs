@@ -243,8 +243,11 @@ test("capacitor-mlx keeps the JS contract and is linked into the iOS app on iOS 
   assert.match(plugin, /prefillEmptyThink/, "noThink packs keep thinking off");
   assert.match(engine, /enable_thinking/);
   assert.match(pkg, /\.iOS\(\.v17\)/);
-  assert.match(pkg, /Layr-Labs\/mlx-swift-lm\.git", revision: "[0-9a-f]{40}"/, "fork pinned to a full commit");
-  assert.match(pkg, /Layr-Labs\/mlx-swift\.git", revision: "[0-9a-f]{40}"/);
+  // The owner's forks (branch stewardmd-ios27): mlx-swift carries the Xcode 27.2 std::system fix, and
+  // mlx-swift-lm's own Package.swift pins that same mlx-swift commit, so both pins must stay in step.
+  assert.match(pkg, /drmanojkurmana\/mlx-swift-lm\.git", revision: "7354dce7a8f62142994acd180e2dc134cb46483f"/, "fork pinned to a full commit");
+  assert.match(pkg, /drmanojkurmana\/mlx-swift\.git", revision: "757b0a04aa8ee27b99b7026f6c5d7fc9629f757e"/, "mlx-swift pinned to the commit mlx-swift-lm pins");
+  assert.doesNotMatch(pkg, /\.package\(url: "https:\/\/github\.com\/Layr-Labs\//, "no Layr-Labs pin left beside the forks");
   const rootPkg = JSON.parse(read("package.json"));
   assert.equal(rootPkg.dependencies["@stewardmd/capacitor-mlx"], "file:local-plugins/capacitor-mlx");
   const spm = read("ios/App/CapApp-SPM/Package.swift");

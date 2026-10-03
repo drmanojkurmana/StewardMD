@@ -248,13 +248,19 @@
     { kw: /gi bleed|upper gi|variceal|melena|haematemesis/, calcs: [{ id: "gbs", why: "Glasgow-Blatchford" }, { id: "rockall", why: "rebleed / mortality" }] },
     { kw: /\bcopd\b/, calcs: [{ id: "cat_copd", why: "symptom burden" }, { id: "decaf", why: "exacerbation mortality" }] }
   ];
-  function suggestCalcs(q, primary) {
+  function suggestCalcs(q, primary, raw) {
     var hay = (q + " " + (primary && primary.canonicalName ? norm(primary.canonicalName) : "")).trim();
     var out = [], seen = {};
     // A calculator NAMED in the question comes first (MEDCALC.find resolves by title), ahead of the
     // condition-mapped suggestions below. That is what makes "Open in StewardMD" say "Open HACOR
     // score" rather than a generic chip, or nothing, when the doctor asked for a score by name.
-    try { var C = G("MEDCALC"); var hit = C && C.find ? C.find(q) : null; if (hit && hit.id) { seen[hit.id] = 1; out.push({ id: hit.id, why: "named in the question" }); } } catch (e) {}
+    try {
+      var C = G("MEDCALC"); var hit = C && C.find ? C.find(q) : null;
+      // "curb65 78 yo rr 32": the values hide the name from find(); look again without them (flag smd_calc_prefill).
+      var P = G("SMD_CPARAMS");
+      if (!hit && C && C.find && P && P.stripValues && prefillOn()) { var q2 = norm(P.stripValues(raw || q)); if (q2 && q2 !== q) hit = C.find(q2); }
+      if (hit && hit.id) { seen[hit.id] = 1; out.push({ id: hit.id, why: "named in the question" }); }
+    } catch (e) {}
     for (var i = 0; i < CALC_FOR.length; i++) {
       if (CALC_FOR[i].kw.test(hay)) {
         CALC_FOR[i].calcs.forEach(function (c) { if (!seen[c.id]) { seen[c.id] = 1; out.push(c); } });
@@ -263,6 +269,7 @@
     return out;
   }
 
+  function prefillOn() { try { return !!(root.localStorage && root.localStorage.getItem("smd_calc_prefill") === "1"); } catch (e) { return false; } }
   function step(source, op, args, why) { return { source: source, op: op, args: args || {}, why: why || "" }; }
   function drugLikely(q) { return /(cillin|pril|sartan|olol|statin|azole|mycin|parin|dipine|prazole|floxacin|tinib|mab|vir|penem|cef|dose of|dosing of)/.test(q); }
 
@@ -281,12 +288,25 @@
     var isMgmt = /\b(treat|treatment|manage|management|regimen|first[- ]line|guideline|protocol|empiric)\b/.test(q);
     var comparison = /\b(vs|versus|compare|difference between)\b/.test(q) || (/\b(nice|esc|aha|acc|idsa|kdigo|ada|gold|gina|who|cdc|icmr)\b/.test(q) && isMgmt);
     var complex = false; try { complex = !!(root.MaiKKB && root.MaiKKB.isComplex && root.MaiKKB.isComplex(raw)); } catch (e) {}
-    var calcs = suggestCalcs(q, p);
+    var calcs = suggestCalcs(q, p, raw);
 
     if (isInteraction) steps.push(step("interactions", "check", {}, "interaction significance from the interactions engine"));
     if (isDose && (p && p.type === "drug" || drugLikely(q))) steps.push(step("drugdb", "lookup", { name: p && p.type === "drug" ? p.canonicalName : null }, "dose / renal / hepatic / pregnancy / interactions from the drug DB"));
     if (p && p.type === "disease") steps.push(step("kb", "compose", { id: p.canonicalId, intent: intent }, "StewardMD KB: " + (intent || "overview")));
-    if (calcs.length) steps.push(step("calculator", wantsCalc ? "run" : "suggest", { calcs: calcs }, "relevant clinical score(s)"));
+    if (calcs.length) {
+      var calcArgs = { calcs: calcs };
+      // Inputs for "run" (flag smd_calc_prefill): only a calculator whose EVERY input was stated gets
+      // inputs, so a partial score is never presented as a complete one. Values come from the shared
+      // parser (present, current, label-checked); the calculator computes.
+      if (wantsCalc && prefillOn()) {
+        var PF = G("SMD_CALC_PREFILL"), byId = {};
+        calcs.forEach(function (c) {
+          try { var r = PF && PF.forText ? PF.forText(c.id, raw || q) : null; if (r && !r.notStated.length && !r.skipped.length) byId[c.id] = r.prefill; } catch (e) {}
+        });
+        if (Object.keys(byId).length) calcArgs.inputsById = byId;
+      }
+      steps.push(step("calculator", wantsCalc ? "run" : "suggest", calcArgs, "relevant clinical score(s)"));
+    }
     if (isMgmt && p) steps.push(step("guideline", "lookup", { id: p.canonicalId }, "guideline recommendation + year + society"));
 
     // Token optimization (Stage 13): Gemini ONLY when it adds value.
@@ -313,7 +333,7 @@
           var out = pkg ? MK.compose(resolved.query.raw, pkg, { intent: (s.args && s.args.intent) || null }) : null;
           if (out && out.text) evidence.push({ source: "kb", data: out, weight: 100 }); else deferred.push(s);
         } else if (s.source === "calculator" && CALC) {
-          var got = (s.args.calcs || []).map(function (c) { var def = CALC.get ? CALC.get(c.id) : null; return def ? { id: c.id, title: def.title, why: c.why, inputs: (def.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type }; }), computed: (s.op === "run" && s.args.inputs ? CALC.run(c.id, s.args.inputs) : null) } : null; }).filter(Boolean);
+          var got = (s.args.calcs || []).map(function (c) { var def = CALC.get ? CALC.get(c.id) : null; return def ? { id: c.id, title: def.title, why: c.why, inputs: (def.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type }; }), computed: (s.op === "run" && (s.args.inputsById ? s.args.inputsById[c.id] : s.args.inputs) ? CALC.run(c.id, s.args.inputsById ? s.args.inputsById[c.id] : s.args.inputs) : null) } : null; }).filter(Boolean);
           if (got.length) evidence.push({ source: "calculator", data: got, weight: 90 });
         } else if (s.source === "drugdb" && DRUGS) {
           var hit = null; if (s.args.name && DRUGS.findByName) hit = DRUGS.findByName(s.args.name);

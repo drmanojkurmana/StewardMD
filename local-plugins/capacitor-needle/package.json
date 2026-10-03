@@ -1,0 +1,13 @@
+{
+  "name": "@stewardmd/capacitor-needle",
+  "version": "0.1.0",
+  "description": "On-device Needle 3 (Cactus) router engine for StewardMD Edge. Text in, one JSON tool call out; nothing leaves the device. Android runs the engine in its own process (:edge) so a stuck call can be killed.",
+  "capacitor": {
+    "ios": { "src": "ios" },
+    "android": { "src": "android" }
+  },
+  "files": ["ios/Sources", "ios/Frameworks", "android/src", "android/build.gradle", "android/libs", "Package.swift", "package.json", "README.md", "scripts"],
+  "author": "StewardMD",
+  "license": "MIT",
+  "_vendored": "StewardMD-authored local plugin wrapping the prebuilt Needle 3 engine (libneedle.a) from huggingface.co/Cactus-Compute/needle3. The engine binaries and weights are NOT in git: run scripts/fetch-needle.sh (pinned sha256). NOT YET BUILT OR RUN ON A DEVICE: see README, gates A0.1 and A0.2."
+}

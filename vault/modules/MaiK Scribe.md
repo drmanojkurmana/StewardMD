@@ -11,6 +11,17 @@ Whisper only; consultation audio never leaves the phone.
 - `smd_scribe_live` — DEFAULT ON, localStorage only. Live-draft cadence (refineEveryChunks 2 instead
   of 8, plus an idle-speech-triggered refine); OFF restores the original ~2 min cadence byte-identically.
   Cost-guarded independently via `smd_scribe_live_mingap_ms` (default 45000) — see `gatedRefine`.
+- `smd_speech_ondevice` (DEFAULT ON since 2026-10-01, owner; "0" = off, Edge A1.2): Fast dictation requests the OS on-device recognizer
+  (Android `createOnDeviceSpeechRecognizer` on 12+, iOS `requiresOnDeviceRecognition`); noCloud callers
+  require it. With the flag ON the caller's language reaches the recognizer ("hi" -> hi-IN, "te" -> te-IN,
+  "en"/"auto" -> the device's; before 2026-10-02 it was always `navigator.language`), and the OPD field
+  strip names the engine. **With the kill switch "0":** "Fast · on-device STT" / engine "On-device" is a claim the
+  OS recognizers do not guarantee (they may send audio to Apple/Google). See [[Flags]], [[StewardMD Edge]].
+- `smd_scribe_reported_gate` — DEFAULT ON, localStorage only ("0" = off). `voice-ambient.js reduce()`
+  pulls out clauses that report a reading ("my BP was 150/90", "sugar at home was 300", "BP was 80/50
+  before fluids") and merges them as speaker "patient", so they never fill objective vitals. Plain
+  dictation with no such clause takes the old code path unchanged. Third person ("his BP is 130/80")
+  is not treated as reported. Test: `test/voice-ambient-reported.test.mjs` (2026-10-01, Edge sprint).
 - `smd_scribe_feedback` — DEFAULT ON, localStorage only. Correction-feedback ring buffer (see below).
 - `smd_scribe_consent` — DEFAULT ON, localStorage only. Per-visit recording consent gate.
 - `smd_scribe_clinical` — DEFAULT ON, localStorage only. Wires the clinical modules into the OPD

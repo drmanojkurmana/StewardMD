@@ -122,13 +122,21 @@ struct GenStats {
     var thermalStart = "", thermalEnd = ""
     var draftProposed = 0, draftAccepted = 0
     var stoppedHot = false, kvQ8 = false, flashAttn = false
+    /// pick(): probability of the chosen choice, and the last 3 prompt tokens + the chosen token.
+    var p: Double? = nil
+    var pickTokens: [Int32] = []
     var dict: [String: Any] {
-        return ["promptTokens": promptTokens, "reusedTokens": reusedTokens, "prefillMs": prefillMs,
+        return ["pickTokens": pickTokens, "promptTokens": promptTokens, "reusedTokens": reusedTokens, "prefillMs": prefillMs,
                 "decodeMs": decodeMs, "tokens": tokens, "tokPerSec": tokPerSec,
                 "thermalStart": thermalStart, "thermalEnd": thermalEnd,
                 "draftProposed": draftProposed, "draftAccepted": draftAccepted,
                 "stoppedHot": stoppedHot, "kvQ8": kvQ8, "flashAttn": flashAttn]
     }
+}
+
+/// Forced prefix + pick request (Edge router, A0.3): see LlamaPlugin.generate.
+struct Pick {
+    let prefix: String, choices: [String], suffix: String
 }
 
 final class LlamaEngine {
@@ -334,13 +342,16 @@ final class LlamaEngine {
                   temperature: Float,
                   seed: UInt32,
                   prefillEmptyThink: Bool = false,
+                  grammar: String? = nil,
+                  pick: Pick? = nil,
                   onToken: ((String) -> Void)?,
                   completion: @escaping (Result<GenStats, Error>) -> Void) {
         work.async { [weak self] in
             guard let self else { return }
             do { completion(.success(try self.generateSync(system: system, user: user, nPredict: nPredict,
                                                            temperature: temperature, seed: seed,
-                                                           prefillEmptyThink: prefillEmptyThink, onToken: onToken))) }
+                                                           prefillEmptyThink: prefillEmptyThink, grammar: grammar,
+                                                           pick: pick, onToken: onToken))) }
             catch { completion(.failure(error)) }
         }
     }
@@ -407,6 +418,8 @@ final class LlamaEngine {
     private func generateSync(system: String, user: String, nPredict: Int32,
                               temperature: Float, seed: UInt32,
                               prefillEmptyThink: Bool = false,
+                              grammar: String? = nil,
+                              pick: Pick? = nil,
                               onToken: ((String) -> Void)?,
                               imagePaths: [String] = [], mmprojPath: String = "") throws -> GenStats {
         // Runs on `work`. The pointers read here stay valid for the whole call: load and release are
@@ -462,6 +475,18 @@ final class LlamaEngine {
          * from a point where the empty think block already happened, with no decision left to make.
          */
         if prefillEmptyThink { prompt += "<think>\n\n</think>\n\n" }
+        // Forced prefix + pick (Edge, A0.3): the reply prefix goes after the model turn opens, and the
+        // whole string is tokenised at once, exactly like the training text.
+        var pickIds = [llama_token]()
+        if let pk = pick, !wantsImages {
+            for ch in pk.choices {
+                var t = [llama_token](repeating: 0, count: 2)
+                let n = llama_tokenize(vocab, ch, Int32(ch.utf8.count), &t, 2, false, false)
+                guard n == 1 else { pickIds = []; break }
+                pickIds.append(t[0])
+            }
+            if !pickIds.isEmpty { prompt += pk.prefix }
+        }
 
         // Tokenise (negative return = required capacity). Skipped entirely on the image path, where
         // mtmd owns tokenisation because it has to interleave text tokens with image embeddings.
@@ -491,6 +516,17 @@ final class LlamaEngine {
         // reproducible. Strength: see repeatPenalty (T55).
         llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
             llama_vocab_n_tokens(vocab), 128, Self.repeatPenalty, 0.0, 0.0))
+        // GBNF grammar (StewardMD Edge, gate A0.3): the Edge router asks a small model for exactly
+        // {"option": n}, so only grammar-legal tokens can be sampled. It sits before greedy/dist so it
+        // masks the logits they choose from. Opt-in: no grammar, no change. A grammar llama.cpp cannot
+        // parse fails the call (the router then passes to the safe path) rather than running free.
+        let constrained = pickIds.isEmpty && !(grammar ?? "").isEmpty
+        if constrained {
+            guard let g = llama_sampler_init_grammar(vocab, grammar!, "root") else {
+                throw LlamaError(.generationFailure, "grammar did not parse")
+            }
+            llama_sampler_chain_add(smpl, g)
+        }
         if temperature > 0 {
             llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40))
             llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95, 1))
@@ -532,6 +568,19 @@ final class LlamaEngine {
         stats.reusedTokens = reused
         llamaPerf("PERF prefill_ms=\(prefillMs) prompt_tokens=\(consumed) reused=\(reused) images=\(imagePaths.count) n_gpu_layers=\(loadedGpuLayers)")
 
+        // Pick: the next-token distribution over the choice tokens only. No decode loop, no grammar.
+        if let pk = pick, !pickIds.isEmpty, toks.count >= 3 {
+            guard let lg = llama_get_logits_ith(c, -1) else { throw LlamaError(.generationFailure, "no logits") }
+            let l = pickIds.map { Double(lg[Int($0)]) }
+            let mx = l.max()!, e = l.map { exp($0 - mx) }, z = e.reduce(0, +)
+            let best = l.firstIndex(of: mx)!
+            stats.text = pk.prefix + pk.choices[best] + pk.suffix
+            stats.p = e[best] / z
+            stats.pickTokens = toks.suffix(3).map { Int32($0) } + [Int32(pickIds[best])]
+            stats.thermalEnd = ThermalGovernor.stateName
+            return stats
+        }
+
         var full = ""
         var produced: Int32 = 0
         let tDecode = Date()
@@ -561,7 +610,8 @@ final class LlamaEngine {
          * target's choice at every position is deterministic, so an accepted proposal is exactly the
          * token the plain loop would have produced: the answer is byte-identical, only faster. With
          * temperature > 0 (a regenerate) or an image prompt the plain loop below runs instead. */
-        let useDraft = draftCtx != nil && temperature <= 0 && vision == nil
+        // The draft proposes tokens without the grammar, so constrained calls decode plainly.
+        let useDraft = draftCtx != nil && temperature <= 0 && vision == nil && !constrained
         if useDraft, let dc = draftCtx {
             // The draft's cache must hold the same prompt; it reuses its own prefix too.
             var draftOK = true
