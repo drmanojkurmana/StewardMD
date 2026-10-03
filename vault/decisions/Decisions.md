@@ -11088,3 +11088,26 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - **Why not an engine fix:** a rival scoring 41 is below the 42 "possible infection" bar both gates use; moving that bar
   or the sinusitis score for this item would be tuning on a sealed case. **Trade-off:** the kill-switch config keeps
   Round 76's large overcall drop and accepts one sealed miss the shipped config also has.
+
+## 2026-10-03 - Opt-out floor re-baseline: `smd_nlp_v2=0` (classic note reader), owner sign-off pending
+- **What:** `dx-floors.json["smd_nlp_v2=0"]` rewritten with `--write-floors` (that config only). Two floors loosen:
+  `heldout3.txt.abxSens` 74 -> 73 and `heldout4.txt.overcall` 23 -> 24. Thirteen tighten (e.g. `heldout3.txt.overcall`
+  46 -> 42, `heldout3.txt.noAbxInf` 12 -> 7, `gold.pc.abxSens` 45 -> 47). No default-config floor changed.
+- **Unlike `smd_gate_v2=0`, here the shipped config decides differently on both cases.** Each loss is a correct rule
+  exposing what the classic reader cannot read, not a worse decision rule:
+  - heldout3 `h3_2_091` (sealed, counted only; gold antibiotics yes, gold diagnosis 11th): lost in Rounds 73-75
+    (`61b5f6a2a`), not Round 76. Ablating the round 73 biliary-rival rule (`RIVAL_NEEDS`: cholangitis / cholecystitis
+    hold antibiotics as a rival only with a biliary sign, Tokyo 2018) restores it, and also returns three overcalls
+    (`h3_5_034`, `h3_5_038` tune, `h3_5_035` sealed: viral hepatitis with no biliary sign) where the default says no
+    antibiotics. The old "antibiotics" came from a biliary rival the note gives no sign of. Default: antibiotics, by a
+    different route (the v2 reader reads more of the note).
+  - heldout4 `h4_1_045` (tune): myasthenic crisis after a cold, on prednisolone, "SpO2 95% RA". Before Round 76 the
+    classic reader read "SpO2 95%" as hypoxia, so interstitial lung disease led and the gate said no antibiotics (right
+    answer, wrong reason). Round 76 fixed that misread; the reader now sees only dyspnoea + sore throat, pharyngitis
+    leads, and hospital-acquired / severe pneumonia rivals within 30 points keep antibiotics. The same config's tapped
+    path (`cur`) already gave antibiotics before and after. Default: no antibiotics (the v2 reader reads the myasthenia).
+- **Why not an engine fix:** h4_1_045 would need three separate changes (a pneumonia rival with no pneumonia sign, the
+  classic-reader HAP anchor that `ANCHOR_V2_ONLY` disables on purpose, and a sore throat with no Centor feature, which
+  still reads "antibiotics if criteria met"); reverting the biliary rule for the classic reader trades three correct
+  withholds for one sealed needed call. **Owner to confirm** that the classic-reader kill switch may carry these two
+  numbers; dropping this commit leaves the `replay` workflow red at this step.
