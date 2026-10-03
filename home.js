@@ -436,6 +436,7 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setupSidebarToggle(IS_V2); }); else setupSidebarToggle(IS_V2);
 
   var ICON = {
+    mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
     grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
     menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     help: '<circle cx="12" cy="12" r="10"/><path d="M9.5 9.2a2.5 2.5 0 0 1 4.5 1.4c0 1.6-2 2-2 3.4"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
@@ -2932,6 +2933,9 @@
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
+      // Owner Mail (mail.js): the hello@maiknowledge.com mailbox, live through /api/mail. The caption is
+      // replaced with the unread count once /api/mail/status answers.
+      ((nIsOwner() && window.SMD_MAIL && SMD_MAIL.enabled()) ? mi("mail", "Mail", "hello@maiknowledge.com (owner)", "mail") : "") +
       // AgentConnect: unified onboarding hub for doctor EMR login, IT protocol feeds, and WardSynq hospital ID.
       ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
         ? mi("hub", "AgentConnect", "Connect your hospital's EMR", "agentconnect")
@@ -2946,6 +2950,8 @@
       mi("book", "Terms of use", "Terms &amp; conditions", "terms")
     );
     var s = sheetEl();
+    var mailRow = s.querySelector('[data-mi="mail"] .mc');
+    if (mailRow && window.SMD_MAIL) SMD_MAIL.checkUnread().then(function (n) { if (mailRow.isConnected) mailRow.textContent = n ? n + " unread" : "hello@maiknowledge.com (owner)"; });
     s.querySelectorAll("[data-ui]").forEach(function (b) {
       b.addEventListener("click", function () { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); });
     });
@@ -2960,6 +2966,7 @@
         if (a === "subscription") return openSubscription();
         if (a === "aiusage") { closeSheet(); return openAiUsage(); }
         if (a === "aictl") { closeSheet(); return openAiControl(); }
+        if (a === "mail") { closeSheet(); if (window.SMD_MAIL) return SMD_MAIL.open(); return toast("Mail loading…"); }
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
         if (a === "nmcsearch") { closeSheet(); setTimeout(function () { try { window.SMD_NMC ? SMD_NMC.open() : toast("Loading…"); } catch (e) {} }, 120); return; }
