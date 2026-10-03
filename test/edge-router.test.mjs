@@ -239,6 +239,45 @@ test("Layer 0 widened: an exactly named tool or generic drug, in any of the thre
   assert.equal(await E.route("do not open antibiogram"), null, "negation still wins");
 });
 
+test("KB page: a navigation word plus exactly a disease name or alias is a rules answer; anything more is not", async () => {
+  // Mock in the shape of MaiKKB (kb/ai/maik-kb.js): exact name match is confident, an intent tail is stripped by
+  // _diseasePhrase, "tb" is a listed alias. "antibiogram" is a contrived disease to collide with the home tool.
+  const NAMES = { pneumonia: "Pneumonia", sepsis: "Sepsis", "pulmonary tuberculosis": "Pulmonary tuberculosis", antibiogram: "Antibiogram" };
+  const ALIAS = { tb: "pulmonary tuberculosis" };
+  const phrase = (q) => { const p = q.replace(/\s+(antibiotics?|dose|treatment)\b.*$/, "").replace(/^(how to treat|what is)\s+/, ""); return ALIAS[p] || p; };
+  globalThis.MaiKKB = {
+    _alias: ALIAS, _diseasePhrase: phrase,
+    resolveTarget: (q) => {
+      const p = phrase(q);
+      if (NAMES[p]) return { id: p.toUpperCase().replace(/ /g, "_"), name: NAMES[p], confident: true, match: "exact" };
+      const hit = Object.keys(NAMES).find((k) => q.includes(k));
+      return hit ? { id: hit.toUpperCase(), name: NAMES[hit], confident: false, match: "fallback" } : null;
+    }
+  };
+  globalThis.SMD_REASON = { hasDiseaseRef: () => true };
+  try {
+    store.smd_edge = "1";
+    const m = mock(() => needleReply(1)); E.setEngine(m);
+    for (const [q, id] of [["open pneumonia page", "PNEUMONIA"], ["show me sepsis", "SEPSIS"], ["sepsis kholo", "SEPSIS"], ["pneumonia dikhao", "PNEUMONIA"],
+      ["sepsis teruvu", "SEPSIS"], ["pneumonia chupinchu", "PNEUMONIA"], ["tb chupinchu", "PULMONARY_TUBERCULOSIS"]]) {
+      const r = await E.route(q);
+      assert.equal(r && r.kind, "kb", q); assert.equal(r.id, id, q); assert.equal(r.source, "rules", q);
+      assert.equal(E.rules(q) && E.rules(q).kind, "kb", q);
+    }
+    assert.equal(m.prompts.length, 0, "no model call for an exact disease page");
+    const kbOf = (q) => E.candidates(q).find((c) => c.kind === "kb");
+    for (const q of ["pneumonia antibiotics dose", "open pneumonia antibiotics dose", "how to treat sepsis", "open pneumonia sepsis"]) {
+      assert.equal(E.layer0(E.candidates(q)), false, q);
+      assert.equal(!!(kbOf(q) && kbOf(q).exact), false, q);
+    }
+    assert.equal(!!kbOf("how to treat sepsis"), true, "question still offers the KB option to the model");
+    assert.equal(!!(kbOf("open antibiogram") && kbOf("open antibiogram").exact), false, "one name, two things: nothing exact");
+    assert.equal(E.candidates("open antibiogram").some((c) => c.exact), false);
+    assert.equal(E.rules("don't open sepsis page"), null, "negation");
+    assert.equal(await E.route("do not open the pneumonia page"), null, "negation still wins");
+  } finally { delete globalThis.MaiKKB; delete globalThis.SMD_REASON; }
+});
+
 test("back-off (plan A0.5): low memory, MaiK generating or Whisper decoding skip the model; heat only warns", async () => {
   store.smd_edge = "1";
   const pick = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
