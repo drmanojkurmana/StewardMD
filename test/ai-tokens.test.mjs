@@ -76,12 +76,13 @@ test("only token packs are fulfilled as tokens; subscriptions still grant Pro", 
 test("rate card is priced off the same cost model that debits the wallet", () => {
   const env = {}, model = "gemini-2.5-flash";
   const r = modelRate(env, model);
-  assert.equal(inrToMt(r.in), 14);                                        // ₹0.007/1k in
-  assert.equal(inrToMt(r.out), 50);                                       // ₹0.025/1k out
+  // Google's published price ($0.30 / $2.50 per 1M) at Rs 96 per USD (2026-10-02).
+  assert.equal(inrToMt(r.in), 58);                                        // ₹0.0288/1k in
+  assert.equal(inrToMt(r.out), 480);                                      // ₹0.24/1k out
   assert.equal(inrToMt(estCostInr(env, model, 0, 0, { images: 1 })), 700);
-  assert.equal(inrToMt(estCostInr(env, model, 0, 0, { audioSeconds: 1 })), 40);
+  assert.equal(inrToMt(estCostInr(env, model, 0, 0, { audioSeconds: 1 })), 8);     // Rs 0.004/s (Vertex audio)
   // A real call: 2k in + 1k out must cost in-rate*2 + out-rate*1.
-  assert.equal(inrToMt(estCostInr(env, model, 2000, 1000)), 14 * 2 + 50);
+  assert.equal(inrToMt(estCostInr(env, model, 2000, 1000)), Math.round((0.0288 * 2 + 0.24) * 2000));
   // Env override moves the rate card and the charge together.
   assert.equal(inrToMt(modelRate({ AI_RATE_GEMINI_2_5_FLASH_IN: "0.01" }, model).in), 20);
 });
@@ -89,13 +90,11 @@ test("rate card is priced off the same cost model that debits the wallet", () =>
 test("a doctor is never quoted an ESTIMATED price", () => {
   assert.equal(rateConfirmed({}, "gemini-2.5-flash"), true, "2.5 rates are published");
   assert.equal(rateConfirmed({}, "gemini-2.5-pro"), true);
-  assert.equal(rateConfirmed({}, "gemini-3.5-flash"), false, "3.x rates are our own estimate");
-  assert.equal(rateConfirmed({}, "gemini-3.5-flash-lite"), false);
-  assert.equal(rateConfirmed({}, "gemini-3.1-flash-lite"), false);
+  // Google published the 3.x prices (read 2026-10-02), so those are real rates now too.
+  assert.equal(rateConfirmed({}, "gemini-3.5-flash"), true, "3.x prices are published");
+  assert.equal(rateConfirmed({}, "gemini-3.1-flash-lite"), true);
   assert.equal(rateConfirmed({}, "something-unknown"), false, "unknown model falls back to a guess");
-  // Once the owner enters the published figure, the card may be shown.
-  assert.equal(rateConfirmed({ AI_RATE_GEMINI_3_5_FLASH_IN: "0.009" }, "gemini-3.5-flash"), false, "half an override is not a rate");
-  assert.equal(rateConfirmed({ AI_RATE_GEMINI_3_5_FLASH_IN: "0.009", AI_RATE_GEMINI_3_5_FLASH_OUT: "0.03" }, "gemini-3.5-flash"), true);
+  // The est flag still guards any future model added before its price is published.
 });
 
 test("the active model stays gemini-2.5-flash unless deliberately changed", () => {

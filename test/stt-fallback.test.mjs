@@ -43,14 +43,15 @@ test("kill switch defaults ON, '0' turns the meter off", () => {
   assert.equal(sttFallbackOn({ STT_FALLBACK_CREDITS_ON: "0" }), false);
 });
 
-test("charge: max(client duration, byte floor); a 5-minute recording costs 60 credits", () => {
-  assert.equal(paisePerSec({}), 2);
+// 2026-10-02: Rs 0.004/s = Vertex gemini-2.5-flash audio (32 tokens/s at $1.00 per 1M + transcript), was Rs 0.02/s.
+test("charge: max(client duration, byte floor); a 5-minute recording costs 12 credits", () => {
+  assert.equal(paisePerSec({}), 0.4);
   assert.equal(chargeSeconds(0, 0), 1);
   assert.equal(chargeSeconds(0, 300000), 300);
   const b64For = (bytes) => Math.ceil(bytes * 4 / 3);
   assert.equal(chargeSeconds(b64For(MAX_BYTES_PER_SEC * 60), 1000), 60);   // under-reported: bytes win
   assert.equal(chargeSeconds(0, 10 * 3600 * 1000), MAX_CHARGE_SEC);
-  assert.equal(chargeCredits({}, 0, 300000), 60);
+  assert.equal(chargeCredits({}, 0, 300000), 12);
   assert.equal(chargeCredits({}, 0, 1), 1);
 });
 

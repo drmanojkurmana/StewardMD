@@ -162,6 +162,8 @@ function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL 
 // Tiered routing (opt-in): the default model is already the FAST one (gemini-2.5-flash). When the owner
 // sets env.STRONG_MODEL (a valid model, e.g. gemini-2.5-pro), a genuinely COMPLEX/reasoning query escalates
 // to it for better answers; everything else stays on flash. Unset STRONG_MODEL = current behaviour (no-op).
+// Cut from the tier-1 (bottom line only) call, which states its own shape (cost audit 2026-10-02).
+const TWO_TIER_RULE = "- TWO-TIER ANSWER: a CONCISE bottom line FIRST, then the marker @@MORE@@ alone on its own line, then the full detail. TIER 1 (before @@MORE@@) = the direct answer to what they asked PLUS everything safety-critical: red flags, contraindications, any time-critical 'refer / admit / treat now' action, key drug cautions. A rushed clinician must be SAFE reading tier 1 alone. TIER 2 (after @@MORE@@) = rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note and nuance. NEVER place a red flag, contraindication, or time-critical action after @@MORE@@. Use @@MORE@@ only when you genuinely have tier-2 depth; a simple lookup gets ONE short answer with NO @@MORE@@.\n";
 function strongModel(env) { const m = env && env.STRONG_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
 // FAST path (latency + cost): a SIMPLE (non-complex) query can run on a cheaper, non-"thinking" model.
 // gemini-2.5-flash keeps thinking even with thinkingBudget:0 (a known Google issue — thinking tokens
@@ -253,7 +255,9 @@ function aiDeadlineMs(env) { const v = Number(env && env.MAIK_AI_DEADLINE_MS); r
 function usageTokens(meta, inChars, outText) {
   const u = meta && meta.usage;
   if (!u || u.promptTokenCount == null) return { inTok: estTokens(inChars), outTok: estTokens(String(outText || "").length) };
-  return { inTok: u.promptTokenCount, outTok: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0), cachedTok: u.cachedContentTokenCount || 0 };
+  // Audio tokens are billed at Vertex's audio rate; recordUsage prices them apart (Scribe, dictation).
+  var audioTok = 0; (u.promptTokensDetails || []).forEach(function (d) { if (d && String(d.modality).toUpperCase() === "AUDIO") audioTok += d.tokenCount | 0; });
+  return { inTok: u.promptTokenCount, outTok: (u.candidatesTokenCount || 0) + (u.thoughtsTokenCount || 0), cachedTok: u.cachedContentTokenCount || 0, audioTok: audioTok };
 }
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
@@ -670,7 +674,7 @@ const KNOWLEDGE_SYS =
   "- ADAPT the format. A simple or factual question -> 1-3 sentences or a few tight bullets, NO headings. A broad 'manage X' / 'in detail' question -> a few short markdown headings or bullets where they genuinely help; never pour a short answer into a template of empty headings.\n" +
   "- Clean, conversational prose; bullets for lists (drugs, steps, differentials); bold key terms sparingly.\n" +
   "UPTODATE-STYLE STRUCTURE, for a clinical MANAGEMENT, DIFFERENTIAL, 'causes of', WORKUP or DRUG-CHOICE question (NOT a simple factual / single-dose lookup):\n" +
-  "- TWO-TIER ANSWER: a CONCISE bottom line FIRST, then the marker @@MORE@@ alone on its own line, then the full detail. TIER 1 (before @@MORE@@) = the direct answer to what they asked PLUS everything safety-critical: red flags, contraindications, any time-critical 'refer / admit / treat now' action, key drug cautions. A rushed clinician must be SAFE reading tier 1 alone. TIER 2 (after @@MORE@@) = rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note and nuance. NEVER place a red flag, contraindication, or time-critical action after @@MORE@@. Use @@MORE@@ only when you genuinely have tier-2 depth; a simple lookup gets ONE short answer with NO @@MORE@@.\n" +
+  TWO_TIER_RULE +
   "- OPEN with ONE short **bold** lead that restates what they're asking and states your key clinical ASSUMPTION(s), e.g. \"**You're asking about empiric therapy for ICU-acquired pneumonia — I'm assuming an immunocompetent adult, no recent antibiotics, and no MRSA/Pseudomonas risk factors.**\" If an assumption is likely wrong, name the main alternative in a few words.\n" +
   "- DIFFERENTIAL / 'causes of' / compare-the-options: a GitHub-style MARKDOWN PIPE TABLE (Diagnosis/Option | Distinguishing features | [the finding columns that matter for THIS question, cells = ✓ / Sometimes / Rarely / —] | Tests to confirm or rule out). One summary line before it; terse cells; most-likely first.\n" +
   "- MANAGEMENT with real depth: follow the clinical flow, using each part ONLY where it adds value: brief interpretation/severity, how URGENT it is (time-critical action first), what to CHECK now, how to TREAT (agents with standard dose/route/duration) and, when useful, a one-line plain-language patient explanation. Never emit an empty or padded heading.\n" +
@@ -894,7 +898,8 @@ function trimHistoryHead(t, over) {
 }
 const PROMPT_ORDER = ["q", "engine", "kb", "treat", "refs", "sources", "doctor", "history", "earlier", "close"];
 const PROMPT_TRIM = ["earlier", "history", "doctor", "refs", "kb", "engine", "treat", "sources"];
-function renderGroundedPrompt(pkg, maxChars) {
+const STEWARD_Q = /antibiot|antimicrob|\bcover|coverage|de-?escalat|narrow|empiric|culture|resistan|stewardship|step ?down|iv to oral|switch|duration|how long|which drug|first.?line|choice of|mrsa|esbl|pseudomonas|carbapenem/i;
+export function renderGroundedPrompt(pkg, maxChars) {
   const S = { q: [], doctor: [], history: [], earlier: [], engine: [], kb: [], treat: [], refs: [], close: [], sources: [] };
   let L = S.q;
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
@@ -964,7 +969,7 @@ function renderGroundedPrompt(pkg, maxChars) {
   if ((pkg.retrieved || []).length) {
     // Chunks arrive already re-ranked by rerankRetrieved() (cross-encoder, lexical fallback) in the
     // explain handler, so emit in the given order — most decision-relevant evidence first.
-    var _rlines = (pkg.retrieved || []).filter((c) => _fresh(c.text)).map((c) => "   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : ""));
+    var _rlines = (pkg.retrieved || []).filter((c) => _fresh(c.text)).slice(0, 5).map((c) => "   [" + c.section + "] " + c.diseaseId + ": " + clip(c.text, 240) + (c.source && c.source.ref ? " (" + c.source.ref + ")" : ""));
     if (_rlines.length) { L.push("\nMore notes (most relevant first):"); _rlines.forEach((e) => L.push(e)); }
   }
   if (L.length === 1) L.length = 0;
@@ -989,6 +994,12 @@ function renderGroundedPrompt(pkg, maxChars) {
     });
     if (t.overlayApplied && t.overlay) L.push("Hospital overlay (" + t.overlay.hospitalId + ", SEPARATE — does not replace the default): " + clip(JSON.stringify(t.overlay.recommendation), 700));
   }
+  // The matching StewardMD clinical protocol (2026-10-02): a curated management summary for a treatment
+  // question (sepsis bundle, MgSO4 regimen, ORS plan B), which the disease notes often lack.
+  if (pkg.protocol && pkg.protocol.summary) {
+    L.push("\n=== STEWARDMD CLINICAL PROTOCOL: " + clip(pkg.protocol.title || "", 100) + " ===");
+    L.push(clip(pkg.protocol.summary, 700));
+  }
   L = S.refs;
   const rf = pkg.refs || {};
   const refLine = [];
@@ -1002,7 +1013,10 @@ function renderGroundedPrompt(pkg, maxChars) {
   // "what's the coverage matrix?" fell back to general knowledge. Sibling of the dose-grounding bug
   // (#482/#483). Emitted compactly (clip + caps) to stay inside MAX_IN_CHARS.
   L = S.treat;   // stewardship is treatment guidance: protected like the dosing
-  const stw = (rf.stewardship || []).filter(Boolean);
+  // Cost (2026-10-02 audit): ~470 tokens per infection question. Sent only when the question is about
+  // choosing, covering, narrowing or stopping antimicrobials; the dosing above always goes.
+  const stwAsked = STEWARD_Q.test(String(pkg.question || ""));
+  const stw = stwAsked ? (rf.stewardship || []).filter(Boolean) : [];
   if (stw.length) {
     L.push("\n=== ANTIBIOTIC STEWARDSHIP (curated — use for de-escalation, narrowing & coverage questions) ===");
     stw.slice(0, 2).forEach((s) => {
@@ -1029,14 +1043,15 @@ function renderGroundedPrompt(pkg, maxChars) {
     });
   }
   L = S.close;
-  if (pkg.question) L.push("\n=== CLINICIAN QUESTION ===\n" + clipQ(pkg.question, 2000));
+  // The question already leads the prompt; repeating a long paste here cost up to 500 tokens (audit).
+  if (pkg.question && String(pkg.question).length <= 300) L.push("\n=== CLINICIAN QUESTION ===\n" + pkg.question);
   // Phase 2 — numbered SOURCES for per-claim citations + table formatting hint. The client builds
   // this list (identical numbering to the footer it renders) so [n] markers line up exactly.
   L = S.sources;
   if (pkg.sources && pkg.sources.length) {
     L.push("\n=== SOURCES (cite the specific supporting claim inline with [n]; use ONLY these numbers, never invent one) ===");
     pkg.sources.slice(0, 12).forEach((s) => L.push((s.n || "") + ". " + clip(s.title, 120)));
-    L.push("\nFORMATTING: append the matching [n] right after a statement that rests on a source above (e.g. 'first-line is X [2]'). When a recommendation rests on a NAMED guideline or trial in the list (e.g. 'Surviving Sepsis Campaign 2021', 'ESC 2024', 'ICMR AMRSN 2024', an 'AAO' PPP), name it in prose with its year the first time you rely on it ('per the 2021 Surviving Sepsis Campaign [n]'), the way UpToDate attributes a source — do NOT name generic bucket titles ('StewardMD Knowledge Base', 'Standard internal-medicine reference') in prose, only mark them with [n]. When you compare 3+ options across the same attributes (differentials, empiric regimens, drug choices), present them as a compact GitHub-flavoured markdown table (header row + |---| separator). Do not cite what you cannot attribute to a listed source.");
+    L.push("\nFORMATTING: put [n] right after a claim that rests on a source above. Name a listed guideline or trial in prose with its year the first time you rely on it ('per the 2021 Surviving Sepsis Campaign [n]'); never name generic titles such as 'StewardMD Knowledge Base', only mark them [n]. Comparing 3+ options on the same attributes: a compact markdown table. Do not cite what no listed source supports.");
   }
   const txt = {};
   PROMPT_ORDER.forEach((k) => { txt[k] = S[k].join("\n"); });
@@ -1783,7 +1798,7 @@ export async function onRequest(context) {
         let _ckey = null, _hitP = null;
         if (_cacheEligible) {
           try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier, kb: kbFingerprint(pkg) });
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier, kb: kbFingerprint(pkg), doctor: pkg.doctor });
             if (_ckey && !(body && body.regen)) _hitP = getCachedAnswer(usageKv(env), _ckey).catch(() => null);
           } catch (e) { _ckey = null; }
         }
@@ -1893,7 +1908,7 @@ export async function onRequest(context) {
           // Lazy two-call generation (client flag smd_maik_lazy). tier 1 = bottom line ONLY (cheap,
           // fast); tier 2 = the depth, fetched only if the clinician taps "Know more". Inert unless the
           // client sends body.tier, so the default single-call behaviour is byte-identical.
-          if (body && body.tier === 1) sysA = sysA + "\n\nOUTPUT MODE — BOTTOM LINE ONLY (overrides the TWO-TIER instruction above): give ONLY tier 1 (the direct answer PLUS all safety-critical information — red flags, contraindications, time-critical 'refer/admit/treat now' actions, key drug cautions). Do NOT write @@MORE@@ and do NOT write any tier-2 detail; a separate follow-up will request the depth.";
+          if (body && body.tier === 1) sysA = sysA.replace(TWO_TIER_RULE, "") + "\n\nOUTPUT MODE — BOTTOM LINE ONLY: give ONLY tier 1 (the direct answer PLUS all safety-critical information — red flags, contraindications, time-critical 'refer/admit/treat now' actions, key drug cautions). Do NOT write @@MORE@@ and do NOT write any tier-2 detail; a separate follow-up will request the depth.";
           else if (body && body.tier === 2) sysA = sysA + "\n\nOUTPUT MODE — DETAIL ONLY: the clinician already has your concise bottom line" + (body.priorLead ? (" (\"" + String(body.priorLead).slice(0, 400).replace(/"/g, "'") + "\")") : "") + ". Now give ONLY the tier-2 depth for THIS question (overrides the TWO-TIER instruction above): rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note, and nuance, each only where it bears on the question. Expand on the question; do not switch to a generic topic outline. Do NOT repeat the bottom line and do NOT write @@MORE@@.";
         } catch (e) {}
         // Cite-or-abstain safety directive (toggle in AI Control Center / MAIK_ABSTAIN). Never fabricate.

@@ -962,7 +962,8 @@
   var GENERIC_Q = /^(management|treatment|treat|therapy|regimen|regimens|dose|dosing|dosage|doses|route|duration|first|line|drug|drugs|agent|agents|class|choice|adult|patient|patients|clinical|medical|topic|topics|learn|learning|teach|today|question|questions|answer|complete|detailed|provide|considerations|principles|verify|locally|empiric|severity|host|adjustment|culture|directed|escalation|steps|monitoring|ongoing|next|approach|options|guideline|guidelines|what|when|which|how|should|give|use|used|with|without|versus|compare|comparison|prefer|each|non|woman|women|man|men|male|female|young|old|older|year|years|uncomplicated|complicated|simple|case|cases|standard|usual|typical|common|adults|hour|hours|minutes|days|weeks|months|outpatient|inpatient|newly|diagnosed|start|starting|isolated|normal|positive|known|flare|safe|causes|interpret|worry|parents|tell|bring|down|decide|slow|progression|step|now|pt|what)$/;
   var MODIFIER_Q = /^(pregnancy|pregnant|lactation|lactating|breastfeeding|renal|hepatic|liver|kidney|paediatric|pediatric|child|children|neonate|neonatal|elderly|geriatric|dialysis|ckd|impairment|failure|obese|obesity)$/;
   var INTRO_HEAD = /definition|glossary|introduction|epidemiolog|etiolog|pathogenesis|classification|history|overview/i;
-  var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri)/i;
+  // "how to slow progression of CKD" and "Rx?" are treatment questions too (bench 2026-10-02).
+  var TREAT_Q = /\b(treat|treatment|therapy|manage|management|dose|dosing|regimen|first.?line|drug|antibiotic|prescri|rx\b|slow|prevent|progression|approach|control)/i;
   // A treatment question prefers passages that talk treatment (scripts/bench-maik-lite-retrieval.mjs,
   // 2026-09-26: the anchored pool often holds the right chapter's intro and its management passage;
   // the intro used to win on BM25). GENERIC_Q gained the scaffolding words that were becoming
@@ -1167,6 +1168,14 @@
     return out;
   }
 
+  // The book's back-of-book INDEX ("Sepsis/septic shock anaerobic bacteremia and, 1377 ... 990, 991t")
+  // matches every disease word and won the first evidence slot for "how to manage septic shock"
+  // (bench 2026-10-02). A run of page references is an index row, never evidence.
+  function isIndexPage(t) {
+    // Bare 3-4 digit page numbers ("990, 991t, 2322-2323"), never a dose or a lab value (those carry a unit).
+    var s = String(t || ""), refs = (s.match(/\b\d{3,4}[tf]?\b(?!\s*(?:mg|mcg|µg|g|ml|l|mmol|meq|iu|units?|%|kg|cells|\/|mm|cm|mosm))/gi) || []).length;
+    return refs >= 6 && refs >= s.length / 120;
+  }
   function retrieveGrounding(packId, question, topic, pkg) {
     if (!ragEligible(packId) || !question) return Promise.resolve(null);
     var RAG = (typeof window !== "undefined") && window.SMD_MAIK_RAG;
@@ -1201,7 +1210,7 @@
       var cited = hits.map(function (h) {
         var p = bk.cite(h[1]);
         return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() };
-      });
+      }).filter(function (c) { return !isIndexPage(c.p.text); });
       var kept = rerankPassages(cited, {
         anchors: anchors, expansion: expansion, mods: A.mods,
         treat: TREAT_Q.test(question), topk: RAG.TOPK
@@ -1241,23 +1250,244 @@
   var PASSAGE_CHARS = 700;
   function regimenText(pkg, g) {
     var t = pkg && pkg.treatment, d = t && t["default"];
-    if (!d || !(d.steps || []).length) return "";
+    if (!d) return "";
     if (t.diseaseId && g && g.diseaseId && t.diseaseId !== g.diseaseId) return "";   // another disease's regimen
+    var steps = d.steps || [];
+    // Infective regimens (140 of them) carry no steps, only dosing lines: "how to manage septic shock"
+    // got NO regimen passage at all (bench 2026-10-02). The dosing line IS the regimen there.
     var doses = (d.dosing || []).map(function (x) {
-      return x && x.drug && x.dose ? x.drug + " " + x.dose + (x.route ? " " + x.route : "") + (x.freq ? ", " + x.freq : "") : "";
+      if (!x || !x.dose) return "";
+      var name = x.label || x.drug || "";
+      return (name && x.dose.toLowerCase().indexOf(String(x.drug || "").toLowerCase().split(" ")[0]) === -1 ? name + " " : "") + x.dose +
+        (x.route && x.dose.indexOf(x.route) === -1 ? " " + x.route : "") + (x.freq && !/as above/i.test(x.freq) ? ", " + x.freq : "");
     }).filter(Boolean);
-    return cleanPassage((d.regimenLabel ? d.regimenLabel + ". " : "") + d.steps.join(" ") + (doses.length ? " Doses: " + doses.join("; ") + "." : ""));
+    if (!steps.length && !doses.length) return "";
+    return cleanPassage((d.regimenLabel ? d.regimenLabel + ". " : (!steps.length && d.line ? (d.line === "empiric" ? "Empiric antimicrobials" : d.line) + ". " : "")) +
+      steps.join(" ") + (doses.length ? (steps.length ? " Doses: " : "") + doses.join("; ") + "." : ""));
   }
-  function curatedPassages(pkg) {
+  // A treatment question's curated notes lead with their MANAGEMENT sentences: the pearls start with
+  // definitions and pathophysiology, so the first 700 chars of "septic shock" never reached fluids or
+  // vasopressors although the notes carry them.
+  var MGMT_TXT = /\b(treat|therap|manag|fluid|crystalloid|vasopress|noradrenaline|norepinephrine|antibiot|antimicrob|dose|mg\b|give|start|first.?line|regimen|admit|refer|deliver|monitor|target|control|avoid|stop|prevent|resuscitat|oxygen|diuretic|insulin|magnesium|ors\b|rehydrat)/gi;
+  function mgmtFirst(items) {
+    // Sentence level: a single pearl can hold the definition AND the management.
+    var sents = [];
+    // No lookbehind: an older iOS WebView rejects the whole file at parse time (test/maik-lite-metatalk).
+    items.forEach(function (s) { String(s).replace(/([.;])\s+(?=[A-Z])/g, "$1\u0001").split("\u0001").forEach(function (x) { if (x.trim()) sents.push(x.trim()); }); });
+    return sents.map(function (s, i) { return { s: s, i: i, n: (s.match(MGMT_TXT) || []).length }; })
+      .sort(function (a, b) { return (b.n > 0) - (a.n > 0) || a.i - b.i; })   // stable: management sentences first, original order within
+      .map(function (x) { return x.s; });
+  }
+  /* CLINICAL PROTOCOLS AS LITE EVIDENCE (2026-10-02). kb/clinical-protocols/index.json (253 protocols,
+   * shipped in the app bundle, so offline) carries a one-paragraph management summary per protocol:
+   * "cultures, antimicrobials within 1 hour, 30 mL/kg crystalloid, noradrenaline to a MAP of 65...".
+   * The Knowledge Library showed them; MaiK never read them. A treatment question whose router disease
+   * matches a protocol now gets that summary as its first curated passage. Severe pre-eclampsia, septic
+   * shock and child dehydration all had protocols and zero management in Lite's evidence. */
+  var _protoP = null;
+  function loadProtocols() {
+    if (_protoP) return _protoP;
+    var w = (typeof window !== "undefined") ? window : {};
+    var pick = function (j) { return (j && (Array.isArray(j) ? j : j.protocols)) || []; };
+    if (w.SMD_MAIK_PROTOCOLS) { _protoList = pick(w.SMD_MAIK_PROTOCOLS); return (_protoP = Promise.resolve(_protoList)); }
+    if (typeof fetch !== "function") return Promise.resolve([]);
+    _protoP = fetch("/kb/clinical-protocols/index.json").then(function (r) { return r.ok ? r.json() : null; })
+      .then(pick).then(function (l) { _protoList = l; return l; }).catch(function () { _protoP = null; return []; });
+    return _protoP;
+  }
+  var _protoList = null;
+  /* MaiK Cloud asks the same question synchronously while it builds its package (2026-10-02): the
+   * protocol for a TREATMENT question, from the list warmed when the MaiK sheet opens. null when the
+   * list is not loaded yet or nothing matches; the cloud answer then simply goes without it. */
+  function protocolForQuestion(pkg) {
+    if (!_protoList) { loadProtocols(); return null; }
+    if (!TREAT_Q.test(String((pkg && pkg.question) || ""))) return null;
+    var p = protocolFor(pkg, _protoList);
+    return p ? { id: p.id, title: p.title, summary: String(p.summary || "").slice(0, 700) } : null;
+  }
+  var CHILD_W = /\b(child|children|kid|infant|baby|toddler|neonat|newborn|paediatric|pediatric|month[- ]old)/i;
+  // "a 50 year old man" is not a child: an age counts only under 18 years, a weight under 40 kg.
+  function isChildQ(q) {
+    if (CHILD_W.test(q)) return true;
+    var y = /\b(\d{1,3}) ?(?:yrs?|years?)[- ]?old\b/i.exec(q), kg = /\b(\d{1,3}(?:\.\d)?) ?kg\b/i.exec(q);
+    return !!((y && +y[1] < 18) || (kg && +kg[1] < 40));
+  }
+  /* Lab-value / shorthand vignettes the router cannot match ("k 6.8 with peaked T, what now", "SOB, BNP
+   * high, pedal edema, Rx?") name no disease. A tiny explicit map, adults only, conservative: a potassium
+   * of 6.0 or more (or peaked T waves with a potassium), or a raised BNP with a congestion sign. */
+  function labProtocolId(q) {
+    var k = /\b(?:k|k\+|potassium)\s*(?:of|is|was|=|:)?\s*(\d{1,2}(?:\.\d+)?)\b/i.exec(q);
+    if (k && (+k[1] >= 6 || /\bpeaked t\b/i.test(q)) && +k[1] < 10) return "hyperkalaemia";
+    if (/\b(?:nt[- ]?pro[- ]?)?bnp\b/i.test(q) && /\b(?:pedal|leg|ankle|peripheral)\s+(?:o?edema|oedema)\b|\borthopn\w*|\bpulmonary (?:o?edema|oedema)\b|\bcrepitations?\b|\bjvp\b/i.test(q)) return "acute-heart-failure";
+    return "";
+  }
+  function protocolFor(pkg, protos) {
+    if (!protos || !protos.length) return null;
+    var q = String((pkg && pkg.question) || "").toLowerCase();
+    var tm = (pkg && pkg.topicMatch) || {}, names = [routerTopic(pkg), tm.grounded, tm.topic]
+      .map(function (s) { return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim(); }).filter(Boolean);
+    var qOnly = !names.length;   // no router disease: the question's own words must name the protocol
+    var labId = !routerTopic(pkg) && !isChildQ(q) ? labProtocolId(q) : "";
+    if (labId) { for (var li = 0; li < protos.length; li++) if (protos[li] && protos[li].id === labId && protos[li].summary) return protos[li]; }
+    var child = isChildQ(q), best = null, bestS = 0;
+    protos.forEach(function (p) {
+      if (!p || !p.summary) return;
+      var keys = [p.title].concat(p.aliases || []).map(function (a) { return String(a || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim(); })
+        .filter(function (a) { return a.length >= 4; });
+      var s = 0;
+      keys.forEach(function (a) {
+        names.forEach(function (n) { if (n === a || (n.length >= 5 && a.indexOf(n) !== -1) || (a.length >= 6 && n.indexOf(a) !== -1)) s = Math.max(s, 3); });
+        // A question naming the protocol outright ("acute heart failure", "hyperkalaemia"): worth a
+        // full match when the router found nothing, and only for a specific term (6+ letters).
+        if (s < 3 && new RegExp("\\b" + a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(q)) s = Math.max(s, qOnly && a.length >= 6 ? 3 : 2);
+      });
+      if (!s) return;
+      var kids = /child|paediatric|pediatric|infant|neonat|newborn/i.test(String(p.population || "") + " " + p.title);
+      if (child) s += kids ? 1 : -1; else if (kids) s -= 1.5;
+      if (/india/i.test(String(p.basis || "") + " " + p.id)) s += 0.25;
+      if (s > bestS) { bestS = s; best = p; }
+    });
+    return bestS >= 2.5 ? best : null;
+  }
+  /* DRUG EVIDENCE (2026-10-02). A drug question with no router disease ("paracetamol dose for a 12 kg
+   * child", "tramadol on sertraline", "valproate in pregnancy") used to be answered from whatever the
+   * book's word match returned (endocarditis tables, antifungal chapters) although the app already
+   * holds the curated answer. Three curated sources, all bundled, none invented here:
+   *   StewardMD Drug Index   = data/dose-rules.json.gz (window.SMD_DOSECALC, the dose calculator's
+   *                            monograph rules: dose rows by population, renal and hepatic text) +
+   *                            the ward formulary (window.MEDDRUGS: adult dose and its warning note),
+   *   StewardMD Interactions = the deterministic rule engine (window.INTERACTIONS over INTERACTION_RULES),
+   *   Pregnancy / lactation  = the offline gold monograph (window.SMD_OFFLINE_CLINICAL), asked only for
+   *                            a pregnancy question because that bundle is large.
+   * Drug names come from window.SMD_DRUGLINK (the app's own lexicon). Everything is lazy and fails
+   * OPEN to no passage, so offline or with a script missing the old evidence is unchanged. */
+  var RENAL_Q = /\b(renal|kidney|ckd|egfr|gfr|crcl|creatinine|dialysis)\b/i;
+  var HEPATIC_Q = /\b(hepatic|liver|cirrho\w*|child-pugh)\b/i;
+  var PREG_Q = /\b(pregnan\w*|childbearing|child-bearing|contracept\w*|lactat\w*|breast-?feed\w*|trimester)/i;
+  var LACT_Q = /\b(lactat\w*|breast-?feed\w*)/i;
+  var DRUG_DOSE_Q = /\b(dos(?:e|es|ing|age)|how much|how to (?:give|dose|use)|max(?:imum)?|renal|kidney|ckd|egfr|crcl|hepatic|liver|safe|contraindicat\w*|can i (?:give|use|prescribe))\b|\bmg\b/i;
+  var SEV_RANK = { contraindicated: 0, major: 1, moderate: 2 };
+  function wordSet(s) { var o = {}; String(s).toLowerCase().split(/[^a-z]+/).forEach(function (w) { if (w.length > 3) o[w] = 1; }); return o; }
+  function overlap(a, b) {
+    var x = wordSet(a), y = wordSet(b), n = 0, kx = Object.keys(x);
+    kx.forEach(function (w) { if (y[w]) n++; });
+    return kx.length ? n / kx.length : 0;
+  }
+  function interactionPassage(names) {
+    var IX = window.INTERACTIONS;
+    if (!IX || !IX.checkInteractions) return null;
+    var res = IX.checkInteractions(names.map(function (n) { return { generic: n.g }; })), all = [];
+    ["critical", "major", "moderate"].forEach(function (b) { (res[b] || []).forEach(function (f) { all.push(f); }); });
+    // worst first; a pair/combination rule before a same-class duplicate note
+    all = all.map(function (f, i) { return { f: f, i: i, k: (SEV_RANK[f.severity] || 0) * 10 + (f.ruleType === "pair" || f.ruleType === "combination" ? 0 : 1) }; })
+      .sort(function (a, b) { return a.k - b.k || a.i - b.i; }).map(function (x) { return x.f; });
+    if (!all.length) return null;
+    var first = all[0], txt = first.severity.charAt(0).toUpperCase() + first.severity.slice(1) + ": " + first.effect +
+      (first.action ? " Action: " + first.action : "") + (first.monitoring ? " Monitor: " + first.monitoring : ""), seen = [first.effect];
+    all.slice(1).forEach(function (f) {
+      if (txt.length >= 560 || seen.some(function (e) { return overlap(f.effect, e) >= 0.4 || overlap(e, f.effect) >= 0.4; })) return;
+      seen.push(f.effect);
+      txt += " Also " + f.severity + ": " + f.effect + (f.action ? " Action: " + f.action : "");
+    });
+    var label = first.drugs.map(function (d) { return d.replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }).join(" + ");
+    return { heading: "StewardMD Interactions > " + label.slice(0, 70), text: cleanPassage(txt).slice(0, PASSAGE_CHARS), curated: true, drug: "interaction" };
+  }
+  function formularyEntry(g) {
+    var list = (window.MEDDRUGS && window.MEDDRUGS._list) || [], key = String(g).toLowerCase();
+    for (var i = 0; i < list.length; i++) {
+      if (String(list[i].generic || "").toLowerCase().replace(/\s*\(.*$/, "") === key) return list[i];
+    }
+    return null;
+  }
+  function indexPassage(names, q, find) {
+    var many = names.length > 1, child = isChildQ(q), pieces = [];
+    names.forEach(function (n) {
+      var dr = find ? find(n.g) : null, md = formularyEntry(n.g), parts = [];
+      if (!dr && !md) return;
+      if (many) {
+        // an interaction question: the one-line dose and the formulary's warning note, per drug
+        var dose = child ? "" : (md ? "Adult " + md.dose : (dr && dr.q) || "");
+        parts.push((dose ? dose + " " : "") + (md && md.notes ? md.notes : ""));
+      } else {
+        if (dr && RENAL_Q.test(q) && dr.ren && dr.ren.text) parts.push("Renal: " + dr.ren.text);
+        if (dr && HEPATIC_Q.test(q) && dr.hep && dr.hep.text) parts.push("Hepatic: " + dr.hep.text);
+        var rows = dr ? (dr.rows || []).filter(function (r) { return child ? /child|neonat|infant/.test(r.pop) : /adult|any/.test(r.pop); }).slice(0, 2) : [];
+        // an adult dose is never offered as a child dose
+        if (child && !rows.length) parts.push("No paediatric dose is on file in the StewardMD Drug Index.");
+        rows.forEach(function (r) { parts.push((r.ctx ? r.ctx + ": " : "") + r.d + (r.t && r.t !== r.d ? " (" + r.t + ")" : "") + "." + (r.note ? " " + r.note + "." : "")); });
+        // the monograph's renal text rides along on any adult dose question (gentamicin: "monitor serum levels")
+        if (dr && !child && !RENAL_Q.test(q) && dr.ren && dr.ren.text) parts.push("Renal: " + dr.ren.text);
+        if (!child && !rows.length && md) parts.push("Adult " + md.dose);
+        if (!child && md && md.notes) parts.push(md.notes);
+      }
+      var body = cleanPassage(parts.join(" "));
+      if (body) pieces.push(n.n + (!many && dr && dr.c ? " (" + dr.c + ")" : "") + ". " + body);
+    });
+    if (!pieces.length) return null;
+    var txt = many ? pieces.map(function (p) { return p.slice(0, Math.floor(PASSAGE_CHARS / names.length) - 1); }).join(" ") : pieces[0];
+    return { heading: "StewardMD Drug Index > " + names.map(function (n) { return n.n; }).join(", ").slice(0, 70), text: cleanPassage(txt).slice(0, PASSAGE_CHARS), curated: true, drug: "index" };
+  }
+  function pregnancyPassage(n, wantLact) {
+    var S = window.SMD_OFFLINE_CLINICAL;
+    if (!S || !S.structured) return Promise.resolve(null);
+    // The gold records name a salt separately ("Sodium Valproate" beside "Valproic Acid").
+    var cands = [n.g, "sodium " + n.g], i = 0;
+    function next() {
+      if (i >= cands.length) return Promise.resolve(null);
+      return S.structured(cands[i++]).then(function (r) {
+        var gd = r && r.found && r.data && r.data.gold;
+        if (typeof gd === "string") { try { gd = JSON.parse(gd); } catch (e) { gd = null; } }
+        if (!gd || !gd.preg) return next();
+        return { heading: "StewardMD Drug Index > " + String(gd.generic || n.n).slice(0, 50) + " > Pregnancy", drug: "pregnancy", curated: true,
+          text: cleanPassage(String(gd.generic || n.n) + " in pregnancy: " + gd.preg + (wantLact && gd.lact ? " Lactation: " + gd.lact : "")).slice(0, PASSAGE_CHARS) };
+      }, next);
+    }
+    return next();
+  }
+  /* -> Promise<passage[]>, never rejects. */
+  function drugEvidence(pkg) {
+    try {
+      var w = (typeof window !== "undefined") ? window : {}, q = String((pkg && pkg.question) || "");
+      if (!q || !w.SMD_DRUGLINK || !w.SMD_DRUGLINK.drugsIn) return Promise.resolve([]);
+      var names = w.SMD_DRUGLINK.drugsIn(q).slice(0, 3).map(function (d) { return { g: d.generic, n: d.name || d.generic }; });
+      var many = names.length > 1;
+      if (!names.length || (!many && !DRUG_DOSE_Q.test(q) && !PREG_Q.test(q))) return Promise.resolve([]);
+      var DC = w.SMD_DOSECALC, findP = (DC && DC.load && DC.find) ? DC.load().then(function () { return DC.find; }, function () { return null; }) : Promise.resolve(null);
+      var pregP = PREG_Q.test(q) ? pregnancyPassage(names[0], LACT_Q.test(q)).catch(function () { return null; }) : Promise.resolve(null);
+      return Promise.all([findP, pregP]).then(function (r) {
+        var out = [];
+        if (r[1]) out.push(r[1]);
+        var ix = many ? interactionPassage(names) : null;
+        if (ix) out.push(ix);
+        var idx = indexPassage(names, q, r[0]);
+        if (idx) out.push(idx);
+        return out;
+      }).catch(function () { return []; });
+    } catch (e) { return Promise.resolve([]); }
+  }
+  function curatedPassages(pkg, protos, drugPs) {
     var topic = routerTopic(pkg), gs = (pkg && pkg.grounding) || [];
-    if (!topic || !gs.length) return [];
+    if (!topic || !gs.length) {
+      // No router disease: a treatment question can still name a protocol ("acute heart failure Rx").
+      var q0 = String((pkg && pkg.question) || "");
+      var pq = (TREAT_Q.test(q0) || labProtocolId(q0)) ? protocolFor(pkg, protos) : null;
+      var pp = pq ? [{ heading: "StewardMD Protocol > " + String(pq.title).slice(0, 70), text: cleanPassage(pq.summary).slice(0, PASSAGE_CHARS), curated: true, protocol: pq.id }] : [];
+      // A drug question: its drug / interaction passages lead, the protocol (if any) follows.
+      return (drugPs || []).concat(pp);
+    }
     var t = topic.toLowerCase(), g = null;
     for (var i = 0; i < gs.length && !g; i++) { var nm = String((gs[i] && gs[i].name) || "").toLowerCase(); if (nm && (nm === t || nm.indexOf(t) !== -1 || t.indexOf(nm) !== -1)) g = gs[i]; }
     g = g || gs[0];
-    var body = cleanPassage(((g && g.knowledge) || []).map(function (k) { return (k && (k.text || k)) || ""; }).join(" "));
+    var isTx = TREAT_Q.test(String((pkg && pkg.question) || ""));
+    var items = ((g && g.knowledge) || []).map(function (k) { return (k && (k.text || k)) || ""; });
+    var body = cleanPassage((isTx ? mgmtFirst(items) : items).join(" "));
     if (body.length < 80) body = "";
     var head = "StewardMD Knowledge Base > " + String(g.name || topic).slice(0, 60), out = [];
-    var rx = TREAT_Q.test(String((pkg && pkg.question) || "")) ? regimenText(pkg, g) : "";
+    var rx = isTx ? regimenText(pkg, g) : "";
+    var pr = isTx ? protocolFor(pkg, protos) : null;
+    // The question names two interacting drugs: that interaction is what was asked, ahead of the disease notes.
+    (drugPs || []).forEach(function (d) { if (d.drug === "interaction") out.push(d); });
+    if (pr) out.push({ heading: "StewardMD Protocol > " + String(pr.title).slice(0, 70), text: cleanPassage(pr.summary).slice(0, PASSAGE_CHARS), curated: true, protocol: pr.id });
     if (rx.length >= 80) out.push({ heading: head + " > Management", text: rx.slice(0, PASSAGE_CHARS), curated: true });
     for (var at = 0; at < body.length && out.length < 2; at += PASSAGE_CHARS) out.push({ heading: head, text: body.slice(at, at + PASSAGE_CHARS), curated: true });
     return out;
@@ -1268,13 +1498,19 @@
       return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, PASSAGE_CHARS - headPart.length - 1));
     }).join("\n\n");
   }
-  function withCurated(g, pkg, packId) {
-    var cur = ragEligible(packId) ? curatedPassages(pkg) : [];
+  function withCurated(g, pkg, packId, protos, drugPs) {
+    var cur = ragEligible(packId) ? curatedPassages(pkg, protos, drugPs) : [];
     if (!cur.length) return g;
     var RAG = (g && g.RAG) || ((typeof window !== "undefined") && window.SMD_MAIK_RAG);
     if (!RAG) return g;
     var cap = RAG.TOPK || 3, book = (g && g.passages) || [];
-    var merged = book.length ? book.slice(0, 1).concat(cur.slice(0, 1), book.slice(1)).slice(0, cap) : cur.slice(0, Math.min(2, cap));
+    // A treatment question with a curated regimen keeps BOTH curated passages (regimen + management
+    // notes) and the best book passage: the book's second hit was usually an index page or an
+    // unrelated chapter, while the notes carry fluids / vasopressors / monitoring (bench 2026-10-02).
+    var txPair = cur.length > 1 && /> Management$|^StewardMD (?:Protocol|Drug Index|Interactions) >/.test(String(cur[0].heading || ""));
+    var merged = !book.length ? cur.slice(0, Math.min(2, cap))
+      : txPair ? book.slice(0, 1).concat(cur.slice(0, 2)).slice(0, cap)
+      : book.slice(0, 1).concat(cur.slice(0, 1), book.slice(1)).slice(0, cap);
     return { evidenceText: evidenceOf(merged), passages: merged, RAG: RAG, anchors: (g && g.anchors) || [], expansion: (g && g.expansion) || [], curated: true };
   }
 
@@ -1302,7 +1538,8 @@
       : (images.length || (opts && opts._ungrounded) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
       // the citation-bearing fields are stripped off the package further down.
-      : retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg).then(function (g) { return withCurated(g, pkg, packId); });
+      : Promise.all([retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg), loadProtocols(), drugEvidence(pkg)])
+          .then(function (r) { return withCurated(r[0], pkg, packId, r[1], r[2]); });
 
     return groundingP.then(function (grounding) {
     /** The claim-check options, shared by the live stream view and the final check. */
@@ -2909,7 +3146,7 @@
     // only way to assert WHICH passages were chosen (and that their citation metadata survived) is
     // to call the retriever itself. test/maik-rag-hybrid.test.mjs is the consumer.
     retrieveGrounding: retrieveGrounding, expansionTerms: expansionTerms, rerankPassages: rerankPassages,
-    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning, scrubMetaTalk: METATALK.scrub, curatedPassages: curatedPassages,
+    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning, scrubMetaTalk: METATALK.scrub, curatedPassages: curatedPassages, protocolFor: protocolFor, protocolForQuestion: protocolForQuestion, loadProtocols: loadProtocols, drugEvidence: drugEvidence, labProtocolId: labProtocolId, isIndexPage: isIndexPage, isChildQ: isChildQ, withCurated: withCurated,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: tracked(warm), isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release,

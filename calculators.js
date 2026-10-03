@@ -8169,7 +8169,7 @@
   }
 
   function inputHTML(c){
-    return c.inputs.map(function(f){
+    return c.inputs.map(function(f,fi,fa){
       var fid="mc_"+c.id+"_"+f.id;
       var unit=f.unit?'<span class="mc-unit">'+esc(f.unit)+'</span>':"";
       if(f.type==="check"){
@@ -8186,7 +8186,8 @@
       var step=f.step?' step="'+esc(f.step)+'"':(typ==="number"?' step="any"':"");
       var def=f.def!=null?' value="'+esc(f.def)+'"':"";
       var min=f.min!=null?' min="'+esc(f.min)+'"':"";
-      return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+unit+'</label><input class="mc-input" id="'+fid+'" type="'+typ+'"'+step+min+def+' placeholder=""></div>';
+      var hint=typ==="number"?' inputmode="decimal" enterkeyhint="'+(fi===fa.length-1?"done":"next")+'"':"";
+      return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+unit+'</label><input class="mc-input" id="'+fid+'" type="'+typ+'"'+step+min+hint+def+' placeholder=""></div>';
     }).join("");
   }
 

@@ -50,6 +50,8 @@
 
   function flagOn() { try { return !!(G.SMD_WARDSYNQ_FLAGS && G.SMD_WARDSYNQ_FLAGS.get("smd_wsq_push")); } catch (e) { return false; } }
   function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  // Privacy mode (privacy-mode.js): identifiers wrapped so they can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function api(p) { return (G.SMD_API_BASE || "") + p; }
   function HA() { return G.SMD_HOSPITAL_AUTH || null; }
 
@@ -115,7 +117,7 @@
       var n = s.notice || {}, pt = n.patient || {}, loc = n.location || {}, res = n.result || {};
       var where = [loc.ward && "Ward " + loc.ward, loc.bed && "bed " + loc.bed].filter(Boolean).join(", ") || "Not recorded";
       var result = [res.display || res.code, res.value, res.unit].filter(function (x) { return x != null && x !== ""; }).join(" ") || "Not recorded";
-      h += line("who", (pt.name || "Name not recorded") + (pt.mrn ? ", MRN " + pt.mrn : "")) +
+      h += '<p class="who">' + phi("name", pt.name, esc(pt.name || "Name not recorded")) + (pt.mrn ? ", MRN " + phi("id", pt.mrn) : "") + "</p>" +
         "<dl><dt>Where</dt><dd>" + esc(where) + "</dd>" +
         "<dt>Result</dt><dd>" + esc(result) + "</dd>" +
         "<dt>Reported</dt><dd>" + esc(when(n.reportedAt)) + "</dd>" +

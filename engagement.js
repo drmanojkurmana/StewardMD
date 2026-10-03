@@ -312,10 +312,16 @@
       var set = {}; (s.badges || []).forEach(function (b) { if (b.unlocked) set[b.id] = 1; });
       return { level: s.level || 0, discount: (s.tiers || []).filter(function (t) { return t.unlocked; }).length, badges: set, quest: !!(s.quest && s.quest.completedToday) };
     }
-    function push(title, body, url) { queue.push({ title: title, body: body, url: url }); drain(); }
+    function push(title, body, url, key) { queue.push({ title: title, body: body, url: url, key: key }); drain(); }
     function drain() {
       if (showing || !queue.length) return; showing = true;
       var n = queue.shift();
+      // In the foreground the one authored celebration carries the moment (own queue, own once-per-key
+      // guard, kill switch "smd_celebrate"). Hidden app or module absent: the old toast / local notice.
+      if (window.SMD_CELEBRATE && !document.hidden) {
+        try { window.SMD_CELEBRATE.show({ title: n.title, detail: n.body, key: n.key }); } catch (e) {}
+        showing = false; drain(); return;
+      }
       try { if (window.SMD_localNotify) window.SMD_localNotify(n.title, n.body, n.url || "/"); else if (window.SMD_toast) window.SMD_toast(n.title + " — " + n.body); } catch (e) {}
       setTimeout(function () { showing = false; drain(); }, 1400);
     }
@@ -323,10 +329,10 @@
       if (!s || typeof s.level !== "number") return;
       var n = toSnap(s);
       if (!snap) { snap = n; return; }                          // baseline; don't fire on first load
-      if (n.level > snap.level) push("Level up", "You reached level " + n.level + " · " + (s.levelName || ""));
-      Object.keys(n.badges).forEach(function (id) { if (!snap.badges[id]) { var b = (s.badges || []).find(function (x) { return x.id === id; }); if (b && b.name && b.name !== "???") push("Achievement unlocked", b.name); } });
-      if (n.discount > snap.discount) push("Reward unlocked", "You've earned a new subscription discount tier");
-      if (n.quest && !snap.quest) push("Daily quest complete", "Nice work — quest reward added");
+      if (n.level > snap.level) push("Level up", "You reached level " + n.level + " · " + (s.levelName || ""), null, "lvl:" + n.level);
+      Object.keys(n.badges).forEach(function (id) { if (!snap.badges[id]) { var b = (s.badges || []).find(function (x) { return x.id === id; }); if (b && b.name && b.name !== "???") push("Achievement unlocked", b.name, null, "badge:" + id); } });
+      if (n.discount > snap.discount) push("Reward unlocked", "You've earned a new subscription discount tier", null, "tier:" + n.discount);
+      if (n.quest && !snap.quest) push("Daily quest complete", "Quest reward added", null, "quest:" + new Date().toISOString().slice(0, 10));
       snap = n;
     }
     try { if (window.SMD_KU && SMD_KU.onChange) SMD_KU.onChange(check); } catch (e) {}

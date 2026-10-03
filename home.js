@@ -543,6 +543,8 @@
     hourglass: '<path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 4 5.5 5 9-1 3.5-5 4.5-5 9M17 3c0 4.5-4 5.5-5 9 1 3.5 5 4.5 5 9"/>',
     download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
     logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>',
+    // Privacy mode toggle (privacy-mode.js): an eye with a stroke through it.
+    eyeOff: '<path d="M10.6 5.1A10 10 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-2.4 3.2"/><path d="M6.6 6.6A17 17 0 0 0 2.5 12s3.5 7 9.5 7a9.6 9.6 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/><line x1="3" y1="3" x2="21" y2="21"/>',
     // App Lock — PIN keypad + biometric fingerprint (no emoji in security UI).
     keypad: '<circle cx="7" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="7" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"/><circle cx="17" cy="18" r="1.3" fill="currentColor" stroke="none"/>',
     fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>',
@@ -1893,6 +1895,10 @@
     } catch (e) { return ""; }
   }
   function escV4(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  // Privacy mode (privacy-mode.js): a patient name on the home cards is wrapped so it can be masked on screen.
+  function phiV4(kind, v) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, escV4(v)) : escV4(v); }
+  function recTitleV4(r) { var R = window.SMD_RECENT; return R && R.titleHtml ? R.titleHtml(r, "Case") : escV4(r.title || "Case"); }
+  function recSubV4(r) { var R = window.SMD_RECENT; return R && R.summaryHtml ? R.summaryHtml(r) : escV4(r.summary); }
   function greetLineV4() {
     var f = acctFirstV4(), nm = f ? ", Dr " + escV4(f) : "";
     var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();      // minutes since midnight
@@ -2548,7 +2554,7 @@
         if (crit.length) {
           critShown = true;
           var _cp = (window.ICU_STATE && window.ICU_STATE.patient) || {};
-          var pmeta = [_cp.bed ? "Bed " + escV4(_cp.bed) : "", _cp.name ? escV4(_cp.name) : ""].filter(Boolean).join(" · ");
+          var pmeta = [_cp.bed ? "Bed " + escV4(_cp.bed) : "", _cp.name ? phiV4("name", _cp.name) : ""].filter(Boolean).join(" · ");
           w.innerHTML = '<button class="rds-banner rds-banner--critical rnav-alert" data-act="icu" aria-label="Open ICU critical alerts">' + ric("warning") +
             '<span class="rds-banner-body"><span class="rds-banner-title">' + crit.length + ' critical alert' + (crit.length > 1 ? "s" : "") + '</span>' +
             '<span class="rds-banner-meta">Open ICU workspace' + (pmeta ? ' · ' + pmeta : "") + '</span></span>' + svg("chev") + '</button>';
@@ -2565,12 +2571,12 @@
           var meta = [pt.bed ? "Bed " + escV4(pt.bed) : "", pt.dx ? escV4(pt.dx) : ""].filter(Boolean).join(" · ");
           res.innerHTML = '<button class="rnav-resume rds-card" data-act="icu" aria-label="Resume patient">' +
             '<span class="rnav-resume-ic rds-icon">monitor_heart</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume ICU patient</span>' +
-            '<span class="rnav-resume-nm">' + escV4(pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + svg("chev") + '</button>';
+            '<span class="rnav-resume-nm">' + phiV4("name", pt.name) + '</span>' + (meta ? '<span class="rnav-resume-mt">' + meta + '</span>' : "") + '</span>' + svg("chev") + '</button>';
         } else if (recent.length) {
           var r0 = recent[0];
           res.innerHTML = '<button class="rnav-resume rds-card" data-rid="' + escV4(r0.caseId) + '" aria-label="Resume last case">' +
             '<span class="rnav-resume-ic rds-icon">history</span><span class="rnav-resume-bd"><span class="rnav-resume-lbl">Resume last case</span>' +
-            '<span class="rnav-resume-nm">' + escV4(r0.title || "Case") + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + escV4(r0.summary) + '</span>' : "") + '</span>' + svg("chev") + '</button>';
+            '<span class="rnav-resume-nm">' + recTitleV4(r0) + '</span>' + (r0.summary ? '<span class="rnav-resume-mt">' + recSubV4(r0) + '</span>' : "") + '</span>' + svg("chev") + '</button>';
           var rb = res.querySelector("[data-rid]");
           if (rb) rb.addEventListener("click", function () { try { SMD_RECENT.open(rb.getAttribute("data-rid")); } catch (e) {} });
         } else { res.innerHTML = ""; }
@@ -2590,8 +2596,8 @@
           var rows = list.filter(function (it) { var k = (it.title || "") + "|" + (it.summary || ""); if (k === _rprev) return false; _rprev = k; return true; }).slice(0, 5).map(function (it) {
             return '<button class="rds-list-row rnav-recent-row" data-rid="' + escV4(it.caseId) + '">' +
               '<span class="rds-list-lead rds-icon">' + (_rmap[it.feature] || "history") + '</span><span class="rds-list-main">' +
-              '<span class="rnav-recent-tt">' + escV4(it.title || "Case") + '</span>' +
-              (it.summary ? '<span class="rnav-recent-sub">' + escV4(it.summary) + '</span>' : "") + '</span>' +
+              '<span class="rnav-recent-tt">' + recTitleV4(it) + '</span>' +
+              (it.summary ? '<span class="rnav-recent-sub">' + recSubV4(it) + '</span>' : "") + '</span>' +
               (it.ts ? '<span class="rnav-recent-time" style="margin-left:8px;flex:0 0 auto;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);white-space:nowrap">' + _rago(it.ts) + '</span>' : "") +
               '<span class="rds-list-trail">' + svg("chev") + '</span></button>';
           }).join("");
@@ -2672,6 +2678,7 @@
         _sync(); _tb.addEventListener("click", function () { setTimeout(_sync, 40); }); }
     }
     try { mountKuChip(root); } catch (e) {}   // KU: header chip (both header variants)
+    try { mountPrivacyToggle(root); } catch (e) {}   // B2 privacy mode: one tap masks patient identifiers on screen
 
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
@@ -2839,13 +2846,27 @@
       + ".ku-note{color:var(--hmut,#64748b);font:500 11.5px var(--hfont,system-ui);margin-top:16px;line-height:1.45}";
     document.head.appendChild(s);
   }
+  function mountPrivacyToggle(root) {
+    var P = window.SMD_PRIVACY_MODE;
+    if (!P || !P.enabled()) return;   // kill switch: localStorage smd_privacy_mode_enabled = "0"
+    var hdr = root.querySelector(".rnav-head, .v3-header"); if (!hdr) return;
+    var rnav = hdr.classList.contains("rnav-head");
+    var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector('[data-act="theme"]') || hdr.querySelector("#v3BellBtn");
+    P.mountToggle(hdr, anchor, rnav ? ric("visibility_off") : svg("eyeOff"), rnav ? "rds-icon-btn" : "v3-ic");
+  }
   function mountKuChip(root) {
     if (!window.SMD_KU) return;
     var hdr = root.querySelector(".rnav-head, .v3-header"); if (!hdr || hdr.querySelector(".v3-ku")) return;
     kuInjectCSS();
     var chip = document.createElement("button");
     chip.className = "v3-ku"; chip.setAttribute("data-act", "ku"); chip.setAttribute("aria-label", "Knowledge Points");
-    function paint() { chip.innerHTML = '<span class="kudia">◆</span>' + kuFmt(SMD_KU.balance()); chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none"; }
+    var kuNum = document.createElement("span");   // persistent node so SMD_NUM can roll only the digits that changed
+    function paint() {
+      if (!kuNum.parentNode) { chip.innerHTML = '<span class="kudia">◆</span>'; chip.appendChild(kuNum); }
+      var t = kuFmt(SMD_KU.balance());
+      if (window.SMD_NUM) SMD_NUM.set(kuNum, t, { kind: "counter" }); else kuNum.textContent = t;
+      chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none";
+    }
     paint(); try { SMD_KU.onChange(paint); } catch (e) {}
     var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
     if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
@@ -3062,7 +3083,10 @@
       if (!h2) return;                                   // sheet closed while the request was in flight
       if (!data || typeof data !== "object") return fail();
       var openD = {}; Array.prototype.forEach.call(h2.querySelectorAll("details[data-k]"), function (d) { if (d.open) openD[d.getAttribute("data-k")] = 1; });
+      var prevBal = h2.querySelector(".aiu-wallet .bal"); prevBal = prevBal && (window.SMD_NUM && SMD_NUM.text(prevBal) != null ? SMD_NUM.text(prevBal) : prevBal.textContent);
       h2.innerHTML = renderAiUsage(data);
+      var nb = window.SMD_NUM && h2.querySelector(".aiu-wallet .bal");   // wallet balance rolls on a refresh; first load is static
+      if (nb) { var curBal = nb.textContent; if (prevBal && prevBal !== curBal) SMD_NUM.set(nb, prevBal, { kind: "counter" }); SMD_NUM.set(nb, curBal, { kind: "counter" }); }
       Array.prototype.forEach.call(h2.querySelectorAll("details[data-k]"), function (d) { if (openD[d.getAttribute("data-k")]) d.open = true; });
       var rf = document.getElementById("aiuRefresh"); if (rf) rf.onclick = function () { aiuLoad(true); };
       var buy = document.getElementById("aiuBuy");
@@ -5742,7 +5766,7 @@
   --mk-teal:#0f766e;--mk-tsoft:#d7f5ef;--mk-acc:#2563eb;--mk-glow:rgba(20,184,166,.35);
   --mk-userbub:linear-gradient(140deg,#15a89a,#0f766e);--mk-userink:#fff;--mk-usersh:0 4px 12px rgba(15,118,110,.28);
   --mk-send:linear-gradient(140deg,#19b8a8,#0e6e63);
-  position:fixed;left:0;right:0;bottom:0;z-index:999;height:86vh;max-height:86vh;
+  position:fixed;left:0;right:0;bottom:0;z-index:999;height:86vh;max-height:86vh;height:86dvh;max-height:86dvh;
   background:var(--mk-bg);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);
   display:flex;flex-direction:column;overflow:hidden;
   transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);
@@ -6301,6 +6325,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+    // Warm the clinical protocol list (one local file in the app bundle) so a treatment question's
+    // package can carry its protocol without waiting.
+    try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.loadProtocols) SMD_MAIK_LOCAL.loadProtocols(); } catch (e) {}
+    // Reopened while an answer is still generating (close() keeps it busy): show Stop, not Send.
+    if (_maikBusy) setTimeout(function () { try { maikSetSendMode(true); } catch (e) {} }, 0);
     try { var _lenBtn = sheet.querySelector("#maikLen"); if (_lenBtn) _lenBtn.addEventListener("click", function (ev) { ev.preventDefault(); maikCycleLen(); }); } catch (e) {}
     // Drug names in questions and answers: bold yellow, tap opens the monograph (drug-link.js).
     try { if (window.SMD_DRUGLINK && body) SMD_DRUGLINK.watch(body); } catch (e) {}
@@ -6397,12 +6426,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       maikBuddyBusy(!!busy);
       if (sheet._maikAtmosphere) sheet._maikAtmosphere.setBusy(!!busy);
       if (was && !busy) { try { maikDocCue("done"); } catch (e) {} try { maikHaptic("done"); } catch (e) {} }   // wave the answer in
-      if (!sendBtn) return;
-      sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
-      sendBtn.classList.toggle("stopping", !!busy);
-      sendBtn.innerHTML = busy ? MK.stop : MK.send;
-      sendBtn.title = busy ? "Stop" : "Send";
-      sendBtn.setAttribute("aria-label", busy ? "Stop generating" : "Send");
+      // The CURRENT sheet's button: a turn started before MaiK was closed and reopened finishes in the
+      // old closure, whose sendBtn is gone.
+      var sb = document.getElementById("maikSend") || sendBtn;
+      if (!sb) return;
+      sb.disabled = false;                      // never disabled: while busy it is the STOP control
+      sb.classList.toggle("stopping", !!busy);
+      sb.innerHTML = busy ? MK.stop : MK.send;
+      sb.title = busy ? "Stop" : "Send";
+      sb.setAttribute("aria-label", busy ? "Stop generating" : "Send");
       if (!busy) _maikStop = null;
     }
 
@@ -6440,9 +6472,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           _maikBodyHTML = body.innerHTML; maikFlushThread(_maikBodyHTML);
         }
       } catch (e) {}
-      // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
-      // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
-      _maikBusy = false;
+      // Unlock only when nothing is in flight. An answer still generating (its bubble carries data-mg)
+      // finishes into the restored thread, and the reopened sheet shows Stop: unlocking here let the
+      // clinician re-ask and pay for the SAME answer twice (duplicate BRCA1 answer, 2026-10-01). A truly
+      // stuck turn is still freed by its watchdog (90 s cloud / 180 s on-device).
+      var _inFlight = false; try { _inFlight = !!(body && body.querySelector("[data-mg]")); } catch (e) {}
+      if (!_inFlight) _maikBusy = false;
       document.removeEventListener("keydown", maikOnKey);
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
@@ -7745,6 +7780,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // The recent turns still travel (a colleague remembers the conversation), but a NEW question must
           // not be merged with the previous condition. The server prompt reads this flag.
           if (pkg && pkg.history && pkg.history.length && !_maikFollowUp) pkg.newTopic = true;
+          // The matching StewardMD clinical protocol for a TREATMENT question (2026-10-02): one ~150-token
+          // summary (sepsis bundle, MgSO4 regimen, ORS plan B) that the KB notes often lack. Same matcher
+          // MaiK Lite uses; null (nothing added) when nothing fits or the list is not loaded yet.
+          try { if (pkg && !pkg.protocol && window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.protocolForQuestion) { var _pr = SMD_MAIK_LOCAL.protocolForQuestion(Object.assign({}, pkg, { question: question })); if (_pr) pkg.protocol = _pr; } } catch (e) {}
           // ASSUME tier: partial KB match → answer the NEAREST topic (grounding already scoped to it)
           // under a STATED assumption; maikRenderAnswer prints the banner + refine chips. Same single
           // grounded call as the confident path — no extra tokens, we just stopped dead-ending.
@@ -7986,6 +8025,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 try { delete _maikCache[maikCacheKey(question, maikActiveCase())]; } catch (e) {}
                 if (_maikBusy) return;
                 _maikRegen = true;
+                // The new answer REPLACES this one (it used to stack a second bubble under the first).
+                try { var _old = host.closest(".maik-b") || host; _old.remove(); } catch (e) {}
                 runClinical(question, retrieval, depth, active, topicLabel);
               }));
               acts.appendChild(act("Edit", function () { try { qEl.value = userQ; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
@@ -8010,7 +8051,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             // same oversized request failed the same way. Retry ONCE without the conversation before
             // showing an error; the answer stands on its own question.
             call = call.then(function (r) {
-              if (!r || !r.error || _maikStopped || _streamStarted || !/server_error|timeout|5\d\d/i.test(String(r.error)) || !(pkg.history && pkg.history.length || pkg.earlier)) return r;
+              // Only a genuine server_error is worth one retry. A timeout or a provider outage means the
+              // provider was slow or down, not that the request was too big, and the first generation is
+              // usually already billed: retrying paid twice for nothing (cost audit 2026-10-02).
+              if (!r || r.error !== "server_error" || /timeout|unavailable|rate|auth/i.test(String(r.reason || "")) || _maikStopped || _streamStarted || !(pkg.history && pkg.history.length || pkg.earlier)) return r;
               try { delete pkg.history; delete pkg.earlier; pkg.newTopic = true; } catch (e) {}
               return window.SMD_AI.explainGrounded(pkg, { depth: depth, tier: _tier, regen: _regen }).catch(function () { return r; });
             });
@@ -8429,7 +8473,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           } else if (label === "Regenerate") {
             if (_maikBusy || !q) return;
             try { delete _maikCache[maikCacheKey(q, maikActiveCase())]; } catch (e) {}
-            _maikRegen = true; runClinical(q, q, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(q) : q);
+            _maikRegen = true;
+            try { (host.closest(".maik-b") || host).remove(); } catch (e) {}   // replace, never stack
+            runClinical(q, q, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(q) : q);
           } else if (label === "Edit") {
             try { qEl.value = q; qEl.focus(); qEl.setSelectionRange(q.length, q.length); } catch (e) {}
           } else if (label === "Save") {
@@ -8813,7 +8859,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     /* A tap should be FELT, not just seen.
      *
      * On iOS the missing haptic is most of why a web view reads as a website: every native control
-     * answers the finger. SMD_HAPTICS is iOS-only and already respects the user's own haptics setting,
+     * answers the finger. SMD_HAPTICS (iOS taptic; Android system haptics since 2026-10-03) already respects the user's own haptics setting,
      * so this is additive and silent everywhere else.
      *
      * Distinct feedback per meaning: a light tap for send, a firmer one for stop, because stopping is
@@ -9109,15 +9155,29 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var _lgid = know.getAttribute("data-lazy-gid");
         if (_lgid && _maikLazyCtx[_lgid] && window.SMD_AI && SMD_AI.explainGrounded) {
           var _ctx = _maikLazyCtx[_lgid]; know.textContent = "Loading detail…"; know.disabled = true;
-          SMD_AI.explainGrounded(_ctx.pkg, { tier: 2, depth: "detailed", priorLead: _ctx.lead }).then(function (r) {
-            var _dt = (r && r.text) ? maikStripRefine(String(r.text)).replace(/@@\s*MORE\s*@@/gi, "").trim() : "";
-            if (kdet && _dt) { kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(_dt) : maikEscH(_dt); }
-            else if (kdet) { kdet.textContent = "Couldn't load the detail. Ask again for the full answer."; }
-            if (kdet) { kdet.hidden = false; kdet.removeAttribute("hidden"); try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+          var _md = function (s) { return maikStripRefine(String(s || "")).replace(/@@\s*MORE\s*@@/gi, "").trim(); };
+          var _paint = function (s) {
+            if (!kdet || !s) return;
+            kdet.innerHTML = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(s) : maikEscH(s);
+            kdet.hidden = false; kdet.removeAttribute("hidden");
+          };
+          // STREAMED where the platform streams (owner 2026-10-01: "Couldn't load the detail. Ask again",
+          // then a second full answer). The whole-answer call waited for up to 6,000 tokens inside a 28 s
+          // server deadline; streamed, the detail appears as it is written. A failure keeps THIS button
+          // ("Try again") instead of sending the clinician to re-ask, which paid for the answer twice.
+          var _opts = { tier: 2, depth: "detailed", priorLead: _ctx.lead }, _gotAny = false;
+          var _call = (SMD_AI.explainGroundedStream && maikStreamOn())
+            ? SMD_AI.explainGroundedStream(_ctx.pkg, _opts, function (acc) { var s = _md(acc); if (s) { _gotAny = true; _paint(s); } })
+            : SMD_AI.explainGrounded(_ctx.pkg, _opts);
+          _call.then(function (r) {
+            var _dt = (r && r.text) ? _md(r.text) : "";
+            if (!_dt && !_gotAny) { know.textContent = "Couldn't load the detail. Try again"; know.disabled = false; return; }
+            if (_dt) _paint(_dt);
+            if (kdet) { try { kdet.scrollIntoView({ block: "nearest" }); } catch (e) {} }
             try { delete _maikLazyCtx[_lgid]; } catch (e) {}
             know.remove();
             try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}   // keep the detail in the saved conversation (audit T17)
-          }).catch(function () { know.textContent = "Know more →"; know.disabled = false; });
+          }).catch(function () { know.textContent = _gotAny ? "Know more →" : "Couldn't load the detail. Try again"; know.disabled = false; });
           return;
         }
         // A reopened conversation has no lazy context (it lived in memory), and its detail was never

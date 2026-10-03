@@ -31,6 +31,10 @@
     } catch (e) {}
   }
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  // The learner's own progress moment (smd-celebrate.js plays the success haptic itself); true when shown.
+  function celebrate(title, detail, key) {
+    try { return !!(window.SMD_CELEBRATE && window.SMD_CELEBRATE.show({ title: title, detail: detail, key: key })); } catch (e) { return false; }
+  }
 
   /* The shim must live on an https origin we control. It cannot be served locally: local means
    * capacitor://, which is the very origin YouTube rejects.
@@ -1760,7 +1764,11 @@
         if (sid) P().record(sid, false, { mode: "case", probe: "Key history topic missed: " + r.history.missedKey[k] });
       }
     }
-    haptic(r.verdict === "good" ? "success" : "warning");
+    // Celebrate a clean case once ever per case; a replay, or a case with a thin workup, gets the plain haptic.
+    var cid = state.caseDef && state.caseDef.id;
+    if (!(r.verdict === "good" && cid && celebrate("Case completed", (state.caseDef.title || state.caseDef.name || "CliniX case"), "clinix-case:" + cid))) {
+      haptic(r.verdict === "good" ? "success" : "warning");
+    }
     repaint();
   }
 
@@ -3449,7 +3457,7 @@
       P().completeLesson(state.skillId, state.diseaseId);
       P().savePosition({ diseaseId: state.diseaseId, chapterId: state.chapterId, skillId: state.skillId, turnIndex: 0 });
     }
-    haptic("success");
+    if (!celebrate("Lesson completed", (state.built && state.built.disease && state.built.disease.name) || "CliniX", "clinix-lesson:" + state.diseaseId + ":" + state.skillId)) haptic("success");
     back();
   }
 

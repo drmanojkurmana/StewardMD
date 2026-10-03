@@ -78,18 +78,24 @@ export async function setUserLimit(store, email, moduleId, limit) {
   return Object.keys(cur).length ? cur : null;
 }
 
-// ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Estimates; env-overridable.
+// ---- cost model (INR per 1k tokens; + flat per-image / per-audio-second). Env-overridable (AI_RATE_*).
+// Google's published prices, read 2026-10-02 on BOTH the Vertex AI page (cloud.google.com/vertex-ai/
+// generative-ai/pricing, the one that bills us: express mode = the GLOBAL endpoint, so the "Global"
+// column; non-global regions are +10% on 3.x) and the Gemini API page; the figures below are identical
+// on both. USD per 1M tokens, output includes thinking. Vertex bills 2.5-flash AUDIO input at $1.00
+// (not $0.30). Converted at Rs 96 per USD (rate that day 96.29):
+// INR per 1k = USD per 1M x 0.096. The old figures were 4-28x below these, so cost caps, the budget
+// breaker and the wallet all under-counted (owner chose to price at real cost, 2026-10-02).
+// `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
 export const MODEL_RATES = {
-  "gemini-2.5-flash":       { in: 0.007, out: 0.025 },
-  "gemini-2.5-flash-lite":  { in: 0.003, out: 0.012 },
-  "gemini-2.5-pro":         { in: 0.110, out: 0.880 },
-  // Gemini 3.x — ESTIMATED (Google's exact rates "to follow"); tune via AI_RATE_* env before relying on cost.
-  // `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
-  "gemini-3.5-flash":       { in: 0.008, out: 0.028, est: true },
-  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012, est: true },
-  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012, est: true },
+  "gemini-2.5-flash":       { in: 0.0288, out: 0.240 },   // $0.30 / $2.50
+  "gemini-2.5-flash-lite":  { in: 0.0096, out: 0.0384 },  // $0.10 / $0.40
+  "gemini-2.5-pro":         { in: 0.120, out: 0.960 },    // $1.25 / $10.00 (prompts up to 200k)
+  "gemini-3.5-flash":       { in: 0.144, out: 0.864 },    // $1.50 / $9.00
+  "gemini-3.5-flash-lite":  { in: 0.0288, out: 0.240 },   // $0.30 / $2.50
+  "gemini-3.1-flash-lite":  { in: 0.024, out: 0.144 },    // $0.25 / $1.50
 };
-const DEFAULT_RATE = { in: 0.007, out: 0.025 };
+const DEFAULT_RATE = { in: 0.0288, out: 0.240 };            // = gemini-2.5-flash
 export function modelRate(env, model) {
   const up = "AI_RATE_" + String(model || "").toUpperCase().replace(/[^A-Z0-9]/g, "_");
   const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
@@ -113,7 +119,10 @@ export function estCostInr(env, model, inTok, outTok, extras) {
   const r = modelRate(env, model);
   let cost = (Math.max(0, inTok | 0) / 1000) * r.in + (Math.max(0, outTok | 0) / 1000) * r.out;
   const perImg = (env && Number(env.AI_COST_PER_IMAGE_INR)) || 0.35;
-  const perAudioSec = (env && Number(env.AI_COST_PER_AUDIO_SEC_INR)) || 0.02;
+  // Vertex gemini-2.5-flash: 32 audio tokens per second (ai.google.dev/gemini-api/docs/audio) at $1.00
+  // per 1M, plus ~3 transcript tokens per second at $2.50 per 1M = ~$0.00004/s = Rs 0.004/s at Rs 96.
+  // Was Rs 0.02/s (5x high).
+  const perAudioSec = (env && Number(env.AI_COST_PER_AUDIO_SEC_INR)) || 0.004;
   if (extras && extras.images) cost += (extras.images | 0) * perImg;
   if (extras && extras.audioSeconds) cost += Math.max(0, extras.audioSeconds) * perAudioSec;
   return Math.round(cost * 10000) / 10000;

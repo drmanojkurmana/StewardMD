@@ -80,6 +80,46 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+/* Codex F2/F3: WHAT A DOSE'S CHECKS WERE DONE AGAINST. Verification, dispensing and the bedside scan are each a check of
+ * one version of the order; an administration that keeps only the order id cannot say which dose and route those checks
+ * covered once the order is amended, and a scan done against one version could be completed against the next. These are
+ * the order fields whose change makes the earlier checks void: a different drug, dose, unit, route or frequency is a
+ * different prescription. Anything else on the order (a course length, a stop time, the safety-at-order note) is not. */
+const MATERIAL_ORDER_FIELDS = Object.freeze(["drug", "drugCode", "dose", "route", "frequency"]);
+
+/** PURE. The order as a dose's checks saw it. Kept on the administration record, so it stays readable after the order changes. */
+function orderSnapshot(order) {
+  const d = order && order.dose;
+  return {
+    version: order && order.version != null ? order.version : null,
+    drug: (order && order.drug) || null,
+    drugCode: (order && order.drugCode) || null,
+    dose: d && d.value != null ? { value: Number(d.value), unit: d.unit == null ? null : String(d.unit) } : null,
+    route: (order && order.route) || null,
+    frequency: (order && order.frequency) || null,
+  };
+}
+
+/**
+ * PURE. Which clinically material fields differ between the order a dose was checked against and the order now.
+ * A record with no snapshot (written before snapshots were kept) answers ["orderSnapshot"]: what its checks covered
+ * cannot be shown, so it is treated as changed rather than as unchanged.
+ */
+function materialOrderChanges(snapshot, order) {
+  if (!snapshot || typeof snapshot !== "object") return ["orderSnapshot"];
+  const now = orderSnapshot(order);
+  const word = (v) => (v == null ? "" : String(v).trim().toLowerCase());
+  return MATERIAL_ORDER_FIELDS.filter((f) => f === "dose"
+    ? JSON.stringify(snapshot.dose || null) !== JSON.stringify(now.dose)
+    : word(snapshot[f]) !== word(now[f]));
+}
+
+function orderChangedReasons(record, order, changes) {
+  const from = record && record.orderSnapshot && record.orderSnapshot.version;
+  return [{ code: "ORDER_CHANGED_SINCE_CHECKS", changed: changes,
+    message: `The order changed (${changes.join(", ")}) after this dose was verified, dispensed or scanned${from != null ? ` under version ${from}` : ""}. Verify it again before giving.` }];
+}
+
 function normaliseBarcode(value) {
   return typeof value === "string" ? value.trim().toUpperCase() : null;
 }
@@ -191,9 +231,36 @@ class MedicationAdministrationRecord {
       drug: order.drug || null,
       drugCode: order.drugCode || null,
       status: STATES.ORDERED,
+      // Codex F2/F3: the order version every check on this dose is bound to, and what that version said.
+      orderVersion: order.version != null ? order.version : null,
+      orderSnapshot: orderSnapshot(order),
     });
     record.audit = [{ at: nowIso(), from: null, to: STATES.ORDERED, actorId: order.prescriberId || null, reason: null }];
     return record;
+  }
+
+  /**
+   * Codex F3: the order was amended in a clinically material way since this dose's checks. The checks are void: the
+   * record goes back to ORDERED, bound to the order as it is now, with the scan and its findings cleared, so it must be
+   * verified, dispensed and scanned again. Not a transition in ALLOWED on purpose: it is never a step a person chooses,
+   * only what an amendment does to the checks. A terminal record is history and is never touched. Returns the changes
+   * (empty when nothing material changed, and nothing is done).
+   */
+  invalidateForAmendedOrder(record, order, actorId) {
+    if (!record || TERMINAL.includes(record.status)) return [];
+    const changes = materialOrderChanges(record.orderSnapshot, order);
+    if (!changes.length) return [];
+    const from = record.status;
+    const was = record.orderSnapshot && record.orderSnapshot.version;
+    for (const f of ["scannedPatientBarcode", "scannedDrugBarcode", "dose", "route"]) record[f] = null;
+    delete record.safetyWarnings; delete record.safetyNotRun;
+    record.status = STATES.ORDERED;
+    record.orderVersion = order.version != null ? order.version : null;
+    record.orderSnapshot = orderSnapshot(order);
+    record.audit = record.audit || [];
+    record.audit.push({ at: nowIso(), from, to: STATES.ORDERED, actorId: actorId || null,
+      reason: `order amended (version ${was == null ? "unknown" : was} to ${record.orderVersion == null ? "unknown" : record.orderVersion}: ${changes.join(", ")}); verification, dispensing and the bedside scan must be done again` });
+    return changes;
   }
 
   isHighAlert(order) {
@@ -256,6 +323,14 @@ class MedicationAdministrationRecord {
       throw new MedicationSafetyError("scan() needs order, patient and nurseId", [{ code: "MISSING_INPUT" }]);
     }
 
+    // Codex F3: a dose verified and dispensed under one order is not scanned against another.
+    const changed = materialOrderChanges(record.orderSnapshot, order);
+    if (changed.length) {
+      const reasons = orderChangedReasons(record, order, changed);
+      await this._block(record, reasons, nurseId);
+      throw new MedicationSafetyError("order changed since this dose was checked", reasons);
+    }
+
     const rights = checkFiveRights(order, scan, patient, { windowMinutes: this.windowMinutes, allowLate: this.allowLate });
     if (!rights.passed) {
       const reasons = rights.failed.map((right) => ({
@@ -278,7 +353,14 @@ class MedicationAdministrationRecord {
       patch: {
         scannedPatientBarcode: scan.patientBarcode,
         scannedDrugBarcode: scan.drugBarcode,
+        // Codex F2: the dose and route that passed the five rights, kept on the record rather than dropped. They are
+        // what is given; the order may change later, this record does not.
+        dose: { value: Number(scan.dose.value), unit: String(scan.dose.unit) },
+        route: String(scan.route),
+        orderVersion: order.version != null ? order.version : record.orderVersion ?? null,
         safetyWarnings: verdict.warnings || [],
+        // Codex F5: the clinical check did not run and a named clinician continued with a reason.
+        ...(verdict.notRun ? { safetyNotRun: verdict.notRun } : {}),
       },
     });
   }
@@ -290,6 +372,16 @@ class MedicationAdministrationRecord {
   async administer(record, input) {
     const { order, nurseId, witnessId } = input || {};
     if (!nurseId) throw new MedicationSafetyError("administer() needs nurseId", [{ code: "NO_ACTOR" }]);
+    /* Codex F3: the order the dose is given against is required, and it must still be the order the dose was verified,
+     * dispensed and scanned under. Whatever version a caller says it saw, a clinically material amendment since the
+     * checks refuses here and the dose has to be checked again. */
+    if (!order) throw new MedicationSafetyError("administer() needs the order", [{ code: "ORDER_REQUIRED" }]);
+    const changed = materialOrderChanges(record.orderSnapshot, order);
+    if (changed.length) {
+      const reasons = orderChangedReasons(record, order, changed);
+      await this._block(record, reasons, nurseId);
+      throw new MedicationSafetyError("order changed since this dose was checked", reasons);
+    }
     if (order && this.isHighAlert(order)) {
       if (!witnessId) {
         const reasons = [{ code: "WITNESS_REQUIRED", message: "high-alert medication requires a second nurse witness" }];
@@ -304,7 +396,9 @@ class MedicationAdministrationRecord {
     }
     return this.transition(record, STATES.ADMINISTERED, {
       actorId: nurseId,
-      patch: { administeredBy: nurseId, witnessedBy: witnessId || null, administeredAt: nowIso() },
+      patch: { administeredBy: nurseId, witnessedBy: witnessId || null, administeredAt: nowIso(),
+        // Codex F2: the version in force when it was given. Materially the snapshot's (checked above); fixed from here on.
+        orderVersion: order.version != null ? order.version : record.orderVersion ?? null },
     });
   }
 
@@ -340,4 +434,7 @@ export {
   MedicationAdministrationRecord,
   checkFiveRights,
   denyWithoutSafetyEngine,
+  MATERIAL_ORDER_FIELDS,
+  orderSnapshot,
+  materialOrderChanges,
 };

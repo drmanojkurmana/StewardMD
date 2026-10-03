@@ -644,8 +644,13 @@
       rafId = requestAnimationFrame(loop);
     }
 
+    // Reduced motion and Low Power Mode / Battery Saver (power-state.js) hold one still frame.
+    function still() {
+      try { if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return true; } catch (e) {}
+      return !!(window.SMD_POWER && window.SMD_POWER.low);
+    }
     function start() {
-      if (running || destroyed) return;
+      if (running || destroyed || still()) return;
       running = true;
       rafId = requestAnimationFrame(loop);
     }
@@ -671,10 +676,11 @@
     }
 
     var onVis = function () {
-      if (document.hidden) stop();
+      if (document.hidden || still()) stop();
       else start();
     };
     document.addEventListener('visibilitychange', onVis);
+    window.addEventListener('smd-power', onVis);
 
     var inst = {
       canvas: canvas,
@@ -691,6 +697,7 @@
         stop();
         if (io) { io.disconnect(); io = null; }
         document.removeEventListener('visibilitychange', onVis);
+        window.removeEventListener('smd-power', onVis);
         activeMounts.delete(inst);
       }
     };

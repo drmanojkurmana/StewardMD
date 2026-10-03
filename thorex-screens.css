@@ -328,7 +328,7 @@
 #thorexRoot .tx-conf-track { fill: none; stroke: var(--txa-line); stroke-width: 8; }
 #thorexRoot .tx-conf-arc {
   fill: none; stroke: var(--tx-green); stroke-width: 8; stroke-linecap: round;
-  transition: stroke-dashoffset .9s var(--tx-ease);
+  transition: stroke-dashoffset var(--smd-dur-moment, 700ms) var(--tx-ease);
 }
 #thorexRoot .tx-conf-center {
   position: absolute; inset: 0;
@@ -352,7 +352,7 @@
 #thorexRoot .tx-stage.is-active .tx-stage-name .material-symbols-rounded { animation: txSpin 1s linear infinite; }
 #thorexRoot .tx-stage-val { color: var(--txa-muted); }
 #thorexRoot .tx-stage-track { height: 5px; border-radius: 999px; background: var(--txa-line); overflow: hidden; }
-#thorexRoot .tx-stage-fill { width: 0; height: 100%; border-radius: 999px; background: var(--tx-green); transition: width .6s var(--tx-ease); }
+#thorexRoot .tx-stage-fill { width: 0; height: 100%; border-radius: 999px; background: var(--tx-green); transition: width var(--smd-dur-sheet, 320ms) var(--tx-ease); }
 
 /* Encrypted / ephemeral footer (image never persisted server-side beyond the analysis window) */
 #thorexRoot .tx-proc-foot {
@@ -444,7 +444,7 @@
 /* Confidence — BAND only, never a raw probability (§6 Safety). Cloned from kx-conf/kx-conf-bar. */
 #thorexRoot .tx-conf { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 #thorexRoot .tx-conf-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--tx-surf-2); overflow: hidden; }
-#thorexRoot .tx-conf-fill { width: var(--tx-conf, 0%); height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--tx-primary), var(--tx-green)); transition: width .6s var(--tx-ease); }
+#thorexRoot .tx-conf-fill { width: var(--tx-conf, 0%); height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--tx-primary), var(--tx-green)); transition: width var(--smd-dur-sheet, 320ms) var(--tx-ease); }
 #thorexRoot .tx-panel--learning .tx-conf-fill { background: linear-gradient(90deg, var(--tx-learning), #A78BFA); }
 #thorexRoot .tx-conf-val { font: 700 13px var(--tx-mono); color: var(--tx-primary); }
 #thorexRoot .tx-panel--learning .tx-conf-val { color: var(--tx-learning); }

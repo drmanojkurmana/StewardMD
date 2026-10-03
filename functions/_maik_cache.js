@@ -55,13 +55,14 @@ function normQ(q) {
 }
 
 /* A cached answer is only safe to serve to ANOTHER doctor when nothing in the prompt belonged to the
- * asker. history / earlier are their own conversation, doctor is their About-me line: any of them
- * shapes the answer, and none of them is in the key. */
+ * asker. history / earlier are their own conversation and are never in the key, so they still refuse.
+ * The About-me line (pkg.doctor) is now IN the key (answerCacheKey o.doctor), so an answer is reused
+ * only for the identical About-me text: refusing it disabled the cache for every doctor who filled
+ * About me in (cost audit 2026-10-02). */
 export function cacheEligibleCtx(pkg) {
   pkg = pkg || {};
   if (Array.isArray(pkg.history) && pkg.history.length) return false;
   if (Array.isArray(pkg.earlier) && pkg.earlier.length) return false;
-  if (pkg.doctor && String(pkg.doctor).trim()) return false;
   return true;
 }
 /* What evidence the answer was written from: grounding disease ids + provenance, retrieved chunk ids,
@@ -96,7 +97,8 @@ export async function answerCacheKey(sha256hex, env, o) {
    * before this still hit rather than being orphaned by a format change. */
   const tier = Number(o.tier) || 0;
   const parts = [ver, q, String(o.depth || "std"), String(o.audience || "any"), String(o.model || "def")]
-    .concat(tier ? ["t" + tier] : []).concat(o.kb ? [String(o.kb)] : []).join("|");
+    .concat(tier ? ["t" + tier] : []).concat(o.kb ? [String(o.kb)] : [])
+    .concat(o.doctor && String(o.doctor).trim() ? ["dr:" + normQ(o.doctor)] : []).join("|");
   return PREFIX + (await sha256hex(parts));
 }
 
