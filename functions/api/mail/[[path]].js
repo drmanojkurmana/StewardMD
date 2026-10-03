@@ -2,7 +2,8 @@
  *
  * The app's Mail screen (mail.js) reads, files and sends mail for ONE configured mailbox through
  * Mailflare's API-key surface (/api/v1/*). The key never reaches the device: it lives in the Pages
- * secret MAILFLARE_API_KEY and every request here is gated by ownerOK (owner Google login).
+ * secret MAILFLARE_API_KEY and every request here is gated by mailAllowed (ownerOK plus the three
+ * MAIL_ACCOUNTS below).
  *
  * Config (Pages env / secrets):
  *   MAILFLARE_URL       e.g. https://mail.maiknowledge.com  (no trailing path)
@@ -22,9 +23,23 @@
  * other mailboxes still only ever exposes this one. Mail content is never logged.
  */
 import { ownerOK } from "../../_adminauth.js";
+import { verifiedClaimsFor, verifiedEmailOf } from "../../_fbauth.js";
 import { fetchWithTimeout } from "../../_fetch.js";
 
 const DEFAULT_MAILBOX = "hello@maiknowledge.com";
+/* The only accounts that may use Mail (owner decision 2026-10-03). Narrower than ownerOK on purpose:
+ * production's OWNER_EMAILS also names stewardmd.in@gmail.com, a customer account, which must never
+ * see this inbox. mail.js OWNERS mirrors this list; this one is the gate. */
+const MAIL_ACCOUNTS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
+
+/** ownerOK, then a signed-in account must also be one of MAIL_ACCOUNTS. A request with no verified
+ * account passed ownerOK on the admin token (server operations, no person behind it). */
+async function mailAllowed(request, env) {
+  if (!(await ownerOK(request, env))) return false;
+  const claims = await verifiedClaimsFor(request, env);
+  const email = claims ? verifiedEmailOf(claims) : null;
+  return email ? MAIL_ACCOUNTS.includes(email) : true;
+}
 const ID_RE = /^[A-Za-z0-9_-]{1,120}$/;
 const FOLDERS = {
   inbox: { status: "received", direction: "inbound" },
@@ -131,7 +146,7 @@ async function ownMessage(cfg, mbId, id) {
 export async function onRequest(context) {
   const { request, env } = context;
   if (env && env.MAIL_ON === "0") return json({ error: "not-found" }, 404);
-  if (!(await ownerOK(request, env))) return json({ error: "forbidden" }, 403);
+  if (!(await mailAllowed(request, env))) return json({ error: "forbidden" }, 403);
 
   const cfg = mailConfig(env);
   const seg = [].concat((context.params && context.params.path) || []).map(String);

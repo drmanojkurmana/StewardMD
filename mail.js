@@ -16,8 +16,8 @@
   "use strict";
   var G = root, D = root.document;
   var BASE = "/api/mail";
-  // Mirrors OWNER_EMAILS_DEFAULT in functions/_adminauth.js. This only hides the entry point; the
-  // server's ownerOK is the real gate.
+  // Mirrors MAIL_ACCOUNTS in functions/api/mail/[[path]].js (owner decision 2026-10-03: these three
+  // only, never stewardmd.in@gmail.com). This only hides the entry point; the server is the gate.
   var OWNERS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
   var FOLDERS = [["inbox", "Inbox"], ["sent", "Sent"], ["archive", "Archive"], ["spam", "Spam"], ["trash", "Trash"]];
   var POLL_MS = 20000;

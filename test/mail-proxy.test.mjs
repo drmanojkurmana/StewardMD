@@ -13,6 +13,8 @@ const CLAIMS = {
   "tok-owner": { sub: "u-owner", email: "drmanojkurmana@gmail.com", email_verified: true },
   "tok-doc": { sub: "u-doc", email: "doc@example.com", email_verified: true },
   "tok-unverified-owner": { sub: "u-x", email: "drmanojkurmana@gmail.com", email_verified: false },
+  "tok-college": { sub: "u-college", email: "stewardmd.in@gmail.com", email_verified: true },
+  "tok-kd": { sub: "u-kd", email: "KDiwakar45@gmail.com", email_verified: true },
 };
 const realAuth = await import("../functions/_fbauth.js");
 mock.module("../functions/_fbauth.js", { namedExports: { ...realAuth, verifiedClaimsFor: async (req) => CLAIMS[(req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "")] || null } });
@@ -74,6 +76,22 @@ test("only verified owners get in; nobody else reaches the upstream", async () =
   assert.equal(calls.length, 0);
   const ok = await call("GET", "list");
   assert.equal(ok.status, 200);
+});
+
+test("Mail is for three accounts only: a platform owner added through OWNER_EMAILS is still refused", async () => {
+  installUpstream();
+  // Production's wrangler.toml lists stewardmd.in@gmail.com in OWNER_EMAILS, so ownerOK lets it in.
+  const env = { ...ENV, OWNER_EMAILS: "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com,stewardmd.in@gmail.com" };
+  for (const path of ["status", "list", "message/msg_1"]) {
+    const r = await call("GET", path, { token: "tok-college", env });
+    assert.equal(r.status, 403, path);
+  }
+  const sent = await call("POST", "send", { token: "tok-college", env, body: { to: "x@example.com", subject: "s", text: "t" } });
+  assert.equal(sent.status, 403);
+  assert.equal(calls.length, 0, "the college account never reaches Mailflare");
+  // The three Mail accounts still get in, case-insensitively.
+  assert.equal((await call("GET", "list", { token: "tok-owner", env })).status, 200);
+  assert.equal((await call("GET", "list", { token: "tok-kd", env })).status, 200);
 });
 
 test("MAIL_ON=0 hides the route, even from owners", async () => {
