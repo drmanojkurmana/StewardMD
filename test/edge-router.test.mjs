@@ -275,3 +275,14 @@ test("renderer gone before the first request (A0.5): the FIRST model-routed requ
     delete globalThis.Capacitor; globalThis.SMD_EDGE = prev;
   }
 });
+
+test("rules(): Layer 0 alone, synchronous, for MaiK to call before follow-up resolution", () => {
+  store.smd_edge = "1";
+  const r = E.rules("antibiogram kholo");
+  assert.equal(r && r.kind, "tool"); assert.equal(r.id, "antibiogram"); assert.equal(r.source, "rules");
+  assert.equal(E.rules("icd code for type 2 diabetes").kind, "icd");
+  assert.equal(E.rules("show me the resistance patterns antibiogram"), null, "not exact: the model path, not rules()");
+  assert.equal(E.rules("don't open antibiogram"), null, "negation");
+  store.smd_edge = "0"; assert.equal(E.rules("antibiogram kholo"), null, "flag off");
+  store.smd_edge = "1";
+});

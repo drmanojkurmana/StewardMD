@@ -65,7 +65,7 @@ try {
   const passed = () => ev(`var s=SMD_EDGE.stats(); return s.none + s.passed;`);
 
   // ── flag OFF: nothing changes ──
-  await ev(`localStorage.removeItem("smd_edge"); return 1;`);
+  await ev(`localStorage.setItem("smd_edge","0"); return 1;`);
   await openMaik();
   await ev(`window.__pick = "open: Antibiogram"; return 1;`);
   await send("show me the resistance patterns antibiogram", 1500);
@@ -136,6 +136,15 @@ try {
   await send("show me the resistance patterns antibiogram");
   await ev(`[].slice.call(document.querySelectorAll('#maikBody [data-maik-tool="antibiogram"]')).pop().click(); return 1;`); await sleep(900);
   ok(await ev(`var s=document.getElementById("maikSheet"); return !s || !s.classList.contains("on") || getComputedStyle(s).display==="none" || s.offsetParent===null;`) === true, "tapping the chip closes MaiK and hands off to the module");
+
+  // A live topic must not swallow an exact tool name (owner, 2026-10-04: "antibiogram kholo" was
+  // read as a follow-up on the earlier INR question and searched).
+  await ev(`localStorage.setItem("smd_edge","1"); return 1;`);
+  await openMaik();
+  const e0 = await countEdge();
+  await ev(`__MAIK_TEST.setTopic({ topic: "warfarin INR target", ts: Date.now() }); var q=document.getElementById("maikQ"); q.value="antibiogram kholo"; q.dispatchEvent(new Event("input",{bubbles:true})); document.getElementById("maikSend").click(); return 1;`);
+  await sleep(1200);
+  ok(await countEdge() > e0 && /data-maik-tool="antibiogram"/.test(String(await lastAi())), "with a topic live, an exact tool name still gets the Edge card");
 
   await ev(`localStorage.removeItem("smd_edge"); return 1;`);
   console.log(fails === 0 ? "\nALL GREEN — Edge routes typed requests on-device, and always lets the doctor continue" : `\n${fails} FAILED`);
