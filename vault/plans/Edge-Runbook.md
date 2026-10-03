@@ -1,6 +1,6 @@
 ---
 tags: [plan, edge, runbook]
-status: round 2 done (2026-10-03); Pixel 22:30 round: renderer-gone edge8 PASS, Needle p95 797 ms / +123 MB PASS, FunctionGemma p95 395 ms PASS but +575 MB MISS, 30-min unplugged session no SEVERE, battery -8 points, Needle 22/150 timeouts under MaiK load MISS; iPhone back-off during real MaiK generation, real Serious and availMB with MaiK Lite pending
+status: round 2 done (2026-10-03); Pixel 22:30 round: renderer-gone edge8 PASS, Needle p95 797 ms / +123 MB PASS, FunctionGemma p95 395 ms PASS but +575 MB MISS, 30-min unplugged session no SEVERE, battery -8 points, Needle 22/150 timeouts under MaiK load MISS; iPhone back-off during real MaiK Lite generation PASS, availMB with MaiK Lite 5,349 min PASS; real iPhone Serious still open
 ---
 # StewardMD Edge: owner runbook (sprint days 2 to 5)
 
@@ -459,8 +459,8 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   was not bypassed; the owner unlocked it at 22:33 and the round ran then (renderer-gone re-test above,
   A0.2/A0.3 re-runs with peak PSS, A0.6 Pixel below). The MaiK Lite `nThreadsBatch` re-measure with the book
   linked (optional) was NOT run: its condition was that everything else pass, and FunctionGemma memory and
-  the mixed-session Needle latency missed. Still PENDING on the iPhone: the MaiK Lite readings (real
-  MaiK-busy back-off, availMB with MaiK Lite loaded); MaiK Lite is staged on the Mac. Phone left clean
+  the mixed-session Needle latency missed. The iPhone MaiK Lite readings were taken the same
+  evening (iPhone section below). Phone left clean
   (OTA 167 current, `smd_edge` unset, `smd_maik_rag_linked` "0", no test weights, stay-awake off, screen
   timeout back to 30 min, no forwards, no thermal override).
 - Why simulated: MaiK Lite had to be re-downloaded after the reinstall, and the phone's own network gave
@@ -469,11 +469,21 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
 - **Memory (availMB, `os_proc_available_memory`, as a peak-memory proxy):** fresh launch 6,120 MB; Needle
   loaded 6,073 (-47); after one Needle call 6,065; FunctionGemma loaded on top 5,958 (-107); after three picks
   5,953; after `release()` 5,953. Far above the 250 MB floor. Round 1's A0.6 footprint (630-665 MiB with
-  MaiK Lite loaded) is still the only MaiK-loaded figure.
-- **Pending (iPhone):** back-off while MaiK Lite really generates, real thermal Serious, and availMB with
-  MaiK Lite loaded.
-  MaiK Lite (`maik-lite-q4_k_m.gguf`, sha verified) is staged on the Mac for the next iPhone window, with
-  side-load steps in its `SIDELOAD.md` (job scratch folder, not in git).
+  MaiK Lite loaded) is the A0.6 session figure.
+- **iPhone 15 Pro, 2026-10-03 evening: back-off during REAL MaiK Lite generation PASSED; availMB with MaiK Lite
+  PASSED; real Serious still NOT reached.** MaiK Lite side-loaded from the Mac with `devicectl` (46 s, sha
+  verified) and LEFT installed as a user pack. Raw log kept on the Mac (job scratch, not in git).
+  - availMB (`os_proc_available_memory`, floor 250 MB): fresh 6,102-6,117; Llama loaded 5,795; MaiK Lite
+    idle 5,539; **minimum during an answer 5,349**. PASS.
+  - Back-off: 12 routes over 2 runs, made during prefill and while streaming: `othersBusy:true`, **engine
+    not called (0 calls)**, null in 19-38 ms (168-390 ms at rest); "antibiogram kholo" still answered from the
+    rules (13-20 ms); the engine resumed after the answer (4 calls per run: 2 at rest, 2 after). PASS (A0.5).
+  - MaiK Lite: the malaria question, first text 3.1-3.5 s, total 3.9-4.5 s (fresh load included); the DKA
+    question, first text 1.24 s, total 13.25 s.
+  - Thermal stayed at 1 (.fair) throughout, so a real Serious was NOT reached; Serious is still covered only
+    by the simulation above. **Still open.**
+  - Watch item: the first MaiK answer right after the side-load failed once with `model-missing` after 174 s
+    (the WebKit inspector disconnected; cause unknown). A direct load then worked, and every later answer did.
 - Clean-up: both test weights overwritten with 0-byte files (`devicectl` cannot delete), the app's own
   background MaiK download cancelled and its partial file removed, `smd_edge` unset.
 - **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
