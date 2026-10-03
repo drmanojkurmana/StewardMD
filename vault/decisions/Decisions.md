@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ: a recovery (PACU) bay is held on the bed board, but is not an inpatient bed
+
+**Decision.** `bedBoard()` lists an open PACU stay in its ward's `recovery[]`, never in `occupied[]`, and leaves its
+bay out of `free[]`, so admission, transfer and leave-recovery pickers never offer it. Only wards the board already
+lists get recovery rows; a PACU the hospital has not put in its bed list stays on the theatre board. Patient flow,
+ward metrics, trends, nurse staffing and the digital twin keep counting admission classes only. Entering recovery
+sets the bay `occupied` in the master bed list and leaving (any outcome) calls `freeMasterBed()`, the discharge
+path: `cleaning` (a housekeeping task) when `supportServices.housekeepingInspection` is on, else `available`.
+**Why.** A PACU on the board read as free bays; recovery stays must not inflate inpatient occupancy KPIs. **Status:**
+PR "WardSynQ: recovery bays on the bed board and housekeeping after recovery".
+
 ## 2026-10-01 · Neonatal layer: plain-language screens; drug search covers every monograph
 
 **Decision (owner: "it looks so confusing or clumsy, can you make it more user friendly easily understood by anyone
