@@ -3841,7 +3841,7 @@
       // PATIENT-scoped tools ONLY. Unit/app settings (Group mode, notification preferences, test
       // notification) now live on the unit Settings screen (bottom bar → Settings), so per-patient
       // actions and app-level settings are no longer mixed. Grouped: this patient · library · danger.
-      return (window.SMD_IS_NATIVE
+      return (window.SMD_HAS_WATCH
           ? '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("codeblue", "🫀") + ' Emergency</div>' +
             '<p class="icu-doc-sub" style="margin:0 0 10px">Live CPR command center on your Apple Watch — compressions, rate, shocks, drugs &amp; ROSC.</p>' +
             '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button></div>'

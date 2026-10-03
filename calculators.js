@@ -8119,9 +8119,9 @@
 
   // Card markup, shared between the browse (grouped-by-category) and search (flat) layouts below.
   function calcCardHTML(c){
-    var favOn=isWatchFav(c.id);
+    var favOn=isWatchFav(c.id), W=window.SMD_HAS_WATCH?" Apple Watch":"";
     return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
-      '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
+      '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+(W||" starred")+'" title="'+(W?"Show on Apple Watch":"Star this calculator")+'" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
       '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
       (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
     '</div>';
@@ -8136,7 +8136,7 @@
     // exactly the reference screenshot's layout. Browsing (no query) is completely unchanged.
     var catsEl=root.querySelector("#mcCats"); if(catsEl) catsEl.style.display=q?"none":"";
     var list=CALCS.filter(matches);
-    if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here (and to your Apple Watch).':'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
+    if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here'+(window.SMD_HAS_WATCH?' (and to your Apple Watch).':'.'):'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
     if(q){
       el.innerHTML='<div class="mc-grp-h">Results <span>'+list.length+'</span></div><div class="mc-grid">'+list.map(calcCardHTML).join("")+'</div>';
       wireListEvents(el);

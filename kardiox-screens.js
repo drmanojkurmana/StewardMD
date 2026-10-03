@@ -1538,7 +1538,7 @@
         + '<div class="kx-set-label">Coming soon</div>'
         + '<div class="kx-set-group">'
           + soonRow('bluetooth', 'Bluetooth devices')
-          + soonRow('watch', 'Apple Watch')
+          + (window.SMD_HAS_WATCH ? soonRow('watch', 'Apple Watch') : '')
           + soonRow('local_hospital', 'Hospital integration')
         + '</div>'
   
