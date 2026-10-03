@@ -140,6 +140,10 @@ JNIEXPORT jbyteArray JNICALL
 Java_in_stewardmd_needle_NeedleNative_completeBytes(JNIEnv* env, jclass, jbyteArray jtext, jint maxTokens) {
   std::lock_guard<std::mutex> lk(g_mu);
   const std::string text = bytes(env, jtext);
+  // A MaiK answer (~2 GB) evicts clean weight pages: the first call after one took ~4,700 major faults
+  // one 4 KB read at a time (Pixel 9, 2026-10-04). Ask for the whole file back in one readahead first;
+  // near free when it is resident. (mlock is not an option: RLIMIT_MEMLOCK is 64 KB for apps.)
+  if (!g_maps.empty()) madvise(g_maps.back().first, g_maps.back().second, MADV_WILLNEED);
   std::vector<char> out(kOutCap, 0);
   const int rc = needle_complete(text.c_str(), (int) maxTokens, out.data(), (int) out.size());
   if (rc < 0) {

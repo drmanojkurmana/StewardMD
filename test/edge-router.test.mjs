@@ -31,8 +31,13 @@ function mock(pick) {
 }
 const needleReply = (option, confidence = 0.9) => ({ type: "call", function_calls: [{ name: "choose_option", arguments: { option } }], confidence });
 
-test("flag OFF: route returns null and no model is called", async () => {
+test("flag default ON (owner 2026-10-04); \"0\" turns it off", async () => {
   delete store.smd_edge;
+  assert.equal(E.enabled(), true, "unset means on");
+});
+
+test("flag OFF (\"0\"): route returns null and no model is called", async () => {
+  store.smd_edge = "0";
   const m = mock(() => needleReply(1)); E.setEngine(m);
   assert.equal(await E.route("open antibiogram"), null);
   assert.equal(m.prompts.length, 0);
@@ -183,6 +188,18 @@ test("needleAdapter: configure (not init), tuned weights path, uncalibrated conf
   assert.equal(E.needleAdapter(plugin, {}).kill, undefined, "no Capacitor platform in Node: not android, not killable");
 });
 
+// Pixel 9, 2026-10-04: a loaded engine that only ever sees needle_complete never returns from its
+// ~49th-57th call (2 cores spinning for 10+ min); needle_reset does not prevent it, needle_init does.
+test("needleAdapter: every complete() starts from a fresh needle_init (configure), not just the first", async () => {
+  const calls = [];
+  const plugin = { load: () => { calls.push("load"); return Promise.resolve(); }, configure: () => { calls.push("configure"); return Promise.resolve(); },
+    complete: () => { calls.push("complete"); return Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) }); } };
+  const a = E.needleAdapter(plugin, {});
+  await a.load();
+  await a.complete({ prompt: "p1" }); await a.complete({ prompt: "p2" }); await a.complete({ prompt: "p3" });
+  assert.deepEqual(calls, ["load", "configure", "configure", "complete", "configure", "complete", "configure", "complete"]);
+});
+
 test("Layer 0 widened: an exactly named tool or generic drug, in any of the three languages, is a rules answer", async () => {
   store.smd_edge = "1";
   const m = mock(() => needleReply(1)); E.setEngine(m);
@@ -196,7 +213,7 @@ test("Layer 0 widened: an exactly named tool or generic drug, in any of the thre
   assert.equal(await E.route("do not open antibiogram"), null, "negation still wins");
 });
 
-test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisper decoding skip the model", async () => {
+test("back-off (plan A0.5): low memory, MaiK generating or Whisper decoding skip the model; heat only warns", async () => {
   store.smd_edge = "1";
   const pick = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
   const ask = "show me the resistance patterns antibiogram";
@@ -207,11 +224,19 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
   try {
     await reads({ thermal: 0, lowMemory: false, availMB: 900 });
     let o = await runs(); assert.equal(o.calls, 1); assert.equal(o.r && o.r.id, "antibiogram", "all clear: the model answers");
-    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }]) {
+    for (const t of [3, 4]) {
+      await reads({ thermal: t, lowMemory: false, availMB: 900, rendererGone: false }); o = await runs();
+      assert.equal(o.calls, 1, "owner 2026-10-04: a hot phone still runs the model"); assert.equal(E.hot(), true, "and MaiK shows the hot note");
+    }
+    await reads({ thermal: 0 }); assert.equal(E.hot(), false);
+    for (const d of [{ thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }, { rendererGone: true }]) {
       await reads(d); o = await runs();
       assert.equal(o.calls, 0, "skipped for " + JSON.stringify(d)); assert.equal(o.r, null, "the caller continues (rules / MaiK)");
     }
-    await reads({ thermal: 2, lowMemory: false, availMB: 600 }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
+    await reads({ thermal: 0, lowMemory: false, availMB: 600, rendererGone: true });
+    assert.equal((await runs()).calls, 0, "renderer gone: Edge is off for the session even with memory and heat fine");
+    assert.equal(E.backoff().device.rendererGone, true);
+    await reads({ thermal: 2, lowMemory: false, availMB: 600, rendererGone: false }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: true, waiting: 0 }) };
     assert.equal((await runs()).calls, 0, "never during a MaiK generation");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: false, waiting: 2 }) };
@@ -229,5 +254,24 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
   } finally {
     delete globalThis.Capacitor; delete globalThis.SMD_MAIK_LOCAL; delete globalThis.SMD_NATIVE;
     await E.refreshDevice(); dev = {};
+  }
+});
+
+test("renderer gone before the first request (A0.5): the FIRST model-routed request already skips the model", async () => {
+  // A fresh SMD_EDGE, as after the activity recreate: no device reading taken yet.
+  const prev = globalThis.SMD_EDGE;
+  vm.runInThisContext(fs.readFileSync(path.join(ROOT, "edge-router.js"), "utf8"), { filename: "edge-router.js" });
+  const F = globalThis.SMD_EDGE;
+  store.smd_edge = "1";
+  globalThis.Capacitor = { Plugins: { Needle: { available: () => Promise.resolve({ thermal: 0, lowMemory: false, availMB: 1800, rendererGone: true }) } } };
+  try {
+    const m = mock(() => needleReply(1)); F.setEngine(m);
+    assert.equal(await F.route("show me the resistance patterns antibiogram"), null);
+    assert.equal(m.prompts.length, 0, "first request: no model call");
+    assert.equal(F.backoff().device.rendererGone, true);
+    const r = await F.route("antibiogram kholo");
+    assert.equal(r && r.source, "rules", "rules still answer"); assert.equal(m.prompts.length, 0);
+  } finally {
+    delete globalThis.Capacitor; globalThis.SMD_EDGE = prev;
   }
 });

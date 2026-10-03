@@ -80,8 +80,11 @@ while (Date.now() < END) {
     .then(function(r){ window.__m={ms:Date.now()-t0, first:first, engine:r&&r.engine, err:r&&r.error, len:r&&r.text?r.text.length:0}; }, function(e){ window.__m={threw:String(e)}; });`, 180);
   // 3. Needle Edge, 10 rows under the production deadline
   const off = (i * 10) % 190;
-  rec.edge = await run(`SMD_EDGE.bakeoff(window.__mrows.slice(${off}, ${off + 10}), SMD_EDGE.needleAdapter(Capacitor.Plugins.Needle, {calibrated:true}), {deadlineMs:1200})
-    .then(function(out){ var st={}, ms=[]; out.forEach(function(l){ st[l.status]=(st[l.status]||0)+1; ms.push(l.ms); }); window.__m={st:st, ms:ms}; }, function(e){ window.__m={threw:String(e)}; });`, 60);
+  // Under the production back-off (A0.5): device state refreshed once per cycle, a "no" resolves "skipped".
+  rec.edge = await run(`var b=function(){ return SMD_EDGE.backoff(); };
+    SMD_EDGE.refreshDevice().then(function(){ return SMD_EDGE.bakeoff(window.__mrows.slice(${off}, ${off + 10}), SMD_EDGE.needleAdapter(Capacitor.Plugins.Needle, {calibrated:true}),
+      {deadlineMs:1200, env:{memoryOk:function(){ return b().memoryOk; }, thermalOk:function(){ return b().thermalOk; }, othersBusy:function(){ return b().othersBusy; }}}); })
+    .then(function(out){ var st={}, ms=[]; out.forEach(function(l){ st[l.status]=(st[l.status]||0)+1; ms.push(l.ms); }); window.__m={st:st, ms:ms, backoff:b()}; }, function(e){ window.__m={threw:String(e)}; });`, 60);
   if (i % 5 === 0) rec.thermal = thermal();
   fs.appendFileSync(OUT, JSON.stringify(rec) + "\n");
   console.log(`${rec.t} #${i} dict=${rec.dict.final ? "ok" : JSON.stringify(rec.dict)} maik=${rec.maik.ms || JSON.stringify(rec.maik)}ms edge=${JSON.stringify(rec.edge.st || rec.edge)} pid=${rec.maik.pid}`);
