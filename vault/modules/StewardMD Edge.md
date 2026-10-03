@@ -58,6 +58,7 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 | JS adapters | `edge-router.js` | `needleAdapter(plugin, {weightsPath, calibrated, killable})`, `llamaAdapter(plugin, {modelPath})` (bake-off only: evicts MaiK's pack), `grammarFor(n)`, `bakeoff(rows, engine)`. |
 
 ## Gotchas
+- Needle engine hang (2026-10-04, Pixel 9): a loaded engine that only gets `needle_complete` never returns from its ~49th-57th call; `needle_reset` does not help, `needle_init` does. `needleAdapter.complete()` runs `configure` before every call (`edge9`). After MaiK, Needle is slow from clock caps (heat) and paged-out weights (`madvise` readahead in JNI); `:edge` binds `BIND_IMPORTANT` (top-app cpuset). 10-min unplugged session: 3/50 timeouts (was 22/150), all on the first call after a 100 s+ MaiK answer. Runbook A0.6 Pixel.
 - An iPhone paired over Wi-Fi is enough: `devicectl` install and `ios_webkit_debug_proxy` 1.9.2 both worked with no cable (2026-10-03). The WebKit page id changes on every relaunch; read it from `curl localhost:9222/json`.
 - Pixel thermal SEVERE is not reachable safely by load; test the back-off with `adb shell cmd thermalservice override-status 3`, then `cmd thermalservice reset`.
 - Android only: after the WebView renderer dies (`onRenderProcessGone`), `Needle.available()` reports `rendererGone` and the model stays off for the session (`edge7`); iOS has no hook. Device runs recorded in the runbook were on `edge5` (historical).

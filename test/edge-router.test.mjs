@@ -183,6 +183,18 @@ test("needleAdapter: configure (not init), tuned weights path, uncalibrated conf
   assert.equal(E.needleAdapter(plugin, {}).kill, undefined, "no Capacitor platform in Node: not android, not killable");
 });
 
+// Pixel 9, 2026-10-04: a loaded engine that only ever sees needle_complete never returns from its
+// ~49th-57th call (2 cores spinning for 10+ min); needle_reset does not prevent it, needle_init does.
+test("needleAdapter: every complete() starts from a fresh needle_init (configure), not just the first", async () => {
+  const calls = [];
+  const plugin = { load: () => { calls.push("load"); return Promise.resolve(); }, configure: () => { calls.push("configure"); return Promise.resolve(); },
+    complete: () => { calls.push("complete"); return Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) }); } };
+  const a = E.needleAdapter(plugin, {});
+  await a.load();
+  await a.complete({ prompt: "p1" }); await a.complete({ prompt: "p2" }); await a.complete({ prompt: "p3" });
+  assert.deepEqual(calls, ["load", "configure", "configure", "complete", "configure", "complete", "configure", "complete"]);
+});
+
 test("Layer 0 widened: an exactly named tool or generic drug, in any of the three languages, is a rules answer", async () => {
   store.smd_edge = "1";
   const m = mock(() => needleReply(1)); E.setEngine(m);

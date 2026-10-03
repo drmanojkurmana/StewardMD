@@ -286,8 +286,11 @@
   // opts.weightsPath: a tuned .cact on the device (else the plugin's bundled weights).
   // opts.calibrated === false (a local LoRA build: its confidence head was not trained) drops the
   // confidence, as Needle's own Python binding does, so the floor is not judged on noise.
+  // Every complete() runs needle_init first (2-10 ms on a Pixel 9). The engine keeps state across
+  // needle_complete calls that needle_reset does not clear: on 2026-10-04 a loaded Pixel 9 engine never
+  // returned from its ~49th-57th call (2 cores spinning for 10+ min; 80/80 fine with init before each).
   function needleAdapter(plugin, opts) {
-    var inited = false, o = opts || {};
+    var o = opts || {};
     var loadArgs = o.weightsPath ? { path: o.weightsPath } : {};
     // Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing. Only
     // Android runs Needle in its own process (":edge"), which is what makes a stuck call killable.
@@ -297,10 +300,10 @@
     return {
       name: "needle",
       available: function () { return !!plugin; },
-      load: function () { inited = false; return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }).then(function () { inited = true; }); },
+      load: function () { return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }); },
       complete: function (task) {
-        return Promise.resolve(inited ? null : plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) })).then(function () {
-          inited = true; return plugin.complete({ text: task.prompt, maxTokens: task.maxTokens || 48 });
+        return Promise.resolve(plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) })).then(function () {
+          return plugin.complete({ text: task.prompt, maxTokens: task.maxTokens || 48 });
         }).then(function (r) {
           var out = r && typeof r.json === "string" ? JSON.parse(r.json) : r;
           if (out && o.calibrated === false) out.confidence = null;
@@ -308,8 +311,8 @@
         });
       },
       reset: function () { return plugin.reset ? plugin.reset() : null; },
-      kill: killable ? function () { inited = false; return plugin.kill(); } : undefined,
-      release: function () { inited = false; return plugin.release ? plugin.release() : null; }
+      kill: killable ? function () { return plugin.kill(); } : undefined,
+      release: function () { return plugin.release ? plugin.release() : null; }
     };
   }
   /* A grammar-capable llama.cpp pack (capacitor-llama with the `grammar` option, gate A0.3), e.g. a

@@ -399,6 +399,43 @@ MaiK Lite (`smd_maik_rag_linked` "0" as the phone is set), `smd_edge` "1" for th
   Not investigated: the phrases came from the Mac speaker, which is placement-sensitive.
 - Not the 4 GB phone the gate names.
 
+**Needle timeouts after MaiK, root-cause pass, 2026-10-04 00:14-01:50 (Pixel 9, unplugged, bundle `builtin`):**
+- **Engine hang (new bug, found here):** a loaded Needle engine that only gets `needle_complete` calls
+  never returns from its ~49th-57th call. Reproduced at rest with no MaiK at all: fresh `:edge`, rows 0..,
+  hang at call 55, 55 and 49 (one run with `needle_reset` before each call). Two cores spin for 10+ minutes
+  (caller and one pool worker in `R`, the other worker cycling into `futex_wait_queue`). `needle_init`
+  (configure) before each call: 80/80, flat latency, 2-10 ms per init. iOS uses the same engine and has no
+  kill, so a hang there would leave Edge `busy` until the app restarts (not run on the iPhone).
+  The 30-min session above re-inits every cycle (10 calls), so this hang is NOT what caused its 22 timeouts.
+- **What did cause them (measured with an on-device sampler: clocks, per-core load, `:edge` major
+  faults, per-thread CPU):**
+  - Clock caps. After MaiK the A720s (cores 4-6, the only cores Needle had in the `foreground` cpuset)
+    ran capped at 1.33-1.80 of 2.60 GHz, the X4 at 1.16-1.40 of 3.1 GHz, at thermal status 0-1. Warm calls
+    were 600-1,250 ms against 290-720 ms at rest. Calls 40 s after MaiK were as slow as calls right after
+    it (one run: slower), so the slowness is heat, not a transient right after the answer.
+  - Paging right after MaiK. The first call after an answer took 4,709 and 12,070 major faults (weights
+    evicted by MaiK Lite's ~2 GB); later calls 0-700. That call took 956 and 1,245 ms.
+  - Not llama threads: GGML_OPENMP is OFF and llama.cpp builds a throwaway threadpool for each graph, so
+    its threads are joined when a decode ends; app CPU was back to its idle level within the sampling step.
+    The idle level itself is ~1.2 cores (RenderThread + Viz drawing the home screen's 13 running CSS
+    animations), and it shares the A720s with Needle.
+  - Cascade: a timeout kills `:edge`, so the next call is a cold load (2.8-4.4 s, `ok`). It does not cause
+    further timeouts on its own.
+- **Fix (edge9):** `needleAdapter.complete()` runs `configure` before every call (the hang; shared JS,
+  both platforms); `needle_jni.cpp` asks for the weights back with `madvise(MADV_WILLNEED)` before each
+  call (mlock is not possible: RLIMIT_MEMLOCK is 64 KB); `NeedlePlugin` binds with `BIND_IMPORTANT`, so
+  `:edge` gets the app's `top-app` cpuset (verified: `cpuset:/top-app`, logcat `engine threads 4 (cpu_capacity,
+  8 cpus, 8 allowed)`; was `foreground`, 3 threads).
+- **10-min unplugged mixed session on edge9 (00:56-01:07, battery 66 -> 62%, thermal 1):** Needle 47 `ok`,
+  3 `timeout`, 0 `unavailable` of 50 (6%; was 22 + 1 of 150, 15%). Every warm call under 1,200 ms (488-1,143 ms
+  outside the first call). All 3 timeouts were the first call after a MaiK answer of 108-140 s.
+- **Still open:** on a hot phone (A720 1.3-1.8 GHz, X4 1.2-1.4 GHz) one test after a 113 s answer gave 6 warm
+  calls of 1,112-1,393 ms. That is the heat ceiling of this phone, not fixed here. The back-off only skips
+  at SEVERE, so it never fires at LIGHT. `BIND_IMPORTANT` (4 threads incl. the X4) was not A/B-tested on
+  its own. NOT run: standalone `--limit 50` bake-off on edge9, MaiK byte-identity check (MaiK code is
+  untouched; Q0 was byte-identical across two old-APK runs, hash 290753865), iPhone run of the hang fix,
+  30-minute session.
+
 **Back-off (763f0e268) on the Pixel 9, 2026-10-03, unplugged, APK bundle: PASSED.** Typed request
 "show me the resistance patterns antibiogram" (model-routed: 5 candidates, first `tool:antibiogram`,
 not exact), `smd_edge` = "1" in localStorage only for the test (removed after, read back `null`), the

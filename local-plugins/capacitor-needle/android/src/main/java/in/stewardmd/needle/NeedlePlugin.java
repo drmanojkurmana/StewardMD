@@ -80,7 +80,9 @@ public class NeedlePlugin extends Plugin {
             if (!binding) {
                 binding = true;
                 Context ctx = getContext();
-                if (!ctx.bindService(new Intent(ctx, NeedleService.class), conn, Context.BIND_AUTO_CREATE)) {
+                // BIND_IMPORTANT: :edge takes the app's scheduling group (top-app while the doctor is in the
+                // app, X4 included) instead of the default group's foreground cpuset (cores 0-6).
+                if (!ctx.bindService(new Intent(ctx, NeedleService.class), conn, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
                     binding = false;
                     List<Runnable> drop = new ArrayList<>(queued); queued.clear();
                     for (Runnable q : drop) q.run();   // service is still null: send() rejects each
