@@ -3,7 +3,12 @@
   "unit": "uveitis",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Intermediate and posterior uveitis",
     "hi": "इंटरमीडिएट और पोस्टीरियर यूवाइटिस"
@@ -13,22 +18,21 @@
     "hi": "आँख के पिछले हिस्से का यूवाइटिस अक्सर बिना दर्द के होता है, और आँख सफ़ेद रहती है। मरीज़ को [[floaters]] और धुंधलापन दिखता है। इसे सिर्फ़ पुतली फैलाकर फ़ंडस की जाँच से पकड़ा जा सकता है।"
   },
   "see": {
-    "diagram": "diagrams/posterior-uveitis.svg",
-    "w": 400,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of the back of the eye as seen through the pupil. The optic disc is on the left and the macula in the centre. Upper right is a dark scar with a pale centre, and a fluffy white patch sits at its edge. The whole view is hazy, and white balls float low down.",
-      "hi": "पुतली से दिखते आँख के पिछले हिस्से का चित्र। ऑप्टिक डिस्क बाईं ओर है और मैक्युला बीच में। ऊपर दाईं ओर हल्के बीच वाला एक गहरा निशान है, और उसकी किनारी पर रुई जैसा सफ़ेद धब्बा है। पूरा दृश्य धुंधला है, और नीचे सफ़ेद गोले तैर रहे हैं।"
+      "en": "The back of the eye, seen through the pupil. The optic disc is on the left and the macula is in the centre. In the upper right, an old scar has a dark pigment rim and a pale centre. A fluffy white patch sits at its edge. The lower half of the view is hazy, with round white clumps floating in the gel.",
+      "hi": "पुतली से देखा गया आँख का पिछला हिस्सा। ऑप्टिक डिस्क बाईं ओर है और मैक्युला बीच में है। ऊपर दाईं ओर एक पुराने निशान का किनारा गहरा रंगीन और बीच फीका है। उसके किनारे पर एक रुई जैसा सफ़ेद धब्बा है। दृश्य का निचला आधा हिस्सा धुंधला है, और जेल में सफ़ेद गोल गुच्छे तैर रहे हैं।"
     },
     "caption": {
       "en": "The fundus in uveitis at the back of the eye. Signs of intermediate and posterior uveitis are drawn together for teaching.",
       "hi": "आँख के पिछले हिस्से के यूवाइटिस में फ़ंडस। पढ़ाने के लिए इंटरमीडिएट और पोस्टीरियर यूवाइटिस के संकेत एक साथ बनाए गए हैं।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.638,
-        "y": 0.41,
+        "x": 0.718,
+        "y": 0.158,
         "label": {
           "en": "Old pigmented scar",
           "hi": "पुराना रंजित निशान"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.72,
-        "y": 0.35,
+        "x": 0.855,
+        "y": 0.285,
         "label": {
           "en": "New active patch",
           "hi": "नया सक्रिय धब्बा"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.425,
-        "y": 0.65,
+        "x": 0.564,
+        "y": 0.679,
         "label": {
           "en": "Hazy view",
           "hi": "धुंधला दृश्य"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.518,
-        "y": 0.867,
+        "x": 0.691,
+        "y": 0.824,
         "label": {
           "en": "Snowballs",
           "hi": "स्नोबॉल (snowballs)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.325,
-        "y": 0.5,
+        "x": 0.205,
+        "y": 0.382,
         "label": {
           "en": "Optic disc",
           "hi": "ऑप्टिक डिस्क (optic disc)"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.57,
-        "y": 0.5,
+        "x": 0.468,
+        "y": 0.442,
         "label": {
           "en": "Macula",
           "hi": "मैक्युला (macula)"
@@ -98,6 +102,10 @@
           "hi": "यहाँ सूजन से बीच की नज़र धुंधली होती है। यूवाइटिस में नज़र के लिए यही सबसे बड़ा ख़तरा है।"
         }
       }
+    ],
+    "img": "learn/media/real/posterior-uveitis.webp",
+    "more": [
+      "posterior-uveitis"
     ]
   },
   "why": {

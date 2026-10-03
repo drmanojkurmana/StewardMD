@@ -90,24 +90,27 @@
     return { x: sg * a, y: y, t: t, ab: a };
   }
 
-  function bisect(f, want, lo, hi) {
-    for (var i = 0; i < 36; i++) { var mid = (lo + hi) / 2; if (f(mid) < want) lo = mid; else hi = mid; }
+  function bisect(f, want, lo, hi, incl) {
+    for (var i = 0; i < 36; i++) { var mid = (lo + hi) / 2, y = f(mid); if (incl ? y <= want + 1e-9 : y < want - 1e-9) lo = mid; else hi = mid; }
     return (lo + hi) / 2;
   }
-  // Command that brings f (monotone) to want; when out of reach, the least command that gets as
-  // close, so a gated movement (an INO eye asked to adduct) does not send maximal effort to the fellow.
-  function solve(f, want) {
-    var c = bisect(f, want, -1.4, 1.4), got = f(c);
+  // Command that brings f (monotone, possibly flat where a pathway is cut) to want: of all commands
+  // that do it, the one nearest zero. When out of reach, the least command that gets as close, so a
+  // gated movement (an INO eye asked to adduct) does not send maximal effort to the fellow.
+  function solve(f, want, span) {
+    function least(a, b) { return clamp(0, bisect(f, a, -1.4, 1.4), bisect(f, b, -1.4, 1.4, true)); }
+    var c = least(want, want), got = f(c), h = span ? clamp(want / span, -1.4, 1.4) : 0;
     if (Math.abs(got - want) < 0.3) return c;
-    return got < want ? bisect(f, got - 0.05, -1.4, c) : bisect(f, got + 0.05, c, 1.4);
+    c = least(got - 0.05, got + 0.05);
+    return Math.abs(c) >= Math.abs(h) ? c : h;   // Hering: at least the command a healthy eye would need
   }
 
   // Both eyes for an examination state ex = {h, v, cover, tilt (+1 right shoulder), near}.
   // Hering's law: the command that brings the fixing eye onto the target goes to both eyes.
   function aim(P, fix, h, v, n, cv, near) {
     var want = h - (fix === "R" ? 1 : -1) * (near ? CONV : 0);
-    var H = solve(function (x) { return eyePos(P, fix, x, 0, cv, n[fix]).x; }, want);
-    var V = solve(function (x) { return eyePos(P, fix, H, x, cv, n[fix]).y; }, v);
+    var H = solve(function (x) { return eyePos(P, fix, x, 0, cv, n[fix]).x; }, want, near ? 0 : RH);
+    var V = solve(function (x) { return eyePos(P, fix, H, x, cv, n[fix]).y; }, v, RV);
     var q = eyePos(P, fix, H, V, cv, n[fix]);
     return { H: H, V: V, miss: Math.abs(q.x - want) + Math.abs(q.y - v) };
   }
@@ -210,7 +213,7 @@
     { id: "cn3", level: "f", group: "nerve", name: "{S} complete third nerve palsy",
       lesion: { mus: { I: { MR: 0, SR: 0, IR: 0, IO: 0 } }, lev: { I: 0 }, pupil: { I: { para: 0 } } },
       complaint: "Sudden drooping of one eyelid with a headache; double vision when the lid is lifted.",
-      look: "Complete ptosis. Lift the lid: the eye rests down and out and cannot adduct, elevate or depress in adduction. The pupil is dilated and reacts neither to light nor to near.",
+      look: "Complete ptosis. Lift the lid: the eye rests down and out; adduction, elevation and depression are limited. On attempted downgaze the eye intorts, showing the fourth nerve is intact. The pupil is dilated and reacts neither to light nor to near.",
       site: "Third nerve between its midbrain nucleus and the orbit. With the pupil involved, compression of the nerve's outer pupillomotor fibres, classically a posterior communicating artery aneurysm, until proven otherwise.",
       pearl: "A painful third nerve palsy with a dilated pupil is an emergency: CT or MR angiography the same day. Pilocarpine 1% still constricts it, because the sphincter itself is healthy.",
       coach: "No parasympathetic drive reaches the {s} sphincter, so that pupil stays dilated to light and near; pilocarpine 1% acts on the sphincter directly.",
@@ -219,11 +222,11 @@
       complaint: "Vertical double vision, worse when reading or walking downstairs.",
       look: "Hypertropia of the affected eye, larger on gaze to the opposite side and down, and larger on head tilt toward the affected side (Bielschowsky). The higher eye is extorted.",
       site: "Fourth nerve, with the longest intracranial course: head injury, decompensated congenital palsy, or microvascular in older adults.",
-      pearl: "Parks three-step: which eye is higher, worse in which horizontal gaze, worse on which head tilt. An intorted higher eye suggests skew deviation instead.",
+      pearl: "Parks three-step: which eye is higher, worse in which horizontal gaze, worse on which head tilt. Patients tilt the head away from the affected side. An intorted higher eye suggests skew deviation instead.",
       key: ["gaze", "tilt", "cover"] },
     { id: "cn6", level: "f", group: "nerve", name: "{S} sixth nerve palsy", lesion: { mus: { I: { LR: 0 } } },
       complaint: "Horizontal double vision, worse in the distance and on looking to one side.",
-      look: "Esotropia in primary position that grows on gaze toward the affected side, with limited abduction of that eye. The deviation is smallest looking away.",
+      look: "Esotropia in primary position that grows on gaze toward the affected side, with limited abduction of that eye. The deviation is smallest looking away, and larger at distance than near.",
       site: "Sixth nerve: pons, a long subarachnoid course (a false localising sign of raised intracranial pressure), petrous apex, cavernous sinus.",
       pearl: "Bilateral sixth nerve palsies or papilloedema point to raised intracranial pressure: look at the discs.",
       key: ["gaze", "cover"] },
@@ -231,19 +234,19 @@
       complaint: "A relative noticed that one upper lid droops a little and that pupil looks small.",
       look: "Mild ptosis (about 2 mm) and a smaller pupil; the anisocoria is larger in the dark, the small pupil redilates slowly when the light goes off (dilation lag), and the lower lid sits slightly higher.",
       site: "Oculosympathetic pathway: hypothalamus, brainstem and cervical cord (first order), lung apex and neck (second order), carotid and cavernous sinus (third order).",
-      pearl: "Apraclonidine 0.5% reverses the anisocoria: the Horner pupil dilates and the lid lifts through denervation supersensitivity. A painful acute Horner needs urgent imaging for carotid dissection.",
+      pearl: "Apraclonidine 0.5% reverses the anisocoria: the Horner pupil dilates and the lid lifts through denervation supersensitivity. It can be negative in the first days, before supersensitivity develops; then use cocaine. Hydroxyamphetamine 1% fails to dilate a third-order (postganglionic) Horner pupil. A painful acute Horner needs urgent imaging for carotid dissection.",
       coach: "The {s} dilator has lost its sympathetic drive, so the difference grows in the dark and the {s} pupil redilates slowly.",
       key: ["dark", "apra"] },
     { id: "rapd", level: "f", group: "pupil", name: "{S} relative afferent pupillary defect", lesion: { aff: { I: 0.9 } }, grades: [0.3, 0.6, 0.9, 1.2],
       complaint: "Blurred vision in one eye over a few days; colours look washed out.",
       look: "The pupils are equal. Both constrict when the light is on the healthy eye and both dilate when it swings to the affected eye.",
       site: "Afferent pathway in front of the chiasm: usually the optic nerve (optic neuritis, ischaemic or compressive optic neuropathy), or extensive retinal disease.",
-      pearl: "An RAPD never causes anisocoria. Grade it by placing neutral density filters over the better eye until the swing is balanced: 0.3 to 1.2 log units.",
+      pearl: "An RAPD never causes anisocoria. Grade it by placing neutral density filters over the better eye until the swing is balanced: usually 0.3 to 1.2 log units, sometimes more.",
       coach: "Less light signal reaches the midbrain through the {s} optic nerve, so both pupils relax when the light moves to that eye.",
       key: ["swing", "filter"] },
     { id: "ino", level: "f", group: "supra", name: "{S} internuclear ophthalmoplegia", lesion: { mlf: { I: 0 } },
       complaint: "Double or blurred vision on looking to one side.",
-      look: "On gaze away from the lesion, the eye on the lesion side adducts slowly or not at all while the other eye abducts with nystagmus. Convergence is preserved.",
+      look: "On gaze away from the lesion, the eye on the lesion side adducts slowly or not at all while the other eye abducts with nystagmus. Convergence is usually preserved.",
       site: "Medial longitudinal fasciculus on the side of the adduction deficit, in the pons or midbrain: demyelination in the young, stroke in older patients.",
       pearl: "The INO is named for the eye that fails to adduct. Adduction on convergence proves the medial rectus and its nerve work.",
       key: ["gaze", "near"] },
@@ -253,7 +256,7 @@
       complaint: "Painful drooping lid and double vision in a patient with diabetes and hypertension.",
       look: "Complete ptosis and a down-and-out eye, but the pupil is equal to its fellow and reacts normally to light and near.",
       site: "Microvascular infarction of the third nerve core, sparing the peripheral pupillomotor fibres.",
-      pearl: "Call it pupil sparing only when the palsy is otherwise complete and the pupil fully normal. It should recover in 8 to 12 weeks; if it does not, image.",
+      pearl: "Call it pupil sparing only when the palsy is otherwise complete and the pupil fully normal. Image it anyway (MRI with MRA or CTA): an aneurysm can spare the pupil at first, so recheck the pupil daily for a week. A microvascular palsy recovers within about 3 months; aberrant regeneration never follows it and means compression.",
       key: ["lift", "gaze", "light"] },
     { id: "cn3p", level: "r", group: "nerve", name: "{S} partial third nerve palsy, pupil involved",
       lesion: { mus: { I: { MR: 0.45, SR: 0.35, IR: 0.55, IO: 0.4 } }, lev: { I: 0.55 }, pupil: { I: { para: 0.55 } } },
@@ -287,7 +290,7 @@
       key: ["gaze", "near", "light"] },
     { id: "skew", level: "r", group: "supra", name: "Skew deviation, {s} eye higher", sideq: "Higher eye", lesion: { drift: { I: { y: 3.5, t: 5 }, C: { y: -3.5, t: -5 } } },
       complaint: "Sudden vertical double vision with unsteadiness.",
-      look: "A vertical deviation that is similar in every gaze position, with the higher eye intorted and the lower eye extorted, unlike the extorted higher eye of a fourth nerve palsy. Head tilt changes little.",
+      look: "A vertical deviation that is often similar in every gaze position, with the higher eye intorted and the lower eye extorted, unlike the extorted higher eye of a fourth nerve palsy. Head tilt changes little.",
       site: "Supranuclear otolith (utricular) pathway in the brainstem or cerebellum.",
       pearl: "The hypertropia of a skew deviation usually falls by half or more when the patient lies supine. Look for other brainstem signs.",
       key: ["gaze", "tilt"] },
@@ -298,7 +301,7 @@
       pearl: "Denervation supersensitivity: pilocarpine 0.1% constricts the Adie pupil and barely moves a normal one. With absent tendon reflexes it is Holmes-Adie syndrome.",
       coach: "The {s} sphincter has been reinnervated by accommodative fibres, so the light reaction is poor, the near reaction slow and tonic, and dilute pilocarpine constricts it.",
       key: ["light", "near", "pilo01"] },
-    { id: "argyll", level: "r", group: "pupil", name: "Argyll Robertson pupils", bilateral: true, lesion: { pupil: { B: { light: 0, mio: 0.3, irregular: true } } },
+    { id: "argyll", level: "r", group: "pupil", name: "Argyll Robertson pupils", bilateral: true, lesion: { pupil: { B: { light: 0, mio: 0.3, size: -1.0, irregular: true } } },
       complaint: "Referred after a routine check found small pupils.",
       look: "Small, irregular pupils in both eyes that do not react to light but constrict to near (light-near dissociation) and dilate poorly in the dark.",
       site: "Dorsal midbrain near the Edinger-Westphal nuclei, interrupting the pretectal light pathway.",
@@ -409,7 +412,9 @@
       if (d.length) f.push(W[e] + " eye: limited " + d.map(function (x) { return x.dir; }).join(", "));
     });
     var nr = eyes(P, { near: true });
-    var cvOk = { R: nr.R.x < p0.R.x - CONV * 0.35, L: nr.L.x > p0.L.x + CONV * 0.35 };
+    // Convergence is judged by the movement, or by intact pathways: a sixth nerve eye adducts on convergence
+    // even though, with no lateral rectus to relax, the model moves it only half as far.
+    var cvOk = { R: nr.R.x < p0.R.x - CONV * 0.6 || (P.mus.R.MR >= 0.9 && P.conv >= 0.9), L: nr.L.x > p0.L.x + CONV * 0.6 || (P.mus.L.MR >= 0.9 && P.conv >= 0.9) };
     if ((P.mlf.R < 1 || P.mlf.L < 1) || !cvOk.R || !cvOk.L)
       f.push(cvOk.R && cvOk.L ? "Convergence preserved" : !cvOk.R && !cvOk.L ? "Convergence weak in both eyes" : "Convergence: the " + (cvOk.R ? "left" : "right") + " eye does not adduct");
     EYES.forEach(function (e) {
@@ -446,9 +451,9 @@
       var lr = amp(P, e, { room: "dark" }, { room: "dark", light: e }), nr2 = amp(P, e, { room: "light" }, { room: "light", near: true });
       if (lr < 0.4 && nr2 < 0.4) f.push(W[e] + " pupil reacts neither to light nor to near");
       else if (lr < 0.6 && nr2 >= 0.6) f.push(W[e] + " pupil: light-near dissociation");
-      else if (lr < 1.2 && nr2 >= 0.4 && P.pupil[e].para < 1) f.push(W[e] + " pupil reacts sluggishly");
+      else if (P.pupil[e].para < 1 && nr2 >= 0.4 && (lr < 1.2 || lr < 0.7 * amp(P, other(e), { room: "dark" }, { room: "dark", light: other(e) }))) f.push(W[e] + " pupil reacts sluggishly");
       if (P.pupil[e].tonic) f.push(W[e] + " pupil: slow, tonic near response and slow redilation");
-      if (P.pupil[e].sym < 1) f.push(W[e] + " pupil redilates slowly in the dark (dilation lag)");
+      if (P.pupil[e].sym < 1 && P.pupil[e].para === 1 && !P.pupil[e].block) f.push(W[e] + " pupil redilates slowly in the dark (dilation lag)");
     });
     EYES.forEach(function (e) {
       if (P.aff[e] > 0) f.push(W[e] + " RAPD: both pupils dilate when the light swings to the " + w[e] + " eye (balanced by a " + P.aff[e].toFixed(1) + " log unit filter over the other eye)");
@@ -823,7 +828,7 @@
     var k = U.cse;
     return '<h2 class="oph-q" id="nrDxQ">Your diagnosis</h2>' +
       '<div class="nr-field"><label for="nrDx">Diagnosis</label><select id="nrDx" name="diagnosis"><option value="">Choose a diagnosis</option>' + condOptions(N.pool(k.lv), k.ans.id, false) + "</select></div>" +
-      '<div class="nr-row"><span class="nr-lab" id="nrAnsL">Side</span><div class="oph-seg nr-full" role="group" aria-labelledby="nrAnsL">' +
+      '<div class="nr-row"><span class="nr-lab" id="nrAnsL">' + esc((N.BY[k.ans.id] && N.BY[k.ans.id].sideq) || "Side") + '</span><div class="oph-seg nr-full" role="group" aria-labelledby="nrAnsL">' +
       segBtn("nrans", "", "R", "Right", k.ans.side) + segBtn("nrans", "", "L", "Left", k.ans.side) + segBtn("nrans", "", "B", "Both", k.ans.side) + "</div></div>" +
       '<p class="nr-err" id="nrErr" role="alert"></p>' +
       '<button type="button" class="oph-btn pri oph-wide" data-act="nrsign">Sign off</button>';
@@ -846,19 +851,20 @@
     if (v && !U.reduce) { v.classList.add("pre"); G.requestAnimationFrame(function () { G.requestAnimationFrame(function () { v.classList.remove("pre"); }); }); }
     try { p.scrollTo({ top: Math.max(0, s.offsetTop - p.offsetTop - 8), behavior: U.reduce ? "auto" : "smooth" }); } catch (e) { p.scrollTop = s.offsetTop; }
     var nx = $("nrNext"); try { if (nx) nx.focus({ preventScroll: true }); } catch (e) {}
-    say(res.ok ? "Signed off: right." : "Signed off.");
+    say(res.ok ? "Signed off: correct." : "Signed off.");
   }
   function signedHtml() {
     var k = U.cse, r = k.res, t = N.BY[k.id], a = N.BY[k.ans.id], tl = condLabel(k.id, k.side, k.grade);
     var al = a.bilateral ? a.name : N.label(a.id, k.ans.side === "B" ? "R" : k.ans.side);
     if (!a.bilateral && k.ans.side === "B") al = bare(a) + ", both sides";
     var cls = r.ok ? "ok" : r.score > 0 ? "part" : "bad", icon = r.ok ? ico("check") : r.score > 0 ? ico("check") : ico("close");
-    var head = r.ok ? "Right: " + esc(tl) : (r.score > 0 ? "Partly right (" + Math.round(r.score * 100) + "%). " : "Not this time. ") + "You said " + esc(al);
+    var head = r.ok ? "Correct: " + esc(tl) : (r.score > 0 ? "Partly right (" + Math.round(r.score * 100) + "%). " : "Not this time. ") + "You said " + esc(al);
     function mark(ok, text) { return '<li class="' + (ok ? "y" : "n") + '">' + (ok ? ico("check") : ico("close")) + "<span>" + text + "</span></li>"; }
     var marks = mark(r.right.indexOf("diagnosis") >= 0, r.right.indexOf("diagnosis") >= 0 ? "Diagnosis" : r.right.indexOf("related") >= 0 ? "Diagnosis: a close relative of the answer" : "Diagnosis") +
       mark(r.right.indexOf("side") >= 0, "Side") + mark(r.right.indexOf("group") >= 0, "Category: " + N.GROUPS[t.group]);
     var tip = "";
-    if (r.errType === "side") tip = '<p class="nr-p">' + esc(SIDETIP[k.id] || "Name the side from the eye that behaves abnormally: the one that underacts, has the ptosis or the abnormal pupil.") + "</p>";
+    if (r.errType === "side" && t.bilateral) tip = '<p class="nr-p">This condition affects both eyes: choose Both.</p>';
+    else if (r.errType === "side") tip = '<p class="nr-p">' + esc(SIDETIP[k.id] || "Name the side from the eye that behaves abnormally: the one that underacts, has the ptosis or the abnormal pupil.") + "</p>";
     else if (!r.ok) tip = '<h3 class="oph-h3">What your answer would show</h3><p class="nr-p"><b>' + esc(bare(a)) + ".</b> " + esc(N.sideText(a.look, k.ans.side === "L" ? "L" : "R")) + "</p>";
     var used = t.key.map(function (x) {
       var u = !!U.log[x];
@@ -1075,7 +1081,7 @@
     U.cse = null; startCase();
   };
   function practiceChanged() {
-    U.px.drops = {};
+    U.px.drops = {}; U.px.filter = { R: 0, L: 0 };   // a filter left on from an RAPD would change the next patient
     setPatient(practicePatient(), false);
     renderPanel("#nrCond");
     say();
@@ -1096,6 +1102,7 @@
     } else if (t.id === "nrDx") {
       U.cse.ans.id = t.value;
       var er = $("nrErr"); if (er) er.textContent = "";
+      var sl = $("nrAnsL"); if (sl) sl.textContent = (N.BY[t.value] && N.BY[t.value].sideq) || "Side";   // skew: higher eye; anisocoria: smaller pupil
     }
   }
 

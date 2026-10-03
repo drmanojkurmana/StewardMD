@@ -87,7 +87,8 @@ try { await fetch(BASE); } catch {
   }
 }
 const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${CDP}`,
-  `--user-data-dir=${JOB}/dx-audit-prof-${process.pid}`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
+  `--user-data-dir=${JOB}/dx-audit-prof-${process.pid}`, "--no-first-run", "--disable-gpu"], { stdio: ["ignore", "ignore", "pipe"] });
+let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let id = 1; const pend = new Map(); let ws, sid;
 const call = (m, p) => { const i = id++; return new Promise((r) => { pend.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId: sid })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return JSON.stringify({__err:String(x&&x.message||x)})}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
@@ -122,7 +123,8 @@ function chartText(c) {
 
 let exitCode = 0;
 try {
-  let ver; for (let t = 0; t < 60; t++) { try { ver = await (await fetch(`http://localhost:${CDP}/json/version`)).json(); break; } catch { await sleep(200); } }
+  let ver; for (let t = 0; t < 300; t++) { try { ver = await (await fetch(`http://localhost:${CDP}/json/version`)).json(); break; } catch { await sleep(200); } }   // up to 60 s on a cold CI runner
+  if (!ver) throw new Error("Chrome did not start within 60 s: " + chromeErr.slice(-800));
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res) => (ws.onopen = res));
   ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pend.has(m.id)) { pend.get(m.id)(m); pend.delete(m.id); } };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });

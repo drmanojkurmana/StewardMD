@@ -5,6 +5,58 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-01 · Neonatal layer: plain-language screens; drug search covers every monograph
+
+**Decision (owner: "it looks so confusing or clumsy, can you make it more user friendly easily understood by anyone
+without removing any function and make drugs more universal covering all drugs" / "see our drug monographs we
+already have covering all drugs").** No tool or function removed. The hub groups tools under Medicines / Fluids and
+feeding / Check and chart / Procedures with plain names (Drug doses, Drip rates, Fluids and sugar, Jaundice, Normal
+values, Lines and tubes), each with a one-line explainer and a "What do these words mean?" glossary; the baby shows
+as plain chips ("Born at 30 weeks 2 days", "Corrected age ..."), compact on tool screens. Band conditions read as
+sentences (`condText`). Drug doses searches all ~1,540 monograph drugs and labels each: "Newborn dose" (sourced band),
+"Newborn dose (monograph)" (the monograph's own neonate row, computed by dose-calc.js), "Newborn notes only",
+"No newborn dose". Newborn statements are copied verbatim from `worker/data/gold` into
+`data/neo/monograph-neonatal.json` by `scripts/neo/build-monograph-neonatal.mjs` (pregnancy, lactation and
+mother-exposure text left out) and shown under "What our monograph says about newborns", also in the dose calculator.
+**Why.** Clinicians at any level must read the answer first; the band table covered ~70 drugs, the monographs ~1,540.
+**Trade-off.** A monograph neonate row is our monograph's text, not a quoted external source: it is labelled as such
+and never replaces a band. A drug with no newborn row still says "No neonatal dose on file. Do not extrapolate."
+Monograph statements are checked against the monographs (`test/neo-monograph.test.mjs`), not by `validate.mjs`.
+**Status.** Branch `feat/neo-ux`, unit + headless tests; PR open.
+
+## 2026-10-01 · Registers file by the hospital's day (after local 00:00 it is the next day)
+
+**Decision (owner: "Follow standard how they do it. After 00:00 its next day no more same day").** A register entry
+whose date field is a timestamp (MLC `arrivalAt`, POCSO task `raisedAt`, and any other) is filed under the hospital's
+local date (`filingDay()` in `functions/_wardsynq/registers.js`, the hospital clock `offsetMinutes`, IST 330 by
+default): its day, month (`period`) and serial year. Plain dates (YYYY-MM-DD) are kept as entered. Listing works the
+day out again, so entries saved before this follow the same calendar without a migration. NDPS r.52U estimate check
+uses the hospital's year too (#1335).
+**Why.** A case at 00:30 IST on the 1st belongs to that day's and that month's register; the UTC date put it in the
+day (and month, and on 1 January the year) before.
+**Trade-off.** Stored `period`/`eventDate` of older entries stay as written; any reader that skips `listEntries` and
+reads them raw still sees the UTC day. Serials already issued are not renumbered.
+**Status.** Merged with tests (a 00:30 IST case, and the whole register test file with the clock moved across month
+and year ends).
+
+## 2026-09-30 · Capture guard for realistic lesson images (iOS watermark while recording, Android FLAG_SECURE)
+
+**Decision (owner approved 2026-09-30).** `<img>` whose src contains `/learn/media/real/` (Tokós now, Ophthalmós
+later) are guarded by `capture-guard.js` + local plugin `@stewardmd/capacitor-capture-guard`
+(`Capacitor.Plugins.CaptureGuard`). iOS: while the scene is recorded or mirrored
+(`UITraitCollection.sceneCaptureState == .active`, iOS 17+; `UIScreen.isCaptured` is deprecated) `html.smd-cg-on`
+draws a low-opacity tiled diagonal StewardMD mark on each image's container (`[data-smd-cg]::after`,
+`pointer-events:none`); after a screenshot (`userDidTakeScreenshotNotification`) the shared `window.toast` says
+"Images are © StewardMD. Please do not share." (en/hi) on any screenshot taken in the app (owner 2026-10-01). Android: FLAG_SECURE on
+the activity window while such an image is on screen (MutationObserver + scroll/resize, 80 ms debounce), cleared as
+soon as none is. Web/PWA: inert.
+**Why.** iOS cannot block or alter captures; Android can. The owner rejected a permanent heavy watermark as
+unprofessional, so the mark appears only during capture.
+**Trade-off.** Android 14 `ScreenCaptureCallback` was not added: it does not fire while FLAG_SECURE is set, which is
+exactly when a notice would be wanted. Thumbnails count as images (the Learn hub with a real thumbnail is also
+FLAG_SECURE on Android) and FLAG_SECURE blanks the Recents preview while set: both confirmed by the owner 2026-10-01.
+**Status.** Draft PR; needs `npm install` + `npx cap sync` + new App Store / Play builds. Not device-verified.
+
 ## 2026-09-30 · Clinical Bulletins: second reader, specialty signers, pre-sign checks, numbers, India access
 
 **Decision (owner: "Do all", after "are we 2x or 10x better than UpToDate?").** Five changes, each aimed at the
@@ -31,6 +83,19 @@ global reference does not give an Indian clinician.
 owner switches the rule off). Keyword specialty routing is approximate; "Show all" is one tap. NLEM matching names
 a medicine only on an exact whole-word match (US names mapped), so it may miss some; it never claims absence.
 **Status.** Built and tested (unit, headless UI with design audit); Jan Aushadhi data waits for the owner's run.
+
+## 2026-10-01 · Neonatal layer ON for everyone, labelled Beta
+
+**Decision (owner: "Make it default on for everyone under beta label").** `smd_neo` defaults ON; the Home tile
+carries the BETA label, the hub header a Beta chip, and every data screen keeps its Draft badge. A device opts
+out with the Experimental switch, `?neo=0` or `smd_neo = "0"`. With it on, the dose calculator's
+no-extrapolation rule (neonate: neonatal rows only) now applies to every user.
+**Why.** Owner call, same posture as Ophthalmós (on before sign-off, visibly marked).
+**Trade-off.** Ships before a neonatologist has reviewed any file and before the licence questions in the
+2026-09-30 entry are answered: INTERGROWTH-21st, AAP 2022, NICE outside the UK, WHO 2024 SBI (CC BY-NC-SA IGO),
+ASHP S4S, VON, N-PASS, StatPearls and several CC BY-NC sources are non-commercial or need permission.
+Set `smd_neo` back to OFF in `neo-flags.js` (and `home.js` `neoOn`, `sidebar-redesign.js` `def`) to reverse.
+**Status.** Done 2026-10-01; reaches phones with the next native build / OTA.
 
 ## 2026-09-30 · Neonatal layer: behind `smd_neo` (default OFF), every number quoted from a fetched source
 
@@ -8797,7 +8862,9 @@ of compliance.js is untouched.
   written 0: an admission or transfer is refused, not made on a short read. Ward and ED boards name patients from the
   newest 1,000 Patients plus a read by id for any missing (the oldest-first roster left new patients nameless).
 - Checked, audit uncertainty: `checkMasterBed` reads the bed's administrative state only, not occupancy; occupancy is the
-  census scan plus the bed claim. A stay without a claim (imported, migrated, moved by transfer) is seen by the scan only.
+  census scan plus the bed claim. A stay without a claim (imported, migrated) is seen by the scan only. Since Codex F1
+  (2026-10-02) transfer takes the same claim on its destination and releases its source; since F7 a master read that
+  throws is 503 `bed_list_unavailable`, not "unconfigured", and the emergency bed override does not bypass it.
 - ponytail: D1 re-groups every version of the type per page (same GROUP BY as latestByType). The open census is one
   page; a whole-type read is N/1,000 pages. A latest-version flag or table (audit O20) is the upgrade if that is slow.
 - Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
@@ -10991,3 +11058,16 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 ## 2026-09-29 - Extract the specialty engine now (reverses "duplicate until a third specialty")
 - Tokós 2.0 needs the whole Ophthalmós engine (shell, Learn, bank, explorers, tools, about 3,000 lines), not the 250 lines duplicated in 1.0, and the roadmap names four more specialty modules; copying per specialty would multiply every fix. The engine is extracted once as `specialty-*.js` + `specialty.css` with the host injected (`SPECIALTY.createHost(cfg)`); Ophthalmós files stay byte-identical and may migrate later in their own repo. Tokós is the first host and loads lazily. Reverses the 2026-09-29 "Tokós duplicates the Ophthalmós engine" entry above. [[Specialty Engine]] [[Tokós]]
 
+## 2026-10-03 - Native launch surface follows system light/dark; app-switcher privacy cover; SmdDevice plugin
+- **Owner, 2026-10-03 (Premium-Feel plan B4, B2, B8, B10):** the native launch surface follows the system appearance: `#FFFFFF` light, `#08302B` dark (middle stop of the dark HTML boot splash). Reverses the white color of the "unbranded white bridge" in the 2026-09-09 boot-sequence entry; the surface stays unbranded. iOS: `LaunchBackground` color set used by `LaunchScreen.storyboard`, the scene window and the web view (`MainViewController`). Android: `@color/launch_background` (`values/` + `values-night/`) for the system splash, window and WebView. `ios/android.backgroundColor` and `SplashScreen.backgroundColor` are removed from `capacitor.config.json`. Native launch can only follow the system setting, not an in-app theme override. The HTML boot splash (`index.html` splash theme script) follows the system mode on every platform too; Android's old 06-18 clock guess is gone, so the native and HTML surfaces agree.
+- iOS blurs the window when the scene resigns active and removes the blur on every activation (`SceneDelegate`); Android 13+ disables the recents screenshot (`setRecentsScreenshotEnabled(false)`), which still allows normal screenshots.
+- App-local plugin `SmdDevice` (iOS in `MainViewController.swift`, Android `SmdDevicePlugin.java`): `getPowerState()` + `powerStateChange` for Low Power Mode / Battery Saver, and Android-only `haptic({type})` through `View.performHapticFeedback` system constants, never raw Vibrator waveforms. iOS `haptic` resolves `{performed:false}`; iOS web code keeps `@capacitor/haptics`.
+
+## 2026-10-03 - Privacy mode masks by CSS over marked-up identifiers, never by rewriting text
+- Plan B2 privacy mode (`privacy-mode.js`) draws masks with `::after { content: attr(data-phi) }` over a hidden
+  inner span. **Why:** the DOM text stays the real value, so code that reads the DOM to copy, save, print or share
+  (ICU summary copy reads `textContent`) can never pick up a mask, and `@media print` never sees one. A JS swap of
+  text nodes would put masks into whatever reads the DOM next. **Trade-off:** every renderer has to wrap its
+  identifiers (one `phi()` helper per module), and screens that are not wrapped must say so; that is what
+  `[data-phi-unmasked]` and the amber label are for. Text that cannot carry markup (toasts, `confirm()`) uses
+  `screenText()`, which masks only at the moment it is shown. [[plans/Premium-Feel]] B2

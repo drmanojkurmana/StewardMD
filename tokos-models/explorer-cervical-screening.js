@@ -33,9 +33,10 @@
       text: T("Treat the eligible lesion with cryotherapy.", "योग्य घाव का cryotherapy से उपचार करें।"), results: { done: "followup-1y" } },
     biopsy: { kind: "decision", title: T("Biopsy: naked eye or colposcopy-guided", "Biopsy: naked eye या colposcopy-guided"),
       text: T("A lesion that is not eligible for cryotherapy needs a biopsy. Treat by the result.", "जो घाव cryotherapy के योग्य नहीं है उसकी biopsy चाहिए। परिणाम के अनुसार उपचार करें।"),
-      results: { cin1: "cryotherapy-cin1", "cin2-3": "leep", cancer: "refer-tcc" } },
+      results: { normal: "followup-1y", cin1: "cryotherapy-cin1", "cin2-3": "leep", cancer: "refer-tcc" } },
     "cryotherapy-cin1": { kind: "action", title: T("Low grade (CIN 1): cryotherapy", "Low grade (CIN 1): cryotherapy"),
-      text: T("Treat with cryotherapy.", "Cryotherapy से उपचार करें।"), results: { done: "followup-1y" } },
+      text: T("Treat with cryotherapy. This is the 2016 programme step. ASCCP 2019 and FOGSI prefer follow-up for CIN 1 and treat only persistent lesions.",
+              "Cryotherapy से उपचार करें। यह 2016 कार्यक्रम का चरण है। ASCCP 2019 और FOGSI CIN 1 में follow-up को प्राथमिकता देते हैं और केवल लगातार बने घाव का उपचार करते हैं।"), results: { done: "followup-1y" } },
     leep: { kind: "action", title: T("High grade (CIN 2 and 3): LEEP", "High grade (CIN 2 और 3): LEEP"),
       text: T("Treat with loop electrosurgical excision (LEEP).", "Loop electrosurgical excision (LEEP) से उपचार करें।"), results: { done: "followup-1y" } },
     "refer-tcc": { kind: "end", title: T("Cancer: refer to a tertiary cancer centre", "Cancer: tertiary cancer centre (TCC) भेजें"),
@@ -56,7 +57,7 @@
     "over-65": T("Over 65 years", "65 साल से अधिक"), symptoms: T("Has symptoms", "लक्षण हैं"),
     negative: T("VIA negative", "VIA negative"), positive: T("VIA positive", "VIA positive"),
     "eligible-cryo": T("Lesion eligible for cryotherapy", "घाव cryotherapy के योग्य"), "not-eligible": T("Lesion not eligible for cryotherapy", "घाव cryotherapy के योग्य नहीं"),
-    done: T("Done", "हो गया"), cin1: T("Low grade (CIN 1)", "Low grade (CIN 1)"), "cin2-3": T("High grade (CIN 2 and 3)", "High grade (CIN 2 और 3)"), cancer: T("Cancer", "Cancer")
+    done: T("Done", "हो गया"), normal: T("No CIN on biopsy", "Biopsy में CIN नहीं"), cin1: T("Low grade (CIN 1)", "Low grade (CIN 1)"), "cin2-3": T("High grade (CIN 2 and 3)", "High grade (CIN 2 और 3)"), cancer: T("Cancer", "Cancer")
   };
 
   function view(id) {
@@ -130,6 +131,8 @@
       { label: "MoHFW. Operational Framework: Management of Common Cancers, 26 August 2016 (Table 1 and Annexure 1b: age 30 to 65, VIA once in 5 years, the algorithm, cryotherapy criteria)", url: "https://nhsrcindia.org/sites/default/files/2021-03/Operational%20Framework%20Management%20of%20Common%20Cancers.pdf" },
       { label: "MoHFW. National Programme for Non-Communicable Diseases (NP-NCD) Training Module for Medical Officers, NHM 2025-26 (section 2.4.3.3: VIA once every 5 years at 30 to 65; treatment options)", url: "https://nhm.gov.in/New-Update-2025-26/Whats-new/NCD-Medical-Officers.pdf" },
       { label: "NHM Odisha. National Cancer Screening guidelines: Orientation to the Operational Framework (offer screening to any woman over 30 attending; refer suspicious lesions promptly)", url: "https://nhmodisha.gov.in/wp-content/uploads/2023/08/Cancer-Screening-Rationale-Framework.pdf" },
+      { label: "World Health Organization. WHO guideline for screening and treatment of cervical pre-cancer lesions for cervical cancer prevention, 2nd ed. Geneva: WHO; 2021 (HPV DNA primary test, intervals, VIA every 3 years, thermal ablation)", url: "https://www.who.int/publications/i/item/9789240030824" },
+      { label: "Perkins RB et al. 2019 ASCCP risk-based management consensus guidelines. J Low Genit Tract Dis 2020;24(2):102-131 (observation preferred for histological CIN 1)", url: "https://pubmed.ncbi.nlm.nih.gov/32243307/" },
       { label: "Bhatla N et al. FOGSI good clinical practice recommendations on screening and management of preinvasive lesions of the cervix. J Obstet Gynaecol Res 2020;46(2):201-214 (abstract only)", url: "https://pubmed.ncbi.nlm.nih.gov/31814222/" }
     ],
     review: "ai_drafted",
@@ -139,7 +142,8 @@
     },
     otherTests: {
       pap: { en: "The programme algorithm notes that VIA is less accurate in postmenopausal women, and that where there are no resources for Pap, women may be screened with VIA up to 65 years. It gives no Pap interval, so none is modelled.", hi: "Programme algorithm में लिखा है कि menopause के बाद VIA कम सटीक होती है, और जहाँ Pap के संसाधन नहीं हैं वहाँ स्त्रियों की VIA से 65 साल तक screening हो सकती है। Pap का कोई अंतराल नहीं दिया गया, इसलिए यहाँ मॉडल नहीं किया गया।" },
-      hpv: { en: "The FOGSI 2018 recommendations (abstract) prefer HPV testing and suggest VIA by trained providers in low-resource settings until an affordable HPV test is available. Age bands and intervals for HPV testing are not modelled because the full text could not be opened.", hi: "FOGSI 2018 की सिफ़ारिशें (abstract) HPV testing को प्राथमिकता देती हैं और कम संसाधन वाली जगहों में सस्ता HPV test उपलब्ध होने तक प्रशिक्षित प्रदाताओं द्वारा VIA सुझाती हैं। HPV testing की आयु सीमा और अंतराल मॉडल नहीं किए गए क्योंकि पूरा पाठ नहीं खुल सका।" }
+      who: { en: "WHO 2021 prefers HPV DNA as the primary screening test. Start at 30 and repeat every 5 to 10 years. Women living with HIV start at 25 and repeat every 3 to 5 years. Where VIA is still used, repeat it every 3 years. Thermal ablation is an alternative to cryotherapy. The Indian programme still uses VIA every 5 years.", hi: "WHO 2021 HPV DNA को प्राथमिक screening test मानता है। 30 साल से शुरू करें और हर 5 से 10 साल में दोहराएँ। HIV वाली स्त्रियाँ 25 साल से शुरू करें और हर 3 से 5 साल में दोहराएँ। जहाँ VIA अभी इस्तेमाल होती है वहाँ हर 3 साल में दोहराएँ। Thermal ablation, cryotherapy का विकल्प है। भारतीय कार्यक्रम अभी भी हर 5 साल में VIA करता है।" },
+      hpv: { en: "The FOGSI recommendations (Bhatla 2020, abstract) prefer HPV testing and suggest VIA by trained providers in low-resource settings until an affordable HPV test is available. Age bands and intervals for HPV testing are not modelled because the full text could not be opened.", hi: "FOGSI की सिफ़ारिशें (Bhatla 2020, abstract) HPV testing को प्राथमिकता देती हैं और कम संसाधन वाली जगहों में सस्ता HPV test उपलब्ध होने तक प्रशिक्षित प्रदाताओं द्वारा VIA सुझाती हैं। HPV testing की आयु सीमा और अंतराल मॉडल नहीं किए गए क्योंकि पूरा पाठ नहीं खुल सका।" }
     },
     constants: { ageMin: AGE_MIN, ageMax: AGE_MAX, intervalYears: INTERVAL_YEARS, followUpYears: FOLLOWUP_YEARS },
     steps: STEPS, stepIds: IDS, resultLabels: RESULT_LABEL, start: "start",

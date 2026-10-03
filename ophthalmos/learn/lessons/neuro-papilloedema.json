@@ -3,7 +3,12 @@
   "unit": "neuro",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Papilloedema",
     "hi": "पैपिलीडीमा"
@@ -13,25 +18,24 @@
     "hi": "[[papilloedema]] खोपड़ी के अंदर ज़्यादा दबाव से दोनों ऑप्टिक डिस्क की सूजन है। शुरू में नज़र अक्सर ठीक रहती है। इसे कभी मामूली न मानें: उसी दिन जाँच (imaging) करवाएँ।"
   },
   "see": {
-    "diagram": "diagrams/neuro-papilloedema.svg",
-    "w": 480,
-    "h": 240,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Two round views of the back of the eye. Left: a normal disc with a sharp edge, a small pale cup and clear vessels. Right: a bigger, pinker disc with a blurred edge and no cup. The vessels vanish at its edge, and red streaks of bleeding lie around it.",
-      "hi": "आँख के पिछले हिस्से के दो गोल दृश्य। बाईं ओर: तीखे किनारे, छोटे हल्के कप और साफ़ नलियों वाली सामान्य डिस्क। दाईं ओर: बड़ी, ज़्यादा गुलाबी डिस्क, धुंधले किनारे वाली और बिना कप के। नलियाँ उसके किनारे पर छिप जाती हैं, और उसके चारों ओर खून की लाल धारियाँ हैं।"
+      "en": "Two views of the optic disc. Left: a normal disc, pink with a sharp edge and a small pale cup in the middle. Vessels cross its edge clearly. Right: a swollen disc. It is raised with no cup, and its edge is blurred. Vessels are hidden where they cross the edge. Streaks of blood lie around the disc.",
+      "hi": "ऑप्टिक डिस्क के दो दृश्य। बाएँ: एक सामान्य डिस्क, गुलाबी, साफ़ किनारे वाली, और बीच में एक छोटा फीका कप। नसें उसके किनारे को साफ़ पार करती हैं। दाएँ: एक सूजी हुई डिस्क। यह उभरी हुई है, इसमें कप नहीं है, और किनारा धुंधला है। किनारा पार करते हुए नसें छिप जाती हैं। डिस्क के चारों ओर खून की धारियाँ हैं।"
     },
     "caption": {
-      "en": "Left, a normal disc. Right, a swollen disc as in papilloedema. In papilloedema both eyes look like this.",
-      "hi": "बाईं ओर सामान्य डिस्क। दाईं ओर पैपिलीडीमा जैसी सूजी हुई डिस्क। पैपिलीडीमा में दोनों आँखें ऐसी दिखती हैं।"
+      "en": "Left, a normal disc. Right, a swollen disc as in papilloedema. In papilloedema both eyes look like this. This one is severe; early papilloedema is much subtler.",
+      "hi": "बाईं ओर सामान्य डिस्क। दाईं ओर पैपिलीडीमा जैसी सूजी हुई डिस्क। पैपिलीडीमा में दोनों आँखें ऐसी दिखती हैं। यह गंभीर है; शुरुआती पैपिलीडीमा इससे कहीं हल्का दिखता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.292,
-        "y": 0.417,
+        "x": 0.291,
+        "y": 0.533,
         "label": {
           "en": "Sharp edge",
-          "hi": "तीखा किनारा"
+          "hi": "साफ़ किनारा"
         },
         "note": {
           "en": "A normal disc has a clear border.",
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.254,
-        "y": 0.5,
+        "x": 0.268,
+        "y": 0.43,
         "label": {
           "en": "Cup",
           "hi": "कप"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.5,
+        "x": 0.745,
+        "y": 0.448,
         "label": {
           "en": "Raised disc, no cup",
           "hi": "उभरी डिस्क, कप नहीं"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.392,
+        "x": 0.673,
+        "y": 0.34,
         "label": {
           "en": "Blurred edge, hidden vessels",
           "hi": "धुंधला किनारा, छिपी नलियाँ"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.669,
-        "y": 0.313,
+        "x": 0.795,
+        "y": 0.2,
         "label": {
           "en": "Flame haemorrhage",
           "hi": "लौ जैसा हेमरेज"
@@ -88,8 +92,10 @@
       }
     ],
     "more": [
+      "neuro-papilloedema",
       "optic-disc"
-    ]
+    ],
+    "img": "learn/media/real/neuro-papilloedema.webp"
   },
   "why": {
     "steps": [
@@ -168,7 +174,7 @@
         },
         {
           "en": "A pale, flat disc",
-          "hi": "पीली, सपाट डिस्क"
+          "hi": "फीकी, सपाट डिस्क"
         }
       ],
       "a": 0,

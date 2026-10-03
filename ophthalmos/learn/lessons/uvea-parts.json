@@ -3,7 +3,12 @@
   "unit": "uveitis",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The uvea and where uveitis sits",
     "hi": "यूविया और यूवाइटिस कहाँ होता है"
@@ -13,21 +18,20 @@
     "hi": "[[uvea]] आँख की बीच वाली परत है: [[iris]], [[ciliary-body]] और [[choroid]]। [[uveitis]] का नाम इस पर रखते हैं कि सूजन कहाँ है।"
   },
   "see": {
-    "diagram": "diagrams/uvea-parts.svg",
-    "w": 400,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram of an eyeball cut from front to back, seen from the side. The front is on the left and the optic nerve leaves on the right. The iris, the ciliary body and the choroid are drawn in orange.",
-      "hi": "आगे से पीछे तक कटी आँख का चित्र, बगल से देखा गया। आगे का हिस्सा बाईं ओर है और ऑप्टिक नर्व दाईं ओर से निकलती है। आइरिस, सिलियरी बॉडी और कोरॉइड नारंगी रंग में बने हैं।"
+      "en": "An eye cut in half from front to back, with the front on the left. The brown iris, the ciliary body behind it and the dark red choroid form one coat. This coat is the uvea. The clear front chamber lies in front of the iris. Clear jelly fills the back of the eye.",
+      "hi": "आँख को आगे से पीछे तक बीच से काटा गया है, आगे का हिस्सा बाईं ओर है। भूरी आइरिस, उसके पीछे सिलियरी बॉडी और गहरी लाल कोरॉइड मिलकर एक परत बनाते हैं। यही परत यूविया है। पारदर्शी आगे का कक्ष आइरिस के सामने है। आँख के पिछले हिस्से में पारदर्शी जेली भरी है।"
     },
     "caption": {
       "en": "The three parts of the uvea are drawn in orange. Tap each dot to see the part, and which type of uveitis is centred there.",
       "hi": "यूविया के तीन हिस्से नारंगी रंग में हैं। हर बिंदु पर टैप करें और देखें कि वह कौन सा हिस्सा है, और वहाँ कौन सा यूवाइटिस होता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.395,
+        "x": 0.225,
         "y": 0.36,
         "label": {
           "en": "Iris",
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.43,
-        "y": 0.267,
+        "x": 0.29,
+        "y": 0.28,
         "label": {
           "en": "Ciliary body",
           "hi": "सिलियरी बॉडी (ciliary body)"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.703,
-        "y": 0.743,
+        "x": 0.785,
+        "y": 0.42,
         "label": {
           "en": "Choroid",
           "hi": "कोरॉइड (choroid)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.338,
-        "y": 0.5,
+        "x": 0.19,
+        "y": 0.42,
         "label": {
           "en": "Anterior chamber",
           "hi": "एंटीरियर चैंबर (anterior chamber)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.625,
-        "y": 0.5,
+        "x": 0.5,
+        "y": 0.33,
         "label": {
           "en": "Vitreous",
           "hi": "विट्रियस (vitreous)"
@@ -88,8 +92,10 @@
       }
     ],
     "more": [
+      "uvea-parts",
       "eye-cross-section"
-    ]
+    ],
+    "img": "learn/media/real/uvea-parts.webp"
   },
   "why": {
     "steps": [

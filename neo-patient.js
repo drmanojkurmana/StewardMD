@@ -151,19 +151,46 @@
     });
     return { ok: ok, needs: needs, unknownKeys: unk };
   }
+  /* A band's condition in plain words: "Born at 34 weeks or less, 8 to under 28 days old". The words keep the
+   * source's boundaries exactly (or less / under / more than / at least). */
+  function rangeWords(c, unit) {
+    var u = unit ? " " + unit : "";
+    var lo = c.min != null ? { v: c.min, inc: true } : c.gt != null ? { v: c.gt, inc: false } : null;
+    var hi = c.max != null ? { v: c.max, inc: true } : c.lt != null ? { v: c.lt, inc: false } : null;
+    if (lo && hi) {
+      if (lo.inc && hi.inc) return lo.v === hi.v ? lo.v + u : lo.v + " to " + hi.v + u;
+      if (lo.inc && !hi.inc) return lo.v + " to under " + hi.v + u;
+      if (!lo.inc && hi.inc) return "more than " + lo.v + ", up to " + hi.v + u;
+      return "more than " + lo.v + " and under " + hi.v + u;
+    }
+    if (lo) return (lo.inc ? lo.v + u + " or more" : "more than " + lo.v + u);
+    if (hi) return (hi.inc ? hi.v + u + " or less" : "under " + hi.v + u);
+    return "";
+  }
   function condText(when) {
-    var out = [], L = { ga_wk: ["GA", "wk"], pma_wk: ["PMA", "wk"], pna_d: ["PNA", "d"], pna_wk: ["PNA", "wk"], pna_mo: ["PNA", "mo"], age_mo: ["Age", "mo"], age_months: ["Age", "mo"], age_yr: ["Age", "y"], age_years: ["Age", "y"], dol: ["Day of life", ""], hours: ["Age", "h"], wt: ["Weight", ""], bw: ["Birth weight", ""] };
+    var out = [];
     Object.keys(when || {}).forEach(function (k) {
       var c = when[k];
-      if (k === "life_week") { out.push(c === "first" ? "First week of life" : "After the first week of life"); return; }
+      if (k === "life_week") { out.push(c === "first" ? "In the first week of life" : "After the first week of life"); return; }
       if (k === "at_birth") { out.push("At birth"); return; }
       if (typeof c !== "object" || c === null) { out.push(k + " " + c); return; }
-      var l = L[k] || [k, ""], u = c.unit || l[1], p = [];
-      if (c.min != null) p.push(">= " + c.min); if (c.gt != null) p.push("> " + c.gt);
-      if (c.max != null) p.push("<= " + c.max); if (c.lt != null) p.push("< " + c.lt);
-      out.push(l[0] + " " + p.join(" and ") + (u ? " " + u : ""));
+      var u = c.unit;
+      switch (k) {
+        case "ga_wk": out.push(("Born at " + rangeWords(c, "weeks")).replace("Born at more than ", "Born after ").replace("Born at under ", "Born before ")); break;
+        case "pma_wk": out.push("Corrected age (PMA) " + rangeWords(c, "weeks")); break;
+        case "pna_d": out.push(rangeWords(c, "days") + " old"); break;
+        case "pna_wk": out.push(rangeWords(c, "weeks") + " old"); break;
+        case "pna_mo": case "age_mo": case "age_months": out.push(rangeWords(c, "months") + " old"); break;
+        case "age_yr": case "age_years": out.push(rangeWords(c, "years") + " old"); break;
+        case "dol": out.push("Day " + rangeWords(c, "") + " of life"); break;
+        case "hours": out.push(rangeWords(c, "hours") + " old"); break;
+        case "wt": out.push("Weighing " + rangeWords(c, u || "g")); break;
+        case "bw": out.push("Birth weight " + rangeWords(c, u || "g")); break;
+        default: out.push(k + " " + rangeWords(c, u || ""));
+      }
     });
-    return out.join(", ");
+    var t = out.join(", ");
+    return t ? t.charAt(0).toUpperCase() + t.slice(1) : "";
   }
 
   var ENGINE = { derive: derive, check: check, parseDob: parseDob, summary: summary, fmtWD: fmtWD, context: context, matches: matches, condText: condText, LIMITS: LIMITS, TERM_DAYS: TERM_DAYS, NEONATAL_DAYS: NEONATAL_DAYS };

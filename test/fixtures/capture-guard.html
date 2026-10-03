@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- Fixture for test/run-capture-guard-ui.mjs: the Tokós "See it" figure markup from
+     specialty-learn.js seeHtml(), a More-pictures tile, and a long spacer so the real image can
+     scroll out of view. A mocked Capacitor CaptureGuard plugin is injected by the harness. -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/specialty.css">
+<style>body{margin:0} .spacer{height:3000px}</style>
+<script src="/toast.js"></script>
+<script src="/capture-guard.js"></script>
+</head><body>
+<div class="sp-root on" id="tokosRoot" style="position:static;display:block;height:auto;overflow:visible">
+  <div class="sp-col" style="padding:16px">
+    <figure class="ln-fig"><div class="ln-pic" id="lnPic" style="aspect-ratio:4 / 3;width:min(100%, 358px)">
+      <button type="button" class="ln-pic-b" data-act="lnzoom" id="zoomBtn" aria-label="Enlarge"><img id="lnImg" src="/tokos/learn/media/real/gy1-uterus.webp" alt="Uterus" width="1200" height="900" decoding="async"></button>
+      <button type="button" class="ln-hot" id="hot0" data-act="lnhot" data-k="0" style="left:30%;top:40%" aria-label="Point 1"><span class="ln-dot" aria-hidden="true">1</span></button>
+    </div><figcaption>Caption</figcaption></figure>
+    <figure class="ln-mfig"><button type="button" class="ln-mpic" style="aspect-ratio:4 / 3"><img id="diagImg" src="/tokos/learn/media/gy1-diagram.svg" alt="Diagram"></button></figure>
+    <div class="spacer"></div>
+  </div>
+</div>
+<script>
+  window.__hits = [];
+  document.addEventListener("click", function (e) { var b = e.target.closest("button"); window.__hits.push(b ? b.id : e.target.tagName); });
+</script>
+</body></html>

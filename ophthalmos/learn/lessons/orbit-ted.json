@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Thyroid eye disease",
     "hi": "थायरॉइड नेत्र रोग (thyroid eye disease)"
@@ -13,22 +18,21 @@
     "hi": "[[thyroid-eye-disease]] में पलकें पीछे खिंच जाती हैं और आँखें बाहर आती हैं। वयस्कों में एक या दोनों आँखों के [[proptosis]] का यह सबसे आम कारण है।"
   },
   "see": {
-    "diagram": "diagrams/orbit-ted.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of two pairs of eyes. Top pair: normal, with each upper lid covering the top edge of the coloured iris. Bottom pair: the upper lids are pulled up so white shows above the iris. The outer part of each lid is highest. Red vessels sit at the outer corners, and the lower lids are puffy.",
-      "hi": "आँखों के दो जोड़ों का चित्र। ऊपर वाला जोड़ा: सामान्य, हर ऊपरी पलक रंगीन आइरिस का ऊपरी किनारा ढकती है। नीचे वाला जोड़ा: ऊपरी पलकें ऊपर खिंची हैं, इसलिए आइरिस के ऊपर सफ़ेद दिखता है। हर पलक का बाहरी हिस्सा सबसे ऊँचा है, बाहरी कोनों पर लाल नसें हैं, और निचली पलकें फूली हैं।"
+      "en": "Two views of the same eyes. Top: normal eyes, with the upper lids resting just over the top of the iris. Bottom: thyroid eye disease. The upper lids are pulled back, so white shows above each iris. The lids are puffy, and red vessels cross the whites. Each upper lid is pulled highest toward the outer corner.",
+      "hi": "एक ही आँखों के दो दृश्य। ऊपर: सामान्य आँखें, ऊपरी पलकें आइरिस के ठीक ऊपरी किनारे पर टिकी हैं। नीचे: थायरॉइड नेत्र रोग। ऊपरी पलकें पीछे खिंची हैं, इसलिए हर आइरिस के ऊपर सफ़ेद दिखता है। पलकें सूजी हैं, और सफ़ेद हिस्से पर लाल नसें हैं। हर ऊपरी पलक बाहरी कोने की ओर सबसे ज़्यादा ऊपर खिंची है।"
     },
     "caption": {
       "en": "Top: normal eyes. Bottom: thyroid eye disease, with pulled-back lids, white above the iris, puffy lids and red vessels.",
       "hi": "ऊपर: सामान्य आँखें। नीचे: थायरॉइड नेत्र रोग, पीछे खिंची पलकें, आइरिस के ऊपर सफ़ेद, फूली पलकें और लाल नसें।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.267,
-        "y": 0.173,
+        "x": 0.255,
+        "y": 0.2,
         "label": {
           "en": "Normal lid",
           "hi": "सामान्य पलक"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.267,
-        "y": 0.603,
+        "x": 0.25,
+        "y": 0.66,
         "label": {
           "en": "White above the iris",
           "hi": "आइरिस के ऊपर सफ़ेद"
@@ -51,7 +55,7 @@
         }
       },
       {
-        "x": 0.146,
+        "x": 0.14,
         "y": 0.727,
         "label": {
           "en": "Red vessels",
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.587,
+        "x": 0.85,
+        "y": 0.627,
         "label": {
           "en": "Outer lid pulled highest",
           "hi": "बाहरी पलक सबसे ऊँची"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.733,
-        "y": 0.873,
+        "x": 0.72,
+        "y": 0.587,
         "label": {
           "en": "Puffy lids",
           "hi": "फूली पलकें"
@@ -86,6 +90,10 @@
           "hi": "सूजी चर्बी और तरल से पलकें फूल जाती हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-ted.webp",
+    "more": [
+      "orbit-ted"
     ]
   },
   "why": {

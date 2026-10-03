@@ -92,7 +92,7 @@
       registerAll();
       el.innerHTML = '<section class="nh-card"><h3>Scores ' + A.badge(doc) + '</h3><div class="nh-list">' + doc.scores.map(function (s) { return '<button type="button" class="nh-li" data-score="' + A.esc("neo_" + s.id.replace(/-/g, "_")) + '"><span>' + A.esc(s.name) + "<br><small>" + A.esc(s.purpose || "") + "</small></span></button>"; }).join("") + "</div>" +
         ((doc.notes || []).map(function (n) { return A.note(n.text, "info") + A.srcLine(doc, n); }).join("")) +
-        ((doc.not_included || []).length ? A.note("Not on file: " + doc.not_included.map(function (x) { return x.id.toUpperCase(); }).join(", ") + " (no source defining them was found).", "info") : "") + '<div class="nh-foot">Opens in Calculators (category Neonatology).</div></section>';
+        ((doc.not_included || []).length ? A.note("Not on file: " + doc.not_included.map(function (x) { return x.id.toUpperCase(); }).join(", ") + " (no source defining them was found).", "info") : "") + '<div class="nh-foot">Tap a score to fill it in. It opens in Calculators (Neonatology).</div></section>';
       el.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-score]"); if (!b || !G.MEDCALC) return; var id = b.getAttribute("data-score"); G.SMD_NEO_HUB.close(); setTimeout(function () { G.MEDCALC.open(id); }, 30); };
     });
   }

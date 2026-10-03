@@ -4,6 +4,7 @@
  * USAGE: node test/run-tokos-app-ui.mjs   (BASE=http://localhost:8996/ to use a running server)
  */
 import { spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,7 +22,8 @@ async function ensureServer() {
   for (let i = 0; i < 30; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
 }
 await ensureServer();
-const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check"], { stdio: "ignore" });
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-dev-shm-usage", "--disable-gpu"], { stdio: ["ignore", "ignore", "pipe"] });
+let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise(r => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
@@ -32,7 +34,8 @@ const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now(
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
 
 try {
-  let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
+  let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }   // up to 60 s: a cold CI Chrome can take over 12
+  if (!ver) throw new Error("Chrome did not start within 60 s: " + chromeErr.slice(-800));
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
@@ -56,12 +59,12 @@ try {
   await load(BASE);
   // lazy loading: app boot requests the loader and no engine or Tokós file
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;
-  ok(reqs.some((u) => /tokos-loader\.js\?v=tok7/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
+  ok(reqs.some((u) => /tokos-loader\.js\?v=tok8/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=pick][data-t=test]');`, 20000), "first open loads Tokós and asks Learn or Test");
-  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok7/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok7/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
+  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok8/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok8/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
   await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   // Tokós 2.0 wiring: every model in tokos/models.json is listed with its own screen (13 tools, 6 drills + the labour room
@@ -85,7 +88,12 @@ try {
   // 16 CTG cases + 3 text blocks, plus Tokós 2.0: 40 units, 17 bank topics, 6 drills, the labour room, 13 calculators,
   // 6 explorers, 2 ultrasound clinics; the units holding claims to verify come first
   ok(await until(`return document.querySelectorAll('#smdReview .rv-row').length === 104;`, 20000), "Review Desk Tokós tab lists every Tokós content item: " + await ev(`return document.querySelectorAll('#smdReview .rv-row').length;`));
-  ok(await ev(`var r=document.querySelectorAll('#smdReview .rv-row'); return r[0].getAttribute("data-rv-act") + "," + r[1].getAttribute("data-rv-act");`) === "sel:unit-ob9,sel:unit-ob12", "units with claims to verify are listed first");
+  // The units holding claims to verify come first, in unit order, then everything else. Which units those are follows
+  // the content (the realistic-image lessons carry a verify note too), so the expected list is read from the index.
+  const tIx = JSON.parse(readFileSync(join(HERE, "..", "tokos/learn/index.json"), "utf8"));
+  const verifyUnits = tIx.units.filter((u) => u.lessons.some((l) => ((tIx.lessons[l] || {}).verify || []).length)).map((u) => "sel:unit-" + u.id);
+  const rvOrder = (await ev(`return [].map.call(document.querySelectorAll('#smdReview .rv-row'), function (r) { return r.getAttribute("data-rv-act"); }).join(",");`)).split(",");
+  ok(verifyUnits.length > 0 && rvOrder.slice(0, verifyUnits.length).join(",") === verifyUnits.join(","), "units with claims to verify are listed first, in unit order (" + verifyUnits.length + "): " + rvOrder.slice(0, 3).join(","));
   await ev(`document.querySelector('#smdReview [data-rv-act="sel:unit-ob12"]').click(); return 1;`);
   await until(`return !!document.querySelector('#smdReview [data-rv-act="read"]');`);
   await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);

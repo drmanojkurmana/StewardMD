@@ -3,7 +3,12 @@
   "unit": "ob10",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Uterine rupture: know the risks and act on the first signs",
     "hi": "गर्भाशय का फटना: जोखिम पहचानें और पहले संकेतों पर कार्रवाई करें"
@@ -13,22 +18,21 @@
     "hi": "[[uterine-rupture]] दोनों जानों के लिए ख़तरा है। यह पुराने सिज़ेरियन निशान, अवरुद्ध प्रसव या ऑक्सीटोसिन के दुरुपयोग में सबसे आम है। पहली चेतावनी पर कार्रवाई करें।"
   },
   "see": {
-    "diagram": "diagrams/ob10-rupture.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "A womb outline with a dashed horizontal old scar near the bottom. A jagged red tear runs along it and red drops fall below. Outside the womb on the right is a baby.",
-      "hi": "गर्भाशय की रूपरेखा जिसके निचले हिस्से में बिंदीदार क्षैतिज पुराना निशान है। उसके साथ दाँतेदार लाल फटन है और नीचे लाल बूँदें गिर रही हैं। दाईं ओर गर्भाशय के बाहर बच्चा है।"
+      "en": "Realistic medical illustration showing complete uterine rupture along a previous caesarean scar in maternal pelvic sagittal cross-section, with full-thickness disruption of the anterior lower uterine segment and fetal extrusion into the peritoneal space.",
+      "hi": "मातृ श्रोणि के अनुदैर्ध्य काट में पिछले सिजेरियन निशान के साथ पूर्ण गर्भाशय टूटने को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र, जिसमें पूर्ववर्ती निचले गर्भाशय खंड का पूर्ण विघटन और पेरिटोनियल स्थान में भ्रूण का बाहर निकलना शामिल है।"
     },
     "caption": {
-      "en": "A tear along an old scar lets the baby and blood escape.",
-      "hi": "पुराने निशान के साथ फटन से बच्चा और खून बाहर आ जाते हैं।"
+      "en": "Uterine rupture: lower segment caesarean hysterotomy scar disruption and fetal extrusion.",
+      "hi": "गर्भाशय टूटना: निचले खंड के सिजेरियन चीरे के निशान का विघटन और भ्रूण का बाहर निकलना।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.417,
-        "y": 0.633,
+        "x": 0.38,
+        "y": 0.49,
         "label": {
           "en": "Old scar",
           "hi": "पुराना निशान"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.417,
-        "y": 0.74,
+        "x": 0.44,
+        "y": 0.54,
         "label": {
           "en": "Tear",
           "hi": "फटन"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.823,
-        "y": 0.433,
+        "x": 0.52,
+        "y": 0.46,
         "label": {
           "en": "Baby outside",
           "hi": "बच्चा बाहर"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.458,
-        "y": 0.883,
+        "x": 0.4,
+        "y": 0.56,
         "label": {
           "en": "Bleeding",
           "hi": "रक्तस्राव"
@@ -74,6 +78,10 @@
           "hi": "योनि या आंतरिक रक्तस्राव से जल्दी शॉक हो जाता है।"
         }
       }
+    ],
+    "img": "learn/media/real/ob10-rupture.webp",
+    "more": [
+      "ob10-rupture"
     ]
   },
   "why": {
@@ -83,8 +91,8 @@
         "hi": "श्रम के दबाव में निशान वाली दीवार टूटती है, या न हटने वाले अवरोध के सामने सामान्य दीवार भी टूट जाती है।"
       },
       {
-        "en": "Oxytocin and prostaglandins raise the force. Prostaglandins are contraindicated in a scarred uterus because of the high risk of rupture.",
-        "hi": "ऑक्सीटोसिन और प्रोस्टाग्लैंडिन बल बढ़ाते हैं। निशान वाले गर्भाशय में प्रोस्टाग्लैंडिन उच्च फटन जोखिम के कारण वर्जित हैं।"
+        "en": "Oxytocin and prostaglandins raise the force. Misoprostol is contraindicated in a scarred uterus. Other prostaglandins raise the rupture risk, so choose the method with care.",
+        "hi": "ऑक्सीटोसिन और प्रोस्टाग्लैंडिन बल बढ़ाते हैं। निशान वाले गर्भाशय में मिसोप्रोस्टोल वर्जित है। अन्य प्रोस्टाग्लैंडिन फटन का जोखिम बढ़ाते हैं, इसलिए तरीक़ा सावधानी से चुनें।"
       },
       {
         "en": "Rupture can kill the baby within minutes and the mother by haemorrhage or infection.",
@@ -185,7 +193,8 @@
   "sources": [
     "FOGSI-ICOG. Good Clinical Practice Recommendations on Induction of Labour, 2018 (induction after caesarean, prostaglandins contraindicated in a scarred uterus).",
     "Cunningham FG, et al. Williams Obstetrics, uterine rupture (textbook reference for risk factors, signs and management).",
-    "Reviewer to add the MoHFW BEmOC training manual section on obstructed labour and rupture."
+    "Reviewer to add the MoHFW BEmOC training manual section on obstructed labour and rupture.",
+    "RCOG. Birth after Previous Caesarean Birth, Green-top Guideline No. 45, 2015 (prostaglandin induction and the risk of uterine rupture)."
   ],
   "competencies": [
     "OG14.2"

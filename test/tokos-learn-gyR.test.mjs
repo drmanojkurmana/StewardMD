@@ -190,7 +190,7 @@ test("diagrams: own SVG, no text or embedded content, viewBox matches the lesson
 });
 
 test("credits: every diagram and media file has an original or permitted-licence entry", () => {
-  const OK = /^(Original, MAIKNOWLEDGE LLP|CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY[\w. -]*|Public domain)$/;
+  const OK = /^(Original, MAIKNOWLEDGE LLP|Original, StewardMD|CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY[\w. -]*|Public domain)$/;
   for (const u of UNITS) {
     const C = JSON.parse(read(`${LEARN}media/credits-${u}.json`));
     assert.equal(C.v, 1);

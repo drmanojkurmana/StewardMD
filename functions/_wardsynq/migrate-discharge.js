@@ -38,7 +38,7 @@ import { VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { problemLine, problemsForSummary } from "./migrate-problem.js";
 import { diagnosisFor } from "./patient-record.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
-import { ADMISSION_CLASSES, freeMasterBed, stopOrderVersion } from "./migrate-inpatient.js";
+import { ADMISSION_CLASSES, freeMasterBed, releaseBedClaim, stopOrderVersion } from "./migrate-inpatient.js";
 import { chargesForPatient, unbilledItems } from "./charge-capture.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { invoicesForStay } from "./invoice.js";
@@ -604,6 +604,7 @@ async function dischargePatient(request, env, ctx) {
     // authoritative record of the discharge either way.
     const loc = current.location || {};
     if (ctx.orgId && loc.ward && loc.bed) await freeMasterBed(env, ctx.orgId, loc.ward, loc.bed, resolved.actor.id);
+    if (loc.bed) await releaseBedClaim(svc, current);   // the bed claim too; a closed holder also frees it on its own
     /* CLIN-04: THE STAY'S MEDICATION ORDERS END WITH IT. Every order of this encounter still active is stopped, as a new
      * version by the discharging clinician with the reason "discharged", so none of them stays on a round, in a
      * worklist or in a later admission's checks. Medicines to continue at home belong on the discharge prescription.

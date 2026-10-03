@@ -27,7 +27,7 @@
     ["pa_t2", "Post-abortion, second trimester, procedural", "गर्भपात के बाद, दूसरी तिमाही, प्रक्रिया द्वारा", "2*", "2*", "1*", "1*", "1*", "1*"],
     ["pa_septic", "Immediate post-septic abortion", "सेप्टिक गर्भपात के तुरंत बाद", "4", "4", "1*", "1*", "1*", "1*"],
     ["ectopic", "Past ectopic pregnancy", "पहले एक्टोपिक गर्भावस्था", "1", "1", "1", "1", "2", "1"],
-    ["nullip", "Nulliparous", "पहली गर्भावस्था (नलिपैरस)", "2", "2", "1", "1", "1", "1"],
+    ["nullip", "Nulliparous", "कोई पूर्व प्रसव नहीं (नलिपैरस)", "2", "2", "1", "1", "1", "1"],
     ["age_lt18", "Age under 18 (menarche to under 18)", "आयु 18 से कम (पहली माहवारी से 18 से कम)", "2", "2", "1", "2", "1", "1"],
     ["age_18_19", "Age 18 to 19", "आयु 18 से 19", "2", "2", "1", "1", "1", "1"],
     ["age_20_39", "Age 20 to 39", "आयु 20 से 39", "1", "1", "1", "1", "1", "1"],
@@ -124,6 +124,8 @@
       if (c.i.indexOf("/") >= 0) lines.push({ en: "Category " + c.i + " depends on severity or type; read the source clarification.", hi: "श्रेणी " + c.i + " गंभीरता या प्रकार पर निर्भर; स्रोत का स्पष्टीकरण देखें।" });
       if (split) lines.push({ en: "Initiation " + c.i + ", continuation " + c.c + ": " + CAT[top(c.c)][0], hi: "शुरू करना " + c.i + ", जारी रखना " + c.c + ": " + CAT[top(c.c)][1] });
       if (c.star) lines.push({ en: "The source has a clarification for this classification (asterisk); check it in the full US MEC table.", hi: "स्रोत में इस वर्गीकरण का स्पष्टीकरण है (तारांकन); पूरी यूएस एमईसी तालिका में देखें।" });
+      lines.push({ en: "India follows WHO MEC 2015, and some categories differ from US MEC. WHO: copper IUD within 48 hours postpartum is category 1; 48 hours to under 4 weeks is category 3. WHO: DMPA while breastfeeding under 6 weeks is category 3. WHO: combined pills while breastfeeding 6 weeks to 6 months are category 3.",
+        hi: "भारत डब्ल्यूएचओ एमईसी 2015 अपनाता है, और कुछ श्रेणियाँ यूएस एमईसी से अलग हैं। डब्ल्यूएचओ: प्रसव के 48 घंटे के भीतर कॉपर आईयूडी श्रेणी 1; 48 घंटे से 4 सप्ताह से कम श्रेणी 3। डब्ल्यूएचओ: 6 सप्ताह से कम स्तनपान में डीएमपीए श्रेणी 3। डब्ल्यूएचओ: 6 सप्ताह से 6 माह स्तनपान में संयुक्त गोली श्रेणी 3।" });
       if (r[0].indexOf("age_") === 0) lines.push({ en: "Age bands combine the per-method age ranges printed in the chart.", hi: "आयु वर्ग चार्ट में छपी विधि-वार आयु सीमाओं को मिलाकर बने हैं।" });
       return { ok: true, value: val, band: mx === 1 ? "normal" : mx === 4 ? "danger" : "caution", label: lab, lines: lines,
         rule: { en: "Category " + c.i + ": " + catI[0] + " Categories: 1 no restriction; 2 advantages generally outweigh risks; 3 risks usually outweigh advantages; 4 unacceptable health risk.",

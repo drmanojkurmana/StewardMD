@@ -3,7 +3,12 @@
   "unit": "ob4",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG17.2"
   ],
@@ -16,46 +21,45 @@
     "hi": "अच्छा दूध पिलाना सही पकड़ पर निर्भर है: बच्चा केवल निप्पल नहीं, एरिओला भी लेता है। चार संकेत बताते हैं कि पकड़ सही है।"
   },
   "see": {
-    "diagram": "diagrams/ob4-breastfeeding-technique.svg",
-    "w": 480,
-    "h": 300,
+    "w": 1080,
+    "h": 724,
     "alt": {
-      "en": "Two round breasts, each with a dark areola. Left: a wide pink mouth covers the nipple and the lower half of the areola, the upper areola is still visible above the mouth, and the chin rests against the breast; a green arrow points down at the top. Right: a small mouth sits at the nipple tip only, the chin is away from the breast, and a red cross is drawn above.",
-      "hi": "दो गोल स्तन, जिनमें गहरा एरिओला है। बाएँ: चौड़ा गुलाबी मुँह निप्पल और एरिओला के निचले आधे हिस्से को ढके है, मुँह के ऊपर एरिओला का ऊपरी हिस्सा दिख रहा है और ठुड्डी स्तन से टिकी है; ऊपर हरा तीर नीचे की ओर है। दाएँ: छोटा मुँह केवल निप्पल की नोक पर है, ठुड्डी स्तन से दूर है और ऊपर लाल क्रॉस बना है।"
+      "en": "Two side views of a baby at the breast with the mouth cut away. Left, good attachment: mouth wide open, lower lip turned out, chin touching the breast, more areola above the mouth than below. Right, poor attachment: lips on the nipple tip only, chin away from the breast.",
+      "hi": "स्तन पर बच्चे के दो बग़ल के चित्र, मुँह का भीतरी भाग दिखता है। बाएँ, सही पकड़: मुँह पूरा खुला, निचला होंठ बाहर मुड़ा, ठुड्डी स्तन से छूती, मुँह के ऊपर नीचे से ज़्यादा एरिओला। दाएँ, ग़लत पकड़: होंठ केवल निप्पल की नोक पर, ठुड्डी स्तन से दूर।"
     },
     "caption": {
       "en": "Good attachment (left) and poor attachment (right).",
       "hi": "सही पकड़ (बाएँ) और ग़लत पकड़ (दाएँ)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.25,
-        "y": 0.547,
+        "x": 0.215,
+        "y": 0.54,
         "label": {
           "en": "Mouth wide open",
           "hi": "मुँह पूरा खुला"
         },
         "note": {
           "en": "The mouth is wide open and takes in the nipple and much of the areola.",
-          "hi": "मुँह पूरा खुला है और निप्पल तथा ज़्यादातर एरिओला को पकड़ता है।"
+          "hi": "मुँह पूरा खुला है और निप्पल तथा ज़्यादातर एरियोला को पकड़ता है।"
         }
       },
       {
-        "x": 0.25,
-        "y": 0.353,
+        "x": 0.175,
+        "y": 0.44,
         "label": {
           "en": "More areola above",
-          "hi": "ऊपर ज़्यादा एरिओला"
+          "hi": "ऊपर ज़्यादा एरियोला"
         },
         "note": {
           "en": "More areola is visible above the baby's mouth than below.",
-          "hi": "बच्चे के मुँह के ऊपर नीचे से ज़्यादा एरिओला दिखता है।"
+          "hi": "बच्चे के मुँह के ऊपर नीचे से ज़्यादा एरियोला दिखता है।"
         }
       },
       {
-        "x": 0.325,
-        "y": 0.593,
+        "x": 0.205,
+        "y": 0.64,
         "label": {
           "en": "Lower lip turned out",
           "hi": "निचला होंठ बाहर की ओर"
@@ -66,8 +70,8 @@
         }
       },
       {
-        "x": 0.25,
-        "y": 0.68,
+        "x": 0.185,
+        "y": 0.72,
         "label": {
           "en": "Chin touching",
           "hi": "ठुड्डी स्पर्श में"
@@ -78,8 +82,8 @@
         }
       },
       {
-        "x": 0.75,
-        "y": 0.467,
+        "x": 0.685,
+        "y": 0.55,
         "label": {
           "en": "Poor attachment",
           "hi": "ग़लत पकड़"
@@ -89,13 +93,17 @@
           "hi": "केवल निप्पल की नोक पर छोटा मुँह: इससे माँ को दर्द होता है, बच्चे को कम दूध मिलता है और निप्पल फटता है। स्थिति सुधारिए।"
         }
       }
+    ],
+    "img": "learn/media/real/ob4-breastfeeding-technique.webp",
+    "more": [
+      "ob4-breastfeeding-technique"
     ]
   },
   "why": {
     "steps": [
       {
         "en": "Help the mother sit or lie comfortably. She can feed lying down or sitting. What matters is that both are comfortable. Check position and attachment at the first feed.",
-        "hi": "माँ को आराम से बैठने या लेटने में मदद कीजिए। वह लेटकर या बैठकर पिला सकती है। ज़रूरी है कि दोनों आरामदायक हों। पहले दूध पर स्थिति और पकड़ जाँचिए।"
+        "hi": "माँ को आराम से बैठने या लेटने में मदद कीजिए। वह लेटकर या बैठकर पिला सकती है। ज़रूरी है कि दोनों आरामदायक हों। पहली बार दूध पिलाते समय स्थिति और पकड़ जाँचिए।"
       },
       {
         "en": "Look for four signs of correct attachment: chin touching the breast, mouth wide open, lower lip turned out, and more areola seen above the mouth than below.",

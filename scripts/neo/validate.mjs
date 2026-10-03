@@ -141,6 +141,9 @@ export function validateAll(files) {
   const list = files && files.length ? files : readdirSync(DIR).filter((f) => f.endsWith(".json")).map((f) => join(DIR, f));
   for (const f of list) {
     let doc; try { doc = JSON.parse(readFileSync(f, "utf8")); } catch (e) { errs.push(basename(f) + ": bad JSON " + e.message); continue; }
+    /* monograph-neonatal.json is verbatim text from our own monographs (worker/data/gold), not a
+     * quoted web source: test/neo-monograph.test.mjs checks it against the monographs instead. */
+    if (doc && doc.kind === "neo-monograph") continue;
     validateDoc(doc, basename(f), errs);
   }
   return { files: list.length, errs };

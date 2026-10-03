@@ -3,7 +3,12 @@
   "unit": "cornea",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Chemical in the eye: wash first",
     "hi": "आँख में केमिकल: पहले धोएँ"
@@ -13,22 +18,25 @@
     "hi": "केमिकल का छींटा आँख की वह इमरजेंसी है जिसका इलाज जाँच से पहले होता है। तुरंत ढेर सारे साफ़ पानी से [[irrigation]] शुरू करें, कम से कम 15 से 30 मिनट तक।"
   },
   "see": {
-    "diagram": "diagrams/eye-irrigation.svg",
-    "w": 400,
-    "h": 260,
+    "img": "learn/media/real/eye-irrigation.webp",
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "An open eye seen from the front. Fingers hold the upper and lower lids wide open, showing a pink pocket under the lower lid. A bottle at the inner corner pours blue streams of water across the eye. The water runs off at the outer corner. A cotton bud sweeps the pink pocket, and a paper strip with a green tip touches the inner corner.",
-      "hi": "सामने से देखी गई खुली आँख। उँगलियाँ ऊपर और नीचे की पलकों को पूरा खोले हुए हैं, जिससे निचली पलक के नीचे गुलाबी जेब दिखती है। अंदर के कोने पर एक बोतल आँख पर पानी की नीली धार डाल रही है, और पानी बाहरी कोने से बह जाता है। एक रुई की तीली गुलाबी जेब साफ़ कर रही है, और हरे सिरे वाली एक कागज़ की पट्टी अंदर के कोने को छू रही है।"
+      "en": "An open eye seen from the front. Gloved fingers hold the lids wide apart to show the pink lower fornix. A tube pours water across the eye from the inner corner. The water drains off at the outer corner. A cotton bud sweeps the lower lid pocket. A paper strip tests the tear film.",
+      "hi": "सामने से दिखाई देने वाली खुली आँख। दस्ताने वाली उँगलियाँ निचला फ़ॉर्निक्स दिखाने के लिए पलकें पूरी खोलती हैं। एक नली अंदर के कोने से आँख पर पानी बहाती है। पानी बाहरी कोने से बाहर बहता है। रुई की तीली निचली पलक की जेब साफ़ करती है। कागज़ की पट्टी आँसुओं की जाँच करती है।"
     },
     "caption": {
       "en": "Washing an eye after a chemical splash. Hold the lids open, pour from the inner corner, and sweep the pockets under the lids.",
       "hi": "केमिकल गिरने के बाद आँख धोना। पलकें खोलकर रखें, अंदर के कोने से पानी डालें, और पलकों के नीचे की जेबें साफ़ करें।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
+    "more": [
+      "eye-irrigation"
+    ],
     "hotspots": [
       {
-        "x": 0.13,
-        "y": 0.24,
+        "x": 0.221,
+        "y": 0.279,
         "label": {
           "en": "Clean water or saline",
           "hi": "साफ़ पानी या सलाइन"
@@ -39,8 +47,8 @@
         }
       },
       {
-        "x": 0.55,
-        "y": 0.41,
+        "x": 0.443,
+        "y": 0.584,
         "label": {
           "en": "Steady flow across the eye",
           "hi": "आँख पर लगातार धार"
@@ -51,8 +59,8 @@
         }
       },
       {
-        "x": 0.55,
-        "y": 0.225,
+        "x": 0.547,
+        "y": 0.226,
         "label": {
           "en": "Hold the lids open",
           "hi": "पलकें खोलकर रखें"
@@ -63,8 +71,8 @@
         }
       },
       {
-        "x": 0.72,
-        "y": 0.655,
+        "x": 0.677,
+        "y": 0.601,
         "label": {
           "en": "Sweep with a moist cotton bud",
           "hi": "गीली रुई की तीली से साफ़ करें"
@@ -75,8 +83,8 @@
         }
       },
       {
-        "x": 0.32,
-        "y": 0.655,
+        "x": 0.339,
+        "y": 0.662,
         "label": {
           "en": "pH paper",
           "hi": "pH पेपर"
@@ -87,8 +95,8 @@
         }
       },
       {
-        "x": 0.875,
-        "y": 0.64,
+        "x": 0.794,
+        "y": 0.557,
         "label": {
           "en": "Water runs away",
           "hi": "पानी बाहर बह जाए"
@@ -99,8 +107,8 @@
         }
       },
       {
-        "x": 0.55,
-        "y": 0.72,
+        "x": 0.547,
+        "y": 0.671,
         "label": {
           "en": "Lower fornix",
           "hi": "निचला फ़ॉर्निक्स"

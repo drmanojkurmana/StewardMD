@@ -3,7 +3,12 @@
   "unit": "ob9",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Twins: chorionicity decides the care",
     "hi": "जुड़वाँ गर्भ: कोरियोनिसिटी से देखभाल तय होती है"
@@ -13,22 +18,21 @@
     "hi": "जुड़वाँ गर्भ के जोखिम [[chorionicity]] से आते हैं, ज़ाइगोसिटी से नहीं। इसे जल्दी, पहली तिमाही में पता करें।"
   },
   "see": {
-    "diagram": "diagrams/ob9-twins-chorion.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "Three circles side by side. The left has a dividing line and two separate red placentas. The middle has a dividing line under one long placenta. The right has no dividing line under one long placenta. Each holds two babies.",
-      "hi": "तीन गोले साथ-साथ। बाएँ में एक विभाजक रेखा और दो अलग लाल प्लेसेंटा हैं। बीच वाले में एक लंबी प्लेसेंटा के नीचे विभाजक रेखा है। दाएँ में एक लंबी प्लेसेंटा के नीचे कोई विभाजक रेखा नहीं। हर एक में दो बच्चे हैं।"
+      "en": "Realistic medical illustration showing a three-panel comparative view of twin placentation and membranes: dichorionic diamniotic (DCDA) with two separate placentas and a thick dividing membrane, monochorionic diamniotic (MCDA) with a shared placenta and thin dividing membrane, and monochorionic monoamniotic (MCMA) with a shared placenta and no dividing membrane.",
+      "hi": "जुड़वाँ अपरा और झिल्लियों के तीन-पैनल तुलनात्मक दृश्य को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र: दो अलग प्लेसेंटा और मोटी विभाजक झिल्ली के साथ डाइकोरियोनिक डाइएम्नियोटिक (DCDA), साझा प्लेसेंटा और पतली विभाजक झिल्ली के साथ मोनोकोरियोनिक डाइएम्नियोटिक (MCDA), और साझा प्लेसेंटा तथा बिना किसी विभाजक झिल्ली के मोनोकोरियोनिक मोनोएम्नियोटिक (MCMA)।"
     },
     "caption": {
-      "en": "Two placentas and two sacs, one placenta and two sacs, one placenta and one sac.",
-      "hi": "दो प्लेसेंटा और दो थैलियाँ, एक प्लेसेंटा और दो थैलियाँ, एक प्लेसेंटा और एक थैली।"
+      "en": "Twin chorionicity and amnionicity: dichorionic diamniotic (DCDA), monochorionic diamniotic (MCDA), and monochorionic monoamniotic (MCMA).",
+      "hi": "जुड़वाँ कोरियोनिसिटी और एम्नियोनिसिटी: डाइकोरियोनिक डाइएम्नियोटिक (DCDA), मोनोकोरियोनिक डाइएम्नियोटिक (MCDA), और मोनोकोरियोनिक मोनोएम्नियोटिक (MCMA)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.188,
-        "y": 0.467,
+        "x": 0.17,
+        "y": 0.45,
         "label": {
           "en": "Dichorionic diamniotic",
           "hi": "डाइकोरियोनिक डाइएम्नियोटिक"
@@ -40,7 +44,7 @@
       },
       {
         "x": 0.5,
-        "y": 0.467,
+        "y": 0.45,
         "label": {
           "en": "Monochorionic diamniotic",
           "hi": "मोनोकोरियोनिक डाइएम्नियोटिक"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.813,
-        "y": 0.467,
+        "x": 0.83,
+        "y": 0.45,
         "label": {
           "en": "Monochorionic monoamniotic",
           "hi": "मोनोकोरियोनिक मोनोएम्नियोटिक"
@@ -62,6 +66,10 @@
           "hi": "साझा प्लेसेंटा और थैली। गर्भनाल उलझती हैं। 32 से 33+6 सप्ताह के बीच प्रसव।"
         }
       }
+    ],
+    "img": "learn/media/real/ob9-twins-chorion.webp",
+    "more": [
+      "ob9-twins-chorion"
     ]
   },
   "why": {
@@ -174,8 +182,8 @@
           "hi": "लैम्ब्डा या T चिह्न शुरुआत में सबसे साफ़ होता है"
         },
         {
-          "en": "Placentas fuse later",
-          "hi": "प्लेसेंटा बाद में जुड़ते हैं"
+          "en": "The babies cannot be seen later",
+          "hi": "बाद में बच्चे दिखाई नहीं देते"
         },
         {
           "en": "Membranes are thick early",

@@ -240,7 +240,7 @@ default (ON) is what you get.
 | Flag | Def | Why |
 |---|---|---|
 | `smd_dose_calc` | **ON** | [[Dose Calculator]]. Owner 2026-09-28: monograph doses are verified, so the calculator ships on. Off per device with `smd_dose_calc = "0"` or `?dosecalc=0`. |
-| `smd_neo` | **OFF** | [[Neonatal]]. Master switch for the NICU layer (all content ai_drafted, licences not cleared). `?neo=1` / Experimental toggle. Per-tool `smd_neo_<dose\|prep\|inf\|fluids\|growth\|bili\|scores\|ref\|proc\|tdm>` default ON under the master; `"0"` pulls one tool. |
+| `smd_neo` | **ON** (Beta) | [[Neonatal]]. Owner 2026-10-01: "Make it default on for everyone under beta label" (was OFF 2026-09-30). Content ai_drafted with Draft badges; licences not cleared (see the Decisions entry). Off per device: Experimental toggle, `?neo=0` or `smd_neo = "0"`. Per-tool `smd_neo_<dose\|prep\|inf\|fluids\|growth\|bili\|scores\|ref\|proc\|tdm>` default ON under the master; `"0"` pulls one tool. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
 
@@ -449,3 +449,10 @@ regulatory claim, `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
 | `smd_pglog_demo` | OFF | **NEVER, INTEGRITY.** Fabricated residents, entries and verifications. See the table at the top of this file. |
 | `smd_pglog_verify_sla_days` | `7` | **CONFIG, NOT NMC.** NMC's only cadence is the monthly guide authentication (5.2(vi)); there is no per-entry SLA. Labelled as institutional policy in the UI. |
 | `smd_pglog_attest_grace_days` | `7` | CONFIG, not NMC. Days after a month closes before its missing authentication is called overdue. |
+
+## Privacy mode (plan B2), added 2026-10-03
+
+| Key | Default | What it does |
+|---|---|---|
+| `smd_privacy_mode_enabled` (localStorage) | enabled (anything but `"0"`) | Kill switch: `"0"` removes the home-header toggle and forces privacy mode off. |
+| `smd_privacy_mode` (sessionStorage) | absent = off | The mode itself, `"1"` while on. Session only, never synced. |

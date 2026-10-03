@@ -46,7 +46,7 @@ test("at cap, no credits → 429 ai-cost-cap with resetAt", async () => {
   const kv = fakeKv(); withCost(kv, 12);
   const r = await checkCostCap({}, kv, DOC, 10, now);
   assert.equal(r.ok, false); assert.equal(r.reason, "ai-cost-cap");
-  assert.equal(r.resetAt, Date.UTC(2026, 9, 2));         // next UTC midnight
+  assert.equal(r.resetAt, Date.UTC(2026, 9, 1, 18, 30));   // next IST midnight (2 Oct 00:00 IST = 1 Oct 18:30 UTC)
 });
 
 test("at cap WITH credits → ok on credits, and lazily debits the over-cap spend", async () => {

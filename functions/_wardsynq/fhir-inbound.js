@@ -55,6 +55,8 @@ import { RecordService, NATIVE_SYSTEM } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { CANONICAL_TYPE, FHIR_TYPE, toFhir, operationOutcome, resolveId, SEARCH_POOL } from "./fhir.js";
 import { parseSearch, applySearch } from "./fhir-search.js";
+import { VersionConflictError } from "./repository.js";
+import { bedMove, bedOccupant, claimBed, releaseBedClaim } from "./migrate-inpatient.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -105,6 +107,10 @@ const REASON = Object.freeze({
    * puts a patient back on a ward they were never on, and a cancel-admit that invents a cancelled
    * one leaves a ghost visit behind. Held for a person, who can see what the sender meant. */
   CANCEL_UNKNOWN: "conflict-cancels-unknown-encounter",
+  /* Codex F1 follow-up. An inbound encounter (HL7 A01/A02/A12/A13, or a FHIR Encounter) that puts a
+   * patient in a bed another open stay already holds. Two charts in one bed hand one patient the
+   * other's medication, so it is held for a person like every conflict above, never filed. */
+  BED_OCCUPIED: "conflict-bed-occupied",
   VERSION_MISMATCH: "version-mismatch",
   UNSUPPORTED: "unsupported-resource",
   INVALID: "invalid-resource",
@@ -731,6 +737,8 @@ function conflictDetail(c) {
       return `${cur.source} already asserts this patient is on ${cur.drug} (${cur.status}); two systems disagreeing about a live medication is reconciled by a person, and nothing here was started, stopped or merged`;
     case REASON.CANCEL_UNKNOWN:
       return `${c.trigger} cancels ${c.cancels} for visit ${str(c.entity.id)}, which this hospital does not hold; a cancellation can only take something back, so nothing was created - check whether the admission message was ever received`;
+    case REASON.BED_OCCUPIED:
+      return `this puts ${str(c.entity.patientId)} in ${cur.ward} bed ${cur.bed}, which ${cur.id ? `visit ${cur.id} (patient ${cur.patientId}) already holds` : "another admission is moving into right now"}; nothing was moved - free the bed or correct the message, then re-drive`;
     case REASON.CONFLICT_LOCAL_AUTHORITATIVE:
       return "this hospital authored the current version; a feed does not overwrite it";
     default:
@@ -1084,6 +1092,17 @@ async function landBundle(request, env, ctx) {
     // TASK 7.6: `trigger` is set only by the HL7 door, and only A11/A12/A13 mean anything to it.
     ...cancellationsWithoutTarget(writable, (e) => currents.get(`${e.resourceType}/${e.id}`) || null, ctx.trigger),
   ];
+  /* BEDS: an encounter moving into a bed another open stay holds is held (REASON.BED_OCCUPIED); the
+   * claim itself is taken just before the write, below. An unread census refuses the message. */
+  const bedMoves = writable.filter((e) => e.resourceType === "Encounter")
+    .map((e) => ({ entity: e, ...bedMove(currents.get(`Encounter/${e.id}`) || null, e) })).filter((m) => m.into || m.out);
+  for (const m of bedMoves) {
+    if (!m.into) continue;
+    let occ;
+    try { occ = await bedOccupant(svc, m.entity.id, m.into); }
+    catch (err) { return { ok: false, status: 503, outcome: operationOutcome("error", "transient", `the open census could not be read to check ${m.into.ward} bed ${m.into.bed}: ${str(err && err.message)}; nothing was written. Retry.`) }; }
+    if (occ) extra.push({ entity: m.entity, current: { id: occ.id, resourceType: "Encounter", version: occ.version, patientId: occ.patientId, ward: m.into.ward, bed: m.into.bed }, reason: REASON.BED_OCCUPIED });
+  }
   if (extra.length) {
     const held = new Set(extra.map((c) => `${c.entity.resourceType}/${c.entity.id}`));
     writable = writable.filter((e) => !held.has(`${e.resourceType}/${e.id}`));
@@ -1203,6 +1222,36 @@ async function landBundle(request, env, ctx) {
     return { ok: false, status: conflicts.length ? 409 : preconditionStatus, outcome: { resourceType: "OperationOutcome", issue: [{ severity: "error", code: "processing", diagnostics: `transaction refused whole: ${conflicts.length} conflict(s), ${failedPreconditions.length} failed precondition(s); nothing was written` }, ...issue] } };
   }
 
+  /* THE BED CLAIM, the one admission and transfer take (migrate-inpatient.js claimBed). The census
+   * check above is the fast path; this is the guard against a native admission or another message
+   * racing for the same bed. A claim lost here is held exactly like an occupied bed. */
+  const claimed = [];
+  for (const m of bedMoves) {
+    if (!m.into || !writable.includes(m.entity)) continue;
+    try { await claimBed(svc, { id: m.entity.id, patientId: m.entity.patientId, location: m.into }); claimed.push(m); }
+    catch (err) {
+      const lost = err instanceof VersionConflictError;
+      const exId = lost ? await raise(REASON.BED_OCCUPIED, { patientId: m.entity.patientId || null, conflict: { resourceType: "Encounter", ward: m.into.ward, bed: m.into.bed }, entityRefs: [`Encounter/${m.entity.id}`],
+        detail: conflictDetail({ entity: m.entity, current: { ward: m.into.ward, bed: m.into.bed }, reason: REASON.BED_OCCUPIED }) }) : null;
+      const why = lost ? `Encounter/${m.entity.id}: ${REASON.BED_OCCUPIED}; see ExchangeException/${exId}` : `Encounter/${m.entity.id}: the bed claim could not be written: ${str(err && err.message)}`;
+      if (atomic) {
+        for (const c of claimed) await releaseBedClaim(svc, { id: c.entity.id, location: c.into });
+        return { ok: false, status: lost ? 409 : 503, outcome: operationOutcome("error", lost ? "conflict" : "transient", `transaction refused whole: ${why}; nothing was written`) };
+      }
+      writable = writable.filter((e) => e !== m.entity);
+      entries.push({ response: { status: lost ? "409 Conflict" : "503 Service Unavailable", outcome: operationOutcome("error", lost ? "conflict" : "transient", why) }, _reqIndex: m.entity._reqIndex });
+    }
+  }
+  /* After the write: a bed this message failed to fill gives its claim back, and a bed the patient left
+   * (a transfer, a discharge, a cancellation) stops naming them. */
+  const settleBeds = async (landedIds) => {
+    for (const m of bedMoves) {
+      const landed = landedIds.has(m.entity.id);
+      if (!landed && claimed.includes(m)) await releaseBedClaim(svc, { id: m.entity.id, location: m.into });
+      if (landed && m.out) await releaseBedClaim(svc, { id: m.entity.id, location: m.out });
+    }
+  };
+
   const written = [];
   const transientFailures = [];   // TASK 7.15: writes that failed for a reason a retry could fix
   const ordered = [...writable].sort(byDependency);
@@ -1219,7 +1268,9 @@ async function landBundle(request, env, ctx) {
     try {
       const saved = await ingest.putMany(adapterActor, bare);
       ordered.forEach((e, i) => { const s = saved && saved[i]; entries.push(describe(e, s && s.record ? s.record : (s || bare[i]))); });
+      await settleBeds(new Set(ordered.map((e) => e.id)));
     } catch (err) {
+      await settleBeds(new Set());
       const code = err instanceof GovernanceError ? "forbidden" : "exception";
       const reasons = err instanceof GovernanceError && Array.isArray(err.reasons) ? err.reasons : [];
       return { ok: false, status: err instanceof GovernanceError ? 403 : 500, outcome: { resourceType: "OperationOutcome", issue: [
@@ -1240,6 +1291,7 @@ async function landBundle(request, env, ctx) {
         entries.push({ response: { status: governance ? "403 Forbidden" : "500 Internal Server Error", outcome: operationOutcome("error", code, `${entity.resourceType}/${entity.id}: ${str(err && err.message)}`) }, _reqIndex });
       }
     }
+    await settleBeds(new Set(written.filter((w) => w.resourceType === "Encounter").map((w) => w.id)));
   }
 
   /* TASK 7.15. A TRANSIENT write failure used to be answered 200: the bundle carried a "500" inside

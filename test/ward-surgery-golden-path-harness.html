@@ -16,6 +16,13 @@ localStorage.setItem("smd_opd_staff_tok", "harness-token");
 
 var CASE_ID = null, ENC_ID = null, PATIENT_ID = "opd-pat-smd-h1-ot01", MRN = "SMD-H1-OT01";
 var STAGE = null, CONSENT = null, MARKING = null, ASA = null, ANES_EVENTS = [], ANES_ENDED = false, IMPLANTS = [], PAC = null;
+/* Recovery (PACU): the open stays the theatre board lists, and the free bays from the hospital's PACU bed list
+ * (window.__pacuBays: an array, null = none listed, false = unreadable), as migrate-surgery.js listOpenCases sends them.
+ * Leaving recovery into Surgical Ward bed S1 is refused as occupied, the way admitPatient refuses it. */
+var RECOVERY = [];
+window.__pacuBays = null;
+window.__setRecovery = function (rows) { RECOVERY = rows.slice(); };
+window.__setSignedOutCase = function () { CASE_ID = "wsq-case-smd-h1-ot02-hernia"; ENC_ID = "wsq-enc-" + CASE_ID; STAGE = "signed-out"; window.__showSignedOut = true; };
 
 window.fetch = function (url, opts) {
   var u = String(url), body = null;
@@ -26,7 +33,18 @@ window.fetch = function (url, opts) {
   if (u.indexOf("/patient/get") >= 0) return reply({ ok: true, patient: { mrn: MRN, name: "OT Harness Patient", ageYears: 50, gender: "female" } });
 
   if (u.indexOf("/ward/surgery-board") >= 0) {
-    return reply({ ok: true, cases: CASE_ID && STAGE !== "signed-out" ? [{ id: CASE_ID, patientId: PATIENT_ID, patientMrn: MRN, procedure: "Cholecystectomy", stage: STAGE, theatre: "OT-1" }] : [] });
+    return reply({ ok: true, cases: CASE_ID && STAGE !== "disposed" && (STAGE !== "signed-out" || window.__showSignedOut) ? [{ id: CASE_ID, patientId: PATIENT_ID, patientMrn: MRN, procedure: "Cholecystectomy", stage: STAGE, theatre: "OT-1" }] : [],
+      recovery: RECOVERY, pacuBays: window.__pacuBays });
+  }
+  if (u.indexOf("/ward/surgery-leave-recovery") >= 0 && (opts && opts.method) === "POST") {
+    if (body.admission && body.admission.bed === "S1") {
+      return Promise.resolve({ ok: false, status: 409, json: function () { return Promise.resolve({ ok: false, status: 409, error: "bed_occupied", detail: "Surgical Ward bed S1 is occupied", written: 0 }); } });
+    }
+    RECOVERY = RECOVERY.filter(function (r) { return r.encounterId !== body.encounterId; });
+    return reply({ ok: true, written: body.outcome === "home" ? 1 : 2, encounterId: body.encounterId, outcome: body.outcome, version: 2 });
+  }
+  if (u.indexOf("/ward/beds") >= 0) {
+    return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Surgical Ward", configured: true, bedsKnown: true, free: ["S1", "S2"], occupied: [], unplaced: [] }] });
   }
   if (u.indexOf("/ward/surgery-book") >= 0 && (opts && opts.method) === "POST") {
     CASE_ID = "wsq-case-smd-h1-ot01-cholecystectomy"; ENC_ID = "wsq-enc-" + CASE_ID; STAGE = "booked";
@@ -67,6 +85,7 @@ window.fetch = function (url, opts) {
   }
   if (u.indexOf("/ward/surgery-note") >= 0 && (opts && opts.method) === "POST") return reply({ ok: true, written: 1, caseId: CASE_ID });
   if (u.indexOf("/ward/surgery-disposition") >= 0 && (opts && opts.method) === "POST") {
+    if (body.disposition === "pacu") { STAGE = "disposed"; RECOVERY.push({ encounterId: "wsq-pacu-" + CASE_ID, caseId: CASE_ID, patientId: PATIENT_ID, mrn: MRN, procedure: "Cholecystectomy", bed: body.pacuBed, since: new Date().toISOString(), version: 1 }); }
     return reply({ ok: true, written: 2, caseId: CASE_ID, disposition: body.disposition, pacuEncounterId: body.disposition === "pacu" ? "wsq-pacu-" + CASE_ID : null });
   }
   if (u.indexOf("/ward/surgery-get") >= 0) {

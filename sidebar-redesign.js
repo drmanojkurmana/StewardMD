@@ -130,7 +130,7 @@
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
-    { id: "neo", title: "Neonatal layer (Draft)", sub: "NICU tools, AI-drafted, awaiting neonatologist review · reload to apply", def: false, key: "smd_neo" }
+    { id: "neo", title: "Neonatal layer (Beta)", sub: "NICU tools, AI-drafted, awaiting neonatologist review · reload to apply", def: true, key: "smd_neo" }
   ];
 
   var TOGGLES = ADV_TOGGLES.concat(EXP_TOGGLES);
@@ -614,9 +614,9 @@
         toggle({ id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
       '</div>' +
 
-      '<div class="sbr-sec">Neonatal (Draft)</div>' +
+      '<div class="sbr-sec">Neonatal (Beta)</div>' +
       '<div class="sbr-card">' +
-        toggle({ id: "neo", title: "Neonatal layer (Draft)", sub: "NICU dosing, infusions, fluids, growth, bilirubin, scores. AI-drafted from cited sources, awaiting neonatologist review · reload to apply", def: false, key: "smd_neo" }) +
+        toggle({ id: "neo", title: "Neonatal layer (Beta)", sub: "NICU dosing, infusions, fluids, growth, bilirubin, scores. AI-drafted from cited sources, awaiting neonatologist review · reload to apply", def: true, key: "smd_neo" }) +
       '</div>' +
 
       '<div class="sbr-sec">Voice &amp; Protocols</div>' +

@@ -3,7 +3,12 @@
   "unit": "ob8",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Preterm labour: who is at risk and how to check the cervix",
     "hi": "समय पूर्व प्रसव: किसे जोखिम है और ग्रीवा कैसे जाँचें"
@@ -34,16 +39,16 @@
           "hi": "लंबी ग्रीवा"
         },
         "note": {
-          "en": "A cervix longer than 25 mm in mid-pregnancy has a lower risk of preterm birth.",
-          "hi": "मध्य गर्भावस्था में 25 mm से लंबी ग्रीवा में समय पूर्व जन्म का जोखिम कम होता है।"
+          "en": "A cervix of 25 mm or longer in mid-pregnancy has a lower risk of preterm birth.",
+          "hi": "मध्य गर्भावस्था में 25 mm या उससे लंबी ग्रीवा में समय पूर्व जन्म का जोखिम कम होता है।"
         }
       },
       {
-        "x": 0.75,
-        "y": 0.633,
+        "x": 0.885,
+        "y": 0.625,
         "label": {
-          "en": "Short cervix, 25 mm or less",
-          "hi": "छोटी ग्रीवा, 25 mm या कम"
+          "en": "Short cervix, below 25 mm",
+          "hi": "छोटी ग्रीवा, 25 mm से कम"
         },
         "note": {
           "en": "On a transvaginal scan between 16 and 24 weeks this is the trigger to act.",
@@ -55,11 +60,11 @@
         "y": 0.613,
         "label": {
           "en": "Cerclage stitch",
-          "hi": "सर्क्लाज टाँका"
+          "hi": "सरक्लाज टाँका"
         },
         "note": {
           "en": "Offered, or vaginal progesterone, when there was a preterm birth or late loss before and the cervix is short.",
-          "hi": "पहले समय पूर्व जन्म या देर से गर्भपात हुआ हो और ग्रीवा छोटी हो तो यह, या योनि प्रोजेस्ट्रोन, दिया जाता है।"
+          "hi": "पहले समय पूर्व जन्म या देर से गर्भपात हुआ हो और ग्रीवा छोटी हो तो यह, या योनि प्रोजेस्टेरोन, दिया जाता है।"
         }
       }
     ]
@@ -100,8 +105,8 @@
       "hi": "पहले समय पूर्व जन्म या देर से गर्भपात हुआ हो तो 16 से 24 सप्ताह के बीच ट्रांसवैजाइनल मार्ग से [[cervical-length]] स्कैन करें।"
     },
     {
-      "en": "With a history and a cervix of 25 mm or less, offer a choice of vaginal progesterone (from 16 to 24 weeks until at least 34 weeks) or [[cerclage]] (NICE).",
-      "hi": "इतिहास हो और ग्रीवा 25 mm या कम हो तो योनि प्रोजेस्ट्रोन (16 से 24 सप्ताह से कम से कम 34 सप्ताह तक) या [[cerclage]] का विकल्प दें (NICE)।"
+      "en": "With a history and a cervix below 25 mm, offer vaginal progesterone or [[cerclage]] (NICE). Progesterone starts at 16 to 24 weeks and continues to at least 34 weeks.",
+      "hi": "इतिहास हो और ग्रीवा 25 mm से कम हो तो योनि प्रोजेस्ट्रोन (16 से 24 सप्ताह से कम से कम 34 सप्ताह तक) या [[cerclage]] का विकल्प दें (NICE)।"
     },
     {
       "en": "In suspected preterm labour at 30 weeks or more, a cervix over 15 mm on scan makes labour unlikely, and 15 mm or less means treat as preterm labour.",
@@ -109,8 +114,8 @@
     }
   ],
   "remember": {
-    "en": "Preterm is before 37 weeks. Look for a past preterm birth or late loss, then scan the cervix at 16 to 24 weeks: 25 mm or less needs progesterone or cerclage.",
-    "hi": "समय पूर्व यानी 37 सप्ताह से पहले। पिछला समय पूर्व जन्म या देर से गर्भपात देखें, फिर 16 से 24 सप्ताह में ग्रीवा स्कैन करें: 25 mm या कम में प्रोजेस्ट्रोन या सर्क्लाज।"
+    "en": "Preterm is before 37 weeks. Look for a past preterm birth or late loss, then scan the cervix at 16 to 24 weeks: below 25 mm needs progesterone or cerclage.",
+    "hi": "समय पूर्व यानी 37 सप्ताह से पहले। पिछला समय पूर्व जन्म या देर से गर्भपात देखें, फिर 16 से 24 सप्ताह में ग्रीवा स्कैन करें: 25 mm से कम में प्रोजेस्ट्रोन या सर्क्लाज।"
   },
   "check": [
     {
@@ -120,8 +125,8 @@
       },
       "o": [
         {
-          "en": "25 mm or less",
-          "hi": "25 mm या कम"
+          "en": "Below 25 mm",
+          "hi": "25 mm से कम"
         },
         {
           "en": "40 mm",
@@ -134,8 +139,8 @@
       ],
       "a": 0,
       "why": {
-        "en": "NICE offers progesterone or cerclage at 25 mm or less.",
-        "hi": "NICE 25 mm या कम पर प्रोजेस्ट्रोन या सर्क्लाज देने को कहता है।"
+        "en": "NICE offers progesterone or cerclage below 25 mm.",
+        "hi": "NICE 25 mm से कम पर प्रोजेस्ट्रोन या सर्क्लाज देने को कहता है।"
       }
     },
     {

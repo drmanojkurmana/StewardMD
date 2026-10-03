@@ -3,7 +3,12 @@
   "unit": "lens",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Three kinds of cataract",
     "hi": "मोतियाबिंद के तीन प्रकार"
@@ -13,22 +18,21 @@
     "hi": "मोतियाबिंद का नाम धुंध की जगह से होता है: [[nuclear-cataract]], [[cortical-cataract]], या [[psc]]। हर एक नज़र को अपने तरीक़े से धुंधला करता है।"
   },
   "see": {
-    "diagram": "diagrams/lens-cataract-types.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Three lens diagrams, each shown cut through (top) and seen through the pupil against a red glow (bottom). Left: an amber core, seen as a central yellow haze. Middle: white wedges in the outer lens, seen as dark spokes pointing inward. Right: a white plaque on the back surface, seen as a cluster of dark dots in the centre.",
-      "hi": "लेंस के तीन चित्र, हर एक ऊपर कटा हुआ और नीचे लाल चमक के सामने पुतली से देखा गया। बाएँ: अंबर रंग का बीच का हिस्सा, जो बीच में पीली धुंध दिखता है। बीच में: बाहरी लेंस में सफ़ेद फाँकें, जो अंदर की ओर इशारा करती काली तीलियाँ दिखती हैं। दाएँ: पीछे की सतह पर सफ़ेद परत, जो बीच में काले बिंदुओं का गुच्छा दिखती है।"
+      "en": "Six pictures show three kinds of cataract. Top row: lens cuts from the side. Bottom row: views through a dilated pupil against the red glow. Left: a yellow nucleus and a central haze. Middle: white wedges and dark spokes. Right: a white back plaque and dark central dots.",
+      "hi": "छह चित्र मोतियाबिंद के तीन प्रकार दिखाते हैं। ऊपर की पंक्ति: बगल से कटे हुए लेंस। नीचे की पंक्ति: लाल चमक के सामने फैली पुतली से दृश्य। बाएँ: पीला न्यूक्लियस और बीच की धुंध। बीच में: सफ़ेद फाँकें और काली तीलियाँ। दाएँ: पीछे की सफ़ेद परत और बीच के काले बिंदु।"
     },
     "caption": {
       "en": "Nuclear (left), cortical (middle) and posterior subcapsular (right) cataract. Light comes in from the left in the top row.",
       "hi": "न्यूक्लियर (बाएँ), कॉर्टिकल (बीच में) और पोस्टीरियर सबकैप्सुलर (दाएँ) मोतियाबिंद। ऊपर की पंक्ति में रोशनी बाईं ओर से आती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.167,
-        "y": 0.287,
+        "x": 0.175,
+        "y": 0.26,
         "label": {
           "en": "Yellow core",
           "hi": "पीला बीच"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.167,
-        "y": 0.76,
+        "x": 0.175,
+        "y": 0.73,
         "label": {
           "en": "Central haze",
           "hi": "बीच की धुंध"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.5,
-        "y": 0.127,
+        "x": 0.44,
+        "y": 0.18,
         "label": {
           "en": "White wedges",
           "hi": "सफ़ेद फाँकें"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.542,
-        "y": 0.856,
+        "x": 0.44,
+        "y": 0.65,
         "label": {
           "en": "Dark spokes",
           "hi": "काली तीलियाँ"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.917,
-        "y": 0.287,
+        "x": 0.825,
+        "y": 0.36,
         "label": {
           "en": "Back plaque",
           "hi": "पीछे की परत"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.76,
+        "x": 0.825,
+        "y": 0.73,
         "label": {
           "en": "Central dots",
           "hi": "बीच के बिंदु"
@@ -98,6 +102,10 @@
           "hi": "छोटा है, पर ठीक रोशनी के रास्ते में। पढ़ने और तेज़ रोशनी में सबसे ज़्यादा दिक़्क़त होती है।"
         }
       }
+    ],
+    "img": "learn/media/real/lens-cataract-types.webp",
+    "more": [
+      "lens-cataract-types"
     ]
   },
   "why": {

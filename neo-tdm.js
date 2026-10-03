@@ -46,17 +46,17 @@
   function r3(v) { return v == null || !isFinite(v) ? "" : (Math.round(v * 1000) / 1000).toString(); }
   function vancoOut(A, doc) {
     var V = doc.vancomycin || {}, r = vancoAuc(S), h = "", esc = A.esc;
-    if (r.needs) h += A.note("Enter the interval, infusion time and two levels with their times (hours from the start of the infusion).", "info");
+    if (r.needs) h += A.note("Enter how often the dose is given, how long it runs, and two blood levels with the times they were taken.", "info");
     else if (r.error) h += '<div class="nh-err">' + esc(r.error) + "</div>";
     else {
-      h += '<div class="nh-row"><div class="nh-lbl">AUC24</div><div class="nh-val">' + r1(r.auc24) + " mg·h/L</div>" +
+      h += '<div class="nh-row"><div class="nh-lbl">Exposure over 24 h (AUC24)</div><div class="nh-val">' + r1(r.auc24) + " mg·h/L</div>" +
         '<div class="nh-work">' + esc("ke " + r3(r.ke) + " /h, half-life " + r1(r.half) + " h, Cmax " + r1(r.cmax) + " mg/L, Cmin " + r1(r.cmin) + " mg/L; AUC infusion " + r1(r.aucInf) + " + elimination " + r1(r.aucElim) + " per " + num(S.tau) + " h interval") + "</div></div>";
       var t = V.auc_target, n = V.neonatal;
       if (t) { var st = r.auc24 < t.lo ? "below" : r.auc24 > t.hi ? "above" : "within"; h += '<div class="nh-note' + (st === "within" ? " info" : "") + '">' + esc("AUC24 is " + st + " the guideline range " + t.lo + " to " + t.hi + " " + t.unit + (t.label ? " (" + t.label + ")" : "")) + "</div>" + A.srcLine(doc, t); }
       if (n) h += (Array.isArray(n) ? n : [n]).map(function (x) { return A.note(x.label || x.text || "", "info") + A.srcLine(doc, x); }).join("");
       A.setSheet("tdm", { title: "Vancomycin AUC", tag: "Neonatal TDM", lines: ["Baby: " + G.SMD_NEO.summary(), "Result: AUC24 " + r1(r.auc24) + " mg·h/L", "Levels: " + S.c1 + " mg/L at " + S.t1 + " h, " + S.c2 + " mg/L at " + S.t2 + " h; interval " + S.tau + " h; infusion " + S.tin + " h", "ke " + r3(r.ke) + " /h, half-life " + r1(r.half) + " h, Cmax " + r1(r.cmax) + ", Cmin " + r1(r.cmin)] });
     }
-    h += "<details><summary>Equations and their sources</summary>" + (V.equations || []).map(function (e) { return '<div class="nh-work" style="font-family:inherit"><b>' + esc(e.name) + "</b>" + (e.form ? ": " + esc(e.form) : "") + (e.caveat ? "<br>" + esc(e.caveat) : "") + "</div>" + A.srcLine(doc, e); }).join("") + "</details>";
+    h += "<details><summary>How this is worked out</summary>" + (V.equations || []).map(function (e) { return '<div class="nh-work" style="font-family:inherit"><b>' + esc(e.name) + "</b>" + (e.form ? ": " + esc(e.form) : "") + (e.caveat ? "<br>" + esc(e.caveat) : "") + "</div>" + A.srcLine(doc, e); }).join("") + "</details>";
     ["trough_only", "sampling"].forEach(function (k) { var x = V[k]; if (!x) return; (Array.isArray(x) ? x : [x]).forEach(function (y) { h += A.note(y.label || y.text || "", "info") + A.srcLine(doc, y); }); });
     (V.notes || []).forEach(function (y) { h += A.note(y.text || y.label || "", "info") + A.srcLine(doc, y); });
     return h;
@@ -85,10 +85,10 @@
     A.dataOrNull("tdm").then(function (doc) {
       var esc = A.esc;
       function f(k, label, unit) { return '<label>' + label + '<span class="nh-u"><input inputmode="decimal" data-tdm="' + k + '" value="' + esc(S[k]) + '"><span>' + unit + "</span></span></label>"; }
-      var h = '<section class="nh-card"><h3>Drug levels ' + (doc ? A.badge(doc) : "") + '</h3><span class="nh-seg" role="group" aria-label="Drug"><button type="button" data-tdm-tab="vanco" aria-pressed="' + (S.tab === "vanco") + '">Vancomycin AUC</button><button type="button" data-tdm-tab="gent" aria-pressed="' + (S.tab === "gent") + '">Gentamicin</button></span>';
+      var h = '<section class="nh-card"><h3>Drug levels ' + (doc ? A.badge(doc) : "") + '</h3><span class="nh-seg" role="group" aria-label="Drug"><button type="button" data-tdm-tab="vanco" aria-pressed="' + (S.tab === "vanco") + '">Vancomycin</button><button type="button" data-tdm-tab="gent" aria-pressed="' + (S.tab === "gent") + '">Gentamicin</button></span>';
       if (!doc) h += A.noData("drug monitoring");
-      else if (S.tab === "vanco") h += '<div class="nh-grid">' + f("tau", "Interval", "h") + f("tin", "Infusion time", "h") + f("c1", "Level 1", "mg/L") + f("t1", "at", "h") + f("c2", "Level 2", "mg/L") + f("t2", "at", "h") + '</div><div class="nh-work">Times are hours from the start of the infusion.</div>';
-      else h += '<div class="nh-grid">' + f("trough", "Trough", "mg/L") + f("doses", "Doses in course", "") + f("peak", "Peak", "mg/L") + "</div>";
+      else if (S.tab === "vanco") h += '<div class="nh-grid">' + f("tau", "Dose every", "h") + f("tin", "Each dose runs over", "h") + f("c1", "First level", "mg/L") + f("t1", "taken at", "h") + f("c2", "Second level", "mg/L") + f("t2", "taken at", "h") + '</div><div class="nh-work">"Taken at" means hours after that dose started running.</div>';
+      else h += '<div class="nh-grid">' + f("trough", "Trough (level just before a dose)", "mg/L") + f("doses", "Doses given so far", "") + f("peak", "Peak (level after a dose)", "mg/L") + "</div>";
       h += '<div data-tdm-out="1"></div>' + A.actionsHtml("tdm") + "</section>";
       el.innerHTML = h;
       function paint() { var o = el.querySelector("[data-tdm-out]"); if (o && doc) o.innerHTML = S.tab === "vanco" ? vancoOut(A, doc) : gentOut(A, doc); }

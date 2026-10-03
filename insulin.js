@@ -291,17 +291,14 @@
     withMotion(function (M) { try { M.animate(el, { opacity: [0, 1], scale: [0.985, 1], y: [8, 0] },
       { duration: 0.42, easing: [0.2, 0.7, 0.2, 1] }); } catch (e) {} });
   }
-  function countUp(el, to) {
-    var target = Number(to) || 0;
-    if (reduced()) { el.textContent = fmt(target); return; }
-    var start = 0, t0 = null, dur = 460;
-    function frame(ts) {
-      if (t0 === null) t0 = ts;
-      var p = Math.min(1, (ts - t0) / dur), eased = 1 - Math.pow(1 - p, 3), cur = start + (target - start) * eased;
-      el.textContent = fmt(st.increment === 0.5 ? Math.round(cur * 2) / 2 : Math.round(cur));
-      if (p < 1) requestAnimationFrame(frame); else el.textContent = fmt(target);
-    }
-    requestAnimationFrame(frame);
+  // The dose swaps (old out, new in); it never counts up from 0, which would pass through lower doses
+  // that were never calculated. A fresh node is seeded with the dose that was on screen so it can swap.
+  function showDose(el, to, animate) {
+    var text = fmt(to), prev = st._doseShown, N = window.SMD_NUM;
+    st._doseShown = text;
+    if (!N) { el.textContent = text; return; }
+    if (animate && prev != null && prev !== text) N.set(el, prev, { kind: "clinical" });
+    N.set(el, text, { kind: "clinical" });
   }
   function fmt(n) { return (Math.round(Number(n) * 10) / 10).toString(); }
 
@@ -339,7 +336,7 @@
     else if (st.screen === "history") { s.innerHTML = historyHTML(); renderHistList(); }
     else { s.innerHTML = calcHTML(); renderInputs(); render(); }
   }
-  function go(screen) { st.screen = screen; paint(); springIn(document.getElementById("insScreen")); }
+  function go(screen) { st.screen = screen; st._doseShown = null; paint(); springIn(document.getElementById("insScreen")); }
 
   function headerHTML() {
     if (st.screen === "dashboard") {
@@ -1589,12 +1586,10 @@
         '<button class="ins-cta" data-ins="confirm"' + (ctaDisabled ? ' disabled' : '') + '>Accept and record</button>' +
         '<div class="ins-done" id="insDone" style="display:none">Recorded to history. The order remains the physician\'s to place.</div>' : '');
 
-    // Animate only when the dose genuinely changes to a new value, and never mid-typing:
-    // re-running the count-up on every keystroke made the number flicker from 0 constantly.
+    // Swap only when the mode changes, never mid-typing (a swap per keystroke would flicker).
     var dn = document.getElementById("insDoseN");
     if (dn) {
-      if (st._lastMode === m) dn.textContent = fmt(res.rounded);   // typing: update in place
-      else countUp(dn, res.rounded);                               // arriving on a screen: animate once
+      showDose(dn, res.rounded, st._lastMode != null && st._lastMode !== m);   // typing / arriving: instant; mode switch: swap once
       st._lastMode = m;
     }
   }
@@ -1829,6 +1824,7 @@
       inputs: snapshot(), calculatedDose: res.rounded, confirmedDose: res.rounded, givenDose: given,
       overridden: given !== res.rounded,
       unit: res.unit, warnings: warns.map(function (w) { return w.id; }), engineVersion: 2, ts: Date.now() });
+    try { if (window.SMD_HAPTICS) window.SMD_HAPTICS.success(); } catch (e) {}   // dose committed to history
     btn.style.display = "none";
     var d = document.getElementById("insDone");
     if (d) {

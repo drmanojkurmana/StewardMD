@@ -3,7 +3,12 @@
   "unit": "gy4",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG27.3"
   ],
@@ -20,8 +25,8 @@
     "w": 480,
     "h": 400,
     "alt": {
-      "en": "A pink uterus with a red inflamed lining. On the left, a tube swollen and filled with yellow pus curls down beside a lavender ovary. On the right, a large yellow round abscess encloses an ovary. At the top right is the edge of a liver with thin red strands stretching to the belly wall. Below the cervix, two red arrows push the cervix from each side.",
-      "hi": "लाल सूजी परत वाला गुलाबी गर्भाशय। बाईं ओर पीले मवाद से भरी सूजी नली एक बैंगनी अंडाशय के बगल में नीचे मुड़ती है। दाईं ओर एक बड़ा पीला गोल फोड़ा अंडाशय को घेरे है। ऊपर दाईं ओर यकृत का किनारा है, जिससे पेट की दीवार तक पतली लाल तंतुएँ फैली हैं। ग्रीवा के नीचे दो लाल तीर ग्रीवा को दोनों ओर से धकेलते हैं।"
+      "en": "A pink uterus with a red inflamed lining. On the left, a tube swollen and filled with yellow pus curls down beside a lavender ovary. On the right, a large yellow round abscess encloses an ovary. At the top left, on the woman's right, is the edge of a liver with thin red strands stretching to the belly wall. Below the cervix, two red arrows push the cervix from each side.",
+      "hi": "लाल सूजी परत वाला गुलाबी गर्भाशय। बाईं ओर पीले मवाद से भरी सूजी नली एक बैंगनी अंडाशय के बगल में नीचे मुड़ती है। दाईं ओर एक बड़ा पीला गोल फोड़ा अंडाशय को घेरे है। ऊपर बाईं ओर, यानी महिला की दाईं ओर, यकृत का किनारा है, जिससे पेट की दीवार तक पतली लाल तंतुएँ फैली हैं। ग्रीवा के नीचे दो लाल तीर ग्रीवा को दोनों ओर से धकेलते हैं।"
     },
     "caption": {
       "en": "PID: inflamed lining, a pus-filled tube, a tubo-ovarian abscess, and the liver strands of Fitz-Hugh-Curtis.",
@@ -73,8 +78,8 @@
           "hi": "एंडोमेट्राइटिस"
         },
         "note": {
-          "en": "Inflammation of the lining. It can be the only sign in some women.",
-          "hi": "परत की सूजन। कुछ महिलाओं में यही एकमात्र संकेत हो सकता है।"
+          "en": "Inflammation of the lining. In some women it is the only part involved, so tubes can look normal.",
+          "hi": "परत की सूजन। कुछ महिलाओं में सिर्फ़ यही हिस्सा प्रभावित होता है, इसलिए नलियाँ सामान्य दिख सकती हैं।"
         }
       },
       {
@@ -82,7 +87,7 @@
         "y": 0.445,
         "label": {
           "en": "Salpingitis and pyosalpinx",
-          "hi": "सैल्पिंजाइटिस और पायोसैल्पिंक्स"
+          "hi": "सैल्पिंज़ाइटिस और पायोसैल्पिंक्स"
         },
         "note": {
           "en": "The tube is swollen and may fill with pus.",
@@ -102,8 +107,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.275,
+        "x": 0.19,
+        "y": 0.26,
         "label": {
           "en": "Fitz-Hugh-Curtis",
           "hi": "फ़िट्ज़-ह्यू-कर्टिस"

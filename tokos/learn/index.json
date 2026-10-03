@@ -847,8 +847,8 @@
    },
    "minutes": 6,
    "idea": {
-    "en": "After 24 weeks the [[fundal-height]] in cm is close to the weeks of pregnancy. From about 32 weeks the four pelvic grips tell you the lie and presentation.",
-    "hi": "24 हफ़्ते के बाद सेमी में [[fundal-height]] लगभग गर्भावस्था के हफ़्तों के बराबर होती है। लगभग 32 हफ़्ते से चार pelvic grips lie और presentation बताती हैं।"
+    "en": "After 24 weeks the [[fundal-height]] in cm is close to the weeks of pregnancy. From about 32 weeks the four obstetric grips (Leopold) tell you the lie and presentation.",
+    "hi": "24 हफ़्ते के बाद सेमी में [[fundal-height]] लगभग गर्भावस्था के हफ़्तों के बराबर होती है। लगभग 32 हफ़्ते से चार obstetric grips (Leopold) lie और presentation बताती हैं।"
    },
    "see": {
     "diagram": "diagrams/ob2-abdominal-exam.svg"
@@ -971,7 +971,7 @@
     "hi": "बच्चे के सिर को श्रोणि के तीन स्तरों से गुज़रना है: inlet, मध्य-गुहा और outlet। सबसे संकरी जगह ischial spines के बीच है। श्रोणि का आकार और नाप बुकिंग पर और प्रसव में फिर जाँचे जाते हैं।"
    },
    "see": {
-    "img": "learn/media/real/ob3-pelvis-head.webp"
+    "diagram": "diagrams/ob3-pelvis-head.svg"
    },
    "test": {
     "mcqTopic": "ob-labour"
@@ -996,7 +996,10 @@
    "test": {
     "mcqTopic": "ob-labour",
     "sim": "labour"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob3-bishop-induction": {
    "title": {
@@ -1174,21 +1177,24 @@
     "hi": "अच्छा दूध पिलाना सही पकड़ पर निर्भर है: बच्चा केवल निप्पल नहीं, एरिओला भी लेता है। चार संकेत बताते हैं कि पकड़ सही है।"
    },
    "see": {
-    "diagram": "diagrams/ob4-breastfeeding-technique.svg"
+    "img": "learn/media/real/ob4-breastfeeding-technique.webp"
    },
    "test": {
     "mcqTopic": "ob-puerperium"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob4-breast-problems": {
    "title": {
     "en": "Sore nipples, engorgement, mastitis and abscess",
-    "hi": "फटे निप्पल, स्तन भरना, mastitis और abscess"
+    "hi": "दुखते निप्पल, स्तन भरना, mastitis और abscess"
    },
    "minutes": 5,
    "idea": {
-    "en": "Most breast problems are helped by keeping the baby feeding. Fever with a red, painful breast that does not settle needs referral, and an abscess needs surgery.",
-    "hi": "ज़्यादातर स्तन की समस्याओं में बच्चे को दूध पिलाते रहना ही मदद करता है। लाल, दर्द भरे स्तन के साथ बुख़ार जो ठीक न हो तो रेफ़र करें, और abscess में सर्जरी चाहिए।"
+    "en": "Most breast problems are helped by keeping the baby feeding. Fever with a red, painful breast that does not settle needs referral, and an abscess needs drainage.",
+    "hi": "ज़्यादातर स्तन की समस्याओं में बच्चे को दूध पिलाते रहना ही मदद करता है। लाल, दर्द भरे स्तन के साथ बुख़ार जो ठीक न हो तो रेफ़र करें, और abscess में पीप निकालनी (drainage) पड़ती है।"
    },
    "see": {
     "img": "learn/media/real/ob4-breast-problems.webp"
@@ -1207,8 +1213,8 @@
    },
    "minutes": 6,
    "idea": {
-    "en": "A woman can get pregnant again early: ovulation can return by 4 to 6 weeks if she is not breast-feeding. Offer a method before she leaves: [[lam]], a [[ppiucd]], sterilisation, or others at the right time.",
-    "hi": "महिला जल्दी फिर गर्भवती हो सकती है: स्तनपान न कराए तो ओव्यूलेशन 4 से 6 हफ़्ते में लौट सकता है। जाने से पहले कोई तरीक़ा दीजिए: [[lam]], [[ppiucd]], नसबंदी, या सही समय पर अन्य।"
+    "en": "A woman can get pregnant again early: if she is not breast-feeding, ovulation can return by 3 to 4 weeks. Offer a method before she leaves: [[lam]], a [[ppiucd]], sterilisation, or others at the right time.",
+    "hi": "महिला जल्दी फिर गर्भवती हो सकती है: स्तनपान न कराए तो ओव्यूलेशन 3 से 4 हफ़्ते में ही लौट सकता है। जाने से पहले कोई तरीक़ा दीजिए: [[lam]], [[ppiucd]], नसबंदी, या सही समय पर अन्य।"
    },
    "see": {
     "diagram": "diagrams/ob4-postpartum-contraception.svg"
@@ -1263,11 +1269,14 @@
     "hi": "pre-eclampsia में [[spiral-arteries]] ठीक से नहीं बदलतीं, इसलिए प्लेसेंटा को कम खून मिलता है। वह ऐसे पदार्थ छोड़ती है जो माँ की सारी नलियों को नुकसान पहुँचाते हैं। एस्पिरिन और कैल्शियम ख़तरा घटा सकते हैं।"
    },
    "see": {
-    "diagram": "diagrams/ob5-pathophysiology.svg"
+    "img": "learn/media/real/ob5-pathophysiology.webp"
    },
    "test": {
     "mcqTopic": "ob-hypertension"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob5-severe-features": {
    "title": {
@@ -1276,8 +1285,8 @@
    },
    "minutes": 5,
    "idea": {
-    "en": "Severe pre-eclampsia means a BP above 160/110, or lower BP with warning symptoms or abnormal labs. It can damage the brain, liver, kidney, lungs and blood. Act at once.",
-    "hi": "गंभीर pre-eclampsia का मतलब है 160/110 से ऊपर बीपी, या कम बीपी के साथ चेतावनी के लक्षण या असामान्य जाँचें। यह मस्तिष्क, यकृत, किडनी, फेफड़े और खून को नुकसान पहुँचा सकता है। तुरंत कार्रवाई कीजिए।"
+    "en": "Severe pre-eclampsia means systolic BP 160 or more or diastolic 110 or more. It also means a raised BP below that with warning symptoms or abnormal labs. It can damage the brain, liver, kidney, lungs and blood. Act at once.",
+    "hi": "गंभीर pre-eclampsia का मतलब है सिस्टोलिक बीपी 160 या ज़्यादा, या डायस्टोलिक 110 या ज़्यादा। इससे कम पर बढ़ा बीपी (140/90 या ज़्यादा) चेतावनी के लक्षण या असामान्य जाँचों के साथ भी गंभीर है। यह मस्तिष्क, यकृत, किडनी, फेफड़े और खून को नुकसान पहुँचा सकता है। तुरंत कार्रवाई कीजिए।"
    },
    "see": {
     "diagram": "diagrams/ob5-severe-features.svg"
@@ -1293,8 +1302,8 @@
    },
    "minutes": 5,
    "idea": {
-    "en": "Treat BP of 140/90 or more, and treat a severe reading fast but not too abruptly. The target is below 140/90. Nifedipine (by mouth, swallowed) and labetalol are the usual first drugs.",
-    "hi": "बीपी 140/90 या ज़्यादा हो तो इलाज कीजिए, और गंभीर रीडिंग का इलाज जल्दी पर बहुत अचानक नहीं। लक्ष्य 140/90 से नीचे है। Nifedipine (मुँह से, निगलकर) और labetalol आम पहली दवाएँ हैं।"
+    "en": "Treat BP of 140/90 or more, and treat a severe reading fast but not too abruptly. The target is below 140/90 (NICE aims for 135/85). Nifedipine (by mouth, swallowed) and labetalol are the usual first drugs.",
+    "hi": "बीपी 140/90 या ज़्यादा हो तो इलाज कीजिए, और गंभीर रीडिंग का इलाज जल्दी पर बहुत अचानक नहीं। लक्ष्य 140/90 से नीचे है (NICE 135/85 का लक्ष्य रखता है)। Nifedipine (मुँह से, निगलकर) और labetalol आम पहली दवाएँ हैं।"
    },
    "see": {
     "diagram": "diagrams/ob5-bp-control.svg"
@@ -1311,7 +1320,7 @@
    "minutes": 6,
    "idea": {
     "en": "[[mgso4]] prevents seizures in severe pre-eclampsia and stops them in eclampsia. Give the loading dose at once, then maintenance only if reflexes, breathing and urine output are safe.",
-    "hi": "गंभीर pre-eclampsia में [[mgso4]] दौरे रोकता है और eclampsia में उन्हें रोकता है। loading dose तुरंत दीजिए, फिर maintenance तभी जब reflexes, साँस और पेशाब सुरक्षित हों।"
+    "hi": "गंभीर pre-eclampsia में [[mgso4]] दौरों से बचाता है और eclampsia में दौरे थामता है। loading dose तुरंत दीजिए, फिर maintenance तभी जब reflexes, साँस और पेशाब सुरक्षित हों।"
    },
    "see": {
     "diagram": "diagrams/ob5-magnesium.svg"
@@ -1387,11 +1396,14 @@
     "hi": "[[placenta-previa]] में प्लेसेंटा सर्विक्स के मुँह को ढकती है। आम संकेत है अचानक, दर्दरहित, चटक लाल रक्तस्राव। योजना है भर्ती, अल्ट्रासाउंड और स्थिर हो तो 36 से 37+6 हफ़्ते पर नियोजित सीज़ेरियन।"
    },
    "see": {
-    "diagram": "diagrams/ob6-placenta-previa.svg"
+    "img": "learn/media/real/ob6-placenta-previa.webp"
    },
    "test": {
     "mcqTopic": "ob-haemorrhage"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob6-abruption": {
    "title": {
@@ -1401,14 +1413,17 @@
    "minutes": 5,
    "idea": {
     "en": "In [[abruption]] the placenta separates early. Look for pain, a tender hard womb, dark blood (or none, if concealed), fetal distress and shock out of proportion to the visible loss.",
-    "hi": "[[abruption]] में प्लेसेंटा जल्दी अलग हो जाती है। दर्द, कोमल कड़ा गर्भाशय, गहरा ख़ून (या छिपा हो तो कुछ नहीं), भ्रूण की तकलीफ़ और दिखते रक्तस्राव से कहीं ज़्यादा शॉक देखिए।"
+    "hi": "[[abruption]] में प्लेसेंटा जल्दी अलग हो जाती है। दर्द, छूने पर दर्द वाला कड़ा गर्भाशय, गहरा ख़ून (या छिपा हो तो कुछ नहीं), भ्रूण की तकलीफ़ और दिखते रक्तस्राव से कहीं ज़्यादा शॉक देखिए।"
    },
    "see": {
-    "diagram": "diagrams/ob6-abruption.svg"
+    "img": "learn/media/real/ob6-abruption.webp"
    },
    "test": {
     "mcqTopic": "ob-haemorrhage"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob6-pph-causes": {
    "title": {
@@ -1418,7 +1433,7 @@
    "minutes": 5,
    "idea": {
     "en": "[[pph]] is a loss of 500 mL or more, or any bleeding that upsets the vital signs. Find the cause with the [[four-ts]]: Tone, Tissue, Trauma, Thrombin. Tone is the commonest.",
-    "hi": "[[pph]] यानी 500 mL या ज़्यादा रक्त की हानि, या कोई भी रक्तस्राव जो महत्वपूर्ण लक्षण बिगाड़े। कारण [[four-ts]] से खोजिए: Tone, Tissue, Trauma, Thrombin। Tone सबसे आम है।"
+    "hi": "[[pph]] यानी 500 mL या ज़्यादा रक्त की हानि, या कोई भी रक्तस्राव जो vital signs (नब्ज़, बीपी, साँस) बिगाड़े। कारण [[four-ts]] से खोजिए: Tone, Tissue, Trauma, Thrombin। Tone सबसे आम है।"
    },
    "see": {
     "diagram": "diagrams/ob6-pph-causes.svg"
@@ -1475,12 +1490,15 @@
     "hi": "आधे घंटे में प्लेसेंटा न निकले तो वह अटकी है और प्रशिक्षित हाथ चाहिए। अंदर से उलटा गर्भाशय ([[uterine-inversion]]) आपात स्थिति है: मदद बुलाइए, तुरंत उसे वापस रखिए, और नाल मत खींचिए।"
    },
    "see": {
-    "diagram": "diagrams/ob6-third-stage-emergencies.svg"
+    "img": "learn/media/real/ob6-third-stage-emergencies.webp"
    },
    "test": {
     "mcqTopic": "ob-haemorrhage",
     "sim": "pph"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob6-referral-note": {
    "title": {
@@ -1664,11 +1682,14 @@
     "hi": "गर्भवती महिला को चिकित्सकीय रूप से ज़रूरी ऑपरेशन से कभी मना या विलंबित नहीं करना चाहिए। [[appendicitis]] और पित्ताशय की पथरी का इलाज ऑपरेशन से होता है, और प्रसूति टीम से परामर्श लिया जाता है।"
    },
    "see": {
-    "diagram": "diagrams/ob7-surgical.svg"
+    "img": "learn/media/real/ob7-surgical.webp"
    },
    "test": {
     "mcqTopic": "ob-medical"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob7-precautions": {
    "title": {
@@ -1702,7 +1723,10 @@
    },
    "test": {
     "mcqTopic": "ob-labour"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob8-preterm-steroids": {
    "title": {
@@ -1819,12 +1843,15 @@
     "hi": "जुड़वाँ गर्भ के जोखिम [[chorionicity]] से आते हैं, ज़ाइगोसिटी से नहीं। इसे जल्दी, पहली तिमाही में पता करें।"
    },
    "see": {
-    "diagram": "diagrams/ob9-twins-chorion.svg"
+    "img": "learn/media/real/ob9-twins-chorion.webp"
    },
    "test": {
     "mcqTopic": "ob-antenatal",
     "sim": "twins"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob9-lie-presentation": {
    "title": {
@@ -1837,11 +1864,14 @@
     "hi": "पूर्ण अवधि के पास बच्चे को लंबवत, सिर नीचे लेटा होना चाहिए। कोई और [[lie]] या [[presentation]] असामान्य प्रस्तुति है और प्रसव से पहले योजना चाहिए।"
    },
    "see": {
-    "diagram": "diagrams/ob9-lie-presentation.svg"
+    "img": "learn/media/real/ob9-lie-presentation.webp"
    },
    "test": {
     "mcqTopic": "ob-labour"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob9-breech": {
    "title": {
@@ -1854,14 +1884,14 @@
     "hi": "[[breech]] बच्चे को कभी-कभी [[ecv]] से घुमाया जा सकता है। ब्रीच रहे तो ज़्यादातर प्रसव सिज़ेरियन से नियोजित होते हैं और योनि ब्रीच प्रसव केवल प्रशिक्षित टीम के लिए है।"
    },
    "see": {
-    "diagram": "diagrams/ob9-breech.svg"
+    "img": "learn/media/real/ob9-breech.webp"
    },
    "test": {
     "mcqTopic": "ob-labour",
     "sim": "breech"
    },
    "verify": [
-    "ECV timing: from about 36 to 37 weeks (RCOG GTG 20a not opened)"
+    "AI-generated realistic image: verify anatomy and label positions"
    ]
   },
   "ob10-episiotomy": {
@@ -1879,7 +1909,10 @@
    },
    "test": {
     "mcqTopic": "ob-operative"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob10-instrumental": {
    "title": {
@@ -1892,7 +1925,7 @@
     "hi": "[[forceps]] या [[vacuum]] दूसरे चरण में बच्चे को निकालने में मदद करते हैं। ये तभी सुरक्षित हैं जब शर्तें पूरी हों, और सिर न उतरे तो रुक जाएँ।"
    },
    "see": {
-    "img": "learn/media/real/ob10-instrumental.webp"
+    "diagram": "diagrams/ob10-instrumental.svg"
    },
    "test": {
     "mcqTopic": "ob-operative"
@@ -1998,11 +2031,14 @@
     "hi": "[[uterine-rupture]] दोनों जानों के लिए ख़तरा है। यह पुराने सिज़ेरियन निशान, अवरुद्ध प्रसव या ऑक्सीटोसिन के दुरुपयोग में सबसे आम है। पहली चेतावनी पर कार्रवाई करें।"
    },
    "see": {
-    "diagram": "diagrams/ob10-rupture.svg"
+    "img": "learn/media/real/ob10-rupture.webp"
    },
    "test": {
     "mcqTopic": "ob-operative"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob10-catheter": {
    "title": {
@@ -2049,11 +2085,14 @@
     "hi": "[[miscarriage]] का वर्णन ग्रीवा और ऊतकों से होता है: थ्रेटेंड, इनएविटेबल, इनकम्प्लीट, कम्प्लीट या मिस्ड। प्रकार से इलाज तय होता है।"
    },
    "see": {
-    "diagram": "diagrams/ob11-miscarriage-types.svg"
+    "img": "learn/media/real/ob11-miscarriage-types.webp"
    },
    "test": {
     "mcqTopic": "ob-early"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob11-miscarriage-manage": {
    "title": {
@@ -2117,11 +2156,14 @@
     "hi": "[[hydatidiform-mole]] का इलाज सक्शन एवैक्युएशन है, फिर [[gtn]] जल्दी पकड़ने के लिए hCG सामान्य होने तक देखा जाता है। GTN अत्यधिक इलाज योग्य है।"
    },
    "see": {
-    "diagram": "diagrams/ob11-molar.svg"
+    "img": "learn/media/real/ob11-molar.webp"
    },
    "test": {
     "mcqTopic": "ob-early"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "ob11-hyperemesis": {
    "title": {
@@ -2314,8 +2356,8 @@
    },
    "minutes": 5,
    "idea": {
-    "en": "A [[stillbirth]] is a baby born with no sign of life after viability. Many causes are found in the mother, the placenta or the cord, and many can be prevented.",
-    "hi": "[[stillbirth]] जीवनक्षमता के बाद बिना जीवन के संकेत के जन्मा बच्चा है। कई कारण माँ, प्लेसेंटा या गर्भनाल में मिलते हैं, और कई रोके जा सकते हैं।"
+    "en": "A [[stillbirth]] is a baby born with no sign of life at 28 weeks or more. ICD uses 22 weeks or 500 g. Many causes lie in the mother, placenta or cord, and many can be prevented.",
+    "hi": "[[stillbirth]] 28 सप्ताह या अधिक पर बिना जीवन के संकेत के जन्मा बच्चा है (ICD में 22 सप्ताह या 500 g)। कई कारण माँ, प्लेसेंटा या गर्भनाल में होते हैं, और कई रोके जा सकते हैं।"
    },
    "see": {
     "diagram": "diagrams/ob12-stillbirth.svg"
@@ -2395,7 +2437,7 @@
     "hi": "गर्भाशय को [[uterine-artery]] और ओवेरियन धमनी से खून मिलता है। ग्रीवा के पास [[ureter]] ठीक गर्भाशय धमनी के नीचे से गुज़रती है: \"पुल के नीचे पानी\"।"
    },
    "see": {
-    "img": "learn/media/real/gy1-blood-ureter.webp"
+    "diagram": "diagrams/gy1-blood-ureter.svg"
    },
    "test": {
     "mcqTopic": "gy-anatomy"
@@ -2607,11 +2649,14 @@
     "hi": "[[pcos]] प्रजनन आयु की महिलाओं में सबसे आम हार्मोन संबंधी समस्या है, जो लगभग 10 में से 1 को होती है। इसमें अनियमित ओव्यूलेशन, ज़्यादा पुरुष-प्रकार के हार्मोन और अक्सर अंडाशय में कई छोटे फॉलिकल साथ आते हैं।"
    },
    "see": {
-    "diagram": "diagrams/gy3-what.svg"
+    "img": "learn/media/real/gy3-what.webp"
    },
    "test": {
     "mcqTopic": "gy-menstrual"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy3-why": {
    "title": {
@@ -2764,7 +2809,10 @@
    },
    "test": {
     "mcqTopic": "gy-infection"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy4-ulcers": {
    "title": {
@@ -2885,11 +2933,14 @@
     "hi": "[[adenomyosis]] यानी गर्भाशय की माँसपेशी के अंदर एंडोमेट्रियम जैसी ग्रंथियाँ और स्ट्रोमा। इससे गर्भाशय बड़ा और दुखता है, और माहवारी भारी और दर्दनाक होती है।"
    },
    "see": {
-    "diagram": "diagrams/gy5-adenomyosis.svg"
+    "img": "learn/media/real/gy5-adenomyosis.webp"
    },
    "test": {
     "mcqTopic": "gy-benign"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy5-hysterectomy": {
    "title": {
@@ -2943,7 +2994,10 @@
    },
    "test": {
     "mcqTopic": "gy-urogyn"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy6-popq": {
    "title": {
@@ -3025,11 +3079,14 @@
     "hi": "[[vvf]] मूत्राशय और योनि के बीच का छेद है। पेशाब लगातार रिसता है। ज़्यादातर [[obs-labour]] या पेड़ू की सर्जरी से होते हैं। ज़्यादातर रोके जा सकते हैं।"
    },
    "see": {
-    "diagram": "diagrams/gy6-fistula.svg"
+    "img": "learn/media/real/gy6-fistula.webp"
    },
    "test": {
     "mcqTopic": "gy-urogyn"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy7-when-to-look": {
    "title": {
@@ -3220,7 +3277,10 @@
    },
    "test": {
     "mcqTopic": "gy-contraception"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy8-tubal-minilap": {
    "title": {
@@ -3246,8 +3306,8 @@
    },
    "minutes": 6,
    "idea": {
-    "en": "Laparoscopic tubal ligation uses [[falope-ring]] occlusion, CO2 pneumoperitoneum below 15 mmHg and a head-down tilt of no more than 15 degrees. It is not done with a second-trimester abortion or in the postpartum period.",
-    "hi": "लैप्रोस्कोपिक नलबंदी में [[falope-ring]] से अवरोध, 15 mmHg से कम CO2 दबाव और 15 डिग्री से अधिक सिर-नीचे झुकाव नहीं होता। यह दूसरी तिमाही के गर्भपात के साथ या प्रसवोत्तर काल में नहीं की जाती।"
+    "en": "Laparoscopic tubal ligation uses [[falope-ring]] occlusion. CO2 pressure is not above 15 mmHg, and head-down tilt is no more than 15 degrees. It is not done with a second-trimester abortion or in the postpartum period.",
+    "hi": "लैप्रोस्कोपिक नलबंदी में [[falope-ring]] से अवरोध किया जाता है। CO2 दबाव 15 mmHg से अधिक नहीं, और सिर-नीचे झुकाव 15 डिग्री से अधिक नहीं होता। यह दूसरी तिमाही के गर्भपात के साथ या प्रसवोत्तर काल में नहीं की जाती।"
    },
    "see": {
     "diagram": "diagrams/gy8-lap-sterilisation.svg"
@@ -3314,8 +3374,8 @@
    },
    "minutes": 6,
    "idea": {
-    "en": "[[mht|Menopausal hormone therapy]] gives its best balance when started within 10 years of menopause or before age 60. Know the two absolute contraindications before you prescribe.",
-    "hi": "[[mht|रजोनिवृत्ति हार्मोन थेरेपी (MHT)]] का सबसे अच्छा संतुलन तब मिलता है जब इसे रजोनिवृत्ति के 10 साल के भीतर या 60 की उम्र से पहले शुरू किया जाए। लिखने से पहले दो निरपेक्ष प्रतिरोधी स्थितियाँ जान लें।"
+    "en": "[[mht|Menopausal hormone therapy]] gives its best balance when started within 10 years of menopause or before age 60. Know the contraindications before you prescribe.",
+    "hi": "[[mht|रजोनिवृत्ति हार्मोन थेरेपी (MHT)]] का सबसे अच्छा संतुलन तब मिलता है जब इसे रजोनिवृत्ति के 10 साल के भीतर या 60 की उम्र से पहले शुरू किया जाए। लिखने से पहले प्रतिनिषेध जान लें।"
    },
    "see": {
     "diagram": "diagrams/gy9-window.svg"
@@ -3457,11 +3517,14 @@
     "hi": "ओव्यूलेशन चक्र से बनने वाली सिस्ट को फंक्शनल सिस्ट कहते हैं। 5 cm से छोटी सरल सिस्ट, जिसमें कोई संदिग्ध लक्षण न हो, पर नज़र रखी जाती है और 6 महीने बाद दोबारा स्कैन होता है, ऑपरेशन नहीं।"
    },
    "see": {
-    "diagram": "diagrams/gy11-functional.svg"
+    "img": "learn/media/real/gy11-functional.webp"
    },
    "test": {
     "mcqTopic": "gy-benign"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy11-classification": {
    "title": {
@@ -3491,11 +3554,14 @@
     "hi": "[[dermoid|डर्मॉइड सिस्ट]] युवा महिलाओं में सबसे आम सौम्य अंडाशय जनन कोशिका गाँठ है। इसमें बाल, चर्बी और कभी-कभी दाँत होते हैं, और यह मुड़ सकती है। सिस्ट निकालें और अंडाशय बचाएँ।"
    },
    "see": {
-    "diagram": "diagrams/gy11-dermoid.svg"
+    "img": "learn/media/real/gy11-dermoid.webp"
    },
    "test": {
     "mcqTopic": "gy-benign"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy11-ultrasound-iota": {
    "title": {
@@ -3522,8 +3588,8 @@
    },
    "minutes": 6,
    "idea": {
-    "en": "[[rmi|RMI I]] multiplies three numbers: ultrasound score, menopausal score and CA-125. A high result sends the woman to a gynaecological oncology team. Use 250 as NICE does, and know the older cut-off of 200.",
-    "hi": "[[rmi|RMI I]] तीन संख्याओं का गुणा है: अल्ट्रासाउंड स्कोर, रजोनिवृत्ति स्कोर और CA-125। ऊँचा नतीजा महिला को गाइनेकोलॉजिकल ऑन्कोलॉजी टीम के पास भेजता है। NICE की तरह 250 इस्तेमाल करें, और पुरानी सीमा 200 भी जानें।"
+    "en": "[[rmi|RMI I]] multiplies three numbers: ultrasound score, menopausal score and CA-125. A high result sends the woman to a gynaecological oncology team. Use 250 as NICE does, and know that RCOG uses 200.",
+    "hi": "[[rmi|RMI I]] तीन संख्याओं का गुणा है: अल्ट्रासाउंड स्कोर, रजोनिवृत्ति स्कोर और CA-125। ऊँचा नतीजा महिला को गाइनेकोलॉजिकल ऑन्कोलॉजी टीम के पास भेजता है। NICE की तरह 250 इस्तेमाल करें, और जानें कि RCOG 200 इस्तेमाल करता है।"
    },
    "see": {
     "diagram": "diagrams/gy11-rmi.svg"
@@ -3616,11 +3682,14 @@
     "hi": "अंडाशय का कैंसर धुँधले लक्षण देता है, पेरिटोनियल गुहा से फैलता है, और अक्सर चरण III या IV में मिलता है। लगातार पेट फूलना और जल्दी पेट भरना CA-125 और स्कैन माँगता है।"
    },
    "see": {
-    "diagram": "diagrams/gy12-ovarian.svg"
+    "img": "learn/media/real/gy12-ovarian.webp"
    },
    "test": {
     "mcqTopic": "gy-oncology"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gy12-staging": {
    "title": {
@@ -3732,8 +3801,8 @@
    },
    "minutes": 6,
    "idea": {
-    "en": "Twin-to-twin transfusion is an amniotic fluid imbalance in monochorionic twins: donor DVP 2 cm or less, recipient 8 cm or more. Stage by Quintero and refer stages II to IV for fetoscopic laser.",
-    "hi": "Twin-to-twin transfusion monochorionic जुड़वाँ में उल्ब-द्रव का असंतुलन है: donor का DVP 2 cm या कम, recipient का 8 cm या ज़्यादा। Quintero से चरण तय करें और चरण II से IV को fetoscopic laser के लिए refer करें।"
+    "en": "Twin-to-twin transfusion is an amniotic fluid imbalance in monochorionic twins: donor DVP 2 cm or less, recipient 8 cm or more (10 cm or more after 20 weeks in Europe). Stage by Quintero and refer stages II to IV for fetoscopic laser.",
+    "hi": "Twin-to-twin transfusion monochorionic जुड़वाँ में उल्ब-द्रव का असंतुलन है: donor का DVP 2 cm या कम, recipient का 8 cm या ज़्यादा (यूरोप में 20 सप्ताह के बाद 10 cm या ज़्यादा)। Quintero से चरण तय करें और चरण II से IV को fetoscopic laser के लिए refer करें।"
    },
    "see": {
     "diagram": "diagrams/obr2-ttts.svg"
@@ -4175,8 +4244,8 @@
    },
    "minutes": 5,
    "idea": {
-    "en": "Two risks matter in prevention: a history of spontaneous preterm birth or late loss, and a short cervix of 25 mm or less on transvaginal scan at 16+0 to 24+0 weeks. In suspected labour from 30+0 weeks, use cervical length or fetal fibronectin, not both.",
-    "hi": "रोकथाम में दो जोखिम मायने रखते हैं: पिछला spontaneous समय से पहले जन्म या देर से गर्भपात, और 16+0 से 24+0 सप्ताह पर transvaginal scan में 25 mm या कम की छोटी cervix। 30+0 सप्ताह से संदिग्ध प्रसव में cervical length या fetal fibronectin लें, दोनों नहीं।"
+    "en": "Two risks matter in prevention: a history of spontaneous preterm birth or late loss, and a short cervix below 25 mm on transvaginal scan at 16+0 to 24+0 weeks. In suspected labour from 30+0 weeks, use cervical length or fetal fibronectin, not both.",
+    "hi": "रोकथाम में दो जोखिम मायने रखते हैं: पिछला spontaneous समय से पहले जन्म या देर से गर्भपात, और 16+0 से 24+0 सप्ताह पर transvaginal scan में 25 mm से कम की छोटी cervix। 30+0 सप्ताह से संदिग्ध प्रसव में cervical length या fetal fibronectin लें, दोनों नहीं।"
    },
    "see": {
     "diagram": "diagrams/obr8-cervix.svg"
@@ -4614,11 +4683,14 @@
     "hi": "पूरी सर्जरी का लक्ष्य रखें। प्राथमिक सर्जरी पूरी न हो सके तो इंटरवल सर्जरी अपनाएँ। BRCA जाँचें और PARP रखरखाव दें।"
    },
    "see": {
-    "diagram": "diagrams/gyr5-ovary.svg"
+    "img": "learn/media/real/gyr5-ovary.webp"
    },
    "test": {
     "mcqTopic": "gy-oncology"
-   }
+   },
+   "verify": [
+    "AI-generated realistic image: verify anatomy and label positions"
+   ]
   },
   "gyr5-gtn": {
    "title": {
@@ -4678,8 +4750,8 @@
    },
    "minutes": 5,
    "idea": {
-    "en": "For benign disease take the least invasive safe route: vaginal if feasible, then laparoscopic, then abdominal. Weigh ureteric injury.",
-    "hi": "सौम्य रोग में सबसे कम आक्रामक सुरक्षित रास्ता चुनें: संभव हो तो योनि, फिर लैप्रोस्कोपिक, फिर पेट का। यूरेटर की चोट का जोखिम तौलें।"
+    "en": "For benign disease take the least invasive safe route: vaginal if feasible, then laparoscopic, then abdominal. Weigh urinary tract injury.",
+    "hi": "सौम्य रोग में सबसे कम आक्रामक सुरक्षित रास्ता चुनें: संभव हो तो योनि, फिर लैप्रोस्कोपिक, फिर पेट का। मूत्र मार्ग (मूत्राशय या यूरेटर) की चोट का जोखिम तौलें।"
    },
    "see": {
     "diagram": "diagrams/gyr6-hysterectomy-route.svg"

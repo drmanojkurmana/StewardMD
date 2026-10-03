@@ -27,7 +27,7 @@
       v = v || {}; var p = num(v.pct);
       if (p === null || p < 0 || p > 20) return bad("Fetal cells must be 0 to 20 percent.", "भ्रूण कोशिकाएँ 0 से 20 प्रतिशत के बीच हों।");
       if (v.guideline === "bsh") {
-        var g = v.given === undefined || v.given === "" ? 500 : num(v.given);
+        var g = v.given == null || v.given === "" ? 500 : num(v.given);
         if (g === null || g < 0 || g > 5000) return bad("Dose already given must be 0 to 5000 IU.", "दी गई खुराक 0 से 5000 आईयू हो।");
         var rbc = r2(p * 18 * 1.22), total = Math.max(500, r2(125 * rbc)), extra = Math.max(0, r2(total - g));
         return { ok: true, value: extra, unit: "IU", band: rbc > 4 ? "caution" : "normal", label: { en: "Additional anti-D IM: " + extra + " IU", hi: "अतिरिक्त एंटी-डी (मांसपेशी): " + extra + " आईयू" },
@@ -44,7 +44,7 @@
       return { ok: true, value: tot, unit: "mcg", band: f > 15 ? "caution" : "normal", label: { en: "Total anti-D: " + tot + " mcg", hi: "कुल एंटी-डी: " + tot + " एमसीजी" },
         lines: [{ en: "Fetal red cells = maternal blood volume x haematocrit x % fetal cells = " + f + " mL (fetal blood volume = this / newborn haematocrit).", hi: "भ्रूण लाल कोशिकाएँ = माँ का रक्त आयतन x हेमैटोक्रिट x % भ्रूण कोशिकाएँ = " + f + " मिली (भ्रूण रक्त आयतन = यह / नवजात हेमैटोक्रिट)।" },
                 { en: "Standard 300 mcg covers 15 mL fetal red cells (30 mL fetal blood); extra " + add + " mcg at 10 mcg per additional 0.5 mL.", hi: "मानक 300 एमसीजी 15 मिली भ्रूण लाल कोशिकाएँ (30 मिली भ्रूण रक्त) कवर करता है; अतिरिक्त " + add + " एमसीजी, हर अतिरिक्त 0.5 मिली पर 10 एमसीजी।" },
-                { en: "Give within 72 hours of the sensitising event or delivery of an Rh D positive baby.", hi: "संवेदनशील घटना या आरएच डी पॉज़िटिव शिशु के प्रसव के 72 घंटे के भीतर दें।" }],
+                { en: "Give within 72 hours of the sensitising event or delivery of an Rh D positive baby.", hi: "संवेदीकरण करने वाली घटना या आरएच डी पॉज़िटिव शिशु के प्रसव के 72 घंटे के भीतर दें।" }],
         rule: { en: "FOGSI/ICOG: 300 mcg anti-D at least; it covers 15 mL fetal RBC. Add 10 mcg for every additional 0.5 mL. Fetal blood volume = maternal blood volume x maternal haematocrit x % fetal cells / newborn haematocrit.", hi: "एफओजीएसआई/आईसीओजी: कम से कम 300 एमसीजी एंटी-डी; यह 15 मिली भ्रूण आरबीसी कवर करता है। हर अतिरिक्त 0.5 मिली पर 10 एमसीजी जोड़ें। भ्रूण रक्त आयतन = माँ का रक्त आयतन x हेमैटोक्रिट x % भ्रूण कोशिकाएँ / नवजात हेमैटोक्रिट।" } };
     },
     examples: [

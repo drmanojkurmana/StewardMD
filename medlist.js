@@ -1497,8 +1497,10 @@
       if (seq !== _checkSeq) return;
       _results = window.INTERACTIONS.checkInteractions(getList());
       _view = "results"; _hideMinor = true;
+      // One buzz per completed check (not per re-render): a critical or major interaction is on screen.
+      try { if (_results && (_results.critical.length || _results.major.length) && window.SMD_HAPTICS) window.SMD_HAPTICS.warning(); } catch (e) {}
     }).catch(function () {
-      if (seq === _checkSeq) toast("Could not finish the check. Check your connection and retry.");
+      if (seq === _checkSeq) { toast("Could not finish the check. Check your connection and retry."); try { if (window.SMD_HAPTICS) window.SMD_HAPTICS.error(); } catch (e) {} }
     }).then(function () { clearTimeout(timer); if (seq === _checkSeq) { _checking = false; _checkSeq++; render(); } });
   }
 
@@ -1867,7 +1869,7 @@
 ".ml-sheet-close{width:34px;height:34px;border-radius:9px;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);font-size:16px;color:var(--slate,#2d4356);cursor:pointer;flex:0 0 auto}",
 ".ml-sheet-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 16px 14px;min-height:0}",
 // tall search surface so suggestions read as a full, scrollable typeahead list
-".ml-sheet-tall{height:88vh;max-height:88vh}",
+".ml-sheet-tall{height:88vh;max-height:88vh;height:88dvh;max-height:88dvh}",
 "@media(min-width:900px){.ml-sheet-tall{height:78vh;max-height:78vh}}",
 // fixed search bar (input stays put while the suggestion list below it scrolls)
 ".ml-searchbar{flex:0 0 auto;padding:2px 16px 12px;border-bottom:1px solid var(--line,#d7dee3)}",

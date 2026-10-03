@@ -2,12 +2,12 @@
  *
  * Fires tactile feedback on every interactive tap across the app via one capture-phase
  * pointerdown listener (snappy, fires on press). Smart intensity: light tap for normal
- * taps/nav, medium for primary actions, a selection tick for toggles/switches/segmented,
- * and a success/warning/error buzz on outcomes (error-like toasts). No edits to any feature
- * internals - it only observes the DOM.
+ * taps/nav, medium for primary actions, a selection tick for toggles/switches/segmented.
+ * Outcome haptics (success / warning / error) are fired by the code that owns the outcome
+ * (record committed, safety alert rendered, validation failed), not inferred from toast text.
  *
- * Native: @capacitor/haptics (registered on iOS SPM + Android). Web: navigator.vibrate
- * fallback (Android Chrome; iOS Safari has no vibrate, but the native app uses the plugin).
+ * iOS: @capacitor/haptics (taptic engine). Android: Capacitor.Plugins.SmdDevice.haptic({type}),
+ * which uses the system's own tuned haptic constants. Nothing else: no web fallback.
  * Preference: localStorage "smd_haptics" (default ON). ?haptics=0 disables, ?haptics=1 forces.
  * Throttled ~45ms so rapid taps never stack or drain battery. */
 (function () {
@@ -16,13 +16,17 @@
   var Cap = window.Capacitor;
   function isNative() { try { return !!(Cap && (typeof Cap.isNativePlatform === "function" ? Cap.isNativePlatform() : Cap.isNative)); } catch (e) { return false; } }
   function platform() { try { return (typeof Cap.getPlatform === "function" ? Cap.getPlatform() : (Cap && Cap.platform)) || "web"; } catch (e) { return "web"; } }
-  // iOS-ONLY by design: Android's vibration motor feels buzzy/cheap vs iOS's taptic engine, so
-  // haptics fire only through the Capacitor Haptics plugin on iOS. Android (native + web) and
-  // every other platform are a hard no-op. (navigator.vibrate is intentionally NOT used.)
+  // Owner decision 2026-10-03 (supersedes the earlier iOS-only rule): Android gets haptics too, but
+  // ONLY through the system's tuned haptics via the native SmdDevice plugin, never raw vibration,
+  // because a bare motor buzz feels cheap next to the taptic engine. Web and every other platform are
+  // a hard no-op. navigator.vibrate is intentionally NOT used.
   function iosNative() { return isNative() && platform() === "ios"; }
+  function androidNative() { return isNative() && platform() === "android"; }
+  function active() { return iosNative() || androidNative(); }
 
-  var _p; // cached plugin ref once FOUND. Absent is re-checked every call: caching null on the
-  // first early call (before the bridge proxied the plugin) made every later tap silent.
+  var _p, _a; // cached plugin refs once FOUND. Absent is re-checked every call: caching null on the
+  // first early call (before the bridge proxied the plugin) made every later tap silent. The Android
+  // SmdDevice plugin can appear late the same way, so it is looked up per call until found.
   function plugin() {
     if (_p) return _p;
     if (!iosNative()) return null;
@@ -30,6 +34,19 @@
     if (!P && C && typeof C.registerPlugin === "function") { try { P = C.registerPlugin("Haptics"); } catch (e) { P = null; } }
     if (P && (P.impact || P.notification)) _p = P;
     return P || null;
+  }
+  function androidPlugin() {
+    if (_a) return _a;
+    if (!androidNative()) return null;
+    var C = window.Capacitor, P = C && C.Plugins && C.Plugins.SmdDevice;
+    if (P && typeof P.haptic === "function") _a = P;
+    return _a || null;
+  }
+  // type: tap|light|medium|heavy|selection|success|warning|error. Resolves {performed:boolean}; ignored.
+  function android(type) {
+    var p = androidPlugin();
+    if (!p) return;
+    try { var r = p.haptic({ type: type }); if (r && r.catch) r.catch(function () {}); } catch (e) {}
   }
 
   function enabled() {
@@ -49,18 +66,22 @@
   var IMPACT = { light: "LIGHT", medium: "MEDIUM", heavy: "HEAVY" };
   var NOTIF = { success: "SUCCESS", warning: "WARNING", error: "ERROR" };
 
-  function impact(style) {
-    if (!enabled() || !iosNative() || !gate()) return;
+  // `name` is the platform-neutral type the Android plugin takes.
+  function impact(style, name) {
+    if (!enabled() || !active() || !gate()) return;
+    if (androidNative()) return android(name);
     var p = plugin();
     if (p && p.impact) { try { p.impact({ style: style }); } catch (e) {} }
   }
-  function notify(type) {
-    if (!enabled() || !iosNative() || !gate()) return;
+  function notify(type, name) {
+    if (!enabled() || !active() || !gate()) return;
+    if (androidNative()) return android(name);
     var p = plugin();
     if (p && p.notification) { try { p.notification({ type: type }); } catch (e) {} }
   }
   function selection() {
-    if (!enabled() || !iosNative() || !gate()) return;
+    if (!enabled() || !active() || !gate()) return;
+    if (androidNative()) return android("selection");
     var p = plugin();
     if (p && p.selectionStart) {
       try { p.selectionStart(); if (p.selectionChanged) p.selectionChanged(); if (p.selectionEnd) p.selectionEnd(); return; } catch (e) {}
@@ -70,17 +91,17 @@
 
   // ---- public API -------------------------------------------------------------------------
   window.SMD_HAPTICS = {
-    tap: function () { impact(IMPACT.light); },
-    light: function () { impact(IMPACT.light); },
-    medium: function () { impact(IMPACT.medium); },
-    heavy: function () { impact(IMPACT.heavy); },
+    tap: function () { impact(IMPACT.light, "tap"); },
+    light: function () { impact(IMPACT.light, "light"); },
+    medium: function () { impact(IMPACT.medium, "medium"); },
+    heavy: function () { impact(IMPACT.heavy, "heavy"); },
     selection: selection,
-    success: function () { notify(NOTIF.success); },
-    warning: function () { notify(NOTIF.warning); },
-    error: function () { notify(NOTIF.error); },
+    success: function () { notify(NOTIF.success, "success"); },
+    warning: function () { notify(NOTIF.warning, "warning"); },
+    error: function () { notify(NOTIF.error, "error"); },
     enabled: enabled,
     setEnabled: function (on) { try { localStorage.setItem("smd_haptics", on ? "1" : "0"); } catch (e) {} },
-    supported: function () { return !!plugin(); }   // true only on iOS native
+    supported: function () { return !!(plugin() || androidPlugin()); }   // true only on iOS / Android native with its plugin
   };
 
   // ---- auto-wire: classify every interactive tap ------------------------------------------
@@ -97,15 +118,15 @@
     if (!el || !el.matches) return;
     try {
       if (el.matches(SELECTION)) return selection();
-      if (el.matches(PRIMARY)) return impact(IMPACT.medium);
-      impact(IMPACT.light);
-    } catch (e) { impact(IMPACT.light); }
+      if (el.matches(PRIMARY)) return impact(IMPACT.medium, "medium");
+      impact(IMPACT.light, "light");
+    } catch (e) { impact(IMPACT.light, "light"); }
   }
 
   // pointerdown = immediate on-press feedback (feels native); capture so it runs before the
   // app's own handlers and survives stopPropagation.
   document.addEventListener("pointerdown", function (e) {
-    if (!iosNative() || !enabled()) return;
+    if (!active() || !enabled()) return;
     if (e.pointerType === "" && e.button && e.button !== 0) return;   // ignore non-primary mouse
     var t = e.target && e.target.closest ? e.target.closest(INTERACTIVE) : null;
     if (t) fireFor(t);
@@ -113,26 +134,12 @@
 
   // Keyboard activation (Enter/Space) for accessibility parity.
   document.addEventListener("keydown", function (e) {
-    if (!iosNative() || !enabled()) return;
+    if (!active() || !enabled()) return;
     if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
     var t = e.target && e.target.closest ? e.target.closest(INTERACTIVE) : null;
     if (t) fireFor(t);
   }, true);
 
-  // Outcome feedback: a distinct error buzz when an error-like toast appears. Wrap the shared
-  // toast shim (window.toast / SMD_toast) once available; the triggering tap already buzzed, so
-  // we ONLY add a buzz for failures (never double-buzz success).
-  function wrapToast() {
-    var fn = window.toast;
-    if (typeof fn !== "function" || fn.__smdHapticWrapped) return false;
-    var wrapped = function (msg) {
-      try { if (enabled() && /\b(fail|failed|error|unable|couldn|could not|invalid|denied|wrong|not\s+found|no\s+internet|offline)\b/i.test(String(msg || ""))) notify(NOTIF.error); } catch (e) {}
-      return fn.apply(this, arguments);
-    };
-    wrapped.__smdHapticWrapped = true;
-    window.toast = wrapped;
-    if (window.SMD_toast === fn) window.SMD_toast = wrapped;
-    return true;
-  }
-  if (!wrapToast()) { var n = 0, iv = setInterval(function () { if (wrapToast() || ++n > 40) clearInterval(iv); }, 250); }
+  // The old toast-text regex buzz is gone: failures are signalled by the code that owns them
+  // (SMD_HAPTICS.error()/warning() at the commit, validation and safety-alert points).
 })();

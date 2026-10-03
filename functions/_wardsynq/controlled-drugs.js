@@ -297,7 +297,9 @@ async function quarantineRefusal(ctx, drug, code, batch) {
  * (legal review F.4.4). Returns null to go ahead, { warning } when the check could not be made, or the refusal. A receipt
  * over the estimate goes ahead only with the reference of the revised estimate filed with the Controller. */
 async function estimateRefusal(request, env, ctx, move) {
-  const year = Number(str(move.at || new Date().toISOString()).slice(0, 4));
+  // The hospital's calendar year (its clock, IST by default), the same calendar the Form 3-I return books stock by;
+  // the UTC year would check a receipt in the first hours of 1 January against last year's estimate.
+  const year = Number(hospitalToday(Date.parse(str(move.at)) || Date.now(), ctx.clock).slice(0, 4));
   let estimates;
   try { estimates = await ctx.recordDeps.repository.latestByType(ctx.migration.tenantId, typeOf("form3j"), 1000, { newest: true }); }
   catch { return { refuse: { ok: false, status: 502, error: "estimate_unreadable", detail: "The Form 3J estimate could not be read, so the receipt was not recorded." } }; }

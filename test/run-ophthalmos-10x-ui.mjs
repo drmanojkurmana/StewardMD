@@ -126,8 +126,10 @@ try {
   }
   await ev(`document.querySelector('#smdOphthalmos [data-act=lnhot][data-k="0"]').click(); return 1;`);
   ok(await until(`var h=document.querySelector('#smdOphthalmos [data-act=lnhot][data-k="0"]'), i=document.getElementById("lnImg"); return !!h && h.getAttribute("aria-expanded") === "true" && !!(i && i.naturalWidth > 0) && document.getElementById("lnHotList").textContent.trim().length > 0;`), "See it: hotspot 1 reveals its label on a loaded picture");
-  await ev(`var i=document.querySelector('#smdOphthalmos .ln-more .ln-mpic img'); if (i) i.scrollIntoView(); return 1;`);
-  ok(await until(`var f=document.querySelector('#smdOphthalmos .ln-more .ln-mfig'), i=f && f.querySelector('img'), c=f && f.querySelector('.oph-credit'); return !!(i && i.naturalWidth > 0 && /\\/ophthalmos\\/learn\\/media\\//.test(i.currentSrc || i.src) && c && c.textContent.trim().length > 3);`, 15000), "More pictures: a learn/media figure loads from the bundle with its credit");
+  // More pictures: the lesson's own original diagram (learn/diagrams, kept when a realistic image leads) and the
+  // library figures (learn/media) each load from the bundle with a credit.
+  await ev(`[].forEach.call(document.querySelectorAll('#smdOphthalmos .ln-more .ln-mpic img'), function (i) { i.loading = "eager"; i.scrollIntoView(); }); return 1;`);
+  ok(await until(`var f=[].slice.call(document.querySelectorAll('#smdOphthalmos .ln-more .ln-mfig')); return f.length > 1 && f.every(function (x) { var i=x.querySelector('img'), c=x.querySelector('.oph-credit'); return !!(i && i.naturalWidth > 0 && /\\/ophthalmos\\/learn\\/(media|diagrams)\\//.test(i.currentSrc || i.src) && c && c.textContent.trim().length > 3); }) && f.some(function (x) { var i=x.querySelector('img'); return /\\/ophthalmos\\/learn\\/media\\//.test(i.currentSrc || i.src); });`, 15000), "More pictures: the original diagram and the learn/media figures load from the bundle with their credits");
   await ev(`document.querySelector('#smdOphthalmos [data-act=lnlang]').click(); return 1;`);
   ok(await until(`var r=document.getElementById("smdOphthalmos"); return r.getAttribute("lang") === "hi" && OPHTHALMOS._st.view === "lesson" && /[\\u0900-\\u097F]/.test(r.querySelector(".ln-h").textContent);`), "Hindi: the lesson re-renders in Hindi on the same step");
   await ev(`OPHTHALMOS._internal.leave(); OPHTHALMOS._renderHub(); return 1;`);

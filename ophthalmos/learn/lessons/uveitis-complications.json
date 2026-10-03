@@ -3,7 +3,12 @@
   "unit": "uveitis",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Complications of uveitis",
     "hi": "यूवाइटिस की जटिलताएँ"
@@ -13,22 +18,21 @@
     "hi": "लाल आँख ठीक होने के बहुत बाद तक भी यूवाइटिस नज़र को नुकसान पहुँचा सकता है। [[glaucoma]], [[cataract]], [[cystoid-macular-oedema]] और [[band-keratopathy]] पर नज़र रखें। स्टेरॉयड मदद करते हैं, पर नुकसान भी कर सकते हैं।"
   },
   "see": {
-    "diagram": "diagrams/uveitis-complications.svg",
-    "w": 400,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of an eye cut from front to back, front on the left. A chalky band lies on the centre of the cornea. The iris bows forward and is stuck to the lens at the pupil. The lens is cloudy. Red arrows push outward inside the eye. The macula has small fluid pockets, and the optic disc has a deep cup.",
-      "hi": "आगे से पीछे तक कटी आँख का चित्र, आगे का हिस्सा बाईं ओर। कॉर्निया के बीच में चॉक जैसी पट्टी है। आइरिस आगे की ओर मुड़ा है और पुतली पर लेंस से चिपका है। लेंस धुंधला है। आँख के अंदर लाल तीर बाहर की ओर दबाते हैं। मैक्युला में छोटी तरल थैलियाँ हैं, और ऑप्टिक डिस्क में गहरा गड्ढा है।"
+      "en": "A side cut through one eye showing the harm from long uveitis. A chalky white band crosses the cornea. The iris bulges forward toward the cornea, and its pupil edge is stuck to the lens. The lens is cloudy. At the back, small fluid pockets swell the macula. The optic disc is pale and hollowed out.",
+      "hi": "एक आँख का बगल से काट, जो लंबे यूवाइटिस से हुआ नुकसान दिखाता है। कॉर्निया के आर-पार खड़िया जैसी एक सफ़ेद पट्टी है। आइरिस कॉर्निया की ओर आगे उभरी है, और उसका पुतली वाला किनारा लेंस से चिपका है। लेंस धुंधला है। पीछे, द्रव की छोटी थैलियाँ मैक्युला को फुलाती हैं। ऑप्टिक डिस्क फीकी और खोखली है।"
     },
     "caption": {
       "en": "The complications of uveitis in one drawing. Tap each dot to see how it harms sight.",
       "hi": "यूवाइटिस की जटिलताएँ एक चित्र में। हर बिंदु पर टैप करके देखें कि वह नज़र को कैसे नुकसान पहुँचाती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.285,
-        "y": 0.5,
+        "x": 0.1,
+        "y": 0.427,
         "label": {
           "en": "Band keratopathy",
           "hi": "बैंड केराटोपैथी (band keratopathy)"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.365,
-        "y": 0.36,
+        "x": 0.215,
+        "y": 0.28,
         "label": {
           "en": "Iris bowed forward",
           "hi": "आगे की ओर मुड़ा आइरिस"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.448,
-        "y": 0.5,
+        "x": 0.31,
+        "y": 0.427,
         "label": {
           "en": "Cataract",
           "hi": "मोतियाबिंद (cataract)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.595,
-        "y": 0.5,
+        "x": 0.15,
+        "y": 0.627,
         "label": {
           "en": "Raised eye pressure",
           "hi": "बढ़ा हुआ आँख का दबाव"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.752,
-        "y": 0.49,
+        "x": 0.68,
+        "y": 0.387,
         "label": {
           "en": "Macular oedema",
           "hi": "मैक्युलर ईडिमा (macular oedema)"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.805,
-        "y": 0.6,
+        "x": 0.86,
+        "y": 0.44,
         "label": {
           "en": "Cupped optic disc",
           "hi": "गड्ढे वाली ऑप्टिक डिस्क"
@@ -100,9 +104,11 @@
       }
     ],
     "more": [
+      "uveitis-complications",
       "macular-oedema",
       "glaucoma-disc-cupped"
-    ]
+    ],
+    "img": "learn/media/real/uveitis-complications.webp"
   },
   "why": {
     "steps": [

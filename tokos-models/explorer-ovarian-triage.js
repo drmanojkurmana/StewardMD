@@ -53,6 +53,8 @@
     if ((d.type === "multilocular" || d.type === "multilocular-solid") && !(num(d.largestDiameterMm) && d.largestDiameterMm > 0)) errs.push("largestDiameterMm (above 0) is needed for a multilocular tumour");
     if (SOLID_TYPES.indexOf(d.type) >= 0 && !(num(d.largestSolidMm) && d.largestSolidMm > 0)) errs.push("largestSolidMm (above 0) is needed when there is a solid component");
     if (d.papillaryStructures !== undefined && !(num(d.papillaryStructures) && d.papillaryStructures >= 0 && d.papillaryStructures === Math.floor(d.papillaryStructures))) errs.push("papillaryStructures is a whole number, 0 or more");
+    // papillary projections are solid components (IOTA terms), so a cyst with no solid part cannot have them
+    if ((d.type === "unilocular" || d.type === "multilocular") && num(d.papillaryStructures) && d.papillaryStructures > 0) errs.push("papillary structures are solid components: use unilocular-solid or multilocular-solid");
     ["acousticShadows", "ascites"].forEach(function (k) { if (d[k] !== undefined && typeof d[k] !== "boolean") errs.push(k + " is true or false"); });
     if (errs.length) return bad("The description is incomplete or out of range.", "वर्णन अधूरा है या सीमा से बाहर है।", errs);
     var f = {

@@ -13,6 +13,7 @@
  */
 import { callGemini } from "./api/ai/[[path]].js";
 import { usageKv, usageConfig, recordUsage, estTokens } from "./_usage.js";
+import { istDay } from "./_counters.js";
 
 const MODEL_PRIMARY_DEFAULT = "gemini-2.5-flash-lite";
 const MODEL_FALLBACK_DEFAULT = "gemini-2.5-flash";
@@ -93,7 +94,7 @@ export async function meterGate(env, type) {
   const store = usageKv(env);
   if (!store) return { meter: false };
   const cfg = usageConfig(env);
-  const now = new Date(), day = now.toISOString().slice(0, 10), month = now.toISOString().slice(0, 7);
+  const now = new Date(), day = istDay(now.getTime()), month = now.toISOString().slice(0, 7);   // same IST day key as _usage.checkQuota
   const id = "system:updates";
   const rj = async (k) => { try { return (await store.get(k, "json")) || null; } catch (e) { return null; } };
   const u = (await rj("maik:u:" + id + ":" + day)) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };

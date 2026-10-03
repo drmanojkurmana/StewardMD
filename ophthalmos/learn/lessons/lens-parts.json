@@ -3,7 +3,12 @@
   "unit": "lens",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "The lens: a clear, living focus",
     "hi": "लेंस: साफ़ और जीवित फ़ोकस"
@@ -13,21 +18,20 @@
     "hi": "लेंस कोशिकाओं की एक साफ़ थैली है, जो [[zonules]] के सहारे आइरिस के पीछे टँगी है। पास फ़ोकस करने के लिए यह आकार बदलता है। उम्र के साथ यह सख़्त होता है, फिर धुंधला।"
   },
   "see": {
-    "diagram": "diagrams/lens-anatomy.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Diagram of the lens cut from front to back, front on the left. A bright line wraps an oval. Inside is a grey outer layer and an amber core. A dotted blue line runs just inside the front surface. Fine grey fibres join the top and bottom edges to red ciliary bodies. The purple iris edges sit in front.",
-      "hi": "लेंस का चित्र, आगे से पीछे तक कटा हुआ, आगे का हिस्सा बाईं ओर। एक चमकीली रेखा अंडाकार को घेरती है। अंदर भूरी बाहरी परत और अंबर रंग का बीच का हिस्सा है। आगे की सतह के ठीक अंदर नीली बिंदु-रेखा है। पतले भूरे रेशे ऊपर और नीचे के किनारों को लाल सिलियरी बॉडी से जोड़ते हैं। आगे बैंगनी आइरिस के किनारे हैं।"
+      "en": "The lens seen close up and cut open, with the iris in front of it. A thin clear capsule wraps the lens. One layer of cells lines its front. Layers of clear cortex surround an amber nucleus in the centre. Fine zonule threads hold the lens to the ciliary body above and below.",
+      "hi": "लेंस को पास से, खोलकर दिखाया गया है, उसके सामने आइरिस है। एक पतला पारदर्शी कैप्सूल लेंस को लपेटे है। उसके आगे की ओर कोशिकाओं की एक परत है। पारदर्शी कॉर्टेक्स की परतें बीच के एम्बर रंग के न्यूक्लियस को घेरे हैं। बारीक ज़ोन्यूल धागे लेंस को ऊपर और नीचे सिलियरी बॉडी से थामे हैं।"
     },
     "caption": {
       "en": "The parts of the lens. Light comes in from the left.",
       "hi": "लेंस के हिस्से। रोशनी बाईं ओर से आती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.658,
+        "x": 0.255,
         "y": 0.5,
         "label": {
           "en": "Capsule",
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.411,
-        "y": 0.355,
+        "x": 0.285,
+        "y": 0.62,
         "label": {
           "en": "Epithelium",
           "hi": "एपिथीलियम"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.583,
-        "y": 0.667,
+        "x": 0.43,
+        "y": 0.55,
         "label": {
           "en": "Cortex",
           "hi": "कॉर्टेक्स"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.521,
-        "y": 0.5,
+        "x": 0.57,
+        "y": 0.4,
         "label": {
           "en": "Nucleus",
           "hi": "न्यूक्लियस"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.5625,
-        "y": 0.173,
+        "x": 0.68,
+        "y": 0.14,
         "label": {
           "en": "Zonules",
           "hi": "ज़ोन्यूल्स"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.667,
-        "y": 0.087,
+        "x": 0.62,
+        "y": 0.88,
         "label": {
           "en": "Ciliary body",
           "hi": "सिलियरी बॉडी"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.34,
-        "y": 0.2,
+        "x": 0.1,
+        "y": 0.45,
         "label": {
           "en": "Iris",
           "hi": "आइरिस"
@@ -112,9 +116,11 @@
       }
     ],
     "more": [
+      "lens-anatomy",
       "accommodation",
       "eye-cross-section"
-    ]
+    ],
+    "img": "learn/media/real/lens-anatomy.webp"
   },
   "why": {
     "steps": [

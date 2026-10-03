@@ -29,7 +29,7 @@ test("builder on the fixture: units, lesson summaries, a unioned glossary (a col
 });
 
 test("licences: only open or original", () => {
-  for (const ok of ["CC0", "CC BY 4.0", "CC BY-SA 3.0", "ODC-BY 1.0", "Public domain", "Original, MAIKNOWLEDGE LLP"]) assert.match(ok, LICENCES);
+  for (const ok of ["CC0", "CC BY 4.0", "CC BY-SA 3.0", "ODC-BY 1.0", "Public domain", "Original, MAIKNOWLEDGE LLP", "Original, StewardMD"]) assert.match(ok, LICENCES);
   for (const bad of ["CC BY-NC 4.0", "All rights reserved", "CC BY-ND 4.0", ""]) assert.doesNotMatch(bad, LICENCES);
 });
 
@@ -51,4 +51,27 @@ test("the real tokos/learn, when present, is valid and its built files are in st
   const files = readdirSync(LEARN + "diagrams").map((f) => LEARN + "diagrams/" + f)
     .concat(readdirSync(LEARN + "media", { withFileTypes: true }).filter((d) => d.isDirectory()).flatMap((d) => readdirSync(LEARN + "media/" + d.name).map((f) => LEARN + "media/" + d.name + "/" + f)));
   assert.deepEqual(files.map(normalize).filter((f) => !credited.has(f)), [], "uncredited Learn media");
+});
+
+test("every lesson picture points at a file that exists (see.img and see.diagram)", () => {
+  if (!existsSync(LEARN + "lessons")) return;
+  const TOKOS = fileURLToPath(new URL("../tokos/", import.meta.url));
+  const missing = [];
+  for (const f of readdirSync(LEARN + "lessons").filter((n) => n.endsWith(".json"))) {
+    const s = JSON.parse(readFileSync(LEARN + "lessons/" + f, "utf8")).see || {};
+    if (s.img && !existsSync(TOKOS + s.img)) missing.push(f + " -> " + s.img);
+    if (s.diagram && !existsSync(LEARN + s.diagram)) missing.push(f + " -> " + s.diagram);
+  }
+  assert.deepEqual(missing, []);
+});
+
+test("quiz options are whole answers: no option is a bare unit word such as \"hours\" with its number missing", () => {
+  if (!existsSync(LEARN + "lessons")) return;
+  const BARE = /^(seconds|minutes?|hours?|days?|weeks?|months?|years?|mg|g|mcg|ml|units?|iu|percent|times?)$/i;
+  const bad = [];
+  for (const f of readdirSync(LEARN + "lessons").filter((x) => x.endsWith(".json"))) {
+    const l = JSON.parse(readFileSync(LEARN + "lessons/" + f, "utf8"));
+    (l.check || []).forEach((q, qi) => q.o.forEach((o, oi) => { if (BARE.test(o.en.trim()) || !o.en.trim() || !String(o.hi || "").trim()) bad.push(f + " check[" + qi + "].o[" + oi + "] " + JSON.stringify(o.en)); }));
+  }
+  assert.deepEqual(bad, []);
 });

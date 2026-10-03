@@ -3,7 +3,12 @@
   "unit": "ob6",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG10.1"
   ],
@@ -13,25 +18,24 @@
   },
   "idea": {
     "en": "In [[abruption]] the placenta separates early. Look for pain, a tender hard womb, dark blood (or none, if concealed), fetal distress and shock out of proportion to the visible loss.",
-    "hi": "[[abruption]] में प्लेसेंटा जल्दी अलग हो जाती है। दर्द, कोमल कड़ा गर्भाशय, गहरा ख़ून (या छिपा हो तो कुछ नहीं), भ्रूण की तकलीफ़ और दिखते रक्तस्राव से कहीं ज़्यादा शॉक देखिए।"
+    "hi": "[[abruption]] में प्लेसेंटा जल्दी अलग हो जाती है। दर्द, छूने पर दर्द वाला कड़ा गर्भाशय, गहरा ख़ून (या छिपा हो तो कुछ नहीं), भ्रूण की तकलीफ़ और दिखते रक्तस्राव से कहीं ज़्यादा शॉक देखिए।"
   },
   "see": {
-    "diagram": "diagrams/ob6-abruption.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "A womb in front view with the placenta on the right wall partly peeled off, and a dark red clot behind it. Purple bruised patches show on the wall on the left. A baby's head sits in the middle. At the lower left a jagged red line shows a struggling heartbeat. At lower right, scattered red drops stand for clotting failure. A thin dark trickle of blood leaves the bottom.",
-      "hi": "गर्भाशय का सामने का चित्र, जिसमें दाईं दीवार पर प्लेसेंटा आंशिक रूप से उखड़ी है और उसके पीछे गहरा लाल थक्का है। बाईं दीवार पर बैंगनी नील के धब्बे हैं। बीच में बच्चे का सिर है। नीचे बाईं ओर दाँतेदार लाल रेखा संघर्ष करती धड़कन दिखाती है। नीचे दाईं ओर बिखरी लाल बूँदें जमने की विफलता दर्शाती हैं। नीचे से ख़ून की पतली गहरी धार निकल रही है।"
+      "en": "Realistic medical illustration showing acute placental abruption in a gravid uterus, with a large dark retroplacental haematoma peeling the placenta off the uterine wall, purplish Couvelaire myometrial bruising, and a fetus in utero.",
+      "hi": "गर्भवती गर्भाशय में तीव्र अपरा पृथक्करण (प्लेसेंटल एब्स्ट्रक्शन) को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र, जिसमें एक बड़ा गहरा रेट्रोप्लेसेंटल हेमेटोमा गर्भाशय की दीवार से प्लेसेंटा को अलग कर रहा है, मायोमेट्रियम में बैंगनी कुवेलेयर चोट के निशान हैं, और गर्भाशय में भ्रूण उपस्थित है।"
     },
     "caption": {
-      "en": "A placenta peeling off with blood trapped behind it, and what follows.",
-      "hi": "उखड़ती प्लेसेंटा जिसके पीछे ख़ून फँसा है, और उसके बाद क्या होता है।"
+      "en": "Placental abruption with retroplacental haematoma and Couvelaire myometrial extravasation.",
+      "hi": "रेट्रोप्लेसेंटल हेमेटोमा और कुवेलेयर मायोमेट्रियल रक्तस्राव के साथ प्लेसेंटल एब्रप्शन।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.679,
-        "y": 0.333,
+        "x": 0.65,
+        "y": 0.4,
         "label": {
           "en": "Clot behind the placenta",
           "hi": "प्लेसेंटा के पीछे थक्का"
@@ -42,20 +46,20 @@
         }
       },
       {
-        "x": 0.396,
-        "y": 0.32,
+        "x": 0.64,
+        "y": 0.58,
         "label": {
           "en": "Hard tender womb",
-          "hi": "कड़ा कोमल गर्भाशय"
+          "hi": "कड़ा, छूने पर दर्द वाला गर्भाशय"
         },
         "note": {
           "en": "The womb is painful, tender, irritable and hard. Blood may seep into the muscle (Couvelaire uterus).",
-          "hi": "गर्भाशय दर्द भरा, कोमल, चिड़चिड़ा और कड़ा होता है। ख़ून मांसपेशी में रिस सकता है (Couvelaire uterus)।"
+          "hi": "गर्भाशय दर्द भरा, छूने पर दर्द वाला, बार-बार सिकुड़ने वाला (irritable) और कड़ा होता है। ख़ून मांसपेशी में रिस सकता है (Couvelaire uterus)।"
         }
       },
       {
-        "x": 0.458,
-        "y": 0.5,
+        "x": 0.48,
+        "y": 0.52,
         "label": {
           "en": "Baby in distress",
           "hi": "बच्चा तकलीफ़ में"
@@ -64,31 +68,11 @@
           "en": "Fetal distress or death, because the placenta has stopped working.",
           "hi": "भ्रूण की तकलीफ़ या मृत्यु, क्योंकि प्लेसेंटा काम करना बंद कर चुकी है।"
         }
-      },
-      {
-        "x": 0.183,
-        "y": 0.713,
-        "label": {
-          "en": "Shock",
-          "hi": "शॉक"
-        },
-        "note": {
-          "en": "Shock out of proportion to the visible bleeding is a clue to concealed abruption.",
-          "hi": "दिखते रक्तस्राव से कहीं ज़्यादा शॉक concealed abruption का सुराग़ है।"
-        }
-      },
-      {
-        "x": 0.885,
-        "y": 0.72,
-        "label": {
-          "en": "Clotting failure (DIC)",
-          "hi": "जमने की विफलता (DIC)"
-        },
-        "note": {
-          "en": "Blood does not clot. Check platelets, fibrinogen, PT and PTT and replace blood and blood products.",
-          "hi": "ख़ून जमता नहीं। प्लेटलेट्स, fibrinogen, PT और PTT जाँचिए और खून व blood products से पूर्ति कीजिए।"
-        }
       }
+    ],
+    "img": "learn/media/real/ob6-abruption.webp",
+    "more": [
+      "ob6-abruption"
     ]
   },
   "why": {
@@ -99,15 +83,15 @@
       },
       {
         "en": "Features: uterine bleeding (blood bright or dark, or none), a painful, tender, irritable womb, and pain out of proportion to the visible bleeding in concealed abruption. Praevia and abruption cannot always be told apart clinically, so ultrasound is often needed.",
-        "hi": "लक्षण: गर्भाशय से रक्तस्राव (चटक या गहरा ख़ून, या कोई नहीं), दर्द भरा, कोमल, चिड़चिड़ा गर्भाशय, और concealed abruption में दिखते रक्तस्राव से कहीं ज़्यादा दर्द। नैदानिक रूप से praevia और abruption हमेशा अलग नहीं होते, इसलिए अक्सर अल्ट्रासाउंड चाहिए।"
+        "hi": "लक्षण: गर्भाशय से रक्तस्राव (चटक या गहरा ख़ून, या कोई नहीं), दर्द भरा, छूने पर दर्द वाला, बार-बार सिकुड़ने वाला (irritable) गर्भाशय, और concealed abruption में दिखते रक्तस्राव से कहीं ज़्यादा दर्द। नैदानिक रूप से praevia और abruption हमेशा अलग नहीं होते, इसलिए अक्सर अल्ट्रासाउंड चाहिए।"
       },
       {
         "en": "Complications: maternal shock, DIC, fetal compromise or death, and alloimmunisation. A normal ultrasound does not rule out abruption. Check the fetal heart, blood count and group, PT, PTT and fibrinogen.",
         "hi": "जटिलताएँ: मातृ शॉक, DIC, भ्रूण की तकलीफ़ या मृत्यु और alloimmunisation। सामान्य अल्ट्रासाउंड abruption को नकारता नहीं। भ्रूण की धड़कन, ब्लड काउंट और ग्रुप, PT, PTT और fibrinogen जाँचिए।"
       },
       {
-        "en": "Manage: resuscitate, refer to an FRU, and replace blood and blood products aggressively. Prompt caesarean if the mother is unstable, the fetal heart is abnormal or she is at term (37 weeks or more). Vaginal delivery may be tried when both are stable.",
-        "hi": "प्रबंधन: resuscitate कीजिए, FRU रेफ़र कीजिए और खून व blood products से पूरी पूर्ति कीजिए। माँ अस्थिर हो, भ्रूण की धड़कन असामान्य हो या पूर्ण अवधि (37 हफ़्ते या ज़्यादा) हो तो तुरंत सीज़ेरियन। दोनों स्थिर हों तो योनि-प्रसव आज़माया जा सकता है।"
+        "en": "Manage: resuscitate, refer to an FRU, and replace blood and blood products aggressively. Deliver promptly. Caesarean if the mother stays unstable or the baby is alive with an abnormal heart rate. If she is stable, or the baby has died, aim for vaginal delivery while correcting clotting. At 37 weeks or more, deliver.",
+        "hi": "प्रबंधन: resuscitate कीजिए, FRU रेफ़र कीजिए और खून व blood products से पूरी पूर्ति कीजिए। जल्दी प्रसव कराइए। माँ अस्थिर रहे, या बच्चा जीवित हो और धड़कन असामान्य हो, तो सीज़ेरियन। माँ स्थिर हो या बच्चे की मृत्यु हो चुकी हो, तो clotting ठीक करते हुए योनि-प्रसव का लक्ष्य रखिए। 37 हफ़्ते या ज़्यादा पर प्रसव कराइए।"
       },
       {
         "en": "Watch for postpartum haemorrhage, as the womb may be atonic and clotting poor, so give active management of the third stage and be ready for blood.",
@@ -141,7 +125,7 @@
   ],
   "remember": {
     "en": "Abruption: pain, hard tender womb, dark or hidden blood, distress and shock out of proportion. Resuscitate, replace blood products, deliver.",
-    "hi": "Abruption: दर्द, कड़ा कोमल गर्भाशय, गहरा या छिपा ख़ून, तकलीफ़ और अनुपात से ज़्यादा शॉक। resuscitate, blood products की पूर्ति, प्रसव।"
+    "hi": "Abruption: दर्द, कड़ा, छूने पर दर्द वाला गर्भाशय, गहरा या छिपा ख़ून, तकलीफ़ और अनुपात से ज़्यादा शॉक। resuscitate, blood products की पूर्ति, प्रसव।"
   },
   "check": [
     {
@@ -152,7 +136,7 @@
       "o": [
         {
           "en": "Painful, tender, hard uterus",
-          "hi": "दर्द भरा, कोमल, कड़ा गर्भाशय"
+          "hi": "दर्द भरा, छूने पर दर्द वाला, कड़ा गर्भाशय"
         },
         {
           "en": "Painless bleeding",
@@ -170,7 +154,7 @@
       "a": 0,
       "why": {
         "en": "Abruption gives a painful, tender, irritable womb. Praevia is painless with a soft womb.",
-        "hi": "Abruption में गर्भाशय दर्द भरा, कोमल और चिड़चिड़ा होता है। Praevia दर्दरहित होता है और गर्भाशय नरम रहता है।"
+        "hi": "Abruption में गर्भाशय दर्द भरा, छूने पर दर्द वाला और बार-बार सिकुड़ने वाला (irritable) होता है। Praevia दर्दरहित होता है और गर्भाशय नरम रहता है।"
       }
     },
     {

@@ -15,11 +15,11 @@
       "prompt": { "en": "Loss 600 mL, pulse 118/min, BP 96/60 mmHg. What is this and what do you do?", "hi": "रक्तस्राव 600 mL, नाड़ी 118/min, BP 96/60 mmHg। यह क्या है और आप क्या करेंगे?" },
       "options": [
         { "id": "a", "correct": true, "critical": true, "next": "access",
-          "text": { "en": "This is PPH. Call for help and start the first response now.", "hi": "यह PPH है। मदद बुलाएँ और अभी पहली प्रतिक्रिया शुरू करें।" },
+          "text": { "en": "This is PPH. Call for help, massage the uterus and start the first response now.", "hi": "यह PPH है। मदद बुलाएँ, गर्भाशय की मालिश करें और अभी पहली प्रतिक्रिया शुरू करें।" },
           "feedback": { "en": "ICMR: PPH is more than 500 mL, or any bleeding that deranges vital signs. Shock index 118/96 is above 1, a red flag.", "hi": "ICMR: 500 mL से अधिक, या जीवन-संकेत बिगाड़ने वाला कोई भी रक्तस्राव PPH है। शॉक इंडेक्स 118/96, यानी 1 से अधिक, खतरे का संकेत है।" } },
         { "id": "b", "correct": false, "next": "delay",
           "text": { "en": "Massage the uterus and recheck in 30 minutes.", "hi": "गर्भाशय की मालिश करें और 30 मिनट बाद फिर जाँचें।" },
-          "feedback": { "en": "Waiting loses the window. The whole first response starts together, now.", "hi": "इंतज़ार से समय निकल जाता है। पूरी पहली प्रतिक्रिया अभी, एक साथ शुरू होती है।" } },
+          "feedback": { "en": "Massage is right, but waiting 30 minutes loses the window. Massage and the whole first response start together, now.", "hi": "मालिश सही है, पर 30 मिनट इंतज़ार से समय निकल जाता है। मालिश और पूरी पहली प्रतिक्रिया अभी, एक साथ शुरू होती है।" } },
         { "id": "c", "correct": false, "next": "delay",
           "text": { "en": "Wait until the systolic BP falls below 90 mmHg.", "hi": "सिस्टोलिक BP 90 mmHg से नीचे जाने तक रुकें।" },
           "feedback": { "en": "Do not wait for hypotension or a falling Hb before acting; young women compensate until late.", "hi": "कार्रवाई से पहले BP गिरने या Hb घटने का इंतज़ार न करें; युवा महिलाएँ देर तक संतुलन बनाए रखती हैं।" } }
@@ -57,7 +57,7 @@
         { "id": "b", "correct": false, "next": "bolus",
           "text": { "en": "Oxytocin 10 IU as a rapid IV bolus.", "hi": "ऑक्सीटोसिन 10 IU तेज़ IV बोलस के रूप में।" },
           "feedback": { "en": "An IV bolus of oxytocin can cause hypotension; ICMR says it should not be given.", "hi": "ऑक्सीटोसिन का IV बोलस BP गिरा सकता है; ICMR इसे न देने को कहता है।" } },
-        { "id": "c", "correct": false,
+        { "id": "c", "correct": false, "next": "txa",
           "text": { "en": "Skip oxytocin and start methylergometrine.", "hi": "ऑक्सीटोसिन छोड़ें और मिथाइलअर्गोमेट्रिन शुरू करें।" },
           "feedback": { "en": "Oxytocin comes first, and methylergometrine is contraindicated in her pre-eclampsia.", "hi": "पहले ऑक्सीटोसिन आता है, और उसके प्री-एक्लेम्पसिया में मिथाइलअर्गोमेट्रिन वर्जित है।" } }
       ] },

@@ -1,5 +1,6 @@
 package in.stewardmd.app;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.getcapacitor.Bridge;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebViewClient;
 import com.getcapacitor.community.speechrecognition.SpeechRecognition;
+import in.stewardmd.captureguard.CaptureGuardPlugin;
 import in.stewardmd.whisper.WhisperPlugin;
 
 public class MainActivity extends BridgeActivity {
@@ -30,7 +32,27 @@ public class MainActivity extends BridgeActivity {
         // ASR target on Android too, matching iOS.
         registerPlugin(WhisperPlugin.class);
         registerPlugin(NfcPlugin.class);
+        // Lesson-image capture guard (FLAG_SECURE while a realistic lesson image is on screen).
+        // Registered explicitly like Whisper so it exists even if capacitor.plugins.json is stale.
+        registerPlugin(CaptureGuardPlugin.class);
+        // App-local power state (Battery Saver) + system haptics for the web layer (Premium-Feel
+        // plan, owner decisions 2026-10-03).
+        registerPlugin(SmdDevicePlugin.class);
         super.onCreate(savedInstanceState);
+        // Launch chain follows the system light/dark mode (owner decision 2026-10-03). The WebView
+        // defaults to white and shows that until the HTML paints, which would flash white between
+        // the dark system splash and the dark boot splash. capacitor.config.json no longer sets
+        // android.backgroundColor, so this is the only color applied.
+        if (getBridge() != null && getBridge().getWebView() != null) {
+            getBridge().getWebView().setBackgroundColor(getColor(R.color.launch_background));
+        }
+        // Patient privacy in recents (owner decision 2026-10-03): the app switcher thumbnail would
+        // show the ward list or a note in full. API 33+ shows a placeholder card instead. Unlike FLAG_SECURE
+        // this does not block the user's own screenshots, which is intended; the capture guard's
+        // FLAG_SECURE path for lesson images is separate and unchanged.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            setRecentsScreenshotEnabled(false);
+        }
         setupSafeAreaInsets();
         setupRenderProcessRecovery();
     }

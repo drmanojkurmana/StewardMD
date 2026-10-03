@@ -3,7 +3,12 @@
   "unit": "gyr5",
   "level": "resident",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Ovarian cancer: surgery, chemotherapy and PARP maintenance",
     "hi": "डिम्बग्रंथि कैंसर: सर्जरी, कीमोथेरेपी और PARP रखरखाव"
@@ -13,22 +18,21 @@
     "hi": "पूरी सर्जरी का लक्ष्य रखें। प्राथमिक सर्जरी पूरी न हो सके तो इंटरवल सर्जरी अपनाएँ। BRCA जाँचें और PARP रखरखाव दें।"
   },
   "see": {
-    "diagram": "diagrams/gyr5-ovary.svg",
-    "w": 480,
-    "h": 300,
+    "w": 1000,
+    "h": 670,
     "alt": {
-      "en": "Two abdomen outlines. On the left a red ovarian mass, an omentum band with red dots and dots on the upper peritoneum. On the right the same outline is clean, with a green tick and a purple tablet.",
-      "hi": "पेट की दो रूपरेखाएँ। बाईं ओर लाल डिम्बग्रंथि गाँठ, लाल बिंदुओं वाली ओमेंटम की पट्टी और ऊपरी पेरिटोनियम पर बिंदु हैं। दाईं ओर वही रूपरेखा साफ़ है, हरा टिक और बैंगनी गोली के साथ।"
+      "en": "Two abdomen drawings. On the left a dark purple ovarian mass and a thickened omentum covered in white deposits. Deposits also sit on the liver surface. On the right the abdomen is clean after surgery, with a purple capsule in the corner.",
+      "hi": "पेट के दो चित्र। बाईं ओर गहरी बैंगनी डिम्बग्रंथि गाँठ, सफ़ेद जमाव से ढकी मोटी ओमेंटम, और लिवर की सतह पर जमाव। दाईं ओर सर्जरी के बाद साफ़ पेट और कोने में एक बैंगनी कैप्सूल।"
     },
     "caption": {
       "en": "The goal is a clean abdomen after surgery, then a tablet to keep it clean in BRCA-mutated disease.",
       "hi": "लक्ष्य सर्जरी के बाद साफ़ पेट है, और BRCA म्यूटेटेड रोग में उसे साफ़ रखने के लिए एक गोली।"
     },
-    "credit": "Original diagram, Tokos (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.19,
-        "y": 0.67,
+        "x": 0.31,
+        "y": 0.55,
         "label": {
           "en": "Ovarian primary",
           "hi": "प्राथमिक डिम्बग्रंथि गाँठ"
@@ -39,20 +43,20 @@
         }
       },
       {
-        "x": 0.28,
-        "y": 0.42,
+        "x": 0.25,
+        "y": 0.38,
         "label": {
           "en": "Omentum",
           "hi": "ओमेंटम"
         },
         "note": {
           "en": "Infracolic omentectomy is part of staging surgery.",
-          "hi": "इन्फ्राकोलिक ओमेंटेक्टॉमी स्टेजिंग सर्जरी का हिस्सा है।"
+          "hi": "इनफ़्राकोलिक ओमेंटेक्टॉमी स्टेजिंग सर्जरी का हिस्सा है।"
         }
       },
       {
-        "x": 0.28,
-        "y": 0.3,
+        "x": 0.18,
+        "y": 0.18,
         "label": {
           "en": "Peritoneal deposits",
           "hi": "पेरिटोनियल जमाव"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.76,
-        "y": 0.42,
+        "x": 0.72,
+        "y": 0.5,
         "label": {
           "en": "Clean abdomen",
           "hi": "साफ़ पेट"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.9,
-        "y": 0.82,
+        "x": 0.92,
+        "y": 0.89,
         "label": {
           "en": "PARP tablet",
           "hi": "PARP गोली"
@@ -86,6 +90,10 @@
           "hi": "प्लैटिनम पर असर के बाद BRCA म्यूटेटेड रोग में ओलापारिब रखरखाव।"
         }
       }
+    ],
+    "img": "learn/media/real/gyr5-ovary.webp",
+    "more": [
+      "gyr5-ovary-diagram"
     ]
   },
   "why": {
@@ -124,7 +132,7 @@
       },
       {
         "en": "[[parp-inhibitor|PARP inhibitor]] maintenance options in NICE include olaparib for BRCA mutation, niraparib, and rucaparib, each under its own appraisal.",
-        "hi": "NICE में [[parp-inhibitor|PARP इनहिबिटर]] रखरखाव के विकल्पों में BRCA म्यूटेशन में ओलापारिब, निराबारिब और रुकापारिब शामिल हैं, हर एक अपने मूल्यांकन के तहत।"
+        "hi": "NICE में [[parp-inhibitor|PARP इनहिबिटर]] रखरखाव के विकल्पों में BRCA म्यूटेशन में ओलापारिब, निरापारिब और रुकापारिब शामिल हैं, हर एक अपने मूल्यांकन के तहत।"
       }
     ],
     "analogy": {
@@ -157,7 +165,7 @@
     },
     {
       "en": "See the Oncology module: Carboplatin plus Paclitaxel every 3 Weeks, with Bevacizumab (GOG-218), Dose-dense Paclitaxel, and Olaparib or Niraparib maintenance.",
-      "hi": "ऑन्कोलॉजी मॉड्यूल देखें: हर 3 हफ़्ते कार्बोप्लैटिन प्लस पैक्लिटैक्सेल, बेवासिज़ुमैब (GOG-218) के साथ, डोज़-डेंस पैक्लिटैक्सेल, और ओलापारिब या निराबारिब रखरखाव।"
+      "hi": "ऑन्कोलॉजी मॉड्यूल देखें: हर 3 हफ़्ते कार्बोप्लैटिन प्लस पैक्लिटैक्सेल, बेवासिज़ुमैब (GOG-218) के साथ, डोज़-डेंस पैक्लिटैक्सेल, और ओलापारिब या निरापारिब रखरखाव।"
     }
   ],
   "remember": {
@@ -176,8 +184,8 @@
           "hi": "सारे दिखने वाले रोग की पूरी सर्जरी"
         },
         {
-          "en": "Biopsy only",
-          "hi": "सिर्फ़ बायोप्सी"
+          "en": "Biopsy only, then chemotherapy",
+          "hi": "सिर्फ़ बायोप्सी, फिर कीमोथेरेपी"
         },
         {
           "en": "Removal of the uterus only",

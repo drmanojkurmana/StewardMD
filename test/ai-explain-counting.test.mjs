@@ -6,7 +6,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 const { onRequest } = await import(new URL("../functions/api/ai/[[path]].js", import.meta.url));
-const DAY = new Date().toISOString().slice(0, 10);
+import { istDay } from "../functions/_counters.js";
+const DAY = istDay(Date.now());   // the doctor-facing day key is IST
 
 function fakeKv() {
   const m = new Map();

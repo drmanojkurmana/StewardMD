@@ -38,17 +38,21 @@
   }
 
   // Best generic in `vocab` for a (possibly misspelled) OCR `name`, or null if none is confidently
-  // close / the match is ambiguous. opts: { minLen=6, ratio=0.2, maxDist=3 }.
+  // close / the match is ambiguous. opts: { minLen=6, ratio=0.2, maxDist=3, strict }.
+  // strict (typed prose, e.g. MaiK questions, where OCR-style slips do not happen): words under 10
+  // letters allow 1 edit only, and the first letter must match ("protocol" must not become propofol).
   function bestGenericMatch(name, vocab, opts) {
     opts = opts || {};
     var q = norm(name);
     var minLen = opts.minLen || 6;
     if (q.length < minLen || !vocab || !vocab.length) return null;
     var maxD = Math.min(opts.maxDist || 3, Math.max(1, Math.round(q.length * (opts.ratio || 0.2))));
+    if (opts.strict && q.length < 10) maxD = 1;
     var best = null, bestD = Infinity, second = Infinity;
     for (var i = 0; i < vocab.length; i++) {
       var v = norm(vocab[i]); if (!v) continue;
       if (Math.abs(v.length - q.length) > maxD) continue;   // length prune
+      if (opts.strict && v.charAt(0) !== q.charAt(0)) continue;
       if (v === q) return { generic: vocab[i], distance: 0 }; // exact (shouldn't happen — caller tried exact first)
       var d = editDistance(q, v);
       if (d < bestD) { second = bestD; bestD = d; best = vocab[i]; }

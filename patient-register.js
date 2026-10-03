@@ -38,6 +38,12 @@
   function genders() { return [["female", wT("ward.reg-female", "Female")], ["male", wT("ward.reg-male", "Male")], ["other", wT("ward.reg-other", "Other")]]; }
   function visits() { return [["new", wT("ward.reg-visit-new", "New")], ["followup", wT("ward.reg-visit-followup", "Follow-up")]]; }
 
+  /* Privacy mode (privacy-mode.js): identifiers are wrapped so they can be masked on screen, identifier inputs
+   * draw as dots. Without SMD_PRIVACY_MODE (the staff console) the markup is exactly what it was. */
+  var PHI_INPUT = { name: 1, mobile: 1, mrn: 1, abhaNumber: 1, abhaAddress: 1, address: 1, abdmId: 1, abdmAadhaar: 1, abdmMobile: 1 };
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  function pv(kind, v) { var P = G.SMD_PRIVACY_MODE; return P ? P.screenText(kind, v) : String(v == null ? "" : v); }
+
   function el() {
     var d = root.document.getElementById("smdPatReg");
     if (!d) { d = root.document.createElement("div"); d.id = "smdPatReg"; root.document.body.appendChild(d); }
@@ -49,7 +55,7 @@
     opts = opts || {};
     return '<div class="pr-f" data-f="' + id + '">' +
       '<label for="pr_' + id + '">' + esc(label) + (opts.req ? '<i aria-hidden="true">*</i>' : "") + "</label>" +
-      '<input id="pr_' + id + '" type="' + (opts.type || "text") + '"' +
+      '<input id="pr_' + id + '" type="' + (opts.type || "text") + '"' + (PHI_INPUT[id] ? " data-phi-input" : "") +
       (opts.mode ? ' inputmode="' + opts.mode + '"' : "") +
       (opts.max ? ' maxlength="' + opts.max + '"' : "") +
       (opts.ph ? ' placeholder="' + esc(opts.ph) + '"' : "") +
@@ -134,7 +140,7 @@
   }
   function abdmInput(id, label, opts) {
     opts = opts || {};
-    return '<div class="pr-f"><label for="pr_' + id + '">' + label + "</label><input id=\"pr_" + id + '" type="text" autocomplete="' + (opts.auto || "off") + '"' +
+    return '<div class="pr-f"><label for="pr_' + id + '">' + label + "</label><input id=\"pr_" + id + '" type="text"' + (PHI_INPUT[id] ? " data-phi-input" : "") + ' autocomplete="' + (opts.auto || "off") + '"' +
       (opts.mode ? ' inputmode="' + opts.mode + '"' : "") + (opts.max ? ' maxlength="' + opts.max + '"' : "") + ' spellcheck="false">' +
       (opts.hint ? '<small class="pr-hint">' + opts.hint + "</small>" : "") + "</div>";
   }
@@ -151,12 +157,12 @@
     var b = a.busy, h = open;
     if (a.err) h += '<p class="pr-warn" role="alert">' + esc(a.err) + "</p>";
     if (a.linkedTo) {
-      return h + '<p class="pr-warn">' + wTH("ward.reg-abdm-already-linked", "This ABHA already belongs to patient {mrn} at this hospital. Open that record instead of registering a new one.", { mrn: '<b lang="en">' + esc(a.linkedTo) + "</b>" }) + "</p>" +
+      return h + '<p class="pr-warn">' + wTH("ward.reg-abdm-already-linked", "This ABHA already belongs to patient {mrn} at this hospital. Open that record instead of registering a new one.", { mrn: '<b lang="en">' + phi("id", a.linkedTo) + "</b>" }) + "</p>" +
         '<div class="pr-abdm-actions">' + abdmBtn("abdm-reset", wTH("ward.reg-abdm-start-again", "Start again"), false, b) + "</div></div>";
     }
     if (a.done) {
       return h + '<div class="pr-abdm-ok"><b>' + (a.done === "created" ? wTH("ward.reg-abdm-created", "ABHA created with ABDM") : a.done === "shared" ? wTH("ward.reg-abdm-shared", "ABHA shared by the patient through ABDM") : wTH("ward.reg-abdm-verified", "ABHA verified with ABDM")) + "</b>" +
-        '<span lang="en">' + esc(fmtAbha(a.profile.abhaNumber)) + (a.profile.abhaAddress ? " &middot; " + esc(a.profile.abhaAddress) : "") + "</span>" +
+        '<span lang="en">' + phi("id", a.profile.abhaNumber, esc(fmtAbha(a.profile.abhaNumber))) + (a.profile.abhaAddress ? " &middot; " + phi("other", a.profile.abhaAddress) : "") + "</span>" +
         "<small>" + wTH("ward.reg-abdm-locked", "Name and ABHA come from ABDM and cannot be edited here. The ABHA is linked to the MR number when the patient is registered.") + "</small></div>" +
         '<div class="pr-abdm-actions">' + abdmBtn("abdm-reset", wTH("ward.reg-abdm-use-another", "Use a different ABHA"), false, b) + "</div></div>";
     }
@@ -194,7 +200,7 @@
       case "create-address":
         return h + '<p class="pr-note">' + wTH("ward.reg-abdm-pick-address", "Let the patient choose their ABHA address.") + "</p>" +
           (a.suggestions || []).map(function (s, i) {
-            return '<label class="pr-check"><input type="radio" name="prAbdmAddr" value="' + esc(s) + '"' + (i === 0 ? " checked" : "") + '><span lang="en">' + esc(s) + "</span></label>";
+            return '<label class="pr-check"><input type="radio" name="prAbdmAddr" value="' + esc(s) + '"' + (i === 0 ? " checked" : "") + '><span lang="en">' + phi("other", s) + "</span></label>";
           }).join("") +
           '<div class="pr-abdm-actions">' + abdmBtn("abdm-address", wTH("ward.reg-abdm-create", "Create ABHA"), true, b) + cancel + "</div></div>";
       default:
@@ -300,9 +306,9 @@
     return '<div class="pr-wrap" role="dialog" aria-modal="true" aria-labelledby="prTitle">' +
       '<div class="pr-card pr-done">' +
         '<div class="pr-tick" aria-hidden="true">&#10003;</div>' +
-        '<h2 id="prTitle">' + wTH("ward.reg-name-added", "{name} added", { name: res.name ? esc(res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
+        '<h2 id="prTitle">' + wTH("ward.reg-name-added", "{name} added", { name: res.name ? phi("name", res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
         '<p class="pr-mrlabel">' + (pending ? wTH("ward.reg-temporary-id", "Temporary ID") : (sid ? wTH("ward.reg-stewardid", "StewardID") : wTH("ward.reg-mr-number", "MR number"))) + "</p>" +
-        '<p class="pr-mr">' + esc(canonicalId) + "</p>" +
+        '<p class="pr-mr">' + phi("id", canonicalId) + "</p>" +
         (pending
           ? '<p class="pr-warn">' + wTH("ward.reg-temporary-id-warning", "The hospital has not issued an MR number yet. This temporary ID is for the queue only - do not write it on hospital records. It is replaced automatically when the EMR issues the real number.") + "</p>"
           : '<p class="pr-note">' + wTH("ward.reg-write-on-slip", "Write this on the patient's slip.") + "</p>") +
@@ -320,7 +326,7 @@
   function offlineDoneHtml(res, canPrint) {
     return '<div class="pr-wrap" role="dialog" aria-modal="true" aria-labelledby="prTitle">' +
       '<div class="pr-card pr-done">' +
-        '<h2 id="prTitle">' + wTH("ward.reg-offline-title", "{name} checked in offline", { name: res.name ? esc(res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
+        '<h2 id="prTitle">' + wTH("ward.reg-offline-title", "{name} checked in offline", { name: res.name ? phi("name", res.name) : wTH("ward.reg-patient", "Patient") }) + "</h2>" +
         '<p class="pr-mrlabel">' + wTH("ward.reg-offline-token", "Offline token") + "</p>" +
         '<p class="pr-mr" lang="en">' + esc(res.token) + "</p>" +
         '<p class="pr-warn">' + wTH("ward.reg-offline-explain", "The connection is down. This check-in is kept on this desk and goes into the queue as soon as the connection is back. The patient keeps this number and their place.") +
@@ -553,8 +559,8 @@
       var ids = [(dup.stewardId ? "StewardID " + dup.stewardId : ""), (dup.mrn || ""), (dup.mobile || "")].filter(Boolean).join("  ·  ");
       var who = dup.mrn || dup.stewardId || dup.mobile || "";
       d.innerHTML = "<b>" + wTH("ward.reg-mobile-already-registered", "This mobile is already registered") + "</b>" +
-        "<span>" + wTH("ward.reg-duplicate-explain", "{mrn} is using this number. If this is the same person, open their record instead. If it is a different patient sharing the phone, continue.", { mrn: esc(who) }) + "</span>" +
-        (ids ? '<span class="pr-dupids" lang="en">' + esc(ids) + "</span>" : "") +
+        "<span>" + wTH("ward.reg-duplicate-explain", "{mrn} is using this number. If this is the same person, open their record instead. If it is a different patient sharing the phone, continue.", { mrn: phi(dup.mrn || dup.stewardId ? "id" : "phone", who) }) + "</span>" +
+        (ids ? '<span class="pr-dupids" lang="en">' + [(dup.stewardId ? "StewardID " + phi("id", dup.stewardId) : ""), (dup.mrn ? phi("id", dup.mrn) : ""), (dup.mobile ? phi("phone", dup.mobile) : "")].filter(Boolean).join("  &middot;  ") + "</span>" : "") +
         '<button type="button" class="pr-btn ghost" data-a="dup-continue">' + wTH("ward.reg-different-patient", "This is a different patient") + "</button>";
       d.scrollIntoView({ block: "nearest" });
     }
@@ -722,7 +728,7 @@
         if (mrnIn && p.mrn) mrnIn.value = p.mrn;
         var fu = host.querySelector('[data-f="visitType"] [data-v="followup"]');
         if (fu) fu.click();
-        if (root.toast) root.toast(wT("ward.reg-scanned-code", "Scanned code: {code}", { code: (p.name ? p.name + " · " : "") + (sid || "") }));
+        if (root.toast) root.toast(wT("ward.reg-scanned-code", "Scanned code: {code}", { code: (p.name ? pv("name", p.name) + " · " : "") + pv("id", sid || "") }));
       }
       /* Offline only: the device's own store. A found patient fills the sheet; anything else leaves the
        * sheet alone and says what was read. The scanned code is never typed into the NAME field - a
@@ -791,7 +797,7 @@
               if (res && !res.then && res.ok && res.patient) hit = res;
             }
           } catch (e) { hit = null; }
-          sBtn.textContent = "\u2713 " + uhid;
+          sBtn.innerHTML = "\u2713 " + phi("id", uhid);
           sBtn.disabled = false;
           state.stewardId = (hit && hit.stewardId) || uhid;
           applyResolvedIdentity(uhid, "nfc", hit);

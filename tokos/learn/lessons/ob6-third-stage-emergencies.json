@@ -3,7 +3,12 @@
   "unit": "ob6",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "competencies": [
     "OG16.3",
     "OG16.1"
@@ -17,22 +22,21 @@
     "hi": "आधे घंटे में प्लेसेंटा न निकले तो वह अटकी है और प्रशिक्षित हाथ चाहिए। अंदर से उलटा गर्भाशय ([[uterine-inversion]]) आपात स्थिति है: मदद बुलाइए, तुरंत उसे वापस रखिए, और नाल मत खींचिए।"
   },
   "see": {
-    "diagram": "diagrams/ob6-third-stage-emergencies.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "Left: a womb with a placenta still stuck to its wall and a cord hanging out. Right: a dashed outline of a womb whose fundus has turned inside out, with a red bulging mass hanging down through the middle. A black arrow points upward at the top of the mass, showing it being pushed back.",
-      "hi": "बाएँ: गर्भाशय जिसकी दीवार से प्लेसेंटा अब भी चिपकी है और नाल बाहर लटक रही है। दाएँ: गर्भाशय की बिंदीदार रूपरेखा जिसका fundus अंदर से उलट गया है, और बीच से नीचे लटका उभरा लाल पिंड। ऊपर पिंड की ओर काला तीर है, जो उसे वापस धकेलना दिखाता है।"
+      "en": "Realistic medical illustration showing a two-panel comparison of third-stage obstetric emergencies: retained placenta adherent to the fundus with umbilical cord descending through the cervix (left), and acute uterine inversion with the fundus invaginated into the vagina (right).",
+      "hi": "तीसरे चरण की प्रसूति आपात स्थितियों के दो-पैनल तुलनात्मक दृश्य को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र: गर्भाशय ग्रीवा से नीचे उतरती गर्भनाल के साथ फंडस से जुड़ी अटकी हुई अपरा (बाएं), और योनि में इनवैजिनेटेड फंडस के साथ तीव्र गर्भाशय विपर्यय (दाएं)।"
     },
     "caption": {
-      "en": "A retained placenta (left) and an inverted uterus being pushed back (right).",
-      "hi": "अटकी प्लेसेंटा (बाएँ) और वापस धकेला जा रहा उलटा गर्भाशय (दाएँ)।"
+      "en": "Third-stage emergencies: retained placenta (left) and acute uterine inversion (right).",
+      "hi": "तीसरे चरण की आपात स्थितियां: अटकी हुई अपरा (बाएं) और तीव्र गर्भाशय विपर्यय (दाएं)।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.333,
-        "y": 0.3,
+        "x": 0.28,
+        "y": 0.22,
         "label": {
           "en": "Retained placenta",
           "hi": "अटकी प्लेसेंटा"
@@ -44,7 +48,7 @@
       },
       {
         "x": 0.25,
-        "y": 0.833,
+        "y": 0.75,
         "label": {
           "en": "Cord",
           "hi": "नाल"
@@ -55,8 +59,8 @@
         }
       },
       {
-        "x": 0.688,
-        "y": 0.567,
+        "x": 0.75,
+        "y": 0.55,
         "label": {
           "en": "Inverted fundus",
           "hi": "उलटा fundus"
@@ -67,8 +71,8 @@
         }
       },
       {
-        "x": 0.688,
-        "y": 0.2,
+        "x": 0.75,
+        "y": 0.18,
         "label": {
           "en": "Push back",
           "hi": "वापस धकेलना"
@@ -78,6 +82,10 @@
           "hi": "तुरंत हाथ से fundus को ऊपर धकेलकर reduction। प्लेसेंटा अब भी चिपकी हो तो उसे निकालने से पहले गर्भाशय को वापस रखिए। फिर गर्भाशय को सिकुड़ा रखने के लिए uterotonic।"
         }
       }
+    ],
+    "img": "learn/media/real/ob6-third-stage-emergencies.webp",
+    "more": [
+      "ob6-third-stage-emergencies"
     ]
   },
   "why": {
@@ -87,8 +95,8 @@
         "hi": "जन्म के आधे घंटे में प्लेसेंटा न निकले तो वह अटकी है। आंशिक रूप से अलग हुई प्लेसेंटा या अंदर रहे टुकड़े लगातार रक्तस्राव और PPH करते हैं। अलग हो चुकी प्लेसेंटा जन्म-नलिका में पड़ी हो तो धीरे से निकालिए।"
       },
       {
-        "en": "If it is not separated, do not try to pull it out. A health worker without the skill refers at once to an FRU for manual removal. Continue the oxytocin drip. Shift to theatre for manual removal of the placenta if controlled cord traction fails.",
-        "hi": "अलग न हुई हो तो उसे खींचकर निकालने की कोशिश न करें। कौशल न रखने वाला स्वास्थ्यकर्मी तुरंत manual removal के लिए FRU रेफ़र करे। oxytocin ड्रिप जारी रखिए। controlled cord traction विफल हो तो manual removal के लिए थिएटर ले जाइए।"
+        "en": "If it is not separated, do not try to pull it out. A health worker without the skill refers at once to an FRU for manual removal. Continue the oxytocin drip. Shift to theatre for manual removal of the placenta if controlled cord traction fails. Give a single dose of prophylactic antibiotic after manual removal.",
+        "hi": "अलग न हुई हो तो उसे खींचकर निकालने की कोशिश न करें। कौशल न रखने वाला स्वास्थ्यकर्मी तुरंत manual removal के लिए FRU रेफ़र करे। oxytocin ड्रिप जारी रखिए। controlled cord traction विफल हो तो manual removal के लिए थिएटर ले जाइए। manual removal के बाद रोकथाम के लिए antibiotic की एक ख़ुराक दीजिए।"
       },
       {
         "en": "[[uterine-inversion]] is a rare emergency in which the womb turns inside out. Causes: excess cord traction (the commonest), fundal pressure during delivery of the placenta, atony and adherent placenta. Signs: PPH with low blood pressure, a missing or low fundus, and a mass at or beyond the vaginal opening.",
@@ -181,8 +189,8 @@
           "hi": "24 घंटे में न निकली"
         },
         {
-          "en": "Never",
-          "hi": "कभी नहीं"
+          "en": "It is never called retained",
+          "hi": "इसे कभी retained नहीं कहते"
         }
       ],
       "a": 0,

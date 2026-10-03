@@ -339,14 +339,42 @@ try {
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "...and no unlock screen was shown");
   // 2h+1min ago: the lock is back, and it is up BEFORE the splash's finish() (right at load)
   await ev(`localStorage.setItem("smd_applock_lastunlock", String(Date.now() - 2*3600*1000 - 60000)); return 1;`);
-  await call("Page.navigate", { url: BASE }); await sleep(1500); // inside the constant 3s frame
-  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "outside 2h: nothing but the splash during its 3s frame (no early PIN pad)");
-  await sleep(2000); // past MIN: finish() -> unlock()
-  ok(await ev(`return !!document.getElementById("salUnlockPin");`) === true, "...then the PIN pad is up by itself");
+  // returning clinician = fast open (owner 2026-10-03): no 3s hold, the PIN pad comes up as soon as
+  // the app is ready, by itself
+  await call("Page.navigate", { url: BASE });
+  await sleep(150);
+  okv(await ev(`return window.__smdBootFast === 1;`), true, "outside 2h, returning clinician: fast open (no fixed 3s hold)");
+  let padAt = 0; for (let i = 0; i < 60 && !padAt; i++) { await sleep(100); if (await ev(`return !!document.getElementById("salUnlockPin");`)) padAt = 150 + (i + 1) * 100; }
+  ok(padAt > 0 && padAt < 6000, `...and the PIN pad is up by itself as soon as the app is ready (${padAt}ms)`);
   await ev(`document.getElementById("salUnlockPin").value="4321"; document.getElementById("salUnlockGo").click(); return 1;`);
   await sleep(700);
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "unlock screen gone after the correct PIN");
   ok(await ev(`var s=document.getElementById("smdBootSplash"); return !s || s.classList.contains("sbs-hide");`) === true, "the boot splash completed via the queued finish() callback");
+
+  /* ---- RELOCK after 5 min in the background (owner 2026-10-03) ---- */
+  const away = (ms) => ev(`
+    Object.defineProperty(document, "visibilityState", { configurable: true, get: function () { return window.__vis || "visible"; } });
+    window.__vis = "hidden"; document.dispatchEvent(new Event("visibilitychange"));
+    var real = Date.now; Date.now = function () { return real() + ${ms}; };
+    window.__vis = "visible"; document.dispatchEvent(new Event("visibilitychange"));
+    Date.now = real; return 1;`);
+  okv(await ev(`return localStorage.getItem("smd_applock_grace");`), "2h", "relock setup: the 2h grace choice is still on");
+  await away(6 * 60000);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "relock: the user's 2h grace choice still wins");
+  await ev(`localStorage.setItem("smd_applock_grace", "0"); return 1;`);
+  await away(60000);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "relock: 1 min away does not lock");
+  await away(6 * 60000);
+  ok(await ev(`var e=document.getElementById("smdApplock"); return !!e && e.classList.contains("smdal-shield") && !!document.getElementById("salUnlockPin");`) === true,
+    "relock: 6 min away puts the PIN pad up on an opaque shield");
+  ok(await ev(`var e=document.getElementById("smdApplock"); var bg=getComputedStyle(e).backgroundColor; return bg === "rgb(255, 255, 255)" || bg === "rgb(8, 48, 43)";`) === true,
+    "relock: the shield is opaque (nothing clinical shows through)");
+  await ev(`document.getElementById("salUnlockPin").value="4321"; document.getElementById("salUnlockGo").click(); return 1;`);
+  await sleep(700);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "relock: the correct PIN removes the shield");
+  await ev(`localStorage.setItem("smd_applock_relock", "0"); return 1;`);
+  await away(6 * 60000);
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "relock: smd_applock_relock=0 turns it off");
   await ev(`localStorage.clear(); return 1;`);
 
   /* ---------- 11. FORCED: signed in + no method = the chooser, once the screen is free ---------- */

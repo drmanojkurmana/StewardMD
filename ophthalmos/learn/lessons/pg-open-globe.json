@@ -3,7 +3,12 @@
   "unit": "orbit-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Open globe injury",
     "hi": "ओपन ग्लोब इंजरी"
@@ -13,22 +18,21 @@
     "hi": "[[open-globe]] में आँख की दीवार में पूरी मोटाई का घाव होता है। शील्ड लगाएँ, दबाव न डालें, CT करवाएँ, और 24 घंटे के अंदर मरम्मत का लक्ष्य रखें।"
   },
   "see": {
-    "diagram": "diagrams/pg-open-globe.svg",
-    "w": 480,
-    "h": 264,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram in two parts. Left: an eye from the front. The white of the eye is deep red all round. The pupil is pear-shaped and points to a cut at the edge of the cornea. A brown knot of tissue pokes out of the cut. Right: the eye cut from the side. The cornea is blue, a short band behind it is yellow, and the rest of the wall is red. A dotted track runs from the yellow band to a white speck inside the eye.",
-      "hi": "दो हिस्सों वाला चित्र। बाएँ: सामने से एक आँख। आँख का सफ़ेद हिस्सा चारों ओर गहरा लाल है। पुतली नाशपाती जैसी है और कॉर्निया के किनारे पर एक कट की ओर इशारा करती है। कट से भूरे ऊतक की एक गाँठ बाहर निकली है। दाएँ: बगल से कटी आँख। कॉर्निया नीला है, उसके पीछे एक छोटी पट्टी पीली है, और बाकी दीवार लाल है। पीली पट्टी से आँख के अंदर एक सफ़ेद कण तक एक बिंदुदार रास्ता जाता है।"
+      "en": "Two views of an injured eye. Left: the white of the eye is hidden by dark red, ballooning blood all round. The pupil is pulled into a point toward a cut at the edge of the cornea. A small brown knot of tissue pokes out of the cut. Right: a side cut through the eye. A thin track runs in through the white wall just behind the cornea. A small metal fragment lies on the retina at the back.",
+      "hi": "एक घायल आँख के दो दृश्य। बाएँ: आँख का सफ़ेद हिस्सा चारों ओर गहरे लाल, फूले हुए खून से ढका है। पुतली खिंचकर कॉर्निया के किनारे के एक कट की ओर नुकीली हो गई है। कट से भूरे ऊतक की एक छोटी गाँठ बाहर निकल रही है। दाएँ: आँख का बगल से काट। कॉर्निया के ठीक पीछे सफ़ेद दीवार से होकर एक पतली रेखा अंदर जाती है। पीछे रेटिना पर धातु का एक छोटा टुकड़ा पड़ा है।"
     },
     "caption": {
       "en": "Signs of an open globe (left) and the three wound zones (right). Zone I is the cornea and limbus. Zone II is the first 5 mm of sclera. Zone III lies behind it.",
       "hi": "ओपन ग्लोब के लक्षण (बाएँ) और घाव के तीन ज़ोन (दाएँ)। ज़ोन I कॉर्निया और लिम्बस है। ज़ोन II स्क्लेरा के पहले 5 mm हैं। ज़ोन III उसके पीछे है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.233,
-        "y": 0.511,
+        "x": 0.264,
+        "y": 0.455,
         "label": {
           "en": "Peaked pupil",
           "hi": "नुकीली पुतली"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.304,
-        "y": 0.375,
+        "x": 0.364,
+        "y": 0.479,
         "label": {
           "en": "Uveal prolapse",
           "hi": "यूवियल प्रोलैप्स"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.1,
-        "y": 0.447,
+        "x": 0.082,
+        "y": 0.57,
         "label": {
           "en": "360° bullous haemorrhage",
           "hi": "360° फूला हुआ हेमरेज"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.608,
-        "y": 0.5,
+        "x": 0.509,
+        "y": 0.461,
         "label": {
           "en": "Zone I",
           "hi": "ज़ोन I"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.677,
-        "y": 0.255,
+        "x": 0.595,
+        "y": 0.679,
         "label": {
           "en": "Zone II",
           "hi": "ज़ोन II"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.919,
-        "y": 0.348,
+        "x": 0.845,
+        "y": 0.182,
         "label": {
           "en": "Zone III",
           "hi": "ज़ोन III"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.796,
-        "y": 0.614,
+        "x": 0.814,
+        "y": 0.588,
         "label": {
           "en": "Intraocular foreign body",
           "hi": "इंट्राऑक्युलर फ़ॉरेन बॉडी"
@@ -110,6 +114,10 @@
           "hi": "धातु पर धातु से हथौड़ा चलाने के बाद इसका शक करें। इससे [[endophthalmitis]] का ख़तरा बढ़ता है।"
         }
       }
+    ],
+    "img": "learn/media/real/pg-open-globe.webp",
+    "more": [
+      "pg-open-globe"
     ]
   },
   "why": {

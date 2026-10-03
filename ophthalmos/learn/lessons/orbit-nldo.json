@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Watery eye in a baby: a blocked tear duct",
     "hi": "शिशु की पानी वाली आँख: बंद आँसू की नली"
@@ -13,22 +18,21 @@
     "hi": "जिस शिशु की आँख से पानी आए और कीचड़ हो, पर आँख सफ़ेद और शांत रहे, उसे आम तौर पर [[nldo]] होती है। ज़्यादातर 1 साल की उम्र तक ठीक हो जाती है।"
   },
   "see": {
-    "diagram": "diagrams/orbit-nldo.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of the tear system of a right eye seen from the front. A tear gland sits above the outer part of the eye. Blue dotted lines show tears crossing the eye to two tiny openings near the nose. Thin tubes lead to a sac, and a duct runs down into the nose below a curled bone. A red bar blocks the lower end of the duct, and tear drops spill onto the cheek.",
-      "hi": "सामने से देखी दाईं आँख के आँसू तंत्र का चित्र। आँख के बाहरी हिस्से के ऊपर आँसू की ग्रंथि है। नीली बिंदुदार रेखाएँ आँसुओं को आँख के पार नाक के पास के दो छोटे छेदों तक जाते दिखाती हैं। पतली नलियाँ एक थैली तक जाती हैं, और एक नली नीचे एक मुड़ी हड्डी के नीचे नाक में खुलती है। नली के निचले सिरे को एक लाल पट्टी बंद करती है, और आँसू की बूँदें गाल पर गिरती हैं।"
+      "en": "A baby's face with a cutaway of the tear system. The tear gland sits above the outer corner of the eye. Two thin tubes run from tiny openings at the inner lid ends to a small sac beside the nose. A duct runs down from the sac into the nose. Its lower end is still closed. Tears pool on the lower lid and run down the cheek.",
+      "hi": "एक शिशु का चेहरा, जिसमें आँसू की नली का भीतरी हिस्सा दिखता है। आँसू ग्रंथि आँख के बाहरी कोने के ऊपर है। पलकों के भीतरी सिरों के छोटे छेदों से दो पतली नलियाँ नाक के पास की एक छोटी थैली तक जाती हैं। थैली से एक नली नीचे नाक में जाती है। उसका निचला सिरा अब भी बंद है। आँसू निचली पलक पर जमा होकर गाल पर बहते हैं।"
     },
     "caption": {
       "en": "Tears drain through the puncta, the canaliculi, the sac and the duct into the nose. In a baby, a thin membrane often still closes the end of the duct.",
       "hi": "आँसू पंक्टा (puncta), कैनालिक्युलाई (canaliculi), थैली और नली से होकर नाक में जाते हैं। शिशु में अक्सर एक पतली झिल्ली नली का सिरा बंद रखती है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
         "x": 0.2,
-        "y": 0.173,
+        "y": 0.182,
         "label": {
           "en": "Tear gland",
           "hi": "आँसू की ग्रंथि"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.592,
-        "y": 0.323,
+        "x": 0.618,
+        "y": 0.333,
         "label": {
           "en": "Canaliculus",
           "hi": "कैनालिक्युलस (canaliculus)"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.533,
-        "y": 0.397,
+        "x": 0.568,
+        "y": 0.434,
         "label": {
           "en": "Punctum",
           "hi": "पंक्टम (punctum)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.6625,
-        "y": 0.433,
+        "x": 0.705,
+        "y": 0.352,
         "label": {
           "en": "Tear sac",
           "hi": "आँसू की थैली"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.6875,
-        "y": 0.733,
+        "x": 0.727,
+        "y": 0.57,
         "label": {
           "en": "Nasolacrimal duct",
           "hi": "नेज़ोलैक्रिमल डक्ट (nasolacrimal duct)"
@@ -87,8 +91,8 @@
         }
       },
       {
-        "x": 0.708,
-        "y": 0.877,
+        "x": 0.773,
+        "y": 0.739,
         "label": {
           "en": "Closed membrane",
           "hi": "बंद झिल्ली"
@@ -99,8 +103,8 @@
         }
       },
       {
-        "x": 0.4125,
-        "y": 0.533,
+        "x": 0.459,
+        "y": 0.57,
         "label": {
           "en": "Tears spill",
           "hi": "आँसू बहते हैं"
@@ -110,6 +114,10 @@
           "hi": "आँसू निकल नहीं पाते, इसलिए पलक के ऊपर से बह जाते हैं। कीचड़ से बाल चिपचिपे हो जाते हैं।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-nldo.webp",
+    "more": [
+      "orbit-nldo"
     ]
   },
   "why": {

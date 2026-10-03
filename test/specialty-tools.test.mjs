@@ -19,6 +19,13 @@ test("parseNum: a true minus, a decimal comma and spaces; anything else is NaN",
   assert.ok(Number.isNaN(T.parseNum("1e3")));
   assert.ok(Number.isNaN(T.parseNum("12 kg")));
 });
+test("parseNum: a thousands comma is grouping, not a decimal (CA125 1,500 must not read as 1.5)", () => {
+  assert.equal(T.parseNum("1,500"), 1500);
+  assert.equal(T.parseNum("2,000"), 2000);
+  assert.equal(T.parseNum("1,25,000"), 125000);
+  assert.equal(T.parseNum("12,5"), 12.5);
+  assert.equal(T.parseNum("0,125"), 0.125);
+});
 
 test("checkInput: number range and required, select options, bool, date; errors are bilingual", () => {
   const [a, , mode, flag, on] = tool.inputs;

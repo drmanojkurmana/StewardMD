@@ -3,7 +3,12 @@
   "unit": "glaucoma-pg",
   "level": "resident",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Treating acute angle closure",
     "hi": "एक्यूट एंगल क्लोज़र का इलाज"
@@ -13,22 +18,21 @@
     "hi": "दवाओं से दौरा तोड़ें, फिर दोनों आँखों में [[lpi]] से [[pupil-block]] हटाएँ। [[angle-closure]] में लेंस निकालना एक मज़बूत विकल्प है।"
   },
   "see": {
-    "diagram": "diagrams/gl-pupil-block.svg",
-    "w": 480,
-    "h": 150,
+    "w": 768,
+    "h": 574,
     "alt": {
-      "en": "Two small diagrams of the upper front of the eye. Left: the iris bows forward over the red drain. Fluid is trapped behind it, and a red arrow pushes forward. Right: after laser, the iris is flat with a gap near its root. A dashed arrow passes through the gap and up to an open drain.",
-      "hi": "आँख के ऊपरी अगले हिस्से के दो छोटे चित्र। बाएँ: आइरिस आगे उभरकर लाल निकास को ढकती है, उसके पीछे पानी फँसा है और एक लाल तीर आगे धकेल रहा है। दाएँ: लेज़र के बाद आइरिस सीधी है और उसकी जड़ के पास एक छेद है। टूटी रेखा वाला तीर छेद से होकर खुले निकास तक जाता है।"
+      "en": "Two side cuts through the front of the same brown eye. Left, before treatment: the iris presses on the lens at the pupil. Fluid is trapped behind the iris, which bows forward and closes the drain. Right, after laser: two small round holes sit near the iris root. The iris lies flatter and the drain angle is open again.",
+      "hi": "एक ही भूरी आँख के आगे के हिस्से के दो बगल से काट। बाएँ, इलाज से पहले: पुतली पर आइरिस लेंस से चिपकी है। आइरिस के पीछे पानी फँसा है, जिससे वह आगे उभरकर निकास बंद कर देती है। दाएँ, लेज़र के बाद: आइरिस की जड़ के पास दो छोटे गोल छेद हैं। आइरिस ज़्यादा सीधी है और निकास का कोण फिर खुल गया है।"
     },
     "caption": {
       "en": "Left: pupil block pushes the iris onto the drain. Right: a laser iridotomy lets fluid bypass the pupil.",
       "hi": "बाएँ: प्यूपिल ब्लॉक आइरिस को निकास पर धकेलता है। दाएँ: लेज़र इरिडोटॉमी से पानी पुतली को छोड़कर आगे निकल जाता है।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.173,
-        "y": 0.25,
+        "x": 0.275,
+        "y": 0.205,
         "label": {
           "en": "Closed drain",
           "hi": "बंद निकास"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.217,
-        "y": 0.62,
+        "x": 0.316,
+        "y": 0.27,
         "label": {
           "en": "Trapped fluid",
           "hi": "फँसा पानी"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.229,
-        "y": 0.81,
+        "x": 0.28,
+        "y": 0.45,
         "label": {
           "en": "Iris on lens",
           "hi": "लेंस पर आइरिस"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.707,
-        "y": 0.5,
+        "x": 0.732,
+        "y": 0.344,
         "label": {
           "en": "Iridotomy",
           "hi": "इरिडोटॉमी"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.673,
-        "y": 0.25,
+        "x": 0.765,
+        "y": 0.2,
         "label": {
           "en": "Drain open again",
           "hi": "निकास फिर खुला"
@@ -86,6 +90,10 @@
           "hi": "आइरिस पीछे हटती है और एंगल खुल जाता है, जब तक PAS न बने हों।"
         }
       }
+    ],
+    "img": "learn/media/real/gl-pupil-block.webp",
+    "more": [
+      "gl-pupil-block"
     ]
   },
   "why": {

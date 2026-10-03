@@ -18,7 +18,7 @@ import { proFromRequest, proMessageFor, isReviewedAccount } from "./_entitlement
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
-import { bump, readDay, mergeCounters, MAIK_GROUPS } from "./_counters.js";
+import { bump, readDay, mergeCounters, MAIK_GROUPS, istDay } from "./_counters.js";
 import { verifiedClaimsFor, cfAccessEmail, verifiedEmailOf } from "./_fbauth.js";
 
 
@@ -40,9 +40,12 @@ export function usageConfig(env) {
     costAlertInr: n("MAIK_PROJECT_DAILY_COST_ALERT_INR", 500),
     costHardStopInr: n("MAIK_PROJECT_DAILY_COST_HARD_STOP_INR", 1000),
     guestDaily: n("MAIK_GUEST_DAILY_LIMIT", 15),
-    // model pricing (INR per 1000 tokens) — server-side, estimate only. Override via env.
-    priceInInrPer1k: Number(env.MAIK_PRICE_IN_INR_PER_1K) || 0.007,
-    priceOutInrPer1k: Number(env.MAIK_PRICE_OUT_INR_PER_1K) || 0.025,
+    // model pricing (INR per 1000 tokens), override via env. Vertex AI's published gemini-2.5-flash
+    // prices (global endpoint = express mode), read 2026-10-02, at Rs 96 per USD: text/image input
+    // $0.30, AUDIO input $1.00, output incl. thinking $2.50 per 1M. Was 0.007 / 0.025 (4-10x low).
+    priceInInrPer1k: Number(env.MAIK_PRICE_IN_INR_PER_1K) || 0.0288,
+    priceOutInrPer1k: Number(env.MAIK_PRICE_OUT_INR_PER_1K) || 0.24,
+    priceAudioInInrPer1k: Number(env.MAIK_PRICE_AUDIO_IN_INR_PER_1K) || 0.096,
   };
 }
 
@@ -85,10 +88,17 @@ export async function identify(request, env) {
    * the per-device daily cap (deviceCheck, MAIK_DEVICE_DAILY_CAP, default 300) and the project-wide
    * daily-cost circuit breaker, which nothing exempts anyone from. Signed-in identity is untouched —
    * this only affects callers who present no credentials at all. */
-  const dev = request.headers.get("X-SMD-Device");
-  if (dev) return { id: "dev:" + (await sha256hex(dev)), guest: true };
-  const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
-  return { id: "ip:" + (await sha256hex(ip)), guest: true };
+  return guestIdentity(request);
+}
+// The unauthenticated tail of identify(): per device, else per IP. Also checkQuota's fallback when
+// identify() itself throws, so an identity hiccup degrades to a guest meter instead of a 500.
+export async function guestIdentity(request) {
+  try {
+    const dev = request.headers.get("X-SMD-Device");
+    if (dev) return { id: "dev:" + (await sha256hex(dev)), guest: true };
+    const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
+    return { id: "ip:" + (await sha256hex(ip)), guest: true };
+  } catch (e) { return { id: "ip:0", guest: true }; }
 }
 
 // The stable, human-readable usage/limit KEY for a caller: the verified email when signed in
@@ -101,7 +111,8 @@ export function usageKeyFor(who) {
 }
 
 // ---- date keys ----
-function dayKey(d) { return d.toISOString().slice(0, 10); }
+// IST calendar day (doctor-facing "midnight"); shared with the aiu:* keys via _counters.istDay.
+function dayKey(d) { return istDay(d.getTime()); }
 function monthKey(d) { return d.toISOString().slice(0, 7); }
 
 // ---- token/cost estimation (approximate; provider metadata used when available) ----
@@ -154,11 +165,15 @@ export async function checkQuota(env, request, type, opts) {
   const _now0 = new Date(), _day0 = dayKey(_now0), _month0 = monthKey(_now0);
   const _qt0 = Date.now(), _qms = {};
   const _tap = (k, p) => Promise.resolve(p).then((v) => { _qms[k] = Date.now() - _qt0; return v; }, (e) => { _qms[k] = Date.now() - _qt0; throw e; });
-  const _whoP = _tap("id", identify(request, env));
-  const _adminP = _tap("own", ownerOK(request, env)).catch(function () { return false; });
-  const _proP = _tap("pro", proFromRequest(env, request)).catch(function () { return null; });
+  /* Every dependency is started inside a thunk: a call that throws SYNCHRONOUSLY (a store binding or
+   * helper that blows up before returning a promise) used to escape before its .catch was attached and
+   * surface as the catch-all server_error 500. A failed identity now falls back to a guest meter. */
+  const _safe = function (fn, dflt) { return Promise.resolve().then(fn).catch(function () { return dflt; }); };
+  const _whoP = _tap("id", Promise.resolve().then(function () { return identify(request, env); }).catch(function () { return guestIdentity(request); }));
+  const _adminP = _tap("own", _safe(function () { return ownerOK(request, env); }, false));
+  const _proP = _tap("pro", _safe(function () { return proFromRequest(env, request); }, null));
   const _gP = _tap("glob", readJson(store, "maik:global:" + _day0));
-  const _boP = _tap("bud", store.get("ai:budget:daily")).catch(function () { return null; });
+  const _boP = _tap("bud", _safe(function () { return store.get("ai:budget:daily"); }, null));
   const _d1P = _tap("d1", readDailyCostInr(env, _day0)).catch(function () { return null; });
   const who = await _whoP; const id = who.id;
   // per-user reads need the id, so they start now rather than after the global reads have finished
@@ -299,7 +314,10 @@ export async function recordUsage(gate, info) {
    * and bills those input tokens at a 90% discount (usageMetadata.cachedContentTokenCount). Price
    * them at 10% and count them, so the report shows whether the static system prompt is being hit. */
   const cachedTok = Math.min(inTok, Math.max(0, info.cachedTok | 0));
-  const cost = estCostInr(cfg, inTok - cachedTok * 0.9, outTok);
+  // Audio input (Scribe, dictation fallback) is billed at the AUDIO rate, not the text rate: the
+  // audio tokens sit inside inTok, so they get the difference on top (usageTokens reports audioTok).
+  const audioTok = Math.min(inTok, Math.max(0, info.audioTok | 0));
+  const cost = estCostInr(cfg, inTok - cachedTok * 0.9, outTok) + (audioTok / 1000) * Math.max(0, (cfg.priceAudioInInrPer1k || 0) - cfg.priceInInrPer1k);
   const u = gate.u, m = gate.m, g = gate.g;
   /* Only a GENERATED result counts against the per-user daily request caps (T36): a cache hit
    * (status "cache"), a failed call, and a continuation the caller marks noCount (MaiK's tier-2
@@ -330,7 +348,7 @@ export async function recordUsage(gate, info) {
   try { await addDailyCostInr(gate.env, gate._day, cost); } catch (e) {}   // atomic mirror (exact under concurrency)
   // Per-USER spend, for the cost cap / prepaid wallet / AI Usage dashboard. Without this the aiu:doc
   // rollup those three read carries only request COUNTS (see addAiSpend), so the cap never fires.
-  try { await addAiSpend(store, gate.costKey, gate._day, cost, inTok + outTok); } catch (e) {}
+  try { await addAiSpend(store, gate.costKey, gate._day, cost, inTok + outTok, gate.env); } catch (e) {}
   return { cost, alert: g.cost >= cfg.costAlertInr && g.cost < cfg.costHardStopInr };
 }
 

@@ -25,6 +25,9 @@
   function C() { return window.SMD_CONNECT; }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function tt(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
+  // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  function pv(kind, v) { var P = window.SMD_PRIVACY_MODE; return P ? P.screenText(kind, v) : String(v == null ? "" : v); }
   function loadLast() { try { return JSON.parse(localStorage.getItem("smd_connect_last") || "null"); } catch (e) { return null; } }
   function saveLast(tid, ref) { try { localStorage.setItem("smd_connect_last", JSON.stringify({ tenantId: tid, patientRef: ref })); } catch (e) {} }
 
@@ -151,12 +154,12 @@
         '<select id="cptTenant" style="width:100%;margin:5px 0 12px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)"></select>' +
         '<label style="font-size:12px;font-weight:700">Find patient by name</label>' +
         '<div style="display:flex;gap:8px;margin:5px 0 8px;flex-wrap:wrap">' +
-          '<input id="cptSearch" placeholder="Type a name" autocapitalize="words" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
+          '<input id="cptSearch" data-phi-input placeholder="Type a name" autocapitalize="words" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
           '<button id="cptSearchBtn" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:9px;padding:9px 16px;font-weight:700">Search</button></div>' +
         '<div id="cptResults" style="margin:2px 0 12px"></div>' +
         '<label style="font-size:12px;font-weight:700">Or enter a patient id directly</label>' +
         '<div style="display:flex;gap:8px;margin:5px 0 12px;flex-wrap:wrap">' +
-          '<input id="cptRef" placeholder="e.g. patient id / MRN" autocapitalize="off" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
+          '<input id="cptRef" data-phi-input placeholder="e.g. patient id / MRN" autocapitalize="off" spellcheck="false" style="flex:1;min-width:160px;padding:9px;border-radius:9px;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c)">' +
           '<button id="cptPull" style="background:var(--teal,#0e6e63);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:700">Pull</button></div>' +
         '<div id="cptMsg" style="font-size:12.5px;margin:6px 0"></div>' +
         '<div id="cptSummary"></div>' +
@@ -194,7 +197,7 @@
       box.innerHTML = ps.slice(0, 25).map(function (p) {
         var sub = [p.gender, p.birthDate].filter(Boolean).join(" · ");
         return '<button class="cpt-hit" data-pid="' + esc(p.id) + '" style="display:block;width:100%;text-align:left;background:var(--panel,#111820);color:var(--ink,#e8eef4);border:1px solid var(--line,#22303c);border-radius:9px;padding:9px 11px;margin:4px 0;cursor:pointer">' +
-          '<div style="font-weight:700;font-size:13.5px">' + esc(p.name || "(unnamed)") + '</div>' + (sub ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2)">' + esc(sub) + '</div>' : "") + '</button>';
+          '<div style="font-weight:700;font-size:13.5px">' + phi("name", p.name, esc(p.name || "(unnamed)")) + '</div>' + (sub ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2)">' + esc(sub) + '</div>' : "") + '</button>';
       }).join("");
       [].slice.call(box.querySelectorAll(".cpt-hit")).forEach(function (btn) {
         btn.onclick = function () { var ref = document.getElementById("cptRef"); if (ref) ref.value = btn.getAttribute("data-pid"); doPull(); };
@@ -236,8 +239,8 @@
     var el = document.getElementById("cptSummary"); if (!el) return;
     el.innerHTML =
       '<div style="margin-top:8px;padding:12px;border:1px solid var(--line,#22303c);border-radius:12px">' +
-        '<div style="font-size:16px;font-weight:800">' + esc(demo.name) + '</div>' +
-        '<div style="font-size:12.5px;color:var(--slate,#9bb0c2)">' + esc([demo.sex, demo.age !== "" ? demo.age + "y" : "", demo.mrn ? "MRN " + demo.mrn : ""].filter(Boolean).join(" · ")) + '</div>' +
+        '<div style="font-size:16px;font-weight:800">' + phi("name", demo.name) + '</div>' +
+        '<div style="font-size:12.5px;color:var(--slate,#9bb0c2)">' + [esc(demo.sex), demo.age !== "" ? esc(demo.age + "y") : "", demo.mrn ? "MRN " + phi("id", demo.mrn) : ""].filter(Boolean).join(" · ") + '</div>' +
         section("Problems", conds) +
         section("Allergies", allg) +
         section("Medications (" + meds.length + ")", meds) +
@@ -315,7 +318,7 @@
         return '<div style="display:flex;align-items:center;gap:10px;background:var(--panel,#111820);border:1px solid var(--line,#22303c);border-radius:11px;padding:10px 12px;margin:6px 0">' +
           '<button class="cptr-add" data-i="' + i + '" style="flex:0 0 auto;background:' + (on ? "transparent" : "var(--teal,#0e6e63)") + ';color:' + (on ? "var(--teal,#0e6e63)" : "#fff") + ';border:' + (on ? "1px solid var(--teal,#0e6e63)" : "0") + ';border-radius:9px;padding:9px 15px;font-weight:800;font-size:13px;cursor:pointer">' + (on ? "Added" : "Add") + '</button>' +
           '<button class="cptr-view" data-i="' + i + '" style="flex:1;min-width:0;text-align:left;background:transparent;border:0;color:var(--ink,#e8eef4);padding:0;cursor:pointer">' +
-            '<div style="font-weight:700;font-size:14px">' + esc(p.patientFirstName || "(unnamed)") + '</div>' +
+            '<div style="font-weight:700;font-size:14px">' + phi("name", p.patientFirstName, esc(p.patientFirstName || "(unnamed)")) + '</div>' +
             (sub ? '<div style="font-size:12px;color:var(--teal,#4ec9b8);margin-top:2px">' + esc(sub) + '</div>' : "") +
             (dem ? '<div style="font-size:11.5px;color:var(--slate,#9bb0c2);margin-top:1px">' + esc(dem) + '</div>' : "") + '</button>' +
           '</div>';
@@ -338,13 +341,13 @@
     // Admit a Connect (FHIR) patient into the CURRENT unit without navigating: pull -> addWardPatientToRoster.
     function addConnect(tenantId, connectionId, p) {
       return C().pullContext({ tenantId: tenantId, patientRef: p.patientId, connectionId: connectionId }).then(function (r) {
-        if (!r || !r.ok) { tt("Could not pull " + (p.patientFirstName || "patient") + "."); return false; }
+        if (!r || !r.ok) { tt("Could not pull " + (p.patientFirstName ? pv("name", p.patientFirstName) : "patient") + "."); return false; }
         var b = r.bundle || {};
         if (p.patientFirstName && (!b.patient || !b.patient.name)) { b.patient = b.patient || {}; b.patient.name = { text: p.patientFirstName }; }
         var dem = demographics(b); if (p.bedName) dem.bed = p.bedName;
         if (!(window.ICU && ICU.addWardPatientToRoster)) { tt("Open the ICU dashboard and pick a unit first."); return false; }
         return Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: p.patientId, source: "Connect EMR", labs: labRows(b) })).then(function () {
-          tt("Added " + (dem.name || "patient") + " to " + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : "the dashboard")); return true;
+          tt("Added " + (dem.name ? pv("name", dem.name) : "patient") + " to " + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : "the dashboard")); return true;
         }, function () { tt("Couldn’t add — open the dashboard and choose a unit first."); return false; });
       });
     }

@@ -5,17 +5,21 @@ tags: [module, clinical, neonatal]
 
 One NICU workspace: a baby record pinned on every screen and ten tools that read it. Built 2026-09-30
 from the owner's plan ("StewardMD Neonatal Layer: Build and Polish Plan", Claude Docs) on branch
-`feat/neo-layer`, recovery tag `pre-neo`. **Nothing here is clinically approved**: every data file is
+`feat/neo-layer`, recovery tag `pre-neo`. **Nothing here is clinically approved** (it ships ON as Beta by owner decision): every data file is
 `review.status: "ai_drafted"` and every screen shows a Draft badge.
 
 ## Flags + default
-- `smd_neo` master, **DEFAULT OFF**. On per device: Settings > Experimental Features > "Neonatal layer
-  (Draft)", `?neo=1`, or `localStorage.smd_neo = "1"`. Registry: `neo-flags.js` (`SMD_NEO_FLAGS`).
+- `smd_neo` master, **DEFAULT ON under a Beta label** (owner 2026-10-01: "Make it default on for everyone
+  under beta label"; built default OFF on 2026-09-30). BETA on the Home tile and the hub header, Draft
+  badges on every data screen. Off per device: Settings > Experimental Features > "Neonatal layer (Beta)",
+  `?neo=0`, or `localStorage.smd_neo = "0"`. Registry: `neo-flags.js` (`SMD_NEO_FLAGS`).
 - Per-feature (default ON, effective only with the master on; `?neo_<name>=0` or
   `localStorage.smd_neo_<name> = "0"`): `dose`, `prep`, `inf`, `fluids`, `growth`, `bili`, `scores`, `ref`,
   `proc`, `tdm`.
 - Off: `neo-flags.js` is the only file that loads (it injects the rest when the flag is on). No Home tile,
   no search hit, no neonatal calculators, dose-calc.js behaves exactly as before.
+- On (the default): a neonate in dose-calc.js sees neonatal rows only ("No neonatal dose on file. Do not
+  extrapolate." when none), for every user.
 
 ## Key files
 | File | Global | What |
@@ -23,7 +27,7 @@ from the owner's plan ("StewardMD Neonatal Layer: Build and Polish Plan", Claude
 | `neo-flags.js` | `SMD_NEO_FLAGS` | flags + loader for the other neo files (`VER` = the `?v=` token) |
 | `neo-patient.js` | `SMD_NEO`, `SMD_NEO_ENGINE` | baby record (memory only) + the ONE band matcher (`context`, `matches`, `condText`) |
 | `neo-hub.js` | `SMD_NEO_HUB` | overlay `#neoHub` (z 10040, under `#doseCalc` 10050), tool registry, data loader, Draft badge, source line, second check, Copy/Print |
-| `neo-dose.js` | `SMD_NEO_DOSE` | Phase 1 bands, tenfold guard; also renders the block dose-calc.js embeds |
+| `neo-dose.js` | `SMD_NEO_DOSE` | Phase 1 bands, tenfold guard; drug search over every monograph (`entries()`, status calc / mono / info / none); renders the block dose-calc.js embeds |
 | `neo-prep.js` | `SMD_NEO_PREP` | Phase 2 vial choice, reconstitution, draw-up, vial count |
 | `neo-infusions.js` | `SMD_NEO_INF` | Phase 3 mcg/kg/min <-> mL/h (app.js `INFUSION_DRUGS` untouched) |
 | `neo-fluids.js` | `SMD_NEO_FLUIDS` | Phase 4 GIR, day-of-life volumes, bag builder; registers `neo_gir`, `neo_fluid_dol` in calculators.js |
@@ -34,6 +38,7 @@ from the owner's plan ("StewardMD Neonatal Layer: Build and Polish Plan", Claude
 | `neo-proc.js` | `SMD_NEO_PROC` | Phase 9 UVC/UAC, ETT, PICC, LP, exchange; step guides in `kb/clinical-protocols/neonatal-*.json` |
 | `neo-tdm.js` | `SMD_NEO_TDM` | Phase 10 vancomycin two-level AUC, neonatal gentamicin levels, Hartford (reference only) |
 | `data/neo/*.json` | | the clinical data; `data/neo/README.md` is the schema |
+| `data/neo/monograph-neonatal.json` | | newborn statements copied verbatim from our monographs (`worker/data/gold`) by `scripts/neo/build-monograph-neonatal.mjs`; skipped by `validate.mjs`, checked by `test/neo-monograph.test.mjs`. Rebuild after a monograph changes |
 | `data/neo/sources.json.gz` | | provenance snapshots, ONE packed file (`{name.txt: text}`); loose `data/neo/sources/*.txt` from snap.py are gitignored and folded in with `validate.mjs --pack`. Not shipped by build-www, 404 on the web |
 | `scripts/neo/snap.py`, `scripts/neo/validate.mjs` | | fetch a source snapshot; enforce "every number is in its quote" |
 
@@ -50,6 +55,13 @@ Unsourced means absent and the screen says "No data on file". Units are stored a
 the engines convert (g/kg, mcg/mg, mg/kg/min <-> g/kg/day).
 
 ## Behaviour
+- **Plain language (owner 2026-10-01).** Tools grouped under Medicines / Fluids and feeding / Check and chart /
+  Procedures with plain titles (`FRIENDLY` in `neo-hub.js`; the technical title stays in `techTitle` and search
+  keywords), a one-line explainer per tool, a glossary, baby chips ("Born at 30 weeks 2 days"), and
+  `SMD_NEO_ENGINE.condText` as sentences ("Born at 34 weeks or less, 8 to under 28 days old").
+- **Every drug.** Drug doses lists every monograph drug: "Newborn dose" (band), "Newborn dose (monograph)" (the
+  monograph's neonate row via `SMD_DOSECALC.engine.compute(..., neoStrict)`), "Newborn notes only", "No newborn dose".
+  A band always wins; adult and child doses are never shown for a newborn.
 - **Band matching** (`SMD_NEO_ENGINE.matches`): GA and PMA in completed weeks (never rounded up); PNA as
   elapsed time in days/weeks/months; `life_week` "first" = PNA < 7 d; a key the engine does not know is
   "unknown", never a match. A row that needs a value the record lacks is listed as "needs ...".
@@ -66,10 +78,12 @@ the engines convert (g/kg, mcg/mg, mg/kg/min <-> g/kg/day).
 ## Tests
 - `test/neo-patient.test.mjs` PNA/PMA/corrected age (source worked examples), month ends, leap day, guards.
 - `test/neo-data.test.mjs` validator over the shipped files + that it catches tampering.
+- `test/neo-monograph.test.mjs` monograph-neonatal.json is fresh, verbatim, newborn-only (no maternal text).
 - `test/neo-engines.test.mjs` dose bands, guard, dose-calc strict path, prep, infusions, fluids, growth,
   procedures, TDM.
 - `test/run-neo-ui.mjs` headless: flag off, every tool at 360 px, Draft badge, no dashes, tenfold stop,
-  second check, dose -> prepare carry-over, dose-calc neonate path, dark mode, `[hidden]` trap.
+  second check, dose -> prepare carry-over, search over every drug and each status, dose-calc neonate path
+  (band block, monograph statements), dark mode, `[hidden]` trap.
 
 ## Gotchas
 - **Cloudflare Pages caps a deploy at 20,000 files** and the repo sits just under it. The 225 snapshots were

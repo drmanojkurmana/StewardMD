@@ -3,7 +3,12 @@
   "unit": "orbit",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Stye or chalazion?",
     "hi": "गुहेरी (stye) या कलेज़ियन (chalazion)?"
@@ -13,22 +18,21 @@
     "hi": "पलक पर गाँठ आम तौर पर गुहेरी (stye) या [[chalazion]] होती है। गुहेरी पलक के बाल की जड़ में दर्द वाला संक्रमण है। कलेज़ियन बंद तेल ग्रंथि से बनी बिना दर्द की गाँठ है।"
   },
   "see": {
-    "diagram": "diagrams/orbit-stye-chalazion.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 576,
     "alt": {
-      "en": "Diagram of two upper eyelids cut from top to bottom, with the eye to the right of each. On the left, a red swelling with a yellow head sits at a lash root. On the right, a round pale lump sits inside the firm plate of the lid, around an oil gland. A blue bar blocks the gland's opening at the lid edge.",
-      "hi": "ऊपर से नीचे तक कटी दो ऊपरी पलकों का चित्र, हर एक के दाईं ओर आँख है। बाईं ओर, पलक के किनारे के आगे, एक बाल की जड़ पर पीले सिरे वाली लाल सूजन है। दाईं ओर, पलक की सख़्त प्लेट के अंदर एक तेल ग्रंथि के चारों ओर गोल, हल्के रंग की गाँठ है। पलक के किनारे पर ग्रंथि का मुँह एक नीली पट्टी से बंद है।"
+      "en": "Two side cuts through an upper eyelid, next to the eye. Each shows skin, red muscle, yellow oil glands in the lid plate, and lashes at the edge. Left: a red, swollen lump sits at a lash root on the front of the lid edge. It has a small yellow head of pus. Right: a round, firm lump sits deeper in the lid plate, around an oil gland. The gland opening at the lid edge is blocked.",
+      "hi": "आँख के पास ऊपरी पलक के दो बगल से काट। हर एक में त्वचा, लाल माँसपेशी, पलक की प्लेट में पीली तेल ग्रंथियाँ और किनारे पर पलकों के बाल दिखते हैं। बाएँ: पलक के किनारे के आगे, एक बाल की जड़ पर लाल सूजी हुई गाँठ है। उस पर मवाद का एक छोटा पीला सिरा है। दाएँ: पलक की प्लेट में गहराई पर, एक तेल ग्रंथि के चारों ओर एक गोल, सख़्त गाँठ है। पलक के किनारे पर ग्रंथि का मुँह बंद है।"
     },
     "caption": {
       "en": "Left: a stye, an infected lash root at the front of the lid edge. Right: a chalazion, a firm lump around a blocked oil gland deeper in the lid.",
       "hi": "बाएँ: गुहेरी, पलक के किनारे के आगे बाल की संक्रमित जड़। दाएँ: कलेज़ियन, पलक में गहराई पर बंद तेल ग्रंथि के चारों ओर सख़्त गाँठ।"
     },
-    "credit": "Original diagram, Ophthalmós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.1625,
-        "y": 0.787,
+        "x": 0.118,
+        "y": 0.497,
         "label": {
           "en": "Stye",
           "hi": "गुहेरी (stye)"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.09,
-        "y": 0.9,
+        "x": 0.17,
+        "y": 0.57,
         "label": {
           "en": "Eyelash",
           "hi": "पलक का बाल"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.244,
-        "y": 0.567,
+        "x": 0.241,
+        "y": 0.461,
         "label": {
           "en": "Oil gland (meibomian gland)",
           "hi": "तेल ग्रंथि (meibomian gland)"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.7375,
-        "y": 0.633,
+        "x": 0.714,
+        "y": 0.364,
         "label": {
           "en": "Chalazion",
           "hi": "कलेज़ियन (chalazion)"
@@ -75,8 +79,8 @@
         }
       },
       {
-        "x": 0.744,
-        "y": 0.857,
+        "x": 0.697,
+        "y": 0.594,
         "label": {
           "en": "Blocked opening",
           "hi": "बंद मुँह"
@@ -86,6 +90,10 @@
           "hi": "ग्रंथि पलक के किनारे पर खुलती है। यह मुँह बंद हो जाए, तो उसके पीछे तेल जमा होता है।"
         }
       }
+    ],
+    "img": "learn/media/real/orbit-stye-chalazion.webp",
+    "more": [
+      "orbit-stye-chalazion"
     ]
   },
   "why": {

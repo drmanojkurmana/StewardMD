@@ -76,7 +76,7 @@ import { startResusBundle, markResusElement, waiveResusElement, voidResusBundle,
 import { deviceAssociate, deviceDissociate, deviceIngest, deviceStatus, deviceList } from "../../_wardsynq/migrate-device.js";
 import {
   bookSurgicalCase, recordCaseConsent, markCaseSite, signInCase, timeOutCase, inciseCase,
-  signOutCase, abandonCase, recordOperativeNote, dispositionCase, getSurgicalCase, listSurgicalCases,
+  signOutCase, abandonCase, recordOperativeNote, dispositionCase, leaveRecovery, getSurgicalCase, listSurgicalCases,
   listOpenCases, startAnesthesia, recordAnesthesiaEvent, endAnesthesia, getAnesthesia,
   recordImplant, listImplants, recordPac, getPac, rescheduleCase, recordTheatreTime, flagUnplannedReturn,
 } from "../../_wardsynq/migrate-surgery.js";
@@ -1832,7 +1832,7 @@ export async function onRequest(context) {
         "surgery-book": CAPS.EMR_TREAT, "surgery-consent": CAPS.EMR_TREAT, "surgery-marksite": CAPS.EMR_TREAT,
         "surgery-signin": CAPS.EMR_TREAT, "surgery-timeout": CAPS.EMR_TREAT, "surgery-incise": CAPS.EMR_TREAT,
         "surgery-signout": CAPS.EMR_TREAT, "surgery-abandon": CAPS.EMR_TREAT, "surgery-note": CAPS.EMR_TREAT,
-        "surgery-disposition": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
+        "surgery-disposition": CAPS.EMR_TREAT, "surgery-leave-recovery": CAPS.EMR_TREAT, "surgery-get": CAPS.EMR_VIEW, "surgery-list": CAPS.EMR_VIEW,
         "surgery-board": CAPS.EMR_VIEW,
         /* Theatre times, rescheduling and the unplanned-return flag are written on the case, by the team that writes the
          * case (P3, 2026-09-17). Theatre sessions are the theatre's diary, booked on the same authority as the theatre
@@ -2828,7 +2828,7 @@ export async function onRequest(context) {
             idempotencyKey: idemFor(body.idempotencyKey, "vitals", c.index) }),
           problems: (rq, ev, c) => recordProblem(rq, ev, { ...c, problem: c.item, idempotencyKey: idemFor(body.idempotencyKey, "problem", c.index) }),
           // CLIN-02: the same engine and hard stops as /ward/medication-order, and a reason for any finding.
-          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, requireSafetyReason: true,
+          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, uncheckedReason: c.item && c.item.uncheckedReason, requireSafetyReason: true,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
             ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
@@ -3104,6 +3104,10 @@ export async function onRequest(context) {
         const r = await dispositionCase(request, env, { ...deps, caseId: body.caseId, disposition: body.disposition, pacuBed: body.pacuBed, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
+      if (sub === "surgery-leave-recovery" && method === "POST") {
+        const r = await leaveRecovery(request, env, { ...deps, encounterId: body.encounterId, outcome: body.outcome, expectedVersion: body.expectedVersion, admission: body.admission, reason: body.reason, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
       if (sub === "surgery-get" && method === "GET") {
         const r = await getSurgicalCase(request, env, { ...deps, caseId: url.searchParams.get("caseId") || "" });
         // The hospital's reschedule reason codes, so the case screen offers exactly the codes the server accepts.
@@ -3344,7 +3348,7 @@ export async function onRequest(context) {
         const r = await createWardMedicationOrder(request, env, {
           /* LT-14: the safety check runs on the server against the record (never a verdict from the body);
            * checkOnly shows it before anything is written. */
-          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason,
+          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason, uncheckedReason: body.uncheckedReason,
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,
@@ -5721,7 +5725,7 @@ export async function onRequest(context) {
       if (sub === "mar" && method === "POST") {
         const r = await administerStep(request, env, {
           ...deps, action: body.action, orderId: body.orderId, dueAt: body.dueAt, expectedOrderVersion: body.expectedOrderVersion,
-          patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId,
+          patient: body.patient, scan: body.scan, reason: body.reason, witnessId: body.witnessId, uncheckedReason: body.uncheckedReason,
           // CLIN-18: the witness's own staff PIN, checked like a PIN sign-in (same hash, lockout and audit), never stored.
           witnessPinCheck: (id, pin) => verifyWitnessPin({ getMemberAuth: (x) => ORG.getMemberAuth(env, wOrgId, x),
             recordAttempt: (a, nx) => ORG.recordMemberPinAttempt(env, wOrgId, a.identity, nx),

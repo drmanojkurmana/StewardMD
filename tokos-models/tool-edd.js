@@ -24,7 +24,7 @@
   function robinsonDays(crl) { return Math.floor(8.052 * Math.sqrt(crl * 1.037) + 23.73 + 0.5); }
   function wd(days) { return Math.floor(days / 7) + "w " + (days % 7) + "d"; }
   function redate(lmpGA, diff) {
-    var lim = lmpGA <= 62 ? 5 : lmpGA <= 97 ? 7 : null;
+    var lim = lmpGA <= 62 ? 5 : lmpGA <= 111 ? 7 : null;
     return lim === null ? null : { lim: lim, change: diff > lim };
   }
   return {
@@ -41,7 +41,7 @@
         options: [{ value: "lmp", label: { en: "From LMP (Naegele)", hi: "अंतिम माहवारी से (नेगेले)" } }, { value: "crl", label: { en: "From CRL (Robinson)", hi: "सीआरएल से (रॉबिन्सन)" } }] },
       { id: "lmp", label: { en: "First day of LMP", hi: "अंतिम माहवारी का पहला दिन" }, type: "date" },
       { id: "cycle", label: { en: "Cycle length (LMP method)", hi: "माहवारी चक्र की लंबाई (एलएमपी विधि)" }, type: "number", unit: "days", min: 21, max: 35, step: 1 },
-      { id: "crl", label: { en: "Crown-rump length", hi: "क्राउन-रम्प लंबाई" }, type: "number", unit: "mm", min: 5, max: 85, step: 0.1 },
+      { id: "crl", label: { en: "Crown-rump length", hi: "क्राउन-रम्प लंबाई" }, type: "number", unit: "mm", min: 5, max: 84, step: 0.1 },
       { id: "scan", label: { en: "Scan date (CRL method)", hi: "स्कैन की तिथि (सीआरएल विधि)" }, type: "date" },
       { id: "asof", label: { en: "Gestational age as of (optional)", hi: "इस तिथि पर गर्भावस्था की अवधि (वैकल्पिक)" }, type: "date" }
     ],
@@ -63,23 +63,31 @@
         if (asof !== null) gaT = Math.round((asof - (lmp + adj * DAY)) / DAY);
       } else if (v.method === "crl") {
         var crl = num(v.crl), scan = v.scan ? parse(v.scan) : null;
-        if (crl === null || crl < 5 || crl > 85) return bad("CRL must be 5 to 85 mm (chart range, about 6 to 14 weeks).", "सीआरएल 5 से 85 मिमी के बीच हो (चार्ट की सीमा, लगभग 6 से 14 सप्ताह)।");
+        if (crl === null || crl < 5 || crl > 84) return bad("CRL must be 5 to 84 mm (CRL dating range, about 6 to 14 weeks).", "सीआरएल 5 से 84 मिमी के बीच हो (सीआरएल से तिथि की सीमा, लगभग 6 से 14 सप्ताह)।");
         if (scan === null) return bad("Scan date is required as YYYY-MM-DD.", "स्कैन की तिथि YYYY-MM-DD रूप में आवश्यक है।");
-        var g = robinsonDays(crl);
+        var g = robinsonDays(crl), gaBase = null;
         eddT = scan + (280 - g) * DAY;
         lines.push({ en: "CRL " + crl + " mm gives GA " + g + " days (" + wd(g) + ") on the scan date.", hi: "सीआरएल " + crl + " मिमी से स्कैन के दिन गर्भावस्था " + g + " दिन (" + wd(g) + ")।" });
         if (lmp !== null) {
-          var lg = Math.round((scan - lmp) / DAY), diff = Math.abs(lg - g), r = redate(lg, diff);
+          var cyc2 = v.cycle === undefined || v.cycle === null || v.cycle === "" ? 28 : num(v.cycle);
+          if (cyc2 === null || cyc2 < 21 || cyc2 > 35 || cyc2 % 1 !== 0) return bad("Cycle length must be a whole number from 21 to 35 days; outside this range use ultrasound dating.", "चक्र की लंबाई 21 से 35 दिन के बीच पूर्णांक हो; इससे बाहर अल्ट्रासाउंड से तिथि तय करें।");
+          var lmpAdj = lmp + (cyc2 - 28) * DAY;
+          var lg = Math.round((scan - lmpAdj) / DAY), diff = Math.abs(lg - g), r = redate(lg, diff);
           lines.push({ en: "LMP dating at scan: " + wd(lg) + "; difference " + diff + " days.", hi: "स्कैन पर एलएमपी अनुसार: " + wd(lg) + "; अंतर " + diff + " दिन।" });
           if (r) lines.push({ en: "ACOG CO 700: change the EDD if the difference is more than " + r.lim + " days. Here: " + (r.change ? "change EDD to the ultrasound date." : "keep LMP dating."), hi: "एसीओजी सीओ 700: अंतर " + r.lim + " दिन से अधिक हो तो ईडीडी बदलें। यहाँ: " + (r.change ? "ईडीडी अल्ट्रासाउंड के अनुसार बदलें।" : "एलएमपी की तिथि रखें।") });
+          if (r && !r.change) {
+            eddT = naegele(lmp) + (cyc2 - 28) * DAY; // same date the LMP method shows
+            gaBase = lmpAdj;
+            lines.push({ en: "The EDD shown is the LMP date.", hi: "दिखाई गई ईडीडी एलएमपी के अनुसार है।" });
+          }
         }
-        if (asof !== null) gaT = Math.round((asof - (eddT - 280 * DAY)) / DAY);
+        if (asof !== null) gaT = Math.round((asof - (gaBase !== null ? gaBase : eddT - 280 * DAY)) / DAY);
       } else return bad("Choose a method.", "विधि चुनें।");
-      if (gaT !== undefined) lines.push({ en: "Gestational age on " + iso(asof) + ": " + (gaT < 0 ? "before conception dating" : wd(gaT)) + ".", hi: iso(asof) + " को गर्भावस्था: " + (gaT < 0 ? "गणना से पहले की तिथि" : wd(gaT)) + "।" });
+      if (gaT !== undefined) lines.push({ en: "Gestational age on " + iso(asof) + ": " + (gaT < 0 ? "before conception dating" : gaT > 300 ? "after the expected delivery" : wd(gaT)) + ".", hi: iso(asof) + " को गर्भावस्था: " + (gaT < 0 ? "गणना से पहले की तिथि" : gaT > 300 ? "अपेक्षित प्रसव के बाद" : wd(gaT)) + "।" });
       return {
         ok: true, value: iso(eddT), label: { en: "Estimated date of delivery", hi: "प्रसव की संभावित तिथि" }, lines: lines,
-        rule: { en: "LMP: Naegele adds 7 days and 9 months (assumes a 28-day cycle; add or subtract the days the cycle is longer or shorter). CRL: GA in days = 8.052 x sqrt(CRL mm x 1.037) + 23.73 (Robinson and Fleming, as tabulated by BC Women's); EDD = scan date + (280 - GA) days.",
-          hi: "एलएमपी: नेगेले में 7 दिन और 9 माह जोड़ते हैं (28 दिन के चक्र की मान्यता; चक्र जितने दिन लंबा या छोटा हो उतने दिन जोड़ें या घटाएँ)। सीआरएल: दिनों में अवधि = 8.052 x sqrt(सीआरएल मिमी x 1.037) + 23.73 (रॉबिन्सन और फ्लेमिंग); ईडीडी = स्कैन तिथि + (280 - अवधि) दिन।" }
+        rule: { en: "LMP: Naegele adds 7 days and 9 months (assumes a 28-day cycle; add or subtract the days the cycle is longer or shorter). CRL: GA in days = 8.052 x sqrt(CRL mm x 1.037) + 23.73 (Robinson and Fleming, as tabulated by BC Women's); EDD = scan date + (280 - GA) days. With a known LMP, keep the LMP EDD unless the gap exceeds the ACOG limit.",
+          hi: "एलएमपी: नेगेले में 7 दिन और 9 माह जोड़ते हैं (28 दिन के चक्र की मान्यता; चक्र जितने दिन लंबा या छोटा हो उतने दिन जोड़ें या घटाएँ)। सीआरएल: दिनों में अवधि = 8.052 x sqrt(सीआरएल मिमी x 1.037) + 23.73 (रॉबिन्सन और फ्लेमिंग); ईडीडी = स्कैन तिथि + (280 - अवधि) दिन। एलएमपी ज्ञात हो तो अंतर एसीओजी सीमा से अधिक न होने पर एलएमपी की ईडीडी रखें।" }
       };
     },
     examples: [

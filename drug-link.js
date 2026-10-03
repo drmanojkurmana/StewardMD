@@ -10,7 +10,7 @@
  *   - SMD_BRANDS        the app's brand-to-generic map
  *   - learn(names)      names from the OpenMed drug tagger (openmed-ner.js) once that pack is enabled
  *   - fuzzy (opt-in, questions only): one misspelled word of 6+ letters, e.g. "paracetomol", via
- *     DrugFuzzy.bestGenericMatch against single-word generics (unique best match, 1-2 edits)
+ *     DrugFuzzy.bestGenericMatch against single-word generics (unique best match, strict: 1 edit under 10 letters, 2 from 10, same first letter)
  *
  * Flags (localStorage): smd_druglink  DEFAULT ON, "0" = no highlighting and no MaiK prompt.
  *                       smd_druglink_ask DEFAULT ON, "0" = keep highlighting, skip the MaiK prompt
@@ -32,10 +32,19 @@
   // Brand words that are also everyday or clinical English: never highlighted as a drug.
   var STOP = { pan: 1, ppi: 1, acid: 1, relief: 1, total: 1, cold: 1, "stop": 1, calm: 1, rest: 1, flow: 1, "clear": 1,
     "active": 1, "rapid": 1, "fresh": 1, "sleep": 1, "focus": 1, "boost": 1, "cough": 1, "fever": 1, "plain": 1,
+    // everyday words one edit from a generic ("cation" is a lexicon generic)
+    cation: 1, location: 1, protocol: 1, position: 1, condition: 1, solution: 1, station: 1, motion: 1, potion: 1,
     "tablet": 1, "tablets": 1, "capsule": 1, "syrup": 1, "injection": 1, "drops": 1, "cream": 1, "patients": 1,
     // drug CLASSES the formulary lists as search aliases: not one drug, so no single monograph to open
     steroid: 1, steroids: 1, statin: 1, statins: 1, nsaid: 1, nsaids: 1, antiemetic: 1, antiemetics: 1, laxative: 1,
     laxatives: 1, antibiotic: 1, antibiotics: 1, "beta blocker": 1, "h2 blocker": 1, diuretic: 1, anticoagulant: 1 };
+
+  // First words of multi-word generics that are chemistry or everyday English, not one drug: never indexed alone.
+  var GENERIC_FIRST = { adapting: 1, anhydrous: 1, antacids: 1, angiotensin: 1, bacterial: 1, boswellia: 1, brilliant: 1,
+    cinnamon: 1, collagen: 1, colloidal: 1, conjugated: 1, cranberry: 1, follicle: 1, gastroprokinetics: 1, glyceryl: 1,
+    glycolic: 1, hepatitis: 1, hydroxyethyl: 1, inactivated: 1, inositol: 1, liposomal: 1, meningococcal: 1, methylene: 1,
+    mucopolysaccharide: 1, northern: 1, parathyroid: 1, peppermint: 1, peruvian: 1, polyvinyl: 1, povidone: 1, prussian: 1,
+    selenium: 1, stannous: 1, watermelon: 1, botulinum: 1, nicotinic: 1 };
 
   // ── Index: first word -> phrases (longest first) ────────────────────────────────────────────────
   var idx = null, fuzzyVocab = [], learned = {}, sig = "";
@@ -46,7 +55,7 @@
   function build() {
     var S = sources();
     if (idx && S.s === sig) return idx;
-    var map = {}, seen = {}, single = {};
+    var map = {}, seen = {}, single = {}, gens = [];
     function add(name, generic) {
       var n = String(name || "").toLowerCase().replace(/\s*\(.*$/, "").replace(/[^a-z0-9\- ]+/g, " ").replace(/\s+/g, " ").trim();
       var g = String(generic || "").toLowerCase().replace(/\s*\(.*$/, "").trim();
@@ -57,17 +66,30 @@
       if (words.length === 1 && n.length >= 6) single[n] = g;
     }
     if (S.L) {
-      S.L.generics.forEach(function (g) { add(g, g); });
+      S.L.generics.forEach(function (g) { add(g, g); gens.push(g); });
       for (var b in S.L.brands) if (Object.prototype.hasOwnProperty.call(S.L.brands, b)) add(b, S.L.brands[b]);
     }
     S.M.forEach(function (d) {
-      add(d.generic, d.generic);
+      add(d.generic, d.generic); gens.push(String(d.generic || "").toLowerCase());
       (d.brands || []).forEach(function (br) { if (String(br).length >= 5) add(br, d.generic); });
     });
     for (var k in S.B) if (Object.prototype.hasOwnProperty.call(S.B, k)) {
       var v = [].concat(S.B[k]); if (v.length === 1 && String(k).length >= 5) add(k, v[0]);
     }
     for (var ln in learned) if (Object.prototype.hasOwnProperty.call(learned, ln)) add(ln, learned[ln]);
+    // First word (8+ letters) of a multi-word generic ("zoledronic acid") names it too, unless it is
+    // already a name of its own or starts more than one distinct generic ("insulin", "sodium"...).
+    var first = {};
+    gens.forEach(function (g) {
+      var w = g.split(/[ \-]+/);
+      if (w.length > 1 && w[0].length >= 8 && /^[a-z]+$/.test(w[0])) (first[w[0]] = first[w[0]] || {})[g] = 1;
+    });
+    for (var fw in first) {
+      var gs = Object.keys(first[fw]).sort(function (a, c) { return a.length - c.length; });
+      // one generic, or one that is a prefix of the rest ("zoledronic acid" / "zoledronic acid anhydrous")
+      var base = gs[0], ok = gs.every(function (g) { return g === base || g.indexOf(base + " ") === 0; });
+      if (ok && !seen[fw] && !GENERIC_FIRST[fw]) add(fw, base);
+    }
     for (var f in map) map[f].sort(function (a, c) { return c.words.length - a.words.length; });
     fuzzyVocab = Object.keys(single); fuzzyVocab.gen = single;
     idx = map; sig = S.s;
@@ -104,7 +126,7 @@
       }
       if (opts.fuzzy && toks[i].w.length >= 6 && /^[a-z]+$/.test(toks[i].w)) {
         var DF = W && W.DrugFuzzy;
-        var bm = DF && DF.bestGenericMatch ? DF.bestGenericMatch(toks[i].w, fuzzyVocab, { minLen: 6, maxDist: 2 }) : null;
+        var bm = DF && DF.bestGenericMatch ? DF.bestGenericMatch(toks[i].w, fuzzyVocab, { minLen: 6, maxDist: 2, strict: true }) : null;
         if (bm && bm.distance > 0) out.push({ start: toks[i].s, end: toks[i].e, text: s.slice(toks[i].s, toks[i].e), generic: fuzzyVocab.gen[bm.generic] || bm.generic, fuzzy: true });
       }
     }

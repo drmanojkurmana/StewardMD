@@ -3,7 +3,12 @@
   "unit": "ob11",
   "level": "mbbs",
   "minutes": 5,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Miscarriage: read the cervix, the bleeding and the scan",
     "hi": "गर्भपात: ग्रीवा, रक्तस्राव और स्कैन पढ़ें"
@@ -13,22 +18,21 @@
     "hi": "[[miscarriage]] का वर्णन ग्रीवा और ऊतकों से होता है: थ्रेटेंड, इनएविटेबल, इनकम्प्लीट, कम्प्लीट या मिस्ड। प्रकार से इलाज तय होता है।"
   },
   "see": {
-    "diagram": "diagrams/ob11-miscarriage-types.svg",
-    "w": 480,
-    "h": 300,
+    "w": 768,
+    "h": 516,
     "alt": {
-      "en": "Four womb outlines. The first has a closed cervix and a sac inside. The second has an open cervix with the sac at the opening. The third has an open cervix with red tissue coming out. The fourth has a closed cervix and an empty cavity.",
-      "hi": "गर्भाशय की चार रूपरेखाएँ। पहली में ग्रीवा बंद और अंदर थैली। दूसरी में ग्रीवा खुली और थैली मुँह पर। तीसरी में ग्रीवा खुली और लाल ऊतक बाहर आ रहा है। चौथी में ग्रीवा बंद और गुहा ख़ाली।"
+      "en": "Realistic medical illustration showing a four-panel comparative view of the clinical types of miscarriage: threatened miscarriage with closed cervix and viable sac, inevitable miscarriage with open internal os and descending sac, incomplete miscarriage with open cervix and retained tissue, and complete miscarriage with closed cervix and empty cavity.",
+      "hi": "गर्भपात के नैदानिक प्रकारों के चार-पैनल तुलनात्मक दृश्य को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र: बंद गर्भाशय ग्रीवा और जीवित थैली के साथ थ्रेटेंड गर्भपात, खुली आंतरिक os और नीचे उतरती थैली के साथ इनएविटेबल गर्भपात, खुली ग्रीवा और अवशिष्ट ऊतक के साथ इनकम्प्लीट गर्भपात, और बंद ग्रीवा तथा खाली गुहा के साथ कम्प्लीट गर्भपात।"
     },
     "caption": {
-      "en": "Threatened, inevitable, incomplete and complete miscarriage.",
-      "hi": "थ्रेटेंड, इनएविटेबल, इनकम्प्लीट और कम्प्लीट गर्भपात।"
+      "en": "Clinical types of miscarriage: threatened, inevitable, incomplete, and complete.",
+      "hi": "गर्भपात के नैदानिक प्रकार: थ्रेटेंड, इनएविटेबल, इनकम्प्लीट, और कम्प्लीट।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
       {
-        "x": 0.167,
-        "y": 0.333,
+        "x": 0.13,
+        "y": 0.3,
         "label": {
           "en": "Threatened",
           "hi": "थ्रेटेंड"
@@ -39,8 +43,8 @@
         }
       },
       {
-        "x": 0.375,
-        "y": 0.583,
+        "x": 0.37,
+        "y": 0.4,
         "label": {
           "en": "Inevitable",
           "hi": "इनएविटेबल"
@@ -51,8 +55,8 @@
         }
       },
       {
-        "x": 0.604,
-        "y": 0.633,
+        "x": 0.62,
+        "y": 0.55,
         "label": {
           "en": "Incomplete",
           "hi": "इनकम्प्लीट"
@@ -63,8 +67,8 @@
         }
       },
       {
-        "x": 0.833,
-        "y": 0.333,
+        "x": 0.88,
+        "y": 0.35,
         "label": {
           "en": "Complete",
           "hi": "कम्प्लीट"
@@ -74,6 +78,10 @@
           "hi": "सभी ऊतक निकल गए, ग्रीवा बंद, रक्तस्राव थम रहा। पक्का करें कि एक्टोपिक गर्भ नहीं था।"
         }
       }
+    ],
+    "img": "learn/media/real/ob11-miscarriage-types.webp",
+    "more": [
+      "ob11-miscarriage-types"
     ]
   },
   "why": {
@@ -84,7 +92,7 @@
       },
       {
         "en": "A [[missed-miscarriage]] has no symptoms, so it is found on a scan. Infection (septic miscarriage) can follow an incomplete one.",
-        "hi": "[[missed-miscarriage]] में कोई लक्षण नहीं होता, इसलिए स्कैन में मिलता है। [[incomplete-miscarriage]] के बाद संक्रमण (सेप्टिक गर्भपात) हो सकता है।"
+        "hi": "[[missed-miscarriage]] में कोई लक्षण नहीं होता, इसलिए स्कैन में मिलता है। अपूर्ण गर्भपात के बाद संक्रमण (सेप्टिक गर्भपात) हो सकता है।"
       },
       {
         "en": "A wrong diagnosis on one scan can end a wanted pregnancy, so the criteria are strict.",

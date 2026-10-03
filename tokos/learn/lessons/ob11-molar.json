@@ -3,7 +3,12 @@
   "unit": "ob11",
   "level": "mbbs",
   "minutes": 6,
-  "review": "ai_drafted",
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "AI-generated realistic image: verify anatomy and label positions"
+    ]
+  },
   "title": {
     "en": "Molar pregnancy: suck it out, then follow the hCG",
     "hi": "मोलर गर्भावस्था: सक्शन करें, फिर hCG की निगरानी करें"
@@ -13,65 +18,68 @@
     "hi": "[[hydatidiform-mole]] का इलाज सक्शन एवैक्युएशन है, फिर [[gtn]] जल्दी पकड़ने के लिए hCG सामान्य होने तक देखा जाता है। GTN अत्यधिक इलाज योग्य है।"
   },
   "see": {
-    "diagram": "diagrams/ob11-molar.svg",
-    "w": 480,
-    "h": 300,
+    "img": "learn/media/real/ob11-molar.webp",
+    "w": 768,
+    "h": 429,
     "alt": {
-      "en": "A womb filled with a cluster of pale round vesicles like grapes, with a large yellow cyst on each side. A green falling line at the bottom left and a red wavy line at the bottom right.",
-      "hi": "अंगूर जैसे हल्के गोल पुटिकाओं के गुच्छे से भरा गर्भाशय, दोनों ओर बड़ी पीली सिस्ट। नीचे बाईं ओर हरी गिरती रेखा और नीचे दाईं ओर लाल लहरदार रेखा।"
+      "en": "Realistic medical illustration showing a coronal cross-section of a molar pregnancy with the enlarged uterus packed with translucent grape-like hydropic vesicles and bilateral multilocular ovarian theca lutein cysts.",
+      "hi": "मोलर गर्भावस्था के कोरोनल क्रॉस-सेक्शन को प्रदर्शित करने वाला यथार्थवादी चिकित्सीय चित्र जिसमें पारभासी अंगूर जैसी हाइड्रॉपिक पुटिकाओं से भरा हुआ बड़ा गर्भाशय और द्विपक्षीय मल्टीलोकुलर डिम्बग्रंथि थीका ल्यूटीन सिस्ट दिखाई दे रही हैं।"
     },
     "caption": {
-      "en": "Grape-like vesicles fill the womb and ovaries form cysts.",
+      "en": "Complete hydatidiform mole: grape-like vesicles fill the womb and ovaries form cysts.",
       "hi": "अंगूर जैसे पुटिकाएँ गर्भाशय भरती हैं और अंडाशय में सिस्ट बनती हैं।"
     },
-    "credit": "Original diagram, Tokós (MAIKNOWLEDGE LLP)",
+    "credit": "Created with MaiK (StewardMD AI)",
+    "more": [
+      "ob11-molar"
+    ],
     "hotspots": [
       {
-        "x": 0.469,
-        "y": 0.4,
+        "x": 0.5,
+        "y": 0.38,
         "label": {
-          "en": "Vesicles",
-          "hi": "पुटिकाएँ"
+          "en": "Hydropic vesicles",
+          "hi": "हाइड्रॉपिक पुटिकाएँ"
         },
         "note": {
-          "en": "The scan shows a vesicular pattern with no embryo (complete mole). In partial mole, cystic spaces in the placenta and a fetus that may be growth restricted.",
-          "hi": "स्कैन में भ्रूण रहित पुटिकाओं का पैटर्न (पूर्ण मोल)। आंशिक मोल में प्लेसेंटा में सिस्टिक स्थान और भ्रूण जो वृद्धि-अवरुद्ध हो सकता है।"
+          "en": "The scan and gross specimen show a vesicular pattern of swollen chorionic villi with no embryo in complete mole.",
+          "hi": "स्कैन और ग्रॉस स्पेसिमेन में पूर्ण मोल में बिना किसी भ्रूण के सूजी हुई कोरियोनिक विली का पुटिका पैटर्न दिखता है।"
         }
       },
       {
-        "x": 0.146,
-        "y": 0.5,
+        "x": 0.17,
+        "y": 0.45,
         "label": {
-          "en": "Theca lutein cysts",
-          "hi": "थीका ल्यूटीन सिस्ट"
+          "en": "Theca lutein cyst (right)",
+          "hi": "थीका ल्यूटीन सिस्ट (दायाँ)"
         },
         "note": {
-          "en": "Large ovarian cysts made by very high hCG. They settle after evacuation.",
-          "hi": "बहुत ऊँचे hCG से बनी बड़ी डिम्बग्रंथि सिस्ट। एवैक्युएशन के बाद ठीक हो जाती हैं।"
+          "en": "Large multilocular ovarian cyst made by very high hCG. Resolves spontaneously following uterine evacuation.",
+          "hi": "बहुत ऊँचे hCG से बनी बड़ी मल्टीलोकुलर डिम्बग्रंथि सिस्ट। गर्भाशय एवैक्युएशन के बाद अपने आप ठीक हो जाती है।"
         }
       },
       {
-        "x": 0.25,
-        "y": 0.833,
+        "x": 0.83,
+        "y": 0.45,
         "label": {
-          "en": "hCG falling",
-          "hi": "hCG गिरता हुआ"
+          "en": "Theca lutein cyst (left)",
+          "hi": "थीका ल्यूटीन सिस्ट (बायाँ)"
         },
         "note": {
-          "en": "Follow hCG every 1 to 2 weeks until normal, then monthly for 6 months for complete mole. A plateau or a rise suggests GTN.",
-          "hi": "सामान्य होने तक हर 1 से 2 सप्ताह hCG देखें, फिर पूर्ण मोल में 6 माह तक हर महीने। स्थिर रहना या बढ़ना GTN का संकेत है।"
+          "en": "Bilateral theca lutein cysts develop in up to 25 to 30 percent of cases. Conservative observation avoids unnecessary oophorectomy.",
+          "hi": "25 से 30 प्रतिशत मामलों में द्विपक्षीय थीका ल्यूटीन सिस्ट विकसित होती हैं। रूढ़िवादी अवलोकन अनावश्यक ओफ़ोरेक्टॉमी से बचाता है।"
         }
       },
       {
-        "x": 0.896,
-        "y": 0.783,
+        "x": 0.5,
+        "y": 0.08,
         "label": {
-          "en": "Warning",
-          "hi": "चेतावनी"
+          "en": "Uterine myometrium",
+          "hi": "गर्भाशय मायोमेट्रियम"
         },
         "note": {
-          "en": "Persistent bleeding, a uterus that does not shrink, or rising hCG.",
-          "hi": "लगातार रक्तस्राव, गर्भाशय का न सिकुड़ना, या बढ़ता hCG।"
+          "en": "Globular enlargement of the uterine muscular wall, frequently exceeding the expected size for gestational dates.",
+          "hi": "गर्भाशय की पेशीय दीवार का गोलाकार फैलाव, जो अक्सर गर्भकालीन अवधि की तुलना में अधिक बड़ा होता है।"
         }
       }
     ]
@@ -108,8 +116,8 @@
   ],
   "todo": [
     {
-      "en": "Suction evacuation under ultrasound guidance, with oxytocin from the start of suction. Give anti-D to Rh negative women. Do not use medical induction or hysterotomy.",
-      "hi": "अल्ट्रासाउंड मार्गदर्शन में सक्शन एवैक्युएशन करें, सक्शन की शुरुआत से ऑक्सीटोसिन दें। Rh नेगेटिव में anti-D दें। दवा से प्रेरण या हिस्टेरोटॉमी न करें।"
+      "en": "Suction evacuation under ultrasound guidance, with oxytocin from the start of suction (FIGO). RCOG prefers oxytocics only after evacuation, unless bleeding is heavy. Give anti-D to Rh negative women. Do not use medical induction or hysterotomy.",
+      "hi": "अल्ट्रासाउंड मार्गदर्शन में सक्शन एवैक्युएशन करें, सक्शन की शुरुआत से ऑक्सीटोसिन दें (FIGO)। RCOG भारी रक्तस्राव न हो तो ऑक्सीटोसिक केवल एवैक्युएशन के बाद पसंद करता है। Rh नेगेटिव में anti-D दें। दवा से प्रेरण या हिस्टेरोटॉमी न करें।"
     },
     {
       "en": "Repeat the scan after 1 week to check completeness. Follow hCG every 1 to 2 weeks until normal, then monthly for 6 months (complete mole) or one further check (partial mole).",
@@ -185,7 +193,8 @@
   ],
   "sources": [
     "Ngan HYS, et al. Diagnosis and management of gestational trophoblastic disease: 2021 update. FIGO Cancer Report 2021. Int J Gynaecol Obstet 2021;155(Suppl 1) (evacuation, follow-up, GTN rates).",
-    "FOGSI-ICOG. Good Clinical Practice Recommendations: The Management of Gestational Trophoblastic Disease, 2009 (diagnosis, evacuation, follow-up)."
+    "FOGSI-ICOG. Good Clinical Practice Recommendations: The Management of Gestational Trophoblastic Disease, 2009 (diagnosis, evacuation, follow-up).",
+    "RCOG. Management of Gestational Trophoblastic Disease, Green-top Guideline No. 38, 2020 (oxytocic infusion after evacuation unless haemorrhage)."
   ],
   "competencies": [
     "OG9.5"

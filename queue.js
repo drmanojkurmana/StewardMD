@@ -14,6 +14,10 @@
   // The OPD token called out in the waiting hall. A ticket registered before tokens existed has none.
   function tok(t) { return t && t.token ? '<span class="q-tok" title="Token">' + esc(t.token) + "</span>" : ""; }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen. Without
+  // SMD_PRIVACY_MODE (node tests, the staff console) this is plain esc(), so the markup is unchanged.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
+  function pv(kind, v) { var P = G.SMD_PRIVACY_MODE; return P ? P.screenText(kind, v) : String(v == null ? "" : v); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function initials(n) { n = String(n || "").trim(); if (!n) return "DR"; var p = n.split(/\s+/); return ((p[0][0] || "") + (p[1] ? p[1][0] : (p[0][1] || ""))).toUpperCase(); }
   function mins(msDiff) { return Math.max(0, Math.round(msDiff / 60000)); }
@@ -39,8 +43,9 @@
   function insightFor(tickets) {
     var worst = null, worstWait = 0;
     tickets.forEach(function (t) { if (isQueued(t.status)) { var w = now() - (t.registeredAt || now()); if (w > worstWait) { worstWait = w; worst = t; } } });
-    if (worst && worstWait > 30 * 60000) return { t: worst, msg: (worst.name || "A patient") + " (#" + (worst.mrnLast4 || "-") + ") has waited " + mins(worstWait) + " minutes. Consider notifying the next few patients of the delay." };
-    return null;
+    if (!worst || worstWait <= 30 * 60000) return null;
+    var tail = " (#" + (worst.mrnLast4 || "-") + ") has waited " + mins(worstWait) + " minutes. Consider notifying the next few patients of the delay.";
+    return { t: worst, msg: (worst.name || "A patient") + tail, html: phi("name", worst.name, esc(worst.name || "A patient")) + esc(tail) };
   }
 
   // ---- PURE render: state -> HTML (demo uses this verbatim) --------------------------------
@@ -61,7 +66,7 @@
       : '<span class="q-tl-eta">' + ms(isNext ? "check_circle" : "pending", false) + (isNext ? '' : '') + " ETA: " + (etaMin == null ? "-" : etaMin + "m") + "</span>";
     return '<div class="q-tl-row' + (isNext ? " next" : "") + (late ? " late" : "") + '" data-q-tid="' + esc(t.id) + '">' +
         '<div class="q-pos">' + (idx + 1) + "</div>" +
-        '<div class="q-tl-info"><div class="q-tl-nm">' + tok(t) + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
+        '<div class="q-tl-info"><div class="q-tl-nm">' + tok(t) + phi("name", t.name, esc(t.name || "Patient")) + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
         '<div class="q-tl-acts">' +
           (t.status !== "called" ? '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" : "") +   // an already-called patient can't be re-called (server rejects called->called); show Send-back instead
           (t.status === "called" ? '<button class="q-ic" title="Send back to waiting" data-q-act="sendback:' + esc(t.id) + '">' + ms("undo") + "</button>" : "") +
@@ -84,7 +89,7 @@
     if (n === false) return h + '<div class="q-empty">The no-shows could not be loaded. Do not read this as none. <button class="q-pause" style="width:auto;padding:6px 10px" data-q-act="noshows">Try again</button></div></div>';
     if (!n.length) return h + '<div class="q-empty">No one marked no-show in the last 4 hours.</div></div>';
     return h + n.map(function (t) {
-      return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + esc(t.name || "Patient") + '</b><div class="q-hint">Marked no-show ' + esc(new Date(t.noShowAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) +
+      return '<div class="q-fd-row"><div>' + tok(t) + "<b>" + phi("name", t.name, esc(t.name || "Patient")) + '</b><div class="q-hint">Marked no-show ' + esc(new Date(t.noShowAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) +
         " &middot; recall until " + esc(new Date(t.recallableUntil).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })) + "</div></div>" +
         '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="recall:' + esc(t.id) + '">Recall</button></div>';
     }).join("") + "</div>";
@@ -119,14 +124,14 @@
     var ordered = orderedTickets(state);
     var q = (state.search || "").trim().toLowerCase();
     var vis = q ? ordered.filter(function (t) { return matchTicket(t, q); }) : ordered;
-    if (!vis.length) return '<div class="q-empty">' + (q ? "No patients match “" + esc(state.search) + "”." : "Queue is empty. Import from Ward Sync or add a patient.") + "</div>";
+    if (!vis.length) return '<div class="q-empty">' + (q ? "No patients match “" + phi("other", state.search) + "”." : "Queue is empty. Import from Ward Sync or add a patient.") + "</div>";
     return vis.map(function (t) { return ticketRow(t, ordered.indexOf(t), ordered); }).join("");
   }
   function renderConsult(cur) {
     if (!cur) return '<div class="q-consult"><div class="q-empty">' + ms("play_circle") + "<div style=\"margin-top:8px\">No one in consultation. Tap a patient's <b>Start</b> or <b>Finish</b> to advance the queue.</div></div></div>";
     var vt = cur.visitType === "followup" ? "Follow-up" : "New";
     return '<div class="q-consult"><div class="q-consult-b">' +
-      '<div class="q-cn"><div><h3>' + tok(cur) + esc(cur.name || "Patient") + "</h3>" +
+      '<div class="q-cn"><div><h3>' + tok(cur) + phi("name", cur.name, esc(cur.name || "Patient")) + "</h3>" +
         '<div class="q-cn-meta"><span>' + ms("badge") + " MRN: <span class=\"mono\">" + esc(cur.mrnLast4 || "-") + "</span></span></div></div>" +
         '<div class="q-vt">' + vt + "</div></div>" +
       '<div class="q-cta">' +
@@ -162,10 +167,10 @@
       kpi("Avg. Consultation", "timer", k.avgConsult + "<u>m</u>", "") +
       '<div class="q-kpi"><div class="q-kpi-l"><span>Queue Health</span>' + ms("health_and_safety") + '</div><div class="q-health' + (k.health === "late" ? " late" : "") + '">' + ms(k.health === "late" ? "warning" : "check_circle", true) + (k.health === "late" ? "Running late" : "On Track") + "</div></div>" +
       "</section>";
-    var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
+    var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" data-phi-input type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
     var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue <button class="q-ic" title="Recall no-shows" data-q-act="noshows">' + ms("person_search") + "</button></span></div>" + noShowPanel(state) + searchBox +
       '<div id="qTlRows">' + timelineRows(state) + "</div></div>";   // the timeline already lists the full ordered queue; the old "View full queue" foot link was a dead no-op
-    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
+    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + (ins.html || esc(ins.msg)) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
     // The doctor's own session above, the hospital's whole OPD day beneath it.
     return kpis + pulseCard(state) + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
       '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
@@ -884,8 +889,8 @@
   }
   // After registration, the queue add's own answer: a refused add is never reported as queued.
   function queuedSay(r, q) {
-    var m = (q && q.ok) ? ("Added - " + r.mrn + (q.ticket && q.ticket.token ? " - token " + q.ticket.token : ""))
-      : ("Registered " + r.mrn + " but NOT queued: " + ((q && (q.message || q.error)) || "the server could not be reached."));
+    var m = (q && q.ok) ? ("Added - " + pv("id", r.mrn) + (q.ticket && q.ticket.token ? " - token " + q.ticket.token : ""))
+      : ("Registered " + pv("id", r.mrn) + " but NOT queued: " + ((q && (q.message || q.error)) || "the server could not be reached."));
     try { G.toast && G.toast(m); } catch (e) {}
   }
   function openAdd() {
@@ -1140,7 +1145,7 @@
           '<div class="q-room-stat">' +
             '<span class="q-room-stat-lbl">In room</span>' +
             '<div class="q-room-stat-val">' +
-              (unavailable ? '<span class="q-hint">&mdash;</span>' : inConsult ? tok(inConsult) + '<span class="q-room-cur-name">' + esc(inConsult.name || "Patient") + '</span>' : '<span class="q-hint">None</span>') +
+              (unavailable ? '<span class="q-hint">&mdash;</span>' : inConsult ? tok(inConsult) + '<span class="q-room-cur-name">' + phi("name", inConsult.name, esc(inConsult.name || "Patient")) + '</span>' : '<span class="q-hint">None</span>') +
             '</div>' +
           '</div>' +
           '<div class="q-room-stat waiting">' +
@@ -1154,7 +1159,7 @@
     }).join("") : '<div class="q-empty">No rooms set up yet. The clinic owner adds rooms in the console.</div>';
 
     var poolRows = pool.length ? '<div class="q-fd-pool-list">' + pool.map(function (t) {
-      return '<div class="q-fd-row"><div>' + tok(t) + '<b class="q-fd-pname">' + esc(t.name || "Patient") + '</b>' +
+      return '<div class="q-fd-row"><div>' + tok(t) + '<b class="q-fd-pname">' + phi("name", t.name, esc(t.name || "Patient")) + '</b>' +
         '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + (t.department ? " &middot; " + esc(t.department) : "") + '</div></div>' +
         (canAssign ? '<button class="q-fd-route-btn" data-q-act="fdroute:' + esc(t.id) + '">' + ms("arrow_forward") + '<span>Route</span></button>' : '') +
         '</div>';

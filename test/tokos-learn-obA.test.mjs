@@ -14,7 +14,7 @@ const MCQ = ["ob-antenatal", "ob-labour", "ob-medical", "ob-haemorrhage", "ob-hy
 const SIMS = ["labour", "pph", "eclampsia", "shoulder", "breech", "twins", "collapse"];
 const TOOLS = ["edd", "bishop", "mgso4", "antid", "dipsi", "apgar", "efw", "weightgain", "vbac", "ganzoni", "rmi", "meows", "mec"];
 const CLINICS = ["ctg", "fetal-planes", "hc-biometry"];
-const LICENCES = /^(CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY( \d\.\d)?|Public domain|Original, MAIKNOWLEDGE LLP)$/;
+const LICENCES = /^(CC0|CC BY \d\.\d|CC BY-SA \d\.\d|ODC-BY( \d\.\d)?|Public domain|Original, MAIKNOWLEDGE LLP|Original, StewardMD)$/;
 const EM_DASH = String.fromCharCode(8212);
 
 const rj = (p) => JSON.parse(readFileSync(p, "utf8"));

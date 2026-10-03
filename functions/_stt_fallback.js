@@ -2,7 +2,8 @@
  *
  * Dictation normally runs on the phone (Whisper / native STT) and costs us nothing. Only when the phone
  * cannot transcribe does voice.js send the audio to /api/ai/transcribe, and that path is billed per
- * second of audio (AI_COST_PER_AUDIO_SEC_INR, Rs 0.02/s default, so a 5-minute consult costs about Rs 6).
+ * second of audio (AI_COST_PER_AUDIO_SEC_INR, Rs 0.004/s default = Vertex's real audio price, so a
+ * 5-minute consult costs about Rs 1.2; it was Rs 0.02/s, 5x the real cost, until 2026-10-02).
  *
  * Owner, 2026-09-26: lock that fallback behind its own monthly credit, cut per use, and NEVER show it
  * in rupees ("the customer feels cheap"): 1 credit = 10 paise of our cost, so Rs 10 = 100 credits.
@@ -14,8 +15,8 @@ import { cfgFlag } from "./_billingcfg.js";
 
 export const DICT_CREDITS = { none: 0, free: 100, pro: 500, clinician: 1000 };
 export const PAISE_PER_CREDIT = 10;
-// Rs 0.02/s, the same default _ai_usage.js estCostInr uses for audio.
-const PAISE_PER_SEC_DEFAULT = 2;
+// Rs 0.004/s, the same default _ai_usage.js estCostInr uses for audio (Vertex audio price, 2026-10-02).
+const PAISE_PER_SEC_DEFAULT = 0.4;
 // The highest bitrate a WebView MediaRecorder uses by default is about 128 kbps = 16,000 bytes/s, so
 // bytes / 16000 is a FLOOR on the audio's length: a client cannot shrink its charge by under-reporting.
 export const MAX_BYTES_PER_SEC = 16000;

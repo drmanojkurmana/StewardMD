@@ -26,6 +26,8 @@
   var _seq = 0;
   function uid() { _seq++; try { return "pc" + Date.now().toString(36) + _seq.toString(36); } catch (e) { return "pc" + _seq; } }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  // Privacy mode (privacy-mode.js): identifiers wrapped so they can be masked on screen; plain esc() without it.
+  function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
 
   /* ------------------------------ store ------------------------------ */
   function listPatients() { var a = readJSON(KEY_PTS, []); return Array.isArray(a) ? a : []; }
@@ -258,9 +260,9 @@
       '<div class="pc-body">' +
         '<button class="pc-add" data-pc="new">+ New patient</button>' +
         (pts.length ? '<div class="pc-list">' + pts.map(function (p) {
-          var sub = [p.age && (p.age + "y"), p.sex, p.phone].filter(Boolean).join(" · ");
-          return '<button class="pc-row" data-pc="open:' + esc(p.id) + '"><div class="pc-row-b"><span class="pc-row-n">' + esc(p.name) + '</span>' +
-            (sub ? '<span class="pc-row-s">' + esc(sub) + '</span>' : "") + '</div><span class="pc-row-c">&#8250;</span></button>';
+          var sub = [p.age && esc(p.age + "y"), esc(p.sex), p.phone && phi("phone", p.phone)].filter(Boolean).join(" · ");
+          return '<button class="pc-row" data-pc="open:' + esc(p.id) + '"><div class="pc-row-b"><span class="pc-row-n">' + phi("name", p.name) + '</span>' +
+            (sub ? '<span class="pc-row-s">' + sub + '</span>' : "") + '</div><span class="pc-row-c">&#8250;</span></button>';
         }).join("") + '</div>'
           : '<div class="pc-empty">No patients yet. Tap <b>+ New patient</b> to start a consult. Everything stays on this phone.</div>') +
         '<div class="pc-foot">On-device EMR · back up to Google Drive from the button above</div>' +
@@ -272,10 +274,10 @@
     el.innerHTML =
       '<div class="pc-top"><button class="pc-ic" data-pc="list" aria-label="Back">&#8249;</button><div class="pc-ttl">New patient</div><span class="pc-ic"></span></div>' +
       '<div class="pc-body"><form id="pcForm" class="pc-form">' +
-        '<label class="pc-f"><span>Name</span><input name="name" autocomplete="off" required></label>' +
+        '<label class="pc-f"><span>Name</span><input data-phi-input name="name" autocomplete="off" required></label>' +
         '<div class="pc-frow"><label class="pc-f"><span>Age</span><input name="age" inputmode="numeric"></label>' +
           '<label class="pc-f"><span>Sex</span><select name="sex"><option value="">-</option><option>Male</option><option>Female</option><option>Other</option></select></label></div>' +
-        '<label class="pc-f"><span>Phone</span><input name="phone" inputmode="tel" autocomplete="off"></label>' +
+        '<label class="pc-f"><span>Phone</span><input data-phi-input name="phone" inputmode="tel" autocomplete="off"></label>' +
         '<button class="pc-add" type="submit">Create + start consult</button>' +
       '</form></div>';
     var f = document.getElementById("pcForm");
