@@ -159,10 +159,11 @@ function mapResource(r, cx) {
       out.conditions.push(condition({ id: r.id, code: cc(r.code, "condition"), clinicalStatus: firstCoding([r.clinicalStatus]) || "unknown" }));
       prov(r); break;
     case "MedicationRequest":
-      out.medications.push(medicationStatement({ id: r.id, medication: medOf(r, resolve), origin: "order", status: r.status || "unknown", dosage: dosageOf(r) }));
+      out.medications.push(medicationStatement({ id: r.id, medication: medOf(r, resolve), origin: "order", status: r.status || "unknown", dosage: dosageOf(r), effectivePeriod: r.authoredOn ? { start: r.authoredOn } : null }));
       prov(r); break;
     case "MedicationStatement":
-      out.medications.push(medicationStatement({ id: r.id, medication: medOf(r, resolve), origin: "statement", status: r.status || "unknown", dosage: dosageOf(r) }));
+      out.medications.push(medicationStatement({ id: r.id, medication: medOf(r, resolve), origin: "statement", status: r.status || "unknown", dosage: dosageOf(r),
+        effectivePeriod: r.effectivePeriod && (r.effectivePeriod.start || r.effectivePeriod.end) ? { start: r.effectivePeriod.start || null, end: r.effectivePeriod.end || null } : (r.effectiveDateTime ? { start: r.effectiveDateTime } : null) }));
       prov(r); break;
     case "AllergyIntolerance":
       out.allergies.push(allergyIntolerance({ id: r.id, code: cc(r.code, "allergen"), criticality: r.criticality || "unable-to-assess" }));
@@ -185,7 +186,7 @@ function mapResource(r, cx) {
     case "DocumentReference": {
       // Metadata only — the attachment bytes (base64/url) are NEVER copied into SCCM.
       const att = (r.content && r.content[0] && r.content[0].attachment) || {};
-      out.documents.push(documentReference({ id: r.id, type: cc(r.type, "document"), status: r.status || "unknown",
+      out.documents.push(documentReference({ id: r.id, type: cc(r.type, "document"), status: r.status || "unknown", date: r.date || null,
         text: att.title || r.description || att.contentType || null }));
       prov(r);
       if (att.data || (att.url && /^data:/.test(att.url))) cx.warn("DocumentReference/" + r.id + " binary content (" + (att.contentType || "attachment") + ") not carried into SCCM; metadata only");

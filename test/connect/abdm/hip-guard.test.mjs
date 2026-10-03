@@ -315,10 +315,10 @@ test("OPS-02/F2 round 2: nothing in range -> anyKept false, the whole careContex
   assert.equal(anyKept, false);
 });
 
-test("OPS-02/F2 round 2: a record with NO determinable date at all -> hadDated false, refused (fail-closed, not 'unaffected')", async () => {
-  const record = { conditions: [{ id: "c1" }], documents: [{ id: "doc1", date: "2026-09-01T00:00:00Z" }] };
+test("OPS-02/F2 round 2: a record with NO dated resource kind at all -> hadDated false, refused (fail-closed, not 'unaffected')", async () => {
+  const record = { conditions: [{ id: "c1" }], allergies: [{ id: "a1" }] };
   const { hadDated } = filterRecordByDateRange(record, FROM, TO);
-  assert.equal(hadDated, false, "documents/conditions carry no date this filter trusts; nothing left to determine a date from");
+  assert.equal(hadDated, false, "conditions/allergies carry no date this filter checks; nothing left to determine a date from");
 });
 
 test("OPS-02/F2 round 2: dateRange bounds are INCLUSIVE - exactly `from` and exactly `to` are kept", async () => {
@@ -328,14 +328,50 @@ test("OPS-02/F2 round 2: dateRange bounds are INCLUSIVE - exactly `from` and exa
   assert.deepEqual(filtered.encounters.map((e) => e.id), ["e-from", "e-to"]);
 });
 
-test("OPS-02/F2 round 2: documents and medications are never individually date-filtered (no reliable clinical date field), and ride along", async () => {
-  const record = {
-    encounters: [enc("e-in", "2024-01-10T00:00:00Z")],
-    documents: [{ id: "narrative", date: "2026-09-01T00:00:00Z" }],   // generatedAt (export time), not clinical
-    medications: [{ id: "m1" }],                                      // neither source dates this field
-  };
-  const { record: filtered, anyKept } = filterRecordByDateRange(record, FROM, TO);
+// ── documents and medications are dated too (clinical date set by the record builders) ──
+const doc = (id, date, extra = {}) => ({ id, date, ...extra });
+const med = (id, authoredOn, effectivePeriod) => ({ id, ...(authoredOn ? { authoredOn } : {}), ...(effectivePeriod ? { effectivePeriod } : {}) });
+
+test("documents: in-range kept, out-of-range dropped, undated dropped (fail closed)", async () => {
+  const record = { documents: [doc("d-in", "2024-01-10T00:00:00Z"), doc("d-before", "2023-12-31T23:59:59Z"), doc("d-after", "2024-02-01T00:00:00Z"), doc("d-undated", null), doc("d-junk", "not a date")] };
+  const { record: filtered, hadDated, anyKept } = filterRecordByDateRange(record, FROM, TO);
+  assert.equal(hadDated, true);
   assert.equal(anyKept, true);
-  assert.deepEqual(filtered.documents.map((d) => d.id), ["narrative"]);
-  assert.deepEqual(filtered.medications.map((m) => m.id), ["m1"]);
+  assert.deepEqual(filtered.documents.map((d) => d.id), ["d-in"]);
+});
+
+test("medications: authoredOn or effectivePeriod places them; out-of-range and undated are dropped", async () => {
+  const record = { medications: [
+    med("m-auth-in", "2024-01-05T00:00:00Z"), med("m-auth-out", "2024-03-01T00:00:00Z"),
+    med("m-per-in", null, { start: "2024-01-20T00:00:00Z" }), med("m-per-end-only", null, { end: "2024-01-21T00:00:00Z" }), med("m-per-out", null, { start: "2023-06-01T00:00:00Z" }),
+    med("m-undated"), med("m-empty-period", null, { start: null, end: null }),
+  ] };
+  const { record: filtered } = filterRecordByDateRange(record, FROM, TO);
+  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-auth-in", "m-per-in", "m-per-end-only"]);
+});
+
+test("document and medication boundaries are INCLUSIVE at exactly from and to", async () => {
+  const record = { documents: [doc("d-from", "2024-01-01T00:00:00Z"), doc("d-to", "2024-01-31T23:59:59Z"), doc("d-after", "2024-01-31T23:59:59.001Z")],
+    medications: [med("m-from", "2024-01-01T00:00:00Z"), med("m-to", "2024-01-31T23:59:59Z"), med("m-before", "2023-12-31T23:59:59.999Z")] };
+  const { record: filtered } = filterRecordByDateRange(record, FROM, TO);
+  assert.deepEqual(filtered.documents.map((d) => d.id), ["d-from", "d-to"]);
+  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-from", "m-to"]);
+});
+
+test("a multi-item narrative (coversDates) is dropped when ANY line it states is outside the window", async () => {
+  const record = { documents: [
+    doc("n-all-in", "2024-01-20T00:00:00Z", { coversDates: ["2024-01-10T00:00:00Z", "2024-01-20T00:00:00Z"] }),
+    doc("n-one-out", "2024-01-20T00:00:00Z", { coversDates: ["2023-11-10T00:00:00Z", "2024-01-20T00:00:00Z"] }),
+    doc("n-one-undated", "2024-01-20T00:00:00Z", { coversDates: [null, "2024-01-20T00:00:00Z"] }),
+    doc("n-empty-covers", "2024-01-20T00:00:00Z", { coversDates: [] }),
+  ] };
+  const { record: filtered } = filterRecordByDateRange(record, FROM, TO);
+  assert.deepEqual(filtered.documents.map((d) => d.id), ["n-all-in", "n-empty-covers"]);
+});
+
+test("a care context whose only dated items are an undated or out-of-range document/medication is not servable (anyKept false)", async () => {
+  const { anyKept, hadDated, record } = filterRecordByDateRange({ documents: [doc("d", null)], medications: [med("m", "2019-01-01T00:00:00Z")] }, FROM, TO);
+  assert.equal(hadDated, true);
+  assert.equal(anyKept, false);
+  assert.deepEqual([record.documents, record.medications], [[], []]);
 });

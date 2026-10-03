@@ -55,7 +55,7 @@ function episode(ref, patientAbhaHash, dx, patientId = "fc-pat-A") {
 
 // Seed the authoritative D1 state the guard reloads: the ONE consent_req row (consent_id + status + persisted
 // scope + patient_abha_hash) PLUS the connect_abdm_carecontext registration rows served refs bind against.
-function seedServeDb(patientAbhaHash, { consentId = "consent-1", careContexts = ["cc-A-1", "cc-A-2"], hiTypes = ["DischargeSummary"], status = "GRANTED", ccRows } = {}) {
+function seedServeDb(patientAbhaHash, { consentId = "consent-1", careContexts = ["cc-A-1", "cc-A-2"], hiTypes = ["DischargeSummary"], status = "GRANTED", ccRows, dateRange = { from: "2026-01-01T00:00:00Z", to: "2026-12-31T23:59:59Z" } } = {}) {
   const carecontext = ccRows || careContexts.map((ref) => ({
     id: ref, tenant_id: TENANT, patient_abha_hash: patientAbhaHash, source: "followcare",
     ref, hi_type: "DischargeSummary", display: "cc " + ref, linked_at: "2026-01-01T00:00:00Z",
@@ -65,7 +65,7 @@ function seedServeDb(patientAbhaHash, { consentId = "consent-1", careContexts = 
       request_id: consentId, consent_id: consentId, tenant_id: TENANT, actor: null,
       patient_abha_hash: patientAbhaHash, status, hi_types: JSON.stringify(hiTypes),
       care_contexts: JSON.stringify(careContexts), purpose: JSON.stringify({ code: "CAREMGT", text: "Care Management" }),
-      date_range: JSON.stringify({ from: "2026-01-01T00:00:00Z", to: "2026-12-31T23:59:59Z" }),
+      date_range: JSON.stringify(dateRange),
       created_at: "2026-01-01T00:00:00Z", updated_at: "2026-01-01T00:00:00Z", expires_at: "2026-12-31T23:59:59Z",
     }],
     connect_abdm_carecontext: carecontext,
@@ -276,4 +276,49 @@ test("empty care-contexts -> EMPTY no-op (nothing loaded, guarded, sealed, or pu
   assert.equal(out.outcome, "EMPTY");
   assert.equal(out.pages, 0);
   assert.equal(calls.length, 0);
+});
+
+// ── documents and medications are date-checked by the consent window, built by the REAL FollowCare builder ──
+test("date window: the builder dates the summary and discharge medications; an out-of-window episode is refused for THAT care context only", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const hiu = await makeHiu();
+  const { fetch, calls } = makeCapturingFetch();
+  const audit = makeAudit();
+  const old = { ...episode("cc-A-2", HASH_A, DX2), dischargeDate: "2025-03-02" };        // before the window below
+  const reader = makeReader([episode("cc-A-1", HASH_A, DX1), old]);                       // cc-A-1 discharged 2026-07-20
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1", "cc-A-2"], dateRange: { from: "2026-07-01T00:00:00Z", to: "2026-07-31T23:59:59Z" } });
+  const out = await serveTransfer(env, depsWith(db, fetch, audit.fn, reader), { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-d1" });
+  assert.equal(out.pages, 1, "only the in-window care context is sealed");
+  assert.equal(out.outcome, "PARTIAL");
+  assert.deepEqual(out.warnings.map((w) => [w.careContextRef, w.reason]), [["cc-A-2", "daterange-out-of-scope"]]);
+  assert.equal(calls.length, 1);
+});
+
+test("date window: FollowCare record carries a clinical date on its document and medications, never the export instant", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const reader = makeReader([episode("cc-A-1", HASH_A, DX1)]);
+  const { record } = await followcareSource.loadRecord(env, depsWith(null, null, null, reader), { tenantId: TENANT, careContextRef: "cc-A-1" });
+  assert.equal(record.documents[0].date, "2026-07-20", "summary dated by the discharge date (no signing time held)");
+  assert.deepEqual(record.medications.map((m) => m.authoredOn), ["2026-07-20"]);
+  assert.notEqual(record.documents[0].date, record.meta.generatedAt);
+  // an explicit summary.signedAt and per-medication authoredOn win over the discharge date
+  const ep = { ...episode("cc-A-3", HASH_A, DX1), summary: { title: "t", text: "x", signedAt: "2026-07-21T05:00:00Z" }, medications: [{ text: "Drug", authoredOn: "2026-07-19T10:00:00Z" }] };
+  const r2 = (await followcareSource.loadRecord(env, depsWith(null, null, null, makeReader([ep])), { tenantId: TENANT, careContextRef: "cc-A-3" })).record;
+  assert.equal(r2.documents[0].date, "2026-07-21T05:00:00Z");
+  assert.equal(r2.medications[0].authoredOn, "2026-07-19T10:00:00Z");
+});
+
+test("date window: an episode with no dates anywhere is refused, not served on the export time", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const hiu = await makeHiu();
+  const { fetch, calls } = makeCapturingFetch();
+  const undated = { ...episode("cc-A-1", HASH_A, DX1), dischargeDate: undefined };
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1"] });
+  const out = await serveTransfer(env, depsWith(db, fetch, makeAudit().fn, makeReader([undated])), { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-d2" });
+  assert.equal(out.pages, 0);
+  assert.equal(calls.length, 0);
+  assert.equal(out.warnings[0].careContextRef, "cc-A-1");
 });

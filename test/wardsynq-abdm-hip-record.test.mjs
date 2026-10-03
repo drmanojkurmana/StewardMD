@@ -24,6 +24,7 @@ import { CONNECTOR_TYPE } from "../functions/_wardsynq/connectors.js";
 import { dischargeSummaryIdFor } from "../functions/_wardsynq/migrate-discharge.js";
 import { openInvoice } from "../wardsynq/wardsynq-invoice.js";
 import { serializeNdhm, validateNdhmDoc, facilitySystemFor } from "../functions/_connect/connectors/abdm/serialize.js";
+import { filterRecordByDateRange } from "../functions/_connect/abdm/hip.js";
 import { assertDataBlind } from "../functions/_connect/abdm/carecontext.js";
 import { putToken, getCachedToken } from "../functions/_connect/abdm/linktoken.js";
 import { NDHM_BILLING, NDHM_PRICE } from "../functions/_connect/abdm/hip-sources/clinic-billing.js";
@@ -501,4 +502,98 @@ test("onGenerateToken caches the token under the tenant's pseudonym of the addre
   assert.equal(await getCachedToken({ kv: kv2, now: () => NOW }, { hipId: "IN0000000000", abhaHash: hash }), null);
   assert.equal(seen.length, 1);
   assert.deepEqual(audits.map((a) => a.action), ["abdm.linktoken.uncorrelated"]);
+});
+
+/* ---- documents and medications carry a CLINICAL date, so the consent date window can place them -------- */
+
+const MS = (iso) => Date.parse(iso);
+const proj = (r, ref) => projectStayRecord(stayOf(r), parseWardsynqRef(ref), { tenantId: TENANT, now: () => NOW });
+
+/** A stay whose summary was signed, order authored and invoice opened on known dates (9 and 10 Sep 2026). */
+function datedStay() {
+  const r = stayRecords();
+  r.summary = { ...r.summary, signedAt: "2026-09-10T09:30:00.000Z" };
+  r.orders = [{ ...r.orders[0], authoredAt: "2026-09-02T07:00:00.000Z" }];
+  return r;
+}
+
+test("DS: the document is dated by the summary's signed time and the medication by its authored time, never the export instant", async () => {
+  const rec = await proj(datedStay(), `IPD:${ENC}:DS`);
+  assert.equal(rec.documents[0].date, "2026-09-10T09:30:00.000Z");
+  assert.deepEqual(rec.documents[0].coversDates, ["2026-09-10T09:30:00.000Z"]);
+  assert.equal(rec.medications[0].authoredOn, "2026-09-02T07:00:00.000Z");
+  assert.notEqual(rec.documents[0].date, NOW, "NOW is the export instant");
+  // a window that covers the stay keeps everything; the documents and medications are present in the filtered record
+  const kept = filterRecordByDateRange(rec, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z"));
+  assert.deepEqual([kept.record.documents.length, kept.record.medications.length, kept.anyKept], [1, 1, true]);
+});
+
+test("DS: a window that ends before the summary was signed drops the document, though the order was in it", async () => {
+  const rec = await proj(datedStay(), `IPD:${ENC}:DS`);
+  const { record } = filterRecordByDateRange(rec, MS("2026-09-01T00:00:00Z"), MS("2026-09-05T00:00:00Z"));
+  assert.deepEqual(record.documents, []);
+  assert.deepEqual(record.medications.map((m) => m.id), ["mo-1"]);
+  assert.deepEqual(record.encounters, [], "the stay ended 10 Sep, so its encounter is out too");
+});
+
+test("last resorts are the record's own meta: order effectiveAt/recordedAt, summary recordedAt; with none the item is undated and dropped", async () => {
+  const r = stayRecords();
+  r.orders = [{ ...r.orders[0], id: "mo-eff", meta: { effectiveAt: "2026-09-03T00:00:00.000Z", recordedAt: "2026-09-04T00:00:00.000Z" } },
+              { ...r.orders[0], id: "mo-rec", meta: { recordedAt: "2026-09-04T00:00:00.000Z" } },
+              { ...r.orders[0], id: "mo-none" }];
+  r.summary = { ...r.summary, meta: { recordedAt: "2026-09-10T11:00:00.000Z" } };
+  const rec = await proj(r, `IPD:${ENC}:DS`);
+  assert.deepEqual(rec.medications.map((m) => [m.id, m.authoredOn]), [["mo-eff", "2026-09-03T00:00:00.000Z"], ["mo-rec", "2026-09-04T00:00:00.000Z"], ["mo-none", null]]);
+  assert.equal(rec.documents[0].date, "2026-09-10T11:00:00.000Z");
+  const { record } = filterRecordByDateRange(rec, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z"));
+  assert.deepEqual(record.medications.map((m) => m.id), ["mo-eff", "mo-rec"], "an undated order is dropped, not served on the export time");
+  // an unsigned-time, unrecorded summary is undated and dropped too
+  const bare = await proj({ ...stayRecords() }, `IPD:${ENC}:DS`);
+  assert.equal(bare.documents[0].date, null);
+  assert.deepEqual(filterRecordByDateRange(bare, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record.documents, []);
+});
+
+test("RX: the prescription narrative lists every order, so it is dropped when any listed order is outside the window; in-range orders stay", async () => {
+  const r = stayRecords();
+  r.orders = [{ ...r.orders[0], id: "mo-a", authoredAt: "2026-09-02T00:00:00.000Z" }, { ...r.orders[0], id: "mo-b", drug: "Amoxicillin", authoredAt: "2026-09-08T00:00:00.000Z" }];
+  const rec = await proj(r, `IPD:${ENC}:RX`);
+  assert.equal(rec.documents[0].date, "2026-09-08T00:00:00.000Z", "dated by the latest order it lists");
+  const whole = filterRecordByDateRange(rec, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record;
+  assert.deepEqual([whole.documents.length, whole.medications.length], [1, 2]);
+  const part = filterRecordByDateRange(rec, MS("2026-09-05T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record;
+  assert.deepEqual(part.medications.map((m) => m.id), ["mo-b"]);
+  assert.deepEqual(part.documents, [], "the narrative also names mo-a, which is outside, so it is not served");
+  assert.ok(!JSON.stringify(part.medications).includes("Paracetamol"));
+});
+
+test("DR, IMM, INV: each narrative is dated by its own clinical date (report time, vaccination day, invoice opening), not the export instant", async () => {
+  const r = datedStay();
+  const drRefs = (await careContextsForStay(stayOf(r))).filter((c) => c.kind === "DR").map((c) => c.ref);   // cbc, then crp (report order)
+  for (const [ref, when] of [[drRefs[0], "2026-09-02T09:00:00.000Z"], [drRefs[1], "2026-09-03T09:00:00.000Z"]]) {
+    assert.equal((await proj(r, ref)).documents[0].date, when);
+  }
+  assert.equal((await proj(r, `IPD:${ENC}:IMM`)).documents[0].date, "2026-09-02T00:00:00.000Z");
+  const invRef = (await careContextsForStay(stayOf(r))).find((c) => c.kind === "INV").ref;
+  assert.equal((await proj(r, invRef)).documents[0].date, "2026-09-10T09:00:00.000Z");
+  // every kind, end to end through the real builder AND the real serializer, still validates with the filter applied
+  for (const c of await careContextsForStay(stayOf(r))) {
+    const rec = await proj(r, c.ref);
+    const { record, anyKept } = filterRecordByDateRange(rec, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z"));
+    assert.equal(anyKept, true, c.ref);
+    assert.ok(record.documents.length === 1, c.ref + " keeps its dated narrative");
+    const v = validateNdhmDoc(serializeNdhm({ facility: FACILITY, envName: "sandbox", now: () => new Date(NOW) }, record));
+    assert.deepEqual(v.errors, [], c.ref);
+  }
+});
+
+test("an ED visit: the consultation narrative is dated by its notes, and an out-of-window note drops it", async () => {
+  const r = stayRecords();
+  r.encounter = { ...r.encounter, class: "ED", id: "enc-ed-1" };
+  const s = { ...stayOf(r), notes: [rec("ClinicalNote", { id: "n1", encounterId: "enc-ed-1", noteType: "ed-note", sections: { hpi: "Chest pain" }, signedAt: "2026-09-02T08:00:00.000Z" }),
+                                    rec("ClinicalNote", { id: "n2", encounterId: "enc-ed-1", noteType: "ed-note", sections: { hpi: "Better" }, meta: { recordedAt: "2026-09-09T08:00:00.000Z" } })],
+              orders: [], conditions: [] };
+  const record = await projectStayRecord(s, parseWardsynqRef("OPD:enc-ed-1:OPC"), { tenantId: TENANT, now: () => NOW });
+  assert.equal(record.documents[0].date, "2026-09-09T08:00:00.000Z");
+  assert.equal(filterRecordByDateRange(record, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record.documents.length, 1);
+  assert.deepEqual(filterRecordByDateRange(record, MS("2026-09-05T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record.documents, []);
 });
