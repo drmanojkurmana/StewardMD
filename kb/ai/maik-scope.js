@@ -203,7 +203,14 @@
     "normal range", "normal value", "reference range", "normal (bp|hr|pulse|temperature|value|range)"
   ];
 
-  var MEDICAL_GROUPS = [MORPH, SYMPTOM, CONDITION, INVESTIGATION, SYSTEM, CLINICAL_ACTION, DRUG_COMMON, DRUG_CLASS, ABBREV_COMMON, COMMON_DISEASE, VITALS_FLUIDS];
+  // StewardMD TOOLS. Asking MaiK to open, show or search one of the app's clinical tools is a clinical
+  // request, in any language ("antibiogram kholo", "search icd teruvu"). With no signal here these
+  // went to the model as "uncertain" and it refused them as non-medical (Pixel 9, 2026-10-04).
+  var APP_TOOL = [
+    "antibiogram", "resistance pattern", "\\bicd\\b", "\\bcalculators?\\b", "drug index", "formulary"
+  ];
+
+  var MEDICAL_GROUPS = [MORPH, SYMPTOM, CONDITION, INVESTIGATION, SYSTEM, CLINICAL_ACTION, DRUG_COMMON, DRUG_CLASS, ABBREV_COMMON, COMMON_DISEASE, VITALS_FLUIDS, APP_TOOL];
   var MEDICAL = rx([].concat.apply([], MEDICAL_GROUPS));
 
   // ── Explicit NON-medical categories (only used to LABEL the block; the allow-list already rejects

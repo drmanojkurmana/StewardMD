@@ -81,6 +81,7 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
 
 ## Gotchas
+- **A tool request is in scope** (2026-10-04): "show me the antibiogram" / "search icd teruvu" reached the model as firewall-"uncertain" and the scope rule refused them as non-medical. Tool words live in `APP_TOOL` (`kb/ai/maik-scope.js`) and the tool clause in `MEDICAL_ONLY` + `maik-local.js`; `KNOWLEDGE_SYS` has a hard length cap (`test/ai-prompt-coherence.test.mjs`), so trim when you add.
 - **A named score is answered by its calculator, for free** (2026-09-02). `maikRoute()` has a
   `calculator` kind: `MEDCALC.find(q)` resolves the question to one calculator by title (conservative:
   every question word must be in the title, a real word must match, ambiguous names return null), and
