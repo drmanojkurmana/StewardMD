@@ -8608,6 +8608,7 @@
   function findNorm(s) {
     return String(s || "").toLowerCase()
       .replace(/₀/g, "0").replace(/₁/g, "1").replace(/₂/g, "2").replace(/₃/g, "3")
+      .replace(/⁰/g, "0").replace(/¹/g, "1").replace(/²/g, "2").replace(/³/g, "3")
       .replace(/[^a-z0-9\s]/g, " ")
       .replace(/([a-z])(\d)/g, "$1 $2").replace(/(\d)([a-z])/g, "$1 $2")
       .replace(/\s+/g, " ").trim();
@@ -8620,10 +8621,20 @@
     n.split(" ").forEach(function (t) { if (t && t.length >= 2 && !seen[t]) { seen[t] = 1; out.push(t); } });
     return out;
   }
+  // Lone letters/digits of a phrase, after the same alias expansion as the question ("chadsvasc" ->
+  // "cha 2 ds 2 vasc"); a possessive 's and a version's ".0" ("MELD 3.0") are not characters.
+  function letters(s) {
+    var raw = String(s || "");
+    if (typeof raw.normalize === "function") raw = raw.normalize("NFD").replace(/[\u0300-\u036f]/g, "");   // "Fagerström"
+    var n = findNorm(raw.replace(/['’]s\b/gi, "").replace(/(\d)\.0\b/g, "$1"));
+    Object.keys(FIND_ALIAS).forEach(function (k) { n = n.replace(new RegExp("\\b" + k.replace(/ /g, "\\s") + "\\b", "g"), FIND_ALIAS[k]); });
+    var ROMAN = { ii: "2", iii: "3", iv: "4" };
+    // "3 0" is "3.0" after punctuation was stripped (MaiK normalises before calling find).
+    return n.split(" ").map(function (t) { return ROMAN[t] || t; }).filter(function (t, i, a) { return !(t === "0" && i && /^\d+$/.test(a[i - 1])); }).filter(function (t) { return /^[a-z0-9]$/.test(t); }); }
   function calcFind(query) {
     var qt = findTokens(query);
     if (!qt.length || !qt.some(function (t) { return /[a-z]{3,}/.test(t); })) return null;
-    var best = null, second = 0;
+    var best = null, second = 0, fullHits = 0;
     for (var i = 0; i < CALCS.length; i++) {
       var c = CALCS[i];
       var title = String(c.title || ""), extra = FIND_EXTRA[c.id] || [];
@@ -8636,17 +8647,31 @@
       var inTitle = qt.filter(function (t) { return tt.indexOf(t) > -1; });
       if (inTitle.length !== qt.length) continue;                     // every question word is in the title
       if (!inTitle.some(function (t) { return /[a-z]{3,}/.test(t); })) continue;
-      var nameHit = 0, nt = names[0];
-      names.forEach(function (a) { var h = a.filter(function (t) { return qt.indexOf(t) > -1; }).length / a.length; if (h > nameHit) { nameHit = h; nt = a; } });
+      // Single letters and digits are dropped from the tokens, so "R-ISS" reads as "iss" and "PHQ-2"
+      // as "phq". A lone character of a name the question lacks ("R-ISS" for "iss", "PHQ-9" for
+      // "phq-2"), or one of the question the title lacks ("r-iss" for ISS), costs that name's match.
+      var ql = letters(query), tl = letters(title + " " + extra.join(" "));
+      var rawNames = [name].concat(extra).filter(function (s) { return findTokens(s).length || findTokens(s, true).length; });
+      var nameHit = 0, nt = names[0], miss = false, bestKey = -1;
+      names.forEach(function (a, ai) {
+        var h = a.filter(function (t) { return qt.indexOf(t) > -1; }).length / a.length, nl = letters(rawNames[ai]);
+        var m = nl.some(function (l) { return ql.indexOf(l) < 0; }) || ql.some(function (l) { return tl.indexOf(l) < 0; });
+        var key = h - (m ? 0.01 : 0);
+        if (key > bestKey) { bestKey = key; nameHit = h; nt = a; miss = m; }
+      });
       if (nameHit < 0.5) continue;                                      // the NAME is what was named
-      var score = nameHit * 10 + inTitle.length - (tt.length - inTitle.length) * 0.1;   // fewer unexplained title words = closer
-      if (!best || score > best.score) { second = best ? best.score : 0; best = { c: c, score: score, nameHit: nameHit, exact: nameHit === 1 && qt.length === nt.length }; }
+      var score = nameHit * 10 - (miss ? 1 : 0) + inTitle.length - (tt.length - inTitle.length) * 0.1;   // fewer unexplained title words = closer
+      var full = nameHit === 1 && qt.length === nt.length && !miss;
+      if (full) fullHits++;
+      if (!best || score > best.score) { second = best ? best.score : 0; best = { c: c, score: score, nameHit: nameHit, exact: full }; }
       else if (score > second) second = score;
     }
     if (!best) return null;
     if (best.score - second < 0.05 && second > 0) return null;          // two calculators fit equally: not sure
     var c = best.c;
-    return { id: c.id, title: c.title, cat: c.cat, desc: c.desc, exact: best.exact,
+    // Exact means ONE calculator carries this name: "timi" fits UA/NSTEMI and STEMI, "meld na" fits
+    // MELD-Na and MELD & MELD-Na. The best guess is still returned, but not as exact.
+    return { id: c.id, title: c.title, cat: c.cat, desc: c.desc, exact: best.exact && fullHits === 1,
              inputs: (c.inputs || []).map(function (x) { return { id: x.id, label: x.label, type: x.type, unit: x.unit }; }) };
   }
 

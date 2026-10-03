@@ -195,7 +195,21 @@
     return function (t) { if (isGarbled(t)) { try { console.warn("[SV] dropped garbled chunk", garbledRatio(t)); } catch (e) {} return; } return fn.apply(this, arguments); };
   }
 
-  var _active = null;   // { engine, mode:'stream'|'record', stop }
+  var _active = null;   // { engine, mode:'stream'|'record', stop, onDevice? }
+  /* Edge A1.2 (flag smd_speech_ondevice, default ON since 2026-10-01, owner; "0" = kill switch). The OS recognizers behind "Fast" dictation
+   * (SFSpeechRecognizer, Android SpeechRecognizer) and Web Speech MAY send audio to Apple/Google.
+   * With the flag ON: noCloud callers REQUIRE the on-device recognizer (else "stt-unavailable-ondevice",
+   * never the cloud) and skip Web Speech; other callers PREFER it, and the engine label says which ran
+   * ("On-device" only when it really is). Flag "0": the old behaviour (and the old, unproven label). */
+  function speechOnDeviceOn() { try { var v = localStorage.getItem("smd_speech_ondevice"); return v !== "0" && v !== "false"; } catch (e) { return true; } }
+  // App language codes ("en" | "hi" | "te" | "auto", or a full tag) -> an OS recognizer locale. "auto" and
+  // unset mean the device language; "en" keeps the device's English variant (en-IN, en-US...).
+  function nativeLang(l) {
+    if (!l || l === "auto") return undefined;
+    if (l.indexOf("-") > 0) return l;
+    var dev = navigator.language || "";
+    return l === "en" && dev.indexOf("en") === 0 ? dev : l + "-IN";
+  }
   function stop() { if (_active && _active.stop) { try { _active.stop(); } catch (e) {} } _active = null; }
 
   function listen(opts) {
@@ -240,15 +254,30 @@
     // 1) Native device STT (default on iOS/Android) — audio never leaves the device.
     if (window.SMD_NATIVE && typeof window.SMD_NATIVE.transcribe === "function") {
       try {
-        var stopFn = window.SMD_NATIVE.transcribe({ onPartial: opts.onPartial, onFinal: opts.onFinal, onError: opts.onError });
-        _active = { engine: "On-device", mode: "stream", stop: (typeof stopFn === "function") ? stopFn : function () { try { window.SMD_NATIVE.stopTranscribe && window.SMD_NATIVE.stopTranscribe(); } catch (e) {} } };
+        var strict = speechOnDeviceOn();
+        var nopts = { onPartial: opts.onPartial, onFinal: opts.onFinal, onError: opts.onError };
+        if (strict) {
+          nopts.language = nativeLang(opts.language);   // the doctor's pick, not navigator.language (undefined = device language)
+          nopts.onDevice = opts.noCloud ? "require" : "prefer";
+          nopts.onError = function (e) { if (opts.onError) opts.onError(e === "on-device-unavailable" ? "stt-unavailable-ondevice" : e); };
+          nopts.onMode = function (m) {
+            if (!_active || _active.native !== true) return;
+            _active.onDevice = !!(m && m.onDevice);
+            _active.engine = _active.onDevice ? "On-device" : "Device speech (cloud)";
+            if (opts.onState) opts.onState("listening", _active.engine);
+            if (opts.onMode) { try { opts.onMode(m); } catch (e) {} }
+          };
+        }
+        var stopFn = window.SMD_NATIVE.transcribe(nopts);
+        _active = { engine: strict ? "Device speech" : "On-device", native: true, mode: "stream", stop: (typeof stopFn === "function") ? stopFn : function () { try { window.SMD_NATIVE.stopTranscribe && window.SMD_NATIVE.stopTranscribe(); } catch (e) {} } };
         if (opts.onState) opts.onState("listening", _active.engine);
         return _active;
       } catch (e) { /* fall through */ }
     }
     // 2) Web Speech API (Android WebView / Chrome). iOS WKWebView/Safari does NOT support it → skip.
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SR && !isIOS()) {
+    // Web Speech in an Android WebView is Google's cloud recognizer: never for noCloud callers (flag ON).
+    if (SR && !isIOS() && !(opts.noCloud && speechOnDeviceOn())) {
       try {
         var rec = new SR(); rec.continuous = true; rec.interimResults = true; rec.lang = navigator.language || "en-US";
         var finalTxt = "";
@@ -260,14 +289,14 @@
         rec.onerror = function (ev) { if (opts.onError) opts.onError((ev && ev.error) || "speech-error"); };
         rec.onend = function () { if (opts.onFinal) opts.onFinal(finalTxt.trim()); };
         rec.start();
-        _active = { engine: "On-device (browser)", mode: "stream", stop: function () { try { rec.stop(); } catch (e) {} } };
+        _active = { engine: speechOnDeviceOn() ? "Browser speech (cloud)" : "On-device (browser)", mode: "stream", stop: function () { try { rec.stop(); } catch (e) {} } };
         if (opts.onState) opts.onState("listening", _active.engine);
         return _active;
       } catch (e) { /* fall through */ }
     }
     // On-device-only callers (the ambient consultation scribe) must never ship audio to the cloud
     // recorder below: if no on-device engine was available, report unavailable and stop.
-    if (opts.noCloud) { if (opts.onError) opts.onError("stt-unavailable"); return null; }
+    if (opts.noCloud) { if (opts.onError) opts.onError(speechOnDeviceOn() ? "stt-unavailable-ondevice" : "stt-unavailable"); return null; }
     // The clinician chose the Local (or KB-only) answer engine (2026-09-11): audio may not go to a
     // cloud AI transcriber either, whatever the network says. Same signal as noCloud, named so the
     // UI can say WHY and offer Clinical dictation (Whisper, on the phone) instead.
@@ -398,7 +427,11 @@
         var mk = whisperModel(dictLang);
         return "StewardVoice · " + (tiersFlagOn() ? voiceTier() : "lite") + " · " + (MODEL_CODE[mk] || mk) + " · " + dictLang;
       }
-      if (window.SMD_NATIVE && window.SMD_NATIVE.transcribe) return "Fast · on-device STT · " + dictLang;
+      if (window.SMD_NATIVE && window.SMD_NATIVE.transcribe) {
+        if (!speechOnDeviceOn()) return "Fast · on-device STT · " + dictLang;
+        var lm = window.SMD_NATIVE.lastSpeechMode;   // set once a session reports its real mode
+        return "Fast · " + (lm ? (lm.onDevice ? "on-device STT" : "device STT (cloud)") : "device STT") + " · " + dictLang;
+      }
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (SR && !isIOS()) return "Fast · browser STT";
       return "AI · server (Gemini)";
@@ -472,7 +505,8 @@
         engEl.innerHTML = '<span class="smdv-dot"></span> Recording ' + fmt(elapsed) + " — speak, then tap Done";
       } else if (state === "listening") {   // stream engines (Fast): text appears live as you speak
         recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live");
-        engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || "On-device") + " · speak now";
+        // No engine yet (the tap paints before listen() returns): neutral until the plugin reports its mode.
+        engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || (speechOnDeviceOn() ? "Device speech" : "On-device")) + " · speak now";
       } else if (state === "transcribing") {
         recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live");
         engEl.innerHTML = '<span class="smdv-spin"></span> Transcribing on-device — a few seconds. Please wait…';
@@ -551,6 +585,7 @@
             // the generic fallback. Every code this file can emit now names itself: the Rx pad used
             // to keep a SECOND copy of this mapping, and two copies drift.
             err === "stt-unavailable" ? "Dictation isn't available on this build of the app." :
+            err === "stt-unavailable-ondevice" ? "This phone can't recognise speech without sending the audio off the device. Use Clinical dictation (on the phone), or type." :
             // Local answer engine selected: audio may not go to a cloud transcriber (2026-09-11).
             err === "stt-unavailable-local" ? "Cloud dictation is off while the on-device answer engine is selected. Use Clinical dictation (on the phone), or switch the answer engine to MaiK Cloud in Settings." :
             err === "stt-fallback-exhausted" ? "Your dictation credits are used up. Top up, or use Clinical dictation on the phone: it is free and unlimited." :

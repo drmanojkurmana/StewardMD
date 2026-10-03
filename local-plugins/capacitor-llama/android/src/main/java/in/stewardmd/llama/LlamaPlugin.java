@@ -372,18 +372,38 @@ public class LlamaPlugin extends Plugin {
         final int seed = call.getInt("seed", 0);
         final boolean stream = call.getBoolean("stream", true);
         final boolean prefillEmptyThink = call.getBoolean("prefillEmptyThink", false);
+        final String grammar = call.getString("grammar", null);   // GBNF, root rule "root" (Edge router)
+        // Forced prefix + pick (Edge router, A0.3): { prefix, choices: ["0","1",...], suffix }. One prefill,
+        // no decode loop; resolves { text: prefix + choice + suffix, p }. Falls back to grammar generation
+        // when a choice is not one token.
+        final JSObject pick = call.getObject("pick", null);
 
         worker.execute(() -> {
             long t0 = System.currentTimeMillis();
             startThermalWatch();
             try {
-                TokenBatcher sink = stream ? new TokenBatcher() : null;
-                String text;
-                try { text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, sink); }
-                finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
+                String text = null; Float p = null;
+                if (pick != null) {
+                    String prefix = pick.getString("prefix", ""), suffix = pick.getString("suffix", "");
+                    org.json.JSONArray ch = pick.optJSONArray("choices");
+                    String[] choices = new String[ch == null ? 0 : ch.length()];
+                    for (int i = 0; i < choices.length; i++) choices[i] = ch.optString(i, "");
+                    float[] probs = choices.length > 0 ? engine.pick(system, user, prefix, choices) : null;
+                    if (probs != null) {
+                        int best = 0;
+                        for (int i = 1; i < probs.length; i++) if (probs[i] > probs[best]) best = i;
+                        text = prefix + choices[best] + suffix; p = probs[best];
+                    }
+                }
+                if (text == null) {
+                    TokenBatcher sink = stream ? new TokenBatcher() : null;
+                    try { text = engine.generate(system, user, nPredict, temp, seed, prefillEmptyThink, grammar, sink); }
+                    finally { if (sink != null) sink.flush(); }   // the last pieces land before the promise settles
+                }
                 long ms = System.currentTimeMillis() - t0;
                 JSObject out = new JSObject().put("text", text).put("ms", ms)
                     .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens());
+                if (p != null) out.put("p", (double) p);
                 try { String s = engine.lastStats(); if (s != null) out.put("perf", new JSObject(s)); } catch (Throwable ignore) {}
                 call.resolve(out);
             } catch (LlamaException e) {

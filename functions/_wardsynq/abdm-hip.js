@@ -295,6 +295,9 @@ function hipSourceFor(wardsynq, fallback) {
 /* ---- registering and linking ----------------------------------------------------------------------------- */
 
 const PENDING = (hipId, hash) => `connect:abdm:linkpending:${hipId}:${hash}`;
+// A pending token is sha10 with its digits mapped to letters: a raw sha10 is all digits from 6-9 about 0.35% of the time,
+// which the KV PHI guard (MOBILE_EMBED, no-phi.js) refuses as a phone number. Reads accept the old raw form too.
+const pendTok = async (ref) => (await sha10(ref)).replace(/[0-9]/g, (d) => "ghijklmnop"[d]);
 const GENDER = { male: "M", female: "F", other: "O", m: "M", f: "F", o: "O" };
 
 /** Register each care context row once (discoverable and servable at once). Returns the refs newly registered. */
@@ -352,7 +355,7 @@ async function linkStayCareContexts(env, ctx) {
       return say("linked-requested", { registered: registered.length, contexts: contexts.length });
     }
     // No token yet: remember WHICH contexts wait for it (hashes of the references, never a reference), then ask.
-    const refHashes = await Promise.all(contexts.map((c) => sha10(c.ref)));
+    const refHashes = await Promise.all(contexts.map((c) => pendTok(c.ref)));
     let prior = [];
     try { prior = JSON.parse((kv && (await kv.get(PENDING(conn.hipId, patientHash)))) || "[]"); } catch { prior = []; }
     if (kv) await guardedKvPut(kv, PENDING(conn.hipId, patientHash), JSON.stringify([...new Set([...prior, ...refHashes])]), { expirationTtl: 7 * 24 * 3600 });
@@ -382,7 +385,7 @@ async function linkPendingAfterToken(env, deps, { tenantId, hipId, abhaAddress, 
     if (!pending.length) return { linked: 0 };
     const { results = [] } = await deps.db.prepare("SELECT * FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?").bind(tenantId, patientHash).all();
     const contexts = [];
-    for (const r of results) if (r.source === SOURCE_ID && pending.includes(await sha10(r.ref))) contexts.push({ ref: r.ref, hiType: r.hi_type, display: r.display });
+    for (const r of results) if (r.source === SOURCE_ID && (pending.includes(await pendTok(r.ref)) || pending.includes(await sha10(r.ref)))) contexts.push({ ref: r.ref, hiType: r.hi_type, display: r.display });
     if (!contexts.length) return { linked: 0 };
     const r = await deps.gateway.post("linkCareContext", linkBody({ abhaAddress, patientRef: patientHash, contexts }), { "X-LINK-TOKEN": token });
     try { await deps.kv.delete(PENDING(hipId, patientHash)); } catch { /* the next token repeats an already-linked context, which ABDM answers ABDM-1056 */ }

@@ -325,7 +325,29 @@
       if (p.items) { var its = p.items(); out[p.cat] = hasQ ? rank(q, its) : its.slice().sort(function (a, b) { return String(a.title).localeCompare(String(b.title)); }); }
       else out[p.cat] = ST.async[p.cat] ? ST.async[p.cat].items : [];
     });
+    var pre = hasQ ? prefilledCalc(q) : null;
+    if (pre) out.calcs = [pre].concat((out.calcs || []).filter(function (it) { return it.id !== pre.id; }));
     return out;
+  }
+  /* "crcl 72F 58kg cr 1.4" (flag smd_calc_prefill): the numbers never match a title, so the calculator
+   * was not found at all. Find it by the words left after the attributed values are removed, and offer
+   * it opened with those values. The result shown is MEDCALC.run's, never a model's. */
+  function prefilledCalc(q) {
+    try {
+      if (localStorage.getItem("smd_calc_prefill") !== "1") return null;
+      var M = G.MEDCALC, P = G.SMD_CPARAMS, F = G.SMD_CALC_PREFILL;
+      if (!M || !M.find || !P || !F) return null;
+      var hit = M.find(P.stripValues(q));
+      if (!hit) return null;
+      var pf = F.forText(hit.id, q, { calc: M.get(hit.id) });
+      if (!pf) return null;
+      var vals = pf.used.map(function (u) { return u.label + " " + (typeof u.value === "boolean" ? (u.value ? "yes" : "no") : u.value + (u.unit ? " " + u.unit : "")); }).join(" · ");
+      var res = null; try { res = M.run(hit.id, pf.prefill); } catch (e) {}
+      var rv = (res && res.value != null && res.value !== "—") ? " → " + res.value + (res.unit ? " " + res.unit : "") + (pf.notStated.length ? " (partial)" : "") : "";
+      var miss = pf.notStated.length ? " · not stated: " + pf.notStated.length : "";
+      return { cat: "calcs", id: hit.id, title: hit.title + " with your values", sub: vals + rv + miss, kw: "",
+        open: function () { M.open(hit.id, F.forText(hit.id, q, { calc: M.get(hit.id) }).prefill); } };
+    } catch (e) { return null; }
   }
 
   /* ---------- rendering ---------- */

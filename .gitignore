@@ -164,3 +164,11 @@ data/dose-rules-report.json
 # Neonatal layer: loose source snapshots (scripts/neo/snap.py). Committed packed as data/neo/sources.json.gz
 # (node scripts/neo/validate.mjs --pack) because Cloudflare Pages caps a deploy at 20,000 files.
 /data/neo/sources/
+
+# Edge router dataset (scripts/edge/generate.mjs): regenerated deterministically. Only the FROZEN
+# test set and its manifest are committed; train/val/canonical and trainer exports are rebuilt.
+/vault/plans/edge-data/dataset/canonical.jsonl
+/vault/plans/edge-data/dataset/train.jsonl
+/vault/plans/edge-data/dataset/val.jsonl
+/vault/plans/edge-data/dataset/export/
+/vault/plans/edge-data/schemas/

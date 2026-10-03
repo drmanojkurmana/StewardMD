@@ -107,6 +107,20 @@ public final class LlamaNative {
     public static native String applyChatTemplate(long model, String system, String user);
 
     /**
+     * GBNF grammar (root rule "root") for the NEXT generate() only; null or "" clears it. A separate
+     * call rather than a new generate() argument so the existing JNI signature is untouched. The
+     * engine sets it and clears it inside its generating guard, so two calls cannot interleave.
+     */
+    public static native void setGrammar(String gbnf);
+
+    /**
+     * Forced prefix + pick (Edge router, A0.3): ONE prefill of {@code prompt} (which already ends with
+     * the forced reply prefix), then softmax probabilities over the single-token {@code choices}.
+     * No decode loop, no grammar. Null when a choice is not exactly one token or the prefill failed.
+     */
+    public static native float[] pick(long ctx, long model, String prompt, String[] choices);
+
+    /**
      * Generate up to {@code nPredict} tokens, streaming each detokenised piece to
      * {@code sink.onToken} and returning the full text (null on failure).
      *

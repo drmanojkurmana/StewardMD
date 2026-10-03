@@ -140,7 +140,9 @@ async function arriveUnknown(svc, resolved, base, arrival, arrivedAt, ctx) {
     const newPatient = { ...provisional, id: patientId };
 
     try {
-      await svc.put(newPatient, { idempotencyKey: null });
+      // Create-only (expectedVersion 0): without it, an arrival that counted before another one wrote this
+      // sequence would land as version 2 of THAT person's Patient instead of moving on to the next sequence.
+      await svc.put(newPatient, { expectedVersion: 0, idempotencyKey: null });
     } catch (e) {
       if (e instanceof VersionConflictError) continue;   // this sequence was just claimed - try the next
       return { ...base, ...writeFailure(e, { written: 0 }) };

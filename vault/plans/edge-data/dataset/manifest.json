@@ -1,0 +1,29 @@
+{
+  "schema_version": "edge-router-2",
+  "generated": "2026-10-01",
+  "counts": {
+    "train": 4597,
+    "val": 546,
+    "test": 4077
+  },
+  "dropped_as_leaks": 25,
+  "route_by": {
+    "rules": 6384,
+    "model": 2523,
+    "negated": 258,
+    "empty": 55
+  },
+  "model_rows": {
+    "train": 1247,
+    "val": 135,
+    "test": 1141
+  },
+  "recall_at_5": 0.9965,
+  "sha256": {
+    "canonical": "35d594b0b86bc53fd614020a8f63e3be8c57f6fe2da2148df7566d1fc3c57f70",
+    "train": "93982ce7503a52511cb9108f48bcd975397d8acc3c808f03dec7e7ec1c60df50",
+    "val": "1d9d46d6ccc445058dd4f5f06fc89fe0745fc43de9df9273d9dd09472a72402f",
+    "test": "77fd7636da405cea127b655f9f0cd5bbeb2233924d7fcac80ee65823669e2f2e"
+  },
+  "note": "Synthetic only. test.jsonl is frozen: changing it requires a new schema_version and a note in the plan."
+}
