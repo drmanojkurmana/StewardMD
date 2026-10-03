@@ -46,9 +46,9 @@ try {
   const ids = await ev(`(()=>{const s=new Set(Object.keys(KB_ENRICHMENT.byId));Object.keys(window.SYNDROMES||{}).forEach(k=>s.add(k));return [...s]})()`);
   await ev(`window.__r={};window.__a=function(ids){ids.forEach(function(id){try{SMD_REASON.openRef(id,{standalone:true});var r=document.querySelector('.dx-reader');var n=function(e){return e.textContent.replace(/\\s+/g,' ').trim().toLowerCase()};
    var seen={},kinds={};[].forEach.call(r.querySelectorAll('p,li,.dx-mgmt-sec,summary,h3,h4,button.dx-select'),function(e){var t=n(e);if(t.length<25)return;if(e.closest('.ev-viewer-collapsed'))return;if(seen[t]){kinds[e.tagName+':'+t.slice(0,40)]=1}seen[t]=1});
-   var mg=[].filter.call(r.querySelectorAll('summary,.dx-mgmt-sec,button.dx-select'),function(e){return /management|stewardship/i.test(e.textContent)}).map(function(e){return e.textContent.replace(/\\s+/g,' ').trim().slice(0,30)});
+   var mg=[].filter.call(r.querySelectorAll('summary,.dx-mgmt-sec,button.dx-select'),function(e){return /^\\s*(management|open full)/i.test(e.textContent.replace(/[^a-z /]/gi,' ').trim())}).map(function(e){return e.textContent.replace(/\\s+/g,' ').trim().slice(0,30)});
    var H=(KB_ENRICHMENT.byId||{})[id],dm=(window.DX_MGMT||{})[id];var has=!!((window.SYNDROMES||{})[id]||(dm&&dm.tx&&dm.tx.length)||(H&&H.management&&H.management.length));
-   window.__r[id]={dups:Object.keys(kinds),mg:mg,has:has}}catch(e){}})};1`);
+   window.__r[id]={dups:Object.keys(kinds),mg:mg,has:has,old:!!r.querySelector('button.dx-select[data-sel]'),syn:!!(window.SYNDROMES||{})[id],rx:r.querySelectorAll('.dx-mgmt-tx li').length}}catch(e){}})};1`);
   for (let i = 0; i < ids.length; i += 200) await ev(`__a(${JSON.stringify(ids.slice(i, i + 200))});1`);
   const R = await ev(`__r`); const agg = {}; let multi = 0, dupPages = 0;
   Object.entries(R).forEach(([id, v]) => { if (v.dups.length) { dupPages++; v.dups.forEach(d => { const k = d.slice(0, 22); (agg[k] = agg[k] || []).push(id); }); } if (v.mg.length > 1) { multi++; } });
@@ -59,6 +59,11 @@ try {
   ok(Object.keys(R).length >= 2400, 'audited every disease page');
   ok(dupPages === 0, 'no disease page repeats a sentence, list item or heading');
   ok(multi === 0, 'no disease page has two management entries (collapse + separate page)');
+  const oldLink = Object.entries(R).filter(([, v]) => v.old).map(([k]) => k);
+  ok(oldLink.length === 0, 'no disease page links to the old case page (' + oldLink.slice(0, 3) + ')');
+  const synNo = Object.entries(R).filter(([, v]) => v.syn && v.mg.length !== 1).map(([k]) => k);
+  ok(synNo.length === 0, 'every infective syndrome shows Management on its own page (' + synNo.slice(0, 3) + ')');
+  ok(R.CAP && R.CAP.rx >= 3, 'CAP lists its regimens inline (' + (R.CAP && R.CAP.rx) + ' drugs)');
   ok(lost.length === 0, 'every disease with management data still shows it, exactly once');
 } catch (e) { console.log('FAIL', e.message); failures++; } finally { try { ws.close(); } catch {} chrome.kill(); server.close(); }
 console.log(failures ? failures + ' failed' : 'all passed'); process.exit(failures ? 1 : 0);

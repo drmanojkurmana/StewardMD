@@ -4347,7 +4347,27 @@
     var briefTx = hasBrief ? dm.tx : ((H && H.management && H.management.length) ? H.management : null);
     // The same list is rendered once: in the body below for reference diseases, in the glance only otherwise
     // (the page used to print it twice, an accordion and then a numbered Management section).
-    var mgmtHtml = (refInf && briefTx)
+    /* Infective syndromes (SYNDROMES, 51) keep their management in the stewardship case data, not in a
+     * tx list. Owner, 2026-10-03: show it on the disease page and drop the link to the old case page. */
+    var synMgmt = "";
+    if (syn) {
+      var rx = function (d) {
+        var line = [d.dose, d.route, d.frequency, d.duration ? "for " + d.duration : ""].filter(Boolean).join(", ");
+        return '<li><b>' + esc(d.drug) + '</b>' + (line ? ': ' + esc(line) : '') + (d.why || d.coverage ? '<div class="dx-mgmt-why">' + medFormat(d.why || d.coverage) + '</div>' : '') + '</li>';
+      };
+      var regs = (syn.regimens && syn.regimens.length) ? syn.regimens
+        : [{ label: "First-line", drugs: syn.firstLine || [] }, { label: "Alternative", drugs: syn.alternatives || [] }];
+      var P = syn.pathogens || {}, orgs = [].concat(P.veryLikely || [], P.likely || []);
+      synMgmt = '<div class="dx-mgmt-sec tx">' + rIco("pills") + ' Management / Treatment</div>' +
+        (syn.decision && syn.decision.label ? '<p class="dx-mgmt-decision ' + esc(syn.decision.status || "") + '"><b>' + esc(syn.decision.label) + '</b></p>' : '') +
+        (orgs.length ? '<p><b>Likely organisms:</b> ' + esc(orgs.join(", ")) + '</p>' : '') +
+        regs.filter(function (g) { return g.drugs && g.drugs.length; }).map(function (g) {
+          return '<div class="dx-mgmt-sec">' + esc(g.label || "Regimen") + '</div><ol class="dx-mgmt-tx">' + g.drugs.map(rx).join("") + '</ol>';
+        }).join("") +
+        (syn.stewardship && syn.stewardship.length ? '<div class="dx-mgmt-sec">Stewardship</div><ul class="dx-mgmt-ul">' + syn.stewardship.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : '') +
+        (syn.deescalation ? '<div class="dx-mgmt-sec">De-escalation</div><p>' + medFormat(syn.deescalation) + '</p>' : '');
+    }
+    var mgmtHtml = syn ? synMgmt : (refInf && briefTx)
       ? ('<div class="dx-mgmt-sec tx">Management</div><ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ol>'
          + (dm && dm.ix && dm.ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + dm.ix.slice(0, 8).map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : '')
          + (dm && dm.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + medFormat(dm.dispo) + '</p>' : '')
@@ -4390,7 +4410,7 @@
         '</div><div class="dx-reader-content">' +
         mgmtHtml +   // "Why this" is not repeated here: the same sentence opens At a glance above
         (harrisonRef(id, { expanded: true, omit: { redFlags: !!(H && H.redFlags && H.redFlags.length), investigations: !!(H && H.additionalInvestigations && H.additionalInvestigations.length) } }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
-        (syn ? '<button class="dx-select inf" data-sel="' + id + '">Open full stewardship page →</button>' : '') +
+
         '</div>' +
       '</div>';
     kbDedupeReader(el);

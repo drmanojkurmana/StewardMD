@@ -249,6 +249,11 @@ body.dark .smd-kb-logo { filter: brightness(1.9) saturate(.85); }
 #dxOverlay #dxMgmt.dx-reader :is(.dx-mgmt-tx, .dx-mgmt-ul) { margin: 0; padding-left: 22px; }
 #dxOverlay #dxMgmt.dx-reader :is(.dx-mgmt-tx, .dx-mgmt-ul) li { margin: 0; padding: 6px 0; font: 400 16px/1.55 var(--sans); color: var(--rd-ink); }
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-tx li::marker { color: var(--rd-mut); font-weight: 500; font-variant-numeric: tabular-nums; }
+/* Infective syndrome management on the disease page (owner, 2026-10-03). */
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-why { margin-top: 3px; font: 400 14px/1.5 var(--sans); color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-decision { display: inline-block; margin: 2px 0 8px; padding: 4px 10px; border-radius: 999px; font-size: 14px; background: color-mix(in srgb, var(--teal, #0f766e) 12%, transparent); color: var(--teal, #0f766e); }
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-decision.orange, #dxOverlay #dxMgmt.dx-reader .dx-mgmt-decision.red { background: color-mix(in srgb, #b45309 14%, transparent); color: #b45309; }
+body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-decision.orange, body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-decision.red { color: #f0b454; }
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-sec { margin: 22px 0 8px; font: 600 21px/1.25 var(--rd-serif); letter-spacing: -.01em; text-transform: none; color: var(--rd-ink); }
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-src { font-size: 13px; color: var(--rd-mut); }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-hero .smd-kb-banner { margin-bottom: 16px; }
