@@ -311,10 +311,14 @@ try {
         var img=[].slice.call(f.querySelectorAll(".sbs-maik")).filter(function(x){return getComputedStyle(x).display!=="none"})[0];
         return getComputedStyle(f).flexDirection==="column" && img && Math.round(parseFloat(getComputedStyle(img).height))===53 ? "classic foot" : "foot changed";`), "classic foot",
       label + ": the developed-by foot keeps its classic stacked composition");
-    /* The logo traces and fills while the rest of the classic composition is already present. */
-    okv(await ev(`var paths=document.querySelectorAll("#smdBootSplash .sbs-logo-trace path"),fill=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
-        return paths.length===3 && paths[0].getAttribute("pathLength")==="1" && fill && parseFloat(getComputedStyle(fill).opacity)===0 && getComputedStyle(paths[0]).animationPlayState==="running" ? "outline-running" : "missing";`), "outline-running",
-      label + ": the visible mark traces without a solid fill");
+    /* Signature Trace (7c4a44fc0): the solid mark is present from the first frame and a highlight
+       draws over it. Dark traces the contour; light shows a reflection sweep instead (trace hidden). */
+    okv(await ev(`var S="#smdBootSplash ",paths=document.querySelectorAll(S+".sbs-logo-trace path"),tr=document.querySelector(S+".sbs-logo-trace"),fill=[document.querySelector(S+".sbs-logo"),document.querySelector(S+".sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0],rf=document.querySelector(S+".sbs-reflection");
+        if(!fill||paths.length!==3||paths[0].getAttribute("pathLength")!=="1") return "missing";
+        var traced=getComputedStyle(tr).display!=="none"&&getComputedStyle(paths[0]).animationPlayState==="running";
+        var swept=rf&&getComputedStyle(rf).display!=="none"&&getComputedStyle(rf,"::after").animationPlayState==="running";
+        return (traced||swept) && parseFloat(getComputedStyle(fill).opacity)>0 ? "highlight-running" : "missing";`), "highlight-running",
+      label + ": a highlight draws over the solid mark (trace in dark, reflection in light)");
     okv(await ev(`var bad=[]; [".sbs-word",".sbs-tag",".sbs-foot",".sbs-center"].forEach(function(sel){
         var e=document.querySelector("#smdBootSplash "+sel); if(!e||getComputedStyle(e).display==="none") return;
         var s=getComputedStyle(e); if(s.animationName!=="none") bad.push(sel+":"+s.animationName); if(parseFloat(s.opacity)<1) bad.push(sel+":opacity "+s.opacity); });
@@ -473,7 +477,8 @@ try {
         if(getComputedStyle(e).animationName!=="none")out.push(sel[i]+":"+getComputedStyle(e).animationName);}
       return out.join(",")||"all still";`), "all still",
     "prefers-reduced-motion stills the intro poster animations");
-  okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-logo-trace"),f=[document.querySelector("#smdBootSplash .sbs-logo"),document.querySelector("#smdBootSplash .sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];return t&&getComputedStyle(t).display!=="none"&&getComputedStyle(t.querySelector("path")).strokeDashoffset==="0px"&&f&&parseFloat(getComputedStyle(f).opacity)===0?"still":"moving";`), "still",
+  okv(await ev(`var S="#smdBootSplash ",t=document.querySelector(S+".sbs-logo-trace"),rf=document.querySelector(S+".sbs-reflection"),f=[document.querySelector(S+".sbs-logo"),document.querySelector(S+".sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
+      return t&&getComputedStyle(t).display==="none"&&(!rf||getComputedStyle(rf).display==="none")&&f&&parseFloat(getComputedStyle(f).opacity)===1&&getComputedStyle(f).animationName==="none"?"still":"moving";`), "still",
     "prefers-reduced-motion shows the completed mark without tracing");
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Test",email:"t@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
