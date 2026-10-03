@@ -517,3 +517,91 @@ test("PACU BAYS come from the hospital's bed list for the PACU ward: the board o
   const none = await as(NURSE, `/ward/surgery-board?orgId=${ORG}`);
   assert.equal(none.pacuBays, null, "no PACU beds listed: the screen falls back to bay 1");
 });
+
+/* ---- recovery bays on the bed board, and the bay's state in the hospital's bed list ---- */
+
+const HOUSEKEEPER = "housekeeper@example.test";
+async function pacuWards(inspect) {
+  seedHospital();
+  if (inspect) docs.get(`q_orgs/${ORG}`).fields.wardsynq = { supportServices: { housekeepingInspection: true } };
+  docs.set(`q_members/${sanitize(ORG)}__${sanitize(idFor(HOUSEKEEPER))}`, { fields: { orgId: ORG, identity: idFor(HOUSEKEEPER), role: "housekeeping", active: true }, updateTime: "t1" });
+  const { createWard, createBed, listBeds } = await import("../functions/_opd_org_store.js");
+  for (const [ward, beds] of [["PACU", ["Bay 1", "Bay 2"]], ["Surgical Ward", ["S1", "S2"]]]) {
+    const w = await createWard(ENV, ORG, { name: ward }, "test");
+    for (const name of beds) await createBed(ENV, ORG, { wardId: w.id, name }, "test");
+  }
+  return async (name) => ((await listBeds(ENV, ORG)).find((b) => b.name === name) || {}).state;
+}
+const boardWard = async (name) => (await as(NURSE, `/ward/beds?orgId=${ORG}`)).wards.find((w) => w.ward === name);
+
+test("RECOVERY ON THE BED BOARD: an open PACU stay holds its bay (labelled, with its start), is never offered to an admission, and the bay is free once the patient leaves", async () => {
+  const bedState = await pacuWards(false);
+  const r = await inRecovery("140", "Bay 1");
+  const pacu = await boardWard("PACU");
+  assert.deepEqual(pacu.free, ["Bay 2"], "the recovery bay is not offered to an admission or a transfer");
+  assert.deepEqual(pacu.occupied, [], "a recovery bay is not an inpatient bed");
+  assert.equal(pacu.recovery.length, 1, JSON.stringify(pacu));
+  const row = pacu.recovery[0];
+  assert.equal(row.bed, "Bay 1"); assert.equal(row.encounterId, r.pacu.id); assert.equal(row.mrn, r.reg.mrn); assert.equal(row.since, r.pacu.periodStart);
+  assert.ok(row.name && row.name.includes("OT Testcase"), JSON.stringify(row));
+  assert.equal(await bedState("Bay 1"), "occupied", "entering recovery occupies the bay in the bed list, as an admission does");
+  assert.ok(!(await boardWard("Surgical Ward")).recovery.length);
+
+  const other = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Bay Taker", mobile: "9876500141", gender: "male", ageYears: 50 });
+  const adm = await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: other.mrn, ward: "PACU", bed: "Bay 1" });
+  assert.equal(adm.__status, 409, JSON.stringify(adm));
+  assert.equal((await boardWard("PACU")).recovery[0].bed, "Bay 1");
+
+  const out = await leave(r.pacu, { outcome: "home" });
+  assert.equal(out.__status, 200, JSON.stringify(out));
+  const after = await boardWard("PACU");
+  assert.deepEqual(after.recovery, []); assert.deepEqual(after.free, ["Bay 1", "Bay 2"], "inspection off: the bay is available again, as a discharged bed is");
+  assert.equal(await bedState("Bay 1"), "available");
+});
+
+test("LEAVING RECOVERY QUEUES THE BAY FOR CLEANING when the hospital inspects vacated beds, whichever way the patient leaves", async () => {
+  const bedState = await pacuWards(true);
+  const home = await inRecovery("142", "Bay 1");
+  const ward = await inRecovery("143", "Bay 2");
+  assert.equal((await leave(home.pacu, { outcome: "home" })).__status, 200);
+  const w = await leave(ward.pacu, { outcome: "ward", admission: { ward: "Surgical Ward", bed: "S2" } });
+  assert.equal(w.__status, 200, JSON.stringify(w));
+  assert.equal(await bedState("Bay 1"), "cleaning"); assert.equal(await bedState("Bay 2"), "cleaning");
+  assert.equal(await bedState("S2"), "occupied", "the ward bed is occupied through admission's own door");
+
+  const hk = await as(HOUSEKEEPER, `/ward/housekeeping-board?orgId=${ORG}`);
+  assert.equal(hk.__status, 200, JSON.stringify(hk));
+  assert.deepEqual(hk.tasks.filter((t) => t.wardName === "PACU" && t.kind === "bed-clean").map((t) => t.bedName).sort(), ["Bay 1", "Bay 2"]);
+  const pacu = await boardWard("PACU");
+  assert.deepEqual(pacu.free, [], "a bay waiting for its clean is not free"); assert.deepEqual(pacu.recovery, []);
+  assert.deepEqual((await as(NURSE, `/ward/surgery-board?orgId=${ORG}`)).pacuBays, [], "nor offered to the next recovery patient");
+  const next = await signedOutCase("144");
+  const refused = await as(DOCTOR, "/ward/surgery-disposition", "POST", { orgId: ORG, caseId: next.caseId, disposition: "pacu", pacuBed: "Bay 1" });
+  assert.equal(refused.__status, 409, JSON.stringify(refused)); assert.equal(refused.error, "bed_not_available");
+});
+
+test("RECOVERY IS NOT INPATIENT OCCUPANCY: patient flow and ward metrics count the same occupied beds before and after a patient enters recovery", async () => {
+  await pacuWards(false);
+  const ipd = await as(DOCTOR, "/patient/register", "POST", { orgId: ORG, name: "Ward Resident", mobile: "9876500145", gender: "female", ageYears: 58 });
+  assert.equal((await as(DOCTOR, "/ward/admit", "POST", { orgId: ORG, mrn: ipd.mrn, ward: "Surgical Ward", bed: "S1" })).__status, 200);
+  const kpis = async () => {
+    const flow = await as(DOCTOR, `/ward/patient-flow?orgId=${ORG}`);
+    const metrics = await as(DOCTOR, `/ward/metrics?orgId=${ORG}`);
+    assert.equal(flow.__status, 200, JSON.stringify(flow)); assert.equal(metrics.__status, 200, JSON.stringify(metrics));
+    return { flowOccupied: flow.flow.beds.occupied, flowDrill: flow.flow.drill.occupied.items.length, metricsOccupied: metrics.metrics.occupiedBeds };
+  };
+  const before = await kpis();
+  assert.deepEqual(before, { flowOccupied: 1, flowDrill: 1, metricsOccupied: 1 });
+  await inRecovery("146", "Bay 1");
+  assert.equal((await boardWard("PACU")).recovery.length, 1);
+  assert.deepEqual(await kpis(), before);
+});
+
+test("NO BED LIST: recovery leaves the bed board's wards alone and changes no bed state", async () => {
+  seedHospital();
+  const r = await inRecovery("147", "1");
+  const board = await as(NURSE, `/ward/beds?orgId=${ORG}`);
+  assert.equal(board.__status, 200, JSON.stringify(board));
+  assert.ok(!board.wards.some((w) => w.recovery && w.recovery.length), "a PACU the board does not list stays on the theatre board alone");
+  assert.equal((await leave(r.pacu, { outcome: "home" })).__status, 200);
+});
