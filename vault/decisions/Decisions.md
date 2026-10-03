@@ -11071,6 +11071,13 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   identifiers (one `phi()` helper per module), and screens that are not wrapped must say so; that is what
   `[data-phi-unmasked]` and the amber label are for. Text that cannot carry markup (toasts, `confirm()`) uses
   `screenText()`, which masks only at the moment it is shown. [[plans/Premium-Feel]] B2
+- **Accessible names are the one place the mode swaps a value in the DOM** (2026-10-03). aria-label, title and
+  alt cannot be reached by CSS, and VoiceOver / TalkBack speak them. Renderers write them with `attr()`: the real
+  text in the attribute, the masked text in `data-phi-<attr>`; while on, privacy-mode.js puts the masked text in the
+  attribute and keeps the real one as an expando on the element (not in another attribute). **Why this does not
+  break the rule above:** no code copies, saves, prints or shares these attributes; the only reader is
+  bug-report.js's "you pointed at" breadcrumb, where a mask is the safer value.
+
 ## 2026-10-02 - Owner Mail is an in-app client over Mailflare's API, not IMAP
 - Owner asked for hello@maiknowledge.com inside StewardMD, owners only, live and synced. Mailflare runs on
   Workers and cannot serve IMAP/SMTP, and the account-forwarding route needs a paid licence. So the app
