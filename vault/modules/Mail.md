@@ -1,6 +1,6 @@
 ---
 tags: [module, owner, cross-cutting]
-status: built (2026-10-02), needs secrets + Mailflare deploy to go live
+status: live (2026-10-03). Mailflare PR #1 deployed, Pages secrets set, StewardMD #1345 merged, phones via OTA v169
 flag: smd_mail (client, localStorage / ?mail=, default ON for owners; "0" hides it) · server MAIL_ON ("0" = route 404)
 ---
 # Mail (owner-only hello@maiknowledge.com inbox)
@@ -9,6 +9,14 @@ flag: smd_mail (client, localStorage / ?mail=, default ON for owners; "0" hides 
 live and synced". The mailbox runs on the owner's Mailflare deployment (Next.js on Cloudflare Workers,
 repo `drmanojkurmana/mailflare`). Mailflare has no IMAP/SMTP, so the iPhone Mail app cannot use it; this
 screen is the in-app client instead.
+
+**2026-10-03, live:** Mailflare `feat/v1-mail-client-api` merged (PR #1, 2d795a5) and deployed with
+`npm run deploy` (no migrations pending). `MAILFLARE_URL` is `https://mailflare.drmanojkurmana.workers.dev`
+(no custom domain yet). `MAILFLARE_URL` and `MAILFLARE_API_KEY` are set as Pages secrets on project
+`stewardmd`; a Pages secret applies only to deployments made after it, so production was redeployed.
+StewardMD #1345 merged (62ba8e6c8). Phones got `mail.js` through OTA v169 (commit ad937b0ce), not a reinstall.
+The first API key was pasted into a chat once; rotate it (new key, then `wrangler pages secret put
+MAILFLARE_API_KEY`, then revoke the old one).
 
 ## Shape
 - **Client** `mail.js` (`window.SMD_MAIL`, `window.SMD_openMail`): full-screen overlay `#smdMail`.
