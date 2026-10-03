@@ -106,7 +106,7 @@ export function projectInvoiceRecord(row, { tenantId, now, typeCode } = {}) {
       id: "comp-" + String(row.id),
       status: "final",
       type: codeable({ text: "Invoice Record" }),
-      date: generatedAt,
+      date: inv.date,                // the invoice's own date (row.createdAt), never the export instant
       text: "Invoice " + row.id + ", total INR " + total.value.toFixed(2) +
             (STATUS[String(row.status)] === "balanced" ? " (paid)" : " (unpaid)"),
     })],

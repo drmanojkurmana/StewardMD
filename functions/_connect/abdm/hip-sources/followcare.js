@@ -82,13 +82,16 @@ function projectDischargeEpisode(episode, { tenantId, now }) {
     status: (m && m.status) || "active",
     dosage: m && m.dosage ? { text: String(m.dosage) } : null,
   }));
+  // A discharge medication is prescribed at discharge: its own authoredOn when the episode carries one, else the
+  // discharge date. NEVER the export instant (generatedAt); no date at all leaves it undated and hip.js drops it.
+  medications.forEach((med, i) => { med.authoredOn = ((episode.medications || [])[i] || {}).authoredOn || episode.dischargeDate || null; });
 
   const observations = (episode.observations || []).map((o, i) => observation({
     id: (o && o.id) || ref + "-obs-" + i,
     category: (o && o.category) || "vital-signs",
     code: cc(o, "observation"),
     value: obsValue(o || {}),
-    effectiveDateTime: (o && o.effectiveDateTime) || episode.dischargeDate || generatedAt,
+    effectiveDateTime: (o && o.effectiveDateTime) || episode.dischargeDate || null,   // never the export instant (generatedAt)
     status: (o && o.status) || "final",
   }));
 
@@ -100,7 +103,9 @@ function projectDischargeEpisode(episode, { tenantId, now }) {
     type: cc({ system: "http://snomed.info/sct", code: "373942005", display: "Discharge summary", text: summary.title || "Discharge summary" }, "Discharge summary"),
     category: "DischargeSummaryRecord",
     status: "current",
-    date: episode.dischargeDate || generatedAt,
+    // The summary's own signed/authored time when the episode carries it, else the discharge date (FollowCare keeps
+    // no signing time today). NEVER the export instant; no date at all leaves it undated and hip.js drops it.
+    date: summary.signedAt || summary.authoredAt || episode.dischargeDate || null,
     text: narrative,
   })];
 
