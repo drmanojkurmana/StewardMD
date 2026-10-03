@@ -177,3 +177,10 @@ BEGIN SELECT RAISE(ABORT, 'audit rows are immutable'); END;
 -- still answers the status query correctly, only slower, so code can deploy before or after.
 CREATE INDEX IF NOT EXISTS idx_wardsynq_record_outbox_status
   ON wardsynq_record (tenant_id, resource_type, json_extract(body, '$.status'));
+
+-- THE CURRENT-VERSION PROJECTION (audit O20, 2026-10-04): wardsynq_current, wardsynq_current_ready and
+-- the trigger wardsynq_current_on_insert on wardsynq_record. NOT declared here, and nothing to apply:
+-- functions/_wardsynq/repository-d1.js (CURRENT_DDL) creates them on first use with IF NOT EXISTS and
+-- backfills each (tenant, type) the first time it is listed. One definition, so this file and the
+-- code cannot drift. Until a type is backfilled, or if the projection cannot be read, list reads fall
+-- back to the MAX(version) GROUP BY over this table, so a database without them still answers correctly.
