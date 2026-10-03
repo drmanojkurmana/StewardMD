@@ -1,6 +1,6 @@
 ---
 tags: [plan, edge, runbook]
-status: round 2 done on the Pixel 9 (2026-10-03); iPhone parts of A0.3 pick and back-off pending
+status: round 2 done (2026-10-03); iPhone back-off during real MaiK generation, real Serious and availMB with MaiK Lite pending
 ---
 # StewardMD Edge: owner runbook (sprint days 2 to 5)
 
@@ -60,14 +60,16 @@ while it is off (`ps` on the Pixel after launch).
   entry in `capacitor.plugins.json`. In the live WebView (OTA bundle 167) `Capacitor.Plugins.Needle.available()`
   answered `{available:true, isolated:true, killable:true, defaultWeightsPresent:false, lowMemory:false,
   thermal:0, availMB:2424}`; an unknown method name threw "is not a function".
-- iOS build PASSED with Needle in `package.json` (2026-10-03, Xcode 27.2, App scheme, incremental in the
-  item 1 DerivedData, signed for the device): the built `App.app` carries `?v=` `edge-router.js?v=edge5`,
-  `voice.js ...-ondev4`, `maik-local.js ...-ntb1`; `App.debug.dylib` defines the `needle_*` symbols and
-  `NeedlePlugin`, and contains the llama `pickTokens` code. **Not installed or run:** the iPhone was off USB
-  (polled `idevice_id -l` every 60 s for 45 min, 03:30 to 04:15). Earlier the same morning it was on USB but
-  the Mac had no disk; the phone still runs an older build (`edge-router.js?v=edge3`), where
-  `Needle.available()` at rest answered `{available:true, isolated:false, killable:false, lowMemory:false,
-  thermal:0, availMB:6120}` with no model loaded.
+- **iOS (iPhone 15 Pro, iOS 27.0, 2026-10-03 12:00): item 6.2 PASSED.** A clean Xcode 27.2 build of this
+  branch (App scheme, signed; `App.debug.dylib` defines the `needle_*` symbols and `NeedlePlugin` and has the
+  llama `pickTokens` code), uninstalled then installed over Wi-Fi (`devicectl` works on a paired phone with
+  no cable; `ios_webkit_debug_proxy` 1.9.2 also attached over Wi-Fi). Live WebView: bundle `builtin`,
+  `edge-router.js?v=edge5`, `voice.js ...-ondev4`, `SMD_EDGE.llamaAdapter` contains `pick`;
+  `Capacitor.Plugins.Needle.available()` answered `{available:true, isolated:false, killable:false,
+  lowMemory:false, thermal:0, availMB:6118, defaultWeightsPresent:false}`.
+- **Token note:** every `edge5` in this file is historical (the build each run used). Later commits on the
+  branch moved `edge-router.js` to `edge6`, then `edge7` (the renderer-gone clause below), and `voice.js` to
+  `-ondev4-nodash1`. The device results above were taken on `edge5`.
 - **Every native build now needs the engine first.** A clean checkout must run
   `local-plugins/capacitor-needle/scripts/fetch-needle.sh` (and `scripts/make-xcframework.sh` for iOS)
   before Gradle or Xcode, or CMake (`android/libs/arm64-v8a/libneedle.a`) and SwiftPM
@@ -97,7 +99,11 @@ mlx-swift `757b0a0` (Layr-Labs `0f4fe40` + a port of ml-explore/mlx-swift `ab924
 `cpu/jit_compiler.cpp`, whose `std::system` the iOS 27.2 SDK marks unavailable; dead code on iOS) and
 mlx-swift-lm `7354dce` (Layr-Labs `9f70e68` repointed at that mlx-swift). A clean Xcode 27.2 build passes. Also needed: the Metal Toolchain
 component (`xcodebuild -downloadComponent MetalToolchain`), `-skipPackagePluginValidation` (mlx-swift's
-CudaBuild plugin), about 6 GB free disk for a worktree build, an iPhone on USB (`idevice_id -l`).
+CudaBuild plugin), about 6 GB free disk for a worktree build, and the iPhone on USB or paired over Wi-Fi (2026-10-03: `devicectl` install and `ios_webkit_debug_proxy` 1.9.2 both worked over Wi-Fi with `idevice_id -l` empty).
+**Item 1 smoke test (2026-10-03, from commits 6e2e3ad7b / afa03b119):** iPhone 15 Pro, signed Debug build with
+Xcode 27.2 and no local patch, uninstalled then installed, live bundle `builtin` (`gold363`). MaiK answered on
+the MLX plugin (engine `mlx`, Ternary Bonsai 8B MLX): prefill 920 tokens at 31.6 tok/s, decode 6.4 tok/s, peak
+3.0 GB; "The target INR ... mechanical mitral valve is 2.5-3.5", the same answer llama.cpp gave on 2026-10-02.
 Verified in the built app: `App.debug.dylib` defines the five `needle_*` symbols and NeedlePlugin,
 references `llama_sampler_init_grammar` (exported by the embedded `llama.framework`); the live
 WebView ran this bundle (`?v=clog2/gold476/gold1057`, `edge-router.js?v=edge3`), `Capacitor.Plugins.Needle` present.
@@ -289,9 +295,17 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   a confidence (none below 0.5); scored 100% accurate, 0 wrong on the 50 predicted rows (base model, small
   sample: fine-tuning is still required per the host result). **Gate A0.3 Android latency: PASS, p95 171
   ms against 1,200 ms.**
-- **iPhone: pending (2026-10-03).** An app build with `pick` is ready (it built), but the phone was not on USB to install it (45-minute poll); the installed build predates `pick`. The Swift compiles (`xcodebuild -scheme StewardmdCapacitorLlama
-  -destination generic/platform=iOS`, Xcode 27.2 beta, BUILD SUCCEEDED); the iPhone bake-off with `pick`
-  is still to run.
+- **iPhone 15 Pro, 2026-10-03 (build above, over Wi-Fi, ggml-org FunctionGemma 270M Q8_0 rev 2566ce14,
+  sha256 83940d4d, copied to `Documents/edge/`; Metal): A0.3 iOS latency PASSED with the pick.**
+  - Run 1 (first load after install): 48 `ok`, 2 `unavailable`. Rows 1-2 hit the 8 s cold budget (the
+    first load, likely Metal shader compile, as in round 1); row 3 finished the load in 2,620 ms. The other
+    47 rows: p50 31 ms, p95 34 ms, max 198 ms.
+  - Run 2 (`--limit 50`, app relaunched): **50/50 `ok`, every option an integer, p50 33 ms, p95 37 ms,
+    max 350 ms** (row 1, cold load included; warm max 40 ms), against the 1,200 ms deadline. No confidence
+    below 0.5. Scored: 100% accurate, 0 wrong on the predicted rows (base model, small sample).
+  - Direct `generate({pick})`: `{"option":1}`, p 0.78-0.79, `perf.pickTokens` = **14937 4485 1083 236770**
+    (the llama-json target `{"option":` plus one digit token, as on Android); 99 prompt tokens, 18-44 ms warm.
+  - Still open on iOS: the one-off first load past the 8 s cold budget (warm-up or a larger first-load budget).
 - **Seen on the way:** on the APK bundle the idle app held ~200% CPU (WebView compositor `VizWebView` +
   GPU thread, home screen in front) and heated the phone from 36 C to 42 C (thermal MODERATE) in ~20
   minutes; backgrounding the app cooled it. Bundle 167 was not checked for the same. Worth a look before
@@ -354,7 +368,31 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   96.4 s (297 stream events). Lowest availMB seen with MaiK Lite loaded: **859 MB** (floor 250 MB).
 - Edge after MaiK on a warm phone missed the 1,200 ms deadline (clocks capped); the runtime killed and
   reloaded `:edge` as designed.
-- iPhone: pending (back-off at rest / MaiK / Serious, availMB with MaiK Lite). 2026-10-03: the installed build predates the back-off JS (`edge3`); the new build was ready but the phone was off USB. Only `Needle.available()` at rest was read (availMB 6,120, thermal 0, no model loaded).
+- **iPhone 15 Pro, 2026-10-03 (build above, base `needle3.cact` copied in, same typed request, engine calls
+  counted, `smd_edge` "1" for the test only, then removed): back-off PASSED, busy states SIMULATED.**
+| State | `SMD_EDGE.backoff()` / `Needle.available()` | Engine called | route() | Layer 0 "antibiogram kholo" |
+|---|---|---|---|---|
+| At rest | all ok, availMB 6,120, thermal 1 (iOS .fair) | yes | 407 / 182 ms; 375 ms, null (base model abstains) | `rules:antibiogram` |
+| MaiK generating, **simulated** (`SMD_MAIK_LOCAL.queueState()` forced `running:true`) | `othersBusy:true`, availMB 6,065 | **no** | 41 ms, null | `rules:antibiogram` |
+| After (real `queueState` back) | all ok | yes (resumed) | 214 ms, null | `rules:antibiogram` |
+| Thermal Serious, **simulated** (`SMD_EDGE_ENV` with `thermalOk` false, engine re-set) | runtime env says not ok (`backoff()` still shows the default env: thermal 1) | **no** | 41 ms, null | `rules:antibiogram` |
+| After (`SMD_EDGE_ENV` removed, engine re-set) | all ok | yes (resumed) | 320 ms, null | `rules:antibiogram` |
+- **A0.5 renderer-gone clause (after these runs, `edge7`, Android only):** when the WebView render process
+  dies, `MainActivity.onRenderProcessGone` marks it, `Needle.available()` reports `rendererGone:true`, and
+  `edge-router.js` skips the model for the rest of the session through `memoryOk` (rules still answer).
+  iOS has no app-side hook for the web-content process (Capacitor handles it), so iOS has no such clause.
+  Not yet run on a phone.
+- Why simulated: MaiK Lite had to be re-downloaded after the reinstall, and the phone's own network gave
+  0.01-0.05 MB/s (the Mac got ~0.9 MB/s from the same R2 file); a Mac side-load did not finish before the
+  owner had to take the phone. Real Serious was not attempted (it needs sustained MaiK load).
+- **Memory (availMB, `os_proc_available_memory`, as a peak-memory proxy):** fresh launch 6,120 MB; Needle
+  loaded 6,073 (-47); after one Needle call 6,065; FunctionGemma loaded on top 5,958 (-107); after three picks
+  5,953; after `release()` 5,953. Far above the 250 MB floor. Round 1's A0.6 footprint (630-665 MiB with
+  MaiK Lite loaded) is still the only MaiK-loaded figure.
+- **Pending (iPhone):** back-off while MaiK Lite really generates, real thermal Serious, and availMB with
+  MaiK Lite loaded.
+- Clean-up: both test weights overwritten with 0-byte files (`devicectl` cannot delete), the app's own
+  background MaiK download cancelled and its partial file removed, `smd_edge` unset.
 - **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
 
 **MaiK prefill threads on Android (Mac prompt 2, item 4), 2026-10-03, Pixel 9, unplugged: APPLIED.**
