@@ -20,7 +20,7 @@ const realAuth = await import("../functions/_fbauth.js");
 mock.module("../functions/_fbauth.js", { namedExports: { ...realAuth, verifiedClaimsFor: async (req) => CLAIMS[(req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "")] || null } });
 
 const mod = await import("../functions/api/mail/[[path]].js");
-const { onRequest, replyThreading, textToHtml, summarise, _resetMailCache } = mod;
+const { onRequest, replyThreading, textToHtml, summarise, _resetMailCache, b64Bytes, checkSchedule, htmlToText } = mod;
 
 const KEY = "ep_testkey_abcdefghijkl";
 const ENV = { MAILFLARE_URL: "https://mail.maiknowledge.com", MAILFLARE_API_KEY: KEY };
@@ -51,7 +51,7 @@ function installUpstream(overrides = {}) {
     if (key === "GET /api/v1/messages/msg_other") return J({ message: OTHER, attachments: [] });
     if (key === "PATCH /api/v1/messages/msg_1") return J({ message: { ...MSG, ...call.body } });
     if (key === "GET /api/v1/messages/msg_1/attachments/att_1") return new Response(new Uint8Array([1, 2, 255]), { status: 200 });
-    if (key === "POST /api/v1/send") return J({ messageId: "msg_sent" });
+    if (key === "POST /api/v1/send") return J(call.body.scheduledAt ? { messageId: "msg_sent", scheduled: true } : { messageId: "msg_sent" });
     return J({ error: "Not found" }, 404);
   };
 }
@@ -210,4 +210,150 @@ test("helpers: threading, html escaping, summary shape", () => {
   assert.deepEqual(replyThreading({}), {});
   assert.equal(textToHtml("<b>&"), "<div>&lt;b&gt;&amp;</div>");
   assert.deepEqual(Object.keys(summarise(MSG)).sort(), ["cc", "createdAt", "direction", "from", "id", "read", "snippet", "starred", "status", "subject", "threadId", "to"]);
+});
+
+/* ---- 2026-10-03 mail-pro: the iPad action row, rich compose, attachments, forward, schedule ---- */
+
+const sentBody = () => calls.find((c) => c.url.pathname === "/api/v1/send").body;
+const b64 = (n) => Buffer.alloc(n, 7).toString("base64");
+
+test("update: the PATCH sent upstream is exactly Mailflare's contract (method, path, field names, values)", async () => {
+  for (const [body, want] of [
+    [{ starred: true }, { starred: true }],
+    [{ starred: false }, { starred: false }],
+    [{ read: false }, { read: false }],
+    [{ status: "archived" }, { status: "archived" }],
+    [{ status: "trash" }, { status: "trash" }],
+    [{ status: "spam" }, { status: "spam" }],
+    [{ status: "received" }, { status: "received" }],
+  ]) {
+    installUpstream();
+    const r = await call("POST", "message/msg_1", { body });
+    assert.equal(r.status, 200, JSON.stringify(body));
+    const patch = calls.find((c) => c.method === "PATCH");
+    assert.equal(patch.url.pathname, "/api/v1/messages/msg_1");
+    assert.equal(patch.headers["Content-Type"], "application/json");
+    assert.deepEqual(patch.body, want);
+    // Mailflare's V1_MESSAGE_STATUSES: received, archived, trash, spam. Nothing else may be sent.
+    if (want.status) assert.ok(["received", "archived", "trash", "spam"].includes(want.status));
+    const out = await r.json();
+    assert.equal(out.message.id, "msg_1");
+  }
+  // a string "true" (what a lossy bridge could send) is refused, not silently dropped into a no-op
+  installUpstream();
+  assert.equal((await call("POST", "message/msg_1", { body: { starred: "true" } })).status, 400);
+});
+
+test("bug 1: Mailflare refusing a move (403, key may read but not manage) reaches the app as mail-permission, never as the owner's 403", async () => {
+  installUpstream({ "PATCH /api/v1/messages/msg_1": () => new Response(JSON.stringify({ error: "You do not have permission to manage this mailbox" }), { status: 403 }) });
+  const r = await call("POST", "message/msg_1", { body: { status: "archived" } });
+  assert.equal(r.status, 502);
+  assert.deepEqual(await r.json(), { error: "mail-permission" });
+  installUpstream({ "PATCH /api/v1/messages/msg_1": () => new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 }) });
+  const k = await call("POST", "message/msg_1", { body: { starred: true } });
+  assert.equal(k.status, 502);
+  assert.deepEqual(await k.json(), { error: "mail-key-rejected" });
+});
+
+test("list: the Scheduled folder is Mailflare's outbound queued mail", async () => {
+  installUpstream();
+  await call("GET", "list?folder=scheduled");
+  const q = calls.find((c) => c.url.pathname === "/api/v1/messages").url.searchParams;
+  assert.equal(q.get("status"), "queued");
+  assert.equal(q.get("direction"), "outbound");
+});
+
+test("send: rich html and its plain-text alternative pass through untouched; html-only gets a text part", async () => {
+  installUpstream();
+  const html = '<div><b>Hello</b> <font color="#d92d20">there</font></div><ul><li>one</li></ul>';
+  assert.equal((await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "Hello there\n- one", html } })).status, 200);
+  assert.equal(sentBody().html, html);
+  assert.equal(sentBody().text, "Hello there\n- one");
+  installUpstream();
+  assert.equal((await call("POST", "send", { body: { to: "a@x.com", subject: "s", html: "<p>Hi <b>you</b></p><p>Bye &amp; thanks</p>" } })).status, 200);
+  assert.equal(sentBody().text, "Hi you\nBye & thanks");
+  installUpstream();
+  assert.equal((await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "x", html: "y".repeat(2 * 1024 * 1024 + 1) } })).status, 413);
+  assert.equal(calls.filter((c) => c.url.pathname === "/api/v1/send").length, 0);
+});
+
+test("send: attachments pass through with Mailflare's limits enforced before anything goes upstream", async () => {
+  installUpstream();
+  const ok = await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "see file", attachments: [{ filename: "../scan\u0000.pdf", type: "application/pdf", contentBase64: b64(1000) }, { filename: "photo.jpg", type: "bogus type", contentBase64: b64(10) }] } });
+  assert.equal(ok.status, 200);
+  const files = sentBody().attachments;
+  assert.equal(files.length, 2);
+  assert.equal(files[0].filename, ".._scan_.pdf");
+  assert.equal(files[0].type, "application/pdf");
+  assert.equal(files[0].contentBase64, b64(1000));
+  assert.equal(files[1].type, "application/octet-stream");
+  assert.deepEqual(Object.keys(files[0]).sort(), ["contentBase64", "filename", "type"]);
+
+  // an attachment alone is a valid message
+  installUpstream();
+  assert.equal((await call("POST", "send", { body: { to: "a@x.com", subject: "s", attachments: [{ filename: "a.txt", contentBase64: b64(3) }] } })).status, 200);
+
+  const cases = [
+    [{ attachments: Array.from({ length: 11 }, (_, i) => ({ filename: i + ".txt", contentBase64: b64(3) })) }, 413, "too-many-attachments"],
+    [{ attachments: [{ filename: "big.bin", contentBase64: b64(10 * 1024 * 1024 + 3) }] }, 413, "attachment-file-too-large"],
+    [{ attachments: [0, 1, 2].map((i) => ({ filename: i + ".bin", contentBase64: b64(7 * 1024 * 1024) })) }, 413, "attachments-too-large"],
+    [{ attachments: [{ filename: "x", contentBase64: "not base64!" }] }, 400, "bad-attachment"],
+    [{ attachments: "nope" }, 400, "bad-attachment"],
+  ];
+  for (const [extra, status, error] of cases) {
+    installUpstream();
+    const r = await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "t", ...extra } });
+    assert.equal(r.status, status, error);
+    assert.equal((await r.json()).error, error);
+    assert.equal(calls.filter((c) => c.url.pathname === "/api/v1/send").length, 0, error);
+  }
+  assert.equal(b64Bytes(b64(10)), 10);
+  assert.equal(b64Bytes(b64(11)), 11);
+});
+
+test("send: forward copies the original's attachments server side, only from this mailbox", async () => {
+  installUpstream();
+  const r = await call("POST", "send", { body: { to: "z@x.com", subject: "Fwd: Hello", text: "fyi", forwardId: "msg_1", forwardAttachmentIds: ["att_1"] } });
+  assert.equal(r.status, 200);
+  const f = sentBody().attachments;
+  assert.deepEqual(f, [{ filename: "a.pdf", type: "application/pdf", contentBase64: "AQL/" }]);
+  assert.ok(calls.some((c) => c.url.pathname === "/api/v1/messages/msg_1/attachments/att_1"));
+  assert.equal(sentBody().inReplyTo, undefined, "a forward is not threaded as a reply");
+
+  installUpstream();
+  assert.equal((await call("POST", "send", { body: { to: "z@x.com", subject: "s", text: "t", forwardId: "msg_1", forwardAttachmentIds: ["att_nope"] } })).status, 404);
+  installUpstream();
+  assert.equal((await call("POST", "send", { body: { to: "z@x.com", subject: "s", text: "t", forwardId: "msg_other", forwardAttachmentIds: ["att_1"] } })).status, 404);
+  installUpstream();
+  assert.equal((await call("POST", "send", { body: { to: "z@x.com", subject: "s", text: "t", forwardId: "../x", forwardAttachmentIds: ["att_1"] } })).status, 400);
+  assert.equal(calls.filter((c) => c.url.pathname === "/api/v1/send").length, 0);
+
+  // forwarded files count toward the limits before they are downloaded
+  installUpstream({ "GET /api/v1/messages/msg_1": () => new Response(JSON.stringify({ message: MSG, attachments: [{ id: "att_1", filename: "huge.zip", type: "application/zip", size: 9 * 1024 * 1024 }] }), { status: 200 }) });
+  const big = await call("POST", "send", { body: { to: "z@x.com", subject: "s", text: "t", forwardId: "msg_1", forwardAttachmentIds: ["att_1"], attachments: [{ filename: "b.bin", contentBase64: b64(6 * 1024 * 1024) }, { filename: "c.bin", contentBase64: b64(6 * 1024 * 1024) }] } });
+  assert.equal(big.status, 413);
+  assert.equal((await big.json()).error, "attachments-too-large");
+  assert.ok(!calls.some((c) => c.url.pathname.includes("/attachments/")));
+});
+
+test("send: scheduledAt is validated and normalised to UTC ISO; the reply says it was scheduled", async () => {
+  installUpstream();
+  const when = new Date(Date.now() + 3 * 3600 * 1000);
+  const local = when.toISOString().replace("Z", "+00:00");
+  const r = await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "t", scheduledAt: local } });
+  assert.equal(r.status, 200);
+  assert.deepEqual(await r.json(), { ok: true, id: "msg_sent", scheduled: true });
+  assert.equal(sentBody().scheduledAt, when.toISOString());
+  for (const [v, err] of [["yesterday", "bad-schedule"], [new Date(Date.now() - 1000).toISOString(), "schedule-in-past"], [new Date(Date.now() + 400 * 86400000).toISOString(), "schedule-too-far"]]) {
+    installUpstream();
+    const x = await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "t", scheduledAt: v } });
+    assert.equal(x.status, 400, v);
+    assert.equal((await x.json()).error, err);
+    assert.equal(calls.filter((c) => c.url.pathname === "/api/v1/send").length, 0);
+  }
+  installUpstream();
+  await call("POST", "send", { body: { to: "a@x.com", subject: "s", text: "t" } });
+  assert.equal(sentBody().scheduledAt, undefined, "no schedule means send now");
+  assert.deepEqual(checkSchedule("", 0), { at: null });
+  assert.equal(htmlToText("<style>p{}</style><p>a</p>b<br>c"), "a\nb\nc");
 });
