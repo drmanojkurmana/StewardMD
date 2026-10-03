@@ -247,6 +247,15 @@
 
   /* route(text, { patient_session_id }) -> Promise<result | null>. Never rejects. */
   function layer0(cands) { var c = cands && cands[0]; return !!(c && (c.kind === "icd" || c.exact)); }
+  // Layer 0 alone, synchronous: an exact name or an explicit ICD request, else null. MaiK calls this BEFORE
+  // its follow-up logic, so "antibiogram kholo" opens the tool even while an earlier topic is live.
+  function rules(text) {
+    if (!flagOn() || NEGATION.test(String(text || ""))) return null;
+    var cands; try { cands = candidates(text); } catch (e) { return null; }
+    if (!layer0(cands)) return null;
+    stats.requests++; stats.rules++;
+    return resultFor(cands[0], text, "rules", null);
+  }
   function route(text, ctx) {
     stats.requests++;
     if (!flagOn()) return Promise.resolve(null);
@@ -399,7 +408,7 @@
   }
 
   var API = {
-    route: route, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
+    route: route, rules: rules, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,

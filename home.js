@@ -8459,6 +8459,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _pasteAsk = maikPastedAsk(q);
       if (_pasteAsk) { q = _pasteAsk; try { _maikTopic = null; } catch (e) {} }
       _maikUserQ = q; _maikFollowUp = false;
+      // Edge Layer 0 (exact tool/calculator/drug name, explicit ICD) runs BEFORE follow-up resolution:
+      // with a topic live, "antibiogram kholo" was read as a follow-up and searched (owner, 2026-10-04).
+      if (!_maikSkipEdge && window.SMD_EDGE && SMD_EDGE.rules) {
+        var _r0 = null; try { _r0 = SMD_EDGE.rules(q); } catch (e) { _r0 = null; }
+        if (_r0) { var _s0 = false; try { _s0 = !!maikEdgeRender(_r0, q); } catch (e) { _s0 = false; } if (_s0) return; }
+      }
       if (maikV2() && !_pasteAsk) {
         var fu = maikResolveFollowup(q);
         if (fu && fu.clarify) { bubble("ai", '<div class="maik-welcome">' + maikEscH(fu.clarify) + '</div>'); return; }
