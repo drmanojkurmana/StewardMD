@@ -498,6 +498,9 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-bedcell span { font-size: 11px; color: var(--on-surface-variant); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #smdWard .w-bedcell.occ { background: var(--sc-high); border: 1px solid var(--outline-variant); }
 #smdWard .w-bedcell.unknown { background: none; border: 1px dashed var(--outline-variant); justify-content: center; align-items: center; grid-column: 1 / -1; }
+/* A recovery bay: the label and how long, in full; it may take two lines in a narrow tile. */
+#smdWard .w-bedcell span.w-bedcell-rec { color: var(--on-surface); font-weight: 600; white-space: normal; }
+#smdWard .w-bedcell-rec i { font-style: normal; white-space: nowrap; }
 #smdWard .w-bedcell.free { appearance: none; border: 1px solid var(--primary); background: var(--primary-container); color: var(--on-primary-container); cursor: pointer; }
 #smdWard .w-bedcell.free span { color: inherit; opacity: .8; }
 #smdWard .w-bedcell.free:active { filter: brightness(.94); }
