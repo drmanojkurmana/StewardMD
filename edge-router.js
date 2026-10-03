@@ -355,6 +355,14 @@
     var k = Math.max(0, Math.min(MAX_OPTIONS, n | 0));
     return 'root ::= "{\\"option\\":" [0-' + k + '] "}"';
   }
+  /* FunctionGemma load args (memory, 2026-10-04). A pick prompt is <= ~300 tokens + 4 output, so a
+   * 512-token context is enough, and 64-token batches shrink the compute buffers, which hold logits
+   * over the 262k-token vocabulary for every token of a ubatch (512 x 262k x f32 = 512 MB reserved).
+   * q8_0 KV (the plugin default, explicit here). Prefill is chunked to nBatch on both platforms. */
+  function fgLoadArgs(path, o) {
+    return { path: path, nCtx: o.nCtx || 512, nBatch: o.nBatch || 64, nUbatch: o.nUbatch || 64,
+             nThreadsBatch: o.nThreadsBatch || 4, kvQ8: true };
+  }
   function llamaAdapter(plugin, opts) {
     var o = opts || {}, loaded = false;
     function mine() { return G.SMD_LLAMA_HOLDER === "edge"; }
@@ -372,7 +380,7 @@
           // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
           // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
           // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
-          return plugin.load({ path: path, nCtx: o.nCtx || 1024, nThreadsBatch: o.nThreadsBatch || 4 });
+          return plugin.load(fgLoadArgs(path, o));
         }).then(function () { loaded = true; });
       },
       complete: function (task) {

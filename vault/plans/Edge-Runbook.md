@@ -313,6 +313,19 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   it loaded and held (`llamaAdapter.load()`, 29 samples) the app is **996-1,000 MB** against the 411-424 MB
   baseline: **about +575 MB, over the plan's +400 MB budget (MISS)**. It drops back to ~405 MB after
   `release()`. The app was relaunched after (the llama plugin had evicted MaiK's pack).
+- **Memory fix, 2026-10-04 (branch `fg-memory`, `edge15`): FunctionGemma load args cut, AFTER MEASUREMENT
+  PENDING.** `llamaAdapter` now loads with `nCtx 512, nBatch 64, nUbatch 64, nThreadsBatch 4, kvQ8 true`
+  (was `nCtx 1024`, plugin defaults `nBatch/nUbatch 512`). Why: the pick prompt is at most ~300 tokens + 4
+  output; the compute buffer holds logits over the 262k vocabulary for every token of a ubatch (512 x 262k
+  x f32 = 512 MB reserved; 64 -> 64 MB); Gemma 3 270M KV is small (18 layers x 1 KV head x 256, q8: ~10 KB
+  a token). Both platforms chunk prefill to `n_batch`. MaiK's loads (`maik-local.js`) are unchanged.
+  **Before** (Pixel 9, APK `edge11` adapter, `llama_jni newContext: n_ctx=1024 n_batch=512 n_ubatch=512
+  threads_batch=4 kv_q8=1 flash_attn=1`, 05:13): app PSS **189 MB** idle (no MaiK pack resident) ->
+  **612-614 MB** with FunctionGemma loaded, before any pick: **+425 MB at load**. The pick and both
+  bake-offs could not run: StewardMD went to the background (another app in front) and its WebView JS
+  froze, so every CDP call timed out; the app was not brought back for 30 min. **After: pending** (inject
+  this `edge-router.js` over CDP, load + one pick, `dumpsys meminfo`, then `--engine llama --limit 50`
+  before and after: must stay 50/50 valid, same picks, p95 not worse).
 - **iPhone 15 Pro, 2026-10-03 (build above, over Wi-Fi, ggml-org FunctionGemma 270M Q8_0 rev 2566ce14,
   sha256 83940d4d, copied to `Documents/edge/`; Metal): A0.3 iOS latency PASSED with the pick.**
   - Run 1 (first load after install): 48 `ok`, 2 `unavailable`. Rows 1-2 hit the 8 s cold budget (the
