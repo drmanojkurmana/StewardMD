@@ -846,6 +846,13 @@
         // The id is the LAST resort, never the first thing a nurse reads off a bed.
         return { bed: o.bed, html: '<button class="w-bedcell occ" data-w-act="openbedpatient:' + esc(o.encounterId || o.patientId || "") + "\" title=\"" + wTA("ward.open-patient-chart", "Open patient chart") + "\"><b>" + esc(o.bed) + '</b><span>' + phiWho(o.name, o.mrn, o.patientId) + "</span>" + (o.name && o.mrn ? "<span>" + phi("id", o.mrn) + "</span>" : "") + "</button>" };
       });
+      /* A recovery (PACU) bay is held by the patient in it, so it is drawn taken, never free, with how long they have
+       * been in recovery. The way out of recovery is on the theatre board, so that is where the tile goes. */
+      (w.recovery || []).forEach(function (o) {
+        var mins = o.since ? Math.max(0, Math.floor((Date.now() - Date.parse(o.since)) / 60000)) : null;
+        cells.push({ bed: o.bed, html: '<button class="w-bedcell occ" data-w-act="surgeryboard" title="' + wTA("ward.bed-recovery-open", "Open the theatre board to leave recovery") + '"><b>' + esc(o.bed) + '</b><span class="w-bedcell-rec">' +
+          (mins == null ? wTH("ward.bed-recovery", "Recovery") : wTH("ward.bed-recovery-for", "Recovery &middot; {t}", { t: "<i>" + esc(dcMins(mins)) + "</i>" }, "t")) + "</span><span>" + phiWho(o.name, o.mrn, o.patientId) + "</span>" + (o.name && o.mrn ? "<span>" + phi("id", o.mrn) + "</span>" : "") + "</button>" });
+      });
       // Which free cell is highlighted as "picked" - a UI selection compare against what the board
       // itself already reported as free, never a computation of whether a bed IS free.
       var isPicked = function (b) { return !!t && t.ward === w.ward && String(t.bed) === String(b); };
@@ -865,7 +872,7 @@
       var unplaced = (w.unplaced || []).map(function (o) {
         return '<div class="w-bedcell occ"><b>-</b><span>' + wTH("ward.no-bed-assigned", "{name} (no bed assigned)", { name: phiWho(o.name, o.mrn, o.patientId) }, "name") + "</span></div>";
       }).join("");
-      return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + (w.department ? esc(w.department) + " &middot; " : "") + wTH("ward.occupied", "{length} occupied", { length: esc((w.occupied || []).length) }, "length") + (w.bedsKnown ? " &middot; " + wTH("ward.free2", "{length} free", { length: esc((w.free || []).length) }, "length") : "") + "</small></h4>" +
+      return '<div class="w-wardrow"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;"><h4>' + esc(w.ward) + "<small style=\"margin-left:8px;\">" + (w.department ? esc(w.department) + " &middot; " : "") + wTH("ward.occupied", "{length} occupied", { length: esc((w.occupied || []).length + (w.recovery || []).length) }, "length") + (w.bedsKnown ? " &middot; " + wTH("ward.free2", "{length} free", { length: esc((w.free || []).length) }, "length") : "") + "</small></h4>" +
         (moving && w.ward !== "(no ward recorded)" ? '<button class="w-btn ghost sm" data-w-act="transferward:' + esc(w.ward) + '" type="button">' + ms("swap_horiz") + wTH("ward.move-here-no-bed-yet", "Move here, no bed yet") + "</button>" : "") + "</div>" +
         '<div class="w-bedgrid">' + occ + free + unplaced + "</div></div>";
     };
