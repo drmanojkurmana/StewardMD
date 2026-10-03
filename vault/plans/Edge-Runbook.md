@@ -1,6 +1,6 @@
 ---
 tags: [plan, edge, runbook]
-status: round 2 done (2026-10-03); iPhone back-off during real MaiK generation, real Serious and availMB with MaiK Lite pending
+status: round 2 done (2026-10-03); Pixel renderer-gone run (first request missed, fixed in edge8, not re-run); Pixel bake-offs with PSS and the 30-minute session not run (phone locked); iPhone back-off during real MaiK generation, real Serious and availMB with MaiK Lite pending
 ---
 # StewardMD Edge: owner runbook (sprint days 2 to 5)
 
@@ -392,7 +392,34 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   dies, `MainActivity.onRenderProcessGone` marks it, `Needle.available()` reports `rendererGone:true`, and
   `edge-router.js` skips the model for the rest of the session through `memoryOk` (rules still answer).
   iOS has no app-side hook for the web-content process (Capacitor handles it), so iOS has no such clause.
-  Not yet run on a phone.
+- **Renderer-gone on the Pixel 9, 2026-10-03 13:34 (APK of 7e28af40a, `edge7`, on USB, base `needle3.cact`,
+  `smd_edge` "1" for the test only): mechanism PASSED, first request MISSED, fixed in `edge8` (not re-run).**
+  - `adb shell kill <renderer pid>` is refused (the renderer runs under an isolated uid: "Operation not
+    permitted"). CDP `Page.crash` on the app's page killed it instead.
+  - logcat: `W StewardMD: WebView render process gone (didCrash=true); recovering by recreating the activity`.
+    Same app pid; a new renderer started; no crash.
+  - After the recreate, `Needle.available()` gave `rendererGone:true` and `backoff()` gave `memoryOk:false`.
+    The FIRST model-routed request ("show me the resistance patterns antibiogram") still called Needle: the
+    router's device state starts at `rendererGone:false` and was refreshed only after the check. The second
+    request skipped the engine (468 ms, null); "antibiogram kholo" still answered `rules:tool:antibiogram`.
+  - `am force-stop` and a relaunch: `rendererGone:false`, the engine is called again.
+  - Fix (6b347d25e, `edge8`): `route()` waits for one `Needle.available()` reading on the first model-routed
+    request; later requests keep the one-request-stale refresh. Unit test fails without it. The `edge8` APK
+    is installed on the Pixel but the re-test did not run: the phone stayed locked (below).
+  - Seen on the way: with the screen locked the app sits in the `background` cpuset (cores 0-3, the A520s);
+    logcat `NeedleJNI: engine threads 4 (cpu_capacity, 8 cpus, 4 allowed)` and every Needle call timed out
+    (routes 4.0-5.7 s). Any Edge timing needs the phone unlocked with the app in front.
+- **Pixel round of 2026-10-03 afternoon: NOT RUN, all PENDING.** The phone stayed behind its lock screen (PIN set)
+  from 13:34 to 19:50; it was not bypassed (locked, the app runs on the A520s only, so numbers would be
+  invalid). PENDING: the renderer-gone re-test on `edge8`, the Needle and
+  FunctionGemma `--limit 50` bake-offs with peak PSS, the 30-minute A0.6 mixed session, the MaiK Lite
+  `nThreadsBatch` re-measure with the book linked (optional). Also PENDING on the iPhone: the MaiK Lite
+  readings (real MaiK-busy back-off, availMB with MaiK Lite loaded); MaiK Lite is staged on the Mac. The earlier Pixel mixed-session result below (2026-10-02,
+  charging, before the thread fix) is still the only one, and it is stale. Ready for the next window: the
+  harness now runs its Edge step under the production back-off (e13344cf5, skips counted), and
+  `/tmp/edge-pixel/sampler.sh` (Mac scratch) logs app and `:edge` PSS, thermal status, skin and battery
+  temperature, level and power every N seconds. Phone left clean (OTA 167 current, `smd_edge` unset,
+  `smd_maik_rag_linked` "0", no test weights, stay-awake off, no forwards, no thermal override).
 - Why simulated: MaiK Lite had to be re-downloaded after the reinstall, and the phone's own network gave
   0.01-0.05 MB/s (the Mac got ~0.9 MB/s from the same R2 file); a Mac side-load did not finish before the
   owner had to take the phone. Real Serious was not attempted (it needs sustained MaiK load).
