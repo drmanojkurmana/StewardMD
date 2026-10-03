@@ -50,8 +50,11 @@ MAILFLARE_API_KEY`, then revoke the old one).
   allowing only images + inline styles; links are intercepted and opened outside, `mailto:` opens compose.
   The headless test proves an inline `<script>` and an `onerror` handler in mail do not run.
 - The Mailflare key never reaches the device. Mail content is not logged.
-- Owner list in `mail.js` mirrors `OWNER_EMAILS_DEFAULT` (3 emails), not the stale 4-email copies in
-  `home.js NOTIF_OWNERS` / `sidebar-redesign.js` that still include `stewardmd.in@gmail.com`.
+- **Three accounts only** (owner, 2026-10-03): drmanojkurmana@gmail.com, mkkmanojkumar0@gmail.com,
+  kdiwakar45@gmail.com. The server gate is `MAIL_ACCOUNTS` in `functions/api/mail/[[path]].js`, checked
+  after `ownerOK`, because production's `OWNER_EMAILS` (wrangler.toml) also names stewardmd.in@gmail.com,
+  a customer account. `mail.js OWNERS` mirrors it and only hides the entry points. The 4-email lists in
+  `home.js NOTIF_OWNERS` / `sidebar-redesign.js` gate other owner rows, not Mail.
 
 ## Tests
 - `test/mail-proxy.test.mjs` (unit, in `npm test`): owner gate, MAIL_ON, folder mapping, mailbox pinning,
