@@ -190,10 +190,12 @@
   /* Back-off (Edge-Master-Plan A0.5): skip Edge, so the rules answer, when memory is low
    * (lowMemory, or under 250 MB available), the phone is at thermal SEVERE or above (Android
    * THERMAL_STATUS_SEVERE = 3; the Needle plugin maps iOS .serious to 3), or MaiK is generating or
-   * Whisper is decoding. The device numbers arrive asynchronously from Needle.available(), so the last
+   * Whisper is decoding, or the Android WebView render process has died (device.rendererGone: the plugin
+   * keeps it set until the app process ends; folded into memoryOk, as memory pressure is the usual cause).
+   * The device numbers arrive asynchronously from Needle.available(), so the last
    * reading is kept and refreshed on every routed request; until one arrives, everything reads "ok".
    * SMD_EDGE_ENV, when set (tests, harnesses), replaces this whole object. */
-  var device = { lowMemory: false, availMB: null, thermal: 0 };
+  var device = { lowMemory: false, availMB: null, thermal: 0, rendererGone: false };
   function refreshDevice() {
     var p = null;
     try { p = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Needle; } catch (e) {}
@@ -203,12 +205,13 @@
         if (typeof a.lowMemory === "boolean") device.lowMemory = a.lowMemory;
         if (typeof a.availMB === "number") device.availMB = a.availMB;
         if (typeof a.thermal === "number") device.thermal = a.thermal;
+        if (typeof a.rendererGone === "boolean") device.rendererGone = a.rendererGone;
       }
       return device;
     }, function () { return device; });
   }
   var DEFAULT_ENV = {
-    memoryOk: function () { return !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
+    memoryOk: function () { return !device.rendererGone && !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
     thermalOk: function () { return device.thermal < 3; },
     othersBusy: function () {
       var L = G.SMD_MAIK_LOCAL, N = G.SMD_NATIVE;

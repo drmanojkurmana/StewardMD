@@ -207,11 +207,14 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
   try {
     await reads({ thermal: 0, lowMemory: false, availMB: 900 });
     let o = await runs(); assert.equal(o.calls, 1); assert.equal(o.r && o.r.id, "antibiogram", "all clear: the model answers");
-    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }]) {
+    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }, { rendererGone: true }]) {
       await reads(d); o = await runs();
       assert.equal(o.calls, 0, "skipped for " + JSON.stringify(d)); assert.equal(o.r, null, "the caller continues (rules / MaiK)");
     }
-    await reads({ thermal: 2, lowMemory: false, availMB: 600 }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
+    await reads({ thermal: 0, lowMemory: false, availMB: 600, rendererGone: true });
+    assert.equal((await runs()).calls, 0, "renderer gone: Edge is off for the session even with memory and heat fine");
+    assert.equal(E.backoff().device.rendererGone, true);
+    await reads({ thermal: 2, lowMemory: false, availMB: 600, rendererGone: false }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: true, waiting: 0 }) };
     assert.equal((await runs()).calls, 0, "never during a MaiK generation");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: false, waiting: 2 }) };
