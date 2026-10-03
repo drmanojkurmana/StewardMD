@@ -492,14 +492,25 @@ final class LlamaEngine {
         // mtmd owns tokenisation because it has to interleave text tokens with image embeddings.
         var toks = [llama_token]()
         if !wantsImages {
-            try prompt.withCString { cstr in
-                let len = Int32(strlen(cstr))
-                let need = -llama_tokenize(vocab, cstr, len, nil, 0, true, true)
-                guard need > 0 else { throw LlamaError(.generationFailure, "tokenize sizing failed") }
-                toks = [llama_token](repeating: 0, count: Int(need))
-                let n = llama_tokenize(vocab, cstr, len, &toks, need, true, true)
-                guard n > 0 else { throw LlamaError(.generationFailure, "tokenize failed") }
-                toks = Array(toks.prefix(Int(n)))
+            for _ in 0..<2 {
+                try prompt.withCString { cstr in
+                    let len = Int32(strlen(cstr))
+                    let need = -llama_tokenize(vocab, cstr, len, nil, 0, true, true)
+                    guard need > 0 else { throw LlamaError(.generationFailure, "tokenize sizing failed") }
+                    toks = [llama_token](repeating: 0, count: Int(need))
+                    let n = llama_tokenize(vocab, cstr, len, &toks, need, true, true)
+                    guard n > 0 else { throw LlamaError(.generationFailure, "tokenize failed") }
+                    toks = Array(toks.prefix(Int(n)))
+                }
+                // The pick shortcut reads the last 3 prompt tokens, so a prompt under 3 tokens cannot use
+                // it. Drop the forced prefix and the pick BEFORE `constrained` is computed below, so the
+                // grammar still applies (a leftover pickIds would leave decoding unconstrained).
+                if let pk = pick, !pickIds.isEmpty, toks.count < 3 {
+                    pickIds = []
+                    prompt = String(prompt.dropLast(pk.prefix.count))
+                    continue
+                }
+                break
             }
         }
 
