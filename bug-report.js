@@ -175,6 +175,15 @@
     if (!el || el === document.body || el === document.documentElement) return null;
     return (el.closest && el.closest("button,a,[role=button],[role=tab],[role=switch],input,select,textarea,label,[data-act],[data-sbr-act]")) || el;
   }
+  function safeText(t) {
+    try {
+      if (t.hasAttribute && t.hasAttribute("data-phi-input")) return "";
+      var c = t.cloneNode(true);
+      [].forEach.call(c.querySelectorAll ? c.querySelectorAll("[data-phi]") : [], function (e) { e.textContent = e.getAttribute("data-phi") || ""; });
+      var txt = (c.textContent || "").trim().replace(/\s+/g, " ");
+      return txt || (t.tagName === "INPUT" || t.tagName === "TEXTAREA" ? "" : String(t.value || "").trim());
+    } catch (e) { return ""; }
+  }
   function describe(el) {
     var t = target(el);
     if (!t) return null;
@@ -188,7 +197,11 @@
       sel.unshift(s + (cls ? "." + cls : "") + (act ? '[data-act="' + act + '"]' : ""));
       n = n.parentElement;
     }
-    var label = (t.getAttribute && (t.getAttribute("aria-label") || t.getAttribute("title"))) || (t.innerText || t.value || "").trim().replace(/\s+/g, " ");
+    // No patient identifier may reach a report (repo rule: no PHI in logs), whatever privacy mode is
+    // set to: use the privacy-mode masks (data-phi-* label copies, [data-phi] spans) and never an
+    // identifier input's value. Identifiers on screens privacy mode does not cover can still appear.
+    var label = (t.getAttribute && (t.getAttribute("data-phi-aria-label") || t.getAttribute("aria-label") ||
+      t.getAttribute("data-phi-title") || t.getAttribute("title"))) || safeText(t);
     label = String(label || "");
     if (label.length > 60) label = label.slice(0, 57).replace(/\s+\S*$/, "") + "...";
     return { tag: t.tagName.toLowerCase(), sel: sel.join(" > ").slice(0, 300), label: label,

@@ -113,6 +113,20 @@ test("wrapIn wraps exactly the identifier inside a built sentence", () => {
   assert.equal(P.wrapIn("name", "x", ""), "x");
 });
 
+test("attr: an accessible name carries the real text, data-phi-<attr> the same text built round the mask", () => {
+  const card = (n) => "Open Bed 7, " + (n || "Patient") + ", Critical";
+  assert.equal(P.attr("aria-label", "name", "Testa Patientkumar", card),
+    ' aria-label="Open Bed 7, Testa Patientkumar, Critical" data-phi-aria-label="Open Bed 7, T. P., Critical"');
+  assert.equal(P.attr("title", "id", "UHID20269990001", (n) => "UHID " + n),
+    ' title="UHID UHID20269990001" data-phi-title="UHID ' + DOTS + ' 0001"', "IDs use the ID mask");
+  assert.equal(P.attr("alt", "name", "A\"<x> Fake", (n) => "Photo of " + n),
+    ' alt="Photo of A&quot;&lt;x&gt; Fake" data-phi-alt="Photo of A. F."', "both values escaped");
+  assert.equal(P.attr("aria-label", "name", "", card), ' aria-label="Open Bed 7, Patient, Critical"', "nothing to mask: no marker");
+  assert.equal(P.attr("aria-label", "name", null, card), ' aria-label="Open Bed 7, Patient, Critical"');
+  const masked = P.attr("aria-label", "name", "Testa Patientkumar", card).split("data-phi-aria-label=")[1];
+  assert.ok(!/Testa|Patientkumar/.test(masked), "the masked label never holds the name");
+});
+
 test("state: default off, session-scoped, kill switch hides and forces off", () => {
   const a = load();
   assert.equal(a.enabled(), true);
