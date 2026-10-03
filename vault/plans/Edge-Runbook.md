@@ -306,6 +306,17 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   - Direct `generate({pick})`: `{"option":1}`, p 0.78-0.79, `perf.pickTokens` = **14937 4485 1083 236770**
     (the llama-json target `{"option":` plus one digit token, as on Android); 99 prompt tokens, 18-44 ms warm.
   - Still open on iOS: the one-off first load past the 8 s cold budget (warm-up or a larger first-load budget).
+  - **Full iOS compile check, 2026-10-03 14:25 (commit 6b347d25e: edge8 + the LlamaEngine.swift short-pick
+    fallback):** Xcode 27.2, `App` scheme, `generic/platform=iOS`, `CODE_SIGNING_ALLOWED=NO`,
+    `-skipPackagePluginValidation -skipMacroValidation`, after `cap sync ios`: **BUILD SUCCEEDED**, 0 errors,
+    no warnings in LlamaEngine/LlamaPlugin/NeedlePlugin; ~5 min; lowest free disk 1.77 GB (started at 7.8 GB);
+    derived data deleted after. No Package.swift change. Not run on a phone.
+  - Likely cause (code read, 2026-10-03; a guess, NOT timed on the device): the 8 s cold budget only stops
+    waiting (`edge-runtime.js` line 48, the `coldMs` timer); the native load keeps going on the serial queue.
+    `llama.xcframework` ships no `.metallib`, so Metal compiles its shaders from source on the first load
+    after an install (about 16-19 s); iOS caches them per install, so later loads take ~350 ms. Row 3 joins
+    the load already in flight. No user impact today: `llamaAdapter` is bake-off only and `autoEngine()`
+    picks Needle. No code change: a prewarm would hide the cold-load cost from the bake-off numbers.
 - **Seen on the way:** on the APK bundle the idle app held ~200% CPU (WebView compositor `VizWebView` +
   GPU thread, home screen in front) and heated the phone from 36 C to 42 C (thermal MODERATE) in ~20
   minutes; backgrounding the app cooled it. Bundle 167 was not checked for the same. Worth a look before
@@ -391,6 +402,8 @@ A Layer 0 request ("antibiogram kholo") at simulated SEVERE still answered `rule
   MaiK Lite loaded) is still the only MaiK-loaded figure.
 - **Pending (iPhone):** back-off while MaiK Lite really generates, real thermal Serious, and availMB with
   MaiK Lite loaded.
+  MaiK Lite (`maik-lite-q4_k_m.gguf`, sha verified) is staged on the Mac for the next iPhone window, with
+  side-load steps in its `SIDELOAD.md` (job scratch folder, not in git).
 - Clean-up: both test weights overwritten with 0-byte files (`devicectl` cannot delete), the app's own
   background MaiK download cancelled and its partial file removed, `smd_edge` unset.
 - **4 GB Android phone (step 3): none available on 2026-10-03.** A0.2 and A0.6 on a 4 GB phone not run.
