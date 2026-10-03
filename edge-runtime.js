@@ -12,6 +12,8 @@
  *     resolves "stale" and is never shown. The engine is reset before the next call.
  *   - Back-off: env.memoryOk() / env.thermalOk() / env.othersBusy() are asked before every call; a
  *     "no" resolves "skipped" so the caller uses the rules path.
+ *   - Lost weights: an engine error tagged `notLoaded` (the engine process restarted empty) marks the
+ *     runtime cold; that call reloads once and retries. No loop: a second notLoaded is an "error".
  *   - Offline: the runtime makes no network calls of its own; adapters must not either.
  * Every outcome is a resolved value, never a rejection, so a caller can always continue (rule S4).
  *
@@ -84,7 +86,20 @@
       }, function (err) {
         if (stuck) { stuck = false; next(); }
         if (settled) return;
-        settled = true; clearTimeout(timer); running = null;
+        settled = true; clearTimeout(timer);
+        // The engine lost its weights behind the runtime's back (Android: the low-memory killer ended
+        // :edge and the restarted process has no model). Mark cold, reload under coldMs, retry this job
+        // once with a fresh deadline. `running` stays this job meanwhile, so new work waits.
+        if (err && err.notLoaded && !job.reloaded) {
+          job.reloaded = true; loaded = false;
+          return ensureLoaded().then(function (ok) {
+            if (ok && job.token === token) return start(job);
+            running = null;
+            done(job.resolve, ok ? "stale" : "unavailable", ok ? null : { reason: "load" });
+            next();
+          });
+        }
+        running = null;
         done(job.resolve, "error", { error: String((err && err.message) || err), ms: now() - t0 });
         next();
       });

@@ -200,6 +200,32 @@ test("needleAdapter: every complete() starts from a fresh needle_init (configure
   assert.deepEqual(calls, ["load", "configure", "configure", "complete", "configure", "complete", "configure", "complete"]);
 });
 
+// Pixel 9, OTA v174: :edge died outside the runtime (low-memory killer; Needle.kill() by hand) and
+// restarted empty. Every later configure failed "needle_init: no model loaded" and Edge stayed dead
+// until the app restarted, because the runtime still believed loaded = true.
+test("needleAdapter + runtime: a restarted :edge with no weights reloads once and the call still runs", async () => {
+  let model = false, loads = 0, configures = 0;
+  const plugin = {
+    load: () => { loads++; model = true; return Promise.resolve({ rc: 0 }); },
+    configure: () => { configures++; if (!model) { const e = new Error("needle_init: no model loaded"); e.code = "ENGINE_ERROR"; return Promise.reject(e); } return Promise.resolve({ rc: 0 }); },
+    complete: () => Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) })
+  };
+  const rt = globalThis.SMD_EDGE_RUNTIME.create({ engine: E.needleAdapter(plugin, { killable: true }) });
+  assert.equal((await rt.run({ prompt: "p1" })).status, "ok");
+  assert.equal(loads, 1);
+  model = false;                                      // process died and came back with no model
+  const r = await rt.run({ prompt: "p2" });
+  assert.equal(r.status, "ok", "reloaded and ran, not error");
+  assert.equal(r.result.function_calls[0].arguments.option, 1);
+  assert.equal(loads, 2);
+  assert.equal(rt.status().loaded, true);
+  // No loop: weights that never stick give one reload attempt, then the call gives up.
+  plugin.load = () => { loads++; return Promise.resolve({ rc: 0 }); };
+  model = false; const before = loads;
+  assert.equal((await rt.run({ prompt: "p3" })).status, "unavailable", "the reload itself fails: rules path");
+  assert.equal(loads - before, 1, "exactly one reload per call");
+});
+
 test("Layer 0 widened: an exactly named tool or generic drug, in any of the three languages, is a rules answer", async () => {
   store.smd_edge = "1";
   const m = mock(() => needleReply(1)); E.setEngine(m);
