@@ -458,3 +458,10 @@ regulatory claim, `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
 | `smd_pglog_demo` | OFF | **NEVER, INTEGRITY.** Fabricated residents, entries and verifications. See the table at the top of this file. |
 | `smd_pglog_verify_sla_days` | `7` | **CONFIG, NOT NMC.** NMC's only cadence is the monthly guide authentication (5.2(vi)); there is no per-entry SLA. Labelled as institutional policy in the UI. |
 | `smd_pglog_attest_grace_days` | `7` | CONFIG, not NMC. Days after a month closes before its missing authentication is called overdue. |
+
+## Privacy mode (plan B2), added 2026-10-03
+
+| Key | Default | What it does |
+|---|---|---|
+| `smd_privacy_mode_enabled` (localStorage) | enabled (anything but `"0"`) | Kill switch: `"0"` removes the home-header toggle and forces privacy mode off. |
+| `smd_privacy_mode` (sessionStorage) | absent = off | The mode itself, `"1"` while on. Session only, never synced. |

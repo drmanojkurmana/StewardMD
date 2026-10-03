@@ -7,16 +7,20 @@
  *
  *   node scripts/wardsynq-assurance.mjs
  *   node scripts/wardsynq-assurance.mjs --json
+ *   node scripts/wardsynq-assurance.mjs --release
  *
- * Exit code is 1 when any hazard is FAILING, so this can gate a pipeline. It is deliberately 0 for
- * UNCONTROLLED and NO_EVIDENCE: those are known, declared gaps in an early build, and a gate that
- * fails on them from day one is a gate somebody switches off.
+ * Exit code is 1 when the test process failed or crashed (non-zero exit, a failed or crashed test file,
+ * any failed test, no results parsed) or when any hazard is FAILING. The default is the development
+ * report: it stays 0 for UNCONTROLLED, NO_EVIDENCE and PARTIAL, which are known, declared gaps in an
+ * early build, and a gate that fails on them from day one is a gate somebody switches off.
+ * --release is the deployment gate: those three also exit 1. Software verification is all this
+ * checks; clinical approval is a separate required sign-off the hazard caveats carry.
  */
 
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { assess, report, summarise } from "../wardsynq/wardsynq-safety-case.js";
+import { assess, gate, report, summarise } from "../wardsynq/wardsynq-safety-case.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
@@ -38,6 +42,7 @@ const SUITES = [
   "test/wardsynq-actors.test.mjs",
   "test/wardsynq-iomt.test.mjs",
   "test/wardsynq-offline.test.mjs",
+  "test/wardsynq-offline-journal.test.mjs",   // HAZ-DOWN-01: three-way reconciliation and the durable journal
   "test/wardsynq-interop.test.mjs",
   "test/wardsynq-paediatrics.test.mjs",
   "test/wardsynq-deterioration.test.mjs",
@@ -86,38 +91,51 @@ const SUITES = [
   "test/medcore-shadow.test.mjs",
 ];
 
-/** Runs node --test with the TAP reporter and returns a flat list of {name, passed}. */
+/** Runs node --test with the TAP reporter. Returns the flat {name, passed} list plus how the process ended. */
 function runTests() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    const run = { exitCode: null, signal: null, error: null, stderr: "", fileFailures: [], failedTests: [] };
     const child = spawn(process.execPath, ["--test", "--experimental-test-module-mocks", "--experimental-sqlite", "--test-reporter=tap", ...SUITES], { cwd: ROOT });
     let out = "";
     child.stdout.on("data", (d) => { out += d; });
-    child.stderr.on("data", () => {});
-    child.on("error", reject);
-    child.on("close", () => {
+    child.stderr.on("data", (d) => { run.stderr += d; });
+    child.on("error", (e) => { run.error = String((e && e.message) || e); resolve({ results: [], run }); });
+    child.on("close", (code, signal) => {
+      run.exitCode = code; run.signal = signal;
       const results = [];
       // TAP lines look like "ok 3 - name" / "not ok 3 - name", indented for subtests.
       for (const line of out.split("\n")) {
         const m = line.match(/^\s*(not ok|ok)\s+\d+\s+-\s+(.*?)\s*$/);
         if (!m) continue;
         const name = m[2].replace(/\s+#.*$/, "");
-        if (/^test\//.test(name)) continue; // the file-level roll-up, not a test
+        // The file-level roll-up is not a test, but a failed or crashed FILE is a failed run.
+        if (/^test\//.test(name)) { if (m[1] === "not ok") run.fileFailures.push(name); continue; }
         results.push({ name, passed: m[1] === "ok" });
       }
-      resolve(results);
+      run.failedTests = results.filter((r) => !r.passed).map((r) => r.name);
+      resolve({ results, run });
     });
   });
 }
 
-const testResults = await runTests();
+const release = process.argv.includes("--release");
+const { results: testResults, run } = await runTests();
+run.testsSeen = testResults.length;
 const assessment = assess(testResults);
 const summary = summarise(assessment);
+const verdict = gate(assessment, run, { release });
+// Node prints loader warnings on stderr even on a green run, so it is reported, not failed on.
+const stderrTail = run.stderr.trim().split("\n").slice(-40).join("\n");
 
 if (process.argv.includes("--json")) {
-  console.log(JSON.stringify({ summary, assessment, testsSeen: testResults.length }, null, 2));
+  console.log(JSON.stringify({ summary, assessment, testsSeen: testResults.length, mode: release ? "release" : "development",
+    testRun: { exitCode: run.exitCode, signal: run.signal, error: run.error, fileFailures: run.fileFailures, failedTests: run.failedTests, stderr: stderrTail },
+    ok: verdict.ok, reasons: verdict.reasons }, null, 2));
 } else {
   console.log(report(assessment));
   console.log(`Evidence drawn from ${testResults.length} executed tests across ${SUITES.length} suites.`);
+  if (stderrTail) console.log(`\nTest process stderr (last lines):\n${stderrTail}`);
+  console.log(`\n${verdict.ok ? "PASS" : "FAIL"} (${release ? "release" : "development"} gate)${verdict.reasons.map((r) => `\n  - ${r}`).join("")}`);
 }
 
-process.exit(assessment.some((a) => a.status === "failing") ? 1 : 0);
+process.exit(verdict.ok ? 0 : 1);

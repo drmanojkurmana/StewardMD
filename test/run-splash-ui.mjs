@@ -280,7 +280,9 @@ try {
   await newTab();
   await call("Page.navigate", { url: BASE });
   await sleep(1500);
-  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com",picture:"https://example.invalid/photo.jpg"})); return 1;`);
+  // smd_splash_fast=0: this section tests the classic two-screen sequence, which later opens now skip
+  // (owner 2026-10-03, see section 2c); the kill switch keeps it reachable and tested
+  await ev(`localStorage.setItem("smd_splash_fast","0"); localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com",picture:"https://example.invalid/photo.jpg"})); return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(380);
 
@@ -387,7 +389,7 @@ try {
   await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: "dark" }] });
   await call("Page.navigate", { url: BASE });
   await sleep(1500);
-  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com"})); return 1;`);
+  await ev(`localStorage.setItem("smd_splash_fast","0"); localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(380);
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-dark");`), true, "the dark theme variant resolves");
@@ -403,11 +405,38 @@ try {
   await shot("splash-07-boot-personal-dark");
   await call("Emulation.setEmulatedMedia", { features: [] });
 
+  /* ---------- 2c. FAST later opens (owner 2026-10-03): 3s on the first open only ---------- */
+  await newTab();
+  await call("Page.navigate", { url: BASE });
+  await sleep(1200);
+  await ev(`localStorage.clear(); return 1;`);
+  await call("Page.navigate", { url: BASE });
+  await sleep(300);
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-fast");`), true,
+    "first open (nothing stored): the full sequence, not the fast path");
+  await sleep(4200);
+  okv(await ev(`return localStorage.getItem("smd_boot_seen");`), "1", "finishing the first open records smd_boot_seen");
+  await call("Page.navigate", { url: BASE });
+  let fastSeen = false;   // the new document can lift its splash within ~100ms, so sample until seen
+  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-blank");`); }
+  okv(fastSeen, true, "later open: fast path, plain surface (no logo flash)");
+  okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "hidden",
+    "later open: the mark is not shown while it would only flash");
+  let goneAt = 0;
+  await ev(`var g=document.getElementById("accountGate"); if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");} return 1;`);
+  for (let i = 0; i < 20 && !goneAt; i++) { await sleep(100); if (await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`)) goneAt = (i + 1) * 100; }
+  ok(goneAt > 0 && goneAt <= 700, `later open: the splash lifts as soon as the app is ready (${goneAt}ms), not after 3s`);
+  await call("Page.navigate", { url: BASE });
+  await sleep(900);
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || !e.classList.contains("sbs-blank");`), true,
+    "later open, slow boot: the mark appears after 700ms so it never looks stuck");
+  await ev(`localStorage.clear(); return 1;`);
+
   /* ---------- 3. Guest: no personalisation ---------- */
   await newTab();
   await call("Page.navigate", { url: BASE });
   await sleep(1200);
-  await ev(`localStorage.clear(); localStorage.setItem("stewardmd_guest_used","1"); return 1;`);
+  await ev(`localStorage.clear(); localStorage.setItem("smd_splash_fast","0"); localStorage.setItem("stewardmd_guest_used","1"); return 1;`);
   await call("Page.navigate", { url: BASE });
   await sleep(380);
   ok(await ev(`var e=document.getElementById("sbsHello"); return !e || e.hidden===true;`) === true,

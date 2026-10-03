@@ -10,6 +10,9 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen. Without
+  // SMD_PRIVACY_MODE (node tests, harness pages) this is plain esc(), so the markup is unchanged.
+  function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function initials(n) { n = String(n || "").trim(); if (!n) return "PT"; var p = n.split(/\s+/); return ((p[0][0] || "") + (p[1] ? p[1][0] : (p[0][1] || ""))).toUpperCase(); }
 
@@ -54,14 +57,14 @@
       '<button class="oe-rec-stop" data-oe-act="voice-stop" aria-label="Stop recording">' + ms("stop") + "Stop</button></div>";
   }
   function patientHead(p, phone) {
-    var line = '<span>' + ms("badge") + ' MR# <b class="mono">' + esc(p.displayId || p.mrn || "-") + "</b></span>";
+    var line = '<span>' + ms("badge") + ' MR# <b class="mono">' + phi("id", p.displayId || p.mrn, esc(p.displayId || p.mrn || "-")) + "</b></span>";
     // Universal Patient Identity: the canonical StewardID rides next to the MRN (hidden when it
     // is the MRN itself, so pre-identity records render exactly as before).
-    if (p.stewardId && p.stewardId !== p.mrn) line += '<span>StewardID <b class="mono">' + esc(p.stewardId) + "</b></span>";
+    if (p.stewardId && p.stewardId !== p.mrn) line += '<span>StewardID <b class="mono">' + phi("id", p.stewardId) + "</b></span>";
     if (p.isFollowUp) line += '<span class="oe-tag">Follow-up</span>';
-    if (phone) line += '<span>' + ms("call") + ' <span class="mono">' + esc(phone) + "</span></span>";
+    if (phone) line += '<span>' + ms("call") + ' <span class="mono">' + phi("phone", phone) + "</span></span>";
     return '<section class="oe-phead"><div class="oe-avatar">' + esc(initials(p.name)) + "</div>" +
-      '<div class="oe-pmeta"><h2>' + esc(p.name || "Patient") + "</h2><div class=\"oe-prow\">" + line + "</div></div></section>";
+      '<div class="oe-pmeta"><h2>' + phi("name", p.name, esc(p.name || "Patient")) + "</h2><div class=\"oe-prow\">" + line + "</div></div></section>";
   }
   function labRow(o) {
     var meta = [o.department, o.orderDate].filter(Boolean).map(esc).join(" · ");
@@ -494,7 +497,7 @@
       return fieldRow(f.l, '<span class="oe-inp-wrap"><select class="oe-inp oe-sel" data-oe-inp="' + esc(id) + '">' + optHtml + '</select>' + fmicBtn(f.n) + '</span>', f.r, re);
     }
     var type = f.k === "number" ? "number" : "text";
-    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '" value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
+    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '"' + (f.n === "informany_attendant" ? " data-phi-input" : "") + ' value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
   }
   // one section = a native <details> accordion (zero-JS collapse; survives typing since onInput doesn't re-render).
   // header shows a required-badge (n/m) or a filled count so the doctor sees at a glance what still needs attention.
@@ -4586,6 +4589,11 @@
     st.scribeRx = _mergeRxRows(st.scribeRx, parsed);
     var sf = _scribeSafetyCheck(st.scribeRx.rows, _scribeSafetyCtx(st));
     st.scribeSafety = sf ? { findings: _safetyRows(sf.findings), summary: sf.summary } : null;
+    // A critical or major finding was just produced for a newly staged line: one warning buzz (this runs
+    // on staging, never on re-render).
+    try {
+      if (st.scribeSafety && (st.scribeSafety.findings || []).some(function (f) { return f.severity === "critical" || f.severity === "major"; }) && G.SMD_HAPTICS) G.SMD_HAPTICS.warning();
+    } catch (e) {}
   }
   // Hand the staged rows to the prescription pad. toRegimen marks a DICTATED dose source:"ai", which
   // is what makes rx-build flag it unverified - a spoken dose must be read back before signing.

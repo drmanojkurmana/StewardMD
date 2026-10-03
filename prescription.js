@@ -73,7 +73,7 @@
       ".rx-scrim{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:16000;opacity:0;transition:opacity .25s ease;pointer-events:none}.rx-scrim.on{opacity:1;pointer-events:auto}" +
       "html.rx-locked,body.rx-locked{overflow:hidden!important;overscroll-behavior:none!important;touch-action:none!important;position:relative!important;width:100%!important;height:100%!important}" +
       ".rx-sheet{position:fixed;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);transition:transform .28s cubic-bezier(0.16,1,0.3,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased;box-sizing:border-box;max-width:100vw!important}" +
-      "@media(max-width:640px){.rx-sheet{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100vw!important;max-width:100vw!important;height:94vh!important;max-height:94vh!important;border-radius:20px 20px 0 0!important;transform:translateY(100%);opacity:0;pointer-events:none;margin:0!important}.rx-sheet.on{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}}" +
+      "@media(max-width:640px){.rx-sheet{left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100vw!important;max-width:100vw!important;height:94vh!important;max-height:94vh!important;height:94dvh!important;max-height:94dvh!important;border-radius:20px 20px 0 0!important;transform:translateY(100%);opacity:0;pointer-events:none;margin:0!important}.rx-sheet.on{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}}" +
       "@media(min-width:641px){.rx-sheet{left:50%!important;top:50%!important;transform:translate(-50%,-46%)!important;width:min(700px,94vw)!important;height:88vh!important;max-height:88vh!important;border-radius:18px!important;opacity:0;pointer-events:none}.rx-sheet.on{transform:translate(-50%,-50%)!important;opacity:1!important;pointer-events:auto!important}}" +
       ".rx-wrap{display:flex;flex-direction:column;height:100%;width:100%;min-height:0;overflow:hidden;box-sizing:border-box}" +
       ".rx-head{flex:none;background:var(--hpanel,#fff);border-bottom:1px solid var(--hbd,#e2e8f0);padding:6px 12px 8px;display:flex;flex-direction:column;gap:4px;position:relative;z-index:2}" +
@@ -2939,7 +2939,7 @@
         return exportRxNow(kind, topic, regNo, signImg, rxv, opts);
       });
     }).catch(function(e){
-      rxToast("Could not build the " + (kind === "pdf" ? "PDF" : "image") + ". Try again, or use Print.");
+      rxToast("Could not build the " + (kind === "pdf" ? "PDF" : "image") + ". Try again, or use Print."); rxHaptic("error");
       try { console.error("[rx] export failed:", e); } catch (_) {}
     });
   }
@@ -2960,6 +2960,7 @@
     }).catch(function(){ try{ n.remove(); }catch(e){} return null; });
   }
 
+  function rxHaptic(k){ try { if (window.SMD_HAPTICS && window.SMD_HAPTICS[k]) window.SMD_HAPTICS[k](); } catch (e) {} }
   function exportRxNow(kind, topic, regNo, signImg, rxv){
     var opts = arguments[5] || {};
     // JPEG is a single image, so the block sits in the document. A PDF can run to several pages, so
@@ -2970,7 +2971,7 @@
     // was an unhandled rejection and the doctor saw nothing happen.
     return window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
       node.remove();
-      if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); return; }
+      if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); rxHaptic("success"); return; }
       var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }
       return rxQrStamp(rxv).then(function(stamp){
         var pdf=new JS({ unit:"pt", format:"a4" }), pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
@@ -2991,8 +2992,9 @@
           pdf.addPage();
         }
         rxSaveOrShare(pdf.output("datauristring"), "prescription.pdf");
+        rxHaptic("success");
       });
-    }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); });
+    }).catch(function(){ try{ node.remove(); }catch(e){} rxToast("Couldn’t render the prescription"); rxHaptic("error"); });
   }
   function signAndExport(topic, regNo){
     function chooser(sig){

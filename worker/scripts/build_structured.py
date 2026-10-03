@@ -147,8 +147,9 @@ def main():
     os.makedirs(os.path.dirname(OUTSQL), exist_ok=True)
     with open(OUTSQL, "w", encoding="utf-8") as f:
         f.write(open(os.path.join(WORKER, "structured_schema.sql")).read() + "\n")
-        for r in out.execute(f"SELECT {','.join(COLS)} FROM drug_structured"):
-            f.write("INSERT OR REPLACE INTO drug_structured (" + ",".join(COLS) + ") VALUES (" + ",".join(lit(v) for v in r) + ");\n")
+        collist = ",".join('"' + c.replace('"', '""') + '"' for c in COLS)
+        for r in out.execute(f"SELECT {collist} FROM drug_structured"):
+            f.write(f"INSERT OR REPLACE INTO drug_structured ({collist}) VALUES (" + ",".join(lit(v) for v in r) + ");\n")
     out.close()
     print(f"\nstructured rows: {n}  | SQL: {OUTSQL} ({os.path.getsize(OUTSQL)//1024} KB)", flush=True)
 

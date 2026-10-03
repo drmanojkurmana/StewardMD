@@ -382,7 +382,9 @@ function stringMatches(value, needle, modifier) {
 
 /** PURE. A reference value `Type/id`, `id`, or an absolute URL ending in Type/id, into {type, id}. */
 function refClause(raw) {
-  const s = str(raw);
+  // A version-specific reference (Type/id/_history/n, as a MedicationAdministration names its order's version) is still a
+  // reference to that resource for search and _include.
+  const s = str(raw).replace(/\/_history\/[^/?#]+$/, "");
   if (!s) return null;
   const m = /(?:^|\/)([A-Za-z]+)\/([^/?#]+)$/.exec(s);
   return m ? { type: m[1], id: m[2] } : { type: null, id: s };

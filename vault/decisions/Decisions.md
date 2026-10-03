@@ -8862,7 +8862,9 @@ of compliance.js is untouched.
   written 0: an admission or transfer is refused, not made on a short read. Ward and ED boards name patients from the
   newest 1,000 Patients plus a read by id for any missing (the oldest-first roster left new patients nameless).
 - Checked, audit uncertainty: `checkMasterBed` reads the bed's administrative state only, not occupancy; occupancy is the
-  census scan plus the bed claim. A stay without a claim (imported, migrated, moved by transfer) is seen by the scan only.
+  census scan plus the bed claim. A stay without a claim (imported, migrated) is seen by the scan only. Since Codex F1
+  (2026-10-02) transfer takes the same claim on its destination and releases its source; since F7 a master read that
+  throws is 503 `bed_list_unavailable`, not "unconfigured", and the emergency bed override does not bypass it.
 - ponytail: D1 re-groups every version of the type per page (same GROUP BY as latestByType). The open census is one
   page; a whole-type read is N/1,000 pages. A latest-version flag or table (audit O20) is the upgrade if that is slow.
 - Left for R4-2: counting and summing callers (quality, security-review, analytics-extract, discharge-milestones,
@@ -11056,6 +11058,19 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 ## 2026-09-29 - Extract the specialty engine now (reverses "duplicate until a third specialty")
 - Tokós 2.0 needs the whole Ophthalmós engine (shell, Learn, bank, explorers, tools, about 3,000 lines), not the 250 lines duplicated in 1.0, and the roadmap names four more specialty modules; copying per specialty would multiply every fix. The engine is extracted once as `specialty-*.js` + `specialty.css` with the host injected (`SPECIALTY.createHost(cfg)`); Ophthalmós files stay byte-identical and may migrate later in their own repo. Tokós is the first host and loads lazily. Reverses the 2026-09-29 "Tokós duplicates the Ophthalmós engine" entry above. [[Specialty Engine]] [[Tokós]]
 
+## 2026-10-03 - Native launch surface follows system light/dark; app-switcher privacy cover; SmdDevice plugin
+- **Owner, 2026-10-03 (Premium-Feel plan B4, B2, B8, B10):** the native launch surface follows the system appearance: `#FFFFFF` light, `#08302B` dark (middle stop of the dark HTML boot splash). Reverses the white color of the "unbranded white bridge" in the 2026-09-09 boot-sequence entry; the surface stays unbranded. iOS: `LaunchBackground` color set used by `LaunchScreen.storyboard`, the scene window and the web view (`MainViewController`). Android: `@color/launch_background` (`values/` + `values-night/`) for the system splash, window and WebView. `ios/android.backgroundColor` and `SplashScreen.backgroundColor` are removed from `capacitor.config.json`. Native launch can only follow the system setting, not an in-app theme override. The HTML boot splash (`index.html` splash theme script) follows the system mode on every platform too; Android's old 06-18 clock guess is gone, so the native and HTML surfaces agree.
+- iOS blurs the window when the scene resigns active and removes the blur on every activation (`SceneDelegate`); Android 13+ disables the recents screenshot (`setRecentsScreenshotEnabled(false)`), which still allows normal screenshots.
+- App-local plugin `SmdDevice` (iOS in `MainViewController.swift`, Android `SmdDevicePlugin.java`): `getPowerState()` + `powerStateChange` for Low Power Mode / Battery Saver, and Android-only `haptic({type})` through `View.performHapticFeedback` system constants, never raw Vibrator waveforms. iOS `haptic` resolves `{performed:false}`; iOS web code keeps `@capacitor/haptics`.
+
+## 2026-10-03 - Privacy mode masks by CSS over marked-up identifiers, never by rewriting text
+- Plan B2 privacy mode (`privacy-mode.js`) draws masks with `::after { content: attr(data-phi) }` over a hidden
+  inner span. **Why:** the DOM text stays the real value, so code that reads the DOM to copy, save, print or share
+  (ICU summary copy reads `textContent`) can never pick up a mask, and `@media print` never sees one. A JS swap of
+  text nodes would put masks into whatever reads the DOM next. **Trade-off:** every renderer has to wrap its
+  identifiers (one `phi()` helper per module), and screens that are not wrapped must say so; that is what
+  `[data-phi-unmasked]` and the amber label are for. Text that cannot carry markup (toasts, `confirm()`) uses
+  `screenText()`, which masks only at the moment it is shown. [[plans/Premium-Feel]] B2
 
 ## 2026-10-01 - Edge: an "exact" calculator name means exactly one calculator, and the scorer judges by rules first
 - `MEDCALC.find(q).exact` (what MaiK's calculator card and the Edge rules layer trust) is true only when ONE calculator carries the name. Single letters and digits are part of a name ("R-ISS" is not "ISS", "PHQ-2" is not "PHQ-9"); "timi", "meld na", "framingham", "corrected qt" still return their best guess, but not as exact, so a model or the doctor picks. Found by the Edge bake-off scorer: the rules layer opened the wrong calculator in 26 frozen-test rows (1.1%); now 0.

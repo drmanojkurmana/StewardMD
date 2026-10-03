@@ -200,6 +200,9 @@
       "#smdApplock .smdal-chk{display:flex;align-items:flex-start;gap:8px;text-align:left;font-size:12.5px;color:var(--slate,#5a7184);margin:14px 0 4px}" +
       "#smdApplock .smdal-chk input{margin-top:2px}" +
       "@keyframes smdalScrim{from{opacity:0}to{opacity:1}}" +
+      // relock shield: opaque, in the launch colors, so nothing clinical shows under Face ID / PIN
+      "#smdApplock.smdal-shield{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;animation:none}" +
+      "body.dark #smdApplock.smdal-shield{background:#08302b}" +
       "@keyframes smdalPop{from{opacity:0;transform:scale(.94) translateY(6px)}to{opacity:1;transform:none}}" +
       "@keyframes smdalRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}" +
       "@keyframes smdalShake{15%,45%{transform:translateX(-4px)}30%,60%{transform:translateX(4px)}100%{transform:none}}" +
@@ -345,13 +348,38 @@
   }
   function markUnlocked() { _unlockedThisBoot = true; lset(K_LASTUNLOCK, String(Date.now())); }
 
+  // ---- RELOCK (owner decision 2026-10-03). The boot lock alone left the app open for the rest of
+  // the session. Coming back after RELOCK_MS in the background locks again, behind an opaque
+  // shield so no patient data shows under the Face ID sheet or the PIN pad. The user's 2h grace
+  // choice still wins. localStorage smd_applock_relock="0" turns relock off.
+  var RELOCK_MS = 5 * 60 * 1000, _hiddenAt = 0, _relocking = false;
+  function relockDue(awayMs) {
+    try {
+      return (method() === "pin" || method() === "biometric") && _unlockedThisBoot && !_unlockShowing &&
+        awayMs >= RELOCK_MS && !withinGrace() && lget("smd_applock_relock") !== "0";
+    } catch (e) { return false; }
+  }
+  function shield() { var el = overlay(); el.className = "smdal-shield"; return el; }
+  function onVisibility() {
+    try {
+      if (document.visibilityState === "hidden") { _hiddenAt = Date.now(); return; }
+      var away = _hiddenAt ? Date.now() - _hiddenAt : 0;
+      _hiddenAt = 0;
+      if (!relockDue(away)) return;
+      _unlockedThisBoot = false; _relocking = true;
+      shield().innerHTML = "";
+      unlock();
+    } catch (e) {}
+  }
+  try { document.addEventListener("visibilitychange", onVisibility); } catch (e) {}
+
   // unlock() is shown the moment this script loads (see the boot block at the bottom) so the
   // Face ID sheet / PIN pad is up while the app is still loading; the splash's finish() then
   // calls unlock(reallyFinish) and simply joins the screen already on show. Every done() queued
   // by any caller fires once, on the one real pass.
   var _dones = [], _unlockShowing = false;
   function finishUnlock() {
-    markUnlocked(); closeOverlay(); _unlockShowing = false;
+    markUnlocked(); closeOverlay(); _unlockShowing = false; _relocking = false;
     var d = _dones.splice(0); for (var i = 0; i < d.length; i++) { try { d[i](); } catch (e) {} }
   }
   function unlock(done) {
@@ -396,7 +424,8 @@
   // Biometric shows NO card of its own: the system Face ID / Touch ID sheet, over the boot
   // splash, is the whole UI. A card appears only after a failed or cancelled scan.
   function renderBiometricUnlock() {
-    closeOverlay();
+    // at boot the splash sits under the system sheet; on relock the shield must stay up instead
+    if (_relocking) shield().innerHTML = ""; else closeOverlay();
     verifyBiometric("Unlock StewardMD").then(function (r) {
       if (r.ok) { finishUnlock(); return; }
       canBiometric().then(function () { renderBiometricRetry(r.text); });
@@ -473,5 +502,6 @@
     promptSetup: promptSetup,
     manage: manage,
     grace: graceOn,
+    _relockDue: relockDue, // test seam
   };
 })();
