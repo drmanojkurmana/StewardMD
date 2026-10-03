@@ -15,6 +15,13 @@
  *    them is on screen the persistent indicator says so, instead of implying it is covered.
  *  - Toasts / confirm() text cannot be marked up: callers use screenText(kind, raw), which returns
  *    the mask only while the mode is on. Those strings are never stored or sent.
+ *  - Accessible names (aria-label, title, alt) are what VoiceOver / TalkBack speak, and CSS cannot reach
+ *    them. A renderer writes them with attr(name, kind, raw, build): the real text in the attribute plus
+ *    data-phi-<name> holding the same text built around the mask. While the mode is on, the masked text
+ *    is swapped into the attribute (the real one kept on the element, never in another attribute), on
+ *    toggle and, through a MutationObserver started the first time the mode goes on, for every node
+ *    rendered afterwards. Visible text wrapped with wrap() needs nothing: the mask drawn by ::after is
+ *    the accessible name and the hidden inner span is not.
  *
  * STATE: default off, persists for the session (sessionStorage), never synced, never logged.
  * KILL SWITCH: localStorage smd_privacy_mode_enabled = "0" hides the toggle and forces it off.
@@ -113,6 +120,15 @@
     var t = str(text), r = str(raw), i = r ? t.indexOf(r, from || 0) : -1;
     if (i < 0) return escHtml(t);
     return escHtml(t.slice(0, i)) + wrap(kind, r) + escHtml(t.slice(i + r.length));
+  }
+
+  // An accessible-name attribute (aria-label / title / alt) that names a patient. build(value) returns the
+  // label around a value; it is called with the real identifier and with its mask, so the identifier sits
+  // exactly where the renderer put it. Returns ' aria-label="real" data-phi-aria-label="masked"', both
+  // escaped; with nothing to mask, the attribute alone.
+  function attr(name, kind, raw, build) {
+    var out = " " + name + '="' + escHtml(build(str(raw))) + '"', m = mask(kind, raw);
+    return m ? out + " data-phi-" + name + '="' + escHtml(build(m)) + '"' : out;
   }
 
   /* ---------- state ---------- */
@@ -216,10 +232,57 @@
     tag.innerHTML = gap ? EYE + "<span>Privacy mode: this screen is not masked</span>" : "";
   }
 
+  /* ---------- accessible names: swap the masked text in and out (see attr()) ---------- */
+  var A11Y = ["aria-label", "title", "alt"];
+  var A11Y_SEL = "[data-phi-aria-label],[data-phi-title],[data-phi-alt]";
+  var a11yOn = false, mo = null;
+
+  function swapEl(el, on) {
+    for (var i = 0; i < A11Y.length; i++) {
+      var a = A11Y[i], m = el.getAttribute("data-phi-" + a);
+      if (m == null) continue;
+      var cur = el.getAttribute(a), real = el._smdPhiReal;
+      if (on) {
+        if (cur !== m) { (real || (el._smdPhiReal = {}))[a] = cur; el.setAttribute(a, m); }
+      } else if (real && real.hasOwnProperty(a)) {
+        // a renderer that rewrote the attribute since has the newer real text in it already
+        if (cur === m) { if (real[a] == null) el.removeAttribute(a); else el.setAttribute(a, real[a]); }
+        delete real[a];
+      }
+    }
+  }
+  function swapIn(root, on) {
+    if (!root || root.nodeType !== 1) return;
+    if (root.matches && root.matches(A11Y_SEL)) swapEl(root, on);
+    var els = root.querySelectorAll(A11Y_SEL);
+    for (var i = 0; i < els.length; i++) swapEl(els[i], on);
+  }
+  // Started the first time the mode goes on, then kept for the session: a node rendered (or re-attached)
+  // while on is masked, one re-attached after the mode went off gets its real label back. Never started
+  // while the mode stays off, so it costs nothing for the clinician who never uses it.
+  function watchA11y() {
+    if (mo || !G.MutationObserver) return;
+    mo = new G.MutationObserver(function (recs) {
+      for (var i = 0; i < recs.length; i++) {
+        var r = recs[i];
+        if (r.type === "attributes") { if (r.target.nodeType === 1) swapEl(r.target, a11yOn); continue; }
+        for (var j = 0; j < r.addedNodes.length; j++) swapIn(r.addedNodes[j], a11yOn);
+      }
+    });
+    mo.observe(D.documentElement, { childList: true, subtree: true, attributes: true,
+      attributeFilter: A11Y.concat(["data-phi-aria-label", "data-phi-title", "data-phi-alt"]) });
+  }
+  function applyA11y(on) {
+    a11yOn = !!on;
+    if (on) watchA11y();
+    swapIn(D.documentElement, a11yOn);
+  }
+
   function apply(on) {
     if (!D) return;
     ensureStyle();
     D.documentElement.classList.toggle(CLS, !!on);
+    applyA11y(on);
     for (var i = buttons.length - 1; i >= 0; i--) {
       var b = buttons[i];
       if (!b.isConnected) { buttons.splice(i, 1); continue; }
@@ -269,7 +332,7 @@
 
   G.SMD_PRIVACY_MODE = {
     maskName: maskName, maskId: maskId, maskPhone: maskPhone, maskAll: maskAll, mask: mask,
-    wrap: wrap, wrapIn: wrapIn, screenText: screenText,
+    wrap: wrap, wrapIn: wrapIn, screenText: screenText, attr: attr,
     inputAttr: function () { return " data-phi-input"; },
     imgAttr: function () { return " data-phi-img"; },
     enabled: enabled, isOn: isOn, set: set, toggle: toggle, mountToggle: mountToggle,
