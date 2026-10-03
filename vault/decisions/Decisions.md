@@ -15,6 +15,17 @@ sets the bay `occupied` in the master bed list and leaving (any outcome) calls `
 path: `cleaning` (a housekeeping task) when `supportServices.housekeepingInspection` is on, else `available`.
 **Why.** A PACU on the board read as free bays; recovery stays must not inflate inpatient occupancy KPIs. **Status:**
 PR "WardSynQ: recovery bays on the bed board and housekeeping after recovery".
+## 2026-10-04 · WardSynQ list reads go through a current-version projection (audit O20)
+
+**Decision.** D1 keeps `wardsynq_current` (one row per tenant, type, id: latest version, its seq, its body status),
+maintained by an AFTER INSERT trigger on `wardsynq_record`, so it commits or rolls back with the version it describes
+(conflicts, staged writes, restores and an older deployment's writes included). `pageByType`, `latestByType`,
+`latestByStatus`, `latestByIds` and `pageByIdPrefix` read it; `latest`, `history` and `byPatient` stay on the record
+indexes they already seek. **Why:** each page grouped the whole type's history; at 50,000 versions a 100-row page went
+from about 1.28M SQLite VM steps to about 800. **No manual step:** `repository-d1.js` creates the tables and trigger on
+first use and backfills each (tenant, type) lazily in one atomic batch with a ready marker; until then, or if the
+projection cannot be read, reads use the old GROUP BY. **Trade-off:** one extra row write per version; the first list
+read of each type pays one GROUP BY. [[WardSynQ]]
 
 ## 2026-10-01 · Neonatal layer: plain-language screens; drug search covers every monograph
 

@@ -277,8 +277,10 @@ class MemoryRepository {
       if (r.tenantId !== tenantId || r.resourceType !== resourceType) continue;
       byId.set(r.id, r);
     }
-    const rows = [...byId.values()];
-    if (opts && opts.newest) rows.sort((a, b) => b.seq - a.seq);
+    /* Ordered by the seq of each id's LATEST version, as D1's ORDER BY r.seq: unsorted, the map kept
+     * first-written order and the two backends cut a limited roster at different ids (O20 parity). */
+    const desc = !!(opts && opts.newest);
+    const rows = [...byId.values()].sort((a, b) => (desc ? b.seq - a.seq : a.seq - b.seq));
     return rows.slice(0, max).map((r) => clone(r.body));
   }
 
@@ -634,7 +636,7 @@ const AUDIT_FLUSH_BATCH = 40;
  * escalation timer, a group's counts). The same paging as RecordService._pageAll: pageByType pages of 1,000, oldest first,
  * a record amended between pages kept at its later copy. Stops once more than `max` ids are held.
  * -> { rows, capped }: capped true means the NEWEST records past max were not read, and the caller must say so.
- * ponytail: each page re-groups every version of the type (audit O20 is the upgrade).
+ * On D1 each page is a range on the current-version projection (O20, repository-d1.js), not a whole-type group-by.
  */
 async function pagedLatest(repository, tenantId, resourceType, opts) {
   if (typeof repository.pageByType !== "function") throw new RepositoryError("this record store cannot page a roster (pageByType)", "PORT_INCOMPLETE");

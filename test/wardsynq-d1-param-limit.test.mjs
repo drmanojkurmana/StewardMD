@@ -50,6 +50,14 @@ test("DATA-02: 150 patients in one append, then every IN-list read over all of t
   const rows = await repo.auditRowsById("t1", Array.from({ length: 200 }, (_, i) => `aud-${i}`));
   assert.equal(rows.length, 200, "the G11 evidence view with 200 ids");
 
+  // O20: the status-scoped reads at the largest status list, through the projection and on the GROUP BY fallback.
+  const ninety = Array.from({ length: 90 }, (_, i) => `s${i}`);
+  for (const r of [repo, new D1Repository({ ...repo.db, prepare(sql) { if (/wardsynq_current/.test(sql)) throw new Error("no projection"); return repo.db.prepare(sql); } })]) {
+    assert.deepEqual((await r.pageByType("t1", "Patient", { statuses: ninety, afterSeq: 1 })).records, []);
+    assert.deepEqual(await r.latestByStatus("t1", "Patient", ninety, 10), []);
+    assert.equal((await r.latestByIds("t1", "Patient", ids)).length, 150);
+  }
+
   assert.ok(seen.length && Math.max(...seen) <= 100, `largest statement bound ${Math.max(...seen)} parameters`);
 });
 

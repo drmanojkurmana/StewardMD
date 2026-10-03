@@ -588,8 +588,14 @@ test("D1 repository speaks the schema: append is one atomic batch, a UNIQUE viol
   failBatch = null;                                  // auditOnly is a batch too now (audit row + chain link)
   await repo.latest("t1", "Patient", "p"); await repo.history("t1", "Patient", "p"); await repo.byPatient("t1", "Observation", "p");
   await repo.changes("t1", 0, 10); await repo.recall("t1", "k"); await repo.latestByType("t1", "Patient", 5); await repo.auditOnly("t1", { action: "record.read" });
-  assert.ok(!sql.some((q) => /\b(UPDATE|DELETE)\b/i.test(q)), "append-only by construction");
-  assert.ok(sql.every((q) => /^INSERT/.test(q) || !/wardsynq_record/.test(q) || /tenant_id\s*=\s*\?/.test(q)), "every record query is tenant-scoped");
+  /* Append-only by construction. O20 adds exactly one UPDATE: to the derived current-version projection, inside
+   * its AFTER INSERT trigger on wardsynq_record (and the backfill's upsert of it). Nothing updates or deletes a record. */
+  const targets = sql.flatMap((q) => [...q.matchAll(/\bUPDATE\s+(\w+)\s+SET\b|\bDELETE\s+FROM\s+(\w+)|\bON\s+CONFLICT\b[^;]*\bDO\s+UPDATE\b/gi)]
+    .map((m) => m[1] || m[2] || (/INSERT INTO wardsynq_current\b/.test(q) ? "wardsynq_current" : "upsert elsewhere")));
+  assert.deepEqual([...new Set(targets)], ["wardsynq_current"], "append-only by construction: only the projection is ever updated");
+  assert.ok(sql.filter((q) => /CREATE TRIGGER/i.test(q)).every((q) => /AFTER INSERT ON wardsynq_record\b/.test(q)), "the projection moves on insert only");
+  // DDL is exempt: the projection trigger is scoped by the inserted row's own tenant (NEW.tenant_id).
+  assert.ok(sql.every((q) => /^(INSERT|CREATE) /.test(q) || !/wardsynq_record/.test(q) || /tenant_id\s*=\s*\?/.test(q)), "every record query is tenant-scoped");
 });
 
 /* ------------------------------------------------------------------ the hospital's own roles */

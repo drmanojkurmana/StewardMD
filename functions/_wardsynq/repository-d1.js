@@ -75,6 +75,72 @@ function statusList(statuses) {
   return want;
 }
 
+/* O20: THE CURRENT-VERSION PROJECTION. Every list read wants "the latest version of each id", and
+ * without this it was answered by `MAX(version) GROUP BY id` over EVERY version of the type before the
+ * page window applied, so a page cost grew with the type's whole history, not with the page.
+ *
+ * wardsynq_current holds one row per (tenant, type, id): the latest version's number and seq (and its
+ * body status, for the status-scoped reads). The body stays in wardsynq_record and is joined by seq,
+ * its primary key, so nothing is stored twice.
+ *
+ * KEPT BY A TRIGGER, NOT BY append(). The row is maintained inside the very INSERT that writes the
+ * version, so it commits or rolls back with it: a version conflict, a staged multi-record write, an
+ * identity refusal and a restore that inserts rows directly all leave it agreeing with wardsynq_record
+ * by construction, and so does a write from an older deployment still serving during a rollout. The
+ * trigger only ever moves a row FORWARD (version < NEW.version), so it means MAX(version) exactly as
+ * the GROUP BY did. The record itself stays append-only: the one UPDATE is to this derived index.
+ *
+ * NO MANUAL STEP. The tables and trigger are created on first use (IF NOT EXISTS), like _counters.js.
+ * A (tenant, type) is read through the projection only once wardsynq_current_ready says it was
+ * backfilled; until then, and whenever the projection cannot be read, the read falls back to the
+ * GROUP BY, so rollout can be slower but never wrong. The backfill is one atomic batch per
+ * (tenant, type), run lazily by the first list read of it (see _projected), and idempotent: it only
+ * moves rows forward and the ready marker is OR IGNORE. It runs AFTER the trigger exists, so every
+ * version is either in the GROUP BY the backfill reads or written through the trigger, never neither.
+ *
+ * `status` is declared with NO type on purpose: TEXT affinity would turn a numeric status into a string
+ * and match where json_extract(body) did not, and the two reads must answer the same.
+ */
+const CURRENT_DDL = [
+  "CREATE TABLE IF NOT EXISTS wardsynq_current (tenant_id TEXT NOT NULL, resource_type TEXT NOT NULL, id TEXT NOT NULL, version INTEGER NOT NULL, seq INTEGER NOT NULL, status, PRIMARY KEY (tenant_id, resource_type, id))",
+  "CREATE INDEX IF NOT EXISTS idx_wardsynq_current_seq ON wardsynq_current (tenant_id, resource_type, seq)",
+  "CREATE INDEX IF NOT EXISTS idx_wardsynq_current_status ON wardsynq_current (tenant_id, resource_type, status, seq)",
+  "CREATE TABLE IF NOT EXISTS wardsynq_current_ready (tenant_id TEXT NOT NULL, resource_type TEXT NOT NULL, built_at TEXT NOT NULL, PRIMARY KEY (tenant_id, resource_type))",
+  "CREATE TRIGGER IF NOT EXISTS wardsynq_current_on_insert AFTER INSERT ON wardsynq_record BEGIN " +
+    "UPDATE wardsynq_current SET version=NEW.version, seq=NEW.seq, status=json_extract(NEW.body, '$.status') " +
+    "WHERE tenant_id=NEW.tenant_id AND resource_type=NEW.resource_type AND id=NEW.id AND version<NEW.version; " +
+    "INSERT INTO wardsynq_current (tenant_id,resource_type,id,version,seq,status) " +
+    "SELECT NEW.tenant_id, NEW.resource_type, NEW.id, NEW.version, NEW.seq, json_extract(NEW.body, '$.status') " +
+    "WHERE NOT EXISTS (SELECT 1 FROM wardsynq_current WHERE tenant_id=NEW.tenant_id AND resource_type=NEW.resource_type AND id=NEW.id); END",
+];
+const CURRENT_BACKFILL =
+  "INSERT INTO wardsynq_current (tenant_id,resource_type,id,version,seq,status) " +
+  "SELECT r.tenant_id, r.resource_type, r.id, r.version, r.seq, json_extract(r.body, '$.status') FROM wardsynq_record r " +
+  "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
+  "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? " +
+  "ON CONFLICT (tenant_id, resource_type, id) DO UPDATE SET version=excluded.version, seq=excluded.seq, status=excluded.status " +
+  "WHERE excluded.version > wardsynq_current.version";
+/* Per binding: which (tenant, type) pairs this isolate has seen ready. Keyed by the binding, not
+ * globally, so two databases in one process (tests, an on-premise restore rehearsal) never share it. */
+const READY = new WeakMap();
+
+/**
+ * PURE. The "latest version per id" row source for one (tenant, type), exposing the record row as `r`.
+ * `proj` reads the projection; otherwise it is the whole-type GROUP BY the projection replaces.
+ * `idWhere(col)` narrows the ids (inside the GROUP BY, so it stays bounded). `seq` and `status` are the
+ * expressions to window and filter on, so a caller writes one query for both sources.
+ */
+function latestRows(proj, tenantId, resourceType, idWhere, idArgs) {
+  const narrow = (col) => (idWhere ? " AND " + idWhere(col) : "");
+  const args = idArgs || [];
+  return proj
+    ? { from: "FROM wardsynq_current k JOIN wardsynq_record r ON r.seq = k.seq WHERE k.tenant_id=? AND k.resource_type=?" + narrow("k.id"),
+        args: [tenantId, resourceType, ...args], seq: "k.seq", status: "k.status" }
+    : { from: "FROM wardsynq_record r JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=?" + narrow("id") +
+          " GROUP BY id) m ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=?",
+        args: [tenantId, resourceType, ...args, tenantId, resourceType], seq: "r.seq", status: "json_extract(r.body, '$.status')" };
+}
+
 /* SCRUB THE LEAVES, NEVER THE CONTAINER, AND THE REASON IS SPECIFIC.
  *
  * scrubPhi() redacts any OBJECT carrying a `resourceType` key wholesale, because on the ABDM path
@@ -153,15 +219,11 @@ class D1Repository {
   }
 
   async latestByType(tenantId, resourceType, limit, opts) {
-    const max = rosterLimit(limit);
-    const r = await this.db
-      .prepare(
-        "SELECT r.body FROM wardsynq_record r " +
-        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
-        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? ORDER BY r.seq " + (opts && opts.newest ? "DESC" : "ASC") + " LIMIT ?"
-      )
-      .bind(tenantId, resourceType, tenantId, resourceType, max).all();
-    return (r.results || []).map(parseBody);
+    const max = rosterLimit(limit), dir = opts && opts.newest ? "DESC" : "ASC";
+    return this._latest(tenantId, resourceType, async (src) => {
+      const r = await this.db.prepare("SELECT r.body " + src.from + " ORDER BY " + src.seq + " " + dir + " LIMIT ?").bind(...src.args, max).all();
+      return (r.results || []).map(parseBody);
+    });
   }
 
   /**
@@ -173,11 +235,8 @@ class D1Repository {
    * R5-3: `newest: true` orders descending and cursors on `beforeSeq`, so a period-scoped read walks
    * back from the newest record and stops once it is past its window (service.listSince).
    *
-   * ponytail: every page re-groups all versions of the type (the same GROUP BY as latestByType), and
-   * NEITHER the status filter NOR the seq window is inside that derived table - they sit on the outer
-   * join, so a page still costs a whole-type group-by whichever direction it walks. What a period read
-   * removes is pages, rows returned, parsed bodies and isolate memory, not that per-page scan. A
-   * latest-version flag or table (audit O20, an owner schema decision) is the only fix for the scan.
+   * O20: through the current-version projection a page is an index range on (tenant, type, seq) that
+   * stops at the page; only the GROUP BY fallback (a type not yet backfilled) still groups the whole type.
    */
   async pageByType(tenantId, resourceType, opts) {
     const max = rosterLimit(opts && opts.limit), desc = !!(opts && opts.newest);
@@ -185,28 +244,27 @@ class D1Repository {
     const before = Number(opts && opts.beforeSeq) || null;
     const want = opts && Array.isArray(opts.statuses) ? statusList(opts.statuses) : null;
     if (want && !want.length) return { records: [], next: null };
-    const window = desc ? (before ? " AND r.seq<?" : "") : " AND r.seq>?";
     const windowArgs = desc ? (before ? [before] : []) : [after];
-    const r = await this.db
-      .prepare(
-        "SELECT r.body, r.seq FROM wardsynq_record r " +
-        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
-        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=?" + window +
-        (want ? " AND json_extract(r.body, '$.status') IN (" + want.map(() => "?").join(",") + ")" : "") +
-        " ORDER BY r.seq " + (desc ? "DESC" : "ASC") + " LIMIT ?"
-      )
-      .bind(...[tenantId, resourceType, tenantId, resourceType, ...windowArgs, ...(want || []), max + 1]).all();
-    const rows = r.results || [];
-    return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+    return this._latest(tenantId, resourceType, async (src) => {
+      const window = desc ? (before ? " AND " + src.seq + "<?" : "") : " AND " + src.seq + ">?";
+      const r = await this.db
+        .prepare(
+          "SELECT r.body, r.seq " + src.from + window +
+          (want ? " AND " + src.status + " IN (" + want.map(() => "?").join(",") + ")" : "") +
+          " ORDER BY " + src.seq + " " + (desc ? "DESC" : "ASC") + " LIMIT ?"
+        )
+        .bind(...src.args, ...windowArgs, ...(want || []), max + 1).all();
+      const rows = r.results || [];
+      return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+    });
   }
 
   /**
    * OPTIONAL (see repository.js): the latest version of each NAMED id, in one read.
    *
-   * R7-2, the ward list. The GROUP BY here is bounded by `id IN (...)`, which is a set of seeks on the
-   * UNIQUE (tenant_id, resource_type, id, version) index rather than the whole-type scan every other
-   * list read pays for - measured at 82,000 rows, this answers in a fraction of a millisecond where the
-   * whole-type group-by takes 8-18ms, and it replaces one round trip PER ID.
+   * R7-2, the ward list. Bounded by `id IN (...)`: a set of seeks on the projection's primary key (O20),
+   * or, in the GROUP BY fallback, on the UNIQUE (tenant_id, resource_type, id, version) index - either
+   * way never the whole-type scan, and one round trip instead of one PER ID.
    *
    * Chunked at ID_CHUNK ids, so every statement stays under D1's 100 bound parameters whatever the
    * size of the ward.
@@ -214,48 +272,45 @@ class D1Repository {
   async latestByIds(tenantId, resourceType, ids) {
     const want = [...new Set((ids || []).map(String).filter(Boolean))];
     if (!want.length) return [];
-    const out = [];
-    for (const part of chunks(want, ID_CHUNK)) {
-      const marks = part.map(() => "?").join(",");
-      const r = await this.db
-        .prepare(
-          "SELECT r.body FROM wardsynq_record r " +
-          "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? AND id IN (" + marks + ") GROUP BY id) m " +
-          "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=?"
-        )
-        .bind(tenantId, resourceType, ...part, tenantId, resourceType).all();
-      for (const row of r.results || []) out.push(parseBody(row));
-    }
-    return out;
+    return this._latest(tenantId, resourceType, async (proj) => {
+      const out = [];
+      for (const part of chunks(want, ID_CHUNK)) {
+        const marks = part.map(() => "?").join(",");
+        const src = proj((col) => col + " IN (" + marks + ")", part);
+        const r = await this.db.prepare("SELECT r.body " + src.from).bind(...src.args).all();
+        for (const row of r.results || []) out.push(parseBody(row));
+      }
+      return out;
+    }, true);
   }
 
   /**
    * OPTIONAL (see repository.js): one page, newest first, of the latest version per id starting with
-   * `prefix`. The prefix is a RANGE on the UNIQUE (tenant_id, resource_type, id, version) index, not a
-   * LIKE, so a hospital's other rows are never walked. The cursor is the seq of the last row handed back.
+   * `prefix`. The prefix is a RANGE on the id index (the projection's primary key, or the record's UNIQUE
+   * key in the fallback), not a LIKE, so a hospital's other rows are never walked. The cursor is the seq
+   * of the last row handed back.
    */
   async pageByIdPrefix(tenantId, resourceType, prefix, opts) {
     const pre = String(prefix || "");
     if (!pre) return { records: [], next: null };
     const max = rosterLimit(opts && opts.limit), before = Number(opts && opts.before) || null;
     const hi = pre.slice(0, -1) + String.fromCharCode(pre.charCodeAt(pre.length - 1) + 1);
-    const r = await this.db
-      .prepare(
-        "SELECT r.body, r.seq FROM wardsynq_record r " +
-        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? AND id>=? AND id<? GROUP BY id) m " +
-        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=?" + (before ? " AND r.seq<?" : "") + " ORDER BY r.seq DESC LIMIT ?"
-      )
-      .bind(...[tenantId, resourceType, pre, hi, tenantId, resourceType, ...(before ? [before] : []), max + 1]).all();
-    const rows = r.results || [];
-    return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+    return this._latest(tenantId, resourceType, async (proj) => {
+      const src = proj((col) => col + ">=? AND " + col + "<?", [pre, hi]);
+      const r = await this.db
+        .prepare("SELECT r.body, r.seq " + src.from + (before ? " AND " + src.seq + "<?" : "") + " ORDER BY " + src.seq + " DESC LIMIT ?")
+        .bind(...src.args, ...(before ? [before] : []), max + 1).all();
+      const rows = r.results || [];
+      return { records: rows.slice(0, max).map(parseBody), next: rows.length > max ? rows[max - 1].seq : null };
+    }, true);
   }
 
   /**
    * OPTIONAL (see repository.js): latest version per id whose body status is one of `statuses`,
-   * oldest first. The status lives in the body JSON - there is deliberately no status column (see
-   * the outbox index note in wardsynq_schema.sql) - so the predicate reads it with json_extract,
-   * which idx_wardsynq_record_outbox_status keeps cheap. Without that index this still answers
-   * correctly, only slower.
+   * oldest first. The status lives in the body JSON - there is deliberately no status column on the
+   * record (see the outbox index note in wardsynq_schema.sql). Through the projection it is the
+   * `status` the trigger copied out with json_extract, behind idx_wardsynq_current_status; in the
+   * fallback it is json_extract on the record body. Same value either way.
    *
    * The IN list is placeholders, never interpolation: statuses arrive as outbox constants, but a
    * query builder that trusts its caller is how a constant becomes an injection one refactor later.
@@ -266,15 +321,58 @@ class D1Repository {
     const want = statusList(statuses);
     if (!want.length) return [];
     const max = rosterLimit(limit);
-    const r = await this.db
-      .prepare(
-        "SELECT r.body FROM wardsynq_record r " +
-        "JOIN (SELECT id, MAX(version) AS v FROM wardsynq_record WHERE tenant_id=? AND resource_type=? GROUP BY id) m " +
-        "ON m.id = r.id AND m.v = r.version WHERE r.tenant_id=? AND r.resource_type=? " +
-        "AND json_extract(r.body, '$.status') IN (" + want.map(() => "?").join(",") + ") ORDER BY r.seq ASC LIMIT ?"
-      )
-      .bind(tenantId, resourceType, tenantId, resourceType, ...want, max).all();
-    return (r.results || []).map(parseBody);
+    return this._latest(tenantId, resourceType, async (src) => {
+      const r = await this.db
+        .prepare("SELECT r.body " + src.from + " AND " + src.status + " IN (" + want.map(() => "?").join(",") + ") ORDER BY " + src.seq + " ASC LIMIT ?")
+        .bind(...src.args, ...want, max).all();
+      return (r.results || []).map(parseBody);
+    });
+  }
+
+  /**
+   * O20. Runs `read` against the current-version projection when (tenant, type) is backfilled, else
+   * against the GROUP BY. `read` gets the row source (latestRows); with `narrowed` it gets a function
+   * of (idWhere, idArgs) instead, for the reads that bound the ids. A projection read that throws is
+   * re-run on the GROUP BY and the pair is forgotten, so a missing or broken projection costs speed,
+   * never an answer.
+   */
+  async _latest(tenantId, resourceType, read, narrowed) {
+    const via = (proj) => (narrowed
+      ? read((idWhere, idArgs) => latestRows(proj, tenantId, resourceType, idWhere, idArgs))
+      : read(latestRows(proj, tenantId, resourceType)));
+    if (await this._projected(tenantId, resourceType)) {
+      try { return await via(true); } catch (_) { const seen = READY.get(this.db); if (seen) seen.delete(`${tenantId}\u0000${resourceType}`); }
+    }
+    return via(false);
+  }
+
+  /**
+   * O20. Is (tenant, type) readable through the projection? Builds it if not: the tables and trigger
+   * first (IF NOT EXISTS), then ONE atomic batch of the backfill and the ready marker. Any failure
+   * answers false and the caller uses the GROUP BY; the next read tries again.
+   */
+  async _projected(tenantId, resourceType) {
+    const key = `${tenantId}\u0000${resourceType}`;
+    let seen = READY.get(this.db);
+    if (seen && seen.has(key)) return true;
+    try {
+      let ready = null;
+      try {
+        ready = await this.db.prepare("SELECT 1 AS ok FROM wardsynq_current_ready WHERE tenant_id=? AND resource_type=?").bind(tenantId, resourceType).first();
+      } catch (_) { /* no projection tables yet: built below */ }
+      if (!ready) {
+        await this.db.batch(CURRENT_DDL.map((sql) => this.db.prepare(sql)));
+        await this.db.batch([
+          this.db.prepare(CURRENT_BACKFILL).bind(tenantId, resourceType, tenantId, resourceType),
+          this.db.prepare("INSERT OR IGNORE INTO wardsynq_current_ready (tenant_id,resource_type,built_at) VALUES (?,?,?)").bind(tenantId, resourceType, new Date().toISOString()),
+        ]);
+      }
+      if (!seen) READY.set(this.db, (seen = new Set()));
+      seen.add(key);
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   /**
