@@ -11071,6 +11071,13 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   identifiers (one `phi()` helper per module), and screens that are not wrapped must say so; that is what
   `[data-phi-unmasked]` and the amber label are for. Text that cannot carry markup (toasts, `confirm()`) uses
   `screenText()`, which masks only at the moment it is shown. [[plans/Premium-Feel]] B2
+## 2026-10-02 - Owner Mail is an in-app client over Mailflare's API, not IMAP
+- Owner asked for hello@maiknowledge.com inside StewardMD, owners only, live and synced. Mailflare runs on
+  Workers and cannot serve IMAP/SMTP, and the account-forwarding route needs a paid licence. So the app
+  talks to Mailflare's `/api/v1` through an owner-gated Pages proxy (`functions/api/mail`) holding the API
+  key; Mailflare gained the read/patch/attachment/mailbox v1 routes it lacked. Live = 20 s polling while
+  open. [[Mail]]
+
 
 ## 2026-10-01 - Edge: an "exact" calculator name means exactly one calculator, and the scorer judges by rules first
 - `MEDCALC.find(q).exact` (what MaiK's calculator card and the Edge rules layer trust) is true only when ONE calculator carries the name. Single letters and digits are part of a name ("R-ISS" is not "ISS", "PHQ-2" is not "PHQ-9"); "timi", "meld na", "framingham", "corrected qt" still return their best guess, but not as exact, so a model or the doctor picks. Found by the Edge bake-off scorer: the rules layer opened the wrong calculator in 26 frozen-test rows (1.1%); now 0.
