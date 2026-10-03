@@ -318,6 +318,14 @@
           var out = r && typeof r.json === "string" ? JSON.parse(r.json) : r;
           if (out && o.calibrated === false) out.confidence = null;
           return out;
+        }, function (e) {
+          // A :edge process that died outside the runtime (low-memory killer) restarts with no weights,
+          // and configure fails "needle_init: no model loaded". Tag it so edge-runtime.js reloads.
+          if (/no model loaded/i.test(String((e && e.message) || e))) {
+            if (!e || typeof e !== "object") e = new Error(String(e));
+            e.notLoaded = true;
+          }
+          throw e;
         });
       },
       reset: function () { return plugin.reset ? plugin.reset() : null; },
