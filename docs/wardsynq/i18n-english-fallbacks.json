@@ -1,9 +1,9 @@
 {
-  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27 (audit fixes CLIN-07, CLIN-16, CLIN-24): ward.crit-uncomparable, ward.crit-unit-unchecked, ward.fluid-direction-gaps and ward.second-checker-staff-id are new and not yet through the pipeline. Added 2026-09-27 (billing audit fixes): ward.payment-link-closed-bill-no-longer-owes, ward.the-bill-was-already-paid-when-this-payment and ward.claim-already-open are new and not yet through the pipeline. Added 2026-10-03 (Codex audit F3, F5, F6): ward.order-changed-verify-again, ward.safety-check-did-not-run, ward.safety-check-did-not-run-reason, ward.safety-check-did-not-run-required, ward.not-checked, ward.reason-for-prescribing-unchecked, ward.give-a-reason-unchecked, ward.prescribed-not-checked, plus from the UI finish gate: ward.verify-again, ward.prescribe-without-check, ward.check-again, ward.safety-check-did-not-run-for, ward.continue-without-checks, ward.save-without-the-checks, ward.consult-unchecked-required, ward.consult-unchecked-text are new and not yet through the pipeline. Added 2026-10-03 (leaving recovery, PACU bays): ward.choose-the-recovery-bay, ward.in-recovery-pacu, ward.in-recovery-since, ward.leave-recovery, ward.leave-recovery-explain, ward.leaves-recovery, ward.leaving-recovery-choose-bed, ward.left-recovery, ward.move, ward.move-from-recovery-to-bed, ward.name-the-recovery-bay, ward.no-recovery-bay-is-free, ward.no-recovery-bays-listed, ward.nobody-is-in-recovery, ward.recovery-bay, ward.recovery-bays-could-not-be-read, ward.recovery-home-day-case, ward.recovery-to-a-ward-bed, ward.recovery-to-icu-or-another-unit, ward.where-does-the-patient-go are new and not yet through the pipeline. Added 2026-10-04 (recovery bays on the bed board): ward.bed-recovery, ward.bed-recovery-for, ward.bed-recovery-open are new and not yet through the pipeline.",
+  "note": "Keys that show English in a translated screen. The machine translation pipeline drops a value when it fails a mechanical check (placeholders, digits, entities, a missing negation marker) or when the second-model meaning check flags it, because a wrong clinical translation is worse than English. Every key here is deliberate: test/wardsynq-i18n.test.mjs fails if a catalog is missing a key that is not listed here. Added 2026-09-19: the MaiK Scribe keys for the ward round and discharge summary (ward.scribe-*, ward.dc-scribe-*) are new and not yet through the translation pipeline; both features ship behind flags that are off, so run the pipeline over these before enabling them. Added 2026-09-24: the Ni-Key / StewardID registration keys (ward.reg-read-nfc, ward.reg-hold-tag, ward.reg-carrier-revoked, ward.reg-tag-read, ward.reg-scanned-code, ward.reg-camera-denied, ward.reg-camera-scan-failed, ward.reg-scan-or-type, ward.reg-tag-empty, ward.reg-nfc-denied, ward.reg-nfc-read-error, ward.reg-scan-qr, ward.reg-stewardid), ward.scanned-tag-deactivated and the bedside OPD/IPD episode picker keys (ward.bedside-episode-opd, ward.bedside-episode-ipd, ward.where-do-you-want-to-work, ward.this-patient-has-an-opd-visit-and-an-admission) are new and not yet through the pipeline, like the earlier ward.reg-nfc-* keys. Added 2026-09-27 (audit fixes CLIN-07, CLIN-16, CLIN-24): ward.crit-uncomparable, ward.crit-unit-unchecked, ward.fluid-direction-gaps and ward.second-checker-staff-id are new and not yet through the pipeline. Added 2026-09-27 (billing audit fixes): ward.payment-link-closed-bill-no-longer-owes, ward.the-bill-was-already-paid-when-this-payment and ward.claim-already-open are new and not yet through the pipeline. Added 2026-10-03 (Codex audit F3, F5, F6): ward.order-changed-verify-again, ward.safety-check-did-not-run, ward.safety-check-did-not-run-reason, ward.safety-check-did-not-run-required, ward.not-checked, ward.reason-for-prescribing-unchecked, ward.give-a-reason-unchecked, ward.prescribed-not-checked, plus from the UI finish gate: ward.verify-again, ward.prescribe-without-check, ward.check-again, ward.safety-check-did-not-run-for, ward.continue-without-checks, ward.save-without-the-checks, ward.consult-unchecked-required, ward.consult-unchecked-text are new and not yet through the pipeline. Added 2026-10-03 (leaving recovery, PACU bays): ward.choose-the-recovery-bay, ward.in-recovery-pacu, ward.in-recovery-since, ward.leave-recovery, ward.leave-recovery-explain, ward.leaves-recovery, ward.leaving-recovery-choose-bed, ward.left-recovery, ward.move, ward.move-from-recovery-to-bed, ward.name-the-recovery-bay, ward.no-recovery-bay-is-free, ward.no-recovery-bays-listed, ward.nobody-is-in-recovery, ward.recovery-bay, ward.recovery-bays-could-not-be-read, ward.recovery-home-day-case, ward.recovery-to-a-ward-bed, ward.recovery-to-icu-or-another-unit, ward.where-does-the-patient-go are new and not yet through the pipeline. Added 2026-10-04 (recovery bays on the bed board): ward.bed-recovery, ward.bed-recovery-for, ward.bed-recovery-open are new and not yet through the pipeline. Added 2026-10-04 (O19, formulary capability): the five formulary.manage keys (site.admin.fml.noAccessCap, site.admin.fml.pharmacyOnly, site.admin.staff.roleNote.pharmacyFml, site.shell.home.tile.formulary.*) are new and not yet through the translation pipeline.",
   "generated": "2026-09-19",
   "languages": {
     "es": {
-      "count": 252,
+      "count": 257,
       "keys": [
         "fb.no",
         "intake.no",
@@ -256,11 +256,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "te": {
-      "count": 232,
+      "count": 237,
       "keys": [
         "comm.off",
         "comm.whatsapp",
@@ -493,11 +498,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "hi": {
-      "count": 167,
+      "count": 172,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -665,11 +675,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "bn": {
-      "count": 283,
+      "count": 288,
       "keys": [
         "comm.whatsapp",
         "msg.empty",
@@ -953,11 +968,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "kn": {
-      "count": 161,
+      "count": 166,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.nomination",
@@ -1119,11 +1139,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "ta": {
-      "count": 216,
+      "count": 221,
       "keys": [
         "comm.whatsapp",
         "privacy.kind.erasure",
@@ -1340,11 +1365,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "ml": {
-      "count": 187,
+      "count": 192,
       "keys": [
         "comm.whatsapp",
         "site.abdm.notAvailable",
@@ -1532,11 +1562,16 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     },
     "mr": {
-      "count": 207,
+      "count": 212,
       "keys": [
         "comm.whatsapp",
         "site.admin.ccs.critical.intro",
@@ -1744,7 +1779,12 @@
         "ward.recovery-home-day-case",
         "ward.recovery-to-a-ward-bed",
         "ward.recovery-to-icu-or-another-unit",
-        "ward.where-does-the-patient-go"
+        "ward.where-does-the-patient-go",
+        "site.admin.fml.noAccessCap",
+        "site.admin.fml.pharmacyOnly",
+        "site.admin.staff.roleNote.pharmacyFml",
+        "site.shell.home.tile.formulary.title",
+        "site.shell.home.tile.formulary.sub"
       ]
     }
   }
