@@ -114,9 +114,15 @@ First launch and post-update: keep the full logo trace. App lock prompts immedia
   Clinic, WardSynQ (19 views in `PHI_VIEWS`, the rest flagged unmasked), discharge.js, SURGX patient card,
   logbook case reference, FollowCare enrol inputs, referrals inbox, home resume/recent/critical banner,
   Recent cases, My Cases, Connect patient, dose calculator / neonatal patient pickers, clinical-docs inputs,
-  critical-result alert screen. NOT masked: free-text notes and reports, aria-labels (screen reader speech),
-  push-notification text from the server, opd.html staff console (not in the app).
-  Tests: `test/privacy-mode.test.mjs`, `test/run-privacy-mode-ui.mjs`.
+  critical-result alert screen. Screen reader speech: text wrapped with `wrap()` is read as the mask (the
+  `::after` mask is the accessible name, the hidden span is not); an aria-label / title / alt that names a
+  patient is written with `SMD_PRIVACY_MODE.attr(name, kind, raw, build)` (real text + `data-phi-<name>`
+  masked text) and swapped on toggle and by a MutationObserver for nodes rendered while on. The only such
+  labels on the covered screens were the ICU board / attention cards and the two ICU alert lists (2026-10-03
+  audit). NOT masked: free-text notes and reports, push-notification text from the server, opd.html staff
+  console (not in the app; `opd-dashboard.js` puts names into aria-labels there).
+  Tests: `test/privacy-mode.test.mjs`, `test/run-privacy-mode-ui.mjs` (also asserts Chrome's computed
+  accessibility tree names no fake patient while on).
 - Turn `smd_applock` ON after the owner's device test.
 
 **B3. Dynamic Type and Android font scale.** Use `@capacitor/text-zoom` (8.0.1 on npm, official,

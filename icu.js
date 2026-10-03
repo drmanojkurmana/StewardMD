@@ -29,6 +29,8 @@
   function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function phiIn(kind, text, v, from) { var P = window.SMD_PRIVACY_MODE; return P && v ? P.wrapIn(kind, text, v, from) : esc(text); }
   function pv(kind, v) { var P = window.SMD_PRIVACY_MODE; return P ? P.screenText(kind, v) : String(v == null ? "" : v); }
+  // An aria-label / title that names the patient: build(value) is called with the real value and with its mask.
+  function phiAttr(attr, kind, v, build) { var P = window.SMD_PRIVACY_MODE; return P ? P.attr(attr, kind, v, build) : " " + attr + '="' + esc(build(v == null ? "" : String(v))) + '"'; }
   function nowTs() { return Date.now(); }
   // BUG B1 (2026-08-22 ward-round audit): every patient id used to be JUST nowTs() (or a fallback
   // to it), so two patients admitted in the same millisecond collided into ONE record — reproduced:
@@ -4473,7 +4475,7 @@
     list.forEach(function (p) {
       if (p.sev === "stable") return;
       var pre = V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · ";
-      rows.push({ id: p.id, sev: p.sev, title: pre + (p.name || "Patient"), th: esc(pre) + phi("name", p.name, esc(p.name || "Patient")), body: v2Reason(p.snap) || v2ReasonFallback(p) });
+      rows.push({ id: p.id, sev: p.sev, pre: pre, nm: p.name, title: pre + (p.name || "Patient"), th: esc(pre) + phi("name", p.name, esc(p.name || "Patient")), body: v2Reason(p.snap) || v2ReasonFallback(p) });
     });
     rows.sort(function (a, b) { return (a.sev === "critical" ? 0 : 1) - (b.sev === "critical" ? 0 : 1); });
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
@@ -4481,7 +4483,8 @@
       ? ' Derived from each patient’s latest values in this shared unit.'
       : ' Derived from each patient’s latest values on this device.') + '</div>';
     var body = rows.length ? rows.map(function (r) {
-      return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.sev === "critical" ? "Urgent: " : "") + r.title + ". " + (r.body || "") + " — open patient") + '">' +
+      return '<button class="icu-v2-alert-row ' + r.sev + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '"' +
+        phiAttr("aria-label", "name", r.nm, function (n) { return (r.sev === "critical" ? "Urgent: " : "") + r.pre + (n || "Patient") + (r.body ? ", " + r.body : "") + ". Open patient."; }) + '>' +
         '<span class="icu-v2-alert-ic" aria-hidden="true">' + (r.sev === "critical" ? ico("warn", "⚠️") : ico("bell", "🔔")) + '</span>' +
         '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + (r.th || esc(r.title)) + (r.sev === "critical" ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
         '<span class="icu-v2-alert-b">' + esc(r.body) + '</span></span></button>';
@@ -4673,7 +4676,7 @@
   function v2StripAria(key, count, name) { return ' aria-pressed="' + (_v2Filter === key) + '" aria-label="' + esc(name + ", " + count + ". Filter the unit.") + '"'; }
   function v2ChipAria(key, label) { return ' aria-pressed="' + (_v2Filter === key) + '" aria-label="' + esc("Show " + label + " patients") + '"'; }
   // Patient / attention cards: an explicit open-target label instead of concatenated inner text.
-  function v2CardAria(p) { return ' aria-label="' + esc("Open Bed " + (p.bed || "—") + ", " + (p.name || "Patient") + ", " + (V2_LABEL[p.sev] || "")) + '"'; }
+  function v2CardAria(p) { return phiAttr("aria-label", "name", p.name, function (n) { return "Open Bed " + (p.bed || "—") + ", " + (n || "Patient") + ", " + (V2_LABEL[p.sev] || ""); }); }
 
   /* --------------------------- Phase 4: loading / offline / error state helpers --------------- */
   // A single calm shimmer placeholder shaped like a patient card. DOM-free; no data leaks.
@@ -6125,7 +6128,12 @@
     var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + ' Live from this shared unit — critical acuity, instructions for you, completed tasks, new investigations and med changes. Derived from the unit snapshot plus the open patient’s timeline; a full per-event unit feed is a later refinement.</div>';
     var body = rows.length ? rows.map(function (r) {
       var fresh = (r.ts || 0) > seen;
-      return '<button class="icu-v2-alert-row ' + (r.urgent ? "critical" : "review") + (fresh ? " fresh" : "") + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '" aria-label="' + esc((r.urgent ? "Urgent: " : "") + (fresh ? "New. " : "") + r.title + (r.body ? ". " + r.body : "") + " — open patient") + '">' +
+      var at = r.nm ? r.title.indexOf(r.nm, r.nmAt || 0) : -1;
+      return '<button class="icu-v2-alert-row ' + (r.urgent ? "critical" : "review") + (fresh ? " fresh" : "") + '" data-icu-act="openpt:' + encodeURIComponent(r.id) + '"' +
+        phiAttr("aria-label", "name", at < 0 ? "" : r.nm, function (n) {
+          var t = at < 0 ? r.title : r.title.slice(0, at) + n + r.title.slice(at + r.nm.length);
+          return (r.urgent ? "Urgent: " : "") + (fresh ? "New. " : "") + t + (r.body ? ". " + r.body : "") + ". Open patient.";
+        }) + '>' +
         '<span class="icu-v2-alert-ic" aria-hidden="true">' + esc(r.icon || "🔔") + '</span>' +
         '<span class="icu-v2-alert-tx"><span class="icu-v2-alert-h">' + (r.nm ? phiIn("name", r.title, r.nm, r.nmAt) : esc(r.title)) + (r.urgent ? '<span class="icu-v2-urg">URGENT</span>' : "") + '</span>' +
         (r.body ? '<span class="icu-v2-alert-b">' + esc(r.body) + '</span>' : "") +

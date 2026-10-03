@@ -6,9 +6,14 @@
  *     list, while clinical values (bed, age/sex, diagnosis, labs, meds) stay visible; the masks are drawn;
  *   - the DOM data is untouched (textContent still holds the real values) and @media print shows them;
  *   - identifier inputs draw as dots; a screen it cannot mask raises the "not masked" label;
+ *   - accessible names (what VoiceOver / TalkBack speak) carry no identifier while on: no aria-label, title or alt
+ *     on the page holds the name or ID, and Chrome's computed accessibility tree names nothing with them, on the
+ *     ICU board, the ICU alerts list, the OPD EMR header, the OPD queue and the ward list; the ICU card's label
+ *     is swapped on toggle without a re-render, labels rendered while on arrive masked, and off brings the real
+ *     labels back;
  *   - the choice survives a reload in the same session; the kill switch removes the toggle and forces it off;
  *   - no uncaught JS error comes from the privacy code.
- * USAGE: node test/run-privacy-mode-ui.mjs   (CHROME=/path/to/chrome, BASE=http://localhost:8981/)
+ * USAGE: node test/run-privacy-mode-ui.mjs   (CHROME=/path/to/chrome, BASE=http://localhost:8984/, CDP_PORT=9484)
  */
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
@@ -16,15 +21,15 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:8981/").replace(/\/?$/, "/");
-const PORT = 9481;
+const BASE = (process.env.BASE || "http://localhost:8984/").replace(/\/?$/, "/");
+const PORT = Number(process.env.CDP_PORT || 9484);
 const userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/privacy-mode-ui-chrome";
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;
 async function ensureServer() {
   try { await fetch(BASE); return; } catch {}
-  const port = (BASE.match(/:(\d+)/) || [, "8981"])[1];
+  const port = (BASE.match(/:(\d+)/) || [, "8984"])[1];
   serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), port], { stdio: "ignore" });
   for (let i = 0; i < 40; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
 }
@@ -69,6 +74,24 @@ const seen = (sel) => ev(`var el=document.querySelector(${JSON.stringify(sel)});
 // renderer that silently dropped it cannot pass as masked.
 const inDom = (sel) => ev(`var el=document.querySelector(${JSON.stringify(sel)}); return el ? el.textContent : null;`);
 const has = (s, w) => typeof s === "string" && s.indexOf(w) >= 0;
+// Accessible names. attrLeaks: every aria-label / title / alt in the page that holds one of the words.
+const attrLeaks = async (words) => JSON.parse(await ev(`var w=${JSON.stringify(words)}, out=[];
+  document.querySelectorAll("[aria-label],[title],[alt]").forEach(function(el){ ["aria-label","title","alt"].forEach(function(a){
+    var v=el.getAttribute(a); if (v && w.some(function(x){return v.indexOf(x)>=0;})) out.push(a+"="+v); }); });
+  return JSON.stringify(out);`));
+// axLeaks: Chrome's computed accessibility tree (the names and descriptions a screen reader speaks, incl. text
+// drawn by CSS) for any node that is not ignored and names one of the words.
+const axLeaks = async (words) => {
+  const r = await call("Accessibility.getFullAXTree", {});
+  const nodes = (r.result && r.result.nodes) || [];
+  const out = [];
+  for (const n of nodes) {
+    if (n.ignored) continue;
+    const said = [n.name, n.description, n.value].map((p) => (p && p.value != null ? String(p.value) : "")).join(" | ");
+    if (words.some((x) => said.indexOf(x) >= 0)) out.push(((n.role && n.role.value) || "?") + ": " + said.slice(0, 120));
+  }
+  return { n: nodes.length, out };
+};
 
 try {
   let ver, t = 0;
@@ -86,7 +109,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true });
   sessionId = sid;
-  await call("Runtime.enable", {}); await call("Page.enable", {});
+  await call("Runtime.enable", {}); await call("Page.enable", {}); await call("Accessibility.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
 
   /* ---------- 1. the toggle, default off ---------- */
@@ -102,6 +125,8 @@ try {
   await sleep(900);
   let board = await seen("#icuRoot");
   ok(has(board, PT.name), "privacy off: the ICU board shows the patient name");
+  const cardOff = await ev(`window.__pvCard = document.querySelector("#icuRoot .icu-v2-card"); return window.__pvCard ? window.__pvCard.getAttribute("aria-label") : null;`);
+  ok(has(cardOff, PT.name), "privacy off: the ICU card's accessible name is the real name", cardOff);
 
   /* ---------- 3. one tap: identifiers leave the screen, clinical content stays ---------- */
   await ev(`document.querySelector("#homeV2 .smd-pv-btn").click(); return 1;`);
@@ -112,6 +137,40 @@ try {
   ok(has(board, "Septic shock") && has(board, "61/M") && has(board, "Bed 7"), "the diagnosis, age/sex and bed stay visible on the board");
   const after = await ev(`var el=document.querySelector("#icuRoot [data-phi]"); return el ? getComputedStyle(el,"::after").content : null;`);
   ok(after === '"T. F."', "the board draws the initials in place of the name", after);
+
+  /* ---------- 3b. accessible names: masked on toggle without a re-render, masked when rendered while on, real again when off ---------- */
+  const PT_WORDS = ["Testa", "Fakepatient", PT.mrn, "99990001234"];
+  const cardOn = await ev(`var c=document.querySelector("#icuRoot .icu-v2-card"); return JSON.stringify({same: c === window.__pvCard, label: c && c.getAttribute("aria-label")});`);
+  const co = JSON.parse(cardOn);
+  ok(co.same, "the ICU card was not re-rendered by the toggle (the swap did it)");
+  ok(has(co.label, "T. F.") && !has(co.label, "Testa") && has(co.label, "Bed 7"), "privacy on: the ICU card's accessible name says the initials and keeps the bed", co.label);
+  let leaks = await attrLeaks(PT_WORDS);
+  ok(leaks.length === 0, "privacy on: no aria-label / title / alt on the ICU board names the patient", leaks);
+  let ax = await axLeaks(PT_WORDS);
+  ok(ax.n > 20 && ax.out.length === 0, "privacy on: nothing in the computed accessibility tree names the patient (ICU board, " + ax.n + " nodes)", ax.out);
+
+  await ev(`document.querySelector('#icuRoot [data-icu-act="icualerts"]').click(); return 1;`);
+  await sleep(600);
+  const alertRow = await ev(`var r=document.querySelector("#icuRoot .icu-v2-alert-row"); window.__pvRow=r; return r ? r.getAttribute("aria-label") : null;`);
+  ok(alertRow != null, "the ICU alerts list has a row for the patient", alertRow);
+  ok(has(alertRow, "T. F.") && !has(alertRow, "Testa"), "an alert row rendered while on arrives with the initials in its accessible name", alertRow);
+  leaks = await attrLeaks(PT_WORDS);
+  ok(leaks.length === 0, "privacy on: no aria-label / title / alt on the ICU alerts list names the patient", leaks);
+  ax = await axLeaks(PT_WORDS);
+  ok(ax.out.length === 0, "privacy on: nothing in the accessibility tree names the patient (ICU alerts)", ax.out);
+
+  await ev(`document.querySelector("#homeV2 .smd-pv-btn").click(); return 1;`);
+  await sleep(200);
+  const rowOff = await ev(`var r=document.querySelector("#icuRoot .icu-v2-alert-row"); return JSON.stringify({same: r === window.__pvRow, label: r && r.getAttribute("aria-label")});`);
+  const ro = JSON.parse(rowOff);
+  ok(ro.same && has(ro.label, PT.name), "privacy off again: the same alert row gets its real accessible name back", ro);
+  ax = await axLeaks(["Testa Fakepatient"]);
+  ok(ax.out.length > 0, "privacy off: the accessibility tree names the patient again", ax.out.length);
+  await ev(`document.querySelector("#homeV2 .smd-pv-btn").click(); return 1;`);
+  await sleep(200);
+  ok(!has(await ev(`return document.querySelector("#icuRoot .icu-v2-alert-row").getAttribute("aria-label");`), "Testa"), "and on again masks it again");
+  await ev(`document.querySelector('#icuRoot [data-icu-act="icuboard"]').click(); return 1;`);
+  await sleep(600);
 
   await ev(`document.querySelector("#icuRoot .icu-v2-card").click(); return 1;`);
   await sleep(800);
@@ -140,6 +199,11 @@ try {
   const emr = await seen("#pvHost");
   ok(!has(emr, "Opdfake") && !has(emr, OPD.mrn) && !has(emr, OPD.phone), "OPD EMR header: name, MR number and phone are not in the rendered text", emr && emr.slice(0, 200));
   ok(has(emr, "Ceftriaxone 1 g") && has(emr, "Serum creatinine"), "OPD EMR keeps the medicines and labs visible");
+  const OPD_WORDS = ["Opdfake", "Personname", OPD.mrn, OPD.phone];
+  leaks = await attrLeaks(OPD_WORDS);
+  ok(leaks.length === 0, "privacy on: no aria-label / title / alt in the OPD EMR header names the patient", leaks);
+  ax = await axLeaks(OPD_WORDS);
+  ok(ax.out.length === 0, "privacy on: nothing in the accessibility tree names the OPD patient", ax.out);
 
   await ev(`document.getElementById("pvHost").innerHTML = QUEUE._render({ session: { doctorName: "Dr Test", department: "General Medicine OPD", doctorStatus: "consulting" }, view: "dashboard", me: {},
       tickets: [{ id: "t1", name: ${JSON.stringify(Q.name)}, mrnLast4: "0001", status: "waiting", visitType: "new", token: "A12", registeredAt: Date.now() - 45 * 60000 }] }); return 1;`);
@@ -149,6 +213,10 @@ try {
   ok(has(queue, "has waited"), "the queue insight sentence rendered", queue && queue.slice(0, 120));
   ok(!has(queue, "Queuefake") && !has(queue, "Personone"), "OPD queue: the name is masked in the row and in the \"has waited\" sentence", queue && queue.slice(0, 300));
   ok(has(queue, "A12"), "the token number stays visible (not an identifier)");
+  leaks = await attrLeaks(["Queuefake", "Personone"]);
+  ok(leaks.length === 0, "privacy on: no aria-label / title / alt in the OPD queue names the patient", leaks);
+  ax = await axLeaks(["Queuefake", "Personone"]);
+  ok(ax.out.length === 0, "privacy on: nothing in the accessibility tree names the queued patient", ax.out);
 
   await ev(`var s = Object.assign({}, WARD._st, { loaded: true, view: "list", q: "", busy: false, err: "",
       patients: [{ patientId: "wsq-pat-fake1", encounterId: "wsq-enc-fake1", name: ${JSON.stringify(WP.name)}, mrn: ${JSON.stringify(WP.mrn)}, ward: "Medical A", bed: "12", class: "inpatient", admittedAt: Date.now() - 86400000 }] });
@@ -158,6 +226,10 @@ try {
   const ward = await seen("#pvHost");
   ok(has(ward, "Medical A") || has(ward, "inpatient") || has(ward, "Inpatient"), "the ward list keeps the ward / class visible", ward && ward.slice(0, 200));
   ok(!has(ward, "Wardfake") && !has(ward, WP.mrn), "WardSynQ ward list: name and MRN are not in the rendered text", ward && ward.slice(0, 300));
+  leaks = await attrLeaks(["Wardfake", "Patientname", WP.mrn]);
+  ok(leaks.length === 0, "privacy on: no aria-label / title / alt in the ward list names the patient", leaks);
+  ax = await axLeaks(["Wardfake", "Patientname", WP.mrn]);
+  ok(ax.out.length === 0, "privacy on: nothing in the accessibility tree names the ward patient", ax.out);
   ok(await ev(`return !!document.querySelector("#pvHost #wQ[data-phi-input]");`) === true, "the ward search box (names, MRNs) is marked as an identifier input");
 
   /* ---------- 5. inputs draw as dots; an unmasked screen says so ---------- */
