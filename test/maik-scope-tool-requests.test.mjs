@@ -59,7 +59,8 @@ test("cloud prompt: MEDICAL_ONLY puts app/tool requests in scope", () => {
   assertToolClause(SERVER.match(/const MEDICAL_ONLY =([\s\S]*?);\n/)[1], "MEDICAL_ONLY");
 });
 
-test("local prompts: SYSTEM_CORE and MEDICAL_ONLY_LOCAL put app/tool requests in scope", () => {
-  assertToolClause(LOCAL.match(/var SYSTEM_CORE =([\s\S]*?);\n/)[1], "SYSTEM_CORE");
+// SYSTEM_CORE (the on-device prefill) is deliberately left alone: it has a hard size budget
+// (maik-local.test.mjs, maik-prompt-budget-guard.test.mjs) and the firewall half covers the client.
+test("local web prompt: MEDICAL_ONLY_LOCAL puts app/tool requests in scope", () => {
   assertToolClause(LOCAL.match(/var MEDICAL_ONLY_LOCAL =([\s\S]*?);\n/)[1], "MEDICAL_ONLY_LOCAL");
 });
