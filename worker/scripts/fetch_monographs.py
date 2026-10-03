@@ -107,7 +107,7 @@ def main():
     m = sqlite3.connect(OUT_DB)
     cols = ["composition","generic_query","indication","dosage","pregnancy","specific_pop",
             "adverse","interactions","warnings","forms","source","source_id","fetched_at"]
-    m.execute("CREATE TABLE monographs (" + ",".join(c + (" TEXT PRIMARY KEY" if c == "composition" else " TEXT") for c in cols) + ")")
+    m.execute("CREATE TABLE monographs (composition TEXT PRIMARY KEY, generic_query TEXT, indication TEXT, dosage TEXT, pregnancy TEXT, specific_pop TEXT, adverse TEXT, interactions TEXT, warnings TEXT, forms TEXT, source TEXT, source_id TEXT, fetched_at TEXT)")
     hit = miss = 0; missed = []
     stamp = time.strftime("%Y-%m-%d")
     def work(comp):
@@ -123,7 +123,7 @@ def main():
                 miss += 1; missed.append(comp)
             else:
                 hit += 1
-                m.execute("INSERT OR REPLACE INTO monographs VALUES (" + ",".join("?"*len(cols)) + ")",
+                m.execute("INSERT OR REPLACE INTO monographs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                           [comp, qn, d["indication"], d["dosage"], d["pregnancy"], d["specific_pop"],
                            d["adverse"], d["interactions"], d["warnings"], d["forms"],
                            "U.S. FDA label via openFDA", d["source_id"], stamp])
