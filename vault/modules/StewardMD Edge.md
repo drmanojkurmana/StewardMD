@@ -39,6 +39,10 @@ navigation words in English/Hinglish/Tenglish ("antibiogram kholo", "search icd 
 requests. A name that fits two things ("insulin": drug and tool) is never exact. Brand names are never
 exact until the combination-brand lexicon bug is fixed (Entresto -> valsartan; task queued). Tenglish
 test rows are mostly brands, hence 32%. A model has to win coverage beyond 65.5% at under 0.5% wrong.
+KB page (2026-10-04): a navigation word (open/show/page/screen/kholo/dikhao/teruvu/chupinchu) plus words that
+are EXACTLY a disease's KB name or a `MaiKKB._alias` entry, resolved `confident`, is exact ("sepsis kholo",
+"tb chupinchu"); "open pneumonia antibiotics" or a name only matched by prefix ("dengue" -> Dengue Fever) is not.
+The frozen test set has no KB rows and `score.mjs` does not load MaiKKB, so rules coverage is unchanged by it.
 Extraction gold set (45 rows): 45 exact, 0 unsafe.
 
 **Bugs the scorer found and fixed:** `MEDCALC.find` read "R-ISS" as "iss", "PHQ-9" for "phq-2",
