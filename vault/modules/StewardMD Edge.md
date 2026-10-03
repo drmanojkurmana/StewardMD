@@ -61,6 +61,31 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 | On-device speech (A1.2) | `local-plugins/capacitor-community-speech-recognition` (Android + iOS), `native-bridge.js`, `voice.js`; flag `smd_speech_ondevice` | `start({onDevice: "off" \| "prefer" \| "require"})`, `available()` reports on-device support, a `recognitionMode` event reports what ran. Device-tested on both phones (2026-10-02). Android 13+ adds a per-language `onDeviceLanguage` (`checkRecognitionSupport`; Pixel: te-IN `no`) and reports the mode from `onReadyForSpeech`, so no "On-device" flash before a fallback (2026-10-03). |
 | JS adapters | `edge-router.js` | `needleAdapter(plugin, {weightsPath, calibrated, killable})`, `llamaAdapter(plugin, {modelPath})` (bake-off only: evicts MaiK's pack), `grammarFor(n)`, `bakeoff(rows, engine)`. |
 
+## Engine choice (owner, 2026-10-04)
+Setting `smd_edge_engine`: `needle` (default), `functiongemma`, `rules` (no model; Layer 0 still answers).
+`smd_edge` "0" still turns Edge off. `SMD_EDGE.engineChoice()` / `setEngineChoice(v)` (switches at once,
+releases the old engine) / `engineName()`. UI: Settings > MaiK, "Edge engine" radio group under "Who
+answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-edgedl`).
+- FunctionGemma = ggml-org `functiongemma-270m-it-q8_0.gguf` rev `2566ce14`, 291,557,792 B, sha256
+  `83940d4d...5270` (re-hashed 2026-10-04). Registered in `maik-models.js` as the synthetic pack
+  `EDGE_FG_ID = "edge-functiongemma"` (not in `PACKS`, so never in the model library); same downloader,
+  native sha check, `pathFor`, `remove`. Downloaded from Hugging Face directly (Gemma Terms of Use, as for
+  MedGemma; never re-hosted). No file on the phone: `autoEngine()` returns null and the rules answer.
+- Caveats: base FunctionGemma is not fine-tuned (bake-off 7.7% wrong shown, FAIL); +575 MB PSS on the
+  Pixel (budget +400); it shares the llama plugin with MaiK, so every Edge call after a MaiK answer
+  reloads FunctionGemma and the next MaiK answer reloads its pack. `window.SMD_LLAMA_HOLDER` ("edge" /
+  "maik") names who loaded last: `maik-local.js` reloads when another holder took the plugin (the plugin's
+  `available().loaded` cannot tell), and `llamaAdapter` never picks with, cancels or releases a model it
+  did not load. FunctionGemma never loads while MaiK generates: `othersBusy` (MaiK queue running) skips
+  the engine before `load()`. MLX MaiK (iOS, flag off) is not evicted, so both stay resident there.
+- Pixel 9, 2026-10-04 (OTA v174 + this branch's JS over CDP; GGUF adb-pushed to
+  `Android/data/in.stewardmd.app/files/maik-models/`): with no file, choice functiongemma gave no engine and
+  route() passed null (rules path). File present: "show me the resistance patterns antibiogram" was
+  routed by FunctionGemma (`source: "edge"`, option 1 = tool antibiogram, p 0.83), 394 ms first call
+  (2.4 s wall with the load), 100 ms warm; switching back to Needle unloaded it (holder null, Llama
+  `loaded:false`). A side-loaded file reads as not installed until `smd_maik_packsha_edge-functiongemma`
+  holds the registry sha (the retrain guard); the in-app Download sets it after the native hash check.
+
 ## Gotchas
 - `:edge` killed outside the runtime (low-memory killer, or `adb shell run-as in.stewardmd.app kill <pid>`; plain `adb shell kill` is refused) restarts with NO weights and configure fails `needle_init: no model loaded`. `needleAdapter` tags that error `notLoaded`; `edge-runtime.js` marks itself cold, reloads under `coldMs` and retries that call once with a fresh 1,200 ms deadline (`edge2`/`edge12`, verified on the Pixel 9 2026-10-04 by injecting the JS). Before this Edge stayed dead until relaunch.
 - Owner 2026-10-04: Edge is ON by default for all users, and a hot phone (thermal SEVERE+) no longer skips the model. `DEFAULT_ENV.thermalOk` is always true; MaiK shows "Phone is hot. Answers may be slower." in its footer (`#maikHot`, from `SMD_EDGE.hot()`). Memory, MaiK/Whisper busy and renderer-gone still skip. `maikPrefillOn` follows `SMD_EDGE.enabled()`, so calculator prefill is on wherever Edge is.

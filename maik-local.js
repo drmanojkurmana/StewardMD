@@ -744,6 +744,8 @@
 
   // ── model lifecycle ─────────────────────────────────────────────────────
   var _loadedPack = null;
+  // Who loaded the llama plugin last: "maik" (here) or "edge" (edge-router.js llamaAdapter).
+  function llamaHeldByOther() { try { var h = window.SMD_LLAMA_HOLDER; return !!h && h !== "maik"; } catch (e) { return false; } }
   function ensureLoaded(packId, loadOpts) {
     var L = llama(), M = models();
     watchRelease(L);
@@ -762,6 +764,9 @@
         .then(null, function () { return null; })
         .then(function () { return ensureLoaded(packId, loadOpts); });
     }
+    // SHARED PLUGIN: StewardMD Edge's FunctionGemma (edge-router.js llamaAdapter) loads into this same
+    // llama plugin and evicts our pack, while available().loaded still says true (ITS model is loaded).
+    if (_loadedPack && _engine !== "mlx" && llamaHeldByOther()) { _loadedPack = null; _warmed = null; }
     if (_loadedPack === packId) {
       // The plugin drops the model on app pause, so confirm it is still resident before answering.
       return L.available().then(function (a) {
@@ -841,6 +846,7 @@
         // Prefill threads, only when the pack sets it: an absent key keeps the plugin default (Android:
         // all cores), while 0 would mean "same as nThreads" in the JNI. iOS ignores the key.
         if (pk.nThreadsBatch > 0) lo.nThreadsBatch = pk.nThreadsBatch;
+        try { window.SMD_LLAMA_HOLDER = "maik"; } catch (e) {}
         return L.load(lo).then(function (r) { pk._ctx = n; return r; });
       }
       // A bigger window the device then refuses falls back to the proven size rather than failing.
@@ -1977,7 +1983,7 @@
         });
       }, { background: true }).then(function () { _warmed = packId; return true; }, function () { return false; });
     };
-    if (_warmed !== packId) return fresh();
+    if (_warmed !== packId || llamaHeldByOther()) return fresh();
     return Promise.resolve().then(function () { return L.available(); })
       .then(function (a) { if (a && a.loaded) return true; _warmed = null; _loadedPack = null; return fresh(); }, function () { return true; });
   }
@@ -1988,6 +1994,8 @@
     var L = llama();
     _loadedPack = null;
     _warmed = null;
+    // Whoever held the plugin (Edge too) has nothing loaded after this; Edge reloads on its next call.
+    try { window.SMD_LLAMA_HOLDER = null; } catch (e) {}
     if (L && L.release) { try { return L.release(); } catch (e) {} }
   }
 

@@ -147,6 +147,29 @@ try {
   ok(await countEdge() > e0 && /data-maik-tool="antibiogram"/.test(String(await lastAi())), "with a topic live, an exact tool name still gets the Edge card");
 
   await ev(`localStorage.removeItem("smd_edge"); return 1;`);
+
+  // ── Settings: the Edge engine row (owner, 2026-10-04) ──
+  await ev(`var h=document.createElement("div"); h.id="__edgeSet"; h.style.cssText="position:fixed;inset:0;overflow:auto;z-index:99999;background:var(--paper,#fff);padding:16px"; h.innerHTML=SMD_MAIK_ENGINE.settingsHTML(); document.body.appendChild(h); SMD_MAIK_ENGINE.wireSettings(h); return 1;`);
+  const grp = () => ev(`var g=document.querySelector('#__edgeSet [role=radiogroup][aria-label="Edge engine"]'); if(!g) return null; return [].map.call(g.querySelectorAll('[role=radio]'), function(b){ return [b.getAttribute("data-me-edge"), b.getAttribute("aria-checked"), Math.round(b.getBoundingClientRect().height), b.innerText.replace(/\\s+/g," ")]; });`);
+  let rows = await grp();
+  ok(rows && rows.length === 3 && rows[0][0] === "needle" && rows[0][1] === "true", "Edge engine radio group: three rows, Needle checked by default (" + JSON.stringify(rows) + ")");
+  ok(rows && rows.every((r) => r[2] >= 44), "every Edge engine row is a 44 px target");
+  ok(rows && /Declines when unsure/.test(rows[0][3]) && /Unloads MaiK Lite/.test(rows[1][3]) && /Exact names only/.test(rows[2][3]) && !rows.some((r) => /—/.test(r[3])), "help text per choice, no em-dash");
+  await ev(`document.querySelector('#__edgeSet [data-me-edge="functiongemma"]').click(); return 1;`); await sleep(300);
+  rows = await grp();
+  ok(await ev(`return SMD_EDGE.engineChoice();`) === "functiongemma" && rows[1][1] === "true" && rows[0][1] === "false", "tapping FunctionGemma switches the engine at once and the row shows it");
+  ok(/Not on this phone/.test(rows[1][3]) && await ev(`return SMD_EDGE.engineName();`) === null, "no FunctionGemma file in the browser: shown as not on this phone, no engine (rules answer)");
+  await ev(`document.querySelector('#__edgeSet [data-me-edge="needle"]').click(); return 1;`); await sleep(300);
+  ok(await ev(`return SMD_EDGE.engineChoice();`) === "needle", "back to Needle");
+  if (process.env.SHOT) {
+    for (const dark of [false, true]) {
+      await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: dark ? "dark" : "light" }] });
+      await ev(`var g=document.querySelector('#__edgeSet [aria-label="Edge engine"]'); g.scrollIntoView({block:"center"}); return 1;`); await sleep(300);
+      const s = await call("Page.captureScreenshot", { format: "png" });
+      (await import("node:fs")).writeFileSync(process.env.SHOT + (dark ? "-dark.png" : "-light.png"), Buffer.from(s.result.data, "base64"));
+    }
+  }
+  await ev(`document.getElementById("__edgeSet").remove(); localStorage.removeItem("smd_edge_engine"); return 1;`);
   console.log(fails === 0 ? "\nALL GREEN — Edge routes typed requests on-device, and always lets the doctor continue" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

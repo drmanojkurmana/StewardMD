@@ -137,6 +137,17 @@
    * Sizes are exact (Hugging Face API, 2026-09-21). MaiK Lite (1.7B) and the 27B Bonsai packs
    * (different backbone vocabularies) carry none. */
   var DRAFT_GEMMA3 = { name: "gemma-3-270m-it-Q8_0.gguf", url: HF + "/unsloth/gemma-3-270m-it-GGUF/resolve/main/gemma-3-270m-it-Q8_0.gguf?download=true", bytes: 291546144 };
+  /* StewardMD Edge engine (owner, 2026-10-04): FunctionGemma 270M Q8_0, the picker behind the
+   * smd_edge_engine "functiongemma" choice (edge-router.js autoEngine). Not a MaiK pack: kept out of
+   * PACKS so it never shows in the model library or becomes the answering pack; pack(EDGE_FG_ID)
+   * resolves it so ensure/installed/pathFor/remove work unchanged. ggml-org revision pinned; the sha256
+   * is the one test/native-host/run.sh pins, re-hashed from a complete local copy on 2026-10-04.
+   * Gemma Terms of Use (as for the MedGemma packs): fetched from Hugging Face, never re-hosted. */
+  var EDGE_FG_ID = "edge-functiongemma";
+  var EDGE_FG = { label: "FunctionGemma (Edge)", actual: "FunctionGemma 270M Q8_0 (StewardMD Edge picker)", edge: true,
+    files: [{ name: "functiongemma-270m-it-q8_0.gguf",
+      url: HF + "/ggml-org/functiongemma-270m-it-GGUF/resolve/2566ce14aedfc14fdd0de955ba67346425e67126/functiongemma-270m-it-q8_0.gguf?download=true",
+      bytes: 291557792, sha256: "83940d4dd9676710856f43523bed096164a595a96f6b34771610a03937de5270" }] };
   var DRAFT_QWEN3 = { name: "Qwen3-0.6B-Q8_0.gguf", url: HF + "/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf?download=true", bytes: 639446688 };
 
   /* MLX ON iPHONE (owner, 2026-09-28: "ios version have MLX and android have existing one"). Flag
@@ -853,6 +864,7 @@
       return { label: baseM.label + " iPhone engine", actual: baseM.actual + " (MLX " + want + ")", tier: baseM.tier,
                files: [mf], mlxOf: baseIdOf(id) };
     }
+    if (id === EDGE_FG_ID) return EDGE_FG;
     var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p;
   }
   function relPath(f) { return SUBDIR + "/" + f; }
@@ -908,6 +920,7 @@
     // one, and if it is not adopted here the UI reports it as absent and offers to start a second.
     var ids = Object.keys(PACKS);
     Object.keys(PACKS).forEach(function (b) { if (PACKS[b].vision) ids.push(b + VISION_SUFFIX); });
+    ids.push(EDGE_FG_ID);
     // MLX files too, but only where MLX is on: with the flag off nothing ever started one.
     if (mlxEnabled()) Object.keys(PACKS).forEach(function (b) { ids = ids.concat(mlxIdsOf(b)); });
     return ids.reduce(function (chain, id) {
@@ -1508,7 +1521,7 @@
     mlxMainIdOf: mlxMainIdOf, isMlxId: isMlxId, mlxBytes: mlxBytes, mlxInstalledCached: mlxInstalledCached,
     mlxReady: mlxReady, ensureMlx: ensureMlx, mlxBusy: mlxBusy, removeMlx: removeMlx, mlxPaths: mlxPaths,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
-    totalBytes: totalBytes, sizeLabel: sizeLabel,
+    totalBytes: totalBytes, sizeLabel: sizeLabel, EDGE_FG_ID: EDGE_FG_ID,
     installed: installed, installedCached: installedCached,
     packIds: packIds, ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
     state: state, subscribe: subscribe,
