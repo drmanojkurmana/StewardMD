@@ -207,11 +207,14 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
   try {
     await reads({ thermal: 0, lowMemory: false, availMB: 900 });
     let o = await runs(); assert.equal(o.calls, 1); assert.equal(o.r && o.r.id, "antibiogram", "all clear: the model answers");
-    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }]) {
+    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }, { rendererGone: true }]) {
       await reads(d); o = await runs();
       assert.equal(o.calls, 0, "skipped for " + JSON.stringify(d)); assert.equal(o.r, null, "the caller continues (rules / MaiK)");
     }
-    await reads({ thermal: 2, lowMemory: false, availMB: 600 }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
+    await reads({ thermal: 0, lowMemory: false, availMB: 600, rendererGone: true });
+    assert.equal((await runs()).calls, 0, "renderer gone: Edge is off for the session even with memory and heat fine");
+    assert.equal(E.backoff().device.rendererGone, true);
+    await reads({ thermal: 2, lowMemory: false, availMB: 600, rendererGone: false }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: true, waiting: 0 }) };
     assert.equal((await runs()).calls, 0, "never during a MaiK generation");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: false, waiting: 2 }) };
@@ -229,5 +232,24 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
   } finally {
     delete globalThis.Capacitor; delete globalThis.SMD_MAIK_LOCAL; delete globalThis.SMD_NATIVE;
     await E.refreshDevice(); dev = {};
+  }
+});
+
+test("renderer gone before the first request (A0.5): the FIRST model-routed request already skips the model", async () => {
+  // A fresh SMD_EDGE, as after the activity recreate: no device reading taken yet.
+  const prev = globalThis.SMD_EDGE;
+  vm.runInThisContext(fs.readFileSync(path.join(ROOT, "edge-router.js"), "utf8"), { filename: "edge-router.js" });
+  const F = globalThis.SMD_EDGE;
+  store.smd_edge = "1";
+  globalThis.Capacitor = { Plugins: { Needle: { available: () => Promise.resolve({ thermal: 0, lowMemory: false, availMB: 1800, rendererGone: true }) } } };
+  try {
+    const m = mock(() => needleReply(1)); F.setEngine(m);
+    assert.equal(await F.route("show me the resistance patterns antibiogram"), null);
+    assert.equal(m.prompts.length, 0, "first request: no model call");
+    assert.equal(F.backoff().device.rendererGone, true);
+    const r = await F.route("antibiogram kholo");
+    assert.equal(r && r.source, "rules", "rules still answer"); assert.equal(m.prompts.length, 0);
+  } finally {
+    delete globalThis.Capacitor; globalThis.SMD_EDGE = prev;
   }
 });

@@ -190,10 +190,13 @@
   /* Back-off (Edge-Master-Plan A0.5): skip Edge, so the rules answer, when memory is low
    * (lowMemory, or under 250 MB available), the phone is at thermal SEVERE or above (Android
    * THERMAL_STATUS_SEVERE = 3; the Needle plugin maps iOS .serious to 3), or MaiK is generating or
-   * Whisper is decoding. The device numbers arrive asynchronously from Needle.available(), so the last
-   * reading is kept and refreshed on every routed request; until one arrives, everything reads "ok".
+   * Whisper is decoding, or the Android WebView render process has died (device.rendererGone: the plugin
+   * keeps it set until the app process ends; folded into memoryOk, as memory pressure is the usual cause).
+   * The device numbers arrive asynchronously from Needle.available(), so the last
+   * reading is kept and refreshed on every routed request; the first model-routed request waits for one.
    * SMD_EDGE_ENV, when set (tests, harnesses), replaces this whole object. */
-  var device = { lowMemory: false, availMB: null, thermal: 0 };
+  var device = { lowMemory: false, availMB: null, thermal: 0, rendererGone: false };
+  var firstRead = null;   // the first device reading (route() waits for it once)
   function refreshDevice() {
     var p = null;
     try { p = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Needle; } catch (e) {}
@@ -203,12 +206,13 @@
         if (typeof a.lowMemory === "boolean") device.lowMemory = a.lowMemory;
         if (typeof a.availMB === "number") device.availMB = a.availMB;
         if (typeof a.thermal === "number") device.thermal = a.thermal;
+        if (typeof a.rendererGone === "boolean") device.rendererGone = a.rendererGone;
       }
       return device;
     }, function () { return device; });
   }
   var DEFAULT_ENV = {
-    memoryOk: function () { return !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
+    memoryOk: function () { return !device.rendererGone && !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
     thermalOk: function () { return device.thermal < 3; },
     othersBusy: function () {
       var L = G.SMD_MAIK_LOCAL, N = G.SMD_NATIVE;
@@ -254,9 +258,15 @@
     if (layer0(cands)) { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
     if (!available() || !runtime) { stats.passed++; return Promise.resolve(null); }
     if (ctx && ctx.patient_session_id != null) runtime.setSession(ctx.patient_session_id);
-    refreshDevice();          // for the NEXT request: this one reads the last known state
+    // The first model-routed request waits for one device reading, so a state set before it (the
+    // renderer died and the activity recreated, low memory) is already seen. Later requests read the
+    // last known state and refresh it for the NEXT request (no wait on the hot path).
+    var first = !firstRead;
+    if (first) firstRead = refreshDevice(); else refreshDevice();
     stats.model++;
-    return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }).then(function (r) {
+    return firstRead.then(function () {
+      return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length });
+    }).then(function (r) {
       if (!r || r.status !== "ok") { stats.passed++; return null; }
       var o = optionFrom(r.result);
       if (!o.ok || typeof o.option !== "number" || o.option !== Math.floor(o.option)) { stats.passed++; return null; }

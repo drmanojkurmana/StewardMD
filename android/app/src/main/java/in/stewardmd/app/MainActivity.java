@@ -72,6 +72,7 @@ public class MainActivity extends BridgeActivity {
             public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
                 boolean didCrash = detail != null && detail.didCrash();
                 Log.w("StewardMD", "WebView render process gone (didCrash=" + didCrash + "); recovering by recreating the activity");
+                in.stewardmd.needle.NeedlePlugin.markRendererGone();   // Edge stays off for this app session (A0.5)
                 try {
                     if (!isFinishing() && !isDestroyed()) {
                         runOnUiThread(() -> { try { recreate(); } catch (Exception e) { Log.e("StewardMD", "recreate failed", e); } });

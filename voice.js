@@ -384,7 +384,7 @@
       '<div class="smdv-scrim" data-act="close"></div>' +
       '<div class="smdv-sheet" role="dialog" aria-modal="true" aria-label="MaiK Scribe voice intake">' +
         '<div class="smdv-hd"><span class="smdv-ttl">' + vcIco("mic") + ' MaiK Scribe</span><button class="smdv-x" data-act="close" aria-label="Close">' + vcIco("close") + '</button></div>' +
-        '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes — tap ✓ to drop the text into the chat." : "Describe your patient in plain speech — symptoms, signs, key numbers.") + '</div>' +
+        '<div class="smdv-sub">' + (target === "icu" ? "Speak this patient’s vitals, labs, ABG or ventilator settings." : target === "text" ? "Speak your question or notes. Tap ✓ to drop the text into the chat." : "Describe your patient in plain speech: symptoms, signs, key numbers.") + '</div>' +
         modeSel +
         tierSel +
         langSel +
@@ -392,8 +392,8 @@
         '<button class="smdv-rec" id="smdvRec">' + vcIco("mic") + ' Tap to speak</button>' +
         '<div class="smdv-eng" id="smdvEng"></div>' +
         '<div class="smdv-diag" id="smdvDiag"></div>' +
-        '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here — you can edit before extracting."></textarea>' +
-        '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server — the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
+        '<textarea class="smdv-ta" id="smdvTa" rows="4" placeholder="Your words appear here. You can edit before extracting."></textarea>' +
+        '<div class="smdv-disc">On-device speech stays private (only text is used). AI transcription/extraction sends audio/text to the server, the same as Photo scan. Nothing is applied until you review &amp; confirm.</div>' +
         '<button class="smdv-extract" id="smdvExtract" disabled>' + (target === "text" ? vcIco("check") + " Use this text" : "Extract &amp; fill") + '</button>' +
         '<div class="smdv-review" id="smdvReview"></div>' +
       '</div>';
@@ -464,7 +464,7 @@
         engineMode = mm;
         [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
         var hint = root.querySelector("#smdvModeHint");
-        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation — first use downloads the model. Better for long notes, accents & drug names. Hindi / Telugu / Auto use the on-device multilingual model." : "";
+        if (hint) hint.textContent = mm === "clinical" ? "On-device medical dictation: first use downloads the model. Better for long notes, accents & drug names. Hindi / Telugu / Auto use the on-device multilingual model." : "";
       }
       var lg = b.getAttribute("data-lang");
       if (lg) {
@@ -501,15 +501,15 @@
     function paint(state, engine, note) {
       lastState = state;
       if (state === "recording") {
-        recBtn.innerHTML = vcIco("stop") + " Done — tap to transcribe"; recBtn.classList.add("live");
-        engEl.innerHTML = '<span class="smdv-dot"></span> Recording ' + fmt(elapsed) + " — speak, then tap Done";
+        recBtn.innerHTML = vcIco("stop") + " Done: tap to transcribe"; recBtn.classList.add("live");
+        engEl.innerHTML = '<span class="smdv-dot"></span> Recording ' + fmt(elapsed) + ", speak, then tap Done";
       } else if (state === "listening") {   // stream engines (Fast): text appears live as you speak
         recBtn.innerHTML = vcIco("stop") + " Listening… tap to stop"; recBtn.classList.add("live");
         // No engine yet (the tap paints before listen() returns): neutral until the plugin reports its mode.
         engEl.innerHTML = '<span class="smdv-dot"></span> ' + (engine || (speechOnDeviceOn() ? "Device speech" : "On-device")) + " · speak now";
       } else if (state === "transcribing") {
         recBtn.innerHTML = vcIco("hourglass") + " Transcribing…"; recBtn.classList.remove("live");
-        engEl.innerHTML = '<span class="smdv-spin"></span> Transcribing on-device — a few seconds. Please wait…';
+        engEl.innerHTML = '<span class="smdv-spin"></span> Transcribing on-device, a few seconds. Please wait…';
       } else if (state === "downloading") {
         recBtn.innerHTML = vcIco("download") + " Downloading model…"; recBtn.classList.remove("live");
         engEl.textContent = note || "Downloading the voice model (first use)…";
@@ -518,7 +518,7 @@
         engEl.textContent = "Getting the on-device model ready…";
       } else if (state === "empty") {
         recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live");
-        engEl.textContent = note || "Didn't catch any speech — tap the mic and try again.";
+        engEl.textContent = note || "Didn't catch any speech. Tap the mic and try again.";
       } else {   // idle
         recBtn.innerHTML = vcIco("mic") + " Tap to speak"; recBtn.classList.remove("live");
         engEl.textContent = (note != null) ? note : "";
@@ -547,7 +547,7 @@
       if (activeMode === "record") {
         paint("transcribing");
         // safety: if the native transcription never calls back, don't leave the user hanging
-        txGuardId = setTimeout(function () { paint("idle", null, "Transcription took too long — tap the mic to try again."); }, 45000);
+        txGuardId = setTimeout(function () { paint("idle", null, "Transcription took too long. Tap the mic to try again."); }, 45000);
       } else { paint("idle"); }   // stream engines already delivered text live
     }
 
@@ -572,13 +572,13 @@
           if (err === "clinical-unavailable") {
             engineMode = "fast";
             [].forEach.call(root.querySelectorAll(".smdv-mode"), function (x) { x.classList.toggle("on", x.getAttribute("data-mode") === "fast"); });
-            paint("idle", null, "On-device Clinical model isn't ready — switched to Fast. Tap to speak."); return;
+            paint("idle", null, "On-device Clinical model isn't ready. Switched to Fast. Tap to speak."); return;
           }
           paint("idle", null,
             (err === "mic-denied" || err === "mic-permission-denied") ? "Microphone access is off. Enable it in Settings → StewardMD → Microphone." :
             (err === "recording-failure" || err === "transcription-failure") ? "Couldn't start recording. Check mic access, close other mic apps, then tap to try again." :
-            err === "model-download-failed" ? "Model download failed — retry, or download it in Settings ▸ Voice models." :
-            (err === "model-corrupted" || err === "model-missing") ? "Voice model not on device — download it in Settings ▸ Voice models, then try again." :
+            err === "model-download-failed" ? "Model download failed. Retry, or download it in Settings ▸ Voice models." :
+            (err === "model-corrupted" || err === "model-missing") ? "Voice model not on device. Download it in Settings ▸ Voice models, then try again." :
             (err === "insufficient-storage" || err === "low-memory") ? "Not enough space/memory for the voice model. Free space, or use Fast mode." :
             err === "no-voice-engine" ? "No speech engine available on this device." :
             // stt-unavailable is emitted by listen() but had no sentence of its own, so it landed on
@@ -591,7 +591,7 @@
             err === "stt-fallback-exhausted" ? "Your dictation credits are used up. Top up, or use Clinical dictation on the phone: it is free and unlimited." :
             err === "stt-fallback-signin" ? "Sign in and verify your mobile number to use cloud dictation. Clinical dictation on the phone is free." :
             err === "stt-unavailable-offline" ? "No connection for cloud dictation. Use Clinical dictation (on the phone) until the network is back." :
-            "Couldn't capture audio — tap to try again.");
+            "Couldn't capture audio. Tap to try again.");
         },
         onState: onEngineState
       });
@@ -626,7 +626,7 @@
 
   function errMsg(e) {
     if (e === "ai-off") return "AI is not available on this build.";
-    if (e === "quota") return "AI usage limit reached — try again later.";
+    if (e === "quota") return "AI usage limit reached. Try again later.";
     if (e === "server" || e === "no-ai") return "The extraction service is unavailable right now.";
     return "Couldn’t extract: " + (e || "unknown error");
   }
@@ -642,9 +642,9 @@
       var chips = keys.map(function (k) { return '<span class="smdv-chip" data-k="' + esc(k) + '">' + esc(labelOf[k] || k) + '<button class="smdv-chip-x" data-rm="' + esc(k) + '" aria-label="Remove">' + vcIco("close") + '</button></span>'; }).join("");
       reviewEl.innerHTML =
         (pt && (pt.age || pt.sex) ? '<div class="smdv-pt">Patient: ' + esc([pt.age ? pt.age + "y" : "", pt.sex || ""].filter(Boolean).join(" ")) + '</div>' : "") +
-        '<div class="smdv-rv-h">Findings heard (' + keys.length + ') — tap ✕ to remove any that are wrong:</div>' +
+        '<div class="smdv-rv-h">Findings heard (' + keys.length + '). Tap ✕ to remove any that are wrong:</div>' +
         '<div class="smdv-chips">' + (chips || '<span class="smdv-muted">none</span>') + '</div>' +
-        (unmatched.length ? '<div class="smdv-rv-h">Heard but not matched — add by hand if needed:</div><div class="smdv-unm">' + unmatched.map(function (u) { return '<span class="smdv-unmatched">' + esc(u) + '</span>'; }).join("") + '</div>' : "") +
+        (unmatched.length ? '<div class="smdv-rv-h">Heard but not matched, add by hand if needed:</div><div class="smdv-unm">' + unmatched.map(function (u) { return '<span class="smdv-unmatched">' + esc(u) + '</span>'; }).join("") + '</div>' : "") +
         '<button class="smdv-apply" id="smdvApply"' + (keys.length ? "" : " disabled") + '>' + vcIco("plus") + ' Add ' + keys.length + ' finding' + (keys.length === 1 ? "" : "s") + ' to reasoning</button>';
       [].forEach.call(reviewEl.querySelectorAll("[data-rm]"), function (b) { b.addEventListener("click", function () { var k = b.getAttribute("data-rm"); keys = keys.filter(function (x) { return x !== k; }); render(); }); });
       var ap = reviewEl.querySelector("#smdvApply");
@@ -652,7 +652,7 @@
         var added = (window.DX && window.DX.addFindings) ? window.DX.addFindings(keys) : 0;
         if (opts && opts.onApply) { try { opts.onApply(keys, pt); } catch (e) {} }
         close();
-        try { (window.toast || function () {})("Added " + added + " finding" + (added === 1 ? "" : "s") + " — differential updated."); } catch (e) {}
+        try { (window.toast || function () {})("Added " + added + " finding" + (added === 1 ? "" : "s") + ". Differential updated."); } catch (e) {}
       });
     }
     render();
@@ -665,7 +665,7 @@
     close();
     if (window.ICU && typeof window.ICU.reviewVoice === "function") window.ICU.reviewVoice(fields, kind);
     else if (opts && opts.onApply) opts.onApply(fields, kind);
-    else try { (window.toast || function () {})("Voice values captured — open the ICU dashboard to review."); } catch (e) {}
+    else try { (window.toast || function () {})("Voice values captured. Open the ICU dashboard to review."); } catch (e) {}
   }
 
   /* ------------------------------ styles ------------------------------- */
@@ -820,7 +820,7 @@
         st.textContent = ok ? "Installed" : "Not installed"; st.className = "smdv-st " + (ok ? "ok" : "off");
         dl.style.display = ok ? "none" : ""; del.style.display = ok ? "" : "none";
         prog.style.display = "none"; el.classList.toggle("installed", !!ok);
-      }).catch(function () { st.textContent = "—"; });
+      }).catch(function () { st.textContent = "Status unavailable"; });
     }
     /* CATEGORISED VOICE MODELS (owner, 2026-09-20: "voice model section make it well organised
      * rather than long page ... categorise and sub categorise ... without deleting any info").
@@ -921,7 +921,7 @@
         b.style.display = "none"; prog.style.display = ""; st.textContent = "Downloading…"; st.className = "smdv-st dl";
         N.downloadWhisperModel(key, { onProgress: function (p) { var v = Math.round((p || 0) * 100); pct.textContent = v + "%"; fill.style.width = v + "%"; } })
           .then(function () { _dlInFlight[key] = false; (window.toast || function () {})("StewardVoice model ready."); refreshStatus(key); })
-          .catch(function () { _dlInFlight[key] = false; prog.style.display = "none"; b.style.display = ""; st.textContent = "Download failed — tap to retry"; st.className = "smdv-st off"; });
+          .catch(function () { _dlInFlight[key] = false; prog.style.display = "none"; b.style.display = ""; st.textContent = "Download failed. Tap to retry"; st.className = "smdv-st off"; });
         return;
       }
       if (b.hasAttribute("data-del")) {
