@@ -1,6 +1,6 @@
 /* edge-router.js — StewardMD Edge, Wave 1: typed, read-only request router (window.SMD_EDGE).
  * ---------------------------------------------------------------------------
- * Flag smd_edge ("1" on, default OFF). Five read-only workflows (Edge-Master-Plan section 1):
+ * Flag smd_edge (default ON for all users since 2026-10-04, owner; "0" turns it off). Five read-only workflows (Edge-Master-Plan section 1):
  *   calculator (open, optionally prefilled) · tool/module · KB topic · drug · ICD search.
  *
  * How a request is handled:
@@ -30,7 +30,7 @@
   }];
   var SYSTEM = "user: clinician; assistant: StewardMD app router";
 
-  function flagOn() { try { return !!(G.localStorage && G.localStorage.getItem("smd_edge") === "1"); } catch (e) { return false; } }
+  function flagOn() { try { return !(G.localStorage && G.localStorage.getItem("smd_edge") === "0"); } catch (e) { return true; } }
   function lower(s) { return String(s == null ? "" : s).toLowerCase(); }
 
   // ---- 1. candidates -----------------------------------------------------------------------
@@ -213,7 +213,8 @@
   }
   var DEFAULT_ENV = {
     memoryOk: function () { return !device.rendererGone && !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
-    thermalOk: function () { return device.thermal < 3; },
+    // Owner 2026-10-04: a hot phone no longer skips the model; MaiK shows "Phone is hot" in its footer (hot()).
+    thermalOk: function () { return true; },
     othersBusy: function () {
       var L = G.SMD_MAIK_LOCAL, N = G.SMD_NATIVE;
       var q = L && L.queueState ? L.queueState() : null;
@@ -402,6 +403,7 @@
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
+    hot: function () { return device.thermal >= 3; },
     backoff: function () { return { memoryOk: DEFAULT_ENV.memoryOk(), thermalOk: DEFAULT_ENV.thermalOk(), othersBusy: DEFAULT_ENV.othersBusy(), device: JSON.parse(JSON.stringify(device)) }; },
     _version: "1.0"
   };

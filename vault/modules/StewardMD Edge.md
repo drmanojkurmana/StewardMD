@@ -1,7 +1,7 @@
 ---
 tags: [module, ai, edge]
 status: built (JS + dataset); Needle linked into the app (package.json, 2026-10-03; flag still OFF; live on both phones). iPhone 2026-10-02: A0.2/A0.3 passed; A0.6 runbook marks passed but MISSED the plan's "no SEVERE" thermal mark (Serious from minute 2). 2026-10-03: FunctionGemma digit pick p95 37 ms (iPhone) / 171 ms (Pixel, unplugged); Needle Pixel p95 747 ms with the thread fix; back-off verified on the Pixel, simulated on the iPhone (real MaiK-busy and availMB with MaiK Lite verified 2026-10-03 evening; real Serious pending); owner options in [[Edge-Options-2026-10-02]]. Pixel 2026-10-03 22:30 round (edge8): renderer-gone PASS (first request after the recreate skips the model); Needle p95 797 ms, +123 MB PSS PASS; FunctionGemma pick p95 395 ms PASS but +575 MB PSS MISS (+400 budget); 30-min unplugged mixed session: no SEVERE (LIGHT max, skin 41 C), battery 100 -> 92%, app never died, Needle 127 ok / 22 timeout / 1 unavailable under MaiK load (MISS); iPhone with real MaiK Lite generation: back-off skips the engine (0 calls), rules answer, Edge resumes; availMB minimum 5,349 MB during an answer (PASS); real iPhone Serious still open (thermal stayed fair)
-flag: smd_edge (default OFF)
+flag: smd_edge (default ON for all since 2026-10-04, owner; "0" turns it off)
 ---
 # StewardMD Edge
 
@@ -58,6 +58,7 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 | JS adapters | `edge-router.js` | `needleAdapter(plugin, {weightsPath, calibrated, killable})`, `llamaAdapter(plugin, {modelPath})` (bake-off only: evicts MaiK's pack), `grammarFor(n)`, `bakeoff(rows, engine)`. |
 
 ## Gotchas
+- Owner 2026-10-04: Edge is ON by default for all users, and a hot phone (thermal SEVERE+) no longer skips the model. `DEFAULT_ENV.thermalOk` is always true; MaiK shows "Phone is hot. Answers may be slower." in its footer (`#maikHot`, from `SMD_EDGE.hot()`). Memory, MaiK/Whisper busy and renderer-gone still skip. `maikPrefillOn` follows `SMD_EDGE.enabled()`, so calculator prefill is on wherever Edge is.
 - Needle engine hang (2026-10-04, Pixel 9): a loaded engine that only gets `needle_complete` never returns from its ~49th-57th call; `needle_reset` does not help, `needle_init` does. `needleAdapter.complete()` runs `configure` before every call (`edge9`). After MaiK, Needle is slow from clock caps (heat) and paged-out weights (`madvise` readahead in JNI); `:edge` binds `BIND_IMPORTANT` (top-app cpuset). 10-min unplugged session: 3/50 timeouts (was 22/150), all on the first call after a 100 s+ MaiK answer. Runbook A0.6 Pixel.
 - An iPhone paired over Wi-Fi is enough: `devicectl` install and `ios_webkit_debug_proxy` 1.9.2 both worked with no cable (2026-10-03). The WebKit page id changes on every relaunch; read it from `curl localhost:9222/json`.
 - Pixel thermal SEVERE is not reachable safely by load; test the back-off with `adb shell cmd thermalservice override-status 3`, then `cmd thermalservice reset`.

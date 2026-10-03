@@ -31,8 +31,13 @@ function mock(pick) {
 }
 const needleReply = (option, confidence = 0.9) => ({ type: "call", function_calls: [{ name: "choose_option", arguments: { option } }], confidence });
 
-test("flag OFF: route returns null and no model is called", async () => {
+test("flag default ON (owner 2026-10-04); \"0\" turns it off", async () => {
   delete store.smd_edge;
+  assert.equal(E.enabled(), true, "unset means on");
+});
+
+test("flag OFF (\"0\"): route returns null and no model is called", async () => {
+  store.smd_edge = "0";
   const m = mock(() => needleReply(1)); E.setEngine(m);
   assert.equal(await E.route("open antibiogram"), null);
   assert.equal(m.prompts.length, 0);
@@ -208,7 +213,7 @@ test("Layer 0 widened: an exactly named tool or generic drug, in any of the thre
   assert.equal(await E.route("do not open antibiogram"), null, "negation still wins");
 });
 
-test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisper decoding skip the model", async () => {
+test("back-off (plan A0.5): low memory, MaiK generating or Whisper decoding skip the model; heat only warns", async () => {
   store.smd_edge = "1";
   const pick = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
   const ask = "show me the resistance patterns antibiogram";
@@ -219,7 +224,12 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
   try {
     await reads({ thermal: 0, lowMemory: false, availMB: 900 });
     let o = await runs(); assert.equal(o.calls, 1); assert.equal(o.r && o.r.id, "antibiogram", "all clear: the model answers");
-    for (const d of [{ thermal: 3 }, { thermal: 4 }, { thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }, { rendererGone: true }]) {
+    for (const t of [3, 4]) {
+      await reads({ thermal: t, lowMemory: false, availMB: 900, rendererGone: false }); o = await runs();
+      assert.equal(o.calls, 1, "owner 2026-10-04: a hot phone still runs the model"); assert.equal(E.hot(), true, "and MaiK shows the hot note");
+    }
+    await reads({ thermal: 0 }); assert.equal(E.hot(), false);
+    for (const d of [{ thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }, { rendererGone: true }]) {
       await reads(d); o = await runs();
       assert.equal(o.calls, 0, "skipped for " + JSON.stringify(d)); assert.equal(o.r, null, "the caller continues (rules / MaiK)");
     }
