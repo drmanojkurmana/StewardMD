@@ -193,9 +193,10 @@
    * Whisper is decoding, or the Android WebView render process has died (device.rendererGone: the plugin
    * keeps it set until the app process ends; folded into memoryOk, as memory pressure is the usual cause).
    * The device numbers arrive asynchronously from Needle.available(), so the last
-   * reading is kept and refreshed on every routed request; until one arrives, everything reads "ok".
+   * reading is kept and refreshed on every routed request; the first model-routed request waits for one.
    * SMD_EDGE_ENV, when set (tests, harnesses), replaces this whole object. */
   var device = { lowMemory: false, availMB: null, thermal: 0, rendererGone: false };
+  var firstRead = null;   // the first device reading (route() waits for it once)
   function refreshDevice() {
     var p = null;
     try { p = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Needle; } catch (e) {}
@@ -257,9 +258,15 @@
     if (layer0(cands)) { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
     if (!available() || !runtime) { stats.passed++; return Promise.resolve(null); }
     if (ctx && ctx.patient_session_id != null) runtime.setSession(ctx.patient_session_id);
-    refreshDevice();          // for the NEXT request: this one reads the last known state
+    // The first model-routed request waits for one device reading, so a state set before it (the
+    // renderer died and the activity recreated, low memory) is already seen. Later requests read the
+    // last known state and refresh it for the NEXT request (no wait on the hot path).
+    var first = !firstRead;
+    if (first) firstRead = refreshDevice(); else refreshDevice();
     stats.model++;
-    return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }).then(function (r) {
+    return firstRead.then(function () {
+      return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length });
+    }).then(function (r) {
       if (!r || r.status !== "ok") { stats.passed++; return null; }
       var o = optionFrom(r.result);
       if (!o.ok || typeof o.option !== "number" || o.option !== Math.floor(o.option)) { stats.passed++; return null; }

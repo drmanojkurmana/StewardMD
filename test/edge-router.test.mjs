@@ -234,3 +234,22 @@ test("back-off (plan A0.5): low memory, thermal SEVERE, MaiK generating or Whisp
     await E.refreshDevice(); dev = {};
   }
 });
+
+test("renderer gone before the first request (A0.5): the FIRST model-routed request already skips the model", async () => {
+  // A fresh SMD_EDGE, as after the activity recreate: no device reading taken yet.
+  const prev = globalThis.SMD_EDGE;
+  vm.runInThisContext(fs.readFileSync(path.join(ROOT, "edge-router.js"), "utf8"), { filename: "edge-router.js" });
+  const F = globalThis.SMD_EDGE;
+  store.smd_edge = "1";
+  globalThis.Capacitor = { Plugins: { Needle: { available: () => Promise.resolve({ thermal: 0, lowMemory: false, availMB: 1800, rendererGone: true }) } } };
+  try {
+    const m = mock(() => needleReply(1)); F.setEngine(m);
+    assert.equal(await F.route("show me the resistance patterns antibiogram"), null);
+    assert.equal(m.prompts.length, 0, "first request: no model call");
+    assert.equal(F.backoff().device.rendererGone, true);
+    const r = await F.route("antibiogram kholo");
+    assert.equal(r && r.source, "rules", "rules still answer"); assert.equal(m.prompts.length, 0);
+  } finally {
+    delete globalThis.Capacitor; globalThis.SMD_EDGE = prev;
+  }
+});
