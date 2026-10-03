@@ -51,6 +51,11 @@ export const CAPS = {
    * "administered" row through the raw record API without going near a bedside. So verification
    * writes its own resource and reads only what a verification actually needs. */
   ORDER_VERIFY: "order.verify",     // check an order against the chart before the ward gives it (pharmacy)
+  /* Keeping the hospital formulary (O19, 2026-10-04): add, edit and retire entries and load a CSV (functions/_wardsynq/
+   * formulary-settings.js). Its own authority because the formulary used to need staff.admin AND order.verify, which only
+   * the admin role holds, so a pharmacist had to be made a hospital admin (staff, settings, billing, integrations) to
+   * maintain it. Reading the formulary when ordering is unchanged: the ordering route reads the hospital's own config. */
+  FORMULARY_MANAGE: "formulary.manage", // maintain the hospital formulary (pharmacy; admin holds every cap)
   /* Resulting a test, 2026-09-07. Its own authority, like verification: a laboratory releasing a
    * result is not a clinician treating a patient, and the two must not borrow each other's powers.
    * See _wardsynq/lab-result.js for what it grants and the one residual it does not close. */
@@ -207,7 +212,8 @@ export const ROLE_CAPS = {
   // Pharmacy: reads the patient's medication orders and marks them dispensed once paid. Deliberately
   // NOT given EMR_VIEW - dispensing needs the order, not the consultation notes - and never
   // BILLING_CHARGE, so the person handing over medicines is not the person taking the money.
-  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY, C.REGISTER_NDPS, C.DEPT_REQUEST],
+  // FORMULARY_MANAGE (O19): the pharmacy keeps the formulary it dispenses from, without holding staff.admin.
+  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE, C.ORDER_VERIFY, C.REGISTER_NDPS, C.DEPT_REQUEST, C.FORMULARY_MANAGE],
   /* Laboratory: sees the tests that were ordered and releases results against them. Deliberately NO
    * EMR_VIEW - resulting a potassium needs the request, not the consultation notes - and no
    * ordering, dispensing or billing capability of any kind. */

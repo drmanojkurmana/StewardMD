@@ -42,12 +42,11 @@ test("PURE: a restriction nobody can clear, a name used twice and an unreadable 
   assert.equal(readFormularyCsv("a\nb", { drug: 0 }, undefined, []).error, "mode_required", "merge or replace is chosen, never assumed");
 });
 
-test("GET/POST /api/queue/org/formulary and POST /api/queue/org/formulary-import: 401 without a session; 403 for pharmacy, hr (staff.admin alone) and another hospital, nothing written", async () => {
+test("GET/POST /api/queue/org/formulary and POST /api/queue/org/formulary-import: 401 without a session; 403 for nurse, hr (staff.admin alone) and another hospital, nothing written (the pharmacy holds formulary.manage since O19: wardsynq-formulary-capability.test.mjs)", async () => {
   seedHospital();
   const body = { orgId: ORG, entries: LIST, reason: "x" };
   for (const [path, method, b] of [[`/org/formulary?orgId=${ORG}`, "GET"], ["/org/formulary", "POST", body], ["/org/formulary-import", "POST", { orgId: ORG, csv: "Name\nX\n" }]]) {
     assert.equal((await as(null, path, method, b)).__status, 401, path);
-    assert.equal((await as(U.PHARMACY, path, method, b)).__status, 403, path);
     assert.equal((await as(U.NURSE, path, method, b)).__status, 403, path);
     const hr = await as(U.HR, path, method, b);
     assert.equal(hr.__status, 403, path + " " + JSON.stringify(hr));
