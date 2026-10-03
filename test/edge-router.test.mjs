@@ -312,3 +312,89 @@ test("rules(): Layer 0 alone, synchronous, for MaiK to call before follow-up res
   store.smd_edge = "0"; assert.equal(E.rules("antibiogram kholo"), null, "flag off");
   store.smd_edge = "1";
 });
+
+// Engine choice (owner, 2026-10-04): smd_edge_engine = needle (default) | functiongemma | rules.
+function nativeWith({ fgFile = false } = {}) {
+  const calls = { needleRelease: 0, llamaLoad: [] };
+  const Needle = { available: () => Promise.resolve({ thermal: 0, lowMemory: false, availMB: 4000 }), load: () => Promise.resolve(),
+    configure: () => Promise.resolve(), complete: () => Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) }), release: () => { calls.needleRelease++; return Promise.resolve(); } };
+  const Llama = { load: (a) => { calls.llamaLoad.push(a); return Promise.resolve({ loaded: true }); },
+    generate: () => Promise.resolve({ text: '{"option":1}', p: 0.9 }), release: () => Promise.resolve() };
+  globalThis.Capacitor = { isNativePlatform: () => true, getPlatform: () => "android", Plugins: { Needle, Llama } };
+  globalThis.SMD_MAIK_MODELS = { installedCached: (id) => fgFile && id === "edge-functiongemma", pathFor: () => Promise.resolve("/data/maik-models/functiongemma-270m-it-q8_0.gguf") };
+  return calls;
+}
+function cleanNative() { delete globalThis.Capacitor; delete globalThis.SMD_MAIK_MODELS; delete globalThis.SMD_LLAMA_HOLDER; delete store.smd_edge_engine; E.setEngine(null); }
+
+test("engine choice: default is needle", () => {
+  delete store.smd_edge; delete store.smd_edge_engine; nativeWith();
+  try {
+    assert.equal(E.engineChoice(), "needle");
+    assert.equal(E.autoEngine().name, "needle");
+    store.smd_edge_engine = "nonsense";
+    assert.equal(E.engineChoice(), "needle", "an unknown value is the default");
+  } finally { cleanNative(); }
+});
+
+test("engine choice: functiongemma with no file on the phone gives no engine, and the rules still answer", async () => {
+  delete store.smd_edge; nativeWith({ fgFile: false });
+  try {
+    assert.equal(E.setEngineChoice("functiongemma"), "functiongemma");
+    assert.equal(E.autoEngine(), null);
+    assert.equal(E.engineName(), null); assert.equal(E.available(), false);
+    const r = await E.route("antibiogram kholo");
+    assert.equal(r && r.source, "rules"); assert.equal(r.id, "antibiogram");
+  } finally { cleanNative(); }
+});
+
+test("engine choice: functiongemma with the file gives the llama adapter on the downloaded path", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  try {
+    E.setEngineChoice("functiongemma");
+    assert.equal(E.engineName(), "llama");
+    const r = await E.autoEngine().complete({ prompt: "x", nOptions: 2 });
+    assert.deepEqual(r, { option: 1, confidence: 0.9 });
+    assert.equal(calls.llamaLoad[0].path, "/data/maik-models/functiongemma-270m-it-q8_0.gguf");
+    assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "MaiK sees another holder and reloads its pack");
+  } finally { cleanNative(); }
+});
+
+test("engine choice: rules gives no engine", () => {
+  delete store.smd_edge; nativeWith({ fgFile: true });
+  try {
+    store.smd_edge_engine = "rules";
+    assert.equal(E.autoEngine(), null);
+    E.setEngineChoice("rules"); assert.equal(E.engineName(), null);
+  } finally { cleanNative(); }
+});
+
+test("setEngineChoice switches live, releasing the old engine", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  try {
+    E.setEngineChoice("needle"); assert.equal(E.engineName(), "needle");
+    E.setEngineChoice("functiongemma"); assert.equal(E.engineName(), "llama");
+    await new Promise((r) => setTimeout(r, 0));
+    assert.equal(calls.needleRelease, 1, "Needle released on the switch");
+    E.setEngineChoice("rules"); assert.equal(E.engineName(), null);
+    E.setEngineChoice("needle"); assert.equal(E.engineName(), "needle");
+    assert.equal(store.smd_edge_engine, "needle");
+  } finally { cleanNative(); }
+});
+
+test("llamaAdapter never picks with, or releases, a model MaiK loaded", async () => {
+  const calls = { gen: 0, release: 0 };
+  let maikTakes = false;
+  const plugin = { load: () => { if (maikTakes) globalThis.SMD_LLAMA_HOLDER = "maik"; return Promise.resolve(); },
+    generate: () => { calls.gen++; return Promise.resolve({ text: '{"option":1}' }); }, release: () => { calls.release++; return Promise.resolve(); } };
+  try {
+    const eng = E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" });
+    maikTakes = true;   // MaiK loads its pack while ours is loading
+    await assert.rejects(eng.complete({ prompt: "x", nOptions: 2 }), /taken by MaiK/);
+    assert.equal(calls.gen, 0, "no pick with MaiK's model");
+    await eng.release(); assert.equal(calls.release, 0, "MaiK's pack is not unloaded");
+    maikTakes = false;
+    await eng.complete({ prompt: "x", nOptions: 2 }); assert.equal(calls.gen, 1, "reloads and picks once it holds the plugin");
+    globalThis.SMD_LLAMA_HOLDER = "maik";   // MaiK answered in between
+    await eng.complete({ prompt: "y", nOptions: 2 }); assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "reloaded, not reused");
+  } finally { delete globalThis.SMD_LLAMA_HOLDER; }
+});

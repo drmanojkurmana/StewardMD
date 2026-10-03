@@ -703,9 +703,10 @@
   }
   function settingsHTML() {
     var pref = getPref();
-    function opt(engine, label, badge, desc, first, disabled) {
-      var on = pref === engine;
-      return '<button type="button" data-me-opt="' + engine + '" role="radio" aria-checked="' + on + '"' +
+    // sel/attr: another radio group in the same row style (the Edge engine rows pass their own).
+    function opt(engine, label, badge, desc, first, disabled, sel, attr) {
+      var on = sel != null ? !!sel : pref === engine;
+      return '<button type="button" ' + (attr || "data-me-opt") + '="' + engine + '" role="radio" aria-checked="' + on + '"' +
         (disabled ? ' aria-disabled="true"' : '') +
         ' style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;background:' +
         (on ? "var(--teal-soft,#e6f4f1)" : "transparent") + ';border:0;' +
@@ -738,8 +739,39 @@
       opt("local", "MaiK on this phone", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
+      edgeEngineHTML(opt) +
       (rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
+  }
+
+  /* EDGE ENGINE (owner, 2026-10-04): which on-device model StewardMD Edge uses to pick a tool
+   * (edge-router.js, setting smd_edge_engine). Same row style as "Who answers"; data-me-edge rows. */
+  function edgeEngineHTML(opt) {
+    var E = window.SMD_EDGE, M = window.SMD_MAIK_MODELS;
+    if (!E || !E.engineChoice || !E.enabled || !E.enabled()) return "";
+    var cur = E.engineChoice(), C = window.Capacitor, P = C && C.Plugins;
+    var native = !!(C && C.isNativePlatform && C.isNativePlatform());
+    var fid = (M && M.EDGE_FG_ID) || "edge-functiongemma";
+    var fgHave = !!(M && M.installedCached && M.installedCached(fid));
+    var st = (M && M.state) ? M.state(fid) : { frac: 0 };
+    var on = pill("On this phone", "#dcfce7", "#166534"), off = pill("Not on this phone", "#e2e8f0", "#334155");
+    var fgPill = fgHave ? on : st.downloading ? pill("Downloading " + (st.frac * 100).toFixed(0) + "%", "#fef3c7", "#92400e") : off;
+    function row(v, label, badge, desc, first) { return opt(v, label, badge, desc, first, false, cur === v, "data-me-edge"); }
+    var size = (M && M.sizeLabel) ? M.sizeLabel(fid) : "290 MB";
+    var dl = (!fgHave && native && P && P.Llama && M && M.ensure)
+      ? '<div style="display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px">' +
+          '<span style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
+            '<span data-me-status="' + fid + '" aria-live="polite">' + (st.downloading ? (st.frac * 100).toFixed(1) + "% of " + size : "FunctionGemma is not on this phone · " + size) + '</span>' +
+            '<span data-me-bar="' + fid + '" style="display:block"></span></span>' +
+          '<button class="smd-nav-btn" data-me-edgedl="' + (st.downloading ? "pause" : "download") + '" style="margin:0;min-height:44px">' + (st.downloading ? "Pause" : "Download") + '</button>' +
+        '</div>'
+      : "";
+    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">Edge engine</div>' +
+      '<div role="radiogroup" aria-label="Edge engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
+        row("needle", "Needle", (native && P && P.Needle) ? on : off, "Small and fast. Declines when unsure.", true) +
+        row("functiongemma", "FunctionGemma", fgPill, "Picks more often, but can pick the wrong tool until trained. Unloads MaiK Lite while it runs.", false) +
+        row("rules", "Rules only", pill("Built in", "#dcfce7", "#166534"), "Exact names only. No model.", false) +
+      '</div>' + dl;
   }
 
   function levelPill(level) {
@@ -1201,6 +1233,25 @@
         if (want === "local" && !packInstalled()) { setPref(want); rerender(b, root); return startDownload(b, root); }
         setPref(want);
         rerender(b, root);
+      });
+    });
+    root.querySelectorAll("[data-me-edge]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var E = window.SMD_EDGE;
+        if (E && E.setEngineChoice) E.setEngineChoice(b.getAttribute("data-me-edge"));
+        rerender(b, root);
+      });
+    });
+    root.querySelectorAll("[data-me-edgedl]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var M = window.SMD_MAIK_MODELS, id = M && M.EDGE_FG_ID;
+        if (!id) return;
+        if (b.getAttribute("data-me-edgedl") === "pause") { if (M.cancel) M.cancel(id); return; }
+        var p = M.ensure(id, null);
+        rerender(b, root);             // flip to Pause at once
+        p.then(function () { toast("FunctionGemma is on this phone."); }, function (e) {
+          if (String((e && e.message) || e) !== "cancelled") toast("Download stopped. Tap Download to resume.");
+        });
       });
     });
     root.querySelectorAll("[data-me-pack]").forEach(function (b) {

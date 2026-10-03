@@ -25,7 +25,7 @@ const SRC = readFileSync(new URL("../maik-local.js", import.meta.url), "utf8");
 
 /** A plugin that behaves like the real one: single-threaded, rejects an overlapping generate. */
 function load({ genMs = 5, hang = false } = {}) {
-  const log = [];
+  const log = [], loads = [];
   let busy = false, reply = () => "ok";
   let pendingReject = null;
   function generate(p) {
@@ -40,7 +40,7 @@ function load({ genMs = 5, hang = false } = {}) {
   }
   const Llama = {
     available: async () => ({ available: true, loaded: true, debugBuild: true, availableMemory: 0 }),
-    load: async () => ({}), generate, release: async () => ({}),
+    load: async (a) => { loads.push(a && a.path); return {}; }, generate, release: async () => ({}),
     cancel: async () => {
       busy = false;
       if (pendingReject) {
@@ -73,7 +73,7 @@ function load({ genMs = 5, hang = false } = {}) {
   new Function("window", "document", "setTimeout", "clearTimeout", SRC)(win, { addEventListener() {} }, wrapSetTimeout, wrapClearTimeout);
   const L = win.SMD_MAIK_LOCAL;
   L.setIdleMs(100000, 100000);   // never release the model mid-test
-  return { L, log, setReply: (f) => { reply = f; } };
+  return { L, log, loads, win, setReply: (f) => { reply = f; } };
 }
 const json = (o) => JSON.stringify(o);
 
@@ -194,4 +194,21 @@ test("the reason reaches the clinician: opd-emr names busy, timeout and memory i
   assert.match(body, /not-enough-memory\|low-memory/);
   assert.match(body, /Could not draft the note: /, "any other engine error is quoted, not swallowed");
   assert.match(body, /_scribeCapToasted !== cm/, "a capability message is deduped per reason, not once per session");
+});
+
+// StewardMD Edge (smd_edge_engine "functiongemma") loads FunctionGemma into this same llama plugin and
+// evicts MaiK's pack; available().loaded still says true (FunctionGemma is loaded), so only the holder
+// marker can tell MaiK its pack is gone. Without the reload MaiK would answer with FunctionGemma.
+test("Edge's FunctionGemma evicting the pack makes the next MaiK call reload it", async () => {
+  const { L, loads, win } = load();
+  await L.translate("fever 3 days");
+  assert.equal(loads.length, 1);
+  assert.equal(win.SMD_LLAMA_HOLDER, "maik");
+  await L.translate("cough");
+  assert.equal(loads.length, 1, "still resident: no reload");
+  win.SMD_LLAMA_HOLDER = "edge";   // edge-router.js llamaAdapter.load()
+  await L.translate("headache");
+  assert.equal(loads.length, 2, "reloaded after Edge took the plugin");
+  assert.equal(loads[1], "/m.gguf");
+  assert.equal(win.SMD_LLAMA_HOLDER, "maik");
 });

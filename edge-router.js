@@ -334,9 +334,10 @@
     };
   }
   /* A grammar-capable llama.cpp pack (capacitor-llama with the `grammar` option, gate A0.3), e.g. a
-   * fine-tuned FunctionGemma GGUF. BAKE-OFF ONLY: the llama plugin holds ONE model per process, so
-   * load() evicts MaiK's pack while maik-local still believes it is loaded. autoEngine() never picks
-   * this; the bake-off harness builds it, and release() runs when the run ends. Relaunch the app after.
+   * FunctionGemma. The llama plugin holds ONE model per process, so load() evicts MaiK's pack. Who holds
+   * it is G.SMD_LLAMA_HOLDER ("edge" here, "maik" in maik-local.js): MaiK reloads its pack when it sees
+   * another holder, and this adapter never picks with a model it did not load. autoEngine() builds it
+   * when smd_edge_engine is "functiongemma"; the bake-off harness builds it too.
    * The grammar admits exactly {"option":n} for n in 0..number of options offered. */
   function grammarFor(n) {
     var k = Math.max(0, Math.min(MAX_OPTIONS, n | 0));
@@ -344,20 +345,30 @@
   }
   function llamaAdapter(plugin, opts) {
     var o = opts || {}, loaded = false;
+    function mine() { return G.SMD_LLAMA_HOLDER === "edge"; }
+    // The plugin drops its model on idle/background; load again on the next call.
+    try { if (plugin && typeof plugin.addListener === "function") plugin.addListener("llamaReleased", function () { loaded = false; }); } catch (e) {}
     return {
       name: "llama",
       available: function () { return !!(plugin && o.modelPath); },
       load: function () {
         loaded = false;
-        // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
-        // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
-        // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
-        return Promise.resolve(plugin.load({ path: o.modelPath, nCtx: o.nCtx || 1024, nThreadsBatch: o.nThreadsBatch || 4 })).then(function () { loaded = true; });
+        G.SMD_LLAMA_HOLDER = "edge";
+        // modelPath: a path, or a function returning one (a downloaded pack's path is only known async).
+        return Promise.resolve(typeof o.modelPath === "function" ? o.modelPath() : o.modelPath).then(function (path) {
+          if (!path) throw new Error("no model file");
+          // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
+          // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
+          // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
+          return plugin.load({ path: path, nCtx: o.nCtx || 1024, nThreadsBatch: o.nThreadsBatch || 4 });
+        }).then(function () { loaded = true; });
       },
       complete: function (task) {
         var n = Math.max(0, Math.min(MAX_OPTIONS, (task.nOptions == null ? MAX_OPTIONS : task.nOptions) | 0)), choices = [];
         for (var d = 0; d <= n; d++) choices.push(String(d));
-        return Promise.resolve(loaded ? null : this.load()).then(function () {
+        return Promise.resolve(loaded && mine() ? null : this.load()).then(function () {
+          // MaiK loaded its pack while ours was loading: never pick with MaiK's model.
+          if (!mine()) { loaded = false; throw new Error("llama plugin taken by MaiK"); }
           // `pick`: forced prefix {"option": + ONE prefill + the most likely digit (no decode loop, no grammar
           // over the whole vocabulary). A plugin without it ignores the key and runs the grammar instead.
           return plugin.generate({ system: task.system || SYSTEM, prompt: task.prompt, nPredict: 8, temperature: 0, stream: false,
@@ -369,8 +380,14 @@
         });
       },
       reset: function () { return null; },
-      kill: plugin.cancel ? function () { return plugin.cancel(); } : undefined,
-      release: function () { loaded = false; return plugin.release ? plugin.release() : null; }
+      kill: plugin.cancel ? function () { return mine() ? plugin.cancel() : null; } : undefined,
+      // Never unload MaiK's pack: release only what this adapter loaded.
+      release: function () {
+        var had = loaded && mine(); loaded = false;
+        if (!had) return null;
+        G.SMD_LLAMA_HOLDER = null;
+        return plugin.release ? plugin.release() : null;
+      }
     };
   }
 
@@ -407,17 +424,40 @@
     return next();
   }
 
+  /* Engine choice (owner, 2026-10-04): smd_edge_engine = "needle" (default), "functiongemma" or "rules"
+   * (no model; Layer 0 still answers). smd_edge "0" still turns Edge off entirely. */
+  var ENGINE_CHOICES = ["needle", "functiongemma", "rules"];
+  var FG_PACK = "edge-functiongemma";   // maik-models.js EDGE_FG_ID
+  function engineChoice() {
+    var v = null; try { v = G.localStorage && G.localStorage.getItem("smd_edge_engine"); } catch (e) {}
+    return ENGINE_CHOICES.indexOf(v) >= 0 ? v : "needle";
+  }
+  // Switches at once, no restart: the old engine is released, the new one loads on its first call.
+  function setEngineChoice(v) {
+    if (ENGINE_CHOICES.indexOf(v) < 0) v = "needle";
+    try { G.localStorage.setItem("smd_edge_engine", v); } catch (e) {}
+    setEngine(flagOn() ? autoEngine() : null);
+    return v;
+  }
   function autoEngine() {
     try {
-      var C = G.Capacitor, p = C && C.Plugins && C.Plugins.Needle;
-      if (p && C.isNativePlatform && C.isNativePlatform()) return needleAdapter(p);
+      var C = G.Capacitor, P = C && C.Plugins, choice = engineChoice();
+      if (choice === "rules" || !P || !(C.isNativePlatform && C.isNativePlatform())) return null;
+      if (choice === "functiongemma") {
+        // No file on the phone: no engine, so the rules answer (silently).
+        var M = G.SMD_MAIK_MODELS;
+        if (!P.Llama || !M || !M.installedCached || !M.installedCached(FG_PACK)) return null;
+        return llamaAdapter(P.Llama, { modelPath: function () { return M.pathFor(FG_PACK); } });
+      }
+      if (P.Needle) return needleAdapter(P.Needle);
     } catch (e) {}
     return null;
   }
 
   var API = {
     route: route, rules: rules, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
-    needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
+    needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine,
+    engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
     hot: function () { return device.thermal >= 3; },
@@ -427,6 +467,13 @@
   if (root) {
     root.SMD_EDGE = API;
     try { if (flagOn()) { var a = autoEngine(); if (a) setEngine(a); } } catch (e) {}
+    // FunctionGemma downloaded (or deleted) while chosen: pick it up without a restart.
+    try {
+      var MM = root.SMD_MAIK_MODELS;
+      if (MM && MM.subscribe) MM.subscribe(function (id, st) {
+        if (id === FG_PACK && st && !st.downloading && engineChoice() === "functiongemma" && flagOn()) setEngine(autoEngine());
+      });
+    } catch (e) {}
   }
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);
