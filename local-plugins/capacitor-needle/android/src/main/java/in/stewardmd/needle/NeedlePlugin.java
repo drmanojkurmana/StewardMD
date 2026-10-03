@@ -41,6 +41,12 @@ public class NeedlePlugin extends Plugin {
     private static final String ERR_DIED = "ENGINE_DIED", ERR_MODEL = "MODEL_MISSING", ERR_ENGINE = "ENGINE_ERROR";
     private static final int MAX_TOKENS_CAP = 128;   // the router asks for 48; never let a call run long
 
+    // Edge-Master-Plan A0.5: once the WebView render process has died, Edge stays off until the app process
+    // ends. The host app's MainActivity calls markRendererGone() from onRenderProcessGone; available()
+    // reports it as rendererGone. Static, so it survives the activity recreate that follows.
+    private static volatile boolean rendererGone = false;
+    public static void markRendererGone() { rendererGone = true; }
+
     private Messenger service;
     private boolean binding;
     private final List<Runnable> queued = new ArrayList<>();
@@ -74,7 +80,9 @@ public class NeedlePlugin extends Plugin {
             if (!binding) {
                 binding = true;
                 Context ctx = getContext();
-                if (!ctx.bindService(new Intent(ctx, NeedleService.class), conn, Context.BIND_AUTO_CREATE)) {
+                // BIND_IMPORTANT: :edge takes the app's scheduling group (top-app while the doctor is in the
+                // app, X4 included) instead of the default group's foreground cpuset (cores 0-6).
+                if (!ctx.bindService(new Intent(ctx, NeedleService.class), conn, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT)) {
                     binding = false;
                     List<Runnable> drop = new ArrayList<>(queued); queued.clear();
                     for (Runnable q : drop) q.run();   // service is still null: send() rejects each
@@ -131,7 +139,7 @@ public class NeedlePlugin extends Plugin {
         } catch (Throwable ignore) {}
         JSObject r = new JSObject().put("available", true).put("isolated", true).put("killable", true)
             .put("defaultWeights", w.getAbsolutePath()).put("defaultWeightsPresent", w.isFile())
-            .put("lowMemory", low).put("thermal", thermal);
+            .put("lowMemory", low).put("thermal", thermal).put("rendererGone", rendererGone);
         if (availMB >= 0) r.put("availMB", availMB);
         call.resolve(r);
     }

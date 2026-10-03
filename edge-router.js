@@ -1,6 +1,6 @@
 /* edge-router.js — StewardMD Edge, Wave 1: typed, read-only request router (window.SMD_EDGE).
  * ---------------------------------------------------------------------------
- * Flag smd_edge ("1" on, default OFF). Five read-only workflows (Edge-Master-Plan section 1):
+ * Flag smd_edge (default ON for all users since 2026-10-04, owner; "0" turns it off). Five read-only workflows (Edge-Master-Plan section 1):
  *   calculator (open, optionally prefilled) · tool/module · KB topic · drug · ICD search.
  *
  * How a request is handled:
@@ -30,7 +30,7 @@
   }];
   var SYSTEM = "user: clinician; assistant: StewardMD app router";
 
-  function flagOn() { try { return !!(G.localStorage && G.localStorage.getItem("smd_edge") === "1"); } catch (e) { return false; } }
+  function flagOn() { try { return !(G.localStorage && G.localStorage.getItem("smd_edge") === "0"); } catch (e) { return true; } }
   function lower(s) { return String(s == null ? "" : s).toLowerCase(); }
 
   // ---- 1. candidates -----------------------------------------------------------------------
@@ -190,10 +190,13 @@
   /* Back-off (Edge-Master-Plan A0.5): skip Edge, so the rules answer, when memory is low
    * (lowMemory, or under 250 MB available), the phone is at thermal SEVERE or above (Android
    * THERMAL_STATUS_SEVERE = 3; the Needle plugin maps iOS .serious to 3), or MaiK is generating or
-   * Whisper is decoding. The device numbers arrive asynchronously from Needle.available(), so the last
-   * reading is kept and refreshed on every routed request; until one arrives, everything reads "ok".
+   * Whisper is decoding, or the Android WebView render process has died (device.rendererGone: the plugin
+   * keeps it set until the app process ends; folded into memoryOk, as memory pressure is the usual cause).
+   * The device numbers arrive asynchronously from Needle.available(), so the last
+   * reading is kept and refreshed on every routed request; the first model-routed request waits for one.
    * SMD_EDGE_ENV, when set (tests, harnesses), replaces this whole object. */
-  var device = { lowMemory: false, availMB: null, thermal: 0 };
+  var device = { lowMemory: false, availMB: null, thermal: 0, rendererGone: false };
+  var firstRead = null;   // the first device reading (route() waits for it once)
   function refreshDevice() {
     var p = null;
     try { p = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Needle; } catch (e) {}
@@ -203,13 +206,15 @@
         if (typeof a.lowMemory === "boolean") device.lowMemory = a.lowMemory;
         if (typeof a.availMB === "number") device.availMB = a.availMB;
         if (typeof a.thermal === "number") device.thermal = a.thermal;
+        if (typeof a.rendererGone === "boolean") device.rendererGone = a.rendererGone;
       }
       return device;
     }, function () { return device; });
   }
   var DEFAULT_ENV = {
-    memoryOk: function () { return !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
-    thermalOk: function () { return device.thermal < 3; },
+    memoryOk: function () { return !device.rendererGone && !device.lowMemory && !(device.availMB != null && device.availMB < 250); },
+    // Owner 2026-10-04: a hot phone no longer skips the model; MaiK shows "Phone is hot" in its footer (hot()).
+    thermalOk: function () { return true; },
     othersBusy: function () {
       var L = G.SMD_MAIK_LOCAL, N = G.SMD_NATIVE;
       var q = L && L.queueState ? L.queueState() : null;
@@ -254,9 +259,15 @@
     if (layer0(cands)) { stats.rules++; return Promise.resolve(resultFor(cands[0], text, "rules", null)); }
     if (!available() || !runtime) { stats.passed++; return Promise.resolve(null); }
     if (ctx && ctx.patient_session_id != null) runtime.setSession(ctx.patient_session_id);
-    refreshDevice();          // for the NEXT request: this one reads the last known state
+    // The first model-routed request waits for one device reading, so a state set before it (the
+    // renderer died and the activity recreated, low memory) is already seen. Later requests read the
+    // last known state and refresh it for the NEXT request (no wait on the hot path).
+    var first = !firstRead;
+    if (first) firstRead = refreshDevice(); else refreshDevice();
     stats.model++;
-    return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }).then(function (r) {
+    return firstRead.then(function () {
+      return runtime.run({ prompt: promptFor(text, cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length });
+    }).then(function (r) {
       if (!r || r.status !== "ok") { stats.passed++; return null; }
       var o = optionFrom(r.result);
       if (!o.ok || typeof o.option !== "number" || o.option !== Math.floor(o.option)) { stats.passed++; return null; }
@@ -276,8 +287,11 @@
   // opts.weightsPath: a tuned .cact on the device (else the plugin's bundled weights).
   // opts.calibrated === false (a local LoRA build: its confidence head was not trained) drops the
   // confidence, as Needle's own Python binding does, so the floor is not judged on noise.
+  // Every complete() runs needle_init first (2-10 ms on a Pixel 9). The engine keeps state across
+  // needle_complete calls that needle_reset does not clear: on 2026-10-04 a loaded Pixel 9 engine never
+  // returned from its ~49th-57th call (2 cores spinning for 10+ min; 80/80 fine with init before each).
   function needleAdapter(plugin, opts) {
-    var inited = false, o = opts || {};
+    var o = opts || {};
     var loadArgs = o.weightsPath ? { path: o.weightsPath } : {};
     // Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing. Only
     // Android runs Needle in its own process (":edge"), which is what makes a stuck call killable.
@@ -287,10 +301,10 @@
     return {
       name: "needle",
       available: function () { return !!plugin; },
-      load: function () { inited = false; return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }).then(function () { inited = true; }); },
+      load: function () { return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }); },
       complete: function (task) {
-        return Promise.resolve(inited ? null : plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) })).then(function () {
-          inited = true; return plugin.complete({ text: task.prompt, maxTokens: task.maxTokens || 48 });
+        return Promise.resolve(plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) })).then(function () {
+          return plugin.complete({ text: task.prompt, maxTokens: task.maxTokens || 48 });
         }).then(function (r) {
           var out = r && typeof r.json === "string" ? JSON.parse(r.json) : r;
           if (out && o.calibrated === false) out.confidence = null;
@@ -298,8 +312,8 @@
         });
       },
       reset: function () { return plugin.reset ? plugin.reset() : null; },
-      kill: killable ? function () { inited = false; return plugin.kill(); } : undefined,
-      release: function () { inited = false; return plugin.release ? plugin.release() : null; }
+      kill: killable ? function () { return plugin.kill(); } : undefined,
+      release: function () { return plugin.release ? plugin.release() : null; }
     };
   }
   /* A grammar-capable llama.cpp pack (capacitor-llama with the `grammar` option, gate A0.3), e.g. a
@@ -389,6 +403,7 @@
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
+    hot: function () { return device.thermal >= 3; },
     backoff: function () { return { memoryOk: DEFAULT_ENV.memoryOk(), thermalOk: DEFAULT_ENV.thermalOk(), othersBusy: DEFAULT_ENV.othersBusy(), device: JSON.parse(JSON.stringify(device)) }; },
     _version: "1.0"
   };
