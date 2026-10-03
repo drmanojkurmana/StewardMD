@@ -3,6 +3,7 @@
  * lists who is in recovery; "Leave recovery" asks where the patient goes; a ward bed or unit is picked
  * on the bed board and confirmed; a refused bed keeps the question open and the patient in recovery;
  * home is recorded from the question. And To PACU with no bays listed falls back to bay "1", editable.
+ * The bed board shows each recovery bay taken ("Recovery" and how long), never offered as a free bed, at 390 px and tablet width.
  * The server half is test/wardsynq-surgery.test.mjs (LEAVE RECOVERY ...).
  *
  *   node test/run-ward-pacu-exit-ui.mjs   (needs Google Chrome; CHROME=... to point elsewhere; SHOTS=dir saves screenshots)
@@ -39,11 +40,13 @@ async function waitFor(expr, tries) {
   for (let i = 0; i < (tries || 30); i++) { await sleep(120); if (await ev(expr)) return true; }
   return false;
 }
+const ago = (min) => new Date(Date.now() - min * 60000).toISOString();
 const ROWS = [
-  { encounterId: "wsq-pacu-a", caseId: "a", patientId: "p-a", mrn: "SMD-H1-RC01", procedure: "Laparoscopic cholecystectomy", bed: "Bay 1", since: "2026-10-03T04:10:00.000Z", version: 1 },
-  { encounterId: "wsq-pacu-b", caseId: "b", patientId: "p-b", mrn: "SMD-H1-RC02", procedure: "Open inguinal hernia repair with mesh", bed: "Bay 12", since: "2026-10-03T04:40:00.000Z", version: 3 },
-  { encounterId: "wsq-pacu-c", caseId: "c", patientId: "p-c", mrn: "SMD-H1-RC03", procedure: "Excision of lipoma", bed: "Bay 4", since: "2026-10-03T05:05:00.000Z", version: 1 },
+  { encounterId: "wsq-pacu-a", caseId: "a", patientId: "p-a", name: "Lakshmi Narayanan Venkataraman", mrn: "SMD-H1-RC01", procedure: "Laparoscopic cholecystectomy", bed: "Bay 1", since: ago(95), version: 1 },
+  { encounterId: "wsq-pacu-b", caseId: "b", patientId: "p-b", mrn: "SMD-H1-RC02", procedure: "Open inguinal hernia repair with mesh", bed: "Bay 12", since: ago(25), version: 3 },
+  { encounterId: "wsq-pacu-c", caseId: "c", patientId: "p-c", mrn: "SMD-H1-RC03", procedure: "Excision of lipoma", bed: "Bay 4", since: ago(190), version: 1 },
 ];
+const recoveryTiles = () => ev(`return JSON.stringify(Array.prototype.filter.call(document.querySelectorAll('.w-bedgrid [data-w-act="surgeryboard"]'), function (b) { return !!b.querySelector('.w-bedcell-rec'); }).map(function (b) { var r=b.getBoundingClientRect(); return { text: b.textContent, h: r.height, right: r.right, clipped: Array.prototype.some.call(b.querySelectorAll('span'), function (s) { return s.classList.contains('w-bedcell-rec') && s.scrollWidth > s.clientWidth + 1; }) }; }));`).then((s) => JSON.parse(s));
 
 try {
   let ver, t = 0; while (t++ < 60) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -78,6 +81,17 @@ try {
   await click('[data-w-act="askok"]');
   ok(await waitFor(`return document.body.textContent.indexOf('Leaving recovery: SMD-H1-RC01') >= 0 && !!document.querySelector('[data-w-act="pickbed:Surgical Ward|S1"]');`), "a ward bed is chosen on the bed board, which says who is leaving recovery");
   ok(await noSideScroll(), "the bed board has no sideways scroll at 390 px");
+  // The PACU ward on the same board: every recovery bay is taken, labelled, and not offered to this move.
+  const tiles = await recoveryTiles();
+  ok(tiles.length === 3, "each recovery stay holds its bay on the bed board: " + tiles.length);
+  ok(tiles.some((x) => x.text.indexOf("Bay 1") === 0 && x.text.indexOf("Recovery · 1 h 35 min") >= 0) && tiles.some((x) => x.text.indexOf("Recovery · 25 min") >= 0) && tiles.some((x) => x.text.indexOf("Recovery · 3 h 10 min") >= 0),
+    "each bay says Recovery and for how long: " + tiles.map((x) => x.text).join(" | "));
+  ok(tiles.some((x) => x.text.indexOf("SMD-H1-RC02") >= 0), "a tile with no name shows the MRN");
+  ok(await ev(`return ['Bay 1','Bay 4','Bay 12'].every(function (b) { return !document.querySelector('[data-w-act="pickbed:PACU|' + b + '"]'); }) && !!document.querySelector('[data-w-act="pickbed:PACU|Bay 2"]');`), "a recovery bay is never a free bed to pick; the empty bay is");
+  ok(await ev(`return Array.prototype.some.call(document.querySelectorAll('.w-wardrow h4'), function (h) { return h.textContent.indexOf('PACU') === 0 && h.textContent.indexOf('3 occupied') >= 0 && h.textContent.indexOf('1 free') >= 0; });`), "the PACU header counts the recovery bays as occupied");
+  ok(tiles.every((x) => x.h >= 44 && x.right <= 390 && !x.clipped), "recovery tiles are 44 px targets inside the screen, the label not cut off: " + JSON.stringify(tiles.map((x) => [x.h, x.right, x.clipped])));
+  await ev(`document.querySelector('.w-bedgrid [data-w-act="surgeryboard"]').scrollIntoView({block:"center"}); return true;`);
+  await shot("2b-bed-board-recovery");
   await click('[data-w-act="pickbed:Surgical Ward|S1"]');
   ok(await waitFor(`return document.querySelector('.w-ask') && document.querySelector('.w-ask').textContent.indexOf('Move SMD-H1-RC01 from recovery to Surgical Ward, bed S1?') >= 0;`), "picking a bed asks to confirm the move, naming patient, ward and bed");
   await click('[data-w-act="askok"]');
@@ -153,6 +167,24 @@ try {
   await waitFor(`return !!document.querySelector('[data-w-act="surgerydisposition:pacu"]');`);
   await click('[data-w-act="surgerydisposition:pacu"]');
   ok(await waitFor(`return document.body.textContent.indexOf("No recovery bay is free on the hospital's bed list.") >= 0 && !document.querySelector('.w-ask');`), "no free bay on the list: said plainly, nothing asked or sent");
+
+  // ---- 7. Tablet width: the bed board's recovery bays, and a tile opens the theatre board. ---------------
+  await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });
+  await ev(`window.__setRecovery(${JSON.stringify(ROWS)}); window.WARD.open({ orgId: "org-harness" }); return true;`);
+  await waitFor(`return !!document.querySelector('[data-w-act="surgeryboard"]');`);
+  await click('[data-w-act="surgeryboard"]');
+  ok(await waitFor(`return document.querySelectorAll('[data-w-act^="leaverecovery:"]').length === 3;`), "tablet: the theatre board lists the three recovery stays");
+  await click('[data-w-act="leaverecovery:wsq-pacu-a"]');
+  await waitFor(`return !!document.querySelector('.w-ask [data-w-act="askok"]');`);
+  await click('[data-w-act="askok"]');
+  await waitFor(`return !!document.querySelector('[data-w-act="pickbed:Surgical Ward|S2"]');`);
+  const wide = await recoveryTiles();
+  ok(wide.length === 3 && wide.every((x) => !x.clipped && x.right <= 820), "at 820 px the recovery bays are whole too: " + JSON.stringify(wide.map((x) => [x.text, x.right, x.clipped])));
+  ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth;`), "no sideways scroll at 820 px");
+  await ev(`document.querySelector('.w-bedgrid [data-w-act="surgeryboard"]').scrollIntoView({block:"center"}); return true;`);
+  await shot("6-bed-board-tablet");
+  await click('.w-bedgrid [data-w-act="surgeryboard"]');
+  ok(await waitFor(`return !!document.querySelector('[data-w-act="leaverecovery:wsq-pacu-a"]');`), "a recovery tile opens the theatre board, where the patient leaves recovery");
 } catch (e) { ok(false, "harness error: " + (e && e.message || e)); }
 finally { try { chrome.kill(); } catch {} }
 console.log(fails ? `\n${fails} check(s) failed` : "\nALL CHECKS PASSED");

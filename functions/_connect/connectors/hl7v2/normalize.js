@@ -77,7 +77,7 @@ export function normalizeHl7(ctx, msg) {
   } else if (type === "MDM") {
     const txa = seg(msg, "TXA");
     const narrative = segs(msg, "OBX").filter((s) => ["TX", "FT", "ST"].includes(field(s, 2))).map((s) => decodeEsc(field(s, 5), enc)).filter(Boolean).join("\n");
-    out.documents.push(documentReference({ id: hashId((txa && field(txa, 12)) || field(msh, 10)), type: txa ? ccFromCE(txa, 2, enc, "document") : codeable({ text: "document" }), status: (txa && field(txa, 17)) || "unknown", text: narrative || null }));   // narrative only, NO binary
+    out.documents.push(documentReference({ id: hashId((txa && field(txa, 12)) || field(msh, 10)), type: txa ? ccFromCE(txa, 2, enc, "document") : codeable({ text: "document" }), status: (txa && field(txa, 17)) || "unknown", date: txa ? (hl7Date(field(txa, 6)) || hl7Date(field(txa, 4)) || null) : null, text: narrative || null }));   // narrative only, NO binary
   } else {
     warnings.push("unsupported message type '" + type + "'; patient-only bundle");
   }

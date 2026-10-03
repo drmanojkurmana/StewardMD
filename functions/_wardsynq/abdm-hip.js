@@ -159,6 +159,8 @@ function parseWardsynqRef(ref) {
 const FHIR_SEX = { male: "male", female: "female", other: "other", m: "male", f: "female", o: "other" };
 const ENC_CLASS = { IPD: "IMP", ICU: "IMP", MATERNITY: "IMP", PEDIATRICS: "IMP", NICU: "IMP", ED: "EMER" };
 const iso = (v) => { const t = Date.parse(str(v)); return Number.isFinite(t) ? new Date(t).toISOString() : null; };
+/* The first of these that is a real date, as ISO, else null. Null is "undated": hip.js drops such an item. */
+const firstIso = (...vs) => { for (const v of vs) { const t = iso(v); if (t) return t; } return null; };
 const words = (k) => str(k).replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (c) => c.toUpperCase());
 
 function projectPatient(s, tenantId) {
@@ -175,11 +177,17 @@ function projectEncounter(enc) {
     period: { start: iso(enc.periodStart), ...(enc.periodEnd ? { end: iso(enc.periodEnd) } : {}) } });
   return e;
 }
+const orderDate = (o) => firstIso(o && o.authoredAt, o && o.meta && o.meta.effectiveAt, o && o.meta && o.meta.recordedAt);
+// The summary's own signed time. Last resort: when its record was written (meta.recordedAt), for a summary signed
+// before signedAt was kept. Never the export instant.
+const summaryDate = (n) => firstIso(n && n.signedAt, n && n.meta && n.meta.effectiveAt, n && n.meta && n.meta.recordedAt);
 const orderLine = (o) => [str(o.drug), o.dose && o.dose.value != null ? `${o.dose.value} ${str(o.dose.unit)}`.trim() : "", str(o.route), str(o.frequency)].filter(Boolean).join(" ");
 function projectOrder(o) {
   const coded = str(o.drugCode) && systemUri(o.drugCodeSystem) ? [coding({ system: systemUri(o.drugCodeSystem), code: str(o.drugCode), display: str(o.drug) })] : [];
   const m = medicationStatement({ id: o.id, medication: codeable({ coding: coded, text: str(o.drug) }), origin: "order", status: o.status, dosage: { text: orderLine(o) || "As directed" } });
-  m.authoredOn = iso(o.meta && o.meta.recordedAt) || null;
+  // The order's own date: authoredAt, else the time it took effect, else when it was entered (the convention
+  // pathways.js already uses for a MedicationOrder). Never the export instant.
+  m.authoredOn = orderDate(o);
   return m;
 }
 function projectObservation(o) {
@@ -194,7 +202,16 @@ function projectReport(r) {
     effectiveDateTime: iso(r.reportedAt || (r.meta && r.meta.recordedAt)), conclusion: str(r.conclusion || r.impression) || null,
     results: (r.resultObservationIds || []).map((id) => ({ type: "Observation", id })) });
 }
-const narrativeDoc = (id, title, text, date) => documentReference({ id, status: "current", type: codeable({ text: title }), date, text });
+/* `dates` are the clinical dates of everything the narrative states (a null among them = an undated item).
+ * The document is dated by the LATEST of them, and `coversDates` lists them all so the consent date filter
+ * drops the narrative when ANY line is outside the window (the text cannot be cut down). No dates, or any
+ * undated, makes the document undated, and hip.js drops it. */
+const narrativeDoc = (id, title, text, dates) => {
+  const ds = Array.isArray(dates) ? dates : [dates];
+  const d = documentReference({ id, status: "current", type: codeable({ text: title }), date: ds.length && ds.every(Boolean) ? ds.reduce((a, b) => (a > b ? a : b)) : null, text });
+  d.coversDates = ds;
+  return d;
+};
 
 /** The SCCM record for one care context of a stay. PURE apart from the report/invoice id hashing. */
 async function projectStayRecord(s, parsed, { tenantId, now }) {
@@ -206,22 +223,22 @@ async function projectStayRecord(s, parsed, { tenantId, now }) {
     const text = Object.keys(secs).filter((k) => str(secs[k])).map((k) => `${words(k)}: ${str(secs[k])}`).join("\n");
     rec = bundle({ ...base, conditions: native(s.conditions).map((c) => condition({ id: c.id, code: codeable({ text: str(c.display || c.code) }), clinicalStatus: c.clinicalStatus })),
       allergies: s.allergies.map((a) => allergyIntolerance({ id: a.id, code: codeable({ text: str(a.substance) }), criticality: a.criticality })),
-      medications: p.orders.map(projectOrder), documents: [narrativeDoc(p.signedSummary.id, "Discharge summary", text || "Discharge summary", generatedAt)] });
+      medications: p.orders.map(projectOrder), documents: [narrativeDoc(p.signedSummary.id, "Discharge summary", text || "Discharge summary", [summaryDate(p.signedSummary)])] });
   } else if (kind === "RX" && p.orders.length) {
-    rec = bundle({ ...base, medications: p.orders.map(projectOrder), documents: [narrativeDoc(`${enc.id}-rx`, "Prescription", p.orders.map(orderLine).join("\n"), generatedAt)] });
+    rec = bundle({ ...base, medications: p.orders.map(projectOrder), documents: [narrativeDoc(`${enc.id}-rx`, "Prescription", p.orders.map(orderLine).join("\n"), p.orders.map(orderDate))] });
   } else if (kind === "DR") {
     let report = null;
     for (const r of p.reports) if ((await sha10(r.id)) === parsed.hash) report = r;
     if (report) {
       const obs = s.observations.filter((o) => (report.resultObservationIds || []).includes(o.id));
       rec = bundle({ ...base, diagnosticReports: [projectReport(report)], observations: obs.map(projectObservation),
-        documents: [narrativeDoc(`${report.id}-text`, "Diagnostic report", [str(report.code), str(report.conclusion || report.impression)].filter(Boolean).join(": ") || "Diagnostic report", generatedAt)] });
+        documents: [narrativeDoc(`${report.id}-text`, "Diagnostic report", [str(report.code), str(report.conclusion || report.impression)].filter(Boolean).join(": ") || "Diagnostic report", [firstIso(report.reportedAt, report.meta && report.meta.recordedAt)])] });
     }
   } else if (kind === "IMM" && p.immunizations.length) {
     rec = bundle({ ...base, immunizations: p.immunizations.map((i) => immunization({ id: i.id, status: "completed", occurrenceDateTime: iso(i.occurredOn) || str(i.occurredOn),
       vaccineCode: codeable({ coding: [coding({ system: systemUri(i.vaccineCodeSystem), code: str(i.vaccineCode), display: str(i.vaccine) })], text: str(i.vaccine) }),
       doseNumber: i.doseNumber || undefined, lotNumber: str(i.lotNumber) || undefined })),
-      documents: [narrativeDoc(`${enc.id}-imm`, "Immunization record", p.immunizations.map((i) => `${str(i.vaccine)} ${str(i.occurredOn)}`).join("\n"), generatedAt)] });
+      documents: [narrativeDoc(`${enc.id}-imm`, "Immunization record", p.immunizations.map((i) => `${str(i.vaccine)} ${str(i.occurredOn)}`).join("\n"), p.immunizations.map((i) => iso(i.occurredOn)))] });
   } else if (kind === "INV") {
     let inv = null;
     for (const x of p.invoices) if ((await sha10(x.id)) === parsed.hash) inv = x;
@@ -233,13 +250,13 @@ async function projectStayRecord(s, parsed, { tenantId, now }) {
         lineItems: inv.lines.map((l, i) => ({ sequence: i + 1, chargeItem: codeable({ coding: [coding({ system: NDHM_BILLING, code: "02", display: "IPD" })], text: str(l.display || l.code) || "charge" }),
           priceComponents: [{ type: "base", code: codeable({ coding: [coding({ system: NDHM_PRICE, code: "01", display: "Rate" })], text: "Rate" }), amount: money(l.amount), factor: Math.max(1, Number(l.quantity) || 1) }] })),
         totalNet: money(total), totalGross: money(total), encounter: { type: "Encounter", id: enc.id } })],
-        documents: [narrativeDoc(`${inv.id}-text`, "Invoice Record", `Invoice ${inv.id}, total ${cur} ${total.toFixed(2)}`, generatedAt)] });
+        documents: [narrativeDoc(`${inv.id}-text`, "Invoice Record", `Invoice ${inv.id}, total ${cur} ${total.toFixed(2)}`, [iso(((inv.events || [])[0] || {}).at)])] });
     }
   } else if (kind === "OPC" && enc.class === "ED") {
     rec = bundle({ ...base, conditions: p.visitConditions.map((c) => condition({ id: c.id, code: codeable({ coding: systemUri(c.codeSystem) && str(c.code) ? [coding({ system: systemUri(c.codeSystem), code: str(c.code), display: str(c.display || c.code) })] : [], text: str(c.display || c.code) }), clinicalStatus: c.clinicalStatus })),
       allergies: s.allergies.map((a) => allergyIntolerance({ id: a.id, code: codeable({ text: str(a.substance) }), criticality: a.criticality })),
       medications: p.orders.map(projectOrder), observations: s.observations.filter((o) => o.encounterId === enc.id).map(projectObservation),
-      documents: [narrativeDoc(`${enc.id}-opc`, "Clinical consultation report", p.visitNotes.map((n) => Object.values(n.sections || {}).map(str).filter(Boolean).join(" ")).filter(Boolean).join("\n") || "Emergency visit", generatedAt)] });
+      documents: [narrativeDoc(`${enc.id}-opc`, "Clinical consultation report", p.visitNotes.map((n) => Object.values(n.sections || {}).map(str).filter(Boolean).join(" ")).filter(Boolean).join("\n") || "Emergency visit", p.visitNotes.map((n) => firstIso(n.signedAt, n.meta && n.meta.effectiveAt, n.meta && n.meta.recordedAt)))] });
   }
   if (!rec) return null;
   rec.profile = KINDS[kind].profile;

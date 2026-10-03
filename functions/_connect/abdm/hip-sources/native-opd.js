@@ -128,16 +128,19 @@ export function projectTimeline(tl, { tenantId, now } = {}) {
 
   // Consultation narrative: notes + assessments, in order, as an unstructured document. ABDM explicitly
   // permits starting with attachment-style bundles before structured coded data.
-  const narrative = entries
-    .filter((e) => KIND_TO_HITYPE[e.kind] === "OPConsultation" && e.text)
-    .map((e) => new Date(e.ts).toISOString() + " - " + e.text)
-    .join("\n");
+  const noteEntries = entries.filter((e) => KIND_TO_HITYPE[e.kind] === "OPConsultation" && e.text);
+  const narrative = noteEntries.map((e) => new Date(e.ts).toISOString() + " - " + e.text).join("\n");
+  // The narrative states every note's time, so it is dated by the latest of them and lists them all (coversDates):
+  // the consent date filter drops it when ANY note is outside the window. An undated note leaves it undated.
+  const noteDates = noteEntries.map((e) => iso(e.ts));
 
   const documents = narrative ? [documentReference({
     id: ref + "-consult",
     type: codeable({ coding: [coding({ system: "http://snomed.info/sct", code: "371530004", display: "Clinical consultation report", kind: "standard" })], text: "Consultation" }),
-    category: "OPConsultRecord", status: "current", date: generatedAt, text: narrative,
+    category: "OPConsultRecord", status: "current", text: narrative,
+    date: noteDates.every(Boolean) ? noteDates.reduce((a, b) => (a > b ? a : b)) : null,
   })] : [];
+  if (documents.length) documents[0].coversDates = noteDates;
 
   const record = bundle({
     tenantId, sourceConnector: "native-opd", generatedAt,

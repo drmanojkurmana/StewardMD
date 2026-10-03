@@ -46,24 +46,24 @@ function ccKey(c) {
 }
 // OPS-02/F2 round 2: EVERY dated resource in the bundle, checked and filtered individually - not
 // just the first one found (a care-context whose FIRST item was in range could still carry
-// out-of-range items after it). One entry per array below: [field name, that resource's own date].
+// out-of-range items after it). One entry per array below: [field name, that resource's own date(s)].
+// An item is kept only when it has at least one date and EVERY date it states is inside the window.
 //
-// `documents` and `medications` are deliberately NOT in this list, for the SAME reason: neither of
-// this codebase's two record-building sources (abdm-hip.js#projectStayRecord for WardSynQ,
-// hip-sources/followcare.js for FollowCare) puts a reliable CLINICAL date on either one.
-// documentReference.date is narrativeDoc()'s `generatedAt` - the EXPORT instant, not a clinical fact
-// - and neither source sets a medicationStatement's `effectivePeriod` (the canonical model's own
-// date field) or `authoredOn` consistently (WardSynQ bolts on `authoredOn`; FollowCare sets neither).
-// Filtering by either would drop a record's own narrative/medications based on an absent or
-// meaningless field, not the encounter/report/immunization the record actually describes - so both
-// simply ride along with whatever the record's OTHER dated resources decide. The record's in-scope
-// window is decided by encounters/diagnosticReports/observations/immunizations, which every real
-// source populates with a genuine clinical date.
+// `documents` and `medications` are dated too. Their dates are the CLINICAL ones the record builders set
+// (abdm-hip.js for WardSynQ, hip-sources/*.js, the connector normalizers), never the export instant:
+//   document    date = the document's own authored/signed/issued time; `coversDates` (optional) lists the
+//               dates a MULTI-ITEM narrative states in its text (a prescription or immunisation listing),
+//               because the narrative cannot be cut down to the in-range items: if any of them is outside
+//               the window the whole narrative is dropped rather than served with the out-of-range lines.
+//   medication  authoredOn (the order/prescription date), else effectivePeriod.start/end (the SCCM date).
+// An undated document or medication is dropped (fail closed), the same rule as every other kind.
 const DATED_ARRAYS = Object.freeze([
-  ["encounters", (e) => (e && e.period && (e.period.end || e.period.start)) || null],
-  ["diagnosticReports", (d) => (d && d.effectiveDateTime) || null],
-  ["observations", (o) => (o && o.effectiveDateTime) || null],
-  ["immunizations", (i) => (i && i.occurrenceDateTime) || null],
+  ["encounters", (e) => [(e && e.period && (e.period.end || e.period.start)) || null]],
+  ["diagnosticReports", (d) => [(d && d.effectiveDateTime) || null]],
+  ["observations", (o) => [(o && o.effectiveDateTime) || null]],
+  ["immunizations", (i) => [(i && i.occurrenceDateTime) || null]],
+  ["medications", (m) => [(m && (m.authoredOn || (m.effectivePeriod && (m.effectivePeriod.start || m.effectivePeriod.end)))) || null]],
+  ["documents", (d) => [(d && d.date) || null, ...((d && Array.isArray(d.coversDates)) ? d.coversDates : [])]],
 ]);
 
 /**
@@ -77,15 +77,13 @@ const DATED_ARRAYS = Object.freeze([
 export function filterRecordByDateRange(record, from, to) {
   const out = { ...(record || {}) };
   let hadDated = false, anyKept = false;
-  for (const [key, dateOf] of DATED_ARRAYS) {
+  for (const [key, datesOf] of DATED_ARRAYS) {
     const arr = Array.isArray(out[key]) ? out[key] : null;
     if (!arr) continue;
     out[key] = arr.filter((item) => {
-      const d = dateOf(item);
-      if (d == null) { hadDated = true; return false; }           // undated item of a dated kind: dropped
-      const ms = Date.parse(d);
       hadDated = true;
-      const ok = !Number.isNaN(ms) && ms >= from && ms <= to;
+      const ds = datesOf(item);
+      const ok = ds.every((d) => { const ms = d == null ? NaN : Date.parse(d); return ms >= from && ms <= to; });   // undated / unparseable: NaN -> false
       if (ok) anyKept = true;
       return ok;
     });

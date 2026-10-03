@@ -44,7 +44,7 @@ import { patientIdForMrn } from "./opd-identity.js";
 import { recordConsent as writePatientConsent } from "./consent.js";
 import { resolveCoding } from "./code-sets.js";
 import { theatreSettings } from "./theatre.js";
-import { ADMISSION_CLASSES, IPD, admitPatient, transferPatient, bedOccupant, checkMasterBed, claimBed, releaseBedClaim } from "./migrate-inpatient.js";
+import { ADMISSION_CLASSES, IPD, admitPatient, transferPatient, bedOccupant, checkMasterBed, claimBed, releaseBedClaim, occupyMasterBed, freeMasterBed } from "./migrate-inpatient.js";
 import { getWardByName, listBeds } from "../_opd_org_store.js";
 
 const CASE_TYPE = "SurgicalCase";
@@ -382,6 +382,7 @@ async function dispositionCase(request, env, ctx) {
     periodStart: now, periodEnd: null, source: { system: "wardsynq-native", sourceId: `pacu-admission:${caseId}` },
   }) : null;
   const pacuBed = pacu && pacu.location.bed;
+  let masterBay = null;
   if (pacuBed) {
     const occupied = { ...base, ok: false, status: 409, error: "bed_occupied", detail: `PACU bed ${pacuBed} is occupied`, caseId, written: 0 };
     try { if (await bedOccupant(svc, pacu.id, pacu.location)) return occupied; }
@@ -394,6 +395,7 @@ async function dispositionCase(request, env, ctx) {
       try { const p = await svc.get("Patient", c.patientId); sex = p && p.sex; } catch {}
       const m = await checkMasterBed(env, ctx.orgId, PACU, pacuBed, sex, false);
       if (!m.ok) return { ...base, ok: false, status: m.status, error: m.error, detail: m.detail, caseId, written: 0 };
+      masterBay = m.masterBed || null;
     }
     try { await claimBed(svc, pacu); }
     catch (e) {
@@ -411,6 +413,8 @@ async function dispositionCase(request, env, ctx) {
   if (pacu) {
     try { await svc.put(pacu, { idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:pacu` : null }); written += 1; pacuEncounterId = pacu.id; }
     catch (e) { await unclaim(); return { ...base, ...writeFailure(e, { written, caseId, actor: resolved.actor.id }) }; }
+    // The bay in the hospital's bed list is occupied the way an admitted bed is (admitPatient); no list, no change.
+    await occupyMasterBed(env, masterBay, resolved.actor.id);
   }
 
   return { ...base, ok: true, written, caseId, disposition: str(ctx.disposition) || "direct-discharge", pacuEncounterId, actor: resolved.actor.id, role: resolved.role };
@@ -484,6 +488,10 @@ async function leaveRecovery(request, env, ctx) {
     const out = await svc.put(closed, { expectedVersion: current.version, idempotencyKey: ctx.idempotencyKey ? `${ctx.idempotencyKey}:pacu-close` : null });
     const loc = current.location || {};
     if (loc.bed) await releaseBedClaim(svc, current);
+    /* The bay goes where a discharged patient's bed goes (migrate-discharge.js): to cleaning when the hospital
+     * inspects vacated beds, which raises the housekeeping task (housekeeping.js), otherwise available. Whatever
+     * the outcome; a hospital with no PACU bed list is untouched. */
+    if (ctx.orgId && loc.bed) await freeMasterBed(env, ctx.orgId, str(loc.ward) || PACU, loc.bed, resolved.actor.id);
     return { ...base, ok: true, written: (moved ? moved.written || 0 : 0) + 1, encounterId, outcome, to: closed.recoveryExit, version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
     if (!moved) return { ...base, ...writeFailure(e, { encounterId, written: 0, actor: resolved.actor.id }) };

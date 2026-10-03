@@ -43,8 +43,12 @@ export function normalizeFhir(ctx, raw) {
       case "Encounter": out.encounters.push(encounter({ id: r.id, status: r.status, class: (r.class && r.class.code) || null,
         period: r.period && (r.period.start || r.period.end) ? { start: r.period.start || null, end: r.period.end || null } : null })); break;
       case "Condition": out.conditions.push(condition({ id: r.id, code: cc(r.code, "condition"), clinicalStatus: firstCoding([r.clinicalStatus]) || "unknown" })); break;
-      case "MedicationStatement": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "statement", status: r.status || "unknown", dosage: r.dosage && r.dosage[0] ? { text: r.dosage[0].text || null } : null })); break;
-      case "MedicationRequest": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "order", status: r.status || "unknown", dosage: r.dosageInstruction && r.dosageInstruction[0] && r.dosageInstruction[0].text ? { text: r.dosageInstruction[0].text } : null })); break;
+      /* A medication's clinical date rides along (SCCM effectivePeriod for a statement, authoredOn for a request) so
+       * the HIP consent date filter can place it; absent in the source = left undated, never defaulted. */
+      case "MedicationStatement": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "statement", status: r.status || "unknown", dosage: r.dosage && r.dosage[0] ? { text: r.dosage[0].text || null } : null,
+        effectivePeriod: r.effectivePeriod && (r.effectivePeriod.start || r.effectivePeriod.end) ? { start: r.effectivePeriod.start || null, end: r.effectivePeriod.end || null } : (r.effectiveDateTime ? { start: r.effectiveDateTime } : null) })); break;
+      case "MedicationRequest": out.medications.push(medicationStatement({ id: r.id, medication: cc(r.medicationCodeableConcept, "medication"), origin: "order", status: r.status || "unknown", dosage: r.dosageInstruction && r.dosageInstruction[0] && r.dosageInstruction[0].text ? { text: r.dosageInstruction[0].text } : null,
+        effectivePeriod: r.authoredOn ? { start: r.authoredOn } : null })); break;
       case "AllergyIntolerance": out.allergies.push(allergyIntolerance({ id: r.id, code: cc(r.code, "allergen"), criticality: r.criticality || "unable-to-assess" })); break;
       case "Observation": {
         const oc = obsCategory(r); if (oc.warn) out.meta.warnings.push(oc.warn);

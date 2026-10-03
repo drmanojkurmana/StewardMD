@@ -662,6 +662,7 @@ const CAP_SAY = {
   "him.roi": "release records to a third party", "incident.report": "file an incident report",
   "incident.investigate": "investigate incidents", "dpdp.manage": "manage privacy notices, data requests and breaches",
   "infection.control": "confirm infections and review surgical prophylaxis", "quality.audit": "keep quality audits, drills and registers",
+  "formulary.manage": "change the formulary",
 };
 function azRefusal(az) {
   const reason = (az && az.reason) || "forbidden";
@@ -6458,14 +6459,12 @@ export async function onRequest(context) {
     /* R3-2: the hospital's formulary (formulary-settings.js), on Admin > Hospital. The editor (POST /org/formulary, the whole
      * list) and the CSV load (POST /org/formulary-import) both dry run first, row by row; a commit writes only the dry run's
      * result (confirmCount, planId), refuses the whole save on any problem, needs a reason, and its audit row names the
-     * entries. staff.admin AND order.verify: no formulary capability exists, and this pair is admin (and the owner) without
-     * hr, which holds staff.admin and has no business with what the pharmacy stocks and restricts. /org/update refuses the key. */
+     * entries. formulary.manage (O19): the pharmacy and admin hold it; hr, which holds staff.admin, does not. /org/update refuses the key. */
     if (seg === "org" && (sub === "formulary" || sub === "formulary-import")) {
       const cb = method === "POST" ? await readBody(request) : {};
       const orgId = url.searchParams.get("orgId") || cb.orgId || "";
-      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
+      const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.FORMULARY_MANAGE);
       if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
-      if (capsFor(az.role).indexOf(CAPS.ORDER_VERIFY) < 0) return json({ ok: false, error: "forbidden", role: az.role, message: 'Your role here is "' + az.role + '", which cannot change the formulary. It needs both staff administration and pharmacy verification (the admin role).' }, 403, request);
       const o = await ORG.getOrg(env, orgId);
       if (!o || o.mode !== "wardsynq") return json({ ok: false, error: "not_a_wardsynq_hospital", message: "The formulary belongs to a WardSynQ hospital." }, 409, request);
       const w = o.wardsynq || {};

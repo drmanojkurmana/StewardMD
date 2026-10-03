@@ -727,6 +727,8 @@
      * antibiogram, the quality team's audits and drills, and the ward's ADR reports, emergency medicine stock-outs and
      * emergency returns. Each tab is offered to its own capability. */
     if (native) adminTiles.push(tile({ go: "quality", icon: "coronavirus", title: T(null, "site.shell.home.tile.quality.title", "Infection control and quality"), sub: T(null, "site.shell.home.tile.quality.sub", "HAI cases, prophylaxis, antibiogram, audits, drills, ADR reports, stock-outs"), need: ["infection.control", "quality.audit", "lab.result", "incident.report", "dept.request", "emr.view"] }));
+    /* O19: the pharmacy keeps the formulary without the Admin Center; for them the admin page is the formulary card alone. */
+    if (native) adminTiles.push(tile({ go: "admin", icon: "medication", title: T(null, "site.shell.home.tile.formulary.title", "Formulary"), sub: T(null, "site.shell.home.tile.formulary.sub", "What the hospital stocks and restricts: add, edit and retire entries"), need: "formulary.manage" }));
     if (native) adminTiles.push(tile({ go: "ward:bedmgmt", icon: "dashboard_customize", title: T(null, "site.shell.home.tile.bedmgmt.title", "Bed management"), sub: T(null, "site.shell.home.tile.bedmgmt.sub", "Bed master: block, release, housekeeping"), need: "staff.admin" }));
     el.innerHTML = head + sec(esc(T(null, "site.shell.home.sec.clinical", "Clinical")), wardTiles) + (cmdTiles.length ? sec(esc(T(null, "site.shell.home.sec.command", "Command and operations")), cmdTiles) : "") + sec(esc(T(null, "site.shell.home.sec.patientsAI", "Patients and AI")), peopleTiles) + sec(esc(T(null, "site.shell.home.sec.admin", "Administration")), adminTiles);
     if (!native) return;

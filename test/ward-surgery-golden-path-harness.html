@@ -44,7 +44,12 @@ window.fetch = function (url, opts) {
     return reply({ ok: true, written: body.outcome === "home" ? 1 : 2, encounterId: body.encounterId, outcome: body.outcome, version: 2 });
   }
   if (u.indexOf("/ward/beds") >= 0) {
-    return reply({ ok: true, bedsConfigured: true, wards: [{ ward: "Surgical Ward", configured: true, bedsKnown: true, free: ["S1", "S2"], occupied: [], unplaced: [] }] });
+    /* The PACU ward as bedBoard (migrate-inpatient.js) sends it: each open recovery stay holds its bay (recovery[]), never free. */
+    var held = RECOVERY.map(function (r) { return r.bed; });
+    return reply({ ok: true, bedsConfigured: true, wards: [
+      { ward: "PACU", configured: true, bedsKnown: true, free: ["Bay 1", "Bay 2", "Bay 4", "Bay 12"].filter(function (b) { return held.indexOf(b) < 0; }), occupied: [], unplaced: [],
+        recovery: RECOVERY.map(function (r) { return { encounterId: r.encounterId, patientId: r.patientId, name: r.name || null, mrn: r.mrn, bed: r.bed, since: r.since }; }) },
+      { ward: "Surgical Ward", configured: true, bedsKnown: true, free: ["S1", "S2"], occupied: [], unplaced: [], recovery: [] }] });
   }
   if (u.indexOf("/ward/surgery-book") >= 0 && (opts && opts.method) === "POST") {
     CASE_ID = "wsq-case-smd-h1-ot01-cholecystectomy"; ENC_ID = "wsq-enc-" + CASE_ID; STAGE = "booked";

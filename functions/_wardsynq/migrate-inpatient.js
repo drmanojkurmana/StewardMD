@@ -1099,6 +1099,7 @@ async function bedBoard(request, env, ctx) {
   }
 
   const allOpen = (encounters || []).filter((e) => e && ADMISSION_CLASSES.includes(e.class) && e.status === OPEN);
+  const inRecovery = (encounters || []).filter((e) => e && e.class === PACU && e.status === OPEN && str(e.location && e.location.bed));
 
   // TASK 4.2: the real Ward/Bed master data from TASK 4.1 wins over the free-text org config the
   // moment a hospital has actually created any - this is what turns the config blob's own
@@ -1149,7 +1150,7 @@ async function bedBoard(request, env, ctx) {
   const byWard = new Map();
   const wardOf = (name) => {
     const key = str(name) || "(no ward recorded)";
-    if (!byWard.has(key)) byWard.set(key, { ward: key, occupied: [], free: [], unplaced: [], configured: false });
+    if (!byWard.has(key)) byWard.set(key, { ward: key, occupied: [], recovery: [], free: [], unplaced: [], configured: false });
     return byWard.get(key);
   };
   // Every configured ward appears even when empty: a ward missing from the board reads as a ward
@@ -1183,6 +1184,19 @@ async function bedBoard(request, env, ctx) {
     };
     if (row.bed) w.occupied.push(row); else w.unplaced.push(row);   // admitted to the ward, no bed yet
   }
+  /* RECOVERY BAYS. An open PACU stay holds its bay (BED_CLASSES), so a ward on this board with one in it
+   * shows that bay taken, never free to admit or transfer into. Kept apart from `occupied` on purpose: a
+   * recovery bay is not an inpatient bed, and every census built on this board (patient flow, nurse
+   * staffing) counts occupied and unplaced only. A PACU stay on a ward this board does not list stays on
+   * the theatre board alone. */
+  for (const e of inRecovery) {
+    const name = wardNameOf(e.location.ward);
+    if (!cfg || !Object.prototype.hasOwnProperty.call(cfg, name)) continue;
+    if (want && name.toLowerCase() !== wardNameOf(ctx.ward).toLowerCase()) continue;
+    const p = nameById.get(e.patientId) || null;
+    const mrn = (p && p.mrn) || ((e.identifiers || []).find((i) => i && i.system === "opd-mrn") || {}).value || null;
+    wardOf(name).recovery.push({ encounterId: e.id, patientId: e.patientId, name: (p && (p.name || p.display)) || null, mrn, bed: e.location.bed, since: e.periodStart || null });
+  }
   for (const w of byWard.values()) {
     w.department = deptOf.get(w.ward) || null;
     const list = cfg && Array.isArray(cfg[w.ward]) ? cfg[w.ward].map(String) : null;
@@ -1193,7 +1207,7 @@ async function bedBoard(request, env, ctx) {
     if (!list) { w.free = []; w.bedsKnown = false; if (bedsUnread) w.bedsUnread = true; continue; }
     w.bedsKnown = true;
     if (!list.length) w.noBeds = true;
-    const taken = new Set(w.occupied.map((o) => String(o.bed).toLowerCase()));
+    const taken = new Set([...w.occupied, ...w.recovery].map((o) => String(o.bed).toLowerCase()));
     // A bed with no patient in it is not automatically free: the master record may say blocked,
     // cleaning or maintenance, and that is the hospital's own call, not this board's to overrule.
     w.free = list.filter((b) => {
@@ -1204,8 +1218,8 @@ async function bedBoard(request, env, ctx) {
     });
     // A patient in a bed the configuration does not list is REPORTED, not hidden: it is either a
     // stale bed list or somebody in a bed that should not exist, and both need a human.
-    w.unlisted = w.occupied.filter((o) => !list.some((b) => String(b).toLowerCase() === String(o.bed).toLowerCase())).map((o) => o.bed);
-    w.occupied.sort((a, b) => list.indexOf(String(a.bed)) - list.indexOf(String(b.bed)));
+    w.unlisted = [...w.occupied, ...w.recovery].filter((o) => !list.some((b) => String(b).toLowerCase() === String(o.bed).toLowerCase())).map((o) => o.bed);
+    for (const rows of [w.occupied, w.recovery]) rows.sort((a, b) => list.indexOf(String(a.bed)) - list.indexOf(String(b.bed)));
   }
   const wards = [...byWard.values()].sort((a, b) => a.ward.localeCompare(b.ward));
   return {
@@ -1584,7 +1598,7 @@ export {
   recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
   BED_CLASSES, claimBed, releaseBedClaim, bedMove, bedOccupant,   // the one bed claim: migrate-surgery.js (PACU), fhir-inbound.js (FHIR/HL7 ADT)
-  freeMasterBed,   // TASK 4.2: discharge reuses this to release the vacated bed - see migrate-discharge.js
+  freeMasterBed, occupyMasterBed,   // TASK 4.2: discharge and recovery (migrate-discharge.js, migrate-surgery.js) set the bed's master state through these
   EMERGENCY_BED_RELAXATION, ADMIN_RELAXABLE_STATES, checkMasterBed,
   timelineFromChart, patientTimeline,
 };
