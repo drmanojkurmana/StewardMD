@@ -198,11 +198,17 @@ def detect_lead_regions(processed_png: bytes, rows: int = 3, cols: int = 4, rhyt
     grid_h = int(H * (0.75 if rhythm_strip else 1.0))
     ch, cw = grid_h // rows, W // cols
     regions: list[dict] = []
+
+    grid_ink = ink[:rows * ch, :cols * cw]
+    if grid_ink.size > 0:
+        cell_means = grid_ink.reshape(rows, ch, cols, cw).mean(axis=(1, 3))
+    else:
+        cell_means = np.zeros((rows, cols))
+
     for r in range(rows):
         for c in range(cols):
             x, y = c * cw, r * ch
-            cell = ink[y:y + ch, x:x + cw]
-            frac = float(cell.mean()) if cell.size else 0.0
+            frac = float(cell_means[r, c])
             lead = labels[r][c] if r < len(labels) and c < len(labels[r]) else f"r{r}c{c}"
             regions.append({"lead": lead, "x": x, "y": y, "w": cw, "h": ch, "inkFrac": round(frac, 4)})
     if rhythm_strip:
