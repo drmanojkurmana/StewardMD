@@ -46,7 +46,7 @@
       ["doctor", T(c, "site.admin.staff.roleNote.doctor", "Full clinical workflow: queue, EMR, orders, prescriptions, own patients.")],
       ["nurse", T(c, "site.admin.staff.roleNote.nurse", "Runs the queue at the desk, records vitals, gives medicines at the bedside (eMAR). No prescribing.")],
       ["reception", T(c, "site.admin.staff.roleNote.reception", "Registers and checks in patients, assigns to a doctor. Reads the chart, cannot edit it.")],
-      ["pharmacy", T(c, "site.admin.staff.roleNote.pharmacy", "Reads and dispenses medication orders, verifies an order against the chart. No consultation notes.")],
+      ["pharmacy", T(c, "site.admin.staff.roleNote.pharmacyFml", "Reads and dispenses medication orders, verifies an order against the chart, and keeps the hospital formulary (formulary.manage). No consultation notes, no other administration.")],
       ["lab", T(c, "site.admin.staff.roleNote.lab", "Sees ordered tests and releases results. No other chart access.")],
       ["billing", T(c, "site.admin.staff.roleNote.billing", "Reads charges, invoices and claims. Cannot take payment (see Cashier for that).")],
       ["him", T(c, "site.admin.staff.roleNote.him", "Reads the chart to decide and record release-of-information requests.")],
@@ -88,6 +88,14 @@
 
   WSQ.page("admin", { render: function (c) {
     var el = c.el, st = c.state;
+    /* O19: a pharmacist (formulary.manage without staff.admin) keeps the formulary and nothing else here, so the page is
+     * that one card: no tabs, no hospital settings, no staff. The server gates every formulary route on formulary.manage. */
+    if (!c.can("staff.admin") && c.can("formulary.manage") && c.isWardsynq()) {
+      el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.fml.title", "Formulary")) + '</h1><span class="sub">' + c.esc((st.org && st.org.name) || "") + "</span></div>" +
+        '<p class="quiet">' + c.esc(T(c, "site.admin.fml.pharmacyOnly", "Your role keeps the hospital formulary. The rest of the Admin Center needs staff administration.")) + '</p><div id="fmlCard"></div>';
+      wireFormulary(c);
+      return;
+    }
     if (!c.can("staff.admin")) {
       el.innerHTML = '<div class="title"><h1>' + c.esc(T(c, "site.admin.title", "Admin Center")) + '</h1></div>' +
         '<div class="msg note">' + c.esc(T(c, "site.admin.noAccess", "Your role does not include staff.admin, so the Admin Center is not available to you.")) + '</div>';
@@ -471,7 +479,7 @@
   function formularyHtml(c, s) {
     var esc = c.esc, r = s.r;
     var h = '<div class="card"><h2>' + esc(T(c, "site.admin.fml.title", "Formulary")) + "</h2>";
-    if (!c.can("order.verify")) return h + '<div class="msg note">' + esc(T(c, "site.admin.fml.noAccess", "Changing the formulary needs both staff administration and pharmacy verification. Your role does not include both.")) + "</div></div>";
+    if (!c.can("formulary.manage")) return h + '<div class="msg note">' + esc(T(c, "site.admin.fml.noAccessCap", "Changing the formulary needs the formulary capability (formulary.manage), which the pharmacy and admin roles hold. Your role does not include it.")) + "</div></div>";
     if (r === undefined) return h + '<p><span class="spin"></span> ' + esc(T(c, "site.admin.fml.loading", "Loading the formulary...")) + "</p></div>";
     if (r === null) return h + '<div class="msg err">' + esc(T(c, "site.admin.fml.loadFailed", "The formulary could not be loaded. Do not read this as no formulary configured.")) + "</div></div>";
     h += '<p class="quiet">' + esc(T(c, "site.admin.fml.intro", "What this hospital stocks and what it restricts. A drug not on the list is flagged on the order, never blocked; a restricted one is blocked until its approval or specialty is given. Retired entries stay listed and match no order. Nothing ships with WardSynQ: the list is this hospital's own.")) + "</p>";
@@ -596,7 +604,7 @@
       }
     };
     draw();
-    if (c.can("order.verify")) load();
+    if (c.can("formulary.manage")) load();
   }
 
   // ---- Critical limits, delta limits, autoverification, MAR times, note templates (R4-4) --------------------------------------
