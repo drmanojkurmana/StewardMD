@@ -62,7 +62,8 @@ echo "== preflight 4/4: unit tests =="
 if [ "${RUN_TESTS:-1}" = "0" ]; then
   echo "  skipped (RUN_TESTS=0)"
 elif command -v node >/dev/null 2>&1; then
-  if node --test test/*.test.mjs >/tmp/smd-preflight-tests.log 2>&1; then
+  # Flagged form, as CI and npm test: bare `node --test` fails every file that calls mock.module().
+  if node --test --experimental-test-module-mocks --experimental-sqlite test/*.test.mjs >/tmp/smd-preflight-tests.log 2>&1; then
     echo "  ok: unit tests pass"
   else
     echo "  FAIL: unit tests failed (tail below)"; tail -15 /tmp/smd-preflight-tests.log
