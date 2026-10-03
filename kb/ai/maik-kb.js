@@ -607,6 +607,7 @@
     isKnownConcept: isKnownConcept,
     _matchTrusted: matchTrusted,
     _diseasePhrase: diseasePhrase,
+    _alias: MAIK_ALIAS,
     _doseSafetyNote: doseSafetyNote,
     _version: "v2.0"
   };

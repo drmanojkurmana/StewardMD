@@ -41,6 +41,8 @@
   function content(s) { return lower(s).replace(/[^a-z0-9.\s-]/g, " ").split(/\s+/).filter(function (w) { return w.length >= 2 && !STOP[w]; }); }
   // Navigation words in any of the three languages: never a search term on their own.
   var NAV = { search: 1, where: 1, khol: 1, kholo: 1, dikhao: 1, teruvu: 1, chupinchu: 1, cheyyi: 1, screen: 1, page: 1, lookup: 1, codes: 1, code: 1 };
+  // The navigation words that ask for a page (English, Hinglish, Tenglish); a KB option is exact only with one.
+  var KB_NAV_RE = /\b(open|show|page|screen|khol|kholo|dikhao|teruvu|chupinchu)\b/;
   var GENERIC = { calculator: 1, calc: 1, score: 1, scores: 1, index: 1, criteria: 1, tool: 1 };
   function norm(s) { return lower(s).replace(/[^a-z0-9]+/g, " ").trim(); }
   // "don't open the ICU", "stop metformin": never act on a negated or stop request.
@@ -146,8 +148,18 @@
     try {
       var KB = G.MaiKKB, R = G.SMD_REASON;
       var t = KB && KB.resolveTarget ? KB.resolveTarget(lower(bare), { question: lower(bare), grounding: [], topicMatch: { matched: false } }) : null;
+      // A clear request for a disease page ("open pneumonia page", "sepsis kholo", "tb chupinchu") is exact:
+      // a navigation word, and the words left are the disease's own name or a listed alias, resolved
+      // confidently. Anything more ("open pneumonia antibiotics") goes to the model.
+      var rest = pw.filter(function (w) { return !NAV[w]; }).join(" "), kbEx = false;
+      if (rest && KB && KB.resolveTarget && KB_NAV_RE.test(norm(q))) {
+        var t2 = KB.resolveTarget(rest, { question: rest, grounding: [], topicMatch: { matched: false } });
+        var own = !!(t2 && t2.match === "exact" && KB._diseasePhrase && KB._diseasePhrase(rest) === rest);
+        var alias = !!(t2 && KB._alias && Object.prototype.hasOwnProperty.call(KB._alias, rest) && norm(KB._alias[rest]) === norm(t2.name));
+        if (t2 && t2.confident && (own || alias)) { t = t2; kbEx = true; }
+      }
       // Fails closed: no reference module to confirm the page, no KB option.
-      if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id });
+      if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id, exact: kbEx });
     } catch (e) {}
     (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title, exact: x.kind === "tool" && x.it.id === exactTool }); });
     // One name, two things ("insulin" is a drug AND a tool): nothing is exact, the model or doctor picks.
