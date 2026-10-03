@@ -11071,3 +11071,20 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   identifiers (one `phi()` helper per module), and screens that are not wrapped must say so; that is what
   `[data-phi-unmasked]` and the amber label are for. Text that cannot carry markup (toasts, `confirm()`) uses
   `screenText()`, which masks only at the moment it is shown. [[plans/Premium-Feel]] B2
+
+## 2026-10-03 - Opt-out floor re-baseline after Round 76: `smd_gate_v2=0`
+- **What:** `kb/validation/dx-floors.json["smd_gate_v2=0"]` rewritten with `--write-floors` (that config only). One floor
+  loosens, `heldout3.txt.abxSens` 126 -> 125; twenty tighten (overcall and viral/self-limited antibiotic calls fall on every
+  set, e.g. `heldout3.cur.overcall` 82 -> 66, `heldout3.txt.overcall` 77 -> 63, `heldout4.txt.overcall` 42 -> 35). No
+  default-config floor changed. The `replay` workflow (`dx-accuracy.yml`) had been red on main since #1312 (2026-09-28)
+  because CI stops at this step.
+- **Evidence (per-case diff, Rounds 73-75 `61b5f6a2a` vs now, same config):** the one lost needed call is heldout3
+  `h3_2_036` (sealed, counted only, not inspected; gold antibiotics yes, ASP "CONDITIONAL", gold diagnosis 2nd in the
+  engine's list). Before Round 76 the classic gate gave antibiotics to every likely infection; now its common-cold lead
+  with no rival needing antibiotics at 42+ within 30 points reads "infection likely, antibiotics not indicated". **The
+  default config (`smd_gate_v2` on, what every user gets) makes the same call on this case** (`infection_no_abx`, no
+  antibiotics, before and after Round 76), and its floors already include that miss. The old 126 encoded the classic
+  gate's blanket antibiotics, not a better decision.
+- **Why not an engine fix:** a rival scoring 41 is below the 42 "possible infection" bar both gates use; moving that bar
+  or the sinusitis score for this item would be tuning on a sealed case. **Trade-off:** the kill-switch config keeps
+  Round 76's large overcall drop and accepts one sealed miss the shipped config also has.
