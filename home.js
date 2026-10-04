@@ -6149,6 +6149,13 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 @media (prefers-reduced-motion:reduce){.maik-kbmore{animation:none;box-shadow:0 0 0 3px rgba(14,110,99,.16)}}
 body.dark .maik-kbmore,body.v3-dark .maik-kbmore{background:rgba(14,110,99,.16)}
 .maik-kbgroup{flex-direction:column;align-items:stretch}
+.maik-edge-fix{margin-top:6px;font:500 12.5px/1.35 var(--sans,system-ui);color:var(--mk-mut)}
+.maik-scheme-list{margin-top:8px}
+.maik-scheme-h{margin-top:10px;font:700 12.5px/1.3 var(--sans,system-ui);color:var(--mk-ink,inherit)}
+.maik-scheme{margin:4px 0 0;padding-left:18px}
+.maik-scheme li{margin:4px 0;line-height:1.4;font-variant-numeric:tabular-nums}
+.maik-scheme-rate,.maik-scheme-src{color:var(--mk-mut);white-space:nowrap}
+.maik-scheme-none{margin-top:4px;color:var(--mk-mut)}
 .maik-kbgroup .maik-kbmore{display:flex;width:100%;min-height:44px;margin:6px 0 0;animation:none;box-shadow:none}
 .maik-kbgroup-more>summary{min-height:44px;display:flex;align-items:center;padding:0 4px;font:600 13px/1 var(--sans,system-ui);color:var(--mk-teal,#0e6e63);cursor:pointer;list-style:none}
 .maik-kbgroup-more>summary::-webkit-details-marker{display:none}
@@ -7240,18 +7247,35 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       return null;
     }
     window.SMD_MAIK_TOOL_OPENABLE = function (id) { return !!maikToolOpener(id); };
+    /* "Open antibiogram" opens Antibiogram (owner, 2026-10-04: it answered "Antibiogram is in StewardMD.").
+     * An explicit open verb and ONE exact rules match (Layer 0, not a model pick): the card's own open
+     * button is pressed, so the opening path is the chip's, and the bubble keeps a short "Opened X" line
+     * with that button as the way back. Several matches or no open verb: the card stays as it was. */
+    function maikEdgeAutoOpen(holder, er, question, sel) {
+      try {
+        if (!holder || er.source !== "rules" || !(window.SMD_EDGE && SMD_EDGE.openVerb && SMD_EDGE.openVerb(question))) return;
+        var btn = holder.querySelector(sel); if (!btn) return;
+        var w = holder.querySelector(".maik-welcome"); if (w) w.innerHTML = 'Opened <b>' + maikEscH(er.title) + '</b>. Tap below to open it again.';
+        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+        btn.click();
+      } catch (e) {}
+    }
+    // "Showing results for dental abscess": a misspelt disease word was searched corrected.
+    function maikFixedLine(term) { return '<div class="maik-tools-lbl maik-edge-fix">Showing results for <b>' + maikEscH(term) + '</b></div>'; }
     function maikEdgeRender(er, question) {
       if (!er) return false;
       if (er.kind === "calculator") {
         var def = (window.MEDCALC && MEDCALC.get) ? MEDCALC.get(er.id) : null;
         if (!def) return false;
-        bubble("ai", maikCalcHTML(def, question)); try { scroll(); } catch (e) {} return true;
+        var _ch = bubble("ai", maikCalcHTML(def, question)); try { scroll(); } catch (e) {}
+        maikEdgeAutoOpen(_ch, er, question, ".maik-tool[data-maik-calc]"); return true;
       }
       if (er.kind === "tool") {
         if (!maikToolOpener(er.id)) return false;
-        bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in StewardMD.</div>' +
+        var _th = bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in StewardMD.</div>' +
           '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="' + maikEscH(er.id) + '">' + maikEscH("Open " + er.title) + '</button>' + maikEdgeAskChip(question) + '</div>');
-        try { scroll(); } catch (e) {} return true;
+        try { scroll(); } catch (e) {}
+        maikEdgeAutoOpen(_th, er, question, "[data-maik-tool]"); return true;
       }
       if (er.kind === "kb" && er.pages) return maikEdgeGroupRender(er, question);
       if (er.kind === "kb") {
@@ -7259,9 +7283,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // promise, and the normal path answers instead (return false).
         var _kbOk = !(window.SMD_REASON && SMD_REASON.hasDiseaseRef) ? false : !!SMD_REASON.hasDiseaseRef(er.id);
         if (_kbOk) {
-          bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in the StewardMD Knowledge Base.</div>' +
+          var _kh = bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in the StewardMD Knowledge Base.</div>' + (er.corrected ? maikFixedLine(er.corrected) : '') +
             '<div class="maik-tools"><button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(er.id) + '"><span>Read more in StewardMD KB<span class="maik-kbmore-sub">' + maikEscH(er.title) + '</span></span><span class="maik-kbmore-go" aria-hidden="true">→</span></button>' + maikEdgeAskChip(question) + '</div>');
-          try { scroll(); } catch (e) {} return true;
+          try { scroll(); } catch (e) {}
+          if (!er.corrected) maikEdgeAutoOpen(_kh, er, question, "[data-kb-more]");
+          return true;
         }
         return false;
       }
@@ -7269,16 +7295,48 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (er.kind === "icd") {
         if (!(window.SMD_ICD && SMD_ICD.localSearch)) return false;
         var holder = bubble("ai", '<div class="maik-welcome maik-edge">ICD-10 codes for <b>' + maikEscH(er.id) + '</b>…</div>');
-        SMD_ICD.localSearch(er.id, 5).then(function (rows) {
-          var el = holder && holder.querySelector ? holder.querySelector(".maik-edge") : null;
+        var _fix = (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.fixTerm) ? SMD_MAIK_ENGINE.fixTerm(er.id) : Promise.resolve({ term: er.id, from: null });
+        _fix.then(function (ft) { return SMD_ICD.localSearch(ft.term, 5).then(function (rows) { return { rows: rows, ft: ft }; }); }).then(function (res) {
+          var rows = res.rows, ft = res.ft;
           var list = (rows || []).map(function (r) { return '<button class="maik-fu" data-maik-icd="' + maikEscH(r.id) + '">' + maikEscH(r.code + "  " + r.title) + '</button>'; }).join("");
-          var html = '<div class="maik-welcome maik-edge">ICD-10 codes for <b>' + maikEscH(er.id) + '</b> (pick the one that fits):</div><div class="maik-tools">' + (list || '<span class="maik-tools-lbl">No match in the offline ICD-10 index.</span>') + maikEdgeAskChip(question) + '</div>';
+          var html = '<div class="maik-welcome maik-edge">ICD-10 codes for <b>' + maikEscH(ft.term) + '</b> (pick the one that fits):</div>' + (ft.from ? maikFixedLine(ft.term) : '') + '<div class="maik-tools">' + (list || '<span class="maik-tools-lbl">No match in the offline ICD-10 index.</span>') + maikEdgeAskChip(question) + '</div>';
           if (holder && holder.innerHTML != null) holder.innerHTML = html;
           try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); scroll(); } catch (e) {}
         }, function () {});
         return true;
       }
+      if (er.kind === "scheme" && er.scheme) return maikEdgeSchemeRender(er, question);
       return false;
+    }
+    /* Scheme packages (Aarogyasri, PM-JAY ...): codes, names and rates from the govschemes database only,
+     * one labelled group per scheme asked for. No row: an honest "no package" line, never an ICD list or a
+     * model guess. Offline: says the lookup needs the network. */
+    function maikEdgeSchemeRender(er, question) {
+      var E = window.SMD_MAIK_ENGINE; if (!(E && E.schemeLookup)) return false;
+      var sa = er.scheme, label = sa.label || "Scheme";
+      var holder = bubble("ai", '<div class="maik-welcome maik-edge">' + maikEscH(label) + ' packages for <b>' + maikEscH(sa.term) + '</b>…</div>');
+      var tail = '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="govschemes">Open Scheme Search</button>' + maikEdgeAskChip(question) + '</div>';
+      E.schemeLookup(sa).then(function (res) {
+        var html;
+        if (!res) html = '<div class="maik-welcome maik-edge">' + maikEscH(label) + ' package codes are looked up in the StewardMD scheme database, which needs the network.</div>';
+        else {
+          var any = res.groups.some(function (g) { return g.rows.length; });
+          var groups = res.groups.map(function (g) {
+            var head = g.name ? '<div class="maik-scheme-h">' + maikEscH(g.name) + '</div>' : '';
+            if (!g.rows.length) return head + '<div class="maik-scheme-none">No package for ' + maikEscH(res.term) + ' in this scheme.</div>';
+            return head + '<ul class="maik-scheme">' + g.rows.slice(0, 6).map(function (p) {
+              var where = g.name ? "" : ' <span class="maik-scheme-src">' + maikEscH((p.scheme || "") + (p.state ? ", " + p.state : "")) + '</span>';
+              return '<li><b>' + maikEscH(p.treatment_code || "") + '</b> ' + maikEscH(p.treatment_name || "") + ' <span class="maik-scheme-rate">' + maikEscH(E.schemePrice(p)) + '</span>' + where + '</li>';
+            }).join("") + '</ul>';
+          }).join("");
+          html = '<div class="maik-welcome maik-edge">' + (any ? maikEscH(label) + ' packages for <b>' + maikEscH(res.term) + '</b>' + (sa.targets.length ? '' : ' (no scheme named)') + ':'
+            : 'No ' + maikEscH(label) + ' package for <b>' + maikEscH(res.term) + '</b> in the StewardMD scheme database.') + '</div>' +
+            (res.from ? maikFixedLine(res.term) : '') + (any ? '<div class="maik-scheme-list">' + groups + '</div>' : '');
+        }
+        if (holder && holder.innerHTML != null) holder.innerHTML = html + tail;
+        try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); scroll(); } catch (e) {}
+      }, function () {});
+      return true;
     }
     // An umbrella term ("pneumonia"): one card listing its Knowledge pages, each one tap. The first six
     // show; the rest fold under a native disclosure. Same page check as the single card.
@@ -7286,7 +7344,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var _pg = er.pages.filter(function (p) { return window.SMD_REASON && SMD_REASON.hasDiseaseRef && SMD_REASON.hasDiseaseRef(p.id); });
       if (_pg.length < 2) return false;
       var _pgBtn = function (p) { return '<button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(p.id) + '" aria-label="' + maikEscH("Open " + p.name + " in the Knowledge Library") + '"><span>' + maikEscH(p.name) + '</span><span class="maik-kbmore-go" aria-hidden="true">→</span></button>'; };
-      bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> has ' + _pg.length + ' pages in the StewardMD Knowledge Base. Pick one.</div>' +
+      bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> has ' + _pg.length + ' pages in the StewardMD Knowledge Base. Pick one.</div>' + (er.corrected ? maikFixedLine(er.corrected) : '') +
         '<div class="maik-tools maik-kbgroup">' + _pg.slice(0, 6).map(_pgBtn).join("") +
         (_pg.length > 6 ? '<details class="maik-kbgroup-more"><summary>' + (_pg.length - 6) + ' more</summary>' + _pg.slice(6).map(_pgBtn).join("") + '</details>' : '') +
         maikEdgeAskChip(question) + '</div>');

@@ -728,7 +728,36 @@ ok("warmIfLocal still exists for the chosen engine", /function warmIfLocal/.test
   sch.win.SMD_ICD = ICD;
   sch.win.fetch = async (u) => ({ ok: true, json: async () => (/schemes\/search/.test(u) ? { results: [{ treatment_code: "M1.9", treatment_name: "Poisonings with unstable vitals", package_amount: 35000, scheme_name: "Dr NTR Vaidya Seva", state: "AP" }] } : { results: [] }) });
   const sr = await sch.win.SMD_AI.explainGrounded({ question: "aarogyasri package code for poisoning" }, {});
-  ok("a scheme ask lists the package code, name and rate from the scheme database", sr && sr.engine === "codedb" && /M1\.9/.test(sr.text) && /35000/.test(sr.text));
+  ok("a scheme ask lists the package code, name and rate from the scheme database", sr && sr.engine === "codedb" && /M1\.9/.test(sr.text) && /Rs 35,000/.test(sr.text));
+
+  // 4 Oct 2026: "What is the arogyasri code for pancreatitis" listed Nagaland and Himachal at "Rs 0".
+  // With the Edge vocabulary loaded, a named scheme searches only its own states, labelled, and a
+  // zero or absurd amount reads "price not listed".
+  const { createRequire } = await import("node:module");
+  const EDGE = createRequire(import.meta.url)("../edge-router.js");
+  const ROWS = [
+    { state_id: "andhra-pradesh", scheme_id: "ap-ntr-vaidya-seva", treatment_code: "M12.10", treatment_name: "Medical management of Acute Pancreatitis -Mild", package_amount: 51310 },
+    { state_id: "telangana", scheme_id: "telangana-aarogyasri", treatment_code: "M12.10", treatment_name: "Medical management of Acute Pancreatitis (Mild)", package_amount: 23003800880010350 },
+    { state_id: "nagaland", scheme_id: "nagaland-cmhis-pmjay", treatment_code: "MG033A", treatment_name: "Acute pancreatitis", package_amount: 0 }
+  ];
+  const ar = load({ gate: true, runtime: true, pack: true });
+  const asked = [];
+  ar.win.SMD_EDGE = EDGE;
+  ar.win.fetch = async (u) => {
+    const st = (String(u).match(/[?&]state=([^&]+)/) || [])[1] || "";
+    if (/schemes\/search/.test(u)) asked.push(st);
+    return { ok: true, json: async () => ({ results: /schemes\/search/.test(u) ? ROWS.filter((r) => !st || r.state_id === st) : [] }) };
+  };
+  const arr = await ar.win.SMD_AI.explainGrounded({ question: "What is the arogyasri code for pancreatitis" }, {});
+  ok("arogyasri: only the AP and Telangana searches run", asked.join(",") === "andhra-pradesh,telangana");
+  ok("arogyasri: no Nagaland, no ICD, both schemes labelled", arr && arr.engine === "codedb" && !/Nagaland|MG033A|ICD/.test(arr.text) && /Andhra Pradesh/.test(arr.text) && /Telangana/.test(arr.text));
+  ok("arogyasri: Rs 51,310 shown, the garbage Telangana amount reads 'price not listed'", /Rs 51,310/.test(arr.text) && /price not listed/.test(arr.text) && !/23003800880010350/.test(arr.text));
+  const none = load({ gate: true, runtime: true, pack: true });
+  none.win.SMD_EDGE = EDGE;
+  none.win.fetch = async () => ({ ok: true, json: async () => ({ results: [] }) });
+  const nr = await none.win.SMD_AI.explainGrounded({ question: "arogyasri code for zzqx fever" }, {});
+  ok("a named scheme with no package says so; no model is asked to invent a code", nr && nr.engine === "codedb" && /No Aarogyasri package found/.test(nr.text) && !none.calls.some((x) => x[0] === "explainGrounded"));
+  ok("schemePrice: 0 and absurd amounts are not prices", ar.win.SMD_MAIK_ENGINE.schemePrice({ package_amount: 0 }) === "price not listed" && ar.win.SMD_MAIK_ENGINE.schemePrice({ package_amount: 1e8 }) === "price not listed" && ar.win.SMD_MAIK_ENGINE.schemePrice({ package_amount: 10000 }) === "Rs 10,000");
 }
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

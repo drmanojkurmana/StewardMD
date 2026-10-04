@@ -359,3 +359,12 @@ unique inventory URLs curl'd (HEAD, follow redirects, 20s, browser UA). Results 
   sourced from there.
 
 Deps: [[Decisions]]
+
+## Data defects seen 2026-10-04
+- PM-JAY HBP-derived sheets (Nagaland, Himachal, UP, Bihar, Kerala, ...) store `package_amount` 0: no rate
+  in the source. MaiK shows "price not listed" (`maik-engine.js schemePrice`), never "Rs 0".
+- **Telangana (Rajiv Aarogyasri) import: most rows hold `package_amount` 23003800880010350**, a parse
+  defect (concatenated digits). MaiK treats any amount of Rs 1 crore or more as "price not listed".
+  The import needs re-parsing; D1 not fixed yet.
+- MaiK's scheme vocabulary (aarogyasri -> `andhra-pradesh/ap-ntr-vaidya-seva` + `telangana/telangana-aarogyasri`,
+  pmjay -> `central`, cmchis -> `tamil-nadu`, mjpjay -> `maharashtra` with 0 packages) lives in `edge-router.js` SCHEMES.
