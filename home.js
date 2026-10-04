@@ -4914,8 +4914,8 @@
   // pkg.grounding. Drives the "Read more in StewardMD KB" chip under the answer.
   var _maikKbId = null, _maikKbName = "";
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
-  var _maikSkipCalc = false;          // set true for ONE send by "Ask MaiK anyway" on a calculator card → bypass the zero-token calculator route once
-  var _maikSkipEdge = false;          // set true for ONE send when Edge passed or "Ask MaiK anyway" was tapped on an Edge card (smd_edge)
+  var _maikSkipCalc = false;          // set by maikSendRest from _maikSkipEdge right before maikRoute, which consumes it → bypass the calculator route once
+  var _maikSkipEdge = false;          // set true for ONE send when Edge passed or "Ask MaiK anyway" was tapped on any Edge or calculator card; maikSendRest clears it first thing
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   /* CONVERSATION MEMORY (owner, 2026-09-24: "remember the conversation without eating tokens").
    * Each turn keeps `a` (320 chars, what the follow-up detector reads) and `g`, a GIST of the answer:
@@ -8535,7 +8535,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // as an MCQ option, "Propofol" read out of a pasted TCHP answer).
       var _qWords = q.split(/\s+/).length;
       var _mcqQ = /(^|[\s)])\(?[aA][).]\s[\s\S]*?(^|[\s)])\(?[bB][).]\s/.test(q);
-      if (!_researchMode && !_sentThumb && !_mcqQ && _qWords <= 18) {
+      if (!_researchMode && !_sentThumb && !_mcqQ && _qWords <= 18 && !_maikSkipEdge) {
         var _drugs = [];
         try { if (window.SMD_DRUGLINK && SMD_DRUGLINK.askEnabled()) _drugs = SMD_DRUGLINK.drugsIn(q, { fuzzy: true }); } catch (e) { _drugs = []; }
         if (_drugs.length) { maikDrugAskCard(_drugs, q); return; }
@@ -8588,7 +8588,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       _maikUserQ = q; _maikFollowUp = false;
       // Edge Layer 0 (exact tool/calculator/drug name, explicit ICD) runs BEFORE follow-up resolution:
       // with a topic live, "antibiogram kholo" was read as a follow-up and searched (owner, 2026-10-04).
-      if (!_maikSkipEdge && window.SMD_EDGE && SMD_EDGE.rules) {
+      // "Ask MaiK anyway" (Edge or calculator card), "Just answer" on the drug card, and Edge's own pass
+      // re-send all skip Edge for THIS send only: read and clear the flag here, before any early return,
+      // so it guards rules() and route() alike and never leaks into the next question. Before this, the
+      // rules() pass above follow-up resolution (#1360) ignored the calculator card's skip and bounced
+      // straight back to the card.
+      var _skipEdge = _maikSkipEdge || !!fromDrugAsk; _maikSkipEdge = false; _maikSkipCalc = false;
+      if (!_skipEdge && window.SMD_EDGE && SMD_EDGE.rules) {
         var _r0 = null; try { _r0 = SMD_EDGE.rules(q); } catch (e) { _r0 = null; }
         if (_r0) { var _s0 = false; try { _s0 = !!maikEdgeRender(_r0, q); } catch (e) { _s0 = false; } if (_s0) return; }
       }
@@ -8597,6 +8603,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (fu && fu.clarify) { bubble("ai", '<div class="maik-welcome">' + maikEscH(fu.clarify) + '</div>'); return; }
         if (fu) { _maikFollowUp = true; runClinical(fu.question, fu.retrieval, fu.depth, active, fu.topic); return; }
       }
+      _maikSkipCalc = _skipEdge;   // consumed by maikRoute on this line, so it cannot leak either
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
       if (route.kind === "calculator") { bubble("ai", maikCalcHTML(route.calc, q)); try { scroll(); } catch (e) {} return; }
@@ -8625,7 +8632,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // StewardMD Edge (flag smd_edge, default ON since 2026-10-04): an unresolved request may be one of the five
       // read-only workflows (calculator, module, KB topic, drug, ICD). The on-device router answers
       // with a card, or passes and this send continues exactly as before (never a dead end).
-      var _skipEdge = _maikSkipEdge; _maikSkipEdge = false;
       if (route.kind === "clinical" && !_skipEdge && !_maikFollowUp && window.SMD_EDGE && SMD_EDGE.enabled && SMD_EDGE.enabled()) {
         var _eq = q;
         SMD_EDGE.route(_eq, { patient_session_id: "maik-home" }).then(function (er) {
@@ -9520,14 +9526,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (calcQ && window.MEDCALC && MEDCALC.get) { var pfr = maikCalcPrefill(MEDCALC.get(calcId), calcQ); calcPf = pfr ? pfr.prefill : null; }
         close(); setTimeout(function () { try { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(calcId, calcPf || undefined); else if (window.MEDCALC) MEDCALC.openList(); } catch (e) {} }, 180); return;
       }
-      // "Ask MaiK anyway" on a calculator card: re-send the SAME question with the local calculator
-      // route bypassed for exactly one send, so the clinician can still get the narrative answer.
-      var edgeAsk = el.getAttribute("data-maik-edgeask");
-      if (edgeAsk) { if (_maikBusy) return; _maikSkipEdge = true; _maikSkipCalc = true; try { qEl.value = edgeAsk; } catch (e) {} send(); return; }
+      // "Ask MaiK anyway" on an Edge or calculator card: re-send the SAME question with Edge (rules and
+      // route) and the calculator route bypassed for exactly one send (maikSendRest clears the flag).
+      var anyAsk = el.getAttribute("data-maik-edgeask") || el.getAttribute("data-maik-calcask");
+      if (anyAsk) { if (_maikBusy) return; _maikSkipEdge = true; try { qEl.value = anyAsk; } catch (e) {} send(); return; }
       var icdId = el.getAttribute("data-maik-icd");
       if (icdId) { close(); setTimeout(function () { try { if (window.SMD_ICD && SMD_ICD.openCode) SMD_ICD.openCode(icdId); } catch (e) {} }, 180); return; }
-      var calcAsk = el.getAttribute("data-maik-calcask");
-      if (calcAsk) { if (_maikBusy) return; _maikSkipCalc = true; try { qEl.value = calcAsk; } catch (e) {} send(); return; }
       // Intent-aware refinement chips: route factors that a dedicated tool answers better than the LLM.
       var refine = el.getAttribute("data-maik-refine");
       if (refine) {

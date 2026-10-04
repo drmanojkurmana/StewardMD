@@ -122,6 +122,14 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   system text into the user turn. Training text must match that (`export.mjs` `llama-json`, A0.3 step 4).
 - The delegated chip handler in `home.js` only fires for attributes listed in its `closest(...)`
   selector. A new chip attribute must be added there or the chip is dead.
+- "Ask MaiK anyway" (`data-maik-edgeask` and the calculator card's `data-maik-calcask`), the drug card's
+  "Just answer" (`fromDrugAsk`) and Edge's own pass re-send all skip Edge through ONE flag,
+  `_maikSkipEdge`, which `maikSendRest` reads and clears first thing; it guards `SMD_EDGE.rules()`,
+  `SMD_EDGE.route()` and (via `_maikSkipCalc`, set right before `maikRoute`) the calculator route.
+  #1360 moved `rules()` above follow-up resolution and only checked `_maikSkipEdge`, so the calculator
+  card's escape (which set only `_maikSkipCalc`) bounced back to the card and, with an open verb,
+  auto-opened the calculator (fixed in home.js `askany1`). A new skip path must set `_maikSkipEdge`, never a second flag.
+  `test/run-maik-edge-ui.mjs` checks every card type.
 - Tool ids are not all ACT keys: `SMD_SEARCH`'s tools provider also lists the neonatal tools as
   `neo:<id>` (neo-hub.js `searchItems`). Before `edge16`/`edgeneo1` the Edge tool card checked `ACT[id]`,
   so a FunctionGemma pick of "Normal values" (`neo:ref`, p 0.86, "normal adult potassium range?") drew no
