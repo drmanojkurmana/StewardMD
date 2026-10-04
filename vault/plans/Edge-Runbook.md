@@ -809,6 +809,37 @@ with `needle-host` (pinned macOS engine, the app's call sequence) and `score.mjs
 r7 + agree is run on the same set as a diagnostic only and is never used to pick.
 Marks: wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%, coverage above rules.
 
+**Result (scored once, after the commit above; M1 host, pinned engine)**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 35.2% | 99.5% | 0.2% (5) | 100% (199/199) | 0.1% / 0.4% / 0.5% | PASS |
+| **r7, single call (pre-registered)** | **72.4%** | **96.2%** | **2.8%** (71) | **85.9%** (171/199) | 2.0% / 6.3% / 7.5% | **FAIL** |
+| r7 + agree (diagnostic only, not a pick) | 69.2% | 97.1% | 2.0% (52) | 89.5% (178/199) | 1.3% / 5.4% / 6.0% | FAIL |
+Coverage by language, r7 single: en 75.3%, hi-Latn 57.1%, te-Latn 59.2% (rules 40.0 / 13.8 / 8.0).
+Model rows (1,503): coverage 63.4%, 4.4% wrong (agree 58.0%, 3.1%). Held-out targets: 72.4% coverage,
+1.2% wrong. KB page requests: 56.3% coverage, 98.2% accepted. Host latency p50 58 / p95 167 ms
+(agree, both calls: 146 / 291 ms).
+
+The 71 wrong opens (single): 16 model picks for a named target (near neighbours: GOS vs GOSE, ISS vs
+R-ISS, "disseminated intravascular coagulation" -> the DIC KB page instead of ISTH DIC, Entresto ->
+valsartan, "about heparin" -> HIT 4Ts); 22 questions about a disease that opened its KB page ("how is
+acute coronary syndrome diagnosed"); 28 danger rows: 14 Hinglish/Tenglish negations ("adrenaline mat
+kholo", "oncotree teravaddu"), 9 ambiguous names ("wells pls", "need the mrc" opened one of two), 5
+clinical orders ("continue metformin", "increase lasix to 40" opened the drug card); and 5 RULES
+errors: "navigate to search icd", "search icd section" and three more open an ICD lookup for the words
+"navigate to" / "section" instead of the Search ICD tool (Layer 0: the ICD cue fires on the tool's own
+title). Without the KB questions, orders and unguarded negations (the parts r7 never saw any form of),
+r7 single still has 30 wrong (1.2%) and 9 ambiguous danger misses, so the verdict does not hinge on
+them.
+
+**Verdict: FAIL, not shipped, nothing went to the Pixel.** Danger is 85.9% and wrong shown 2.8% (mark
+under 0.5%); agree does not pass either. r7 does not generalise to new phrasings, Hinglish/Tenglish
+negations, or the KB option it never saw. Separate from the model, two rules fixes are indicated by
+this set: the negation guard knows no Hinglish/Tenglish forms (mat, nahi chahiye, vaddu, teravaddu),
+and the ICD cue should not fire on the "Search ICD" tool title. Both change rows outside the model and
+need their own review; the marks were not changed. Raw host output and scores:
+`$WORK/r7.test3{,rot}.raw.jsonl`, `r7.test3{,sc}.score.json` (not in the repo).
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
