@@ -219,6 +219,9 @@ const RESOURCE_TYPES = Object.freeze([
   /* gst-parties (2026-09-17): who settles an inpatient stay's bill (functions/_wardsynq/stay-payer.js), a reference to a
    * payer contract or self-pay. Financial, versioned, granted with Claim. */
   "StayPayer",
+  /* Owner 2026-10-04 (opening-balance.js): what a patient already admitted when the hospital moved to WardSynQ owed on
+   * the old system's bill, carried onto the stay as ONE line. Financial, one per stay, granted with Invoice. */
+  "OpeningBalance",
   /* TASK 4.6: the charge-to-reconciliation ledger. Every discount/deposit/payment/refund/
    * adjustment/write-off is an append to the SAME invoice record, never a mutation of its charge
    * lines - "what was billed" and "what happened to the bill since" are different facts. A

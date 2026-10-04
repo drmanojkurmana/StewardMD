@@ -11,7 +11,9 @@ import { reorderSuggestionsFrom, contractWarnings, validateReorderPolicy } from 
 import { levelsFrom } from "../functions/_wardsynq/stock.js";
 
 const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();
-const receive = (who, extra) => as(who, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Paracetamol 500mg", quantity: { value: 100, unit: "tablet" }, location: "Main", receivedFrom: "Acme Pharma", documentNo: "INV-1", ...extra });
+const receive = (who, extra) => as(who, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "Paracetamol 500mg", quantity: { value: 100, unit: "tablet" }, location: "Main", receivedFrom: "Acme Pharma", documentNo: "INV-1",
+  /* What the receipt cost: a return to the supplier carries a debit note worked out from it (owner 2026-10-04). */
+  purchase: { unitPricePaise: 200, gstRate: 12, interState: false }, ...extra });
 const levelOf = async (code) => { const r = await as(U.PHARMACY, `/ward/stock?orgId=${ORG}`); assert.equal(r.__status, 200, JSON.stringify(r)); return r.levels.find((l) => l.code === code); };
 
 test("POST /api/queue/ward/supplier-return and GET /api/queue/ward/supply-chain: 401 without a session, 403 for a nurse and another hospital with nothing written; a partial return lowers the level by exactly that; more than received is refused", async () => {

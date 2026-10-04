@@ -56,13 +56,15 @@ test("BILL-03 POST /ward/stock-move: a receipt resent with the same idempotencyK
 
 test("BILL-03 POST /ward/supplier-return and /ward/stock-reconcile: a retry with the same key replays instead of being judged again", async () => {
   seedHospital();
-  const rc = await as(U.PHARMACY, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "PCM-500", quantity: { value: 10, unit: "tablet" }, location: "Pharmacy", receivedFrom: "Acme" });
+  const rc = await as(U.PHARMACY, "/ward/stock-move", "POST", { orgId: ORG, kind: "receipt", code: "PCM-500", quantity: { value: 10, unit: "tablet" }, location: "Pharmacy", receivedFrom: "Acme",
+    purchase: { unitPricePaise: 200, gstRate: 12, interState: false } });   // a return now carries a debit note (owner 2026-10-04)
   const ret = { orgId: ORG, receiptId: rc.movementId, quantity: "6", reason: "Damaged", idempotencyKey: "ret-1" };
   const r1 = await as(U.PHARMACY, "/ward/supplier-return", "POST", ret);
   const r2 = await as(U.PHARMACY, "/ward/supplier-return", "POST", ret);
   assert.equal(r1.__status, 200, JSON.stringify(r1));
   assert.equal(r2.__status, 200, JSON.stringify(r2));
   assert.equal(r2.movementId, r1.movementId);
+  assert.equal(r2.movement.debitNote.number, r1.debitNote.number, "the retry issues no second debit note number");
   const cnt = { orgId: ORG, code: "PCM-500", location: "Pharmacy", unit: "tablet", counted: 1, reason: "Shelf count", idempotencyKey: "count-1" };
   const c1 = await as(U.PHARMACY, "/ward/stock-reconcile", "POST", cnt);
   const c2 = await as(U.PHARMACY, "/ward/stock-reconcile", "POST", cnt);
