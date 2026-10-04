@@ -642,6 +642,69 @@ Download every depth; the bake-off picks the smallest one that passes.
 (validation for early stopping), after step 3.4 settled the template. Then GGUF + Q8_0/Q4_K_M as in
 step 3.5. Record the base model id, the trainer and its version, and the hyperparameters in this file.
 
+### 5a. Needle local LoRA, 2026-10-04: FAIL on the frozen test set (not shipped)
+No Cactus platform key exists, so this used the other official route: `needle finetune` (LoRA) +
+build, from `cactus-needle` 3.0.6. Script: `scripts/edge/train-needle.sh` (setup, up, train, build,
+predict, down). Base: `checkpoints/needle3.safetensors` and `needle3.cact` at the pinned revision
+`27c0a9a5` (both files are byte-identical on `main`).
+
+**Compute and cost.** An M1 Mac (8 GB, CPU only; JAX has no M1 GPU path here) took over 55 s per step,
+which is 9+ hours for one 579-step run, so training ran on GCP: one on-demand `g2-standard-4` + L4,
+us-central1, list price about 0.72 USD/h (2026-10-04 billing catalog). The VM is created with
+`--max-run-duration 4h --instance-termination-action DELETE`. It ran 22:56 to 01:57 UTC (3.0 h),
+**about 2.17 USD**. It was deleted after the runs, and no instances or disks were left. Only
+`export/needle-local/train.jsonl` (generated, no PHI) was uploaded. The adapters came back to the Mac;
+builds and scoring ran on the Mac. The needle CLI ran with `NEEDLE_TELEMETRY=0`.
+
+**Scoring.** `scripts/edge/needle-host.cpp` links the pinned macOS engine (`macos-arm64/libneedle.a`,
+same revision) and repeats the app's call sequence: mmap + `needle_load` once, then `needle_init`
+before every call (edge9) and `needle_complete` with 48 tokens. Replies are parsed by the router's own
+`optionFrom()` (`needle-pred.mjs`) and scored with `score.mjs --pred`. `needle-calibrate.mjs` sweeps
+the threshold on val. This is a Mac CPU, not the Pixel; the Android binary was not run.
+
+**Findings**
+- **The engine opens a `<think>` block before every call.** Trained on targets with no reasoning, the
+  tuned model kept writing base-style reasoning and answered "option 1" for nearly everything (val
+  77/135 exact; train rows only 54% in the engine). Adding the line `option K` (`none fits` for an
+  empty call list) in front of each target (`needle-pred.mjs think`) fixed it: val 130/135.
+- **A local LoRA has no usable confidence.** `needle build` drops the head. The engine then reports
+  `confidence: 1.0000`, not None, so the app's 0.5 floor never filters anything. Keeping the
+  untrained base head in the build (`build --keep-head`) gives a number, but on the tuned weights it
+  does not separate right from wrong: every val error scored 0.97 to 0.995.
+- Cactus's own held-out check (`--val-split`) recompiles JAX for every prompt length (about 40 min on
+  the L4 for 161 rows). Use `--val-split 0` and score with the engine instead.
+- The W4 build is 63 MB (base 35 MB, 2-bit). Host latency is unchanged (M1 p50 43-65 ms).
+
+**Runs** (3,237 train rows; batch 16; seq 512)
+| Run | Settings | Val exact (model rows) | Val result |
+|---|---|---|---|
+| r1 | 3 ep, lr 1e-4, rank 16 (package defaults), no reasoning | 77/135 | passes only at t 0.89+, coverage = rules |
+| r2 | 6 ep, lr 3e-4, rank 32, no reasoning | 82/135 | fail at every t up to 0.95 |
+| r3 | as r2 + `option K` reasoning | 130/135 | 0.7% wrong; passes only at t 0.99 |
+| r4 | 8 ep, lr 5e-4, rank 32 + reasoning | 132/135 | PASS: coverage 90.5% (rules 74.9%), 0.4% wrong |
+
+**Threshold (val only).** The rule was fixed before test was opened: take the lowest t where val wrong
+is at most half the mark (0.25%), because val has only 135 model rows. For r4 that is **t = 0.98**
+(val: coverage 86.8%, wrong 0.2%). The official build (head dropped) has no threshold.
+
+**Frozen test set (4,077 rows), scored once**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 65.5% | 100% | 0.0% | 100% | 0 / 0 / 0 | PASS |
+| r4, head dropped (official) | 88.2% | 98.3% | **1.5%** (60 rows) | 99.6% | 1.1% / 1.4% / 8.1% | **FAIL** |
+| r4 + base head, t 0.98 (val-chosen) | 85.7% | 98.5% | **1.3%** | 99.6% | 0.9% / 1.4% / 8.1% | **FAIL** |
+Coverage by language (r4 official): en 88.7%, hi-Latn 81.3%, te-Latn 86.1%. Recall@5 is 99.4%. Model
+rows alone: coverage 81.3%, accuracy 93.5%. Most errors are near neighbours and held-out targets
+(TIMI NSTEMI vs STEMI, P/F vs S/F, FENa vs Na deficit, APRI vs PLR, QTcF vs QTc, MRC vs mMRC). One
+danger row was opened wrongly. Diagnostic only (chosen by looking at test, so not a valid pick): test
+passes only at t 0.995, with 66.8% coverage, +1.3 points over rules.
+
+**Verdict.** The marks (wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%) are not
+met, so the build is not shipped and nothing went to the Pixel. Val (135 model rows) was much easier
+than test. A larger, harder calibration split, or a calibrated confidence head, is needed before
+another attempt. Only the Cactus platform trains that head: platform key and owner decision.
+Weights are kept off the repo; see the PR for paths and sha256.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
