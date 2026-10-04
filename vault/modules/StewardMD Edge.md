@@ -35,6 +35,14 @@ train/val/canonical/export are gitignored and regenerated.
 | base FunctionGemma 270M + grammar (host CPU, -1 rows) | 93.4% | 91.8% | 7.7% | 99.6% | FAIL: must be fine-tuned |
 | oracle (labels) | 88.3% | 100% | 0.0% | 100% | ceiling |
 | Needle 3 local LoRA r4 (host CPU, pinned engine, 2026-10-04) | 88.2% | 98.3% | 1.5% | 99.6% | FAIL: [[Edge-Runbook]] 5a |
+
+**New frozen test set `edge-router-3`** (2,562 rows, `scripts/edge/generate-test3.mjs`, `dataset/test3.jsonl`;
+new templates, targets r7 never answered, KB disease-page options, Hinglish/Tenglish negations; 2026-10-04):
+| Policy | Coverage | Accepted-route acc. | Wrong shown | Danger | Verdict |
+|---|---|---|---|---|---|
+| rules | 35.2% | 99.5% | 0.2% (Search ICD title fires the ICD cue) | 100% | PASS |
+| Needle r7, single call (pre-registered on dev) | 72.4% | 96.2% | 2.8% | 85.9% | FAIL: [[Edge-Runbook]] 5c |
+| Needle r7 + agree (diagnostic) | 69.2% | 97.1% | 2.0% | 89.5% | FAIL |
 Layer 0 (rules) answers an exact calculator name, an exact home-tool title or generic drug name after
 navigation words in English/Hinglish/Tenglish ("antibiogram kholo", "search icd teruvu"), and ICD
 requests. A name that fits two things ("insulin": drug and tool) is never exact. Brand names are never
