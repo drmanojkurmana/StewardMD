@@ -109,7 +109,10 @@ hospital with a **backup destination** (Admin Center > Integrations > Backup des
 - System health shows the last successful backup and size, the last restore test and the last failure; a failure
   is pushed to the hospital's administrators once a day.
 **Destinations.** `s3`: the hospital's own S3-compatible bucket (AWS S3, R2, MinIO, Wasabi), credentials sealed.
-`platform`: this deployment's object store, which needs the `DOC_S3_*` settings, i.e. owner decision S1 (the
-storage bucket). Until one is configured, System health reads "Backups are not running: no backup destination is
-configured". The bucket holder cannot read the files; restoring one needs WardSynQ (the document key) and
+`platform`: this deployment's R2 bucket `wardsynq-backups`, bound as `WARDSYNQ_BACKUPS` in wrangler.toml (the
+`DOC_S3_*` document store is only a fallback when that binding is absent). A hospital selects it once under Admin
+Center > Integrations > Backup destination > "WardSynQ platform storage". Until a destination is selected and the
+bucket is bound, System health reads "Backups are not running". The backup key is derived from `DOC_ENC_KEY`, or
+`FOLLOWCARE_PHI_KEY` when that is unset: losing or rotating that secret makes every backup unreadable, so keep an
+offline copy of it. The bucket holder cannot read the files; restoring one needs WardSynQ (the document key) and
 `backup.js verifyPlan` before any import. SFTP is not supported.

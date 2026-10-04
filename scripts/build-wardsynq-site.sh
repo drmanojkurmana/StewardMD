@@ -57,14 +57,25 @@ cp "$ROOT/kb/protocols/"*.json "$OUT/kb/protocols/" 2>/dev/null || true
 # and mount a clickjacking/UI-redress attack against a logged-in clinician (auth here is header/token
 # via localStorage, not cookies, so a framed page still renders the signed-in state). Missing HSTS
 # means a hospital-WiFi downgrade attempt on a first-touch connection is not blocked by the browser.
-# Mirrors the root _headers file's four headers, plus frame-ancestors 'none' (enforced - simple and
-# safe even without a full script-src policy) and a Report-Only CSP derived from what index.html/
-# portal.html actually load (Google Fonts, gstatic Firebase, same-origin /api/* via _worker.js's
-# server-side proxy - never called cross-origin from the browser). Report-Only, not enforced: index.html
-# ships one inline <script> (the SAME reason the root _headers file gives for shipping no CSP there at
-# all), so a script-src CSP here risks breaking the app without a nonce - see "Decisions to confirm".
-CSP_RO="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://www.gstatic.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-printf '/*\n  X-Robots-Tag: noindex\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n  Strict-Transport-Security: max-age=31536000; includeSubDomains\n  Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=(), nfc=(self)\n  Content-Security-Policy: frame-ancestors '\''none'\''\n  Content-Security-Policy-Report-Only: %s\n  Cache-Control: no-store\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n' "$CSP_RO" > "$OUT/_headers"
+# Mirrors the root _headers file's four headers and ENFORCES a Content-Security-Policy (owner decision
+# 2026-10-04, after OPS-27 shipped it Report-Only). No report endpoint exists (no report-uri/report-to), so
+# the policy was checked in a real browser instead: every page this site serves, with the policy enforced and
+# a report-uri pointed at a local collector (see the PR for the violations found and what was allowed).
+#
+#   script-src: 'unsafe-inline' stays. index.html, opd.html and clinic-billing.html each ship inline <script>
+#     blocks, and ward.js builds markup with inline onchange= handlers; dropping it needs nonces or hashes
+#     and a rewrite of those handlers. 'unsafe-eval' is NOT allowed and nothing needs it.
+#   https://www.gstatic.com            the Firebase compat SDK scripts.
+#   https://apis.google.com            Firebase signInWithPopup (Google sign-in on the door) loads gapi from here.
+#   cdn.jsdelivr.net .../dicomParser.min.js   the DICOM viewer's parser, ONE exact file (not the whole CDN),
+#     and it is also pinned by an SRI hash in ward-dicom-viewer.js. Keep this URL equal to PARSER_URL there.
+#   frame-src https://stewardmd-498ec.firebaseapp.com   Firebase's sign-in popup helper frame.
+#   connect-src https://stewardmd.in   opd.html and clinic-billing.html call the record service directly
+#     when served from wardsynq.com (stewardmd.in answers CORS for the wardsynq.com origin). The Firebase
+#     hosts are the account sign-in.
+#   frame-ancestors 'none' (also in its own always-enforced header) and X-Frame-Options DENY stop clickjacking.
+CSP="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://cdn.jsdelivr.net/npm/dicom-parser@1.8.21/dist/dicomParser.min.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://stewardmd.in https://www.gstatic.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src 'self' https://stewardmd-498ec.firebaseapp.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+printf '/*\n  X-Robots-Tag: noindex\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n  Strict-Transport-Security: max-age=31536000; includeSubDomains\n  Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=(), nfc=(self)\n  Content-Security-Policy: %s\n  Cache-Control: no-store\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=604800\n' "$CSP" > "$OUT/_headers"
 
 echo "built $OUT ($(find "$OUT" -type f | wc -l | tr -d ' ') files)"
 if [ "${1:-}" = "--deploy" ]; then
