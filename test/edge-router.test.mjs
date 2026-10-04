@@ -147,6 +147,13 @@ test("llamaAdapter: per-call grammar limited to the options offered, greedy, par
   await eng.release(); assert.equal(calls.release, 1);
 });
 
+test("llamaAdapter: FunctionGemma load args fit the +400 MB budget (small context, small batches, q8 KV)", async () => {
+  const load = [];
+  const plugin = { load: (a) => { load.push(a); return Promise.resolve({ loaded: true }); }, generate: () => Promise.resolve({ text: '{"option":1}' }) };
+  await E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" }).load();
+  assert.deepEqual(load[0], { path: "/m/fg.gguf", nCtx: 512, nBatch: 64, nUbatch: 64, nThreadsBatch: 4, kvQ8: true });
+});
+
 test("llamaAdapter: forced prefix + digit pick, confidence from the plugin, grammar kept as the fallback", async () => {
   let reply = { text: '{"option":1}', p: 0.42 };
   const gen = [];
