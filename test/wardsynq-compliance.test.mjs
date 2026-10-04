@@ -155,7 +155,7 @@ test("NABH: every indicator is either computed per month or not computable namin
   assert.equal(by[28].months[0].value, 0, "falls: a real zero over the ICU bed-days");
   assert.ok(by[28].months[0].denominator > 0);
   assert.equal(C.computeNabhIndicators({ rows: {}, unreadable: {}, windows: [W] }).find((i) => i.no === 28).months[0].value, null, "no bed-days: no rate rather than zero");
-  assert.equal(by[9].computable, false);
+  assert.equal(by[9].computable, true, "KPI 9 is the owner's NCC MERP severity count");
   const blocked = C.computeNabhIndicators({ rows: {}, unreadable: { SurgicalCase: "not readable with this role" }, windows: [W] });
   assert.equal(blocked.find((i) => i.no === 7).computable, false);
   assert.match(blocked.find((i) => i.no === 7).reason, /could not be read/);

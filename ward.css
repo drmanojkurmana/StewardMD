@@ -232,6 +232,8 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-sub.warn { background: var(--warn-container); color: var(--on-warn-container); margin: 14px -14px -14px; padding: 12px 14px; border-radius: 0 0 15px 15px; border-top: 0; }
 #smdWard .w-mini { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 #smdWard .w-mini span { color: var(--on-surface-variant); font-size: 13px; }
+#smdWard .w-merp li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 12px; }
+#smdWard .w-merp li small { flex: 1 0 100%; margin: 0; }
 #smdWard .w-sub.warn .w-mini span, #smdWard .w-sub.warn .w-hint { color: inherit; opacity: .85; }
 
 /* Timeline. One row per event, oldest styling reused (w-mini's spacing/type scale) rather than a

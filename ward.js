@@ -1640,6 +1640,7 @@
       case "falls": return wTS("ward.qm-falls", "Falls per 1000 bed-days", t);
       case "pressure-injuries": return wTS("ward.qm-pressure-injuries", "Pressure injuries per 1000 bed-days", t);
       case "medication-errors": return wTS("ward.qm-medication-errors", "Medication error incidents per 1000 bed-days", t);
+      case "medication-error-severity": return wTS("ward.qm-medication-error-severity", "Medication errors by NCC MERP category", t);
       case "hai": return wTS("ward.qm-hai", "Healthcare-associated infections per 1000 bed-days", t);
       case "antibiotic-dot": return wTS("ward.qm-antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", t);
       case "lab-tat": return wTS("ward.qm-lab-tat", "Laboratory turnaround (request to result)", t);
@@ -1668,6 +1669,8 @@
       case "below-minimum": return wTS("ward.qm-below-minimum", "{denominator} eligible cases is below the minimum of {minimum}; a percentage here would be compared with percentages from far larger populations and nothing would say they are different kinds of number", sent, v);
       case "beds-not-subtracted": return wTS("ward.qm-beds-not-subtracted", "Available beds are the configured bed list; blocked or closed beds are not subtracted.", sent);
       case "deaths-source": return wTS("ward.qm-deaths-source", "Deaths are read from a recorded death (Patient.deceased) or a discharge disposition. A stay with neither is excluded as data missing, and counted.", sent);
+      case "med-error-near-misses": return wTS("ward.qm-med-error-near-misses", "Every confirmed medication error is counted, near misses (NCC MERP categories A and B) included; the near misses are shown beside the rate.", sent);
+      case "med-error-uncategorised": return wTS("ward.qm-med-error-uncategorised", "An incident filed before the NCC MERP category was required has none and is counted as uncategorised, never placed in a category.", sent);
       case "readmissions-all-unplanned": return wTS("ward.qm-readmissions-all-unplanned", "The record has no planned-readmission flag, so every readmission is counted as unplanned.", sent);
       default: return esc(sent);
     }
@@ -9841,6 +9844,22 @@
   function categoryOptions(first) {
     return '<option value="">' + esc(first) + "</option>" + INCIDENT_CATEGORY.map(function (c) { return '<option value="' + esc(c[0]) + '">' + esc(wTEn(c[1])) + "</option>"; }).join("");
   }
+  /* NCC MERP index for categorizing medication errors (wardsynq/wardsynq-incidents.js MERP_CATEGORY). Asked whenever the event is a
+   * medication error, at filing and again at confirmation; the group each belongs to is the owner's reporting grouping (NABH 9). */
+  var INCIDENT_MERP = [
+    ["A", "Circumstances or events that have the capacity to cause error"], ["B", "An error occurred but did not reach the patient"],
+    ["C", "An error reached the patient but did not cause harm"], ["D", "An error reached the patient and required monitoring and/or intervention to preclude harm"],
+    ["E", "Temporary harm, required intervention"], ["F", "Temporary harm, required initial or prolonged hospitalization"],
+    ["G", "Permanent patient harm"], ["H", "Intervention required to sustain life"], ["I", "May have contributed to or resulted in the patient's death"],
+  ];
+  var MERP_GROUP_ROWS = [
+    ["no-error", "No error", ["A"]], ["error-no-harm", "Error, no harm", ["B", "C", "D"]],
+    ["error-harm", "Error, harm", ["E", "F", "G", "H"]], ["death", "Death", ["I"]],
+  ];
+  function merpOptions(first) {
+    return '<option value="">' + esc(first) + "</option>" + INCIDENT_MERP.map(function (c) { return '<option value="' + esc(c[0]) + '">' + esc(c[0] + " - " + wTEn(c[1])) + "</option>"; }).join("");
+  }
+  function merpLabel(v) { for (var i = 0; i < INCIDENT_MERP.length; i++) if (INCIDENT_MERP[i][0] === v) return v + " - " + wTEn(INCIDENT_MERP[i][1]); return v; }
   function categoryLabel(v) { for (var i = 0; i < INCIDENT_CATEGORY.length; i++) if (INCIDENT_CATEGORY[i][0] === v) return wTEn(INCIDENT_CATEGORY[i][1]); return v ? v : wT("ward.no-category", "no category"); }
   function incidentRow(inc) {
     var stage = inc.stage || "signal";
@@ -9861,6 +9880,7 @@
       ? "<div class=\"w-sub\"><h4>" + wTH("ward.confirm-or-reject-this-signal", "Confirm or reject this signal") + "</h4>" +
         '<select id="wIncOutcome_' + esc(inc.id) + "\"><option value=\"\">" + wTH("ward.decision", "Decision…") + "</option><option value=\"confirmed\">" + wTH("ward.confirmed-incident", "Confirmed incident") + "</option><option value=\"not-an-incident\">" + wTH("ward.not-an-incident", "Not an incident") + "</option><option value=\"duplicate\">" + wTH("ward.duplicate-of-another-report", "Duplicate of another report") + "</option></select>" +
         '<select id="wIncConfCat_' + esc(inc.id) + '">' + categoryOptions(inc.category ? "Keep: " + categoryLabel(inc.category) : wT("ward.category-needed-to-confirm", "Category (needed to confirm)…")) + "</select>" +
+        '<select id="wIncConfMerp_' + esc(inc.id) + '" aria-label="' + wTA("ward.ncc-merp-category", "NCC MERP category") + '">' + merpOptions(inc.merpCategory ? "Keep: " + merpLabel(inc.merpCategory) : wT("ward.ncc-merp-category-medication-error", "NCC MERP category (required for a medication error)…")) + "</select>" +
         '<input id="wIncDupOf_' + esc(inc.id) + "\" placeholder=\"" + wTA("ward.duplicate-of-incident-id-for-a", "Duplicate of incident id (for a duplicate)") + "\">" +
         '<input id="wIncConfReason_' + esc(inc.id) + "\" placeholder=\"" + wTA("ward.reason-for-the-decision", "Reason for the decision") + "\">" +
         '<button class="w-btn ghost" data-w-act="incidentconfirm:' + esc(inc.id) + '">' + ms("fact_check") + wTH("ward.record-decision", "Record decision") + "</button></div>"
@@ -9887,7 +9907,8 @@
       : "";
     return '<li class="w-mini-row"><div>' +
       '<span class="w-st ' + esc(stage === "closed" || stage === "rejected" ? "" : inc.severity === "catastrophic" || inc.severity === "major" ? "escalate" : "due") + '">' + esc(wTEn(INCIDENT_STAGE[stage]) || stage) + "</span> " +
-      "<b>" + esc(incidentSeverityWord(inc.severity)) + "</b> &middot; " + esc(categoryLabel(inc.category)) + (inc.sac ? " &middot; " + wTH("ward.sac", "SAC {sac} - {response}", { sac: esc(inc.sac.sac), response: esc(inc.sac.response) }, "sac response") : "") +
+      "<b>" + esc(incidentSeverityWord(inc.severity)) + "</b> &middot; " + esc(categoryLabel(inc.category)) +
+      (inc.category === "medication-error" ? " &middot; " + (inc.merpCategory ? wTH("ward.ncc-merp-category-value", "NCC MERP {c}", { c: esc(inc.merpCategory) }, "c") : '<span class="w-st due">' + wTH("ward.ncc-merp-uncategorised", "NCC MERP uncategorised") + "</span>") : "") + (inc.sac ? " &middot; " + wTH("ward.sac", "SAC {sac} - {response}", { sac: esc(inc.sac.sac), response: esc(inc.sac.response) }, "sac response") : "") +
       (inc.anonymous ? " &middot; " + wTH("ward.anonymous", "anonymous") : "") +
       '<div class="w-dt-times">' + esc(inc.what) + "</div>" +
       "<div class=\"w-dt-times\">" + wTH("ward.reported2", "reported {reportedAt}", { reportedAt: when(inc.reportedAt) }, "reportedAt") + (inc.patientId ? " &middot; " + wTH("ward.patient2", "patient {patientId}", { patientId: esc(inc.patientId) }, "patientId") : "") + "</div>" +
@@ -9918,6 +9939,7 @@
       "<input id=\"wIncWhen\" type=\"datetime-local\" placeholder=\"" + wTA("ward.when-optional-default-now", "When (optional, default now)") + "\">" +
       "<input id=\"wIncPatient\" placeholder=\"" + wTA("ward.patient-mrn-optional", "Patient MRN (optional)") + "\">" +
       '<select id="wIncCategory">' + categoryOptions(wT("ward.what-kind-of-event-optional", "What kind of event (optional)…")) + "</select>" +
+      '<select id="wIncMerp" aria-label="' + wTA("ward.ncc-merp-category", "NCC MERP category") + '">' + merpOptions(wT("ward.ncc-merp-category-medication-error", "NCC MERP category (required for a medication error)…")) + "</select>" +
       "<label class=\"w-f\" style=\"flex-direction:row;align-items:center\"><input id=\"wIncAnon\" type=\"checkbox\" style=\"width:auto;margin:0 8px 0 0\"><span>" + wTH("ward.file-anonymously", "File anonymously") + "</span></label>" +
       '<p class="w-hint">' + ms("info") + wTH("ward.a-named-report-defaults-to-you", "A named report defaults to you; anonymous means exactly that - nobody, including the record, is told who filed it.") +
       "</p><button class=\"w-btn\" data-w-act=\"incidentreport\">" + ms("outbox") + wTH("ward.report", "Report") + "</button></div>" +
@@ -9931,8 +9953,20 @@
    * numerator, denominator and period, and opens the case list behind it. Loading, failed and not
    * computable are three different screens: none of them is a zero. */
   var QS_PERIODS = [7, 30, 90, 365];
+  /* NCC MERP counts (NABH 9): each group with the categories in it, then the records that have no category, apart. */
+  function qsMerp(m) {
+    var g = m.byGroup || {}, c = m.byCategory || {};
+    if (!m.numerator) return '<p class="w-hint">' + ms("info") + wTH("ward.no-medication-errors-in-this-period", "No confirmed medication errors in this period.") + "</p>";
+    var rows = MERP_GROUP_ROWS.map(function (r) {
+      var cats = r[2].map(function (k) { return esc(k) + " <b>" + esc(c[k] || 0) + "</b>"; }).join(" &middot; ");
+      return "<li><b>" + esc(wTEn(r[1])) + " (" + esc(r[2].length > 1 ? r[2][0] + " " + wT("ward.to2", "to") + " " + r[2][r[2].length - 1] : r[2][0]) + ")</b><span>" + esc(g[r[0]] || 0) + '</span><small class="w-dt-times">' + cats + "</small></li>";
+    }).join("");
+    var un = m.uncategorised ? '<li><b>' + wTH("ward.ncc-merp-uncategorised2", "Uncategorised: filed with no NCC MERP category") + "</b><span>" + esc(m.uncategorised) + "</span></li>" : "";
+    return "<p>" + wTH("ward.med-errors-total", "{n} confirmed medication errors", { n: esc(m.numerator) }, "n") + "</p><ul class=\"w-mini w-merp\">" + rows + un + "</ul>";
+  }
   function qsValue(m) {
     if (!m.computable) return '<p class="w-hint warn">' + ms("help") + wTH("ward.not-computable", "Not computable: {reason}", { reason: qmText(m.reasonCode, m.reason, m.reasonVars) }) + "</p>";
+    if (m.byCategory) return qsMerp(m) + (m.note2 ? '<p class="w-hint">' + ms("info") + qmText(m.note2Code, m.note2) + "</p>" : "");
     var parts = [];
     if (m.unit === "days" || m.unit === "minutes") {
       if (!m.denominator) return '<p class="w-hint">' + ms("info") + wTH("ward.no-cases-in-this-period", "No cases in this period.") + "</p>";
@@ -9948,6 +9982,8 @@
     }
     if (m.excluded) parts.push(wTH("ward.qs-excluded", "{n} excluded", { n: esc(m.excluded) }));
     if (m.stillRunning) parts.push(wTH("ward.qs-bundles-still-running", "{n} bundle(s) still running, not counted", { n: esc(m.stillRunning) }));
+    if (m.nearMisses != null) parts.push(wTH("ward.med-error-near-misses-line", "of which {n} near misses (NCC MERP A and B)", { n: esc(m.nearMisses) }, "n"));
+    if (m.uncategorised) parts.push(wTH("ward.med-error-uncategorised-line", "{n} with no NCC MERP category", { n: esc(m.uncategorised) }, "n"));
     if (m.woundRecords != null) parts.push(wTH("ward.qs-wound-records-beside", "{n} hospital-acquired stage 2+ pressure wound record(s), shown beside the rate", { n: esc(m.woundRecords) }));
     return "<p>" + parts.join(" &middot; ") + "</p>" + (m.note2 ? '<p class="w-hint">' + ms("info") + qmText(m.note2Code, m.note2) + "</p>" : "");
   }
@@ -15534,12 +15570,15 @@
       .catch(function () { st.recall = { ok: false }; paint(); });
   }
   function incidentConfirm(id) {
-    var outcome = val("wIncOutcome_" + id), reason = val("wIncConfReason_" + id), category = val("wIncConfCat_" + id), dup = val("wIncDupOf_" + id);
+    var outcome = val("wIncOutcome_" + id), reason = val("wIncConfReason_" + id), category = val("wIncConfCat_" + id), dup = val("wIncDupOf_" + id), merp = val("wIncConfMerp_" + id);
     if (!outcome) { st.err = wT("ward.pick-a-decision", "Pick a decision."); paint(); return; }
     if (!reason) { st.err = wT("ward.a-decision-needs-a-reason", "A decision needs a reason."); paint(); return; }
     if (outcome === "duplicate" && !dup) { st.err = wT("ward.name-the-incident-this-duplicates", "Name the incident this duplicates."); paint(); return; }
+    /* A confirmed medication error is counted by its NCC MERP category, so the decision is not sent without one (the server refuses it too). */
+    var filed = (st.incidentLog || []).filter(function (i) { return i.id === id; })[0] || {};
+    if (outcome === "confirmed" && (category || filed.category) === "medication-error" && !(merp || filed.merpCategory)) { st.err = wT("ward.a-medication-error-needs-its-ncc", "A medication error needs its NCC MERP category."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/incident-confirm", { orgId: st.orgId, incidentId: id, outcome: outcome, reason: reason, category: category || undefined, duplicateOf: dup || undefined })
+    apiPost("/ward/incident-confirm", { orgId: st.orgId, incidentId: id, outcome: outcome, reason: reason, category: category || undefined, merpCategory: merp || undefined, duplicateOf: dup || undefined })
       .then(function (r) { if (settle(r, wT("ward.decision-recorded", "Decision recorded."))) loadIncidents(); else paint(); })
       .catch(function () { st.busy = false; st.err = wT("ward.could-not-record-the-decision", "Could not record the decision."); paint(); });
   }
@@ -15590,13 +15629,15 @@
       .catch(function () { st.busy = false; paint(); });
   }
   function reportIncidentAction() {
-    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient"), category = val("wIncCategory");
+    var what = val("wIncWhat"), severity = val("wIncSeverity"), whenAt = val("wIncWhen"), patientId = val("wIncPatient"), category = val("wIncCategory"), merp = val("wIncMerp");
     var anonEl = document.getElementById("wIncAnon");
     var anon = !!(anonEl && anonEl.checked);
     if (!what || what.length < 3) { st.err = wT("ward.describe-what-happened-in-a-sentence", "Describe what happened, in a sentence or two."); paint(); return; }
     if (!severity) { st.err = wT("ward.pick-what-actually-reached-the-patient", "Pick what actually reached the patient."); paint(); return; }
+    if (category === "medication-error" && !merp) { st.err = wT("ward.a-medication-error-needs-its-ncc", "A medication error needs its NCC MERP category."); paint(); return; }
+    if (merp && category !== "medication-error") { st.err = wT("ward.ncc-merp-is-for-a-medication", "An NCC MERP category belongs to a medication error: choose that kind of event, or clear the category."); paint(); return; }
     st.busy = true; paint();
-    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined, category: category || undefined })
+    apiPost("/ward/incident-report", { orgId: st.orgId, what: what, severity: severity, when: whenAt || undefined, anonymous: anon, patientId: patientId || undefined, category: category || undefined, merpCategory: merp || undefined })
       .then(function (r) {
         if (settle(r, r && r.written ? wT("ward.reported", "Reported.") : null)) {
           ["wIncWhat", "wIncWhen", "wIncPatient"].forEach(function (id) { var el = document.getElementById(id); if (el) el.value = ""; });

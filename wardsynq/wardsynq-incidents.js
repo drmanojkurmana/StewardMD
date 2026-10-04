@@ -119,6 +119,87 @@ const CATEGORY = Object.freeze({
 const CATEGORIES = Object.freeze(Object.values(CATEGORY));
 
 /**
+ * THE NCC MERP INDEX FOR CATEGORIZING MEDICATION ERRORS (A to I). The owner's decision of 2026-10-04 (NABH KPI 4 and 9):
+ * every medication error is filed with the category of what happened, and the hospital's counts are made from it. The
+ * wording is the index's own. A medication error is any preventable event that may cause or lead to inappropriate
+ * medication use or patient harm while the medication is in the control of the health care professional, patient or
+ * consumer, so the categories run from "capacity to cause error" (A) to "contributed to death" (I).
+ *
+ * The category is the MEDICATION OUTCOME axis and is kept apart from `severity` (the general incident outcome) and from
+ * culpability: nothing here is derived from either, and nothing derives a category for a record that has none. A record
+ * filed before this existed is "uncategorised" and is counted as that, never guessed from its severity.
+ */
+const MERP_CATEGORY = Object.freeze({
+  A: { code: "A", group: "no-error", label: "Circumstances or events that have the capacity to cause error" },
+  B: { code: "B", group: "error-no-harm", label: "An error occurred but did not reach the patient" },
+  C: { code: "C", group: "error-no-harm", label: "An error reached the patient but did not cause harm" },
+  D: { code: "D", group: "error-no-harm", label: "An error reached the patient and required monitoring and/or intervention to preclude harm" },
+  E: { code: "E", group: "error-harm", label: "An error may have contributed to or resulted in temporary harm and required intervention" },
+  F: { code: "F", group: "error-harm", label: "An error may have contributed to or resulted in temporary harm and required initial or prolonged hospitalization" },
+  G: { code: "G", group: "error-harm", label: "An error may have contributed to or resulted in permanent patient harm" },
+  H: { code: "H", group: "error-harm", label: "An error required intervention necessary to sustain life" },
+  I: { code: "I", group: "death", label: "An error may have contributed to or resulted in the patient's death" },
+});
+const MERP_CODES = Object.freeze(Object.keys(MERP_CATEGORY));
+/** The four groups the owner reports, in order, each with the categories it holds. */
+const MERP_GROUPS = Object.freeze({
+  "no-error": Object.freeze(["A"]),
+  "error-no-harm": Object.freeze(["B", "C", "D"]),
+  "error-harm": Object.freeze(["E", "F", "G", "H"]),
+  death: Object.freeze(["I"]),
+});
+/** Categories A and B are the near misses: nothing reached the patient. */
+const MERP_NEAR_MISS = Object.freeze(["A", "B"]);
+const UNCATEGORISED = "uncategorised";
+
+/** PURE. The NCC MERP category of an incident, or "uncategorised" (never inferred). */
+const merpOf = (incident) => {
+  const c = incident && typeof incident.merpCategory === "string" ? incident.merpCategory.trim().toUpperCase() : "";
+  return MERP_CODES.includes(c) ? c : UNCATEGORISED;
+};
+
+/**
+ * PURE. Counts confirmed medication-error incidents by NCC MERP category and group. `incidents` is any list; only a
+ * CONFIRMED incident of category medication-error is counted (the same rule quality.js applies to every category), and
+ * `within(incident)` may narrow it to a period. A confirmed medication error with no category is counted in `total` and
+ * under "uncategorised", and in no category, no group and not in `nearMisses`.
+ */
+function merpSummary(incidents, within) {
+  const byCategory = Object.fromEntries([...MERP_CODES, UNCATEGORISED].map((k) => [k, 0]));
+  const byGroup = Object.fromEntries([...Object.keys(MERP_GROUPS), UNCATEGORISED].map((k) => [k, 0]));
+  const cases = [];
+  for (const x of incidents || []) {
+    if (!x || x.category !== CATEGORY.MEDICATION_ERROR || !x.confirmation || x.confirmation.outcome !== CONFIRM_OUTCOME.CONFIRMED) continue;
+    if (typeof within === "function" && !within(x)) continue;
+    const c = merpOf(x);
+    byCategory[c]++;
+    byGroup[c === UNCATEGORISED ? UNCATEGORISED : MERP_CATEGORY[c].group]++;
+    cases.push({ id: x.id, patientId: x.patientId || null, merpCategory: c === UNCATEGORISED ? null : c, severity: x.severity });
+  }
+  return {
+    total: cases.length, byCategory, byGroup,
+    nearMisses: byCategory.A + byCategory.B,
+    uncategorised: byCategory[UNCATEGORISED],
+    cases,
+  };
+}
+
+/** Checks a supplied NCC MERP category and the rule that goes with it. Returns the upper-case code, or null when none. */
+function checkMerp(merpCategory, category) {
+  const raw = merpCategory == null || merpCategory === "" ? null : String(merpCategory).trim().toUpperCase();
+  if (raw !== null && !MERP_CODES.includes(raw)) {
+    throw new IncidentError(`the NCC MERP category must be one of ${MERP_CODES.join(", ")}`, "BAD_MERP_CATEGORY");
+  }
+  if (raw !== null && category && category !== CATEGORY.MEDICATION_ERROR) {
+    throw new IncidentError("an NCC MERP category belongs to a medication error only", "MERP_NOT_MEDICATION_ERROR");
+  }
+  if (category === CATEGORY.MEDICATION_ERROR && raw === null) {
+    throw new IncidentError(`a medication error needs its NCC MERP category (${MERP_CODES.join(", ")}); without it the error cannot be counted by severity`, "NO_MERP_CATEGORY");
+  }
+  return raw;
+}
+
+/**
  * Records a signal may be raised from. A signal is a report that has not yet been decided; linking it
  * to the record that prompted it lets the investigator open the override, the critical result loop
  * or the escalation instead of reconstructing it from a description.
@@ -181,7 +262,7 @@ let seq = 0;
  * report, and the reports lost to friction are not a random sample: they are the minor and the
  * near-miss ones, which is to say the ones that were still cheap to learn from.
  */
-function report({ what, when, severity, reportedBy, anonymous = false, patientId, likelihood, contributingFactors, category, source, now } = {}) {
+function report({ what, when, severity, reportedBy, anonymous = false, patientId, likelihood, contributingFactors, category, merpCategory, source, now } = {}) {
   if (!what || String(what).trim().length < 3) {
     throw new IncidentError("an incident needs a description of what happened", "NO_DESCRIPTION");
   }
@@ -196,6 +277,9 @@ function report({ what, when, severity, reportedBy, anonymous = false, patientId
   if (category && !CATEGORIES.includes(category)) {
     throw new IncidentError(`category must be one of ${CATEGORIES.join(", ")}`, "BAD_CATEGORY");
   }
+  // A medication error is filed WITH its NCC MERP category (owner decision 2026-10-04); a report whose kind is not yet
+  // known may leave both out, and the category is then required when the signal is confirmed as a medication error.
+  const merp = checkMerp(merpCategory, category);
   if (source && (!SIGNAL_SOURCES.includes(source.resourceType) || !String(source.id || "").trim())) {
     throw new IncidentError(`a signal source needs a resourceType (${SIGNAL_SOURCES.join(", ")}) and an id`, "BAD_SOURCE");
   }
@@ -216,6 +300,7 @@ function report({ what, when, severity, reportedBy, anonymous = false, patientId
     patientId: patientId || null,
     contributingFactors: contributingFactors || [],
     category: category || null,
+    merpCategory: merp,
     source: source ? { resourceType: source.resourceType, id: String(source.id).trim() } : null,
     confirmation: null,
     state: STATE.REPORTED,
@@ -241,7 +326,7 @@ const mustBeConfirmed = (incident, what) => {
  * kind of decision an auditor needs to be able to read back. Decided once; a second decision is a
  * new report, not a rewrite.
  */
-function confirm(incident, { outcome, reason, duplicateOf, category, by, now } = {}) {
+function confirm(incident, { outcome, reason, duplicateOf, category, merpCategory, by, now } = {}) {
   if (!by) throw new IncidentError("a confirmation must name who decided it", "NO_ACTOR");
   if (incident.confirmation) throw new IncidentError(`already decided: ${incident.confirmation.outcome}`, "ALREADY_DECIDED");
   if (!Object.values(CONFIRM_OUTCOME).includes(outcome)) {
@@ -256,8 +341,15 @@ function confirm(incident, { outcome, reason, duplicateOf, category, by, now } =
   if (outcome === CONFIRM_OUTCOME.DUPLICATE && (!duplicateOf || duplicateOf === incident.id)) {
     throw new IncidentError("a duplicate must name the other incident it duplicates", "NO_DUPLICATE_OF");
   }
+  /* The NCC MERP category is settled with the kind of event: a confirmed medication error cannot be counted without it,
+   * so it is taken from this decision or from the filing, and refused when neither has it. A signal decided to be some
+   * other kind of event, or not an incident, carries none. */
+  const merp = outcome === CONFIRM_OUTCOME.CONFIRMED
+    ? checkMerp(merpCategory == null || merpCategory === "" ? (cat === CATEGORY.MEDICATION_ERROR ? incident.merpCategory : null) : merpCategory, cat)
+    : null;
   const at = now || new Date().toISOString();
   incident.category = cat || null;
+  incident.merpCategory = merp;
   incident.confirmation = {
     outcome, reason: String(reason).trim(),
     duplicateOf: outcome === CONFIRM_OUTCOME.DUPLICATE ? duplicateOf : null,
@@ -440,6 +532,7 @@ function reportingHealth(incidents, nowIso) {
 export {
   SEVERITY, SEVERITY_RANK, LIKELIHOOD, STATE, CONTROL_STRENGTH, WEAK_ACTIONS,
   CATEGORY, CATEGORIES, SIGNAL_SOURCES, CONFIRM_OUTCOME,
+  MERP_CATEGORY, MERP_CODES, MERP_GROUPS, MERP_NEAR_MISS, UNCATEGORISED, merpOf, merpSummary,
   IncidentError,
   sacScore, report, triage, confirm, stageOf, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
 };

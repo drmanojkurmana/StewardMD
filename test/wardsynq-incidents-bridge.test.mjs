@@ -152,7 +152,7 @@ test("full lifecycle: report -> triage -> RCA -> CAPA -> close, each a real new 
   assert.ok(triaged.incident.version > filed.incident.version, "triage is a NEW version, not a rewrite");
   const early = await as(SAFETY_OFFICER, "/ward/incident-rca", "POST", { orgId: ORG, incidentId: id, rootCause: "The pump screen shows no unit label at the bedside" });
   assert.equal(early.error, "NOT_CONFIRMED", "an RCA waits for the signal to be confirmed");
-  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error" });
+  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error", merpCategory: "C" });
   assert.equal(conf.__status, 200, JSON.stringify(conf));
 
   const rca = await as(SAFETY_OFFICER, "/ward/incident-rca", "POST", { orgId: ORG, incidentId: id, rootCause: "The infusion pump's rate-entry screen defaults to mL/hr with no unit label visible at the bedside", conductedBy: "Safety Officer" });
@@ -199,7 +199,7 @@ test("a SAC-1/2 incident cannot close without an RCA, surfaced through the wire"
   const triaged = await as(SAFETY_OFFICER, "/ward/incident-triage", "POST", { orgId: ORG, incidentId: filed.incident.id, likelihood: "likely", triagedBy: "Safety Officer" });
   assert.equal(triaged.__status, 200, JSON.stringify(triaged));
   assert.ok(triaged.incident.sac.rcaRequired, "this severity/likelihood combination must require RCA for the test to prove anything");
-  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: filed.incident.id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error" });
+  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: filed.incident.id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error", merpCategory: "C" });
   assert.equal(conf.__status, 200, JSON.stringify(conf));
 
   const closeAttempt = await as(SAFETY_OFFICER, "/ward/incident-close", "POST", { orgId: ORG, incidentId: filed.incident.id, by: "Safety Officer" });
@@ -226,7 +226,7 @@ test("triagedBy/conductedBy are the session's own actor, not whatever name the b
   assert.equal(triaged.__status, 200, JSON.stringify(triaged));
   assert.equal(triaged.incident.triagedBy, idFor(SAFETY_OFFICER), "triagedBy must be the authenticated session's actor, never the body");
   assert.notEqual(triaged.incident.triagedBy, "Dr Somebody Else");
-  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error" });
+  const conf = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: id, outcome: "confirmed", reason: "Reviewed: a real event", category: "medication-error", merpCategory: "C" });
   assert.equal(conf.__status, 200, JSON.stringify(conf));
   assert.equal(conf.incident.confirmation.by, idFor(SAFETY_OFFICER), "the decider is the session's actor");
 
@@ -243,7 +243,7 @@ test("P1.14 SIGNAL: raised from a real source record, refused for a missing one;
   assert.equal(none.__status, 422, JSON.stringify(none));
   const missing = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Override looked wrong", severity: "no-harm", source: { resourceType: "SafetyOverride", id: "nope" } });
   assert.equal(missing.__status, 404, JSON.stringify(missing));
-  const sig = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Allergy override then a rash", severity: "minor", category: "medication-error", source: { resourceType: "SafetyOverride", id: "ovr-1" } });
+  const sig = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Allergy override then a rash", severity: "minor", category: "medication-error", merpCategory: "D", source: { resourceType: "SafetyOverride", id: "ovr-1" } });
   assert.equal(sig.__status, 200, JSON.stringify(sig));
   assert.deepEqual(sig.incident.source, { resourceType: "SafetyOverride", id: "ovr-1" });
   assert.equal(sig.incident.patientId, "pat-1", "the patient comes from the source record");
@@ -300,4 +300,69 @@ test("P1.14 quality-safety: returns the seed measures and case lists for analyti
   assert.equal(denied.__status, 403, "a nurse holds no analytics.view");
   assert.equal(denied.error, "forbidden");
   // (SAFETY_OFFICER is this org's owner in the harness, so resolves as admin; not a negative case here.)
+});
+
+/* NABH KPI 4 and 9 (owner decision 2026-10-04): a medication error is filed and confirmed with its NCC MERP category. */
+const count = async (type) => (await RECORD.latestByType(TENANT_ROW.id, type, 100)).length;
+test("NCC MERP: a medication error is refused without its category at filing, as a signal and at confirmation; nothing is written", async () => {
+  seedHospital();
+  await RECORD.append(TENANT_ROW.id, [{ resourceType: "SafetyOverride", id: "ovr-1", version: 1, patientId: "pat-1", rule: "allergy" }]);
+  const before = await count("IncidentReport");
+  const noCat = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Ten times the ordered heparin rate", severity: "minor", category: "medication-error" });
+  assert.equal(noCat.__status, 422, JSON.stringify(noCat));
+  assert.equal(noCat.error, "NO_MERP_CATEGORY");
+  const badCat = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Ten times the ordered heparin rate", severity: "minor", category: "medication-error", merpCategory: "Z" });
+  assert.equal(badCat.error, "BAD_MERP_CATEGORY");
+  const onFall = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Found on the floor beside the bed", severity: "minor", category: "fall", merpCategory: "C" });
+  assert.equal(onFall.error, "MERP_NOT_MEDICATION_ERROR");
+  const sig = await as(NURSE, "/ward/incident-signal", "POST", { orgId: ORG, what: "Allergy override then a rash", severity: "minor", category: "medication-error", source: { resourceType: "SafetyOverride", id: "ovr-1" } });
+  assert.equal(sig.error, "NO_MERP_CATEGORY");
+  assert.equal(await count("IncidentReport"), before, "no refused filing was written");
+
+  // A report of unknown kind is accepted; it cannot be CONFIRMED as a medication error without the category.
+  const filed = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Wrong strength drawn up, caught at the bedside", severity: "near-miss" });
+  assert.equal(filed.__status, 200, JSON.stringify(filed));
+  const refused = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: filed.incident.id, outcome: "confirmed", reason: "a real event", category: "medication-error" });
+  assert.equal(refused.__status, 409, JSON.stringify(refused));
+  assert.equal(refused.error, "NO_MERP_CATEGORY");
+  const still = (await as(SAFETY_OFFICER, "/ward/incident-log?orgId=" + ORG)).incidents.find((i) => i.id === filed.incident.id);
+  assert.equal(still.confirmation, null, "the refused decision was not recorded");
+  const ok = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: filed.incident.id, outcome: "confirmed", reason: "a real event", category: "medication-error", merpCategory: "B" });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  assert.equal(ok.incident.merpCategory, "B");
+  const log = await as(SAFETY_OFFICER, "/ward/incident-log?orgId=" + ORG);
+  assert.deepEqual(log.merpCategories.map((c) => c.code), ["A", "B", "C", "D", "E", "F", "G", "H", "I"]);
+  assert.deepEqual(log.merpGroups, { "no-error": ["A"], "error-no-harm": ["B", "C", "D"], "error-harm": ["E", "F", "G", "H"], death: ["I"] });
+});
+
+test("NCC MERP: the quality screen and the NABH table count by category and report a record with none as uncategorised", async () => {
+  seedHospital();
+  const when = new Date(Date.now() - 2 * 86400000).toISOString();
+  // Confirmed on a build that did not ask for the category: no merpCategory on the record.
+  await RECORD.append(TENANT_ROW.id, [{ resourceType: "IncidentReport", id: "inc-legacy", version: 1, what: "Old medication error", when, reportedAt: when, severity: "catastrophic", category: "medication-error", confirmation: { outcome: "confirmed", reason: "x", by: "lead", at: when }, state: "reported", capas: [], history: [] }]);
+  const f = await as(NURSE, "/ward/incident-report", "POST", { orgId: ORG, what: "Dose given an hour early, no effect", severity: "no-harm", category: "medication-error", merpCategory: "C", when });
+  assert.equal(f.__status, 200, JSON.stringify(f));
+  const c = await as(SAFETY_OFFICER, "/ward/incident-confirm", "POST", { orgId: ORG, incidentId: f.incident.id, outcome: "confirmed", reason: "a real event" });
+  assert.equal(c.__status, 200, JSON.stringify(c));
+
+  const q = await as(DOCTOR, "/ward/quality-safety?orgId=" + ORG + "&days=30");
+  assert.equal(q.__status, 200, JSON.stringify(q));
+  const sev = q.measures.find((m) => m.id === "medication-error-severity");
+  assert.equal(sev.numerator, 2);
+  assert.equal(sev.byCategory.C, 1);
+  assert.equal(sev.byCategory.uncategorised, 1, "the old record is uncategorised, not guessed from its catastrophic severity");
+  assert.equal(sev.byCategory.I, 0);
+  assert.equal(q.measures.find((m) => m.id === "medication-errors").uncategorised, 1);
+
+  const n = await as(DOCTOR, "/ward/nabh-indicators?orgId=" + ORG + "&months=1");
+  assert.equal(n.__status, 200, JSON.stringify(n));
+  const k9 = n.indicators.find((i) => i.no === 9);
+  assert.equal(k9.computable, true);
+  assert.equal(k9.months[0].numerator, 2);
+  assert.equal(k9.months[0].uncategorised, 1);
+  assert.equal(k9.months[0].byGroup["error-no-harm"], 1);
+  const k4 = n.indicators.find((i) => i.no === 4);
+  assert.equal(k4.computable, true);
+  assert.equal(k4.months[0].numerator, 2);
+  assert.equal(k4.months[0].nearMisses, 0);
 });

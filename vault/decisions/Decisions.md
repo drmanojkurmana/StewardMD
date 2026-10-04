@@ -5,6 +5,33 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ NABH KPI 4: medication errors follow the NCC MERP definition (owner)
+
+**Decision.** A medication error is any preventable event that may cause or lead to inappropriate medication use or
+patient harm while the medication is in the control of the health care professional, patient or consumer. KPI 4 counts
+every confirmed medication-error incident, near misses (NCC MERP categories A and B) included, and shows the near
+misses as their own line. The rate keeps the denominator the quality screen already had for this measure, inpatient
+bed-days (per 1000); NABH's "total number of opportunities" is not recorded anywhere in WardSynQ, so the percentage
+form is not computed and the cell says so. A confirmed medication error filed with no category is counted and shown as
+uncategorised. Capture requires the NCC MERP category (below) whenever the event is a medication error.
+**Why.** The owner chose the NCC MERP definition (was owner item O1). **Trade-off.** Category A is "no error" in the
+index but is counted here as the owner asked; the near-miss line lets a reader take it out. **Status:** PR "WardSynQ NABH
+KPI 4 and 9: NCC MERP medication-error definition and A to I severity".
+
+## 2026-10-04 · WardSynQ NABH KPI 9: NCC MERP categories A to I (owner)
+
+**Decision.** `merpCategory` A to I is required to file or confirm a medication error (`NO_MERP_CATEGORY`, 422 at
+filing, 409 at confirmation, nothing written). A count of medication errors by category is shown in the Quality and safety
+screen and in the NABH table (row 9), per category and per group: no error (A), error no harm (B to D), error harm
+(E to H), death (I), with "uncategorised" apart for records with none; a category is never inferred from `severity`.
+A: capacity to cause error. B: error, did not reach the patient. C: reached the patient, no harm. D: reached the
+patient, required monitoring and/or intervention to preclude harm. E: temporary harm, required intervention. F:
+temporary harm, initial or prolonged hospitalization. G: permanent harm. H: intervention required to sustain life. I:
+contributed to death. **Why.** The owner chose a severity model (was owner item O2). **Trade-off.** The published NABH
+KPI 9 is the standardized mortality ratio for ICU, which needs predicted deaths from a severity score WardSynQ does not
+record; row 9 now reports this measure instead and keeps the published title on the row (`publishedTitle`). Clinical
+sign-off of the wording is still the owner's. **Status:** same PR.
+
 ## 2026-10-04 · WardSynQ renal check: which eGFR LOINC codes it reads (owner)
 
 **Decision.** `functions/_wardsynq/migrate-emar.js` accepts every code below for the order-entry renal check (importing

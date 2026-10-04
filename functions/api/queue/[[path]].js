@@ -5085,12 +5085,12 @@ export async function onRequest(context) {
       }
       if ((sub === "incident-report" || sub === "incident-signal") && method === "POST") {
         const fn = sub === "incident-signal" ? signalIncident : reportIncident;
-        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
+        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, merpCategory: body.merpCategory, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-confirm" && method === "POST") {
         // The decider is the authenticated actor, never the body: same reasoning as triagedBy below.
-        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, by: actor.id || "" });
+        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, merpCategory: body.merpCategory, by: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-triage" && method === "POST") {
