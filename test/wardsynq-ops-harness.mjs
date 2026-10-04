@@ -128,3 +128,8 @@ export function patchOrgConfig(orgId, patch) {
 export function docsWhere(pred) {
   return [...docs].filter(([path, d]) => pred(d.fields, path)).map(([path, d]) => ({ path, fields: d.fields }));
 }
+
+/** Put one platform document (a seed sign-off record), as the store would hold it. */
+export function putDoc(path, fields) {
+  docs.set(path, { fields: { ...fields }, updateTime: "t" + (++clock) });
+}

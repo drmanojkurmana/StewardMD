@@ -26,7 +26,7 @@ async function firstItem() {
 
 test("pure: every seed list is present, every item has a fingerprint, and nothing is signed until a record exists for its current content", async () => {
   const lists = await S.seedStatus([]);
-  assert.deepEqual(lists.map((l) => l.id), ["allergy-classes", "allergy-cross-reactivity", "dose-ceilings", "pregnancy-lactation", "critical-limits", "critical-thresholds", "pews-bands", "meows-bands", "news2-escalation", "quality-measures", "hai-criteria"]);
+  assert.deepEqual(lists.map((l) => l.id), ["allergy-classes", "allergy-cross-reactivity", "dose-ceilings", "pregnancy-lactation", "critical-limits", "critical-thresholds", "pews-bands", "meows-bands", "news2-escalation", "quality-measures", "hai-criteria", "dialysis-adequacy", "nfi-tables"]);
   for (const l of lists) {
     // Pregnancy and lactation rules ship empty (no unapproved guidance written); every other list has items.
     if (l.id === "pregnancy-lactation") assert.equal(l.items.length, 0); else assert.ok(l.items.length > 0, l.id + " has items");
@@ -97,6 +97,24 @@ test("the platform owner signs one item: the record says who, when and which ver
   const twice = await api("/seed/signoff", "POST", body, H.PLATFORM);
   assert.equal(twice.__status, 409); assert.equal(twice.error, "already_signed");
   assert.equal(events().length, 1);
+});
+
+/* Owner decision 2026-10-04: the NFI tables are the one list whose sign-off turns a check on (seed-signoff.js nfiSignoffState,
+ * read by order-entry-pack.js). The owner signs a table through this same route; the stored record then reads as signed for
+ * that table only, and only for the content that was shown. */
+test("nfi-tables: the owner signs the renal table through the route; only that table reads as signed, for its current content", async () => {
+  H.seed();
+  const st = await api("/seed/status", "GET", null, H.PLATFORM);
+  const l = st.lists.find((x) => x.id === "nfi-tables");
+  assert.deepEqual(l.items.map((i) => i.id), ["renal", "pregnancy", "lactation"]);
+  const renal = l.items.find((i) => i.id === "renal");
+  const r = await api("/seed/signoff", "POST", { listId: "nfi-tables", itemId: "renal", contentHash: renal.contentHash, signatory: "Dr Manoj Kurmana", attest: true }, H.PLATFORM);
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  const held = [...docs.entries()].filter(([k]) => k.startsWith("q_seed_signoffs/")).map(([k, d]) => ({ id: k.slice("q_seed_signoffs/".length), ...d.fields }));
+  assert.deepEqual(await S.nfiSignoffState(held), { renal: "signed", pregnancy: "awaiting-signoff", lactation: "awaiting-signoff" });
+  // The record names the content's full fingerprint: a record carrying any other hash does not sign the table.
+  const forged = held.map((x) => ({ ...x, contentHash: "0".repeat(64) }));
+  assert.equal((await S.nfiSignoffState(forged)).renal, "awaiting-signoff");
 });
 
 test("a sign-off whose commit fails reports failure and records nothing", async () => {

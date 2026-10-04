@@ -33,7 +33,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import {
-  SEVERITY, LIKELIHOOD, STATE, CATEGORIES, SIGNAL_SOURCES, IncidentError,
+  SEVERITY, LIKELIHOOD, STATE, CATEGORIES, SIGNAL_SOURCES, MERP_CATEGORY, MERP_GROUPS, IncidentError,
   report, triage, confirm, stageOf, recordRCA, addCAPA, completeCAPA, close, reportingHealth,
 } from "../../wardsynq/wardsynq-incidents.js";
 
@@ -101,7 +101,7 @@ async function mutate(request, env, ctx, mutator) {
 
 /**
  * Files an incident. ctx: { migration, what, when?, severity, anonymous?, reportedBy?, patientId?,
- * likelihood?, contributingFactors?, actorDeps, recordDeps }
+ * likelihood?, contributingFactors?, category?, merpCategory? (required when category is medication-error), actorDeps, recordDeps }
  */
 async function reportIncident(request, env, ctx) {
   const mig = ctx.migration;
@@ -122,7 +122,7 @@ async function reportIncident(request, env, ctx) {
       // was asked for - the engine itself refuses a named report with no reporter.
       reportedBy: ctx.anonymous ? null : (str(ctx.reportedBy) || resolved.actor.id),
       patientId: ctx.patientId || null, likelihood: ctx.likelihood || null,
-      contributingFactors: ctx.contributingFactors || [], category: ctx.category || null,
+      contributingFactors: ctx.contributingFactors || [], category: ctx.category || null, merpCategory: ctx.merpCategory || null,
       source: ctx.source || null, now: at,
     });
   } catch (e) {
@@ -181,7 +181,7 @@ async function confirmIncident(request, env, ctx) {
   }
   return mutate(request, env, ctx, (draft) => confirm(draft, {
     outcome: ctx.outcome, reason: ctx.reason, duplicateOf: str(ctx.duplicateOf) || null,
-    category: ctx.category || null, by: str(ctx.by), now: new Date().toISOString(),
+    category: ctx.category || null, merpCategory: ctx.merpCategory || null, by: str(ctx.by), now: new Date().toISOString(),
   }));
 }
 
@@ -237,7 +237,7 @@ async function incidentLog(request, env, ctx) {
   incidents.sort((a, b) => String(b.reportedAt || "").localeCompare(String(a.reportedAt || "")));
 
   incidents = incidents.map((i) => ({ ...i, stage: stageOf(i) }));
-  return { ...base, ok: true, incidents, health: reportingHealth(incidents), categories: CATEGORIES };
+  return { ...base, ok: true, incidents, health: reportingHealth(incidents), categories: CATEGORIES, merpCategories: Object.values(MERP_CATEGORY), merpGroups: MERP_GROUPS };
 }
 
 export {

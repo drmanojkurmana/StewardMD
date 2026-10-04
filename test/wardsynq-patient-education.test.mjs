@@ -267,3 +267,69 @@ test("PURE: a leaflet needs a title, a language code and text; the portal copy n
   assert.deepEqual(out.map((x) => x.title), ["a"]);
   assert.deepEqual(Object.keys(out[0]).sort(), ["attachedAt", "body", "language", "title"]);
 });
+
+/* ---------------------------------------------------------------- owner decision 2026-10-04: the StewardMD starter drafts */
+const { STARTER_LEAFLETS, STARTER_MARKER } = await import("../functions/_wardsynq/leaflet-starter.js");
+const { leafletFields } = await import("../functions/_wardsynq/patient-education.js");
+
+test("starter set: ten English leaflets, each valid as a leaflet, plain text with no dashes, a come-back list, the emergency number, and no dose", () => {
+  assert.equal(STARTER_LEAFLETS.leaflets.length, 10);
+  assert.equal(STARTER_LEAFLETS.language, "en");
+  assert.equal(STARTER_MARKER, "Draft prepared by StewardMD for your clinicians to review");
+  assert.deepEqual(STARTER_LEAFLETS.leaflets.map((l) => l.title), ["Caring for your wound at home", "Caring for your urinary catheter at home", "Diabetes: looking after your blood sugar at home",
+    "Taking warfarin safely", "Using your inhaler", "After a heart attack", "After a stroke", "Fever: care at home and when to come back", "Caring for your newborn baby at home", "Caring for your plaster cast"]);
+  assert.equal(new Set(STARTER_LEAFLETS.leaflets.map((l) => l.templateId)).size, 10, "unique template ids");
+  for (const l of STARTER_LEAFLETS.leaflets) {
+    const f = leafletFields({ title: l.title, language: "en", body: l.body, tags: l.tags });
+    assert.ok(f.fields, l.templateId + ": " + JSON.stringify(f.refuse));
+    assert.doesNotMatch(l.title + l.body, /[–—]/, l.templateId + ": no en or em dash");
+    assert.match(l.body, /Come back to hospital, or call 108 for an ambulance, if:\n+- /, l.templateId + ": a come-back list naming 108");
+    assert.doesNotMatch(l.body, /\b\d+(\.\d+)?\s?(mg|mcg|ml|mL|g|IU|units?|tablets?|puffs?)\b/i, l.templateId + ": no drug amount");
+    assert.ok(!l.body.includes(STARTER_MARKER), l.templateId + ": the draft marker is on the record, never in the patient's words");
+  }
+});
+
+test("POST /ward/education-leaflet-import-starter: 401, 403 for a nurse, cashier and another hospital; imports ten DRAFTS once; nothing approved, nothing given; a second clinician approves each", async () => {
+  seedHospital(); secondDoctor(); otherHospital();
+  assert.equal(await anon("/ward/education-leaflet-import-starter", { orgId: ORG }), 401);
+  assert.equal((await as(NURSE, "/ward/education-leaflet-import-starter", "POST", { orgId: ORG })).__status, 403);
+  assert.equal((await as(CASHIER, "/ward/education-leaflet-import-starter", "POST", { orgId: ORG })).__status, 403);
+  assert.equal((await as(STRANGER, "/ward/education-leaflet-import-starter", "POST", { orgId: ORG })).__status, 403);
+  assert.equal(await count("EducationLeaflet"), 0, "refused calls wrote nothing; nothing is seeded into a hospital by itself");
+
+  const r = await as(DOCTOR, "/ward/education-leaflet-import-starter", "POST", { orgId: ORG });
+  assert.equal(r.__status, 200, JSON.stringify(r));
+  assert.equal(r.written, 10);
+  assert.equal(r.imported.length, 10);
+  assert.equal(r.marker, STARTER_MARKER);
+  const lib = await as(NURSE, "/ward/education-leaflets" + q());
+  assert.equal(lib.leaflets.length, 10);
+  for (const l of lib.leaflets) {
+    assert.equal(l.state, "draft", l.title);
+    assert.equal(l.approval, null);
+    assert.equal(l.language, "en");
+    assert.equal(l.starter.marker, STARTER_MARKER);
+    assert.deepEqual(l.draftedBy, [idFor(DOCTOR)], "the importing clinician is the author");
+  }
+  assert.equal(await count("EducationAttachment"), 0, "nothing reaches a patient");
+
+  // Importing again adds nothing; an edited one is left as the hospital has it.
+  const first = r.imported[0];
+  const again = await as(DOCTOR2, "/ward/education-leaflet-import-starter", "POST", { orgId: ORG });
+  assert.equal(again.__status, 200, JSON.stringify(again));
+  assert.equal(again.written, 0);
+  assert.equal(again.alreadyHeld.length, 10);
+  assert.equal(await count("EducationLeaflet"), 10);
+
+  // The importer cannot approve; a second clinician can, and only then can it be given.
+  const a = await admitted("31");
+  assert.equal((await as(DOCTOR, "/ward/education-attach", "POST", { orgId: ORG, encounterId: a.encounterId, leafletId: first.leafletId, leafletVersion: first.version })).error, "not_approved");
+  assert.equal((await as(DOCTOR, "/ward/education-leaflet-approve", "POST", { orgId: ORG, leafletId: first.leafletId, expectedVersion: first.version })).error, "own_leaflet");
+  const ok = await as(DOCTOR2, "/ward/education-leaflet-approve", "POST", { orgId: ORG, leafletId: first.leafletId, expectedVersion: first.version });
+  assert.equal(ok.__status, 200, JSON.stringify(ok));
+  const give = await as(DOCTOR, "/ward/education-attach", "POST", { orgId: ORG, encounterId: a.encounterId, leafletId: first.leafletId, leafletVersion: ok.version });
+  assert.equal(give.__status, 200, JSON.stringify(give));
+  const given = await as(NURSE, "/ward/education-attachments" + q("&encounterId=" + a.encounterId));
+  assert.ok(!given.items[0].body.includes(STARTER_MARKER), "the patient's copy is the leaflet's words only");
+
+});

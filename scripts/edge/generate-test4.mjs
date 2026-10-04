@@ -1,5 +1,5 @@
 // scripts/edge/generate-test4.mjs: the NEW frozen test set for the Edge router, schema edge-router-4
-// (Edge-Runbook 5d). edge-router-3 (test3) was seen once by r7, so round 3 is judged on this set, once.
+// (Edge-Runbook 5e). edge-router-3 (test3) was seen once by r7, so round 3 is judged on this set, once.
 //
 //   node scripts/edge/generate.mjs                  (train, val, test: the texts this set must not repeat)
 //   node scripts/edge/generate-test4.mjs   -> vault/plans/edge-data/dataset/{test4.jsonl, manifest4.json}

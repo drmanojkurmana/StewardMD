@@ -48,7 +48,7 @@ Frozen test set `edge-router-4` (test4, 2,804 rows, current router + KB, built b
 | Policy | Coverage | Accepted-route acc. | Wrong shown | Danger | Verdict |
 |---|---|---|---|---|---|
 | rules | 24.8% | 100% | 0.0% | 100% | PASS |
-| Needle r8 + agree (round 3; no run met the dev3 rule, scored for the record) | 61.1% | 97.1% | 1.8% | 94.2% | FAIL: [[Edge-Runbook]] 5d |
+| Needle r8 + agree (round 3; no run met the dev3 rule, scored for the record) | 61.1% | 97.1% | 1.8% | 94.2% | FAIL: [[Edge-Runbook]] 5e |
 Layer 0 (rules) answers an exact calculator name, an exact home-tool title or generic drug name after
 navigation words in English/Hinglish/Tenglish ("antibiogram kholo", "search icd teruvu"), and ICD
 requests. A name that fits two things ("insulin": drug and tool) is never exact. Brand names are never
@@ -143,6 +143,10 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   card and the `data-maik-tool` chip, and `candidates()` drops any tool `SMD_MAIK_TOOL_OPENABLE` says
   cannot open. A new tool source must go through `maikToolOpener` or it is filtered out.
   `test/run-maik-edge-ui.mjs` asserts every tools-provider id is openable.
+- Adult vs neonatal normal values (2026-10-04): `candidates()` drops `neo:ref` unless the request names a
+  newborn / infant / child / NICU word, and drops `adultref` ([[Adult Normal Values]]) when it does, so
+  "normal adult potassium range?" offers Adult normal values. The card passes the question
+  (`data-maik-toolq`) so the page opens on that analyte. Frozen sets unchanged: test 65.5% / 0.0% wrong.
 - FunctionGemma background warm (`edge16`, 2026-10-04): the first iOS load took 17.2 s (Metal shader
   compile) against the 8 s cold budget, so the first request fell to rules. `SMD_EDGE` now warms it
   (load + one throwaway pick via `runtime.warm`, 60 s budget, never the request budget) 4 s after the
@@ -169,8 +173,10 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   adapter takes `killable` (default: Android only).
 - Cactus replaced every needle3 binary and the header on `main` on 2026-10-02 (revision f84005f8). Our pins
   are the 2026-09-28 files, so `fetch-needle.sh` and `test/native-host/run.sh` fetch from revision
-  `27c0a9a5` and keep a copy that already matches. The new upstream build is unaudited; it may change the
-  thread fallback that a62e9fbab works around. Re-audit it before moving the pin.
+  `27c0a9a5` and keep a copy that already matches. Re-audited 2026-10-04 (Edge-Runbook 5d): the new build is
+  engine 3.1.0 with Whistle speech added; same weights and licence, no network symbols, identical decisions
+  on test and test3, same thread fallback (our wrap still needed) and the same init-less hang (call 56 on
+  the Mac too), but 28% larger and `needle_complete` gained `pcm, samples` (ABI break). Pin NOT moved.
 - No engine is bundled. `SMD_EDGE.autoEngine()` uses `Capacitor.Plugins.Needle` on native when the
   plugin exists (Day 4 work). Until then only the rules layer answers.
 

@@ -32,6 +32,7 @@ import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
 import { stayDays } from "./charge-capture.js";
+import { isOpeningBalanceLine } from "./opening-balance.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const slug = (v) => str(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
@@ -135,9 +136,12 @@ function coverageOf(it, pkg, table) {
 function applyPackage(charges, assignment, table) {
   const pkg = assignment.package;
   const tag = { packageCode: pkg.code };
-  const lines = [{ code: pkg.code, display: `Package: ${pkg.name}`, quantity: 1, amount: pkg.rate, line: pkg.rate, sourceType: ASSIGNMENT_TYPE, sourceId: assignment.id, kind: "package", packageLine: true, ...tag }];
+  /* A balance carried from the old system (opening-balance.js) is no charge of this package: it stays the bill's first
+   * line, untouched, ahead of the package line. */
+  const lines = [...(charges.priced || []).filter(isOpeningBalanceLine),
+    { code: pkg.code, display: `Package: ${pkg.name}`, quantity: 1, amount: pkg.rate, line: pkg.rate, sourceType: ASSIGNMENT_TYPE, sourceId: assignment.id, kind: "package", packageLine: true, ...tag }];
   const counts = { included: 0, excluded: 0, outside: 0 }, unpriced = [];
-  for (const it of charges.priced || []) {
+  for (const it of (charges.priced || []).filter((x) => !isOpeningBalanceLine(x))) {
     const c = coverageOf(it, pkg, table);
     counts[c] += 1;
     if (c === "included") lines.push({ ...it, amount: 0, line: 0, packageIncluded: true, ...tag });

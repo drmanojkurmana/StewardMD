@@ -54,6 +54,11 @@
     var w = { "central-line": T(c, "site.qual.device.central", "Central line"), "urinary-catheter": T(c, "site.qual.device.urinary", "Urinary catheter"), ventilator: T(c, "site.qual.device.ventilator", "Ventilator") };
     return Object.prototype.hasOwnProperty.call(w, d) ? c.esc(w[d]) : EN(c, c.esc(d));
   }
+  /* VAE is surveyed on adult stays and VAP on paediatric stays (NHSN by location; infection-control.js LOCATION_POPULATION). */
+  function populationWord(c, p) {
+    var w = { adult: T(c, "site.qual.hai.popAdult", "adult stays only"), paediatric: T(c, "site.qual.hai.popPaed", "paediatric stays only, not NICU") };
+    return Object.prototype.hasOwnProperty.call(w, p) ? c.esc(w[p]) : EN(c, c.esc(p));
+  }
   function depthWord(c, d) {
     var w = { "superficial-incisional": T(c, "site.qual.ssi.superficial", "Superficial incisional"), "deep-incisional": T(c, "site.qual.ssi.deep", "Deep incisional"), "organ-space": T(c, "site.qual.ssi.organ", "Organ or space") };
     return Object.prototype.hasOwnProperty.call(w, d) ? c.esc(w[d]) : EN(c, c.esc(d));
@@ -75,7 +80,7 @@
       d.rates.map(function (r) {
         var e = ev(r.event);
         if (!r.computable) return "<tr><td>" + EN(c, esc(r.event)) + '</td><td colspan="3">' + TS(c, "site.qual.hai.notComputable", "Not computable:") + " " + EN(c, esc(r.reason)) + "</td></tr>";
-        return "<tr><td><b>" + EN(c, esc(r.event)) + "</b> " + EN(c, esc(e ? e.label : "")) + "</td><td>" + esc(r.numerator) + "</td><td>" + esc(r.denominator) + "</td><td>" +
+        return "<tr><td><b>" + EN(c, esc(r.event)) + "</b> " + EN(c, esc(e ? e.label : "")) + (r.population ? ' <span class="quiet">(' + populationWord(c, r.population) + ")</span>" : "") + "</td><td>" + esc(r.numerator) + "</td><td>" + esc(r.denominator) + "</td><td>" +
           (r.value == null ? esc(T(c, "site.qual.noRate", "no rate: nothing to divide by")) : esc(r.per === 1000 ? T(c, "site.qual.hai.per1000", "{v} per 1000 device-days", { v: r.value }) : T(c, "site.qual.hai.per100", "{v} per 100 operations", { v: r.value }))) + "</td></tr>";
       }).join("") + "</table></div>" + '<p class="quiet">' + EN(c, esc(d.denominatorNote || "")) + "</p>";
     var cases = d.cases == null ? failed(c, { detail: d.casesError }) : !d.cases.length ? "<p>" + esc(T(c, "site.qual.hai.none", "No cases recorded.")) + "</p>" : d.cases.map(function (k) {
@@ -97,16 +102,18 @@
     var lineOpts = (d.lines || []).map(function (l) { return '<option value="' + esc(l.lineId) + '">' + deviceWord(c, l.deviceClass) + " · " + who(c, d.patients, l.patientId) + " · " + EN(c, esc(l.type + (l.site ? " " + l.site : "") + " " + when(l.insertedAt))) + "</option>"; }).join("");
     var opOpts = (d.operations || []).map(function (o) { return '<option value="' + esc(o.caseId) + '">' + who(c, d.patients, o.patientId) + " · " + EN(c, esc((o.procedure || "") + " " + when(o.incisionAt))) + "</option>"; }).join("");
     var form = '<div class="card"><h2>' + esc(T(c, "site.qual.hai.openTitle", "Open a case for review")) + '</h2><p class="quiet">' + esc(T(c, "site.qual.hai.openHelp", "A device-associated infection is linked to a line logged with its device class on the chart; a surgical site infection to the operation. The criteria are applied by you; nothing here decides.")) + "</p>" +
-      '<div class="row"><label class="f"><span>' + esc(T(c, "site.qual.hai.event", "Infection")) + '</span><select id="qEvent">' + events.map(function (e) { return '<option value="' + esc(e.id) + '">' + EN(c, esc(e.id + " " + e.label)) + "</option>"; }).join("") + "</select></label>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.qual.hai.event", "Infection")) + '</span><select id="qEvent">' + events.map(function (e) { return '<option value="' + esc(e.id) + '">' + EN(c, esc(e.id + " " + e.label)) + (e.population ? " (" + populationWord(c, e.population) + ")" : "") + "</option>"; }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.qual.hai.doeLabel", "Date of event")) + '</span><input id="qDoe" type="date"></label></div>' +
-      '<div class="row"><label class="f"><span>' + esc(T(c, "site.qual.hai.line", "Line (CLABSI, CAUTI, VAP)")) + '</span><select id="qLine"><option value=""></option>' + lineOpts + "</select></label>" +
+      '<div class="row"><label class="f"><span>' + esc(T(c, "site.qual.hai.lineVent", "Line (CLABSI, CAUTI, VAP, VAE)")) + '</span><select id="qLine"><option value=""></option>' + lineOpts + "</select></label>" +
       (d.lines == null ? failed(c, { detail: d.linesError }) : "") +
       '<label class="f"><span>' + esc(T(c, "site.qual.hai.operation", "Operation (SSI)")) + '</span><select id="qOp"><option value=""></option>' + opOpts + "</select></label>" +
       (d.operations == null ? failed(c, { detail: d.operationsError }) : "") + "</div>" +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.qual.hai.depth", "SSI depth")) + '</span><select id="qDepth"><option value=""></option>' + (d.ssiDepths || []).map(function (x) { return '<option value="' + esc(x) + '">' + depthWord(c, x) + "</option>"; }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.qual.hai.period", "SSI surveillance period (days)")) + '</span><select id="qPeriod"><option value=""></option><option value="30">30</option><option value="90">90</option></select></label>' +
       '<label class="f"><span>' + esc(T(c, "site.qual.note", "Note")) + '</span><input id="qNote"></label>' +
-      '<button class="btn" type="button" data-q="open">' + esc(T(c, "site.qual.hai.open", "Open case")) + "</button></div>" + '<p class="quiet">' + EN(c, esc(d.unapproved || "")) + "</p></div>";
+      '<button class="btn" type="button" data-q="open">' + esc(T(c, "site.qual.hai.open", "Open case")) + "</button></div>" +
+      '<p class="quiet">' + esc(T(c, "site.qual.hai.ventHelp", "A ventilated patient on an adult stay is surveyed for VAE (VAC, IVAC, PVAP) and one on a paediatric stay for VAP, as NHSN does by location. A NICU stay is surveyed for neither.")) + "</p>" +
+      (d.unapproved ? '<div class="msg note">' + EN(c, esc(d.unapproved)) + "</div>" : "") + "</div>";
     return '<div class="card"><h2>' + esc(T(c, "site.qual.hai.ratesTitle", "Rates this month")) + "</h2>" + rates + "</div>" + form + "<h2>" + esc(T(c, "site.qual.hai.casesTitle", "Cases")) + "</h2>" + cases;
   }
 

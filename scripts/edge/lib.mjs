@@ -72,7 +72,7 @@ export function sha(s) { return crypto.createHash("sha256").update(s).digest("he
 // Deterministic 0..1 from a string (split assignment never changes between runs).
 export function unit(s) { return parseInt(sha(s).slice(0, 8), 16) / 0xffffffff; }
 
-// Round 3 (Edge-Runbook 5d). Keys held out of r3 training AND its dev split, so only the frozen test4 set
+// Round 3 (Edge-Runbook 5e). Keys held out of r3 training AND its dev split, so only the frozen test4 set
 // has them: targets ("calculator:gos", "kb:dic") 8%, ambiguous names ("amb:wells") 30%.
 export function t4Held(key) { return unit("t4hold:" + key) < (key.startsWith("amb:") ? 0.3 : 0.08); }
 // Short names a clinician uses for two or more different modules ("wells": DVT or PE; "insulin": drug, tool or

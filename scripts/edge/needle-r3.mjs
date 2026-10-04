@@ -1,4 +1,4 @@
-// scripts/edge/needle-r3.mjs: round-3 training set for the Needle router (Edge-Runbook 5d). Train side only.
+// scripts/edge/needle-r3.mjs: round-3 training set for the Needle router (Edge-Runbook 5e). Train side only.
 //   node scripts/edge/generate.mjs                       train/val (then: git checkout the frozen test.jsonl/manifest.json)
 //   node scripts/edge/generate-test4.mjs                 the frozen test4 set (committed BEFORE this runs)
 //   node scripts/edge/needle-r3.mjs build [--permute 1]  -> dataset/dev3.jsonl (selection split, real labels)

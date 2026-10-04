@@ -15,8 +15,17 @@
  * Kidney Foundation. KDOQI Clinical Practice Guideline for Hemodialysis Adequacy: 2015 update. Am J Kidney Dis
  * 2015;66(5):884-930, PMID 26498416. Both citations checked against PubMed 2026-09-17; the 1990 abstract does not
  * itself name URR, so its use as the URR source is unverified beyond the abstract). Missing an
- * input, or two inputs in different units, is "not computable", never 0. Kt/V is not built: it needs a formula choice
- * and nephrology sign-off (owner item O12).
+ * input, or two inputs in different units, is "not computable", never 0.
+ *
+ * SINGLE-POOL Kt/V IS DAUGIRDAS SECOND GENERATION (owner decision 2026-10-04, owner item O12): spKt/V = -ln(R - 0.008 x t)
+ * + (4 - 3.5 x R) x UF / W, with R = post urea / pre urea, t the session length in hours, UF the ultrafiltration in
+ * litres and W the post-dialysis weight in kg (Daugirdas JT. Second generation logarithmic estimates of single-pool
+ * variable volume Kt/V: an analysis of error. J Am Soc Nephrol 1993;4(5):1205-13, PMID 8305648, checked against PubMed
+ * 2026-10-04; the StewardMD calculator "ktv" in calculators.js carries the same expression). Unlike that calculator,
+ * ureas in different units, a negative ultrafiltration, a session of no length and a logarithm of zero or less are each
+ * "not computable" with the reason, never 0, and no adequacy verdict or target is shown (URR shows none either). Both
+ * formulas are clinical seed content (seed-signoff.js "dialysis-adequacy", ADEQUACY below): they are shown UNAPPROVED
+ * until signed, and, as for URR, signing does not gate the arithmetic.
  *
  * NOTHING IS DECIDED CLINICALLY. A post weight above the pre weight while fluid was removed is refused only until the
  * nurse says why (a scale, a meal, a transfusion); anticoagulation goes through the existing orders and eMAR, not a
@@ -97,6 +106,54 @@ function urr(pre, post) {
   return { computable: true, value: Math.round(((a - b) / a) * 1000) / 10, inputs };
 }
 
+/** PURE. Single-pool Kt/V by the Daugirdas second generation equation, to two decimals, or why it cannot be computed.
+ *  pre and post are { value, unit }; hours is the session length, ufLitres the ultrafiltration, weightKg the post weight. */
+function ktv(pre, post, hours, ufLitres, weightKg) {
+  const n = (x) => (x != null && str(x) !== "" && Number.isFinite(Number(x)) ? Number(x) : null);
+  const a = n(pre && pre.value), b = n(post && post.value), t = n(hours), uf = n(ufLitres), w = n(weightKg);
+  const inputs = { pre: pre || null, post: post || null, hours: t, ufLitres: uf, weightKg: w };
+  const no = (reason) => ({ computable: false, reason, inputs });
+  if (a === null) return no("pre_urea_missing");
+  if (b === null) return no("post_urea_missing");
+  if (str(pre.unit) !== str(post.unit)) return no("units_differ");
+  if (a <= 0) return no("pre_urea_not_positive");
+  if (b < 0) return no("post_urea_negative");
+  if (t === null) return no("duration_missing");
+  if (t <= 0) return no("duration_not_positive");
+  if (uf === null) return no("uf_missing");
+  if (uf < 0) return no("uf_negative");
+  if (w === null) return no("post_weight_missing");
+  if (w <= 0) return no("post_weight_not_positive");
+  const R = b / a, inner = R - 0.008 * t;
+  if (!(inner > 0)) return no("invalid_logarithm");
+  return { computable: true, value: Math.round((-Math.log(inner) + (4 - 3.5 * R) * (uf / w)) * 100) / 100, inputs };
+}
+
+/** PURE. Kt/V of a session record: t from its start and end, UF from the achieved ultrafiltration in mL, W its post weight. */
+function sessionKtv(s) {
+  const a = Date.parse(str(s && s.startAt)), e = Date.parse(str(s && s.endAt));
+  const hours = Number.isFinite(a) && Number.isFinite(e) ? (e - a) / 3600000 : null;
+  const uf = s && s.achievedUfMl != null && str(s.achievedUfMl) !== "" ? Number(s.achievedUfMl) / 1000 : null;
+  return ktv(s && s.preUrea, s && s.postUrea, hours, uf, s ? s.postWeightKg : null);
+}
+
+/* UNAPPROVED seed content (seed-signoff.js "dialysis-adequacy"): each formula with the code that computes it, so a change
+ * to either the words or the arithmetic is a new fingerprint and shows as unapproved until signed again. */
+const ADEQUACY = Object.freeze({
+  urr: Object.freeze({ label: "Urea reduction ratio (URR)",
+    formula: "URR (%) = (pre urea - post urea) / pre urea x 100",
+    rounding: "percent to one decimal",
+    notComputable: "pre or post urea missing; the two ureas in different units; pre urea zero or below",
+    source: "Lowrie EG, Lew NL. Am J Kidney Dis 1990;15(5):458-82, PMID 2333868; NKF KDOQI Clinical Practice Guideline for Hemodialysis Adequacy: 2015 update. Am J Kidney Dis 2015;66(5):884-930, PMID 26498416",
+    compute: urr }),
+  "sp-ktv": Object.freeze({ label: "Single-pool Kt/V (Daugirdas second generation)",
+    formula: "spKt/V = -ln(R - 0.008 x t) + (4 - 3.5 x R) x UF / W; R = post urea / pre urea, t = session length in hours, UF = ultrafiltration in litres, W = post-dialysis weight in kg",
+    rounding: "two decimals",
+    notComputable: "pre or post urea missing; the two ureas in different units; pre urea zero or below; post urea below zero; no session length or a length of zero or less; no ultrafiltration or a negative one; no post weight or a weight of zero or less; R - 0.008 x t zero or below (invalid logarithm)",
+    source: "Daugirdas JT. Second generation logarithmic estimates of single-pool variable volume Kt/V: an analysis of error. J Am Soc Nephrol 1993;4(5):1205-13, PMID 8305648",
+    compute: ktv, fromSession: sessionKtv }),
+});
+
 /** PURE. One dialyzer's story from its events: whose, how many uses, discarded or not. */
 function dialyzerState(dialyzerId, events) {
   const mine = (events || []).filter((e) => e && str(e.dialyzerId) === str(dialyzerId)).sort((x, y) => str(x.at).localeCompare(str(y.at)));
@@ -172,7 +229,7 @@ function sessionView(s) {
     targetUfMl: s.targetUfMl, achievedUfMl: s.achievedUfMl, weightReason: s.weightReason || null, startAt: s.startAt, endAt: s.endAt,
     dialyzerId: s.dialyzerId || null, reuseNumber: s.reuseNumber == null ? null : s.reuseNumber, complications: s.complications || null,
     nurse: s.nurse || null, doctor: s.doctor || null, preUrea: s.preUrea || null, postUrea: s.postUrea || null,
-    urr: urr(s.preUrea, s.postUrea), missingPost: missingPost(s), by: s.by, at: s.at,
+    urr: urr(s.preUrea, s.postUrea), ktv: sessionKtv(s), missingPost: missingPost(s), by: s.by, at: s.at,
   };
 }
 
@@ -426,6 +483,6 @@ async function dialyzerEvent(request, env, ctx) {
 
 export {
   ACCESS_TYPES as DIALYSIS_ACCESS_TYPES, STATION_PREFIX as DIALYSIS_STATION_PREFIX,
-  validateDialysisSettings, readDialysisSettings, urr, dialyzerState, missingPost,
+  validateDialysisSettings, readDialysisSettings, urr, ktv, sessionKtv, ADEQUACY as DIALYSIS_ADEQUACY, dialyzerState, missingPost,
   dialysisUnit, dialysisPatient, recordSerology, bookStation, saveSession, dialyzerEvent,
 };

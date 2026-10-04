@@ -132,8 +132,10 @@
       '<label class="f"><span>' + esc(T(c, "site.stores.quantity", "Quantity")) + '</span><input id="stMvQty" type="number"></label>' +
       '<label class="f" id="stMvUnitWrap"><span>' + esc(T(c, "site.stores.colUnit", "Unit")) + '</span><select id="stMvUnit">' + unitOptions(c, d.items[0], d.items[0] && d.items[0].unit) + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.stores.batch", "Batch")) + '</span><input id="stMvBatch"></label>' +
-      '<label class="f"><span>' + esc(T(c, "site.stores.expiry", "Expiry")) + '</span><input id="stMvExpiry" type="date"></label><label class="f"><span>' + esc(T(c, "site.stores.reason", "Reason (needed for adjustment or wastage)")) + '</span><input id="stMvReason"></label>' +
-      '<button class="btn" type="button" data-st="move">' + esc(T(c, "site.stores.record", "Record")) + "</button></div>";
+      '<label class="f"><span>' + esc(T(c, "site.stores.expiry", "Expiry")) + '</span><input id="stMvExpiry" type="date"></label><label class="f"><span>' + esc(T(c, "site.stores.reason", "Reason (needed for adjustment or wastage)")) + '</span><input id="stMvReason"></label></div>' +
+      '<div id="stMvTerms"><p class="note">' + esc(T(c, "site.stores.gst.receiptNote", "For a receipt: what it cost, from the supplier's invoice. A return to the supplier later reverses the GST from these.")) + '</p><div class="row">' +
+      termsFieldsHtml(c, "stMvT", T(c, "site.stores.gst.unitPrice", "Price per unit before GST (Rs)")) + "</div></div>" +
+      '<div class="row"><button class="btn" type="button" data-st="move">' + esc(T(c, "site.stores.record", "Record")) + "</button></div>";
   }
 
   function raiseHtml(c, d) {
@@ -187,6 +189,9 @@
           var matchItem = d && d.ok && d.items ? d.items.filter(function (i) { return i.code === l.item; })[0] : null;
           var unitSel = '<select id="stPoUnit-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colUnit", "Unit")) + '">' + (matchItem ? unitOptions(c, matchItem, l.unit) : '<option value="' + esc(l.unit) + '">' + EN(c, esc(l.unit)) + "</option>") + "</select>";
           var book = canBook && l.outstanding > 0 ? '<input type="number" min="1" id="stPoQty-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.quantity", "Quantity")) + '"> ' + unitSel + ' <select id="stPoLoc-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colStore", "Store")) + '">' + locs + "</select> " +
+            /* The GST on the supplier's invoice; the price is the order line's. */
+            '<input id="stPoGst-' + id + "-" + l.index + '" inputmode="decimal" size="6" autocomplete="off" aria-label="' + esc(T(c, "site.stores.gst.rate", "GST rate on the supplier's invoice (%)")) + '" placeholder="' + esc(T(c, "site.stores.gst.ratePh", "GST %, e.g. 12…")) + '"> ' +
+            '<select id="stPoInter-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.gst.split", "GST charged as")) + '"><option value="false">' + esc(T(c, "site.stores.gst.intraShort", "CGST + SGST")) + '</option><option value="true">' + esc(T(c, "site.stores.gst.interShort", "IGST")) + "</option></select> " +
             '<button class="btn quiet" type="button" data-st="bookin" data-id="' + id + '" data-po-line="' + esc(l.index) + '" data-item="' + esc(l.item) + '">' + esc(T(c, "site.stores.bookIn", "Book in")) + "</button>" : "";
           return "<tr><td>" + EN(c, esc(l.item)) + "</td><td>" + EN(c, esc(l.ordered + " " + l.unit)) + "</td><td>" + esc(l.received) + "</td><td>" + book + "</td></tr>";
         }).join("") + "</table></div></div>";
@@ -196,6 +201,48 @@
   function rupees(paise) { return (Math.round(Number(paise) || 0) / 100).toFixed(2); }
   function day(iso) { return String(iso || "").slice(0, 10); }
 
+  /* WHAT A RECEIPT COST (owner 2026-10-04, functions/_wardsynq/supplier-debit-note.js): the price before GST, the GST
+   * rate on the supplier's invoice and whether it charged CGST + SGST or IGST. A return to the supplier reverses the input
+   * tax credit from these. prefix names the inputs; pricePlaceholder says what a blank price means on this form. */
+  function termsFieldsHtml(c, prefix, priceLabel) {
+    var esc = c.esc;
+    return '<label class="f"><span>' + esc(priceLabel) + '</span><input id="' + prefix + '-price" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.gst.rate", "GST rate on the supplier's invoice (%)")) + '</span><input id="' + prefix + '-gst" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.gst.split", "GST charged as")) + '</span><select id="' + prefix + '-split"><option value="false">' + esc(T(c, "site.stores.gst.intra", "CGST + SGST (same state)")) + '</option><option value="true">' + esc(T(c, "site.stores.gst.inter", "IGST (another state)")) + "</option></select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.stores.gst.invoiceNo", "Supplier's invoice number")) + '</span><input id="' + prefix + '-inv" autocomplete="off"></label>';
+  }
+  /* The purchase terms to send, or undefined when no GST rate was typed (a receipt still lands without them). Rupees on
+   * screen, whole paise to the server; anything that is not a plain amount is sent as typed and refused there. */
+  function termsFrom(prefix) {
+    var rate = val(prefix + "-gst"); if (!rate) return undefined;
+    var rs = val(prefix + "-price"), out = { gstRate: rate, interState: val(prefix + "-split") === "true", invoiceNo: val(prefix + "-inv") };
+    if (rs) out.unitPricePaise = /^\d+(\.\d{1,2})?$/.test(rs) ? Math.round(Number(rs) * 100) : rs;
+    return out;
+  }
+  /* "Rs 99.90 + CGST 5.99 + SGST 5.99 = Rs 111.88" for a debit note. */
+  function noteAmounts(c, n) {
+    var tax = n.interState ? T(c, "site.stores.dn.igst", "IGST {v}", { v: rupees(n.igstPaise) }) : T(c, "site.stores.dn.cgstSgst", "CGST {c} + SGST {s}", { c: rupees(n.cgstPaise), s: rupees(n.sgstPaise) });
+    return c.esc(T(c, "site.stores.dn.amounts", "Rs {value} + {tax} = Rs {total}", { value: rupees(n.taxablePaise), tax: tax, total: rupees(n.totalPaise) }));
+  }
+
+  /* The supplier debit note register (GET /ward/supplier-debit-notes): every note in the dates chosen, with the totals the
+   * accountant reverses input tax credit by. null: not asked yet. */
+  function registerHtml(c, r) {
+    var esc = c.esc;
+    if (r == null) return "<p>" + esc(T(c, "site.stores.dn.pressShow", "Choose the dates and press Show.")) + "</p>";
+    if (r === "loading") return loading(c);
+    if (!r.ok) return '<div class="msg err">' + TS(c, "site.stores.dn.failed", "The register could not be read. Do not read this as no debit notes.") + (r.detail ? " " + EN(c, esc(r.detail)) : "") + "</div>";
+    if (!r.rows.length) return "<p>" + esc(T(c, "site.stores.dn.none", "No debit notes in these dates.")) + "</p>";
+    var t = r.totals, num = function (p) { return '<td class="num">' + esc(rupees(p)) + "</td>"; };
+    return '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.stores.sc.date", "Date")) + "</th><th>" + esc(T(c, "site.stores.dn.number", "Debit note")) + "</th><th>" + esc(T(c, "site.stores.supplier", "Supplier")) + "</th><th>" +
+      esc(T(c, "site.stores.colItem", "Item")) + '</th><th class="num">' + esc(T(c, "site.stores.dn.value", "Value (Rs)")) + '</th><th class="num">CGST</th><th class="num">SGST</th><th class="num">IGST</th><th class="num">' +
+      esc(T(c, "site.stores.dn.total", "Total (Rs)")) + "</th></tr></thead><tbody>" + r.rows.map(function (x) {
+        /* The original invoice sits under the note's number and the GSTIN under the supplier, so the five money columns fit. */
+        return "<tr><td>" + esc(x.date) + '</td><td><span class="mono" translate="no">' + esc(x.number) + "</span>" + (x.originalInvoiceNo ? '<br><span class="quiet">' + esc(T(c, "site.stores.dn.against", "against {inv}", { inv: x.originalInvoiceNo })) + "</span>" : "") + "</td><td>" +
+          EN(c, esc(x.supplier)) + (x.supplierGstin ? '<br><span class="mono" translate="no">' + esc(x.supplierGstin) + "</span>" : "") + "</td><td>" + EN(c, esc(x.display + " · " + x.quantity + " " + x.unit)) + "</td>" + num(x.taxablePaise) + num(x.cgstPaise) + num(x.sgstPaise) + num(x.igstPaise) + num(x.totalPaise) + "</tr>";
+      }).join("") + '</tbody><tfoot><tr><th colspan="4">' + esc(T(c, "site.stores.dn.totals", "{n} notes: input tax credit to reverse", { n: t.count })) + "</th>" + num(t.taxablePaise) + num(t.cgstPaise) + num(t.sgstPaise) + num(t.igstPaise) + num(t.totalPaise) + "</tr></tfoot></table></div>";
+  }
+
   /* Returns to suppliers (GET /ward/supply-chain): a return is always against the receipt the stock came in on, so the
    * server can refuse more than arrived. A controlled drug also needs a witness and the Controller of Drugs approval. */
   function returnsHtml(c, sc) {
@@ -203,20 +250,27 @@
     if (!sc.ok) return failed(c, T(c, "site.stores.sc.receiptsPhrase", "receipts and returns"));
     var esc = c.esc;
     var form = sc.receipts.length ? '<div class="row"><label class="f"><span>' + esc(T(c, "site.stores.sc.receipt", "Receipt")) + '</span><select id="stRtReceipt">' + sc.receipts.map(function (r) {
-      return '<option value="' + esc(r.receiptId) + '">' + EN(c, esc(r.display + " · " + day(r.at) + " · " + (r.supplier || ""))) + " · " + esc(T(c, "site.stores.sc.left", "{n} {unit} can go back", { n: r.remaining, unit: r.unit })) + "</option>";
+      return '<option value="' + esc(r.receiptId) + '" data-priced="' + (r.priced ? "1" : "0") + '">' + EN(c, esc(r.display + " · " + day(r.at) + " · " + (r.supplier || ""))) + " · " + esc(T(c, "site.stores.sc.left", "{n} {unit} can go back", { n: r.remaining, unit: r.unit })) +
+        (r.priced ? "" : " · " + esc(T(c, "site.stores.sc.unpriced", "no price on record"))) + "</option>";
     }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.stores.quantity", "Quantity")) + '</span><input id="stRtQty" type="number" min="0"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.stores.sc.returnReason", "Why it is going back")) + '</span><input id="stRtReason"></label>' +
-      '<label class="f"><span>' + esc(T(c, "site.stores.sc.debitNote", "Debit or credit note number (optional)")) + '</span><input id="stRtNote"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.sc.creditNote", "Supplier's credit note number (optional)")) + '</span><input id="stRtNote"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.stores.sc.supplierIfMissing", "Supplier, if the receipt names none")) + '</span><input id="stRtSupplier"></label></div>' +
+      /* Shown only for a receipt with no price on record: the debit note cannot be worked out without them. */
+      '<div id="stRtTerms"' + (sc.receipts[0].priced ? " hidden" : "") + '><p class="note">' + esc(T(c, "site.stores.sc.termsNeeded", "This receipt has no price on record. A debit note goes with every return, so give the price and GST from the supplier's invoice.")) + '</p><div class="row">' +
+      termsFieldsHtml(c, "stRtT", T(c, "site.stores.sc.termsPrice", "Price per unit as received, before GST (Rs)")) + "</div></div>" +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.stores.sc.witness", "Witness staff ID (controlled drugs only)")) + '</span><input id="stRtWitness" autocomplete="off"></label>' +
       '<label class="f"><span>' + esc(T(c, "site.stores.sc.controllerRef", "Controller of Drugs approval reference (controlled drugs only)")) + '</span><input id="stRtCdRef"></label>' +
       '<button class="btn" type="button" data-st="return">' + esc(T(c, "site.stores.sc.returnBtn", "Return to supplier")) + "</button></div>"
       : "<p>" + esc(T(c, "site.stores.sc.noReceipts", "No receipt has stock left that could go back to a supplier.")) + "</p>";
-    var list = sc.returns.length ? "<h3>" + esc(T(c, "site.stores.sc.recentReturns", "Recent returns")) + '</h3><div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.quantity", "Quantity")) + "</th><th>" + esc(T(c, "site.stores.supplier", "Supplier")) + "</th><th>" + esc(T(c, "site.stores.sc.returnReason", "Why it is going back")) + "</th><th>" + esc(T(c, "site.stores.sc.date", "Date")) + "</th></tr>" + sc.returns.map(function (r) {
-      return "<tr><td>" + EN(c, esc(r.display)) + "</td><td>" + EN(c, esc(r.quantity + " " + r.unit)) + "</td><td>" + EN(c, esc(r.supplier)) + "</td><td>" + EN(c, esc(r.reason)) + (r.debitNoteNo ? " · " + EN(c, esc(r.debitNoteNo)) : "") + "</td><td>" + esc(day(r.at)) + "</td></tr>";
+    var list = sc.returns.length ? "<h3>" + esc(T(c, "site.stores.sc.recentReturns", "Recent returns")) + '</h3><div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.quantity", "Quantity")) + "</th><th>" + esc(T(c, "site.stores.supplier", "Supplier")) + "</th><th>" + esc(T(c, "site.stores.sc.returnReason", "Why it is going back")) + "</th><th>" + esc(T(c, "site.stores.dn.number", "Debit note")) + "</th><th>" + esc(T(c, "site.stores.sc.date", "Date")) + "</th></tr>" + sc.returns.map(function (r) {
+      var dn = r.debitNote ? '<span class="mono" translate="no">' + esc(r.debitNote.number) + "</span><br>" + noteAmounts(c, r.debitNote) : esc(T(c, "site.stores.dn.beforeNotes", "Returned before debit notes"));
+      return "<tr><td>" + EN(c, esc(r.display)) + "</td><td>" + EN(c, esc(r.quantity + " " + r.unit)) + "</td><td>" + EN(c, esc(r.supplier)) + "</td><td>" + EN(c, esc(r.reason)) + (r.debitNoteNo ? " · " + EN(c, esc(r.debitNoteNo)) : "") + "</td><td>" + dn + "</td><td>" + esc(day(r.at)) + "</td></tr>";
     }).join("") + "</table></div>" : "";
-    return (sc.truncatedWarning ? '<div class="msg note">' + EN(c, esc(sc.truncatedWarning)) + "</div>" : "") + form + list;
+    var reg = "<h3>" + esc(T(c, "site.stores.dn.registerHeading", "Debit note register")) + '</h3><div class="row"><label class="f"><span>' + esc(T(c, "site.stores.from", "From date")) + '</span><input id="stDnFrom" type="date"></label><label class="f"><span>' +
+      esc(T(c, "site.stores.to", "To date")) + '</span><input id="stDnTo" type="date"></label><button class="btn quiet" type="button" data-st="dnRegister">' + esc(T(c, "site.stores.show", "Show")) + '</button></div><div id="stDnReg" aria-live="polite">' + registerHtml(c, null) + "</div>";
+    return (sc.truncatedWarning ? '<div class="msg note">' + EN(c, esc(sc.truncatedWarning)) + "</div>" : "") + form + list + reg;
   }
 
   /* Rate contracts per supplier. A price above an in-date contract is shown to the approver; it never changes an order. */
@@ -330,7 +384,13 @@
       for (var i = 0; i < inputs.length; i++) if (inputs[i].getAttribute("data-indent") === id) { var o = { code: inputs[i].getAttribute("data-code") }; o[field] = String(inputs[i].value || "").trim(); out.push(o); }
       return out;
     };
-    el.onchange = function (ev) { if (ev.target && ev.target.id === "stMvItem") refreshMvUnit(); };
+    var termsVisible = function (id) { var e = document.getElementById(id); return !!e && !e.hidden; };
+    el.onchange = function (ev) {
+      if (ev.target && ev.target.id === "stMvItem") refreshMvUnit();
+      /* The cost fields belong to a receipt only; a priced receipt needs none to go back. */
+      if (ev.target && ev.target.id === "stMvKind") { var mt = document.getElementById("stMvTerms"); if (mt) mt.hidden = ev.target.value !== "receipt"; }
+      if (ev.target && ev.target.id === "stRtReceipt") { var o = ev.target.options[ev.target.selectedIndex], rt = document.getElementById("stRtTerms"); if (rt) rt.hidden = !o || o.getAttribute("data-priced") === "1"; }
+    };
     el.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-st]"); if (!b) return;
       var act = b.getAttribute("data-st"), id = b.getAttribute("data-id");
@@ -342,7 +402,7 @@
       if (act === "close") return send("close:" + id, "/ward/indent-close", { orgId: org, indentId: id, reason: val("stClose-" + id) }, T(c, "site.stores.closed", "Back-order closed."));
       if (act === "item") return send("item", "/ward/store-item", { orgId: org, code: val("stItCode"), name: val("stItName"), category: val("stItCat"), unit: val("stItUnit"), reorderLevel: val("stItReorder"), packs: parsePacksInput(val("stItPacks")) }, T(c, "site.stores.itemSaved", "Item saved."));
       if (act === "location") return send("location", "/ward/store-location", { orgId: org, code: val("stLoCode"), name: val("stLoName"), kind: val("stLoKind"), departmentId: val("stLoDept") }, T(c, "site.stores.locationSaved", "Location saved."));
-      if (act === "move") return send("move", "/ward/store-move", { orgId: org, kind: val("stMvKind"), code: val("stMvItem"), location: val("stMvLoc"), quantity: val("stMvQty"), unit: val("stMvUnit"), batch: val("stMvBatch"), expiry: val("stMvExpiry"), reason: val("stMvReason") }, T(c, "site.stores.recorded", "Recorded."));
+      if (act === "move") return send("move", "/ward/store-move", { orgId: org, kind: val("stMvKind"), code: val("stMvItem"), location: val("stMvLoc"), quantity: val("stMvQty"), unit: val("stMvUnit"), batch: val("stMvBatch"), expiry: val("stMvExpiry"), reason: val("stMvReason"), purchase: val("stMvKind") === "receipt" ? termsFrom("stMvT") : undefined }, T(c, "site.stores.recorded", "Recorded."));
       if (act === "raise") {
         var to = document.getElementById("stRqTo"), opt = to && to.options ? to.options[to.selectedIndex] : null, rl = [];
         for (var n = 0; n < 5; n++) { if (val("stRqItem" + n)) rl.push({ code: val("stRqItem" + n), quantity: val("stRqQty" + n) }); }
@@ -350,9 +410,15 @@
       }
       if (act === "bookin") {
         var ln = b.getAttribute("data-po-line");
-        return send("bookin:" + id + ":" + ln, "/ward/goods-receive", { orgId: org, purchaseOrderId: id, line: ln, item: b.getAttribute("data-item"), unit: val("stPoUnit-" + id + "-" + ln), quantity: val("stPoQty-" + id + "-" + ln), location: val("stPoLoc-" + id + "-" + ln) }, T(c, "site.stores.bookedIn", "Booked in."));
+        return send("bookin:" + id + ":" + ln, "/ward/goods-receive", { orgId: org, purchaseOrderId: id, line: ln, item: b.getAttribute("data-item"), unit: val("stPoUnit-" + id + "-" + ln), quantity: val("stPoQty-" + id + "-" + ln), location: val("stPoLoc-" + id + "-" + ln),
+          purchase: val("stPoGst-" + id + "-" + ln) ? { gstRate: val("stPoGst-" + id + "-" + ln), interState: val("stPoInter-" + id + "-" + ln) === "true" } : undefined }, T(c, "site.stores.bookedIn", "Booked in."));
       }
-      if (act === "return") return send("return", "/ward/supplier-return", { orgId: org, receiptId: val("stRtReceipt"), quantity: val("stRtQty"), reason: val("stRtReason"), debitNoteNo: val("stRtNote"), supplier: val("stRtSupplier"), witnessId: val("stRtWitness"), controllerApprovalRef: val("stRtCdRef") }, T(c, "site.stores.sc.returned", "Returned to the supplier."));
+      if (act === "return") return send("return", "/ward/supplier-return", { orgId: org, receiptId: val("stRtReceipt"), quantity: val("stRtQty"), reason: val("stRtReason"), debitNoteNo: val("stRtNote"), supplier: val("stRtSupplier"), witnessId: val("stRtWitness"), controllerApprovalRef: val("stRtCdRef"),
+        purchase: termsVisible("stRtTerms") ? termsFrom("stRtT") : undefined }, T(c, "site.stores.sc.returned", "Returned to the supplier."));
+      if (act === "dnRegister") {
+        set("stDnReg", registerHtml(c, "loading"));
+        return c.api("/ward/supplier-debit-notes" + q + "&from=" + encodeURIComponent(val("stDnFrom")) + "&to=" + encodeURIComponent(val("stDnTo"))).then(function (r) { set("stDnReg", registerHtml(c, r || { ok: false })); }, function () { set("stDnReg", registerHtml(c, { ok: false })); });
+      }
       if (act === "contract") {
         /* Rupees on screen, whole paise to the server; anything that is not a plain amount is sent as typed and refused there. */
         var rs = val("stRcPrice"), paise = /^\d+(\.\d{1,2})?$/.test(rs) ? Math.round(Number(rs) * 100) : rs;
@@ -371,5 +437,5 @@
   } });
 
   WSQ._stores = { indentsHtml: indentsHtml, stockHtml: stockHtml, masterHtml: masterHtml, locationsHtml: locationsHtml, raiseHtml: raiseHtml, consumptionHtml: consumptionHtml, ordersHtml: ordersHtml,
-    returnsHtml: returnsHtml, contractsHtml: contractsHtml, reorderHtml: reorderHtml, policyHtml: policyHtml };
+    returnsHtml: returnsHtml, registerHtml: registerHtml, contractsHtml: contractsHtml, reorderHtml: reorderHtml, policyHtml: policyHtml };
 })();

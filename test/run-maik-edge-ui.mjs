@@ -157,7 +157,7 @@ try {
   const tpj = JSON.parse(tp || "{}");
   ok(tpj.n > 10 && tpj.neo > 0 && tpj.bad && tpj.bad.length === 0, "every tool the router can offer (incl. " + tpj.neo + " neonatal tools) has a card that opens (" + tp + ")");
   for (const [kind, q, pick, attr] of [
-    ["tool (neonatal)", "normal adult potassium range?", "open: (Normal values|Reference values)", /data-maik-tool="neo:ref"/],
+    ["tool (adult)", "normal adult potassium range?", "open: Adult normal values", /data-maik-tool="adultref"/],
     ["drug", "is augmentin ok in pregnancy", "drug:", /data-maik-drug|maik-drug/],
     ["kb", "open pneumonia antibiotics", "reference:", /data-kb-more=/],
     ["calculator", "how sick is this pneumonia patient score", "calculator:", /data-maik-calc=/]
@@ -169,11 +169,12 @@ try {
     const offered = new RegExp("^\\d+\\. " + pick, "m").test(lp);
     ok(!offered || ((await countAi()) > a1 && attr.test(html)), kind + ": the picked option draws its card (" + (offered ? "offered" : "not offered for this text") + ")");
     if (kind.startsWith("tool")) {
-      ok(offered, "the potassium request offers Normal values to the engine (" + lp.replace(/\n/g, " | ") + ")");
-      await ev(`window.__neoOpened = null; window.__neoReal = SMD_NEO_HUB.open; SMD_NEO_HUB.open = function (id) { window.__neoOpened = id; };
-        var b = [].slice.call(document.querySelectorAll('#maikBody [data-maik-tool="neo:ref"]')).pop(); if (b) b.click(); return 1;`);
+      ok(offered, "the adult potassium request offers Adult normal values to the engine (" + lp.replace(/\n/g, " | ") + ")");
+      ok(!/Normal values|Reference values/.test(lp.replace(/Adult normal values/g, "")), "and not the neonatal page (" + lp.replace(/\n/g, " | ") + ")");
+      await ev(`window.__arOpened = null; window.__arReal = SMD_ADULT_REF.open; SMD_ADULT_REF.open = function (o) { window.__arOpened = o; };
+        var b = [].slice.call(document.querySelectorAll('#maikBody [data-maik-tool="adultref"]')).pop(); if (b) b.click(); return 1;`);
       await sleep(600);
-      ok(await ev(`SMD_NEO_HUB.open = window.__neoReal; return window.__neoOpened;`) === "ref", "tapping it closes MaiK and opens Neonatal Normal values");
+      ok(await ev(`SMD_ADULT_REF.open = window.__arReal; return window.__arOpened && window.__arOpened.q;`) === q, "tapping it closes MaiK and opens Adult normal values on the question");
       await openMaik();
     }
   }

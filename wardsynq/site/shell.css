@@ -100,7 +100,7 @@ input[type="checkbox"], input[type="radio"] { width: auto; min-height: 0; margin
 table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
 th, td { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
 th { font-size: var(--t-micro); color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-td.num { font-variant-numeric: tabular-nums lining-nums; text-align: right; }
+td.num, th.num { font-variant-numeric: tabular-nums lining-nums; text-align: right; }
 /* .tbl exists to let a wide table scroll sideways instead of squeezing its columns - but `table`
  * is `width: 100%` and browsers auto-size columns to fit that 100%, so a table never actually
  * overflows its scroll box; it just gets squeezed. Then .mono's word-break:break-word, with nothing

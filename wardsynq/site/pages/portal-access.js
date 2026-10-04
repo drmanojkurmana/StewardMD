@@ -6,7 +6,8 @@
  * shown ONCE, here, to be read to the person in front of you: it is not stored and nothing sends it.
  *
  * A fourth: the hospital's patient education leaflets (functions/_wardsynq/patient-education.js). Written here as drafts
- * and approved here by a second clinician; WardSynQ ships none. A leaflet is given to a patient on the discharge summary
+ * and approved here by a second clinician. WardSynQ puts none in a library by itself; a treating clinician may import the
+ * StewardMD starter set (owner decision 2026-10-04, leaflet-starter.js), which arrives as drafts marked as StewardMD's. A leaflet is given to a patient on the discharge summary
  * (discharge.js) and then shows on their portal.
  */
 (function () {
@@ -73,7 +74,10 @@
     if (!r.leaflets.length) return '<p data-empty="leaflets">' + c.esc(T(c, "site.portal.edu.none", "This hospital has written no leaflet yet.")) + "</p>";
     return (r.warning ? '<div class="msg err">' + EN(c, c.esc(r.warning)) + "</div>" : "") + "<ul>" + r.leaflets.map(function (l) {
       var mine = (l.draftedBy || []).indexOf(r.me) >= 0;
-      return "<li><b>" + EN(c, c.esc(l.title)) + "</b> (" + EN(c, c.esc(l.language)) + "), " + c.esc(eduState(c, l.state)) + ", " + c.esc(T(c, "site.portal.edu.version", "version {n}", { n: l.version })) +
+      /* A StewardMD starter leaflet says so: as a draft, plainly; once approved, as where the words started. */
+      var origin = !l.starter ? "" : l.state === "draft" ? '<br><span class="pill warn" style="white-space:normal">' + c.esc(T(c, "site.portal.edu.starterDraft", "Draft prepared by StewardMD for your clinicians to review")) + "</span>"
+        : '<br><span class="quiet">' + c.esc(T(c, "site.portal.edu.starterOrigin", "Started from a StewardMD draft")) + "</span>";
+      return "<li><b>" + EN(c, c.esc(l.title)) + "</b> (" + EN(c, c.esc(l.language)) + "), " + c.esc(eduState(c, l.state)) + ", " + c.esc(T(c, "site.portal.edu.version", "version {n}", { n: l.version })) + origin +
         (l.approval ? "<br>" + c.esc(T(c, "site.portal.edu.approvedBy", "Approved by")) + " " + EN(c, c.esc(l.approval.byName || l.approval.by)) : "") +
         (l.retired ? "<br>" + c.esc(T(c, "site.portal.edu.retiredWhy", "Retired:")) + " " + EN(c, c.esc(l.retired.reason)) : "") +
         '<details><summary>' + c.esc(T(c, "site.portal.edu.read", "Read")) + '</summary><div style="white-space:pre-wrap" lang="' + c.esc(l.language) + '">' + EN(c, c.esc(l.body)) + "</div></details>" +
@@ -111,12 +115,15 @@
         '<p class="quiet">' + c.esc(T(c, "site.portal.giveAccessNote1", "Only with the person in front of you. The code is shown once; read it to them. Patients sign in at")) + ' <b>/portal.html#org=' + EN(c, c.esc(org)) + "</b>.</p>" +
         '<div class="row"><label class="f"><span>' + c.esc(T(c, "site.portal.mrnLabel", "MR number")) + '</span><input id="paMrn" autocapitalize="characters"></label><button class="btn quiet" type="button" data-pa="find">' + c.esc(T(c, "site.portal.find", "Find")) + "</button></div>" +
         '<div id="paPatient"></div></div>' : "") +
-      '<div class="card"><h2>' + c.esc(T(c, "site.portal.edu.card", "Patient education leaflets")) + '</h2><p class="quiet">' + c.esc(T(c, "site.portal.edu.intro", "The hospital's own leaflets. WardSynQ ships none. A leaflet reaches a patient only after a second clinician approves the version, and only when a clinician gives it on the discharge summary.")) + "</p>" +
+      '<div class="card"><h2>' + c.esc(T(c, "site.portal.edu.card", "Patient education leaflets")) + '</h2><p class="quiet">' + c.esc(T(c, "site.portal.edu.introStarter", "The hospital's own leaflets. WardSynQ puts none in your library by itself. A leaflet reaches a patient only after a second clinician approves the version, and only when a clinician gives it on the discharge summary.")) + "</p>" +
         (treat ? '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.portal.edu.title", "Title")) + '</span><input id="paEduTitle" maxlength="160"></label>' +
           '<label class="f"><span>' + c.esc(T(c, "site.portal.edu.language", "Language code (en, hi, ta)")) + '</span><input id="paEduLang" maxlength="12"></label>' +
           '<label class="f"><span>' + c.esc(T(c, "site.portal.edu.tags", "Conditions or procedures, separated by commas")) + '</span><input id="paEduTags"></label></div>' +
           '<div class="row"><label class="f" style="flex:2 1 260px"><span>' + c.esc(T(c, "site.portal.edu.body", "Leaflet text")) + '</span><textarea id="paEduBody" rows="6" maxlength="20000"></textarea></label></div>' +
-          '<button class="btn primary" type="button" data-pa="edusave">' + c.esc(T(c, "site.portal.edu.save", "Save draft")) + '</button> <button class="btn quiet" type="button" data-pa="edunew">' + c.esc(T(c, "site.portal.edu.new", "New leaflet")) + '</button><div id="paEduOut" aria-live="polite"></div>' : "") +
+          '<button class="btn primary" type="button" data-pa="edusave">' + c.esc(T(c, "site.portal.edu.save", "Save draft")) + '</button> <button class="btn quiet" type="button" data-pa="edunew">' + c.esc(T(c, "site.portal.edu.new", "New leaflet")) + "</button>" +
+          '<div class="row"><button class="btn quiet" type="button" data-pa="edustarter">' + c.esc(T(c, "site.portal.edu.starterImport", "Add the StewardMD starter drafts (10 leaflets, English)")) + "</button></div>" +
+          '<p class="quiet">' + c.esc(T(c, "site.portal.edu.starterNote", "Each one arrives as a draft for your clinicians to read and change. A second clinician approves each one before it can be given to any patient. Leaflets already in your library are left as they are.")) + "</p>" +
+          '<div id="paEduOut" aria-live="polite"></div>' : "") +
         '<div id="paEduLib"></div></div>';
     var edu = { lib: null, editing: null };
     function loadLib() { set("paEduLib", libraryHtml(c, null, treat)); c.api("/ward/education-leaflets" + q).then(function (r) { edu.lib = r && r.ok && Array.isArray(r.leaflets) ? r : { ok: false }; set("paEduLib", libraryHtml(c, edu.lib, treat)); }); }
@@ -174,6 +181,16 @@
         if (edu.editing) { eb.leafletId = edu.editing.id; eb.expectedVersion = edu.editing.v; }
         b.disabled = true;
         return c.api("/ward/education-leaflet-save", eb).then(function (r) { if (r && r.ok) eduForm(null); eduDone(r); });
+      }
+      if (a === "edustarter") {
+        b.disabled = true;
+        set("paEduOut", '<span class="spin"></span> ' + c.esc(T(c, "site.portal.edu.starterBusy", "Adding the starter drafts...")));
+        return c.api("/ward/education-leaflet-import-starter", { orgId: org }).then(function (r) {
+          if (!r || !r.ok) return eduDone(r);
+          b.disabled = false;
+          set("paEduOut", '<div class="msg ok">' + TS(c, "site.portal.edu.starterDone", "{n} starter drafts added. {m} were already in your library and were not changed.", { n: r.written, m: (r.alreadyHeld || []).length }) + "</div>");
+          loadLib();
+        }, function () { eduDone(null); });
       }
       if (a === "eduapprove") {
         b.disabled = true;

@@ -194,7 +194,12 @@ adb) before a final drop decision.
   >
   > Requests: (1) count fast cores at a lower threshold (say 50% of the max) or take the top two capacity
   > tiers; (2) respect `sched_getaffinity`; (3) expose a thread count in `needle.h` so apps do not need a
-  > linker wrap. We have not yet checked whether your 2026-10-02 build changes this.
+  > linker wrap. Your 2026-10-02 build (3.1.0, f84005f8) does not change this: `fast_core_mask()` and
+  > `Engine::Engine()` disassemble identically.
+  >
+  > Separately: a loaded engine that only gets `needle_complete` (no `needle_init` in between) never
+  > returns from about its 49th-57th call (Pixel 9; also on macOS arm64, call 56, both 27c0a9a5 and
+  > f84005f8). `needle_reset` does not help; `needle_init` before each call does.
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Latency options (2026-10-02):** [[Edge-Options-2026-10-02]]. On a host CPU the grammar sampler over the
@@ -853,7 +858,41 @@ and the ICD cue should not fire on the "Search ICD" tool title. Both change rows
 need their own review; the marks were not changed. Raw host output and scores:
 `$WORK/r7.test3{,rot}.raw.jsonl`, `r7.test3{,sc}.score.json` (not in the repo).
 
-### 5d. Needle local LoRA, round 3, and frozen test set `edge-router-4`, 2026-10-04
+### 5d. Re-audit of upstream Needle 3.1.0 (f84005f8), 2026-10-04: pin NOT moved
+Cactus's `main` is `c7c415a3` (README only) over `f84005f8` ("Replace binaries from production build",
+2026-10-02). The binaries are engine 3.1.0 (`config.json` engine_version 3.0.2 -> 3.1.0): the Whistle
+speech model (GitHub cactus-compute/needle `bb665fc1` "Whistle (#163)", 2026-10-01) linked into the same
+library. Compared with our pin `27c0a9a5` on the Mac (M1, CPU), no phone:
+| Check | 27c0a9a5 (pin) | f84005f8 (3.1.0) | Verdict |
+|---|---|---|---|
+| Weights `needle3.cact`, `LICENSE`, tokenizer | weights sha256 c9d915ec..., LICENSE git blob d6456956... | identical | equal |
+| Header | 1,187 B, `needle_complete(input, max, out, cap)` | 3,322 B; **`needle_complete` and `needle_embed` gain `pcm, samples`**; new `needle_models`, `needle_set_audio`, `needle_transcribe` | **API break**: JNI, `NeedlePlugin.swift` and `needle-host.cpp` must change to move |
+| Size | android-arm64 1.66 MB, ios-arm64 1.14 MB, macos 1.16 MB | 2.13 / 1.47 / 1.50 MB (+28%, speech code we do not use) | **worse** |
+| Imports (`nm -u`) | android 124 | 131: only `cos sin sincos log10`, `__memset_chk __strlen_chk`, one libc++ sort | equal: no socket/connect/getaddrinfo/curl/SSL/dlopen, no URL or host string |
+| Thread fallback | `fast_core_mask` + `hardware_concurrency()` in `needle::Engine()` | disassembly of `fast_core_mask`, `Engine::Engine()` and `ThreadPool(int)` identical (only string-table offsets moved); `whistle::Engine()` is a second caller | unchanged: our `--wrap` is still needed and still links |
+| Hang (init once, then only complete; `NEEDLE_INIT_ONCE=1 needle-host`, 150 test3 rows) | **hangs at call 56** (no return in 60 s; calls take ~65 ms) | **hangs at call 56** | not fixed upstream; first host repro (was Pixel only). With init before every call: 2,644/2,644 on both |
+| Base model, frozen `test` (1,141 model rows) | PASS, coverage 65.5%, wrong 0.0%, danger 100% | same | equal: all 1,141 decisions byte-identical |
+| Base model, `test3` (1,503 model rows) | PASS, coverage 35.3%, wrong 0.2%, danger 100% | same | equal: all 1,503 decisions byte-identical |
+| Host latency p50 / p95 (init + complete) | test 63 / 95 ms, test3 65 / 82 ms | test 62 / 81, test3 65 / 80 ms | equal or better (one run each, M1) |
+| Peak RAM (engine's own field) | 99 MB | 98 MB | equal |
+| Android link (NDK 27.2 clang, API 26, the plugin's flags) | links; LOAD align 0x4000; wrap in place; no network imports | as-is **fails to compile** (needle_complete takes 6 args); with `nullptr, 0` added it links, align 0x4000, wrap in place, no network imports | needs a code change |
+
+`test/native-host/run.sh android` itself was not run: it is Linux-only (linux-x86_64 NDK path, gradle +
+the llama submodule) and the Mac had about 2.5 GB free. The NDK link above replaces its Needle half.
+
+**Decision: keep `27c0a9a5`.** The new build is the same text engine with speech added: identical
+decisions, the same thread fallback and the same hang, so it fixes nothing we need, while it is 28% larger
+and breaks the `needle_complete` ABI (three call sites). It is not at least as good on every check.
+Move only if we want Whistle (on-device speech to tool calls) or a later build fixes the hang or the
+thread count; then change the three call sites to `needle_complete(text, nullptr, 0, max, out, cap)`
+(`needle-host.cpp` already builds against both headers) and re-run this table.
+Repro: `clang++ -std=c++17 -O2 -I<dir with needle.h> scripts/edge/needle-host.cpp <macos-arm64/libneedle.a>
+-framework Accelerate -o needle-host`; rows from `node scripts/edge/needle-r2.mjs rows test|test3`;
+`node scripts/edge/needle-pred.mjs pred raw.jsonl > pred.jsonl`; `node scripts/edge/score.mjs --split
+test|test3 --pred pred.jsonl`. Binaries were deleted after the run.
+
+### 5e. Needle local LoRA, round 3, and frozen test set `edge-router-4`, 2026-10-04
+Written as 5d on its branch; renumbered 5e on merge because 5d on main is the Needle 3.1.0 re-audit. The frozen `manifest4.json` note still says "Edge-Runbook 5d" and means this section.
 
 **Why.** test3 (`edge-router-3`) was seen once by r7, so it is not used to tune or pick anything in round 3.
 The rules layer also changed after r7 (#1365 KB exact, #1374 disease-name navigation, #1377 scheme intent and

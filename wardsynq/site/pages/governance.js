@@ -626,6 +626,14 @@
       });
       return out.length ? '<br><span class="quiet">' + out.join("<br>") + "</span>" : "";
     }
+    /* Owner decision 2026-10-04: 4 counts medication errors by the NCC MERP definition, near misses beside the rate, the count by category A to I and group beneath. */
+    if (no === 4 && m.byCategory) {
+      var g = m.byGroup || {}, bc = m.byCategory;
+      out.push(T(c, "site.gov.nabh.k4near", "of which {n} near misses (NCC MERP categories A and B)", { n: m.nearMisses }));
+      out.push(T(c, "site.gov.nabh.k4groups", "No error {a}, error no harm {b}, error harm {h}, death {d}", { a: g["no-error"] || 0, b: g["error-no-harm"] || 0, h: g["error-harm"] || 0, d: g.death || 0 }));
+      out.push(["A", "B", "C", "D", "E", "F", "G", "H", "I"].map(function (k) { return k + " " + (bc[k] || 0); }).join(", "));
+      if (m.uncategorised) out.push(T(c, "site.gov.nabh.k4uncat", "{n} with no NCC MERP category", { n: m.uncategorised }));
+    }
     if (no === 30) {
       if (m.reportingYearNotConfigured) out.push(T(c, "site.gov.nabh.k30notset", "Reporting year not configured: this month only"));
       else if (m.yearToDateFrom) out.push(T(c, "site.gov.nabh.k30ytd", "Year to date from {from}", { from: m.yearToDateFrom }));
