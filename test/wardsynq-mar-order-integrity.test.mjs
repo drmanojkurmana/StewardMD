@@ -4,6 +4,7 @@
  *   F3  a bedside scan done under one order version cannot be completed after a clinically material amendment
  *   F5  a safety check that did not run refuses by default; continuing needs a reason and is recorded as unchecked
  *   F6  missing renal and pregnancy/lactation coverage is said on the order, with the patient's measurements
+ *       (and which eGFR LOINC codes are read, in what order: owner decision 2026-10-04)
  *
  * node --test --experimental-test-module-mocks --experimental-sqlite test/wardsynq-mar-order-integrity.test.mjs
  */
@@ -228,4 +229,52 @@ test("F3, the machine itself: administer() refuses a dose scanned under an order
   assert.equal(rec.status, "administered");
   assert.deepEqual([rec.dose, rec.route, rec.orderVersion], [{ value: 1, unit: "g" }, "IV", 1]);
   assert.deepEqual(emar.invalidateForAmendedOrder(rec, v2, "rn"), [], "an administered dose is history: never reset");
+});
+
+/* F6, owner decision 2026-10-04: which eGFR codes the renal check reads. Newest result wins by time; the code preference
+ * (98979-8 first, legacy group last) only breaks a tie within one draw; 33914-3 is read as 77147-7. */
+const EGFR_NOW = Date.parse("2026-10-04T12:00:00Z");
+const EGFR_T1 = "2026-10-04T08:00:00Z", EGFR_T0 = "2026-10-03T08:00:00Z";
+const egfrObs = (code, value, at) => ({ resourceType: "Observation", code, value, unit: "mL/min/1.73m2", meta: { effectiveAt: at } });
+const egfrOf = async (...o) => (await import("../functions/_wardsynq/migrate-emar.js")).renalFrom(o, EGFR_NOW).egfr;
+
+test("F6 eGFR codes: 98979-8 is preferred over 62238-1 for the same draw, in either arrival order", async () => {
+  assert.equal((await egfrOf(egfrObs("62238-1", 40, EGFR_T1), egfrObs("98979-8", 44, EGFR_T1))).code, "98979-8");
+  assert.equal((await egfrOf(egfrObs("98979-8", 44, EGFR_T1), egfrObs("62238-1", 40, EGFR_T1))).value, 44);
+  assert.equal((await egfrOf(egfrObs("48642-3", 50, EGFR_T1), egfrObs("69405-9", 46, EGFR_T1))).code, "69405-9", "a legacy code never beats an active one from the same draw");
+});
+
+test("F6 eGFR codes: a newer 62238-1 beats an older 98979-8 (time first, code only breaks a tie)", async () => {
+  const r = await egfrOf(egfrObs("98979-8", 70, EGFR_T0), egfrObs("62238-1", 30, EGFR_T1));
+  assert.deepEqual([r.code, r.value], ["62238-1", 30]);
+  assert.equal((await egfrOf(egfrObs("98979-8", 70, EGFR_T0), egfrObs("48642-3", 30, EGFR_T1))).value, 30, "even a legacy code, when it is the newer result");
+});
+
+test("F6 eGFR codes: 33914-3 is accepted and reported as 77147-7", async () => {
+  const r = await egfrOf(egfrObs("33914-3", 52, EGFR_T1));
+  assert.deepEqual([r.code, r.value, r.legacy], ["77147-7", 52, undefined]);
+  assert.equal((await egfrOf(egfrObs("33914-3", 52, EGFR_T1), egfrObs("62238-1", 51, EGFR_T1))).code, "62238-1", "the alias takes 77147-7's rank, below 62238-1");
+});
+
+test("F6 eGFR codes: 77147-7 is accepted", async () => {
+  assert.equal((await egfrOf(egfrObs("77147-7", 53, EGFR_T1))).code, "77147-7");
+  assert.equal((await egfrOf(egfrObs("77147-7", 53, EGFR_T1), egfrObs("69405-9", 54, EGFR_T1))).code, "77147-7", "ranked above 69405-9");
+});
+
+test("F6 eGFR codes: a lone race-specific or population-specific result is used with legacy: true and a coverage note", async () => {
+  const { renalFrom, coverageFindings } = await import("../functions/_wardsynq/migrate-emar.js");
+  for (const code of ["48642-3", "48643-1", "50044-7", "88293-6", "88294-4"]) {
+    const renal = renalFrom([egfrObs(code, 33, EGFR_T1)], EGFR_NOW);
+    assert.deepEqual([renal.egfr.code, renal.egfr.value, renal.egfr.legacy], [code, 33, true], code);
+    const note = coverageFindings({ drug: "Ceftriaxone" }, renal, 0, 0, {}).find((f) => f.code === "RENAL_EGFR_LEGACY_EQUATION");
+    assert.ok(note && /legacy race-specific or population-specific equation/.test(note.message), code);
+  }
+  const modern = renalFrom([egfrObs("98979-8", 44, EGFR_T1)], EGFR_NOW);
+  assert.equal(modern.egfr.legacy, undefined);
+  assert.ok(!coverageFindings({ drug: "Ceftriaxone" }, modern, 0, 0, {}).some((f) => f.code === "RENAL_EGFR_LEGACY_EQUATION"));
+});
+
+test("F6 eGFR codes: an unknown code is ignored, even when it is the newest result", async () => {
+  assert.equal(await egfrOf(egfrObs("99999-9", 10, EGFR_T1)), null);
+  assert.equal((await egfrOf(egfrObs("99999-9", 10, EGFR_T1), egfrObs("98979-8", 44, EGFR_T0))).value, 44);
 });

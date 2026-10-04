@@ -5,6 +5,21 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ renal check: which eGFR LOINC codes it reads (owner)
+
+**Decision.** `functions/_wardsynq/migrate-emar.js` accepts every code below for the order-entry renal check (importing
+historical lab data) and picks the result by time first: the newest eGFR wins, and only results sharing the newest
+effective time (one draw) are ranked by code preference. Nothing in WardSynQ computes an eGFR. Per code:
+`98979-8` CKD-EPI 2021 creatinine, PREFERRED modern code. `62238-1` older CKD-EPI, active, accepted. `77147-7` MDRD
+generic, active, accepted (added). `69405-9` generic GFR per 1.73 m2, active, accepted. `33914-3` discouraged by LOINC,
+maps to `77147-7`: legacy input alias only, read and returned as `77147-7`. `48642-3`, `48643-1`, `88293-6`,
+`88294-4` race-specific and `50044-7` MDRD female-population: legacy, accepted as incoming results, ranked last,
+StewardMD never generates or prefers them. Preference order: 98979-8, 62238-1, 77147-7, 69405-9, then the legacy
+group. A chosen legacy result carries `legacy: true` and the order's coverage list gets `RENAL_EGFR_LEGACY_EQUATION`
+("eGFR from a legacy race-specific or population-specific equation"). **Unchanged.** `RENAL_STALE_DAYS` stays 7 (owner
+confirmed). **Why.** Interoperability with old data without letting a legacy equation outrank a modern one or a newer
+value lose to an older one. **Status:** PR "WardSynQ renal check: eGFR LOINC codes per owner".
+
 ## 2026-10-04 · WardSynQ: discharge asks per order which medicines continue at home (owner)
 
 **Decision.** `/ward/discharge` takes `continueOrderIds`. Each must be an active MedicationOrder of the stay being

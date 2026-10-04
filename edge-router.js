@@ -168,6 +168,9 @@
       // Fails closed: no reference module to confirm the page, no KB option.
       if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id, exact: kbEx });
     } catch (e) {}
+    // Never offer a tool the MaiK card cannot open (home.js SMD_MAIK_TOOL_OPENABLE: ACT or a neonatal tool).
+    var openable = G.SMD_MAIK_TOOL_OPENABLE;
+    if (typeof openable === "function" && ranked) ranked = ranked.filter(function (x) { return x.kind !== "tool" || openable(x.it.id); });
     (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title, exact: x.kind === "tool" && x.it.id === exactTool }); });
     // One name, two things ("insulin" is a drug AND a tool): nothing is exact, the model or doctor picks.
     var exacts = out.filter(function (c) { return c.exact && c.kind !== "icd"; });
@@ -251,7 +254,45 @@
     if (runtime && runtime.release) runtime.release();
     engine = eng || null; runtime = makeRuntime();
     if (opts && typeof opts.minConfidence === "number") minConfidence = opts.minConfidence;
+    scheduleWarm();
   }
+
+  /* Background warm-up (FunctionGemma only). Its first load on an iPhone 15 Pro takes 17.2 s (Metal
+   * compiles its shaders on first use), past the 8 s cold budget, so the first request fell back to
+   * rules. When the choice is functiongemma, the file is installed (engine is the llama adapter) and the
+   * app is idle, load it and run one throwaway pick outside any request's budget.
+   * Triggers: engine set (choice set, app start, download done), app back in the foreground, MaiK
+   * releasing the plugin (maik-local.js release()). Rules: never while MaiK generates or holds the
+   * plugin (holder must be null; the runtime's othersBusy/memory back-off applies too); never evicts
+   * MaiK; at most once per trigger, and only when FunctionGemma is not already resident. */
+  var WARM_DELAY_MS = 4000, warmTimer = null, warming = null, warmLog = [];
+  function logWarm(x) { warmLog.push(x); if (warmLog.length > 20) warmLog.shift(); }
+  function scheduleWarm(delayMs) {
+    if (warmTimer) { clearTimeout(warmTimer); warmTimer = null; }
+    if (!engine || engine.name !== "llama") return;
+    warmTimer = setTimeout(function () { warmTimer = null; warmNow(); }, delayMs == null ? WARM_DELAY_MS : delayMs);
+    if (warmTimer && warmTimer.unref) warmTimer.unref();
+  }
+  function warmNow() {
+    function skip(why) { logWarm({ at: Date.now(), skipped: why }); return Promise.resolve(false); }
+    if (warming) return warming;
+    if (!flagOn() || engineChoice() !== "functiongemma") return skip("choice");
+    if (!engine || engine.name !== "llama" || !runtime || !runtime.warm) return skip("no engine");
+    // "edge" with nothing resident (idle/background release) is safe; "maik" (or anyone else) is not.
+    if (G.SMD_LLAMA_HOLDER != null && G.SMD_LLAMA_HOLDER !== "edge") return skip("holder " + G.SMD_LLAMA_HOLDER);
+    if (engine.resident && engine.resident()) return skip("resident");
+    var t0 = Date.now(), cands = [{ kind: "tool", title: "Antibiogram" }, { kind: "calculator", title: "CURB-65" }];
+    warming = runtime.warm({ prompt: promptFor("open antibiogram", cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }, 60000)
+      .then(function (ok) { logWarm({ at: t0, ok: ok, ms: Date.now() - t0 }); try { console.log("[edge] warm " + (ok ? "ok" : "skipped") + " " + (Date.now() - t0) + " ms"); } catch (e) {} return ok; },
+        function () { return false; })
+      .then(function (ok) { warming = null; return ok; });
+    return warming;
+  }
+  try {
+    if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () {
+      if (G.document.visibilityState === "visible") scheduleWarm();
+    });
+  } catch (e) {}
   function available() { return !!(flagOn() && engine && engine.available && engine.available()); }
 
   function resultFor(c, text, source, conf, ms) {
@@ -416,6 +457,8 @@
           return o;
         });
       },
+      // FunctionGemma is loaded and still ours (not evicted by MaiK, not dropped on idle/background).
+      resident: function () { return loaded && mine(); },
       reset: function () { return null; },
       kill: plugin.cancel ? function () { return mine() ? plugin.cancel() : null; } : undefined,
       // Never unload MaiK's pack: release only what this adapter loaded.
@@ -497,6 +540,7 @@
     engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
+    warmSoon: scheduleWarm, warmNow: warmNow, warmLog: function () { return warmLog.slice(-10); },
     hot: function () { return device.thermal >= 3; },
     backoff: function () { return { memoryOk: DEFAULT_ENV.memoryOk(), thermalOk: DEFAULT_ENV.thermalOk(), othersBusy: DEFAULT_ENV.othersBusy(), device: JSON.parse(JSON.stringify(device)) }; },
     _version: "1.0"

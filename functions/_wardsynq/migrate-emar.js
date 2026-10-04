@@ -53,29 +53,43 @@ const ACTIONS = Object.freeze(["verify", "dispense", "scan", "administer", "hold
  * rather than re-derived so the ward and the vitals mapper cannot disagree about what a weight is. */
 const BODY_WEIGHT_LOINC = "29463-7";
 
-/* Codex F6: the LOINC codes for an estimated GFR (MDRD, CKD-EPI and the 2021 CKD-EPI equations, per 1.73 m2). Read as the
- * laboratory reported it: nothing here computes an eGFR from a creatinine (radiology-protocol.js says why). */
-const EGFR_CODES = Object.freeze(["33914-3", "48642-3", "48643-1", "50044-7", "62238-1", "69405-9", "88293-6", "88294-4", "98979-8"]);
+/* Codex F6, owner decision 2026-10-04: the LOINC codes for an estimated GFR, read as the laboratory reported it. Nothing here
+ * computes an eGFR from a creatinine (radiology-protocol.js says why). EGFR_CODES is the accepted list in PREFERENCE order:
+ * 98979-8 (CKD-EPI 2021 creatinine, the modern code) first, then the other active codes (62238-1 older CKD-EPI, 77147-7 MDRD
+ * generic, 69405-9 GFR per 1.73 m2), then the legacy group last. The preference only breaks a tie between results of the same
+ * draw; it never lets an older value beat a newer one. */
+const EGFR_CODES = Object.freeze(["98979-8", "62238-1", "77147-7", "69405-9", "50044-7", "48642-3", "48643-1", "88293-6", "88294-4"]);
+/* 33914-3 is discouraged by LOINC and maps to 77147-7: accepted on the way in, reported as 77147-7. */
+const EGFR_ALIASES = Object.freeze({ "33914-3": "77147-7" });
+/* Race-specific (48642-3, 48643-1, 88293-6, 88294-4) and population-specific (50044-7, MDRD female) equations. Accepted as
+ * incoming history; StewardMD never generates or prefers them, and a result from one is flagged so a clinician can see it. */
+const EGFR_LEGACY_CODES = Object.freeze(new Set(["50044-7", "48642-3", "48643-1", "88293-6", "88294-4"]));
 /* An eGFR or creatinine older than this is shown with its age and is NOT used by the renal check. Seven days is the age at
  * which radiology-protocol.js already tells a radiologist a creatinine "describes the patient then, not now"; it is not a
  * clinical threshold this file invents, and it is listed for the owner to confirm. */
 const RENAL_STALE_DAYS = 7;
 
-/** PURE. The newest result with one of `codes`, with its unit, time and age, or null. Never a number without a date. */
-function latestLab(observations, codes, nowMs) {
-  const rows = (observations || []).filter((o) => o && codes.includes(str(o.code)) && Number.isFinite(Number(o.value)) && o.value !== "" && o.value !== null)
-    .map((o) => ({ value: Number(o.value), unit: o.unit || null, at: (o.meta && o.meta.effectiveAt) || o.effectiveAt || null, code: str(o.code) }))
+/** PURE. The newest result with one of `codes`, with its unit, time and age, or null. Never a number without a date.
+ * `opts` ({ aliases, legacy }) is for eGFR: a code in `aliases` is read as the code it maps to, the result is ranked by its
+ * position in `codes` (the preference order) when several share the newest time, and a result from the `legacy` set carries
+ * legacy: true. Without `opts` the order of `codes` means nothing, as before. */
+function latestLab(observations, codes, nowMs, opts) {
+  const aliases = (opts && opts.aliases) || {};
+  const norm = (c) => (Object.prototype.hasOwnProperty.call(aliases, c) ? aliases[c] : c);
+  const rank = (c) => (opts ? codes.indexOf(c) : 0);
+  const rows = (observations || []).filter((o) => o && codes.includes(norm(str(o.code))) && Number.isFinite(Number(o.value)) && o.value !== "" && o.value !== null)
+    .map((o) => ({ value: Number(o.value), unit: o.unit || null, at: (o.meta && o.meta.effectiveAt) || o.effectiveAt || null, code: norm(str(o.code)) }))
     .filter((o) => Number.isFinite(Date.parse(str(o.at))))
-    .sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
+    .sort((a, b) => (Date.parse(b.at) - Date.parse(a.at)) || (rank(a.code) - rank(b.code)));
   if (!rows.length) return null;
   const ageDays = Math.max(0, Math.floor((nowMs - Date.parse(rows[0].at)) / 86400000));
-  return { ...rows[0], ageDays, stale: ageDays >= RENAL_STALE_DAYS };
+  return { ...rows[0], ageDays, stale: ageDays >= RENAL_STALE_DAYS, ...(opts && opts.legacy && opts.legacy.has(rows[0].code) ? { legacy: true } : {}) };
 }
 
 /** PURE. The renal facts the order check is given: latest eGFR and creatinine, or null when the Observations were unreadable. */
 function renalFrom(observations, nowMs) {
   if (observations === null) return null;
-  return { egfr: latestLab(observations, EGFR_CODES, nowMs), creatinine: latestLab(observations, CREATININE_CODES, nowMs) };
+  return { egfr: latestLab(observations, EGFR_CODES, nowMs, { aliases: EGFR_ALIASES, legacy: EGFR_LEGACY_CODES }), creatinine: latestLab(observations, CREATININE_CODES, nowMs) };
 }
 
 /** The patient's most recently recorded weight in kg, or undefined when the ward has not weighed them. */
@@ -226,6 +240,7 @@ function coverageFindings(order, renal, renalTable, plRules, pregnancyStatus) {
   if (renal === null) w("RENAL_FUNCTION_UNREADABLE", "The patient's results could not be read, so renal function is unknown. Do not read this as normal.");
   else if (!renal.egfr) w("RENAL_FUNCTION_NOT_RECORDED", `No eGFR is recorded for this patient, so no renal dose check can use one.${renal.creatinine ? ` Latest creatinine: ${lab(renal.creatinine, "").trim()}. Nothing here computes an eGFR from it.` : ""}`);
   else if (renal.egfr.stale) w("RENAL_FUNCTION_STALE", `The latest eGFR is ${renal.egfr.ageDays} days old, so the renal dose check did not use it.`);
+  else if (renal.egfr.legacy) w("RENAL_EGFR_LEGACY_EQUATION", `The latest eGFR is from a legacy race-specific or population-specific equation (LOINC ${renal.egfr.code}).`);
   const s = pregnancyStatus || {};
   if (!plRules && !(s.pregnant === false && s.lactating === false)) {
     const recorded = s.pregnant === true ? " The patient is recorded as pregnant." : s.lactating === true ? " The patient is recorded as breastfeeding or within the postpartum lactation window." : "";
@@ -536,4 +551,4 @@ async function administerStep(request, env, ctx) {
   }
 }
 
-export { ACTIONS, ORDER_ENTRY_HARD_STOPS, EGFR_CODES, RENAL_STALE_DAYS, latestLab, renalFrom, coverageFindings, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };
+export { ACTIONS, ORDER_ENTRY_HARD_STOPS, EGFR_CODES, EGFR_ALIASES, EGFR_LEGACY_CODES, RENAL_STALE_DAYS, latestLab, renalFrom, coverageFindings, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };

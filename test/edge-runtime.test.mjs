@@ -122,3 +122,27 @@ test("the runtime never touches the network", async () => {
     assert.equal(hits, 0);
   } finally { globalThis.fetch = orig; }
 });
+
+test("warm: a slow first load runs outside the request budget; a request during it still gives up at coldMs", async () => {
+  const eng = mockEngine({ loadMs: 120, delay: 30 });
+  const rt = R.create({ engine: eng, coldMs: 50, deadlineMs: 20 });
+  const w = rt.warm({ prompt: "warm" }, 1000);
+  await sleep(5);
+  const r = await rt.run({ prompt: "a" });
+  assert.equal(r.status, "unavailable", "the request keeps its 50 ms cold budget");
+  assert.equal(await w, true, "warm finished its 120 ms load and its 30 ms throwaway call (20 ms deadline not applied)");
+  assert.equal(eng.loads, 1, "one shared load");
+  eng.delay = 5;
+  assert.equal((await rt.run({ prompt: "b" })).status, "ok", "next request is warm");
+  assert.equal(eng.loads, 1);
+});
+
+test("warm: skipped under back-off or while a call is running", async () => {
+  const eng = mockEngine({ delay: 40 });
+  assert.equal(await R.create({ engine: eng, env: { othersBusy: () => true } }).warm({}), false);
+  assert.equal(await R.create({ engine: eng, env: { memoryOk: () => false } }).warm({}), false);
+  const rt = R.create({ engine: eng });
+  const a = rt.run({ prompt: "a" }); await sleep(5);
+  assert.equal(await rt.warm({}), false, "never queues behind real work");
+  assert.equal((await a).status, "ok");
+});
