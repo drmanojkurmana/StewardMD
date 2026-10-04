@@ -718,6 +718,68 @@ than test. A larger, harder calibration split, or a calibrated confidence head, 
 another attempt. Only the Cactus platform trains that head: platform key and owner decision.
 Weights are kept off the repo; see the PR for paths and sha256.
 
+### 5b. Needle local LoRA, round 2, 2026-10-04
+
+**Selection rule (fixed before any round-2 model was scored on test).** Val (135 model rows) was too
+easy in round 1, so round 2 picks on a larger **dev** split built by `scripts/edge/needle-r2.mjs build`
+from the TRAIN side only: val, plus train rows whose target (12%) or condition (12%) is held out, plus
+every row of one held-out template per group, plus augmented rows for those held-out keys. Dev keeps
+the real labels. Each run is scored on dev in two configurations: single call, and two calls with the
+options rotated by one where the router acts only if both pick the same option (`engine.agree`). The
+dev mark is **wrong opens at most 0.9% of dev model-routed rows**: the test mark (0.5% of ALL rows)
+equals 1.79% of model rows at test's 28% model share, halved for safety as in round 1. Among the
+run x configuration pairs that meet it, the one with the highest dev coverage is the final candidate,
+and only it is scored on test, once. If none meets it, the round FAILS; the best dev pair is still
+scored on test once, for the record.
+
+**What changed (train side only; `needle-r2.mjs build`).** No test row or test text is trained on: any
+generated text equal to a test text is dropped (224), and test-only targets are never augmented.
+1. Abstain targets. A train request whose words fit the target's title AND a title that is not
+   accepted (TIMI UA/NSTEMI vs TIMI STEMI for "timi", drug Insulin vs tool Insulin) is relabelled 0.
+   So is a calculator request that only describes the target instead of naming it ("pancreatitis
+   severity", "delirium"): named = words fit the title, or initials match ("ast platelet ratio" ->
+   APRI, "ci" -> Cardiac Index). 2,526 of 9,337 train model rows end as 0.
+2. Augmentation: every calculator keyword (round 1 used only the first), title stems and
+   parentheses, Hinglish/Tenglish calculator and brand templates, 17 question templates (en/hi/te)
+   over 84 conditions, and hard negatives: questions about conditions that calculators are named after
+   ("how to manage hepatic encephalopathy" vs West Haven) give 0. 24,195 rows with 2 shuffled copies.
+3. Calibration: the engine has no logprobs (`needle.h` exposes only init/complete/embed/reset/load,
+   and replies carry no token scores), so the only engine-side check is self-consistency: a second
+   call with the options rotated by one must pick the same option. It is in `route()` behind
+   `engine.agree` (`needleAdapter(p, { agree: true })`); `autoEngine()` does not turn it on.
+4. Hyperparameters unchanged from r4 except epochs (3, as the set is 7x larger).
+
+**Runs** (L4, 3 epochs, lr 5e-4, LoRA r32/a64; dev model rows 2,151)
+| Run | Data | Dev wrong (model rows), 1 call / agree | Dev coverage (all rows), 1 call / agree |
+|---|---|---|---|
+| r5 | augmentation + ambiguity relabel | 9.1% / 5.1% | 85.7% / 74.2% |
+| r6 | + description relabel | 2.4% / 1.2% | 63.6% / 60.4% |
+| r7 | + condition hard negatives | **0.7%** / 0.3% | **60.6%** / 57.7% |
+Dev is harder than test (descriptive keywords, held-out conditions): r5's errors were mostly
+keyword rows several calculators answer. Only r7 met the dev mark; by the rule, **r7 with ONE call**
+(higher dev coverage) is the candidate. Host latency on the M1 is not a device number.
+
+**Frozen test set (4,077 rows), r7 single call, scored once**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 65.5% | 100% | 0.0% | 100% | 0 / 0 / 0 | PASS |
+| r4 (round 1) | 88.2% | 98.3% | 1.5% (60) | 99.6% | 1.1% / 1.4% / 8.1% | FAIL |
+| **r7** | **83.8%** | **99.7%** | **0.3%** (11) | **99.6%** (252/253) | 0.3% / 0.0% / 0.5% | **FAIL (danger)** |
+Coverage by language: en 84.5%, hi-Latn 79.0%, te-Latn 77.5% (rules 67.0 / 71.8 / 32.1). Held-out
+targets: 93.5% coverage, 1 wrong of 630. Model rows: coverage 65.6%, 1.0% wrong. The 11 wrong opens:
+"go to timi" (STEMI), "go to fractional excretion urea" (FE bicarb), "ast platelet ratio score" (PLR),
+"can you pull up glasgow outcome scale" (tool Insulin), "go to ninds reflex" (burn TBSA), "go to
+international prognostic index" (IPSS), "warf details" (tool Ward), "entresto details" and "entresto
+chupinchu" (valsartan alone), "red flags in typhoid" (typhoid vaccine), and the danger row "wells
+score" (opened Wells DVT; the label is "ambiguous, pass").
+
+**Verdict.** Wrong shown (0.3% < 0.5%), accepted accuracy (99.7% >= 99%) and coverage (83.8% > 65.5%)
+pass; **danger is 99.6%, not 100%**, so the build FAILS the marks and is not shipped. Nothing went to
+the Pixel. Cost: three VMs, about 4.04 USD list price (round 1 + 2: about 6.21 of the 20 USD cap).
+The test set has now been seen by r7; a different operating point chosen on it would not be valid.
+Next lever: the rotated-agreement check (dev 0.3% wrong) on r7, judged on a NEW frozen test set
+(new `schema_version`), or on the owner's 150-request human set, with the same marks.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
