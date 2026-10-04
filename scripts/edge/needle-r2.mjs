@@ -64,7 +64,7 @@ const DEV_FAMILY = /^(calc:train6|tool:train2|none:train9|none:train10|drug:trai
 
 // o (round 3, needle-r3.mjs): kb (load the Knowledge Base), prep(rows) for train/val, exclude (more texts never
 // trained on), held(key) (more test-only targets), more(add, ctx) (more augmentation), fix(row) (relabel or drop,
-// null drops; train and dev), ambiguous (replaces ambiguous()), out { dev, train } file names.
+// null drops; train and dev), ambiguous (replaces ambiguous()), extra(trainRows) (more train rows), out { dev, train }.
 export function build(o = {}) {
   const { E, M } = o.kb ? loadKB() : loadApp();
   let train = readJsonl(path.join(OUT_DIR, "train.jsonl")), val = readJsonl(path.join(OUT_DIR, "val.jsonl"));
@@ -158,7 +158,7 @@ export function build(o = {}) {
   const describes = (r) => r.kind === "calculator" && r.target_option && !r.tags.includes("values") && !names(r.input_text, r.candidates[r.target_option - 1].title);
   let relabel = 0;
   trainRows.forEach((r) => { if ((o.ambiguous || ambiguous)(r) || describes(r)) { r.target_option = 0; r.accept = []; r.target = null; r.kind = "none"; relabel++; } });
-  const rows = augment(trainRows, Number(arg("permute", 2)));
+  const rows = augment(o.extra ? trainRows.concat(o.extra(trainRows)) : trainRows, Number(arg("permute", 2)));
   const out = o.out || { dev: "dev.jsonl", train: "train.r2.jsonl" };
   writeJsonl(path.join(OUT_DIR, out.dev), devAll);
   writeJsonl(path.join(EXP, out.train), rows.map((r) => {

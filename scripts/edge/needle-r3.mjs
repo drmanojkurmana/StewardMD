@@ -20,7 +20,7 @@ import { loadKB, OUT_DIR, readJsonl, unit, t4Held, AMBIGUOUS_NAMES } from "./lib
 import { build, fits, words } from "./needle-r2.mjs";
 import { relive } from "./score.mjs";
 
-const argv = process.argv.slice(2);
+const argv = process.argv.slice(2), V2 = argv.includes("--v2");   // v2: r9 data (decoys, more orders)
 const { E, M } = loadKB();
 const NEVER = new Set(["test", "test3", "test4"].flatMap((s) => {
   const f = path.join(OUT_DIR, s + ".jsonl");
@@ -121,14 +121,49 @@ function more(add, { devHeld }) {
       add(tpl.replace("{x}", x), lang, "calculator", c.id, acc, ti === CT.length - 1, "nb" + ti + "|" + c.id);
     }));
   });
+  if (!V2) return;
+  // v2 (r9, chosen from r8's dev3 errors): more order forms, train only (added last, so dev3 is unchanged).
+  const ORD2 = [["shift to {g}", "en"], ["begin {g}", "en"], ["put him on {g}", "en"], ["{g} iv stat", "en"], ["{g} de do", "hi-Latn"], ["{g} chalu rakho", "hi-Latn"],
+    ["{g} pettu", "te-Latn"], ["{g} ivvali", "te-Latn"]];
+  (globalThis.MEDDRUGS ? MEDDRUGS._list : []).forEach((d) => {
+    const g = String(d.generic).replace(/\s*\(.*\)\s*/g, " ").trim().toLowerCase();
+    if (unit("ord4x" + g) < 0.6) pickT("ord4x" + g, ORD2, 2).forEach(([, [tpl, lang], ti]) => add(tpl.replace("{g}", g), lang, null, null, null, false, "hnord" + ti + "|" + g));
+  });
+}
+
+// v2: decoy contrasts. A request that names its target gets a copy with one more option whose title EXTENDS the
+// target's name ("Glasgow Outcome Scale" next to "Glasgow Outcome Scale Extended", "CI" next to "CIWA score"): the
+// label stays the named target. And the reverse: the request names the longer title, which is then the answer.
+// Decoy titles are synthetic (train only); they teach the exact-name preference that unseen targets need.
+const MODS = [" Extended", " Revised", " Modified", " Simplified", " II", " Pediatric"];
+function decoys(rows) {
+  const out = [];
+  rows.forEach((r, i) => {
+    if (!r.target_option || !/^(calculator|tool|drug)$/.test(r.kind) || unit("decoy:" + r.id) > 0.35) return;
+    const t = r.candidates[r.target_option - 1], base = nameOf(t), mod = MODS[i % MODS.length];
+    const short = words(r.input_text).join(" ");
+    const abbr = short.length <= 4 && !/ /.test(short);
+    const ext = abbr ? (unit("dx" + r.id) < 0.5 ? short.toUpperCase() + "WA" : "FL" + short.toUpperCase()) + " score" : base + mod;
+    const d = { kind: t.kind, id: "decoy:" + ext.toLowerCase(), title: ext };
+    const keep = r.candidates.filter((c) => c !== t).slice(0, 3).concat([t]).sort((a, b) => r.candidates.indexOf(a) - r.candidates.indexOf(b));
+    const c1 = keep.slice(); c1.splice(Math.floor(unit("dp" + r.id) * (c1.length + 1)), 0, d);
+    out.push({ ...r, id: r.id + "~d", candidates: c1, target_option: c1.indexOf(t) + 1, tags: r.tags.concat(["decoy"]) });
+    const last = base.split(" ").pop();
+    if (!abbr && fits(r.input_text, base) && new RegExp("\\b" + last.replace(/[^a-z0-9]/gi, "") + "\\b", "i").test(r.input_text)) {
+      const text = r.input_text.replace(new RegExp("\\b" + last.replace(/[^a-z0-9]/gi, "") + "\\b", "i"), (m) => m + mod.toLowerCase());
+      if (text !== r.input_text && !NEVER.has(text.toLowerCase())) out.push({ ...r, id: r.id + "~e", input_text: text, candidates: c1, target: d.id, accept: [d.id], target_option: c1.indexOf(d) + 1, tags: r.tags.concat(["decoy"]) });
+    }
+  });
+  return out;
 }
 
 const prep = (rows) => relive(rows, E);
-const { dev, train, raw } = build({ kb: true, prep, exclude: NEVER, held: t4Held, more, fix, ambiguous: ambiguous3, out: { dev: "dev3.jsonl", train: "train.r3.jsonl" } });
+const { dev, train, raw } = build({ kb: true, prep, exclude: NEVER, held: t4Held, more, fix, ambiguous: ambiguous3, extra: V2 ? decoys : null,
+  out: { dev: V2 ? "dev3.v2.jsonl" : "dev3.jsonl", train: V2 ? "train.r3v2.jsonl" : "train.r3.jsonl" } });
 
 // ---- asserts: nothing from any test set, no test4-held key, in training or dev ----
 train.forEach((r) => { if (NEVER.has(r.input_text.toLowerCase())) throw new Error("training text is a test/test3/test4 text: " + r.input_text); });
-const out = readJsonl(path.join(OUT_DIR, "export", "needle-local", "train.r3.jsonl"));   // the file that is uploaded
+const out = readJsonl(path.join(OUT_DIR, "export", "needle-local", V2 ? "train.r3v2.jsonl" : "train.r3.jsonl"));   // the file that is uploaded
 if (out.length !== train.length) throw new Error("train.r3.jsonl does not match the built rows");
 out.forEach((r) => { const t = r.query.split("\nOptions:")[0].toLowerCase(); if (NEVER.has(t)) throw new Error("train.r3.jsonl has a test text: " + t); });
 raw.forEach((r) => {   // the rows the export was made from (same rows, before the shuffled copies)
