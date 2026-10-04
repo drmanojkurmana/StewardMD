@@ -184,7 +184,7 @@ test("device gating: a 6 GB phone gets no 8 GB-floor recommendation, a 12 GB pho
 
 test("KB-only: answer kinds get the notice, structured kinds get { error: kb-only }, nothing reaches the cloud or a model", async () => {
   const { A, cloud, local } = load({ pref: "rag" });
-  const n = await A.explainGrounded({ question: "q" }, {}); assert.match(n.text, /KB-only mode is on/);
+  const n = await A.explainGrounded({ question: "q" }, {}); assert.match(n.text, /MaiK Edge\*\* found no tool/);
   const x = await A.extract("t", "opd-suggest"); assert.equal(x.error, "kb-only");
   assert.equal(aiCloudCalls(cloud).length, 0); assert.equal(local.length, 0);
 });

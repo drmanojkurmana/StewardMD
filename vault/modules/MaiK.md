@@ -10,7 +10,7 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 
 ## Key files
 - `home.js` — the MaiK sheet + `runClinical()` (the ask flow), Aurora UI, sidebar
-- `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (KB only / Cloud / On-device);
+- `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (MaiK Edge, formerly "KB only" / Cloud / On-device);
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
 - `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
@@ -421,4 +421,15 @@ apply unchanged. A question about a DIFFERENT disease the KB resolves confidentl
 
 ## MaiK Lite value questions (2026-10-04, branch maik-lite-ontopic)
 iPhone, OTA v177: "normal adult potassium range?" grounded on a DIALYSATE passage and Lite said the range was "not given in the evidence"; Pixel: "INR target mechanical mitral valve" said 2.0-3.0. Root cause is retrieval: the book (Harrison's) has NO adult serum potassium reference range, and its "target INR of 2.5-3.5" passage (row 9950) was pushed out of the 12-passage pool by the expansion term "valve". `neo:ref` (data/neo/ref-values.json) is neonatal only (K 3.3-5.4, days 1-3), so it is not adult evidence; StewardMD has no adult normal-values table. Fix (`maik-local.js` `VALUE_Q` / `statesValue`): a normal/reference/target question also searches its own words, passages with a sentence naming the asked thing beside a figure and a range/target word lead, and with none the question goes ungrounded (model knowledge) with "Not checked against the StewardMD Knowledge Base." appended; `NO_COVERAGE` now catches "is given / stated / specified in the evidence". Bench (`--router real`): the 54 old questions unchanged at 86.7% / 38 full; L-62 (INR) 1/3 -> 3/3; L-61 (potassium) has no evidence by design. Pixel had `smd_maik_rag_linked` "0" (book unlinked), where retrieval cannot help. Test: `test/maik-lite-value-q.test.mjs`.
+
+## "KB only" renamed "MaiK Edge" (owner, 2026-10-04, branch `maik-edge-engine`)
+The `rag` engine shows as **MaiK Edge** everywhere (picker row, header chip, footer `discLabel`, Settings
+"Who answers", the KB-miss notice, the `kb-only` error message). The pref value stays `rag`, so saved choices
+and analytics are unchanged. It is the free, offline, no-paid-AI mode: Edge's on-device router
+(`SMD_EDGE.rules` + `SMD_EDGE.route` in `maikSendRest`, not engine-gated) opens the right tool, calculator,
+drug, ICD or Knowledge page, and the KB answers the rest. It never calls a cloud AI or writes long answers.
+Edge runs on Settings > MaiK > "Edge engine" (`smd_edge_engine`: Needle, FunctionGemma, Rules only); the picker
+row shows "Engine: <name>" under its description. `smd_edge` "0" brings back the old "KB only" name and copy.
+Helpers: `SMD_MAIK_ENGINE.ragLabel()`, `edgeEngineLabel()`. The picker overlay mounts on `<body>`, outside
+`#maikSheet`, so it never got the dark tokens; `body.dark #maikModelPicker` (home.js) now carries them.
 
