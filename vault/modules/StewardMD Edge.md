@@ -34,6 +34,7 @@ train/val/canonical/export are gitignored and regenerated.
 | top1 (always option 1) | 93.5% | 93.9% | 5.7% | 99.6% | FAIL |
 | base FunctionGemma 270M + grammar (host CPU, -1 rows) | 93.4% | 91.8% | 7.7% | 99.6% | FAIL: must be fine-tuned |
 | oracle (labels) | 88.3% | 100% | 0.0% | 100% | ceiling |
+| Needle 3 local LoRA r4 (host CPU, pinned engine, 2026-10-04) | 88.2% | 98.3% | 1.5% | 99.6% | FAIL: [[Edge-Runbook]] 5a |
 Layer 0 (rules) answers an exact calculator name, an exact home-tool title or generic drug name after
 navigation words in English/Hinglish/Tenglish ("antibiogram kholo", "search icd teruvu"), and ICD
 requests. A name that fits two things ("insulin": drug and tool) is never exact. Brand names are never
