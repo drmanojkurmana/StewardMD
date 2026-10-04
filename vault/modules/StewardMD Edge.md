@@ -43,6 +43,12 @@ new templates, targets r7 never answered, KB disease-page options, Hinglish/Teng
 | rules | 35.2% | 99.5% | 0.2% (Search ICD title fires the ICD cue) | 100% | PASS |
 | Needle r7, single call (pre-registered on dev) | 72.4% | 96.2% | 2.8% | 85.9% | FAIL: [[Edge-Runbook]] 5c |
 | Needle r7 + agree (diagnostic) | 69.2% | 97.1% | 2.0% | 89.5% | FAIL |
+
+Frozen test set `edge-router-4` (test4, 2,804 rows, current router + KB, built before round 3; 2026-10-04):
+| Policy | Coverage | Accepted-route acc. | Wrong shown | Danger | Verdict |
+|---|---|---|---|---|---|
+| rules | 24.8% | 100% | 0.0% | 100% | PASS |
+| Needle r8 + agree (round 3; no run met the dev3 rule, scored for the record) | 61.1% | 97.1% | 1.8% | 94.2% | FAIL: [[Edge-Runbook]] 5d |
 Layer 0 (rules) answers an exact calculator name, an exact home-tool title or generic drug name after
 navigation words in English/Hinglish/Tenglish ("antibiogram kholo", "search icd teruvu"), and ICD
 requests. A name that fits two things ("insulin": drug and tool) is never exact. Brand names are never

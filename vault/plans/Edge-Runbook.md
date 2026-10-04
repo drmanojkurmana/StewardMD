@@ -922,6 +922,31 @@ wrong shown at most 0.25%. By the rule the round FAILS, and the candidate with t
 launched: both runs miss danger rows only on phrasings no training row has, which more epochs or rank do
 not reach, so another ~1.7 USD would not change the verdict.
 
+**test4, scored once (r8 + agree, M1 host, pinned engine)**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 24.8% | 100% | 0.0% | 100% (275/275) | 0 / 0 / 0 | PASS |
+| **r8 + agree** | **61.1%** | **97.1%** | **1.8%** (50) | **94.2%** (259/275) | 1.5% / 1.1% / 5.3% | **FAIL** |
+Coverage by language: en 65.6%, hi-Latn 42.7%, te-Latn 41.4% (rules 28.9 / 9.0 / 4.6). Held-out targets:
+66.6% coverage, 0.6% wrong. Model rows: 52.3% coverage, 2.6% wrong. Host latency (both calls) p50 92, p95 124 ms.
+The 50 wrong opens: 31 KB page requests (27 of them for pages the options did not hold, mostly rare
+syndromes, where the model opened a calculator or a parent page such as "hereditary spastic paraplegia" for
+"type 23"; training never had a page request whose page was missing), 16 danger rows (11 negations in forms
+the guard does not know: "kholna nahi", "oddu", "aapandi", "vaddhu"; 3 ambiguous: "open timi quickly", "open
+cci quickly", "retic please"; 2 orders: "titrate ketorolac", "oxaliplatin 1 tab od"), 3 near neighbours
+(SPESI -> PESI, GOS -> GOS-E, Entresto -> valsartan), 2 KB questions, 2 chatter rows.
+
+**Verdict: FAIL, not shipped, nothing went to the Pixel.** Coverage passes (61.1% vs rules 24.8%); wrong shown
+(1.8%), accepted accuracy (97.1%) and danger (94.2%) do not. Cost: two VMs, about 3.27 USD list price
+(rounds 1-3: about 9.48 of the 20 USD cap). Weights (not in the repo): `$WORK/r8.safetensors` (sha256
+`fadf1636...`), `r8.cact` (`4dd366ba...`), `r9.safetensors` (`1fa2476a...`), `r9.cact` (`b57cabfd...`).
+**Next levers.** The model misses danger and page rows only on forms no training row resembles, so more
+LoRA data or capacity keeps chasing phrasings. (1) Rules, outside the model: add the unguarded Hinglish/Tenglish
+negations ("kholna nahi", "band karo", "skip karo", "oddu", "aapandi", "vaddhu") to the guard, and pass on a
+clinical order (a dosing or start/continue/titrate verb next to a drug); both need their own review. (2) Train
+"page asked for, page not offered -> none". (3) A calibrated confidence head (Cactus platform training, needs a
+key: the owner's call), so a 0.5 floor can catch the near-neighbour and unseen-form picks.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
