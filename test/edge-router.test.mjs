@@ -76,6 +76,19 @@ test("model picks among numbered options through the fixed tool", async () => {
   assert.match(m.prompts[0].prompt, /0\. none of these/);
 });
 
+test("engine.agree: a second call with the options rotated must pick the same option, else pass", async () => {
+  store.smd_edge = "1";
+  const q = "show me the resistance patterns antibiogram";
+  const byTitle = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
+  const m = mock(byTitle); m.agree = true; E.setEngine(m);
+  const r = await E.route(q);
+  assert.equal(r && r.id, "antibiogram"); assert.equal(m.prompts.length, 2, "two calls");
+  assert.notEqual(m.prompts[0].prompt, m.prompts[1].prompt, "options rotated");
+  const first = mock(() => needleReply(1)); first.agree = true; E.setEngine(first);   // position bias: always "1"
+  assert.equal(await E.route(q), null, "disagreement passes to the safe path");
+  assert.equal(E.needleAdapter({}, { agree: true }).agree, true);
+});
+
 test("option 0, out-of-range, wrong tool, low confidence, garbage: all pass through (null)", async () => {
   store.smd_edge = "1";
   const q = "show me the resistance patterns antibiogram";

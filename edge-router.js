@@ -283,9 +283,18 @@
       if (o.option === 0) { stats.none++; return null; }
       if (o.option < 1 || o.option > cands.length) { stats.passed++; return null; }
       if (o.confidence != null && o.confidence < minConfidence) { stats.passed++; return null; }
-      stats.chosen++;
-      return resultFor(cands[o.option - 1], text, "edge", o.confidence, r.ms);
-    }, function () { stats.passed++; return null; });
+      var pick = cands[o.option - 1];
+      if (!engine.agree || cands.length < 2) { stats.chosen++; return resultFor(pick, text, "edge", o.confidence, r.ms); }
+      // Self-consistency (engine.agree; Edge-Runbook 5b): ask again with the options rotated by one and act
+      // only if the same option comes back. A local LoRA build has no usable confidence; this is its floor.
+      var rot = cands.slice(1).concat(cands.slice(0, 1));
+      return runtime.run({ prompt: promptFor(text, rot), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: rot.length }).then(function (r2) {
+        var o2 = r2 && r2.status === "ok" ? optionFrom(r2.result) : null;
+        if (!o2 || !o2.ok || rot[o2.option - 1] !== pick) { stats.passed++; return null; }
+        stats.chosen++;
+        return resultFor(pick, text, "edge", o.confidence, r.ms + r2.ms);
+      });
+    }).then(null, function () { stats.passed++; return null; });
   }
 
   // ---- engine adapters -----------------------------------------------------------------------
@@ -309,6 +318,7 @@
     })();
     return {
       name: "needle",
+      agree: !!o.agree,   // opts.agree: act only when a second call with rotated options agrees (route())
       available: function () { return !!plugin; },
       load: function () { return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }); },
       complete: function (task) {
