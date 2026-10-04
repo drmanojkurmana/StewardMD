@@ -11196,3 +11196,35 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   caution words / "safe" raises nothing / vague = monitor); pregnancy under Contraindications is contraindicated, under
   Precautions only a monitor-level caution. Every finding stays overridable with a reason. Dashes in the source are written
   as hyphens (the no-dash rule). Open for the owner: see PR "Decisions to confirm".
+
+## 2026-10-04 - WardSynQ dialysis shows single-pool Kt/V (Daugirdas second generation) beside URR
+- **Owner, 2026-10-04 (closes owner item O12):** spKt/V = -ln(R - 0.008 x t) + (4 - 3.5 x R) x UF / W; R = post/pre urea,
+  t session hours (start to end), UF achieved ultrafiltration in litres, W post-dialysis weight in kg. Source Daugirdas JT,
+  J Am Soc Nephrol 1993;4(5):1205-13, PMID 8305648 (checked on PubMed 2026-10-04). Same expression as the StewardMD
+  calculator `ktv`, but WardSynQ refuses mixed urea units (as URR does), a negative UF and t <= 0, says "not computable" with
+  the reason (never 0), shows two decimals, and gives no adequacy verdict or target (URR shows none). Code:
+  `functions/_wardsynq/dialysis.js` ktv/sessionKtv; screen `wardsynq/site/pages/dialysis.js`.
+- URR and Kt/V are a new seed list `dialysis-adequacy` (items `urr`, `sp-ktv`, each with its code) and show UNAPPROVED until
+  signed. Like URR, the arithmetic is not gated on the sign-off.
+
+## 2026-10-04 - WardSynQ infection criteria: SUTI 2 for CAUTI; VAE for adult stays, VAP for paediatric stays only
+- **Owner, 2026-10-04:** CAUTI offers SUTI 2 (NHSN ch.7 Table 1, a patient 1 year of age or less, with or without a catheter).
+  Its fingerprint changed, so CAUTI shows UNAPPROVED again (intended).
+- New event VAE with tiers VAC, IVAC, PVAP (NHSN Patient Safety Component Manual, January 2026, ch.10 Ventilator-Associated
+  Event, "For use in adult locations only", read from cdc.gov 10-vae_final.pdf on 2026-10-04). VAP (PNU1-3) is kept for
+  paediatric stays only, neonatal excluded (ch.6 Settings: in-plan VAP is paediatric locations only). NHSN decides by
+  LOCATION regardless of age, so WardSynQ uses the class of the ventilator line's stay: NICU = neonatal (neither event),
+  PEDIATRICS = paediatric (VAP), every other class = adult (VAE). Same device-day rule for both; each rate and NABH KPI 14
+  count only their own stays' ventilator days. VAP keeps NABH number 14; VAE has none (no NABH number in the repo's notes).
+  VAP's fingerprint changed too, so it is UNAPPROVED again.
+- The infection control "awaiting clinical sign-off" notice is now read from the seed sign-off records (seed-signoff.js
+  itemSignoffState) and names only the unsigned events; it clears when all are signed; unreadable records read as unsigned.
+
+## 2026-10-04 - StewardMD starter patient leaflets: ten English drafts a hospital imports, never auto-approved
+- **Owner, 2026-10-04:** ten starter leaflets (wound care, urinary catheter, diabetes, warfarin, inhaler, after a heart
+  attack, after a stroke, fever, newborn care, plaster cast) in plain Indian-context English, no drug doses, 108, a
+  "come back to hospital if" list, no em dashes. In `functions/_wardsynq/leaflet-starter.js`.
+- A clinician imports them with one action (POST /ward/education-leaflet-import-starter, emr.treat) into their own
+  hospital's library as DRAFTS authored by the importer, create-only (importing again changes nothing). Each record carries
+  "Draft prepared by StewardMD for your clinicians to review" (on the record and in the library, not in the patient's text).
+  The existing second-clinician approval is unchanged; nothing is seeded into any hospital automatically.
