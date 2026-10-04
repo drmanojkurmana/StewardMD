@@ -10733,7 +10733,7 @@
     "site.stores.gst.receiptNote": "For a receipt: what it cost, from the supplier's invoice. A return to the supplier later reverses the GST from these.",
     "site.stores.gst.unitPrice": "Price per unit before GST (Rs)",
     "site.stores.gst.rate": "GST rate on the supplier's invoice (%)",
-    "site.stores.gst.ratePh": "GST %",
+    "site.stores.gst.ratePh": "GST %, e.g. 12…",
     "site.stores.gst.split": "GST charged as",
     "site.stores.gst.intraShort": "CGST + SGST",
     "site.stores.gst.interShort": "IGST",
@@ -10747,7 +10747,6 @@
     "site.stores.dn.failed": "The register could not be read. Do not read this as no debit notes.",
     "site.stores.dn.none": "No debit notes in these dates.",
     "site.stores.dn.number": "Debit note",
-    "site.stores.dn.original": "Original invoice",
     "site.stores.dn.value": "Value (Rs)",
     "site.stores.dn.total": "Total (Rs)",
     "site.stores.dn.totals": "{n} notes: input tax credit to reverse",
@@ -10757,6 +10756,7 @@
     "site.stores.sc.termsPrice": "Price per unit as received, before GST (Rs)",
     "site.stores.dn.beforeNotes": "Returned before debit notes",
     "site.stores.dn.registerHeading": "Debit note register",
+    "site.stores.dn.against": "against {inv}",
     /* end site pages keys */
   };
 

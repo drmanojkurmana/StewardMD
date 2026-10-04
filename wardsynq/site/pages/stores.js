@@ -190,7 +190,7 @@
           var unitSel = '<select id="stPoUnit-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colUnit", "Unit")) + '">' + (matchItem ? unitOptions(c, matchItem, l.unit) : '<option value="' + esc(l.unit) + '">' + EN(c, esc(l.unit)) + "</option>") + "</select>";
           var book = canBook && l.outstanding > 0 ? '<input type="number" min="1" id="stPoQty-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.quantity", "Quantity")) + '"> ' + unitSel + ' <select id="stPoLoc-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.colStore", "Store")) + '">' + locs + "</select> " +
             /* The GST on the supplier's invoice; the price is the order line's. */
-            '<input id="stPoGst-' + id + "-" + l.index + '" inputmode="decimal" size="4" aria-label="' + esc(T(c, "site.stores.gst.rate", "GST rate on the supplier's invoice (%)")) + '" placeholder="' + esc(T(c, "site.stores.gst.ratePh", "GST %")) + '"> ' +
+            '<input id="stPoGst-' + id + "-" + l.index + '" inputmode="decimal" size="6" autocomplete="off" aria-label="' + esc(T(c, "site.stores.gst.rate", "GST rate on the supplier's invoice (%)")) + '" placeholder="' + esc(T(c, "site.stores.gst.ratePh", "GST %, e.g. 12…")) + '"> ' +
             '<select id="stPoInter-' + id + "-" + l.index + '" aria-label="' + esc(T(c, "site.stores.gst.split", "GST charged as")) + '"><option value="false">' + esc(T(c, "site.stores.gst.intraShort", "CGST + SGST")) + '</option><option value="true">' + esc(T(c, "site.stores.gst.interShort", "IGST")) + "</option></select> " +
             '<button class="btn quiet" type="button" data-st="bookin" data-id="' + id + '" data-po-line="' + esc(l.index) + '" data-item="' + esc(l.item) + '">' + esc(T(c, "site.stores.bookIn", "Book in")) + "</button>" : "";
           return "<tr><td>" + EN(c, esc(l.item)) + "</td><td>" + EN(c, esc(l.ordered + " " + l.unit)) + "</td><td>" + esc(l.received) + "</td><td>" + book + "</td></tr>";
@@ -235,11 +235,12 @@
     if (!r.rows.length) return "<p>" + esc(T(c, "site.stores.dn.none", "No debit notes in these dates.")) + "</p>";
     var t = r.totals, num = function (p) { return '<td class="num">' + esc(rupees(p)) + "</td>"; };
     return '<div class="tbl"><table><thead><tr><th>' + esc(T(c, "site.stores.sc.date", "Date")) + "</th><th>" + esc(T(c, "site.stores.dn.number", "Debit note")) + "</th><th>" + esc(T(c, "site.stores.supplier", "Supplier")) + "</th><th>" +
-      esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.dn.original", "Original invoice")) + '</th><th class="num">' + esc(T(c, "site.stores.dn.value", "Value (Rs)")) + '</th><th class="num">CGST</th><th class="num">SGST</th><th class="num">IGST</th><th class="num">' +
+      esc(T(c, "site.stores.colItem", "Item")) + '</th><th class="num">' + esc(T(c, "site.stores.dn.value", "Value (Rs)")) + '</th><th class="num">CGST</th><th class="num">SGST</th><th class="num">IGST</th><th class="num">' +
       esc(T(c, "site.stores.dn.total", "Total (Rs)")) + "</th></tr></thead><tbody>" + r.rows.map(function (x) {
-        return "<tr><td>" + esc(x.date) + '</td><td class="mono">' + esc(x.number) + "</td><td>" + EN(c, esc(x.supplier)) + (x.supplierGstin ? ' <span class="mono">' + esc(x.supplierGstin) + "</span>" : "") + "</td><td>" + EN(c, esc(x.display + " · " + x.quantity + " " + x.unit)) + "</td><td>" +
-          EN(c, esc(x.originalInvoiceNo || "")) + "</td>" + num(x.taxablePaise) + num(x.cgstPaise) + num(x.sgstPaise) + num(x.igstPaise) + num(x.totalPaise) + "</tr>";
-      }).join("") + '</tbody><tfoot><tr><th colspan="5">' + esc(T(c, "site.stores.dn.totals", "{n} notes: input tax credit to reverse", { n: t.count })) + "</th>" + num(t.taxablePaise) + num(t.cgstPaise) + num(t.sgstPaise) + num(t.igstPaise) + num(t.totalPaise) + "</tr></tfoot></table></div>";
+        /* The original invoice sits under the note's number and the GSTIN under the supplier, so the five money columns fit. */
+        return "<tr><td>" + esc(x.date) + '</td><td><span class="mono" translate="no">' + esc(x.number) + "</span>" + (x.originalInvoiceNo ? '<br><span class="quiet">' + esc(T(c, "site.stores.dn.against", "against {inv}", { inv: x.originalInvoiceNo })) + "</span>" : "") + "</td><td>" +
+          EN(c, esc(x.supplier)) + (x.supplierGstin ? '<br><span class="mono" translate="no">' + esc(x.supplierGstin) + "</span>" : "") + "</td><td>" + EN(c, esc(x.display + " · " + x.quantity + " " + x.unit)) + "</td>" + num(x.taxablePaise) + num(x.cgstPaise) + num(x.sgstPaise) + num(x.igstPaise) + num(x.totalPaise) + "</tr>";
+      }).join("") + '</tbody><tfoot><tr><th colspan="4">' + esc(T(c, "site.stores.dn.totals", "{n} notes: input tax credit to reverse", { n: t.count })) + "</th>" + num(t.taxablePaise) + num(t.cgstPaise) + num(t.sgstPaise) + num(t.igstPaise) + num(t.totalPaise) + "</tr></tfoot></table></div>";
   }
 
   /* Returns to suppliers (GET /ward/supply-chain): a return is always against the receipt the stock came in on, so the
@@ -264,7 +265,7 @@
       '<button class="btn" type="button" data-st="return">' + esc(T(c, "site.stores.sc.returnBtn", "Return to supplier")) + "</button></div>"
       : "<p>" + esc(T(c, "site.stores.sc.noReceipts", "No receipt has stock left that could go back to a supplier.")) + "</p>";
     var list = sc.returns.length ? "<h3>" + esc(T(c, "site.stores.sc.recentReturns", "Recent returns")) + '</h3><div class="tbl"><table><tr><th>' + esc(T(c, "site.stores.colItem", "Item")) + "</th><th>" + esc(T(c, "site.stores.quantity", "Quantity")) + "</th><th>" + esc(T(c, "site.stores.supplier", "Supplier")) + "</th><th>" + esc(T(c, "site.stores.sc.returnReason", "Why it is going back")) + "</th><th>" + esc(T(c, "site.stores.dn.number", "Debit note")) + "</th><th>" + esc(T(c, "site.stores.sc.date", "Date")) + "</th></tr>" + sc.returns.map(function (r) {
-      var dn = r.debitNote ? '<span class="mono">' + esc(r.debitNote.number) + "</span><br>" + noteAmounts(c, r.debitNote) : esc(T(c, "site.stores.dn.beforeNotes", "Returned before debit notes"));
+      var dn = r.debitNote ? '<span class="mono" translate="no">' + esc(r.debitNote.number) + "</span><br>" + noteAmounts(c, r.debitNote) : esc(T(c, "site.stores.dn.beforeNotes", "Returned before debit notes"));
       return "<tr><td>" + EN(c, esc(r.display)) + "</td><td>" + EN(c, esc(r.quantity + " " + r.unit)) + "</td><td>" + EN(c, esc(r.supplier)) + "</td><td>" + EN(c, esc(r.reason)) + (r.debitNoteNo ? " · " + EN(c, esc(r.debitNoteNo)) : "") + "</td><td>" + dn + "</td><td>" + esc(day(r.at)) + "</td></tr>";
     }).join("") + "</table></div>" : "";
     var reg = "<h3>" + esc(T(c, "site.stores.dn.registerHeading", "Debit note register")) + '</h3><div class="row"><label class="f"><span>' + esc(T(c, "site.stores.from", "From date")) + '</span><input id="stDnFrom" type="date"></label><label class="f"><span>' +

@@ -342,8 +342,9 @@
   /* One stay at a time (POST /ward/opening-balance): the same rules as the file, for a hospital with a handful of stays
    * open at switch-over. s.ob: null, or the server's answer to the last save. */
   function obSingleHtml(c, s) {
-    var esc = c.esc, r = s.ob, f = function (id, label, type, extra) {
-      return '<label class="f"><span>' + esc(label) + '</span><input id="' + id + '"' + (type ? ' type="' + type + '"' : "") + (extra || "") + ' autocomplete="off"></label>';
+    /* What was typed survives a refusal (s.obDraft), so a corrected field is all that has to be typed again; a save clears it. */
+    var esc = c.esc, r = s.ob, d = s.obDraft || {}, f = function (id, label, type, extra) {
+      return '<label class="f"><span>' + esc(label) + '</span><input id="' + id + '"' + (type ? ' type="' + type + '"' : "") + (extra || "") + ' value="' + esc(d[id] || "") + '" autocomplete="off" spellcheck="false"></label>';
     };
     var out = r == null ? "" : r === false ? '<div class="msg err">' + esc(T(c, "site.admin.import.obFailed", "No answer from the server. Check the stay before entering it again.")) + "</div>"
       : !r.ok ? '<div class="msg err">' + EN(c, esc(r.detail || refusal(c, r))) + "</div>"
@@ -390,8 +391,9 @@
       if (act === "obSave") {
         if (s.obBusy) return;
         s.obBusy = true; b.disabled = true;
-        c.api("/ward/opening-balance", { orgId: c.state.orgId, mrn: sel("admObMrn").trim(), amount: sel("admObAmount").trim(), legacyBillRef: sel("admObRef").trim(), asOf: sel("admObAsOf") }).then(function (r) {
-          s.obBusy = false; s.ob = r || false; draw();
+        s.obDraft = { admObMrn: sel("admObMrn").trim(), admObAmount: sel("admObAmount").trim(), admObRef: sel("admObRef").trim(), admObAsOf: sel("admObAsOf") };
+        c.api("/ward/opening-balance", { orgId: c.state.orgId, mrn: s.obDraft.admObMrn, amount: s.obDraft.admObAmount, legacyBillRef: s.obDraft.admObRef, asOf: s.obDraft.admObAsOf }).then(function (r) {
+          s.obBusy = false; s.ob = r || false; if (r && r.ok) s.obDraft = null; draw();
         }, function () { s.obBusy = false; s.ob = false; draw(); });
         return;
       }
