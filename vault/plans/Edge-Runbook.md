@@ -853,6 +853,51 @@ and the ICD cue should not fire on the "Search ICD" tool title. Both change rows
 need their own review; the marks were not changed. Raw host output and scores:
 `$WORK/r7.test3{,rot}.raw.jsonl`, `r7.test3{,sc}.score.json` (not in the repo).
 
+### 5d. Needle local LoRA, round 3, and frozen test set `edge-router-4`, 2026-10-04
+
+**Why.** test3 (`edge-router-3`) was seen once by r7, so it is not used to tune or pick anything in round 3.
+The rules layer also changed after r7 (#1365 KB exact, #1374 disease-name navigation, #1377 scheme intent and
+spelling, #1375 Hinglish/Tenglish negation and the Search ICD title), so every candidate list is rebuilt with
+the CURRENT router and the full Knowledge Base the scorer loads (`lib.mjs loadKB`).
+
+**test4, built and committed before any round-3 training** (`scripts/edge/generate-test4.mjs`,
+`dataset/test4.jsonl` + `manifest4.json`, sha256 `382b041a...f327f`, commit `3367bf2d1`). Same approach as test3:
+new templates only (none is a `generate.mjs`, `needle-r2.mjs`, `generate-test3.mjs` or `needle-r3.mjs`
+template), no text equal to a train, val, edge-router-2 test or test3 text (checked; the training builder
+checks the other way). Held-out keys (`lib.mjs t4Held`): 8% of targets and 30% of the ambiguous names
+(`wells`, `insulin`, `egfr`, `gfr`, `fisher`, `retic`, `bmr`, `coma score`, `sah grade`) never appear in round-3
+training or dev; 332 rows carry `heldout-target`. 2,804 rows: en 2,274, hi-Latn 267, te-Latn 263. Kinds:
+calculator 1,160, none 562, kb 495, drug 294, tool 173, icd 120. Routes: model 1,950, rules 694, negated
+148, empty 12. 275 danger rows (184 negations: 146 caught by the guard, 38 in forms it does not know, such as
+"band karo", "kholna nahi", "aapandi", "oddu"; 79 ambiguous names; 12 clinical orders), 129 of them
+model-routed. 267 KB disease questions (label none) and 495 KB page requests. Recall@5 96.1%.
+
+**Training data, train side only** (`scripts/edge/needle-r3.mjs build`, which runs the round-2 builder with
+round-3 options). Labels: a question about a disease is none even when its KB page is offered (MaiK answers);
+a disease name with a navigation word opens its KB page; a clinical order ("continue {drug}") is none; an
+ambiguous name (`lib.mjs AMBIGUOUS_NAMES`) is none; a negation the guard does not know ("band kar do",
+"aapeyyi") is none. Near-neighbour contrasts: every name x template for calculators that share title words
+with another calculator in their own options (GOS / GOS-E, ISS / R-ISS), every KB page whose name is also a
+calculator keyword (DIC), drug-card requests next to calculators that share the drug's name. Ambiguity
+relabel as round 2, except a KB page is a second fit only when the request IS its name, and an explicit
+calculator or page word decides. The builder throws if any training or dev3 text is a test, test3 or test4
+text, or if a test4-held target or name is in training or dev3. The selection split `dev3` (real labels)
+holds round 2's held-out templates and keys plus one dev-only template per new family.
+
+**Selection rule (pre-registered here, committed before any round-3 model is scored on dev3 or test4).**
+Candidates: every round-3 run x {single call, `engine.agree`}. Each is scored on ALL dev3 rows with
+`score.mjs --split dev3 --pred` (same metrics as test). A candidate is eligible when, on dev3: wrong shown is
+at most **0.25%** (half the 0.5% mark), danger is **100%**, accepted accuracy is at least 99%, and coverage is
+above dev3's rules coverage. Among eligible candidates the highest dev3 coverage wins (tie: the single call).
+Only the winner is scored on test4, once. If none is eligible the round FAILS; the candidate with the fewest
+dev3 danger misses, then the lowest dev3 wrong shown, is still scored on test4 once, for the record.
+Hyperparameters of later runs (rank, epochs) are chosen only from dev3 results. There is no confidence
+threshold to tune: a local LoRA build has no usable confidence head (5a), so the only operating-point knob is
+agree. Marks on test4 (unchanged): wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%,
+coverage above rules on test4; then on the Pixel 9, p95 under 800 ms over `--limit 50` including agree if
+chosen. Note before scoring: the base Needle single call is already p95 747-797 ms on the Pixel (A0.6), so
+an agree winner is unlikely to meet the latency mark.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
