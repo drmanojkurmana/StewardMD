@@ -11173,3 +11173,6 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 
 ## 2026-10-04 - StewardMD Edge ON for all; heat warns instead of skipping
 - **Owner, 2026-10-04:** `smd_edge` defaults ON for all users (kill switch `"0"`). A hot phone no longer skips the on-device router; MaiK shows "Phone is hot. Answers may be slower." in its footer. Accepted cost: slower answers and a warmer phone under sustained use. Memory, MaiK/Whisper busy and renderer-gone back-off stay.
+
+## 2026-10-04 - "KB only" renamed "MaiK Edge"
+- **Owner, 2026-10-04:** "KB only" renamed "MaiK Edge" in MaiK's model selection and everywhere it shows (picker, chip, footer, Settings "Who answers", KB-miss notice). Same `rag` pref, no migration. It is the KB answer plus StewardMD Edge's on-device router: free, offline, no cloud AI, no long answers. With `smd_edge` "0" the label falls back to "KB only".

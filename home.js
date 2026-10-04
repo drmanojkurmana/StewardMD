@@ -6016,6 +6016,8 @@ body.dark .maik-exp{box-shadow:0 12px 34px rgba(0,0,0,.55)}
 #maikSheet{color:var(--mk-ink)}
 #maikSheet *{box-sizing:border-box}
 body.v3-dark #maikSheet{--mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;--mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b;--mk-acc:#7db3ff;--mk-glow:rgba(45,212,191,.42);--mk-userbub:linear-gradient(140deg,#0f766e,#0b5a53);--mk-userink:#eafff9;--mk-usersh:0 4px 12px rgba(0,0,0,.35);box-shadow:0 -8px 40px rgba(0,0,0,.6)}
+/* The model picker (maik-engine.js openPicker) mounts on <body>, outside #maikSheet, so it never got the dark tokens. */
+body.dark #maikModelPicker,body.v3-dark #maikModelPicker{--mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-bd:#233149;--mk-soft:#182338;--mk-teal:#2dd4bf;--mk-tsoft:#0e2e2b}
 body.v3-dark .maik-wm{opacity:.06}
 body.v3-dark #maikSheet .maik-b.ai{box-shadow:0 2px 8px rgba(0,0,0,.25)}
 body.v3-dark #maikSheet .maik-card{background:var(--mk-soft);box-shadow:none}

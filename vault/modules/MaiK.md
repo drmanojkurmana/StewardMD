@@ -10,7 +10,7 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 
 ## Key files
 - `home.js` — the MaiK sheet + `runClinical()` (the ask flow), Aurora UI, sidebar
-- `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (KB only / Cloud / On-device);
+- `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (MaiK Edge, formerly "KB only" / Cloud / On-device);
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
 - `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
@@ -431,3 +431,15 @@ an unnamed ask prefers the profile state (`smd_profile_cache:<uid>.state`); a na
 package says so instead of falling through to a model. See [[StewardMD Edge]] and [[Government Health Schemes]].
 The garbled "Ma c au d a ca." line was not reproduced: the stream patch + markdown keep every character
 (asserted in `test/run-maik-conv5.mjs`), and line 7 no longer reaches a model at all.
+
+## "KB only" renamed "MaiK Edge" (owner, 2026-10-04, branch `maik-edge-engine`)
+The `rag` engine shows as **MaiK Edge** everywhere (picker row, header chip, footer `discLabel`, Settings
+"Who answers", the KB-miss notice, the `kb-only` error message). The pref value stays `rag`, so saved choices
+and analytics are unchanged. It is the free, offline, no-paid-AI mode: Edge's on-device router
+(`SMD_EDGE.rules` + `SMD_EDGE.route` in `maikSendRest`, not engine-gated) opens the right tool, calculator,
+drug, ICD or Knowledge page, and the KB answers the rest. It never calls a cloud AI or writes long answers.
+Edge runs on Settings > MaiK > "Edge engine" (`smd_edge_engine`: Needle, FunctionGemma, Rules only); the picker
+row shows "Engine: <name>" under its description. `smd_edge` "0" brings back the old "KB only" name and copy.
+Helpers: `SMD_MAIK_ENGINE.ragLabel()`, `edgeEngineLabel()`. The picker overlay mounts on `<body>`, outside
+`#maikSheet`, so it never got the dark tokens; `body.dark #maikModelPicker` (home.js) now carries them.
+

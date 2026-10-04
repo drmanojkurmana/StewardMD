@@ -3,7 +3,8 @@
  * Three clinician-controlled engines, ONE router. Mirrors image-engine.js (same pref
  * pattern, same iOS-grouped-list settings markup, same wireSettings contract).
  *
- *   • KB only · Free        — the deterministic StewardMD KB answer (Tier 0, home.js) and
+ *   • MaiK Edge · Free      — (was "KB only"; owner, 2026-10-04) StewardMD Edge's on-device router
+ *                             (edge-router.js) plus the deterministic StewardMD KB answer (Tier 0, home.js) and
  *                             NOTHING else. Zero AI tokens, works offline. On a KB miss the
  *                             clinician is told plainly instead of a paid call being made.
  *   • MaiK Cloud · Pro      — today's pipeline, unchanged: KB grounding → Vertex/Gemini.
@@ -140,6 +141,19 @@
     return p;
   }
 
+  // "KB only" is now "MaiK Edge" (owner, 2026-10-04). Same "rag" pref, renamed for the on-device
+  // router (edge-router.js) that runs in it. With Edge off (smd_edge "0") the old name comes back.
+  function edgeOn() { return lget("smd_edge") !== "0"; }
+  function ragLabel() { return edgeOn() ? "MaiK Edge" : "KB only"; }
+  var EDGE_ENGINE_LABEL = { needle: "Needle", functiongemma: "FunctionGemma", rules: "Rules only" };
+  function edgeEngineLabel() {
+    var v = null;
+    try { var E = window.SMD_EDGE; v = (E && E.engineChoice) ? E.engineChoice() : lget("smd_edge_engine"); } catch (e) {}
+    return EDGE_ENGINE_LABEL[v] || "Needle";
+  }
+  var RAG_SUB_EDGE = "On-device. Opens the right tool, calculator, drug or page instantly, and answers from the StewardMD Knowledge Base. Free, works offline. No AI writing.";
+  var RAG_SUB_KB = "StewardMD knowledge base, cited. No tokens, works offline.";
+
   // ── the KB-only notice (rendered as a normal answer, so no home.js error branch needed) ──
   // Deliberately avoids the phrases maikRenderAnswer's "limited material" regex looks for.
   function kbOnlyNotice() {
@@ -152,7 +166,7 @@
       var st = (M && M.state) ? M.state(pid) : { frac: 0, downloading: false };
       var why, how;
       if (!runtimeAvailable()) { why = "this build cannot run on-device models"; how = "Update the app, or switch to **MaiK Cloud**."; }
-      else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **KB only**."; }
+      else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **" + ragLabel() + "**."; }
       else if (st.frac > 0) { why = "**" + label + "** is only partly downloaded (" + (st.frac * 100).toFixed(0) + "%)"; how = "Tap the model name at the top of this screen and select it again to resume the download."; }
       else { why = "**" + label + "** is not downloaded to this device yet"; how = "Tap the model name at the top of this screen and select it to start the download."; }
       return {
@@ -160,6 +174,14 @@
         sources: [], engine: "local-unavailable", pack: pid
       };
     }
+    if (edgeOn()) return {
+      text: "**MaiK Edge** found no tool, page or Knowledge Base entry for this, and it never writes " +
+            "long answers or makes a paid AI call.\n\n" +
+            "Switch to **MaiK Cloud** or an on-device model for a written answer: tap the model name at " +
+            "the top of this screen, or open **Settings → MaiK → Who answers**.",
+      sources: [],
+      engine: "rag"
+    };
     return {
       text: "**KB-only mode is on.** The StewardMD knowledge base has no entry that answers this, " +
             "and KB-only mode never makes a paid AI call.\n\n" +
@@ -637,7 +659,7 @@
       // KB only never spends and never runs a model. Answer kinds render the notice as an answer;
       // structured kinds get an error their callers already know how to show.
       if (answerKind) return Promise.resolve(kbOnlyNotice());
-      return Promise.resolve({ error: "kb-only", message: (FEATURE_LABEL[feature] || feature) + " needs an AI model. KB-only mode makes no AI calls: pick MaiK Cloud or an on-device model in Settings." });
+      return Promise.resolve({ error: "kb-only", message: (FEATURE_LABEL[feature] || feature) + " needs an AI model. " + (edgeOn() ? "MaiK Edge" : "KB-only mode") + " makes no AI calls: pick MaiK Cloud or an on-device model in Settings." });
     }
     // LOCAL
     var need = REQ[feature] || null;
@@ -815,8 +837,8 @@
     return '<div class="me-seg">' +
       '<div class="smd-nav-lbl" style="margin-bottom:6px">Who answers</div>' +
       '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
-      opt("rag", "Knowledge Base only", pill("Free", "#dcfce7", "#166534"),
-          "StewardMD's own references, with citations. No AI, works offline.", true, false) +
+      opt("rag", ragLabel(), pill("Free", "#dcfce7", "#166534"),
+          edgeOn() ? RAG_SUB_EDGE : "StewardMD's own references, with citations. No AI, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e") + " " + gradePill("DM"),
           "Our super specialist. The strongest MaiK, reads the Knowledge Base before every answer. Uses AI tokens.", false, false) +
       opt("local", "MaiK on this phone", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
@@ -1195,7 +1217,7 @@
             '<div class="smd-nav-sub">' + (on
               ? "The model reads the StewardMD Knowledge Base before answering and every claim is checked against it. Slower, and the safer default."
               : "Off: faster, but the model answers from its own training and shows no sources.") +
-              " MaiK Cloud and Knowledge Base only are always checked." +
+              " MaiK Cloud and " + (edgeOn() ? "MaiK Edge" : "Knowledge Base only") + " are always checked." +
             '</div>' +
           '</div>' +
           '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-rag="1" role="switch" aria-checked="' + on + '"' +
@@ -1468,7 +1490,7 @@
   function options() {
     var out = [
       { id: "cloud", label: "MaiK Cloud", sub: "Our super specialist, grounded in the StewardMD KB. Uses AI tokens.", badge: "PRO", grade: "DM" },
-      { id: "rag", label: "KB only", sub: "StewardMD knowledge base, cited. No tokens, works offline.", badge: "FREE" }
+      { id: "rag", label: ragLabel(), sub: edgeOn() ? RAG_SUB_EDGE : RAG_SUB_KB, badge: "FREE", edgeEngine: edgeOn() ? edgeEngineLabel() : "" }
     ];
     var M = window.SMD_MAIK_MODELS;
     if (M && M.PACKS && gateActive() && runtimeAvailable()) {
@@ -1510,7 +1532,7 @@
     // "MaiK Cloud (not ready)" - the owner took that as Cloud being broken (2026-09-20). Name the pack.
     var _pk = null;
     try { var _M0 = window.SMD_MAIK_MODELS; _pk = (_M0 && _M0.PACKS && _M0.PACKS[activePack()]) ? _M0.PACKS[activePack()].label : null; } catch (e) {}
-    var base = o ? o.label : (getPref() === "rag" ? "KB only" : (getPref() === "local" && _pk) ? _pk : "MaiK Cloud");
+    var base = o ? o.label : (getPref() === "rag" ? ragLabel() : (getPref() === "local" && _pk) ? _pk : "MaiK Cloud");
     // Never let the chip imply an on-device model is answering when it is not ready. Silent
     // degrade-to-KB with a model name still showing is how "I get no answer" happens.
     if (getPref() === "local" && !localReady()) {
@@ -1551,7 +1573,7 @@
     // switch reads "disconnected" while this footer names the knowledge base, and without the
     // reason that looks like the footer ignoring the switch (owner, 2026-09-20).
     if (e === "rag" && getPref() === "local") return "Knowledge base (on-device model not ready) \u00b7 verify independently";
-    if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
+    if (e === "rag") return (edgeOn() ? "MaiK Edge \u00b7 " : "") + "StewardMD knowledge base \u00b7 verify independently";
     return "Grounded \u00b7 AI-generated, verify independently";
   }
 
@@ -1705,6 +1727,10 @@
         '<span style="font:600 10.5px/1 var(--sans,system-ui);letter-spacing:.03em;text-transform:uppercase;color:var(--mk-mut,#5a7184)">' + label + '</span>' +
         '<span aria-hidden="true">' + segs + '</span></span>';
     }
+    // MaiK Edge row: which Edge engine runs, in the same muted line the packs use for their size.
+    function edgeLineHTML(o) {
+      return o.edgeEngine ? '<span style="display:block;margin-top:7px;font:500 11px/1.3 var(--sans,system-ui);color:var(--mk-mut,#5a7184)">Engine: ' + esc(o.edgeEngine) + ' · change in Settings, MaiK, Edge engine</span>' : "";
+    }
     function metersHTML(o) {
       if (!o.pack) return "";
       var M = window.SMD_MAIK_MODELS, c = null, size = "";
@@ -1727,7 +1753,7 @@
               (badge ? '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + badge + '</span>' : "") +
             '</span>' +
             '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
-            metersHTML(o) +
+            metersHTML(o) + edgeLineHTML(o) +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
           '</button>';
@@ -1854,7 +1880,7 @@
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,
     getPref: getPref, setPref: setPref, effective: effective,
     gateActive: gateActive, runtimeAvailable: runtimeAvailable, packInstalled: packInstalled, localReady: localReady,
-    kbOnlyNotice: kbOnlyNotice, route: route, install: install, activePack: activePack,
+    kbOnlyNotice: kbOnlyNotice, ragLabel: ragLabel, edgeEngineLabel: edgeEngineLabel, route: route, install: install, activePack: activePack,
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
