@@ -1,7 +1,7 @@
 // scripts/edge/needle-r2.mjs: round-2 training set for the Needle router (Edge-Runbook 5b). Train side only.
 //   node scripts/edge/needle-r2.mjs build [--permute 2]   -> dataset/dev.jsonl (calibration split, real labels)
 //                                                           export/needle-local/train.r2.jsonl (with reasoning)
-//   node scripts/edge/needle-r2.mjs rows dev|test [--rot]  -> host rows (--rot: options rotated by one, ids ~r)
+//   node scripts/edge/needle-r2.mjs rows dev|test|test3 [--rot]  -> host rows (--rot: options rotated by one, ids ~r)
 //   node scripts/edge/needle-r2.mjs pred A.raw.jsonl [B.raw.jsonl]  -> score.mjs --pred lines; with B (the
 //        rotated run), a call counts only when both runs pick the SAME candidate (self-consistency), else option 0
 // What changes from round 1, all on the train side (test.jsonl and its texts are never read for training,
@@ -183,7 +183,8 @@ function pred(a, b) {
     const o = E.optionFrom(l.raw); return o.ok ? o : { ok: false, reason: o.reason };
   };
   const rot = {}; if (b) readJsonl(b).filter((l) => /~r$/.test(l.id)).forEach((l) => { rot[l.id.replace(/~r$/, "")] = l; });
-  const n = {}; readJsonl(path.join(OUT_DIR, "dev.jsonl")).concat(readJsonl(path.join(OUT_DIR, "test.jsonl"))).forEach((r) => { n[r.id] = r.candidates.length; });
+  const n = {}; ["dev", "test", "test3"].filter((s) => fs.existsSync(path.join(OUT_DIR, s + ".jsonl")))
+    .forEach((s) => readJsonl(path.join(OUT_DIR, s + ".jsonl")).forEach((r) => { n[r.id] = r.candidates.length; }));
   readJsonl(a).filter((l) => !/~r$/.test(l.id)).forEach((l) => {
     const o = one(l), line = { id: l.id, option: null, confidence: null, ms: l.ms, status: o.ok ? "ok" : "error" };
     if (!o.ok) { if (l.raw || l.raw === undefined) line.status = "invalid:" + o.reason; process.stdout.write(JSON.stringify(line) + "\n"); return; }
@@ -198,16 +199,16 @@ function pred(a, b) {
   });
 }
 
-// Device bake-off rows (test/edge-bakeoff-device.mjs --file): the first N model rows of test, each followed by
+// Device bake-off rows (test/edge-bakeoff-device.mjs --file): the first N model rows of test (--split test3: the new set), each followed by
 // its rotated copy (id ~r). Score: pred <device.jsonl> <device.jsonl> (both runs are in the one file).
-function bake(n) {
+function bake(n, split) {
   const { E } = loadApp();
-  modelRows(readJsonl(path.join(OUT_DIR, "test.jsonl"))).slice(0, n).forEach((r) => [r.candidates, r.candidates.slice(1).concat(r.candidates.slice(0, 1))].forEach((c, k) =>
+  modelRows(readJsonl(path.join(OUT_DIR, split + ".jsonl"))).slice(0, n).forEach((r) => [r.candidates, r.candidates.slice(1).concat(r.candidates.slice(0, 1))].forEach((c, k) =>
     process.stdout.write(JSON.stringify({ id: r.id + (k ? "~r" : ""), system: E.SYSTEM, prompt: E.promptFor(r.input_text, c), tools: E.TOOL_SCHEMA, n_options: c.length }) + "\n")));
 }
 
 if (mode === "build") build();
-else if (mode === "bake") bake(Number(argv[1] || 50));
+else if (mode === "bake") bake(Number(argv[1] || 50), arg("split", "test"));
 else if (mode === "rows") rows(argv[1], argv.includes("--rot"));
 else if (mode === "pred") pred(argv[1], argv[2]);
-else { console.error("usage: needle-r2.mjs build | bake N | rows dev|test [--rot] | pred A.raw.jsonl [B.raw.jsonl]"); process.exit(2); }
+else { console.error("usage: needle-r2.mjs build | bake N [--split test3] | rows dev|test|test3 [--rot] | pred A.raw.jsonl [B.raw.jsonl]"); process.exit(2); }

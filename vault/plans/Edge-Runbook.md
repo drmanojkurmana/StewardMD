@@ -767,6 +767,48 @@ The test set has now been seen by r7; a different operating point chosen on it w
 Next lever: the rotated-agreement check (dev 0.3% wrong) on r7, judged on a NEW frozen test set
 (new `schema_version`), or on the owner's 150-request human set, with the same marks.
 
+### 5c. New frozen test set `edge-router-3`, r7 scored once, 2026-10-04
+
+**Why a new set.** r7 was scored on `edge-router-2`, so that set can no longer judge r7 or pick its
+setting. `scripts/edge/generate-test3.mjs` writes `dataset/test3.jsonl` + `manifest3.json` (committed,
+like `test.jsonl`; sha256 `eae452d5...b7fe`). This section was written and committed BEFORE any model
+was run on the new set.
+
+**How it is unseen (each point is checked in the script, which throws otherwise).**
+- New templates only: none of the calculator, tool, drug, ICD, question and negation templates is a
+  `generate.mjs` or `needle-r2.mjs` template (e.g. "could you open the {t}", "{a} calculator chalao",
+  "naaku {a} kavali", "{t} pe le chalo", "{b} leaflet", "{g} card teruvu", "{d} ka icd code").
+- No row text equals a train, val, dev, old-test or r7-training text. r7's training file is read from
+  `needle-r2.mjs build` output and pinned by sha256 (`3520ce49...`, byte-identical to the file r7 was
+  trained on). 9 generated texts were dropped as seen, then the script asserts none is left.
+- Held-out targets: 664 rows (tag `heldout-target`) name a target that never appears as the answered
+  option of any r7 training row (424 targets did) and is not a dev target. They get every English
+  template and one Hinglish and one Tenglish.
+- **KB disease pages are on.** The app offers a `reference` option from `MaiKKB.resolveTarget` +
+  `SMD_REASON.hasDiseaseRef`; the old generator ran without the KB, so no train/dev/old-test row ever
+  had one. The script loads the KB stores; Node's `hasDiseaseRef` checks `KB_ENRICHMENT` only (the app
+  also checks SYNDROMES and DDX_NI), so Node offers a KB option only where the app does. 192 page
+  requests (target `kb:<id>`, where the bare name resolves to that page) and 102 questions about the
+  same diseases (label none: a question goes to MaiK, as in `generate.mjs`).
+- Danger (199): 161 negations (138 English forms the guard knows, 23 Hinglish/Tenglish forms it does
+  not: "{t} mat kholo", "{t} nahi chahiye", "{t} teravaddu", "{t} vaddu", which reach the model), 28
+  ambiguous names in new forms ("wells pls", "need the timi", "insulin wala kholo", "mrc kavalandi";
+  label pass), 9 clinical orders ("start heparin", "heparin chalu karo"; label pass), and "qtc" (any
+  QTc calculator is accepted). 61 danger rows are model-routed (edge-router-2: 7).
+
+**Shape.** 2,562 rows: en 2,137 (83%), hi-Latn 224 (9%), te-Latn 201 (8%) (edge-router-2: 90/5/5).
+Kinds: calculator 1,256, drug 444, none 319, tool 200, kb 192, icd 150. Routes: model 1,503 (59%;
+edge-router-2: 28%), rules 902, negated 141, empty 16. Recall@5 97.5%. Because the model share is
+higher, the plan's mark (wrong shown under 0.5% of ALL rows, i.e. at most 12 rows) is 0.85% of model
+rows here, close to the 0.9% dev mark; the marks are not changed.
+
+**Pre-registered choice (dev only, rule of 5b).** r7 on dev (2,151 model rows, 3,339 rows):
+single call wrong 0.65% of model rows, coverage 60.6%; agree wrong 0.28%, coverage 57.7%. Both meet
+the 0.9% dev mark, so the highest dev coverage wins: **r7 single call** is the setting scored, once,
+with `needle-host` (pinned macOS engine, the app's call sequence) and `score.mjs --split test3 --pred`.
+r7 + agree is run on the same set as a diagnostic only and is never used to pick.
+Marks: wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%, coverage above rules.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh

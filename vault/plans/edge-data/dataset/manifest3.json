@@ -1,0 +1,49 @@
+{
+  "schema_version": "edge-router-3",
+  "generated": "2026-10-04",
+  "rows": 2562,
+  "lang": {
+    "en": 2137,
+    "hi-Latn": 224,
+    "te-Latn": 201
+  },
+  "kind": {
+    "calculator": 1256,
+    "tool": 200,
+    "drug": 444,
+    "icd": 150,
+    "kb": 192,
+    "none": 320
+  },
+  "route_by": {
+    "rules": 902,
+    "model": 1503,
+    "negated": 141,
+    "empty": 16
+  },
+  "model_rows_by_lang": {
+    "not-model": 1059,
+    "en": 1131,
+    "hi-Latn": 192,
+    "te-Latn": 180
+  },
+  "tags": {
+    "heldout-target": 664,
+    "values": 40,
+    "kb": 294,
+    "kb-question": 102,
+    "danger": 199,
+    "negation": 161,
+    "ambiguous": 28,
+    "version": 1,
+    "not-a-tool": 9
+  },
+  "dropped_equal_to_seen_text": 9,
+  "r7_train_sha256": "3520ce49c4243fe447cd61cb3819557da2c1a497d2cd5267629c05ef96d79810",
+  "r7_trained_targets": 424,
+  "recall_at_5": 0.975,
+  "sha256": {
+    "test3": "eae452d5f2db4ec5e14d7f324b29ab104aae9b2e228f90aa5cba14698d8bb7fe"
+  },
+  "note": "Synthetic only. test3.jsonl is frozen (Edge-Runbook 5c): no text equals a train, val, dev, edge-router-2 test or r7-training text."
+}
