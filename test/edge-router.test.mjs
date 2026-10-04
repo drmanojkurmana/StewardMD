@@ -142,6 +142,27 @@ test("ICD: the screen request is not a code lookup, and a diagnosis keeps its wo
   assert.equal(E.candidates("icd for open fracture of tibia")[0].id, "open fracture tibia", "'open' is part of the diagnosis");
   assert.equal(E.candidates("icd code for type 2 diabetes")[0].id, "type 2 diabetes");
 });
+// Found by the frozen test set edge-router-3 (test3.jsonl): rules opened a card on these.
+test("negation guard: Hinglish and Tenglish negations pass, clinical 'nahi' does not", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["antibiogram mat kholo", "icu nahi chahiye", "insulin mat dikhao", "icu nahin chahiye", "antibiogram vaddu", "icu teravaddu", "antibiogram chupinchavaddu"]) {
+    assert.equal(E.negated(q), true, q);
+    assert.equal(E.rules(q), null, q);
+    assert.equal(await E.route(q), null, q);
+  }
+  assert.equal(m.prompts.length, 0);
+  for (const q of ["fever nahi utar raha paracetamol dose", "urine output nahi hai crcl", "mat 2 lagao"]) assert.equal(E.negated(q), false, q);
+});
+test("ICD: naming the Search ICD tool never looks up the navigation words", () => {
+  store.smd_edge = "1";
+  for (const q of ["navigate to search icd", "search icd section", "jump to search icd", "search icd wala page kholo", "search icd page ki vellu", "icd search kholo"]) {
+    assert.ok(!E.candidates(q).some((c) => c.kind === "icd"), q);
+    assert.ok(!E.rules(q) || E.rules(q).kind !== "icd", q);
+  }
+  assert.equal(E.candidates("search icd for type 2 diabetes")[0].id, "type 2 diabetes", "a real lookup through the tool name still works");
+  assert.equal(E.rules("icd code for type 2 diabetes").kind, "icd");
+});
 
 test("llamaAdapter: per-call grammar limited to the options offered, greedy, parses {option}", async () => {
   const calls = { load: [], gen: [], release: 0 };
