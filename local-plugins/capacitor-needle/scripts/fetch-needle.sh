@@ -5,6 +5,8 @@
 set -euo pipefail
 # Pinned to the repo revision that carries exactly these files: `main` moved on 2026-10-02 (f84005f8,
 # "Replace binaries from production build") and no longer serves them. A new revision is a re-audit.
+# f84005f8 (engine 3.1.0) was re-audited 2026-10-04 and NOT adopted: needle_complete's ABI changed, +28%
+# size, same decisions, thread fallback and hang (vault/plans/Edge-Runbook.md 5d).
 HF="https://huggingface.co/Cactus-Compute/needle3/resolve/27c0a9a5b3ca835e0b7dbeaccf555df03dac493d"
 cd "$(dirname "$0")/.."
 fetch() {   # url  dest  sha256

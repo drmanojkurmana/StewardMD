@@ -167,8 +167,10 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   adapter takes `killable` (default: Android only).
 - Cactus replaced every needle3 binary and the header on `main` on 2026-10-02 (revision f84005f8). Our pins
   are the 2026-09-28 files, so `fetch-needle.sh` and `test/native-host/run.sh` fetch from revision
-  `27c0a9a5` and keep a copy that already matches. The new upstream build is unaudited; it may change the
-  thread fallback that a62e9fbab works around. Re-audit it before moving the pin.
+  `27c0a9a5` and keep a copy that already matches. Re-audited 2026-10-04 (Edge-Runbook 5d): the new build is
+  engine 3.1.0 with Whistle speech added; same weights and licence, no network symbols, identical decisions
+  on test and test3, same thread fallback (our wrap still needed) and the same init-less hang (call 56 on
+  the Mac too), but 28% larger and `needle_complete` gained `pcm, samples` (ABI break). Pin NOT moved.
 - No engine is bundled. `SMD_EDGE.autoEngine()` uses `Capacitor.Plugins.Needle` on native when the
   plugin exists (Day 4 work). Until then only the rules layer answers.
 
