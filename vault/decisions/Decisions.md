@@ -5,6 +5,19 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ: discharge asks per order which medicines continue at home (owner)
+
+**Decision.** `/ward/discharge` takes `continueOrderIds`. Each must be an active MedicationOrder of the stay being
+closed (`continue_order_not_on_stay` 422 / `continue_order_not_active` 409, nothing written). Default: none continue.
+Chosen orders are copied to the finished Encounter's `takeHomeMedications` and closed as a new version with stop reason
+"continued at home"; the rest stop with "discharged" (CLIN-04). `medicationDecisions` records each order's outcome and
+who chose. The assembled discharge summary's medications section starts with the take-home list once the stay is
+finished. Active medication orders no longer need the free-text override reason (the per-order choice is the
+decision) but still need `emr.treat` (`medication_decision_not_permitted`); doses in flight, pending results and
+unreadable lists still need the reason. ABDM shares an order continued at home as active with an open period. The ward
+discharge screen shows one row per medicine with a tick and the outcome in words. **Known limit.** A summary signed
+before the stay ends does not list the take-home medicines. **Status:** PR "WardSynQ: owner decisions of 2026-10-04".
+
 ## 2026-10-04 · WardSynQ: a nurse may perform the bedside transfusion check (owner)
 
 **Decision.** New capability `transfusion.administer`, granted to the nurse role (admin holds every capability). It

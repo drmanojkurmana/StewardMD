@@ -38,7 +38,7 @@ import { VITAL_CODES, displayUnit } from "./migrate-vitals.js";
 import { problemLine, problemsForSummary } from "./migrate-problem.js";
 import { diagnosisFor } from "./patient-record.js";
 import { reconciliationIdFor, reconciliationForSummary } from "./med-reconciliation.js";
-import { ADMISSION_CLASSES, freeMasterBed, releaseBedClaim, stopOrderVersion } from "./migrate-inpatient.js";
+import { ADMISSION_CLASSES, freeMasterBed, releaseBedClaim, stopOrderVersion, CONTINUED_AT_HOME } from "./migrate-inpatient.js";
 import { chargesForPatient, unbilledItems } from "./charge-capture.js";
 import { reconciliationOf } from "../../wardsynq/wardsynq-invoice.js";
 import { invoicesForStay } from "./invoice.js";
@@ -166,6 +166,13 @@ function assembleDischargeSummary(r) {
         return `${o.drug} - ${d}${o.route ? ", " + o.route : ""}${o.frequency ? ", " + o.frequency : ""} (${o.status}); doses administered on this admission: ${n}`;
       }).join("\n")
     : NOT_RECORDED;
+  /* Owner decision 2026-10-04: the medicines the discharging clinician chose to continue at home, copied from the
+   * finished Encounter (dischargePatient). Shown first because it is what the patient leaves with. A stay discharged
+   * before this existed has no list and its section reads as it always did. */
+  const takeHome = enc.status === "finished" && Array.isArray(enc.takeHomeMedications) ? enc.takeHomeMedications : null;
+  const medications = !takeHome ? medsOrdered
+    : `${takeHome.length ? `To continue at home (chosen at discharge):\n${takeHome.map(takeHomeLine).join("\n")}`
+      : "To continue at home: none. Every medicine ordered on this admission was stopped at discharge."}\n\nOn this admission:\n${medsOrdered}`;
 
   const allergies = (r.allergies || []).length
     ? r.allergies.map((a) => `${a.substance}${a.reportedText ? ` (reported as: ${a.reportedText})` : ""} - severity ${a.severity || "unknown"}, ${a.verifiedBy ? "verified" : "unverified"}`).join("\n")
@@ -191,7 +198,7 @@ function assembleDischargeSummary(r) {
     allergies,
     vitals,
     investigations,
-    medications: medsOrdered,
+    medications,
     /* What the patient was taking BEFORE they came in, and what was decided about each. A discharge
      * summary that lists only the inpatient orders tells the GP what we started and nothing about
      * what we stopped - which is exactly how a home anticoagulant disappears at the boundary
@@ -211,6 +218,17 @@ function assembleDischargeSummary(r) {
       + "investigation requests and clinician notes. Nothing here is generated or inferred; a section "
       + "reading \"Not recorded.\" means no such entry exists in the record. Review and sign before use.",
   };
+}
+
+/** PURE. One take-home medicine as the summary prints it. */
+function takeHomeLine(m) {
+  const d = m.dose && m.dose.value != null ? `${m.dose.value} ${m.dose.unit || ""}`.trim() : "no dose recorded";
+  return `${m.drug} - ${d}${m.route ? ", " + m.route : ""}${m.frequency ? ", " + m.frequency : ""}`;
+}
+/** PURE. What the finished Encounter keeps of an order continued at home: the prescription, not the chart. */
+function takeHomeEntry(o) {
+  return { orderId: o.id, drug: o.drug, drugCode: o.drugCode || null, drugCodeSystem: o.drugCodeSystem || null,
+    dose: o.dose || null, route: o.route || null, frequency: o.frequency || null };
 }
 
 /**
@@ -476,17 +494,39 @@ function dischargeChecklist(pending, bill, failed) {
 
 /**
  * PURE. What stops this discharge. A bill that is not settled needs a stated reason to defer it.
- * Open orders, pending results, or a list that could not be read need an explicit override with a
+ * Doses in flight, pending results, or a list that could not be read need an explicit override with a
  * reason, and only somebody allowed to override (the router's emr.treat decision) may give one.
+ *
+ * Active medication orders no longer need an override reason (owner decision 2026-10-04): discharge asks about
+ * each one, continue at home or stop, and that choice is the decision. Making it still needs a treating clinician
+ * (`canOverride`), because which medicines a patient goes home on is a prescribing decision.
  */
 function dischargeBlockers(checklist, answers) {
   const a = answers || {};
   const out = [];
   if (checklist.bill.state !== "settled" && !str(a.billDeferredReason)) out.push("bill_not_settled");
-  const needsOverride = checklist.openOrders.length > 0 || checklist.pendingResults.length > 0 || checklist.unreadable.length > 0;
+  const meds = checklist.openOrders.filter((p) => p && p.kind === "medication");
+  const needsOverride = checklist.openOrders.length > meds.length || checklist.pendingResults.length > 0 || checklist.unreadable.length > 0;
   if (needsOverride && !str(a.overrideReason)) out.push("override_required");
   if (needsOverride && str(a.overrideReason) && a.canOverride !== true) out.push("override_not_permitted");
+  if (meds.length && a.canOverride !== true) out.push("medication_decision_not_permitted");
   return out;
+}
+/** PURE. The order ids the clinician chose to continue at home, checked against this stay's active orders.
+ *  Returns { ids } or { refusal }. Nothing is written when an id is wrong: a discharge that names an order of
+ *  another stay, or one already stopped, is refused whole rather than discharged with that choice dropped. */
+function continueChoice(raw, orders) {
+  if (raw == null) return { ids: [] };
+  if (!Array.isArray(raw) || raw.some((x) => typeof x !== "string" || !str(x))) {
+    return { refusal: { status: 422, error: "bad_continue_orders", detail: "continueOrderIds must be a list of order ids." } };
+  }
+  const ids = [...new Set(raw.map(str))];
+  const byId = new Map((orders || []).filter(Boolean).map((o) => [o.id, o]));
+  const foreign = ids.filter((id) => !byId.has(id));
+  if (foreign.length) return { refusal: { status: 422, error: "continue_order_not_on_stay", orderIds: foreign, detail: "A medicine chosen to continue at home is not an order of this stay." } };
+  const closed = ids.filter((id) => byId.get(id).status !== "active");
+  if (closed.length) return { refusal: { status: 409, error: "continue_order_not_active", orderIds: closed, detail: "A medicine chosen to continue at home is no longer active on this stay." } };
+  return { ids };
 }
 
 /** Reads the stay's checklist with the caller's own record access. Never throws. */
@@ -516,14 +556,14 @@ async function readDischargeChecklist(request, env, ctx) {
   const checklist = await checklistFor(request, env, ctx, svc, stay);
   return {
     ...base, ok: true, encounterId, patientId: stay.encounter.patientId, status: stay.encounter.status, class: stay.encounter.class,
-    checklist, blockers: dischargeBlockers(checklist, {}), canOverride: ctx.canOverride === true,
+    checklist, blockers: dischargeBlockers(checklist, { canOverride: ctx.canOverride === true }), canOverride: ctx.canOverride === true,
     deceasedRecorded: !!(stay.inputs.patient && stay.inputs.patient.deceased), dispositions: DISCHARGE_DISPOSITIONS,
   };
 }
 
 /**
  * Closes the stay. ctx: { migration, encounterId, dischargedAt?, disposition, destination?, dispositionNote?,
- *   billDeferredReason?, overrideReason?, canOverride?, tariff?, actorDeps, recordDeps }
+ *   billDeferredReason?, overrideReason?, continueOrderIds?, canOverride?, tariff?, actorDeps, recordDeps }
  *
  * THE CHECKLIST IS ENFORCED HERE, not only on the screen (LT-32). A stay used to close with no bill,
  * an active order and results outstanding, because nothing here looked. Now the bill has to be
@@ -560,16 +600,23 @@ async function dischargePatient(request, env, ctx) {
     return { ...base, ok: false, status: 409, error: "death_not_recorded", detail: "Record the death first, then close the stay.", written: 0 };
   }
 
+  const choice = continueChoice(ctx.continueOrderIds, stay.inputs.orders);
+  if (choice.refusal) return { ...base, ok: false, ...choice.refusal, written: 0 };
+
   const checklist = await checklistFor(request, env, ctx, svc, stay);
   const blockers = dischargeBlockers(checklist, ctx);
   if (blockers.length) {
-    const forbidden = blockers.includes("override_not_permitted");
+    const forbidden = blockers.includes("override_not_permitted") ? "override_not_permitted"
+      : blockers.includes("medication_decision_not_permitted") ? "medication_decision_not_permitted" : null;
     return {
-      ...base, ok: false, status: forbidden ? 403 : 409, error: forbidden ? "override_not_permitted" : "discharge_blocked", blockers, checklist,
-      detail: forbidden ? "Only a treating clinician may discharge with orders or results still open." : "This stay has a bill, orders or results that are not settled.",
+      ...base, ok: false, status: forbidden ? 403 : 409, error: forbidden || "discharge_blocked", blockers, checklist,
+      detail: forbidden === "override_not_permitted" ? "Only a treating clinician may discharge with orders or results still open."
+        : forbidden ? "Only a treating clinician may decide which medicines continue at home." : "This stay has a bill, orders or results that are not settled.",
       written: 0,
     };
   }
+  const activeOrders = (stay.inputs.orders || []).filter((x) => x && x.status === "active");
+  const continueIds = new Set(choice.ids);
 
   const dischargedAt = str(ctx.dischargedAt) || new Date().toISOString();
   const at = new Date().toISOString();
@@ -592,8 +639,15 @@ async function dischargePatient(request, env, ctx) {
     unreadable: checklist.unreadable,
   };
   if (checklist.bill.state !== "settled") candidate.billDeferred = { reason: str(ctx.billDeferredReason), by: resolved.actor.id, at };
-  if (checklist.openOrders.length || checklist.pendingResults.length || checklist.unreadable.length) {
+  if (str(ctx.overrideReason) && (checklist.openOrders.length || checklist.pendingResults.length || checklist.unreadable.length)) {
     candidate.dischargeOverride = { reason: str(ctx.overrideReason), by: resolved.actor.id, role: resolved.role, at };
+  }
+  /* Owner decision 2026-10-04: the take-home list and the decision on every active order, written with the discharge
+   * itself so the finished stay says what the patient went home on and who chose it. Default: nothing continues. */
+  candidate.takeHomeMedications = activeOrders.filter((o) => continueIds.has(o.id)).map(takeHomeEntry);
+  if (activeOrders.length) {
+    candidate.medicationDecisions = { by: resolved.actor.id, at, orders: activeOrders.map((o) => ({ orderId: o.id, drug: o.drug || null,
+      decision: continueIds.has(o.id) ? "continued-at-home" : "stopped" })) };
   }
   const inFlight = checklist.openOrders.filter((p) => p.kind === "dose").map((p) => ({ administrationId: p.id, orderId: p.orderId, status: p.status }));
 
@@ -605,18 +659,20 @@ async function dischargePatient(request, env, ctx) {
     const loc = current.location || {};
     if (ctx.orgId && loc.ward && loc.bed) await freeMasterBed(env, ctx.orgId, loc.ward, loc.bed, resolved.actor.id);
     if (loc.bed) await releaseBedClaim(svc, current);   // the bed claim too; a closed holder also frees it on its own
-    /* CLIN-04: THE STAY'S MEDICATION ORDERS END WITH IT. Every order of this encounter still active is stopped, as a new
-     * version by the discharging clinician with the reason "discharged", so none of them stays on a round, in a
-     * worklist or in a later admission's checks. Medicines to continue at home belong on the discharge prescription.
-     * One that could not be stopped is named on the response; it still leaves every round, whose orders come only
+    /* CLIN-04: THE STAY'S MEDICATION ORDERS END WITH IT. Every order of this encounter still active is closed, as a new
+     * version by the discharging clinician, so none of them stays on a round, in a worklist or in a later admission's
+     * checks. Owner decision 2026-10-04: the ones the clinician chose to continue at home are on the Encounter's
+     * take-home list and close with the reason "continued at home"; the rest stop with the reason "discharged".
+     * One that could not be closed is named on the response; it still leaves every round, whose orders come only
      * from open stays (mar-schedule.js roundOrders). */
-    const ordersStopped = [], ordersNotStopped = [];
-    for (const o of (stay.inputs.orders || []).filter((x) => x && x.status === "active")) {
-      try { await stopOrderVersion(svc, o, resolved.actor.id, "discharged", dischargedAt, null); ordersStopped.push(o.id); }
+    const ordersStopped = [], ordersContinuedAtHome = [], ordersNotStopped = [];
+    for (const o of activeOrders) {
+      const home = continueIds.has(o.id);
+      try { await stopOrderVersion(svc, o, resolved.actor.id, home ? CONTINUED_AT_HOME : "discharged", dischargedAt, null); (home ? ordersContinuedAtHome : ordersStopped).push(o.id); }
       catch (e) { ordersNotStopped.push({ orderId: o.id, drug: o.drug || null, error: str(e && e.message) }); }
     }
     return { ...base, ok: true, written: 1, encounterId, patientId: current.patientId, status: "finished", dischargedAt, disposition, dosesInFlight: inFlight,
-      ordersStopped, ...(ordersNotStopped.length ? { ordersNotStopped } : {}),
+      ordersStopped, ordersContinuedAtHome, takeHomeMedications: candidate.takeHomeMedications, ...(ordersNotStopped.length ? { ordersNotStopped } : {}),
       billDeferred: candidate.billDeferred || null, dischargeOverride: candidate.dischargeOverride || null,
       version: out.record.version, actor: resolved.actor.id, role: resolved.role };
   } catch (e) {
@@ -714,5 +770,5 @@ export {
   NOT_RECORDED, dischargeSummaryIdFor, lengthOfStayDays, assembleDischargeSummary, structuredSections,
   mergeSections, pendingItems, readDischargeSummary,
   draftDischargeSummary, signDischargeSummary, dischargePatient,
-  DISCHARGE_DISPOSITIONS, billState, dischargeChecklist, dischargeBlockers, readDischargeChecklist, investigationLine,
+  DISCHARGE_DISPOSITIONS, billState, dischargeChecklist, dischargeBlockers, continueChoice, readDischargeChecklist, investigationLine,
 };

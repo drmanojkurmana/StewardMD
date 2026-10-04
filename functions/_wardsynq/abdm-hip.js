@@ -33,7 +33,7 @@
 
 import { makeActor, KIND, TIER } from "../../wardsynq/wardsynq-actors.js";
 import { RecordService, isExternalRecord } from "./service.js";
-import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
+import { ADMISSION_CLASSES, CONTINUED_AT_HOME } from "./migrate-inpatient.js";
 import { dischargeSummaryIdFor } from "./migrate-discharge.js";
 import { invoicesForStay } from "./invoice.js";
 import { statusOf, chargeTotal } from "../../wardsynq/wardsynq-invoice.js";
@@ -184,13 +184,15 @@ const summaryDate = (n) => firstIso(n && n.signedAt, n && n.meta && n.meta.effec
 const orderLine = (o) => [str(o.drug), o.dose && o.dose.value != null ? `${o.dose.value} ${str(o.dose.unit)}`.trim() : "", str(o.route), str(o.frequency)].filter(Boolean).join(" ");
 function projectOrder(o) {
   const coded = str(o.drugCode) && systemUri(o.drugCodeSystem) ? [coding({ system: systemUri(o.drugCodeSystem), code: str(o.drugCode), display: str(o.drug) })] : [];
-  const m = medicationStatement({ id: o.id, medication: codeable({ coding: coded, text: str(o.drug) }), origin: "order", status: o.status, dosage: { text: orderLine(o) || "As directed" } });
+  // An order closed at discharge to continue at home is a medicine the patient is still taking: active, period open.
+  const atHome = o.status === "stopped" && o.stopReason === CONTINUED_AT_HOME;
+  const m = medicationStatement({ id: o.id, medication: codeable({ coding: coded, text: str(o.drug) }), origin: "order", status: atHome ? "active" : o.status, dosage: { text: orderLine(o) || "As directed" } });
   // The order's own date: authoredAt, else the time it took effect, else when it was entered (the convention
   // pathways.js already uses for a MedicationOrder). Never the export instant.
   m.authoredOn = orderDate(o);
   // A stopped order's active period ends when it was stopped, so hip.js's period-overlap filter does not
   // share it into a consent window that starts after the stop.
-  const end = o.status === "stopped" ? iso(o.stoppedAt) : null;
+  const end = o.status === "stopped" && !atHome ? iso(o.stoppedAt) : null;
   if (end) m.effectivePeriod = { start: m.authoredOn, end };
   return m;
 }

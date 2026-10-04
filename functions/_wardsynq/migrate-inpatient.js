@@ -895,6 +895,10 @@ async function createWardMedicationOrder(request, env, ctx) {
  *
  * ctx: { migration, orderId, reason, expectedVersion?, idempotencyKey?, actorDeps, recordDeps }
  */
+/* The stop reason discharge writes on an order the clinician chose to continue at home (owner decision 2026-10-04).
+ * The inpatient order is closed either way; this reason is what tells it apart from one stopped as "discharged", and
+ * abdm-hip.js leaves such an order's period open because the patient is still taking it. */
+const CONTINUED_AT_HOME = "continued at home";
 /** The stop itself, shared by the chart's Stop and by discharge (migrate-discharge.js). Throws what svc.put throws. */
 async function stopOrderVersion(svc, order, actorId, reason, at, idempotencyKey) {
   const next = { ...order, status: "stopped", signedBy: actorId, stoppedAt: at, stoppedBy: actorId, stopReason: reason };
@@ -1595,7 +1599,7 @@ async function patientTimeline(request, env, ctx) {
 export {
   IPD, ICU, MATERNITY, PEDIATRICS, NICU, ADMISSION_CLASSES, OPEN, patientsFor,
   encounterFromAdmission, sameAdmission, admitPatient, listWard,
-  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
+  recordWardVitals, orderFromWardRequest, createWardMedicationOrder, stopWardMedicationOrder, stopOrderVersion, CONTINUED_AT_HOME, PATIENT_INSTRUCTIONS, patientInstructionsRefusal,
   sameBed, transferPatient, bedBoard,
   BED_CLASSES, claimBed, releaseBedClaim, bedMove, bedOccupant,   // the one bed claim: migrate-surgery.js (PACU), fhir-inbound.js (FHIR/HL7 ADT)
   freeMasterBed, occupyMasterBed,   // TASK 4.2: discharge and recovery (migrate-discharge.js, migrate-surgery.js) set the bed's master state through these

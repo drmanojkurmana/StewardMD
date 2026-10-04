@@ -13136,7 +13136,7 @@
   function wardDischarge() {
     var s = st.sel; if (!s) return;
     st.dc = { encounterId: s.encounterId, checklist: null, loadFailed: false, canOverride: false, deceasedRecorded: false,
-      disposition: "", destination: "", note: "", billReason: "", overrideReason: "", blockers: null, err: "" };
+      disposition: "", destination: "", note: "", billReason: "", overrideReason: "", blockers: null, err: "", continueIds: {} };
     st.err = ""; st.note = ""; st.refusal = null;
     st.view = "discharge"; paint();
     loadDischargeChecklist();
@@ -13165,7 +13165,8 @@
     apiPost("/ward/discharge", { orgId: st.orgId, encounterId: dc.encounterId, disposition: dc.disposition,
       destination: dc.disposition === "transferred" ? String(dc.destination).trim() : undefined,
       dispositionNote: dc.disposition === "other" ? String(dc.note).trim() : undefined,
-      billDeferredReason: String(dc.billReason).trim() || undefined, overrideReason: String(dc.overrideReason).trim() || undefined })
+      billDeferredReason: String(dc.billReason).trim() || undefined, overrideReason: String(dc.overrideReason).trim() || undefined,
+      continueOrderIds: dischargeHomeIds(dc) })
       .then(function (r) {
         st.busy = false;
         if (r && r.ok) {
@@ -13183,9 +13184,35 @@
       })
       .catch(function () { st.busy = false; if (st.dc !== dc) return; dc.err = wT("ward.could-not-end-the-stay", "Could not end the stay."); paint(); });
   }
+  /* Owner decision 2026-10-04: discharge asks about each medicine still ordered. Ticked ones continue at home (the
+   * stay's take-home list); the rest stop when the stay ends. Nothing is ticked until a clinician ticks it. */
+  function dischargeMeds(c) { return ((c && c.openOrders) || []).filter(function (p) { return p.kind === "medication"; }); }
+  function dischargeHomeIds(dc) {
+    var ids = dc.continueIds || {};
+    return dischargeMeds(dc.checklist).filter(function (p) { return ids[p.id] === true; }).map(function (p) { return p.id; });
+  }
+  function dischargeHomeBlock(dc, c) {
+    var meds = dischargeMeds(c); if (!meds.length) return "";
+    var ids = dc.continueIds || {}, locked = !dc.canOverride, n = 0;
+    var rows = meds.map(function (p) {
+      var on = !locked && ids[p.id] === true; if (on) n++;
+      var sig = [p.dose && p.dose.value != null ? p.dose.value + " " + (p.dose.unit || "") : "", p.frequency || ""].filter(function (x) { return String(x).trim(); }).join(", ");
+      return '<li><label class="w-chk w-home-row' + (on ? " on" : "") + '"><input type="checkbox" data-w-act="dccontinue:' + esc(p.id) + '"' + (on ? " checked" : "") + (locked ? " disabled" : "") + ">" +
+        '<span class="w-home-drug" translate="no"><b lang="en">' + esc(p.drug || p.id) + "</b>" + (sig ? '<span lang="en">' + esc(sig) + "</span>" : "") + "</span>" +
+        '<span class="w-st' + (on ? " administered" : "") + '">' + (on ? wTH("ward.dc-home-continues", "Continues at home") : wTH("ward.dc-home-stops", "Stops")) + "</span></label></li>";
+    }).join("");
+    var said = locked ? '<p class="w-hint warn">' + ms("lock") + wTH("ward.dc-home-locked", "Only a treating clinician decides which medicines continue at home.") + "</p>"
+      : '<p class="w-hint" aria-live="polite">' + (n ? wTH("ward.dc-home-some", "{n} of {total} continue at home. The rest stop when the stay ends.", { n: n, total: meds.length }, "")
+        : wTH("ward.dc-home-none", "Nothing ticked: every medicine stops when the stay ends.")) + "</p>";
+    return '<div class="w-sub w-take-home" role="group" aria-labelledby="wDcHomeH"><h4 id="wDcHomeH">' + ms("medication") + wTH("ward.dc-home-title", "Medicines: continue at home?") + "</h4>" +
+      '<p class="w-hint">' + wTH("ward.dc-home-hint", "Tick each medicine the patient keeps taking at home. It goes on the take-home list.") + "</p>" +
+      '<ul class="w-mini">' + rows + "</ul>" + said + "</div>";
+  }
   /* PURE. The discharge screen. */
   function dischargeView(state) {
     var dc = state.dc || {}, s = state.sel || {}, c = dc.checklist;
+    // Doses in flight still need an override; medicines are decided one by one above them (dischargeHomeBlock).
+    var otherOpen = ((c && c.openOrders) || []).filter(function (p) { return p.kind !== "medication"; });
     var opt = function (v, label, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? " selected" : "") + ">" + label + "</option>"; };
     var BILL_WORDS = {
       settled: wTH("ward.the-bill-is-settled", "The bill is settled."),
@@ -13208,10 +13235,11 @@
           ((c.bill.unbilled || []).length ? "<p>" + wTH("ward.not-on-a-bill-yet", "Not on a bill yet:") + " " + c.bill.unbilled.map(function (u) { return esc(u.display); }).join(", ") + "</p>" : "") +
           (c.bill.state !== "settled" ? '<label class="w-f"><span>' + wTH("ward.defer-the-bill-reason", "Defer the bill: reason") + '</span><input type="text" autocomplete="off" data-w-dc="billReason" value="' + esc(dc.billReason || "") + '"></label>' : "") +
         "</div>" +
-        '<div class="w-sub"><h4>' + ms("medication") + wTH("ward.open-orders", "Open orders") + "</h4>" + itemList(c.openOrders || [], function (p) { return p.drug || p.display || p.id; }) + "</div>" +
+        dischargeHomeBlock(dc, c) +
+        (otherOpen.length || !dischargeMeds(c).length ? '<div class="w-sub"><h4>' + ms("medication") + wTH("ward.open-orders", "Open orders") + "</h4>" + itemList(otherOpen, function (p) { return p.drug || p.display || p.id; }) + "</div>" : "") +
         '<div class="w-sub"><h4>' + ms("science") + wTH("ward.pending-results", "Pending results") + "</h4>" + itemList(c.pendingResults || [], function (p) { return p.display || p.id; }) + "</div>" +
         ((c.unreadable || []).length ? '<p class="w-hint warn">' + ms("warning") + wTH("ward.some-of-this-stay-could-not", "Some of this stay could not be read, so open orders or results may be missing.", null, "", 1) + "</p>" : "") +
-        ((c.openOrders || []).length || (c.pendingResults || []).length || (c.unreadable || []).length
+        (otherOpen.length || (c.pendingResults || []).length || (c.unreadable || []).length
           ? (dc.canOverride
             ? '<label class="w-f"><span>' + wTH("ward.discharge-with-these-open-reason-recorded", "Discharge with these open: reason (recorded with your name)") + '</span><textarea rows="2" data-w-dc="overrideReason">' + esc(dc.overrideReason || "") + "</textarea></label>"
             : '<p class="w-hint warn">' + ms("lock") + wTH("ward.only-a-treating-clinician-can-discharge", "Only a treating clinician can discharge with orders or results still open.") + "</p>")
@@ -16923,6 +16951,7 @@
     if (cmd === "followupsubmit") { followUpSubmit(); return; }
     if (cmd === "dischargecheck") { loadDischargeChecklist(); return; }
     if (cmd === "dischargesubmit") { dischargeSubmit(); return; }
+    if (cmd === "dccontinue") { if (st.dc && st.dc.canOverride) { st.dc.continueIds = st.dc.continueIds || {}; st.dc.continueIds[arg] = !st.dc.continueIds[arg]; paint(); } return; }
     if (cmd === "invvoid") { invoiceVoid(arg); return; }
     if (cmd === "dispensereturn") { dispenseReturn(arg); return; }
     if (cmd === "bloodtrace") { bloodTrace(); return; }

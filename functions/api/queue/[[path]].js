@@ -5683,7 +5683,7 @@ export async function onRequest(context) {
           ? await readDischargeChecklist(request, env, { ...common, encounterId: url.searchParams.get("encounterId") || "" })
           : await dischargePatient(request, env, { ...common, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition,
             destination: body.destination, dispositionNote: body.dispositionNote, billDeferredReason: body.billDeferredReason, overrideReason: body.overrideReason,
-            idempotencyKey: body.idempotencyKey || null });
+            continueOrderIds: body.continueOrderIds, idempotencyKey: body.idempotencyKey || null });
         if (sub === "discharge" && r.ok && r.written) abdmStayHook(body.encounterId, "discharge");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
