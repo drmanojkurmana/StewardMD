@@ -108,6 +108,11 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
 - Layer 0 trusts `MEDCALC.find(...).exact`. Exact now means ONE calculator carries the name; keep it
   that way or rules open the wrong score. Regression check: diff `find()` over every title + kw.
 - `negated()` guard (don't / do not / stop / hold / cancel) runs before rules and the model.
+- `negated()` also knows Hinglish "mat kholo / mat dikhao", "nahi chahiye" and Tenglish "vaddu / teravaddu"
+  (any `-vaddu`). A bare "nahi" is NOT a negation ("fever nahi utar raha"); only "nahi chahiye" and "mat <verb>".
+  Found by test3 (edge-router-3): before this, "fundx ai mat kholo" reached the model.
+- ICD trigger: a request naming the Search ICD tool ("navigate to search icd", "icd search kholo") builds a
+  lookup only from the words after "for" / "of". Without that, rules opened "ICD-10 codes for navigate to".
 - Drug and KB options get their slots before the ranked list, or weak word overlaps fill all five.
 - Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing; the
   adapter takes `killable` (default: Android only).

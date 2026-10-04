@@ -46,8 +46,13 @@
   var GENERIC = { calculator: 1, calc: 1, score: 1, scores: 1, index: 1, criteria: 1, tool: 1 };
   function norm(s) { return lower(s).replace(/[^a-z0-9]+/g, " ").trim(); }
   // "don't open the ICU", "stop metformin": never act on a negated or stop request.
-  var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b/i;
+  // Hinglish "mat kholo" / "nahi chahiye" and Tenglish "vaddu" / "teravaddu": a bare "nahi" is not one
+  // ("fever nahi utar raha"), only "nahi chahiye" (do not want) and "mat" before a verb.
+  var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b|\b(nahi|nahin|nahii|nai|nhi)\s+chahi(y|e)e?\b|\bmat\s+(khol|kholo|kholna|dikha|dikhao|dikhana|karo|kar|chalao|chala|lagao|bhejo|do)\b|\b\w*(vaddu|vadhu)\b/i;
   var ICD_CUE = /\b(icd(?:\s*-?\s*1[01])?|icd10|icd11|diagnosis code|code for)\b/i;
+  // The Search ICD tool's own name ("navigate to search icd", "icd search kholo"): only a term after
+  // "for" / "of" is a lookup ("search icd for sepsis"); the rest is navigation, never an ICD term.
+  var ICD_TOOL = /\b(search\s+icd|icd\s+search)\b/i;
   function candidates(text) {
     var out = [], seen = {}, q = String(text || "");
     var P = G.SMD_CPARAMS, M = G.MEDCALC, S = G.SMD_SEARCH;
@@ -57,7 +62,9 @@
     // Words that are kept ("s/f", "r-ipi", "phq-2" keep their single letters and digits).
     var pw = norm(bare).split(" ").filter(function (w) { return w && !STOP[w]; });
     if (ICD_CUE.test(q)) {
-      var term = bare.replace(ICD_CUE, " ").replace(/\b(what(?:'s| is)?|the|of|for|please|give|me)\b/gi, " ").replace(/\s+/g, " ").trim();
+      var src = bare;
+      if (ICD_TOOL.test(bare)) { var tm = bare.match(/\b(?:for|of)\b([\s\S]*)$/i); src = tm ? tm[1] : ""; }
+      var term = src.replace(ICD_CUE, " ").replace(/\b(what(?:'s| is)?|the|of|for|please|give|me)\b/gi, " ").replace(/\s+/g, " ").trim();
       // "search icd", "take me to icd search": the request is for the screen, not a code lookup.
       // Stop words only decide whether a term is left; they are never removed from it ("open
       // fracture of tibia" is not "fracture tibia": an open fracture has its own codes).
