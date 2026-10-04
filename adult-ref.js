@@ -1,4 +1,4 @@
-/* StewardMD - Adult normal values (window.SMD_ADULT_REF). Owner-approved 2026-10-04, review pending.
+/* StewardMD - Adult normal values (window.SMD_ADULT_REF). Owner-approved 2026-10-04; clinical sign-off by the owner 2026-10-05.
  *
  * Adult lab reference ranges from data/ref/adult-ref-values.json: every row carries its value, unit,
  * source and the source row as read. Same look as the neonatal "Reference values" screen (neo-ref.js),
@@ -153,10 +153,10 @@
     var b = root.querySelector(".nh-body");
     if (!doc) { b.innerHTML = '<section class="nh-card"><div class="nh-none">Could not load the adult reference ranges. Check the connection and try again.</div></section>'; return; }
     b.innerHTML = '<div class="nh-note" role="note">' + esc(doc.note) + "</div>" +
-      '<section class="nh-card"><h3>Adult normal values <span class="nh-draft" title="Compiled from the cited sources; awaiting clinical sign-off">Draft</span></h3>' +
+      '<section class="nh-card"><h3>Adult normal values</h3>' +
       '<label for="arQ" class="nh-work">Search a test (name or abbreviation)</label><input id="arQ" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" placeholder="Potassium, ALT, TSH…" value="' + esc(query) + '"></section>' +
       '<div data-ar="list" aria-live="polite" style="display:flex;flex-direction:column;gap:12px">' + listHtml() + "</div>" + sourcesHtml() +
-      '<div class="nh-foot">Adults only. Each value names its source; review pending.</div>';
+      '<div class="nh-foot">Adults only. Each value names its source. Use your own laboratory\'s range where it differs.</div>';
     if (hit.length) { var el = b.querySelector(".nh-row.hit"); if (el && el.scrollIntoView) setTimeout(function () { try { el.scrollIntoView({ block: "nearest" }); } catch (e) {} }, 60); }
   }
   function close() { if (root) root.hidden = true; D.body.classList.remove("smd-adultref-open"); }

@@ -12,7 +12,7 @@ const DOC = JSON.parse(readFileSync(new URL("../data/ref/adult-ref-values.json",
 const REF_SRC = readFileSync(new URL("../adult-ref.js", import.meta.url), "utf8");
 
 test("schema: every row has analyte, value, unit, a known source and the quoted source row", () => {
-  assert.equal(DOC.review, "pending clinical sign-off");
+  assert.equal(DOC.review, "signed off by owner 2026-10-05");
   assert.match(DOC.note, /vary by laborator/i);
   assert.match(DOC.note, /own laboratory/i);
   let n = 0;
