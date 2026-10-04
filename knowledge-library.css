@@ -123,6 +123,9 @@ body.dark #dxOverlay #dxMgmt.dx-reader { --rd-red: #ff8a80; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-favourite[aria-pressed="true"] { background: color-mix(in srgb, var(--reader-accent) 10%, transparent); }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-favourite[aria-pressed="true"] svg { fill: currentColor; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-favourite:active { transform: scale(0.97); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-acts .dx-reader-favourite { margin-top: 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-askmaik { border-color: transparent; background: color-mix(in srgb, var(--reader-accent) 12%, transparent); font-weight: 600; }
 @media (hover: hover) and (pointer: fine) { #dxOverlay #dxMgmt.dx-reader .dx-reader-favourite:hover { background: color-mix(in srgb, var(--reader-accent) 7%, transparent); } }
 #dxOverlay #dxMgmt.dx-reader :is(.smd-bls-h, .dx-reader-glance h3, .smd-bl-h) { text-wrap: balance; }
 #dxOverlay #dxMgmt.dx-reader :is(.dx-reader-favourite, .dx-back, summary, .ev-top, .ev-sec-h):focus-visible { outline: 2px solid var(--reader-accent); outline-offset: 2px; }

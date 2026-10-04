@@ -407,3 +407,14 @@ Bench (`scripts/bench-maik-lite-retrieval.mjs --router real`, real book): key po
 - Still zero: child paracetamol dose, tramadol with sertraline, the unnamed heart-failure vignette (drug
   questions belong to the Drug Index path). `LITE_DEBUG=<case id>` prints a case's package + evidence.
 
+
+## Topic chip from a Knowledge page (2026-10-04, branch `kb-nav-askmaik`)
+`window.SMD_askMaikTopic(id, name)` = `openAskAi("", {topic})`: sets `_maikPin = {id, name}` (outer scope,
+survives a sheet reopen; cleared by the chip's x or a new thread) and `_maikTopic` to the disease, Research off.
+Composer: `#maikTopicBar` ("About: <name>", `#maikTopicX`, radiogroup `[data-maik-tmode]` Ask / Research;
+Research only with `researchModeAvail()`), painted by `maikPaintTopic()` (also from `setResearchMode`).
+Research seeds the input with the disease name and uses the existing Evidence Review path (cloud; on a
+local engine the existing "Answering on-device" fallback). Ask: `maikPinScope(q)` runs after Edge Layer 0,
+follow-ups and the casual/calculator routes; a clinical question becomes `<disease>: <q>` (unless it already
+names it) with retrieval `<disease> <q>`, through `runClinical`, so the chosen engine and hard-local policy
+apply unchanged. A question about a DIFFERENT disease the KB resolves confidently is not forced onto the chip.

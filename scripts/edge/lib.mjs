@@ -52,6 +52,22 @@ export function loadApp() {
   return loaded;
 }
 
+// The Knowledge Base for KB-page rules (MaiKKB + symptoms). SMD_REASON.hasDiseaseRef is reduced to its
+// enrichment lookup (reasoning.js also checks SYNDROMES / DDX_NI, which only ADD pages), so a page this
+// offers always exists in the app. ~1 s; only --kb and the KB tests load it.
+export const KB_EVAL = path.join(ROOT, "vault", "plans", "edge-data", "kb", "kb-nav.jsonl");
+let kbLoaded = false;
+export function loadKB() {
+  const app = loadApp();
+  if (!kbLoaded) {
+    ["kb/dist/kb.core.js", "kb/dist/kb.clinical.js", "kb/dist/kb.enrichment.js", "kb/dist/kb.enrichment.2.js", "kb/dist/kb.expanded.js", "kb/dist/kb.rag.js",
+      "kb/ai/maik-kb.js", "kb/ai/maik-symptoms.js"].forEach((f) => vm.runInThisContext(fs.readFileSync(path.join(ROOT, f), "utf8"), { filename: f }));
+    globalThis.SMD_REASON = { hasDiseaseRef: (id) => !!(globalThis.KB_ENRICHMENT && globalThis.KB_ENRICHMENT.byId && globalThis.KB_ENRICHMENT.byId[id]) };
+    kbLoaded = true;
+  }
+  return app;
+}
+
 export function sha(s) { return crypto.createHash("sha256").update(s).digest("hex"); }
 // Deterministic 0..1 from a string (split assignment never changes between runs).
 export function unit(s) { return parseInt(sha(s).slice(0, 8), 16) / 0xffffffff; }
