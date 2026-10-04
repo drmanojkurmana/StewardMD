@@ -183,3 +183,20 @@ test("R2-2 NABH table: indicator 1 says how many admissions miss each time and h
     } else assert.deepEqual(leftovers(html, []), []);
   }
 });
+
+test("NABH table: indicator 4 shows the near misses and uncategorised beside the rate and the NCC MERP counts beneath, translated around server values", async () => {
+  const { loadSite, leftovers } = await import("./wsq-site-i18n-harness.mjs");
+  for (const lang of ["en", "xx"]) {
+    const e = loadSite({ lang, pages: ["governance.js"] });
+    const W = e.win.WSQ, c = { esc: W.esc, t: W.t, tSafe: W.tSafe, en: W.en };
+    const html = W._govNabhCellNote(c, 4, { nearMisses: 2, uncategorised: 1, byCategory: { A: 1, B: 1, C: 2, D: 0, E: 0, F: 0, G: 1, H: 0, I: 1, uncategorised: 1 }, byGroup: { "no-error": 1, "error-no-harm": 3, "error-harm": 1, death: 1, uncategorised: 1 }, uncategorised: 1 }) + W._govNabhCellNote(c, 9, { byCategory: { A: 1 }, byGroup: {}, uncategorised: 1 });
+    if (lang === "en") {
+      assert.match(html, /of which 2 near misses \(NCC MERP categories A and B\)/);
+      assert.match(html, /1 with no NCC MERP category/);
+      assert.match(html, /No error 1, error no harm 3, error harm 1, death 1/);
+      assert.match(html, /A 1, B 1, C 2, D 0, E 0, F 0, G 1, H 0, I 1/);
+      assert.equal(W._govNabhCellNote(c, 9, { byCategory: { A: 1 }, byGroup: {}, uncategorised: 1 }), "", "indicator 9 is the SMR and shows no NCC MERP lines");
+      assert.equal(W._govNabhCellNote(c, 4, { value: 3 }), "", "a month with no near-miss field adds nothing");
+    } else assert.deepEqual(leftovers(html, ["A 1, B 1, C 2, D 0, E 0, F 0, G 1, H 0, I 1", "NCC", "MERP"]), []);
+  }
+});

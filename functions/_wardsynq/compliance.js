@@ -24,6 +24,7 @@ import { HAI_EVENTS, deviceDays, confirmedIn } from "./infection-control.js";
 import { auditSummary, edReturnPairs } from "./quality-registers.js";
 import { readWindowed } from "./read-window.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
+import { MERP_CODES } from "../../wardsynq/wardsynq-incidents.js";
 import { HMIS_FORMAT, HMIS_SECTIONS, HMIS_ITEMS } from "./hmis-items.js";
 import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
 import { milestoneTimes, dischargeMinutes } from "./discharge-milestones.js";
@@ -117,7 +118,16 @@ const NABH_SOURCES = {
       for (const x of a) { const d = str(x.department) || "not-recorded"; byDepartment[d] = byDepartment[d] || { audited: 0, compliant: 0 }; byDepartment[d].audited++; if (x.compliant) byDepartment[d].compliant++; }
       return { ...auditCell("diagnostic-safety")(r, w), byDepartment, auditorInsideDepartment: a.filter((x) => x.auditorOutsideDepartment === false).length };
     } },
-  4: { missing: "The number of opportunities for a medication error. Confirmed medication-error incidents are recorded, but the denominator is not." },
+  /* Owner decision 2026-10-04 (was owner item O1): a medication error is the NCC MERP definition, so every confirmed
+   * medication-error incident counts, near misses (categories A and B) included and shown as their own line, and the
+   * same errors are counted per NCC MERP category A to I and per group (no error A, error no harm B to D, error harm E to
+   * H, death I) beneath it; a record with no category is shown as uncategorised. The denominator is the one quality.js
+   * already uses for this measure, inpatient bed-days; NABH's "total number of opportunities" is not recorded anywhere
+   * in WardSynQ, so the percentage of opportunities is not computed. */
+  4: { needs: ["Encounter", "IncidentReport", "WoundAssessment"], qs: "medication-errors",
+    def: { unit: "per 1000 inpatient bed-days", denominator: "Inpatient bed-days (the denominator WardSynQ's quality screen already uses for medication errors)", numerator: "Confirmed medication errors, near misses (NCC MERP categories A and B) included" },
+    source: "Confirmed medication-error incidents (NCC MERP definition) dated by when the event happened, per 1000 inpatient bed-days (quality.js).",
+    note: "NABH names the number of opportunities for a medication error as the denominator; WardSynQ does not record opportunities, so the rate is per inpatient bed-day and the percentage form is not computed. Near misses (categories A and B) are counted in the rate and shown as their own line, with the count per NCC MERP category and group beneath; a confirmed medication error filed with no NCC MERP category is counted in the rate and shown as uncategorised." },
   5: { needs: ["AdverseDrugReaction", "Encounter"], source: "Suspected adverse drug reaction reports (PvPI form) whose reaction started in the month while the patient was on an inpatient stay, over inpatient stays open in the month.",
     note: "Counts reports, as filed; causality assessment at the ADR monitoring centre is not recorded.",
     compute: (r, w) => {
@@ -283,12 +293,12 @@ function computeNabhIndicators(input) {
   };
   return NABH_KPIS.map((k) => {
     const s = NABH_SOURCES[k.no] || { missing: "Not mapped." };
-    const def = { no: k.no, standard: k.standard, title: k.title, definition: k.definition, numerator: k.numerator, denominator: k.denominator, unit: k.unit, frequency: k.frequency };
+    const def = { no: k.no, standard: k.standard, title: k.title, definition: k.definition, numerator: k.numerator, denominator: k.denominator, unit: k.unit, frequency: k.frequency, ...(s.def || {}) };
     if (s.missing) return { ...def, computable: false, reason: "Not computable from WardSynQ data. Missing: " + s.missing, dataSource: null, months: [] };
     const blocked = (s.needs || []).find((t) => bad[t]);
     if (blocked) return { ...def, computable: false, reason: `Not computable: ${blocked} records could not be read (${bad[blocked]}).`, dataSource: s.source, months: [] };
     const months = input.windows.map((w) => {
-      if (s.qs) { const m = qs(w)[s.qs]; return { month: w.month, numerator: m.numerator, denominator: m.denominator, value: m.rate }; }
+      if (s.qs) { const m = qs(w)[s.qs]; return { month: w.month, numerator: m.numerator, denominator: m.denominator, value: m.rate, ...(m.byCategory ? { nearMisses: m.nearMisses, uncategorised: m.uncategorised, byCategory: m.byCategory, byGroup: m.byGroup } : {}) }; }
       return { month: w.month, ...s.compute(rows, w, input.settings || {}) };
     });
     return { ...def, computable: true, dataSource: s.source, note: s.note || null, months };
@@ -337,12 +347,20 @@ function csvCell(v) {
 }
 const csvRows = (rows) => rows.map((r) => r.map(csvCell).join(",")).join("\r\n") + "\r\n";
 
+/** PURE. The NCC MERP detail of a month's cell (NABH 4: near misses, uncategorised, categories A to I, groups), or "". */
+function cellDetail(c) {
+  if (!c || !c.byCategory) return "";
+  const cats = [...MERP_CODES, "uncategorised"].map((k) => `${k} ${c.byCategory[k]}`).join(", ");
+  const groups = Object.keys(c.byGroup).map((k) => `${k} ${c.byGroup[k]}`).join(", ");
+  return `${c.month}: near misses (A, B) ${c.nearMisses}, uncategorised ${c.uncategorised}; ${cats}; ${groups}`;
+}
+
 /** PURE. The NABH monthly table as CSV. */
 function nabhCsv(report) {
-  const head = ["No", "Standard", "Indicator", "Unit", ...report.months.flatMap((m) => [m + " value", m + " numerator", m + " denominator"]), "Computable", "Data source or what is missing"];
+  const head = ["No", "Standard", "Indicator", "Unit", ...report.months.flatMap((m) => [m + " value", m + " numerator", m + " denominator"]), "Computable", "Data source or what is missing", "Detail by month"];
   const body = report.indicators.map((i) => {
     const cells = report.months.flatMap((m) => { const c = (i.months || []).find((x) => x.month === m); return c ? [c.value, c.numerator, c.denominator] : ["", "", ""]; });
-    return [i.no, i.standard, i.title, i.unit, ...cells, i.computable ? "yes" : "no", i.computable ? [i.dataSource, i.note].filter(Boolean).join(" ") : i.reason];
+    return [i.no, i.standard, i.title, i.unit, ...cells, i.computable ? "yes" : "no", i.computable ? [i.dataSource, i.note].filter(Boolean).join(" ") : i.reason, (i.months || []).map(cellDetail).filter(Boolean).join(" | ")];
   });
   return csvRows([[report.formatNote], head, ...body]);
 }

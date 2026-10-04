@@ -5,6 +5,26 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ NABH KPI 4: medication errors follow the NCC MERP definition, with A to I severity beneath (owner)
+
+**Decision.** A medication error is any preventable event that may cause or lead to inappropriate medication use or
+patient harm while the medication is in the control of the health care professional, patient or consumer. KPI 4 counts
+every confirmed medication-error incident, near misses (NCC MERP categories A and B) included, and shows the near
+misses as their own line. Beneath the rate the same errors are counted per NCC MERP category A to I and per group: no
+error (A), error no harm (B to D), error harm (E to H), death (I). Categories: A capacity to cause error; B error, did
+not reach the patient; C reached the patient, no harm; D reached the patient, required monitoring and/or intervention to
+preclude harm; E temporary harm, required intervention; F temporary harm, initial or prolonged hospitalization; G
+permanent harm; H intervention required to sustain life; I contributed to death. The rate keeps the denominator the
+quality screen already had for this measure, inpatient bed-days (per 1000); NABH's "total number of opportunities" is not
+recorded anywhere in WardSynQ, so the percentage form is not computed and the cell says so. Capture requires the category
+(`merpCategory`, `NO_MERP_CATEGORY`: 422 at filing, 409 at confirmation, nothing written). Records with no category
+(all earlier ones) are "uncategorised": counted in the total, in no category or group, never inferred from `severity`.
+**KPI 9 is unchanged**: the published ICU standardized mortality ratio, still not computable; which illness-severity
+model it should use (APACHE II, SOFA) is a separate open owner question. **Why.** The owner chose the NCC MERP
+definition and categories (were owner items O1 and O2). **Trade-off.** Category A is "no error" in the index but is
+counted as the owner asked; the near-miss line lets a reader take it out. Clinical sign-off of the category wording is
+still the owner's. **Status:** PR "WardSynQ NABH KPI 4 and 9: NCC MERP medication-error definition and A to I severity".
+
 ## 2026-10-04 · WardSynQ renal check: which eGFR LOINC codes it reads (owner)
 
 **Decision.** `functions/_wardsynq/migrate-emar.js` accepts every code below for the order-entry renal check (importing
