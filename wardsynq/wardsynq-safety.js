@@ -133,7 +133,8 @@ function resolveGeneric(text, pack) {
  *     doseLimits: { <generic>: {maxSingle:{value,unit}, maxDaily:{value,unit},
  *                               mgPerKgSingle?, mgPerKgUpToKg?, absoluteCeilingSingle?,
  *                               absoluteCeilingDaily?} },
- *     renalAdjustments: { <generic>: { <band>: {dose, note} } },
+ *     renalAdjustments: { <generic>: { <band>: {dose, note} } }, or a table's own eGFR columns:
+ *                       { <generic>: { source?, method?, gfrBands: [{band, gt?, gte?, lt?, lte?, dose, capd?, hd?}] } },
  *     pregnancyLactation: { <generic>: { pregnancy?: {level, text}, lactation?: {level, text} } }
  *   }
  * A pregnancyLactation level is one of SEVERITY; its findings are always OVERRIDABLE (checkPregnancyLactation).
@@ -817,6 +818,18 @@ function checkRenal(pack, order, clinical) {
   if (!bands) return out;
   const band = renalBand(clinical.egfr);
   if (!band || band === "normal") return out;
+  /* A table with its OWN eGFR columns (the NFI renal table: >50, 10-50, <10 ml/min) is read by those columns, never by
+   * this engine's bands, which cut elsewhere (90/60/30/15). The cell is the source's own words; nothing is computed. */
+  if (Array.isArray(bands.gfrBands)) {
+    const e = clinical.egfr;
+    const col = bands.gfrBands.find((b) => b && (b.gt == null || e > b.gt) && (b.gte == null || e >= b.gte) && (b.lt == null || e < b.lt) && (b.lte == null || e <= b.lte));
+    if (!col) return out;
+    const dialysis = col.capd || col.hd ? ` On CAPD: ${col.capd || "not stated"}. On haemodialysis: ${col.hd || "not stated"}.` : "";
+    out.push(finding("RENAL_ADJUSTMENT_RECOMMENDED", DISPOSITION.OVERRIDABLE, SEVERITY.MODERATE,
+      `eGFR ${e} is in the ${col.band} column of the renal table: ${order.drug} ${col.dose}${bands.method ? ` (dose method ${bands.method}: D is the percentage of the normal dose, I the dose interval)` : ""}.${dialysis}${bands.source ? ` Source: ${bands.source}.` : ""}`,
+      { generic, band: col.band, egfr: e, advice: col }));
+    return out;
+  }
   const advice = bands[band];
   if (!advice) return out;
   out.push(finding("RENAL_ADJUSTMENT_RECOMMENDED", DISPOSITION.OVERRIDABLE, SEVERITY.MODERATE,
