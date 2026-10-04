@@ -492,6 +492,12 @@
     chf: "heart failure", pe: "pulmonary embolism", dvt: "deep vein thrombosis", aki: "acute kidney injury", ards: "acute respiratory distress syndrome", od: "poisoning", overdose: "poisoning" };
   function codeIntent(q) {
     var s = String(q || "").trim();
+    // A named scheme or a package-code ask is a scheme lookup only, never ICD (owner, 2026-10-04:
+    // "What is the arogyasri code for pancreatitis" listed ICD codes). The vocabulary lives in
+    // edge-router.js (SMD_EDGE.schemeAsk) so Edge and this path read a request the same way.
+    var E = (typeof window !== "undefined") ? window.SMD_EDGE : null;
+    var sa = (E && E.schemeAsk) ? E.schemeAsk(s) : null;
+    if (sa) return sa.term && sa.term.length >= 2 ? { subject: sa.term, icd: false, scheme: true, ask: sa } : null;
     if (!s || s.length > 200 || !CODE_ASK.test(s)) return null;
     var scheme = /(a+r+o+gya?sri|aarogyasri|pmjay|ayushman|vaidya\s*seva|scheme|package)/i.test(s);
     var icd = /\bicd\b/i.test(s) || !scheme;
@@ -501,6 +507,71 @@
          .split(" ").map(function (w) { return CODE_ABBR[w.toLowerCase()] || w; }).join(" ");
     if (!subject || subject.length < 2) return null;
     return { subject: subject, icd: icd, scheme: scheme };
+  }
+  /* A misspelt disease word is searched corrected ("dental absccess" -> "dental abscess"), against the
+   * ICD-10 title words (icd.js vocab) and the Knowledge page names. Resolves { term, from } where
+   * from is the original term when it was changed, else null. Never rejects. */
+  function fixTerm(term) {
+    var W = (typeof window !== "undefined") ? window : {}, E = W.SMD_EDGE, I = W.SMD_ICD, K = W.MaiKKB;
+    var t = String(term || "");
+    if (!E || !E.spell) return Promise.resolve({ term: t, from: null });
+    return Promise.resolve(I && I.vocab ? I.vocab() : {}).then(null, function () { return {}; }).then(function (v) {
+      var all = {}, k; for (k in v) all[k] = 1;
+      try { var kv = K && K.vocab ? K.vocab() : {}; for (k in kv) all[k] = 1; } catch (e) {}
+      var r = E.spell(t, all);
+      return r.changed ? { term: r.text, from: t } : { term: t, from: null };
+    });
+  }
+  // A package's rate as a doctor reads it. 0 or no amount is "price not listed" (the PM-JAY HBP sheets
+  // carry no rate, stored as 0), and so is a figure over Rs 1 crore: the Telangana import holds
+  // 23003800880010350 for most rows, a parse defect, not a price.
+  function schemePrice(p) {
+    var a = Number(p && p.package_amount);
+    if (!(a > 0) || a >= 1e7) return "price not listed";
+    try { return "Rs " + a.toLocaleString("en-IN"); } catch (e) { return "Rs " + a; }
+  }
+  // The user's state from the cached profile ("Andhra Pradesh" -> "andhra-pradesh"), or null.
+  function profileState() {
+    try {
+      var A = window.SMD_AUTH, u = A && A.currentUser, c = u ? JSON.parse(localStorage.getItem("smd_profile_cache:" + u.uid) || "null") : null;
+      var st = c && c.state ? String(c.state).toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : "";
+      return st || null;
+    } catch (e) { return null; }
+  }
+  /* Scheme packages for a schemeAsk() result (edge-router.js). A named scheme searches only its own
+   * states and scheme ids, one labelled group each (Aarogyasri: AP and Telangana). No scheme named: the
+   * user's state first when the profile has one, else every state as before. Codes come only from the
+   * database. Resolves { term, from, groups:[{ name, rows }] }, or null when offline. */
+  function schemeLookup(ask, term) {
+    var W = window, nav = (typeof navigator !== "undefined") ? navigator : null;
+    if (nav && nav.onLine === false) return Promise.resolve(null);
+    var base = (W && W.AI_PROXY) ? String(W.AI_PROXY).replace(/\/api\/ai$/, "") : "";
+    var f = (W && W.fetch) ? function (u) { return W.fetch(u); } : fetch;
+    function search(q, state) {
+      return f(base + "/api/schemes/search?q=" + encodeURIComponent(String(q).slice(0, 80)) + "&limit=" + (state ? 8 : 12) + (state ? "&state=" + encodeURIComponent(state) : ""))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { var rows = (j && (j.results || j.packages)) || []; return Array.isArray(rows) ? rows : []; })
+        .then(function (rows) {
+          // The AP seed spells one common word "Poisioning"; a miss on "poisoning" retries that spelling.
+          if (!rows.length && /poisoning/i.test(q)) return search(String(q).replace(/poisoning/i, "poisioning"), state);
+          return rows;
+        });
+    }
+    var targets = (ask && ask.targets) || [];
+    return fixTerm(term != null ? term : (ask && ask.term)).then(function (ft) {
+      var mine = !targets.length ? profileState() : null;
+      var plan = targets.length ? targets : (mine ? [{ state: mine, scheme: null, name: null, mine: true }, { state: "", scheme: null, name: null }] : [{ state: "", scheme: null, name: null }]);
+      return Promise.all(plan.map(function (t) {
+        return search(ft.term, t.state).then(function (rows) {
+          if (t.scheme) rows = rows.filter(function (p) { return !p.scheme_id || p.scheme_id === t.scheme; });
+          return { name: t.name || null, mine: !!t.mine, rows: rows };
+        });
+      })).then(function (groups) {
+        // Unnamed: the user's own state when it has rows, else the national list.
+        if (!targets.length) groups = (groups[0].mine && groups[0].rows.length) ? [groups[0]] : [groups[groups.length - 1]];
+        return { term: ft.term, from: ft.from, groups: groups };
+      });
+    }).then(null, function () { return null; });
   }
   function schemePackages(subject) {
     var W = window, nav = (typeof navigator !== "undefined") ? navigator : null;
@@ -524,10 +595,18 @@
     if (!it) return null;
     var jobs = [];
     if (it.icd) jobs.push(icdCandidates(it.subject).then(function (c) { return { icd: (c && c.candidates) || [] }; }, function () { return { icd: [] }; }));
-    if (it.scheme) jobs.push(schemePackages(it.subject).then(function (rows) { return { scheme: rows }; }));
+    if (it.scheme && it.ask) jobs.push(schemeLookup(it.ask, it.subject).then(function (res) {
+      if (!res) return { scheme: null };
+      // Flattened with each group's name, so the list below labels the scheme of every row.
+      var rows = [];
+      res.groups.forEach(function (g) { g.rows.slice(0, 6).forEach(function (p) { rows.push({ p: p, name: g.name }); }); });
+      return { scheme: rows, from: res.from, subject: res.term };
+    }));
+    else if (it.scheme) jobs.push(schemePackages(it.subject).then(function (rows) { return { scheme: rows }; }));
     return Promise.all(jobs).then(function (parts) {
       var icd = [], scheme, askedScheme = false;
-      parts.forEach(function (p) { if (p.icd) icd = p.icd; if ("scheme" in p) { askedScheme = true; scheme = p.scheme; } });
+      var shownFor = it.subject, fixedFrom = null;
+      parts.forEach(function (p) { if (p.icd) icd = p.icd; if ("scheme" in p) { askedScheme = true; scheme = p.scheme; if (p.subject) shownFor = p.subject; if (p.from) fixedFrom = p.from; } });
       var out = [], codes = [];
       if (icd.length) {
         var top = icd.slice(0, 5);
@@ -541,17 +620,21 @@
       if (askedScheme) {
         if (scheme === null) out.push((out.length ? "\n" : "") + "Scheme package rates are looked up live in the scheme database and need the network.");
         else if (scheme.length) {
-          out.push((out.length ? "\n" : "") + "**Scheme packages for " + it.subject + "**");
-          scheme.slice(0, 6).forEach(function (p) {
-            var label = (p.scheme_name || p.scheme || "") + (p.state ? " (" + p.state + ")" : "");
+          if (fixedFrom) out.push("_Showing results for " + shownFor + "._");
+          out.push((out.length ? "\n" : "") + "**" + (it.ask ? it.ask.label : "Scheme") + " packages for " + shownFor + "**");
+          scheme.slice(0, 12).forEach(function (x) {
+            var p = x.p || x, label = x.name || ((p.scheme_name || p.scheme || "") + (p.state ? " (" + p.state + ")" : ""));
             out.push("- **" + (p.treatment_code || p.code || "") + "** " + (p.treatment_name || p.name || "") +
-              (p.package_amount != null ? " · Rs " + p.package_amount : "") + (label ? " · " + label : ""));
+              " · " + schemePrice(p) + (label ? " · " + label : ""));
           });
+        } else if (it.ask && it.ask.targets.length) {
+          // A named scheme with no package for this term: say so; never fall through to a model that could invent a code.
+          out.push("No " + it.ask.label + " package found for " + shownFor + " in the StewardMD scheme database.");
         }
       }
       // Nothing in either database: fall through so the model can still help (it knows common codes);
       // the only exception is a scheme ask offline, where the honest notice beats a guessed rate.
-      if (!icd.length && !(askedScheme && (scheme === null || (scheme && scheme.length)))) return null;
+      if (!icd.length && !(askedScheme && (scheme === null || (scheme && scheme.length) || (it.ask && it.ask.targets.length)))) return null;
       return { text: out.join("\n"), engine: "codedb", codes: codes, grounded: true, mode: "codedb" };
     });
   }
@@ -1805,6 +1888,8 @@
     // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
     KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
     warmIfLocal: warmIfLocal,
+    // Scheme package lookup and the disease-word spelling fix, shared with the Edge cards in home.js.
+    schemeLookup: schemeLookup, schemePrice: schemePrice, fixTerm: fixTerm,
     // hard Local/Cloud policy + capability matcher (2026-09-11)
     KEY_HARD: KEY_HARD, hardLocal: hardLocal, policy: policy, policyReason: policyReason, cloudAllowed: cloudAllowed, REQ: REQ, LOCAL_IMPL: LOCAL_IMPL, FEATURE_LABEL: FEATURE_LABEL,
     featureOf: featureOf, match: match, capabilityError: capabilityError, unlocksFor: unlocksFor, capsHTML: capsHTML,

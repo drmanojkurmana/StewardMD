@@ -144,7 +144,10 @@ try {
   const e0 = await countEdge();
   await ev(`__MAIK_TEST.setTopic({ topic: "warfarin INR target", ts: Date.now() }); var q=document.getElementById("maikQ"); q.value="antibiogram kholo"; q.dispatchEvent(new Event("input",{bubbles:true})); document.getElementById("maikSend").click(); return 1;`);
   await sleep(1200);
-  ok(await countEdge() > e0 && /data-maik-tool="antibiogram"/.test(String(await lastAi())), "with a topic live, an exact tool name still gets the Edge card");
+  // "kholo" is an open verb: since 2026-10-04 an exact tool name with one opens the tool (MaiK steps
+  // aside) and the thread keeps "Opened Antibiogram" with the open button.
+  await openMaik();
+  ok(await countEdge() > e0 && /data-maik-tool="antibiogram"/.test(String(await lastAi())) && /Opened/.test(String(await lastAi())), "with a topic live, an exact tool name with an open verb still reaches the tool (" + String(await lastAi()).replace(/<[^>]+>/g, " ").slice(0, 120) + ")");
 
   // ── every option the router can offer draws a card that opens (iPhone 2026-10-04: FunctionGemma picked
   //    "Normal values" (neo:ref) for "normal adult potassium range?", no card, MaiK answered) ──

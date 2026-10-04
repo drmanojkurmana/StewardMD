@@ -53,7 +53,79 @@
   // The Search ICD tool's own name ("navigate to search icd", "icd search kholo"): only a term after
   // "for" / "of" is a lookup ("search icd for sepsis"); the rest is navigation, never an ICD term.
   var ICD_TOOL = /\b(search\s+icd|icd\s+search)\b/i;
-  function candidates(text) {
+  /* Government scheme package asks (owner, 2026-10-04: "What is the arogyasri code for pancreatitis" got
+   * an ICD list, and the scheme answer showed Nagaland). A request that names a scheme, or asks for a
+   * package/scheme code, is a scheme lookup: never ICD. Each entry maps a scheme's spoken names to the
+   * jurisdictions (and scheme ids) of the govschemes database (functions/db/govschemes_seed_jurisdictions.sql).
+   * Aarogyasri is two schemes: Dr YSR Aarogyasri, now Dr NTR Vaidya Seva (Andhra Pradesh), and Rajiv
+   * Aarogyasri (Telangana); a bare "Aarogyasri" shows both, labelled. "ars" counts only next to code or
+   * package ("ars codes for malaria"), so ARDS and "ars" elsewhere are untouched. */
+  var SCHEMES = [
+    { key: "aarogyasri", label: "Aarogyasri", re: /\ba{1,2}rogy?a\s*-?\s*s(?:h)?ri\b|\bars\s+(?:package\s+|scheme\s+)?(?:codes?|packages?|rates?)\b|\b(?:codes?|packages?)\s+(?:in|under|for|of)\s+ars\b/i,
+      targets: [{ state: "andhra-pradesh", scheme: "ap-ntr-vaidya-seva", name: "Dr NTR Vaidya Seva (YSR Aarogyasri), Andhra Pradesh" },
+                { state: "telangana", scheme: "telangana-aarogyasri", name: "Rajiv Aarogyasri, Telangana" }] },
+    { key: "ap", label: "Dr NTR Vaidya Seva", re: /\b(?:dr\.?\s*)?(?:ntr\s*)?vaidya\s*seva\b|\bysr\b/i,
+      targets: [{ state: "andhra-pradesh", scheme: "ap-ntr-vaidya-seva", name: "Dr NTR Vaidya Seva (YSR Aarogyasri), Andhra Pradesh" }] },
+    { key: "pmjay", label: "AB PM-JAY", re: /\b(?:ab\s*-?\s*)?pm\s*-?\s*jay\b|\bpmjay\b|\bayushman(?:\s+bharat)?\b/i,
+      targets: [{ state: "central", scheme: null, name: "AB PM-JAY (central package list)" }] },
+    { key: "cmchis", label: "CMCHIS", re: /\bcmchis\b/i, targets: [{ state: "tamil-nadu", scheme: null, name: "CMCHIS, Tamil Nadu" }] },
+    { key: "mjpjay", label: "MJPJAY", re: /\bmjpjay\b|\bmahatma\s+jyotiba\s+phule\b/i, targets: [{ state: "maharashtra", scheme: null, name: "MJPJAY, Maharashtra" }] }
+  ];
+  // A scheme or package code asked for without naming the scheme ("package code for malaria").
+  var SCHEME_GENERIC = /\b(?:govt?\.?|government|health|insurance)\s+schemes?\b|\bschemes?\s+(?:codes?|packages?|rates?)\b|\bpackage\s+(?:codes?|rates?|amount|price)\b/i;
+  var SCHEME_STRIP = /\b(what(?:'?s| is| are)?|whats|the|a|an|please|pls|tell|me|give|find|search|show|look\s*up|for|of|in|under|is|are|its|it|which|and|icd|codes?|coding|number|no|package|packages|rates?|amount|price|cost|schemes?|govt?|government|health|insurance|ars|ab|dr)\b/gi;
+  function schemeAsk(text) {
+    var s = String(text || "");
+    if (!s || s.length > 200) return null;
+    var hit = null;
+    for (var i = 0; i < SCHEMES.length && !hit; i++) if (SCHEMES[i].re.test(s)) hit = SCHEMES[i];
+    if (!hit && !SCHEME_GENERIC.test(s)) return null;
+    var t = s;
+    SCHEMES.forEach(function (x) { t = t.replace(new RegExp(x.re.source, "gi"), " "); });
+    t = t.replace(/[?.,!:;"'()]/g, " ").replace(SCHEME_STRIP, " ").replace(/\s+/g, " ").trim();
+    return { key: hit ? hit.key : null, label: hit ? hit.label : "Scheme", targets: hit ? hit.targets.slice() : [], term: t };
+  }
+
+  /* Conservative spelling fix for disease words ("absccess" -> "abscess", "pneumoniacns" -> "pneumonia").
+   * vocab: { word: 1 } of known words (KB page names, ICD-10 titles). Only a word of 6+ letters that is
+   * not in vocab is touched: one edit (two from 9 letters) to exactly ONE nearest known word, or a known
+   * word of 6+ letters run together with a tail of at most 3 letters, which is dropped. Short words
+   * ("hello", "ards") are never changed. Returns { text, changed }. */
+  function editDist(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i]; var lo = i;
+      for (j = 1; j <= b.length; j++) { cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1)); if (cur[j] < lo) lo = cur[j]; }
+      if (lo > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  function spell(text, vocab) {
+    var words = lower(text).replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter(Boolean), changed = false;
+    if (!vocab) return { text: words.join(" "), changed: false };
+    var keys = null;
+    var out = words.map(function (w) {
+      if (w.length < 6 || vocab[w] || STOP[w] || NAV[w] || /\d/.test(w)) return w;
+      keys = keys || Object.keys(vocab);
+      var max = w.length >= 9 ? 2 : 1, best = null, bestD = max + 1, tie = false;
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i]; if (k.length < 5) continue;
+        var d = editDist(w, k, max);
+        if (d < bestD) { best = k; bestD = d; tie = false; } else if (d === bestD && d <= max && k !== best) tie = true;
+      }
+      if (best && bestD <= max && !tie) { changed = true; return best; }
+      for (var n = w.length - 1; n >= 6 && w.length - n <= 3; n--) if (vocab[w.slice(0, n)]) { changed = true; return w.slice(0, n); }
+      return w;
+    });
+    return { text: out.join(" "), changed: changed };
+  }
+  // An explicit request to open something ("open antibiogram", "antibiogram kholo", "icu teruvu").
+  var OPEN_RE = /\b(open|launch|kholo|khol|kholna|teruvu|teravu|terichu|chupinchu)\b|\b(go|take me)\s+to\b/i;
+
+  function candidates(text, _retry) {
     var out = [], seen = {}, q = String(text || "");
     var P = G.SMD_CPARAMS, M = G.MEDCALC, S = G.SMD_SEARCH;
     var bare = P && P.stripValues ? P.stripValues(q) : q;
@@ -61,7 +133,10 @@
 
     // Words that are kept ("s/f", "r-ipi", "phq-2" keep their single letters and digits).
     var pw = norm(bare).split(" ").filter(function (w) { return w && !STOP[w]; });
-    if (ICD_CUE.test(q)) {
+    // A scheme package ask holds the first place an ICD request would, and there is no ICD option.
+    var sa = schemeAsk(q);
+    if (sa && sa.term && content(sa.term).length) add({ kind: "scheme", id: sa.term, title: sa.label + " packages for " + sa.term, exact: true, scheme: sa });
+    else if (ICD_CUE.test(q)) {
       var src = bare;
       if (ICD_TOOL.test(bare)) { var tm = bare.match(/\b(?:for|of)\b([\s\S]*)$/i); src = tm ? tm[1] : ""; }
       var term = src.replace(ICD_CUE, " ").replace(/\b(what(?:'s| is)?|the|of|for|please|give|me)\b/gi, " ").replace(/\s+/g, " ").trim();
@@ -186,18 +261,25 @@
     if (typeof openable === "function" && ranked) ranked = ranked.filter(function (x) { return x.kind !== "tool" || openable(x.it.id); });
     (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title, exact: x.kind === "tool" && x.it.id === exactTool }); });
     // One name, two things ("insulin" is a drug AND a tool): nothing is exact, the model or doctor picks.
-    var exacts = out.filter(function (c) { return c.exact && c.kind !== "icd"; });
-    if (exacts.length > 1) out.forEach(function (c) { if (c.kind !== "icd") c.exact = false; });
-    // Otherwise the one exactly named option goes first, unless an ICD request holds that place.
+    var exacts = out.filter(function (c) { return c.exact && !CODE_KIND[c.kind]; });
+    if (exacts.length > 1) out.forEach(function (c) { if (!CODE_KIND[c.kind]) c.exact = false; });
+    // Otherwise the one exactly named option goes first, unless an ICD or scheme request holds that place.
     for (var k = 1; k < out.length; k++) if (out[k].exact) {
-      if (out[0].kind !== "icd") { var x0 = out.splice(k, 1)[0]; out.unshift(x0); } else out[k].exact = false;
+      if (!CODE_KIND[out[0].kind]) { var x0 = out.splice(k, 1)[0]; out.unshift(x0); } else out[k].exact = false;
       break;
+    }
+    // Nothing found and a disease word looks misspelt ("pneumoniacns"): the Knowledge pages for the
+    // corrected words, marked so the card says what it searched for. KB options only, never a tool.
+    if (!out.length && !_retry) {
+      var KBv = G.MaiKKB, fx = KBv && KBv.vocab ? spell(bare, KBv.vocab()) : null;
+      if (fx && fx.changed) out = candidates(fx.text, true).filter(function (c) { return c.kind === "kb"; }).map(function (c) { c.corrected = fx.text; return c; });
     }
     return out;
   }
 
   // ---- 3. prompt for the fixed tool --------------------------------------------------------
-  var KIND_LABEL = { calculator: "calculator", tool: "open", kb: "reference", drug: "drug", icd: "ICD codes" };
+  var KIND_LABEL = { calculator: "calculator", tool: "open", kb: "reference", drug: "drug", icd: "ICD codes", scheme: "scheme packages" };
+  var CODE_KIND = { icd: 1, scheme: 1 };
   function promptFor(text, cands) {
     var lines = cands.map(function (c, i) { return (i + 1) + ". " + KIND_LABEL[c.kind] + ": " + c.title; });
     return String(text || "").slice(0, 300) + "\nOptions:\n" + lines.join("\n") + "\n0. none of these";
@@ -316,11 +398,13 @@
     }
     if (c.drug) r.drug = c.drug;
     if (c.pages) r.pages = c.pages;
+    if (c.scheme) r.scheme = c.scheme;
+    if (c.corrected) r.corrected = c.corrected;
     return r;
   }
 
   /* route(text, { patient_session_id }) -> Promise<result | null>. Never rejects. */
-  function layer0(cands) { var c = cands && cands[0]; return !!(c && (c.kind === "icd" || c.exact)); }
+  function layer0(cands) { var c = cands && cands[0]; return !!(c && (CODE_KIND[c.kind] || c.exact)); }
   // Layer 0 alone, synchronous: an exact name or an explicit ICD request, else null. MaiK calls this BEFORE
   // its follow-up logic, so "antibiogram kholo" opens the tool even while an earlier topic is live.
   function rules(text) {
@@ -549,7 +633,7 @@
   }
 
   var API = {
-    route: route, rules: rules, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
+    route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine,
     engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },

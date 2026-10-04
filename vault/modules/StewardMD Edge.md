@@ -165,3 +165,18 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
 `test/edge-runtime.test.mjs`, `test/edge-router.test.mjs`, `test/voice-ambient-reported.test.mjs`;
 `test/edge-dataset.test.mjs`, `test/calc-find.test.mjs`, `test/edge-schemas.test.mjs`, `test/cockcroft-gault-agree.test.mjs`;
 headless `test/run-maik-calc-prefill-ui.mjs`, `test/run-maik-edge-ui.mjs` (mock engine), `test/run-maik-calc-route-ui.mjs`.
+
+## Conversation fixes, 4 Oct 2026 (branch maik-conv5-fixes)
+Owner's phone conversation (3:05 pm) replayed in `test/run-maik-conv5.mjs`; rules in `test/maik-conv5.test.mjs`.
+- **Scheme asks win over ICD.** `SMD_EDGE.schemeAsk(text)` holds the scheme vocabulary (aarogyasri and
+  spellings, "ars" only next to code/package, ysr, vaidya seva, pm-jay/ayushman, cmchis, mjpjay, "scheme
+  code", "package code") and maps each scheme to govschemes state + scheme ids. A scheme ask is a Layer 0
+  `kind:"scheme"` option in place of the ICD option; `maik-engine.js codeIntent` reads the same function.
+- **Spelling fix.** `SMD_EDGE.spell(text, vocab)`: 6+ letter words only, one edit (two from 9 letters) to
+  exactly one known word, or a known word with a run-together tail of at most 3 letters dropped. Vocab:
+  `MaiKKB.vocab()` (KB names + aliases) for the KB retry when no candidate is found, and
+  `SMD_ICD.vocab()` + KB for ICD and scheme terms (`SMD_MAIK_ENGINE.fixTerm`). Cards say "Showing results for X".
+  `icd.js` also maps "dental/tooth abscess" to "periapical abscess" (K04.6/K04.7; WHO titles never say dental).
+- **"Open X" opens X.** `SMD_EDGE.openVerb` + a single Layer 0 rules match (tool, calculator, single KB
+  page): home.js `maikEdgeAutoOpen` presses the card's own open button and leaves "Opened X" with that
+  button as the way back. Model picks, groups and corrected terms keep the card.

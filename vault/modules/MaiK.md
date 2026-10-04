@@ -422,6 +422,16 @@ apply unchanged. A question about a DIFFERENT disease the KB resolves confidentl
 ## MaiK Lite value questions (2026-10-04, branch maik-lite-ontopic)
 iPhone, OTA v177: "normal adult potassium range?" grounded on a DIALYSATE passage and Lite said the range was "not given in the evidence"; Pixel: "INR target mechanical mitral valve" said 2.0-3.0. Root cause is retrieval: the book (Harrison's) has NO adult serum potassium reference range, and its "target INR of 2.5-3.5" passage (row 9950) was pushed out of the 12-passage pool by the expansion term "valve". `neo:ref` (data/neo/ref-values.json) is neonatal only (K 3.3-5.4, days 1-3), so it is not adult evidence; StewardMD has no adult normal-values table. Fix (`maik-local.js` `VALUE_Q` / `statesValue`): a normal/reference/target question also searches its own words, passages with a sentence naming the asked thing beside a figure and a range/target word lead, and with none the question goes ungrounded (model knowledge) with "Not checked against the StewardMD Knowledge Base." appended; `NO_COVERAGE` now catches "is given / stated / specified in the evidence". Bench (`--router real`): the 54 old questions unchanged at 86.7% / 38 full; L-62 (INR) 1/3 -> 3/3; L-61 (potassium) has no evidence by design. Pixel had `smd_maik_rag_linked` "0" (book unlinked), where retrieval cannot help. Test: `test/maik-lite-value-q.test.mjs`.
 
+
+## Scheme and ICD lookups (2026-10-04, branch maik-conv5-fixes)
+"What is the arogyasri code for pancreatitis" got an ICD list (Edge ICD cue "code for"), and on the
+second ask the codedb path listed Nagaland/Himachal at "Rs 0". Now a scheme ask goes to
+`SMD_MAIK_ENGINE.schemeLookup` filtered to the named scheme's states (Aarogyasri = AP + Telangana, labelled);
+an unnamed ask prefers the profile state (`smd_profile_cache:<uid>.state`); a named scheme with no
+package says so instead of falling through to a model. See [[StewardMD Edge]] and [[Government Health Schemes]].
+The garbled "Ma c au d a ca." line was not reproduced: the stream patch + markdown keep every character
+(asserted in `test/run-maik-conv5.mjs`), and line 7 no longer reaches a model at all.
+
 ## "KB only" renamed "MaiK Edge" (owner, 2026-10-04, branch `maik-edge-engine`)
 The `rag` engine shows as **MaiK Edge** everywhere (picker row, header chip, footer `discLabel`, Settings
 "Who answers", the KB-miss notice, the `kb-only` error message). The pref value stays `rag`, so saved choices

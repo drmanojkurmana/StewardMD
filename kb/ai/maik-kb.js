@@ -619,9 +619,22 @@
     return out.map(function (x) { return { id: x.id, name: x.name }; });
   }
 
+  /* The words of every Knowledge page name and alias ({ word: 1 }), for the Edge spelling fix
+   * (edge-router.js spell: "pneumoniacns" -> "pneumonia"). Built once the KB stores are loaded. */
+  var _vocab = null;
+  function vocab() {
+    if (_vocab) return _vocab;
+    var v = {}, idx = buildNameIndex();
+    idx.forEach(function (e) { e.key.split(/[^a-z0-9]+/).forEach(function (w) { if (w.length >= 4) v[w] = 1; }); });
+    Object.keys(MAIK_ALIAS).forEach(function (k) { (k + " " + MAIK_ALIAS[k]).toLowerCase().split(/[^a-z0-9]+/).forEach(function (w) { if (w.length >= 4) v[w] = 1; }); });
+    if (idx.length) _vocab = v;   // not cached while the stores are still empty
+    return v;
+  }
+
   var API = {
     compose: compose,
     kbPages: kbPages,
+    vocab: vocab,
     clinicalDialogue: clinicalDialogue,
     classifyIntent: classifyIntent,
     isComplex: isComplex,

@@ -94,9 +94,13 @@
             function () { localData = []; return localData; });
     return localLoading;
   }
+  // Bedside names the WHO titles never use, each mapped to the title the ICD-10 alphabetical index
+  // sends it to ("Abscess, dental" -> K04.7 Periapical abscess without sinus).
+  var BEDSIDE = [[/\b(?:dental|tooth|dento-?alveolar)\s+abscess\b/i, "periapical abscess"]];
   function localSearch(q, limit) {
     var lim = limit || 30;
     var query = String(q || "").trim();
+    BEDSIDE.forEach(function (b) { query = query.replace(b[0], b[1]); });
     return loadLocalData().then(function (rows) {
       if (!query || !rows.length) return [];
       var out = [], i;
@@ -121,6 +125,19 @@
       });
       for (i = 0; i < scored.length && i < lim; i++) out.push(toRow(scored[i].row));
       return out;
+    });
+  }
+
+  // Every ICD-10 title word ({ word: 1 }), for the MaiK spelling fix (edge-router.js spell):
+  // "dental absccess" is searched as "dental abscess". Built once from the same offline index.
+  var vocabMap = null;
+  function vocab() {
+    if (vocabMap) return Promise.resolve(vocabMap);
+    return loadLocalData().then(function (rows) {
+      var v = {};
+      for (var i = 0; i < rows.length; i++) { var w = titleWords(rows[i][1]); for (var j = 0; j < w.length; j++) if (w[j].length >= 4) v[w[j]] = 1; }
+      if (rows.length) vocabMap = v;
+      return v;
     });
   }
 
@@ -247,5 +264,5 @@
   }
 
   function openCode(id) { openWith(null); try { openDetail(id); } catch (e) {} }
-  window.SMD_ICD = { open: open, pick: pick, close: close, localSearch: localSearch, openCode: openCode };
+  window.SMD_ICD = { open: open, pick: pick, close: close, localSearch: localSearch, vocab: vocab, openCode: openCode };
 })();
