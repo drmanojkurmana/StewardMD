@@ -102,6 +102,8 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 # Neonatal layer (smd_neo): the quoted clinical data files, fetched lazily by neo-*.js from /data/neo/.
 # data/neo/sources.json.gz (provenance snapshots for scripts/neo/validate.mjs) is NOT shipped.
 if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data/neo/"; fi
+# Adult normal values (adult-ref.js fetches /data/ref/adult-ref-values.json).
+if [ -d data/ref ]; then mkdir -p "$WWW/data/ref"; cp data/ref/*.json "$WWW/data/ref/"; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 # India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
 # owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
