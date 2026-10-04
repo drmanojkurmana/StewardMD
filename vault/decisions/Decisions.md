@@ -5,6 +5,25 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ: a return to the supplier reverses input GST with a debit note (owner)
+
+**Decision.** Every supplier return (`stock.js returnToSupplier`) carries a debit note written on the return movement:
+the value returned plus the GST charged on it on the original receipt, at the receipt's rate and split (CGST + SGST or
+IGST), in whole paise by the BILL-22 rule, pro-rated cumulatively so part returns add up to exactly the receipt's value
+and GST. Numbered in its own series `SDN/<FY>/<serial>`, linked to the receipt and its order line, listed on Stores >
+Returns and in `GET /ward/supplier-debit-notes` (register with totals). A receipt may carry its purchase terms
+(`purchase`); a return with no receipt, or with no price and rate on record or given with it, is refused. **Status:** PR
+"WardSynQ: GST reversal on supplier returns, and opening balances for stays at switch-over".
+
+## 2026-10-04 · WardSynQ: opening balances for stays open at switch-over (owner)
+
+**Decision.** Each stay open when a hospital moves to WardSynQ carries ONE `OpeningBalance` line (amount, old bill
+reference, as-of date, entered by), entered one at a time (`POST /ward/opening-balance`) or by CSV (legacy-import kind
+`openingBalances`), needing staff.admin AND billing.charge, audited, idempotent per stay (same facts matched, different
+refused). It is the first line on the stay's bill, not taxed again, outside the GST documents and e-invoice, and deposits
+and payments settle it like any charge. The patient must already be admitted here; a credit balance is not accepted
+(record it as a deposit). **Status:** same PR.
+
 ## 2026-10-04 · WardSynQ renal check: which eGFR LOINC codes it reads (owner)
 
 **Decision.** `functions/_wardsynq/migrate-emar.js` accepts every code below for the order-entry renal check (importing
