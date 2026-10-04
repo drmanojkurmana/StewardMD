@@ -1,4 +1,4 @@
-/* test/maik-eval/live-cases.json is MaiK's answer-quality set (60 cases, 2026-09-26). The runners
+/* test/maik-eval/live-cases.json is MaiK's answer-quality set (60 cases 2026-09-26, +2 value questions 2026-10-04). The runners
  * (test/maik-eval/run-live-eval.mjs and scripts/maik-quality-run.mjs --cases) trust its shape, and a
  * key point that is too loose makes every answer "pass", so both are pinned here. No model is called. */
 import { test } from "node:test";
@@ -11,10 +11,10 @@ const CATS = ["emergency", "infection", "drug-dosing", "interaction-pregnancy", 
   "chronic-disease", "obstetrics", "paediatrics", "shorthand", "decline-hedge"];
 const decline = (c) => c.category === "decline-hedge";
 
-test("60 cases: unique ids and questions, known categories, none certified until a clinician reviews them", () => {
-  assert.equal(cases.length, 60);
-  assert.equal(new Set(cases.map((c) => c.id)).size, 60);
-  assert.equal(new Set(cases.map((c) => c.message.toLowerCase())).size, 60);
+test("62 cases: unique ids and questions, known categories, none certified until a clinician reviews them", () => {
+  assert.equal(cases.length, 62);
+  assert.equal(new Set(cases.map((c) => c.id)).size, 62);
+  assert.equal(new Set(cases.map((c) => c.message.toLowerCase())).size, 62);
   for (const c of cases) {
     assert.match(c.id, /^L-\d\d$/);
     assert.ok(CATS.includes(c.category), c.id + " " + c.category);

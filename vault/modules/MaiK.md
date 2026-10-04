@@ -411,10 +411,14 @@ Bench (`scripts/bench-maik-lite-retrieval.mjs --router real`, real book): key po
 ## Topic chip from a Knowledge page (2026-10-04, branch `kb-nav-askmaik`)
 `window.SMD_askMaikTopic(id, name)` = `openAskAi("", {topic})`: sets `_maikPin = {id, name}` (outer scope,
 survives a sheet reopen; cleared by the chip's x or a new thread) and `_maikTopic` to the disease, Research off.
-Composer: `#maikTopicBar` ("About: <name>", `#maikTopicX`, radiogroup `[data-maik-tmode]` Ask / Research;
+Composer: `#maikTopicBar` ("About: <name>", `#maikTopicX`, button group `[data-maik-tmode]` (aria-pressed) Ask / Research;
 Research only with `researchModeAvail()`), painted by `maikPaintTopic()` (also from `setResearchMode`).
 Research seeds the input with the disease name and uses the existing Evidence Review path (cloud; on a
 local engine the existing "Answering on-device" fallback). Ask: `maikPinScope(q)` runs after Edge Layer 0,
 follow-ups and the casual/calculator routes; a clinical question becomes `<disease>: <q>` (unless it already
 names it) with retrieval `<disease> <q>`, through `runClinical`, so the chosen engine and hard-local policy
 apply unchanged. A question about a DIFFERENT disease the KB resolves confidently is not forced onto the chip.
+
+## MaiK Lite value questions (2026-10-04, branch maik-lite-ontopic)
+iPhone, OTA v177: "normal adult potassium range?" grounded on a DIALYSATE passage and Lite said the range was "not given in the evidence"; Pixel: "INR target mechanical mitral valve" said 2.0-3.0. Root cause is retrieval: the book (Harrison's) has NO adult serum potassium reference range, and its "target INR of 2.5-3.5" passage (row 9950) was pushed out of the 12-passage pool by the expansion term "valve". `neo:ref` (data/neo/ref-values.json) is neonatal only (K 3.3-5.4, days 1-3), so it is not adult evidence; StewardMD has no adult normal-values table. Fix (`maik-local.js` `VALUE_Q` / `statesValue`): a normal/reference/target question also searches its own words, passages with a sentence naming the asked thing beside a figure and a range/target word lead, and with none the question goes ungrounded (model knowledge) with "Not checked against the StewardMD Knowledge Base." appended; `NO_COVERAGE` now catches "is given / stated / specified in the evidence". Bench (`--router real`): the 54 old questions unchanged at 86.7% / 38 full; L-62 (INR) 1/3 -> 3/3; L-61 (potassium) has no evidence by design. Pixel had `smd_maik_rag_linked` "0" (book unlinked), where retrieval cannot help. Test: `test/maik-lite-value-q.test.mjs`.
+

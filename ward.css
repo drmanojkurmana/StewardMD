@@ -549,6 +549,19 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 
 /* ICU: the admit-panel's own class toggle, and the device-association card's short device list. */
 #smdWard .w-chk { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 13px; }
+/* Discharge: which medicines continue at home (owner decision 2026-10-04). One row per order, the whole row is the
+ * target, and the pill says the outcome in words so the choice never rests on the tick alone. */
+#smdWard .w-take-home .w-mini { gap: 2px; }
+#smdWard .w-home-row { min-height: 44px; padding: 6px 10px; margin: 0 -10px; border-radius: 10px; font-size: 14px; gap: 6px 12px; flex-wrap: wrap; cursor: pointer; transition: background-color 160ms ease-out; }
+#smdWard .w-home-row.on { background: var(--ok-container); }
+#smdWard .w-home-row input { width: 20px; height: 20px; flex: none; margin: 0; accent-color: var(--on-ok-container); }
+#smdWard .w-home-row input:disabled, #smdWard .w-home-row input:disabled ~ * { cursor: not-allowed; }
+#smdWard .w-home-drug { flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; overflow-wrap: anywhere; }
+#smdWard .w-home-drug span { font-size: 13px; color: var(--on-surface-variant); }
+/* On a phone a long name keeps its width and the outcome drops under it, still at the right edge. */
+#smdWard .w-home-row .w-st { flex: none; margin-left: auto; white-space: nowrap; }
+@media (hover: hover) and (pointer: fine) { #smdWard .w-home-row:not(.on):hover { background: var(--sc-low); } }
+@media (prefers-reduced-motion: reduce) { #smdWard .w-home-row { transition: none; } }
 #smdWard .w-devices { list-style: none; margin: 0 0 8px; padding: 0; }
 #smdWard .w-devices li { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-top: 1px solid var(--outline-variant); gap: 8px; }
 #smdWard .w-devices li:first-child { border-top: 0; }

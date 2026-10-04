@@ -183,7 +183,8 @@
   var EMPTY_ANSWER = "The on-device model did not produce an answer this time. Ask again, or switch to MaiK Cloud.";
   // The model reporting that the retrieved passages do not cover the question. That is a retrieval
   // verdict, not an answer; see the no-coverage fallback in answer().
-  var NO_COVERAGE = /\b(not|isn't|is not|aren't|are not|no)\b[^.]{0,60}\b(addressed|covered|found|included|mentioned|discussed|available|present|information|evidence|guidelines?)\b[^.]{0,50}\b(reference|retrieved|provided|source|sources|material|evidence|knowledge base)\b|\b(reference|retrieved) (material|passages?|sources?) (does not|do not|doesn't|don't|did not)\b/i;
+  // "given / stated / specified": "No specific normal serum potassium range is given in the evidence" (iPhone, 2026-10-04).
+  var NO_COVERAGE = /\b(not|isn't|is not|aren't|are not|no)\b[^.]{0,60}\b(addressed|covered|found|included|mentioned|discussed|available|present|information|evidence|guidelines?|given|stated|specified|listed)\b[^.]{0,50}\b(reference|retrieved|provided|source|sources|material|evidence|knowledge base)\b|\b(reference|retrieved) (material|passages?|sources?) (does not|do not|doesn't|don't|did not)\b/i;
 
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
@@ -980,6 +981,26 @@
   // anchors: "acute severe asthma treatment in adults" grounded on "Diagnostic Criteria for
   // Cachexia in Adults", and "STEMI management in the first hour" anchored on "hour".
   var TREAT_TXT = /\b(?:treat(?:ed|ment)?|therapy|management|administer|dos(?:e|es|ing)|mg|first-line|drug of choice|regimen)\b/;
+  /* A VALUE question asks for a number: a normal range, a reference value, a target (2026-10-04, live
+   * on the iPhone). "normal adult potassium range?" grounded on a dialysate passage and Lite answered
+   * "no normal serum potassium range is given"; "INR target mechanical mitral valve" grounded on a
+   * bridging list that names the valve but no INR, while the book's Oral Anticoagulants passage with
+   * "target INR of 2.5-3.5" sat in the pool (BM25 #6). For such a question only a passage with a
+   * SENTENCE that names the asked thing beside a figure and a range/target word is the answer; those
+   * lead, and when none exists the book does not hold the fact, so the question goes ungrounded (the
+   * model answers from its own knowledge, labelled NOT_CHECKED) instead of "not given in the evidence". */
+  var VALUE_Q = /\b(?:normal|reference|target|goal|therapeutic)\b[^.?]{0,40}\b(?:ranges?|values?|levels?|limits?|intervals?)\b|\b(?:ranges?|levels?|values?)\s+(?:of|for)\b|\btarget\b/i;
+  var VALUE_W = /^(?:normal|reference|target|goal|therapeutic|range|ranges|value|values|level|levels|limit|limits|interval|intervals)$/;
+  var VALUE_TXT = /\b(?:normal|reference|range|target|goal|therapeutic|limits?|interval)\b/i;
+  var VALUE_NUM = /\d(?:\.\d+)?\s*(?:-|–|to)\s*\d|[<>≤≥]\s*\d/;
+  function statesValue(text, anchors) {
+    var keys = anchors.filter(function (a) { return !VALUE_W.test(a); });
+    if (!keys.length) return false;
+    // "(Table 416-9)" and "Fig. 248-37" are not ranges.
+    return String(text || "").toLowerCase().replace(/\b(?:table|fig(?:ure)?\.?|chapter|chap\.?)\s*[\d.–-]+[a-z]?/g, " ").split(/[.;]\s+/).some(function (s) {
+      return VALUE_NUM.test(s) && VALUE_TXT.test(s) && keys.some(function (a) { return s.indexOf(a) !== -1; });
+    });
+  }
   /** A generation that stopped on its token budget ends mid-sentence. Prose that trails off is cut
    *  back to the last sentence end (kept only if that keeps most of the answer, else an ellipsis);
    *  a list item or heading as the last line is left alone, they legitimately end without a stop. */
@@ -1162,7 +1183,12 @@
     // survives, the intro is dropped rather than merely demoted (it is ~175 prefill tokens spent
     // saying what the disease is called).
     if (F.treat) { var real = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); }); if (real.length) kept = real; }
-    kept.sort(function (a, b) { return b.rank - a.rank; });
+    // A value question: the passages that state the value lead; none means the book lacks the fact.
+    if (F.value) {
+      kept.forEach(function (c) { c.val = statesValue(c.p.text, F.anchors) ? 1 : 0; });
+      if (!kept.some(function (c) { return c.val; })) return [];
+      kept.sort(function (a, b) { return (b.val - a.val) || (b.rank - a.rank); });
+    } else kept.sort(function (a, b) { return b.rank - a.rank; });
     // Diversity: three slices of one chapter teach less than two chapters do, and a single heading
     // filling the whole window is how a broad question comes back narrow.
     var perHead = {}, out = [];
@@ -1217,13 +1243,21 @@
       // chapter that matches every word. The rerank below is what picks from this pool.
       var hits = bk.search(q, RAG.TOPK * 4);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
+      // A value question also searches its own words: the expansion ("valve") pushed the passage with
+      // "target INR of 2.5-3.5" out of the pool. Value questions only, so other answers are unchanged.
+      var isValue = VALUE_Q.test(question);
+      if (isValue && q !== question) {
+        var have = {};
+        hits.forEach(function (h) { have[h[1]] = 1; });
+        bk.search(question, RAG.TOPK * 4).forEach(function (h) { if (!have[h[1]]) hits.push(h); });
+      }
       var cited = hits.map(function (h) {
         var p = bk.cite(h[1]);
         return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() };
       }).filter(function (c) { return !isIndexPage(c.p.text); });
       var kept = rerankPassages(cited, {
         anchors: anchors, expansion: expansion, mods: A.mods,
-        treat: TREAT_Q.test(question), topk: RAG.TOPK
+        treat: TREAT_Q.test(question), value: isValue, topk: RAG.TOPK
       });
       // Every candidate failed the floor: supported by neither an anchor nor RAG #1's vocabulary.
       if (!kept.length) return null;
@@ -1864,6 +1898,10 @@
         // A regenerate that ended up with no passages is never presented as checked (T57). With the
         // evidence carried through opts._grounding this cannot happen today; it stays as the net.
         if (!grounding && opts && opts._regen) text += "\n\n" + NOT_CHECKED;
+        // The book was linked but did not hold the fact (no-coverage re-ask, or a value question whose
+        // value the book never states): the model answered from its own knowledge, so say so.
+        else if (!grounding && !images.length && ragEligible(packId) && !(opts && (opts.systemOverride || (opts.mode && MODE_SYS[opts.mode]))) &&
+                 ((opts && opts._ungrounded) || VALUE_Q.test(String((pkg && pkg.question) || "")))) text += "\n\n" + NOT_CHECKED;
         if (!quotedPassage) text = emphasize(text);
         return {
           text: text,

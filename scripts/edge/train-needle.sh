@@ -11,6 +11,10 @@
 #   scripts/edge/train-needle.sh predict NAME validation|test               -> WORK/NAME.<split>.pred.jsonl
 #   scripts/edge/train-needle.sh down                  delete the VM (always run this)
 # The 2026-10-04 run (r4, FAILED the test marks): train r4 --epochs 8 --lr 5e-4 --lora-rank 32 --lora-alpha 64 --val-split 0
+# Round 2 (runbook 5b): node scripts/edge/needle-r2.mjs build, then
+#   TRAIN=vault/plans/edge-data/dataset/export/needle-local/train.r2.jsonl train-needle.sh train r7 --epochs 3 --lr 5e-4 \
+#     --lora-rank 32 --lora-alpha 64 --val-split 0
+# and score with needle-host + needle-r2.mjs rows/pred (dev split, single call and rotated-agreement).
 #
 # Only the generated dataset (vault/plans/edge-data/dataset/export/needle-local/train.jsonl, built from the app's
 # own data, no PHI) leaves the Mac. Weights never leave it. Telemetry of the needle CLI is off (NEEDLE_TELEMETRY=0).
@@ -54,7 +58,8 @@ up)
     ~/v/bin/python -c 'import jax; print(jax.devices())'" ;;
 train)
   NAME="$2"; shift 2
-  (cd "$ROOT" && node scripts/edge/needle-pred.mjs think train) > train.think.jsonl
+  # TRAIN=<file>: a prepared training file (round 2: export/needle-local/train.r2.jsonl from needle-r2.mjs build).
+  if [ -n "${TRAIN:-}" ]; then cp "$TRAIN" train.think.jsonl; else (cd "$ROOT" && node scripts/edge/needle-pred.mjs think train) > train.think.jsonl; fi
   gcloud compute scp --zone "$ZONE" train.think.jsonl "$VM":w/train.jsonl
   ssh_vm "cd ~/w && NEEDLE_TELEMETRY=0 DO_NOT_TRACK=1 ~/v/bin/needle finetune train.jsonl --checkpoint checkpoints/needle3.safetensors --out $NAME.safetensors --checkpoint-dir ckpt $* 2>&1 | grep --line-buffered -v 'step ' | tee $NAME.log"
   gcloud compute scp --zone "$ZONE" "$VM":w/"$NAME".safetensors "$VM":w/"$NAME".log "$WORK"/ ;;

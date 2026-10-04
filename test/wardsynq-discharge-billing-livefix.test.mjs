@@ -169,9 +169,17 @@ test("PURE LT-32: the bill is settled only when nothing is owed and nothing done
 
   const open = D.dischargeChecklist([{ kind: "medication", id: "rx1" }, { kind: "investigation", id: "sr1" }, { kind: "problem", id: "c1" }], { state: "settled" }, []);
   assert.equal(open.openOrders.length, 1); assert.equal(open.pendingResults.length, 1);
-  assert.deepEqual(D.dischargeBlockers(open, {}), ["override_required"]);
-  assert.deepEqual(D.dischargeBlockers(open, { overrideReason: "Going home on these", canOverride: false }), ["override_not_permitted"]);
+  // Owner decision 2026-10-04: an active medication order is decided per order at discharge (continue at home or
+  // stop), so it needs a treating clinician but no override reason; the pending result still needs one.
+  assert.deepEqual(D.dischargeBlockers(open, { canOverride: true }), ["override_required"]);
+  assert.deepEqual(D.dischargeBlockers(open, {}), ["override_required", "medication_decision_not_permitted"]);
+  assert.deepEqual(D.dischargeBlockers(open, { overrideReason: "Going home on these", canOverride: false }), ["override_not_permitted", "medication_decision_not_permitted"]);
   assert.deepEqual(D.dischargeBlockers(open, { overrideReason: "Going home on these", canOverride: true }), []);
+  const medsOnly = D.dischargeChecklist([{ kind: "medication", id: "rx1" }], { state: "settled" }, []);
+  assert.deepEqual(D.dischargeBlockers(medsOnly, { canOverride: true }), [], "the per-order choice is the decision");
+  assert.deepEqual(D.dischargeBlockers(medsOnly, {}), ["medication_decision_not_permitted"]);
+  const doseInFlight = D.dischargeChecklist([{ kind: "dose", id: "ad1" }], { state: "settled" }, []);
+  assert.deepEqual(D.dischargeBlockers(doseInFlight, { canOverride: true }), ["override_required"], "a dose in flight still needs a reason");
   const unsettled = D.dischargeChecklist([], { state: "unbilled" }, []);
   assert.deepEqual(D.dischargeBlockers(unsettled, {}), ["bill_not_settled"]);
   assert.deepEqual(D.dischargeBlockers(unsettled, { billDeferredReason: "Insurer settles" }), []);

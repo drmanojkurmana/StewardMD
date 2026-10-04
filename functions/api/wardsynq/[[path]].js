@@ -41,6 +41,8 @@ import { sccmAdapter } from "../../../wardsynq/adapters/wardsynq-sccm-adapter.js
 import { reconcileIdentity, identityCandidates, rebind, authorizedSourceSystem } from "../../_wardsynq/fhir-inbound.js";
 
 const ROUTE_GOVERNED = new Set(["Verification", "MedicationVerification", "MedicationDispense", "MedicationAdministration", "EmergencyActivation", "BreakGlassGrant", "SourceSystemGrant", "PatientConsent", "CriticalResultLoop", "SafetyOverride",
+  // A transfusion's crossmatch, issue and two-person bedside check are enforced by its routes (migrate-transfusion.js).
+  "TransfusionEpisode",
   // Hospital support services (2026-09-16): each has a state machine its own routes enforce.
   "DietOrder", "MealRound", "InstrumentSet", "SterilizerLoad", "CssdCycle", "HousekeepingTask", "AmbulanceVehicle", "AmbulanceTrip", "MortuaryCase"]);
 
