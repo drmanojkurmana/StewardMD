@@ -7401,6 +7401,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (/model-missing/i.test(e)) {
       return "The on-device model was still loading. Please ask again - it usually answers on the next try.";
     }
+    // Owner screenshot (2026-10-04): an empty reply surfaced the browser's raw "Unexpected end of JSON
+    // input". reasoning.js now retries once and names it "server-empty"; the regex also catches any
+    // other path that still lets a parse error through.
+    if (e === "server-empty" || /Unexpected end of JSON|JSON\.parse|on 'Response'|is not valid JSON|Unexpected token/i.test(e)) {
+      return "MaiK Cloud sent back an empty reply, usually a brief network drop. Tap <b>Try again</b>." +
+             "<br><br>The deterministic StewardMD engine, calculators and reference tools remain available." +
+             (r && r.status ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: empty reply (HTTP ' + maikEscH(r.status) + ")</span>" : "");
+    }
     return "MaiK is unavailable right now. The deterministic StewardMD engine, calculators and reference tools remain available." +
            (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
   }

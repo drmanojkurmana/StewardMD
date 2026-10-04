@@ -6289,7 +6289,19 @@
               return { error: "quota", reason: (j && j.reason) || "rate" };
             });
           }
-          return r.json().then(function (j) { if (j && !j.sources) j.sources = pkg.sources; return j; });
+          /* EMPTY / UNPARSABLE REPLY (owner screenshot, 2026-10-04, Android): "Reason: Failed to execute
+           * 'json' on 'Response': Unexpected end of JSON input" after 0.5s. On native, /api/* goes
+           * through CapacitorHttp and native-bridge.js wraps a missing body as new Response(""), so a
+           * dropped or cut reply reached r.json() raw and the browser's parse error was shown to the
+           * clinician. Read the text, retry ONCE (the failure is fast and usually transient; the server
+           * counts a question only when an answer is generated), then return a named error. */
+          return r.text().catch(function () { return ""; }).then(function (t) {
+            var j = null;
+            try { j = t ? JSON.parse(t) : null; } catch (e) { j = null; }
+            if (j && typeof j === "object") { if (!j.sources) j.sources = pkg.sources; return j; }
+            if (!retried) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return attempt(true); });
+            return { error: "server-empty", status: r.status || 0 };
+          });
         });
       }
       return raceTimeout(attempt(false).catch(function (e) { return { error: String(e && e.message || e) }; }), 35000, { error: "timeout" });
