@@ -392,10 +392,11 @@ function grantForCaps(caps) {
     // the same financial authority as a pre-authorisation, and it is not a clinical fact.
     // PackageAssignment joined 2026-09-16 (packages.js): which package a stay is billed on is the same authority as the bill.
     // StayPayer joined 2026-09-17 (stay-payer.js, gst-parties): who settles a stay's bill is the same authority as the bill.
+    // OpeningBalance joined 2026-10-04 (opening-balance.js): the old system's balance carried onto a stay is a bill line.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES, "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"]
-      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES, "CoverageEligibilityCheck", "PackageAssignment", "StayPayer", "OpeningBalance"]
+      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer", "OpeningBalance"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer", "OpeningBalance"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds

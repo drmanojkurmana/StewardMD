@@ -30,6 +30,7 @@ import { gstForLines, gstSplit, financialYearOf, istDateOf, section34Deadline, p
 import { ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
 import { ASSIGNMENT_TYPE, applyPackage, packageFlags } from "./packages.js";
 import { nextDocumentNumber } from "./doc-series.js";
+import { isOpeningBalanceLine } from "./opening-balance.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -122,7 +123,8 @@ function documentsOf(inv) {
     const tax = Math.round(idx.reduce((n, i) => n + (Number(lines[i].tax) || 0), 0) * 100) / 100;
     return { type, number: number || null, lineIndexes: idx, taxable, tax, total: Math.round((taxable + tax) * 100) / 100 };
   };
-  const all = lines.map((_, i) => i), taxed = all.filter((i) => taxedLine(lines[i])), exempt = all.filter((i) => !taxedLine(lines[i]));
+  /* An opening balance carried from the old system is on the bill but in none of its GST documents (opening-balance.js). */
+  const all = lines.map((_, i) => i).filter((i) => !isOpeningBalanceLine(lines[i])), taxed = all.filter((i) => taxedLine(lines[i])), exempt = all.filter((i) => !taxedLine(lines[i]));
   if (!taxed.length) return [doc("bill_of_supply", inv.documentNumber, all)];
   if (!exempt.length) return [doc("tax_invoice", inv.documentNumber, all)];
   if (inv.buyer && str(inv.buyer.gstin)) return [doc("tax_invoice", inv.documentNumber, taxed), doc("bill_of_supply", inv.billOfSupplyNumber, exempt)];
@@ -239,7 +241,8 @@ async function raiseInvoice(request, env, ctx) {
    * ponytail: the room is valued from the stay's covered room days when the package line is billed; room days after a
    * package bill raised on an open stay are not in it, and the response says so (a debit note carries them). */
   const set = ctx.gst || {};
-  const lineInput = newLines.filter((l) => !l.packageIncluded && !l.packageLine);
+  /* A balance carried from the old system (opening-balance.js) was taxed there: it is never taxed again. */
+  const lineInput = newLines.filter((l) => !l.packageIncluded && !l.packageLine && !isOpeningBalanceLine(l));
   const gst = gstForLines(lineInput, ctx.tariff, ctx.region, { inpatient: !!encounterId, settings: set });
   if (gst.invalid.length) return { ...base, ok: false, status: 422, error: "gst_rate_invalid", codes: gst.invalid, written: 0, detail: "These tariff items carry a GST rate that is not a number from 0 to 100. Correct the tariff before raising this invoice." };
   if (gst.unconfigured.length) return { ...base, ok: false, status: 422, error: "gst_rate_missing", codes: gst.unconfigured, written: 0, detail: "These items are taxable and have no GST rate on the Price list, so no bill was raised. An administrator sets each rate; none is assumed." };
@@ -282,6 +285,7 @@ async function raiseInvoice(request, env, ctx) {
         taxKind: "GST", taxRate: ROOM_GST_RATE, taxExempt: false, tax: room.tax, hsnSac: SAC.INPATIENT, taxBasis: GST_BASIS.PACKAGE_ROOM, taxable: room.taxable, kind: "bed", packageCode: l.packageCode, packageRoom: true });
       continue;
     }
+    if (isOpeningBalanceLine(l)) { billLines.push({ ...baseLine, kind: "opening_balance" }); continue; }
     billLines.push({ ...baseLine, ...(g && !l.packageIncluded ? { taxKind: "GST", taxRate: g.gstRate, taxExempt: g.gstExempt, tax: g.tax, hsnSac: g.hsnSac, taxBasis: g.basis, taxable: g.taxable, kind: g.kind } : {}), ...pk });
   }
 
@@ -313,7 +317,8 @@ async function raiseInvoice(request, env, ctx) {
    * explains gaps as cancelled numbers, the usual practice, rather than this taking a cross-record transaction. */
   /* A bill with nothing taxed is a Bill of Supply and takes its number from the BOS series; anything taxed takes the
    * invoice series (a Tax Invoice, or an Invoice-cum-Bill of Supply when exempt lines are on it too). */
-  if (gst.applies) {
+  /* A bill carrying only an opening balance is no supply: it takes no invoice or Bill of Supply number. */
+  if (gst.applies && ep.lines.some((l) => !isOpeningBalanceLine(l))) {
     try {
       ep.documentNumber = await nextDocumentNumber(ctx.recordDeps.repository, mig.tenantId, ep.lines.some(taxedLine) ? "INV" : "BOS", at, resolved.actor.id);
       await billOfSupplyFor(ep, ctx, at, resolved.actor.id);
@@ -515,7 +520,7 @@ const recipientIncomplete = { ok: false, status: 422, error: "recipient_details_
  * own number, issued once. Throws when no number could be issued. */
 async function billOfSupplyFor(inv, ctx, at, actorId) {
   const lines = inv.lines || [];
-  if (!(inv.buyer && str(inv.buyer.gstin)) || inv.billOfSupplyNumber || !str(inv.documentNumber) || !lines.some(taxedLine) || !lines.some((l) => !taxedLine(l))) return;
+  if (!(inv.buyer && str(inv.buyer.gstin)) || inv.billOfSupplyNumber || !str(inv.documentNumber) || !lines.some(taxedLine) || !lines.some((l) => !taxedLine(l) && !isOpeningBalanceLine(l))) return;
   inv.billOfSupplyNumber = await nextDocumentNumber(ctx.recordDeps.repository, ctx.migration.tenantId, "BOS", at, actorId);
 }
 
