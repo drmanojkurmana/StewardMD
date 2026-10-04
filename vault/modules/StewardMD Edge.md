@@ -166,6 +166,16 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
 - `negated()` also knows Hinglish "mat kholo / mat dikhao", "nahi chahiye" and Tenglish "vaddu / teravaddu"
   (any `-vaddu`). A bare "nahi" is NOT a negation ("fever nahi utar raha"); only "nahi chahiye" and "mat <verb>".
   Found by test3 (edge-router-3): before this, "fundx ai mat kholo" reached the model.
+- test4 (edge-router-4) negation forms, `edge19` (2026-10-04): "<verb>na nahi" ("kholna nahi", "dikhana nahi"),
+  "band / skip karo" (also "band kar do"), Tenglish any `-oddu`, "aapandi / aapu / aapeyyi", "vaddhu",
+  "cheyyakandi / cheyyaku". "band" and "skip" count only before karo/kar; "nahi" only after a `-na` verb.
+- Clinical orders pass (`edge19`): an order verb (start/continue/titrate/taper/increase/give/add/shift to/
+  escalate/restart, chalu/shuru karo, badhao, modalu pettandi, ivvandi ...) counts only when
+  `SMD_DRUGLINK.drugsIn` finds a drug; a dosing pattern ("1 tab od", "500 mg bd") counts alone. Lab values
+  ("creatinine 1.2 mg") are not a dose: units need a frequency after them, forms (tab/cap/puff/drop) do not.
+  `SMD_EDGE.negated()` is the whole pass guard (negation OR order), so `score.mjs` counts orders as
+  `route_by: negated`; `SMD_EDGE.ordered()` is the order half alone. Rules coverage unchanged on test,
+  test3, test4 (59 newly guarded rows, all label none).
 - ICD trigger: a request naming the Search ICD tool ("navigate to search icd", "icd search kholo") builds a
   lookup only from the words after "for" / "of". Without that, rules opened "ICD-10 codes for navigate to".
 - Drug and KB options get their slots before the ranked list, or weak word overlaps fill all five.
