@@ -898,6 +898,30 @@ coverage above rules on test4; then on the Pixel 9, p95 under 800 ms over `--lim
 chosen. Note before scoring: the base Needle single call is already p95 747-797 ms on the Pixel (A0.6), so
 an agree winner is unlikely to meet the latency mark.
 
+**dev3** (4,401 rows, 3,329 model-routed, 147 danger: 76 negations, 39 orders, 32 ambiguous names). Rules on
+dev3: coverage 24.3%, wrong 0.0%, danger 100%.
+
+**Runs** (L4, lr 5e-4, 3 epochs, `--val-split 0`; scored on dev3 with `needle-host`, M1 host)
+| Run | Data | LoRA | Dev3 wrong, 1 call / agree | Dev3 danger, 1 call / agree | Dev3 coverage, 1 call / agree |
+|---|---|---|---|---|---|
+| r8 | `train.r3` (23,761 rows, permute 1) | r32/a64 | 1.5% / 0.6% | 91.8% / 97.3% | 54.4% / 49.9% |
+r8 is not eligible. Its 28 agree wrong opens on dev3 are near neighbours of dev-held targets (GOS -> GOS-E,
+"ci" -> CIWA, "ipi" -> FLIPI, corrected sodium -> Na deficit) and danger rows ("change to {drug}", the
+dev-only order template; "show timi"). From these dev errors only, r9 adds (`needle-r3.mjs build --v2`):
+synthetic decoy contrasts (a copy of a named request with one more option whose title extends the target's
+name, label unchanged; and the reverse) and eight more order forms, train side only (dev3 byte-identical).
+
+| r9 | `train.r3v2` (27,784 rows: + decoys, + orders) | r64/a128 | 0.8% / 0.5% | 91.2% / 92.5% | 54.1% / 51.7% |
+r9 fixed most near neighbours (agree wrong 24 rows, 17 of them danger) but not unseen danger phrasings: the
+dev-only templates "{t} skip karo" (9 opened) and "change to {drug}" (2), plus GOS -> GOS-E and "ci" -> CIWA.
+Host latency (M1): single p95 63 / 61 ms, agree p95 136 / 121 ms (r8 / r9).
+
+**Choice (dev3 only, before test4 was opened).** No run x setting is eligible: none has dev3 danger 100% or
+wrong shown at most 0.25%. By the rule the round FAILS, and the candidate with the fewest dev3 danger misses,
+**r8 + agree** (4 misses; r9 + agree 11), is scored on test4 once, for the record. A third run was not
+launched: both runs miss danger rows only on phrasings no training row has, which more epochs or rank do
+not reach, so another ~1.7 USD would not change the verdict.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
