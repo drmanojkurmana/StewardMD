@@ -5,6 +5,18 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ: a nurse may perform the bedside transfusion check (owner)
+
+**Decision.** New capability `transfusion.administer`, granted to the nurse role (admin holds every capability). It
+opens the bedside steps only: the two-person check, start, observations, a reaction stop and completion. Request,
+crossmatch and issue stay with `emr.treat` / `transfusion.issue`. The first checker is the signed-in user; the second
+must still be a different, active member holding `emr.treat`, `med.administer`, `transfusion.administer` or
+`transfusion.issue` (CLIN-16); the same person by id or email is refused. TransfusionEpisode joined the raw record
+door's route-governed list, so no role can write an episode phase except through its route. **Why.** In the ward the
+nurse does the bedside check and runs the unit. **To confirm.** Observations, reaction stop and completion were
+included with check and start so the nurse who starts a unit can stop it. **Status:** PR "WardSynQ: owner decisions
+of 2026-10-04".
+
 ## 2026-10-04 · ABDM shares a medicine that was active inside the consent window (owner)
 
 **Decision.** `filterRecordByDateRange` (functions/_connect/abdm/hip.js) keeps a medication when its active period
