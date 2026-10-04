@@ -178,6 +178,33 @@ try {
     }
   }
 
+  // ── "Ask MaiK anyway" on EVERY card type skips Edge exactly once (rules() and route()), never re-fires
+  //    auto-open, and reaches the normal answer; the next identical ask gets the card again. Before the
+  //    fix the rules() pass (#1360) ignored the calculator card's skip and bounced back to the card. ──
+  const cards = () => ev(`return document.querySelectorAll("#maikBody .maik-edge, #maikBody .maik-calc, #maikBody .maik-drugask").length;`);
+  const sheetOn = () => ev(`var s=document.getElementById("maikSheet"); return !!(s && s.classList.contains("on"));`);
+  await ev(`window.__pick = null; return 1;`);
+  for (const [kind, q, esc] of [
+    ["calculator", "open hacor score", "data-maik-calcask"],
+    ["tool", "open antibiogram", "data-maik-edgeask"],
+    ["drug", "dose of paracetamol", "data-maik-drugcont"],
+    ["icd", "icd code for type 2 diabetes mellitus", "data-maik-edgeask"],
+    ["kb", "open pneumonia", "data-maik-edgeask"],
+    ["scheme", "aarogyasri code for pancreatitis", "data-maik-edgeask"]
+  ]) {
+    await openMaik();
+    await send(q, 2500);
+    if (!(await sheetOn())) await openMaik();       // an open verb auto-opened the module
+    const k0 = await cards(), a0 = await countAi();
+    const hasEsc = await ev(`return !!document.querySelector("#maikBody [${esc}]");`);
+    await ev(`[].slice.call(document.querySelectorAll("#maikBody [${esc}]")).pop().click(); return 1;`); await sleep(3000);
+    const k1 = await cards(), a1 = await countAi(), on = await sheetOn();
+    ok(hasEsc && k1 === k0 && a1 > a0 && on, kind + ": 'Ask MaiK anyway' reaches the normal answer, no card, no auto-open (" + [hasEsc, k0, k1, a0, a1, on].join(",") + ")");
+    await send(q, 2500);
+    if (!(await sheetOn())) await openMaik();
+    ok(await cards() > k1, kind + ": the skip was one-shot, the same ask draws the card again");
+  }
+
   await ev(`localStorage.removeItem("smd_edge"); return 1;`);
 
   // ── Settings: the Edge engine row (owner, 2026-10-04) ──
