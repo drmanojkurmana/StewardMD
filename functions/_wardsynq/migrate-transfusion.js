@@ -30,7 +30,9 @@
  * comments in service.js). The master plan's own emphasis on separation of duties between the
  * scientist who crossmatches and the nurse who transfuses is a real, deliberate authorization
  * decision this task does not make unilaterally - the SAME restraint migrate-oncology.js's header
- * states about the oncqis_* role fence.
+ * states about the oncqis_* role fence. (Since made: TASK 4.13 gave the blood bank transfusion.issue, and the
+ * owner's decision of 2026-10-04 gave the ward nurse transfusion.administer for the bedside check, start,
+ * observations, a reaction stop and completion, never the request, crossmatch or issue.)
  *
  * node --test --experimental-test-module-mocks --experimental-sqlite test/wardsynq-transfusion-bridge.test.mjs
  */

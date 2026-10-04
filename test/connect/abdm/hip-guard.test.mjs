@@ -340,22 +340,44 @@ test("documents: in-range kept, out-of-range dropped, undated dropped (fail clos
   assert.deepEqual(filtered.documents.map((d) => d.id), ["d-in"]);
 });
 
-test("medications: authoredOn or effectivePeriod places them; out-of-range and undated are dropped", async () => {
+test("medications (owner decision 2026-10-04): kept when the ACTIVE PERIOD overlaps the window, not by start date alone", async () => {
   const record = { medications: [
-    med("m-auth-in", "2024-01-05T00:00:00Z"), med("m-auth-out", "2024-03-01T00:00:00Z"),
-    med("m-per-in", null, { start: "2024-01-20T00:00:00Z" }), med("m-per-end-only", null, { end: "2024-01-21T00:00:00Z" }), med("m-per-out", null, { start: "2023-06-01T00:00:00Z" }),
+    med("m-auth-in", "2024-01-05T00:00:00Z"),                                                // started inside, no end
+    med("m-auth-out", "2024-03-01T00:00:00Z"),                                               // starts after the window
+    med("m-per-in", null, { start: "2024-01-20T00:00:00Z" }),                                // started inside (effectivePeriod)
+    med("m-long-term", null, { start: "2023-06-01T00:00:00Z" }),                             // started before, still taken: SHARED
+    med("m-long-term-auth", "2022-02-01T00:00:00Z"),                                         // ordered years before, no end: SHARED
+    med("m-stopped-inside", null, { start: "2023-06-01T00:00:00Z", end: "2024-01-15T00:00:00Z" }),  // started before, stopped inside: SHARED
+    med("m-stopped-before", null, { start: "2023-06-01T00:00:00Z", end: "2023-12-15T00:00:00Z" }),  // stopped before `from`: dropped
+    med("m-spans", null, { start: "2023-12-01T00:00:00Z", end: "2024-03-01T00:00:00Z" }),     // covers the whole window: SHARED
+    med("m-per-end-only", null, { end: "2024-01-21T00:00:00Z" }),                            // no start: dropped (fail closed)
+    med("m-bad-end", null, { start: "2023-06-01T00:00:00Z", end: "not a date" }),             // unparseable end: dropped
     med("m-undated"), med("m-empty-period", null, { start: null, end: null }),
   ] };
   const { record: filtered } = filterRecordByDateRange(record, FROM, TO);
-  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-auth-in", "m-per-in", "m-per-end-only"]);
+  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-auth-in", "m-per-in", "m-long-term", "m-long-term-auth", "m-stopped-inside", "m-spans"]);
+});
+
+test("medications: an ENDED status with no end date is not treated as still running; only a start inside the window keeps it", async () => {
+  const record = { medications: [
+    { ...med("m-stopped-old", "2023-06-01T00:00:00Z"), status: "stopped" },                  // ended at an unknown time: dropped
+    { ...med("m-completed-old", "2023-06-01T00:00:00Z"), status: "completed" },
+    { ...med("m-completed-in", "2024-01-10T00:00:00Z"), status: "completed" },               // its start is in the window: kept
+    { ...med("m-active-old", "2023-06-01T00:00:00Z"), status: "active" },                    // still active: kept
+    { ...med("m-stopped-dated", null, { start: "2023-06-01T00:00:00Z", end: "2024-01-02T00:00:00Z" }), status: "stopped" },   // known end inside: kept
+  ] };
+  const { record: filtered } = filterRecordByDateRange(record, FROM, TO);
+  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-completed-in", "m-active-old", "m-stopped-dated"]);
 });
 
 test("document and medication boundaries are INCLUSIVE at exactly from and to", async () => {
   const record = { documents: [doc("d-from", "2024-01-01T00:00:00Z"), doc("d-to", "2024-01-31T23:59:59Z"), doc("d-after", "2024-01-31T23:59:59.001Z")],
-    medications: [med("m-from", "2024-01-01T00:00:00Z"), med("m-to", "2024-01-31T23:59:59Z"), med("m-before", "2023-12-31T23:59:59.999Z")] };
+    medications: [med("m-from", "2024-01-01T00:00:00Z"), med("m-to", "2024-01-31T23:59:59Z"), med("m-after", "2024-01-31T23:59:59.001Z"),
+      med("m-ends-at-from", null, { start: "2023-01-01T00:00:00Z", end: "2024-01-01T00:00:00Z" }),
+      med("m-ends-just-before", null, { start: "2023-01-01T00:00:00Z", end: "2023-12-31T23:59:59.999Z" })] };
   const { record: filtered } = filterRecordByDateRange(record, FROM, TO);
   assert.deepEqual(filtered.documents.map((d) => d.id), ["d-from", "d-to"]);
-  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-from", "m-to"]);
+  assert.deepEqual(filtered.medications.map((m) => m.id), ["m-from", "m-to", "m-ends-at-from"]);
 });
 
 test("a multi-item narrative (coversDates) is dropped when ANY line it states is outside the window", async () => {
@@ -370,7 +392,7 @@ test("a multi-item narrative (coversDates) is dropped when ANY line it states is
 });
 
 test("a care context whose only dated items are an undated or out-of-range document/medication is not servable (anyKept false)", async () => {
-  const { anyKept, hadDated, record } = filterRecordByDateRange({ documents: [doc("d", null)], medications: [med("m", "2019-01-01T00:00:00Z")] }, FROM, TO);
+  const { anyKept, hadDated, record } = filterRecordByDateRange({ documents: [doc("d", null)], medications: [med("m", null, { start: "2019-01-01T00:00:00Z", end: "2019-02-01T00:00:00Z" })] }, FROM, TO);
   assert.equal(hadDated, true);
   assert.equal(anyKept, false);
   assert.deepEqual([record.documents, record.medications], [[], []]);

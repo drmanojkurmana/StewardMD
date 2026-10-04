@@ -1617,6 +1617,7 @@ export async function onRequest(context) {
       /* Who records which discharge step (discharge-milestones.js). A step not listed takes the route's own entry. */
       const DISCHARGE_STEP_CAPS = Object.freeze({ advised: CAPS.EMR_TREAT, "pharmacy-cleared": CAPS.ORDER_VERIFY, "bill-ready": CAPS.BILLING_CHARGE,
         "tpa-final-requested": CAPS.BILLING_CHARGE, "tpa-final-received": CAPS.BILLING_CHARGE, left: CAPS.QUEUE_ADD });
+      const TRANSFUSION_BEDSIDE_SUBS = new Set(["transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       const TRANSFUSION_SUBS = new Set(["transfusion-request", "transfusion-crossmatch", "transfusion-issue", "transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
@@ -2448,6 +2449,8 @@ export async function onRequest(context) {
        * routes - the `blood_bank` role holds TRANSFUSION_ISSUE and none of the EMR capabilities, and
        * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
       if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
+      // Owner 2026-10-04: the nurse's bedside steps (transfusion.administer); request, crossmatch and issue are not among them.
+      if (!wAz.ok && TRANSFUSION_BEDSIDE_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ADMINISTER);
       /* Statutory registers: the custodian may also do what the creating doctor does. Medical records corrects a
        * medico-legal case and opens one patient's; the nodal officer records a notification. Nothing else widens. */
       if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
@@ -3304,11 +3307,11 @@ export async function onRequest(context) {
         return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-bedside-check" && method === "POST") {
-        /* CLIN-16: the second checker is an active member of this hospital who treats, gives medicines or works the blood bank. */
+        /* CLIN-16: the second checker is an active member of this hospital who treats, gives medicines, administers a transfusion or works the blood bank. */
         const secondCheckerCheck = async (id) => {
           if (actor.email && String(id).toLowerCase() === String(actor.email).toLowerCase()) return "self";
           const who = { kind: "witness", id: String(id), email: String(id).indexOf("@") > 0 ? String(id).toLowerCase() : null };
-          for (const cap of [CAPS.EMR_TREAT, CAPS.MED_ADMINISTER, CAPS.TRANSFUSION_ISSUE]) if ((await ORG.authorizeOrg(env, who, wOrgId, cap) || {}).ok) return true;
+          for (const cap of [CAPS.EMR_TREAT, CAPS.MED_ADMINISTER, CAPS.TRANSFUSION_ADMINISTER, CAPS.TRANSFUSION_ISSUE]) if ((await ORG.authorizeOrg(env, who, wOrgId, cap) || {}).ok) return true;
           return false;
         };
         const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, secondCheckerId: body.secondCheckerId, secondCheckerCheck, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });
@@ -5680,7 +5683,7 @@ export async function onRequest(context) {
           ? await readDischargeChecklist(request, env, { ...common, encounterId: url.searchParams.get("encounterId") || "" })
           : await dischargePatient(request, env, { ...common, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition,
             destination: body.destination, dispositionNote: body.dispositionNote, billDeferredReason: body.billDeferredReason, overrideReason: body.overrideReason,
-            idempotencyKey: body.idempotencyKey || null });
+            continueOrderIds: body.continueOrderIds, idempotencyKey: body.idempotencyKey || null });
         if (sub === "discharge" && r.ok && r.written) abdmStayHook(body.encounterId, "discharge");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
