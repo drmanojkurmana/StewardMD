@@ -5231,7 +5231,9 @@ export async function onRequest(context) {
       const utcOffsetMinutes = wsqCfg && wsqCfg.utcOffsetMinutes;
       const cfgList = (k) => (wsqCfg && Array.isArray(wsqCfg[k]) ? wsqCfg[k] : []);
       if (sub === "infection-control" && method === "GET") {
-        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes });
+        /* The "awaiting sign-off" notice is read from the seed sign-off records (null when unreadable: shown as unsigned). */
+        const haiSignoff = await SEED.itemSignoffState("hai-criteria", await SEEDSTORE.listSignoffs(env).catch(() => null));
+        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes, haiSignoff });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "hai-case" && method === "POST") {
