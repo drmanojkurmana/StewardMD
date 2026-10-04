@@ -102,10 +102,41 @@ function memoryStore() {
   };
 }
 
+/**
+ * Cloudflare R2 BINDING adapter: the same three calls over an R2Bucket binding (env.WARDSYNQ_BACKUPS), no
+ * credentials and no network hop through the S3 API. Only the backup platform destination uses it; the
+ * document store stays on S3 (storeFromEnv). R2's get() returns null for a missing key, like the S3 adapter's 404.
+ * https://developers.cloudflare.com/r2/api/workers/workers-api-reference/
+ */
+function r2Store(bucket) {
+  return {
+    kind: "r2",
+    async put(key, bytes, contentType) {
+      try { await bucket.put(String(key), bytes, { httpMetadata: { contentType: contentType || "application/octet-stream" } }); }
+      catch (e) { throw new ObjectStoreError("put", 500, String((e && e.message) || e).slice(0, 300)); }
+    },
+    async get(key) {
+      let o;
+      try { o = await bucket.get(String(key)); } catch (e) { throw new ObjectStoreError("get", 500, String((e && e.message) || e).slice(0, 300)); }
+      if (!o) return null;
+      return { bytes: new Uint8Array(await o.arrayBuffer()), contentType: (o.httpMetadata && o.httpMetadata.contentType) || "application/octet-stream" };
+    },
+    async delete(key) {
+      try { await bucket.delete(String(key)); } catch (e) { throw new ObjectStoreError("delete", 500, String((e && e.message) || e).slice(0, 300)); }
+    },
+  };
+}
+
+/** The backup bucket binding when present (an R2Bucket has put/get/delete), else null. */
+function backupBucketFromEnv(env) {
+  const b = env && env.WARDSYNQ_BACKUPS;
+  return b && typeof b.put === "function" && typeof b.get === "function" && typeof b.delete === "function" ? r2Store(b) : null;
+}
+
 function storeFromEnv(env) {
   const e = env || {};
   if (!e.DOC_S3_ENDPOINT || !e.DOC_S3_BUCKET || !e.DOC_S3_ACCESS_KEY_ID || !e.DOC_S3_SECRET_ACCESS_KEY) return null;
   return s3Store({ endpoint: e.DOC_S3_ENDPOINT, bucket: e.DOC_S3_BUCKET, accessKeyId: e.DOC_S3_ACCESS_KEY_ID, secretAccessKey: e.DOC_S3_SECRET_ACCESS_KEY, region: e.DOC_S3_REGION });
 }
 
-export { signV4, s3Store, memoryStore, storeFromEnv, ObjectStoreError, sha256Hex, EMPTY_SHA256 };
+export { signV4, s3Store, r2Store, backupBucketFromEnv, memoryStore, storeFromEnv, ObjectStoreError, sha256Hex, EMPTY_SHA256 };

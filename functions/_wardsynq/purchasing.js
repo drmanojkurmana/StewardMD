@@ -44,6 +44,7 @@ import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { chainState, approvalCovers, levelsFor, amountOf, allVerifications } from "./verification.js";
 import { levelsFrom, issueStoreFor, quantityOf, returnableFrom, toBaseUnit, dualDisplay, replayMovement, MOVE_TYPE as STOCK_TYPE } from "./stock.js";
+import { purchaseTermsOf, receiptAmounts, debitNoteRegister } from "./supplier-debit-note.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 /* Orders, receipts, approvals and suppliers are read whole (service.listAll, paged): a receipt or approval missed by a
@@ -301,6 +302,19 @@ async function receiveGoods(request, env, ctx) {
     baseUnit = converted.unit; baseQty = converted.value; receivedAs = { value: quantity, unit };
   }
 
+  /* WHAT THE RECEIPT COST (supplier-debit-note.js, owner 2026-10-04): optional, checked when given, and what a return to
+   * the supplier later reverses the input tax credit by. The price defaults to the order line's when the receipt is in
+   * the line's own unit; the GST rate and the split are always the supplier's invoice's, never assumed. */
+  let purchase = null;
+  if (ctx.purchase != null && ctx.purchase !== "") {
+    const pl = str(ctx.line) !== "" && Array.isArray(po.lines) ? po.lines[Number(ctx.line)] : null;
+    const p = ctx.purchase && typeof ctx.purchase === "object" ? ctx.purchase : {};
+    const fill = pl && str(p.unitPricePaise) === "" && str(p.taxablePaise) === "" && qtyOf(pl.unitPricePaise) !== null && key(pl.unit) === key(unit) ? { unitPricePaise: pl.unitPricePaise } : {};
+    const got = purchaseTermsOf(typeof ctx.purchase === "object" ? { ...p, ...fill } : ctx.purchase, quantity);
+    if (got.error) return { ...base, ok: false, status: 422, error: got.error, field: got.field, detail: got.detail, written: 0 };
+    purchase = got.terms;
+  }
+
   const at = str(ctx.at) || new Date().toISOString();
   const id = `wsq-grn-${poId}-${str(at).replace(/[^0-9a-zA-Z]+/g, "")}`;
   try {
@@ -316,6 +330,7 @@ async function receiveGoods(request, env, ctx) {
       ...(str(ctx.expiry) ? { expiry: str(ctx.expiry) } : {}),
       ...(str(ctx.location) ? { location: str(ctx.location) } : {}),
       ...(receivedAs ? { receivedAs } : {}),
+      ...(purchase ? { purchase } : {}),
       receivedBy: resolved.actor.id, at,
     };
     const out = await svc.put(movement, { idempotencyKey: ctx.idempotencyKey || null });
@@ -530,12 +545,17 @@ async function supplyChainOverview(request, env, ctx) {
     const left = returnableFrom(m, moves);
     return left && left.remaining > 0 ? { receiptId: str(m.id), code: str(m.code), display: str(m.display) || str(m.code), unit: left.unit, location: m.location || null, batch: m.batch || null,
       at: str(m.at), supplier: str(m.receivedFrom) || poVendor.get(str(m.purchaseOrderId)) || null, purchaseOrderId: str(m.purchaseOrderId) || null,
-      received: left.received, returned: left.returned, remaining: left.remaining } : null;
+      received: left.received, returned: left.returned, remaining: left.remaining,
+      /* Whether a return can work out its debit note from what is on record, or must be given the terms. */
+      priced: !!(m.purchase || moves.some((x) => str(x.kind) === "supplier-return" && str(x.returnOfReceipt) === str(m.id) && x.debitNote && x.debitNote.terms)),
+      ...(m.purchase ? { purchase: receiptAmounts(m.purchase) } : {}) } : null;
   }).filter(Boolean).sort((a, b) => b.at.localeCompare(a.at)).slice(0, 200);
   const returns = moves.filter((m) => str(m.kind) === "supplier-return").map((m) => {
     const q = quantityOf(m.quantity);
     return { movementId: str(m.id), receiptId: str(m.returnOfReceipt), code: str(m.code), display: str(m.display) || str(m.code), quantity: q ? q.value : null, unit: q ? q.unit : null,
-      supplier: str(m.supplier), reason: str(m.reason), debitNoteNo: m.debitNoteNo || null, at: str(m.at), by: str(m.by), controlled: m.controlled === true };
+      supplier: str(m.supplier), reason: str(m.reason), debitNoteNo: m.debitNoteNo || null, at: str(m.at), by: str(m.by), controlled: m.controlled === true,
+      ...(m.debitNote ? { debitNote: { number: m.debitNote.number, taxablePaise: m.debitNote.taxablePaise, gstRate: m.debitNote.gstRate, interState: m.debitNote.interState,
+        cgstPaise: m.debitNote.cgstPaise, sgstPaise: m.debitNote.sgstPaise, igstPaise: m.debitNote.igstPaise, taxPaise: m.debitNote.taxPaise, totalPaise: m.debitNote.totalPaise } } : {}) };
   }).sort((a, b) => b.at.localeCompare(a.at)).slice(0, 50);
   const today = new Date().toISOString().slice(0, 10);
   return { ...base, ok: true, receipts, returns,
@@ -543,6 +563,24 @@ async function supplyChainOverview(request, env, ctx) {
       contracts: (Array.isArray(v.rateContracts) ? v.rateContracts : []).map((c) => ({ ...c, inDate: str(c.validFrom) <= today && today <= str(c.validTo) })) }))
       .sort((a, b) => a.name.localeCompare(b.name)),
     ...(moves.length >= 1000 ? { truncated: true, truncatedWarning: "More than 1000 stock records exist; only the newest were read, so older receipts are not listed here." } : {}) };
+}
+
+/** The supplier debit note register (supplier-debit-note.js): every note in a date range, with the totals of value, CGST,
+ *  SGST and IGST the accountant reverses input tax credit by. ctx: { from?, to? } (YYYY-MM-DD, India time). */
+async function supplierDebitNotes(request, env, ctx) {
+  const mig = ctx.migration;
+  const base = { mode: mig && mig.mode, tenantId: (mig && mig.tenantId) || null };
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", rows: [] };
+  const day = (v) => (str(v) === "" ? "" : isDate(v) ? str(v) : null);
+  const from = day(ctx.from), to = day(ctx.to);
+  if (from === null || to === null || (from && to && to < from)) return { ...base, ok: false, status: 422, error: "bad_dates", detail: "Give the dates as YYYY-MM-DD, the end on or after the start." };
+  const { svc, error } = await open(request, env, ctx, "record:read");
+  if (error) return { ...base, ...error };
+  let moves;
+  try { moves = await every(svc, STOCK_TYPE); }
+  catch (e) { return { ...base, ...readFailure(e) }; }
+  return { ...base, ok: true, from: from || null, to: to || null, ...debitNoteRegister(moves, from, to),
+    note: "Each note reverses the input tax credit on stock returned to its supplier: the value returned and the GST charged on it on the original receipt." };
 }
 
 /* The hospital's reorder numbers (wardsynq.reorderPolicy): all four or none. */
@@ -653,6 +691,6 @@ async function reorderSuggestions(request, env, ctx) {
 export {
   PO_TYPE, VENDOR_TYPE, qtyOf, poIdFor, orderState, poTotalPaise, ordersFrom,
   raisePurchaseOrder, receiveGoods, listPurchaseOrders,
-  contractWarnings, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview,
+  contractWarnings, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, supplierDebitNotes,
   validateReorderPolicy, readReorderPolicy, reorderSuggestionsFrom, reorderSuggestions,
 };

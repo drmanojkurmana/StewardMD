@@ -257,11 +257,13 @@
   // ---- Import from the previous system (R2-5, legacy-import.js) -------------------------------------------------
   /* Patients, Price list rows and suppliers from the hospital's old HIS, as CSV. Read the file, map its columns, run the
    * dry run, read every row, then import exactly what the dry run showed. Nothing is written until the last step, and a
-   * file that no longer matches its dry run is refused by the server. Open stays, balances and GST documents are not
-   * imported. s.preview: null = not run, false = the request failed, else the server's report. */
-  var IMPORT_KINDS = ["patients", "prices", "vendors"];
+   * file that no longer matches its dry run is refused by the server. Owner 2026-10-04: the balance each stay open at
+   * switch-over owed on the old bill (opening-balance.js) comes in as a file or one stay at a time; stays, deposits and
+   * GST documents are still not imported. s.preview: null = not run, false = the request failed, else the server's report. */
+  var IMPORT_KINDS = ["patients", "prices", "vendors", "openingBalances"];
   function importKindLabel(c, k) {
-    return { patients: T(c, "site.admin.import.kindPatients", "Patients"), prices: T(c, "site.admin.import.kindPrices", "Price list"), vendors: T(c, "site.admin.import.kindVendors", "Suppliers") }[k] || k;
+    return { patients: T(c, "site.admin.import.kindPatients", "Patients"), prices: T(c, "site.admin.import.kindPrices", "Price list"), vendors: T(c, "site.admin.import.kindVendors", "Suppliers"),
+      openingBalances: T(c, "site.admin.import.kindOpening", "Opening balances of admitted patients") }[k] || k;
   }
   function importFieldLabel(c, f) {
     return {
@@ -271,6 +273,8 @@
       kind: T(c, "site.admin.import.f.kind", "Kind (investigation, medication, service, bed, nursing, visit)"), price: T(c, "site.admin.import.f.price", "Price in rupees"), code: T(c, "site.admin.import.f.code", "Code"),
       ward: T(c, "site.admin.import.f.ward", "Ward (per-day charges)"), hsnSac: T(c, "site.admin.import.f.hsnSac", "HSN/SAC"), gstRate: T(c, "site.admin.import.f.gstRate", "GST rate %"),
       nonHealthcare: T(c, "site.admin.import.f.nonHealthcare", "Not health care (yes or no)"), intensiveCareClass: T(c, "site.admin.import.f.icu", "Intensive care class (beds)"), unitHours: T(c, "site.admin.import.f.unitHours", "Hours one bed price covers"),
+      patientRef: T(c, "site.admin.import.f.patientRef", "MR number (here, or in the old system)"), amount: T(c, "site.admin.import.f.amount", "Balance owed in rupees"),
+      legacyBillRef: T(c, "site.admin.import.f.legacyBillRef", "Bill number in the old system"), asOf: T(c, "site.admin.import.f.asOf", "Balance as of (date)"),
       gstin: T(c, "site.admin.import.f.gstin", "GSTIN"), phone: T(c, "site.admin.import.f.phone", "Phone"), email: T(c, "site.admin.import.f.email", "Email"), drugLicenceNo: T(c, "site.admin.import.f.drugLicence", "Drug licence number"),
     }[f] || f;
   }
@@ -282,11 +286,13 @@
     var esc = c.esc, pv = s.preview, m = s.map;
     var h = '<div class="card"><h2>' + esc(T(c, "site.admin.import.title", "Import from the previous system")) + "</h2>" +
       '<p class="quiet">' + esc(T(c, "site.admin.import.intro", "Load patients, the price list or suppliers from the system this hospital is replacing, as a CSV file. A dry run shows what would happen to every row before anything is saved. Nothing already here is changed or merged.")) + "</p>" +
-      '<p class="quiet">' + esc(T(c, "site.admin.import.notImported", "Open admissions, balances, deposits and GST invoices are not imported. Aadhaar numbers are never stored.")) + "</p>" +
+      '<p class="quiet">' + esc(T(c, "site.admin.import.notImportedOb", "Admissions, deposits and GST invoices are not imported. Aadhaar numbers are never stored.")) + "</p>" +
+      (s.kind === "openingBalances" ? '<p class="quiet">' + esc(T(c, "site.admin.import.obIntro", "One line per stay: what each patient admitted at switch-over owes on the old system's bill. Admit the patient here first. The line is the first on the stay's bill, is not taxed again, and deposits and payments settle it like any charge. A stay that already carries a balance is never changed.")) + "</p>" : "") +
       '<div class="row"><label class="f"><span>' + esc(T(c, "site.admin.import.kind", "What the file holds")) + '</span><select id="admImpKind">' +
       IMPORT_KINDS.map(function (k) { return '<option value="' + k + '"' + (k === s.kind ? " selected" : "") + ">" + esc(importKindLabel(c, k)) + "</option>"; }).join("") + "</select></label>" +
       '<label class="f"><span>' + esc(T(c, "site.admin.import.file", "CSV file")) + '</span><input id="admImpFile" type="file" accept=".csv,text/csv"></label></div>' +
-      '<button type="button" class="btn ghost" data-imp="read">' + esc(T(c, "site.admin.import.read", "Read the file")) + '</button><div id="admImpMsg" aria-live="polite"></div></div>';
+      '<button type="button" class="btn ghost" data-imp="read">' + esc(T(c, "site.admin.import.read", "Read the file")) + '</button><div id="admImpMsg" aria-live="polite"></div></div>' +
+      (s.kind === "openingBalances" ? obSingleHtml(c, s) : "");
     if (!m) return h;
     var opts = function (field) {
       var cur = s.mapping && s.mapping[field] != null ? String(s.mapping[field]) : "";
@@ -300,7 +306,7 @@
         var req = m.fields.required.indexOf(f) >= 0;
         return '<label class="f"><span>' + esc(importFieldLabel(c, f)) + (req ? " " + esc(T(c, "site.admin.import.required", "(required)")) : "") + '</span><select data-imp-field="' + f + '">' + opts(f) + "</select></label>";
       }).join("") +
-      (s.kind === "patients" ? '<label class="f"><span>' + esc(T(c, "site.admin.import.dateOrder", "Dates in the file are written")) + '</span><select id="admImpOrder">' +
+      (s.kind === "patients" || s.kind === "openingBalances" ? '<label class="f"><span>' + esc(T(c, "site.admin.import.dateOrder", "Dates in the file are written")) + '</span><select id="admImpOrder">' +
         [["dmy", T(c, "site.admin.import.dmy", "day/month/year")], ["mdy", T(c, "site.admin.import.mdy", "month/day/year")], ["ymd", T(c, "site.admin.import.ymd", "year-month-day")]].map(function (o) {
           return '<option value="' + o[0] + '"' + ((s.mapping && s.mapping.dateOrder) === o[0] ? " selected" : "") + ">" + esc(o[1]) + "</option>";
         }).join("") + "</select></label>" : "") +
@@ -323,7 +329,8 @@
         var ex = r.existing || {};
         var why = (r.field ? esc(importFieldLabel(c, r.field)) + ": " : "") + (r.reason ? EN(c, esc(r.reason)) : "") +
           (ex.mrn ? " " + esc(T(c, "site.admin.import.existingMrn", "MR number {mrn}", { mrn: ex.mrn })) : "") + (r.mrn ? esc(T(c, "site.admin.import.newMrn", "MR number {mrn}", { mrn: r.mrn })) : "") +
-          (ex.price != null ? esc(T(c, "site.admin.import.existingPrice", "Price on the list: Rs {price}", { price: (Number(ex.price) / 100).toFixed(2) })) : "");
+          (ex.price != null ? esc(T(c, "site.admin.import.existingPrice", "Price on the list: Rs {price}", { price: (Number(ex.price) / 100).toFixed(2) })) : "") +
+          (ex.amountPaise != null ? " " + esc(T(c, "site.admin.import.existingOb", "On this stay: Rs {amount}, old bill {ref}", { amount: (Number(ex.amountPaise) / 100).toFixed(2), ref: ex.legacyBillRef })) : "");
         return '<tr><td class="mono">' + esc(String(r.row)) + "</td><td>" + EN(c, esc(r.label || "")) + "</td><td>" + esc(importStatusLabel(c, r.status)) + "</td><td>" + why + "</td></tr>";
       }).join("") + "</tbody></table></div>";
     if (pv.step === "preview" && pv.ok) {
@@ -331,6 +338,22 @@
         : '<p class="quiet">' + esc(T(c, "site.admin.import.nothing", "Nothing in this file would be added.")) + "</p>";
     }
     return h + '<div id="admImpDoneMsg" aria-live="polite"></div></div>';
+  }
+  /* One stay at a time (POST /ward/opening-balance): the same rules as the file, for a hospital with a handful of stays
+   * open at switch-over. s.ob: null, or the server's answer to the last save. */
+  function obSingleHtml(c, s) {
+    /* What was typed survives a refusal (s.obDraft), so a corrected field is all that has to be typed again; a save clears it. */
+    var esc = c.esc, r = s.ob, d = s.obDraft || {}, f = function (id, label, type, extra) {
+      return '<label class="f"><span>' + esc(label) + '</span><input id="' + id + '"' + (type ? ' type="' + type + '"' : "") + (extra || "") + ' value="' + esc(d[id] || "") + '" autocomplete="off" spellcheck="false"></label>';
+    };
+    var out = r == null ? "" : r === false ? '<div class="msg err">' + esc(T(c, "site.admin.import.obFailed", "No answer from the server. Check the stay before entering it again.")) + "</div>"
+      : !r.ok ? '<div class="msg err">' + EN(c, esc(r.detail || refusal(c, r))) + "</div>"
+      : '<div class="msg ok">' + esc(r.matched ? T(c, "site.admin.import.obMatched", "This stay already carries exactly this balance. Nothing was changed.")
+        : T(c, "site.admin.import.obSaved", "Saved: Rs {amount} from old bill {ref} will be the first line on this stay's bill.", { amount: (Number(r.openingBalance.amountPaise) / 100).toFixed(2), ref: r.openingBalance.legacyBillRef })) + "</div>";
+    return '<div class="card"><h2>' + esc(T(c, "site.admin.import.obSingleTitle", "Enter one stay's opening balance")) + '</h2><div class="row">' +
+      f("admObMrn", T(c, "site.admin.import.obMrn", "MR number here")) + f("admObAmount", T(c, "site.admin.import.f.amount", "Balance owed in rupees"), "", ' inputmode="decimal"') +
+      f("admObRef", T(c, "site.admin.import.f.legacyBillRef", "Bill number in the old system")) + f("admObAsOf", T(c, "site.admin.import.f.asOf", "Balance as of (date)"), "date") +
+      '<button type="button" class="btn" data-imp="obSave">' + esc(T(c, "site.admin.import.obSave", "Save opening balance")) + '</button></div><div id="admObMsg" aria-live="polite">' + out + "</div></div>";
   }
   WSQ._importHtml = importHtml;
   /* R3-1: a file larger than one run is checked and imported in successive runs of at most rowCap rows (the server's
@@ -355,16 +378,25 @@
     var mapping = function () {
       var out = {};
       body.querySelectorAll("[data-imp-field]").forEach(function (e) { if (e.value !== "") out[e.getAttribute("data-imp-field")] = Number(e.value); });
-      if (s.kind === "patients") out.dateOrder = sel("admImpOrder");
+      if (s.kind === "patients" || s.kind === "openingBalances") out.dateOrder = sel("admImpOrder");
       return out;
     };
     var send = function (extra) { return c.api("/ward/legacy-import", Object.assign({ orgId: c.state.orgId, kind: s.kind, csv: s.csv }, extra || {})); };
     body.onchange = function (ev) {
-      if (ev.target && ev.target.id === "admImpKind") { s.kind = ev.target.value; s.csv = ""; s.map = null; s.mapping = null; s.preview = null; draw(); }
+      if (ev.target && ev.target.id === "admImpKind") { s.kind = ev.target.value; s.csv = ""; s.map = null; s.mapping = null; s.preview = null; s.ob = null; draw(); }
     };
     body.onclick = function (ev) {
       var b = ev.target.closest && ev.target.closest("[data-imp]"); if (!b) return;
       var act = b.getAttribute("data-imp"), msg = document.getElementById("admImpMsg");
+      if (act === "obSave") {
+        if (s.obBusy) return;
+        s.obBusy = true; b.disabled = true;
+        s.obDraft = { admObMrn: sel("admObMrn").trim(), admObAmount: sel("admObAmount").trim(), admObRef: sel("admObRef").trim(), admObAsOf: sel("admObAsOf") };
+        c.api("/ward/opening-balance", { orgId: c.state.orgId, mrn: s.obDraft.admObMrn, amount: s.obDraft.admObAmount, legacyBillRef: s.obDraft.admObRef, asOf: s.obDraft.admObAsOf }).then(function (r) {
+          s.obBusy = false; s.ob = r || false; if (r && r.ok) s.obDraft = null; draw();
+        }, function () { s.obBusy = false; s.ob = false; draw(); });
+        return;
+      }
       if (act === "read") {
         var f = document.getElementById("admImpFile"), file = f && f.files && f.files[0];
         if (!file) { msg.innerHTML = '<div class="msg err">' + c.esc(T(c, "site.admin.import.chooseFile", "Choose the CSV file first.")) + "</div>"; return; }

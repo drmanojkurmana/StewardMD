@@ -17,9 +17,14 @@
  *   price already on the list is matched and never changed here; changing one stays on the Price list screen.
  * - Suppliers are Vendor records through RecordService, one per name at the id purchasing.js rate contracts use.
  *
- * OUT OF SCOPE BY DECISION (owner and accountant, audit O4): open stays, balances, deposits and GST documents. No row type
- * here can create an encounter, a bill line or an invoice. Aadhaar has no column to map to, and a mapped text field that
- * holds a 12-digit Aadhaar-shaped number refuses its row rather than store it.
+ * - Opening balances (owner 2026-10-04, opening-balance.js): the old system's balance on each stay still open at switch-over,
+ *   ONE line per stay (amount, old bill number, as-of date, who entered it). The patient is found by MR number or legacy MR
+ *   number and must already be admitted here; a stay that already carries exactly this balance is matched, a different
+ *   one is refused by name. Never taxed again, and the first line on the stay's bill.
+ *
+ * STILL OUT OF SCOPE (audit O4): creating stays, deposits and GST documents. No row type here can create an encounter or
+ * an invoice. Aadhaar has no column to map to, and a mapped text field that holds a 12-digit Aadhaar-shaped number refuses
+ * its row rather than store it.
  */
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { findCandidates } from "../../wardsynq/wardsynq-mpi.js";
@@ -32,6 +37,7 @@ import { registerPatientRecord } from "./migrate-registration.js";
 import { patientIdForMrn } from "./opd-identity.js";
 import { validateRegistration } from "../_opd_patient.js";
 import { validateTariff } from "../_clinic_billing.js";
+import { validateOpeningBalance, openStayOf, existingFor, sameBalance, writeOpeningBalance } from "./opening-balance.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const refuse = (status, error, message, extra) => ({ ok: false, status, error, message, written: 0, ...(extra || {}) });
@@ -40,7 +46,7 @@ const MAX_CSV_BYTES = 2 * 1024 * 1024;
  * well inside a Worker's budget. A larger file is sent whole with `run` { from, to } (data rows, 0-based, to exclusive):
  * the Import screen splits it into successive runs, each dry run and committed with its own planId. Raise with a queued
  * import if a hospital needs one request. */
-const ROW_CAP = { patients: 100, prices: 500, vendors: 500 };
+const ROW_CAP = { patients: 100, prices: 500, vendors: 500, openingBalances: 100 };
 /* ponytail: the name and date of birth comparison reads one page of patients (as mpi-view.js), because the record store
  * has no name or date of birth index (repository.js: identifiers only); exact checks (legacy MR number, MR number,
  * mobile) are index seeks over everyone. The screen says when the page was full. */
@@ -51,6 +57,7 @@ const FIELDS = {
   patients: { required: ["legacyMrn", "name", "mobile", "gender"], optional: ["birthDate", "ageYears", "address", "district", "state", "pincode"] },
   prices: { required: ["name", "kind", "price"], optional: ["code", "ward", "hsnSac", "gstRate", "nonHealthcare", "intensiveCareClass", "unitHours"] },
   vendors: { required: ["name"], optional: ["gstin", "phone", "email", "address", "drugLicenceNo"] },
+  openingBalances: { required: ["patientRef", "amount", "legacyBillRef", "asOf"], optional: [] },
 };
 const KINDS = ["investigation", "medication", "service", "bed", "nursing", "visit"];
 
@@ -127,6 +134,17 @@ const TARIFF_SAY = { name_required: "The name is empty.", bad_price: "The price 
   bad_gst_rate: "The GST rate is a percentage from 0 to 100.", bad_intensive_care_class: "The intensive care class is ICU, CCU, ICCU, NICU, ICU_SPECIALTY, HDU or empty.",
   bad_unit_hours: "The hours one bed price covers are a whole number from 1 to 24." };
 
+/** PURE. One open stay's balance line to the three facts, or the refusal. patientRef: the MR number or legacy MR number. */
+function openingRow(row, cells, ctx) {
+  const label = cells.patientRef;
+  if (!cells.patientRef) return invalid(row, label, "patientRef", "The MR number is empty. It is how the patient's stay is found.");
+  const asOf = dayOf(cells.asOf, ctx.dateOrder);
+  if (!asOf) return invalid(row, label, "asOf", "The as-of date is not a real date in the chosen date order.");
+  const v = validateOpeningBalance({ amount: cells.amount, legacyBillRef: cells.legacyBillRef, asOf }, ctx.nowMs);
+  if (v.error) return invalid(row, label, v.field, v.detail);
+  return { row, status: "create", label, patientRef: cells.patientRef, value: v.value };
+}
+
 /** PURE. One supplier line to a Vendor record, or the refusal. */
 function vendorRow(row, cells) {
   const label = cells.name;
@@ -171,6 +189,28 @@ async function checkAgainstStore(request, env, ctx, kind, allRows, rows) {
       const hit = have.find((t) => t.kind === r.item.kind && str(t.ward).toUpperCase() === str(r.item.ward).toUpperCase()
         && (r.item.code ? str(t.code).toUpperCase() === r.item.code.toUpperCase() : str(t.name).toUpperCase() === r.item.name.toUpperCase()));
       if (hit) Object.assign(r, { status: "matched", existing: { name: hit.name, code: hit.code || "", price: hit.price } });
+    }
+    return {};
+  }
+  if (kind === "openingBalances") {
+    repeat((r) => r.patientRef.toUpperCase(), "patientRef");
+    /* The patient by MR number, else by the legacy MR number kept at import; then their one open stay here, and what it
+     * already carries. A read that fails throws, so it is never taken as "no stay" or "no balance". */
+    const svc = await openSvc(request, env, ctx, "record:read");
+    for (const r of rows) {
+      if (r.status !== "create") continue;
+      let patientId = patientIdForMrn(r.patientRef), stay = await openStayOf(svc, patientId, "");
+      if (stay.error === "no_open_stay") {
+        const found = await svc.findPatientsByIdentifier({ identifiers: [{ system: "legacy-mrn", value: r.patientRef }] });
+        const p = (found || []).find((x) => (x.identifiers || []).some((i) => i && i.system === "legacy-mrn" && str(i.value).toUpperCase() === r.patientRef.toUpperCase()));
+        if (p) { patientId = str(p.id); stay = await openStayOf(svc, patientId, ""); }
+      }
+      if (stay.error) { Object.assign(r, { status: "invalid", field: "patientRef", reason: stay.detail }); continue; }
+      r.encounter = stay.encounter;
+      const prior = await existingFor(svc, stay.encounter.id);
+      if (prior && sameBalance(prior, r.value)) Object.assign(r, { status: "matched", existing: { amountPaise: prior.amountPaise, legacyBillRef: prior.legacyBillRef, asOf: prior.asOf } });
+      else if (prior) Object.assign(r, { status: "invalid", field: "amount", existing: { amountPaise: prior.amountPaise, legacyBillRef: prior.legacyBillRef, asOf: prior.asOf },
+        reason: `This stay already carries a different opening balance (Rs ${(Number(prior.amountPaise) / 100).toFixed(2)}, old bill ${prior.legacyBillRef}). It is not replaced; correct it on the bill.` });
     }
     return {};
   }
@@ -239,7 +279,7 @@ async function importLegacy(request, env, ctx) {
   const mig = ctx.migration;
   if (!mig || mig.mode === "off" || !mig.tenantId) return refuse(404, "not_a_wardsynq_hospital", "Importing is for a WardSynQ hospital.");
   const kind = str(ctx.kind);
-  if (!FIELDS[kind]) return refuse(422, "unknown_kind", "Choose what the file holds: patients, prices or suppliers.");
+  if (!FIELDS[kind]) return refuse(422, "unknown_kind", "Choose what the file holds: patients, prices, suppliers or opening balances.");
   if (kind === "prices" && !ctx.prices) return refuse(409, "price_list_off", "This hospital's Price list is not switched on, so there is nowhere the bills read prices from. Nothing was imported.");
   const csv = String(ctx.csv == null ? "" : ctx.csv);
   if (!csv.trim()) return refuse(422, "csv_required", "Choose the CSV file.");
@@ -264,7 +304,7 @@ async function importLegacy(request, env, ctx) {
   const rowCtx = { dateOrder, nowMs: Number(ctx.nowMs) || Date.now(), region: ctx.region };
   const allRows = lines.slice(1).map((l, i) => {
     const cells = cellsOf(l, mp, fields);
-    return kind === "patients" ? patientRow(i + 2, cells, rowCtx) : kind === "prices" ? priceRow(i + 2, cells) : vendorRow(i + 2, cells);
+    return kind === "patients" ? patientRow(i + 2, cells, rowCtx) : kind === "prices" ? priceRow(i + 2, cells) : kind === "openingBalances" ? openingRow(i + 2, cells, rowCtx) : vendorRow(i + 2, cells);
   });
   const rows = allRows.slice(run.from, run.to);
 
@@ -287,13 +327,22 @@ async function importLegacy(request, env, ctx) {
     await ctx.audit("legacy_import_stopped", `${kind} ${written} of ${creates.length} plan ${planId} stopped at row ${r.row}`).catch(() => null);
     return { ...refuse(502, "import_incomplete", `The import stopped at row ${r.row} after ${written} of ${creates.length}. ${message} The rest were not saved; importing the same file again adds only what is missing.`), written, ...report };
   };
-  try { if (kind === "vendors") svc = await openSvc(request, env, ctx, "record:write"); }
+  let actorId = "";
+  try {
+    if (kind === "vendors" || kind === "openingBalances") svc = await openSvc(request, env, ctx, "record:write");
+    if (kind === "openingBalances") actorId = svc.actor.id;
+  }
   catch (e) { return failOf(e); }
   for (const r of creates) {
     if (kind === "prices") {
       let out;
       try { out = await ctx.prices.save(r.item); } catch { out = null; }
       if (!out || !out.ok) return stopped(r, "The price was not saved.");
+    } else if (kind === "openingBalances") {
+      let out;
+      try { out = await writeOpeningBalance(svc, actorId, { encounter: r.encounter, value: r.value, source: "import" }); } catch { out = { error: "write_failed" }; }
+      if (out.error) return stopped(r, out.error === "opening_balance_exists" ? "This stay was given a different opening balance meanwhile." : "The opening balance was not saved.");
+      if (out.status === "matched") continue;   // written meanwhile with exactly these facts: nothing new
     } else if (kind === "vendors") {
       try { await svc.put(r.vendor, { expectedVersion: 0 }); }
       catch (e) { return stopped(r, e instanceof VersionConflictError ? "A supplier with this name was added meanwhile." : "The supplier was not saved."); }
@@ -321,4 +370,4 @@ async function importLegacy(request, env, ctx) {
   return { ok: true, step: "done", written, ...report };
 }
 
-export { ROW_CAP, dayOf, patientRow, priceRow, vendorRow, importLegacy };
+export { ROW_CAP, dayOf, patientRow, priceRow, vendorRow, openingRow, importLegacy };

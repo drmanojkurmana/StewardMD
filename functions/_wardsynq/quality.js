@@ -256,7 +256,7 @@ async function qualityReport(request, env, ctx) {
  *     measured; the rest are counted as exclusions.
  */
 import { MEASURES as SEED, computeMeasure, withEvidence } from "../../wardsynq/wardsynq-quality.js";
-import { CATEGORY, stageOf } from "../../wardsynq/wardsynq-incidents.js";
+import { CATEGORY, stageOf, merpSummary } from "../../wardsynq/wardsynq-incidents.js";
 import { hydrateBundle } from "./migrate-resus.js";
 import { provenanceReport } from "../../wardsynq/wardsynq-bundle-binding.js";
 
@@ -392,7 +392,15 @@ function computeQualitySafety(input) {
     }
     return { woundRecords: seen.size, woundCases: [...seen.values()], woundNote: "Hospital-acquired pressure wounds at stage 2 or worse recorded in the period, shown beside the rate and not added to it." };
   }));
-  out.push(rateRow("medication-errors", "Medication error incidents per 1000 bed-days", CATEGORY.MEDICATION_ERROR));
+  /* NABH 4 (owner decision 2026-10-04): a medication error is any preventable event that may cause or lead to
+   * inappropriate medication use or patient harm (NCC MERP), so the rate counts every confirmed medication-error incident,
+   * near misses (NCC MERP A and B) included, and shows the near misses as their own line. Beneath it the same incidents
+   * are counted by NCC MERP category A to I and by group; an incident with no category is "uncategorised". */
+  const merp = merpSummary(confirmed, null);
+  out.push(rateRow("medication-errors", "Medication error incidents per 1000 bed-days", CATEGORY.MEDICATION_ERROR, () => ({
+    nearMisses: merp.nearMisses, uncategorised: merp.uncategorised, byCategory: merp.byCategory, byGroup: merp.byGroup,
+    note2: "Every confirmed medication error is counted, near misses (NCC MERP categories A and B) included; the near misses are shown beside the rate, and the count by NCC MERP category beneath it. An incident filed before the category was required has none and is counted as uncategorised, never placed in a category.", note2Code: "med-error-near-misses",
+  })));
   out.push(rateRow("hai", "Healthcare-associated infections per 1000 bed-days", CATEGORY.HAI));
 
   // ANTIBIOTIC DAYS OF THERAPY.
