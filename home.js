@@ -1059,6 +1059,8 @@
     dosecalc: function () { if (window.SMD_DOSECALC) SMD_DOSECALC.open({ source: "Drugs" }); else toast("Dose calculator loading…"); },
     // Neonatal hub (neo-hub.js), flag smd_neo DEFAULT ON (Beta, owner 2026-10-01).
     neo: function () { if (window.SMD_NEO_HUB) SMD_NEO_HUB.open(); else toast("Neonatal tools loading…"); },
+    // Adult normal values (adult-ref.js): sourced adult lab reference ranges, review pending.
+    adultref: function () { if (window.SMD_ADULT_REF && SMD_ADULT_REF.open) SMD_ADULT_REF.open(); else toast("Adult normal values loading…"); },
     drugmenu: function () {
       openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
         mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
@@ -7241,8 +7243,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     /* What opens a tool id that SMD_SEARCH's tools provider (so the Edge router) can offer: an ACT action,
      * or a neonatal tool "neo:<id>" (neo-hub.js searchItems; not in ACT). Before this a "neo:ref" pick
      * ("Normal values") had no card and MaiK answered instead. null = cannot open, no card. */
-    function maikToolOpener(id) {
+    function maikToolOpener(id, q) {
       id = String(id || "");
+      // Adult normal values opens on the analyte the question named ("normal adult potassium range?").
+      if (id === "adultref") return (window.SMD_ADULT_REF && SMD_ADULT_REF.open) ? function () { SMD_ADULT_REF.open({ q: q || "" }); } : null;
       if (ACT[id]) return ACT[id];
       var N = window.SMD_NEO_HUB, m = /^neo:(.+)$/.exec(id);
       if (m && N && N.open && N.on && N.on() && N.tools && N.tools().some(function (t) { return t.id === m[1]; })) return function () { N.open(m[1]); };
@@ -7275,7 +7279,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (er.kind === "tool") {
         if (!maikToolOpener(er.id)) return false;
         var _th = bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in StewardMD.</div>' +
-          '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="' + maikEscH(er.id) + '">' + maikEscH("Open " + er.title) + '</button>' + maikEdgeAskChip(question) + '</div>');
+          '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="' + maikEscH(er.id) + '" data-maik-toolq="' + maikEscH(String(question || "")) + '">' + maikEscH("Open " + er.title) + '</button>' + maikEdgeAskChip(question) + '</div>');
         try { scroll(); } catch (e) {}
         maikEdgeAutoOpen(_th, er, question, "[data-maik-tool]"); return true;
       }
@@ -9550,7 +9554,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       // Phase 4 — "open in app" tool chips route straight into the matching module via the ACT map.
       var tool = el.getAttribute("data-maik-tool");
-      var toolFn = tool ? maikToolOpener(tool) : null;
+      var toolFn = tool ? maikToolOpener(tool, el.getAttribute("data-maik-toolq")) : null;
       if (toolFn) { close(); setTimeout(function () { try { toolFn(); } catch (e) {} }, 180); return; }
       var fq = el.getAttribute("data-maik-q");
       if (fq) {

@@ -137,6 +137,10 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   card and the `data-maik-tool` chip, and `candidates()` drops any tool `SMD_MAIK_TOOL_OPENABLE` says
   cannot open. A new tool source must go through `maikToolOpener` or it is filtered out.
   `test/run-maik-edge-ui.mjs` asserts every tools-provider id is openable.
+- Adult vs neonatal normal values (2026-10-04): `candidates()` drops `neo:ref` unless the request names a
+  newborn / infant / child / NICU word, and drops `adultref` ([[Adult Normal Values]]) when it does, so
+  "normal adult potassium range?" offers Adult normal values. The card passes the question
+  (`data-maik-toolq`) so the page opens on that analyte. Frozen sets unchanged: test 65.5% / 0.0% wrong.
 - FunctionGemma background warm (`edge16`, 2026-10-04): the first iOS load took 17.2 s (Metal shader
   compile) against the 8 s cold budget, so the first request fell to rules. `SMD_EDGE` now warms it
   (load + one throwaway pick via `runtime.warm`, 60 s budget, never the request budget) 4 s after the
