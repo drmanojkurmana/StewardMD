@@ -5,8 +5,9 @@
  * allergy classes and cross-reactivity (wardsynq/data/allergy-classes.seed.json), dose ceilings
  * and pregnancy and lactation rules (adapters/wardsynq-rules-stewardmd.js), the default critical limits (critical-results.js) and the
  * critical threshold seed (wardsynq/data/critical-thresholds.seed.json), PEWS age bands, MEOWS trigger
- * bands, the NEWS2 escalation policy and responder ladder, the quality measure definitions and the CDC/NHSN
- * healthcare-associated infection criteria (infection-control.js). Each list
+ * bands, the NEWS2 escalation policy and responder ladder, the quality measure definitions, the CDC/NHSN
+ * healthcare-associated infection criteria (infection-control.js) and the dialysis adequacy formulas, URR and single-pool
+ * Kt/V (dialysis.js, owner decision 2026-10-04). Each list
  * is read from the module that USES it, so what is listed is what runs.
  *
  * A SIGN-OFF NAMES THE EXACT CONTENT. Each item's fingerprint is a SHA-256 of its content (function bodies
@@ -32,6 +33,7 @@ import { MEOWS_BANDS } from "../../wardsynq/wardsynq-obstetrics.js";
 import { ESCALATION as NEWS2_ESCALATION, RESPONDER_LADDER } from "../../wardsynq/wardsynq-deterioration.js";
 import { MEASURES } from "../../wardsynq/wardsynq-quality.js";
 import { HAI_EVENTS } from "./infection-control.js";
+import { DIALYSIS_ADEQUACY } from "./dialysis.js";
 import { NFI_TABLE_IDS, NFI_TABLE_LABELS, nfiTableContent } from "../../wardsynq/adapters/nfi-rules.js";
 import { NFI_SOURCE } from "../../wardsynq/adapters/nfi-tables.js";
 
@@ -66,6 +68,10 @@ export function seedLists() {
     // P5 (2026-09-17): the CDC/NHSN criterion names an infection control nurse may confirm a case against, per event.
     { id: "hai-criteria", title: "Healthcare-associated infection criteria (CDC/NHSN)", source: "functions/_wardsynq/infection-control.js HAI_EVENTS", seedVersion: "code",
       items: entries(HAI_EVENTS).map(([k, v]) => ({ id: k, label: (v && v.label) || k, content: v })) },
+    // Owner decision 2026-10-04: the formulas the dialysis session shows, each with the code that computes it. Shown
+    // UNAPPROVED until signed; as for every list but nfi-tables, signing does not change what is computed.
+    { id: "dialysis-adequacy", title: "Dialysis adequacy formulas (URR, single-pool Kt/V)", source: "functions/_wardsynq/dialysis.js ADEQUACY", seedVersion: "code",
+      items: ["urr", "sp-ktv"].map((k) => ({ id: k, label: DIALYSIS_ADEQUACY[k].label, content: DIALYSIS_ADEQUACY[k] })) },
     // Owner decision 2026-10-04: one item per table, so editing any entry turns that whole table off until it is signed again.
     { id: NFI_LIST, title: "NFI renal, pregnancy and lactation tables (signing a table turns its check on at order entry)",
       source: "wardsynq/adapters/nfi-tables.js: " + NFI_SOURCE.title + ", " + NFI_SOURCE.url, seedVersion: NFI_SOURCE.id,
@@ -105,6 +111,24 @@ export async function seedStatus(records) {
     }
     out.push({ id: l.id, title: l.title, source: l.source, seedVersion: l.seedVersion, items,
       signed: items.filter((i) => i.status === "signed").length, unapproved: items.filter((i) => i.status !== "signed").length });
+  }
+  return out;
+}
+
+/** PURE (but for the hashing). Each item of one list against the sign-off records held: "signed" only when a record exists
+ * for the item's CURRENT fingerprint, "unapproved" otherwise, and "signoffs-unreadable" for every item when the records
+ * could not be read (records === null or undefined): a sign-off that cannot be confirmed is not assumed. Used by screens
+ * that say which of their content still awaits sign-off (infection-control.js). */
+export async function itemSignoffState(listId, records) {
+  const list = seedLists().find((l) => l.id === listId);
+  if (!list) return {};
+  if (records === null || records === undefined) return Object.fromEntries(list.items.map((it) => [it.id, "signoffs-unreadable"]));
+  const byId = new Map((records || []).map((r) => [r && r.id, r]));
+  const out = {};
+  for (const it of list.items) {
+    const hash = await fingerprint(it.content);
+    const rec = byId.get(signoffId(list.id, it.id, hash));
+    out[it.id] = rec && rec.contentHash === hash && rec.listId === list.id && rec.itemId === it.id ? "signed" : "unapproved";
   }
   return out;
 }

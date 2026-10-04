@@ -168,7 +168,7 @@ import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, ex
 import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
 import { recordBedArrival, markInitialAssessment, admissionTimes } from "../../_wardsynq/admission-times.js";
 import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
-import { saveLeaflet, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
+import { saveLeaflet, importStarterLeaflets, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
 import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages, listMessagePeople } from "../../_wardsynq/staff-messaging.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
@@ -1781,7 +1781,7 @@ export async function onRequest(context) {
          * retiring a leaflet and giving one to a patient are a treating clinician's acts. The second-person rule on approval
          * and the approved-only rule on giving are decided inside. */
         "education-leaflets": CAPS.EMR_VIEW, "education-attachments": CAPS.EMR_VIEW,
-        "education-leaflet-save": CAPS.EMR_TREAT, "education-leaflet-approve": CAPS.EMR_TREAT, "education-leaflet-retire": CAPS.EMR_TREAT,
+        "education-leaflet-save": CAPS.EMR_TREAT, "education-leaflet-import-starter": CAPS.EMR_TREAT, "education-leaflet-approve": CAPS.EMR_TREAT, "education-leaflet-retire": CAPS.EMR_TREAT,
         "education-attach": CAPS.EMR_TREAT, "education-detach": CAPS.EMR_TREAT,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
@@ -5246,7 +5246,9 @@ export async function onRequest(context) {
       const utcOffsetMinutes = wsqCfg && wsqCfg.utcOffsetMinutes;
       const cfgList = (k) => (wsqCfg && Array.isArray(wsqCfg[k]) ? wsqCfg[k] : []);
       if (sub === "infection-control" && method === "GET") {
-        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes });
+        /* The "awaiting sign-off" notice is read from the seed sign-off records (null when unreadable: shown as unsigned). */
+        const haiSignoff = await SEED.itemSignoffState("hai-criteria", await SEEDSTORE.listSignoffs(env).catch(() => null));
+        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes, haiSignoff });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "hai-case" && method === "POST") {
@@ -5487,6 +5489,10 @@ export async function onRequest(context) {
         }
         if (sub === "education-leaflet-save" && method === "POST") {
           const r = await saveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion, title: body.title, language: body.language, body: body.body, tags: body.tags, idempotencyKey: body.idempotencyKey || null });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
+        if (sub === "education-leaflet-import-starter" && method === "POST") {
+          const r = await importStarterLeaflets(request, env, { ...deps });
           return json(r, r.ok ? 200 : (r.status || 502), request);
         }
         if (sub === "education-leaflet-approve" && method === "POST") {

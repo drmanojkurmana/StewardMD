@@ -111,7 +111,15 @@ test("education leaflets: the library keeps loading, failed and empty apart; a d
   assert.match(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [draft] }, true), /data-pa="eduapprove" data-id="l1" data-v="1"/);
   assert.ok(!/data-pa="edu/.test(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [draft] }, false)), "a reader gets no author controls");
   assert.ok(!/data-pa="edu/.test(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [{ ...draft, state: "retired", retired: { reason: "old" } }] }, true)), "a retired leaflet is only read");
-  for (const route of ["/ward/education-leaflets", "/ward/education-leaflet-save", "/ward/education-leaflet-approve", "/ward/education-leaflet-retire"]) assert.ok(STAFF.includes(route), route);
+  for (const route of ["/ward/education-leaflets", "/ward/education-leaflet-save", "/ward/education-leaflet-approve", "/ward/education-leaflet-retire", "/ward/education-leaflet-import-starter"]) assert.ok(STAFF.includes(route), route);
+  // Owner decision 2026-10-04: a StewardMD starter draft says so plainly; once approved it says where its words started.
+  const starter = { ...draft, starter: { marker: "Draft prepared by StewardMD for your clinicians to review", version: "2026-10-04" } };
+  assert.match(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [starter] }, true), /class="pill warn"[^>]*>Draft prepared by StewardMD for your clinicians to review</);
+  const approvedStarter = api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [{ ...starter, state: "approved", approval: { byName: "Dr B" } }] }, true);
+  assert.match(approvedStarter, /Started from a StewardMD draft/);
+  assert.doesNotMatch(approvedStarter, /Draft prepared by StewardMD/);
+  assert.doesNotMatch(api.libraryHtml(c, { ok: true, me: "cfa:b", leaflets: [draft] }, true), /StewardMD/, "a hospital-written leaflet carries no StewardMD label");
+  assert.ok(STAFF.includes('data-pa="edustarter"'), "a treating clinician is offered the starter import");
 
   const P = loadPortal();
   const given = P.renderRecord({ access: { kind: "patient", sections: ["education"] }, document: {}, education: [{ title: "Wound care", language: "hi", body: "line <b>", attachedAt: "2026-09-17T01:00:00Z" }], failedSections: [] });

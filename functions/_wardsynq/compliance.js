@@ -20,7 +20,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { computeQualitySafety, INPATIENT } from "./quality.js";
-import { HAI_EVENTS, deviceDays, confirmedIn } from "./infection-control.js";
+import { HAI_EVENTS, deviceDays, confirmedIn, populationOf, linesOfPopulation } from "./infection-control.js";
 import { auditSummary, edReturnPairs } from "./quality-registers.js";
 import { readWindowed } from "./read-window.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
@@ -93,7 +93,13 @@ const val = (numerator, denominator, multiplier) => ({ numerator, denominator, v
 
 /* P5 infection-ams-quality (2026-09-17): the cells for indicators 5, 11, 13-18, 25-27, 31 and 32, from the registers in
  * infection-control.js and quality-registers.js. An HAI is counted only when the infection control nurse confirmed it. */
-const deviceCell = (event) => (r, w) => val(confirmedIn(r.HaiCase, event, w).length, deviceDays(r.LineRecord, HAI_EVENTS[event].device, w.fromMs, w.toMs, w.offsetMs, w.nowMs), 1000);
+/* An event surveyed on one location population (VAP: paediatric stays, owner decision 2026-10-04) counts only the device
+ * days of lines on stays of that population (infection-control.js populationOf). */
+const deviceCell = (event) => (r, w) => {
+  const def = HAI_EVENTS[event];
+  const lines = def.population ? linesOfPopulation(r.LineRecord, new Map((r.Encounter || []).map((e) => [str(e.id), populationOf(e)])), def.population) : r.LineRecord;
+  return val(confirmedIn(r.HaiCase, event, w).length, deviceDays(lines, def.device, w.fromMs, w.toMs, w.offsetMs, w.nowMs), 1000);
+};
 const auditCell = (kind) => (r, w) => { const s = auditSummary(r.QualityAudit, w)[kind]; return val(s.compliant, s.audited, 100); };
 const stayIn = (e, w) => e && INPATIENT.has(e.class) && e.status !== "cancelled" && ms(e.periodStart) != null && ms(e.periodStart) <= w.toMs && (ms(e.periodEnd) == null || ms(e.periodEnd) >= w.fromMs);
 
@@ -172,7 +178,7 @@ const NABH_SOURCES = {
   12: { needs: ["Encounter", "IncidentReport", "WoundAssessment"], source: "Confirmed pressure-injury incidents per 1000 occupied bed-days (quality.js).", qs: "pressure-injuries" },
   13: { needs: ["HaiCase", "LineRecord"], source: "CAUTI cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 urinary catheter-days from the line log.", compute: deviceCell("CAUTI"),
     note: "Device-days are counted electronically from lines logged with a device class; NHSN accepts electronic counts after they are validated against manual daily counts." },
-  14: { needs: ["HaiCase", "LineRecord"], source: "VAP cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 ventilator-days from the line log.", compute: deviceCell("VAP"),
+  14: { needs: ["HaiCase", "LineRecord", "Encounter"], source: "VAP cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 ventilator-days from the line log, both on paediatric stays only: NHSN surveys VAP in paediatric locations and adult ventilated patients by VAE, which has no NABH indicator number and is shown on the infection control screen.", compute: deviceCell("VAP"),
     note: "Device-days are counted electronically from lines logged with a device class; NHSN accepts electronic counts after they are validated against manual daily counts." },
   15: { needs: ["HaiCase", "LineRecord"], source: "CLABSI cases confirmed by infection control (CDC/NHSN) with the date of event in the month, per 1000 central line days from the line log.", compute: deviceCell("CLABSI"),
     note: "Device-days are counted electronically from lines logged with a device class; NHSN accepts electronic counts after they are validated against manual daily counts." },

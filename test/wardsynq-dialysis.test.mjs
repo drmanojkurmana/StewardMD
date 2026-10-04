@@ -10,7 +10,7 @@
 import { as, seedHospital, recordsOf, H, TENANT, U, ORG, ORG2 } from "./wardsynq-ops-harness.mjs";
 import { test } from "node:test";
 import assert from "node:assert/strict";
-const { urr, validateDialysisSettings, readDialysisSettings, dialyzerState } = await import("../functions/_wardsynq/dialysis.js");
+const { urr, ktv, sessionKtv, validateDialysisSettings, readDialysisSettings, dialyzerState } = await import("../functions/_wardsynq/dialysis.js");
 
 /* ---------------------------------------------------------------- pure */
 
@@ -26,6 +26,36 @@ test("URR: pre 120 and post 40 is 66.7 with its inputs; a missing post urea or d
   assert.equal(urr({ value: 120, unit: "mg/dL" }, { value: 14, unit: "mmol/L" }).reason, "units_differ");
   assert.equal(urr({ value: "", unit: "mg/dL" }, { value: 40, unit: "mg/dL" }).reason, "pre_urea_missing");
   assert.equal(urr({ value: 0, unit: "mg/dL" }, { value: 0, unit: "mg/dL" }).reason, "pre_urea_not_positive");
+});
+
+test("single-pool Kt/V (Daugirdas second generation, owner decision 2026-10-04): worked examples to two decimals; refusals are not computable with the reason, never 0", () => {
+  const mg = (v) => ({ value: v, unit: "mg/dL" }), mmol = (v) => ({ value: v, unit: "mmol/L" });
+  // 120 and 40 mg/dL, 4 h, 2 L, 70 kg: R = 0.3333, -ln(0.3013) = 1.1995, (4 - 1.1667) x 2 / 70 = 0.0810, total 1.2805.
+  const r = ktv(mg(120), mg(40), 4, 2, 70);
+  assert.equal(r.computable, true);
+  assert.equal(r.value, 1.28);
+  assert.deepEqual(r.inputs, { pre: mg(120), post: mg(40), hours: 4, ufLitres: 2, weightKg: 70 });
+  assert.equal(ktv(mmol(20), mmol(6), 3.5, 3, 60).value, 1.45, "R 0.3, 3.5 h, 3 L, 60 kg: 1.3020 + 0.1475");
+  assert.equal(ktv(mmol(20), mmol(6), 4, 0, 70).value, 1.32, "no fluid removed: the log term only");
+  // R - 0.008t = 0.032 - 0.032 = 0: the logarithm is invalid.
+  const log = ktv(mmol(20), mmol(0.64), 4, 2, 70);
+  assert.equal(log.computable, false); assert.equal(log.reason, "invalid_logarithm"); assert.equal(log.value, undefined);
+  assert.equal(ktv(mg(120), mmol(14), 4, 2, 70).reason, "units_differ", "mixed urea units are refused, as for URR");
+  assert.equal(ktv(mg(120), mg(40), 4, -0.5, 70).reason, "uf_negative");
+  assert.equal(ktv(mg(120), mg(40), 0, 2, 70).reason, "duration_not_positive");
+  assert.equal(ktv(mg(120), mg(40), -1, 2, 70).reason, "duration_not_positive");
+  assert.equal(ktv(mg(120), mg(40), null, 2, 70).reason, "duration_missing");
+  assert.equal(ktv(mg(120), mg(40), 4, null, 70).reason, "uf_missing");
+  assert.equal(ktv(mg(120), mg(40), 4, 2, 0).reason, "post_weight_not_positive");
+  assert.equal(ktv(mg(120), mg(40), 4, 2, "").reason, "post_weight_missing");
+  assert.equal(ktv(mg(0), mg(0), 4, 2, 70).reason, "pre_urea_not_positive");
+  assert.equal(ktv(mg(120), null, 4, 2, 70).reason, "post_urea_missing");
+  // From a session: t from start and end, UF from the achieved mL, W the post weight.
+  const s = { preUrea: mg(120), postUrea: mg(40), startAt: "2026-09-17T04:00:00Z", endAt: "2026-09-17T08:00:00Z", achievedUfMl: 2000, postWeightKg: 70 };
+  assert.equal(sessionKtv(s).value, 1.28);
+  assert.equal(sessionKtv({ ...s, endAt: null }).reason, "duration_missing");
+  assert.equal(sessionKtv({ ...s, endAt: s.startAt }).reason, "duration_not_positive");
+  assert.equal(sessionKtv({ ...s, achievedUfMl: null }).reason, "uf_missing");
 });
 
 test("settings have no default: absent is not configured; stations must match the serology groups when set", () => {
@@ -171,6 +201,8 @@ test("POST /api/queue/ward/dialysis-session: 401, 403 cashier and another hospit
   assert.deepEqual(s1.session.missingPost.sort(), ["achievedUfMl", "endAt", "postBp", "postWeightKg"]);
   assert.equal(s1.session.urr.computable, false);
   assert.equal(s1.session.urr.reason, "post_urea_missing");
+  assert.equal(s1.session.ktv.computable, false, "Kt/V is not computed until the post values are in");
+  assert.equal(s1.session.ktv.reason, "post_urea_missing");
   assert.equal(s1.session.reuseNumber, 0);
 
   const today = new Date(Date.now() + 330 * 60000 - 4 * 3600000).toISOString().slice(0, 10);
@@ -187,11 +219,14 @@ test("POST /api/queue/ward/dialysis-session: 401, 403 cashier and another hospit
   assert.deepEqual(s2.session.missingPost, []);
   assert.equal(s2.session.urr.value, 66.7);
   assert.equal(s2.session.urr.inputs.pre.observationId, "obs-urea-pre");
+  // 120 and 40, 4 h, 1.5 L, 71 kg: 1.1995 + 2.8333 x 1.5 / 71 = 1.2594.
+  assert.equal(s2.session.ktv.value, 1.26, JSON.stringify(s2.session.ktv));
   assert.equal((await H.RECORD.history(TENANT, "DialysisSession", s1.session.sessionId)).length, 2, "append-only versions");
 
   const p = await as(U.NURSE, `/ward/dialysis-patient?orgId=${ORG}&mrn=MRN-500`);
   assert.equal(p.__status, 200, JSON.stringify(p));
   assert.equal(p.sessions[0].urr.value, 66.7);
+  assert.equal(p.sessions[0].ktv.value, 1.26);
   assert.equal(p.labResults.length, 2);
   assert.equal(p.encounters[0].encounterId, "enc-500");
   assert.equal(p.dialyzers[0].dialyzerId, "DZ-9");

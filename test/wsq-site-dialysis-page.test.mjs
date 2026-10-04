@@ -10,7 +10,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { loadSite, leftovers } from "./wsq-site-i18n-harness.mjs";
-const { readDialysisSettings, urr } = await import("../functions/_wardsynq/dialysis.js");
+const { readDialysisSettings, urr, sessionKtv } = await import("../functions/_wardsynq/dialysis.js");
 
 const ctxOf = (env) => ({ esc: env.win.WSQ.esc, t: env.win.WSQ.t, tSafe: env.win.WSQ.tSafe, en: env.win.WSQ.en });
 const load = (lang) => loadSite({ lang, pages: ["dialysis.js"] });
@@ -19,7 +19,8 @@ const UNSET = readDialysisSettings(null);
 const SESSION = (u) => ({ sessionId: "s1", version: 2, patientId: "p1", encounterId: "e1", stationId: "hd-1", stationName: "HD 1", accessType: "av-fistula",
   preWeightKg: 70, postWeightKg: 71, preBp: { systolic: 150, diastolic: 90 }, postBp: null, targetUfMl: 2000, achievedUfMl: 1500, weightReason: "Ward scale",
   startAt: "2026-09-17T04:00:00Z", endAt: null, dialyzerId: "DZ-1", reuseNumber: 1, complications: "Cramps", nurse: "Sister Anu", doctor: "Dr Rao",
-  preUrea: { value: 120, unit: "mg/dL", observationId: "o1" }, postUrea: u, urr: urr({ value: 120, unit: "mg/dL", observationId: "o1" }, u), missingPost: u ? [] : ["postBp", "endAt"] });
+  preUrea: { value: 120, unit: "mg/dL", observationId: "o1" }, postUrea: u, urr: urr({ value: 120, unit: "mg/dL", observationId: "o1" }, u), missingPost: u ? [] : ["postBp", "endAt"],
+  ktv: sessionKtv({ preUrea: { value: 120, unit: "mg/dL" }, postUrea: u, startAt: "2026-09-17T04:00:00Z", endAt: u ? "2026-09-17T08:00:00Z" : null, achievedUfMl: 2000, postWeightKg: 70 }) });
 const UNIT = (settings) => ({ ok: true, date: "2026-09-17", settings, accessTypes: ["av-fistula"],
   stations: settings.stations.map((s) => ({ ...s, bookings: [{ bookingId: "b1", patientId: "p1", name: "Ravi Menon", mrn: "MRN-500", startAt: "2026-09-17T04:00:00Z", minutes: 240 }] })),
   sessions: [], missingPost: [{ ...SESSION(null), name: "Ravi Menon", mrn: "MRN-500" }] });
@@ -36,7 +37,7 @@ test("dialysis screen: every visible word is translated in another language; rec
   const html = D.scheduleHtml(c, UNIT(SET)) + D.missingHtml(c, UNIT(SET)) + D.patientHtml(c, PATIENT(SET, post), null, true) + D.patientHtml(c, PATIENT(SET, null), SESSION(null), true) +
     D.settingsHtml(c, { ok: true, settings: SET }) + D.scheduleHtml(c, UNIT(UNSET)) + D.patientHtml(c, PATIENT(UNSET, null), null, true) + D.settingsHtml(c, { ok: true, settings: UNSET });
   assert.deepEqual(leftovers(html, ["HD 1", "Negative", "HBsAg positive, Negative", "HBsAg positive", "Ravi Menon", "MRN-500", "2026-09-17 04:00", "Ward scale", "Cramps", "Sister Anu · Dr Rao",
-    "DZ-1", "Clotted", "ELISA", "120 mg/dL", "40 mg/dL", "Lab report 77", "70 / 71 kg", "150/90 / -", "2000 / 1500 mL", "OPD · 2026-09-17 03:00", "3094-0 · 120 mg/dL · 2026-09-17 03:30",
+    "DZ-1", "Clotted", "ELISA", "120 mg/dL", "40 mg/dL", "Lab report 77", "70 / 71 kg", "150/90 / -", "2000 / 1500 mL", "OPD · 2026-09-17 03:00", "3094-0 · 120 mg/dL · 2026-09-17 03:30", "1.28", "4", "2", "70",
     "HD 1 · Negative", "hd-1 | HD 1 | Negative", "HBsAg positive; Negative"]), []);
 });
 
@@ -57,7 +58,15 @@ test("dialysis screen: loading and a failed read never read as none; unset setti
   const pending = D.patientHtml(c, PATIENT(SET, null), null, true);
   assert.match(pending, /URR not computable:<\/?[^>]*>? ?no post-dialysis urea|URR not computable: no post-dialysis urea/);
   assert.doesNotMatch(pending, /URR 0/);
-  assert.match(pending, /Kt\/V is not calculated/);
+  assert.match(pending, /Kt\/V not computable: no post-dialysis urea/);
+  assert.doesNotMatch(pending, /Kt\/V 0/);
+  assert.match(pending, /Single-pool Kt\/V = -ln\(R minus 0\.008 x t\)/, "the formula is shown beside the URR formula");
+  assert.match(done, /Single-pool Kt\/V 1\.28<\/b> \(4 hours, 2 L ultrafiltration, post weight 70 kg\)/, "two decimals with its inputs");
+  assert.doesNotMatch(done, /adequate|below target|target (of|≥|>=)|Kt\/V target/i, "no adequacy verdict is invented");
+  const units = D.ktvHtml(c, { computable: false, reason: "units_differ" });
+  assert.match(units, /Kt\/V not computable: the two ureas are in different units/);
+  assert.match(D.ktvHtml(c, { computable: false, reason: "invalid_logarithm" }), /logarithm is undefined/);
+  assert.equal(D.ktvHtml(c, { computable: true, value: 1.3, inputs: { hours: 4, ufLitres: 2, weightKg: 70 } }).indexOf("1.30") > 0, true, "always two decimals");
   assert.match(pending, /data-dy="session"/);
   const readOnly = D.patientHtml(c, PATIENT(SET, null), null, false);
   assert.doesNotMatch(readOnly, /data-dy="(session|book|dialyzer|serology)"/, "reading the chart offers no recording");
