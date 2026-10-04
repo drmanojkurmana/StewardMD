@@ -210,7 +210,9 @@
     if (reqKeys[0] && ranked) {
       var toolHits = toolItems.filter(function (it) {
         var tk = keys(it.title);
-        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1]);
+        // The generic-stripped match needs a generic word in the request too: bare "dose?" (a follow-up
+        // on a live topic) must not equal "Dose calculator" just because "calculator" is generic.
+        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1] && (tk[0] === tk[1] || reqKeys[0] !== reqKeys[1]));
       });
       if (toolHits.length === 1) {
         ranked.forEach(function (r) { if (r.kind === "tool" && r.it.id === toolHits[0].id) r.s += 3; });
@@ -259,6 +261,11 @@
     // Never offer a tool the MaiK card cannot open (home.js SMD_MAIK_TOOL_OPENABLE: ACT or a neonatal tool).
     var openable = G.SMD_MAIK_TOOL_OPENABLE;
     if (typeof openable === "function" && ranked) ranked = ranked.filter(function (x) { return x.kind !== "tool" || openable(x.it.id); });
+    /* Adult or neonatal normal values (2026-10-04): "normal adult potassium range?" was offered the neonatal
+     * page. The neonatal one only when the request names a newborn / child; otherwise the adult one.
+     * "normal values" alone is the neonatal page's title, but adult is the default (owner, 2026-10-04). */
+    var neoAsk = /\b(neonat\w*|newborns?|new-born|nicu|preterm|premature|infants?|bab(?:y|ies)|paediatric|pediatric|child(?:ren)?)\b/i.test(q);
+    if (ranked) ranked = ranked.filter(function (x) { return x.kind !== "tool" || (neoAsk ? x.it.id !== "adultref" : x.it.id !== "neo:ref"); });
     (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title, exact: x.kind === "tool" && x.it.id === exactTool }); });
     // One name, two things ("insulin" is a drug AND a tool): nothing is exact, the model or doctor picks.
     var exacts = out.filter(function (c) { return c.exact && !CODE_KIND[c.kind]; });
