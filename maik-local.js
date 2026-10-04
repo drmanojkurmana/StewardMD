@@ -2033,8 +2033,12 @@
     _loadedPack = null;
     _warmed = null;
     // Whoever held the plugin (Edge too) has nothing loaded after this; Edge reloads on its next call.
-    try { window.SMD_LLAMA_HOLDER = null; } catch (e) {}
-    if (L && L.release) { try { return L.release(); } catch (e) {} }
+    var wasMaik = false;
+    try { wasMaik = window.SMD_LLAMA_HOLDER === "maik"; window.SMD_LLAMA_HOLDER = null; } catch (e) {}
+    // MaiK is idle and has let go: Edge may warm FunctionGemma back up (it checks its own rules).
+    var edgeWarm = function () { try { if (wasMaik && window.SMD_EDGE && SMD_EDGE.warmSoon) SMD_EDGE.warmSoon(); } catch (e) {} };
+    if (L && L.release) { try { return Promise.resolve(L.release()).then(function (r) { edgeWarm(); return r; }); } catch (e) {} }
+    edgeWarm();
   }
 
   /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and
