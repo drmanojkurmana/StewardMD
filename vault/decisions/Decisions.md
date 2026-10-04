@@ -11313,3 +11313,6 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   still reads "antibiotics if criteria met"); reverting the biliary rule for the classic reader trades three correct
   withholds for one sealed needed call. **Owner to confirm** that the classic-reader kill switch may carry these two
   numbers; dropping this commit leaves the `replay` workflow red at this step.
+
+## 2026-10-05 - Owner sign-offs: opt-out dx floors and adult normal values
+- **Owner, 2026-10-05:** signed off the opt-out floor re-baselines for `smd_gate_v2=0` and `smd_nlp_v2=0` (the two 2026-10-03 entries above; default floors untouched), ending the red `replay` check. Signed off the adult normal-values table (#1383) clinically and approved reuse of the cited ABIM (Jan 2026) and RCPA (2024) ranges; the Draft badge is removed.

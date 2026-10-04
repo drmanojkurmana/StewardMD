@@ -1,6 +1,6 @@
 # Adult Normal Values
 
-Adult lab reference ranges with a source on every row. Owner-approved 2026-10-04; **review: pending clinical sign-off** (Draft badge). No flag: a read-only page.
+Adult lab reference ranges with a source on every row. Owner-approved 2026-10-04; **clinical sign-off: owner, 2026-10-05** (Draft badge removed; reuse of ABIM/RCPA ranges approved). No flag: a read-only page.
 
 ## Files
 - `data/ref/adult-ref-values.json`: groups (electrolytes, renal, liver, cbc, coag, glucose, lipids, thyroid, cardiac, abg, urine, iron, inflam). Row `{ analyte, aka?, specimen?, sex?, value, unit, src, quote, note? }`. Values copied as published, never converted; `quote` is the source table row as read on 2026-10-04.
