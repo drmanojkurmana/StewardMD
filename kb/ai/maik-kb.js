@@ -597,8 +597,31 @@
     } catch (e) { return false; }
   }
 
+  /* Knowledge pages an umbrella disease term covers (Edge "pneumonia" card, 2026-10-04): every KB
+   * enrichment entry whose name, without a bracketed note, IS the term or ENDS with it as whole words
+   * ("Hospital Acquired Pneumonia", "Pneumocystis Pneumonia (PCP)"). The head noun must match, so
+   * "fever" would not list "Fever with rash" via a middle word. Same-name duplicates ("Ventilator
+   * Associated Pneumonia" / "Ventilator-associated pneumonia") collapse to one. Order: pages with a
+   * treatment bundle or management brief first, then the shorter (more general) names.
+   * Returns [] for a qualifier-only term ("syndrome", "disease") or one shorter than 4 letters. */
+  function kbPages(term) {
+    var t = medNorm(String(term || "")).replace(/-/g, " ").replace(/\s+/g, " ").trim();
+    if (t.length < 4 || MATCH_QUAL[t] || MATCH_QUAL[t.replace(/s$/, "")] || /^infections?$/.test(t)) return [];
+    var s = stores(), by = (s.KE && s.KE.byId) || {}, seen = {}, out = [];
+    Object.keys(by).forEach(function (id) {
+      var e = by[id], nm = medNorm(String((e && e.name) || id.replace(/_/g, " ")).replace(/\s*\([^)]*\)\s*/g, " ")).replace(/-/g, " ").replace(/\s+/g, " ").trim();
+      if (!(nm === t || (nm.length > t.length && nm.slice(-(t.length + 1)) === " " + t))) return;
+      if (seen[nm]) return; seen[nm] = 1;
+      var rich = (s.KR[id] || s.DX[id]) ? 0 : 1;
+      out.push({ id: id, name: (e && e.name) || cap(id.replace(/_/g, " ")), _r: rich, _w: nm.split(" ").length });
+    });
+    out.sort(function (a, b) { return (a._r - b._r) || (a._w - b._w) || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0); });
+    return out.map(function (x) { return { id: x.id, name: x.name }; });
+  }
+
   var API = {
     compose: compose,
+    kbPages: kbPages,
     clinicalDialogue: clinicalDialogue,
     classifyIntent: classifyIntent,
     isComplex: isComplex,

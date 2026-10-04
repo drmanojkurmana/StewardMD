@@ -4909,6 +4909,7 @@
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  var _maikPin = null;            // { id, name }: the Knowledge page MaiK was opened from (topic chip); cleared by its x or a new thread
   // The KB disease this answer was grounded on, captured in send() before maik-local.js strips
   // pkg.grounding. Drives the "Read more in StewardMD KB" chip under the answer.
   var _maikKbId = null, _maikKbName = "";
@@ -5638,6 +5639,15 @@
       '</div>' +
       '<div class="maik-cmp">' +
         '<div class="maik-offline" id="maikOffline" role="status" hidden>You are offline. MaiK is answering from this phone until you reconnect.</div>' +
+        // Topic from a Knowledge page's "Ask MaiK" (SMD_askMaikTopic): questions stay on that disease
+        // until the chip is cleared. Ask = normal answer; Research = Evidence Review (when available).
+        '<div class="maik-topicbar" id="maikTopicBar" hidden>' +
+          '<span class="maik-topic"><span id="maikTopicName"></span><button type="button" class="maik-topic-x" id="maikTopicX" aria-label="Clear topic">×</button></span>' +
+          '<span class="maik-topicmode" role="group" aria-label="How MaiK answers">' +
+            '<button type="button" aria-pressed="true" data-maik-tmode="ask">Ask</button>' +
+            (researchModeAvail() ? '<button type="button" aria-pressed="false" data-maik-tmode="research">Research</button>' : '') +
+          '</span>' +
+        '</div>' +
         '<div class="maik-cmp-in">' +
           '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
           (researchModeAvail() ? '<button class="maik-research" id="maikResearch" type="button" title="Research mode: review journals" aria-label="Research mode: review journals" aria-pressed="false">' + MK.research + '</button>' : '') +
@@ -6138,6 +6148,26 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 @keyframes maikKbGlow{0%{box-shadow:0 0 0 0 rgba(14,110,99,.45)}70%{box-shadow:0 0 0 9px rgba(14,110,99,0)}100%{box-shadow:0 0 0 0 rgba(14,110,99,0)}}
 @media (prefers-reduced-motion:reduce){.maik-kbmore{animation:none;box-shadow:0 0 0 3px rgba(14,110,99,.16)}}
 body.dark .maik-kbmore,body.v3-dark .maik-kbmore{background:rgba(14,110,99,.16)}
+.maik-kbgroup{flex-direction:column;align-items:stretch}
+.maik-kbgroup .maik-kbmore{display:flex;width:100%;min-height:44px;margin:6px 0 0;animation:none;box-shadow:none}
+.maik-kbgroup-more>summary{min-height:44px;display:flex;align-items:center;padding:0 4px;font:600 13px/1 var(--sans,system-ui);color:var(--mk-teal,#0e6e63);cursor:pointer;list-style:none}
+.maik-kbgroup-more>summary::-webkit-details-marker{display:none}
+.maik-kbgroup-more>summary::after{content:"";width:7px;height:7px;margin-left:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .16s ease-out}
+.maik-kbgroup-more[open]>summary::after{transform:rotate(225deg) translateY(-2px)}
+.maik-kbgroup .maik-fu[data-maik-edgeask]{align-self:flex-start;min-height:44px;margin-top:8px}
+.maik-topicbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 2px 8px}
+.maik-topicbar[hidden]{display:none}
+.maik-topic{display:inline-flex;align-items:center;min-height:32px;max-width:100%;padding:0 4px 0 12px;border-radius:999px;background:var(--mk-tsoft,#e6f4f1);color:var(--mk-teal,#0e6e63);font:600 13px/1.2 var(--sans,system-ui)}
+.maik-topic>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:min(60vw,320px)}
+.maik-topic-x{position:relative;width:28px;height:28px;margin-left:2px;border:none;border-radius:50%;background:transparent;color:inherit;font:600 18px/1 var(--sans,system-ui);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.maik-topic-x::after{content:"";position:absolute;inset:-8px}
+.maik-topicmode{display:inline-flex;padding:2px;border-radius:12px;background:var(--mk-soft);margin-left:auto}
+.maik-topicmode button{min-height:44px;min-width:44px;padding:0 14px;border:none;border-radius:10px;background:transparent;color:var(--mk-mut);font:600 13px/1 var(--sans,system-ui);cursor:pointer;transition:background-color .14s ease-out,color .14s ease-out}
+.maik-topicmode button[aria-pressed="true"]{background:var(--mk-bg);color:var(--mk-teal,#0e6e63);box-shadow:0 1px 3px rgba(15,23,42,.12)}
+body.dark .maik-topic,body.v3-dark .maik-topic{background:rgba(14,110,99,.2);color:#7fd6c8}
+body.dark .maik-topicmode button[aria-pressed="true"],body.v3-dark .maik-topicmode button[aria-pressed="true"]{background:var(--mk-field);color:#7fd6c8}
+#maikSheet .maik-topicmode button:focus-visible,#maikSheet .maik-topic-x:focus-visible,.maik-kbgroup-more>summary:focus-visible{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.maik-topicmode button,.maik-kbgroup-more>summary::after{transition:none}}
 .maik-detail{margin-top:6px;padding-top:10px;border-top:1px dashed var(--mk-bd)}
 .maik-detail[hidden]{display:none}
 /* generic chips still used by web-research / Rx / help / patient / extract replies */
@@ -7223,6 +7253,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="' + maikEscH(er.id) + '">' + maikEscH("Open " + er.title) + '</button>' + maikEdgeAskChip(question) + '</div>');
         try { scroll(); } catch (e) {} return true;
       }
+      if (er.kind === "kb" && er.pages) return maikEdgeGroupRender(er, question);
       if (er.kind === "kb") {
         // Same rule as the answer chip: offer the page only when one exists. Cannot verify -> do not
         // promise, and the normal path answers instead (return false).
@@ -7248,6 +7279,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return true;
       }
       return false;
+    }
+    // An umbrella term ("pneumonia"): one card listing its Knowledge pages, each one tap. The first six
+    // show; the rest fold under a native disclosure. Same page check as the single card.
+    function maikEdgeGroupRender(er, question) {
+      var _pg = er.pages.filter(function (p) { return window.SMD_REASON && SMD_REASON.hasDiseaseRef && SMD_REASON.hasDiseaseRef(p.id); });
+      if (_pg.length < 2) return false;
+      var _pgBtn = function (p) { return '<button type="button" class="maik-kbmore" data-kb-more="' + maikEscH(p.id) + '" aria-label="' + maikEscH("Open " + p.name + " in the Knowledge Library") + '"><span>' + maikEscH(p.name) + '</span><span class="maik-kbmore-go" aria-hidden="true">→</span></button>'; };
+      bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> has ' + _pg.length + ' pages in the StewardMD Knowledge Base. Pick one.</div>' +
+        '<div class="maik-tools maik-kbgroup">' + _pg.slice(0, 6).map(_pgBtn).join("") +
+        (_pg.length > 6 ? '<details class="maik-kbgroup-more"><summary>' + (_pg.length - 6) + ' more</summary>' + _pg.slice(6).map(_pgBtn).join("") + '</details>' : '') +
+        maikEdgeAskChip(question) + '</div>');
+      try { scroll(); } catch (e) {} return true;
     }
     function maikCalcHTML(c, question) {
       var inputs = (c.inputs || []).map(function (x) { return x && x.label ? String(x.label).replace(/\s*\(.*$/, "") : ""; }).filter(Boolean);
@@ -8452,6 +8495,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (ask.length < 6 || rest.length < 300) return null;
       return ask + "\n\nThe text I am asking about:\n" + rest;
     }
+    /* The chip's scope for one question, or null (no chip, or the question names ANOTHER disease the KB
+     * resolves confidently: the clinician moved on). The question gets the disease name when it lacks it. */
+    function maikPinScope(q) {
+      var p = _maikPin; if (!p || !p.name) return null;
+      var n = maikNorm(q), base = maikNorm(p.name.replace(/\s*\([^)]*\)\s*/g, " "));
+      try {
+        if (window.MaiKKB && MaiKKB.resolveTarget) {
+          var t = MaiKKB.resolveTarget(n, { question: n, grounding: [], topicMatch: { matched: false } });
+          if (t && t.confident && t.id !== p.id && base.indexOf(maikNorm(t.name)) < 0) return null;
+        }
+      } catch (e) {}
+      return { question: n.indexOf(base) >= 0 ? q : p.name + ": " + q, retrieval: p.name + " " + q, topic: p.name };
+    }
     function maikSendRest(q, fromDrugAsk) {
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
       if (_researchMode) {
@@ -8459,7 +8515,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // ("Evidence Review is a MaiK Cloud feature") and answered nothing; owner transcript 2026-09-21,
         // "Which is better in Esophageal Varices". Answer it on-device instead, and say why once.
         var _eff = null; try { _eff = window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective ? window.SMD_MAIK_ENGINE.effective() : null; } catch (e) {}
-        if (!_eff || _eff === "cloud") { maikRunResearch(q); return; }
+        if (!_eff || _eff === "cloud") { var _rp = maikPinScope(q); maikRunResearch(_rp ? _rp.question : q); return; }
         try { toast("Evidence Review needs MaiK Cloud. Answering on-device."); } catch (e) {}
       }
       var active = maikActiveCase();
@@ -8484,6 +8540,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
       if (route.kind === "calculator") { bubble("ai", maikCalcHTML(route.calc, q)); try { scroll(); } catch (e) {} return; }
+      // Topic chip live: the question is about that page's disease, and retrieval leads with its name.
+      var _pin = route.kind === "clinical" ? maikPinScope(q) : null;
+      if (_pin) { _maikFollowUp = true; runClinical(_pin.question, _pin.retrieval, MAIK_DETAIL_ASK.test(maikNorm(q)) ? "detailed" : "concise", active, _pin.topic); return; }
       // CONTINUITY on every engine (owner, 2026-09-19: "no one should feel every question is a new
       // question"). maikResolveFollowup() knows the common follow-up shapes; anything else that arrives
       // while a topic is live, is short, and BRINGS NO NEW SUBJECT (see maikNovelTokens: "Just tell me
@@ -8659,7 +8718,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // instead of asking what it is about (audit T22).
       try { if (lastQ && maikV2()) _maikTopic = { topic: maikCanonTopic(lastQ), question: lastQ, depth: "concise", lastDrug: null, ts: Date.now() }; } catch (e) {}
     }
-    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask MaiK…"; qEl.focus(); } }
+    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikPin = null; try { maikPaintTopic(); } catch (e) {} _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask MaiK…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireChip) SMD_MAIK_ENGINE.wireChip(sheet); } catch (e) {}
@@ -9457,6 +9516,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     function setResearchMode(on) {
       _researchMode = !!on;
+      try { maikPaintTopic(); } catch (e) {}
       try { maikResearchLabel(); } catch (e) {}
       if (researchBtn) { researchBtn.classList.toggle("on", _researchMode); researchBtn.setAttribute("aria-pressed", _researchMode ? "true" : "false"); }
       try { if (qEl) qEl.placeholder = _researchMode ? "Review the evidence on…" : ((body && body.querySelector(".maik-b")) ? "Ask a follow-up…" : "Ask MaiK…"); } catch (e) {}
@@ -9786,11 +9846,40 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); maikBuddyCue("typing"); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     if (prefill && typeof prefill === "string") { try { qEl.value = prefill; autosizeQ(); } catch (e) {} }
+    // ---- Topic chip (a Knowledge page's "Ask MaiK"): "About: <disease>", clearable; Ask or Research ----
+    var topicBar = sheet.querySelector("#maikTopicBar");
+    function maikPaintTopic() {
+      if (!topicBar) return;
+      topicBar.hidden = !_maikPin;
+      if (!_maikPin) return;
+      var nm = topicBar.querySelector("#maikTopicName"); if (nm) nm.textContent = "About: " + _maikPin.name;
+      [].forEach.call(topicBar.querySelectorAll("[data-maik-tmode]"), function (b) { b.setAttribute("aria-pressed", String((b.getAttribute("data-maik-tmode") === "research") === _researchMode)); });
+    }
+    if (topicBar) topicBar.addEventListener("click", function (ev) {
+      var x = ev.target.closest ? ev.target.closest("#maikTopicX") : null;
+      if (x) { _maikPin = null; setResearchMode(false); maikPaintTopic(); try { qEl.focus(); } catch (e) {} return; }
+      var m = ev.target.closest ? ev.target.closest("[data-maik-tmode]") : null;
+      if (!m || !_maikPin) return;
+      var res = m.getAttribute("data-maik-tmode") === "research";
+      setResearchMode(res);
+      // Research is seeded with the topic; the clinician can add what to review before sending.
+      if (res && !qEl.value.trim()) { qEl.value = _maikPin.name; try { autosizeQ(); } catch (e) {} }
+      try { qEl.focus(); } catch (e) {}
+    });
+    if (opts && opts.topic && opts.topic.name) {
+      _maikPin = { id: opts.topic.id || null, name: String(opts.topic.name) };
+      // Continuity follows the page too: "and the dose?" is about this disease.
+      _maikTopic = { topic: _maikPin.name, question: _maikPin.name, depth: "concise", lastDrug: null, ts: Date.now() };
+      setResearchMode(false);
+    }
+    maikPaintTopic();
     setTimeout(function () { try { qEl.focus({ preventScroll: true }); } catch (e) {} }, 300);
   }
   // Open the MaiK assistant with an optional pre-filled question (used by Specialty
   // Workspaces' point-of-care "Ask MaiK" hand-off). The clinician reviews and sends.
   window.SMD_askMaik = function (q) { try { openAskAi(q); } catch (e) {} };
+  // Knowledge page "Ask MaiK": open MaiK with that disease as the topic (chip in the composer).
+  window.SMD_askMaikTopic = function (id, name) { try { openAskAi("", { topic: { id: id, name: name } }); } catch (e) {} };
   // Open MaiK and immediately begin dictation (used by the "Dictate" home tile).
   window.SMD_dictateMaik = function () { try { openAskAi("", { dictate: true }); } catch (e) {} };
 

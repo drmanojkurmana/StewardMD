@@ -72,7 +72,7 @@
       if (!content(term).length) term = "";
       if (term) add({ kind: "icd", id: term, title: "ICD-10 codes for " + term, exact: true });
     }
-    var hit = null, ranked = null, exactTool = null, calcItems = [], toolItems = [];
+    var hit = null, ranked = null, exactTool = null, calcItems = [], toolItems = [], calcNamed = false;
     try { hit = M && M.find ? (M.find(bare) || (pw.length ? M.find(pw.join(" ")) : null)) : null; } catch (e) {}
     // An exact title goes first; a near title competes in the ranked list below an own name.
     if (hit && hit.exact) add({ kind: "calculator", id: hit.id, title: hit.title, exact: true });
@@ -108,6 +108,7 @@
       if (phrases.length && M && M.get) calcItems.forEach(function (it) {
         var c = M.get(it.id), names = [it.id.replace(/_/g, " "), String(it.title || "").replace(/\s*\(.*$/, "")].concat((c && c.kw) || []);
         if (!names.some(function (k) { return phrases.indexOf(norm(k)) > -1; })) return;
+        calcNamed = true;   // the request IS a calculator's own name ("disseminated intravascular coagulation")
         var x = null; ranked.forEach(function (r) { if (r.kind === "calculator" && r.it.id === it.id) x = r; });
         if (!x) { x = { kind: "calculator", it: it, s: 0 }; ranked.push(x); }
         x.s += 2;
@@ -158,15 +159,27 @@
       // A clear request for a disease page ("open pneumonia page", "sepsis kholo", "tb chupinchu") is exact:
       // a navigation word, and the words left are the disease's own name or a listed alias, resolved
       // confidently. Anything more ("open pneumonia antibiotics") goes to the model.
-      var rest = pw.filter(function (w) { return !NAV[w]; }).join(" "), kbEx = false;
-      if (rest && KB && KB.resolveTarget && KB_NAV_RE.test(norm(q))) {
+      // Also exact with NO navigation word when the whole request is that name ("pneumonia", "sepsis");
+      // "what is sepsis" keeps its question words, so it stays a MaiK question.
+      var rest = pw.filter(function (w) { return !NAV[w]; }).join(" "), kbEx = false, group = null;
+      // A name that is also a calculator's own name ("dic") is one name, two things: never exact.
+      if (rest && !calcNamed && KB && KB.resolveTarget && (KB_NAV_RE.test(norm(q)) || norm(q) === rest)) {
         var t2 = KB.resolveTarget(rest, { question: rest, grounding: [], topicMatch: { matched: false } });
         var own = !!(t2 && t2.match === "exact" && KB._diseasePhrase && KB._diseasePhrase(rest) === rest);
         var alias = !!(t2 && KB._alias && Object.prototype.hasOwnProperty.call(KB._alias, rest) && norm(KB._alias[rest]) === norm(t2.name));
         if (t2 && t2.confident && (own || alias)) { t = t2; kbEx = true; }
+        // An umbrella term with no page of its own ("pneumonia": CAP, HAP, VAP...): one card listing the
+        // pages whose name ends with it (MaiKKB.kbPages). A presenting symptom ("fever", "headache") is a
+        // MaiK question, never a list of diseases.
+        else if (KB.kbPages && !(G.MAIK_SYMPTOMS && G.MAIK_SYMPTOMS._find && G.MAIK_SYMPTOMS._find(rest, true))) {
+          var pages = KB.kbPages(rest).filter(function (p) { return R && R.hasDiseaseRef && R.hasDiseaseRef(p.id); });
+          // ponytail: over 24 pages ("cancer"-sized) is a category, not a disease; raise if owners want it.
+          if (pages.length >= 2 && pages.length <= 24) group = { kind: "kb", id: "group:" + rest, title: rest.charAt(0).toUpperCase() + rest.slice(1), pages: pages, exact: true };
+        }
       }
+      if (group) add(group);
       // Fails closed: no reference module to confirm the page, no KB option.
-      if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id, exact: kbEx });
+      else if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id, exact: kbEx });
     } catch (e) {}
     // Never offer a tool the MaiK card cannot open (home.js SMD_MAIK_TOOL_OPENABLE: ACT or a neonatal tool).
     var openable = G.SMD_MAIK_TOOL_OPENABLE;
@@ -302,6 +315,7 @@
       try { r.prefill = F && F.forText ? F.forText(c.id, text) : null; } catch (e) { r.prefill = null; }
     }
     if (c.drug) r.drug = c.drug;
+    if (c.pages) r.pages = c.pages;
     return r;
   }
 

@@ -52,6 +52,18 @@ KB page (2026-10-04): a navigation word (open/show/page/screen/kholo/dikhao/teru
 are EXACTLY a disease's KB name or a `MaiKKB._alias` entry, resolved `confident`, is exact ("sepsis kholo",
 "tb chupinchu"); "open pneumonia antibiotics" or a name only matched by prefix ("dengue" -> Dengue Fever) is not.
 The frozen test set has no KB rows and `score.mjs` does not load MaiKKB, so rules coverage is unchanged by it.
+Disease-name navigation (2026-10-04, branch `kb-nav-askmaik`): a BARE disease name (the whole request is the
+name or alias: "sepsis", "malaria") is exact too; "what is sepsis" keeps its question words and is not. An
+umbrella term with no page of its own ("pneumonia", "meningitis", "hepatitis", "cancer") gives ONE exact card
+listing its pages: candidate `{kind:"kb", id:"group:<term>", pages:[{id,name}]}` from `MaiKKB.kbPages(term)`
+(KB enrichment names that ARE or END with the term, bracket notes ignored, same-name duplicates collapsed,
+treatment/brief pages first; refuses MATCH_QUAL words and plurals: "syndrome(s)", "disease"). Never for a
+presenting symptom (`MAIK_SYMPTOMS._find(term, true)`: "fever", "headache"), never over 24 pages, and never
+when a calculator's own name is the request ("disseminated intravascular coagulation" = `isth_dic` kw: one
+name, two things). home.js `maikEdgeRender` shows 6 pages + a native `<details>` "N more", plus "Ask MaiK anyway".
+Scores: `score.mjs --kb-eval` (NEW set `vault/plans/edge-data/kb/kb-nav.jsonl`, 45 rows, KB loaded) rules
+100% accepted, 0.0% wrong, every navigation row answered. Frozen set, rules: 65.5% / 0.0% wrong (unchanged);
+`--live --kb` (frozen set re-derived with the KB loaded) is row-for-row identical to main.
 Extraction gold set (45 rows): 45 exact, 0 unsafe.
 
 **Bugs the scorer found and fixed:** `MEDCALC.find` read "R-ISS" as "iss", "PHQ-9" for "phq-2",

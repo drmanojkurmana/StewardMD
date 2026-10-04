@@ -6,6 +6,8 @@
 //   node scripts/edge/score.mjs --human labels.tsv      the owner + doctors set (text<TAB>label, label = kind:id or none)
 //   node scripts/edge/score.mjs --draft owner-requests.txt   write a TSV to label (label column left EMPTY on purpose)
 //   node scripts/edge/score.mjs --extraction            SMD_CPARAMS against gold/cparams-gold.jsonl
+//   node scripts/edge/score.mjs --kb                    load the Knowledge Base too (KB page rules); with --live, the frozen set re-scored
+//   node scripts/edge/score.mjs --kb-eval               the KB navigation set (vault/plans/edge-data/kb/kb-nav.jsonl), live, KB loaded
 //   --split val|test (default test)  --json out.json  --errors (list every miss, not only wrong opens)
 //
 // Every metric is printed separately and by language, kind, route and danger tag; nothing is merged
@@ -13,7 +15,7 @@
 // safety marks (7.5); the oracle line shows how much the candidates themselves allow.
 import fs from "node:fs";
 import path from "node:path";
-import { loadApp, OUT_DIR, readJsonl } from "./lib.mjs";
+import { loadApp, loadKB, KB_EVAL, OUT_DIR, readJsonl } from "./lib.mjs";
 import { scoreRouter, scoreExtraction, PASS_MARKS } from "./metrics.mjs";
 
 const argv = process.argv.slice(2);
@@ -83,13 +85,14 @@ function main() {
     Object.entries(rep.by_tag).forEach(([k, b]) => console.log(`  tag:${k.padEnd(22)} n ${b.n} exact ${b.exact} unsafe ${b.unsafe}`));
     rep.errors.forEach((e) => console.log(`  [${e.kind}] ${e.id} "${e.text}" ${e.field}: want ${e.want} got ${e.got}`));
   } else {
-    const { E } = loadApp();
+    const { E } = has("kb") || has("kb-eval") ? loadKB() : loadApp();
     let rows;
     if (has("human")) rows = relive(parseHuman(fs.readFileSync(arg("human"), "utf8")), E).map((r) => {
       // "icd" labels accept whatever ICD request the router built from the text.
       if (r.kind === "icd" && r.target === "*") { const c = r.candidates.find((x) => x.kind === "icd"); return { ...r, target: c ? c.id : "*", target_in_candidates: !!c, target_option: c ? r.candidates.indexOf(c) + 1 : 0 }; }
       return r;
     });
+    else if (has("kb-eval")) rows = relive(readJsonl(KB_EVAL), E);
     else {
       rows = readJsonl(path.join(OUT_DIR, arg("split", "test") + ".jsonl"));
       if (has("live")) rows = relive(rows, E);
