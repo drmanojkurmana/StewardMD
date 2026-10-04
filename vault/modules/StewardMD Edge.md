@@ -122,12 +122,34 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   system text into the user turn. Training text must match that (`export.mjs` `llama-json`, A0.3 step 4).
 - The delegated chip handler in `home.js` only fires for attributes listed in its `closest(...)`
   selector. A new chip attribute must be added there or the chip is dead.
+- Tool ids are not all ACT keys: `SMD_SEARCH`'s tools provider also lists the neonatal tools as
+  `neo:<id>` (neo-hub.js `searchItems`). Before `edge16`/`edgeneo1` the Edge tool card checked `ACT[id]`,
+  so a FunctionGemma pick of "Normal values" (`neo:ref`, p 0.86, "normal adult potassium range?") drew no
+  card and MaiK answered. `home.js` `maikToolOpener(id)` (ACT, or `SMD_NEO_HUB.open`) now backs both the
+  card and the `data-maik-tool` chip, and `candidates()` drops any tool `SMD_MAIK_TOOL_OPENABLE` says
+  cannot open. A new tool source must go through `maikToolOpener` or it is filtered out.
+  `test/run-maik-edge-ui.mjs` asserts every tools-provider id is openable.
+- FunctionGemma background warm (`edge16`, 2026-10-04): the first iOS load took 17.2 s (Metal shader
+  compile) against the 8 s cold budget, so the first request fell to rules. `SMD_EDGE` now warms it
+  (load + one throwaway pick via `runtime.warm`, 60 s budget, never the request budget) 4 s after the
+  engine is set (choice set, app start, download done), on `visibilitychange` to visible, and after
+  MaiK's `release()` lets go of the plugin. Skipped unless choice is functiongemma with the file, holder
+  is null or "edge" (never "maik"), the MaiK queue is idle, memory is ok, and FunctionGemma is not
+  already resident. A request arriving mid-warm joins the load but still gives up at 8 s.
+  `SMD_EDGE.warmLog()` shows what happened. iPhone 15 Pro (OTA v177 + injected JS): warm ok 730 ms,
+  4.2 s after the switch; next request 254 ms wall (184 ms engine). The 17 s first load did not recur
+  on that run (shaders already cached by an earlier load in that install).
 - MaiK continuity runs before Edge: a repeated short question with no new subject is a follow-up and
   never reaches Edge. Tests reset the topic with `__MAIK_TEST.setTopic(null)`.
 - `SMD_SEARCH.rank` needs every term to match; the router ranks content words and falls back per word.
 - Layer 0 trusts `MEDCALC.find(...).exact`. Exact now means ONE calculator carries the name; keep it
   that way or rules open the wrong score. Regression check: diff `find()` over every title + kw.
 - `negated()` guard (don't / do not / stop / hold / cancel) runs before rules and the model.
+- `negated()` also knows Hinglish "mat kholo / mat dikhao", "nahi chahiye" and Tenglish "vaddu / teravaddu"
+  (any `-vaddu`). A bare "nahi" is NOT a negation ("fever nahi utar raha"); only "nahi chahiye" and "mat <verb>".
+  Found by test3 (edge-router-3): before this, "fundx ai mat kholo" reached the model.
+- ICD trigger: a request naming the Search ICD tool ("navigate to search icd", "icd search kholo") builds a
+  lookup only from the words after "for" / "of". Without that, rules opened "ICD-10 codes for navigate to".
 - Drug and KB options get their slots before the ranked list, or weak word overlaps fill all five.
 - Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing; the
   adapter takes `killable` (default: Android only).

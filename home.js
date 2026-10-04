@@ -7229,6 +7229,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           }).join("") + '</div>';
       } catch (e) { return ""; }
     }
+    /* What opens a tool id that SMD_SEARCH's tools provider (so the Edge router) can offer: an ACT action,
+     * or a neonatal tool "neo:<id>" (neo-hub.js searchItems; not in ACT). Before this a "neo:ref" pick
+     * ("Normal values") had no card and MaiK answered instead. null = cannot open, no card. */
+    function maikToolOpener(id) {
+      id = String(id || "");
+      if (ACT[id]) return ACT[id];
+      var N = window.SMD_NEO_HUB, m = /^neo:(.+)$/.exec(id);
+      if (m && N && N.open && N.on && N.on() && N.tools && N.tools().some(function (t) { return t.id === m[1]; })) return function () { N.open(m[1]); };
+      return null;
+    }
+    window.SMD_MAIK_TOOL_OPENABLE = function (id) { return !!maikToolOpener(id); };
     function maikEdgeRender(er, question) {
       if (!er) return false;
       if (er.kind === "calculator") {
@@ -7237,7 +7248,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         bubble("ai", maikCalcHTML(def, question)); try { scroll(); } catch (e) {} return true;
       }
       if (er.kind === "tool") {
-        if (!ACT[er.id]) return false;
+        if (!maikToolOpener(er.id)) return false;
         bubble("ai", '<div class="maik-welcome maik-edge"><b>' + maikEscH(er.title) + '</b> is in StewardMD.</div>' +
           '<div class="maik-tools"><span class="maik-tools-lbl">Open in app</span><button class="maik-fu maik-tool" data-maik-tool="' + maikEscH(er.id) + '">' + maikEscH("Open " + er.title) + '</button>' + maikEdgeAskChip(question) + '</div>');
         try { scroll(); } catch (e) {} return true;
@@ -9475,7 +9486,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       // Phase 4 — "open in app" tool chips route straight into the matching module via the ACT map.
       var tool = el.getAttribute("data-maik-tool");
-      if (tool && ACT[tool]) { close(); setTimeout(function () { try { ACT[tool](); } catch (e) {} }, 180); return; }
+      var toolFn = tool ? maikToolOpener(tool) : null;
+      if (toolFn) { close(); setTimeout(function () { try { toolFn(); } catch (e) {} }, 180); return; }
       var fq = el.getAttribute("data-maik-q");
       if (fq) {
         if (_maikBusy) return;

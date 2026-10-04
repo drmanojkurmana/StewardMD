@@ -142,6 +142,27 @@ test("ICD: the screen request is not a code lookup, and a diagnosis keeps its wo
   assert.equal(E.candidates("icd for open fracture of tibia")[0].id, "open fracture tibia", "'open' is part of the diagnosis");
   assert.equal(E.candidates("icd code for type 2 diabetes")[0].id, "type 2 diabetes");
 });
+// Found by the frozen test set edge-router-3 (test3.jsonl): rules opened a card on these.
+test("negation guard: Hinglish and Tenglish negations pass, clinical 'nahi' does not", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["antibiogram mat kholo", "icu nahi chahiye", "insulin mat dikhao", "icu nahin chahiye", "antibiogram vaddu", "icu teravaddu", "antibiogram chupinchavaddu"]) {
+    assert.equal(E.negated(q), true, q);
+    assert.equal(E.rules(q), null, q);
+    assert.equal(await E.route(q), null, q);
+  }
+  assert.equal(m.prompts.length, 0);
+  for (const q of ["fever nahi utar raha paracetamol dose", "urine output nahi hai crcl", "mat 2 lagao"]) assert.equal(E.negated(q), false, q);
+});
+test("ICD: naming the Search ICD tool never looks up the navigation words", () => {
+  store.smd_edge = "1";
+  for (const q of ["navigate to search icd", "search icd section", "jump to search icd", "search icd wala page kholo", "search icd page ki vellu", "icd search kholo"]) {
+    assert.ok(!E.candidates(q).some((c) => c.kind === "icd"), q);
+    assert.ok(!E.rules(q) || E.rules(q).kind !== "icd", q);
+  }
+  assert.equal(E.candidates("search icd for type 2 diabetes")[0].id, "type 2 diabetes", "a real lookup through the tool name still works");
+  assert.equal(E.rules("icd code for type 2 diabetes").kind, "icd");
+});
 
 test("llamaAdapter: per-call grammar limited to the options offered, greedy, parses {option}", async () => {
   const calls = { load: [], gen: [], release: 0 };
@@ -456,4 +477,57 @@ test("llamaAdapter never picks with, or releases, a model MaiK loaded", async ()
     globalThis.SMD_LLAMA_HOLDER = "maik";   // MaiK answered in between
     await eng.complete({ prompt: "y", nOptions: 2 }); assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "reloaded, not reused");
   } finally { delete globalThis.SMD_LLAMA_HOLDER; }
+});
+
+// Background warm-up (FunctionGemma only): the first iOS load is 17 s (Metal shader compile), past the
+// 8 s cold budget, so it is loaded + one throwaway pick at idle, outside any request.
+test("warm: FunctionGemma loads and picks once when idle; the next request finds it warm", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  let gens = 0; globalThis.Capacitor.Plugins.Llama.generate = () => { gens++; return Promise.resolve({ text: '{"option":1}', p: 0.9 }); };
+  try {
+    E.setEngineChoice("functiongemma");
+    assert.equal(await E.warmNow(), true, "warmed");
+    assert.equal(calls.llamaLoad.length, 1); assert.equal(gens, 1, "one throwaway pick");
+    assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge");
+    assert.equal(await E.warmNow(), false, "at most once: already resident");
+    assert.equal(calls.llamaLoad.length, 1);
+    const r = await E.route("show me the resistance patterns antibiogram");
+    assert.ok(r, "routed"); assert.equal(calls.llamaLoad.length, 1, "no reload on the first real request");
+  } finally { cleanNative(); }
+});
+
+test("warm: skipped while MaiK holds the plugin or is generating, runs once MaiK lets go", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  let running = false; globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running, waiting: 0 }) };
+  try {
+    E.setEngineChoice("functiongemma");
+    globalThis.SMD_LLAMA_HOLDER = "maik";
+    assert.equal(await E.warmNow(), false, "MaiK holds the plugin");
+    assert.equal(globalThis.SMD_LLAMA_HOLDER, "maik", "MaiK's pack is never evicted");
+    globalThis.SMD_LLAMA_HOLDER = null; running = true;
+    assert.equal(await E.warmNow(), false, "MaiK queue running");
+    assert.equal(calls.llamaLoad.length, 0, "never loaded");
+    running = false;
+    assert.equal(await E.warmNow(), true, "warms once MaiK is idle and the holder is null");
+    assert.equal(calls.llamaLoad.length, 1);
+  } finally { delete globalThis.SMD_MAIK_LOCAL; cleanNative(); }
+});
+
+test("warm: never for needle or rules", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  let needleLoads = 0; globalThis.Capacitor.Plugins.Needle.load = () => { needleLoads++; return Promise.resolve(); };
+  try {
+    E.setEngineChoice("needle"); assert.equal(await E.warmNow(), false); assert.equal(needleLoads, 0);
+    E.setEngineChoice("rules"); assert.equal(await E.warmNow(), false);
+    assert.equal(calls.llamaLoad.length, 0);
+  } finally { cleanNative(); }
+});
+
+test("tool candidates the MaiK card cannot open are never offered", () => {
+  delete store.smd_edge;
+  try {
+    assert.ok(E.candidates("open antibiogram resistance").some((c) => c.kind === "tool" && c.id === "antibiogram"));
+    globalThis.SMD_MAIK_TOOL_OPENABLE = (id) => id !== "antibiogram";
+    assert.ok(!E.candidates("open antibiogram resistance").some((c) => c.kind === "tool" && c.id === "antibiogram"));
+  } finally { delete globalThis.SMD_MAIK_TOOL_OPENABLE; }
 });

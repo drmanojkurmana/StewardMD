@@ -146,6 +146,35 @@ try {
   await sleep(1200);
   ok(await countEdge() > e0 && /data-maik-tool="antibiogram"/.test(String(await lastAi())), "with a topic live, an exact tool name still gets the Edge card");
 
+  // ── every option the router can offer draws a card that opens (iPhone 2026-10-04: FunctionGemma picked
+  //    "Normal values" (neo:ref) for "normal adult potassium range?", no card, MaiK answered) ──
+  for (let i = 0; i < 30 && !(await ev(`return !!(window.SMD_NEO_HUB && SMD_NEO_HUB.tools().length);`)); i++) await sleep(200);
+  await openMaik();
+  const tp = await ev(`var p=SMD_SEARCH.providers().filter(function(x){return x.cat==="tools";})[0]; var it=p.items(); return JSON.stringify({ n: it.length, neo: it.filter(function(t){return /^neo:/.test(t.id);}).length, bad: it.filter(function(t){return !SMD_MAIK_TOOL_OPENABLE(t.id);}).map(function(t){return t.id;}) });`);
+  const tpj = JSON.parse(tp || "{}");
+  ok(tpj.n > 10 && tpj.neo > 0 && tpj.bad && tpj.bad.length === 0, "every tool the router can offer (incl. " + tpj.neo + " neonatal tools) has a card that opens (" + tp + ")");
+  for (const [kind, q, pick, attr] of [
+    ["tool (neonatal)", "normal adult potassium range?", "open: (Normal values|Reference values)", /data-maik-tool="neo:ref"/],
+    ["drug", "is augmentin ok in pregnancy", "drug:", /data-maik-drug|maik-drug/],
+    ["kb", "open pneumonia antibiotics", "reference:", /data-kb-more=/],
+    ["calculator", "how sick is this pneumonia patient score", "calculator:", /data-maik-calc=/]
+  ]) {
+    await ev(`window.__pick = ${JSON.stringify(pick)}; window.__engineCalls = 0; return 1;`);
+    const a1 = await countAi();
+    await send(q, 1800);
+    const html = String(await lastAi()), lp = String(await ev(`return window.__lastPrompt || "";`));
+    const offered = new RegExp("^\\d+\\. " + pick, "m").test(lp);
+    ok(!offered || ((await countAi()) > a1 && attr.test(html)), kind + ": the picked option draws its card (" + (offered ? "offered" : "not offered for this text") + ")");
+    if (kind.startsWith("tool")) {
+      ok(offered, "the potassium request offers Normal values to the engine (" + lp.replace(/\n/g, " | ") + ")");
+      await ev(`window.__neoOpened = null; window.__neoReal = SMD_NEO_HUB.open; SMD_NEO_HUB.open = function (id) { window.__neoOpened = id; };
+        var b = [].slice.call(document.querySelectorAll('#maikBody [data-maik-tool="neo:ref"]')).pop(); if (b) b.click(); return 1;`);
+      await sleep(600);
+      ok(await ev(`SMD_NEO_HUB.open = window.__neoReal; return window.__neoOpened;`) === "ref", "tapping it closes MaiK and opens Neonatal Normal values");
+      await openMaik();
+    }
+  }
+
   await ev(`localStorage.removeItem("smd_edge"); return 1;`);
 
   // ── Settings: the Edge engine row (owner, 2026-10-04) ──
