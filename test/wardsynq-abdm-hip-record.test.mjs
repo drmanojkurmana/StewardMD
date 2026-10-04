@@ -561,8 +561,20 @@ test("RX: the prescription narrative lists every order, so it is dropped when an
   const whole = filterRecordByDateRange(rec, MS("2026-09-01T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record;
   assert.deepEqual([whole.documents.length, whole.medications.length], [1, 2]);
   const part = filterRecordByDateRange(rec, MS("2026-09-05T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record;
-  assert.deepEqual(part.medications.map((m) => m.id), ["mo-b"]);
-  assert.deepEqual(part.documents, [], "the narrative also names mo-a, which is outside, so it is not served");
+  // owner decision 2026-10-04: mo-a was ordered on 2 Sep and is still active, so it was active inside the window
+  assert.deepEqual(part.medications.map((m) => m.id), ["mo-a", "mo-b"]);
+  assert.deepEqual(part.documents, [], "the narrative also names mo-a's order date, which is outside, so it is not served");
+});
+
+test("RX: a WardSynQ order stopped before the window opens is not shared; one stopped inside it is", async () => {
+  const r = stayRecords();
+  r.orders = [{ ...r.orders[0], id: "mo-a", status: "stopped", authoredAt: "2026-09-02T00:00:00.000Z", stoppedAt: "2026-09-04T00:00:00.000Z" },
+              { ...r.orders[0], id: "mo-c", status: "stopped", drug: "Heparin", authoredAt: "2026-09-02T00:00:00.000Z", stoppedAt: "2026-09-06T00:00:00.000Z" },
+              { ...r.orders[0], id: "mo-b", drug: "Amoxicillin", authoredAt: "2026-09-08T00:00:00.000Z" }];
+  const rec = await proj(r, `IPD:${ENC}:RX`);
+  assert.deepEqual(rec.medications.find((m) => m.id === "mo-a").effectivePeriod, { start: "2026-09-02T00:00:00.000Z", end: "2026-09-04T00:00:00.000Z" });
+  const part = filterRecordByDateRange(rec, MS("2026-09-05T00:00:00Z"), MS("2026-09-30T00:00:00Z")).record;
+  assert.deepEqual(part.medications.map((m) => m.id), ["mo-c", "mo-b"]);
   assert.ok(!JSON.stringify(part.medications).includes("Paracetamol"));
 });
 

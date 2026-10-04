@@ -47,7 +47,8 @@ function ccKey(c) {
 // OPS-02/F2 round 2: EVERY dated resource in the bundle, checked and filtered individually - not
 // just the first one found (a care-context whose FIRST item was in range could still carry
 // out-of-range items after it). One entry per array below: [field name, that resource's own date(s)].
-// An item is kept only when it has at least one date and EVERY date it states is inside the window.
+// An item is kept only when it has at least one date and EVERY date it states is inside the window (a
+// medication instead by period overlap, below).
 //
 // `documents` and `medications` are dated too. Their dates are the CLINICAL ones the record builders set
 // (abdm-hip.js for WardSynQ, hip-sources/*.js, the connector normalizers), never the export instant:
@@ -55,14 +56,33 @@ function ccKey(c) {
 //               dates a MULTI-ITEM narrative states in its text (a prescription or immunisation listing),
 //               because the narrative cannot be cut down to the in-range items: if any of them is outside
 //               the window the whole narrative is dropped rather than served with the out-of-range lines.
-//   medication  authoredOn (the order/prescription date), else effectivePeriod.start/end (the SCCM date).
-// An undated document or medication is dropped (fail closed), the same rule as every other kind.
+//   medication  NOT a point in time but an ACTIVE PERIOD (owner decision 2026-10-04): a long-term medicine
+//               started before the window and still taken inside it belongs to the window. It is kept when
+//               that period overlaps [from, to], bounds inclusive: start <= to and (no end, or end >= from).
+//               start = authoredOn (the order/prescription date), else effectivePeriod.start; end =
+//               effectivePeriod.end. No parseable start: dropped (fail closed). An end that does not parse:
+//               dropped. A medication whose status says it has ENDED (stopped, completed, ...) but that
+//               carries no end date is not treated as still running: only its start is known, so it is kept
+//               only when that start is inside the window (the pre-2026-10-04 rule).
+// An undated document is dropped (fail closed), the same rule as every other kind.
+const MED_ENDED_STATUSES = Object.freeze(["stopped", "completed", "cancelled", "entered-in-error", "not-taken"]);
+function medicationOverlaps(m, from, to) {
+  const ep = (m && m.effectivePeriod) || null;
+  const startIso = (m && m.authoredOn) || (ep && ep.start) || null;
+  const start = startIso == null ? NaN : Date.parse(startIso);
+  if (!(start <= to)) return false;                       // no / unparseable start, or starts after the window
+  const endIso = ep && ep.end;
+  if (endIso == null || endIso === "") {
+    return MED_ENDED_STATUSES.includes(m && m.status) ? start >= from : true;
+  }
+  return Date.parse(endIso) >= from;                      // unparseable end: NaN -> false
+}
 const DATED_ARRAYS = Object.freeze([
   ["encounters", (e) => [(e && e.period && (e.period.end || e.period.start)) || null]],
   ["diagnosticReports", (d) => [(d && d.effectiveDateTime) || null]],
   ["observations", (o) => [(o && o.effectiveDateTime) || null]],
   ["immunizations", (i) => [(i && i.occurrenceDateTime) || null]],
-  ["medications", (m) => [(m && (m.authoredOn || (m.effectivePeriod && (m.effectivePeriod.start || m.effectivePeriod.end)))) || null]],
+  ["medications", null],                                  // period overlap, see medicationOverlaps
   ["documents", (d) => [(d && d.date) || null, ...((d && Array.isArray(d.coversDates)) ? d.coversDates : [])]],
 ]);
 
@@ -82,8 +102,8 @@ export function filterRecordByDateRange(record, from, to) {
     if (!arr) continue;
     out[key] = arr.filter((item) => {
       hadDated = true;
-      const ds = datesOf(item);
-      const ok = ds.every((d) => { const ms = d == null ? NaN : Date.parse(d); return ms >= from && ms <= to; });   // undated / unparseable: NaN -> false
+      const ok = datesOf ? datesOf(item).every((d) => { const ms = d == null ? NaN : Date.parse(d); return ms >= from && ms <= to; })   // undated / unparseable: NaN -> false
+        : medicationOverlaps(item, from, to);
       if (ok) anyKept = true;
       return ok;
     });

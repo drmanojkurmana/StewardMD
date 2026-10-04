@@ -188,6 +188,10 @@ function projectOrder(o) {
   // The order's own date: authoredAt, else the time it took effect, else when it was entered (the convention
   // pathways.js already uses for a MedicationOrder). Never the export instant.
   m.authoredOn = orderDate(o);
+  // A stopped order's active period ends when it was stopped, so hip.js's period-overlap filter does not
+  // share it into a consent window that starts after the stop.
+  const end = o.status === "stopped" ? iso(o.stoppedAt) : null;
+  if (end) m.effectivePeriod = { start: m.authoredOn, end };
   return m;
 }
 function projectObservation(o) {

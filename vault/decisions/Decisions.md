@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · ABDM shares a medicine that was active inside the consent window (owner)
+
+**Decision.** `filterRecordByDateRange` (functions/_connect/abdm/hip.js) keeps a medication when its active period
+overlaps the consent's [from, to], bounds inclusive: start (authoredOn, else effectivePeriod.start) <= to and (no end,
+or effectivePeriod.end >= from). No parseable start, or an end that does not parse: dropped (fail closed). A
+medication whose status says it ended (stopped, completed, cancelled, entered-in-error, not-taken) but carries no end
+date is not treated as running: it is kept only when its start is in the window. A stopped WardSynQ order now carries
+its stop time as the period end. **Why.** Dating a medicine by its start dropped long-term medicines started before
+the window but still taken. **Trade-off.** An active medicine with no recorded end is shared into any later window.
+Replaces the start-date rule of PR #1356. **Status:** PR "WardSynQ: owner decisions of 2026-10-04".
+
 ## 2026-10-04 · WardSynQ: a recovery (PACU) bay is held on the bed board, but is not an inpatient bed
 
 **Decision.** `bedBoard()` lists an open PACU stay in its ward's `recovery[]`, never in `occupied[]`, and leaves its
