@@ -206,16 +206,16 @@
    * tax credit from these. prefix names the inputs; pricePlaceholder says what a blank price means on this form. */
   function termsFieldsHtml(c, prefix, priceLabel) {
     var esc = c.esc;
-    return '<label class="f"><span>' + esc(priceLabel) + '</span><input id="' + prefix + 'Price" inputmode="decimal" autocomplete="off"></label>' +
-      '<label class="f"><span>' + esc(T(c, "site.stores.gst.rate", "GST rate on the supplier's invoice (%)")) + '</span><input id="' + prefix + 'Gst" inputmode="decimal" autocomplete="off"></label>' +
-      '<label class="f"><span>' + esc(T(c, "site.stores.gst.split", "GST charged as")) + '</span><select id="' + prefix + 'Inter"><option value="false">' + esc(T(c, "site.stores.gst.intra", "CGST + SGST (same state)")) + '</option><option value="true">' + esc(T(c, "site.stores.gst.inter", "IGST (another state)")) + "</option></select></label>" +
-      '<label class="f"><span>' + esc(T(c, "site.stores.gst.invoiceNo", "Supplier's invoice number")) + '</span><input id="' + prefix + 'Inv" autocomplete="off"></label>';
+    return '<label class="f"><span>' + esc(priceLabel) + '</span><input id="' + prefix + '-price" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.gst.rate", "GST rate on the supplier's invoice (%)")) + '</span><input id="' + prefix + '-gst" inputmode="decimal" autocomplete="off"></label>' +
+      '<label class="f"><span>' + esc(T(c, "site.stores.gst.split", "GST charged as")) + '</span><select id="' + prefix + '-split"><option value="false">' + esc(T(c, "site.stores.gst.intra", "CGST + SGST (same state)")) + '</option><option value="true">' + esc(T(c, "site.stores.gst.inter", "IGST (another state)")) + "</option></select></label>" +
+      '<label class="f"><span>' + esc(T(c, "site.stores.gst.invoiceNo", "Supplier's invoice number")) + '</span><input id="' + prefix + '-inv" autocomplete="off"></label>';
   }
   /* The purchase terms to send, or undefined when no GST rate was typed (a receipt still lands without them). Rupees on
    * screen, whole paise to the server; anything that is not a plain amount is sent as typed and refused there. */
   function termsFrom(prefix) {
-    var rate = val(prefix + "Gst"); if (!rate) return undefined;
-    var rs = val(prefix + "Price"), out = { gstRate: rate, interState: val(prefix + "Inter") === "true", invoiceNo: val(prefix + "Inv") };
+    var rate = val(prefix + "-gst"); if (!rate) return undefined;
+    var rs = val(prefix + "-price"), out = { gstRate: rate, interState: val(prefix + "-split") === "true", invoiceNo: val(prefix + "-inv") };
     if (rs) out.unitPricePaise = /^\d+(\.\d{1,2})?$/.test(rs) ? Math.round(Number(rs) * 100) : rs;
     return out;
   }
