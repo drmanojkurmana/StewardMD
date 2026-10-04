@@ -224,7 +224,7 @@ test("VERIFICATION FAILURES: a refused upload, a corrupted read-back, a missing 
   assert.equal(other.outcome, "failed");
 });
 
-test("NOT RUNNING IS SAID PLAINLY: no destination, platform storage before S1, no encryption key", async () => {
+test("NOT RUNNING IS SAID PLAINLY: no destination, platform storage with no bucket bound, no encryption key", async () => {
   let out = await run(await hospital(null), null, "2026-09-10T00:05:00.000Z");
   assert.equal(out.notConfigured, true);
   assert.equal(out.setup, "hospital");
@@ -233,7 +233,7 @@ test("NOT RUNNING IS SAID PLAINLY: no destination, platform storage before S1, n
   out = await run(await hospital("platform"), null, "2026-09-10T00:05:00.000Z");
   assert.equal(out.error, "platform_not_configured");
   assert.equal(out.setup, "platform");
-  assert.match(out.message, /owner decision S1/);
+  assert.match(out.message, /WARDSYNQ_BACKUPS/);
 
   out = await S.backupHospital({ repository: await hospital("s3"), tenantId: T, env: { FOLLOWCARE_PHI_KEY: ENV.FOLLOWCARE_PHI_KEY }, nowIso: "2026-09-10T00:05:00.000Z", fetchImpl: bucket().fetchImpl });
   assert.equal(out.ok, true, "control: the same hospital with a key runs");

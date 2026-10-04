@@ -24,6 +24,26 @@ refused). It is the first line on the stay's bill, not taxed again, outside the 
 and payments settle it like any charge. The patient must already be admitted here; a credit balance is not accepted
 (record it as a deposit). **Status:** same PR.
 
+## 2026-10-04 · WardSynQ NABH KPI 4: medication errors follow the NCC MERP definition, with A to I severity beneath (owner)
+
+**Decision.** A medication error is any preventable event that may cause or lead to inappropriate medication use or
+patient harm while the medication is in the control of the health care professional, patient or consumer. KPI 4 counts
+every confirmed medication-error incident, near misses (NCC MERP categories A and B) included, and shows the near
+misses as their own line. Beneath the rate the same errors are counted per NCC MERP category A to I and per group: no
+error (A), error no harm (B to D), error harm (E to H), death (I). Categories: A capacity to cause error; B error, did
+not reach the patient; C reached the patient, no harm; D reached the patient, required monitoring and/or intervention to
+preclude harm; E temporary harm, required intervention; F temporary harm, initial or prolonged hospitalization; G
+permanent harm; H intervention required to sustain life; I contributed to death. The rate keeps the denominator the
+quality screen already had for this measure, inpatient bed-days (per 1000); NABH's "total number of opportunities" is not
+recorded anywhere in WardSynQ, so the percentage form is not computed and the cell says so. Capture requires the category
+(`merpCategory`, `NO_MERP_CATEGORY`: 422 at filing, 409 at confirmation, nothing written). Records with no category
+(all earlier ones) are "uncategorised": counted in the total, in no category or group, never inferred from `severity`.
+**KPI 9 is unchanged**: the published ICU standardized mortality ratio, still not computable; which illness-severity
+model it should use (APACHE II, SOFA) is a separate open owner question. **Why.** The owner chose the NCC MERP
+definition and categories (were owner items O1 and O2). **Trade-off.** Category A is "no error" in the index but is
+counted as the owner asked; the near-miss line lets a reader take it out. Clinical sign-off of the category wording is
+still the owner's. **Status:** PR "WardSynQ NABH KPI 4 and 9: NCC MERP medication-error definition and A to I severity".
+
 ## 2026-10-04 · WardSynQ renal check: which eGFR LOINC codes it reads (owner)
 
 **Decision.** `functions/_wardsynq/migrate-emar.js` accepts every code below for the order-entry renal check (importing
@@ -11195,3 +11215,29 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 
 ## 2026-10-04 - "KB only" renamed "MaiK Edge"
 - **Owner, 2026-10-04:** "KB only" renamed "MaiK Edge" in MaiK's model selection and everywhere it shows (picker, chip, footer, Settings "Who answers", KB-miss notice). Same `rag` pref, no migration. It is the KB answer plus StewardMD Edge's on-device router: free, offline, no cloud AI, no long answers. With `smd_edge` "0" the label falls back to "KB only".
+
+## 2026-10-04 - wardsynq.com enforces its Content-Security-Policy
+- **Owner, 2026-10-04:** enforce the CSP that OPS-27 shipped as Report-Only, after checking what it would block. The policy had no `report-uri`/`report-to`, so nothing collected reports; the check was a real Chrome run over every page the site serves, policy enforced, violations posted to a local collector. Found and allowed (legitimate sources only): `https://apis.google.com` (script, Firebase Google sign-in), `https://stewardmd-498ec.firebaseapp.com` (frame, Firebase sign-in helper), `https://stewardmd.in` (connect: `opd.html` and `clinic-billing.html` call the record service directly from wardsynq.com, which stewardmd.in allows by CORS), and the one DICOM parser file on jsDelivr (exact URL, also SRI-pinned; without it the viewer says "could not be loaded"). Added `object-src 'none'`. `'unsafe-eval'` is not allowed and nothing needs it; `frame-ancestors 'none'` stays. `'unsafe-inline'` stays in `script-src` (inline blocks in `index.html`, `opd.html`, `clinic-billing.html` and `onchange=` handlers in `ward.js`); removing it needs nonces or hashes and is the next step. Not verifiable without a real Google account: the Google popup's later hops after a completed sign-in. Test: `test/wardsynq-site-headers.test.mjs`.
+
+## 2026-10-04 - WardSynQ backups go to the R2 bucket `wardsynq-backups` through a binding
+- **Owner, 2026-10-04:** back WardSynQ up to a Cloudflare R2 bucket. This answers owner decision S1 for backups. The `platform` backup destination now uses the R2 binding `WARDSYNQ_BACKUPS` (bucket `wardsynq-backups`, `wrangler.toml` top level and `env.production`); the `DOC_S3_*` document store is only a fallback when the binding is absent (it is set in production today, so without the binding "platform" would have written backups into the documents bucket). No new secret: the backup key is HKDF-derived per hospital from `DOC_ENC_KEY`, else `FOLLOWCARE_PHI_KEY` (set in production); losing or rotating that secret makes every backup unreadable. No R2 lifecycle rule (retention is the hospital's, pruned by `backup-schedule.js`). Each hospital still selects "WardSynQ platform storage" once under Admin Center, Integrations, Backup destination. Tests: `test/wardsynq-backup-r2.test.mjs`. [[WardSynQ-Progress]]
+
+## 2026-10-04 - WardSynQ renal and pregnancy/lactation tables come from the NFI, off until the owner signs them off
+- **Owner, 2026-10-04:** the renal-adjustment and pregnancy/lactation tables are built from the National Formulary of India
+  (Indian Pharmacopoeia Commission), and the owner signs them off before they take effect.
+- Source used: the latest NFI text the IPC publishes free, the **6th Edition 2019-20 Draft Version**
+  (ipc.gov.in/images/Draft_Version_NFI_6th_edition.pdf, sha256 269be2d4...). NFI 2021 (6th, final) and NFI 2026 (7th) are
+  sold in print and through the subscription NFI Online portal, so they are not used. The renal table is identical row for
+  row to the final NFI 2011 Appendix 7d. Renal = Appendix 10d; lactation = Appendix 10b; pregnancy = each monograph's
+  Contraindications/Precautions (Appendix 10c has no per-drug table).
+- Data in `wardsynq/adapters/nfi-tables.js` (generated; every entry has quote, PDF page and rule), turned into rules by
+  `wardsynq/adapters/nfi-rules.js`, applied at order entry by `functions/_wardsynq/order-entry-pack.js`.
+- Gating reuses the D10 fingerprinted sign-off: list `nfi-tables`, one item per table. Only a table with a record for its
+  CURRENT fingerprint is applied; any edit turns it off until re-signed; unreadable sign-off records apply nothing. Until
+  signed, the order check says "NFI table loaded, awaiting clinical sign-off". This is the one seed list whose sign-off
+  changes behaviour.
+- Encoding policy (in `NFI_SOURCE.encoding`, signed with the tables): renal reads the NFI's own eGFR columns (>50, 10-50,
+  <10) and raises nothing at eGFR 90 or more; lactation levels come from the source's own words (contraindicated / avoid /
+  caution words / "safe" raises nothing / vague = monitor); pregnancy under Contraindications is contraindicated, under
+  Precautions only a monitor-level caution. Every finding stays overridable with a reason. Dashes in the source are written
+  as hyphens (the no-dash rule). Open for the owner: see PR "Decisions to confirm".

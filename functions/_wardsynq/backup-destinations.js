@@ -2,14 +2,14 @@
  *
  * A BACKUP DESTINATION IS A CONNECTOR (connectors.js), kind "backup", one per hospital. The hospital picks
  * the adapter on Admin > Integrations, and its credentials are sealed exactly like every other connector's.
- * Nothing here is a Cloudflare binding: both adapters speak the S3 API through object-store.js.
+ * The s3 adapter speaks the S3 API through object-store.js; only the platform adapter can use an R2 binding.
  *
  *   s3        The hospital's OWN S3-compatible bucket (AWS S3, Cloudflare R2, MinIO, Wasabi). Needs nothing
  *             from the platform owner: the hospital enters endpoint, bucket and keys, and backups start on
  *             the next hourly run.
- *   platform  The deployment's own object store (the DOC_S3_* settings object-store.js reads). Those are
- *             unset until the platform owner chooses the storage bucket (owner decision S1), and until then
- *             this adapter reports "not configured" rather than pretending to store anything.
+ *   platform  The deployment's own storage: the R2 bucket bound as WARDSYNQ_BACKUPS (bucket wardsynq-backups),
+ *             else the DOC_S3_* object store object-store.js reads. With neither this adapter reports
+ *             "not configured" rather than pretending to store anything.
  *
  * SFTP IS NOT OFFERED. A Worker has no SSH client, and adding one is a new dependency; a hospital with only
  * an SFTP server can put an S3-compatible gateway (MinIO) in front of it.
@@ -20,7 +20,7 @@
  * AWS's published example in test/wardsynq-object-store.test.mjs.
  */
 
-import { s3Store, storeFromEnv } from "./object-store.js";
+import { s3Store, storeFromEnv, backupBucketFromEnv } from "./object-store.js";
 import { checkDestination } from "./webhooks.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
@@ -121,8 +121,10 @@ async function destinationFor(connector, secrets, deps) {
     return a.error ? { ...a, setup: "hospital" } : { store: a.store, provider: "s3", retention };
   }
   if (connector.provider === "platform") {
-    const store = storeFromEnv(deps && deps.env);
-    if (!store) return { error: "platform_not_configured", setup: "platform", message: "Backups are not running: this hospital chose WardSynQ platform storage, and the platform owner has not yet chosen the storage bucket (owner decision S1). Choose your own S3-compatible bucket under Admin Center, Integrations, Backup destination to start now." };
+    /* The dedicated R2 bucket (binding WARDSYNQ_BACKUPS, wrangler.toml) wins. DOC_S3_* is the DOCUMENT bucket and is
+     * only a fallback for a deployment that has no backup bucket bound yet. */
+    const store = backupBucketFromEnv(deps && deps.env) || storeFromEnv(deps && deps.env);
+    if (!store) return { error: "platform_not_configured", setup: "platform", message: "Backups are not running: this hospital chose WardSynQ platform storage, and the platform owner has not yet set up the backup bucket (the WARDSYNQ_BACKUPS R2 binding). Choose your own S3-compatible bucket under Admin Center, Integrations, Backup destination to start now." };
     return { store, provider: "platform", retention };
   }
   return { error: "unknown_provider", setup: "hospital", message: "Backups are not running: the backup destination names an adapter this server does not have." };

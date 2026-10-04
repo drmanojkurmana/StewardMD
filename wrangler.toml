@@ -64,6 +64,14 @@ bucket_name = "stewardmd-followcare-media"
 binding = "OTA_R2"
 bucket_name = "stewardmd-offline"
 
+# R2 — WardSynQ scheduled backups (functions/_wardsynq/backup-destinations.js, "WardSynQ platform storage").
+# A private bucket used for nothing else: encrypted per-hospital backup files under wardsynq-backups/<tenant>/.
+# NO lifecycle rule: backup-schedule.js prunes by the hospital's retention, and an expiry rule would delete
+# restore points it still counts. Create it once: `npx wrangler r2 bucket create wardsynq-backups`.
+[[r2_buckets]]
+binding = "WARDSYNQ_BACKUPS"
+bucket_name = "wardsynq-backups"
+
 # Plaintext config vars (NOT secrets — secrets stay in `wrangler pages secret put`).
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
@@ -276,6 +284,10 @@ bucket_name = "stewardmd-followcare-media"
 [[env.production.r2_buckets]]
 binding = "OTA_R2"
 bucket_name = "stewardmd-offline"
+
+[[env.production.r2_buckets]]
+binding = "WARDSYNQ_BACKUPS"
+bucket_name = "wardsynq-backups"
 
 [env.production.ai]
 binding = "AI"

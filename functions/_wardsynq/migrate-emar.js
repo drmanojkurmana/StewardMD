@@ -31,7 +31,7 @@
  */
 
 import { MedicationAdministrationRecord, STATES, TERMINAL, MedicationSafetyError, materialOrderChanges } from "../../wardsynq/wardsynq-meds.js";
-import { SafetyEngine } from "../../wardsynq/wardsynq-safety.js";
+import { SafetyEngine, resolveComponents } from "../../wardsynq/wardsynq-safety.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { weightInKg } from "../../wardsynq/wardsynq-vitals.js";
@@ -227,23 +227,50 @@ function bedsideSafetyCheck(svc, rulePack, opts) {
 const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
 
 /* Codex F6: WHAT THE ORDER CHECK COULD NOT COVER, SAID AS A FINDING. The engine's renal and pregnancy/lactation checks only
- * fire from loaded tables (getRulePack loads no renal table; the pregnancy/lactation seed is empty) and from the patient's
+ * fire from loaded tables (getRulePack loads none; order-entry-pack.js adds the signed-off NFI tables) and from the patient's
  * measurements; with either missing they returned nothing, which reads as checked and clean. Disposition "warn", never a
  * block: they report missing content and data, decide nothing clinical, and no table or formula is invented here. */
-function coverageFindings(order, renal, renalTable, plRules, pregnancyStatus) {
+/* Owner decision 2026-10-04: with the National Formulary of India tables present (`tables` = rulePack.clinicalTables,
+ * order-entry-pack.js), an UNSIGNED table says exactly that ("NFI table loaded, awaiting clinical sign-off") and is not used;
+ * a SIGNED table that has no entry for the ordered drug says so too, rather than reading as checked. `generics` is what the
+ * ordered drug resolved to. Without `tables` (a pack with no NFI tables at all) the wording is as before. */
+const NFI_STATE_SAID = Object.freeze({
+  "awaiting-signoff": "NFI table loaded, awaiting clinical sign-off",
+  "signoffs-unreadable": "NFI table loaded, but its clinical sign-off could not be read, so it was not applied",
+});
+function coverageFindings(order, renal, renalTable, plRules, pregnancyStatus, tables, generics) {
   const out = [];
   const w = (code, message, extra) => out.push({ code, severity: "moderate", disposition: "warn", message, ...(extra || {}) });
   const lab = (x, name) => `${name} ${x.value}${x.unit ? " " + x.unit : ""} on ${x.at.slice(0, 10)}${x.stale ? `, ${x.ageDays} days old` : ""}`;
   const known = renal ? [renal.egfr && lab(renal.egfr, "eGFR"), renal.creatinine && lab(renal.creatinine, "creatinine")].filter(Boolean) : [];
   const said = known.length ? ` Latest recorded: ${known.join("; ")}.` : "";
-  if (!renalTable) w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: no renal table is loaded, so ${order.drug} was not checked for renal dosing.${said}`);
+  const covers = (t) => (generics || []).some((g) => t.covered && t.covered.has(g));
+  const rt = tables && tables.renal;
+  if (rt && rt.state !== "signed") w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: ${NFI_STATE_SAID[rt.state] || NFI_STATE_SAID["awaiting-signoff"]}. ${order.drug} was not checked for renal dosing.${said}`, { table: rt.table, tableState: rt.state });
+  else if (rt && !covers(rt)) w("RENAL_CHECK_NOT_COVERED", `Renal dose check: ${order.drug} is not in the NFI renal table, so it was not checked for renal dosing.${said}`, { table: rt.table });
+  else if (!rt && !renalTable) w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: no renal table is loaded, so ${order.drug} was not checked for renal dosing.${said}`);
   if (renal === null) w("RENAL_FUNCTION_UNREADABLE", "The patient's results could not be read, so renal function is unknown. Do not read this as normal.");
   else if (!renal.egfr) w("RENAL_FUNCTION_NOT_RECORDED", `No eGFR is recorded for this patient, so no renal dose check can use one.${renal.creatinine ? ` Latest creatinine: ${lab(renal.creatinine, "").trim()}. Nothing here computes an eGFR from it.` : ""}`);
   else if (renal.egfr.stale) w("RENAL_FUNCTION_STALE", `The latest eGFR is ${renal.egfr.ageDays} days old, so the renal dose check did not use it.`);
   else if (renal.egfr.legacy) w("RENAL_EGFR_LEGACY_EQUATION", `The latest eGFR is from a legacy race-specific or population-specific equation (LOINC ${renal.egfr.code}).`);
   const s = pregnancyStatus || {};
-  if (!plRules && !(s.pregnant === false && s.lactating === false)) {
-    const recorded = s.pregnant === true ? " The patient is recorded as pregnant." : s.lactating === true ? " The patient is recorded as breastfeeding or within the postpartum lactation window." : "";
+  const recorded = s.pregnant === true ? " The patient is recorded as pregnant." : s.lactating === true ? " The patient is recorded as breastfeeding or within the postpartum lactation window." : "";
+  if (tables && tables.pregnancy && tables.lactation) {
+    // Only a side the patient's record does not rule out (recorded true, or not recorded) is spoken about.
+    const sides = [["pregnancy", "pregnancy", s.pregnant], ["lactation", "breastfeeding", s.lactating]].filter(([, , st]) => st !== false);
+    const unsigned = sides.filter(([k]) => tables[k].state !== "signed");
+    if (unsigned.length) {
+      const st = unsigned.some(([k]) => tables[k].state === "signoffs-unreadable") ? "signoffs-unreadable" : "awaiting-signoff";
+      const names = unsigned.map(([k]) => k).join(" and ");
+      w("PREGNANCY_LACTATION_CHECK_NOT_AVAILABLE", `${names[0].toUpperCase() + names.slice(1)} check not available: ${NFI_STATE_SAID[st]}. ${order.drug} was not checked for use in ${unsigned.map(([, use]) => use).join(" or ")}.${recorded}`,
+        { tables: unsigned.map(([k]) => tables[k].table), tableState: st });
+    }
+    for (const [k, use, st] of sides) {
+      if (st === true && tables[k].state === "signed" && !covers(tables[k])) {
+        w("PREGNANCY_LACTATION_NOT_COVERED", `${order.drug} is not in the NFI ${k} table, so no NFI guidance on use in ${use} was applied.${recorded}`, { table: tables[k].table });
+      }
+    }
+  } else if (!plRules && !(s.pregnant === false && s.lactating === false)) {
     w("PREGNANCY_LACTATION_CHECK_NOT_AVAILABLE", `Pregnancy and lactation check not available: no pregnancy or lactation rules are loaded, so ${order.drug} was not checked for use in pregnancy or breastfeeding.${recorded}`);
   }
   return out;
@@ -268,7 +295,8 @@ async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
     // medicine in pregnancy or breastfeeding, is decided.
     const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug", "pregnancy"] })
       .evaluate({ order, allergies, activeMeds, weightKg, egfr, pregnancyStatus, overrides: overrides || [] });
-    const coverage = coverageFindings(order, renal, renalTable, rulesLoaded, pregnancyStatus);
+    const coverage = coverageFindings(order, renal, renalTable, rulesLoaded, pregnancyStatus, rulePack.clinicalTables || null,
+      rulePack.clinicalTables ? resolveComponents(order.drugCode || order.drug, rulePack) : []);
     const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
       ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
       ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
@@ -284,6 +312,8 @@ async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
       coverage,
       // Codex F6: the measurements the renal check was given (null = the results could not be read).
       renal: { tableLoaded: renalTable, egfr: renal ? renal.egfr : null, creatinine: renal ? renal.creatinine : null, ...(renal ? {} : { unreadable: true }) },
+      // Owner decision 2026-10-04: each NFI table and whether it is signed off (only a signed table is applied).
+      ...(rulePack.clinicalTables ? { clinicalTables: { source: rulePack.clinicalTables.source, renal: rulePack.clinicalTables.renal.state, pregnancy: rulePack.clinicalTables.pregnancy.state, lactation: rulePack.clinicalTables.lactation.state } } : {}),
     };
   } catch (e) {
     return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };

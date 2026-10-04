@@ -286,6 +286,9 @@ This eval set is the go/no-go gate for everything after it.
 - **Base quality is poor on clinical text.** This is measured, and the claimed 18 to 36 point lift from fine-tuning is unverified for SMD.
 - **Phone performance is unmeasured.**
 - **Format churn.** Needle 2 to 3 changed the weights format, and the engine is pinned at 3.0.3 while `config.json` says 3.0.2.
+  2026-10-04: upstream 3.1.0 (revision f84005f8, Whistle speech added) changed the `needle_complete` and
+  `needle_embed` signatures and grew the binaries 28%. Same weights, no network symbols, identical router
+  decisions, same thread fallback and hang. We stay on 27c0a9a5 (Edge-Runbook 5d).
 - **Regulatory.** Adding an ML step to dosing input paths needs a documented validator layer.
 
 ## Final verdict

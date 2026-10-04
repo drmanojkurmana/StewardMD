@@ -65,6 +65,7 @@ import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
+import { orderEntryRulePack } from "../../_wardsynq/order-entry-pack.js"; // + the NFI tables the owner has signed off
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
 import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, stopWardMedicationOrder, transferPatient, bedBoard, patientTimeline } from "../../_wardsynq/migrate-inpatient.js";
@@ -2840,7 +2841,7 @@ export async function onRequest(context) {
             idempotencyKey: idemFor(body.idempotencyKey, "vitals", c.index) }),
           problems: (rq, ev, c) => recordProblem(rq, ev, { ...c, problem: c.item, idempotencyKey: idemFor(body.idempotencyKey, "problem", c.index) }),
           // CLIN-02: the same engine and hard stops as /ward/medication-order, and a reason for any finding.
-          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, uncheckedReason: c.item && c.item.uncheckedReason, requireSafetyReason: true,
+          medications: async (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: await orderEntryRulePack(ev), overrideReason: c.item && c.item.overrideReason, uncheckedReason: c.item && c.item.uncheckedReason, requireSafetyReason: true,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
             ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
@@ -3360,7 +3361,7 @@ export async function onRequest(context) {
         const r = await createWardMedicationOrder(request, env, {
           /* LT-14: the safety check runs on the server against the record (never a verdict from the body);
            * checkOnly shows it before anything is written. */
-          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason, uncheckedReason: body.uncheckedReason,
+          ...deps, order: body.order || body, rulePack: await orderEntryRulePack(env), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason, uncheckedReason: body.uncheckedReason,
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,
@@ -5100,12 +5101,12 @@ export async function onRequest(context) {
       }
       if ((sub === "incident-report" || sub === "incident-signal") && method === "POST") {
         const fn = sub === "incident-signal" ? signalIncident : reportIncident;
-        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
+        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, merpCategory: body.merpCategory, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-confirm" && method === "POST") {
         // The decider is the authenticated actor, never the body: same reasoning as triagedBy below.
-        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, by: actor.id || "" });
+        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, merpCategory: body.merpCategory, by: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-triage" && method === "POST") {
