@@ -219,7 +219,7 @@ import { scanOrderClosures, closeOrderBacklog } from "../../_wardsynq/order-back
 import { scanSourceClosures, closeSourceTerminal } from "../../_wardsynq/source-order-close.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
-import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
+import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, supplierDebitNotes, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
 import { saveDietOrder, stopDietOrder, dietOrderHistory, mealBoard, markMeal } from "../../_wardsynq/diet.js";
 import { saveInstrumentSet, startLoad, recordLoadResult, cssdStep, cssdBoard, caseSets } from "../../_wardsynq/cssd.js";
 import { housekeepingBoard, raiseHousekeepingTask, housekeepingStep, housekeepingReport } from "../../_wardsynq/housekeeping.js";
@@ -1677,7 +1677,7 @@ export async function onRequest(context) {
         "goods-receive": CAPS.ORDER_DISPENSE,
         /* Supply chain depth (R2-4): returning stock to a supplier, rate contracts and reorder drafts are the same
          * purchasing authority as raising an order; the store keeper reaches them through the stores fallback below. */
-        "supply-chain": CAPS.ORDER_DISPENSE, "supplier-return": CAPS.ORDER_DISPENSE, "rate-contract": CAPS.ORDER_DISPENSE, "reorder-suggestions": CAPS.ORDER_DISPENSE,
+        "supply-chain": CAPS.ORDER_DISPENSE, "supplier-return": CAPS.ORDER_DISPENSE, "supplier-debit-notes": CAPS.ORDER_DISPENSE, "rate-contract": CAPS.ORDER_DISPENSE, "reorder-suggestions": CAPS.ORDER_DISPENSE,
         /* General stores (stores.js). The overview is every stores role's own screen; each write sits on the
          * authority of the person who does it: the ward raises and acknowledges, the in-charge decides (and the
          * route narrows that to the departments in the membership's scope), the store keeper runs the store. */
@@ -2468,7 +2468,7 @@ export async function onRequest(context) {
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
       /* General stores: the store keeper orders and books in through the same purchasing routes the pharmacy uses,
        * and the in-charge and the store open the stores overview without raising indents themselves. */
-      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || sub === "supply-chain" || sub === "supplier-return" || sub === "rate-contract" || sub === "reorder-suggestions" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || sub === "supply-chain" || sub === "supplier-return" || sub === "supplier-debit-notes" || sub === "rate-contract" || sub === "reorder-suggestions" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
       if (!wAz.ok && sub === "stores") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
       if (!wAz.ok && (sub === "stores" || sub === "store-consumption")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.INDENT_APPROVE);
       if (!wAz.ok && sub === "assets") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ASSET_MANAGE);
@@ -2681,7 +2681,7 @@ export async function onRequest(context) {
         if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
         if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, packs: body.packs, active: body.active, idempotencyKey: key }));
         if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
-        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, purchase: body.purchase, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines, idempotencyKey: key }));
@@ -2773,7 +2773,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "goods-receive" && method === "POST") {
-        const r = await receiveGoods(request, env, { ...deps, purchaseOrderId: body.purchaseOrderId, item: body.item, quantity: body.quantity, unit: body.unit, line: body.line, batch: body.batch, expiry: body.expiry, location: body.location, idempotencyKey: body.idempotencyKey || null });
+        const r = await receiveGoods(request, env, { ...deps, purchaseOrderId: body.purchaseOrderId, item: body.item, quantity: body.quantity, unit: body.unit, line: body.line, batch: body.batch, expiry: body.expiry, location: body.location, purchase: body.purchase, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "purchase-orders" && method === "GET") {
@@ -2787,8 +2787,12 @@ export async function onRequest(context) {
       if (sub === "supplier-return" && method === "POST") {
         /* Whether the stock is a controlled drug is decided from the receipt's own item (isControlled, the drug master),
          * never from anything the screen sends. */
-        const r = await returnToSupplier(request, env, { ...deps, receiptId: body.receiptId, quantity: body.quantity, reason: body.reason, supplier: body.supplier, debitNoteNo: body.debitNoteNo,
+        const r = await returnToSupplier(request, env, { ...deps, receiptId: body.receiptId, quantity: body.quantity, reason: body.reason, supplier: body.supplier, debitNoteNo: body.debitNoteNo, purchase: body.purchase,
           isControlled, witnessId: body.witnessId, witnessCheck, controllerApprovalRef: body.controllerApprovalRef, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "supplier-debit-notes" && method === "GET") {
+        const r = await supplierDebitNotes(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "rate-contract" && method === "POST") {
@@ -4027,7 +4031,7 @@ export async function onRequest(context) {
       }
       if (sub === "stock-move" && method === "POST") {
         const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
-          receivedFrom: body.receivedFrom, documentNo: body.documentNo, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck, destruction: body.destruction,
+          receivedFrom: body.receivedFrom, documentNo: body.documentNo, purchase: body.purchase, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck, destruction: body.destruction,
           supplierAddress: body.supplierAddress, supplierLicenceNo: body.supplierLicenceNo, manufacturer: body.manufacturer, toInstitution: body.toInstitution, transferKind: body.transferKind, controllerApprovalRef: body.controllerApprovalRef, revisedEstimateRef: body.revisedEstimateRef,
           estimateCheck: deps.rmiApplies(body.display, body.code) ? (move) => estimateRefusal(request, env, { ...deps, cfg: wsqCfg }, move) : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);

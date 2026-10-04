@@ -29,6 +29,7 @@ import { STAY_PAYER_TYPE, stayPayerIdFor } from "./stay-payer.js";
 import { gstForLines, gstSplit, financialYearOf, istDateOf, section34Deadline, packageRoomComponent, GST_BASIS, SAC, ROOM_GST_RATE } from "../_region_in.js";
 import { ADMISSION_CLASSES, OPEN } from "./migrate-inpatient.js";
 import { ASSIGNMENT_TYPE, applyPackage, packageFlags } from "./packages.js";
+import { nextDocumentNumber } from "./doc-series.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const TYPE = "Invoice";
@@ -337,7 +338,6 @@ async function raiseInvoice(request, env, ctx) {
   } catch (e) { return { ...base, ...writeFailure(e, { written: 0, actor: resolved.actor.id }) }; }
 }
 
-const SERIES_TYPE = "_wardsynq_doc_series";
 const HEAD_TYPE = "_wardsynq_invoice_raise";
 
 /** The outcome a request with this idempotency key already produced for this patient's bill, as the response, or null.
@@ -348,24 +348,6 @@ async function replayed(svc, ctx, patientId, invoiceId) {
   try { prior = await svc.replayFor(ctx.idempotencyKey, TYPE, patientId || null, invoiceId || null); }
   catch (e) { return writeFailure(e, { written: 0 }); }
   return prior && prior.record ? { ok: true, written: 0, replayed: true, ...summary(prior.record) } : null;
-}
-/** The next number in a document series ("INV", "CRN", "DBN") for the financial year of `at`: INV/2627/000001.
- *  Optimistic: two cashiers racing for the same number cannot both land (append refuses a version that exists). */
-async function nextDocumentNumber(repo, tenantId, typ, at, actorId) {
-  const fy = financialYearOf(at);
-  if (!fy) throw new Error("no financial year for that time");
-  const id = `${typ.toLowerCase()}-${fy}`;
-  for (let attempt = 0; attempt < 6; attempt++) {
-    const cur = await repo.latest(tenantId, SERIES_TYPE, id);
-    const n = (cur ? Number(cur.last) || 0 : 0) + 1;
-    const now = new Date().toISOString();
-    const rec = { resourceType: SERIES_TYPE, id, version: cur ? cur.version + 1 : 1, series: typ, financialYear: fy, last: n, writtenBy: { id: actorId, kind: "human", at: now } };
-    try {
-      await repo.append(tenantId, [rec], { audit: { ts: now, actor: actorId, connectorId: "wardsynq-invoices", action: "document.number.issue", outcome: "ok", scope: { series: id, number: n } } });
-      return `${typ}/${fy}/${String(n).padStart(6, "0")}`;
-    } catch (e) { if (!(e instanceof VersionConflictError)) throw e; }
-  }
-  throw new Error("the document number series is busy");
 }
 
 /** Shared phase-transition runner: read the invoice, mutate it via the engine, write it back. `before(current, actorId)`,
