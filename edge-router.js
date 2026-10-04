@@ -210,7 +210,9 @@
     if (reqKeys[0] && ranked) {
       var toolHits = toolItems.filter(function (it) {
         var tk = keys(it.title);
-        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1]);
+        // The generic-stripped match needs a generic word in the request too: bare "dose?" (a follow-up
+        // on a live topic) must not equal "Dose calculator" just because "calculator" is generic.
+        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1] && (tk[0] === tk[1] || reqKeys[0] !== reqKeys[1]));
       });
       if (toolHits.length === 1) {
         ranked.forEach(function (r) { if (r.kind === "tool" && r.it.id === toolHits[0].id) r.s += 3; });
