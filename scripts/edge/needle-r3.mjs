@@ -52,6 +52,8 @@ function ambiguous3(r) {
 const TAGS = { ord: ["danger", "not-a-tool"], negx: ["danger", "negation"], amb: ["danger", "ambiguous"], kbq: ["kb", "kb-question"], kbr: ["kb"] };
 function fix(r) {
   if (r.target && t4Held(r.kind + ":" + r.target)) return null;
+  const opt = r.target_option && r.candidates[r.target_option - 1];   // an accepted alternative can be held too
+  if (opt && t4Held(opt.kind + ":" + opt.id)) return null;
   const a = AMB.get(core(r.input_text));
   if (a) {
     if (t4Held("amb:" + a)) return null;
@@ -125,8 +127,10 @@ const prep = (rows) => relive(rows, E);
 const { dev, train, raw } = build({ kb: true, prep, exclude: NEVER, held: t4Held, more, fix, ambiguous: ambiguous3, out: { dev: "dev3.jsonl", train: "train.r3.jsonl" } });
 
 // ---- asserts: nothing from any test set, no test4-held key, in training or dev ----
-const textOf = (q) => q.split("\nOptions:")[0].toLowerCase();
-train.forEach((r) => { if (NEVER.has(textOf(r.query))) throw new Error("training text is a test/test3/test4 text: " + textOf(r.query)); });
+train.forEach((r) => { if (NEVER.has(r.input_text.toLowerCase())) throw new Error("training text is a test/test3/test4 text: " + r.input_text); });
+const out = readJsonl(path.join(OUT_DIR, "export", "needle-local", "train.r3.jsonl"));   // the file that is uploaded
+if (out.length !== train.length) throw new Error("train.r3.jsonl does not match the built rows");
+out.forEach((r) => { const t = r.query.split("\nOptions:")[0].toLowerCase(); if (NEVER.has(t)) throw new Error("train.r3.jsonl has a test text: " + t); });
 raw.forEach((r) => {   // the rows the export was made from (same rows, before the shuffled copies)
   const a = AMB.get(core(r.input_text)); if (a && t4Held("amb:" + a)) throw new Error("test4-held ambiguous name in training: " + r.input_text);
   const c = r.target_option && r.candidates[r.target_option - 1];
@@ -137,4 +141,4 @@ dev.forEach((r) => {
   if (r.target && t4Held(r.kind + ":" + r.target)) throw new Error("test4-held target in dev: " + r.input_text);
 });
 console.log("asserts ok: no test/test3/test4 text and no test4-held key in train (" + train.length + ") or dev3 (" + dev.length + ")");
-if (argv.includes("--sample")) train.filter((_, i) => i % 400 === 0).forEach((r) => console.log(textOf(r.query), "=>", r.reasoning));
+if (argv.includes("--sample")) raw.filter((_, i) => i % 300 === 0).forEach((r) => console.log(r.input_text, "=>", r.target_option ? r.candidates[r.target_option - 1].kind + ":" + r.candidates[r.target_option - 1].id : "none"));

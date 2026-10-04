@@ -29,7 +29,7 @@ const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").tr
 const FILLER = new Set(("open show me the a an go to take please pls can you i want need for of on in with and is what whats calculate calc " +
   "check find get my this pull up work out see look bring launch run use screen page app where would like let do it now be at from by or " +
   "score scores calculator tool drug card details detail info monograph patient kholo khol dikhao karo batao cheyyi chupinchu teruvu chudu " +
-  "kavali chahiye kya hai ka ki ke enti em cheppu cheyandi").split(" "));
+  "kavali chahiye kya hai ka ki ke enti em cheppu cheyandi lagao").split(" "));
 export const words = (s) => norm(s).split(" ").filter((w) => w && !FILLER.has(w));
 // Every request word is in the title (a 4+ letter word may be the start of a title word: "fract" -> "fractional").
 export function fits(text, title) {
