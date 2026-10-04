@@ -392,24 +392,15 @@ function computeQualitySafety(input) {
     }
     return { woundRecords: seen.size, woundCases: [...seen.values()], woundNote: "Hospital-acquired pressure wounds at stage 2 or worse recorded in the period, shown beside the rate and not added to it." };
   }));
-  /* NABH 4 and 9 (owner decision 2026-10-04): a medication error is any preventable event that may cause or lead to
+  /* NABH 4 (owner decision 2026-10-04): a medication error is any preventable event that may cause or lead to
    * inappropriate medication use or patient harm (NCC MERP), so the rate counts every confirmed medication-error incident,
-   * near misses (NCC MERP A and B) included, and shows the near misses as their own line. The severity row beside it
-   * counts the same incidents by NCC MERP category A to I and by group; an incident with no category is "uncategorised". */
+   * near misses (NCC MERP A and B) included, and shows the near misses as their own line. Beneath it the same incidents
+   * are counted by NCC MERP category A to I and by group; an incident with no category is "uncategorised". */
   const merp = merpSummary(confirmed, null);
   out.push(rateRow("medication-errors", "Medication error incidents per 1000 bed-days", CATEGORY.MEDICATION_ERROR, () => ({
-    nearMisses: merp.nearMisses, uncategorised: merp.uncategorised,
-    note2: "Every confirmed medication error is counted, near misses (NCC MERP categories A and B) included; the near misses are shown beside the rate.", note2Code: "med-error-near-misses",
+    nearMisses: merp.nearMisses, uncategorised: merp.uncategorised, byCategory: merp.byCategory, byGroup: merp.byGroup,
+    note2: "Every confirmed medication error is counted, near misses (NCC MERP categories A and B) included; the near misses are shown beside the rate, and the count by NCC MERP category beneath it. An incident filed before the category was required has none and is counted as uncategorised, never placed in a category.", note2Code: "med-error-near-misses",
   })));
-  out.push(incBlocked
-    ? notComputable("medication-error-severity", "Medication errors by NCC MERP category", `Incident records could not be read: ${bad.IncidentReport}`, "records-unreadable", { why: bad.IncidentReport })
-    : {
-      id: "medication-error-severity", title: "Medication errors by NCC MERP category", computable: true, unit: "count",
-      numerator: merp.total, denominator: null, rate: null, byCategory: merp.byCategory, byGroup: merp.byGroup,
-      nearMisses: merp.nearMisses, uncategorised: merp.uncategorised, cases: merp.cases,
-      source: "confirmed incidents, category medication-error, by NCC MERP category",
-      note2: "An incident filed before the NCC MERP category was required has none and is counted as uncategorised, never placed in a category.", note2Code: "med-error-uncategorised",
-    });
   out.push(rateRow("hai", "Healthcare-associated infections per 1000 bed-days", CATEGORY.HAI));
 
   // ANTIBIOTIC DAYS OF THERAPY.

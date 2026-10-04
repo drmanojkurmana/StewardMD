@@ -626,16 +626,13 @@
       });
       return out.length ? '<br><span class="quiet">' + out.join("<br>") + "</span>" : "";
     }
-    /* Owner decision 2026-10-04: 4 counts medication errors by the NCC MERP definition (near misses beside it), 9 counts them by category A to I. */
-    if (no === 4 && m.nearMisses != null) {
-      out.push(T(c, "site.gov.nabh.k4near", "of which {n} near misses (NCC MERP categories A and B)", { n: m.nearMisses }));
-      if (m.uncategorised) out.push(T(c, "site.gov.nabh.k4uncat", "{n} with no NCC MERP category", { n: m.uncategorised }));
-    }
-    if (no === 9 && m.byCategory) {
+    /* Owner decision 2026-10-04: 4 counts medication errors by the NCC MERP definition, near misses beside the rate, the count by category A to I and group beneath. */
+    if (no === 4 && m.byCategory) {
       var g = m.byGroup || {}, bc = m.byCategory;
-      out.push(T(c, "site.gov.nabh.k9groups", "No error {a}, error no harm {b}, error harm {h}, death {d}", { a: g["no-error"] || 0, b: g["error-no-harm"] || 0, h: g["error-harm"] || 0, d: g.death || 0 }));
+      out.push(T(c, "site.gov.nabh.k4near", "of which {n} near misses (NCC MERP categories A and B)", { n: m.nearMisses }));
+      out.push(T(c, "site.gov.nabh.k4groups", "No error {a}, error no harm {b}, error harm {h}, death {d}", { a: g["no-error"] || 0, b: g["error-no-harm"] || 0, h: g["error-harm"] || 0, d: g.death || 0 }));
       out.push(["A", "B", "C", "D", "E", "F", "G", "H", "I"].map(function (k) { return k + " " + (bc[k] || 0); }).join(", "));
-      if (m.uncategorised) out.push(T(c, "site.gov.nabh.k9uncat", "{n} uncategorised: filed with no NCC MERP category", { n: m.uncategorised }));
+      if (m.uncategorised) out.push(T(c, "site.gov.nabh.k4uncat", "{n} with no NCC MERP category", { n: m.uncategorised }));
     }
     if (no === 30) {
       if (m.reportingYearNotConfigured) out.push(T(c, "site.gov.nabh.k30notset", "Reporting year not configured: this month only"));
@@ -664,7 +661,7 @@
               (i.computable ? '<br><span class="quiet">' + EN(c, esc([i.dataSource, i.note].filter(Boolean).join(" "))) + "</span>" : "") + "</td>";
             if (!i.computable) return "<tr><td>" + esc(i.no) + "</td>" + title + '<td colspan="' + d.months.length + '"><span class="pill">' + esc(T(c, "site.gov.nabh.notComputable", "Not computable from WardSynQ data")) + "</span> " + EN(c, esc(i.reason)) + "</td></tr>";
             return "<tr><td>" + esc(i.no) + "</td>" + title + i.months.map(function (m) {
-              return "<td>" + (m.value == null ? '<span class="quiet">' + esc(T(c, "site.gov.nabh.noCases", "no cases")) + "</span>" : "<b>" + esc(m.value) + "</b>") + (i.no === 9 ? "" : '<br><span class="quiet">' + esc(m.numerator == null ? "" : m.numerator) + " / " + esc(m.denominator == null ? "" : m.denominator) + "</span>") + nabhCellNote(c, i.no, m) + "</td>";
+              return "<td>" + (m.value == null ? '<span class="quiet">' + esc(T(c, "site.gov.nabh.noCases", "no cases")) + "</span>" : "<b>" + esc(m.value) + "</b>") + '<br><span class="quiet">' + esc(m.numerator == null ? "" : m.numerator) + " / " + esc(m.denominator == null ? "" : m.denominator) + "</span>" + nabhCellNote(c, i.no, m) + "</td>";
             }).join("") + "</tr>";
           }).join("") + "</tbody></table></div>";
       }

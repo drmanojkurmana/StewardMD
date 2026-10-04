@@ -100,21 +100,19 @@ test("NCC MERP: the quality screen shows near misses and uncategorised beside th
   const byCategory = { A: 1, B: 1, C: 2, D: 0, E: 1, F: 0, G: 0, H: 0, I: 1, uncategorised: 2 };
   const byGroup = { "no-error": 1, "error-no-harm": 3, "error-harm": 1, death: 1, uncategorised: 2 };
   const report = { ...REPORT, measures: [
-    { id: "medication-errors", title: "Medication error incidents per 1000 bed-days", computable: true, unit: "per 1000 bed-days", numerator: 8, denominator: 400, rate: 20, nearMisses: 2, uncategorised: 2, cases: [] },
-    { id: "medication-error-severity", title: "Medication errors by NCC MERP category", computable: true, unit: "count", numerator: 8, denominator: null, rate: null, byCategory, byGroup, nearMisses: 2, uncategorised: 2, cases: [] },
+    { id: "medication-errors", title: "Medication error incidents per 1000 bed-days", computable: true, unit: "per 1000 bed-days", numerator: 8, denominator: 400, rate: 20, nearMisses: 2, uncategorised: 2, byCategory, byGroup, cases: [] },
   ] };
   const html = qs(W, { qs: report });
   assert.match(html, /<b>20<\/b> per 1000 bed-days \(8 over 400 bed-days\) &middot; of which 2 near misses \(NCC MERP A and B\) &middot; 2 with no NCC MERP category/);
-  assert.match(html, /8 confirmed medication errors/);
   assert.match(html, /No error \(A\)<\/b><span>1<\/span>/);
   assert.match(html, /Error, no harm \(B to D\)<\/b><span>3<\/span><small class="w-dt-times">B <b>1<\/b> &middot; C <b>2<\/b> &middot; D <b>0<\/b>/);
   assert.match(html, /Error, harm \(E to H\)<\/b><span>1<\/span>/);
   assert.match(html, /Death \(I\)<\/b><span>1<\/span>/);
   assert.match(html, /Uncategorised: filed with no NCC MERP category<\/b><span>2<\/span>/);
-  // No errors in the period is said, not drawn as a table of zeros; unreadable records are not a zero either.
-  const none = qs(W, { qs: { ...REPORT, measures: [{ id: "medication-error-severity", title: "x", computable: true, unit: "count", numerator: 0, byCategory: { ...byCategory, uncategorised: 0 }, byGroup, cases: [] }] } });
-  assert.match(none, /No confirmed medication errors in this period/);
+  // No errors in the period is a real zero with no table of zeros; unreadable records are not a zero either.
+  const none = qs(W, { qs: { ...REPORT, measures: [{ id: "medication-errors", title: "Medication error incidents per 1000 bed-days", computable: true, unit: "per 1000 bed-days", numerator: 0, denominator: 400, rate: 0, nearMisses: 0, uncategorised: 0, byCategory: { ...byCategory, uncategorised: 0 }, byGroup, cases: [] }] } });
+  assert.match(none, /<b>0<\/b> per 1000 bed-days/);
   assert.ok(!/w-merp/.test(none));
-  const blocked = qs(W, { qs: { ...REPORT, measures: [{ id: "medication-error-severity", title: "x", computable: false, reason: "Incident records could not be read: not readable with this role", reasonCode: "records-unreadable", reasonVars: { why: "not readable with this role" } }] } });
+  const blocked = qs(W, { qs: { ...REPORT, measures: [{ id: "medication-errors", title: "x", computable: false, reason: "Incident records could not be read: not readable with this role", reasonCode: "records-unreadable", reasonVars: { why: "not readable with this role" } }] } });
   assert.match(blocked, /Not computable: Incident records could not be read: not readable with this role/);
 });

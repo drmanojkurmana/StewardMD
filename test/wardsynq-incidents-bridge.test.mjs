@@ -347,22 +347,24 @@ test("NCC MERP: the quality screen and the NABH table count by category and repo
 
   const q = await as(DOCTOR, "/ward/quality-safety?orgId=" + ORG + "&days=30");
   assert.equal(q.__status, 200, JSON.stringify(q));
-  const sev = q.measures.find((m) => m.id === "medication-error-severity");
-  assert.equal(sev.numerator, 2);
-  assert.equal(sev.byCategory.C, 1);
-  assert.equal(sev.byCategory.uncategorised, 1, "the old record is uncategorised, not guessed from its catastrophic severity");
-  assert.equal(sev.byCategory.I, 0);
-  assert.equal(q.measures.find((m) => m.id === "medication-errors").uncategorised, 1);
+  assert.equal(q.measures.find((m) => m.id === "medication-error-severity"), undefined);
+  const me = q.measures.find((m) => m.id === "medication-errors");
+  assert.equal(me.numerator, 2);
+  assert.equal(me.byCategory.C, 1);
+  assert.equal(me.byCategory.uncategorised, 1, "the old record is uncategorised, not guessed from its catastrophic severity");
+  assert.equal(me.byCategory.I, 0);
+  assert.equal(me.uncategorised, 1);
 
   const n = await as(DOCTOR, "/ward/nabh-indicators?orgId=" + ORG + "&months=1");
   assert.equal(n.__status, 200, JSON.stringify(n));
   const k9 = n.indicators.find((i) => i.no === 9);
-  assert.equal(k9.computable, true);
-  assert.equal(k9.months[0].numerator, 2);
-  assert.equal(k9.months[0].uncategorised, 1);
-  assert.equal(k9.months[0].byGroup["error-no-harm"], 1);
+  assert.equal(k9.title, "Standardized Mortality Ratio for ICU", "row 9 is still the published SMR");
+  assert.equal(k9.computable, false);
   const k4 = n.indicators.find((i) => i.no === 4);
   assert.equal(k4.computable, true);
   assert.equal(k4.months[0].numerator, 2);
   assert.equal(k4.months[0].nearMisses, 0);
+  assert.equal(k4.months[0].uncategorised, 1);
+  assert.equal(k4.months[0].byCategory.C, 1);
+  assert.equal(k4.months[0].byGroup["error-no-harm"], 1);
 });

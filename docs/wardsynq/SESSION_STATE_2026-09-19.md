@@ -55,7 +55,7 @@ NABH: 30 of 32 indicators compute.
 ## Needs the owner (do not guess these)
 
 - **O1** NABH KPI 4: the hospital's medication-error capture definition. DONE 2026-10-04: NCC MERP definition (vault/decisions/Decisions.md).
-- **O2** NABH KPI 9: a severity model plus clinical sign-off. DONE 2026-10-04: NCC MERP categories A to I; clinical sign-off of the wording still open.
+- **O2** NABH KPI 9: a severity model plus clinical sign-off. NCC MERP categories A to I chosen 2026-10-04 and counted under KPI 4; KPI 9 stays the ICU SMR and its illness-severity model (APACHE II, SOFA) is still open.
 - **O19** a formulary capability, so a pharmacist need not hold the admin role.
 - **O20** a latest-version table or index: every paged read still costs a whole-type group-by per page.
 - Clinical sign-offs: Kt/V formula (dialysis), infection criteria names, patient leaflet content.

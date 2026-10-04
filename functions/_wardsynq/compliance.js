@@ -24,7 +24,7 @@ import { HAI_EVENTS, deviceDays, confirmedIn } from "./infection-control.js";
 import { auditSummary, edReturnPairs } from "./quality-registers.js";
 import { readWindowed } from "./read-window.js";
 import { NABH_KPIS } from "./nabh-kpi-defs.js";
-import { merpSummary, MERP_CODES } from "../../wardsynq/wardsynq-incidents.js";
+import { MERP_CODES } from "../../wardsynq/wardsynq-incidents.js";
 import { HMIS_FORMAT, HMIS_SECTIONS, HMIS_ITEMS } from "./hmis-items.js";
 import { DHS_CHAPTERS, DHS_ELEMENTS } from "./dhs-elements.js";
 import { milestoneTimes, dischargeMinutes } from "./discharge-milestones.js";
@@ -119,13 +119,15 @@ const NABH_SOURCES = {
       return { ...auditCell("diagnostic-safety")(r, w), byDepartment, auditorInsideDepartment: a.filter((x) => x.auditorOutsideDepartment === false).length };
     } },
   /* Owner decision 2026-10-04 (was owner item O1): a medication error is the NCC MERP definition, so every confirmed
-   * medication-error incident counts, near misses (categories A and B) included and shown as their own line. The
-   * denominator is the one quality.js already uses for this measure, inpatient bed-days; NABH's "total number of
-   * opportunities" is not recorded anywhere in WardSynQ, so the percentage of opportunities is not computed. */
+   * medication-error incident counts, near misses (categories A and B) included and shown as their own line, and the
+   * same errors are counted per NCC MERP category A to I and per group (no error A, error no harm B to D, error harm E to
+   * H, death I) beneath it; a record with no category is shown as uncategorised. The denominator is the one quality.js
+   * already uses for this measure, inpatient bed-days; NABH's "total number of opportunities" is not recorded anywhere
+   * in WardSynQ, so the percentage of opportunities is not computed. */
   4: { needs: ["Encounter", "IncidentReport", "WoundAssessment"], qs: "medication-errors",
     def: { unit: "per 1000 inpatient bed-days", denominator: "Inpatient bed-days (the denominator WardSynQ's quality screen already uses for medication errors)", numerator: "Confirmed medication errors, near misses (NCC MERP categories A and B) included" },
     source: "Confirmed medication-error incidents (NCC MERP definition) dated by when the event happened, per 1000 inpatient bed-days (quality.js).",
-    note: "NABH names the number of opportunities for a medication error as the denominator; WardSynQ does not record opportunities, so the rate is per inpatient bed-day and the percentage form is not computed. Near misses (categories A and B) are counted in the rate and shown as their own line; a confirmed medication error filed with no NCC MERP category is counted in the rate and shown as uncategorised." },
+    note: "NABH names the number of opportunities for a medication error as the denominator; WardSynQ does not record opportunities, so the rate is per inpatient bed-day and the percentage form is not computed. Near misses (categories A and B) are counted in the rate and shown as their own line, with the count per NCC MERP category and group beneath; a confirmed medication error filed with no NCC MERP category is counted in the rate and shown as uncategorised." },
   5: { needs: ["AdverseDrugReaction", "Encounter"], source: "Suspected adverse drug reaction reports (PvPI form) whose reaction started in the month while the patient was on an inpatient stay, over inpatient stays open in the month.",
     note: "Counts reports, as filed; causality assessment at the ADR monitoring centre is not recorded.",
     compute: (r, w) => {
@@ -151,17 +153,7 @@ const NABH_SOURCES = {
     compute: (r, w) => { const cs = r.SurgicalCase.filter((c) => inW(c.incisionAt, w)); return val(cs.filter((c) => c.signIn && c.timeOut && c.signOut).length, cs.length, 100); } },
   8: { needs: ["TransfusionEpisode"], source: "Transfusions started in the month (one unit each) and the suspected reactions recorded against them.",
     compute: (r, w) => { const eps = r.TransfusionEpisode.filter((e) => inW(e.startedAt, w)); return val(eps.filter((e) => e.reaction).length, eps.length, 100); } },
-  /* Owner decision 2026-10-04 (was owner item O2): this row reports medication-error severity by NCC MERP category A to
-   * I, not the published standardized mortality ratio, which needs predicted deaths from a severity score that WardSynQ
-   * does not record. The published title stays on the row (publishedTitle) so a reader sees what was replaced. */
-  9: { needs: ["IncidentReport"],
-    def: { title: "Medication error severity by NCC MERP category (A to I)", definition: "NCC MERP index for categorizing medication errors: A circumstances or events that have the capacity to cause error; B an error occurred but did not reach the patient; C reached the patient, no harm; D reached the patient and required monitoring and/or intervention to preclude harm; E temporary harm, required intervention; F temporary harm, initial or prolonged hospitalization; G permanent harm; H intervention required to sustain life; I contributed to death. Groups: no error (A), error no harm (B to D), error harm (E to H), death (I).", numerator: "Confirmed medication errors in each NCC MERP category and group", denominator: "No denominator: counts", unit: "Number" },
-    source: "Confirmed medication-error incidents dated by when the event happened, counted by the NCC MERP category recorded when the error was filed or confirmed.",
-    note: "The hospital's own measure in place of the published standardized mortality ratio for ICU (NABH KPI 9), which needs predicted deaths from a severity score that WardSynQ does not record. A record with no NCC MERP category is counted as uncategorised and in no category or group.",
-    compute: (r, w) => {
-      const m = merpSummary(r.IncidentReport, (x) => inW(x.when || x.reportedAt, w));
-      return { numerator: m.total, denominator: null, value: m.total, byCategory: m.byCategory, byGroup: m.byGroup, nearMisses: m.nearMisses, uncategorised: m.uncategorised };
-    } },
+  9: { missing: "Predicted deaths from a severity score (APACHE, SOFA, SAPS, MPM); WardSynQ does not record one." },
   10: { needs: ["Encounter"], source: "ICU stays that ended in the month, and a new ICU stay for the same patient starting within 48 hours.",
     note: "HDU stays are not told apart from ICU stays unless the hospital records them under a different class.",
     compute: (r, w) => {
@@ -301,12 +293,12 @@ function computeNabhIndicators(input) {
   };
   return NABH_KPIS.map((k) => {
     const s = NABH_SOURCES[k.no] || { missing: "Not mapped." };
-    const def = { no: k.no, standard: k.standard, title: k.title, definition: k.definition, numerator: k.numerator, denominator: k.denominator, unit: k.unit, frequency: k.frequency, ...(s.def ? { ...s.def, publishedTitle: k.title } : {}) };
+    const def = { no: k.no, standard: k.standard, title: k.title, definition: k.definition, numerator: k.numerator, denominator: k.denominator, unit: k.unit, frequency: k.frequency, ...(s.def || {}) };
     if (s.missing) return { ...def, computable: false, reason: "Not computable from WardSynQ data. Missing: " + s.missing, dataSource: null, months: [] };
     const blocked = (s.needs || []).find((t) => bad[t]);
     if (blocked) return { ...def, computable: false, reason: `Not computable: ${blocked} records could not be read (${bad[blocked]}).`, dataSource: s.source, months: [] };
     const months = input.windows.map((w) => {
-      if (s.qs) { const m = qs(w)[s.qs]; return { month: w.month, numerator: m.numerator, denominator: m.denominator, value: m.rate, ...(m.nearMisses != null ? { nearMisses: m.nearMisses, uncategorised: m.uncategorised } : {}) }; }
+      if (s.qs) { const m = qs(w)[s.qs]; return { month: w.month, numerator: m.numerator, denominator: m.denominator, value: m.rate, ...(m.byCategory ? { nearMisses: m.nearMisses, uncategorised: m.uncategorised, byCategory: m.byCategory, byGroup: m.byGroup } : {}) }; }
       return { month: w.month, ...s.compute(rows, w, input.settings || {}) };
     });
     return { ...def, computable: true, dataSource: s.source, note: s.note || null, months };
@@ -355,16 +347,12 @@ function csvCell(v) {
 }
 const csvRows = (rows) => rows.map((r) => r.map(csvCell).join(",")).join("\r\n") + "\r\n";
 
-/** PURE. The by-category detail of a month's cell (NABH 4 near misses and uncategorised, NABH 9 categories and groups), or "". */
+/** PURE. The NCC MERP detail of a month's cell (NABH 4: near misses, uncategorised, categories A to I, groups), or "". */
 function cellDetail(c) {
-  if (!c) return "";
-  if (c.byCategory) {
-    const cats = [...MERP_CODES, "uncategorised"].map((k) => `${k} ${c.byCategory[k]}`).join(", ");
-    const groups = Object.keys(c.byGroup).map((k) => `${k} ${c.byGroup[k]}`).join(", ");
-    return `${c.month}: ${cats}; ${groups}`;
-  }
-  if (c.nearMisses != null) return `${c.month}: near misses (A, B) ${c.nearMisses}, uncategorised ${c.uncategorised}`;
-  return "";
+  if (!c || !c.byCategory) return "";
+  const cats = [...MERP_CODES, "uncategorised"].map((k) => `${k} ${c.byCategory[k]}`).join(", ");
+  const groups = Object.keys(c.byGroup).map((k) => `${k} ${c.byGroup[k]}`).join(", ");
+  return `${c.month}: near misses (A, B) ${c.nearMisses}, uncategorised ${c.uncategorised}; ${cats}; ${groups}`;
 }
 
 /** PURE. The NABH monthly table as CSV. */

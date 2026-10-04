@@ -1,5 +1,5 @@
-/* test/wardsynq-merp.test.mjs - NABH KPI 4 and 9 (owner decision 2026-10-04): the NCC MERP medication-error definition and
- * the A to I severity categories. Definitions, capture refusal without a category, counting, grouping, and the handling
+/* test/wardsynq-merp.test.mjs - NABH KPI 4 (owner decision 2026-10-04): the NCC MERP medication-error definition and
+ * the A to I severity categories counted beneath it. KPI 9 stays the published ICU standardized mortality ratio. Definitions, capture refusal without a category, counting, grouping, and the handling
  * of a record with no category (uncategorised, never guessed). The routes are proven in
  * test/wardsynq-incidents-bridge.test.mjs.
  *
@@ -125,35 +125,34 @@ const FROM = Date.parse("2026-09-01T00:00:00Z"), TO = Date.parse("2026-09-30T00:
 const stay = { id: "e1", patientId: "p1", class: "IPD", status: "in-progress", periodStart: "2026-09-01T00:00:00Z", periodEnd: null }; // 29 bed-days to TO
 const byId = (r) => Object.fromEntries(r.measures.map((m) => [m.id, m]));
 
-test("quality screen: the medication-error rate counts every confirmed error, shows near misses and uncategorised beside it", () => {
+test("quality screen: the medication-error rate counts every confirmed error; near misses, uncategorised and the NCC MERP counts sit beneath it", () => {
   const incidents = [
     confirmed("a1", "medication-error", "A"), confirmed("b1", "medication-error", "B"), confirmed("e1", "medication-error", "E"),
     confirmed("u1", "medication-error", undefined),
     confirmed("old", "medication-error", "C", "2026-07-01T00:00:00Z"),                   // outside the period
   ];
   const m = byId(computeQualitySafety({ fromMs: FROM, toMs: TO, encounters: [stay], incidents }));
-  assert.equal(m["medication-errors"].numerator, 4);
-  assert.equal(m["medication-errors"].denominator, 29, "inpatient bed-days, the denominator this measure already had");
-  assert.equal(m["medication-errors"].rate, Math.round((4 / 29) * 1000 * 100) / 100);
-  assert.equal(m["medication-errors"].nearMisses, 2);
-  assert.equal(m["medication-errors"].uncategorised, 1);
-  const s = m["medication-error-severity"];
-  assert.equal(s.computable, true);
-  assert.equal(s.numerator, 4);
-  assert.deepEqual(s.byCategory, { A: 1, B: 1, C: 0, D: 0, E: 1, F: 0, G: 0, H: 0, I: 0, uncategorised: 1 });
-  assert.deepEqual(s.byGroup, { "no-error": 1, "error-no-harm": 1, "error-harm": 1, death: 0, uncategorised: 1 });
-  assert.equal(s.cases.length, 4);
+  assert.equal(m["medication-error-severity"], undefined, "one row, not two: the categories are part of the medication-error row");
+  const r = m["medication-errors"];
+  assert.equal(r.numerator, 4);
+  assert.equal(r.denominator, 29, "inpatient bed-days, the denominator this measure already had");
+  assert.equal(r.rate, Math.round((4 / 29) * 1000 * 100) / 100);
+  assert.equal(r.nearMisses, 2);
+  assert.equal(r.uncategorised, 1);
+  assert.deepEqual(r.byCategory, { A: 1, B: 1, C: 0, D: 0, E: 1, F: 0, G: 0, H: 0, I: 0, uncategorised: 1 });
+  assert.deepEqual(r.byGroup, { "no-error": 1, "error-no-harm": 1, "error-harm": 1, death: 0, uncategorised: 1 });
+  assert.equal(r.cases.length, 4);
 });
 
 test("quality screen: no medication errors is a real zero; unreadable incident records are not computable, not zero", () => {
-  const zero = byId(computeQualitySafety({ fromMs: FROM, toMs: TO, encounters: [stay], incidents: [] }));
-  assert.equal(zero["medication-errors"].numerator, 0);
-  assert.equal(zero["medication-errors"].nearMisses, 0);
-  assert.equal(zero["medication-error-severity"].numerator, 0);
-  assert.equal(zero["medication-error-severity"].byCategory.A, 0);
-  const blocked = byId(computeQualitySafety({ fromMs: FROM, toMs: TO, encounters: [stay], unreadable: { IncidentReport: "not readable with this role" } }));
-  assert.equal(blocked["medication-error-severity"].computable, false);
-  assert.match(blocked["medication-error-severity"].reason, /not readable/);
+  const zero = byId(computeQualitySafety({ fromMs: FROM, toMs: TO, encounters: [stay], incidents: [] }))["medication-errors"];
+  assert.equal(zero.numerator, 0);
+  assert.equal(zero.rate, 0);
+  assert.equal(zero.nearMisses, 0);
+  assert.equal(zero.byCategory.A, 0);
+  const blocked = byId(computeQualitySafety({ fromMs: FROM, toMs: TO, encounters: [stay], unreadable: { IncidentReport: "not readable with this role" } }))["medication-errors"];
+  assert.equal(blocked.computable, false);
+  assert.match(blocked.reason, /not readable/);
 });
 
 /* ------------------------------------------------------------------ NABH table (compliance.js) */
@@ -162,22 +161,27 @@ const W = C.monthWindows(Date.parse("2026-09-20T00:00:00Z"), 1, 330)[0];
 const at = (day, hh) => new Date(Date.UTC(2026, 8, day, hh || 6) - 330 * 60000).toISOString();
 const inc = (id, merp, day, extra) => confirmed(id, "medication-error", merp, at(day), extra);
 
-test("NABH KPI 4: confirmed medication errors per 1000 inpatient bed-days, near misses and uncategorised shown beside", () => {
+test("NABH KPI 4: confirmed medication errors per 1000 inpatient bed-days, near misses, uncategorised and the NCC MERP counts beneath", () => {
   const rows = {
     Encounter: [{ id: "e1", patientId: "p1", class: "IPD", status: "in-progress", periodStart: at(1), periodEnd: null }],
-    IncidentReport: [inc("a", "A", 3), inc("b", "B", 4), inc("c", "C", 5), inc("u", undefined, 6), confirmed("f", "fall", undefined, at(7))],
+    IncidentReport: [inc("a", "A", 3), inc("b", "B", 4), inc("c", "C", 5), inc("g", "G", 6), inc("i", "I", 7), inc("u", undefined, 8), confirmed("f", "fall", undefined, at(7)),
+      confirmed("aug", "medication-error", "H", "2026-08-10T00:00:00Z"), { ...inc("sig", "C", 9), confirmation: null }],
   };
   const k4 = C.computeNabhIndicators({ rows, unreadable: {}, windows: [W] }).find((i) => i.no === 4);
   assert.equal(k4.computable, true);
+  assert.equal(k4.title, "Incidence of medication errors", "the published title is kept");
+  assert.equal(k4.publishedTitle, undefined);
   assert.equal(k4.unit, "per 1000 inpatient bed-days");
   assert.match(k4.denominator, /Inpatient bed-days/);
   assert.match(k4.definition, /preventable event that may cause or lead to inappropriate medication use/);
   const m = k4.months[0];
-  assert.equal(m.numerator, 4, "the fall is not a medication error");
+  assert.equal(m.numerator, 6, "the fall, the signal and August are not counted");
   assert.equal(m.nearMisses, 2);
   assert.equal(m.uncategorised, 1);
+  assert.deepEqual(m.byCategory, { A: 1, B: 1, C: 1, D: 0, E: 0, F: 0, G: 1, H: 0, I: 1, uncategorised: 1 });
+  assert.deepEqual(m.byGroup, { "no-error": 1, "error-no-harm": 2, "error-harm": 1, death: 1, uncategorised: 1 });
   assert.ok(m.denominator > 0);
-  assert.ok(Math.abs(m.value - (4 / m.denominator) * 1000) < 1, "the rate is the count over the bed-days, per 1000 (the denominator is shown to one decimal)");
+  assert.ok(Math.abs(m.value - (6 / m.denominator) * 1000) < 1, "the rate is the count over the bed-days, per 1000 (the denominator is shown to one decimal)");
   assert.match(k4.note, /opportunities/);
 });
 
@@ -190,37 +194,27 @@ test("NABH KPI 4: no bed-days gives no rate rather than zero; unreadable inciden
   assert.match(blocked.reason, /could not be read/);
 });
 
-test("NABH KPI 9: counts per NCC MERP category and group in the month, uncategorised apart, the published title kept", () => {
-  const rows = { IncidentReport: [
-    inc("a", "A", 3), inc("b", "B", 4), inc("c1", "C", 5), inc("c2", "C", 5), inc("g", "G", 8), inc("i", "I", 9), inc("u", undefined, 10),
-    { ...inc("sig", "C", 11), confirmation: null },
-    confirmed("aug", "medication-error", "H", "2026-08-10T00:00:00Z"),
-  ] };
+test("NABH KPI 9 is still the published ICU standardized mortality ratio, not computable, unchanged by the NCC MERP work", () => {
+  const rows = { IncidentReport: [inc("a", "A", 3), inc("i", "I", 4)] };
   const k9 = C.computeNabhIndicators({ rows, unreadable: {}, windows: [W] }).find((i) => i.no === 9);
-  assert.equal(k9.computable, true);
-  assert.equal(k9.publishedTitle, "Standardized Mortality Ratio for ICU");
-  assert.match(k9.title, /NCC MERP/);
-  const m = k9.months[0];
-  assert.equal(m.numerator, 7);
-  assert.equal(m.denominator, null);
-  assert.deepEqual(m.byCategory, { A: 1, B: 1, C: 2, D: 0, E: 0, F: 0, G: 1, H: 0, I: 1, uncategorised: 1 });
-  assert.deepEqual(m.byGroup, { "no-error": 1, "error-no-harm": 3, "error-harm": 1, death: 1, uncategorised: 1 });
-  assert.equal(m.nearMisses, 2);
-  assert.equal(m.uncategorised, 1);
+  assert.equal(k9.title, "Standardized Mortality Ratio for ICU");
+  assert.equal(k9.numerator, "Actual deaths in ICU");
+  assert.equal(k9.denominator, "Predicted deaths in ICU");
+  assert.equal(k9.unit, "Ratio");
+  assert.equal(k9.computable, false);
+  assert.equal(k9.reason, "Not computable from WardSynQ data. Missing: Predicted deaths from a severity score (APACHE, SOFA, SAPS, MPM); WardSynQ does not record one.");
+  assert.deepEqual(k9.months, []);
+  assert.equal(k9.publishedTitle, undefined);
 });
 
-test("NABH KPI 9: a month with no medication errors is a real zero in every category", () => {
-  const m = C.computeNabhIndicators({ rows: {}, unreadable: {}, windows: [W] }).find((i) => i.no === 9).months[0];
-  assert.equal(m.numerator, 0);
-  assert.ok(Object.values(m.byCategory).every((n) => n === 0));
-});
-
-test("NABH CSV: KPI 4 and 9 carry their category detail", () => {
+test("NABH CSV: KPI 4 carries its NCC MERP detail and KPI 9 is still the SMR row", () => {
   const rows = { Encounter: [{ id: "e1", patientId: "p1", class: "IPD", status: "in-progress", periodStart: at(1), periodEnd: null }], IncidentReport: [inc("b", "B", 4), inc("u", undefined, 6)] };
   const indicators = C.computeNabhIndicators({ rows, unreadable: {}, windows: [W] });
   const csv = C.nabhCsv({ months: [W.month], indicators, formatNote: "note" });
   const line = (no) => csv.split("\r\n").find((l) => l.startsWith(no + ","));
   assert.match(line(4), /near misses \(A, B\) 1, uncategorised 1/);
-  assert.match(line(9), /A 0, B 1, C 0/);
-  assert.match(line(9), /uncategorised 1/);
+  assert.match(line(4), /A 0, B 1, C 0/);
+  assert.match(line(4), /error-no-harm 1/);
+  assert.match(line(9), /Standardized Mortality Ratio for ICU/);
+  assert.doesNotMatch(line(9), /near misses|uncategorised/, "no NCC MERP detail on the SMR row");
 });

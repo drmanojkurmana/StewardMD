@@ -1640,7 +1640,6 @@
       case "falls": return wTS("ward.qm-falls", "Falls per 1000 bed-days", t);
       case "pressure-injuries": return wTS("ward.qm-pressure-injuries", "Pressure injuries per 1000 bed-days", t);
       case "medication-errors": return wTS("ward.qm-medication-errors", "Medication error incidents per 1000 bed-days", t);
-      case "medication-error-severity": return wTS("ward.qm-medication-error-severity", "Medication errors by NCC MERP category", t);
       case "hai": return wTS("ward.qm-hai", "Healthcare-associated infections per 1000 bed-days", t);
       case "antibiotic-dot": return wTS("ward.qm-antibiotic-dot", "Antibiotic days of therapy per 1000 bed-days", t);
       case "lab-tat": return wTS("ward.qm-lab-tat", "Laboratory turnaround (request to result)", t);
@@ -1669,8 +1668,7 @@
       case "below-minimum": return wTS("ward.qm-below-minimum", "{denominator} eligible cases is below the minimum of {minimum}; a percentage here would be compared with percentages from far larger populations and nothing would say they are different kinds of number", sent, v);
       case "beds-not-subtracted": return wTS("ward.qm-beds-not-subtracted", "Available beds are the configured bed list; blocked or closed beds are not subtracted.", sent);
       case "deaths-source": return wTS("ward.qm-deaths-source", "Deaths are read from a recorded death (Patient.deceased) or a discharge disposition. A stay with neither is excluded as data missing, and counted.", sent);
-      case "med-error-near-misses": return wTS("ward.qm-med-error-near-misses", "Every confirmed medication error is counted, near misses (NCC MERP categories A and B) included; the near misses are shown beside the rate.", sent);
-      case "med-error-uncategorised": return wTS("ward.qm-med-error-uncategorised", "An incident filed before the NCC MERP category was required has none and is counted as uncategorised, never placed in a category.", sent);
+      case "med-error-near-misses": return wTS("ward.qm-med-error-near-misses", "Every confirmed medication error is counted, near misses (NCC MERP categories A and B) included; the near misses are shown beside the rate, and the count by NCC MERP category beneath it. An incident filed before the category was required has none and is counted as uncategorised, never placed in a category.", sent);
       case "readmissions-all-unplanned": return wTS("ward.qm-readmissions-all-unplanned", "The record has no planned-readmission flag, so every readmission is counted as unplanned.", sent);
       default: return esc(sent);
     }
@@ -9956,17 +9954,16 @@
   /* NCC MERP counts (NABH 9): each group with the categories in it, then the records that have no category, apart. */
   function qsMerp(m) {
     var g = m.byGroup || {}, c = m.byCategory || {};
-    if (!m.numerator) return '<p class="w-hint">' + ms("info") + wTH("ward.no-medication-errors-in-this-period", "No confirmed medication errors in this period.") + "</p>";
+    if (!m.numerator) return "";
     var rows = MERP_GROUP_ROWS.map(function (r) {
       var cats = r[2].map(function (k) { return esc(k) + " <b>" + esc(c[k] || 0) + "</b>"; }).join(" &middot; ");
       return "<li><b>" + esc(wTEn(r[1])) + " (" + esc(r[2].length > 1 ? r[2][0] + " " + wT("ward.to2", "to") + " " + r[2][r[2].length - 1] : r[2][0]) + ")</b><span>" + esc(g[r[0]] || 0) + '</span><small class="w-dt-times">' + cats + "</small></li>";
     }).join("");
     var un = m.uncategorised ? '<li><b>' + wTH("ward.ncc-merp-uncategorised2", "Uncategorised: filed with no NCC MERP category") + "</b><span>" + esc(m.uncategorised) + "</span></li>" : "";
-    return "<p>" + wTH("ward.med-errors-total", "{n} confirmed medication errors", { n: esc(m.numerator) }, "n") + "</p><ul class=\"w-mini w-merp\">" + rows + un + "</ul>";
+    return "<ul class=\"w-mini w-merp\">" + rows + un + "</ul>";
   }
   function qsValue(m) {
     if (!m.computable) return '<p class="w-hint warn">' + ms("help") + wTH("ward.not-computable", "Not computable: {reason}", { reason: qmText(m.reasonCode, m.reason, m.reasonVars) }) + "</p>";
-    if (m.byCategory) return qsMerp(m) + (m.note2 ? '<p class="w-hint">' + ms("info") + qmText(m.note2Code, m.note2) + "</p>" : "");
     var parts = [];
     if (m.unit === "days" || m.unit === "minutes") {
       if (!m.denominator) return '<p class="w-hint">' + ms("info") + wTH("ward.no-cases-in-this-period", "No cases in this period.") + "</p>";
@@ -9985,7 +9982,7 @@
     if (m.nearMisses != null) parts.push(wTH("ward.med-error-near-misses-line", "of which {n} near misses (NCC MERP A and B)", { n: esc(m.nearMisses) }, "n"));
     if (m.uncategorised) parts.push(wTH("ward.med-error-uncategorised-line", "{n} with no NCC MERP category", { n: esc(m.uncategorised) }, "n"));
     if (m.woundRecords != null) parts.push(wTH("ward.qs-wound-records-beside", "{n} hospital-acquired stage 2+ pressure wound record(s), shown beside the rate", { n: esc(m.woundRecords) }));
-    return "<p>" + parts.join(" &middot; ") + "</p>" + (m.note2 ? '<p class="w-hint">' + ms("info") + qmText(m.note2Code, m.note2) + "</p>" : "");
+    return "<p>" + parts.join(" &middot; ") + "</p>" + (m.byCategory ? qsMerp(m) : "") + (m.note2 ? '<p class="w-hint">' + ms("info") + qmText(m.note2Code, m.note2) + "</p>" : "");
   }
   function qsCases(m) {
     var list = (m.cases || []).concat(m.woundCases || []);
