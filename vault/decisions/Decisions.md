@@ -5,6 +5,42 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ: discharge asks per order which medicines continue at home (owner)
+
+**Decision.** `/ward/discharge` takes `continueOrderIds`. Each must be an active MedicationOrder of the stay being
+closed (`continue_order_not_on_stay` 422 / `continue_order_not_active` 409, nothing written). Default: none continue.
+Chosen orders are copied to the finished Encounter's `takeHomeMedications` and closed as a new version with stop reason
+"continued at home"; the rest stop with "discharged" (CLIN-04). `medicationDecisions` records each order's outcome and
+who chose. The assembled discharge summary's medications section starts with the take-home list once the stay is
+finished. Active medication orders no longer need the free-text override reason (the per-order choice is the
+decision) but still need `emr.treat` (`medication_decision_not_permitted`); doses in flight, pending results and
+unreadable lists still need the reason. ABDM shares an order continued at home as active with an open period. The ward
+discharge screen shows one row per medicine with a tick and the outcome in words. **Known limit.** A summary signed
+before the stay ends does not list the take-home medicines. **Status:** PR "WardSynQ: owner decisions of 2026-10-04".
+
+## 2026-10-04 · WardSynQ: a nurse may perform the bedside transfusion check (owner)
+
+**Decision.** New capability `transfusion.administer`, granted to the nurse role (admin holds every capability). It
+opens the bedside steps only: the two-person check, start, observations, a reaction stop and completion. Request,
+crossmatch and issue stay with `emr.treat` / `transfusion.issue`. The first checker is the signed-in user; the second
+must still be a different, active member holding `emr.treat`, `med.administer`, `transfusion.administer` or
+`transfusion.issue` (CLIN-16); the same person by id or email is refused. TransfusionEpisode joined the raw record
+door's route-governed list, so no role can write an episode phase except through its route. **Why.** In the ward the
+nurse does the bedside check and runs the unit. **To confirm.** Observations, reaction stop and completion were
+included with check and start so the nurse who starts a unit can stop it. **Status:** PR "WardSynQ: owner decisions
+of 2026-10-04".
+
+## 2026-10-04 · ABDM shares a medicine that was active inside the consent window (owner)
+
+**Decision.** `filterRecordByDateRange` (functions/_connect/abdm/hip.js) keeps a medication when its active period
+overlaps the consent's [from, to], bounds inclusive: start (authoredOn, else effectivePeriod.start) <= to and (no end,
+or effectivePeriod.end >= from). No parseable start, or an end that does not parse: dropped (fail closed). A
+medication whose status says it ended (stopped, completed, cancelled, entered-in-error, not-taken) but carries no end
+date is not treated as running: it is kept only when its start is in the window. A stopped WardSynQ order now carries
+its stop time as the period end. **Why.** Dating a medicine by its start dropped long-term medicines started before
+the window but still taken. **Trade-off.** An active medicine with no recorded end is shared into any later window.
+Replaces the start-date rule of PR #1356. **Status:** PR "WardSynQ: owner decisions of 2026-10-04".
+
 ## 2026-10-04 · WardSynQ: a recovery (PACU) bay is held on the bed board, but is not an inpatient bed
 
 **Decision.** `bedBoard()` lists an open PACU stay in its ward's `recovery[]`, never in `occupied[]`, and leaves its

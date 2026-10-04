@@ -460,6 +460,24 @@ function grantForCaps(caps) {
     };
   }
 
+  /* Owner decision 2026-10-04. TRANSFUSION_ADMINISTER is the ward nurse's bedside part of a transfusion: the
+   * two-person check, start, observations, a reaction stop and completion. Which of those steps a request may take
+   * is decided at the route (functions/api/queue/[[path]].js); this grant only lets the episode be written, and the
+   * raw record door refuses TransfusionEpisode (functions/api/wardsynq/[[path]].js ROUTE_GOVERNED), so a nurse
+   * cannot write a crossmatch or an issue through it. Patient is read to compare the scanned wristband. */
+  if (has(CAPS.TRANSFUSION_ADMINISTER)) {
+    const added = ["TransfusionEpisode"];
+    const canRead = [...added, "Patient", "Encounter"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: added, basis: CAPS.TRANSFUSION_ADMINISTER };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.TRANSFUSION_ADMINISTER,
+    };
+  }
+
   /* TASK 4.15. Declaring/deactivating EmergencyActivation is its own narrow authority - see
    * emergency-mode.js's own header for why this grants nothing beyond the declaration record
    * itself: EMERGENCY_DECLARE is a governance capability, not a clinical one, and reading/writing

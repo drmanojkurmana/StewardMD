@@ -54,7 +54,14 @@ test("FHIR R4 connector: a medication's authoredOn / effective[x] reach the reco
   assert.deepEqual(kept.medications.map((m) => m.id), ["mr-1", "ms-1", "ms-2"]);
   assert.deepEqual(kept.documents.map((d) => d.id), ["dr-1"]);
   const late = filterRecordByDateRange(b, D("2026-02-13T00:00:00Z"), D("2026-02-28T00:00:00Z")).record;
-  assert.deepEqual(late.medications.map((m) => m.id), ["ms-2"]);
+  // owner decision 2026-10-04: mr-1 and ms-1 started before 13 Feb but are still active (no end), so they
+  // were active inside the window and are shared; only the undated one is still dropped.
+  assert.deepEqual(late.medications.map((m) => m.id), ["mr-1", "ms-1", "ms-2"]);
+  const after = filterRecordByDateRange(normalizeFhir(makeCtx(), { ...raw, resources: [
+    { resourceType: "MedicationStatement", id: "ms-ended", status: "completed", medicationCodeableConcept: { text: "Drug E" }, effectivePeriod: { start: "2026-01-02T00:00:00Z", end: "2026-01-20T00:00:00Z" } },
+    { resourceType: "MedicationStatement", id: "ms-ongoing", status: "active", medicationCodeableConcept: { text: "Drug F" }, effectivePeriod: { start: "2026-01-02T00:00:00Z" } }] }),
+    D("2026-02-01T00:00:00Z"), D("2026-02-28T00:00:00Z")).record;
+  assert.deepEqual(after.medications.map((m) => m.id), ["ms-ongoing"], "an end before the window drops it; an open period keeps it");
 });
 
 test("ABDM bundle normalizer: a MedicationRequest's authoredOn and a DocumentReference's date are carried", () => {

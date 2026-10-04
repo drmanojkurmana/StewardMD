@@ -66,6 +66,11 @@ export const CAPS = {
   // borrow a broader one's power to do its own job. Least privilege, per the plan's own text.
   HIM_ROI: "him.roi",               // decide and record a release-of-information request (HIM)
   TRANSFUSION_ISSUE: "transfusion.issue", // crossmatch/issue/administer a transfusion (blood bank)
+  /* Owner decision 2026-10-04: the ward nurse performs the two-person bedside check and runs the transfusion
+   * (start, observations, a reaction stop, completion). Its own authority so it reaches only those steps: request,
+   * crossmatch and issue stay with emr.treat and transfusion.issue. The second checker is still a different,
+   * active, authenticated member of the hospital (migrate-transfusion.js, CLIN-16). */
+  TRANSFUSION_ADMINISTER: "transfusion.administer", // bedside check, start and run a transfusion (ward nurse)
   // TASK 4.15 (Emergency Command Mode): declaring/deactivating a hospital-wide emergency is a
   // governance act, not a clinical one - its own capability, held only by admin/owner, never
   // folded into emr.treat (a doctor treating a patient is not the same authority as a hospital
@@ -195,8 +200,9 @@ export const ROLE_CAPS = {
   // emr.treat, so a nurse who can give a dose still cannot write the order for it.
   // …and may RECORD A VACCINATION they administered (emr.immunise) - the nurse is usually the one giving
   // it, so withholding that would mean the doctor typing in someone else's act.
+  // TRANSFUSION_ADMINISTER (owner, 2026-10-04): the bedside check and running the transfusion, not its order or issue.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
-          C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.MED_ADMINISTER, C.INCIDENT_REPORT, C.DEPT_REQUEST],
+          C.EMR_VITALS, C.EMR_IMMUNISE, C.EMR_VIEW, C.MED_ADMINISTER, C.TRANSFUSION_ADMINISTER, C.INCIDENT_REPORT, C.DEPT_REQUEST],
   // Intern / resident: clinical trainees — see the queue, register a walk-in, advance status, record
   // vitals, view EMR. QUEUE_ADD added 2026-08-24: an intern is often the person handed a walk-in, and
   // withholding it meant they could move patients through consultation but not enter them. Reorder and
