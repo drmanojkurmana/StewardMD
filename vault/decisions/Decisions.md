@@ -11182,3 +11182,23 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 
 ## 2026-10-04 - WardSynQ backups go to the R2 bucket `wardsynq-backups` through a binding
 - **Owner, 2026-10-04:** back WardSynQ up to a Cloudflare R2 bucket. This answers owner decision S1 for backups. The `platform` backup destination now uses the R2 binding `WARDSYNQ_BACKUPS` (bucket `wardsynq-backups`, `wrangler.toml` top level and `env.production`); the `DOC_S3_*` document store is only a fallback when the binding is absent (it is set in production today, so without the binding "platform" would have written backups into the documents bucket). No new secret: the backup key is HKDF-derived per hospital from `DOC_ENC_KEY`, else `FOLLOWCARE_PHI_KEY` (set in production); losing or rotating that secret makes every backup unreadable. No R2 lifecycle rule (retention is the hospital's, pruned by `backup-schedule.js`). Each hospital still selects "WardSynQ platform storage" once under Admin Center, Integrations, Backup destination. Tests: `test/wardsynq-backup-r2.test.mjs`. [[WardSynQ-Progress]]
+
+## 2026-10-04 - WardSynQ renal and pregnancy/lactation tables come from the NFI, off until the owner signs them off
+- **Owner, 2026-10-04:** the renal-adjustment and pregnancy/lactation tables are built from the National Formulary of India
+  (Indian Pharmacopoeia Commission), and the owner signs them off before they take effect.
+- Source used: the latest NFI text the IPC publishes free, the **6th Edition 2019-20 Draft Version**
+  (ipc.gov.in/images/Draft_Version_NFI_6th_edition.pdf, sha256 269be2d4...). NFI 2021 (6th, final) and NFI 2026 (7th) are
+  sold in print and through the subscription NFI Online portal, so they are not used. The renal table is identical row for
+  row to the final NFI 2011 Appendix 7d. Renal = Appendix 10d; lactation = Appendix 10b; pregnancy = each monograph's
+  Contraindications/Precautions (Appendix 10c has no per-drug table).
+- Data in `wardsynq/adapters/nfi-tables.js` (generated; every entry has quote, PDF page and rule), turned into rules by
+  `wardsynq/adapters/nfi-rules.js`, applied at order entry by `functions/_wardsynq/order-entry-pack.js`.
+- Gating reuses the D10 fingerprinted sign-off: list `nfi-tables`, one item per table. Only a table with a record for its
+  CURRENT fingerprint is applied; any edit turns it off until re-signed; unreadable sign-off records apply nothing. Until
+  signed, the order check says "NFI table loaded, awaiting clinical sign-off". This is the one seed list whose sign-off
+  changes behaviour.
+- Encoding policy (in `NFI_SOURCE.encoding`, signed with the tables): renal reads the NFI's own eGFR columns (>50, 10-50,
+  <10) and raises nothing at eGFR 90 or more; lactation levels come from the source's own words (contraindicated / avoid /
+  caution words / "safe" raises nothing / vague = monitor); pregnancy under Contraindications is contraindicated, under
+  Precautions only a monitor-level caution. Every finding stays overridable with a reason. Dashes in the source are written
+  as hyphens (the no-dash rule). Open for the owner: see PR "Decisions to confirm".

@@ -1509,6 +1509,28 @@
       }).catch(function () { return []; });
     } catch (e) { return Promise.resolve([]); }
   }
+  /* ADULT REFERENCE RANGES AS LITE EVIDENCE (2026-10-04). The book (Harrison's) has no adult serum
+   * potassium range, so "normal adult potassium range?" went ungrounded ("Not checked"). A value question
+   * that names an analyte in StewardMD's adult table (adult-ref.js, data/ref/adult-ref-values.json) gets
+   * that analyte's rows, each with its source named, as the leading passage. Never for a newborn / child
+   * question (the table is adults only). -> Promise<passage[]>, never rejects. */
+  function refEvidence(pkg) {
+    try {
+      var R = (typeof window !== "undefined") && window.SMD_ADULT_REF, q = String((pkg && pkg.question) || "");
+      if (!R || !R.load || !q || !VALUE_Q.test(q) || R.isNeonatal(q)) return Promise.resolve([]);
+      return R.load().then(function (d) {
+        if (!d) return [];
+        return R.match(q, d).slice(0, 2).map(function (a) { return R.passage(a, d); }).filter(Boolean);
+      }, function () { return []; });
+    } catch (e) { return Promise.resolve([]); }
+  }
+  // The answer's attribution: the adult table's own sources when its rows were evidence, else the KB line.
+  function sourceLine(grounding) {
+    var refs = [];
+    ((grounding && grounding.passages) || []).forEach(function (p) { (p.ref ? p.sources || [] : []).forEach(function (x) { if (refs.indexOf(x) < 0) refs.push(x); }); });
+    return refs.length ? "Source: StewardMD adult reference ranges (" + refs.join("; ") + "). Ranges vary by laboratory; use the patient's own lab range."
+      : "Source: StewardMD Knowledge Base - based on standard medical resources.";
+  }
   function curatedPassages(pkg, protos, drugPs) {
     var topic = routerTopic(pkg), gs = (pkg && pkg.grounding) || [];
     if (!topic || !gs.length) {
@@ -1542,9 +1564,10 @@
       return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, PASSAGE_CHARS - headPart.length - 1));
     }).join("\n\n");
   }
-  function withCurated(g, pkg, packId, protos, drugPs) {
+  function withCurated(g, pkg, packId, protos, drugPs, refPs) {
     var cur = ragEligible(packId) ? curatedPassages(pkg, protos, drugPs) : [];
-    if (!cur.length) return g;
+    refPs = ragEligible(packId) ? (refPs || []) : [];
+    if (!cur.length && !refPs.length) return g;
     var RAG = (g && g.RAG) || ((typeof window !== "undefined") && window.SMD_MAIK_RAG);
     if (!RAG) return g;
     var cap = RAG.TOPK || 3, book = (g && g.passages) || [];
@@ -1555,6 +1578,8 @@
     var merged = !book.length ? cur.slice(0, Math.min(2, cap))
       : txPair ? book.slice(0, 1).concat(cur.slice(0, 2)).slice(0, cap)
       : book.slice(0, 1).concat(cur.slice(0, 1), book.slice(1)).slice(0, cap);
+    // A reference-range question the adult table answers: the table rows lead, the rest follows.
+    if (refPs.length) merged = refPs.slice(0, cap).concat(merged).slice(0, cap);
     return { evidenceText: evidenceOf(merged), passages: merged, RAG: RAG, anchors: (g && g.anchors) || [], expansion: (g && g.expansion) || [], curated: true };
   }
 
@@ -1582,8 +1607,8 @@
       : (images.length || (opts && opts._ungrounded) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
       // the citation-bearing fields are stripped off the package further down.
-      : Promise.all([retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg), loadProtocols(), drugEvidence(pkg)])
-          .then(function (r) { return withCurated(r[0], pkg, packId, r[1], r[2]); });
+      : Promise.all([retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg), loadProtocols(), drugEvidence(pkg), refEvidence(pkg)])
+          .then(function (r) { return withCurated(r[0], pkg, packId, r[1], r[2], r[3]); });
 
     return groundingP.then(function (grounding) {
     /** The claim-check options, shared by the live stream view and the final check. */
@@ -1874,7 +1899,7 @@
             // used to be printed inside the answer ("Left out: 3 statements ..."). It now travels in
             // result.grounding.removed and the UI shows it in the small perf/meta line (owner audit,
             // 2026-09-19: offline answers should read like MaiK's, not like a log).
-            text += "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
+            text += "\n\n" + sourceLine(grounding);
           }
           groundingOut = { verdict: g.verdict, stats: g.stats, claims: g.claims, removed: g.removed, citations: g.citations };
         } else if (grounding) {
@@ -1892,7 +1917,7 @@
           } else {
             // NEVER a page number, on owner order - matches the standing attribution used
             // everywhere else in the app (maik-models.js GUIDE_INTRO / guide.why).
-            text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
+            text = text + "\n\n" + sourceLine(grounding);
           }
         }
         // A regenerate that ended up with no passages is never presented as checked (T57). With the
