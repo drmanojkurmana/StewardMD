@@ -1,0 +1,62 @@
+{
+  "schema_version": "edge-router-4",
+  "generated": "2026-10-04",
+  "rows": 2804,
+  "lang": {
+    "en": 2274,
+    "hi-Latn": 267,
+    "te-Latn": 263
+  },
+  "kind": {
+    "calculator": 1160,
+    "tool": 173,
+    "drug": 294,
+    "icd": 120,
+    "kb": 495,
+    "none": 562
+  },
+  "route_by": {
+    "rules": 694,
+    "model": 1950,
+    "empty": 12,
+    "negated": 148
+  },
+  "model_rows_by_lang": {
+    "not-model": 854,
+    "en": 1465,
+    "hi-Latn": 235,
+    "te-Latn": 250
+  },
+  "tags": {
+    "heldout-target": 332,
+    "values": 40,
+    "kb": 762,
+    "kb-question": 267,
+    "danger": 275,
+    "negation": 184,
+    "ambiguous": 79,
+    "not-a-tool": 12
+  },
+  "danger_by_route": {
+    "not-danger": 2529,
+    "negated": 146,
+    "model": 129
+  },
+  "dropped_equal_to_seen_text": 1,
+  "heldout_ambiguous_names": [
+    "wells",
+    "insulin",
+    "egfr",
+    "gfr",
+    "fisher",
+    "retic",
+    "bmr",
+    "coma score",
+    "sah grade"
+  ],
+  "recall_at_5": 0.9607,
+  "sha256": {
+    "test4": "382b041a4ae93b5ba87fea387dff15f66f5252604812778e6464b2e16b2f327f"
+  },
+  "note": "Synthetic only. test4.jsonl is frozen (Edge-Runbook 5d): no text equals a train, val, edge-router-2 test or test3 text, and none is in r3 training or dev."
+}

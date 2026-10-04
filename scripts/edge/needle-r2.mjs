@@ -15,7 +15,7 @@
 //     question templates in Hinglish/Tenglish, more condition names. Templates differ from test's.
 import fs from "node:fs";
 import path from "node:path";
-import { loadApp, OUT_DIR, readJsonl, writeJsonl, unit } from "./lib.mjs";
+import { loadApp, loadKB, OUT_DIR, readJsonl, writeJsonl, unit } from "./lib.mjs";
 import { augment, modelRows, FORMAT } from "./export.mjs";
 import { permute } from "./metrics.mjs";
 
@@ -29,10 +29,10 @@ const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").tr
 const FILLER = new Set(("open show me the a an go to take please pls can you i want need for of on in with and is what whats calculate calc " +
   "check find get my this pull up work out see look bring launch run use screen page app where would like let do it now be at from by or " +
   "score scores calculator tool drug card details detail info monograph patient kholo khol dikhao karo batao cheyyi chupinchu teruvu chudu " +
-  "kavali chahiye kya hai ka ki ke enti em cheppu cheyandi").split(" "));
-const words = (s) => norm(s).split(" ").filter((w) => w && !FILLER.has(w));
+  "kavali chahiye kya hai ka ki ke enti em cheppu cheyandi lagao").split(" "));
+export const words = (s) => norm(s).split(" ").filter((w) => w && !FILLER.has(w));
 // Every request word is in the title (a 4+ letter word may be the start of a title word: "fract" -> "fractional").
-function fits(text, title) {
+export function fits(text, title) {
   const tw = norm(title).split(" ");
   const q = words(text);
   return q.length > 0 && q.every((w) => tw.some((t) => t === w || (w.length >= 4 && t.startsWith(w))));
@@ -62,10 +62,14 @@ const devHeld = (key) => unit("dev:" + key) < 0.12;
 // One held-out template per group (generate.mjs family ids), for held-out phrasing in dev.
 const DEV_FAMILY = /^(calc:train6|tool:train2|none:train9|none:train10|drug:train1|hinglish:train1|tenglish:train1|val:train1):/;
 
-function build() {
-  const { E, M } = loadApp();
-  const train = readJsonl(path.join(OUT_DIR, "train.jsonl")), val = readJsonl(path.join(OUT_DIR, "val.jsonl"));
-  const testText = new Set(readJsonl(path.join(OUT_DIR, "test.jsonl")).map((r) => r.input_text.toLowerCase()));
+// o (round 3, needle-r3.mjs): kb (load the Knowledge Base), prep(rows) for train/val, exclude (more texts never
+// trained on), held(key) (more test-only targets), more(add, ctx) (more augmentation), fix(row) (relabel or drop,
+// null drops; train and dev), ambiguous (replaces ambiguous()), extra(trainRows) (more train rows), out { dev, train }.
+export function build(o = {}) {
+  const { E, M } = o.kb ? loadKB() : loadApp();
+  let train = readJsonl(path.join(OUT_DIR, "train.jsonl")), val = readJsonl(path.join(OUT_DIR, "val.jsonl"));
+  if (o.prep) { train = o.prep(train); val = o.prep(val); }
+  const testText = new Set(readJsonl(path.join(OUT_DIR, "test.jsonl")).map((r) => r.input_text.toLowerCase()).concat([...(o.exclude || [])]));
   const known = new Set(train.concat(val).map((r) => r.input_text.toLowerCase()));
   const dev = val.slice(), tr = [];
   train.forEach((r) => ((DEV_FAMILY.test(r.family_id) || devHeld(devKey(r)) ? dev : tr).push(r)));
@@ -77,7 +81,7 @@ function build() {
     const key = text.toLowerCase();
     if (testText.has(key)) { leaks++; return; }
     if (known.has(key)) return; known.add(key);
-    if (target && heldOutTarget((kind || "none") + ":" + target)) return;   // never touch test-only targets
+    if (target && (heldOutTarget((kind || "none") + ":" + target) || (o.held && o.held((kind || "none") + ":" + target)))) return;   // never touch test-only targets
     const cands = E.candidates(text);
     if (E.negated(text) || !cands.length || E.layer0(cands)) return;      // only rows the model would see
     const ok = target ? (accept && accept.length ? accept : [target]).map(String) : [];
@@ -145,16 +149,19 @@ function build() {
     add(tpl.replace("{c}", c), lang, null, null, null, false, "hn" + ti + "|" + c);
   }));
 
-  const devAll = dev.concat(aug.dev);
+  if (o.more) o.more(add, { E, M, devHeld });
+  const fix = (a) => (o.fix ? a.map(o.fix).filter(Boolean) : a);
+  const devAll = fix(dev.concat(aug.dev));
   // Train rows: ambiguous requests, and calculator requests that only describe the target, are relabelled
   // "none" (the label the router should act on).
-  const trainRows = modelRows(tr.concat(aug.train));
+  const trainRows = modelRows(fix(tr.concat(aug.train)));
   const describes = (r) => r.kind === "calculator" && r.target_option && !r.tags.includes("values") && !names(r.input_text, r.candidates[r.target_option - 1].title);
   let relabel = 0;
-  trainRows.forEach((r) => { if (ambiguous(r) || describes(r)) { r.target_option = 0; r.accept = []; r.target = null; r.kind = "none"; relabel++; } });
-  const rows = augment(trainRows, Number(arg("permute", 2)));
-  writeJsonl(path.join(OUT_DIR, "dev.jsonl"), devAll);
-  writeJsonl(path.join(EXP, "train.r2.jsonl"), rows.map((r) => {
+  trainRows.forEach((r) => { if ((o.ambiguous || ambiguous)(r) || describes(r)) { r.target_option = 0; r.accept = []; r.target = null; r.kind = "none"; relabel++; } });
+  const rows = augment(o.extra ? trainRows.concat(o.extra(trainRows)) : trainRows, Number(arg("permute", 2)));
+  const out = o.out || { dev: "dev.jsonl", train: "train.r2.jsonl" };
+  writeJsonl(path.join(OUT_DIR, out.dev), devAll);
+  writeJsonl(path.join(EXP, out.train), rows.map((r) => {
     const f = FORMAT["needle-local"](r);
     return { ...f, reasoning: f.answers.length ? "option " + f.answers[0].arguments.option : "none fits" };
   }));
@@ -162,6 +169,7 @@ function build() {
   console.log(JSON.stringify({ dev_rows: devAll.length, dev_model_rows: modelRows(devAll).length, dev_by: cnt(modelRows(devAll)),
     train_model_rows: trainRows.length, train_by: cnt(trainRows), relabelled_ambiguous: relabel, train_exported: rows.length,
     aug_train: aug.train.length, aug_dev: aug.dev.length, dropped_equal_to_test_text: leaks }, null, 1));
+  return { dev: devAll, train: rows, raw: trainRows };
 }
 
 // Host rows: canonical rows of a split (dev from dev.jsonl; test/val from the frozen files), model-routed only.
@@ -183,7 +191,7 @@ function pred(a, b) {
     const o = E.optionFrom(l.raw); return o.ok ? o : { ok: false, reason: o.reason };
   };
   const rot = {}; if (b) readJsonl(b).filter((l) => /~r$/.test(l.id)).forEach((l) => { rot[l.id.replace(/~r$/, "")] = l; });
-  const n = {}; ["dev", "test", "test3"].filter((s) => fs.existsSync(path.join(OUT_DIR, s + ".jsonl")))
+  const n = {}; ["dev", "test", "test3", "dev3", "test4"].filter((s) => fs.existsSync(path.join(OUT_DIR, s + ".jsonl")))
     .forEach((s) => readJsonl(path.join(OUT_DIR, s + ".jsonl")).forEach((r) => { n[r.id] = r.candidates.length; }));
   readJsonl(a).filter((l) => !/~r$/.test(l.id)).forEach((l) => {
     const o = one(l), line = { id: l.id, option: null, confidence: null, ms: l.ms, status: o.ok ? "ok" : "error" };
@@ -207,7 +215,9 @@ function bake(n, split) {
     process.stdout.write(JSON.stringify({ id: r.id + (k ? "~r" : ""), system: E.SYSTEM, prompt: E.promptFor(r.input_text, c), tools: E.TOOL_SCHEMA, n_options: c.length }) + "\n")));
 }
 
-if (mode === "build") build();
+const main = import.meta.url === "file://" + process.argv[1];
+if (!main) {}
+else if (mode === "build") build();
 else if (mode === "bake") bake(Number(argv[1] || 50), arg("split", "test"));
 else if (mode === "rows") rows(argv[1], argv.includes("--rot"));
 else if (mode === "pred") pred(argv[1], argv[2]);

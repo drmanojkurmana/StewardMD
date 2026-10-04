@@ -891,6 +891,101 @@ Repro: `clang++ -std=c++17 -O2 -I<dir with needle.h> scripts/edge/needle-host.cp
 `node scripts/edge/needle-pred.mjs pred raw.jsonl > pred.jsonl`; `node scripts/edge/score.mjs --split
 test|test3 --pred pred.jsonl`. Binaries were deleted after the run.
 
+### 5e. Needle local LoRA, round 3, and frozen test set `edge-router-4`, 2026-10-04
+Written as 5d on its branch; renumbered 5e on merge because 5d on main is the Needle 3.1.0 re-audit. The frozen `manifest4.json` note still says "Edge-Runbook 5d" and means this section.
+
+**Why.** test3 (`edge-router-3`) was seen once by r7, so it is not used to tune or pick anything in round 3.
+The rules layer also changed after r7 (#1365 KB exact, #1374 disease-name navigation, #1377 scheme intent and
+spelling, #1375 Hinglish/Tenglish negation and the Search ICD title), so every candidate list is rebuilt with
+the CURRENT router and the full Knowledge Base the scorer loads (`lib.mjs loadKB`).
+
+**test4, built and committed before any round-3 training** (`scripts/edge/generate-test4.mjs`,
+`dataset/test4.jsonl` + `manifest4.json`, sha256 `382b041a...f327f`, commit `3367bf2d1`). Same approach as test3:
+new templates only (none is a `generate.mjs`, `needle-r2.mjs`, `generate-test3.mjs` or `needle-r3.mjs`
+template), no text equal to a train, val, edge-router-2 test or test3 text (checked; the training builder
+checks the other way). Held-out keys (`lib.mjs t4Held`): 8% of targets and 30% of the ambiguous names
+(`wells`, `insulin`, `egfr`, `gfr`, `fisher`, `retic`, `bmr`, `coma score`, `sah grade`) never appear in round-3
+training or dev; 332 rows carry `heldout-target`. 2,804 rows: en 2,274, hi-Latn 267, te-Latn 263. Kinds:
+calculator 1,160, none 562, kb 495, drug 294, tool 173, icd 120. Routes: model 1,950, rules 694, negated
+148, empty 12. 275 danger rows (184 negations: 146 caught by the guard, 38 in forms it does not know, such as
+"band karo", "kholna nahi", "aapandi", "oddu"; 79 ambiguous names; 12 clinical orders), 129 of them
+model-routed. 267 KB disease questions (label none) and 495 KB page requests. Recall@5 96.1%.
+
+**Training data, train side only** (`scripts/edge/needle-r3.mjs build`, which runs the round-2 builder with
+round-3 options). Labels: a question about a disease is none even when its KB page is offered (MaiK answers);
+a disease name with a navigation word opens its KB page; a clinical order ("continue {drug}") is none; an
+ambiguous name (`lib.mjs AMBIGUOUS_NAMES`) is none; a negation the guard does not know ("band kar do",
+"aapeyyi") is none. Near-neighbour contrasts: every name x template for calculators that share title words
+with another calculator in their own options (GOS / GOS-E, ISS / R-ISS), every KB page whose name is also a
+calculator keyword (DIC), drug-card requests next to calculators that share the drug's name. Ambiguity
+relabel as round 2, except a KB page is a second fit only when the request IS its name, and an explicit
+calculator or page word decides. The builder throws if any training or dev3 text is a test, test3 or test4
+text, or if a test4-held target or name is in training or dev3. The selection split `dev3` (real labels)
+holds round 2's held-out templates and keys plus one dev-only template per new family.
+
+**Selection rule (pre-registered here, committed before any round-3 model is scored on dev3 or test4).**
+Candidates: every round-3 run x {single call, `engine.agree`}. Each is scored on ALL dev3 rows with
+`score.mjs --split dev3 --pred` (same metrics as test). A candidate is eligible when, on dev3: wrong shown is
+at most **0.25%** (half the 0.5% mark), danger is **100%**, accepted accuracy is at least 99%, and coverage is
+above dev3's rules coverage. Among eligible candidates the highest dev3 coverage wins (tie: the single call).
+Only the winner is scored on test4, once. If none is eligible the round FAILS; the candidate with the fewest
+dev3 danger misses, then the lowest dev3 wrong shown, is still scored on test4 once, for the record.
+Hyperparameters of later runs (rank, epochs) are chosen only from dev3 results. There is no confidence
+threshold to tune: a local LoRA build has no usable confidence head (5a), so the only operating-point knob is
+agree. Marks on test4 (unchanged): wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%,
+coverage above rules on test4; then on the Pixel 9, p95 under 800 ms over `--limit 50` including agree if
+chosen. Note before scoring: the base Needle single call is already p95 747-797 ms on the Pixel (A0.6), so
+an agree winner is unlikely to meet the latency mark.
+
+**dev3** (4,401 rows, 3,329 model-routed, 147 danger: 76 negations, 39 orders, 32 ambiguous names). Rules on
+dev3: coverage 24.3%, wrong 0.0%, danger 100%.
+
+**Runs** (L4, lr 5e-4, 3 epochs, `--val-split 0`; scored on dev3 with `needle-host`, M1 host)
+| Run | Data | LoRA | Dev3 wrong, 1 call / agree | Dev3 danger, 1 call / agree | Dev3 coverage, 1 call / agree |
+|---|---|---|---|---|---|
+| r8 | `train.r3` (23,761 rows, permute 1) | r32/a64 | 1.5% / 0.6% | 91.8% / 97.3% | 54.4% / 49.9% |
+r8 is not eligible. Its 28 agree wrong opens on dev3 are near neighbours of dev-held targets (GOS -> GOS-E,
+"ci" -> CIWA, "ipi" -> FLIPI, corrected sodium -> Na deficit) and danger rows ("change to {drug}", the
+dev-only order template; "show timi"). From these dev errors only, r9 adds (`needle-r3.mjs build --v2`):
+synthetic decoy contrasts (a copy of a named request with one more option whose title extends the target's
+name, label unchanged; and the reverse) and eight more order forms, train side only (dev3 byte-identical).
+
+| r9 | `train.r3v2` (27,784 rows: + decoys, + orders) | r64/a128 | 0.8% / 0.5% | 91.2% / 92.5% | 54.1% / 51.7% |
+r9 fixed most near neighbours (agree wrong 24 rows, 17 of them danger) but not unseen danger phrasings: the
+dev-only templates "{t} skip karo" (9 opened) and "change to {drug}" (2), plus GOS -> GOS-E and "ci" -> CIWA.
+Host latency (M1): single p95 63 / 61 ms, agree p95 136 / 121 ms (r8 / r9).
+
+**Choice (dev3 only, before test4 was opened).** No run x setting is eligible: none has dev3 danger 100% or
+wrong shown at most 0.25%. By the rule the round FAILS, and the candidate with the fewest dev3 danger misses,
+**r8 + agree** (4 misses; r9 + agree 11), is scored on test4 once, for the record. A third run was not
+launched: both runs miss danger rows only on phrasings no training row has, which more epochs or rank do
+not reach, so another ~1.7 USD would not change the verdict.
+
+**test4, scored once (r8 + agree, M1 host, pinned engine)**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 24.8% | 100% | 0.0% | 100% (275/275) | 0 / 0 / 0 | PASS |
+| **r8 + agree** | **61.1%** | **97.1%** | **1.8%** (50) | **94.2%** (259/275) | 1.5% / 1.1% / 5.3% | **FAIL** |
+Coverage by language: en 65.6%, hi-Latn 42.7%, te-Latn 41.4% (rules 28.9 / 9.0 / 4.6). Held-out targets:
+66.6% coverage, 0.6% wrong. Model rows: 52.3% coverage, 2.6% wrong. Host latency (both calls) p50 92, p95 124 ms.
+The 50 wrong opens: 31 KB page requests (27 of them for pages the options did not hold, mostly rare
+syndromes, where the model opened a calculator or a parent page such as "hereditary spastic paraplegia" for
+"type 23"; training never had a page request whose page was missing), 16 danger rows (11 negations in forms
+the guard does not know: "kholna nahi", "oddu", "aapandi", "vaddhu"; 3 ambiguous: "open timi quickly", "open
+cci quickly", "retic please"; 2 orders: "titrate ketorolac", "oxaliplatin 1 tab od"), 3 near neighbours
+(SPESI -> PESI, GOS -> GOS-E, Entresto -> valsartan), 2 KB questions, 2 chatter rows.
+
+**Verdict: FAIL, not shipped, nothing went to the Pixel.** Coverage passes (61.1% vs rules 24.8%); wrong shown
+(1.8%), accepted accuracy (97.1%) and danger (94.2%) do not. Cost: two VMs, about 3.27 USD list price
+(rounds 1-3: about 9.48 of the 20 USD cap). Weights (not in the repo): `$WORK/r8.safetensors` (sha256
+`fadf1636...`), `r8.cact` (`4dd366ba...`), `r9.safetensors` (`1fa2476a...`), `r9.cact` (`b57cabfd...`).
+**Next levers.** The model misses danger and page rows only on forms no training row resembles, so more
+LoRA data or capacity keeps chasing phrasings. (1) Rules, outside the model: add the unguarded Hinglish/Tenglish
+negations ("kholna nahi", "band karo", "skip karo", "oddu", "aapandi", "vaddhu") to the guard, and pass on a
+clinical order (a dosing or start/continue/titrate verb next to a drug); both need their own review. (2) Train
+"page asked for, page not offered -> none". (3) A calibrated confidence head (Cactus platform training, needs a
+key: the owner's call), so a 0.5 floor can catch the near-neighbour and unseen-form picks.
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh
