@@ -531,3 +531,37 @@ test("tool candidates the MaiK card cannot open are never offered", () => {
     assert.ok(!E.candidates("open antibiogram resistance").some((c) => c.kind === "tool" && c.id === "antibiogram"));
   } finally { delete globalThis.SMD_MAIK_TOOL_OPENABLE; }
 });
+
+// Found by the frozen test set edge-router-4 (test4.jsonl, runbook 5d): forms the guard did not know.
+test("negation guard: more Hinglish and Tenglish forms pass; clinical questions still route", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["antibiogram kholna nahi", "icu band karo", "icu band kar do", "antibiogram skip karo", "insulin mat karo", "icu oddu",
+    "antibiogram aapandi", "icu vaddhu", "antibiogram vaddu", "antibiogram cheyyakandi", "icu dikhana nahi", "antibiogram aapeyyi"]) {
+    assert.equal(E.negated(q), true, q);
+    assert.equal(E.rules(q), null, q);
+    assert.equal(await E.route(q), null, q);
+  }
+  assert.equal(m.prompts.length, 0);
+  for (const q of ["fever nahi utar raha paracetamol dose", "urine output nahi hai crcl", "band keratopathy", "bandage kab karna hai", "creatinine 1.2 mg crcl"])
+    assert.equal(E.negated(q), false, q);
+});
+test("clinical orders pass: an order verb next to a drug, or a dosing pattern, never opens a card or calls the model", async () => {
+  const DRUGS = ["metformin", "ketorolac", "oxaliplatin", "heparin", "amlodipine", "insulin"];
+  globalThis.SMD_DRUGLINK = { drugsIn: (t) => DRUGS.filter((d) => t.toLowerCase().includes(d)).map((d) => ({ generic: d, name: d, typed: d, fuzzy: false })) };
+  try {
+    store.smd_edge = "1";
+    const m = mock(() => needleReply(1)); E.setEngine(m);
+    for (const q of ["continue metformin", "titrate ketorolac", "oxaliplatin 1 tab od", "metformin 500 mg bd", "start heparin", "heparin chalu karo",
+      "metformin continue cheyyi", "add amlodipine 5 mg", "give insulin 10 units", "increase metformin", "shift to heparin"]) {
+      assert.equal(E.negated(q), true, q);
+      assert.equal(E.rules(q), null, q);
+      assert.equal(await E.route(q), null, q);
+    }
+    assert.equal(m.prompts.length, 0, "no model call for an order");
+    for (const q of ["metformin details", "open metformin", "metformin", "start the curb-65", "give me the antibiogram", "creatinine 1.2 mg crcl"])
+      assert.equal(E.negated(q), false, q);
+    const r = E.rules("metformin");
+    assert.equal(r && r.kind, "drug", "the drug card still opens");
+  } finally { delete globalThis.SMD_DRUGLINK; }
+});

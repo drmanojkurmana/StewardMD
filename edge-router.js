@@ -48,7 +48,22 @@
   // "don't open the ICU", "stop metformin": never act on a negated or stop request.
   // Hinglish "mat kholo" / "nahi chahiye" and Tenglish "vaddu" / "teravaddu": a bare "nahi" is not one
   // ("fever nahi utar raha"), only "nahi chahiye" (do not want) and "mat" before a verb.
-  var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b|\b(nahi|nahin|nahii|nai|nhi)\s+chahi(y|e)e?\b|\bmat\s+(khol|kholo|kholna|dikha|dikhao|dikhana|karo|kar|chalao|chala|lagao|bhejo|do)\b|\b\w*(vaddu|vadhu)\b/i;
+  // Also (test4, 2026-10-04): "<verb>na nahi" ("kholna nahi"), "band / skip karo", Tenglish "oddu" (any
+  // -oddu), "aapandi / aapu / aapeyyi" (stop), "vaddhu", "cheyyakandi / cheyyaku".
+  var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b|\b(nahi|nahin|nahii|nai|nhi)\s+chahi(y|e)e?\b|\bmat\s+(khol|kholo|kholna|dikha|dikhao|dikhana|karo|kar|chalao|chala|lagao|bhejo|do)\b|\b\w*(vaddu|vadhu|vaddhu|oddu)\b|\b(kholna|dikhana|chalana|karna|bhejna|lagana|dena)\s+(nahi|nahin|nhi|mat)\b|\b(band|skip)\s+(karo|kar\s*do|kardo|kar\s*dijiye|karna|kar)\b|\baap(u|andi|eyyi|eyandi|eyi|ivu|ivandi)\b|\bchey+(akandi|aku|akunda)\b/i;
+  // A clinical order ("continue metformin", "titrate ketorolac", "oxaliplatin 1 tab od") is never a
+  // navigation request: Edge passes, no card and no model. An order verb counts only with a drug named
+  // (SMD_DRUGLINK); a dosing pattern (a number + tab/cap/puff/drop, or a frequency after a number: "500 mg bd")
+  // counts alone. Lab values ("creatinine 1.2 mg") are neither. "metformin details" / "open metformin" carry neither, so the drug card still opens.
+  var ORDER_VERB = /\b(start|restart|resume|continue|titrate|up-?titrate|taper|wean|increase|decrease|reduce|escalate|de-?escalate|give(?!\s+me\b)|add|administer|prescribe|shift\s+to|switch\s+to|change\s+to|chalu|shuru|jari\s+rakho|badhao|badha\s+do|ghatao|ghata\s+do|kam\s+karo|modalu|ivvandi|ivvu|ivvali|penchandi|penchu|tagginchandi|tagginchu)\b/i;
+  var DOSE_RE = /\b\d+(\.\d+)?\s*(tabs?|tablets?|caps?|capsules?|puffs?|drops?)\b|\b\d+(\.\d+)?\s*(mg|mcg|ml|units?|tabs?|tablets?|caps?)?\s*(od|bd|bid|tds|tid|qid|qds|hs|sos|stat|prn|q\d+h)\b/i;
+  function ordered(t) {
+    if (DOSE_RE.test(t)) return true;
+    if (!ORDER_VERB.test(t)) return false;
+    try { var DL = G.SMD_DRUGLINK; return !!(DL && DL.drugsIn && DL.drugsIn(t, { fuzzy: true }).length); } catch (e) { return false; }
+  }
+  // The pass guard: a negation or a clinical order. Runs before rules and the model.
+  function guarded(text) { var t = String(text || ""); return NEGATION.test(t) || ordered(t); }
   var ICD_CUE = /\b(icd(?:\s*-?\s*1[01])?|icd10|icd11|diagnosis code|code for)\b/i;
   // The Search ICD tool's own name ("navigate to search icd", "icd search kholo"): only a term after
   // "for" / "of" is a lookup ("search icd for sepsis"); the rest is navigation, never an ICD term.
@@ -415,7 +430,7 @@
   // Layer 0 alone, synchronous: an exact name or an explicit ICD request, else null. MaiK calls this BEFORE
   // its follow-up logic, so "antibiogram kholo" opens the tool even while an earlier topic is live.
   function rules(text) {
-    if (!flagOn() || NEGATION.test(String(text || ""))) return null;
+    if (!flagOn() || guarded(text)) return null;
     var cands; try { cands = candidates(text); } catch (e) { return null; }
     if (!layer0(cands)) return null;
     stats.requests++; stats.rules++;
@@ -424,7 +439,7 @@
   function route(text, ctx) {
     stats.requests++;
     if (!flagOn()) return Promise.resolve(null);
-    if (NEGATION.test(String(text || ""))) { stats.passed++; return Promise.resolve(null); }
+    if (guarded(text)) { stats.passed++; return Promise.resolve(null); }
     var cands;
     try { cands = candidates(text); } catch (e) { cands = []; }
     if (!cands.length) { stats.passed++; return Promise.resolve(null); }
@@ -640,7 +655,7 @@
   }
 
   var API = {
-    route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
+    route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: guarded, ordered: function (t) { return ordered(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine,
     engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
