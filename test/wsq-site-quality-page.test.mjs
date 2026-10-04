@@ -72,3 +72,27 @@ test("R2-1: a diagnostics safety checklist asks for the department and the audit
   const xx = loadSite({ lang: "xx", pages: ["quality.js"] }), X = xx.win.WSQ._quality;
   assert.deepEqual(leftovers(X.auditsHtml(ctxOf(xx), d, "t1"), ["Lab safety", "Gloves worn", "Hands"]), []);
 });
+
+test("owner decisions 2026-10-04: VAE and VAP name the stays they are surveyed on; the sign-off notice shows only while something is unsigned, translated", () => {
+  const vent = { ...IC,
+    events: [...IC.events, { id: "VAP", label: "Ventilator-associated pneumonia", device: "ventilator", population: "paediatric", criteria: ["PNU1"], source: "NHSN ch.6" },
+      { id: "VAE", label: "Ventilator-associated event", device: "ventilator", population: "adult", criteria: ["VAC", "IVAC", "PVAP"], source: "NHSN ch.10" }],
+    rates: [...IC.rates, { event: "VAE", population: "adult", computable: true, numerator: 1, denominator: 31, per: 1000, value: 32.26 },
+      { event: "VAP", population: "paediatric", computable: false, reason: "a ventilator line's stay could not be read" }],
+    cases: [{ id: "h2", patientId: "p1", event: "VAE", dateOfEvent: "2026-08-06", status: "under-review", eligibility: { eligible: true, deviceDay: 6 }, criteriaMet: [], organisms: [], definitionSource: "NHSN ch.10" }],
+    unapproved: "The NHSN criterion names for CAUTI are seed content awaiting clinical sign-off." };
+  const en = loadSite({ lang: "en", pages: ["quality.js"] }), c = ctxOf(en), Q = en.win.WSQ._quality;
+  const html = Q.icHtml(c, vent);
+  assert.match(html, /<option value="VAE">VAE Ventilator-associated event \(adult stays only\)<\/option>/);
+  assert.match(html, /<option value="VAP">VAP Ventilator-associated pneumonia \(paediatric stays only, not NICU\)<\/option>/);
+  assert.ok(["VAC", "IVAC", "PVAP"].every((k) => html.includes('data-crit="' + k + '"')), "a VAE case offers the three VAE tiers");
+  assert.match(html, /Line \(CLABSI, CAUTI, VAP, VAE\)/);
+  assert.match(html, /Not computable:<\/?[^>]*>? ?a ventilator line's stay could not be read|Not computable: a ventilator line&#39;s stay could not be read/);
+  assert.match(html, /class="msg note">The NHSN criterion names for CAUTI are seed content awaiting clinical sign-off\./);
+  assert.doesNotMatch(Q.icHtml(c, { ...vent, unapproved: null }), /awaiting clinical sign-off/, "nothing unsigned: no notice");
+  const xx = loadSite({ lang: "xx", pages: ["quality.js"] }), X = xx.win.WSQ._quality;
+  assert.deepEqual(leftovers(X.icHtml(ctxOf(xx), vent), ["CLABSI", "SSI", "VAP", "VAE", "Central line-associated bloodstream infection", "Surgical site infection", "Ventilator-associated pneumonia", "Ventilator-associated event",
+    "Asha Rao · MRN-100", "VAC", "IVAC", "PVAP", "NHSN ch.10", "The NHSN criterion names for CAUTI are seed content awaiting clinical sign-off.", "a ventilator line's stay could not be read", "a ventilator line&#39;s stay could not be read",
+    "Counted electronically.", "2026-08-06", "31", "1", "0", "CVC Right IJ 2026-08-01 05:00", "90", "30",
+    "Not computable:"]), [], "a refusal (TS) carries its English original under the translation by design");
+});

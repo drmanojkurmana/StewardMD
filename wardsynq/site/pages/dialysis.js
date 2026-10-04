@@ -4,8 +4,9 @@
  * Buildless ES5.
  *
  * Reads: GET /ward/dialysis-unit, GET /ward/dialysis-patient, GET /org/dialysis-settings. null is loading and a failed read
- * says so, never "none". A setting that is not configured says exactly that. URR is shown with its inputs, or as not
- * computable with the reason; Kt/V is not offered.
+ * says so, never "none". A setting that is not configured says exactly that. URR and single-pool Kt/V (Daugirdas second
+ * generation, owner decision 2026-10-04) are shown with their inputs, or as not computable with the reason; neither carries
+ * an adequacy verdict.
  */
 (function () {
   "use strict";
@@ -42,6 +43,22 @@
     var why = { pre_urea_missing: T(c, "site.dialysis.urrWhy.pre", "no pre-dialysis urea"), post_urea_missing: T(c, "site.dialysis.urrWhy.post", "no post-dialysis urea"),
       units_differ: T(c, "site.dialysis.urrWhy.units", "the two ureas are in different units"), pre_urea_not_positive: T(c, "site.dialysis.urrWhy.zero", "the pre-dialysis urea is not above zero") };
     return c.esc(T(c, "site.dialysis.urrNot", "URR not computable:")) + " " + (HAS(why, r.reason) ? c.esc(why[r.reason]) : data(c, r.reason));
+  }
+  function ktvHtml(c, r) {
+    if (!r) return "";
+    if (r.computable) {
+      var i = r.inputs;
+      return "<b>" + c.esc(T(c, "site.dialysis.ktvValue", "Single-pool Kt/V {v}", { v: Number(r.value).toFixed(2) })) + "</b> (" +
+        c.esc(T(c, "site.dialysis.ktvInputs", "{h} hours, {uf} L ultrafiltration, post weight {w} kg", { h: Math.round(i.hours * 100) / 100, uf: i.ufLitres, w: i.weightKg })) + ")";
+    }
+    var why = { pre_urea_missing: T(c, "site.dialysis.urrWhy.pre", "no pre-dialysis urea"), post_urea_missing: T(c, "site.dialysis.urrWhy.post", "no post-dialysis urea"),
+      units_differ: T(c, "site.dialysis.urrWhy.units", "the two ureas are in different units"), pre_urea_not_positive: T(c, "site.dialysis.urrWhy.zero", "the pre-dialysis urea is not above zero"),
+      post_urea_negative: T(c, "site.dialysis.ktvWhy.postNegative", "the post-dialysis urea is below zero"),
+      duration_missing: T(c, "site.dialysis.ktvWhy.noEnd", "no start and end time"), duration_not_positive: T(c, "site.dialysis.ktvWhy.noLength", "the session has no length"),
+      uf_missing: T(c, "site.dialysis.ktvWhy.noUf", "no achieved ultrafiltration"), uf_negative: T(c, "site.dialysis.ktvWhy.ufNegative", "the ultrafiltration is below zero"),
+      post_weight_missing: T(c, "site.dialysis.ktvWhy.noWeight", "no post-dialysis weight"), post_weight_not_positive: T(c, "site.dialysis.ktvWhy.weightZero", "the post-dialysis weight is not above zero"),
+      invalid_logarithm: T(c, "site.dialysis.ktvWhy.log", "the post urea is too low for the session length (the logarithm is undefined); check the ureas and times") };
+    return c.esc(T(c, "site.dialysis.ktvNot", "Kt/V not computable:")) + " " + (HAS(why, r.reason) ? c.esc(why[r.reason]) : data(c, r.reason));
   }
   function bpText(bp) { return bp ? bp.systolic + "/" + bp.diastolic : ""; }
 
@@ -121,7 +138,7 @@
       field(c, "dyComplications", T(c, "site.dialysis.complications", "Complications"), "", s.complications) + "</div>" +
       '<p class="quiet">' + esc(T(c, "site.dialysis.anticoagNote", "Anticoagulation is ordered and given through the medication orders and eMAR, not recorded here.")) + "</p>" +
       ureaInputs(c, p, "pre", T(c, "site.dialysis.preUrea", "Pre-dialysis urea"), !!edit) + ureaInputs(c, p, "post", T(c, "site.dialysis.postUrea", "Post-dialysis urea"), !!edit) +
-      '<p class="quiet">' + esc(T(c, "site.dialysis.urrFormula", "URR = (pre-dialysis urea minus post-dialysis urea) / pre-dialysis urea x 100 (Lowrie and Lew 1990; NKF KDOQI haemodialysis adequacy guideline, 2015 update). Kt/V is not calculated.")) + "</p>" +
+      '<p class="quiet">' + esc(T(c, "site.dialysis.adequacyFormula", "URR = (pre-dialysis urea minus post-dialysis urea) / pre-dialysis urea x 100 (Lowrie and Lew 1990; NKF KDOQI haemodialysis adequacy guideline, 2015 update). Single-pool Kt/V = -ln(R minus 0.008 x t) + (4 minus 3.5 x R) x UF / W, where R is post urea / pre urea, t the session length in hours, UF the achieved ultrafiltration in litres and W the post-dialysis weight in kilograms (Daugirdas 1993, second generation). Both ureas must be in the same unit.")) + "</p>" +
       '<button class="btn" type="button" data-dy="session">' + esc(T(c, "site.dialysis.saveSession", "Save session")) + "</button>" +
       (edit ? ' <button class="btn quiet" type="button" data-dy="cancel-edit">' + esc(T(c, "site.dialysis.cancelEdit", "Stop editing")) + "</button>" : "");
   }
@@ -159,7 +176,8 @@
       field(c, "dyDzReason", T(c, "site.dialysis.dzReason", "Reason (for a discard)")) + '<button class="btn quiet" type="button" data-dy="dialyzer">' + esc(T(c, "site.dialysis.recordEvent", "Record")) + "</button></div>";
     if (canWrite) h += sessionForm(c, p, edit);
     h += "<h4>" + esc(T(c, "site.dialysis.sessions", "Sessions")) + "</h4>" + (p.sessions.length ? p.sessions.map(function (x) {
-      return '<div class="card">' + data(c, when(x.startAt)) + (x.endAt ? " · " + data(c, when(x.endAt)) : "") + " · " + data(c, x.stationName || x.stationId) + " · " + accessWord(c, x.accessType) +
+      /* One wrapper: .card is a two-column grid (signal, content), so loose text would fall into the signal column. */
+      return '<div class="card"><div>' + data(c, when(x.startAt)) + (x.endAt ? " · " + data(c, when(x.endAt)) : "") + " · " + data(c, x.stationName || x.stationId) + " · " + accessWord(c, x.accessType) +
         "<br>" + esc(T(c, "site.dialysis.weights", "Weight")) + " " + data(c, x.preWeightKg + " / " + (x.postWeightKg == null ? "-" : x.postWeightKg) + " kg") +
         " · " + esc(T(c, "site.dialysis.bp", "BP")) + " " + data(c, bpText(x.preBp) + " / " + (bpText(x.postBp) || "-")) +
         " · " + esc(T(c, "site.dialysis.uf", "UF target / achieved")) + " " + data(c, (x.targetUfMl == null ? "-" : x.targetUfMl) + " / " + (x.achievedUfMl == null ? "-" : x.achievedUfMl) + " mL") +
@@ -167,9 +185,9 @@
         (x.dialyzerId ? "<br>" + esc(T(c, "site.dialysis.dialyzerReuse", "Dialyzer {id}, reuse number {n}", { id: x.dialyzerId, n: x.reuseNumber })) : "") +
         (x.complications ? "<br>" + esc(T(c, "site.dialysis.complications", "Complications")) + ": " + data(c, x.complications) : "") +
         (x.nurse || x.doctor ? "<br>" + data(c, [x.nurse, x.doctor].filter(Boolean).join(" · ")) : "") +
-        "<br>" + urrHtml(c, x.urr) +
+        "<br>" + urrHtml(c, x.urr) + (x.ktv ? "<br>" + ktvHtml(c, x.ktv) : "") +
         (x.missingPost.length ? '<br><span class="msg note">' + esc(T(c, "site.dialysis.missingList", "missing:")) + " " + x.missingPost.map(function (k) { return missingWord(c, k); }).join(", ") + "</span>" : "") +
-        (canWrite ? ' <button class="btn quiet" type="button" data-dy="edit" data-id="' + esc(x.sessionId) + '">' + esc(T(c, "site.dialysis.edit", "Add or correct")) + "</button>" : "") + "</div>";
+        (canWrite ? ' <button class="btn quiet" type="button" data-dy="edit" data-id="' + esc(x.sessionId) + '">' + esc(T(c, "site.dialysis.edit", "Add or correct")) + "</button>" : "") + "</div></div>";
     }).join("") : "<p>" + esc(T(c, "site.dialysis.noSessions", "No session is recorded for this patient.")) + "</p>");
     return h;
   }
@@ -245,5 +263,5 @@
     };
   } });
 
-  WSQ._dialysis = { scheduleHtml: scheduleHtml, missingHtml: missingHtml, patientHtml: patientHtml, settingsHtml: settingsHtml, urrHtml: urrHtml };
+  WSQ._dialysis = { scheduleHtml: scheduleHtml, missingHtml: missingHtml, patientHtml: patientHtml, settingsHtml: settingsHtml, urrHtml: urrHtml, ktvHtml: ktvHtml };
 })();
