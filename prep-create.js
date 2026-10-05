@@ -21,7 +21,12 @@
   var SR = isNode ? require("./prep-source.js") : G.PREP_SRC;
 
   /* ================= pure ================= */
-  var URL = "/api/ai/prep-generate", MODEL = "gemini-3.1-flash-lite", PV = "p1", BATCH = 7, TARGET = 10, RETRY_MS = 4000, TIMEOUT_MS = 40000;
+  var URL = "/api/ai/prep-generate", MODEL = "gemini-3.1-flash-lite", PV = "p1", BATCH = 7, TARGET = 10, RETRY_MS = 4000, TIMEOUT_MS = 45000;
+  /* TIMEOUT_MS: the phone gives up on one call after 45 s, longer than the router's 28 s AI deadline plus the time to
+     store the idempotency record, so a slow but successful call has normally been answered (and recorded) before the
+     phone resends it with the same idem. Residual risk: if the first request is still in flight on the server when
+     the phone's resend arrives (a network stall longer than 45 s, or a server queue), both can reach the model and be
+     charged; the server answers the resend from the replay record only once the first one has finished. */
   var MONTH_CAP = 10, DAY_CAP = 3;
   var PROFILE = { id: "neet-pg", v: 1, cog: { recall: 0.4, application: 0.4, reasoning: 0.2 }, d: { 1: 0.3, 2: 0.5, 3: 0.2 } };
 
@@ -215,6 +220,26 @@
     if (store.bm) for (k in store.bm) if (store.bm[k] && store.bm[k][1] === m) delete store.bm[k];
     if (store.last && store.last.m === m) store.last = null;
     return store;
+  }
+  /* What the phone could not read as text, in counts (no page numbers on screen): rd = readPages() result,
+     canOcr = the app has on-device OCR. "" when every page had a good text layer. */
+  function readNote(rd, canOcr) {
+    var n = rd && rd.ocrPages ? rd.ocrPages.length : 0, by = {}, out = [];
+    ((rd && rd.skipped) || []).forEach(function (x) { by[x.why] = (by[x.why] || 0) + 1; });
+    var pg = function (k) { return k + (k === 1 ? " page" : " pages"); };
+    if (n) out.push(pg(n) + " read by on-device OCR.");
+    if (by["no-text"]) out.push(pg(by["no-text"]) + (canOcr ? " had no text to read." : " skipped: scanned pages are read only in the StewardMD phone app, not on the web."));
+    if (by["garbled"]) out.push(pg(by["garbled"]) + " skipped: their text could not be read cleanly.");
+    if (by["ocr-cap"]) out.push(pg(by["ocr-cap"]) + " skipped: up to " + SR.OCR_PAGE_CAP + " scanned pages are read by OCR in one deck.");
+    if (by["ocr-failed"]) out.push(pg(by["ocr-failed"]) + " could not be read by OCR.");
+    return out.join(" ");
+  }
+  // Nothing readable at all: the one message that says why.
+  function unreadableMessage(rd, canOcr) {
+    var sk = (rd && rd.skipped) || [];
+    if (!canOcr && sk.length && sk.every(function (x) { return x.why === "no-text"; })) return "These pages are scanned images. Scans are read only in the StewardMD phone app, not on the web. Paste the text instead.";
+    if (sk.length && sk.every(function (x) { return x.why === "garbled"; })) return "The text on these pages could not be read cleanly. Try other pages, or paste the text instead.";
+    return "No readable text was found on these pages. Try other pages, or paste the text instead.";
   }
   function defaultTitle(doc, name) {
     if (name) return String(name).replace(/\.pdf$/i, "").slice(0, 80);
@@ -461,7 +486,7 @@
     errorCode: errorCode, errorMessage: errorMessage, canRetry: canRetry, shouldRetry: shouldRetry, opError: opError,
     idemKey: idemKey, deckIdFor: deckIdFor, mixFor: mixFor, addUsage: addUsage, dayKey: dayKey, capsFrom: capsFrom, capLine: capLine, capsAfterStop: capsAfterStop, costLine: costLine,
     factRecord: factRecord, factPayload: factPayload, paraFor: paraFor, gatesPass: gatesPass, toStored: toStored, toCard: toCard, jaccard: jaccard, nearDup: nearDup,
-    deckKey: deckKey, cardDeckKey: cardDeckKey, deckProgress: deckProgress, purgeStore: purgeStore, defaultTitle: defaultTitle,
+    deckKey: deckKey, cardDeckKey: cardDeckKey, deckProgress: deckProgress, purgeStore: purgeStore, defaultTitle: defaultTitle, readNote: readNote, unreadableMessage: unreadableMessage,
     newRound: newRound, newJob: newJob, nextOp: nextOp, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp
   };
   if (isNode) { module.exports = PURE; return; }
@@ -469,7 +494,7 @@
   /* ================= browser ================= */
   var CAPS_KEY = "smd_prep_c_caps";
   var cs = { kind: "paste", text: "", title: "", own: false, pdf: null, pagesSpec: "", err: "", busy: "", pending: null };
-  var job = null, jobResult = null, profiles = {};
+  var job = null, jobResult = null, profiles = {}, note = "";   // note: what the reader could not read as text (readNote)
 
   function readCaps() { try { return JSON.parse(G.localStorage.getItem(CAPS_KEY) || "null"); } catch (e) { return null; } }
   function writeCaps(c) { try { G.localStorage.setItem(CAPS_KEY, JSON.stringify(c)); } catch (e) {} }
@@ -521,7 +546,7 @@
     var esc = host.esc, n = DK.questionCount(m), t = esc(m.title), id = esc(m.id), busy = job && !jobResult && job.deckId === m.id;
     var line = host.fmt(n) + (n === 1 ? " question" : " questions") + " · " + host.fmt(m.stats.cards || 0) + " cards" + (pg.due ? " · " + host.fmt(pg.due) + " due" : "") + (pg.cardsDue ? " · " + host.fmt(pg.cardsDue) + " cards due" : "");
     return '<section class="pn-panel pc-deck" aria-label="' + t + '"><div class="pc-dh"><span class="pn-mb"><b>' + t + "</b><small>" + line + "</small>" +
-      '<small class="pc-lab">' + esc(m.label || DK.LABEL) + (m.cost && m.cost.stopped ? " · stopped: " + esc(stopWord(m.cost.stopped)) : "") + "</small></span>" +
+      '<small class="pc-lab">' + esc(m.label || DK.LABEL) + (m.source && m.source.ocr ? " · partly read by OCR" : "") + (m.cost && m.cost.stopped ? " · stopped: " + esc(stopWord(m.cost.stopped)) : "") + "</small></span>" +
       '<button type="button" class="pn-ib" data-act="c-del" data-d="' + id + '" aria-label="Delete the deck ' + t + '">' + host.ico("x") + "</button></div>" +
       '<div class="pc-acts">' +
       '<button type="button" class="pn-btn sm pri" data-act="c-prac" data-d="' + id + '" aria-label="Practise ' + t + '"' + (n ? "" : " disabled") + ">" + host.ico("play") + " Practise</button>" +
@@ -545,7 +570,7 @@
       (cs.pdf ? '<p class="pc-file"><b>' + esc(cs.pdf.name) + "</b> · " + host.fmt(cs.pdf.pages) + " pages</p>" +
         '<label class="pc-lbl" for="pcPages">Pages to use</label><input id="pcPages" class="pc-in" inputmode="numeric" autocomplete="off" value="' + esc(cs.pagesSpec) + '">' +
         '<p class="pn-mut pn-small">' + SR.PAGE_CAP + " pages at most. Example: 1-20, 25. Pick the chapter you are studying.</p>" : "") +
-      '<p class="pn-mut pn-small">Digital PDFs only for now. Scanned PDFs are coming soon.</p>';
+      '<p class="pn-mut pn-small">' + (SR.canOcr() ? "Scanned pages are read on this phone by on-device OCR, up to " + SR.OCR_PAGE_CAP + " in one deck. Nothing is uploaded for this." : "Scanned pages are read only in the StewardMD phone app. Here, only PDFs with real text work.") + "</p>";
     host.paint(host.bar("Make a deck", esc(ex.label), "back") + '<div class="pn-body" id="pcCreateView">' +
       '<div class="pn-wrap" role="group" aria-label="Source">' + chip("paste", "Paste notes") + chip("pdf", "PDF") + "</div>" + src +
       '<label class="pc-lbl" for="pcTitle">Deck name (optional)</label><input id="pcTitle" class="pc-in" maxlength="80" autocomplete="off" value="' + esc(cs.title) + '">' +
@@ -593,13 +618,16 @@
     if (pp.error) return createError(host, pp.error);
     cs.busy = "Reading page 1 of " + pp.pages.length;
     host.rerender();
-    SR.readPages(cs.pdf.doc, pp.pages, function (d, n) {
+    var ocrOn = SR.canOcr();
+    SR.readPdfPages(cs.pdf.doc, pp.pages, function (d, n, phase) {
       var el = host.root() && host.root().querySelector("#pcCreateView .pn-load");
-      if (el && d < n) el.textContent = "Reading page " + (d + 1) + " of " + n;
+      if (!el) return;
+      if (phase === "ocr") el.textContent = d < n ? "Reading scanned page " + (d + 1) + " of " + n + " on this phone" : "Scanned pages read";
+      else if (d < n) el.textContent = "Reading page " + (d + 1) + " of " + n;
     }).then(function (rd) {
       cs.busy = "";
-      if (rd.scanned.length >= pp.pages.length) return createError(host, "These pages have no text layer, so the PDF looks scanned. Scanned PDFs are coming soon. For now, paste the text instead.");
-      review(host, { kind: "pdf", raw: rd.pages, title: cs.title, name: cs.pdf.name, pages: pp.pages, scanned: rd.scanned });
+      if (!rd.pages.length) return createError(host, unreadableMessage(rd, ocrOn));
+      review(host, { kind: "pdf", raw: rd.pages, title: cs.title, name: cs.pdf.name, pages: pp.pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: readNote(rd, ocrOn) });
     }, function () { createError(host, "The pages could not be read. Try other pages or another PDF."); });
   }
   function rawText(src) {
@@ -622,22 +650,27 @@
   function build(host, src) {
     var doc;
     if (src.kind === "paste") doc = SR.docFromNotes(SR.prepScrub(src.text), src.title);
-    else doc = SR.docFromPdfPages(src.raw.map(function (pg) { return { p: pg.p, lines: pg.lines.map(function (l) { return { tx: SR.prepScrub(l.tx), size: l.size }; }) }; }), src.title);
+    else doc = SR.docFromPdfPages(src.raw.map(function (pg) { return { p: pg.p, ocr: !!pg.ocr, lines: pg.lines.map(function (l) { return { tx: SR.prepScrub(l.tx), size: l.size, ocr: !!l.ocr }; }) }; }), src.title);
     var chk = SR.capCheck(doc, src.pages ? src.pages.length : 1);
     if (chk.error) { if (onTop("#pcScrubView", host)) host.back(); return createError(host, chk.error); }
     var ex = host.exam(), u = user(), sha = DK.sha256(SR.docText(doc)), title = (src.title || "").trim() || defaultTitle(doc, src.name);
     cs.text = ""; cs.title = ""; cs.pdf = null; cs.pending = null; cs.own = false;
+    note = src.note || "";
     loadProfile(ex.id).then(function (prof) {
       var id = deckIdFor({ uid: u && u.uid, sha: sha, exam: ex.id, profileV: prof.v || 1, pv: PV, model: MODEL });
       return DK.getDeck(id).then(function (old) {
         if (old) { host.toast("You already have a deck from this source. Adding 10 more questions to it."); return startMore(host, old.id, true); }
         var m = DK.newManifest({ id: id, title: title, exam: ex.id, profileV: prof.v || 1, pv: PV, model: MODEL, source: { type: src.kind, name: src.name, pages: SR.pageSpan(src.pages), sha: sha } });
+        if (src.ocr) m.source.ocr = src.ocr;
+        if (src.skipped) m.source.skipped = src.skipped;
+        note = src.note || "";
         start(host, newJob({ m: m, sents: doc.sents, sections: doc.sections, facts: [], items: [], saved: false, target: TARGET, profile: prof, ctx: ctxOf(m) }), true);
       });
     }).then(null, function () { createError(host, MSG.storage); });
   }
   function ctxOf(m) { return { doc: m.source.sha.slice(0, 12), name: m.source.name || m.title, exam: m.exam, pv: m.pv, model: m.model }; }
   function startMore(host, deckId, fromCreate) {
+    if (!fromCreate) note = "";
     if (job && !jobResult) { host.toast("A deck is being made. Wait for it to finish first."); return Promise.resolve(); }
     return Promise.all([DK.getDeck(deckId), DK.getSrc(deckId), DK.facts(deckId), DK.items(deckId)]).then(function (a) {
       var m = a[0], src = a[1];
@@ -674,6 +707,7 @@
       '<span class="pn-prog pc-bar" aria-hidden="true"><i id="pcBarI" style="width:' + b.pct + '%"></i></span>' +
       '<p id="pcPhase">' + esc(b.phase) + '</p><p class="pn-mut pn-small" id="pcCost">' + esc(b.cost) + '</p><p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p></section>" +
       '<button type="button" class="pn-btn" data-act="c-stop"' + (job.stopReq ? " disabled" : "") + ">" + (job.stopReq ? "Stopping after this step" : "Stop after this step") + "</button>" +
+      (note ? '<p class="pn-mut pn-small" id="pcNote">' + esc(note) + "</p>" : "") +
       '<p class="pn-mut pn-small">Each step is checked before the next. You can go back; the deck keeps building.</p>';
     else if (!res.ok && !job.saved) {
       body = '<p class="pn-err" role="alert" id="pcErr" tabindex="-1">' + esc(res.message) + "</p>" + (b.caps ? '<p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p>" : "") +
@@ -684,6 +718,7 @@
       var n = res.accepted, has = DK.questionCount(job.m);
       body = '<section class="pn-panel pn-score"><p class="pn-big">' + n + '</p><p class="pn-mut">' + (n === 1 ? "new question" : "new questions") + " · " + has + " in the deck</p>" +
         (b.cost ? '<p class="pn-mut pn-small">' + esc(b.cost) + "</p>" : "") + (b.caps ? '<p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p>" : "") + "</section>" +
+        (note ? '<p class="pn-mut pn-small" id="pcNote">' + esc(note) + "</p>" : "") +
         (res.ok ? '<p class="pn-mut">' + (res.stopped ? "Stopped. What was made is saved." : n ? "Saved on this phone." : res.more ? "No question passed the checks this time. Try 10 more." : "Every part of this source has been used. Make a new deck from more material.") + "</p>" :
           '<p class="pn-err" role="alert" id="pcErr" tabindex="-1">' + esc(res.message) + "</p>") +
         (has ? '<button type="button" class="pn-btn pri" data-act="c-prac" data-d="' + id + '">' + host.ico("play") + " Practise this deck</button>" : "") +

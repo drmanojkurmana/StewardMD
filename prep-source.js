@@ -230,8 +230,8 @@
   var OCR_PAGE_CAP = 20, OCR_PAGE_MS = 30000, NONWORD_MAX = 0.1, FC = String.fromCharCode;
   var LETTERS = "A-Za-z0-9" + FC(0xC0) + "-" + FC(0x24F) + FC(0x370) + "-" + FC(0x3FF);
   var HAS_ALNUM = new RegExp("[" + LETTERS + "]");
-  // A word: letters (Latin, accented, Greek), digits and the joiners medical text uses (B12, PML-RARA, t(15;17),
-  // 1.5, 45mg/m2, 90%, 37.5\u00B0C written as a degree sign).
+  // A word: letters (Latin, accented, Greek), digits, degree, plus-minus and micro signs, and the joiners medical
+  // text uses (B12, PML-RARA, t(15;17), 1.5, 45mg/m2, 90%).
   var WORD = new RegExp("^[" + LETTERS + FC(0xB0, 0xB1, 0xB5) + ".,;:()\\[\\]/%+'&=<>*-]+$");
   var EDGE = /^[("'\[{<]+|[)"'\]}>.,;:!?*]+$/g;
   // Share of tokens that are not words. Tokens of plain ASCII punctuation only (bullets, dashes) are not counted.
