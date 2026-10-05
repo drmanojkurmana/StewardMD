@@ -1,0 +1,582 @@
+{
+  "id": "ss-infectious-diseases",
+  "code": "sid",
+  "branch": "ss-medicine",
+  "title": "Infectious Diseases",
+  "medmcqa": null,
+  "exams": [
+    "neet-ss"
+  ],
+  "sections": [
+    {
+      "id": "sid-principles",
+      "title": "Principles of infectious diseases",
+      "modules": [
+        {
+          "id": "sid-micro-diagnostics",
+          "title": "Microbiological diagnostics",
+          "size": "l",
+          "scope": "blood culture volume, MALDI-TOF, multiplex PCR panels, 16S rRNA sequencing, metagenomic next generation sequencing, procalcitonin, galactomannan, beta-D-glucan, antigen detection, serology interpretation, specimen collection"
+        },
+        {
+          "id": "sid-ast-resistance",
+          "title": "Antimicrobial susceptibility and resistance mechanisms",
+          "size": "l",
+          "scope": "MIC, CLSI EUCAST breakpoints, ESBL, AmpC, carbapenemases KPC NDM OXA-48, mecA MRSA, VRE vanA, colistin resistance mcr-1, efflux pumps, porin loss, modified carbapenem inactivation method"
+        },
+        {
+          "id": "sid-pk-pd",
+          "title": "Antimicrobial pharmacokinetics and pharmacodynamics",
+          "size": "m",
+          "scope": "time dependent killing, concentration dependent killing, AUC/MIC, T above MIC, extended infusion beta-lactams, vancomycin AUC monitoring, once daily aminoglycoside, augmented renal clearance, CRRT dosing, loading dose"
+        },
+        {
+          "id": "sid-stewardship",
+          "title": "Antimicrobial stewardship",
+          "size": "m",
+          "scope": "prospective audit and feedback, preauthorization, de-escalation, procalcitonin guided discontinuation, short course therapy, IV to oral switch, cumulative antibiogram, WHO AWaRe classification, ICMR treatment guidelines"
+        },
+        {
+          "id": "sid-fever-approach",
+          "title": "Fever and fever of unknown origin",
+          "size": "m",
+          "scope": "classic FUO, nosocomial FUO, neutropenic FUO, HIV associated FUO, FDG PET-CT, drug fever, factitious fever, adult onset Still disease, lymphoma, extrapulmonary tuberculosis, relative bradycardia"
+        },
+        {
+          "id": "sid-host-response",
+          "title": "Host defence and sepsis immunology",
+          "size": "s",
+          "scope": "innate immunity, complement, opsonization, asplenia, encapsulated organisms, cytokine storm, immunoparalysis, Sepsis-3 definitions, qSOFA, lactate, immune reconstitution"
+        },
+        {
+          "id": "sid-prophylaxis",
+          "title": "Antimicrobial prophylaxis",
+          "size": "s",
+          "scope": "surgical antibiotic prophylaxis cefazolin timing, endocarditis prophylaxis, meningococcal contact chemoprophylaxis, rheumatic fever secondary prophylaxis, post-splenectomy, cotrimoxazole prophylaxis, recurrent UTI prophylaxis"
+        }
+      ]
+    },
+    {
+      "id": "sid-antimicrobials",
+      "title": "Antimicrobial agents",
+      "modules": [
+        {
+          "id": "sid-beta-lactams",
+          "title": "Beta-lactams and beta-lactamase inhibitors",
+          "size": "l",
+          "scope": "penicillins, cephalosporin generations, carbapenems, aztreonam, ceftazidime avibactam, meropenem vaborbactam, imipenem relebactam, cefiderocol, aztreonam avibactam, penicillin allergy delabelling, beta-lactam neurotoxicity"
+        },
+        {
+          "id": "sid-non-beta-lactams",
+          "title": "Glycopeptides, aminoglycosides and other antibacterials",
+          "size": "l",
+          "scope": "vancomycin, teicoplanin, daptomycin CPK, linezolid serotonin syndrome myelosuppression, tigecycline, colistin polymyxin B nephrotoxicity, fosfomycin, aminoglycoside ototoxicity, fluoroquinolone tendinopathy, macrolide QT, cotrimoxazole"
+        },
+        {
+          "id": "sid-newer-agents",
+          "title": "Newer antibacterials and the pipeline",
+          "size": "s",
+          "scope": "sulbactam durlobactam, cefepime taniborbactam, cefepime enmetazobactam, omadacycline, eravacycline, lefamulin, delafloxacin, gepotidacin, zoliflodacin, bacteriophage therapy, plazomicin"
+        },
+        {
+          "id": "sid-antifungals",
+          "title": "Antifungal agents",
+          "size": "m",
+          "scope": "amphotericin B deoxycholate, liposomal amphotericin, fluconazole, voriconazole visual hallucinations TDM, posaconazole, isavuconazole, echinocandins, flucytosine, olorofim, rezafungin, azole drug interactions"
+        },
+        {
+          "id": "sid-antivirals",
+          "title": "Antiviral agents",
+          "size": "m",
+          "scope": "acyclovir crystalluria, valganciclovir, ganciclovir myelosuppression, foscarnet, letermovir, maribavir, oseltamivir, baloxavir, remdesivir, nirmatrelvir ritonavir, tecovirimat, cidofovir nephrotoxicity"
+        },
+        {
+          "id": "sid-antiparasitic",
+          "title": "Antiparasitic agents",
+          "size": "s",
+          "scope": "artesunate, artemether lumefantrine, primaquine G6PD deficiency, tafenoquine, chloroquine, ivermectin, albendazole, praziquantel, nitazoxanide, miltefosine, diethylcarbamazine"
+        },
+        {
+          "id": "sid-anti-tb-drugs",
+          "title": "Antituberculous drugs and toxicity",
+          "size": "m",
+          "scope": "isoniazid neuropathy pyridoxine, rifampicin interactions, pyrazinamide hyperuricaemia, ethambutol optic neuritis, drug induced liver injury rechallenge, bedaquiline QT, delamanid, pretomanid, linezolid neuropathy, clofazimine"
+        }
+      ]
+    },
+    {
+      "id": "sid-grampos",
+      "title": "Gram positive infections",
+      "modules": [
+        {
+          "id": "sid-staph",
+          "title": "Staphylococcal infections",
+          "size": "l",
+          "scope": "Staphylococcus aureus bacteraemia, MRSA, Panton-Valentine leukocidin, follow-up blood cultures, echocardiography, cefazolin versus cloxacillin, vancomycin, daptomycin, coagulase negative staphylococci, SNAP trial"
+        },
+        {
+          "id": "sid-strep-entero",
+          "title": "Streptococcal and enterococcal infections",
+          "size": "m",
+          "scope": "Streptococcus pyogenes, invasive group A streptococcus, pneumococcal disease, viridans streptococci, Streptococcus suis, Enterococcus faecalis ampicillin ceftriaxone, vancomycin resistant enterococci, high dose daptomycin"
+        },
+        {
+          "id": "sid-gp-other",
+          "title": "Other gram positive bacterial infections",
+          "size": "s",
+          "scope": "Listeria monocytogenes, Nocardia, Actinomyces, Bacillus anthracis, Erysipelothrix, Rhodococcus, Corynebacterium striatum, Clostridium perfringens gas gangrene, Lactobacillus"
+        },
+        {
+          "id": "sid-toxin-mediated",
+          "title": "Toxin-mediated infections",
+          "size": "s",
+          "scope": "tetanus human tetanus immunoglobulin, magnesium sulfate, metronidazole, diphtheria antitoxin, botulism antitoxin, staphylococcal toxic shock syndrome, streptococcal toxic shock clindamycin, staphylococcal scalded skin syndrome"
+        }
+      ]
+    },
+    {
+      "id": "sid-gramneg",
+      "title": "Gram negative infections",
+      "modules": [
+        {
+          "id": "sid-enterobacterales",
+          "title": "Enterobacterales and carbapenem resistance",
+          "size": "l",
+          "scope": "Escherichia coli, Klebsiella pneumoniae, ESBL, carbapenem resistant Enterobacterales, NDM, OXA-48, ceftazidime avibactam plus aztreonam, polymyxins, MERINO trial, hypervirulent Klebsiella liver abscess"
+        },
+        {
+          "id": "sid-non-fermenters",
+          "title": "Non-fermenting gram negative bacilli",
+          "size": "l",
+          "scope": "Pseudomonas aeruginosa, difficult to treat resistance, ceftolozane tazobactam, Acinetobacter baumannii, sulbactam durlobactam, colistin, Stenotrophomonas maltophilia cotrimoxazole, Burkholderia cepacia complex"
+        },
+        {
+          "id": "sid-typhoid",
+          "title": "Enteric fever",
+          "size": "m",
+          "scope": "Salmonella Typhi, Paratyphi A, blood culture, bone marrow culture, Widal test limitations, XDR typhoid, azithromycin, ceftriaxone, meropenem, intestinal perforation, chronic carrier, typhoid conjugate vaccine"
+        },
+        {
+          "id": "sid-fastidious-gn",
+          "title": "Haemophilus, Neisseria, Legionella and HACEK",
+          "size": "m",
+          "scope": "Haemophilus influenzae type b, Neisseria meningitidis, meningococcaemia, Moraxella catarrhalis, HACEK endocarditis, Legionella urinary antigen, Bordetella pertussis, Vibrio cholerae, Vibrio vulnificus"
+        },
+        {
+          "id": "sid-zoonoses",
+          "title": "Bacterial zoonoses",
+          "size": "m",
+          "scope": "brucellosis doxycycline rifampicin streptomycin, anthrax, plague Yersinia pestis, tularaemia, Q fever Coxiella burnetii, Bartonella cat scratch disease, Pasteurella multocida, rat bite fever, glanders"
+        },
+        {
+          "id": "sid-melioidosis",
+          "title": "Melioidosis",
+          "size": "s",
+          "scope": "Burkholderia pseudomallei, diabetes mellitus, Ashdown medium, bipolar safety pin staining, intensive phase meropenem ceftazidime, eradication phase cotrimoxazole, splenic abscess, prostatic abscess, India endemic"
+        }
+      ]
+    },
+    {
+      "id": "sid-anaerobes",
+      "title": "Anaerobes, spirochaetes and intracellular bacteria",
+      "modules": [
+        {
+          "id": "sid-anaerobic-infections",
+          "title": "Anaerobic and clostridial infections",
+          "size": "m",
+          "scope": "Bacteroides fragilis, metronidazole, Clostridioides difficile, fidaxomicin, oral vancomycin, bezlotoxumab, faecal microbiota transplantation, GDH toxin testing, fulminant colitis, Lemierre syndrome Fusobacterium"
+        },
+        {
+          "id": "sid-spirochetes",
+          "title": "Syphilis and Lyme disease",
+          "size": "m",
+          "scope": "Treponema pallidum, primary secondary latent syphilis, neurosyphilis, VDRL, TPHA, Jarisch-Herxheimer reaction, benzathine penicillin, Borrelia burgdorferi Lyme disease, erythema migrans, relapsing fever"
+        },
+        {
+          "id": "sid-leptospirosis",
+          "title": "Leptospirosis",
+          "size": "m",
+          "scope": "Weil disease, pulmonary haemorrhage syndrome, microscopic agglutination test, IgM ELISA, conjunctival suffusion, calf tenderness, penicillin, doxycycline chemoprophylaxis, non-oliguric AKI hypokalaemia, monsoon flooding"
+        },
+        {
+          "id": "sid-rickettsia",
+          "title": "Rickettsial infections",
+          "size": "l",
+          "scope": "scrub typhus Orientia tsutsugamushi, eschar, Weil-Felix test, IgM ELISA, doxycycline, azithromycin, INTREST trial, Indian tick typhus, spotted fever group, murine typhus, Ehrlichia, scrub typhus meningoencephalitis"
+        },
+        {
+          "id": "sid-atypicals",
+          "title": "Mycoplasma, Chlamydia and atypical pathogens",
+          "size": "s",
+          "scope": "Mycoplasma pneumoniae, cold agglutinins, erythema multiforme, Chlamydia pneumoniae, Chlamydia psittaci psittacosis, macrolide resistance, doxycycline, extrapulmonary manifestations, Stevens-Johnson syndrome"
+        }
+      ]
+    },
+    {
+      "id": "sid-mycobacteria",
+      "title": "Mycobacterial infections",
+      "modules": [
+        {
+          "id": "sid-tb",
+          "title": "Tuberculosis diagnosis and drug susceptible treatment",
+          "size": "l",
+          "scope": "GeneXpert MTB/RIF Ultra, Truenat, urine LF-LAM, MGIT liquid culture, NTEP guidelines, 2HRZE/4HR, four month regimen, extrapulmonary TB, tuberculous meningitis dexamethasone, paradoxical reaction, Ni-kshay"
+        },
+        {
+          "id": "sid-dr-tb",
+          "title": "Drug resistant tuberculosis",
+          "size": "l",
+          "scope": "rifampicin resistance, MDR-TB, pre-XDR, XDR-TB, BPaLM, BPaL ZeNix, shorter all oral bedaquiline regimen, line probe assay katG inhA, fluoroquinolone resistance, QT monitoring, linezolid toxicity"
+        },
+        {
+          "id": "sid-ltbi-special",
+          "title": "Latent TB infection and TB in special populations",
+          "size": "m",
+          "scope": "IGRA, tuberculin skin test, 3HP rifapentine, 1HP, 6H isoniazid, TNF inhibitor screening, HIV TB coinfection, TB in pregnancy, diabetes, chronic kidney disease, household contacts"
+        },
+        {
+          "id": "sid-ntm-leprosy",
+          "title": "Nontuberculous mycobacteria and leprosy",
+          "size": "m",
+          "scope": "Mycobacterium avium complex, Mycobacterium abscessus, rapidly growing mycobacteria, skin soft tissue NTM infection, Mycobacterium leprae, multibacillary MDT, type 1 reversal reaction, erythema nodosum leprosum thalidomide, slit skin smear"
+        }
+      ]
+    },
+    {
+      "id": "sid-fungi",
+      "title": "Fungal infections",
+      "modules": [
+        {
+          "id": "sid-candida",
+          "title": "Candidiasis and Candida auris",
+          "size": "l",
+          "scope": "candidaemia, echinocandin first line, ophthalmological examination, central line removal, Candida auris pan-resistance, invasive candidiasis, beta-D-glucan, T2Candida, oesophageal candidiasis, fluconazole step down"
+        },
+        {
+          "id": "sid-aspergillus",
+          "title": "Aspergillosis",
+          "size": "l",
+          "scope": "invasive pulmonary aspergillosis, halo sign, air crescent sign, serum and BAL galactomannan, voriconazole, isavuconazole SECURE, EORTC/MSGERC criteria, COVID associated pulmonary aspergillosis, chronic pulmonary aspergillosis"
+        },
+        {
+          "id": "sid-mucor",
+          "title": "Mucormycosis",
+          "size": "l",
+          "scope": "rhino-orbito-cerebral mucormycosis, diabetic ketoacidosis, COVID-19 associated mucormycosis, iron overload deferoxamine, reverse halo sign, broad aseptate hyphae, liposomal amphotericin B, surgical debridement, posaconazole, isavuconazole"
+        },
+        {
+          "id": "sid-cryptococcus-endemic",
+          "title": "Cryptococcosis and endemic mycoses",
+          "size": "m",
+          "scope": "cryptococcal meningitis, CrAg lateral flow assay, India ink, raised opening pressure therapeutic LP, AMBITION single dose liposomal amphotericin, flucytosine, histoplasmosis, Talaromyces marneffei, blastomycosis, sporotrichosis"
+        },
+        {
+          "id": "sid-pcp-other-fungal",
+          "title": "Pneumocystis and other fungal infections",
+          "size": "s",
+          "scope": "Pneumocystis jirovecii pneumonia, LDH, beta-D-glucan, cotrimoxazole, adjunctive corticosteroids PaO2 below 70, atovaquone, Fusarium, Scedosporium, chromoblastomycosis, mycetoma"
+        }
+      ]
+    },
+    {
+      "id": "sid-viral",
+      "title": "Viral infections",
+      "modules": [
+        {
+          "id": "sid-hiv-basics",
+          "title": "HIV infection pathogenesis and diagnosis",
+          "size": "l",
+          "scope": "CCR5, CXCR4 tropism, acute retroviral syndrome, fourth generation antigen antibody assay, viral load, CD4 count, WHO clinical staging, NACO testing strategy, HIV-2, elite controllers, latent reservoir"
+        },
+        {
+          "id": "sid-art",
+          "title": "Antiretroviral therapy",
+          "size": "l",
+          "scope": "TLD dolutegravir, tenofovir alafenamide, bictegravir, long acting cabotegravir rilpivirine, lenacapavir, START trial, rapid ART initiation, virological failure, genotypic resistance testing, NNRTI, protease inhibitors, drug interactions"
+        },
+        {
+          "id": "sid-hiv-oi",
+          "title": "Opportunistic infections in HIV",
+          "size": "l",
+          "scope": "Pneumocystis pneumonia, toxoplasma encephalitis, cryptococcal meningitis deferred ART COAT, CMV retinitis, disseminated MAC, PML JC virus, Kaposi sarcoma, IRIS, cotrimoxazole prophylaxis, Talaromyces, histoplasmosis"
+        },
+        {
+          "id": "sid-hiv-comorbidities",
+          "title": "HIV comorbidities and ART complications",
+          "size": "m",
+          "scope": "immune reconstitution inflammatory syndrome, lipodystrophy, metabolic syndrome, cardiovascular disease REPRIEVE pitavastatin, HIVAN, HIV associated neurocognitive disorder, dolutegravir weight gain, TB HIV rifampicin interactions"
+        },
+        {
+          "id": "sid-hiv-prevention",
+          "title": "HIV prevention, PEP and PrEP",
+          "size": "s",
+          "scope": "post exposure prophylaxis 28 days, needle stick injury, oral PrEP tenofovir emtricitabine, long acting cabotegravir PrEP, lenacapavir PURPOSE, prevention of parent to child transmission, undetectable equals untransmittable"
+        },
+        {
+          "id": "sid-hsv-vzv",
+          "title": "Herpes simplex and varicella zoster infections",
+          "size": "m",
+          "scope": "HSV encephalitis acyclovir, temporal lobe MRI, HSV PCR CSF, genital herpes, varicella pneumonia, herpes zoster ophthalmicus, disseminated zoster, acyclovir resistance foscarnet, recombinant zoster vaccine"
+        },
+        {
+          "id": "sid-cmv-ebv",
+          "title": "CMV, EBV and other herpesviruses",
+          "size": "m",
+          "scope": "CMV disease, CMV retinitis, ganciclovir resistance UL97, letermovir prophylaxis, pre-emptive therapy, EBV infectious mononucleosis, PTLD, chronic active EBV, HHV-6 encephalitis, HHV-8"
+        },
+        {
+          "id": "sid-hbv",
+          "title": "Hepatitis B and D",
+          "size": "l",
+          "scope": "HBsAg, anti-HBc, HBeAg, HBV DNA, phases of chronic hepatitis B, tenofovir, entecavir, HBV reactivation prophylaxis, occult HBV, hepatitis D bulevirtide, mother to child transmission"
+        },
+        {
+          "id": "sid-hcv-other-hepatitis",
+          "title": "Hepatitis C, A and E",
+          "size": "m",
+          "scope": "anti-HCV, HCV RNA, sofosbuvir velpatasvir, sofosbuvir daclatasvir, sustained virologic response, National Viral Hepatitis Control Programme, hepatitis E in pregnancy, hepatitis A, acute liver failure, extrahepatic manifestations"
+        },
+        {
+          "id": "sid-respiratory-viral",
+          "title": "Influenza and respiratory viral infections",
+          "size": "m",
+          "scope": "seasonal influenza, oseltamivir, baloxavir, avian influenza H5N1, H7N9, RSV in adults, nirsevimab, MERS coronavirus, adenovirus, human metapneumovirus, parainfluenza, rhinovirus"
+        },
+        {
+          "id": "sid-covid",
+          "title": "COVID-19",
+          "size": "m",
+          "scope": "SARS-CoV-2, dexamethasone RECOVERY, tocilizumab, baricitinib, remdesivir, nirmatrelvir ritonavir, molnupiravir, long COVID, COVID associated mucormycosis, thromboprophylaxis, COVID vaccines"
+        },
+        {
+          "id": "sid-arbovirus",
+          "title": "Dengue, chikungunya and arboviral infections",
+          "size": "l",
+          "scope": "dengue warning signs, NS1 antigen, plasma leakage, WHO 2009 classification, fluid management, severe dengue, chikungunya chronic arthritis, Zika microcephaly, Japanese encephalitis, Kyasanur forest disease, yellow fever, West Nile"
+        },
+        {
+          "id": "sid-emerging-viral",
+          "title": "Emerging and haemorrhagic fever viruses",
+          "size": "m",
+          "scope": "Nipah virus Kerala, Ebola, Crimean-Congo haemorrhagic fever, hantavirus, Lassa fever, mpox tecovirimat, Chandipura virus, Marburg, Disease X, viral haemorrhagic fever infection control"
+        },
+        {
+          "id": "sid-rabies",
+          "title": "Rabies and animal bite management",
+          "size": "s",
+          "scope": "category III exposure, rabies immunoglobulin, intradermal Thai Red Cross regimen, wound washing, hydrophobia, aerophobia, Negri bodies, rabies monoclonal antibody, pre-exposure prophylaxis, paralytic rabies"
+        },
+        {
+          "id": "sid-other-viral",
+          "title": "Measles, enteroviruses and other viral infections",
+          "size": "s",
+          "scope": "measles, SSPE, mumps, rubella, enterovirus 71 hand foot mouth disease, poliomyelitis, parvovirus B19 aplastic crisis, BK polyomavirus nephropathy, JC virus, HTLV-1, rotavirus"
+        }
+      ]
+    },
+    {
+      "id": "sid-parasites",
+      "title": "Parasitic infections",
+      "modules": [
+        {
+          "id": "sid-malaria",
+          "title": "Malaria",
+          "size": "l",
+          "scope": "Plasmodium falciparum, Plasmodium vivax, Plasmodium knowlesi, WHO severe malaria criteria, intravenous artesunate, post-artesunate delayed haemolysis, ACT, primaquine radical cure G6PD, kelch13 artemisinin resistance, HRP2 rapid diagnostic test, cerebral malaria"
+        },
+        {
+          "id": "sid-kala-azar",
+          "title": "Leishmaniasis",
+          "size": "m",
+          "scope": "visceral leishmaniasis kala-azar, rK39, splenic aspirate, single dose liposomal amphotericin B, miltefosine, post kala-azar dermal leishmaniasis, cutaneous leishmaniasis, HIV coinfection, Phlebotomus sandfly, elimination programme"
+        },
+        {
+          "id": "sid-protozoa-other",
+          "title": "Intestinal and tissue protozoa",
+          "size": "m",
+          "scope": "Entamoeba histolytica amoebic liver abscess, Giardia, Cryptosporidium, Cyclospora, Toxoplasma gondii, Trypanosoma cruzi Chagas disease, African trypanosomiasis, Babesia, Naegleria primary amoebic meningoencephalitis"
+        },
+        {
+          "id": "sid-helminths",
+          "title": "Helminthic infections",
+          "size": "m",
+          "scope": "neurocysticercosis albendazole praziquantel, echinococcosis hydatid PAIR, Strongyloides hyperinfection ivermectin, lymphatic filariasis diethylcarbamazine, schistosomiasis, toxocariasis, trichinellosis, Angiostrongylus eosinophilic meningitis"
+        }
+      ]
+    },
+    {
+      "id": "sid-syndromes",
+      "title": "Clinical syndromes",
+      "modules": [
+        {
+          "id": "sid-sepsis-id",
+          "title": "Sepsis and septic shock antimicrobial management",
+          "size": "l",
+          "scope": "empirical therapy, source control, time to antibiotics, Surviving Sepsis Campaign, blood cultures before antibiotics, double gram negative coverage, de-escalation, MDR risk factors, treatment duration"
+        },
+        {
+          "id": "sid-endocarditis",
+          "title": "Infective endocarditis",
+          "size": "l",
+          "scope": "2023 Duke-ISCVID criteria, transoesophageal echocardiography, Staphylococcus aureus, culture negative endocarditis Coxiella Bartonella, surgical indications, partial oral POET trial, prosthetic valve endocarditis, embolic events, gentamicin synergy"
+        },
+        {
+          "id": "sid-meningitis",
+          "title": "Bacterial meningitis",
+          "size": "l",
+          "scope": "ceftriaxone vancomycin, adjunctive dexamethasone, Listeria ampicillin, CSF analysis, CT before lumbar puncture, pneumococcal meningitis, meningococcal disease, post-neurosurgical ventriculitis, intraventricular antibiotics, chemoprophylaxis"
+        },
+        {
+          "id": "sid-encephalitis-abscess",
+          "title": "Encephalitis, brain abscess and chronic meningitis",
+          "size": "m",
+          "scope": "viral encephalitis, acute encephalitis syndrome, Japanese encephalitis, autoimmune encephalitis mimics, brain abscess aspiration, tuberculous meningitis, cryptococcal meningitis, eosinophilic meningitis, spinal epidural abscess"
+        },
+        {
+          "id": "sid-uti",
+          "title": "Urinary tract infections",
+          "size": "m",
+          "scope": "asymptomatic bacteriuria, cystitis nitrofurantoin fosfomycin, complicated UTI, acute pyelonephritis, emphysematous pyelonephritis, catheter associated UTI, acute bacterial prostatitis, ESBL UTI, renal abscess, seven day course"
+        },
+        {
+          "id": "sid-skin-bone-joint",
+          "title": "Skin, soft tissue, bone and joint infections",
+          "size": "l",
+          "scope": "cellulitis, necrotizing fasciitis LRINEC, Fournier gangrene, diabetic foot infection, osteomyelitis MRI, vertebral osteomyelitis, OVIVA oral therapy, prosthetic joint infection DAIR, septic arthritis, tropical pyomyositis"
+        },
+        {
+          "id": "sid-intra-abdominal",
+          "title": "Intra-abdominal and hepatobiliary infections",
+          "size": "m",
+          "scope": "secondary peritonitis, spontaneous bacterial peritonitis, STOP-IT trial, pyogenic liver abscess, amoebic liver abscess, acute cholangitis Tokyo guidelines, infected pancreatic necrosis step up approach, tertiary peritonitis, Candida peritonitis"
+        },
+        {
+          "id": "sid-respiratory-id",
+          "title": "Respiratory tract infections",
+          "size": "l",
+          "scope": "community acquired pneumonia, atypical coverage, HAP, VAP, MRSA nasal swab, empyema, lung abscess, aspiration, pharyngitis Centor score, epiglottitis, acute bacterial sinusitis, pertussis"
+        },
+        {
+          "id": "sid-stis",
+          "title": "Sexually transmitted infections",
+          "size": "m",
+          "scope": "gonorrhoea ceftriaxone resistance, Chlamydia doxycycline, syndromic management NACO, genital ulcer disease, chancroid, lymphogranuloma venereum, donovanosis, Trichomonas, Mycoplasma genitalium, pelvic inflammatory disease, doxy-PEP"
+        },
+        {
+          "id": "sid-tropical-fever",
+          "title": "Acute undifferentiated febrile illness and tropical fevers",
+          "size": "l",
+          "scope": "scrub typhus, dengue, malaria, leptospirosis, enteric fever, empirical doxycycline, acute febrile illness with thrombocytopenia, tropical multiorgan dysfunction, hantavirus, India syndromic approach"
+        },
+        {
+          "id": "sid-gi-infections",
+          "title": "Infectious diarrhoea and food poisoning",
+          "size": "s",
+          "scope": "cholera, Shigella, Campylobacter Guillain-Barre, enterohaemorrhagic Escherichia coli HUS, travellers diarrhoea, rifaximin, Bacillus cereus, Staphylococcus aureus enterotoxin, norovirus, oral rehydration"
+        },
+        {
+          "id": "sid-head-neck-eye",
+          "title": "Ocular, head and neck infections",
+          "size": "s",
+          "scope": "endophthalmitis, orbital cellulitis, fungal keratitis, Acanthamoeba keratitis, Ludwig angina, Lemierre syndrome, malignant otitis externa Pseudomonas, deep neck space infection, cavernous sinus thrombosis"
+        },
+        {
+          "id": "sid-vascular-device",
+          "title": "Vascular and device infections",
+          "size": "s",
+          "scope": "cardiac implantable electronic device infection, LVAD infection, mycotic aneurysm, septic thrombophlebitis, vascular graft infection, catheter related bloodstream infection, antibiotic lock therapy, Salmonella aortitis"
+        },
+        {
+          "id": "sid-fever-rash",
+          "title": "Fever with rash and lymphadenopathy",
+          "size": "s",
+          "scope": "maculopapular rash, petechial rash, vesicular rash, meningococcaemia, spotted fever, DRESS, Stevens-Johnson syndrome, Kikuchi-Fujimoto disease, tuberculous lymphadenitis, cat scratch lymphadenitis"
+        }
+      ]
+    },
+    {
+      "id": "sid-hosts",
+      "title": "Infections in special hosts",
+      "modules": [
+        {
+          "id": "sid-febrile-neutropenia",
+          "title": "Infections in neutropenia and haematological malignancy",
+          "size": "l",
+          "scope": "febrile neutropenia, MASCC score, empirical antipseudomonal beta-lactam, empirical versus pre-emptive antifungal, posaconazole prophylaxis, fluoroquinolone prophylaxis, neutropenic enterocolitis typhlitis, ECIL guidelines"
+        },
+        {
+          "id": "sid-sot",
+          "title": "Infections in solid organ transplant recipients",
+          "size": "l",
+          "scope": "timeline of post-transplant infections, CMV prophylaxis valganciclovir, pre-emptive monitoring, BK polyomavirus, EBV PTLD, donor derived infections, Strongyloides screening, Pneumocystis prophylaxis, nocardiosis, tacrolimus azole interactions"
+        },
+        {
+          "id": "sid-hsct-id",
+          "title": "Infections in HSCT and cellular therapy",
+          "size": "m",
+          "scope": "pre-engraftment, post-engraftment, letermovir CMV prophylaxis, adenovirus cidofovir, HHV-6 encephalitis, GVHD associated infections, CAR-T hypogammaglobulinaemia, IVIG replacement, revaccination after transplant"
+        },
+        {
+          "id": "sid-biologics-asplenia",
+          "title": "Infections with biologics, asplenia and other immunosuppression",
+          "size": "m",
+          "scope": "TNF inhibitors tuberculosis, rituximab HBV reactivation PML, eculizumab meningococcal infection, JAK inhibitors herpes zoster, overwhelming post-splenectomy infection, diabetes, cirrhosis, chronic kidney disease, elderly"
+        },
+        {
+          "id": "sid-pregnancy-id",
+          "title": "Infections in pregnancy and the neonate",
+          "size": "s",
+          "scope": "TORCH infections, congenital syphilis, group B streptococcus, listeriosis, malaria in pregnancy, hepatitis E, varicella pneumonia, antimicrobial safety in pregnancy, vertical transmission HIV HBV"
+        },
+        {
+          "id": "sid-travel",
+          "title": "Travel medicine and the returning traveller",
+          "size": "s",
+          "scope": "pre-travel consultation, yellow fever vaccination, malaria chemoprophylaxis, travellers diarrhoea, fever in returned traveller, eosinophilia in traveller, Hajj meningococcal vaccine, schistosomiasis"
+        }
+      ]
+    },
+    {
+      "id": "sid-control",
+      "title": "Infection prevention, control and public health",
+      "modules": [
+        {
+          "id": "sid-hai",
+          "title": "Healthcare associated infections",
+          "size": "l",
+          "scope": "CLABSI, CAUTI, VAP prevention bundle, surgical site infection, device days, NHSN surveillance definitions, ICMR HAI surveillance network, chlorhexidine bathing, catheter insertion checklist, infection rate calculation"
+        },
+        {
+          "id": "sid-infection-control",
+          "title": "Infection prevention and control practices",
+          "size": "l",
+          "scope": "hand hygiene WHO five moments, standard precautions, contact droplet airborne precautions, N95 respirator, negative pressure isolation, environmental cleaning, MDRO screening, cohorting, Spaulding classification, sterilization disinfection"
+        },
+        {
+          "id": "sid-occupational",
+          "title": "Occupational exposure and healthcare worker safety",
+          "size": "s",
+          "scope": "needle stick injury, HIV post exposure prophylaxis, HBV post exposure management, HCV follow-up, tuberculosis in healthcare workers, varicella exposure, healthcare worker vaccination, biomedical waste management rules"
+        },
+        {
+          "id": "sid-vaccines",
+          "title": "Adult immunization",
+          "size": "m",
+          "scope": "pneumococcal PCV20 PCV15 PPSV23, recombinant zoster vaccine, influenza vaccine, HPV vaccine, hepatitis B non-responders, Tdap in pregnancy, typhoid conjugate vaccine, rabies pre-exposure, vaccines in immunocompromised, live vaccine contraindications"
+        },
+        {
+          "id": "sid-amr-epi",
+          "title": "Antimicrobial resistance epidemiology and One Health",
+          "size": "s",
+          "scope": "National Action Plan on AMR, WHO bacterial priority pathogens, GLASS, ICMR AMRSN, One Health, antibiotic use in agriculture, Chennai declaration, colistin ban in animal feed, Red Line campaign"
+        },
+        {
+          "id": "sid-outbreaks",
+          "title": "Outbreak investigation and public health",
+          "size": "s",
+          "scope": "epidemic curve, case definition, IDSP, notifiable diseases, contact tracing, basic reproduction number R0, quarantine, isolation, pandemic preparedness, Nipah containment, cholera outbreak response"
+        }
+      ]
+    }
+  ]
+}

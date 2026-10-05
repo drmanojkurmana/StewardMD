@@ -1,0 +1,44 @@
+/* PrepNucleus Layer C (prep-create.js, prep-cards.js): Your decks, Make a deck, progress, flashcards. Scoped under
+   .pn-root and built on prep.css's --pn-* tokens, so body.dark switches the palette with it; the two colours added here
+   are redefined for body.dark below. Loaded after prep.css by prep-loader.js. */
+.pn-root { --pc-warn-bg: #fdf3e1; --pc-warn-line: #e7c98a; }
+body.dark .pn-root { --pc-warn-bg: #33270f; --pc-warn-line: #6b5420; }
+
+/* ---- Your decks ---- */
+.pn-root .pc-decks { display: flex; flex-direction: column; gap: 10px; }
+.pn-root .pc-deck { gap: 12px; padding: 14px; }
+.pn-root .pc-dh { display: flex; align-items: flex-start; gap: 10px; }
+.pn-root .pc-lab { color: var(--pn-warn); font-weight: 600; }
+.pn-root .pc-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .pc-acts .pn-btn { min-height: 44px; flex: 1 1 calc(50% - 4px); }
+
+/* ---- Make a deck ---- */
+.pn-root .pc-lbl { font-size: 13px; font-weight: 700; color: var(--pn-mut); text-transform: uppercase; letter-spacing: .04em; padding-top: 4px; }
+.pn-root #pcCreateView .pn-chip { min-height: 44px; }
+.pn-root .pc-in { width: 100%; min-height: 48px; padding: 12px 14px; border: 1.5px solid var(--pn-line); border-radius: 14px; background: var(--pn-card); color: var(--pn-text); font: inherit; font-size: 16px; }
+.pn-root .pc-in:focus { outline: none; border-color: var(--pn-pri); }
+.pn-root .pc-ta { min-height: 180px; resize: vertical; line-height: 1.5; }
+.pn-root .pc-file { padding: 10px 14px; border-radius: 12px; background: var(--pn-s1); overflow-wrap: anywhere; }
+.pn-root .pc-check { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 10px 12px; border: 1px solid var(--pn-line); border-radius: 14px; background: var(--pn-card); text-align: left; font-size: 15px; }
+.pn-root .pc-box { width: 24px; height: 24px; flex: 0 0 auto; border: 2px solid var(--pn-line); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; color: var(--pn-on-pri); }
+.pn-root .pc-box svg { width: 16px; height: 16px; }
+.pn-root .pc-check[aria-pressed="true"] .pc-box { background: var(--pn-pri); border-color: var(--pn-pri); }
+.pn-root .pc-warn { background: var(--pc-warn-bg); border-color: var(--pc-warn-line); gap: 8px; }
+.pn-root .pc-warn:focus { outline: none; }
+
+/* ---- progress ---- */
+.pn-root .pc-progp { align-items: center; text-align: center; }
+.pn-root .pc-bar { height: 8px; border-radius: 4px; }
+.pn-root .pc-bar i { transition: width 300ms var(--pn-ease); }
+
+/* ---- flashcards ---- */
+.pn-root .pc-card { min-height: 220px; justify-content: center; gap: 14px; }
+.pn-root .pc-front { font-size: 19px; line-height: 1.45; font-weight: 600; white-space: pre-wrap; }
+.pn-root .pc-back { display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 1px solid var(--pn-line); animation: pn-rise 200ms var(--pn-ease); }
+.pn-root .pc-back:focus { outline: none; }
+.pn-root .pc-back > p:first-child { font-size: 17px; line-height: 1.5; white-space: pre-wrap; }
+.pn-root #pcCardsEnd:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pc-back { animation: none; }
+  .pn-root .pc-bar i { transition: none; }
+}

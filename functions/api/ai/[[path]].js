@@ -153,6 +153,7 @@ import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 import { icdSuggestPrompt, sanitizeIcdSuggest } from "./_icd-suggest.js";
 import * as icdRepo from "../../_icd_repo.js";
 import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
+import { handlePrepGenerate } from "./_prep-generate.js";   // PrepNucleus Layer C (vault/plans/PrepNucleus-LayerC.md)
 import { quotaOn, quotaKv, consumeScribeSession, quotaRefusal, state as quotaState, consume as quotaConsume } from "../../_quota.js";
 import { getEntitlement, effectiveTierFor } from "../../_entitlements.js";
 import { sttFallbackOn, planClass, monthlyCredits, chargeCredits, signinBody } from "../../_stt_fallback.js";
@@ -203,6 +204,9 @@ const MODULE_FOR = {
   // CliniX simulated patient: an unscripted history question answered in character from the case's
   // own facts. Student revision, so the "clinix" bucket, never the doctor's MaiK allowance.
   "clinix-patient": "clinix",
+  // PrepNucleus Layer C deck generation. The handler gates itself (checkQuota type prep, then gateAndCount
+  // with deferRecord, one record after the call), so the generic cap below skips it.
+  "prep-generate": "prep",
 };
 function moduleLimitMsg(mod, limit) {
   const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions", surgx_note: "SURGX note dictations", surgx_case: "SURGX case questions" }[mod] || "AI requests";
@@ -288,7 +292,7 @@ function streamTextAsSSE(text, diag) {
 // opts.system: the system prompt, sent as Gemini's systemInstruction (both the developer API and Vertex
 // accept it) instead of being glued onto the user text (T20). Static prompt first, per-request suffixes
 // after, so the shared prefix is identical across requests.
-function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.system) b.systemInstruction = { parts: [{ text: String(opts.system) }] }; if (opts && opts.json) b.generationConfig.responseMimeType = "application/json"; if (opts && opts.tools) b.tools = opts.tools; return b; }
+function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.system) b.systemInstruction = { parts: [{ text: String(opts.system) }] }; if (opts && opts.json) b.generationConfig.responseMimeType = "application/json"; if (opts && opts.schema) b.generationConfig.responseSchema = opts.schema; if (opts && opts.labels) b.labels = opts.labels; if (opts && opts.tools) b.tools = opts.tools; return b; }
 /* Latency/token instrumentation: a Gemini call's usageMetadata (promptTokenCount / thoughtsTokenCount /
  * candidatesTokenCount / cachedContentTokenCount) + finishReason + model, written into the CALLER's
  * opts.meta object (T41). It used to be a module-level global (_lastGenMeta), so a concurrent request
@@ -536,7 +540,9 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
   });
   return new Response(rs, { headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-store", "X-Accel-Buffering": "no" } });
 }
-function providerOrder(env) {
+function providerOrder(env, opts) {
+  // opts.providers pins the list (PrepNucleus is Vertex-only, so its labels reach Cloud Billing).
+  if (opts && Array.isArray(opts.providers) && opts.providers.length) return opts.providers.filter(function (n) { return n === "vertex" || n === "developer"; });
   // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
   // AI_PROVIDER=vertex (default) -> Vertex then Developer; any other value -> Developer then Vertex.
   const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
@@ -1662,6 +1668,7 @@ export async function onRequest(context) {
     if (seg === "research" && !_isEvidReview) _mod = "maik";
     // Emergency "pause" kill switch — block every AI-consuming call before any LLM/web work.
     if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
+      if (seg === "prep-generate") return json({ error: "quota", reason: "circuit-breaker" }, 429);   // prep's error vocabulary
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
     /* The device cap and the caller's identity are INDEPENDENT reads that were paid one after the
@@ -1679,7 +1686,7 @@ export async function onRequest(context) {
      * committed only when an answer is actually generated (_countQuestion), so a cache hit or a failed
      * generation never uses up one of the doctor's questions. */
     const _skipCap = seg === "refine" || seg === "route" || seg === "verify" || (seg === "explain" && !!(body && body.tier === 2 && body.priorLead));
-    const _capped = _mod && !_isEvidReview && !_skipCap;
+    const _capped = _mod && !_isEvidReview && !_skipCap && seg !== "prep-generate";
     const _whoP = _capped ? identify(request, env) : null;
     // Owner check runs alongside the others so the exemption costs no extra wall time. checkQuota
     // (_usage.js) already exempts owners from ITS per-user throttles; this makes the second cap
@@ -1689,6 +1696,7 @@ export async function onRequest(context) {
       try {
         const _dc = await _dcP;
         _hm.dev = Date.now() - _reqT0;
+        if (!_dc.ok && seg === "prep-generate") return json({ error: "quota", reason: "daily-calls" }, 429);
         if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
     }
@@ -1733,6 +1741,8 @@ export async function onRequest(context) {
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
   try {
+    // PrepNucleus Layer C: one Gemini call per request, its own gates, metering and error shape.
+    if (seg === "prep-generate") return await handlePrepGenerate({ request, env, body, callGemini, waitUntil: context.waitUntil.bind(context) });
     if (seg === "explain") {
       // Preferred: grounded RAG package (KB primary). The client assembles it from
       // the deterministic engine output + retrieved StewardMD knowledge; we forward

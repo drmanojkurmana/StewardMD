@@ -191,12 +191,13 @@
     var el = D && D.getElementById("smdReview"); if (!el) return;
     var body = el.querySelector(".kit-sheet-body"), top = body.scrollTop, dec = loadDecisions(), n = Object.keys(dec).length, html;
     var pend = (S.deskOn && G.SMD_BULLETINS_DESK && G.SMD_BULLETINS_DESK.pendingTotal) ? G.SMD_BULLETINS_DESK.pendingTotal() : 0;
-    var kinds = KINDS.concat(S.deskOn ? [["bulletin", "Clinical updates" + (pend ? " (" + pend + ")" : "")]] : []);
+    var kinds = KINDS.concat(S.deskOn ? [["bulletin", "Clinical updates" + (pend ? " (" + pend + ")" : "")], ["prep", "PrepNucleus reports"]] : []);
     var tabs = '<div class="kit-row" role="tablist">' + kinds.map(function (k) { return '<button type="button" role="tab" class="kit-seg' + (S.kind === k[0] ? " on" : "") + '" data-rv-act="kind:' + k[0] + '" aria-selected="' + (S.kind === k[0]) + '">' + k[1] + "</button>"; }).join("") + "</div>";
     if (S.kind === "bulletin") {
       body.innerHTML = '<div class="kit dl">' + (G.SMD_BULLETINS_DESK ? G.SMD_BULLETINS_DESK.html(tabs) : tabs) + "</div>"; body.scrollTop = top;
       return;
     }
+    if (S.kind === "prep") { body.innerHTML = '<div class="kit dl">' + prepHtml(tabs) + "</div>"; body.scrollTop = top; return; }
     var list = S.items[S.kind];
     if (!list) { loadItems(S.kind).then(render); html = tabs + '<p class="kit-muted">Loading…</p>'; }
     else if (S.sel) {
@@ -223,6 +224,33 @@
         }).join("") + "</div>";
     }
     body.innerHTML = '<div class="kit dl">' + html + "</div>"; body.scrollTop = top;
+  }
+  // PrepNucleus student reports (functions/api/prep/flag.js), owners only, read-only apart from Restore: an item that
+  // three separate students reported is hidden from everyone until an owner restores it here.
+  var PREP_REASON = { "wrong-key": "wrong key", unclear: "unclear", outdated: "outdated", typo: "typo", other: "other" };
+  function prepToken() { try { var u = G.SMD_AUTH && G.SMD_AUTH.currentUser; return (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
+  function prepCall(method, body) {
+    return prepToken().then(function (t) {
+      var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t;
+      return G.fetch("/api/prep/flag" + (method === "GET" ? "?top=1" : ""), { method: method, headers: h, body: body ? JSON.stringify(body) : undefined, cache: "no-store" });
+    }).then(function (r) { return r.json().then(function (d) { return { status: r.status, data: d || {} }; }, function () { return { status: r.status, data: {} }; }); }, function () { return { status: 0, data: {} }; });
+  }
+  function loadPrep() {
+    S.prep = { loading: true };
+    prepCall("GET").then(function (r) { S.prep = r.status === 200 ? { items: r.data.items || [] } : { err: r.status === 403 ? "Only owners can see student reports." : r.status === 0 ? "No connection. Try again." : "The reports did not load." }; render(); });
+  }
+  function prepHtml(tabs) {
+    var P = S.prep;
+    if (!P) { loadPrep(); P = S.prep; }
+    var intro = '<p class="kit-muted">Questions students reported in PrepNucleus, most reported first. Three separate reports hide a question from everyone; Restore brings it back after you have checked it.</p>';
+    if (P.loading) return tabs + intro + '<p class="kit-muted">Loading…</p>';
+    if (P.err) return tabs + intro + '<p class="kit-muted">' + esc(P.err) + '</p><div class="kit-row"><button type="button" class="kit-pill" data-rv-act="prepreload">Try again</button></div>';
+    if (!P.items.length) return tabs + intro + '<p class="kit-muted">No reports yet.</p>';
+    return tabs + intro + '<div class="rv-list">' + P.items.map(function (x) {
+      var why = Object.keys(x.reasons || {}).map(function (k) { return (PREP_REASON[k] || k) + " " + x.reasons[k]; }).join(", ");
+      return '<div class="rv-row"><span class="rv-t">' + esc(x.module || "") + " · " + esc(x.itemId) + '</span><span class="rv-s">' + esc(x.subject || "") + " · " + x.n + " report" + (x.n === 1 ? "" : "s") + (why ? ": " + esc(why) : "") + "</span>" +
+        "<span>" + (x.hidden ? '<span class="rv-pill">Hidden</span><button type="button" class="kit-pill" data-rv-act="prepun:' + esc(x.itemId) + '">Restore</button>' : "") + "</span></div>";
+    }).join("") + "</div>";
   }
   function flagOn() {
     try { var q = (G.location.search.match(/[?&]review=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return G.localStorage.getItem("smd_review_desk") !== "0"; } catch (e) { return true; }
@@ -260,7 +288,9 @@
     var b = e.target && e.target.closest && e.target.closest("[data-rv-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-rv-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { close(); return; }
-    if (cmd === "kind") { S.kind = arg; S.sel = ""; if (arg === "bulletin" && G.SMD_BULLETINS_DESK) G.SMD_BULLETINS_DESK.reset(); render(); return; }
+    if (cmd === "prepreload") { S.prep = null; render(); return; }
+    if (cmd === "prepun") { prepCall("DELETE", { itemId: arg }).then(function (r) { toast(r.status === 200 ? "Restored. Students see it again within a few hours." : "Restore failed."); S.prep = null; render(); }); return; }
+    if (cmd === "kind") { S.kind = arg; S.sel = ""; if (arg === "prep") S.prep = null; if (arg === "bulletin" && G.SMD_BULLETINS_DESK) G.SMD_BULLETINS_DESK.reset(); render(); return; }
     if (cmd === "sel") { S.sel = arg; S.showText = false; render(); D.querySelector("#smdReview .kit-sheet-body").scrollTop = 0; return; }
     if (cmd === "back") { S.sel = ""; render(); return; }
     if (cmd === "read") {

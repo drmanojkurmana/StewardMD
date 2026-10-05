@@ -229,17 +229,26 @@ export const normKey = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/
 // whole corpus, then for a token that is not attested-good, insert "rt" at each position and accept an attested word.
 // Never touched: KEEP (real words that only look corrupted), short all-caps abbreviations.
 const RT_KEEP = new Set(["so", "was", "abo", "robe", "robes", "fo", "foe", "tule", "reve", "obsterics"]);
-export function buildRepair(texts) {
+// opts (PrepNucleus; Tokós passes none and is unchanged): maxRatio skips a token seen more than maxRatio times as often
+// as its "rt" form. A vocabulary over every subject attests rare words such as "rtis" (RTIs), "tort" and "arts", which
+// would otherwise turn "is", "to" and "as" into them; the dropped forms are never that common relative to the real word
+// ("hea" 7,740 vs "heart" 5,225). Tokens of shortLen letters or fewer use shortRatio ("po", per oral, is not "port").
+// keep: more real words that only look corrupted ("hyperopia", "Poland").
+export function buildRepair(texts, opts) {
+  opts = opts || {};
+  const keep = new Set(opts.keep || []);
+  const ratioFor = (w) => (opts.shortLen && w.length <= opts.shortLen ? opts.shortRatio : opts.maxRatio);
   const vocab = new Map();
   for (const t of texts) for (const m of t.matchAll(/[A-Za-z]+/g)) { const w = m[0].toLowerCase(); vocab.set(w, (vocab.get(w) || 0) + 1); }
   const fix = new Map();
   for (const [w] of vocab) {
-    if (w.length < 2 || RT_KEEP.has(w)) continue;
+    if (w.length < 2 || RT_KEEP.has(w) || keep.has(w)) continue;
+    const ratio = ratioFor(w);
     let best = null;
     for (let i = 0; i <= w.length; i++) {
       const v = w.slice(0, i) + "rt" + w.slice(i);
       const c = vocab.get(v) || 0;
-      if (c >= 3 && (!best || c > best[1])) best = [v, c];
+      if (c >= 3 && (!best || c > best[1]) && !(ratio && vocab.get(w) > ratio * c)) best = [v, c];
     }
     if (best) fix.set(w, best[0]);
   }
@@ -301,7 +310,7 @@ export function difficulty(q) {
   return s >= 2 ? 3 : s === 0 && n <= 40 ? 1 : 2;
 }
 
-const IMAGE_REF = /shown in the (image|figure|picture|photograph)|given (figure|image)|identify the (structure|lesion|finding) marked|marked (with an? )?arrow|structure marked|arrow (points?|marks?)|following (image|figure|photograph|picture)|image shown below|figure shows|picture shows|photograph shows|clinical photograph (below|above)|(shown|seen) in the (given|below|above) (image|figure|picture)|(image|picture|figure|photograph|ultrasound|usg|x-?ray|mri|ct scan|histopathology|slide) (below|above|given)/i;
+export const IMAGE_REF = /shown in the (image|figure|picture|photograph)|given (figure|image)|identify the (structure|lesion|finding) marked|marked (with an? )?arrow|structure marked|arrow (points?|marks?)|following (image|figure|photograph|picture)|image shown below|figure shows|picture shows|photograph shows|clinical photograph (below|above)|(shown|seen) in the (given|below|above) (image|figure|picture)|(image|picture|figure|photograph|ultrasound|usg|x-?ray|mri|ct scan|histopathology|slide) (below|above|given)/i;
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Subtopic mapping

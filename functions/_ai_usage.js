@@ -32,6 +32,7 @@ export const AI_MODULES = {
   stt:         { id: "stt",         label: "Speech-to-Text",     group: "Voice",         daily: 50,  provider: "vertex" },
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
+  prep:        { id: "prep",        label: "PrepNucleus decks",  group: "PrepNucleus",   daily: 95,  provider: "vertex" }, // Layer C PDF/notes -> deck. Unit = Gemini calls: 3 decks x up to 31 calls + 2 retries (vault/plans/PrepNucleus.md 9.3). env AI_LIMIT_PREP / admin KV override.
 };
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
@@ -186,6 +187,7 @@ export function buildUsageRecord(f) {
     provider: clip(f.provider || (AI_MODULES[f.module] && AI_MODULES[f.module].provider) || "vertex", 20),
     model: clip(f.model, 60),
     promptTokens: inTok, completionTokens: outTok, totalTokens: inTok + outTok,
+    thinkTokens: Math.max(0, f.thinkTokens | 0),     // already inside completionTokens (billed as output); kept apart for PrepNucleus metering
     estCostInr: typeof f.estCostInr === "number" ? f.estCostInr : 0,
     latencyMs: Math.max(0, f.latencyMs | 0),
     status: (f.status === "failed" || f.status === "blocked" || f.status === "timeout") ? f.status : "success",
@@ -539,8 +541,12 @@ export async function gateAndCount(env, store, moduleId, doctorId, subscription,
     if (!cc.ok) return cc;                                 // { ok:false, reason:"ai-cost-cap", resetAt, ... }
   }
   _t.cost = Date.now() - _t.t0;
-  const rec = function () {
-    return recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now);
+  // extra (deferred commit only): the call's real metering fields (model, tokens, cost, feature, latency,
+  // status), merged under the identity fields so one record per call carries them (PrepNucleus 6.8).
+  // MaiK /explain commits with no argument, exactly as before.
+  const rec = function (extra) {
+    const f = Object.assign({}, (extra && typeof extra === "object") ? extra : {}, { doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email });
+    return recordAiUsage(env, store, buildUsageRecord(f), now);
   };
   if (deferRecord) { try { q.commit = rec; } catch (e) {} }
   else if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }

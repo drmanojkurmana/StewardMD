@@ -11325,3 +11325,29 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   mistranslate and misparse. Env pins to a 2.5 model are ignored; the console override can roll back to
   2.5 until 2026-10-16. Quality of both 3.x models is unmeasured. [[AI Control Center]]
 
+
+## 2026-10-05 - PrepNucleus: a standalone QBank screen on the shared FSRS core, not the specialty shell
+- **Deviation from plan 5.2** ([[PrepNucleus]]): `prep.js` is its own overlay (`#smdPrep`, `.pn-*` classes), not
+  `SPECIALTY.createHost`. The shell is built for one specialty with one bank; PrepNucleus is about 1,700 modules
+  across 33 subjects and four exams, laid out as exam tabs, subject grid, numbered module lists, timed tests and a
+  question grid. It still uses `specialty-core.js` for FSRS-6 (`review`, `buildSession`, `recordAnswer`), so
+  scheduling is the same engine as Tokós. Layer C screens draw through `PREP._host` (data-act `c-*`).
+- **Bank delivery:** only `prep/taxonomy.json` and each subject's `index.json` ship in the app; module files and
+  search indexes (about 180 MB) live in R2 (`stewardmd-offline`, prefix `prep-bank/`), served by
+  `/api/prep/bank/` and kept in IndexedDB after first open. No new bucket.
+- **Flag:** `smd_prep` default OFF until the owner turns it on.
+
+## 2026-10-05 - PrepNucleus Layer C server: where the code settles what the contract left open
+- `/api/ai/prep-generate` (`functions/api/ai/_prep-generate.js`, pure gates and prompts in `functions/_prep-core.js`,
+  shared with the owner Layer B tools). Vertex only, `gemini-3.1-flash-lite`, thinking 0, one usage record per call.
+- **Idempotent replay is sealed:** the stored response is AES-GCM encrypted with a key derived from the uid and the
+  exact request body, so the server keeps no readable question or source text. A different body under the same
+  `idem` is not replayed.
+- **KV keys carry the uid** (`prep:tok:<uid>:<deck>`, `prep:idem:<uid>:<idem>`); no email in any key.
+- **A deck counts against 3/day and 10/month at its first successful `facts` call**; `mcq`, `solve` and `review`
+  on a deck with no accepted `facts` call are refused (400 `deck-not-started`), so the caps cannot be skipped.
+- Per-deck caps on the server: 200k tokens, 60 pages, 300k characters (413). The 95 calls/day cap enforces only
+  when `MAIK_ENFORCE_CAPS=1` (set in `wrangler.toml`), like every other AI module.
+- Temperatures are placeholders until Phase 0: facts 0.2, mcq 0.4, review 0.2, solve 0.2.
+- Exam profiles live in `EXAM_PROFILES` in the core (no `prep/profiles/*.json` yet); INI-CET and NEET-SS wording is
+  provisional.

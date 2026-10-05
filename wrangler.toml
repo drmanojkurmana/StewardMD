@@ -72,6 +72,13 @@ bucket_name = "stewardmd-offline"
 binding = "WARDSYNQ_BACKUPS"
 bucket_name = "wardsynq-backups"
 
+# R2 - PrepNucleus question bank (functions/api/prep/bank/[[path]].js, tools/prep-upload-bank.mjs). REUSES the
+# existing stewardmd-offline bucket (also bound as OTA_R2) under the prep-bank/ prefix: no new bucket, and the
+# binding can never point at a bucket that does not exist. Public, versioned, immutable bank files only.
+[[r2_buckets]]
+binding = "PREP_BANK_R2"
+bucket_name = "stewardmd-offline"
+
 # Plaintext config vars (NOT secrets — secrets stay in `wrangler pages secret put`).
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
@@ -288,6 +295,10 @@ bucket_name = "stewardmd-offline"
 [[env.production.r2_buckets]]
 binding = "WARDSYNQ_BACKUPS"
 bucket_name = "wardsynq-backups"
+
+[[env.production.r2_buckets]]
+binding = "PREP_BANK_R2"
+bucket_name = "stewardmd-offline"
 
 [env.production.ai]
 binding = "AI"

@@ -134,7 +134,9 @@ async function readDailyCostInr(env, day) {
   try { const r = await db.prepare("SELECT cost_paise FROM ai_cost_daily WHERE day = ?").bind(day).first(); return r && r.cost_paise != null ? Number(r.cost_paise) / 100 : 0; }
   catch (e) { return null; }   // table missing / D1 error -> caller falls back to the KV counter
 }
-async function addDailyCostInr(env, day, inr) {
+// Exported for PrepNucleus, which feeds the breaker without recordUsage (that prices at MaiK's rate and
+// spends the MaiK allowance).
+export async function addDailyCostInr(env, day, inr) {
   const db = costDb(env); if (!db) return; const paise = Math.max(0, Math.round((inr || 0) * 100)); if (!paise) return;
   try { await db.prepare("INSERT INTO ai_cost_daily (day, cost_paise) VALUES (?, ?) ON CONFLICT(day) DO UPDATE SET cost_paise = cost_paise + excluded.cost_paise").bind(day, paise).run(); }
   catch (e) { /* fail-safe: the KV counter is still recorded by the caller */ }
@@ -147,7 +149,7 @@ async function addDailyCostInr(env, day, inr) {
 // per-user caps later, set env MAIK_ENFORCE_CAPS="1" (no code change).
 function aiUnlimited(env) { try { return String(env && env.MAIK_ENFORCE_CAPS) !== "1"; } catch (e) { return true; } }
 
-/* Pre-call gate. type ∈ general|case|intent|ocr|pdf. Returns {ok} or {ok:false, reason, message}.
+/* Pre-call gate. type ∈ general|case|intent|ocr|pdf|prep. Returns {ok} or {ok:false, reason, message}.
    Enforces: rate limit, per-user daily requests (by class), daily/monthly tokens, OCR/PDF
    quotas, and the global daily-cost circuit breaker. Fail-open when no KV. */
 export async function checkQuota(env, request, type, opts) {
@@ -226,16 +228,19 @@ export async function checkQuota(env, request, type, opts) {
   const u = (await _uP) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
   const m = (await _mP) || { tokens: 0 };
 
-  if (!exempt && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
+  // type "prep" (PrepNucleus decks) gets the breaker and the rate limit only: MaiK's per-user token
+  // allowances do not govern it; prep has its own deck, call and token caps (PrepNucleus-LayerC 6.8).
+  const _prep = type === "prep";
+  if (!exempt && !_prep && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
   let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
   let budgetApplied = false;
-  if (aiBudgetOn(env) && callerUid) {
+  if (aiBudgetOn(env) && callerUid && !_prep) {
     try {
       const cap = await monthlyCapFor(env, callerUid, isProCaller, callerPhoneVerified, month, { kv: store });
       if (cap != null) { monthlyCap = cap; budgetApplied = true; }
     } catch (e) { /* fail-open: keep legacy cap */ }
   }
-  if (!exempt && m.tokens >= monthlyCap) {
+  if (!exempt && !_prep && m.tokens >= monthlyCap) {
     if (!isProCaller) {
       // A Free account whose mobile is not verified has a zero allowance under the budget tiers:
       // the fix is the phone sheet, not a price (pro-notice.js "phone-unverified").

@@ -1,0 +1,630 @@
+{
+  "id": "ss-medical-oncology",
+  "code": "son",
+  "branch": "ss-medicine",
+  "title": "Medical Oncology",
+  "medmcqa": null,
+  "exams": [
+    "neet-ss"
+  ],
+  "sections": [
+    {
+      "id": "son-biology",
+      "title": "Cancer biology, epidemiology and assessment",
+      "modules": [
+        {
+          "id": "son-hallmarks",
+          "title": "Hallmarks of cancer and carcinogenesis",
+          "size": "m",
+          "scope": "oncogenes, tumour suppressor genes, Knudson two hit hypothesis, TP53, RB1, MYC, RAS, BCL2 apoptosis, VEGF angiogenesis, telomerase, Warburg effect, genomic instability, chemical carcinogens, oncogenic viruses"
+        },
+        {
+          "id": "son-hereditary",
+          "title": "Hereditary cancer syndromes and genetic counselling",
+          "size": "l",
+          "scope": "BRCA1, BRCA2, Lynch syndrome mismatch repair genes, Li-Fraumeni TP53, familial adenomatous polyposis APC, MEN1, MEN2 RET, Cowden PTEN, Peutz-Jeghers STK11, von Hippel-Lindau, cascade germline testing, risk reducing surgery"
+        },
+        {
+          "id": "son-molecular-dx",
+          "title": "Molecular diagnostics and predictive biomarkers",
+          "size": "l",
+          "scope": "next generation sequencing, liquid biopsy circulating tumour DNA, tumour mutational burden, microsatellite instability, PD-L1 TPS CPS, FISH, HER2 low, homologous recombination deficiency, minimal residual disease, ESCAT tiers"
+        },
+        {
+          "id": "son-tumour-markers",
+          "title": "Tumour markers",
+          "size": "s",
+          "scope": "CEA, CA-125, CA 19-9, AFP, beta-hCG, LDH, PSA, chromogranin A, calcitonin, thyroglobulin, beta2 microglobulin, ROMA index, marker half-life, false positive elevation"
+        },
+        {
+          "id": "son-staging-response",
+          "title": "Staging, performance status and response assessment",
+          "size": "m",
+          "scope": "TNM eighth edition, ECOG performance status, Karnofsky score, RECIST 1.1, iRECIST pseudoprogression, PERCIST, Lugano classification, Deauville five point score, mRECIST, Response Assessment in Neuro-Oncology"
+        },
+        {
+          "id": "son-trial-design",
+          "title": "Clinical trial design and evidence in oncology",
+          "size": "s",
+          "scope": "phase I dose escalation 3+3, maximum tolerated dose, randomized phase III, overall survival, progression free survival, hazard ratio, noninferiority, basket trial, umbrella trial, ESMO-MCBS, surrogate endpoints"
+        },
+        {
+          "id": "son-epidemiology",
+          "title": "Cancer epidemiology, prevention and screening",
+          "size": "m",
+          "scope": "GLOBOCAN, National Cancer Registry Programme India, tobacco related cancers, cervical screening VIA HPV DNA, mammography, low dose CT lung screening NLST NELSON, colonoscopy, PSA screening, HPV vaccination, hepatitis B vaccination"
+        }
+      ]
+    },
+    {
+      "id": "son-systemic",
+      "title": "Principles of systemic therapy",
+      "modules": [
+        {
+          "id": "son-chemo-principles",
+          "title": "Principles of cytotoxic chemotherapy",
+          "size": "m",
+          "scope": "cell cycle specificity, Skipper log kill hypothesis, Goldie-Coldman hypothesis, dose density, dose intensity, body surface area dosing, Calvert formula carboplatin AUC, multidrug resistance P-glycoprotein, neoadjuvant, adjuvant, metronomic chemotherapy"
+        },
+        {
+          "id": "son-alkylators-platinum",
+          "title": "Alkylating agents and platinum compounds",
+          "size": "m",
+          "scope": "cyclophosphamide, ifosfamide, mesna, busulfan, melphalan, bendamustine, temozolomide, dacarbazine, nitrosoureas, cisplatin, carboplatin, oxaliplatin, therapy related myeloid neoplasm"
+        },
+        {
+          "id": "son-antimetabolites",
+          "title": "Antimetabolites",
+          "size": "m",
+          "scope": "methotrexate leucovorin rescue, 5-fluorouracil, capecitabine, gemcitabine, pemetrexed vitamin B12 folate premedication, cytarabine cerebellar toxicity, fludarabine, cladribine, hydroxyurea, thymidylate synthase"
+        },
+        {
+          "id": "son-natural-products",
+          "title": "Anthracyclines, microtubule and topoisomerase agents",
+          "size": "m",
+          "scope": "doxorubicin cumulative dose, epirubicin, liposomal doxorubicin, bleomycin, mitomycin, paclitaxel, docetaxel, nab-paclitaxel, vincristine neurotoxicity, eribulin, etoposide, irinotecan, topotecan"
+        },
+        {
+          "id": "son-targeted",
+          "title": "Small molecule targeted therapy",
+          "size": "l",
+          "scope": "tyrosine kinase inhibitors, EGFR, ALK, BRAF MEK, PARP inhibitors synthetic lethality, CDK4/6 inhibitors, mTOR inhibitors, PI3K AKT, multikinase VEGFR inhibitors, acquired resistance mutations, on-target toxicity"
+        },
+        {
+          "id": "son-monoclonals-adc",
+          "title": "Monoclonal antibodies and antibody drug conjugates",
+          "size": "m",
+          "scope": "trastuzumab, bevacizumab, cetuximab, rituximab, trastuzumab deruxtecan, T-DM1, sacituzumab govitecan, enfortumab vedotin, brentuximab vedotin, linker payload, bystander effect, drug to antibody ratio"
+        },
+        {
+          "id": "son-immunotherapy",
+          "title": "Immune checkpoint inhibitors",
+          "size": "l",
+          "scope": "PD-1 nivolumab pembrolizumab, PD-L1 atezolizumab durvalumab, CTLA-4 ipilimumab, LAG-3 relatlimab, cancer immunity cycle, hyperprogression, pseudoprogression, MSI-high tissue agnostic approval, immunotherapy biomarkers"
+        },
+        {
+          "id": "son-cellular-therapy",
+          "title": "Cellular therapy and bispecific antibodies",
+          "size": "m",
+          "scope": "CAR-T cells CD19 BCMA, cytokine release syndrome, ICANS, tocilizumab, bispecific T cell engagers, blinatumomab, teclistamab, tebentafusp, tarlatamab, tumour infiltrating lymphocytes lifileucel"
+        },
+        {
+          "id": "son-hormonal",
+          "title": "Endocrine therapy in oncology",
+          "size": "m",
+          "scope": "tamoxifen, aromatase inhibitors, fulvestrant, elacestrant ESR1, GnRH agonists, degarelix, relugolix, abiraterone, enzalutamide, apalutamide, darolutamide, somatostatin analogues"
+        },
+        {
+          "id": "son-tissue-agnostic",
+          "title": "Tissue agnostic and precision oncology",
+          "size": "s",
+          "scope": "NTRK fusion larotrectinib entrectinib, MSI-high pembrolizumab, TMB-high, BRAF V600E dabrafenib trametinib, RET fusion selpercatinib, HER2 IHC 3+ trastuzumab deruxtecan, molecular tumour board"
+        },
+        {
+          "id": "son-pharmacogenomics",
+          "title": "Pharmacogenomics and drug interactions",
+          "size": "s",
+          "scope": "DPYD deficiency fluoropyrimidine toxicity, UGT1A1 irinotecan, TPMT thiopurines, CYP2D6 tamoxifen, CYP3A4 interactions TKIs, QT prolongation, proton pump inhibitor absorption, dose modification hepatic renal impairment"
+        },
+        {
+          "id": "son-radiation-principles",
+          "title": "Radiation oncology for the medical oncologist",
+          "size": "s",
+          "scope": "radiosensitizers, concurrent chemoradiation, linear quadratic model, stereotactic body radiotherapy, abscopal effect, radiation pneumonitis, radiation recall, brachytherapy, Gray fractionation, oligometastatic disease"
+        }
+      ]
+    },
+    {
+      "id": "son-thoracic",
+      "title": "Thoracic malignancies",
+      "modules": [
+        {
+          "id": "son-nsclc-dx",
+          "title": "NSCLC diagnosis, pathology and staging",
+          "size": "m",
+          "scope": "adenocarcinoma, squamous cell carcinoma, EBUS-TBNA, PET-CT, TNM staging, TTF-1, p40, reflex molecular testing, mediastinal staging, solitary pulmonary nodule, Pancoast tumour"
+        },
+        {
+          "id": "son-nsclc-early",
+          "title": "Early stage and locally advanced NSCLC",
+          "size": "l",
+          "scope": "lobectomy, adjuvant osimertinib ADAURA, neoadjuvant chemoimmunotherapy CheckMate 816, perioperative pembrolizumab KEYNOTE-671, durvalumab consolidation PACIFIC, concurrent chemoradiation, adjuvant alectinib ALINA, SBRT"
+        },
+        {
+          "id": "son-nsclc-driver",
+          "title": "Oncogene addicted NSCLC",
+          "size": "l",
+          "scope": "EGFR exon 19 deletion, L858R, osimertinib FLAURA, T790M, ALK alectinib, lorlatinib CROWN, ROS1, BRAF V600E, KRAS G12C sotorasib, MET exon 14 skipping, RET selpercatinib, EGFR exon 20 amivantamab, MARIPOSA"
+        },
+        {
+          "id": "son-nsclc-io",
+          "title": "Immunotherapy-based therapy in advanced NSCLC",
+          "size": "l",
+          "scope": "pembrolizumab KEYNOTE-024, KEYNOTE-189, KEYNOTE-407, PD-L1 50 percent, CheckMate 9LA, nivolumab ipilimumab, atezolizumab, docetaxel second line, maintenance pemetrexed, bevacizumab"
+        },
+        {
+          "id": "son-sclc",
+          "title": "Small cell lung cancer",
+          "size": "m",
+          "scope": "limited stage, extensive stage, cisplatin etoposide, atezolizumab IMpower133, durvalumab CASPIAN, ADRIATIC consolidation, prophylactic cranial irradiation, tarlatamab DLL3, lurbinectedin, SIADH, Lambert-Eaton"
+        },
+        {
+          "id": "son-mesothelioma-thymic",
+          "title": "Mesothelioma and thymic tumours",
+          "size": "s",
+          "scope": "asbestos exposure, pleural mesothelioma, calretinin, BAP1 loss, nivolumab ipilimumab CheckMate 743, thymoma Masaoka-Koga, myasthenia gravis, thymic carcinoma, carboplatin paclitaxel"
+        }
+      ]
+    },
+    {
+      "id": "son-breast",
+      "title": "Breast cancer",
+      "modules": [
+        {
+          "id": "son-breast-bio",
+          "title": "Breast cancer biology and staging",
+          "size": "m",
+          "scope": "ER, PR, HER2 IHC, Ki-67, luminal A, luminal B, HER2 enriched, triple negative, Oncotype DX recurrence score TAILORx RxPONDER, MammaPrint MINDACT, prognostic stage groups"
+        },
+        {
+          "id": "son-breast-early-hr",
+          "title": "Early hormone receptor positive breast cancer",
+          "size": "l",
+          "scope": "adjuvant tamoxifen, aromatase inhibitors, ovarian function suppression SOFT TEXT, extended endocrine therapy, abemaciclib monarchE, ribociclib NATALEE, olaparib OlympiA, adjuvant bisphosphonates"
+        },
+        {
+          "id": "son-breast-her2",
+          "title": "HER2-positive breast cancer",
+          "size": "l",
+          "scope": "trastuzumab, pertuzumab APHINITY, neoadjuvant pathological complete response, T-DM1 KATHERINE, trastuzumab deruxtecan DESTINY-Breast03, tucatinib HER2CLIMB, CLEOPATRA, cardiotoxicity LVEF monitoring"
+        },
+        {
+          "id": "son-breast-tnbc",
+          "title": "Triple negative breast cancer",
+          "size": "l",
+          "scope": "neoadjuvant pembrolizumab KEYNOTE-522, adjuvant capecitabine CREATE-X, sacituzumab govitecan ASCENT, PARP inhibitors, platinum, germline BRCA, PD-L1 CPS, KEYNOTE-355, datopotamab deruxtecan"
+        },
+        {
+          "id": "son-breast-metastatic-hr",
+          "title": "Metastatic hormone receptor positive breast cancer",
+          "size": "l",
+          "scope": "CDK4/6 inhibitors palbociclib ribociclib MONALEESA abemaciclib, fulvestrant, ESR1 mutation elacestrant, PIK3CA alpelisib, capivasertib CAPItello-291, everolimus, HER2-low trastuzumab deruxtecan DESTINY-Breast04"
+        },
+        {
+          "id": "son-breast-special",
+          "title": "Special situations in breast cancer",
+          "size": "s",
+          "scope": "male breast cancer, pregnancy associated breast cancer, inflammatory breast cancer, phyllodes tumour, ductal carcinoma in situ, Paget disease of nipple, elderly patients, oligometastatic breast cancer"
+        }
+      ]
+    },
+    {
+      "id": "son-gi",
+      "title": "Gastrointestinal cancers",
+      "modules": [
+        {
+          "id": "son-esophagus-gastric",
+          "title": "Oesophageal and gastric cancer",
+          "size": "l",
+          "scope": "squamous carcinoma, adenocarcinoma, CROSS chemoradiation, FLOT perioperative, adjuvant nivolumab CheckMate 577, HER2 trastuzumab ToGA, Claudin 18.2 zolbetuximab, nivolumab CheckMate 649, Siewert classification"
+        },
+        {
+          "id": "son-crc-early",
+          "title": "Localized colon and rectal cancer",
+          "size": "l",
+          "scope": "adjuvant FOLFOX CAPOX, IDEA trial 3 versus 6 months, high risk stage II, MMR testing, total neoadjuvant therapy rectal cancer RAPIDO PRODIGE 23, watch and wait, dostarlimab dMMR rectal cancer"
+        },
+        {
+          "id": "son-crc-metastatic",
+          "title": "Metastatic colorectal cancer",
+          "size": "l",
+          "scope": "RAS BRAF testing, primary tumour sidedness, cetuximab, panitumumab, bevacizumab, FOLFIRI, encorafenib cetuximab BEACON, pembrolizumab KEYNOTE-177, trifluridine tipiracil, fruquintinib, regorafenib, liver metastasectomy"
+        },
+        {
+          "id": "son-anal-sb",
+          "title": "Anal canal, small bowel and appendiceal cancers",
+          "size": "s",
+          "scope": "anal squamous carcinoma HPV, Nigro protocol mitomycin 5-FU chemoradiation, small bowel adenocarcinoma, ampullary carcinoma, appendiceal neoplasms, pseudomyxoma peritonei, cytoreductive surgery HIPEC"
+        },
+        {
+          "id": "son-pancreas",
+          "title": "Pancreatic cancer",
+          "size": "l",
+          "scope": "resectable, borderline resectable, CA 19-9, modified FOLFIRINOX PRODIGE 24, gemcitabine nab-paclitaxel, NALIRIFOX, germline BRCA olaparib POLO, KRAS mutation, Whipple procedure, neoadjuvant therapy"
+        },
+        {
+          "id": "son-hcc",
+          "title": "Hepatocellular carcinoma",
+          "size": "l",
+          "scope": "BCLC staging, LI-RADS, AFP, TACE, radiofrequency ablation, atezolizumab bevacizumab IMbrave150, durvalumab tremelimumab HIMALAYA, sorafenib, lenvatinib REFLECT, Child-Pugh, Milan criteria transplant"
+        },
+        {
+          "id": "son-biliary",
+          "title": "Biliary tract cancers",
+          "size": "m",
+          "scope": "cholangiocarcinoma, gallbladder carcinoma, durvalumab TOPAZ-1, gemcitabine cisplatin, adjuvant capecitabine BILCAP, FGFR2 fusion pemigatinib, IDH1 ivosidenib, HER2 amplification, primary sclerosing cholangitis"
+        },
+        {
+          "id": "son-gist",
+          "title": "Gastrointestinal stromal tumour",
+          "size": "m",
+          "scope": "KIT exon 11, PDGFRA D842V, DOG1, CD117, adjuvant imatinib 3 years, sunitinib, regorafenib, ripretinib, avapritinib, mitotic count risk stratification, SDH deficient GIST"
+        },
+        {
+          "id": "son-net",
+          "title": "Neuroendocrine neoplasms",
+          "size": "m",
+          "scope": "well differentiated NET, Ki-67 grading, neuroendocrine carcinoma, carcinoid syndrome, urinary 5-HIAA, Ga-68 DOTATATE PET, octreotide, lanreotide CLARINET, lutetium PRRT NETTER-1, everolimus, sunitinib, capecitabine temozolomide"
+        }
+      ]
+    },
+    {
+      "id": "son-gu",
+      "title": "Genitourinary cancers",
+      "modules": [
+        {
+          "id": "son-prostate-local",
+          "title": "Localized and biochemically recurrent prostate cancer",
+          "size": "m",
+          "scope": "Gleason grade group, PSA kinetics, multiparametric MRI PI-RADS, active surveillance, radical prostatectomy, radiotherapy with androgen deprivation, PSMA PET, high risk localized, STAMPEDE abiraterone"
+        },
+        {
+          "id": "son-prostate-advanced",
+          "title": "Advanced prostate cancer",
+          "size": "l",
+          "scope": "metastatic hormone sensitive, castration resistant, docetaxel, abiraterone LATITUDE, enzalutamide, apalutamide, darolutamide ARASENS, lutetium PSMA VISION, olaparib PROfound, radium-223, cabazitaxel"
+        },
+        {
+          "id": "son-bladder",
+          "title": "Urothelial carcinoma",
+          "size": "l",
+          "scope": "non-muscle invasive BCG, muscle invasive cystectomy, neoadjuvant dose dense MVAC, enfortumab vedotin pembrolizumab EV-302, avelumab maintenance JAVELIN Bladder 100, erdafitinib FGFR3, upper tract urothelial carcinoma, adjuvant nivolumab"
+        },
+        {
+          "id": "son-kidney",
+          "title": "Renal cell carcinoma",
+          "size": "l",
+          "scope": "clear cell, VHL, IMDC risk, sunitinib, pembrolizumab axitinib KEYNOTE-426, nivolumab ipilimumab CheckMate 214, cabozantinib, lenvatinib, belzutifan HIF-2 alpha, adjuvant pembrolizumab KEYNOTE-564, papillary, chromophobe"
+        },
+        {
+          "id": "son-testis",
+          "title": "Germ cell tumours",
+          "size": "l",
+          "scope": "seminoma, nonseminoma, AFP, beta-hCG, LDH, IGCCCG risk classification, BEP, EP, retroperitoneal lymph node dissection, surveillance, single dose carboplatin, salvage TIP, high dose chemotherapy, bleomycin lung toxicity"
+        },
+        {
+          "id": "son-penile-adrenal",
+          "title": "Penile and adrenal cancers",
+          "size": "s",
+          "scope": "penile squamous carcinoma HPV, inguinal lymphadenectomy, adrenocortical carcinoma, mitotane, EDP mitotane FIRM-ACT, Weiss criteria, malignant pheochromocytoma, paraganglioma SDHB"
+        }
+      ]
+    },
+    {
+      "id": "son-gyn",
+      "title": "Gynaecological cancers",
+      "modules": [
+        {
+          "id": "son-ovary",
+          "title": "Epithelial ovarian cancer",
+          "size": "l",
+          "scope": "high grade serous carcinoma, BRCA, HRD, CA-125, cytoreductive surgery, carboplatin paclitaxel, PARP maintenance olaparib SOLO-1, niraparib PRIMA, bevacizumab, platinum sensitive relapse, mirvetuximab folate receptor alpha, HIPEC"
+        },
+        {
+          "id": "son-cervix",
+          "title": "Cervical cancer",
+          "size": "l",
+          "scope": "HPV 16 18, FIGO 2018 staging, concurrent cisplatin chemoradiation, brachytherapy, pembrolizumab KEYNOTE-A18, KEYNOTE-826, bevacizumab GOG 240, tisotumab vedotin, induction chemotherapy INTERLACE"
+        },
+        {
+          "id": "son-endometrium",
+          "title": "Endometrial cancer",
+          "size": "m",
+          "scope": "Lynch syndrome, molecular classification POLE ultramutated, MMR deficient, p53 abnormal, NSMP, dostarlimab RUBY, pembrolizumab lenvatinib, carboplatin paclitaxel, PORTEC, uterine serous carcinoma, carcinosarcoma"
+        },
+        {
+          "id": "son-gtn-rare",
+          "title": "Gestational trophoblastic neoplasia and rare gynaecological cancers",
+          "size": "s",
+          "scope": "complete hydatidiform mole, choriocarcinoma, beta-hCG surveillance, FIGO WHO prognostic score, methotrexate, actinomycin D, EMA-CO, placental site trophoblastic tumour, vulvar cancer, ovarian germ cell tumours"
+        }
+      ]
+    },
+    {
+      "id": "son-headneck",
+      "title": "Head and neck, CNS, skin and sarcoma",
+      "modules": [
+        {
+          "id": "son-head-neck",
+          "title": "Head and neck squamous cell carcinoma",
+          "size": "l",
+          "scope": "oral cavity cancer, oropharyngeal cancer HPV p16, induction TPF, concurrent cisplatin, cetuximab bioradiotherapy, pembrolizumab KEYNOTE-048, larynx preservation, low dose nivolumab, oral metronomic chemotherapy India"
+        },
+        {
+          "id": "son-npc-salivary",
+          "title": "Nasopharyngeal and salivary gland cancers",
+          "size": "s",
+          "scope": "nasopharyngeal carcinoma EBV DNA, gemcitabine cisplatin induction, toripalimab, camrelizumab, adenoid cystic carcinoma, mucoepidermoid carcinoma, salivary duct carcinoma androgen receptor HER2"
+        },
+        {
+          "id": "son-thyroid",
+          "title": "Thyroid cancer",
+          "size": "m",
+          "scope": "papillary thyroid carcinoma, radioactive iodine refractory, lenvatinib SELECT, sorafenib DECISION, medullary thyroid cancer RET selpercatinib, calcitonin, anaplastic thyroid cancer BRAF dabrafenib trametinib, thyroglobulin"
+        },
+        {
+          "id": "son-cns",
+          "title": "Central nervous system tumours",
+          "size": "l",
+          "scope": "glioblastoma IDH wildtype, MGMT promoter methylation, temozolomide Stupp protocol, tumour treating fields, IDH mutant astrocytoma, oligodendroglioma 1p19q codeletion, vorasidenib INDIGO, PCV, medulloblastoma, WHO CNS5"
+        },
+        {
+          "id": "son-melanoma",
+          "title": "Melanoma",
+          "size": "l",
+          "scope": "BRAF V600, dabrafenib trametinib, encorafenib binimetinib, nivolumab ipilimumab CheckMate 067, relatlimab, adjuvant pembrolizumab, neoadjuvant immunotherapy, uveal melanoma tebentafusp, mucosal melanoma, sentinel node biopsy"
+        },
+        {
+          "id": "son-nmsc",
+          "title": "Non-melanoma skin cancers",
+          "size": "s",
+          "scope": "basal cell carcinoma hedgehog pathway, vismodegib, sonidegib, cutaneous squamous cell carcinoma cemiplimab, Merkel cell carcinoma polyomavirus, avelumab, xeroderma pigmentosum, Gorlin syndrome"
+        },
+        {
+          "id": "son-sarcoma",
+          "title": "Soft tissue sarcomas",
+          "size": "m",
+          "scope": "liposarcoma MDM2 amplification, leiomyosarcoma, synovial sarcoma SS18-SSX, doxorubicin ifosfamide, trabectedin, eribulin, pazopanib, desmoid tumour, Kaposi sarcoma, angiosarcoma, rhabdomyosarcoma"
+        },
+        {
+          "id": "son-bone-sarcoma",
+          "title": "Bone sarcomas",
+          "size": "m",
+          "scope": "osteosarcoma MAP regimen high dose methotrexate, Ewing sarcoma EWSR1-FLI1, VDC/IE, chondrosarcoma, giant cell tumour of bone denosumab, Codman triangle, onion skin periosteal reaction"
+        },
+        {
+          "id": "son-cup",
+          "title": "Cancer of unknown primary",
+          "size": "s",
+          "scope": "favourable subsets, CK7 CK20 immunohistochemistry, gene expression profiling, midline germ cell syndrome, peritoneal carcinomatosis in women, isolated axillary nodes, squamous cervical nodes, empirical carboplatin paclitaxel"
+        },
+        {
+          "id": "son-hiv-malignancy",
+          "title": "HIV-associated malignancies",
+          "size": "s",
+          "scope": "Kaposi sarcoma HHV-8, primary effusion lymphoma, plasmablastic lymphoma, AIDS defining cancers, antiretroviral drug interactions, multicentric Castleman disease, HPV related anal cancer"
+        }
+      ]
+    },
+    {
+      "id": "son-heme",
+      "title": "Haematological malignancies",
+      "modules": [
+        {
+          "id": "son-aml",
+          "title": "Acute myeloid leukaemia",
+          "size": "l",
+          "scope": "FLT3 midostaurin, NPM1, CEBPA, ELN 2022 risk, 7+3 induction, venetoclax azacitidine VIALE-A, IDH1 IDH2 inhibitors, gilteritinib, quizartinib, CPX-351, allogeneic transplant, menin inhibitors"
+        },
+        {
+          "id": "son-apl",
+          "title": "Acute promyelocytic leukaemia",
+          "size": "m",
+          "scope": "PML-RARA t(15;17), ATRA arsenic trioxide APL0406, DIC coagulopathy, differentiation syndrome, Sanz risk score, Auer rods faggot cells, QT prolongation, early haemorrhagic death"
+        },
+        {
+          "id": "son-all",
+          "title": "Acute lymphoblastic leukaemia",
+          "size": "l",
+          "scope": "Philadelphia positive, ponatinib, dasatinib, BFM protocol, hyper-CVAD, asparaginase toxicity, blinatumomab, inotuzumab ozogamicin, tisagenlecleucel, MRD, CNS prophylaxis, Ph-like ALL"
+        },
+        {
+          "id": "son-cml",
+          "title": "Chronic myeloid leukaemia",
+          "size": "l",
+          "scope": "BCR-ABL1 t(9;22), imatinib IRIS, dasatinib, nilotinib, bosutinib, ponatinib T315I, asciminib ASC4FIRST, major molecular response, treatment free remission, blast crisis, ELN milestones"
+        },
+        {
+          "id": "son-cll",
+          "title": "Chronic lymphocytic leukaemia",
+          "size": "m",
+          "scope": "del 17p TP53, IGHV mutation status, Rai Binet staging, ibrutinib, acalabrutinib, zanubrutinib, venetoclax obinutuzumab CLL14, Richter transformation, autoimmune haemolytic anaemia, hypogammaglobulinaemia"
+        },
+        {
+          "id": "son-mpn-mds",
+          "title": "Myeloproliferative neoplasms and myelodysplastic syndromes",
+          "size": "l",
+          "scope": "JAK2 V617F, CALR, MPL, polycythaemia vera, essential thrombocythaemia, myelofibrosis ruxolitinib, fedratinib, momelotinib, MDS IPSS-M, luspatercept, azacitidine, del 5q lenalidomide"
+        },
+        {
+          "id": "son-hodgkin",
+          "title": "Hodgkin lymphoma",
+          "size": "l",
+          "scope": "Reed-Sternberg cells CD15 CD30, ABVD, escalated BEACOPP, interim PET adapted therapy, brentuximab vedotin ECHELON-1, nivolumab AVD SWOG S1826, nodular lymphocyte predominant, involved site radiotherapy, late effects"
+        },
+        {
+          "id": "son-nhl-aggressive",
+          "title": "Aggressive B cell lymphomas",
+          "size": "l",
+          "scope": "diffuse large B cell lymphoma, cell of origin, R-CHOP, Pola-R-CHP POLARIX, IPI, double hit MYC BCL2, Burkitt lymphoma, primary CNS lymphoma high dose methotrexate, CAR-T ZUMA-7, mantle cell lymphoma"
+        },
+        {
+          "id": "son-nhl-indolent",
+          "title": "Indolent B cell lymphomas",
+          "size": "m",
+          "scope": "follicular lymphoma t(14;18), FLIPI, bendamustine rituximab, watch and wait, marginal zone lymphoma, H pylori MALT lymphoma, Waldenstrom macroglobulinaemia MYD88, histologic transformation, mosunetuzumab"
+        },
+        {
+          "id": "son-tcell",
+          "title": "T cell and NK cell lymphomas",
+          "size": "m",
+          "scope": "peripheral T cell lymphoma NOS, anaplastic large cell lymphoma ALK, brentuximab ECHELON-2, angioimmunoblastic T cell lymphoma, extranodal NK/T cell lymphoma EBV asparaginase, mycosis fungoides, Sezary syndrome, ATLL HTLV-1"
+        },
+        {
+          "id": "son-myeloma",
+          "title": "Multiple myeloma and plasma cell disorders",
+          "size": "l",
+          "scope": "CRAB SLiM criteria, R-ISS, daratumumab, lenalidomide, bortezomib, carfilzomib, DRd MAIA, autologous transplant, teclistamab, ciltacabtagene autoleucel, MGUS, smouldering myeloma, AL amyloidosis, POEMS"
+        },
+        {
+          "id": "son-hsct",
+          "title": "Haematopoietic stem cell transplantation",
+          "size": "m",
+          "scope": "autologous versus allogeneic, HLA matching, haploidentical post-transplant cyclophosphamide, myeloablative reduced intensity conditioning, graft versus host disease ruxolitinib, sinusoidal obstruction syndrome defibrotide, CMV letermovir"
+        }
+      ]
+    },
+    {
+      "id": "son-special",
+      "title": "Special populations and survivorship",
+      "modules": [
+        {
+          "id": "son-paeds",
+          "title": "Paediatric solid tumours",
+          "size": "m",
+          "scope": "neuroblastoma MYCN, Wilms tumour WT1, retinoblastoma RB1, hepatoblastoma, paediatric rhabdomyosarcoma, medulloblastoma, dinutuximab, Childrens Oncology Group, survivorship"
+        },
+        {
+          "id": "son-geriatric-aya",
+          "title": "Geriatric oncology, AYA and cancer in pregnancy",
+          "size": "s",
+          "scope": "comprehensive geriatric assessment G8, CARG toxicity score, adolescent young adult, fertility preservation oocyte cryopreservation, GnRH agonist ovarian protection, chemotherapy in pregnancy second trimester"
+        },
+        {
+          "id": "son-survivorship",
+          "title": "Survivorship and late effects",
+          "size": "s",
+          "scope": "second malignant neoplasms, therapy related AML, infertility, radiation induced fibrosis, chemotherapy related cognitive impairment, follow-up surveillance, exercise oncology, psychosocial distress, financial toxicity"
+        },
+        {
+          "id": "son-cardio-oncology",
+          "title": "Cardio-oncology",
+          "size": "s",
+          "scope": "anthracycline cardiomyopathy dexrazoxane, trastuzumab LVEF decline, global longitudinal strain, troponin surveillance, immune checkpoint myocarditis, fluoropyrimidine vasospasm, VEGF inhibitor hypertension, QTc, ESC 2022 cardio-oncology"
+        }
+      ]
+    },
+    {
+      "id": "son-toxicity",
+      "title": "Toxicities of anticancer therapy",
+      "modules": [
+        {
+          "id": "son-myelosuppression",
+          "title": "Myelosuppression and febrile neutropenia",
+          "size": "l",
+          "scope": "absolute neutrophil count nadir, MASCC score, CISNE, empirical piperacillin tazobactam, cefepime, G-CSF pegfilgrastim primary prophylaxis 20 percent risk, posaconazole prophylaxis, chemotherapy induced anaemia, thrombocytopenia"
+        },
+        {
+          "id": "son-cinv",
+          "title": "Chemotherapy induced nausea and vomiting",
+          "size": "m",
+          "scope": "emetogenic risk classification, NK1 antagonists aprepitant fosaprepitant, 5-HT3 antagonists palonosetron, olanzapine, dexamethasone, anticipatory nausea, delayed emesis, breakthrough emesis"
+        },
+        {
+          "id": "son-organ-tox",
+          "title": "Organ-specific toxicities of cytotoxics",
+          "size": "l",
+          "scope": "anthracycline cardiotoxicity, bleomycin pulmonary fibrosis, cisplatin nephrotoxicity ototoxicity, ifosfamide encephalopathy methylene blue, high dose methotrexate glucarpidase, oxaliplatin cold neuropathy, irinotecan diarrhoea loperamide, 5-FU coronary vasospasm"
+        },
+        {
+          "id": "son-irae",
+          "title": "Immune related adverse events",
+          "size": "l",
+          "scope": "checkpoint inhibitor colitis, hepatitis, pneumonitis, hypophysitis, thyroiditis, type 1 diabetes, myocarditis, myositis, CTCAE grading, corticosteroids, infliximab, vedolizumab, mycophenolate, rechallenge"
+        },
+        {
+          "id": "son-targeted-tox",
+          "title": "Toxicities of targeted agents and ADCs",
+          "size": "m",
+          "scope": "EGFR inhibitor acneiform rash, paronychia, hand foot skin reaction, VEGF inhibitor hypertension proteinuria, trastuzumab deruxtecan ILD, ocular toxicity, alpelisib hyperglycaemia, CDK4/6 neutropenia, lorlatinib hyperlipidaemia"
+        },
+        {
+          "id": "son-infusion-extravasation",
+          "title": "Infusion reactions, hypersensitivity and extravasation",
+          "size": "s",
+          "scope": "taxane hypersensitivity, platinum hypersensitivity desensitization, rituximab infusion reaction, vesicant extravasation, anthracycline dexrazoxane, hyaluronidase vinca alkaloids, cold versus warm compress, port care"
+        },
+        {
+          "id": "son-mucositis-skin",
+          "title": "Mucositis, dermatological and gonadal toxicity",
+          "size": "s",
+          "scope": "oral mucositis palifermin, oral cryotherapy, scalp cooling alopecia, capecitabine hand foot syndrome, nail toxicity, gonadotoxicity, premature ovarian insufficiency, sperm banking"
+        }
+      ]
+    },
+    {
+      "id": "son-supportive",
+      "title": "Oncologic emergencies and supportive care",
+      "modules": [
+        {
+          "id": "son-emergencies",
+          "title": "Oncologic emergencies",
+          "size": "l",
+          "scope": "tumour lysis syndrome rasburicase Cairo-Bishop, hypercalcaemia of malignancy zoledronic acid denosumab, malignant spinal cord compression dexamethasone, superior vena cava syndrome, hyperviscosity, leukostasis, malignant pericardial tamponade"
+        },
+        {
+          "id": "son-paraneoplastic",
+          "title": "Paraneoplastic syndromes",
+          "size": "m",
+          "scope": "SIADH, ectopic ACTH, PTHrP hypercalcaemia, Lambert-Eaton anti-VGCC, anti-Hu, anti-Yo, anti-Ma2, cancer associated dermatomyositis, hypertrophic osteoarthropathy, Trousseau syndrome, anti-NMDA receptor encephalitis ovarian teratoma"
+        },
+        {
+          "id": "son-thrombosis",
+          "title": "Cancer associated thrombosis",
+          "size": "m",
+          "scope": "Khorana score, low molecular weight heparin CLOT, edoxaban Hokusai VTE Cancer, apixaban Caravaggio, rivaroxaban SELECT-D, catheter related thrombosis, primary thromboprophylaxis AVERT CASSINI, incidental pulmonary embolism"
+        },
+        {
+          "id": "son-pain-palliative",
+          "title": "Cancer pain and palliative care",
+          "size": "l",
+          "scope": "WHO analgesic ladder, opioid titration, oral morphine equivalence, opioid rotation, neuropathic cancer pain, breakthrough pain, early palliative care Temel trial, total pain, end of life care, palliative sedation"
+        },
+        {
+          "id": "son-bone-mets",
+          "title": "Bone metastases and skeletal related events",
+          "size": "s",
+          "scope": "osteolytic, osteoblastic, zoledronic acid, denosumab, Mirels score, pathological fracture, single fraction radiotherapy, radium-223, osteonecrosis of jaw, hypocalcaemia"
+        },
+        {
+          "id": "son-brain-mets",
+          "title": "Brain and leptomeningeal metastases",
+          "size": "s",
+          "scope": "stereotactic radiosurgery, whole brain radiotherapy memantine hippocampal avoidance, osimertinib CNS activity, tucatinib, leptomeningeal carcinomatosis CSF cytology, intrathecal chemotherapy, dexamethasone, Ommaya reservoir"
+        },
+        {
+          "id": "son-infections-onc",
+          "title": "Infections in the cancer patient",
+          "size": "m",
+          "scope": "neutropenic fever, invasive aspergillosis, galactomannan, Pneumocystis prophylaxis, hepatitis B reactivation rituximab, CMV reactivation, mucormycosis, central line associated bloodstream infection, vaccination in cancer patients"
+        },
+        {
+          "id": "son-effusions-nutrition",
+          "title": "Malignant effusions, cachexia and nutrition",
+          "size": "s",
+          "scope": "malignant pleural effusion talc pleurodesis, indwelling pleural catheter, malignant ascites, cancer cachexia anamorelin, olanzapine appetite, megestrol acetate, malignant bowel obstruction octreotide, parenteral nutrition"
+        }
+      ]
+    }
+  ]
+}

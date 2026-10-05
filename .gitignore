@@ -174,3 +174,10 @@ data/dose-rules-report.json
 /vault/plans/edge-data/dataset/dev3.jsonl
 /vault/plans/edge-data/dataset/export/
 /vault/plans/edge-data/schemas/
+
+# PrepNucleus bank build outputs (tools/prep-build-bank.mjs). Question files and search indexes live in R2
+# (tools/prep-upload-bank.mjs); only prep/taxonomy.json and each subject's index.json are committed and shipped.
+/prep/bank/v*/*/mcq/
+/prep/bank/v*/*/search.json
+/prep/build/
+/prep/fill/

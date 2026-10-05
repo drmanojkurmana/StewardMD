@@ -142,6 +142,12 @@ subject recorded. (5) Files on R2 and `manifest.json` lists them; `curl` of one 
 returns it with the immutable header. (6) Reproducible: a second run from the same inputs is byte-identical.
 
 ### 5.2 Phase 2: the bank app ($0 AI)
+> **As built (2026-10-05):** `prep.js` is a standalone overlay on `specialty-core.js` FSRS, not
+> `SPECIALTY.createHost` (Decisions 2026-10-05); there is no `prep-bank.js`, the browser, filters, custom module,
+> search and downloads live in `prep.js`. The bank route reads the existing bucket `stewardmd-offline` under
+> `prep-bank/`, not a new `stewardmd-prep-bank`. Auto-hide is 3 separate reporters (the server never sees attempts).
+> Module notes: [[PrepNucleus]].
+
 **Files.**
 | File | Role |
 |---|---|

@@ -1109,6 +1109,12 @@
       if (!t || !homeToolEligible(t)) return;
       if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
     },
+    // PrepNucleus (prep.js, loaded on first open by prep-loader.js): same quiet no-op when its flag is off.
+    prep: function () {
+      var t = HOME_TOOLS.filter(function (x) { return x.act === "prep"; })[0];
+      if (!t || !homeToolEligible(t)) return;
+      if (window.PREP && PREP.open) PREP.open(); else toast("PrepNucleus loading…");
+    },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     staging: function () { if (window.SMD_ONCOSTAGING && SMD_ONCOSTAGING.openList) SMD_ONCOSTAGING.openList(); else toast("Cancer Staging loading…"); },
@@ -2144,6 +2150,10 @@
     // obstetrician approves each case in the Review Desk.
     { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
+    // PrepNucleus (prep.js, loaded on first open by prep-loader.js): the NEET-PG, INI-CET, NEET-SS and USMLE question
+    // bank (vault/plans/PrepNucleus.md). OFF by default while the bank is filled; smd_prep="1" or ?prep=1 shows it.
+    { act: "prep", ic: "quiz", tt: "PrepNucleus", sub: "Exam question bank",
+      eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") === "1"; } catch (e) { return false; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

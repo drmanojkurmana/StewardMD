@@ -232,6 +232,15 @@ rm -rf "$WWW/tokos/learn/units" "$WWW/tokos/learn/media"/credits-*.json "$WWW/to
 # subdirectory, so the root *.js glob misses it. The engine files (specialty-*.js, specialty.css) are root globs.
 [ -d tokos-models ] && mkdir -p "$WWW/tokos-models" && cp -R tokos-models/. "$WWW/tokos-models/"
 
+# PrepNucleus (prep.js, loaded by prep-loader.js): the module tree and the per-subject index files (MCQ counts) ship
+# in the app, about 1 MB. The question files (prep/bank/v1/*/mcq/, search.json, about 180 MB) do NOT: the app fetches
+# a module from /api/prep/bank/ (R2) the first time it opens and keeps it in IndexedDB. prep/build and prep/fill are
+# build-tool outputs, never shipped.
+if [ -f prep/taxonomy.json ]; then
+  mkdir -p "$WWW/prep" && cp prep/taxonomy.json "$WWW/prep/"
+  for ix in prep/bank/v1/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
+fi
+
 # NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix
 # and surgx above: the root *.js glob copies the module code, DATA DIRECTORIES ARE NOT COPIED. Without
 # this line pglog loads, the tile appears, and every requirement list is empty on the device — which

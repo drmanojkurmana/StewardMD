@@ -1,0 +1,60 @@
+{
+  "id": "ss-biostatistics",
+  "code": "sbs",
+  "branch": "ss-medicine",
+  "title": "Biostatistics and Research Methods",
+  "medmcqa": null,
+  "exams": [
+    "neet-ss"
+  ],
+  "sections": [
+    {
+      "id": "sbs-statistics",
+      "title": "Biostatistics",
+      "modules": [
+        {
+          "id": "sbs-descriptive-probability",
+          "title": "Descriptive statistics, distributions and probability",
+          "size": "l",
+          "scope": "mean, median, mode, standard deviation, standard error, normal distribution, skewness, confidence interval, probability, binomial distribution, Poisson distribution, central limit theorem, nominal ordinal interval data"
+        },
+        {
+          "id": "sbs-hypothesis-tests",
+          "title": "Hypothesis testing and choice of statistical test",
+          "size": "l",
+          "scope": "null hypothesis, p value, type I alpha error, type II beta error, power, sample size calculation, t test, ANOVA, chi-square, Fisher exact, Mann-Whitney, Wilcoxon, Kruskal-Wallis, Bonferroni correction"
+        },
+        {
+          "id": "sbs-regression-survival",
+          "title": "Correlation, regression and survival analysis",
+          "size": "m",
+          "scope": "Pearson correlation, Spearman correlation, linear regression, logistic regression odds ratio, Cox proportional hazards, hazard ratio, Kaplan-Meier curve, log rank test, multivariable adjustment, competing risks"
+        }
+      ]
+    },
+    {
+      "id": "sbs-research",
+      "title": "Research methodology and evidence based medicine",
+      "modules": [
+        {
+          "id": "sbs-study-design",
+          "title": "Study designs and epidemiological measures",
+          "size": "l",
+          "scope": "cohort study, case control study, cross sectional, ecological, randomized controlled trial, relative risk, odds ratio, attributable risk, number needed to treat, incidence, prevalence, selection bias, confounding, Bradford Hill criteria"
+        },
+        {
+          "id": "sbs-diagnostic-tests",
+          "title": "Diagnostic test evaluation",
+          "size": "m",
+          "scope": "sensitivity, specificity, positive predictive value, negative predictive value, likelihood ratio, ROC curve AUC, pretest probability, Bayes theorem, Fagan nomogram, screening lead time bias, length time bias"
+        },
+        {
+          "id": "sbs-trials-ebm",
+          "title": "Clinical trials, meta-analysis and research ethics",
+          "size": "l",
+          "scope": "randomization, allocation concealment, blinding, intention to treat, per protocol analysis, noninferiority margin, CONSORT, systematic review, forest plot, I squared heterogeneity, funnel plot, GRADE, ICMR ethical guidelines, CTRI registration"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+/* PrepNucleus server routes: the bank file route and student question reports.
+ * Firebase auth, KV and R2 are in-memory. What must hold: only whitelisted, versioned bank paths are served, with
+ * immutable caching (manifest short-lived) and nothing else readable from the bucket; a missing binding is a 503;
+ * reports need sign-in, take only an id and a reason code, count once per user per item, stop at the daily cap,
+ * and only owners can read the list.
+ *
+ * node --test --experimental-test-module-mocks test/prep-server.test.mjs
+ */
+import { test, mock } from "node:test";
+import assert from "node:assert/strict";
+
+const CLAIMS = { "tok-a": { sub: "u-a", email: "a@example.com", email_verified: true }, "tok-b": { sub: "u-b", email: "b@example.com", email_verified: true } };
+const realAuth = await import("../functions/_fbauth.js");
+const claimsOf = (req) => CLAIMS[(req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "")] || null;
+mock.module("../functions/_fbauth.js", { namedExports: { ...realAuth, verifiedClaimsFor: async (req) => claimsOf(req), identify: async (req) => { const c = claimsOf(req); return c ? "fb:" + c.sub : null; } } });
+
+const bank = await import("../functions/api/prep/bank/[[path]].js");
+const flag = await import("../functions/api/prep/flag.js");
+
+function r2(files) {
+  return { get: async (k) => (k in files ? { body: files[k], httpEtag: '"e1"' } : null) };
+}
+function kv() {
+  const m = new Map();
+  return {
+    m,
+    get: async (k) => (m.has(k) ? m.get(k) : null),
+    put: async (k, v) => { m.set(k, v); },
+    delete: async (k) => { m.delete(k); },
+    list: async ({ prefix }) => ({ keys: [...m.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })), list_complete: true }),
+  };
+}
+const get = (path, env) => bank.onRequestGet({ env, params: { path: path.split("/") } });
+
+test("bank: serves a whitelisted module file from prep-bank/ with immutable caching", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[]}', "prep-bank/v1/manifest.json": "{}" }) };
+  const r = await get("v1/anatomy/mcq/ana-gametogenesis.json", env);
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Cache-Control"), /immutable/);
+  assert.equal(r.headers.get("ETag"), '"e1"');
+  assert.deepEqual(JSON.parse(await r.text()), { topic: "ana-gametogenesis", items: [] });
+  const m = await get("v1/manifest.json", env);
+  assert.equal(m.status, 200);
+  assert.doesNotMatch(m.headers.get("Cache-Control"), /immutable/);
+});
+
+test("bank: anything off the whitelist is 404 and never reaches the bucket", async () => {
+  let asked = 0;
+  const env = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
+  for (const p of ["../ota/secret.json", "v1/anatomy/../../ota/x.json", "v1/Anatomy/index.json", "v1/anatomy/index.js", "v1/anatomy/mcq/a/b.json", "ota/manifest.json", "v1/anatomy/mcq/x.json.bak"]) {
+    const r = await get(p, env);
+    assert.equal(r.status, 404, p);
+  }
+  assert.equal(asked, 0);
+  assert.equal((await get("v1/anatomy/mcq/missing-module.json", { PREP_BANK_R2: r2({}) })).status, 404);
+});
+
+test("bank: no binding is a clear 503", async () => {
+  assert.equal((await get("v1/anatomy/index.json", {})).status, 503);
+});
+
+const post = (body, token, env) => flag.onRequestPost({ request: new Request("https://stewardmd.in/api/prep/flag", { method: "POST", headers: { "Content-Type": "application/json", ...(token ? { Authorization: "Bearer " + token } : {}) }, body: JSON.stringify(body) }), env });
+const GOOD = { itemId: "e9ad821a-c438-4965-9f77-760819dfa155", subject: "anatomy", module: "ana-gametogenesis", reason: "wrong-key" };
+
+test("flag: sign-in required; only an id and a reason code are accepted", async () => {
+  const env = { UPDATES_KV: kv() };
+  assert.equal((await post(GOOD, null, env)).status, 401);
+  for (const bad of [{ ...GOOD, reason: "free text here" }, { ...GOOD, itemId: "x" }, { ...GOOD, subject: "../etc" }, { ...GOOD, module: "" }]) {
+    assert.equal((await post(bad, "tok-a", env)).status, 400);
+  }
+  assert.equal(env.UPDATES_KV.m.size, 0);
+});
+
+test("flag: one count per user per item; the record holds reasons, no text", async () => {
+  const env = { UPDATES_KV: kv() };
+  assert.deepEqual(await (await post(GOOD, "tok-a", env)).json(), { ok: true, counted: true, n: 1 });
+  assert.deepEqual(await (await post({ ...GOOD, reason: "unclear" }, "tok-a", env)).json(), { ok: true, counted: false });
+  assert.deepEqual(await (await post({ ...GOOD, reason: "unclear" }, "tok-b", env)).json(), { ok: true, counted: true, n: 2 });
+  const rec = JSON.parse(env.UPDATES_KV.m.get("prep:flag:" + GOOD.itemId));
+  assert.equal(rec.n, 2);
+  assert.deepEqual(rec.reasons, { "wrong-key": 1, unclear: 1 });
+  assert.equal(rec.subject, "anatomy");
+  assert.ok(!JSON.stringify(rec).includes("a@example.com"));
+});
+
+test("flag: daily cap per user", async () => {
+  const env = { UPDATES_KV: kv() };
+  for (let i = 0; i < 60; i++) assert.equal((await post({ ...GOOD, itemId: "item-" + String(i).padStart(4, "0") }, "tok-a", env)).status, 200);
+  assert.equal((await post({ ...GOOD, itemId: "item-9999" }, "tok-a", env)).status, 429);
+  assert.equal((await post({ ...GOOD, itemId: "item-9999" }, "tok-b", env)).status, 200);
+});
+
+test("flag: only owners read the most-reported list", async () => {
+  const env = { UPDATES_KV: kv(), UPDATES_ADMIN_TOKEN: "owner-token-123" };
+  await post(GOOD, "tok-a", env); await post(GOOD, "tok-b", env);
+  await post({ ...GOOD, itemId: "other-item-1" }, "tok-a", env);
+  const deny = await flag.onRequestGet({ request: new Request("https://stewardmd.in/api/prep/flag?top=1", { headers: { Authorization: "Bearer tok-a" } }), env });
+  assert.equal(deny.status, 403);
+  const ok = await flag.onRequestGet({ request: new Request("https://stewardmd.in/api/prep/flag?top=1", { headers: { "X-Admin-Token": "owner-token-123" } }), env });
+  const j = await ok.json();
+  assert.equal(j.items[0].itemId, GOOD.itemId);
+  assert.equal(j.items[0].n, 2);
+  assert.equal(j.items.length, 2);
+});
+
+test("flag: three separate reporters hide an item for everyone; owners see it marked and can restore it", async () => {
+  CLAIMS["tok-c"] = { sub: "u-c", email: "c@example.com", email_verified: true };
+  const env = { UPDATES_KV: kv(), UPDATES_ADMIN_TOKEN: "owner-token-123" };
+  const hidden = async () => (await flag.onRequestGet({ request: new Request("https://stewardmd.in/api/prep/flag?hidden=1"), env })).json();
+  await post(GOOD, "tok-a", env); await post(GOOD, "tok-a", env); await post(GOOD, "tok-b", env);
+  assert.deepEqual(await hidden(), { ids: [] }, "two reporters (one twice) do not hide it");
+  await post(GOOD, "tok-c", env);
+  const r = await flag.onRequestGet({ request: new Request("https://stewardmd.in/api/prep/flag?hidden=1"), env });
+  assert.match(r.headers.get("Cache-Control"), /public/);
+  assert.deepEqual(await r.json(), { ids: [GOOD.itemId] });
+  const top = await (await flag.onRequestGet({ request: new Request("https://stewardmd.in/api/prep/flag?top=1", { headers: { "X-Admin-Token": "owner-token-123" } }), env })).json();
+  assert.equal(top.items[0].hidden, true);
+  const del = (h) => flag.onRequestDelete({ request: new Request("https://stewardmd.in/api/prep/flag", { method: "DELETE", headers: { "Content-Type": "application/json", ...h }, body: JSON.stringify({ itemId: GOOD.itemId }) }), env });
+  assert.equal((await del({ Authorization: "Bearer tok-a" })).status, 403);
+  assert.equal((await del({ "X-Admin-Token": "owner-token-123" })).status, 200);
+  assert.deepEqual(await hidden(), { ids: [] });
+  assert.equal(env.UPDATES_KV.m.has("prep:flag:" + GOOD.itemId), false);
+});
