@@ -101,7 +101,8 @@ try {
   ok(await ev(`return window.__fakeDoc.degree;`) === "DNB", "picking a degree saves it to the profile document");
 
   // ── 3. the duplicate "Couldn't load your details" notice ──
-  await ev(`window.SMD_DB = null; delete window.SMD_loadFirebase; return 1;`);
+  // (no copy of the details saved on this device, or that copy would rightly be shown instead)
+  await ev(`window.SMD_DB = null; delete window.SMD_loadFirebase; try { localStorage.removeItem("smd_profile_cache:test-uid"); } catch (e) {} return 1;`);
   await ev(`SMD_openProfile(); return 1;`); await sleep(900);
   await ev(`SMD_openProfile(); return 1;`); await sleep(900);
   ok(await ev(`return document.querySelectorAll('#pfPro [data-offnote]').length;`) === 1,
@@ -138,6 +139,43 @@ try {
   await ev(`SMD_openProfile(); return 1;`); await sleep(9000);
   ok(await ev(`return document.querySelectorAll('#pfPro [data-offnote]').length;`) === 1, "an unreadable hanging card shows exactly one Retry notice");
   ok((await ev(PRO_ROWS)).indexOf("Loading…") === -1, "and no row is still Loading…");
+
+  // ── 3c. owner, 2026-10-05: Registration "Verified" (sign-in works) but every detail "Offline" ──
+  // Firestore never boots, and the iOS native bridge returns an EMPTY body on the first server call.
+  // The server copy must still fill the rows, and the Mobile number must show.
+  await ev(`
+    try { localStorage.removeItem("smd_profile_cache:test-uid"); } catch (e) {}
+    window.SMD_DB = null;
+    window.SMD_loadFirebase = function(cb){ setTimeout(function(){ cb && cb(); }, 50); };   // boots, but no Firestore
+    window.SMD_AUTH = { currentUser: { uid: "test-uid", getIdToken: function(){ return Promise.resolve("tok"); }, getIdTokenResult: function(){ return Promise.resolve({ claims: { phoneVerified: true } }); } }, onAuthStateChanged: function(){} };
+    window.__myProfileCalls = 0;
+    window.__realFetch = window.__realFetch || window.fetch;
+    window.fetch = function(url, opts){
+      url = String(url);
+      if (url.indexOf('/api/auth/my-profile') >= 0) {
+        window.__myProfileCalls++;
+        if (window.__myProfileCalls === 1) return Promise.resolve(new Response(""));      // the empty native body
+        return Promise.resolve(new Response(JSON.stringify({ ok: true, exists: true, phoneVerified: true,
+          profile: { regNo: window.__srvReg, hospital: "Gandhi Medical College", city: "Hyderabad", phone: "9876543210", phoneVerifiedNumber: "+919876543210" } })));
+      }
+      if (url.indexOf('/api/verify-doctor') >= 0) return Promise.resolve(new Response(JSON.stringify({ status: "verified", regNo: "APMC-77881" })));
+      return window.__realFetch.apply(this, arguments);
+    };
+    window.__srvReg = "TSMC-12345";
+    return 1;`);
+  await ev(`SMD_openProfile(); return 1;`); await sleep(3500);
+  const srv = await ev(PRO_ROWS);
+  ok(srv.indexOf("Offline") === -1, "sign-in up, Firestore missing: no row reads Offline " + srv);
+  ok(srv.indexOf("regno=TSMC-12345") >= 0 && srv.indexOf("hospital=Gandhi Medical College") >= 0 && srv.indexOf("city=Hyderabad") >= 0, "the server copy fills the details");
+  ok(await ev(`return window.__myProfileCalls;`) >= 2, "an empty reply is retried, not treated as a failure");
+  ok(await ev(`return document.querySelectorAll('#pfPro [data-offnote]').length;`) === 0, "no Couldn't-load notice");
+  const phoneTxt = await ev(`var n=document.getElementById("pfPhoneNum"); return n ? n.textContent.trim() : "(no row)";`);
+  ok(phoneTxt === "(no row)" || /9876543210/.test(phoneTxt), "the Mobile number row shows the number: " + phoneTxt);
+  // No reg number in the profile: the verification record's number (council reg or ID card) shows.
+  await ev(`try { localStorage.removeItem("smd_profile_cache:test-uid"); } catch (e) {} window.__srvReg = ""; window.__myProfileCalls = 1; return 1;`);
+  await ev(`SMD_openProfile(); return 1;`); await sleep(3000);
+  ok((await ev(PRO_ROWS)).indexOf("regno=APMC-77881") >= 0, "a profile without a reg number shows the verified / ID-card number");
+  await ev(`window.fetch = window.__realFetch; return 1;`);
 
   // ── 4. the first-run form ──
   await ev(`window.SMD_DB = window.__mkDb(); window.__fakeDoc = { regNo: "TSMC-12345" }; return 1;`);
