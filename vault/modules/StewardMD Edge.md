@@ -210,3 +210,11 @@ Owner's phone conversation (3:05 pm) replayed in `test/run-maik-conv5.mjs`; rule
 - **"Open X" opens X.** `SMD_EDGE.openVerb` + a single Layer 0 rules match (tool, calculator, single KB
   page): home.js `maikEdgeAutoOpen` presses the card's own open button and leaves "Opened X" with that
   button as the way back. Model picks, groups and corrected terms keep the card.
+
+## PrepNucleus quiz requests (`start_mcq`, 2026-10-05)
+- Rules only (layer 0), behind `smd_prep` (`PREP_LOADER.enabled()`): `mcqParse` reads "10 questions on lymphoma",
+  "quiz me on brachial plexus", "timed test on renal physiology", "show my mistakes" into `{ n, topic, mode }`;
+  `startMcq` calls `PREP.open({ query, n, mode })`; `home.js` `maikEdgeRender` says "Opening PrepNucleus".
+- `guarded()` no longer treats "start 10 mcqs on digoxin" as a clinical order when `mcqAsk` matches.
+- Rejects pasted MCQs ("which of the following"), "questions to ask", "common mistakes in", over 16 words.
+  With the flag on, 0 of 9,488 frozen rows read as a quiz (`test/edge-start-mcq.test.mjs`).

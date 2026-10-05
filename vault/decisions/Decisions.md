@@ -11351,3 +11351,7 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 - Temperatures are placeholders until Phase 0: facts 0.2, mcq 0.4, review 0.2, solve 0.2.
 - Exam profiles live in `EXAM_PROFILES` in the core (no `prep/profiles/*.json` yet); INI-CET and NEET-SS wording is
   provisional.
+- (Same day) **Regeneration is batched:** `mcq` takes `avoid` as one `{fi, why}` or an array of them, so a round's
+  failed facts regenerate in one call (the 9.1 budget of 0 to 6 regeneration calls a deck assumes this). The client
+  sends weights (summing to 1) for `mix`, and keeps the server's `prov: "USR"` with `gen: "AI"` (label
+  "AI-generated, auto-checked").
