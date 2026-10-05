@@ -25,8 +25,11 @@ import json
 import os
 import sys
 
-MODEL = "BAAI/bge-small-en-v1.5"
-REVISION = "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+# PREP_EMBED_MODEL / PREP_EMBED_REVISION switch the model (measured 2026-10-05 on a blind-labelled Anatomy sample,
+# items the labeller placed in Anatomy: bge-small 73%, bge-base 78%, bge-large 82%, MedEmbed-base 79%). bge-large is
+# about 10x slower on CPU: run it on a machine with a GPU or Apple MPS. Pin the revision for a reproducible build.
+MODEL = os.environ.get("PREP_EMBED_MODEL", "BAAI/bge-small-en-v1.5")
+REVISION = os.environ.get("PREP_EMBED_REVISION", "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a" if MODEL == "BAAI/bge-small-en-v1.5" else None)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TAX_DIR = os.path.join(ROOT, "prep", "taxonomy")
 OUT_DIR = os.path.join(ROOT, "prep", "build")
@@ -70,7 +73,8 @@ def main():
 
     from sentence_transformers import SentenceTransformer  # imported late: --help and errors stay fast
     import numpy as np
-    model = SentenceTransformer(MODEL, revision=REVISION, device="cpu")
+    device = os.environ.get("PREP_EMBED_DEVICE", "cpu")
+    model = SentenceTransformer(MODEL, revision=REVISION, device=device)
     os.makedirs(OUT_DIR, exist_ok=True)
     all_ids, all_txt = [], []
     for s in every:
@@ -87,7 +91,7 @@ def main():
                 mtxt.append(module_text(s, sec, m))
         rows = by_name.get(s["medmcqa"], [])
         me = model.encode(mtxt, batch_size=64, normalize_embeddings=True)
-        vec = os.path.join(OUT_DIR, f"vec-{s['id']}.npy")
+        vec = os.path.join(OUT_DIR, f"vec-{s['id']}-{MODEL.split('/')[-1]}.npy")
         if os.path.exists(vec) and "--fresh" not in sys.argv and np.load(vec).shape[0] == len(rows):
             ie = np.load(vec)
         else:

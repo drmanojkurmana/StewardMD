@@ -224,6 +224,14 @@ export function loadEmbed(subjectId) {
     x: (id) => { const x = j.x && j.x[id]; return x ? [j.all[x[0]], x[1] / 1000] : null; },
   };
 }
+// Optional owner-run Gemini classification (tools/prep-classify.mjs): prep/build/llm-<subject>.json
+// { map: { itemId: [moduleIdOrSubjectId, "high"|"low"] } }. Only "high" answers are used; null when absent.
+export function loadLlm(subjectId) {
+  const p = path.join(BUILD_DIR, `llm-${subjectId}.json`);
+  if (!fs.existsSync(p)) return null;
+  const j = JSON.parse(fs.readFileSync(p, "utf8"));
+  return { model: j.model, get: (id) => { const x = j.map && j.map[id]; return x && x[1] === "high" ? x[0] : null; } };
+}
 // Decide: with embeddings, the better of the two embedding candidates plus a keyword bonus, unless keywords alone
 // point clearly elsewhere; without, keywords. Weak signal on both -> the subject's "Mixed practice" module.
 // moveCos / moveMargin: an item whose best module in its own subject scores under moveCos goes to another subject's
@@ -250,21 +258,29 @@ export function mapItem(mods, it, emb) {
 
 // Cross-subject moves. subjects in taxonomy order; byName: MedMCQA subject name -> items; embeds: subject id -> loadEmbed.
 // Returns { out: Set of item ids leaving their subject, into: Map subject id -> [{ item, module }] }.
-export function planMoves(subjects, byName, embeds) {
-  const owner = new Map();
+// llms (optional): subject id -> loadLlm. A confident classification decides: a module of the item's own subject keeps
+// it home; another subject's id moves it there (to the embedding's best module when that is in the same subject, else
+// the target subject maps it by keywords). Without one, the embedding rule above.
+export function planMoves(subjects, byName, embeds, llms) {
+  const owner = new Map(), subjectIds = new Set(subjects.map((s) => s.id));
   for (const s of subjects) for (const m of modulesOf(s)) owner.set(m.id, s.id);
   const out = new Set(), into = new Map();
+  const send = (it, to, module) => { out.add(it.id); if (!into.has(to)) into.set(to, []); into.get(to).push({ item: it, module }); };
   for (const s of subjects) {
-    const emb = embeds[s.id];
-    if (!s.medmcqa || !emb || !emb.x) continue;
+    const emb = embeds[s.id], llm = llms && llms[s.id];
+    if (!s.medmcqa) continue;
     for (const it of byName.get(s.medmcqa) || []) {
+      const said = llm ? llm.get(it.id) : null;
+      if (said) {
+        if (subjectIds.has(said) && said !== s.id) { const x = emb && emb.x ? emb.x(it.id) : null; send(it, said, x && owner.get(x[0]) === said ? x[0] : null); }
+        continue;
+      }
+      if (!emb || !emb.x) continue;
       const own = emb.get(it.id), x = emb.x(it.id);
       if (!own || !x) continue;
       const to = owner.get(x[0]);
       if (!to || to === s.id || own[0][1] >= MAP.moveCos || x[1] < MAP.moveCos || x[1] - own[0][1] < MAP.moveMargin) continue;
-      out.add(it.id);
-      if (!into.has(to)) into.set(to, []);
-      into.get(to).push({ item: it, module: x[0] });
+      send(it, to, x[0]);
     }
   }
   return { out, into };
@@ -359,11 +375,11 @@ export function dedupeSubject(items) {
 export const crossKey = (it) => normKey(it.q) + "#" + it.o.map(normKey).sort().join("|");
 
 // items may carry `module` (moved in from another subject by planMoves): that module is used as is.
-export function buildSubject(subject, items, seen, emb) {
+export function buildSubject(subject, items, seen, emb, llm) {
   const { kept, st } = dedupeSubject(items);
   const mods = compileModules(subject);
   const ids = new Set(mods.map((m) => m.id));
-  const how = { embed: 0, keyword: 0, mixed: 0, moved: 0 };
+  const how = { embed: 0, keyword: 0, mixed: 0, moved: 0, llm: 0 };
   let cross = 0, scrubbed = 0, usmle = 0;
   const out = [];
   for (const it of kept.sort((a, b) => (a.id < b.id ? -1 : 1))) {
@@ -372,7 +388,9 @@ export function buildSubject(subject, items, seen, emb) {
     seen.add(ck);
     const exp = scrubRefs(it.exp);
     if (exp !== it.exp) scrubbed++;
-    const mapped = it.module && ids.has(it.module) ? { id: it.module, how: "moved" } : mapItem(mods, { q: it.q, key: it.key, exp, topic: it.topic }, emb ? emb.get(it.id) : null);
+    const said = llm ? llm.get(it.id) : null;
+    const mapped = it.module && ids.has(it.module) ? { id: it.module, how: "moved" } : said && ids.has(said) ? { id: said, how: "llm" }
+      : mapItem(mods, { q: it.q, key: it.key, exp, topic: it.topic }, it.module === null ? null : emb ? emb.get(it.id) : null);
     how[mapped.how]++;
     const t = mapped.id && ids.has(mapped.id) ? mapped.id : mixedId(subject);
     const o = { id: it.id, q: it.q, o: it.o, a: it.a, exp, t, d: difficulty(it.q), prov: "LIC" };
@@ -422,9 +440,9 @@ export function main(argv = process.argv.slice(2)) {
   const prep = prepare(rows);
   const byName = new Map();
   for (const it of prep.items) { if (!byName.has(it.subject)) byName.set(it.subject, []); byName.get(it.subject).push(it); }
-  const embeds = {};
-  for (const s of subjects) if (s.medmcqa) embeds[s.id] = loadEmbed(s.id);
-  const moves = planMoves(subjects, byName, embeds);
+  const embeds = {}, llms = {};
+  for (const s of subjects) if (s.medmcqa) { embeds[s.id] = loadEmbed(s.id); llms[s.id] = loadLlm(s.id); }
+  const moves = planMoves(subjects, byName, embeds, llms);
   const seen = new Set();
   const manifest = { v: 1, source: "medmcqa@" + MEDMCQA_SOURCE.sourceCommit, subjects: [] };
   const report = { read: rows.length, drop: prep.drop, repairWords: prep.repairWords, subjects: [], shortfall: [] };
@@ -433,7 +451,7 @@ export function main(argv = process.argv.slice(2)) {
     const own = s.medmcqa ? (byName.get(s.medmcqa) || []).filter((it) => !moves.out.has(it.id)) : [];
     const items = own.concat((moves.into.get(s.id) || []).map((m) => ({ ...m.item, module: m.module })));
     const emb = s.medmcqa ? embeds[s.id] : null;
-    const res = buildSubject(s, items, seen, emb);
+    const res = buildSubject(s, items, seen, emb, s.medmcqa ? llms[s.id] : null);
     if (only && s.id !== only) continue;
     fs.rmSync(sdir, { recursive: true, force: true });
     const ix = subjectIndex(s, res.items);
@@ -450,7 +468,7 @@ export function main(argv = process.argv.slice(2)) {
     const below = mods.filter((t) => t.count < t.target);
     manifest.subjects.push({ id: s.id, items: res.items.length, modules: mods.length, bytes, index: sha(fs.readFileSync(path.join(sdir, "index.json"))) });
     const perModule = Object.fromEntries(ix.topics.map((t) => [t.id, t.count]));
-    report.subjects.push({ id: s.id, perModule, flagged: ix.counts.flagged, under10: mods.filter((t) => t.count < 10).length, under25: mods.filter((t) => t.count < 25).length, read: items.length, movedOut: s.medmcqa ? (byName.get(s.medmcqa) || []).length - own.length : 0, kept: res.items.length, ...res.stats, modules: mods.length, empty: mods.filter((t) => !t.count).length, belowTarget: below.length, mixed: (ix.topics.find((t) => t.group === "mixed") || {}).count || 0, embed: emb ? emb.model : null, bytes });
+    report.subjects.push({ id: s.id, perModule, flagged: ix.counts.flagged, under10: mods.filter((t) => t.count < 10).length, under25: mods.filter((t) => t.count < 25).length, read: items.length, movedOut: s.medmcqa ? (byName.get(s.medmcqa) || []).length - own.length : 0, kept: res.items.length, ...res.stats, modules: mods.length, empty: mods.filter((t) => !t.count).length, belowTarget: below.length, mixed: (ix.topics.find((t) => t.group === "mixed") || {}).count || 0, embed: emb ? emb.model : null, llm: s.medmcqa && llms[s.id] ? llms[s.id].model : null, bytes });
     for (const t of below) report.shortfall.push({ subject: s.id, module: t.id, size: t.size, kept: t.count, target: t.target, fill: t.target - t.count });
     console.log(`${s.id.padEnd(28)} read ${String(items.length).padStart(6)} kept ${String(res.items.length).padStart(6)} modules ${String(mods.length).padStart(4)} below target ${String(below.length).padStart(4)} mixed ${String((ix.topics.find((t) => t.group === "mixed") || {}).count || 0).padStart(5)} ${(bytes / 1e6).toFixed(1)} MB`);
   }

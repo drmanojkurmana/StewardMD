@@ -185,3 +185,15 @@ test("emitted index and module files pass the engine validators; the markdown re
   assert.match(md, /ana-hand 7/);
   assert.doesNotMatch(md, /[\u2013\u2014]/);
 });
+
+test("a confident Gemini classification decides: own module, or a move to another subject", () => {
+  const PAT = { id: "pathology", code: "pat", branch: "mbbs", title: "Pathology", medmcqa: "Pathology", exams: ["neet-pg"],
+    sections: [{ id: "pat-lung", title: "Lung", modules: [{ id: "pat-ards", title: "ARDS", size: "s", scope: "ARDS, diffuse alveolar damage, hyaline membranes" }] }] };
+  const llm = { get: (id) => ({ k1: "ana-gametogenesis", k2: "pathology", k3: null }[id] || null) };
+  const emb = { get: () => [["ana-hand", 0.9], ["ana-gametogenesis", 0.3]], x: () => ["ana-hand", 0.9] };
+  const r = B.planMoves([SUBJ, PAT], new Map([["Anatomy", [{ id: "k1" }, { id: "k2" }, { id: "k3" }]]]), { anatomy: emb }, { anatomy: llm });
+  assert.deepEqual([...r.out], ["k2"], "only the item the classifier sent to pathology leaves; strong embeddings keep k3 home");
+  assert.equal(r.into.get("pathology")[0].module, null, "the embedding's best module is not in pathology, so pathology maps it");
+  const res = B.buildSubject(SUBJ, [mk("k1", "Which nerve passes through the carpal tunnel at the wrist?", ["Median", "Ulnar", "Radial", "Axillary"], 0)], new Set(), emb, llm);
+  assert.equal(res.items[0].t, "ana-gametogenesis"); assert.equal(res.stats.map.llm, 1);
+});
