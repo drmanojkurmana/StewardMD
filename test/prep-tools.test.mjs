@@ -16,6 +16,8 @@ import * as V from "../tools/prep-vertex.mjs";
 import * as M from "../tools/prep-measure.mjs";
 import * as K from "../tools/prep-screen-keys.mjs";
 import * as F from "../tools/prep-fill.mjs";
+import * as C from "../tools/prep-classify.mjs";
+import * as E from "../tools/prep-map-eval.mjs";
 import { loadTaxonomy, subjectIndex } from "../tools/prep-build-bank.mjs";
 import { normText, solveMatches } from "../functions/_prep-core.js";
 
@@ -75,12 +77,26 @@ function makeBrain(o = {}) {
     const n = (user.match(/^Q\d+: /gm) || []).length;
     return { g: Array.from({ length: n }, (_, i) => ({ i, g4: true, g6: true, g7: true, g8: true, g9: true, g10: true, g11: true, old: false, why: "" })) };
   }
+  function classify(sys, user) {
+    const anatomy = /subject: Anatomy\./.test(sys), c = [];
+    for (const m of user.matchAll(/^\[(\d+)\] Q: (.+)$/gm)) {
+      const q = m[2];
+      let id = "med-aml", conf = "high";
+      if (/nerve|coronary|valve/i.test(q)) id = anatomy ? (/nerve/i.test(q) ? "ana-upper-limb-nerves" : "ana-heart") : "anatomy";
+      else if (/philadelphia|imatinib|chronic myeloid/i.test(q)) id = "med-cml";
+      else if (/UNKNOWNTOPIC/.test(q)) id = "made-up-module";
+      else if (/splenomegaly/i.test(q)) conf = "low";
+      c.push({ i: Number(m[1]), m: id, conf });
+    }
+    return { c };
+  }
   return {
     keys, seen,
     answer(body) {
       const sys = body.systemInstruction.parts[0].text, user = body.contents[0].parts[0].text;
       let out;
-      if (/extract testable medical facts/.test(sys)) { seen.facts++; out = facts(user); }
+      if (/You sort MBBS exam questions/.test(sys)) { seen.classify = (seen.classify || 0) + 1; out = classify(sys, user); }
+      else if (/extract testable medical facts/.test(sys)) { seen.facts++; out = facts(user); }
       else if (/write single-best-answer MCQs/.test(sys)) { seen.mcq++; out = mcq(sys, user); }
       else if (/Answer each question as the examiner/.test(sys)) { seen.solve++; out = solve(user); }
       else { seen.review++; out = review(user); }
@@ -541,7 +557,148 @@ test("fill helpers: sentences, pages and headings; book and locator check", () =
 });
 
 test("no em or en dash in the tools or this test", () => {
-  for (const f of ["tools/prep-vertex.mjs", "tools/prep-measure.mjs", "tools/prep-screen-keys.mjs", "tools/prep-fill.mjs", "test/prep-tools.test.mjs"]) {
+  for (const f of ["tools/prep-classify.mjs", "tools/prep-map-eval.mjs", "prep/eval/labels-anatomy.json", "tools/prep-vertex.mjs", "tools/prep-measure.mjs", "tools/prep-screen-keys.mjs", "tools/prep-fill.mjs", "test/prep-tools.test.mjs"]) {
     assert.doesNotMatch(fs.readFileSync(path.join(HERE, "..", f), "utf8"), DASH, f);
   }
+});
+
+/* ================================================= prep-classify ================================================= */
+const MED = path.join(FIX, "medmcqa");
+const clsArgs = (dir, extra) => ["--tax", path.join(FIX, "tax"), "--out", path.join(dir, "build"), "--medmcqa", MED, "--run", "cls-test", "--poll-sec", "0", ...(extra || [])];
+const inputLines = (fv, sub) => [...fv.gcs.entries()].filter(([k]) => k.endsWith(`/${sub}/input.jsonl`)).flatMap(([, v]) => v.trim().split("\n").map((l) => JSON.parse(l)));
+
+test("classify: 10 items a request with the module list and other subjects; stem, key and 200 explanation chars only", async () => {
+  const dir = tmpDir();
+  const brain = makeBrain(), fv = fakeVertex(brain);
+  const r = await C.main(clsArgs(dir), fv.deps());
+  assert.deepEqual(r.pending, []);
+  const lines = inputLines(fv, "medicine");
+  assert.equal(lines.length, 2, "12 Medicine items -> 10 + 2");
+  const rows = fs.readFileSync(path.join(MED, "train.jsonl"), "utf8").trim().split("\n").map((l) => JSON.parse(l));
+  for (const l of lines) {
+    const req = l.request, user = req.contents[0].parts[0].text;
+    assert.equal(req.generationConfig.temperature, 0);
+    const sch = req.generationConfig.responseSchema;
+    assert.deepEqual(Object.keys(sch.properties), ["c"]);
+    assert.deepEqual(sch.properties.c.items.propertyOrdering, ["i", "m", "conf"]);
+    assert.deepEqual(sch.properties.c.items.properties.conf.enum, ["high", "low"]);
+    assert.deepEqual(sch.properties.c.items.properties.m.enum, ["med-aml", "med-cml", "anatomy"]);
+    assert.match(user, /^med-aml \| Haematology > Acute myeloid leukaemia \| acute myeloid leukemia/m);
+    assert.match(user, /other-subject \(answer with one of these subject ids when the item is not Medicine\): anatomy\n/);
+    assert.ok((user.match(/^\[\d+\] Q: /gm) || []).length <= 10);
+    for (const row of rows) {
+      if (!user.includes(row.question)) continue;
+      const key = [row.opa, row.opb, row.opc, row.opd][row.cop];
+      assert.ok(user.includes("Key: " + key));
+      const at = user.indexOf("Q: " + row.question), end = user.indexOf("\n[", at);
+      const blk = user.slice(at + 3 + row.question.length, end < 0 ? undefined : end);
+      for (const o of [row.opa, row.opb, row.opc, row.opd]) if (o !== key && !key.includes(o)) assert.ok(!blk.includes(o), "a distractor is not sent: " + o);
+    }
+    assert.doesNotMatch(user, /TAILMARKER/, "nothing past 200 explanation characters");
+    for (const m of user.matchAll(/^    Note: (.*)$/gm)) assert.ok(m[1].length <= 200);
+  }
+  assert.ok(lines.some((l) => /Note: The PML-RARA fusion blocks/.test(l.request.contents[0].parts[0].text)));
+  assert.equal(inputLines(fv, "dental").length, 0);
+  const med = readJ(path.join(dir, "build", "llm-medicine.json"));
+  assert.equal(med.model, "gemini-3.1-flash-lite"); assert.equal(med.run, "cls-test");
+  assert.deepEqual(med.map.m01, ["med-aml", "high"]);
+  assert.deepEqual(med.map.m02, ["med-cml", "high"]);
+  assert.deepEqual(med.map.m06, ["anatomy", "high"], "another subject's item names that subject");
+  assert.equal(med.map.m11[1], "low");
+  assert.ok(!("m09" in med.map), "an unknown id is left out");
+  assert.equal(Object.keys(med.map).length, 11);
+  const ana = readJ(path.join(dir, "build", "llm-anatomy.json"));
+  assert.deepEqual(ana.map.a01, ["ana-upper-limb-nerves", "high"]);
+  assert.deepEqual(ana.map.a02, ["ana-heart", "high"]);
+  assert.deepEqual(inputLines(fv, "anatomy")[0].request.generationConfig.responseSchema.properties.c.items.properties.m.enum, ["ana-upper-limb-nerves", "ana-heart", "medicine"]);
+});
+
+test("classify: a half-finished run resumes from the recorded job ids; a finished one calls nothing", async () => {
+  const dir = tmpDir();
+  let hold = true;
+  const fv = fakeVertex(makeBrain(), { hold: (n) => hold && /medicine/.test(n) });
+  const r1 = await C.main(clsArgs(dir, ["--no-wait"]), fv.deps());
+  assert.deepEqual(r1.pending, ["medicine"]);
+  assert.equal(readJ(path.join(dir, "build", "classify", "state.json")).subjects.medicine.status, "submitted");
+  assert.ok(fs.existsSync(path.join(dir, "build", "llm-anatomy.json")) && !fs.existsSync(path.join(dir, "build", "llm-medicine.json")));
+  hold = false;
+  const r2 = await C.main(clsArgs(dir), fv.deps());
+  assert.deepEqual(r2.pending, []);
+  assert.equal(fv.jobs.size, 2, "one job per subject, never resubmitted");
+  const n = fv.reqs.length;
+  await C.main(clsArgs(dir), fv.deps());
+  assert.equal(fv.reqs.length, n);
+});
+
+test("classify: --sample sends only the labelled items to a separate file; --dry-run makes zero calls", async () => {
+  const dir = tmpDir();
+  const fv = fakeVertex(makeBrain());
+  await C.main(clsArgs(dir, ["--sample", path.join(FIX, "labels-anatomy-sample.json")]), fv.deps());
+  assert.equal(inputLines(fv, "medicine").length, 0);
+  const lines = inputLines(fv, "anatomy");
+  assert.equal(lines.length, 1);
+  const user = lines[0].request.contents[0].parts[0].text;
+  assert.equal((user.match(/^\[\d+\] Q: /gm) || []).length, 3);
+  assert.doesNotMatch(user, /spiral groove/, "an unlabelled item is not sent");
+  assert.ok(fs.existsSync(path.join(dir, "build", "llm-anatomy.sample.json")) && !fs.existsSync(path.join(dir, "build", "llm-anatomy.json")));
+  const sc = E.scoreMapping(readJ(path.join(FIX, "labels-anatomy-sample.json")).labels, E.fromLlm(readJ(path.join(dir, "build", "llm-anatomy.sample.json")), SUBJ.anatomy));
+  assert.equal(sc.agree, 3);
+  const fv2 = fakeVertex(makeBrain());
+  const d1 = await C.main(clsArgs(tmpDir(), ["--dry-run"]), fv2.deps());
+  assert.equal(d1.total.items, 16); assert.equal(d1.total.requests, 3);
+  assert.ok(d1.total.usd > 0);
+  const d2 = await C.main(["--tax", path.join(FIX, "tax"), "--out", path.join(tmpDir(), "b"), "--dry-run", "--assume-items", "1000"], fv2.deps({ env: {} }));
+  assert.equal(d2.total.items, 1000);
+  assert.equal(fv2.reqs.length, 0); assert.equal(fv2.execCalls, 0);
+});
+
+/* ================================================= prep-map-eval ================================================= */
+test("map-eval: the scorer counts best, ok, mixed, moved out and missing as the plan says", () => {
+  const labels = [
+    { id: "1", best: "ana-heart", ok: [] }, { id: "2", best: "ana-heart", ok: ["ana-upper-limb-nerves"] },
+    { id: "3", best: "ana-heart", ok: [] }, { id: "4", best: "mixed", ok: [] }, { id: "5", best: "mixed", ok: ["ana-heart"] },
+    { id: "6", best: "mixed", ok: [] }, { id: "7", best: "ana-heart", ok: [] }, { id: "8", best: "mixed", ok: [] },
+  ];
+  const assign = new Map([
+    ["1", { kind: "module", m: "ana-heart" }], ["2", { kind: "module", m: "ana-upper-limb-nerves" }], ["3", { kind: "module", m: "ana-upper-limb-nerves" }],
+    ["4", { kind: "moved", to: "physiology" }], ["5", { kind: "module", m: "ana-heart" }], ["6", { kind: "module", m: "ana-heart" }],
+    ["7", { kind: "mixed" }], ["8", { kind: "mixed" }],
+  ]);
+  const r = E.scoreMapping(labels.concat([{ id: "9", best: "ana-heart", ok: [] }]), assign);
+  assert.equal(r.n, 9); assert.equal(r.agree, 5); assert.equal(r.missing, 1);
+  assert.deepEqual([r.inSubject.n, r.inSubject.agree], [5, 2]);
+  assert.deepEqual([r.labelledMixed.n, r.labelledMixed.agree], [4, 3]);
+  assert.equal(r.pairs["ana-heart -> ana-upper-limb-nerves"], 1);
+  assert.equal(r.pairs["ana-heart -> mixed"], 1);
+  assert.equal(r.pairs["mixed -> ana-heart"], 1);
+  assert.equal(r.pairs["ana-heart -> missing"], 1);
+  assert.equal(E.agrees({ best: "x", ok: [] }, undefined), false);
+});
+
+test("map-eval: scores a built bank across subjects and an llm file, with --high", () => {
+  const dir = tmpDir(), bank = copyBank(dir);
+  fs.mkdirSync(path.join(bank, "ss-cardiology", "mcq"), { recursive: true });
+  fs.writeFileSync(path.join(bank, "ss-cardiology", "mcq", "sca-hfref.json"), JSON.stringify({ topic: "sca-hfref", items: [{ id: "lic-moved", q: "q", o: ["a", "b", "c", "d"], a: 0, exp: "", t: "sca-hfref", d: 1 }] }));
+  const lab = { subject: "medicine", labels: [
+    { id: "lic-aml-1", best: "med-aml", ok: [] }, { id: "lic-cml-2", best: "med-aml", ok: ["med-cml"] }, { id: "lic-aml-2", best: "med-cml", ok: [] },
+    { id: "lic-moved", best: "mixed", ok: [] }, { id: "nowhere", best: "med-aml", ok: [] },
+  ] };
+  const lp = path.join(dir, "labels.json");
+  fs.writeFileSync(lp, JSON.stringify(lab));
+  const out = [];
+  const r = E.main(["--labels", lp, "--bank", bank, "--tax", path.join(FIX, "tax")], { log: (s) => out.push(s) });
+  assert.deepEqual([r.overall.n, r.overall.agree, r.overall.missing], [5, 3, 1]);
+  assert.equal(r.subjects[0].subject, "medicine");
+  assert.ok(out.some((l) => /med-cml -> med-aml/.test(l)) && out.some((l) => /^overall: 3 of 5 agree \(60\.0%\)/.test(l)));
+  const llm = path.join(dir, "llm-medicine.json");
+  fs.writeFileSync(llm, JSON.stringify({ subject: "medicine", map: { "lic-aml-1": ["med-aml", "high"], "lic-cml-2": ["med-cml", "low"], "lic-aml-2": ["med-cml", "high"], "lic-moved": ["anatomy", "high"] } }));
+  const r2 = E.main(["--labels", lp, "--llm", llm, "--tax", path.join(FIX, "tax")], { log: quiet });
+  assert.equal(r2.overall.agree, 4);
+  const r3 = E.main(["--labels", lp, "--llm", llm, "--tax", path.join(FIX, "tax"), "--high"], { log: quiet });
+  assert.equal(r3.overall.agree, 3, "a low-confidence answer counts as mixed under --high");
+  // the saved Anatomy sample is well formed and names the subject and the labeller
+  const saved = readJ(path.join(HERE, "..", "prep", "eval", "labels-anatomy.json"));
+  assert.equal(saved.subject, "anatomy"); assert.match(saved.labeller, /not a doctor/);
+  assert.equal(saved.labels.length, 120);
+  assert.ok(saved.labels.every((l) => typeof l.id === "string" && typeof l.best === "string" && Array.isArray(l.ok) && Object.keys(l).length === 3));
 });
