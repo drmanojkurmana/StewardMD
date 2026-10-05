@@ -3952,8 +3952,24 @@
       }
       btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
     }
+    /* Reg. number from the verification record (GET /api/verify-doctor: the verified council number,
+     * or the number read off the ID card). The same call that makes Registration say "Verified", so
+     * the number shows even when the profile document cannot be read. */
+    function regFromVerify(paint) {
+      try {
+        var u = window.SMD_AUTH && SMD_AUTH.currentUser; if (!u || typeof u.getIdToken !== "function") return;
+        u.getIdToken().then(function (tok) {
+          return fetch((window.SMD_API_BASE || "") + "/api/verify-doctor", { headers: { "Authorization": "Bearer " + tok } });
+        }).then(function (r) { return typeof r.text === "function" ? r.text() : r.json().then(function (o) { return JSON.stringify(o); }); }).then(function (t) {
+          var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
+          var rn = j && String(j.regNo || "").trim();
+          if (rn && document.body.contains(card)) paint(rn);
+        }).catch(function () {});
+      } catch (e) {}
+    }
     function offline(msg, why) {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
+      regFromVerify(function (rn) { setRow("regno", rn, { edit: false }); });
       // The Mobile number row only paints from the profile doc, so without this it said Checking for
       // good. The account's phoneVerified claim is the server's own answer; show that instead.
       try {
@@ -4001,11 +4017,15 @@
      * locked every later open onto "Loading..." until the app was killed. It is a timestamp now,
      * and a boot older than BOOT_MS is treated as dead and retried. */
     var BOOT_MS = 12000;
-    if ((!uid || !fdb) && typeof window.SMD_loadFirebase === "function") {
-      ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: "Loading…", edit: false }); });
+    /* Owner, 2026-10-05 (screenshot: Registration Verified, every detail "Offline"): sign-in was up,
+     * so the server could answer, but a missing Firestore SDK used to end here on "Offline" without
+     * asking it. With a uid, boot Firestore in the background AND carry on to the cache + server read. */
+    if ((!uid || !fdb) && typeof window.SMD_loadFirebase === "function" && !(uid && acctFillProfessional._bootFailed)) {
+      if (!uid) ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: "Loading…", edit: false }); });
       var since = acctFillProfessional._bootAt || 0;
-      if (since && Date.now() - since < BOOT_MS) return;          // a live boot will refill the sheet
-      if (acctFillProfessional._bootFailed) { offline("Offline"); return; }   // Retry clears this
+      if (since && Date.now() - since < BOOT_MS) { if (!uid) return; }   // a live boot will refill the sheet
+      else if (acctFillProfessional._bootFailed) { offline("Offline"); return; }   // Retry clears this
+      else {
       acctFillProfessional._bootAt = Date.now();
       var done = false;
       function refill() {
@@ -4032,14 +4052,21 @@
           }
           refill();
         });
-      } catch (e) { refill(); return; }
+      } catch (e) { refill(); }
       setTimeout(refill, BOOT_MS);   // the loader's callback is not guaranteed if a script hangs
-      return;
+      }
+      if (!uid) return;
     }
-    if (!uid || !fdb) { offline(uid ? "Offline" : "Sign-in still loading"); return; }
-    acctFillProfessional._bootFailed = false;
+    if (!uid) { offline("Sign-in still loading"); return; }
+    if (fdb) acctFillProfessional._bootFailed = false;
 
-    var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
+    // Firestore may still be booting: edits resolve the doc at save time, the read goes via the server.
+    var pref = fdb ? fdb.collection("users").doc(uid).collection("profile").doc("self") : null;
+    function prefNow() {
+      if (pref) return pref;
+      try { if (window.SMD_DB) pref = SMD_DB.collection("users").doc(uid).collection("profile").doc("self"); } catch (e) {}
+      return pref;
+    }
     /* A get() that never settles is the "stuck on Loading…" report: on a half-open connection
      * Firestore waits on the server indefinitely, so every row sat at "Loading…" with no Retry and
      * no way out. Bound the wait, then read the on-device cache before declaring it unreadable. */
@@ -4087,7 +4114,8 @@
     }
     try { var cached = JSON.parse(localStorage.getItem(CK) || "null"); if (cached) { painted = true; onData(wrap(cached)); } } catch (e) {}
     var sdkDone = false;
-    pref.get().then(function (snap) { sdkDone = true; fresh(snap); }, function (e) { sdkDone = true; failed(e); });
+    if (pref) pref.get().then(function (snap) { sdkDone = true; fresh(snap); }, function (e) { sdkDone = true; failed(e); });
+    else { sdkDone = true; failed({ code: "no-db" }); }
     setTimeout(function () { if (!sdkDone) { sdkDone = true; failed({ code: "sdk-timeout" }); } }, 6000);
     (function viaServer() {
       var u = null; try { u = SMD_AUTH && SMD_AUTH.currentUser; } catch (e) {}
@@ -4097,12 +4125,22 @@
       var srvDone = false;
       setTimeout(function () { if (!srvDone) { srvDone = true; failed({ code: "server-timeout" }); } }, 10000);
       var srvFail = function (e) { if (srvDone) return; srvDone = true; failed(e); };
-      u.getIdToken().then(function (tok) {
-        return fetch((window.SMD_API_BASE || "") + "/api/auth/my-profile", {
-          method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: "{}"
+      /* The iOS native HTTP bridge sometimes hands back an EMPTY body (native-bridge.js wraps a missing
+       * CapacitorHttp body as new Response("")); r.json() on that threw, the server source counted as
+       * failed, and with the SDK read also hung every row said "Offline". Read text, retry once. */
+      function ask(left) {
+        return u.getIdToken().then(function (tok) {
+          return fetch((window.SMD_API_BASE || "") + "/api/auth/my-profile", {
+            method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok }, body: "{}"
+          });
+        }).then(function (r) { return typeof r.text === "function" ? r.text() : r.json().then(function (o) { return JSON.stringify(o); }); }).then(function (t) {
+          var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
+          if (!j && left > 0) return new Promise(function (res) { setTimeout(res, 800); }).then(function () { return ask(left - 1); });
+          return j;
         });
-      }).then(function (r) { return r.json(); }).then(function (j) {
-        if (!j || !j.ok) throw { code: (j && j.error) || "server" };
+      }
+      ask(1).then(function (j) {
+        if (!j || !j.ok) throw { code: (j && j.error) || "server-empty" };
         srvDone = true;
         fresh(wrap(j.profile, j.exists));
       }).catch(srvFail);
@@ -4114,6 +4152,7 @@
       var d = (snap && snap.exists && snap.data()) || {};
       var pendingCert = !!d.regNoPendingCert;
       setRow("regno", d.regNo, { placeholder: pendingCert ? "Awaiting certificate" : "Not set" });
+      if (!d.regNo && !pendingCert) regFromVerify(function (rn) { if (!d.regNo) { d.regNo = rn; setRow("regno", rn, {}); } });
       setRow("hospital", d.hospital, { editLabel: d.hospital ? "Change" : "Choose" });
       setRow("degree", d.degree, { editLabel: d.degree ? "Change" : "Choose" });
       // Role box (2026-09-26). A VERIFIED role (from the server) is shown and not editable here:
@@ -4127,7 +4166,7 @@
       setRow("phone", d.phone);
       if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
 
-      function save(obj) { return pref.set(obj, { merge: true }); }
+      function save(obj) { var pr = prefNow(); return pr ? pr.set(obj, { merge: true }) : Promise.reject({ code: "no-db" }); }
 
       // Edit in place: the value becomes an input with Save / Cancel. No window.prompt.
       function inlineEdit(key, label, cur, onSave) {
@@ -7518,6 +7557,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // was still being mapped into memory) read as a permanent failure. One retry costs nothing.
     if (/model-missing/i.test(e)) {
       return "The on-device model was still loading. Please ask again - it usually answers on the next try.";
+    }
+    // Owner screenshot (2026-10-04): an empty reply surfaced the browser's raw "Unexpected end of JSON
+    // input". reasoning.js now retries once and names it "server-empty"; the regex also catches any
+    // other path that still lets a parse error through.
+    if (e === "server-empty" || /Unexpected end of JSON|JSON\.parse|on 'Response'|is not valid JSON|Unexpected token/i.test(e)) {
+      return "MaiK Cloud sent back an empty reply, usually a brief network drop. Tap <b>Try again</b>." +
+             "<br><br>The deterministic StewardMD engine, calculators and reference tools remain available." +
+             (r && r.status ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: empty reply (HTTP ' + maikEscH(r.status) + ")</span>" : "");
     }
     return "MaiK is unavailable right now. The deterministic StewardMD engine, calculators and reference tools remain available." +
            (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");

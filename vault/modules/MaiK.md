@@ -81,6 +81,13 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
 
 ## Gotchas
+- **An empty `/explain` body is retried once, then named** (2026-10-04, owner screenshot: "Reason:
+  Failed to execute 'json' on 'Response': Unexpected end of JSON input" at 0.5s). On native,
+  `nativeApiFetch` (`native-bridge.js`) wraps a missing CapacitorHttp body as `new Response("")`;
+  `explainGrounded` used to call `r.json()` on it raw. It now reads text, retries once after 800 ms and
+  returns `{ error: "server-empty", status }`; `maikErrorNotice` words it ("empty reply, Try again").
+  Server cause not identified (the route always answers JSON). Tests: `test/maik-empty-reply.test.mjs`,
+  `test/run-maik-empty-reply-ui.mjs`. Other `SMD_AI` calls in `reasoning.js` still use bare `r.json()`.
 - **A tool request is in scope** (2026-10-04): "show me the antibiogram" / "search icd teruvu" reached the model as firewall-"uncertain" and the scope rule refused them as non-medical. Tool words live in `APP_TOOL` (`kb/ai/maik-scope.js`) and the tool clause in `MEDICAL_ONLY` + `maik-local.js`; `KNOWLEDGE_SYS` has a hard length cap (`test/ai-prompt-coherence.test.mjs`), so trim when you add.
 - **A named score is answered by its calculator, for free** (2026-09-02). `maikRoute()` has a
   `calculator` kind: `MEDCALC.find(q)` resolves the question to one calculator by title (conservative:
