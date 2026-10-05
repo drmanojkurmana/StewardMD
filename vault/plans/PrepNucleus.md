@@ -28,8 +28,8 @@ measured pilot. The phone drives the pipeline step by step; the server runs ever
 ## 2. Scope
 ### v1 (Phases 0 to 3)
 - **Exam profiles: NEET-PG and INI-CET only** (recommendation; decision 1). Candidates are final-year MBBS
-  students, interns and graduate doctors, all existing roles (`student`, `intern`, `doctor` on the Trainee or
-  Pro plans). NEET-UG, NEET-SS, INI-SS, USMLE are profile files added later; the format (6.9) carries them without code.
+  students, interns and graduate doctors: existing plan roles `student`, `intern`, `pro`/`physician`
+  (`_entitlements.js` `ROLES`; the verification chooser's `doctor` maps to those). NEET-UG, NEET-SS, INI-SS, USMLE are profile files added later; the format (6.9) carries them without code.
 - **Sources: pasted text and digital PDF.** Scanned PDF (native OCR) is Phase 3b, after the digital path is graded.
 - Questions and timed exam from the existing licensed banks, under a `prep` host of the specialty engine.
 - Premium MCQ screen: why right, why wrong per option, exam pearl, source line, flag, bookmark.
@@ -92,7 +92,7 @@ heading split, clean, page picker          gate: sign-in, plan, breaker, caps, i
 bank first (lexical)                       op facts  : 1 chunk  -> <= 15 facts          thinkingBudget: 0
 loop per 7: facts (as needed), mcq,        op mcq    : 7 facts  -> code gates, shuffle, responseSchema JSON
   solve, review, regen once                            9b check -> <= 7 stored items
-IndexedDB: source sentences, facts,        op solve  : stems + options -> picks (blind)
+IndexedDB: source sentences, facts,        op solve  : stems + options (a kept out of prompt) -> match
   questions, cards, manifest, cost         op review : items + paragraphs -> gates
 engine: FSRS-6, MCQ, exam, cards           one usage record per call, real tokens, breaker fed
 MaiK Lite / MxCore: offline teacher        KV: prep:tok:<deck>, prep:tok:<uid>:<month>, prep:idem:<k>
@@ -112,7 +112,8 @@ MaiK Lite / MxCore: offline teacher        KV: prep:tok:<deck>, prep:tok:<uid>:<
 | Engine | `specialty-bank.js` | `opts.source`, `opts.exam`, `opts.srcLine` (6.6); `validateItems` accepts 6.4 fields |
 | Server | `functions/api/ai/_prep-generate.js` | Ops, prompts, `responseSchema`s, sanitizers, code gates, shuffle, `prepScrub`, metering |
 | Server | `functions/api/ai/[[path]].js` | `seg === "prep-generate"` dispatch, `MODULE_FOR["prep-generate"] = "prep"`, `deferRecord` for the segment, `callGemini` gains `providers: ["vertex"]` and `labels` |
-| Server | `functions/_ai_usage.js`, `functions/_usage.js` | `AI_MODULES.prep` (daily cap = calls, 9.3); `checkQuota` type `prep`; export `addDailyCostInr` |
+| Server | `functions/_ai_usage.js` | `AI_MODULES.prep` (daily cap = calls, 9.3); `gateAndCount` deferred `commit(extra)` merges `extra` (model, tokens, cost, feature, latency) into the record (today `q.commit` takes no arguments and writes a 0-token record) |
+| Server | `functions/_usage.js` | `checkQuota` type `prep`; export `addDailyCostInr` |
 | Tools | `tools/prep-measure.mjs` | Phase 0 harness (dev only) |
 | Tests | `test/prep-*.test.mjs`, `test/run-prep-ui.mjs` | Unit (route with mocked `generateContent` as `test/ai-router-model.test.mjs`), headless CDP UI (as `test/run-specialty-ui.mjs`) |
 
@@ -121,7 +122,7 @@ No phase spends AI money before Phase 0 passes.
 
 | Phase | Build | Exit criteria |
 |---|---|---|
-| **0 Measure** (Vertex project, no app code) | `tools/prep-measure.mjs` on Vertex (not the developer key): 5 sources (2 digital chapters, 1 two-column, 1 scanned, 1 pasted notes), 100 kept questions, temperature 1.0 and 0.2. Records per call: `promptTokenCount`, `candidatesTokenCount`, `thoughtsTokenCount`, `cachedContentTokenCount`, `finishReason` (MAX_TOKENS, RECITATION, SAFETY), `modelVersion`, provider, 429s and retries, latency. Every request carries Vertex `labels: { app: "prep", run }` so the run reconciles against Cloud Billing. Fits cost = a x pages + b x questions kept, reports p50/p90. **Seeds 50 items with deliberately wrong keys** into the `solve` set to measure the catch rate directly. Doctor grades the 100 kept (8.3) and 50 reviewer-rejected items | Fitted cost within 20% of billing; thinking billing known; temperature chosen; reject rate known; blind-solve catch rate on seeded wrong keys known (target >= 90%); graded accuracy against the bar. Fail -> fix prompts or model before any UI |
+| **0 Measure** (Vertex project, no app code) | `tools/prep-measure.mjs` on Vertex (not the developer key): 5 sources (2 digital chapters, 1 two-column, 1 scanned, 1 pasted notes), 100 kept questions, temperature 1.0 and 0.2. Records per call: `promptTokenCount`, `candidatesTokenCount`, `thoughtsTokenCount`, `cachedContentTokenCount`, `finishReason` (MAX_TOKENS, RECITATION, SAFETY), `modelVersion`, provider, 429s and retries, latency. Every request carries Vertex `labels: { app: "prep", run }` so the run reconciles against Cloud Billing. Fits cost = a x pages + b x questions kept, reports p50/p90. **Seeds 50 items with deliberately wrong keys** into the `solve` set to measure the catch rate directly. Doctor grades the 100 kept (8.3) and 50 reviewer-rejected items | Fitted cost within 20% of billing; thinking billing known; temperature chosen; reject rate known; blind-solve catch rate on seeded wrong keys known (target >= 90%; this measures only what the solver knows, an error shared by generator and solver shows only in the doctor grade); graded accuracy against the bar. Fail -> fix prompts or model before any UI |
 | **1 Foundation** ($0 AI) | `prep.js` host behind `smd_prep` OFF; OBGYN bank as LICENSED with flagged items excluded; MCQ screen; flags, bookmarks, mistakes; FSRS via `specialty-core.js`; deck source abstraction; IndexedDB store; cards view; NEET-PG and INI-CET profiles | `npm test` green; `test/run-prep-ui.mjs` passes; engine test still forbids host names in engine files; zero AI calls in the network log |
 | **2 Create from pasted text** (internal) | `_prep-generate.js` ops, `prep` module, caps, metering, breaker feed, Vertex-only, step loop, "10 more"; flag OFF for students | 200 doctor-graded questions per profile pass 8.3; metered cost within 20% of the Phase 0 fit and exactly one usage record per call; token-cap stop and idempotent retry tested |
 | **3 Digital PDF** | pdf.js text layer, sentence numbering, page picker, 60-page cap; "View source" shows the stored sentences of that page (and the page render when the PDF is still reachable) | 10-PDF set: character error rate <= 2% on one hand-checked page per PDF for 9 of 10; heading split matches the TOC on 8 of 10 |
@@ -144,7 +145,7 @@ Sentences are numbered once across the whole document on the phone: `{ n, p, h, 
 |---|---|---|---|
 | `facts` | `chunk: { i, sents: [ { n, p, h, tx } ] }` (<= 6,000 tokens) | `{ facts: [6.1 with fid, quote, p, h], usage }` | 1 |
 | `mcq` | `facts: [<= 7 of 6.1 with their sentences], mix: { dl, cog }, avoid?: { fi, why }` | `{ items: [<= 7 of 6.4, gated and shuffled], usage }` | 1 |
-| `solve` | `q: [ { id, q, o } ]` (<= 7; no `a`, no reasons) | `{ picks: [ { id, ot } ], usage }`; server compares `ot` to `o[a]` | 1 |
+| `solve` | `q: [ { id, q, o, a } ]` (<= 7; no reasons). `a` never enters the prompt; the server only uses it to compare | `{ solved: [ { id, ok, ot } ], usage }` | 1 |
 | `review` | `q: [<= 7 of 6.4 that passed solve], para: { id: "sentences n-3..n+3" }` | `{ gates: [6.3], usage }` | 1 |
 
 Flow on the phone for "10 questions": `facts` on the first chunk of each section until >= 14 unused facts ->
@@ -158,7 +159,8 @@ back to `fid`.
 Errors, all `{ error, reason, retryAfter? }`: 400 `bad-input`, 401 `sign-in`, 402 `needs-plan`, 413 `too-large`,
 429 `rate | circuit-breaker | daily-calls | daily-decks | token-cap | month-budget`, 502 `ai-failed`, 504 `ai-timeout`.
 Idempotency: the server stores each successful response under `prep:idem:<uid>:<idem>` for 10 minutes; a
-retry with the same `idem` returns it without a second Gemini call or charge. The phone retries 504 once.
+retry with the same `idem` returns it without a second Gemini call or charge. The phone retries 504 once,
+after 4 s (the per-user rate limit is 3 s, `MAIK_RATE_LIMIT_SECONDS`).
 
 ### 6.1 Facts (model output, `responseSchema`)
 ```
@@ -184,12 +186,13 @@ chunk's sentences and assigns `fid = "f_" + sha12(deckId + sn.join(","))` (uniqu
 items (6.4). `misread` is a learner tap, never a model output.
 
 ### 6.3 Solve and review (model output, `responseSchema`)
-`solve` sees stem and shuffled options only (no key, no reasons, no pearl):
+The `solve` prompt holds stem and shuffled options only (no key, no reasons, no pearl); the request's `a`
+stays server-side for the comparison:
 ```
 { s: [ { i: 0, ot: "the option text the examiner picks" } ] }          // maxOutputTokens 400
 ```
-Reject when `ot` does not match `o[a]` (normalised compare). Survivors go to `review`, which sees the full item
-and its paragraph:
+The server rejects when `ot` does not match `o[a]` (normalised compare). Survivors go to `review`, which sees
+the full item and its paragraph:
 ```
 { g: [ { i: 0,
          g4: true,     // no grammatical clue between stem and options
@@ -253,9 +256,11 @@ a new item; that is fine because a rejected question is never stored and never h
   allowance is governed by prep's own caps below, not refused by MaiK's); then `gateAndCount(env, store,
   "prep", ..., deferRecord = true)` (`aiu:mod` call count, `AI_MODULES.prep.daily`); then prep's KV counters
   `prep:decks:<uid>:<day>`, `prep:tok:<deckId>`, `prep:tok:<uid>:<month>` against the plan's budget.
-- Post-call, exactly one record: `commit(buildUsageRecord({ module: "prep", feature: "prep:" + op, model,
-  promptTokens, completionTokens, estCostInr: aiEstCostInr(env, model, inTok, outTok), latencyMs }))`, then
-  `addDailyCostInr(env, day, inr)` (exported from `_usage.js`) so the breaker and `realCostInr` see prep.
+- Post-call, exactly one record: `commit({ feature: "prep:" + op, model, promptTokens, completionTokens,
+  estCostInr: aiEstCostInr(env, model, inTok, outTok), latencyMs })`, where `commit` is `gateAndCount`'s deferred
+  record extended to merge these fields (today it takes no arguments and would write 0 tokens, Rs 0). Then
+  `addDailyCostInr(env, day, inr)` (exported from `_usage.js`) for the breaker, and `bump(env, day,
+  { "maik.cost": inr })` (`_counters.js`) so the console's `realCostInr` (reads `maik.cost`) sees prep.
   **Never `_usage.js` `recordUsage`**: it prices at MaiK's flat 2.5-flash rate and spends the MaiK allowance.
 - `thoughtsTokenCount` is recorded separately (the route folds it into output today).
 - Model pinned by `PREP_MODEL` (default `MODEL_HARD_DEFAULT`); `env.__modelOverride` is ignored for prep except
@@ -285,7 +290,8 @@ Sanitizers in `_prep-generate.js` whitelist every field (pattern: `sanitizeMaikN
 
 ## 8. Quality and medical safety
 ### 8.1 Gates
-All code gates run on the server inside the `mcq` op; the phone cannot skip them.
+All code gates run on the server inside the `mcq` op, so a modified client cannot skip them. It could skip
+`solve`/`review` and store ungated items; that harms only its own private deck, and such items carry `rv: null`.
 
 | Gate (spec 13) | Checked by | How |
 |---|---|---|
@@ -293,7 +299,7 @@ All code gates run on the server inside the `mcq` op; the phone cannot skip them
 | 5 no length clue | Server code | key length within 1.6x of the median distractor |
 | 4 no grammar clue, 6 plausible, 7 each wrong, 8 reasons agree, 10 unambiguous, 11 difficulty | `review` | `g4`, `g6` to `g11`, all true |
 | 9 source supports key | `review` `g9` AND server code 9b | 9b: every number in the key option appears in the cited sentences |
-| Key correct | `solve` (blind) | picked option text equals `o[a]` |
+| Key correct | `solve` (blind), compared on the server | picked option text equals `o[a]`; `a` is in the request, never in the prompt |
 | 12 not a near-duplicate | Server code within the call, phone across calls | `fid` used once per deck; token Jaccard >= 0.6 against stems in the same call (server) and the saved deck (phone, before save) |
 | Key balance | Server code | seeded shuffle across A to D |
 
@@ -349,10 +355,10 @@ Flash-Lite; if it still thinks, the result is truncation inside `maxOutputTokens
 | `mcq` (35 generated) | 5 | 7k to 9k | 9k to 11k | 0.015 to 0.019 |
 | `solve` | 5 | 6k to 8k | 0.3k to 0.5k | 0.002 to 0.003 |
 | `review` | 5 | 17k to 21k | 1.2k to 1.6k | 0.006 to 0.008 |
-| Regenerate + solve + review | 0 to 2 | 2k to 6k | 1k to 3k | 0.002 to 0.006 |
-| **Deck** | 25 to 27 | | | **0.053 to 0.070 (Rs 5.1 to 6.7)** |
+| Regenerate + solve + review | 0 to 6 | 2k to 6k | 1k to 3k | 0.002 to 0.006 |
+| **Deck** | 25 to 31 | 85k to 110k | 22k to 29k | **0.053 to 0.070 (Rs 5.1 to 6.7)** |
 
-Input is about 35% of the bill; facts are about half. Each further 10 questions (2 `mcq` + 2 `solve` + 2
+Input is 37 to 39% of the bill; facts are about half. A 60-page deck runs 125k to 165k tokens. Each further 10 questions (2 `mcq` + 2 `solve` + 2
 `review`): about $0.011 to 0.013. Lazy first 10 (facts on 1 to 2 chunks only, 6.0 flow): about $0.015.
 Pasted notes (2,000 words), 10 questions: about $0.013. Any study session, exam, card, mistake: 0.
 
@@ -373,10 +379,10 @@ per plan, not only per day (9.3).
 |---|---|---|
 | Calls per day | `AI_MODULES.prep.daily`, `AI_LIMIT_PREP`, admin KV (unit = Gemini calls, what `aiu:mod` counts; one record per call) | 150 (about 5 decks) |
 | Decks per day | `prep:decks:<uid>:<day>` | 5 |
-| Tokens per month per plan (server-counted, in + out) | `prep:tok:<uid>:<month>` (`PREP_MONTH_TOK_FREE/TRAINEE/PRO`) | Free trial 200k (one deck), Trainee 1.5M (about 8 decks, Rs 45), Pro 4M |
+| Tokens per month per plan (server-counted, in + out) | `prep:tok:<uid>:<month>` (`PREP_MONTH_TOK_FREE/TRAINEE/PRO`) | Free trial 200k (one deck), Trainee 1M (about 8 full decks, Rs 50 against Rs 199), Pro 3M |
 | Pages per deck | client + server (`PREP_PAGE_CAP`) | 60 |
 | Text per deck | client + server (`PREP_CHARS_CAP`) | 300,000 chars |
-| Tokens per deck (hard stop) | `prep:tok:<deckId>`, checked before every call (`PREP_DECK_TOKEN_CAP`) | 150,000; returns `token-cap`, the phone keeps what it has |
+| Tokens per deck (hard stop) | `prep:tok:<deckId>`, checked before every call (`PREP_DECK_TOKEN_CAP`) | 200,000 (a 60-page deck is 125k to 165k, so the page cap stops first); returns `token-cap`, the phone keeps what it has |
 | Output per call | `maxOutputTokens` | 1,536 / 3,000 / 400 / 800 |
 | Project spend | `_usage.js` project daily-cost breaker (`MAIK_PROJECT_DAILY_COST_HARD_STOP_INR`, admin-editable), fed by prep's `addDailyCostInr`; `ai:emergency` pause | as configured |
 
@@ -411,8 +417,8 @@ prep's own counters and the breaker enforce always. The per-user rupee cap in `_
 | Thinking billed or truncation despite `thinkingBudget: 0` | Phase 0 records `thoughtsTokenCount` and `finishReason`; owner re-decides before Phase 2 |
 | 3.1 Flash-Lite retired or repriced | `PREP_MODEL` env, `MODEL_RATES`, `pv`/`mv` on every item |
 | Reviewer rubber-stamps | Truly blind `solve` (no reasons, no key), gate fields, "default to false", paragraph context, Phase 0 catch rate on 50 seeded wrong keys, graded sample |
-| Modified client skips gates | All code gates, the shuffle and the solve comparison run on the server; the phone only stores |
-| Double or missing usage records | `deferRecord` for the segment, one `commit` after the call; Phase 2 test asserts one record per call |
+| Modified client skips gates | Code gates, shuffle and the solve comparison run on the server; skipping `solve`/`review` harms only that client's own deck |
+| Double, missing or empty usage records | `deferRecord` for the segment, one `commit(extra)` after the call; Phase 2 test asserts one record per call with non-zero tokens and cost |
 | Wrong key reaches a student | Label on every AI item, flag button, flagged items leave circulation on the phone at once |
 | Invented quote or page | Model returns sentence numbers only; code fills the rest; gate 9b |
 | RECITATION / SAFETY blocks | No verbatim quotes requested; `finishReason` logged; such calls are retried once at temperature 0.2 then dropped |
@@ -443,7 +449,7 @@ prep's own counters and the breaker enforce always. The per-user rupee cap in `_
 2. **NEET-UG**: candidates are school leavers and often minors; DPDP needs verifiable parental consent and a
    different role. Recommendation: not before a consent flow exists. Confirm.
 3. **Quality bar**: Wilson 95% lower bound >= 95% key-correct (>= 197/200), >= 90% fully clean, <= 30% rejects; who grades.
-4. **Caps per plan** (9.3 defaults): tokens per month Free 200k / Trainee 1.5M / Pro 4M, decks per day 5, deck token cap 150k; whether Create is in Trainee or Pro only.
+4. **Caps per plan** (9.3 defaults): tokens per month Free 200k / Trainee 1M (about Rs 50) / Pro 3M, decks per day 5, deck token cap 200k; whether Create is in Trainee or Pro only.
 5. **More MedMCQA banks** (Medicine, Surgery, Paediatrics, ...) before launch: $0 AI, about a day of build-tool work per subject plus a Review Desk flagged-keys pass. Recommendation: yes, at least Medicine and Surgery.
 6. **Escalation** to 3.5 Flash-Lite: off until the graded sample says otherwise. Confirm.
 7. **Who writes and versions exam profiles** (6.9), including `exam.n/sec/negative` per notification.
@@ -452,6 +458,7 @@ prep's own counters and the breaker enforce always. The per-user rupee cap in `_
 ## 15. Verified against the code (2026-10-05, branch docs/prepnucleus-plan)
 - `functions/_ai_usage.js`: `AI_MODULES`, `gateAndCount` -> `recordAiUsage` pre-call (no tokens, no model), `buildUsageRecord` fields (`feature` present, unset by callers), `MODEL_RATES` 3.1/3.5 Flash-Lite, `estCostInr` (imported as `aiEstCostInr` in the route), `aiu:mod:<doc>:<module>:<day>` counts calls, `capsEnforced`.
 - `functions/_usage.js`: `recordUsage` prices with `priceInInrPer1k` 0.0288 / `priceOutInrPer1k` 0.24 and writes `maik:u`/`maik:m` monthly tokens; `checkQuota` holds the project breaker (`costHardStopInr`) and the per-user rate limit; `addDailyCostInr` is module-private; `functions/_aibudget.js`: Free allowance 5,000 tokens. `functions/_credits.js`: per-user cap, `AI_COST_CAP_ON` unset in `wrangler.toml` (lines 148 to 184).
+- `functions/_ai_usage.js:544`: deferred `q.commit = rec` where `rec` takes no arguments and builds a record with doctorId, module, subscription, email only; `_ai_usage.js:579`: `realCostInr` reads the `maik.cost` counter; `_counters.js:29` `bump(env, day, incs)`.
 - `functions/api/ai/[[path]].js`: `aiDeadlineMs` 28,000 and the "native client gives up at ~25-35s" comment; gate block at 1698 passes `deferRecord` only for `seg === "explain"` and keeps `_mq.commit`; `env.__modelOverride` stamped per request; `providerOrder` reads `AI_PROVIDER`; `genBody` (`thinkingBudget: 0`, `responseMimeType` only, no `labels`); `MODULE_FOR`; no `feature:` in any usage record.
 - `functions/_deid.js` `stripIdentifiers`: `\d{4,}` removal, `\s+` collapse, "patient name" to end of text.
 - `specialty-bank.js`: `validateIndex` (licence, citation, `^mcq/[a-z0-9-]+\.json$`), three `I.getJSON` points (`INDEX`, `decks/`, `SEARCH`), `EXAM_N = 30, EXAM_SEC = 90`, `srcLine` "crowd-sourced", `A.mcqbank`, user `flags`.
