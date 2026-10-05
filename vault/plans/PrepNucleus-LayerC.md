@@ -1,6 +1,6 @@
 ---
 tags: [plan, learning, ai, cost]
-status: frozen reference (2026-10-05). Layer C (student PDF or notes to deck) contract of the PrepNucleus plan.
+status: frozen reference (2026-10-05). Layer C (student PDF or notes to deck) contract of the PrepNucleus plan. One later change: the caps in 9.3 and the related counters follow the owner's decision of 2026-10-05 (10 decks a month, 3 a day, every signed-in user), see [[PrepNucleus]] D6.
 ---
 > **Frozen copy.** This is the PrepNucleus plan as it stood at commit `c3f3725c` (Opus: 10/10 for Layer C),
 > kept as a file so it survives a squash merge. It is the authoritative Layer C contract (protocol, gates,
@@ -98,7 +98,7 @@ loop per 7: facts (as needed), mcq,        op mcq    : 7 facts  -> code gates, s
 IndexedDB: source sentences, facts,        op solve  : stems + options (a kept out of prompt) -> match
   questions, cards, manifest, cost         op review : items + paragraphs -> gates
 engine: FSRS-6, MCQ, exam, cards           one usage record per call, real tokens, breaker fed
-MaiK Lite / MxCore: offline teacher        KV: prep:tok:<deck>, prep:tok:<uid>:<month>, prep:idem:<k>
+MaiK Lite / MxCore: offline teacher        KV: prep:tok:<deck>, prep:decks:<uid>:<day|month>, prep:idem:<k>
 ```
 
 ### Files
@@ -157,10 +157,10 @@ Flow on the phone for "10 questions": `facts` on the first chunk of each section
 server state. In the `mcq` prompt facts are referenced by local index `fi` (0 to 6); the server maps `fi`
 back to `fid`.
 
-`usage` = `{ inTok, outTok, thinkTok, inr, deckTok, deckCapTok, monthTok, monthCapTok }`; the Create screen shows the running rupee line.
+`usage` = `{ inTok, outTok, thinkTok, inr, deckTok, deckCapTok, dayDecks, monthDecks }`; the Create screen shows the running rupee line and "deck 2 of 3 today, 7 of 10 this month".
 
-Errors, all `{ error, reason, retryAfter? }`: 400 `bad-input`, 401 `sign-in`, 402 `needs-plan`, 413 `too-large`,
-429 `rate | circuit-breaker | daily-calls | daily-decks | token-cap | month-budget`, 502 `ai-failed`, 504 `ai-timeout`.
+Errors, all `{ error, reason, retryAfter? }`: 400 `bad-input`, 401 `sign-in`, 402 `needs-plan` (reserved, unused: every signed-in user has the same caps), 413 `too-large`,
+429 `rate | circuit-breaker | daily-calls | daily-decks | month-decks | token-cap`, 502 `ai-failed`, 504 `ai-timeout`.
 Idempotency: the server stores each successful response under `prep:idem:<uid>:<idem>` for 10 minutes; a
 retry with the same `idem` returns it without a second Gemini call or charge. The phone retries 504 once,
 after 4 s (the per-user rate limit is 3 s, `MAIK_RATE_LIMIT_SECONDS`).
@@ -249,7 +249,7 @@ a new item; that is fine because a rejected question is never stored and never h
   source: { type: "paste|pdf", name, pages: [1, 50], sha: "<sha256 of cleaned text>" },
   prov: "AI", label: "AI-generated educational content", model, pv, created,
   stats: { facts, generated, accepted, rejected, regenerated, cards },
-  cost: { inTok, outTok, thinkTok, inr, stopped: null | "token-cap" | "month-budget" | "daily" | "circuit-breaker" },
+  cost: { inTok, outTok, thinkTok, inr, stopped: null | "token-cap" | "month-decks" | "daily-decks" | "daily-calls" | "circuit-breaker" },
   topics: [ { id: "sec-3", title: { en: "Management" }, count: 9, file: "idb:gen_x/sec-3" } ] }
 ```
 
@@ -258,7 +258,8 @@ a new item; that is fine because a rejected question is never stored and never h
   the per-user rate limit but **not** MaiK's per-user daily/monthly token allowances (a Free user with no MaiK
   allowance is governed by prep's own caps below, not refused by MaiK's); then `gateAndCount(env, store,
   "prep", ..., deferRecord = true)` (`aiu:mod` call count, `AI_MODULES.prep.daily`); then prep's KV counters
-  `prep:decks:<uid>:<day>`, `prep:tok:<deckId>`, `prep:tok:<uid>:<month>` against the plan's budget.
+  `prep:decks:<uid>:<day>` (3), `prep:decks:<uid>:<month>` (10), `prep:tok:<deckId>` (200k). A deck counts
+  when its first `facts` op is accepted; the same `deckId` never counts twice.
 - Post-call, exactly one record: `commit({ feature: "prep:" + op, model, promptTokens, completionTokens,
   estCostInr: aiEstCostInr(env, model, inTok, outTok), latencyMs })`, where `commit` is `gateAndCount`'s deferred
   record extended to merge these fields (today it takes no arguments and would write 0 tokens, Rs 0). Then
@@ -366,8 +367,8 @@ Input is 37 to 39% of the bill; facts are about half. A 60-page deck runs 125k t
 `review`): about $0.011 to 0.013. Lazy first 10 (facts on 1 to 2 chunks only, 6.0 flow): about $0.015.
 Pasted notes (2,000 words), 10 questions: about $0.013. Any study session, exam, card, mistake: 0.
 
-Heavy user, 5 full decks a day: about Rs 900 a month against the Rs 199 Trainee plan. So caps are per month and
-per plan, not only per day (9.3).
+Worst case under the owner's caps (10 decks a month, 3 a day, every signed-in user): 10 x Rs 6.7 = about Rs 67
+a month per student (9.3).
 
 ### 9.2 Levers, largest first
 1. Bank first: a hit is $0.
@@ -378,12 +379,12 @@ per plan, not only per day (9.3).
 6. Batch API (half price) for offline jobs only (bank option reasons).
 7. Escalation to 3.5 Flash-Lite off by default.
 
-### 9.3 Caps (defaults are proposals; decision 4)
-| Cap | Where | Default |
+### 9.3 Caps (owner decision 2026-10-05: "10 decks per month, 3 max per day", every signed-in user, no plan split)
+| Cap | Where | Value |
 |---|---|---|
-| Calls per day | `AI_MODULES.prep.daily`, `AI_LIMIT_PREP`, admin KV (unit = Gemini calls, what `aiu:mod` counts; one record per call) | 160 (5 decks at up to 31 calls) |
-| Decks per day | `prep:decks:<uid>:<day>` | 5 |
-| Tokens per month per plan (server-counted, in + out) | `prep:tok:<uid>:<month>` (`PREP_MONTH_TOK_FREE/TRAINEE/PRO`) | Free trial 200k (one deck), Trainee 1M (about 8 full decks, Rs 50 against Rs 199), Pro 3M |
+| Decks per month | `prep:decks:<uid>:<month>` | **10** (`month-decks`) |
+| Decks per day | `prep:decks:<uid>:<day>` | **3** (`daily-decks`) |
+| Calls per day | `AI_MODULES.prep.daily`, `AI_LIMIT_PREP`, admin KV (unit = Gemini calls, what `aiu:mod` counts; one record per call) | **95** (3 decks x up to 31 calls = 93, plus 2 for a retried call) |
 | Pages per deck | client + server (`PREP_PAGE_CAP`) | 60 |
 | Text per deck | client + server (`PREP_CHARS_CAP`) | 300,000 chars |
 | Tokens per deck (hard stop) | `prep:tok:<deckId>`, checked before every call (`PREP_DECK_TOKEN_CAP`) | 200,000 (a 60-page deck is 125k to 165k, so the page cap stops first); returns `token-cap`, the phone keeps what it has |
@@ -453,7 +454,7 @@ prep's own counters and the breaker enforce always. The per-user rupee cap in `_
 2. **NEET-UG**: candidates are school leavers and often minors; DPDP needs verifiable parental consent and a
    different role. Recommendation: not before a consent flow exists. Confirm.
 3. **Quality bar**: Wilson 95% lower bound >= 95% key-correct (>= 197/200), >= 90% fully clean, <= 30% rejects; who grades.
-4. **Caps per plan** (9.3 defaults): tokens per month Free 200k / Trainee 1M (about Rs 50) / Pro 3M, decks per day 5, deck token cap 200k; whether Create is in Trainee or Pro only.
+4. **Caps**: decided 2026-10-05 by the owner, 10 decks a month and 3 a day for every signed-in user (9.3); the per-plan token budgets proposed here were dropped.
 5. **More MedMCQA banks** (Medicine, Surgery, Paediatrics, ...) before launch: $0 AI, about a day of build-tool work per subject plus a Review Desk flagged-keys pass. Recommendation: yes, at least Medicine and Surgery.
 6. **Escalation** to 3.5 Flash-Lite: off until the graded sample says otherwise. Confirm.
 7. **Who writes and versions exam profiles** (6.9), including `exam.n/sec/negative` per notification.
