@@ -285,8 +285,7 @@ student nothing and have no caps.
 - Layer A about 170k items x 0.93 KB (the Tokós directory measures 934 bytes per item including
   `search.json`, about 770 for topic files alone) = **about 160 MB**; Layer B 18k to 30k items x 1.3 KB
   (reasons, pearl, tags) = 25 to 40 MB; **total 180 to 200 MB**. Not bundled: `www/` must stay small and the
-  native app only talks to `stewardmd.in/api/*` (and R2 custom domains under `stewardmd.in`, the precedent
-  being `ophthalmos-img.stewardmd.in`).
+  bank is served only through `stewardmd.in/api/prep/bank/*` (the `PREP_BANK_R2` binding).
 - Bundled by default (`scripts/build-www.sh` copies only these): `taxonomy.json` and the per-subject
   `index.json` files (about 200 KB). Downloaded on first open of a subject: its `search.json` (1 to 2 MB).
   Downloaded on demand and cached in IndexedDB: topic files (0.1 to 1 MB each). "Download for offline" per
@@ -346,7 +345,7 @@ student nothing and have no caps.
 3. **Layer B sources and legal check**: recommendation is verifiably CC BY / CC0 / public domain / owner-licensed documents only, each checked and recorded; `kb/diseases` excluded as Harrison-derived unless the owner obtains a licence ruling; StatPearls and WHO (NC licences) excluded for a paid app. Who does the legal check, and which two subspecialties pilot.
 4. **Thin topics**: recommendation is to leave a topic below 100 when no licence-clean pack exists, with a visible "fewer questions" note, rather than fill from model memory. Confirm, or set a lower floor for subspecialty topics.
 5. **Doctor grading volume**: recommend 200 per specialty/subspecialty unit for Layer B (360 to 900 doctor-hours at 3 to 5 minutes, shipped in waves) plus 200 per branch for Layer A keys (35 to 40 hours); alternative 200 per branch for Layer B too (60 to 120 hours, weaker guarantee). Name the reviewers and the Layer A warning threshold.
-6. **Bank hosting**: recommend R2 (`stewardmd-prep-bank`, custom domain) from day one; git keeps only taxonomy, tools and samples.
+6. **Bank hosting**: recommend R2 (`stewardmd-prep-bank`, read through the `PREP_BANK_R2` binding, no public domain) from day one; git keeps only taxonomy, tools and samples.
 7. **Layer C caps and plan placement** (9.3): Trainee or Pro only; monthly token budgets.
 8. **Who writes exam profiles** and fills `exam.n/sec/negative` from the notifications.
 9. Log for prep the "licence-verified sources or our own writing" rule (today Ophthalmós-scoped).
