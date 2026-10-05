@@ -141,6 +141,12 @@ export async function onRequest(context) {
     return next();
   }
 
+  // TEMPORARY: owner's personal wedding invitation page (static, no app code, noindex).
+  // To take it down: delete the /vineela-koushik/ folder AND this block.
+  if (url.pathname === "/vineela-koushik" || url.pathname.startsWith("/vineela-koushik/")) {
+    return next();
+  }
+
   // PREVIEW DEPLOYMENTS ARE GATED LIKE PRODUCTION (owner decision 2026-09-27). Branch/PR previews
   // (<hash|branch>.stewardmd.pages.dev) used to serve the real web app with no gate "for QA", which put
   // the clinical app in a browser behind every URL Cloudflare posts on a PR. StewardMD is native-only
