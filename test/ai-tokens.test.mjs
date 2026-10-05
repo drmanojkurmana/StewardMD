@@ -97,11 +97,12 @@ test("a doctor is never quoted an ESTIMATED price", () => {
   // The est flag still guards any future model added before its price is published.
 });
 
-test("the active model stays gemini-2.5-flash unless deliberately changed", () => {
-  assert.equal(MODEL_HARD_DEFAULT, "gemini-2.5-flash");
-  assert.equal(resolveModel(null, {}), "gemini-2.5-flash", "no override, no env → 2.5-flash");
-  assert.equal(resolveModel(null, { GEMINI_MODEL: "" }), "gemini-2.5-flash");
-  assert.equal(resolveModel("not-a-model", {}), "gemini-2.5-flash", "a junk override cannot take effect");
+// Owner, 2026-10-05: the cheapest model in service (every Gemini 2.5 model retires on Vertex 2026-10-16).
+test("the active model is gemini-3.1-flash-lite unless deliberately changed", () => {
+  assert.equal(MODEL_HARD_DEFAULT, "gemini-3.1-flash-lite");
+  assert.equal(resolveModel(null, {}), "gemini-3.1-flash-lite", "no override, no env → 3.1-flash-lite");
+  assert.equal(resolveModel(null, { GEMINI_MODEL: "" }), "gemini-3.1-flash-lite");
+  assert.equal(resolveModel("not-a-model", {}), "gemini-3.1-flash-lite", "a junk override cannot take effect");
   assert.equal(rateConfirmed({}, resolveModel(null, {})), true, "so the rate card IS publishable by default");
 });
 

@@ -8,8 +8,7 @@
  *   • Plugin-style module registry — add a new AI module with ONE entry, no other code changes.
  *   • One immutable usage-record shape for EVERY module (metadata only — NEVER prompts/PHI).
  *   • Per-module daily quotas, all env-overridable without a deploy.
- *   • Cost model per provider/model (2.5 + 3.x), env-overridable (Gemini 3.x rates are estimates
- *     until Google publishes them — the email said "details to follow").
+ *   • Cost model per provider/model (2.5 + 3.x), env-overridable, at Google's published rates.
  *   • Admin-settable model override → env → default (the "switch models" control).
  */
 
@@ -93,9 +92,12 @@ export const MODEL_RATES = {
   "gemini-2.5-pro":         { in: 0.120, out: 0.960 },    // $1.25 / $10.00 (prompts up to 200k)
   "gemini-3.5-flash":       { in: 0.144, out: 0.864 },    // $1.50 / $9.00
   "gemini-3.5-flash-lite":  { in: 0.0288, out: 0.240 },   // $0.30 / $2.50
-  "gemini-3.1-flash-lite":  { in: 0.024, out: 0.144 },    // $0.25 / $1.50
+  "gemini-3.1-flash-lite":  { in: 0.024, out: 0.144 },    // $0.25 / $1.50 (the default since 2026-10-05)
+  // Google's named replacement for 2.5-flash. $0.75 / $3.75 through 2026-12-31, then $1.50 / $7.50 from
+  // 2027-01-01 (Gemini API pricing page, read 2026-10-05): update these figures on that date.
+  "gemini-3.6-flash":       { in: 0.072, out: 0.360 },
 };
-const DEFAULT_RATE = { in: 0.0288, out: 0.240 };            // = gemini-2.5-flash
+const DEFAULT_RATE = { in: 0.024, out: 0.144 };             // = gemini-3.1-flash-lite (the default model)
 export function modelRate(env, model) {
   const up = "AI_RATE_" + String(model || "").toUpperCase().replace(/[^A-Z0-9]/g, "_");
   const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
@@ -129,11 +131,42 @@ export function estCostInr(env, model, inTok, outTok, extras) {
 }
 
 // ---- model resolver: the "switch models" control. override (admin, KV) → env → hard default. ----
-export const MODEL_HARD_DEFAULT = "gemini-2.5-flash";
-export const ALLOWED_MODELS = Object.keys(MODEL_RATES);
-export function resolveModel(override, env) {
-  const pick = (m) => (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1 ? m : null);
-  return pick(override) || pick(env && env.GEMINI_MODEL) || MODEL_HARD_DEFAULT;
+// Owner, 2026-10-05: "choose the cheapest model next available". Google retires every Gemini 2.5 model
+// on Vertex on 2026-10-16 (Vertex release notes, 2026-04-02); the cheapest model that stays is
+// gemini-3.1-flash-lite ($0.25 / $1.50 per 1M), cheaper than the old 2.5-flash default ($0.30 / $2.50).
+export const MODEL_HARD_DEFAULT = "gemini-3.1-flash-lite";
+// Image reading (prescriptions, reports, certificates, fundus) and Scribe translation stay one tier up:
+// misreading a drug name is a safety risk, and the older flash-lite was measured to mistranslate clinical
+// Telugu. gemini-3.5-flash-lite costs what gemini-2.5-flash did ($0.30 / $2.50), so these paths cost no
+// more than before. Env VISION_MODEL / SCRIBE_MODEL still override.
+export const ACCURATE_MODEL = "gemini-3.5-flash-lite";
+// Shutdown dates (YYYY-MM-DD, Vertex). A retiring model is never picked up from env (a Pages variable
+// pinned to it would silently keep the old model, then break on the day); the owner's console override
+// may still choose it until the date, as the rollback, and is ignored from that day on.
+export const MODEL_RETIRES = {
+  "gemini-2.5-flash": "2026-10-16",
+  "gemini-2.5-flash-lite": "2026-10-16",
+  "gemini-2.5-pro": "2026-10-16",
+};
+function today(now) { return new Date(now == null ? Date.now() : now).toISOString().slice(0, 10); }
+export function isRetiring(model) { return Object.prototype.hasOwnProperty.call(MODEL_RETIRES, String(model || "")); }
+export function isRetired(model, now) { return isRetiring(model) && today(now) >= MODEL_RETIRES[model]; }
+// Models the console may select today (priced and not yet shut down).
+export function allowedModels(now) { return Object.keys(MODEL_RATES).filter((m) => !isRetired(m, now)); }
+export const ALLOWED_MODELS = Object.keys(MODEL_RATES).filter((m) => !isRetiring(m));
+// One rule for every env model knob (GEMINI_MODEL, MAIK_ROUTER_MODEL, VISION_MODEL, UPDATES_MODEL, ...):
+// a priced, non-retiring model is used as set; anything else (unset, unknown, retiring) gets `fallback`.
+export function envModel(value, fallback) {
+  const m = typeof value === "string" ? value.trim() : "";
+  return (m && ALLOWED_MODELS.indexOf(m) > -1) ? m : fallback;
+}
+// The console override: any priced model, a retiring one only until its shutdown date.
+export function overrideModel(value, now) {
+  const m = typeof value === "string" ? value.trim() : "";
+  return (m && allowedModels(now).indexOf(m) > -1) ? m : null;
+}
+export function resolveModel(override, env, now) {
+  return overrideModel(override, now) || envModel(env && env.GEMINI_MODEL, null) || MODEL_HARD_DEFAULT;
 }
 
 // ---- immutable usage record (metadata ONLY — never prompt/PHI/output). One shape for every module. ----
@@ -372,9 +405,9 @@ export async function doctorUsageSummary(env, store, doctorId, now) {
 export async function getModelOverride(store) {
   try { return store ? (await store.get("ai:model:override")) || null : null; } catch (e) { return null; }
 }
-export async function setModelOverride(store, model) {
+export async function setModelOverride(store, model, now) {
   if (!store) return false;
-  if (model && ALLOWED_MODELS.indexOf(model) === -1) return false; // only real, priced models
+  if (model && !overrideModel(model, now)) return false; // only real, priced models still in service
   try { if (model) await store.put("ai:model:override", model); else await store.delete("ai:model:override"); return true; } catch (e) { return false; }
 }
 
@@ -395,14 +428,10 @@ export async function setLimitOverride(store, moduleId, limit) {
 
 // ---- Phase 5: emergency override (kill switch), runtime budget, and admin audit log. ----
 export const EMERGENCY_MODES = ["off", "pause", "cheap"]; // off=normal, pause=block all AI, cheap=force cheapest
-// Confirmed live (2026-08-24, /api/ai/health's last_failover): "gemini-2.5-flash-lite" 404s on the
-// Developer API ("no longer available") - every call requesting it silently fails the lookup, THEN
-// retries on the slower Vertex fallback, which is worse than just resolving cleanly on a model that
-// still exists. "gemini-2.5-flash" (non-lite) is the confirmed-working default everywhere else in
-// this file, so it's the safe choice here too, even at a higher per-token rate, until a real
-// gemini-3.x-flash-lite id is verified end-to-end (it appears in ALLOWED_MODELS/MODEL_RATES as
-// "ESTIMATED", not yet confirmed live) and can replace this.
-export const CHEAP_MODEL = "gemini-2.5-flash";
+// The emergency "cheap" mode and the lightweight calls (router, viva judge, CliniX) use the cheapest
+// model in service. Was gemini-2.5-flash (2.5-flash-lite 404'd on the Developer API on 2026-08-24, and
+// every 2.5 model retires on Vertex on 2026-10-16).
+export const CHEAP_MODEL = MODEL_HARD_DEFAULT;
 export async function getEmergency(store) {
   try { const e = store ? await store.get("ai:emergency", "json") : null; return (e && EMERGENCY_MODES.indexOf(e.mode) > -1) ? e : { mode: "off" }; } catch (e) { return { mode: "off" }; }
 }

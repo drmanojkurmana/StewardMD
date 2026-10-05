@@ -11316,3 +11316,12 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 
 ## 2026-10-05 - Owner sign-offs: opt-out dx floors and adult normal values
 - **Owner, 2026-10-05:** signed off the opt-out floor re-baselines for `smd_gate_v2=0` and `smd_nlp_v2=0` (the two 2026-10-03 entries above; default floors untouched), ending the red `replay` check. Signed off the adult normal-values table (#1383) clinically and approved reuse of the cited ABIM (Jan 2026) and RCPA (2024) ranges; the Draft badge is removed.
+
+## 2026-10-05 - Cheapest Gemini in service: 3.1 Flash-Lite by default, 3.5 Flash-Lite where accuracy is safety
+- **Owner, 2026-10-05:** "choose the cheapest model next available". Every Gemini 2.5 model retires on Vertex
+  on 2026-10-16, so "Gemini 2.5 only" was not possible. Default and cheap model `gemini-3.1-flash-lite`
+  ($0.25 / $1.50 vs 2.5-flash $0.30 / $2.50). Image reading, Scribe and the router stay on
+  `gemini-3.5-flash-lite` (same price as the old default) because the flash-lite tier was measured to
+  mistranslate and misparse. Env pins to a 2.5 model are ignored; the console override can roll back to
+  2.5 until 2026-10-16. Quality of both 3.x models is unmeasured. [[AI Control Center]]
+

@@ -13,7 +13,7 @@
  *
  * Config (Pages env / encrypted secrets):
  *   AI_PROVIDER     (optional, 'vertex' [primary, default] | 'developer')
- *   GEMINI_MODEL    (optional, default 'gemini-2.5-flash'; do NOT use gemini-2.0-flash)
+ *   GEMINI_MODEL    (optional, default 'gemini-3.1-flash-lite'; a retiring 2.5 model here is ignored)
  *   Vertex (primary):  EITHER an API key, VERTEX_API_KEY (Vertex AI express mode, publisher path,
  *     no project or region in the URL; owner 2026-09-24, replaces the old account's project
  *     credentials), OR the project path: GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL.
@@ -32,11 +32,12 @@
  */
 
 // AI transport config. Selection ONLY via env.AI_PROVIDER ("vertex" [primary, default]
-// | "developer"). Model via env.GEMINI_MODEL (default gemini-2.5-flash; NOT 2.0).
+// | "developer"). Model via env.GEMINI_MODEL (default MODEL_HARD_DEFAULT, gemini-3.1-flash-lite; a retiring
+// model named there is ignored, see envModel in _ai_usage.js).
 import MaiKScope from "../../../kb/ai/maik-scope.js"; // shared clinician-only Intent Firewall (CJS UMD, default import)
 
 const DEV_HOST = "https://generativelanguage.googleapis.com/v1beta/models";
-const MODEL_DEFAULT = "gemini-2.5-flash";
+const MODEL_DEFAULT = MODEL_HARD_DEFAULT;
 
 // Server-side Intent Firewall (defense-in-depth): reject CONFIDENTLY non-clinical requests BEFORE any
 // LLM/web call, regardless of what the client did — "system prompts are not a security boundary".
@@ -121,7 +122,7 @@ function withCors(request, resp) {
  * Developer API. A future provider drops into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, meterEmail, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, MODEL_RETIRES, envModel, overrideModel, allowedModels, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, scribeChargeSec, isScribeKind, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR, tokenPackList } from "../../_credits.js";
 import { warmBillingCfg } from "../../_billingcfg.js";
 import { istDay } from "../../_counters.js";
@@ -158,19 +159,19 @@ import { sttFallbackOn, planClass, monthlyCredits, chargeCredits, signinBody } f
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
-function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL || MODEL_DEFAULT; }
-// Tiered routing (opt-in): the default model is already the FAST one (gemini-2.5-flash). When the owner
-// sets env.STRONG_MODEL (a valid model, e.g. gemini-2.5-pro), a genuinely COMPLEX/reasoning query escalates
+function modelId(env) { return (env && env.__modelOverride) || envModel(env && env.GEMINI_MODEL, MODEL_DEFAULT); }
+// Tiered routing (opt-in): the default model is already the cheap one (gemini-3.1-flash-lite). When the owner
+// sets env.STRONG_MODEL (a valid model, e.g. gemini-3.6-flash), a genuinely COMPLEX/reasoning query escalates
 // to it for better answers; everything else stays on flash. Unset STRONG_MODEL = current behaviour (no-op).
 // Cut from the tier-1 (bottom line only) call, which states its own shape (cost audit 2026-10-02).
 const TWO_TIER_RULE = "- TWO-TIER ANSWER: a CONCISE bottom line FIRST, then the marker @@MORE@@ alone on its own line, then the full detail. TIER 1 (before @@MORE@@) = the direct answer to what they asked PLUS everything safety-critical: red flags, contraindications, any time-critical 'refer / admit / treat now' action, key drug cautions. A rushed clinician must be SAFE reading tier 1 alone. TIER 2 (after @@MORE@@) = rationale, investigations, full dose/route/duration, evidence and named guidelines, the differential table, the 'In India' note and nuance. NEVER place a red flag, contraindication, or time-critical action after @@MORE@@. Use @@MORE@@ only when you genuinely have tier-2 depth; a simple lookup gets ONE short answer with NO @@MORE@@.\n";
-function strongModel(env) { const m = env && env.STRONG_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+function strongModel(env) { return envModel(env && env.STRONG_MODEL, null); }
 // FAST path (latency + cost): a SIMPLE (non-complex) query can run on a cheaper, non-"thinking" model.
 // gemini-2.5-flash keeps thinking even with thinkingBudget:0 (a known Google issue — thinking tokens
 // eat the output budget + wall-clock); gemini-2.5-flash-lite honours budget:0, so it is faster AND
 // ~2.4x cheaper. Set env.MAIK_FAST_MODEL=gemini-2.5-flash-lite to route simple queries there; complex
 // reasoning still uses the default (full flash). Unset = current behaviour (no-op). Validate quality first.
-function fastModel(env) { const m = env && env.MAIK_FAST_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+function fastModel(env) { return envModel(env && env.MAIK_FAST_MODEL, null); }
 function looksComplex(q) {
   q = String(q || ""); if (q.length > 160) return true;
   // Depth/reasoning cues -> keep on the full model. Anything NOT matching (a bare factual/dose/definition
@@ -182,7 +183,8 @@ function looksComplex(q) {
 // Vision/OCR uses a strong, FIXED multimodal model — deliberately NOT the admin text-model override
 // or the emergency "cheap" model. Misreading a drug name off a prescription is a safety risk, so
 // image/OCR reading must never be degraded by a text-cost setting. Env-tunable via VISION_MODEL.
-function visionModel(env) { const m = env && env.VISION_MODEL; return (typeof m === "string" && m) ? m : "gemini-2.5-flash"; }
+// ACCURATE_MODEL (gemini-3.5-flash-lite) is priced like the old gemini-2.5-flash default.
+function visionModel(env) { return envModel(env && env.VISION_MODEL, ACCURATE_MODEL); }
 
 // AI Control Center — which usage MODULE a route consumes (for the per-module daily cap + analytics).
 // explain is refined to maik_case when a computed differential is present. refine/route/verify and a
@@ -217,11 +219,12 @@ async function aiAdminAuthed(request, env, url) {
 // FAST model instead of inheriting the heavy answer model. Answer calls pass no model → unchanged.
 function modelFor(env, opts) { return (opts && opts.model) || modelId(env); }
 // MaiK Scribe voice kinds (assessment / opd-scribe / translate) can run on a cheaper model for cost —
-// set env.SCRIBE_MODEL (e.g. "gemini-2.5-flash-lite"); unset = the normal model. Only real, priced models honoured.
+// set env.SCRIBE_MODEL to a priced model; unset = ACCURATE_MODEL (gemini-3.5-flash-lite), one tier above
+// the cheap default, because translation is where the cheap tier failed. Only real, priced models honoured.
 // Default = the accurate model (null -> the normal modelId). flash-lite was measured to mistranslate
 // clinical terms (Telugu "prameham"/diabetes -> "premeal"; "2 days" -> "yesterday"), so it is NOT the
 // default — enable it per-deploy only via env.SCRIBE_MODEL if you accept that accuracy tradeoff for cost.
-function scribeModel(env) { const m = env && env.SCRIBE_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+function scribeModel(env) { return envModel(env && env.SCRIBE_MODEL, ACCURATE_MODEL); }
 // Router-intent normalisation: the parser occasionally emits a value outside its own enum ("interpretation",
 // "prevent") or a synonym; clamp to the canonical taxonomy so the client's intent->composer mapping is
 // deterministic. Generic — no disease specifics.
@@ -1256,7 +1259,7 @@ export async function onRequest(context) {
         _cfgCache = { emergency: _em, override: _ov, exp: _now + CFG_TTL_MS };
       }
       _emergency = _cfgCache.emergency;
-      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_cfgCache.override || undefined);
+      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (overrideModel(_cfgCache.override) || undefined);
     }
   } catch (e) {}
 
@@ -1443,11 +1446,11 @@ export async function onRequest(context) {
     if (request.method === "POST") {
       let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
       const ok = await setModelOverride(store, b.model || null);   // null/"" clears the override
-      const nv = await getModelOverride(store); env.__modelOverride = nv;   // reflect the just-set value
+      const nv = await getModelOverride(store); env.__modelOverride = overrideModel(nv) || undefined;   // reflect the just-set value
       await auditRecord(store, "model", "-> " + (nv || "default"), actorId, Date.now());
-      return json({ ok: ok, model: nv, effective: modelId(env), allowed: ALLOWED_MODELS });
+      return json({ ok: ok, model: nv, effective: modelId(env), allowed: allowedModels(), retires: MODEL_RETIRES });
     }
-    return json({ model: await getModelOverride(store), effective: modelId(env), allowed: ALLOWED_MODELS, rates: MODEL_RATES });
+    return json({ model: await getModelOverride(store), effective: modelId(env), allowed: allowedModels(), retires: MODEL_RETIRES, rates: MODEL_RATES });
   }
 
   // AI Control Center: owner-facing per-user report + per-user cap editor.
@@ -1943,14 +1946,14 @@ export async function onRequest(context) {
         if (wantStream && liveStream) {
           let up = null;
           const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
-          try { up = await geminiStreamUpstream(env, [{ text: grounded }], MAX_OUT, { system: sysA, temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
+          try { up = await geminiStreamUpstream(env, [{ text: grounded }], MAX_OUT, { system: sysA, temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? envModel(env.CLINIX_TUTOR_MODEL, CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
           if (up) return withCors(request, streamGeminiToSSE(up, function (full, usage) { try { _later(recordUsage(gate, { ...usageTokens({ usage: usage }, sysA.length + grounded.length, full), status: full ? "success" : "failed", noCount: _tier === 2 })); } catch (e) {}
             if (full) _countQuestion();
             // Populate the answer cache from the STREAM path too. waitUntil, because the response has
             // already been handed to the client by the time the last token lands (same pattern as the
             // router cache write below, which is why that one has always worked and this one did not).
-            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { filter: metaTalkStream(), idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
+            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { filter: metaTalkStream(), idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? envModel(env.CLINIX_TUTOR_MODEL, CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         let text;
         // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +
@@ -1974,7 +1977,7 @@ export async function onRequest(context) {
         // 3.3s of pure generation for a 68-token, "keep it short" answer with a 901-token prompt -
         // the model tier, not the output cap, was the real cost; the answer already finished at
         // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
-        try { text = await gen([{ text: grounded }], nsCap, { system: nsSys, temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
+        try { text = await gen([{ text: grounded }], nsCap, { system: nsSys, temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? envModel(env.CLINIX_TUTOR_MODEL, CHEAP_MODEL) : undefined }); }
         catch (e) { _later(recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" })); throw e; }
         text = scrubMetaTalk(text);   // never "the passage you sent is irrelevant" (2026-09-26); before the cache write
         _later(recordUsage(gate, { ...tokens(nsSys.length + grounded.length, text), status: text ? "success" : "failed", noCount: _tier === 2 }));
@@ -2074,13 +2077,13 @@ export async function onRequest(context) {
         "RULES: (1) Expand EVERY abbreviation/acronym to its most likely full canonical medical name given clinical context; resolve brands to generic drugs and lab/serology/imaging codes to their full name. (2) Infer intent from shorthand generically: rx/tx/'management' => treatment; 'prophylaxis'/'ppx'/'prevent'/'prevention' => prevention; a named DRUG with a dosing cue (dose, dosing, drip, infusion, push, bolus, mg, mcg, units, rate, /kg) => dose; dx or 'diagnosis' => investigation; a lab/serology/marker/imaging token or 'cutoff'/'titre'/'level'/'interpretation' => investigation; a named set of DIAGNOSTIC CRITERIA used to ESTABLISH a diagnosis (e.g. Duke, Brugada, Sgarbossa, Light's) => investigation; a SEVERITY / PROGNOSTIC / RISK score or a staging/grading system (e.g. Ranson, APACHE, CURB-65, Child-Pugh, NIHSS) => severity; a named published GUIDELINE/consensus => guideline; a procedure/operation token => procedure; a comparison ('X vs Y'), a patient scenario, or a 'latest/recent evidence' request => reasoning. (3) AMBIGUITY: whenever a SHORT acronym (<=4 letters) has more than one well-established medical meaning AND the surrounding words do NOT decisively fix exactly one, set ambiguous=true and list the top 2-3 canonical meanings in options (still set primaryConcept to the most likely). Only skip this when one meaning is clearly dominant in context. (4) Do NOT invent modifiers that aren't in the query. (5) Output JSON ONLY, no prose, no markdown. This must generalise to every specialty and every future term — reason from meaning, not from any fixed list. (6) SCOPE: StewardMD is a clinician-only clinical tool. If the query is NOT a medical/clinical/health question (coding, software/API integration, general knowledge, math, trivia, personal/legal/financial advice), set outOfScope=true and primaryConcept=\"\"; for ANY medical/clinical/health question set outOfScope=false.\n\n" +
         "Query: " + q;
       let text;
-      // Router model (T42): the SAME model the answers use (modelId), unless MAIK_ROUTER_MODEL pins one.
-      // It used to default to a hard-coded "gemini-2.5-flash", which Vertex returned NOT_FOUND for on
-      // new projects (functions/_wardsynq/maik-gateway.js notes the same) while answers ran on the
-      // configured model. flash-lite was measured to degrade parse quality (intent -9pts, entity
-      // -10pts) without cutting latency, so do not pin it here. JSON mode + a 512 cap so a model that
-      // thinks cannot spend the whole budget before the JSON (200 was cutting it off).
-      const routerModel = env.MAIK_ROUTER_MODEL || modelId(env);
+      // Router model (T42): ACCURATE_MODEL unless MAIK_ROUTER_MODEL pins one. 2.5 flash-lite was measured
+      // to degrade parse quality (intent -9pts, entity -10pts) without cutting latency, so the router
+      // stays one tier above the cheap answer model (2026-10-05); its calls are small, so the cost is
+      // too. It used to default to a hard-coded "gemini-2.5-flash", which Vertex returned NOT_FOUND for
+      // on new projects. JSON mode + a 512 cap so a model that thinks cannot spend the whole budget
+      // before the JSON (200 was cutting it off).
+      const routerModel = envModel(env.MAIK_ROUTER_MODEL, ACCURATE_MODEL);
       try { text = await gen([{ text: sys }], 512, { temperature: 0, model: routerModel, json: true }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "route-failed" }, 502); }
       await recordUsage(gate, { ...tokens(sys.length, text), status: "success" });
@@ -2136,7 +2139,7 @@ export async function onRequest(context) {
         "NEVER state a drug dose, route, or frequency in your feedback, even if the student's answer contains " +
         "one — that is out of scope for this judgement.\n\n" +
         "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + given;
-      const judgeModel = env.VIVA_JUDGE_MODEL || CHEAP_MODEL;
+      const judgeModel = envModel(env.VIVA_JUDGE_MODEL, CHEAP_MODEL);
       let text;
       try { text = await gen([{ text: sys }], 120, { temperature: 0, model: judgeModel }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "judge-failed" }, 502); }
@@ -2180,7 +2183,7 @@ export async function onRequest(context) {
         (body.opening ? ("PRESENTING COMPLAINT (in your words): " + clip(body.opening, 400) + "\n") : "") +
         "PATIENT RECORD:\n" + factLines + "\n\n" +
         "STUDENT'S QUESTION: " + clip(q, 300);
-      const model = env.CLINIX_PATIENT_MODEL || env.CLINIX_TUTOR_MODEL || CHEAP_MODEL;
+      const model = envModel(env.CLINIX_PATIENT_MODEL, envModel(env.CLINIX_TUTOR_MODEL, CHEAP_MODEL));
       let text;
       try { text = await gen([{ text: sys }], 160, { temperature: 0.3, model: model }); }
       catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "patient-failed" }, 502); }

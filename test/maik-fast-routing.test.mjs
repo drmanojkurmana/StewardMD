@@ -5,14 +5,16 @@ import assert from "node:assert";
 import fs from "node:fs"; import path from "node:path";
 import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const { ALLOWED_MODELS } = await import(path.join(ROOT, "functions/_ai_usage.js"));
+const { ALLOWED_MODELS, envModel, MODEL_HARD_DEFAULT } = await import(path.join(ROOT, "functions/_ai_usage.js"));
 globalThis.ALLOWED_MODELS = ALLOWED_MODELS;
+globalThis.envModel = envModel;
 const src = fs.readFileSync(path.join(ROOT, "functions/api/ai/[[path]].js"), "utf8");
 const grab = (re, n) => { const m = src.match(re); assert.ok(m, n + " found"); return (0, eval)("(" + m[0].replace(/^function \w+/, "function") + ")"); };
 const looksComplex = grab(/function looksComplex\(q\) \{[\s\S]*?\n\}/, "looksComplex");
 const strongModel  = grab(/function strongModel\(env\) \{[^}]*\}/, "strongModel");
 const fastModel    = grab(/function fastModel\(env\) \{[^}]*\}/, "fastModel");
-const FLASH = "gemini-2.5-flash", LITE = "gemini-2.5-flash-lite", PRO = "gemini-2.5-pro";
+// The default is now the cheapest model (gemini-3.1-flash-lite); "FLASH" below is that default.
+const FLASH = MODEL_HARD_DEFAULT, LITE = "gemini-3.5-flash-lite", PRO = "gemini-3.5-flash";
 function chooseModel(env, q) {                    // mirrors callGemini's prologue
   let opts = { complex: looksComplex(q) };
   if (opts && !opts.model) {
@@ -39,6 +41,12 @@ test("fast path: simple query -> flash-lite when MAIK_FAST_MODEL set; complex st
 test("no env set -> unchanged default (flash everywhere)", () => {
   assert.equal(chooseModel({}, "azithromycin dose").model, FLASH);
   assert.equal(chooseModel({}, "management of DKA").model, FLASH);
+});
+
+test("a retiring Gemini 2.5 model in STRONG_MODEL / MAIK_FAST_MODEL is ignored", () => {
+  const env = { MAIK_FAST_MODEL: "gemini-2.5-flash-lite", STRONG_MODEL: "gemini-2.5-pro" };
+  assert.equal(chooseModel(env, "azithromycin dose").model, FLASH);
+  assert.equal(chooseModel(env, "management of DKA").model, FLASH);
 });
 
 test("strong + fast can coexist: simple->lite, complex->pro", () => {

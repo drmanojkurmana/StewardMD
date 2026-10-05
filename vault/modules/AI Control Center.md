@@ -25,8 +25,29 @@ Gemini 3.x rows (Google's real figures are still "to follow"). `rateConfirmed(en
 dashboard's rate card: for an estimated model the card is WITHHELD (`ratesProvisional: true`) and the
 page says rates are being confirmed, rather than printing a guess. Entering both `AI_RATE_<M>_IN` and
 `_OUT` marks a model confirmed. Internal costing/metering still uses the estimate — this is about what
-is published to someone deciding what to spend. Active model stays `gemini-2.5-flash`
-(`MODEL_HARD_DEFAULT`), whose rates are real.
+is published to someone deciding what to spend.
+
+## Models (owner, 2026-10-05: "choose the cheapest model next available")
+Google retires every Gemini 2.5 model (Flash, Flash-Lite, Pro) on Vertex on **2026-10-16** (Vertex release
+notes, 2026-04-02). On the Gemini Developer API 2.5 has no date but is limited to existing users.
+- `MODEL_HARD_DEFAULT` = `CHEAP_MODEL` = **`gemini-3.1-flash-lite`** ($0.25 / $1.50 per 1M): MaiK answers,
+  emergency "cheap" mode, viva judge, CliniX tutor/patient, Updates summaries (primary).
+- `ACCURATE_MODEL` = **`gemini-3.5-flash-lite`** ($0.30 / $2.50, what 2.5-flash cost): image/OCR reading
+  (`visionModel`, FundX), Scribe kinds (`scribeModel`; 2.5 flash-lite mistranslated clinical Telugu), the
+  `/refine` router (2.5 flash-lite parsed worse: intent -9pts, entity -10pts), digest, summary fallback.
+  Neither 3.x model's clinical quality is measured yet: run the MaiK eval on both.
+- `MODEL_RETIRES` (`_ai_usage.js`): a retiring model in ANY env knob (`GEMINI_MODEL`, `MAIK_ROUTER_MODEL`,
+  `VISION_MODEL`, `SCRIBE_MODEL`, `STRONG_MODEL`, `MAIK_FAST_MODEL`, `UPDATES_*`, `FUNDX_MODEL`, CliniX/viva)
+  is ignored through `envModel()`, so a stale Pages variable cannot keep 2.5 alive or break on the day.
+  The owner console override may still pick a 2.5 model until 2026-10-16 (the rollback), then it is ignored.
+- `gemini-3.6-flash` priced at $0.75 / $3.75 until 2026-12-31; Google doubles it to $1.50 / $7.50 on
+  2027-01-01: update `MODEL_RATES` that day.
+- Not changed: `verify-doctor.js` (rolling `gemini-flash-latest` alias on the Developer API), the WardSynQ
+  gateway registry (3.6 Flash / 3.1 Pro, flags OFF), `voice-worker` (separate worker), `_usage.js` budget
+  breaker prices (still 2.5-flash rates, so it over-counts text spend: conservative), and
+  `CONNECT_AGENT_MODEL` (owner-set env; check it does not name a 2.5 model).
+- Gemini 3 note: Google recommends temperature 1.0 and warns lower values can loop; MaiK still sends
+  0.2 to 0.45. Watch for repeated text in the eval.
 
 `GET /api/ai/usage` (More → AI Usage) returns, for the caller only: today's requests/tokens/spend,
 per-module counts, `capsEnforced`, wallet `balanceMt`, `dailyFreeMt`, and a `rates` card priced off

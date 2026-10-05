@@ -4,7 +4,7 @@
  * a throwaway RSA-2048 key exercises the REAL self-signed-JWT signing (Web Crypto);
  * the OAuth token endpoint, Vertex generateContent, and Developer generateContent are
  * all stubbed. Asserts provider selection (AI_PROVIDER), Vertex→Developer failover,
- * OAuth token caching, gemini-2.5-flash default, and the /status shape.
+ * OAuth token caching, gemini-3.1-flash-lite default, and the /status shape.
  *
  * USAGE: node test/run-ai-providers.mjs   (exit 0 = pass)
  */
@@ -52,7 +52,7 @@ try {
   let r = await (await onRequest({ request: req({ package: pkg }), env: VERTEX_ENV, params: { path: ["explain"] } })).json();
   ok(r.text === "VERTEX-OK", "default → Vertex primary used", r.text);
   ok(calls.token === 1 && calls.vertex === 1 && calls.dev === 0, "Vertex path: 1 token exchange + 1 vertex call, no dev", JSON.stringify({ token: calls.token, vertex: calls.vertex, dev: calls.dev }));
-  ok(/us-central1-aiplatform\.googleapis\.com\/v1\/projects\/stewardmd-498ec\/locations\/us-central1\/publishers\/google\/models\/gemini-2\.5-flash:generateContent/.test(calls.vertexUrl), "Vertex endpoint + gemini-2.5-flash default", calls.vertexUrl.slice(0, 90) + "…");
+  ok(/us-central1-aiplatform\.googleapis\.com\/v1\/projects\/stewardmd-498ec\/locations\/us-central1\/publishers\/google\/models\/gemini-3\.1-flash-lite:generateContent/.test(calls.vertexUrl), "Vertex endpoint + gemini-2.5-flash default", calls.vertexUrl.slice(0, 90) + "…");
   ok(calls.vertexAuth === "Bearer tok-abc", "Vertex called with OAuth Bearer token", calls.vertexAuth);
 
   // 2) OAuth token CACHING — second call reuses token (no new token exchange)
@@ -67,7 +67,7 @@ try {
   // 3b) the failover was logged internally (previous/new provider, reason, timestamp, model)
   let h = await (await onRequest({ request: new Request("https://stewardmd.in/api/ai/health", { headers: { Origin: "https://stewardmd.in" } }), env: { ...VERTEX_ENV, GEMINI_API_KEY: "dev-key" }, params: { path: ["health"] } })).json();
   const lf = h.last_failover;
-  ok(lf && lf.from === "vertex" && lf.to === "developer" && /5xx|unavailable/i.test(lf.reason) && lf.timestamp && lf.model === "gemini-2.5-flash", "failover recorded (from/to/reason/timestamp/model)", JSON.stringify(lf));
+  ok(lf && lf.from === "vertex" && lf.to === "developer" && /5xx|unavailable/i.test(lf.reason) && lf.timestamp && lf.model === "gemini-3.1-flash-lite", "failover recorded (from/to/reason/timestamp/model)", JSON.stringify(lf));
 
   // 4) AI_PROVIDER=developer → developer only, no Vertex/token traffic
   stub();
@@ -77,7 +77,7 @@ try {
   // 5) status shape (Vertex configured)
   stub();
   let s = await (await onRequest({ request: statusReq(), env: VERTEX_ENV, params: { path: ["status"] } })).json();
-  ok(s.enabled === true && s.provider === "vertex" && s.vertex === true && s.model === "gemini-2.5-flash", "/status reports vertex primary + model", JSON.stringify(s));
+  ok(s.enabled === true && s.provider === "vertex" && s.vertex === true && s.model === "gemini-3.1-flash-lite", "/status reports vertex primary + model", JSON.stringify(s));
 
   // 6) no providers → disabled + explain fails safe (client falls back to rule-based)
   s = await (await onRequest({ request: statusReq(), env: {}, params: { path: ["status"] } })).json();
@@ -92,7 +92,7 @@ try {
 
   // 8) /api/ai/health endpoint shape (Vertex primary + Developer hot standby configured)
   h = await (await onRequest({ request: new Request("https://stewardmd.in/api/ai/health", { headers: { Origin: "https://stewardmd.in" } }), env: { ...VERTEX_ENV, GEMINI_API_KEY: "dev-key" }, params: { path: ["health"] } })).json();
-  ok(h.enabled === true && h.provider === "vertex" && h.fallback_available === true && h.fallback_provider === "developer" && h.model === "gemini-2.5-flash" && h.token_cache === true && h.vertex_status === "configured" && h.developer_status === "configured" && h.authentication === "Service Account JWT", "/api/ai/health returns full shape", JSON.stringify(h).slice(0, 200));
+  ok(h.enabled === true && h.provider === "vertex" && h.fallback_available === true && h.fallback_provider === "developer" && h.model === "gemini-3.1-flash-lite" && h.token_cache === true && h.vertex_status === "configured" && h.developer_status === "configured" && h.authentication === "Service Account JWT", "/api/ai/health returns full shape", JSON.stringify(h).slice(0, 200));
 
   globalThis.fetch = realFetch;
   console.log(`\n${fails === 0 ? "ALL GREEN — provider abstraction: Vertex primary, Developer failover, token cached, 2.5-flash default" : fails + " failed"}`);
