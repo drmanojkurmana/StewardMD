@@ -9,7 +9,9 @@
  * - a refused discharge shows why and keeps the form;
  * - Raise invoice with nothing priced names the charges and links to the Price list;
  * - the discharge summary shows the hospital's clock, real icons, Sign clear of Report Bug, and leaves with the ward;
- * - a Patient copy prints without the page behind the ward.
+ * - a Patient copy prints without the page behind the ward;
+ * - (owner decision 2026-10-04) each open medicine is a "continue at home" choice, none ticked by default, sent as
+ *   continueOrderIds, locked for someone who cannot decide it, and laid out at 390 px and tablet width.
  * Prints PASS/FAIL per step; exits 1 on any FAIL.
  */
 import { launch } from "./wardsynq-site-cdp.mjs";
@@ -25,7 +27,8 @@ await mkdir(SHOTS, { recursive: true });
 const PRINT = { languagesEnabled: false, timeZone: "Asia/Kolkata", utcOffsetMinutes: 330 };
 const CHECKLIST = {
   bill: { state: "unbilled", balance: 0, unbilled: [], unpriced: [{ display: "Bed per day, GAS", code: "BED-DAY" }] },
-  openOrders: [{ kind: "medication", id: "rx1", drug: "Paracetamol 1 g", status: "active" }],
+  openOrders: [{ kind: "medication", id: "rx1", drug: "Paracetamol 1 g", status: "active" },
+    { kind: "medication", id: "rx2", drug: "Metoprolol succinate extended release", dose: { value: 25, unit: "mg" }, frequency: "once daily", status: "active" }],
   pendingResults: [{ kind: "investigation", id: "sr1", display: "Chest X-ray PA view", status: "no result yet" }], unreadable: [],
 };
 const SUMMARY = {
@@ -93,6 +96,46 @@ try {
   await ev(SEL + ` WARD._dispatch("wardcloseopen"); return 1;`);
   await step("Discharge opens an in-app form with the server's checklist, no browser prompt", async () =>
     (await until(`var t = document.getElementById("smdWard").innerText; return t.indexOf("Paracetamol 1 g") >= 0 && t.indexOf("Chest X-ray PA view") >= 0 && t.indexOf("Bed per day, GAS") >= 0 && !window.__prompted ? true : null;`, 8000)) === true || "checklist not shown");
+  const homeText = () => ev(`var g = document.querySelector("#smdWard .w-take-home"); return g ? g.innerText : "";`);
+  await step("Medicines: each open medicine is a continue-at-home choice, none ticked, and the screen says all stop", async () => {
+    const boxes = await ev(`return Array.prototype.map.call(document.querySelectorAll('#smdWard .w-take-home input[type="checkbox"]'), function (i) { return i.getAttribute("data-w-act") + ":" + i.checked + ":" + i.disabled; }).join(",");`);
+    const t = await homeText();
+    return boxes === "dccontinue:rx1:false:false,dccontinue:rx2:false:false" && /every medicine stops/.test(t) && /25 mg, once daily/.test(t) && !/Continues at home/i.test(t) || boxes + " | " + t;
+  });
+  await step("Ticking one says it continues at home, counts it, and survives a repaint; the row label toggles too", async () => {
+    await ev(`var i = document.querySelector('[data-w-act="dccontinue:rx2"]'); i.focus(); i.click(); return 1;`);
+    const t = await homeText();
+    const on = await ev(`return document.querySelector('[data-w-act="dccontinue:rx2"]').checked && document.activeElement && document.activeElement.getAttribute("data-w-act");`);
+    if (!(/1 of 2 continue at home/.test(t) && /Continues at home/i.test(t) && on === "dccontinue:rx2")) return t + " | focus " + on;
+    await ev(`document.querySelector('[data-w-act="dccontinue:rx1"]').closest("label").querySelector("b").click(); return 1;`);
+    const both = await homeText();
+    await ev(`document.querySelector('[data-w-act="dccontinue:rx1"]').click(); return 1;`);
+    return /2 of 2/.test(both) && /1 of 2/.test(await homeText()) || both;
+  });
+  await step("Someone who cannot decide sees the choices locked and why", async () => {
+    await ev(`WARD._st.dc.canOverride = false; WARD._dispatch("dismiss"); return 1;`);
+    const r = await ev(`var b = document.querySelectorAll('#smdWard .w-take-home input'); for (var i = 0; i < b.length; i++) if (!b[i].disabled) return "enabled"; return 1;`);
+    await ev(`document.querySelector('[data-w-act="dccontinue:rx1"]').click(); return 1;`);
+    const t = await homeText();
+    await ev(`WARD._st.dc.canOverride = true; WARD._dispatch("dismiss"); return 1;`);
+    return r === 1 && /Only a treating clinician decides/.test(t) && !/2 of 2/.test(await homeText()) || r + " | " + t;
+  });
+  for (const [w, h, name] of [[390, 844, "phone-390"], [820, 1180, "tablet-820"]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: false });   // the harness page has no viewport meta
+    await ev(`WARD._dispatch("dismiss"); var g = document.querySelector("#smdWard .w-take-home"); if (g) g.scrollIntoView({ block: "start" }); return 1;`);
+    await step(`Medicines at ${w} px: no sideways scroll, rows at least 44 px, pill and name inside the row`, async () => ev(`
+      if (document.documentElement.scrollWidth > ${w} + 1) return "page scrolls sideways: " + document.documentElement.scrollWidth;
+      var rows = document.querySelectorAll("#smdWard .w-home-row"); if (!rows.length) return "no rows";
+      for (var i = 0; i < rows.length; i++) {
+        var r = rows[i].getBoundingClientRect(), p = rows[i].querySelector(".w-st").getBoundingClientRect(), d = rows[i].querySelector(".w-home-drug").getBoundingClientRect();
+        if (r.height < 44) return "row " + i + " is " + r.height + " px";
+        if (p.right > r.right + 0.5 || p.bottom > r.bottom + 0.5 || (p.top < d.bottom && d.right > p.left + 0.5)) return "row " + i + " overlaps: " + JSON.stringify([r.right, p.left, p.right, d.right]);
+      }
+      return true;`));
+    await b.shot(SHOTS + "/discharge-take-home-" + name + ".png");
+  }
+  await call("Emulation.clearDeviceMetricsOverride", {});
+  await ev(`WARD._dispatch("dismiss"); return 1;`);
   await step("Picking 'Transferred to another hospital' asks for the receiving hospital", async () => {
     await setField('[data-w-dc="disposition"]', "transferred");
     return (await until(`return document.querySelector('[data-w-dc="destination"]') ? true : null;`, 3000)) === true || "no destination field";
@@ -118,6 +161,7 @@ try {
     const sent = posts.filter((x) => x.path === "/ward/discharge").pop();
     const bd = sent && sent.body || {};
     return ok === true && bd.disposition === "transferred" && bd.destination === "City Cardiac Centre" && bd.billDeferredReason === "Insurer settles directly" && /chases/.test(bd.overrideReason || "")
+      && JSON.stringify(bd.continueOrderIds) === '["rx2"]'
       || JSON.stringify(bd) + " " + (await ev(`return JSON.stringify({ view: WARD._st.view, note: WARD._st.note, err: WARD._st.err });`));
   });
   await b.shot(SHOTS + "/after-discharge.png");

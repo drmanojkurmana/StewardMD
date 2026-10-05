@@ -104,6 +104,7 @@ try {
   const u = await J(READ);
   ok(u.sheet === true, "the AI Usage sheet opens and paints");
   ok(u.balance === "250k", `the MaiK Token wallet leads the screen (got "${u.balance}")`);
+  ok((u.text.match(/250k/g) || []).length === 1, `the wallet value appears exactly once in the sheet, not doubled by the number roll (${(u.text.match(/250k/g) || []).length})`);
   ok(u.buy === true, "there is a Buy MaiK Tokens button on it");
   // Priced at the store's entry pack (Boost: ₹49 for 50,000), not at the AI cost rate (mtPerInr gives ₹125).
   ok(/Worth about ₹245 at the (store|App Store|Google Play) price \(₹49 for 50,000 tokens\)/.test(u.text || ""), `the wallet says what the balance is worth at the store price (${(u.text || "").slice(0, 160)})`);

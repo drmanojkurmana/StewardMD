@@ -76,6 +76,19 @@ test("model picks among numbered options through the fixed tool", async () => {
   assert.match(m.prompts[0].prompt, /0\. none of these/);
 });
 
+test("engine.agree: a second call with the options rotated must pick the same option, else pass", async () => {
+  store.smd_edge = "1";
+  const q = "show me the resistance patterns antibiogram";
+  const byTitle = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
+  const m = mock(byTitle); m.agree = true; E.setEngine(m);
+  const r = await E.route(q);
+  assert.equal(r && r.id, "antibiogram"); assert.equal(m.prompts.length, 2, "two calls");
+  assert.notEqual(m.prompts[0].prompt, m.prompts[1].prompt, "options rotated");
+  const first = mock(() => needleReply(1)); first.agree = true; E.setEngine(first);   // position bias: always "1"
+  assert.equal(await E.route(q), null, "disagreement passes to the safe path");
+  assert.equal(E.needleAdapter({}, { agree: true }).agree, true);
+});
+
 test("option 0, out-of-range, wrong tool, low confidence, garbage: all pass through (null)", async () => {
   store.smd_edge = "1";
   const q = "show me the resistance patterns antibiogram";
@@ -129,6 +142,27 @@ test("ICD: the screen request is not a code lookup, and a diagnosis keeps its wo
   assert.equal(E.candidates("icd for open fracture of tibia")[0].id, "open fracture tibia", "'open' is part of the diagnosis");
   assert.equal(E.candidates("icd code for type 2 diabetes")[0].id, "type 2 diabetes");
 });
+// Found by the frozen test set edge-router-3 (test3.jsonl): rules opened a card on these.
+test("negation guard: Hinglish and Tenglish negations pass, clinical 'nahi' does not", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["antibiogram mat kholo", "icu nahi chahiye", "insulin mat dikhao", "icu nahin chahiye", "antibiogram vaddu", "icu teravaddu", "antibiogram chupinchavaddu"]) {
+    assert.equal(E.negated(q), true, q);
+    assert.equal(E.rules(q), null, q);
+    assert.equal(await E.route(q), null, q);
+  }
+  assert.equal(m.prompts.length, 0);
+  for (const q of ["fever nahi utar raha paracetamol dose", "urine output nahi hai crcl", "mat 2 lagao"]) assert.equal(E.negated(q), false, q);
+});
+test("ICD: naming the Search ICD tool never looks up the navigation words", () => {
+  store.smd_edge = "1";
+  for (const q of ["navigate to search icd", "search icd section", "jump to search icd", "search icd wala page kholo", "search icd page ki vellu", "icd search kholo"]) {
+    assert.ok(!E.candidates(q).some((c) => c.kind === "icd"), q);
+    assert.ok(!E.rules(q) || E.rules(q).kind !== "icd", q);
+  }
+  assert.equal(E.candidates("search icd for type 2 diabetes")[0].id, "type 2 diabetes", "a real lookup through the tool name still works");
+  assert.equal(E.rules("icd code for type 2 diabetes").kind, "icd");
+});
 
 test("llamaAdapter: per-call grammar limited to the options offered, greedy, parses {option}", async () => {
   const calls = { load: [], gen: [], release: 0 };
@@ -145,6 +179,13 @@ test("llamaAdapter: per-call grammar limited to the options offered, greedy, par
   assert.equal(calls.gen[0].grammar, 'root ::= "{\\"option\\":" [0-3] "}"', "only 0..3 can be produced");
   assert.equal(E.optionFrom(r).option, 2);
   await eng.release(); assert.equal(calls.release, 1);
+});
+
+test("llamaAdapter: FunctionGemma load args fit the +400 MB budget (small context, small batches, q8 KV)", async () => {
+  const load = [];
+  const plugin = { load: (a) => { load.push(a); return Promise.resolve({ loaded: true }); }, generate: () => Promise.resolve({ text: '{"option":1}' }) };
+  await E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" }).load();
+  assert.deepEqual(load[0], { path: "/m/fg.gguf", nCtx: 512, nBatch: 64, nUbatch: 64, nThreadsBatch: 4, kvQ8: true });
 });
 
 test("llamaAdapter: forced prefix + digit pick, confidence from the plugin, grammar kept as the fallback", async () => {
@@ -200,6 +241,32 @@ test("needleAdapter: every complete() starts from a fresh needle_init (configure
   assert.deepEqual(calls, ["load", "configure", "configure", "complete", "configure", "complete", "configure", "complete"]);
 });
 
+// Pixel 9, OTA v174: :edge died outside the runtime (low-memory killer; Needle.kill() by hand) and
+// restarted empty. Every later configure failed "needle_init: no model loaded" and Edge stayed dead
+// until the app restarted, because the runtime still believed loaded = true.
+test("needleAdapter + runtime: a restarted :edge with no weights reloads once and the call still runs", async () => {
+  let model = false, loads = 0, configures = 0;
+  const plugin = {
+    load: () => { loads++; model = true; return Promise.resolve({ rc: 0 }); },
+    configure: () => { configures++; if (!model) { const e = new Error("needle_init: no model loaded"); e.code = "ENGINE_ERROR"; return Promise.reject(e); } return Promise.resolve({ rc: 0 }); },
+    complete: () => Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) })
+  };
+  const rt = globalThis.SMD_EDGE_RUNTIME.create({ engine: E.needleAdapter(plugin, { killable: true }) });
+  assert.equal((await rt.run({ prompt: "p1" })).status, "ok");
+  assert.equal(loads, 1);
+  model = false;                                      // process died and came back with no model
+  const r = await rt.run({ prompt: "p2" });
+  assert.equal(r.status, "ok", "reloaded and ran, not error");
+  assert.equal(r.result.function_calls[0].arguments.option, 1);
+  assert.equal(loads, 2);
+  assert.equal(rt.status().loaded, true);
+  // No loop: weights that never stick give one reload attempt, then the call gives up.
+  plugin.load = () => { loads++; return Promise.resolve({ rc: 0 }); };
+  model = false; const before = loads;
+  assert.equal((await rt.run({ prompt: "p3" })).status, "unavailable", "the reload itself fails: rules path");
+  assert.equal(loads - before, 1, "exactly one reload per call");
+});
+
 test("Layer 0 widened: an exactly named tool or generic drug, in any of the three languages, is a rules answer", async () => {
   store.smd_edge = "1";
   const m = mock(() => needleReply(1)); E.setEngine(m);
@@ -211,6 +278,45 @@ test("Layer 0 widened: an exactly named tool or generic drug, in any of the thre
   assert.equal(E.layer0(E.candidates("resistance patterns antibiogram")), false, "extra words: the model decides");
   assert.equal(E.layer0(E.candidates("do not open antibiogram")), false);
   assert.equal(await E.route("do not open antibiogram"), null, "negation still wins");
+});
+
+test("KB page: a navigation word plus exactly a disease name or alias is a rules answer; anything more is not", async () => {
+  // Mock in the shape of MaiKKB (kb/ai/maik-kb.js): exact name match is confident, an intent tail is stripped by
+  // _diseasePhrase, "tb" is a listed alias. "antibiogram" is a contrived disease to collide with the home tool.
+  const NAMES = { pneumonia: "Pneumonia", sepsis: "Sepsis", "pulmonary tuberculosis": "Pulmonary tuberculosis", antibiogram: "Antibiogram" };
+  const ALIAS = { tb: "pulmonary tuberculosis" };
+  const phrase = (q) => { const p = q.replace(/\s+(antibiotics?|dose|treatment)\b.*$/, "").replace(/^(how to treat|what is)\s+/, ""); return ALIAS[p] || p; };
+  globalThis.MaiKKB = {
+    _alias: ALIAS, _diseasePhrase: phrase,
+    resolveTarget: (q) => {
+      const p = phrase(q);
+      if (NAMES[p]) return { id: p.toUpperCase().replace(/ /g, "_"), name: NAMES[p], confident: true, match: "exact" };
+      const hit = Object.keys(NAMES).find((k) => q.includes(k));
+      return hit ? { id: hit.toUpperCase(), name: NAMES[hit], confident: false, match: "fallback" } : null;
+    }
+  };
+  globalThis.SMD_REASON = { hasDiseaseRef: () => true };
+  try {
+    store.smd_edge = "1";
+    const m = mock(() => needleReply(1)); E.setEngine(m);
+    for (const [q, id] of [["open pneumonia page", "PNEUMONIA"], ["show me sepsis", "SEPSIS"], ["sepsis kholo", "SEPSIS"], ["pneumonia dikhao", "PNEUMONIA"],
+      ["sepsis teruvu", "SEPSIS"], ["pneumonia chupinchu", "PNEUMONIA"], ["tb chupinchu", "PULMONARY_TUBERCULOSIS"]]) {
+      const r = await E.route(q);
+      assert.equal(r && r.kind, "kb", q); assert.equal(r.id, id, q); assert.equal(r.source, "rules", q);
+      assert.equal(E.rules(q) && E.rules(q).kind, "kb", q);
+    }
+    assert.equal(m.prompts.length, 0, "no model call for an exact disease page");
+    const kbOf = (q) => E.candidates(q).find((c) => c.kind === "kb");
+    for (const q of ["pneumonia antibiotics dose", "open pneumonia antibiotics dose", "how to treat sepsis", "open pneumonia sepsis"]) {
+      assert.equal(E.layer0(E.candidates(q)), false, q);
+      assert.equal(!!(kbOf(q) && kbOf(q).exact), false, q);
+    }
+    assert.equal(!!kbOf("how to treat sepsis"), true, "question still offers the KB option to the model");
+    assert.equal(!!(kbOf("open antibiogram") && kbOf("open antibiogram").exact), false, "one name, two things: nothing exact");
+    assert.equal(E.candidates("open antibiogram").some((c) => c.exact), false);
+    assert.equal(E.rules("don't open sepsis page"), null, "negation");
+    assert.equal(await E.route("do not open the pneumonia page"), null, "negation still wins");
+  } finally { delete globalThis.MaiKKB; delete globalThis.SMD_REASON; }
 });
 
 test("back-off (plan A0.5): low memory, MaiK generating or Whisper decoding skip the model; heat only warns", async () => {
@@ -274,4 +380,188 @@ test("renderer gone before the first request (A0.5): the FIRST model-routed requ
   } finally {
     delete globalThis.Capacitor; globalThis.SMD_EDGE = prev;
   }
+});
+
+test("rules(): Layer 0 alone, synchronous, for MaiK to call before follow-up resolution", () => {
+  store.smd_edge = "1";
+  const r = E.rules("antibiogram kholo");
+  assert.equal(r && r.kind, "tool"); assert.equal(r.id, "antibiogram"); assert.equal(r.source, "rules");
+  assert.equal(E.rules("icd code for type 2 diabetes").kind, "icd");
+  assert.equal(E.rules("show me the resistance patterns antibiogram"), null, "not exact: the model path, not rules()");
+  assert.equal(E.rules("don't open antibiogram"), null, "negation");
+  store.smd_edge = "0"; assert.equal(E.rules("antibiogram kholo"), null, "flag off");
+  store.smd_edge = "1";
+});
+
+// Engine choice (owner, 2026-10-04): smd_edge_engine = needle (default) | functiongemma | rules.
+function nativeWith({ fgFile = false } = {}) {
+  const calls = { needleRelease: 0, llamaLoad: [] };
+  const Needle = { available: () => Promise.resolve({ thermal: 0, lowMemory: false, availMB: 4000 }), load: () => Promise.resolve(),
+    configure: () => Promise.resolve(), complete: () => Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) }), release: () => { calls.needleRelease++; return Promise.resolve(); } };
+  const Llama = { load: (a) => { calls.llamaLoad.push(a); return Promise.resolve({ loaded: true }); },
+    generate: () => Promise.resolve({ text: '{"option":1}', p: 0.9 }), release: () => Promise.resolve() };
+  globalThis.Capacitor = { isNativePlatform: () => true, getPlatform: () => "android", Plugins: { Needle, Llama } };
+  globalThis.SMD_MAIK_MODELS = { installedCached: (id) => fgFile && id === "edge-functiongemma", pathFor: () => Promise.resolve("/data/maik-models/functiongemma-270m-it-q8_0.gguf") };
+  return calls;
+}
+function cleanNative() { delete globalThis.Capacitor; delete globalThis.SMD_MAIK_MODELS; delete globalThis.SMD_LLAMA_HOLDER; delete store.smd_edge_engine; E.setEngine(null); }
+
+test("engine choice: default is needle", () => {
+  delete store.smd_edge; delete store.smd_edge_engine; nativeWith();
+  try {
+    assert.equal(E.engineChoice(), "needle");
+    assert.equal(E.autoEngine().name, "needle");
+    store.smd_edge_engine = "nonsense";
+    assert.equal(E.engineChoice(), "needle", "an unknown value is the default");
+  } finally { cleanNative(); }
+});
+
+test("engine choice: functiongemma with no file on the phone gives no engine, and the rules still answer", async () => {
+  delete store.smd_edge; nativeWith({ fgFile: false });
+  try {
+    assert.equal(E.setEngineChoice("functiongemma"), "functiongemma");
+    assert.equal(E.autoEngine(), null);
+    assert.equal(E.engineName(), null); assert.equal(E.available(), false);
+    const r = await E.route("antibiogram kholo");
+    assert.equal(r && r.source, "rules"); assert.equal(r.id, "antibiogram");
+  } finally { cleanNative(); }
+});
+
+test("engine choice: functiongemma with the file gives the llama adapter on the downloaded path", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  try {
+    E.setEngineChoice("functiongemma");
+    assert.equal(E.engineName(), "llama");
+    const r = await E.autoEngine().complete({ prompt: "x", nOptions: 2 });
+    assert.deepEqual(r, { option: 1, confidence: 0.9 });
+    assert.equal(calls.llamaLoad[0].path, "/data/maik-models/functiongemma-270m-it-q8_0.gguf");
+    assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "MaiK sees another holder and reloads its pack");
+  } finally { cleanNative(); }
+});
+
+test("engine choice: rules gives no engine", () => {
+  delete store.smd_edge; nativeWith({ fgFile: true });
+  try {
+    store.smd_edge_engine = "rules";
+    assert.equal(E.autoEngine(), null);
+    E.setEngineChoice("rules"); assert.equal(E.engineName(), null);
+  } finally { cleanNative(); }
+});
+
+test("setEngineChoice switches live, releasing the old engine", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  try {
+    E.setEngineChoice("needle"); assert.equal(E.engineName(), "needle");
+    E.setEngineChoice("functiongemma"); assert.equal(E.engineName(), "llama");
+    await new Promise((r) => setTimeout(r, 0));
+    assert.equal(calls.needleRelease, 1, "Needle released on the switch");
+    E.setEngineChoice("rules"); assert.equal(E.engineName(), null);
+    E.setEngineChoice("needle"); assert.equal(E.engineName(), "needle");
+    assert.equal(store.smd_edge_engine, "needle");
+  } finally { cleanNative(); }
+});
+
+test("llamaAdapter never picks with, or releases, a model MaiK loaded", async () => {
+  const calls = { gen: 0, release: 0 };
+  let maikTakes = false;
+  const plugin = { load: () => { if (maikTakes) globalThis.SMD_LLAMA_HOLDER = "maik"; return Promise.resolve(); },
+    generate: () => { calls.gen++; return Promise.resolve({ text: '{"option":1}' }); }, release: () => { calls.release++; return Promise.resolve(); } };
+  try {
+    const eng = E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" });
+    maikTakes = true;   // MaiK loads its pack while ours is loading
+    await assert.rejects(eng.complete({ prompt: "x", nOptions: 2 }), /taken by MaiK/);
+    assert.equal(calls.gen, 0, "no pick with MaiK's model");
+    await eng.release(); assert.equal(calls.release, 0, "MaiK's pack is not unloaded");
+    maikTakes = false;
+    await eng.complete({ prompt: "x", nOptions: 2 }); assert.equal(calls.gen, 1, "reloads and picks once it holds the plugin");
+    globalThis.SMD_LLAMA_HOLDER = "maik";   // MaiK answered in between
+    await eng.complete({ prompt: "y", nOptions: 2 }); assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "reloaded, not reused");
+  } finally { delete globalThis.SMD_LLAMA_HOLDER; }
+});
+
+// Background warm-up (FunctionGemma only): the first iOS load is 17 s (Metal shader compile), past the
+// 8 s cold budget, so it is loaded + one throwaway pick at idle, outside any request.
+test("warm: FunctionGemma loads and picks once when idle; the next request finds it warm", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  let gens = 0; globalThis.Capacitor.Plugins.Llama.generate = () => { gens++; return Promise.resolve({ text: '{"option":1}', p: 0.9 }); };
+  try {
+    E.setEngineChoice("functiongemma");
+    assert.equal(await E.warmNow(), true, "warmed");
+    assert.equal(calls.llamaLoad.length, 1); assert.equal(gens, 1, "one throwaway pick");
+    assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge");
+    assert.equal(await E.warmNow(), false, "at most once: already resident");
+    assert.equal(calls.llamaLoad.length, 1);
+    const r = await E.route("show me the resistance patterns antibiogram");
+    assert.ok(r, "routed"); assert.equal(calls.llamaLoad.length, 1, "no reload on the first real request");
+  } finally { cleanNative(); }
+});
+
+test("warm: skipped while MaiK holds the plugin or is generating, runs once MaiK lets go", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  let running = false; globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running, waiting: 0 }) };
+  try {
+    E.setEngineChoice("functiongemma");
+    globalThis.SMD_LLAMA_HOLDER = "maik";
+    assert.equal(await E.warmNow(), false, "MaiK holds the plugin");
+    assert.equal(globalThis.SMD_LLAMA_HOLDER, "maik", "MaiK's pack is never evicted");
+    globalThis.SMD_LLAMA_HOLDER = null; running = true;
+    assert.equal(await E.warmNow(), false, "MaiK queue running");
+    assert.equal(calls.llamaLoad.length, 0, "never loaded");
+    running = false;
+    assert.equal(await E.warmNow(), true, "warms once MaiK is idle and the holder is null");
+    assert.equal(calls.llamaLoad.length, 1);
+  } finally { delete globalThis.SMD_MAIK_LOCAL; cleanNative(); }
+});
+
+test("warm: never for needle or rules", async () => {
+  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
+  let needleLoads = 0; globalThis.Capacitor.Plugins.Needle.load = () => { needleLoads++; return Promise.resolve(); };
+  try {
+    E.setEngineChoice("needle"); assert.equal(await E.warmNow(), false); assert.equal(needleLoads, 0);
+    E.setEngineChoice("rules"); assert.equal(await E.warmNow(), false);
+    assert.equal(calls.llamaLoad.length, 0);
+  } finally { cleanNative(); }
+});
+
+test("tool candidates the MaiK card cannot open are never offered", () => {
+  delete store.smd_edge;
+  try {
+    assert.ok(E.candidates("open antibiogram resistance").some((c) => c.kind === "tool" && c.id === "antibiogram"));
+    globalThis.SMD_MAIK_TOOL_OPENABLE = (id) => id !== "antibiogram";
+    assert.ok(!E.candidates("open antibiogram resistance").some((c) => c.kind === "tool" && c.id === "antibiogram"));
+  } finally { delete globalThis.SMD_MAIK_TOOL_OPENABLE; }
+});
+
+// Found by the frozen test set edge-router-4 (test4.jsonl, runbook 5d): forms the guard did not know.
+test("negation guard: more Hinglish and Tenglish forms pass; clinical questions still route", async () => {
+  store.smd_edge = "1";
+  const m = mock(() => needleReply(1)); E.setEngine(m);
+  for (const q of ["antibiogram kholna nahi", "icu band karo", "icu band kar do", "antibiogram skip karo", "insulin mat karo", "icu oddu",
+    "antibiogram aapandi", "icu vaddhu", "antibiogram vaddu", "antibiogram cheyyakandi", "icu dikhana nahi", "antibiogram aapeyyi"]) {
+    assert.equal(E.negated(q), true, q);
+    assert.equal(E.rules(q), null, q);
+    assert.equal(await E.route(q), null, q);
+  }
+  assert.equal(m.prompts.length, 0);
+  for (const q of ["fever nahi utar raha paracetamol dose", "urine output nahi hai crcl", "band keratopathy", "bandage kab karna hai", "creatinine 1.2 mg crcl"])
+    assert.equal(E.negated(q), false, q);
+});
+test("clinical orders pass: an order verb next to a drug, or a dosing pattern, never opens a card or calls the model", async () => {
+  const DRUGS = ["metformin", "ketorolac", "oxaliplatin", "heparin", "amlodipine", "insulin"];
+  globalThis.SMD_DRUGLINK = { drugsIn: (t) => DRUGS.filter((d) => t.toLowerCase().includes(d)).map((d) => ({ generic: d, name: d, typed: d, fuzzy: false })) };
+  try {
+    store.smd_edge = "1";
+    const m = mock(() => needleReply(1)); E.setEngine(m);
+    for (const q of ["continue metformin", "titrate ketorolac", "oxaliplatin 1 tab od", "metformin 500 mg bd", "start heparin", "heparin chalu karo",
+      "metformin continue cheyyi", "add amlodipine 5 mg", "give insulin 10 units", "increase metformin", "shift to heparin"]) {
+      assert.equal(E.negated(q), true, q);
+      assert.equal(E.rules(q), null, q);
+      assert.equal(await E.route(q), null, q);
+    }
+    assert.equal(m.prompts.length, 0, "no model call for an order");
+    for (const q of ["metformin details", "open metformin", "metformin", "start the curb-65", "give me the antibiogram", "creatinine 1.2 mg crcl"])
+      assert.equal(E.negated(q), false, q);
+    const r = E.rules("metformin");
+    assert.equal(r && r.kind, "drug", "the drug card still opens");
+  } finally { delete globalThis.SMD_DRUGLINK; }
 });

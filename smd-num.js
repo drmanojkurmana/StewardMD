@@ -9,7 +9,9 @@
  *   opts.live   true: polite live region (only where the number is a status).
  * First render, same value, reduced motion, no WAAPI, or localStorage smd_num_motion="0" = instant swap.
  * A new set() mid-animation cancels the running one and retargets from what is on screen.
- * A11y: a visually hidden node always carries the final text; the animated layer is aria-hidden.
+ * A11y: at rest the value is in the DOM exactly ONCE (plain text in the visual layer, readable by AT and
+ * by textContent). Only while a roll runs does a visually hidden node carry the final text and the
+ * animated layer go aria-hidden; the hidden copy is emptied when the roll settles.
  *
  * SMD_SKEL: skeleton shown only if loading takes longer than 300ms; container gets aria-busy.
  *   SMD_SKEL.start(container, SMD_SKEL.html("list")) -> stop()      (JS-managed container)
@@ -44,7 +46,6 @@
     var st = el.__smdNum;
     if (st) return st;
     st = el.__smdNum = { text: null, shown: null, anims: [], vis: mk("smd-num-vis"), sr: mk("smd-num-sr"), token: 0 };
-    st.vis.setAttribute("aria-hidden", "true");
     clear(el);
     el.appendChild(st.sr);
     el.appendChild(st.vis);
@@ -57,11 +58,19 @@
     var a = st.anims; st.anims = []; st.token++;
     for (var i = 0; i < a.length; i++) { try { a[i].onfinish = null; a[i].cancel(); } catch (e) {} }
   }
+  // At rest: one copy of the value (visual layer, exposed to AT). Never leave the sr copy filled too,
+  // or host.textContent reads "250k250k" wherever the CSS that hides .smd-num-sr is absent or ignored.
   function paint(st, text) {
     clear(st.vis);
     st.vis.appendChild(D.createTextNode ? D.createTextNode(text) : mk("", text));
     st.shown = text;
+    st.sr.textContent = "";
+    st.vis.removeAttribute("aria-hidden");
+  }
+  // While a roll runs the visual layer holds partial glyphs, so AT reads the final value from sr instead.
+  function busy(st, text) {
     st.sr.textContent = text;
+    st.vis.setAttribute("aria-hidden", "true");
   }
   function run(st, node, from, to, dur, delay) {
     var a;
@@ -119,8 +128,8 @@
       var from = st.shown;                       // what is on screen right now (old value, or old target mid-roll)
       cancelAnims(st);
       st.text = text;
-      st.sr.textContent = text;                  // assistive tech always gets the final value
       if (first || from == null || from === text || motionOff() || !st.vis.animate) { paint(st, text); return; }
+      busy(st, text);                            // assistive tech gets the final value for the whole roll
       if (o.kind === "clinical") clinical(st, from, text); else counter(st, from, text);
     },
     // test/debug helpers

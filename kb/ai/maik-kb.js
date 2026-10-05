@@ -597,8 +597,44 @@
     } catch (e) { return false; }
   }
 
+  /* Knowledge pages an umbrella disease term covers (Edge "pneumonia" card, 2026-10-04): every KB
+   * enrichment entry whose name, without a bracketed note, IS the term or ENDS with it as whole words
+   * ("Hospital Acquired Pneumonia", "Pneumocystis Pneumonia (PCP)"). The head noun must match, so
+   * "fever" would not list "Fever with rash" via a middle word. Same-name duplicates ("Ventilator
+   * Associated Pneumonia" / "Ventilator-associated pneumonia") collapse to one. Order: pages with a
+   * treatment bundle or management brief first, then the shorter (more general) names.
+   * Returns [] for a qualifier-only term ("syndrome", "disease") or one shorter than 4 letters. */
+  function kbPages(term) {
+    var t = medNorm(String(term || "")).replace(/-/g, " ").replace(/\s+/g, " ").trim();
+    if (t.length < 4 || MATCH_QUAL[t] || MATCH_QUAL[t.replace(/s$/, "")] || /^infections?$/.test(t)) return [];
+    var s = stores(), by = (s.KE && s.KE.byId) || {}, seen = {}, out = [];
+    Object.keys(by).forEach(function (id) {
+      var e = by[id], nm = medNorm(String((e && e.name) || id.replace(/_/g, " ")).replace(/\s*\([^)]*\)\s*/g, " ")).replace(/-/g, " ").replace(/\s+/g, " ").trim();
+      if (!(nm === t || (nm.length > t.length && nm.slice(-(t.length + 1)) === " " + t))) return;
+      if (seen[nm]) return; seen[nm] = 1;
+      var rich = (s.KR[id] || s.DX[id]) ? 0 : 1;
+      out.push({ id: id, name: (e && e.name) || cap(id.replace(/_/g, " ")), _r: rich, _w: nm.split(" ").length });
+    });
+    out.sort(function (a, b) { return (a._r - b._r) || (a._w - b._w) || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0); });
+    return out.map(function (x) { return { id: x.id, name: x.name }; });
+  }
+
+  /* The words of every Knowledge page name and alias ({ word: 1 }), for the Edge spelling fix
+   * (edge-router.js spell: "pneumoniacns" -> "pneumonia"). Built once the KB stores are loaded. */
+  var _vocab = null;
+  function vocab() {
+    if (_vocab) return _vocab;
+    var v = {}, idx = buildNameIndex();
+    idx.forEach(function (e) { e.key.split(/[^a-z0-9]+/).forEach(function (w) { if (w.length >= 4) v[w] = 1; }); });
+    Object.keys(MAIK_ALIAS).forEach(function (k) { (k + " " + MAIK_ALIAS[k]).toLowerCase().split(/[^a-z0-9]+/).forEach(function (w) { if (w.length >= 4) v[w] = 1; }); });
+    if (idx.length) _vocab = v;   // not cached while the stores are still empty
+    return v;
+  }
+
   var API = {
     compose: compose,
+    kbPages: kbPages,
+    vocab: vocab,
     clinicalDialogue: clinicalDialogue,
     classifyIntent: classifyIntent,
     isComplex: isComplex,
@@ -607,6 +643,7 @@
     isKnownConcept: isKnownConcept,
     _matchTrusted: matchTrusted,
     _diseasePhrase: diseasePhrase,
+    _alias: MAIK_ALIAS,
     _doseSafetyNote: doseSafetyNote,
     _version: "v2.0"
   };

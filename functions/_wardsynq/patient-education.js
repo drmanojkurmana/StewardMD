@@ -1,8 +1,11 @@
 /* functions/_wardsynq/patient-education.js - the hospital's own patient education leaflets, and which ones a patient
  * was given with their discharge.
  *
- * STRUCTURE ONLY. WardSynQ ships no leaflet: every title and word is written by the hospital, in the language it is
- * written in, and reviewed by a clinician of that hospital. There is no seed, sample or translation here.
+ * THE HOSPITAL'S OWN WORDS. Every leaflet is written or taken on by the hospital, in the language it is written in, and
+ * approved by a clinician of that hospital. WardSynQ seeds nothing into a hospital. The one exception to "written here" is
+ * the StewardMD starter set (owner decision 2026-10-04, leaflet-starter.js): ten English drafts a clinician may import with
+ * one action (importStarterLeaflets). Each arrives as a DRAFT by the importing clinician, marked as StewardMD's draft on its
+ * record, and goes through exactly the same second-clinician approval as a leaflet written here.
  *
  * ONE EducationLeaflet RECORD PER LEAFLET PER LANGUAGE, versioned in the append-only store. A leaflet is a draft
  * until a SECOND clinician approves the exact version they read (expectedVersion): whoever wrote any of the current
@@ -23,6 +26,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { actorName } from "./patient-label.js";
+import { STARTER_LEAFLETS } from "./leaflet-starter.js";
 
 const LEAFLET = "EducationLeaflet";
 const GIVEN = "EducationAttachment";
@@ -81,7 +85,7 @@ function leafletFields(input) {
 function leafletView(r) {
   return { leafletId: r.id, version: r.version, title: r.title, language: r.language, body: r.body, tags: r.tags || [], state: r.state,
     authorId: r.authorId, authorName: r.authorName || null, draftedBy: r.draftedBy || [], editedAt: r.editedAt || null,
-    approval: r.approval || null, retired: r.retired || null };
+    approval: r.approval || null, retired: r.retired || null, starter: r.starter || null };
 }
 
 /** POST /ward/education-leaflet-save. ctx: { leafletId?, expectedVersion (with leafletId), title, language, body, tags? } */
@@ -117,6 +121,42 @@ async function saveLeaflet(request, env, ctx) {
     const put = await svc.put(next, { expectedVersion, idempotencyKey: ctx.idempotencyKey || null });
     return { ...base, ok: true, written: 1, leafletId: next.id, version: put.record.version, state: "draft" };
   } catch (e) { return { ...base, ...writeFailure(e) }; }
+}
+
+/** The record id of a starter leaflet in a hospital's library: one per template, so importing twice adds nothing. */
+const starterIdFor = (templateId) => "wsq-edu-starter-" + str(templateId).replace(/[^A-Za-z0-9_-]/g, "-").slice(0, 80);
+
+/** POST /ward/education-leaflet-import-starter. ctx: {}. Writes every starter leaflet the hospital does not already hold as a
+ *  DRAFT by the caller (create-only, expectedVersion 0); one already held, in any state, is left exactly as it is. Never
+ *  approves anything: the caller is in draftedBy, so a second clinician must approve each one. */
+async function importStarterLeaflets(request, env, ctx) {
+  const mig = ctx.migration, base = baseOf(mig);
+  if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", written: 0 };
+  const set = (ctx && ctx.starter) || STARTER_LEAFLETS;
+  const { svc, resolved, error } = await openService(request, env, ctx, "record:write");
+  if (error) return { ...base, ...error, written: 0 };
+  const me = resolved.actor.id, name = actorName(resolved.actor), at = new Date().toISOString();
+  const imported = [], alreadyHeld = [];
+  for (const t of set.leaflets) {
+    const id = starterIdFor(t.templateId);
+    const got = await readOne(svc, LEAFLET, id);
+    if (got.refuse) return { ...base, ...got.refuse, written: imported.length, imported, alreadyHeld };
+    if (got.rec) { alreadyHeld.push({ leafletId: id, title: got.rec.title, state: got.rec.state }); continue; }
+    const f = leafletFields({ title: t.title, language: set.language, body: t.body, tags: t.tags });
+    if (f.refuse) return { ...base, ok: false, status: 500, error: "starter_invalid", detail: t.templateId + ": " + f.refuse.detail, written: imported.length, imported, alreadyHeld };
+    const rec = { resourceType: LEAFLET, id, ...f.fields, state: "draft", authorId: me, authorName: name, draftedBy: [me], createdAt: at, editedAt: at,
+      approval: null, retired: null, starter: { setId: set.id, version: set.version, templateId: t.templateId, marker: set.marker, importedBy: me, importedAt: at },
+      source: { system: "stewardmd-starter", sourceId: set.id + "/" + t.templateId + "@" + set.version } };
+    try {
+      const put = await svc.put(rec, { expectedVersion: 0 });
+      imported.push({ leafletId: id, title: rec.title, version: put.record.version });
+    } catch (e) {
+      /* Another clinician imported the same leaflet a moment ago: it is held, which is what was wanted. */
+      if (e instanceof VersionConflictError) { alreadyHeld.push({ leafletId: id, title: rec.title, state: "draft" }); continue; }
+      return { ...base, ...writeFailure(e), written: imported.length, imported, alreadyHeld };
+    }
+  }
+  return { ...base, ok: true, written: imported.length, imported, alreadyHeld, marker: set.marker, setVersion: set.version };
 }
 
 /** POST /ward/education-leaflet-approve. ctx: { leafletId, expectedVersion } - the version the approver read. */
@@ -264,5 +304,5 @@ function portalLeaflets(records) {
 
 export {
   LEAFLET, GIVEN, STATES, leafletFields, leafletView, givenIdFor, portalLeaflets,
-  saveLeaflet, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments,
+  starterIdFor, saveLeaflet, importStarterLeaflets, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments,
 };

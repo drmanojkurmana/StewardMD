@@ -183,7 +183,8 @@
   var EMPTY_ANSWER = "The on-device model did not produce an answer this time. Ask again, or switch to MaiK Cloud.";
   // The model reporting that the retrieved passages do not cover the question. That is a retrieval
   // verdict, not an answer; see the no-coverage fallback in answer().
-  var NO_COVERAGE = /\b(not|isn't|is not|aren't|are not|no)\b[^.]{0,60}\b(addressed|covered|found|included|mentioned|discussed|available|present|information|evidence|guidelines?)\b[^.]{0,50}\b(reference|retrieved|provided|source|sources|material|evidence|knowledge base)\b|\b(reference|retrieved) (material|passages?|sources?) (does not|do not|doesn't|don't|did not)\b/i;
+  // "given / stated / specified": "No specific normal serum potassium range is given in the evidence" (iPhone, 2026-10-04).
+  var NO_COVERAGE = /\b(not|isn't|is not|aren't|are not|no)\b[^.]{0,60}\b(addressed|covered|found|included|mentioned|discussed|available|present|information|evidence|guidelines?|given|stated|specified|listed)\b[^.]{0,50}\b(reference|retrieved|provided|source|sources|material|evidence|knowledge base)\b|\b(reference|retrieved) (material|passages?|sources?) (does not|do not|doesn't|don't|did not)\b/i;
 
   function stripReasoning(t) {
     var out = String(t == null ? "" : t);
@@ -744,6 +745,8 @@
 
   // ── model lifecycle ─────────────────────────────────────────────────────
   var _loadedPack = null;
+  // Who loaded the llama plugin last: "maik" (here) or "edge" (edge-router.js llamaAdapter).
+  function llamaHeldByOther() { try { var h = window.SMD_LLAMA_HOLDER; return !!h && h !== "maik"; } catch (e) { return false; } }
   function ensureLoaded(packId, loadOpts) {
     var L = llama(), M = models();
     watchRelease(L);
@@ -762,6 +765,9 @@
         .then(null, function () { return null; })
         .then(function () { return ensureLoaded(packId, loadOpts); });
     }
+    // SHARED PLUGIN: StewardMD Edge's FunctionGemma (edge-router.js llamaAdapter) loads into this same
+    // llama plugin and evicts our pack, while available().loaded still says true (ITS model is loaded).
+    if (_loadedPack && _engine !== "mlx" && llamaHeldByOther()) { _loadedPack = null; _warmed = null; }
     if (_loadedPack === packId) {
       // The plugin drops the model on app pause, so confirm it is still resident before answering.
       return L.available().then(function (a) {
@@ -841,6 +847,7 @@
         // Prefill threads, only when the pack sets it: an absent key keeps the plugin default (Android:
         // all cores), while 0 would mean "same as nThreads" in the JNI. iOS ignores the key.
         if (pk.nThreadsBatch > 0) lo.nThreadsBatch = pk.nThreadsBatch;
+        try { window.SMD_LLAMA_HOLDER = "maik"; } catch (e) {}
         return L.load(lo).then(function (r) { pk._ctx = n; return r; });
       }
       // A bigger window the device then refuses falls back to the proven size rather than failing.
@@ -974,6 +981,26 @@
   // anchors: "acute severe asthma treatment in adults" grounded on "Diagnostic Criteria for
   // Cachexia in Adults", and "STEMI management in the first hour" anchored on "hour".
   var TREAT_TXT = /\b(?:treat(?:ed|ment)?|therapy|management|administer|dos(?:e|es|ing)|mg|first-line|drug of choice|regimen)\b/;
+  /* A VALUE question asks for a number: a normal range, a reference value, a target (2026-10-04, live
+   * on the iPhone). "normal adult potassium range?" grounded on a dialysate passage and Lite answered
+   * "no normal serum potassium range is given"; "INR target mechanical mitral valve" grounded on a
+   * bridging list that names the valve but no INR, while the book's Oral Anticoagulants passage with
+   * "target INR of 2.5-3.5" sat in the pool (BM25 #6). For such a question only a passage with a
+   * SENTENCE that names the asked thing beside a figure and a range/target word is the answer; those
+   * lead, and when none exists the book does not hold the fact, so the question goes ungrounded (the
+   * model answers from its own knowledge, labelled NOT_CHECKED) instead of "not given in the evidence". */
+  var VALUE_Q = /\b(?:normal|reference|target|goal|therapeutic)\b[^.?]{0,40}\b(?:ranges?|values?|levels?|limits?|intervals?)\b|\b(?:ranges?|levels?|values?)\s+(?:of|for)\b|\btarget\b/i;
+  var VALUE_W = /^(?:normal|reference|target|goal|therapeutic|range|ranges|value|values|level|levels|limit|limits|interval|intervals)$/;
+  var VALUE_TXT = /\b(?:normal|reference|range|target|goal|therapeutic|limits?|interval)\b/i;
+  var VALUE_NUM = /\d(?:\.\d+)?\s*(?:-|–|to)\s*\d|[<>≤≥]\s*\d/;
+  function statesValue(text, anchors) {
+    var keys = anchors.filter(function (a) { return !VALUE_W.test(a); });
+    if (!keys.length) return false;
+    // "(Table 416-9)" and "Fig. 248-37" are not ranges.
+    return String(text || "").toLowerCase().replace(/\b(?:table|fig(?:ure)?\.?|chapter|chap\.?)\s*[\d.–-]+[a-z]?/g, " ").split(/[.;]\s+/).some(function (s) {
+      return VALUE_NUM.test(s) && VALUE_TXT.test(s) && keys.some(function (a) { return s.indexOf(a) !== -1; });
+    });
+  }
   /** A generation that stopped on its token budget ends mid-sentence. Prose that trails off is cut
    *  back to the last sentence end (kept only if that keeps most of the answer, else an ellipsis);
    *  a list item or heading as the last line is left alone, they legitimately end without a stop. */
@@ -1156,7 +1183,12 @@
     // survives, the intro is dropped rather than merely demoted (it is ~175 prefill tokens spent
     // saying what the disease is called).
     if (F.treat) { var real = kept.filter(function (c) { return !INTRO_HEAD.test(c.p.heading || ""); }); if (real.length) kept = real; }
-    kept.sort(function (a, b) { return b.rank - a.rank; });
+    // A value question: the passages that state the value lead; none means the book lacks the fact.
+    if (F.value) {
+      kept.forEach(function (c) { c.val = statesValue(c.p.text, F.anchors) ? 1 : 0; });
+      if (!kept.some(function (c) { return c.val; })) return [];
+      kept.sort(function (a, b) { return (b.val - a.val) || (b.rank - a.rank); });
+    } else kept.sort(function (a, b) { return b.rank - a.rank; });
     // Diversity: three slices of one chapter teach less than two chapters do, and a single heading
     // filling the whole window is how a broad question comes back narrow.
     var perHead = {}, out = [];
@@ -1211,13 +1243,21 @@
       // chapter that matches every word. The rerank below is what picks from this pool.
       var hits = bk.search(q, RAG.TOPK * 4);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
+      // A value question also searches its own words: the expansion ("valve") pushed the passage with
+      // "target INR of 2.5-3.5" out of the pool. Value questions only, so other answers are unchanged.
+      var isValue = VALUE_Q.test(question);
+      if (isValue && q !== question) {
+        var have = {};
+        hits.forEach(function (h) { have[h[1]] = 1; });
+        bk.search(question, RAG.TOPK * 4).forEach(function (h) { if (!have[h[1]]) hits.push(h); });
+      }
       var cited = hits.map(function (h) {
         var p = bk.cite(h[1]);
         return { score: h[0], p: p, hay: ((p.heading || "") + " " + (p.text || "")).toLowerCase() };
       }).filter(function (c) { return !isIndexPage(c.p.text); });
       var kept = rerankPassages(cited, {
         anchors: anchors, expansion: expansion, mods: A.mods,
-        treat: TREAT_Q.test(question), topk: RAG.TOPK
+        treat: TREAT_Q.test(question), value: isValue, topk: RAG.TOPK
       });
       // Every candidate failed the floor: supported by neither an anchor nor RAG #1's vocabulary.
       if (!kept.length) return null;
@@ -1469,6 +1509,28 @@
       }).catch(function () { return []; });
     } catch (e) { return Promise.resolve([]); }
   }
+  /* ADULT REFERENCE RANGES AS LITE EVIDENCE (2026-10-04). The book (Harrison's) has no adult serum
+   * potassium range, so "normal adult potassium range?" went ungrounded ("Not checked"). A value question
+   * that names an analyte in StewardMD's adult table (adult-ref.js, data/ref/adult-ref-values.json) gets
+   * that analyte's rows, each with its source named, as the leading passage. Never for a newborn / child
+   * question (the table is adults only). -> Promise<passage[]>, never rejects. */
+  function refEvidence(pkg) {
+    try {
+      var R = (typeof window !== "undefined") && window.SMD_ADULT_REF, q = String((pkg && pkg.question) || "");
+      if (!R || !R.load || !q || !VALUE_Q.test(q) || R.isNeonatal(q)) return Promise.resolve([]);
+      return R.load().then(function (d) {
+        if (!d) return [];
+        return R.match(q, d).slice(0, 2).map(function (a) { return R.passage(a, d); }).filter(Boolean);
+      }, function () { return []; });
+    } catch (e) { return Promise.resolve([]); }
+  }
+  // The answer's attribution: the adult table's own sources when its rows were evidence, else the KB line.
+  function sourceLine(grounding) {
+    var refs = [];
+    ((grounding && grounding.passages) || []).forEach(function (p) { (p.ref ? p.sources || [] : []).forEach(function (x) { if (refs.indexOf(x) < 0) refs.push(x); }); });
+    return refs.length ? "Source: StewardMD adult reference ranges (" + refs.join("; ") + "). Ranges vary by laboratory; use the patient's own lab range."
+      : "Source: StewardMD Knowledge Base - based on standard medical resources.";
+  }
   function curatedPassages(pkg, protos, drugPs) {
     var topic = routerTopic(pkg), gs = (pkg && pkg.grounding) || [];
     if (!topic || !gs.length) {
@@ -1502,9 +1564,10 @@
       return "[" + (n + 1) + "]" + headPart + " " + p.text.slice(0, Math.max(400, PASSAGE_CHARS - headPart.length - 1));
     }).join("\n\n");
   }
-  function withCurated(g, pkg, packId, protos, drugPs) {
+  function withCurated(g, pkg, packId, protos, drugPs, refPs) {
     var cur = ragEligible(packId) ? curatedPassages(pkg, protos, drugPs) : [];
-    if (!cur.length) return g;
+    refPs = ragEligible(packId) ? (refPs || []) : [];
+    if (!cur.length && !refPs.length) return g;
     var RAG = (g && g.RAG) || ((typeof window !== "undefined") && window.SMD_MAIK_RAG);
     if (!RAG) return g;
     var cap = RAG.TOPK || 3, book = (g && g.passages) || [];
@@ -1515,6 +1578,8 @@
     var merged = !book.length ? cur.slice(0, Math.min(2, cap))
       : txPair ? book.slice(0, 1).concat(cur.slice(0, 2)).slice(0, cap)
       : book.slice(0, 1).concat(cur.slice(0, 1), book.slice(1)).slice(0, cap);
+    // A reference-range question the adult table answers: the table rows lead, the rest follows.
+    if (refPs.length) merged = refPs.slice(0, cap).concat(merged).slice(0, cap);
     return { evidenceText: evidenceOf(merged), passages: merged, RAG: RAG, anchors: (g && g.anchors) || [], expansion: (g && g.expansion) || [], curated: true };
   }
 
@@ -1542,8 +1607,8 @@
       : (images.length || (opts && opts._ungrounded) || isGreeting(pkg && pkg.question)) ? Promise.resolve(null)
       // pkg goes in so expansionTerms() can mine RAG #1's own vocabulary. It is read HERE, before
       // the citation-bearing fields are stripped off the package further down.
-      : Promise.all([retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg), loadProtocols(), drugEvidence(pkg)])
-          .then(function (r) { return withCurated(r[0], pkg, packId, r[1], r[2]); });
+      : Promise.all([retrieveGrounding(packId, ragQuestion(pkg), routerTopic(pkg), pkg), loadProtocols(), drugEvidence(pkg), refEvidence(pkg)])
+          .then(function (r) { return withCurated(r[0], pkg, packId, r[1], r[2], r[3]); });
 
     return groundingP.then(function (grounding) {
     /** The claim-check options, shared by the live stream view and the final check. */
@@ -1834,7 +1899,7 @@
             // used to be printed inside the answer ("Left out: 3 statements ..."). It now travels in
             // result.grounding.removed and the UI shows it in the small perf/meta line (owner audit,
             // 2026-09-19: offline answers should read like MaiK's, not like a log).
-            text += "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
+            text += "\n\n" + sourceLine(grounding);
           }
           groundingOut = { verdict: g.verdict, stats: g.stats, claims: g.claims, removed: g.removed, citations: g.citations };
         } else if (grounding) {
@@ -1852,12 +1917,16 @@
           } else {
             // NEVER a page number, on owner order - matches the standing attribution used
             // everywhere else in the app (maik-models.js GUIDE_INTRO / guide.why).
-            text = text + "\n\nSource: StewardMD Knowledge Base - based on standard medical resources.";
+            text = text + "\n\n" + sourceLine(grounding);
           }
         }
         // A regenerate that ended up with no passages is never presented as checked (T57). With the
         // evidence carried through opts._grounding this cannot happen today; it stays as the net.
         if (!grounding && opts && opts._regen) text += "\n\n" + NOT_CHECKED;
+        // The book was linked but did not hold the fact (no-coverage re-ask, or a value question whose
+        // value the book never states): the model answered from its own knowledge, so say so.
+        else if (!grounding && !images.length && ragEligible(packId) && !(opts && (opts.systemOverride || (opts.mode && MODE_SYS[opts.mode]))) &&
+                 ((opts && opts._ungrounded) || VALUE_Q.test(String((pkg && pkg.question) || "")))) text += "\n\n" + NOT_CHECKED;
         if (!quotedPassage) text = emphasize(text);
         return {
           text: text,
@@ -1977,7 +2046,7 @@
         });
       }, { background: true }).then(function () { _warmed = packId; return true; }, function () { return false; });
     };
-    if (_warmed !== packId) return fresh();
+    if (_warmed !== packId || llamaHeldByOther()) return fresh();
     return Promise.resolve().then(function () { return L.available(); })
       .then(function (a) { if (a && a.loaded) return true; _warmed = null; _loadedPack = null; return fresh(); }, function () { return true; });
   }
@@ -1988,7 +2057,13 @@
     var L = llama();
     _loadedPack = null;
     _warmed = null;
-    if (L && L.release) { try { return L.release(); } catch (e) {} }
+    // Whoever held the plugin (Edge too) has nothing loaded after this; Edge reloads on its next call.
+    var wasMaik = false;
+    try { wasMaik = window.SMD_LLAMA_HOLDER === "maik"; window.SMD_LLAMA_HOLDER = null; } catch (e) {}
+    // MaiK is idle and has let go: Edge may warm FunctionGemma back up (it checks its own rules).
+    var edgeWarm = function () { try { if (wasMaik && window.SMD_EDGE && SMD_EDGE.warmSoon) SMD_EDGE.warmSoon(); } catch (e) {} };
+    if (L && L.release) { try { return Promise.resolve(L.release()).then(function (r) { edgeWarm(); return r; }); } catch (e) {} }
+    edgeWarm();
   }
 
   /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and
@@ -2172,6 +2247,9 @@
     "\nSCOPE - NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only. That includes everything a " +
     "doctor legitimately asks: diseases, drugs and drug classes, doses, mechanisms of action, " +
     "investigations, procedures, guidelines, physiology, pathology, public health and medical education. " +
+    "A request to open, show or search a StewardMD tool (antibiogram, ICD codes, a calculator, the drug " +
+    "index), in any language (\"kholo\", \"teruvu\"), is medical: never refuse it. Answer what you can " +
+    "and name the StewardMD tool to open. " +
     "If the question is NOT medical, do not answer it. Reply with exactly this line and nothing else: " +
     "\"I can only help with medical and clinical questions.\"";
   var WEB_SYS =

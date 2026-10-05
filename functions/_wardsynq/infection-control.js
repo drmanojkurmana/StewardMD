@@ -9,6 +9,15 @@
  *   CAUTI   same manual, ch.7 Urinary Tract Infection Event  https://www.cdc.gov/nhsn/pdfs/pscmanual/7psccauticurrent.pdf
  *   VAP     same manual, ch.6 Pneumonia (VAP and PNEU) Event  https://www.cdc.gov/nhsn/pdfs/pscmanual/6pscvapcurrent.pdf
  *   SSI     same manual, ch.9 Surgical Site Infection Event   https://www.cdc.gov/nhsn/pdfs/pscmanual/9pscssicurrent.pdf
+ *   VAE     same manual, ch.10 Ventilator-Associated Event (VAE), "For use in adult locations only", read 2026-10-04
+ *           https://www.cdc.gov/nhsn/pdfs/pscmanual/10-vae_final.pdf
+ * WHO IS SURVEYED FOR WHICH VENTILATOR EVENT (owner decision 2026-10-04). NHSN decides by the patient's LOCATION, "regardless
+ * of patient's age": VAE (tiers VAC, IVAC, PVAP; ch.10 Introduction and Inclusion and Exclusion Criteria) in adult inpatient
+ * locations, and in-plan VAP (PNU1 to PNU3) only in paediatric inpatient locations, neonatal locations excluded (ch.6
+ * Settings, read 2026-10-04). Here the location is the class of the stay the ventilator line belongs to: a NICU stay is a
+ * neonatal location, a PEDIATRICS stay a paediatric one, and every other stay an adult one (LOCATION_POPULATION). A VAE is
+ * opened only on an adult stay's line and a VAP only on a paediatric stay's; a NICU line is neither. Each rate counts only
+ * the ventilator days of its own stays, by the same device-day rule.
  * NOTHING HERE DIAGNOSES AN INFECTION. The infection control nurse opens a case, reads the chart against the NHSN
  * criteria, and confirms it (naming the criterion met) or rules it out. The server computes only two facts the manual
  * makes arithmetic of, and shows them beside the decision: which device day the date of event falls on (a device is
@@ -49,15 +58,22 @@ const DEVICE_CLASSES = Object.freeze(["central-line", "urinary-catheter", "venti
 const SSI_DEPTHS = Object.freeze(["superficial-incisional", "deep-incisional", "organ-space"]);
 const HAI_STATES = Object.freeze(["under-review", "confirmed", "ruled-out", "withdrawn"]);
 const NHSN = "NHSN Patient Safety Component Manual, January 2026";
+/* The surveillance population of a stay's location, by its class (see the header). Every class not named is adult. */
+const LOCATION_POPULATION = Object.freeze({ NICU: "neonatal", PEDIATRICS: "paediatric" });
+const POPULATIONS = Object.freeze(["adult", "paediatric", "neonatal"]);
+/** PURE. The population of a stay, or null when there is no stay. */
+const populationOf = (encounter) => (encounter ? LOCATION_POPULATION[str(encounter.class).toUpperCase()] || "adult" : null);
 
 /* UNAPPROVED seed content (seed-signoff.js "hai-criteria"): the NHSN criteria a confirmation may name, per event. */
 const HAI_EVENTS = Object.freeze({
   CLABSI: Object.freeze({ label: "Central line-associated bloodstream infection", device: "central-line", nabh: 15,
     criteria: Object.freeze(["LCBI 1", "LCBI 2", "LCBI 3", "MBI-LCBI 1", "MBI-LCBI 2", "MBI-LCBI 3"]), source: NHSN + ", ch.4 Bloodstream Infection Event, Table 1 and Table 2" }),
   CAUTI: Object.freeze({ label: "Catheter-associated urinary tract infection", device: "urinary-catheter", nabh: 13,
-    criteria: Object.freeze(["SUTI 1a", "ABUTI"]), source: NHSN + ", ch.7 Urinary Tract Infection Event, Table 1" }),
-  VAP: Object.freeze({ label: "Ventilator-associated pneumonia", device: "ventilator", nabh: 14,
-    criteria: Object.freeze(["PNU1", "PNU2", "PNU3"]), source: NHSN + ", ch.6 Pneumonia (VAP and PNEU) Event, Tables 1 to 4" }),
+    criteria: Object.freeze(["SUTI 1a", "SUTI 2", "ABUTI"]), source: NHSN + ", ch.7 Urinary Tract Infection Event, Table 1 (SUTI 2: a patient 1 year of age or less, with or without a catheter)" }),
+  VAP: Object.freeze({ label: "Ventilator-associated pneumonia", device: "ventilator", nabh: 14, population: "paediatric",
+    criteria: Object.freeze(["PNU1", "PNU2", "PNU3"]), source: NHSN + ", ch.6 Pneumonia (VAP and PNEU) Event, Tables 1 to 4; in-plan VAP in paediatric locations only, neonatal excluded (Settings)" }),
+  VAE: Object.freeze({ label: "Ventilator-associated event", device: "ventilator", nabh: null, population: "adult",
+    criteria: Object.freeze(["VAC", "IVAC", "PVAP"]), source: NHSN + ", ch.10 Ventilator-Associated Event (VAE), Figure 1 (VAE surveillance algorithm); adult locations only (Settings, Inclusion and Exclusion Criteria)" }),
   SSI: Object.freeze({ label: "Surgical site infection", device: null, nabh: 16,
     criteria: Object.freeze(["Superficial incisional SSI", "Deep incisional SSI", "Organ/Space SSI"]), source: NHSN + ", ch.9 Surgical Site Infection Event, Table 1" }),
 });
@@ -83,6 +99,13 @@ function monthRange(month, off) {
 }
 
 /* ------------------------------------------------------------------ pure: device-days and eligibility */
+
+/** PURE. Why an event is not opened on a line of this population, naming the event that applies. */
+function populationRefusal(event, population) {
+  const other = Object.keys(HAI_EVENTS).find((k) => k !== event && HAI_EVENTS[k].device === HAI_EVENTS[event].device && HAI_EVENTS[k].population === population);
+  return `${event} is surveyed on ${HAI_EVENTS[event].population} stays only (NHSN); this line belongs to a ${population} stay` +
+    (other ? `: open a ${other} instead.` : ": NHSN surveys neither VAP nor VAE in a neonatal location, so no ventilator event is opened here.");
+}
 
 /** PURE. NHSN denominator device-days of one class in [fromMs, toMs]: one per patient per local calendar day on which a
  *  line of that class was present. An open line runs to nowMs (never into the future). */
@@ -282,8 +305,15 @@ async function recordHaiCase(request, env, ctx) {
         const line = str(ctx.lineId) ? await svc.get("LineRecord", str(ctx.lineId)) : null;
         if (!line || str(line.patientId) !== patientId) return { ...base, ok: false, status: 422, error: "line_required", detail: "a device-associated infection is linked to the patient's line in the line log", written: 0 };
         if (line.deviceClass !== def.device) return { ...base, ok: false, status: 422, error: "wrong_device_class", detail: `${event} is linked to a ${def.device} line`, written: 0 };
+        let population = null;
+        if (def.population) {
+          const stay = line.encounterId ? await svc.get("Encounter", str(line.encounterId)) : null;
+          if (!stay) return { ...base, ok: false, status: 422, error: "stay_not_found", detail: "the line's stay could not be found, so whether it is an adult, paediatric or neonatal location cannot be told", written: 0 };
+          population = populationOf(stay);
+          if (population !== def.population) return { ...base, ok: false, status: 422, error: "wrong_population", population, detail: populationRefusal(event, population), written: 0 };
+        }
         eligibility = deviceEligibility(line, dateOfEvent, off);
-        link = { lineId: line.id, encounterId: line.encounterId || null };
+        link = { lineId: line.id, encounterId: line.encounterId || null, ...(population ? { population } : {}) };
       } else {
         const depth = str(ctx.ssiDepth), days = Number(ctx.surveillanceDays);
         if (!SSI_DEPTHS.includes(depth)) return { ...base, ok: false, status: 422, error: "ssi_depth_required", detail: `ssiDepth is one of ${SSI_DEPTHS.join(", ")}`, written: 0 };
@@ -383,7 +413,46 @@ async function recordProphylaxisReview(request, env, ctx) {
 
 /* ------------------------------------------------------------------ the infection control screen */
 
-/** ctx: { migration, month (YYYY-MM), antibiotics, windowMinutes, utcOffsetMinutes, actorDeps, recordDeps } */
+/** PURE. The lines whose stay is of the population, from a map encounterId -> population. */
+function linesOfPopulation(lines, byEncounter, population) {
+  return (lines || []).filter((l) => l && byEncounter.get(str(l.encounterId)) === population);
+}
+
+/** The population of the stay of every ventilator line present in the window, read stay by stay. Any stay that cannot be
+ *  read makes the population rates not computable (error), rather than counting its ventilator days nowhere. */
+async function stayPopulations(svc, lines, w, nowMs) {
+  const ids = new Set();
+  for (const l of lines || []) {
+    if (!l || l.deviceClass !== "ventilator") continue;
+    const a = ms(l.insertedAt), r = ms(l.removedAt);
+    if (a == null || a > Math.min(w.toMs, nowMs) || (r != null && r < w.fromMs - DAY)) continue;
+    ids.add(str(l.encounterId));
+  }
+  const byEncounter = new Map();
+  for (const id of ids) {
+    if (!id) return { error: "a ventilator line has no stay, so its location population cannot be told" };
+    let e;
+    try { e = await svc.get("Encounter", id); } catch (err) { return { error: "a ventilator line's stay could not be read" + (err instanceof GovernanceError ? " with this role" : "") }; }
+    if (!e) return { error: `the stay ${id} of a ventilator line was not found, so its location population cannot be told` };
+    byEncounter.set(id, populationOf(e));
+  }
+  return { byEncounter };
+}
+
+/** PURE. One event's sign-off state from the seed sign-off states (seed-signoff.js itemSignoffState "hai-criteria"). */
+const signoffOf = (states, id) => (states && typeof states === "object" ? states[id] || "unapproved" : "signoffs-unreadable");
+/** PURE. The notice under the case form, read from the sign-off records: null once every event's criterion names are signed. */
+function unapprovedNotice(states) {
+  const ids = Object.keys(HAI_EVENTS);
+  const st = ids.map((id) => signoffOf(states, id));
+  if (st.some((s) => s === "signoffs-unreadable")) return "The sign-off records could not be read, so the NHSN criterion names offered here are shown as awaiting clinical sign-off.";
+  const open = ids.filter((id, i) => st[i] !== "signed");
+  if (!open.length) return null;
+  return `The NHSN criterion names for ${open.join(", ")} are seed content awaiting clinical sign-off.`;
+}
+
+/** ctx: { migration, month (YYYY-MM), antibiotics, windowMinutes, utcOffsetMinutes, haiSignoff ({ event: state }, from
+ *        seed-signoff.js itemSignoffState; absent or null reads as unreadable), actorDeps, recordDeps } */
 async function infectionControlView(request, env, ctx) {
   const mig = ctx.migration, base = baseOf(mig);
   if (!mig || mig.mode === "off") return { ...base, ok: true, skipped: "off", cases: [] };
@@ -398,15 +467,19 @@ async function infectionControlView(request, env, ctx) {
     { sinceMs: w.fromMs, windowed: [SAP_TYPE, "MedicationAdministration", "AnesthesiaRecord"] });
 
   const cases = rows[HAI_TYPE] && [...rows[HAI_TYPE]].sort((a, b) => str(b.openedAt).localeCompare(str(a.openedAt)));
+  const stays = rows.LineRecord ? await stayPopulations(svc, rows.LineRecord, w, nowMs) : null;
   const rates = Object.entries(HAI_EVENTS).map(([event, def]) => {
     const need = def.device ? [HAI_TYPE, "LineRecord"] : [HAI_TYPE, "SurgicalCase"];
     const blocked = need.find((t) => unreadable[t]);
-    if (blocked) return { event, nabh: def.nabh, computable: false, reason: `${blocked} could not be read (${unreadable[blocked]})` };
+    const pop = def.population ? { population: def.population } : {};
+    if (blocked) return { event, nabh: def.nabh, ...pop, computable: false, reason: `${blocked} could not be read (${unreadable[blocked]})` };
+    if (def.population && stays.error) return { event, nabh: def.nabh, ...pop, computable: false, reason: stays.error };
     const numerator = def.device ? confirmedIn(cases, event, w).length
       : confirmedIn(cases, event, { fromMs: -8.64e15, toMs: 8.64e15, offsetMs: off }).filter((c) => { const s = rows.SurgicalCase.find((x) => x.id === c.surgicalCaseId); const t = s && ms(s.incisionAt); return t != null && t >= w.fromMs && t <= w.toMs; }).length;
-    const denominator = def.device ? deviceDays(rows.LineRecord, def.device, w.fromMs, w.toMs, off, nowMs) : rows.SurgicalCase.filter((s) => { const t = ms(s.incisionAt); return t != null && t >= w.fromMs && t <= w.toMs; }).length;
+    const lines = def.population ? linesOfPopulation(rows.LineRecord, stays.byEncounter, def.population) : rows.LineRecord;
+    const denominator = def.device ? deviceDays(lines, def.device, w.fromMs, w.toMs, off, nowMs) : rows.SurgicalCase.filter((s) => { const t = ms(s.incisionAt); return t != null && t >= w.fromMs && t <= w.toMs; }).length;
     const mult = def.device ? 1000 : 100;
-    return { event, nabh: def.nabh, computable: true, numerator, denominator, per: mult, value: denominator > 0 ? Math.round((numerator / denominator) * mult * 100) / 100 : null };
+    return { event, nabh: def.nabh, ...pop, computable: true, numerator, denominator, per: mult, value: denominator > 0 ? Math.round((numerator / denominator) * mult * 100) / 100 : null };
   });
 
   const recent = nowMs - 120 * DAY;
@@ -435,9 +508,10 @@ async function infectionControlView(request, env, ctx) {
     ...base, ok: true, month, truncated, cases, casesError: unreadable[HAI_TYPE] || null, rates, lines, linesError: unreadable.LineRecord || null,
     operations, operationsError: unreadable.SurgicalCase || null, prophylaxis, prophylaxisReason, windowMinutes: Number.isInteger(win) ? win : null,
     patients: await patientsFor(svc, ids),
-    events: Object.entries(HAI_EVENTS).map(([id, d]) => ({ id, label: d.label, device: d.device, criteria: d.criteria, source: d.source, nabh: d.nabh })),
+    events: Object.entries(HAI_EVENTS).map(([id, d]) => ({ id, label: d.label, device: d.device, population: d.population || null, criteria: d.criteria, source: d.source, nabh: d.nabh,
+      signoff: signoffOf(ctx.haiSignoff, id) })),
     ssiDepths: SSI_DEPTHS, deviceClasses: DEVICE_CLASSES,
-    unapproved: "The NHSN criterion names offered here are seed content awaiting clinical sign-off.",
+    unapproved: unapprovedNotice(ctx.haiSignoff),
     denominatorNote: "Device-days are counted electronically from the line log. NHSN accepts electronic counts only after three consecutive months within 5% of manual daily counts; that validation is the hospital's.",
   };
 }
@@ -473,7 +547,7 @@ async function antibiogramReport(request, env, ctx) {
 }
 
 export {
-  HAI_TYPE, SAP_TYPE, DEVICE_CLASSES, SSI_DEPTHS, HAI_STATES, HAI_EVENTS, dayOfDate, monthRange, deviceDays, deviceEligibility, ssiEligibility,
+  HAI_TYPE, SAP_TYPE, DEVICE_CLASSES, SSI_DEPTHS, HAI_STATES, HAI_EVENTS, LOCATION_POPULATION, POPULATIONS, populationOf, linesOfPopulation, unapprovedNotice, dayOfDate, monthRange, deviceDays, deviceEligibility, ssiEligibility,
   confirmedIn, isListedAntibiotic, prophylaxisDoses, prophylaxisAppropriate, computeAntibiogram,
   recordHaiCase, recordProphylaxisReview, infectionControlView, antibiogramReport,
 };

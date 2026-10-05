@@ -10,7 +10,7 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 
 ## Key files
 - `home.js` — the MaiK sheet + `runClinical()` (the ask flow), Aurora UI, sidebar
-- `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (KB only / Cloud / On-device);
+- `maik-engine.js` (`window.SMD_MAIK_ENGINE`) — answer-engine picker (MaiK Edge, formerly "KB only" / Cloud / On-device);
   DECORATES `window.SMD_AI` rather than branching in home.js. Pref `stewardmd.maikEngine`, default `cloud`
 - `maik-models.js` / `maik-local.js` — on-device model packs (resumable Range download) + llama.cpp
   inference via `local-plugins/capacitor-llama` (mainline llama.cpp b10502 xcframework). See
@@ -88,6 +88,7 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
   returns `{ error: "server-empty", status }`; `maikErrorNotice` words it ("empty reply, Try again").
   Server cause not identified (the route always answers JSON). Tests: `test/maik-empty-reply.test.mjs`,
   `test/run-maik-empty-reply-ui.mjs`. Other `SMD_AI` calls in `reasoning.js` still use bare `r.json()`.
+- **A tool request is in scope** (2026-10-04): "show me the antibiogram" / "search icd teruvu" reached the model as firewall-"uncertain" and the scope rule refused them as non-medical. Tool words live in `APP_TOOL` (`kb/ai/maik-scope.js`) and the tool clause in `MEDICAL_ONLY` + `maik-local.js`; `KNOWLEDGE_SYS` has a hard length cap (`test/ai-prompt-coherence.test.mjs`), so trim when you add.
 - **A named score is answered by its calculator, for free** (2026-09-02). `maikRoute()` has a
   `calculator` kind: `MEDCALC.find(q)` resolves the question to one calculator by title (conservative:
   every question word must be in the title, a real word must match, ambiguous names return null), and
@@ -412,4 +413,42 @@ Bench (`scripts/bench-maik-lite-retrieval.mjs --router real`, real book): key po
 - With a protocol or regimen leading, the evidence is book #1 + two curated passages (same 3 x 700 cap).
 - Still zero: child paracetamol dose, tramadol with sertraline, the unnamed heart-failure vignette (drug
   questions belong to the Drug Index path). `LITE_DEBUG=<case id>` prints a case's package + evidence.
+
+
+## Topic chip from a Knowledge page (2026-10-04, branch `kb-nav-askmaik`)
+`window.SMD_askMaikTopic(id, name)` = `openAskAi("", {topic})`: sets `_maikPin = {id, name}` (outer scope,
+survives a sheet reopen; cleared by the chip's x or a new thread) and `_maikTopic` to the disease, Research off.
+Composer: `#maikTopicBar` ("About: <name>", `#maikTopicX`, button group `[data-maik-tmode]` (aria-pressed) Ask / Research;
+Research only with `researchModeAvail()`), painted by `maikPaintTopic()` (also from `setResearchMode`).
+Research seeds the input with the disease name and uses the existing Evidence Review path (cloud; on a
+local engine the existing "Answering on-device" fallback). Ask: `maikPinScope(q)` runs after Edge Layer 0,
+follow-ups and the casual/calculator routes; a clinical question becomes `<disease>: <q>` (unless it already
+names it) with retrieval `<disease> <q>`, through `runClinical`, so the chosen engine and hard-local policy
+apply unchanged. A question about a DIFFERENT disease the KB resolves confidently is not forced onto the chip.
+
+## MaiK Lite value questions (2026-10-04, branch maik-lite-ontopic)
+iPhone, OTA v177: "normal adult potassium range?" grounded on a DIALYSATE passage and Lite said the range was "not given in the evidence"; Pixel: "INR target mechanical mitral valve" said 2.0-3.0. Root cause is retrieval: the book (Harrison's) has NO adult serum potassium reference range, and its "target INR of 2.5-3.5" passage (row 9950) was pushed out of the 12-passage pool by the expansion term "valve". `neo:ref` (data/neo/ref-values.json) is neonatal only (K 3.3-5.4, days 1-3), so it is not adult evidence; StewardMD has no adult normal-values table. Fix (`maik-local.js` `VALUE_Q` / `statesValue`): a normal/reference/target question also searches its own words, passages with a sentence naming the asked thing beside a figure and a range/target word lead, and with none the question goes ungrounded (model knowledge) with "Not checked against the StewardMD Knowledge Base." appended; `NO_COVERAGE` now catches "is given / stated / specified in the evidence". Bench (`--router real`): the 54 old questions unchanged at 86.7% / 38 full; L-62 (INR) 1/3 -> 3/3; L-61 (potassium) has no evidence by design. Pixel had `smd_maik_rag_linked` "0" (book unlinked), where retrieval cannot help. Test: `test/maik-lite-value-q.test.mjs`.
+
+
+Update 2026-10-04 (branch `adult-normal-values`): StewardMD now HAS an adult table ([[Adult Normal Values]]). `refEvidence(pkg)` puts the asked analyte's rows first in the evidence for a non-neonatal `VALUE_Q` question, and `sourceLine(grounding)` names the table's sources instead of the KB line, so "normal adult potassium range?" answers 3.5-5.2 mmol/L (RCPA) / 3.5-5.0 mEq/L (ABIM) with the source. A value the table does not hold still goes ungrounded with NOT_CHECKED. Test: `test/adult-ref.test.mjs`.
+
+## Scheme and ICD lookups (2026-10-04, branch maik-conv5-fixes)
+"What is the arogyasri code for pancreatitis" got an ICD list (Edge ICD cue "code for"), and on the
+second ask the codedb path listed Nagaland/Himachal at "Rs 0". Now a scheme ask goes to
+`SMD_MAIK_ENGINE.schemeLookup` filtered to the named scheme's states (Aarogyasri = AP + Telangana, labelled);
+an unnamed ask prefers the profile state (`smd_profile_cache:<uid>.state`); a named scheme with no
+package says so instead of falling through to a model. See [[StewardMD Edge]] and [[Government Health Schemes]].
+The garbled "Ma c au d a ca." line was not reproduced: the stream patch + markdown keep every character
+(asserted in `test/run-maik-conv5.mjs`), and line 7 no longer reaches a model at all.
+
+## "KB only" renamed "MaiK Edge" (owner, 2026-10-04, branch `maik-edge-engine`)
+The `rag` engine shows as **MaiK Edge** everywhere (picker row, header chip, footer `discLabel`, Settings
+"Who answers", the KB-miss notice, the `kb-only` error message). The pref value stays `rag`, so saved choices
+and analytics are unchanged. It is the free, offline, no-paid-AI mode: Edge's on-device router
+(`SMD_EDGE.rules` + `SMD_EDGE.route` in `maikSendRest`, not engine-gated) opens the right tool, calculator,
+drug, ICD or Knowledge page, and the KB answers the rest. It never calls a cloud AI or writes long answers.
+Edge runs on Settings > MaiK > "Edge engine" (`smd_edge_engine`: Needle, FunctionGemma, Rules only); the picker
+row shows "Engine: <name>" under its description. `smd_edge` "0" brings back the old "KB only" name and copy.
+Helpers: `SMD_MAIK_ENGINE.ragLabel()`, `edgeEngineLabel()`. The picker overlay mounts on `<body>`, outside
+`#maikSheet`, so it never got the dark tokens; `body.dark #maikModelPicker` (home.js) now carries them.
 

@@ -23,7 +23,7 @@ const aSignal = (over) => report({
   what: "Wrong-strength potassium ampoule selected from the resuscitation trolley",
   severity: SEVERITY.NEAR_MISS, reportedBy: "nurse-7", now: NOW, ...over,
 });
-const anIncident = (over) => confirm(aSignal(over), { outcome: CONFIRM_OUTCOME.CONFIRMED, reason: "reviewed, a real event", category: CATEGORY.MEDICATION_ERROR, by: "safety-lead", now: NOW });
+const anIncident = (over) => confirm(aSignal(over), { outcome: CONFIRM_OUTCOME.CONFIRMED, reason: "reviewed, a real event", category: CATEGORY.MEDICATION_ERROR, merpCategory: "B", by: "safety-lead", now: NOW });
 
 /* ------------------------------------------------------------------ signal -> confirm */
 

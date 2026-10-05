@@ -38,6 +38,7 @@ import { resolveClinicalActor } from "./actor.js";
 import { RecordService, isExternalRecord } from "./service.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { ADMISSION_CLASSES } from "./migrate-inpatient.js";
+import { TYPE as OPENING_TYPE, openingLine } from "./opening-balance.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 
@@ -357,13 +358,17 @@ async function chargesForPatient(request, env, ctx) {
   /* A slice that could not be read is NAMED, not treated as nothing done. Reading it as empty is
    * how a bill looks settled when the doses on it were simply not visible to this request. */
   const unreadable = [];
-  let slices, stays = [];
+  let slices, stays = [], openings = [];
   try {
     const rows = await Promise.all(types.map((t) => svc.byPatient(t, patientId).catch(() => { unreadable.push(t); return []; })));
     slices = {};
     types.forEach((t, i) => { slices[t] = (rows[i] || []).filter(Boolean); });
     stays = (await svc.byPatient("Encounter", patientId).catch(() => { unreadable.push("Encounter"); return []; }))
       .filter((e) => e && !isExternalRecord(e) && ADMISSION_CLASSES.includes(e.class));
+    /* A balance carried from the old system at switch-over (opening-balance.js). Unreadable is named, as every slice is:
+     * a bill raised without it would look settled while the patient still owes the old bill. */
+    openings = ((await svc.byPatient(OPENING_TYPE, patientId).catch(() => { unreadable.push(OPENING_TYPE); return []; })) || [])
+      .filter((r) => r && !isExternalRecord(r) && str(r.patientId) === patientId);
   } catch (e) {
     if (e instanceof GovernanceError) return { ...base, ok: false, status: 403, error: "permission", reasons: (e.reasons || []).map((r) => r.code), items: [] };
     return { ...base, ok: false, status: 502, error: "record_read_failed", detail: str(e && e.message), items: [] };
@@ -375,6 +380,7 @@ async function chargesForPatient(request, env, ctx) {
   if (encounterId) {
     for (const t of types) slices[t] = slices[t].filter((r) => str(r.encounterId) === encounterId);
     stays = stays.filter((e) => e.id === encounterId);
+    openings = openings.filter((r) => str(r.encounterId) === encounterId);
   }
 
   const { items, skipped } = capturableFrom(slices);
@@ -395,8 +401,12 @@ async function chargesForPatient(request, env, ctx) {
   }
   const once = supplyOrDose(items, ctx.tariff);
   skipped.push(...once.skipped);
-  const { priced, unpriced: unpricedByTariff, total, currency } = priceWith(once.items, ctx.tariff);
+  const { priced: tariffPriced, unpriced: unpricedByTariff, total: tariffTotal, currency } = priceWith(once.items, ctx.tariff);
   const unpriced = [...once.unpriced, ...unpricedByTariff];
+  /* The carried balance is already a price (no tariff applies), and it is the FIRST line of the stay's bill. */
+  const opening = openings.sort((a, b) => str(a.encounterId).localeCompare(str(b.encounterId))).map(openingLine);
+  const priced = [...opening, ...tariffPriced];
+  const total = Math.round(tariffTotal * 100 + opening.reduce((n, l) => n + Math.round(l.line * 100), 0)) / 100;
 
   return {
     ...base, ok: true, patientId, encounterId: encounterId || null,

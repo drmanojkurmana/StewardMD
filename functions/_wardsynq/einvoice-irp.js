@@ -129,7 +129,8 @@ function irnRequest(invoice, seller, note) {
   const source = note ? note.lines || [] : invoice.lines || [];
   const taxed = source.filter((l) => isTaxed(l) && !(note && !(Number(l.tax) > 0)));
   if (!taxed.length) return { error: "no_taxable_lines", detail: "Exempt supplies are not reported for e-invoicing. This Bill of Supply has no IRN." };
-  if (!note && (invoice.lines || []).some((l) => !isTaxed(l)) && !str(invoice.billOfSupplyNumber)) return { error: "bill_of_supply_number_missing", detail: "This bill has taxed and exempt charges for a registered buyer, and its separate Bill of Supply has no number yet. Save the buyer details again to issue it, then report the Tax Invoice." };
+  /* A balance carried from the old system (kind opening_balance) is in no GST document, so it needs no Bill of Supply. */
+  if (!note && (invoice.lines || []).some((l) => !isTaxed(l) && !(l && l.kind === "opening_balance")) && !str(invoice.billOfSupplyNumber)) return { error: "bill_of_supply_number_missing", detail: "This bill has taxed and exempt charges for a registered buyer, and its separate Bill of Supply has no number yet. Save the buyer details again to issue it, then report the Tax Invoice." };
   const noHsn = taxed.filter((l) => !HSN.test(str(l.hsnSac))).map((l) => l.code);
   if (noHsn.length) return { error: "hsn_sac_missing", codes: noHsn, detail: "These taxed items have no HSN/SAC on the Price list, so the document cannot be reported." };
 

@@ -12,6 +12,8 @@
  *     resolves "stale" and is never shown. The engine is reset before the next call.
  *   - Back-off: env.memoryOk() / env.thermalOk() / env.othersBusy() are asked before every call; a
  *     "no" resolves "skipped" so the caller uses the rules path.
+ *   - Lost weights: an engine error tagged `notLoaded` (the engine process restarted empty) marks the
+ *     runtime cold; that call reloads once and retries. No loop: a second notLoaded is an "error".
  *   - Offline: the runtime makes no network calls of its own; adapters must not either.
  * Every outcome is a resolved value, never a rejection, so a caller can always continue (rule S4).
  *
@@ -40,18 +42,24 @@
       resolve(out);
     }
 
-    function ensureLoaded() {
+    // budget: how long THIS caller waits (a request: coldMs; a background warm: longer). A request that
+    // arrives while a warm is loading joins that load but still gives up after coldMs (rules answer).
+    function ensureLoaded(budget) {
+      budget = budget || coldMs;
       if (loaded) return Promise.resolve(true);
-      if (loading) return loading;
-      var t0 = now();
-      loading = new Promise(function (res) {
-        var timer = setTimeout(function () { loading = null; res(false); }, coldMs);
-        Promise.resolve().then(function () { return engine.load(); }).then(function () {
-          clearTimeout(timer); loaded = true; loading = null; res(true);
-        }, function () { clearTimeout(timer); loading = null; res(false); });
+      if (!loading) {
+        loading = new Promise(function (res) {
+          var timer = setTimeout(function () { loading = null; res(false); }, budget);
+          Promise.resolve().then(function () { return engine.load(); }).then(function () {
+            clearTimeout(timer); loaded = true; loading = null; res(true);
+          }, function () { clearTimeout(timer); loading = null; res(false); });
+        });
+      }
+      var shared = loading;
+      return new Promise(function (res) {
+        var t = setTimeout(function () { res(false); }, budget);
+        shared.then(function (ok) { clearTimeout(t); res(ok); });
       });
-      loading.startedAt = t0;
-      return loading;
     }
 
     function start(job) {
@@ -68,7 +76,7 @@
         }
         done(job.resolve, "timeout", { ms: now() - t0 });
         running = null; next();
-      }, deadlineMs);
+      }, job.deadlineMs || deadlineMs);
 
       Promise.resolve().then(function () {
         return needsReset && engine.reset ? Promise.resolve(engine.reset()).then(function () { needsReset = false; }) : null;
@@ -84,7 +92,20 @@
       }, function (err) {
         if (stuck) { stuck = false; next(); }
         if (settled) return;
-        settled = true; clearTimeout(timer); running = null;
+        settled = true; clearTimeout(timer);
+        // The engine lost its weights behind the runtime's back (Android: the low-memory killer ended
+        // :edge and the restarted process has no model). Mark cold, reload under coldMs, retry this job
+        // once with a fresh deadline. `running` stays this job meanwhile, so new work waits.
+        if (err && err.notLoaded && !job.reloaded) {
+          job.reloaded = true; loaded = false;
+          return ensureLoaded().then(function (ok) {
+            if (ok && job.token === token) return start(job);
+            running = null;
+            done(job.resolve, ok ? "stale" : "unavailable", ok ? null : { reason: "load" });
+            next();
+          });
+        }
+        running = null;
         done(job.resolve, "error", { error: String((err && err.message) || err), ms: now() - t0 });
         next();
       });
@@ -115,6 +136,23 @@
       });
     }
 
+    /* warm(task, budgetMs): load and run one throwaway call OUTSIDE any request's budget, so the first
+     * real request finds the engine warm (iOS Metal compiles its shaders on first use: 17 s for
+     * FunctionGemma on an iPhone 15 Pro). Same back-off as run(). Never queues: busy -> false.
+     * Resolves true when the throwaway call came back ok. */
+    function warm(task, budgetMs) {
+      var budget = budgetMs || 60000;
+      if (!engine || !engine.available || !engine.available()) return Promise.resolve(false);
+      if (!ask(env.memoryOk) || (env.othersBusy && ask(function () { return !env.othersBusy(); }) === false)) return Promise.resolve(false);
+      if (running || waiting || stuck) return Promise.resolve(false);
+      return ensureLoaded(budget).then(function (ok) {
+        if (!ok || running || waiting || stuck) return false;
+        return new Promise(function (resolve) {
+          start({ task: task || {}, token: token, resolve: resolve, deadlineMs: budget });
+        }).then(function (r) { return !!(r && r.status === "ok"); });
+      });
+    }
+
     function setSession(id) {
       if (id === sessionId) return;
       sessionId = id; token++; needsReset = true;
@@ -130,7 +168,7 @@
     }
 
     return {
-      run: run, setSession: setSession, release: release,
+      run: run, warm: warm, setSession: setSession, release: release,
       session: function () { return sessionId; },
       status: function () { return { loaded: loaded, running: !!running, waiting: !!waiting, stuck: stuck, token: token, stats: JSON.parse(JSON.stringify(stats)) }; }
     };

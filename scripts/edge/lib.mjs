@@ -52,9 +52,33 @@ export function loadApp() {
   return loaded;
 }
 
+// The Knowledge Base for KB-page rules (MaiKKB + symptoms). SMD_REASON.hasDiseaseRef is reduced to its
+// enrichment lookup (reasoning.js also checks SYNDROMES / DDX_NI, which only ADD pages), so a page this
+// offers always exists in the app. ~1 s; only --kb and the KB tests load it.
+export const KB_EVAL = path.join(ROOT, "vault", "plans", "edge-data", "kb", "kb-nav.jsonl");
+let kbLoaded = false;
+export function loadKB() {
+  const app = loadApp();
+  if (!kbLoaded) {
+    ["kb/dist/kb.core.js", "kb/dist/kb.clinical.js", "kb/dist/kb.enrichment.js", "kb/dist/kb.enrichment.2.js", "kb/dist/kb.expanded.js", "kb/dist/kb.rag.js",
+      "kb/ai/maik-kb.js", "kb/ai/maik-symptoms.js"].forEach((f) => vm.runInThisContext(fs.readFileSync(path.join(ROOT, f), "utf8"), { filename: f }));
+    globalThis.SMD_REASON = { hasDiseaseRef: (id) => !!(globalThis.KB_ENRICHMENT && globalThis.KB_ENRICHMENT.byId && globalThis.KB_ENRICHMENT.byId[id]) };
+    kbLoaded = true;
+  }
+  return app;
+}
+
 export function sha(s) { return crypto.createHash("sha256").update(s).digest("hex"); }
 // Deterministic 0..1 from a string (split assignment never changes between runs).
 export function unit(s) { return parseInt(sha(s).slice(0, 8), 16) / 0xffffffff; }
+
+// Round 3 (Edge-Runbook 5e). Keys held out of r3 training AND its dev split, so only the frozen test4 set
+// has them: targets ("calculator:gos", "kb:dic") 8%, ambiguous names ("amb:wells") 30%.
+export function t4Held(key) { return unit("t4hold:" + key) < (key.startsWith("amb:") ? 0.3 : 0.08); }
+// Short names a clinician uses for two or more different modules ("wells": DVT or PE; "insulin": drug, tool or
+// calculator). The router must pass on them (danger, "ambiguous"), in training and in test4 alike.
+export const AMBIGUOUS_NAMES = ["wells", "timi", "insulin", "mrc", "ipss", "egfr", "gfr", "cci", "homa", "fisher", "gds", "framingham",
+  "cam", "lvh", "dlbcl", "retic", "bmr", "coma score", "sah grade", "copd score"];
 
 export function readJsonl(file) {
   return fs.readFileSync(file, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));

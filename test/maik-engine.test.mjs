@@ -229,7 +229,8 @@ function load(env = {}) {
   const h = E.settingsHTML();
   ok("settings: one .me-seg host", (h.match(/class="me-seg"/g) || []).length === 1);
   ok("settings: three engine options", (h.match(/data-me-opt="/g) || []).length === 3);
-  ok("settings: labels present", /Knowledge Base only/.test(h) && /MaiK Cloud/.test(h) && /MaiK on this phone/.test(h));
+  ok("settings: labels present", /MaiK Edge/.test(h) && /MaiK Cloud/.test(h) && /MaiK on this phone/.test(h));
+  ok("settings: old KB-only name is gone with Edge on", !/Knowledge Base only|KB only/.test(h));
   ok("settings: Cloud is graded DM, the super specialist, and never named by vendor", /MaiK Cloud[\s\S]{0,400}>DM</.test(h) && !/Gemini/.test(h));
   ok("settings: cloud is checked by default", /data-me-opt="cloud" role="radio" aria-checked="true"/.test(h));
   ok("settings: local disabled without a gate", /data-me-opt="local"[^>]*aria-disabled="true"/.test(h));
@@ -350,7 +351,10 @@ function load(env = {}) {
   // tier only. `actual` stays in the registry for logs and bug reports.
   ok("picker: no upstream model name leaks into the row", !/MedGemma|Gemma/i.test(opts[2].sub) && !/MedGemma|Gemma/i.test(opts[2].label));
   ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
-  ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
+  ok("picker: Edge row is named MaiK Edge", opts[1].label === "MaiK Edge");
+  ok("picker: Edge row says it opens tools and answers from the KB, no AI writing", /opens the right tool/i.test(opts[1].sub) && /Knowledge Base/.test(opts[1].sub) && /No AI writing/.test(opts[1].sub));
+  ok("picker: Edge row shows its engine (Needle by default)", opts[1].edgeEngine === "Needle");
+  ok("picker: no em-dash in the Edge row", !/—/.test(opts[1].label + opts[1].sub));
   ok("picker: cloud row is our super specialist, grounded, never a vendor name", /super specialist/i.test(opts[0].sub) && /grounded/i.test(opts[0].sub) && !/Gemini/.test(opts[0].sub));
   ok("picker: cloud row carries the DM grade", opts[0].grade === "DM");
   ok("picker: on-device rows carry a grade", ["MBBS", "MD", "PhD"].indexOf(opts[2].grade) >= 0 && ["MBBS", "MD", "PhD"].indexOf(opts[4].grade) >= 0);
@@ -364,7 +368,8 @@ function load(env = {}) {
   ok("picker: selecting an installed pack sets engine local", E.getPref() === "local");
   ok("picker: currentOptionId follows the pack", E.currentOptionId() === "local:maik-mxcore");
   E.selectOption("rag");
-  ok("picker: selecting KB only switches engine", E.getPref() === "rag" && E.chipLabel() === "KB only");
+  ok("picker: selecting MaiK Edge switches engine (pref stays rag)", E.getPref() === "rag" && E.chipLabel() === "MaiK Edge");
+  ok("picker: footer names MaiK Edge", /^MaiK Edge/.test(E.discLabel()) && /knowledge base/i.test(E.discLabel()));
   E.selectOption("cloud");
   ok("picker: back to cloud", E.getPref() === "cloud");
 
@@ -439,7 +444,25 @@ function load(env = {}) {
   // a genuine KB-only choice still gets the KB-only copy
   const kb = load({ gate: true, runtime: true, pack: true });
   kb.E.setPref("rag");
-  ok("notice: real KB-only choice keeps its own copy", /KB-only mode is on/.test(kb.E.kbOnlyNotice().text));
+  ok("notice: real MaiK Edge choice gets the Edge miss copy", /\*\*MaiK Edge\*\* found no tool, page or Knowledge Base entry/.test(kb.E.kbOnlyNotice().text) && kb.E.kbOnlyNotice().engine === "rag");
+  ok("notice: Edge miss copy has no em-dash", !/—/.test(kb.E.kbOnlyNotice().text));
+}
+
+// smd_edge "0" (Edge off): the rag option falls back to its old "KB only" name everywhere
+{
+  const { E, ls } = load({ gate: true, runtime: true, pack: true });
+  ls.setItem("smd_edge", "0");
+  E.setPref("rag");
+  ok("edge off: label falls back to KB only", E.ragLabel() === "KB only" && E.chipLabel() === "KB only");
+  const o = E.options().filter((x) => x.id === "rag")[0];
+  ok("edge off: picker row is KB only, cited, no engine line", o.label === "KB only" && /cited/i.test(o.sub) && !o.edgeEngine);
+  ok("edge off: settings row is Knowledge Base only", /Knowledge Base only/.test(E.settingsHTML()) && !/MaiK Edge/.test(E.settingsHTML()));
+  ok("edge off: notice keeps the KB-only copy", /KB-only mode is on/.test(E.kbOnlyNotice().text));
+  ok("edge off: footer does not name MaiK Edge", !/MaiK Edge/.test(E.discLabel()));
+  ls.setItem("smd_edge", "1");
+  ok("edge on again: MaiK Edge", E.chipLabel() === "MaiK Edge");
+  ls.setItem("smd_edge_engine", "functiongemma");
+  ok("edge engine label follows smd_edge_engine", E.edgeEngineLabel() === "FunctionGemma");
 }
 
 // adopt the pack once it finishes downloading
@@ -728,7 +751,36 @@ ok("warmIfLocal still exists for the chosen engine", /function warmIfLocal/.test
   sch.win.SMD_ICD = ICD;
   sch.win.fetch = async (u) => ({ ok: true, json: async () => (/schemes\/search/.test(u) ? { results: [{ treatment_code: "M1.9", treatment_name: "Poisonings with unstable vitals", package_amount: 35000, scheme_name: "Dr NTR Vaidya Seva", state: "AP" }] } : { results: [] }) });
   const sr = await sch.win.SMD_AI.explainGrounded({ question: "aarogyasri package code for poisoning" }, {});
-  ok("a scheme ask lists the package code, name and rate from the scheme database", sr && sr.engine === "codedb" && /M1\.9/.test(sr.text) && /35000/.test(sr.text));
+  ok("a scheme ask lists the package code, name and rate from the scheme database", sr && sr.engine === "codedb" && /M1\.9/.test(sr.text) && /Rs 35,000/.test(sr.text));
+
+  // 4 Oct 2026: "What is the arogyasri code for pancreatitis" listed Nagaland and Himachal at "Rs 0".
+  // With the Edge vocabulary loaded, a named scheme searches only its own states, labelled, and a
+  // zero or absurd amount reads "price not listed".
+  const { createRequire } = await import("node:module");
+  const EDGE = createRequire(import.meta.url)("../edge-router.js");
+  const ROWS = [
+    { state_id: "andhra-pradesh", scheme_id: "ap-ntr-vaidya-seva", treatment_code: "M12.10", treatment_name: "Medical management of Acute Pancreatitis -Mild", package_amount: 51310 },
+    { state_id: "telangana", scheme_id: "telangana-aarogyasri", treatment_code: "M12.10", treatment_name: "Medical management of Acute Pancreatitis (Mild)", package_amount: 23003800880010350 },
+    { state_id: "nagaland", scheme_id: "nagaland-cmhis-pmjay", treatment_code: "MG033A", treatment_name: "Acute pancreatitis", package_amount: 0 }
+  ];
+  const ar = load({ gate: true, runtime: true, pack: true });
+  const asked = [];
+  ar.win.SMD_EDGE = EDGE;
+  ar.win.fetch = async (u) => {
+    const st = (String(u).match(/[?&]state=([^&]+)/) || [])[1] || "";
+    if (/schemes\/search/.test(u)) asked.push(st);
+    return { ok: true, json: async () => ({ results: /schemes\/search/.test(u) ? ROWS.filter((r) => !st || r.state_id === st) : [] }) };
+  };
+  const arr = await ar.win.SMD_AI.explainGrounded({ question: "What is the arogyasri code for pancreatitis" }, {});
+  ok("arogyasri: only the AP and Telangana searches run", asked.join(",") === "andhra-pradesh,telangana");
+  ok("arogyasri: no Nagaland, no ICD, both schemes labelled", arr && arr.engine === "codedb" && !/Nagaland|MG033A|ICD/.test(arr.text) && /Andhra Pradesh/.test(arr.text) && /Telangana/.test(arr.text));
+  ok("arogyasri: Rs 51,310 shown, the garbage Telangana amount reads 'price not listed'", /Rs 51,310/.test(arr.text) && /price not listed/.test(arr.text) && !/23003800880010350/.test(arr.text));
+  const none = load({ gate: true, runtime: true, pack: true });
+  none.win.SMD_EDGE = EDGE;
+  none.win.fetch = async () => ({ ok: true, json: async () => ({ results: [] }) });
+  const nr = await none.win.SMD_AI.explainGrounded({ question: "arogyasri code for zzqx fever" }, {});
+  ok("a named scheme with no package says so; no model is asked to invent a code", nr && nr.engine === "codedb" && /No Aarogyasri package found/.test(nr.text) && !none.calls.some((x) => x[0] === "explainGrounded"));
+  ok("schemePrice: 0 and absurd amounts are not prices", ar.win.SMD_MAIK_ENGINE.schemePrice({ package_amount: 0 }) === "price not listed" && ar.win.SMD_MAIK_ENGINE.schemePrice({ package_amount: 1e8 }) === "price not listed" && ar.win.SMD_MAIK_ENGINE.schemePrice({ package_amount: 10000 }) === "Rs 10,000");
 }
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

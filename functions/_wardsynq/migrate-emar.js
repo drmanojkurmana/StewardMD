@@ -31,7 +31,7 @@
  */
 
 import { MedicationAdministrationRecord, STATES, TERMINAL, MedicationSafetyError, materialOrderChanges } from "../../wardsynq/wardsynq-meds.js";
-import { SafetyEngine } from "../../wardsynq/wardsynq-safety.js";
+import { SafetyEngine, resolveComponents } from "../../wardsynq/wardsynq-safety.js";
 import { GovernanceError } from "../../wardsynq/wardsynq-actors.js";
 import { VersionConflictError } from "./repository.js";
 import { weightInKg } from "../../wardsynq/wardsynq-vitals.js";
@@ -53,29 +53,43 @@ const ACTIONS = Object.freeze(["verify", "dispense", "scan", "administer", "hold
  * rather than re-derived so the ward and the vitals mapper cannot disagree about what a weight is. */
 const BODY_WEIGHT_LOINC = "29463-7";
 
-/* Codex F6: the LOINC codes for an estimated GFR (MDRD, CKD-EPI and the 2021 CKD-EPI equations, per 1.73 m2). Read as the
- * laboratory reported it: nothing here computes an eGFR from a creatinine (radiology-protocol.js says why). */
-const EGFR_CODES = Object.freeze(["33914-3", "48642-3", "48643-1", "50044-7", "62238-1", "69405-9", "88293-6", "88294-4", "98979-8"]);
+/* Codex F6, owner decision 2026-10-04: the LOINC codes for an estimated GFR, read as the laboratory reported it. Nothing here
+ * computes an eGFR from a creatinine (radiology-protocol.js says why). EGFR_CODES is the accepted list in PREFERENCE order:
+ * 98979-8 (CKD-EPI 2021 creatinine, the modern code) first, then the other active codes (62238-1 older CKD-EPI, 77147-7 MDRD
+ * generic, 69405-9 GFR per 1.73 m2), then the legacy group last. The preference only breaks a tie between results of the same
+ * draw; it never lets an older value beat a newer one. */
+const EGFR_CODES = Object.freeze(["98979-8", "62238-1", "77147-7", "69405-9", "50044-7", "48642-3", "48643-1", "88293-6", "88294-4"]);
+/* 33914-3 is discouraged by LOINC and maps to 77147-7: accepted on the way in, reported as 77147-7. */
+const EGFR_ALIASES = Object.freeze({ "33914-3": "77147-7" });
+/* Race-specific (48642-3, 48643-1, 88293-6, 88294-4) and population-specific (50044-7, MDRD female) equations. Accepted as
+ * incoming history; StewardMD never generates or prefers them, and a result from one is flagged so a clinician can see it. */
+const EGFR_LEGACY_CODES = Object.freeze(new Set(["50044-7", "48642-3", "48643-1", "88293-6", "88294-4"]));
 /* An eGFR or creatinine older than this is shown with its age and is NOT used by the renal check. Seven days is the age at
  * which radiology-protocol.js already tells a radiologist a creatinine "describes the patient then, not now"; it is not a
  * clinical threshold this file invents, and it is listed for the owner to confirm. */
 const RENAL_STALE_DAYS = 7;
 
-/** PURE. The newest result with one of `codes`, with its unit, time and age, or null. Never a number without a date. */
-function latestLab(observations, codes, nowMs) {
-  const rows = (observations || []).filter((o) => o && codes.includes(str(o.code)) && Number.isFinite(Number(o.value)) && o.value !== "" && o.value !== null)
-    .map((o) => ({ value: Number(o.value), unit: o.unit || null, at: (o.meta && o.meta.effectiveAt) || o.effectiveAt || null, code: str(o.code) }))
+/** PURE. The newest result with one of `codes`, with its unit, time and age, or null. Never a number without a date.
+ * `opts` ({ aliases, legacy }) is for eGFR: a code in `aliases` is read as the code it maps to, the result is ranked by its
+ * position in `codes` (the preference order) when several share the newest time, and a result from the `legacy` set carries
+ * legacy: true. Without `opts` the order of `codes` means nothing, as before. */
+function latestLab(observations, codes, nowMs, opts) {
+  const aliases = (opts && opts.aliases) || {};
+  const norm = (c) => (Object.prototype.hasOwnProperty.call(aliases, c) ? aliases[c] : c);
+  const rank = (c) => (opts ? codes.indexOf(c) : 0);
+  const rows = (observations || []).filter((o) => o && codes.includes(norm(str(o.code))) && Number.isFinite(Number(o.value)) && o.value !== "" && o.value !== null)
+    .map((o) => ({ value: Number(o.value), unit: o.unit || null, at: (o.meta && o.meta.effectiveAt) || o.effectiveAt || null, code: norm(str(o.code)) }))
     .filter((o) => Number.isFinite(Date.parse(str(o.at))))
-    .sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
+    .sort((a, b) => (Date.parse(b.at) - Date.parse(a.at)) || (rank(a.code) - rank(b.code)));
   if (!rows.length) return null;
   const ageDays = Math.max(0, Math.floor((nowMs - Date.parse(rows[0].at)) / 86400000));
-  return { ...rows[0], ageDays, stale: ageDays >= RENAL_STALE_DAYS };
+  return { ...rows[0], ageDays, stale: ageDays >= RENAL_STALE_DAYS, ...(opts && opts.legacy && opts.legacy.has(rows[0].code) ? { legacy: true } : {}) };
 }
 
 /** PURE. The renal facts the order check is given: latest eGFR and creatinine, or null when the Observations were unreadable. */
 function renalFrom(observations, nowMs) {
   if (observations === null) return null;
-  return { egfr: latestLab(observations, EGFR_CODES, nowMs), creatinine: latestLab(observations, CREATININE_CODES, nowMs) };
+  return { egfr: latestLab(observations, EGFR_CODES, nowMs, { aliases: EGFR_ALIASES, legacy: EGFR_LEGACY_CODES }), creatinine: latestLab(observations, CREATININE_CODES, nowMs) };
 }
 
 /** The patient's most recently recorded weight in kg, or undefined when the ward has not weighed them. */
@@ -213,22 +227,50 @@ function bedsideSafetyCheck(svc, rulePack, opts) {
 const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
 
 /* Codex F6: WHAT THE ORDER CHECK COULD NOT COVER, SAID AS A FINDING. The engine's renal and pregnancy/lactation checks only
- * fire from loaded tables (getRulePack loads no renal table; the pregnancy/lactation seed is empty) and from the patient's
+ * fire from loaded tables (getRulePack loads none; order-entry-pack.js adds the signed-off NFI tables) and from the patient's
  * measurements; with either missing they returned nothing, which reads as checked and clean. Disposition "warn", never a
  * block: they report missing content and data, decide nothing clinical, and no table or formula is invented here. */
-function coverageFindings(order, renal, renalTable, plRules, pregnancyStatus) {
+/* Owner decision 2026-10-04: with the National Formulary of India tables present (`tables` = rulePack.clinicalTables,
+ * order-entry-pack.js), an UNSIGNED table says exactly that ("NFI table loaded, awaiting clinical sign-off") and is not used;
+ * a SIGNED table that has no entry for the ordered drug says so too, rather than reading as checked. `generics` is what the
+ * ordered drug resolved to. Without `tables` (a pack with no NFI tables at all) the wording is as before. */
+const NFI_STATE_SAID = Object.freeze({
+  "awaiting-signoff": "NFI table loaded, awaiting clinical sign-off",
+  "signoffs-unreadable": "NFI table loaded, but its clinical sign-off could not be read, so it was not applied",
+});
+function coverageFindings(order, renal, renalTable, plRules, pregnancyStatus, tables, generics) {
   const out = [];
   const w = (code, message, extra) => out.push({ code, severity: "moderate", disposition: "warn", message, ...(extra || {}) });
   const lab = (x, name) => `${name} ${x.value}${x.unit ? " " + x.unit : ""} on ${x.at.slice(0, 10)}${x.stale ? `, ${x.ageDays} days old` : ""}`;
   const known = renal ? [renal.egfr && lab(renal.egfr, "eGFR"), renal.creatinine && lab(renal.creatinine, "creatinine")].filter(Boolean) : [];
   const said = known.length ? ` Latest recorded: ${known.join("; ")}.` : "";
-  if (!renalTable) w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: no renal table is loaded, so ${order.drug} was not checked for renal dosing.${said}`);
+  const covers = (t) => (generics || []).some((g) => t.covered && t.covered.has(g));
+  const rt = tables && tables.renal;
+  if (rt && rt.state !== "signed") w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: ${NFI_STATE_SAID[rt.state] || NFI_STATE_SAID["awaiting-signoff"]}. ${order.drug} was not checked for renal dosing.${said}`, { table: rt.table, tableState: rt.state });
+  else if (rt && !covers(rt)) w("RENAL_CHECK_NOT_COVERED", `Renal dose check: ${order.drug} is not in the NFI renal table, so it was not checked for renal dosing.${said}`, { table: rt.table });
+  else if (!rt && !renalTable) w("RENAL_CHECK_NOT_AVAILABLE", `Renal dose check not available: no renal table is loaded, so ${order.drug} was not checked for renal dosing.${said}`);
   if (renal === null) w("RENAL_FUNCTION_UNREADABLE", "The patient's results could not be read, so renal function is unknown. Do not read this as normal.");
   else if (!renal.egfr) w("RENAL_FUNCTION_NOT_RECORDED", `No eGFR is recorded for this patient, so no renal dose check can use one.${renal.creatinine ? ` Latest creatinine: ${lab(renal.creatinine, "").trim()}. Nothing here computes an eGFR from it.` : ""}`);
   else if (renal.egfr.stale) w("RENAL_FUNCTION_STALE", `The latest eGFR is ${renal.egfr.ageDays} days old, so the renal dose check did not use it.`);
+  else if (renal.egfr.legacy) w("RENAL_EGFR_LEGACY_EQUATION", `The latest eGFR is from a legacy race-specific or population-specific equation (LOINC ${renal.egfr.code}).`);
   const s = pregnancyStatus || {};
-  if (!plRules && !(s.pregnant === false && s.lactating === false)) {
-    const recorded = s.pregnant === true ? " The patient is recorded as pregnant." : s.lactating === true ? " The patient is recorded as breastfeeding or within the postpartum lactation window." : "";
+  const recorded = s.pregnant === true ? " The patient is recorded as pregnant." : s.lactating === true ? " The patient is recorded as breastfeeding or within the postpartum lactation window." : "";
+  if (tables && tables.pregnancy && tables.lactation) {
+    // Only a side the patient's record does not rule out (recorded true, or not recorded) is spoken about.
+    const sides = [["pregnancy", "pregnancy", s.pregnant], ["lactation", "breastfeeding", s.lactating]].filter(([, , st]) => st !== false);
+    const unsigned = sides.filter(([k]) => tables[k].state !== "signed");
+    if (unsigned.length) {
+      const st = unsigned.some(([k]) => tables[k].state === "signoffs-unreadable") ? "signoffs-unreadable" : "awaiting-signoff";
+      const names = unsigned.map(([k]) => k).join(" and ");
+      w("PREGNANCY_LACTATION_CHECK_NOT_AVAILABLE", `${names[0].toUpperCase() + names.slice(1)} check not available: ${NFI_STATE_SAID[st]}. ${order.drug} was not checked for use in ${unsigned.map(([, use]) => use).join(" or ")}.${recorded}`,
+        { tables: unsigned.map(([k]) => tables[k].table), tableState: st });
+    }
+    for (const [k, use, st] of sides) {
+      if (st === true && tables[k].state === "signed" && !covers(tables[k])) {
+        w("PREGNANCY_LACTATION_NOT_COVERED", `${order.drug} is not in the NFI ${k} table, so no NFI guidance on use in ${use} was applied.${recorded}`, { table: tables[k].table });
+      }
+    }
+  } else if (!plRules && !(s.pregnant === false && s.lactating === false)) {
     w("PREGNANCY_LACTATION_CHECK_NOT_AVAILABLE", `Pregnancy and lactation check not available: no pregnancy or lactation rules are loaded, so ${order.drug} was not checked for use in pregnancy or breastfeeding.${recorded}`);
   }
   return out;
@@ -253,7 +295,8 @@ async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
     // medicine in pregnancy or breastfeeding, is decided.
     const v = new SafetyEngine({ rulePack, checks: ["allergy", "interaction", "dose", "renal", "same-drug", "pregnancy"] })
       .evaluate({ order, allergies, activeMeds, weightKg, egfr, pregnancyStatus, overrides: overrides || [] });
-    const coverage = coverageFindings(order, renal, renalTable, rulesLoaded, pregnancyStatus);
+    const coverage = coverageFindings(order, renal, renalTable, rulesLoaded, pregnancyStatus, rulePack.clinicalTables || null,
+      rulePack.clinicalTables ? resolveComponents(order.drugCode || order.drug, rulePack) : []);
     const pick = (f) => ({ code: f.code, severity: f.severity || null, disposition: f.disposition, message: f.message || "",
       ...(f.ruleId ? { ruleId: f.ruleId } : {}), ...(f.allergyId ? { allergyId: f.allergyId } : {}), ...(f.overridden ? { overridden: true } : {}),
       ...(f.disposition === "block" && ORDER_ENTRY_HARD_STOPS.includes(f.code) ? { hardStop: true } : {}) });
@@ -269,6 +312,8 @@ async function orderEntrySafety(svc, rulePack, order, overrides, opts) {
       coverage,
       // Codex F6: the measurements the renal check was given (null = the results could not be read).
       renal: { tableLoaded: renalTable, egfr: renal ? renal.egfr : null, creatinine: renal ? renal.creatinine : null, ...(renal ? {} : { unreadable: true }) },
+      // Owner decision 2026-10-04: each NFI table and whether it is signed off (only a signed table is applied).
+      ...(rulePack.clinicalTables ? { clinicalTables: { source: rulePack.clinicalTables.source, renal: rulePack.clinicalTables.renal.state, pregnancy: rulePack.clinicalTables.pregnancy.state, lactation: rulePack.clinicalTables.lactation.state } } : {}),
     };
   } catch (e) {
     return { checked: false, code: "SAFETY_CHECK_UNAVAILABLE", message: str(e && e.message) || "decision support unavailable" };
@@ -536,4 +581,4 @@ async function administerStep(request, env, ctx) {
   }
 }
 
-export { ACTIONS, ORDER_ENTRY_HARD_STOPS, EGFR_CODES, RENAL_STALE_DAYS, latestLab, renalFrom, coverageFindings, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };
+export { ACTIONS, ORDER_ENTRY_HARD_STOPS, EGFR_CODES, EGFR_ALIASES, EGFR_LEGACY_CODES, RENAL_STALE_DAYS, latestLab, renalFrom, coverageFindings, bedsideSafetyCheck, orderEntrySafety, medicationRound, administerStep };

@@ -392,10 +392,11 @@ function grantForCaps(caps) {
     // the same financial authority as a pre-authorisation, and it is not a clinical fact.
     // PackageAssignment joined 2026-09-16 (packages.js): which package a stay is billed on is the same authority as the bill.
     // StayPayer joined 2026-09-17 (stay-payer.js, gst-parties): who settles a stay's bill is the same authority as the bill.
+    // OpeningBalance joined 2026-10-04 (opening-balance.js): the old system's balance carried onto a stay is a bill line.
     const canRead = has(CAPS.BILLING_CHARGE)
-      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES, "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"]
-      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"];
-    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer"] : [];
+      ? ["Condition", "Claim", "PreAuthorisation", "Invoice", "CostEstimate", ...CAPTURE_TYPES, "CoverageEligibilityCheck", "PackageAssignment", "StayPayer", "OpeningBalance"]
+      : ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer", "OpeningBalance"];
+    const canWrite = has(CAPS.BILLING_CHARGE) ? ["Claim", "PreAuthorisation", "Invoice", "CostEstimate", "CoverageEligibilityCheck", "PackageAssignment", "StayPayer", "OpeningBalance"] : [];
     if (!grant) grant = { tier: canWrite.length ? TIER.EXECUTE : TIER.READ, read: canRead, write: canWrite, basis: has(CAPS.BILLING_CHARGE) ? CAPS.BILLING_CHARGE : CAPS.BILLING_VIEW };
     else grant = {
       // Raised, never lowered - the same union rule as every branch above. A cashier who also holds
@@ -457,6 +458,24 @@ function grantForCaps(caps) {
       write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
       writeCategories: grant.writeCategories,
       basis: grant.basis + "+" + CAPS.TRANSFUSION_ISSUE,
+    };
+  }
+
+  /* Owner decision 2026-10-04. TRANSFUSION_ADMINISTER is the ward nurse's bedside part of a transfusion: the
+   * two-person check, start, observations, a reaction stop and completion. Which of those steps a request may take
+   * is decided at the route (functions/api/queue/[[path]].js); this grant only lets the episode be written, and the
+   * raw record door refuses TransfusionEpisode (functions/api/wardsynq/[[path]].js ROUTE_GOVERNED), so a nurse
+   * cannot write a crossmatch or an issue through it. Patient is read to compare the scanned wristband. */
+  if (has(CAPS.TRANSFUSION_ADMINISTER)) {
+    const added = ["TransfusionEpisode"];
+    const canRead = [...added, "Patient", "Encounter"];
+    if (!grant) grant = { tier: TIER.EXECUTE, read: canRead, write: added, basis: CAPS.TRANSFUSION_ADMINISTER };
+    else grant = {
+      tier: TIER.EXECUTE,
+      read: grant.read === null ? null : [...new Set([...grant.read, ...canRead])],
+      write: grant.write === null ? null : [...new Set([...grant.write, ...added])],
+      writeCategories: grant.writeCategories,
+      basis: grant.basis + "+" + CAPS.TRANSFUSION_ADMINISTER,
     };
   }
 

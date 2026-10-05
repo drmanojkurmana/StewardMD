@@ -1,0 +1,196 @@
+{
+ "schema": 1,
+ "kind": "adult-ref-values",
+ "title": "Adult laboratory reference ranges",
+ "compiled": "2026-10-04",
+ "review": "signed off by owner 2026-10-05",
+ "note": "Reference ranges vary by laboratory, method and population. Use the reference range printed by the patient's own laboratory. Adults only (18 years and older).",
+ "_comment": "Row: { analyte, aka?, specimen?, sex?, value, unit, src, quote, note? }. value and unit are copied from the source as published (dashes normalised to '-'), never converted; quote is the source table row as read on the accessed date. A row with no SI source shows conventional units only, and the reverse. Lipid rows are decision limits, not population ranges (the source says so).",
+ "sources": {
+  "abim-2026": {
+   "title": "ABIM Laboratory Test Reference Ranges, January 2026",
+   "publisher": "American Board of Internal Medicine (ABIM)",
+   "url": "https://www.abim.org/Media/bfijryql/laboratory-reference-ranges.pdf",
+   "licence": "Published by ABIM for its examinations; free to read; no open licence stated. Owner to confirm reuse.",
+   "accessed": "2026-10-04"
+  },
+  "rcpa-spia": {
+   "title": "RCPA Standardised Pathology Informatics in Australia (SPIA) Chemical Pathology Harmonised Reference Intervals (RCPA Manual, Table 6; AACB Committee for Common Reference Intervals)",
+   "publisher": "Royal College of Pathologists of Australasia (RCPA Manual, page last updated 25-Nov-2024)",
+   "url": "https://www.rcpa.edu.au/Manuals/RCPA-Manual/General-Information/IG/Table-6-Harmonised-reference-intervals-for-chem",
+   "licence": "RCPA copyright; free to read; no open licence stated. Owner to confirm reuse.",
+   "accessed": "2026-10-04"
+  }
+ },
+ "groups": [
+  {
+   "id": "electrolytes", "title": "Electrolytes and minerals",
+   "rows": [
+    { "analyte": "Sodium", "aka": ["na"], "specimen": "serum", "value": "135-145", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Sodium | 18y to <120y | 135–145 mmol/L" },
+    { "analyte": "Sodium", "aka": ["na"], "specimen": "serum", "value": "136-145", "unit": "mEq/L", "src": "abim-2026", "quote": "Sodium, serum | 136-145 mEq/L" },
+    { "analyte": "Potassium", "aka": ["k+"], "specimen": "serum or plasma", "value": "3.5-5.2", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Potassium | 18y to <120y | 3.5–5.2 mmol/L", "note": "For adults this interval applies to serum and plasma; laboratories testing only heparin plasma may choose a lower interval (source note)." },
+    { "analyte": "Potassium", "aka": ["k+"], "specimen": "serum", "value": "3.5-5.0", "unit": "mEq/L", "src": "abim-2026", "quote": "Potassium, serum | 3.5-5.0 mEq/L" },
+    { "analyte": "Chloride", "aka": ["cl"], "specimen": "serum", "value": "95-110", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Chloride | 18y to <120y | 95–110 mmol/L" },
+    { "analyte": "Chloride", "aka": ["cl"], "specimen": "serum", "value": "98-106", "unit": "mEq/L", "src": "abim-2026", "quote": "Chloride, serum | 98-106 mEq/L" },
+    { "analyte": "Bicarbonate", "aka": ["hco3", "total co2"], "specimen": "serum", "value": "22-32", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Bicarbonate | 18y to <120y | 22–32 mmol/L" },
+    { "analyte": "Bicarbonate", "aka": ["hco3", "total co2"], "specimen": "serum", "value": "23-28", "unit": "mEq/L", "src": "abim-2026", "quote": "Bicarbonate, serum | 23-28 mEq/L" },
+    { "analyte": "Anion gap", "specimen": "serum", "value": "7-13", "unit": "mEq/L", "src": "abim-2026", "quote": "Anion gap, serum | 7-13 mEq/L" },
+    { "analyte": "Calcium (total)", "aka": ["calcium", "ca"], "specimen": "serum", "value": "2.10-2.60", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Calcium | 18y to <120y | 2.10–2.60 mmol/L" },
+    { "analyte": "Calcium (total)", "aka": ["calcium", "ca"], "specimen": "serum", "value": "8.6-10.2", "unit": "mg/dL", "src": "abim-2026", "quote": "Calcium, serum | 8.6-10.2 mg/dL" },
+    { "analyte": "Calcium corrected for albumin", "aka": ["corrected calcium", "adjusted calcium"], "specimen": "serum", "value": "2.10-2.60", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Calcium corrected for albumin | 18y to <120y | 2.10–2.60 mmol/L" },
+    { "analyte": "Calcium (ionised)", "aka": ["ionised calcium", "ionized calcium"], "specimen": "serum", "value": "1.16-1.31", "unit": "mmol/L", "src": "abim-2026", "quote": "Calcium, ionized, serum | 1.16-1.31 mmol/L" },
+    { "analyte": "Magnesium", "aka": ["mg"], "specimen": "serum", "value": "0.70-1.10", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Magnesium | 18y to <120y | 0.70–1.10 mmol/L" },
+    { "analyte": "Magnesium", "aka": ["mg"], "specimen": "serum", "value": "1.6-2.6", "unit": "mg/dL", "src": "abim-2026", "quote": "Magnesium, serum | 1.6-2.6 mg/dL" },
+    { "analyte": "Phosphate", "aka": ["phosphorus", "po4"], "specimen": "serum", "value": "0.75-1.50", "unit": "mmol/L", "src": "rcpa-spia", "quote": "Phosphate | 20y to <120y | 0.75–1.50 mmol/L", "note": "Age 20 years and over (18 to under 20 years: 0.75-1.65 mmol/L in the same source)." },
+    { "analyte": "Phosphate", "aka": ["phosphorus", "po4"], "specimen": "serum", "value": "3.0-4.5", "unit": "mg/dL", "src": "abim-2026", "quote": "Phosphorus, serum | 3.0-4.5 mg/dL" },
+    { "analyte": "Osmolality", "aka": ["serum osmolality", "plasma osmolality"], "specimen": "serum", "value": "275-295", "unit": "mOsm/kg H2O", "src": "abim-2026", "quote": "Osmolality, serum | 275-295 mOsm/kg H2O" }
+   ]
+  },
+  {
+   "id": "renal", "title": "Kidney function",
+   "rows": [
+    { "analyte": "Creatinine", "aka": ["serum creatinine", "creat"], "specimen": "serum", "sex": "male", "value": "60-110", "unit": "µmol/L", "src": "rcpa-spia", "quote": "Creatinine | Male | 19y to <60y | 60–110 umol/L", "note": "Ages 19 to under 60 years; Vitros enzymatic assay (source notes)." },
+    { "analyte": "Creatinine", "aka": ["serum creatinine", "creat"], "specimen": "serum", "sex": "female", "value": "45-90", "unit": "µmol/L", "src": "rcpa-spia", "quote": "Creatinine | Female | 19y to <60y | 45–90 umol/L", "note": "Ages 19 to under 60 years; Vitros enzymatic assay (source notes)." },
+    { "analyte": "Creatinine", "aka": ["serum creatinine", "creat"], "specimen": "serum", "sex": "female", "value": "0.50-1.10", "unit": "mg/dL", "src": "abim-2026", "quote": "Creatinine, serum | Female: 0.50-1.10 mg/dL; male: 0.70-1.30 mg/dL" },
+    { "analyte": "Creatinine", "aka": ["serum creatinine", "creat"], "specimen": "serum", "sex": "male", "value": "0.70-1.30", "unit": "mg/dL", "src": "abim-2026", "quote": "Creatinine, serum | Female: 0.50-1.10 mg/dL; male: 0.70-1.30 mg/dL" },
+    { "analyte": "Urea nitrogen (BUN)", "aka": ["bun", "urea", "blood urea nitrogen"], "specimen": "serum or plasma", "value": "8-20", "unit": "mg/dL", "src": "abim-2026", "quote": "Blood urea nitrogen (BUN), serum or plasma | 8-20 mg/dL" },
+    { "analyte": "Uric acid", "aka": ["urate"], "specimen": "serum", "value": "3.0-7.0", "unit": "mg/dL", "src": "abim-2026", "quote": "Uric acid, serum | 3.0-7.0 mg/dL" }
+   ]
+  },
+  {
+   "id": "liver", "title": "Liver tests",
+   "rows": [
+    { "analyte": "Bilirubin (total)", "aka": ["bilirubin", "total bilirubin"], "specimen": "serum", "value": "1-20", "unit": "µmol/L", "src": "rcpa-spia", "quote": "Bilirubin | 18y to <120y | 1–20 µmol/L" },
+    { "analyte": "Bilirubin (total)", "aka": ["bilirubin", "total bilirubin"], "specimen": "serum", "value": "0.3-1.0", "unit": "mg/dL", "src": "abim-2026", "quote": "Bilirubin, serum | Total | 0.3-1.0 mg/dL" },
+    { "analyte": "Bilirubin (direct)", "aka": ["direct bilirubin", "conjugated bilirubin"], "specimen": "serum", "value": "0.1-0.3", "unit": "mg/dL", "src": "abim-2026", "quote": "Bilirubin, serum | Direct | 0.1-0.3 mg/dL" },
+    { "analyte": "ALT", "aka": ["alanine aminotransferase", "sgpt"], "specimen": "serum", "sex": "male", "value": "5-40", "unit": "U/L", "src": "rcpa-spia", "quote": "Alanine aminotransferase (no pyridoxal 5-phosphate) | Male | 18y to <120y | 5–40 U/L" },
+    { "analyte": "ALT", "aka": ["alanine aminotransferase", "sgpt"], "specimen": "serum", "sex": "female", "value": "5-35", "unit": "U/L", "src": "rcpa-spia", "quote": "Alanine aminotransferase (no pyridoxal 5-phosphate) | Female | 18y to <120y | 5–35 U/L" },
+    { "analyte": "ALT", "aka": ["alanine aminotransferase", "sgpt"], "specimen": "serum", "value": "10-40", "unit": "U/L", "src": "abim-2026", "quote": "Aminotransferase, serum alanine (ALT, SGPT) | 10-40 U/L" },
+    { "analyte": "AST", "aka": ["aspartate aminotransferase", "sgot"], "specimen": "serum", "sex": "male", "value": "5-35", "unit": "U/L", "src": "rcpa-spia", "quote": "Aspartate aminotransferase (no pyridoxal 5-phosphate) | Male | 18y to <120y | 5–35 U/L" },
+    { "analyte": "AST", "aka": ["aspartate aminotransferase", "sgot"], "specimen": "serum", "sex": "female", "value": "5-30", "unit": "U/L", "src": "rcpa-spia", "quote": "Aspartate aminotransferase (no pyridoxal 5-phosphate) | Female | 18y to <120y | 5–30 U/L" },
+    { "analyte": "AST", "aka": ["aspartate aminotransferase", "sgot"], "specimen": "serum", "value": "10-40", "unit": "U/L", "src": "abim-2026", "quote": "Aminotransferase, serum aspartate (AST, SGOT) | 10-40 U/L" },
+    { "analyte": "Alkaline phosphatase", "aka": ["alp"], "specimen": "serum", "value": "30-110", "unit": "U/L", "src": "rcpa-spia", "quote": "Alkaline phosphatase | 22y to <120y | 30–110 U/L", "note": "Age 22 years and over (younger adults have higher, sex-specific intervals in the same source)." },
+    { "analyte": "Alkaline phosphatase", "aka": ["alp"], "specimen": "serum", "value": "30-120", "unit": "U/L", "src": "abim-2026", "quote": "Alkaline phosphatase, serum | 30-120 U/L" },
+    { "analyte": "GGT", "aka": ["gamma glutamyltransferase", "gamma gt", "ggtp"], "specimen": "serum", "sex": "male", "value": "5-50", "unit": "U/L", "src": "rcpa-spia", "quote": "Gamma glutamyltransferase | Male | 18y to <120y | 5–50 U/L" },
+    { "analyte": "GGT", "aka": ["gamma glutamyltransferase", "gamma gt", "ggtp"], "specimen": "serum", "sex": "female", "value": "5-35", "unit": "U/L", "src": "rcpa-spia", "quote": "Gamma glutamyltransferase | Female | 18y to <120y | 5–35 U/L" },
+    { "analyte": "GGT", "aka": ["gamma glutamyltransferase", "gamma gt", "ggtp"], "specimen": "serum", "sex": "female", "value": "8-40", "unit": "U/L", "src": "abim-2026", "quote": "Gamma-glutamyltranspeptidase, serum | Female: 8-40 U/L; male: 9-50 U/L" },
+    { "analyte": "GGT", "aka": ["gamma glutamyltransferase", "gamma gt", "ggtp"], "specimen": "serum", "sex": "male", "value": "9-50", "unit": "U/L", "src": "abim-2026", "quote": "Gamma-glutamyltranspeptidase, serum | Female: 8-40 U/L; male: 9-50 U/L" },
+    { "analyte": "Albumin", "aka": ["serum albumin"], "specimen": "serum", "value": "3.5-5.5", "unit": "g/dL", "src": "abim-2026", "quote": "Albumin, serum | 3.5-5.5 g/dL" },
+    { "analyte": "Total protein", "aka": ["protein", "serum protein"], "specimen": "serum", "value": "60-80", "unit": "g/L", "src": "rcpa-spia", "quote": "Total protein | 18y to <120y | 60–80 g/L" },
+    { "analyte": "LDH", "aka": ["lactate dehydrogenase", "ld"], "specimen": "serum", "value": "120-250", "unit": "U/L", "src": "rcpa-spia", "quote": "Lactate dehydrogenase | 18y to <120y | 120–250 U/L", "note": "Lactate to pyruvate (IFCC) method." },
+    { "analyte": "LDH", "aka": ["lactate dehydrogenase", "ld"], "specimen": "serum", "value": "80-225", "unit": "U/L", "src": "abim-2026", "quote": "Lactate dehydrogenase, serum | 80-225 U/L" },
+    { "analyte": "Lipase", "specimen": "serum", "value": "10-60", "unit": "U/L", "src": "rcpa-spia", "quote": "Lipase | 18y to <120y | 10–60 U/L", "note": "Excludes Siemens Dimension and Ortho Vitros assays (source note)." },
+    { "analyte": "Lipase", "specimen": "serum", "value": "10-140", "unit": "U/L", "src": "abim-2026", "quote": "Lipase, serum | 10-140 U/L" }
+   ]
+  },
+  {
+   "id": "cbc", "title": "Blood count",
+   "rows": [
+    { "analyte": "Haemoglobin", "aka": ["hemoglobin", "hb", "hgb"], "specimen": "blood", "sex": "female", "value": "12-16", "unit": "g/dL", "src": "abim-2026", "quote": "Hemoglobin, blood | Female: 12-16 g/dL; male: 14-18 g/dL" },
+    { "analyte": "Haemoglobin", "aka": ["hemoglobin", "hb", "hgb"], "specimen": "blood", "sex": "male", "value": "14-18", "unit": "g/dL", "src": "abim-2026", "quote": "Hemoglobin, blood | Female: 12-16 g/dL; male: 14-18 g/dL" },
+    { "analyte": "Haematocrit", "aka": ["hematocrit", "hct", "pcv"], "specimen": "blood", "sex": "female", "value": "37-47", "unit": "%", "src": "abim-2026", "quote": "Hematocrit, blood | Female: 37%-47%; male: 42%-50%" },
+    { "analyte": "Haematocrit", "aka": ["hematocrit", "hct", "pcv"], "specimen": "blood", "sex": "male", "value": "42-50", "unit": "%", "src": "abim-2026", "quote": "Hematocrit, blood | Female: 37%-47%; male: 42%-50%" },
+    { "analyte": "Red cell count", "aka": ["rbc", "erythrocyte count"], "specimen": "blood", "value": "4.2-5.9", "unit": "million/µL", "src": "abim-2026", "quote": "Erythrocyte count | 4.2-5.9 million/μL" },
+    { "analyte": "MCV", "aka": ["mean corpuscular volume"], "specimen": "blood", "value": "80-98", "unit": "fL", "src": "abim-2026", "quote": "Mean corpuscular volume | 80-98 fL" },
+    { "analyte": "MCH", "aka": ["mean corpuscular hemoglobin"], "specimen": "blood", "value": "28-32", "unit": "pg", "src": "abim-2026", "quote": "Mean corpuscular hemoglobin | 28-32 pg" },
+    { "analyte": "MCHC", "aka": ["mean corpuscular hemoglobin concentration"], "specimen": "blood", "value": "33-36", "unit": "g/dL", "src": "abim-2026", "quote": "Mean corpuscular hemoglobin concentration | 33-36 g/dL" },
+    { "analyte": "White cell count", "aka": ["wbc", "tlc", "leukocyte count", "total leucocyte count"], "specimen": "blood", "value": "4000-11,000", "unit": "/µL", "src": "abim-2026", "quote": "Leukocyte count | 4000-11,000/μL" },
+    { "analyte": "Neutrophils (absolute)", "aka": ["anc", "absolute neutrophil count", "neutrophil"], "specimen": "blood", "value": "2000-8250", "unit": "/µL", "src": "abim-2026", "quote": "Absolute neutrophil count (ANC) | 2000-8250/μL" },
+    { "analyte": "Lymphocytes (absolute)", "aka": ["absolute lymphocyte count", "lymphocyte"], "specimen": "blood", "value": "1200-4950", "unit": "/µL", "src": "abim-2026", "quote": "Absolute lymphocyte count | 1200-4950/μL" },
+    { "analyte": "Platelet count", "aka": ["platelets", "platelet", "plt"], "specimen": "blood", "value": "150,000-450,000", "unit": "/µL", "src": "abim-2026", "quote": "Platelet count | 150,000-450,000/μL" },
+    { "analyte": "Reticulocyte count", "aka": ["retic", "reticulocytes"], "specimen": "blood", "value": "0.5-1.5", "unit": "% of red cells", "src": "abim-2026", "quote": "Reticulocyte count | 0.5%-1.5% of red cells" }
+   ]
+  },
+  {
+   "id": "coag", "title": "Coagulation",
+   "rows": [
+    { "analyte": "Prothrombin time (PT)", "aka": ["pt", "prothrombin time"], "specimen": "plasma", "value": "11-13", "unit": "seconds", "src": "abim-2026", "quote": "Prothrombin time, plasma | 11-13 seconds", "note": "No INR reference range in the sources used; INR is not listed here." },
+    { "analyte": "aPTT", "aka": ["aptt", "ptt", "activated partial thromboplastin time"], "specimen": "plasma", "value": "25-35", "unit": "seconds", "src": "abim-2026", "quote": "Activated partial thromboplastin time | 25-35 seconds" },
+    { "analyte": "Fibrinogen", "specimen": "plasma", "value": "200-400", "unit": "mg/dL", "src": "abim-2026", "quote": "Fibrinogen, plasma | 200-400 mg/dL" },
+    { "analyte": "D-dimer", "aka": ["d dimer", "ddimer"], "specimen": "plasma", "value": "<0.5", "unit": "µg/mL", "src": "abim-2026", "quote": "D-dimer, plasma | <0.5 μg/mL" }
+   ]
+  },
+  {
+   "id": "glucose", "title": "Glucose and HbA1c",
+   "rows": [
+    { "analyte": "Glucose (fasting)", "aka": ["glucose", "fasting glucose", "fbs", "fasting blood sugar", "blood sugar", "fpg"], "specimen": "plasma", "value": "70-99", "unit": "mg/dL", "src": "abim-2026", "quote": "Glucose, plasma (fasting) | 70-99 mg/dL" },
+    { "analyte": "HbA1c", "aka": ["a1c", "hba1c", "glycated haemoglobin", "glycated hemoglobin", "glycosylated haemoglobin"], "specimen": "blood", "value": "4.0-5.6", "unit": "%", "src": "abim-2026", "quote": "Hemoglobin A1C | 4.0%-5.6%" }
+   ]
+  },
+  {
+   "id": "lipids", "title": "Lipids (decision limits)",
+   "rows": [
+    { "analyte": "Total cholesterol", "aka": ["cholesterol"], "specimen": "serum", "value": "<200 (desirable)", "unit": "mg/dL", "src": "abim-2026", "quote": "Cholesterol, serum | Total | Desirable <200 mg/dL; Borderline-high 200-239 mg/dL; High >239 mg/dL" },
+    { "analyte": "LDL cholesterol", "aka": ["ldl"], "specimen": "serum", "value": "<100 (optimal)", "unit": "mg/dL", "src": "abim-2026", "quote": "Low-density lipoprotein | Optimal <100 mg/dL; Near-optimal 100-129 mg/dL; Borderline-high 130-159 mg/dL; High 160-189 mg/dL; Very high >189 mg/dL" },
+    { "analyte": "HDL cholesterol", "aka": ["hdl"], "specimen": "serum", "sex": "female", "value": "<50 is low", "unit": "mg/dL", "src": "abim-2026", "quote": "High-density lipoprotein | Low | Female: <50 mg/dL; male: <40 mg/dL" },
+    { "analyte": "HDL cholesterol", "aka": ["hdl"], "specimen": "serum", "sex": "male", "value": "<40 is low", "unit": "mg/dL", "src": "abim-2026", "quote": "High-density lipoprotein | Low | Female: <50 mg/dL; male: <40 mg/dL" },
+    { "analyte": "Triglycerides", "aka": ["tg", "triglyceride"], "specimen": "serum (fasting)", "value": "<150 (normal)", "unit": "mg/dL", "src": "abim-2026", "quote": "Triglycerides, serum (fasting) | Optimal <100 mg/dL; Normal <150 mg/dL; Borderline-high 150-199 mg/dL; High 200-499 mg/dL" }
+   ]
+  },
+  {
+   "id": "thyroid", "title": "Thyroid",
+   "rows": [
+    { "analyte": "TSH", "aka": ["thyroid stimulating hormone", "thyrotropin"], "specimen": "serum", "value": "0.5-4.0", "unit": "mU/L", "src": "abim-2026", "quote": "Thyroid-stimulating hormone (TSH), serum | 0.5-4.0 μU/mL (0.5-4.0 mU/L)" },
+    { "analyte": "Free T4", "aka": ["ft4", "free thyroxine"], "specimen": "serum", "value": "0.8-1.8", "unit": "ng/dL", "src": "abim-2026", "quote": "Thyroxine (T4), serum | Free | 0.8-1.8 ng/dL" },
+    { "analyte": "Total T4", "aka": ["t4", "thyroxine"], "specimen": "serum", "value": "5-12", "unit": "µg/dL", "src": "abim-2026", "quote": "Thyroxine (T4), serum | Total | 5-12 μg/dL" },
+    { "analyte": "Free T3", "aka": ["ft3", "free triiodothyronine"], "specimen": "serum", "value": "2.3-4.2", "unit": "pg/mL", "src": "abim-2026", "quote": "Triiodothyronine (T3), serum | Free | 2.3-4.2 pg/mL" },
+    { "analyte": "Total T3", "aka": ["t3", "triiodothyronine"], "specimen": "serum", "value": "80-180", "unit": "ng/dL", "src": "abim-2026", "quote": "Triiodothyronine (T3), serum | Total | 80-180 ng/dL" }
+   ]
+  },
+  {
+   "id": "cardiac", "title": "Cardiac markers",
+   "rows": [
+    { "analyte": "Troponin I (high-sensitivity)", "aka": ["troponin", "hs troponin i", "hs-tni", "trop i"], "specimen": "plasma", "sex": "female", "value": "≤15", "unit": "ng/L", "src": "abim-2026", "quote": "Troponin I, cardiac, high-sensitivity, plasma | Female: ≤15 ng/L; male: ≤20 ng/L", "note": "Troponin cut-offs are assay-specific; use the assay's own 99th percentile." },
+    { "analyte": "Troponin I (high-sensitivity)", "aka": ["troponin", "hs troponin i", "hs-tni", "trop i"], "specimen": "plasma", "sex": "male", "value": "≤20", "unit": "ng/L", "src": "abim-2026", "quote": "Troponin I, cardiac, high-sensitivity, plasma | Female: ≤15 ng/L; male: ≤20 ng/L", "note": "Troponin cut-offs are assay-specific; use the assay's own 99th percentile." },
+    { "analyte": "Troponin T (high-sensitivity)", "aka": ["troponin", "hs troponin t", "hs-tnt", "trop t"], "specimen": "plasma", "sex": "female", "value": "≤10", "unit": "ng/L", "src": "abim-2026", "quote": "Troponin T, cardiac, high-sensitivity, plasma | Female: ≤10 ng/L; male: ≤15 ng/L", "note": "Troponin cut-offs are assay-specific; use the assay's own 99th percentile." },
+    { "analyte": "Troponin T (high-sensitivity)", "aka": ["troponin", "hs troponin t", "hs-tnt", "trop t"], "specimen": "plasma", "sex": "male", "value": "≤15", "unit": "ng/L", "src": "abim-2026", "quote": "Troponin T, cardiac, high-sensitivity, plasma | Female: ≤10 ng/L; male: ≤15 ng/L", "note": "Troponin cut-offs are assay-specific; use the assay's own 99th percentile." },
+    { "analyte": "BNP", "aka": ["b-type natriuretic peptide", "brain natriuretic peptide"], "specimen": "plasma", "value": "<100", "unit": "pg/mL", "src": "abim-2026", "quote": "B-type natriuretic peptide, plasma | <100 pg/mL" },
+    { "analyte": "Creatine kinase (CK)", "aka": ["ck", "cpk", "creatine kinase"], "specimen": "serum", "sex": "male", "value": "45-250", "unit": "U/L", "src": "rcpa-spia", "quote": "Creatine kinase | Male | 18y to <60y | 45–250 U/L", "note": "Men 60 years and over: 40-200 U/L (same source)." },
+    { "analyte": "Creatine kinase (CK)", "aka": ["ck", "cpk", "creatine kinase"], "specimen": "serum", "sex": "female", "value": "30-150", "unit": "U/L", "src": "rcpa-spia", "quote": "Creatine kinase | Female | 18y to <120y | 30–150 U/L" },
+    { "analyte": "Creatine kinase (CK)", "aka": ["ck", "cpk", "creatine kinase"], "specimen": "serum", "sex": "female", "value": "30-135", "unit": "U/L", "src": "abim-2026", "quote": "Creatine kinase, serum | Total | Female: 30-135 U/L; male: 55-170 U/L" },
+    { "analyte": "Creatine kinase (CK)", "aka": ["ck", "cpk", "creatine kinase"], "specimen": "serum", "sex": "male", "value": "55-170", "unit": "U/L", "src": "abim-2026", "quote": "Creatine kinase, serum | Total | Female: 30-135 U/L; male: 55-170 U/L" }
+   ]
+  },
+  {
+   "id": "abg", "title": "Arterial blood gas (room air)",
+   "rows": [
+    { "analyte": "pH (arterial)", "aka": ["ph", "arterial ph", "abg ph"], "specimen": "arterial blood", "value": "7.38-7.44", "unit": "", "src": "abim-2026", "quote": "Arterial blood gas studies (patient breathing room air) | pH | 7.38-7.44" },
+    { "analyte": "PaCO2", "aka": ["paco2", "pco2", "carbon dioxide"], "specimen": "arterial blood", "value": "38-42", "unit": "mmHg", "src": "abim-2026", "quote": "Arterial blood gas studies (patient breathing room air) | PaCO2 | 38-42 mmHg" },
+    { "analyte": "PaO2", "aka": ["pao2", "po2"], "specimen": "arterial blood", "value": "75-100", "unit": "mmHg", "src": "abim-2026", "quote": "Arterial blood gas studies (patient breathing room air) | PaO2 | 75-100 mmHg" },
+    { "analyte": "Bicarbonate (arterial)", "aka": ["abg bicarbonate", "arterial bicarbonate"], "specimen": "arterial blood", "value": "23-26", "unit": "mEq/L", "src": "abim-2026", "quote": "Arterial blood gas studies (patient breathing room air) | Bicarbonate | 23-26 mEq/L" },
+    { "analyte": "Oxygen saturation (arterial)", "aka": ["sao2", "oxygen saturation", "spo2"], "specimen": "arterial blood", "value": "≥95", "unit": "%", "src": "abim-2026", "quote": "Arterial blood gas studies (patient breathing room air) | Oxygen saturation | ≥95%" },
+    { "analyte": "Lactate", "aka": ["lactic acid"], "specimen": "serum or plasma", "value": "0.7-2.1", "unit": "mmol/L", "src": "abim-2026", "quote": "Lactate, serum or plasma | 0.7-2.1 mmol/L" },
+    { "analyte": "Lactate", "aka": ["lactic acid"], "specimen": "arterial blood", "value": "<1.3", "unit": "mmol/L", "src": "abim-2026", "quote": "Lactate, arterial blood | <1.3 mmol/L (<1.3 mEq/L)" }
+   ]
+  },
+  {
+   "id": "urine", "title": "Urine",
+   "rows": [
+    { "analyte": "Urine specific gravity", "aka": ["specific gravity"], "specimen": "urine", "value": "1.002-1.030", "unit": "", "src": "abim-2026", "quote": "Specific gravity, urine | 1.002-1.030" },
+    { "analyte": "Urine osmolality", "specimen": "urine", "value": "38-1400", "unit": "mOsm/kg H2O", "src": "abim-2026", "quote": "Osmolality, urine | 38-1400 mOsm/kg H2O" },
+    { "analyte": "Urine albumin-to-creatinine ratio", "aka": ["acr", "uacr", "albumin creatinine ratio", "microalbumin"], "specimen": "urine", "value": "<30", "unit": "mg/g", "src": "abim-2026", "quote": "Albumin-to-creatinine ratio, urine | <30 mg/g" },
+    { "analyte": "Urine protein-to-creatinine ratio", "aka": ["upcr", "pcr", "protein creatinine ratio"], "specimen": "urine", "value": "<0.2", "unit": "mg/mg", "src": "abim-2026", "quote": "Protein-to-creatinine ratio, urine | <0.2 mg/mg" },
+    { "analyte": "Urine protein (24-hour)", "aka": ["24 hour urine protein", "urine protein", "proteinuria"], "specimen": "urine, 24 h", "value": "<100", "unit": "mg/24 h", "src": "abim-2026", "quote": "Protein, urine | 24-hour measurement | <100 mg/24 hr" }
+   ]
+  },
+  {
+   "id": "iron", "title": "Iron studies",
+   "rows": [
+    { "analyte": "Ferritin", "specimen": "serum", "sex": "female", "value": "24-307", "unit": "ng/mL", "src": "abim-2026", "quote": "Ferritin, serum | Female: 24-307 ng/mL; male: 24-336 ng/mL" },
+    { "analyte": "Ferritin", "specimen": "serum", "sex": "male", "value": "24-336", "unit": "ng/mL", "src": "abim-2026", "quote": "Ferritin, serum | Female: 24-307 ng/mL; male: 24-336 ng/mL" },
+    { "analyte": "Iron (serum)", "aka": ["serum iron", "iron"], "specimen": "serum", "value": "50-150", "unit": "µg/dL", "src": "abim-2026", "quote": "Iron, serum | 50-150 μg/dL" },
+    { "analyte": "TIBC", "aka": ["total iron binding capacity", "iron binding capacity"], "specimen": "serum", "value": "250-310", "unit": "µg/dL", "src": "abim-2026", "quote": "Iron-binding capacity, serum (total) | 250-310 μg/dL" },
+    { "analyte": "Transferrin saturation", "aka": ["tsat", "transferrin sat"], "specimen": "serum", "value": "20-50", "unit": "%", "src": "abim-2026", "quote": "Transferrin saturation | 20%-50%" },
+    { "analyte": "Transferrin", "specimen": "serum", "value": "200-400", "unit": "mg/dL", "src": "abim-2026", "quote": "Transferrin, serum | 200-400 mg/dL" }
+   ]
+  },
+  {
+   "id": "inflam", "title": "Inflammation",
+   "rows": [
+    { "analyte": "CRP", "aka": ["c-reactive protein", "c reactive protein"], "specimen": "serum", "value": "≤0.8", "unit": "mg/dL", "src": "abim-2026", "quote": "C-reactive protein, serum | ≤0.8 mg/dL" },
+    { "analyte": "ESR", "aka": ["erythrocyte sedimentation rate", "sed rate"], "specimen": "blood", "sex": "female", "value": "0-20", "unit": "mm/h", "src": "abim-2026", "quote": "Erythrocyte sedimentation rate (Westergren) | Female: 0-20 mm/hr; male: 0-15 mm/hr" },
+    { "analyte": "ESR", "aka": ["erythrocyte sedimentation rate", "sed rate"], "specimen": "blood", "sex": "male", "value": "0-15", "unit": "mm/h", "src": "abim-2026", "quote": "Erythrocyte sedimentation rate (Westergren) | Female: 0-20 mm/hr; male: 0-15 mm/hr" }
+   ]
+  }
+ ]
+}

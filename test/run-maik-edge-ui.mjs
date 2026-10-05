@@ -65,7 +65,7 @@ try {
   const passed = () => ev(`var s=SMD_EDGE.stats(); return s.none + s.passed;`);
 
   // ── flag OFF: nothing changes ──
-  await ev(`localStorage.removeItem("smd_edge"); return 1;`);
+  await ev(`localStorage.setItem("smd_edge","0"); return 1;`);
   await openMaik();
   await ev(`window.__pick = "open: Antibiogram"; return 1;`);
   await send("show me the resistance patterns antibiogram", 1500);
@@ -137,7 +137,99 @@ try {
   await ev(`[].slice.call(document.querySelectorAll('#maikBody [data-maik-tool="antibiogram"]')).pop().click(); return 1;`); await sleep(900);
   ok(await ev(`var s=document.getElementById("maikSheet"); return !s || !s.classList.contains("on") || getComputedStyle(s).display==="none" || s.offsetParent===null;`) === true, "tapping the chip closes MaiK and hands off to the module");
 
+  // A live topic must not swallow an exact tool name (owner, 2026-10-04: "antibiogram kholo" was
+  // read as a follow-up on the earlier INR question and searched).
+  await ev(`localStorage.setItem("smd_edge","1"); return 1;`);
+  await openMaik();
+  const e0 = await countEdge();
+  await ev(`__MAIK_TEST.setTopic({ topic: "warfarin INR target", ts: Date.now() }); var q=document.getElementById("maikQ"); q.value="antibiogram kholo"; q.dispatchEvent(new Event("input",{bubbles:true})); document.getElementById("maikSend").click(); return 1;`);
+  await sleep(1200);
+  // "kholo" is an open verb: since 2026-10-04 an exact tool name with one opens the tool (MaiK steps
+  // aside) and the thread keeps "Opened Antibiogram" with the open button.
+  await openMaik();
+  ok(await countEdge() > e0 && /data-maik-tool="antibiogram"/.test(String(await lastAi())) && /Opened/.test(String(await lastAi())), "with a topic live, an exact tool name with an open verb still reaches the tool (" + String(await lastAi()).replace(/<[^>]+>/g, " ").slice(0, 120) + ")");
+
+  // ── every option the router can offer draws a card that opens (iPhone 2026-10-04: FunctionGemma picked
+  //    "Normal values" (neo:ref) for "normal adult potassium range?", no card, MaiK answered) ──
+  for (let i = 0; i < 30 && !(await ev(`return !!(window.SMD_NEO_HUB && SMD_NEO_HUB.tools().length);`)); i++) await sleep(200);
+  await openMaik();
+  const tp = await ev(`var p=SMD_SEARCH.providers().filter(function(x){return x.cat==="tools";})[0]; var it=p.items(); return JSON.stringify({ n: it.length, neo: it.filter(function(t){return /^neo:/.test(t.id);}).length, bad: it.filter(function(t){return !SMD_MAIK_TOOL_OPENABLE(t.id);}).map(function(t){return t.id;}) });`);
+  const tpj = JSON.parse(tp || "{}");
+  ok(tpj.n > 10 && tpj.neo > 0 && tpj.bad && tpj.bad.length === 0, "every tool the router can offer (incl. " + tpj.neo + " neonatal tools) has a card that opens (" + tp + ")");
+  for (const [kind, q, pick, attr] of [
+    ["tool (adult)", "normal adult potassium range?", "open: Adult normal values", /data-maik-tool="adultref"/],
+    ["drug", "is augmentin ok in pregnancy", "drug:", /data-maik-drug|maik-drug/],
+    ["kb", "open pneumonia antibiotics", "reference:", /data-kb-more=/],
+    ["calculator", "how sick is this pneumonia patient score", "calculator:", /data-maik-calc=/]
+  ]) {
+    await ev(`window.__pick = ${JSON.stringify(pick)}; window.__engineCalls = 0; return 1;`);
+    const a1 = await countAi();
+    await send(q, 1800);
+    const html = String(await lastAi()), lp = String(await ev(`return window.__lastPrompt || "";`));
+    const offered = new RegExp("^\\d+\\. " + pick, "m").test(lp);
+    ok(!offered || ((await countAi()) > a1 && attr.test(html)), kind + ": the picked option draws its card (" + (offered ? "offered" : "not offered for this text") + ")");
+    if (kind.startsWith("tool")) {
+      ok(offered, "the adult potassium request offers Adult normal values to the engine (" + lp.replace(/\n/g, " | ") + ")");
+      ok(!/Normal values|Reference values/.test(lp.replace(/Adult normal values/g, "")), "and not the neonatal page (" + lp.replace(/\n/g, " | ") + ")");
+      await ev(`window.__arOpened = null; window.__arReal = SMD_ADULT_REF.open; SMD_ADULT_REF.open = function (o) { window.__arOpened = o; };
+        var b = [].slice.call(document.querySelectorAll('#maikBody [data-maik-tool="adultref"]')).pop(); if (b) b.click(); return 1;`);
+      await sleep(600);
+      ok(await ev(`SMD_ADULT_REF.open = window.__arReal; return window.__arOpened && window.__arOpened.q;`) === q, "tapping it closes MaiK and opens Adult normal values on the question");
+      await openMaik();
+    }
+  }
+
+  // ── "Ask MaiK anyway" on EVERY card type skips Edge exactly once (rules() and route()), never re-fires
+  //    auto-open, and reaches the normal answer; the next identical ask gets the card again. Before the
+  //    fix the rules() pass (#1360) ignored the calculator card's skip and bounced back to the card. ──
+  const cards = () => ev(`return document.querySelectorAll("#maikBody .maik-edge, #maikBody .maik-calc, #maikBody .maik-drugask").length;`);
+  const sheetOn = () => ev(`var s=document.getElementById("maikSheet"); return !!(s && s.classList.contains("on"));`);
+  await ev(`window.__pick = null; return 1;`);
+  for (const [kind, q, esc] of [
+    ["calculator", "open hacor score", "data-maik-calcask"],
+    ["tool", "open antibiogram", "data-maik-edgeask"],
+    ["drug", "dose of paracetamol", "data-maik-drugcont"],
+    ["icd", "icd code for type 2 diabetes mellitus", "data-maik-edgeask"],
+    ["kb", "open pneumonia", "data-maik-edgeask"],
+    ["scheme", "aarogyasri code for pancreatitis", "data-maik-edgeask"]
+  ]) {
+    await openMaik();
+    await send(q, 2500);
+    if (!(await sheetOn())) await openMaik();       // an open verb auto-opened the module
+    const k0 = await cards(), a0 = await countAi();
+    const hasEsc = await ev(`return !!document.querySelector("#maikBody [${esc}]");`);
+    await ev(`[].slice.call(document.querySelectorAll("#maikBody [${esc}]")).pop().click(); return 1;`); await sleep(3000);
+    const k1 = await cards(), a1 = await countAi(), on = await sheetOn();
+    ok(hasEsc && k1 === k0 && a1 > a0 && on, kind + ": 'Ask MaiK anyway' reaches the normal answer, no card, no auto-open (" + [hasEsc, k0, k1, a0, a1, on].join(",") + ")");
+    await send(q, 2500);
+    if (!(await sheetOn())) await openMaik();
+    ok(await cards() > k1, kind + ": the skip was one-shot, the same ask draws the card again");
+  }
+
   await ev(`localStorage.removeItem("smd_edge"); return 1;`);
+
+  // ── Settings: the Edge engine row (owner, 2026-10-04) ──
+  await ev(`var h=document.createElement("div"); h.id="__edgeSet"; h.style.cssText="position:fixed;inset:0;overflow:auto;z-index:99999;background:var(--paper,#fff);padding:16px"; h.innerHTML=SMD_MAIK_ENGINE.settingsHTML(); document.body.appendChild(h); SMD_MAIK_ENGINE.wireSettings(h); return 1;`);
+  const grp = () => ev(`var g=document.querySelector('#__edgeSet [role=radiogroup][aria-label="Edge engine"]'); if(!g) return null; return [].map.call(g.querySelectorAll('[role=radio]'), function(b){ return [b.getAttribute("data-me-edge"), b.getAttribute("aria-checked"), Math.round(b.getBoundingClientRect().height), b.innerText.replace(/\\s+/g," ")]; });`);
+  let rows = await grp();
+  ok(rows && rows.length === 3 && rows[0][0] === "needle" && rows[0][1] === "true", "Edge engine radio group: three rows, Needle checked by default (" + JSON.stringify(rows) + ")");
+  ok(rows && rows.every((r) => r[2] >= 44), "every Edge engine row is a 44 px target");
+  ok(rows && /Declines when unsure/.test(rows[0][3]) && /Unloads MaiK Lite/.test(rows[1][3]) && /Exact names only/.test(rows[2][3]) && !rows.some((r) => /—/.test(r[3])), "help text per choice, no em-dash");
+  await ev(`document.querySelector('#__edgeSet [data-me-edge="functiongemma"]').click(); return 1;`); await sleep(300);
+  rows = await grp();
+  ok(await ev(`return SMD_EDGE.engineChoice();`) === "functiongemma" && rows[1][1] === "true" && rows[0][1] === "false", "tapping FunctionGemma switches the engine at once and the row shows it");
+  ok(/Not on this phone/.test(rows[1][3]) && await ev(`return SMD_EDGE.engineName();`) === null, "no FunctionGemma file in the browser: shown as not on this phone, no engine (rules answer)");
+  await ev(`document.querySelector('#__edgeSet [data-me-edge="needle"]').click(); return 1;`); await sleep(300);
+  ok(await ev(`return SMD_EDGE.engineChoice();`) === "needle", "back to Needle");
+  if (process.env.SHOT) {
+    for (const dark of [false, true]) {
+      await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: dark ? "dark" : "light" }] });
+      await ev(`var g=document.querySelector('#__edgeSet [aria-label="Edge engine"]'); g.scrollIntoView({block:"center"}); return 1;`); await sleep(300);
+      const s = await call("Page.captureScreenshot", { format: "png" });
+      (await import("node:fs")).writeFileSync(process.env.SHOT + (dark ? "-dark.png" : "-light.png"), Buffer.from(s.result.data, "base64"));
+    }
+  }
+  await ev(`document.getElementById("__edgeSet").remove(); localStorage.removeItem("smd_edge_engine"); return 1;`);
   console.log(fails === 0 ? "\nALL GREEN — Edge routes typed requests on-device, and always lets the doctor continue" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

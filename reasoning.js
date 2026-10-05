@@ -4418,7 +4418,18 @@
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
     favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
-    el.querySelector(".dx-reader-hero").appendChild(favourite);
+    var heroActs = document.createElement("div"); heroActs.className = "dx-reader-acts";
+    heroActs.appendChild(favourite);
+    // "Ask MaiK" (2026-10-04): MaiK opens over this page with the disease as its topic (home.js
+    // SMD_askMaikTopic). Absent when MaiK is not loaded, so it is never a dead button.
+    if (typeof window.SMD_askMaikTopic === "function") {
+      var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-favourite dx-reader-askmaik";
+      askMk.setAttribute("aria-label", "Ask MaiK about " + name);
+      askMk.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span>Ask MaiK</span>';
+      askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
+      heroActs.appendChild(askMk);
+    }
+    el.querySelector(".dx-reader-hero").appendChild(heroActs);
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
       el.classList.remove("on");

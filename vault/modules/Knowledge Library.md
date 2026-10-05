@@ -91,3 +91,12 @@ Owner: on phone/iPad, typing in search left the results below the keyboard. Now:
 - iPad: the shell is full width (was the 900px `.sbref-shell` column), body 840px centred, header
   titled "Knowledge Library". Test: `test/run-kb-live-search-ui.mjs` (short viewport = keyboard up).
   Gotcha: the app applies a zoom on wide screens, so compare computed widths, not rect widths.
+
+## Ask MaiK on every disease page (2026-10-04, branch `kb-nav-askmaik`)
+
+The reader hero has "Ask MaiK" beside Save (`.dx-reader-acts`, `.dx-reader-askmaik`; reasoning.js
+`openDiseaseRef`). It calls `window.SMD_askMaikTopic(id, name)` (home.js), which opens MaiK over the page with
+that disease as the topic: a clearable "About: <disease>" chip above the composer and an Ask / Research
+choice (Research only when `smd_maik_research` is on). The button is not rendered when MaiK is not loaded.
+MaiK can also reach these pages by name: "pneumonia" or "open pneumonia" in MaiK gives a card listing the
+pneumonia pages (see [[StewardMD Edge]]). Headless check: `test/run-kb-nav-askmaik-ui.mjs`.

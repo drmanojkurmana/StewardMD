@@ -47,6 +47,8 @@ import { RecordService, ListCeilingError } from "./service.js";
 import { VersionConflictError } from "./repository.js";
 import { AuthError, PermissionError } from "../_connect/permission.js";
 import { witnessOrRefusal } from "./controlled-drugs.js";
+import { purchaseTermsOf, sameTerms, debitNoteAmounts, SERIES as DEBIT_NOTE_SERIES } from "./supplier-debit-note.js";
+import { nextDocumentNumber } from "./doc-series.js";
 
 const str = (v) => (v == null ? "" : String(v).trim());
 const key = (v) => str(v).toUpperCase();
@@ -476,6 +478,15 @@ async function recordMovement(request, env, ctx) {
       detail: kind === "adjustment" ? "An adjustment of nothing is not an adjustment." : `A ${kind} is a quantity above zero. Stock that went the other way is a wastage, a return or an adjustment, each with its reason.` };
   }
 
+  /* WHAT A RECEIPT COST (supplier-debit-note.js, owner 2026-10-04): optional on a receipt, checked when given, and what a
+   * later return to the supplier reverses the input tax credit by. A price is per unit as entered (receivedAs). */
+  let purchase = null;
+  if (kind === "receipt" && ctx.purchase != null && ctx.purchase !== "") {
+    const got = purchaseTermsOf(ctx.purchase, quantityOf(ctx.receivedAs) ? quantityOf(ctx.receivedAs).value : quantity.value);
+    if (got.error) return { ...base, ok: false, status: 422, error: got.error, field: got.field, detail: got.detail, written: 0 };
+    purchase = got.terms;
+  }
+
   /* An adjustment without a reason is the movement that hides everything else. It is the only kind
    * that can make a level say whatever somebody wants it to say, so it is the one that must say why. */
   const reason = str(ctx.reason);
@@ -570,13 +581,20 @@ async function recordMovement(request, env, ctx) {
     ...(str(ctx.indentId) ? { indentId: str(ctx.indentId) } : {}),
     ...(str(ctx.jobCardId) ? { jobCardId: str(ctx.jobCardId) } : {}),
     ...(str(ctx.departmentId) ? { departmentId: str(ctx.departmentId) } : {}),
+    ...(purchase ? { purchase } : {}),
     ...(kind === "supplier-return" ? { supplier: toInstitution.slice(0, 200), returnOfReceipt: str(ctx.supplierReturn.receiptId),
       ...(str(ctx.supplierReturn.purchaseOrderId) ? { purchaseOrderId: str(ctx.supplierReturn.purchaseOrderId) } : {}),
+      ...(ctx.supplierReturn.debitNote ? { debitNote: { ...ctx.supplierReturn.debitNote } } : {}),
       ...(str(ctx.supplierReturn.debitNoteNo) ? { debitNoteNo: str(ctx.supplierReturn.debitNoteNo).slice(0, 80) } : {}),
       ...(ctx.controlled === true ? { controllerApprovalRef: str(ctx.controllerApprovalRef).slice(0, 120) } : {}) } : {}),
     source: { system: "wardsynq-native", sourceId: `stock:${id}` },
   };
 
+  /* The debit note's number is issued last, once nothing above can refuse the return, so a refused return uses none. */
+  if (record.debitNote && typeof ctx.supplierReturn.issueNumber === "function") {
+    try { record.debitNote.number = await ctx.supplierReturn.issueNumber(at, resolved.actor.id); }
+    catch { return { ...base, ok: false, status: 502, error: "document_number_failed", detail: "No debit note number could be issued, so the return was not recorded.", written: 0 }; }
+  }
   try {
     const out = await svc.put(record, { idempotencyKey: ctx.idempotencyKey || null, ...(fixedId ? { expectedVersion: 0 } : {}) });
     /* A replayed key answers with the movement that key first wrote, not the id this retry minted. */
@@ -627,13 +645,17 @@ function returnableFrom(receipt, movements) {
 
 /**
  * Sends stock back to the supplier it came from, against the receipt that brought it in.
- * ctx: { migration, receiptId, quantity, reason, supplier?, debitNoteNo?, isControlled(display, code), witnessId?, witnessCheck?,
+ * ctx: { migration, receiptId, quantity, reason, supplier?, debitNoteNo?, purchase?, isControlled(display, code), witnessId?, witnessCheck?,
  *        controllerApprovalRef?, at?, idempotencyKey? }
  *
  * NEVER MORE THAN ARRIVED. The receipt and every earlier return against it are read, and a quantity above what is
  * left is refused with both numbers named. A return is a movement like any other, so the level, the batch balances
- * and the controlled-drug register (controlled-drugs.js) all read it from the one ledger. The supplier's GST credit
- * note or the hospital's debit note is the accountant's document; its number is kept when given, nothing is computed.
+ * and the controlled-drug register (controlled-drugs.js) all read it from the one ledger.
+ * A DEBIT NOTE GOES WITH EVERY RETURN (owner 2026-10-04, supplier-debit-note.js): the value returned and the GST charged
+ * on it on the receipt, pro-rated, at the receipt's rate and split, numbered in its own series and written on the return
+ * itself. The terms are the receipt's own, or those an earlier return against it was given; with none, the return names
+ * them (`purchase`, from the supplier's invoice) or is refused. `debitNoteNo` is now the supplier's own credit note
+ * number, kept when given.
  * ponytail: two returns against one receipt at the same instant are not serialised; the level shows any excess.
  */
 async function returnToSupplier(request, env, ctx) {
@@ -675,13 +697,42 @@ async function returnToSupplier(request, env, ctx) {
   /* Controlled or not is the hospital's drug master applied to the receipt's own item, never the caller's word. A route
    * that cannot say is refused rather than treated as not controlled. */
   if (typeof ctx.isControlled !== "function") return { ...base, ok: false, status: 502, error: "controlled_check_unavailable", detail: "Whether this is a controlled drug could not be checked, so nothing was recorded.", written: 0 };
+
+  /* What the receipt cost, for the debit note: the receipt's own terms, else those an earlier return against it carried,
+   * else the ones given now. Terms given now that disagree with ones already recorded are refused, never ignored. */
+  const earlier = (movements || []).find((m) => m && str(m.kind) === "supplier-return" && str(m.returnOfReceipt) === receiptId && m.debitNote && m.debitNote.terms);
+  let terms = receipt.purchase || (earlier ? earlier.debitNote.terms : null);
+  let termsSource = receipt.purchase ? "receipt" : earlier ? "earlier_return" : null;
+  if (ctx.purchase != null && ctx.purchase !== "") {
+    const asReceived = quantityOf(receipt.receivedAs) ? quantityOf(receipt.receivedAs).value : left.received;
+    const got = purchaseTermsOf(ctx.purchase, asReceived);
+    if (got.error) return { ...base, ok: false, status: 422, error: got.error, field: got.field, detail: got.detail, written: 0 };
+    if (terms && !sameTerms(terms, got.terms)) {
+      return { ...base, ok: false, status: 409, error: "purchase_terms_differ", recorded: terms, written: 0,
+        detail: "This receipt already has a price and GST rate on record, and the ones given differ. Nothing was recorded." };
+    }
+    if (!terms) { terms = got.terms; termsSource = "given_with_return"; }
+  }
+  if (!terms) {
+    return { ...base, ok: false, status: 422, error: "purchase_terms_required", written: 0,
+      detail: "This receipt has no price or GST rate on record, so the debit note cannot be worked out. Give the price before GST, the GST rate and whether the supplier charged IGST, from the supplier's invoice." };
+  }
+  const amounts = debitNoteAmounts(terms, left.received, left.returned, value);
+  const debitNote = { series: DEBIT_NOTE_SERIES, number: null, supplier, ...(terms.supplierGstin ? { supplierGstin: terms.supplierGstin } : {}),
+    receiptId, ...(str(receipt.purchaseOrderId) ? { purchaseOrderId: str(receipt.purchaseOrderId) } : {}),
+    ...(str(receipt.purchaseOrderLine) !== "" ? { purchaseOrderLine: str(receipt.purchaseOrderLine) } : {}),
+    ...(terms.invoiceNo || str(receipt.documentNo) ? { originalInvoiceNo: terms.invoiceNo || str(receipt.documentNo) } : {}),
+    ...(terms.invoiceDate ? { originalInvoiceDate: terms.invoiceDate } : {}),
+    ...(str(ctx.debitNoteNo) ? { supplierCreditNoteNo: str(ctx.debitNoteNo).slice(0, 80) } : {}),
+    quantity: value, unit: left.unit, received: left.received, ...amounts, terms, termsSource };
   const moved = await recordMovement(request, env, {
     ...ctx, kind: "supplier-return", controlled: ctx.isControlled(receipt.display, receipt.code) === true, code: str(receipt.code), display: str(receipt.display) || str(receipt.code),
     quantity: { value, unit: left.unit }, location: receipt.location || null, batch: receipt.batch || null, expiry: receipt.expiry || null, reason,
-    supplierReturn: { receiptId, supplier, purchaseOrderId: str(receipt.purchaseOrderId), debitNoteNo: ctx.debitNoteNo },
+    supplierReturn: { receiptId, supplier, purchaseOrderId: str(receipt.purchaseOrderId), debitNoteNo: ctx.debitNoteNo, debitNote,
+      issueNumber: (at, actorId) => nextDocumentNumber(ctx.recordDeps.repository, mig.tenantId, DEBIT_NOTE_SERIES, at, actorId) },
   });
   if (!moved.ok) return moved;
-  return { ...moved, supplier, receiptId, returned: left.returned + value, remaining: left.remaining - value, unit: left.unit };
+  return { ...moved, supplier, receiptId, returned: left.returned + value, remaining: left.remaining - value, unit: left.unit, debitNote: moved.movement && moved.movement.debitNote };
 }
 
 /** ctx: { migration, code, unit, quantity, now? } - which batches to take from, earliest expiry first. Advice only. */

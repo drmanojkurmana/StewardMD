@@ -65,6 +65,7 @@ import { recordLinkForOrg } from "../../_wardsynq/migration-tenant.js";
 import { actorDeps as wsqActorDeps, recordDeps as wsqRecordDeps } from "../../_wardsynq/deps.js";
 import { checkPrescriptionSafety } from "../../_wardsynq/rx-safety.js";
 import { getRulePack } from "../../_wardsynq/rulepack.js";
+import { orderEntryRulePack } from "../../_wardsynq/order-entry-pack.js"; // + the NFI tables the owner has signed off
 // Inpatient ward + eMAR (2026-09-07). Same shape as every OPD migration above: the route resolves
 // the org and the forced wardsynq migration, these do the governed record write.
 import { admitPatient, listWard, recordWardVitals, createWardMedicationOrder, stopWardMedicationOrder, transferPatient, bedBoard, patientTimeline } from "../../_wardsynq/migrate-inpatient.js";
@@ -167,7 +168,7 @@ import { requestTransfer, respondTransfer, assignTransferBed, cancelTransfer, ex
 import { recordDischargeMilestone, dischargeProgress } from "../../_wardsynq/discharge-milestones.js";
 import { recordBedArrival, markInitialAssessment, admissionTimes } from "../../_wardsynq/admission-times.js";
 import { createInboundTransfer, decideInboundTransfer, cancelInboundTransfer, listInboundTransfers } from "../../_wardsynq/transfer-centre.js";
-import { saveLeaflet, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
+import { saveLeaflet, importStarterLeaflets, approveLeaflet, retireLeaflet, listLeaflets, attachLeaflet, detachLeaflet, listAttachments } from "../../_wardsynq/patient-education.js";
 import { sendStaffMessage, editStaffMessage, recallStaffMessage, markThreadRead, escalateStaffMessage, listStaffMessages, listMessagePeople } from "../../_wardsynq/staff-messaging.js";
 import { releaseResult, pendingRequests, verifyResult, resultsToVerify } from "../../_wardsynq/lab-result.js";
 import { recordCulture, culturesInProgress, recordHistopathology, addHistopathologyAddendum, pathologyForPatient } from "../../_wardsynq/pathology-report.js";
@@ -219,7 +220,7 @@ import { scanOrderClosures, closeOrderBacklog } from "../../_wardsynq/order-back
 import { scanSourceClosures, closeSourceTerminal } from "../../_wardsynq/source-order-close.js";
 import { saveConsultation } from "../../_wardsynq/consultation.js";
 import { requestVerification, recordVerification, listVerifications } from "../../_wardsynq/verification.js";
-import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
+import { raisePurchaseOrder, receiveGoods, listPurchaseOrders, saveRateContract, purchaseOrderPriceChecks, supplyChainOverview, supplierDebitNotes, validateReorderPolicy, readReorderPolicy, reorderSuggestions } from "../../_wardsynq/purchasing.js";
 import { saveDietOrder, stopDietOrder, dietOrderHistory, mealBoard, markMeal } from "../../_wardsynq/diet.js";
 import { saveInstrumentSet, startLoad, recordLoadResult, cssdStep, cssdBoard, caseSets } from "../../_wardsynq/cssd.js";
 import { housekeepingBoard, raiseHousekeepingTask, housekeepingStep, housekeepingReport } from "../../_wardsynq/housekeeping.js";
@@ -294,6 +295,7 @@ import { enrolPatient, redeemCode, portalRead, revokeAccess, listGrants } from "
 import { messageWorklist, replyToMessage } from "../../_wardsynq/portal-requests.js";
 import { clockAttendance, correctAttendance, importDeviceAttendance, attendanceMonth } from "../../_wardsynq/hr-attendance.js";
 import { importLegacy } from "../../_wardsynq/legacy-import.js";
+import { recordOpeningBalance } from "../../_wardsynq/opening-balance.js";
 import { saveCredential, runCredentialAlerts, acknowledgeAlert, listCredentials, saveCourse, saveSession, recordSessionAttendance, recordTraining, trainingOverview } from "../../_wardsynq/hr-records.js";
 import { staffPreference, runPatientMessaging, messageLog, retryMessage, settingsOf as commsSettingsOf } from "../../_wardsynq/patient-messaging.js";
 import { feedbackDashboard, updateRecovery } from "../../_wardsynq/patient-feedback.js";
@@ -1617,6 +1619,7 @@ export async function onRequest(context) {
       /* Who records which discharge step (discharge-milestones.js). A step not listed takes the route's own entry. */
       const DISCHARGE_STEP_CAPS = Object.freeze({ advised: CAPS.EMR_TREAT, "pharmacy-cleared": CAPS.ORDER_VERIFY, "bill-ready": CAPS.BILLING_CHARGE,
         "tpa-final-requested": CAPS.BILLING_CHARGE, "tpa-final-received": CAPS.BILLING_CHARGE, left: CAPS.QUEUE_ADD });
+      const TRANSFUSION_BEDSIDE_SUBS = new Set(["transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       const TRANSFUSION_SUBS = new Set(["transfusion-request", "transfusion-crossmatch", "transfusion-issue", "transfusion-bedside-check", "transfusion-start", "transfusion-observe", "transfusion-reaction", "transfusion-complete"]);
       /* TASK 9.15. Whole-hospital or whole-ward reads. Rationed tightly because they are rare and
        * deliberate, and because they are the one shape that turns an authenticated account into a
@@ -1676,7 +1679,7 @@ export async function onRequest(context) {
         "goods-receive": CAPS.ORDER_DISPENSE,
         /* Supply chain depth (R2-4): returning stock to a supplier, rate contracts and reorder drafts are the same
          * purchasing authority as raising an order; the store keeper reaches them through the stores fallback below. */
-        "supply-chain": CAPS.ORDER_DISPENSE, "supplier-return": CAPS.ORDER_DISPENSE, "rate-contract": CAPS.ORDER_DISPENSE, "reorder-suggestions": CAPS.ORDER_DISPENSE,
+        "supply-chain": CAPS.ORDER_DISPENSE, "supplier-return": CAPS.ORDER_DISPENSE, "supplier-debit-notes": CAPS.ORDER_DISPENSE, "rate-contract": CAPS.ORDER_DISPENSE, "reorder-suggestions": CAPS.ORDER_DISPENSE,
         /* General stores (stores.js). The overview is every stores role's own screen; each write sits on the
          * authority of the person who does it: the ward raises and acknowledges, the in-charge decides (and the
          * route narrows that to the departments in the membership's scope), the store keeper runs the store. */
@@ -1778,7 +1781,7 @@ export async function onRequest(context) {
          * retiring a leaflet and giving one to a patient are a treating clinician's acts. The second-person rule on approval
          * and the approved-only rule on giving are decided inside. */
         "education-leaflets": CAPS.EMR_VIEW, "education-attachments": CAPS.EMR_VIEW,
-        "education-leaflet-save": CAPS.EMR_TREAT, "education-leaflet-approve": CAPS.EMR_TREAT, "education-leaflet-retire": CAPS.EMR_TREAT,
+        "education-leaflet-save": CAPS.EMR_TREAT, "education-leaflet-import-starter": CAPS.EMR_TREAT, "education-leaflet-approve": CAPS.EMR_TREAT, "education-leaflet-retire": CAPS.EMR_TREAT,
         "education-attach": CAPS.EMR_TREAT, "education-detach": CAPS.EMR_TREAT,
         /* Emergency department. Arrival is the same administrative act as admit (queue.add) - it
          * opens a visit, it does not treat one. Triage acuity is the nurse's own record, the same
@@ -2321,6 +2324,9 @@ export async function onRequest(context) {
         /* Loading a replaced HIS's patients, prices and suppliers (legacy-import.js) is hospital administration. The route
          * also asks for the capability the manual door for that kind needs, so an import never reaches further than typing. */
         "legacy-import": CAPS.STAFF_ADMIN,
+        /* Owner 2026-10-04: the old system's balance carried onto a stay open at switch-over (opening-balance.js). Hospital
+         * administration AND a bill line, so staff.admin here and billing.charge asked at the route, as the import's kind. */
+        "opening-balance": CAPS.STAFF_ADMIN,
         "hr-credentials": CAPS.STAFF_ADMIN, "hr-credential-save": CAPS.STAFF_ADMIN, "hr-credential-alerts": CAPS.STAFF_ADMIN,
         "hr-training": CAPS.STAFF_ADMIN, "hr-course-save": CAPS.STAFF_ADMIN, "hr-session-save": CAPS.STAFF_ADMIN,
         "hr-session-attendance": CAPS.STAFF_ADMIN, "hr-training-record": CAPS.STAFF_ADMIN,
@@ -2448,6 +2454,8 @@ export async function onRequest(context) {
        * routes - the `blood_bank` role holds TRANSFUSION_ISSUE and none of the EMR capabilities, and
        * this does not narrow what emr.treat could already do. Same shape as the two checks above. */
       if (!wAz.ok && TRANSFUSION_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ISSUE);
+      // Owner 2026-10-04: the nurse's bedside steps (transfusion.administer); request, crossmatch and issue are not among them.
+      if (!wAz.ok && TRANSFUSION_BEDSIDE_SUBS.has(sub)) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.TRANSFUSION_ADMINISTER);
       /* Statutory registers: the custodian may also do what the creating doctor does. Medical records corrects a
        * medico-legal case and opens one patient's; the nodal officer records a notification. Nothing else widens. */
       if (!wAz.ok && ((sub === "register-mlc" && method === "POST") || sub === "mlc-patient")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.REGISTER_RECORDS);
@@ -2465,7 +2473,7 @@ export async function onRequest(context) {
       if (!wAz.ok && sub === "approval-request" && (body.subjectType === "PurchaseOrder" || body.subjectType === "StockRequisition")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ORDER_DISPENSE);
       /* General stores: the store keeper orders and books in through the same purchasing routes the pharmacy uses,
        * and the in-charge and the store open the stores overview without raising indents themselves. */
-      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || sub === "supply-chain" || sub === "supplier-return" || sub === "rate-contract" || sub === "reorder-suggestions" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
+      if (!wAz.ok && (sub === "purchase-orders" || sub === "goods-receive" || sub === "supply-chain" || sub === "supplier-return" || sub === "supplier-debit-notes" || sub === "rate-contract" || sub === "reorder-suggestions" || (sub === "approval-request" && body.subjectType === "PurchaseOrder"))) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
       if (!wAz.ok && sub === "stores") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.STORES_MANAGE);
       if (!wAz.ok && (sub === "stores" || sub === "store-consumption")) wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.INDENT_APPROVE);
       if (!wAz.ok && sub === "assets") wAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.ASSET_MANAGE);
@@ -2678,7 +2686,7 @@ export async function onRequest(context) {
         if (sub === "stores" && method === "GET") return R(await storesOverview(request, env, { ...deps, nearExpiryDays: (wsqCfg && wsqCfg.nearExpiryDays) || null }));
         if (sub === "store-item" && method === "POST") return R(await saveStoreItem(request, env, { ...deps, code: body.code, name: body.name, unit: body.unit, category: body.category, reorderLevel: body.reorderLevel, packs: body.packs, active: body.active, idempotencyKey: key }));
         if (sub === "store-location" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await saveStoreLocation(request, env, { ...deps, departments: d, code: body.code, name: body.name, kind: body.kind, departmentId: body.departmentId, active: body.active, idempotencyKey: key })); }
-        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, idempotencyKey: key }));
+        if (sub === "store-move" && method === "POST") return R(await storeMovement(request, env, { ...deps, kind: body.kind, code: body.code, quantity: body.quantity, unit: body.unit, location: body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, purchase: body.purchase, idempotencyKey: key }));
         if (sub === "indent" && method === "POST") { const d = await needDepts(); if (!d) return deptsFailed(); return R(await raiseIndent(request, env, { ...deps, departments: d, authorizeDepartment: inDept(CAPS.DEPT_REQUEST), departmentId: body.departmentId, fromLocation: body.fromLocation, toLocation: body.toLocation, lines: body.lines, note: body.note, idempotencyKey: key })); }
         if (sub === "indent-decide" && method === "POST") return R(await decideIndent(request, env, { ...deps, authorizeDepartment: inDept(CAPS.INDENT_APPROVE), indentId: body.indentId, decision: body.decision, lines: body.lines, reason: body.reason, idempotencyKey: key }));
         if (sub === "indent-issue" && method === "POST") return R(await issueIndent(request, env, { ...deps, indentId: body.indentId, lines: body.lines, idempotencyKey: key }));
@@ -2770,7 +2778,7 @@ export async function onRequest(context) {
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "goods-receive" && method === "POST") {
-        const r = await receiveGoods(request, env, { ...deps, purchaseOrderId: body.purchaseOrderId, item: body.item, quantity: body.quantity, unit: body.unit, line: body.line, batch: body.batch, expiry: body.expiry, location: body.location, idempotencyKey: body.idempotencyKey || null });
+        const r = await receiveGoods(request, env, { ...deps, purchaseOrderId: body.purchaseOrderId, item: body.item, quantity: body.quantity, unit: body.unit, line: body.line, batch: body.batch, expiry: body.expiry, location: body.location, purchase: body.purchase, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "purchase-orders" && method === "GET") {
@@ -2784,8 +2792,12 @@ export async function onRequest(context) {
       if (sub === "supplier-return" && method === "POST") {
         /* Whether the stock is a controlled drug is decided from the receipt's own item (isControlled, the drug master),
          * never from anything the screen sends. */
-        const r = await returnToSupplier(request, env, { ...deps, receiptId: body.receiptId, quantity: body.quantity, reason: body.reason, supplier: body.supplier, debitNoteNo: body.debitNoteNo,
+        const r = await returnToSupplier(request, env, { ...deps, receiptId: body.receiptId, quantity: body.quantity, reason: body.reason, supplier: body.supplier, debitNoteNo: body.debitNoteNo, purchase: body.purchase,
           isControlled, witnessId: body.witnessId, witnessCheck, controllerApprovalRef: body.controllerApprovalRef, idempotencyKey: body.idempotencyKey || null });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "supplier-debit-notes" && method === "GET") {
+        const r = await supplierDebitNotes(request, env, { ...deps, from: url.searchParams.get("from") || "", to: url.searchParams.get("to") || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "rate-contract" && method === "POST") {
@@ -2829,7 +2841,7 @@ export async function onRequest(context) {
             idempotencyKey: idemFor(body.idempotencyKey, "vitals", c.index) }),
           problems: (rq, ev, c) => recordProblem(rq, ev, { ...c, problem: c.item, idempotencyKey: idemFor(body.idempotencyKey, "problem", c.index) }),
           // CLIN-02: the same engine and hard stops as /ward/medication-order, and a reason for any finding.
-          medications: (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: getRulePack(), overrideReason: c.item && c.item.overrideReason, uncheckedReason: c.item && c.item.uncheckedReason, requireSafetyReason: true,
+          medications: async (rq, ev, c) => createWardMedicationOrder(rq, ev, { ...c, order: c.item, rulePack: await orderEntryRulePack(ev), overrideReason: c.item && c.item.overrideReason, uncheckedReason: c.item && c.item.uncheckedReason, requireSafetyReason: true,
             formulary: (wsqCfg && wsqCfg.formulary) || null,
             advisories: (wsqCfg && wsqCfg.advisories) || null,
             ageYears: body.ageYears, lactationWindowDays: (wsqCfg && wsqCfg.lactationWindowDays) || null,
@@ -3304,11 +3316,11 @@ export async function onRequest(context) {
         return json({ ...r, inventory: gate.tracked ? "tracked" : "untracked" }, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "transfusion-bedside-check" && method === "POST") {
-        /* CLIN-16: the second checker is an active member of this hospital who treats, gives medicines or works the blood bank. */
+        /* CLIN-16: the second checker is an active member of this hospital who treats, gives medicines, administers a transfusion or works the blood bank. */
         const secondCheckerCheck = async (id) => {
           if (actor.email && String(id).toLowerCase() === String(actor.email).toLowerCase()) return "self";
           const who = { kind: "witness", id: String(id), email: String(id).indexOf("@") > 0 ? String(id).toLowerCase() : null };
-          for (const cap of [CAPS.EMR_TREAT, CAPS.MED_ADMINISTER, CAPS.TRANSFUSION_ISSUE]) if ((await ORG.authorizeOrg(env, who, wOrgId, cap) || {}).ok) return true;
+          for (const cap of [CAPS.EMR_TREAT, CAPS.MED_ADMINISTER, CAPS.TRANSFUSION_ADMINISTER, CAPS.TRANSFUSION_ISSUE]) if ((await ORG.authorizeOrg(env, who, wOrgId, cap) || {}).ok) return true;
           return false;
         };
         const r = await recordBedsideCheck(request, env, { ...deps, episodeId: body.episodeId, secondCheckerId: body.secondCheckerId, secondCheckerCheck, scannedPatientBarcode: body.scannedPatientBarcode, scannedUnitId: body.scannedUnitId, unitInHand: body.unitInHand, idempotencyKey: body.idempotencyKey || null });
@@ -3349,7 +3361,7 @@ export async function onRequest(context) {
         const r = await createWardMedicationOrder(request, env, {
           /* LT-14: the safety check runs on the server against the record (never a verdict from the body);
            * checkOnly shows it before anything is written. */
-          ...deps, order: body.order || body, rulePack: getRulePack(), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason, uncheckedReason: body.uncheckedReason,
+          ...deps, order: body.order || body, rulePack: await orderEntryRulePack(env), checkOnly: body.checkOnly === true, overrideReason: body.overrideReason, uncheckedReason: body.uncheckedReason,
           /* The formulary is ORG content, exactly as the order sets and the critical limits are: a
            * caller who could pass one could lift any restriction the hospital had set. */
           formulary: (wsqCfg && wsqCfg.formulary) || null,
@@ -3428,8 +3440,8 @@ export async function onRequest(context) {
       /* CONNECTORS (connectors.js), Admin Center > Integrations. Credentials go in and never come back out. */
       /* HR BEYOND THE ROTA and PATIENT ENGAGEMENT (gap wave 2026-09-16). The route's capability was decided above. */
       if (sub === "legacy-import" && method === "POST") {
-        const kindCap = { patients: CAPS.QUEUE_ADD, prices: CAPS.STAFF_ADMIN, vendors: CAPS.STORES_MANAGE }[String(body.kind || "")];
-        if (!kindCap) return json({ ok: false, error: "unknown_kind", message: "Choose what the file holds: patients, prices or suppliers." }, 422, request);
+        const kindCap = { patients: CAPS.QUEUE_ADD, prices: CAPS.STAFF_ADMIN, vendors: CAPS.STORES_MANAGE, openingBalances: CAPS.BILLING_CHARGE }[String(body.kind || "")];
+        if (!kindCap) return json({ ok: false, error: "unknown_kind", message: "Choose what the file holds: patients, prices, suppliers or opening balances." }, 422, request);
         const kAz = await ORG.authorizeOrg(env, actor, wOrgId, kindCap);
         if (!kAz.ok) return json(azRefusal(kAz), 403, request);
         const r = await importLegacy(request, env, { ...deps, kind: body.kind, csv: body.csv, mapping: body.mapping, run: body.run, commit: body.commit === true, confirmCount: body.confirmCount, planId: body.planId,
@@ -3437,6 +3449,13 @@ export async function onRequest(context) {
           patients: { byMrn: (mrn) => PAT.getPatient(env, wOrgId, mrn), mobileTaken: (mobile) => PAT.mobileDuplicateOf(env, wOrgId, mobile), register: (b) => PAT.registerPatient(env, wOrg, b, actor.id || "") },
           // The Price list is the one table the invoice paths read (wsqTariff); without its store there is nowhere to import to.
           prices: BILL.billingEnabled(env) ? { list: () => BILL.listTariff(env, wOrgId), save: (item) => BILL.upsertTariff(env, wOrgId, item, actor.id || "") } : null,
+          audit: async (action, meta) => Q.qAudit(env, { hospitalId: wOrgId, ticketId: "", actor: actor.id, action, meta }) });
+        return json(r, r.ok ? 200 : (r.status || 502), request);
+      }
+      if (sub === "opening-balance" && method === "POST") {
+        const bAz = await ORG.authorizeOrg(env, actor, wOrgId, CAPS.BILLING_CHARGE);
+        if (!bAz.ok) return json(azRefusal(bAz), 403, request);
+        const r = await recordOpeningBalance(request, env, { ...deps, patientId: body.patientId || (body.mrn ? patientIdForMrn(body.mrn) : ""), encounterId: body.encounterId, amount: body.amount, legacyBillRef: body.legacyBillRef, asOf: body.asOf,
           audit: async (action, meta) => Q.qAudit(env, { hospitalId: wOrgId, ticketId: "", actor: actor.id, action, meta }) });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
@@ -4024,7 +4043,7 @@ export async function onRequest(context) {
       }
       if (sub === "stock-move" && method === "POST") {
         const r = await recordMovement(request, env, { ...deps, kind: body.kind, code: body.code, display: body.display, quantity: body.quantity, location: labStockOnly ? LAB_STOCK_LOCATION : body.location, batch: body.batch, expiry: body.expiry, reason: body.reason, at: body.at, idempotencyKey: body.idempotencyKey || null,
-          receivedFrom: body.receivedFrom, documentNo: body.documentNo, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck, destruction: body.destruction,
+          receivedFrom: body.receivedFrom, documentNo: body.documentNo, purchase: body.purchase, controlled: isControlled(body.display, body.code), witnessId: body.witnessId, witnessCheck, destruction: body.destruction,
           supplierAddress: body.supplierAddress, supplierLicenceNo: body.supplierLicenceNo, manufacturer: body.manufacturer, toInstitution: body.toInstitution, transferKind: body.transferKind, controllerApprovalRef: body.controllerApprovalRef, revisedEstimateRef: body.revisedEstimateRef,
           estimateCheck: deps.rmiApplies(body.display, body.code) ? (move) => estimateRefusal(request, env, { ...deps, cfg: wsqCfg }, move) : null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -5082,12 +5101,12 @@ export async function onRequest(context) {
       }
       if ((sub === "incident-report" || sub === "incident-signal") && method === "POST") {
         const fn = sub === "incident-signal" ? signalIncident : reportIncident;
-        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
+        const r = await fn(request, env, { ...deps, what: body.what, when: body.when, severity: body.severity, anonymous: body.anonymous === true, reportedBy: body.reportedBy, patientId: body.patientId, likelihood: body.likelihood, contributingFactors: body.contributingFactors, category: body.category, merpCategory: body.merpCategory, source: sub === "incident-signal" ? body.source : null, idempotencyKey: body.idempotencyKey || null });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-confirm" && method === "POST") {
         // The decider is the authenticated actor, never the body: same reasoning as triagedBy below.
-        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, by: actor.id || "" });
+        const r = await confirmIncident(request, env, { ...deps, incidentId: body.incidentId, outcome: body.outcome, reason: body.reason, duplicateOf: body.duplicateOf, category: body.category, merpCategory: body.merpCategory, by: actor.id || "" });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "incident-triage" && method === "POST") {
@@ -5227,7 +5246,9 @@ export async function onRequest(context) {
       const utcOffsetMinutes = wsqCfg && wsqCfg.utcOffsetMinutes;
       const cfgList = (k) => (wsqCfg && Array.isArray(wsqCfg[k]) ? wsqCfg[k] : []);
       if (sub === "infection-control" && method === "GET") {
-        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes });
+        /* The "awaiting sign-off" notice is read from the seed sign-off records (null when unreadable: shown as unsigned). */
+        const haiSignoff = await SEED.itemSignoffState("hai-criteria", await SEEDSTORE.listSignoffs(env).catch(() => null));
+        const r = await infectionControlView(request, env, { ...deps, month: url.searchParams.get("month") || "", antibiotics: cfgList("antibiotics"), windowMinutes: wsqCfg && wsqCfg.prophylaxisWindowMinutes, utcOffsetMinutes, haiSignoff });
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }
       if (sub === "hai-case" && method === "POST") {
@@ -5470,6 +5491,10 @@ export async function onRequest(context) {
           const r = await saveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion, title: body.title, language: body.language, body: body.body, tags: body.tags, idempotencyKey: body.idempotencyKey || null });
           return json(r, r.ok ? 200 : (r.status || 502), request);
         }
+        if (sub === "education-leaflet-import-starter" && method === "POST") {
+          const r = await importStarterLeaflets(request, env, { ...deps });
+          return json(r, r.ok ? 200 : (r.status || 502), request);
+        }
         if (sub === "education-leaflet-approve" && method === "POST") {
           const r = await approveLeaflet(request, env, { ...deps, leafletId: body.leafletId, expectedVersion: body.expectedVersion });
           return json(r, r.ok ? 200 : (r.status || 502), request);
@@ -5680,7 +5705,7 @@ export async function onRequest(context) {
           ? await readDischargeChecklist(request, env, { ...common, encounterId: url.searchParams.get("encounterId") || "" })
           : await dischargePatient(request, env, { ...common, encounterId: body.encounterId, dischargedAt: body.dischargedAt, disposition: body.disposition,
             destination: body.destination, dispositionNote: body.dispositionNote, billDeferredReason: body.billDeferredReason, overrideReason: body.overrideReason,
-            idempotencyKey: body.idempotencyKey || null });
+            continueOrderIds: body.continueOrderIds, idempotencyKey: body.idempotencyKey || null });
         if (sub === "discharge" && r.ok && r.written) abdmStayHook(body.encounterId, "discharge");
         return json(r, r.ok ? 200 : (r.status || 502), request);
       }

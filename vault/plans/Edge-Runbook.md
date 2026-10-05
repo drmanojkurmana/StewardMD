@@ -194,7 +194,12 @@ adb) before a final drop decision.
   >
   > Requests: (1) count fast cores at a lower threshold (say 50% of the max) or take the top two capacity
   > tiers; (2) respect `sched_getaffinity`; (3) expose a thread count in `needle.h` so apps do not need a
-  > linker wrap. We have not yet checked whether your 2026-10-02 build changes this.
+  > linker wrap. Your 2026-10-02 build (3.1.0, f84005f8) does not change this: `fast_core_mask()` and
+  > `Engine::Engine()` disassemble identically.
+  >
+  > Separately: a loaded engine that only gets `needle_complete` (no `needle_init` in between) never
+  > returns from about its 49th-57th call (Pixel 9; also on macOS arm64, call 56, both 27c0a9a5 and
+  > f84005f8). `needle_reset` does not help; `needle_init` before each call does.
 
 ## 3. Gate A0.3: FunctionGemma + grammar (llama.cpp)
 **Latency options (2026-10-02):** [[Edge-Options-2026-10-02]]. On a host CPU the grammar sampler over the
@@ -313,6 +318,19 @@ unplugged: AC and USB powered false; ggml-org FunctionGemma 270M Q8_0 rev 2566ce
   it loaded and held (`llamaAdapter.load()`, 29 samples) the app is **996-1,000 MB** against the 411-424 MB
   baseline: **about +575 MB, over the plan's +400 MB budget (MISS)**. It drops back to ~405 MB after
   `release()`. The app was relaunched after (the llama plugin had evicted MaiK's pack).
+- **Memory fix, 2026-10-04 (branch `fg-memory`, `edge15`): FunctionGemma load args cut, AFTER MEASUREMENT
+  PENDING.** `llamaAdapter` now loads with `nCtx 512, nBatch 64, nUbatch 64, nThreadsBatch 4, kvQ8 true`
+  (was `nCtx 1024`, plugin defaults `nBatch/nUbatch 512`). Why: the pick prompt is at most ~300 tokens + 4
+  output; the compute buffer holds logits over the 262k vocabulary for every token of a ubatch (512 x 262k
+  x f32 = 512 MB reserved; 64 -> 64 MB); Gemma 3 270M KV is small (18 layers x 1 KV head x 256, q8: ~10 KB
+  a token). Both platforms chunk prefill to `n_batch`. MaiK's loads (`maik-local.js`) are unchanged.
+  **Before** (Pixel 9, APK `edge11` adapter, `llama_jni newContext: n_ctx=1024 n_batch=512 n_ubatch=512
+  threads_batch=4 kv_q8=1 flash_attn=1`, 05:13): app PSS **189 MB** idle (no MaiK pack resident) ->
+  **612-614 MB** with FunctionGemma loaded, before any pick: **+425 MB at load**. The pick and both
+  bake-offs could not run: StewardMD went to the background (another app in front) and its WebView JS
+  froze, so every CDP call timed out; the app was not brought back for 30 min. **After: pending** (inject
+  this `edge-router.js` over CDP, load + one pick, `dumpsys meminfo`, then `--engine llama --limit 50`
+  before and after: must stay 50/50 valid, same picks, p95 not worse).
 - **iPhone 15 Pro, 2026-10-03 (build above, over Wi-Fi, ggml-org FunctionGemma 270M Q8_0 rev 2566ce14,
   sha256 83940d4d, copied to `Documents/edge/`; Metal): A0.3 iOS latency PASSED with the pick.**
   - Run 1 (first load after install): 48 `ok`, 2 `unavailable`. Rows 1-2 hit the 8 s cold budget (the
@@ -641,6 +659,332 @@ Download every depth; the bake-off picks the smallest one that passes.
 **FunctionGemma on a rented GPU:** supervised fine-tune on `export/llama-json/train.jsonl`
 (validation for early stopping), after step 3.4 settled the template. Then GGUF + Q8_0/Q4_K_M as in
 step 3.5. Record the base model id, the trainer and its version, and the hyperparameters in this file.
+
+### 5a. Needle local LoRA, 2026-10-04: FAIL on the frozen test set (not shipped)
+No Cactus platform key exists, so this used the other official route: `needle finetune` (LoRA) +
+build, from `cactus-needle` 3.0.6. Script: `scripts/edge/train-needle.sh` (setup, up, train, build,
+predict, down). Base: `checkpoints/needle3.safetensors` and `needle3.cact` at the pinned revision
+`27c0a9a5` (both files are byte-identical on `main`).
+
+**Compute and cost.** An M1 Mac (8 GB, CPU only; JAX has no M1 GPU path here) took over 55 s per step,
+which is 9+ hours for one 579-step run, so training ran on GCP: one on-demand `g2-standard-4` + L4,
+us-central1, list price about 0.72 USD/h (2026-10-04 billing catalog). The VM is created with
+`--max-run-duration 4h --instance-termination-action DELETE`. It ran 22:56 to 01:57 UTC (3.0 h),
+**about 2.17 USD**. It was deleted after the runs, and no instances or disks were left. Only
+`export/needle-local/train.jsonl` (generated, no PHI) was uploaded. The adapters came back to the Mac;
+builds and scoring ran on the Mac. The needle CLI ran with `NEEDLE_TELEMETRY=0`.
+
+**Scoring.** `scripts/edge/needle-host.cpp` links the pinned macOS engine (`macos-arm64/libneedle.a`,
+same revision) and repeats the app's call sequence: mmap + `needle_load` once, then `needle_init`
+before every call (edge9) and `needle_complete` with 48 tokens. Replies are parsed by the router's own
+`optionFrom()` (`needle-pred.mjs`) and scored with `score.mjs --pred`. `needle-calibrate.mjs` sweeps
+the threshold on val. This is a Mac CPU, not the Pixel; the Android binary was not run.
+
+**Findings**
+- **The engine opens a `<think>` block before every call.** Trained on targets with no reasoning, the
+  tuned model kept writing base-style reasoning and answered "option 1" for nearly everything (val
+  77/135 exact; train rows only 54% in the engine). Adding the line `option K` (`none fits` for an
+  empty call list) in front of each target (`needle-pred.mjs think`) fixed it: val 130/135.
+- **A local LoRA has no usable confidence.** `needle build` drops the head. The engine then reports
+  `confidence: 1.0000`, not None, so the app's 0.5 floor never filters anything. Keeping the
+  untrained base head in the build (`build --keep-head`) gives a number, but on the tuned weights it
+  does not separate right from wrong: every val error scored 0.97 to 0.995.
+- Cactus's own held-out check (`--val-split`) recompiles JAX for every prompt length (about 40 min on
+  the L4 for 161 rows). Use `--val-split 0` and score with the engine instead.
+- The W4 build is 63 MB (base 35 MB, 2-bit). Host latency is unchanged (M1 p50 43-65 ms).
+
+**Runs** (3,237 train rows; batch 16; seq 512)
+| Run | Settings | Val exact (model rows) | Val result |
+|---|---|---|---|
+| r1 | 3 ep, lr 1e-4, rank 16 (package defaults), no reasoning | 77/135 | passes only at t 0.89+, coverage = rules |
+| r2 | 6 ep, lr 3e-4, rank 32, no reasoning | 82/135 | fail at every t up to 0.95 |
+| r3 | as r2 + `option K` reasoning | 130/135 | 0.7% wrong; passes only at t 0.99 |
+| r4 | 8 ep, lr 5e-4, rank 32 + reasoning | 132/135 | PASS: coverage 90.5% (rules 74.9%), 0.4% wrong |
+
+**Threshold (val only).** The rule was fixed before test was opened: take the lowest t where val wrong
+is at most half the mark (0.25%), because val has only 135 model rows. For r4 that is **t = 0.98**
+(val: coverage 86.8%, wrong 0.2%). The official build (head dropped) has no threshold.
+
+**Frozen test set (4,077 rows), scored once**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 65.5% | 100% | 0.0% | 100% | 0 / 0 / 0 | PASS |
+| r4, head dropped (official) | 88.2% | 98.3% | **1.5%** (60 rows) | 99.6% | 1.1% / 1.4% / 8.1% | **FAIL** |
+| r4 + base head, t 0.98 (val-chosen) | 85.7% | 98.5% | **1.3%** | 99.6% | 0.9% / 1.4% / 8.1% | **FAIL** |
+Coverage by language (r4 official): en 88.7%, hi-Latn 81.3%, te-Latn 86.1%. Recall@5 is 99.4%. Model
+rows alone: coverage 81.3%, accuracy 93.5%. Most errors are near neighbours and held-out targets
+(TIMI NSTEMI vs STEMI, P/F vs S/F, FENa vs Na deficit, APRI vs PLR, QTcF vs QTc, MRC vs mMRC). One
+danger row was opened wrongly. Diagnostic only (chosen by looking at test, so not a valid pick): test
+passes only at t 0.995, with 66.8% coverage, +1.3 points over rules.
+
+**Verdict.** The marks (wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%) are not
+met, so the build is not shipped and nothing went to the Pixel. Val (135 model rows) was much easier
+than test. A larger, harder calibration split, or a calibrated confidence head, is needed before
+another attempt. Only the Cactus platform trains that head: platform key and owner decision.
+Weights are kept off the repo; see the PR for paths and sha256.
+
+### 5b. Needle local LoRA, round 2, 2026-10-04
+
+**Selection rule (fixed before any round-2 model was scored on test).** Val (135 model rows) was too
+easy in round 1, so round 2 picks on a larger **dev** split built by `scripts/edge/needle-r2.mjs build`
+from the TRAIN side only: val, plus train rows whose target (12%) or condition (12%) is held out, plus
+every row of one held-out template per group, plus augmented rows for those held-out keys. Dev keeps
+the real labels. Each run is scored on dev in two configurations: single call, and two calls with the
+options rotated by one where the router acts only if both pick the same option (`engine.agree`). The
+dev mark is **wrong opens at most 0.9% of dev model-routed rows**: the test mark (0.5% of ALL rows)
+equals 1.79% of model rows at test's 28% model share, halved for safety as in round 1. Among the
+run x configuration pairs that meet it, the one with the highest dev coverage is the final candidate,
+and only it is scored on test, once. If none meets it, the round FAILS; the best dev pair is still
+scored on test once, for the record.
+
+**What changed (train side only; `needle-r2.mjs build`).** No test row or test text is trained on: any
+generated text equal to a test text is dropped (224), and test-only targets are never augmented.
+1. Abstain targets. A train request whose words fit the target's title AND a title that is not
+   accepted (TIMI UA/NSTEMI vs TIMI STEMI for "timi", drug Insulin vs tool Insulin) is relabelled 0.
+   So is a calculator request that only describes the target instead of naming it ("pancreatitis
+   severity", "delirium"): named = words fit the title, or initials match ("ast platelet ratio" ->
+   APRI, "ci" -> Cardiac Index). 2,526 of 9,337 train model rows end as 0.
+2. Augmentation: every calculator keyword (round 1 used only the first), title stems and
+   parentheses, Hinglish/Tenglish calculator and brand templates, 17 question templates (en/hi/te)
+   over 84 conditions, and hard negatives: questions about conditions that calculators are named after
+   ("how to manage hepatic encephalopathy" vs West Haven) give 0. 24,195 rows with 2 shuffled copies.
+3. Calibration: the engine has no logprobs (`needle.h` exposes only init/complete/embed/reset/load,
+   and replies carry no token scores), so the only engine-side check is self-consistency: a second
+   call with the options rotated by one must pick the same option. It is in `route()` behind
+   `engine.agree` (`needleAdapter(p, { agree: true })`); `autoEngine()` does not turn it on.
+4. Hyperparameters unchanged from r4 except epochs (3, as the set is 7x larger).
+
+**Runs** (L4, 3 epochs, lr 5e-4, LoRA r32/a64; dev model rows 2,151)
+| Run | Data | Dev wrong (model rows), 1 call / agree | Dev coverage (all rows), 1 call / agree |
+|---|---|---|---|
+| r5 | augmentation + ambiguity relabel | 9.1% / 5.1% | 85.7% / 74.2% |
+| r6 | + description relabel | 2.4% / 1.2% | 63.6% / 60.4% |
+| r7 | + condition hard negatives | **0.7%** / 0.3% | **60.6%** / 57.7% |
+Dev is harder than test (descriptive keywords, held-out conditions): r5's errors were mostly
+keyword rows several calculators answer. Only r7 met the dev mark; by the rule, **r7 with ONE call**
+(higher dev coverage) is the candidate. Host latency on the M1 is not a device number.
+
+**Frozen test set (4,077 rows), r7 single call, scored once**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 65.5% | 100% | 0.0% | 100% | 0 / 0 / 0 | PASS |
+| r4 (round 1) | 88.2% | 98.3% | 1.5% (60) | 99.6% | 1.1% / 1.4% / 8.1% | FAIL |
+| **r7** | **83.8%** | **99.7%** | **0.3%** (11) | **99.6%** (252/253) | 0.3% / 0.0% / 0.5% | **FAIL (danger)** |
+Coverage by language: en 84.5%, hi-Latn 79.0%, te-Latn 77.5% (rules 67.0 / 71.8 / 32.1). Held-out
+targets: 93.5% coverage, 1 wrong of 630. Model rows: coverage 65.6%, 1.0% wrong. The 11 wrong opens:
+"go to timi" (STEMI), "go to fractional excretion urea" (FE bicarb), "ast platelet ratio score" (PLR),
+"can you pull up glasgow outcome scale" (tool Insulin), "go to ninds reflex" (burn TBSA), "go to
+international prognostic index" (IPSS), "warf details" (tool Ward), "entresto details" and "entresto
+chupinchu" (valsartan alone), "red flags in typhoid" (typhoid vaccine), and the danger row "wells
+score" (opened Wells DVT; the label is "ambiguous, pass").
+
+**Verdict.** Wrong shown (0.3% < 0.5%), accepted accuracy (99.7% >= 99%) and coverage (83.8% > 65.5%)
+pass; **danger is 99.6%, not 100%**, so the build FAILS the marks and is not shipped. Nothing went to
+the Pixel. Cost: three VMs, about 4.04 USD list price (round 1 + 2: about 6.21 of the 20 USD cap).
+The test set has now been seen by r7; a different operating point chosen on it would not be valid.
+Next lever: the rotated-agreement check (dev 0.3% wrong) on r7, judged on a NEW frozen test set
+(new `schema_version`), or on the owner's 150-request human set, with the same marks.
+
+### 5c. New frozen test set `edge-router-3`, r7 scored once, 2026-10-04
+
+**Why a new set.** r7 was scored on `edge-router-2`, so that set can no longer judge r7 or pick its
+setting. `scripts/edge/generate-test3.mjs` writes `dataset/test3.jsonl` + `manifest3.json` (committed,
+like `test.jsonl`; sha256 `eae452d5...b7fe`). This section was written and committed BEFORE any model
+was run on the new set.
+
+**How it is unseen (each point is checked in the script, which throws otherwise).**
+- New templates only: none of the calculator, tool, drug, ICD, question and negation templates is a
+  `generate.mjs` or `needle-r2.mjs` template (e.g. "could you open the {t}", "{a} calculator chalao",
+  "naaku {a} kavali", "{t} pe le chalo", "{b} leaflet", "{g} card teruvu", "{d} ka icd code").
+- No row text equals a train, val, dev, old-test or r7-training text. r7's training file is read from
+  `needle-r2.mjs build` output and pinned by sha256 (`3520ce49...`, byte-identical to the file r7 was
+  trained on). 9 generated texts were dropped as seen, then the script asserts none is left.
+- Held-out targets: 664 rows (tag `heldout-target`) name a target that never appears as the answered
+  option of any r7 training row (424 targets did) and is not a dev target. They get every English
+  template and one Hinglish and one Tenglish.
+- **KB disease pages are on.** The app offers a `reference` option from `MaiKKB.resolveTarget` +
+  `SMD_REASON.hasDiseaseRef`; the old generator ran without the KB, so no train/dev/old-test row ever
+  had one. The script loads the KB stores; Node's `hasDiseaseRef` checks `KB_ENRICHMENT` only (the app
+  also checks SYNDROMES and DDX_NI), so Node offers a KB option only where the app does. 192 page
+  requests (target `kb:<id>`, where the bare name resolves to that page) and 102 questions about the
+  same diseases (label none: a question goes to MaiK, as in `generate.mjs`).
+- Danger (199): 161 negations (138 English forms the guard knows, 23 Hinglish/Tenglish forms it does
+  not: "{t} mat kholo", "{t} nahi chahiye", "{t} teravaddu", "{t} vaddu", which reach the model), 28
+  ambiguous names in new forms ("wells pls", "need the timi", "insulin wala kholo", "mrc kavalandi";
+  label pass), 9 clinical orders ("start heparin", "heparin chalu karo"; label pass), and "qtc" (any
+  QTc calculator is accepted). 61 danger rows are model-routed (edge-router-2: 7).
+
+**Shape.** 2,562 rows: en 2,137 (83%), hi-Latn 224 (9%), te-Latn 201 (8%) (edge-router-2: 90/5/5).
+Kinds: calculator 1,256, drug 444, none 319, tool 200, kb 192, icd 150. Routes: model 1,503 (59%;
+edge-router-2: 28%), rules 902, negated 141, empty 16. Recall@5 97.5%. Because the model share is
+higher, the plan's mark (wrong shown under 0.5% of ALL rows, i.e. at most 12 rows) is 0.85% of model
+rows here, close to the 0.9% dev mark; the marks are not changed.
+
+**Pre-registered choice (dev only, rule of 5b).** r7 on dev (2,151 model rows, 3,339 rows):
+single call wrong 0.65% of model rows, coverage 60.6%; agree wrong 0.28%, coverage 57.7%. Both meet
+the 0.9% dev mark, so the highest dev coverage wins: **r7 single call** is the setting scored, once,
+with `needle-host` (pinned macOS engine, the app's call sequence) and `score.mjs --split test3 --pred`.
+r7 + agree is run on the same set as a diagnostic only and is never used to pick.
+Marks: wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%, coverage above rules.
+
+**Result (scored once, after the commit above; M1 host, pinned engine)**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 35.2% | 99.5% | 0.2% (5) | 100% (199/199) | 0.1% / 0.4% / 0.5% | PASS |
+| **r7, single call (pre-registered)** | **72.4%** | **96.2%** | **2.8%** (71) | **85.9%** (171/199) | 2.0% / 6.3% / 7.5% | **FAIL** |
+| r7 + agree (diagnostic only, not a pick) | 69.2% | 97.1% | 2.0% (52) | 89.5% (178/199) | 1.3% / 5.4% / 6.0% | FAIL |
+Coverage by language, r7 single: en 75.3%, hi-Latn 57.1%, te-Latn 59.2% (rules 40.0 / 13.8 / 8.0).
+Model rows (1,503): coverage 63.4%, 4.4% wrong (agree 58.0%, 3.1%). Held-out targets: 72.4% coverage,
+1.2% wrong. KB page requests: 56.3% coverage, 98.2% accepted. Host latency p50 58 / p95 167 ms
+(agree, both calls: 146 / 291 ms).
+
+The 71 wrong opens (single): 16 model picks for a named target (near neighbours: GOS vs GOSE, ISS vs
+R-ISS, "disseminated intravascular coagulation" -> the DIC KB page instead of ISTH DIC, Entresto ->
+valsartan, "about heparin" -> HIT 4Ts); 22 questions about a disease that opened its KB page ("how is
+acute coronary syndrome diagnosed"); 28 danger rows: 14 Hinglish/Tenglish negations ("adrenaline mat
+kholo", "oncotree teravaddu"), 9 ambiguous names ("wells pls", "need the mrc" opened one of two), 5
+clinical orders ("continue metformin", "increase lasix to 40" opened the drug card); and 5 RULES
+errors: "navigate to search icd", "search icd section" and three more open an ICD lookup for the words
+"navigate to" / "section" instead of the Search ICD tool (Layer 0: the ICD cue fires on the tool's own
+title). Without the KB questions, orders and unguarded negations (the parts r7 never saw any form of),
+r7 single still has 30 wrong (1.2%) and 9 ambiguous danger misses, so the verdict does not hinge on
+them.
+
+**Verdict: FAIL, not shipped, nothing went to the Pixel.** Danger is 85.9% and wrong shown 2.8% (mark
+under 0.5%); agree does not pass either. r7 does not generalise to new phrasings, Hinglish/Tenglish
+negations, or the KB option it never saw. Separate from the model, two rules fixes are indicated by
+this set: the negation guard knows no Hinglish/Tenglish forms (mat, nahi chahiye, vaddu, teravaddu),
+and the ICD cue should not fire on the "Search ICD" tool title. Both change rows outside the model and
+need their own review; the marks were not changed. Raw host output and scores:
+`$WORK/r7.test3{,rot}.raw.jsonl`, `r7.test3{,sc}.score.json` (not in the repo).
+
+### 5d. Re-audit of upstream Needle 3.1.0 (f84005f8), 2026-10-04: pin NOT moved
+Cactus's `main` is `c7c415a3` (README only) over `f84005f8` ("Replace binaries from production build",
+2026-10-02). The binaries are engine 3.1.0 (`config.json` engine_version 3.0.2 -> 3.1.0): the Whistle
+speech model (GitHub cactus-compute/needle `bb665fc1` "Whistle (#163)", 2026-10-01) linked into the same
+library. Compared with our pin `27c0a9a5` on the Mac (M1, CPU), no phone:
+| Check | 27c0a9a5 (pin) | f84005f8 (3.1.0) | Verdict |
+|---|---|---|---|
+| Weights `needle3.cact`, `LICENSE`, tokenizer | weights sha256 c9d915ec..., LICENSE git blob d6456956... | identical | equal |
+| Header | 1,187 B, `needle_complete(input, max, out, cap)` | 3,322 B; **`needle_complete` and `needle_embed` gain `pcm, samples`**; new `needle_models`, `needle_set_audio`, `needle_transcribe` | **API break**: JNI, `NeedlePlugin.swift` and `needle-host.cpp` must change to move |
+| Size | android-arm64 1.66 MB, ios-arm64 1.14 MB, macos 1.16 MB | 2.13 / 1.47 / 1.50 MB (+28%, speech code we do not use) | **worse** |
+| Imports (`nm -u`) | android 124 | 131: only `cos sin sincos log10`, `__memset_chk __strlen_chk`, one libc++ sort | equal: no socket/connect/getaddrinfo/curl/SSL/dlopen, no URL or host string |
+| Thread fallback | `fast_core_mask` + `hardware_concurrency()` in `needle::Engine()` | disassembly of `fast_core_mask`, `Engine::Engine()` and `ThreadPool(int)` identical (only string-table offsets moved); `whistle::Engine()` is a second caller | unchanged: our `--wrap` is still needed and still links |
+| Hang (init once, then only complete; `NEEDLE_INIT_ONCE=1 needle-host`, 150 test3 rows) | **hangs at call 56** (no return in 60 s; calls take ~65 ms) | **hangs at call 56** | not fixed upstream; first host repro (was Pixel only). With init before every call: 2,644/2,644 on both |
+| Base model, frozen `test` (1,141 model rows) | PASS, coverage 65.5%, wrong 0.0%, danger 100% | same | equal: all 1,141 decisions byte-identical |
+| Base model, `test3` (1,503 model rows) | PASS, coverage 35.3%, wrong 0.2%, danger 100% | same | equal: all 1,503 decisions byte-identical |
+| Host latency p50 / p95 (init + complete) | test 63 / 95 ms, test3 65 / 82 ms | test 62 / 81, test3 65 / 80 ms | equal or better (one run each, M1) |
+| Peak RAM (engine's own field) | 99 MB | 98 MB | equal |
+| Android link (NDK 27.2 clang, API 26, the plugin's flags) | links; LOAD align 0x4000; wrap in place; no network imports | as-is **fails to compile** (needle_complete takes 6 args); with `nullptr, 0` added it links, align 0x4000, wrap in place, no network imports | needs a code change |
+
+`test/native-host/run.sh android` itself was not run: it is Linux-only (linux-x86_64 NDK path, gradle +
+the llama submodule) and the Mac had about 2.5 GB free. The NDK link above replaces its Needle half.
+
+**Decision: keep `27c0a9a5`.** The new build is the same text engine with speech added: identical
+decisions, the same thread fallback and the same hang, so it fixes nothing we need, while it is 28% larger
+and breaks the `needle_complete` ABI (three call sites). It is not at least as good on every check.
+Move only if we want Whistle (on-device speech to tool calls) or a later build fixes the hang or the
+thread count; then change the three call sites to `needle_complete(text, nullptr, 0, max, out, cap)`
+(`needle-host.cpp` already builds against both headers) and re-run this table.
+Repro: `clang++ -std=c++17 -O2 -I<dir with needle.h> scripts/edge/needle-host.cpp <macos-arm64/libneedle.a>
+-framework Accelerate -o needle-host`; rows from `node scripts/edge/needle-r2.mjs rows test|test3`;
+`node scripts/edge/needle-pred.mjs pred raw.jsonl > pred.jsonl`; `node scripts/edge/score.mjs --split
+test|test3 --pred pred.jsonl`. Binaries were deleted after the run.
+
+### 5e. Needle local LoRA, round 3, and frozen test set `edge-router-4`, 2026-10-04
+Written as 5d on its branch; renumbered 5e on merge because 5d on main is the Needle 3.1.0 re-audit. The frozen `manifest4.json` note still says "Edge-Runbook 5d" and means this section.
+
+**Why.** test3 (`edge-router-3`) was seen once by r7, so it is not used to tune or pick anything in round 3.
+The rules layer also changed after r7 (#1365 KB exact, #1374 disease-name navigation, #1377 scheme intent and
+spelling, #1375 Hinglish/Tenglish negation and the Search ICD title), so every candidate list is rebuilt with
+the CURRENT router and the full Knowledge Base the scorer loads (`lib.mjs loadKB`).
+
+**test4, built and committed before any round-3 training** (`scripts/edge/generate-test4.mjs`,
+`dataset/test4.jsonl` + `manifest4.json`, sha256 `382b041a...f327f`, commit `3367bf2d1`). Same approach as test3:
+new templates only (none is a `generate.mjs`, `needle-r2.mjs`, `generate-test3.mjs` or `needle-r3.mjs`
+template), no text equal to a train, val, edge-router-2 test or test3 text (checked; the training builder
+checks the other way). Held-out keys (`lib.mjs t4Held`): 8% of targets and 30% of the ambiguous names
+(`wells`, `insulin`, `egfr`, `gfr`, `fisher`, `retic`, `bmr`, `coma score`, `sah grade`) never appear in round-3
+training or dev; 332 rows carry `heldout-target`. 2,804 rows: en 2,274, hi-Latn 267, te-Latn 263. Kinds:
+calculator 1,160, none 562, kb 495, drug 294, tool 173, icd 120. Routes: model 1,950, rules 694, negated
+148, empty 12. 275 danger rows (184 negations: 146 caught by the guard, 38 in forms it does not know, such as
+"band karo", "kholna nahi", "aapandi", "oddu"; 79 ambiguous names; 12 clinical orders), 129 of them
+model-routed. 267 KB disease questions (label none) and 495 KB page requests. Recall@5 96.1%.
+
+**Training data, train side only** (`scripts/edge/needle-r3.mjs build`, which runs the round-2 builder with
+round-3 options). Labels: a question about a disease is none even when its KB page is offered (MaiK answers);
+a disease name with a navigation word opens its KB page; a clinical order ("continue {drug}") is none; an
+ambiguous name (`lib.mjs AMBIGUOUS_NAMES`) is none; a negation the guard does not know ("band kar do",
+"aapeyyi") is none. Near-neighbour contrasts: every name x template for calculators that share title words
+with another calculator in their own options (GOS / GOS-E, ISS / R-ISS), every KB page whose name is also a
+calculator keyword (DIC), drug-card requests next to calculators that share the drug's name. Ambiguity
+relabel as round 2, except a KB page is a second fit only when the request IS its name, and an explicit
+calculator or page word decides. The builder throws if any training or dev3 text is a test, test3 or test4
+text, or if a test4-held target or name is in training or dev3. The selection split `dev3` (real labels)
+holds round 2's held-out templates and keys plus one dev-only template per new family.
+
+**Selection rule (pre-registered here, committed before any round-3 model is scored on dev3 or test4).**
+Candidates: every round-3 run x {single call, `engine.agree`}. Each is scored on ALL dev3 rows with
+`score.mjs --split dev3 --pred` (same metrics as test). A candidate is eligible when, on dev3: wrong shown is
+at most **0.25%** (half the 0.5% mark), danger is **100%**, accepted accuracy is at least 99%, and coverage is
+above dev3's rules coverage. Among eligible candidates the highest dev3 coverage wins (tie: the single call).
+Only the winner is scored on test4, once. If none is eligible the round FAILS; the candidate with the fewest
+dev3 danger misses, then the lowest dev3 wrong shown, is still scored on test4 once, for the record.
+Hyperparameters of later runs (rank, epochs) are chosen only from dev3 results. There is no confidence
+threshold to tune: a local LoRA build has no usable confidence head (5a), so the only operating-point knob is
+agree. Marks on test4 (unchanged): wrong shown under 0.5%, accepted accuracy at least 99%, danger 100%,
+coverage above rules on test4; then on the Pixel 9, p95 under 800 ms over `--limit 50` including agree if
+chosen. Note before scoring: the base Needle single call is already p95 747-797 ms on the Pixel (A0.6), so
+an agree winner is unlikely to meet the latency mark.
+
+**dev3** (4,401 rows, 3,329 model-routed, 147 danger: 76 negations, 39 orders, 32 ambiguous names). Rules on
+dev3: coverage 24.3%, wrong 0.0%, danger 100%.
+
+**Runs** (L4, lr 5e-4, 3 epochs, `--val-split 0`; scored on dev3 with `needle-host`, M1 host)
+| Run | Data | LoRA | Dev3 wrong, 1 call / agree | Dev3 danger, 1 call / agree | Dev3 coverage, 1 call / agree |
+|---|---|---|---|---|---|
+| r8 | `train.r3` (23,761 rows, permute 1) | r32/a64 | 1.5% / 0.6% | 91.8% / 97.3% | 54.4% / 49.9% |
+r8 is not eligible. Its 28 agree wrong opens on dev3 are near neighbours of dev-held targets (GOS -> GOS-E,
+"ci" -> CIWA, "ipi" -> FLIPI, corrected sodium -> Na deficit) and danger rows ("change to {drug}", the
+dev-only order template; "show timi"). From these dev errors only, r9 adds (`needle-r3.mjs build --v2`):
+synthetic decoy contrasts (a copy of a named request with one more option whose title extends the target's
+name, label unchanged; and the reverse) and eight more order forms, train side only (dev3 byte-identical).
+
+| r9 | `train.r3v2` (27,784 rows: + decoys, + orders) | r64/a128 | 0.8% / 0.5% | 91.2% / 92.5% | 54.1% / 51.7% |
+r9 fixed most near neighbours (agree wrong 24 rows, 17 of them danger) but not unseen danger phrasings: the
+dev-only templates "{t} skip karo" (9 opened) and "change to {drug}" (2), plus GOS -> GOS-E and "ci" -> CIWA.
+Host latency (M1): single p95 63 / 61 ms, agree p95 136 / 121 ms (r8 / r9).
+
+**Choice (dev3 only, before test4 was opened).** No run x setting is eligible: none has dev3 danger 100% or
+wrong shown at most 0.25%. By the rule the round FAILS, and the candidate with the fewest dev3 danger misses,
+**r8 + agree** (4 misses; r9 + agree 11), is scored on test4 once, for the record. A third run was not
+launched: both runs miss danger rows only on phrasings no training row has, which more epochs or rank do
+not reach, so another ~1.7 USD would not change the verdict.
+
+**test4, scored once (r8 + agree, M1 host, pinned engine)**
+| Build | Coverage | Accepted acc. | Wrong shown | Danger | en / hi-Latn / te-Latn wrong | Verdict |
+|---|---|---|---|---|---|---|
+| rules | 24.8% | 100% | 0.0% | 100% (275/275) | 0 / 0 / 0 | PASS |
+| **r8 + agree** | **61.1%** | **97.1%** | **1.8%** (50) | **94.2%** (259/275) | 1.5% / 1.1% / 5.3% | **FAIL** |
+Coverage by language: en 65.6%, hi-Latn 42.7%, te-Latn 41.4% (rules 28.9 / 9.0 / 4.6). Held-out targets:
+66.6% coverage, 0.6% wrong. Model rows: 52.3% coverage, 2.6% wrong. Host latency (both calls) p50 92, p95 124 ms.
+The 50 wrong opens: 31 KB page requests (27 of them for pages the options did not hold, mostly rare
+syndromes, where the model opened a calculator or a parent page such as "hereditary spastic paraplegia" for
+"type 23"; training never had a page request whose page was missing), 16 danger rows (11 negations in forms
+the guard does not know: "kholna nahi", "oddu", "aapandi", "vaddhu"; 3 ambiguous: "open timi quickly", "open
+cci quickly", "retic please"; 2 orders: "titrate ketorolac", "oxaliplatin 1 tab od"), 3 near neighbours
+(SPESI -> PESI, GOS -> GOS-E, Entresto -> valsartan), 2 KB questions, 2 chatter rows.
+
+**Verdict: FAIL, not shipped, nothing went to the Pixel.** Coverage passes (61.1% vs rules 24.8%); wrong shown
+(1.8%), accepted accuracy (97.1%) and danger (94.2%) do not. Cost: two VMs, about 3.27 USD list price
+(rounds 1-3: about 9.48 of the 20 USD cap). Weights (not in the repo): `$WORK/r8.safetensors` (sha256
+`fadf1636...`), `r8.cact` (`4dd366ba...`), `r9.safetensors` (`1fa2476a...`), `r9.cact` (`b57cabfd...`).
+**Next levers.** The model misses danger and page rows only on forms no training row resembles, so more
+LoRA data or capacity keeps chasing phrasings. (1) Rules, outside the model: add the unguarded Hinglish/Tenglish
+negations ("kholna nahi", "band karo", "skip karo", "oddu", "aapandi", "vaddhu") to the guard, and pass on a
+clinical order (a dosing or start/continue/titrate verb next to a drug); both need their own review. (2) Train
+"page asked for, page not offered -> none". (3) A calibrated confidence head (Cactus platform training, needs a
+key: the owner's call), so a 0.5 floor can catch the near-neighbour and unseen-form picks.
 
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:

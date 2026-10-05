@@ -30,14 +30,16 @@ function load({ reduced = false, kill = false, noWaapi = false } = {}) {
 const allAnims = (el) => { const out = []; (function w(n) { n.anims.forEach((a) => out.push(a)); n.children.forEach(w); })(el); return out; };
 const finishAll = (el) => allAnims(el).filter((a) => !a.cancelled).forEach((a) => a.finish());
 const vis = (el) => el.__smdNum.vis;
-const sr = (el) => el.__smdNum.sr.textContent;
+// What assistive tech reads: the sr copy mid-roll, the plain visual text at rest.
+const sr = (el) => el.__smdNum.sr.textContent || (el.__smdNum.vis.attrs["aria-hidden"] ? "" : el.__smdNum.vis.textContent);
 
 test("first render: instant, no animation, sr text carries the value, tabular numerals", () => {
   const { doc, NUM } = load(); const el = doc.createElement("span");
   NUM.set(el, 42, { kind: "counter" });
   assert.equal(allAnims(el).length, 0);
   assert.equal(vis(el).textContent, "42"); assert.equal(sr(el), "42");
-  assert.equal(vis(el).attrs["aria-hidden"], "true");
+  assert.equal(el.textContent, "42", "the value is in the DOM exactly once at rest");
+  assert.equal(vis(el).attrs["aria-hidden"], undefined);
   assert.equal(el.style.fontVariantNumeric, "tabular-nums"); assert.match(el.className, /smd-num/);
 });
 
@@ -56,8 +58,11 @@ test("counter: only the digits that changed roll (199 -> 209: tens and none else
   const a = allAnims(el)[0];
   assert.equal(a.opts.duration, 200); assert.match(a.opts.easing, /0\.23, 1, 0\.32, 1/);
   assert.equal(sr(el), "209", "assistive tech gets the final value immediately");
+  assert.equal(vis(el).attrs["aria-hidden"], "true", "partial glyphs hidden from AT mid-roll");
   finishAll(el);
   assert.equal(vis(el).textContent, "209"); assert.equal(vis(el).children.length, 1, "collapsed to plain text");
+  assert.equal(el.textContent, "209", "settled: value appears once, sr copy emptied");
+  assert.equal(vis(el).attrs["aria-hidden"], undefined);
 });
 
 test("counter: longer value gets a new leading digit", () => {
@@ -123,6 +128,7 @@ test("reduced motion and the localStorage kill switch swap instantly", () => {
     const { doc, NUM } = load(opt); const el = doc.createElement("span");
     NUM.set(el, 6, { kind: "clinical" }); NUM.set(el, 9, { kind: "clinical" });
     assert.equal(allAnims(el).length, 0, JSON.stringify(opt)); assert.equal(vis(el).textContent, "9"); assert.equal(sr(el), "9");
+    assert.equal(el.textContent, "9", "reduced motion: value once, no sr duplicate");
   }
 });
 

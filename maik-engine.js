@@ -3,7 +3,8 @@
  * Three clinician-controlled engines, ONE router. Mirrors image-engine.js (same pref
  * pattern, same iOS-grouped-list settings markup, same wireSettings contract).
  *
- *   • KB only · Free        — the deterministic StewardMD KB answer (Tier 0, home.js) and
+ *   • MaiK Edge · Free      — (was "KB only"; owner, 2026-10-04) StewardMD Edge's on-device router
+ *                             (edge-router.js) plus the deterministic StewardMD KB answer (Tier 0, home.js) and
  *                             NOTHING else. Zero AI tokens, works offline. On a KB miss the
  *                             clinician is told plainly instead of a paid call being made.
  *   • MaiK Cloud · Pro      — today's pipeline, unchanged: KB grounding → Vertex/Gemini.
@@ -140,6 +141,19 @@
     return p;
   }
 
+  // "KB only" is now "MaiK Edge" (owner, 2026-10-04). Same "rag" pref, renamed for the on-device
+  // router (edge-router.js) that runs in it. With Edge off (smd_edge "0") the old name comes back.
+  function edgeOn() { return lget("smd_edge") !== "0"; }
+  function ragLabel() { return edgeOn() ? "MaiK Edge" : "KB only"; }
+  var EDGE_ENGINE_LABEL = { needle: "Needle", functiongemma: "FunctionGemma", rules: "Rules only" };
+  function edgeEngineLabel() {
+    var v = null;
+    try { var E = window.SMD_EDGE; v = (E && E.engineChoice) ? E.engineChoice() : lget("smd_edge_engine"); } catch (e) {}
+    return EDGE_ENGINE_LABEL[v] || "Needle";
+  }
+  var RAG_SUB_EDGE = "On-device. Opens the right tool, calculator, drug or page instantly, and answers from the StewardMD Knowledge Base. Free, works offline. No AI writing.";
+  var RAG_SUB_KB = "StewardMD knowledge base, cited. No tokens, works offline.";
+
   // ── the KB-only notice (rendered as a normal answer, so no home.js error branch needed) ──
   // Deliberately avoids the phrases maikRenderAnswer's "limited material" regex looks for.
   function kbOnlyNotice() {
@@ -152,7 +166,7 @@
       var st = (M && M.state) ? M.state(pid) : { frac: 0, downloading: false };
       var why, how;
       if (!runtimeAvailable()) { why = "this build cannot run on-device models"; how = "Update the app, or switch to **MaiK Cloud**."; }
-      else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **KB only**."; }
+      else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **" + ragLabel() + "**."; }
       else if (st.frac > 0) { why = "**" + label + "** is only partly downloaded (" + (st.frac * 100).toFixed(0) + "%)"; how = "Tap the model name at the top of this screen and select it again to resume the download."; }
       else { why = "**" + label + "** is not downloaded to this device yet"; how = "Tap the model name at the top of this screen and select it to start the download."; }
       return {
@@ -160,6 +174,14 @@
         sources: [], engine: "local-unavailable", pack: pid
       };
     }
+    if (edgeOn()) return {
+      text: "**MaiK Edge** found no tool, page or Knowledge Base entry for this, and it never writes " +
+            "long answers or makes a paid AI call.\n\n" +
+            "Switch to **MaiK Cloud** or an on-device model for a written answer: tap the model name at " +
+            "the top of this screen, or open **Settings → MaiK → Who answers**.",
+      sources: [],
+      engine: "rag"
+    };
     return {
       text: "**KB-only mode is on.** The StewardMD knowledge base has no entry that answers this, " +
             "and KB-only mode never makes a paid AI call.\n\n" +
@@ -470,6 +492,12 @@
     chf: "heart failure", pe: "pulmonary embolism", dvt: "deep vein thrombosis", aki: "acute kidney injury", ards: "acute respiratory distress syndrome", od: "poisoning", overdose: "poisoning" };
   function codeIntent(q) {
     var s = String(q || "").trim();
+    // A named scheme or a package-code ask is a scheme lookup only, never ICD (owner, 2026-10-04:
+    // "What is the arogyasri code for pancreatitis" listed ICD codes). The vocabulary lives in
+    // edge-router.js (SMD_EDGE.schemeAsk) so Edge and this path read a request the same way.
+    var E = (typeof window !== "undefined") ? window.SMD_EDGE : null;
+    var sa = (E && E.schemeAsk) ? E.schemeAsk(s) : null;
+    if (sa) return sa.term && sa.term.length >= 2 ? { subject: sa.term, icd: false, scheme: true, ask: sa } : null;
     if (!s || s.length > 200 || !CODE_ASK.test(s)) return null;
     var scheme = /(a+r+o+gya?sri|aarogyasri|pmjay|ayushman|vaidya\s*seva|scheme|package)/i.test(s);
     var icd = /\bicd\b/i.test(s) || !scheme;
@@ -479,6 +507,71 @@
          .split(" ").map(function (w) { return CODE_ABBR[w.toLowerCase()] || w; }).join(" ");
     if (!subject || subject.length < 2) return null;
     return { subject: subject, icd: icd, scheme: scheme };
+  }
+  /* A misspelt disease word is searched corrected ("dental absccess" -> "dental abscess"), against the
+   * ICD-10 title words (icd.js vocab) and the Knowledge page names. Resolves { term, from } where
+   * from is the original term when it was changed, else null. Never rejects. */
+  function fixTerm(term) {
+    var W = (typeof window !== "undefined") ? window : {}, E = W.SMD_EDGE, I = W.SMD_ICD, K = W.MaiKKB;
+    var t = String(term || "");
+    if (!E || !E.spell) return Promise.resolve({ term: t, from: null });
+    return Promise.resolve(I && I.vocab ? I.vocab() : {}).then(null, function () { return {}; }).then(function (v) {
+      var all = {}, k; for (k in v) all[k] = 1;
+      try { var kv = K && K.vocab ? K.vocab() : {}; for (k in kv) all[k] = 1; } catch (e) {}
+      var r = E.spell(t, all);
+      return r.changed ? { term: r.text, from: t } : { term: t, from: null };
+    });
+  }
+  // A package's rate as a doctor reads it. 0 or no amount is "price not listed" (the PM-JAY HBP sheets
+  // carry no rate, stored as 0), and so is a figure over Rs 1 crore: the Telangana import holds
+  // 23003800880010350 for most rows, a parse defect, not a price.
+  function schemePrice(p) {
+    var a = Number(p && p.package_amount);
+    if (!(a > 0) || a >= 1e7) return "price not listed";
+    try { return "Rs " + a.toLocaleString("en-IN"); } catch (e) { return "Rs " + a; }
+  }
+  // The user's state from the cached profile ("Andhra Pradesh" -> "andhra-pradesh"), or null.
+  function profileState() {
+    try {
+      var A = window.SMD_AUTH, u = A && A.currentUser, c = u ? JSON.parse(localStorage.getItem("smd_profile_cache:" + u.uid) || "null") : null;
+      var st = c && c.state ? String(c.state).toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : "";
+      return st || null;
+    } catch (e) { return null; }
+  }
+  /* Scheme packages for a schemeAsk() result (edge-router.js). A named scheme searches only its own
+   * states and scheme ids, one labelled group each (Aarogyasri: AP and Telangana). No scheme named: the
+   * user's state first when the profile has one, else every state as before. Codes come only from the
+   * database. Resolves { term, from, groups:[{ name, rows }] }, or null when offline. */
+  function schemeLookup(ask, term) {
+    var W = window, nav = (typeof navigator !== "undefined") ? navigator : null;
+    if (nav && nav.onLine === false) return Promise.resolve(null);
+    var base = (W && W.AI_PROXY) ? String(W.AI_PROXY).replace(/\/api\/ai$/, "") : "";
+    var f = (W && W.fetch) ? function (u) { return W.fetch(u); } : fetch;
+    function search(q, state) {
+      return f(base + "/api/schemes/search?q=" + encodeURIComponent(String(q).slice(0, 80)) + "&limit=" + (state ? 8 : 12) + (state ? "&state=" + encodeURIComponent(state) : ""))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { var rows = (j && (j.results || j.packages)) || []; return Array.isArray(rows) ? rows : []; })
+        .then(function (rows) {
+          // The AP seed spells one common word "Poisioning"; a miss on "poisoning" retries that spelling.
+          if (!rows.length && /poisoning/i.test(q)) return search(String(q).replace(/poisoning/i, "poisioning"), state);
+          return rows;
+        });
+    }
+    var targets = (ask && ask.targets) || [];
+    return fixTerm(term != null ? term : (ask && ask.term)).then(function (ft) {
+      var mine = !targets.length ? profileState() : null;
+      var plan = targets.length ? targets : (mine ? [{ state: mine, scheme: null, name: null, mine: true }, { state: "", scheme: null, name: null }] : [{ state: "", scheme: null, name: null }]);
+      return Promise.all(plan.map(function (t) {
+        return search(ft.term, t.state).then(function (rows) {
+          if (t.scheme) rows = rows.filter(function (p) { return !p.scheme_id || p.scheme_id === t.scheme; });
+          return { name: t.name || null, mine: !!t.mine, rows: rows };
+        });
+      })).then(function (groups) {
+        // Unnamed: the user's own state when it has rows, else the national list.
+        if (!targets.length) groups = (groups[0].mine && groups[0].rows.length) ? [groups[0]] : [groups[groups.length - 1]];
+        return { term: ft.term, from: ft.from, groups: groups };
+      });
+    }).then(null, function () { return null; });
   }
   function schemePackages(subject) {
     var W = window, nav = (typeof navigator !== "undefined") ? navigator : null;
@@ -502,10 +595,18 @@
     if (!it) return null;
     var jobs = [];
     if (it.icd) jobs.push(icdCandidates(it.subject).then(function (c) { return { icd: (c && c.candidates) || [] }; }, function () { return { icd: [] }; }));
-    if (it.scheme) jobs.push(schemePackages(it.subject).then(function (rows) { return { scheme: rows }; }));
+    if (it.scheme && it.ask) jobs.push(schemeLookup(it.ask, it.subject).then(function (res) {
+      if (!res) return { scheme: null };
+      // Flattened with each group's name, so the list below labels the scheme of every row.
+      var rows = [];
+      res.groups.forEach(function (g) { g.rows.slice(0, 6).forEach(function (p) { rows.push({ p: p, name: g.name }); }); });
+      return { scheme: rows, from: res.from, subject: res.term };
+    }));
+    else if (it.scheme) jobs.push(schemePackages(it.subject).then(function (rows) { return { scheme: rows }; }));
     return Promise.all(jobs).then(function (parts) {
       var icd = [], scheme, askedScheme = false;
-      parts.forEach(function (p) { if (p.icd) icd = p.icd; if ("scheme" in p) { askedScheme = true; scheme = p.scheme; } });
+      var shownFor = it.subject, fixedFrom = null;
+      parts.forEach(function (p) { if (p.icd) icd = p.icd; if ("scheme" in p) { askedScheme = true; scheme = p.scheme; if (p.subject) shownFor = p.subject; if (p.from) fixedFrom = p.from; } });
       var out = [], codes = [];
       if (icd.length) {
         var top = icd.slice(0, 5);
@@ -519,17 +620,21 @@
       if (askedScheme) {
         if (scheme === null) out.push((out.length ? "\n" : "") + "Scheme package rates are looked up live in the scheme database and need the network.");
         else if (scheme.length) {
-          out.push((out.length ? "\n" : "") + "**Scheme packages for " + it.subject + "**");
-          scheme.slice(0, 6).forEach(function (p) {
-            var label = (p.scheme_name || p.scheme || "") + (p.state ? " (" + p.state + ")" : "");
+          if (fixedFrom) out.push("_Showing results for " + shownFor + "._");
+          out.push((out.length ? "\n" : "") + "**" + (it.ask ? it.ask.label : "Scheme") + " packages for " + shownFor + "**");
+          scheme.slice(0, 12).forEach(function (x) {
+            var p = x.p || x, label = x.name || ((p.scheme_name || p.scheme || "") + (p.state ? " (" + p.state + ")" : ""));
             out.push("- **" + (p.treatment_code || p.code || "") + "** " + (p.treatment_name || p.name || "") +
-              (p.package_amount != null ? " · Rs " + p.package_amount : "") + (label ? " · " + label : ""));
+              " · " + schemePrice(p) + (label ? " · " + label : ""));
           });
+        } else if (it.ask && it.ask.targets.length) {
+          // A named scheme with no package for this term: say so; never fall through to a model that could invent a code.
+          out.push("No " + it.ask.label + " package found for " + shownFor + " in the StewardMD scheme database.");
         }
       }
       // Nothing in either database: fall through so the model can still help (it knows common codes);
       // the only exception is a scheme ask offline, where the honest notice beats a guessed rate.
-      if (!icd.length && !(askedScheme && (scheme === null || (scheme && scheme.length)))) return null;
+      if (!icd.length && !(askedScheme && (scheme === null || (scheme && scheme.length) || (it.ask && it.ask.targets.length)))) return null;
       return { text: out.join("\n"), engine: "codedb", codes: codes, grounded: true, mode: "codedb" };
     });
   }
@@ -554,7 +659,7 @@
       // KB only never spends and never runs a model. Answer kinds render the notice as an answer;
       // structured kinds get an error their callers already know how to show.
       if (answerKind) return Promise.resolve(kbOnlyNotice());
-      return Promise.resolve({ error: "kb-only", message: (FEATURE_LABEL[feature] || feature) + " needs an AI model. KB-only mode makes no AI calls: pick MaiK Cloud or an on-device model in Settings." });
+      return Promise.resolve({ error: "kb-only", message: (FEATURE_LABEL[feature] || feature) + " needs an AI model. " + (edgeOn() ? "MaiK Edge" : "KB-only mode") + " makes no AI calls: pick MaiK Cloud or an on-device model in Settings." });
     }
     // LOCAL
     var need = REQ[feature] || null;
@@ -703,9 +808,10 @@
   }
   function settingsHTML() {
     var pref = getPref();
-    function opt(engine, label, badge, desc, first, disabled) {
-      var on = pref === engine;
-      return '<button type="button" data-me-opt="' + engine + '" role="radio" aria-checked="' + on + '"' +
+    // sel/attr: another radio group in the same row style (the Edge engine rows pass their own).
+    function opt(engine, label, badge, desc, first, disabled, sel, attr) {
+      var on = sel != null ? !!sel : pref === engine;
+      return '<button type="button" ' + (attr || "data-me-opt") + '="' + engine + '" role="radio" aria-checked="' + on + '"' +
         (disabled ? ' aria-disabled="true"' : '') +
         ' style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;background:' +
         (on ? "var(--teal-soft,#e6f4f1)" : "transparent") + ';border:0;' +
@@ -731,15 +837,46 @@
     return '<div class="me-seg">' +
       '<div class="smd-nav-lbl" style="margin-bottom:6px">Who answers</div>' +
       '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
-      opt("rag", "Knowledge Base only", pill("Free", "#dcfce7", "#166534"),
-          "StewardMD's own references, with citations. No AI, works offline.", true, false) +
+      opt("rag", ragLabel(), pill("Free", "#dcfce7", "#166534"),
+          edgeOn() ? RAG_SUB_EDGE : "StewardMD's own references, with citations. No AI, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e") + " " + gradePill("DM"),
           "Our super specialist. The strongest MaiK, reads the Knowledge Base before every answer. Uses AI tokens.", false, false) +
       opt("local", "MaiK on this phone", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
+      edgeEngineHTML(opt) +
       (rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
+  }
+
+  /* EDGE ENGINE (owner, 2026-10-04): which on-device model StewardMD Edge uses to pick a tool
+   * (edge-router.js, setting smd_edge_engine). Same row style as "Who answers"; data-me-edge rows. */
+  function edgeEngineHTML(opt) {
+    var E = window.SMD_EDGE, M = window.SMD_MAIK_MODELS;
+    if (!E || !E.engineChoice || !E.enabled || !E.enabled()) return "";
+    var cur = E.engineChoice(), C = window.Capacitor, P = C && C.Plugins;
+    var native = !!(C && C.isNativePlatform && C.isNativePlatform());
+    var fid = (M && M.EDGE_FG_ID) || "edge-functiongemma";
+    var fgHave = !!(M && M.installedCached && M.installedCached(fid));
+    var st = (M && M.state) ? M.state(fid) : { frac: 0 };
+    var on = pill("On this phone", "#dcfce7", "#166534"), off = pill("Not on this phone", "#e2e8f0", "#334155");
+    var fgPill = fgHave ? on : st.downloading ? pill("Downloading " + (st.frac * 100).toFixed(0) + "%", "#fef3c7", "#92400e") : off;
+    function row(v, label, badge, desc, first) { return opt(v, label, badge, desc, first, false, cur === v, "data-me-edge"); }
+    var size = (M && M.sizeLabel) ? M.sizeLabel(fid) : "290 MB";
+    var dl = (!fgHave && native && P && P.Llama && M && M.ensure)
+      ? '<div style="display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px">' +
+          '<span style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
+            '<span data-me-status="' + fid + '" aria-live="polite">' + (st.downloading ? (st.frac * 100).toFixed(1) + "% of " + size : "FunctionGemma is not on this phone · " + size) + '</span>' +
+            '<span data-me-bar="' + fid + '" style="display:block"></span></span>' +
+          '<button class="smd-nav-btn" data-me-edgedl="' + (st.downloading ? "pause" : "download") + '" style="margin:0;min-height:44px">' + (st.downloading ? "Pause" : "Download") + '</button>' +
+        '</div>'
+      : "";
+    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">Edge engine</div>' +
+      '<div role="radiogroup" aria-label="Edge engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
+        row("needle", "Needle", (native && P && P.Needle) ? on : off, "Small and fast. Declines when unsure.", true) +
+        row("functiongemma", "FunctionGemma", fgPill, "Picks more often, but can pick the wrong tool until trained. Unloads MaiK Lite while it runs.", false) +
+        row("rules", "Rules only", pill("Built in", "#dcfce7", "#166534"), "Exact names only. No model.", false) +
+      '</div>' + dl;
   }
 
   function levelPill(level) {
@@ -1080,7 +1217,7 @@
             '<div class="smd-nav-sub">' + (on
               ? "The model reads the StewardMD Knowledge Base before answering and every claim is checked against it. Slower, and the safer default."
               : "Off: faster, but the model answers from its own training and shows no sources.") +
-              " MaiK Cloud and Knowledge Base only are always checked." +
+              " MaiK Cloud and " + (edgeOn() ? "MaiK Edge" : "Knowledge Base only") + " are always checked." +
             '</div>' +
           '</div>' +
           '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-rag="1" role="switch" aria-checked="' + on + '"' +
@@ -1201,6 +1338,25 @@
         if (want === "local" && !packInstalled()) { setPref(want); rerender(b, root); return startDownload(b, root); }
         setPref(want);
         rerender(b, root);
+      });
+    });
+    root.querySelectorAll("[data-me-edge]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var E = window.SMD_EDGE;
+        if (E && E.setEngineChoice) E.setEngineChoice(b.getAttribute("data-me-edge"));
+        rerender(b, root);
+      });
+    });
+    root.querySelectorAll("[data-me-edgedl]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var M = window.SMD_MAIK_MODELS, id = M && M.EDGE_FG_ID;
+        if (!id) return;
+        if (b.getAttribute("data-me-edgedl") === "pause") { if (M.cancel) M.cancel(id); return; }
+        var p = M.ensure(id, null);
+        rerender(b, root);             // flip to Pause at once
+        p.then(function () { toast("FunctionGemma is on this phone."); }, function (e) {
+          if (String((e && e.message) || e) !== "cancelled") toast("Download stopped. Tap Download to resume.");
+        });
       });
     });
     root.querySelectorAll("[data-me-pack]").forEach(function (b) {
@@ -1334,7 +1490,7 @@
   function options() {
     var out = [
       { id: "cloud", label: "MaiK Cloud", sub: "Our super specialist, grounded in the StewardMD KB. Uses AI tokens.", badge: "PRO", grade: "DM" },
-      { id: "rag", label: "KB only", sub: "StewardMD knowledge base, cited. No tokens, works offline.", badge: "FREE" }
+      { id: "rag", label: ragLabel(), sub: edgeOn() ? RAG_SUB_EDGE : RAG_SUB_KB, badge: "FREE", edgeEngine: edgeOn() ? edgeEngineLabel() : "" }
     ];
     var M = window.SMD_MAIK_MODELS;
     if (M && M.PACKS && gateActive() && runtimeAvailable()) {
@@ -1376,7 +1532,7 @@
     // "MaiK Cloud (not ready)" - the owner took that as Cloud being broken (2026-09-20). Name the pack.
     var _pk = null;
     try { var _M0 = window.SMD_MAIK_MODELS; _pk = (_M0 && _M0.PACKS && _M0.PACKS[activePack()]) ? _M0.PACKS[activePack()].label : null; } catch (e) {}
-    var base = o ? o.label : (getPref() === "rag" ? "KB only" : (getPref() === "local" && _pk) ? _pk : "MaiK Cloud");
+    var base = o ? o.label : (getPref() === "rag" ? ragLabel() : (getPref() === "local" && _pk) ? _pk : "MaiK Cloud");
     // Never let the chip imply an on-device model is answering when it is not ready. Silent
     // degrade-to-KB with a model name still showing is how "I get no answer" happens.
     if (getPref() === "local" && !localReady()) {
@@ -1417,7 +1573,7 @@
     // switch reads "disconnected" while this footer names the knowledge base, and without the
     // reason that looks like the footer ignoring the switch (owner, 2026-09-20).
     if (e === "rag" && getPref() === "local") return "Knowledge base (on-device model not ready) \u00b7 verify independently";
-    if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
+    if (e === "rag") return (edgeOn() ? "MaiK Edge \u00b7 " : "") + "StewardMD knowledge base \u00b7 verify independently";
     return "Grounded \u00b7 AI-generated, verify independently";
   }
 
@@ -1571,6 +1727,10 @@
         '<span style="font:600 10.5px/1 var(--sans,system-ui);letter-spacing:.03em;text-transform:uppercase;color:var(--mk-mut,#5a7184)">' + label + '</span>' +
         '<span aria-hidden="true">' + segs + '</span></span>';
     }
+    // MaiK Edge row: which Edge engine runs, in the same muted line the packs use for their size.
+    function edgeLineHTML(o) {
+      return o.edgeEngine ? '<span style="display:block;margin-top:7px;font:500 11px/1.3 var(--sans,system-ui);color:var(--mk-mut,#5a7184)">Engine: ' + esc(o.edgeEngine) + ' · change in Settings, MaiK, Edge engine</span>' : "";
+    }
     function metersHTML(o) {
       if (!o.pack) return "";
       var M = window.SMD_MAIK_MODELS, c = null, size = "";
@@ -1593,7 +1753,7 @@
               (badge ? '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + badge + '</span>' : "") +
             '</span>' +
             '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
-            metersHTML(o) +
+            metersHTML(o) + edgeLineHTML(o) +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
           '</button>';
@@ -1720,7 +1880,7 @@
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,
     getPref: getPref, setPref: setPref, effective: effective,
     gateActive: gateActive, runtimeAvailable: runtimeAvailable, packInstalled: packInstalled, localReady: localReady,
-    kbOnlyNotice: kbOnlyNotice, route: route, install: install, activePack: activePack,
+    kbOnlyNotice: kbOnlyNotice, ragLabel: ragLabel, edgeEngineLabel: edgeEngineLabel, route: route, install: install, activePack: activePack,
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
@@ -1728,6 +1888,8 @@
     // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
     KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
     warmIfLocal: warmIfLocal,
+    // Scheme package lookup and the disease-word spelling fix, shared with the Edge cards in home.js.
+    schemeLookup: schemeLookup, schemePrice: schemePrice, fixTerm: fixTerm,
     // hard Local/Cloud policy + capability matcher (2026-09-11)
     KEY_HARD: KEY_HARD, hardLocal: hardLocal, policy: policy, policyReason: policyReason, cloudAllowed: cloudAllowed, REQ: REQ, LOCAL_IMPL: LOCAL_IMPL, FEATURE_LABEL: FEATURE_LABEL,
     featureOf: featureOf, match: match, capabilityError: capabilityError, unlocksFor: unlocksFor, capsHTML: capsHTML,

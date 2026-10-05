@@ -78,3 +78,41 @@ test("a critical result loop on the hospital board can raise a linked safety sig
   const html = W._render({ ...W._st, view: "critsboard", critsBoard: [{ loopId: "loop-7", patientId: "p1", state: "open", reportedAt: "2026-09-13T00:00:00Z", escalation: { level: "due" } }] });
   assert.ok(html.includes('data-w-act="incidentsignal:CriticalResultLoop~loop-7"'), html.slice(0, 400));
 });
+
+/* NABH KPI 4 and 9 (owner decision 2026-10-04): the NCC MERP category on the forms, the incident row and the quality screen. */
+test("NCC MERP: the filing form and the confirm form ask for the category, all nine, and a record with none says so", () => {
+  const W = loadWard();
+  const inc = (x) => ({ id: "i1", severity: "minor", what: "wrong rate", reportedAt: "2026-09-10T00:00:00Z", capas: [], state: "reported", stage: "signal", ...x });
+  const view = (i) => W._render({ ...W._st, view: "incidents", incidentLog: [i], incidentHealth: { signals: 1, confirmed: 0, rejected: 0, withRootCause: 0, completedCapas: 0, total: 1, openCapas: 0, reading: "" } });
+  const html = view(inc({ category: "medication-error", merpCategory: "D" }));
+  assert.match(html, /id="wIncMerp"/, "the filing form");
+  assert.match(html, /id="wIncConfMerp_i1"/, "the confirm form");
+  for (const c of ["A", "B", "C", "D", "E", "F", "G", "H", "I"]) assert.ok(html.includes('<option value="' + c + '">' + c + " - "), c);
+  assert.match(html, /D - An error reached the patient and required monitoring and\/or intervention to preclude harm/);
+  assert.match(html, /Medication error &middot; NCC MERP D<div/);
+  assert.match(html, /Keep: D - An error reached the patient and required monitoring/, "a filed category is kept unless changed");
+  assert.match(view(inc({ category: "medication-error" })), /<span class="w-st due">NCC MERP uncategorised<\/span>/);
+  assert.ok(!/NCC MERP/.test(view(inc({ category: "fall" })).split('id="wIncMerp"')[0].split("<li")[1] || ""), "no category line on a fall");
+});
+
+test("NCC MERP: the quality screen shows near misses and uncategorised beside the rate, and the counts by category and group", () => {
+  const W = loadWard();
+  const byCategory = { A: 1, B: 1, C: 2, D: 0, E: 1, F: 0, G: 0, H: 0, I: 1, uncategorised: 2 };
+  const byGroup = { "no-error": 1, "error-no-harm": 3, "error-harm": 1, death: 1, uncategorised: 2 };
+  const report = { ...REPORT, measures: [
+    { id: "medication-errors", title: "Medication error incidents per 1000 bed-days", computable: true, unit: "per 1000 bed-days", numerator: 8, denominator: 400, rate: 20, nearMisses: 2, uncategorised: 2, byCategory, byGroup, cases: [] },
+  ] };
+  const html = qs(W, { qs: report });
+  assert.match(html, /<b>20<\/b> per 1000 bed-days \(8 over 400 bed-days\) &middot; of which 2 near misses \(NCC MERP A and B\) &middot; 2 with no NCC MERP category/);
+  assert.match(html, /No error \(A\)<\/b><span>1<\/span>/);
+  assert.match(html, /Error, no harm \(B to D\)<\/b><span>3<\/span><small class="w-dt-times">B <b>1<\/b> &middot; C <b>2<\/b> &middot; D <b>0<\/b>/);
+  assert.match(html, /Error, harm \(E to H\)<\/b><span>1<\/span>/);
+  assert.match(html, /Death \(I\)<\/b><span>1<\/span>/);
+  assert.match(html, /Uncategorised: filed with no NCC MERP category<\/b><span>2<\/span>/);
+  // No errors in the period is a real zero with no table of zeros; unreadable records are not a zero either.
+  const none = qs(W, { qs: { ...REPORT, measures: [{ id: "medication-errors", title: "Medication error incidents per 1000 bed-days", computable: true, unit: "per 1000 bed-days", numerator: 0, denominator: 400, rate: 0, nearMisses: 0, uncategorised: 0, byCategory: { ...byCategory, uncategorised: 0 }, byGroup, cases: [] }] } });
+  assert.match(none, /<b>0<\/b> per 1000 bed-days/);
+  assert.ok(!/w-merp/.test(none));
+  const blocked = qs(W, { qs: { ...REPORT, measures: [{ id: "medication-errors", title: "x", computable: false, reason: "Incident records could not be read: not readable with this role", reasonCode: "records-unreadable", reasonVars: { why: "not readable with this role" } }] } });
+  assert.match(blocked, /Not computable: Incident records could not be read: not readable with this role/);
+});

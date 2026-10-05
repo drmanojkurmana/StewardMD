@@ -23,6 +23,8 @@
   // Expose for any code that wants to build absolute URLs explicitly.
   window.SMD_API_BASE = native ? API_ORIGIN : "";
   window.SMD_IS_NATIVE = native;
+  // Apple Watch UI gate: true only on iOS native, where the WatchBridge plugin exists. Never Android/web.
+  window.SMD_HAS_WATCH = native && (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
   if (!native) return;                       // web: leave everything alone
 
   // Native device STT (Fast Dictation) runs on BOTH platforms via @capacitor-community/speech-

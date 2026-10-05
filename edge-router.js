@@ -41,12 +41,106 @@
   function content(s) { return lower(s).replace(/[^a-z0-9.\s-]/g, " ").split(/\s+/).filter(function (w) { return w.length >= 2 && !STOP[w]; }); }
   // Navigation words in any of the three languages: never a search term on their own.
   var NAV = { search: 1, where: 1, khol: 1, kholo: 1, dikhao: 1, teruvu: 1, chupinchu: 1, cheyyi: 1, screen: 1, page: 1, lookup: 1, codes: 1, code: 1 };
+  // The navigation words that ask for a page (English, Hinglish, Tenglish); a KB option is exact only with one.
+  var KB_NAV_RE = /\b(open|show|page|screen|khol|kholo|dikhao|teruvu|chupinchu)\b/;
   var GENERIC = { calculator: 1, calc: 1, score: 1, scores: 1, index: 1, criteria: 1, tool: 1 };
   function norm(s) { return lower(s).replace(/[^a-z0-9]+/g, " ").trim(); }
   // "don't open the ICU", "stop metformin": never act on a negated or stop request.
-  var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b/i;
+  // Hinglish "mat kholo" / "nahi chahiye" and Tenglish "vaddu" / "teravaddu": a bare "nahi" is not one
+  // ("fever nahi utar raha"), only "nahi chahiye" (do not want) and "mat" before a verb.
+  // Also (test4, 2026-10-04): "<verb>na nahi" ("kholna nahi"), "band / skip karo", Tenglish "oddu" (any
+  // -oddu), "aapandi / aapu / aapeyyi" (stop), "vaddhu", "cheyyakandi / cheyyaku".
+  var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b|\b(nahi|nahin|nahii|nai|nhi)\s+chahi(y|e)e?\b|\bmat\s+(khol|kholo|kholna|dikha|dikhao|dikhana|karo|kar|chalao|chala|lagao|bhejo|do)\b|\b\w*(vaddu|vadhu|vaddhu|oddu)\b|\b(kholna|dikhana|chalana|karna|bhejna|lagana|dena)\s+(nahi|nahin|nhi|mat)\b|\b(band|skip)\s+(karo|kar\s*do|kardo|kar\s*dijiye|karna|kar)\b|\baap(u|andi|eyyi|eyandi|eyi|ivu|ivandi)\b|\bchey+(akandi|aku|akunda)\b/i;
+  // A clinical order ("continue metformin", "titrate ketorolac", "oxaliplatin 1 tab od") is never a
+  // navigation request: Edge passes, no card and no model. An order verb counts only with a drug named
+  // (SMD_DRUGLINK); a dosing pattern (a number + tab/cap/puff/drop, or a frequency after a number: "500 mg bd")
+  // counts alone. Lab values ("creatinine 1.2 mg") are neither. "metformin details" / "open metformin" carry neither, so the drug card still opens.
+  var ORDER_VERB = /\b(start|restart|resume|continue|titrate|up-?titrate|taper|wean|increase|decrease|reduce|escalate|de-?escalate|give(?!\s+me\b)|add|administer|prescribe|shift\s+to|switch\s+to|change\s+to|chalu|shuru|jari\s+rakho|badhao|badha\s+do|ghatao|ghata\s+do|kam\s+karo|modalu|ivvandi|ivvu|ivvali|penchandi|penchu|tagginchandi|tagginchu)\b/i;
+  var DOSE_RE = /\b\d+(\.\d+)?\s*(tabs?|tablets?|caps?|capsules?|puffs?|drops?)\b|\b\d+(\.\d+)?\s*(mg|mcg|ml|units?|tabs?|tablets?|caps?)?\s*(od|bd|bid|tds|tid|qid|qds|hs|sos|stat|prn|q\d+h)\b/i;
+  function ordered(t) {
+    if (DOSE_RE.test(t)) return true;
+    if (!ORDER_VERB.test(t)) return false;
+    try { var DL = G.SMD_DRUGLINK; return !!(DL && DL.drugsIn && DL.drugsIn(t, { fuzzy: true }).length); } catch (e) { return false; }
+  }
+  // The pass guard: a negation or a clinical order. Runs before rules and the model.
+  function guarded(text) { var t = String(text || ""); return NEGATION.test(t) || ordered(t); }
   var ICD_CUE = /\b(icd(?:\s*-?\s*1[01])?|icd10|icd11|diagnosis code|code for)\b/i;
-  function candidates(text) {
+  // The Search ICD tool's own name ("navigate to search icd", "icd search kholo"): only a term after
+  // "for" / "of" is a lookup ("search icd for sepsis"); the rest is navigation, never an ICD term.
+  var ICD_TOOL = /\b(search\s+icd|icd\s+search)\b/i;
+  /* Government scheme package asks (owner, 2026-10-04: "What is the arogyasri code for pancreatitis" got
+   * an ICD list, and the scheme answer showed Nagaland). A request that names a scheme, or asks for a
+   * package/scheme code, is a scheme lookup: never ICD. Each entry maps a scheme's spoken names to the
+   * jurisdictions (and scheme ids) of the govschemes database (functions/db/govschemes_seed_jurisdictions.sql).
+   * Aarogyasri is two schemes: Dr YSR Aarogyasri, now Dr NTR Vaidya Seva (Andhra Pradesh), and Rajiv
+   * Aarogyasri (Telangana); a bare "Aarogyasri" shows both, labelled. "ars" counts only next to code or
+   * package ("ars codes for malaria"), so ARDS and "ars" elsewhere are untouched. */
+  var SCHEMES = [
+    { key: "aarogyasri", label: "Aarogyasri", re: /\ba{1,2}rogy?a\s*-?\s*s(?:h)?ri\b|\bars\s+(?:package\s+|scheme\s+)?(?:codes?|packages?|rates?)\b|\b(?:codes?|packages?)\s+(?:in|under|for|of)\s+ars\b/i,
+      targets: [{ state: "andhra-pradesh", scheme: "ap-ntr-vaidya-seva", name: "Dr NTR Vaidya Seva (YSR Aarogyasri), Andhra Pradesh" },
+                { state: "telangana", scheme: "telangana-aarogyasri", name: "Rajiv Aarogyasri, Telangana" }] },
+    { key: "ap", label: "Dr NTR Vaidya Seva", re: /\b(?:dr\.?\s*)?(?:ntr\s*)?vaidya\s*seva\b|\bysr\b/i,
+      targets: [{ state: "andhra-pradesh", scheme: "ap-ntr-vaidya-seva", name: "Dr NTR Vaidya Seva (YSR Aarogyasri), Andhra Pradesh" }] },
+    { key: "pmjay", label: "AB PM-JAY", re: /\b(?:ab\s*-?\s*)?pm\s*-?\s*jay\b|\bpmjay\b|\bayushman(?:\s+bharat)?\b/i,
+      targets: [{ state: "central", scheme: null, name: "AB PM-JAY (central package list)" }] },
+    { key: "cmchis", label: "CMCHIS", re: /\bcmchis\b/i, targets: [{ state: "tamil-nadu", scheme: null, name: "CMCHIS, Tamil Nadu" }] },
+    { key: "mjpjay", label: "MJPJAY", re: /\bmjpjay\b|\bmahatma\s+jyotiba\s+phule\b/i, targets: [{ state: "maharashtra", scheme: null, name: "MJPJAY, Maharashtra" }] }
+  ];
+  // A scheme or package code asked for without naming the scheme ("package code for malaria").
+  var SCHEME_GENERIC = /\b(?:govt?\.?|government|health|insurance)\s+schemes?\b|\bschemes?\s+(?:codes?|packages?|rates?)\b|\bpackage\s+(?:codes?|rates?|amount|price)\b/i;
+  var SCHEME_STRIP = /\b(what(?:'?s| is| are)?|whats|the|a|an|please|pls|tell|me|give|find|search|show|look\s*up|for|of|in|under|is|are|its|it|which|and|icd|codes?|coding|number|no|package|packages|rates?|amount|price|cost|schemes?|govt?|government|health|insurance|ars|ab|dr)\b/gi;
+  function schemeAsk(text) {
+    var s = String(text || "");
+    if (!s || s.length > 200) return null;
+    var hit = null;
+    for (var i = 0; i < SCHEMES.length && !hit; i++) if (SCHEMES[i].re.test(s)) hit = SCHEMES[i];
+    if (!hit && !SCHEME_GENERIC.test(s)) return null;
+    var t = s;
+    SCHEMES.forEach(function (x) { t = t.replace(new RegExp(x.re.source, "gi"), " "); });
+    t = t.replace(/[?.,!:;"'()]/g, " ").replace(SCHEME_STRIP, " ").replace(/\s+/g, " ").trim();
+    return { key: hit ? hit.key : null, label: hit ? hit.label : "Scheme", targets: hit ? hit.targets.slice() : [], term: t };
+  }
+
+  /* Conservative spelling fix for disease words ("absccess" -> "abscess", "pneumoniacns" -> "pneumonia").
+   * vocab: { word: 1 } of known words (KB page names, ICD-10 titles). Only a word of 6+ letters that is
+   * not in vocab is touched: one edit (two from 9 letters) to exactly ONE nearest known word, or a known
+   * word of 6+ letters run together with a tail of at most 3 letters, which is dropped. Short words
+   * ("hello", "ards") are never changed. Returns { text, changed }. */
+  function editDist(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i]; var lo = i;
+      for (j = 1; j <= b.length; j++) { cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1)); if (cur[j] < lo) lo = cur[j]; }
+      if (lo > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  function spell(text, vocab) {
+    var words = lower(text).replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter(Boolean), changed = false;
+    if (!vocab) return { text: words.join(" "), changed: false };
+    var keys = null;
+    var out = words.map(function (w) {
+      if (w.length < 6 || vocab[w] || STOP[w] || NAV[w] || /\d/.test(w)) return w;
+      keys = keys || Object.keys(vocab);
+      var max = w.length >= 9 ? 2 : 1, best = null, bestD = max + 1, tie = false;
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i]; if (k.length < 5) continue;
+        var d = editDist(w, k, max);
+        if (d < bestD) { best = k; bestD = d; tie = false; } else if (d === bestD && d <= max && k !== best) tie = true;
+      }
+      if (best && bestD <= max && !tie) { changed = true; return best; }
+      for (var n = w.length - 1; n >= 6 && w.length - n <= 3; n--) if (vocab[w.slice(0, n)]) { changed = true; return w.slice(0, n); }
+      return w;
+    });
+    return { text: out.join(" "), changed: changed };
+  }
+  // An explicit request to open something ("open antibiogram", "antibiogram kholo", "icu teruvu").
+  var OPEN_RE = /\b(open|launch|kholo|khol|kholna|teruvu|teravu|terichu|chupinchu)\b|\b(go|take me)\s+to\b/i;
+
+  function candidates(text, _retry) {
     var out = [], seen = {}, q = String(text || "");
     var P = G.SMD_CPARAMS, M = G.MEDCALC, S = G.SMD_SEARCH;
     var bare = P && P.stripValues ? P.stripValues(q) : q;
@@ -54,8 +148,13 @@
 
     // Words that are kept ("s/f", "r-ipi", "phq-2" keep their single letters and digits).
     var pw = norm(bare).split(" ").filter(function (w) { return w && !STOP[w]; });
-    if (ICD_CUE.test(q)) {
-      var term = bare.replace(ICD_CUE, " ").replace(/\b(what(?:'s| is)?|the|of|for|please|give|me)\b/gi, " ").replace(/\s+/g, " ").trim();
+    // A scheme package ask holds the first place an ICD request would, and there is no ICD option.
+    var sa = schemeAsk(q);
+    if (sa && sa.term && content(sa.term).length) add({ kind: "scheme", id: sa.term, title: sa.label + " packages for " + sa.term, exact: true, scheme: sa });
+    else if (ICD_CUE.test(q)) {
+      var src = bare;
+      if (ICD_TOOL.test(bare)) { var tm = bare.match(/\b(?:for|of)\b([\s\S]*)$/i); src = tm ? tm[1] : ""; }
+      var term = src.replace(ICD_CUE, " ").replace(/\b(what(?:'s| is)?|the|of|for|please|give|me)\b/gi, " ").replace(/\s+/g, " ").trim();
       // "search icd", "take me to icd search": the request is for the screen, not a code lookup.
       // Stop words only decide whether a term is left; they are never removed from it ("open
       // fracture of tibia" is not "fracture tibia": an open fracture has its own codes).
@@ -63,7 +162,7 @@
       if (!content(term).length) term = "";
       if (term) add({ kind: "icd", id: term, title: "ICD-10 codes for " + term, exact: true });
     }
-    var hit = null, ranked = null, exactTool = null, calcItems = [], toolItems = [];
+    var hit = null, ranked = null, exactTool = null, calcItems = [], toolItems = [], calcNamed = false;
     try { hit = M && M.find ? (M.find(bare) || (pw.length ? M.find(pw.join(" ")) : null)) : null; } catch (e) {}
     // An exact title goes first; a near title competes in the ranked list below an own name.
     if (hit && hit.exact) add({ kind: "calculator", id: hit.id, title: hit.title, exact: true });
@@ -99,6 +198,7 @@
       if (phrases.length && M && M.get) calcItems.forEach(function (it) {
         var c = M.get(it.id), names = [it.id.replace(/_/g, " "), String(it.title || "").replace(/\s*\(.*$/, "")].concat((c && c.kw) || []);
         if (!names.some(function (k) { return phrases.indexOf(norm(k)) > -1; })) return;
+        calcNamed = true;   // the request IS a calculator's own name ("disseminated intravascular coagulation")
         var x = null; ranked.forEach(function (r) { if (r.kind === "calculator" && r.it.id === it.id) x = r; });
         if (!x) { x = { kind: "calculator", it: it, s: 0 }; ranked.push(x); }
         x.s += 2;
@@ -125,7 +225,9 @@
     if (reqKeys[0] && ranked) {
       var toolHits = toolItems.filter(function (it) {
         var tk = keys(it.title);
-        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1]);
+        // The generic-stripped match needs a generic word in the request too: bare "dose?" (a follow-up
+        // on a live topic) must not equal "Dose calculator" just because "calculator" is generic.
+        return (tk[0] && tk[0] === reqKeys[0]) || (tk[1] && tk[1] === reqKeys[1] && (tk[0] === tk[1] || reqKeys[0] !== reqKeys[1]));
       });
       if (toolHits.length === 1) {
         ranked.forEach(function (r) { if (r.kind === "tool" && r.it.id === toolHits[0].id) r.s += 3; });
@@ -146,23 +248,60 @@
     try {
       var KB = G.MaiKKB, R = G.SMD_REASON;
       var t = KB && KB.resolveTarget ? KB.resolveTarget(lower(bare), { question: lower(bare), grounding: [], topicMatch: { matched: false } }) : null;
+      // A clear request for a disease page ("open pneumonia page", "sepsis kholo", "tb chupinchu") is exact:
+      // a navigation word, and the words left are the disease's own name or a listed alias, resolved
+      // confidently. Anything more ("open pneumonia antibiotics") goes to the model.
+      // Also exact with NO navigation word when the whole request is that name ("pneumonia", "sepsis");
+      // "what is sepsis" keeps its question words, so it stays a MaiK question.
+      var rest = pw.filter(function (w) { return !NAV[w]; }).join(" "), kbEx = false, group = null;
+      // A name that is also a calculator's own name ("dic") is one name, two things: never exact.
+      if (rest && !calcNamed && KB && KB.resolveTarget && (KB_NAV_RE.test(norm(q)) || norm(q) === rest)) {
+        var t2 = KB.resolveTarget(rest, { question: rest, grounding: [], topicMatch: { matched: false } });
+        var own = !!(t2 && t2.match === "exact" && KB._diseasePhrase && KB._diseasePhrase(rest) === rest);
+        var alias = !!(t2 && KB._alias && Object.prototype.hasOwnProperty.call(KB._alias, rest) && norm(KB._alias[rest]) === norm(t2.name));
+        if (t2 && t2.confident && (own || alias)) { t = t2; kbEx = true; }
+        // An umbrella term with no page of its own ("pneumonia": CAP, HAP, VAP...): one card listing the
+        // pages whose name ends with it (MaiKKB.kbPages). A presenting symptom ("fever", "headache") is a
+        // MaiK question, never a list of diseases.
+        else if (KB.kbPages && !(G.MAIK_SYMPTOMS && G.MAIK_SYMPTOMS._find && G.MAIK_SYMPTOMS._find(rest, true))) {
+          var pages = KB.kbPages(rest).filter(function (p) { return R && R.hasDiseaseRef && R.hasDiseaseRef(p.id); });
+          // ponytail: over 24 pages ("cancer"-sized) is a category, not a disease; raise if owners want it.
+          if (pages.length >= 2 && pages.length <= 24) group = { kind: "kb", id: "group:" + rest, title: rest.charAt(0).toUpperCase() + rest.slice(1), pages: pages, exact: true };
+        }
+      }
+      if (group) add(group);
       // Fails closed: no reference module to confirm the page, no KB option.
-      if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id });
+      else if (t && t.id && R && R.hasDiseaseRef && R.hasDiseaseRef(t.id)) add({ kind: "kb", id: t.id, title: t.name || t.id, exact: kbEx });
     } catch (e) {}
+    // Never offer a tool the MaiK card cannot open (home.js SMD_MAIK_TOOL_OPENABLE: ACT or a neonatal tool).
+    var openable = G.SMD_MAIK_TOOL_OPENABLE;
+    if (typeof openable === "function" && ranked) ranked = ranked.filter(function (x) { return x.kind !== "tool" || openable(x.it.id); });
+    /* Adult or neonatal normal values (2026-10-04): "normal adult potassium range?" was offered the neonatal
+     * page. The neonatal one only when the request names a newborn / child; otherwise the adult one.
+     * "normal values" alone is the neonatal page's title, but adult is the default (owner, 2026-10-04). */
+    var neoAsk = /\b(neonat\w*|newborns?|new-born|nicu|preterm|premature|infants?|bab(?:y|ies)|paediatric|pediatric|child(?:ren)?)\b/i.test(q);
+    if (ranked) ranked = ranked.filter(function (x) { return x.kind !== "tool" || (neoAsk ? x.it.id !== "adultref" : x.it.id !== "neo:ref"); });
     (ranked || []).forEach(function (x) { add({ kind: x.kind, id: x.it.id, title: x.it.title, exact: x.kind === "tool" && x.it.id === exactTool }); });
     // One name, two things ("insulin" is a drug AND a tool): nothing is exact, the model or doctor picks.
-    var exacts = out.filter(function (c) { return c.exact && c.kind !== "icd"; });
-    if (exacts.length > 1) out.forEach(function (c) { if (c.kind !== "icd") c.exact = false; });
-    // Otherwise the one exactly named option goes first, unless an ICD request holds that place.
+    var exacts = out.filter(function (c) { return c.exact && !CODE_KIND[c.kind]; });
+    if (exacts.length > 1) out.forEach(function (c) { if (!CODE_KIND[c.kind]) c.exact = false; });
+    // Otherwise the one exactly named option goes first, unless an ICD or scheme request holds that place.
     for (var k = 1; k < out.length; k++) if (out[k].exact) {
-      if (out[0].kind !== "icd") { var x0 = out.splice(k, 1)[0]; out.unshift(x0); } else out[k].exact = false;
+      if (!CODE_KIND[out[0].kind]) { var x0 = out.splice(k, 1)[0]; out.unshift(x0); } else out[k].exact = false;
       break;
+    }
+    // Nothing found and a disease word looks misspelt ("pneumoniacns"): the Knowledge pages for the
+    // corrected words, marked so the card says what it searched for. KB options only, never a tool.
+    if (!out.length && !_retry) {
+      var KBv = G.MaiKKB, fx = KBv && KBv.vocab ? spell(bare, KBv.vocab()) : null;
+      if (fx && fx.changed) out = candidates(fx.text, true).filter(function (c) { return c.kind === "kb"; }).map(function (c) { c.corrected = fx.text; return c; });
     }
     return out;
   }
 
   // ---- 3. prompt for the fixed tool --------------------------------------------------------
-  var KIND_LABEL = { calculator: "calculator", tool: "open", kb: "reference", drug: "drug", icd: "ICD codes" };
+  var KIND_LABEL = { calculator: "calculator", tool: "open", kb: "reference", drug: "drug", icd: "ICD codes", scheme: "scheme packages" };
+  var CODE_KIND = { icd: 1, scheme: 1 };
   function promptFor(text, cands) {
     var lines = cands.map(function (c, i) { return (i + 1) + ". " + KIND_LABEL[c.kind] + ": " + c.title; });
     return String(text || "").slice(0, 300) + "\nOptions:\n" + lines.join("\n") + "\n0. none of these";
@@ -232,7 +371,45 @@
     if (runtime && runtime.release) runtime.release();
     engine = eng || null; runtime = makeRuntime();
     if (opts && typeof opts.minConfidence === "number") minConfidence = opts.minConfidence;
+    scheduleWarm();
   }
+
+  /* Background warm-up (FunctionGemma only). Its first load on an iPhone 15 Pro takes 17.2 s (Metal
+   * compiles its shaders on first use), past the 8 s cold budget, so the first request fell back to
+   * rules. When the choice is functiongemma, the file is installed (engine is the llama adapter) and the
+   * app is idle, load it and run one throwaway pick outside any request's budget.
+   * Triggers: engine set (choice set, app start, download done), app back in the foreground, MaiK
+   * releasing the plugin (maik-local.js release()). Rules: never while MaiK generates or holds the
+   * plugin (holder must be null; the runtime's othersBusy/memory back-off applies too); never evicts
+   * MaiK; at most once per trigger, and only when FunctionGemma is not already resident. */
+  var WARM_DELAY_MS = 4000, warmTimer = null, warming = null, warmLog = [];
+  function logWarm(x) { warmLog.push(x); if (warmLog.length > 20) warmLog.shift(); }
+  function scheduleWarm(delayMs) {
+    if (warmTimer) { clearTimeout(warmTimer); warmTimer = null; }
+    if (!engine || engine.name !== "llama") return;
+    warmTimer = setTimeout(function () { warmTimer = null; warmNow(); }, delayMs == null ? WARM_DELAY_MS : delayMs);
+    if (warmTimer && warmTimer.unref) warmTimer.unref();
+  }
+  function warmNow() {
+    function skip(why) { logWarm({ at: Date.now(), skipped: why }); return Promise.resolve(false); }
+    if (warming) return warming;
+    if (!flagOn() || engineChoice() !== "functiongemma") return skip("choice");
+    if (!engine || engine.name !== "llama" || !runtime || !runtime.warm) return skip("no engine");
+    // "edge" with nothing resident (idle/background release) is safe; "maik" (or anyone else) is not.
+    if (G.SMD_LLAMA_HOLDER != null && G.SMD_LLAMA_HOLDER !== "edge") return skip("holder " + G.SMD_LLAMA_HOLDER);
+    if (engine.resident && engine.resident()) return skip("resident");
+    var t0 = Date.now(), cands = [{ kind: "tool", title: "Antibiogram" }, { kind: "calculator", title: "CURB-65" }];
+    warming = runtime.warm({ prompt: promptFor("open antibiogram", cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }, 60000)
+      .then(function (ok) { logWarm({ at: t0, ok: ok, ms: Date.now() - t0 }); try { console.log("[edge] warm " + (ok ? "ok" : "skipped") + " " + (Date.now() - t0) + " ms"); } catch (e) {} return ok; },
+        function () { return false; })
+      .then(function (ok) { warming = null; return ok; });
+    return warming;
+  }
+  try {
+    if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () {
+      if (G.document.visibilityState === "visible") scheduleWarm();
+    });
+  } catch (e) {}
   function available() { return !!(flagOn() && engine && engine.available && engine.available()); }
 
   function resultFor(c, text, source, conf, ms) {
@@ -242,15 +419,27 @@
       try { r.prefill = F && F.forText ? F.forText(c.id, text) : null; } catch (e) { r.prefill = null; }
     }
     if (c.drug) r.drug = c.drug;
+    if (c.pages) r.pages = c.pages;
+    if (c.scheme) r.scheme = c.scheme;
+    if (c.corrected) r.corrected = c.corrected;
     return r;
   }
 
   /* route(text, { patient_session_id }) -> Promise<result | null>. Never rejects. */
-  function layer0(cands) { var c = cands && cands[0]; return !!(c && (c.kind === "icd" || c.exact)); }
+  function layer0(cands) { var c = cands && cands[0]; return !!(c && (CODE_KIND[c.kind] || c.exact)); }
+  // Layer 0 alone, synchronous: an exact name or an explicit ICD request, else null. MaiK calls this BEFORE
+  // its follow-up logic, so "antibiogram kholo" opens the tool even while an earlier topic is live.
+  function rules(text) {
+    if (!flagOn() || guarded(text)) return null;
+    var cands; try { cands = candidates(text); } catch (e) { return null; }
+    if (!layer0(cands)) return null;
+    stats.requests++; stats.rules++;
+    return resultFor(cands[0], text, "rules", null);
+  }
   function route(text, ctx) {
     stats.requests++;
     if (!flagOn()) return Promise.resolve(null);
-    if (NEGATION.test(String(text || ""))) { stats.passed++; return Promise.resolve(null); }
+    if (guarded(text)) { stats.passed++; return Promise.resolve(null); }
     var cands;
     try { cands = candidates(text); } catch (e) { cands = []; }
     if (!cands.length) { stats.passed++; return Promise.resolve(null); }
@@ -274,9 +463,18 @@
       if (o.option === 0) { stats.none++; return null; }
       if (o.option < 1 || o.option > cands.length) { stats.passed++; return null; }
       if (o.confidence != null && o.confidence < minConfidence) { stats.passed++; return null; }
-      stats.chosen++;
-      return resultFor(cands[o.option - 1], text, "edge", o.confidence, r.ms);
-    }, function () { stats.passed++; return null; });
+      var pick = cands[o.option - 1];
+      if (!engine.agree || cands.length < 2) { stats.chosen++; return resultFor(pick, text, "edge", o.confidence, r.ms); }
+      // Self-consistency (engine.agree; Edge-Runbook 5b): ask again with the options rotated by one and act
+      // only if the same option comes back. A local LoRA build has no usable confidence; this is its floor.
+      var rot = cands.slice(1).concat(cands.slice(0, 1));
+      return runtime.run({ prompt: promptFor(text, rot), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: rot.length }).then(function (r2) {
+        var o2 = r2 && r2.status === "ok" ? optionFrom(r2.result) : null;
+        if (!o2 || !o2.ok || rot[o2.option - 1] !== pick) { stats.passed++; return null; }
+        stats.chosen++;
+        return resultFor(pick, text, "edge", o.confidence, r.ms + r2.ms);
+      });
+    }).then(null, function () { stats.passed++; return null; });
   }
 
   // ---- engine adapters -----------------------------------------------------------------------
@@ -300,6 +498,7 @@
     })();
     return {
       name: "needle",
+      agree: !!o.agree,   // opts.agree: act only when a second call with rotated options agrees (route())
       available: function () { return !!plugin; },
       load: function () { return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }); },
       complete: function (task) {
@@ -309,6 +508,14 @@
           var out = r && typeof r.json === "string" ? JSON.parse(r.json) : r;
           if (out && o.calibrated === false) out.confidence = null;
           return out;
+        }, function (e) {
+          // A :edge process that died outside the runtime (low-memory killer) restarts with no weights,
+          // and configure fails "needle_init: no model loaded". Tag it so edge-runtime.js reloads.
+          if (/no model loaded/i.test(String((e && e.message) || e))) {
+            if (!e || typeof e !== "object") e = new Error(String(e));
+            e.notLoaded = true;
+          }
+          throw e;
         });
       },
       reset: function () { return plugin.reset ? plugin.reset() : null; },
@@ -317,30 +524,49 @@
     };
   }
   /* A grammar-capable llama.cpp pack (capacitor-llama with the `grammar` option, gate A0.3), e.g. a
-   * fine-tuned FunctionGemma GGUF. BAKE-OFF ONLY: the llama plugin holds ONE model per process, so
-   * load() evicts MaiK's pack while maik-local still believes it is loaded. autoEngine() never picks
-   * this; the bake-off harness builds it, and release() runs when the run ends. Relaunch the app after.
+   * FunctionGemma. The llama plugin holds ONE model per process, so load() evicts MaiK's pack. Who holds
+   * it is G.SMD_LLAMA_HOLDER ("edge" here, "maik" in maik-local.js): MaiK reloads its pack when it sees
+   * another holder, and this adapter never picks with a model it did not load. autoEngine() builds it
+   * when smd_edge_engine is "functiongemma"; the bake-off harness builds it too.
    * The grammar admits exactly {"option":n} for n in 0..number of options offered. */
   function grammarFor(n) {
     var k = Math.max(0, Math.min(MAX_OPTIONS, n | 0));
     return 'root ::= "{\\"option\\":" [0-' + k + '] "}"';
   }
+  /* FunctionGemma load args (memory, 2026-10-04). A pick prompt is <= ~300 tokens + 4 output, so a
+   * 512-token context is enough, and 64-token batches shrink the compute buffers, which hold logits
+   * over the 262k-token vocabulary for every token of a ubatch (512 x 262k x f32 = 512 MB reserved).
+   * q8_0 KV (the plugin default, explicit here). Prefill is chunked to nBatch on both platforms. */
+  function fgLoadArgs(path, o) {
+    return { path: path, nCtx: o.nCtx || 512, nBatch: o.nBatch || 64, nUbatch: o.nUbatch || 64,
+             nThreadsBatch: o.nThreadsBatch || 4, kvQ8: true };
+  }
   function llamaAdapter(plugin, opts) {
     var o = opts || {}, loaded = false;
+    function mine() { return G.SMD_LLAMA_HOLDER === "edge"; }
+    // The plugin drops its model on idle/background; load again on the next call.
+    try { if (plugin && typeof plugin.addListener === "function") plugin.addListener("llamaReleased", function () { loaded = false; }); } catch (e) {}
     return {
       name: "llama",
       available: function () { return !!(plugin && o.modelPath); },
       load: function () {
         loaded = false;
-        // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
-        // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
-        // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
-        return Promise.resolve(plugin.load({ path: o.modelPath, nCtx: o.nCtx || 1024, nThreadsBatch: o.nThreadsBatch || 4 })).then(function () { loaded = true; });
+        G.SMD_LLAMA_HOLDER = "edge";
+        // modelPath: a path, or a function returning one (a downloaded pack's path is only known async).
+        return Promise.resolve(typeof o.modelPath === "function" ? o.modelPath() : o.modelPath).then(function (path) {
+          if (!path) throw new Error("no model file");
+          // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
+          // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
+          // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
+          return plugin.load(fgLoadArgs(path, o));
+        }).then(function () { loaded = true; });
       },
       complete: function (task) {
         var n = Math.max(0, Math.min(MAX_OPTIONS, (task.nOptions == null ? MAX_OPTIONS : task.nOptions) | 0)), choices = [];
         for (var d = 0; d <= n; d++) choices.push(String(d));
-        return Promise.resolve(loaded ? null : this.load()).then(function () {
+        return Promise.resolve(loaded && mine() ? null : this.load()).then(function () {
+          // MaiK loaded its pack while ours was loading: never pick with MaiK's model.
+          if (!mine()) { loaded = false; throw new Error("llama plugin taken by MaiK"); }
           // `pick`: forced prefix {"option": + ONE prefill + the most likely digit (no decode loop, no grammar
           // over the whole vocabulary). A plugin without it ignores the key and runs the grammar instead.
           return plugin.generate({ system: task.system || SYSTEM, prompt: task.prompt, nPredict: 8, temperature: 0, stream: false,
@@ -351,9 +577,17 @@
           return o;
         });
       },
+      // FunctionGemma is loaded and still ours (not evicted by MaiK, not dropped on idle/background).
+      resident: function () { return loaded && mine(); },
       reset: function () { return null; },
-      kill: plugin.cancel ? function () { return plugin.cancel(); } : undefined,
-      release: function () { loaded = false; return plugin.release ? plugin.release() : null; }
+      kill: plugin.cancel ? function () { return mine() ? plugin.cancel() : null; } : undefined,
+      // Never unload MaiK's pack: release only what this adapter loaded.
+      release: function () {
+        var had = loaded && mine(); loaded = false;
+        if (!had) return null;
+        G.SMD_LLAMA_HOLDER = null;
+        return plugin.release ? plugin.release() : null;
+      }
     };
   }
 
@@ -390,19 +624,43 @@
     return next();
   }
 
+  /* Engine choice (owner, 2026-10-04): smd_edge_engine = "needle" (default), "functiongemma" or "rules"
+   * (no model; Layer 0 still answers). smd_edge "0" still turns Edge off entirely. */
+  var ENGINE_CHOICES = ["needle", "functiongemma", "rules"];
+  var FG_PACK = "edge-functiongemma";   // maik-models.js EDGE_FG_ID
+  function engineChoice() {
+    var v = null; try { v = G.localStorage && G.localStorage.getItem("smd_edge_engine"); } catch (e) {}
+    return ENGINE_CHOICES.indexOf(v) >= 0 ? v : "needle";
+  }
+  // Switches at once, no restart: the old engine is released, the new one loads on its first call.
+  function setEngineChoice(v) {
+    if (ENGINE_CHOICES.indexOf(v) < 0) v = "needle";
+    try { G.localStorage.setItem("smd_edge_engine", v); } catch (e) {}
+    setEngine(flagOn() ? autoEngine() : null);
+    return v;
+  }
   function autoEngine() {
     try {
-      var C = G.Capacitor, p = C && C.Plugins && C.Plugins.Needle;
-      if (p && C.isNativePlatform && C.isNativePlatform()) return needleAdapter(p);
+      var C = G.Capacitor, P = C && C.Plugins, choice = engineChoice();
+      if (choice === "rules" || !P || !(C.isNativePlatform && C.isNativePlatform())) return null;
+      if (choice === "functiongemma") {
+        // No file on the phone: no engine, so the rules answer (silently).
+        var M = G.SMD_MAIK_MODELS;
+        if (!P.Llama || !M || !M.installedCached || !M.installedCached(FG_PACK)) return null;
+        return llamaAdapter(P.Llama, { modelPath: function () { return M.pathFor(FG_PACK); } });
+      }
+      if (P.Needle) return needleAdapter(P.Needle);
     } catch (e) {}
     return null;
   }
 
   var API = {
-    route: route, candidates: candidates, layer0: layer0, negated: function (t) { return NEGATION.test(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
-    needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
+    route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: guarded, ordered: function (t) { return ordered(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
+    needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine,
+    engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
+    warmSoon: scheduleWarm, warmNow: warmNow, warmLog: function () { return warmLog.slice(-10); },
     hot: function () { return device.thermal >= 3; },
     backoff: function () { return { memoryOk: DEFAULT_ENV.memoryOk(), thermalOk: DEFAULT_ENV.thermalOk(), othersBusy: DEFAULT_ENV.othersBusy(), device: JSON.parse(JSON.stringify(device)) }; },
     _version: "1.0"
@@ -410,6 +668,13 @@
   if (root) {
     root.SMD_EDGE = API;
     try { if (flagOn()) { var a = autoEngine(); if (a) setEngine(a); } } catch (e) {}
+    // FunctionGemma downloaded (or deleted) while chosen: pick it up without a restart.
+    try {
+      var MM = root.SMD_MAIK_MODELS;
+      if (MM && MM.subscribe) MM.subscribe(function (id, st) {
+        if (id === FG_PACK && st && !st.downloading && engineChoice() === "functiongemma" && flagOn()) setEngine(autoEngine());
+      });
+    } catch (e) {}
   }
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);

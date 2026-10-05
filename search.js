@@ -103,6 +103,7 @@
     { act: "theme", tt: "Appearance", sub: "Theme and dark mode", kw: "dark mode light theme colour appearance" },
     { act: "about", tt: "About StewardMD", sub: "Version and licence", kw: "about version" },
     { act: "drugs", tt: "Drugs database", sub: "Generics, brands, prices", kw: "drug database brands prices" },
+    { act: "adultref", tt: "Adult normal values", sub: "Lab reference ranges with sources", kw: "normal values normal range reference range reference ranges lab laboratory adult electrolytes sodium potassium chloride bicarbonate calcium magnesium phosphate creatinine urea bun uric acid lft bilirubin alt ast alp ggt albumin cbc haemoglobin hemoglobin platelets wbc inr pt aptt glucose hba1c lipids cholesterol triglycerides tsh thyroid troponin bnp abg lactate urine ferritin iron crp esr" },
     { act: "alltools", tt: "All tools", sub: "Every tool in one list, open any of them", kw: "all tools list open every tool" },
     { act: "customizetools", tt: "Customize home tools", sub: "Show, hide, reorder tiles", kw: "customize tiles reorder home" }
   ];

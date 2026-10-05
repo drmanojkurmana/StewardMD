@@ -651,12 +651,13 @@ const RAG_SYS =
  * exact failure this whole change exists to remove.
  */
 const MEDICAL_ONLY =
-  "\nSCOPE — NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only. That includes everything a " +
-  "doctor legitimately asks: diseases, drugs and drug classes, doses, mechanisms of action, " +
-  "investigations, procedures, guidelines, physiology, pathology, public health and medical education. " +
-  "If the question is NOT medical — general knowledge, geography, history, sport, entertainment, " +
-  "programming, maths, finance, travel, shopping, personal life advice, or a request to write " +
-  "non-medical content — do not answer it. Reply with exactly this line and nothing else: " +
+  "\nSCOPE — NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only: " +
+  "diseases, drugs and drug classes, doses, mechanisms of action, " +
+  "investigations, procedures, guidelines, physiology, pathology, public health, medical education, and " +
+  "opening or searching a StewardMD tool (antibiogram, ICD, calculators) in any language (kholo, teruvu): " +
+  "never refuse; answer and name the tool. If the question is NOT medical — general knowledge, " +
+  "geography, sport, programming, travel, or non-medical writing — do not answer it. " +
+  "Reply with exactly this line and nothing else: " +
   "\"I can only help with medical and clinical questions.\" " +
   "Judge the QUESTION, not the retrieved knowledge. When a question IS medical but unfamiliar, or uses " +
   "an abbreviation or drug class you are unsure of, ANSWER IT as a clinical question: a doctor asking " +

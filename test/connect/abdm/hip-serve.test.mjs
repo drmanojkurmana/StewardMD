@@ -285,7 +285,9 @@ test("date window: the builder dates the summary and discharge medications; an o
   const hiu = await makeHiu();
   const { fetch, calls } = makeCapturingFetch();
   const audit = makeAudit();
-  const old = { ...episode("cc-A-2", HASH_A, DX2), dischargeDate: "2025-03-02" };        // before the window below
+  // before the window below; its take-home course is recorded as completed, so (owner decision 2026-10-04,
+  // period overlap) it is not a medicine still active inside the window either
+  const old = { ...episode("cc-A-2", HASH_A, DX2), dischargeDate: "2025-03-02", medications: [{ text: "Azithromycin 500 mg once daily", status: "completed" }] };
   const reader = makeReader([episode("cc-A-1", HASH_A, DX1), old]);                       // cc-A-1 discharged 2026-07-20
   const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1", "cc-A-2"], dateRange: { from: "2026-07-01T00:00:00Z", to: "2026-07-31T23:59:59Z" } });
   const out = await serveTransfer(env, depsWith(db, fetch, audit.fn, reader), { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-d1" });
@@ -293,6 +295,20 @@ test("date window: the builder dates the summary and discharge medications; an o
   assert.equal(out.outcome, "PARTIAL");
   assert.deepEqual(out.warnings.map((w) => [w.careContextRef, w.reason]), [["cc-A-2", "daterange-out-of-scope"]]);
   assert.equal(calls.length, 1);
+});
+
+test("date window (owner decision 2026-10-04): a take-home medicine from an earlier episode, still active, makes that care context servable", async () => {
+  const env = envOf();
+  const HASH_A = await hmacPseudonym(env, TENANT, "A@sbx");
+  const hiu = await makeHiu();
+  const { fetch, calls } = makeCapturingFetch();
+  const old = { ...episode("cc-A-2", HASH_A, DX2), dischargeDate: "2025-03-02", medications: [{ text: "Metformin 500 mg twice daily" }] };   // active, no end
+  const reader = makeReader([episode("cc-A-1", HASH_A, DX1), old]);
+  const db = seedServeDb(HASH_A, { careContexts: ["cc-A-1", "cc-A-2"], dateRange: { from: "2026-07-01T00:00:00Z", to: "2026-07-31T23:59:59Z" } });
+  const out = await serveTransfer(env, depsWith(db, fetch, makeAudit().fn, reader), { tenantId: TENANT, consentId: "consent-1", careContexts: ["cc-A-1", "cc-A-2"], hiuKeyMaterial: hiu.keyMaterial, dataPushUrl: "https://hiu.example.org/abdm/push", transactionId: "txn-d3" });
+  assert.equal(out.pages, 2, "the long-term medicine makes the earlier care context servable");
+  assert.deepEqual(out.warnings || [], []);
+  assert.equal(calls.length, 2);
 });
 
 test("date window: FollowCare record carries a clinical date on its document and medications, never the export instant", async () => {

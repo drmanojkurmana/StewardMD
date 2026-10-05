@@ -5,6 +5,96 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-04 · WardSynQ: a return to the supplier reverses input GST with a debit note (owner)
+
+**Decision.** Every supplier return (`stock.js returnToSupplier`) carries a debit note written on the return movement:
+the value returned plus the GST charged on it on the original receipt, at the receipt's rate and split (CGST + SGST or
+IGST), in whole paise by the BILL-22 rule, pro-rated cumulatively so part returns add up to exactly the receipt's value
+and GST. Numbered in its own series `SDN/<FY>/<serial>`, linked to the receipt and its order line, listed on Stores >
+Returns and in `GET /ward/supplier-debit-notes` (register with totals). A receipt may carry its purchase terms
+(`purchase`); a return with no receipt, or with no price and rate on record or given with it, is refused. **Status:** PR
+"WardSynQ: GST reversal on supplier returns, and opening balances for stays at switch-over".
+
+## 2026-10-04 · WardSynQ: opening balances for stays open at switch-over (owner)
+
+**Decision.** Each stay open when a hospital moves to WardSynQ carries ONE `OpeningBalance` line (amount, old bill
+reference, as-of date, entered by), entered one at a time (`POST /ward/opening-balance`) or by CSV (legacy-import kind
+`openingBalances`), needing staff.admin AND billing.charge, audited, idempotent per stay (same facts matched, different
+refused). It is the first line on the stay's bill, not taxed again, outside the GST documents and e-invoice, and deposits
+and payments settle it like any charge. The patient must already be admitted here; a credit balance is not accepted
+(record it as a deposit). **Status:** same PR.
+
+## 2026-10-04 · WardSynQ NABH KPI 4: medication errors follow the NCC MERP definition, with A to I severity beneath (owner)
+
+**Decision.** A medication error is any preventable event that may cause or lead to inappropriate medication use or
+patient harm while the medication is in the control of the health care professional, patient or consumer. KPI 4 counts
+every confirmed medication-error incident, near misses (NCC MERP categories A and B) included, and shows the near
+misses as their own line. Beneath the rate the same errors are counted per NCC MERP category A to I and per group: no
+error (A), error no harm (B to D), error harm (E to H), death (I). Categories: A capacity to cause error; B error, did
+not reach the patient; C reached the patient, no harm; D reached the patient, required monitoring and/or intervention to
+preclude harm; E temporary harm, required intervention; F temporary harm, initial or prolonged hospitalization; G
+permanent harm; H intervention required to sustain life; I contributed to death. The rate keeps the denominator the
+quality screen already had for this measure, inpatient bed-days (per 1000); NABH's "total number of opportunities" is not
+recorded anywhere in WardSynQ, so the percentage form is not computed and the cell says so. Capture requires the category
+(`merpCategory`, `NO_MERP_CATEGORY`: 422 at filing, 409 at confirmation, nothing written). Records with no category
+(all earlier ones) are "uncategorised": counted in the total, in no category or group, never inferred from `severity`.
+**KPI 9 is unchanged**: the published ICU standardized mortality ratio, still not computable; which illness-severity
+model it should use (APACHE II, SOFA) is a separate open owner question. **Why.** The owner chose the NCC MERP
+definition and categories (were owner items O1 and O2). **Trade-off.** Category A is "no error" in the index but is
+counted as the owner asked; the near-miss line lets a reader take it out. Clinical sign-off of the category wording is
+still the owner's. **Status:** PR "WardSynQ NABH KPI 4 and 9: NCC MERP medication-error definition and A to I severity".
+
+## 2026-10-04 · WardSynQ renal check: which eGFR LOINC codes it reads (owner)
+
+**Decision.** `functions/_wardsynq/migrate-emar.js` accepts every code below for the order-entry renal check (importing
+historical lab data) and picks the result by time first: the newest eGFR wins, and only results sharing the newest
+effective time (one draw) are ranked by code preference. Nothing in WardSynQ computes an eGFR. Per code:
+`98979-8` CKD-EPI 2021 creatinine, PREFERRED modern code. `62238-1` older CKD-EPI, active, accepted. `77147-7` MDRD
+generic, active, accepted (added). `69405-9` generic GFR per 1.73 m2, active, accepted. `33914-3` discouraged by LOINC,
+maps to `77147-7`: legacy input alias only, read and returned as `77147-7`. `48642-3`, `48643-1`, `88293-6`,
+`88294-4` race-specific and `50044-7` MDRD female-population: legacy, accepted as incoming results, ranked last,
+StewardMD never generates or prefers them. Preference order: 98979-8, 62238-1, 77147-7, 69405-9, then the legacy
+group. A chosen legacy result carries `legacy: true` and the order's coverage list gets `RENAL_EGFR_LEGACY_EQUATION`
+("eGFR from a legacy race-specific or population-specific equation"). **Unchanged.** `RENAL_STALE_DAYS` stays 7 (owner
+confirmed). **Why.** Interoperability with old data without letting a legacy equation outrank a modern one or a newer
+value lose to an older one. **Status:** PR "WardSynQ renal check: eGFR LOINC codes per owner".
+
+## 2026-10-04 · WardSynQ: discharge asks per order which medicines continue at home (owner)
+
+**Decision.** `/ward/discharge` takes `continueOrderIds`. Each must be an active MedicationOrder of the stay being
+closed (`continue_order_not_on_stay` 422 / `continue_order_not_active` 409, nothing written). Default: none continue.
+Chosen orders are copied to the finished Encounter's `takeHomeMedications` and closed as a new version with stop reason
+"continued at home"; the rest stop with "discharged" (CLIN-04). `medicationDecisions` records each order's outcome and
+who chose. The assembled discharge summary's medications section starts with the take-home list once the stay is
+finished. Active medication orders no longer need the free-text override reason (the per-order choice is the
+decision) but still need `emr.treat` (`medication_decision_not_permitted`); doses in flight, pending results and
+unreadable lists still need the reason. ABDM shares an order continued at home as active with an open period. The ward
+discharge screen shows one row per medicine with a tick and the outcome in words. **Known limit.** A summary signed
+before the stay ends does not list the take-home medicines. **Status:** PR "WardSynQ: owner decisions of 2026-10-04".
+
+## 2026-10-04 · WardSynQ: a nurse may perform the bedside transfusion check (owner)
+
+**Decision.** New capability `transfusion.administer`, granted to the nurse role (admin holds every capability). It
+opens the bedside steps only: the two-person check, start, observations, a reaction stop and completion. Request,
+crossmatch and issue stay with `emr.treat` / `transfusion.issue`. The first checker is the signed-in user; the second
+must still be a different, active member holding `emr.treat`, `med.administer`, `transfusion.administer` or
+`transfusion.issue` (CLIN-16); the same person by id or email is refused. TransfusionEpisode joined the raw record
+door's route-governed list, so no role can write an episode phase except through its route. **Why.** In the ward the
+nurse does the bedside check and runs the unit. **To confirm.** Observations, reaction stop and completion were
+included with check and start so the nurse who starts a unit can stop it. **Status:** PR "WardSynQ: owner decisions
+of 2026-10-04".
+
+## 2026-10-04 · ABDM shares a medicine that was active inside the consent window (owner)
+
+**Decision.** `filterRecordByDateRange` (functions/_connect/abdm/hip.js) keeps a medication when its active period
+overlaps the consent's [from, to], bounds inclusive: start (authoredOn, else effectivePeriod.start) <= to and (no end,
+or effectivePeriod.end >= from). No parseable start, or an end that does not parse: dropped (fail closed). A
+medication whose status says it ended (stopped, completed, cancelled, entered-in-error, not-taken) but carries no end
+date is not treated as running: it is kept only when its start is in the window. A stopped WardSynQ order now carries
+its stop time as the period end. **Why.** Dating a medicine by its start dropped long-term medicines started before
+the window but still taken. **Trade-off.** An active medicine with no recorded end is shared into any later window.
+Replaces the start-date rule of PR #1356. **Status:** PR "WardSynQ: owner decisions of 2026-10-04".
+
 ## 2026-10-04 · WardSynQ: a recovery (PACU) bay is held on the bed board, but is not an inpatient bed
 
 **Decision.** `bedBoard()` lists an open PACU stay in its ward's `recovery[]`, never in `occupied[]`, and leaves its
@@ -11122,3 +11212,107 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
 
 ## 2026-10-04 - StewardMD Edge ON for all; heat warns instead of skipping
 - **Owner, 2026-10-04:** `smd_edge` defaults ON for all users (kill switch `"0"`). A hot phone no longer skips the on-device router; MaiK shows "Phone is hot. Answers may be slower." in its footer. Accepted cost: slower answers and a warmer phone under sustained use. Memory, MaiK/Whisper busy and renderer-gone back-off stay.
+
+## 2026-10-04 - "KB only" renamed "MaiK Edge"
+- **Owner, 2026-10-04:** "KB only" renamed "MaiK Edge" in MaiK's model selection and everywhere it shows (picker, chip, footer, Settings "Who answers", KB-miss notice). Same `rag` pref, no migration. It is the KB answer plus StewardMD Edge's on-device router: free, offline, no cloud AI, no long answers. With `smd_edge` "0" the label falls back to "KB only".
+
+## 2026-10-04 - wardsynq.com enforces its Content-Security-Policy
+- **Owner, 2026-10-04:** enforce the CSP that OPS-27 shipped as Report-Only, after checking what it would block. The policy had no `report-uri`/`report-to`, so nothing collected reports; the check was a real Chrome run over every page the site serves, policy enforced, violations posted to a local collector. Found and allowed (legitimate sources only): `https://apis.google.com` (script, Firebase Google sign-in), `https://stewardmd-498ec.firebaseapp.com` (frame, Firebase sign-in helper), `https://stewardmd.in` (connect: `opd.html` and `clinic-billing.html` call the record service directly from wardsynq.com, which stewardmd.in allows by CORS), and the one DICOM parser file on jsDelivr (exact URL, also SRI-pinned; without it the viewer says "could not be loaded"). Added `object-src 'none'`. `'unsafe-eval'` is not allowed and nothing needs it; `frame-ancestors 'none'` stays. `'unsafe-inline'` stays in `script-src` (inline blocks in `index.html`, `opd.html`, `clinic-billing.html` and `onchange=` handlers in `ward.js`); removing it needs nonces or hashes and is the next step. Not verifiable without a real Google account: the Google popup's later hops after a completed sign-in. Test: `test/wardsynq-site-headers.test.mjs`.
+
+## 2026-10-04 - WardSynQ backups go to the R2 bucket `wardsynq-backups` through a binding
+- **Owner, 2026-10-04:** back WardSynQ up to a Cloudflare R2 bucket. This answers owner decision S1 for backups. The `platform` backup destination now uses the R2 binding `WARDSYNQ_BACKUPS` (bucket `wardsynq-backups`, `wrangler.toml` top level and `env.production`); the `DOC_S3_*` document store is only a fallback when the binding is absent (it is set in production today, so without the binding "platform" would have written backups into the documents bucket). No new secret: the backup key is HKDF-derived per hospital from `DOC_ENC_KEY`, else `FOLLOWCARE_PHI_KEY` (set in production); losing or rotating that secret makes every backup unreadable. No R2 lifecycle rule (retention is the hospital's, pruned by `backup-schedule.js`). Each hospital still selects "WardSynQ platform storage" once under Admin Center, Integrations, Backup destination. Tests: `test/wardsynq-backup-r2.test.mjs`. [[WardSynQ-Progress]]
+
+## 2026-10-04 - WardSynQ renal and pregnancy/lactation tables come from the NFI, off until the owner signs them off
+- **Owner, 2026-10-04:** the renal-adjustment and pregnancy/lactation tables are built from the National Formulary of India
+  (Indian Pharmacopoeia Commission), and the owner signs them off before they take effect.
+- Source used: the latest NFI text the IPC publishes free, the **6th Edition 2019-20 Draft Version**
+  (ipc.gov.in/images/Draft_Version_NFI_6th_edition.pdf, sha256 269be2d4...). NFI 2021 (6th, final) and NFI 2026 (7th) are
+  sold in print and through the subscription NFI Online portal, so they are not used. The renal table is identical row for
+  row to the final NFI 2011 Appendix 7d. Renal = Appendix 10d; lactation = Appendix 10b; pregnancy = each monograph's
+  Contraindications/Precautions (Appendix 10c has no per-drug table).
+- Data in `wardsynq/adapters/nfi-tables.js` (generated; every entry has quote, PDF page and rule), turned into rules by
+  `wardsynq/adapters/nfi-rules.js`, applied at order entry by `functions/_wardsynq/order-entry-pack.js`.
+- Gating reuses the D10 fingerprinted sign-off: list `nfi-tables`, one item per table. Only a table with a record for its
+  CURRENT fingerprint is applied; any edit turns it off until re-signed; unreadable sign-off records apply nothing. Until
+  signed, the order check says "NFI table loaded, awaiting clinical sign-off". This is the one seed list whose sign-off
+  changes behaviour.
+- Encoding policy (in `NFI_SOURCE.encoding`, signed with the tables): renal reads the NFI's own eGFR columns (>50, 10-50,
+  <10) and raises nothing at eGFR 90 or more; lactation levels come from the source's own words (contraindicated / avoid /
+  caution words / "safe" raises nothing / vague = monitor); pregnancy under Contraindications is contraindicated, under
+  Precautions only a monitor-level caution. Every finding stays overridable with a reason. Dashes in the source are written
+  as hyphens (the no-dash rule). Open for the owner: see PR "Decisions to confirm".
+
+## 2026-10-04 - WardSynQ dialysis shows single-pool Kt/V (Daugirdas second generation) beside URR
+- **Owner, 2026-10-04 (closes owner item O12):** spKt/V = -ln(R - 0.008 x t) + (4 - 3.5 x R) x UF / W; R = post/pre urea,
+  t session hours (start to end), UF achieved ultrafiltration in litres, W post-dialysis weight in kg. Source Daugirdas JT,
+  J Am Soc Nephrol 1993;4(5):1205-13, PMID 8305648 (checked on PubMed 2026-10-04). Same expression as the StewardMD
+  calculator `ktv`, but WardSynQ refuses mixed urea units (as URR does), a negative UF and t <= 0, says "not computable" with
+  the reason (never 0), shows two decimals, and gives no adequacy verdict or target (URR shows none). Code:
+  `functions/_wardsynq/dialysis.js` ktv/sessionKtv; screen `wardsynq/site/pages/dialysis.js`.
+- URR and Kt/V are a new seed list `dialysis-adequacy` (items `urr`, `sp-ktv`, each with its code) and show UNAPPROVED until
+  signed. Like URR, the arithmetic is not gated on the sign-off.
+
+## 2026-10-04 - WardSynQ infection criteria: SUTI 2 for CAUTI; VAE for adult stays, VAP for paediatric stays only
+- **Owner, 2026-10-04:** CAUTI offers SUTI 2 (NHSN ch.7 Table 1, a patient 1 year of age or less, with or without a catheter).
+  Its fingerprint changed, so CAUTI shows UNAPPROVED again (intended).
+- New event VAE with tiers VAC, IVAC, PVAP (NHSN Patient Safety Component Manual, January 2026, ch.10 Ventilator-Associated
+  Event, "For use in adult locations only", read from cdc.gov 10-vae_final.pdf on 2026-10-04). VAP (PNU1-3) is kept for
+  paediatric stays only, neonatal excluded (ch.6 Settings: in-plan VAP is paediatric locations only). NHSN decides by
+  LOCATION regardless of age, so WardSynQ uses the class of the ventilator line's stay: NICU = neonatal (neither event),
+  PEDIATRICS = paediatric (VAP), every other class = adult (VAE). Same device-day rule for both; each rate and NABH KPI 14
+  count only their own stays' ventilator days. VAP keeps NABH number 14; VAE has none (no NABH number in the repo's notes).
+  VAP's fingerprint changed too, so it is UNAPPROVED again.
+- The infection control "awaiting clinical sign-off" notice is now read from the seed sign-off records (seed-signoff.js
+  itemSignoffState) and names only the unsigned events; it clears when all are signed; unreadable records read as unsigned.
+
+## 2026-10-04 - StewardMD starter patient leaflets: ten English drafts a hospital imports, never auto-approved
+- **Owner, 2026-10-04:** ten starter leaflets (wound care, urinary catheter, diabetes, warfarin, inhaler, after a heart
+  attack, after a stroke, fever, newborn care, plaster cast) in plain Indian-context English, no drug doses, 108, a
+  "come back to hospital if" list, no em dashes. In `functions/_wardsynq/leaflet-starter.js`.
+- A clinician imports them with one action (POST /ward/education-leaflet-import-starter, emr.treat) into their own
+  hospital's library as DRAFTS authored by the importer, create-only (importing again changes nothing). Each record carries
+  "Draft prepared by StewardMD for your clinicians to review" (on the record and in the library, not in the patient's text).
+  The existing second-clinician approval is unchanged; nothing is seeded into any hospital automatically.
+
+## 2026-10-03 - Opt-out floor re-baseline after Round 76: `smd_gate_v2=0`
+- **What:** `kb/validation/dx-floors.json["smd_gate_v2=0"]` rewritten with `--write-floors` (that config only). One floor
+  loosens, `heldout3.txt.abxSens` 126 -> 125; twenty tighten (overcall and viral/self-limited antibiotic calls fall on every
+  set, e.g. `heldout3.cur.overcall` 82 -> 66, `heldout3.txt.overcall` 77 -> 63, `heldout4.txt.overcall` 42 -> 35). No
+  default-config floor changed. The `replay` workflow (`dx-accuracy.yml`) had been red on main since #1312 (2026-09-28)
+  because CI stops at this step.
+- **Evidence (per-case diff, Rounds 73-75 `61b5f6a2a` vs now, same config):** the one lost needed call is heldout3
+  `h3_2_036` (sealed, counted only, not inspected; gold antibiotics yes, ASP "CONDITIONAL", gold diagnosis 2nd in the
+  engine's list). Before Round 76 the classic gate gave antibiotics to every likely infection; now its common-cold lead
+  with no rival needing antibiotics at 42+ within 30 points reads "infection likely, antibiotics not indicated". **The
+  default config (`smd_gate_v2` on, what every user gets) makes the same call on this case** (`infection_no_abx`, no
+  antibiotics, before and after Round 76), and its floors already include that miss. The old 126 encoded the classic
+  gate's blanket antibiotics, not a better decision.
+- **Why not an engine fix:** a rival scoring 41 is below the 42 "possible infection" bar both gates use; moving that bar
+  or the sinusitis score for this item would be tuning on a sealed case. **Trade-off:** the kill-switch config keeps
+  Round 76's large overcall drop and accepts one sealed miss the shipped config also has.
+
+## 2026-10-03 - Opt-out floor re-baseline: `smd_nlp_v2=0` (classic note reader), owner sign-off pending
+- **What:** `dx-floors.json["smd_nlp_v2=0"]` rewritten with `--write-floors` (that config only). Two floors loosen:
+  `heldout3.txt.abxSens` 74 -> 73 and `heldout4.txt.overcall` 23 -> 24. Thirteen tighten (e.g. `heldout3.txt.overcall`
+  46 -> 42, `heldout3.txt.noAbxInf` 12 -> 7, `gold.pc.abxSens` 45 -> 47). No default-config floor changed.
+- **Unlike `smd_gate_v2=0`, here the shipped config decides differently on both cases.** Each loss is a correct rule
+  exposing what the classic reader cannot read, not a worse decision rule:
+  - heldout3 `h3_2_091` (sealed, counted only; gold antibiotics yes, gold diagnosis 11th): lost in Rounds 73-75
+    (`61b5f6a2a`), not Round 76. Ablating the round 73 biliary-rival rule (`RIVAL_NEEDS`: cholangitis / cholecystitis
+    hold antibiotics as a rival only with a biliary sign, Tokyo 2018) restores it, and also returns three overcalls
+    (`h3_5_034`, `h3_5_038` tune, `h3_5_035` sealed: viral hepatitis with no biliary sign) where the default says no
+    antibiotics. The old "antibiotics" came from a biliary rival the note gives no sign of. Default: antibiotics, by a
+    different route (the v2 reader reads more of the note).
+  - heldout4 `h4_1_045` (tune): myasthenic crisis after a cold, on prednisolone, "SpO2 95% RA". Before Round 76 the
+    classic reader read "SpO2 95%" as hypoxia, so interstitial lung disease led and the gate said no antibiotics (right
+    answer, wrong reason). Round 76 fixed that misread; the reader now sees only dyspnoea + sore throat, pharyngitis
+    leads, and hospital-acquired / severe pneumonia rivals within 30 points keep antibiotics. The same config's tapped
+    path (`cur`) already gave antibiotics before and after. Default: no antibiotics (the v2 reader reads the myasthenia).
+- **Why not an engine fix:** h4_1_045 would need three separate changes (a pneumonia rival with no pneumonia sign, the
+  classic-reader HAP anchor that `ANCHOR_V2_ONLY` disables on purpose, and a sore throat with no Centor feature, which
+  still reads "antibiotics if criteria met"); reverting the biliary rule for the classic reader trades three correct
+  withholds for one sealed needed call. **Owner to confirm** that the classic-reader kill switch may carry these two
+  numbers; dropping this commit leaves the `replay` workflow red at this step.
+
+## 2026-10-05 - Owner sign-offs: opt-out dx floors and adult normal values
+- **Owner, 2026-10-05:** signed off the opt-out floor re-baselines for `smd_gate_v2=0` and `smd_nlp_v2=0` (the two 2026-10-03 entries above; default floors untouched), ending the red `replay` check. Signed off the adult normal-values table (#1383) clinically and approved reuse of the cited ABIM (Jan 2026) and RCPA (2024) ranges; the Draft badge is removed.
