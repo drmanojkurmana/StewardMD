@@ -158,6 +158,9 @@ test("finalizeFacts: sn inside the chunk, numbers grounded, quote/p/h filled, fi
 test("code gates 1, 2, 3, 5, 9b, verbatim each reject their fault", () => {
   assert.equal(C.runCodeGates(rq(), SRC), null);
   assert.equal(C.runCodeGates(rq({ dis: rq().dis.slice(0, 2) }), SRC), "g1");
+  assert.equal(C.runCodeGates(rq({ key: { ot: "t(15;17)", wr: "" } }), SRC), "g1", "the key needs its reason");
+  assert.equal(C.runCodeGates(rq({ dis: [Object.assign({}, rq().dis[0], { wr: "" })].concat(rq().dis.slice(1)) }), SRC), "g1", "every distractor needs its reason");
+  assert.equal(C.gate1(rq({ dis: rq().dis.map((d) => ({ ot: d.ot, et: d.et })) })), false, "a missing wr fails gate 1");
   assert.equal(C.runCodeGates(rq({ dis: [{ ot: "t(15;17)", wr: "x", et: "knowledge" }].concat(rq().dis.slice(1)) }), SRC), "g2");
   assert.equal(C.runCodeGates(rq({ dis: [rq().dis[0], rq().dis[0], rq().dis[2]] }), SRC), "g3");
   assert.equal(C.runCodeGates(rq({ key: { ot: "Balanced translocation between chromosomes fifteen and seventeen", wr: "PML-RARA" } }), SRC), "g5");

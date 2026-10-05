@@ -411,8 +411,11 @@ export function finalizeFacts(facts, sents, deckId) {
 
 // ---- code gates (LayerC 8.1). Each takes a sanitized rq and returns true when it passes. ----
 const optsOf = (rq) => [rq.key && rq.key.ot].concat((rq.dis || []).map((d) => d.ot));
-/* gate1(rq): four options, the key plus exactly three distractors, none empty. */
-export function gate1(rq) { return !!(rq && rq.key && rq.key.ot && Array.isArray(rq.dis) && rq.dis.length === 3 && rq.dis.every((d) => d && d.ot)); }
+// Four options, the key plus exactly three distractors, none empty (the shape every option gate needs).
+function fourOptions(rq) { return !!(rq && rq.key && rq.key.ot && Array.isArray(rq.dis) && rq.dis.length === 3 && rq.dis.every((d) => d && d.ot)); }
+/* gate1(rq): four options, the key plus exactly three distractors, none empty, and every option carries its
+ * reason (key wr and each distractor wr non-empty), so a stored item never has an empty entry in r. */
+export function gate1(rq) { return fourOptions(rq) && !!(rq.key.wr && rq.dis.every((d) => d.wr)); }
 /* gate2(x): one key. Raw rq: the key is non empty and no distractor equals it. Stored item { o, a }: a is an
  * index 0..3 of a non empty option that no other option equals. */
 export function gate2(x) {
@@ -428,7 +431,7 @@ export function gate3(rq) { const o = optsOf(rq).map(normText); return o.every(B
 /* gate5(rq): no length clue. Key length within 1.6x of the median distractor length (either way). Lengths
  * under 8 chars count as 8, so short tokens ("IgA", "Folate") are not judged by ratio. */
 export function gate5(rq) {
-  if (!gate1(rq)) return false;
+  if (!fourOptions(rq)) return false;
   const L = (s) => Math.max(8, normText(s).length);
   const d = rq.dis.map((x) => L(x.ot)).sort((a, b) => a - b), med = d[1], k = L(rq.key.ot);
   return Math.max(k / med, med / k) <= 1.6;
@@ -489,7 +492,7 @@ export function keyPositions(n, rnd) {
   return out.slice(0, n);
 }
 /* shuffleOptions(rq, keyPos, rnd) -> { o: [4], a, r: [4], et: [4] }: the key at keyPos, the three distractors
- * shuffled into the other slots. et is null on the key. Needs gate1(rq). */
+ * shuffled into the other slots. et is null on the key. Needs four options (gate1). */
 export function shuffleOptions(rq, keyPos, rnd) {
   const dis = shuffleInPlace(rq.dis.slice(0, 3), rnd), o = [], r = [], et = [];
   let j = 0;

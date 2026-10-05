@@ -386,7 +386,8 @@
       });
     }
     if (op.op === "review") {
-      // The server reads id, q, o, a, r and kp; r goes only when all four reasons are present.
+      // The server reads id, q, o, a, r and kp. Gate 1 now requires every reason, so r is always complete; the check
+      // only guards against items saved before that (an empty reason would make the server refuse the call).
       body.q = b.items.map(function (it) {
         var x = { id: it.id, q: it.q, o: it.o, a: it.a };
         if (it.r && it.r.length === 4 && it.r.every(function (t) { return typeof t === "string" && t.trim(); })) x.r = it.r;

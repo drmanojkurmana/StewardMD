@@ -210,6 +210,8 @@ test("the key and the reasons never reach the solve prompt", () => {
   const review = vertex.find((v) => v.op === "review");
   assert.match(review.user, /Key: [A-D]/, "the reviewer, unlike the solver, sees the key");
   assert.match(review.user, /Source paragraph: \[\d+\] /);
+  assert.ok(A.log.filter((x) => x.op === "review").every((x) => x.body.q.every((q) => Array.isArray(q.r) && q.r.length === 4 && q.r.every(Boolean))), "review gets every reason (gate 1 guarantees them)");
+  assert.match(review.user, /\(reason: The note says so directly\)/);
 });
 
 test("deck counters come back on every response and the cap line shows them; cost is metered", () => {

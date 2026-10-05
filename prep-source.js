@@ -233,19 +233,23 @@
   // A word: letters (Latin, accented, Greek), digits, degree, plus-minus and micro signs, and the joiners medical
   // text uses (B12, PML-RARA, t(15;17), 1.5, 45mg/m2, 90%).
   var WORD = new RegExp("^[" + LETTERS + FC(0xB0, 0xB1, 0xB5) + ".,;:()\\[\\]/%+'&=<>*-]+$");
+  var PUNCT = new RegExp("^[!-/:-@\\[-" + FC(96) + "{-~]+$");   // ASCII punctuation only (FC(96) is the backtick)
+  // Bullet and dash glyphs on their own (built from char codes so no dash character sits in this file).
+  var MARKS = new RegExp("^[" + FC(0x2022, 0x25AA, 0x25CF, 0x25E6, 0x2023, 0x2043, 0x2013, 0x2014, 0xB7, 0x25A0) + "]+$");
   var EDGE = /^[("'\[{<]+|[)"'\]}>.,;:!?*]+$/g;
   // Share of tokens that are not words. Tokens of plain ASCII punctuation only (bullets, dashes) are not counted.
   function nonWordRatio(text) {
     var toks = String(text == null ? "" : text).split(/\s+/), n = 0, bad = 0;
     toks.forEach(function (t) {
-      if (!t || /^[!-\/:-@\[-`{-~]+$/.test(t)) return;
+      if (!t || PUNCT.test(t) || MARKS.test(t)) return;
       n++;
       var c = t.replace(EDGE, "");
       if (!c || !HAS_ALNUM.test(c) || !WORD.test(c)) bad++;
     });
     return n ? bad / n : 0;
   }
-  function textChars(lines) { var c = 0; (lines || []).forEach(function (l) { c += String(l.tx || "").replace(/\s+/g, "").length; }); return c; }
+  // Characters on the page's lines (lines are already squashed: single spaces, no edges).
+  function textChars(lines) { var c = 0; (lines || []).forEach(function (l) { c += String(l.tx || "").length; }); return c; }
   /* What to do with one page from its text-layer lines: { use: "text" | "ocr" | "skip", why }.
      why: "" (good text layer), "little-text", "garbled", "no-text" (nothing to read without OCR). */
   function pageDecision(lines, canOcr) {

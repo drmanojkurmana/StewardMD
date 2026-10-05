@@ -35,8 +35,8 @@ async function ensureServer() {
 }
 
 /* ---------- a tiny digital PDF: two pages, a 20 pt heading, an 16 pt heading, 11 pt body ---------- */
-function makePdf() {
-  const pageText = [
+function makePdf(pagesIn) {
+  const pageText = pagesIn || [
     [[20, 780, "Acute leukaemia"], [11, 750, "Acute myeloid leukaemia shows more than twenty percent myeloblasts in the marrow."],
       [11, 735, "Auer rods are needle shaped aggregates of azurophilic granules."], [11, 720, "Disseminated intravascular coagulation complicates the promyelocytic subtype."]],
     [[16, 780, "Management"], [11, 750, "Induction combines cytarabine with an anthracycline for seven plus three days."],
@@ -44,11 +44,12 @@ function makePdf() {
   ];
   const objs = [];
   objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
-  objs[2] = "<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>";
-  objs[7] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
-  [3, 5].forEach((po, k) => {
+  const pobj = pageText.map((_, k) => 3 + 2 * k), font = 3 + 2 * pageText.length;
+  objs[2] = "<< /Type /Pages /Kids [" + pobj.map((o) => o + " 0 R").join(" ") + "] /Count " + pageText.length + " >>";
+  objs[font] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
+  pobj.forEach((po, k) => {
     const stream = pageText[k].map(([size, y, t]) => `BT /F1 ${size} Tf 50 ${y} Td (${t}) Tj ET`).join("\n");
-    objs[po] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 7 0 R >> >> /Contents ${po + 1} 0 R >>`;
+    objs[po] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font} 0 R >> >> /Contents ${po + 1} 0 R >>`;
     objs[po + 1] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
   });
   let out = "%PDF-1.4\n";
@@ -298,6 +299,38 @@ try {
   await ev(`var b=[].filter.call(document.querySelectorAll('#pcDecks [data-act="c-del"]'), function(x){return x.getAttribute("data-d")===${JSON.stringify(deckId)};})[0]; b.click(); return 1;`);
   ok(await until(`return document.querySelectorAll("#pcDecks .pc-deck").length === 1;`, 5000), "Delete removes the deck from the list");
   ok(await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).cards).filter(function(k){return k.indexOf("${deckId}")>=0;}).length;`) === 0, "and its FSRS cards from the store");
+
+  // ---- a scanned page (Phase 3b): page 1 has a text layer, page 2 is an image-only page with no text
+  const scanPdf = join(dir, "Marrow scan.pdf");
+  writeFileSync(scanPdf, makePdf([[[20, 780, "Bone marrow failure"], [11, 750, "Aplastic anaemia presents with pancytopenia and a hypocellular marrow on biopsy."],
+    [11, 735, "Fanconi anaemia is inherited and often shows thumb anomalies and short stature."], [11, 720, "Paroxysmal nocturnal haemoglobinuria lacks CD55 and CD59 on red cells."]], []]), "latin1");
+  api.calls.length = 0;
+  await click('#smdPrep [data-act="c-new"]');
+  await until(`return !!document.querySelector('#smdPrep [data-act="c-src"][data-v="pdf"]');`);
+  await click('#smdPrep [data-act="c-src"][data-v="pdf"]');
+  await until(`return !!document.getElementById("pcFile");`);
+  ok(/read only in the StewardMD phone app/.test(await screenText()), "web build: the create screen says scans are read only in the app");
+  { const { result: { root: r2 } } = await call("DOM.getDocument", { depth: 0 }); const { result: { nodeId: n2 } } = await call("DOM.querySelector", { nodeId: r2.nodeId, selector: "#pcFile" }); await call("DOM.setFileInputFiles", { nodeId: n2, files: [scanPdf] }); }
+  ok(await until(`var f=document.querySelector("#pcCreateView .pc-file"); return !!f && /Marrow scan\.pdf/.test(f.textContent) && /2 pages/.test(f.textContent);`, 20000), "the scanned PDF opens");
+  await ev(`var p=document.getElementById("pcPages"); p.value="2"; p.dispatchEvent(new Event("input")); return 1;`);
+  await click('#smdPrep [data-act="c-own"]');
+  await click('#smdPrep [data-act="c-go"]');
+  ok(await until(`var e=document.getElementById("pcErr"); return !!e && /These pages are scanned images. Scans are read only in the StewardMD phone app, not on the web/.test(e.textContent);`, 15000), "web build, scanned page only: a clear message and nothing sent");
+  ok(api.calls.length === 0, "no request for an unreadable source");
+  // The app: on-device OCR through a stubbed SMD_NATIVE.ocr (native-bridge.js shape: { text, lines, boxes }).
+  await ev(`window.__ocr = []; window.SMD_NATIVE = { ocr: function (img, opts) { window.__ocr.push([String(img).slice(0, 23), img.length, opts && opts.languageCorrection]); return Promise.resolve({ text: "DIAGNOSIS\\nBone marrow biopsy confirms the diagnosis in most adults.\\nFlow cytometry shows myeloid markers on the blasts.\\nCytogenetics guides the choice of therapy.", lines: [], boxes: [] }); } }; return 1;`);
+  await ev(`var p=document.getElementById("pcPages"); p.value="1-2"; p.dispatchEvent(new Event("input")); return 1;`);
+  await click('#smdPrep [data-act="c-go"]');
+  ok(await until(`return !!document.getElementById("pcProgView") && /Deck saved/.test(document.querySelector("#smdPrep .pn-bar h1").textContent);`, 30000), "the app: the deck is made with the scanned page read by OCR");
+  const ocrCalls = String(await ev(`return JSON.stringify(window.__ocr || null);`));
+  ok(/^\[\["data:image\/jpeg;base64,",\d+,true\]\]$/.test(ocrCalls) && JSON.parse(ocrCalls)[0][1] > 5000, "only the scanned page is rendered by pdf.js and sent to on-device OCR, as a JPEG: " + ocrCalls.slice(0, 60));
+  const scanSents = api.calls.filter((c) => c.op === "facts").flatMap((c) => c.body.chunk.sents);
+  ok(scanSents.map((x) => x.p).join(",") === "1,1,1,2,2,2" && scanSents[3].h === "DIAGNOSIS" && /Bone marrow biopsy/.test(scanSents[3].tx) && scanSents.every((x) => Object.keys(x).sort().join() === "h,n,p,tx"), "OCR text goes through the same sentence pipeline: " + scanSents.map((x) => x.n + "/" + x.p).join(" "));
+  ok(/1 page read by on-device OCR/.test(await screenText()), "the progress screen says a page was read by OCR");
+  ok(!JSON.stringify(api.calls).includes("data:image"), "no image is ever sent to the server");
+  await click('#smdPrep [data-act="c-done"]');
+  ok(await until(`return [].some.call(document.querySelectorAll("#pcDecks .pc-deck"), function (d) { return /Marrow scan/.test(d.textContent) && /partly read by OCR/.test(d.textContent); });`, 5000), "the deck list marks the deck as partly read by OCR");
+  await ev(`delete window.SMD_NATIVE; return 1;`);
 
   ok(api.other.every((u) => /\/api\//.test(u)), "every other /api/ request was answered locally (" + api.other.length + "), none left the machine");
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));

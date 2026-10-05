@@ -145,6 +145,87 @@ test("PDF cleaning: running headers, footers and page numbers drop; a sentence k
   assert.deepEqual(span.sents.map((s) => [s.n, s.p]), [[1, 4], [2, 5]]);
 });
 
+/* ---------------- scanned pages (Phase 3b): OCR fallback ---------------- */
+const GARBAGE = Array.from({ length: 40 }, (_, i) => String.fromCharCode(0xFFFD, 0x25A1 + (i % 3)) + "x" + String.fromCharCode(0xE000 + i)).join(" ");
+const BODY = "Acute myeloid leukaemia shows more than twenty percent myeloblasts in the marrow. Auer rods are needle shaped granules. Disseminated intravascular coagulation complicates the promyelocytic subtype. Induction uses cytarabine.";
+test("non-word share and the per-page decision: under 200 characters or over 10% non-words goes to OCR", () => {
+  assert.equal(SR.nonWordRatio("Iron 100 mg daily, B12 and PML-RARA t(15;17) at 37.5 C in 90% of cases."), 0);
+  assert.equal(SR.nonWordRatio(String.fromCharCode(0x2022) + " Iron - low -- " + String.fromCharCode(0x2013) + " stores"), 0, "bullets and dashes are not counted");
+  assert.ok(SR.nonWordRatio(GARBAGE) > 0.9);
+  assert.ok(SR.nonWordRatio(BODY + " " + String.fromCharCode(0xFFFD)) < 0.1);
+  const good = [{ tx: BODY }], short = [{ tx: "Index" }], bad = [{ tx: GARBAGE + " " + BODY }];
+  assert.deepEqual(SR.pageDecision(good, true), { use: "text", why: "" });
+  assert.deepEqual(SR.pageDecision([], true), { use: "ocr", why: "no-text" });
+  assert.deepEqual(SR.pageDecision(short, true), { use: "ocr", why: "little-text" });
+  assert.deepEqual(SR.pageDecision(bad, true), { use: "ocr", why: "garbled" });
+  // Web build (no OCR): a short page keeps its text, an empty one or a garbled one is skipped.
+  assert.deepEqual(SR.pageDecision(short, false), { use: "text", why: "little-text" });
+  assert.deepEqual(SR.pageDecision([], false), { use: "skip", why: "no-text" });
+  assert.deepEqual(SR.pageDecision(bad, false), { use: "skip", why: "garbled" });
+  assert.deepEqual(SR.ocrToLines({ text: "TREATMENT\n  Give ATRA early.  \n\n" }), [{ tx: "TREATMENT", size: 0, ocr: true }, { tx: "Give ATRA early.", size: 0, ocr: true }]);
+  assert.deepEqual(SR.ocrToLines({ lines: ["A line"], text: "ignored" }), [{ tx: "A line", size: 0, ocr: true }]);
+});
+
+const it11 = (str, y) => ({ str, transform: [11, 0, 0, 11, 50, y], width: str.length * 5, hasEOL: true });
+function mockPdf(pages) {
+  return { getPage: async (p) => ({ id: p, getTextContent: async () => ({ items: pages[p] || [] }) }) };
+}
+const PDF = {
+  1: [it11(BODY, 700)],                                    // a digital page
+  2: [],                                                   // a scan: no text layer
+  3: [it11(GARBAGE, 700)],                                 // a broken text layer
+  4: [it11("Index", 700)],                                 // a short digital page
+  5: [],                                                   // a scan OCR cannot read
+};
+const OCR_TEXT = { 2: "MANAGEMENT\nInduction combines cytarabine with an anthracycline for seven days.\nAll trans retinoic acid treats the promyelocytic subtype.",
+  3: "Tumour lysis is prevented with hydration and allopurinol.", 4: "Ix" };
+test("readPages: text layer first, then on-device OCR for scanned or garbled pages; progress; failures and the cap", async () => {
+  const seen = [], progress = [];
+  const ocr = async (img) => { seen.push(img); const p = Number(img.slice(-1)); if (p === 5) throw new Error("vision failed"); return { text: OCR_TEXT[p] || "" }; };
+  const render = async (page) => "data:image/jpeg;base64,PAGE" + page.id;
+  const rd = await SR.readPages(mockPdf(PDF), [1, 2, 3, 4, 5], (d, n, ph) => progress.push(ph + d + "/" + n), { ocr, render });
+  assert.deepEqual(seen, ["data:image/jpeg;base64,PAGE2", "data:image/jpeg;base64,PAGE3", "data:image/jpeg;base64,PAGE4", "data:image/jpeg;base64,PAGE5"], "only pages that need it are rendered and OCR'd");
+  assert.deepEqual(progress, ["text1/5", "text2/5", "text3/5", "text4/5", "text5/5", "ocr1/4", "ocr2/4", "ocr3/4", "ocr4/4"]);
+  assert.deepEqual(rd.ocrPages, [2, 3]);
+  assert.deepEqual(rd.skipped, [{ p: 5, why: "ocr-failed" }]);
+  assert.deepEqual(rd.scanned, [2, 3, 4, 5]);
+  assert.deepEqual(rd.pages.map((pg) => [pg.p, !!pg.ocr]), [[1, false], [2, true], [3, true], [4, false]], "page 4 keeps its text layer: OCR read less");
+  // The same sentence pipeline: numbered across the document, OCR pages marked, caps-line heading from OCR.
+  const doc = SR.docFromPdfPages(rd.pages, "AML.pdf");
+  assert.deepEqual(doc.ocrPages, [2, 3]);
+  const ocrS = doc.sents.filter((x) => x.o);
+  assert.deepEqual(ocrS.map((x) => x.p), [2, 2, 3]);
+  assert.equal(ocrS[0].h, "MANAGEMENT");
+  assert.ok(doc.sents.every((x, i) => x.n === i + 1));
+  assert.ok(!doc.sents.some((x) => x.tx === "MANAGEMENT"), "the OCR heading is not sent as a sentence");
+  const chunk = SR.chunkPayload(SR.chunkSentences(doc.sents)[0]);
+  assert.ok(chunk.sents.every((x) => !("o" in x)), "the OCR mark stays on the phone");
+  assert.equal(PC.readNote(rd, true), "2 pages read by on-device OCR. 1 page could not be read by OCR.");
+});
+
+test("readPages without OCR (web build) and with the OCR page cap", async () => {
+  const web = await SR.readPages(mockPdf(PDF), [1, 2, 3, 4, 5]);
+  assert.deepEqual(web.ocrPages, []);
+  assert.deepEqual(web.skipped, [{ p: 2, why: "no-text" }, { p: 3, why: "garbled" }, { p: 5, why: "no-text" }]);
+  assert.deepEqual(web.pages.map((pg) => pg.p), [1, 4]);
+  assert.equal(PC.readNote(web, false), "2 pages skipped: scanned pages are read only in the StewardMD phone app, not on the web. 1 page skipped: their text could not be read cleanly.");
+  const scanOnly = await SR.readPages(mockPdf(PDF), [2, 5]);
+  assert.equal(scanOnly.pages.length, 0);
+  assert.match(PC.unreadableMessage(scanOnly, false), /read only in the StewardMD phone app, not on the web/);
+  assert.match(PC.unreadableMessage({ skipped: [{ p: 3, why: "garbled" }] }, false), /could not be read cleanly/);
+  assert.match(PC.unreadableMessage({ skipped: [{ p: 2, why: "ocr-failed" }] }, true), /No readable text/);
+  let calls = 0;
+  const capped = await SR.readPages(mockPdf(PDF), [2, 3, 5], null, { ocrCap: 1, render: async (pg) => "img" + pg.id, ocr: async (img) => { calls++; return { text: OCR_TEXT[Number(img.slice(-1))] || "" }; } });
+  assert.equal(calls, 1, "OCR stops at the page cap");
+  assert.deepEqual(capped.ocrPages, [2]);
+  assert.deepEqual(capped.skipped, [{ p: 3, why: "ocr-cap" }, { p: 5, why: "ocr-cap" }], "past the cap a page needing OCR is skipped and says why");
+  assert.equal(PC.readNote(capped, true), "1 page read by on-device OCR. 2 pages skipped: up to 20 scanned pages are read by OCR in one deck.");
+  // A slow OCR call is abandoned at its time limit and the page is reported.
+  const slow = await SR.readPages(mockPdf(PDF), [2], null, { ocrMs: 30, render: async () => "img", ocr: () => new Promise(() => {}) });
+  assert.deepEqual(slow.skipped, [{ p: 2, why: "ocr-failed" }]);
+  assert.equal(SR.OCR_PAGE_CAP, 20);
+});
+
 /* ---------------- page picker and caps ---------------- */
 test("page picker and the 60-page cap", () => {
   assert.deepEqual(SR.parsePages("1-3, 5, 3", 10), { pages: [1, 2, 3, 5] });
