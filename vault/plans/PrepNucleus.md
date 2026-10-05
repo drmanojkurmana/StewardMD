@@ -356,6 +356,7 @@ Flash-Lite; if it still thinks, the result is truncation inside `maxOutputTokens
 | `solve` | 5 | 6k to 8k | 0.3k to 0.5k | 0.002 to 0.003 |
 | `review` | 5 | 17k to 21k | 1.2k to 1.6k | 0.006 to 0.008 |
 | Regenerate + solve + review | 0 to 6 | 2k to 6k | 1k to 3k | 0.002 to 0.006 |
+| System prompts and schemas (repeated per call) | (included above) | 3k to 6k | 0 | about 0.001 |
 | **Deck** | 25 to 31 | 85k to 110k | 22k to 29k | **0.053 to 0.070 (Rs 5.1 to 6.7)** |
 
 Input is 37 to 39% of the bill; facts are about half. A 60-page deck runs 125k to 165k tokens. Each further 10 questions (2 `mcq` + 2 `solve` + 2
@@ -377,7 +378,7 @@ per plan, not only per day (9.3).
 ### 9.3 Caps (defaults are proposals; decision 4)
 | Cap | Where | Default |
 |---|---|---|
-| Calls per day | `AI_MODULES.prep.daily`, `AI_LIMIT_PREP`, admin KV (unit = Gemini calls, what `aiu:mod` counts; one record per call) | 150 (about 5 decks) |
+| Calls per day | `AI_MODULES.prep.daily`, `AI_LIMIT_PREP`, admin KV (unit = Gemini calls, what `aiu:mod` counts; one record per call) | 160 (5 decks at up to 31 calls) |
 | Decks per day | `prep:decks:<uid>:<day>` | 5 |
 | Tokens per month per plan (server-counted, in + out) | `prep:tok:<uid>:<month>` (`PREP_MONTH_TOK_FREE/TRAINEE/PRO`) | Free trial 200k (one deck), Trainee 1M (about 8 full decks, Rs 50 against Rs 199), Pro 3M |
 | Pages per deck | client + server (`PREP_PAGE_CAP`) | 60 |
@@ -458,7 +459,7 @@ prep's own counters and the breaker enforce always. The per-user rupee cap in `_
 ## 15. Verified against the code (2026-10-05, branch docs/prepnucleus-plan)
 - `functions/_ai_usage.js`: `AI_MODULES`, `gateAndCount` -> `recordAiUsage` pre-call (no tokens, no model), `buildUsageRecord` fields (`feature` present, unset by callers), `MODEL_RATES` 3.1/3.5 Flash-Lite, `estCostInr` (imported as `aiEstCostInr` in the route), `aiu:mod:<doc>:<module>:<day>` counts calls, `capsEnforced`.
 - `functions/_usage.js`: `recordUsage` prices with `priceInInrPer1k` 0.0288 / `priceOutInrPer1k` 0.24 and writes `maik:u`/`maik:m` monthly tokens; `checkQuota` holds the project breaker (`costHardStopInr`) and the per-user rate limit; `addDailyCostInr` is module-private; `functions/_aibudget.js`: Free allowance 5,000 tokens. `functions/_credits.js`: per-user cap, `AI_COST_CAP_ON` unset in `wrangler.toml` (lines 148 to 184).
-- `functions/_ai_usage.js:544`: deferred `q.commit = rec` where `rec` takes no arguments and builds a record with doctorId, module, subscription, email only; `_ai_usage.js:579`: `realCostInr` reads the `maik.cost` counter; `_counters.js:29` `bump(env, day, incs)`.
+- `functions/_ai_usage.js:545`: deferred `q.commit = rec` where `rec` takes no arguments and builds a record with doctorId, module, subscription, email only; `_ai_usage.js:579`: `realCostInr` reads the `maik.cost` counter; `_counters.js:29` `bump(env, day, incs)`.
 - `functions/api/ai/[[path]].js`: `aiDeadlineMs` 28,000 and the "native client gives up at ~25-35s" comment; gate block at 1698 passes `deferRecord` only for `seg === "explain"` and keeps `_mq.commit`; `env.__modelOverride` stamped per request; `providerOrder` reads `AI_PROVIDER`; `genBody` (`thinkingBudget: 0`, `responseMimeType` only, no `labels`); `MODULE_FOR`; no `feature:` in any usage record.
 - `functions/_deid.js` `stripIdentifiers`: `\d{4,}` removal, `\s+` collapse, "patient name" to end of text.
 - `specialty-bank.js`: `validateIndex` (licence, citation, `^mcq/[a-z0-9-]+\.json$`), three `I.getJSON` points (`INDEX`, `decks/`, `SEARCH`), `EXAM_N = 30, EXAM_SEC = 90`, `srcLine` "crowd-sourced", `A.mcqbank`, user `flags`.
