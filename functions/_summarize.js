@@ -5,8 +5,9 @@
  * the ingest pipeline; the result is cached in D1 forever and shared by all users.
  *
  * Reuses the app's existing Gemini transport (callGemini → Vertex primary, AI-Studio
- * fallback) from functions/api/ai. Model chain: gemini-2.5-flash-lite (cheapest) →
- * gemini-2.5-flash (fallback), overridable via UPDATES_MODEL / UPDATES_MODEL_FALLBACK.
+ * fallback) from functions/api/ai. Model chain: CHEAP_MODEL (gemini-3.1-flash-lite, the cheapest in
+ * service) → ACCURATE_MODEL (gemini-3.5-flash-lite), overridable via UPDATES_MODEL / UPDATES_MODEL_FALLBACK.
+ * Every Gemini 2.5 model retires on Vertex on 2026-10-16; a retiring model set in env is ignored.
  *
  * COPYRIGHT: the prompt forbids reproducing guideline text, tables, or figures. Only
  * an original plain-language summary + structured facts + links are produced/stored.
@@ -14,9 +15,10 @@
 import { callGemini } from "./api/ai/[[path]].js";
 import { usageKv, usageConfig, recordUsage, estTokens } from "./_usage.js";
 import { istDay } from "./_counters.js";
+import { CHEAP_MODEL, ACCURATE_MODEL, envModel } from "./_ai_usage.js";
 
-const MODEL_PRIMARY_DEFAULT = "gemini-2.5-flash-lite";
-const MODEL_FALLBACK_DEFAULT = "gemini-2.5-flash";
+const MODEL_PRIMARY_DEFAULT = CHEAP_MODEL;
+const MODEL_FALLBACK_DEFAULT = ACCURATE_MODEL;
 const WORKSPACES = ["internal_medicine", "surgery", "ent", "ophthalmology", "obstetrics_gynaecology", "urology", "dentistry_omfs", "paediatrics"];
 
 const SUMMARY_SYS =
@@ -109,8 +111,8 @@ export async function meterGate(env, type) {
  * `data` is the normalised structured object ready to persist. On failure ok=false.
  */
 export async function summarizeDocument(env, meta) {
-  const primary = env.UPDATES_MODEL || MODEL_PRIMARY_DEFAULT;
-  const fallback = env.UPDATES_MODEL_FALLBACK || MODEL_FALLBACK_DEFAULT;
+  const primary = envModel(env.UPDATES_MODEL, MODEL_PRIMARY_DEFAULT);
+  const fallback = envModel(env.UPDATES_MODEL_FALLBACK, MODEL_FALLBACK_DEFAULT);
   const models = fallback && fallback !== primary ? [primary, fallback] : [primary];
 
   const metaBlock = [
@@ -235,8 +237,8 @@ const CLASSIFY_SYS =
 
 export async function classifyDocument(env, meta) {
   meta = meta || {};
-  const primary = env.UPDATES_MODEL || MODEL_PRIMARY_DEFAULT;
-  const fallback = env.UPDATES_MODEL_FALLBACK || MODEL_FALLBACK_DEFAULT;
+  const primary = envModel(env.UPDATES_MODEL, MODEL_PRIMARY_DEFAULT);
+  const fallback = envModel(env.UPDATES_MODEL_FALLBACK, MODEL_FALLBACK_DEFAULT);
   const models = fallback && fallback !== primary ? [primary, fallback] : [primary];
   const searchBlock = (Array.isArray(meta.search) && meta.search.length)
     ? "\n=== WEB SEARCH RESULTS (authoritative context — summarize facts in your OWN words; do not copy) ===\n" +
@@ -340,8 +342,8 @@ function prevSummaryText(prev) {
 export async function diffDocument(env, meta) {
   const prevText = prevSummaryText(meta.prevSummary);
   if (!prevText) return { ok: false, changes: [], error: "no-previous" };
-  const primary = env.UPDATES_MODEL || MODEL_PRIMARY_DEFAULT;
-  const fallback = env.UPDATES_MODEL_FALLBACK || MODEL_FALLBACK_DEFAULT;
+  const primary = envModel(env.UPDATES_MODEL, MODEL_PRIMARY_DEFAULT);
+  const fallback = envModel(env.UPDATES_MODEL_FALLBACK, MODEL_FALLBACK_DEFAULT);
   const models = fallback && fallback !== primary ? [primary, fallback] : [primary];
   const block = [
     "Title: " + (meta.title || ""),

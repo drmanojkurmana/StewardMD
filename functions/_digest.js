@@ -7,8 +7,11 @@
 import { callGemini } from "./api/ai/[[path]].js";
 import { meterGate } from "./_summarize.js";
 import { recordUsage, estTokens } from "./_usage.js";
+import { CHEAP_MODEL, ACCURATE_MODEL, envModel } from "./_ai_usage.js";
 
-const MODEL = "gemini-2.5-flash";   // synthesis benefits from the fuller model
+// Synthesis benefits from the fuller model: ACCURATE_MODEL (gemini-3.5-flash-lite), then the cheapest.
+// Was gemini-2.5-flash, then gemini-2.5-flash-lite; every 2.5 model retires on Vertex on 2026-10-16.
+const MODEL = ACCURATE_MODEL;
 const DIGEST_SYS =
   "You are a medical editor compiling a concise 'This Week in Medicine' briefing for busy clinicians. " +
   "You are given a list of THIS WEEK'S medical updates (guidelines, drug approvals, safety alerts, major trials) " +
@@ -30,7 +33,7 @@ export async function buildDigest(env, items) {
   const prompt = DIGEST_SYS + "\n\n=== THIS WEEK'S UPDATES ===\n" + lines;
   const gate = await meterGate(env, "updates_digest");
   let lastErr = null;
-  for (const model of [env.UPDATES_DIGEST_MODEL || MODEL, "gemini-2.5-flash-lite"]) {
+  for (const model of [envModel(env.UPDATES_DIGEST_MODEL, MODEL), CHEAP_MODEL]) {
     try {
       const text = await callGemini(Object.assign({}, env, { GEMINI_MODEL: model }), [{ text: prompt }], 1600, { temperature: 0.4 });
       const p = parseJsonLoose(text);

@@ -15,9 +15,13 @@
  * the pure helpers (validate/build/extract/normalize/select) are dependency-free + unit-tested.
  */
 
-const MODEL_DEFAULT = "gemini-2.5-flash";
+import { ACCURATE_MODEL, envModel } from "./_ai_usage.js";
+
+// Image reading stays on ACCURATE_MODEL (gemini-3.5-flash-lite, priced like the old gemini-2.5-flash),
+// never the cheap text default. Every 2.5 model retires on Vertex on 2026-10-16.
+const MODEL_DEFAULT = ACCURATE_MODEL;
 const SCHEMA_VISION = 1, SCHEMA_CLINICAL = 1;
-export function modelId(env) { return (env && (env.FUNDX_MODEL || env.GEMINI_MODEL)) || MODEL_DEFAULT; }
+export function modelId(env) { return envModel(env && env.FUNDX_MODEL, MODEL_DEFAULT); }
 function num(n, d) { n = +n; return Number.isFinite(n) ? n : (d || 0); }
 function clamp(n, lo, hi) { n = +n; if (!Number.isFinite(n)) return lo; return n < lo ? lo : n > hi ? hi : n; }
 function httpErr(status, code, detail) { const e = new Error(code + (detail ? ": " + detail : "")); e.status = status; e.code = code; e.detail = detail || null; return e; }

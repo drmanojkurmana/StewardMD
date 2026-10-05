@@ -1,4 +1,5 @@
-/* ai-router-model.test.mjs - the /refine router uses the answer model, JSON mode and a 512 cap (T42). */
+/* ai-router-model.test.mjs - the /refine router runs on ACCURATE_MODEL (not the cheap answer model, whose
+ * flash-lite tier was measured to parse worse), JSON mode and a 512 cap (T42, 2026-10-05). */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
@@ -20,16 +21,18 @@ async function route(env, q) {
   } finally { globalThis.fetch = real; }
 }
 
-test("router defaults to the configured answer model, in JSON mode, with a 512-token cap", async () => {
+test("router runs on ACCURATE_MODEL whatever the answer model, in JSON mode, with a 512-token cap", async () => {
   const { out, seen } = await route({ GEMINI_MODEL: "gemini-3.5-flash" }, "af rate control options");
   assert.equal(out.primaryConcept, "Atrial fibrillation");
   assert.equal(seen.length, 1);
-  assert.match(seen[0].url, /models\/gemini-3\.5-flash:generateContent/);
+  assert.match(seen[0].url, /models\/gemini-3\.5-flash-lite:generateContent/);
   assert.equal(seen[0].body.generationConfig.responseMimeType, "application/json");
   assert.equal(seen[0].body.generationConfig.maxOutputTokens, 512);
 });
 
-test("MAIK_ROUTER_MODEL still pins the router model", async () => {
-  const { seen } = await route({ GEMINI_MODEL: "gemini-3.5-flash", MAIK_ROUTER_MODEL: "gemini-2.5-flash" }, "dvt prophylaxis in pregnancy");
-  assert.match(seen[0].url, /models\/gemini-2\.5-flash:generateContent/);
+test("MAIK_ROUTER_MODEL still pins the router model; a retiring 2.5 pin is ignored", async () => {
+  const { seen } = await route({ MAIK_ROUTER_MODEL: "gemini-3.6-flash" }, "dvt prophylaxis in pregnancy");
+  assert.match(seen[0].url, /models\/gemini-3\.6-flash:generateContent/);
+  const old = await route({ MAIK_ROUTER_MODEL: "gemini-2.5-flash" }, "heparin bridging before surgery");   // new query: the first is cached
+  assert.match(old.seen[0].url, /models\/gemini-3\.5-flash-lite:generateContent/);
 });
