@@ -222,11 +222,13 @@ test("idem key: sha12 of op plus payload, stable, ignores an existing idem; deck
   assert.notEqual(PC.deckIdFor({ uid: "u2", sha: "s", exam: "neet-pg", profileV: 1 }), id);
 });
 
-test("mix from the profile: counts sum to n", () => {
+test("mix from the profile: weights 0 to 1 that sum to 1", () => {
+  // The server reads weights 0 to 1 (a count map would be a 400 bad-input "mix").
   const m = PC.mixFor(7);
-  assert.deepEqual(m.dl, { 1: 2, 2: 4, 3: 1 });
-  assert.equal(Object.values(m.cog).reduce((a, b) => a + b, 0), 7);
-  assert.equal(Object.values(PC.mixFor(1).dl).reduce((a, b) => a + b, 0), 1);
+  assert.deepEqual(m.dl, { 1: 0.3, 2: 0.5, 3: 0.2 });
+  assert.deepEqual(m.cog, { recall: 0.4, application: 0.4, reasoning: 0.2 });
+  assert.deepEqual(PC.mixFor(3, { d: { 1: 2, 2: 2 }, cog: { recall: 1 } }), { dl: { 1: 0.5, 2: 0.5 }, cog: { recall: 1 } });
+  assert.ok(Object.values(m.dl).every((v) => v >= 0 && v <= 1));
 });
 
 test("cap and cost lines from the server's counters", () => {
@@ -260,6 +262,8 @@ test("every error code maps to a short plain message; both { error } and { reaso
   }
   assert.match(PC.errorMessage(429, { error: "month-decks" }), /10 decks this month/);
   assert.match(PC.errorMessage(429, { reason: "daily-decks" }), /3 decks today/);
+  assert.equal(PC.errorCode(400, { error: "bad-input", reason: "deck-not-started" }), "deck-not-started");
+  assert.equal(PC.canRetry("deck-not-started"), false);
   assert.equal(PC.canRetry("month-decks"), false);
   assert.equal(PC.canRetry("ai-timeout"), true);
   assert.equal(PC.shouldRetry(504, 0), 4000);
@@ -324,6 +328,8 @@ test("server item -> stored item for the runner; card; gates; paragraph; near du
   assert.equal(s.id, "q_abc"); assert.equal(s.a, 0); assert.equal(s.exp, "Dorsal columns"); assert.equal(s.t, "sec-1"); assert.equal(s.d, 3);
   assert.equal(s._s, "deck"); assert.equal(s._m, "deck-gen_a"); assert.equal(s.deckId, "gen_a");
   assert.equal(s.prov, "AI"); assert.equal(s.gen, "AI"); assert.deepEqual(s.ex, ["neet-pg"]);
+  assert.equal(PC.toStored(Object.assign({}, it, { prov: "USR" }), f, "gen_a", ctx).prov, "USR", "the server's prov is kept");
+  assert.equal(PC.toStored(Object.assign({}, it, { prov: "XYZ" }), f, "gen_a", ctx).prov, "USR", "an unknown prov becomes USR");
   assert.deepEqual(s.src, { doc: "abc123abc123", name: "Haematology notes", p: [1], h: "MEGALOBLASTIC ANAEMIA", sn: [7] });
   assert.equal(PC.toStored(Object.assign({}, it, { o: ["a", "b", "c"] }), f, "gen_a", ctx), null);
   assert.equal(PC.toStored(Object.assign({}, it, { a: 4 }), f, "gen_a", ctx), null);
@@ -386,7 +392,7 @@ function freshJob(text, target, extra) {
   return PC.newJob(Object.assign({ m, sents: doc.sents, sections: doc.sections, facts: [], items: [], saved: false, target: target || 10, ctx }, extra || {}));
 }
 // Small chunks so the loop has several sections to pull facts from.
-const SMALL = (s) => { s.chunks = SR.chunkSentences(s.sents, 110); s.order = SR.chunkOrder(s.chunks); return s; };
+const SMALL = (s) => { s.chunks = SR.chunkSentences(s.sents, 130); s.order = SR.chunkOrder(s.chunks); return s; };
 
 test("step loop: facts until 14 unused, mcq x2, solve x2, review x2, regen once (batched), save what passed", async () => {
   const job = SMALL(freshJob());
@@ -422,12 +428,13 @@ test("step loop: the regen request carries the failed facts and their reasons; t
   await PC.runRound(job, { send: (b) => { bodies.push(JSON.parse(JSON.stringify(b))); return srv.send(b); }, store: memStore() });
   const mcq = bodies.filter((b) => b.op === "mcq");
   assert.equal(mcq[0].facts.length, 7);
-  assert.deepEqual(Object.keys(mcq[0].facts[0]).sort(), ["cq", "fi", "fid", "fk", "ft", "h", "p", "sents", "sn"]);
+  assert.deepEqual(Object.keys(mcq[0].facts[0]).sort(), ["cq", "fi", "fid", "fk", "ft", "h", "p", "sents", "sn", "t"]);
+  assert.equal(mcq[0].facts[0].t, "sec-0", "the section id rides along so the server stamps item.t");
   assert.equal(mcq[0].facts[0].sents[0].tx, mcq[0].facts[0].ft);
-  assert.equal(Object.values(mcq[0].mix.dl).reduce((a, b) => a + b, 0), 7);
+  assert.deepEqual(mcq[0].mix.dl, { 1: 0.3, 2: 0.5, 3: 0.2 });
   const regen = mcq[2];
   assert.equal(regen.facts.length, 1);
-  assert.deepEqual(regen.avoid, [{ fi: 0, why: "distractor also right" }]);
+  assert.deepEqual(regen.avoid, { fi: 0, why: "distractor also right" }, "one failed fact: the contract's single avoid object");
   const rv = bodies.find((b) => b.op === "review");
   assert.equal(Object.keys(rv.para).length, rv.q.length);
   bodies.forEach((b) => { assert.equal(b.deckId, "gen_t"); assert.equal(b.exam, "neet-pg"); assert.equal(b.pv, "p1"); assert.equal(b.profileV, 1); });

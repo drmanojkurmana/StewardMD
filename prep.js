@@ -24,7 +24,9 @@
     { id: "usmle", label: "USMLE", branch: "mbbs", tag: "usmle", sec: 90 }
   ];
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 } }; }
+  // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
+  // goal: new questions a day for the daily plan.
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30 }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
@@ -85,9 +87,93 @@
     while (out.length < n && pools.some(function (p) { return p.length; })) { var p = pools[i % pools.length]; if (p.length) out.push(p.pop()); i++; }
     return shuffle(out, rnd);
   }
+  /* ---- Phase 4: adapt ---- */
+  // Target difficulty from the share right: 80% and over -> hard (3), 60% and over -> medium (2), else easy (1);
+  // under 5 attempts -> medium.
+  function targetDifficulty(ms) { if (!ms || (ms.t || 0) < 5) return 2; var acc = ms.ok / ms.t; return acc >= 0.8 ? 3 : acc >= 0.6 ? 2 : 1; }
+  // n unseen items, closest to the target difficulty first (random within a level).
+  function adaptiveNew(pool, cards, dk, target, n, rnd) {
+    var fresh = shuffle(pool.filter(function (it) { return !cards[dk + ":" + it.id]; }), rnd);
+    fresh.sort(function (a, b) { return Math.abs((a.d || 2) - target) - Math.abs((b.d || 2) - target); });
+    return fresh.slice(0, n);
+  }
+  // Modules with at least 5 attempts and under 60% right, weakest first.
+  function weakModules(store, max) {
+    return Object.keys(store.mod).filter(function (m) { var x = store.mod[m]; return x.t >= 5 && x.ok / x.t < 0.6; })
+      .sort(function (a, b) { var x = store.mod[a], y = store.mod[b]; return x.ok / x.t - y.ok / y.t || (a < b ? -1 : 1); }).slice(0, max || 3);
+  }
+  // Today's plan: due reviews by module (most first), weak modules, the new-question goal left today.
+  function planToday(store, today) {
+    var prog = progressByModule(store, today), due = [], total = 0;
+    Object.keys(prog).forEach(function (m) { if (prog[m].due) { due.push({ m: m, n: prog[m].due }); total += prog[m].due; } });
+    due.sort(function (a, b) { return b.n - a.n || (a.m < b.m ? -1 : 1); });
+    var done = store.days[today] || 0, goal = store.goal || 30;
+    return { due: total, dueModules: due, weak: weakModules(store, 3), done: done, goal: goal, left: Math.max(0, goal - done) };
+  }
+  var MISTAKE_TAGS = [["know", "Did not know"], ["misread", "Misread the question"], ["mixed", "Mixed up two options"], ["careless", "Careless slip"]];
+  function mistakeCounts(mt) {
+    var c = { all: 0 }; MISTAKE_TAGS.forEach(function (t) { c[t[0]] = 0; }); c.untagged = 0;
+    Object.keys(mt).forEach(function (id) { c.all++; var t = mt[id][2]; if (t && c[t] != null) c[t]++; else c.untagged++; });
+    return c;
+  }
+
+  /* ---- Phase 5: mock exams. Patterns as published for 2024 to 2026; confirm against the current bulletin. ---- */
+  var MOCKS = {
+    "neet-pg": [{ id: "neet-pg", label: "NEET-PG pattern", n: 200, min: 210, plus: 4, minus: 1 }, { id: "ini-cet", label: "INI-CET pattern", n: 200, min: 180, plus: 1, minus: 1 / 3 }],
+    "neet-ss": [{ id: "neet-ss", label: "NEET-SS pattern", n: 150, min: 150, plus: 4, minus: 1 }],
+    "usmle": [{ id: "usmle-block", label: "USMLE block", n: 40, min: 60, plus: 1, minus: 0 }]
+  };
+  function mockOf(exam, id) { var l = MOCKS[exam] || MOCKS["neet-pg"]; for (var i = 0; i < l.length; i++) if (l[i].id === id) return l[i]; return l[0]; }
+  // Module picks for a mock: up to maxFiles modules, shared across subjects by their question counts (every subject
+  // with questions gets at least one), the biggest modules of each subject first.
+  function mockModules(subjectIndexes, exam, maxFiles, rnd) {
+    var subs = [], total = 0;
+    subjectIndexes.forEach(function (x) {
+      var mods = x.ix.topics.filter(function (t) { return countFor(t, exam) > 0; }).map(function (t) { return { s: x.id, m: t.id, n: countFor(t, exam) }; });
+      var n = mods.reduce(function (a, t) { return a + t.n; }, 0);
+      if (n) { subs.push({ id: x.id, mods: shuffle(mods, rnd), n: n }); total += n; }
+    });
+    // one module per subject first (largest subjects first), then the rest in proportion to question counts
+    var out = [], left = maxFiles;
+    subs.sort(function (a, b) { return b.n - a.n; });
+    subs.forEach(function (sb) { sb.k = left > 0 ? 1 : 0; left -= sb.k; });
+    var spare = left;
+    subs.forEach(function (sb) { var add = Math.min(sb.mods.length - sb.k, Math.floor(spare * sb.n / total), left); if (add > 0) { sb.k += add; left -= add; } });
+    subs.forEach(function (sb) { out = out.concat(sb.mods.slice(0, sb.k)); });
+    return out;
+  }
+  // Marks with the pattern's scheme; unanswered scores 0. bySubject: { s: { n, right, wrong } }.
+  function scoreMock(items, ans, scheme) {
+    var r = { right: 0, wrong: 0, blank: 0, marks: 0, max: items.length * scheme.plus, bySubject: {} };
+    items.forEach(function (it, i) {
+      var b = r.bySubject[it._s] || (r.bySubject[it._s] = { n: 0, right: 0, wrong: 0 });
+      b.n++;
+      if (ans[i] < 0) r.blank++; else if (ans[i] === it.a) { r.right++; b.right++; } else { r.wrong++; b.wrong++; }
+    });
+    r.marks = Math.round((r.right * scheme.plus - r.wrong * scheme.minus) * 100) / 100;
+    return r;
+  }
+  // Best module for a typed topic ("brachial plexus", "lymphoma"): word overlap with module, section and subject
+  // names; ties go to the earlier module. null when nothing matches.
+  function findModule(subjects, query) {
+    var q = String(query || "").toLowerCase().match(/[a-z0-9]+/g) || [], best = null, bestS = 0;
+    if (!q.length) return null;
+    subjects.forEach(function (sb) {
+      sb.sections.forEach(function (sec) {
+        sec.modules.forEach(function (m) {
+          var mt = (m.name.en || "").toLowerCase(), ct = (sec.name.en + " " + sb.name.en).toLowerCase(), sc = 0;
+          q.forEach(function (w) { if (w.length < 3) return; if (new RegExp("\\b" + w).test(mt)) sc += 3; else if (new RegExp("\\b" + w).test(ct)) sc += 1; });
+          if (sc > bestS) { bestS = sc; best = { subject: sb.id, module: m.id }; }
+        });
+      });
+    });
+    return best;
+  }
   function fmtTime(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
   var PURE = { EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime };
+    statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
+    targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
+    MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -241,9 +327,25 @@
     root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus</div>';
     loadTax().then(function () {
       if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
+      else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
+      else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
+      else if (opts && opts.query) openQuery(opts);
       else push(renderHome);
     }, function () { paint(bar("PrepNucleus", "", "close") + '<div class="pn-body"><p class="pn-err" role="alert">PrepNucleus did not load. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="retry">Try again</button></div>'); });
     return true;
+  }
+  // Edge "start_mcq" (e.g. "10 questions on lymphoma"): the best-matching module of the current exam's subjects,
+  // else of any subject; practice (or a timed test with mode "exam") of n questions, at most 50.
+  function openQuery(opts) {
+    var s = load(), hit = findModule(subjectsOf(s.exam), opts.query), all = [];
+    if (!hit) { (st.tax ? st.tax.branches : []).forEach(function (b) { all = all.concat(b.subjects); }); hit = findModule(all, opts.query); }
+    st.stack = [renderHome];
+    if (!hit) { push(renderHome); return toast("No module matches \u201c" + String(opts.query).slice(0, 60) + "\u201d. Pick one from the list."); }
+    loadIndex(hit.subject).then(function () {
+      push(function () { renderSubject(hit.subject); });
+      push(function () { renderModule(hit.subject, hit.module); });
+      startModule(hit.subject, hit.module, opts.mode === "exam" ? "exam" : "study", Math.max(1, Math.min(50, Number(opts.n) || SESSION)));
+    });
   }
   function close() {
     stopTimer();
@@ -263,9 +365,12 @@
     var nb = Object.keys(s.bm).length;
     paint(bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body" id="pnHome">' +
+      planCard(s) +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext" hidden><span>Solve next</span><b id="pnNextT"></b>' + ico("chev") + "</button>" +
       '<div class="pn-cards"><button type="button" class="pn-card" data-act="bookmarks">' + ico("bm") + "<span><b>Bookmarks</b><small>" + fmt(nb) + " saved</small></span></button>" +
       '<button type="button" class="pn-card" data-act="custom">' + ico("plus") + "<span><b>Custom module</b><small>Your own mix and count</small></span></button>" +
+      '<button type="button" class="pn-card" data-act="mistakes">' + ico("x") + "<span><b>My mistakes</b><small>" + fmt(Object.keys(s.mt).length) + " to fix</small></span></button>" +
+      '<button type="button" class="pn-card" data-act="mocks">' + ico("clock") + "<span><b>Mock exam</b><small>Full pattern, marked</small></span></button>" +
       (G.PREP_C ? '<button type="button" class="pn-card pn-card-wide" data-act="c-home">' + ico("dl") + "<span><b>Your decks</b><small>Questions and cards from your PDF or notes</small></span></button>" : "") + "</div>" +
       '<div class="pn-grid" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
       '<p class="pn-note">Questions: MedMCQA (MIT licence), cleaned and sorted into modules; AI-generated questions are labelled. Progress stays on this device.</p></div>');
@@ -332,16 +437,21 @@
       '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>');
     st.cur = { s: sid, m: mid };
   }
-  function startModule(sid, mid, kind) {
-    var s = load();
+  function startModule(sid, mid, kind, n) {
+    var s = load(), size = n || SESSION;
     paint(bar("Loading", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading questions</p></div>');
     loadModule(sid, mid).then(function (items) {
       var pool = poolFor(items, s.exam, hidden()), dk = deckKey(mid), td = today(), list;
-      if (kind === "due") list = pool.filter(function (it) { var c = s.cards[C.key(dk, it.id)]; return c && c[3] <= td; }).slice(0, SESSION);
-      // A timed test is a fresh random draw; practice follows FSRS (due, then new) and, once every question is seen
-      // and none is due, becomes extra practice from the whole module.
-      else if (kind === "exam") list = shuffle(pool.slice()).slice(0, SESSION);
-      else { list = C.buildSession({ id: dk, items: pool }, s, td, { size: SESSION, newCap: SESSION }); if (!list.length) list = shuffle(pool.slice()).slice(0, SESSION); }
+      if (kind === "due") list = pool.filter(function (it) { var c = s.cards[C.key(dk, it.id)]; return c && c[3] <= td; }).slice(0, size);
+      // A timed test is a fresh random draw. Practice: FSRS due reviews first, then unseen questions nearest the
+      // difficulty the student's share right calls for (adaptive); once every question is seen and none is due, a
+      // random set from the whole module.
+      else if (kind === "exam") list = shuffle(pool.slice()).slice(0, size);
+      else {
+        list = C.buildSession({ id: dk, items: pool }, s, td, { size: size, newCap: 0 });
+        list = list.concat(adaptiveNew(pool, s.cards, dk, targetDifficulty(s.mod[mid]), size - list.length));
+        if (!list.length) list = shuffle(pool.slice()).slice(0, size);
+      }
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
@@ -351,9 +461,11 @@
   }
 
   /* ---------- runner ---------- */
-  function runQuestions(items, mode, title) {
+  // opts (mock exams): { limit: seconds, scheme: {plus, minus, label} }.
+  function runQuestions(items, mode, title, opts) {
     var ex = examOf(load().exam);
-    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: mode === "exam" ? items.length * ex.sec : 0 };
+    opts = opts || {};
+    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: mode === "exam" ? (opts.limit || items.length * ex.sec) : 0, scheme: opts.scheme || null };
     st.stack.push(renderRun);
     renderRun();
     if (mode === "exam") startTimer();
@@ -391,6 +503,12 @@
         (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">The source gives no explanation for this question.</p>') +
         (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
+        // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
+        (!ok && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
+        (!ok && !own ? '<div class="pn-mtag" role="group" aria-label="Why did you miss it?"><span class="pn-mut pn-small">Why did you miss it?</span><div class="pn-wrap">' + MISTAKE_TAGS.map(function (t) {
+          var on = (s.mt[it.id] || [])[2] === t[0];
+          return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
+        }).join("") + "</div></div>" : "") +
         '<p class="pn-prov">' + provLine(it) + "</p></section>";
     }
     var nav = r.mode === "exam" ?
@@ -410,6 +528,8 @@
     var ms = s.mod[it._m || it.t] || (s.mod[it._m || it.t] = { t: 0, ok: 0 });
     ms.t++; if (ok) ms.ok++; ms.last = td;
     s.last = { s: it._s, m: it._m || it.t };
+    // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
+    if (it._s !== "deck") { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
     save();
   }
   function answer(k) {
@@ -431,8 +551,8 @@
     var r = st.run, ok = 0, missed = [];
     r.items.forEach(function (it, i) { if (r.ans[i] === it.a) ok++; else missed.push(i); });
     var pct = r.items.length ? Math.round(ok * 100 / r.items.length) : 0;
-    paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body"><section class="pn-panel pn-score">' +
-      '<p class="pn-big">' + ok + " / " + r.items.length + '</p><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>" +
+    paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r) : '<section class="pn-panel pn-score">' +
+      '<p class="pn-big">' + ok + " / " + r.items.length + '</p><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>") +
       (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
         return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 117) + "..." : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
@@ -449,6 +569,119 @@
       }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "The source gives no explanation for this question.") + '</p><p class="pn-prov">' + provLine(it) + "</p></section></div>");
     });
     rerender();
+  }
+
+  /* ---------- Phase 4: today's plan, mistakes, weak areas ---------- */
+  function planCard(s) {
+    var p = planToday(s, today()), pct = p.goal ? Math.min(100, Math.round(p.done * 100 / p.goal)) : 0;
+    return '<section class="pn-plan" aria-label="Today"><div class="pn-plan-h"><b>Today</b><button type="button" class="pn-link" data-act="goal" aria-label="Daily goal ' + p.goal + ' questions, change">Goal ' + p.goal + "</button></div>" +
+      '<span class="pn-prog" aria-hidden="true"><i style="width:' + pct + '%"></i></span><p class="pn-mut pn-small">' + fmt(p.done) + " of " + fmt(p.goal) + " answered today" + (p.due ? " · " + fmt(p.due) + " reviews due" : "") + "</p>" +
+      '<div class="pn-navrow"><button type="button" class="pn-btn pri" data-act="plan"' + (p.due || p.left ? "" : " disabled") + ">" + ico("play") + (p.due ? " Start today's reviews" : " Start today's set") + "</button>" +
+      '<button type="button" class="pn-btn" data-act="weak"' + (p.weak.length || Object.keys(s.mt).length ? "" : " disabled") + ">Fix my weak areas</button></div></section>";
+  }
+  // Items for (subject, module) pairs, each module file once; modules that fail to load are skipped.
+  function loadMany(pairs, onStep) {
+    var done = 0;
+    return Promise.all(pairs.map(function (x) {
+      return loadModule(x.s, x.m).then(function (items) { done++; if (onStep) onStep(done, pairs.length); return { s: x.s, m: x.m, items: items }; }, function () { done++; return { s: x.s, m: x.m, items: [] }; });
+    }));
+  }
+  function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
+  function subjectByCode(code) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { if (sb.code === code) r = sb.id; }); }); return r; }
+  function loadingScreen(title, msg) { paint(bar(title, "", "back") + '<div class="pn-body"><p class="pn-load" role="status" id="pnLoadMsg">' + msg + "</p></div>"); }
+  function stepMsg(d, n) { var el = root && root.querySelector("#pnLoadMsg"); if (el) el.textContent = "Loading questions: " + d + " of " + n + " modules"; }
+  // Today's set: due reviews from the modules with the most due (up to 6 files), then adaptive new questions from
+  // "solve next" to reach the day's goal, 20 at a time.
+  function startPlan() {
+    var s = load(), td = today(), p = planToday(s, td), hid = hidden();
+    st.stack.push(function () {}); loadingScreen("Today", "Loading questions");
+    var pairs = p.dueModules.slice(0, 6).map(function (x) { return { s: subjectOfModule(x.m), m: x.m }; }).filter(function (x) { return x.s; });
+    var nx = solveNext(subjectsOf(s.exam), st.ix, s, td, s.exam);
+    if (nx && !pairs.some(function (x) { return x.m === nx.module; })) pairs.push({ s: nx.subject, m: nx.module });
+    loadMany(pairs, stepMsg).then(function (lists) {
+      var out = [];
+      lists.forEach(function (l) { var dk = deckKey(l.m); poolFor(l.items, s.exam, hid).forEach(function (it) { var c = s.cards[C.key(dk, it.id)]; if (c && c[3] <= td && out.length < SESSION) out.push(it); }); });
+      lists.forEach(function (l) { if (out.length < SESSION && nx && l.m === nx.module) out = out.concat(adaptiveNew(poolFor(l.items, s.exam, hid), s.cards, deckKey(l.m), targetDifficulty(s.mod[l.m]), Math.min(SESSION - out.length, Math.max(p.left, 1)))); });
+      st.stack.pop();
+      if (!out.length) { toast("Nothing due. Open a subject to learn something new."); return rerender(); }
+      runQuestions(out, "study", "Today");
+    });
+  }
+  // Weak areas: up to 10 of the mistakes, then unseen questions at the right level from the 3 weakest modules.
+  function startWeak() {
+    var s = load(), hid = hidden(), weak = weakModules(s, 3), mids = Object.keys(s.mt), pairs = [], seen = {};
+    mids.slice(0, 40).forEach(function (id) { var b = s.mt[id]; if (!seen[b[1]] && pairs.length < 4) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
+    weak.forEach(function (m) { var sid = subjectOfModule(m); if (sid && !seen[m]) { seen[m] = 1; pairs.push({ s: sid, m: m }); } });
+    st.stack.push(function () {}); loadingScreen("Weak areas", "Loading questions");
+    loadMany(pairs, stepMsg).then(function (lists) {
+      var out = [];
+      lists.forEach(function (l) { l.items.forEach(function (it) { if (s.mt[it.id] && usable(it, hid) && out.length < 10) out.push(it); }); });
+      lists.forEach(function (l) { if (weak.indexOf(l.m) >= 0 && out.length < SESSION) out = out.concat(adaptiveNew(poolFor(l.items, s.exam, hid), s.cards, deckKey(l.m), targetDifficulty(s.mod[l.m]), Math.ceil((SESSION - out.length) / 2))); });
+      st.stack.pop();
+      if (!out.length) { toast("No weak areas yet. Keep practising."); return rerender(); }
+      runQuestions(shuffle(out).slice(0, SESSION), "study", "Weak areas");
+    });
+  }
+  var mf = { tag: "all" };
+  function renderMistakes() {
+    var s = load(), c = mistakeCounts(s.mt), ids = Object.keys(s.mt).filter(function (id) { return mf.tag === "all" || (mf.tag === "untagged" ? !s.mt[id][2] : s.mt[id][2] === mf.tag); });
+    ids.sort(function (a, b) { return s.mt[b][3] - s.mt[a][3]; });
+    var chips = [["all", "All"]].concat(MISTAKE_TAGS).concat([["untagged", "Not tagged"]]).map(function (t) {
+      return '<button type="button" class="pn-chip' + (mf.tag === t[0] ? " on" : "") + '" aria-pressed="' + (mf.tag === t[0]) + '" data-act="mfilter" data-v="' + t[0] + '">' + t[1] + " " + (c[t[0]] || 0) + "</button>";
+    }).join("");
+    paint(bar("My mistakes", fmt(c.all) + " to fix", "back") + '<div class="pn-body">' + (c.all ?
+      '<div class="pn-wrap">' + chips + '</div><button type="button" class="pn-btn pri" data-act="mpractice"' + (ids.length ? "" : " disabled") + ">" + ico("play") + " Practise these " + Math.min(ids.length, 50) + "</button>" +
+      '<ul class="pn-mods">' + ids.slice(0, 100).map(function (id) { var b = s.mt[id], t = topicOf(b[0], b[1]); return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + esc(b[4]) + "</b><small>" + (t ? tx(t.title) : esc(b[1])) + (b[2] ? " · " + esc(tagLabel(b[2])) : "") + "</small></span></div></li>"; }).join("") + "</ul>" +
+      '<p class="pn-mut pn-small">A question leaves this list when you answer it right.</p>'
+      : '<p class="pn-empty">No mistakes to fix. Questions you get wrong collect here.</p>') + "</div>");
+    var subs = {}; Object.keys(s.mt).forEach(function (id) { subs[s.mt[id][0]] = 1; }); Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
+  }
+  function tagLabel(t) { for (var i = 0; i < MISTAKE_TAGS.length; i++) if (MISTAKE_TAGS[i][0] === t) return MISTAKE_TAGS[i][1]; return ""; }
+  function practiceMistakes() {
+    var s = load(), hid = hidden(), ids = Object.keys(s.mt).filter(function (id) { return mf.tag === "all" || (mf.tag === "untagged" ? !s.mt[id][2] : s.mt[id][2] === mf.tag); }).slice(0, 50), pairs = [], seen = {};
+    ids.forEach(function (id) { var b = s.mt[id]; if (!seen[b[1]]) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
+    var want = {}; ids.forEach(function (id) { want[id] = 1; });
+    st.stack.push(function () {}); loadingScreen("My mistakes", "Loading questions");
+    loadMany(pairs.slice(0, 12), stepMsg).then(function (lists) {
+      var out = []; lists.forEach(function (l) { l.items.forEach(function (it) { if (want[it.id] && usable(it, hid)) out.push(it); }); });
+      st.stack.pop();
+      if (!out.length) { toast("These questions need a connection to load once."); return rerender(); }
+      runQuestions(shuffle(out), "study", "My mistakes");
+    });
+  }
+
+  /* ---------- Phase 5: mock exams ---------- */
+  function renderMocks() {
+    var s = load(), list = MOCKS[s.exam] || MOCKS["neet-pg"];
+    paint(bar("Mock exam", examOf(s.exam).label, "back") + '<div class="pn-body">' + list.map(function (m) {
+      var mini = Math.min(50, m.n);
+      return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions, " + fmtMin(m.min) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0.</p>" +
+        '<button type="button" class="pn-btn pri" data-act="mock" data-v="' + m.id + '" data-k="full">' + ico("clock") + " Full mock: " + m.n + " questions</button>" +
+        (mini < m.n ? '<button type="button" class="pn-btn" data-act="mock" data-v="' + m.id + '" data-k="mini">' + ico("clock") + " Mini mock: " + mini + " questions, " + fmtMin(Math.round(m.min * mini / m.n)) + "</button>" : "") + "</section>";
+    }).join("") + '<p class="pn-mut pn-small">Questions are drawn across every subject of the exam in proportion to the bank. Patterns follow the published bulletins; check the current one before your exam.</p></div>');
+  }
+  function fmtMin(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + " h" : "") + (h && r ? " " : "") + (r ? r + " min" : ""); }
+  function fmtMark(x) { return Math.abs(x - 1 / 3) < 1e-9 ? "1/3" : String(x); }
+  function startMock(id, kind) {
+    var s = load(), m = mockOf(s.exam, id), n = kind === "mini" ? Math.min(50, m.n) : m.n, subs = subjectsOf(s.exam), hid = hidden();
+    st.stack.push(function () {}); loadingScreen(m.label, "Choosing questions");
+    Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
+      var pairs = mockModules(subs.map(function (sb) { return { id: sb.id, ix: st.ix[sb.id] }; }), s.exam, kind === "mini" ? 12 : 30);
+      return loadMany(pairs, stepMsg);
+    }).then(function (lists) {
+      var list = customDraw(lists.map(function (l) { return poolFor(l.items, s.exam, hid); }), n, 0);
+      st.stack.pop();
+      if (list.length < Math.min(n, 5)) { toast("Not enough questions loaded for a mock. Check the connection and try again."); return rerender(); }
+      runQuestions(list, "exam", m.label + (kind === "mini" ? " (mini)" : ""), { limit: Math.round(m.min * 60 * list.length / m.n), scheme: { plus: m.plus, minus: m.minus, label: m.label } });
+    });
+  }
+  function mockAnalysis(r) {
+    var sc = scoreMock(r.items, r.ans, r.scheme), rows = Object.keys(sc.bySubject).map(function (sid) { var b = sc.bySubject[sid], sb = subjectById(sid); return { sid: sid, name: sb ? tx(sb.name) : esc(sid), n: b.n, right: b.right, wrong: b.wrong, pct: b.n ? Math.round(b.right * 100 / b.n) : 0 }; });
+    rows.sort(function (a, b) { return a.pct - b.pct; });
+    return '<section class="pn-panel pn-score"><p class="pn-big">' + fmtMark(sc.marks) + " / " + sc.max + '</p><p class="pn-mut">' + sc.right + " right · " + sc.wrong + " wrong · " + sc.blank + " unanswered · " + fmtTime(r.secs) + " taken</p></section>" +
+      '<h2 class="pn-sec">By subject, weakest first</h2><ul class="pn-mods">' + rows.map(function (x) {
+        return '<li><button type="button" class="pn-mod" data-act="subject" data-s="' + esc(x.sid) + '"><span class="pn-mb"><b>' + x.name + "</b><small>" + x.right + " of " + x.n + " right · " + x.wrong + ' wrong</small></span><span class="pn-st' + (x.pct >= 70 ? " done" : "") + '">' + x.pct + "%</span></button></li>";
+      }).join("") + "</ul>";
   }
 
   /* ---------- search ---------- */
@@ -619,6 +852,16 @@
     if (a === "retrymissed") { var r2 = st.run, miss = r2.items.filter(function (it, i) { return r2.ans[i] !== it.a; }); st.stack.pop(); return runQuestions(miss, "study", r2.title); }
     if (a === "donerun") { st.run = null; st.stack.pop(); return rerender(); }
     if (a === "bookmarks") return push(renderBookmarks);
+    if (a === "plan") return startPlan();
+    if (a === "weak") return startWeak();
+    if (a === "goal") { var G2 = [20, 30, 50, 100], gi = G2.indexOf(s.goal); s.goal = G2[(gi + 1) % G2.length]; save(); return rerender(); }
+    if (a === "mistakes") { mf.tag = "all"; return push(renderMistakes); }
+    if (a === "mfilter") { mf.tag = v; return rerender(); }
+    if (a === "mpractice") return practiceMistakes();
+    if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
+    if (a === "mocks") return push(renderMocks);
+    if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
+    if (a === "mock") return startMock(v, b.getAttribute("data-k"));
     if (a === "practicebm") return practiceBookmarks();
     if (a === "custom") return push(renderCustom);
     if (a === "cmsub") { if (cm.subs[v]) delete cm.subs[v]; else cm.subs[v] = 1; return rerender(); }

@@ -278,7 +278,7 @@ export function buildFactsPrompt(args) {
 
 /* buildMcqPrompt({ facts, profile, mix, avoid }) where facts = [{ ft, sents: [{ n, tx }] } | { ft, quote }]
  * (at most 7, already scrubbed), profile = an EXAM_PROFILES entry, mix = { dl, cog } (number/string or weight
- * maps), avoid = { fi, why } on a regeneration. Key first, three distractors each wrong for a stated reason. */
+ * maps), avoid = { fi, why } on a regeneration, or an array of them for a batched regeneration (one line each). Key first, three distractors each wrong for a stated reason. */
 export function buildMcqPrompt(args) {
   const a = args || {}, facts = a.facts || [], profile = a.profile || EXAM_PROFILES["neet-pg"];
   const system = [
@@ -294,7 +294,10 @@ export function buildMcqPrompt(args) {
     return "[" + i + "] " + untag(f.ft) + "\n    source: " + src;
   });
   let user = "<facts>\n" + fl.join("\n") + "\n</facts>\n" + mixLine(a.mix, profile);
-  if (a.avoid && Number.isInteger(a.avoid.fi)) user += "\nA previous question on fact [" + a.avoid.fi + "] was rejected: " + untag(a.avoid.why || "failed review") + ". Write a different question on that fact that avoids the problem.";
+  // avoid: one { fi, why }, or (optional, for a batched regeneration) an array of them.
+  (Array.isArray(a.avoid) ? a.avoid : [a.avoid]).forEach((v) => {
+    if (v && Number.isInteger(v.fi)) user += "\nA previous question on fact [" + v.fi + "] was rejected: " + untag(v.why || "failed review") + ". Write a different question on that fact that avoids the problem.";
+  });
   return { op: "mcq", system, user, schema: SCHEMAS.mcq, maxOut: PREP_LIMITS.mcq.maxOut, temperature: PREP_TEMPS.mcq };
 }
 

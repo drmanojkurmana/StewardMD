@@ -4,7 +4,7 @@
  *
  * One op per request, one Gemini call per op, so each request fits the router's 28 s deadline:
  *   facts   { chunk: { i, sents: [{ n, p, h, tx }] } }              -> { facts, dropped, usage }
- *   mcq     { facts: [<= 7 { fid, ft, sn, sents | quote, p, h, t? }], mix?, avoid?, src? }
+ *   mcq     { facts: [<= 7 { fid, ft, sn, sents | quote, p, h, t? }], mix?, avoid? ({ fi, why } or [{ fi, why }]), src? }
  *                                                                   -> { items (6.4, gated, shuffled, rv null), rejected, usage }
  *   solve   { q: [<= 7 { id, q, o[4], a }] }  a stays here; only stem and options reach the model
  *                                                                   -> { solved: [{ id, ok, ot }], usage }
@@ -133,9 +133,19 @@ export function readRequest(body) {
     const mix = readMix(b.mix);
     if (mix === undefined) return bad("mix");
     req.mix = mix;
+    // avoid: { fi, why } (6.0), or an array of them when the phone regenerates several failed facts in one call
+    // (one regeneration batch instead of one call per fact keeps a deck inside the 9.1 call budget).
     if (b.avoid != null) {
-      if (typeof b.avoid !== "object" || !isInt(b.avoid.fi, 0, req.facts.length - 1) || (b.avoid.why != null && !isStr(b.avoid.why, 0, 300))) return bad("avoid");
-      req.avoid = { fi: b.avoid.fi, why: scrub(b.avoid.why || "", 200) };
+      const one = (a) => (a && typeof a === "object" && !Array.isArray(a) && isInt(a.fi, 0, req.facts.length - 1) && (a.why == null || isStr(a.why, 0, 300)) ? { fi: a.fi, why: scrub(a.why || "", 200) } : null);
+      if (Array.isArray(b.avoid)) {
+        if (!b.avoid.length || b.avoid.length > req.facts.length) return bad("avoid");
+        const list = b.avoid.map(one);
+        if (list.some((a) => !a) || new Set(list.map((a) => a.fi)).size !== list.length) return bad("avoid");
+        req.avoid = list;
+      } else {
+        req.avoid = one(b.avoid);
+        if (!req.avoid) return bad("avoid");
+      }
     }
     if (b.src != null) {
       if (typeof b.src !== "object" || (b.src.doc != null && !RE.doc.test(String(b.src.doc))) || (b.src.name != null && !isStr(b.src.name, 0, 200))) return bad("src");

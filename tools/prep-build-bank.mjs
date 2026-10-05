@@ -6,7 +6,8 @@
 // get an empty index here; tools/prep-fill.mjs fills them.
 //
 // RUN
-//   MEDMCQA_DIR=<dir> node tools/prep-build-bank.mjs [--subject <id>] [--out prep/bank/v1]
+//   MEDMCQA_DIR=<dir> node tools/prep-build-bank.mjs [--subject <id>] [--out prep/bank/v1] [--upload]
+//   --upload then runs tools/prep-upload-bank.mjs --yes on the output (wrangler logged in; manifest uploaded last).
 //   Optional first: MEDMCQA_DIR=<dir> python3 tools/prep-embed.py   (module classifier by meaning; without it the
 //   mapping uses keywords only and more items land in "Mixed practice")
 //
@@ -21,10 +22,12 @@
 //     (all)          prep/taxonomy.json                           the tree the app draws (bundled)
 //                    prep/bank/v1/manifest.json                   subjects, counts, bytes
 //                    prep/build/report.json                       per subject and per module counts, shortfall
+//                    vault/plans/prep-bank-<date>.md              the same report for people (plan 5.1)
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
 import { SOURCE as MEDMCQA_SOURCE, FLAG_LEGEND as TOK_FLAGS, cleanText, normKey, buildRepair, cleanExplanation, difficulty, expFlags, IMAGE_REF } from "./tokos-build-mcq.mjs";
 import { buildSearch } from "./tokos-build-mcq-search.mjs";
 
@@ -267,6 +270,17 @@ export function planMoves(subjects, byName, embeds) {
   return { out, into };
 }
 
+// Markdown report (plan 5.1): per subject rows, then per module counts. Pure: report.json in, text out.
+export function reportMarkdown(report, date) {
+  const pct = (a, b) => (b ? Math.round((a * 1000) / b) / 10 : 0) + "%";
+  const L = [`# PrepNucleus bank build ${date}`, "", `MedMCQA rows read ${report.read}; dropped ${Object.entries(report.drop).map(([k, v]) => `${k} ${v}`).join(", ")}; "rt" repairs ${report.repairWords}.`, "",
+    "| Subject | Read | Moved out | Deduped | Kept | Flagged | USMLE | Modules | Under 10 | Under 25 | Below target | Mixed share |", "|---|---|---|---|---|---|---|---|---|---|---|---|"];
+  for (const s of report.subjects) L.push(`| ${s.id} | ${s.read} | ${s.movedOut || 0} | ${(s.removed || 0) + (s.crossDupes || 0)} | ${s.kept} | ${s.flagged || 0} | ${s.usmle || 0} | ${s.modules} | ${s.under10 || 0} | ${s.under25 || 0} | ${s.belowTarget} | ${pct(s.mixed, s.kept)} |`);
+  L.push("", `Layer B shortfall: ${report.shortfall.length} modules, ${report.shortfall.reduce((a, x) => a + x.fill, 0)} questions (prep/fill/shortfall.json).`, "", "## Questions per module");
+  for (const s of report.subjects) if (s.perModule) L.push("", `**${s.id}**: ` + Object.entries(s.perModule).map(([m, n]) => `${m} ${n}`).join(", "));
+  return L.join("\n") + "\n";
+}
+
 // ---------------------------------------------------------------------------------------------------------------------
 // USMLE-style vignette (plan 5.1): age-led or "presents / is brought / complains", at least 25 words.
 const AGE_LEAD = /^\s*(?:a|an)\s+\d{1,3}[- ]?(?:year|yr|month|day|week)s?[- ]old\b/i;
@@ -378,7 +392,7 @@ export function subjectIndex(subject, items) {
     all[it.t] = (all[it.t] || 0) + 1;
     if (it.flags && it.flags.length) { counts.flagged++; continue; }
     counts.total++; counts["d" + it.d]++; per[it.t] = (per[it.t] || 0) + 1;
-    if (it.ex) us[it.t] = (us[it.t] || 0) + 1;
+    if (it.ex && it.ex.indexOf("usmle") >= 0) us[it.t] = (us[it.t] || 0) + 1;   // Layer B items carry ex: [exam]
   }
   const topics = [];
   const row = (id, title, group, size, target) => ({ id, title, group, count: per[id] || 0, all: all[id] || 0, usmle: us[id] || 0, file: `mcq/${id}.json`, size, target, lic: all[id] ? "MIT" : null, cite: all[id] ? "MedMCQA" : null });
@@ -435,7 +449,8 @@ export function main(argv = process.argv.slice(2)) {
     const mods = ix.topics.filter((t) => t.group !== "mixed");
     const below = mods.filter((t) => t.count < t.target);
     manifest.subjects.push({ id: s.id, items: res.items.length, modules: mods.length, bytes, index: sha(fs.readFileSync(path.join(sdir, "index.json"))) });
-    report.subjects.push({ id: s.id, read: items.length, movedOut: s.medmcqa ? (byName.get(s.medmcqa) || []).length - own.length : 0, kept: res.items.length, ...res.stats, modules: mods.length, empty: mods.filter((t) => !t.count).length, belowTarget: below.length, mixed: (ix.topics.find((t) => t.group === "mixed") || {}).count || 0, embed: emb ? emb.model : null, bytes });
+    const perModule = Object.fromEntries(ix.topics.map((t) => [t.id, t.count]));
+    report.subjects.push({ id: s.id, perModule, flagged: ix.counts.flagged, under10: mods.filter((t) => t.count < 10).length, under25: mods.filter((t) => t.count < 25).length, read: items.length, movedOut: s.medmcqa ? (byName.get(s.medmcqa) || []).length - own.length : 0, kept: res.items.length, ...res.stats, modules: mods.length, empty: mods.filter((t) => !t.count).length, belowTarget: below.length, mixed: (ix.topics.find((t) => t.group === "mixed") || {}).count || 0, embed: emb ? emb.model : null, bytes });
     for (const t of below) report.shortfall.push({ subject: s.id, module: t.id, size: t.size, kept: t.count, target: t.target, fill: t.target - t.count });
     console.log(`${s.id.padEnd(28)} read ${String(items.length).padStart(6)} kept ${String(res.items.length).padStart(6)} modules ${String(mods.length).padStart(4)} below target ${String(below.length).padStart(4)} mixed ${String((ix.topics.find((t) => t.group === "mixed") || {}).count || 0).padStart(5)} ${(bytes / 1e6).toFixed(1)} MB`);
   }
@@ -443,6 +458,14 @@ export function main(argv = process.argv.slice(2)) {
   writeJson(path.join(BUILD_DIR, only ? `report-${only}.json` : "report.json"), report);
   fs.mkdirSync(path.join(ROOT, "prep", "fill"), { recursive: true });
   if (!only) writeJson(path.join(ROOT, "prep", "fill", "shortfall.json"), { v: 1, modules: report.shortfall });
+  if (!only) {
+    const date = process.env.PREP_REPORT_DATE || new Date().toISOString().slice(0, 10);
+    fs.writeFileSync(path.join(ROOT, "vault", "plans", `prep-bank-${date}.md`), reportMarkdown(report, date));
+  }
+  if (argv.includes("--upload")) {
+    const up = spawnSync(process.execPath, [path.join(ROOT, "tools", "prep-upload-bank.mjs"), "--dir", path.relative(ROOT, outDir), "--yes"].concat(only ? ["--only", only] : []), { stdio: "inherit" });
+    if (up.status !== 0) { console.error("upload failed"); process.exitCode = 1; }
+  }
   const tot = report.subjects.reduce((a, s) => a + s.kept, 0);
   console.log(`total kept ${tot}; shortfall ${report.shortfall.length} modules, ${report.shortfall.reduce((a, x) => a + x.fill, 0)} questions to fill`);
 }

@@ -1,7 +1,8 @@
 /* edge-router.js — StewardMD Edge, Wave 1: typed, read-only request router (window.SMD_EDGE).
  * ---------------------------------------------------------------------------
  * Flag smd_edge (default ON for all users since 2026-10-04, owner; "0" turns it off). Five read-only workflows (Edge-Master-Plan section 1):
- *   calculator (open, optionally prefilled) · tool/module · KB topic · drug · ICD search.
+ *   calculator (open, optionally prefilled) · tool/module · KB topic · drug · ICD search. Plus PrepNucleus practice
+ *   (kind start_mcq, rules only, flag smd_prep): "10 questions on lymphoma", "show my mistakes" (mcqParse, startMcq).
  *
  * How a request is handled:
  *   1. CANDIDATES (deterministic): existing matchers propose at most 5 options: MEDCALC.find and
@@ -51,6 +52,60 @@
   // Also (test4, 2026-10-04): "<verb>na nahi" ("kholna nahi"), "band / skip karo", Tenglish "oddu" (any
   // -oddu), "aapandi / aapu / aapeyyi" (stop), "vaddhu", "cheyyakandi / cheyyaku".
   var NEGATION = /\b(don'?t|do not|dont|never|no need to|not now|stop|cancel|hold|discontinue)\b|\b(nahi|nahin|nahii|nai|nhi)\s+chahi(y|e)e?\b|\bmat\s+(khol|kholo|kholna|dikha|dikhao|dikhana|karo|kar|chalao|chala|lagao|bhejo|do)\b|\b\w*(vaddu|vadhu|vaddhu|oddu)\b|\b(kholna|dikhana|chalana|karna|bhejna|lagana|dena)\s+(nahi|nahin|nhi|mat)\b|\b(band|skip)\s+(karo|kar\s*do|kardo|kar\s*dijiye|karna|kar)\b|\baap(u|andi|eyyi|eyandi|eyi|ivu|ivandi)\b|\bchey+(akandi|aku|akunda)\b/i;
+  /* PrepNucleus practice (LayerC Phase 4, kind "start_mcq", 0 AI): "10 questions on lymphoma", "quiz me on brachial
+   * plexus", "practice cardiology MCQs", "timed test on renal physiology", "show my mistakes". Rules only, Layer 0.
+   * mcqParse(text) -> { n, topic, mode: "study" | "exam" | "mistakes" } or null; mcqAsk() is the same behind the
+   * PrepNucleus flag (PREP_LOADER.enabled(), smd_prep): flag off, no start_mcq option and the request goes on as before.
+   * A pasted MCQ ("explain this mcq", "which of the following") or a history question ("questions to ask") is not one. */
+  var MCQ_NUMW = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, fifteen: 15, twenty: 20, thirty: 30, forty: 40, fifty: 50, hundred: 100 };
+  var MCQ_NUM = "(\\d{1,3}|one|two|three|four|five|six|seven|eight|nine|ten|fifteen|twenty|thirty|forty|fifty|hundred)";
+  var MCQ_Q = "(?:mcqs?|questions?|qs|qns?|ques)";
+  var MCQ_CUE = new RegExp("\\b(?:mcqs?|quiz(?:zes)?|q\\s*bank|question\\s+bank|prep\\s*nucleus)\\b|\\b(?:quiz|test)\\s+me\\b|\\b(?:mock|timed|practice|practise|grand)\\s+(?:tests?|exams?|papers?)\\b|\\b" +
+    MCQ_NUM + "\\s*-?\\s*(?:[a-z]+\\s+){0,2}" + MCQ_Q + "\\b|\\b(?:practi[cs]e|revise|solve|attempt|give\\s+me|ask\\s+me)\\s+(?:some\\s+|a\\s+few\\s+|few\\s+|more\\s+)?(?:[a-z]+\\s+){0,3}" + MCQ_Q + "\\b", "i");
+  var MCQ_MISTAKES = /\b(?:my\s+(?:mistakes|wrong\s+answers|wrong\s+ones|missed\s+questions|incorrect\s+answers)|(?:practi[cs]e|revise|redo|repeat)\s+(?:the\s+)?(?:mistakes|wrong\s+answers|missed\s+questions)|questions\s+i\s+(?:got\s+wrong|missed|got\s+incorrect))\b/i;
+  var MCQ_NOT = /\b(?:explain|which\s+of\s+the\s+following|this\s+(?:mcq|question)|correct\s+option|answer\s+(?:to|for|of)\s+this)\b|\bquestions?\s+(?:to\s+ask|for\s+the\s+patient|in\s+(?:the\s+)?history)\b|\bhistory\s+taking\b/i;
+  var MCQ_EXAM = /\b(?:timed|mock|grand\s+test|exam\s+mode|tests?)\b/i;
+  // Words that are never the topic: the request's own cue, filler, counts, exam names, Hinglish/Tenglish verbs.
+  var MCQ_FILL = { mcq: 1, mcqs: 1, question: 1, questions: 1, qs: 1, qn: 1, qns: 1, ques: 1, quiz: 1, quizzes: 1, test: 1, tests: 1, exam: 1, exams: 1, paper: 1, papers: 1,
+    timed: 1, mock: 1, grand: 1, practice: 1, practise: 1, revise: 1, revision: 1, solve: 1, attempt: 1, redo: 1, repeat: 1, review: 1, start: 1, begin: 1, take: 1,
+    give: 1, ask: 1, show: 1, open: 1, me: 1, my: 1, i: 1, some: 1, few: 1, more: 1, please: 1, pls: 1, now: 1, lets: 1, let: 1, us: 1, do: 1, set: 1, mode: 1, session: 1,
+    mistakes: 1, mistake: 1, wrong: 1, answers: 1, ones: 1, missed: 1, incorrect: 1, got: 1, prep: 1, nucleus: 1, prepnucleus: 1, bank: 1, qbank: 1, q: 1,
+    neet: 1, pg: 1, ss: 1, inicet: 1, "ini-cet": 1, usmle: 1, fmge: 1, step: 1, can: 1, you: 1, want: 1, need: 1, would: 1, like: 1, to: 1,
+    ke: 1, ki: 1, ka: 1, par: 1, pe: 1, pr: 1, dijiye: 1, karo: 1, karao: 1, chahiye: 1, mujhe: 1, pai: 1, meeda: 1, ivvu: 1, ivvandi: 1, cheyyi: 1 };
+  var MCQ_EDGE = { on: 1, about: 1, of: 1, in: 1, for: 1, the: 1, a: 1, an: 1, from: 1, and: 1, with: 1, regarding: 1, covering: 1, topic: 1, chapter: 1 };
+  function mcqParse(text) {
+    var s = String(text || "");
+    if (!s || s.length > 160 || MCQ_NOT.test(s)) return null;
+    var mistakes = MCQ_MISTAKES.test(s);
+    if (!mistakes && !MCQ_CUE.test(s)) return null;
+    var low = lower(s).replace(/[^a-z0-9\s'-]/g, " ").replace(/'/g, "").replace(/\s+/g, " ").trim();
+    if (low.split(" ").length > 16) return null;
+    var n = null, nm = new RegExp("\\b" + MCQ_NUM + "\\s*-?\\s*(?:[a-z]+\\s+){0,2}" + MCQ_Q + "\\b").exec(low) || new RegExp("\\b(?:test|quiz|mock)\\s+of\\s+" + MCQ_NUM + "\\b").exec(low);
+    if (nm) { var v = MCQ_NUMW[nm[1]] || parseInt(nm[1], 10); if (v >= 1 && v <= 200) n = v; }
+    // The topic: the words after the first "on / about / from / regarding / covering / in / of / for", else the whole
+    // request; cue and filler words dropped anywhere, joining words trimmed from the ends ("diseases of the liver" kept).
+    var pm = /\b(?:on|about|from|regarding|covering|in|of|for)\s+(.+)$/.exec(low);
+    var words = (pm ? pm[1] : low).split(" ").filter(function (w) { return w && !MCQ_FILL[w] && !/^\d+$/.test(w) && !MCQ_NUMW[w]; });
+    while (words.length && MCQ_EDGE[words[0]]) words.shift();
+    while (words.length && MCQ_EDGE[words[words.length - 1]]) words.pop();
+    if (words.length > 6) return null;   // a sentence, not a topic: a quiz request names its topic briefly
+    return { n: n, topic: words.length ? words.join(" ") : null, mode: mistakes ? "mistakes" : MCQ_EXAM.test(low) ? "exam" : "study" };
+  }
+  function prepOn() { try { var PL = G.PREP_LOADER; return !!(PL && PL.enabled && PL.enabled()); } catch (e) { return false; } }
+  function mcqAsk(text) { return prepOn() ? mcqParse(text) : null; }
+  function mcqTitle(m) {
+    var t = m.topic ? " on " + m.topic : "";
+    if (m.mode === "mistakes") return "Your mistakes" + t;
+    return (m.mode === "exam" ? "Timed test" : (m.n ? m.n + " questions" : "Practice questions")) + (m.mode === "exam" && m.n ? " of " + m.n : "") + t;
+  }
+  /* Run a start_mcq result: PrepNucleus opens with { query, n, mode } (prep.js searches module titles for query, picks
+   * the best module and starts). Returns false, and does nothing, when the flag is off or PrepNucleus is missing. */
+  function startMcq(a) {
+    if (!a || a.kind !== "start_mcq" || !prepOn()) return false;
+    var P = G.PREP;
+    if (!P || typeof P.open !== "function") return false;
+    try { return P.open({ query: a.topic || null, n: a.n || null, mode: a.mode || "study" }) !== false; } catch (e) { return false; }
+  }
   // A clinical order ("continue metformin", "titrate ketorolac", "oxaliplatin 1 tab od") is never a
   // navigation request: Edge passes, no card and no model. An order verb counts only with a drug named
   // (SMD_DRUGLINK); a dosing pattern (a number + tab/cap/puff/drop, or a frequency after a number: "500 mg bd")
@@ -63,7 +118,8 @@
     try { var DL = G.SMD_DRUGLINK; return !!(DL && DL.drugsIn && DL.drugsIn(t, { fuzzy: true }).length); } catch (e) { return false; }
   }
   // The pass guard: a negation or a clinical order. Runs before rules and the model.
-  function guarded(text) { var t = String(text || ""); return NEGATION.test(t) || ordered(t); }
+  // A PrepNucleus practice request ("start 10 mcqs on digoxin") names a drug but is no order.
+  function guarded(text) { var t = String(text || ""); return NEGATION.test(t) || (ordered(t) && !mcqAsk(t)); }
   var ICD_CUE = /\b(icd(?:\s*-?\s*1[01])?|icd10|icd11|diagnosis code|code for)\b/i;
   // The Search ICD tool's own name ("navigate to search icd", "icd search kholo"): only a term after
   // "for" / "of" is a lookup ("search icd for sepsis"); the rest is navigation, never an ICD term.
@@ -145,6 +201,9 @@
     var P = G.SMD_CPARAMS, M = G.MEDCALC, S = G.SMD_SEARCH;
     var bare = P && P.stripValues ? P.stripValues(q) : q;
     function add(c) { var k = c.kind + ":" + c.id; if (seen[k] || out.length >= MAX_OPTIONS) return; seen[k] = 1; out.push(c); }
+    // A PrepNucleus practice request is that and nothing else: one exact option, answered by rules.
+    var mq = mcqAsk(q);
+    if (mq) return [{ kind: "start_mcq", id: mq.mode + ":" + (mq.topic || ""), title: mcqTitle(mq), exact: true, mcq: mq }];
 
     // Words that are kept ("s/f", "r-ipi", "phq-2" keep their single letters and digits).
     var pw = norm(bare).split(" ").filter(function (w) { return w && !STOP[w]; });
@@ -300,7 +359,7 @@
   }
 
   // ---- 3. prompt for the fixed tool --------------------------------------------------------
-  var KIND_LABEL = { calculator: "calculator", tool: "open", kb: "reference", drug: "drug", icd: "ICD codes", scheme: "scheme packages" };
+  var KIND_LABEL = { calculator: "calculator", tool: "open", kb: "reference", drug: "drug", icd: "ICD codes", scheme: "scheme packages", start_mcq: "practice questions" };
   var CODE_KIND = { icd: 1, scheme: 1 };
   function promptFor(text, cands) {
     var lines = cands.map(function (c, i) { return (i + 1) + ". " + KIND_LABEL[c.kind] + ": " + c.title; });
@@ -422,6 +481,7 @@
     if (c.pages) r.pages = c.pages;
     if (c.scheme) r.scheme = c.scheme;
     if (c.corrected) r.corrected = c.corrected;
+    if (c.mcq) { r.n = c.mcq.n; r.topic = c.mcq.topic; r.mode = c.mcq.mode; }
     return r;
   }
 
@@ -655,7 +715,7 @@
   }
 
   var API = {
-    route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: guarded, ordered: function (t) { return ordered(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
+    route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, mcqParse: mcqParse, mcqAsk: mcqAsk, startMcq: startMcq, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: guarded, ordered: function (t) { return ordered(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
     needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine,
     engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },

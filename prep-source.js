@@ -7,7 +7,8 @@
    the body (font size from textContent.items[].transform); in notes it is a "#" line, a short ALL CAPS line or a short
    line ending in a colon. Running headers, footers and page numbers that repeat across pages are dropped.
    PDF: pdf.js text layer from the vendored copy (/vendor/pdfjs, the same files icu.js, medlist.js and home.js load),
-   loaded only when a PDF is picked. No CDN. Scanned pages (no text layer) are counted and skipped: OCR is Phase 3b.
+   loaded only when a PDF is picked. No CDN. Scanned or garbled pages are rendered and read by on-device OCR in the
+   app (Phase 3b, readPages below); the web build skips them.
    Caps: 60 pages, 300,000 characters per deck. prepScrub finds and removes emails, phone numbers, Aadhaar-like
    12-digit numbers, hospital ids (MRN, UHID, IP or OP no, reg no, bed or ward with a number) and "patient name"
    to the end of the line, keeping every other number and every newline. Nothing in this file sends anything. */
@@ -75,9 +76,16 @@
     return line.size >= body * 1.15 && line.size - body >= 1 && words(tx) <= 14 && tx.length <= 120 && /[A-Za-z]{2}/.test(tx) && !/[.;,]$/.test(tx);
   }
   // pages [{ p, lines: [{ tx, size }] }] -> the same pages with head flags from font size.
+  // OCR lines carry no font size, so they use the notes rules (short ALL CAPS or colon line).
   function markHeadings(pages) {
     var body = bodySize(pages);
-    return pages.map(function (pg) { return { p: pg.p, lines: pg.lines.map(function (l) { return { tx: l.tx, head: isHeadingBySize(l, body) }; }) }; });
+    return pages.map(function (pg) {
+      return { p: pg.p, ocr: !!pg.ocr, lines: pg.lines.map(function (l) {
+        if (!l.ocr) return { tx: l.tx, head: isHeadingBySize(l, body) };
+        var h = isNoteHeading(l.tx);
+        return { tx: h ? l.tx.replace(/^#{1,6}\s+/, "").replace(/:$/, "") : l.tx, head: h };
+      }) };
+    });
   }
 
   /* ---------- pasted notes ---------- */
@@ -116,7 +124,7 @@
     });
     var min = Math.max(3, Math.ceil(pages.length / 2));
     return pages.map(function (pg) {
-      return { p: pg.p, lines: pg.lines.filter(function (l, i) {
+      return { p: pg.p, ocr: !!pg.ocr, lines: pg.lines.filter(function (l, i) {
         if (!l.tx) return true;
         if (/^(page\s*)?\d{1,4}(\s*(of|\/)\s*\d{1,4})?$/i.test(l.tx.trim())) return false;
         return !(edge(pg, i) && pages.length >= 3 && cnt[key(l.tx)] >= min);
@@ -166,7 +174,8 @@
      before (starts in lower case, or the line before ends in a comma, bracket, slash or hyphen). */
   function buildDoc(pages, opts) {
     opts = opts || {};
-    var sents = [], sections = [], sec = null, para = [];
+    var sents = [], sections = [], sec = null, para = [], ocrP = {};
+    (pages || []).forEach(function (pg) { if (pg.ocr) ocrP[pg.p] = 1; });
     function newSection(title) {
       if (sec && !sec.used) { sec.title = (sec.title ? sec.title + ": " : "") + title; sec.title = sec.title.slice(0, 120); return; }
       sec = { id: "sec-" + sections.length, title: title, used: false };
@@ -188,7 +197,9 @@
         for (var i = 0; i < marks.length && marks[i].at <= s.at; i++) p = marks[i].p;
         hardWrap(s.tx).forEach(function (tx) {
           if (!/[A-Za-z0-9]/.test(tx.replace(/\[removed\]/g, ""))) return;   // nothing left after prepScrub
-          sents.push({ n: sents.length + 1, p: p, h: sec.title, tx: tx, s: sec.id });
+          var sn = { n: sents.length + 1, p: p, h: sec.title, tx: tx, s: sec.id };
+          if (ocrP[p]) sn.o = 1;   // read by on-device OCR (kept on the phone; chunkPayload sends n, p, h, tx only)
+          sents.push(sn);
           sec.used = true;
         });
       });
@@ -204,12 +215,105 @@
       if (opts.lineBreaks) flush();
     });
     flush();
-    return { sents: sents, sections: sections.filter(function (s) { return s.used; }).map(function (s) { return { id: s.id, title: s.title || opts.title || "General" }; }) };
+    return { ocrPages: Object.keys(ocrP).map(Number).sort(function (a, b) { return a - b; }), sents: sents, sections: sections.filter(function (s) { return s.used; }).map(function (s) { return { id: s.id, title: s.title || opts.title || "General" }; }) };
   }
   // Notes keep their line structure (a line ending a sentence ends a paragraph); PDFs join wrapped lines.
   function docFromNotes(text, title) { return buildDoc(notesToPages(text), { title: title, lineBreaks: true }); }
   function docFromPdfPages(pages, title) { return buildDoc(markHeadings(stripRepeats(pages)), { title: title }); }
   function docText(doc) { return doc.sents.map(function (s) { return s.tx; }).join("\n"); }
+
+  /* ---------- scanned pages (Phase 3b): the text layer, or on-device OCR ---------- */
+  /* A page is read by OCR when its text layer gives under 200 characters or more than 10% non-words (LayerC 12).
+     OCR runs on the phone only (Apple Vision on iOS, ML Kit on Android, through native-bridge.js SMD_NATIVE.ocr) and
+     never costs AI tokens. The web build has no OCR (LayerC 2): such a page keeps whatever text layer it has, or is
+     skipped. At most OCR_PAGE_CAP pages a deck are OCR'd, each within OCR_PAGE_MS. */
+  var OCR_PAGE_CAP = 20, OCR_PAGE_MS = 30000, NONWORD_MAX = 0.1, FC = String.fromCharCode;
+  var LETTERS = "A-Za-z0-9" + FC(0xC0) + "-" + FC(0x24F) + FC(0x370) + "-" + FC(0x3FF);
+  var HAS_ALNUM = new RegExp("[" + LETTERS + "]");
+  // A word: letters (Latin, accented, Greek), digits and the joiners medical text uses (B12, PML-RARA, t(15;17),
+  // 1.5, 45mg/m2, 90%, 37.5\u00B0C written as a degree sign).
+  var WORD = new RegExp("^[" + LETTERS + FC(0xB0, 0xB1, 0xB5) + ".,;:()\\[\\]/%+'&=<>*-]+$");
+  var EDGE = /^[("'\[{<]+|[)"'\]}>.,;:!?*]+$/g;
+  // Share of tokens that are not words. Tokens of plain ASCII punctuation only (bullets, dashes) are not counted.
+  function nonWordRatio(text) {
+    var toks = String(text == null ? "" : text).split(/\s+/), n = 0, bad = 0;
+    toks.forEach(function (t) {
+      if (!t || /^[!-\/:-@\[-`{-~]+$/.test(t)) return;
+      n++;
+      var c = t.replace(EDGE, "");
+      if (!c || !HAS_ALNUM.test(c) || !WORD.test(c)) bad++;
+    });
+    return n ? bad / n : 0;
+  }
+  function textChars(lines) { var c = 0; (lines || []).forEach(function (l) { c += String(l.tx || "").replace(/\s+/g, "").length; }); return c; }
+  /* What to do with one page from its text-layer lines: { use: "text" | "ocr" | "skip", why }.
+     why: "" (good text layer), "little-text", "garbled", "no-text" (nothing to read without OCR). */
+  function pageDecision(lines, canOcr) {
+    var chars = textChars(lines), garbled = chars > 0 && nonWordRatio((lines || []).map(function (l) { return l.tx; }).join(" ")) > NONWORD_MAX;
+    if (chars >= SCANNED_CHARS && !garbled) return { use: "text", why: "" };
+    var why = garbled ? "garbled" : chars ? "little-text" : "no-text";
+    if (canOcr) return { use: "ocr", why: why };
+    if (garbled) return { use: "skip", why: "garbled" };
+    return chars ? { use: "text", why: why } : { use: "skip", why: "no-text" };
+  }
+  // SMD_NATIVE.ocr result { text, lines } -> page lines { tx, size: 0, ocr: true }.
+  function ocrToLines(res) {
+    var raw = res && res.lines && res.lines.length ? res.lines : String((res && res.text) || "").split(/\r?\n/);
+    var out = [];
+    raw.forEach(function (l) { var tx = squash(fixText(l)); if (tx) out.push({ tx: tx, size: 0, ocr: true }); });
+    return out;
+  }
+  // OCR wins when the text layer was garbled or OCR read more.
+  function pickOcr(textLines, ocrLines, why) { return ocrLines.length && (why === "garbled" || textChars(ocrLines) > textChars(textLines)); }
+  function withTimeout(p, ms) {
+    return new Promise(function (res, rej) {
+      var t = setTimeout(function () { rej(new Error("ocr-slow")); }, ms);
+      Promise.resolve(p).then(function (v) { clearTimeout(t); res(v); }, function (e) { clearTimeout(t); rej(e); });
+    });
+  }
+  /* readPages(doc, pageList, onPage?, opts?) -> { pages: [{ p, lines, ocr? }], ocrPages, skipped: [{ p, why }], scanned }.
+     doc is a pdf.js document (getPage -> getTextContent). opts.render(page) -> Promise(image data URL) and
+     opts.ocr(dataUrl) -> Promise({ text, lines }) turn OCR on; without both, no page is OCR'd. onPage(done, total,
+     phase) reports progress, phase "text" then "ocr". skipped why: "no-text" | "garbled" | "ocr-cap" | "ocr-failed".
+     scanned lists every page whose text layer was not good enough. */
+  function readPages(doc, pageList, onPage, opts) {
+    opts = opts || {};
+    var canOcr = !!(opts.ocr && opts.render), cap = opts.ocrCap || OCR_PAGE_CAP, ms = opts.ocrMs || OCR_PAGE_MS;
+    var got = {}, i = 0, k = 0, ocrList = [], skipped = [], ocrPages = [], scanned = [];
+    function textPass() {
+      if (i >= pageList.length) return Promise.resolve();
+      var p = pageList[i++];
+      return doc.getPage(p).then(function (page) {
+        return page.getTextContent().then(function (tc) {
+          var lines = itemsToLines(tc.items), d = pageDecision(lines, canOcr);
+          got[p] = { page: page, lines: lines, d: d, use: null };
+          if (d.why) scanned.push(p);
+          if (d.use === "ocr") { if (ocrList.length < cap) ocrList.push(p); else { var d2 = pageDecision(lines, false); got[p].d = d2.use === "skip" ? { use: "skip", why: "ocr-cap" } : d2; } }
+          if (onPage) onPage(i, pageList.length, "text");
+          return textPass();
+        });
+      });
+    }
+    function fallback(p, why) { var d = pageDecision(got[p].lines, false); got[p].d = d.use === "skip" ? { use: "skip", why: why } : d; }
+    function ocrPass() {
+      if (k >= ocrList.length) return Promise.resolve();
+      var p = ocrList[k++], g = got[p];
+      return Promise.resolve().then(function () { return opts.render(g.page); }).then(function (img) { return withTimeout(opts.ocr(img), ms); }).then(function (res) {
+        var ol = ocrToLines(res);
+        if (pickOcr(g.lines, ol, g.d.why)) { g.lines = ol; g.ocr = true; ocrPages.push(p); g.d = { use: "text", why: "" }; }
+        else fallback(p, "ocr-failed");
+      }, function () { fallback(p, "ocr-failed"); }).then(function () { if (onPage) onPage(k, ocrList.length, "ocr"); return ocrPass(); });
+    }
+    return textPass().then(ocrPass).then(function () {
+      var pages = [];
+      pageList.forEach(function (p) {
+        var g = got[p];
+        if (g.d.use === "skip") { skipped.push({ p: p, why: g.d.why }); return; }
+        if (g.lines.length) pages.push(g.ocr ? { p: p, lines: g.lines, ocr: true } : { p: p, lines: g.lines });
+      });
+      return { pages: pages, ocrPages: ocrPages, skipped: skipped, scanned: scanned };
+    });
+  }
 
   /* ---------- pages and caps ---------- */
   function defaultPages(total) { return total <= 1 ? "1" : "1-" + Math.min(total, PAGE_CAP); }
@@ -251,7 +355,7 @@
     maxTok = maxTok || CHUNK_TOK;
     var chunks = [], cur = null;
     (sents || []).forEach(function (s) {
-      var t = estTokens(s.tx);
+      var t = estTokens(s.tx + s.h);   // the server counts text and heading at chars / 4 (6,000 max)
       if (!cur || cur.sec !== s.s || (cur.tok + t > maxTok && cur.sents.length)) { cur = { i: chunks.length, sec: s.s, tok: 0, sents: [] }; chunks.push(cur); }
       cur.sents.push(s); cur.tok += t;
     });
@@ -311,7 +415,9 @@
     isNoteHeading: isNoteHeading, notesToPages: notesToPages, stripRepeats: stripRepeats, splitSentences: splitSentences, buildDoc: buildDoc,
     docFromNotes: docFromNotes, docFromPdfPages: docFromPdfPages, docText: docText, defaultPages: defaultPages, parsePages: parsePages, pageSpan: pageSpan,
     capCheck: capCheck, estTokens: estTokens, chunkSentences: chunkSentences, chunkOrder: chunkOrder, chunkPayload: chunkPayload,
-    scrubFind: scrubFind, prepScrub: prepScrub, scrubSummary: scrubSummary
+    scrubFind: scrubFind, prepScrub: prepScrub, scrubSummary: scrubSummary,
+    OCR_PAGE_CAP: OCR_PAGE_CAP, OCR_PAGE_MS: OCR_PAGE_MS, nonWordRatio: nonWordRatio, textChars: textChars, pageDecision: pageDecision, ocrToLines: ocrToLines,
+    pickOcr: pickOcr, readPages: readPages
   };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -340,27 +446,29 @@
       return lib.getDocument({ data: new Uint8Array(buf) }).promise;
     }).then(function (doc) { return { doc: doc, pages: doc.numPages, name: String(file.name || "Document.pdf") }; });
   }
-  /* The chosen pages -> { pages: [{ p, lines: [{ tx, size }] }], scanned: [page numbers with little or no text] }.
-     onPage(done, total) reports progress. */
-  function readPages(doc, pageList, onPage) {
-    var out = [], scanned = [], i = 0;
-    function next() {
-      if (i >= pageList.length) return Promise.resolve({ pages: out, scanned: scanned });
-      var p = pageList[i++];
-      return doc.getPage(p).then(function (page) { return page.getTextContent(); }).then(function (tc) {
-        var lines = itemsToLines(tc.items), chars = 0;
-        lines.forEach(function (l) { chars += l.tx.length; });
-        if (chars < SCANNED_CHARS) scanned.push(p);
-        if (lines.length) out.push({ p: p, lines: lines });
-        if (onPage) onPage(i, pageList.length);
-        return next();
-      });
-    }
-    return next();
+  // One page -> a JPEG data URL for OCR, about 2,000 px on the long side, on white (a transparent canvas would
+  // encode as black). The canvas is released at once.
+  function renderPage(page) {
+    var vp1 = page.getViewport({ scale: 1 }), scale = Math.min(3, Math.max(1, 2000 / Math.max(vp1.width, vp1.height)));
+    var vp = page.getViewport({ scale: scale }), cv = G.document.createElement("canvas"), cx = cv.getContext("2d");
+    cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+    cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height);
+    return page.render({ canvasContext: cx, viewport: vp }).promise.then(function () { var u = cv.toDataURL("image/jpeg", 0.85); cv.width = 0; cv.height = 0; return u; });
+  }
+  // On-device OCR through native-bridge.js; null on the web build (no SMD_NATIVE there).
+  function nativeOcr() {
+    var N = G.SMD_NATIVE;
+    return N && typeof N.ocr === "function" ? function (img) { return N.ocr(img, { languageCorrection: true }); } : null;
+  }
+  function canOcr() { return !!nativeOcr(); }
+  // The chosen pages of an open PDF, with OCR for scanned pages when the app runs on a phone.
+  function readPdfPages(doc, pageList, onPage) {
+    var ocr = nativeOcr();
+    return readPages(doc, pageList, onPage, ocr ? { ocr: ocr, render: renderPage } : {});
   }
 
   var API = {};
   for (var k in PURE) API[k] = PURE[k];
-  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPages = readPages; API._pure = PURE;
+  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API._pure = PURE;
   G.PREP_SRC = API;
 })(typeof window !== "undefined" ? window : this);

@@ -75,6 +75,13 @@ body.dark .pn-root {
 .pn-root .pn-prog { display: block; width: 100%; height: 4px; border-radius: 2px; background: var(--pn-s2); overflow: hidden; }
 .pn-root .pn-prog i { display: block; height: 100%; background: var(--pn-pri); }
 
+/* ---- today's plan, mistakes ---- */
+.pn-root .pn-plan { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; background: var(--pn-card); border: 1px solid var(--pn-line); }
+.pn-root .pn-plan-h { display: flex; align-items: center; justify-content: space-between; }
+.pn-root .pn-plan-h b { font-size: 16px; }
+.pn-root .pn-mtag { display: flex; flex-direction: column; gap: 6px; padding-top: 4px; }
+.pn-root .pn-mid { font-size: 20px; }
+
 /* ---- module lists ---- */
 .pn-root .pn-mods, .pn-root .pn-missed { display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-mod { width: 100%; display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 10px 14px; border: 1px solid var(--pn-line); border-radius: 14px; background: var(--pn-card); text-align: left; }

@@ -168,3 +168,20 @@ test("rt repair guard: common words stay, dropped rt letters are restored", asyn
   assert.equal(guarded.apply("it is to the head, given po"), "it is to the head, given po");
   assert.equal(guarded.apply("the hea and the aery"), "the heart and the artery");
 });
+
+test("emitted index and module files pass the engine validators; the markdown report renders", async () => {
+  const { createRequire } = await import("node:module");
+  const BANK = createRequire(import.meta.url)("../specialty-bank.js");
+  const vignette = "A 24-year-old man presents after a fall on the outstretched hand with numbness over the lateral three and a half fingers and weakness of thumb opposition; which nerve is injured?";
+  const res = B.buildSubject(SUBJ, [mk("v1", vignette, ["Median nerve", "Ulnar nerve", "Radial nerve", "Axillary nerve"], 0, { exp: "carpal tunnel" }),
+    mk("v2", "First polar body is extruded at the time of", ["Ovulation", "Fertilisation", "Implantation", "Birth"], 0, { exp: "oogenesis" })], new Set(), null);
+  const ix = B.subjectIndex(SUBJ, res.items);
+  assert.deepEqual(BANK.validateIndex(ix), []);
+  const ids = ix.topics.map((t) => t.id);
+  assert.deepEqual(BANK.validateItems(res.items, ids), []);
+  const md = B.reportMarkdown({ read: 10, drop: { imageRef: 1 }, repairWords: 3, shortfall: [{ fill: 5 }], subjects: [{ id: "anatomy", read: 10, kept: 8, mixed: 1, modules: 3, belowTarget: 1, perModule: { "ana-hand": 7 } }] }, "2026-10-05");
+  assert.match(md, /\| anatomy \| 10 \| 0 \| 0 \| 8 \|/);
+  assert.match(md, /12\.5%/);
+  assert.match(md, /ana-hand 7/);
+  assert.doesNotMatch(md, /[\u2013\u2014]/);
+});

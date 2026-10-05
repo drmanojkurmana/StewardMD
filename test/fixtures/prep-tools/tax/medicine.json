@@ -1,0 +1,18 @@
+{
+  "id": "medicine",
+  "code": "med",
+  "branch": "mbbs",
+  "title": "Medicine",
+  "medmcqa": "Medicine",
+  "exams": ["neet-pg", "ini-cet", "usmle"],
+  "sections": [
+    {
+      "id": "med-haem",
+      "title": "Haematology",
+      "modules": [
+        { "id": "med-aml", "title": "Acute myeloid leukaemia", "size": "s", "scope": "acute myeloid leukemia, promyelocytic leukemia, Auer rods, all-trans retinoic acid, disseminated intravascular coagulation" },
+        { "id": "med-cml", "title": "Chronic myeloid leukaemia", "size": "s", "scope": "chronic myeloid leukemia, Philadelphia chromosome, imatinib, BCR-ABL, blast crisis" }
+      ]
+    }
+  ]
+}

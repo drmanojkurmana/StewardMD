@@ -3,7 +3,9 @@
  * opens the overlay, home lists the exam's subjects with MCQ counts; a subject lists sections and numbered modules
  * (an empty module says "Questions coming soon"); practice marks each answer with its explanation and source line and
  * writes FSRS cards; a flagged item and an item on the reported-and-hidden list never show; a report is kept; subject
- * search finds a question and opens it; a bookmark is counted on home; a timed test runs a clock, marks for
+ * search finds a question and opens it; a wrong answer joins My mistakes with its tag and leaves when answered right;
+ * the Today card counts the day and starts a set; a mini mock is marked with the pattern's negative marking and
+ * analysed by subject; PREP.open({ query, n }) (Edge start_mcq) starts the best module; a bookmark is counted on home; a timed test runs a clock, marks for
  * review, submits and marks; the NEET-SS tab shows the SS subject; a module opened once loads again with the bank
  * route blocked after a reload (IndexedDB); back() unwinds to home and closes; the Review Desk "PrepNucleus reports"
  * tab lists reports and Restore sends the owner DELETE (the reports API is answered inside the browser); no request
@@ -107,6 +109,11 @@ try {
       ok(await ev(`return document.querySelector("#smdPrep .pn-prov").textContent;`) === "Source: MedMCQA (MIT licence)", "source line under the explanation");
       ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.right").length === 1;`) === true, "the right option is marked");
       await shot("feedback");
+      const wrong = await ev(`return !!document.querySelector("#smdPrep .pn-fb.no");`);
+      if (wrong) {
+        await click('#smdPrep [data-act=mtag][data-v=misread]');
+        ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")), k=Object.keys(s.mt); return k.length===1 && s.mt[k[0]][2]==="misread";`) === true, "a wrong answer joins My mistakes and takes its tag");
+      } else ok(await ev(`return !document.querySelector("#smdPrep [data-act=mtag]");`) === true, "a right answer offers no mistake tags");
       await click("#smdPrep [data-act=report]");
       ok(await until(`return document.querySelectorAll("#smdPrep [data-act=sendreport]").length === 5;`, 3000), "Report lists the five reasons");
       await click('#smdPrep [data-act=sendreport][data-v=unclear]');
@@ -152,6 +159,45 @@ try {
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 5000), "back() unwinds to home");
   ok(await ev(`return /1 saved/.test(document.querySelector("#smdPrep [data-act=bookmarks]").textContent);`) === true, "home counts the bookmark");
+  const nmt = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`);
+  ok(nmt > 0 && await ev(`return /${nmt} to fix/.test(document.querySelector("#smdPrep [data-act=mistakes]").textContent);`) === true, "home counts the mistakes: " + nmt);
+  ok(await ev(`return /answered today/.test(document.querySelector("#smdPrep .pn-plan").textContent);`) === true, "the Today card shows the day's count");
+  await click("#smdPrep [data-act=goal]");
+  ok(await ev(`return JSON.parse(localStorage.getItem("smd_prep_v1")).goal;`) === 50, "the goal chip steps the daily goal");
+  await click("#smdPrep [data-act=mistakes]");
+  ok(await until(`return document.querySelectorAll("#smdPrep .pn-mods .pn-mod").length === ${nmt};`, 5000), "My mistakes lists them");
+  await click("#smdPrep [data-act=mpractice]");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 8000), "Practise these starts a set of the mistakes");
+  const n0 = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`);
+  await ev(`var it=PREP._st.run.items[0]; var b=document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]'); b.click(); return 1;`);
+  ok(await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`) === n0 - 1, "answering a mistake right takes it off the list");
+  await ev(`PREP.back(); PREP.back(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep [data-act=mocks]");`, 3000);
+  await click("#smdPrep [data-act=mocks]");
+  ok(await until(`return document.querySelectorAll("#smdPrep [data-act=mock]").length === 4;`, 3000), "NEET-PG and INI-CET patterns, full and mini");
+  await click('#smdPrep [data-act=mock][data-v=neet-pg][data-k=mini]');
+  ok(await until(`return !!document.getElementById("pnClock") && document.querySelector("#smdPrep .pn-t h1").textContent === "NEET-PG pattern (mini)";`, 10000), "the mini mock starts with a clock");
+  await ev(`var r=PREP._st.run; r.ans=r.items.map(function(it,i){return i===0?it.a:i===1?(it.a+1)%4:-1;}); return 1;`);
+  await click("#smdPrep [data-act=qgrid]");
+  await click("#smdPrep .pn-qgrid + p + [data-act=submit]");
+  ok(await until(`return document.querySelector("#smdPrep .pn-score .pn-big").textContent.split(" / ")[0] === "3";`, 5000), "marked +4 / -1: one right, one wrong = 3: " + await ev(`return (document.querySelector("#smdPrep .pn-score .pn-big")||{}).textContent;`));
+  ok(await ev(`return !!document.querySelector('#smdPrep .pn-mod[data-act=subject][data-s=anatomy]');`) === true, "the analysis lists subjects, each opening its subject");
+  await click("#smdPrep [data-act=donerun]");
+  await ev(`PREP.back(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep .pn-plan");`, 3000);
+  await ev(`var st=PREP._st.store, k=Object.keys(st.cards).filter(function(x){return x.indexOf("p:ana-gametogenesis:")===0;})[0]; st.cards[k][3]=0; PREP._st.stack[PREP._st.stack.length-1](); return 1;`);
+  await click("#smdPrep [data-act=plan]");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && /Today/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 8000), "Start on the Today card runs a set");
+  await ev(`PREP.close(); PREP.open({ query: "quiz me on brachial plexus", n: 2 }); return 1;`);
+  ok(await until(`var r=PREP._st.run; return !!r && r.items.length===2 && r.items.every(function(it){return it._m==="ana-brachial-plexus";});`, 8000), "PREP.open({ query, n }) starts the best-matching module with n questions");
+  await ev(`PREP.close(); return 1;`);
+  const er = await ev(`var p=SMD_EDGE.mcqParse("quiz me on brachial plexus, 3 questions"); return JSON.stringify(p);`);
+  ok(/brachial plexus/.test(er || ""), "Edge reads \"quiz me on brachial plexus\" as a quiz request: " + er);
+  ok(await ev(`return SMD_EDGE.startMcq({ kind: "start_mcq", n: 3, topic: "brachial plexus", mode: "study", title: "x" });`) === true, "Edge start_mcq opens PrepNucleus while the flag is on");
+  ok(await until(`var r=PREP._st.run; return !!r && r.items.length===3 && r.items[0]._m==="ana-brachial-plexus";`, 8000), "and starts 3 questions of the matching module");
+  ok(await ev(`var o=document.querySelector('#smdPrep .pn-opt[data-k="'+((PREP._st.run.items[0].a+1)%4)+'"]'); o.click(); return !document.querySelector("#smdPrep [data-act=teach]") && !!window.PREP_TEACHER;`) === true, "the offline teacher is loaded but offers nothing on the web (no local model)");
+  await ev(`PREP.close(); PREP.open(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 5000);
   await click('#smdPrep .pn-tab[data-v=neet-ss]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=ss-cardiology]") && !document.querySelector("#smdPrep .pn-tile[data-s=anatomy]");`, 5000), "NEET-SS tab shows the SS subject only");
   await click('#smdPrep .pn-tab[data-v=neet-pg]');

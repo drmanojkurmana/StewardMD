@@ -153,3 +153,51 @@ test("wiring: index.html boots only the loader, at the loader's token; home, bac
 test("app text has no em or en dash", () => {
   for (const f of ["prep.js", "prep-loader.js", "prep.css"]) assert.doesNotMatch(read(f), /[–—]/, f);
 });
+
+test("Phase 4: target difficulty and adaptive new picks", () => {
+  assert.equal(P.targetDifficulty(null), 2);
+  assert.equal(P.targetDifficulty({ t: 10, ok: 9 }), 3);
+  assert.equal(P.targetDifficulty({ t: 10, ok: 6 }), 2);
+  assert.equal(P.targetDifficulty({ t: 10, ok: 3 }), 1);
+  const pool = [item("e1", { d: 1 }), item("e2", { d: 1 }), item("m1", { d: 2 }), item("h1", { d: 3 }), item("h2", { d: 3 })];
+  const cards = { "p:x:h2": [5, 2, 1, 9, 1, 0] };
+  const got = P.adaptiveNew(pool, cards, "p:x", 3, 2, () => 0.5).map((i) => i.id);
+  assert.deepEqual(got, ["h1", "m1"], "unseen only, nearest the target first");
+  assert.deepEqual(P.adaptiveNew(pool, {}, "p:x", 1, 2, () => 0.5).map((i) => i.d), [1, 1]);
+});
+
+test("Phase 4: weak modules, today's plan, mistake counts", () => {
+  const s = P.emptyStore();
+  s.mod = { a: { t: 10, ok: 3 }, b: { t: 10, ok: 5 }, c: { t: 10, ok: 9 }, d: { t: 3, ok: 0 } };
+  assert.deepEqual(P.weakModules(s, 3), ["a", "b"], "under 60% with 5 attempts or more, weakest first");
+  s.cards["p:a:1"] = [5, 2, 1, 10, 1, 0]; s.cards["p:a:2"] = [5, 2, 1, 9, 1, 0]; s.cards["p:c:1"] = [5, 2, 1, 10, 1, 0]; s.cards["p:c:2"] = [5, 2, 1, 99, 1, 0];
+  s.days[10] = 12; s.goal = 30;
+  const p = P.planToday(s, 10);
+  assert.equal(p.due, 3); assert.deepEqual(p.dueModules, [{ m: "a", n: 2 }, { m: "c", n: 1 }]);
+  assert.equal(p.done, 12); assert.equal(p.left, 18); assert.deepEqual(p.weak, ["a", "b"]);
+  s.mt = { q1: ["anatomy", "a", "know", 1, "Q"], q2: ["anatomy", "a", null, 2, "Q"], q3: ["anatomy", "b", "misread", 3, "Q"] };
+  const c = P.mistakeCounts(s.mt);
+  assert.equal(c.all, 3); assert.equal(c.know, 1); assert.equal(c.misread, 1); assert.equal(c.untagged, 1);
+});
+
+test("Phase 5: mock patterns, module picks across subjects, marking with negatives", () => {
+  assert.deepEqual([P.mockOf("neet-pg", "ini-cet").n, P.mockOf("neet-pg", "ini-cet").min], [200, 180]);
+  assert.equal(P.mockOf("usmle").minus, 0);
+  const ix = (id, counts) => ({ id, ix: { topics: counts.map((n, i) => ({ id: id + i, count: n })) } });
+  const picks = P.mockModules([ix("big", [100, 100, 100, 100]), ix("small", [10, 0])], "neet-pg", 4, () => 0.3);
+  assert.ok(picks.some((p) => p.s === "small"), "every subject with questions gets a module");
+  assert.ok(picks.length <= 4); assert.ok(picks.every((p) => p.n > 0));
+  const items = [item("1", { _s: "a" }), item("2", { _s: "a" }), item("3", { _s: "b" }), item("4", { _s: "b" })];
+  const sc = P.scoreMock(items, [0, 1, -1, 0], { plus: 4, minus: 1 });
+  assert.deepEqual([sc.right, sc.wrong, sc.blank, sc.marks, sc.max], [2, 1, 1, 7, 16]);
+  assert.deepEqual(sc.bySubject.a, { n: 2, right: 1, wrong: 1 });
+  assert.equal(P.scoreMock(items, [1, 1, 1, 1], { plus: 1, minus: 1 / 3 }).marks, -1.33);
+});
+
+test("findModule: typed topic to the best module", () => {
+  const subs = [{ id: "anatomy", name: { en: "Anatomy" }, sections: [{ id: "s1", name: { en: "Upper limb" }, modules: [{ id: "ana-hand", name: { en: "Hand" } }, { id: "ana-bp", name: { en: "Brachial plexus" } }] }] },
+    { id: "pathology", name: { en: "Pathology" }, sections: [{ id: "s2", name: { en: "Haematopathology" }, modules: [{ id: "pat-lymphoma", name: { en: "Hodgkin and non-Hodgkin lymphoma" } }] }] }];
+  assert.deepEqual(P.findModule(subs, "10 questions on lymphoma"), { subject: "pathology", module: "pat-lymphoma" });
+  assert.deepEqual(P.findModule(subs, "quiz me on brachial plexus"), { subject: "anatomy", module: "ana-bp" });
+  assert.equal(P.findModule(subs, "astrophysics"), null);
+});

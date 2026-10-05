@@ -41,11 +41,12 @@
     "ai-timeout": "The question writer took too long. Try again.",
     "offline": "No connection. Check the internet and try again.",
     "storage": "The phone storage is full, so the deck could not be saved. Free some space and try again.",
+    "deck-not-started": "The server no longer knows this deck, so it cannot add questions. Make a new deck from the same source.",
     "unknown": "Something went wrong. Try again."
   };
   var BY_STATUS = { 400: "bad-input", 401: "sign-in", 402: "needs-plan", 413: "too-large", 429: "rate", 502: "ai-failed", 504: "ai-timeout" };
   // Codes that end the run for now; "Try again" is offered for the rest.
-  var STOPS = { "sign-in": 1, "needs-plan": 1, "bad-input": 1, "too-large": 1, "circuit-breaker": 1, "daily-calls": 1, "daily-decks": 1, "month-decks": 1, "token-cap": 1 };
+  var STOPS = { "deck-not-started": 1, "sign-in": 1, "needs-plan": 1, "bad-input": 1, "too-large": 1, "circuit-breaker": 1, "daily-calls": 1, "daily-decks": 1, "month-decks": 1, "token-cap": 1 };
   // Codes the manifest records in cost.stopped (6.7).
   var CAP_STOPS = { "token-cap": 1, "month-decks": 1, "daily-decks": 1, "daily-calls": 1, "circuit-breaker": 1 };
   function errorCode(status, body) {
@@ -73,7 +74,15 @@
   function idemKey(op, body) { return DK.sha12(op + JSON.stringify(without(body, "idem"))); }
   function deckIdFor(o) { return "gen_" + DK.sha12([o.uid || "anon", o.sha, o.exam, o.profileV, o.pv || PV, o.model || MODEL].join("|")); }
 
-  /* ---------- requested mix (6.9 profile cog and d shares -> counts for n questions, largest remainder) ---------- */
+  /* ---------- requested mix: the profile's cog and d shares (6.9) as weights 0 to 1 that sum to 1, which is what the
+     server reads (a weight map, or one level). share() turns shares into counts for n questions. ---------- */
+  function weights(w) {
+    var keys = Object.keys(w || {}), tot = 0, out = {};
+    keys.forEach(function (k) { tot += Math.max(0, +w[k] || 0); });
+    if (!tot) return null;
+    keys.forEach(function (k) { var v = Math.max(0, +w[k] || 0) / tot; if (v > 0) out[k] = Math.round(v * 1000) / 1000; });
+    return out;
+  }
   function share(n, w) {
     var keys = Object.keys(w), tot = 0, out = {}, rest = [], used = 0;
     keys.forEach(function (k) { tot += +w[k] || 0; });
@@ -83,7 +92,7 @@
     for (var i = 0; used < n && i < rest.length; i++, used++) out[rest[i].k]++;
     return out;
   }
-  function mixFor(n, prof) { prof = prof || PROFILE; return { dl: share(n, prof.d || PROFILE.d), cog: share(n, prof.cog || PROFILE.cog) }; }
+  function mixFor(n, prof) { prof = prof || PROFILE; return { dl: weights(prof.d || PROFILE.d), cog: weights(prof.cog || PROFILE.cog) }; }
 
   /* ---------- usage, caps and cost lines ---------- */
   function addUsage(cost, u) {
@@ -134,7 +143,10 @@
   }
   // What the mcq op receives for one fact: its local index fi, the fact and its sentences.
   function factPayload(f, fi, byN) {
-    return { fi: fi, fid: f.id, ft: f.ft, cq: f.cq, sn: f.sn, fk: f.fk, p: f.p, h: f.h, sents: f.sn.map(function (n) { var s = byN[n]; return { n: n, tx: s ? s.tx : "" }; }) };
+    var out = { fi: fi, fid: f.id, ft: f.ft, cq: f.cq, sn: f.sn, fk: f.fk, p: f.p, h: f.h };
+    if (/^[a-z0-9-]{1,40}$/.test(String(f.sec || ""))) out.t = f.sec;   // the server stamps it on the item
+    out.sents = f.sn.map(function (n) { var s = byN[n]; return { n: n, tx: s ? s.tx : "" }; });
+    return out;
   }
   // The review paragraph: sentences n-3 .. n+3 around the cited ones, at most about 250 tokens.
   function paraFor(sn, byN) {
@@ -150,6 +162,7 @@
     for (var i = 0; i < k.length; i++) if (g[k[i]] !== true) return false;
     return true;
   }
+  var PROVS = { AI: 1, LIC: 1, SMD: 1, USR: 1, PUB: 1 };
   /* A reviewed item (6.4) -> the stored item for the shared runner, or null when it is not a usable question. */
   function toStored(it, f, deckId, ctx) {
     if (!it || typeof it.q !== "string" || !it.q.trim() || !it.o || it.o.length !== 4) return null;
@@ -163,7 +176,7 @@
       q: it.q, o: it.o.slice(0, 4), a: a, exp: String(it.exp || (r && r[a]) || ""), t: (f && f.sec) || it.t || "sec-0",
       d: it.d === 1 || it.d === 3 ? it.d : 2, r: r, kp: it.kp ? String(it.kp) : "", et: it.et && it.et.length === 4 ? it.et : null, cog: it.cog || null, fid: fid,
       src: { doc: ctx.doc, name: ctx.name, p: f ? f.p : [], h: f ? f.h : "", sn: f ? f.sn : [] },
-      prov: "AI", gen: "AI", ex: [ctx.exam], pv: it.pv || ctx.pv || PV, mv: it.mv || ctx.model || MODEL,
+      prov: PROVS[it.prov] ? it.prov : "USR", gen: "AI", ex: [ctx.exam], pv: it.pv || ctx.pv || PV, mv: it.mv || ctx.model || MODEL,
       rv: it.rv || null, deckId: deckId, _s: "deck", _m: "deck-" + deckId
     };
   }
@@ -249,6 +262,10 @@
   }
   var PHASE = { facts: "Finding the key facts in your source", mcq: "Writing questions", solve: "Checking each answer blind", review: "Reviewing each question", regen: "Rewriting the questions that failed a check", batch: "Writing questions" };
 
+  // The server's code-gate names (mcq "rejected") as the reason handed back in avoid.
+  var GATE_WHY = { g1: "it did not have exactly four options", g2: "the key was repeated as a distractor", g3: "two options were the same",
+    g5: "the key was much longer or shorter than the distractors", g9b: "a number in the key is not in the source", verbatim: "it copied the source word for word",
+    g12: "it repeated another question" };
   function base(job, op) { return { op: op, deckId: job.deckId, exam: job.m.exam, profileV: job.m.profileV, pv: job.m.pv }; }
   function fail(job, b, fid, why) {
     if (b.regen) return;
@@ -279,7 +296,7 @@
     if (op.op === "regen") {
       var take = r.failed.slice(0, BATCH);
       r.failed = r.failed.slice(BATCH);
-      r.batches.push({ fids: take.map(function (x) { return x.fid; }), stage: "mcq", regen: true, items: [], avoid: take.map(function (x, fi) { return { fi: fi, why: x.why }; }) });
+      r.batches.push({ fids: take.map(function (x) { return x.fid; }), stage: "mcq", regen: true, items: [], avoid: take.length === 1 ? { fi: 0, why: take[0].why } : take.map(function (x, fi) { return { fi: fi, why: x.why }; }) });
       m.stats.regenerated += take.length;
       return Promise.resolve();
     }
@@ -321,7 +338,9 @@
           return true;
         });
         m.stats.generated += b.items.length;
-        b.fids.forEach(function (fid) { if (!got[fid]) fail(job, b, fid, "no question passed the format checks"); });
+        var gate = {};
+        (res.rejected || []).forEach(function (x) { if (x && x.fid && !gate[x.fid]) gate[x.fid] = x.gate; });
+        b.fids.forEach(function (fid) { if (!got[fid]) fail(job, b, fid, GATE_WHY[gate[fid]] || "no question passed the format checks"); });
         b.stage = b.items.length ? "solve" : "done";
         return saveDeck(job, store);
       });
@@ -342,7 +361,13 @@
       });
     }
     if (op.op === "review") {
-      body.q = b.items;
+      // The server reads id, q, o, a, r and kp; r goes only when all four reasons are present.
+      body.q = b.items.map(function (it) {
+        var x = { id: it.id, q: it.q, o: it.o, a: it.a };
+        if (it.r && it.r.length === 4 && it.r.every(function (t) { return typeof t === "string" && t.trim(); })) x.r = it.r;
+        if (typeof it.kp === "string") x.kp = it.kp;
+        return x;
+      });
       body.para = {};
       b.items.forEach(function (it) { var f = job.facts[it.fid]; body.para[it.id] = paraFor(f ? f.sn : (it.src && it.src.sn), job.byN); });
       return deps.send(body).then(function (res) {
@@ -387,6 +412,9 @@
     return loop().then(null, function (e) {
       var code = e && e.code ? e.code : e && e.name === "QuotaExceededError" ? "storage" : e && e.status != null ? errorCode(e.status, e.body) : "storage";
       if (CAP_STOPS[code]) { job.stopped = code; job.m.cost.stopped = code; }
+      var eb = e && e.body && typeof e.body === "object" ? e.body : null;
+      if (eb && eb.usage) applyUsage(job, eb, deps);   // a failed AI call is still metered
+      else if (eb && (eb.monthDecks != null || eb.dayDecks != null)) { var c0 = capsFrom(eb, deps.today || dayKey()); job.caps = c0; if (deps.onCaps) deps.onCaps(c0); }
       var after = capsAfterStop(job.caps, code, deps.today || dayKey());
       if (after !== job.caps) { job.caps = after; if (deps.onCaps) deps.onCaps(after); }
       var done = job.saved ? deps.store.putDeck(job.m).then(null, function () {}) : Promise.resolve();

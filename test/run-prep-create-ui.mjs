@@ -8,7 +8,7 @@
  * from the font size and its sentences carry their page; a 429 month-decks shows the plain monthly-limit message and
  * saves nothing; no em or en dash on screen; every button in these screens is at least 44 px tall; no uncaught error.
  *
- * prep-loader.js does not load the Layer C files yet, so this harness injects them after PrepNucleus opens.
+ * prep-loader.js loads the Layer C files on first open; the harness checks the order it lists them in.
  * USAGE: node test/run-prep-create-ui.mjs   (BASE=http://localhost:8998/ for a running server; CHROME, CHROME_PORT, SHOTS=<dir>)
  */
 import { spawn } from "node:child_process";
@@ -155,10 +155,9 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return PREP.isOpen && PREP.isOpen() && !!document.querySelector("#smdPrep .pn-tile");`, 20000), "PrepNucleus opens (fixture bank)");
 
-  // Inject the Layer C files (in the order prep-loader.js should load them), then reopen so home shows Your decks.
-  await ev(`${JSON.stringify(LAYER_C_CSS)}.forEach(function(h){var l=document.createElement("link"); l.rel="stylesheet"; l.href="/"+h+"?v=test"; document.head.appendChild(l);});
-    ${JSON.stringify(LAYER_C_JS)}.forEach(function(s){var e=document.createElement("script"); e.src="/"+s+"?v=test"; e.async=false; document.head.appendChild(e);}); return 1;`);
-  ok(await until(`return !!(window.PREP_SRC && window.PREP_DECKS && window.PREP_CARDS && window.PREP_C);`, 10000), "Layer C scripts load: PREP_SRC, PREP_DECKS, PREP_CARDS, PREP_C");
+  // prep-loader.js loads the Layer C files on first open, after prep.js, in this order.
+  ok(await ev(`return PREP_LOADER.JS.slice(-4).join(",") + "|" + PREP_LOADER.CSS.join(",");`) === LAYER_C_JS.join(",") + "|prep.css," + LAYER_C_CSS.join(","), "prep-loader.js lists the Layer C files in load order");
+  ok(await until(`return !!(window.PREP_SRC && window.PREP_DECKS && window.PREP_CARDS && window.PREP_C && document.querySelector('link[data-prep="prep-create.css"]'));`, 10000), "the loader loaded PREP_SRC, PREP_DECKS, PREP_CARDS, PREP_C and prep-create.css");
   await ev(`PREP_C.cfg.gap = 0; PREP.close(); PREP.open(); window.SMD_AUTH = { currentUser: { uid: "u-test", getIdToken: function () { return Promise.resolve("test-token"); } } }; return 1;`);
   ok(await until(`return !!document.querySelector('#smdPrep [data-act="c-home"]');`, 10000), "home shows the Your decks card");
 

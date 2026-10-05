@@ -7361,6 +7361,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         return true;
       }
       if (er.kind === "scheme" && er.scheme) return maikEdgeSchemeRender(er, question);
+      // PrepNucleus "10 questions on lymphoma" (edge-router.js start_mcq): opens the bank, never a model. startMcq is
+      // false when smd_prep is off, and MaiK then answers as before.
+      if (er.kind === "start_mcq") {
+        if (!(window.SMD_EDGE && SMD_EDGE.startMcq && SMD_EDGE.startMcq(er))) return false;
+        bubble("ai", '<div class="maik-welcome maik-edge">Opening PrepNucleus: <b>' + maikEscH(er.title) + '</b>.</div>'); try { scroll(); } catch (e) {}
+        return true;
+      }
       return false;
     }
     /* Scheme packages (Aarogyasri, PM-JAY ...): codes, names and rates from the govschemes database only,

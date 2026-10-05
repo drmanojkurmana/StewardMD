@@ -397,3 +397,24 @@ test("502 ai-failed on malformed model output for every op", async () => {
   const rec = await post(env, factsBody(deckOf("x1")), { token: "tok-j" });
   assert.equal(rec.status, 502, "a RECITATION block is ai-failed");
 });
+
+test("mcq avoid: one { fi, why } (6.0) or a batched array, each reason reaching the prompt; a bad avoid is 400", async () => {
+  const env = envFor(); reply = () => FACTS_REPLY;
+  const facts = await startDeck(env, "av1", "tok-k");
+  reply = () => JSON.stringify({ q: [Q_GOOD0] });
+  const base = { op: "mcq", deckId: deckOf("av1"), exam: "neet-pg", facts };
+  calls = [];
+  const one = await post(env, Object.assign({ idem: idem(), avoid: { fi: 1, why: "two answers were defensible" } }, base), { token: "tok-k" });
+  assert.equal(one.status, 200, JSON.stringify(one.json));
+  assert.match(calls[0].body.contents[0].parts[0].text, /fact \[1\] was rejected: two answers were defensible/);
+  calls = [];
+  const many = await post(env, Object.assign({ idem: idem(), avoid: [{ fi: 0, why: "a blind check picked a different answer" }, { fi: 2, why: "it copied the source word for word" }] }, base), { token: "tok-k" });
+  assert.equal(many.status, 200, JSON.stringify(many.json));
+  const user = calls[0].body.contents[0].parts[0].text;
+  assert.match(user, /fact \[0\] was rejected: a blind check picked a different answer/);
+  assert.match(user, /fact \[2\] was rejected: it copied the source word for word/);
+  for (const bad of [[], [{ fi: 0 }, { fi: 0 }], [{ fi: 9 }], { fi: "x" }, [{ fi: 0, why: 5 }]]) {
+    const r = await post(env, Object.assign({ idem: idem(), avoid: bad }, base), { token: "tok-k" });
+    assert.equal(r.status, 400, JSON.stringify(bad)); assert.deepEqual([r.json.error, r.json.reason], ["bad-input", "avoid"]);
+  }
+});
