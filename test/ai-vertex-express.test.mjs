@@ -33,7 +33,7 @@ test("VERTEX_API_KEY alone makes Vertex available and primary, on the express pu
     const r = await (await onRequest({ request: explain({ package: pkg }), env: ENV, params: { path: ["explain"] }, waitUntil: () => {} })).json();
     assert.equal(r.text, "VERTEX-OK");
     assert.equal(calls.vertex, 1); assert.equal(calls.dev, 0); assert.equal(calls.token, 0, "no service-account token exchange in key mode");
-    assert.match(calls.vertexUrl, /^https:\/\/aiplatform\.googleapis\.com\/v1\/publishers\/google\/models\/gemini-2\.5-flash:generateContent$/);
+    assert.match(calls.vertexUrl, /^https:\/\/aiplatform\.googleapis\.com\/v1\/publishers\/google\/models\/gemini-3\.1-flash-lite:generateContent$/);   // MODEL_HARD_DEFAULT since 2026-10-05
     assert.equal(calls.vertexHeaders["x-goog-api-key"], "vk-test-key");
     assert.ok(!calls.vertexHeaders.Authorization, "no bearer token in key mode");
     assert.ok(!calls.vertexUrl.includes("vk-test-key"), "the key never appears in the URL");

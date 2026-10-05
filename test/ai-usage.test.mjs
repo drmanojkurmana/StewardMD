@@ -8,6 +8,7 @@ import {
   gateAndCount, globalUsageReport, resolveLimit, limitOverrides, setLimitOverride,
   EMERGENCY_MODES, CHEAP_MODEL, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit,
   getAbuseThreshold, setAbuseThreshold, ABUSE_DEFAULT,
+  ACCURATE_MODEL, MODEL_RETIRES, ALLOWED_MODELS, envModel, allowedModels, isRetired,
 } from "../functions/_ai_usage.js";
 
 // tiny in-memory KV mock (get / get(_,"json") / put / delete)
@@ -45,7 +46,8 @@ test("moduleDailyLimit: default + env override + unlimited", () => {
 
 test("modelRate: known model + fallback + env override", () => {
   assert.deepEqual(modelRate({}, "gemini-2.5-flash"), { in: 0.0288, out: 0.24 });   // $0.30 / $2.50 per 1M at Rs 96
-  assert.deepEqual(modelRate({}, "unknown-model"), { in: 0.0288, out: 0.24 }); // DEFAULT_RATE = 2.5-flash
+  assert.deepEqual(modelRate({}, "unknown-model"), { in: 0.024, out: 0.144 }); // DEFAULT_RATE = 3.1-flash-lite (the default)
+  assert.deepEqual(modelRate({}, "gemini-3.1-flash-lite"), { in: 0.024, out: 0.144 });   // $0.25 / $1.50
   assert.deepEqual(modelRate({ "AI_RATE_GEMINI_3_5_FLASH_IN": "0.01", "AI_RATE_GEMINI_3_5_FLASH_OUT": "0.03" }, "gemini-3.5-flash"), { in: 0.01, out: 0.03 });
 });
 
@@ -63,11 +65,30 @@ test("estCostInr: tokens + image/audio extras + env cost overrides", () => {
 
 test("resolveModel: override (valid) → env → hard default; rejects unknown", () => {
   assert.equal(resolveModel("gemini-3.5-flash", {}), "gemini-3.5-flash");        // admin override wins
-  assert.equal(resolveModel(null, { GEMINI_MODEL: "gemini-2.5-flash-lite" }), "gemini-2.5-flash-lite"); // env
+  assert.equal(resolveModel(null, { GEMINI_MODEL: "gemini-3.5-flash-lite" }), "gemini-3.5-flash-lite"); // env
   assert.equal(resolveModel(null, {}), MODEL_HARD_DEFAULT);                       // hard default
   assert.equal(resolveModel("not-a-real-model", {}), MODEL_HARD_DEFAULT);         // unknown override ignored
   assert.equal(resolveModel("evil'; DROP", { GEMINI_MODEL: "also-bad" }), MODEL_HARD_DEFAULT); // both bad → default
   assert.ok(MODEL_RATES[resolveModel(null, {})]);                                 // default is a priced model
+});
+
+test("Gemini 2.5 retirement (2026-10-16): env never picks a retiring model; the console override may until the date", () => {
+  assert.equal(MODEL_HARD_DEFAULT, "gemini-3.1-flash-lite");
+  assert.equal(CHEAP_MODEL, "gemini-3.1-flash-lite");
+  assert.equal(ACCURATE_MODEL, "gemini-3.5-flash-lite");
+  for (const m of ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-pro"]) {
+    assert.equal(MODEL_RETIRES[m], "2026-10-16", m);
+    assert.equal(ALLOWED_MODELS.indexOf(m), -1, m + " is not an env/STRONG/FAST/SCRIBE choice");
+    assert.equal(envModel(m, "fb"), "fb");
+    assert.equal(resolveModel(null, { GEMINI_MODEL: m }), MODEL_HARD_DEFAULT, "env pinned to " + m + " is ignored");
+  }
+  const before = Date.parse("2026-10-15T23:59:00Z"), after = Date.parse("2026-10-16T00:00:00Z");
+  assert.equal(resolveModel("gemini-2.5-flash", {}, before), "gemini-2.5-flash", "rollback works before the date");
+  assert.equal(resolveModel("gemini-2.5-flash", {}, after), MODEL_HARD_DEFAULT, "and is ignored from the date");
+  assert.ok(allowedModels(before).includes("gemini-2.5-flash") && !allowedModels(after).includes("gemini-2.5-flash"));
+  assert.equal(isRetired("gemini-3.1-flash-lite", after), false);
+  assert.equal(envModel("  gemini-3.6-flash ", null), "gemini-3.6-flash");
+  assert.equal(envModel("gemini-flash-latest", "fb"), "fb", "an unpriced model is never used");
 });
 
 test("buildUsageRecord: normalized metadata, NO prompt/PHI fields, clamps + status", () => {
