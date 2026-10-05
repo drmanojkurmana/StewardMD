@@ -1,6 +1,6 @@
 ---
 tags: [plan, learning, ai, cost]
-status: proposed (2026-10-05, revision 6), builds on the owner's "PrepNucleus" spec (Document_8.docx). Nothing built yet. Layer C contract in full: `git show a76272a0:vault/plans/PrepNucleus.md` (sections 6 to 8), summarised in section 7 here.
+status: proposed (2026-10-05, revision 7), builds on the owner's "PrepNucleus" spec (Document_8.docx). Nothing built yet. Layer C contract in full: [[PrepNucleus-LayerC]] (`vault/plans/PrepNucleus-LayerC.md`, frozen from commit `c3f3725c`), summarised in section 7 here.
 owner-goal: "Make 100+ questions for each topic on default. Over all branches, specialties and sub specialties by default. Who wants MCQs from a specific PDF may use this feature." Earlier: "best, easy, cheap".
 flag: smd_prep (planned, default OFF)
 ---
@@ -45,7 +45,7 @@ licence-clean source exists at subspecialty depth, the topic stays below 100 rat
 model memory (decision 4).
 
 ### Layer C: PDF -> deck (Phases 5 to 6, optional, paid per deck)
-Pasted text and digital PDF first, scanned PDF after. Design of revisions 2 to 4 unchanged (section 7, 9.2, 9.3; full text at a76272a0).
+Pasted text and digital PDF first, scanned PDF after. Design of revisions 2 to 4 unchanged (section 7, 9.2, 9.3; full text in [[PrepNucleus-LayerC]]).
 
 ### Non-goals for v1
 No per-session AI (mastery, plan, adaptive difficulty, mistake tags are code over FSRS state); no semantic
@@ -95,7 +95,7 @@ Review Desk: kind "prep", stratified sample,
 | Tools | `tools/prep-screen-keys.mjs` | Layer A Batch blind-solve screen of every item; writes `disputed` flags (6.2) |
 | Tools | `tools/prep-fill.mjs` | Layer B batch driver: shortfall list, source packs, four Batch stages with files between them (6.3), gates, sample export |
 | Tools | `tools/prep-measure.mjs` | Phase 0 harness |
-| Server | `functions/api/prep/bank/[[path]].js` | Proxies `prep-bank.stewardmd.in` (R2 custom domain, as `ophthalmos-img.stewardmd.in` does for images) with immutable cache headers; the native app may only call `stewardmd.in/api/*` |
+| Server | `functions/api/prep/bank/[[path]].js` | The ONE bank serving path: reads bucket `stewardmd-prep-bank` through a new R2 binding `PREP_BANK_R2` in `wrangler.toml` (today only `FOLLOWCARE_R2` exists) and returns it with immutable cache headers; the native app only calls `stewardmd.in/api/*` |
 | Server | `functions/api/prep/flag.js` | `POST { itemId, topic, reason }`: student flags on shared items land in KV `prep:flag:<itemId>` and a Review Desk queue (the engine's flags are phone-local today, `store.flags`) |
 | Server | `functions/api/ai/_prep-generate.js`, `[[path]].js`, `_ai_usage.js`, `_usage.js` | Layer C ops and metering (revision 4 design) |
 | Client | `prep.js`, `prep-loader.js`, `prep-bank.js` (taxonomy browser, subject download), `prep-cards.js`, `prep-create.js`, `prep-source.js`, `prep-decks.js`, `prep.css` | Host, browsing, cards, Layer C UI |
@@ -152,8 +152,11 @@ Review Desk: kind "prep", stratified sample,
   licence line; (b) a **Batch blind-solve screen of every item** (`tools/prep-screen-keys.mjs`): stem and
   options only, about 150 input and 15 output tokens per item, 170k items = 25M in + 2.5M out at Batch price =
   about $5.1 (Rs 490; Rs 530 with margin). Disagreements get a `disputed` flag and are excluded like the
-  other flags until a doctor clears them (expected several percent; the Phase 0 seeded-key test says how much
-  to trust the solver). The disputed list is the Review Desk queue for Layer A.
+  other flags (expected several percent; the Phase 0 seeded-key test says how much to trust the solver).
+  Disputed items stay **excluded by default; they are not a queue to clear**: 5k to 15k items at 2 minutes
+  would be 170 to 500 doctor-hours. A doctor may clear one when a student flag or a topic shortfall makes it
+  worth it. Exclusions can push topics below 100, so the Layer B shortfall is recomputed after the screen.
+  The doctor sample in (a) is drawn from items that pass the screen, since those are what ships.
 - Shipped as LICENSED, keys from the source, every flagged or disputed item excluded until cleared. `exp`
   (scrubbed) shown as the explanation; no `r`/`kp`.
 - Ophthalmology: rebuilt from MedMCQA by the same tool (gives it the missing `licence`/`citation` and flags); the
@@ -186,7 +189,7 @@ Review Desk: kind "prep", stratified sample,
 - Output per topic: `prep/fill/<topic>.json` (items with `prov: "SMD"`, `gen: "AI"`, `rv`), plus a stratified
   sample for Review Desk. Items are **invisible until the specialty's go-live switch** is set after 8.1.
 
-## 7. Contracts (revision 4 text is authoritative: `git show a76272a0:vault/plans/PrepNucleus.md` sections 6 to 8)
+## 7. Contracts ([[PrepNucleus-LayerC]] sections 6 to 8 are authoritative)
 Layer B uses exactly these gates and schemas; only the transport (Batch files) and the source differ.
 - Request protocol, Layer C: `POST /api/ai/prep-generate` with `op: facts | mcq | solve | review`, one Gemini
   call per HTTP call (28 s deadline), `idem` key with a 10-minute stored response, the phone retries a 504
@@ -273,7 +276,7 @@ The AI bill is small; **doctor time is the cost** (8.1). Re-running a specialty 
 10 about $0.015. A 60-page deck runs 125k to 165k tokens. Study, exam, cards, bank: $0.
 
 ### 9.3 Runtime caps (Layer C only; defaults are proposals, decision 7)
-Calls per day 150 (`AI_MODULES.prep.daily`, one record per call); decks per day 5; tokens per month Free 200k /
+Calls per day 160 (`AI_MODULES.prep.daily`, one record per call; 5 decks at up to 31 calls); decks per day 5; tokens per month Free 200k /
 Trainee 1M (about 8 decks, Rs 50) / Pro 3M (`prep:tok:<uid>:<month>`); tokens per deck 200k; pages per deck 60;
 `maxOutputTokens` 1,536 / 3,000 / 400 / 800; project breaker fed by `addDailyCostInr`. Layer A and B cost the
 student nothing and have no caps.
@@ -292,7 +295,7 @@ student nothing and have no caps.
 - Hosting: **R2, not git** (decision 6). A rebuild is about 40 MB compressed; committing each one grows the
   repo history by that much every time, which the Ophthalmós module already hit and solved with R2
   (`stewardmd-ophthalmos-img`, custom domain, `wrangler r2 object put` per file). Bucket `stewardmd-prep-bank`,
-  domain `prep-bank.stewardmd.in`, uploaded by the build tool with a version prefix; the repo keeps the
+  read only through the `PREP_BANK_R2` binding (no public domain), uploaded by the build tool with a version prefix; the repo keeps the
   taxonomy, the build tool, the counts report and the sample files, not the items.
 
 ## 10. Offline and Edge roles
@@ -332,7 +335,7 @@ student nothing and have no caps.
 | Thinking billed or Batch slower than expected | Phase 0 runs Batch too; `finishReason` and `thoughtsTokenCount` logged |
 | Reviewer rubber-stamps | Blind solve, gate fields, seeded wrong keys in Phase 0, graded sample |
 | Bank too big for the app or the repo | Not bundled, not committed: R2 with versioned immutable paths; per-subject indexes, on-demand topics, offline download per subject |
-| Native app may only call `/api/*` | Bank served through `functions/api/prep/bank/[[path]].js` or the R2 custom domain, as Ophthalmós images are |
+| Native app may only call `/api/*` | Bank served only through `functions/api/prep/bank/[[path]].js` over the `PREP_BANK_R2` binding |
 | 3.1 Flash-Lite retired or repriced | `PREP_MODEL`, `MODEL_RATES`, `pv`/`mv` per item; a topic is reproducible from its source pack |
 | Layer C abuse | Caps in 9.3, breaker, `ai:emergency` pause |
 | Students paste patient notes (Layer C) | `prepScrub`, client warning, no server storage |
@@ -356,7 +359,7 @@ student nothing and have no caps.
 - OBGYN explanations: 2,967 of 7,526 match a textbook-reference pattern, 1,190 carry a page locator (regex count this session). `vault/decisions/Decisions.md:688` "2026-09-24 · No textbooks named as sources, no page numbers (copyright)".
 - `specialty-bank.js` flags are phone-local (`st.store.flags`); no server flag endpoint exists.
 - `specialty-shell.js` `getJSON` fetches `BASE + path`; `scripts/build-www.sh` copies `ophthalmos/decks` into `www/`; `wrangler.toml` has one R2 binding (`FOLLOWCARE_R2`); `vault/modules/Ophthalmós.md`: images on R2 `stewardmd-ophthalmos-img` with custom domain `ophthalmos-img.stewardmd.in`, uploaded per file with immutable cache headers.
-- Commit `a76272a0` holds the revision 4 plan with the full Layer C contract (gate 9b, solve with `a`, Vertex-only, fail-closed cap, `fid`, 4 s retry, source-as-data).
+- `vault/plans/PrepNucleus-LayerC.md` (frozen from commit `c3f3725c`) holds the full Layer C contract (gate 9b, solve with `a`, Vertex-only, fail-closed cap, `fid`, 4 s retry, source-as-data, 160 calls a day).
 - `functions/_ai_usage.js`: `MODEL_RATES`, `gateAndCount` deferred `q.commit = rec` (no arguments, line 544), `realCostInr` reads `maik.cost` (579); `functions/_usage.js`: `checkQuota` breaker and 3 s rate limit, `addDailyCostInr` private, `recordUsage` MaiK rates; `functions/_counters.js` `bump(env, day, incs)`; `functions/_entitlements.js` `ROLES` (no `doctor`); `wrangler.toml` `AI_COST_CAP_ON` unset.
 - `functions/api/ai/[[path]].js`: `aiDeadlineMs` 28,000, `deferRecord` only for `explain` (1698), `providerOrder` from `AI_PROVIDER`, `genBody` without `responseSchema` or `labels`.
 - `specialty-bank.js`: `validateIndex`, three `I.getJSON` points, `EXAM_N`/`EXAM_SEC`, `srcLine`; `specialty-core.js` `gradeFor`; engine features bank/explore/learn/notes/tools/drills (no cards).
