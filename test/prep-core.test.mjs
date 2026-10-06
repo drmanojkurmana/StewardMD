@@ -86,7 +86,7 @@ test("parseModelJson: plain, fenced, wrapped in prose; null on truncation or arr
 
 test("schemas: Gemini form, short keys, exact counts", () => {
   assert.equal(C.SCHEMAS.facts.type, "OBJECT");
-  assert.deepEqual(C.SCHEMAS.facts.properties.f.items.required, ["ft", "cq", "sn", "fk"]);
+  assert.deepEqual(C.SCHEMAS.facts.properties.fs.items.required, ["ft", "cq", "sn", "fk"]);
   const dis = C.SCHEMAS.mcq.properties.q.items.properties.dis;
   assert.equal(dis.minItems, 3); assert.equal(dis.maxItems, 3);
   assert.deepEqual(C.SCHEMAS.mcq.properties.q.items.propertyOrdering.slice(0, 3), ["st", "key", "dis"], "key is written before the distractors");
@@ -122,6 +122,7 @@ test("buildSolvePrompt: identical whatever the key; never carries reasons, pearl
 
 test("sanitizers whitelist fields and reject the wrong shape", () => {
   assert.equal(C.sanitizeFacts({ q: [] }), null);
+  assert.deepEqual(C.sanitizeFacts({ fs: [{ ft: "x", cq: "y", sn: [1], fk: "dx" }] }), [{ ft: "x", cq: "y", sn: [1], fk: "dx" }]);
   const f = C.sanitizeFacts({ f: [{ ft: " A fact ", cq: "Q?", sn: [3, "4", 5], fk: "nonsense", evil: "<script>" }, { ft: "", cq: "x", sn: [1] }] });
   assert.deepEqual(f, [{ ft: "A fact", cq: "Q?", sn: [3, 4], fk: "recall" }]);
   assert.equal(C.sanitizeMcq({ f: [] }, 3), null);
