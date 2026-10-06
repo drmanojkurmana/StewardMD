@@ -43,13 +43,13 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | AS5.4 | as5-la-pharmacology | tool:la-maxdose, drill:last | yes |
 | AS5.5 | as5-caudal |  |  |
 | AS5.6 | as5-peripheral-blocks, asr2-brachial-plexus-above-clavicle, asr2-femoral-fascia-iliaca |  |  |
-| AS6.1 | as6-recovery-monitoring, as6-airway-breathing, as6-circulation-discharge | tool:apfel |  |
+| AS6.1 | as6-recovery-monitoring, as6-airway-breathing, as6-circulation-discharge | clinic:monitor, tool:apfel |  |
 | AS6.2 | as6-crash-cart |  |  |
 | AS6.3 | as6-airway-breathing, as6-ponv-pain-temperature, as6-circulation-discharge | tool:apfel, drill:laryngospasm |  |
 | AS7.1 | as7-icu-functions |  |  |
 | AS7.2 | as7-admission-discharge |  |  |
 | AS7.3 | as7-unconscious-patient, asr6-tbi | explorer:ventilator, tool:pf-ratio |  |
-| AS7.4 | as7-oxygen-therapy, as7-ventilator-setup, asr7-ventilation-modes |  |  |
+| AS7.4 | as7-ventilator-setup, asr7-ventilation-modes |  |  |
 | AS7.5 | as7-admission-discharge, as7-oxygen-therapy, as7-icu-monitoring |  |  |
 | AS8.1 | as8-pain-pathway |  |  |
 | AS8.2 | as8-pain-assessment, as8-acute-postoperative-pain |  |  |
@@ -64,8 +64,8 @@ A competency counts as taught when a lesson lists it in `competencies`, a shippe
 | AS10.2 | as10-perioperative-hazards, as10-safety-checklist, asr8-safety |  | yes |
 | AS10.3 | as10-safety-checklist, as10-communication, asr8-crm |  | yes |
 | AS10.4 | as10-medication-errors, asr8-safety | drill:mh, drill:anaphylaxis |  |
-| AS11.1 | as11-oxygen-devices | explorer:odc | yes |
-| AS11.2 | as11-oxygen-therapy | explorer:odc |  |
+| AS11.1 | as7-oxygen-therapy, as11-oxygen-devices | explorer:odc | yes |
+| AS11.2 | as7-oxygen-therapy, as11-oxygen-therapy | explorer:odc |  |
 | AS11.3 | as11-opening-airway |  | yes |
 | AS11.4 | as11-opa-npa |  | yes |
 | AS11.5 | as11-advanced-airway-bvm, as11-intubation-lma | drill:cico | yes |

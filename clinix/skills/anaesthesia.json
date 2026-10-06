@@ -133,7 +133,7 @@
         { "text": "Mallampati class: patient sitting upright, head neutral, mouth open fully, tongue out as far as possible, without saying 'aah'. Look from eye level with a torch." },
         { "text": "Grade it: class I soft palate, fauces, uvula and pillars seen; class II soft palate, fauces and uvula; class III soft palate and base of the uvula; class IV soft palate not seen." }
       ],
-      "normal": "Mouth opening of three fingerbreadths or more, sound teeth, and Mallampati class I or II.",
+      "normal": "Mouth opening of 3 cm or more, sound teeth, and Mallampati class I or II.",
       "abnormal": "Mouth opening under 3 cm, loose or prominent teeth, or Mallampati class III or IV.",
       "significance": "Each finding raises the chance of difficult laryngoscopy; together they raise it more. A predicted difficult airway is discussed with a senior and planned for in advance.",
       "practice": "Grade the Mallampati class on five partners, both with and without phonation, and see how saying 'aah' changes the class.",
@@ -146,7 +146,7 @@
       "probes": [
         { "level": 1, "q": "Describe the four Mallampati classes.", "a": "Class I soft palate, fauces, uvula and pillars visible; class II soft palate, fauces and uvula; class III soft palate and base of uvula; class IV soft palate not visible.", "accept": ["soft palate", "fauces", "uvula", "pillars", "base", "not visible"], "minMatch": 4 },
         { "level": 2, "q": "How is the Mallampati test done correctly?", "a": "Sitting upright, head neutral, mouth fully open, tongue fully out, without phonation, viewed at eye level.", "accept": ["sitting", "neutral", "tongue", "without phonation", "phonation", "eye level"], "minMatch": 3 },
-        { "level": 3, "q": "What mouth opening suggests a difficult airway?", "a": "An interincisor gap of less than 3 cm, roughly less than two fingerbreadths.", "accept": ["3", "cm", "fingerbreadths", "interincisor"], "minMatch": 2 }
+        { "level": 3, "q": "What mouth opening suggests a difficult airway?", "a": "An interincisor gap of less than 3 cm.", "accept": ["3", "cm", "fingerbreadths", "interincisor"], "minMatch": 2 }
       ],
       "rubric": [
         { "id": "inspect", "text": "Inspects face and neck for beard, obesity, small jaw, prominent teeth, masses or radiotherapy" },

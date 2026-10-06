@@ -78,7 +78,7 @@ test("the Learn index builder accepts these units without errors", () => {
 test("every NMC competency AS6.1 to AS10.4 is taught by at least one lesson", () => {
   const taught = new Set(lessons.flatMap((l) => l.competencies));
   NMC.forEach((c) => assert.ok(taught.has(c), c + " has no lesson"));
-  lessons.forEach((l) => l.competencies.forEach((c) => assert.ok(NMC.includes(c), l.id + " lists " + c + " outside AS6 to AS10")));
+  lessons.forEach((l) => l.competencies.forEach((c) => assert.ok(NMC.includes(c) || /^AS11\./.test(c), l.id + " lists " + c + " outside AS6 to AS11")));
 });
 
 test("lessons: unit, review, minutes, checks, sources, hotspots, test links", () => {
