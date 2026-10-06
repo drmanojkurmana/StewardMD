@@ -238,6 +238,8 @@ rm -rf "$WWW/tokos/learn/units" "$WWW/tokos/learn/media"/credits-*.json "$WWW/to
 # build-tool outputs, never shipped.
 if [ -f prep/taxonomy.json ]; then
   mkdir -p "$WWW/prep" && cp prep/taxonomy.json "$WWW/prep/"
+  # Public accuracy numbers (tools/prep-accuracy.mjs; PrepSocial.openAccuracy() reads it), a few KB.
+  [ -f prep/accuracy.json ] && cp prep/accuracy.json "$WWW/prep/"
   [ -d prep/profiles ] && mkdir -p "$WWW/prep/profiles" && cp prep/profiles/*.json "$WWW/prep/profiles/"
   for ix in prep/bank/v1/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.

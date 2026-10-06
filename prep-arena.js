@@ -141,7 +141,8 @@
   /* ================= browser ================= */
   var API = G.SMD_PREP_ARENA_API || "/api/prep/arena/";
   var WS = G.SMD_PREP_ARENA_WS || "wss://prep-arena.drmanojkurmana.workers.dev";
-  var A = { consent: null, events: null, evAt: 0, cd: 0, sheet: null, battle: null, ws: null, bTimer: 0, board: "event", ev: null };
+  // room: a private battle code (a friend challenge from prep-social.js); null is public matchmaking.
+  var A = { consent: null, events: null, evAt: 0, cd: 0, sheet: null, battle: null, ws: null, bTimer: 0, board: "event", ev: null, room: null };
   var H = null;
 
   function on() { try { return enabled(G.location.search, function (k) { return G.localStorage.getItem(k); }); } catch (e) { return false; } }
@@ -245,10 +246,10 @@
     }, function (e) { btn.disabled = false; btn.textContent = "Join Arena"; H.toast(errText(e)); });
   }
   function leaveArena() {
-    if (G.confirm && !G.confirm("Leave the Arena? Your Arena results and leaderboard places are deleted. Practice on this phone is kept.")) return;
+    if (G.confirm && !G.confirm("Leave the Arena? Your Arena results, leaderboard places, friends, challenges, college tag and study groups are deleted. Practice on this phone is kept.")) return;
     api("DELETE", "consent").then(function () {
       A.consent = { joined: false, name: "" }; A.events = null;
-      H.toast("You left the Arena. Your Arena results were deleted.");
+      H.toast("You left the Arena. Your results, friends and groups were deleted.");
       H.back();
     }, function (e) { H.toast(errText(e)); });
   }
@@ -390,7 +391,7 @@
     token().then(function (tok) {
       if (!tok || !A.battle) { if (A.battle) { A.battle = battleClosed(A.battle); paintBattle(); } return; }
       var ws;
-      try { ws = new G.WebSocket(WS.replace(/\/$/, "") + "/battle?exam=" + encodeURIComponent(exam()), ["smd-arena", tok]); } catch (e) { A.battle = battleClosed(A.battle); return paintBattle(); }
+      try { ws = new G.WebSocket(WS.replace(/\/$/, "") + "/battle?exam=" + encodeURIComponent(A.room && A.roomExam ? A.roomExam : exam()) + (A.room ? "&room=" + encodeURIComponent(A.room) : ""), ["smd-arena", tok]); } catch (e) { A.battle = battleClosed(A.battle); return paintBattle(); }
       A.ws = ws;
       ws.onopen = function () { if (!resume) try { ws.send(JSON.stringify({ t: "queue" })); } catch (e) {} };
       ws.onmessage = function (e) {
@@ -436,9 +437,9 @@
   function renderBattle() {
     var b = A.battle || battleNew(), L = ["A", "B", "C", "D", "E", "F"], body = "", focus = null;
     if (A.bTimer) { G.clearInterval(A.bTimer); A.bTimer = 0; }
-    if (b.phase === "queue") body = '<section class="pn-panel pn-mm" role="status"><span class="pn-mm-bar" aria-hidden="true"><i></i></span><p class="pn-mid">Finding an opponent</p><p class="pn-mut">' +
-      esc(H.exam().label) + ", nearest rating first. This takes up to 30 seconds.</p></section><button type=\"button\" class=\"pn-btn\" data-act=\"back\">Cancel</button>";
-    else if (b.phase === "nobody") body = '<section class="pn-panel pn-score"><p class="pn-mid">Nobody is free right now</p><p class="pn-mut">No opponent joined in 30 seconds. Battles are only against real players. Try again in a few minutes, or practise meanwhile.</p></section>' +
+    if (b.phase === "queue") body = '<section class="pn-panel pn-mm" role="status"><span class="pn-mm-bar" aria-hidden="true"><i></i></span><p class="pn-mid">' + (A.room ? "Waiting for your friend" : "Finding an opponent") + '</p><p class="pn-mut">' +
+      (A.room ? "The battle starts when both of you are in." : esc(H.exam().label) + ", nearest rating first. This takes up to 30 seconds.") + "</p></section><button type=\"button\" class=\"pn-btn\" data-act=\"back\">Cancel</button>";
+    else if (b.phase === "nobody") body = '<section class="pn-panel pn-score"><p class="pn-mid">' + (A.room ? "Your friend did not join in time" : "Nobody is free right now") + '</p><p class="pn-mut">' + (A.room ? "A challenge room waits 3 minutes. Send a new challenge from Friends." : "No opponent joined in 30 seconds. Battles are only against real players. Try again in a few minutes, or practise meanwhile.") + "</p></section>" +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Back</button><button type="button" class="pn-btn pri" data-act="a-again">Try again</button></div>';
     else if (b.phase === "busy" || b.phase === "slow") body = '<section class="pn-panel pn-score"><p class="pn-mid">' + (b.phase === "busy" ? "You are already in a battle" : "Too many tries") + '</p><p class="pn-mut">' +
       (b.phase === "busy" ? "A battle of yours is still running, perhaps on another phone. It ends on its own within a few minutes." : "Battles allow 10 joins a minute. Wait a minute, then try again.") + "</p></section>" +
@@ -466,7 +467,7 @@
       var why = b.forfeit === "opp" ? esc(b.opp.name) + " left the battle." : b.forfeit === "you" ? "You were away for more than 10 seconds." : b.forfeit === "both" ? "Both players left, so it is a draw." : "";
       body = versus(b) + '<section class="pn-panel pn-score pn-final ' + b.result + '"><p class="pn-big">' + head + '</p><p class="pn-final-s">' + b.score[0] + " to " + b.score[1] + "</p>" + (why ? '<p class="pn-mut">' + why + "</p>" : "") +
         (rt ? '<p class="pn-mut">Rating ' + rt.before + " to <b>" + rt.after + "</b> (" + signed(rt.after - rt.before) + ")</p>" : "") + "</section>" +
-        '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Done</button><button type="button" class="pn-btn pri" data-act="a-again">Play again</button></div>';
+        '<div class="pn-navrow"><button type="button" class="pn-btn' + (A.room ? " pri" : "") + '" data-act="back">Done</button>' + (A.room ? "" : '<button type="button" class="pn-btn pri" data-act="a-again">Play again</button>') + "</div>";
     }
     H.paint(H.bar(battleTitle(b), b.opp ? "vs " + esc(b.opp.name) : esc(H.exam().label), "back") + '<div class="pn-body pn-run pn-battle">' + body + "</div>", focus);
   }
@@ -521,7 +522,8 @@
     H = host;
     var v = b.getAttribute("data-v");
     if (a === "a-stats") return H.push(renderStats);
-    if (!on()) return;
+    // A battle or consent sheet opened from prep-social.js (friend challenge) works with the Arena flag off.
+    if (!on() && !A.sheet && !A.battle) return;
     if (a === "a-retryhome") { A.events = null; return H.rerender(); }
     if (a === "a-event") return openEvent(b.getAttribute("data-k"));
     if (a === "a-start") return startEvent(b);
@@ -542,11 +544,21 @@
     if (H && H.stackTop() === renderBattle) {
       var b = A.battle;
       if (b && A.ws && (b.phase === "match" || b.phase === "q" || b.phase === "r") && G.confirm && !G.confirm("Leave the battle? It counts as a loss.")) return true;
-      stopBattle(); A.battle = null;
+      stopBattle(); A.battle = null; A.room = null;
     }
     return false;
   }
-  function leave() { stopBattle(); A.battle = null; A.sheet = null; if (A.cd) { G.clearInterval(A.cd); A.cd = 0; } }
+  function leave() { stopBattle(); A.battle = null; A.room = null; A.sheet = null; if (A.cd) { G.clearInterval(A.cd); A.cd = 0; } }
 
-  G.PREP_ARENA = { enabled: on, homeHtml: homeHtml, homeMounted: homeMounted, act: act, back: back, leave: leave, _pure: PURE, _a: A };
+  /* For prep-social.js (friends, challenges): host defaults to PREP._host. joined(then) runs then() after Arena consent
+     (the same sheet); startBattle({ room, exam }) opens a private battle, room and exam riding on the battle socket's URL;
+     leaveArena() is the Leave the Arena confirm and DELETE, which the server also uses to delete every social record. */
+  function useHost(host) { H = host || H || (G.PREP && G.PREP._host); return H; }
+  function joinedFor(then, host) { if (useHost(host)) joined(then); }
+  function startRoomBattle(opts, host) {
+    if (!useHost(host)) return;
+    joined(function () { A.room = (opts && opts.room) ? String(opts.room) : null; A.roomExam = (opts && opts.exam) ? String(opts.exam) : null; H.push(renderBattle); startBattle(); });
+  }
+  function leaveFor(host) { if (useHost(host)) leaveArena(); }
+  G.PREP_ARENA = { enabled: on, homeHtml: homeHtml, homeMounted: homeMounted, act: act, back: back, leave: leave, joined: joinedFor, startBattle: startRoomBattle, leaveArena: leaveFor, _pure: PURE, _a: A };
 })(typeof window !== "undefined" ? window : this);
