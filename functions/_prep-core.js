@@ -46,8 +46,9 @@ export const PREP_LIMITS = {
   solve: { maxOut: 400, maxItems: 7 },
   review: { maxOut: 800, maxItems: 7 },
 };
-// Default temperatures until Phase 0 measures them. Solve is fixed at 0.2 (LayerC 7).
-export const PREP_TEMPS = { facts: 0.2, mcq: 0.4, solve: 0.2, review: 0.2 };
+// Set from Phase 0 (measure-202610060513, vault/plans/prep-phase0-2026-10-06.md): writing at 1.0 rejected 17.2% vs
+// 25.4% at 0.2 at lower cost; the checks stay at 0.2 (review judges, solve is fixed at 0.2 by LayerC 7).
+export const PREP_TEMPS = { facts: 1.0, mcq: 1.0, solve: 0.2, review: 0.2 };
 
 // Exam profiles (LayerC 6.9; PrepNucleus.md 6.4). Only style, cog and d are needed here; the exam
 // simulator numbers live in the client profile files.
