@@ -1,94 +1,173 @@
 {
-  "id": "TOXIC_SHOCK_SYNDROME",
-  "name": "Toxic shock syndrome",
-  "system": "Infectious",
-  "class": "infective",
-  "chapter": null,
-  "page": null,
-  "aliases": [
-    "toxic shock",
-    "TSS",
-    "staphylococcal toxic shock syndrome",
-    "streptococcal toxic shock syndrome",
-    "STSS",
-    "menstrual TSS",
-    "tampon-associated shock"
+ "id": "TOXIC_SHOCK_SYNDROME",
+ "name": "Toxic shock syndrome",
+ "system": "Infectious",
+ "class": "infective",
+ "chapter": null,
+ "page": null,
+ "aliases": [
+  "toxic shock",
+  "TSS",
+  "staphylococcal toxic shock syndrome",
+  "streptococcal toxic shock syndrome",
+  "STSS",
+  "menstrual TSS",
+  "tampon-associated shock"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "reference": {
+  "clinicalPearls": [
+   "Consider TSS in any acute febrile illness with diffuse macular erythroderma, hypotension, and multi-organ involvement, even without an obvious focal infection source.",
+   "A retained tampon, nasal packing, surgical wound packing, or postpartum/post-surgical site should always be actively sought and removed as part of initial assessment.",
+   "Streptococcal TSS typically presents with a clear, severe, deep soft-tissue focus (necrotizing fasciitis or bacteremia) and is far more often bacteremic than the staphylococcal form.",
+   "Desquamation of the palms and soles is a late finding, occurring one to two weeks after illness onset, and should never be relied upon to make the initial diagnosis.",
+   "Hypotension plus involvement of three or more organ systems (renal, hepatic, hematologic, mucosal, CNS, muscular/GI) in a febrile diffuse-rash illness supports the syndromic diagnosis.",
+   "Early aggressive fluid resuscitation is often required because of profound capillary leak, and volume needs can be extreme in the first 24-48 hours.",
+   "Source control (removing foreign material, draining/debriding infected tissue) is as critical as antimicrobial therapy and delays worsen outcomes.",
+   "Blood cultures are frequently negative in staphylococcal TSS since the syndrome is toxin-mediated rather than driven by bloodstream invasion."
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "clinicalPearls": [
-      "Consider TSS in any acute febrile illness with diffuse macular erythroderma, hypotension, and multi-organ involvement, even without an obvious focal infection source.",
-      "A retained tampon, nasal packing, surgical wound packing, or postpartum/post-surgical site should always be actively sought and removed as part of initial assessment.",
-      "Streptococcal TSS typically presents with a clear, severe, deep soft-tissue focus (necrotizing fasciitis or bacteremia) and is far more often bacteremic than the staphylococcal form.",
-      "Desquamation of the palms and soles is a late finding, occurring one to two weeks after illness onset, and should never be relied upon to make the initial diagnosis.",
-      "Hypotension plus involvement of three or more organ systems (renal, hepatic, hematologic, mucosal, CNS, muscular/GI) in a febrile diffuse-rash illness supports the syndromic diagnosis.",
-      "Early aggressive fluid resuscitation is often required because of profound capillary leak, and volume needs can be extreme in the first 24-48 hours.",
-      "Source control (removing foreign material, draining/debriding infected tissue) is as critical as antimicrobial therapy and delays worsen outcomes.",
-      "Blood cultures are frequently negative in staphylococcal TSS since the syndrome is toxin-mediated rather than driven by bloodstream invasion."
-    ],
-    "pathophysiology": "TSS results from exotoxins produced by Staphylococcus aureus (notably TSST-1) or by Streptococcus pyogenes acting as superantigens that bind directly to MHC class II molecules and T-cell receptors outside the conventional antigen groove. This bypasses normal antigen processing and triggers massive, non-specific polyclonal T-cell activation with a resulting cytokine storm (IL-1, IL-2, TNF, interferon-gamma). The surge in inflammatory mediators produces capillary leak, vasodilation, hypotension, and secondary multi-organ dysfunction, explaining why the clinical picture can be severe even with a small, localized focus of infection or colonization.",
-    "additionalDifferentials": [
-      "Kawasaki disease (especially in children with fever, rash, and mucosal changes)",
-      "Necrotizing fasciitis without full toxic shock physiology",
-      "Rocky Mountain spotted fever and other rickettsial infections",
-      "Severe scarlet fever",
-      "Drug reaction with eosinophilia and systemic symptoms (DRESS) or Stevens-Johnson spectrum",
-      "Septic shock from another gram-negative or gram-positive source"
-    ],
-    "infectionMimics": [
-      "Kawasaki disease",
-      "Scarlet fever",
-      "Rocky Mountain spotted fever",
-      "Leptospirosis (Weil syndrome)",
-      "Meningococcemia"
-    ],
-    "nonInfectiousMimics": [
-      "Stevens-Johnson syndrome/toxic epidermal necrolysis",
-      "Drug hypersensitivity reaction (DRESS)",
-      "Systemic lupus erythematosus flare with vasculitic rash",
-      "Adult-onset Still disease"
-    ],
-    "additionalInvestigations": [
-      "Blood cultures (times two) — often negative in staphylococcal TSS but essential to identify streptococcal bacteremia and guide therapy",
-      "Wound, vaginal, or device-site cultures — to isolate toxin-producing S. aureus or S. pyogenes and confirm source",
-      "Complete metabolic panel with renal and hepatic function — documents multi-organ involvement required for diagnosis",
-      "Complete blood count with differential — assesses for thrombocytopenia and left shift",
-      "Creatine kinase — elevated with muscular involvement/myositis component",
-      "Coagulation studies (PT/INR, fibrinogen) — screens for evolving disseminated intravascular coagulation",
-      "Imaging (CT/MRI or bedside ultrasound) of suspected soft-tissue focus — evaluates for necrotizing infection requiring surgical debridement",
-      "Serologic/toxin studies where available — can support etiology in atypical or culture-negative presentations"
-    ],
-    "redFlags": [
-      "Refractory hypotension unresponsive to initial fluid resuscitation, suggesting need for vasopressors and ICU-level care",
-      "Rapidly spreading pain, swelling, or crepitus over a soft-tissue site raising concern for necrotizing fasciitis requiring emergent surgical exploration",
-      "Evolving coagulopathy or falling platelet count concerning for disseminated intravascular coagulation",
-      "Altered mental status or new organ dysfunction indicating rapid progression to multi-organ failure",
-      "Any retained foreign material (tampon, packing, prosthetic material) not yet identified or removed"
-    ],
-    "pitfalls": [
-      "Dismissing the diagnosis because blood cultures are negative — staphylococcal TSS is toxin-mediated and frequently culture-negative.",
-      "Waiting for classic desquamation before considering the diagnosis, which delays treatment since desquamation occurs late in the course.",
-      "Failing to perform a thorough examination for retained foreign bodies (vaginal, nasal, surgical) as the driving source.",
-      "Underestimating streptococcal TSS severity because the cutaneous findings can be subtler than staphylococcal disease despite higher mortality."
-    ],
-    "prognosis": "Staphylococcal TSS has a lower mortality (roughly a few percent) when recognized early and the source is controlled, whereas streptococcal TSS carries a substantially higher mortality, often cited around 30-70%, particularly when associated with necrotizing soft-tissue infection or bacteremia. Prompt source control, resuscitation, and antimicrobial therapy are the main determinants of outcome.",
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e — Staphylococcal Infections and Streptococcal Infections chapters (Toxic Shock Syndrome sections)"
-    ],
-    "crossLinks": [
-      "NECROTIZING_FASCIITIS",
-      "SEPTIC_SHOCK"
-    ],
-    "management": [
-      "Immediate source control — remove any retained tampon, nasal or wound packing and debride or drain a necrotising soft-tissue focus",
-      "Combination antimicrobial therapy pairing a beta-lactam (an antistaphylococcal penicillin, or vancomycin where meticillin-resistant S. aureus is possible, with streptococcal cover) and a protein-synthesis-inhibiting agent such as clindamycin or linezolid to suppress toxin production",
-      "Aggressive intravenous fluid resuscitation for capillary-leak hypotension, with vasopressors and organ support in intensive care",
-      "Intravenous immunoglobulin for severe or streptococcal toxic shock syndrome to neutralise circulating superantigen",
-      "Monitor and support multi-organ dysfunction — renal, hepatic, respiratory and haematological, including evolving disseminated intravascular coagulation",
-      "Escalate early to critical care and surgical teams for refractory shock or necrotising infection"
-    ]
+  "pathophysiology": "TSS results from exotoxins produced by Staphylococcus aureus (notably TSST-1) or by Streptococcus pyogenes acting as superantigens that bind directly to MHC class II molecules and T-cell receptors outside the conventional antigen groove. This bypasses normal antigen processing and triggers massive, non-specific polyclonal T-cell activation with a resulting cytokine storm (IL-1, IL-2, TNF, interferon-gamma). The surge in inflammatory mediators produces capillary leak, vasodilation, hypotension, and secondary multi-organ dysfunction, explaining why the clinical picture can be severe even with a small, localized focus of infection or colonization.",
+  "additionalDifferentials": [
+   "Kawasaki disease (especially in children with fever, rash, and mucosal changes)",
+   "Necrotizing fasciitis without full toxic shock physiology",
+   "Rocky Mountain spotted fever and other rickettsial infections",
+   "Severe scarlet fever",
+   "Drug reaction with eosinophilia and systemic symptoms (DRESS) or Stevens-Johnson spectrum",
+   "Septic shock from another gram-negative or gram-positive source"
+  ],
+  "infectionMimics": [
+   "Kawasaki disease",
+   "Scarlet fever",
+   "Rocky Mountain spotted fever",
+   "Leptospirosis (Weil syndrome)",
+   "Meningococcemia"
+  ],
+  "nonInfectiousMimics": [
+   "Stevens-Johnson syndrome/toxic epidermal necrolysis",
+   "Drug hypersensitivity reaction (DRESS)",
+   "Systemic lupus erythematosus flare with vasculitic rash",
+   "Adult-onset Still disease"
+  ],
+  "additionalInvestigations": [
+   "Blood cultures (times two) — often negative in staphylococcal TSS but essential to identify streptococcal bacteremia and guide therapy",
+   "Wound, vaginal, or device-site cultures — to isolate toxin-producing S. aureus or S. pyogenes and confirm source",
+   "Complete metabolic panel with renal and hepatic function — documents multi-organ involvement required for diagnosis",
+   "Complete blood count with differential — assesses for thrombocytopenia and left shift",
+   "Creatine kinase — elevated with muscular involvement/myositis component",
+   "Coagulation studies (PT/INR, fibrinogen) — screens for evolving disseminated intravascular coagulation",
+   "Imaging (CT/MRI or bedside ultrasound) of suspected soft-tissue focus — evaluates for necrotizing infection requiring surgical debridement",
+   "Serologic/toxin studies where available — can support etiology in atypical or culture-negative presentations"
+  ],
+  "redFlags": [
+   "Refractory hypotension unresponsive to initial fluid resuscitation, suggesting need for vasopressors and ICU-level care",
+   "Rapidly spreading pain, swelling, or crepitus over a soft-tissue site raising concern for necrotizing fasciitis requiring emergent surgical exploration",
+   "Evolving coagulopathy or falling platelet count concerning for disseminated intravascular coagulation",
+   "Altered mental status or new organ dysfunction indicating rapid progression to multi-organ failure",
+   "Any retained foreign material (tampon, packing, prosthetic material) not yet identified or removed"
+  ],
+  "pitfalls": [
+   "Dismissing the diagnosis because blood cultures are negative — staphylococcal TSS is toxin-mediated and frequently culture-negative.",
+   "Waiting for classic desquamation before considering the diagnosis, which delays treatment since desquamation occurs late in the course.",
+   "Failing to perform a thorough examination for retained foreign bodies (vaginal, nasal, surgical) as the driving source.",
+   "Underestimating streptococcal TSS severity because the cutaneous findings can be subtler than staphylococcal disease despite higher mortality."
+  ],
+  "prognosis": "Staphylococcal TSS has a lower mortality (roughly a few percent) when recognized early and the source is controlled, whereas streptococcal TSS carries a substantially higher mortality, often cited around 30-70%, particularly when associated with necrotizing soft-tissue infection or bacteremia. Prompt source control, resuscitation, and antimicrobial therapy are the main determinants of outcome.",
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e — Staphylococcal Infections and Streptococcal Infections chapters (Toxic Shock Syndrome sections)"
+  ],
+  "crossLinks": [
+   "NECROTIZING_FASCIITIS",
+   "SEPTIC_SHOCK"
+  ],
+  "management": [
+   "Immediate source control — remove any retained tampon, nasal or wound packing and debride or drain a necrotising soft-tissue focus",
+   "Combination antimicrobial therapy pairing a beta-lactam (an antistaphylococcal penicillin, or vancomycin where meticillin-resistant S. aureus is possible, with streptococcal cover) and a protein-synthesis-inhibiting agent such as clindamycin or linezolid to suppress toxin production",
+   "Aggressive intravenous fluid resuscitation for capillary-leak hypotension, with vasopressors and organ support in intensive care",
+   "Intravenous immunoglobulin for severe or streptococcal toxic shock syndrome to neutralise circulating superantigen",
+   "Monitor and support multi-organ dysfunction — renal, hepatic, respiratory and haematological, including evolving disseminated intravascular coagulation",
+   "Escalate early to critical care and surgical teams for refractory shock or necrotising infection"
+  ]
+ },
+ "specialty": "Infectious Disease",
+ "algorithms": [
+  {
+   "id": "tss-resus-algo",
+   "title": "Toxic Shock Syndrome Emergency Resuscitation and Source Control Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Patient presenting with abrupt fever (> 38.9 C), diffuse sunburn-like erythroderma, hypotension (SBP < 90 mmHg), and signs of capillary leak or multiorgan involvement.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Source Control Exploration",
+     "action": "Examine entire body for foreign objects: immediately remove retained vaginal tampons, nasal packs, surgical dressings. Inspect surgical wounds and soft tissues for crepitus, edema, or necrotizing fasciitis.",
+     "critical": true
+    },
+    {
+     "step": "Aggressive Capillary-Leak Resuscitation",
+     "action": "Profound capillary leak requires massive crystalloid fluid resuscitation (often 10 to 15 L in first 24h). Early central line and arterial line placement; start norepinephrine for refractory shock.",
+     "critical": true
+    },
+    {
+     "step": "Dual Empirical Antimicrobial Regimen",
+     "action": "Administer bactericidal cell-wall active agent (IV Vancomycin or Cefazolin/Nafcillin) PLUS Protein Synthesis Inhibitor for toxin suppression (IV Clindamycin 900 mg 8-hourly or IV Linezolid 600 mg 12-hourly).",
+     "critical": true
+    },
+    {
+     "step": "Intravenous Immunoglobulin (IVIg) Escalation",
+     "branch": "Refractory shock or Streptococcal TSS",
+     "action": "Administer high-dose IVIg (1 to 2 g/kg) to neutralize circulating bacterial superantigens (TSST-1, SpeA/C)."
+    }
+   ],
+   "caption": "Emergency management algorithm for staphylococcal and streptococcal toxic shock syndrome."
   }
+ ],
+ "tables": [
+  {
+   "id": "tss-staph-vs-strep-matrix",
+   "title": "Clinical and Microbiological Comparison: Staphylococcal TSS vs Streptococcal TSS",
+   "headers": [
+    "Feature",
+    "Staphylococcal TSS",
+    "Streptococcal TSS (STSS)"
+   ],
+   "rows": [
+    [
+     "Primary Pathogen",
+     "Staphylococcus aureus (TSST-1, enterotoxins B & C)",
+     "Streptococcus pyogenes (Group A Strep; SpeA, SpeC exotoxins)"
+    ],
+    [
+     "Bacteremia Rate",
+     "Rare (< 5% to 15%); toxin mediated without bacteremia",
+     "Very High (> 50% to 60%); frequently positive blood cultures"
+    ],
+    [
+     "Infection Site / Focus",
+     "Retained tampons, nasal packing, postpartum, abscess, minor wound",
+     "Deep soft-tissue infection, necrotizing fasciitis, cellulitis, pneumonia"
+    ],
+    [
+     "Cutaneous Findings",
+     "Diffuse macular erythroderma; late desquamation at 1 to 2 weeks",
+     "Rash less common; localized severe soft-tissue erythema, bullae, necrosis"
+    ],
+    [
+     "Overall Mortality",
+     "Lower (approximately 3% to 5% with early source control)",
+     "Significantly Higher (30% to 70% despite maximal intensive care)"
+    ],
+    [
+     "Surgical Requirement",
+     "Remove foreign material; drain localized abscess",
+     "Emergent surgical exploration and aggressive surgical debridement of necrotizing focus"
+    ]
+   ],
+   "caption": "Streptococcal TSS requires immediate surgical consultation due to high prevalence of underlying necrotizing fasciitis."
+  }
+ ]
 }

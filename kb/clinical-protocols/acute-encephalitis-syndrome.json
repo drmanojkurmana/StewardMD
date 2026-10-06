@@ -6,7 +6,19 @@
  "basis": "india",
  "counterpart": "acute-encephalitis-international",
  "setting": "Emergency department, ward, ICU, PICU",
- "aliases": ["AES", "JE", "Japanese encephalitis", "acute febrile encephalopathy", "AFE", "viral encephalitis", "HSV encephalitis", "brain fever", "chamki bukhar", "litchi hypoglycaemic encephalopathy", "NPPCJA"],
+ "aliases": [
+  "AES",
+  "JE",
+  "Japanese encephalitis",
+  "acute febrile encephalopathy",
+  "AFE",
+  "viral encephalitis",
+  "HSV encephalitis",
+  "brain fever",
+  "chamki bukhar",
+  "litchi hypoglycaemic encephalopathy",
+  "NPPCJA"
+ ],
  "summary": "Fever of up to 5 to 7 days with altered sensorium or new seizures. Stabilise airway, breathing and circulation, correct hypoglycaemia, control seizures and raised ICP, and start empirical ceftriaxone, acyclovir, doxycycline (scrub typhus) and artesunate if malaria is not excluded, then narrow by results.",
  "sections": [
   {
@@ -95,22 +107,163 @@
   }
  ],
  "drugs": [
-  { "name": "Ceftriaxone", "dose": "Children 100 mg/kg/day IV in 2 divided doses (maximum 4 g/day); adults 2 g IV 12-hourly", "notes": "Empirical cover for bacterial meningitis; 10 to 14 days if confirmed." },
-  { "name": "Acyclovir", "dose": "3 months to 12 years 500 mg/m2 IV 8-hourly; over 12 years and adults 10 mg/kg IV over 1 hour 8-hourly", "notes": "14 to 21 days if HSV confirmed. Hydrate; reduce dose in renal impairment." },
-  { "name": "Doxycycline", "dose": "Adults 100 mg 12-hourly; children 2.2 mg/kg 12-hourly (maximum 100 mg per dose)", "notes": "Empirical scrub typhus cover; 7 days if confirmed." },
-  { "name": "Azithromycin", "dose": "Children 10 mg/kg once daily; adults 500 mg once daily", "notes": "Alternative scrub typhus cover, including pregnancy." },
-  { "name": "Artesunate", "dose": "2.4 mg/kg IV (3 mg/kg under 20 kg) at 0, 12 and 24 hours, then daily", "notes": "Until malaria excluded; if positive, complete with full oral ACT." },
-  { "name": "Mannitol 20%", "dose": "0.25 g/kg IV bolus, then 0.25 g/kg 6-hourly as needed, up to 48 hours", "notes": "Raised ICP after correcting dehydration." },
-  { "name": "Hypertonic saline 3%", "dose": "0.1 to 1 mL/kg/h IV infusion, target sodium 145 to 155 mmol/L", "notes": "Preferred over mannitol with hypotension, hypovolaemia or renal failure." },
-  { "name": "Lorazepam or midazolam", "dose": "Lorazepam 0.1 mg/kg IV; midazolam 0.2 mg/kg IV, IM, buccal or intranasal", "notes": "First-line for seizures." },
-  { "name": "Phenytoin", "dose": "20 mg/kg IV loading, no faster than 1 mg/kg/min (maximum 50 mg/min)", "notes": "Second-line; cardiac monitoring during infusion." },
-  { "name": "Dextrose", "dose": "Children 10% dextrose 2 mL/kg IV; adults 100 mL of 25% dextrose IV with thiamine 100 mg", "notes": "Treat hypoglycaemia immediately, then dextrose-containing maintenance fluid." }
+  {
+   "name": "Ceftriaxone",
+   "dose": "Children 100 mg/kg/day IV in 2 divided doses (maximum 4 g/day); adults 2 g IV 12-hourly",
+   "notes": "Empirical cover for bacterial meningitis; 10 to 14 days if confirmed."
+  },
+  {
+   "name": "Acyclovir",
+   "dose": "3 months to 12 years 500 mg/m2 IV 8-hourly; over 12 years and adults 10 mg/kg IV over 1 hour 8-hourly",
+   "notes": "14 to 21 days if HSV confirmed. Hydrate; reduce dose in renal impairment."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "Adults 100 mg 12-hourly; children 2.2 mg/kg 12-hourly (maximum 100 mg per dose)",
+   "notes": "Empirical scrub typhus cover; 7 days if confirmed."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "Children 10 mg/kg once daily; adults 500 mg once daily",
+   "notes": "Alternative scrub typhus cover, including pregnancy."
+  },
+  {
+   "name": "Artesunate",
+   "dose": "2.4 mg/kg IV (3 mg/kg under 20 kg) at 0, 12 and 24 hours, then daily",
+   "notes": "Until malaria excluded; if positive, complete with full oral ACT."
+  },
+  {
+   "name": "Mannitol 20%",
+   "dose": "0.25 g/kg IV bolus, then 0.25 g/kg 6-hourly as needed, up to 48 hours",
+   "notes": "Raised ICP after correcting dehydration."
+  },
+  {
+   "name": "Hypertonic saline 3%",
+   "dose": "0.1 to 1 mL/kg/h IV infusion, target sodium 145 to 155 mmol/L",
+   "notes": "Preferred over mannitol with hypotension, hypovolaemia or renal failure."
+  },
+  {
+   "name": "Lorazepam or midazolam",
+   "dose": "Lorazepam 0.1 mg/kg IV; midazolam 0.2 mg/kg IV, IM, buccal or intranasal",
+   "notes": "First-line for seizures."
+  },
+  {
+   "name": "Phenytoin",
+   "dose": "20 mg/kg IV loading, no faster than 1 mg/kg/min (maximum 50 mg/min)",
+   "notes": "Second-line; cardiac monitoring during infusion."
+  },
+  {
+   "name": "Dextrose",
+   "dose": "Children 10% dextrose 2 mL/kg IV; adults 100 mL of 25% dextrose IV with thiamine 100 mg",
+   "notes": "Treat hypoglycaemia immediately, then dextrose-containing maintenance fluid."
+  }
  ],
  "sources": [
-  { "org": "ICMR / DHR", "title": "Standard Treatment Workflow: Acute Encephalitis Syndrome (AES) in Children", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725959608_paediatrics_acute_encephalitis_syndrome.pdf" },
-  { "org": "NVBDCP (NCVBDC), MoHFW", "title": "Operational Guidelines: National Programme for Prevention and Control of JE/AES", "year": 2014, "url": "https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/JE-AES-Prevention-Control(NPPCJA).pdf" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019 (acute febrile encephalopathy)", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf" },
-  { "org": "ICMR / DHR", "title": "Standard Treatment Workflow: Neuroinfections", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952343_neurology_neuroinfections.pdf" }
+  {
+   "org": "ICMR / DHR",
+   "title": "Standard Treatment Workflow: Acute Encephalitis Syndrome (AES) in Children",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725959608_paediatrics_acute_encephalitis_syndrome.pdf"
+  },
+  {
+   "org": "NVBDCP (NCVBDC), MoHFW",
+   "title": "Operational Guidelines: National Programme for Prevention and Control of JE/AES",
+   "year": 2014,
+   "url": "https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/JE-AES-Prevention-Control(NPPCJA).pdf"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019 (acute febrile encephalopathy)",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf"
+  },
+  {
+   "org": "ICMR / DHR",
+   "title": "Standard Treatment Workflow: Neuroinfections",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952343_neurology_neuroinfections.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "aes-resus-algo",
+   "title": "AES Emergency Triage and Empirical Antimicrobial Pathway",
+   "steps": [
+    {
+     "step": "Immediate Triage and Glucose Check",
+     "action": "Patient presenting with acute fever (< 7 days) and altered mental status or new seizures. Check blood glucose immediately (give 25% or 10% dextrose to rule out or treat fatal hypoglycemic encephalopathy).",
+     "critical": true
+    },
+    {
+     "step": "Airway and Raised ICP Management",
+     "action": "Intubate if GCS < 8 or signs of brainstem herniation. Elevate head end 30 degrees. If signs of cerebral edema, administer 3% hypertonic saline infusion (target Na 145 to 155 mEq/L) or IV mannitol 0.25 g/kg.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Empirical Quadruple Therapy",
+     "action": "Within 1 hour of arrival (draw blood cultures immediately): IV Ceftriaxone 2 g 12-hourly + IV Acyclovir 10 mg/kg 8-hourly + Oral/NG Doxycycline 100 mg 12-hourly (scrub typhus) + IV Artesunate 2.4 mg/kg (cerebral malaria).",
+     "critical": true
+    },
+    {
+     "step": "Neuroimaging & Lumbar Puncture",
+     "branch": "Rule out contraindications",
+     "action": "Perform CT/MRI brain. If no mass effect or herniation risk, perform lumbar puncture for CSF cell count, protein, glucose, HSV PCR, and JE IgM (MAC-ELISA)."
+    },
+    {
+     "step": "De-escalation based on Etiology",
+     "action": "Stop artesunate if malaria smear/RDT negative. Stop acyclovir if dual HSV PCRs negative at 48 hours and MRI normal. Complete 14 to 21 days acyclovir if HSV confirmed."
+    }
+   ],
+   "caption": "Protocol aligned with Indian Ministry of Health and Family Welfare (MoHFW) / ICMR AES clinical guidance."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aes-etiology-matrix",
+   "title": "Major Etiologies of Acute Encephalitis Syndrome in India: Diagnostic Markers",
+   "headers": [
+    "Etiology / Pathogen",
+    "Epidemiologic Clues",
+    "Key Clinical Distinguishing Features",
+    "First-Line Diagnostic Confirmation"
+   ],
+   "rows": [
+    [
+     "Japanese Encephalitis (JE)",
+     "Monsoon / post-monsoon season; rural agricultural settings; pigs/wading birds",
+     "Dystonia, mask-like facies, Parkinsonian extrapyramidal tremors; rash argues strongly against JE",
+     "Serum and CSF JE IgM MAC-ELISA"
+    ],
+    [
+     "Herpes Simplex Virus (HSV-1)",
+     "Sporadic throughout the year; all age groups",
+     "Focal seizures, olfactory hallucinations, prominent aphasia, frontotemporal necrosis on neuroimaging",
+     "CSF HSV DNA PCR (sensitivity > 95%); MRI temporal T2/FLAIR hyperintensity"
+    ],
+    [
+     "Scrub Typhus (Orientia tsutsugamushi)",
+     "Post-monsoon, rural/suburban brush exposure; UP, Bihar, South India, Northeast",
+     "Diagnostic necrotic black eschar, prominent hepatosplenomegaly, thrombocytopenia, elevated transaminases",
+     "Scrub typhus IgM ELISA / rapid ICT; dramatic defervescence to doxycycline within 24 to 48 hours"
+    ],
+    [
+     "Cerebral Malaria (Plasmodium falciparum)",
+     "Endemic tropical zones; peak monsoon",
+     "Severe symmetrical coma, retinal hemorrhages, severe pallor, jaundice, metabolic acidosis",
+     "Blood thick/thin Giemsa smear and rapid malarial antigen test (Pf HRP-2)"
+    ],
+    [
+     "Litchi Hypoglycemic Encephalopathy",
+     "Summer harvest season (May to June) in Muzaffarpur (Bihar); undernourished children",
+     "Early morning sudden catastrophic coma, seizures, severe hypoglycemia; vomiting precedes collapse",
+     "Urinary MCPG (methylene cyclopropyl glycine) metabolites; dramatic rapid recovery if early dextrose given"
+    ]
+   ],
+   "caption": "Multisystem workup is required early given the broad endemic etiologic spectrum."
+  }
+ ]
 }

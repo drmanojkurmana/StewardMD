@@ -16,7 +16,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var CONTENT_V = "01580d845968";
+  var CONTENT_V = "5c2afdc3229e";
   var BASE = "/kb/clinical-protocols/";
 
   var KINDS = {
@@ -229,6 +229,53 @@
         (s.items || []).map(function (it) { return "<li>" + esc(it) + "</li>"; }).join("") + "</" + tag + "></section>";
     }).join("");
     var toc = (p.sections || []).map(function (s, i) { return '<button type="button" class="kbp-jump" data-kbp-jump="' + pre + "Sec" + i + '">' + esc(s.title) + "</button>"; });
+
+    // Decision-tree flowchart: numbered step badges joined by inline SVG arrows (no dependencies,
+    // so it renders in the Knowledge Library and in embedded readers alike).
+    var flowArrow = '<svg class="kbp-flow-arrow" viewBox="0 0 16 20" width="16" height="20" aria-hidden="true"><line x1="8" y1="1" x2="8" y2="12" stroke="currentColor" stroke-width="2"/><path d="M3 10l5 6 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var algos = (p.algorithms && p.algorithms.length)
+      ? p.algorithms.map(function (a, i) {
+          var steps = (a.steps || []).map(function (st, idx) {
+            return '<div class="kbp-flow-node' + (st.critical ? " kbp-flow-crit" : "") + '">' +
+              '<div class="kbp-flow-head"><span class="kbp-flow-idx">' + (idx + 1) + '</span><span class="kbp-flow-step">' + esc(st.step) + '</span>' +
+              (st.branch ? '<span class="kbp-flow-branch">' + esc(st.branch) + '</span>' : '') + '</div>' +
+              '<div class="kbp-flow-action">' + esc(st.action) + '</div>' +
+              '</div>';
+          }).join(flowArrow);
+          return '<section class="kbp-sec kbp-sec-algo" id="' + pre + 'Algo' + i + '"><h2><span class="kbp-kind">Algorithm</span>' + esc(a.title) + '</h2>' +
+            '<div class="kbp-flowchart">' + steps + '</div>' +
+            (a.caption ? '<p class="kbp-caption">' + esc(a.caption) + '</p>' : '') + '</section>';
+        }).join("")
+      : "";
+    if (p.algorithms && p.algorithms.length) {
+      p.algorithms.forEach(function (a, i) { toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Algo' + i + '">' + esc(a.title) + '</button>'); });
+    }
+
+    var tables = (p.tables && p.tables.length)
+      ? p.tables.map(function (t, i) {
+          var ths = (t.headers || []).map(function (h) { return '<th>' + esc(h) + '</th>'; }).join("");
+          var trs = (t.rows || []).map(function (r) {
+            return '<tr>' + (r || []).map(function (cell) { return '<td>' + esc(cell) + '</td>'; }).join("") + '</tr>';
+          }).join("");
+          return '<section class="kbp-sec kbp-sec-tbl" id="' + pre + 'Tbl' + i + '"><h2><span class="kbp-kind">Matrix</span>' + esc(t.title) + '</h2>' +
+            '<div class="kbp-table-wrap"><table class="kbp-tbl"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +
+            (t.caption ? '<p class="kbp-caption">' + esc(t.caption) + '</p>' : '') + '</section>';
+        }).join("")
+      : "";
+    if (p.tables && p.tables.length) {
+      p.tables.forEach(function (t, i) { toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Tbl' + i + '">' + esc(t.title) + '</button>'); });
+    }
+
+    var calcs = (p.calculators && p.calculators.length)
+      ? '<section class="kbp-sec kbp-sec-calcs" id="' + pre + 'Calcs"><h2><span class="kbp-kind">Decision Tools</span>Calculators and Scores</h2><div class="kbp-calc-grid">' +
+        p.calculators.map(function (c) {
+          return '<div class="kbp-calc-card"><div class="kbp-calc-meta"><strong>' + esc(c.title) + '</strong>' +
+            (c.description ? '<p>' + esc(c.description) + '</p>' : '') + '</div>' +
+            '<button type="button" class="kbp-calc-btn" data-kbp-calc="' + esc(c.linkId) + '">Open ' + esc(c.title) + ' &rarr;</button></div>';
+        }).join("") + '</div></section>'
+      : "";
+    if (calcs) toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Calcs">Calculators</button>');
+
     var drugs = (p.drugs && p.drugs.length)
       ? '<section class="kbp-sec kbp-drugs" id="' + pre + 'Drugs"><h2><span class="kbp-kind">Drugs</span>Key drugs and doses</h2><dl>' + p.drugs.map(function (d) {
           return '<div class="kbp-drug"><dt>' + esc(d.name) + '</dt><dd class="kbp-dose">' + esc(d.dose) + "</dd>" + (d.notes ? '<dd class="kbp-note">' + esc(d.notes) + "</dd>" : "") + "</div>";
@@ -243,7 +290,7 @@
       (opts.back ? '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' : "") +
       '<header class="kblib-tool-intro kbp-hero">' + (opts.brand ? brandHTML() : "") + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
       (meta ? '<div class="kbp-metas">' + meta + "</div>" : "") + '<p class="kbp-summary">' + esc(p.summary) + "</p></header>" +
-      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + drugs + sources + "</div>";
+      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + algos + tables + calcs + drugs + sources + "</div>";
   }
   function renderReader(p) {
     st.view = "reader"; st.openId = p.id;
@@ -324,6 +371,18 @@
       // Section jumps work wherever a reader is embedded (Knowledge Library, OPD Protocol tab).
       var jump = t.closest("[data-kbp-jump]");
       if (jump) { var sec = D.getElementById(jump.getAttribute("data-kbp-jump")); if (sec && sec.scrollIntoView) sec.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
+      // Calculator bridges work wherever a reader is embedded. Same open order as reasoning.js:
+      // SB.calc when the shell provides it, else the calculator engine directly.
+      var calcBtn = t.closest("[data-kbp-calc]");
+      if (calcBtn) {
+        var cid = calcBtn.getAttribute("data-kbp-calc");
+        try {
+          if (G.SB && typeof G.SB.calc === "function") { G.SB.calc(cid); return; }
+          if (G.MEDCALC && typeof G.MEDCALC.open === "function") { G.MEDCALC.open(cid); return; }
+        } catch (err) {}
+        try { if (G.toast) G.toast("The calculator could not be opened right now."); } catch (err2) {}
+        return;
+      }
       if (!t.closest("#sbrefBody")) return;
       if (t.closest("[data-kbp-tab]")) { e.preventDefault(); if (G.SB && G.SB.openRef) G.SB.openRef("protocols"); else open(); return; }
       var go = t.closest("[data-kbp-go]"); if (go) { if (G.SB && G.SB.openRef) G.SB.openRef(go.getAttribute("data-kbp-go")); return; }
