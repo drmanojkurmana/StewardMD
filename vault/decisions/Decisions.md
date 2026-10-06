@@ -11355,3 +11355,17 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   failed facts regenerate in one call (the 9.1 budget of 0 to 6 regeneration calls a deck assumes this). The client
   sends weights (summing to 1) for `mix`, and keeps the server's `prov: "USR"` with `gen: "AI"` (label
   "AI-generated, auto-checked").
+
+## 2026-10-06 - PrepNucleus Arena server: sockets stay in the Matchmaker, state lives in the BattleRoom
+- **Decision** ([[PrepNucleus]], plan [[plans/PrepNucleus-Arena]]): the client's one WebSocket (`/battle?exam=`) is held
+  by the exam's `Matchmaker` Durable Object for the whole session, queue and battle. A WebSocket cannot move between
+  Durable Objects, and the plan's protocol is one socket from `queue` to `end`, so the `BattleRoom` (one per match)
+  owns the authoritative battle state (`prep-arena-worker/src/core.js`, a pure reducer with an injected clock), times
+  rounds with alarms, writes the result and Elo to D1, and talks to the Matchmaker by RPC (answers in, messages out).
+- **Why:** keeps the plan's wire protocol unchanged for the client, and every timing and scoring rule in one pure,
+  node-tested module. **Trade-off:** one Matchmaker per exam carries every socket of that exam (fine at Arena scale;
+  plain sockets, not the hibernation API, so its state is in memory while anyone is connected).
+- Event papers are drawn from the bank (`seed` = `v1:<event id>`), excluding flagged items only: the auto-hidden list
+  (KV) is not applied, because it can change between a player's start and submit and the paper must not.
+- Leaving deletes the player row and entries and replaces the player's id in past battles with `gone`, so the
+  opponent keeps their record. **Status:** branch `feat/prep-arena-server`, not deployed (owner creates D1, deploys).
