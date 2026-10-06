@@ -326,7 +326,11 @@ try {
   // abg-12: a combined change (lower VT and raise the rate) must apply both settings and explain them
   { const LEARN = JSON.parse(readFileSync(join(HERE, "../narke/vent/learn.json"), "utf8")), ci = LEARN.cases.findIndex((c) => c.id === "abg-12");
     const c12 = LEARN.cases[ci], oi = c12.q2.options.findIndex((o) => o.change && o.change.also);
-    for (let i = 1; i < ci; i++) { await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`); await click(`[data-act=vlq2]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlcnext]');`); await click(`[data-act=vlcnext]`); await until(`return /Case ${i + 2} /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`); }
+    // the case list follows the level (a Level 1 learner sees only the level 1 cases): Level 4 shows them all, from Case 1
+    await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+    await click(`[data-act=vllevel][data-v="4"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='4';`);
+    await click(`[data-act=vlcases]`); await until(`return /Case 1 /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`);
+    for (let i = 0; i < ci; i++) { await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`); await click(`[data-act=vlq2]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlcnext]');`); await click(`[data-act=vlcnext]`); await until(`return /Case ${i + 2} /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`); }
     await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`);
     await click(`[data-act=vlq2][data-o="${oi}"]`);
     const S = (await evp(`Promise.resolve(NARKE_MODELS["vent-engine"].SETTINGS)`)) || {};
@@ -335,6 +339,7 @@ try {
     if (await ev(`return !!NARKE_MODELS["vent-engine"].caseState;`)) ok(await ev(`return document.querySelectorAll('#smdNarke .vl-case .vl-ba tbody tr').length >= 4 && document.querySelectorAll('#smdNarke .vl-case .vl-why li').length >= 1;`) === true, "abg-12: the combined change has a result gas and reasons");
     await shot("390-dark-case-combined"); }
   await ev(`__back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await click(`[data-act=vllevel][data-v="1"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='1';`);
 
   // dyssynchrony gallery
   await click(`[data-act=vldys]`);

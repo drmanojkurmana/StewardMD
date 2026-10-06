@@ -1932,7 +1932,9 @@
     }
     var canNext = R.tut.ok && (R.tut.saw || R.tut.flat);
     // Next never looks dead without a reason: the line under it says what to press first.
-    var need = canNext ? "" : '<p class="vl-co-need" id="vlCoNeed">' + (!R.tut.ok && task ? s("needDo", { x: task }) : s("needWait", { x: expName(sp) })) + "</p>";
+    // nothing to name before tutEnter has set the step up (first paint) or on a step with no task and no expected change
+    var needTx = !R.tut.ok && task ? s("needDo", { x: task }) : sp.expect ? s("needWait", { x: expName(sp) }) : "";
+    var need = canNext || !needTx ? "" : '<p class="vl-co-need" id="vlCoNeed">' + needTx + "</p>";
     var say = txg(sp.say);
     GL.seen = keep;
     return '<div class="vl-co-h"><button type="button" class="vl-co-min" data-act="vlcomin" aria-expanded="' + !R.coMin + '" aria-controls="vlCoBody"><span class="vl-co-ht">' + tx(tu.title) + " · " + s("stepOf", { i: R.tut.i + 1, n: n }) +
@@ -2070,7 +2072,7 @@
     var parts = Object.keys(sco.parts || {}).map(function (k) {
       var v = +sco.parts[k] || 0, mx = MX[k], why = partWhy(k, sco);
       // null = not part of this run (no such decision made): say why instead of showing a zero
-      if (sco.parts[k] === null) return '<li class="vl-pna"><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pnote">' + (sco.explain && sco.explain[k] ? tx(sco.explain[k]) : "") + "</span><b>" + s("notScored") + "</b></li>";
+      if (sco.parts[k] === null) return '<li class="vl-pna"><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pnote">' + why + "</span><b>" + s("notScored") + "</b></li>";
       if (k === "unsafe") return v < 0 ? '<li class="vl-pen"><span class="vl-pl">' + s("p_unsafe") + '</span><span class="vl-pnote">' + s("penalty") + "</span><b>" + I.fmt(v) + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>" : "";
       var pct = mx ? clamp(v / mx * 100, 0, 100) : clamp(v, 0, 100);
       return '<li><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pbar" aria-hidden="true"><i style="width:' + pct.toFixed(0) + '%"></i></span><b>' + I.fmt(v) + (mx ? '<small>/' + mx + "</small>" : "") + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>";
