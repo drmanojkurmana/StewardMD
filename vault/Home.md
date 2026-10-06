@@ -55,6 +55,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ABDM]] — national health-data exchange (ABHA, HIP/HIU, consent); read the V3 reconciliation first
 
 ## Cross-cutting
+- [[Settings]] — grouped settings, search, model disclosures and Display return flow; presentation flag `smd_settings_redesign` defaults ON.
 - [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
   before touching this.
