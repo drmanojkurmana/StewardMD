@@ -183,5 +183,7 @@ data/dose-rules-report.json
 # Owner 2026-10-06: classifier outputs are kept in git so a lost worktree costs nothing; vectors stay local.
 !/prep/build/embed-*.json
 !/prep/build/llm-*.json
-/prep/fill/
+/prep/fill/*
+!/prep/fill/packs/
+!/prep/fill/*.json
 /prep/screen/v*/*.jsonl
