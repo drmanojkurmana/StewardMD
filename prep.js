@@ -383,6 +383,8 @@
     root.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.preventDefault(); back(); } });
     st.open = true; st.stack = [];
     refreshHidden();
+    // Reminder, widget, Live Activity and sync on open (prep-native.js).
+    if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
     root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus</div>';
     loadTax().then(function () {
       if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); }
@@ -625,6 +627,7 @@
     s.last = { s: it._s, m: it._m || it.t };
     // Answer log for readiness accuracy (prep-plan.js): [module, 1|0], newest last.
     if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
+    if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
@@ -646,6 +649,7 @@
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
     if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
     renderResult();
+    if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
   }
   function renderResult() {
     var r = st.run, ok = 0, missed = [];
@@ -932,6 +936,8 @@
     var b = e.target.closest ? e.target.closest("[data-act]") : null;
     if (!b || !root.contains(b) || b.getAttribute("aria-disabled") === "true" || b.disabled) return;
     var a = b.getAttribute("data-act"), v = b.getAttribute("data-v"), s = load();
+    // Starting an item of today's plan may start the Live Activity (prep-native.js).
+    if (G.PREP_NATIVE && b.classList.contains("pl-item")) G.PREP_NATIVE.planStarted();
     if (a === "close") return close();
     if (a === "back") return back();
     if (a === "retry") { close(); return open(); }

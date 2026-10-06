@@ -1340,7 +1340,9 @@
       var r = String(route || "").toLowerCase().replace(/^\/+/, "").replace(/[/?#].*$/, "");
       var map = { criticallabs: "icu", patients: "icu", tasks: "icu", ward: "ward",
                   askai: "askai", drugs: "drugs", drugmenu: "drugmenu", calculators: "calculators",
-                  antibiogram: "antibiogram", home: "home" };
+                  antibiogram: "antibiogram", home: "home",
+                  // PrepNucleus widget, Live Activity and reminder taps; ACT.prep keeps the smd_prep flag.
+                  prep: "prep" };
       // The "Before you delete us" Home Screen quick action lands here. It is not an ACT overlay,
       // so it is handled before the ACT lookup. SMD_openFeedback is referenced across the app but
       // defined nowhere, so this mirrors the sidebar's three-step chain (sidebar-redesign.js

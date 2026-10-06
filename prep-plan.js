@@ -4,13 +4,15 @@
    asks back() first on back, shows onboard() on the first plain open and draws homeHtml() where the Today card was.
 
    Store (smd_prep_v1): pl { ob, exam, date, min, rem } = onboarding answers (ob 1 once finished or skipped; exam is one
-   of EXAM_CHOICES; date "YYYY-MM-DD" or null; min daily minutes; rem "HH:MM" or null, stored only: the native reminder
-   comes later). pt { d, ex, items } = today's plan, made once per local day and exam tab. ra = the last answers as
+   of EXAM_CHOICES; date "YYYY-MM-DD" or null; min daily minutes; rem "HH:MM" or null: the daily reminder time,
+   scheduled by prep-native.js when the student turns the reminder on). pt { d, ex, items } = today's plan, made once per local day and exam tab. ra = the last answers as
    [module, 1|0] (written by prep.js record()), read by readiness.
 
    Readiness per exam = geometric mean of coverage (share of the exam's modules attempted, weighted by the exam's
    blueprint per subject, else by module count), retention (mean FSRS retrievability today of the seen cards) and
-   accuracy (the last 200 answers), x 100. Pure helpers load under node for tests. Nothing here calls a server. */
+   accuracy (the last 200 answers), x 100. Pure helpers load under node for tests. Nothing here calls a server.
+   snapshot() feeds prep-native.js (widget, Live Activity, reminder count); the settings sheet carries its reminder switch
+   and sync controls ("p-n-*" acts go to it). */
 (function (G) {
   "use strict";
   var NODE = typeof module !== "undefined" && module.exports && !(G && G.document);
@@ -236,12 +238,17 @@
     return '<button type="button" class="pl-hero" data-act="p-why" aria-label="' + esc(label) + '"><span class="pl-num" aria-hidden="true">' + rd.score + '<small>/100</small></span>' +
       '<span class="pl-hb" aria-hidden="true"><b>' + esc(name) + " readiness</b><small>" + esc(line) + "</small></span>" + H.ico("chev") + "</button>";
   }
+  // The item's one-line name: the plan row, the widget's "next" and the Live Activity.
+  function itemTitle(it) {
+    return it.k === "rev" ? "Review " + plural(it.n, "due question", "due questions") : it.k === "lsn" ? "Lesson: " + it.title :
+      it.k === "new" ? plural(it.n, "new question", "new questions") : "Mini mock: " + String(it.label || "").replace(/ pattern$/, "");
+  }
   function itemHtml(it, pr) {
-    var t, sub, attrs = "";
-    if (it.k === "rev") { t = "Review " + plural(it.n, "due question", "due questions"); sub = "About " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
-    else if (it.k === "lsn") { t = "Lesson: " + it.title; sub = "About " + it.min + " min, then 3 quick questions"; attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"'; }
-    else if (it.k === "new") { t = plural(it.n, "new question", "new questions"); sub = (it.mods && it.mods.length ? "In your weakest modules" : "Where you left off") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
-    else { t = "Mini mock: " + it.label.replace(/ pattern$/, ""); sub = "50 questions, " + it.min + " min, marked like the exam"; }
+    var t = itemTitle(it), sub, attrs = "";
+    if (it.k === "rev") { sub = "About " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
+    else if (it.k === "lsn") { sub = "About " + it.min + " min, then 3 quick questions"; attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"'; }
+    else if (it.k === "new") { sub = (it.mods && it.mods.length ? "In your weakest modules" : "Where you left off") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
+    else { sub = "50 questions, " + it.min + " min, marked like the exam"; }
     var act = it.k === "lsn" ? "l-open" : "p-go";
     return '<li><button type="button" class="pn-row pl-item' + (pr.done ? " done" : "") + '" data-act="' + act + '" data-k="' + it.k + '"' + attrs + '>' +
       '<span class="pl-tick" aria-hidden="true">' + (pr.done ? ic("check") : "") + '</span><span class="pn-rb"><b>' + (pr.done ? '<span class="pl-sr">Done: </span>' : "") + esc(t) + "</b><small>" + esc(sub) + "</small></span>" + H.ico("chev") + "</button></li>";
@@ -267,7 +274,17 @@
       if (!box) return;
       var s = store(), pt = planValid(s) ? s.pt : makePlan(lessons);
       box.innerHTML = heroHtml(computeReadiness()) + '<h2 class="pn-h">Today\'s plan</h2>' + planHtml(pt);
+      if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
+  }
+  /* For prep-native.js: { score, exam, daysLeft, items: [{ label, done }], planDay "YYYY-MM-DD" | null }. items = today's
+     plan when it is made for today, else []. */
+  function snapshot(h) {
+    H = h;
+    var s = store(), td = H.today(), pt = planValid(s) ? s.pt : null, d = new Date(td * 864e5);
+    return { score: computeReadiness().score, exam: examLabel(), daysLeft: examDays(),
+      items: pt ? pt.items.map(function (it) { return { label: itemTitle(it), done: itemProgress(it, s, td, dayOf).done }; }) : [],
+      planDay: pt ? d.toISOString().slice(0, 10) : null };
   }
 
   /* ---------- starting an item ---------- */
@@ -381,7 +398,7 @@
     }).join("") + "</div>";
     out.rem = '<label class="pn-sl"><span class="pn-mut pn-small">Reminder time</span><input class="pn-in" type="time" id="plRem" name="reminderTime" value="' + esc(c.rem || "") + '"></label>' +
       '<div class="pn-wrap">' + chip("p-f-norem", "1", !c.rem, "No reminder") + "</div>" +
-      '<p class="pn-mut pn-small">The reminder itself arrives with a later app update. The time is kept on this phone until then.</p>';
+      (G.PREP_NATIVE ? G.PREP_NATIVE.remHtml(c) : '<p class="pn-mut pn-small">Your reminder time is kept on this phone.</p>');
     return step ? out[step] : out;
   }
   function settingsSheet() {
@@ -392,7 +409,7 @@
   function drawSettings(first) {
     var f = fieldsHtml(SET);
     var html = '<span class="pn-grab" aria-hidden="true"></span><h2 id="pnSetT">Your plan</h2><div class="pl-setbody">' +
-      '<h3 class="pl-sh">Exam</h3>' + f.exam + '<h3 class="pl-sh">Exam date</h3>' + f.date + '<h3 class="pl-sh">Time a day</h3>' + f.min + '<h3 class="pl-sh">Reminder</h3>' + f.rem + "</div>" +
+      '<h3 class="pl-sh">Exam</h3>' + f.exam + '<h3 class="pl-sh">Exam date</h3>' + f.date + '<h3 class="pl-sh">Time a day</h3>' + f.min + '<h3 class="pl-sh">Reminder</h3>' + f.rem + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="p-save">Save</button><button type="button" class="pn-btn" data-act="p-close">Cancel</button></div>';
     if (first) openSheet("set", html, "pnSetT");
     else { var sh = root().querySelector("#pnPlanSheet .pn-sheet"), body = sh && sh.querySelector(".pl-setbody"), y = body ? body.scrollTop : 0; if (sh) sh.innerHTML = html; body = sh && sh.querySelector(".pl-setbody"); if (body) body.scrollTop = y; }
@@ -410,6 +427,7 @@
     if (ch) s.exam = ch.tab;
     s.pt = null;
     H.save();
+    if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
   }
 
   /* ---------- onboarding: exam, date, minutes, reminder ---------- */
@@ -456,6 +474,7 @@
     }
     // Onboarding fields edit P.ob.c; the settings sheet edits SET.
     var c = P.sheet && P.sheet.id === "set" ? SET : P.ob && P.ob.c, redraw = P.sheet && P.sheet.id === "set" ? function () { drawSettings(false); } : function () { onboard(H); };
+    if (a.indexOf("p-n-") === 0) return G.PREP_NATIVE && G.PREP_NATIVE.act(a, b, H, c && redraw);
     if (a.indexOf("p-f-") === 0 && c) {
       if (a === "p-f-exam") c.exam = v;
       if (a === "p-f-nodate") c.date = null;
@@ -474,7 +493,7 @@
     if (P.ob && H && H.stackTop && H.stack().length === 1 && P.ob.i > 0) { P.ob.i--; onboard(H); return true; }
     return false;
   }
-  function leave() { P.sheet = null; P.ob = null; SET = null; }
+  function leave() { P.sheet = null; P.ob = null; SET = null; if (G.PREP_NATIVE) G.PREP_NATIVE.leave(); }
 
-  G.PREP_PLAN = { needsOnboard: needsOnboard, onboard: onboard, homeHtml: homeHtml, homeMounted: homeMounted, act: act, back: back, leave: leave, noteAnswer: noteAnswer, _pure: PURE, _p: P };
+  G.PREP_PLAN = { needsOnboard: needsOnboard, onboard: onboard, homeHtml: homeHtml, homeMounted: homeMounted, snapshot: snapshot, act: act, back: back, leave: leave, noteAnswer: noteAnswer, _pure: PURE, _p: P };
 })(typeof window !== "undefined" ? window : this);

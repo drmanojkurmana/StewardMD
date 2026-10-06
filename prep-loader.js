@@ -6,13 +6,15 @@
    "0" or ?prep=0 turns it off (same rule as the home tile in home.js). prep-arena.js (Arena and My stats) always loads; its
    own flag smd_prep_arena (default OFF, ?arena=1) decides whether the Compete section shows. prep-lessons.js (Lessons) has
    no flag of its own: a module shows its Lesson row only when prep/lessons/v1/index.json lists it. prep-plan.js
-   (onboarding, readiness, today's plan) and prep-flash.js (module flashcards) have no flag of their own either. */
+   (onboarding, readiness, today's plan) and prep-flash.js (module flashcards) have no flag of their own either.
+   prep-sync.js (opt-in encrypted sync) and prep-native.js (reminder, widget, Live Activity) load with them. */
 (function (G) {
   "use strict";
-  var V = "prep7";
+  var V = "prep8";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-flash.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  var OPTIONAL = { "prep-sync.js": 1 };
   var loading = null;
 
   function enabled() {
@@ -32,7 +34,8 @@
     return new Promise(function (res, rej) {
       var s = G.document.createElement("script");
       s.src = "/" + src + "?v=" + V; s.async = false;
-      s.onload = function () { done[src] = 1; res(); }; s.onerror = function () { rej(new Error(src)); };
+      // prep-sync.js is optional: without it PrepNucleus still loads, with no sync controls.
+      s.onload = function () { done[src] = 1; res(); }; s.onerror = function () { if (OPTIONAL[src]) res(); else rej(new Error(src)); };
       G.document.head.appendChild(s);
     });
   }

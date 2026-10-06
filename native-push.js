@@ -382,8 +382,10 @@
     if (C.Plugins && C.Plugins.LocalNotifications) {
       C.Plugins.LocalNotifications.addListener("localNotificationActionPerformed", function (a) {
         try {
-          var url = a && a.notification && a.notification.extra && a.notification.extra.url;
-          routeUrl(url);
+          var ex = (a && a.notification && a.notification.extra) || {};
+          // PrepNucleus daily reminder (prep-native.js): extra.route opens that screen through home.js's router.
+          if (ex.route && window.SMD_openRoute) { window.SMD_openRoute(ex.route); return; }
+          routeUrl(ex.url);
         } catch (x) {}
       });
     }
