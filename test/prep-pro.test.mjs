@@ -93,9 +93,10 @@ test("offer: nothing without one; real static expiry; quote percent", () => {
   const exp = new Date(2026, 9, 8, 16, 30).getTime();
   const o = P.offerText({ kind: "winback", finalPaise: 99900, listPaise: 599900, offPct: 83, saveRupees: 5000, expiresAt: exp });
   assert.equal(o.line, "Rs 999 for your first year (then Rs 5,999 a year). One time offer, valid until Thu 8 Oct, 4:30 pm.");
-  assert.equal(o.off, "83% off"); assert.equal(o.save, "Save Rs 5,000");
+  assert.equal(o.off, "83% off Rs 5,999"); assert.equal(o.save, "Save Rs 5,000");
+  assert.equal(P.offerText({ finalPaise: 99900, basePaise: 149900, listPaise: 599900, saveRupees: 500, expiresAt: exp }).save, "Save Rs 500 on Rs 1,499", "saving names its baseline");
   assert.equal(P.offerText({ finalPaise: 99900, basePaise: 149900, expiresAt: exp }).off, "");
-  assert.equal(P.offerText({ finalPaise: 99900, basePaise: 149900, listPaise: 599900, expiresAt: exp }).off, "83% off");   // vs list when no offPct
+  assert.equal(P.offerText({ finalPaise: 99900, basePaise: 149900, listPaise: 599900, expiresAt: exp }).off, "83% off Rs 5,999");   // vs list when no offPct
 });
 
 test("cancel line: store manage link, truthful one-time text", () => {
@@ -110,13 +111,37 @@ test("no em-dash in app text", async () => {
   assert.doesNotMatch(fs.readFileSync(new URL("../prep-pro.js", import.meta.url), "utf8"), /—/);
 });
 
-test("store path (iOS IAP): no student or win-back price it cannot charge", () => {
-  const stu = { listPaise: 599900, firstYearPaise: 119900, renewalPaise: 599900, priceReason: "student", offPct: 80 };
-  assert.equal(P.quoteView(stu, false).price, "Rs 1,199");
+test("store path (iOS IAP): the price the store charges, never a student or win-back price, no web steering", () => {
+  const L = new Date(2027, 2, 31, 12).getTime();
+  const stu = { listPaise: 599900, firstYearPaise: 479920, storeFirstYearPaise: 599900, renewalPaise: 599900, priceReason: "student", offPct: 20, firstYear: true };
+  assert.equal(P.quoteView(stu, false).price, "Rs 4,799");
   const v = P.quoteView(stu, true);
-  assert.equal(v.price, "Rs 5,999"); assert.equal(v.strike + v.off + v.reason, ""); assert.equal(v.note, "The student price applies on the website.");
-  const wb = P.quoteView({ listPaise: 599900, firstYearPaise: 99900, priceReason: "winback", offPct: 83 }, true);
-  assert.equal(wb.price, "Rs 5,999"); assert.match(wb.note, /website/);
+  assert.equal(v.price, "Rs 5,999"); assert.equal(v.strike + v.off + v.reason, ""); assert.equal(v.per, "a year");
+  // win-back during launch: the store's intro (launch) price, labelled, no win-back percent
+  const wb = P.quoteView({ listPaise: 599900, firstYearPaise: 99900, storeFirstYearPaise: 149900, renewalPaise: 599900, priceReason: "winback", offPct: 83, launchEndsAt: L, firstYear: true }, true);
+  assert.equal(wb.price, "Rs 1,499"); assert.equal(wb.strike, "Rs 5,999"); assert.equal(wb.reason, "Launch price until 31 Mar 2027"); assert.equal(wb.off, "Then Rs 5,999/year");
+  // student renewal: the store charges list
+  assert.equal(P.quoteView({ listPaise: 599900, firstYearPaise: 479920, storeFirstYearPaise: 599900, priceReason: "student", firstYear: false }, true).price, "Rs 5,999");
+  // older server without storeFirstYearPaise: list, never the lower price
+  assert.equal(P.quoteView({ listPaise: 599900, firstYearPaise: 99900, priceReason: "winback" }, true).price, "Rs 5,999");
   const launch = P.quoteView({ listPaise: 599900, firstYearPaise: 149900, priceReason: "launch", offPct: 75 }, true);
-  assert.equal(launch.price, "Rs 1,499"); assert.equal(launch.note, "");
+  assert.equal(launch.price, "Rs 1,499");
+  for (const x of [v, wb, launch]) assert.doesNotMatch(JSON.stringify(x), /website|web|stewardmd\.in/i);
+});
+
+test("student line only when the student price beats the current first-year price, never on the store path", () => {
+  const launchQ = { firstYearPaise: 149900, studentPaise: 479920, studentVerified: false };
+  assert.equal(P.studentOffer(launchQ, false), false, "Rs 4,799 student loses to Rs 1,499 launch");
+  const after = { firstYearPaise: 599900, studentPaise: 479920, studentVerified: false };
+  assert.equal(P.studentOffer(after, false), true);
+  assert.equal(P.studentOffer(after, true), false);
+  assert.equal(P.studentOffer({ ...after, studentVerified: true }, false), false);
+  assert.equal(P.studentOffer(null, false), false);
+  assert.equal(P.studentOffer({ firstYearPaise: 599900 }, false), false, "no studentPaise from the server: hidden");
+});
+
+test("cancel line before buying matches the checkout path", () => {
+  assert.equal(P.buyCancelView(false).text, "Cancel anytime: no auto-renewal, you choose whether to renew.");
+  const s = P.buyCancelView(true);
+  assert.equal(s.kind, "store"); assert.equal(s.url, "https://apps.apple.com/account/subscriptions");
 });

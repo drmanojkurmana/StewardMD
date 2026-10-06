@@ -99,6 +99,9 @@ export function prepQuote(cfg, opts, now) {
     firstYearPaise: best.paise, renewalPaise: list, priceReason: best.reason,
     offPct: Math.round((list - best.paise) * 100 / list), saveRupees: Math.round((list - best.paise) / 100),
     studentVerified: !!opts.studentVerified, referralCreditDays: cfg.referralDays,
+    // storeFirstYearPaise: what store IAP charges (its intro offer only; no per-user student / win-back price there).
+    // studentPaise: the verified-student price, so the client says "verify" only when it would actually be lower.
+    storeFirstYearPaise: c[0].paise, studentPaise: Math.round(list * (100 - cfg.studentDiscountPct) / 100),
     store: {
       iosOfferId: best.reason === "winback" ? st.iosWinbackOfferId : null,   // intro is automatic on iOS
       playBasePlanId: st.playBasePlanId,

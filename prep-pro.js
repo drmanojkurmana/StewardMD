@@ -70,21 +70,30 @@
      struck through only when the first year is below it (the list price is the real renewal price), the quote's own
      percent, reason and dates, and the renewal price. No quote (offline, endpoint missing): the list price, nothing off. */
   var REASONS = { intro: "Introductory price", student: "Student price", launch: "Launch price", winback: "One time price" };
-  /* store: checkout goes through store IAP (iOS), which cannot apply a per-user student or win-back price (no offer
-     signing yet): show the plain list price the store charges, plus where the lower price applies. */
+  /* store: checkout is store IAP (iOS), which charges its own price (the intro offer set in App Store Connect) and
+     cannot apply a per-user student or win-back price. So on that path a student / win-back quote shows the store
+     price (quote.storeFirstYearPaise: launch or intro first year, else list) with no percent (the quote's percent is
+     for the other price). No "cheaper on the website" line: the India storefront rejects any steering (pro-paywall.js
+     ANTI-STEERING). */
   function quoteView(q, store) {
     q = q || {};
     if (store && (q.priceReason === "student" || q.priceReason === "winback")) {
-      var v0 = quoteView({ listPaise: q.listPaise, renewalPaise: q.renewalPaise, priceReason: "renewal" });
-      v0.note = q.priceReason === "student" ? "The student price applies on the website." : "This one time price applies on the website.";
-      return v0;
+      var l0 = q.listPaise || PLAN.listPaise, f0 = q.storeFirstYearPaise != null ? q.storeFirstYearPaise : l0;
+      return quoteView({ listPaise: l0, renewalPaise: q.renewalPaise, firstYearPaise: f0, launchEndsAt: q.launchEndsAt,
+        priceReason: f0 >= l0 || q.firstYear === false ? "renewal" : q.launchEndsAt ? "launch" : "intro" });
     }
     var list = q.listPaise || PLAN.listPaise, first = q.firstYearPaise != null ? q.firstYearPaise : list, renew = q.renewalPaise || list, below = first < list && q.priceReason !== "renewal";
     return { price: rs(first), per: below ? "first year" : "a year", strike: below ? rs(list) : "",
       reason: below ? (REASONS[q.priceReason] || "") + (q.priceReason === "launch" && q.launchEndsAt ? " until " + fmtDate(q.launchEndsAt) : "") : "",
-      off: below ? (q.offPct ? q.offPct + "% off " + rs(list) + ", then " : "Then ") + rs(renew) + "/year" : "",
-      renewal: "", note: "" };
+      off: below ? (q.offPct ? q.offPct + "% off " + rs(list) + ", then " : "Then ") + rs(renew) + "/year" : "" };
   }
+  // The "verify for the student price" line: only off the store path, only when the server's student price would
+  // actually beat the current first-year price (20% off list loses to the Rs 1,499 launch price). No quote: hidden.
+  function studentOffer(q, store) { return !!(!store && q && !q.studentVerified && q.studentPaise > 0 && q.firstYearPaise != null && q.studentPaise < q.firstYearPaise); }
+  // The cancel line before buying, by checkout path: store subscriptions auto-renew and cancel in the store;
+  // Razorpay sells a one-time year, so there is nothing to cancel.
+  var STORE_SUBS = "https://apps.apple.com/account/subscriptions";
+  function buyCancelView(store) { return store ? { kind: "store", text: "Cancel anytime in your App Store subscriptions.", url: STORE_SUBS } : cancelView({}); }
   /* The cancel line for a Pro entitlement { active, until, source, autoRenews, manageUrl }: a store subscription opens
      its manage page (manageUrl); a one-time purchase (Razorpay orders) says truthfully that it does not renew. */
   function cancelView(e) {
@@ -97,9 +106,11 @@
     if (!o || o.finalPaise == null || !o.expiresAt) return null;
     var list = o.listPaise || o.basePaise, pct = o.offPct || (o.listPaise && o.listPaise > o.finalPaise ? Math.round((1 - o.finalPaise / o.listPaise) * 100) : 0);
     return { line: rs(o.finalPaise) + " for your first year (then " + rs(list) + " a year). One time offer, valid until " + fmtWhen(o.expiresAt) + ".",
-      off: pct ? pct + "% off" : "", save: o.saveRupees ? "Save " + rs(o.saveRupees * 100) : "" };
+      price: rs(o.finalPaise), then: "Then " + rs(list) + " a year. One time offer, valid until " + fmtWhen(o.expiresAt) + ".",
+      // Name each baseline: the percent is off the list price, the saving (server) is off the first-year price walked away from.
+      off: pct ? pct + "% off " + rs(list) : "", save: o.saveRupees ? "Save " + rs(o.saveRupees * 100) + (o.basePaise && o.basePaise < list ? " on " + rs(o.basePaise) : "") : "" };
   }
-  var PURE = { CFG: CFG, PLAN: PLAN, dayKey: dayKey, fmtWhen: fmtWhen, rs: rs, openSet: openSet, modulesOf: modulesOf, freshDay: freshDay, used: used, gate: gate, count: count, quoteView: quoteView, cancelView: cancelView, offerText: offerText };
+  var PURE = { CFG: CFG, PLAN: PLAN, dayKey: dayKey, fmtWhen: fmtWhen, rs: rs, openSet: openSet, modulesOf: modulesOf, freshDay: freshDay, used: used, gate: gate, count: count, quoteView: quoteView, cancelView: cancelView, buyCancelView: buyCancelView, studentOffer: studentOffer, offerText: offerText };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -149,7 +160,8 @@
     return api("GET", "/prep-quote?plan=year").then(function (x) { P.quote = x.s === 200 && x.d.firstYearPaise != null ? x.d : null; }, function () {});
   }
   function loadOffer() {
-    if (!signedIn()) return Promise.resolve(null);
+    // Never on the store path: the first GET starts the one-time 48 h window, and the card is not shown there.
+    if (!signedIn() || storePath()) return Promise.resolve(null);
     return api("GET", "/prep-offer").then(function (x) { P.offer = x.s === 200 && x.d.offer && offerText(x.d.offer) ? x.d.offer : null; return P.offer; }, function () { return null; });
   }
 
@@ -165,35 +177,36 @@
   function homeMounted() { if (isPro()) return; loadOffer().then(function () { var el = D.querySelector("#ppOfferSlot"); if (el) el.innerHTML = offerHtml(); }); }
   function offerHtml() {
     var t = offerText(P.offer); if (!t || isPro() || storePath()) return "";   // the store cannot charge the offer price yet
-    return '<section class="pn-panel pp-offer" aria-labelledby="ppOfferT"><p class="pp-kick" id="ppOfferT">A one time price for you</p><p class="pp-offer-line">' + esc(t.line) + "</p>" +
+    return '<section class="pn-panel pp-offer" aria-labelledby="ppOfferT"><h2 class="pp-price" id="ppOfferT"><b>' + t.price + "</b> <span>first year</span></h2>" +
+      '<p class="pp-offer-line">' + esc(t.then) + "</p>" +
       (t.off || t.save ? '<p class="pp-save">' + esc([t.off, t.save].filter(Boolean).join(" \u00b7 ")) + "</p>" : "") +
-      '<p class="pn-mut pn-small pp-cancel">Cancel anytime: manage or cancel from the PrepNucleus Pro screen.</p>' +
+      '<p class="pn-mut pn-small pp-cancel">' + esc(buyCancelView(false).text) + "</p>" +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="pro-odismiss">Dismiss</button><button type="button" class="pn-btn pri" data-act="pro-obuy">Get this price</button></div></section>';
   }
   function planHtml() {
-    var v = quoteView(P.quote, storePath());
-    return '<section class="pn-panel pp-plan" aria-labelledby="ppPlanT"><p class="pp-kick" id="ppPlanT">Yearly' + (v.reason ? " \u00b7 " + esc(v.reason) : "") + "</p>" +
-      '<p class="pp-price"><b>' + v.price + "</b> <span>" + v.per + "</span>" + (v.strike ? ' <s class="pp-strike" aria-label="List price ' + v.strike + '">' + v.strike + "</s>" : "") + "</p>" +
-      (v.off ? '<p class="pp-save">' + esc(v.off) + "</p>" : "") + (v.renewal ? '<p class="pn-mut pn-small pp-renew">' + esc(v.renewal) + "</p>" : "") + (v.note ? '<p class="pn-mut pn-small pp-note">' + esc(v.note) + "</p>" : "") +
-      '<button type="button" class="pn-btn pri" data-act="pro-buy">Get PrepNucleus Pro</button><p class="pn-mut pn-small pp-cancel">Cancel anytime: manage or cancel from this screen.</p></section>';
+    var store = storePath(), v = quoteView(P.quote, store), c = buyCancelView(store);
+    return '<section class="pn-panel pp-plan" aria-labelledby="ppPlanT"><h2 class="pp-price" id="ppPlanT"><b>' + v.price + "</b> <span>" + v.per + "</span>" + (v.strike ? ' <s class="pp-strike" aria-label="List price ' + v.strike + '">' + v.strike + "</s>" : "") + "</h2>" +
+      (v.reason ? '<p class="pp-why">' + esc(v.reason) + "</p>" : "") + (v.off ? '<p class="pp-save">' + esc(v.off) + "</p>" : "") +
+      '<button type="button" class="pn-btn pri" data-act="pro-buy">Get PrepNucleus Pro</button>' +
+      (c.url ? '<a class="pn-link pp-start pp-cancel" href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.text) + "</a>" : '<p class="pn-mut pn-small pp-cancel">' + esc(c.text) + "</p>") + "</section>";
   }
   function manageHtml() {
     var e = ent(), c = cancelView(e);
-    return '<section class="pn-panel pp-manage"><p class="pp-kick">Your plan</p><p class="pp-offer-line">PrepNucleus Pro is active' + (e.until ? " until " + esc(fmtDate(e.until)) : "") + ".</p>" +
+    return '<section class="pn-panel pp-manage" aria-labelledby="ppManT"><h2 class="pp-offer-line pp-h" id="ppManT">PrepNucleus Pro is active' + (e.until ? ' until <span class="pp-nw">' + esc(fmtDate(e.until)) + "</span>" : "") + ".</h2>" +
       '<p class="pn-mut pn-small" id="ppCancelMsg" aria-live="polite">' + esc(c.text) + "</p>" +
       (c.kind === "store" ? '<button type="button" class="pn-btn" data-act="pro-manage">Manage or cancel subscription</button>' : "") + "</section>";
   }
-  var ROWS = [["Questions a day", "50", "No limit"], ["Lessons a day", "1", "No limit"], ["Flashcards a day", "10", "No limit"], ["Daily sprint", "Yes", "Yes"], ["Modules", "First 2 of each subject, fully", "All"]];
+  var ROWS = [["Questions a day", "50", "No limit"], ["Lessons a day", "1", "No limit"], ["Flashcards a day", "10", "No limit"], ["Daily sprint", "Yes", "Yes"], ["Modules", "2 per subject", "All"]];
   function renderPricing(H) {
-    var pro = isPro(), studentVerified = !!(P.quote && (P.quote.studentVerified || P.quote.priceReason === "student"));
+    var pro = isPro();
     var ios = G.SMD_IAP && G.SMD_IAP.available && G.SMD_IAP.available();
     H.paint(H.bar("PrepNucleus Pro", pro ? "Active" : "", "back") + '<div class="pn-body pp-body" id="ppPricing">' +
       (pro ? manageHtml() : offerHtml() + planHtml() +
-        (studentVerified ? "" : '<p class="pn-mut pn-small pp-line">Students: verify your college ID for the student price. <button type="button" class="pn-link pp-inl" data-act="pro-verify">Verify</button></p>')) +
+        (!studentOffer(P.quote, storePath()) ? "" : '<p class="pn-mut pn-small pp-line">Students: verify your college ID for the student price. <button type="button" class="pn-link pp-inl" data-act="pro-verify">Verify</button></p>')) +
       '<h2 class="pn-sec">Free and Pro</h2><table class="pp-cmp"><thead><tr><th scope="col"><span class="pp-sr">Feature</span></th><th scope="col">Free</th><th scope="col">Pro</th></tr></thead><tbody>' +
       ROWS.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td><td>" + r[2] + "</td></tr>"; }).join("") + "</tbody></table>" +
       (pro ? "" : '<h2 class="pn-sec">Referred by a friend?</h2><label class="pn-sl" for="ppRef"><span class="pn-mut pn-small">Their StewardMD ID (optional)</span>' +
-        '<span class="pp-refrow"><input id="ppRef" class="pn-in" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="done">' +
+        '<span class="pp-refrow"><input id="ppRef" name="referral" class="pn-in" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="done">' +
         '<button type="button" class="pn-btn sm" data-act="pro-ref">Apply</button></span></label><p class="pn-mut pn-small" id="ppRefMsg" aria-live="polite">' + esc(P.msg) + "</p>") +
       '<section class="pn-panel pp-refund"><p><b>7-day full refund.</b> Not for you? Ask within 7 days of paying and you get all of it back.</p>' +
       '<button type="button" class="pn-link pp-start" data-act="pro-refund">Request refund</button>' +

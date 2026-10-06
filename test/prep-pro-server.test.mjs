@@ -62,6 +62,7 @@ test("quote: student 20% is off the LIST price and never stacks on launch", asyn
   assert.deepEqual([before.firstYearPaise, before.priceReason, before.studentVerified], [149900, "launch", true], "launch 1,499 beats student 4,799; never 1,199");
   const after = await P.quoteFor(ENV, "u1", s.deps, AFTER);
   assert.deepEqual([after.firstYearPaise, after.priceReason, after.offPct], [479920, "student", 20]);
+  assert.deepEqual([before.storeFirstYearPaise, before.studentPaise, after.storeFirstYearPaise, after.studentPaise], [149900, 479920, 599900, 479920], "store price = launch/intro only");
   s.deps.claims.u1 = { verified: true };   // a registered doctor is not a student
   assert.equal((await P.quoteFor(ENV, "u1", s.deps, AFTER)).priceReason, "intro");
 });

@@ -1,6 +1,10 @@
 /* PrepNucleus Pro (prep-pro.js): pricing screen, win-back card, limit sheet. Reads the prep.css --pn-* tokens (body.dark
    switches them); the sheet reuses .pn-sheet-wrap / .pn-scrim / .pn-sheet from prep.css. Loaded by prep-loader.js. */
-.pn-root .pp-kick { font-size: 13px; font-weight: 650; letter-spacing: .02em; color: var(--pn-mut); }
+.pn-root .pp-price { margin: 0; font-size: inherit; font-weight: inherit; line-height: 1.1; }
+.pn-root .pp-why { margin-top: -4px; color: var(--pn-mut); font-size: 14px; font-weight: 600; }
+.pn-root .pp-h { margin: 0; font-weight: 650; text-wrap: balance; }
+.pn-root a.pp-cancel { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+.pn-root a.pp-cancel:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; border-radius: 6px; }
 .pn-root .pp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; }
 .pn-root .pp-price b { font-size: 34px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .pn-root .pp-price span { color: var(--pn-mut); font-size: 15px; }
@@ -29,3 +33,5 @@
 .pn-root .pp-inl, .pn-root .pp-start { min-height: 44px; flex: 0 0 auto; }
 .pn-root .pp-cmp tbody th { width: 42%; }
 .pn-root .pp-cmp td:last-child { white-space: nowrap; }
+.pn-root .pp-cmp td { font-variant-numeric: tabular-nums; }
+.pn-root .pp-nw { white-space: nowrap; }

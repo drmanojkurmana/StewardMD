@@ -145,26 +145,40 @@ try {
   // ---- pricing: launch quote
   const LAUNCH_END = new Date(2027, 2, 31, 23, 59).getTime();
   await ev(SIGN_IN);
-  await ev(`window.__ent.quote={plan:"year",productId:"prep_pro_year",listPaise:599900,firstYearPaise:149900,renewalPaise:599900,priceReason:"launch",offPct:75,saveRupees:4500,studentVerified:false,referralCreditDays:30,launchEndsAt:${LAUNCH_END}}; return 1;`);
+  await ev(`window.__ent.quote={plan:"year",productId:"prep_pro_year",listPaise:599900,firstYearPaise:149900,renewalPaise:599900,priceReason:"launch",offPct:75,saveRupees:4500,studentVerified:false,studentPaise:479920,storeFirstYearPaise:149900,firstYear:true,referralCreditDays:30,launchEndsAt:${LAUNCH_END}}; return 1;`);
   await openHome(); await click("#smdPrep [data-act=pro-open]");
   ok(await until(`return /Launch price/.test((document.getElementById("ppPricing")||{}).innerText||"");`, 5000), "pricing opens with the quote");
   const pt = await text();
   ok(/Rs 1,499/.test(pt) && /Launch price until 31 Mar 2027/.test(pt) && /75% off Rs 5,999, then Rs 5,999\/year/.test(pt), "launch price, real date, quote percent and renewal");
   ok(await ev(`var s=document.querySelectorAll("#ppPricing s"); return s.length===1 && s[0].textContent==="Rs 5,999";`) === true, "the only strikethrough is the list price");
-  ok(/Cancel anytime/.test(pt) && /7-day full refund/.test(pt) && !!(await ev(`return !!document.querySelector("#ppPricing [data-act=pro-refund]");`)), "Cancel anytime, 7-day refund line and Request refund");
-  ok(/Free/.test(pt) && /No limit/.test(pt) && /StewardMD ID/.test(pt) && /verify your college ID/.test(pt), "comparison, referral field, verify link");
+  ok(/Cancel anytime: no auto-renewal/.test(pt) && /7-day full refund/.test(pt) && !!(await ev(`return !!document.querySelector("#ppPricing [data-act=pro-refund]");`)), "Cancel anytime, 7-day refund line and Request refund");
+  ok(/Free/.test(pt) && /No limit/.test(pt) && /StewardMD ID/.test(pt) && !/verify your college ID/.test(pt), "comparison, referral field; no student line while launch (Rs 1,499) beats student (Rs 4,799)");
   ok(!/\d+:\d\d:\d\d/.test(pt) && await ev(`return !document.querySelector("#ppPricing [role=timer], #ppPricing .pn-cd");`) === true, "no countdown");
   ok(!/\u2014/.test(pt) && !/3 months/.test(pt), "no em-dash, no 3-month plan");
   const short = await ev(`return Array.from(document.querySelectorAll("#ppPricing button")).filter(function(b){var h=b.offsetHeight;return h>0&&h<44;}).map(function(b){return b.getAttribute("data-act")+":"+b.offsetHeight;}).join(",");`);
   ok(short === "", "every pricing button is at least 44px tall" + (short ? ": " + short : ""));
   await shot("pricing");
+  await ev(`window.SMD_PRO={buy:function(b){window.__buy=b;}}; return 1;`); await click("#ppPricing [data-act=pro-buy]");
+  ok(await ev(`return JSON.stringify(window.__buy);`) === '{"productId":"prep_pro_year","prepPlan":"year"}', "Razorpay checkout sends the product and plan only, never a price");
 
   // ---- after the launch date: list price
-  await ev(`window.__ent.quote={plan:"year",productId:"prep_pro_year",listPaise:599900,firstYearPaise:599900,renewalPaise:599900,priceReason:"base",studentVerified:false}; return 1;`);
+  await ev(`window.__ent.quote={plan:"year",productId:"prep_pro_year",listPaise:599900,firstYearPaise:599900,renewalPaise:599900,priceReason:"base",studentVerified:false,studentPaise:479920}; return 1;`);
   await click("#smdPrep [data-act=back]"); await click("#smdPrep [data-act=pro-open]");
   await until(`return /Rs 5,999/.test((document.getElementById("ppPricing")||{}).innerText||"");`, 5000); await sleep(300);
   const lt = await text();
   ok(/Rs 5,999/.test(lt) && !/Launch price/.test(lt) && !/% off/.test(lt) && await ev(`return !document.querySelector("#ppPricing s");`) === true, "after launch: list price, no strike, no launch line");
+  ok(/verify your college ID/.test(lt), "after launch: student (Rs 4,799) beats list, so the verify line shows");
+
+  // ---- iOS store path with a win-back quote: the store's price only, no offer fetch, store cancel link
+  await ev(`window.SMD_IAP={isIOS:function(){return true;},available:function(){return true;}}; window.__calls.length=0; window.__ent.offer={kind:"winback",finalPaise:99900,listPaise:599900,basePaise:149900,saveRupees:500,expiresAt:Date.now()+864e5,productId:"prep_pro_year"}; window.__ent.quote={plan:"year",productId:"prep_pro_year",listPaise:599900,firstYearPaise:99900,storeFirstYearPaise:149900,renewalPaise:599900,priceReason:"winback",offPct:83,firstYear:true,studentVerified:false,studentPaise:479920,launchEndsAt:${LAUNCH_END}}; return 1;`);
+  await click("#smdPrep [data-act=back]"); await click("#smdPrep [data-act=pro-open]");
+  await until(`return /Rs 1,499/.test((document.getElementById("ppPricing")||{}).innerText||"");`, 5000); await sleep(400);
+  const it = await text();
+  ok(/Rs 1,499/.test(it) && /Launch price until 31 Mar 2027/.test(it) && !/Rs 999/.test(it) && !/83%/.test(it) && !/website|stewardmd\.in/i.test(it) && !/verify your college ID/.test(it), "iOS: store price (launch intro), no win-back or student price, no web steering");
+  ok(await ev(`return !document.querySelector("#smdPrep .pp-offer") && window.__calls.indexOf("GET /prep-offer")<0;`) === true, "iOS: no win-back card and the offer window is never started");
+  ok(await ev(`var a=document.querySelector("#ppPricing a.pp-cancel"); return !!a && a.href==="https://apps.apple.com/account/subscriptions" && a.offsetHeight>=44;`) === true, "iOS: Cancel anytime links to App Store subscriptions (44px)");
+  await shot("pricing-ios");
+  await ev(`delete window.SMD_IAP; window.__ent.quote=null; return 1;`);
 
   // ---- win-back card on home
   const EXP = new Date(2026, 9, 8, 16, 30).getTime();
@@ -172,7 +186,7 @@ try {
   await openHome();
   ok(await until(`return !!document.querySelector("#smdPrep .pp-offer");`, 5000), "win-back card shows on home");
   const ot = await ev(`return document.querySelector("#smdPrep .pp-offer").innerText;`);
-  ok(/Rs 999 for your first year \(then Rs 5,999 a year\)/.test(ot) && /valid until Thu 8 Oct, 4:30 pm/.test(ot) && /83% off/.test(ot) && /Save Rs 5,000/.test(ot) && /Cancel anytime/.test(ot), "offer: price, real static expiry, quote percent, saving, Cancel anytime");
+  ok(/Rs 999/.test(ot) && /first year/.test(ot) && /Then Rs 5,999 a year\. One time offer, valid until Thu 8 Oct, 4:30 pm\./.test(ot) && /83% off/.test(ot) && /Save Rs 5,000/.test(ot) && /Cancel anytime: no auto-renewal/.test(ot), "offer: price, real static expiry, quote percent, saving, Cancel anytime");
   await ev(`document.querySelector("#smdPrep .pp-offer").scrollIntoView({block:"center"}); return 1;`); await sleep(150);
   await shot("offer");
   await click("#smdPrep [data-act=pro-odismiss]"); await sleep(200);
@@ -193,7 +207,7 @@ try {
   await click("#smdPrep [data-act=pro-open]");
   ok(await until(`return !!document.querySelector("#ppPricing [data-act=pro-manage]");`, 5000), "Pro (store, renewing): Manage or cancel subscription shows");
   ok(await ev(`return !document.querySelector("#ppPricing [data-act=pro-buy]") && /active until 6 Oct 2027/.test(document.getElementById("ppPricing").innerText);`) === true, "Pro: active until date, no buy button");
-  await shot("manage");
+  await sleep(3500); await shot("manage");
   await click("#ppPricing [data-act=pro-manage]");
   ok(await ev(`return window.__opened;`) === "https://apps.apple.com/account/subscriptions", "manage opens the store's manageUrl");
   ok(await ev(`return PrepPro.can("questions",{items:[{_m:"ana-brachial-plexus",_s:"anatomy"}]});`) === true, "Pro unlocks the capped module");
