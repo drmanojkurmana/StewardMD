@@ -36,8 +36,9 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   `prep-upload-bank.mjs` (wrangler R2 upload), and owner-run Vertex tools that cost money:
   `prep-measure.mjs` (Phase 0), `prep-screen-keys.mjs` (blind-solve key screen, about $3.4 at 7 items a request),
   `prep-fill.mjs` (Layer B four Batch stages, `--merge` to `v2`, estimate about $19 for the whole fill), all on
-  `prep-vertex.mjs`. Every `--dry-run` makes no call. Before the first real run, check the Batch details flagged
-  "CHECK AGAINST THE CURRENT VERTEX DOCS" in `prep-vertex.mjs` (line format, output layout, location).
+  `prep-vertex.mjs`. Every `--dry-run` makes no call. Batch format checked against a real job 2026-10-06: Batch for
+  `gemini-3.1-flash-lite` runs only in location `global` (us-central1 refuses it, MODEL_NOT_SUPPORTED_FOR_BATCH), now
+  the default; `key` is echoed on each output line; user (non-ADC) gcloud logins need the `x-goog-user-project` header.
 - Taxonomy source: `prep/taxonomy/*.json` (one per subject; `validateSubject` in the builder).
 
 ## Store
@@ -49,6 +50,13 @@ localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, ex
 `test/prep-generate.test.mjs`, `test/prep-layerc-e2e.test.mjs`, `test/prep-create.test.mjs`, `test/prep-teacher.test.mjs`,
 `test/prep-tools.test.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-create-ui.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
 Chromium at `/opt/pw-browsers/chromium` by default, `CHROME=` to override).
+
+## Bank v1 mapping (2026-10-06)
+Gemini mapping (`prep-classify.mjs --per 10`, all 19 MBBS subjects, $16.11 estimate) scored 96.7% on the 120-item
+Anatomy sample (--per 25 scored 93.3%, so 10 was kept); the built bank agrees 92.5% (plan target 90%). The builder
+prefers confident Gemini answers; embeddings are only the fallback, so bge-small (default pin) is used for them.
+`prep/build/embed-*.json` and `llm-*.json` are committed (owner rule after a worktree cleanup deleted them); the
+`vec-*.npy` caches are not.
 
 ## Gotchas
 - **MedMCQA "rt" repair needs guards.** Building the repair vocabulary over every subject attests rare words
