@@ -15,6 +15,7 @@
     levels: { free: ["mbbs"] }, proFeature: "narke", models: "NARKE_MODELS",
     statusBg: "#faf8f3", draft: true,
     strings: {
+      tools: { anaesthesia: { en: "Anaesthesia", hi: "एनेस्थीसिया" } },
       learn: {
         learnLine: { en: "Short lessons on anaesthesia, the airway, pain and resuscitation, with pictures. Start here if you are new.", hi: "एनेस्थीसिया, वायुमार्ग, दर्द और पुनर्जीवन पर तस्वीरों के साथ छोटे पाठ। नए हैं तो यहीं से शुरू करें।" },
         testLine: { en: "Questions, crisis drills, monitor clinics and calculators to practise on.", hi: "अभ्यास के लिए प्रश्न, आपात ड्रिल, मॉनिटर क्लिनिक और कैलकुलेटर।" }

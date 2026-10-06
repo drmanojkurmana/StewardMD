@@ -72,3 +72,10 @@ test("Narkē stays within its 450-file budget (narke/ and narke-models/)", async
   const n = count("narke") + count("narke-models");
   assert.ok(n <= 450, n + " files");
 });
+
+test("every id in narke/models.json has its narke-models file, drill-core first", async () => {
+  const { existsSync } = await import("node:fs");
+  const ids = JSON.parse(read("narke/models.json")).models;
+  assert.equal(ids[0], "drill-core");
+  for (const id of ids) assert.ok(existsSync("narke-models/" + id + ".js"), id);
+});

@@ -67,6 +67,7 @@ try {
   await ev(`document.querySelector('#smdNarke [data-act=pick][data-t=test]').click(); return 1;`);
   await sleep(600);
   ok(await ev(`return NARKE.isOpen() && !!document.querySelector('#smdNarke');`) === true, "the Test tab opens");
+  ok(await until(`return NARKE._tools && NARKE._tools.length === 12 && NARKE._sims.length >= 12;`, 20000), "12 calculators and 12 drills are listed: " + await ev(`return [NARKE._tools && NARKE._tools.length, NARKE._sims && NARKE._sims.length].join(",");`));
   ok(!/[\u2013\u2014]/.test(await ev(`return document.getElementById("smdNarke").innerText;`)), "no em or en dash on the Narkē screens");
   await ev(`NARKE.back(); NARKE.back(); NARKE.back(); return 1;`);
   ok(await until(`return !NARKE.isOpen();`, 5000), "back() closes Narkē and returns to home");
