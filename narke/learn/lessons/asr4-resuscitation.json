@@ -1,0 +1,235 @@
+{
+  "id": "asr4-resuscitation",
+  "unit": "asr4",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "All doses and ratios are from the kb neonatal and paediatric arrest protocols (AHA/AAP 2025)"
+    ]
+  },
+  "title": {
+    "en": "Newborn and child resuscitation for the anaesthetist",
+    "hi": "Anaesthetist के लिए नवजात और बच्चे का resuscitation"
+  },
+  "idea": {
+    "en": "The anaesthetist is often the airway expert at a caesarean birth and a paediatric arrest. In newborns, ventilation fixes most problems. In children, high-quality CPR and early adrenaline come first.",
+    "hi": "Caesarean जन्म और paediatric arrest में anaesthetist अक्सर airway विशेषज्ञ होता है। नवजात में ventilation ज़्यादातर समस्याएँ ठीक करता है। बच्चों में high-quality CPR और जल्दी adrenaline पहले आते हैं।"
+  },
+  "see": {
+    "diagram": "diagrams/asr4-resuscitation.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "On the left a newborn under an amber radiant warmer with a blue bag and mask at the head. Below, three teal dots and one blue ring show the 3 to 1 rhythm. On the right a red box holds 15 bars and 2 blue rings. A green syringe lies below it.",
+      "hi": "बाईं ओर amber radiant warmer के नीचे नवजात, सिर पर नीला bag और mask। नीचे तीन teal बिंदु और एक नीला छल्ला 3 से 1 लय दिखाते हैं। दाईं ओर लाल डिब्बे में 15 पट्टियाँ और 2 नीले छल्ले। उसके नीचे हरी syringe।"
+    },
+    "caption": {
+      "en": "Newborn warming, ventilation and 3:1 compressions, and the child 15:2 ratio with adrenaline.",
+      "hi": "नवजात को गर्म रखना, ventilation और 3:1 compressions, और adrenaline के साथ बच्चे का 15:2 अनुपात।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.26,
+        "y": 0.15,
+        "label": {
+          "en": "Warm and dry",
+          "hi": "गर्म और सूखा"
+        },
+        "note": {
+          "en": "Dry, keep warm at 36.5 to 37.5 °C and stimulate in the first minute.",
+          "hi": "पहले मिनट में सुखाएँ, 36.5 से 37.5 °C पर गर्म रखें और उत्तेजित करें।"
+        }
+      },
+      {
+        "x": 0.07,
+        "y": 0.38,
+        "label": {
+          "en": "Bag and mask",
+          "hi": "Bag और mask"
+        },
+        "note": {
+          "en": "Start within 60 seconds if apnoeic, gasping or heart rate below 100. Air at 35 weeks or more.",
+          "hi": "Apnoea, gasping या heart rate 100 से कम हो तो 60 सेकंड में शुरू करें। 35 सप्ताह या अधिक में air।"
+        }
+      },
+      {
+        "x": 0.24,
+        "y": 0.82,
+        "label": {
+          "en": "3:1 compressions",
+          "hi": "3:1 compressions"
+        },
+        "note": {
+          "en": "Only if heart rate stays below 60 after 30 seconds of effective ventilation.",
+          "hi": "केवल अगर 30 सेकंड के प्रभावी ventilation के बाद भी heart rate 60 से कम रहे।"
+        }
+      },
+      {
+        "x": 0.74,
+        "y": 0.37,
+        "label": {
+          "en": "Child CPR 15:2",
+          "hi": "बच्चे का CPR 15:2"
+        },
+        "note": {
+          "en": "Two rescuers use 15 compressions to 2 breaths until puberty.",
+          "hi": "दो rescuers यौवन तक 15 compressions पर 2 साँसें देते हैं।"
+        }
+      },
+      {
+        "x": 0.69,
+        "y": 0.76,
+        "label": {
+          "en": "Adrenaline",
+          "hi": "Adrenaline"
+        },
+        "note": {
+          "en": "Child 0.01 mg/kg IV/IO, max 1 mg. Newborn 0.01 to 0.03 mg/kg IV.",
+          "hi": "बच्चा 0.01 mg/kg IV/IO, अधिकतम 1 mg। नवजात 0.01 से 0.03 mg/kg IV।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Newborn: warm, dry and stimulate. Start ventilation within 60 seconds if apnoeic, gasping or heart rate is under 100.",
+        "hi": "नवजात: गर्म करें, सुखाएँ और उत्तेजित करें। Apnoea, gasping या heart rate 100 से कम हो तो 60 सेकंड में ventilation शुरू करें।"
+      },
+      {
+        "en": "Ventilate at 30 to 60 breaths per minute with 20 to 30 cmH2O. If the chest does not rise, use [[mr-sopa]].",
+        "hi": "30 से 60 साँस प्रति मिनट पर 20 से 30 cmH2O से ventilate करें। छाती न उठे तो [[mr-sopa]] करें।"
+      },
+      {
+        "en": "Start compressions only if heart rate stays below 60 after 30 seconds of ventilation that moves the chest. Use 3:1 and 100% oxygen.",
+        "hi": "छाती हिलाने वाले 30 सेकंड के ventilation के बाद भी heart rate 60 से कम रहे तभी compressions शुरू करें। 3:1 और 100% oxygen लें।"
+      },
+      {
+        "en": "Newborn adrenaline is 0.01 to 0.03 mg/kg IV, preferably by umbilical venous catheter, every 3 to 5 minutes.",
+        "hi": "नवजात adrenaline 0.01 से 0.03 mg/kg IV है, अधिमानतः umbilical venous catheter से, हर 3 से 5 मिनट।"
+      },
+      {
+        "en": "Child: compress to one-third of chest depth at 100 to 120 per minute. Use 15:2 with two rescuers.",
+        "hi": "बच्चा: 100 से 120 प्रति मिनट पर छाती की एक-तिहाई गहराई तक दबाएँ। दो rescuers में 15:2।"
+      },
+      {
+        "en": "Child adrenaline is 0.01 mg/kg IV/IO, maximum 1 mg. Shock VF at 2 J/kg, then 4 J/kg, up to 10 J/kg.",
+        "hi": "बच्चे का adrenaline 0.01 mg/kg IV/IO, अधिकतम 1 mg। VF में 2 J/kg, फिर 4 J/kg, 10 J/kg तक shock।"
+      }
+    ],
+    "analogy": {
+      "en": "For a newborn, the breath is the key that starts the engine. For an arrested child, your hands are the engine until it restarts.",
+      "hi": "नवजात के लिए साँस वह चाबी है जो इंजन चालू करती है; arrest वाले बच्चे में इंजन दोबारा चलने तक आपके हाथ ही इंजन हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Newborn heart rate rising with ventilation: ventilation is working, do not start compressions.",
+      "hi": "Ventilation से नवजात की heart rate बढ़ रही है: ventilation काम कर रहा है, compressions शुरू न करें।"
+    },
+    {
+      "en": "Chest not rising with bag and mask: correct the mask and airway before anything else.",
+      "hi": "Bag और mask से छाती नहीं उठती: किसी और चीज़ से पहले mask और airway ठीक करें।"
+    },
+    {
+      "en": "1 mg/ml adrenaline drawn for a child: dilute to 0.1 mg/ml before IV use.",
+      "hi": "बच्चे के लिए 1 mg/ml adrenaline भरा: IV उपयोग से पहले 0.1 mg/ml तक पतला करें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check the warmer, bag, masks, suction and timer before every caesarean.",
+      "hi": "हर caesarean से पहले warmer, bag, masks, suction और timer जाँचें।"
+    },
+    {
+      "en": "Use a weight chart or length-based tape and a second-person dose check.",
+      "hi": "वज़न chart या length-based tape और दूसरे व्यक्ति से dose जाँच लें।"
+    },
+    {
+      "en": "Keep hands-off time under 10 seconds during child CPR.",
+      "hi": "बच्चे के CPR में hands-off समय 10 सेकंड से कम रखें।"
+    }
+  ],
+  "remember": {
+    "en": "Newborn: warm, ventilate in 60 s, 3:1 only if HR under 60, adrenaline 0.01 to 0.03 mg/kg. Child: 15:2, adrenaline 0.01 mg/kg, 2 then 4 J/kg.",
+    "hi": "नवजात: गर्म करें, 60 s में ventilate, HR 60 से कम पर ही 3:1, adrenaline 0.01 से 0.03 mg/kg। बच्चा: 15:2, adrenaline 0.01 mg/kg, 2 फिर 4 J/kg।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Term newborn, apnoeic, heart rate 80 at 1 minute. Next?",
+        "hi": "पूर्ण-अवधि नवजात, apnoea, 1 मिनट पर heart rate 80। आगे?"
+      },
+      "o": [
+        {
+          "en": "Start bag-mask ventilation in air",
+          "hi": "Air में bag-mask ventilation शुरू करें"
+        },
+        {
+          "en": "Start chest compressions",
+          "hi": "Chest compressions शुरू करें"
+        },
+        {
+          "en": "Give adrenaline",
+          "hi": "Adrenaline दें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Heart rate below 100 with apnoea needs ventilation. Compressions are for a rate below 60 despite good ventilation.",
+        "hi": "Apnoea के साथ 100 से कम heart rate में ventilation चाहिए। Compressions केवल अच्छे ventilation के बावजूद 60 से कम पर।"
+      }
+    },
+    {
+      "q": {
+        "en": "A 20 kg child in asystole. Adrenaline dose?",
+        "hi": "Asystole में 20 kg का बच्चा। Adrenaline dose?"
+      },
+      "o": [
+        {
+          "en": "0.2 mg IV/IO",
+          "hi": "0.2 mg IV/IO"
+        },
+        {
+          "en": "1 mg IV/IO",
+          "hi": "1 mg IV/IO"
+        },
+        {
+          "en": "0.02 mg IV/IO",
+          "hi": "0.02 mg IV/IO"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "0.01 mg/kg times 20 kg is 0.2 mg, which is 2 ml of 0.1 mg/ml.",
+        "hi": "0.01 mg/kg गुणा 20 kg = 0.2 mg, यानी 0.1 mg/ml के 2 ml।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "cpr",
+    "sim": "paedarrest"
+  },
+  "deeper": {
+    "note": "asr4-resuscitation",
+    "text": {
+      "en": "Most newborns who need help respond to effective ventilation alone. Drugs are rarely needed when ventilation is done well.",
+      "hi": "मदद की ज़रूरत वाले ज़्यादातर नवजात केवल प्रभावी ventilation से ठीक हो जाते हैं। Ventilation अच्छा हो तो दवाओं की ज़रूरत कम ही पड़ती है।"
+    }
+  },
+  "glossary": [
+    "mr-sopa",
+    "golden-minute"
+  ],
+  "sources": [
+    "StewardMD clinical protocol: Neonatal resuscitation at birth (kb/clinical-protocols/neonatal-resuscitation.json), after AHA/AAP 2025, NRP 9th edition and NSSK.",
+    "StewardMD clinical protocol: Paediatric cardiac arrest (kb/clinical-protocols/paediatric-cardiac-arrest.json), after AHA/AAP 2025 Pediatric Basic and Advanced Life Support."
+  ],
+  "competencies": [
+    "AS2.1",
+    "AS2.2"
+  ]
+}

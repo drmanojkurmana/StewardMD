@@ -1,0 +1,223 @@
+{
+  "id": "asr3-pph-anaesthesia",
+  "unit": "asr3",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "FIGO 2022: shock index above 0.9; TXA 1 g over 10 minutes within 3 hours, second dose after 30 minutes",
+      "Fibrinogen target above 2 g/L during bleeding",
+      "Cell salvage with a leucocyte filter in obstetrics (Association of Anaesthetists 2018)"
+    ]
+  },
+  "title": {
+    "en": "Anaesthesia for major postpartum haemorrhage",
+    "hi": "Major postpartum haemorrhage में anaesthesia"
+  },
+  "idea": {
+    "en": "In major PPH the anaesthetist runs resuscitation while the obstetrician stops the bleeding. Act on the shock index, give tranexamic acid early and replace blood in balance.",
+    "hi": "Major PPH में obstetrician रक्तस्राव रोकते हैं और anaesthetist resuscitation चलाते हैं। Shock index पर कार्य करें, tranexamic acid जल्दी दें और संतुलित रूप से रक्त बदलें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr3-pph-anaesthesia.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Four blood bags in a row in red, amber, pale yellow and blue. A teal syringe lies at the top right and a green thermometer at the right edge. A gauge at the bottom has its needle in the red zone.",
+      "hi": "एक पंक्ति में चार blood bags, लाल, amber, हल्के पीले और नीले। ऊपर दाईं ओर teal syringe, दाएँ किनारे पर हरा thermometer, और नीचे लाल क्षेत्र में सुई वाला gauge।"
+    },
+    "caption": {
+      "en": "Blood components, tranexamic acid, warming and the shock index in major PPH.",
+      "hi": "Major PPH में रक्त घटक, tranexamic acid, गर्माहट और shock index।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.31,
+        "y": 0.4,
+        "label": {
+          "en": "Balanced components",
+          "hi": "संतुलित घटक"
+        },
+        "note": {
+          "en": "Red cells, plasma and platelets near 1:1:1, with cryoprecipitate for fibrinogen.",
+          "hi": "लाल कोशिकाएँ, plasma और platelets लगभग 1:1:1, fibrinogen के लिए cryoprecipitate।"
+        }
+      },
+      {
+        "x": 0.76,
+        "y": 0.19,
+        "label": {
+          "en": "Tranexamic acid",
+          "hi": "Tranexamic acid"
+        },
+        "note": {
+          "en": "1 g IV over 10 minutes within 3 hours of birth. Repeat once if bleeding goes on after 30 minutes.",
+          "hi": "जन्म के 3 घंटे में 1 g IV 10 मिनट में। 30 मिनट बाद भी रक्तस्राव हो तो एक बार दोहराएँ।"
+        }
+      },
+      {
+        "x": 0.92,
+        "y": 0.55,
+        "label": {
+          "en": "Warming",
+          "hi": "गर्माहट"
+        },
+        "note": {
+          "en": "Warm all fluids and the patient. Cold worsens clotting.",
+          "hi": "सभी fluids और मरीज़ को गर्म रखें। ठंड clotting बिगाड़ती है।"
+        }
+      },
+      {
+        "x": 0.69,
+        "y": 0.83,
+        "label": {
+          "en": "Shock index",
+          "hi": "Shock index"
+        },
+        "note": {
+          "en": "Heart rate divided by systolic pressure. Above 0.9 means act now.",
+          "hi": "Heart rate भाग systolic pressure। 0.9 से ऊपर यानी अभी कार्य करें।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Blood pressure falls late in pregnancy. Use the [[shock-index]]: a value above 0.9 signals instability.",
+        "hi": "गर्भावस्था में blood pressure देर से गिरता है। [[shock-index]] लें: 0.9 से ऊपर का मान अस्थिरता बताता है।"
+      },
+      {
+        "en": "Give tranexamic acid 1 g IV over 10 minutes within 3 hours of birth. Give a second 1 g if bleeding continues after 30 minutes.",
+        "hi": "जन्म के 3 घंटे में tranexamic acid 1 g IV 10 मिनट में दें। 30 मिनट बाद भी रक्तस्राव हो तो दूसरा 1 g दें।"
+      },
+      {
+        "en": "Limit crystalloid. Activate the massive transfusion protocol and give red cells, plasma and platelets near 1:1:1.",
+        "hi": "Crystalloid सीमित रखें। Massive transfusion protocol शुरू करें और लाल कोशिकाएँ, plasma और platelets लगभग 1:1:1 में दें।"
+      },
+      {
+        "en": "Fibrinogen falls first in obstetric bleeding. Keep it above 2 g/L while bleeding continues.",
+        "hi": "Obstetric रक्तस्राव में fibrinogen सबसे पहले गिरता है। रक्तस्राव जारी रहने तक इसे 2 g/L से ऊपर रखें।"
+      },
+      {
+        "en": "An epidural or spinal may continue if the mother is stable. Convert to general anaesthesia if she is unstable or coagulopathic.",
+        "hi": "माँ स्थिर हो तो epidural या spinal जारी रह सकता है। अस्थिर या coagulopathic हो तो general anaesthesia में बदलें।"
+      },
+      {
+        "en": "Use [[cell-salvage]] where available, with a leucocyte filter. Keep her warm and check calcium, gases and clotting often.",
+        "hi": "उपलब्ध हो तो leucocyte filter के साथ [[cell-salvage]] करें। उसे गर्म रखें और calcium, gases और clotting बार-बार जाँचें।"
+      }
+    ],
+    "analogy": {
+      "en": "You are refilling a leaking tank. Plug the hole with the surgeon, and refill with the same mix that leaked out.",
+      "hi": "आप रिसती टंकी भर रहे हैं: surgeon के साथ छेद बंद करें, और वही मिश्रण भरें जो बहा।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Pulse 120, systolic 100: shock index 1.2, act even though the pressure looks safe.",
+      "hi": "नाड़ी 120, systolic 100: shock index 1.2, pressure सुरक्षित लगे तब भी कार्य करें।"
+    },
+    {
+      "en": "Oozing from cannula sites and the wound: coagulopathy, check fibrinogen at once.",
+      "hi": "Cannula स्थलों और घाव से रिसाव: coagulopathy, तुरंत fibrinogen जाँचें।"
+    },
+    {
+      "en": "Temperature under 35 during transfusion: warm actively, clotting is failing.",
+      "hi": "Transfusion के दौरान तापमान 35 से कम: सक्रिय रूप से गर्म करें, clotting विफल हो रही है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Take two large-bore IV lines and send group, crossmatch, clotting and fibrinogen.",
+      "hi": "दो बड़ी IV lines लें और group, crossmatch, clotting और fibrinogen भेजें।"
+    },
+    {
+      "en": "Name one person to talk to the blood bank throughout.",
+      "hi": "पूरे समय blood bank से बात करने के लिए एक व्यक्ति तय करें।"
+    },
+    {
+      "en": "Record the shock index every 5 minutes and measure blood loss by weighing.",
+      "hi": "हर 5 मिनट पर shock index दर्ज करें और तौलकर रक्त हानि मापें।"
+    }
+  ],
+  "remember": {
+    "en": "Shock index above 0.9, TXA 1 g within 3 hours, products near 1:1:1, fibrinogen above 2 g/L, keep her warm.",
+    "hi": "Shock index 0.9 से ऊपर, 3 घंटे में TXA 1 g, घटक लगभग 1:1:1, fibrinogen 2 g/L से ऊपर, उसे गर्म रखें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Pulse 130, systolic 90 after birth with heavy bleeding. Shock index and action?",
+        "hi": "जन्म के बाद भारी रक्तस्राव, नाड़ी 130, systolic 90। Shock index और कदम?"
+      },
+      "o": [
+        {
+          "en": "About 1.4: start the massive haemorrhage response",
+          "hi": "लगभग 1.4: massive haemorrhage response शुरू करें"
+        },
+        {
+          "en": "About 0.7: observe",
+          "hi": "लगभग 0.7: देखते रहें"
+        },
+        {
+          "en": "About 0.9: recheck in an hour",
+          "hi": "लगभग 0.9: एक घंटे बाद दोबारा जाँचें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "130 divided by 90 is about 1.4, well above 0.9.",
+        "hi": "130 भाग 90 लगभग 1.4 है, 0.9 से काफ़ी ऊपर।"
+      }
+    },
+    {
+      "q": {
+        "en": "Fibrinogen is 1.5 g/L and bleeding continues. Action?",
+        "hi": "Fibrinogen 1.5 g/L है और रक्तस्राव जारी है। कदम?"
+      },
+      "o": [
+        {
+          "en": "Give cryoprecipitate or fibrinogen concentrate to raise it above 2 g/L",
+          "hi": "इसे 2 g/L से ऊपर लाने के लिए cryoprecipitate या fibrinogen concentrate दें"
+        },
+        {
+          "en": "Give more crystalloid",
+          "hi": "और crystalloid दें"
+        },
+        {
+          "en": "Wait for the next result",
+          "hi": "अगले परिणाम का इंतज़ार करें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Low fibrinogen predicts severe PPH. Replace early while bleeding continues.",
+        "hi": "कम fibrinogen गंभीर PPH का संकेत है। रक्तस्राव जारी रहते जल्दी बदलें।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "fluids-blood",
+    "sim": "haemorrhage"
+  },
+  "deeper": {
+    "note": "asr3-pph-anaesthesia",
+    "text": {
+      "en": "Viscoelastic tests at the bedside can guide fibrinogen and plasma use faster than the laboratory. Use them where your unit has them.",
+      "hi": "Bedside viscoelastic tests laboratory से तेज़ fibrinogen और plasma के उपयोग का मार्गदर्शन कर सकते हैं। आपकी इकाई में हों तो इनका उपयोग करें।"
+    }
+  },
+  "glossary": [
+    "shock-index",
+    "cell-salvage"
+  ],
+  "sources": [
+    "Escobar MF, Nassar AH, Theron G, et al. FIGO recommendations on the management of postpartum hemorrhage 2022. Int J Gynaecol Obstet 2022;157 Suppl 1:3-50.",
+    "Mavrides E, Allard S, Chandraharan E, et al. on behalf of the RCOG. Prevention and management of postpartum haemorrhage. BJOG 2016;124:e106-e149 (Green-top Guideline No. 52).",
+    "Klein AA, Bailey CR, Charlton AJ, et al. Association of Anaesthetists guidelines: cell salvage for peri-operative blood conservation 2018. Anaesthesia 2018;73:1141-50.",
+    "Chestnut DH, Wong CA, Tsen LC, et al., eds. Chestnut's Obstetric Anesthesia: Principles and Practice, 6th edition. Elsevier 2020."
+  ]
+}
