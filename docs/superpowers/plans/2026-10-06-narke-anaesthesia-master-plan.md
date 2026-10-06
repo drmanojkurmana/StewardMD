@@ -10,14 +10,14 @@
 
 **Tech stack:** ES5 IIFE, buildless, `?v=` tokens, `scripts/build-www.sh`; Node `--test`; headless Chrome UI tests; Node build tools under `tools/` (never shipped).
 
-**Inputs:** NMC CBME UG curriculum Vol III (2018), Anaesthesiology AS1.1 to AS10.4, 46 competencies (`https://nmc.org.in/storage/new/UG-Curriculum-Vol-III.pdf`, printed pages 145 to 150). The 2024 competency volume (reported 52 competencies, 11 topics) is not on the NMC site yet; the mapping is redone when the owner supplies it. Reviewed protocols already in `kb/clinical-protocols/`: adult and paediatric cardiac arrest, post-cardiac-arrest care, anaphylaxis, local anaesthetic systemic toxicity, malignant hyperthermia, blood transfusion, sepsis and septic shock, ICU sedation-analgesia-delirium, status epilepticus, neonatal resuscitation. OPD kit `kb/specialty-kits/src/anaesthesia.json` exists (linked, ids kept distinct).
+**Inputs:** NMC CBME Curriculum 2024 (No. D-11011/500/2024-AcademicCell, 12-09-2024, the document Tokós uses), Anaesthesiology AS1.1 to AS11.6, 52 competencies in 11 topics; AS11 (oxygen delivery, oxygen therapy and airway management) is new since the 2018 Vol III (46 competencies), whose AS1 to AS10 codes are unchanged. Extracted to `narke/learn/competencies.json`. Reviewed protocols already in `kb/clinical-protocols/`: adult and paediatric cardiac arrest, post-cardiac-arrest care, anaphylaxis, local anaesthetic systemic toxicity, malignant hyperthermia, blood transfusion, sepsis and septic shock, ICU sedation-analgesia-delirium, status epilepticus, neonatal resuscitation. OPD kit `kb/specialty-kits/src/anaesthesia.json` exists (linked, ids kept distinct).
 
 ---
 
 ## 1. Acceptance bar
 
-1. **Coverage:** all 46 NMC AS competencies map to a lesson, tool, drill or OSCE station; `narke/learn/competencies.json` plus a coverage report with zero gaps.
-2. **Learn:** at least 80 lessons in 18 units (10 MBBS on AS1 to AS10, 8 Resident), English and Hindi, Learn schema (idea, see, why, spot, todo, remember, check, test, sources, review).
+1. **Coverage:** all 52 NMC AS competencies map to a lesson, tool, drill or OSCE station; `narke/learn/competencies.json` plus a coverage report with zero gaps.
+2. **Learn:** at least 80 lessons in 19 units (11 MBBS on AS1 to AS11, 8 Resident), English and Hindi, Learn schema (idea, see, why, spot, todo, remember, check, test, sources, review).
 3. **Bank:** all 3,206 MedMCQA Anaesthesia questions (train 3,172 + dev 34, no duplicates, 3,106 with explanations), tagged into a Narkē subtopic taxonomy with difficulty, study sets and a timed exam, built the same way as the Tokós bank.
 4. **Clinics:** at least 2 reading clinics on synthetic, clearly labelled teaching signals: capnography waveform clinic and monitor (vital signs) clinic. No real-data clinic until a licence is verified (Section 6).
 5. **Drills:** at least 10 timed crisis drills, doses from the kb protocols or a cited guideline.
@@ -34,7 +34,7 @@
 
 | Level | Who | Content |
 |---|---|---|
-| MBBS | 3rd-year and final-year students, interns | AS1 to AS10 units, core drills (BLS, cardiac arrest, anaphylaxis), calculators, clinics, OSCE |
+| MBBS | 3rd-year and final-year students, interns | AS1 to AS11 units, core drills (BLS, cardiac arrest, anaphylaxis), calculators, clinics, OSCE |
 | Resident | MD/DNB anaesthesia residents | Resident units, crisis drills (difficult airway, LAST, MH, high spinal, laryngospasm, massive haemorrhage), full bank, timed exam |
 
 ## 3. Syllabus
@@ -52,6 +52,7 @@
 | as8 | AS8 Pain and its management | 5 | Pain physiology, assessment scales, WHO ladder, acute pain, chronic and palliative pain |
 | as9 | AS9 Fluids | 4 | Body fluids, crystalloids and colloids, maintenance and deficit, blood and transfusion |
 | as10 | AS10 Patient safety | 4 | Checklists, drug errors, equipment checks, positioning and burns, critical incidents |
+| as11 | AS11 Oxygen delivery devices, oxygen therapy and airway management (new in 2024) | 6 | Oxygen devices and FiO2, oxygen therapy targets and safety, airway opening, OPA and NPA, BVM, intubation and LMA steps, ventilation basics |
 
 ### Resident units
 | Unit | Theme |
@@ -134,7 +135,7 @@ Content phases run as parallel subagents in isolated worktrees after Phase 0 mer
 | Item | Default taken |
 |---|---|
 | Module name | Narkē (display only, renamable) |
-| NMC 2024 AS list (52 competencies) | Map the verified 2018 list now; remap when the 2024 PDF is supplied |
+| NMC competency list | CBME 2024 (52 codes) found in the same NMC PDF Tokós uses; mapped |
 | MedMCQA exam-content rights | Same as Tokós: ship, pending the existing legal sign-off item |
 | VitalDB | Not used; ask VitalDB for written commercial permission if real signals are wanted |
 | Clinical reviewers | One anaesthesiologist for Phases 2 to 7 via Review Desk |
