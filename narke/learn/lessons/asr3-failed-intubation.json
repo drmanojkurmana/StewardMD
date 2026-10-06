@@ -1,0 +1,223 @@
+{
+  "id": "asr3-failed-intubation",
+  "unit": "asr3",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Failed obstetric intubation about 1 in 390 (Kinsella 2015 review)",
+      "OAA/DAS 2015: 2 laryngoscopy attempts, a third by a more experienced anaesthetist; 2 SAD attempts",
+      "Cricoid force 10 N awake to 30 N after loss of consciousness",
+      "AIDAA obstetric airway guidance: whether it differs from OAA/DAS on attempt numbers"
+    ]
+  },
+  "title": {
+    "en": "Failed intubation in obstetrics",
+    "hi": "Obstetrics में failed intubation"
+  },
+  "idea": {
+    "en": "Obstetric general anaesthesia is usually urgent, and the airway is harder. Plan before induction whether you would wake the mother or proceed if intubation fails.",
+    "hi": "Obstetric general anaesthesia आम तौर पर तत्काल होता है, और airway कठिन होता है। Induction से पहले तय करें कि intubation विफल होने पर माँ को जगाएँगे या आगे बढ़ेंगे।"
+  },
+  "see": {
+    "diagram": "diagrams/asr3-failed-intubation.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A flow of boxes. A teal box with two filled dots and one open dot leads to a blue box with a supraglottic airway. Next comes an amber box with a face mask. Below, a violet diamond splits to a green box and an amber box. A red bar runs along the bottom.",
+      "hi": "डिब्बों का क्रम। दो भरे और एक खाली बिंदु वाला teal डिब्बा, supraglottic airway वाले नीले डिब्बे तक, फिर face mask वाला amber डिब्बा। नीचे violet हीरा हरे और amber डिब्बे में बँटता है। सबसे नीचे लाल पट्टी।"
+    },
+    "caption": {
+      "en": "The obstetric failed intubation pathway: limited attempts, supraglottic airway, mask, the wake or proceed decision and front of neck access.",
+      "hi": "Obstetric failed intubation रास्ता: सीमित प्रयास, supraglottic airway, mask, जगाने या आगे बढ़ने का निर्णय और front of neck access।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.18,
+        "y": 0.27,
+        "label": {
+          "en": "Two attempts",
+          "hi": "दो प्रयास"
+        },
+        "note": {
+          "en": "Up to 2 laryngoscopy attempts; a third only by a more experienced anaesthetist.",
+          "hi": "Laryngoscopy के अधिकतम 2 प्रयास; तीसरा केवल अधिक अनुभवी anaesthetist द्वारा।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.27,
+        "label": {
+          "en": "Supraglottic airway",
+          "hi": "Supraglottic airway"
+        },
+        "note": {
+          "en": "Declare failed intubation and insert a second-generation device. Maximum 2 attempts.",
+          "hi": "Failed intubation घोषित करें और second-generation device डालें। अधिकतम 2 प्रयास।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.6,
+        "label": {
+          "en": "Wake or proceed",
+          "hi": "जगाएँ या आगे बढ़ें"
+        },
+        "note": {
+          "en": "Decide using maternal and fetal condition, airway, and the risk of waking. Plan it at the team brief.",
+          "hi": "माँ और शिशु की स्थिति, airway, और जगाने के जोखिम से तय करें। Team brief में योजना बनाएँ।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.85,
+        "label": {
+          "en": "Front of neck access",
+          "hi": "Front of neck access"
+        },
+        "note": {
+          "en": "If mask and device fail with falling SpO2, declare CICO and cut.",
+          "hi": "Mask और device विफल हों और SpO2 गिरे तो CICO घोषित करें और चीरा लगाएँ।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Failed intubation occurs in about 1 in 390 obstetric general anaesthetics. That is several times the general surgical rate.",
+        "hi": "Failed intubation लगभग 390 में 1 obstetric general anaesthetic में होता है। यह सामान्य सर्जरी से कई गुना है।"
+      },
+      {
+        "en": "Preoxygenate head up to an end-tidal oxygen near 0.9. Use rapid sequence induction with cricoid pressure.",
+        "hi": "सिर ऊँचा करके end-tidal oxygen लगभग 0.9 तक preoxygenate करें। Cricoid pressure के साथ rapid sequence induction करें।"
+      },
+      {
+        "en": "Apply cricoid force of about 10 N awake, rising to 30 N after loss of consciousness. Release it if it blocks the view.",
+        "hi": "जागते समय लगभग 10 N cricoid बल, होश जाने के बाद 30 N तक। दृश्य रोके तो छोड़ दें।"
+      },
+      {
+        "en": "Allow 2 laryngoscopy attempts, and a third only by a more experienced anaesthetist. Then declare failed intubation and call for help.",
+        "hi": "Laryngoscopy के 2 प्रयास दें, तीसरा केवल अधिक अनुभवी anaesthetist द्वारा। फिर failed intubation घोषित करें और मदद बुलाएँ।"
+      },
+      {
+        "en": "Insert a second-generation supraglottic airway. If oxygenation works, choose between waking and proceeding.",
+        "hi": "Second-generation supraglottic airway डालें। Oxygenation हो तो जगाने और आगे बढ़ने में से चुनें।"
+      },
+      {
+        "en": "Proceed when the mother or baby is in danger and the airway is safe. Otherwise wake her and choose another plan.",
+        "hi": "माँ या शिशु ख़तरे में हों और airway सुरक्षित हो तो आगे बढ़ें। नहीं तो उसे जगाएँ और दूसरी योजना चुनें।"
+      }
+    ],
+    "analogy": {
+      "en": "Decide your exits before you board the plane. In an obstetric crisis there is no time to read the safety card.",
+      "hi": "विमान में चढ़ने से पहले बाहर निकलने के रास्ते तय करें: obstetric संकट में safety card पढ़ने का समय नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Swollen airway in pre-eclampsia: expect a harder view and use a smaller tube.",
+      "hi": "Pre-eclampsia में सूजा airway: कठिन दृश्य की अपेक्षा करें और छोटी tube लें।"
+    },
+    {
+      "en": "Rapid desaturation in pregnancy: lower FRC and higher oxygen use, so oxygenate between attempts.",
+      "hi": "गर्भावस्था में तेज़ desaturation: कम FRC और ज़्यादा oxygen उपयोग, इसलिए प्रयासों के बीच oxygenate करें।"
+    },
+    {
+      "en": "Regurgitation during attempts: suction, head down tilt and keep cricoid pressure as tolerated.",
+      "hi": "प्रयासों के दौरान regurgitation: suction, सिर नीचे झुकाव, और सहन हो तो cricoid pressure रखें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "At the team brief, state whether you would wake or proceed if intubation failed.",
+      "hi": "Team brief में बताएँ कि intubation विफल हो तो जगाएँगे या आगे बढ़ेंगे।"
+    },
+    {
+      "en": "Have a videolaryngoscope, bougie and second-generation supraglottic airway ready in obstetric theatre.",
+      "hi": "Obstetric theatre में videolaryngoscope, bougie और second-generation supraglottic airway तैयार रखें।"
+    },
+    {
+      "en": "Prefer neuraxial anaesthesia when time allows, which avoids the airway risk.",
+      "hi": "समय हो तो neuraxial anaesthesia को प्राथमिकता दें, जो airway जोखिम से बचाता है।"
+    }
+  ],
+  "remember": {
+    "en": "2 attempts plus 1 by an expert, 2 supraglottic attempts, wake or proceed decided before induction, CICO means cut.",
+    "hi": "2 प्रयास और 1 विशेषज्ञ द्वारा, 2 supraglottic प्रयास, जगाने या आगे बढ़ने का निर्णय induction से पहले, CICO यानी चीरा।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "How many laryngoscopy attempts do OAA/DAS 2015 allow before declaring failed intubation?",
+        "hi": "OAA/DAS 2015 failed intubation घोषित करने से पहले laryngoscopy के कितने प्रयास देते हैं?"
+      },
+      "o": [
+        {
+          "en": "2, with a third only by a more experienced anaesthetist",
+          "hi": "2, तीसरा केवल अधिक अनुभवी anaesthetist द्वारा"
+        },
+        {
+          "en": "4",
+          "hi": "4"
+        },
+        {
+          "en": "As many as needed while SpO2 is above 90%",
+          "hi": "SpO2 90% से ऊपर रहने तक जितने चाहिए"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Repeated attempts cause swelling and bleeding, making oxygenation harder.",
+        "hi": "बार-बार प्रयास सूजन और रक्तस्राव करते हैं, जिससे oxygenation कठिन होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Failed intubation, supraglottic airway works, fetal distress is severe and the mother is stable. Usual decision?",
+        "hi": "Failed intubation, supraglottic airway काम करता है, गंभीर fetal distress और माँ स्थिर। आम निर्णय?"
+      },
+      "o": [
+        {
+          "en": "Proceed with surgery through the supraglottic airway",
+          "hi": "Supraglottic airway से सर्जरी आगे बढ़ाएँ"
+        },
+        {
+          "en": "Wake her and wait for a spinal later",
+          "hi": "उसे जगाएँ और बाद में spinal का इंतज़ार करें"
+        },
+        {
+          "en": "Keep trying intubation",
+          "hi": "Intubation का प्रयास जारी रखें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "When the baby is in danger and oxygenation is secure, proceeding is often chosen.",
+        "hi": "जब शिशु ख़तरे में हो और oxygenation सुरक्षित हो, अक्सर आगे बढ़ना चुना जाता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "airway",
+    "sim": "cico"
+  },
+  "deeper": {
+    "note": "asr3-failed-intubation",
+    "text": {
+      "en": "The guideline gives a table of factors for the wake or proceed decision. Learn its logic, and agree local thresholds with your obstetric team.",
+      "hi": "Guideline जगाने या आगे बढ़ने के निर्णय के लिए कारकों की तालिका देती है। उसका तर्क सीखें, और obstetric टीम के साथ स्थानीय सीमाएँ तय करें।"
+    }
+  },
+  "glossary": [
+    "cico",
+    "sad-2g"
+  ],
+  "sources": [
+    "Mushambi MC, Kinsella SM, Popat M, et al. Obstetric Anaesthetists' Association and Difficult Airway Society guidelines for the management of difficult and failed tracheal intubation in obstetrics. Anaesthesia 2015;70:1286-306. (Cited for facts; wording and figures are original.)",
+    "Kinsella SM, Winton AL, Mushambi MC, et al. Failed tracheal intubation during obstetric general anaesthesia: a literature review. Int J Obstet Anesth 2015;24:356-74.",
+    "Chestnut DH, Wong CA, Tsen LC, et al., eds. Chestnut's Obstetric Anesthesia: Principles and Practice, 6th edition. Elsevier 2020."
+  ]
+}

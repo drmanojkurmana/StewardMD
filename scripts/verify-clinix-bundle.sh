@@ -26,6 +26,7 @@ for f in clinix.js clinix-flags.js clinix-model.js clinix-content.js clinix-stor
 done
 
 for f in manifest.json skills/core.json skills/respiratory.json skills/obgyn.json systems/obgyn.json \
+         skills/anaesthesia.json systems/anaesthesia.json \
          diseases/copd.json diseases/pleural-effusion.json media/manifest.json \
          dx-vocabulary.json presentations/breathlessness.json; do
   [ -f "$WWW/clinix/$f" ] && say "clinix/$f" "ok" || bad "clinix/$f" "cp -R clinix in build-www.sh"

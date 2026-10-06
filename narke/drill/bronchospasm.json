@@ -1,0 +1,118 @@
+{
+  "id": "bronchospasm", "kind": "drill", "level": "resident", "review": "ai_drafted", "timeLimitSec": 480,
+  "title": { "en": "Intraoperative bronchospasm drill", "hi": "ऑपरेशन के दौरान ब्रॉन्कोस्पाज़्म ड्रिल" },
+  "scenario": {
+    "en": "A 45-year-old woman with asthma and a 20 pack-year smoking history is intubated for a laparoscopic cholecystectomy. Two minutes after intubation, peak airway pressure climbs and SpO2 starts to fall. Teaching scenario, not a real patient.",
+    "hi": "अस्थमा और 20 पैक-ईयर धूम्रपान वाली 45 वर्षीय महिला को लैप्रोस्कोपिक कोलेसिस्टेक्टॉमी के लिए इंट्यूबेट किया गया है। इंट्यूबेशन के 2 मिनट बाद पीक एयरवे प्रेशर बढ़ता है और SpO2 गिरने लगता है। यह शिक्षण परिदृश्य है, असली मरीज़ नहीं।"
+  },
+  "sources": [
+    { "label": "Looseley A. Management of bronchospasm during general anaesthesia. Update in Anaesthesia (WFSA) 2011", "url": "https://e-safe-anaesthesia.org/e_library/05/Bronchospasm_during_anaesthesia_Update_2011.pdf" },
+    { "label": "Westhorpe RN, Ludbrook GL, Helps SC. Crisis management during anaesthesia: bronchospasm. Qual Saf Health Care 2005", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1744001/" },
+    { "label": "StewardMD Clinical Protocols: Acute asthma exacerbation (adult)", "path": "kb/clinical-protocols/acute-asthma-adult.json" },
+    { "label": "StewardMD Clinical Protocols: Anaphylaxis (adults and children)", "path": "kb/clinical-protocols/anaphylaxis.json" }
+  ],
+  "stages": [
+    { "id": "recognise", "src": 0, "timeSec": 40,
+      "vitals": { "hr": 112, "bp": "128/78", "spo2": 91, "paw": { "label": { "en": "Peak airway pressure (cmH2O)", "hi": "पीक एयरवे प्रेशर (cmH2O)" }, "value": 42 }, "etco2": { "label": { "en": "Capnogram", "hi": "कैपनोग्राम" }, "value": "shark fin" } },
+      "prompt": { "en": "Wheeze, prolonged expiration and a shark-fin capnogram. What do you do first?", "hi": "व्हीज़, लंबा निःश्वास और शार्क-फ़िन कैपनोग्राम। सबसे पहले क्या करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "mechanical",
+          "text": { "en": "100% oxygen, ventilate by hand, ask the surgeon to stop, and call for help.", "hi": "100% ऑक्सीजन, हाथ से वेंटिलेट करें, सर्जन से रुकने को कहें, और मदद बुलाएँ।" },
+          "feedback": { "en": "Hand ventilation lets you feel compliance. Stopping stimulation removes a common trigger.", "hi": "हाथ से वेंटिलेशन से आप कम्प्लायंस महसूस कर सकते हैं। उत्तेजना रोकने से एक आम ट्रिगर हटता है।" } },
+        { "id": "b", "correct": false, "next": "mechanical",
+          "text": { "en": "Raise the ventilator pressure limit and carry on.", "hi": "वेंटिलेटर की प्रेशर सीमा बढ़ाएँ और जारी रखें।" },
+          "feedback": { "en": "That hides the problem. Take control by hand on 100% oxygen and find the cause.", "hi": "इससे समस्या छिप जाती है। 100% ऑक्सीजन पर हाथ से नियंत्रण लें और कारण खोजें।" } }
+      ] },
+    { "id": "mechanical", "src": 0, "timeSec": 50,
+      "vitals": { "hr": 116, "bp": "124/76", "spo2": 89 },
+      "prompt": { "en": "Before calling it bronchospasm, what must you exclude?", "hi": "इसे ब्रॉन्कोस्पाज़्म कहने से पहले क्या ख़ारिज करना ज़रूरी है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "deepen",
+          "text": { "en": "A blocked, kinked or misplaced tube: pass a suction catheter, check depth and both sides, and try a self-inflating bag.", "hi": "बंद, मुड़ी या गलत जगह ट्यूब: सक्शन कैथेटर डालें, गहराई और दोनों तरफ़ जाँचें, और सेल्फ़-इन्फ़्लेटिंग बैग आज़माएँ।" },
+          "feedback": { "en": "A kinked tube or blocked circuit can mimic severe bronchospasm. Endobronchial intubation is common after positioning for laparoscopy.", "hi": "मुड़ी ट्यूब या बंद सर्किट गंभीर ब्रॉन्कोस्पाज़्म जैसा दिख सकता है। लैप्रोस्कोपी की पोज़िशनिंग के बाद ट्यूब एक तरफ़ के ब्रॉन्कस में जाना आम है।" } },
+        { "id": "b", "correct": false, "next": "deepen",
+          "text": { "en": "Nothing. Wheeze in an asthmatic is always bronchospasm.", "hi": "कुछ नहीं। अस्थमा रोगी में व्हीज़ हमेशा ब्रॉन्कोस्पाज़्म है।" },
+          "feedback": { "en": "A blocked circuit once killed a patient treated as bronchospasm. Always rule out the equipment.", "hi": "ब्रॉन्कोस्पाज़्म मानकर इलाज किए गए एक मरीज़ की मौत बंद सर्किट से हुई थी। उपकरण हमेशा जाँचें।" } }
+      ] },
+    { "id": "deepen", "src": 0, "timeSec": 40,
+      "vitals": { "hr": 114, "bp": "120/74", "spo2": 89 },
+      "prompt": { "en": "The tube and circuit are clear. How do you deepen anaesthesia?", "hi": "ट्यूब और सर्किट साफ़ हैं। एनेस्थीसिया कैसे गहरा करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "An IV propofol bolus, or raise sevoflurane if gas still reaches the lungs.", "hi": "IV प्रोपोफोल बोलस, या गैस फेफड़ों तक पहुँच रही हो तो सेवोफ़्लुरेन बढ़ाएँ।" },
+          "feedback": { "en": "Light anaesthesia drives reflex bronchospasm. Propofol blunts airway reflexes well; sevoflurane bronchodilates.", "hi": "हल्का एनेस्थीसिया रिफ़्लेक्स ब्रॉन्कोस्पाज़्म बढ़ाता है। प्रोपोफोल एयरवे रिफ़्लेक्स को अच्छी तरह दबाता है; सेवोफ़्लुरेन ब्रॉन्काई फैलाता है।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Switch to desflurane at a high concentration.", "hi": "ऊँची सांद्रता पर डेसफ़्लुरेन पर जाएँ।" },
+          "feedback": { "en": "Desflurane at high concentration can increase airway resistance. Choose sevoflurane or propofol.", "hi": "ऊँची सांद्रता पर डेसफ़्लुरेन एयरवे प्रतिरोध बढ़ा सकता है। सेवोफ़्लुरेन या प्रोपोफोल चुनें।" } },
+        { "id": "c", "correct": false,
+          "text": { "en": "Give more rocuronium.", "hi": "और रोकुरोनियम दें।" },
+          "feedback": { "en": "Muscle relaxants do not relax bronchial smooth muscle. Deepen the anaesthetic instead.", "hi": "मसल रिलैक्सेंट ब्रॉन्कियल स्मूथ मसल को ढीला नहीं करते। इसके बजाय एनेस्थीसिया गहरा करें।" } }
+      ] },
+    { "id": "salbutamol", "src": 0, "timeSec": 50,
+      "vitals": { "hr": 118, "spo2": 88 },
+      "prompt": { "en": "Wheeze persists. Which first-line drug, and how do you deliver it?", "hi": "व्हीज़ बना हुआ है। पहली पंक्ति की कौन सी दवा, और कैसे देंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true, "next": "vent",
+          "text": { "en": "Salbutamol 6 to 8 puffs by MDI, via an in-line adaptor on the patient side of the HME. Repeat as needed.", "hi": "सालब्यूटामोल MDI से 6 से 8 पफ़, HME फ़िल्टर के मरीज़ वाली तरफ़ इन-लाइन अडैप्टर से, ज़रूरत पर दोहराएँ।" },
+          "feedback": { "en": "An inhaled beta-agonist is first line. Given upstream of the filter, most of the drug is trapped and lost.", "hi": "सूँघने वाला बीटा-एगोनिस्ट पहली पंक्ति है। फ़िल्टर से पहले देने पर ज़्यादातर दवा फँसकर बर्बाद होती है।" } },
+        { "id": "b", "correct": false, "next": "vent",
+          "text": { "en": "IV chlorphenamine and wait.", "hi": "IV क्लोरफ़ेनिरामीन दें और इंतज़ार करें।" },
+          "feedback": { "en": "Antihistamines do not reverse bronchoconstriction. Salbutamol comes first.", "hi": "एंटीहिस्टामिन ब्रॉन्कोकंस्ट्रिक्शन को नहीं उलटते। पहले सालब्यूटामोल।" } }
+      ] },
+    { "id": "vent", "src": 0, "timeSec": 45,
+      "vitals": { "hr": 116, "bp": "112/70", "spo2": 90 },
+      "prompt": { "en": "Back on the ventilator. How do you set it?", "hi": "वापस वेंटिलेटर पर। इसे कैसे सेट करेंगे?" },
+      "options": [
+        { "id": "a", "correct": true, "next": "differential",
+          "text": { "en": "Slow rate and long expiratory time so each breath empties; accept a higher EtCO2.", "hi": "धीमी दर और लंबा निःश्वास समय ताकि हर साँस खाली हो; ज़्यादा EtCO2 स्वीकार करें।" },
+          "feedback": { "en": "Incomplete exhalation causes breath stacking and intrinsic PEEP. That raises chest pressure and lowers venous return.", "hi": "अधूरा निःश्वास ब्रेथ स्टैकिंग और इंट्रिन्ज़िक PEEP बनाता है। इससे छाती का दबाव बढ़ता है और वेनस रिटर्न घटता है।" } },
+        { "id": "b", "correct": false, "next": "stacking",
+          "text": { "en": "Raise the rate to 20/min to bring the EtCO2 down.", "hi": "EtCO2 घटाने के लिए दर 20/min करें।" },
+          "feedback": { "en": "Faster breaths leave less time to exhale. Trapped gas builds up.", "hi": "तेज़ साँसों में निःश्वास का समय कम होता है। हवा फँसती जाती है।" } }
+      ] },
+    { "id": "stacking", "src": 0, "timeSec": 40,
+      "vitals": { "hr": 128, "bp": "70/40", "spo2": 86 },
+      "prompt": { "en": "BP falls to 70/40 mmHg and the chest looks hyperinflated. What now?", "hi": "BP 70/40 mmHg तक गिरता है और छाती ज़्यादा फूली दिखती है। अब क्या?" },
+      "options": [
+        { "id": "a", "correct": true, "next": "differential",
+          "text": { "en": "Disconnect the circuit briefly to let trapped gas out, then ventilate slowly with a long expiration.", "hi": "फँसी हवा निकलने के लिए सर्किट थोड़ी देर अलग करें, फिर धीरे और लंबे निःश्वास के साथ वेंटिलेट करें।" },
+          "feedback": { "en": "Releasing gas trapping restores venous return. Also think of tension pneumothorax if BP does not recover.", "hi": "फँसी हवा निकलने से वेनस रिटर्न लौटता है। BP न सुधरे तो टेंशन न्यूमोथोरैक्स भी सोचें।" } },
+        { "id": "b", "correct": false, "next": "differential",
+          "text": { "en": "Give a vasopressor and keep the same settings.", "hi": "वैसोप्रेसर दें और वही सेटिंग रखें।" },
+          "feedback": { "en": "The cause is gas trapping. Fix the ventilation first.", "hi": "कारण फँसी हवा है। पहले वेंटिलेशन ठीक करें।" } }
+      ] },
+    { "id": "differential", "src": 3, "timeSec": 45,
+      "vitals": { "hr": 112, "bp": "118/72", "spo2": 90 },
+      "prompt": { "en": "Co-amoxiclav was given 5 minutes before induction. What else must you check now?", "hi": "इंडक्शन से 5 मिनट पहले को-एमोक्सिक्लेव दिया गया था। अब और क्या जाँचना ज़रूरी है?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "Look for anaphylaxis: expose the skin, check BP trend, and review recent drugs. Also consider aspiration and pneumothorax.", "hi": "एनाफ़िलैक्सिस खोजें: त्वचा खोलकर देखें, BP का रुझान जाँचें, और हाल की दवाएँ देखें। एस्पिरेशन और न्यूमोथोरैक्स भी सोचें।" },
+          "feedback": { "en": "Bronchospasm can be the first sign of anaphylaxis to antibiotics or relaxants. Anaphylaxis needs adrenaline, not just salbutamol.", "hi": "ब्रॉन्कोस्पाज़्म एंटीबायोटिक या रिलैक्सेंट से एनाफ़िलैक्सिस का पहला संकेत हो सकता है। एनाफ़िलैक्सिस में केवल सालब्यूटामोल नहीं, एड्रेनालिन चाहिए।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Nothing else; she is a known asthmatic.", "hi": "और कुछ नहीं; वह ज्ञात अस्थमा रोगी है।" },
+          "feedback": { "en": "Known asthma makes it easy to miss anaphylaxis or aspiration. Always check.", "hi": "ज्ञात अस्थमा से एनाफ़िलैक्सिस या एस्पिरेशन छूटना आसान होता है। हमेशा जाँचें।" } }
+      ] },
+    { "id": "refractory", "src": 2, "timeSec": 50,
+      "vitals": { "hr": 120, "bp": "116/70", "spo2": 87, "paw": { "label": { "en": "Peak airway pressure (cmH2O)", "hi": "पीक एयरवे प्रेशर (cmH2O)" }, "value": 40 } },
+      "prompt": { "en": "Skin and BP are normal. Wheeze persists after repeated salbutamol. Next drug?", "hi": "त्वचा और BP सामान्य हैं। बार-बार सालब्यूटामोल के बाद भी व्हीज़ है। अगली दवा?" },
+      "options": [
+        { "id": "a", "correct": true, "critical": true,
+          "text": { "en": "IV magnesium sulfate 2 g over 20 minutes. Ketamine is an option; small IV adrenaline boluses (adult 50 micrograms) only in extremis.", "hi": "IV मैग्नीशियम सल्फ़ेट 2 g, 20 मिनट में। केटामिन एक विकल्प है; छोटे IV एड्रेनालिन बोलस (वयस्क 50 micrograms) केवल अति गंभीर स्थिति में।" },
+          "feedback": { "en": "Magnesium relaxes bronchial smooth muscle. Titrated IV adrenaline is reserved for life-threatening spasm by experienced hands.", "hi": "मैग्नीशियम ब्रॉन्कियल स्मूथ मसल को ढीला करता है। टाइट्रेट किया गया IV एड्रेनालिन जानलेवा स्पाज़्म के लिए, अनुभवी हाथों में ही।" } },
+        { "id": "b", "correct": false,
+          "text": { "en": "Undiluted adrenaline 1 mg IV push.", "hi": "बिना पतला एड्रेनालिन 1 mg IV पुश।" },
+          "feedback": { "en": "A 1 mg IV bolus in a patient with a pulse can cause dangerous arrhythmias. Use magnesium, then small titrated doses if needed.", "hi": "नाड़ी वाले मरीज़ में 1 mg IV बोलस खतरनाक अरिद्मिया कर सकता है। मैग्नीशियम दें, फिर ज़रूरत हो तो छोटी टाइट्रेट की गई खुराक।" } }
+      ] },
+    { "id": "after", "src": 0, "timeSec": 45,
+      "vitals": { "hr": 104, "bp": "120/74", "spo2": 95 },
+      "prompt": { "en": "Airway pressure falls and SpO2 recovers. What about the surgery and aftercare?", "hi": "एयरवे प्रेशर घटता है और SpO2 सुधरता है। सर्जरी और बाद की देखभाल का क्या?" },
+      "options": [
+        { "id": "a", "correct": true, "next": "end",
+          "text": { "en": "Discuss abandoning elective surgery, give hydrocortisone 100 mg IV every 6 hours, get a chest X-ray, and plan HDU or ICU care.", "hi": "योजनाबद्ध सर्जरी छोड़ने पर चर्चा करें, हाइड्रोकॉर्टिसोन 100 mg IV हर 6 घंटे दें, छाती का X-ray कराएँ, और HDU या ICU देखभाल तय करें।" },
+          "feedback": { "en": "Steroids help the later inflammatory phase. Severe spasm may need ventilation overnight in critical care.", "hi": "स्टेरॉइड बाद की सूजन वाली अवस्था में मदद करते हैं। गंभीर स्पाज़्म में रात भर क्रिटिकल केयर में वेंटिलेशन लग सकता है।" } },
+        { "id": "b", "correct": false, "next": "end",
+          "text": { "en": "Carry on and extubate deep at the end as usual.", "hi": "जारी रखें और अंत में हमेशा की तरह गहरे में एक्सट्यूबेट करें।" },
+          "feedback": { "en": "After severe bronchospasm, reconsider surgery and plan a safe recovery area first.", "hi": "गंभीर ब्रॉन्कोस्पाज़्म के बाद सर्जरी पर पुनर्विचार करें और पहले सुरक्षित रिकवरी स्थान तय करें।" } }
+      ] }
+  ]
+}

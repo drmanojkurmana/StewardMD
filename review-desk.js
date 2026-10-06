@@ -83,6 +83,10 @@
     });
     kind("tool").forEach(function (m) { add("tool-" + m.id, N + " calculator: " + m.title.en, (m.sources || []).length + " source" + ((m.sources || []).length === 1 ? "" : "s") + ", " + (m.examples || []).length + " worked examples"); });
     kind("explorer").forEach(function (m) { add("explorer-" + m.id, N + " explorer: " + m.title.en, (m.sources || []).length + " sources, rules and teaching text"); });
+    if (host === "narke") {
+      if (M.signals) { add("clinic-capno", "Narkē clinic: capnography", "Teaching points per pattern, synthetic signals"); add("clinic-monitor", "Narkē clinic: monitor reading", "Teaching points per crisis scenario, synthetic signals"); }
+      return out;
+    }
     if (host !== "tokos") return out;
     add("clinic-fetal-planes", "Tokós clinic: fetal ultrasound planes", "Teaching points per plane (ISUOG), English and Hindi");
     add("clinic-hc-biometry", "Tokós clinic: fetal head circumference", "Teaching points, HC scoring bands and GA from HC");
@@ -127,6 +131,14 @@
     var M = G[SPEC[host].models] || {}, m, rows = [], L = S.specLearn[host], bank = S.specBank[host];
     function tt(o) { return o && typeof o === "object" ? o : { en: o == null ? "" : String(o), hi: "" }; }
     function srcs(list) { (list || []).forEach(function (x) { rows.push(["Source", x.label || x.url || String(x), ""]); }); }
+    function bilingual(o, path, depth, out) { // every {en, hi} under o as [path, en, hi]; functions skipped, depth capped
+      if (!o || typeof o !== "object" || depth > 6) return;
+      if (typeof o.en === "string" && typeof o.hi === "string") { out.push([path, o.en, o.hi]); return; }
+      Object.keys(o).forEach(function (k) {
+        if (typeof o[k] === "function" || (!depth && (k === "sources" || k === "subtitle"))) return;
+        bilingual(o[k], path ? path + "." + k : k, depth + 1, out);
+      });
+    }
     if (/^unit-/.test(id) && L) {
       var u = (L.units || []).filter(function (x) { return "unit-" + x.id === id; })[0];
       if (u) u.lessons.forEach(function (lid) {
@@ -158,7 +170,17 @@
     } else if (/^(tool|explorer)-/.test(id) && (m = M[id.replace(/^(tool|explorer)-/, "")])) {
       (m.examples || []).forEach(function (e) { rows.push(["Worked example", JSON.stringify(e.values) + " gives " + JSON.stringify(e.expect), ""]); });
       if (m.subtitle) rows.push(["What it shows", tt(m.subtitle).en, tt(m.subtitle).hi]);
+      if (host === "narke" && /^explorer-/.test(id)) bilingual(m, "", 0, rows); // Narkē explorers carry no examples: list every {en, hi} they show
       srcs(m.sources);
+    } else if (host === "narke" && /^clinic-(capno|monitor)$/.test(id) && (m = M.signals)) {
+      var T = id === "clinic-capno" ? m.CAPNO : m.MONITOR;
+      Object.keys(T || {}).forEach(function (k) {
+        var c = T[k], h = tt(c.title).en;
+        if (c.scene) rows.push([h + ": scene", tt(c.scene).en, tt(c.scene).hi]);
+        if (c.describe) rows.push([h + ": trace", tt(c.describe).en, tt(c.describe).hi]);
+        (c.points || []).forEach(function (pt) { rows.push([h, pt.en, pt.hi]); });
+      });
+      Object.keys(m.SOURCES || {}).forEach(function (k) { rows.push(["Source", m.SOURCES[k].label, ""]); });
     } else if (host === "tokos" && /^clinic-/.test(id) && G.TOKOS_US) {
       var U = G.TOKOS_US;
       if (id === "clinic-fetal-planes") Object.keys(U.PLANES).forEach(function (k) { U.PLANES[k].points.forEach(function (pt) { rows.push([words(k), pt.en, pt.hi]); }); });
@@ -320,7 +342,7 @@
 
   // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.
   function openBulletins() { S.wantBulletin = true; open(); }
-  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, DECISIONS: DECISIONS };
+  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, _tokosMoreRows: tokosMoreRows, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);

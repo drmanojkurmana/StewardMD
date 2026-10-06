@@ -1,0 +1,236 @@
+{
+  "_comment": "The Narke anaesthesia OSCE and viva stations, as a system module shaped like a pathway so every runner (lesson, OSCE, viva, competency) works with no new code. Owns no skills; every reference is to skills/anaesthesia.json or skills/core.json. Eight stations and a viva pool over all anaesthesia skills. Station competencies are NMC CBME 2024 AS codes. Deep link id: narke-osce.",
+  "id": "anaesthesia-osce",
+  "name": "OSCE and viva stations",
+  "fullName": "Anaesthesiology: OSCE and viva stations",
+  "system": "anaesthesia",
+  "kind": "system-module",
+  "oneLine": "8 timed stations: preoperative assessment, airway, consent, airway devices, spinal and BLS",
+  "estMinutes": 120,
+  "review": { "status": "ai_drafted" },
+  "version": 1,
+  "deepLink": "narke-osce",
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the patient and consent",
+      "blurb": "Introduction, consent for general and for spinal anaesthesia",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.ana.consent_setup",
+        "skill.approach.ana.consent_ga_info",
+        "skill.approach.ana.consent_spinal_info",
+        "skill.approach.ana.consent_close"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Preoperative assessment",
+      "blurb": "History, drugs and fasting, ASA grade and readiness",
+      "skills": [
+        "skill.hx.ana.preop_history",
+        "skill.hx.ana.preop_drugs_fasting",
+        "skill.reasoning.ana.asa_readiness"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Airway assessment",
+      "blurb": "Mouth opening, Mallampati, thyromental distance, upper lip bite and neck movement",
+      "skills": [
+        "skill.exam.ana.airway_mouth",
+        "skill.exam.ana.airway_jaw_neck"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Procedures and resuscitation",
+      "blurb": "Bag-mask ventilation, laryngeal mask, spinal anaesthesia and adult BLS",
+      "skills": [
+        "skill.exam.ana.opa",
+        "skill.exam.ana.bmv",
+        "skill.exam.ana.lma_prepare",
+        "skill.exam.ana.lma_insert",
+        "skill.approach.ana.spinal_prepare",
+        "skill.exam.ana.spinal_position_asepsis",
+        "skill.exam.ana.spinal_inject_aftercare",
+        "skill.tx.ana.bls_recognise",
+        "skill.tx.ana.bls_cpr",
+        "skill.tx.ana.bls_aed"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ana.preop_assessment",
+        "title": "Preoperative assessment and ASA grade",
+        "task": "A 58-year-old man with diabetes and high blood pressure is listed for an elective hernia repair tomorrow. Take a preoperative anaesthetic history, give his ASA grade, and say whether he is ready for surgery.",
+        "seconds": 480,
+        "competencies": ["AS3.1", "AS3.2", "AS3.5"],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.hx.ana.preop_history",
+          "skill.hx.ana.preop_drugs_fasting",
+          "skill.reasoning.ana.asa_readiness"
+        ],
+        "examinerQuestions": [
+          "What ASA grade did you give, and why?",
+          "Which of his medicines would you continue on the morning of surgery, and which would you ask about?",
+          "His blood sugar is very high on the morning of surgery. What do you do?"
+        ]
+      },
+      {
+        "id": "osce.ana.airway_assessment",
+        "title": "Airway assessment",
+        "task": "This patient is to have a general anaesthetic. Assess the airway and tell the examiner whether you predict difficulty with mask ventilation or laryngoscopy.",
+        "seconds": 360,
+        "competencies": ["AS4.2", "AS3.3", "AS11.5"],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.ana.airway_mouth",
+          "skill.exam.ana.airway_jaw_neck"
+        ],
+        "examinerQuestions": [
+          "Why must the patient not say 'aah' during the Mallampati test?",
+          "Which single test is the best predictor of a difficult airway?",
+          "You predict a difficult airway. What do you do before the day of surgery?"
+        ]
+      },
+      {
+        "id": "osce.ana.consent_ga",
+        "title": "Consent for general anaesthesia",
+        "task": "A 35-year-old woman is having her gallbladder removed under general anaesthesia tomorrow. Explain the anaesthetic and take her consent.",
+        "seconds": 480,
+        "competencies": ["AS1.3", "AS10.3", "AS4.3"],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.ana.consent_setup",
+          "skill.approach.ana.consent_ga_info",
+          "skill.approach.ana.consent_close"
+        ],
+        "examinerQuestions": [
+          "She is worried about waking up during the operation. What do you tell her?",
+          "Which risks must always be mentioned, and why?",
+          "She asks a relative to sign for her. Is that valid?"
+        ]
+      },
+      {
+        "id": "osce.ana.consent_spinal",
+        "title": "Consent for spinal anaesthesia",
+        "task": "A 45-year-old man is having a knee arthroscopy under spinal anaesthesia. He is anxious about a needle in his back. Explain the spinal and take his consent.",
+        "seconds": 480,
+        "competencies": ["AS1.3", "AS10.3", "AS5.1"],
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.ana.consent_setup",
+          "skill.approach.ana.consent_spinal_info",
+          "skill.approach.ana.consent_close"
+        ],
+        "examinerQuestions": [
+          "What will he feel during the operation?",
+          "What would you tell him about the headache after a spinal?",
+          "He takes clopidogrel. What do you do?"
+        ]
+      },
+      {
+        "id": "osce.ana.bmv_opa",
+        "title": "Bag-mask ventilation with an oropharyngeal airway",
+        "task": "This manikin is an unconscious adult who is not breathing adequately but has a pulse. Open the airway, insert an oropharyngeal airway and ventilate with a bag and mask.",
+        "seconds": 360,
+        "competencies": ["AS11.3", "AS11.4", "AS11.5", "AS11.1"],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.exam.ana.opa",
+          "skill.exam.ana.bmv"
+        ],
+        "examinerQuestions": [
+          "How fast would you ventilate a patient who has a pulse but is not breathing?",
+          "The chest is not rising. What do you do?",
+          "When would you use a nasopharyngeal airway instead?"
+        ]
+      },
+      {
+        "id": "osce.ana.lma",
+        "title": "Laryngeal mask airway insertion",
+        "task": "This manikin is an anaesthetised adult weighing 70 kg for a short elective procedure. Prepare and insert a laryngeal mask airway and confirm its position.",
+        "seconds": 360,
+        "competencies": ["AS11.5", "AS4.3", "AS4.2"],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.exam.ana.lma_prepare",
+          "skill.exam.ana.lma_insert"
+        ],
+        "examinerQuestions": [
+          "Which size would you choose for this patient, and how did you decide?",
+          "Name a patient in whom you would not use a laryngeal mask.",
+          "There is no capnography trace after insertion. What do you do?"
+        ]
+      },
+      {
+        "id": "osce.ana.spinal_procedure",
+        "title": "Spinal anaesthesia: the procedure",
+        "task": "A consented adult is to have a spinal anaesthetic for a lower limb operation. Describe and demonstrate on the trainer how you would prepare for and perform the spinal, and the care in the first minutes after.",
+        "seconds": 540,
+        "competencies": ["AS5.1", "AS5.2", "AS5.4", "AS10.2"],
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.ana.spinal_prepare",
+          "skill.exam.ana.spinal_position_asepsis",
+          "skill.exam.ana.spinal_inject_aftercare"
+        ],
+        "examinerQuestions": [
+          "Why do you choose a space below L3 in an adult?",
+          "The patient feels an electric shock down the leg as the needle advances. What do you do?",
+          "Ten minutes after the spinal, the patient says her hands feel weak and she cannot breathe properly. What is happening and what do you do?"
+        ]
+      },
+      {
+        "id": "osce.ana.bls_adult",
+        "title": "Adult basic life support",
+        "task": "You find an adult collapsed on the ward. This manikin is the patient. Perform basic life support until the AED arrives, then use it.",
+        "seconds": 360,
+        "passMark": 60,
+        "competencies": ["AS2.1", "AS11.3"],
+        "skills": [
+          "skill.tx.ana.bls_recognise",
+          "skill.tx.ana.bls_cpr",
+          "skill.tx.ana.bls_aed"
+        ],
+        "examinerQuestions": [
+          "How do you tell agonal breathing from normal breathing?",
+          "When do you swap the person doing compressions, and why?",
+          "What changes once a tracheal tube is in place?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.hx.ana.preop_history",
+      "skill.hx.ana.preop_drugs_fasting",
+      "skill.reasoning.ana.asa_readiness",
+      "skill.exam.ana.airway_mouth",
+      "skill.exam.ana.airway_jaw_neck",
+      "skill.approach.ana.consent_setup",
+      "skill.approach.ana.consent_ga_info",
+      "skill.approach.ana.consent_spinal_info",
+      "skill.approach.ana.consent_close",
+      "skill.exam.ana.opa",
+      "skill.exam.ana.bmv",
+      "skill.exam.ana.lma_prepare",
+      "skill.exam.ana.lma_insert",
+      "skill.approach.ana.spinal_prepare",
+      "skill.exam.ana.spinal_position_asepsis",
+      "skill.exam.ana.spinal_inject_aftercare",
+      "skill.tx.ana.bls_recognise",
+      "skill.tx.ana.bls_cpr",
+      "skill.tx.ana.bls_aed"
+    ]
+  }
+}

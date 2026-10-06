@@ -1,0 +1,273 @@
+{
+  "id": "asr5-cpb",
+  "unit": "asr5",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Heparin 300 to 400 units/kg and ACT target 400 to 480 s (unit protocols differ)",
+      "Bypass flow 2.2 to 2.4 L/min/m2 and MAP 50 to 70 mmHg",
+      "Protamine 1 mg per 100 units heparin",
+      "EACTS/EACTA/EBCP 2019 citation details"
+    ]
+  },
+  "title": {
+    "en": "Cardiopulmonary bypass: the circuit and anticoagulation",
+    "hi": "Cardiopulmonary bypass: circuit और anticoagulation"
+  },
+  "idea": {
+    "en": "Bypass drains venous blood, oxygenates it and pumps it back into the aorta. It needs full heparin before cannulation and protamine after. Know each part to act when one fails.",
+    "hi": "Bypass शिरा का रक्त निकालता है, उसे oxygenate करता है और aorta में वापस पंप करता है। Cannulation से पहले पूरा heparin और बाद में protamine चाहिए। हर भाग जानें ताकि खराबी पर कार्य कर सकें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr5-cpb.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A red heart on the left with a blue venous line running down to a reservoir with fluid in it, then to an amber roller pump, up into a teal oxygenator with fine lines, through a violet filter and back as a red line into the top of the heart.",
+      "hi": "बाईं ओर लाल हृदय, उससे नीचे नीली venous line तरल भरे reservoir तक, फिर पीले roller pump तक, ऊपर पतली रेखाओं वाले teal oxygenator में, बैंगनी filter से होकर लाल line के रूप में हृदय के ऊपर वापस।"
+    },
+    "caption": {
+      "en": "The bypass loop: venous drainage, reservoir, pump, oxygenator, arterial filter and aortic return.",
+      "hi": "Bypass का loop: venous drainage, reservoir, pump, oxygenator, arterial filter और aorta में वापसी।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.208,
+        "y": 0.8,
+        "label": {
+          "en": "Venous drainage",
+          "hi": "Venous drainage"
+        },
+        "note": {
+          "en": "Blood leaves the right atrium or cavae by gravity or assisted suction.",
+          "hi": "रक्त right atrium या cavae से gravity या सहायक suction से निकलता है।"
+        }
+      },
+      {
+        "x": 0.385,
+        "y": 0.85,
+        "label": {
+          "en": "Venous reservoir",
+          "hi": "Venous reservoir"
+        },
+        "note": {
+          "en": "The safety buffer. If the level runs dry the pump can send air into the aorta.",
+          "hi": "सुरक्षा भंडार। स्तर ख़त्म हो जाए तो pump aorta में हवा भेज सकता है।"
+        }
+      },
+      {
+        "x": 0.604,
+        "y": 0.85,
+        "label": {
+          "en": "Pump",
+          "hi": "Pump"
+        },
+        "note": {
+          "en": "A roller or centrifugal pump gives non-pulsatile flow, about 2.2 to 2.4 L/min/m2 at normothermia.",
+          "hi": "Roller या centrifugal pump non-pulsatile प्रवाह देता है, normothermia पर लगभग 2.2 से 2.4 L/min/m2।"
+        }
+      },
+      {
+        "x": 0.812,
+        "y": 0.517,
+        "label": {
+          "en": "Membrane oxygenator",
+          "hi": "Membrane oxygenator"
+        },
+        "note": {
+          "en": "Adds oxygen and removes CO2. The heat exchanger next to it cools or warms the blood.",
+          "hi": "ऑक्सीजन जोड़ता है और CO2 हटाता है। इसके साथ लगा heat exchanger रक्त को ठंडा या गर्म करता है।"
+        }
+      },
+      {
+        "x": 0.812,
+        "y": 0.2,
+        "label": {
+          "en": "Arterial filter",
+          "hi": "Arterial filter"
+        },
+        "note": {
+          "en": "Traps air and particles before blood returns to the patient.",
+          "hi": "रक्त के रोगी में लौटने से पहले हवा और कण रोकता है।"
+        }
+      },
+      {
+        "x": 0.25,
+        "y": 0.307,
+        "label": {
+          "en": "Aortic cannula",
+          "hi": "Aortic cannula"
+        },
+        "note": {
+          "en": "Returns oxygenated blood to the ascending aorta. High line pressure suggests a kink, malposition or dissection.",
+          "hi": "Oxygenated रक्त ascending aorta में लौटाता है। Line का ऊँचा दबाव kink, गलत स्थिति या dissection का संकेत है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Venous blood drains from the right atrium or cavae into a reservoir, by gravity or by assisted suction.",
+        "hi": "शिरा का रक्त right atrium या cavae से reservoir में gravity या सहायक suction से जाता है।"
+      },
+      {
+        "en": "A pump drives it through a membrane oxygenator and heat exchanger, then an arterial filter, into the ascending aorta.",
+        "hi": "Pump उसे membrane oxygenator और heat exchanger से, फिर arterial filter से, ascending aorta में भेजता है।"
+      },
+      {
+        "en": "Give unfractionated heparin about 300 to 400 units/kg before cannulation. Confirm the [[act]] is above the unit target, usually 400 to 480 seconds.",
+        "hi": "Cannulation से पहले लगभग 300 से 400 units/kg unfractionated heparin दें। पुष्टि करें कि [[act]] unit के लक्ष्य से ऊपर है, आम तौर पर 400 से 480 सेकंड।"
+      },
+      {
+        "en": "Typical targets on bypass are a flow of about 2.2 to 2.4 L/min/m2 and a MAP of about 50 to 70 mmHg.",
+        "hi": "Bypass पर सामान्य लक्ष्य: प्रवाह लगभग 2.2 से 2.4 L/min/m2 और MAP लगभग 50 से 70 mmHg।"
+      },
+      {
+        "en": "Stop ventilation once full flow is reached. Restart it, with recruitment, before weaning from bypass.",
+        "hi": "पूरा प्रवाह मिलने पर ventilation रोकें। Bypass से हटाने से पहले recruitment के साथ इसे फिर शुरू करें।"
+      },
+      {
+        "en": "Before separation check temperature, rhythm, potassium, haemoglobin and ventilation. Then the heart takes over as pump flow is reduced.",
+        "hi": "अलग करने से पहले तापमान, rhythm, potassium, haemoglobin और ventilation जाँचें। फिर pump प्रवाह घटने पर हृदय काम संभालता है।"
+      },
+      {
+        "en": "Reverse heparin with protamine, about 1 mg per 100 units of heparin, given slowly. Watch for hypotension, pulmonary hypertension and anaphylactoid reactions.",
+        "hi": "Heparin को protamine से उलटें, लगभग 1 mg प्रति 100 units heparin, धीरे-धीरे। Hypotension, pulmonary hypertension और anaphylactoid प्रतिक्रिया पर नज़र रखें।"
+      }
+    ],
+    "analogy": {
+      "en": "The circuit is an outside heart and lung: a tank, a pump and a lung joined in a loop.",
+      "hi": "Circuit बाहर रखा हृदय और फेफड़ा है: एक टंकी, एक पंप और एक फेफड़ा, loop में जुड़े।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Falling reservoir level: risk of pumping air; warn the perfusionist and surgeon at once.",
+      "hi": "गिरता reservoir स्तर: हवा पंप होने का ख़तरा; perfusionist और surgeon को तुरंत बताएँ।"
+    },
+    {
+      "en": "High arterial line pressure after going on bypass: think kinked line, cannula malposition or aortic dissection.",
+      "hi": "Bypass शुरू होने के बाद ऊँचा arterial line दबाव: मुड़ी line, cannula की गलत स्थिति या aortic dissection सोचें।"
+    },
+    {
+      "en": "Severe hypotension with rising pulmonary pressure during protamine: stop the protamine and support the right ventricle.",
+      "hi": "Protamine के दौरान बढ़ते pulmonary दबाव के साथ गंभीर hypotension: protamine रोकें और right ventricle को सहारा दें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Check the ACT after heparin and before the surgeon asks to go on bypass.",
+      "hi": "Heparin के बाद और surgeon के bypass माँगने से पहले ACT जाँचें।"
+    },
+    {
+      "en": "Agree aloud when ventilation stops and when it restarts.",
+      "hi": "Ventilation कब रुका और कब फिर शुरू हुआ, ज़ोर से तय करें।"
+    },
+    {
+      "en": "Tell the perfusionist and surgeon before protamine starts, so suction to the circuit stops.",
+      "hi": "Protamine शुरू करने से पहले perfusionist और surgeon को बताएँ, ताकि circuit में suction बंद हो।"
+    }
+  ],
+  "remember": {
+    "en": "Heparin 300 to 400 units/kg, ACT above the unit target (often 400 to 480 s), protamine 1 mg per 100 units.",
+    "hi": "Heparin 300 से 400 units/kg, ACT unit के लक्ष्य से ऊपर (अक्सर 400 से 480 s), protamine 1 mg प्रति 100 units।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "An 80 kg patient needs heparin before cannulation. A usual dose?",
+        "hi": "80 kg रोगी को cannulation से पहले heparin चाहिए। सामान्य खुराक?"
+      },
+      "o": [
+        {
+          "en": "About 24,000 to 32,000 units, then check the ACT",
+          "hi": "लगभग 24,000 से 32,000 units, फिर ACT जाँचें"
+        },
+        {
+          "en": "5000 units subcutaneously",
+          "hi": "5000 units subcutaneous"
+        },
+        {
+          "en": "1000 units IV",
+          "hi": "1000 units IV"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "300 to 400 units/kg times 80 kg gives 24,000 to 32,000 units. The ACT confirms the effect.",
+        "hi": "300 से 400 units/kg गुणा 80 kg यानी 24,000 से 32,000 units। ACT असर की पुष्टि करता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Heparin given was 30,000 units. The usual protamine dose?",
+        "hi": "30,000 units heparin दिया गया। सामान्य protamine खुराक?"
+      },
+      "o": [
+        {
+          "en": "About 300 mg, given slowly",
+          "hi": "लगभग 300 mg, धीरे से"
+        },
+        {
+          "en": "30 mg",
+          "hi": "30 mg"
+        },
+        {
+          "en": "3 g",
+          "hi": "3 g"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "About 1 mg protamine neutralises 100 units of heparin. Give it slowly to avoid hypotension.",
+        "hi": "लगभग 1 mg protamine 100 units heparin को निष्क्रिय करता है। Hypotension से बचने को धीरे दें।"
+      }
+    },
+    {
+      "q": {
+        "en": "The venous reservoir level falls fast during bypass. Main immediate danger?",
+        "hi": "Bypass के दौरान venous reservoir का स्तर तेज़ी से गिरता है। मुख्य तात्कालिक ख़तरा?"
+      },
+      "o": [
+        {
+          "en": "Pumping air into the aorta",
+          "hi": "Aorta में हवा पंप होना"
+        },
+        {
+          "en": "Hyperkalaemia",
+          "hi": "Hyperkalaemia"
+        },
+        {
+          "en": "Hypothermia",
+          "hi": "Hypothermia"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "An empty reservoir lets the pump draw air and send it to the arterial side. The team must act at once.",
+        "hi": "ख़ाली reservoir से pump हवा खींचकर arterial ओर भेज सकता है। टीम को तुरंत कार्य करना चाहिए।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "monitoring-equipment"
+  },
+  "deeper": {
+    "note": "asr5-cpb",
+    "text": {
+      "en": "Heparin resistance, often from low antithrombin, shows as a poor ACT rise despite full heparin. Options include more heparin, antithrombin concentrate or fresh frozen plasma by local protocol. Patients with heparin-induced thrombocytopenia need an alternative such as bivalirudin.",
+      "hi": "Heparin resistance, अक्सर कम antithrombin से, पूरे heparin के बावजूद ACT कम बढ़ने से दिखता है। स्थानीय protocol अनुसार अधिक heparin, antithrombin concentrate या fresh frozen plasma दिया जाता है। Heparin-induced thrombocytopenia वाले रोगियों को bivalirudin जैसा विकल्प चाहिए।"
+    }
+  },
+  "glossary": [
+    "act"
+  ],
+  "sources": [
+    "Wahba A, Milojevic M, Boer C, et al. 2019 EACTS/EACTA/EBCP guidelines on cardiopulmonary bypass in adult cardiac surgery. Eur J Cardiothorac Surg 2020;57:210-251.",
+    "Gropper MA, ed. Miller's Anesthesia, 9th edition. Elsevier 2020: anesthesia for cardiac surgical procedures and cardiopulmonary bypass."
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "id": "as8-pain-assessment",
+  "unit": "as8",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "NRS bands: 1 to 3 mild, 4 to 6 moderate, 7 to 10 severe.",
+      "FLACC age range and scoring (Merkel 1997)."
+    ]
+  },
+  "competencies": [
+    "AS8.2"
+  ],
+  "title": {
+    "en": "Assessing pain: level, quality and tolerance",
+    "hi": "दर्द की जाँच: स्तर, प्रकार और सहनशक्ति"
+  },
+  "idea": {
+    "en": "Pain is what the patient says it is. Measure it with a scale that suits the patient, at rest and on movement, and recheck after treatment.",
+    "hi": "दर्द वही है जो मरीज़ बताता है। मरीज़ के अनुकूल पैमाने से, आराम में और हिलने पर नापिए, और इलाज के बाद फिर जाँचिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as8-pain-assessment.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Top: six faces in a row, from a broad smile to a deep frown with a tear. Middle: a bar of ten colour blocks from green to red, with eleven tick marks. Bottom: a child figure and a head on a pillow with a tube from the mouth. Last, a body outline with a red spot.",
+      "hi": "ऊपर: एक पंक्ति में छह चेहरे, चौड़ी मुस्कान से आँसू वाली गहरी उदासी तक। बीच में: हरे से लाल तक दस रंगीन खानों की पट्टी, ग्यारह निशानों के साथ। नीचे: एक बच्चे की आकृति, तकिये पर मुँह से नली वाला एक सिर, और पेट पर लाल बिंदु वाली शरीर की रूपरेखा।"
+    },
+    "caption": {
+      "en": "Choose the pain scale to suit the patient: numbers, faces or behaviour.",
+      "hi": "मरीज़ के हिसाब से दर्द का पैमाना चुनिए: संख्याएँ, चेहरे या व्यवहार।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.417,
+        "y": 0.53,
+        "label": {
+          "en": "Numeric rating scale",
+          "hi": "Numeric rating scale"
+        },
+        "note": {
+          "en": "0 is no pain and 10 is the worst imaginable. Often 1 to 3 mild, 4 to 6 moderate, 7 to 10 severe.",
+          "hi": "0 मतलब कोई दर्द नहीं और 10 मतलब सबसे बुरा। अक्सर 1 से 3 हल्का, 4 से 6 मध्यम, 7 से 10 गंभीर।"
+        }
+      },
+      {
+        "x": 0.417,
+        "y": 0.307,
+        "label": {
+          "en": "Faces scale",
+          "hi": "Faces पैमाना"
+        },
+        "note": {
+          "en": "Children and adults who find numbers hard point to the face that matches their pain.",
+          "hi": "बच्चे और वयस्क जिन्हें संख्याएँ कठिन लगती हैं, अपने दर्द से मिलता चेहरा दिखाते हैं।"
+        }
+      },
+      {
+        "x": 0.917,
+        "y": 0.53,
+        "label": {
+          "en": "Worst pain",
+          "hi": "सबसे बुरा दर्द"
+        },
+        "note": {
+          "en": "Ask for the worst score in the last 24 hours as well as the score now.",
+          "hi": "अभी के स्कोर के साथ पिछले 24 घंटे का सबसे बुरा स्कोर भी पूछिए।"
+        }
+      },
+      {
+        "x": 0.208,
+        "y": 0.827,
+        "label": {
+          "en": "Young child",
+          "hi": "छोटा बच्चा"
+        },
+        "note": {
+          "en": "Use FLACC: face, legs, activity, cry and consolability, each 0 to 2.",
+          "hi": "FLACC इस्तेमाल कीजिए: चेहरा, पैर, गतिविधि, रोना और चुप कराया जाना, हर एक 0 से 2।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.8,
+        "label": {
+          "en": "Patient who cannot speak",
+          "hi": "जो मरीज़ बोल नहीं सकता"
+        },
+        "note": {
+          "en": "In ICU use the Behavioural Pain Scale or CPOT. Vital signs alone are not a valid pain score.",
+          "hi": "ICU में Behavioural Pain Scale या CPOT इस्तेमाल कीजिए। सिर्फ़ vital signs दर्द का सही स्कोर नहीं हैं।"
+        }
+      },
+      {
+        "x": 0.804,
+        "y": 0.813,
+        "label": {
+          "en": "Site and quality",
+          "hi": "जगह और प्रकार"
+        },
+        "note": {
+          "en": "Ask where, what it feels like, what makes it worse, and how it affects sleep and movement.",
+          "hi": "पूछिए कहाँ है, कैसा लगता है, किससे बढ़ता है, और नींद व चलने-फिरने पर क्या असर है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Level: ask for a score on the [[nrs]], at rest and on moving or coughing.",
+        "hi": "स्तर: [[nrs]] पर स्कोर पूछिए, आराम में और हिलने या खाँसने पर।"
+      },
+      {
+        "en": "Quality: site, onset, character, radiation, timing, what helps, what worsens. Sharp, dull, burning or shooting?",
+        "hi": "प्रकार: जगह, शुरुआत, स्वभाव, फैलाव, समय, किससे आराम, किससे बढ़त। चुभता, भारी, जलन या बिजली जैसा?"
+      },
+      {
+        "en": "Quantity over time: use a pain diary or chart, and record the worst score each day.",
+        "hi": "समय के साथ मात्रा: दर्द की डायरी या चार्ट रखिए, और हर दिन का सबसे बुरा स्कोर लिखिए।"
+      },
+      {
+        "en": "Tolerance is the most pain a person will accept. It differs from threshold, the least stimulus felt as pain.",
+        "hi": "सहनशक्ति वह सबसे ज़्यादा दर्द है जो व्यक्ति स्वीकार करता है। यह threshold से अलग है, जो दर्द लगने वाली सबसे कम उत्तेजना है।"
+      },
+      {
+        "en": "If the patient cannot report, ask a surrogate and use a behavioural scale such as [[flacc]].",
+        "hi": "अगर मरीज़ बता न सके, तो किसी परिजन से पूछिए और [[flacc]] जैसा व्यवहार वाला पैमाना इस्तेमाल कीजिए।"
+      }
+    ],
+    "analogy": {
+      "en": "A pain score is like a thermometer for suffering. It is only useful if you read it again after treatment.",
+      "hi": "दर्द का स्कोर पीड़ा का thermometer है। यह तभी काम का है जब इलाज के बाद फिर पढ़ा जाए।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A quiet patient may still have severe pain. Ask; do not assume.",
+      "hi": "चुप मरीज़ को भी तेज़ दर्द हो सकता है। पूछिए; अनुमान मत लगाइए।"
+    },
+    {
+      "en": "Pain that stops the patient coughing or walking needs treatment, even if the score at rest is low.",
+      "hi": "जो दर्द मरीज़ को खाँसने या चलने से रोके, उसका इलाज चाहिए, भले आराम में स्कोर कम हो।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Record a pain score with every set of vital signs.",
+      "hi": "हर बार vital signs के साथ दर्द का स्कोर लिखिए।"
+    },
+    {
+      "en": "Recheck the score after each analgesic dose.",
+      "hi": "हर दर्द-निवारक खुराक के बाद स्कोर फिर जाँचिए।"
+    }
+  ],
+  "remember": {
+    "en": "Ask, score, describe, recheck. Use numbers, faces or behaviour to fit the patient.",
+    "hi": "पूछिए, स्कोर कीजिए, वर्णन कीजिए, फिर जाँचिए। मरीज़ के हिसाब से संख्याएँ, चेहरे या व्यवहार इस्तेमाल कीजिए।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which scale suits a 2-year-old after surgery?",
+        "hi": "सर्जरी के बाद 2 साल के बच्चे के लिए कौन सा पैमाना ठीक है?"
+      },
+      "o": [
+        {
+          "en": "Numeric rating scale 0 to 10",
+          "hi": "Numeric rating scale 0 से 10"
+        },
+        {
+          "en": "100 mm visual analogue line",
+          "hi": "100 mm visual analogue रेखा"
+        },
+        {
+          "en": "The FLACC behavioural scale",
+          "hi": "FLACC व्यवहार पैमाना"
+        },
+        {
+          "en": "McGill pain questionnaire",
+          "hi": "McGill pain questionnaire"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Toddlers cannot rate pain, so a behavioural scale such as FLACC is used.",
+        "hi": "छोटे बच्चे दर्द आँक नहीं सकते, इसलिए FLACC जैसा व्यवहार वाला पैमाना इस्तेमाल होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What does pain tolerance mean?",
+        "hi": "pain tolerance का क्या मतलब है?"
+      },
+      "o": [
+        {
+          "en": "The most pain a person is willing to accept",
+          "hi": "सबसे ज़्यादा दर्द जो व्यक्ति स्वीकार करने को तैयार है"
+        },
+        {
+          "en": "The least stimulus that is felt as pain",
+          "hi": "सबसे कम उत्तेजना जो दर्द लगती है"
+        },
+        {
+          "en": "The time taken for pain to start",
+          "hi": "दर्द शुरू होने में लगने वाला समय"
+        },
+        {
+          "en": "The area of skin that hurts",
+          "hi": "त्वचा का दुखने वाला हिस्सा"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Threshold is the lowest painful stimulus; tolerance is the most pain a person will bear.",
+        "hi": "Threshold सबसे कम दर्दनाक उत्तेजना है; tolerance वह सबसे ज़्यादा दर्द है जो व्यक्ति सहेगा।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "pain"
+  },
+  "glossary": [
+    "nrs",
+    "flacc"
+  ],
+  "sources": [
+    "Merkel SI, Voepel-Lewis T, Shayevitz JR, Malviya S. The FLACC: a behavioral scale for scoring postoperative pain in young children. Pediatr Nurs 1997;23:293-7.",
+    "Breivik H, Borchgrevink PC, Allen SM, et al. Assessment of pain. Br J Anaesth 2008;101:17-24.",
+    "StewardMD clinical protocol: ICU pain, sedation and delirium (PADIS), kb/clinical-protocols/icu-sedation-analgesia-delirium.json: BPS and CPOT."
+  ]
+}

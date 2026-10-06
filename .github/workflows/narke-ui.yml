@@ -21,3 +21,7 @@ jobs:
           node-version: '24'
       - name: Narkē in the real app (lazy load, route, back, Review Desk tab, kill switch; 390 px)
         run: node test/run-narke-app-ui.mjs
+      - name: Narkē explorers (390 px, both themes, keyboard)
+        run: node test/run-narke-explore-ui.mjs
+      - name: Narkē capnography and monitor clinics
+        run: node test/run-narke-clinic-ui.mjs

@@ -1,0 +1,251 @@
+{
+  "id": "as7-oxygen-therapy",
+  "unit": "as7",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "SpO2 targets 94 to 98% and 88 to 92% (BTS 2017; kb acute-respiratory-failure-niv-hfnc).",
+      "Type 1 and type 2 respiratory failure thresholds (kb acute-respiratory-failure-niv-hfnc).",
+      "Reservoir mask at 15 L/min for critical illness (BTS 2017)."
+    ]
+  },
+  "competencies": [
+    "AS7.5",
+    "AS11.2",
+    "AS11.1"
+  ],
+  "title": {
+    "en": "Oxygen therapy: devices and targets",
+    "hi": "ऑक्सीजन थेरेपी: उपकरण और लक्ष्य"
+  },
+  "idea": {
+    "en": "Oxygen is a drug with a target, not a comfort measure. Choose the device by how much oxygen is needed and aim at a set SpO2 range.",
+    "hi": "ऑक्सीजन एक दवा है जिसका लक्ष्य होता है, सिर्फ़ आराम का साधन नहीं। ज़रूरत के हिसाब से उपकरण चुनिए और तय SpO2 सीमा का लक्ष्य रखिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as7-oxygen-therapy.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Five faces in a row, each with an oxygen device. From left: thin nasal prongs, a simple green mask, and a mask with a blue valve on its tube. Then a mask with a hanging reservoir bag, and wide purple prongs joined to a humidifier box. Below is a grey bar with an amber band and a green band.",
+      "hi": "एक पंक्ति में पाँच चेहरे, हर एक पर ऑक्सीजन का उपकरण। बाएँ से: पतली nasal prongs, सादा हरा मास्क, नली पर नीले valve वाला मास्क, लटकती reservoir थैली वाला मास्क, और humidifier डिब्बे से जुड़ी चौड़ी बैंगनी prongs। नीचे एक धूसर पट्टी है जिसमें एक पीला और एक हरा हिस्सा है।"
+    },
+    "caption": {
+      "en": "Five oxygen devices, and the two usual SpO2 target ranges.",
+      "hi": "ऑक्सीजन के पाँच उपकरण, और SpO2 की दो सामान्य लक्ष्य-सीमाएँ।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.125,
+        "y": 0.347,
+        "label": {
+          "en": "Nasal cannula",
+          "hi": "Nasal cannula"
+        },
+        "note": {
+          "en": "Low-flow oxygen, comfortable, lets the patient eat and talk.",
+          "hi": "कम flow वाली ऑक्सीजन, आरामदेह, मरीज़ खा और बोल सकता है।"
+        }
+      },
+      {
+        "x": 0.312,
+        "y": 0.373,
+        "label": {
+          "en": "Simple face mask",
+          "hi": "सादा face mask"
+        },
+        "note": {
+          "en": "Gives more oxygen than prongs, but the exact FiO2 varies with breathing.",
+          "hi": "prongs से ज़्यादा ऑक्सीजन देता है, पर सही FiO2 साँस के साथ बदलता है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.493,
+        "label": {
+          "en": "Venturi mask",
+          "hi": "Venturi mask"
+        },
+        "note": {
+          "en": "A coloured valve gives a fixed FiO2. Useful when too much oxygen is risky.",
+          "hi": "रंगीन valve एक तय FiO2 देता है। तब उपयोगी जब ज़्यादा ऑक्सीजन ख़तरनाक हो।"
+        }
+      },
+      {
+        "x": 0.688,
+        "y": 0.507,
+        "label": {
+          "en": "Reservoir mask",
+          "hi": "Reservoir mask"
+        },
+        "note": {
+          "en": "A non-rebreathing mask with a bag at 15 L/min gives high oxygen in critical illness.",
+          "hi": "थैली वाला non-rebreathing मास्क 15 L/min पर गंभीर बीमारी में ज़्यादा ऑक्सीजन देता है।"
+        }
+      },
+      {
+        "x": 0.875,
+        "y": 0.567,
+        "label": {
+          "en": "High-flow nasal oxygen",
+          "hi": "High-flow nasal oxygen"
+        },
+        "note": {
+          "en": "Warmed, humid oxygen at 30 to 60 L/min with a set FiO2, for hypoxaemic failure.",
+          "hi": "hypoxaemic विफलता के लिए 30 से 60 L/min पर तय FiO2 के साथ गर्म, नम ऑक्सीजन।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.823,
+        "label": {
+          "en": "Target 88 to 92%",
+          "hi": "लक्ष्य 88 से 92%"
+        },
+        "note": {
+          "en": "For patients at risk of carbon dioxide retention, such as COPD or obesity hypoventilation.",
+          "hi": "carbon dioxide रुकने के ख़तरे वाले मरीज़ों के लिए, जैसे COPD या obesity hypoventilation।"
+        }
+      },
+      {
+        "x": 0.725,
+        "y": 0.823,
+        "label": {
+          "en": "Target 94 to 98%",
+          "hi": "लक्ष्य 94 से 98%"
+        },
+        "note": {
+          "en": "For most other acutely ill adults.",
+          "hi": "ज़्यादातर अन्य गंभीर रूप से बीमार वयस्कों के लिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Type 1 failure: PaO2 below 60 mmHg with normal or low PaCO2. Type 2: PaCO2 above 45 mmHg as well; a pH below 7.35 means it is acute or acute-on-chronic.",
+        "hi": "Type 1 विफलता: PaO2 60 mmHg से कम, PaCO2 सामान्य या कम। Type 2: साथ में PaCO2 45 mmHg से ऊपर; pH 7.35 से कम हो तो यह acute या acute-on-chronic है।"
+      },
+      {
+        "en": "Aim SpO2 at 94 to 98% for most patients, and 88 to 92% if carbon dioxide retention is a risk.",
+        "hi": "ज़्यादातर मरीज़ों में SpO2 94 से 98% रखिए, और carbon dioxide रुकने का ख़तरा हो तो 88 से 92%।"
+      },
+      {
+        "en": "Start with the device that meets the need, then step up or down to stay in the target.",
+        "hi": "ज़रूरत पूरी करने वाले उपकरण से शुरू कीजिए, फिर लक्ष्य में रहने के लिए ऊपर या नीचे जाइए।"
+      },
+      {
+        "en": "In hypoxaemic failure, [[hfno]] is preferred over standard oxygen. Do not let it delay intubation.",
+        "hi": "hypoxaemic विफलता में standard ऑक्सीजन के बजाय [[hfno]] बेहतर है। इसे intubation में देरी का कारण मत बनने दीजिए।"
+      },
+      {
+        "en": "Prescribe oxygen like any drug: device, flow or [[fio2]], and the target range.",
+        "hi": "ऑक्सीजन को किसी भी दवा की तरह लिखिए: उपकरण, flow या [[fio2]], और लक्ष्य-सीमा।"
+      }
+    ],
+    "analogy": {
+      "en": "Oxygen targets are like a speed limit. Too slow is dangerous, and too fast is dangerous too.",
+      "hi": "ऑक्सीजन के लक्ष्य speed limit जैसे हैं। बहुत धीमा भी ख़तरनाक है और बहुत तेज़ भी।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A COPD patient on high oxygen who becomes drowsy may be retaining carbon dioxide. Check a blood gas.",
+      "hi": "ज़्यादा ऑक्सीजन पर COPD मरीज़ ऊँघने लगे तो carbon dioxide रुक रही हो सकती है। blood gas जाँचिए।"
+    },
+    {
+      "en": "A breathing rate above 30 with accessory muscle use means tiring, whatever the SpO2.",
+      "hi": "साँस की दर 30 से ऊपर और सहायक मांसपेशियों का इस्तेमाल थकान बताता है, SpO2 जो भी हो।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write the target SpO2 range on every oxygen prescription.",
+      "hi": "हर ऑक्सीजन prescription पर लक्ष्य SpO2 सीमा लिखिए।"
+    },
+    {
+      "en": "Match the device to the need, and recheck SpO2 after every change.",
+      "hi": "उपकरण को ज़रूरत से मिलाइए, और हर बदलाव के बाद SpO2 फिर जाँचिए।"
+    }
+  ],
+  "remember": {
+    "en": "Oxygen is a drug: prescribe the device and the target. 94 to 98% for most, 88 to 92% if CO2 retention is a risk.",
+    "hi": "ऑक्सीजन दवा है: उपकरण और लक्ष्य लिखिए। ज़्यादातर में 94 से 98%, CO2 रुकने का ख़तरा हो तो 88 से 92%।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What SpO2 target suits a patient with a COPD exacerbation?",
+        "hi": "COPD exacerbation वाले मरीज़ के लिए कौन सा SpO2 लक्ष्य ठीक है?"
+      },
+      "o": [
+        {
+          "en": "94 to 98%",
+          "hi": "94 से 98%"
+        },
+        {
+          "en": "88 to 92%",
+          "hi": "88 से 92%"
+        },
+        {
+          "en": "99 to 100%",
+          "hi": "99 से 100%"
+        },
+        {
+          "en": "80 to 84%",
+          "hi": "80 से 84%"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Patients at risk of hypercapnia are kept at 88 to 92% to avoid carbon dioxide retention.",
+        "hi": "hypercapnia के ख़तरे वाले मरीज़ों को carbon dioxide रुकने से बचाने के लिए 88 से 92% पर रखते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which device gives a fixed, known FiO2?",
+        "hi": "कौन सा उपकरण तय और पता FiO2 देता है?"
+      },
+      "o": [
+        {
+          "en": "Simple face mask",
+          "hi": "सादा face mask"
+        },
+        {
+          "en": "Nasal cannula",
+          "hi": "Nasal cannula"
+        },
+        {
+          "en": "Venturi mask",
+          "hi": "Venturi mask"
+        },
+        {
+          "en": "Reservoir bag mask",
+          "hi": "Reservoir bag mask"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "A Venturi valve mixes air and oxygen in a fixed ratio, so the FiO2 stays set.",
+        "hi": "Venturi valve हवा और ऑक्सीजन को तय अनुपात में मिलाता है, इसलिए FiO2 तय रहता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "tool": "pf-ratio"
+  },
+  "glossary": [
+    "hfno",
+    "fio2"
+  ],
+  "sources": [
+    "O'Driscoll BR, Howard LS, Earis J, Mak V. BTS guideline for oxygen use in adults in healthcare and emergency settings. Thorax 2017;72(Suppl 1):ii1-90.",
+    "StewardMD clinical protocol: Acute respiratory failure, NIV and high-flow nasal oxygen, kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json (ERS 2022, ESICM 2023)."
+  ]
+}

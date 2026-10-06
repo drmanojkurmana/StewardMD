@@ -10,9 +10,9 @@ const read = (f) => readFileSync(f, "utf8");
 
 test("app boot loads only narke-loader.js; the loader lists the engine then narke.js at its own token", () => {
   const html = read("index.html");
-  assert.deepEqual(html.match(/narke[-.\w]*\.(js|css)\?v=\w+/g), ["narke-loader.js?v=nrk1"]);
+  assert.deepEqual(html.match(/narke[-.\w]*\.(js|css)\?v=\w+/g), ["narke-loader.js?v=nrk2"]);
   const L = read("narke-loader.js"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "nrk1");
+  assert.equal(v, "nrk2");
   for (const f of ["specialty.css", "narke.css", "specialty-core.js", "specialty-shell.js", "specialty-notes.js", "narke.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-notes.js"') < L.indexOf('"narke.js"'), "engine before the host");
   assert.ok(!/tokos/i.test(L), "no Tokós name in the Narkē loader");
@@ -71,4 +71,55 @@ test("Narkē stays within its 450-file budget (narke/ and narke-models/)", async
   const count = (d) => !existsSync(d) ? 0 : readdirSync(d).reduce((n, f) => n + (statSync(d + "/" + f).isDirectory() ? count(d + "/" + f) : 1), 0);
   const n = count("narke") + count("narke-models");
   assert.ok(n <= 450, n + " files");
+});
+
+test("every id in narke/models.json has its narke-models file, drill-core first", async () => {
+  const { existsSync } = await import("node:fs");
+  const ids = JSON.parse(read("narke/models.json")).models;
+  assert.equal(ids[0], "drill-core");
+  for (const id of ids) assert.ok(existsSync("narke-models/" + id + ".js"), id);
+});
+
+test("Review Desk lists the Narkē clinics when the signals model is loaded; apply-reviews records them in the ledger", async () => {
+  const R = createRequire(import.meta.url)("../review-desk.js");
+  const ids = R._tokosMore({ models: { signals: { kind: "signals" } } }, "narke").map((x) => x.id);
+  assert.deepEqual(ids, ["clinic-capno", "clinic-monitor"]);
+  const A = await import("../scripts/apply-reviews.mjs");
+  assert.deepEqual(A.tokosTarget("clinic-capno", "/r", () => "{}", () => true, "narke"), { files: [] });
+});
+
+test("Review Desk text: Narkē explorers list every {en, hi} they show; clinics list scene and trace before points", () => {
+  const req = createRequire(import.meta.url);
+  const tof = req("../narke-models/explorer-tof.js"), sig = req("../narke-models/signals.js");
+  const R = req("../review-desk.js");
+  globalThis.NARKE_MODELS = { tof, signals: sig };
+  try {
+    const rows = R._tokosMoreRows("explorer-tof", "narke");
+    const want = [];
+    (function walk(o, d) { if (!o || typeof o !== "object" || d > 6) return; if (typeof o.en === "string" && typeof o.hi === "string") { want.push(o.en); return; } Object.keys(o).forEach((k) => { if (typeof o[k] !== "function" && !(d === 0 && (k === "sources" || k === "subtitle"))) walk(o[k], d + 1); }); })(tof, 0);
+    assert.ok(want.length > 5, "the TOF model carries bilingual text");
+    const en = rows.map((r) => r[1]);
+    want.forEach((t) => assert.ok(en.includes(t), t));
+    assert.ok(rows.filter((r) => r[2]).length >= want.length, "Hindi kept beside each English row");
+    const cap = R._tokosMoreRows("clinic-capno", "narke"), first = sig.CAPNO[Object.keys(sig.CAPNO)[0]];
+    const iScene = cap.findIndex((r) => r[1] === first.scene.en), iDesc = cap.findIndex((r) => r[1] === first.describe.en), iPt = cap.findIndex((r) => r[1] === first.points[0].en);
+    assert.ok(iScene >= 0 && iScene < iDesc && iDesc < iPt, [iScene, iDesc, iPt].join(","));
+    assert.equal(cap[iScene][2], first.scene.hi);
+  } finally { delete globalThis.NARKE_MODELS; }
+});
+
+test("apply-reviews: approving a Narkē drill rewrites a JSON the drill core still accepts, and names the narke rebuild", async () => {
+  const A = await import("../scripts/apply-reviews.mjs");
+  const core = createRequire(import.meta.url)("../narke-models/drill-core.js");
+  const x = { schema: 1, reviewer: { name: "Dr An", regNo: "77", verified: true }, decisions: [{ kind: "narke", id: "drill-bls", decision: "approve", at: "2026-10-06T09:00:00Z" }] };
+  assert.deepEqual(A.validateExport(x), []);
+  const u = A.plan(x).updates.find((d) => !d.ledger);
+  assert.ok(u && /narke\/drill\/bls\.json$/.test(u.file));
+  assert.equal(u.build, "tools/tokos-build-drills.mjs --host narke");
+  const d = JSON.parse(u.text);
+  assert.equal(d.review, "reviewed");
+  assert.deepEqual(core.validate(d), []);
+  const bump = A.tokosBump([u.build]);
+  assert.match(bump, /^Narkē content changed/);
+  assert.ok(!/Tokós/.test(bump), "a Narkē drill rebuild does not ask for a Tokós bump");
 });

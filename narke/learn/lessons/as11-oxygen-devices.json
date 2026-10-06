@@ -1,0 +1,286 @@
+{
+  "id": "as11-oxygen-devices",
+  "unit": "as11",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Nasal cannula 1 to 6 L/min gives FiO2 about 0.24 to 0.44 (about 0.04 per litre)",
+      "Simple face mask 5 to 10 L/min gives FiO2 about 0.40 to 0.60 (BTS 2017)",
+      "Non-rebreather at 15 L/min gives FiO2 about 0.60 to 0.90 (BTS 2017)",
+      "Venturi valve colours 24% blue, 28% white, 31% orange, 35% yellow, 40% red, 60% green (BTS 2017; brands vary)",
+      "BVM with reservoir at 15 L/min gives FiO2 close to 1.0",
+      "HFNC adult flow 30 to 60 L/min (kb protocol)"
+    ]
+  },
+  "competencies": [
+    "AS11.1"
+  ],
+  "title": {
+    "en": "Oxygen delivery devices",
+    "hi": "ऑक्सीजन देने के उपकरण"
+  },
+  "idea": {
+    "en": "Each device gives a different range of [[fio2]]. Low-flow devices give a variable FiO2. A [[venturi-mask]] and [[hfnc]] give a set FiO2.",
+    "hi": "हर उपकरण [[fio2]] की अलग सीमा देता है। कम-प्रवाह उपकरण बदलता FiO2 देते हैं। [[venturi-mask]] और [[hfnc]] तय FiO2 देते हैं।"
+  },
+  "see": {
+    "diagram": "diagrams/as11-oxygen-devices.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A chart with six coloured bars of different heights and positions. Under each bar is a small device drawing. They are nasal prongs, a plain mask and a mask with a blue valve. Then come a mask with a bag, a bag with a mask, and wide prongs joined to a box.",
+      "hi": "छह रंगीन पट्टियों वाला चार्ट, जिनकी ऊँचाई और जगह अलग है। हर पट्टी के नीचे एक उपकरण का छोटा चित्र है: नाक के प्रोंग, सादा मास्क, नीले वाल्व वाला मास्क, बैग वाला मास्क, मास्क वाला बैग, और एक डिब्बे से जुड़े चौड़े प्रोंग।"
+    },
+    "caption": {
+      "en": "Approximate FiO2 range of each device, from room air at the bottom to 1.0 at the top.",
+      "hi": "हर उपकरण की लगभग FiO2 सीमा, नीचे कमरे की हवा से ऊपर 1.0 तक।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.06,
+        "y": 0.1,
+        "label": {
+          "en": "FiO2 scale",
+          "hi": "FiO2 पैमाना"
+        },
+        "note": {
+          "en": "Bottom line is room air, 0.21. Top line is 1.0. Bars show the approximate range each device gives.",
+          "hi": "नीचे की रेखा कमरे की हवा, 0.21 है। ऊपर की रेखा 1.0 है। पट्टियाँ हर उपकरण की लगभग सीमा दिखाती हैं।"
+        }
+      },
+      {
+        "x": 0.125,
+        "y": 0.85,
+        "label": {
+          "en": "Nasal cannula",
+          "hi": "नेज़ल कैनुला"
+        },
+        "note": {
+          "en": "1 to 6 L/min. FiO2 about 0.24 to 0.44, roughly 0.04 more per litre. Comfortable; patient can eat and talk.",
+          "hi": "1 से 6 L/min। FiO2 लगभग 0.24 से 0.44, हर लीटर पर लगभग 0.04 ज़्यादा। आरामदेह; मरीज़ खा और बोल सकता है।"
+        }
+      },
+      {
+        "x": 0.281,
+        "y": 0.85,
+        "label": {
+          "en": "Simple face mask",
+          "hi": "साधारण फ़ेस मास्क"
+        },
+        "note": {
+          "en": "5 to 10 L/min, FiO2 about 0.40 to 0.60. Never below 5 L/min, or exhaled CO2 builds up in the mask.",
+          "hi": "5 से 10 L/min, FiO2 लगभग 0.40 से 0.60। कभी 5 L/min से कम नहीं, वरना छोड़ी गई CO2 मास्क में जमा होती है।"
+        }
+      },
+      {
+        "x": 0.4375,
+        "y": 0.9,
+        "label": {
+          "en": "Venturi mask",
+          "hi": "Venturi मास्क"
+        },
+        "note": {
+          "en": "Fixed FiO2 by valve: 0.24, 0.28, 0.31, 0.35, 0.40, 0.60. Set at least the flow printed on the valve.",
+          "hi": "वाल्व से तय FiO2: 0.24, 0.28, 0.31, 0.35, 0.40, 0.60। कम से कम वाल्व पर छपा प्रवाह सेट करें।"
+        }
+      },
+      {
+        "x": 0.594,
+        "y": 0.85,
+        "label": {
+          "en": "Non-rebreather mask",
+          "hi": "Non-rebreather मास्क"
+        },
+        "note": {
+          "en": "15 L/min, FiO2 about 0.60 to 0.90. Fill the reservoir bag before putting it on. First choice in critical illness.",
+          "hi": "15 L/min, FiO2 लगभग 0.60 से 0.90। लगाने से पहले रिज़र्वायर बैग भरें। गंभीर बीमारी में पहली पसंद।"
+        }
+      },
+      {
+        "x": 0.758,
+        "y": 0.9,
+        "label": {
+          "en": "Bag-valve-mask",
+          "hi": "बैग-वाल्व-मास्क"
+        },
+        "note": {
+          "en": "For a patient who is not breathing well. With a reservoir and 15 L/min oxygen, FiO2 comes close to 1.0.",
+          "hi": "उस मरीज़ के लिए जो ठीक से साँस नहीं ले रहा। रिज़र्वायर और 15 L/min ऑक्सीजन से FiO2 लगभग 1.0 तक पहुँचता है।"
+        }
+      },
+      {
+        "x": 0.906,
+        "y": 0.88,
+        "label": {
+          "en": "High-flow nasal cannula",
+          "hi": "हाई-फ़्लो नेज़ल कैनुला"
+        },
+        "note": {
+          "en": "Adults: 30 to 60 L/min, heated and humidified. FiO2 0.21 to 1.0 is set on the blender.",
+          "hi": "वयस्क: 30 से 60 L/min, गर्म और नम। FiO2 0.21 से 1.0 ब्लेंडर पर सेट होता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Low-flow devices give less flow than the patient breathes in. Room air dilutes the oxygen, so FiO2 varies with breathing.",
+        "hi": "कम-प्रवाह उपकरण मरीज़ की साँस से कम प्रवाह देते हैं। कमरे की हवा ऑक्सीजन को पतला करती है, इसलिए FiO2 साँस के साथ बदलता है।"
+      },
+      {
+        "en": "A fast breathing patient on a cannula or simple mask gets a lower FiO2 than the chart suggests.",
+        "hi": "कैनुला या साधारण मास्क पर तेज़ साँस लेने वाले मरीज़ को चार्ट से कम FiO2 मिलता है।"
+      },
+      {
+        "en": "A Venturi valve pulls in a fixed ratio of room air. Total flow exceeds the patient's demand, so FiO2 stays fixed.",
+        "hi": "Venturi वाल्व कमरे की हवा का तय अनुपात खींचता है। कुल प्रवाह मरीज़ की ज़रूरत से ज़्यादा होता है, इसलिए FiO2 तय रहता है।"
+      },
+      {
+        "en": "HFNC meets the patient's full demand. It also washes out dead space and gives a small positive pressure.",
+        "hi": "HFNC मरीज़ की पूरी ज़रूरत पूरी करता है। यह dead space भी साफ़ करता है और थोड़ा धनात्मक दबाव देता है।"
+      },
+      {
+        "en": "Valve colours follow BTS: 24% blue, 28% white, 31% orange, 35% yellow, 40% red, 60% green. Brands in India vary, so read the label.",
+        "hi": "वाल्व के रंग BTS के अनुसार: 24% नीला, 28% सफ़ेद, 31% नारंगी, 35% पीला, 40% लाल, 60% हरा। भारत में ब्रांड अलग हो सकते हैं, इसलिए लेबल पढ़ें।"
+      }
+    ],
+    "analogy": {
+      "en": "A low-flow device is like a tap filling a bucket with a hole. A Venturi mask is a mixer tap set to one temperature.",
+      "hi": "कम-प्रवाह उपकरण छेद वाली बाल्टी भरते नल जैसा है। Venturi मास्क एक तापमान पर सेट मिक्सर नल जैसा है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A deflated reservoir bag on a non-rebreather means the flow is too low or the mask leaks.",
+      "hi": "Non-rebreather का पिचका रिज़र्वायर बैग बताता है कि प्रवाह कम है या मास्क से रिसाव है।"
+    },
+    {
+      "en": "Humidifier bottle bubbling but no flow at the mask: check for a kinked or disconnected tube.",
+      "hi": "ह्यूमिडिफ़ायर की बोतल में बुलबुले पर मास्क पर प्रवाह नहीं: मुड़ी या अलग हुई नली देखें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Match the device to the target: Venturi 24 to 28% for a CO2 retainer, non-rebreather 15 L/min in shock.",
+      "hi": "उपकरण को लक्ष्य से मिलाएँ: CO2 retainer में Venturi 24 से 28%, shock में non-rebreather 15 L/min।"
+    },
+    {
+      "en": "Check the flowmeter ball, the tubing, the mask fit and the SpO2 within minutes of starting.",
+      "hi": "शुरू करने के कुछ मिनट में flowmeter की गेंद, नली, मास्क की फ़िटिंग और SpO2 जाँचें।"
+    }
+  ],
+  "remember": {
+    "en": "Cannula 1 to 6 L/min, simple mask 5 to 10, non-rebreather 15 L/min. Venturi gives a fixed FiO2. HFNC gives up to 60 L/min.",
+    "hi": "कैनुला 1 से 6 L/min, साधारण मास्क 5 से 10, non-rebreather 15 L/min। Venturi तय FiO2 देता है। HFNC 60 L/min तक देता है।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A patient with COPD needs a known, fixed low FiO2. Which device fits best?",
+        "hi": "COPD के मरीज़ को ज्ञात, तय कम FiO2 चाहिए। कौन-सा उपकरण सबसे सही है?"
+      },
+      "o": [
+        {
+          "en": "Non-rebreather mask at 15 L/min",
+          "hi": "15 L/min पर non-rebreather मास्क"
+        },
+        {
+          "en": "Venturi mask 24% or 28%",
+          "hi": "Venturi मास्क 24% या 28%"
+        },
+        {
+          "en": "Simple face mask at 3 L/min",
+          "hi": "3 L/min पर साधारण फ़ेस मास्क"
+        },
+        {
+          "en": "Bag-valve-mask",
+          "hi": "बैग-वाल्व-मास्क"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "A Venturi valve gives a fixed FiO2 whatever the breathing pattern. That suits a patient at risk of hypercapnia.",
+        "hi": "Venturi वाल्व साँस के तरीके से अलग तय FiO2 देता है। यह hypercapnia के जोखिम वाले मरीज़ के लिए सही है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why should a simple face mask never run below 5 L/min?",
+        "hi": "साधारण फ़ेस मास्क कभी 5 L/min से कम पर क्यों नहीं चलाना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "The oxygen becomes too dry",
+          "hi": "ऑक्सीजन बहुत सूखी हो जाती है"
+        },
+        {
+          "en": "The FiO2 rises too high",
+          "hi": "FiO2 बहुत बढ़ जाता है"
+        },
+        {
+          "en": "Exhaled CO2 collects in the mask and is rebreathed",
+          "hi": "छोड़ी गई CO2 मास्क में जमा होकर फिर साँस में जाती है"
+        },
+        {
+          "en": "The mask will not stay on",
+          "hi": "मास्क टिकेगा नहीं"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Low flow does not flush the mask. The patient rebreathes carbon dioxide.",
+        "hi": "कम प्रवाह मास्क को साफ़ नहीं करता। मरीज़ फिर से कार्बन डाइऑक्साइड साँस में लेता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Roughly what FiO2 does a nasal cannula at 3 L/min give?",
+        "hi": "3 L/min पर नेज़ल कैनुला लगभग कितना FiO2 देता है?"
+      },
+      "o": [
+        {
+          "en": "About 0.33",
+          "hi": "लगभग 0.33"
+        },
+        {
+          "en": "About 0.60",
+          "hi": "लगभग 0.60"
+        },
+        {
+          "en": "About 0.90",
+          "hi": "लगभग 0.90"
+        },
+        {
+          "en": "Exactly 0.21",
+          "hi": "ठीक 0.21"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Room air 0.21 plus about 0.04 per litre gives about 0.33. It varies with breathing.",
+        "hi": "कमरे की हवा 0.21 में हर लीटर पर लगभग 0.04 जोड़ने से लगभग 0.33। यह साँस के साथ बदलता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "explorer": "odc"
+  },
+  "glossary": [
+    "fio2",
+    "venturi-mask",
+    "non-rebreather-mask",
+    "hfnc",
+    "bvm"
+  ],
+  "sources": [
+    "O'Driscoll BR, Howard LS, Earis J, Mak V. BTS guideline for oxygen use in adults in healthcare and emergency settings. Thorax 2017;72(Suppl 1):ii1-ii90.",
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition (2022): airway management, and respiratory care chapters.",
+    "StewardMD reviewed protocol kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json: oxygen targets, HFNC settings and Venturi use.",
+    "National Medical Commission. CBME Curriculum 2024, Anaesthesiology, competencies AS11.1 to AS11.6."
+  ]
+}

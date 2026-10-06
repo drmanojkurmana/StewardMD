@@ -68,6 +68,7 @@ export function tokosTarget(id, root, read, exists, host = "tokos") {
   if ((m = /^drill-([a-z-]+)$/.exec(id))) return { files: [{ file: join(root, H + "/drill", m[1] + ".json"), how: "string" }], build: "tools/tokos-build-drills.mjs" + (H === "tokos" ? "" : " --host " + H) };
   if (H === "tokos" && id === "sim-labour") return { files: [{ file: join(root, "tokos-models/drill-labour.js"), how: "js" }] };
   if (/^(tool|explorer)-[a-z0-9-]+$/.test(id)) return { files: [{ file: join(root, HM, id + ".js"), how: "js" }] };
+  if (H === "narke" && /^clinic-(capno|monitor)$/.test(id)) return exists(join(root, "narke-models/signals.js")) ? { files: [] } : null; // ledger only
   if (H === "tokos" && (m = /^clinic-(fetal-planes|hc-biometry)$/.exec(id))) return { files: [{ file: join(root, "tokos/decks", m[1] + ".json"), how: "string" }] };
   if ((m = /^bank-([a-z-]+)$/.exec(id))) {
     const f = H + "/decks/mcq/index.json";
@@ -250,12 +251,13 @@ export function feedbackMarkdown(x, p, today) {
 
 /** The cache-token bump a Tokós approval needs (models and data load at the loader's ?v= token), or "". */
 export function tokosBump(kinds, root = ROOT) {
-  if (kinds.some((k) => k === "narke")) {
+  const isNarke = (k) => k === "narke" || / --host narke$/.test(k);
+  if (kinds.some(isNarke)) {
     const n = (/var V = "(nrk)(\d+)";/.exec(readFileSync(join(root, "narke-loader.js"), "utf8")) || []);
     const c = n[1] ? n[1] + n[2] : "nrkN", x = n[1] ? n[1] + (+n[2] + 1) : "nrkN+1";
     const msg = `Narkē content changed: bump the cache token ${c} -> ${x} in narke-loader.js (var V = "${x}") and in index.html (<script src="/narke-loader.js?v=${x}">), and in test/narke-wiring.test.mjs.`;
     if (!kinds.some((k) => k === "tokos" || /tokos/.test(k))) return msg;
-    return msg + " " + tokosBump(kinds.filter((k) => k !== "narke"), root);
+    return msg + " " + tokosBump(kinds.filter((k) => !isNarke(k)), root);
   }
   if (!kinds.some((k) => k === "tokos" || /tokos/.test(k))) return "";
   const v = (/var V = "(tok)(\d+)";/.exec(readFileSync(join(root, "tokos-loader.js"), "utf8")) || []);
@@ -280,7 +282,7 @@ function main() {
   const kinds = new Set();
   for (const x of exports) applyOne(x, { dry, includeMinor }, kinds);
   if (dry) return;
-  [...new Set([...kinds].map((k) => (KINDS[k] ? KINDS[k].build : k)))].filter(Boolean).forEach((b) => { console.log("Rebuilding: " + b); execFileSync(process.execPath, [join(ROOT, b)], { stdio: "inherit" }); });
+  [...new Set([...kinds].map((k) => (KINDS[k] ? KINDS[k].build : k)))].filter(Boolean).forEach((b) => { console.log("Rebuilding: " + b); const [f, ...a] = b.split(" "); execFileSync(process.execPath, [join(ROOT, f), ...a], { stdio: "inherit" }); });
   if (kinds.size) console.log("Done. Run the unit tests, then commit the changed files.");
   const tb = tokosBump([...kinds]);
   if (tb) console.log(tb);

@@ -1,0 +1,271 @@
+{
+  "id": "as7-ventilator-setup",
+  "unit": "as7",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Initial tidal volume 6 to 8 mL/kg predicted body weight for non-ARDS lungs; 6 mL/kg in ARDS.",
+      "Initial PEEP often 5 cmH2O.",
+      "Plateau pressure below 30 cmH2O in ARDS (kb ards-lung-protective-ventilation)."
+    ]
+  },
+  "competencies": [
+    "AS7.4"
+  ],
+  "title": {
+    "en": "Setting up a ventilator",
+    "hi": "Ventilator तैयार करना"
+  },
+  "idea": {
+    "en": "A safe start has three parts. Check the machine, fit and test the circuit, then set the breath and alarms.",
+    "hi": "ventilator की सुरक्षित शुरुआत के तीन हिस्से हैं: मशीन जाँचिए, circuit लगाकर परखिए, फिर साँस और alarms सेट कीजिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as7-ventilator-setup.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A ventilator stands on the left. Its dark screen shows a yellow pressure wave and a blue flow wave above three dials. Green and grey hoses run down from it to the floor, beside a black power cable. Two ribbed tubes leave its side: the upper one passes a humidifier chamber with water. Both tubes join at a Y-piece attached to a pink test lung.",
+      "hi": "बाईं ओर एक ventilator, जिसकी काली स्क्रीन पर पीली pressure लहर और नीली flow लहर है, नीचे तीन dials। उससे हरी और धूसर नलियाँ फ़र्श तक जाती हैं, पास में काला बिजली का तार। बगल से दो धारीदार नलियाँ निकलती हैं: ऊपर वाली पानी भरे humidifier से गुज़रती है। दोनों नलियाँ एक Y-piece पर मिलती हैं जो गुलाबी test lung से जुड़ा है।"
+    },
+    "caption": {
+      "en": "Supply, power, screen, humidifier, circuit and test lung: check each before the patient is connected.",
+      "hi": "Supply, बिजली, स्क्रीन, humidifier, circuit और test lung: मरीज़ को जोड़ने से पहले हर एक जाँचिए।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.167,
+        "y": 0.9,
+        "label": {
+          "en": "Gas supply",
+          "hi": "गैस supply"
+        },
+        "note": {
+          "en": "Oxygen and air hoses connected to the wall, with pressure shown on the machine.",
+          "hi": "ऑक्सीजन और हवा की नलियाँ दीवार से जुड़ी हों, और मशीन पर दबाव दिखे।"
+        }
+      },
+      {
+        "x": 0.35,
+        "y": 0.92,
+        "label": {
+          "en": "Power and battery",
+          "hi": "बिजली और बैटरी"
+        },
+        "note": {
+          "en": "Mains power on and the backup battery charged before any transfer.",
+          "hi": "किसी भी transfer से पहले मुख्य बिजली चालू और backup बैटरी चार्ज।"
+        }
+      },
+      {
+        "x": 0.24,
+        "y": 0.307,
+        "label": {
+          "en": "Screen and settings",
+          "hi": "स्क्रीन और settings"
+        },
+        "note": {
+          "en": "Set mode, tidal volume, rate, PEEP and FiO2. Then set the alarm limits.",
+          "hi": "mode, tidal volume, rate, PEEP और FiO2 सेट कीजिए। फिर alarm सीमाएँ सेट कीजिए।"
+        }
+      },
+      {
+        "x": 0.521,
+        "y": 0.62,
+        "label": {
+          "en": "Humidifier",
+          "hi": "Humidifier"
+        },
+        "note": {
+          "en": "Warms and wets the dry gas. An HME filter at the Y-piece is the simpler choice.",
+          "hi": "सूखी गैस को गर्म और नम करता है। Y-piece पर HME filter सरल विकल्प है।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.65,
+        "label": {
+          "en": "Circuit and Y-piece",
+          "hi": "Circuit और Y-piece"
+        },
+        "note": {
+          "en": "Inspiratory and expiratory limbs meet here. Check every joint for leaks.",
+          "hi": "inspiratory और expiratory नलियाँ यहाँ मिलती हैं। हर जोड़ पर leak जाँचिए।"
+        }
+      },
+      {
+        "x": 0.892,
+        "y": 0.653,
+        "label": {
+          "en": "Test lung",
+          "hi": "Test lung"
+        },
+        "note": {
+          "en": "Run the self-test and watch the test lung fill and empty before connecting the patient.",
+          "hi": "मरीज़ को जोड़ने से पहले self-test चलाइए और test lung का भरना-ख़ाली होना देखिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Check power, the backup battery, the oxygen and air supply, and run the machine self-test.",
+        "hi": "बिजली, backup बैटरी, ऑक्सीजन और हवा की supply जाँचिए, और मशीन का self-test चलाइए।"
+      },
+      {
+        "en": "Fit a clean circuit with a humidifier or an HME filter. Check for leaks with a test lung.",
+        "hi": "humidifier या HME filter के साथ साफ़ circuit लगाइए। test lung से leak जाँचिए।"
+      },
+      {
+        "en": "Set tidal volume on [[pbw]], about 6 to 8 mL/kg. In ARDS, start at 6 mL/kg.",
+        "hi": "tidal volume [[pbw]] पर सेट कीजिए, लगभग 6 से 8 mL/kg। ARDS में 6 mL/kg से शुरू कीजिए।"
+      },
+      {
+        "en": "Set the rate, [[peep]] (often 5 cmH2O to start) and FiO2. Start FiO2 high, then lower it to the SpO2 target.",
+        "hi": "rate, [[peep]] (शुरू में अक्सर 5 cmH2O) और FiO2 सेट कीजिए। FiO2 ऊँचा शुरू कीजिए, फिर SpO2 लक्ष्य तक घटाइए।"
+      },
+      {
+        "en": "Set high and low pressure, minute volume and apnoea alarms. Keep a bag-valve-mask and oxygen at the bed.",
+        "hi": "high और low pressure, minute volume और apnoea alarms सेट कीजिए। बेड पर bag-valve-mask और ऑक्सीजन रखिए।"
+      },
+      {
+        "en": "Check a blood gas after starting and after changes. In ARDS, keep plateau pressure below 30 cmH2O.",
+        "hi": "शुरू करने और बदलाव के बाद blood gas जाँचिए। ARDS में plateau pressure 30 cmH2O से कम रखिए।"
+      }
+    ],
+    "analogy": {
+      "en": "Like a pilot's pre-flight check, the ventilator is tested on the ground before anyone's life depends on it.",
+      "hi": "पायलट की उड़ान से पहले की जाँच की तरह, ventilator को किसी की जान उस पर टिकने से पहले ज़मीन पर परखा जाता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A high-pressure alarm suggests a blocked or kinked tube, secretions, bronchospasm or biting.",
+      "hi": "high-pressure alarm बंद या मुड़ी tube, स्राव, bronchospasm या दाँत से काटने की ओर इशारा करता है।"
+    },
+    {
+      "en": "A low-pressure alarm with no chest movement suggests a disconnection or a large leak.",
+      "hi": "छाती न हिले और low-pressure alarm बजे तो disconnection या बड़ा leak हो सकता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Work out predicted body weight from height before choosing a tidal volume.",
+      "hi": "tidal volume चुनने से पहले लंबाई से predicted body weight निकालिए।"
+    },
+    {
+      "en": "If the ventilator fails, disconnect it and ventilate by bag with oxygen at once.",
+      "hi": "ventilator बंद हो जाए तो उसे हटाइए और तुरंत ऑक्सीजन के साथ bag से ventilate कीजिए।"
+    }
+  ],
+  "remember": {
+    "en": "Check machine, test circuit, set breath on predicted weight, set alarms, keep a bag at the bed.",
+    "hi": "मशीन जाँचिए, circuit परखिए, predicted weight पर साँस सेट कीजिए, alarms सेट कीजिए, बेड पर bag रखिए।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "On which weight is the tidal volume set?",
+        "hi": "tidal volume किस भार पर सेट होता है?"
+      },
+      "o": [
+        {
+          "en": "Actual weight on the scale",
+          "hi": "तराज़ू पर असली भार"
+        },
+        {
+          "en": "Predicted weight from height",
+          "hi": "लंबाई से अनुमानित भार"
+        },
+        {
+          "en": "Lean weight from waist size",
+          "hi": "कमर के नाप से lean भार"
+        },
+        {
+          "en": "Admission weight plus fluids",
+          "hi": "भर्ती का भार और fluids"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Lung size follows height, not fat, so predicted body weight is used.",
+        "hi": "फेफड़ों का आकार लंबाई से तय होता है, चर्बी से नहीं, इसलिए predicted body weight इस्तेमाल होता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "The low-pressure alarm sounds and the chest is not moving. What is the likely cause?",
+        "hi": "low-pressure alarm बजता है और छाती नहीं हिल रही। संभावित कारण क्या है?"
+      },
+      "o": [
+        {
+          "en": "Bronchospasm with high airway pressure",
+          "hi": "ऊँचे airway pressure के साथ bronchospasm"
+        },
+        {
+          "en": "Secretions blocking the tube",
+          "hi": "tube को रोकते स्राव"
+        },
+        {
+          "en": "Circuit disconnection or a large leak",
+          "hi": "circuit का अलग होना या बड़ा leak"
+        },
+        {
+          "en": "Coughing against the ventilator",
+          "hi": "ventilator के ख़िलाफ़ खाँसना"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Low pressure means gas is escaping; blockages raise the pressure instead.",
+        "hi": "low pressure का मतलब है गैस निकल रही है; रुकावटें इसके उलट दबाव बढ़ाती हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "The ventilator stops working during use. What is the first action?",
+        "hi": "इस्तेमाल के दौरान ventilator बंद हो जाता है। पहला कदम क्या है?"
+      },
+      "o": [
+        {
+          "en": "Ventilate by bag with oxygen",
+          "hi": "ऑक्सीजन के साथ bag से ventilate करना"
+        },
+        {
+          "en": "Wait for the engineer to arrive",
+          "hi": "इंजीनियर के आने का इंतज़ार"
+        },
+        {
+          "en": "Raise the PEEP on the screen",
+          "hi": "स्क्रीन पर PEEP बढ़ाना"
+        },
+        {
+          "en": "Turn the patient prone at once",
+          "hi": "मरीज़ को तुरंत पेट के बल करना"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Hand ventilation with oxygen keeps the patient alive while the fault is fixed.",
+        "hi": "ख़राबी ठीक होने तक ऑक्सीजन के साथ हाथ से ventilation मरीज़ को ज़िंदा रखता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "explorer": "ventilator"
+  },
+  "glossary": [
+    "pbw",
+    "peep"
+  ],
+  "sources": [
+    "StewardMD clinical protocol: ARDS lung-protective ventilation, kb/clinical-protocols/ards-lung-protective-ventilation.json (ARDSNet; ATS 2024; ESICM 2023): PBW formula, 6 mL/kg, plateau below 30 cmH2O.",
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition: critical care, mechanical ventilation.",
+    "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd edition: ventilator alarms and checks."
+  ]
+}

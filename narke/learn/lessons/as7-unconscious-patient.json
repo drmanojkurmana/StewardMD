@@ -1,0 +1,266 @@
+{
+  "id": "as7-unconscious-patient",
+  "unit": "as7",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Intubation is usually indicated at GCS 8 or less (ATLS 10th edition).",
+      "Head of bed raised about 30 degrees to reduce aspiration and ventilator pneumonia.",
+      "Hypoglycaemia threshold below 70 mg/dL (kb opioid-overdose)."
+    ]
+  },
+  "competencies": [
+    "AS7.3"
+  ],
+  "title": {
+    "en": "Managing an unconscious patient",
+    "hi": "बेहोश मरीज़ का प्रबंधन"
+  },
+  "idea": {
+    "en": "An unconscious patient cannot protect the airway, eyes, skin or bladder. Treat ABC first, then find the cause, then protect every system.",
+    "hi": "बेहोश मरीज़ अपना airway, आँखें, त्वचा या मूत्राशय नहीं बचा सकता। पहले ABC, फिर कारण खोजिए, फिर हर तंत्र की रक्षा कीजिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as7-unconscious-patient.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Side view of a patient on an ICU bed with the head end raised. A purple tube leaves the mouth. A small strip covers the closed eye. A dashed orange line runs from the nose to the stomach. An amber arc marks the angle of the backrest. A urine bag hangs under the bed and a green pillow lifts the heels.",
+      "hi": "ICU बेड पर मरीज़ का बगल से दृश्य, सिरहाना ऊपर उठा है। मुँह से एक बैंगनी नली निकलती है। बंद आँख पर एक छोटी पट्टी है। नाक से पेट तक एक नारंगी टूटी रेखा जाती है। एक पीला चाप पीठ के सहारे का कोण दिखाता है। बेड के नीचे पेशाब की थैली लटकी है और एक हरा तकिया एड़ियों को उठाता है।"
+    },
+    "caption": {
+      "en": "Airway, eyes, head-up position, feeding tube, bladder and heels all need care.",
+      "hi": "Airway, आँखें, सिर ऊपर की स्थिति, feeding tube, मूत्राशय और एड़ियाँ, सबकी देखभाल चाहिए।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.146,
+        "y": 0.307,
+        "label": {
+          "en": "Airway",
+          "hi": "Airway"
+        },
+        "note": {
+          "en": "With a GCS of 8 or less, the airway is usually secured with a cuffed tracheal tube.",
+          "hi": "GCS 8 या कम होने पर airway आमतौर पर cuffed tracheal tube से सुरक्षित किया जाता है।"
+        }
+      },
+      {
+        "x": 0.167,
+        "y": 0.467,
+        "label": {
+          "en": "Eyes",
+          "hi": "आँखें"
+        },
+        "note": {
+          "en": "Eyes that stay open dry and ulcerate. Lubricate and keep the lids closed.",
+          "hi": "खुली रहने वाली आँखें सूखकर घाव बना लेती हैं। lubricant डालिए और पलकें बंद रखिए।"
+        }
+      },
+      {
+        "x": 0.267,
+        "y": 0.687,
+        "label": {
+          "en": "Head-up 30 degrees",
+          "hi": "सिर 30 डिग्री ऊपर"
+        },
+        "note": {
+          "en": "Raising the head of the bed lowers the risk of aspiration and ventilator pneumonia.",
+          "hi": "बेड का सिरहाना उठाने से aspiration और ventilator pneumonia का ख़तरा घटता है।"
+        }
+      },
+      {
+        "x": 0.312,
+        "y": 0.62,
+        "label": {
+          "en": "Nasogastric tube",
+          "hi": "Nasogastric tube"
+        },
+        "note": {
+          "en": "Drains the stomach and allows early feeding. Confirm the position before use.",
+          "hi": "पेट ख़ाली करती है और जल्दी feeding संभव करती है। इस्तेमाल से पहले स्थिति पक्की कीजिए।"
+        }
+      },
+      {
+        "x": 0.625,
+        "y": 0.873,
+        "label": {
+          "en": "Bladder",
+          "hi": "मूत्राशय"
+        },
+        "note": {
+          "en": "A catheter measures urine output. Remove it as soon as it is not needed.",
+          "hi": "Catheter पेशाब नापता है। ज़रूरत न रहे तो जल्द से जल्द निकालिए।"
+        }
+      },
+      {
+        "x": 0.846,
+        "y": 0.687,
+        "label": {
+          "en": "Heels and skin",
+          "hi": "एड़ियाँ और त्वचा"
+        },
+        "note": {
+          "en": "Turn the patient regularly and float the heels to prevent pressure ulcers.",
+          "hi": "pressure ulcers से बचाने के लिए मरीज़ की करवट नियमित बदलिए और एड़ियाँ ऊपर रखिए।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Airway, breathing and circulation first. Give oxygen. Turn the patient onto the side if the airway is not secured.",
+        "hi": "पहले airway, साँस और circulation। ऑक्सीजन दीजिए। airway सुरक्षित न हो तो मरीज़ को करवट दिलाइए।"
+      },
+      {
+        "en": "Measure the [[gcs]] and pupils, and check capillary glucose. Treat glucose below 70 mg/dL at once.",
+        "hi": "[[gcs]] और पुतलियाँ नापिए, और capillary glucose जाँचिए। 70 mg/dL से कम glucose का तुरंत इलाज कीजिए।"
+      },
+      {
+        "en": "Look for the cause: head injury, stroke, infection, poisoning, low or high glucose, hypoxia, or organ failure.",
+        "hi": "कारण खोजिए: सिर की चोट, stroke, संक्रमण, ज़हर, कम या ज़्यादा glucose, hypoxia, या अंग-विफलता।"
+      },
+      {
+        "en": "Protect every system: eyes, mouth, skin, bladder, bowels, nutrition, clot prevention and physiotherapy.",
+        "hi": "हर तंत्र की रक्षा कीजिए: आँखें, मुँह, त्वचा, मूत्राशय, आँतें, पोषण, थक्कों की रोकथाम और physiotherapy।"
+      },
+      {
+        "en": "Keep the family informed and record the GCS often to spot change early.",
+        "hi": "परिवार को जानकारी देते रहिए और बदलाव जल्दी पकड़ने के लिए GCS बार-बार लिखिए।"
+      }
+    ],
+    "analogy": {
+      "en": "An unconscious patient is a house with the guards asleep. You must lock every door for them.",
+      "hi": "बेहोश मरीज़ ऐसा घर है जिसके पहरेदार सो रहे हैं। हर दरवाज़ा आपको ही बंद करना है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Snoring and gurgling mean the airway is at risk right now.",
+      "hi": "खर्राटे और गड़गड़ाहट का मतलब है airway अभी ख़तरे में है।"
+    },
+    {
+      "en": "Unequal pupils in a comatose patient need urgent brain imaging.",
+      "hi": "बेहोश मरीज़ में असमान पुतलियों के लिए तुरंत दिमाग़ की imaging चाहिए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Score GCS as E, V and M separately, not just the total.",
+      "hi": "GCS को E, V और M अलग-अलग लिखिए, सिर्फ़ कुल नहीं।"
+    },
+    {
+      "en": "Check capillary glucose in every unconscious patient within minutes of arrival.",
+      "hi": "हर बेहोश मरीज़ में आने के कुछ मिनट में capillary glucose जाँचिए।"
+    }
+  ],
+  "remember": {
+    "en": "ABC, GCS, glucose, cause. Then guard the eyes, skin, bladder, gut and lungs.",
+    "hi": "ABC, GCS, glucose, कारण। फिर आँखें, त्वचा, मूत्राशय, पेट और फेफड़ों की रक्षा।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "After a head injury the GCS is 7. Why is the patient intubated?",
+        "hi": "सिर की चोट के बाद GCS 7 है। मरीज़ को intubate क्यों करते हैं?"
+      },
+      "o": [
+        {
+          "en": "To protect the airway from blockage and aspiration",
+          "hi": "airway को रुकावट और aspiration से बचाने के लिए"
+        },
+        {
+          "en": "To raise the blood glucose more quickly",
+          "hi": "blood glucose जल्दी बढ़ाने के लिए"
+        },
+        {
+          "en": "Because every comatose patient needs surgery",
+          "hi": "क्योंकि हर बेहोश मरीज़ को सर्जरी चाहिए"
+        },
+        {
+          "en": "To allow oral feeding to start sooner",
+          "hi": "मुँह से खाना जल्दी शुरू करने के लिए"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A GCS of 8 or less usually means the patient cannot protect the airway.",
+        "hi": "GCS 8 या कम का आमतौर पर मतलब है कि मरीज़ airway नहीं बचा सकता।"
+      }
+    },
+    {
+      "q": {
+        "en": "What are the lowest and highest possible GCS totals?",
+        "hi": "GCS का न्यूनतम और अधिकतम संभव कुल क्या है?"
+      },
+      "o": [
+        {
+          "en": "0 and 15",
+          "hi": "0 और 15"
+        },
+        {
+          "en": "1 and 10",
+          "hi": "1 और 10"
+        },
+        {
+          "en": "3 and 15",
+          "hi": "3 और 15"
+        },
+        {
+          "en": "3 and 12",
+          "hi": "3 और 12"
+        }
+      ],
+      "a": 2,
+      "why": {
+        "en": "Each part scores at least 1, so the lowest total is 3. The highest is 4 + 5 + 6 = 15.",
+        "hi": "हर हिस्से में कम से कम 1 अंक है, इसलिए न्यूनतम 3 है। अधिकतम 4 + 5 + 6 = 15 है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why keep the head of the bed raised in an unconscious tube-fed patient?",
+        "hi": "tube से खाना पा रहे बेहोश मरीज़ में बेड का सिरहाना ऊपर क्यों रखते हैं?"
+      },
+      "o": [
+        {
+          "en": "It improves the GCS score",
+          "hi": "इससे GCS स्कोर सुधरता है"
+        },
+        {
+          "en": "It lowers the risk of aspiration",
+          "hi": "इससे aspiration का ख़तरा घटता है"
+        },
+        {
+          "en": "It prevents eye dryness",
+          "hi": "इससे आँखें सूखने से बचती हैं"
+        },
+        {
+          "en": "It raises the blood pressure",
+          "hi": "इससे ब्लड प्रेशर बढ़ता है"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "A head-up position keeps stomach contents away from the airway.",
+        "hi": "सिर ऊपर की स्थिति पेट की चीज़ों को airway से दूर रखती है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation"
+  },
+  "glossary": [
+    "gcs"
+  ],
+  "sources": [
+    "Teasdale G, Maas A, Lecky F, et al. The Glasgow Coma Scale at 40 years: standing the test of time. Lancet Neurol 2014;13:844-54.",
+    "American College of Surgeons. Advanced Trauma Life Support (ATLS), 10th edition (2018): definitive airway at GCS 8 or less.",
+    "NICE CG179. Pressure ulcers: prevention and management (2014): repositioning and heel off-loading.",
+    "StewardMD clinical protocol: Opioid overdose (adult), kb/clinical-protocols/opioid-overdose.json: hypoglycaemia below 70 mg/dL."
+  ]
+}

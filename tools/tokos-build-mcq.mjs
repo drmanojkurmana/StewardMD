@@ -25,11 +25,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeSearch } from "./tokos-build-mcq-search.mjs";
+import { NARKE } from "./narke-mcq-taxonomy.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 // Split deck: index.json (metadata, counts, topic list) + one small file per subtopic, so a phone parses only what it opens.
-export const OUT_DIR = path.join(ROOT, "tokos", "decks", "mcq");
-const SUBJECT = "Gynaecology & Obstetrics";
+export let OUT_DIR = path.join(ROOT, "tokos", "decks", "mcq");
+let SUBJECT = "Gynaecology & Obstetrics";
+let HOST = null; // null = Tokós; set by useHost() for --host narke (tools/narke-mcq-taxonomy.mjs)
 
 export const SOURCE = {
   source: "medmcqa",
@@ -64,7 +66,7 @@ export const SOURCE = {
 
 // ---------------------------------------------------------------------------------------------------------------------
 // The 17 subtopics (ids fixed by the Tokós 2.0 contract). Titles are learner-facing, English and Hindi.
-export const SUBTOPICS = [
+export let SUBTOPICS = [
   { id: "ob-antenatal", group: "obstetrics", title: { en: "Antenatal care and physiology of pregnancy", hi: "प्रसवपूर्व देखभाल और गर्भावस्था की शरीरक्रिया" } },
   { id: "ob-labour", group: "obstetrics", title: { en: "Labour and its complications", hi: "प्रसव और उसकी जटिलताएँ" } },
   { id: "ob-medical", group: "obstetrics", title: { en: "Medical disorders in pregnancy", hi: "गर्भावस्था में चिकित्सीय रोग" } },
@@ -83,8 +85,8 @@ export const SUBTOPICS = [
   { id: "gy-urogyn", group: "gynaecology", title: { en: "Urogynaecology and pelvic floor", hi: "यूरोगायनेकोलॉजी और श्रोणि तल" } },
   { id: "gy-anatomy", group: "gynaecology", title: { en: "Genital anatomy and congenital anomalies", hi: "जननांग शरीररचना और जन्मजात विकृतियाँ" } },
 ];
-const SUB_IDS = SUBTOPICS.map((s) => s.id);
-const SIDE = Object.fromEntries(SUBTOPICS.map((s) => [s.id, s.group === "obstetrics" ? "ob" : "gy"]));
+let SUB_IDS = SUBTOPICS.map((s) => s.id);
+let SIDE = Object.fromEntries(SUBTOPICS.map((s) => [s.id, s.group === "obstetrics" ? "ob" : "gy"]));
 
 export const FLAG_LEGEND = {
   "exp-letter": { en: "The explanation names a different option letter than the key", hi: "व्याख्या में बताया गया विकल्प-अक्षर उत्तर-कुंजी से अलग है" },
@@ -98,7 +100,7 @@ export const FLAG_LEGEND = {
 // headings, generic words). First match wins on the lower-cased, repaired topic_name. A name not matched here, or matched
 // by nothing, falls through to the keyword rules below (topic_name text is fed to them as a hint too).
 // ponytail: regex table by hand, revisit with a classifier only if per-subtopic accuracy needs auditing.
-export const TOPIC_TABLE = [
+export let TOPIC_TABLE = [
   [null, /sour grapes|hey,whats the hurry/], // mixed textbook chapters: keyword rules decide
   ["ob-hypertension", /pregnancy induced hyper|hypertensive disorders? in pregnancy|pre-?eclampsia|eclampsia/],
   ["ob-haemorrhage", /antepartum h|post ?partum h|placenta previa|placental abruption|causes of obstetrical h|complication of 3rd stage/],
@@ -194,10 +196,23 @@ const KW = {
     weak: ["ovary", "vagina", "cervix", "uterus"],
   },
 };
-const KWRE = Object.fromEntries(Object.entries(KW).map(([id, k]) => [id, {
+const compileKw = (kw) => Object.fromEntries(Object.entries(kw).map(([id, k]) => [id, {
   strong: k.strong.map((s) => new RegExp(s, "i")),
   weak: k.weak.map((s) => new RegExp(s, "i")),
 }]));
+let KWRE = compileKw(KW);
+
+// Switch the whole builder to another host (Narkē). Tokós stays the default so its build and test are untouched.
+export function useHost(name) {
+  if (name !== "narke") throw new Error(`unknown --host ${name}`);
+  HOST = NARKE;
+  SUBJECT = NARKE.subject;
+  OUT_DIR = path.join(ROOT, NARKE.outSub, "decks", "mcq");
+  SUBTOPICS = NARKE.subtopics;
+  SUB_IDS = SUBTOPICS.map((s) => s.id);
+  TOPIC_TABLE = NARKE.topicTable;
+  KWRE = compileKw(NARKE.keywords);
+}
 // Side detection: does the item read as obstetric or gynaecological?
 const OB_CTX = /pregnan|gravid|antenatal|gestation|trimester|labou?r\b|deliver|puerper|postpartum|lactat|fetus|fetal|foetal|obstetric|caesarean|cesarean|placenta|neonat|newborn|amnio|eclampsia|breech|parity|primigravida|multigravida|abortion|miscarriage|ectopic/i;
 const GY_CTX = /menstru|menopaus|amenorrh|uterine bleeding|gynae?cologic|fibroid|endometriosis|ovarian|cervical (cancer|carcinoma|intraepithelial)|carcinoma (cervix|ovary|endometrium)|prolapse|vagina|vulva|contracept|infertil|pcos|hirsut|puberty|colposcop|pap smear|hysterectomy|pelvic inflammatory|intersex/i;
@@ -315,9 +330,10 @@ export function keywordTopic({ q, key, exp, topic }) {
   const ctx = `${q} ${key} ${topic}`;
   const ob = (OB_CTX.test(ctx) ? 1 : 0) + (OB_CTX.test(exp) ? 0.5 : 0);
   const gy = (GY_CTX.test(ctx) ? 1 : 0) + (GY_CTX.test(exp) ? 0.5 : 0);
-  const side = ob > gy ? "ob" : gy > ob ? "gy" : null;
+  const side = HOST ? null : ob > gy ? "ob" : gy > ob ? "gy" : null;
   let best = null, bestScore = 0;
   for (const id of SUB_IDS) {
+    if (!KWRE[id]) continue; // Narkē `general` is the fallback only
     let s = 0;
     for (const [list, mult] of [[KWRE[id].strong, 2], [KWRE[id].weak, 0.5]]) {
       let e = 0;
@@ -333,6 +349,7 @@ export function keywordTopic({ q, key, exp, topic }) {
     if (s > bestScore) { best = id; bestScore = s; }
   }
   if (best) return { id: best, fallback: false };
+  if (HOST) return { id: HOST.fallback, fallback: true };
   const t = String(topic || "").toLowerCase();
   const gyn = /gyn/.test(t) ? true : /obs/.test(t) ? false : side === "gy";
   return { id: gyn ? "gy-benign" : "ob-antenatal", fallback: true };
@@ -474,19 +491,21 @@ export function summarize(items) {
 }
 
 function main() {
+  const hi = process.argv.indexOf("--host");
+  if (hi > 0) useHost(process.argv[hi + 1]);
   const dir = process.env.MEDMCQA_DIR;
   if (!dir) { console.error("set MEDMCQA_DIR (see the GET THE DATA block at the top of this script)"); process.exit(1); }
   const { items, stats } = build(readRows(dir));
   const sum = summarize(items);
   const index = {
-    id: "mcq", v: 1, ...SOURCE, subject: SUBJECT,
+    id: "mcq", v: 1, ...SOURCE, ...(HOST ? { modifications: SOURCE.modifications.replace("Gynaecology & Obstetrics", SUBJECT).replace(/Tokós subtopics/, `${HOST.name} subtopics`) } : {}), subject: SUBJECT,
     counts: { total: sum.total, d1: sum.byLevel[1], d2: sum.byLevel[2], d3: sum.byLevel[3] },
     topics: SUBTOPICS.map(({ id, title, group }) => ({ id, title, group, count: sum.byTopic[id], file: `mcq/${id}.json` })),
     flagLegend: FLAG_LEGEND,
     stats: { ...sum, build: stats },
   };
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
-  fs.rmSync(path.join(ROOT, "tokos", "decks", "mcq.json"), { force: true }); // the old single-file deck
+  if (!HOST) fs.rmSync(path.join(ROOT, "tokos", "decks", "mcq.json"), { force: true }); // the old single-file deck
   fs.mkdirSync(OUT_DIR, { recursive: true });
   let bytes = 0, biggest = 0;
   const write = (name, obj) => { const body = JSON.stringify(obj); bytes += Buffer.byteLength(body); biggest = Math.max(biggest, Buffer.byteLength(body)); fs.writeFileSync(path.join(OUT_DIR, name), body); };
