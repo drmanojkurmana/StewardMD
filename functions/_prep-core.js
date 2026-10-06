@@ -305,7 +305,7 @@ export function buildMcqPrompt(args) {
  * key index, the reasons and the pearl can never reach this prompt (blind solve, LayerC 6.3). */
 export function buildSolvePrompt(args) {
   const items = (args && args.items) || [];
-  const system = "Answer each question as the examiner. For each question return i and the full text of the option you choose, copied exactly. " + DATA_RULE;
+  const system = "Answer each question as the examiner. For each question return i, the question number N from its label QN (not the option's position), and ot, the full text of the option you choose copied exactly, without its letter. Return the questions in order. " + DATA_RULE;
   const blocks = items.map((it, i) => "Q" + i + ": " + untag(it.q) + "\n" + (it.o || []).slice(0, 4).map((o, k) => LETTERS[k] + ". " + untag(o)).join("\n"));
   return { op: "solve", system, user: "<questions>\n" + blocks.join("\n\n") + "\n</questions>", schema: SCHEMAS.solve, maxOut: PREP_LIMITS.solve.maxOut, temperature: PREP_TEMPS.solve };
 }
@@ -364,8 +364,16 @@ export function sanitizeMcq(raw, nFacts) {
 /* sanitizeSolve(raw, n) -> array of n picked option texts ("" when the model skipped one), or null. */
 export function sanitizeSolve(raw, n) {
   if (!raw || typeof raw !== "object" || !Array.isArray(raw.s)) return null;
-  const out = new Array(n | 0).fill("");
-  raw.s.forEach((x) => { if (!x || typeof x !== "object") return; const i = intOr(x.i, -1); if (i >= 0 && i < out.length && !out[i]) out[i] = cleanText(x.ot, 300); });
+  const out = new Array(n | 0).fill(""), rows = raw.s.filter((x) => x && typeof x === "object");
+  const idx = rows.map((x) => intOr(x.i, -1));
+  // Some replies put the chosen option's position (0..3) in i instead of the question number, so i repeats and
+  // picks land on the wrong question. Repeated i with one row per question -> read the rows in order instead.
+  // ponytail: a short request (n <= 4) whose option positions happen to be distinct is not detected.
+  const byPos = rows.length === out.length && new Set(idx).size < idx.length;
+  rows.forEach((x, k) => {
+    const i = byPos ? k : idx[k];
+    if (i >= 0 && i < out.length && !out[i]) out[i] = cleanText(String(x.ot == null ? "" : x.ot).replace(/^\s*[A-Da-d][.)]\s+/, ""), 300);
+  });
   return out;
 }
 /* sanitizeReview(raw, n) -> array of n { g4, g6..g11, old, why }; a missing verdict is all false. Only a

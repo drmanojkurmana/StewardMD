@@ -130,6 +130,11 @@ test("sanitizers whitelist fields and reject the wrong shape", () => {
   assert.equal(m[0].dl, 3); assert.equal(m[0].cog, "recall"); assert.equal(m[0].extra, undefined);
   assert.deepEqual(C.sanitizeSolve({ s: [{ i: 1, ot: " B " }, { i: 9, ot: "x" }] }, 2), ["", "B"]);
   assert.equal(C.sanitizeSolve({}, 2), null);
+  // i given as the option position (repeats): read the rows in order; the letter prefix is dropped.
+  assert.deepEqual(C.sanitizeSolve({ s: [{ i: 2, ot: "C. Tinea incognito" }, { i: 3, ot: "D. E. floccosum" }, { i: 3, ot: "D) Itraconazole" }] }, 3),
+    ["Tinea incognito", "E. floccosum", "Itraconazole"]);
+  // distinct question numbers out of order still map by i
+  assert.deepEqual(C.sanitizeSolve({ s: [{ i: 1, ot: "b" }, { i: 0, ot: "a" }] }, 2), ["a", "b"]);
   const g = C.sanitizeReview({ g: [{ i: 0, g4: true, g6: true, g7: true, g8: true, g9: true, g10: true, g11: "true", old: true, why: "w" }] }, 2);
   assert.equal(g[0].g11, false, "only a literal true passes");
   assert.equal(g[1].why, "no verdict");

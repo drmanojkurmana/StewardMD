@@ -1,0 +1,563 @@
+{
+ "v": 1,
+ "bank": "v1",
+ "run": "screen-202610060417",
+ "model": "gemini-3.1-flash-lite",
+ "subjects": {
+  "anatomy": {
+   "status": "applied",
+   "items": 10585,
+   "requests": 1513,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/4877786111729991680",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/anatomy/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/anatomy/out/",
+   "submittedAt": "2026-10-06T04:17:08.639Z",
+   "usage": {
+    "calls": 1513,
+    "inTok": 784529,
+    "outTok": 305648,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.327302
+   },
+   "appliedAt": "2026-10-06T05:03:07.745Z",
+   "result": {
+    "screened": 10585,
+    "agree": 8760,
+    "disputed": 1214,
+    "unmatched": 510,
+    "nopick": 101,
+    "rate": 0.8356,
+    "usd": 0.327302
+   }
+  },
+  "physiology": {
+   "status": "applied",
+   "items": 8053,
+   "requests": 1151,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/8694586795926487040",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/physiology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/physiology/out/",
+   "submittedAt": "2026-10-06T04:17:14.214Z",
+   "usage": {
+    "calls": 1151,
+    "inTok": 573014,
+    "outTok": 231499,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.245251
+   },
+   "appliedAt": "2026-10-06T05:03:13.368Z",
+   "result": {
+    "screened": 8053,
+    "agree": 6676,
+    "disputed": 934,
+    "unmatched": 373,
+    "nopick": 70,
+    "rate": 0.8363,
+    "usd": 0.245251
+   }
+  },
+  "biochemistry": {
+   "status": "applied",
+   "items": 7910,
+   "requests": 1130,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/7345758707529023488",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/biochemistry/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/biochemistry/out/",
+   "submittedAt": "2026-10-06T04:17:19.459Z",
+   "usage": {
+    "calls": 1130,
+    "inTok": 551377,
+    "outTok": 223514,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.236558
+   },
+   "appliedAt": "2026-10-06T05:03:19.163Z",
+   "result": {
+    "screened": 7910,
+    "agree": 6820,
+    "disputed": 619,
+    "unmatched": 397,
+    "nopick": 74,
+    "rate": 0.8703,
+    "usd": 0.236558
+   }
+  },
+  "pathology": {
+   "status": "applied",
+   "items": 13207,
+   "requests": 1887,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/6003686018572615680",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/pathology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/pathology/out/",
+   "submittedAt": "2026-10-06T04:17:24.599Z",
+   "usage": {
+    "calls": 1887,
+    "inTok": 1023454,
+    "outTok": 376331,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.41018
+   },
+   "appliedAt": "2026-10-06T05:03:25.696Z",
+   "result": {
+    "screened": 13207,
+    "agree": 11148,
+    "disputed": 1274,
+    "unmatched": 667,
+    "nopick": 118,
+    "rate": 0.8517,
+    "usd": 0.41018
+   }
+  },
+  "pharmacology": {
+   "status": "applied",
+   "items": 12299,
+   "requests": 1757,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/3483922027058823168",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/pharmacology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/pharmacology/out/",
+   "submittedAt": "2026-10-06T04:17:29.476Z",
+   "usage": {
+    "calls": 1757,
+    "inTok": 891991,
+    "outTok": 351904,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.375427
+   },
+   "appliedAt": "2026-10-06T05:03:31.885Z",
+   "result": {
+    "screened": 12299,
+    "agree": 10680,
+    "disputed": 915,
+    "unmatched": 595,
+    "nopick": 109,
+    "rate": 0.8761,
+    "usd": 0.375427
+   }
+  },
+  "microbiology": {
+   "status": "applied",
+   "items": 9631,
+   "requests": 1376,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/2947993671401734144",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/microbiology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/microbiology/out/",
+   "submittedAt": "2026-10-06T04:17:35.021Z",
+   "usage": {
+    "calls": 1376,
+    "inTok": 711813,
+    "outTok": 276422,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.296293
+   },
+   "appliedAt": "2026-10-06T05:03:38.160Z",
+   "result": {
+    "screened": 9631,
+    "agree": 8241,
+    "disputed": 903,
+    "unmatched": 414,
+    "nopick": 73,
+    "rate": 0.8622,
+    "usd": 0.296293
+   }
+  },
+  "forensic-medicine": {
+   "status": "applied",
+   "items": 4923,
+   "requests": 704,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/2646252496367910912",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/forensic-medicine/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/forensic-medicine/out/",
+   "submittedAt": "2026-10-06T04:17:39.613Z",
+   "usage": {
+    "calls": 704,
+    "inTok": 345538,
+    "outTok": 139071,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.147496
+   },
+   "appliedAt": "2026-10-06T05:03:43.295Z",
+   "result": {
+    "screened": 4923,
+    "agree": 3860,
+    "disputed": 772,
+    "unmatched": 248,
+    "nopick": 43,
+    "rate": 0.791,
+    "usd": 0.147496
+   }
+  },
+  "community-medicine": {
+   "status": "applied",
+   "items": 9421,
+   "requests": 1346,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/6192837202922176512",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/community-medicine/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/community-medicine/out/",
+   "submittedAt": "2026-10-06T04:17:44.450Z",
+   "usage": {
+    "calls": 1346,
+    "inTok": 689297,
+    "outTok": 271334,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.289663
+   },
+   "appliedAt": "2026-10-06T05:03:49.364Z",
+   "result": {
+    "screened": 9421,
+    "agree": 7290,
+    "disputed": 1557,
+    "unmatched": 479,
+    "nopick": 95,
+    "rate": 0.7817,
+    "usd": 0.289663
+   }
+  },
+  "ophthalmology": {
+   "status": "applied",
+   "items": 5791,
+   "requests": 828,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/8095608045486211072",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/ophthalmology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/ophthalmology/out/",
+   "submittedAt": "2026-10-06T04:17:49.743Z",
+   "usage": {
+    "calls": 828,
+    "inTok": 416492,
+    "outTok": 165410,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.176119
+   },
+   "appliedAt": "2026-10-06T05:03:54.657Z",
+   "result": {
+    "screened": 5791,
+    "agree": 4654,
+    "disputed": 782,
+    "unmatched": 304,
+    "nopick": 51,
+    "rate": 0.8108,
+    "usd": 0.176119
+   }
+  },
+  "ent": {
+   "status": "applied",
+   "items": 4423,
+   "requests": 632,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/8079845446790414336",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/ent/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/ent/out/",
+   "submittedAt": "2026-10-06T04:17:54.458Z",
+   "usage": {
+    "calls": 632,
+    "inTok": 322431,
+    "outTok": 127121,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.135645
+   },
+   "appliedAt": "2026-10-06T05:03:59.424Z",
+   "result": {
+    "screened": 4423,
+    "agree": 3647,
+    "disputed": 544,
+    "unmatched": 199,
+    "nopick": 33,
+    "rate": 0.8308,
+    "usd": 0.135645
+   }
+  },
+  "medicine": {
+   "status": "applied",
+   "items": 15301,
+   "requests": 2186,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/3866727995385315328",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/medicine/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/medicine/out/",
+   "submittedAt": "2026-10-06T04:18:00.053Z",
+   "usage": {
+    "calls": 2186,
+    "inTok": 1240366,
+    "outTok": 441538,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.486199
+   },
+   "appliedAt": "2026-10-06T05:04:05.988Z",
+   "result": {
+    "screened": 15301,
+    "agree": 12476,
+    "disputed": 1903,
+    "unmatched": 773,
+    "nopick": 149,
+    "rate": 0.8234,
+    "usd": 0.486199
+   }
+  },
+  "surgery": {
+   "status": "applied",
+   "items": 11901,
+   "requests": 1701,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/371934684545810432",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/surgery/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/surgery/out/",
+   "submittedAt": "2026-10-06T04:18:05.932Z",
+   "usage": {
+    "calls": 1701,
+    "inTok": 916038,
+    "outTok": 344010,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.372512
+   },
+   "appliedAt": "2026-10-06T05:04:12.348Z",
+   "result": {
+    "screened": 11901,
+    "agree": 9327,
+    "disputed": 1817,
+    "unmatched": 642,
+    "nopick": 115,
+    "rate": 0.7914,
+    "usd": 0.372512
+   }
+  },
+  "obstetrics-gynaecology": {
+   "status": "applied",
+   "items": 9178,
+   "requests": 1312,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/6105017010188451840",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/obstetrics-gynaecology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/obstetrics-gynaecology/out/",
+   "submittedAt": "2026-10-06T04:18:11.371Z",
+   "usage": {
+    "calls": 1312,
+    "inTok": 714735,
+    "outTok": 266417,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.289155
+   },
+   "appliedAt": "2026-10-06T05:04:18.499Z",
+   "result": {
+    "screened": 9178,
+    "agree": 7398,
+    "disputed": 1357,
+    "unmatched": 357,
+    "nopick": 66,
+    "rate": 0.8119,
+    "usd": 0.289155
+   }
+  },
+  "paediatrics": {
+   "status": "applied",
+   "items": 6670,
+   "requests": 953,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/7559679689829122048",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/paediatrics/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/paediatrics/out/",
+   "submittedAt": "2026-10-06T04:18:16.447Z",
+   "usage": {
+    "calls": 953,
+    "inTok": 532445,
+    "outTok": 193116,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.211393
+   },
+   "appliedAt": "2026-10-06T05:04:24.523Z",
+   "result": {
+    "screened": 6670,
+    "agree": 5245,
+    "disputed": 932,
+    "unmatched": 411,
+    "nopick": 82,
+    "rate": 0.7961,
+    "usd": 0.211393
+   }
+  },
+  "orthopaedics": {
+   "status": "applied",
+   "items": 3677,
+   "requests": 526,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/4983620702973198336",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/orthopaedics/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/orthopaedics/out/",
+   "submittedAt": "2026-10-06T04:18:20.653Z",
+   "usage": {
+    "calls": 526,
+    "inTok": 278191,
+    "outTok": 106415,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.114585
+   },
+   "appliedAt": "2026-10-06T05:04:29.939Z",
+   "result": {
+    "screened": 3677,
+    "agree": 2996,
+    "disputed": 472,
+    "unmatched": 177,
+    "nopick": 32,
+    "rate": 0.8219,
+    "usd": 0.114585
+   }
+  },
+  "dermatology": {
+   "status": "applied",
+   "items": 1772,
+   "requests": 254,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/3697843009358921728",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/dermatology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/dermatology/out/",
+   "submittedAt": "2026-10-06T04:18:24.472Z",
+   "usage": {
+    "calls": 254,
+    "inTok": 133481,
+    "outTok": 50666,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.054685
+   },
+   "appliedAt": "2026-10-06T05:04:34.222Z",
+   "result": {
+    "screened": 1772,
+    "agree": 1535,
+    "disputed": 135,
+    "unmatched": 86,
+    "nopick": 16,
+    "rate": 0.8741,
+    "usd": 0.054685
+   }
+  },
+  "psychiatry": {
+   "status": "applied",
+   "items": 4010,
+   "requests": 573,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/842560845606027264",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/psychiatry/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/psychiatry/out/",
+   "submittedAt": "2026-10-06T04:18:29.250Z",
+   "usage": {
+    "calls": 573,
+    "inTok": 295644,
+    "outTok": 112308,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.121187
+   },
+   "appliedAt": "2026-10-06T05:04:38.871Z",
+   "result": {
+    "screened": 4010,
+    "agree": 3421,
+    "disputed": 324,
+    "unmatched": 224,
+    "nopick": 41,
+    "rate": 0.8619,
+    "usd": 0.121187
+   }
+  },
+  "anaesthesia": {
+   "status": "applied",
+   "items": 2909,
+   "requests": 416,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/4947591905954234368",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/anaesthesia/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/anaesthesia/out/",
+   "submittedAt": "2026-10-06T04:18:34.197Z",
+   "usage": {
+    "calls": 416,
+    "inTok": 218750,
+    "outTok": 84056,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.090386
+   },
+   "appliedAt": "2026-10-06T05:04:43.421Z",
+   "result": {
+    "screened": 2909,
+    "agree": 2376,
+    "disputed": 412,
+    "unmatched": 102,
+    "nopick": 19,
+    "rate": 0.8221,
+    "usd": 0.090386
+   }
+  },
+  "radiology": {
+   "status": "applied",
+   "items": 3928,
+   "requests": 562,
+   "jobId": "projects/705789851709/locations/global/batchPredictionJobs/5616376450618753024",
+   "inputUri": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/radiology/input.jsonl",
+   "outputPrefix": "gs://project-6074a703-e86c-40a5-848-prep-batch/prep/screen-202610060417/screen/radiology/out/",
+   "submittedAt": "2026-10-06T04:18:39.153Z",
+   "usage": {
+    "calls": 562,
+    "inTok": 285247,
+    "outTok": 111517,
+    "thinkTok": 0,
+    "cachedTok": 0,
+    "usd": 0.119294
+   },
+   "appliedAt": "2026-10-06T05:04:47.906Z",
+   "result": {
+    "screened": 3928,
+    "agree": 3142,
+    "disputed": 553,
+    "unmatched": 194,
+    "nopick": 39,
+    "rate": 0.8079,
+    "usd": 0.119294
+   }
+  },
+  "ss-general-medicine": {
+   "status": "submitted"
+  },
+  "ss-cardiology": {
+   "status": "submitted"
+  },
+  "ss-neurology": {
+   "status": "submitted"
+  },
+  "ss-nephrology": {
+   "status": "submitted"
+  },
+  "ss-gastroenterology": {
+   "status": "submitted"
+  },
+  "ss-hepatology": {
+   "status": "submitted"
+  },
+  "ss-endocrinology": {
+   "status": "submitted"
+  },
+  "ss-haematology": {
+   "status": "submitted"
+  },
+  "ss-medical-oncology": {
+   "status": "submitted"
+  },
+  "ss-rheumatology-immunology": {
+   "status": "submitted"
+  },
+  "ss-pulmonology": {
+   "status": "submitted"
+  },
+  "ss-infectious-diseases": {
+   "status": "submitted"
+  },
+  "ss-critical-care": {
+   "status": "submitted"
+  },
+  "ss-biostatistics": {
+   "status": "submitted"
+  }
+ }
+}
