@@ -18,8 +18,8 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8997) + "/").replace(/\/?$/, "/");
-const PORT = +(process.env.CHROME_PORT || 9399), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-chrome-" + PORT + "-" + Date.now();
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || await freePort()) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || await freePort()), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-chrome-" + PORT + "-" + Date.now();
 const CHROME = process.env.CHROME || "/opt/pw-browsers/chromium";
 const FIX = "/test/fixtures/prep/";
 

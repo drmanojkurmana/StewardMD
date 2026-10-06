@@ -19,8 +19,8 @@ import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 const LOADER_V = (await import("node:fs")).readFileSync(new URL("../prep-loader.js", import.meta.url), "utf8").match(/var V = "([^"]+)"/)[1];
 const HERE = dirname(fileURLToPath(import.meta.url));
-const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8995) + "/").replace(/\/?$/, "/");
-const PORT = +(process.env.CHROME_PORT || 9397), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-pyq-chrome-" + PORT + "-" + Date.now();
+const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || await freePort()) + "/").replace(/\/?$/, "/");
+const PORT = +(process.env.CHROME_PORT || await freePort()), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-pyq-chrome-" + PORT + "-" + Date.now();
 const CHROME = process.env.CHROME || "/opt/pw-browsers/chromium";
 const FIX = "/test/fixtures/prep/";
 
