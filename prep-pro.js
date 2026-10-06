@@ -70,13 +70,20 @@
      struck through only when the first year is below it (the list price is the real renewal price), the quote's own
      percent, reason and dates, and the renewal price. No quote (offline, endpoint missing): the list price, nothing off. */
   var REASONS = { intro: "Introductory price", student: "Student price", launch: "Launch price", winback: "One time price" };
-  function quoteView(q) {
+  /* store: checkout goes through store IAP (iOS), which cannot apply a per-user student or win-back price (no offer
+     signing yet): show the plain list price the store charges, plus where the lower price applies. */
+  function quoteView(q, store) {
     q = q || {};
+    if (store && (q.priceReason === "student" || q.priceReason === "winback")) {
+      var v0 = quoteView({ listPaise: q.listPaise, renewalPaise: q.renewalPaise, priceReason: "renewal" });
+      v0.note = q.priceReason === "student" ? "The student price applies on the website." : "This one time price applies on the website.";
+      return v0;
+    }
     var list = q.listPaise || PLAN.listPaise, first = q.firstYearPaise != null ? q.firstYearPaise : list, renew = q.renewalPaise || list, below = first < list && q.priceReason !== "renewal";
     return { price: rs(first), per: below ? "first year" : "a year", strike: below ? rs(list) : "",
       reason: below ? (REASONS[q.priceReason] || "") + (q.priceReason === "launch" && q.launchEndsAt ? " until " + fmtDate(q.launchEndsAt) : "") : "",
       off: below ? (q.offPct ? q.offPct + "% off " + rs(list) + ", then " : "Then ") + rs(renew) + "/year" : "",
-      renewal: "" };
+      renewal: "", note: "" };
   }
   /* The cancel line for a Pro entitlement { active, until, source, autoRenews, manageUrl }: a store subscription opens
      its manage page (manageUrl); a one-time purchase (Razorpay orders) says truthfully that it does not renew. */
@@ -128,6 +135,8 @@
       return G.fetch((G.SMD_API_BASE || "") + "/api/entitlements" + path, { method: method, headers: h, body: body ? JSON.stringify(body) : undefined });
     }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d || {} }; }, function () { return { s: r.status, d: {} }; }); });
   }
+  // pro-paywall.js doBuy sends iOS purchases to StoreKit (SMD_IAP); web and Android go through Razorpay.
+  function storePath() { try { return !!(G.SMD_IAP && G.SMD_IAP.isIOS && G.SMD_IAP.isIOS()); } catch (e) { return false; } }
   function signedIn() { return !!(G.SMD_AUTH && G.SMD_AUTH.currentUser); }
   function refreshEnt() {
     if (!signedIn()) return Promise.resolve(ent());
@@ -155,17 +164,17 @@
   }
   function homeMounted() { if (isPro()) return; loadOffer().then(function () { var el = D.querySelector("#ppOfferSlot"); if (el) el.innerHTML = offerHtml(); }); }
   function offerHtml() {
-    var t = offerText(P.offer); if (!t || isPro()) return "";
+    var t = offerText(P.offer); if (!t || isPro() || storePath()) return "";   // the store cannot charge the offer price yet
     return '<section class="pn-panel pp-offer" aria-labelledby="ppOfferT"><p class="pp-kick" id="ppOfferT">A one time price for you</p><p class="pp-offer-line">' + esc(t.line) + "</p>" +
       (t.off || t.save ? '<p class="pp-save">' + esc([t.off, t.save].filter(Boolean).join(" \u00b7 ")) + "</p>" : "") +
       '<p class="pn-mut pn-small pp-cancel">Cancel anytime: manage or cancel from the PrepNucleus Pro screen.</p>' +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="pro-odismiss">Dismiss</button><button type="button" class="pn-btn pri" data-act="pro-obuy">Get this price</button></div></section>';
   }
   function planHtml() {
-    var v = quoteView(P.quote);
+    var v = quoteView(P.quote, storePath());
     return '<section class="pn-panel pp-plan" aria-labelledby="ppPlanT"><p class="pp-kick" id="ppPlanT">Yearly' + (v.reason ? " \u00b7 " + esc(v.reason) : "") + "</p>" +
       '<p class="pp-price"><b>' + v.price + "</b> <span>" + v.per + "</span>" + (v.strike ? ' <s class="pp-strike" aria-label="List price ' + v.strike + '">' + v.strike + "</s>" : "") + "</p>" +
-      (v.off ? '<p class="pp-save">' + esc(v.off) + "</p>" : "") + (v.renewal ? '<p class="pn-mut pn-small pp-renew">' + esc(v.renewal) + "</p>" : "") +
+      (v.off ? '<p class="pp-save">' + esc(v.off) + "</p>" : "") + (v.renewal ? '<p class="pn-mut pn-small pp-renew">' + esc(v.renewal) + "</p>" : "") + (v.note ? '<p class="pn-mut pn-small pp-note">' + esc(v.note) + "</p>" : "") +
       '<button type="button" class="pn-btn pri" data-act="pro-buy">Get PrepNucleus Pro</button><p class="pn-mut pn-small pp-cancel">Cancel anytime: manage or cancel from this screen.</p></section>';
   }
   function manageHtml() {

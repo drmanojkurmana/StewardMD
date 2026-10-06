@@ -109,3 +109,14 @@ test("no em-dash in app text", async () => {
   const fs = await import("node:fs");
   assert.doesNotMatch(fs.readFileSync(new URL("../prep-pro.js", import.meta.url), "utf8"), /—/);
 });
+
+test("store path (iOS IAP): no student or win-back price it cannot charge", () => {
+  const stu = { listPaise: 599900, firstYearPaise: 119900, renewalPaise: 599900, priceReason: "student", offPct: 80 };
+  assert.equal(P.quoteView(stu, false).price, "Rs 1,199");
+  const v = P.quoteView(stu, true);
+  assert.equal(v.price, "Rs 5,999"); assert.equal(v.strike + v.off + v.reason, ""); assert.equal(v.note, "The student price applies on the website.");
+  const wb = P.quoteView({ listPaise: 599900, firstYearPaise: 99900, priceReason: "winback", offPct: 83 }, true);
+  assert.equal(wb.price, "Rs 5,999"); assert.match(wb.note, /website/);
+  const launch = P.quoteView({ listPaise: 599900, firstYearPaise: 149900, priceReason: "launch", offPct: 75 }, true);
+  assert.equal(launch.price, "Rs 1,499"); assert.equal(launch.note, "");
+});
