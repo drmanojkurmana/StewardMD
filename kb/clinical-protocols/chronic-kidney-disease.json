@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, ward",
- "aliases": ["CKD", "chronic renal failure", "CRF", "KDIGO 2024", "eGFR", "albuminuria", "ACR", "diabetic kidney disease", "SGLT2 inhibitor", "finerenone", "renal anaemia", "CKD-MBD", "KFRE"],
+ "aliases": [
+  "CKD",
+  "chronic renal failure",
+  "CRF",
+  "KDIGO 2024",
+  "eGFR",
+  "albuminuria",
+  "ACR",
+  "diabetic kidney disease",
+  "SGLT2 inhibitor",
+  "finerenone",
+  "renal anaemia",
+  "CKD-MBD",
+  "KFRE"
+ ],
  "summary": "Stage CKD by cause, GFR and albuminuria (KDIGO 2024), then slow progression with BP control, maximum tolerated ACE inhibitor or ARB, an SGLT2 inhibitor, finerenone in albuminuric type 2 diabetes and a statin, manage anaemia, acidosis and mineral bone disease, and refer on KDIGO criteria.",
  "sections": [
   {
@@ -89,17 +103,155 @@
   }
  ],
  "drugs": [
-  { "name": "ACE inhibitor or ARB", "dose": "Titrate to the maximum tolerated licensed dose, for example ramipril up to 10 mg daily, telmisartan up to 80 mg daily or losartan up to 100 mg daily", "notes": "Check potassium and creatinine at 2 to 4 weeks; accept up to 30% creatinine rise." },
-  { "name": "Dapagliflozin", "dose": "10 mg orally once daily", "notes": "Start at eGFR 20 or more; hold during acute illness, fasting or surgery." },
-  { "name": "Empagliflozin", "dose": "10 mg orally once daily", "notes": "Start at eGFR 20 or more; hold during acute illness, fasting or surgery." },
-  { "name": "Finerenone", "dose": "10 mg daily if eGFR 25 to 59; 20 mg daily if eGFR 60 or more; increase 10 mg to 20 mg after 4 weeks if potassium 4.8 mmol/L or less", "notes": "Product label dosing. Start only if potassium is 5.0 mmol/L or less; hold if above 5.5. Type 2 diabetes with albuminuria." },
-  { "name": "Metformin", "dose": "Reduce the dose when eGFR is below 45; stop when eGFR is below 30", "notes": "Pause during acute illness and around iodinated contrast if eGFR is 30 or less." }
+  {
+   "name": "ACE inhibitor or ARB",
+   "dose": "Titrate to the maximum tolerated licensed dose, for example ramipril up to 10 mg daily, telmisartan up to 80 mg daily or losartan up to 100 mg daily",
+   "notes": "Check potassium and creatinine at 2 to 4 weeks; accept up to 30% creatinine rise."
+  },
+  {
+   "name": "Dapagliflozin",
+   "dose": "10 mg orally once daily",
+   "notes": "Start at eGFR 20 or more; hold during acute illness, fasting or surgery."
+  },
+  {
+   "name": "Empagliflozin",
+   "dose": "10 mg orally once daily",
+   "notes": "Start at eGFR 20 or more; hold during acute illness, fasting or surgery."
+  },
+  {
+   "name": "Finerenone",
+   "dose": "10 mg daily if eGFR 25 to 59; 20 mg daily if eGFR 60 or more; increase 10 mg to 20 mg after 4 weeks if potassium 4.8 mmol/L or less",
+   "notes": "Product label dosing. Start only if potassium is 5.0 mmol/L or less; hold if above 5.5. Type 2 diabetes with albuminuria."
+  },
+  {
+   "name": "Metformin",
+   "dose": "Reduce the dose when eGFR is below 45; stop when eGFR is below 30",
+   "notes": "Pause during acute illness and around iodinated contrast if eGFR is 30 or less."
+  }
  ],
  "sources": [
-  { "org": "KDIGO", "title": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease", "year": 2024, "url": "https://kdigo.org/guidelines/ckd-evaluation-and-management/" },
-  { "org": "KDIGO", "title": "KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease", "year": 2022, "url": "https://kdigo.org/guidelines/diabetes-ckd/" },
-  { "org": "KDIGO", "title": "KDIGO 2026 Clinical Practice Guideline for the Management of Anemia in CKD", "year": 2026, "url": "https://kdigo.org/guidelines/anemia-in-ckd/" },
-  { "org": "KDIGO", "title": "KDIGO 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder", "year": 2017, "url": "https://kdigo.org/guidelines/ckd-mbd/" }
+  {
+   "org": "KDIGO",
+   "title": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+   "year": 2024,
+   "url": "https://kdigo.org/guidelines/ckd-evaluation-and-management/"
+  },
+  {
+   "org": "KDIGO",
+   "title": "KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease",
+   "year": 2022,
+   "url": "https://kdigo.org/guidelines/diabetes-ckd/"
+  },
+  {
+   "org": "KDIGO",
+   "title": "KDIGO 2026 Clinical Practice Guideline for the Management of Anemia in CKD",
+   "year": 2026,
+   "url": "https://kdigo.org/guidelines/anemia-in-ckd/"
+  },
+  {
+   "org": "KDIGO",
+   "title": "KDIGO 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder",
+   "year": 2017,
+   "url": "https://kdigo.org/guidelines/ckd-mbd/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chronic-kidney-disease-pathway",
+   "title": "Chronic kidney disease: evaluation and management (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "CKD: abnormal kidney structure or function present for more than 3 months with implications for health, for example eGFR below 60 mL/min/1.73 m2 or albuminuria (ACR 30 mg/g [3 mg/mmol] or more).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "GFR categories: G1 90 or more, G2 60 to 89, G3a 45 to 59, G3b 30 to 44, G4 15 to 29, G5 below 15 mL/min/1.73 m2.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Creatinine-based eGFR (CKD-EPI); use combined creatinine and cystatin C eGFR when creatinine is less accurate (extremes of muscle mass, amputation, unusual diet) and the result changes decisions."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Anaemia (KDIGO 2026): Hb below 13 g/dL in men or 12 g/dL in women; check CBC, reticulocytes, ferritin, TSAT, B12, folate. Not on dialysis: give iron (oral or IV) if ferritin below 100 ng/mL with TSAT below 40%, or ferritin 100 to 300 ng/mL"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "eGFR and ACR at least yearly, more often (up to 4 or more times a year) in higher GFR and albuminuria risk categories."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chronic kidney disease: evaluation and management (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic-kidney-disease-summary-matrix",
+   "title": "Chronic kidney disease: evaluation and management (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "CKD: abnormal kidney structure or function present for more than 3 months with implications for health, for example eGFR below 60",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Anaemia (KDIGO 2026): Hb below 13 g/dL in men or 12 g/dL in women; check CBC, reticulocytes, ferritin, TSAT, B12, folate. Not on dialysis:",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Creatinine-based eGFR (CKD-EPI); use combined creatinine and cystatin C eGFR when creatinine is less accurate (extremes of muscle mass,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "ACE inhibitor or ARB: Titrate to the maximum tolerated licensed dose, for example ramipril up to 10 mg daily, telmisartan up to 80 mg daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Not measuring ACR, so high-risk albuminuric patients are missed.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chronic kidney disease: evaluation and management (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-kidney-disease-diagram",
+   "title": "Chronic kidney disease: evaluation and management (adult): Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

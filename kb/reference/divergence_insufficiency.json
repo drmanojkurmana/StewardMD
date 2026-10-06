@@ -1,74 +1,169 @@
 {
-  "id": "divergence_insufficiency",
-  "name": "Divergence insufficiency",
-  "aliases": [
-    "divergence paralysis",
-    "age-related distance esotropia"
+ "id": "divergence_insufficiency",
+ "name": "Divergence insufficiency",
+ "aliases": [
+  "divergence paralysis",
+  "age-related distance esotropia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Ophthalmology / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Causes horizontal binocular diplopia that is worse at distance and resolves or improves at near, the reverse of convergence insufficiency",
+   "There is a comitant esotropia greater for distance than near, with full abduction of each eye",
+   "It is most often a benign age-related condition sometimes called age-related distance esotropia",
+   "Abduction is full, which helps distinguish it from a sixth nerve palsy where abduction is limited",
+   "New-onset cases warrant exclusion of posterior fossa pathology and raised intracranial pressure",
+   "Prisms in spectacles usually relieve the distance diplopia effectively"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Ophthalmology / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Causes horizontal binocular diplopia that is worse at distance and resolves or improves at near, the reverse of convergence insufficiency",
-      "There is a comitant esotropia greater for distance than near, with full abduction of each eye",
-      "It is most often a benign age-related condition sometimes called age-related distance esotropia",
-      "Abduction is full, which helps distinguish it from a sixth nerve palsy where abduction is limited",
-      "New-onset cases warrant exclusion of posterior fossa pathology and raised intracranial pressure",
-      "Prisms in spectacles usually relieve the distance diplopia effectively"
+  "pathophysiology": "Divergence insufficiency reflects an imbalance between convergence and divergence tone, with relatively reduced divergence producing an esodeviation that is greatest when the eyes should be parallel for distance viewing. In the common age-related form, degenerative changes in the orbital connective-tissue pulleys and extraocular muscle mechanics are thought to contribute. Because reduced divergence can also result from pontine or cerebellar disease and from raised intracranial pressure, a secondary neurological cause must be considered when onset is acute or accompanied by other signs.",
+  "additionalDifferentials": [
+   "Bilateral sixth nerve palsy",
+   "Raised intracranial pressure",
+   "Posterior fossa or brainstem lesion",
+   "Myasthenia gravis",
+   "Decompensated esophoria",
+   "Thyroid eye disease"
+  ],
+  "additionalInvestigations": [
+   "Orthoptic measurement of the deviation for distance and near",
+   "Assessment of abduction to exclude a sixth nerve palsy",
+   "MRI of the brain and posterior fossa in atypical or acute cases",
+   "Fundoscopy for papilloedema",
+   "Acetylcholine-receptor antibody testing if myasthenia is suspected"
+  ],
+  "redFlags": [
+   "Limited abduction indicating a sixth nerve palsy",
+   "Papilloedema or headache suggesting raised intracranial pressure",
+   "Additional neurological signs",
+   "Rapidly progressive or fluctuating deviation"
+  ],
+  "prognosis": "The benign age-related form is generally stable and responds well to prisms; prognosis in secondary cases depends on the underlying neurological cause.",
+  "pitfalls": [
+   "Mistaking it for a bilateral sixth nerve palsy despite full abduction",
+   "Failing to exclude raised intracranial pressure in new-onset cases",
+   "Overlooking myasthenia as a fluctuating mimic",
+   "Assuming a benign cause without measuring distance and near deviations"
+  ],
+  "references": [
+   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Base-out prism correction in spectacles to relieve the distance binocular diplopia, the mainstay for the benign age-related form",
+   "Orthoptic review measuring the esodeviation for distance and near to guide prism strength",
+   "Exclude and treat a secondary neurological cause such as posterior fossa pathology or raised intracranial pressure in new-onset or atypical cases",
+   "Strabismus surgery for large or prism-intolerant deviations",
+   "Neuro-ophthalmology or neurology referral where a secondary cause is suspected",
+   "Periodic monitoring as the deviation may change over time"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "divergence_insufficiency-pathway",
+   "title": "Divergence insufficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Causes horizontal binocular diplopia that is worse at distance and resolves or improves at near, the reverse of convergence insufficiency",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Limited abduction indicating a sixth nerve palsy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Orthoptic measurement of the deviation for distance and near, Assessment of abduction to exclude a sixth nerve palsy, MRI of the brain and posterior fossa in atypical or acute cases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Base-out prism correction in spectacles to relieve the distance binocular diplopia, the mainstay for the benign age-related form"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking it for a bilateral sixth nerve palsy despite full abduction"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of divergence insufficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "divergence_insufficiency-matrix",
+   "title": "Divergence insufficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Causes horizontal binocular diplopia that is worse at distance and resolves or improves at near, the reverse of convergence",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Divergence insufficiency reflects an imbalance between convergence and divergence tone, with relatively reduced divergence producing an esodeviation that is greatest when the eyes should be parallel for distance viewing. In the common age-related form, degenerative changes in the orbital connective-tissue pulleys and extraocular muscle mechanics are thought to contribute. Because reduced divergence can also result from pontine or cerebellar disease and from raised intracranial pressure, a secondary neurological cause must be considered when onset is acute or accompanied by other signs.",
-    "additionalDifferentials": [
-      "Bilateral sixth nerve palsy",
-      "Raised intracranial pressure",
-      "Posterior fossa or brainstem lesion",
-      "Myasthenia gravis",
-      "Decompensated esophoria",
-      "Thyroid eye disease"
+    [
+     "Key Investigations",
+     "Orthoptic measurement of the deviation for distance and near, Assessment of abduction to exclude a sixth nerve palsy, MRI of the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Orthoptic measurement of the deviation for distance and near",
-      "Assessment of abduction to exclude a sixth nerve palsy",
-      "MRI of the brain and posterior fossa in atypical or acute cases",
-      "Fundoscopy for papilloedema",
-      "Acetylcholine-receptor antibody testing if myasthenia is suspected"
+    [
+     "Primary Differentials",
+     "Bilateral sixth nerve palsy, Raised intracranial pressure, Posterior fossa or brainstem lesion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Limited abduction indicating a sixth nerve palsy",
-      "Papilloedema or headache suggesting raised intracranial pressure",
-      "Additional neurological signs",
-      "Rapidly progressive or fluctuating deviation"
+    [
+     "Management Strategy",
+     "Base-out prism correction in spectacles to relieve the distance binocular diplopia, the mainstay for the benign age-related form",
+     "Core treatment modality"
     ],
-    "prognosis": "The benign age-related form is generally stable and responds well to prisms; prognosis in secondary cases depends on the underlying neurological cause.",
-    "pitfalls": [
-      "Mistaking it for a bilateral sixth nerve palsy despite full abduction",
-      "Failing to exclude raised intracranial pressure in new-onset cases",
-      "Overlooking myasthenia as a fluctuating mimic",
-      "Assuming a benign cause without measuring distance and near deviations"
-    ],
-    "references": [
-      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Base-out prism correction in spectacles to relieve the distance binocular diplopia, the mainstay for the benign age-related form",
-      "Orthoptic review measuring the esodeviation for distance and near to guide prism strength",
-      "Exclude and treat a secondary neurological cause such as posterior fossa pathology or raised intracranial pressure in new-onset or atypical cases",
-      "Strabismus surgery for large or prism-intolerant deviations",
-      "Neuro-ophthalmology or neurology referral where a secondary cause is suspected",
-      "Periodic monitoring as the deviation may change over time"
+    [
+     "Clinical Pitfall",
+     "Mistaking it for a bilateral sixth nerve palsy despite full abduction",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for divergence insufficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "divergence-insufficiency-diagram",
+   "title": "Divergence insufficiency: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "dental_trauma",
-  "name": "Dental trauma",
-  "aliases": [
-    "traumatic dental injury",
-    "tooth injury",
-    "dentoalveolar trauma",
-    "avulsion and luxation injuries"
+ "id": "dental_trauma",
+ "name": "Dental trauma",
+ "aliases": [
+  "traumatic dental injury",
+  "tooth injury",
+  "dentoalveolar trauma",
+  "avulsion and luxation injuries"
+ ],
+ "class": "non_infective",
+ "system": "Oral / Dental / Maxillofacial",
+ "specialty": "Dentistry / OMFS",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard oral medicine & OMFS references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Dental trauma ranges from enamel fractures through crown-root fractures to luxation and complete avulsion, and injuries frequently coexist",
+   "The maxillary central incisors are the teeth most commonly injured, especially in children and young adults",
+   "Avulsion of a permanent tooth is a time-critical emergency, as the survival of the periodontal ligament falls rapidly the longer the tooth is out of the socket and dry",
+   "An avulsed permanent tooth should ideally be reimplanted promptly or stored in a suitable physiological medium such as milk or saliva rather than water",
+   "Avulsed primary teeth are generally not reimplanted because of the risk of damaging the developing permanent successor",
+   "Pulp status can change over time after luxation injuries, so baseline and repeated sensibility testing and follow-up are essential",
+   "Ellis-type crown fractures involving dentine or pulp need timely protection or pulp management to preserve vitality",
+   "Always assess for associated alveolar, jaw, and soft-tissue injuries, and consider non-accidental injury when the history is inconsistent"
   ],
-  "class": "non_infective",
-  "system": "Oral / Dental / Maxillofacial",
-  "specialty": "Dentistry / OMFS",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard oral medicine & OMFS references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Dental trauma ranges from enamel fractures through crown-root fractures to luxation and complete avulsion, and injuries frequently coexist",
-      "The maxillary central incisors are the teeth most commonly injured, especially in children and young adults",
-      "Avulsion of a permanent tooth is a time-critical emergency, as the survival of the periodontal ligament falls rapidly the longer the tooth is out of the socket and dry",
-      "An avulsed permanent tooth should ideally be reimplanted promptly or stored in a suitable physiological medium such as milk or saliva rather than water",
-      "Avulsed primary teeth are generally not reimplanted because of the risk of damaging the developing permanent successor",
-      "Pulp status can change over time after luxation injuries, so baseline and repeated sensibility testing and follow-up are essential",
-      "Ellis-type crown fractures involving dentine or pulp need timely protection or pulp management to preserve vitality",
-      "Always assess for associated alveolar, jaw, and soft-tissue injuries, and consider non-accidental injury when the history is inconsistent"
+  "pathophysiology": "Dental trauma results from a direct or indirect force exceeding the resistance of the tooth and its supporting structures. Depending on the vector and magnitude, energy is dissipated as enamel or dentine fracture, pulp exposure, displacement of the tooth within or out of its socket (luxation or avulsion), or fracture of the alveolar bone. Injury to the neurovascular supply at the apex can lead to reversible or irreversible pulpal damage and later necrosis, while disruption of the periodontal ligament and its cells governs the likelihood of successful healing after repositioning or reimplantation. Extra-oral drying and delay compromise ligament cell viability and predispose to replacement resorption.",
+  "additionalDifferentials": [
+   "Isolated alveolar fracture",
+   "Mandibular or midface fracture",
+   "Pre-existing caries or fracture unrelated to the acute event",
+   "Soft-tissue laceration without dental injury",
+   "Non-accidental injury in vulnerable patients"
+  ],
+  "additionalInvestigations": [
+   "Systematic clinical examination of teeth, occlusion, and soft tissues",
+   "Pulp sensibility testing at baseline and on follow-up",
+   "Periapical and occlusal radiographs, with further imaging for suspected jaw fractures",
+   "Assessment of tooth mobility, displacement, and percussion note",
+   "Documentation of injury time and storage medium for avulsed teeth"
+  ],
+  "redFlags": [
+   "Airway compromise, significant haemorrhage, or associated head and facial injuries requiring emergency management",
+   "Signs of jaw fracture such as malocclusion, trismus, or step deformity",
+   "Inconsistent history or injury pattern suggesting non-accidental injury",
+   "Aspirated or unaccounted-for tooth fragments needing chest imaging"
+  ],
+  "prognosis": "Outcome depends on injury type, maturity of the tooth, and speed of appropriate care; minor fractures and promptly managed luxations often do well, whereas avulsions with prolonged dry time and mature apices frequently develop pulp necrosis or root resorption.",
+  "pitfalls": [
+   "Storing an avulsed tooth in water or letting it dry, damaging periodontal ligament cells",
+   "Reimplanting avulsed primary teeth and harming the permanent successor",
+   "Assuming an initially vital tooth will remain so and skipping follow-up sensibility testing",
+   "Focusing on the obvious dental injury and missing alveolar or jaw fractures or non-accidental injury"
+  ],
+  "references": [
+   "Burket's Oral Medicine",
+   "Standard OMFS references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat avulsion of a permanent tooth as a time-critical emergency: reimplant promptly or store in a physiological medium such as milk or saliva, then reimplant and apply a flexible splint",
+   "Reposition and splint luxated or displaced teeth and reduce and stabilise associated alveolar fractures",
+   "Restore fractured crowns with adhesive composite and manage pulp exposure with pulp capping or pulpotomy, preserving vitality in immature teeth",
+   "Do not reimplant avulsed primary teeth because of the risk to the developing permanent successor",
+   "Provide endodontic treatment for teeth that develop pulp necrosis and monitor for root resorption",
+   "Give tetanus prophylaxis, analgesia and antibiotics where wounds are contaminated",
+   "Perform baseline and serial pulp sensibility testing with radiographic follow-up, and plan prosthetic or orthodontic rehabilitation for lost teeth"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dental_trauma-pathway",
+   "title": "Dental trauma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Dental trauma ranges from enamel fractures through crown-root fractures to luxation and complete avulsion, and injuries frequently coexist",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Airway compromise, significant haemorrhage, or associated head and facial injuries requiring emergency management",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Systematic clinical examination of teeth, occlusion, and soft tissues, Pulp sensibility testing at baseline and on follow-up, Periapical and occlusal radiographs, with further imaging for suspected jaw fractures"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat avulsion of a permanent tooth as a time-critical emergency: reimplant promptly or store in a physiological medium such as milk or saliva, then reimplant and apply a flexible splint"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Storing an avulsed tooth in water or letting it dry, damaging periodontal ligament cells"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dental trauma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dental_trauma-matrix",
+   "title": "Dental trauma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Dental trauma ranges from enamel fractures through crown-root fractures to luxation and complete avulsion, and injuries",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Dental trauma results from a direct or indirect force exceeding the resistance of the tooth and its supporting structures. Depending on the vector and magnitude, energy is dissipated as enamel or dentine fracture, pulp exposure, displacement of the tooth within or out of its socket (luxation or avulsion), or fracture of the alveolar bone. Injury to the neurovascular supply at the apex can lead to reversible or irreversible pulpal damage and later necrosis, while disruption of the periodontal ligament and its cells governs the likelihood of successful healing after repositioning or reimplantation. Extra-oral drying and delay compromise ligament cell viability and predispose to replacement resorption.",
-    "additionalDifferentials": [
-      "Isolated alveolar fracture",
-      "Mandibular or midface fracture",
-      "Pre-existing caries or fracture unrelated to the acute event",
-      "Soft-tissue laceration without dental injury",
-      "Non-accidental injury in vulnerable patients"
+    [
+     "Key Investigations",
+     "Systematic clinical examination of teeth, occlusion, and soft tissues, Pulp sensibility testing at baseline and on follow-up,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Systematic clinical examination of teeth, occlusion, and soft tissues",
-      "Pulp sensibility testing at baseline and on follow-up",
-      "Periapical and occlusal radiographs, with further imaging for suspected jaw fractures",
-      "Assessment of tooth mobility, displacement, and percussion note",
-      "Documentation of injury time and storage medium for avulsed teeth"
+    [
+     "Primary Differentials",
+     "Isolated alveolar fracture, Mandibular or midface fracture, Pre-existing caries or fracture unrelated to the acute event",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Airway compromise, significant haemorrhage, or associated head and facial injuries requiring emergency management",
-      "Signs of jaw fracture such as malocclusion, trismus, or step deformity",
-      "Inconsistent history or injury pattern suggesting non-accidental injury",
-      "Aspirated or unaccounted-for tooth fragments needing chest imaging"
+    [
+     "Management Strategy",
+     "Treat avulsion of a permanent tooth as a time-critical emergency: reimplant promptly or store in a physiological medium such as",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on injury type, maturity of the tooth, and speed of appropriate care; minor fractures and promptly managed luxations often do well, whereas avulsions with prolonged dry time and mature apices frequently develop pulp necrosis or root resorption.",
-    "pitfalls": [
-      "Storing an avulsed tooth in water or letting it dry, damaging periodontal ligament cells",
-      "Reimplanting avulsed primary teeth and harming the permanent successor",
-      "Assuming an initially vital tooth will remain so and skipping follow-up sensibility testing",
-      "Focusing on the obvious dental injury and missing alveolar or jaw fractures or non-accidental injury"
-    ],
-    "references": [
-      "Burket's Oral Medicine",
-      "Standard OMFS references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat avulsion of a permanent tooth as a time-critical emergency: reimplant promptly or store in a physiological medium such as milk or saliva, then reimplant and apply a flexible splint",
-      "Reposition and splint luxated or displaced teeth and reduce and stabilise associated alveolar fractures",
-      "Restore fractured crowns with adhesive composite and manage pulp exposure with pulp capping or pulpotomy, preserving vitality in immature teeth",
-      "Do not reimplant avulsed primary teeth because of the risk to the developing permanent successor",
-      "Provide endodontic treatment for teeth that develop pulp necrosis and monitor for root resorption",
-      "Give tetanus prophylaxis, analgesia and antibiotics where wounds are contaminated",
-      "Perform baseline and serial pulp sensibility testing with radiographic follow-up, and plan prosthetic or orthodontic rehabilitation for lost teeth"
+    [
+     "Clinical Pitfall",
+     "Storing an avulsed tooth in water or letting it dry, damaging periodontal ligament cells",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dental trauma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dental-trauma-diagram",
+   "title": "Dental trauma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

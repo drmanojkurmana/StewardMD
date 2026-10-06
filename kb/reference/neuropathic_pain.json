@@ -1,80 +1,175 @@
 {
-  "id": "neuropathic_pain",
-  "name": "Neuropathic pain",
-  "aliases": [
-    "nerve pain",
-    "neurogenic pain",
-    "neuralgia"
+ "id": "neuropathic_pain",
+ "name": "Neuropathic pain",
+ "aliases": [
+  "nerve pain",
+  "neurogenic pain",
+  "neuralgia"
+ ],
+ "class": "non_infective",
+ "system": "Rehabilitation / Pain",
+ "specialty": "Rehabilitation Medicine (PM&R)",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Neuropathic pain arises from a lesion or disease of the somatosensory nervous system and is distinct from nociceptive pain caused by ongoing tissue damage",
+   "Typical descriptors are burning, shooting, electric-shock, or stabbing pain, often with numbness, and it characteristically maps to a recognisable neuroanatomical distribution",
+   "Hallmark abnormal sensory findings include allodynia, where a normally non-painful stimulus causes pain, and hyperalgesia, an exaggerated response to a painful stimulus",
+   "Common causes span diabetic and other polyneuropathies, postherpetic neuralgia, trigeminal neuralgia, radiculopathy, post-stroke central pain, spinal cord injury, and chemotherapy-induced neuropathy",
+   "Screening tools such as the DN4 or painDETECT can support recognition, but diagnosis rests on history, distribution, and confirmatory sensory examination",
+   "First-line pharmacological principles favour gabapentinoids, tricyclic antidepressants, and serotonin-noradrenaline reuptake inhibitors, with topical agents for localised pain and opioids generally avoided as first choice",
+   "A multimodal, multidisciplinary approach combining medication, physical therapy, psychological strategies, and treatment of the underlying cause gives the best results",
+   "Interventional options such as nerve blocks and neuromodulation may help selected patients with refractory pain",
+   "Realistic goals centre on partial pain reduction and improved function and sleep rather than complete pain relief"
   ],
-  "class": "non_infective",
-  "system": "Rehabilitation / Pain",
-  "specialty": "Rehabilitation Medicine (PM&R)",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Neuropathic pain arises from a lesion or disease of the somatosensory nervous system and is distinct from nociceptive pain caused by ongoing tissue damage",
-      "Typical descriptors are burning, shooting, electric-shock, or stabbing pain, often with numbness, and it characteristically maps to a recognisable neuroanatomical distribution",
-      "Hallmark abnormal sensory findings include allodynia, where a normally non-painful stimulus causes pain, and hyperalgesia, an exaggerated response to a painful stimulus",
-      "Common causes span diabetic and other polyneuropathies, postherpetic neuralgia, trigeminal neuralgia, radiculopathy, post-stroke central pain, spinal cord injury, and chemotherapy-induced neuropathy",
-      "Screening tools such as the DN4 or painDETECT can support recognition, but diagnosis rests on history, distribution, and confirmatory sensory examination",
-      "First-line pharmacological principles favour gabapentinoids, tricyclic antidepressants, and serotonin-noradrenaline reuptake inhibitors, with topical agents for localised pain and opioids generally avoided as first choice",
-      "A multimodal, multidisciplinary approach combining medication, physical therapy, psychological strategies, and treatment of the underlying cause gives the best results",
-      "Interventional options such as nerve blocks and neuromodulation may help selected patients with refractory pain",
-      "Realistic goals centre on partial pain reduction and improved function and sleep rather than complete pain relief"
+  "pathophysiology": "Neuropathic pain results from maladaptive changes throughout the nervous system after nerve injury or disease. Damaged neurons develop ectopic and spontaneous discharge and altered ion-channel expression, producing peripheral sensitisation. In the dorsal horn, increased excitability, loss of inhibitory interneuron function, and glial activation drive central sensitisation and wind-up. Structural and functional reorganisation extends to the brain, and descending modulatory pathways may shift toward facilitation of pain. These changes together explain the spontaneous pain, allodynia, and hyperalgesia that persist beyond any ongoing tissue injury.",
+  "additionalDifferentials": [
+   "Nociceptive musculoskeletal pain",
+   "Inflammatory or ischaemic pain",
+   "Complex regional pain syndrome",
+   "Fibromyalgia and centralised pain states",
+   "Myofascial pain syndrome",
+   "Vascular claudication mimicking limb pain"
+  ],
+  "additionalInvestigations": [
+   "Detailed sensory examination mapping the distribution and testing for allodynia and hyperalgesia",
+   "Nerve conduction studies and electromyography where a peripheral nerve or root lesion is suspected",
+   "Screening questionnaires such as DN4 or painDETECT to support recognition",
+   "Targeted investigation of the underlying cause, for example glycaemic testing, imaging of the spine, or metabolic screening",
+   "Quantitative sensory testing or skin biopsy for small-fibre assessment in selected cases"
+  ],
+  "redFlags": [
+   "Progressive motor weakness, sphincter disturbance, or saddle anaesthesia suggesting cord or cauda equina compression",
+   "Rapidly worsening deficit implying an evolving compressive or inflammatory lesion",
+   "Systemic features such as weight loss or night pain raising concern for malignancy or infection",
+   "New severe pain with fever suggesting an infective or inflammatory neurological process"
+  ],
+  "prognosis": "Neuropathic pain is often chronic and only partially responsive to treatment, but many patients achieve meaningful reductions in pain intensity and improved function with a structured multimodal approach. Prognosis is better when a reversible underlying cause is identified and treated early.",
+  "pitfalls": [
+   "Treating neuropathic pain with conventional analgesics or NSAIDs alone, which are usually ineffective",
+   "Escalating opioids for a pain type that responds poorly to them and carries dependence risk",
+   "Missing a serious underlying cause such as cord compression or malignancy",
+   "Setting an expectation of complete pain relief rather than functional improvement",
+   "Neglecting the psychological and sleep dimensions that amplify chronic neuropathic pain"
+  ],
+  "references": [
+   "Braddom's Physical Medicine and Rehabilitation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and treat any reversible underlying cause, such as optimising glycaemic control in diabetic neuropathy or decompressing a compressed nerve root",
+   "Start first-line pharmacotherapy with a gabapentinoid, a tricyclic antidepressant or a serotonin-noradrenaline reuptake inhibitor such as duloxetine, titrating to effect",
+   "Use topical agents such as lidocaine or capsaicin for localised peripheral neuropathic pain",
+   "Reserve opioids such as tramadol as later-line options given limited long-term benefit and harms, avoiding them as first choice",
+   "Consider syndrome-specific agents, such as carbamazepine or oxcarbazepine for trigeminal neuralgia",
+   "Combine pharmacotherapy with physiotherapy, psychological therapy and a multimodal self-management approach",
+   "Refer to a specialist pain service for interventional options such as nerve blocks or neuromodulation when pain is refractory",
+   "Set realistic functional goals and review efficacy and adverse effects regularly, rotating or combining agents as needed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neuropathic_pain-pathway",
+   "title": "Neuropathic pain: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Neuropathic pain arises from a lesion or disease of the somatosensory nervous system and is distinct from nociceptive pain caused by ongoing tissue damage",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive motor weakness, sphincter disturbance, or saddle anaesthesia suggesting cord or cauda equina compression",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed sensory examination mapping the distribution and testing for allodynia and hyperalgesia, Nerve conduction studies and electromyography where a peripheral nerve or root lesion is suspected, Screening questionnaires"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and treat any reversible underlying cause, such as optimising glycaemic control in diabetic neuropathy or decompressing a compressed nerve root"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating neuropathic pain with conventional analgesics or NSAIDs alone, which are usually ineffective"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neuropathic pain."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neuropathic_pain-matrix",
+   "title": "Neuropathic pain: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Neuropathic pain arises from a lesion or disease of the somatosensory nervous system and is distinct from nociceptive pain caused",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Neuropathic pain results from maladaptive changes throughout the nervous system after nerve injury or disease. Damaged neurons develop ectopic and spontaneous discharge and altered ion-channel expression, producing peripheral sensitisation. In the dorsal horn, increased excitability, loss of inhibitory interneuron function, and glial activation drive central sensitisation and wind-up. Structural and functional reorganisation extends to the brain, and descending modulatory pathways may shift toward facilitation of pain. These changes together explain the spontaneous pain, allodynia, and hyperalgesia that persist beyond any ongoing tissue injury.",
-    "additionalDifferentials": [
-      "Nociceptive musculoskeletal pain",
-      "Inflammatory or ischaemic pain",
-      "Complex regional pain syndrome",
-      "Fibromyalgia and centralised pain states",
-      "Myofascial pain syndrome",
-      "Vascular claudication mimicking limb pain"
+    [
+     "Key Investigations",
+     "Detailed sensory examination mapping the distribution and testing for allodynia and hyperalgesia, Nerve conduction studies and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed sensory examination mapping the distribution and testing for allodynia and hyperalgesia",
-      "Nerve conduction studies and electromyography where a peripheral nerve or root lesion is suspected",
-      "Screening questionnaires such as DN4 or painDETECT to support recognition",
-      "Targeted investigation of the underlying cause, for example glycaemic testing, imaging of the spine, or metabolic screening",
-      "Quantitative sensory testing or skin biopsy for small-fibre assessment in selected cases"
+    [
+     "Primary Differentials",
+     "Nociceptive musculoskeletal pain, Inflammatory or ischaemic pain, Complex regional pain syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive motor weakness, sphincter disturbance, or saddle anaesthesia suggesting cord or cauda equina compression",
-      "Rapidly worsening deficit implying an evolving compressive or inflammatory lesion",
-      "Systemic features such as weight loss or night pain raising concern for malignancy or infection",
-      "New severe pain with fever suggesting an infective or inflammatory neurological process"
+    [
+     "Management Strategy",
+     "Identify and treat any reversible underlying cause, such as optimising glycaemic control in diabetic neuropathy or decompressing",
+     "Core treatment modality"
     ],
-    "prognosis": "Neuropathic pain is often chronic and only partially responsive to treatment, but many patients achieve meaningful reductions in pain intensity and improved function with a structured multimodal approach. Prognosis is better when a reversible underlying cause is identified and treated early.",
-    "pitfalls": [
-      "Treating neuropathic pain with conventional analgesics or NSAIDs alone, which are usually ineffective",
-      "Escalating opioids for a pain type that responds poorly to them and carries dependence risk",
-      "Missing a serious underlying cause such as cord compression or malignancy",
-      "Setting an expectation of complete pain relief rather than functional improvement",
-      "Neglecting the psychological and sleep dimensions that amplify chronic neuropathic pain"
-    ],
-    "references": [
-      "Braddom's Physical Medicine and Rehabilitation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and treat any reversible underlying cause, such as optimising glycaemic control in diabetic neuropathy or decompressing a compressed nerve root",
-      "Start first-line pharmacotherapy with a gabapentinoid, a tricyclic antidepressant or a serotonin-noradrenaline reuptake inhibitor such as duloxetine, titrating to effect",
-      "Use topical agents such as lidocaine or capsaicin for localised peripheral neuropathic pain",
-      "Reserve opioids such as tramadol as later-line options given limited long-term benefit and harms, avoiding them as first choice",
-      "Consider syndrome-specific agents, such as carbamazepine or oxcarbazepine for trigeminal neuralgia",
-      "Combine pharmacotherapy with physiotherapy, psychological therapy and a multimodal self-management approach",
-      "Refer to a specialist pain service for interventional options such as nerve blocks or neuromodulation when pain is refractory",
-      "Set realistic functional goals and review efficacy and adverse effects regularly, rotating or combining agents as needed"
+    [
+     "Clinical Pitfall",
+     "Treating neuropathic pain with conventional analgesics or NSAIDs alone, which are usually ineffective",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neuropathic pain."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neuropathic-pain-diagram",
+   "title": "Neuropathic pain: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

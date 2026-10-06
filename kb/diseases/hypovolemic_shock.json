@@ -145,5 +145,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h6350d14b"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hypovolemic_shock-dx-algo",
+      "title": "Hypovolemic / haemorrhagic shock: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Hypovolemic shock is haemodynamically a low-output state: reduced cardiac output and oxygen delivery driven by low preload, with a compensatory rise in systemic vascular resistance and low CVP and PCWP from depleted intravascular volume",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Overt features of severe blood-volume loss (>40%): confusion, dyspnoea, diaphoresis, hypotension and tachycardia indicating critical vital-organ hypoperfusion needing immediate volume replacement (pp.850-851)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serial serum lactate for diagnosis, risk stratification and to gauge response to resuscitation - elevated lactate/lactic acidosis correlates with worse outcome (p.2314), Haemoglobin/haematocrit - reduced in haemorrhagic"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames severity along the shock continuum (compensated/pre-shock to decompensated to irreversible) (pp.2311-2312) and, for haemorrhage, by the fraction of blood volume lost rather than an ATLS Class I-IV table"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Compensated shock can present with a normal blood pressure: relying on an absolute SBP/MAP threshold misses early shock, since young patients may maintain pressure with tachycardia, narrow pulse pressure and only a"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hypovolemic / haemorrhagic shock."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hypovolemic_shock-matrix",
+      "title": "Hypovolemic / haemorrhagic shock: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hypovolemic shock is haemodynamically a low-output state: reduced cardiac output and oxygen delivery driven by low preload, with",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serial serum lactate for diagnosis, risk stratification and to gauge response to resuscitation - elevated lactate/lactic acidosis",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Distributive shock (e.g. sepsis, anaphylaxis, neurogenic, adrenal crisis) - high cardiac output, low SVR, warm peripheries",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Overt features of severe blood-volume loss (>40%): confusion, dyspnoea, diaphoresis, hypotension and tachycardia indicating",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Compensated shock can present with a normal blood pressure: relying on an absolute SBP/MAP threshold misses early shock, since",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hypovolemic / haemorrhagic shock."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "hypovolemic-shock-diagram",
+      "title": "Hypovolemic / haemorrhagic shock: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

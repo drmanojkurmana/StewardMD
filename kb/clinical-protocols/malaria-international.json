@@ -6,7 +6,23 @@
  "basis": "international",
  "counterpart": "malaria",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["WHO malaria guidelines 2025", "P. falciparum", "P. vivax", "P. ovale", "P. knowlesi", "severe malaria", "cerebral malaria", "ACT", "artemether lumefantrine", "artesunate", "primaquine", "tafenoquine", "G6PD", "radical cure", "imported malaria"],
+ "aliases": [
+  "WHO malaria guidelines 2025",
+  "P. falciparum",
+  "P. vivax",
+  "P. ovale",
+  "P. knowlesi",
+  "severe malaria",
+  "cerebral malaria",
+  "ACT",
+  "artemether lumefantrine",
+  "artesunate",
+  "primaquine",
+  "tafenoquine",
+  "G6PD",
+  "radical cure",
+  "imported malaria"
+ ],
  "summary": "Confirm every case by microscopy or RDT. Uncomplicated falciparum: a 3-day ACT (artemether-lumefantrine in the first trimester), plus single-dose primaquine 0.25 mg/kg in low-transmission areas. Vivax and ovale: chloroquine or ACT plus G6PD-guided primaquine or tafenoquine. Severe malaria: IV artesunate 2.4 mg/kg (3 mg/kg under 20 kg) for at least 24 hours, then a full ACT.",
  "sections": [
   {
@@ -102,22 +118,180 @@
   }
  ],
  "drugs": [
-  { "name": "Artesunate injection", "dose": "2.4 mg/kg IV or IM at 0, 12 and 24 hours, then once daily; 3 mg/kg per dose in children under 20 kg", "notes": "At least 24 hours and until oral intake tolerated, then a full 3-day ACT. CDC uses 2.4 mg/kg at all weights. Monitor Hb for delayed haemolysis." },
-  { "name": "Artemether-lumefantrine (20/120 mg)", "dose": "Twice daily for 3 days: under 15 kg 1 tablet, 15 to under 25 kg 2, 25 to under 35 kg 3, 35 kg or more 4 tablets per dose", "notes": "First two doses 8 hours apart; take with fat. Preferred ACT in the first trimester." },
-  { "name": "Dihydroartemisinin-piperaquine", "dose": "Once daily for 3 days by weight band (adults 36 to under 60 kg: 120/960 mg daily); children under 25 kg at least 2.5 mg/kg DHA and 20 mg/kg piperaquine daily", "notes": "Avoid high-fat meals (QT prolongation)." },
-  { "name": "Primaquine (transmission blocking, falciparum)", "dose": "0.25 mg base/kg orally, single dose on day 1 with the ACT", "notes": "No G6PD test needed. Not in pregnancy, infants under 1 month, or women breastfeeding infants under 1 month." },
-  { "name": "Primaquine (radical cure, vivax and ovale)", "dose": "0.5 mg/kg daily for 14 days, or 1 mg/kg daily for 7 days if G6PD 70% or more; 0.25 mg/kg daily for 14 days acceptable in South Asia; 0.75 mg/kg weekly for 8 weeks if G6PD deficient", "notes": "G6PD-guided. Stop for dark urine, jaundice or breathlessness." },
-  { "name": "Tafenoquine", "dose": "Single oral dose with chloroquine: over 35 kg 300 mg; over 20 to 35 kg 200 mg; over 10 to 20 kg 100 mg (age 2 years or more)", "notes": "Only if G6PD activity 70% or more on a quantitative or semi-quantitative test. Not with ACTs, pregnancy or lactation." },
-  { "name": "Chloroquine", "dose": "25 mg base/kg over 3 days: 10 mg/kg day 1, 10 mg/kg day 2, 5 mg/kg day 3", "notes": "Chloroquine-susceptible vivax, ovale, malariae, knowlesi. Pregnancy prophylaxis 300 mg base weekly (CDC)." },
-  { "name": "Artemether injection", "dose": "3.2 mg/kg IM loading, then 1.6 mg/kg IM once daily", "notes": "Only if artesunate is unavailable; preferred over quinine." },
-  { "name": "Quinine dihydrochloride", "dose": "20 mg salt/kg IV over 4 hours, then 10 mg salt/kg every 8 hours", "notes": "Maximum rate 5 mg salt/kg/h; never as a bolus. Reduce to 10 mg/kg 12-hourly if AKI persists or no improvement by 48 hours. Hypoglycaemia risk." },
-  { "name": "Rectal artesunate (pre-referral)", "dose": "10 mg/kg single dose", "notes": "Children under 6 years only, when IM injection is unavailable; refer immediately." }
+  {
+   "name": "Artesunate injection",
+   "dose": "2.4 mg/kg IV or IM at 0, 12 and 24 hours, then once daily; 3 mg/kg per dose in children under 20 kg",
+   "notes": "At least 24 hours and until oral intake tolerated, then a full 3-day ACT. CDC uses 2.4 mg/kg at all weights. Monitor Hb for delayed haemolysis."
+  },
+  {
+   "name": "Artemether-lumefantrine (20/120 mg)",
+   "dose": "Twice daily for 3 days: under 15 kg 1 tablet, 15 to under 25 kg 2, 25 to under 35 kg 3, 35 kg or more 4 tablets per dose",
+   "notes": "First two doses 8 hours apart; take with fat. Preferred ACT in the first trimester."
+  },
+  {
+   "name": "Dihydroartemisinin-piperaquine",
+   "dose": "Once daily for 3 days by weight band (adults 36 to under 60 kg: 120/960 mg daily); children under 25 kg at least 2.5 mg/kg DHA and 20 mg/kg piperaquine daily",
+   "notes": "Avoid high-fat meals (QT prolongation)."
+  },
+  {
+   "name": "Primaquine (transmission blocking, falciparum)",
+   "dose": "0.25 mg base/kg orally, single dose on day 1 with the ACT",
+   "notes": "No G6PD test needed. Not in pregnancy, infants under 1 month, or women breastfeeding infants under 1 month."
+  },
+  {
+   "name": "Primaquine (radical cure, vivax and ovale)",
+   "dose": "0.5 mg/kg daily for 14 days, or 1 mg/kg daily for 7 days if G6PD 70% or more; 0.25 mg/kg daily for 14 days acceptable in South Asia; 0.75 mg/kg weekly for 8 weeks if G6PD deficient",
+   "notes": "G6PD-guided. Stop for dark urine, jaundice or breathlessness."
+  },
+  {
+   "name": "Tafenoquine",
+   "dose": "Single oral dose with chloroquine: over 35 kg 300 mg; over 20 to 35 kg 200 mg; over 10 to 20 kg 100 mg (age 2 years or more)",
+   "notes": "Only if G6PD activity 70% or more on a quantitative or semi-quantitative test. Not with ACTs, pregnancy or lactation."
+  },
+  {
+   "name": "Chloroquine",
+   "dose": "25 mg base/kg over 3 days: 10 mg/kg day 1, 10 mg/kg day 2, 5 mg/kg day 3",
+   "notes": "Chloroquine-susceptible vivax, ovale, malariae, knowlesi. Pregnancy prophylaxis 300 mg base weekly (CDC)."
+  },
+  {
+   "name": "Artemether injection",
+   "dose": "3.2 mg/kg IM loading, then 1.6 mg/kg IM once daily",
+   "notes": "Only if artesunate is unavailable; preferred over quinine."
+  },
+  {
+   "name": "Quinine dihydrochloride",
+   "dose": "20 mg salt/kg IV over 4 hours, then 10 mg salt/kg every 8 hours",
+   "notes": "Maximum rate 5 mg salt/kg/h; never as a bolus. Reduce to 10 mg/kg 12-hourly if AKI persists or no improvement by 48 hours. Hypoglycaemia risk."
+  },
+  {
+   "name": "Rectal artesunate (pre-referral)",
+   "dose": "10 mg/kg single dose",
+   "notes": "Children under 6 years only, when IM injection is unavailable; refer immediately."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO guidelines for malaria, 13 August 2025", "year": 2025, "url": "https://iris.who.int/bitstream/handle/10665/382254/B09514-eng.pdf?sequence=1" },
-  { "org": "CDC", "title": "Treatment of Severe Malaria (clinical guidance)", "year": 2026, "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/treatment-of-severe-malaria-1.html" },
-  { "org": "CDC", "title": "Malaria in the United States: Treatment Tables", "year": 2026, "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html" },
-  { "org": "CDC", "title": "Malaria, CDC Yellow Book 2026", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/malaria.html" }
+  {
+   "org": "WHO",
+   "title": "WHO guidelines for malaria, 13 August 2025",
+   "year": 2025,
+   "url": "https://iris.who.int/bitstream/handle/10665/382254/B09514-eng.pdf?sequence=1"
+  },
+  {
+   "org": "CDC",
+   "title": "Treatment of Severe Malaria (clinical guidance)",
+   "year": 2026,
+   "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/treatment-of-severe-malaria-1.html"
+  },
+  {
+   "org": "CDC",
+   "title": "Malaria in the United States: Treatment Tables",
+   "year": 2026,
+   "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html"
+  },
+  {
+   "org": "CDC",
+   "title": "Malaria, CDC Yellow Book 2026",
+   "year": 2025,
+   "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/malaria.html"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "malaria-international-pathway",
+   "title": "Malaria: uncomplicated and severe (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect malaria in any fever (or recent fever) with residence in or travel to an endemic area; ask about antimalarials taken in the previous 1 to 2 months. Confirm every suspected case by microscopy or RDT before treating.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "IV or IM artesunate 2.4 mg/kg per dose (3 mg/kg per dose in children under 20 kg) at 0, 12 and 24 hours, then once daily, for all ages and in all trimesters of pregnancy. Give parenteral treatment for at least 24 hours and until oral",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Severe falciparum malaria (WHO), with asexual parasitaemia and no other cause: GCS below 11 (Blantyre below 3 in children), prostration, more than 2 convulsions in 24 hours, acidosis (base deficit above 8 mEq/L, bicarbonate below 15 mmol/L"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Blood stage: chloroquine (25 mg base/kg over 3 days: 10, 10 and 5 mg/kg) where chloroquine-susceptible, or an ACT; use an ACT where chloroquine resistance exists and for mixed or uncertain species. P. malariae and P. knowlesi are treated"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Glucose at least 4-hourly, especially if unconscious. Treat below 40 mg/dL (2.2 mmol/L), or below 54 mg/dL (3 mmol/L) in children under 5, then maintain with glucose-containing infusion. Hypoglycaemia recurs with quinine and in pregnancy."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for malaria: uncomplicated and severe (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malaria-international-summary-matrix",
+   "title": "Malaria: uncomplicated and severe (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect malaria in any fever (or recent fever) with residence in or travel to an endemic area; ask about antimalarials taken in the",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "IV or IM artesunate 2.4 mg/kg per dose (3 mg/kg per dose in children under 20 kg) at 0, 12 and 24 hours, then once daily, for all ages and",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Artesunate injection: 2.4 mg/kg IV or IM at 0, 12 and 24 hours, then once daily; 3 mg/kg per dose in children under 20 kg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating without a parasitological test, or dismissing fever in a traveller because prophylaxis was taken.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for malaria: uncomplicated and severe (who)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malaria-international-diagram",
+   "title": "Malaria: uncomplicated and severe (WHO): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

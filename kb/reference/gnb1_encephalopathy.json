@@ -1,80 +1,175 @@
 {
-  "id": "gnb1_encephalopathy",
-  "name": "GNB1 encephalopathy",
-  "aliases": [
-    "GNB1",
-    "GNB1-related neurodevelopmental disorder",
-    "G-protein beta1 encephalopathy",
-    "MRD42"
+ "id": "gnb1_encephalopathy",
+ "name": "GNB1 encephalopathy",
+ "aliases": [
+  "GNB1",
+  "GNB1-related neurodevelopmental disorder",
+  "G-protein beta1 encephalopathy",
+  "MRD42"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Epileptology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / ILAE",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by usually de novo variants in GNB1, which encodes the beta1 subunit of heterotrimeric G-proteins that relay signals from G-protein-coupled receptors to downstream effectors including ion channels",
+   "Core features are developmental delay and intellectual disability with hypotonia, and epilepsy occurs in a substantial subset",
+   "Seizures, when present, are variable in type, including focal, generalised, and infantile spasms, and range from readily controlled to drug-resistant",
+   "A movement disorder can occur, with dystonia or other involuntary movements, overlapping the broader G-protein-related phenotypes",
+   "Additional features may include feeding difficulties, growth problems, visual impairment, and, in some, a predisposition to certain haematological abnormalities",
+   "Because the beta subunit modulates effectors such as G-protein-gated potassium channels, disease reflects disturbed signalling rather than a single channel defect, and antiseizure therapy is broad-spectrum and empirical",
+   "GNB1 shares mechanistic ground with GNAO1 as a heterotrimeric G-protein subunit disorder, though the phenotypes differ"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Epileptology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / ILAE",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by usually de novo variants in GNB1, which encodes the beta1 subunit of heterotrimeric G-proteins that relay signals from G-protein-coupled receptors to downstream effectors including ion channels",
-      "Core features are developmental delay and intellectual disability with hypotonia, and epilepsy occurs in a substantial subset",
-      "Seizures, when present, are variable in type, including focal, generalised, and infantile spasms, and range from readily controlled to drug-resistant",
-      "A movement disorder can occur, with dystonia or other involuntary movements, overlapping the broader G-protein-related phenotypes",
-      "Additional features may include feeding difficulties, growth problems, visual impairment, and, in some, a predisposition to certain haematological abnormalities",
-      "Because the beta subunit modulates effectors such as G-protein-gated potassium channels, disease reflects disturbed signalling rather than a single channel defect, and antiseizure therapy is broad-spectrum and empirical",
-      "GNB1 shares mechanistic ground with GNAO1 as a heterotrimeric G-protein subunit disorder, though the phenotypes differ"
+  "pathophysiology": "GNB1 encodes the beta1 subunit of heterotrimeric G-proteins, which together with gamma subunits transmits signals from activated G-protein-coupled receptors to effectors including adenylate cyclase, phospholipase C, and G-protein-gated inwardly rectifying potassium channels. The beta-gamma complex is essential for correct assembly and signalling of the G-protein cycle. Pathogenic variants disrupt subunit interactions and downstream signalling, perturbing neuronal excitability and neurotransmission across many circuits. This broad signalling disturbance produces the combination of intellectual disability, hypotonia, epilepsy, and movement disorder, and because the defect is upstream of multiple effectors, treatment cannot target a single channel.",
+  "additionalDifferentials": [
+   "GNAO1 encephalopathy",
+   "STXBP1 and SYNGAP1 encephalopathies",
+   "GNB5-related disorder",
+   "Other genetic causes of intellectual disability with epilepsy and movement disorder",
+   "Chromosomal and copy-number neurodevelopmental disorders",
+   "Mitochondrial and metabolic encephalopathies"
+  ],
+  "additionalInvestigations": [
+   "Gene panel or whole-exome sequencing to identify the GNB1 variant",
+   "Electroencephalography where seizures are present, to characterise type",
+   "Brain magnetic resonance imaging to exclude structural causes",
+   "Developmental, cognitive, and movement-disorder assessment",
+   "Feeding, growth, and visual evaluation",
+   "Haematological review if blood-count abnormalities are noted"
+  ],
+  "redFlags": [
+   "Infantile spasms or drug-resistant seizures with developmental regression",
+   "Status epilepticus",
+   "Escalating movement disorder impairing function",
+   "Significant feeding failure or unexplained haematological abnormality"
+  ],
+  "prognosis": "Most affected individuals have intellectual disability of variable severity with hypotonia; seizures and movement disorder, when present, add to the burden, and cognitive outcome is generally guarded though heterogeneous.",
+  "pitfalls": [
+   "Excluding the diagnosis because it is a signalling protein rather than an ion channel",
+   "Overlooking the associated movement disorder or haematological features",
+   "Conflating the phenotype with GNAO1 despite differing clinical patterns",
+   "Expecting a channel-specific therapy to be available"
+  ],
+  "references": [
+   "GeneReviews and OMIM resources on GNB1-related neurodevelopmental disorder",
+   "ILAE resources on genetic developmental and epileptic encephalopathies"
+  ],
+  "crossLinks": [
+   "gnao1_encephalopathy"
+  ],
+  "management": [
+   "Treat seizures with broad-spectrum antiseizure medication chosen empirically, as the defect lies upstream of multiple effectors rather than a single channel",
+   "Manage dystonia and other involuntary movements with movement-disorder pharmacotherapy",
+   "Provide developmental and rehabilitative support with physiotherapy, occupational therapy and speech and language therapy",
+   "Address feeding difficulties and poor growth with nutritional support or gastrostomy, and manage visual impairment",
+   "Monitor for and treat associated haematological abnormalities",
+   "Coordinate multidisciplinary neurology, epileptology and developmental paediatrics, and offer genetic counselling given usually de novo variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gnb1_encephalopathy-pathway",
+   "title": "GNB1 encephalopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by usually de novo variants in GNB1, which encodes the beta1 subunit of heterotrimeric G-proteins that relay signals from G-protein-coupled receptors to downstream effectors including ion channels",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Infantile spasms or drug-resistant seizures with developmental regression",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Gene panel or whole-exome sequencing to identify the GNB1 variant, Electroencephalography where seizures are present, to characterise type, Brain magnetic resonance imaging to exclude structural causes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat seizures with broad-spectrum antiseizure medication chosen empirically, as the defect lies upstream of multiple effectors rather than a single channel"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis because it is a signalling protein rather than an ion channel"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gnb1 encephalopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gnb1_encephalopathy-matrix",
+   "title": "GNB1 encephalopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by usually de novo variants in GNB1, which encodes the beta1 subunit of heterotrimeric G-proteins that relay signals from",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "GNB1 encodes the beta1 subunit of heterotrimeric G-proteins, which together with gamma subunits transmits signals from activated G-protein-coupled receptors to effectors including adenylate cyclase, phospholipase C, and G-protein-gated inwardly rectifying potassium channels. The beta-gamma complex is essential for correct assembly and signalling of the G-protein cycle. Pathogenic variants disrupt subunit interactions and downstream signalling, perturbing neuronal excitability and neurotransmission across many circuits. This broad signalling disturbance produces the combination of intellectual disability, hypotonia, epilepsy, and movement disorder, and because the defect is upstream of multiple effectors, treatment cannot target a single channel.",
-    "additionalDifferentials": [
-      "GNAO1 encephalopathy",
-      "STXBP1 and SYNGAP1 encephalopathies",
-      "GNB5-related disorder",
-      "Other genetic causes of intellectual disability with epilepsy and movement disorder",
-      "Chromosomal and copy-number neurodevelopmental disorders",
-      "Mitochondrial and metabolic encephalopathies"
+    [
+     "Key Investigations",
+     "Gene panel or whole-exome sequencing to identify the GNB1 variant, Electroencephalography where seizures are present, to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Gene panel or whole-exome sequencing to identify the GNB1 variant",
-      "Electroencephalography where seizures are present, to characterise type",
-      "Brain magnetic resonance imaging to exclude structural causes",
-      "Developmental, cognitive, and movement-disorder assessment",
-      "Feeding, growth, and visual evaluation",
-      "Haematological review if blood-count abnormalities are noted"
+    [
+     "Primary Differentials",
+     "GNAO1 encephalopathy, STXBP1 and SYNGAP1 encephalopathies, GNB5-related disorder",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Infantile spasms or drug-resistant seizures with developmental regression",
-      "Status epilepticus",
-      "Escalating movement disorder impairing function",
-      "Significant feeding failure or unexplained haematological abnormality"
+    [
+     "Management Strategy",
+     "Treat seizures with broad-spectrum antiseizure medication chosen empirically, as the defect lies upstream of multiple effectors",
+     "Core treatment modality"
     ],
-    "prognosis": "Most affected individuals have intellectual disability of variable severity with hypotonia; seizures and movement disorder, when present, add to the burden, and cognitive outcome is generally guarded though heterogeneous.",
-    "pitfalls": [
-      "Excluding the diagnosis because it is a signalling protein rather than an ion channel",
-      "Overlooking the associated movement disorder or haematological features",
-      "Conflating the phenotype with GNAO1 despite differing clinical patterns",
-      "Expecting a channel-specific therapy to be available"
-    ],
-    "references": [
-      "GeneReviews and OMIM resources on GNB1-related neurodevelopmental disorder",
-      "ILAE resources on genetic developmental and epileptic encephalopathies"
-    ],
-    "crossLinks": [
-      "gnao1_encephalopathy"
-    ],
-    "management": [
-      "Treat seizures with broad-spectrum antiseizure medication chosen empirically, as the defect lies upstream of multiple effectors rather than a single channel",
-      "Manage dystonia and other involuntary movements with movement-disorder pharmacotherapy",
-      "Provide developmental and rehabilitative support with physiotherapy, occupational therapy and speech and language therapy",
-      "Address feeding difficulties and poor growth with nutritional support or gastrostomy, and manage visual impairment",
-      "Monitor for and treat associated haematological abnormalities",
-      "Coordinate multidisciplinary neurology, epileptology and developmental paediatrics, and offer genetic counselling given usually de novo variants"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis because it is a signalling protein rather than an ion channel",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gnb1 encephalopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gnb1-encephalopathy-diagram",
+   "title": "GNB1 encephalopathy: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU, prehospital",
- "aliases": ["cardiac arrest", "ACLS", "ALS", "CPR", "code blue", "VF", "pulseless VT", "PEA", "asystole", "cardiopulmonary resuscitation", "4 Hs and 4 Ts", "defibrillation"],
+ "aliases": [
+  "cardiac arrest",
+  "ACLS",
+  "ALS",
+  "CPR",
+  "code blue",
+  "VF",
+  "pulseless VT",
+  "PEA",
+  "asystole",
+  "cardiopulmonary resuscitation",
+  "4 Hs and 4 Ts",
+  "defibrillation"
+ ],
  "summary": "High-quality CPR with minimal interruptions, early defibrillation for VF/pVT, adrenaline 1 mg every 3 to 5 minutes (as soon as possible for non-shockable rhythms, after failed initial shocks for shockable rhythms), amiodarone or lidocaine for refractory VF/pVT, and an active search for reversible causes.",
  "sections": [
   {
@@ -101,19 +114,156 @@
   }
  ],
  "drugs": [
-  { "name": "Adrenaline (epinephrine)", "dose": "1 mg IV or IO every 3 to 5 minutes (1 mL of 1 mg/mL or 10 mL of 0.1 mg/mL), followed by a 20 mL saline flush", "notes": "Non-shockable: as soon as IV or IO access is obtained. Shockable: after the 3rd shock (ERC/RCUK) or after the 2nd shock (AHA)." },
-  { "name": "Amiodarone", "dose": "300 mg IV or IO bolus after the 3rd shock; further 150 mg after the 5th shock", "notes": "Refractory or recurrent VF/pVT. May be diluted to 20 mL with 5% glucose." },
-  { "name": "Lidocaine (lignocaine)", "dose": "AHA: 1 to 1.5 mg/kg IV or IO, then 0.5 to 0.75 mg/kg. ERC: 100 mg IV, further 50 mg after the 5th shock", "notes": "Alternative when amiodarone is unavailable or by local policy." },
-  { "name": "Calcium chloride 10%", "dose": "10 mL IV by rapid bolus (6.8 mmol calcium)", "notes": "Hyperkalaemia, hypocalcaemia, calcium channel blocker or magnesium toxicity only. Not routine. Do not mix with bicarbonate: separate line or flush between." },
-  { "name": "Soluble (regular) insulin with glucose", "dose": "Insulin 10 units IV with glucose 25 g (50 mL of 50% glucose) IV by rapid injection", "notes": "Hyperkalaemic arrest (ERC). Monitor blood glucose closely for hypoglycaemia." },
-  { "name": "Sodium bicarbonate 8.4%", "dose": "50 mmol (50 mL) IV", "notes": "Hyperkalaemic arrest with severe acidosis or renal failure (ERC), tricyclic or other sodium channel blocker toxicity. Not routine." },
-  { "name": "Magnesium sulfate", "dose": "1 to 2 g IV (4 to 8 mmol)", "notes": "Torsades de pointes or suspected hypomagnesaemia." }
+  {
+   "name": "Adrenaline (epinephrine)",
+   "dose": "1 mg IV or IO every 3 to 5 minutes (1 mL of 1 mg/mL or 10 mL of 0.1 mg/mL), followed by a 20 mL saline flush",
+   "notes": "Non-shockable: as soon as IV or IO access is obtained. Shockable: after the 3rd shock (ERC/RCUK) or after the 2nd shock (AHA)."
+  },
+  {
+   "name": "Amiodarone",
+   "dose": "300 mg IV or IO bolus after the 3rd shock; further 150 mg after the 5th shock",
+   "notes": "Refractory or recurrent VF/pVT. May be diluted to 20 mL with 5% glucose."
+  },
+  {
+   "name": "Lidocaine (lignocaine)",
+   "dose": "AHA: 1 to 1.5 mg/kg IV or IO, then 0.5 to 0.75 mg/kg. ERC: 100 mg IV, further 50 mg after the 5th shock",
+   "notes": "Alternative when amiodarone is unavailable or by local policy."
+  },
+  {
+   "name": "Calcium chloride 10%",
+   "dose": "10 mL IV by rapid bolus (6.8 mmol calcium)",
+   "notes": "Hyperkalaemia, hypocalcaemia, calcium channel blocker or magnesium toxicity only. Not routine. Do not mix with bicarbonate: separate line or flush between."
+  },
+  {
+   "name": "Soluble (regular) insulin with glucose",
+   "dose": "Insulin 10 units IV with glucose 25 g (50 mL of 50% glucose) IV by rapid injection",
+   "notes": "Hyperkalaemic arrest (ERC). Monitor blood glucose closely for hypoglycaemia."
+  },
+  {
+   "name": "Sodium bicarbonate 8.4%",
+   "dose": "50 mmol (50 mL) IV",
+   "notes": "Hyperkalaemic arrest with severe acidosis or renal failure (ERC), tricyclic or other sodium channel blocker toxicity. Not routine."
+  },
+  {
+   "name": "Magnesium sulfate",
+   "dose": "1 to 2 g IV (4 to 8 mmol)",
+   "notes": "Torsades de pointes or suspected hypomagnesaemia."
+  }
  ],
  "sources": [
-  { "org": "American Heart Association", "title": "Part 9: Adult Advanced Life Support. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" },
-  { "org": "European Resuscitation Council", "title": "European Resuscitation Council Guidelines 2025 Adult Advanced Life Support", "year": 2025, "url": "https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext" },
-  { "org": "Resuscitation Council UK", "title": "2025 Adult advanced life support guidelines", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines" },
-  { "org": "Resuscitation Council UK", "title": "2025 Special circumstances guidelines", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines" }
+  {
+   "org": "American Heart Association",
+   "title": "Part 9: Adult Advanced Life Support. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care",
+   "year": 2025,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376"
+  },
+  {
+   "org": "European Resuscitation Council",
+   "title": "European Resuscitation Council Guidelines 2025 Adult Advanced Life Support",
+   "year": 2025,
+   "url": "https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext"
+  },
+  {
+   "org": "Resuscitation Council UK",
+   "title": "2025 Adult advanced life support guidelines",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+  },
+  {
+   "org": "Resuscitation Council UK",
+   "title": "2025 Special circumstances guidelines",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "adult-cardiac-arrest-pathway",
+   "title": "Adult cardiac arrest (ALS/ACLS) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Unresponsive with absent or abnormal (agonal) breathing: treat as cardiac arrest. Take no more than 10 seconds to feel for a central pulse; if in doubt, start CPR.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Compress the centre of the chest at 100 to 120/min, depth at least 5 cm (not more than 6 cm), allow full recoil; change the compressor every 2 minutes or sooner if tired.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Many in-hospital arrests have warning signs: use a track-and-trigger score (for example NEWS2) and act on deterioration early."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Hypoxia, hypovolaemia, hypo/hyperkalaemia and other metabolic causes (including hypoglycaemia and acidosis), hypothermia; thrombosis (coronary or pulmonary), tension pneumothorax, tamponade, toxins."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Waveform capnography: ETCO2 below 10 mmHg suggests poor CPR quality or poor prognosis; above 10 and ideally above 20 mmHg is associated with ROSC. An abrupt sustained rise suggests ROSC."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for adult cardiac arrest (als/acls)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adult-cardiac-arrest-summary-matrix",
+   "title": "Adult cardiac arrest (ALS/ACLS) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Unresponsive with absent or abnormal (agonal) breathing: treat as cardiac arrest. Take no more than 10 seconds to feel for a central pulse;",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Compress the centre of the chest at 100 to 120/min, depth at least 5 cm (not more than 6 cm), allow full recoil; change the compressor",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adrenaline (epinephrine): 1 mg IV or IO every 3 to 5 minutes (1 mL of 1 mg/mL or 10 mL of 0.1 mg/mL), followed by a 20 mL saline flush",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Long pauses for pulse checks, intubation or ultrasound; leaning on the chest; compressor fatigue.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for adult cardiac arrest (als/acls)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "vf-rhythm-strip",
+   "title": "Shockable rhythm: ventricular fibrillation",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/vf-ecg.svg?v=kbdx1",
+   "caption": "Schematic Lead II strip showing coarse ventricular fibrillation: a chaotic baseline of varying amplitude with no P waves, QRS complexes or T waves. Shockable: defibrillate at once with ongoing high-quality CPR.",
+   "annotations": [
+    { "label": "Chaotic baseline", "description": "Irregular undulations of varying amplitude and rate." },
+    { "label": "No QRS or T", "description": "No organised complexes at all; distinguishes VF from polymorphic VT and artefact." },
+    { "label": "Shockable", "description": "Immediate unsynchronised shock per the ALS algorithm; do not delay for drugs or airway." }
+   ]
+  }
+ ]
 }

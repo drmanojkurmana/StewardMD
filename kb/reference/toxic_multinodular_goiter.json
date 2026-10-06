@@ -1,78 +1,173 @@
 {
-  "id": "toxic_multinodular_goiter",
-  "name": "Toxic multinodular goitre",
-  "aliases": [
-    "toxic multinodular goiter",
-    "Plummer disease",
-    "toxic nodular goitre"
+ "id": "toxic_multinodular_goiter",
+ "name": "Toxic multinodular goitre",
+ "aliases": [
+  "toxic multinodular goiter",
+  "Plummer disease",
+  "toxic nodular goitre"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology / Endocrine Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A common cause of hyperthyroidism in older adults, arising in a long-standing multinodular goitre when one or more nodules become autonomously hyperfunctioning",
+   "Thyrotoxicosis is often insidious and may be 'apathetic', dominated by atrial fibrillation, weight loss, or heart failure rather than classic adrenergic features",
+   "Biochemistry shows suppressed TSH with elevated thyroid hormones, and TSH-receptor antibodies are absent because the disorder is autonomous, not autoimmune",
+   "Isotope uptake scanning demonstrates patchy uptake with multiple hot areas and suppressed internodular tissue, distinguishing it from the diffuse uptake of Graves disease",
+   "Autonomy commonly reflects accumulated activating TSH-receptor mutations within nodules developing over years of goitrous change",
+   "A large retrosternal goitre can produce compressive symptoms and positional airway narrowing, which surgery addresses better than radioactive iodine",
+   "Iodine loads from contrast media or amiodarone frequently precipitate overt thyrotoxicosis in these autonomous glands"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology / Endocrine Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A common cause of hyperthyroidism in older adults, arising in a long-standing multinodular goitre when one or more nodules become autonomously hyperfunctioning",
-      "Thyrotoxicosis is often insidious and may be 'apathetic', dominated by atrial fibrillation, weight loss, or heart failure rather than classic adrenergic features",
-      "Biochemistry shows suppressed TSH with elevated thyroid hormones, and TSH-receptor antibodies are absent because the disorder is autonomous, not autoimmune",
-      "Isotope uptake scanning demonstrates patchy uptake with multiple hot areas and suppressed internodular tissue, distinguishing it from the diffuse uptake of Graves disease",
-      "Autonomy commonly reflects accumulated activating TSH-receptor mutations within nodules developing over years of goitrous change",
-      "A large retrosternal goitre can produce compressive symptoms and positional airway narrowing, which surgery addresses better than radioactive iodine",
-      "Iodine loads from contrast media or amiodarone frequently precipitate overt thyrotoxicosis in these autonomous glands"
+  "pathophysiology": "Toxic multinodular goitre develops when a long-standing multinodular goitre acquires foci of autonomous function. Over time, subpopulations of follicular cells accumulate somatic activating mutations, particularly of the TSH receptor, so that individual nodules secrete thyroid hormone independently of TSH. As autonomous mass increases, circulating thyroid hormone rises and suppresses pituitary TSH, silencing the internodular parenchyma and producing the characteristic patchy scintigraphic pattern. Because the autonomous tissue avidly traps iodine, exposure to iodinated contrast or iodine-rich drugs such as amiodarone can abruptly increase hormone synthesis and precipitate thyrotoxicosis.",
+  "additionalDifferentials": [
+   "Graves disease",
+   "Solitary toxic adenoma",
+   "Thyroiditis with transient hyperthyroidism",
+   "Amiodarone-induced thyrotoxicosis",
+   "Non-toxic multinodular goitre",
+   "Exogenous thyrotoxicosis"
+  ],
+  "additionalInvestigations": [
+   "Serum TSH with free thyroxine and free triiodothyronine to confirm thyrotoxicosis",
+   "Radioiodine or technetium uptake scan showing patchy multifocal uptake",
+   "Neck ultrasound to characterise the nodular gland and identify any dominant or suspicious nodule",
+   "Cross-sectional imaging when retrosternal extension or compression is suspected",
+   "TSH-receptor antibodies to exclude coexisting Graves disease where uncertain",
+   "Review of iodine exposure including contrast and amiodarone"
+  ],
+  "redFlags": [
+   "New atrial fibrillation, heart failure, or thromboembolism from occult thyrotoxicosis in an older patient",
+   "Thyroid storm features such as fever, delirium, and cardiovascular collapse",
+   "Compressive airway symptoms or stridor from a large or retrosternal goitre",
+   "Severe thyrotoxicosis precipitated by iodinated contrast or amiodarone"
+  ],
+  "prognosis": "With definitive treatment by radioactive iodine or surgery the outlook is good; untreated disease, especially in the elderly, carries substantial cardiovascular and bone morbidity, and large goitres may cause progressive compression.",
+  "pitfalls": [
+   "Overlooking apathetic thyrotoxicosis presenting only as atrial fibrillation or weight loss in an older patient",
+   "Administering iodinated contrast or amiodarone without recognising the risk of precipitating thyrotoxicosis",
+   "Choosing radioactive iodine for a large compressive or retrosternal goitre better managed surgically",
+   "Assuming diffuse Graves-type uptake and missing the patchy autonomous pattern on scanning"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "WHO Classification of Endocrine and Neuroendocrine Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive treatment with radioactive iodine, or total or near-total thyroidectomy which is preferred for large, retrosternal, or compressive goitres",
+   "Render the patient euthyroid before definitive therapy with an antithyroid drug such as carbimazole",
+   "Beta-blockade to control adrenergic symptoms and to rate-control associated atrial fibrillation",
+   "Assess for anticoagulation in thyrotoxic atrial fibrillation to reduce thromboembolic risk",
+   "Avoid iodinated contrast and amiodarone, which can precipitate thyrotoxicosis",
+   "Cross-sectional imaging and airway assessment where retrosternal extension causes compression",
+   "Monitor thyroid function for resolution and for post-treatment hypothyroidism needing levothyroxine, and refer to endocrinology and endocrine surgery for definitive management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "toxic_multinodular_goiter-pathway",
+   "title": "Toxic multinodular goitre: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A common cause of hyperthyroidism in older adults, arising in a long-standing multinodular goitre when one or more nodules become autonomously hyperfunctioning",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New atrial fibrillation, heart failure, or thromboembolism from occult thyrotoxicosis in an older patient",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum TSH with free thyroxine and free triiodothyronine to confirm thyrotoxicosis, Radioiodine or technetium uptake scan showing patchy multifocal uptake, Neck ultrasound to characterise the nodular gland and identify any"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive treatment with radioactive iodine, or total or near-total thyroidectomy which is preferred for large, retrosternal, or compressive goitres"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking apathetic thyrotoxicosis presenting only as atrial fibrillation or weight loss in an older patient"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of toxic multinodular goitre."
+  }
+ ],
+ "tables": [
+  {
+   "id": "toxic_multinodular_goiter-matrix",
+   "title": "Toxic multinodular goitre: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A common cause of hyperthyroidism in older adults, arising in a long-standing multinodular goitre when one or more nodules become",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Toxic multinodular goitre develops when a long-standing multinodular goitre acquires foci of autonomous function. Over time, subpopulations of follicular cells accumulate somatic activating mutations, particularly of the TSH receptor, so that individual nodules secrete thyroid hormone independently of TSH. As autonomous mass increases, circulating thyroid hormone rises and suppresses pituitary TSH, silencing the internodular parenchyma and producing the characteristic patchy scintigraphic pattern. Because the autonomous tissue avidly traps iodine, exposure to iodinated contrast or iodine-rich drugs such as amiodarone can abruptly increase hormone synthesis and precipitate thyrotoxicosis.",
-    "additionalDifferentials": [
-      "Graves disease",
-      "Solitary toxic adenoma",
-      "Thyroiditis with transient hyperthyroidism",
-      "Amiodarone-induced thyrotoxicosis",
-      "Non-toxic multinodular goitre",
-      "Exogenous thyrotoxicosis"
+    [
+     "Key Investigations",
+     "Serum TSH with free thyroxine and free triiodothyronine to confirm thyrotoxicosis, Radioiodine or technetium uptake scan showing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum TSH with free thyroxine and free triiodothyronine to confirm thyrotoxicosis",
-      "Radioiodine or technetium uptake scan showing patchy multifocal uptake",
-      "Neck ultrasound to characterise the nodular gland and identify any dominant or suspicious nodule",
-      "Cross-sectional imaging when retrosternal extension or compression is suspected",
-      "TSH-receptor antibodies to exclude coexisting Graves disease where uncertain",
-      "Review of iodine exposure including contrast and amiodarone"
+    [
+     "Primary Differentials",
+     "Graves disease, Solitary toxic adenoma, Thyroiditis with transient hyperthyroidism",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New atrial fibrillation, heart failure, or thromboembolism from occult thyrotoxicosis in an older patient",
-      "Thyroid storm features such as fever, delirium, and cardiovascular collapse",
-      "Compressive airway symptoms or stridor from a large or retrosternal goitre",
-      "Severe thyrotoxicosis precipitated by iodinated contrast or amiodarone"
+    [
+     "Management Strategy",
+     "Definitive treatment with radioactive iodine, or total or near-total thyroidectomy which is preferred for large, retrosternal, or",
+     "Core treatment modality"
     ],
-    "prognosis": "With definitive treatment by radioactive iodine or surgery the outlook is good; untreated disease, especially in the elderly, carries substantial cardiovascular and bone morbidity, and large goitres may cause progressive compression.",
-    "pitfalls": [
-      "Overlooking apathetic thyrotoxicosis presenting only as atrial fibrillation or weight loss in an older patient",
-      "Administering iodinated contrast or amiodarone without recognising the risk of precipitating thyrotoxicosis",
-      "Choosing radioactive iodine for a large compressive or retrosternal goitre better managed surgically",
-      "Assuming diffuse Graves-type uptake and missing the patchy autonomous pattern on scanning"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "WHO Classification of Endocrine and Neuroendocrine Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive treatment with radioactive iodine, or total or near-total thyroidectomy which is preferred for large, retrosternal, or compressive goitres",
-      "Render the patient euthyroid before definitive therapy with an antithyroid drug such as carbimazole",
-      "Beta-blockade to control adrenergic symptoms and to rate-control associated atrial fibrillation",
-      "Assess for anticoagulation in thyrotoxic atrial fibrillation to reduce thromboembolic risk",
-      "Avoid iodinated contrast and amiodarone, which can precipitate thyrotoxicosis",
-      "Cross-sectional imaging and airway assessment where retrosternal extension causes compression",
-      "Monitor thyroid function for resolution and for post-treatment hypothyroidism needing levothyroxine, and refer to endocrinology and endocrine surgery for definitive management"
+    [
+     "Clinical Pitfall",
+     "Overlooking apathetic thyrotoxicosis presenting only as atrial fibrillation or weight loss in an older patient",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for toxic multinodular goitre."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "toxic-multinodular-goiter-diagram",
+   "title": "Toxic multinodular goitre: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

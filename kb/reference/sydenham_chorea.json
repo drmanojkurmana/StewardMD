@@ -1,84 +1,179 @@
 {
-  "id": "sydenham_chorea",
-  "name": "sydenham chorea",
-  "aliases": [
-    "chorea minor",
-    "rheumatic chorea",
-    "St Vitus dance"
+ "id": "sydenham_chorea",
+ "name": "sydenham chorea",
+ "aliases": [
+  "chorea minor",
+  "rheumatic chorea",
+  "St Vitus dance"
+ ],
+ "class": "non_infective",
+ "system": "nervous system",
+ "specialty": "paediatric neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Adams and Victor's Principles of Neurology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Post-streptococcal autoimmune chorea and the commonest cause of acquired chorea in childhood, typically arising 1-6 months after group A streptococcal pharyngitis.",
+   "One of the major Jones criteria for acute rheumatic fever, and may occur in isolation (pure chorea) when other manifestations have resolved.",
+   "Peaks between ages 5 and 15 with a female preponderance; onset is often subacute over days to weeks.",
+   "Clinical triad of chorea, hypotonia and emotional lability; obsessive-compulsive symptoms and attention difficulties frequently accompany the movement disorder.",
+   "Classic bedside signs include the 'milkmaid grip' (rhythmic squeezing on sustained grasp), 'darting' or serpentine tongue on protrusion, and pronator (spooning) sign with wrist flexion on arm elevation.",
+   "Chorea may be markedly asymmetrical or strictly unilateral (hemichorea) in up to a fifth of cases.",
+   "Antineuronal antibodies cross-reacting with basal ganglia epitopes are implicated; anti-streptolysin O and anti-DNase B titres may already be falling by the time chorea appears.",
+   "Secondary penicillin prophylaxis against recurrent streptococcal infection and rheumatic carditis is essential regardless of whether cardiac involvement is evident."
   ],
-  "class": "non_infective",
-  "system": "nervous system",
-  "specialty": "paediatric neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Adams and Victor's Principles of Neurology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Post-streptococcal autoimmune chorea and the commonest cause of acquired chorea in childhood, typically arising 1-6 months after group A streptococcal pharyngitis.",
-      "One of the major Jones criteria for acute rheumatic fever, and may occur in isolation (pure chorea) when other manifestations have resolved.",
-      "Peaks between ages 5 and 15 with a female preponderance; onset is often subacute over days to weeks.",
-      "Clinical triad of chorea, hypotonia and emotional lability; obsessive-compulsive symptoms and attention difficulties frequently accompany the movement disorder.",
-      "Classic bedside signs include the 'milkmaid grip' (rhythmic squeezing on sustained grasp), 'darting' or serpentine tongue on protrusion, and pronator (spooning) sign with wrist flexion on arm elevation.",
-      "Chorea may be markedly asymmetrical or strictly unilateral (hemichorea) in up to a fifth of cases.",
-      "Antineuronal antibodies cross-reacting with basal ganglia epitopes are implicated; anti-streptolysin O and anti-DNase B titres may already be falling by the time chorea appears.",
-      "Secondary penicillin prophylaxis against recurrent streptococcal infection and rheumatic carditis is essential regardless of whether cardiac involvement is evident."
+  "pathophysiology": "Sydenham chorea is an autoimmune disorder triggered by group A beta-haemolytic streptococcal infection in a genetically susceptible host. Molecular mimicry between streptococcal antigens (notably M protein and N-acetyl-beta-D-glucosamine) and neuronal epitopes generates cross-reactive antibodies that bind surface antigens on basal ganglia neurons, particularly within the caudate and putamen. Antibody binding activates calcium/calmodulin-dependent protein kinase II signalling and disturbs dopaminergic neurotransmission, producing dysfunction of the striatal indirect pathway and the disinhibited, involuntary movements characteristic of chorea. Neuroimaging and functional studies show reversible striatal inflammation and hypermetabolism, correlating with the usually self-limiting course as the immune response wanes.",
+  "additionalDifferentials": [
+   "Systemic lupus erythematosus and antiphospholipid antibody syndrome chorea",
+   "Chorea gravidarum and oral contraceptive-related chorea",
+   "Drug-induced chorea (neuroleptics, stimulants, anticonvulsants)",
+   "Benign hereditary chorea and other genetic choreas",
+   "Wilson disease",
+   "Tics and Tourette syndrome",
+   "Functional (psychogenic) movement disorder"
+  ],
+  "additionalInvestigations": [
+   "Throat swab culture and anti-streptolysin O / anti-DNase B titres",
+   "Echocardiography to detect subclinical rheumatic valvulitis",
+   "Inflammatory markers (ESR, C-reactive protein) and full blood count",
+   "Autoantibody screen (antinuclear, antiphospholipid antibodies) to exclude lupus",
+   "Serum caeruloplasmin and copper studies to exclude Wilson disease",
+   "MRI brain (often normal or showing reversible striatal signal change)",
+   "Electrocardiogram for evidence of rheumatic carditis"
+  ],
+  "redFlags": [
+   "Signs of active carditis (new murmur, cardiac failure, pericardial rub) requiring urgent cardiology assessment",
+   "Severe generalised chorea causing dehydration, exhaustion or injury (chorea paralytica)",
+   "Fever, encephalopathy or focal deficits suggesting an alternative encephalitic process",
+   "Marked psychiatric disturbance or self-harm risk from emotional lability",
+   "Recurrence of chorea suggesting inadequate streptococcal prophylaxis"
+  ],
+  "prognosis": "Most cases are self-limiting and resolve over weeks to months, though symptoms may persist up to two years and recur in a third of patients, particularly during pregnancy or with oestrogen exposure. Long-term outcome is dominated by the risk of rheumatic heart disease, making secondary antibiotic prophylaxis the key determinant of prognosis.",
+  "pitfalls": [
+   "Attributing fidgetiness or emotional change to behavioural problems and missing an evolving chorea.",
+   "Excluding rheumatic fever because pharyngitis was not recalled or streptococcal titres have already normalised.",
+   "Omitting echocardiography because a murmur is not audible, thereby missing subclinical valvulitis.",
+   "Failing to institute or continue secondary penicillin prophylaxis, risking carditis with recurrent infection.",
+   "Over-sedating with dopamine antagonists when symptoms are mild and would settle spontaneously."
+  ],
+  "references": [
+   "Adams and Victor's Principles of Neurology",
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "World Heart Federation criteria for acute rheumatic fever"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Eradicate group A streptococcus with a penicillin course and start long-term secondary antibiotic prophylaxis to prevent recurrence and rheumatic heart disease",
+   "Treat disabling chorea symptomatically with dopamine-blocking agents such as haloperidol or risperidone, or antiepileptics such as sodium valproate or carbamazepine",
+   "Reserve immunomodulation with corticosteroids, intravenous immunoglobulin or plasma exchange for severe or refractory chorea",
+   "Screen for and manage associated rheumatic carditis with echocardiography",
+   "Address accompanying obsessive-compulsive symptoms, emotional lability and attention difficulties",
+   "Provide a safe, low-stimulation environment and supportive care during the movement disorder",
+   "Monitor for relapse, including with pregnancy or oestrogen exposure, and coordinate paediatric neurology and cardiology follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sydenham_chorea-pathway",
+   "title": "sydenham chorea: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Post-streptococcal autoimmune chorea and the commonest cause of acquired chorea in childhood, typically arising 1-6 months after group A streptococcal pharyngitis.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of active carditis (new murmur, cardiac failure, pericardial rub) requiring urgent cardiology assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Throat swab culture and anti-streptolysin O / anti-DNase B titres, Echocardiography to detect subclinical rheumatic valvulitis, Inflammatory markers (ESR, C-reactive protein) and full blood count"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Eradicate group A streptococcus with a penicillin course and start long-term secondary antibiotic prophylaxis to prevent recurrence and rheumatic heart disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing fidgetiness or emotional change to behavioural problems and missing an evolving chorea."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sydenham chorea."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sydenham_chorea-matrix",
+   "title": "sydenham chorea: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Post-streptococcal autoimmune chorea and the commonest cause of acquired chorea in childhood, typically arising 1-6 months after",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sydenham chorea is an autoimmune disorder triggered by group A beta-haemolytic streptococcal infection in a genetically susceptible host. Molecular mimicry between streptococcal antigens (notably M protein and N-acetyl-beta-D-glucosamine) and neuronal epitopes generates cross-reactive antibodies that bind surface antigens on basal ganglia neurons, particularly within the caudate and putamen. Antibody binding activates calcium/calmodulin-dependent protein kinase II signalling and disturbs dopaminergic neurotransmission, producing dysfunction of the striatal indirect pathway and the disinhibited, involuntary movements characteristic of chorea. Neuroimaging and functional studies show reversible striatal inflammation and hypermetabolism, correlating with the usually self-limiting course as the immune response wanes.",
-    "additionalDifferentials": [
-      "Systemic lupus erythematosus and antiphospholipid antibody syndrome chorea",
-      "Chorea gravidarum and oral contraceptive-related chorea",
-      "Drug-induced chorea (neuroleptics, stimulants, anticonvulsants)",
-      "Benign hereditary chorea and other genetic choreas",
-      "Wilson disease",
-      "Tics and Tourette syndrome",
-      "Functional (psychogenic) movement disorder"
+    [
+     "Key Investigations",
+     "Throat swab culture and anti-streptolysin O / anti-DNase B titres, Echocardiography to detect subclinical rheumatic valvulitis,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Throat swab culture and anti-streptolysin O / anti-DNase B titres",
-      "Echocardiography to detect subclinical rheumatic valvulitis",
-      "Inflammatory markers (ESR, C-reactive protein) and full blood count",
-      "Autoantibody screen (antinuclear, antiphospholipid antibodies) to exclude lupus",
-      "Serum caeruloplasmin and copper studies to exclude Wilson disease",
-      "MRI brain (often normal or showing reversible striatal signal change)",
-      "Electrocardiogram for evidence of rheumatic carditis"
+    [
+     "Primary Differentials",
+     "Systemic lupus erythematosus and antiphospholipid antibody syndrome chorea, Chorea gravidarum and oral contraceptive-related",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of active carditis (new murmur, cardiac failure, pericardial rub) requiring urgent cardiology assessment",
-      "Severe generalised chorea causing dehydration, exhaustion or injury (chorea paralytica)",
-      "Fever, encephalopathy or focal deficits suggesting an alternative encephalitic process",
-      "Marked psychiatric disturbance or self-harm risk from emotional lability",
-      "Recurrence of chorea suggesting inadequate streptococcal prophylaxis"
+    [
+     "Management Strategy",
+     "Eradicate group A streptococcus with a penicillin course and start long-term secondary antibiotic prophylaxis to prevent",
+     "Core treatment modality"
     ],
-    "prognosis": "Most cases are self-limiting and resolve over weeks to months, though symptoms may persist up to two years and recur in a third of patients, particularly during pregnancy or with oestrogen exposure. Long-term outcome is dominated by the risk of rheumatic heart disease, making secondary antibiotic prophylaxis the key determinant of prognosis.",
-    "pitfalls": [
-      "Attributing fidgetiness or emotional change to behavioural problems and missing an evolving chorea.",
-      "Excluding rheumatic fever because pharyngitis was not recalled or streptococcal titres have already normalised.",
-      "Omitting echocardiography because a murmur is not audible, thereby missing subclinical valvulitis.",
-      "Failing to institute or continue secondary penicillin prophylaxis, risking carditis with recurrent infection.",
-      "Over-sedating with dopamine antagonists when symptoms are mild and would settle spontaneously."
-    ],
-    "references": [
-      "Adams and Victor's Principles of Neurology",
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "World Heart Federation criteria for acute rheumatic fever"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Eradicate group A streptococcus with a penicillin course and start long-term secondary antibiotic prophylaxis to prevent recurrence and rheumatic heart disease",
-      "Treat disabling chorea symptomatically with dopamine-blocking agents such as haloperidol or risperidone, or antiepileptics such as sodium valproate or carbamazepine",
-      "Reserve immunomodulation with corticosteroids, intravenous immunoglobulin or plasma exchange for severe or refractory chorea",
-      "Screen for and manage associated rheumatic carditis with echocardiography",
-      "Address accompanying obsessive-compulsive symptoms, emotional lability and attention difficulties",
-      "Provide a safe, low-stimulation environment and supportive care during the movement disorder",
-      "Monitor for relapse, including with pregnancy or oestrogen exposure, and coordinate paediatric neurology and cardiology follow-up"
+    [
+     "Clinical Pitfall",
+     "Attributing fidgetiness or emotional change to behavioural problems and missing an evolving chorea.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sydenham chorea."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sydenham-chorea-diagram",
+   "title": "sydenham chorea: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

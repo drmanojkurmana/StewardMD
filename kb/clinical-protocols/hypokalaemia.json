@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["hypokalemia", "low potassium", "low K", "KCl", "potassium chloride infusion", "hypokalaemic paralysis", "periodic paralysis", "potassium replacement"],
+ "aliases": [
+  "hypokalemia",
+  "low potassium",
+  "low K",
+  "KCl",
+  "potassium chloride infusion",
+  "hypokalaemic paralysis",
+  "periodic paralysis",
+  "potassium replacement"
+ ],
  "summary": "Grade severity, check magnesium, replace orally when possible and give IV potassium chloride for severe, symptomatic or ECG-affected cases at no more than 10 mmol/h and 40 mmol/L peripherally, while treating the cause.",
  "sections": [
   {
@@ -83,13 +92,133 @@
   }
  ],
  "drugs": [
-  { "name": "Potassium chloride IV", "dose": "20 to 40 mmol in 1 L 0.9% saline; 40 mmol over 6 hours if below 2.5 mmol/L", "notes": "Max 40 mmol/L peripherally; max 10 mmol/h routinely (20 mmol/h in emergencies with ECG monitoring); max 2 to 3 mmol/kg/day." },
-  { "name": "Potassium chloride oral", "dose": "Mild: 24 mmol two to three times daily. Moderate: 24 to 36 mmol three to four times daily", "notes": "Take with food; recheck within 1 to 3 days." },
-  { "name": "Magnesium sulphate IV", "dose": "If magnesium is low: see Hypomagnesaemia protocol", "notes": "Correct magnesium alongside potassium." }
+  {
+   "name": "Potassium chloride IV",
+   "dose": "20 to 40 mmol in 1 L 0.9% saline; 40 mmol over 6 hours if below 2.5 mmol/L",
+   "notes": "Max 40 mmol/L peripherally; max 10 mmol/h routinely (20 mmol/h in emergencies with ECG monitoring); max 2 to 3 mmol/kg/day."
+  },
+  {
+   "name": "Potassium chloride oral",
+   "dose": "Mild: 24 mmol two to three times daily. Moderate: 24 to 36 mmol three to four times daily",
+   "notes": "Take with food; recheck within 1 to 3 days."
+  },
+  {
+   "name": "Magnesium sulphate IV",
+   "dose": "If magnesium is low: see Hypomagnesaemia protocol",
+   "notes": "Correct magnesium alongside potassium."
+  }
  ],
  "sources": [
-  { "org": "NHS Specialist Pharmacy Service", "title": "Treating acute hypokalaemia in adults", "year": 2024, "url": "https://sps.nhs.uk/articles/hypokalaemia/" },
-  { "org": "Royal Cornwall Hospitals NHS Trust", "title": "Management of Hypokalaemia in Adults Clinical Guideline V4.0", "year": 2025, "url": "https://doclibrary-rcht.cornwall.nhs.uk/DocumentsLibrary/RoyalCornwallHospitalsTrust/Clinical/Pharmacy/ManagementOfHypokalaemiaInAdultsClinicalGuideline.pdf" }
+  {
+   "org": "NHS Specialist Pharmacy Service",
+   "title": "Treating acute hypokalaemia in adults",
+   "year": 2024,
+   "url": "https://sps.nhs.uk/articles/hypokalaemia/"
+  },
+  {
+   "org": "Royal Cornwall Hospitals NHS Trust",
+   "title": "Management of Hypokalaemia in Adults Clinical Guideline V4.0",
+   "year": 2025,
+   "url": "https://doclibrary-rcht.cornwall.nhs.uk/DocumentsLibrary/RoyalCornwallHospitalsTrust/Clinical/Pharmacy/ManagementOfHypokalaemiaInAdultsClinicalGuideline.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypokalaemia-pathway",
+   "title": "Hypokalaemia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Severity: mild 3.0 to 3.4 mmol/L, moderate 2.5 to 2.9 mmol/L, severe below 2.5 mmol/L.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Check magnesium, phosphate, creatinine, glucose, bicarbonate and a 12-lead ECG. Hypokalaemia is hard to correct until hypomagnesaemia is corrected.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "ECG: flat or inverted T waves, ST depression, prominent U waves. Arrhythmia risk is higher with ischaemic heart disease, heart failure, LVH and digoxin."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use premixed potassium chloride bags where possible (20 to 40 mmol/L in 0.9% saline). Avoid glucose-containing diluents initially because glucose lowers potassium further."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Recheck potassium about 6 hours after each infusion for severe hypokalaemia, and within 24 hours for milder cases on IV therapy."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypokalaemia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypokalaemia-summary-matrix",
+   "title": "Hypokalaemia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severity: mild 3.0 to 3.4 mmol/L, moderate 2.5 to 2.9 mmol/L, severe below 2.5 mmol/L.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Check magnesium, phosphate, creatinine, glucose, bicarbonate and a 12-lead ECG. Hypokalaemia is hard to correct until hypomagnesaemia is",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Potassium chloride IV: 20 to 40 mmol in 1 L 0.9% saline; 40 mmol over 6 hours if below 2.5 mmol/L",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Not checking or correcting magnesium, so potassium stays low.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypokalaemia (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hypokalaemia-diagram",
+   "title": "Hypokalaemia (adult): Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

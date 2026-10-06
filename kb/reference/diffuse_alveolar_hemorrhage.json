@@ -1,80 +1,175 @@
 {
-  "id": "diffuse_alveolar_hemorrhage",
-  "name": "Diffuse alveolar haemorrhage",
-  "aliases": [
-    "DAH",
-    "alveolar haemorrhage syndrome",
-    "diffuse alveolar haemorrhage",
-    "diffuse pulmonary haemorrhage"
+ "id": "diffuse_alveolar_hemorrhage",
+ "name": "Diffuse alveolar haemorrhage",
+ "aliases": [
+  "DAH",
+  "alveolar haemorrhage syndrome",
+  "diffuse alveolar haemorrhage",
+  "diffuse pulmonary haemorrhage"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Murray & Nadel's Textbook of Respiratory Medicine / Fishman's Pulmonary Diseases and Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A clinical-pathological syndrome, not a single disease, presenting with breathlessness, cough, and diffuse alveolar infiltrates, often with hypoxaemia",
+   "Haemoptysis may be strikingly absent in up to a third of cases, so its absence does not exclude the diagnosis",
+   "A falling haematocrit together with new diffuse infiltrates should raise suspicion of alveolar haemorrhage",
+   "The diagnostic hallmark on bronchoalveolar lavage is progressively bloodier fluid on sequential aliquots, and later haemosiderin-laden macrophages",
+   "Mechanistically it falls into three groups: pulmonary capillaritis (pauci-immune or immune), bland haemorrhage without inflammation, and haemorrhage associated with diffuse alveolar damage",
+   "Capillaritis is commonly due to ANCA-associated vasculitis or anti-GBM (Goodpasture) disease and is frequently accompanied by a pulmonary-renal syndrome",
+   "The diffusing capacity for carbon monoxide is characteristically raised acutely because intra-alveolar blood binds inhaled carbon monoxide",
+   "Immunosuppression is the mainstay for immune capillaritis, alongside supportive respiratory care and treatment of any underlying cause"
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Murray & Nadel's Textbook of Respiratory Medicine / Fishman's Pulmonary Diseases and Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A clinical-pathological syndrome, not a single disease, presenting with breathlessness, cough, and diffuse alveolar infiltrates, often with hypoxaemia",
-      "Haemoptysis may be strikingly absent in up to a third of cases, so its absence does not exclude the diagnosis",
-      "A falling haematocrit together with new diffuse infiltrates should raise suspicion of alveolar haemorrhage",
-      "The diagnostic hallmark on bronchoalveolar lavage is progressively bloodier fluid on sequential aliquots, and later haemosiderin-laden macrophages",
-      "Mechanistically it falls into three groups: pulmonary capillaritis (pauci-immune or immune), bland haemorrhage without inflammation, and haemorrhage associated with diffuse alveolar damage",
-      "Capillaritis is commonly due to ANCA-associated vasculitis or anti-GBM (Goodpasture) disease and is frequently accompanied by a pulmonary-renal syndrome",
-      "The diffusing capacity for carbon monoxide is characteristically raised acutely because intra-alveolar blood binds inhaled carbon monoxide",
-      "Immunosuppression is the mainstay for immune capillaritis, alongside supportive respiratory care and treatment of any underlying cause"
+  "pathophysiology": "Diffuse alveolar haemorrhage results from disruption of the alveolar-capillary basement membrane, allowing red cells to flood the alveolar spaces. Three broad mechanisms are recognised. In pulmonary capillaritis there is neutrophilic inflammation and fibrinoid necrosis of the alveolar capillaries, most often from ANCA-associated vasculitis or anti-glomerular basement membrane disease. In bland haemorrhage the capillaries bleed without inflammation, as in coagulopathy, mitral stenosis, or idiopathic pulmonary haemosiderosis. In the third group, haemorrhage accompanies diffuse alveolar damage from infection, drugs, or toxins. Extravasated blood is phagocytosed by macrophages, which accumulate haemosiderin over the ensuing days.",
+  "additionalDifferentials": [
+   "Cardiogenic pulmonary oedema",
+   "Diffuse pneumonia or acute respiratory distress syndrome",
+   "Pulmonary embolism with infarction",
+   "Malignant infiltration or lymphangitic spread",
+   "Coagulopathy-related bleeding",
+   "Acute eosinophilic pneumonia"
+  ],
+  "additionalInvestigations": [
+   "Bronchoalveolar lavage with sequential aliquots showing progressively bloodier return and haemosiderin-laden macrophages",
+   "ANCA, anti-GBM antibody, antinuclear antibody, and complement testing to define an immune cause",
+   "Urinalysis and renal function to detect an associated glomerulonephritis (pulmonary-renal syndrome)",
+   "Full blood count and coagulation studies, noting a falling haematocrit",
+   "High-resolution CT showing diffuse ground-glass opacity and consolidation",
+   "Diffusing capacity for carbon monoxide, which is typically elevated during active bleeding"
+  ],
+  "redFlags": [
+   "Rapidly progressive hypoxaemic respiratory failure requiring ventilatory support",
+   "Concurrent acute kidney injury suggesting a pulmonary-renal vasculitic syndrome",
+   "Massive haemorrhage with haemodynamic compromise",
+   "Falling haematocrit with expanding infiltrates indicating ongoing bleeding"
+  ],
+  "prognosis": "Outcome depends heavily on the underlying cause and speed of treatment; immune capillaritis can respond well to prompt immunosuppression, but severe or recurrent haemorrhage, especially with renal involvement, carries significant morbidity and mortality.",
+  "pitfalls": [
+   "Excluding the diagnosis because haemoptysis is absent",
+   "Mistaking the infiltrates for pneumonia or pulmonary oedema and missing an underlying vasculitis",
+   "Failing to check renal function and urinalysis for an associated glomerulonephritis",
+   "Overlooking the diagnostic value of sequential bronchoalveolar lavage aliquots and a raised carbon monoxide transfer factor"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "Fishman's Pulmonary Diseases and Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Initiate prompt high-dose corticosteroids for suspected immune-mediated capillaritis, with additional immunosuppression such as cyclophosphamide or rituximab",
+   "Add plasma exchange for anti-GBM Goodpasture disease and severe ANCA-associated vasculitis, particularly with renal involvement",
+   "Support gas exchange with supplemental oxygen and mechanical ventilation when hypoxaemia is severe",
+   "Correct coagulopathy and treat bland-haemorrhage causes such as raised pulmonary venous pressure",
+   "Withdraw offending drugs or toxins and treat any underlying infection driving diffuse alveolar damage",
+   "Monitor haematocrit, oxygenation and infiltrates and manage in intensive care during active bleeding",
+   "Coordinate care with respiratory medicine, rheumatology and nephrology and screen for an associated glomerulonephritis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "diffuse_alveolar_hemorrhage-pathway",
+   "title": "Diffuse alveolar haemorrhage: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A clinical-pathological syndrome, not a single disease, presenting with breathlessness, cough, and diffuse alveolar infiltrates, often with hypoxaemia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive hypoxaemic respiratory failure requiring ventilatory support",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bronchoalveolar lavage with sequential aliquots showing progressively bloodier return and haemosiderin-laden macrophages, ANCA, anti-GBM antibody, antinuclear antibody, and complement testing to define an immune cause,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Initiate prompt high-dose corticosteroids for suspected immune-mediated capillaritis, with additional immunosuppression such as cyclophosphamide or rituximab"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis because haemoptysis is absent"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of diffuse alveolar haemorrhage."
+  }
+ ],
+ "tables": [
+  {
+   "id": "diffuse_alveolar_hemorrhage-matrix",
+   "title": "Diffuse alveolar haemorrhage: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A clinical-pathological syndrome, not a single disease, presenting with breathlessness, cough, and diffuse alveolar infiltrates,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Diffuse alveolar haemorrhage results from disruption of the alveolar-capillary basement membrane, allowing red cells to flood the alveolar spaces. Three broad mechanisms are recognised. In pulmonary capillaritis there is neutrophilic inflammation and fibrinoid necrosis of the alveolar capillaries, most often from ANCA-associated vasculitis or anti-glomerular basement membrane disease. In bland haemorrhage the capillaries bleed without inflammation, as in coagulopathy, mitral stenosis, or idiopathic pulmonary haemosiderosis. In the third group, haemorrhage accompanies diffuse alveolar damage from infection, drugs, or toxins. Extravasated blood is phagocytosed by macrophages, which accumulate haemosiderin over the ensuing days.",
-    "additionalDifferentials": [
-      "Cardiogenic pulmonary oedema",
-      "Diffuse pneumonia or acute respiratory distress syndrome",
-      "Pulmonary embolism with infarction",
-      "Malignant infiltration or lymphangitic spread",
-      "Coagulopathy-related bleeding",
-      "Acute eosinophilic pneumonia"
+    [
+     "Key Investigations",
+     "Bronchoalveolar lavage with sequential aliquots showing progressively bloodier return and haemosiderin-laden macrophages, ANCA,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bronchoalveolar lavage with sequential aliquots showing progressively bloodier return and haemosiderin-laden macrophages",
-      "ANCA, anti-GBM antibody, antinuclear antibody, and complement testing to define an immune cause",
-      "Urinalysis and renal function to detect an associated glomerulonephritis (pulmonary-renal syndrome)",
-      "Full blood count and coagulation studies, noting a falling haematocrit",
-      "High-resolution CT showing diffuse ground-glass opacity and consolidation",
-      "Diffusing capacity for carbon monoxide, which is typically elevated during active bleeding"
+    [
+     "Primary Differentials",
+     "Cardiogenic pulmonary oedema, Diffuse pneumonia or acute respiratory distress syndrome, Pulmonary embolism with infarction",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive hypoxaemic respiratory failure requiring ventilatory support",
-      "Concurrent acute kidney injury suggesting a pulmonary-renal vasculitic syndrome",
-      "Massive haemorrhage with haemodynamic compromise",
-      "Falling haematocrit with expanding infiltrates indicating ongoing bleeding"
+    [
+     "Management Strategy",
+     "Initiate prompt high-dose corticosteroids for suspected immune-mediated capillaritis, with additional immunosuppression such as",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends heavily on the underlying cause and speed of treatment; immune capillaritis can respond well to prompt immunosuppression, but severe or recurrent haemorrhage, especially with renal involvement, carries significant morbidity and mortality.",
-    "pitfalls": [
-      "Excluding the diagnosis because haemoptysis is absent",
-      "Mistaking the infiltrates for pneumonia or pulmonary oedema and missing an underlying vasculitis",
-      "Failing to check renal function and urinalysis for an associated glomerulonephritis",
-      "Overlooking the diagnostic value of sequential bronchoalveolar lavage aliquots and a raised carbon monoxide transfer factor"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "Fishman's Pulmonary Diseases and Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Initiate prompt high-dose corticosteroids for suspected immune-mediated capillaritis, with additional immunosuppression such as cyclophosphamide or rituximab",
-      "Add plasma exchange for anti-GBM Goodpasture disease and severe ANCA-associated vasculitis, particularly with renal involvement",
-      "Support gas exchange with supplemental oxygen and mechanical ventilation when hypoxaemia is severe",
-      "Correct coagulopathy and treat bland-haemorrhage causes such as raised pulmonary venous pressure",
-      "Withdraw offending drugs or toxins and treat any underlying infection driving diffuse alveolar damage",
-      "Monitor haematocrit, oxygenation and infiltrates and manage in intensive care during active bleeding",
-      "Coordinate care with respiratory medicine, rheumatology and nephrology and screen for an associated glomerulonephritis"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis because haemoptysis is absent",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for diffuse alveolar haemorrhage."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "diffuse-alveolar-hemorrhage-diagram",
+   "title": "Diffuse alveolar haemorrhage: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

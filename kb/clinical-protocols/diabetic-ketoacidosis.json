@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU, ward",
- "aliases": ["DKA", "ketoacidosis", "euglycaemic DKA", "euDKA", "SGLT2 inhibitor ketoacidosis", "FRIII", "fixed rate insulin infusion", "hyperglycaemic crisis"],
+ "aliases": [
+  "DKA",
+  "ketoacidosis",
+  "euglycaemic DKA",
+  "euDKA",
+  "SGLT2 inhibitor ketoacidosis",
+  "FRIII",
+  "fixed rate insulin infusion",
+  "hyperglycaemic crisis"
+ ],
  "summary": "Confirm DKA by glucose or known diabetes, ketones and acidosis; give crystalloid, check potassium before insulin, start fixed-rate IV insulin 0.1 units/kg/h, add dextrose when glucose falls below 250 mg/dL (13.9 mmol/L) and continue insulin until ketoacidosis resolves.",
  "sections": [
   {
@@ -106,19 +115,164 @@
   }
  ],
  "drugs": [
-  { "name": "0.9% sodium chloride or Ringer lactate", "dose": "500 to 1000 mL/h IV for the first 2 to 4 hours, then guided by hydration, sodium and urine output", "notes": "250 mL boluses with reassessment in older adults, heart failure and dialysis patients." },
-  { "name": "Regular (soluble) insulin, IV fixed-rate infusion", "dose": "0.1 units/kg/h IV; reduce to 0.05 units/kg/h when glucose is below 250 mg/dL (13.9 mmol/L)", "notes": "Optional 0.1 units/kg IV or IM bolus if the infusion is delayed. JBDS suggests specialist advice above 15 units/h." },
-  { "name": "Rapid-acting insulin analogue, SC (mild or moderate DKA)", "dose": "0.1 units/kg SC bolus, then 0.1 units/kg every hour or 0.2 units/kg every 2 hours", "notes": "When glucose is below 250 mg/dL: 0.05 units/kg every hour or 0.1 units/kg every 2 hours. Not for severe DKA." },
-  { "name": "Potassium chloride", "dose": "K 3.5 to 5.0 mmol/L: 20 to 30 mmol per litre of IV fluid. K below 3.5 mmol/L: 10 to 20 mmol/h IV with insulin held", "notes": "No potassium if K is above 5.0 mmol/L. Never as an IV push." },
-  { "name": "Dextrose 5% or 10%", "dose": "Run alongside saline once glucose is below 250 mg/dL (13.9 mmol/L); from the start in euglycaemic DKA", "notes": "JBDS uses 10% glucose at 125 mL/h. Target glucose 150 to 200 mg/dL until resolution." },
-  { "name": "Sodium bicarbonate 8.4%", "dose": "Only if pH below 7.0: 100 mmol (100 mL) in 400 mL sterile water, repeated every 2 hours until pH is above 7.0", "notes": "Can worsen hypokalaemia." },
-  { "name": "Potassium phosphate", "dose": "20 to 30 mmol added to replacement fluids", "notes": "Only if phosphate below 1.0 mmol/L with muscle weakness or cardiorespiratory compromise." },
-  { "name": "Basal insulin analogue (glargine)", "dose": "0.15 to 0.3 units/kg SC once daily, can start during the IV infusion", "notes": "Give at least 1 to 2 hours before stopping IV insulin." }
+  {
+   "name": "0.9% sodium chloride or Ringer lactate",
+   "dose": "500 to 1000 mL/h IV for the first 2 to 4 hours, then guided by hydration, sodium and urine output",
+   "notes": "250 mL boluses with reassessment in older adults, heart failure and dialysis patients."
+  },
+  {
+   "name": "Regular (soluble) insulin, IV fixed-rate infusion",
+   "dose": "0.1 units/kg/h IV; reduce to 0.05 units/kg/h when glucose is below 250 mg/dL (13.9 mmol/L)",
+   "notes": "Optional 0.1 units/kg IV or IM bolus if the infusion is delayed. JBDS suggests specialist advice above 15 units/h."
+  },
+  {
+   "name": "Rapid-acting insulin analogue, SC (mild or moderate DKA)",
+   "dose": "0.1 units/kg SC bolus, then 0.1 units/kg every hour or 0.2 units/kg every 2 hours",
+   "notes": "When glucose is below 250 mg/dL: 0.05 units/kg every hour or 0.1 units/kg every 2 hours. Not for severe DKA."
+  },
+  {
+   "name": "Potassium chloride",
+   "dose": "K 3.5 to 5.0 mmol/L: 20 to 30 mmol per litre of IV fluid. K below 3.5 mmol/L: 10 to 20 mmol/h IV with insulin held",
+   "notes": "No potassium if K is above 5.0 mmol/L. Never as an IV push."
+  },
+  {
+   "name": "Dextrose 5% or 10%",
+   "dose": "Run alongside saline once glucose is below 250 mg/dL (13.9 mmol/L); from the start in euglycaemic DKA",
+   "notes": "JBDS uses 10% glucose at 125 mL/h. Target glucose 150 to 200 mg/dL until resolution."
+  },
+  {
+   "name": "Sodium bicarbonate 8.4%",
+   "dose": "Only if pH below 7.0: 100 mmol (100 mL) in 400 mL sterile water, repeated every 2 hours until pH is above 7.0",
+   "notes": "Can worsen hypokalaemia."
+  },
+  {
+   "name": "Potassium phosphate",
+   "dose": "20 to 30 mmol added to replacement fluids",
+   "notes": "Only if phosphate below 1.0 mmol/L with muscle weakness or cardiorespiratory compromise."
+  },
+  {
+   "name": "Basal insulin analogue (glargine)",
+   "dose": "0.15 to 0.3 units/kg SC once daily, can start during the IV infusion",
+   "notes": "Give at least 1 to 2 hours before stopping IV insulin."
+  }
  ],
  "sources": [
-  { "org": "ADA / EASD / JBDS / AACE / DTS", "title": "Hyperglycemic crises in adults with diabetes: a consensus report", "year": 2024, "url": "https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A" },
-  { "org": "JBDS-IP", "title": "The management of diabetic ketoacidosis in adults (revised March 2023)", "year": 2023, "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_02_DKA_Guideline_with_QR_code_March_2023.pdf" },
-  { "org": "ADA", "title": "16. Diabetes care in the hospital: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690180/" }
+  {
+   "org": "ADA / EASD / JBDS / AACE / DTS",
+   "title": "Hyperglycemic crises in adults with diabetes: a consensus report",
+   "year": 2024,
+   "url": "https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A"
+  },
+  {
+   "org": "JBDS-IP",
+   "title": "The management of diabetic ketoacidosis in adults (revised March 2023)",
+   "year": 2023,
+   "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_02_DKA_Guideline_with_QR_code_March_2023.pdf"
+  },
+  {
+   "org": "ADA",
+   "title": "16. Diabetes care in the hospital: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690180/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "diabetic-ketoacidosis-pathway",
+   "title": "Diabetic ketoacidosis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Diagnosis needs all three (2024 consensus): glucose 200 mg/dL (11.1 mmol/L) or more OR known diabetes; blood beta-hydroxybutyrate (BOHB) 3.0 mmol/L or more OR urine ketones 2+ or more; venous pH below 7.3 and/or bicarbonate below 18 mmol/L.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Fluids: 0.9% saline or balanced crystalloid (Ringer lactate) at 500 to 1000 mL/h for the first 2 to 4 hours (about 1 L/h if severely hypovolaemic). Aim to replace about half the deficit in 8 to 12 hours and the rest over 24 to 48 hours.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Capillary glucose, venous blood gas (pH, bicarbonate, potassium), blood BOHB (preferred to urine ketones), sodium, urea, creatinine, phosphate, CBC, calculated osmolality."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Switch when DKA has resolved and the patient can eat and drink. Give SC basal insulin 1 to 2 hours BEFORE stopping the IV insulin infusion to prevent rebound ketoacidosis."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Capillary glucose every 1 to 2 hours. Potassium 2 hours after starting insulin, then every 4 hours. Venous pH, bicarbonate, BOHB, electrolytes, phosphate and creatinine every 2 to 4 hours until resolution."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for diabetic ketoacidosis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "diabetic-ketoacidosis-summary-matrix",
+   "title": "Diabetic ketoacidosis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Diagnosis needs all three (2024 consensus): glucose 200 mg/dL (11.1 mmol/L) or more OR known diabetes; blood beta-hydroxybutyrate (BOHB)",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Fluids: 0.9% saline or balanced crystalloid (Ringer lactate) at 500 to 1000 mL/h for the first 2 to 4 hours (about 1 L/h if severely",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Capillary glucose, venous blood gas (pH, bicarbonate, potassium), blood BOHB (preferred to urine ketones), sodium, urea, creatinine,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "0.9% sodium chloride or Ringer lactate: 500 to 1000 mL/h IV for the first 2 to 4 hours, then guided by hydration, sodium and urine output",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting insulin when potassium is below 3.5 mmol/L (risk of arrhythmia and respiratory muscle weakness).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for diabetic ketoacidosis (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "diabetic-ketoacidosis-diagram",
+   "title": "Diabetic ketoacidosis (adult): Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

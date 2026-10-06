@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Haematology and oncology ward, emergency department, ICU",
- "aliases": ["TLS", "tumor lysis syndrome", "Cairo-Bishop", "rasburicase", "hyperuricaemia", "laboratory TLS", "clinical TLS", "oncological emergency"],
+ "aliases": [
+  "TLS",
+  "tumor lysis syndrome",
+  "Cairo-Bishop",
+  "rasburicase",
+  "hyperuricaemia",
+  "laboratory TLS",
+  "clinical TLS",
+  "oncological emergency"
+ ],
  "summary": "Risk-stratify every patient before anti-cancer therapy; hydrate and give allopurinol for low or intermediate risk, rasburicase for high risk or established TLS (after excluding G6PD deficiency), monitor electrolytes closely and involve renal and ICU teams early for dialysis.",
  "sections": [
   {
@@ -93,18 +102,162 @@
   }
  ],
  "drugs": [
-  { "name": "Rasburicase", "dose": "Treatment: 0.2 mg/kg IV over 30 minutes once daily for 3 to 5 days (up to 7). High-risk prophylaxis: 3 mg IV single dose 30 to 60 minutes before therapy, repeat once if needed", "notes": "Round to 1.5 mg or 7.5 mg vials. No renal adjustment. Contraindicated in G6PD deficiency, haemolysis and methaemoglobinaemia." },
-  { "name": "Allopurinol", "dose": "300 mg orally once daily for 7 days, starting 12 to 24 hours before therapy; 100 to 200 mg once daily if CrCl below 20 mL/min", "notes": "Up to 800 mg/day in 2 to 3 divided doses if rasburicase is contraindicated. Stop while on rasburicase. Watch for rash and hypersensitivity." },
-  { "name": "Febuxostat", "dose": "120 mg orally once daily from 2 days before therapy, for 7 to 9 days", "notes": "For allopurinol intolerance. Caution if CrCl below 30 mL/min or cardiovascular disease. Avoid with azathioprine or mercaptopurine." },
-  { "name": "IV fluids (0.9% sodium chloride)", "dose": "Above 3 L/m2/day in established TLS, targeting urine output above 100 mL/m2/hour", "notes": "No added potassium or phosphate. Reassess for overload at least 4-hourly." },
-  { "name": "Calcium gluconate 10%", "dose": "Hyperkalaemia with ECG changes: 30 mL IV over 10 minutes. Symptomatic hypocalcaemia: 10 to 20 mL IV over 10 minutes", "notes": "ECG monitoring. Do not treat asymptomatic hypocalcaemia." },
-  { "name": "Soluble insulin with glucose", "dose": "10 units insulin with 25 g glucose IV", "notes": "For hyperkalaemia; monitor capillary glucose for 6 hours." }
+  {
+   "name": "Rasburicase",
+   "dose": "Treatment: 0.2 mg/kg IV over 30 minutes once daily for 3 to 5 days (up to 7). High-risk prophylaxis: 3 mg IV single dose 30 to 60 minutes before therapy, repeat once if needed",
+   "notes": "Round to 1.5 mg or 7.5 mg vials. No renal adjustment. Contraindicated in G6PD deficiency, haemolysis and methaemoglobinaemia."
+  },
+  {
+   "name": "Allopurinol",
+   "dose": "300 mg orally once daily for 7 days, starting 12 to 24 hours before therapy; 100 to 200 mg once daily if CrCl below 20 mL/min",
+   "notes": "Up to 800 mg/day in 2 to 3 divided doses if rasburicase is contraindicated. Stop while on rasburicase. Watch for rash and hypersensitivity."
+  },
+  {
+   "name": "Febuxostat",
+   "dose": "120 mg orally once daily from 2 days before therapy, for 7 to 9 days",
+   "notes": "For allopurinol intolerance. Caution if CrCl below 30 mL/min or cardiovascular disease. Avoid with azathioprine or mercaptopurine."
+  },
+  {
+   "name": "IV fluids (0.9% sodium chloride)",
+   "dose": "Above 3 L/m2/day in established TLS, targeting urine output above 100 mL/m2/hour",
+   "notes": "No added potassium or phosphate. Reassess for overload at least 4-hourly."
+  },
+  {
+   "name": "Calcium gluconate 10%",
+   "dose": "Hyperkalaemia with ECG changes: 30 mL IV over 10 minutes. Symptomatic hypocalcaemia: 10 to 20 mL IV over 10 minutes",
+   "notes": "ECG monitoring. Do not treat asymptomatic hypocalcaemia."
+  },
+  {
+   "name": "Soluble insulin with glucose",
+   "dose": "10 units insulin with 25 g glucose IV",
+   "notes": "For hyperkalaemia; monitor capillary glucose for 6 hours."
+  }
  ],
  "sources": [
-  { "org": "British Society for Haematology", "title": "Updated guidelines for the diagnosis and management of tumour lysis syndrome in adults and children with haematological malignancies: a focus on patient safety", "year": 2025, "url": "https://onlinelibrary.wiley.com/doi/10.1111/bjh.70092" },
-  { "org": "British Committee for Standards in Haematology", "title": "Guidelines for the management of tumour lysis syndrome in adults and children with haematological malignancies", "year": 2015, "url": "https://onlinelibrary.wiley.com/doi/10.1111/bjh.13403" },
-  { "org": "Oxford University Hospitals NHS Foundation Trust", "title": "Prevention and management of tumour lysis syndrome in adults (H.8, updated to BSH 2025)", "year": 2026, "url": "https://nssg.oxford-haematology.org.uk/general-haematology/clinical-care/H-8-tumour-lysis-syndrome.pdf" },
-  { "org": "NHS England", "title": "National Patient Safety Alert: harm from delayed administration of rasburicase for tumour lysis syndrome", "year": 2025, "url": "https://www.england.nhs.uk/long-read/harm-from-delayed-administration-of-rasburicase-for-tumour-lysis-syndrome-natpsa-2025-005-nhsps/" }
+  {
+   "org": "British Society for Haematology",
+   "title": "Updated guidelines for the diagnosis and management of tumour lysis syndrome in adults and children with haematological malignancies: a focus on patient safety",
+   "year": 2025,
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/bjh.70092"
+  },
+  {
+   "org": "British Committee for Standards in Haematology",
+   "title": "Guidelines for the management of tumour lysis syndrome in adults and children with haematological malignancies",
+   "year": 2015,
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/bjh.13403"
+  },
+  {
+   "org": "Oxford University Hospitals NHS Foundation Trust",
+   "title": "Prevention and management of tumour lysis syndrome in adults (H.8, updated to BSH 2025)",
+   "year": 2026,
+   "url": "https://nssg.oxford-haematology.org.uk/general-haematology/clinical-care/H-8-tumour-lysis-syndrome.pdf"
+  },
+  {
+   "org": "NHS England",
+   "title": "National Patient Safety Alert: harm from delayed administration of rasburicase for tumour lysis syndrome",
+   "year": 2025,
+   "url": "https://www.england.nhs.uk/long-read/harm-from-delayed-administration-of-rasburicase-for-tumour-lysis-syndrome-natpsa-2025-005-nhsps/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "algorithms": [
+  {
+   "id": "tls-strat-algo",
+   "title": "TLS Risk Stratification and Management Algorithm",
+   "steps": [
+    {
+     "step": "Risk Stratification Prior to Chemotherapy",
+     "action": "Stratify into Low, Intermediate, or High risk based on malignancy type (Burkitt, ALL, AML, bulky lymphoma) and baseline renal function or uric acid.",
+     "critical": true
+    },
+    {
+     "step": "Low Risk Pathway",
+     "branch": "Low Risk",
+     "action": "Vigorous oral or IV hydration (2 L/m2/day). Monitor laboratory electrolytes daily. Prophylactic allopurinol is optional."
+    },
+    {
+     "step": "Intermediate Risk Pathway",
+     "branch": "Intermediate Risk",
+     "action": "IV hydration 2 to 3 L/m2/day targeting urine output > 100 mL/m2/hour. Allopurinol 300 mg daily starting 12 to 24 hours pre-chemo. Check 8-hourly labs."
+    },
+    {
+     "step": "High Risk Prophylaxis",
+     "branch": "High Risk",
+     "action": "Aggressive IV hydration 3 L/m2/day. Check G6PD status. Single fixed-dose rasburicase 3 mg IV 30 to 60 minutes pre-chemo. Strict 4-hourly lab monitoring.",
+     "critical": true
+    },
+    {
+     "step": "Established Clinical TLS",
+     "branch": "Laboratory or Clinical TLS",
+     "action": "Full treatment rasburicase 0.2 mg/kg IV daily. Do not give allopurinol concurrently. Send rasburicase blood samples on ice. Urgent nephrology consultation for RRT if refractory."
+    }
+   ],
+   "caption": "Stepwise pathway incorporating BSH 2025 fixed-dose rasburicase protocol."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cairo-bishop-criteria",
+   "title": "Cairo-Bishop Criteria for Laboratory and Clinical TLS",
+   "headers": [
+    "Parameter",
+    "Laboratory Threshold",
+    "Clinical Significance"
+   ],
+   "rows": [
+    [
+     "Uric Acid",
+     ">= 476 micromol/L (>= 8.0 mg/dL) or 25% increase",
+     "Precipitates as urate crystals in renal tubules causing acute obstructive uropathy"
+    ],
+    [
+     "Potassium",
+     ">= 6.0 mmol/L or 25% increase",
+     "Life-threatening cardiac arrhythmias; requires immediate membrane stabilization if ECG changes"
+    ],
+    [
+     "Phosphate",
+     ">= 1.45 mmol/L (>= 4.5 mg/dL) or 25% increase",
+     "Precipitates with calcium causing severe acute nephrocalcinosis and secondary hypocalcaemia"
+    ],
+    [
+     "Calcium",
+     "<= 1.75 mmol/L (<= 7.0 mg/dL) or 25% decrease",
+     "Tetany, seizures, QT prolongation; never treat asymptomatic hypocalcaemia due to Ca-phosphate precipitation risk"
+    ],
+    [
+     "Clinical TLS",
+     "Lab TLS plus at least one clinical complication",
+     "Defined by creatinine >= 1.5x baseline, cardiac arrhythmia, seizure, or sudden death"
+    ]
+   ],
+   "caption": "Diagnosis requires 2 or more laboratory criteria within 3 to 7 days of treatment."
+  }
+ ],
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "diagrams": [
+  {
+   "id": "tumour-lysis-syndrome-diagram",
+   "title": "Tumour lysis syndrome (adult): Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

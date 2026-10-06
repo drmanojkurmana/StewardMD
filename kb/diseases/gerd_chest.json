@@ -175,5 +175,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3a5625ea"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "gerd_chest-dx-algo",
+      "title": "GERD / non-cardiac chest pain: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Esophageal pain shares a nerve plexus with the heart and esophageal afferents discriminate stimuli poorly, so distention or acid (chemostimulation) is often perceived as pressure-type mid-chest pain radiating to back, arms, or jaw -",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Dysphagia (concerning for oesophageal obstruction - stricture, EoE, or cancer)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: 12-lead ECG within 10 min of presentation, with serial ECGs every 30-60 min when ACS suspected; note resting ECG sensitivity for ischaemia is poor (as low as 20%), High-sensitivity cardiac troponin at presentation and"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: GERD spans a spectrum of oesophageal injury: nonerosive reflux disease, erosive esophagitis (graded by antisecretory-responsive severity), peptic stricture, Barrett's metaplasia, and adenocarcinoma. Barrett's dysplasia"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Attributing chest pain to GERD before excluding a cardiac cause - coronary artery disease must be given early consideration because of its potentially lethal implications, and oesophageal pain closely mimics angina."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for gerd / non-cardiac chest pain."
+    }
+  ],
+  "tables": [
+    {
+      "id": "gerd_chest-matrix",
+      "title": "GERD / non-cardiac chest pain: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Esophageal pain shares a nerve plexus with the heart and esophageal afferents discriminate stimuli poorly, so distention or acid",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG within 10 min of presentation, with serial ECGs every 30-60 min when ACS suspected; note resting ECG sensitivity for",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute coronary syndrome / myocardial ischaemia (must be excluded first given lethal implications), Distal (diffuse) esophageal",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Dysphagia (concerning for oesophageal obstruction - stricture, EoE, or cancer)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chest pain to GERD before excluding a cardiac cause - coronary artery disease must be given early consideration",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for gerd / non-cardiac chest pain."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "gerd-chest-diagram",
+      "title": "GERD / non-cardiac chest pain: Abdominal & Hepatobiliary Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+      "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+      "annotations": [
+        {
+          "label": "Hepatobiliary Axis",
+          "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+        },
+        {
+          "label": "Pancreaticoduodenal",
+          "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+        },
+        {
+          "label": "Enteric Loops",
+          "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

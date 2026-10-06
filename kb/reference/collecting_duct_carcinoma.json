@@ -1,83 +1,178 @@
 {
-  "id": "collecting_duct_carcinoma",
-  "name": "Collecting duct carcinoma",
-  "aliases": [
-    "Bellini duct carcinoma",
-    "carcinoma of the collecting ducts of Bellini"
+ "id": "collecting_duct_carcinoma",
+ "name": "Collecting duct carcinoma",
+ "aliases": [
+  "Bellini duct carcinoma",
+  "carcinoma of the collecting ducts of Bellini"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary / Kidney",
+ "specialty": "Uro-oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Uro-oncology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare, aggressive renal carcinoma arising from the collecting ducts of Bellini in the renal medulla",
+   "Tends to present at a younger age than clear cell carcinoma, often with advanced disease",
+   "Common presenting features include haematuria, flank pain, an abdominal mass and constitutional symptoms",
+   "Imaging typically shows a centrally located, infiltrative medullary mass rather than a well-defined cortical tumour",
+   "Histology shows irregular tubular and papillary structures with a marked desmoplastic stromal reaction",
+   "It behaves more like an aggressive urothelial cancer than a typical renal cell carcinoma",
+   "Early lymph node and distant metastases are frequent at diagnosis"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary / Kidney",
-  "specialty": "Uro-oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Uro-oncology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare, aggressive renal carcinoma arising from the collecting ducts of Bellini in the renal medulla",
-      "Tends to present at a younger age than clear cell carcinoma, often with advanced disease",
-      "Common presenting features include haematuria, flank pain, an abdominal mass and constitutional symptoms",
-      "Imaging typically shows a centrally located, infiltrative medullary mass rather than a well-defined cortical tumour",
-      "Histology shows irregular tubular and papillary structures with a marked desmoplastic stromal reaction",
-      "It behaves more like an aggressive urothelial cancer than a typical renal cell carcinoma",
-      "Early lymph node and distant metastases are frequent at diagnosis"
+  "pathophysiology": "Collecting duct carcinoma originates from the principal cells of the distal collecting ducts within the medulla. It is a high-grade tumour with infiltrative growth, extensive desmoplasia and early vascular and lymphatic invasion. Its central medullary origin explains the infiltrative imaging pattern and the tendency to involve the renal pelvis and regional nodes. Its biology overlaps with high-grade urothelial carcinoma, and it is distinguished from renal medullary carcinoma by retained SMARCB1 expression and the absence of an obligatory link to sickling haemoglobinopathies.",
+  "additionalDifferentials": [
+   "Renal medullary carcinoma",
+   "Upper tract urothelial carcinoma",
+   "High-grade papillary renal cell carcinoma",
+   "Clear cell renal cell carcinoma with infiltrative growth",
+   "Metastatic carcinoma involving the kidney",
+   "Renal pelvis inflammatory or infective mass"
+  ],
+  "additionalInvestigations": [
+   "Contrast-enhanced CT of the abdomen and pelvis to define the infiltrative mass and nodal spread",
+   "Chest imaging for pulmonary metastases",
+   "Tissue diagnosis with immunohistochemistry to distinguish from urothelial and medullary carcinoma",
+   "Urine cytology and evaluation of the upper urinary tract",
+   "Baseline renal function and staging investigations"
+  ],
+  "redFlags": [
+   "Infiltrative central renal mass with haematuria and systemic symptoms",
+   "Bulky regional lymphadenopathy at presentation",
+   "Evidence of distant metastatic disease",
+   "Rapid clinical deterioration"
+  ],
+  "prognosis": "The prognosis is generally poor, with many patients presenting at an advanced stage and limited response to systemic therapy; complete surgical resection of localised disease offers the best chance of prolonged survival.",
+  "pitfalls": [
+   "Mistaking an infiltrative medullary tumour for upper tract urothelial carcinoma or vice versa",
+   "Attributing a central renal mass to infection and delaying oncological work-up",
+   "Assuming standard clear cell targeted therapy will be effective",
+   "Underestimating the likelihood of occult metastatic disease"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology (standard reference)",
+   "WHO Classification of Urinary and Male Genital Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Radical nephrectomy with regional lymph node dissection is the standard curative approach for localised, resectable disease",
+   "Complete surgical resection of localised disease is the single most important determinant of prolonged survival",
+   "Thorough preoperative staging with cross sectional abdominal and pelvic imaging plus chest imaging is important before surgery given the tendency for early nodal and distant spread",
+   "No established histology specific role for routine adjuvant systemic therapy exists in CDC, adjuvant kinase inhibitor and other adjuvant approaches in renal cell carcinoma broadly have shown inconsistent or no survival benefit, so this remains case by case with trial consideration",
+   "Advanced or metastatic CDC is generally treated with urothelial type cytotoxic chemotherapy principles rather than the clear cell renal cell carcinoma targeted therapy or immunotherapy paradigm",
+   "Platinum based cytotoxic combination chemotherapy is the systemic treatment most commonly used for advanced or metastatic CDC",
+   "Standard clear cell renal cell carcinoma agents such as VEGF pathway tyrosine kinase inhibitors, mTOR inhibitors, and checkpoint inhibitor combinations generally show poor response in CDC given its distinct biology",
+   "Clinical trial enrolment should be considered whenever available given the limited evidence base and poor response to conventional systemic agents",
+   "Best supportive and palliative care with symptom control should run alongside active treatment discussions from diagnosis of advanced disease",
+   "Structured surveillance imaging after resection of localised disease is warranted to detect recurrence early given the aggressive natural history",
+   "Baseline and interval renal function assessment should accompany oncological staging and follow up",
+   "New haematuria, flank pain, palpable mass, or constitutional symptoms after treatment should prompt prompt re-imaging",
+   "All suspected or confirmed CDC should be managed through a specialist uro-oncology multidisciplinary team from diagnosis",
+   "Refer for genitourinary pathology review with immunohistochemistry when diagnosis is uncertain to exclude upper tract urothelial carcinoma and renal medullary carcinoma"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "collecting_duct_carcinoma-pathway",
+   "title": "Collecting duct carcinoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare, aggressive renal carcinoma arising from the collecting ducts of Bellini in the renal medulla",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Infiltrative central renal mass with haematuria and systemic symptoms",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Contrast-enhanced CT of the abdomen and pelvis to define the infiltrative mass and nodal spread, Chest imaging for pulmonary metastases, Tissue diagnosis with immunohistochemistry to distinguish from urothelial and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Radical nephrectomy with regional lymph node dissection is the standard curative approach for localised, resectable disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking an infiltrative medullary tumour for upper tract urothelial carcinoma or vice versa"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of collecting duct carcinoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "collecting_duct_carcinoma-matrix",
+   "title": "Collecting duct carcinoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare, aggressive renal carcinoma arising from the collecting ducts of Bellini in the renal medulla",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Collecting duct carcinoma originates from the principal cells of the distal collecting ducts within the medulla. It is a high-grade tumour with infiltrative growth, extensive desmoplasia and early vascular and lymphatic invasion. Its central medullary origin explains the infiltrative imaging pattern and the tendency to involve the renal pelvis and regional nodes. Its biology overlaps with high-grade urothelial carcinoma, and it is distinguished from renal medullary carcinoma by retained SMARCB1 expression and the absence of an obligatory link to sickling haemoglobinopathies.",
-    "additionalDifferentials": [
-      "Renal medullary carcinoma",
-      "Upper tract urothelial carcinoma",
-      "High-grade papillary renal cell carcinoma",
-      "Clear cell renal cell carcinoma with infiltrative growth",
-      "Metastatic carcinoma involving the kidney",
-      "Renal pelvis inflammatory or infective mass"
+    [
+     "Key Investigations",
+     "Contrast-enhanced CT of the abdomen and pelvis to define the infiltrative mass and nodal spread, Chest imaging for pulmonary",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Contrast-enhanced CT of the abdomen and pelvis to define the infiltrative mass and nodal spread",
-      "Chest imaging for pulmonary metastases",
-      "Tissue diagnosis with immunohistochemistry to distinguish from urothelial and medullary carcinoma",
-      "Urine cytology and evaluation of the upper urinary tract",
-      "Baseline renal function and staging investigations"
+    [
+     "Primary Differentials",
+     "Renal medullary carcinoma, Upper tract urothelial carcinoma, High-grade papillary renal cell carcinoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Infiltrative central renal mass with haematuria and systemic symptoms",
-      "Bulky regional lymphadenopathy at presentation",
-      "Evidence of distant metastatic disease",
-      "Rapid clinical deterioration"
+    [
+     "Management Strategy",
+     "Radical nephrectomy with regional lymph node dissection is the standard curative approach for localised, resectable disease",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally poor, with many patients presenting at an advanced stage and limited response to systemic therapy; complete surgical resection of localised disease offers the best chance of prolonged survival.",
-    "pitfalls": [
-      "Mistaking an infiltrative medullary tumour for upper tract urothelial carcinoma or vice versa",
-      "Attributing a central renal mass to infection and delaying oncological work-up",
-      "Assuming standard clear cell targeted therapy will be effective",
-      "Underestimating the likelihood of occult metastatic disease"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology (standard reference)",
-      "WHO Classification of Urinary and Male Genital Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Radical nephrectomy with regional lymph node dissection is the standard curative approach for localised, resectable disease",
-      "Complete surgical resection of localised disease is the single most important determinant of prolonged survival",
-      "Thorough preoperative staging with cross sectional abdominal and pelvic imaging plus chest imaging is important before surgery given the tendency for early nodal and distant spread",
-      "No established histology specific role for routine adjuvant systemic therapy exists in CDC, adjuvant kinase inhibitor and other adjuvant approaches in renal cell carcinoma broadly have shown inconsistent or no survival benefit, so this remains case by case with trial consideration",
-      "Advanced or metastatic CDC is generally treated with urothelial type cytotoxic chemotherapy principles rather than the clear cell renal cell carcinoma targeted therapy or immunotherapy paradigm",
-      "Platinum based cytotoxic combination chemotherapy is the systemic treatment most commonly used for advanced or metastatic CDC",
-      "Standard clear cell renal cell carcinoma agents such as VEGF pathway tyrosine kinase inhibitors, mTOR inhibitors, and checkpoint inhibitor combinations generally show poor response in CDC given its distinct biology",
-      "Clinical trial enrolment should be considered whenever available given the limited evidence base and poor response to conventional systemic agents",
-      "Best supportive and palliative care with symptom control should run alongside active treatment discussions from diagnosis of advanced disease",
-      "Structured surveillance imaging after resection of localised disease is warranted to detect recurrence early given the aggressive natural history",
-      "Baseline and interval renal function assessment should accompany oncological staging and follow up",
-      "New haematuria, flank pain, palpable mass, or constitutional symptoms after treatment should prompt prompt re-imaging",
-      "All suspected or confirmed CDC should be managed through a specialist uro-oncology multidisciplinary team from diagnosis",
-      "Refer for genitourinary pathology review with immunohistochemistry when diagnosis is uncertain to exclude upper tract urothelial carcinoma and renal medullary carcinoma"
+    [
+     "Clinical Pitfall",
+     "Mistaking an infiltrative medullary tumour for upper tract urothelial carcinoma or vice versa",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for collecting duct carcinoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "collecting-duct-carcinoma-diagram",
+   "title": "Collecting duct carcinoma: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

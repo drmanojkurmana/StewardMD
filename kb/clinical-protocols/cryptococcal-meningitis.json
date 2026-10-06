@@ -5,7 +5,22 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, HDU, ART clinic",
- "aliases": ["cryptococcal meningitis", "crypto meningitis", "CM", "cryptococcosis", "Cryptococcus neoformans", "CrAg", "cryptococcal antigen", "India ink", "liposomal amphotericin", "AmBisome", "flucytosine", "5-FC", "therapeutic lumbar puncture", "raised intracranial pressure"],
+ "aliases": [
+  "cryptococcal meningitis",
+  "crypto meningitis",
+  "CM",
+  "cryptococcosis",
+  "Cryptococcus neoformans",
+  "CrAg",
+  "cryptococcal antigen",
+  "India ink",
+  "liposomal amphotericin",
+  "AmBisome",
+  "flucytosine",
+  "5-FC",
+  "therapeutic lumbar puncture",
+  "raised intracranial pressure"
+ ],
  "summary": "Diagnose by lumbar puncture with opening pressure and CSF cryptococcal antigen; induce with a single 10 mg/kg dose of liposomal amphotericin B plus 14 days of flucytosine and fluconazole, drain raised pressure by repeated therapeutic lumbar puncture, and defer ART for 4 to 6 weeks.",
  "sections": [
   {
@@ -96,16 +111,148 @@
   }
  ],
  "drugs": [
-  { "name": "Liposomal amphotericin B", "dose": "10 mg/kg IV single dose on day 1 (preferred induction); or 3 to 4 mg/kg/day IV for 14 days if flucytosine unavailable", "notes": "Prehydrate with saline and potassium; dilute in 5% glucose." },
-  { "name": "Flucytosine", "dose": "100 mg/kg/day orally in 4 divided doses for 14 days (7 days with amphotericin deoxycholate)", "notes": "CBC weekly; reduce dose in renal impairment." },
-  { "name": "Fluconazole", "dose": "Induction 1200 mg daily; consolidation 800 mg daily for 8 weeks; maintenance 200 mg daily", "notes": "Adjust for renal impairment; teratogenic risk in pregnancy." },
-  { "name": "Amphotericin B deoxycholate", "dose": "1 mg/kg/day IV for 7 days (with flucytosine) or 14 days (with fluconazole)", "notes": "Nephrotoxicity, hypokalaemia, anaemia; needs the full monitoring package." },
-  { "name": "Potassium chloride", "dose": "20 mEq in 1 L 0.9% saline over 2 hours before each amphotericin dose, plus 8 mEq tablets orally twice daily (2 tablets per dose with deoxycholate)", "notes": "Omit with renal impairment or hyperkalaemia." },
-  { "name": "Prednisolone", "dose": "1 mg/kg/day for at least 1 week, then taper over 2 to 6 weeks", "notes": "Only for life-threatening cryptococcal IRIS; not for routine induction." }
+  {
+   "name": "Liposomal amphotericin B",
+   "dose": "10 mg/kg IV single dose on day 1 (preferred induction); or 3 to 4 mg/kg/day IV for 14 days if flucytosine unavailable",
+   "notes": "Prehydrate with saline and potassium; dilute in 5% glucose."
+  },
+  {
+   "name": "Flucytosine",
+   "dose": "100 mg/kg/day orally in 4 divided doses for 14 days (7 days with amphotericin deoxycholate)",
+   "notes": "CBC weekly; reduce dose in renal impairment."
+  },
+  {
+   "name": "Fluconazole",
+   "dose": "Induction 1200 mg daily; consolidation 800 mg daily for 8 weeks; maintenance 200 mg daily",
+   "notes": "Adjust for renal impairment; teratogenic risk in pregnancy."
+  },
+  {
+   "name": "Amphotericin B deoxycholate",
+   "dose": "1 mg/kg/day IV for 7 days (with flucytosine) or 14 days (with fluconazole)",
+   "notes": "Nephrotoxicity, hypokalaemia, anaemia; needs the full monitoring package."
+  },
+  {
+   "name": "Potassium chloride",
+   "dose": "20 mEq in 1 L 0.9% saline over 2 hours before each amphotericin dose, plus 8 mEq tablets orally twice daily (2 tablets per dose with deoxycholate)",
+   "notes": "Omit with renal impairment or hyperkalaemia."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "1 mg/kg/day for at least 1 week, then taper over 2 to 6 weeks",
+   "notes": "Only for life-threatening cryptococcal IRIS; not for routine induction."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Guidelines for diagnosing, preventing and managing cryptococcal disease among adults, adolescents and children living with HIV", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240052178" },
-  { "org": "WHO", "title": "Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach", "year": 2021, "url": "https://www.who.int/publications/i/item/9789240031593" }
+  {
+   "org": "WHO",
+   "title": "Guidelines for diagnosing, preventing and managing cryptococcal disease among adults, adolescents and children living with HIV",
+   "year": 2022,
+   "url": "https://www.who.int/publications/i/item/9789240052178"
+  },
+  {
+   "org": "WHO",
+   "title": "Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach",
+   "year": 2021,
+   "url": "https://www.who.int/publications/i/item/9789240031593"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "cryptococcal-meningitis-pathway",
+   "title": "Cryptococcal meningitis, HIV-associated (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect in anyone with HIV and a low CD4 count (usually below 100 cells/mm3) with headache, fever, vomiting, confusion, visual loss, seizures or cranial nerve palsy (especially VI). Neck stiffness is often absent.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Raised intracranial pressure (CSF opening pressure 25 cmH2O or more) occurs in up to 80% and is a major cause of death and blindness.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Prompt lumbar puncture with opening pressure and rapid CSF CrAg (lateral flow assay) is the preferred approach. Send CSF fungal culture for a first episode."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Consolidation: fluconazole 800 mg orally daily for 8 weeks after induction."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Measure opening pressure at the first LP and repeat an early LP to recheck pressure, whether or not there are symptoms."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for cryptococcal meningitis, hiv-associated (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cryptococcal-meningitis-summary-matrix",
+   "title": "Cryptococcal meningitis, HIV-associated (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect in anyone with HIV and a low CD4 count (usually below 100 cells/mm3) with headache, fever, vomiting, confusion, visual loss,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Consolidation: fluconazole 800 mg orally daily for 8 weeks after induction.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Prompt lumbar puncture with opening pressure and rapid CSF CrAg (lateral flow assay) is the preferred approach. Send CSF fungal culture for",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Liposomal amphotericin B: 10 mg/kg IV single dose on day 1 (preferred induction); or 3 to 4 mg/kg/day IV for 14 days if flucytosine",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Not measuring opening pressure, or not repeating therapeutic LPs, when raised pressure is the main treatable cause of death.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for cryptococcal meningitis, hiv-associated (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cryptococcal-meningitis-diagram",
+   "title": "Cryptococcal meningitis, HIV-associated (adult): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

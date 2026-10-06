@@ -1,79 +1,174 @@
 {
-  "id": "carotid_sinus_hypersensitivity",
-  "name": "Carotid sinus hypersensitivity",
-  "aliases": [
-    "carotid sinus syndrome",
-    "CSH",
-    "carotid sinus syncope"
+ "id": "carotid_sinus_hypersensitivity",
+ "name": "Carotid sinus hypersensitivity",
+ "aliases": [
+  "carotid sinus syndrome",
+  "CSH",
+  "carotid sinus syncope"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Autonomic",
+ "specialty": "Neurology / Autonomic",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An exaggerated response to carotid sinus stimulation causing syncope or unexplained falls, chiefly in older people",
+   "Two components are recognised: a cardioinhibitory response with asystole or marked bradycardia (conventionally a pause of at least three seconds) and a vasodepressor response with a fall in systolic pressure (conventionally at least 50 mmHg); a mixed pattern is common",
+   "Symptoms may be provoked by head turning, tight collars, shaving, or neck extension, though a clear trigger is often absent",
+   "Carotid sinus massage under continuous ECG and blood-pressure monitoring, performed supine and upright on a tilt table, is the diagnostic test",
+   "An important reversible cause of unexplained falls and syncope in the elderly, sometimes without a warning",
+   "Asymptomatic hypersensitive responses are common in older people, so results must be correlated with symptoms",
+   "Carotid massage is avoided when there are carotid bruits or recent stroke or TIA because of embolic risk",
+   "Management is reassurance and trigger avoidance; cardiac pacing is considered for a dominant cardioinhibitory type, while the vasodepressor component is harder to treat"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Autonomic",
-  "specialty": "Neurology / Autonomic",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An exaggerated response to carotid sinus stimulation causing syncope or unexplained falls, chiefly in older people",
-      "Two components are recognised: a cardioinhibitory response with asystole or marked bradycardia (conventionally a pause of at least three seconds) and a vasodepressor response with a fall in systolic pressure (conventionally at least 50 mmHg); a mixed pattern is common",
-      "Symptoms may be provoked by head turning, tight collars, shaving, or neck extension, though a clear trigger is often absent",
-      "Carotid sinus massage under continuous ECG and blood-pressure monitoring, performed supine and upright on a tilt table, is the diagnostic test",
-      "An important reversible cause of unexplained falls and syncope in the elderly, sometimes without a warning",
-      "Asymptomatic hypersensitive responses are common in older people, so results must be correlated with symptoms",
-      "Carotid massage is avoided when there are carotid bruits or recent stroke or TIA because of embolic risk",
-      "Management is reassurance and trigger avoidance; cardiac pacing is considered for a dominant cardioinhibitory type, while the vasodepressor component is harder to treat"
+  "pathophysiology": "The carotid sinus baroreceptors normally sense arterial stretch and, via glossopharyngeal afferents, modulate autonomic outflow to regulate blood pressure and heart rate. In carotid sinus hypersensitivity this reflex is exaggerated, so that ordinary mechanical stimulation of the neck provokes an excessive efferent response. A cardioinhibitory response reflects a surge of vagal (parasympathetic) outflow producing profound bradycardia or asystole, whereas a vasodepressor response reflects sympathetic withdrawal causing vasodilatation and a fall in blood pressure. The result is transient cerebral hypoperfusion, syncope, or an unexplained fall. The condition is associated with ageing and with neurodegenerative disease, and its mechanism is incompletely understood.",
+  "additionalDifferentials": [
+   "Reflex (vasovagal) syncope",
+   "Orthostatic hypotension",
+   "Cardiac arrhythmia such as sick sinus syndrome or heart block",
+   "Structural cardiac disease such as aortic stenosis",
+   "Epileptic seizure",
+   "Transient ischaemic attack"
+  ],
+  "additionalInvestigations": [
+   "Carotid sinus massage, supine and upright, with continuous ECG and beat-to-beat blood pressure",
+   "12-lead ECG and ambulatory ECG monitoring",
+   "Head-up tilt-table testing to assess coexisting reflex syncope or orthostatic hypotension",
+   "Echocardiography to exclude structural heart disease",
+   "Carotid duplex before massage where vascular disease is suspected",
+   "Medication review for bradycardic or hypotensive agents"
+  ],
+  "redFlags": [
+   "Syncope during exertion or with chest pain suggesting a cardiac cause",
+   "A carotid bruit or recent stroke or TIA contraindicating carotid massage",
+   "Recurrent injurious falls or 'drop attacks'",
+   "Documented prolonged asystole"
+  ],
+  "prognosis": "With trigger avoidance and, where appropriate, cardiac pacing for the cardioinhibitory form, many patients have fewer syncopal events; however, the vasodepressor component responds less well, and recurrent falls remain a concern in frail older people.",
+  "pitfalls": [
+   "Diagnosing carotid sinus hypersensitivity from a positive massage without correlating it to the patient's symptoms",
+   "Performing carotid massage despite bruits or a recent cerebrovascular event",
+   "Implanting a pacemaker when the dominant problem is vasodepressor rather than cardioinhibitory",
+   "Overlooking it as a cause of unexplained falls in the elderly"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Low's Clinical Autonomic Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Avoidance of provoking triggers such as tight collars, rapid head turning and neck extension",
+   "Review and withdrawal of contributory bradycardic and hypotensive medications",
+   "Permanent dual-chamber cardiac pacing for the cardioinhibitory form with recurrent syncope",
+   "Measures for the vasodepressor component including increased salt and fluid intake, compression garments and pressor agents such as midodrine or fludrocortisone",
+   "Falls-prevention strategies and physiotherapy in frail older people",
+   "Correlation of massage findings with symptoms before attributing events, given the frequency of asymptomatic hypersensitive responses",
+   "Multidisciplinary input from cardiology, falls services and care of the elderly"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carotid_sinus_hypersensitivity-pathway",
+   "title": "Carotid sinus hypersensitivity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An exaggerated response to carotid sinus stimulation causing syncope or unexplained falls, chiefly in older people",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Syncope during exertion or with chest pain suggesting a cardiac cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Carotid sinus massage, supine and upright, with continuous ECG and beat-to-beat blood pressure, 12-lead ECG and ambulatory ECG monitoring, Head-up tilt-table testing to assess coexisting reflex syncope or orthostatic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Avoidance of provoking triggers such as tight collars, rapid head turning and neck extension"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing carotid sinus hypersensitivity from a positive massage without correlating it to the patient's symptoms"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carotid sinus hypersensitivity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carotid_sinus_hypersensitivity-matrix",
+   "title": "Carotid sinus hypersensitivity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An exaggerated response to carotid sinus stimulation causing syncope or unexplained falls, chiefly in older people",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The carotid sinus baroreceptors normally sense arterial stretch and, via glossopharyngeal afferents, modulate autonomic outflow to regulate blood pressure and heart rate. In carotid sinus hypersensitivity this reflex is exaggerated, so that ordinary mechanical stimulation of the neck provokes an excessive efferent response. A cardioinhibitory response reflects a surge of vagal (parasympathetic) outflow producing profound bradycardia or asystole, whereas a vasodepressor response reflects sympathetic withdrawal causing vasodilatation and a fall in blood pressure. The result is transient cerebral hypoperfusion, syncope, or an unexplained fall. The condition is associated with ageing and with neurodegenerative disease, and its mechanism is incompletely understood.",
-    "additionalDifferentials": [
-      "Reflex (vasovagal) syncope",
-      "Orthostatic hypotension",
-      "Cardiac arrhythmia such as sick sinus syndrome or heart block",
-      "Structural cardiac disease such as aortic stenosis",
-      "Epileptic seizure",
-      "Transient ischaemic attack"
+    [
+     "Key Investigations",
+     "Carotid sinus massage, supine and upright, with continuous ECG and beat-to-beat blood pressure, 12-lead ECG and ambulatory ECG",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Carotid sinus massage, supine and upright, with continuous ECG and beat-to-beat blood pressure",
-      "12-lead ECG and ambulatory ECG monitoring",
-      "Head-up tilt-table testing to assess coexisting reflex syncope or orthostatic hypotension",
-      "Echocardiography to exclude structural heart disease",
-      "Carotid duplex before massage where vascular disease is suspected",
-      "Medication review for bradycardic or hypotensive agents"
+    [
+     "Primary Differentials",
+     "Reflex (vasovagal) syncope, Orthostatic hypotension, Cardiac arrhythmia such as sick sinus syndrome or heart block",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Syncope during exertion or with chest pain suggesting a cardiac cause",
-      "A carotid bruit or recent stroke or TIA contraindicating carotid massage",
-      "Recurrent injurious falls or 'drop attacks'",
-      "Documented prolonged asystole"
+    [
+     "Management Strategy",
+     "Avoidance of provoking triggers such as tight collars, rapid head turning and neck extension",
+     "Core treatment modality"
     ],
-    "prognosis": "With trigger avoidance and, where appropriate, cardiac pacing for the cardioinhibitory form, many patients have fewer syncopal events; however, the vasodepressor component responds less well, and recurrent falls remain a concern in frail older people.",
-    "pitfalls": [
-      "Diagnosing carotid sinus hypersensitivity from a positive massage without correlating it to the patient's symptoms",
-      "Performing carotid massage despite bruits or a recent cerebrovascular event",
-      "Implanting a pacemaker when the dominant problem is vasodepressor rather than cardioinhibitory",
-      "Overlooking it as a cause of unexplained falls in the elderly"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Low's Clinical Autonomic Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Avoidance of provoking triggers such as tight collars, rapid head turning and neck extension",
-      "Review and withdrawal of contributory bradycardic and hypotensive medications",
-      "Permanent dual-chamber cardiac pacing for the cardioinhibitory form with recurrent syncope",
-      "Measures for the vasodepressor component including increased salt and fluid intake, compression garments and pressor agents such as midodrine or fludrocortisone",
-      "Falls-prevention strategies and physiotherapy in frail older people",
-      "Correlation of massage findings with symptoms before attributing events, given the frequency of asymptomatic hypersensitive responses",
-      "Multidisciplinary input from cardiology, falls services and care of the elderly"
+    [
+     "Clinical Pitfall",
+     "Diagnosing carotid sinus hypersensitivity from a positive massage without correlating it to the patient's symptoms",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carotid sinus hypersensitivity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carotid-sinus-hypersensitivity-diagram",
+   "title": "Carotid sinus hypersensitivity: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

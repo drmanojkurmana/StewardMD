@@ -1,92 +1,187 @@
 {
-  "id": "diamond_blackfan_anaemia",
-  "name": "Diamond-Blackfan Anaemia",
-  "aliases": [
-    "Blackfan-Diamond anaemia",
-    "Congenital hypoplastic anaemia",
-    "Congenital pure red cell aplasia",
-    "DBA",
-    "Diamond-Blackfan anaemia",
-    "RPS19",
-    "congenital hypoplastic anaemia",
-    "congenital pure red cell aplasia",
-    "diamond blackfan",
-    "diamond blackfan anemia",
-    "pure red cell aplasia of infancy"
+ "id": "diamond_blackfan_anaemia",
+ "name": "Diamond-Blackfan Anaemia",
+ "aliases": [
+  "Blackfan-Diamond anaemia",
+  "Congenital hypoplastic anaemia",
+  "Congenital pure red cell aplasia",
+  "DBA",
+  "Diamond-Blackfan anaemia",
+  "RPS19",
+  "congenital hypoplastic anaemia",
+  "congenital pure red cell aplasia",
+  "diamond blackfan",
+  "diamond blackfan anemia",
+  "pure red cell aplasia of infancy"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Paediatric haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Haematology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An inherited pure red cell aplasia that typically presents in early infancy, usually within the first year of life, with macrocytic anaemia and reticulocytopenia while white cells and platelets are preserved.",
+   "It is a ribosomopathy caused by mutations in ribosomal protein genes, of which RPS19 is the most common; inheritance is usually autosomal dominant, and many cases arise de novo.",
+   "Raised erythrocyte adenosine deaminase activity and raised fetal haemoglobin support the diagnosis and help distinguish it from acquired red cell aplasia.",
+   "Congenital anomalies occur in around half of patients, notably thumb and radial-ray defects (including triphalangeal thumb), craniofacial dysmorphism, short stature, and cardiac and genitourinary malformations.",
+   "Corticosteroids are the mainstay of initial treatment and produce a response in many children, though steroid dependence or transfusion dependence is common.",
+   "Regular transfusion with iron chelation is used for steroid-refractory disease, and haematopoietic stem cell transplantation is the only curative option for the marrow failure.",
+   "There is a lifelong predisposition to malignancy, particularly myelodysplastic syndrome, acute myeloid leukaemia, osteosarcoma and certain other solid tumours.",
+   "It must be distinguished from transient erythroblastopenia of childhood, which occurs in older children, is normocytic and self-limiting, and shows normal erythrocyte adenosine deaminase."
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Paediatric haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Haematology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An inherited pure red cell aplasia that typically presents in early infancy, usually within the first year of life, with macrocytic anaemia and reticulocytopenia while white cells and platelets are preserved.",
-      "It is a ribosomopathy caused by mutations in ribosomal protein genes, of which RPS19 is the most common; inheritance is usually autosomal dominant, and many cases arise de novo.",
-      "Raised erythrocyte adenosine deaminase activity and raised fetal haemoglobin support the diagnosis and help distinguish it from acquired red cell aplasia.",
-      "Congenital anomalies occur in around half of patients, notably thumb and radial-ray defects (including triphalangeal thumb), craniofacial dysmorphism, short stature, and cardiac and genitourinary malformations.",
-      "Corticosteroids are the mainstay of initial treatment and produce a response in many children, though steroid dependence or transfusion dependence is common.",
-      "Regular transfusion with iron chelation is used for steroid-refractory disease, and haematopoietic stem cell transplantation is the only curative option for the marrow failure.",
-      "There is a lifelong predisposition to malignancy, particularly myelodysplastic syndrome, acute myeloid leukaemia, osteosarcoma and certain other solid tumours.",
-      "It must be distinguished from transient erythroblastopenia of childhood, which occurs in older children, is normocytic and self-limiting, and shows normal erythrocyte adenosine deaminase."
+  "pathophysiology": "Diamond-Blackfan anaemia is caused by heterozygous loss-of-function mutations in genes encoding proteins of the small or large ribosomal subunit, leading to haploinsufficiency and defective ribosomal RNA processing and ribosome assembly. This impaired ribosome biogenesis generates nucleolar stress that stabilises and activates the p53 tumour-suppressor pathway, driving cell-cycle arrest and apoptosis. Erythroid progenitors are uniquely sensitive to this stress, producing a selective failure of red cell production with sparing of the other lineages. Rare cases involve mutations affecting the erythroid transcription factor pathway, such as GATA1, which impair erythroid-specific translation and give a comparable phenotype. The same disturbance of ribosomal function and p53 signalling is thought to underlie the associated congenital malformations, growth impairment and heightened cancer predisposition.",
+  "additionalDifferentials": [
+   "Transient erythroblastopenia of childhood",
+   "Parvovirus B19-induced red cell aplasia (especially with underlying haemolysis)",
+   "Pearson marrow-pancreas syndrome",
+   "Other inherited bone marrow failure syndromes (Fanconi anaemia, Shwachman-Diamond syndrome, dyskeratosis congenita)",
+   "Congenital dyserythropoietic anaemia",
+   "Acquired pure red cell aplasia",
+   "Nutritional macrocytic anaemia"
+  ],
+  "additionalInvestigations": [
+   "Full blood count with reticulocyte count and blood film showing macrocytosis",
+   "Bone marrow examination demonstrating selective erythroid hypoplasia with preserved myeloid and megakaryocytic lineages",
+   "Erythrocyte adenosine deaminase activity",
+   "Fetal haemoglobin measurement",
+   "Targeted genetic testing of ribosomal protein and related genes",
+   "Echocardiography, renal ultrasound and skeletal assessment for associated anomalies",
+   "Parvovirus B19 studies to exclude an acquired cause"
+  ],
+  "redFlags": [
+   "New cytopenias in other lineages or marrow dysplasia suggesting transformation to myelodysplasia or leukaemia",
+   "Bone pain, swelling or a mass raising concern for osteosarcoma",
+   "Features of transfusional iron overload affecting the heart, liver or endocrine organs",
+   "Severe anaemia with signs of cardiac compromise",
+   "Failure to respond to, or loss of response to, established therapy"
+  ],
+  "prognosis": "With corticosteroids and transfusion support many patients survive into adulthood, but long-term morbidity arises from iron overload, treatment toxicity and malignancy; stem cell transplantation can cure the marrow failure though it does not remove the underlying cancer predisposition.",
+  "pitfalls": [
+   "Confusing the condition with transient erythroblastopenia of childhood and delaying diagnosis; age, red cell size and erythrocyte adenosine deaminase help differentiate them.",
+   "Overlooking subtle radial-ray or thumb anomalies that point to the diagnosis.",
+   "Under-monitoring and under-treating transfusional iron overload.",
+   "Exposing a growing infant to prolonged high-intensity corticosteroid therapy without weighing growth and toxicity effects.",
+   "Neglecting long-term malignancy surveillance."
+  ],
+  "references": [
+   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood (standard reference)",
+   "Williams Hematology (standard reference)",
+   "British Society for Haematology guidance (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Initiate corticosteroids as the mainstay of first-line treatment, which produce a response in many children",
+   "Support steroid-refractory or steroid-dependent disease with regular red cell transfusion",
+   "Add iron chelation therapy to manage transfusional iron overload",
+   "Consider haematopoietic stem cell transplantation as the only curative therapy for the marrow failure",
+   "Screen for and manage associated anomalies with echocardiography, renal imaging and skeletal review, and monitor growth",
+   "Surveil for treatment toxicity and the lifelong increased risk of myelodysplasia, leukaemia and solid tumours",
+   "Offer genetic counselling and family screening, as inheritance is usually autosomal dominant with frequent de novo variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "diamond_blackfan_anaemia-pathway",
+   "title": "Diamond-Blackfan Anaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An inherited pure red cell aplasia that typically presents in early infancy, usually within the first year of life, with macrocytic anaemia and reticulocytopenia while white cells and platelets are preserved.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New cytopenias in other lineages or marrow dysplasia suggesting transformation to myelodysplasia or leukaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count with reticulocyte count and blood film showing macrocytosis, Bone marrow examination demonstrating selective erythroid hypoplasia with preserved myeloid and megakaryocytic lineages, Erythrocyte adenosine"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Initiate corticosteroids as the mainstay of first-line treatment, which produce a response in many children"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the condition with transient erythroblastopenia of childhood and delaying diagnosis; age, red cell size and erythrocyte adenosine deaminase help differentiate them."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of diamond-blackfan anaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "diamond_blackfan_anaemia-matrix",
+   "title": "Diamond-Blackfan Anaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An inherited pure red cell aplasia that typically presents in early infancy, usually within the first year of life, with",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Diamond-Blackfan anaemia is caused by heterozygous loss-of-function mutations in genes encoding proteins of the small or large ribosomal subunit, leading to haploinsufficiency and defective ribosomal RNA processing and ribosome assembly. This impaired ribosome biogenesis generates nucleolar stress that stabilises and activates the p53 tumour-suppressor pathway, driving cell-cycle arrest and apoptosis. Erythroid progenitors are uniquely sensitive to this stress, producing a selective failure of red cell production with sparing of the other lineages. Rare cases involve mutations affecting the erythroid transcription factor pathway, such as GATA1, which impair erythroid-specific translation and give a comparable phenotype. The same disturbance of ribosomal function and p53 signalling is thought to underlie the associated congenital malformations, growth impairment and heightened cancer predisposition.",
-    "additionalDifferentials": [
-      "Transient erythroblastopenia of childhood",
-      "Parvovirus B19-induced red cell aplasia (especially with underlying haemolysis)",
-      "Pearson marrow-pancreas syndrome",
-      "Other inherited bone marrow failure syndromes (Fanconi anaemia, Shwachman-Diamond syndrome, dyskeratosis congenita)",
-      "Congenital dyserythropoietic anaemia",
-      "Acquired pure red cell aplasia",
-      "Nutritional macrocytic anaemia"
+    [
+     "Key Investigations",
+     "Full blood count with reticulocyte count and blood film showing macrocytosis, Bone marrow examination demonstrating selective",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count with reticulocyte count and blood film showing macrocytosis",
-      "Bone marrow examination demonstrating selective erythroid hypoplasia with preserved myeloid and megakaryocytic lineages",
-      "Erythrocyte adenosine deaminase activity",
-      "Fetal haemoglobin measurement",
-      "Targeted genetic testing of ribosomal protein and related genes",
-      "Echocardiography, renal ultrasound and skeletal assessment for associated anomalies",
-      "Parvovirus B19 studies to exclude an acquired cause"
+    [
+     "Primary Differentials",
+     "Transient erythroblastopenia of childhood, Parvovirus B19-induced red cell aplasia (especially with underlying haemolysis),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New cytopenias in other lineages or marrow dysplasia suggesting transformation to myelodysplasia or leukaemia",
-      "Bone pain, swelling or a mass raising concern for osteosarcoma",
-      "Features of transfusional iron overload affecting the heart, liver or endocrine organs",
-      "Severe anaemia with signs of cardiac compromise",
-      "Failure to respond to, or loss of response to, established therapy"
+    [
+     "Management Strategy",
+     "Initiate corticosteroids as the mainstay of first-line treatment, which produce a response in many children",
+     "Core treatment modality"
     ],
-    "prognosis": "With corticosteroids and transfusion support many patients survive into adulthood, but long-term morbidity arises from iron overload, treatment toxicity and malignancy; stem cell transplantation can cure the marrow failure though it does not remove the underlying cancer predisposition.",
-    "pitfalls": [
-      "Confusing the condition with transient erythroblastopenia of childhood and delaying diagnosis; age, red cell size and erythrocyte adenosine deaminase help differentiate them.",
-      "Overlooking subtle radial-ray or thumb anomalies that point to the diagnosis.",
-      "Under-monitoring and under-treating transfusional iron overload.",
-      "Exposing a growing infant to prolonged high-intensity corticosteroid therapy without weighing growth and toxicity effects.",
-      "Neglecting long-term malignancy surveillance."
-    ],
-    "references": [
-      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood (standard reference)",
-      "Williams Hematology (standard reference)",
-      "British Society for Haematology guidance (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Initiate corticosteroids as the mainstay of first-line treatment, which produce a response in many children",
-      "Support steroid-refractory or steroid-dependent disease with regular red cell transfusion",
-      "Add iron chelation therapy to manage transfusional iron overload",
-      "Consider haematopoietic stem cell transplantation as the only curative therapy for the marrow failure",
-      "Screen for and manage associated anomalies with echocardiography, renal imaging and skeletal review, and monitor growth",
-      "Surveil for treatment toxicity and the lifelong increased risk of myelodysplasia, leukaemia and solid tumours",
-      "Offer genetic counselling and family screening, as inheritance is usually autosomal dominant with frequent de novo variants"
+    [
+     "Clinical Pitfall",
+     "Confusing the condition with transient erythroblastopenia of childhood and delaying diagnosis; age, red cell size and erythrocyte",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for diamond-blackfan anaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "diamond-blackfan-anaemia-diagram",
+   "title": "Diamond-Blackfan Anaemia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

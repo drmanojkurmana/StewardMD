@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["empyema", "empyema thoracis", "parapneumonic effusion", "complicated parapneumonic effusion", "CPPE", "pleural infection", "pyothorax", "tPA DNase", "MIST2", "RAPID score"],
+ "aliases": [
+  "empyema",
+  "empyema thoracis",
+  "parapneumonic effusion",
+  "complicated parapneumonic effusion",
+  "CPPE",
+  "pleural infection",
+  "pyothorax",
+  "tPA DNase",
+  "MIST2",
+  "RAPID score"
+ ],
  "summary": "Aspirate any effusion with suspected infection under ultrasound and measure pH immediately: frank pus or pH 7.2 or less needs a small-bore chest drain; pH above 7.2 to below 7.4 needs LDH and clinical review. Give antibiotics with anaerobic cover for 2 to 6 weeks, tPA plus DNase for residual collections, and refer early for VATS when medical treatment fails.",
  "sections": [
   {
@@ -82,15 +93,143 @@
   }
  ],
  "drugs": [
-  { "name": "Tissue plasminogen activator (alteplase), intrapleural", "dose": "10 mg via chest drain twice daily for 3 days (6 doses); 5 mg twice daily if higher bleeding risk", "notes": "Always combined with DNase; follow BTS Clinical Statement on Pleural Procedures for administration." },
-  { "name": "Dornase alfa (DNase), intrapleural", "dose": "5 mg via chest drain twice daily for 3 days (6 doses)", "notes": "Given with tPA; not as single agent." },
-  { "name": "Amoxicillin-clavulanate", "dose": "1.2 g IV every 8 hours; oral step-down 625 mg three times daily", "notes": "Covers streptococci and anaerobes; reduce dose if eGFR below 30 mL/min." },
-  { "name": "Ceftriaxone plus metronidazole", "dose": "Ceftriaxone 2 g IV once daily plus metronidazole 500 mg IV every 8 hours", "notes": "Community-acquired pleural infection alternative." },
-  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "Hospital-acquired infection; add vancomycin 15 mg/kg IV every 12 hours (adjusted to levels) if MRSA risk." }
+  {
+   "name": "Tissue plasminogen activator (alteplase), intrapleural",
+   "dose": "10 mg via chest drain twice daily for 3 days (6 doses); 5 mg twice daily if higher bleeding risk",
+   "notes": "Always combined with DNase; follow BTS Clinical Statement on Pleural Procedures for administration."
+  },
+  {
+   "name": "Dornase alfa (DNase), intrapleural",
+   "dose": "5 mg via chest drain twice daily for 3 days (6 doses)",
+   "notes": "Given with tPA; not as single agent."
+  },
+  {
+   "name": "Amoxicillin-clavulanate",
+   "dose": "1.2 g IV every 8 hours; oral step-down 625 mg three times daily",
+   "notes": "Covers streptococci and anaerobes; reduce dose if eGFR below 30 mL/min."
+  },
+  {
+   "name": "Ceftriaxone plus metronidazole",
+   "dose": "Ceftriaxone 2 g IV once daily plus metronidazole 500 mg IV every 8 hours",
+   "notes": "Community-acquired pleural infection alternative."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV every 8 hours",
+   "notes": "Hospital-acquired infection; add vancomycin 15 mg/kg IV every 12 hours (adjusted to levels) if MRSA risk."
+  }
  ],
  "sources": [
-  { "org": "BTS", "title": "British Thoracic Society Guideline for Pleural Disease (Thorax 2023), including pleural infection pathways", "year": 2023, "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/pleural-disease/" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (empyema and drug doses)", "year": 2019, "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines" }
+  {
+   "org": "BTS",
+   "title": "British Thoracic Society Guideline for Pleural Disease (Thorax 2023), including pleural infection pathways",
+   "year": 2023,
+   "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/pleural-disease/"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (empyema and drug doses)",
+   "year": 2019,
+   "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "pleural-infection-empyema-pathway",
+   "title": "Pleural infection and empyema (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect pleural infection in pneumonia with an effusion, or persisting fever and raised CRP despite antibiotics; also after thoracic surgery, trauma, oesophageal rupture or aspiration.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Frank pus, or pH 7.2 or less: high risk; insert an intercostal drain if ultrasound shows a safe accessible pocket.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Always use thoracic ultrasound guidance for aspiration. Send fluid in a plain container and inoculate 5 to 10 mL into aerobic and anaerobic blood culture bottles."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Residual collection after drainage has stopped: intrapleural tPA 10 mg plus DNase 5 mg twice daily for 3 days (6 doses). A lower tPA dose (5 mg twice daily with DNase 5 mg) may be as effective and suits patients with higher bleeding risk."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Daily review of temperature, drain output and position, CRP and WBC; repeat ultrasound or chest X-ray to confirm the collection is resolving."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pleural infection and empyema (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pleural-infection-empyema-summary-matrix",
+   "title": "Pleural infection and empyema (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect pleural infection in pneumonia with an effusion, or persisting fever and raised CRP despite antibiotics; also after thoracic",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Frank pus, or pH 7.2 or less: high risk; insert an intercostal drain if ultrasound shows a safe accessible pocket.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Always use thoracic ultrasound guidance for aspiration. Send fluid in a plain container and inoculate 5 to 10 mL into aerobic and anaerobic",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tissue plasminogen activator (alteplase), intrapleural: 10 mg via chest drain twice daily for 3 days (6 doses); 5 mg twice daily if higher",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying drainage of pus or a pH 7.2 or less effusion while trying antibiotics alone.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pleural infection and empyema (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pleural-infection-empyema-diagram",
+   "title": "Pleural infection and empyema (adult): Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

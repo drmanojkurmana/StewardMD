@@ -151,5 +151,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h31d0232d"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "glomerulonephritis-dx-algo",
+      "title": "Acute glomerulonephritis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The nephritic urinalysis is the foundation of diagnosis: dysmorphic RBCs, RBC casts, pyuria, and proteinuria; always examine a freshly spun sediment to confirm active GN (p.2353-2354).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Rapidly rising creatinine with a nephritic sediment = crescentic RPGN, a nephrology emergency requiring urgent immunology and biopsy (p.2355)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Phase-contrast microscopy of spun sediment for dysmorphic RBCs/acanthocytes and RBC casts (p.341-342), Serum complement C3 (and C4 for cryoglobulinemia) to separate low-complement immune-complex GN from normal-complement"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: RPGN crescent burden on biopsy stratifies severity: focal and segmental necrotizing GN when 50% of glomeruli are affected, which usually progresses to global glomerulosclerosis. Healed focal segmental lesions yield"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on dipstick alone: it detects only albumin and can be falsely positive at pH >7 or with concentrated/blood-contaminated urine, and falsely negative in dilute urine or with non-albumin (light-chain) proteinuria"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute glomerulonephritis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "glomerulonephritis-matrix",
+      "title": "Acute glomerulonephritis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The nephritic urinalysis is the foundation of diagnosis: dysmorphic RBCs, RBC casts, pyuria, and proteinuria; always examine a",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Phase-contrast microscopy of spun sediment for dysmorphic RBCs/acanthocytes and RBC casts (p.341-342), Serum complement C3 (and",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "ANCA-associated (pauci-immune) vasculitis - microscopic polyangiitis, granulomatosis with polyangiitis (formerly Wegener),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Rapidly rising creatinine with a nephritic sediment = crescentic RPGN, a nephrology emergency requiring urgent immunology and",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on dipstick alone: it detects only albumin and can be falsely positive at pH >7 or with concentrated/blood-contaminated",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute glomerulonephritis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "glomerulonephritis-diagram",
+      "title": "Acute glomerulonephritis: Renal & Urinary Tract Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+      "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+        },
+        {
+          "label": "Tubular Apparatus",
+          "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+        }
+      ]
+    }
+  ]
 }

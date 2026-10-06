@@ -1,83 +1,178 @@
 {
-  "id": "amatoxin_mushroom_poisoning",
-  "name": "Amatoxin (Amanita) mushroom poisoning",
-  "aliases": [
-    "Amanita phalloides poisoning",
-    "death cap poisoning",
-    "alpha-amanitin poisoning",
-    "amanitin toxicity",
-    "cyclopeptide mushroom poisoning"
+ "id": "amatoxin_mushroom_poisoning",
+ "name": "Amatoxin (Amanita) mushroom poisoning",
+ "aliases": [
+  "Amanita phalloides poisoning",
+  "death cap poisoning",
+  "alpha-amanitin poisoning",
+  "amanitin toxicity",
+  "cyclopeptide mushroom poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Suspect amatoxin poisoning whenever gastrointestinal symptoms are delayed for six or more hours after eating foraged mushrooms, since early-onset symptoms usually indicate a more benign species",
+   "The illness is classically biphasic: a severe cholera-like gastroenteritis, then a deceptive quiescent phase, followed by hepatic and renal injury from around the second to fourth day",
+   "The apparent clinical improvement during the latent phase is a trap, as transaminases and coagulopathy are already rising while the patient feels better",
+   "Ask specifically about the number of people who shared the meal and whether any mushrooms remain, as identification and shared exposure guide risk stratification",
+   "Serial monitoring of transaminases, bilirubin, coagulation, glucose and renal function is essential to detect evolving hepatic failure early",
+   "Aggressive fluid resuscitation and supportive care for profound fluid losses are the foundation of management, with N-acetylcysteine and silibinin used as hepatoprotective adjuncts",
+   "Early discussion with a liver transplant centre is warranted for those developing signs of acute liver failure, and prognostic criteria help identify transplant candidates",
+   "Activated charcoal and interruption of enterohepatic recirculation may be considered, and referral to a poisons centre is advised for identification and treatment guidance"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Suspect amatoxin poisoning whenever gastrointestinal symptoms are delayed for six or more hours after eating foraged mushrooms, since early-onset symptoms usually indicate a more benign species",
-      "The illness is classically biphasic: a severe cholera-like gastroenteritis, then a deceptive quiescent phase, followed by hepatic and renal injury from around the second to fourth day",
-      "The apparent clinical improvement during the latent phase is a trap, as transaminases and coagulopathy are already rising while the patient feels better",
-      "Ask specifically about the number of people who shared the meal and whether any mushrooms remain, as identification and shared exposure guide risk stratification",
-      "Serial monitoring of transaminases, bilirubin, coagulation, glucose and renal function is essential to detect evolving hepatic failure early",
-      "Aggressive fluid resuscitation and supportive care for profound fluid losses are the foundation of management, with N-acetylcysteine and silibinin used as hepatoprotective adjuncts",
-      "Early discussion with a liver transplant centre is warranted for those developing signs of acute liver failure, and prognostic criteria help identify transplant candidates",
-      "Activated charcoal and interruption of enterohepatic recirculation may be considered, and referral to a poisons centre is advised for identification and treatment guidance"
+  "pathophysiology": "Amatoxins, chiefly alpha-amanitin found in Amanita phalloides and related species, are heat-stable bicyclic octapeptides that survive cooking. After intestinal absorption they are taken up by hepatocytes and undergo enterohepatic recirculation. Inside cells they bind and inhibit RNA polymerase II, halting messenger RNA synthesis and therefore protein production. Metabolically active tissues, particularly hepatocytes and renal tubular cells, undergo apoptosis and necrosis, producing centrilobular hepatic necrosis, acute liver failure and acute kidney injury. The delay before organ injury reflects the time needed for depletion of essential proteins.",
+  "additionalDifferentials": [
+   "Gastroenteritis from early-onset (non-amatoxin) mushroom species such as gastrointestinal irritant fungi",
+   "Viral or bacterial infective gastroenteritis",
+   "Paracetamol or other drug-induced acute liver failure",
+   "Acute viral hepatitis",
+   "Ischaemic hepatitis or hypoxic liver injury",
+   "Gyromitrin (false morel) or orellanine (nephrotoxic Cortinarius) mushroom poisoning"
+  ],
+  "additionalInvestigations": [
+   "Serial hepatic transaminases, bilirubin and synthetic function including INR/prothrombin time",
+   "Renal function, electrolytes and blood glucose with close monitoring for hypoglycaemia",
+   "Arterial or venous blood gas and lactate to assess acidosis and hepatic perfusion",
+   "Urinary amatoxin assay where available, ideally on an early sample",
+   "Expert mycological identification of any remaining mushrooms or spore examination",
+   "Ammonia and coagulation trends to gauge progression toward hepatic encephalopathy"
+  ],
+  "redFlags": [
+   "Delayed onset of gastrointestinal symptoms beyond six hours after mushroom ingestion",
+   "Rising transaminases, worsening coagulopathy or hypoglycaemia during the latent phase",
+   "Encephalopathy, jaundice or a rapidly rising INR indicating acute liver failure",
+   "Oliguria or rising creatinine signalling concurrent renal injury",
+   "Progressive lactic acidosis and haemodynamic instability"
+  ],
+  "prognosis": "Outcome depends on the ingested dose, time to treatment and progression to acute liver failure; with early supportive care and hepatoprotective therapy many recover, but fulminant hepatic failure carries a high mortality unless liver transplantation is performed. Children and those presenting late are at greater risk.",
+  "pitfalls": [
+   "Being reassured by the latent phase and discharging patients before hepatic injury declares itself",
+   "Attributing the initial illness to simple gastroenteritis and failing to take a mushroom exposure history",
+   "Underestimating fluid and electrolyte losses during the gastrointestinal phase",
+   "Delaying referral to a liver transplant unit until encephalopathy is advanced",
+   "Assuming cooking or a pleasant taste excludes a toxic species"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Amatoxin-containing mushroom poisoning"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin aggressive intravenous fluid resuscitation to correct profound gastrointestinal fluid losses and maintain renal clearance",
+   "Give multiple-dose activated charcoal to interrupt enterohepatic recirculation of the toxin",
+   "Administer hepatoprotective antidotal therapy with intravenous N-acetylcysteine and silibinin",
+   "Monitor transaminases, bilirubin, coagulation, glucose and renal function serially, correcting hypoglycaemia and coagulopathy",
+   "Refer early to a liver transplant centre and apply prognostic criteria, as fulminant hepatic failure may require transplantation",
+   "Secure expert mycological identification and assess others who shared the meal for exposure",
+   "Provide supportive management of hepatic encephalopathy and acute kidney injury, including renal replacement therapy where needed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "amatoxin_mushroom_poisoning-pathway",
+   "title": "Amatoxin (Amanita) mushroom poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Suspect amatoxin poisoning whenever gastrointestinal symptoms are delayed for six or more hours after eating foraged mushrooms, since early-onset symptoms usually indicate a more benign species",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Delayed onset of gastrointestinal symptoms beyond six hours after mushroom ingestion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial hepatic transaminases, bilirubin and synthetic function including INR/prothrombin time, Renal function, electrolytes and blood glucose with close monitoring for hypoglycaemia, Arterial or venous blood gas and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin aggressive intravenous fluid resuscitation to correct profound gastrointestinal fluid losses and maintain renal clearance"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Being reassured by the latent phase and discharging patients before hepatic injury declares itself"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of amatoxin (amanita) mushroom poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "amatoxin_mushroom_poisoning-matrix",
+   "title": "Amatoxin (Amanita) mushroom poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect amatoxin poisoning whenever gastrointestinal symptoms are delayed for six or more hours after eating foraged mushrooms,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Amatoxins, chiefly alpha-amanitin found in Amanita phalloides and related species, are heat-stable bicyclic octapeptides that survive cooking. After intestinal absorption they are taken up by hepatocytes and undergo enterohepatic recirculation. Inside cells they bind and inhibit RNA polymerase II, halting messenger RNA synthesis and therefore protein production. Metabolically active tissues, particularly hepatocytes and renal tubular cells, undergo apoptosis and necrosis, producing centrilobular hepatic necrosis, acute liver failure and acute kidney injury. The delay before organ injury reflects the time needed for depletion of essential proteins.",
-    "additionalDifferentials": [
-      "Gastroenteritis from early-onset (non-amatoxin) mushroom species such as gastrointestinal irritant fungi",
-      "Viral or bacterial infective gastroenteritis",
-      "Paracetamol or other drug-induced acute liver failure",
-      "Acute viral hepatitis",
-      "Ischaemic hepatitis or hypoxic liver injury",
-      "Gyromitrin (false morel) or orellanine (nephrotoxic Cortinarius) mushroom poisoning"
+    [
+     "Key Investigations",
+     "Serial hepatic transaminases, bilirubin and synthetic function including INR/prothrombin time, Renal function, electrolytes and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial hepatic transaminases, bilirubin and synthetic function including INR/prothrombin time",
-      "Renal function, electrolytes and blood glucose with close monitoring for hypoglycaemia",
-      "Arterial or venous blood gas and lactate to assess acidosis and hepatic perfusion",
-      "Urinary amatoxin assay where available, ideally on an early sample",
-      "Expert mycological identification of any remaining mushrooms or spore examination",
-      "Ammonia and coagulation trends to gauge progression toward hepatic encephalopathy"
+    [
+     "Primary Differentials",
+     "Gastroenteritis from early-onset (non-amatoxin) mushroom species such as gastrointestinal irritant fungi, Viral or bacterial",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Delayed onset of gastrointestinal symptoms beyond six hours after mushroom ingestion",
-      "Rising transaminases, worsening coagulopathy or hypoglycaemia during the latent phase",
-      "Encephalopathy, jaundice or a rapidly rising INR indicating acute liver failure",
-      "Oliguria or rising creatinine signalling concurrent renal injury",
-      "Progressive lactic acidosis and haemodynamic instability"
+    [
+     "Management Strategy",
+     "Begin aggressive intravenous fluid resuscitation to correct profound gastrointestinal fluid losses and maintain renal clearance",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the ingested dose, time to treatment and progression to acute liver failure; with early supportive care and hepatoprotective therapy many recover, but fulminant hepatic failure carries a high mortality unless liver transplantation is performed. Children and those presenting late are at greater risk.",
-    "pitfalls": [
-      "Being reassured by the latent phase and discharging patients before hepatic injury declares itself",
-      "Attributing the initial illness to simple gastroenteritis and failing to take a mushroom exposure history",
-      "Underestimating fluid and electrolyte losses during the gastrointestinal phase",
-      "Delaying referral to a liver transplant unit until encephalopathy is advanced",
-      "Assuming cooking or a pleasant taste excludes a toxic species"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Amatoxin-containing mushroom poisoning"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin aggressive intravenous fluid resuscitation to correct profound gastrointestinal fluid losses and maintain renal clearance",
-      "Give multiple-dose activated charcoal to interrupt enterohepatic recirculation of the toxin",
-      "Administer hepatoprotective antidotal therapy with intravenous N-acetylcysteine and silibinin",
-      "Monitor transaminases, bilirubin, coagulation, glucose and renal function serially, correcting hypoglycaemia and coagulopathy",
-      "Refer early to a liver transplant centre and apply prognostic criteria, as fulminant hepatic failure may require transplantation",
-      "Secure expert mycological identification and assess others who shared the meal for exposure",
-      "Provide supportive management of hepatic encephalopathy and acute kidney injury, including renal replacement therapy where needed"
+    [
+     "Clinical Pitfall",
+     "Being reassured by the latent phase and discharging patients before hepatic injury declares itself",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for amatoxin (amanita) mushroom poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "amatoxin-mushroom-poisoning-diagram",
+   "title": "Amatoxin (Amanita) mushroom poisoning: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

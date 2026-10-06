@@ -5,7 +5,15 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU",
- "aliases": ["myxedema coma", "myxoedema crisis", "decompensated hypothyroidism", "severe hypothyroidism", "hypothyroid coma", "IV levothyroxine", "liothyronine"],
+ "aliases": [
+  "myxedema coma",
+  "myxoedema crisis",
+  "decompensated hypothyroidism",
+  "severe hypothyroidism",
+  "hypothyroid coma",
+  "IV levothyroxine",
+  "liothyronine"
+ ],
  "summary": "Suspect in a hypothermic, drowsy patient with hypothyroidism and a precipitant; give stress-dose hydrocortisone and IV levothyroxine 200 to 400 mcg loading (100 to 200 mcg if older or cardiac), then 1.6 mcg/kg/day (75% if IV), with ICU supportive care and passive rewarming.",
  "sections": [
   {
@@ -83,13 +91,133 @@
   }
  ],
  "drugs": [
-  { "name": "Levothyroxine IV", "dose": "Loading 200 to 400 mcg IV once (100 to 200 mcg if small, older, ischaemic heart disease or arrhythmia); then 1.6 mcg/kg/day reduced to 75% while IV", "notes": "Switch to oral once conscious and absorbing." },
-  { "name": "Liothyronine (T3)", "dose": "2.5 to 10 mcg every 8 hours (optional)", "notes": "Alternative regimen: 10 to 25 mcg IV with a 200 to 300 mcg levothyroxine load, then 2.5 to 10 mcg IV every 8 hours. Lower doses in older or cardiac patients." },
-  { "name": "Hydrocortisone", "dose": "100 mg IV immediately, then 50 mg IV every 6 hours (or 200 mg/24 hours by continuous infusion)", "notes": "Continue until adrenal insufficiency is excluded." }
+  {
+   "name": "Levothyroxine IV",
+   "dose": "Loading 200 to 400 mcg IV once (100 to 200 mcg if small, older, ischaemic heart disease or arrhythmia); then 1.6 mcg/kg/day reduced to 75% while IV",
+   "notes": "Switch to oral once conscious and absorbing."
+  },
+  {
+   "name": "Liothyronine (T3)",
+   "dose": "2.5 to 10 mcg every 8 hours (optional)",
+   "notes": "Alternative regimen: 10 to 25 mcg IV with a 200 to 300 mcg levothyroxine load, then 2.5 to 10 mcg IV every 8 hours. Lower doses in older or cardiac patients."
+  },
+  {
+   "name": "Hydrocortisone",
+   "dose": "100 mg IV immediately, then 50 mg IV every 6 hours (or 200 mg/24 hours by continuous infusion)",
+   "notes": "Continue until adrenal insufficiency is excluded."
+  }
  ],
  "sources": [
-  { "org": "ETA / BTA / Society for Endocrinology", "title": "Management of endocrine emergencies: joint consensus statement for management of myxoedema coma", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13452032/" },
-  { "org": "American Thyroid Association", "title": "Guidelines for the treatment of hypothyroidism: prepared by the ATA task force on thyroid hormone replacement", "year": 2014, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4267409/" }
+  {
+   "org": "ETA / BTA / Society for Endocrinology",
+   "title": "Management of endocrine emergencies: joint consensus statement for management of myxoedema coma",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13452032/"
+  },
+  {
+   "org": "American Thyroid Association",
+   "title": "Guidelines for the treatment of hypothyroidism: prepared by the ATA task force on thyroid hormone replacement",
+   "year": 2014,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4267409/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "myxoedema-coma-pathway",
+   "title": "Myxoedema coma Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Decompensated severe hypothyroidism: altered mental state (lethargy for weeks, confusion, stupor, less often coma), hypothermia and multi-organ dysfunction. Most patients are not comatose; mortality may reach 50%.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Treat on clinical suspicion; do not wait for thyroid results. Secure the airway and assess ventilation: hypoventilation and hypercapnia often need non-invasive or mechanical ventilation.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "TSH and FT4 (TSH may be low or normal in central hypothyroidism); random cortisol (with ACTH if possible) drawn BEFORE hydrocortisone, without delaying it."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Hypotension: cautious IV crystalloid or blood; avoid fluid overload. Correct hyponatraemia cautiously with close sodium monitoring; avoid hypotonic fluids."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Continuous ECG and BP monitoring for tachyarrhythmia or ischaemia after thyroid hormone; hourly temperature, GCS, glucose; frequent arterial gases and sodium."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for myxoedema coma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "myxoedema-coma-summary-matrix",
+   "title": "Myxoedema coma Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Decompensated severe hypothyroidism: altered mental state (lethargy for weeks, confusion, stupor, less often coma), hypothermia and",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Treat on clinical suspicion; do not wait for thyroid results. Secure the airway and assess ventilation: hypoventilation and hypercapnia",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "TSH and FT4 (TSH may be low or normal in central hypothyroidism); random cortisol (with ACTH if possible) drawn BEFORE hydrocortisone,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Levothyroxine IV: Loading 200 to 400 mcg IV once (100 to 200 mcg if small, older, ischaemic heart disease or arrhythmia); then 1.6",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving thyroid hormone without glucocorticoid cover, which can precipitate adrenal crisis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for myxoedema coma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "myxoedema-coma-diagram",
+   "title": "Myxoedema coma: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

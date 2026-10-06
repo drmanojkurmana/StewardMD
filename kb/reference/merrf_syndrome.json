@@ -1,79 +1,174 @@
 {
-  "id": "merrf_syndrome",
-  "name": "MERRF syndrome",
-  "aliases": [
-    "Myoclonic epilepsy with ragged-red fibres",
-    "m.8344A>G",
-    "MT-TK",
-    "MERRF"
+ "id": "merrf_syndrome",
+ "name": "MERRF syndrome",
+ "aliases": [
+  "Myoclonic epilepsy with ragged-red fibres",
+  "m.8344A>G",
+  "MT-TK",
+  "MERRF"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The defining tetrad is myoclonus, generalised epilepsy, cerebellar ataxia and a myopathy with ragged-red fibres on muscle biopsy",
+   "Most cases are due to the maternally inherited m.8344A>G point mutation in the MT-TK gene encoding the mitochondrial transfer RNA for lysine",
+   "As with other mitochondrial tRNA disorders, heteroplasmy and a threshold effect explain the variable severity and age of onset across a maternal lineage",
+   "Additional features may include sensorineural deafness, optic atrophy, peripheral neuropathy, dementia and multiple symmetrical lipomatosis of the neck and trunk",
+   "Elevated resting or exercise-induced lactate supports the diagnosis but is neither universal nor specific",
+   "Myoclonus is frequently stimulus-sensitive and can be difficult to control; some anticonvulsants worsen mitochondrial function and are best avoided",
+   "Muscle histochemistry shows ragged-red fibres that are typically cytochrome c oxidase deficient, reflecting the tRNA translation defect"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / GeneReviews mitochondrial disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The defining tetrad is myoclonus, generalised epilepsy, cerebellar ataxia and a myopathy with ragged-red fibres on muscle biopsy",
-      "Most cases are due to the maternally inherited m.8344A>G point mutation in the MT-TK gene encoding the mitochondrial transfer RNA for lysine",
-      "As with other mitochondrial tRNA disorders, heteroplasmy and a threshold effect explain the variable severity and age of onset across a maternal lineage",
-      "Additional features may include sensorineural deafness, optic atrophy, peripheral neuropathy, dementia and multiple symmetrical lipomatosis of the neck and trunk",
-      "Elevated resting or exercise-induced lactate supports the diagnosis but is neither universal nor specific",
-      "Myoclonus is frequently stimulus-sensitive and can be difficult to control; some anticonvulsants worsen mitochondrial function and are best avoided",
-      "Muscle histochemistry shows ragged-red fibres that are typically cytochrome c oxidase deficient, reflecting the tRNA translation defect"
+  "pathophysiology": "MERRF is caused by a mitochondrial tRNA mutation, usually m.8344A>G in MT-TK, that impairs mitochondrial translation and thereby the synthesis of respiratory-chain subunits, reducing oxidative phosphorylation capacity. The mutation is maternally inherited and heteroplasmic, so clinical expression depends on the proportion of mutant genomes and the energy threshold of each tissue. Neurons of the cerebellum, brainstem and cerebral cortex, together with skeletal muscle, are especially vulnerable to the resulting energy deficit, producing the characteristic myoclonus, seizures, ataxia and myopathy. Accumulation of abnormal mitochondria beneath the sarcolemma gives the ragged-red appearance on trichrome staining.",
+  "additionalDifferentials": [
+   "Other progressive myoclonic epilepsies such as Unverricht-Lundborg and Lafora disease",
+   "MELAS and overlap mitochondrial syndromes",
+   "Sialidosis and neuronal ceroid lipofuscinosis",
+   "Spinocerebellar ataxias with myoclonus",
+   "Juvenile myoclonic epilepsy",
+   "Coeliac-associated or paraneoplastic cerebellar ataxia"
+  ],
+  "additionalInvestigations": [
+   "Resting and post-exercise blood lactate and pyruvate",
+   "Electroencephalography to characterise generalised epileptiform and photosensitive discharges",
+   "Brain MRI, which may show cerebellar and brainstem atrophy or basal ganglia calcification",
+   "Targeted molecular testing for m.8344A>G with heteroplasmy quantification in appropriate tissue",
+   "Skeletal muscle biopsy for ragged-red fibres and respiratory-chain enzymology",
+   "Audiometry and nerve conduction studies for associated deafness and neuropathy"
+  ],
+  "redFlags": [
+   "Poorly controlled myoclonic seizures or status epilepticus",
+   "Rapid neurological deterioration or new cardiorespiratory compromise",
+   "Cardiac conduction abnormality or cardiomyopathy on surveillance",
+   "Metabolic decompensation with rising lactic acidosis"
+  ],
+  "prognosis": "MERRF is slowly progressive with a broad spectrum of severity; many patients have a normal early childhood before symptoms emerge, but accumulating myoclonus, ataxia and dementia can be disabling, and lifespan may be reduced in severely affected individuals.",
+  "pitfalls": [
+   "Labelling the disorder an idiopathic progressive myoclonic epilepsy without pursuing mitochondrial testing",
+   "Relying on blood alone for genetic testing, since low-level heteroplasmy may be missed",
+   "Prescribing anticonvulsants that impair respiratory-chain or mitochondrial function",
+   "Overlooking cardiac and audiological involvement that warrants surveillance"
+  ],
+  "references": [
+   "GeneReviews: MERRF",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Antiepileptic therapy for seizures and myoclonus, favouring agents such as levetiracetam and clonazepam while avoiding sodium valproate, which is mitochondrially toxic",
+   "Supportive mitochondrial supplementation such as coenzyme Q10, riboflavin and L-carnitine, recognising the limited evidence base",
+   "Management of complications including hearing aids or cochlear implantation for sensorineural deafness and rehabilitation for cerebellar ataxia",
+   "Avoidance of mitochondrial toxins including aminoglycosides and valproate",
+   "Surveillance for cardiac conduction disease, endocrinopathy and progressive neurological decline",
+   "Physiotherapy, occupational therapy and multidisciplinary neurological support",
+   "Genetic counselling emphasising maternal mitochondrial inheritance and heteroplasmy, with assessment of the maternal lineage"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "merrf_syndrome-pathway",
+   "title": "MERRF syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The defining tetrad is myoclonus, generalised epilepsy, cerebellar ataxia and a myopathy with ragged-red fibres on muscle biopsy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Poorly controlled myoclonic seizures or status epilepticus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Resting and post-exercise blood lactate and pyruvate, Electroencephalography to characterise generalised epileptiform and photosensitive discharges, Brain MRI, which may show cerebellar and brainstem atrophy or basal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Antiepileptic therapy for seizures and myoclonus, favouring agents such as levetiracetam and clonazepam while avoiding sodium valproate, which is mitochondrially toxic"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the disorder an idiopathic progressive myoclonic epilepsy without pursuing mitochondrial testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of merrf syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "merrf_syndrome-matrix",
+   "title": "MERRF syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The defining tetrad is myoclonus, generalised epilepsy, cerebellar ataxia and a myopathy with ragged-red fibres on muscle biopsy",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "MERRF is caused by a mitochondrial tRNA mutation, usually m.8344A>G in MT-TK, that impairs mitochondrial translation and thereby the synthesis of respiratory-chain subunits, reducing oxidative phosphorylation capacity. The mutation is maternally inherited and heteroplasmic, so clinical expression depends on the proportion of mutant genomes and the energy threshold of each tissue. Neurons of the cerebellum, brainstem and cerebral cortex, together with skeletal muscle, are especially vulnerable to the resulting energy deficit, producing the characteristic myoclonus, seizures, ataxia and myopathy. Accumulation of abnormal mitochondria beneath the sarcolemma gives the ragged-red appearance on trichrome staining.",
-    "additionalDifferentials": [
-      "Other progressive myoclonic epilepsies such as Unverricht-Lundborg and Lafora disease",
-      "MELAS and overlap mitochondrial syndromes",
-      "Sialidosis and neuronal ceroid lipofuscinosis",
-      "Spinocerebellar ataxias with myoclonus",
-      "Juvenile myoclonic epilepsy",
-      "Coeliac-associated or paraneoplastic cerebellar ataxia"
+    [
+     "Key Investigations",
+     "Resting and post-exercise blood lactate and pyruvate, Electroencephalography to characterise generalised epileptiform and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Resting and post-exercise blood lactate and pyruvate",
-      "Electroencephalography to characterise generalised epileptiform and photosensitive discharges",
-      "Brain MRI, which may show cerebellar and brainstem atrophy or basal ganglia calcification",
-      "Targeted molecular testing for m.8344A>G with heteroplasmy quantification in appropriate tissue",
-      "Skeletal muscle biopsy for ragged-red fibres and respiratory-chain enzymology",
-      "Audiometry and nerve conduction studies for associated deafness and neuropathy"
+    [
+     "Primary Differentials",
+     "Other progressive myoclonic epilepsies such as Unverricht-Lundborg and Lafora disease, MELAS and overlap mitochondrial syndromes,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Poorly controlled myoclonic seizures or status epilepticus",
-      "Rapid neurological deterioration or new cardiorespiratory compromise",
-      "Cardiac conduction abnormality or cardiomyopathy on surveillance",
-      "Metabolic decompensation with rising lactic acidosis"
+    [
+     "Management Strategy",
+     "Antiepileptic therapy for seizures and myoclonus, favouring agents such as levetiracetam and clonazepam while avoiding sodium",
+     "Core treatment modality"
     ],
-    "prognosis": "MERRF is slowly progressive with a broad spectrum of severity; many patients have a normal early childhood before symptoms emerge, but accumulating myoclonus, ataxia and dementia can be disabling, and lifespan may be reduced in severely affected individuals.",
-    "pitfalls": [
-      "Labelling the disorder an idiopathic progressive myoclonic epilepsy without pursuing mitochondrial testing",
-      "Relying on blood alone for genetic testing, since low-level heteroplasmy may be missed",
-      "Prescribing anticonvulsants that impair respiratory-chain or mitochondrial function",
-      "Overlooking cardiac and audiological involvement that warrants surveillance"
-    ],
-    "references": [
-      "GeneReviews: MERRF",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Antiepileptic therapy for seizures and myoclonus, favouring agents such as levetiracetam and clonazepam while avoiding sodium valproate, which is mitochondrially toxic",
-      "Supportive mitochondrial supplementation such as coenzyme Q10, riboflavin and L-carnitine, recognising the limited evidence base",
-      "Management of complications including hearing aids or cochlear implantation for sensorineural deafness and rehabilitation for cerebellar ataxia",
-      "Avoidance of mitochondrial toxins including aminoglycosides and valproate",
-      "Surveillance for cardiac conduction disease, endocrinopathy and progressive neurological decline",
-      "Physiotherapy, occupational therapy and multidisciplinary neurological support",
-      "Genetic counselling emphasising maternal mitochondrial inheritance and heteroplasmy, with assessment of the maternal lineage"
+    [
+     "Clinical Pitfall",
+     "Labelling the disorder an idiopathic progressive myoclonic epilepsy without pursuing mitochondrial testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for merrf syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "merrf-syndrome-diagram",
+   "title": "MERRF syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -149,5 +149,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h48fb7963"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "aki-dx-algo",
+      "title": "Acute kidney injury: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "AKI is conventionally categorised by site of insult: prerenal (perfusion), intrinsic/renal (vascular, glomerular, tubulointerstitial), and postrenal (obstruction); excluding pre- and post-renal causes points to an intrinsic parenchymal",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Oliguria (24-h output under 400 mL) or anuria (under 100 mL); oliguria is never normal as at least ~400 mL of maximally concentrated urine is needed to excrete the daily osmolar load (p.341)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Urine sediment microscopy for casts (muddy-brown granular and tubular epithelial casts in ATN; hyaline/granular or normal in prerenal; RBC casts in glomerulonephritis; WBC casts in interstitial nephritis) (p.340-341),"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: AKI severity is staged by the KDIGO criteria (referenced as Kidney Disease: Improving Global Outcomes; p.341, line ref to KDIGO Controversies Conference). Detailed KDIGO stage cut-offs (serum creatinine rise and"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to exclude obstruction early; ultrasound can be falsely negative very early in obstruction or when ureters cannot dilate (tumour encasement, retroperitoneal fibrosis) (p.340)"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute kidney injury."
+    }
+  ],
+  "tables": [
+    {
+      "id": "aki-matrix",
+      "title": "Acute kidney injury: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "AKI is conventionally categorised by site of insult: prerenal (perfusion), intrinsic/renal (vascular, glomerular,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Urine sediment microscopy for casts (muddy-brown granular and tubular epithelial casts in ATN; hyaline/granular or normal in",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Prerenal azotaemia from true volume loss (GI haemorrhage, burns, diarrhoea, diuretics) (p.340), Prerenal from volume",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Oliguria (24-h output under 400 mL) or anuria (under 100 mL); oliguria is never normal as at least ~400 mL of maximally",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude obstruction early; ultrasound can be falsely negative very early in obstruction or when ureters cannot dilate",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute kidney injury."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "aki-diagram",
+      "title": "Acute kidney injury: Renal & Urinary Tract Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+      "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+        },
+        {
+          "label": "Tubular Apparatus",
+          "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+        }
+      ]
+    }
+  ]
 }

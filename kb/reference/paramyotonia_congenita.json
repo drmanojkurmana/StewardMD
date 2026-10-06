@@ -1,79 +1,174 @@
 {
-  "id": "paramyotonia_congenita",
-  "name": "Paramyotonia congenita",
-  "aliases": [
-    "PMC",
-    "paramyotonia congenita of von Eulenburg",
-    "SCN4A",
-    "sodium channelopathy of muscle",
-    "cold-induced paradoxical myotonia"
+ "id": "paramyotonia_congenita",
+ "name": "Paramyotonia congenita",
+ "aliases": [
+  "PMC",
+  "paramyotonia congenita of von Eulenburg",
+  "SCN4A",
+  "sodium channelopathy of muscle",
+  "cold-induced paradoxical myotonia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuromuscular",
+ "specialty": "Neurology / Neuromuscular",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Distinguished by paradoxical myotonia, in which stiffness worsens rather than improves with repeated activity, the opposite of the warm-up seen in myotonia congenita",
+   "Symptoms are markedly precipitated or aggravated by cold exposure, classically affecting the face, eyelids, tongue and hands",
+   "Cold-induced stiffness can be followed by a period of flaccid weakness that may persist for some time after rewarming",
+   "Caused by gain-of-function mutations in the SCN4A skeletal-muscle sodium channel gene and inherited in an autosomal dominant pattern",
+   "It sits on a clinical continuum with hyperkalaemic periodic paralysis and the potassium-aggravated myotonias, all allelic SCN4A disorders",
+   "Management combines avoidance of cold and other triggers with sodium-channel-blocking antimyotonic agents when symptoms are troublesome",
+   "Bedside cooling of a hand, or asking the patient to repeatedly forcefully close the eyes, can reproduce the paradoxical worsening"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuromuscular",
-  "specialty": "Neurology / Neuromuscular",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Distinguished by paradoxical myotonia, in which stiffness worsens rather than improves with repeated activity, the opposite of the warm-up seen in myotonia congenita",
-      "Symptoms are markedly precipitated or aggravated by cold exposure, classically affecting the face, eyelids, tongue and hands",
-      "Cold-induced stiffness can be followed by a period of flaccid weakness that may persist for some time after rewarming",
-      "Caused by gain-of-function mutations in the SCN4A skeletal-muscle sodium channel gene and inherited in an autosomal dominant pattern",
-      "It sits on a clinical continuum with hyperkalaemic periodic paralysis and the potassium-aggravated myotonias, all allelic SCN4A disorders",
-      "Management combines avoidance of cold and other triggers with sodium-channel-blocking antimyotonic agents when symptoms are troublesome",
-      "Bedside cooling of a hand, or asking the patient to repeatedly forcefully close the eyes, can reproduce the paradoxical worsening"
+  "pathophysiology": "Paramyotonia congenita is caused by gain-of-function mutations in SCN4A, encoding the skeletal-muscle voltage-gated sodium channel Nav1.4. The mutant channels show impaired or slowed inactivation, and this defect is temperature sensitive so that cooling exaggerates the persistent sodium current. Incomplete inactivation produces sustained membrane depolarisation, which at moderate levels causes repetitive firing perceived as myotonia and, when depolarisation becomes severe, inactivates the remaining channels to render the fibre inexcitable and weak. Because the abnormality worsens with sustained activity and with cold, patients experience the characteristic paradoxical, cold-sensitive myotonia followed by weakness rather than the warm-up improvement of chloride channelopathies.",
+  "additionalDifferentials": [
+   "Myotonia congenita",
+   "Hyperkalaemic periodic paralysis",
+   "Potassium-aggravated myotonias",
+   "Myotonic dystrophy types 1 and 2",
+   "Andersen-Tawil syndrome",
+   "Schwartz-Jampel syndrome"
+  ],
+  "additionalInvestigations": [
+   "Electromyography with myotonic discharges, including recordings before and after muscle cooling",
+   "Short exercise electromyography protocol with cooling, showing the characteristic decrement pattern",
+   "Serum creatine kinase and interictal potassium",
+   "Targeted SCN4A genetic testing",
+   "Assessment to exclude myotonic dystrophy and its systemic features",
+   "Muscle biopsy only where diagnostic uncertainty persists"
+  ],
+  "redFlags": [
+   "Prolonged or severe cold-induced weakness impairing safe function",
+   "Respiratory or bulbar involvement during a severe episode",
+   "Susceptibility to anaesthetic complications with depolarising muscle relaxants and hypothermia",
+   "Emergence of a fixed myopathy, which would prompt reconsideration of the diagnosis"
+  ],
+  "prognosis": "Paramyotonia congenita is a non-progressive disorder compatible with a normal lifespan, and although cold-triggered stiffness and weakness can be disabling in cold climates or occupations, symptoms are usually manageable with trigger avoidance and antimyotonic therapy.",
+  "pitfalls": [
+   "Confusing the paradoxical cold-worsened myotonia with the warm-up improvement of myotonia congenita",
+   "Failing to test after cooling, so mild or intermittent myotonia is missed on standard examination or electromyography",
+   "Not recognising the overlap with hyperkalaemic periodic paralysis when weakness dominates",
+   "Overlooking anaesthetic risks from cold theatres and depolarising neuromuscular blockade"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "GeneReviews: Paramyotonia Congenita and SCN4A-related disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Avoidance of triggers, particularly cold exposure and sustained strenuous activity",
+   "Sodium-channel-blocking antimyotonic therapy, notably mexiletine, for troublesome myotonia",
+   "Measures to prevent associated hyperkalaemic weakness, such as avoiding potassium loads and prolonged fasting, with carbonic anhydrase inhibitors in overlap cases",
+   "Anaesthetic precautions including maintaining normothermia and avoiding depolarising muscle relaxants, with awareness of malignant-hyperthermia susceptibility",
+   "Genetic counselling given autosomal dominant inheritance of the SCN4A mutation",
+   "Long-term neuromuscular specialist follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "paramyotonia_congenita-pathway",
+   "title": "Paramyotonia congenita: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Distinguished by paradoxical myotonia, in which stiffness worsens rather than improves with repeated activity, the opposite of the warm-up seen in myotonia congenita",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Prolonged or severe cold-induced weakness impairing safe function",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Electromyography with myotonic discharges, including recordings before and after muscle cooling, Short exercise electromyography protocol with cooling, showing the characteristic decrement pattern, Serum creatine kinase"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Avoidance of triggers, particularly cold exposure and sustained strenuous activity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the paradoxical cold-worsened myotonia with the warm-up improvement of myotonia congenita"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of paramyotonia congenita."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paramyotonia_congenita-matrix",
+   "title": "Paramyotonia congenita: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Distinguished by paradoxical myotonia, in which stiffness worsens rather than improves with repeated activity, the opposite of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Paramyotonia congenita is caused by gain-of-function mutations in SCN4A, encoding the skeletal-muscle voltage-gated sodium channel Nav1.4. The mutant channels show impaired or slowed inactivation, and this defect is temperature sensitive so that cooling exaggerates the persistent sodium current. Incomplete inactivation produces sustained membrane depolarisation, which at moderate levels causes repetitive firing perceived as myotonia and, when depolarisation becomes severe, inactivates the remaining channels to render the fibre inexcitable and weak. Because the abnormality worsens with sustained activity and with cold, patients experience the characteristic paradoxical, cold-sensitive myotonia followed by weakness rather than the warm-up improvement of chloride channelopathies.",
-    "additionalDifferentials": [
-      "Myotonia congenita",
-      "Hyperkalaemic periodic paralysis",
-      "Potassium-aggravated myotonias",
-      "Myotonic dystrophy types 1 and 2",
-      "Andersen-Tawil syndrome",
-      "Schwartz-Jampel syndrome"
+    [
+     "Key Investigations",
+     "Electromyography with myotonic discharges, including recordings before and after muscle cooling, Short exercise electromyography",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Electromyography with myotonic discharges, including recordings before and after muscle cooling",
-      "Short exercise electromyography protocol with cooling, showing the characteristic decrement pattern",
-      "Serum creatine kinase and interictal potassium",
-      "Targeted SCN4A genetic testing",
-      "Assessment to exclude myotonic dystrophy and its systemic features",
-      "Muscle biopsy only where diagnostic uncertainty persists"
+    [
+     "Primary Differentials",
+     "Myotonia congenita, Hyperkalaemic periodic paralysis, Potassium-aggravated myotonias",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Prolonged or severe cold-induced weakness impairing safe function",
-      "Respiratory or bulbar involvement during a severe episode",
-      "Susceptibility to anaesthetic complications with depolarising muscle relaxants and hypothermia",
-      "Emergence of a fixed myopathy, which would prompt reconsideration of the diagnosis"
+    [
+     "Management Strategy",
+     "Avoidance of triggers, particularly cold exposure and sustained strenuous activity",
+     "Core treatment modality"
     ],
-    "prognosis": "Paramyotonia congenita is a non-progressive disorder compatible with a normal lifespan, and although cold-triggered stiffness and weakness can be disabling in cold climates or occupations, symptoms are usually manageable with trigger avoidance and antimyotonic therapy.",
-    "pitfalls": [
-      "Confusing the paradoxical cold-worsened myotonia with the warm-up improvement of myotonia congenita",
-      "Failing to test after cooling, so mild or intermittent myotonia is missed on standard examination or electromyography",
-      "Not recognising the overlap with hyperkalaemic periodic paralysis when weakness dominates",
-      "Overlooking anaesthetic risks from cold theatres and depolarising neuromuscular blockade"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "GeneReviews: Paramyotonia Congenita and SCN4A-related disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Avoidance of triggers, particularly cold exposure and sustained strenuous activity",
-      "Sodium-channel-blocking antimyotonic therapy, notably mexiletine, for troublesome myotonia",
-      "Measures to prevent associated hyperkalaemic weakness, such as avoiding potassium loads and prolonged fasting, with carbonic anhydrase inhibitors in overlap cases",
-      "Anaesthetic precautions including maintaining normothermia and avoiding depolarising muscle relaxants, with awareness of malignant-hyperthermia susceptibility",
-      "Genetic counselling given autosomal dominant inheritance of the SCN4A mutation",
-      "Long-term neuromuscular specialist follow-up"
+    [
+     "Clinical Pitfall",
+     "Confusing the paradoxical cold-worsened myotonia with the warm-up improvement of myotonia congenita",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for paramyotonia congenita."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "paramyotonia-congenita-diagram",
+   "title": "Paramyotonia congenita: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

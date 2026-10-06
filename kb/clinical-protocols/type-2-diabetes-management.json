@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "type-2-diabetes-management-india",
  "setting": "Outpatient, primary care, medical clinic",
- "aliases": ["T2DM", "T2D", "type 2 diabetes mellitus", "DM2", "NIDDM", "diabetes management", "oral hypoglycaemic agents", "OHA", "insulin initiation", "SGLT2 inhibitor", "GLP-1 RA"],
+ "aliases": [
+  "T2DM",
+  "T2D",
+  "type 2 diabetes mellitus",
+  "DM2",
+  "NIDDM",
+  "diabetes management",
+  "oral hypoglycaemic agents",
+  "OHA",
+  "insulin initiation",
+  "SGLT2 inhibitor",
+  "GLP-1 RA"
+ ],
  "summary": "Aim for HbA1c below 7% in most adults, start metformin with lifestyle change, add SGLT2 inhibitors or GLP-1 RAs for ASCVD, heart failure, CKD or obesity irrespective of HbA1c, start basal insulin at 10 units or 0.1 to 0.2 units/kg when needed, and screen yearly for complications.",
  "sections": [
   {
@@ -96,21 +108,175 @@
   }
  ],
  "drugs": [
-  { "name": "Metformin", "dose": "500 mg orally once or twice daily with meals, titrated every 1 to 2 weeks to 1000 mg twice daily (usual maximum 2000 mg/day); extended-release once daily", "notes": "Do not start if eGFR below 45; halve at eGFR 30 to 45; stop below 30. Check vitamin B12 periodically." },
-  { "name": "Empagliflozin", "dose": "10 mg orally once daily (25 mg for extra glucose lowering if eGFR allows)", "notes": "HF, CKD and ASCVD benefit; start if eGFR 20 or more. Glucose effect falls below eGFR 45." },
-  { "name": "Dapagliflozin", "dose": "10 mg orally once daily", "notes": "HF and CKD benefit; start if eGFR 20 or more." },
-  { "name": "Semaglutide (SC)", "dose": "0.25 mg SC once weekly for 4 weeks, then 0.5 mg weekly; increase to 1 mg and then 2 mg weekly after at least 4 weeks each if needed", "notes": "Oral semaglutide is an alternative. GI side effects; avoid with MTC or MEN2 history." },
-  { "name": "Tirzepatide", "dose": "2.5 mg SC once weekly for 4 weeks, then increase by 2.5 mg every 4 weeks as needed to a maximum of 15 mg weekly", "notes": "Highest glucose and weight efficacy; do not combine with a DPP-4 inhibitor or GLP-1 RA." },
-  { "name": "Gliclazide MR", "dose": "30 mg orally once daily with breakfast, titrated to a maximum of 120 mg once daily", "notes": "Low cost; hypoglycaemia risk, especially in older adults and CKD." },
-  { "name": "Sitagliptin", "dose": "100 mg orally once daily; 50 mg if eGFR 30 to 44; 25 mg if eGFR below 30", "notes": "Weight neutral, low hypoglycaemia risk." },
-  { "name": "Basal insulin (glargine or NPH)", "dose": "10 units or 0.1 to 0.2 units/kg SC at bedtime, increased by 2 units every 3 days to the fasting goal", "notes": "Reduce by 10 to 20% after hypoglycaemia. NPH may need twice-daily dosing." },
-  { "name": "Atorvastatin", "dose": "Moderate intensity 10 to 20 mg once daily; high intensity 40 to 80 mg once daily", "notes": "Rosuvastatin 5 to 10 mg (moderate) or 20 to 40 mg (high) is an alternative." }
+  {
+   "name": "Metformin",
+   "dose": "500 mg orally once or twice daily with meals, titrated every 1 to 2 weeks to 1000 mg twice daily (usual maximum 2000 mg/day); extended-release once daily",
+   "notes": "Do not start if eGFR below 45; halve at eGFR 30 to 45; stop below 30. Check vitamin B12 periodically."
+  },
+  {
+   "name": "Empagliflozin",
+   "dose": "10 mg orally once daily (25 mg for extra glucose lowering if eGFR allows)",
+   "notes": "HF, CKD and ASCVD benefit; start if eGFR 20 or more. Glucose effect falls below eGFR 45."
+  },
+  {
+   "name": "Dapagliflozin",
+   "dose": "10 mg orally once daily",
+   "notes": "HF and CKD benefit; start if eGFR 20 or more."
+  },
+  {
+   "name": "Semaglutide (SC)",
+   "dose": "0.25 mg SC once weekly for 4 weeks, then 0.5 mg weekly; increase to 1 mg and then 2 mg weekly after at least 4 weeks each if needed",
+   "notes": "Oral semaglutide is an alternative. GI side effects; avoid with MTC or MEN2 history."
+  },
+  {
+   "name": "Tirzepatide",
+   "dose": "2.5 mg SC once weekly for 4 weeks, then increase by 2.5 mg every 4 weeks as needed to a maximum of 15 mg weekly",
+   "notes": "Highest glucose and weight efficacy; do not combine with a DPP-4 inhibitor or GLP-1 RA."
+  },
+  {
+   "name": "Gliclazide MR",
+   "dose": "30 mg orally once daily with breakfast, titrated to a maximum of 120 mg once daily",
+   "notes": "Low cost; hypoglycaemia risk, especially in older adults and CKD."
+  },
+  {
+   "name": "Sitagliptin",
+   "dose": "100 mg orally once daily; 50 mg if eGFR 30 to 44; 25 mg if eGFR below 30",
+   "notes": "Weight neutral, low hypoglycaemia risk."
+  },
+  {
+   "name": "Basal insulin (glargine or NPH)",
+   "dose": "10 units or 0.1 to 0.2 units/kg SC at bedtime, increased by 2 units every 3 days to the fasting goal",
+   "notes": "Reduce by 10 to 20% after hypoglycaemia. NPH may need twice-daily dosing."
+  },
+  {
+   "name": "Atorvastatin",
+   "dose": "Moderate intensity 10 to 20 mg once daily; high intensity 40 to 80 mg once daily",
+   "notes": "Rosuvastatin 5 to 10 mg (moderate) or 20 to 40 mg (high) is an alternative."
+  }
  ],
  "sources": [
-  { "org": "ADA", "title": "9. Pharmacologic approaches to glycemic treatment: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690185/" },
-  { "org": "ADA", "title": "6. Glycemic goals, hypoglycemia, and hyperglycemic crises: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/" },
-  { "org": "RSSDI", "title": "RSSDI clinical practice recommendations for the management of type 2 diabetes mellitus 2022", "year": 2022, "url": "https://link.springer.com/article/10.1007/s13410-022-01129-5" },
-  { "org": "ADA", "title": "Standards of Care in Diabetes 2026 (sections 10 to 12: cardiovascular, kidney, eye and foot)", "year": 2026, "url": "https://professional.diabetes.org/standards-of-care" }
+  {
+   "org": "ADA",
+   "title": "9. Pharmacologic approaches to glycemic treatment: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690185/"
+  },
+  {
+   "org": "ADA",
+   "title": "6. Glycemic goals, hypoglycemia, and hyperglycemic crises: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/"
+  },
+  {
+   "org": "RSSDI",
+   "title": "RSSDI clinical practice recommendations for the management of type 2 diabetes mellitus 2022",
+   "year": 2022,
+   "url": "https://link.springer.com/article/10.1007/s13410-022-01129-5"
+  },
+  {
+   "org": "ADA",
+   "title": "Standards of Care in Diabetes 2026 (sections 10 to 12: cardiovascular, kidney, eye and foot)",
+   "year": 2026,
+   "url": "https://professional.diabetes.org/standards-of-care"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "type-2-diabetes-management-pathway",
+   "title": "Type 2 diabetes: outpatient management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Diagnosis: HbA1c 6.5% or more, fasting plasma glucose 126 mg/dL (7.0 mmol/L) or more, 2-hour OGTT glucose 200 mg/dL (11.1 mmol/L) or more, or random glucose 200 mg/dL or more with classic symptoms. Without unequivocal hyperglycaemia,",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Consider type 1 diabetes or LADA if lean, rapid weight loss, ketosis or young onset; consider pancreatic diabetes (fibrocalculous pancreatitis, chronic pancreatitis) in India.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "At baseline record: weight and BMI, BP, HbA1c, lipids, eGFR and urine albumin-to-creatinine ratio (UACR), liver enzymes, ECG, eye and foot examination, ASCVD and heart failure history, hypoglycaemia risk, cost and access."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Statin for all aged 40 to 75: moderate intensity if no ASCVD; high intensity if additional risk factors or ASCVD. Add ezetimibe if LDL goal is not met on the maximum tolerated statin."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Kidney: UACR and eGFR at least yearly from diagnosis; 1 to 4 times a year once CKD is present."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for type 2 diabetes: outpatient management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "type-2-diabetes-management-summary-matrix",
+   "title": "Type 2 diabetes: outpatient management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Diagnosis: HbA1c 6.5% or more, fasting plasma glucose 126 mg/dL (7.0 mmol/L) or more, 2-hour OGTT glucose 200 mg/dL (11.1 mmol/L) or more,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Statin for all aged 40 to 75: moderate intensity if no ASCVD; high intensity if additional risk factors or ASCVD. Add ezetimibe if LDL goal",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Metformin: 500 mg orally once or twice daily with meals, titrated every 1 to 2 weeks to 1000 mg twice daily (usual maximum 2000 mg/day);",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Therapeutic inertia: leaving HbA1c above goal for months without intensifying.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for type 2 diabetes: outpatient management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "type-2-diabetes-management-diagram",
+   "title": "Type 2 diabetes: outpatient management: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

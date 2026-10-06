@@ -6,7 +6,18 @@
  "basis": "india",
  "counterpart": "leptospirosis-international",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["lepto", "Weil disease", "Weil's disease", "rat fever", "leptospiral pulmonary haemorrhage", "LPHS", "MAT", "flood fever", "doxycycline prophylaxis", "NCDC leptospirosis"],
+ "aliases": [
+  "lepto",
+  "Weil disease",
+  "Weil's disease",
+  "rat fever",
+  "leptospiral pulmonary haemorrhage",
+  "LPHS",
+  "MAT",
+  "flood fever",
+  "doxycycline prophylaxis",
+  "NCDC leptospirosis"
+ ],
  "summary": "Suspect in fever with myalgia, calf tenderness or conjunctival suffusion after flood-water, field or animal exposure. Treat empirically: doxycycline for mild disease; IV penicillin or ceftriaxone for severe disease. Refer early for AKI, jaundice, bleeding or breathlessness, as pulmonary haemorrhage kills within hours.",
  "sections": [
   {
@@ -101,18 +112,159 @@
   }
  ],
  "drugs": [
-  { "name": "Doxycycline", "dose": "100 mg orally twice daily for 7 days", "notes": "Mild disease. Avoid in pregnancy, lactation and children under 8 years." },
-  { "name": "Ampicillin or amoxicillin", "dose": "500 mg orally 6-hourly for 7 days (children 30 to 50 mg/kg/day in divided doses)", "notes": "Pregnancy, lactation and children under 8 years." },
-  { "name": "Azithromycin", "dose": "500 mg orally once daily for 3 days", "notes": "Alternative for mild disease (CDC)." },
-  { "name": "Crystalline penicillin G (benzylpenicillin)", "dose": "20 lakh units (2 million units) IV 6-hourly for 7 days", "notes": "Severe disease (NCDC). Children 2 to 4 lakh units/kg/day. CDC dose 1.5 million units 6-hourly." },
-  { "name": "Ceftriaxone", "dose": "1 g IV once daily for 7 days", "notes": "Severe disease (CDC). Children 50 to 75 mg/kg/day (NCDC)." },
-  { "name": "Cefotaxime", "dose": "1 g IV 6-hourly for 7 days", "notes": "Severe disease alternative (NCDC)." },
-  { "name": "Doxycycline chemoprophylaxis", "dose": "200 mg orally once weekly", "notes": "High-risk occupational exposure in peak season; 6 weeks, never beyond 8 weeks." }
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally twice daily for 7 days",
+   "notes": "Mild disease. Avoid in pregnancy, lactation and children under 8 years."
+  },
+  {
+   "name": "Ampicillin or amoxicillin",
+   "dose": "500 mg orally 6-hourly for 7 days (children 30 to 50 mg/kg/day in divided doses)",
+   "notes": "Pregnancy, lactation and children under 8 years."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "500 mg orally once daily for 3 days",
+   "notes": "Alternative for mild disease (CDC)."
+  },
+  {
+   "name": "Crystalline penicillin G (benzylpenicillin)",
+   "dose": "20 lakh units (2 million units) IV 6-hourly for 7 days",
+   "notes": "Severe disease (NCDC). Children 2 to 4 lakh units/kg/day. CDC dose 1.5 million units 6-hourly."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "1 g IV once daily for 7 days",
+   "notes": "Severe disease (CDC). Children 50 to 75 mg/kg/day (NCDC)."
+  },
+  {
+   "name": "Cefotaxime",
+   "dose": "1 g IV 6-hourly for 7 days",
+   "notes": "Severe disease alternative (NCDC)."
+  },
+  {
+   "name": "Doxycycline chemoprophylaxis",
+   "dose": "200 mg orally once weekly",
+   "notes": "High-risk occupational exposure in peak season; 6 weeks, never beyond 8 weeks."
+  }
  ],
  "sources": [
-  { "org": "NCDC, MoHFW", "title": "National Guidelines: Diagnosis, Case Management, Prevention and Control of Leptospirosis", "year": 2015, "url": "https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/919.pdf" },
-  { "org": "CDC", "title": "Clinical Overview of Leptospirosis", "year": 2026, "url": "https://www.cdc.gov/leptospirosis/hcp/clinical-overview/index.html" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf" }
+  {
+   "org": "NCDC, MoHFW",
+   "title": "National Guidelines: Diagnosis, Case Management, Prevention and Control of Leptospirosis",
+   "year": 2015,
+   "url": "https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/919.pdf"
+  },
+  {
+   "org": "CDC",
+   "title": "Clinical Overview of Leptospirosis",
+   "year": 2026,
+   "url": "https://www.cdc.gov/leptospirosis/hcp/clinical-overview/index.html"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "leptospirosis-pathway",
+   "title": "Leptospirosis (adult, India) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspected case (NCDC): fever, headache, myalgia and prostration after exposure to animal urine or contaminated water or soil (floods, paddy fields, sewers, cattle), plus any of: calf tenderness, conjunctival suffusion, oliguria or",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Pulmonary haemorrhage or ARDS: early ICU, early intubation, lung-protective ventilation (tidal volume 6 mL/kg predicted body weight, plateau pressure below 30 cmH2O) with PEEP; avoid fluid overload.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CBC, creatinine, urea, sodium and potassium, bilirubin and liver enzymes, CPK, urinalysis, coagulation, blood gas, chest X-ray and ECG."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Crystalline penicillin G 20 lakh units (2 million units) IV 6-hourly for 7 days (NCDC; CDC uses 1.5 million units 6-hourly)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Labelling fever with jaundice as viral hepatitis without checking creatinine, CPK and urine."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for leptospirosis (adult, india)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "leptospirosis-summary-matrix",
+   "title": "Leptospirosis (adult, India) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspected case (NCDC): fever, headache, myalgia and prostration after exposure to animal urine or contaminated water or soil (floods, paddy",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Pulmonary haemorrhage or ARDS: early ICU, early intubation, lung-protective ventilation (tidal volume 6 mL/kg predicted body weight,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CBC, creatinine, urea, sodium and potassium, bilirubin and liver enzymes, CPK, urinalysis, coagulation, blood gas, chest X-ray and ECG.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Doxycycline: 100 mg orally twice daily for 7 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling fever with jaundice as viral hepatitis without checking creatinine, CPK and urine.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for leptospirosis (adult, india)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "leptospirosis-diagram",
+   "title": "Leptospirosis (adult, India): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

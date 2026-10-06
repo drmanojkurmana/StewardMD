@@ -1,78 +1,173 @@
 {
-  "id": "cleidocranial_dysplasia",
-  "name": "Cleidocranial dysplasia",
-  "aliases": [
-    "RUNX2",
-    "CCD",
-    "CBFA1",
-    "cleidocranial dysostosis"
+ "id": "cleidocranial_dysplasia",
+ "name": "Cleidocranial dysplasia",
+ "aliases": [
+  "RUNX2",
+  "CCD",
+  "CBFA1",
+  "cleidocranial dysostosis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics / Skeletal Dysplasia",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A dominant disorder of bone and tooth formation dominated by clavicular hypoplasia or aplasia, delayed cranial ossification, and dental anomalies, with only modestly reduced stature",
+   "Caused by heterozygous variants in RUNX2, the master transcription factor driving osteoblast differentiation",
+   "Absent or hypoplastic clavicles allow abnormal approximation of the shoulders in front of the chest, a classic demonstrable sign",
+   "Delayed closure of fontanelles and sutures with wormian bones, frontal and parietal bossing, and midface hypoplasia are characteristic craniofacial features",
+   "Dental abnormalities are prominent, with retained deciduous teeth, delayed or failed eruption of permanent teeth, and supernumerary teeth requiring specialist orthodontic care",
+   "Radiographs show clavicular defects, open cranial sutures with wormian bones, wide pubic symphysis, and hypoplastic iliac wings",
+   "Diagnosis is clinical and radiographic, confirmed by RUNX2 molecular testing"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics / Skeletal Dysplasia",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A dominant disorder of bone and tooth formation dominated by clavicular hypoplasia or aplasia, delayed cranial ossification, and dental anomalies, with only modestly reduced stature",
-      "Caused by heterozygous variants in RUNX2, the master transcription factor driving osteoblast differentiation",
-      "Absent or hypoplastic clavicles allow abnormal approximation of the shoulders in front of the chest, a classic demonstrable sign",
-      "Delayed closure of fontanelles and sutures with wormian bones, frontal and parietal bossing, and midface hypoplasia are characteristic craniofacial features",
-      "Dental abnormalities are prominent, with retained deciduous teeth, delayed or failed eruption of permanent teeth, and supernumerary teeth requiring specialist orthodontic care",
-      "Radiographs show clavicular defects, open cranial sutures with wormian bones, wide pubic symphysis, and hypoplastic iliac wings",
-      "Diagnosis is clinical and radiographic, confirmed by RUNX2 molecular testing"
+  "pathophysiology": "Cleidocranial dysplasia is caused by haploinsufficiency of RUNX2, the principal transcription factor governing osteoblast differentiation and both intramembranous and endochondral bone formation. Reduced RUNX2 activity impairs ossification of bones that depend heavily on membranous ossification, especially the clavicles and cranial vault, and disrupts the tooth-forming programme. The result is clavicular hypoplasia, delayed cranial and dental maturation, and a range of skeletal ossification defects, with relative preservation of overall growth.",
+  "additionalDifferentials": [
+   "Mandibuloacral dysplasia",
+   "Pycnodysostosis",
+   "Yunis-Varon syndrome",
+   "Hypophosphatasia (dental features)",
+   "Crane-Heise syndrome",
+   "Other conditions with delayed cranial ossification"
+  ],
+  "additionalInvestigations": [
+   "Skeletal survey demonstrating clavicular defects, wormian bones, and pelvic changes",
+   "RUNX2 molecular genetic testing to confirm the diagnosis",
+   "Dental and orthopantomographic assessment of eruption and supernumerary teeth",
+   "Bone mineral density assessment given a tendency to reduced density",
+   "Audiological review for conductive hearing loss from recurrent ear disease",
+   "Cranial imaging where persistent large fontanelles raise protection concerns"
+  ],
+  "redFlags": [
+   "Persistent large calvarial defects posing a risk of head injury",
+   "Recurrent sinus and middle-ear infection with hearing loss",
+   "Significant dental impaction causing pain, infection, or feeding difficulty",
+   "Cephalopelvic disproportion complicating delivery in affected women"
+  ],
+  "prognosis": "Prognosis is excellent with a normal lifespan and intelligence. Morbidity is mainly dental and orthodontic, together with a modest increase in fracture risk and reduced bone density; multidisciplinary dental care is central to management.",
+  "pitfalls": [
+   "Attributing the delayed dentition to normal variation and deferring orthodontic assessment",
+   "Overlooking conductive hearing loss and its developmental impact",
+   "Failing to counsel affected women about potential cephalopelvic disproportion",
+   "Neglecting protection of persistent calvarial defects in young children"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Comprehensive dental and orthodontic management is central, including removal of retained deciduous and supernumerary teeth and surgical exposure with orthodontic traction of unerupted permanent teeth.",
+   "Craniofacial and maxillofacial surgical input for midface hypoplasia and dental rehabilitation.",
+   "Protection of the skull while fontanelles and sutures remain open, with a protective helmet in infancy where indicated.",
+   "Monitoring of bone mineral density with measures to reduce fracture risk, including adequate calcium and vitamin D.",
+   "Audiological and ENT review for conductive hearing loss related to recurrent middle ear disease.",
+   "Genetic counselling for this autosomal dominant RUNX2 disorder, with assessment of at-risk relatives."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cleidocranial_dysplasia-pathway",
+   "title": "Cleidocranial dysplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A dominant disorder of bone and tooth formation dominated by clavicular hypoplasia or aplasia, delayed cranial ossification, and dental anomalies, with only modestly reduced stature",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent large calvarial defects posing a risk of head injury",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skeletal survey demonstrating clavicular defects, wormian bones, and pelvic changes, RUNX2 molecular genetic testing to confirm the diagnosis, Dental and orthopantomographic assessment of eruption and supernumerary teeth"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Comprehensive dental and orthodontic management is central, including removal of retained deciduous and supernumerary teeth and surgical exposure with orthodontic traction of unerupted permanent teeth."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the delayed dentition to normal variation and deferring orthodontic assessment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cleidocranial dysplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cleidocranial_dysplasia-matrix",
+   "title": "Cleidocranial dysplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A dominant disorder of bone and tooth formation dominated by clavicular hypoplasia or aplasia, delayed cranial ossification, and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cleidocranial dysplasia is caused by haploinsufficiency of RUNX2, the principal transcription factor governing osteoblast differentiation and both intramembranous and endochondral bone formation. Reduced RUNX2 activity impairs ossification of bones that depend heavily on membranous ossification, especially the clavicles and cranial vault, and disrupts the tooth-forming programme. The result is clavicular hypoplasia, delayed cranial and dental maturation, and a range of skeletal ossification defects, with relative preservation of overall growth.",
-    "additionalDifferentials": [
-      "Mandibuloacral dysplasia",
-      "Pycnodysostosis",
-      "Yunis-Varon syndrome",
-      "Hypophosphatasia (dental features)",
-      "Crane-Heise syndrome",
-      "Other conditions with delayed cranial ossification"
+    [
+     "Key Investigations",
+     "Skeletal survey demonstrating clavicular defects, wormian bones, and pelvic changes, RUNX2 molecular genetic testing to confirm",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skeletal survey demonstrating clavicular defects, wormian bones, and pelvic changes",
-      "RUNX2 molecular genetic testing to confirm the diagnosis",
-      "Dental and orthopantomographic assessment of eruption and supernumerary teeth",
-      "Bone mineral density assessment given a tendency to reduced density",
-      "Audiological review for conductive hearing loss from recurrent ear disease",
-      "Cranial imaging where persistent large fontanelles raise protection concerns"
+    [
+     "Primary Differentials",
+     "Mandibuloacral dysplasia, Pycnodysostosis, Yunis-Varon syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent large calvarial defects posing a risk of head injury",
-      "Recurrent sinus and middle-ear infection with hearing loss",
-      "Significant dental impaction causing pain, infection, or feeding difficulty",
-      "Cephalopelvic disproportion complicating delivery in affected women"
+    [
+     "Management Strategy",
+     "Comprehensive dental and orthodontic management is central, including removal of retained deciduous and supernumerary teeth and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is excellent with a normal lifespan and intelligence. Morbidity is mainly dental and orthodontic, together with a modest increase in fracture risk and reduced bone density; multidisciplinary dental care is central to management.",
-    "pitfalls": [
-      "Attributing the delayed dentition to normal variation and deferring orthodontic assessment",
-      "Overlooking conductive hearing loss and its developmental impact",
-      "Failing to counsel affected women about potential cephalopelvic disproportion",
-      "Neglecting protection of persistent calvarial defects in young children"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Comprehensive dental and orthodontic management is central, including removal of retained deciduous and supernumerary teeth and surgical exposure with orthodontic traction of unerupted permanent teeth.",
-      "Craniofacial and maxillofacial surgical input for midface hypoplasia and dental rehabilitation.",
-      "Protection of the skull while fontanelles and sutures remain open, with a protective helmet in infancy where indicated.",
-      "Monitoring of bone mineral density with measures to reduce fracture risk, including adequate calcium and vitamin D.",
-      "Audiological and ENT review for conductive hearing loss related to recurrent middle ear disease.",
-      "Genetic counselling for this autosomal dominant RUNX2 disorder, with assessment of at-risk relatives."
+    [
+     "Clinical Pitfall",
+     "Attributing the delayed dentition to normal variation and deferring orthodontic assessment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cleidocranial dysplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cleidocranial-dysplasia-diagram",
+   "title": "Cleidocranial dysplasia: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

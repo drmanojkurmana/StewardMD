@@ -1,77 +1,172 @@
 {
-  "id": "brain_lung_thyroid_syndrome",
-  "name": "Brain-lung-thyroid syndrome",
-  "aliases": [
-    "NKX2-1-related disorder",
-    "benign hereditary chorea with lung and thyroid disease",
-    "TTF-1 deficiency"
+ "id": "brain_lung_thyroid_syndrome",
+ "name": "Brain-lung-thyroid syndrome",
+ "aliases": [
+  "NKX2-1-related disorder",
+  "benign hereditary chorea with lung and thyroid disease",
+  "TTF-1 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Neurology, Respiratory, Endocrine",
+ "specialty": "Clinical genetics / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Clinical genetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant disorder caused by mutations or deletions of NKX2-1 (also known as TTF-1)",
+   "Classically affects three organ systems: the brain, the lungs and the thyroid, in variable combination",
+   "Neurological features include benign hereditary chorea and, in infancy, hypotonia and delayed motor milestones",
+   "Respiratory involvement ranges from neonatal respiratory distress to recurrent infections and interstitial lung disease",
+   "Thyroid disease spans congenital hypothyroidism to compensated or subclinical dysfunction",
+   "Not all three systems are involved in every patient, so partial phenotypes are common",
+   "Diagnosis is confirmed genetically; the combination of chorea, lung disease and thyroid dysfunction is a strong clue"
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Neurology, Respiratory, Endocrine",
-  "specialty": "Clinical genetics / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Clinical genetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant disorder caused by mutations or deletions of NKX2-1 (also known as TTF-1)",
-      "Classically affects three organ systems: the brain, the lungs and the thyroid, in variable combination",
-      "Neurological features include benign hereditary chorea and, in infancy, hypotonia and delayed motor milestones",
-      "Respiratory involvement ranges from neonatal respiratory distress to recurrent infections and interstitial lung disease",
-      "Thyroid disease spans congenital hypothyroidism to compensated or subclinical dysfunction",
-      "Not all three systems are involved in every patient, so partial phenotypes are common",
-      "Diagnosis is confirmed genetically; the combination of chorea, lung disease and thyroid dysfunction is a strong clue"
+  "pathophysiology": "NKX2-1 encodes a transcription factor essential for development and function of the brain (notably the basal ganglia), lung and thyroid. Haploinsufficiency from a mutation or deletion of one allele disrupts gene programmes in these three organs, producing the characteristic triad. In the lung, NKX2-1 regulates surfactant protein genes, linking the disorder to the surfactant dysfunction spectrum. The variable involvement and severity reflect the differing dose sensitivity of each organ to reduced transcription-factor activity.",
+  "additionalDifferentials": [
+   "Isolated benign hereditary chorea",
+   "Other genetic surfactant dysfunction disorders",
+   "Congenital hypothyroidism of other cause",
+   "Cerebral palsy with a movement disorder",
+   "Other causes of childhood chorea",
+   "Ataxia-telangiectasia and other movement disorders"
+  ],
+  "additionalInvestigations": [
+   "Genetic testing for NKX2-1 mutations or deletions",
+   "Thyroid function tests and thyroid imaging",
+   "Chest imaging and, where indicated, assessment for interstitial lung disease",
+   "Neurological assessment and brain imaging",
+   "Developmental assessment in children"
+  ],
+  "redFlags": [
+   "Neonatal respiratory distress with associated hypotonia",
+   "Progressive interstitial lung disease",
+   "Uncontrolled hypothyroidism affecting development",
+   "Recurrent severe respiratory infections"
+  ],
+  "prognosis": "The prognosis depends on the severity of lung involvement; chorea is typically non-progressive and thyroid dysfunction is treatable, so many patients do well, though severe respiratory disease worsens the outlook.",
+  "pitfalls": [
+   "Diagnosing isolated benign hereditary chorea and missing associated lung or thyroid disease",
+   "Overlooking subtle or compensated thyroid dysfunction",
+   "Not considering the syndrome in unexplained neonatal respiratory distress with hypotonia",
+   "Assuming all three organ systems must be involved to make the diagnosis"
+  ],
+  "references": [
+   "GeneReviews (standard reference)",
+   "Paediatric neurology and endocrinology references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Levothyroxine replacement for congenital, compensated or subclinical hypothyroidism",
+   "Symptomatic treatment of disabling benign hereditary chorea, for example with tetrabenazine or a trial of levodopa",
+   "Respiratory support for neonatal respiratory distress, recurrent infections and interstitial lung disease",
+   "Developmental support with physiotherapy, occupational and speech therapy for hypotonia and motor delay",
+   "Surveillance of thyroid function, respiratory status and neurological progression",
+   "Multidisciplinary coordination across neurology, respiratory medicine, endocrinology and clinical genetics",
+   "Genetic counselling for autosomal dominant NKX2-1 inheritance with family testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "brain_lung_thyroid_syndrome-pathway",
+   "title": "Brain-lung-thyroid syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant disorder caused by mutations or deletions of NKX2-1 (also known as TTF-1)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal respiratory distress with associated hypotonia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Genetic testing for NKX2-1 mutations or deletions, Thyroid function tests and thyroid imaging, Chest imaging and, where indicated, assessment for interstitial lung disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Levothyroxine replacement for congenital, compensated or subclinical hypothyroidism"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing isolated benign hereditary chorea and missing associated lung or thyroid disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of brain-lung-thyroid syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "brain_lung_thyroid_syndrome-matrix",
+   "title": "Brain-lung-thyroid syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant disorder caused by mutations or deletions of NKX2-1 (also known as TTF-1)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "NKX2-1 encodes a transcription factor essential for development and function of the brain (notably the basal ganglia), lung and thyroid. Haploinsufficiency from a mutation or deletion of one allele disrupts gene programmes in these three organs, producing the characteristic triad. In the lung, NKX2-1 regulates surfactant protein genes, linking the disorder to the surfactant dysfunction spectrum. The variable involvement and severity reflect the differing dose sensitivity of each organ to reduced transcription-factor activity.",
-    "additionalDifferentials": [
-      "Isolated benign hereditary chorea",
-      "Other genetic surfactant dysfunction disorders",
-      "Congenital hypothyroidism of other cause",
-      "Cerebral palsy with a movement disorder",
-      "Other causes of childhood chorea",
-      "Ataxia-telangiectasia and other movement disorders"
+    [
+     "Key Investigations",
+     "Genetic testing for NKX2-1 mutations or deletions, Thyroid function tests and thyroid imaging, Chest imaging and, where",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Genetic testing for NKX2-1 mutations or deletions",
-      "Thyroid function tests and thyroid imaging",
-      "Chest imaging and, where indicated, assessment for interstitial lung disease",
-      "Neurological assessment and brain imaging",
-      "Developmental assessment in children"
+    [
+     "Primary Differentials",
+     "Isolated benign hereditary chorea, Other genetic surfactant dysfunction disorders, Congenital hypothyroidism of other cause",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal respiratory distress with associated hypotonia",
-      "Progressive interstitial lung disease",
-      "Uncontrolled hypothyroidism affecting development",
-      "Recurrent severe respiratory infections"
+    [
+     "Management Strategy",
+     "Levothyroxine replacement for congenital, compensated or subclinical hypothyroidism",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis depends on the severity of lung involvement; chorea is typically non-progressive and thyroid dysfunction is treatable, so many patients do well, though severe respiratory disease worsens the outlook.",
-    "pitfalls": [
-      "Diagnosing isolated benign hereditary chorea and missing associated lung or thyroid disease",
-      "Overlooking subtle or compensated thyroid dysfunction",
-      "Not considering the syndrome in unexplained neonatal respiratory distress with hypotonia",
-      "Assuming all three organ systems must be involved to make the diagnosis"
-    ],
-    "references": [
-      "GeneReviews (standard reference)",
-      "Paediatric neurology and endocrinology references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Levothyroxine replacement for congenital, compensated or subclinical hypothyroidism",
-      "Symptomatic treatment of disabling benign hereditary chorea, for example with tetrabenazine or a trial of levodopa",
-      "Respiratory support for neonatal respiratory distress, recurrent infections and interstitial lung disease",
-      "Developmental support with physiotherapy, occupational and speech therapy for hypotonia and motor delay",
-      "Surveillance of thyroid function, respiratory status and neurological progression",
-      "Multidisciplinary coordination across neurology, respiratory medicine, endocrinology and clinical genetics",
-      "Genetic counselling for autosomal dominant NKX2-1 inheritance with family testing"
+    [
+     "Clinical Pitfall",
+     "Diagnosing isolated benign hereditary chorea and missing associated lung or thyroid disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for brain-lung-thyroid syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "brain-lung-thyroid-syndrome-diagram",
+   "title": "Brain-lung-thyroid syndrome: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

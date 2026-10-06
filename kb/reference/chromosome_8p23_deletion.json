@@ -1,79 +1,174 @@
 {
-  "id": "chromosome_8p23_deletion",
-  "name": "8p23.1 deletion syndrome",
-  "aliases": [
-    "8p23.1 microdeletion syndrome",
-    "del(8)(p23.1)",
-    "8p23.1 recurrent deletion"
+ "id": "chromosome_8p23_deletion",
+ "name": "8p23.1 deletion syndrome",
+ "aliases": [
+  "8p23.1 microdeletion syndrome",
+  "del(8)(p23.1)",
+  "8p23.1 recurrent deletion"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A recurrent deletion mediated by non-allelic homologous recombination between the olfactory-receptor gene clusters (segmental duplications) that flank the interval",
+   "Congenital heart disease is a leading feature, especially atrioventricular septal defects and other septal lesions, linked to the GATA4 gene",
+   "Congenital diaphragmatic hernia occurs in a proportion of cases",
+   "Developmental delay, mild to moderate intellectual disability and behavioural difficulties (including hyperactivity and impulsivity) are common",
+   "Microcephaly and variable facial dysmorphism may be present",
+   "The reciprocal duplication of the same region exists and has its own, generally milder, phenotype",
+   "Expressivity is variable and the change may be inherited from a mildly affected parent",
+   "Chromosomal microarray is the first-line diagnostic investigation"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A recurrent deletion mediated by non-allelic homologous recombination between the olfactory-receptor gene clusters (segmental duplications) that flank the interval",
-      "Congenital heart disease is a leading feature, especially atrioventricular septal defects and other septal lesions, linked to the GATA4 gene",
-      "Congenital diaphragmatic hernia occurs in a proportion of cases",
-      "Developmental delay, mild to moderate intellectual disability and behavioural difficulties (including hyperactivity and impulsivity) are common",
-      "Microcephaly and variable facial dysmorphism may be present",
-      "The reciprocal duplication of the same region exists and has its own, generally milder, phenotype",
-      "Expressivity is variable and the change may be inherited from a mildly affected parent",
-      "Chromosomal microarray is the first-line diagnostic investigation"
+  "pathophysiology": "The 8p23.1 region is bordered by large clusters of olfactory-receptor genes that function as segmental duplications and predispose to non-allelic homologous recombination, producing a recurrent deletion or its reciprocal duplication. The interval contains dosage-sensitive developmental genes, notably GATA4, a transcription factor essential for cardiac septation and diaphragm formation; its haploinsufficiency largely accounts for the congenital heart disease and diaphragmatic hernia. Loss of additional genes in the region contributes to the neurodevelopmental and behavioural features. Variable expressivity reflects differences in deletion size and background genetic modifiers.",
+  "additionalDifferentials": [
+   "Isolated (non-syndromic) congenital heart disease",
+   "Other syndromic causes of congenital diaphragmatic hernia",
+   "Other recurrent copy-number syndromes causing developmental delay and behavioural problems",
+   "Attention deficit hyperactivity disorder without a copy-number change",
+   "Fragile X syndrome",
+   "Non-syndromic intellectual disability"
+  ],
+  "additionalInvestigations": [
+   "Chromosomal microarray as first-line to detect and size the deletion",
+   "FISH or MLPA to confirm the deletion",
+   "Parental studies to establish inheritance and counsel recurrence risk",
+   "Echocardiography to define congenital heart disease",
+   "Chest imaging where diaphragmatic hernia is suspected",
+   "Developmental and behavioural assessment"
+  ],
+  "redFlags": [
+   "Haemodynamically significant congenital heart disease requiring cardiology or surgical input",
+   "Respiratory distress suggestive of diaphragmatic hernia in the neonate",
+   "Faltering growth or feeding difficulty",
+   "Severe behavioural disturbance affecting safety or schooling"
+  ],
+  "prognosis": "Outlook is largely determined by the severity of the congenital heart disease and any diaphragmatic hernia; when these are corrected, many children do well with mild to moderate learning and behavioural difficulties. Neurodevelopmental support and cardiac follow-up shape long-term function.",
+  "pitfalls": [
+   "Failing to arrange echocardiography given the strong association with congenital heart disease",
+   "Overlooking a diaphragmatic hernia presenting with respiratory symptoms",
+   "Assuming an inherited deletion is benign despite variable expressivity",
+   "Attributing behavioural problems solely to the deletion without appropriate assessment and support"
+  ],
+  "references": [
+   "GeneReviews (University of Washington, Seattle)",
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Emery and Rimoin's Principles and Practice of Medical Genetics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical correction of the congenital heart disease, particularly atrioventricular and other septal defects linked to GATA4 haploinsufficiency, with paediatric cardiology follow-up",
+   "Surgical repair of congenital diaphragmatic hernia when present, supported by neonatal respiratory stabilisation",
+   "Developmental and behavioural intervention, including educational support for intellectual disability and behavioural strategies for hyperactivity and impulsivity",
+   "Echocardiographic and chest-imaging surveillance to define and monitor the structural anomalies",
+   "Coordinated multidisciplinary care across paediatric cardiology, neonatal and paediatric surgery, developmental paediatrics and clinical genetics",
+   "Genetic counselling with parental studies to establish inheritance and counsel recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chromosome_8p23_deletion-pathway",
+   "title": "8p23.1 deletion syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A recurrent deletion mediated by non-allelic homologous recombination between the olfactory-receptor gene clusters (segmental duplications) that flank the interval",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Haemodynamically significant congenital heart disease requiring cardiology or surgical input",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chromosomal microarray as first-line to detect and size the deletion, FISH or MLPA to confirm the deletion, Parental studies to establish inheritance and counsel recurrence risk"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical correction of the congenital heart disease, particularly atrioventricular and other septal defects linked to GATA4 haploinsufficiency, with paediatric cardiology follow-up"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to arrange echocardiography given the strong association with congenital heart disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of 8p23.1 deletion syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chromosome_8p23_deletion-matrix",
+   "title": "8p23.1 deletion syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A recurrent deletion mediated by non-allelic homologous recombination between the olfactory-receptor gene clusters (segmental",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The 8p23.1 region is bordered by large clusters of olfactory-receptor genes that function as segmental duplications and predispose to non-allelic homologous recombination, producing a recurrent deletion or its reciprocal duplication. The interval contains dosage-sensitive developmental genes, notably GATA4, a transcription factor essential for cardiac septation and diaphragm formation; its haploinsufficiency largely accounts for the congenital heart disease and diaphragmatic hernia. Loss of additional genes in the region contributes to the neurodevelopmental and behavioural features. Variable expressivity reflects differences in deletion size and background genetic modifiers.",
-    "additionalDifferentials": [
-      "Isolated (non-syndromic) congenital heart disease",
-      "Other syndromic causes of congenital diaphragmatic hernia",
-      "Other recurrent copy-number syndromes causing developmental delay and behavioural problems",
-      "Attention deficit hyperactivity disorder without a copy-number change",
-      "Fragile X syndrome",
-      "Non-syndromic intellectual disability"
+    [
+     "Key Investigations",
+     "Chromosomal microarray as first-line to detect and size the deletion, FISH or MLPA to confirm the deletion, Parental studies to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chromosomal microarray as first-line to detect and size the deletion",
-      "FISH or MLPA to confirm the deletion",
-      "Parental studies to establish inheritance and counsel recurrence risk",
-      "Echocardiography to define congenital heart disease",
-      "Chest imaging where diaphragmatic hernia is suspected",
-      "Developmental and behavioural assessment"
+    [
+     "Primary Differentials",
+     "Isolated (non-syndromic) congenital heart disease, Other syndromic causes of congenital diaphragmatic hernia, Other recurrent",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Haemodynamically significant congenital heart disease requiring cardiology or surgical input",
-      "Respiratory distress suggestive of diaphragmatic hernia in the neonate",
-      "Faltering growth or feeding difficulty",
-      "Severe behavioural disturbance affecting safety or schooling"
+    [
+     "Management Strategy",
+     "Surgical correction of the congenital heart disease, particularly atrioventricular and other septal defects linked to GATA4",
+     "Core treatment modality"
     ],
-    "prognosis": "Outlook is largely determined by the severity of the congenital heart disease and any diaphragmatic hernia; when these are corrected, many children do well with mild to moderate learning and behavioural difficulties. Neurodevelopmental support and cardiac follow-up shape long-term function.",
-    "pitfalls": [
-      "Failing to arrange echocardiography given the strong association with congenital heart disease",
-      "Overlooking a diaphragmatic hernia presenting with respiratory symptoms",
-      "Assuming an inherited deletion is benign despite variable expressivity",
-      "Attributing behavioural problems solely to the deletion without appropriate assessment and support"
-    ],
-    "references": [
-      "GeneReviews (University of Washington, Seattle)",
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Emery and Rimoin's Principles and Practice of Medical Genetics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical correction of the congenital heart disease, particularly atrioventricular and other septal defects linked to GATA4 haploinsufficiency, with paediatric cardiology follow-up",
-      "Surgical repair of congenital diaphragmatic hernia when present, supported by neonatal respiratory stabilisation",
-      "Developmental and behavioural intervention, including educational support for intellectual disability and behavioural strategies for hyperactivity and impulsivity",
-      "Echocardiographic and chest-imaging surveillance to define and monitor the structural anomalies",
-      "Coordinated multidisciplinary care across paediatric cardiology, neonatal and paediatric surgery, developmental paediatrics and clinical genetics",
-      "Genetic counselling with parental studies to establish inheritance and counsel recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Failing to arrange echocardiography given the strong association with congenital heart disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for 8p23.1 deletion syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chromosome-8p23-deletion-diagram",
+   "title": "8p23.1 deletion syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

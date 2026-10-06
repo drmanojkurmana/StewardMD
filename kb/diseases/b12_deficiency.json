@@ -3,7 +3,11 @@
   "name": "Vitamin B12 Deficiency (incl. subacute combined degeneration)",
   "class": "non_infective",
   "system": "Haematology / Neurology",
-  "coding": { "icd10": "E53.8", "icd11": null, "snomed": null },
+  "coding": {
+    "icd10": "E53.8",
+    "icd11": null,
+    "snomed": null
+  },
   "matching": {
     "find": {
       "ataxia": 20,
@@ -31,19 +35,131 @@
     "Check for pernicious anaemia (intrinsic-factor antibodies) and other autoimmune disease"
   ],
   "investigations": [
-    { "test": "FBC + film (macrocytosis, hypersegmented neutrophils), reticulocytes" },
-    { "test": "Serum B12 (± methylmalonic acid/homocysteine), folate" },
-    { "test": "Intrinsic-factor antibodies (pernicious anaemia); LDH/bilirubin (ineffective erythropoiesis)" }
+    {
+      "test": "FBC + film (macrocytosis, hypersegmented neutrophils), reticulocytes"
+    },
+    {
+      "test": "Serum B12 (± methylmalonic acid/homocysteine), folate"
+    },
+    {
+      "test": "Intrinsic-factor antibodies (pernicious anaemia); LDH/bilirubin (ineffective erythropoiesis)"
+    }
   ],
   "treatmentRef": null,
   "policyRef": null,
   "calculatorRefs": [],
   "icuModuleRefs": [],
   "drugRefs": [],
-  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
-  "review": { "status": "approved", "reviewedBy": "Dr. Manoj Kurmana", "reviewedAt": "2026-07-03" },
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": "Dr. Manoj Kurmana",
+    "reviewedAt": "2026-07-03"
+  },
   "version": 1,
   "contentHash": null,
-  "references": ["Harrison 22e — Megaloblastic Anaemias"],
-  "provenanceNote": "Recall Tier-4 (Group B) new diagnosable entity. AI-drafted; PENDING clinician sign-off. Uses only existing governed finding keys (no vocabulary change). neckStiffness/fever negatives distinguish from CNS infection."
+  "references": [
+    "Harrison 22e — Megaloblastic Anaemias"
+  ],
+  "provenanceNote": "Recall Tier-4 (Group B) new diagnosable entity. AI-drafted; PENDING clinician sign-off. Uses only existing governed finding keys (no vocabulary change). neckStiffness/fever negatives distinguish from CNS infection.",
+  "algorithms": [
+    {
+      "id": "b12_deficiency-dx-algo",
+      "title": "Vitamin B12 Deficiency (incl. subacute combined degeneration): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Evaluate acute presentation and core clinical features of Vitamin B12 Deficiency (incl. subacute combined degeneration).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Neurological damage may be irreversible if untreated - do not delay B12 replacement for a haematological response",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: FBC + film (macrocytosis, hypersegmented neutrophils), reticulocytes, Serum B12 (± methylmalonic acid/homocysteine), folate, Intrinsic-factor antibodies (pernicious anaemia); LDH/bilirubin (ineffective erythropoiesis)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Initiate guideline-directed medical therapy and monitor clinical progress."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for vitamin b12 deficiency (incl. subacute combined degeneration)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "b12_deficiency-matrix",
+      "title": "Vitamin B12 Deficiency (incl. subacute combined degeneration): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardinal presentation of Vitamin B12 Deficiency (incl. subacute combined degeneration)",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "FBC + film (macrocytosis, hypersegmented neutrophils), reticulocytes, Serum B12 (± methylmalonic acid/homocysteine), folate,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Neurological damage may be irreversible if untreated - do not delay B12 replacement for a haematological response",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delayed recognition of atypical presentations",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for vitamin b12 deficiency (incl. subacute combined degeneration)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "b12-deficiency-diagram",
+      "title": "Vitamin B12 Deficiency (incl. subacute combined degeneration): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

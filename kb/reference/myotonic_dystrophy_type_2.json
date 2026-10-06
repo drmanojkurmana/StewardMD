@@ -1,84 +1,179 @@
 {
-  "id": "myotonic_dystrophy_type_2",
-  "name": "Myotonic Dystrophy Type 2",
-  "aliases": [
-    "DM2",
-    "PROMM",
-    "Proximal myotonic myopathy",
-    "Ricker syndrome"
+ "id": "myotonic_dystrophy_type_2",
+ "name": "Myotonic Dystrophy Type 2",
+ "aliases": [
+  "DM2",
+  "PROMM",
+  "Proximal myotonic myopathy",
+  "Ricker syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Neuromuscular",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Weakness is proximal-predominant (hip girdle and thigh), the opposite of the distal-onset pattern of type 1 disease, hence the label 'proximal myotonic myopathy'.",
+   "Myotonia is often mild, fluctuating and may be clinically inapparent, sometimes only demonstrable on electromyography.",
+   "Myalgia and fluctuating muscle stiffness or pain are prominent and frequently the presenting complaint.",
+   "Grip and percussion myotonia may be elicited, and calf hypertrophy can occur.",
+   "It is a multisystem disorder: posterior subcapsular iridescent cataracts, cardiac conduction defects and arrhythmia, insulin resistance and diabetes, hypogonadism and mild cognitive change.",
+   "Onset is typically in adulthood and the phenotype is generally milder than type 1, with no congenital form.",
+   "Creatine kinase may be mildly elevated.",
+   "Inheritance is autosomal dominant; a family history is often present but the condition is frequently under-recognised."
   ],
-  "class": "non_infective",
-  "system": "Neuromuscular",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Weakness is proximal-predominant (hip girdle and thigh), the opposite of the distal-onset pattern of type 1 disease, hence the label 'proximal myotonic myopathy'.",
-      "Myotonia is often mild, fluctuating and may be clinically inapparent, sometimes only demonstrable on electromyography.",
-      "Myalgia and fluctuating muscle stiffness or pain are prominent and frequently the presenting complaint.",
-      "Grip and percussion myotonia may be elicited, and calf hypertrophy can occur.",
-      "It is a multisystem disorder: posterior subcapsular iridescent cataracts, cardiac conduction defects and arrhythmia, insulin resistance and diabetes, hypogonadism and mild cognitive change.",
-      "Onset is typically in adulthood and the phenotype is generally milder than type 1, with no congenital form.",
-      "Creatine kinase may be mildly elevated.",
-      "Inheritance is autosomal dominant; a family history is often present but the condition is frequently under-recognised."
+  "pathophysiology": "Myotonic dystrophy type 2 is an autosomal dominant disorder caused by an unstable CCTG tetranucleotide repeat expansion in intron 1 of the CNBP gene (formerly ZNF9) on chromosome 3q21. Transcription produces expanded CCTG-containing RNA that accumulates as ribonuclear foci, sequestering muscleblind-like (MBNL) splicing regulators and dysregulating CELF1. This toxic RNA gain-of-function drives widespread mis-splicing (a spliceopathy), including of the insulin receptor, the muscle chloride channel CLCN1 (producing myotonia through reduced chloride conductance) and cardiac troponin T, explaining the multisystem phenotype. In contrast to type 1 disease, repeat length correlates poorly with severity, and prominent anticipation and a congenital form are essentially absent.",
+  "additionalDifferentials": [
+   "Myotonic dystrophy type 1",
+   "Limb-girdle muscular dystrophy",
+   "Non-dystrophic myotonias (myotonia congenita from CLCN1; paramyotonia congenita from SCN4A)",
+   "Inflammatory myopathy (polymyositis)",
+   "Metabolic myopathy such as late-onset Pompe disease",
+   "Drug-induced myopathy including statin-associated myopathy",
+   "Fibromyalgia and other chronic pain syndromes, given the prominent myalgia"
+  ],
+  "additionalInvestigations": [
+   "Targeted genetic testing for the CNBP (ZNF9) CCTG repeat expansion using repeat-primed PCR or Southern blot.",
+   "Electromyography to demonstrate myotonic discharges.",
+   "Creatine kinase.",
+   "ECG and ambulatory rhythm monitoring for conduction disease and arrhythmia, with echocardiography.",
+   "Slit-lamp examination for characteristic cataracts.",
+   "Fasting glucose and glycated haemoglobin with assessment of insulin resistance.",
+   "Muscle biopsy where needed, which may show selective type 2 fibre atrophy and pyknotic nuclear clumps."
+  ],
+  "redFlags": [
+   "Syncope, palpitations or documented conduction block, given the risk of sudden cardiac death and the need for cardiology surveillance.",
+   "New symptoms of heart failure.",
+   "Peri-operative and sedation risk, with sensitivity to anaesthetic and analgesic agents, prolonged apnoea and myotonia provoked by depolarising muscle relaxants.",
+   "Progressive proximal weakness affecting mobility and transfers."
+  ],
+  "prognosis": "The course is generally milder and more slowly progressive than type 1 disease, with life expectancy often near normal and ambulation usually preserved for many years. Cardiac conduction disease and arrhythmia remain important causes of morbidity and of sudden death.",
+  "pitfalls": [
+   "Frequently misdiagnosed as limb-girdle dystrophy, fibromyalgia or statin myopathy because the myotonia is subtle.",
+   "Repeat size does not predict severity, so counselling should not apply the anticipation rules used for type 1 disease.",
+   "Standard sequencing panels miss the intronic repeat; specific repeat-expansion testing is needed.",
+   "Cardiac risk is easily underestimated because the skeletal weakness is comparatively mild.",
+   "Unrecognised diagnosis can lead to avoidable anaesthetic complications."
+  ],
+  "references": [
+   "Consensus care guidelines for myotonic dystrophy",
+   "Standard neuromuscular disorders textbook",
+   "Neurogenetics reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide cardiac surveillance with electrocardiography and ambulatory rhythm monitoring for conduction disease and arrhythmia, with device therapy where indicated",
+   "Manage prominent myalgia and fluctuating stiffness with analgesia, adding an antimyotonic agent such as mexiletine for symptomatic myotonia",
+   "Screen for and treat insulin resistance and diabetes mellitus",
+   "Arrange slit-lamp review and cataract surgery when visually significant",
+   "Support proximal muscle function with physiotherapy and graded exercise",
+   "Offer genetic counselling for the autosomal dominant CNBP CCTG repeat expansion",
+   "Coordinate multidisciplinary neurology follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "myotonic_dystrophy_type_2-pathway",
+   "title": "Myotonic Dystrophy Type 2: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Weakness is proximal-predominant (hip girdle and thigh), the opposite of the distal-onset pattern of type 1 disease, hence the label 'proximal myotonic myopathy'.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Syncope, palpitations or documented conduction block, given the risk of sudden cardiac death and the need for cardiology surveillance.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted genetic testing for the CNBP (ZNF9) CCTG repeat expansion using repeat-primed PCR or Southern blot., Electromyography to demonstrate myotonic discharges., Creatine kinase."
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide cardiac surveillance with electrocardiography and ambulatory rhythm monitoring for conduction disease and arrhythmia, with device therapy where indicated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Frequently misdiagnosed as limb-girdle dystrophy, fibromyalgia or statin myopathy because the myotonia is subtle."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of myotonic dystrophy type 2."
+  }
+ ],
+ "tables": [
+  {
+   "id": "myotonic_dystrophy_type_2-matrix",
+   "title": "Myotonic Dystrophy Type 2: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Weakness is proximal-predominant (hip girdle and thigh), the opposite of the distal-onset pattern of type 1 disease, hence the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Myotonic dystrophy type 2 is an autosomal dominant disorder caused by an unstable CCTG tetranucleotide repeat expansion in intron 1 of the CNBP gene (formerly ZNF9) on chromosome 3q21. Transcription produces expanded CCTG-containing RNA that accumulates as ribonuclear foci, sequestering muscleblind-like (MBNL) splicing regulators and dysregulating CELF1. This toxic RNA gain-of-function drives widespread mis-splicing (a spliceopathy), including of the insulin receptor, the muscle chloride channel CLCN1 (producing myotonia through reduced chloride conductance) and cardiac troponin T, explaining the multisystem phenotype. In contrast to type 1 disease, repeat length correlates poorly with severity, and prominent anticipation and a congenital form are essentially absent.",
-    "additionalDifferentials": [
-      "Myotonic dystrophy type 1",
-      "Limb-girdle muscular dystrophy",
-      "Non-dystrophic myotonias (myotonia congenita from CLCN1; paramyotonia congenita from SCN4A)",
-      "Inflammatory myopathy (polymyositis)",
-      "Metabolic myopathy such as late-onset Pompe disease",
-      "Drug-induced myopathy including statin-associated myopathy",
-      "Fibromyalgia and other chronic pain syndromes, given the prominent myalgia"
+    [
+     "Key Investigations",
+     "Targeted genetic testing for the CNBP (ZNF9) CCTG repeat expansion using repeat-primed PCR or Southern blot., Electromyography to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted genetic testing for the CNBP (ZNF9) CCTG repeat expansion using repeat-primed PCR or Southern blot.",
-      "Electromyography to demonstrate myotonic discharges.",
-      "Creatine kinase.",
-      "ECG and ambulatory rhythm monitoring for conduction disease and arrhythmia, with echocardiography.",
-      "Slit-lamp examination for characteristic cataracts.",
-      "Fasting glucose and glycated haemoglobin with assessment of insulin resistance.",
-      "Muscle biopsy where needed, which may show selective type 2 fibre atrophy and pyknotic nuclear clumps."
+    [
+     "Primary Differentials",
+     "Myotonic dystrophy type 1, Limb-girdle muscular dystrophy, Non-dystrophic myotonias (myotonia congenita from CLCN1; paramyotonia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Syncope, palpitations or documented conduction block, given the risk of sudden cardiac death and the need for cardiology surveillance.",
-      "New symptoms of heart failure.",
-      "Peri-operative and sedation risk, with sensitivity to anaesthetic and analgesic agents, prolonged apnoea and myotonia provoked by depolarising muscle relaxants.",
-      "Progressive proximal weakness affecting mobility and transfers."
+    [
+     "Management Strategy",
+     "Provide cardiac surveillance with electrocardiography and ambulatory rhythm monitoring for conduction disease and arrhythmia,",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is generally milder and more slowly progressive than type 1 disease, with life expectancy often near normal and ambulation usually preserved for many years. Cardiac conduction disease and arrhythmia remain important causes of morbidity and of sudden death.",
-    "pitfalls": [
-      "Frequently misdiagnosed as limb-girdle dystrophy, fibromyalgia or statin myopathy because the myotonia is subtle.",
-      "Repeat size does not predict severity, so counselling should not apply the anticipation rules used for type 1 disease.",
-      "Standard sequencing panels miss the intronic repeat; specific repeat-expansion testing is needed.",
-      "Cardiac risk is easily underestimated because the skeletal weakness is comparatively mild.",
-      "Unrecognised diagnosis can lead to avoidable anaesthetic complications."
-    ],
-    "references": [
-      "Consensus care guidelines for myotonic dystrophy",
-      "Standard neuromuscular disorders textbook",
-      "Neurogenetics reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide cardiac surveillance with electrocardiography and ambulatory rhythm monitoring for conduction disease and arrhythmia, with device therapy where indicated",
-      "Manage prominent myalgia and fluctuating stiffness with analgesia, adding an antimyotonic agent such as mexiletine for symptomatic myotonia",
-      "Screen for and treat insulin resistance and diabetes mellitus",
-      "Arrange slit-lamp review and cataract surgery when visually significant",
-      "Support proximal muscle function with physiotherapy and graded exercise",
-      "Offer genetic counselling for the autosomal dominant CNBP CCTG repeat expansion",
-      "Coordinate multidisciplinary neurology follow-up"
+    [
+     "Clinical Pitfall",
+     "Frequently misdiagnosed as limb-girdle dystrophy, fibromyalgia or statin myopathy because the myotonia is subtle.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for myotonic dystrophy type 2."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "myotonic-dystrophy-type-2-diagram",
+   "title": "Myotonic Dystrophy Type 2: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

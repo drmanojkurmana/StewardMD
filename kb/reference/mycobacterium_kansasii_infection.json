@@ -1,78 +1,173 @@
 {
-  "id": "mycobacterium_kansasii_infection",
-  "name": "Mycobacterium kansasii infection",
-  "aliases": [
-    "M. kansasii infection",
-    "Mycobacterium kansasii lung disease"
+ "id": "mycobacterium_kansasii_infection",
+ "name": "Mycobacterium kansasii infection",
+ "aliases": [
+  "M. kansasii infection",
+  "Mycobacterium kansasii lung disease"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A slow-growing photochromogen (producing yellow pigment on exposure to light) that is one of the more virulent nontuberculous mycobacteria",
+   "Acquired chiefly from municipal tap water rather than soil, with geographical clustering in certain regions and among miners and industrial workers",
+   "Produces the most tuberculosis-like illness of the nontuberculous mycobacteria, with chronic cavitary upper-lobe pulmonary disease, cough, and haemoptysis",
+   "Most often affects middle-aged men with chronic obstructive pulmonary disease, pneumoconiosis, or previous tuberculosis",
+   "Isolation is rarely due to simple contamination, so a positive respiratory culture usually reflects genuine disease",
+   "Carries the ESAT-6 and CFP-10 antigens and can therefore cause a positive interferon-gamma release assay, adding to the confusion with tuberculosis",
+   "Rifampicin is the cornerstone of therapy, combined with agents such as ethambutol and a macrolide or isoniazid, and rifampicin susceptibility should be tested",
+   "Responds well to rifampicin-based combination treatment, giving one of the better outcomes among the nontuberculous mycobacteria"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A slow-growing photochromogen (producing yellow pigment on exposure to light) that is one of the more virulent nontuberculous mycobacteria",
-      "Acquired chiefly from municipal tap water rather than soil, with geographical clustering in certain regions and among miners and industrial workers",
-      "Produces the most tuberculosis-like illness of the nontuberculous mycobacteria, with chronic cavitary upper-lobe pulmonary disease, cough, and haemoptysis",
-      "Most often affects middle-aged men with chronic obstructive pulmonary disease, pneumoconiosis, or previous tuberculosis",
-      "Isolation is rarely due to simple contamination, so a positive respiratory culture usually reflects genuine disease",
-      "Carries the ESAT-6 and CFP-10 antigens and can therefore cause a positive interferon-gamma release assay, adding to the confusion with tuberculosis",
-      "Rifampicin is the cornerstone of therapy, combined with agents such as ethambutol and a macrolide or isoniazid, and rifampicin susceptibility should be tested",
-      "Responds well to rifampicin-based combination treatment, giving one of the better outcomes among the nontuberculous mycobacteria"
+  "pathophysiology": "Mycobacterium kansasii is a slow-growing photochromogenic mycobacterium whose principal reservoir is treated water-distribution systems. Inhalation leads to pulmonary infection in hosts with pre-existing lung damage, where it produces a granulomatous, frequently cavitating process closely resembling tuberculosis. Impaired cell-mediated immunity, notably advanced HIV infection, predisposes to disseminated disease and extrapulmonary sites such as lymph nodes, skin, and joints. Because the organism expresses antigens shared with M. tuberculosis, immune-based tests can cross-react. Its comparatively predictable susceptibility to rifampicin underlies the good response to rifampicin-based regimens.",
+  "additionalDifferentials": [
+   "Pulmonary tuberculosis",
+   "Mycobacterium avium complex lung disease",
+   "Other cavitary NTM lung disease (M. xenopi, M. malmoense)",
+   "Chronic pulmonary aspergillosis",
+   "Lung malignancy with cavitation",
+   "Bacterial lung abscess"
+  ],
+  "additionalInvestigations": [
+   "Mycobacterial culture with recognition of photochromogenic pigment",
+   "Molecular identification to distinguish it from M. tuberculosis and other NTM",
+   "Rifampicin susceptibility testing of the isolate",
+   "Chest radiograph and CT for upper-lobe cavitary or fibronodular disease",
+   "Repeated sputum cultures to meet diagnostic criteria",
+   "HIV testing and immune assessment, especially with disseminated disease"
+  ],
+  "redFlags": [
+   "Extensive cavitary disease with haemoptysis",
+   "Disseminated disease indicating advanced immunosuppression such as HIV",
+   "Rifampicin resistance on susceptibility testing",
+   "Rapid clinical or radiographic progression",
+   "Diagnostic confusion leading to treatment for tuberculosis and delay in correct therapy"
+  ],
+  "prognosis": "With rifampicin-based combination therapy the prognosis is generally favourable and relapse is uncommon in adherent patients, making M. kansasii one of the more treatable nontuberculous mycobacteria. Rifampicin resistance, extensive structural lung damage, and significant immunosuppression worsen outcomes.",
+  "pitfalls": [
+   "Mistaking the illness and a positive interferon-gamma release assay for tuberculosis",
+   "Dismissing a positive culture as a contaminant when it usually signifies real disease",
+   "Omitting rifampicin susceptibility testing",
+   "Under-treating with an inadequate or single-drug regimen"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with a prolonged rifampicin-based combination regimen, typically rifampicin, ethambutol, and either isoniazid or a macrolide, which achieves reliably good outcomes",
+   "Perform rifampicin susceptibility testing to confirm the isolate remains rifampicin-susceptible and guide the regimen",
+   "Manage the underlying structural lung disease, such as chronic obstructive pulmonary disease, alongside antimycobacterial treatment",
+   "Monitor for drug toxicity, including ethambutol-related ocular toxicity with visual monitoring and hepatotoxicity, and track response with repeated sputum cultures",
+   "Perform HIV testing and immune assessment, treating disseminated disease more intensively and starting antiretroviral therapy where indicated while accounting for rifamycin interactions",
+   "Refer to infectious diseases or respiratory medicine, noting the generally favourable prognosis and low relapse rate in adherent patients"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mycobacterium_kansasii_infection-pathway",
+   "title": "Mycobacterium kansasii infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A slow-growing photochromogen (producing yellow pigment on exposure to light) that is one of the more virulent nontuberculous mycobacteria",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Extensive cavitary disease with haemoptysis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Mycobacterial culture with recognition of photochromogenic pigment, Molecular identification to distinguish it from M. tuberculosis and other NTM, Rifampicin susceptibility testing of the isolate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with a prolonged rifampicin-based combination regimen, typically rifampicin, ethambutol, and either isoniazid or a macrolide, which achieves reliably good outcomes"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the illness and a positive interferon-gamma release assay for tuberculosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mycobacterium kansasii infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mycobacterium_kansasii_infection-matrix",
+   "title": "Mycobacterium kansasii infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A slow-growing photochromogen (producing yellow pigment on exposure to light) that is one of the more virulent nontuberculous",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mycobacterium kansasii is a slow-growing photochromogenic mycobacterium whose principal reservoir is treated water-distribution systems. Inhalation leads to pulmonary infection in hosts with pre-existing lung damage, where it produces a granulomatous, frequently cavitating process closely resembling tuberculosis. Impaired cell-mediated immunity, notably advanced HIV infection, predisposes to disseminated disease and extrapulmonary sites such as lymph nodes, skin, and joints. Because the organism expresses antigens shared with M. tuberculosis, immune-based tests can cross-react. Its comparatively predictable susceptibility to rifampicin underlies the good response to rifampicin-based regimens.",
-    "additionalDifferentials": [
-      "Pulmonary tuberculosis",
-      "Mycobacterium avium complex lung disease",
-      "Other cavitary NTM lung disease (M. xenopi, M. malmoense)",
-      "Chronic pulmonary aspergillosis",
-      "Lung malignancy with cavitation",
-      "Bacterial lung abscess"
+    [
+     "Key Investigations",
+     "Mycobacterial culture with recognition of photochromogenic pigment, Molecular identification to distinguish it from M.",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Mycobacterial culture with recognition of photochromogenic pigment",
-      "Molecular identification to distinguish it from M. tuberculosis and other NTM",
-      "Rifampicin susceptibility testing of the isolate",
-      "Chest radiograph and CT for upper-lobe cavitary or fibronodular disease",
-      "Repeated sputum cultures to meet diagnostic criteria",
-      "HIV testing and immune assessment, especially with disseminated disease"
+    [
+     "Primary Differentials",
+     "Pulmonary tuberculosis, Mycobacterium avium complex lung disease, Other cavitary NTM lung disease (M. xenopi, M. malmoense)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Extensive cavitary disease with haemoptysis",
-      "Disseminated disease indicating advanced immunosuppression such as HIV",
-      "Rifampicin resistance on susceptibility testing",
-      "Rapid clinical or radiographic progression",
-      "Diagnostic confusion leading to treatment for tuberculosis and delay in correct therapy"
+    [
+     "Management Strategy",
+     "Treat with a prolonged rifampicin-based combination regimen, typically rifampicin, ethambutol, and either isoniazid or a",
+     "Core treatment modality"
     ],
-    "prognosis": "With rifampicin-based combination therapy the prognosis is generally favourable and relapse is uncommon in adherent patients, making M. kansasii one of the more treatable nontuberculous mycobacteria. Rifampicin resistance, extensive structural lung damage, and significant immunosuppression worsen outcomes.",
-    "pitfalls": [
-      "Mistaking the illness and a positive interferon-gamma release assay for tuberculosis",
-      "Dismissing a positive culture as a contaminant when it usually signifies real disease",
-      "Omitting rifampicin susceptibility testing",
-      "Under-treating with an inadequate or single-drug regimen"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with a prolonged rifampicin-based combination regimen, typically rifampicin, ethambutol, and either isoniazid or a macrolide, which achieves reliably good outcomes",
-      "Perform rifampicin susceptibility testing to confirm the isolate remains rifampicin-susceptible and guide the regimen",
-      "Manage the underlying structural lung disease, such as chronic obstructive pulmonary disease, alongside antimycobacterial treatment",
-      "Monitor for drug toxicity, including ethambutol-related ocular toxicity with visual monitoring and hepatotoxicity, and track response with repeated sputum cultures",
-      "Perform HIV testing and immune assessment, treating disseminated disease more intensively and starting antiretroviral therapy where indicated while accounting for rifamycin interactions",
-      "Refer to infectious diseases or respiratory medicine, noting the generally favourable prognosis and low relapse rate in adherent patients"
+    [
+     "Clinical Pitfall",
+     "Mistaking the illness and a positive interferon-gamma release assay for tuberculosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mycobacterium kansasii infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mycobacterium-kansasii-infection-diagram",
+   "title": "Mycobacterium kansasii infection: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

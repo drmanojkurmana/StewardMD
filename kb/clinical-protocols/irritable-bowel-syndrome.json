@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, primary care",
- "aliases": ["IBS", "IBS-D", "IBS-C", "IBS-M", "spastic colon", "Rome IV", "low FODMAP", "disorder of gut-brain interaction", "functional bowel disorder"],
+ "aliases": [
+  "IBS",
+  "IBS-D",
+  "IBS-C",
+  "IBS-M",
+  "spastic colon",
+  "Rome IV",
+  "low FODMAP",
+  "disorder of gut-brain interaction",
+  "functional bowel disorder"
+ ],
  "summary": "Make a positive diagnosis from symptoms (Rome IV) after limited tests (blood count, CRP, coeliac serology, faecal calprotectin for diarrhoea), then treat by predominant symptom: soluble fibre, diet, peppermint or antispasmodics, loperamide or laxatives first; low-dose tricyclics, rifaximin, linaclotide and gut-directed psychological therapy second line.",
  "sections": [
   {
@@ -84,18 +94,163 @@
   }
  ],
  "drugs": [
-  { "name": "Ispaghula (psyllium) husk", "dose": "Start 3 to 4 g daily orally, increase gradually as tolerated", "notes": "Soluble fibre; avoid insoluble fibre such as wheat bran." },
-  { "name": "Peppermint oil (enteric-coated)", "dose": "0.2 mL capsule, 1 to 2 capsules orally three times daily before meals", "notes": "Heartburn is the common side effect." },
-  { "name": "Mebeverine", "dose": "135 mg orally three times daily, 20 minutes before meals", "notes": "Antispasmodic for pain and cramping; stop if no benefit." },
-  { "name": "Loperamide", "dose": "2 mg orally as needed, titrated to effect; maximum 16 mg per day", "notes": "IBS-D. Watch for constipation and bloating." },
-  { "name": "Amitriptyline", "dose": "10 mg orally at night, increase by 10 mg weekly to a maximum of 30 to 50 mg once daily", "notes": "Second line for global symptoms and pain. Avoid with QT prolongation or bundle branch block." },
-  { "name": "Rifaximin", "dose": "550 mg orally three times daily for 14 days", "notes": "IBS-D; up to 2 further courses for relapse." },
-  { "name": "Ondansetron", "dose": "4 mg orally once daily, titrate up to a maximum of 8 mg three times daily", "notes": "IBS-D second line (off-label); constipation is common." },
-  { "name": "Linaclotide", "dose": "290 mcg orally once daily, at least 30 minutes before the first meal", "notes": "IBS-C second line; diarrhoea is the main adverse effect." }
+  {
+   "name": "Ispaghula (psyllium) husk",
+   "dose": "Start 3 to 4 g daily orally, increase gradually as tolerated",
+   "notes": "Soluble fibre; avoid insoluble fibre such as wheat bran."
+  },
+  {
+   "name": "Peppermint oil (enteric-coated)",
+   "dose": "0.2 mL capsule, 1 to 2 capsules orally three times daily before meals",
+   "notes": "Heartburn is the common side effect."
+  },
+  {
+   "name": "Mebeverine",
+   "dose": "135 mg orally three times daily, 20 minutes before meals",
+   "notes": "Antispasmodic for pain and cramping; stop if no benefit."
+  },
+  {
+   "name": "Loperamide",
+   "dose": "2 mg orally as needed, titrated to effect; maximum 16 mg per day",
+   "notes": "IBS-D. Watch for constipation and bloating."
+  },
+  {
+   "name": "Amitriptyline",
+   "dose": "10 mg orally at night, increase by 10 mg weekly to a maximum of 30 to 50 mg once daily",
+   "notes": "Second line for global symptoms and pain. Avoid with QT prolongation or bundle branch block."
+  },
+  {
+   "name": "Rifaximin",
+   "dose": "550 mg orally three times daily for 14 days",
+   "notes": "IBS-D; up to 2 further courses for relapse."
+  },
+  {
+   "name": "Ondansetron",
+   "dose": "4 mg orally once daily, titrate up to a maximum of 8 mg three times daily",
+   "notes": "IBS-D second line (off-label); constipation is common."
+  },
+  {
+   "name": "Linaclotide",
+   "dose": "290 mcg orally once daily, at least 30 minutes before the first meal",
+   "notes": "IBS-C second line; diarrhoea is the main adverse effect."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "ACG Clinical Guideline: Management of Irritable Bowel Syndrome (Am J Gastroenterol 2021;116:17-44)", "year": 2021, "url": "https://journals.lww.com/ajg/fulltext/10.14309/ajg.0000000000001036~acg-clinical-guideline-management-of-irritable-bowel" },
-  { "org": "British Society of Gastroenterology", "title": "British Society of Gastroenterology guidelines on the management of irritable bowel syndrome (Gut 2021;70:1214-1240)", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33903147/" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "ACG Clinical Guideline: Management of Irritable Bowel Syndrome (Am J Gastroenterol 2021;116:17-44)",
+   "year": 2021,
+   "url": "https://journals.lww.com/ajg/fulltext/10.14309/ajg.0000000000001036~acg-clinical-guideline-management-of-irritable-bowel"
+  },
+  {
+   "org": "British Society of Gastroenterology",
+   "title": "British Society of Gastroenterology guidelines on the management of irritable bowel syndrome (Gut 2021;70:1214-1240)",
+   "year": 2021,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/33903147/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "ibs-diagnostic-algo",
+   "title": "IBS Positive Diagnostic Strategy and Subtype-Directed Therapy Pathway",
+   "steps": [
+    {
+     "step": "Rome IV Diagnostic Criteria Check",
+     "action": "Recurrent abdominal pain >= 1 day/week in last 3 months, related to defecation and/or change in stool frequency or form, with symptom onset >= 6 months prior.",
+     "critical": true
+    },
+    {
+     "step": "Mandatory Red-Flag Triage",
+     "action": "Assess for alarm features: Age > 50 at onset without prior colonoscopy, rectal bleeding, nocturnal pain/diarrhea, unexplained weight loss, fever, anemia, family history of IBD or colorectal cancer. If any red flag is present, refer immediately for urgent colonoscopy.",
+     "critical": true
+    },
+    {
+     "step": "Targeted Non-Invasive Exclusion Testing",
+     "action": "Complete Blood Count, fecal calprotectin (exclude inflammatory bowel disease if < 50 to 100 mcg/g), and serum anti-tTG IgA with total IgA (exclude celiac disease before dietary changes)."
+    },
+    {
+     "step": "Subtype Classification (Bristol Stool Chart)",
+     "branch": "IBS-D vs IBS-C vs IBS-M",
+     "action": "Classify based on stool consistency: IBS-D (> 25% loose/watery Bristol 6 to 7), IBS-C (> 25% hard/lumpy Bristol 1 to 2), or IBS-M (> 25% of both)."
+    },
+    {
+     "step": "Targeted Pharmacologic & Dietary Management",
+     "action": "First-line: Soluble fibre (ispaghula husk), dietary counselling (structured 3-phase low FODMAP diet supervised by dietitian), and antispasmodics (hyoscine, mebeverine, or peppermint oil) for cramping pain."
+    }
+   ],
+   "caption": "Algorithm compliant with BSG 2021 and ACG 2021 clinical guidelines for IBS."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ibs-pharmacotherapy-matrix",
+   "title": "Second-Line Pharmacotherapy Tailored by IBS Predominant Subtype",
+   "headers": [
+    "Subtype",
+    "Drug Class / Agent",
+    "Mechanism of Action",
+    "Clinical Nuances & Precautions"
+   ],
+   "rows": [
+    [
+     "IBS-C (Constipation)",
+     "Osmotic Laxatives (Polyethylene glycol)",
+     "Osmotic water retention in stool lumen",
+     "Effective for stool frequency and consistency; limited benefit for abdominal pain alone"
+    ],
+    [
+     "IBS-C (Constipation)",
+     "Guanylate Cyclase-C Agonist (Linaclotide 290 mcg daily)",
+     "Increases intracellular cGMP, stimulates chloride secretion, reduces visceral hypersensitivity",
+     "Significantly improves both stool frequency and abdominal pain; main side effect is diarrhea"
+    ],
+    [
+     "IBS-D (Diarrhea)",
+     "Peripheral Opioid Mu-Receptor Agonist (Loperamide 2 to 4 mg PRN)",
+     "Slows intestinal transit and enhances anal sphincter tone",
+     "Dose-titrated for fecal urgency and diarrhea; avoid scheduled high doses to prevent rebound constipation"
+    ],
+    [
+     "IBS-D (Diarrhea)",
+     "5-HT3 Receptor Antagonist (Alosetron / Ondansetron)",
+     "Blocks 5-HT3 receptors on enteric sensory and motor neurons",
+     "Improves urgency and pain; alosetron restricted to severe refractory cases due to ischemic colitis risk"
+    ],
+    [
+     "IBS (Pain Predominant - All Subtypes)",
+     "Tricyclic Antidepressants (Amitriptyline 10 to 30 mg at bedtime)",
+     "Neuromodulation of the brain-gut axis and visceral pain thresholds",
+     "Start low at 10 mg nocte; benefits visceral hypersensitivity and stool frequency in IBS-D; caution in IBS-C due to anticholinergic slowing"
+    ]
+   ],
+   "caption": "Neuromodulators should be explained to the patient as targeting gut nerve sensitivity, not as psychiatric treatment."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "irritable-bowel-syndrome-diagram",
+   "title": "Irritable bowel syndrome (adult): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

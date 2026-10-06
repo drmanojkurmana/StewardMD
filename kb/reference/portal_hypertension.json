@@ -1,79 +1,174 @@
 {
-  "id": "portal_hypertension",
-  "name": "Portal hypertension",
-  "aliases": [
-    "portal venous hypertension",
-    "raised portal pressure",
-    "portal HTN"
+ "id": "portal_hypertension",
+ "name": "Portal hypertension",
+ "aliases": [
+  "portal venous hypertension",
+  "raised portal pressure",
+  "portal HTN"
+ ],
+ "class": "non_infective",
+ "system": "Hepatobiliary surgery",
+ "specialty": "General Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Portal hypertension is a sustained rise in portal venous pressure and is most often caused by cirrhosis in the developed world and by schistosomiasis or portal vein thrombosis elsewhere",
+   "Clinical consequences arise from portosystemic collaterals and splanchnic congestion: gastro-oesophageal varices, splenomegaly with hypersplenism, ascites, and caput medusae",
+   "Variceal haemorrhage is the most dangerous complication and presents as haematemesis or melaena, often with haemodynamic instability",
+   "Causes are usefully grouped as prehepatic (e.g. portal vein thrombosis), intrahepatic (presinusoidal, sinusoidal as in cirrhosis, or postsinusoidal), and posthepatic (e.g. Budd-Chiari syndrome, constrictive pericarditis)",
+   "Endoscopy characterises and treats varices, while non-selective beta-blockade reduces portal pressure and the risk of first or recurrent bleeding",
+   "Acute variceal bleeding is managed with resuscitation, vasoactive splanchnic vasoconstrictors, endoscopic band ligation, and antibiotic prophylaxis, with balloon tamponade or TIPS as rescue",
+   "Transjugular intrahepatic portosystemic shunt (TIPS) and, less commonly, surgical shunts decompress the portal system but can precipitate hepatic encephalopathy"
   ],
-  "class": "non_infective",
-  "system": "Hepatobiliary surgery",
-  "specialty": "General Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Portal hypertension is a sustained rise in portal venous pressure and is most often caused by cirrhosis in the developed world and by schistosomiasis or portal vein thrombosis elsewhere",
-      "Clinical consequences arise from portosystemic collaterals and splanchnic congestion: gastro-oesophageal varices, splenomegaly with hypersplenism, ascites, and caput medusae",
-      "Variceal haemorrhage is the most dangerous complication and presents as haematemesis or melaena, often with haemodynamic instability",
-      "Causes are usefully grouped as prehepatic (e.g. portal vein thrombosis), intrahepatic (presinusoidal, sinusoidal as in cirrhosis, or postsinusoidal), and posthepatic (e.g. Budd-Chiari syndrome, constrictive pericarditis)",
-      "Endoscopy characterises and treats varices, while non-selective beta-blockade reduces portal pressure and the risk of first or recurrent bleeding",
-      "Acute variceal bleeding is managed with resuscitation, vasoactive splanchnic vasoconstrictors, endoscopic band ligation, and antibiotic prophylaxis, with balloon tamponade or TIPS as rescue",
-      "Transjugular intrahepatic portosystemic shunt (TIPS) and, less commonly, surgical shunts decompress the portal system but can precipitate hepatic encephalopathy"
+  "pathophysiology": "Portal hypertension results from increased resistance to portal blood flow combined with increased splanchnic inflow. In cirrhosis, fibrosis and regenerative nodules distort the hepatic architecture and raise sinusoidal resistance, compounded by intrahepatic vasoconstriction. Splanchnic arterial vasodilatation, mediated in part by nitric oxide, increases portal inflow and sustains the elevated pressure. As pressure rises, portosystemic collateral channels open at sites of communication between the portal and systemic circulations, producing varices at the gastro-oesophageal junction, rectum, and anterior abdominal wall. Splenic congestion causes splenomegaly and hypersplenism, and the combination of portal hypertension and hepatic dysfunction drives ascites and hepatic encephalopathy.",
+  "additionalDifferentials": [
+   "Cirrhosis of any aetiology",
+   "Portal or splenic vein thrombosis (prehepatic)",
+   "Hepatic schistosomiasis (presinusoidal)",
+   "Budd-Chiari syndrome (hepatic venous outflow obstruction)",
+   "Right heart failure or constrictive pericarditis (posthepatic)",
+   "Non-cirrhotic portal hypertension / idiopathic portal hypertension"
+  ],
+  "additionalInvestigations": [
+   "Upper GI endoscopy to grade and treat varices",
+   "Abdominal ultrasound with Doppler of the portal and hepatic veins to assess flow, thrombosis, and splenomegaly",
+   "Liver function tests, coagulation profile, and full blood count (for hypersplenism-related cytopenias)",
+   "Cross-sectional imaging (CT or MRI) for hepatic architecture, collaterals, and vascular patency",
+   "Hepatic venous pressure gradient measurement where available to quantify portal pressure",
+   "Liver biopsy or elastography to assess fibrosis and clarify aetiology"
+  ],
+  "redFlags": [
+   "Active variceal haemorrhage with haematemesis, melaena, and haemodynamic instability requiring emergency resuscitation and endoscopy",
+   "Encephalopathy with reduced consciousness and risk of aspiration",
+   "Rapidly accumulating tense ascites or spontaneous bacterial peritonitis",
+   "Signs of decompensation (jaundice, coagulopathy, hepatorenal syndrome) indicating advanced liver failure"
+  ],
+  "prognosis": "Prognosis is dominated by the underlying liver disease and by whether decompensation has occurred; variceal bleeding carries substantial mortality, particularly in advanced cirrhosis. Effective prophylaxis, endoscopic therapy, and shunting reduce rebleeding, but long-term survival depends on hepatic reserve and, in suitable candidates, transplantation.",
+  "pitfalls": [
+   "Over-transfusing during variceal bleeding, which can raise portal pressure and worsen haemorrhage",
+   "Omitting antibiotic prophylaxis in cirrhotic patients with gastrointestinal bleeding",
+   "Aggressive correction of coagulopathy or platelet counts without regard to the rebalanced haemostasis of cirrhosis",
+   "Creating a shunt without anticipating precipitation or worsening of hepatic encephalopathy",
+   "Attributing all upper GI bleeding to varices and missing coexisting peptic ulceration or portal hypertensive gastropathy"
+  ],
+  "references": [
+   "Bailey & Love's Short Practice of Surgery",
+   "Sabiston Textbook of Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treatment of the underlying cause, principally management of cirrhosis with abstinence from alcohol and cause-specific therapy, alongside referral for liver transplantation in decompensated disease",
+   "Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure for primary and secondary prophylaxis of variceal bleeding",
+   "Endoscopic band ligation to eradicate oesophageal varices, with surveillance endoscopy",
+   "Acute variceal haemorrhage managed with resuscitation, vasoactive splanchnic vasoconstrictors such as terlipressin or octreotide, urgent endoscopic band ligation and prophylactic antibiotics, with balloon tamponade or transjugular intrahepatic portosystemic shunt as rescue",
+   "Ascites treated with dietary sodium restriction and diuretics such as spironolactone and furosemide, with large-volume paracentesis and antibiotic prophylaxis against spontaneous bacterial peritonitis",
+   "Hepatic encephalopathy treated with lactulose and rifaximin",
+   "Transjugular intrahepatic portosystemic shunt for refractory ascites or recurrent variceal bleeding"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "portal_hypertension-pathway",
+   "title": "Portal hypertension: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Portal hypertension is a sustained rise in portal venous pressure and is most often caused by cirrhosis in the developed world and by schistosomiasis or portal vein thrombosis elsewhere",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Active variceal haemorrhage with haematemesis, melaena, and haemodynamic instability requiring emergency resuscitation and endoscopy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper GI endoscopy to grade and treat varices, Abdominal ultrasound with Doppler of the portal and hepatic veins to assess flow, thrombosis, and splenomegaly, Liver function tests, coagulation profile, and full blood count"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treatment of the underlying cause, principally management of cirrhosis with abstinence from alcohol and cause-specific therapy, alongside referral for liver transplantation in decompensated disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Over-transfusing during variceal bleeding, which can raise portal pressure and worsen haemorrhage"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of portal hypertension."
+  }
+ ],
+ "tables": [
+  {
+   "id": "portal_hypertension-matrix",
+   "title": "Portal hypertension: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Portal hypertension is a sustained rise in portal venous pressure and is most often caused by cirrhosis in the developed world",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Portal hypertension results from increased resistance to portal blood flow combined with increased splanchnic inflow. In cirrhosis, fibrosis and regenerative nodules distort the hepatic architecture and raise sinusoidal resistance, compounded by intrahepatic vasoconstriction. Splanchnic arterial vasodilatation, mediated in part by nitric oxide, increases portal inflow and sustains the elevated pressure. As pressure rises, portosystemic collateral channels open at sites of communication between the portal and systemic circulations, producing varices at the gastro-oesophageal junction, rectum, and anterior abdominal wall. Splenic congestion causes splenomegaly and hypersplenism, and the combination of portal hypertension and hepatic dysfunction drives ascites and hepatic encephalopathy.",
-    "additionalDifferentials": [
-      "Cirrhosis of any aetiology",
-      "Portal or splenic vein thrombosis (prehepatic)",
-      "Hepatic schistosomiasis (presinusoidal)",
-      "Budd-Chiari syndrome (hepatic venous outflow obstruction)",
-      "Right heart failure or constrictive pericarditis (posthepatic)",
-      "Non-cirrhotic portal hypertension / idiopathic portal hypertension"
+    [
+     "Key Investigations",
+     "Upper GI endoscopy to grade and treat varices, Abdominal ultrasound with Doppler of the portal and hepatic veins to assess flow,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper GI endoscopy to grade and treat varices",
-      "Abdominal ultrasound with Doppler of the portal and hepatic veins to assess flow, thrombosis, and splenomegaly",
-      "Liver function tests, coagulation profile, and full blood count (for hypersplenism-related cytopenias)",
-      "Cross-sectional imaging (CT or MRI) for hepatic architecture, collaterals, and vascular patency",
-      "Hepatic venous pressure gradient measurement where available to quantify portal pressure",
-      "Liver biopsy or elastography to assess fibrosis and clarify aetiology"
+    [
+     "Primary Differentials",
+     "Cirrhosis of any aetiology, Portal or splenic vein thrombosis (prehepatic), Hepatic schistosomiasis (presinusoidal)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Active variceal haemorrhage with haematemesis, melaena, and haemodynamic instability requiring emergency resuscitation and endoscopy",
-      "Encephalopathy with reduced consciousness and risk of aspiration",
-      "Rapidly accumulating tense ascites or spontaneous bacterial peritonitis",
-      "Signs of decompensation (jaundice, coagulopathy, hepatorenal syndrome) indicating advanced liver failure"
+    [
+     "Management Strategy",
+     "Treatment of the underlying cause, principally management of cirrhosis with abstinence from alcohol and cause-specific therapy,",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is dominated by the underlying liver disease and by whether decompensation has occurred; variceal bleeding carries substantial mortality, particularly in advanced cirrhosis. Effective prophylaxis, endoscopic therapy, and shunting reduce rebleeding, but long-term survival depends on hepatic reserve and, in suitable candidates, transplantation.",
-    "pitfalls": [
-      "Over-transfusing during variceal bleeding, which can raise portal pressure and worsen haemorrhage",
-      "Omitting antibiotic prophylaxis in cirrhotic patients with gastrointestinal bleeding",
-      "Aggressive correction of coagulopathy or platelet counts without regard to the rebalanced haemostasis of cirrhosis",
-      "Creating a shunt without anticipating precipitation or worsening of hepatic encephalopathy",
-      "Attributing all upper GI bleeding to varices and missing coexisting peptic ulceration or portal hypertensive gastropathy"
-    ],
-    "references": [
-      "Bailey & Love's Short Practice of Surgery",
-      "Sabiston Textbook of Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treatment of the underlying cause, principally management of cirrhosis with abstinence from alcohol and cause-specific therapy, alongside referral for liver transplantation in decompensated disease",
-      "Non-selective beta-blockade with propranolol or carvedilol to lower portal pressure for primary and secondary prophylaxis of variceal bleeding",
-      "Endoscopic band ligation to eradicate oesophageal varices, with surveillance endoscopy",
-      "Acute variceal haemorrhage managed with resuscitation, vasoactive splanchnic vasoconstrictors such as terlipressin or octreotide, urgent endoscopic band ligation and prophylactic antibiotics, with balloon tamponade or transjugular intrahepatic portosystemic shunt as rescue",
-      "Ascites treated with dietary sodium restriction and diuretics such as spironolactone and furosemide, with large-volume paracentesis and antibiotic prophylaxis against spontaneous bacterial peritonitis",
-      "Hepatic encephalopathy treated with lactulose and rifaximin",
-      "Transjugular intrahepatic portosystemic shunt for refractory ascites or recurrent variceal bleeding"
+    [
+     "Clinical Pitfall",
+     "Over-transfusing during variceal bleeding, which can raise portal pressure and worsen haemorrhage",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for portal hypertension."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "portal-hypertension-diagram",
+   "title": "Portal hypertension: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

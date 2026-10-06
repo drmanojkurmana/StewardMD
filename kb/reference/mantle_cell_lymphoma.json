@@ -1,89 +1,184 @@
 {
-  "id": "mantle_cell_lymphoma",
-  "name": "Mantle cell lymphoma (CCND1/t(11;14))",
-  "aliases": [
-    "MCL",
-    "t(11;14) CCND1-IGH lymphoma",
-    "cyclin D1-positive B-cell lymphoma",
-    "blastoid mantle cell lymphoma",
-    "leukaemic non-nodal mantle cell lymphoma"
+ "id": "mantle_cell_lymphoma",
+ "name": "Mantle cell lymphoma (CCND1/t(11;14))",
+ "aliases": [
+  "MCL",
+  "t(11;14) CCND1-IGH lymphoma",
+  "cyclin D1-positive B-cell lymphoma",
+  "blastoid mantle cell lymphoma",
+  "leukaemic non-nodal mantle cell lymphoma"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Haematologic malignancy",
+ "specialty": "Haematology / Haemato-oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Haematolymphoid Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A mature B-cell lymphoma of pre-germinal-centre origin defined by the translocation t(11;14) that juxtaposes CCND1 with the immunoglobulin heavy-chain locus and overexpresses cyclin D1",
+   "The neoplastic cells are typically CD20-positive and CD5-positive with SOX11 expression, but unlike chronic lymphocytic leukaemia are CD23-negative",
+   "Often presents at an advanced stage in older adults with widespread lymphadenopathy, splenomegaly, marrow and blood involvement, and sometimes gastrointestinal lymphomatous polyposis",
+   "The blastoid and pleomorphic variants are morphologically aggressive and carry a worse prognosis, especially with high proliferation index or TP53 abnormalities",
+   "A leukaemic non-nodal variant, often SOX11-negative, behaves more indolently and may be observed initially",
+   "Diagnosis rests on demonstrating cyclin D1 overexpression and/or t(11;14), with SOX11 useful in the rare cyclin D1-negative cases",
+   "Management uses chemoimmunotherapy incorporating anti-CD20 therapy, often with autologous HSCT in fit patients and BTK-inhibitor targeted agents in relapse"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Haematologic malignancy",
-  "specialty": "Haematology / Haemato-oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Haematolymphoid Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A mature B-cell lymphoma of pre-germinal-centre origin defined by the translocation t(11;14) that juxtaposes CCND1 with the immunoglobulin heavy-chain locus and overexpresses cyclin D1",
-      "The neoplastic cells are typically CD20-positive and CD5-positive with SOX11 expression, but unlike chronic lymphocytic leukaemia are CD23-negative",
-      "Often presents at an advanced stage in older adults with widespread lymphadenopathy, splenomegaly, marrow and blood involvement, and sometimes gastrointestinal lymphomatous polyposis",
-      "The blastoid and pleomorphic variants are morphologically aggressive and carry a worse prognosis, especially with high proliferation index or TP53 abnormalities",
-      "A leukaemic non-nodal variant, often SOX11-negative, behaves more indolently and may be observed initially",
-      "Diagnosis rests on demonstrating cyclin D1 overexpression and/or t(11;14), with SOX11 useful in the rare cyclin D1-negative cases",
-      "Management uses chemoimmunotherapy incorporating anti-CD20 therapy, often with autologous HSCT in fit patients and BTK-inhibitor targeted agents in relapse"
+  "pathophysiology": "Mantle cell lymphoma arises from a mature B cell of the follicle mantle zone, generally before germinal-centre transit. The defining event is the t(11;14) translocation, which places the CCND1 gene under the control of the immunoglobulin heavy-chain enhancer and leads to constitutive overexpression of cyclin D1, dysregulating the cell cycle at the G1-S transition. The transcription factor SOX11 is commonly expressed and contributes to the tumour phenotype. Additional genomic lesions affecting DNA-damage response and cell-cycle pathways, notably TP53 and CDKN2A alterations, drive more aggressive blastoid disease. The tumour disseminates widely, colonising the mantle zones of follicles and infiltrating nodes, spleen, marrow, blood and the gastrointestinal tract.",
+  "additionalDifferentials": [
+   "Chronic lymphocytic leukaemia/small lymphocytic lymphoma",
+   "Marginal zone lymphoma",
+   "Follicular lymphoma",
+   "Diffuse large B-cell lymphoma (for blastoid variant)",
+   "Lymphoblastic lymphoma (for blastoid variant)",
+   "Prolymphocytic leukaemia"
+  ],
+  "additionalInvestigations": [
+   "Lymph node or tissue biopsy with immunohistochemistry showing cyclin D1 and SOX11 positivity",
+   "FISH or molecular testing to confirm t(11;14) CCND1-IGH",
+   "Flow cytometry demonstrating CD20-positive, CD5-positive, CD23-negative B cells",
+   "Assessment of proliferation index (Ki-67) for prognostic stratification",
+   "TP53 mutation and deletion analysis given its strong prognostic impact",
+   "PET-CT and bone marrow examination for staging, with gastrointestinal endoscopy where indicated"
+  ],
+  "redFlags": [
+   "Blastoid or pleomorphic morphology with high proliferation index indicating aggressive disease",
+   "TP53 abnormality predicting resistance to standard chemoimmunotherapy",
+   "Rapidly progressive bulky disease with B symptoms and rising lactate dehydrogenase",
+   "Central nervous system involvement in aggressive variants",
+   "Tumour lysis risk with high tumour burden at treatment initiation"
+  ],
+  "prognosis": "Classic mantle cell lymphoma is generally incurable with a relapsing course, though modern chemoimmunotherapy, HSCT and targeted agents have improved survival; blastoid morphology, high Ki-67 and TP53 abnormalities predict poor outcomes, whereas the leukaemic non-nodal SOX11-negative variant can follow an indolent course.",
+  "pitfalls": [
+   "Confusing the disease with chronic lymphocytic leukaemia, both CD5-positive, without checking CD23 and cyclin D1",
+   "Missing the rare cyclin D1-negative variant, where SOX11 and t(11;14) alternatives aid diagnosis",
+   "Treating the indolent leukaemic non-nodal variant as aggressively as classic disease",
+   "Overlooking TP53 status, which should influence treatment choice",
+   "Failing to consider gastrointestinal involvement, which is common even when asymptomatic"
+  ],
+  "references": [
+   "WHO Classification of Haematolymphoid Tumours",
+   "British Society for Haematology guidance on mantle cell lymphoma"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Truly localised (stage I to II) disease is potentially curable with combined chemotherapy plus involved-site radiotherapy, while advanced-stage disease is treated to prolong remission rather than for cure.",
+   "A minority with a more indolent presentation (minimal lymphadenopathy, mild splenomegaly, low Ki-67) can be managed with a period of watchful waiting without apparent worsening of eventual response or survival.",
+   "Frontline chemoimmunotherapy should be built around an anti-CD20 antibody; an anthracycline-based combination has been a mainstay, with a bendamustine-based combination preferred in older or less fit patients for better tolerability.",
+   "Adding a proteasome inhibitor to an anthracycline-based backbone can improve response and progression-free survival but adds toxicity that has limited its routine use; lenalidomide with an anti-CD20 antibody is a promising but not yet established frontline option.",
+   "In younger, fit patients, more intensive cytarabine-containing induction followed by consolidation with autologous stem-cell transplant should be considered, recognising a meaningful risk that intensive induction cannot be completed due to toxicity, which should factor into fitness assessment.",
+   "Maintenance anti-CD20 antibody therapy after induction, including after transplant consolidation, should be offered to responders as it improves progression-free and overall survival.",
+   "At relapse, prognosis is generally poor and referral for consideration of clinical trials should be part of the discussion.",
+   "Bruton tyrosine kinase inhibitors are a mainstay of relapsed treatment; second-generation, more selective agents achieve higher response rates with a more favourable toxicity profile than first-generation ibrutinib.",
+   "CD19-directed CAR T-cell therapy should be considered for relapsed or refractory disease after chemoimmunotherapy and a BTK inhibitor, including in high-risk disease, but requires a centre experienced in managing cytokine release syndrome and neurologic toxicity.",
+   "Other agents with activity in relapsed disease include proteasome inhibitors, immunomodulatory agents, the BCL2 antagonist venetoclax, and conventional cytotoxic agents such as purine analogues and bendamustine.",
+   "MCL is notably radiosensitive, so radiotherapy, even at modest doses, should be considered for symptomatic or bulky localised disease including at relapse.",
+   "TP53 mutation or deletion is an adverse prognostic marker associated with poor response to conventional chemoimmunotherapy and should prompt consideration of a non-chemotherapy-based or trial-based approach.",
+   "A minority with an indolent, non-nodal leukaemic course and low proliferation index may be appropriate for active surveillance rather than immediate treatment.",
+   "All new diagnoses warrant referral to haemato-oncology for staging and risk stratification before treatment, and relapses, especially with high-risk features, should be referred promptly given the role of specialised options requiring experienced centres."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mantle_cell_lymphoma-pathway",
+   "title": "Mantle cell lymphoma (CCND1/t(11;14)): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A mature B-cell lymphoma of pre-germinal-centre origin defined by the translocation t(11;14) that juxtaposes CCND1 with the immunoglobulin heavy-chain locus and overexpresses cyclin D1",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Blastoid or pleomorphic morphology with high proliferation index indicating aggressive disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Lymph node or tissue biopsy with immunohistochemistry showing cyclin D1 and SOX11 positivity, FISH or molecular testing to confirm t(11;14) CCND1-IGH, Flow cytometry demonstrating CD20-positive, CD5-positive, CD23-negative"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Truly localised (stage I to II) disease is potentially curable with combined chemotherapy plus involved-site radiotherapy, while advanced-stage disease is treated to prolong remission rather than for cure."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the disease with chronic lymphocytic leukaemia, both CD5-positive, without checking CD23 and cyclin D1"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mantle cell lymphoma (ccnd1/t(11;14))."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mantle_cell_lymphoma-matrix",
+   "title": "Mantle cell lymphoma (CCND1/t(11;14)): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mature B-cell lymphoma of pre-germinal-centre origin defined by the translocation t(11;14) that juxtaposes CCND1 with the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mantle cell lymphoma arises from a mature B cell of the follicle mantle zone, generally before germinal-centre transit. The defining event is the t(11;14) translocation, which places the CCND1 gene under the control of the immunoglobulin heavy-chain enhancer and leads to constitutive overexpression of cyclin D1, dysregulating the cell cycle at the G1-S transition. The transcription factor SOX11 is commonly expressed and contributes to the tumour phenotype. Additional genomic lesions affecting DNA-damage response and cell-cycle pathways, notably TP53 and CDKN2A alterations, drive more aggressive blastoid disease. The tumour disseminates widely, colonising the mantle zones of follicles and infiltrating nodes, spleen, marrow, blood and the gastrointestinal tract.",
-    "additionalDifferentials": [
-      "Chronic lymphocytic leukaemia/small lymphocytic lymphoma",
-      "Marginal zone lymphoma",
-      "Follicular lymphoma",
-      "Diffuse large B-cell lymphoma (for blastoid variant)",
-      "Lymphoblastic lymphoma (for blastoid variant)",
-      "Prolymphocytic leukaemia"
+    [
+     "Key Investigations",
+     "Lymph node or tissue biopsy with immunohistochemistry showing cyclin D1 and SOX11 positivity, FISH or molecular testing to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Lymph node or tissue biopsy with immunohistochemistry showing cyclin D1 and SOX11 positivity",
-      "FISH or molecular testing to confirm t(11;14) CCND1-IGH",
-      "Flow cytometry demonstrating CD20-positive, CD5-positive, CD23-negative B cells",
-      "Assessment of proliferation index (Ki-67) for prognostic stratification",
-      "TP53 mutation and deletion analysis given its strong prognostic impact",
-      "PET-CT and bone marrow examination for staging, with gastrointestinal endoscopy where indicated"
+    [
+     "Primary Differentials",
+     "Chronic lymphocytic leukaemia/small lymphocytic lymphoma, Marginal zone lymphoma, Follicular lymphoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Blastoid or pleomorphic morphology with high proliferation index indicating aggressive disease",
-      "TP53 abnormality predicting resistance to standard chemoimmunotherapy",
-      "Rapidly progressive bulky disease with B symptoms and rising lactate dehydrogenase",
-      "Central nervous system involvement in aggressive variants",
-      "Tumour lysis risk with high tumour burden at treatment initiation"
+    [
+     "Management Strategy",
+     "Truly localised (stage I to II) disease is potentially curable with combined chemotherapy plus involved-site radiotherapy, while",
+     "Core treatment modality"
     ],
-    "prognosis": "Classic mantle cell lymphoma is generally incurable with a relapsing course, though modern chemoimmunotherapy, HSCT and targeted agents have improved survival; blastoid morphology, high Ki-67 and TP53 abnormalities predict poor outcomes, whereas the leukaemic non-nodal SOX11-negative variant can follow an indolent course.",
-    "pitfalls": [
-      "Confusing the disease with chronic lymphocytic leukaemia, both CD5-positive, without checking CD23 and cyclin D1",
-      "Missing the rare cyclin D1-negative variant, where SOX11 and t(11;14) alternatives aid diagnosis",
-      "Treating the indolent leukaemic non-nodal variant as aggressively as classic disease",
-      "Overlooking TP53 status, which should influence treatment choice",
-      "Failing to consider gastrointestinal involvement, which is common even when asymptomatic"
-    ],
-    "references": [
-      "WHO Classification of Haematolymphoid Tumours",
-      "British Society for Haematology guidance on mantle cell lymphoma"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Truly localised (stage I to II) disease is potentially curable with combined chemotherapy plus involved-site radiotherapy, while advanced-stage disease is treated to prolong remission rather than for cure.",
-      "A minority with a more indolent presentation (minimal lymphadenopathy, mild splenomegaly, low Ki-67) can be managed with a period of watchful waiting without apparent worsening of eventual response or survival.",
-      "Frontline chemoimmunotherapy should be built around an anti-CD20 antibody; an anthracycline-based combination has been a mainstay, with a bendamustine-based combination preferred in older or less fit patients for better tolerability.",
-      "Adding a proteasome inhibitor to an anthracycline-based backbone can improve response and progression-free survival but adds toxicity that has limited its routine use; lenalidomide with an anti-CD20 antibody is a promising but not yet established frontline option.",
-      "In younger, fit patients, more intensive cytarabine-containing induction followed by consolidation with autologous stem-cell transplant should be considered, recognising a meaningful risk that intensive induction cannot be completed due to toxicity, which should factor into fitness assessment.",
-      "Maintenance anti-CD20 antibody therapy after induction, including after transplant consolidation, should be offered to responders as it improves progression-free and overall survival.",
-      "At relapse, prognosis is generally poor and referral for consideration of clinical trials should be part of the discussion.",
-      "Bruton tyrosine kinase inhibitors are a mainstay of relapsed treatment; second-generation, more selective agents achieve higher response rates with a more favourable toxicity profile than first-generation ibrutinib.",
-      "CD19-directed CAR T-cell therapy should be considered for relapsed or refractory disease after chemoimmunotherapy and a BTK inhibitor, including in high-risk disease, but requires a centre experienced in managing cytokine release syndrome and neurologic toxicity.",
-      "Other agents with activity in relapsed disease include proteasome inhibitors, immunomodulatory agents, the BCL2 antagonist venetoclax, and conventional cytotoxic agents such as purine analogues and bendamustine.",
-      "MCL is notably radiosensitive, so radiotherapy, even at modest doses, should be considered for symptomatic or bulky localised disease including at relapse.",
-      "TP53 mutation or deletion is an adverse prognostic marker associated with poor response to conventional chemoimmunotherapy and should prompt consideration of a non-chemotherapy-based or trial-based approach.",
-      "A minority with an indolent, non-nodal leukaemic course and low proliferation index may be appropriate for active surveillance rather than immediate treatment.",
-      "All new diagnoses warrant referral to haemato-oncology for staging and risk stratification before treatment, and relapses, especially with high-risk features, should be referred promptly given the role of specialised options requiring experienced centres."
+    [
+     "Clinical Pitfall",
+     "Confusing the disease with chronic lymphocytic leukaemia, both CD5-positive, without checking CD23 and cyclin D1",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mantle cell lymphoma (ccnd1/t(11;14))."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mantle-cell-lymphoma-diagram",
+   "title": "Mantle cell lymphoma (CCND1/t(11;14)): Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

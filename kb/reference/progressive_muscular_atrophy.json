@@ -1,78 +1,173 @@
 {
-  "id": "progressive_muscular_atrophy",
-  "name": "Progressive muscular atrophy",
-  "aliases": [
-    "PMA",
-    "pure lower motor neurone disease",
-    "progressive muscular atrophy variant of motor neurone disease"
+ "id": "progressive_muscular_atrophy",
+ "name": "Progressive muscular atrophy",
+ "aliases": [
+  "PMA",
+  "pure lower motor neurone disease",
+  "progressive muscular atrophy variant of motor neurone disease"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Cognitive & Movement",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with progressive muscle weakness, wasting and fasciculation reflecting pure lower motor neurone degeneration, without upper motor neurone signs",
+   "Reflexes are usually reduced or absent and plantar responses are flexor, in contrast to the brisk reflexes of amyotrophic lateral sclerosis",
+   "Weakness is often asymmetrical at onset, commonly beginning in a limb before spreading to other regions",
+   "Bulbar and respiratory muscles may become involved as the disease advances, threatening swallowing and breathing",
+   "Many patients develop subclinical upper motor neurone or corticospinal pathology over time, so progressive muscular atrophy is regarded as part of the motor neurone disease spectrum",
+   "Distinguishing it from treatable lower motor neurone syndromes such as multifocal motor neuropathy with conduction block is a diagnostic priority",
+   "Care is multidisciplinary and supportive, addressing mobility, communication, nutrition and respiratory function"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Cognitive & Movement",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with progressive muscle weakness, wasting and fasciculation reflecting pure lower motor neurone degeneration, without upper motor neurone signs",
-      "Reflexes are usually reduced or absent and plantar responses are flexor, in contrast to the brisk reflexes of amyotrophic lateral sclerosis",
-      "Weakness is often asymmetrical at onset, commonly beginning in a limb before spreading to other regions",
-      "Bulbar and respiratory muscles may become involved as the disease advances, threatening swallowing and breathing",
-      "Many patients develop subclinical upper motor neurone or corticospinal pathology over time, so progressive muscular atrophy is regarded as part of the motor neurone disease spectrum",
-      "Distinguishing it from treatable lower motor neurone syndromes such as multifocal motor neuropathy with conduction block is a diagnostic priority",
-      "Care is multidisciplinary and supportive, addressing mobility, communication, nutrition and respiratory function"
+  "pathophysiology": "Progressive muscular atrophy is a form of motor neurone disease characterised by selective degeneration of the lower motor neurones in the anterior horns of the spinal cord and the motor nuclei of the brainstem, producing denervation, muscle wasting and fasciculation. The corticospinal upper motor neurone pathways are clinically spared, at least initially, distinguishing it from amyotrophic lateral sclerosis. Post-mortem studies frequently reveal TDP-43 pathology and subclinical corticospinal involvement, supporting the view that progressive muscular atrophy lies at the lower motor neurone end of a continuous motor neurone disease spectrum rather than being a wholly separate entity.",
+  "additionalDifferentials": [
+   "Amyotrophic lateral sclerosis at an early or lower motor neurone predominant stage",
+   "Multifocal motor neuropathy with conduction block",
+   "Spinal muscular atrophy and other hereditary motor neuronopathies",
+   "Chronic inflammatory demyelinating polyradiculoneuropathy with motor predominance",
+   "Inclusion body myositis and other myopathies causing wasting",
+   "Kennedy disease (spinobulbar muscular atrophy)",
+   "Post-polio syndrome"
+  ],
+  "additionalInvestigations": [
+   "Electromyography and nerve conduction studies to confirm widespread denervation and exclude conduction block",
+   "MRI of the brain and spine to exclude structural and compressive lesions",
+   "Anti-GM1 antibody testing where multifocal motor neuropathy is suspected",
+   "Creatine kinase and myopathy screen to exclude a primary muscle disorder",
+   "Genetic testing including the androgen receptor gene for Kennedy disease when clinically indicated",
+   "Respiratory function testing to monitor for ventilatory involvement"
+  ],
+  "redFlags": [
+   "Conduction block on nerve conduction studies, suggesting a potentially treatable multifocal motor neuropathy",
+   "Emergence of upper motor neurone signs, indicating evolution towards amyotrophic lateral sclerosis",
+   "Declining respiratory function or nocturnal hypoventilation",
+   "Bulbar weakness with unsafe swallowing and aspiration risk"
+  ],
+  "prognosis": "Progressive muscular atrophy typically progresses somewhat more slowly than classic amyotrophic lateral sclerosis, but many patients develop respiratory and bulbar involvement, and the underlying motor neurone degeneration is ultimately progressive with limited life expectancy in many cases.",
+  "pitfalls": [
+   "Missing multifocal motor neuropathy with conduction block, a treatable mimic that responds to immunotherapy",
+   "Assuming the disorder will remain purely lower motor neurone, when many cases progress within the wider spectrum",
+   "Overlooking Kennedy disease, which carries different inheritance and prognosis",
+   "Failing to monitor respiratory function until late in the illness"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Disease-modifying therapy with riluzole, as offered across the motor neurone disease spectrum, to modestly slow progression",
+   "Respiratory surveillance with regular function testing and non-invasive ventilation for ventilatory insufficiency as respiratory muscles become involved",
+   "Nutritional support and dysphagia management, with gastrostomy feeding when swallowing fails",
+   "Symptomatic care for cramps, spasticity, sialorrhoea and secretions, with physiotherapy, occupational therapy and mobility and communication aids",
+   "Exclude and treat mimics, particularly multifocal motor neuropathy with conduction block, which responds to intravenous immunoglobulin",
+   "Multidisciplinary motor neurone disease clinic care with early palliative care and advance care planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "progressive_muscular_atrophy-pathway",
+   "title": "Progressive muscular atrophy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with progressive muscle weakness, wasting and fasciculation reflecting pure lower motor neurone degeneration, without upper motor neurone signs",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Conduction block on nerve conduction studies, suggesting a potentially treatable multifocal motor neuropathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Electromyography and nerve conduction studies to confirm widespread denervation and exclude conduction block, MRI of the brain and spine to exclude structural and compressive lesions, Anti-GM1 antibody testing where"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Disease-modifying therapy with riluzole, as offered across the motor neurone disease spectrum, to modestly slow progression"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing multifocal motor neuropathy with conduction block, a treatable mimic that responds to immunotherapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of progressive muscular atrophy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "progressive_muscular_atrophy-matrix",
+   "title": "Progressive muscular atrophy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with progressive muscle weakness, wasting and fasciculation reflecting pure lower motor neurone degeneration, without",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Progressive muscular atrophy is a form of motor neurone disease characterised by selective degeneration of the lower motor neurones in the anterior horns of the spinal cord and the motor nuclei of the brainstem, producing denervation, muscle wasting and fasciculation. The corticospinal upper motor neurone pathways are clinically spared, at least initially, distinguishing it from amyotrophic lateral sclerosis. Post-mortem studies frequently reveal TDP-43 pathology and subclinical corticospinal involvement, supporting the view that progressive muscular atrophy lies at the lower motor neurone end of a continuous motor neurone disease spectrum rather than being a wholly separate entity.",
-    "additionalDifferentials": [
-      "Amyotrophic lateral sclerosis at an early or lower motor neurone predominant stage",
-      "Multifocal motor neuropathy with conduction block",
-      "Spinal muscular atrophy and other hereditary motor neuronopathies",
-      "Chronic inflammatory demyelinating polyradiculoneuropathy with motor predominance",
-      "Inclusion body myositis and other myopathies causing wasting",
-      "Kennedy disease (spinobulbar muscular atrophy)",
-      "Post-polio syndrome"
+    [
+     "Key Investigations",
+     "Electromyography and nerve conduction studies to confirm widespread denervation and exclude conduction block, MRI of the brain",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Electromyography and nerve conduction studies to confirm widespread denervation and exclude conduction block",
-      "MRI of the brain and spine to exclude structural and compressive lesions",
-      "Anti-GM1 antibody testing where multifocal motor neuropathy is suspected",
-      "Creatine kinase and myopathy screen to exclude a primary muscle disorder",
-      "Genetic testing including the androgen receptor gene for Kennedy disease when clinically indicated",
-      "Respiratory function testing to monitor for ventilatory involvement"
+    [
+     "Primary Differentials",
+     "Amyotrophic lateral sclerosis at an early or lower motor neurone predominant stage, Multifocal motor neuropathy with conduction",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Conduction block on nerve conduction studies, suggesting a potentially treatable multifocal motor neuropathy",
-      "Emergence of upper motor neurone signs, indicating evolution towards amyotrophic lateral sclerosis",
-      "Declining respiratory function or nocturnal hypoventilation",
-      "Bulbar weakness with unsafe swallowing and aspiration risk"
+    [
+     "Management Strategy",
+     "Disease-modifying therapy with riluzole, as offered across the motor neurone disease spectrum, to modestly slow progression",
+     "Core treatment modality"
     ],
-    "prognosis": "Progressive muscular atrophy typically progresses somewhat more slowly than classic amyotrophic lateral sclerosis, but many patients develop respiratory and bulbar involvement, and the underlying motor neurone degeneration is ultimately progressive with limited life expectancy in many cases.",
-    "pitfalls": [
-      "Missing multifocal motor neuropathy with conduction block, a treatable mimic that responds to immunotherapy",
-      "Assuming the disorder will remain purely lower motor neurone, when many cases progress within the wider spectrum",
-      "Overlooking Kennedy disease, which carries different inheritance and prognosis",
-      "Failing to monitor respiratory function until late in the illness"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Disease-modifying therapy with riluzole, as offered across the motor neurone disease spectrum, to modestly slow progression",
-      "Respiratory surveillance with regular function testing and non-invasive ventilation for ventilatory insufficiency as respiratory muscles become involved",
-      "Nutritional support and dysphagia management, with gastrostomy feeding when swallowing fails",
-      "Symptomatic care for cramps, spasticity, sialorrhoea and secretions, with physiotherapy, occupational therapy and mobility and communication aids",
-      "Exclude and treat mimics, particularly multifocal motor neuropathy with conduction block, which responds to intravenous immunoglobulin",
-      "Multidisciplinary motor neurone disease clinic care with early palliative care and advance care planning"
+    [
+     "Clinical Pitfall",
+     "Missing multifocal motor neuropathy with conduction block, a treatable mimic that responds to immunotherapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for progressive muscular atrophy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "progressive-muscular-atrophy-diagram",
+   "title": "Progressive muscular atrophy: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

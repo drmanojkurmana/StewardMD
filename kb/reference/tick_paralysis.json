@@ -1,78 +1,173 @@
 {
-  "id": "tick_paralysis",
-  "name": "Tick paralysis",
-  "aliases": [
-    "tick-borne paralysis",
-    "Ixodes holocyclus paralysis",
-    "Dermacentor tick paralysis",
-    "tick toxicosis"
+ "id": "tick_paralysis",
+ "name": "Tick paralysis",
+ "aliases": [
+  "tick-borne paralysis",
+  "Ixodes holocyclus paralysis",
+  "Dermacentor tick paralysis",
+  "tick toxicosis"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Envenomation",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with an ascending, symmetrical flaccid paralysis that can closely mimic Guillain-Barre syndrome",
+   "Caused by a neurotoxin in the saliva of a feeding, engorged female tick, most often in children",
+   "A careful whole-body skin search, including the scalp, hairline, ears and skin folds, is essential to find the attached tick",
+   "In the North American form (Dermacentor and others), removing the tick usually produces rapid improvement over hours to days",
+   "In the Australian form (Ixodes holocyclus), paralysis may worsen after tick removal, and specific measures differ",
+   "Sensation is typically preserved and reflexes are reduced or absent, helping distinguish it from other causes",
+   "The principal danger is progression to bulbar and respiratory muscle weakness requiring ventilatory support"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Envenomation",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with an ascending, symmetrical flaccid paralysis that can closely mimic Guillain-Barre syndrome",
-      "Caused by a neurotoxin in the saliva of a feeding, engorged female tick, most often in children",
-      "A careful whole-body skin search, including the scalp, hairline, ears and skin folds, is essential to find the attached tick",
-      "In the North American form (Dermacentor and others), removing the tick usually produces rapid improvement over hours to days",
-      "In the Australian form (Ixodes holocyclus), paralysis may worsen after tick removal, and specific measures differ",
-      "Sensation is typically preserved and reflexes are reduced or absent, helping distinguish it from other causes",
-      "The principal danger is progression to bulbar and respiratory muscle weakness requiring ventilatory support"
+  "pathophysiology": "During prolonged attachment and feeding, certain ticks secrete a salivary neurotoxin that impairs neuromuscular transmission, principally by interfering with presynaptic release of acetylcholine and with nerve conduction. The result is a progressive, ascending, symmetrical flaccid paralysis with hyporeflexia but preserved sensation. Toxin production relates to the duration of feeding and the engorgement of the tick, and the clinical course after tick removal differs between the North American species, where recovery is usually prompt, and Ixodes holocyclus, in which deterioration can continue for a period after removal.",
+  "additionalDifferentials": [
+   "Guillain-Barre syndrome",
+   "Botulism",
+   "Myasthenia gravis or myasthenic crisis",
+   "Spinal cord compression or transverse myelitis",
+   "Poliomyelitis or other acute flaccid paralysis",
+   "Electrolyte disturbance or periodic paralysis"
+  ],
+  "additionalInvestigations": [
+   "Thorough skin and scalp examination to locate the tick (the key diagnostic step)",
+   "Serial forced vital capacity and respiratory monitoring",
+   "Nerve conduction studies to help differentiate from Guillain-Barre syndrome",
+   "Cerebrospinal fluid analysis to exclude inflammatory neuropathy",
+   "Electrolytes including potassium and calcium",
+   "Pulse oximetry and arterial blood gases if respiratory involvement"
+  ],
+  "redFlags": [
+   "Bulbar weakness with impaired swallowing or airway protection",
+   "Declining respiratory function or vital capacity",
+   "Rapidly ascending or worsening paralysis",
+   "Deterioration after tick removal (notably with Ixodes holocyclus)",
+   "Very young child with progressive weakness"
+  ],
+  "prognosis": "Prognosis is excellent once the tick is found and removed, with most patients (particularly the North American form) recovering fully over days; the main risk is respiratory failure before diagnosis, and the Australian form may deteriorate transiently after removal.",
+  "pitfalls": [
+   "Missing the attached tick, especially in the scalp, and misdiagnosing Guillain-Barre syndrome",
+   "Assuming immediate improvement in all cases, when Ixodes holocyclus paralysis can worsen after removal",
+   "Crushing or incompletely removing the tick, potentially leaving mouthparts or expressing more saliva",
+   "Underestimating the speed of respiratory decline in a young child"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Clinical guidance on tick paralysis"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Locate and completely remove the attached, engorged tick by thorough whole-body and scalp examination, which is curative and produces rapid recovery in the North American form",
+   "Monitor respiratory function with serial forced vital capacity and provide ventilatory support if respiratory muscles are involved",
+   "Observe carefully after removal in the Australian Ixodes holocyclus form, in which paralysis may transiently worsen, and avoid squeezing the tick during removal",
+   "Provide supportive nursing and airway protection while weakness resolves",
+   "Confirm neurological recovery and reconsider alternative diagnoses such as Guillain-Barre syndrome if there is no improvement after tick removal"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tick_paralysis-pathway",
+   "title": "Tick paralysis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with an ascending, symmetrical flaccid paralysis that can closely mimic Guillain-Barre syndrome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Bulbar weakness with impaired swallowing or airway protection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Thorough skin and scalp examination to locate the tick (the key diagnostic step), Serial forced vital capacity and respiratory monitoring, Nerve conduction studies to help differentiate from Guillain-Barre syndrome"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Locate and completely remove the attached, engorged tick by thorough whole-body and scalp examination, which is curative and produces rapid recovery in the North American form"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the attached tick, especially in the scalp, and misdiagnosing Guillain-Barre syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tick paralysis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tick_paralysis-matrix",
+   "title": "Tick paralysis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with an ascending, symmetrical flaccid paralysis that can closely mimic Guillain-Barre syndrome",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During prolonged attachment and feeding, certain ticks secrete a salivary neurotoxin that impairs neuromuscular transmission, principally by interfering with presynaptic release of acetylcholine and with nerve conduction. The result is a progressive, ascending, symmetrical flaccid paralysis with hyporeflexia but preserved sensation. Toxin production relates to the duration of feeding and the engorgement of the tick, and the clinical course after tick removal differs between the North American species, where recovery is usually prompt, and Ixodes holocyclus, in which deterioration can continue for a period after removal.",
-    "additionalDifferentials": [
-      "Guillain-Barre syndrome",
-      "Botulism",
-      "Myasthenia gravis or myasthenic crisis",
-      "Spinal cord compression or transverse myelitis",
-      "Poliomyelitis or other acute flaccid paralysis",
-      "Electrolyte disturbance or periodic paralysis"
+    [
+     "Key Investigations",
+     "Thorough skin and scalp examination to locate the tick (the key diagnostic step), Serial forced vital capacity and respiratory",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Thorough skin and scalp examination to locate the tick (the key diagnostic step)",
-      "Serial forced vital capacity and respiratory monitoring",
-      "Nerve conduction studies to help differentiate from Guillain-Barre syndrome",
-      "Cerebrospinal fluid analysis to exclude inflammatory neuropathy",
-      "Electrolytes including potassium and calcium",
-      "Pulse oximetry and arterial blood gases if respiratory involvement"
+    [
+     "Primary Differentials",
+     "Guillain-Barre syndrome, Botulism, Myasthenia gravis or myasthenic crisis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Bulbar weakness with impaired swallowing or airway protection",
-      "Declining respiratory function or vital capacity",
-      "Rapidly ascending or worsening paralysis",
-      "Deterioration after tick removal (notably with Ixodes holocyclus)",
-      "Very young child with progressive weakness"
+    [
+     "Management Strategy",
+     "Locate and completely remove the attached, engorged tick by thorough whole-body and scalp examination, which is curative and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is excellent once the tick is found and removed, with most patients (particularly the North American form) recovering fully over days; the main risk is respiratory failure before diagnosis, and the Australian form may deteriorate transiently after removal.",
-    "pitfalls": [
-      "Missing the attached tick, especially in the scalp, and misdiagnosing Guillain-Barre syndrome",
-      "Assuming immediate improvement in all cases, when Ixodes holocyclus paralysis can worsen after removal",
-      "Crushing or incompletely removing the tick, potentially leaving mouthparts or expressing more saliva",
-      "Underestimating the speed of respiratory decline in a young child"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Clinical guidance on tick paralysis"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Locate and completely remove the attached, engorged tick by thorough whole-body and scalp examination, which is curative and produces rapid recovery in the North American form",
-      "Monitor respiratory function with serial forced vital capacity and provide ventilatory support if respiratory muscles are involved",
-      "Observe carefully after removal in the Australian Ixodes holocyclus form, in which paralysis may transiently worsen, and avoid squeezing the tick during removal",
-      "Provide supportive nursing and airway protection while weakness resolves",
-      "Confirm neurological recovery and reconsider alternative diagnoses such as Guillain-Barre syndrome if there is no improvement after tick removal"
+    [
+     "Clinical Pitfall",
+     "Missing the attached tick, especially in the scalp, and misdiagnosing Guillain-Barre syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tick paralysis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tick-paralysis-diagram",
+   "title": "Tick paralysis: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

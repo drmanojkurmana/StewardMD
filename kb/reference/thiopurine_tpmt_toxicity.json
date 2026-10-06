@@ -1,83 +1,178 @@
 {
-  "id": "thiopurine_tpmt_toxicity",
-  "name": "Thiopurine (TPMT/NUDT15) myelotoxicity",
-  "aliases": [
-    "thiopurine myelosuppression",
-    "azathioprine toxicity",
-    "mercaptopurine toxicity",
-    "TPMT deficiency",
-    "NUDT15 deficiency",
-    "thiopurine methyltransferase deficiency"
+ "id": "thiopurine_tpmt_toxicity",
+ "name": "Thiopurine (TPMT/NUDT15) myelotoxicity",
+ "aliases": [
+  "thiopurine myelosuppression",
+  "azathioprine toxicity",
+  "mercaptopurine toxicity",
+  "TPMT deficiency",
+  "NUDT15 deficiency",
+  "thiopurine methyltransferase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Clinical pharmacology / Toxicology",
+ "specialty": "Clinical Pharmacology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / Goldman-Cecil Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Thiopurines (azathioprine, mercaptopurine, thioguanine) can cause severe, sometimes life-threatening bone marrow suppression",
+   "Patients with low or absent thiopurine methyltransferase (TPMT) activity accumulate cytotoxic thioguanine nucleotides and are at high risk of profound myelotoxicity",
+   "NUDT15 variants are an additional important genetic cause of thiopurine-induced myelosuppression, particularly relevant in East Asian and Hispanic populations",
+   "Pre-treatment testing of TPMT (and where available NUDT15) status guides dosing and identifies patients needing reduced doses or avoidance",
+   "Myelosuppression can present with neutropenia, thrombocytopenia or pancytopenia, sometimes with infection or bleeding",
+   "Regular full blood count monitoring is essential throughout treatment, as marrow suppression can occur even with normal enzyme activity",
+   "Allopurinol markedly increases thiopurine toxicity by blocking xanthine oxidase, an important interaction requiring dose reduction",
+   "Management of established toxicity is drug withdrawal, supportive care, and treatment of neutropenic sepsis or bleeding"
   ],
-  "class": "non_infective",
-  "system": "Clinical pharmacology / Toxicology",
-  "specialty": "Clinical Pharmacology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / Goldman-Cecil Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Thiopurines (azathioprine, mercaptopurine, thioguanine) can cause severe, sometimes life-threatening bone marrow suppression",
-      "Patients with low or absent thiopurine methyltransferase (TPMT) activity accumulate cytotoxic thioguanine nucleotides and are at high risk of profound myelotoxicity",
-      "NUDT15 variants are an additional important genetic cause of thiopurine-induced myelosuppression, particularly relevant in East Asian and Hispanic populations",
-      "Pre-treatment testing of TPMT (and where available NUDT15) status guides dosing and identifies patients needing reduced doses or avoidance",
-      "Myelosuppression can present with neutropenia, thrombocytopenia or pancytopenia, sometimes with infection or bleeding",
-      "Regular full blood count monitoring is essential throughout treatment, as marrow suppression can occur even with normal enzyme activity",
-      "Allopurinol markedly increases thiopurine toxicity by blocking xanthine oxidase, an important interaction requiring dose reduction",
-      "Management of established toxicity is drug withdrawal, supportive care, and treatment of neutropenic sepsis or bleeding"
+  "pathophysiology": "Thiopurines are prodrugs metabolised along competing pathways. One route, via hypoxanthine-guanine phosphoribosyltransferase, generates cytotoxic thioguanine nucleotides that are incorporated into DNA and mediate both the therapeutic immunosuppressive effect and marrow toxicity. Two enzymes divert drug away from this cytotoxic route: thiopurine methyltransferase (TPMT), which methylates the drug, and xanthine oxidase, which oxidises it. Individuals with genetically low TPMT activity shunt more drug into thioguanine nucleotide production, causing accumulation and severe myelosuppression at standard doses. NUDT15 normally dephosphorylates active thioguanine metabolites, and loss-of-function variants similarly increase active drug and marrow toxicity. Inhibition of xanthine oxidase by allopurinol removes another escape route, greatly amplifying toxicity unless the thiopurine dose is reduced.",
+  "additionalDifferentials": [
+   "Other drug-induced marrow suppression",
+   "Bone marrow infiltration or primary haematological malignancy",
+   "Aplastic anaemia from other causes",
+   "Sepsis-related cytopenias",
+   "Nutritional deficiency (B12, folate) causing cytopenias",
+   "Viral marrow suppression"
+  ],
+  "additionalInvestigations": [
+   "TPMT enzyme activity or genotype before starting therapy",
+   "NUDT15 genotyping where available and indicated",
+   "Regular full blood count with differential during treatment",
+   "Assessment for drug interactions, especially allopurinol",
+   "Thiopurine metabolite levels in specialist monitoring",
+   "Bone marrow examination in unexplained or severe cytopenias"
+  ],
+  "redFlags": [
+   "Severe neutropenia with fever or sepsis",
+   "Profound thrombocytopenia with bleeding",
+   "Pancytopenia developing after starting or dose-escalating a thiopurine",
+   "Concurrent allopurinol without appropriate dose reduction",
+   "Rapidly falling counts on routine monitoring"
+  ],
+  "prognosis": "Marrow toxicity usually recovers after withdrawal and supportive care, but severe neutropenic sepsis can be fatal. Identifying at-risk genotypes and monitoring counts allows most patients to be treated safely.",
+  "pitfalls": [
+   "Starting standard doses without checking TPMT (and where relevant NUDT15) status",
+   "Co-prescribing allopurinol without reducing the thiopurine dose",
+   "Assuming normal enzyme activity removes the need for blood count monitoring",
+   "Attributing cytopenias to disease activity rather than drug toxicity"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine",
+   "CPIC Guideline for thiopurines and TPMT/NUDT15"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Test TPMT activity (and NUDT15 genotype where available) before starting a thiopurine, reducing the dose or avoiding azathioprine, mercaptopurine or thioguanine in deficient patients",
+   "Withhold or permanently discontinue the offending thiopurine as soon as significant myelosuppression is detected",
+   "Avoid concurrent allopurinol or febuxostat, since xanthine oxidase inhibition diverts drug into cytotoxic thioguanine nucleotides; markedly reduce the thiopurine dose if co-prescription is unavoidable",
+   "Give supportive care for neutropenic sepsis with broad-spectrum antibiotics and granulocyte colony-stimulating factor, with platelet and red cell transfusion for bleeding or symptomatic anaemia",
+   "Monitor the full blood count regularly throughout treatment, as myelosuppression can occur even with normal enzyme activity",
+   "Use thiopurine metabolite level monitoring in specialist practice to guide dose adjustment",
+   "Escalate to haematology with bone marrow examination for profound, prolonged or unexplained pancytopenia"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "thiopurine_tpmt_toxicity-pathway",
+   "title": "Thiopurine (TPMT/NUDT15) myelotoxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Thiopurines (azathioprine, mercaptopurine, thioguanine) can cause severe, sometimes life-threatening bone marrow suppression",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe neutropenia with fever or sepsis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: TPMT enzyme activity or genotype before starting therapy, NUDT15 genotyping where available and indicated, Regular full blood count with differential during treatment"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Test TPMT activity (and NUDT15 genotype where available) before starting a thiopurine, reducing the dose or avoiding azathioprine, mercaptopurine or thioguanine in deficient patients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Starting standard doses without checking TPMT (and where relevant NUDT15) status"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of thiopurine (tpmt/nudt15) myelotoxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "thiopurine_tpmt_toxicity-matrix",
+   "title": "Thiopurine (TPMT/NUDT15) myelotoxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Thiopurines (azathioprine, mercaptopurine, thioguanine) can cause severe, sometimes life-threatening bone marrow suppression",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Thiopurines are prodrugs metabolised along competing pathways. One route, via hypoxanthine-guanine phosphoribosyltransferase, generates cytotoxic thioguanine nucleotides that are incorporated into DNA and mediate both the therapeutic immunosuppressive effect and marrow toxicity. Two enzymes divert drug away from this cytotoxic route: thiopurine methyltransferase (TPMT), which methylates the drug, and xanthine oxidase, which oxidises it. Individuals with genetically low TPMT activity shunt more drug into thioguanine nucleotide production, causing accumulation and severe myelosuppression at standard doses. NUDT15 normally dephosphorylates active thioguanine metabolites, and loss-of-function variants similarly increase active drug and marrow toxicity. Inhibition of xanthine oxidase by allopurinol removes another escape route, greatly amplifying toxicity unless the thiopurine dose is reduced.",
-    "additionalDifferentials": [
-      "Other drug-induced marrow suppression",
-      "Bone marrow infiltration or primary haematological malignancy",
-      "Aplastic anaemia from other causes",
-      "Sepsis-related cytopenias",
-      "Nutritional deficiency (B12, folate) causing cytopenias",
-      "Viral marrow suppression"
+    [
+     "Key Investigations",
+     "TPMT enzyme activity or genotype before starting therapy, NUDT15 genotyping where available and indicated, Regular full blood",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "TPMT enzyme activity or genotype before starting therapy",
-      "NUDT15 genotyping where available and indicated",
-      "Regular full blood count with differential during treatment",
-      "Assessment for drug interactions, especially allopurinol",
-      "Thiopurine metabolite levels in specialist monitoring",
-      "Bone marrow examination in unexplained or severe cytopenias"
+    [
+     "Primary Differentials",
+     "Other drug-induced marrow suppression, Bone marrow infiltration or primary haematological malignancy, Aplastic anaemia from other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe neutropenia with fever or sepsis",
-      "Profound thrombocytopenia with bleeding",
-      "Pancytopenia developing after starting or dose-escalating a thiopurine",
-      "Concurrent allopurinol without appropriate dose reduction",
-      "Rapidly falling counts on routine monitoring"
+    [
+     "Management Strategy",
+     "Test TPMT activity (and NUDT15 genotype where available) before starting a thiopurine, reducing the dose or avoiding",
+     "Core treatment modality"
     ],
-    "prognosis": "Marrow toxicity usually recovers after withdrawal and supportive care, but severe neutropenic sepsis can be fatal. Identifying at-risk genotypes and monitoring counts allows most patients to be treated safely.",
-    "pitfalls": [
-      "Starting standard doses without checking TPMT (and where relevant NUDT15) status",
-      "Co-prescribing allopurinol without reducing the thiopurine dose",
-      "Assuming normal enzyme activity removes the need for blood count monitoring",
-      "Attributing cytopenias to disease activity rather than drug toxicity"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine",
-      "CPIC Guideline for thiopurines and TPMT/NUDT15"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Test TPMT activity (and NUDT15 genotype where available) before starting a thiopurine, reducing the dose or avoiding azathioprine, mercaptopurine or thioguanine in deficient patients",
-      "Withhold or permanently discontinue the offending thiopurine as soon as significant myelosuppression is detected",
-      "Avoid concurrent allopurinol or febuxostat, since xanthine oxidase inhibition diverts drug into cytotoxic thioguanine nucleotides; markedly reduce the thiopurine dose if co-prescription is unavoidable",
-      "Give supportive care for neutropenic sepsis with broad-spectrum antibiotics and granulocyte colony-stimulating factor, with platelet and red cell transfusion for bleeding or symptomatic anaemia",
-      "Monitor the full blood count regularly throughout treatment, as myelosuppression can occur even with normal enzyme activity",
-      "Use thiopurine metabolite level monitoring in specialist practice to guide dose adjustment",
-      "Escalate to haematology with bone marrow examination for profound, prolonged or unexplained pancytopenia"
+    [
+     "Clinical Pitfall",
+     "Starting standard doses without checking TPMT (and where relevant NUDT15) status",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for thiopurine (tpmt/nudt15) myelotoxicity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "thiopurine-tpmt-toxicity-diagram",
+   "title": "Thiopurine (TPMT/NUDT15) myelotoxicity: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

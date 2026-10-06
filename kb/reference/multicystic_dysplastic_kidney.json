@@ -1,78 +1,173 @@
 {
-  "id": "multicystic_dysplastic_kidney",
-  "name": "Multicystic dysplastic kidney",
-  "aliases": [
-    "MCDK",
-    "multicystic kidney",
-    "multicystic renal dysplasia"
+ "id": "multicystic_dysplastic_kidney",
+ "name": "Multicystic dysplastic kidney",
+ "aliases": [
+  "MCDK",
+  "multicystic kidney",
+  "multicystic renal dysplasia"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A congenital dysplastic kidney replaced by multiple non-communicating cysts of varying size with intervening dysplastic tissue and no functioning nephrons, giving a non-functioning renal unit",
+   "Usually unilateral and detected on antenatal ultrasound; bilateral disease is incompatible with life",
+   "On ultrasound the cysts do not communicate and there is no identifiable normal renal parenchyma or a reniform pelvicalyceal pattern, distinguishing it from hydronephrosis",
+   "A DMSA or MAG3 scan confirms absent function in the affected kidney",
+   "The natural history is progressive involution, with many kidneys shrinking or disappearing over months to years",
+   "The contralateral kidney should be assessed carefully, as compensatory hypertrophy is expected and coexisting anomalies such as reflux or ureteropelvic junction obstruction on the other side carry the main functional prognosis",
+   "Most cases are managed conservatively with surveillance; nephrectomy is reserved for the rare complications of a very large lesion, symptoms, hypertension, or diagnostic uncertainty (concern for malignancy)"
   ],
-  "class": "non_infective",
-  "system": "Renal / Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A congenital dysplastic kidney replaced by multiple non-communicating cysts of varying size with intervening dysplastic tissue and no functioning nephrons, giving a non-functioning renal unit",
-      "Usually unilateral and detected on antenatal ultrasound; bilateral disease is incompatible with life",
-      "On ultrasound the cysts do not communicate and there is no identifiable normal renal parenchyma or a reniform pelvicalyceal pattern, distinguishing it from hydronephrosis",
-      "A DMSA or MAG3 scan confirms absent function in the affected kidney",
-      "The natural history is progressive involution, with many kidneys shrinking or disappearing over months to years",
-      "The contralateral kidney should be assessed carefully, as compensatory hypertrophy is expected and coexisting anomalies such as reflux or ureteropelvic junction obstruction on the other side carry the main functional prognosis",
-      "Most cases are managed conservatively with surveillance; nephrectomy is reserved for the rare complications of a very large lesion, symptoms, hypertension, or diagnostic uncertainty (concern for malignancy)"
+  "pathophysiology": "Multicystic dysplastic kidney is a severe form of renal dysplasia thought to result from an early developmental insult, such as complete ureteric or ureteropelvic obstruction/atresia, that disrupts the normal inductive interaction between the ureteric bud and the metanephric blastema. The affected kidney develops as a disorganised collection of non-communicating cysts with dysplastic stroma and cartilage and no functioning nephron mass. Because the collecting system does not connect, the unit produces no urine and typically involutes over time. Unlike hydronephrosis, there is no central dilated pelvis draining the cysts.",
+  "additionalDifferentials": [
+   "Severe hydronephrosis from ureteropelvic junction obstruction",
+   "Autosomal recessive or dominant polycystic kidney disease",
+   "Cystic renal tumour (e.g. cystic nephroma, cystic Wilms)",
+   "Segmental multicystic dysplasia in a duplex system",
+   "Simple or complex renal cysts",
+   "Obstructed dysplastic kidney with retained function"
+  ],
+  "additionalInvestigations": [
+   "Renal ultrasound to demonstrate non-communicating cysts and absent normal parenchyma",
+   "DMSA or MAG3 scintigraphy to confirm the kidney is non-functioning",
+   "Micturating cystourethrogram (MCUG) if contralateral or ipsilateral reflux is suspected",
+   "Serial ultrasound to monitor involution and the contralateral kidney",
+   "Blood pressure monitoring during follow-up",
+   "MRI in cases of diagnostic uncertainty"
+  ],
+  "redFlags": [
+   "Any abnormality of the contralateral solitary functioning kidney",
+   "New-onset hypertension attributable to the dysplastic kidney",
+   "Enlarging or solid components within the lesion raising concern for malignancy",
+   "Respiratory or renal compromise suggesting bilateral disease in the neonate"
+  ],
+  "prognosis": "For unilateral disease with a normal contralateral kidney the outlook is generally excellent, with progressive involution and good overall renal function; prognosis depends chiefly on the health of the contralateral kidney, and rare complications such as hypertension are the main reasons for intervention.",
+  "pitfalls": [
+   "Confusing multicystic dysplastic kidney with severe hydronephrosis and mismanaging accordingly",
+   "Neglecting thorough evaluation and follow-up of the contralateral kidney",
+   "Performing unnecessary nephrectomy on a lesion that would involute",
+   "Overlooking rare malignant transformation or a coexisting tumour"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "Gearhart, Rink & Mouriquand: Pediatric Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Conservative management with serial renal ultrasound to follow the expected involution of the affected kidney",
+   "Regular blood pressure monitoring with antihypertensive treatment if hypertension develops",
+   "Careful assessment and protection of the contralateral kidney, managing any coexisting vesicoureteric reflux or pelviureteric junction obstruction",
+   "Nephrectomy reserved for complications such as uncontrolled hypertension, mass effect or diagnostic uncertainty regarding malignancy",
+   "Micturating cystourethrogram where reflux is suspected",
+   "Longitudinal monitoring of renal function, since prognosis depends chiefly on the healthy contralateral kidney",
+   "Referral to paediatric nephrology and urology for surveillance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "multicystic_dysplastic_kidney-pathway",
+   "title": "Multicystic dysplastic kidney: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A congenital dysplastic kidney replaced by multiple non-communicating cysts of varying size with intervening dysplastic tissue and no functioning nephrons, giving a non-functioning renal unit",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Any abnormality of the contralateral solitary functioning kidney",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Renal ultrasound to demonstrate non-communicating cysts and absent normal parenchyma, DMSA or MAG3 scintigraphy to confirm the kidney is non-functioning, Micturating cystourethrogram (MCUG) if contralateral or ipsilateral"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Conservative management with serial renal ultrasound to follow the expected involution of the affected kidney"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing multicystic dysplastic kidney with severe hydronephrosis and mismanaging accordingly"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of multicystic dysplastic kidney."
+  }
+ ],
+ "tables": [
+  {
+   "id": "multicystic_dysplastic_kidney-matrix",
+   "title": "Multicystic dysplastic kidney: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A congenital dysplastic kidney replaced by multiple non-communicating cysts of varying size with intervening dysplastic tissue",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Multicystic dysplastic kidney is a severe form of renal dysplasia thought to result from an early developmental insult, such as complete ureteric or ureteropelvic obstruction/atresia, that disrupts the normal inductive interaction between the ureteric bud and the metanephric blastema. The affected kidney develops as a disorganised collection of non-communicating cysts with dysplastic stroma and cartilage and no functioning nephron mass. Because the collecting system does not connect, the unit produces no urine and typically involutes over time. Unlike hydronephrosis, there is no central dilated pelvis draining the cysts.",
-    "additionalDifferentials": [
-      "Severe hydronephrosis from ureteropelvic junction obstruction",
-      "Autosomal recessive or dominant polycystic kidney disease",
-      "Cystic renal tumour (e.g. cystic nephroma, cystic Wilms)",
-      "Segmental multicystic dysplasia in a duplex system",
-      "Simple or complex renal cysts",
-      "Obstructed dysplastic kidney with retained function"
+    [
+     "Key Investigations",
+     "Renal ultrasound to demonstrate non-communicating cysts and absent normal parenchyma, DMSA or MAG3 scintigraphy to confirm the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Renal ultrasound to demonstrate non-communicating cysts and absent normal parenchyma",
-      "DMSA or MAG3 scintigraphy to confirm the kidney is non-functioning",
-      "Micturating cystourethrogram (MCUG) if contralateral or ipsilateral reflux is suspected",
-      "Serial ultrasound to monitor involution and the contralateral kidney",
-      "Blood pressure monitoring during follow-up",
-      "MRI in cases of diagnostic uncertainty"
+    [
+     "Primary Differentials",
+     "Severe hydronephrosis from ureteropelvic junction obstruction, Autosomal recessive or dominant polycystic kidney disease, Cystic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Any abnormality of the contralateral solitary functioning kidney",
-      "New-onset hypertension attributable to the dysplastic kidney",
-      "Enlarging or solid components within the lesion raising concern for malignancy",
-      "Respiratory or renal compromise suggesting bilateral disease in the neonate"
+    [
+     "Management Strategy",
+     "Conservative management with serial renal ultrasound to follow the expected involution of the affected kidney",
+     "Core treatment modality"
     ],
-    "prognosis": "For unilateral disease with a normal contralateral kidney the outlook is generally excellent, with progressive involution and good overall renal function; prognosis depends chiefly on the health of the contralateral kidney, and rare complications such as hypertension are the main reasons for intervention.",
-    "pitfalls": [
-      "Confusing multicystic dysplastic kidney with severe hydronephrosis and mismanaging accordingly",
-      "Neglecting thorough evaluation and follow-up of the contralateral kidney",
-      "Performing unnecessary nephrectomy on a lesion that would involute",
-      "Overlooking rare malignant transformation or a coexisting tumour"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "Gearhart, Rink & Mouriquand: Pediatric Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Conservative management with serial renal ultrasound to follow the expected involution of the affected kidney",
-      "Regular blood pressure monitoring with antihypertensive treatment if hypertension develops",
-      "Careful assessment and protection of the contralateral kidney, managing any coexisting vesicoureteric reflux or pelviureteric junction obstruction",
-      "Nephrectomy reserved for complications such as uncontrolled hypertension, mass effect or diagnostic uncertainty regarding malignancy",
-      "Micturating cystourethrogram where reflux is suspected",
-      "Longitudinal monitoring of renal function, since prognosis depends chiefly on the healthy contralateral kidney",
-      "Referral to paediatric nephrology and urology for surveillance"
+    [
+     "Clinical Pitfall",
+     "Confusing multicystic dysplastic kidney with severe hydronephrosis and mismanaging accordingly",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for multicystic dysplastic kidney."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "multicystic-dysplastic-kidney-diagram",
+   "title": "Multicystic dysplastic kidney: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

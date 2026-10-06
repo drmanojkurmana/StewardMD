@@ -1,77 +1,172 @@
 {
-  "id": "kbg_syndrome",
-  "name": "KBG syndrome (ANKRD11)",
-  "aliases": [
-    "ANKRD11",
-    "KBG",
-    "16q24.3 microdeletion (ANKRD11)"
+ "id": "kbg_syndrome",
+ "name": "KBG syndrome (ANKRD11)",
+ "aliases": [
+  "ANKRD11",
+  "KBG",
+  "16q24.3 microdeletion (ANKRD11)"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Clinical Genetics / Neurodevelopmental",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A recognisable syndrome combining macrodontia of the upper central incisors with a characteristic face and developmental delay",
+   "Large upper central incisors (macrodontia) are a near-specific clue and give the syndrome its dental signature",
+   "Facial features include a triangular face, a broad eyebrow with a tendency to meet in the midline (synophrys), a prominent nasal bridge and a long philtrum",
+   "Short stature, delayed bone age, skeletal and hand anomalies (such as brachydactyly and clinodactyly) are common",
+   "Developmental delay is usually mild to moderate, with behavioural difficulties, autistic features, hearing loss and epilepsy in some",
+   "Caused by loss-of-function variants in ANKRD11 (or 16q24.3 deletions including it), usually autosomal dominant, encoding a chromatin regulator that interacts with histone deacetylase complexes",
+   "The name derives from the initials of the surnames in the original family descriptions"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Clinical Genetics / Neurodevelopmental",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A recognisable syndrome combining macrodontia of the upper central incisors with a characteristic face and developmental delay",
-      "Large upper central incisors (macrodontia) are a near-specific clue and give the syndrome its dental signature",
-      "Facial features include a triangular face, a broad eyebrow with a tendency to meet in the midline (synophrys), a prominent nasal bridge and a long philtrum",
-      "Short stature, delayed bone age, skeletal and hand anomalies (such as brachydactyly and clinodactyly) are common",
-      "Developmental delay is usually mild to moderate, with behavioural difficulties, autistic features, hearing loss and epilepsy in some",
-      "Caused by loss-of-function variants in ANKRD11 (or 16q24.3 deletions including it), usually autosomal dominant, encoding a chromatin regulator that interacts with histone deacetylase complexes",
-      "The name derives from the initials of the surnames in the original family descriptions"
+  "pathophysiology": "ANKRD11 encodes ankyrin repeat domain 11, a chromatin regulator that interacts with histone deacetylase complexes to modulate histone acetylation and thereby the transcription of genes controlling neural development and bone formation. Loss-of-function variants or deletions cause haploinsufficiency, dysregulating chromatin-dependent gene expression during development of the brain, skeleton and teeth. This produces the intellectual disability, characteristic facies, macrodontia and skeletal features. As a chromatin-modifying regulator, it belongs to the broad group of disorders in which altered histone regulation disturbs neurodevelopment.",
+  "additionalDifferentials": [
+   "Cornelia de Lange syndrome",
+   "Coffin-Siris syndrome",
+   "Silver-Russell syndrome",
+   "22q11.2 deletion syndrome",
+   "Other chromatin-related intellectual disability syndromes",
+   "Isolated short stature with delayed bone age"
+  ],
+  "additionalInvestigations": [
+   "Dental assessment noting macrodontia of the upper central incisors",
+   "Bone-age radiograph, skeletal survey and growth assessment",
+   "Audiological evaluation for hearing loss",
+   "EEG and brain MRI where seizures or other neurological features occur",
+   "Chromosomal microarray for 16q24.3 deletions and gene panel or exome sequencing including ANKRD11"
+  ],
+  "redFlags": [
+   "Significant hearing loss impairing communication",
+   "Seizures where present",
+   "Feeding difficulty or faltering growth in infancy",
+   "Cardiac or other structural anomalies needing evaluation"
+  ],
+  "prognosis": "KBG syndrome generally has a favourable outlook, with mild to moderate intellectual disability and manageable skeletal, dental and sensory features; most individuals achieve meaningful independence with support. Care is supportive with dental, audiological and developmental surveillance.",
+  "pitfalls": [
+   "Missing the diagnosis when macrodontia is subtle or the child is pre-dentate",
+   "Confusing it with Cornelia de Lange syndrome based on synophrys alone",
+   "Overlooking hearing loss that affects speech and learning",
+   "Relying only on sequencing and missing 16q24.3 deletions detectable by microarray"
+  ],
+  "references": [
+   "GeneReviews: KBG Syndrome",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early developmental intervention with speech, occupational and physiotherapy for the developmental delay",
+   "Dental review and orthodontic management of macrodontia and malocclusion of the upper central incisors",
+   "Audiological surveillance with hearing aids for conductive or sensorineural hearing loss",
+   "Growth and skeletal monitoring with bone-age assessment, and endocrine referral to consider growth hormone evaluation where short stature warrants",
+   "Antiseizure medication and neurology input for those who develop epilepsy",
+   "Behavioural and educational support addressing autistic features, attention difficulties and learning needs",
+   "Clinical genetics referral with counselling for this autosomal dominant ANKRD11 disorder and testing of at-risk relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kbg_syndrome-pathway",
+   "title": "KBG syndrome (ANKRD11): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A recognisable syndrome combining macrodontia of the upper central incisors with a characteristic face and developmental delay",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Significant hearing loss impairing communication",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dental assessment noting macrodontia of the upper central incisors, Bone-age radiograph, skeletal survey and growth assessment, Audiological evaluation for hearing loss"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early developmental intervention with speech, occupational and physiotherapy for the developmental delay"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis when macrodontia is subtle or the child is pre-dentate"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kbg syndrome (ankrd11)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kbg_syndrome-matrix",
+   "title": "KBG syndrome (ANKRD11): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A recognisable syndrome combining macrodontia of the upper central incisors with a characteristic face and developmental delay",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "ANKRD11 encodes ankyrin repeat domain 11, a chromatin regulator that interacts with histone deacetylase complexes to modulate histone acetylation and thereby the transcription of genes controlling neural development and bone formation. Loss-of-function variants or deletions cause haploinsufficiency, dysregulating chromatin-dependent gene expression during development of the brain, skeleton and teeth. This produces the intellectual disability, characteristic facies, macrodontia and skeletal features. As a chromatin-modifying regulator, it belongs to the broad group of disorders in which altered histone regulation disturbs neurodevelopment.",
-    "additionalDifferentials": [
-      "Cornelia de Lange syndrome",
-      "Coffin-Siris syndrome",
-      "Silver-Russell syndrome",
-      "22q11.2 deletion syndrome",
-      "Other chromatin-related intellectual disability syndromes",
-      "Isolated short stature with delayed bone age"
+    [
+     "Key Investigations",
+     "Dental assessment noting macrodontia of the upper central incisors, Bone-age radiograph, skeletal survey and growth assessment,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dental assessment noting macrodontia of the upper central incisors",
-      "Bone-age radiograph, skeletal survey and growth assessment",
-      "Audiological evaluation for hearing loss",
-      "EEG and brain MRI where seizures or other neurological features occur",
-      "Chromosomal microarray for 16q24.3 deletions and gene panel or exome sequencing including ANKRD11"
+    [
+     "Primary Differentials",
+     "Cornelia de Lange syndrome, Coffin-Siris syndrome, Silver-Russell syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Significant hearing loss impairing communication",
-      "Seizures where present",
-      "Feeding difficulty or faltering growth in infancy",
-      "Cardiac or other structural anomalies needing evaluation"
+    [
+     "Management Strategy",
+     "Early developmental intervention with speech, occupational and physiotherapy for the developmental delay",
+     "Core treatment modality"
     ],
-    "prognosis": "KBG syndrome generally has a favourable outlook, with mild to moderate intellectual disability and manageable skeletal, dental and sensory features; most individuals achieve meaningful independence with support. Care is supportive with dental, audiological and developmental surveillance.",
-    "pitfalls": [
-      "Missing the diagnosis when macrodontia is subtle or the child is pre-dentate",
-      "Confusing it with Cornelia de Lange syndrome based on synophrys alone",
-      "Overlooking hearing loss that affects speech and learning",
-      "Relying only on sequencing and missing 16q24.3 deletions detectable by microarray"
-    ],
-    "references": [
-      "GeneReviews: KBG Syndrome",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early developmental intervention with speech, occupational and physiotherapy for the developmental delay",
-      "Dental review and orthodontic management of macrodontia and malocclusion of the upper central incisors",
-      "Audiological surveillance with hearing aids for conductive or sensorineural hearing loss",
-      "Growth and skeletal monitoring with bone-age assessment, and endocrine referral to consider growth hormone evaluation where short stature warrants",
-      "Antiseizure medication and neurology input for those who develop epilepsy",
-      "Behavioural and educational support addressing autistic features, attention difficulties and learning needs",
-      "Clinical genetics referral with counselling for this autosomal dominant ANKRD11 disorder and testing of at-risk relatives"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis when macrodontia is subtle or the child is pre-dentate",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kbg syndrome (ankrd11)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "kbg-syndrome-diagram",
+   "title": "KBG syndrome (ANKRD11): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

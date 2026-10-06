@@ -1,78 +1,173 @@
 {
-  "id": "acanthocephaliasis",
-  "name": "Acanthocephaliasis",
-  "aliases": [
-    "acanthocephalan infection",
-    "thorny-headed worm infection",
-    "Macracanthorhynchus hirudinaceus",
-    "Moniliformis moniliformis"
+ "id": "acanthocephaliasis",
+ "name": "Acanthocephaliasis",
+ "aliases": [
+  "acanthocephalan infection",
+  "thorny-headed worm infection",
+  "Macracanthorhynchus hirudinaceus",
+  "Moniliformis moniliformis"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Acanthocephaliasis is a rare intestinal infection by thorny-headed worms, chiefly Macracanthorhynchus hirudinaceus and Moniliformis moniliformis",
+   "Humans are accidental hosts, infected by eating raw or undercooked arthropod intermediate hosts such as beetles, cockroaches or other insects",
+   "The worm's defining feature is a retractable proboscis armed with hooks that anchors into the intestinal wall",
+   "Many infections are asymptomatic or cause mild abdominal pain, whereas heavy infection can produce more marked gastrointestinal symptoms",
+   "Deep attachment of the proboscis can cause focal inflammation, ulceration and, rarely, bowel perforation with peritonitis",
+   "Diagnosis relies on identifying characteristic eggs in stool or recovering an expelled or endoscopically visualised worm",
+   "Management is with antihelminthic therapy, and surgery is reserved for perforation or other complications"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Acanthocephaliasis is a rare intestinal infection by thorny-headed worms, chiefly Macracanthorhynchus hirudinaceus and Moniliformis moniliformis",
-      "Humans are accidental hosts, infected by eating raw or undercooked arthropod intermediate hosts such as beetles, cockroaches or other insects",
-      "The worm's defining feature is a retractable proboscis armed with hooks that anchors into the intestinal wall",
-      "Many infections are asymptomatic or cause mild abdominal pain, whereas heavy infection can produce more marked gastrointestinal symptoms",
-      "Deep attachment of the proboscis can cause focal inflammation, ulceration and, rarely, bowel perforation with peritonitis",
-      "Diagnosis relies on identifying characteristic eggs in stool or recovering an expelled or endoscopically visualised worm",
-      "Management is with antihelminthic therapy, and surgery is reserved for perforation or other complications"
+  "pathophysiology": "Infection is acquired when a person ingests an arthropod harbouring the larval (cystacanth) stage of an acanthocephalan. In the intestine the larva develops into an adult worm that lacks a digestive tract and absorbs nutrients across its surface. Its hallmark is a spiny, retractable proboscis that embeds into the intestinal mucosa, provoking localised inflammation and, with deeper penetration, ulceration or full-thickness injury. Most damage is therefore mechanical and focal at the attachment site; systemic disease is uncommon and severe complications such as perforation are rare.",
+  "additionalDifferentials": [
+   "Other intestinal helminth infections such as ascariasis or trichuriasis",
+   "Non-specific gastroenteritis",
+   "Peptic ulcer disease",
+   "Appendicitis or other causes of an acute abdomen when perforation occurs",
+   "Inflammatory bowel disease",
+   "Intestinal tuberculosis"
+  ],
+  "additionalInvestigations": [
+   "Stool microscopy for characteristic acanthocephalan eggs",
+   "Morphological identification of any expelled or extracted worm",
+   "Endoscopy to visualise and retrieve attached worms",
+   "Abdominal imaging if perforation or complication is suspected",
+   "Full blood count including eosinophil assessment",
+   "Detailed dietary and exposure history for ingestion of insects or arthropods"
+  ],
+  "redFlags": [
+   "Signs of peritonitis suggesting intestinal perforation",
+   "Severe or persistent abdominal pain with systemic features",
+   "Gastrointestinal bleeding",
+   "Heavy worm burden with marked symptoms"
+  ],
+  "prognosis": "Prognosis is excellent in most cases, as infection is usually mild and self-limited or readily treated; the rare complication of perforation carries the morbidity of any acute abdomen but is uncommon.",
+  "pitfalls": [
+   "Failing to consider the diagnosis because of its rarity",
+   "Not taking a dietary history for ingestion of insects or arthropods",
+   "Misidentifying eggs or worms without expert parasitological input",
+   "Overlooking perforation as a cause of acute abdominal deterioration"
+  ],
+  "references": [
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+   "Manson's Tropical Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with anthelmintic therapy, using a benzimidazole such as albendazole or mebendazole, with pyrantel pamoate as an alternative, to eradicate the worm",
+   "Remove an accessible attached worm endoscopically, which can be both diagnostic and therapeutic",
+   "Provide supportive care and analgesia for abdominal symptoms and ensure adequate hydration",
+   "Manage the rare complication of bowel perforation or peritonitis surgically as an acute abdomen",
+   "Confirm clearance with follow-up stool examination after treatment",
+   "Prevent reinfection through food hygiene and by avoiding ingestion of raw or undercooked arthropods such as beetles and cockroaches"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acanthocephaliasis-pathway",
+   "title": "Acanthocephaliasis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Acanthocephaliasis is a rare intestinal infection by thorny-headed worms, chiefly Macracanthorhynchus hirudinaceus and Moniliformis moniliformis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of peritonitis suggesting intestinal perforation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Stool microscopy for characteristic acanthocephalan eggs, Morphological identification of any expelled or extracted worm, Endoscopy to visualise and retrieve attached worms"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with anthelmintic therapy, using a benzimidazole such as albendazole or mebendazole, with pyrantel pamoate as an alternative, to eradicate the worm"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to consider the diagnosis because of its rarity"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acanthocephaliasis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acanthocephaliasis-matrix",
+   "title": "Acanthocephaliasis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acanthocephaliasis is a rare intestinal infection by thorny-headed worms, chiefly Macracanthorhynchus hirudinaceus and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Infection is acquired when a person ingests an arthropod harbouring the larval (cystacanth) stage of an acanthocephalan. In the intestine the larva develops into an adult worm that lacks a digestive tract and absorbs nutrients across its surface. Its hallmark is a spiny, retractable proboscis that embeds into the intestinal mucosa, provoking localised inflammation and, with deeper penetration, ulceration or full-thickness injury. Most damage is therefore mechanical and focal at the attachment site; systemic disease is uncommon and severe complications such as perforation are rare.",
-    "additionalDifferentials": [
-      "Other intestinal helminth infections such as ascariasis or trichuriasis",
-      "Non-specific gastroenteritis",
-      "Peptic ulcer disease",
-      "Appendicitis or other causes of an acute abdomen when perforation occurs",
-      "Inflammatory bowel disease",
-      "Intestinal tuberculosis"
+    [
+     "Key Investigations",
+     "Stool microscopy for characteristic acanthocephalan eggs, Morphological identification of any expelled or extracted worm,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Stool microscopy for characteristic acanthocephalan eggs",
-      "Morphological identification of any expelled or extracted worm",
-      "Endoscopy to visualise and retrieve attached worms",
-      "Abdominal imaging if perforation or complication is suspected",
-      "Full blood count including eosinophil assessment",
-      "Detailed dietary and exposure history for ingestion of insects or arthropods"
+    [
+     "Primary Differentials",
+     "Other intestinal helminth infections such as ascariasis or trichuriasis, Non-specific gastroenteritis, Peptic ulcer disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of peritonitis suggesting intestinal perforation",
-      "Severe or persistent abdominal pain with systemic features",
-      "Gastrointestinal bleeding",
-      "Heavy worm burden with marked symptoms"
+    [
+     "Management Strategy",
+     "Treat with anthelmintic therapy, using a benzimidazole such as albendazole or mebendazole, with pyrantel pamoate as an",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is excellent in most cases, as infection is usually mild and self-limited or readily treated; the rare complication of perforation carries the morbidity of any acute abdomen but is uncommon.",
-    "pitfalls": [
-      "Failing to consider the diagnosis because of its rarity",
-      "Not taking a dietary history for ingestion of insects or arthropods",
-      "Misidentifying eggs or worms without expert parasitological input",
-      "Overlooking perforation as a cause of acute abdominal deterioration"
-    ],
-    "references": [
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-      "Manson's Tropical Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with anthelmintic therapy, using a benzimidazole such as albendazole or mebendazole, with pyrantel pamoate as an alternative, to eradicate the worm",
-      "Remove an accessible attached worm endoscopically, which can be both diagnostic and therapeutic",
-      "Provide supportive care and analgesia for abdominal symptoms and ensure adequate hydration",
-      "Manage the rare complication of bowel perforation or peritonitis surgically as an acute abdomen",
-      "Confirm clearance with follow-up stool examination after treatment",
-      "Prevent reinfection through food hygiene and by avoiding ingestion of raw or undercooked arthropods such as beetles and cockroaches"
+    [
+     "Clinical Pitfall",
+     "Failing to consider the diagnosis because of its rarity",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acanthocephaliasis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acanthocephaliasis-diagram",
+   "title": "Acanthocephaliasis: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

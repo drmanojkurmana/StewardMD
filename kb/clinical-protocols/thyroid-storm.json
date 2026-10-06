@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU",
- "aliases": ["thyrotoxic crisis", "thyroid crisis", "Burch-Wartofsky", "BWPS", "severe thyrotoxicosis", "Graves crisis", "Lugol iodine", "PTU"],
+ "aliases": [
+  "thyrotoxic crisis",
+  "thyroid crisis",
+  "Burch-Wartofsky",
+  "BWPS",
+  "severe thyrotoxicosis",
+  "Graves crisis",
+  "Lugol iodine",
+  "PTU"
+ ],
  "summary": "Clinical diagnosis aided by the Burch-Wartofsky score (45 or more) or JTA/JES criteria; treat in HDU or ICU with beta-blockade, high-dose thionamide, iodine at least 1 hour after the thionamide, hydrocortisone, cooling and treatment of the precipitant.",
  "sections": [
   {
@@ -93,19 +102,163 @@
   }
  ],
  "drugs": [
-  { "name": "Propranolol", "dose": "60 to 80 mg orally every 4 hours; IV 1 to 3 mg at no more than 1 mg/min, repeat once after 2 minutes", "notes": "Avoid or use cautiously in heart failure, hypotension or asthma." },
-  { "name": "Esmolol", "dose": "500 mcg/kg IV over 1 minute, then infusion titrated up to 200 mcg/kg/min", "notes": "Preferred when LV function or BP is a concern (short half-life)." },
-  { "name": "Methimazole (thiamazole)", "dose": "60 to 80 mg/day orally or via NG tube in divided doses", "notes": "Reduce to about 30 mg/day once stable." },
-  { "name": "Carbimazole", "dose": "80 to 100 mg/day orally or via NG tube in divided doses", "notes": "Widely used in India; reduce to about 40 mg/day once stable." },
-  { "name": "Propylthiouracil", "dose": "500 to 1000 mg loading dose, then 250 mg every 4 hours (oral, NG or rectal)", "notes": "Preferred in first-trimester pregnancy; avoid if liver tests exceed 3 times normal. Reduce to about 400 mg/day once stable." },
-  { "name": "Lugol's iodine or SSKI", "dose": "Lugol's 8 drops four times daily or SSKI 5 drops four times daily, diluted", "notes": "Start at least 1 hour after the thionamide. Stop once stable." },
-  { "name": "Hydrocortisone", "dose": "100 mg IV every 8 hours (JTA/JES) or 100 mg IV loading then 50 mg every 6 hours (ETA/BTA 2026)", "notes": "Dexamethasone 8 mg/day is an alternative. Taper once stable." },
-  { "name": "Cholestyramine", "dose": "4 g orally three to four times daily", "notes": "Separate from other oral drugs." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours (maximum 4 g/day)", "notes": "Antipyretic of choice; avoid aspirin and NSAIDs." }
+  {
+   "name": "Propranolol",
+   "dose": "60 to 80 mg orally every 4 hours; IV 1 to 3 mg at no more than 1 mg/min, repeat once after 2 minutes",
+   "notes": "Avoid or use cautiously in heart failure, hypotension or asthma."
+  },
+  {
+   "name": "Esmolol",
+   "dose": "500 mcg/kg IV over 1 minute, then infusion titrated up to 200 mcg/kg/min",
+   "notes": "Preferred when LV function or BP is a concern (short half-life)."
+  },
+  {
+   "name": "Methimazole (thiamazole)",
+   "dose": "60 to 80 mg/day orally or via NG tube in divided doses",
+   "notes": "Reduce to about 30 mg/day once stable."
+  },
+  {
+   "name": "Carbimazole",
+   "dose": "80 to 100 mg/day orally or via NG tube in divided doses",
+   "notes": "Widely used in India; reduce to about 40 mg/day once stable."
+  },
+  {
+   "name": "Propylthiouracil",
+   "dose": "500 to 1000 mg loading dose, then 250 mg every 4 hours (oral, NG or rectal)",
+   "notes": "Preferred in first-trimester pregnancy; avoid if liver tests exceed 3 times normal. Reduce to about 400 mg/day once stable."
+  },
+  {
+   "name": "Lugol's iodine or SSKI",
+   "dose": "Lugol's 8 drops four times daily or SSKI 5 drops four times daily, diluted",
+   "notes": "Start at least 1 hour after the thionamide. Stop once stable."
+  },
+  {
+   "name": "Hydrocortisone",
+   "dose": "100 mg IV every 8 hours (JTA/JES) or 100 mg IV loading then 50 mg every 6 hours (ETA/BTA 2026)",
+   "notes": "Dexamethasone 8 mg/day is an alternative. Taper once stable."
+  },
+  {
+   "name": "Cholestyramine",
+   "dose": "4 g orally three to four times daily",
+   "notes": "Separate from other oral drugs."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV every 6 hours (maximum 4 g/day)",
+   "notes": "Antipyretic of choice; avoid aspirin and NSAIDs."
+  }
  ],
  "sources": [
-  { "org": "ETA / BTA / Society for Endocrinology", "title": "Management of thyroid emergencies: joint consensus statement on management of thyroid storm", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13506520/" },
-  { "org": "Japan Thyroid Association / Japan Endocrine Society", "title": "2016 Guidelines for the management of thyroid storm (first edition)", "year": 2016, "url": "https://www.jstage.jst.go.jp/article/endocrj/63/12/63_EJ16-0336/_article" }
+  {
+   "org": "ETA / BTA / Society for Endocrinology",
+   "title": "Management of thyroid emergencies: joint consensus statement on management of thyroid storm",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13506520/"
+  },
+  {
+   "org": "Japan Thyroid Association / Japan Endocrine Society",
+   "title": "2016 Guidelines for the management of thyroid storm (first edition)",
+   "year": 2016,
+   "url": "https://www.jstage.jst.go.jp/article/endocrj/63/12/63_EJ16-0336/_article"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "thyroid-storm-pathway",
+   "title": "Thyroid storm Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Severe thyrotoxicosis with decompensation: fever (often above 38.5 C), tachycardia out of proportion to fever, atrial fibrillation, heart failure, agitation, delirium, seizure or coma, vomiting, diarrhoea, jaundice. Older patients may",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Manage in HDU or ICU. ICU for vasopressor need, reduced consciousness, respiratory support, heart failure or shock, arrhythmia or multi-organ dysfunction. Alert surgeons early in case thyroidectomy is needed.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "FT4, FT3, TSH; CBC, liver function (bilirubin and transaminases guide PTU versus methimazole), electrolytes, glucose, calcium, CK, lactate, blood and urine cultures."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Target heart rate 130 per minute or less; stop or reduce beta-blockade if heart rate falls below 80, systolic BP below 80 mmHg or cardiac index 2.2 L/min/m2 or less (JTA/JES)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Continuous ECG, BP, SpO2, temperature, fluid balance and capillary glucose. Improvement is usually seen within 24 to 72 hours."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for thyroid storm."
+  }
+ ],
+ "tables": [
+  {
+   "id": "thyroid-storm-summary-matrix",
+   "title": "Thyroid storm Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severe thyrotoxicosis with decompensation: fever (often above 38.5 C), tachycardia out of proportion to fever, atrial fibrillation, heart",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Manage in HDU or ICU. ICU for vasopressor need, reduced consciousness, respiratory support, heart failure or shock, arrhythmia or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "FT4, FT3, TSH; CBC, liver function (bilirubin and transaminases guide PTU versus methimazole), electrolytes, glucose, calcium, CK, lactate,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Propranolol: 60 to 80 mg orally every 4 hours; IV 1 to 3 mg at no more than 1 mg/min, repeat once after 2 minutes",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving iodine before the thionamide (can fuel further hormone synthesis).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for thyroid storm."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "thyroid-storm-diagram",
+   "title": "Thyroid storm: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

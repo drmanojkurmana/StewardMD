@@ -93,5 +93,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-30"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-intraosseous-access-pathway",
+   "title": "Intraosseous access in neonates Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the delivery room, IO is a reasonable alternative (ERC, weak recommendation, very low certainty evidence).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "IO can be used in preterm and term neonates, and all intravenous medications can be given by this route."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "If the tuberosity cannot be felt, use the flat medial tibia 1.5 to 2 cm distal to the patella."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Watch the limb for swelling, extravasation and poor perfusion throughout every infusion."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for intraosseous access in neonates."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-intraosseous-access-summary-matrix",
+   "title": "Intraosseous access in neonates Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Targeted Treatment",
+     "Specialist consultation and organ support",
+     "Definitive care pathway"
+    ],
+    [
+     "Critical Pitfall",
+     "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for intraosseous access in neonates."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-intraosseous-access-diagram",
+   "title": "Intraosseous access in neonates: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "alport_syndrome",
-  "name": "Alport syndrome",
-  "aliases": [
-    "hereditary nephritis",
-    "hereditary nephritis with deafness",
-    "Alport's syndrome"
+ "id": "alport_syndrome",
+ "name": "Alport syndrome",
+ "aliases": [
+  "hereditary nephritis",
+  "hereditary nephritis with deafness",
+  "Alport's syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Renal",
+ "specialty": "Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / KDIGO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Alport syndrome is an inherited disorder of type IV collagen affecting the basement membranes of the kidney, cochlea, and eye",
+   "The classic triad is progressive glomerular disease, sensorineural hearing loss, and characteristic ocular abnormalities such as lenticonus",
+   "Persistent microscopic haematuria, often from early childhood, is the earliest and most consistent renal finding, later accompanied by proteinuria and declining function",
+   "The most common form is X-linked, so affected males typically develop severe progressive disease while female carriers have a more variable course",
+   "A family history of haematuria, hearing loss, or renal failure across generations is an important diagnostic clue",
+   "Electron microscopy of a kidney biopsy shows characteristic splitting and lamellation of the glomerular basement membrane",
+   "Renin-angiotensin system blockade is a core management principle to reduce proteinuria and slow progression, and early treatment appears to delay kidney failure",
+   "Genetic diagnosis is increasingly used to confirm the disorder, define inheritance, and guide family screening and counselling"
   ],
-  "class": "non_infective",
-  "system": "Renal",
-  "specialty": "Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / KDIGO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Alport syndrome is an inherited disorder of type IV collagen affecting the basement membranes of the kidney, cochlea, and eye",
-      "The classic triad is progressive glomerular disease, sensorineural hearing loss, and characteristic ocular abnormalities such as lenticonus",
-      "Persistent microscopic haematuria, often from early childhood, is the earliest and most consistent renal finding, later accompanied by proteinuria and declining function",
-      "The most common form is X-linked, so affected males typically develop severe progressive disease while female carriers have a more variable course",
-      "A family history of haematuria, hearing loss, or renal failure across generations is an important diagnostic clue",
-      "Electron microscopy of a kidney biopsy shows characteristic splitting and lamellation of the glomerular basement membrane",
-      "Renin-angiotensin system blockade is a core management principle to reduce proteinuria and slow progression, and early treatment appears to delay kidney failure",
-      "Genetic diagnosis is increasingly used to confirm the disorder, define inheritance, and guide family screening and counselling"
+  "pathophysiology": "Alport syndrome arises from mutations in the genes encoding the alpha-3, alpha-4, or alpha-5 chains of type IV collagen, the principal structural component of specialised basement membranes. Defective assembly of the collagen IV network weakens the glomerular basement membrane, which progressively thickens, thins, splits, and develops the characteristic basket-weave lamellation seen on electron microscopy. The abnormal membrane cannot maintain a normal filtration barrier, leading to haematuria, progressive proteinuria, glomerulosclerosis, and interstitial fibrosis. Because the same collagen chains are found in the cochlea and the lens and retina, the disorder also produces sensorineural hearing loss and ocular changes. Inheritance is most often X-linked, with autosomal recessive and dominant forms accounting for the remainder and influencing severity and sex distribution.",
+  "additionalDifferentials": [
+   "Thin basement membrane nephropathy (benign familial haematuria)",
+   "IgA nephropathy",
+   "Other hereditary glomerulopathies",
+   "Post-infectious glomerulonephritis",
+   "Fabry disease with renal involvement",
+   "Acquired causes of persistent haematuria"
+  ],
+  "additionalInvestigations": [
+   "Urinalysis and microscopy documenting persistent haematuria and quantifying proteinuria",
+   "Audiometry to detect sensorineural hearing loss",
+   "Ophthalmological examination for lenticonus and retinal changes",
+   "Kidney biopsy with electron microscopy of the glomerular basement membrane",
+   "Genetic testing to confirm the diagnosis and define the inheritance pattern",
+   "Family screening for haematuria and hearing loss"
+  ],
+  "redFlags": [
+   "Emergence of proteinuria and rising creatinine signalling progression toward kidney failure",
+   "Rapidly worsening renal function suggesting a superimposed process",
+   "Progressive hearing loss affecting communication",
+   "Acute visual disturbance from ocular complications"
+  ],
+  "prognosis": "In classic X-linked disease, affected males commonly progress to end-stage kidney disease by early to middle adulthood, whereas female carriers and some autosomal forms have a more variable and often milder course. Early renin-angiotensin blockade can delay progression. Transplantation is generally successful, though a small number of patients develop anti-GBM disease in the graft against the previously absent collagen antigen.",
+  "pitfalls": [
+   "Dismissing persistent childhood haematuria as benign without a family and hearing assessment",
+   "Confusing Alport syndrome with thin basement membrane nephropathy on light microscopy alone",
+   "Delaying renin-angiotensin blockade until proteinuria is advanced",
+   "Overlooking the small post-transplant risk of anti-GBM disease in affected recipients"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "KDIGO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Initiate renin-angiotensin system blockade with an ACE inhibitor or angiotensin receptor blocker early to reduce proteinuria and delay end-stage kidney disease",
+   "Monitor blood pressure, proteinuria and eGFR and manage chronic kidney disease complications such as anaemia and mineral-bone disorder",
+   "Provide audiological surveillance with hearing aids for sensorineural hearing loss",
+   "Arrange ophthalmology review for lenticonus and retinal changes",
+   "Plan timely renal replacement therapy including dialysis and transplantation, monitoring transplant recipients for anti-glomerular basement membrane disease",
+   "Offer genetic counselling, define the inheritance pattern, and screen at-risk relatives for haematuria and hearing loss"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "alport_syndrome-pathway",
+   "title": "Alport syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Alport syndrome is an inherited disorder of type IV collagen affecting the basement membranes of the kidney, cochlea, and eye",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Emergence of proteinuria and rising creatinine signalling progression toward kidney failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urinalysis and microscopy documenting persistent haematuria and quantifying proteinuria, Audiometry to detect sensorineural hearing loss, Ophthalmological examination for lenticonus and retinal changes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Initiate renin-angiotensin system blockade with an ACE inhibitor or angiotensin receptor blocker early to reduce proteinuria and delay end-stage kidney disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing persistent childhood haematuria as benign without a family and hearing assessment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of alport syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "alport_syndrome-matrix",
+   "title": "Alport syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Alport syndrome is an inherited disorder of type IV collagen affecting the basement membranes of the kidney, cochlea, and eye",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Alport syndrome arises from mutations in the genes encoding the alpha-3, alpha-4, or alpha-5 chains of type IV collagen, the principal structural component of specialised basement membranes. Defective assembly of the collagen IV network weakens the glomerular basement membrane, which progressively thickens, thins, splits, and develops the characteristic basket-weave lamellation seen on electron microscopy. The abnormal membrane cannot maintain a normal filtration barrier, leading to haematuria, progressive proteinuria, glomerulosclerosis, and interstitial fibrosis. Because the same collagen chains are found in the cochlea and the lens and retina, the disorder also produces sensorineural hearing loss and ocular changes. Inheritance is most often X-linked, with autosomal recessive and dominant forms accounting for the remainder and influencing severity and sex distribution.",
-    "additionalDifferentials": [
-      "Thin basement membrane nephropathy (benign familial haematuria)",
-      "IgA nephropathy",
-      "Other hereditary glomerulopathies",
-      "Post-infectious glomerulonephritis",
-      "Fabry disease with renal involvement",
-      "Acquired causes of persistent haematuria"
+    [
+     "Key Investigations",
+     "Urinalysis and microscopy documenting persistent haematuria and quantifying proteinuria, Audiometry to detect sensorineural",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urinalysis and microscopy documenting persistent haematuria and quantifying proteinuria",
-      "Audiometry to detect sensorineural hearing loss",
-      "Ophthalmological examination for lenticonus and retinal changes",
-      "Kidney biopsy with electron microscopy of the glomerular basement membrane",
-      "Genetic testing to confirm the diagnosis and define the inheritance pattern",
-      "Family screening for haematuria and hearing loss"
+    [
+     "Primary Differentials",
+     "Thin basement membrane nephropathy (benign familial haematuria), IgA nephropathy, Other hereditary glomerulopathies",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Emergence of proteinuria and rising creatinine signalling progression toward kidney failure",
-      "Rapidly worsening renal function suggesting a superimposed process",
-      "Progressive hearing loss affecting communication",
-      "Acute visual disturbance from ocular complications"
+    [
+     "Management Strategy",
+     "Initiate renin-angiotensin system blockade with an ACE inhibitor or angiotensin receptor blocker early to reduce proteinuria and",
+     "Core treatment modality"
     ],
-    "prognosis": "In classic X-linked disease, affected males commonly progress to end-stage kidney disease by early to middle adulthood, whereas female carriers and some autosomal forms have a more variable and often milder course. Early renin-angiotensin blockade can delay progression. Transplantation is generally successful, though a small number of patients develop anti-GBM disease in the graft against the previously absent collagen antigen.",
-    "pitfalls": [
-      "Dismissing persistent childhood haematuria as benign without a family and hearing assessment",
-      "Confusing Alport syndrome with thin basement membrane nephropathy on light microscopy alone",
-      "Delaying renin-angiotensin blockade until proteinuria is advanced",
-      "Overlooking the small post-transplant risk of anti-GBM disease in affected recipients"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "KDIGO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Initiate renin-angiotensin system blockade with an ACE inhibitor or angiotensin receptor blocker early to reduce proteinuria and delay end-stage kidney disease",
-      "Monitor blood pressure, proteinuria and eGFR and manage chronic kidney disease complications such as anaemia and mineral-bone disorder",
-      "Provide audiological surveillance with hearing aids for sensorineural hearing loss",
-      "Arrange ophthalmology review for lenticonus and retinal changes",
-      "Plan timely renal replacement therapy including dialysis and transplantation, monitoring transplant recipients for anti-glomerular basement membrane disease",
-      "Offer genetic counselling, define the inheritance pattern, and screen at-risk relatives for haematuria and hearing loss"
+    [
+     "Clinical Pitfall",
+     "Dismissing persistent childhood haematuria as benign without a family and hearing assessment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for alport syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "alport-syndrome-diagram",
+   "title": "Alport syndrome: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "epilepsy_with_myoclonic_absences",
-  "name": "Epilepsy with myoclonic absences",
-  "aliases": [
-    "Myoclonic absence epilepsy",
-    "Tassinari syndrome"
+ "id": "epilepsy_with_myoclonic_absences",
+ "name": "Epilepsy with myoclonic absences",
+ "aliases": [
+  "Myoclonic absence epilepsy",
+  "Tassinari syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system",
+ "specialty": "Paediatric neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ILAE classification and clinical guidance on the epilepsy syndromes",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A generalised epilepsy defined by absence seizures accompanied by rhythmic bilateral myoclonic jerks, predominantly of the shoulders and arms, with a tonic component.",
+   "Onset is around 7 years, spanning early childhood to pre-adolescence, with a male predominance.",
+   "Seizures are frequent, occurring many times a day, and can be triggered by hyperventilation.",
+   "EEG shows bilateral synchronous rhythmic 3 Hz spike-wave discharges time-locked to the myoclonias, confirmed by polygraphic EMG.",
+   "Consciousness is variably impaired during events.",
+   "Associated intellectual disability is common and other seizure types, including generalised tonic-clonic seizures, may occur.",
+   "A proportion have an identifiable cause such as a chromosomal abnormality or structural lesion.",
+   "Treatment response is often incomplete, and valproate combined with ethosuximide is a common regimen."
   ],
-  "class": "non_infective",
-  "system": "Nervous system",
-  "specialty": "Paediatric neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ILAE classification and clinical guidance on the epilepsy syndromes",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A generalised epilepsy defined by absence seizures accompanied by rhythmic bilateral myoclonic jerks, predominantly of the shoulders and arms, with a tonic component.",
-      "Onset is around 7 years, spanning early childhood to pre-adolescence, with a male predominance.",
-      "Seizures are frequent, occurring many times a day, and can be triggered by hyperventilation.",
-      "EEG shows bilateral synchronous rhythmic 3 Hz spike-wave discharges time-locked to the myoclonias, confirmed by polygraphic EMG.",
-      "Consciousness is variably impaired during events.",
-      "Associated intellectual disability is common and other seizure types, including generalised tonic-clonic seizures, may occur.",
-      "A proportion have an identifiable cause such as a chromosomal abnormality or structural lesion.",
-      "Treatment response is often incomplete, and valproate combined with ethosuximide is a common regimen."
+  "pathophysiology": "Epilepsy with myoclonic absences is a generalised epilepsy in which thalamocortical oscillatory circuits generate rhythmic 3 Hz spike-wave discharges. The distinctive rhythmic myoclonias arise as the motor cortex is entrained by these generalised discharges, producing a positive motor phenomenon with a superimposed tonic contraction, demonstrable on combined EEG-EMG polygraphy. Underlying genetic or, in some, structural and chromosomal abnormalities contribute to the network dysfunction and the associated cognitive impairment.",
+  "additionalDifferentials": [
+   "Childhood and juvenile absence epilepsy",
+   "Doose syndrome (myoclonic-atonic epilepsy)",
+   "Juvenile myoclonic epilepsy",
+   "Lennox-Gastaut syndrome",
+   "Eyelid myoclonia with absences (Jeavons)",
+   "Progressive myoclonic epilepsy"
+  ],
+  "additionalInvestigations": [
+   "Video-EEG with polygraphic EMG to demonstrate the time-locked myoclonias",
+   "MRI brain to exclude a structural cause",
+   "Chromosomal microarray and genetic testing",
+   "Metabolic screen if progressive features emerge",
+   "Neuropsychological assessment",
+   "Hyperventilation-activated EEG"
+  ],
+  "redFlags": [
+   "Cognitive decline or regression",
+   "Emergence of tonic or atonic seizures suggesting evolution to Lennox-Gastaut syndrome",
+   "Drug-resistant, very frequent seizures",
+   "Abnormal neurological examination or imaging"
+  ],
+  "prognosis": "Variable and often guarded; seizures may be difficult to control and cognitive impairment is common, although isolated cases without other seizure types can remit. Evolution to other epileptic encephalopathies occurs in some.",
+  "pitfalls": [
+   "Mistaking the myoclonic absences for simple typical absences and under-treating.",
+   "Not performing polygraphic EEG-EMG to confirm the time-locked myoclonias.",
+   "Overlooking an underlying chromosomal or structural cause.",
+   "Using drugs that aggravate generalised seizures."
+  ],
+  "references": [
+   "ILAE position papers on classification of the epilepsies",
+   "Panayiotopoulos CP. A Clinical Guide to Epileptic Syndromes and their Treatment",
+   "Standard textbook of paediatric neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with broad-spectrum antiseizure medication, using valproate often combined with ethosuximide, and add lamotrigine for incomplete control",
+   "Avoid seizure-aggravating agents such as carbamazepine, oxcarbazepine and phenytoin that can worsen generalised seizures",
+   "Manage any coexisting generalised tonic-clonic seizures within the same regimen",
+   "Provide neuropsychological assessment and educational support, as intellectual disability commonly accompanies the epilepsy",
+   "Advise on seizure precautions and note that hyperventilation can provoke attacks",
+   "Monitor for treatment response and for evolution into other epileptic encephalopathies, with regular paediatric neurology follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "epilepsy_with_myoclonic_absences-pathway",
+   "title": "Epilepsy with myoclonic absences: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A generalised epilepsy defined by absence seizures accompanied by rhythmic bilateral myoclonic jerks, predominantly of the shoulders and arms, with a tonic component.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Cognitive decline or regression",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Video-EEG with polygraphic EMG to demonstrate the time-locked myoclonias, MRI brain to exclude a structural cause, Chromosomal microarray and genetic testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with broad-spectrum antiseizure medication, using valproate often combined with ethosuximide, and add lamotrigine for incomplete control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the myoclonic absences for simple typical absences and under-treating."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of epilepsy with myoclonic absences."
+  }
+ ],
+ "tables": [
+  {
+   "id": "epilepsy_with_myoclonic_absences-matrix",
+   "title": "Epilepsy with myoclonic absences: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A generalised epilepsy defined by absence seizures accompanied by rhythmic bilateral myoclonic jerks, predominantly of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Epilepsy with myoclonic absences is a generalised epilepsy in which thalamocortical oscillatory circuits generate rhythmic 3 Hz spike-wave discharges. The distinctive rhythmic myoclonias arise as the motor cortex is entrained by these generalised discharges, producing a positive motor phenomenon with a superimposed tonic contraction, demonstrable on combined EEG-EMG polygraphy. Underlying genetic or, in some, structural and chromosomal abnormalities contribute to the network dysfunction and the associated cognitive impairment.",
-    "additionalDifferentials": [
-      "Childhood and juvenile absence epilepsy",
-      "Doose syndrome (myoclonic-atonic epilepsy)",
-      "Juvenile myoclonic epilepsy",
-      "Lennox-Gastaut syndrome",
-      "Eyelid myoclonia with absences (Jeavons)",
-      "Progressive myoclonic epilepsy"
+    [
+     "Key Investigations",
+     "Video-EEG with polygraphic EMG to demonstrate the time-locked myoclonias, MRI brain to exclude a structural cause, Chromosomal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Video-EEG with polygraphic EMG to demonstrate the time-locked myoclonias",
-      "MRI brain to exclude a structural cause",
-      "Chromosomal microarray and genetic testing",
-      "Metabolic screen if progressive features emerge",
-      "Neuropsychological assessment",
-      "Hyperventilation-activated EEG"
+    [
+     "Primary Differentials",
+     "Childhood and juvenile absence epilepsy, Doose syndrome (myoclonic-atonic epilepsy), Juvenile myoclonic epilepsy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Cognitive decline or regression",
-      "Emergence of tonic or atonic seizures suggesting evolution to Lennox-Gastaut syndrome",
-      "Drug-resistant, very frequent seizures",
-      "Abnormal neurological examination or imaging"
+    [
+     "Management Strategy",
+     "Treat with broad-spectrum antiseizure medication, using valproate often combined with ethosuximide, and add lamotrigine for",
+     "Core treatment modality"
     ],
-    "prognosis": "Variable and often guarded; seizures may be difficult to control and cognitive impairment is common, although isolated cases without other seizure types can remit. Evolution to other epileptic encephalopathies occurs in some.",
-    "pitfalls": [
-      "Mistaking the myoclonic absences for simple typical absences and under-treating.",
-      "Not performing polygraphic EEG-EMG to confirm the time-locked myoclonias.",
-      "Overlooking an underlying chromosomal or structural cause.",
-      "Using drugs that aggravate generalised seizures."
-    ],
-    "references": [
-      "ILAE position papers on classification of the epilepsies",
-      "Panayiotopoulos CP. A Clinical Guide to Epileptic Syndromes and their Treatment",
-      "Standard textbook of paediatric neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with broad-spectrum antiseizure medication, using valproate often combined with ethosuximide, and add lamotrigine for incomplete control",
-      "Avoid seizure-aggravating agents such as carbamazepine, oxcarbazepine and phenytoin that can worsen generalised seizures",
-      "Manage any coexisting generalised tonic-clonic seizures within the same regimen",
-      "Provide neuropsychological assessment and educational support, as intellectual disability commonly accompanies the epilepsy",
-      "Advise on seizure precautions and note that hyperventilation can provoke attacks",
-      "Monitor for treatment response and for evolution into other epileptic encephalopathies, with regular paediatric neurology follow-up"
+    [
+     "Clinical Pitfall",
+     "Mistaking the myoclonic absences for simple typical absences and under-treating.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for epilepsy with myoclonic absences."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "epilepsy-with-myoclonic-absences-diagram",
+   "title": "Epilepsy with myoclonic absences: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

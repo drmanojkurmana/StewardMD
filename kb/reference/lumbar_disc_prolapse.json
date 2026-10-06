@@ -1,80 +1,175 @@
 {
-  "id": "lumbar_disc_prolapse",
-  "name": "Lumbar disc prolapse",
-  "aliases": [
-    "prolapsed intervertebral disc",
-    "herniated lumbar disc",
-    "slipped disc",
-    "lumbar disc herniation",
-    "sciatica from disc prolapse"
+ "id": "lumbar_disc_prolapse",
+ "name": "Lumbar disc prolapse",
+ "aliases": [
+  "prolapsed intervertebral disc",
+  "herniated lumbar disc",
+  "slipped disc",
+  "lumbar disc herniation",
+  "sciatica from disc prolapse"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Orthopaedics",
+ "specialty": "Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with low back pain followed by radicular leg pain (sciatica) that typically radiates below the knee in a dermatomal pattern and is worsened by coughing, sneezing, or sitting",
+   "Most prolapses occur at L4/5 and L5/S1, affecting the L5 and S1 nerve roots respectively; the level is inferred from the pattern of pain, weakness, sensory loss, and reflex change",
+   "A positive straight-leg-raise (or its variants) reproduces radicular pain and supports nerve-root tension from a disc lesion",
+   "The great majority settle with conservative management: reassurance, maintained activity, analgesia, and physiotherapy, as most herniations resorb over weeks to months",
+   "Cauda equina syndrome from a large central prolapse is a surgical emergency and must be actively excluded in every patient",
+   "Imaging (MRI) is reserved for persistent or severe symptoms, progressive neurological deficit, or when surgery is being considered, since asymptomatic disc bulges are common",
+   "Surgery (discectomy) is considered for intractable radicular pain unresponsive to conservative care, significant or progressive motor weakness, or cauda equina compression",
+   "Isolated back pain without leg symptoms is usually not due to a surgically treatable disc prolapse"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Orthopaedics",
-  "specialty": "Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with low back pain followed by radicular leg pain (sciatica) that typically radiates below the knee in a dermatomal pattern and is worsened by coughing, sneezing, or sitting",
-      "Most prolapses occur at L4/5 and L5/S1, affecting the L5 and S1 nerve roots respectively; the level is inferred from the pattern of pain, weakness, sensory loss, and reflex change",
-      "A positive straight-leg-raise (or its variants) reproduces radicular pain and supports nerve-root tension from a disc lesion",
-      "The great majority settle with conservative management: reassurance, maintained activity, analgesia, and physiotherapy, as most herniations resorb over weeks to months",
-      "Cauda equina syndrome from a large central prolapse is a surgical emergency and must be actively excluded in every patient",
-      "Imaging (MRI) is reserved for persistent or severe symptoms, progressive neurological deficit, or when surgery is being considered, since asymptomatic disc bulges are common",
-      "Surgery (discectomy) is considered for intractable radicular pain unresponsive to conservative care, significant or progressive motor weakness, or cauda equina compression",
-      "Isolated back pain without leg symptoms is usually not due to a surgically treatable disc prolapse"
+  "pathophysiology": "The intervertebral disc comprises a gelatinous nucleus pulposus contained by the fibrous annulus fibrosus. With age and repetitive loading the annulus weakens and fissures, allowing nuclear material to bulge or herniate, usually posterolaterally where the annulus is thinnest and the posterior longitudinal ligament offers least support. The herniated fragment compresses and inflames the traversing or exiting nerve root, producing radicular pain, and inflammatory mediators from the nucleus contribute to root irritation. A large central herniation can compress the cauda equina. Over time herniated material often shrinks through dehydration and resorption, correlating with symptom resolution.",
+  "additionalDifferentials": [
+   "Lumbar spinal stenosis with neurogenic claudication",
+   "Cauda equina syndrome from other causes",
+   "Spinal infection (discitis, epidural abscess) or vertebral osteomyelitis",
+   "Spinal or metastatic tumour",
+   "Peripheral neuropathy or diabetic amyotrophy",
+   "Hip osteoarthritis or greater trochanteric pain referring to the leg",
+   "Piriformis syndrome"
+  ],
+  "additionalInvestigations": [
+   "MRI of the lumbar spine as the imaging modality of choice when indicated",
+   "Detailed neurological examination for the affected root (motor, sensory, reflexes)",
+   "Straight-leg-raise and femoral stretch tests to localise root tension",
+   "Urgent MRI if cauda equina syndrome is suspected",
+   "Inflammatory markers and further imaging if infection or malignancy is a concern"
+  ],
+  "redFlags": [
+   "SURGICAL EMERGENCY: cauda equina syndrome (saddle anaesthesia, bladder or bowel dysfunction, bilateral leg symptoms) requires urgent MRI and decompression",
+   "Progressive or severe motor weakness (e.g. foot drop) indicating significant root compression",
+   "Features suggesting infection or malignancy (fever, weight loss, night pain, history of cancer)",
+   "New neurological deficit with structural back pain in the presence of trauma or osteoporosis"
+  ],
+  "prognosis": "The natural history is favourable, with most patients improving substantially within weeks to a few months as the herniation resorbs; surgery gives faster relief of radicular pain in selected cases but does not clearly improve very long-term outcome, and recurrence or residual back pain can occur.",
+  "pitfalls": [
+   "Failing to screen for and act on cauda equina syndrome",
+   "Ordering MRI too early and over-treating incidental disc bulges that do not explain the symptoms",
+   "Attributing pure axial back pain to a disc prolapse amenable to discectomy",
+   "Prolonged bed rest, which worsens outcomes compared with maintained activity"
+  ],
+  "references": [
+   "Apley & Solomon's System of Orthopaedics and Fractures"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure and treat the majority conservatively with maintained activity, simple analgesia and a short course of NSAIDs, and structured physiotherapy, as most prolapses resorb over weeks to months",
+   "Use neuropathic analgesics such as amitriptyline or gabapentinoids for persistent radicular leg pain",
+   "Consider an epidural or nerve-root corticosteroid injection for refractory sciatica before contemplating surgery",
+   "Actively exclude cauda equina syndrome in every patient and arrange urgent MRI with emergency surgical decompression if suspected",
+   "Reserve discectomy for persistent or severe radiculopathy, or a progressive motor deficit, after failure of conservative treatment",
+   "Restrict MRI to persistent, severe or progressive symptoms or surgical planning, since asymptomatic disc bulges are common",
+   "Refer to orthopaedic or spinal surgery for progressive neurological deficit, disabling pain or surgical consideration"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lumbar_disc_prolapse-pathway",
+   "title": "Lumbar disc prolapse: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with low back pain followed by radicular leg pain (sciatica) that typically radiates below the knee in a dermatomal pattern and is worsened by coughing, sneezing, or sitting",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: SURGICAL EMERGENCY: cauda equina syndrome (saddle anaesthesia, bladder or bowel dysfunction, bilateral leg symptoms) requires urgent MRI and decompression",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the lumbar spine as the imaging modality of choice when indicated, Detailed neurological examination for the affected root (motor, sensory, reflexes), Straight-leg-raise and femoral stretch tests to localise root"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure and treat the majority conservatively with maintained activity, simple analgesia and a short course of NSAIDs, and structured physiotherapy, as most prolapses resorb over weeks to months"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to screen for and act on cauda equina syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lumbar disc prolapse."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lumbar_disc_prolapse-matrix",
+   "title": "Lumbar disc prolapse: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with low back pain followed by radicular leg pain (sciatica) that typically radiates below the knee in a dermatomal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The intervertebral disc comprises a gelatinous nucleus pulposus contained by the fibrous annulus fibrosus. With age and repetitive loading the annulus weakens and fissures, allowing nuclear material to bulge or herniate, usually posterolaterally where the annulus is thinnest and the posterior longitudinal ligament offers least support. The herniated fragment compresses and inflames the traversing or exiting nerve root, producing radicular pain, and inflammatory mediators from the nucleus contribute to root irritation. A large central herniation can compress the cauda equina. Over time herniated material often shrinks through dehydration and resorption, correlating with symptom resolution.",
-    "additionalDifferentials": [
-      "Lumbar spinal stenosis with neurogenic claudication",
-      "Cauda equina syndrome from other causes",
-      "Spinal infection (discitis, epidural abscess) or vertebral osteomyelitis",
-      "Spinal or metastatic tumour",
-      "Peripheral neuropathy or diabetic amyotrophy",
-      "Hip osteoarthritis or greater trochanteric pain referring to the leg",
-      "Piriformis syndrome"
+    [
+     "Key Investigations",
+     "MRI of the lumbar spine as the imaging modality of choice when indicated, Detailed neurological examination for the affected root",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the lumbar spine as the imaging modality of choice when indicated",
-      "Detailed neurological examination for the affected root (motor, sensory, reflexes)",
-      "Straight-leg-raise and femoral stretch tests to localise root tension",
-      "Urgent MRI if cauda equina syndrome is suspected",
-      "Inflammatory markers and further imaging if infection or malignancy is a concern"
+    [
+     "Primary Differentials",
+     "Lumbar spinal stenosis with neurogenic claudication, Cauda equina syndrome from other causes, Spinal infection (discitis,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "SURGICAL EMERGENCY: cauda equina syndrome (saddle anaesthesia, bladder or bowel dysfunction, bilateral leg symptoms) requires urgent MRI and decompression",
-      "Progressive or severe motor weakness (e.g. foot drop) indicating significant root compression",
-      "Features suggesting infection or malignancy (fever, weight loss, night pain, history of cancer)",
-      "New neurological deficit with structural back pain in the presence of trauma or osteoporosis"
+    [
+     "Management Strategy",
+     "Reassure and treat the majority conservatively with maintained activity, simple analgesia and a short course of NSAIDs, and",
+     "Core treatment modality"
     ],
-    "prognosis": "The natural history is favourable, with most patients improving substantially within weeks to a few months as the herniation resorbs; surgery gives faster relief of radicular pain in selected cases but does not clearly improve very long-term outcome, and recurrence or residual back pain can occur.",
-    "pitfalls": [
-      "Failing to screen for and act on cauda equina syndrome",
-      "Ordering MRI too early and over-treating incidental disc bulges that do not explain the symptoms",
-      "Attributing pure axial back pain to a disc prolapse amenable to discectomy",
-      "Prolonged bed rest, which worsens outcomes compared with maintained activity"
-    ],
-    "references": [
-      "Apley & Solomon's System of Orthopaedics and Fractures"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure and treat the majority conservatively with maintained activity, simple analgesia and a short course of NSAIDs, and structured physiotherapy, as most prolapses resorb over weeks to months",
-      "Use neuropathic analgesics such as amitriptyline or gabapentinoids for persistent radicular leg pain",
-      "Consider an epidural or nerve-root corticosteroid injection for refractory sciatica before contemplating surgery",
-      "Actively exclude cauda equina syndrome in every patient and arrange urgent MRI with emergency surgical decompression if suspected",
-      "Reserve discectomy for persistent or severe radiculopathy, or a progressive motor deficit, after failure of conservative treatment",
-      "Restrict MRI to persistent, severe or progressive symptoms or surgical planning, since asymptomatic disc bulges are common",
-      "Refer to orthopaedic or spinal surgery for progressive neurological deficit, disabling pain or surgical consideration"
+    [
+     "Clinical Pitfall",
+     "Failing to screen for and act on cauda equina syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lumbar disc prolapse."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lumbar-disc-prolapse-diagram",
+   "title": "Lumbar disc prolapse: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

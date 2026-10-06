@@ -177,5 +177,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "bronchiectasis-pathway",
+   "title": "Bronchiectasis (adult, non-cystic fibrosis) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect with a persistent or recurrent productive cough for more than 8 weeks, recurrent chest infections or haemoptysis; also in COPD with frequent exacerbations and Pseudomonas, severe asthma, rheumatoid arthritis or IBD with chronic",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Diagnosis: bronchial dilatation on thin-section chest CT (broncho-arterial ratio above 1, lack of tapering, airways visible near the pleura) with compatible symptoms.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "All patients: FBC with blood eosinophils; serum IgG, IgA and IgM; total IgE with Aspergillus-specific IgE and IgG (ABPA); sputum for routine bacterial culture and mycobacterial smear and culture."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Offer eradication for a new isolation of P. aeruginosa (first isolate, or regrowth after a prolonged negative period)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Before a long-term macrolide: at least one negative NTM culture, ECG for QTc, liver tests, review of other QT-prolonging drugs, and caution with hearing loss or balance problems."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for bronchiectasis (adult, non-cystic fibrosis)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bronchiectasis-summary-matrix",
+   "title": "Bronchiectasis (adult, non-cystic fibrosis) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect with a persistent or recurrent productive cough for more than 8 weeks, recurrent chest infections or haemoptysis; also in COPD with",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Offer eradication for a new isolation of P. aeruginosa (first isolate, or regrowth after a prolonged negative period).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "All patients: FBC with blood eosinophils; serum IgG, IgA and IgM; total IgE with Aspergillus-specific IgE and IgG (ABPA); sputum for",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Azithromycin (long-term): 250 mg orally three times weekly (alternatives: 250 mg daily or 500 mg three times weekly)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting long-term azithromycin without excluding NTM (risk of macrolide-resistant NTM).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for bronchiectasis (adult, non-cystic fibrosis)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bronchiectasis-diagram",
+   "title": "Bronchiectasis (adult, non-cystic fibrosis): Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

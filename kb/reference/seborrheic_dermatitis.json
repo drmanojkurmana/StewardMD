@@ -1,76 +1,171 @@
 {
-  "id": "seborrheic_dermatitis",
-  "name": "Seborrheic dermatitis",
-  "aliases": [
-    "seborrhoeic dermatitis",
-    "seborrhoeic eczema",
-    "dandruff (mild scalp form)"
+ "id": "seborrheic_dermatitis",
+ "name": "Seborrheic dermatitis",
+ "aliases": [
+  "seborrhoeic dermatitis",
+  "seborrhoeic eczema",
+  "dandruff (mild scalp form)"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as ill-defined erythematous patches with greasy yellowish scale in sebum-rich areas: scalp, eyebrows, nasolabial folds, ears, and central chest",
+   "Mild scalp involvement manifests simply as dandruff, while more severe disease produces inflamed, scaly, sometimes itchy plaques",
+   "It has a characteristic bimodal age pattern, occurring in infants (including cradle cap) and again in adults",
+   "The condition is linked to the commensal yeast Malassezia, so antifungal agents are a mainstay of treatment",
+   "Management combines antifungal shampoos or creams with short courses of low-potency topical corticosteroids or calcineurin inhibitors for inflammation, and recognises that it is a relapsing condition needing maintenance",
+   "Unusually severe, extensive, or treatment-resistant seborrhoeic dermatitis should prompt consideration of underlying HIV infection or Parkinson's disease",
+   "Distinguish it from psoriasis (sharper, thicker, silvery plaques) and from atopic or contact dermatitis based on distribution and morphology"
   ],
-  "class": "non_infective",
-  "system": "Skin / Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as ill-defined erythematous patches with greasy yellowish scale in sebum-rich areas: scalp, eyebrows, nasolabial folds, ears, and central chest",
-      "Mild scalp involvement manifests simply as dandruff, while more severe disease produces inflamed, scaly, sometimes itchy plaques",
-      "It has a characteristic bimodal age pattern, occurring in infants (including cradle cap) and again in adults",
-      "The condition is linked to the commensal yeast Malassezia, so antifungal agents are a mainstay of treatment",
-      "Management combines antifungal shampoos or creams with short courses of low-potency topical corticosteroids or calcineurin inhibitors for inflammation, and recognises that it is a relapsing condition needing maintenance",
-      "Unusually severe, extensive, or treatment-resistant seborrhoeic dermatitis should prompt consideration of underlying HIV infection or Parkinson's disease",
-      "Distinguish it from psoriasis (sharper, thicker, silvery plaques) and from atopic or contact dermatitis based on distribution and morphology"
+  "pathophysiology": "Seborrhoeic dermatitis is a chronic inflammatory disorder occurring in sebaceous-rich skin, driven by an abnormal host inflammatory response to Malassezia yeasts that are part of the normal skin flora. The yeasts metabolise sebum lipids, releasing free fatty acids and other products that irritate the skin and provoke inflammation in susceptible individuals. Sebaceous gland activity, an altered skin barrier, individual immune reactivity, and neurological or immunosuppressive comorbidities all influence expression. This explains its predilection for sebum-rich sites, its association with hormonal activity in infancy and adulthood, and its increased severity in HIV infection and Parkinson's disease.",
+  "additionalDifferentials": [
+   "Psoriasis (particularly scalp and flexural)",
+   "Atopic dermatitis",
+   "Contact dermatitis",
+   "Tinea capitis or tinea faciei",
+   "Rosacea (facial involvement)",
+   "Subacute cutaneous lupus erythematosus in atypical facial cases"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis based on distribution and greasy scale",
+   "Skin scrapings for mycology if dermatophyte infection is a consideration",
+   "HIV testing when disease is severe, sudden, or refractory",
+   "Skin biopsy in atypical or diagnostically uncertain presentations",
+   "Assessment for neurological comorbidity such as Parkinson's disease when relevant"
+  ],
+  "redFlags": [
+   "Severe, extensive, or abrupt-onset disease prompting evaluation for immunosuppression such as HIV",
+   "Erythroderma with widespread involvement",
+   "Failure to respond to appropriate first-line therapy suggesting an alternative diagnosis",
+   "Secondary bacterial infection of excoriated or fissured plaques"
+  ],
+  "prognosis": "Seborrhoeic dermatitis is a benign but chronic relapsing condition; infantile disease usually resolves within months, whereas adult disease tends to persist with periodic flares and is controlled rather than cured.",
+  "pitfalls": [
+   "Confusing it with psoriasis or dermatophyte infection and choosing the wrong therapy",
+   "Relying on topical corticosteroids alone and neglecting antifungal treatment of the yeast component",
+   "Overusing potent steroids on the face, risking atrophy and rosacea-like changes",
+   "Failing to investigate unusually severe or refractory disease for underlying HIV or neurological disease"
+  ],
+  "references": [
+   "Fitzpatrick's Dermatology",
+   "Rook's Textbook of Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with topical antifungal agents such as ketoconazole or ciclopirox and medicated shampoos containing selenium sulphide, zinc pyrithione or coal tar as the mainstay",
+   "Add short courses of low-potency topical corticosteroids or topical calcineurin inhibitors to settle inflammation",
+   "Manage infantile cradle cap with emollients, gentle descaling and mild antifungal preparations",
+   "Use maintenance antifungal therapy to control this relapsing condition",
+   "Consider systemic antifungal therapy for severe or widespread disease",
+   "Investigate for underlying HIV infection or Parkinson's disease when disease is severe, sudden or treatment-resistant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "seborrheic_dermatitis-pathway",
+   "title": "Seborrheic dermatitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as ill-defined erythematous patches with greasy yellowish scale in sebum-rich areas: scalp, eyebrows, nasolabial folds, ears, and central chest",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe, extensive, or abrupt-onset disease prompting evaluation for immunosuppression such as HIV",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis based on distribution and greasy scale, Skin scrapings for mycology if dermatophyte infection is a consideration, HIV testing when disease is severe, sudden, or refractory"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with topical antifungal agents such as ketoconazole or ciclopirox and medicated shampoos containing selenium sulphide, zinc pyrithione or coal tar as the mainstay"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with psoriasis or dermatophyte infection and choosing the wrong therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of seborrheic dermatitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "seborrheic_dermatitis-matrix",
+   "title": "Seborrheic dermatitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as ill-defined erythematous patches with greasy yellowish scale in sebum-rich areas: scalp, eyebrows, nasolabial folds,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Seborrhoeic dermatitis is a chronic inflammatory disorder occurring in sebaceous-rich skin, driven by an abnormal host inflammatory response to Malassezia yeasts that are part of the normal skin flora. The yeasts metabolise sebum lipids, releasing free fatty acids and other products that irritate the skin and provoke inflammation in susceptible individuals. Sebaceous gland activity, an altered skin barrier, individual immune reactivity, and neurological or immunosuppressive comorbidities all influence expression. This explains its predilection for sebum-rich sites, its association with hormonal activity in infancy and adulthood, and its increased severity in HIV infection and Parkinson's disease.",
-    "additionalDifferentials": [
-      "Psoriasis (particularly scalp and flexural)",
-      "Atopic dermatitis",
-      "Contact dermatitis",
-      "Tinea capitis or tinea faciei",
-      "Rosacea (facial involvement)",
-      "Subacute cutaneous lupus erythematosus in atypical facial cases"
+    [
+     "Key Investigations",
+     "Clinical diagnosis based on distribution and greasy scale, Skin scrapings for mycology if dermatophyte infection is a",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis based on distribution and greasy scale",
-      "Skin scrapings for mycology if dermatophyte infection is a consideration",
-      "HIV testing when disease is severe, sudden, or refractory",
-      "Skin biopsy in atypical or diagnostically uncertain presentations",
-      "Assessment for neurological comorbidity such as Parkinson's disease when relevant"
+    [
+     "Primary Differentials",
+     "Psoriasis (particularly scalp and flexural), Atopic dermatitis, Contact dermatitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe, extensive, or abrupt-onset disease prompting evaluation for immunosuppression such as HIV",
-      "Erythroderma with widespread involvement",
-      "Failure to respond to appropriate first-line therapy suggesting an alternative diagnosis",
-      "Secondary bacterial infection of excoriated or fissured plaques"
+    [
+     "Management Strategy",
+     "Treat with topical antifungal agents such as ketoconazole or ciclopirox and medicated shampoos containing selenium sulphide, zinc",
+     "Core treatment modality"
     ],
-    "prognosis": "Seborrhoeic dermatitis is a benign but chronic relapsing condition; infantile disease usually resolves within months, whereas adult disease tends to persist with periodic flares and is controlled rather than cured.",
-    "pitfalls": [
-      "Confusing it with psoriasis or dermatophyte infection and choosing the wrong therapy",
-      "Relying on topical corticosteroids alone and neglecting antifungal treatment of the yeast component",
-      "Overusing potent steroids on the face, risking atrophy and rosacea-like changes",
-      "Failing to investigate unusually severe or refractory disease for underlying HIV or neurological disease"
-    ],
-    "references": [
-      "Fitzpatrick's Dermatology",
-      "Rook's Textbook of Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with topical antifungal agents such as ketoconazole or ciclopirox and medicated shampoos containing selenium sulphide, zinc pyrithione or coal tar as the mainstay",
-      "Add short courses of low-potency topical corticosteroids or topical calcineurin inhibitors to settle inflammation",
-      "Manage infantile cradle cap with emollients, gentle descaling and mild antifungal preparations",
-      "Use maintenance antifungal therapy to control this relapsing condition",
-      "Consider systemic antifungal therapy for severe or widespread disease",
-      "Investigate for underlying HIV infection or Parkinson's disease when disease is severe, sudden or treatment-resistant"
+    [
+     "Clinical Pitfall",
+     "Confusing it with psoriasis or dermatophyte infection and choosing the wrong therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for seborrheic dermatitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "seborrheic-dermatitis-diagram",
+   "title": "Seborrheic dermatitis: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

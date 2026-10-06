@@ -1,78 +1,173 @@
 {
-  "id": "phlegmasia_cerulea_dolens",
-  "name": "Phlegmasia cerulea dolens",
-  "aliases": [
-    "phlegmasia",
-    "massive iliofemoral deep vein thrombosis",
-    "blue phlegmasia"
+ "id": "phlegmasia_cerulea_dolens",
+ "name": "Phlegmasia cerulea dolens",
+ "aliases": [
+  "phlegmasia",
+  "massive iliofemoral deep vein thrombosis",
+  "blue phlegmasia"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Vascular",
+ "specialty": "Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A limb-threatening emergency caused by massive proximal (iliofemoral) deep vein thrombosis with near-total venous outflow obstruction",
+   "Classic triad of severe pain, extensive oedema, and cyanosis (blue discolouration) of the affected limb",
+   "Often preceded by phlegmasia alba dolens, a pale, swollen limb, as thrombosis progresses to occlude collaterals",
+   "Massive venous congestion raises compartment pressure, compromises arterial inflow, and can progress to venous gangrene and compartment syndrome",
+   "Frequently associated with an underlying prothrombotic state, particularly malignancy, and may cause substantial fluid sequestration and circulatory compromise",
+   "Requires urgent anticoagulation, limb elevation, and fluid resuscitation, with catheter-directed thrombolysis or thrombectomy to restore venous outflow in appropriate patients; fasciotomy may be needed for compartment syndrome",
+   "Carries a high risk of pulmonary embolism and of significant limb loss and mortality"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Vascular",
-  "specialty": "Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A limb-threatening emergency caused by massive proximal (iliofemoral) deep vein thrombosis with near-total venous outflow obstruction",
-      "Classic triad of severe pain, extensive oedema, and cyanosis (blue discolouration) of the affected limb",
-      "Often preceded by phlegmasia alba dolens, a pale, swollen limb, as thrombosis progresses to occlude collaterals",
-      "Massive venous congestion raises compartment pressure, compromises arterial inflow, and can progress to venous gangrene and compartment syndrome",
-      "Frequently associated with an underlying prothrombotic state, particularly malignancy, and may cause substantial fluid sequestration and circulatory compromise",
-      "Requires urgent anticoagulation, limb elevation, and fluid resuscitation, with catheter-directed thrombolysis or thrombectomy to restore venous outflow in appropriate patients; fasciotomy may be needed for compartment syndrome",
-      "Carries a high risk of pulmonary embolism and of significant limb loss and mortality"
+  "pathophysiology": "Phlegmasia cerulea dolens is the extreme of iliofemoral deep vein thrombosis, in which thrombus occludes not only the major deep veins but also the collateral channels, producing near-complete venous outflow obstruction. The resulting massive rise in interstitial and venous pressure causes gross oedema and cyanosis, and can exceed capillary and eventually arterial perfusion pressure, leading to ischaemia, venous gangrene, and compartment syndrome. Large volumes of fluid sequester in the limb, causing hypovolaemia and shock. An underlying hypercoagulable state, often malignancy, is common.",
+  "additionalDifferentials": [
+   "Acute arterial occlusion or acute limb ischaemia",
+   "Uncomplicated iliofemoral deep vein thrombosis",
+   "Compartment syndrome from other causes",
+   "Necrotising soft tissue infection",
+   "Acute severe cellulitis",
+   "Compressive haematoma"
+  ],
+  "additionalInvestigations": [
+   "Venous duplex ultrasound to confirm extensive proximal thrombosis",
+   "CT or MR venography to define the extent and any iliac compression or obstruction",
+   "Assessment of limb perfusion and compartment pressures where ischaemia is suspected",
+   "Investigation for underlying malignancy or thrombophilia",
+   "Baseline coagulation and renal function before thrombolysis",
+   "Chest imaging or CT pulmonary angiography if pulmonary embolism is suspected"
+  ],
+  "redFlags": [
+   "Progression to venous gangrene or absent arterial signals, indicating a threatened limb",
+   "Compartment syndrome requiring fasciotomy",
+   "Haemodynamic compromise from fluid sequestration or massive pulmonary embolism",
+   "Rapidly advancing cyanosis and pain despite anticoagulation"
+  ],
+  "prognosis": "A serious emergency with significant risk of limb loss, pulmonary embolism, and death; prompt anticoagulation and thrombus removal can salvage the limb, but venous gangrene carries a poor outcome and any underlying malignancy influences survival.",
+  "pitfalls": [
+   "Mistaking it for acute arterial ischaemia and delaying anticoagulation",
+   "Underestimating fluid sequestration and failing to resuscitate",
+   "Delaying thrombolysis or thrombectomy until gangrene has developed",
+   "Missing an occult underlying malignancy"
+  ],
+  "references": [
+   "Rutherford's Vascular Surgery and Endovascular Therapy",
+   "ESVS Clinical Practice Guidelines on Venous Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute emergency therapeutic anticoagulation with intravenous unfractionated heparin as the immediate priority",
+   "Give aggressive fluid resuscitation for hypovolaemia and shock and elevate the limb to reduce venous congestion",
+   "Restore venous outflow urgently with catheter-directed thrombolysis or venous thrombectomy in suitable patients",
+   "Perform fasciotomy for compartment syndrome and debride or amputate established venous gangrene",
+   "Investigate and treat an underlying prothrombotic state, particularly occult malignancy or thrombophilia",
+   "Monitor for and manage concurrent pulmonary embolism",
+   "Escalate immediately to vascular surgery and critical care for this limb- and life-threatening emergency"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "phlegmasia_cerulea_dolens-pathway",
+   "title": "Phlegmasia cerulea dolens: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A limb-threatening emergency caused by massive proximal (iliofemoral) deep vein thrombosis with near-total venous outflow obstruction",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progression to venous gangrene or absent arterial signals, indicating a threatened limb",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Venous duplex ultrasound to confirm extensive proximal thrombosis, CT or MR venography to define the extent and any iliac compression or obstruction, Assessment of limb perfusion and compartment pressures where ischaemia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute emergency therapeutic anticoagulation with intravenous unfractionated heparin as the immediate priority"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking it for acute arterial ischaemia and delaying anticoagulation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of phlegmasia cerulea dolens."
+  }
+ ],
+ "tables": [
+  {
+   "id": "phlegmasia_cerulea_dolens-matrix",
+   "title": "Phlegmasia cerulea dolens: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A limb-threatening emergency caused by massive proximal (iliofemoral) deep vein thrombosis with near-total venous outflow",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Phlegmasia cerulea dolens is the extreme of iliofemoral deep vein thrombosis, in which thrombus occludes not only the major deep veins but also the collateral channels, producing near-complete venous outflow obstruction. The resulting massive rise in interstitial and venous pressure causes gross oedema and cyanosis, and can exceed capillary and eventually arterial perfusion pressure, leading to ischaemia, venous gangrene, and compartment syndrome. Large volumes of fluid sequester in the limb, causing hypovolaemia and shock. An underlying hypercoagulable state, often malignancy, is common.",
-    "additionalDifferentials": [
-      "Acute arterial occlusion or acute limb ischaemia",
-      "Uncomplicated iliofemoral deep vein thrombosis",
-      "Compartment syndrome from other causes",
-      "Necrotising soft tissue infection",
-      "Acute severe cellulitis",
-      "Compressive haematoma"
+    [
+     "Key Investigations",
+     "Venous duplex ultrasound to confirm extensive proximal thrombosis, CT or MR venography to define the extent and any iliac",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Venous duplex ultrasound to confirm extensive proximal thrombosis",
-      "CT or MR venography to define the extent and any iliac compression or obstruction",
-      "Assessment of limb perfusion and compartment pressures where ischaemia is suspected",
-      "Investigation for underlying malignancy or thrombophilia",
-      "Baseline coagulation and renal function before thrombolysis",
-      "Chest imaging or CT pulmonary angiography if pulmonary embolism is suspected"
+    [
+     "Primary Differentials",
+     "Acute arterial occlusion or acute limb ischaemia, Uncomplicated iliofemoral deep vein thrombosis, Compartment syndrome from other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progression to venous gangrene or absent arterial signals, indicating a threatened limb",
-      "Compartment syndrome requiring fasciotomy",
-      "Haemodynamic compromise from fluid sequestration or massive pulmonary embolism",
-      "Rapidly advancing cyanosis and pain despite anticoagulation"
+    [
+     "Management Strategy",
+     "Institute emergency therapeutic anticoagulation with intravenous unfractionated heparin as the immediate priority",
+     "Core treatment modality"
     ],
-    "prognosis": "A serious emergency with significant risk of limb loss, pulmonary embolism, and death; prompt anticoagulation and thrombus removal can salvage the limb, but venous gangrene carries a poor outcome and any underlying malignancy influences survival.",
-    "pitfalls": [
-      "Mistaking it for acute arterial ischaemia and delaying anticoagulation",
-      "Underestimating fluid sequestration and failing to resuscitate",
-      "Delaying thrombolysis or thrombectomy until gangrene has developed",
-      "Missing an occult underlying malignancy"
-    ],
-    "references": [
-      "Rutherford's Vascular Surgery and Endovascular Therapy",
-      "ESVS Clinical Practice Guidelines on Venous Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute emergency therapeutic anticoagulation with intravenous unfractionated heparin as the immediate priority",
-      "Give aggressive fluid resuscitation for hypovolaemia and shock and elevate the limb to reduce venous congestion",
-      "Restore venous outflow urgently with catheter-directed thrombolysis or venous thrombectomy in suitable patients",
-      "Perform fasciotomy for compartment syndrome and debride or amputate established venous gangrene",
-      "Investigate and treat an underlying prothrombotic state, particularly occult malignancy or thrombophilia",
-      "Monitor for and manage concurrent pulmonary embolism",
-      "Escalate immediately to vascular surgery and critical care for this limb- and life-threatening emergency"
+    [
+     "Clinical Pitfall",
+     "Mistaking it for acute arterial ischaemia and delaying anticoagulation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for phlegmasia cerulea dolens."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "phlegmasia-cerulea-dolens-diagram",
+   "title": "Phlegmasia cerulea dolens: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

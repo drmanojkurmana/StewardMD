@@ -1,80 +1,175 @@
 {
-  "id": "heavy_chain_disease",
-  "name": "Heavy chain disease",
-  "aliases": [
-    "HCD",
-    "alpha heavy chain disease",
-    "gamma heavy chain disease (Franklin disease)",
-    "mu heavy chain disease",
-    "immunoproliferative small intestinal disease"
+ "id": "heavy_chain_disease",
+ "name": "Heavy chain disease",
+ "aliases": [
+  "HCD",
+  "alpha heavy chain disease",
+  "gamma heavy chain disease (Franklin disease)",
+  "mu heavy chain disease",
+  "immunoproliferative small intestinal disease"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare group of B-cell lymphoproliferative disorders that secrete an incomplete, truncated immunoglobulin heavy chain with no associated light chain",
+   "Three main types are recognised by heavy chain isotype: alpha, gamma and mu",
+   "Alpha heavy chain disease is the commonest and typically presents as immunoproliferative small intestinal disease with malabsorption, diarrhoea and weight loss",
+   "Gamma heavy chain disease (Franklin disease) often causes lymphadenopathy, hepatosplenomegaly and, characteristically, palatal or uvular oedema, and may associate with autoimmune disease",
+   "Mu heavy chain disease is rare and usually arises in the setting of chronic lymphocytic leukaemia with vacuolated plasma cells in the marrow",
+   "The abnormal protein is often difficult to detect by routine electrophoresis, so immunofixation and immunoselection techniques are needed",
+   "Alpha heavy chain disease is linked to Campylobacter jejuni infection, and early antibiotic therapy can induce remission at the lymphoma stage"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare group of B-cell lymphoproliferative disorders that secrete an incomplete, truncated immunoglobulin heavy chain with no associated light chain",
-      "Three main types are recognised by heavy chain isotype: alpha, gamma and mu",
-      "Alpha heavy chain disease is the commonest and typically presents as immunoproliferative small intestinal disease with malabsorption, diarrhoea and weight loss",
-      "Gamma heavy chain disease (Franklin disease) often causes lymphadenopathy, hepatosplenomegaly and, characteristically, palatal or uvular oedema, and may associate with autoimmune disease",
-      "Mu heavy chain disease is rare and usually arises in the setting of chronic lymphocytic leukaemia with vacuolated plasma cells in the marrow",
-      "The abnormal protein is often difficult to detect by routine electrophoresis, so immunofixation and immunoselection techniques are needed",
-      "Alpha heavy chain disease is linked to Campylobacter jejuni infection, and early antibiotic therapy can induce remission at the lymphoma stage"
+  "pathophysiology": "Heavy chain diseases arise from clonal B cells or plasma cells that carry deletions or mutations in the immunoglobulin heavy chain gene, so that a structurally abnormal, truncated heavy chain is produced which cannot bind light chains and is secreted alone. Each isotype reflects a distinct clinical entity. In alpha heavy chain disease, chronic antigenic stimulation of gut-associated lymphoid tissue, associated with Campylobacter jejuni, is thought to drive a marginal zone lymphoproliferation of the small bowel, which explains why antibiotics can be effective early. Gamma and mu variants represent clonal lymphoplasmacytic proliferations with their own tissue distributions and disease associations.",
+  "additionalDifferentials": [
+   "Multiple myeloma and other plasma cell neoplasms",
+   "Marginal zone lymphoma (including MALT lymphoma)",
+   "Waldenstrom macroglobulinaemia",
+   "Chronic lymphocytic leukaemia",
+   "Coeliac disease and other causes of malabsorption (for alpha type)",
+   "Monoclonal gammopathy of undetermined significance"
+  ],
+  "additionalInvestigations": [
+   "Serum and urine protein electrophoresis with immunofixation seeking a heavy chain without light chain",
+   "Immunoselection or specialised immunochemical techniques to confirm the isolated heavy chain",
+   "Small bowel biopsy and imaging for suspected alpha heavy chain disease",
+   "Bone marrow aspirate and trephine with immunophenotyping",
+   "Lymph node biopsy where lymphadenopathy is present",
+   "Testing for associated infection or autoimmune disease"
+  ],
+  "redFlags": [
+   "Severe malabsorption with weight loss and nutritional failure",
+   "Airway compromise from palatal or pharyngeal oedema in gamma type",
+   "Transformation to an aggressive large B-cell lymphoma",
+   "Progressive marrow failure with cytopenias"
+  ],
+  "prognosis": "Outcome varies by type and stage; early alpha heavy chain disease may respond to antibiotics, whereas advanced lymphomatous or aggressive disease carries a poorer prognosis and requires lymphoma-directed therapy.",
+  "pitfalls": [
+   "Missing the diagnosis because the abnormal protein evades routine electrophoresis",
+   "Overlooking a treatable infective driver in alpha heavy chain disease",
+   "Mistaking malabsorption for coeliac disease without considering immunoproliferative small intestinal disease",
+   "Failing to recognise transformation to aggressive lymphoma"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Alpha heavy chain disease detected early: eradicate Campylobacter jejuni and treat the marginal-zone lymphoproliferation with antibiotics such as tetracyclines or metronidazole",
+   "Advanced, bulky or lymphomatous disease: give lymphoma-directed chemoimmunotherapy combining anthracycline-based chemotherapy with an anti-CD20 antibody",
+   "Gamma and mu variants: direct treatment at the underlying lymphoplasmacytic clone and treat any coexisting chronic lymphocytic leukaemia or associated autoimmune disease",
+   "Support malabsorption with nutritional repletion and replacement of fat-soluble vitamins, iron and other deficiencies, alongside management of diarrhoea and weight loss",
+   "Monitor response and progression with serial serum and urine immunofixation, cross-sectional imaging and repeat small-bowel or lymph-node biopsy where relevant",
+   "Maintain airway vigilance in gamma heavy chain disease given the characteristic palatal and uvular oedema",
+   "Refer to haematology-oncology with gastroenterology input and escalate to aggressive-lymphoma protocols if histological transformation occurs"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "heavy_chain_disease-pathway",
+   "title": "Heavy chain disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare group of B-cell lymphoproliferative disorders that secrete an incomplete, truncated immunoglobulin heavy chain with no associated light chain",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe malabsorption with weight loss and nutritional failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum and urine protein electrophoresis with immunofixation seeking a heavy chain without light chain, Immunoselection or specialised immunochemical techniques to confirm the isolated heavy chain, Small bowel biopsy and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Alpha heavy chain disease detected early: eradicate Campylobacter jejuni and treat the marginal-zone lymphoproliferation with antibiotics such as tetracyclines or metronidazole"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis because the abnormal protein evades routine electrophoresis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of heavy chain disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "heavy_chain_disease-matrix",
+   "title": "Heavy chain disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare group of B-cell lymphoproliferative disorders that secrete an incomplete, truncated immunoglobulin heavy chain with no",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Heavy chain diseases arise from clonal B cells or plasma cells that carry deletions or mutations in the immunoglobulin heavy chain gene, so that a structurally abnormal, truncated heavy chain is produced which cannot bind light chains and is secreted alone. Each isotype reflects a distinct clinical entity. In alpha heavy chain disease, chronic antigenic stimulation of gut-associated lymphoid tissue, associated with Campylobacter jejuni, is thought to drive a marginal zone lymphoproliferation of the small bowel, which explains why antibiotics can be effective early. Gamma and mu variants represent clonal lymphoplasmacytic proliferations with their own tissue distributions and disease associations.",
-    "additionalDifferentials": [
-      "Multiple myeloma and other plasma cell neoplasms",
-      "Marginal zone lymphoma (including MALT lymphoma)",
-      "Waldenstrom macroglobulinaemia",
-      "Chronic lymphocytic leukaemia",
-      "Coeliac disease and other causes of malabsorption (for alpha type)",
-      "Monoclonal gammopathy of undetermined significance"
+    [
+     "Key Investigations",
+     "Serum and urine protein electrophoresis with immunofixation seeking a heavy chain without light chain, Immunoselection or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum and urine protein electrophoresis with immunofixation seeking a heavy chain without light chain",
-      "Immunoselection or specialised immunochemical techniques to confirm the isolated heavy chain",
-      "Small bowel biopsy and imaging for suspected alpha heavy chain disease",
-      "Bone marrow aspirate and trephine with immunophenotyping",
-      "Lymph node biopsy where lymphadenopathy is present",
-      "Testing for associated infection or autoimmune disease"
+    [
+     "Primary Differentials",
+     "Multiple myeloma and other plasma cell neoplasms, Marginal zone lymphoma (including MALT lymphoma), Waldenstrom macroglobulinaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe malabsorption with weight loss and nutritional failure",
-      "Airway compromise from palatal or pharyngeal oedema in gamma type",
-      "Transformation to an aggressive large B-cell lymphoma",
-      "Progressive marrow failure with cytopenias"
+    [
+     "Management Strategy",
+     "Alpha heavy chain disease detected early: eradicate Campylobacter jejuni and treat the marginal-zone lymphoproliferation with",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome varies by type and stage; early alpha heavy chain disease may respond to antibiotics, whereas advanced lymphomatous or aggressive disease carries a poorer prognosis and requires lymphoma-directed therapy.",
-    "pitfalls": [
-      "Missing the diagnosis because the abnormal protein evades routine electrophoresis",
-      "Overlooking a treatable infective driver in alpha heavy chain disease",
-      "Mistaking malabsorption for coeliac disease without considering immunoproliferative small intestinal disease",
-      "Failing to recognise transformation to aggressive lymphoma"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Alpha heavy chain disease detected early: eradicate Campylobacter jejuni and treat the marginal-zone lymphoproliferation with antibiotics such as tetracyclines or metronidazole",
-      "Advanced, bulky or lymphomatous disease: give lymphoma-directed chemoimmunotherapy combining anthracycline-based chemotherapy with an anti-CD20 antibody",
-      "Gamma and mu variants: direct treatment at the underlying lymphoplasmacytic clone and treat any coexisting chronic lymphocytic leukaemia or associated autoimmune disease",
-      "Support malabsorption with nutritional repletion and replacement of fat-soluble vitamins, iron and other deficiencies, alongside management of diarrhoea and weight loss",
-      "Monitor response and progression with serial serum and urine immunofixation, cross-sectional imaging and repeat small-bowel or lymph-node biopsy where relevant",
-      "Maintain airway vigilance in gamma heavy chain disease given the characteristic palatal and uvular oedema",
-      "Refer to haematology-oncology with gastroenterology input and escalate to aggressive-lymphoma protocols if histological transformation occurs"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis because the abnormal protein evades routine electrophoresis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for heavy chain disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "heavy-chain-disease-diagram",
+   "title": "Heavy chain disease: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

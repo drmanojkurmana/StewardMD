@@ -1,78 +1,173 @@
 {
-  "id": "endometrioma",
-  "name": "Ovarian endometrioma",
-  "aliases": [
-    "chocolate cyst",
-    "endometriotic cyst",
-    "ovarian endometriotic cyst"
+ "id": "endometrioma",
+ "name": "Ovarian endometrioma",
+ "aliases": [
+  "chocolate cyst",
+  "endometriotic cyst",
+  "ovarian endometriotic cyst"
+ ],
+ "class": "non_infective",
+ "system": "Gynaecology",
+ "specialty": "Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard gynaecology reference textbook",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Represents the ovarian manifestation of endometriosis and contains thick, altered brown blood, giving rise to the term chocolate cyst",
+   "On transvaginal ultrasound it classically appears as a unilocular cyst with homogeneous low-level ground-glass internal echoes and no solid vascular components",
+   "Frequently associated with dysmenorrhoea, deep dyspareunia, chronic pelvic pain, and subfertility",
+   "CA-125 is often mildly to moderately raised, which supports the diagnosis but is neither sensitive nor specific",
+   "Excisional surgery can reduce ovarian reserve, so the risks to future fertility must be weighed against symptom control",
+   "A small but real risk of malignant transformation exists, particularly to clear cell and endometrioid ovarian carcinoma",
+   "New solid vascular nodularity, rapid enlargement, or a rising CA-125, especially around or after the menopause, should prompt concern for malignant change"
   ],
-  "class": "non_infective",
-  "system": "Gynaecology",
-  "specialty": "Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard gynaecology reference textbook",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Represents the ovarian manifestation of endometriosis and contains thick, altered brown blood, giving rise to the term chocolate cyst",
-      "On transvaginal ultrasound it classically appears as a unilocular cyst with homogeneous low-level ground-glass internal echoes and no solid vascular components",
-      "Frequently associated with dysmenorrhoea, deep dyspareunia, chronic pelvic pain, and subfertility",
-      "CA-125 is often mildly to moderately raised, which supports the diagnosis but is neither sensitive nor specific",
-      "Excisional surgery can reduce ovarian reserve, so the risks to future fertility must be weighed against symptom control",
-      "A small but real risk of malignant transformation exists, particularly to clear cell and endometrioid ovarian carcinoma",
-      "New solid vascular nodularity, rapid enlargement, or a rising CA-125, especially around or after the menopause, should prompt concern for malignant change"
+  "pathophysiology": "Ectopic endometrial-type tissue implanted on or within the ovary responds to cyclical hormonal stimulation and bleeds repeatedly. The retained, progressively degraded blood accumulates as viscous, dark brown fluid rich in haemosiderin, forming a cyst within the ovarian cortex. Surrounding chronic inflammation, fibrosis, and adhesion formation distort pelvic anatomy and contribute to pain and impaired fertility; long-standing epithelial change within the cyst wall underlies the recognised, though uncommon, potential for malignant transformation.",
+  "additionalDifferentials": [
+   "Haemorrhagic corpus luteum cyst",
+   "Mature cystic teratoma (dermoid cyst)",
+   "Ovarian malignancy, including clear cell and endometrioid carcinoma",
+   "Tubo-ovarian abscess",
+   "Mucinous or serous cystadenoma",
+   "Haemorrhagic functional cyst"
+  ],
+  "additionalInvestigations": [
+   "Transvaginal ultrasound assessing morphology and ground-glass appearance, applying standardised descriptors",
+   "Serum CA-125, interpreted with caution given its limited specificity",
+   "Pelvic magnetic resonance imaging, where the cyst is typically bright on T1 with T2 shading",
+   "Structured risk assessment of adnexal masses to triage the likelihood of malignancy",
+   "Diagnostic laparoscopy, which allows visual confirmation and histological sampling"
+  ],
+  "redFlags": [
+   "A solid, vascular mural nodule within the cyst",
+   "Rapid growth or a markedly rising CA-125",
+   "A new or enlarging endometrioma in a postmenopausal woman",
+   "Features of acute rupture or torsion causing severe pain"
+  ],
+  "prognosis": "Endometriomas are benign but tend to recur after conservative treatment and can adversely affect fertility; the overall prognosis is good, with only a small proportion undergoing malignant transformation over time.",
+  "pitfalls": [
+   "Aggressive cyst excision that unnecessarily depletes ovarian reserve in women wishing to conceive",
+   "Assuming every persistent adnexal cyst is a benign endometrioma without reassessment",
+   "Overlooking subtle features of malignant transformation on surveillance imaging",
+   "Relying on CA-125 alone to distinguish benign from malignant disease"
+  ],
+  "references": [
+   "Standard gynaecology reference textbook",
+   "Peer-reviewed gynaecology clinical reviews",
+   "Gynaecological oncology reference text"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer hormonal suppression with combined hormonal contraceptives, progestogens or GnRH analogues to control associated pain, recognising this does not eliminate the cyst",
+   "Reserve laparoscopic ovarian cystectomy for large, symptomatic, enlarging or diagnostically uncertain endometriomas",
+   "Counsel on the trade-off between excisional surgery and ovarian reserve, weighing fertility implications before operating",
+   "In subfertility, involve reproductive medicine and consider assisted reproduction, as surgery does not reliably improve conception",
+   "Monitor with serial transvaginal ultrasound using standardised descriptors and reassess any suspicious solid or vascular change",
+   "Remain alert to the small risk of malignant transformation to clear cell and endometrioid carcinoma, investigating any rising suspicion",
+   "Manage within a gynaecology service with fertility and pain-management input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "endometrioma-pathway",
+   "title": "Ovarian endometrioma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Represents the ovarian manifestation of endometriosis and contains thick, altered brown blood, giving rise to the term chocolate cyst",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A solid, vascular mural nodule within the cyst",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transvaginal ultrasound assessing morphology and ground-glass appearance, applying standardised descriptors, Serum CA-125, interpreted with caution given its limited specificity, Pelvic magnetic resonance imaging, where"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer hormonal suppression with combined hormonal contraceptives, progestogens or GnRH analogues to control associated pain, recognising this does not eliminate the cyst"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Aggressive cyst excision that unnecessarily depletes ovarian reserve in women wishing to conceive"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ovarian endometrioma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "endometrioma-matrix",
+   "title": "Ovarian endometrioma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Represents the ovarian manifestation of endometriosis and contains thick, altered brown blood, giving rise to the term chocolate",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ectopic endometrial-type tissue implanted on or within the ovary responds to cyclical hormonal stimulation and bleeds repeatedly. The retained, progressively degraded blood accumulates as viscous, dark brown fluid rich in haemosiderin, forming a cyst within the ovarian cortex. Surrounding chronic inflammation, fibrosis, and adhesion formation distort pelvic anatomy and contribute to pain and impaired fertility; long-standing epithelial change within the cyst wall underlies the recognised, though uncommon, potential for malignant transformation.",
-    "additionalDifferentials": [
-      "Haemorrhagic corpus luteum cyst",
-      "Mature cystic teratoma (dermoid cyst)",
-      "Ovarian malignancy, including clear cell and endometrioid carcinoma",
-      "Tubo-ovarian abscess",
-      "Mucinous or serous cystadenoma",
-      "Haemorrhagic functional cyst"
+    [
+     "Key Investigations",
+     "Transvaginal ultrasound assessing morphology and ground-glass appearance, applying standardised descriptors, Serum CA-125,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transvaginal ultrasound assessing morphology and ground-glass appearance, applying standardised descriptors",
-      "Serum CA-125, interpreted with caution given its limited specificity",
-      "Pelvic magnetic resonance imaging, where the cyst is typically bright on T1 with T2 shading",
-      "Structured risk assessment of adnexal masses to triage the likelihood of malignancy",
-      "Diagnostic laparoscopy, which allows visual confirmation and histological sampling"
+    [
+     "Primary Differentials",
+     "Haemorrhagic corpus luteum cyst, Mature cystic teratoma (dermoid cyst), Ovarian malignancy, including clear cell and endometrioid",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A solid, vascular mural nodule within the cyst",
-      "Rapid growth or a markedly rising CA-125",
-      "A new or enlarging endometrioma in a postmenopausal woman",
-      "Features of acute rupture or torsion causing severe pain"
+    [
+     "Management Strategy",
+     "Offer hormonal suppression with combined hormonal contraceptives, progestogens or GnRH analogues to control associated pain,",
+     "Core treatment modality"
     ],
-    "prognosis": "Endometriomas are benign but tend to recur after conservative treatment and can adversely affect fertility; the overall prognosis is good, with only a small proportion undergoing malignant transformation over time.",
-    "pitfalls": [
-      "Aggressive cyst excision that unnecessarily depletes ovarian reserve in women wishing to conceive",
-      "Assuming every persistent adnexal cyst is a benign endometrioma without reassessment",
-      "Overlooking subtle features of malignant transformation on surveillance imaging",
-      "Relying on CA-125 alone to distinguish benign from malignant disease"
-    ],
-    "references": [
-      "Standard gynaecology reference textbook",
-      "Peer-reviewed gynaecology clinical reviews",
-      "Gynaecological oncology reference text"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer hormonal suppression with combined hormonal contraceptives, progestogens or GnRH analogues to control associated pain, recognising this does not eliminate the cyst",
-      "Reserve laparoscopic ovarian cystectomy for large, symptomatic, enlarging or diagnostically uncertain endometriomas",
-      "Counsel on the trade-off between excisional surgery and ovarian reserve, weighing fertility implications before operating",
-      "In subfertility, involve reproductive medicine and consider assisted reproduction, as surgery does not reliably improve conception",
-      "Monitor with serial transvaginal ultrasound using standardised descriptors and reassess any suspicious solid or vascular change",
-      "Remain alert to the small risk of malignant transformation to clear cell and endometrioid carcinoma, investigating any rising suspicion",
-      "Manage within a gynaecology service with fertility and pain-management input"
+    [
+     "Clinical Pitfall",
+     "Aggressive cyst excision that unnecessarily depletes ovarian reserve in women wishing to conceive",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ovarian endometrioma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "endometrioma-diagram",
+   "title": "Ovarian endometrioma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

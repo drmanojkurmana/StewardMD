@@ -143,5 +143,104 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "pcos-diagnostic-algo",
+   "title": "PCOS Diagnostic Assessment and Phenotyping Pathway (2023 International Guidelines)",
+   "steps": [
+    {
+     "step": "Ovulatory Dysfunction Screening",
+     "action": "Assess for irregular menstrual cycles (< 21 or > 35 days, or < 8 cycles per year). In adolescents within 3 years post-menarche, cycle irregularity requires conservative observation unless persistent.",
+     "critical": true
+    },
+    {
+     "step": "Hyperandrogenism Evaluation",
+     "action": "Clinical hyperandrogenism: Modified Ferriman-Gallwey score >= 4 to 6 (ethnicity-specific cutoffs) for hirsutism, alopecia, or severe acne. Biochemical hyperandrogenism: calculate Free Androgen Index (FAI) or Free Testosterone by LC-MS; avoid direct radioimmunoassays."
+    },
+    {
+     "step": "Mandatory Rule-Out Testing",
+     "action": "Exclude secondary endocrine etiologies: Serum TSH (thyroid disease), Prolactin (hyperprolactinemia), 17-OHP (non-classic 21-hydroxylase deficiency CAH). In rapid virilization, measure DHEAS and total testosterone to exclude adrenal/ovarian tumors.",
+     "critical": true
+    },
+    {
+     "step": "Pelvic Ultrasound or Serum AMH",
+     "branch": "Only if adult and 1 of 2 above criteria met",
+     "action": "Transvaginal ultrasound: Follicle number per ovary >= 20 in either ovary OR ovarian volume >= 10 mL (without dominant follicle). Alternatively, elevated serum Anti-Mullerian Hormone (AMH) can substitute for ultrasound in adults (not in adolescents)."
+    },
+    {
+     "step": "Comprehensive Cardiometabolic Stratification",
+     "action": "Screen all confirmed PCOS patients with a baseline 75 g 2-hour Oral Glucose Tolerance Test (OGTT), fasting lipid profile, and blood pressure measurement. Calculate BMI and waist-to-height ratio."
+    }
+   ],
+   "caption": "Aligned with 2023 International Evidence-based Guideline for the assessment and management of PCOS."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pcos-phenotype-matrix",
+   "title": "Rotterdam PCOS Phenotypes and Long-Term Metabolic Risk Profile",
+   "headers": [
+    "PCOS Phenotype",
+    "Ovulatory Dysfunction (OD)",
+    "Hyperandrogenism (HA)",
+    "Polycystic Ovarian Morphology (PCOM)",
+    "Cardiometabolic Risk Severity"
+   ],
+   "rows": [
+    [
+     "Phenotype A (Classic / Complete)",
+     "Present (oligo- or anovulation)",
+     "Present (clinical or biochemical)",
+     "Present (follicles >= 20 or volume >= 10 mL)",
+     "Highest metabolic risk: severe insulin resistance, highest prevalence of metabolic syndrome and MASLD"
+    ],
+    [
+     "Phenotype B (Hyperandrogenic Anovulatory)",
+     "Present (irregular cycles)",
+     "Present (hirsutism or elevated FAI)",
+     "Absent (normal ovarian morphology)",
+     "High metabolic risk: significant insulin resistance and elevated cardiovascular risk"
+    ],
+    [
+     "Phenotype C (Ovulatory PCOS)",
+     "Absent (regular menstrual cycles)",
+     "Present (hirsutism or hyperandrogenemia)",
+     "Present (polycystic ovaries on ultrasound)",
+     "Intermediate metabolic risk: lower insulin resistance, but requires long-term lipid and glucose surveillance"
+    ],
+    [
+     "Phenotype D (Non-Hyperandrogenic)",
+     "Present (oligo-amenorrhea)",
+     "Absent (normal androgens and no hirsutism)",
+     "Present (polycystic morphology on scan)",
+     "Mildest metabolic phenotype: lowest insulin resistance; diagnosis requires strict exclusion of other causes"
+    ]
+   ],
+   "caption": "Phenotypes A and B carry the highest risk for type 2 diabetes and require regular 1 to 3 yearly OGTT testing."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "polycystic-ovary-syndrome-diagram",
+   "title": "Polycystic ovary syndrome (PCOS): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

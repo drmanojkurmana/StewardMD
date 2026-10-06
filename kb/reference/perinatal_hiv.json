@@ -1,77 +1,172 @@
 {
-  "id": "perinatal_hiv",
-  "name": "Perinatal HIV Infection",
-  "aliases": [
-    "mother-to-child HIV transmission",
-    "vertical HIV transmission",
-    "paediatric HIV"
+ "id": "perinatal_hiv",
+ "name": "Perinatal HIV Infection",
+ "aliases": [
+  "mother-to-child HIV transmission",
+  "vertical HIV transmission",
+  "paediatric HIV"
+ ],
+ "class": "infective",
+ "system": "Immunological",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Most childhood HIV infection is acquired from the mother during pregnancy, around delivery, or through breastfeeding, and transmission is largely preventable with effective interventions.",
+   "Maternal antiretroviral therapy that suppresses viral load, appropriate mode of delivery, infant antiretroviral prophylaxis, and safe infant feeding practices dramatically reduce vertical transmission.",
+   "Infected infants are frequently asymptomatic at birth, so diagnosis relies on virological (nucleic acid) testing rather than antibody tests, because maternal antibodies cross the placenta and persist for months.",
+   "Untreated perinatal infection can progress rapidly in infancy, with failure to thrive, recurrent or severe infections, lymphadenopathy, hepatosplenomegaly, and developmental regression.",
+   "Pneumocystis jirovecii pneumonia is a serious early opportunistic infection, so prophylaxis is important in at-risk and infected infants.",
+   "Early initiation of antiretroviral therapy in infected infants improves survival and outcomes and is recommended as soon as diagnosis is confirmed.",
+   "A definitive diagnosis of infection or its exclusion requires a defined schedule of repeat virological testing over the first months of life.",
+   "Comprehensive care includes immunisations adapted to immune status, growth and developmental monitoring, and support for the whole family."
   ],
-  "class": "infective",
-  "system": "Immunological",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Most childhood HIV infection is acquired from the mother during pregnancy, around delivery, or through breastfeeding, and transmission is largely preventable with effective interventions.",
-      "Maternal antiretroviral therapy that suppresses viral load, appropriate mode of delivery, infant antiretroviral prophylaxis, and safe infant feeding practices dramatically reduce vertical transmission.",
-      "Infected infants are frequently asymptomatic at birth, so diagnosis relies on virological (nucleic acid) testing rather than antibody tests, because maternal antibodies cross the placenta and persist for months.",
-      "Untreated perinatal infection can progress rapidly in infancy, with failure to thrive, recurrent or severe infections, lymphadenopathy, hepatosplenomegaly, and developmental regression.",
-      "Pneumocystis jirovecii pneumonia is a serious early opportunistic infection, so prophylaxis is important in at-risk and infected infants.",
-      "Early initiation of antiretroviral therapy in infected infants improves survival and outcomes and is recommended as soon as diagnosis is confirmed.",
-      "A definitive diagnosis of infection or its exclusion requires a defined schedule of repeat virological testing over the first months of life.",
-      "Comprehensive care includes immunisations adapted to immune status, growth and developmental monitoring, and support for the whole family."
+  "pathophysiology": "HIV crosses to the infant transplacentally, through exposure to maternal blood and genital secretions during delivery, or via breast milk. The virus infects CD4 T lymphocytes and other immune cells, integrating into host DNA and causing progressive depletion and dysfunction of CD4 cells. In infants the immune system is immature and the initial viral burden relative to immune capacity is high, so without treatment immunodeficiency and disease progression can occur faster than in adults, predisposing to opportunistic and recurrent infections and end-organ involvement.",
+  "additionalDifferentials": [
+   "Other congenital infections (e.g., cytomegalovirus, syphilis)",
+   "Primary immunodeficiency disorders",
+   "Failure to thrive of other cause",
+   "Recurrent infections from other immune defects",
+   "Tuberculosis"
+  ],
+  "additionalInvestigations": [
+   "HIV nucleic acid (virological) testing on the recommended schedule",
+   "CD4 count and percentage",
+   "HIV viral load",
+   "Screening for co-infections (tuberculosis, hepatitis B and C, syphilis)",
+   "Full blood count and growth and developmental assessment"
+  ],
+  "redFlags": [
+   "Failure to thrive or growth faltering",
+   "Recurrent, severe, or unusual infections",
+   "Signs of Pneumocystis jirovecii pneumonia or other opportunistic infection",
+   "Developmental regression or encephalopathy",
+   "Persistent hepatosplenomegaly or generalised lymphadenopathy"
+  ],
+  "prognosis": "With early diagnosis, prompt antiretroviral therapy, and prophylaxis against opportunistic infections, children can achieve viral suppression, immune recovery, and near-normal life expectancy; untreated perinatal infection carries high morbidity and mortality in early childhood.",
+  "pitfalls": [
+   "Using antibody testing rather than virological testing to diagnose infection in young infants",
+   "Interpreting a single negative early test as excluding infection without completing the testing schedule",
+   "Delaying antiretroviral therapy or Pneumocystis prophylaxis in an at-risk or infected infant",
+   "Overlooking co-infections such as tuberculosis or hepatitis"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prevent vertical transmission with maternal antiretroviral therapy to suppress viral load, an appropriate mode of delivery and safe infant feeding practices",
+   "Give the exposed neonate antiretroviral prophylaxis after birth according to the assessed transmission risk",
+   "Start combination antiretroviral therapy promptly in any confirmed infected infant, regardless of clinical or immunological status",
+   "Provide Pneumocystis jirovecii pneumonia prophylaxis with co-trimoxazole in at-risk and infected infants",
+   "Confirm infection status with virological (nucleic acid) testing on the recommended schedule rather than antibody tests, since maternal antibody persists",
+   "Monitor CD4 count and percentage, viral load, and growth and development, and screen for and treat co-infections such as tuberculosis, hepatitis B and C and syphilis",
+   "Immunise appropriately and refer to paediatric HIV specialists, with testing and support for the mother and family"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "perinatal_hiv-pathway",
+   "title": "Perinatal HIV Infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most childhood HIV infection is acquired from the mother during pregnancy, around delivery, or through breastfeeding, and transmission is largely preventable with effective interventions.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Failure to thrive or growth faltering",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: HIV nucleic acid (virological) testing on the recommended schedule, CD4 count and percentage, HIV viral load"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prevent vertical transmission with maternal antiretroviral therapy to suppress viral load, an appropriate mode of delivery and safe infant feeding practices"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Using antibody testing rather than virological testing to diagnose infection in young infants"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of perinatal hiv infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "perinatal_hiv-matrix",
+   "title": "Perinatal HIV Infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most childhood HIV infection is acquired from the mother during pregnancy, around delivery, or through breastfeeding, and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "HIV crosses to the infant transplacentally, through exposure to maternal blood and genital secretions during delivery, or via breast milk. The virus infects CD4 T lymphocytes and other immune cells, integrating into host DNA and causing progressive depletion and dysfunction of CD4 cells. In infants the immune system is immature and the initial viral burden relative to immune capacity is high, so without treatment immunodeficiency and disease progression can occur faster than in adults, predisposing to opportunistic and recurrent infections and end-organ involvement.",
-    "additionalDifferentials": [
-      "Other congenital infections (e.g., cytomegalovirus, syphilis)",
-      "Primary immunodeficiency disorders",
-      "Failure to thrive of other cause",
-      "Recurrent infections from other immune defects",
-      "Tuberculosis"
+    [
+     "Key Investigations",
+     "HIV nucleic acid (virological) testing on the recommended schedule, CD4 count and percentage, HIV viral load",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "HIV nucleic acid (virological) testing on the recommended schedule",
-      "CD4 count and percentage",
-      "HIV viral load",
-      "Screening for co-infections (tuberculosis, hepatitis B and C, syphilis)",
-      "Full blood count and growth and developmental assessment"
+    [
+     "Primary Differentials",
+     "Other congenital infections (e.g., cytomegalovirus, syphilis), Primary immunodeficiency disorders, Failure to thrive of other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Failure to thrive or growth faltering",
-      "Recurrent, severe, or unusual infections",
-      "Signs of Pneumocystis jirovecii pneumonia or other opportunistic infection",
-      "Developmental regression or encephalopathy",
-      "Persistent hepatosplenomegaly or generalised lymphadenopathy"
+    [
+     "Management Strategy",
+     "Prevent vertical transmission with maternal antiretroviral therapy to suppress viral load, an appropriate mode of delivery and",
+     "Core treatment modality"
     ],
-    "prognosis": "With early diagnosis, prompt antiretroviral therapy, and prophylaxis against opportunistic infections, children can achieve viral suppression, immune recovery, and near-normal life expectancy; untreated perinatal infection carries high morbidity and mortality in early childhood.",
-    "pitfalls": [
-      "Using antibody testing rather than virological testing to diagnose infection in young infants",
-      "Interpreting a single negative early test as excluding infection without completing the testing schedule",
-      "Delaying antiretroviral therapy or Pneumocystis prophylaxis in an at-risk or infected infant",
-      "Overlooking co-infections such as tuberculosis or hepatitis"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prevent vertical transmission with maternal antiretroviral therapy to suppress viral load, an appropriate mode of delivery and safe infant feeding practices",
-      "Give the exposed neonate antiretroviral prophylaxis after birth according to the assessed transmission risk",
-      "Start combination antiretroviral therapy promptly in any confirmed infected infant, regardless of clinical or immunological status",
-      "Provide Pneumocystis jirovecii pneumonia prophylaxis with co-trimoxazole in at-risk and infected infants",
-      "Confirm infection status with virological (nucleic acid) testing on the recommended schedule rather than antibody tests, since maternal antibody persists",
-      "Monitor CD4 count and percentage, viral load, and growth and development, and screen for and treat co-infections such as tuberculosis, hepatitis B and C and syphilis",
-      "Immunise appropriately and refer to paediatric HIV specialists, with testing and support for the mother and family"
+    [
+     "Clinical Pitfall",
+     "Using antibody testing rather than virological testing to diagnose infection in young infants",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for perinatal hiv infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "perinatal-hiv-diagram",
+   "title": "Perinatal HIV Infection: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

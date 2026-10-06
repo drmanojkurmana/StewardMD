@@ -1,85 +1,180 @@
 {
-  "id": "serrated_polyposis_syndrome",
-  "name": "Serrated polyposis syndrome",
-  "aliases": [
-    "SPS",
-    "hyperplastic polyposis syndrome",
-    "serrated polyposis"
+ "id": "serrated_polyposis_syndrome",
+ "name": "Serrated polyposis syndrome",
+ "aliases": [
+  "SPS",
+  "hyperplastic polyposis syndrome",
+  "serrated polyposis"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Genetics",
+ "specialty": "Medical Genetics / Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined clinically by the number, size and distribution of serrated polyps rather than by a single causative gene, and most cases lack an identified germline mutation",
+   "Diagnosis rests on established polyp-count and size criteria, such as multiple serrated polyps proximal to the rectum or a high cumulative lifetime polyp count",
+   "Confers an increased risk of colorectal cancer, which arises through the serrated neoplasia pathway rather than the classic adenoma-carcinoma sequence",
+   "Serrated lesions, especially sessile serrated lesions in the proximal colon, are flat and pale and easily missed, so high-quality colonoscopy with meticulous inspection is essential",
+   "First-degree relatives of affected individuals have a raised colorectal cancer risk and warrant earlier and more frequent colonoscopic screening",
+   "Management is regular colonoscopic surveillance with clearance of significant polyps, and surgery is reserved for uncontrollable polyp burden or malignancy",
+   "The serrated pathway is frequently associated with BRAF mutation, CpG island methylation and, in some tumours, acquired mismatch-repair deficiency"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Genetics",
-  "specialty": "Medical Genetics / Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined clinically by the number, size and distribution of serrated polyps rather than by a single causative gene, and most cases lack an identified germline mutation",
-      "Diagnosis rests on established polyp-count and size criteria, such as multiple serrated polyps proximal to the rectum or a high cumulative lifetime polyp count",
-      "Confers an increased risk of colorectal cancer, which arises through the serrated neoplasia pathway rather than the classic adenoma-carcinoma sequence",
-      "Serrated lesions, especially sessile serrated lesions in the proximal colon, are flat and pale and easily missed, so high-quality colonoscopy with meticulous inspection is essential",
-      "First-degree relatives of affected individuals have a raised colorectal cancer risk and warrant earlier and more frequent colonoscopic screening",
-      "Management is regular colonoscopic surveillance with clearance of significant polyps, and surgery is reserved for uncontrollable polyp burden or malignancy",
-      "The serrated pathway is frequently associated with BRAF mutation, CpG island methylation and, in some tumours, acquired mismatch-repair deficiency"
+  "pathophysiology": "Serrated polyposis reflects dysregulation of the serrated neoplasia pathway, a route to colorectal cancer distinct from the conventional adenoma-carcinoma sequence. Sessile serrated lesions commonly carry activating BRAF mutations and develop widespread promoter hypermethylation known as the CpG island methylator phenotype, which silences tumour-suppressor and repair genes. Epigenetic silencing of a mismatch-repair gene in some lesions leads to acquired microsatellite instability, driving progression from serrated polyp to carcinoma; while the condition clusters in families, a consistent germline determinant has not been established for most patients.",
+  "additionalDifferentials": [
+   "Familial adenomatous polyposis and its attenuated form",
+   "MUTYH-associated polyposis",
+   "Lynch syndrome",
+   "Sporadic hyperplastic polyps",
+   "Hereditary mixed polyposis syndrome",
+   "Juvenile polyposis syndrome"
+  ],
+  "additionalInvestigations": [
+   "High-quality colonoscopy with careful proximal-colon inspection and documentation of polyp number, size and location against diagnostic criteria",
+   "Histopathological classification of serrated lesions, including sessile serrated lesions and traditional serrated adenomas",
+   "Molecular testing of tumours for BRAF mutation and CpG island methylation where relevant",
+   "Mismatch-repair immunohistochemistry on carcinomas to detect acquired deficiency",
+   "Consideration of germline multigene panel testing when features suggest another syndrome",
+   "Colonoscopic screening of first-degree relatives at an earlier age"
+  ],
+  "redFlags": [
+   "A large or endoscopically complex serrated lesion suspicious for malignancy",
+   "A discrete mass or advanced histology on biopsy",
+   "Iron-deficiency anaemia or rectal bleeding",
+   "Rapidly increasing polyp burden that cannot be cleared endoscopically"
+  ],
+  "prognosis": "With diligent colonoscopic surveillance and complete removal of significant serrated lesions, colorectal cancer risk can be well controlled and prognosis is good. Risk persists lifelong and depends on the completeness of examinations, so meticulous ongoing surveillance and family screening are important.",
+  "pitfalls": [
+   "Missing flat, pale sessile serrated lesions in the proximal colon during suboptimal colonoscopy",
+   "Dismissing hyperplastic-appearing polyps without recognising the cumulative diagnostic criteria",
+   "Failing to screen first-degree relatives at increased colorectal cancer risk",
+   "Assuming a germline mutation must be present and stopping surveillance when testing is negative"
+  ],
+  "references": [
+   "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
+   "NCCN Guidelines: Genetic/Familial High-Risk Assessment - Colorectal"
+  ],
+  "crossLinks": [],
+  "management": [
+   "SPS is managed as a polyp burden and cancer risk problem, not with cytotoxic or targeted systemic therapy",
+   "Regular colonoscopic surveillance is the mainstay, aiming for complete endoscopic clearance of significant serrated polyps at each exam",
+   "High quality colonoscopy technique (adequate bowel prep, longer withdrawal time, image enhancement or chromoendoscopy) is emphasized since sessile serrated lesions are flat, pale, and proximal",
+   "Surveillance interval is individualized to polyp number, size, and completeness of prior clearance, following current society or NCCN colorectal surveillance guidance",
+   "If a discrete mass, advanced histology, or an endoscopically uncontrollable lesion is found, work-up and staging proceed as for sporadic colorectal cancer, including tumor mismatch repair and microsatellite status",
+   "Invasive cancer arising in SPS is treated with standard colorectal cancer therapy lines, with fluoropyrimidine based chemotherapy and biologic or immune checkpoint agent selection guided by RAS, BRAF, and mismatch repair or microsatellite instability status",
+   "Colectomy or a more limited resection is reserved for polyp burden that cannot be controlled endoscopically or once malignancy has developed, rather than offered prophylactically to all patients",
+   "When surgery is done for cancer, standard oncologic resection and lymphadenectomy principles for colorectal cancer apply",
+   "Radiotherapy has no defined role in SPS itself and would only be used for an established rectal cancer arising in an SPS patient, per standard rectal cancer principles",
+   "There is no first line versus second line concept for SPS itself; surveillance and polypectomy repeat indefinitely, with standard colorectal cancer sequencing applying only if invasive cancer develops",
+   "Lifelong colonoscopic surveillance with complete lesion clearance is required since risk persists as long as the colon remains",
+   "Resected lesions should be histopathologically classified and any carcinoma tested by mismatch repair immunohistochemistry and for BRAF mutation and CpG island methylation",
+   "First degree relatives have increased colorectal cancer risk and warrant earlier colonoscopic screening than average risk individuals",
+   "Refer for germline multigene panel testing when features suggest an alternative hereditary syndrome, and refer to colorectal surgery once polyp burden is uncontrollable or cancer is confirmed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "serrated_polyposis_syndrome-pathway",
+   "title": "Serrated polyposis syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined clinically by the number, size and distribution of serrated polyps rather than by a single causative gene, and most cases lack an identified germline mutation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A large or endoscopically complex serrated lesion suspicious for malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-quality colonoscopy with careful proximal-colon inspection and documentation of polyp number, size and location against diagnostic criteria, Histopathological classification of serrated lesions, including sessile"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: SPS is managed as a polyp burden and cancer risk problem, not with cytotoxic or targeted systemic therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing flat, pale sessile serrated lesions in the proximal colon during suboptimal colonoscopy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of serrated polyposis syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "serrated_polyposis_syndrome-matrix",
+   "title": "Serrated polyposis syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined clinically by the number, size and distribution of serrated polyps rather than by a single causative gene, and most cases",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Serrated polyposis reflects dysregulation of the serrated neoplasia pathway, a route to colorectal cancer distinct from the conventional adenoma-carcinoma sequence. Sessile serrated lesions commonly carry activating BRAF mutations and develop widespread promoter hypermethylation known as the CpG island methylator phenotype, which silences tumour-suppressor and repair genes. Epigenetic silencing of a mismatch-repair gene in some lesions leads to acquired microsatellite instability, driving progression from serrated polyp to carcinoma; while the condition clusters in families, a consistent germline determinant has not been established for most patients.",
-    "additionalDifferentials": [
-      "Familial adenomatous polyposis and its attenuated form",
-      "MUTYH-associated polyposis",
-      "Lynch syndrome",
-      "Sporadic hyperplastic polyps",
-      "Hereditary mixed polyposis syndrome",
-      "Juvenile polyposis syndrome"
+    [
+     "Key Investigations",
+     "High-quality colonoscopy with careful proximal-colon inspection and documentation of polyp number, size and location against",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-quality colonoscopy with careful proximal-colon inspection and documentation of polyp number, size and location against diagnostic criteria",
-      "Histopathological classification of serrated lesions, including sessile serrated lesions and traditional serrated adenomas",
-      "Molecular testing of tumours for BRAF mutation and CpG island methylation where relevant",
-      "Mismatch-repair immunohistochemistry on carcinomas to detect acquired deficiency",
-      "Consideration of germline multigene panel testing when features suggest another syndrome",
-      "Colonoscopic screening of first-degree relatives at an earlier age"
+    [
+     "Primary Differentials",
+     "Familial adenomatous polyposis and its attenuated form, MUTYH-associated polyposis, Lynch syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A large or endoscopically complex serrated lesion suspicious for malignancy",
-      "A discrete mass or advanced histology on biopsy",
-      "Iron-deficiency anaemia or rectal bleeding",
-      "Rapidly increasing polyp burden that cannot be cleared endoscopically"
+    [
+     "Management Strategy",
+     "SPS is managed as a polyp burden and cancer risk problem, not with cytotoxic or targeted systemic therapy",
+     "Core treatment modality"
     ],
-    "prognosis": "With diligent colonoscopic surveillance and complete removal of significant serrated lesions, colorectal cancer risk can be well controlled and prognosis is good. Risk persists lifelong and depends on the completeness of examinations, so meticulous ongoing surveillance and family screening are important.",
-    "pitfalls": [
-      "Missing flat, pale sessile serrated lesions in the proximal colon during suboptimal colonoscopy",
-      "Dismissing hyperplastic-appearing polyps without recognising the cumulative diagnostic criteria",
-      "Failing to screen first-degree relatives at increased colorectal cancer risk",
-      "Assuming a germline mutation must be present and stopping surveillance when testing is negative"
-    ],
-    "references": [
-      "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
-      "NCCN Guidelines: Genetic/Familial High-Risk Assessment - Colorectal"
-    ],
-    "crossLinks": [],
-    "management": [
-      "SPS is managed as a polyp burden and cancer risk problem, not with cytotoxic or targeted systemic therapy",
-      "Regular colonoscopic surveillance is the mainstay, aiming for complete endoscopic clearance of significant serrated polyps at each exam",
-      "High quality colonoscopy technique (adequate bowel prep, longer withdrawal time, image enhancement or chromoendoscopy) is emphasized since sessile serrated lesions are flat, pale, and proximal",
-      "Surveillance interval is individualized to polyp number, size, and completeness of prior clearance, following current society or NCCN colorectal surveillance guidance",
-      "If a discrete mass, advanced histology, or an endoscopically uncontrollable lesion is found, work-up and staging proceed as for sporadic colorectal cancer, including tumor mismatch repair and microsatellite status",
-      "Invasive cancer arising in SPS is treated with standard colorectal cancer therapy lines, with fluoropyrimidine based chemotherapy and biologic or immune checkpoint agent selection guided by RAS, BRAF, and mismatch repair or microsatellite instability status",
-      "Colectomy or a more limited resection is reserved for polyp burden that cannot be controlled endoscopically or once malignancy has developed, rather than offered prophylactically to all patients",
-      "When surgery is done for cancer, standard oncologic resection and lymphadenectomy principles for colorectal cancer apply",
-      "Radiotherapy has no defined role in SPS itself and would only be used for an established rectal cancer arising in an SPS patient, per standard rectal cancer principles",
-      "There is no first line versus second line concept for SPS itself; surveillance and polypectomy repeat indefinitely, with standard colorectal cancer sequencing applying only if invasive cancer develops",
-      "Lifelong colonoscopic surveillance with complete lesion clearance is required since risk persists as long as the colon remains",
-      "Resected lesions should be histopathologically classified and any carcinoma tested by mismatch repair immunohistochemistry and for BRAF mutation and CpG island methylation",
-      "First degree relatives have increased colorectal cancer risk and warrant earlier colonoscopic screening than average risk individuals",
-      "Refer for germline multigene panel testing when features suggest an alternative hereditary syndrome, and refer to colorectal surgery once polyp burden is uncontrollable or cancer is confirmed"
+    [
+     "Clinical Pitfall",
+     "Missing flat, pale sessile serrated lesions in the proximal colon during suboptimal colonoscopy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for serrated polyposis syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "serrated-polyposis-syndrome-diagram",
+   "title": "Serrated polyposis syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

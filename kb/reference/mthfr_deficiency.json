@@ -1,84 +1,179 @@
 {
-  "id": "mthfr_deficiency",
-  "name": "Severe methylenetetrahydrofolate reductase deficiency",
-  "aliases": [
-    "severe MTHFR deficiency",
-    "methylenetetrahydrofolate reductase deficiency",
-    "homocystinuria due to MTHFR deficiency",
-    "MTHFR",
-    "5,10-methylenetetrahydrofolate reductase deficiency"
+ "id": "mthfr_deficiency",
+ "name": "Severe methylenetetrahydrofolate reductase deficiency",
+ "aliases": [
+  "severe MTHFR deficiency",
+  "methylenetetrahydrofolate reductase deficiency",
+  "homocystinuria due to MTHFR deficiency",
+  "MTHFR",
+  "5,10-methylenetetrahydrofolate reductase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive deficiency of methylenetetrahydrofolate reductase, the commonest inborn error of folate metabolism and a remethylation defect",
+   "Produces homocystinuria and raised plasma total homocysteine with a low or normal methionine, the opposite of classical cystathionine beta-synthase homocystinuria where methionine is high",
+   "There is no methylmalonic aciduria, which helps distinguish it from cobalamin remethylation defects such as cblC",
+   "Severe neonatal and infantile forms present with encephalopathy, apnoea, seizures, feeding difficulty, microcephaly and developmental delay",
+   "Later-onset disease can present with neurological deterioration, psychiatric features and thromboembolism",
+   "This severe monogenic deficiency is entirely distinct from the common thermolabile C677T polymorphism, which is not a metabolic disease",
+   "Betaine is the mainstay of treatment because it drives an alternative remethylation of homocysteine to methionine through betaine-homocysteine methyltransferase",
+   "Additional generic measures include folinic acid, vitamin B12 and, in some cases, methionine supplementation, with early treatment giving the best results"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive deficiency of methylenetetrahydrofolate reductase, the commonest inborn error of folate metabolism and a remethylation defect",
-      "Produces homocystinuria and raised plasma total homocysteine with a low or normal methionine, the opposite of classical cystathionine beta-synthase homocystinuria where methionine is high",
-      "There is no methylmalonic aciduria, which helps distinguish it from cobalamin remethylation defects such as cblC",
-      "Severe neonatal and infantile forms present with encephalopathy, apnoea, seizures, feeding difficulty, microcephaly and developmental delay",
-      "Later-onset disease can present with neurological deterioration, psychiatric features and thromboembolism",
-      "This severe monogenic deficiency is entirely distinct from the common thermolabile C677T polymorphism, which is not a metabolic disease",
-      "Betaine is the mainstay of treatment because it drives an alternative remethylation of homocysteine to methionine through betaine-homocysteine methyltransferase",
-      "Additional generic measures include folinic acid, vitamin B12 and, in some cases, methionine supplementation, with early treatment giving the best results"
+  "pathophysiology": "Methylenetetrahydrofolate reductase converts 5,10-methylenetetrahydrofolate to 5-methyltetrahydrofolate, the methyl donor required for the vitamin B12-dependent remethylation of homocysteine to methionine. When the enzyme is severely deficient, this methyl supply fails, so homocysteine accumulates and is excreted (homocystinuria) while methionine and S-adenosylmethionine, needed for methylation in the nervous system, fall. The combination of homocysteine toxicity, impaired methylation and reduced methionine is thought to drive the neurological injury, and the raised homocysteine also predisposes to vascular thrombosis. Betaine treatment provides an alternative route to regenerate methionine and lower homocysteine.",
+  "additionalDifferentials": [
+   "Classical homocystinuria (cystathionine beta-synthase deficiency)",
+   "Cobalamin remethylation defects such as cblC, cblD and cblE",
+   "Transcobalamin and dietary vitamin B12 deficiency",
+   "Cerebral folate deficiency of other cause",
+   "Other neonatal metabolic encephalopathies",
+   "Acquired hyperhomocysteinaemia from nutritional deficiency"
+  ],
+  "additionalInvestigations": [
+   "Plasma total homocysteine (markedly raised)",
+   "Plasma amino acids showing low or normal methionine with the raised homocysteine",
+   "Urine organic acids to confirm absence of methylmalonic acid",
+   "Vitamin B12 and folate status to exclude nutritional causes",
+   "MTHFR gene sequencing for confirmation",
+   "Brain MRI and electroencephalography in the encephalopathic presentation"
+  ],
+  "redFlags": [
+   "Neonatal encephalopathy with apnoea and seizures",
+   "Progressive neurological deterioration or psychiatric change",
+   "Thromboembolic events, including in unusual sites",
+   "Rapid decompensation during intercurrent catabolic illness"
+  ],
+  "prognosis": "Outcome is strongly determined by how early betaine and adjunctive treatment begin; presymptomatic or early therapy can markedly improve neurological outcome, while late-treated severe disease often leaves significant impairment and carries thrombotic risk.",
+  "pitfalls": [
+   "Confusing the severe enzyme deficiency with the benign common C677T polymorphism",
+   "Expecting a high methionine as in classical homocystinuria and dismissing the diagnosis when it is low or normal",
+   "Not excluding cobalamin defects by checking for methylmalonic aciduria and B12 status",
+   "Delaying betaine, which is time-critical for neurological protection",
+   "Overlooking thromboembolism as a presenting feature in older patients"
+  ],
+  "references": [
+   "Scriver's OMMBID",
+   "Huemer M et al. Guidelines for remethylation disorders and severe MTHFR deficiency",
+   "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Betaine is the mainstay, providing an alternative pathway to remethylate homocysteine to methionine, lowering toxic homocysteine and restoring methylation",
+   "Add adjunctive folate as folinic acid or 5-methyltetrahydrofolate, hydroxocobalamin and, where appropriate, methionine supplementation",
+   "Begin treatment as early as possible, ideally presymptomatically, as timing strongly determines neurological outcome",
+   "Manage the acute neonatal encephalopathy with treatment of seizures and apnoea and metabolic stabilisation",
+   "Address the raised thrombotic risk with prophylaxis during high-risk periods and anticoagulation for thromboembolism",
+   "Monitor plasma total homocysteine and methionine to titrate treatment",
+   "Offer genetic counselling for this autosomal recessive disorder, with family testing and early testing of at-risk newborns",
+   "Coordinate multidisciplinary metabolic and neurology care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mthfr_deficiency-pathway",
+   "title": "Severe methylenetetrahydrofolate reductase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive deficiency of methylenetetrahydrofolate reductase, the commonest inborn error of folate metabolism and a remethylation defect",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal encephalopathy with apnoea and seizures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma total homocysteine (markedly raised), Plasma amino acids showing low or normal methionine with the raised homocysteine, Urine organic acids to confirm absence of methylmalonic acid"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Betaine is the mainstay, providing an alternative pathway to remethylate homocysteine to methionine, lowering toxic homocysteine and restoring methylation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the severe enzyme deficiency with the benign common C677T polymorphism"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of severe methylenetetrahydrofolate reductase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mthfr_deficiency-matrix",
+   "title": "Severe methylenetetrahydrofolate reductase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive deficiency of methylenetetrahydrofolate reductase, the commonest inborn error of folate metabolism and a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Methylenetetrahydrofolate reductase converts 5,10-methylenetetrahydrofolate to 5-methyltetrahydrofolate, the methyl donor required for the vitamin B12-dependent remethylation of homocysteine to methionine. When the enzyme is severely deficient, this methyl supply fails, so homocysteine accumulates and is excreted (homocystinuria) while methionine and S-adenosylmethionine, needed for methylation in the nervous system, fall. The combination of homocysteine toxicity, impaired methylation and reduced methionine is thought to drive the neurological injury, and the raised homocysteine also predisposes to vascular thrombosis. Betaine treatment provides an alternative route to regenerate methionine and lower homocysteine.",
-    "additionalDifferentials": [
-      "Classical homocystinuria (cystathionine beta-synthase deficiency)",
-      "Cobalamin remethylation defects such as cblC, cblD and cblE",
-      "Transcobalamin and dietary vitamin B12 deficiency",
-      "Cerebral folate deficiency of other cause",
-      "Other neonatal metabolic encephalopathies",
-      "Acquired hyperhomocysteinaemia from nutritional deficiency"
+    [
+     "Key Investigations",
+     "Plasma total homocysteine (markedly raised), Plasma amino acids showing low or normal methionine with the raised homocysteine,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma total homocysteine (markedly raised)",
-      "Plasma amino acids showing low or normal methionine with the raised homocysteine",
-      "Urine organic acids to confirm absence of methylmalonic acid",
-      "Vitamin B12 and folate status to exclude nutritional causes",
-      "MTHFR gene sequencing for confirmation",
-      "Brain MRI and electroencephalography in the encephalopathic presentation"
+    [
+     "Primary Differentials",
+     "Classical homocystinuria (cystathionine beta-synthase deficiency), Cobalamin remethylation defects such as cblC, cblD and cblE,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal encephalopathy with apnoea and seizures",
-      "Progressive neurological deterioration or psychiatric change",
-      "Thromboembolic events, including in unusual sites",
-      "Rapid decompensation during intercurrent catabolic illness"
+    [
+     "Management Strategy",
+     "Betaine is the mainstay, providing an alternative pathway to remethylate homocysteine to methionine, lowering toxic homocysteine",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is strongly determined by how early betaine and adjunctive treatment begin; presymptomatic or early therapy can markedly improve neurological outcome, while late-treated severe disease often leaves significant impairment and carries thrombotic risk.",
-    "pitfalls": [
-      "Confusing the severe enzyme deficiency with the benign common C677T polymorphism",
-      "Expecting a high methionine as in classical homocystinuria and dismissing the diagnosis when it is low or normal",
-      "Not excluding cobalamin defects by checking for methylmalonic aciduria and B12 status",
-      "Delaying betaine, which is time-critical for neurological protection",
-      "Overlooking thromboembolism as a presenting feature in older patients"
-    ],
-    "references": [
-      "Scriver's OMMBID",
-      "Huemer M et al. Guidelines for remethylation disorders and severe MTHFR deficiency",
-      "Blau N. Physician's Guide to the Diagnosis, Treatment, and Follow-up of Inherited Metabolic Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Betaine is the mainstay, providing an alternative pathway to remethylate homocysteine to methionine, lowering toxic homocysteine and restoring methylation",
-      "Add adjunctive folate as folinic acid or 5-methyltetrahydrofolate, hydroxocobalamin and, where appropriate, methionine supplementation",
-      "Begin treatment as early as possible, ideally presymptomatically, as timing strongly determines neurological outcome",
-      "Manage the acute neonatal encephalopathy with treatment of seizures and apnoea and metabolic stabilisation",
-      "Address the raised thrombotic risk with prophylaxis during high-risk periods and anticoagulation for thromboembolism",
-      "Monitor plasma total homocysteine and methionine to titrate treatment",
-      "Offer genetic counselling for this autosomal recessive disorder, with family testing and early testing of at-risk newborns",
-      "Coordinate multidisciplinary metabolic and neurology care"
+    [
+     "Clinical Pitfall",
+     "Confusing the severe enzyme deficiency with the benign common C677T polymorphism",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for severe methylenetetrahydrofolate reductase deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mthfr-deficiency-diagram",
+   "title": "Severe methylenetetrahydrofolate reductase deficiency: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -5,7 +5,23 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, sexual health clinic, emergency department",
- "aliases": ["HSV", "HSV-1", "HSV-2", "genital herpes", "herpes genitalis", "herpes labialis", "cold sore", "fever blister", "herpes proctitis", "aciclovir", "acyclovir", "valaciclovir", "valacyclovir", "famciclovir", "suppressive therapy"],
+ "aliases": [
+  "HSV",
+  "HSV-1",
+  "HSV-2",
+  "genital herpes",
+  "herpes genitalis",
+  "herpes labialis",
+  "cold sore",
+  "fever blister",
+  "herpes proctitis",
+  "aciclovir",
+  "acyclovir",
+  "valaciclovir",
+  "valacyclovir",
+  "famciclovir",
+  "suppressive therapy"
+ ],
  "summary": "Treat first-episode genital herpes with oral aciclovir, valaciclovir or famciclovir (CDC 7 to 10 days; BASHH 5 days with review), use short episodic courses or daily suppression for recurrences, give suppression from 36 weeks of pregnancy, and treat cold sores early with high-dose valaciclovir.",
  "sections": [
   {
@@ -98,17 +114,154 @@
   }
  ],
  "drugs": [
-  { "name": "Aciclovir (acyclovir), oral", "dose": "First episode 400 mg three times daily for 5 to 10 days; episodic 800 mg three times daily for 2 days; suppression 400 mg twice daily; pregnancy from 36 weeks 400 mg three times daily", "notes": "Reduce dose in renal impairment." },
-  { "name": "Valaciclovir (valacyclovir)", "dose": "First episode 1 g twice daily (CDC) or 500 mg twice daily (BASHH); episodic 500 mg twice daily for 3 days; suppression 500 mg once daily (1 g if 10 or more recurrences a year); cold sores 2 g every 12 hours for 1 day", "notes": "Renal adjustment needed; pregnancy suppression 500 mg twice daily from 36 weeks." },
-  { "name": "Famciclovir", "dose": "First episode 250 mg three times daily; episodic 1 g twice daily for 1 day; suppression 250 mg twice daily (500 mg twice daily in HIV)", "notes": "Reduce dose in renal impairment." },
-  { "name": "Aciclovir, IV", "dose": "5 to 10 mg/kg IV 8-hourly for severe genital or disseminated disease; 10 mg/kg 8-hourly for encephalitis", "notes": "Hydrate; adjust for renal function. Neonates 20 mg/kg 8-hourly." },
-  { "name": "Foscarnet", "dose": "80 to 120 mg/kg/day IV in 2 to 3 divided doses", "notes": "Aciclovir-resistant HSV; specialist use; nephrotoxic, causes electrolyte disturbance." },
-  { "name": "Lidocaine 5% ointment", "dose": "Apply thinly to lesions as needed, especially before passing urine", "notes": "Symptom relief in genital herpes." }
+  {
+   "name": "Aciclovir (acyclovir), oral",
+   "dose": "First episode 400 mg three times daily for 5 to 10 days; episodic 800 mg three times daily for 2 days; suppression 400 mg twice daily; pregnancy from 36 weeks 400 mg three times daily",
+   "notes": "Reduce dose in renal impairment."
+  },
+  {
+   "name": "Valaciclovir (valacyclovir)",
+   "dose": "First episode 1 g twice daily (CDC) or 500 mg twice daily (BASHH); episodic 500 mg twice daily for 3 days; suppression 500 mg once daily (1 g if 10 or more recurrences a year); cold sores 2 g every 12 hours for 1 day",
+   "notes": "Renal adjustment needed; pregnancy suppression 500 mg twice daily from 36 weeks."
+  },
+  {
+   "name": "Famciclovir",
+   "dose": "First episode 250 mg three times daily; episodic 1 g twice daily for 1 day; suppression 250 mg twice daily (500 mg twice daily in HIV)",
+   "notes": "Reduce dose in renal impairment."
+  },
+  {
+   "name": "Aciclovir, IV",
+   "dose": "5 to 10 mg/kg IV 8-hourly for severe genital or disseminated disease; 10 mg/kg 8-hourly for encephalitis",
+   "notes": "Hydrate; adjust for renal function. Neonates 20 mg/kg 8-hourly."
+  },
+  {
+   "name": "Foscarnet",
+   "dose": "80 to 120 mg/kg/day IV in 2 to 3 divided doses",
+   "notes": "Aciclovir-resistant HSV; specialist use; nephrotoxic, causes electrolyte disturbance."
+  },
+  {
+   "name": "Lidocaine 5% ointment",
+   "dose": "Apply thinly to lesions as needed, especially before passing urine",
+   "notes": "Symptom relief in genital herpes."
+  }
  ],
  "sources": [
-  { "org": "CDC", "title": "Sexually Transmitted Infections Treatment Guidelines, 2021: Genital herpes simplex virus (HSV) infection", "year": 2021, "url": "https://www.cdc.gov/std/treatment-guidelines/herpes.htm" },
-  { "org": "BASHH", "title": "British Association of Sexual Health and HIV UK national guideline for the management of anogenital herpes, 2024", "year": 2024, "url": "https://www.bashh.org/resources/23/anogenital_herpes_2024_updated_guideline" },
-  { "org": "US FDA (DailyMed)", "title": "VALTREX (valacyclovir hydrochloride) tablets: prescribing information", "year": 2025, "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f8e0d8f8-cb73-4206-a484-88f5c4fbd719" }
+  {
+   "org": "CDC",
+   "title": "Sexually Transmitted Infections Treatment Guidelines, 2021: Genital herpes simplex virus (HSV) infection",
+   "year": 2021,
+   "url": "https://www.cdc.gov/std/treatment-guidelines/herpes.htm"
+  },
+  {
+   "org": "BASHH",
+   "title": "British Association of Sexual Health and HIV UK national guideline for the management of anogenital herpes, 2024",
+   "year": 2024,
+   "url": "https://www.bashh.org/resources/23/anogenital_herpes_2024_updated_guideline"
+  },
+  {
+   "org": "US FDA (DailyMed)",
+   "title": "VALTREX (valacyclovir hydrochloride) tablets: prescribing information",
+   "year": 2025,
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f8e0d8f8-cb73-4206-a484-88f5c4fbd719"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "herpes-simplex-infections-pathway",
+   "title": "Herpes simplex: genital herpes and cold sores (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Genital herpes: painful grouped vesicles and shallow ulcers on the genitals or perianal skin. A first episode may bring fever, myalgia, tender inguinal nodes, dysuria, urinary retention or aseptic meningitis. HSV-1 now causes many first",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Recurrences: a prodrome of tingling or burning, then milder, shorter lesions. Genital HSV-2 recurs more often than genital HSV-1. Asymptomatic shedding is an important route of transmission.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Swab the base of a lesion for HSV PCR (NAAT) with typing; viral culture is less sensitive. Do not rely on a Tzanck smear."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Most episodes settle without treatment. Advise avoiding kissing and oral sex while lesions are present, and sunscreen if sunlight triggers recurrences."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Starting episodic treatment late: benefit is greatest when taken at the prodrome."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for herpes simplex: genital herpes and cold sores (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "herpes-simplex-infections-summary-matrix",
+   "title": "Herpes simplex: genital herpes and cold sores (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Genital herpes: painful grouped vesicles and shallow ulcers on the genitals or perianal skin. A first episode may bring fever, myalgia,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Most episodes settle without treatment. Advise avoiding kissing and oral sex while lesions are present, and sunscreen if sunlight triggers",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Swab the base of a lesion for HSV PCR (NAAT) with typing; viral culture is less sensitive. Do not rely on a Tzanck smear.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Aciclovir (acyclovir), oral: First episode 400 mg three times daily for 5 to 10 days; episodic 800 mg three times daily for 2 days;",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting episodic treatment late: benefit is greatest when taken at the prodrome.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for herpes simplex: genital herpes and cold sores (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "herpes-simplex-infections-diagram",
+   "title": "Herpes simplex: genital herpes and cold sores (adult): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

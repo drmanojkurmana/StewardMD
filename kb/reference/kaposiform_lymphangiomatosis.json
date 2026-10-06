@@ -1,78 +1,173 @@
 {
-  "id": "kaposiform_lymphangiomatosis",
-  "name": "Kaposiform lymphangiomatosis",
-  "aliases": [
-    "KLA",
-    "NRAS-associated kaposiform lymphangiomatosis"
+ "id": "kaposiform_lymphangiomatosis",
+ "name": "Kaposiform lymphangiomatosis",
+ "aliases": [
+  "KLA",
+  "NRAS-associated kaposiform lymphangiomatosis"
+ ],
+ "class": "non_infective",
+ "system": "Vascular anomalies / Dermatology",
+ "specialty": "Vascular Anomalies",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An aggressive complex lymphatic anomaly distinguished from generalised lymphatic anomaly by clusters of spindled lymphatic endothelial cells and a marked bleeding tendency",
+   "It characteristically causes haemorrhagic pleural and pericardial effusions and a consumptive coagulopathy with thrombocytopenia and hypofibrinogenaemia",
+   "Thoracic and mediastinal involvement is common and drives respiratory morbidity and mortality",
+   "Somatic activating NRAS variants have been identified, placing it within the RAS-pathway lymphatic anomalies",
+   "Histology shows dilated lymphatic channels accompanied by characteristic foci of spindled lymphatic endothelial cells, unlike generalised lymphatic anomaly",
+   "The coagulopathy resembles but is mechanistically distinct from the Kasabach-Merritt phenomenon of vascular tumours",
+   "Sirolimus, sometimes combined with MEK-pathway inhibition in refractory disease, is used for medical control alongside supportive management",
+   "It carries the worst prognosis among the complex lymphatic anomalies and needs specialist multidisciplinary care"
   ],
-  "class": "non_infective",
-  "system": "Vascular anomalies / Dermatology",
-  "specialty": "Vascular Anomalies",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An aggressive complex lymphatic anomaly distinguished from generalised lymphatic anomaly by clusters of spindled lymphatic endothelial cells and a marked bleeding tendency",
-      "It characteristically causes haemorrhagic pleural and pericardial effusions and a consumptive coagulopathy with thrombocytopenia and hypofibrinogenaemia",
-      "Thoracic and mediastinal involvement is common and drives respiratory morbidity and mortality",
-      "Somatic activating NRAS variants have been identified, placing it within the RAS-pathway lymphatic anomalies",
-      "Histology shows dilated lymphatic channels accompanied by characteristic foci of spindled lymphatic endothelial cells, unlike generalised lymphatic anomaly",
-      "The coagulopathy resembles but is mechanistically distinct from the Kasabach-Merritt phenomenon of vascular tumours",
-      "Sirolimus, sometimes combined with MEK-pathway inhibition in refractory disease, is used for medical control alongside supportive management",
-      "It carries the worst prognosis among the complex lymphatic anomalies and needs specialist multidisciplinary care"
+  "pathophysiology": "Kaposiform lymphangiomatosis is an aggressive, multifocal lymphatic malformation in which abnormal, dilated lymphatic channels are interspersed with clusters and sheets of spindled lymphatic endothelial cells. Somatic activating variants in NRAS drive dysregulated RAS-MAPK signalling within the lymphatic endothelium. The disordered lymphatics and abnormal endothelium promote platelet activation and consumption of clotting factors, producing thrombocytopenia, hypofibrinogenaemia and a bleeding diathesis that manifests as haemorrhagic effusions. Extensive thoracic involvement leads to progressive respiratory compromise.",
+  "additionalDifferentials": [
+   "Generalised lymphatic anomaly (no spindle cells, milder coagulopathy)",
+   "Gorham-Stout disease",
+   "Central conducting lymphatic anomaly",
+   "Kaposiform haemangioendothelioma with Kasabach-Merritt phenomenon",
+   "Malignancy with pleural effusion",
+   "Diffuse pulmonary lymphangiectasia"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and coagulation profile including fibrinogen and D-dimer to document consumptive coagulopathy",
+   "MRI and CT of the chest to map mediastinal and pulmonary involvement",
+   "Analysis of pleural or pericardial fluid, often haemorrhagic",
+   "Biopsy showing spindled lymphatic endothelial cells with lymphatic markers",
+   "Molecular testing for NRAS and related RAS-pathway variants",
+   "Echocardiography to assess pericardial involvement"
+  ],
+  "redFlags": [
+   "Haemorrhagic pleural or pericardial effusions with respiratory or cardiac compromise",
+   "Severe thrombocytopenia and hypofibrinogenaemia with bleeding",
+   "Rapidly progressive mediastinal disease",
+   "Haemodynamic instability",
+   "Refractory chylous or bloody effusions despite drainage"
+  ],
+  "prognosis": "Kaposiform lymphangiomatosis has the most guarded prognosis of the complex lymphatic anomalies, with significant mortality from haemorrhage and respiratory failure; sirolimus and RAS/MEK-directed therapy have improved outcomes but the disease is chronic and often difficult to control.",
+  "pitfalls": [
+   "Mislabelling it as generalised lymphatic anomaly and underestimating the bleeding and effusion risk",
+   "Overlooking the consumptive coagulopathy before drainage or surgery",
+   "Assuming effusions are infective or malignant rather than haemorrhagic-lymphatic",
+   "Delaying systemic therapy in favour of repeated procedural drainage alone"
+  ],
+  "references": [
+   "ISSVA Classification of Vascular Anomalies",
+   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use sirolimus as the mainstay systemic therapy, with RAS/MEK-directed agents such as trametinib given the activating NRAS pathway",
+   "Support the consumptive coagulopathy with fibrinogen and clotting-factor replacement and cautious blood-product use",
+   "Drain and manage haemorrhagic pleural and pericardial effusions with respiratory support",
+   "Monitor platelets, fibrinogen and D-dimer serially and map thoracic disease with cross-sectional imaging",
+   "Undertake molecular testing for NRAS and related RAS-pathway variants to guide targeted therapy",
+   "Manage within a multidisciplinary vascular anomalies team given the guarded, chronic course"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kaposiform_lymphangiomatosis-pathway",
+   "title": "Kaposiform lymphangiomatosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An aggressive complex lymphatic anomaly distinguished from generalised lymphatic anomaly by clusters of spindled lymphatic endothelial cells and a marked bleeding tendency",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Haemorrhagic pleural or pericardial effusions with respiratory or cardiac compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and coagulation profile including fibrinogen and D-dimer to document consumptive coagulopathy, MRI and CT of the chest to map mediastinal and pulmonary involvement, Analysis of pleural or pericardial"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use sirolimus as the mainstay systemic therapy, with RAS/MEK-directed agents such as trametinib given the activating NRAS pathway"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling it as generalised lymphatic anomaly and underestimating the bleeding and effusion risk"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kaposiform lymphangiomatosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kaposiform_lymphangiomatosis-matrix",
+   "title": "Kaposiform lymphangiomatosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An aggressive complex lymphatic anomaly distinguished from generalised lymphatic anomaly by clusters of spindled lymphatic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Kaposiform lymphangiomatosis is an aggressive, multifocal lymphatic malformation in which abnormal, dilated lymphatic channels are interspersed with clusters and sheets of spindled lymphatic endothelial cells. Somatic activating variants in NRAS drive dysregulated RAS-MAPK signalling within the lymphatic endothelium. The disordered lymphatics and abnormal endothelium promote platelet activation and consumption of clotting factors, producing thrombocytopenia, hypofibrinogenaemia and a bleeding diathesis that manifests as haemorrhagic effusions. Extensive thoracic involvement leads to progressive respiratory compromise.",
-    "additionalDifferentials": [
-      "Generalised lymphatic anomaly (no spindle cells, milder coagulopathy)",
-      "Gorham-Stout disease",
-      "Central conducting lymphatic anomaly",
-      "Kaposiform haemangioendothelioma with Kasabach-Merritt phenomenon",
-      "Malignancy with pleural effusion",
-      "Diffuse pulmonary lymphangiectasia"
+    [
+     "Key Investigations",
+     "Full blood count and coagulation profile including fibrinogen and D-dimer to document consumptive coagulopathy, MRI and CT of the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and coagulation profile including fibrinogen and D-dimer to document consumptive coagulopathy",
-      "MRI and CT of the chest to map mediastinal and pulmonary involvement",
-      "Analysis of pleural or pericardial fluid, often haemorrhagic",
-      "Biopsy showing spindled lymphatic endothelial cells with lymphatic markers",
-      "Molecular testing for NRAS and related RAS-pathway variants",
-      "Echocardiography to assess pericardial involvement"
+    [
+     "Primary Differentials",
+     "Generalised lymphatic anomaly (no spindle cells, milder coagulopathy), Gorham-Stout disease, Central conducting lymphatic anomaly",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Haemorrhagic pleural or pericardial effusions with respiratory or cardiac compromise",
-      "Severe thrombocytopenia and hypofibrinogenaemia with bleeding",
-      "Rapidly progressive mediastinal disease",
-      "Haemodynamic instability",
-      "Refractory chylous or bloody effusions despite drainage"
+    [
+     "Management Strategy",
+     "Use sirolimus as the mainstay systemic therapy, with RAS/MEK-directed agents such as trametinib given the activating NRAS pathway",
+     "Core treatment modality"
     ],
-    "prognosis": "Kaposiform lymphangiomatosis has the most guarded prognosis of the complex lymphatic anomalies, with significant mortality from haemorrhage and respiratory failure; sirolimus and RAS/MEK-directed therapy have improved outcomes but the disease is chronic and often difficult to control.",
-    "pitfalls": [
-      "Mislabelling it as generalised lymphatic anomaly and underestimating the bleeding and effusion risk",
-      "Overlooking the consumptive coagulopathy before drainage or surgery",
-      "Assuming effusions are infective or malignant rather than haemorrhagic-lymphatic",
-      "Delaying systemic therapy in favour of repeated procedural drainage alone"
-    ],
-    "references": [
-      "ISSVA Classification of Vascular Anomalies",
-      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use sirolimus as the mainstay systemic therapy, with RAS/MEK-directed agents such as trametinib given the activating NRAS pathway",
-      "Support the consumptive coagulopathy with fibrinogen and clotting-factor replacement and cautious blood-product use",
-      "Drain and manage haemorrhagic pleural and pericardial effusions with respiratory support",
-      "Monitor platelets, fibrinogen and D-dimer serially and map thoracic disease with cross-sectional imaging",
-      "Undertake molecular testing for NRAS and related RAS-pathway variants to guide targeted therapy",
-      "Manage within a multidisciplinary vascular anomalies team given the guarded, chronic course"
+    [
+     "Clinical Pitfall",
+     "Mislabelling it as generalised lymphatic anomaly and underestimating the bleeding and effusion risk",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kaposiform lymphangiomatosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "kaposiform-lymphangiomatosis-diagram",
+   "title": "Kaposiform lymphangiomatosis: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

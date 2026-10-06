@@ -129,5 +129,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "febrile-seizure-pathway",
+   "title": "Febrile seizures Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Febrile seizure: seizure with fever of 38 °C or more in a child aged 6 to 60 months (some guidelines 6 months to 6 years) without CNS infection, metabolic disturbance or previous afebrile seizures.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Airway, oxygen, recovery position, check blood glucose, and time the seizure.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Focus on finding the cause of fever (examination, urine test in infants, targeted tests). A simple febrile seizure carries the same risk of serious bacterial infection as fever alone."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat the cause of the fever. Paracetamol 15 mg/kg every 4 to 6 hours (max 60 mg/kg/day) may be given for comfort, but antipyretics do not prevent recurrence."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Labelling a seizure as febrile without excluding meningitis, particularly in infants, children given antibiotics, or those not back to baseline."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for febrile seizures."
+  }
+ ],
+ "tables": [
+  {
+   "id": "febrile-seizure-summary-matrix",
+   "title": "Febrile seizures Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Febrile seizure: seizure with fever of 38 °C or more in a child aged 6 to 60 months (some guidelines 6 months to 6 years) without CNS",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Airway, oxygen, recovery position, check blood glucose, and time the seizure.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Focus on finding the cause of fever (examination, urine test in infants, targeted tests). A simple febrile seizure carries the same risk of",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Midazolam (buccal or intranasal): 0.3 mg/kg once (max 10 mg); may repeat once after 5 to 10 minutes",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling a seizure as febrile without excluding meningitis, particularly in infants, children given antibiotics, or those not back to",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for febrile seizures."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "febrile-seizure-diagram",
+   "title": "Febrile seizures: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

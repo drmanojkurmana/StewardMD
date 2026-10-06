@@ -1,80 +1,175 @@
 {
-  "id": "fibroadenoma",
-  "name": "Fibroadenoma of the breast",
-  "aliases": [
-    "fibroadenoma",
-    "breast mouse",
-    "breast fibroadenoma"
+ "id": "fibroadenoma",
+ "name": "Fibroadenoma of the breast",
+ "aliases": [
+  "fibroadenoma",
+  "breast mouse",
+  "breast fibroadenoma"
+ ],
+ "class": "non_infective",
+ "system": "Breast",
+ "specialty": "Breast Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard breast surgery textbook and triple assessment guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A fibroadenoma is the commonest benign solid breast lump in young women, typically presenting in the late teens to early thirties",
+   "It classically feels smooth, firm, rounded, and highly mobile within the breast, earning the nickname breast mouse",
+   "It is usually painless and slow-growing, and may be found incidentally or during breast self-awareness",
+   "Diagnosis follows the principle of triple assessment, combining clinical examination, imaging, and needle biopsy where indicated",
+   "In women under about twenty-five with typical features and concordant imaging, tissue diagnosis may not always be required, but any diagnostic uncertainty warrants biopsy",
+   "Ultrasound is the imaging of choice in young women, typically showing a well-defined, oval, hypoechoic mass, with mammography reserved for older patients",
+   "Once benign diagnosis is confirmed, small asymptomatic fibroadenomas can be safely observed, with excision considered for large, enlarging, symptomatic, or patient-preference cases",
+   "A rapidly enlarging fibroadenoma-like mass, especially in an older woman, should raise the possibility of a phyllodes tumour and prompt further assessment"
   ],
-  "class": "non_infective",
-  "system": "Breast",
-  "specialty": "Breast Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard breast surgery textbook and triple assessment guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A fibroadenoma is the commonest benign solid breast lump in young women, typically presenting in the late teens to early thirties",
-      "It classically feels smooth, firm, rounded, and highly mobile within the breast, earning the nickname breast mouse",
-      "It is usually painless and slow-growing, and may be found incidentally or during breast self-awareness",
-      "Diagnosis follows the principle of triple assessment, combining clinical examination, imaging, and needle biopsy where indicated",
-      "In women under about twenty-five with typical features and concordant imaging, tissue diagnosis may not always be required, but any diagnostic uncertainty warrants biopsy",
-      "Ultrasound is the imaging of choice in young women, typically showing a well-defined, oval, hypoechoic mass, with mammography reserved for older patients",
-      "Once benign diagnosis is confirmed, small asymptomatic fibroadenomas can be safely observed, with excision considered for large, enlarging, symptomatic, or patient-preference cases",
-      "A rapidly enlarging fibroadenoma-like mass, especially in an older woman, should raise the possibility of a phyllodes tumour and prompt further assessment"
+  "pathophysiology": "A fibroadenoma is a benign biphasic tumour arising from the terminal duct lobular unit, in which both the glandular epithelium and the surrounding specialised stroma proliferate. It is regarded as an aberration of normal breast development rather than a true neoplasm, and its growth is influenced by oestrogen, which is why fibroadenomas typically appear during the reproductive years, may enlarge in pregnancy, and tend to involute after the menopause. The well-circumscribed, encapsulated architecture gives the characteristic smooth, freely mobile clinical lump. Malignant change within a fibroadenoma is very rare.",
+  "additionalDifferentials": [
+   "Phyllodes tumour",
+   "Breast cyst",
+   "Invasive breast carcinoma",
+   "Fibrocystic change with a dominant lump",
+   "Fat lobule or lipoma",
+   "Tubular adenoma or lactating adenoma"
+  ],
+  "additionalInvestigations": [
+   "Clinical breast examination as part of triple assessment",
+   "Ultrasound as first-line imaging in young women",
+   "Mammography in women over the appropriate age threshold or with atypical features",
+   "Core needle biopsy for tissue diagnosis where imaging or clinical features are not classically benign",
+   "Fine-needle aspiration cytology in selected settings",
+   "Interval imaging follow-up when a lesion is observed rather than excised"
+  ],
+  "redFlags": [
+   "Rapid enlargement suggesting a phyllodes tumour",
+   "Irregular, hard, or fixed mass or associated skin or nipple changes",
+   "Discordance between clinical, imaging, and pathological findings on triple assessment",
+   "A new discrete solid lump in an older woman that must be presumed malignant until proven otherwise",
+   "Associated axillary lymphadenopathy"
+  ],
+  "prognosis": "Fibroadenomas are benign with an excellent prognosis; many remain stable or regress over time, recurrence after complete excision is uncommon, and the associated increase in future breast cancer risk is minimal except in the uncommon complex subtype.",
+  "pitfalls": [
+   "Assuming any young woman's lump is a fibroadenoma without completing triple assessment",
+   "Missing a phyllodes tumour presenting as a rapidly growing fibroadenoma-like mass",
+   "Failing to biopsy a solid lump in an older woman where malignancy is more likely",
+   "Ignoring discordant triple assessment results",
+   "Over-treating small, asymptomatic, confirmed benign lesions with surgery"
+  ],
+  "references": [
+   "Standard breast surgery reference text on benign breast disease",
+   "Guidance on triple assessment of breast lumps"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm the benign diagnosis through triple assessment combining clinical examination, ultrasound and core needle biopsy where indicated",
+   "Reassure and offer conservative management with interval clinical and ultrasound follow-up for small, asymptomatic, typical fibroadenomas",
+   "Offer surgical excision for large, enlarging or symptomatic lesions, diagnostic uncertainty or patient preference",
+   "Consider minimally invasive options such as vacuum-assisted excision or cryoablation as alternatives to open surgery in suitable cases",
+   "Biopsy any lesion with atypical or discordant imaging, and follow complex fibroadenomas more closely given their small associated risk",
+   "Refer to a breast clinic for assessment of any new or changing breast lump"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "fibroadenoma-pathway",
+   "title": "Fibroadenoma of the breast: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A fibroadenoma is the commonest benign solid breast lump in young women, typically presenting in the late teens to early thirties",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid enlargement suggesting a phyllodes tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical breast examination as part of triple assessment, Ultrasound as first-line imaging in young women, Mammography in women over the appropriate age threshold or with atypical features"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm the benign diagnosis through triple assessment combining clinical examination, ultrasound and core needle biopsy where indicated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming any young woman's lump is a fibroadenoma without completing triple assessment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of fibroadenoma of the breast."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fibroadenoma-matrix",
+   "title": "Fibroadenoma of the breast: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A fibroadenoma is the commonest benign solid breast lump in young women, typically presenting in the late teens to early thirties",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A fibroadenoma is a benign biphasic tumour arising from the terminal duct lobular unit, in which both the glandular epithelium and the surrounding specialised stroma proliferate. It is regarded as an aberration of normal breast development rather than a true neoplasm, and its growth is influenced by oestrogen, which is why fibroadenomas typically appear during the reproductive years, may enlarge in pregnancy, and tend to involute after the menopause. The well-circumscribed, encapsulated architecture gives the characteristic smooth, freely mobile clinical lump. Malignant change within a fibroadenoma is very rare.",
-    "additionalDifferentials": [
-      "Phyllodes tumour",
-      "Breast cyst",
-      "Invasive breast carcinoma",
-      "Fibrocystic change with a dominant lump",
-      "Fat lobule or lipoma",
-      "Tubular adenoma or lactating adenoma"
+    [
+     "Key Investigations",
+     "Clinical breast examination as part of triple assessment, Ultrasound as first-line imaging in young women, Mammography in women",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical breast examination as part of triple assessment",
-      "Ultrasound as first-line imaging in young women",
-      "Mammography in women over the appropriate age threshold or with atypical features",
-      "Core needle biopsy for tissue diagnosis where imaging or clinical features are not classically benign",
-      "Fine-needle aspiration cytology in selected settings",
-      "Interval imaging follow-up when a lesion is observed rather than excised"
+    [
+     "Primary Differentials",
+     "Phyllodes tumour, Breast cyst, Invasive breast carcinoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid enlargement suggesting a phyllodes tumour",
-      "Irregular, hard, or fixed mass or associated skin or nipple changes",
-      "Discordance between clinical, imaging, and pathological findings on triple assessment",
-      "A new discrete solid lump in an older woman that must be presumed malignant until proven otherwise",
-      "Associated axillary lymphadenopathy"
+    [
+     "Management Strategy",
+     "Confirm the benign diagnosis through triple assessment combining clinical examination, ultrasound and core needle biopsy where",
+     "Core treatment modality"
     ],
-    "prognosis": "Fibroadenomas are benign with an excellent prognosis; many remain stable or regress over time, recurrence after complete excision is uncommon, and the associated increase in future breast cancer risk is minimal except in the uncommon complex subtype.",
-    "pitfalls": [
-      "Assuming any young woman's lump is a fibroadenoma without completing triple assessment",
-      "Missing a phyllodes tumour presenting as a rapidly growing fibroadenoma-like mass",
-      "Failing to biopsy a solid lump in an older woman where malignancy is more likely",
-      "Ignoring discordant triple assessment results",
-      "Over-treating small, asymptomatic, confirmed benign lesions with surgery"
-    ],
-    "references": [
-      "Standard breast surgery reference text on benign breast disease",
-      "Guidance on triple assessment of breast lumps"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm the benign diagnosis through triple assessment combining clinical examination, ultrasound and core needle biopsy where indicated",
-      "Reassure and offer conservative management with interval clinical and ultrasound follow-up for small, asymptomatic, typical fibroadenomas",
-      "Offer surgical excision for large, enlarging or symptomatic lesions, diagnostic uncertainty or patient preference",
-      "Consider minimally invasive options such as vacuum-assisted excision or cryoablation as alternatives to open surgery in suitable cases",
-      "Biopsy any lesion with atypical or discordant imaging, and follow complex fibroadenomas more closely given their small associated risk",
-      "Refer to a breast clinic for assessment of any new or changing breast lump"
+    [
+     "Clinical Pitfall",
+     "Assuming any young woman's lump is a fibroadenoma without completing triple assessment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for fibroadenoma of the breast."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fibroadenoma-diagram",
+   "title": "Fibroadenoma of the breast: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

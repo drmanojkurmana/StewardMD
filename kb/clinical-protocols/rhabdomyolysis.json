@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["rhabdo", "raised CK", "creatine kinase", "myoglobinuria", "crush injury", "crush syndrome", "pigment nephropathy", "exertional rhabdomyolysis", "McMahon score"],
+ "aliases": [
+  "rhabdo",
+  "raised CK",
+  "creatine kinase",
+  "myoglobinuria",
+  "crush injury",
+  "crush syndrome",
+  "pigment nephropathy",
+  "exertional rhabdomyolysis",
+  "McMahon score"
+ ],
  "summary": "Confirm with CK above 5 times normal, start early isotonic crystalloid titrated to urine output 1 to 3 mL/kg/h (up to 300 mL/h), treat hyperkalaemia, look for compartment syndrome, and avoid routine bicarbonate, mannitol and diuretics.",
  "sections": [
   {
@@ -80,13 +90,133 @@
   }
  ],
  "drugs": [
-  { "name": "Isotonic crystalloid (0.9% saline or Ringer lactate)", "dose": "Start about 400 mL/h IV, titrate 200 to 1000 mL/h to urine output 1 to 3 mL/kg/h (up to 300 mL/h)", "notes": "Continue until CK is reliably falling; reduce if overload or oliguric AKI." },
-  { "name": "Calcium gluconate 10%", "dose": "30 mL IV over 10 minutes", "notes": "Only for hyperkalaemia with ECG changes or symptomatic hypocalcaemia." },
-  { "name": "Soluble insulin with glucose", "dose": "10 units soluble insulin IV with 25 g glucose", "notes": "Hyperkalaemia; monitor glucose for 6 hours (see Hyperkalaemia protocol)." }
+  {
+   "name": "Isotonic crystalloid (0.9% saline or Ringer lactate)",
+   "dose": "Start about 400 mL/h IV, titrate 200 to 1000 mL/h to urine output 1 to 3 mL/kg/h (up to 300 mL/h)",
+   "notes": "Continue until CK is reliably falling; reduce if overload or oliguric AKI."
+  },
+  {
+   "name": "Calcium gluconate 10%",
+   "dose": "30 mL IV over 10 minutes",
+   "notes": "Only for hyperkalaemia with ECG changes or symptomatic hypocalcaemia."
+  },
+  {
+   "name": "Soluble insulin with glucose",
+   "dose": "10 units soluble insulin IV with 25 g glucose",
+   "notes": "Hyperkalaemia; monitor glucose for 6 hours (see Hyperkalaemia protocol)."
+  }
  ],
  "sources": [
-  { "org": "American Association for the Surgery of Trauma", "title": "Rhabdomyolysis: an AAST Critical Care Committee Clinical Consensus Document", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8804685/" },
-  { "org": "KDIGO", "title": "KDIGO 2026 Clinical Practice Guideline for AKI and AKD (public review draft): rhabdomyolysis-associated AKI", "year": 2026, "url": "https://kdigo.org/wp-content/uploads/2026/03/KDIGO-2026-AKI-AKD-Guideline-Public-Review-Draft-March-2026.pdf" }
+  {
+   "org": "American Association for the Surgery of Trauma",
+   "title": "Rhabdomyolysis: an AAST Critical Care Committee Clinical Consensus Document",
+   "year": 2022,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8804685/"
+  },
+  {
+   "org": "KDIGO",
+   "title": "KDIGO 2026 Clinical Practice Guideline for AKI and AKD (public review draft): rhabdomyolysis-associated AKI",
+   "year": 2026,
+   "url": "https://kdigo.org/wp-content/uploads/2026/03/KDIGO-2026-AKI-AKD-Guideline-Public-Review-Draft-March-2026.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "rhabdomyolysis-pathway",
+   "title": "Rhabdomyolysis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Diagnosis: CK above 5 times the upper limit of normal or above 1000 U/L, with muscle pain, weakness or swelling. Dark (tea-coloured) urine that is dipstick positive for blood without red cells on microscopy suggests myoglobinuria.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Start isotonic crystalloid early: 0.9% saline or Ringer lactate are both acceptable. Begin at about 400 mL/h and titrate between 200 and 1000 mL/h.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CK at presentation and serially (for example daily) until it has peaked and is reliably falling."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Do not routinely give sodium bicarbonate or mannitol: they have not reduced AKI or dialysis. Avoid loop diuretics except for fluid overload."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Hourly urine output (catheter), fluid balance and daily weight; examine for pulmonary oedema, especially in older adults and heart failure."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for rhabdomyolysis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rhabdomyolysis-summary-matrix",
+   "title": "Rhabdomyolysis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Diagnosis: CK above 5 times the upper limit of normal or above 1000 U/L, with muscle pain, weakness or swelling. Dark (tea-coloured) urine",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start isotonic crystalloid early: 0.9% saline or Ringer lactate are both acceptable. Begin at about 400 mL/h and titrate between 200 and",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CK at presentation and serially (for example daily) until it has peaked and is reliably falling.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Isotonic crystalloid (0.9% saline or Ringer lactate): Start about 400 mL/h IV, titrate 200 to 1000 mL/h to urine output 1 to 3 mL/kg/h (up",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing compartment syndrome in patients who cannot report pain.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for rhabdomyolysis (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rhabdomyolysis-diagram",
+   "title": "Rhabdomyolysis (adult): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

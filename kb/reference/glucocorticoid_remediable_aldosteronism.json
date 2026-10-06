@@ -1,85 +1,180 @@
 {
-  "id": "glucocorticoid_remediable_aldosteronism",
-  "name": "Glucocorticoid-Remediable Aldosteronism",
-  "aliases": [
-    "Familial Hyperaldosteronism Type 1",
-    "GRA",
-    "FH-1",
-    "Glucocorticoid-suppressible hyperaldosteronism"
+ "id": "glucocorticoid_remediable_aldosteronism",
+ "name": "Glucocorticoid-Remediable Aldosteronism",
+ "aliases": [
+  "Familial Hyperaldosteronism Type 1",
+  "GRA",
+  "FH-1",
+  "Glucocorticoid-suppressible hyperaldosteronism"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Endocrinology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest monogenic form of primary aldosteronism; autosomal dominant, caused by a chimeric CYP11B1/CYP11B2 gene that places aldosterone synthase under ACTH control.",
+   "Aldosterone secretion becomes regulated by ACTH rather than by angiotensin II and potassium, so it is suppressible by exogenous glucocorticoids, which underpins both the diagnosis and the treatment.",
+   "Presents typically as early-onset hypertension in childhood or young adulthood, often with a strong family history of early, severe hypertension.",
+   "Hypokalaemia is frequently mild or absent, unlike sporadic aldosterone-producing adenoma, so normal potassium should not exclude the diagnosis.",
+   "Characteristically associated with early haemorrhagic stroke from intracranial (berry) aneurysms, a key reason to screen affected families with cerebral vascular imaging.",
+   "Biochemistry shows raised aldosterone with suppressed renin (an elevated aldosterone-to-renin ratio) and markedly increased hybrid steroids 18-hydroxycortisol and 18-oxocortisol.",
+   "Confirmed by genetic testing for the chimeric gene using long-PCR or Southern blot; the older dexamethasone suppression test is now largely superseded.",
+   "Treated with the lowest effective glucocorticoid dose to suppress ACTH, often combined with a mineralocorticoid receptor antagonist; over-treatment risks iatrogenic Cushingoid effects and growth suppression, especially in children."
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Endocrinology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest monogenic form of primary aldosteronism; autosomal dominant, caused by a chimeric CYP11B1/CYP11B2 gene that places aldosterone synthase under ACTH control.",
-      "Aldosterone secretion becomes regulated by ACTH rather than by angiotensin II and potassium, so it is suppressible by exogenous glucocorticoids, which underpins both the diagnosis and the treatment.",
-      "Presents typically as early-onset hypertension in childhood or young adulthood, often with a strong family history of early, severe hypertension.",
-      "Hypokalaemia is frequently mild or absent, unlike sporadic aldosterone-producing adenoma, so normal potassium should not exclude the diagnosis.",
-      "Characteristically associated with early haemorrhagic stroke from intracranial (berry) aneurysms, a key reason to screen affected families with cerebral vascular imaging.",
-      "Biochemistry shows raised aldosterone with suppressed renin (an elevated aldosterone-to-renin ratio) and markedly increased hybrid steroids 18-hydroxycortisol and 18-oxocortisol.",
-      "Confirmed by genetic testing for the chimeric gene using long-PCR or Southern blot; the older dexamethasone suppression test is now largely superseded.",
-      "Treated with the lowest effective glucocorticoid dose to suppress ACTH, often combined with a mineralocorticoid receptor antagonist; over-treatment risks iatrogenic Cushingoid effects and growth suppression, especially in children."
+  "pathophysiology": "Glucocorticoid-remediable aldosteronism arises from unequal crossing-over between two highly homologous, adjacently located genes on the long arm of chromosome 8: CYP11B1 (11-beta-hydroxylase, normally expressed in the ACTH-regulated zona fasciculata) and CYP11B2 (aldosterone synthase, normally expressed in the angiotensin II- and potassium-regulated zona glomerulosa). The resulting chimeric gene fuses the ACTH-responsive regulatory (promoter) region of CYP11B1 to the coding sequence of CYP11B2, so aldosterone synthase activity is expressed ectopically throughout the zona fasciculata and is driven by ACTH instead of the renin-angiotensin system. Aldosterone production therefore rises and falls with ACTH and the diurnal cortisol rhythm and is suppressible by exogenous glucocorticoids. Ectopic aldosterone synthase also acts on cortisol and its precursors in the zona fasciculata to generate the hybrid steroids 18-hydroxycortisol and 18-oxocortisol, which are diagnostic hallmarks. Chronic mineralocorticoid excess causes renal sodium retention, volume expansion, renin suppression and hypertension, while associated cerebrovascular fragility predisposes to intracranial aneurysm formation and haemorrhage.",
+  "additionalDifferentials": [
+   "Familial hyperaldosteronism type 2, frequently linked to CLCN2 mutations",
+   "Familial hyperaldosteronism type 3 (germline KCNJ5 mutation), which can cause severe childhood hypertension with adrenal hyperplasia",
+   "Familial hyperaldosteronism type 4 (CACNA1H mutation)",
+   "Sporadic primary aldosteronism, including aldosterone-producing adenoma (Conn syndrome) and bilateral adrenal hyperplasia",
+   "Liddle syndrome (activating epithelial sodium channel mutations; low aldosterone and low renin)",
+   "Apparent mineralocorticoid excess (11-beta-hydroxysteroid dehydrogenase type 2 deficiency)",
+   "Other monogenic or secondary hypertension, including phaeochromocytoma and renovascular disease"
+  ],
+  "additionalInvestigations": [
+   "Plasma aldosterone and renin with calculation of the aldosterone-to-renin ratio",
+   "Urinary or plasma 18-hydroxycortisol and 18-oxocortisol (hybrid steroids)",
+   "Genetic testing for the CYP11B1/CYP11B2 chimeric gene, which is definitive",
+   "Serum potassium and acid-base status, which may show hypokalaemic metabolic alkalosis but is often normal",
+   "Cerebral vascular imaging (MR or CT angiography) to screen for intracranial aneurysms",
+   "Adrenal imaging to help exclude an adenoma when the diagnosis is uncertain",
+   "Ambulatory blood pressure monitoring and assessment for hypertensive end-organ damage"
+  ],
+  "redFlags": [
+   "Early-onset or treatment-resistant hypertension with a family history of hypertension or early stroke",
+   "Personal or family history of cerebral haemorrhage or a known intracranial aneurysm",
+   "Severe hypertension in a child or young adult",
+   "Hypertension with suppressed renin and elevated aldosterone",
+   "Features of a hypertensive emergency, such as encephalopathy or cardiac or renal compromise"
+  ],
+  "prognosis": "Blood pressure and biochemistry usually respond well to targeted therapy and the outlook is favourable when treatment starts early. The principal threat to life is cerebrovascular haemorrhage from intracranial aneurysms, so family screening and aneurysm surveillance are important.",
+  "pitfalls": [
+   "Excluding the diagnosis because potassium is normal, when hypokalaemia is frequently absent.",
+   "Not considering the diagnosis in a young hypertensive patient with a suggestive family history.",
+   "Using excessive glucocorticoid doses and causing iatrogenic Cushing syndrome and growth suppression in children.",
+   "Failing to screen affected relatives, thereby missing treatable hypertension and silent aneurysms.",
+   "Relying solely on adrenal imaging, which is often normal and does not exclude the diagnosis."
+  ],
+  "references": [
+   "Endocrine society clinical practice guidance on primary aldosteronism",
+   "Standard endocrinology textbooks",
+   "Reference reviews on monogenic and familial hypertension"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Suppress the ACTH-driven aldosterone excess with a low-dose exogenous glucocorticoid such as dexamethasone or prednisolone, the disease-specific mainstay that normalises aldosterone and lowers blood pressure",
+   "Where glucocorticoid alone is insufficient or to minimise iatrogenic Cushingoid effects, add a mineralocorticoid receptor antagonist such as spironolactone or eplerenone, or amiloride, to control hypertension and correct hypokalaemia",
+   "Titrate to the lowest effective glucocorticoid dose to avoid growth suppression in children and iatrogenic hypercortisolism",
+   "Monitor blood pressure, plasma potassium and the aldosterone-to-renin ratio, and in children follow growth and bone health for signs of over-suppression",
+   "Screen for and undertake surveillance of intracranial (berry) aneurysms with cerebral MR or CT angiography, given the risk of early haemorrhagic stroke",
+   "Manage hypertensive emergencies with standard antihypertensive therapy while continuing glucocorticoid suppression",
+   "Offer genetic counselling for autosomal dominant inheritance and test first-degree relatives for the chimeric CYP11B1/CYP11B2 gene, screening affected members for aneurysms"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "glucocorticoid_remediable_aldosteronism-pathway",
+   "title": "Glucocorticoid-Remediable Aldosteronism: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest monogenic form of primary aldosteronism; autosomal dominant, caused by a chimeric CYP11B1/CYP11B2 gene that places aldosterone synthase under ACTH control.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Early-onset or treatment-resistant hypertension with a family history of hypertension or early stroke",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma aldosterone and renin with calculation of the aldosterone-to-renin ratio, Urinary or plasma 18-hydroxycortisol and 18-oxocortisol (hybrid steroids), Genetic testing for the CYP11B1/CYP11B2 chimeric gene, which is"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Suppress the ACTH-driven aldosterone excess with a low-dose exogenous glucocorticoid such as dexamethasone or prednisolone, the disease-specific mainstay that normalises aldosterone and lowers blood pressure"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis because potassium is normal, when hypokalaemia is frequently absent."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of glucocorticoid-remediable aldosteronism."
+  }
+ ],
+ "tables": [
+  {
+   "id": "glucocorticoid_remediable_aldosteronism-matrix",
+   "title": "Glucocorticoid-Remediable Aldosteronism: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest monogenic form of primary aldosteronism; autosomal dominant, caused by a chimeric CYP11B1/CYP11B2 gene that places",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Glucocorticoid-remediable aldosteronism arises from unequal crossing-over between two highly homologous, adjacently located genes on the long arm of chromosome 8: CYP11B1 (11-beta-hydroxylase, normally expressed in the ACTH-regulated zona fasciculata) and CYP11B2 (aldosterone synthase, normally expressed in the angiotensin II- and potassium-regulated zona glomerulosa). The resulting chimeric gene fuses the ACTH-responsive regulatory (promoter) region of CYP11B1 to the coding sequence of CYP11B2, so aldosterone synthase activity is expressed ectopically throughout the zona fasciculata and is driven by ACTH instead of the renin-angiotensin system. Aldosterone production therefore rises and falls with ACTH and the diurnal cortisol rhythm and is suppressible by exogenous glucocorticoids. Ectopic aldosterone synthase also acts on cortisol and its precursors in the zona fasciculata to generate the hybrid steroids 18-hydroxycortisol and 18-oxocortisol, which are diagnostic hallmarks. Chronic mineralocorticoid excess causes renal sodium retention, volume expansion, renin suppression and hypertension, while associated cerebrovascular fragility predisposes to intracranial aneurysm formation and haemorrhage.",
-    "additionalDifferentials": [
-      "Familial hyperaldosteronism type 2, frequently linked to CLCN2 mutations",
-      "Familial hyperaldosteronism type 3 (germline KCNJ5 mutation), which can cause severe childhood hypertension with adrenal hyperplasia",
-      "Familial hyperaldosteronism type 4 (CACNA1H mutation)",
-      "Sporadic primary aldosteronism, including aldosterone-producing adenoma (Conn syndrome) and bilateral adrenal hyperplasia",
-      "Liddle syndrome (activating epithelial sodium channel mutations; low aldosterone and low renin)",
-      "Apparent mineralocorticoid excess (11-beta-hydroxysteroid dehydrogenase type 2 deficiency)",
-      "Other monogenic or secondary hypertension, including phaeochromocytoma and renovascular disease"
+    [
+     "Key Investigations",
+     "Plasma aldosterone and renin with calculation of the aldosterone-to-renin ratio, Urinary or plasma 18-hydroxycortisol and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma aldosterone and renin with calculation of the aldosterone-to-renin ratio",
-      "Urinary or plasma 18-hydroxycortisol and 18-oxocortisol (hybrid steroids)",
-      "Genetic testing for the CYP11B1/CYP11B2 chimeric gene, which is definitive",
-      "Serum potassium and acid-base status, which may show hypokalaemic metabolic alkalosis but is often normal",
-      "Cerebral vascular imaging (MR or CT angiography) to screen for intracranial aneurysms",
-      "Adrenal imaging to help exclude an adenoma when the diagnosis is uncertain",
-      "Ambulatory blood pressure monitoring and assessment for hypertensive end-organ damage"
+    [
+     "Primary Differentials",
+     "Familial hyperaldosteronism type 2, frequently linked to CLCN2 mutations, Familial hyperaldosteronism type 3 (germline KCNJ5",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Early-onset or treatment-resistant hypertension with a family history of hypertension or early stroke",
-      "Personal or family history of cerebral haemorrhage or a known intracranial aneurysm",
-      "Severe hypertension in a child or young adult",
-      "Hypertension with suppressed renin and elevated aldosterone",
-      "Features of a hypertensive emergency, such as encephalopathy or cardiac or renal compromise"
+    [
+     "Management Strategy",
+     "Suppress the ACTH-driven aldosterone excess with a low-dose exogenous glucocorticoid such as dexamethasone or prednisolone, the",
+     "Core treatment modality"
     ],
-    "prognosis": "Blood pressure and biochemistry usually respond well to targeted therapy and the outlook is favourable when treatment starts early. The principal threat to life is cerebrovascular haemorrhage from intracranial aneurysms, so family screening and aneurysm surveillance are important.",
-    "pitfalls": [
-      "Excluding the diagnosis because potassium is normal, when hypokalaemia is frequently absent.",
-      "Not considering the diagnosis in a young hypertensive patient with a suggestive family history.",
-      "Using excessive glucocorticoid doses and causing iatrogenic Cushing syndrome and growth suppression in children.",
-      "Failing to screen affected relatives, thereby missing treatable hypertension and silent aneurysms.",
-      "Relying solely on adrenal imaging, which is often normal and does not exclude the diagnosis."
-    ],
-    "references": [
-      "Endocrine society clinical practice guidance on primary aldosteronism",
-      "Standard endocrinology textbooks",
-      "Reference reviews on monogenic and familial hypertension"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Suppress the ACTH-driven aldosterone excess with a low-dose exogenous glucocorticoid such as dexamethasone or prednisolone, the disease-specific mainstay that normalises aldosterone and lowers blood pressure",
-      "Where glucocorticoid alone is insufficient or to minimise iatrogenic Cushingoid effects, add a mineralocorticoid receptor antagonist such as spironolactone or eplerenone, or amiloride, to control hypertension and correct hypokalaemia",
-      "Titrate to the lowest effective glucocorticoid dose to avoid growth suppression in children and iatrogenic hypercortisolism",
-      "Monitor blood pressure, plasma potassium and the aldosterone-to-renin ratio, and in children follow growth and bone health for signs of over-suppression",
-      "Screen for and undertake surveillance of intracranial (berry) aneurysms with cerebral MR or CT angiography, given the risk of early haemorrhagic stroke",
-      "Manage hypertensive emergencies with standard antihypertensive therapy while continuing glucocorticoid suppression",
-      "Offer genetic counselling for autosomal dominant inheritance and test first-degree relatives for the chimeric CYP11B1/CYP11B2 gene, screening affected members for aneurysms"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis because potassium is normal, when hypokalaemia is frequently absent.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for glucocorticoid-remediable aldosteronism."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "glucocorticoid-remediable-aldosteronism-diagram",
+   "title": "Glucocorticoid-Remediable Aldosteronism: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

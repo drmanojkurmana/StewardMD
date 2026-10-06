@@ -1,88 +1,183 @@
 {
-  "id": "histiocytic_sarcoma",
-  "name": "Histiocytic sarcoma",
-  "aliases": [
-    "HS",
-    "malignant histiocytosis (historical)",
-    "true histiocytic sarcoma",
-    "CD163-positive histiocytic malignancy"
+ "id": "histiocytic_sarcoma",
+ "name": "Histiocytic sarcoma",
+ "aliases": [
+  "HS",
+  "malignant histiocytosis (historical)",
+  "true histiocytic sarcoma",
+  "CD163-positive histiocytic malignancy"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Haematologic malignancy",
+ "specialty": "Haematology / Haemato-oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Haematolymphoid Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare aggressive malignancy of cells showing morphological and immunophenotypic features of mature tissue macrophages (histiocytes)",
+   "May present at nodal, extranodal or disseminated sites, with common involvement of the gastrointestinal tract, skin, soft tissue and lymph nodes",
+   "Systemic symptoms such as fever, weight loss and cytopenias are frequent, and disseminated disease carries a poor outlook",
+   "The tumour cells are large and pleomorphic and express histiocytic markers such as CD163, CD68 and lysozyme while lacking B-cell, T-cell, dendritic-cell, melanocytic and epithelial markers",
+   "It can arise in association with, or transform from, other haematological neoplasms such as follicular lymphoma or chronic lymphocytic leukaemia, sometimes sharing clonal genetic features",
+   "Recurrent activating mutations in the MAPK pathway, including BRAF and other kinase genes, occur in a proportion of cases and may offer targeted-therapy opportunities",
+   "Localised disease may be treated with surgery and radiotherapy, while disseminated disease requires systemic chemotherapy, generally with limited durable success"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Haematologic malignancy",
-  "specialty": "Haematology / Haemato-oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Haematolymphoid Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare aggressive malignancy of cells showing morphological and immunophenotypic features of mature tissue macrophages (histiocytes)",
-      "May present at nodal, extranodal or disseminated sites, with common involvement of the gastrointestinal tract, skin, soft tissue and lymph nodes",
-      "Systemic symptoms such as fever, weight loss and cytopenias are frequent, and disseminated disease carries a poor outlook",
-      "The tumour cells are large and pleomorphic and express histiocytic markers such as CD163, CD68 and lysozyme while lacking B-cell, T-cell, dendritic-cell, melanocytic and epithelial markers",
-      "It can arise in association with, or transform from, other haematological neoplasms such as follicular lymphoma or chronic lymphocytic leukaemia, sometimes sharing clonal genetic features",
-      "Recurrent activating mutations in the MAPK pathway, including BRAF and other kinase genes, occur in a proportion of cases and may offer targeted-therapy opportunities",
-      "Localised disease may be treated with surgery and radiotherapy, while disseminated disease requires systemic chemotherapy, generally with limited durable success"
+  "pathophysiology": "Histiocytic sarcoma is a clonal proliferation of cells committed to the macrophage/histiocyte lineage, retaining the antigen-expression profile of mature tissue macrophages such as CD163 and CD68. In a subset of cases the tumour is clonally related to a preceding or concurrent lymphoid neoplasm, reflecting a phenomenon of lineage plasticity or transdifferentiation in which a committed lymphoid clone acquires a histiocytic phenotype while sharing molecular hallmarks such as immunoglobulin gene rearrangements. Recurrent activating alterations of the RAS-RAF-MEK-ERK (MAPK) signalling pathway drive proliferation in many cases. The malignant histiocytes infiltrate tissues destructively and disseminate widely, producing the aggressive, often treatment-resistant clinical behaviour.",
+  "additionalDifferentials": [
+   "Diffuse large B-cell lymphoma or anaplastic large cell lymphoma",
+   "Follicular and interdigitating dendritic cell sarcoma",
+   "Langerhans cell histiocytosis and Langerhans cell sarcoma",
+   "Metastatic carcinoma or melanoma",
+   "Reactive histiocytic proliferations and haemophagocytic lymphohistiocytosis",
+   "Undifferentiated pleomorphic sarcoma"
+  ],
+  "additionalInvestigations": [
+   "Biopsy with immunohistochemistry showing CD163, CD68 and lysozyme positivity and absence of lymphoid, dendritic and epithelial markers",
+   "Clonality and molecular studies, including assessment of relationship to any associated lymphoid neoplasm",
+   "Molecular testing for BRAF and other MAPK-pathway mutations to guide targeted therapy",
+   "PET-CT and cross-sectional imaging for staging",
+   "Bone marrow examination and full blood count",
+   "Exclusion of reactive histiocytic and haemophagocytic conditions"
+  ],
+  "redFlags": [
+   "Rapidly progressive disseminated disease with systemic symptoms",
+   "Bone marrow failure with severe cytopenias",
+   "Bulky or destructive extranodal masses causing organ compromise",
+   "Features of haemophagocytic lymphohistiocytosis complicating the disease",
+   "Central nervous system involvement"
+  ],
+  "prognosis": "Localised histiocytic sarcoma may be controlled with surgery and radiotherapy, but disseminated or high-stage disease is aggressive with poor survival despite chemotherapy; identification of targetable MAPK-pathway mutations offers a potential avenue for improved outcomes in selected patients.",
+  "pitfalls": [
+   "Misdiagnosing the tumour as anaplastic lymphoma, carcinoma or dendritic-cell sarcoma without a full histiocytic marker panel",
+   "Failing to recognise clonal relationship to an associated lymphoid neoplasm",
+   "Overlooking targetable BRAF or other MAPK-pathway mutations",
+   "Confusing malignant disease with reactive histiocytosis or haemophagocytic lymphohistiocytosis",
+   "Underestimating the aggressive behaviour of disseminated disease"
+  ],
+  "references": [
+   "WHO Classification of Haematolymphoid Tumours",
+   "British and international guidance on histiocytic and dendritic neoplasms"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Localised, resectable disease is treated with curative intent using complete surgical resection as primary treatment",
+   "Adjuvant radiotherapy is considered after surgery for close or positive margins, bulky lesions, or sites where wide resection is not feasible",
+   "Locally advanced or marginally resectable disease can be managed with radiotherapy alone or combined with systemic therapy for local control when surgery would be disfiguring or incomplete",
+   "Disseminated, multifocal, or high-stage disease shifts intent to disease control, with systemic therapy as the mainstay",
+   "First-line systemic therapy for disseminated disease is typically anthracycline-based combination chemotherapy, similar to regimens used in aggressive lymphoma or soft tissue sarcoma",
+   "On progression, alternative cytotoxic combinations used in aggressive lymphoma or sarcoma can be considered",
+   "Tumours with activating MAPK-pathway mutations (such as BRAF) may be treated with BRAF-directed or combined BRAF/MEK-directed targeted therapy",
+   "Any coexisting lymphoid clone in tumours arising from or associated with another haematological neoplasm should be assessed and treated, since it may drive relapse independently",
+   "Clinical trial enrolment should be considered at any line given the absence of a standard-of-care regimen established by controlled trials",
+   "Monitoring includes baseline and interval cross-sectional and or PET imaging, with frequency guided by initial stage and risk",
+   "Regular full blood count is used to monitor for disease- and treatment-related cytopenias and marrow involvement",
+   "Clinical monitoring for systemic B symptoms and for features of secondary haemophagocytic lymphohistiocytosis is recommended, as this can complicate the disease course",
+   "Referral to a haemato-oncology or sarcoma multidisciplinary team with expert haematopathology review is warranted for any suspected or confirmed case",
+   "Refer for molecular testing of BRAF and other MAPK-pathway alterations at diagnosis or relapse, and refer early to a centre with clinical trial access given generally poor outcomes in disseminated disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "histiocytic_sarcoma-pathway",
+   "title": "Histiocytic sarcoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare aggressive malignancy of cells showing morphological and immunophenotypic features of mature tissue macrophages (histiocytes)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive disseminated disease with systemic symptoms",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Biopsy with immunohistochemistry showing CD163, CD68 and lysozyme positivity and absence of lymphoid, dendritic and epithelial markers, Clonality and molecular studies, including assessment of relationship to any"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Localised, resectable disease is treated with curative intent using complete surgical resection as primary treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the tumour as anaplastic lymphoma, carcinoma or dendritic-cell sarcoma without a full histiocytic marker panel"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of histiocytic sarcoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "histiocytic_sarcoma-matrix",
+   "title": "Histiocytic sarcoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare aggressive malignancy of cells showing morphological and immunophenotypic features of mature tissue macrophages",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Histiocytic sarcoma is a clonal proliferation of cells committed to the macrophage/histiocyte lineage, retaining the antigen-expression profile of mature tissue macrophages such as CD163 and CD68. In a subset of cases the tumour is clonally related to a preceding or concurrent lymphoid neoplasm, reflecting a phenomenon of lineage plasticity or transdifferentiation in which a committed lymphoid clone acquires a histiocytic phenotype while sharing molecular hallmarks such as immunoglobulin gene rearrangements. Recurrent activating alterations of the RAS-RAF-MEK-ERK (MAPK) signalling pathway drive proliferation in many cases. The malignant histiocytes infiltrate tissues destructively and disseminate widely, producing the aggressive, often treatment-resistant clinical behaviour.",
-    "additionalDifferentials": [
-      "Diffuse large B-cell lymphoma or anaplastic large cell lymphoma",
-      "Follicular and interdigitating dendritic cell sarcoma",
-      "Langerhans cell histiocytosis and Langerhans cell sarcoma",
-      "Metastatic carcinoma or melanoma",
-      "Reactive histiocytic proliferations and haemophagocytic lymphohistiocytosis",
-      "Undifferentiated pleomorphic sarcoma"
+    [
+     "Key Investigations",
+     "Biopsy with immunohistochemistry showing CD163, CD68 and lysozyme positivity and absence of lymphoid, dendritic and epithelial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Biopsy with immunohistochemistry showing CD163, CD68 and lysozyme positivity and absence of lymphoid, dendritic and epithelial markers",
-      "Clonality and molecular studies, including assessment of relationship to any associated lymphoid neoplasm",
-      "Molecular testing for BRAF and other MAPK-pathway mutations to guide targeted therapy",
-      "PET-CT and cross-sectional imaging for staging",
-      "Bone marrow examination and full blood count",
-      "Exclusion of reactive histiocytic and haemophagocytic conditions"
+    [
+     "Primary Differentials",
+     "Diffuse large B-cell lymphoma or anaplastic large cell lymphoma, Follicular and interdigitating dendritic cell sarcoma,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive disseminated disease with systemic symptoms",
-      "Bone marrow failure with severe cytopenias",
-      "Bulky or destructive extranodal masses causing organ compromise",
-      "Features of haemophagocytic lymphohistiocytosis complicating the disease",
-      "Central nervous system involvement"
+    [
+     "Management Strategy",
+     "Localised, resectable disease is treated with curative intent using complete surgical resection as primary treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Localised histiocytic sarcoma may be controlled with surgery and radiotherapy, but disseminated or high-stage disease is aggressive with poor survival despite chemotherapy; identification of targetable MAPK-pathway mutations offers a potential avenue for improved outcomes in selected patients.",
-    "pitfalls": [
-      "Misdiagnosing the tumour as anaplastic lymphoma, carcinoma or dendritic-cell sarcoma without a full histiocytic marker panel",
-      "Failing to recognise clonal relationship to an associated lymphoid neoplasm",
-      "Overlooking targetable BRAF or other MAPK-pathway mutations",
-      "Confusing malignant disease with reactive histiocytosis or haemophagocytic lymphohistiocytosis",
-      "Underestimating the aggressive behaviour of disseminated disease"
-    ],
-    "references": [
-      "WHO Classification of Haematolymphoid Tumours",
-      "British and international guidance on histiocytic and dendritic neoplasms"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Localised, resectable disease is treated with curative intent using complete surgical resection as primary treatment",
-      "Adjuvant radiotherapy is considered after surgery for close or positive margins, bulky lesions, or sites where wide resection is not feasible",
-      "Locally advanced or marginally resectable disease can be managed with radiotherapy alone or combined with systemic therapy for local control when surgery would be disfiguring or incomplete",
-      "Disseminated, multifocal, or high-stage disease shifts intent to disease control, with systemic therapy as the mainstay",
-      "First-line systemic therapy for disseminated disease is typically anthracycline-based combination chemotherapy, similar to regimens used in aggressive lymphoma or soft tissue sarcoma",
-      "On progression, alternative cytotoxic combinations used in aggressive lymphoma or sarcoma can be considered",
-      "Tumours with activating MAPK-pathway mutations (such as BRAF) may be treated with BRAF-directed or combined BRAF/MEK-directed targeted therapy",
-      "Any coexisting lymphoid clone in tumours arising from or associated with another haematological neoplasm should be assessed and treated, since it may drive relapse independently",
-      "Clinical trial enrolment should be considered at any line given the absence of a standard-of-care regimen established by controlled trials",
-      "Monitoring includes baseline and interval cross-sectional and or PET imaging, with frequency guided by initial stage and risk",
-      "Regular full blood count is used to monitor for disease- and treatment-related cytopenias and marrow involvement",
-      "Clinical monitoring for systemic B symptoms and for features of secondary haemophagocytic lymphohistiocytosis is recommended, as this can complicate the disease course",
-      "Referral to a haemato-oncology or sarcoma multidisciplinary team with expert haematopathology review is warranted for any suspected or confirmed case",
-      "Refer for molecular testing of BRAF and other MAPK-pathway alterations at diagnosis or relapse, and refer early to a centre with clinical trial access given generally poor outcomes in disseminated disease"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the tumour as anaplastic lymphoma, carcinoma or dendritic-cell sarcoma without a full histiocytic marker panel",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for histiocytic sarcoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "histiocytic-sarcoma-diagram",
+   "title": "Histiocytic sarcoma: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

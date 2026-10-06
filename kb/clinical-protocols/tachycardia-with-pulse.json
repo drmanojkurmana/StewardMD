@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, CCU, ICU",
- "aliases": ["tachyarrhythmia", "SVT", "PSVT", "AF with RVR", "fast AF", "atrial flutter", "VT with pulse", "broad complex tachycardia", "narrow complex tachycardia", "WCT", "synchronised cardioversion", "adenosine"],
+ "aliases": [
+  "tachyarrhythmia",
+  "SVT",
+  "PSVT",
+  "AF with RVR",
+  "fast AF",
+  "atrial flutter",
+  "VT with pulse",
+  "broad complex tachycardia",
+  "narrow complex tachycardia",
+  "WCT",
+  "synchronised cardioversion",
+  "adenosine"
+ ],
  "summary": "Unstable tachyarrhythmia (usually 150/min or more with shock, altered mental state, ischaemic pain or acute heart failure) needs synchronised cardioversion under sedation. Stable patients are treated by QRS width and regularity: vagal manoeuvres and adenosine for regular narrow complex, rate control for AF, and antiarrhythmics or elective cardioversion for broad complex.",
  "sections": [
   {
@@ -84,18 +97,160 @@
   }
  ],
  "drugs": [
-  { "name": "Adenosine", "dose": "6 mg rapid IV push with 20 mL saline flush; 12 mg if no effect", "notes": "3 mg via central line, after heart transplant or with dipyridamole. Regular rhythms only." },
-  { "name": "Amiodarone", "dose": "Stable VT (AHA): 150 mg IV over 10 minutes, repeat if needed, then 1 mg/min for 6 hours. Failed cardioversion (ERC): 300 mg IV over 10 to 20 minutes, then 900 mg over 24 hours", "notes": "Give via a large or central vein; watch for hypotension and bradycardia." },
-  { "name": "Procainamide", "dose": "20 to 50 mg/min IV until arrhythmia suppressed, hypotension, QRS widens over 50% or 17 mg/kg given; maintenance 1 to 4 mg/min", "notes": "Avoid with prolonged QT or heart failure. Limited availability in India." },
-  { "name": "Diltiazem", "dose": "0.25 mg/kg IV over 2 minutes (usually 15 to 20 mg); if needed after 15 minutes, 0.35 mg/kg (20 to 25 mg)", "notes": "Rate control of AF or flutter, or SVT after adenosine. Avoid in HFrEF, hypotension and pre-excitation." },
-  { "name": "Metoprolol", "dose": "2.5 to 5 mg IV over 2 minutes, repeated every 5 to 10 minutes to a maximum of 15 mg", "notes": "Avoid in acute decompensated heart failure, severe asthma and pre-excitation." },
-  { "name": "Magnesium sulfate", "dose": "2 g IV over 10 minutes", "notes": "Torsades de pointes or hypomagnesaemia." }
+  {
+   "name": "Adenosine",
+   "dose": "6 mg rapid IV push with 20 mL saline flush; 12 mg if no effect",
+   "notes": "3 mg via central line, after heart transplant or with dipyridamole. Regular rhythms only."
+  },
+  {
+   "name": "Amiodarone",
+   "dose": "Stable VT (AHA): 150 mg IV over 10 minutes, repeat if needed, then 1 mg/min for 6 hours. Failed cardioversion (ERC): 300 mg IV over 10 to 20 minutes, then 900 mg over 24 hours",
+   "notes": "Give via a large or central vein; watch for hypotension and bradycardia."
+  },
+  {
+   "name": "Procainamide",
+   "dose": "20 to 50 mg/min IV until arrhythmia suppressed, hypotension, QRS widens over 50% or 17 mg/kg given; maintenance 1 to 4 mg/min",
+   "notes": "Avoid with prolonged QT or heart failure. Limited availability in India."
+  },
+  {
+   "name": "Diltiazem",
+   "dose": "0.25 mg/kg IV over 2 minutes (usually 15 to 20 mg); if needed after 15 minutes, 0.35 mg/kg (20 to 25 mg)",
+   "notes": "Rate control of AF or flutter, or SVT after adenosine. Avoid in HFrEF, hypotension and pre-excitation."
+  },
+  {
+   "name": "Metoprolol",
+   "dose": "2.5 to 5 mg IV over 2 minutes, repeated every 5 to 10 minutes to a maximum of 15 mg",
+   "notes": "Avoid in acute decompensated heart failure, severe asthma and pre-excitation."
+  },
+  {
+   "name": "Magnesium sulfate",
+   "dose": "2 g IV over 10 minutes",
+   "notes": "Torsades de pointes or hypomagnesaemia."
+  }
  ],
  "sources": [
-  { "org": "American Heart Association", "title": "Part 9: Adult Advanced Life Support. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" },
-  { "org": "American Heart Association", "title": "Adult Tachyarrhythmia With a Pulse Algorithm (2025)", "year": 2025, "url": "https://cpr.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Algorithms/Algorithm-ACLS-Tachycardia-250514.pdf?sc_lang=en" },
-  { "org": "European Resuscitation Council", "title": "European Resuscitation Council Guidelines 2025 Adult Advanced Life Support", "year": 2025, "url": "https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext" },
-  { "org": "Resuscitation Council UK", "title": "2025 Adult advanced life support guidelines (peri-arrest arrhythmias)", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines" }
+  {
+   "org": "American Heart Association",
+   "title": "Part 9: Adult Advanced Life Support. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care",
+   "year": 2025,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376"
+  },
+  {
+   "org": "American Heart Association",
+   "title": "Adult Tachyarrhythmia With a Pulse Algorithm (2025)",
+   "year": 2025,
+   "url": "https://cpr.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Algorithms/Algorithm-ACLS-Tachycardia-250514.pdf?sc_lang=en"
+  },
+  {
+   "org": "European Resuscitation Council",
+   "title": "European Resuscitation Council Guidelines 2025 Adult Advanced Life Support",
+   "year": 2025,
+   "url": "https://www.resuscitationjournal.com/article/S0300-9572(25)00281-3/fulltext"
+  },
+  {
+   "org": "Resuscitation Council UK",
+   "title": "2025 Adult advanced life support guidelines (peri-arrest arrhythmias)",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "tachycardia-with-pulse-pathway",
+   "title": "Tachycardia with a pulse (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Rate is typically 150/min or more when the arrhythmia itself causes instability. At lower rates, sinus tachycardia from sepsis, bleeding, hypoxia, pain, PE or thyrotoxicosis is more likely: treat the cause, not the rate.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "ABC, oxygen if hypoxaemic, monitor, IV access, BP, SpO2; record a rhythm strip during every intervention.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "12-lead ECG before and after conversion (pre-excitation, QT, ischaemia)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Seek expert help. Monomorphic VT with structural heart disease: elective synchronised cardioversion under sedation is often preferred (ERC)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Rate-control drugs for compensatory sinus tachycardia (sepsis, bleeding, PE)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for tachycardia with a pulse (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tachycardia-with-pulse-summary-matrix",
+   "title": "Tachycardia with a pulse (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rate is typically 150/min or more when the arrhythmia itself causes instability. At lower rates, sinus tachycardia from sepsis, bleeding,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ABC, oxygen if hypoxaemic, monitor, IV access, BP, SpO2; record a rhythm strip during every intervention.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "12-lead ECG before and after conversion (pre-excitation, QT, ischaemia).",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adenosine: 6 mg rapid IV push with 20 mL saline flush; 12 mg if no effect",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Rate-control drugs for compensatory sinus tachycardia (sepsis, bleeding, PE).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for tachycardia with a pulse (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tachycardia-with-pulse-diagram",
+   "title": "Tachycardia with a pulse (adult): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

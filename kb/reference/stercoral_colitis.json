@@ -1,72 +1,167 @@
 {
-  "id": "stercoral_colitis",
-  "name": "Stercoral colitis",
-  "aliases": [
-    "stercoral ulceration"
+ "id": "stercoral_colitis",
+ "name": "Stercoral colitis",
+ "aliases": [
+  "stercoral ulceration"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal",
+ "specialty": "Colorectal surgery / Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Colorectal surgery and gastroenterology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Inflammation and ulceration of the colonic wall caused by pressure from impacted, hardened faeces (a faecaloma)",
+   "It occurs in patients with severe chronic constipation, typically elderly, immobile or institutionalised",
+   "The rectosigmoid and the antimesenteric border are most often affected",
+   "It can progress to ischaemic pressure necrosis, ulceration and stercoral perforation, which is life-threatening",
+   "CT shows a distended faeces-filled colon with wall thickening, pericolonic changes or, if perforated, free air",
+   "Management includes disimpaction and bowel decompression, with surgery for perforation or necrosis"
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal",
-  "specialty": "Colorectal surgery / Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Colorectal surgery and gastroenterology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Inflammation and ulceration of the colonic wall caused by pressure from impacted, hardened faeces (a faecaloma)",
-      "It occurs in patients with severe chronic constipation, typically elderly, immobile or institutionalised",
-      "The rectosigmoid and the antimesenteric border are most often affected",
-      "It can progress to ischaemic pressure necrosis, ulceration and stercoral perforation, which is life-threatening",
-      "CT shows a distended faeces-filled colon with wall thickening, pericolonic changes or, if perforated, free air",
-      "Management includes disimpaction and bowel decompression, with surgery for perforation or necrosis"
+  "pathophysiology": "Stercoral colitis develops when a hard, impacted faecal mass exerts sustained pressure on the colonic wall, exceeding capillary perfusion pressure and causing localised ischaemia. The resulting mucosal and mural injury produces inflammation and stercoral ulcers, which can deepen to full-thickness necrosis and perforation. The rectosigmoid is predisposed because of its narrower lumen and firmer stool, and chronic constipation with reduced colonic motility and sensation underlies the impaction.",
+  "additionalDifferentials": [
+   "Ischaemic colitis",
+   "Diverticulitis",
+   "Infective or inflammatory colitis",
+   "Colonic obstruction or pseudo-obstruction",
+   "Colorectal malignancy"
+  ],
+  "additionalInvestigations": [
+   "CT of the abdomen and pelvis",
+   "Assessment of the degree of faecal impaction",
+   "Inflammatory markers and lactate",
+   "Evaluation of constipation cause and comorbidities",
+   "Surgical review where perforation or necrosis is suspected"
+  ],
+  "redFlags": [
+   "Peritonitis or free air indicating stercoral perforation",
+   "Signs of colonic necrosis or systemic toxicity",
+   "Marked colonic distension with impending perforation",
+   "Rapid clinical deterioration"
+  ],
+  "prognosis": "Uncomplicated cases improve with disimpaction and bowel care, but stercoral perforation carries a high mortality, so early recognition is important.",
+  "pitfalls": [
+   "Underestimating the perforation risk of severe faecal impaction",
+   "Confusing it with diverticulitis or ischaemic colitis",
+   "Failing to address the underlying chronic constipation",
+   "Overlooking the diagnosis in a frail, constipated patient with abdominal pain"
+  ],
+  "references": [
+   "Colorectal surgery references (standard reference)",
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manual disimpaction and bowel decompression with enemas and osmotic or stimulant laxatives to relieve the impacted faecal mass",
+   "Urgent surgical intervention, typically resection with stoma formation, for stercoral perforation, transmural necrosis or peritonitis",
+   "Supportive care with intravenous fluid resuscitation, bowel rest and broad-spectrum antibiotics where perforation or sepsis is present",
+   "Serial clinical and CT assessment with monitoring of inflammatory markers and lactate for evolving ischaemia or perforation",
+   "Long-term bowel regimen with laxatives, adequate hydration, fibre and improved mobility to prevent recurrent impaction",
+   "Review and address underlying causes and comorbidities driving chronic constipation, including constipating medications"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "stercoral_colitis-pathway",
+   "title": "Stercoral colitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Inflammation and ulceration of the colonic wall caused by pressure from impacted, hardened faeces (a faecaloma)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Peritonitis or free air indicating stercoral perforation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT of the abdomen and pelvis, Assessment of the degree of faecal impaction, Inflammatory markers and lactate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manual disimpaction and bowel decompression with enemas and osmotic or stimulant laxatives to relieve the impacted faecal mass"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating the perforation risk of severe faecal impaction"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of stercoral colitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "stercoral_colitis-matrix",
+   "title": "Stercoral colitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Inflammation and ulceration of the colonic wall caused by pressure from impacted, hardened faeces (a faecaloma)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Stercoral colitis develops when a hard, impacted faecal mass exerts sustained pressure on the colonic wall, exceeding capillary perfusion pressure and causing localised ischaemia. The resulting mucosal and mural injury produces inflammation and stercoral ulcers, which can deepen to full-thickness necrosis and perforation. The rectosigmoid is predisposed because of its narrower lumen and firmer stool, and chronic constipation with reduced colonic motility and sensation underlies the impaction.",
-    "additionalDifferentials": [
-      "Ischaemic colitis",
-      "Diverticulitis",
-      "Infective or inflammatory colitis",
-      "Colonic obstruction or pseudo-obstruction",
-      "Colorectal malignancy"
+    [
+     "Key Investigations",
+     "CT of the abdomen and pelvis, Assessment of the degree of faecal impaction, Inflammatory markers and lactate",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT of the abdomen and pelvis",
-      "Assessment of the degree of faecal impaction",
-      "Inflammatory markers and lactate",
-      "Evaluation of constipation cause and comorbidities",
-      "Surgical review where perforation or necrosis is suspected"
+    [
+     "Primary Differentials",
+     "Ischaemic colitis, Diverticulitis, Infective or inflammatory colitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Peritonitis or free air indicating stercoral perforation",
-      "Signs of colonic necrosis or systemic toxicity",
-      "Marked colonic distension with impending perforation",
-      "Rapid clinical deterioration"
+    [
+     "Management Strategy",
+     "Manual disimpaction and bowel decompression with enemas and osmotic or stimulant laxatives to relieve the impacted faecal mass",
+     "Core treatment modality"
     ],
-    "prognosis": "Uncomplicated cases improve with disimpaction and bowel care, but stercoral perforation carries a high mortality, so early recognition is important.",
-    "pitfalls": [
-      "Underestimating the perforation risk of severe faecal impaction",
-      "Confusing it with diverticulitis or ischaemic colitis",
-      "Failing to address the underlying chronic constipation",
-      "Overlooking the diagnosis in a frail, constipated patient with abdominal pain"
-    ],
-    "references": [
-      "Colorectal surgery references (standard reference)",
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manual disimpaction and bowel decompression with enemas and osmotic or stimulant laxatives to relieve the impacted faecal mass",
-      "Urgent surgical intervention, typically resection with stoma formation, for stercoral perforation, transmural necrosis or peritonitis",
-      "Supportive care with intravenous fluid resuscitation, bowel rest and broad-spectrum antibiotics where perforation or sepsis is present",
-      "Serial clinical and CT assessment with monitoring of inflammatory markers and lactate for evolving ischaemia or perforation",
-      "Long-term bowel regimen with laxatives, adequate hydration, fibre and improved mobility to prevent recurrent impaction",
-      "Review and address underlying causes and comorbidities driving chronic constipation, including constipating medications"
+    [
+     "Clinical Pitfall",
+     "Underestimating the perforation risk of severe faecal impaction",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for stercoral colitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "stercoral-colitis-diagram",
+   "title": "Stercoral colitis: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

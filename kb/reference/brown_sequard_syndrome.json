@@ -1,79 +1,174 @@
 {
-  "id": "brown_sequard_syndrome",
-  "name": "Brown-Sequard syndrome",
-  "aliases": [
-    "spinal cord hemisection syndrome",
-    "hemicord syndrome",
-    "Brown-Sequard-plus syndrome"
+ "id": "brown_sequard_syndrome",
+ "name": "Brown-Sequard syndrome",
+ "aliases": [
+  "spinal cord hemisection syndrome",
+  "hemicord syndrome",
+  "Brown-Sequard-plus syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Spinal cord",
+ "specialty": "Neurology / Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The syndrome reflects functional or anatomical hemisection of the spinal cord, producing a characteristic laterally split, dissociated deficit",
+   "Below the lesion there is ipsilateral weakness from corticospinal tract damage and ipsilateral loss of proprioception, vibration and fine touch from dorsal column involvement",
+   "On the opposite side there is loss of pain and temperature sensation, beginning one or two segments below the level of the lesion, because spinothalamic fibres decussate shortly after entering the cord",
+   "At the level of the lesion there may be ipsilateral segmental lower motor neurone signs and a narrow band of ipsilateral sensory loss",
+   "The pure anatomical form is uncommon, and most patients present with an incomplete Brown-Sequard-plus picture",
+   "Penetrating trauma such as a stab wound is a classic cause, but tumour, prolapsed disc, epidural haematoma, demyelination and radiation myelopathy are all recognised",
+   "The offset between the higher motor and dorsal column level and the lower contralateral pain and temperature level is a useful clue to true lesion height",
+   "MRI of the cord with contrast is the key investigation and helps identify a treatable structural cause"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Spinal cord",
-  "specialty": "Neurology / Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The syndrome reflects functional or anatomical hemisection of the spinal cord, producing a characteristic laterally split, dissociated deficit",
-      "Below the lesion there is ipsilateral weakness from corticospinal tract damage and ipsilateral loss of proprioception, vibration and fine touch from dorsal column involvement",
-      "On the opposite side there is loss of pain and temperature sensation, beginning one or two segments below the level of the lesion, because spinothalamic fibres decussate shortly after entering the cord",
-      "At the level of the lesion there may be ipsilateral segmental lower motor neurone signs and a narrow band of ipsilateral sensory loss",
-      "The pure anatomical form is uncommon, and most patients present with an incomplete Brown-Sequard-plus picture",
-      "Penetrating trauma such as a stab wound is a classic cause, but tumour, prolapsed disc, epidural haematoma, demyelination and radiation myelopathy are all recognised",
-      "The offset between the higher motor and dorsal column level and the lower contralateral pain and temperature level is a useful clue to true lesion height",
-      "MRI of the cord with contrast is the key investigation and helps identify a treatable structural cause"
+  "pathophysiology": "Brown-Sequard syndrome results from injury to one lateral half of the spinal cord, which interrupts three long tracts with differing decussation patterns. The corticospinal tract has already crossed in the medulla, so its interruption causes weakness on the same side as the cord lesion; the dorsal columns ascend uncrossed to the lower medulla, so their damage causes ipsilateral loss of proprioception and vibration; the spinothalamic tract, by contrast, decussates within one or two segments of entering the cord, so its interruption causes contralateral loss of pain and temperature beginning just below the lesion. This anatomy explains the distinctive dissociated and laterally divided pattern of deficit and the slight vertical offset between the sensory modalities.",
+  "additionalDifferentials": [
+   "Complete spinal cord transection",
+   "Anterior spinal artery (anterior cord) syndrome",
+   "Central cord syndrome",
+   "Transverse myelitis with asymmetric involvement",
+   "Hemicord multiple sclerosis plaque",
+   "Intramedullary or extramedullary cord tumour"
+  ],
+  "additionalInvestigations": [
+   "MRI of the spinal cord with contrast to localise and characterise the causative lesion",
+   "CT of the spine where bony injury or instability from trauma is suspected",
+   "Cerebrospinal fluid analysis and oligoclonal bands if a demyelinating cause is considered",
+   "Serum aquaporin-4 and MOG antibodies where inflammatory myelopathy is possible",
+   "Coagulation studies where a spontaneous epidural haematoma is suspected",
+   "Careful examination for a penetrating wound tract in trauma"
+  ],
+  "redFlags": [
+   "Progressive deficit suggesting an expanding compressive lesion or haematoma",
+   "Traumatic injury with spinal instability requiring immobilisation",
+   "New sphincter dysfunction indicating more extensive cord involvement",
+   "An ascending sensory or motor level over hours"
+  ],
+  "prognosis": "Brown-Sequard syndrome carries the most favourable prognosis of the incomplete cord syndromes, and the majority of patients regain the ability to walk and achieve useful bladder control. Outcome is best when a treatable cause is addressed promptly before secondary cord injury accrues.",
+  "pitfalls": [
+   "Expecting sensory loss on the same side as the weakness and forgetting that spinothalamic loss is contralateral",
+   "Missing a subtle contralateral pinprick deficit and thereby overlooking the diagnosis",
+   "Assuming the syndrome only follows penetrating trauma and neglecting compressive or inflammatory causes",
+   "Mislocating the lesion by relying on the lower contralateral pain and temperature level rather than the higher ipsilateral signs",
+   "Failing to image urgently when a compressive cause is potentially reversible"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Greenberg Handbook of Neurosurgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause promptly with surgical decompression and stabilisation for penetrating trauma, tumour, prolapsed disc, or epidural haematoma before secondary cord injury accrues",
+   "Deliver acute spinal cord injury care with immobilisation, maintenance of cord perfusion, and urgent neurosurgical referral",
+   "Give disease-specific therapy for inflammatory causes, such as corticosteroids for demyelinating or inflammatory myelopathy",
+   "Institute early physiotherapy and occupational therapy rehabilitation to maximise motor recovery and gait",
+   "Manage bladder and bowel dysfunction with intermittent catheterisation and a bowel regimen, and treat neuropathic pain",
+   "Prevent complications with venous thromboembolism prophylaxis, pressure-area care, and spasticity management within a multidisciplinary rehabilitation team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "brown_sequard_syndrome-pathway",
+   "title": "Brown-Sequard syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The syndrome reflects functional or anatomical hemisection of the spinal cord, producing a characteristic laterally split, dissociated deficit",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive deficit suggesting an expanding compressive lesion or haematoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the spinal cord with contrast to localise and characterise the causative lesion, CT of the spine where bony injury or instability from trauma is suspected, Cerebrospinal fluid analysis and oligoclonal bands if a"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause promptly with surgical decompression and stabilisation for penetrating trauma, tumour, prolapsed disc, or epidural haematoma before secondary cord injury accrues"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Expecting sensory loss on the same side as the weakness and forgetting that spinothalamic loss is contralateral"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of brown-sequard syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "brown_sequard_syndrome-matrix",
+   "title": "Brown-Sequard syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The syndrome reflects functional or anatomical hemisection of the spinal cord, producing a characteristic laterally split,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Brown-Sequard syndrome results from injury to one lateral half of the spinal cord, which interrupts three long tracts with differing decussation patterns. The corticospinal tract has already crossed in the medulla, so its interruption causes weakness on the same side as the cord lesion; the dorsal columns ascend uncrossed to the lower medulla, so their damage causes ipsilateral loss of proprioception and vibration; the spinothalamic tract, by contrast, decussates within one or two segments of entering the cord, so its interruption causes contralateral loss of pain and temperature beginning just below the lesion. This anatomy explains the distinctive dissociated and laterally divided pattern of deficit and the slight vertical offset between the sensory modalities.",
-    "additionalDifferentials": [
-      "Complete spinal cord transection",
-      "Anterior spinal artery (anterior cord) syndrome",
-      "Central cord syndrome",
-      "Transverse myelitis with asymmetric involvement",
-      "Hemicord multiple sclerosis plaque",
-      "Intramedullary or extramedullary cord tumour"
+    [
+     "Key Investigations",
+     "MRI of the spinal cord with contrast to localise and characterise the causative lesion, CT of the spine where bony injury or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the spinal cord with contrast to localise and characterise the causative lesion",
-      "CT of the spine where bony injury or instability from trauma is suspected",
-      "Cerebrospinal fluid analysis and oligoclonal bands if a demyelinating cause is considered",
-      "Serum aquaporin-4 and MOG antibodies where inflammatory myelopathy is possible",
-      "Coagulation studies where a spontaneous epidural haematoma is suspected",
-      "Careful examination for a penetrating wound tract in trauma"
+    [
+     "Primary Differentials",
+     "Complete spinal cord transection, Anterior spinal artery (anterior cord) syndrome, Central cord syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive deficit suggesting an expanding compressive lesion or haematoma",
-      "Traumatic injury with spinal instability requiring immobilisation",
-      "New sphincter dysfunction indicating more extensive cord involvement",
-      "An ascending sensory or motor level over hours"
+    [
+     "Management Strategy",
+     "Treat the underlying cause promptly with surgical decompression and stabilisation for penetrating trauma, tumour, prolapsed disc,",
+     "Core treatment modality"
     ],
-    "prognosis": "Brown-Sequard syndrome carries the most favourable prognosis of the incomplete cord syndromes, and the majority of patients regain the ability to walk and achieve useful bladder control. Outcome is best when a treatable cause is addressed promptly before secondary cord injury accrues.",
-    "pitfalls": [
-      "Expecting sensory loss on the same side as the weakness and forgetting that spinothalamic loss is contralateral",
-      "Missing a subtle contralateral pinprick deficit and thereby overlooking the diagnosis",
-      "Assuming the syndrome only follows penetrating trauma and neglecting compressive or inflammatory causes",
-      "Mislocating the lesion by relying on the lower contralateral pain and temperature level rather than the higher ipsilateral signs",
-      "Failing to image urgently when a compressive cause is potentially reversible"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Greenberg Handbook of Neurosurgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause promptly with surgical decompression and stabilisation for penetrating trauma, tumour, prolapsed disc, or epidural haematoma before secondary cord injury accrues",
-      "Deliver acute spinal cord injury care with immobilisation, maintenance of cord perfusion, and urgent neurosurgical referral",
-      "Give disease-specific therapy for inflammatory causes, such as corticosteroids for demyelinating or inflammatory myelopathy",
-      "Institute early physiotherapy and occupational therapy rehabilitation to maximise motor recovery and gait",
-      "Manage bladder and bowel dysfunction with intermittent catheterisation and a bowel regimen, and treat neuropathic pain",
-      "Prevent complications with venous thromboembolism prophylaxis, pressure-area care, and spasticity management within a multidisciplinary rehabilitation team"
+    [
+     "Clinical Pitfall",
+     "Expecting sensory loss on the same side as the weakness and forgetting that spinothalamic loss is contralateral",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for brown-sequard syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "brown-sequard-syndrome-diagram",
+   "title": "Brown-Sequard syndrome: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

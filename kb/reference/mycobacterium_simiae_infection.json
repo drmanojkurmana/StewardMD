@@ -1,77 +1,172 @@
 {
-  "id": "mycobacterium_simiae_infection",
-  "name": "Mycobacterium simiae infection",
-  "aliases": [
-    "M. simiae infection",
-    "Mycobacterium simiae lung disease"
+ "id": "mycobacterium_simiae_infection",
+ "name": "Mycobacterium simiae infection",
+ "aliases": [
+  "M. simiae infection",
+  "Mycobacterium simiae lung disease"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A slow-growing photochromogen originally isolated from monkeys, hence its name",
+   "Its main reservoir is water, including aquifers and tap water, and it shows geographical clustering in certain regions",
+   "Very commonly isolated as an environmental contaminant or coloniser, so true disease is far less frequent than positive cultures suggest",
+   "When genuinely pathogenic it causes nodular-bronchiectatic or cavitary pulmonary disease and, in the profoundly immunosuppressed, disseminated infection",
+   "Notoriously drug-resistant, with unpredictable in vitro susceptibility and a poor response to treatment",
+   "Distinguishing colonisation from disease is a central challenge and requires strict application of diagnostic criteria",
+   "When treatment is warranted, susceptibility-guided combinations (often including a macrolide, moxifloxacin, and co-trimoxazole) are used, but results are frequently disappointing"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A slow-growing photochromogen originally isolated from monkeys, hence its name",
-      "Its main reservoir is water, including aquifers and tap water, and it shows geographical clustering in certain regions",
-      "Very commonly isolated as an environmental contaminant or coloniser, so true disease is far less frequent than positive cultures suggest",
-      "When genuinely pathogenic it causes nodular-bronchiectatic or cavitary pulmonary disease and, in the profoundly immunosuppressed, disseminated infection",
-      "Notoriously drug-resistant, with unpredictable in vitro susceptibility and a poor response to treatment",
-      "Distinguishing colonisation from disease is a central challenge and requires strict application of diagnostic criteria",
-      "When treatment is warranted, susceptibility-guided combinations (often including a macrolide, moxifloxacin, and co-trimoxazole) are used, but results are frequently disappointing"
+  "pathophysiology": "Mycobacterium simiae is a slow-growing photochromogenic mycobacterium whose reservoir is water, including groundwater aquifers and municipal supplies, giving rise to regional clusters. It is among the mycobacteria most often recovered as a contaminant or airway coloniser, and only a minority of positive cultures reflect true disease. When pathogenic it produces chronic pulmonary infection in hosts with structural lung disease and disseminated disease in the profoundly immunosuppressed. Intrinsic and unpredictable drug resistance, with poor correlation between in vitro testing and clinical response, makes it one of the more difficult nontuberculous mycobacteria to treat.",
+  "additionalDifferentials": [
+   "Colonisation or contamination without true disease",
+   "Mycobacterium avium complex lung disease",
+   "Pulmonary tuberculosis",
+   "Other NTM lung disease",
+   "Bronchiectasis exacerbation from conventional pathogens",
+   "Disseminated NTM in advanced HIV"
+  ],
+  "additionalInvestigations": [
+   "Repeated respiratory cultures to distinguish colonisation from genuine disease",
+   "Mycobacterial culture with recognition of photochromogenic pigment",
+   "Molecular identification to species level",
+   "Drug-susceptibility testing, recognising its limited predictive value",
+   "Chest CT for nodular-bronchiectatic or cavitary disease",
+   "Assessment of immune status, particularly for disseminated disease"
+  ],
+  "redFlags": [
+   "Disseminated disease indicating profound immunosuppression",
+   "Progressive pulmonary disease meeting diagnostic criteria",
+   "Poor response to therapy reflecting extensive drug resistance",
+   "Clustered isolates suggesting a shared water source"
+  ],
+  "prognosis": "Even when true disease is confirmed, response to treatment is often poor because of extensive and unpredictable drug resistance, so the prognosis is guarded. Many isolates, however, represent colonisation that does not require treatment and does not progress.",
+  "pitfalls": [
+   "Treating a coloniser or contaminant as genuine disease and exposing the patient to prolonged toxic therapy",
+   "Relying too heavily on in vitro susceptibility that correlates poorly with outcome",
+   "Failing to meet diagnostic criteria before starting treatment",
+   "Underestimating the difficulty of achieving cure"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Distinguish colonisation or contamination from genuine disease by strict diagnostic criteria and repeated respiratory cultures, since many isolates need no treatment",
+   "When true disease is confirmed, use multidrug therapy such as a macrolide with a fluoroquinolone like moxifloxacin and co-trimoxazole, recognising the poor correlation between in vitro susceptibility and response",
+   "Aim for disease control rather than reliable cure given the notorious and unpredictable drug resistance",
+   "Manage the underlying structural lung disease alongside antimycobacterial treatment",
+   "Monitor treatment response with repeated cultures and watch for drug toxicity over the prolonged course",
+   "Assess immune status, particularly where disseminated disease is suspected in profoundly immunosuppressed patients",
+   "Refer to infectious diseases or respiratory medicine given the guarded prognosis and treatment difficulty"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mycobacterium_simiae_infection-pathway",
+   "title": "Mycobacterium simiae infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A slow-growing photochromogen originally isolated from monkeys, hence its name",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Disseminated disease indicating profound immunosuppression",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Repeated respiratory cultures to distinguish colonisation from genuine disease, Mycobacterial culture with recognition of photochromogenic pigment, Molecular identification to species level"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Distinguish colonisation or contamination from genuine disease by strict diagnostic criteria and repeated respiratory cultures, since many isolates need no treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating a coloniser or contaminant as genuine disease and exposing the patient to prolonged toxic therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mycobacterium simiae infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mycobacterium_simiae_infection-matrix",
+   "title": "Mycobacterium simiae infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A slow-growing photochromogen originally isolated from monkeys, hence its name",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mycobacterium simiae is a slow-growing photochromogenic mycobacterium whose reservoir is water, including groundwater aquifers and municipal supplies, giving rise to regional clusters. It is among the mycobacteria most often recovered as a contaminant or airway coloniser, and only a minority of positive cultures reflect true disease. When pathogenic it produces chronic pulmonary infection in hosts with structural lung disease and disseminated disease in the profoundly immunosuppressed. Intrinsic and unpredictable drug resistance, with poor correlation between in vitro testing and clinical response, makes it one of the more difficult nontuberculous mycobacteria to treat.",
-    "additionalDifferentials": [
-      "Colonisation or contamination without true disease",
-      "Mycobacterium avium complex lung disease",
-      "Pulmonary tuberculosis",
-      "Other NTM lung disease",
-      "Bronchiectasis exacerbation from conventional pathogens",
-      "Disseminated NTM in advanced HIV"
+    [
+     "Key Investigations",
+     "Repeated respiratory cultures to distinguish colonisation from genuine disease, Mycobacterial culture with recognition of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Repeated respiratory cultures to distinguish colonisation from genuine disease",
-      "Mycobacterial culture with recognition of photochromogenic pigment",
-      "Molecular identification to species level",
-      "Drug-susceptibility testing, recognising its limited predictive value",
-      "Chest CT for nodular-bronchiectatic or cavitary disease",
-      "Assessment of immune status, particularly for disseminated disease"
+    [
+     "Primary Differentials",
+     "Colonisation or contamination without true disease, Mycobacterium avium complex lung disease, Pulmonary tuberculosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Disseminated disease indicating profound immunosuppression",
-      "Progressive pulmonary disease meeting diagnostic criteria",
-      "Poor response to therapy reflecting extensive drug resistance",
-      "Clustered isolates suggesting a shared water source"
+    [
+     "Management Strategy",
+     "Distinguish colonisation or contamination from genuine disease by strict diagnostic criteria and repeated respiratory cultures,",
+     "Core treatment modality"
     ],
-    "prognosis": "Even when true disease is confirmed, response to treatment is often poor because of extensive and unpredictable drug resistance, so the prognosis is guarded. Many isolates, however, represent colonisation that does not require treatment and does not progress.",
-    "pitfalls": [
-      "Treating a coloniser or contaminant as genuine disease and exposing the patient to prolonged toxic therapy",
-      "Relying too heavily on in vitro susceptibility that correlates poorly with outcome",
-      "Failing to meet diagnostic criteria before starting treatment",
-      "Underestimating the difficulty of achieving cure"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Distinguish colonisation or contamination from genuine disease by strict diagnostic criteria and repeated respiratory cultures, since many isolates need no treatment",
-      "When true disease is confirmed, use multidrug therapy such as a macrolide with a fluoroquinolone like moxifloxacin and co-trimoxazole, recognising the poor correlation between in vitro susceptibility and response",
-      "Aim for disease control rather than reliable cure given the notorious and unpredictable drug resistance",
-      "Manage the underlying structural lung disease alongside antimycobacterial treatment",
-      "Monitor treatment response with repeated cultures and watch for drug toxicity over the prolonged course",
-      "Assess immune status, particularly where disseminated disease is suspected in profoundly immunosuppressed patients",
-      "Refer to infectious diseases or respiratory medicine given the guarded prognosis and treatment difficulty"
+    [
+     "Clinical Pitfall",
+     "Treating a coloniser or contaminant as genuine disease and exposing the patient to prolonged toxic therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mycobacterium simiae infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mycobacterium-simiae-infection-diagram",
+   "title": "Mycobacterium simiae infection: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

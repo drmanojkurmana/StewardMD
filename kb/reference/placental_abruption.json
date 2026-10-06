@@ -1,82 +1,177 @@
 {
-  "id": "placental_abruption",
-  "name": "Placental abruption",
-  "aliases": [
-    "abruptio placentae",
-    "placental abruptio",
-    "premature separation of the placenta"
+ "id": "placental_abruption",
+ "name": "Placental abruption",
+ "aliases": [
+  "abruptio placentae",
+  "placental abruptio",
+  "premature separation of the placenta"
+ ],
+ "class": "non_infective",
+ "system": "Obstetrics / Gynaecology",
+ "specialty": "Obstetrics & Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Obstetrics / Novak's Gynecology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Abruption is premature separation of a normally sited placenta before delivery, classically presenting with painful vaginal bleeding and a tender, firm, or hypertonic uterus",
+   "Bleeding may be concealed behind the placenta, so the degree of vaginal blood loss can badly underestimate the true haemorrhage",
+   "Risk factors include hypertension and pre-eclampsia, trauma, cocaine or tobacco use, prior abruption, polyhydramnios with rapid decompression, and thrombophilia",
+   "Fetal compromise or death can occur rapidly because the separated placenta cannot support gas exchange",
+   "It is largely a clinical diagnosis; ultrasound is insensitive and a normal scan does not exclude abruption",
+   "Disseminated intravascular coagulation is an important complication, particularly with large abruptions or fetal demise",
+   "Management depends on maternal and fetal status: resuscitation, and prompt delivery (often by caesarean) when there is fetal distress or maternal instability",
+   "Anti-D should be given to rhesus-negative women and blood products used to correct coagulopathy"
   ],
-  "class": "non_infective",
-  "system": "Obstetrics / Gynaecology",
-  "specialty": "Obstetrics & Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Obstetrics / Novak's Gynecology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Abruption is premature separation of a normally sited placenta before delivery, classically presenting with painful vaginal bleeding and a tender, firm, or hypertonic uterus",
-      "Bleeding may be concealed behind the placenta, so the degree of vaginal blood loss can badly underestimate the true haemorrhage",
-      "Risk factors include hypertension and pre-eclampsia, trauma, cocaine or tobacco use, prior abruption, polyhydramnios with rapid decompression, and thrombophilia",
-      "Fetal compromise or death can occur rapidly because the separated placenta cannot support gas exchange",
-      "It is largely a clinical diagnosis; ultrasound is insensitive and a normal scan does not exclude abruption",
-      "Disseminated intravascular coagulation is an important complication, particularly with large abruptions or fetal demise",
-      "Management depends on maternal and fetal status: resuscitation, and prompt delivery (often by caesarean) when there is fetal distress or maternal instability",
-      "Anti-D should be given to rhesus-negative women and blood products used to correct coagulopathy"
+  "pathophysiology": "Abruption begins with rupture of maternal decidual vessels, causing bleeding into the decidua basalis that splits the placenta from the uterine wall. The expanding retroplacental clot further separates the placenta, reducing the functional area for maternal-fetal exchange and provoking uterine irritability and contraction. Thromboplastins released from the disrupted placenta and decidua enter the maternal circulation and can trigger consumptive coagulopathy (disseminated intravascular coagulation), while extravasation of blood into the myometrium (Couvelaire uterus) impairs contractility and postpartum haemostasis.",
+  "additionalDifferentials": [
+   "Placenta praevia",
+   "Uterine rupture",
+   "Preterm labour",
+   "Vasa praevia",
+   "Local genital tract causes of bleeding",
+   "Acute abdomen from a non-obstetric cause"
+  ],
+  "additionalInvestigations": [
+   "Continuous cardiotocography to detect fetal compromise and uterine hypertonicity",
+   "Full blood count and serial haemoglobin",
+   "Coagulation screen including fibrinogen to identify disseminated intravascular coagulation",
+   "Group and cross-match for transfusion",
+   "Ultrasound mainly to exclude praevia rather than to confirm abruption",
+   "Kleihauer test in rhesus-negative women to quantify fetomaternal haemorrhage"
+  ],
+  "redFlags": [
+   "Maternal haemodynamic instability or shock, which may be disproportionate to visible blood loss due to concealed haemorrhage",
+   "Non-reassuring or absent fetal heart activity",
+   "Developing coagulopathy with falling fibrinogen and abnormal clotting",
+   "A rigid, exquisitely tender uterus with frequent contractions",
+   "Rapid clinical deterioration requiring emergency delivery"
+  ],
+  "prognosis": "Small abruptions with a stable mother and reassuring fetus may allow expectant management with good outcomes. Large abruptions carry high risks of fetal death, maternal haemorrhage, coagulopathy, and organ injury, and abruption is a leading cause of perinatal mortality and antepartum stillbirth. Recurrence risk in future pregnancies is increased.",
+  "pitfalls": [
+   "Being falsely reassured by minimal external bleeding when concealed haemorrhage is severe",
+   "Relying on ultrasound to rule out abruption",
+   "Underestimating and undertreating evolving coagulopathy",
+   "Delaying delivery in the face of fetal distress or maternal instability",
+   "Failing to consider abruption after seemingly minor abdominal trauma in pregnancy"
+  ],
+  "references": [
+   "Williams Obstetrics",
+   "Novak's Gynecology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Maternal resuscitation with intravenous access, fluids and blood transfusion for significant haemorrhage",
+   "Urgent delivery, usually by caesarean, when there is foetal compromise or maternal instability",
+   "Continuous cardiotocographic monitoring to detect foetal distress and uterine hypertonus",
+   "Correction of coagulopathy and disseminated intravascular coagulation with fresh frozen plasma, cryoprecipitate, fibrinogen and platelets",
+   "Antenatal corticosteroids and expectant management for small stable abruptions remote from term",
+   "Anti-D immunoglobulin guided by the Kleihauer test in rhesus-negative women",
+   "Anticipation and active management of postpartum haemorrhage with uterotonics for a poorly contracting Couvelaire uterus",
+   "Treatment of underlying hypertension or pre-eclampsia with follow-up given the recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "placental_abruption-pathway",
+   "title": "Placental abruption: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Abruption is premature separation of a normally sited placenta before delivery, classically presenting with painful vaginal bleeding and a tender, firm, or hypertonic uterus",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Maternal haemodynamic instability or shock, which may be disproportionate to visible blood loss due to concealed haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous cardiotocography to detect fetal compromise and uterine hypertonicity, Full blood count and serial haemoglobin, Coagulation screen including fibrinogen to identify disseminated intravascular coagulation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Maternal resuscitation with intravenous access, fluids and blood transfusion for significant haemorrhage"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Being falsely reassured by minimal external bleeding when concealed haemorrhage is severe"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of placental abruption."
+  }
+ ],
+ "tables": [
+  {
+   "id": "placental_abruption-matrix",
+   "title": "Placental abruption: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Abruption is premature separation of a normally sited placenta before delivery, classically presenting with painful vaginal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Abruption begins with rupture of maternal decidual vessels, causing bleeding into the decidua basalis that splits the placenta from the uterine wall. The expanding retroplacental clot further separates the placenta, reducing the functional area for maternal-fetal exchange and provoking uterine irritability and contraction. Thromboplastins released from the disrupted placenta and decidua enter the maternal circulation and can trigger consumptive coagulopathy (disseminated intravascular coagulation), while extravasation of blood into the myometrium (Couvelaire uterus) impairs contractility and postpartum haemostasis.",
-    "additionalDifferentials": [
-      "Placenta praevia",
-      "Uterine rupture",
-      "Preterm labour",
-      "Vasa praevia",
-      "Local genital tract causes of bleeding",
-      "Acute abdomen from a non-obstetric cause"
+    [
+     "Key Investigations",
+     "Continuous cardiotocography to detect fetal compromise and uterine hypertonicity, Full blood count and serial haemoglobin,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous cardiotocography to detect fetal compromise and uterine hypertonicity",
-      "Full blood count and serial haemoglobin",
-      "Coagulation screen including fibrinogen to identify disseminated intravascular coagulation",
-      "Group and cross-match for transfusion",
-      "Ultrasound mainly to exclude praevia rather than to confirm abruption",
-      "Kleihauer test in rhesus-negative women to quantify fetomaternal haemorrhage"
+    [
+     "Primary Differentials",
+     "Placenta praevia, Uterine rupture, Preterm labour",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Maternal haemodynamic instability or shock, which may be disproportionate to visible blood loss due to concealed haemorrhage",
-      "Non-reassuring or absent fetal heart activity",
-      "Developing coagulopathy with falling fibrinogen and abnormal clotting",
-      "A rigid, exquisitely tender uterus with frequent contractions",
-      "Rapid clinical deterioration requiring emergency delivery"
+    [
+     "Management Strategy",
+     "Maternal resuscitation with intravenous access, fluids and blood transfusion for significant haemorrhage",
+     "Core treatment modality"
     ],
-    "prognosis": "Small abruptions with a stable mother and reassuring fetus may allow expectant management with good outcomes. Large abruptions carry high risks of fetal death, maternal haemorrhage, coagulopathy, and organ injury, and abruption is a leading cause of perinatal mortality and antepartum stillbirth. Recurrence risk in future pregnancies is increased.",
-    "pitfalls": [
-      "Being falsely reassured by minimal external bleeding when concealed haemorrhage is severe",
-      "Relying on ultrasound to rule out abruption",
-      "Underestimating and undertreating evolving coagulopathy",
-      "Delaying delivery in the face of fetal distress or maternal instability",
-      "Failing to consider abruption after seemingly minor abdominal trauma in pregnancy"
-    ],
-    "references": [
-      "Williams Obstetrics",
-      "Novak's Gynecology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Maternal resuscitation with intravenous access, fluids and blood transfusion for significant haemorrhage",
-      "Urgent delivery, usually by caesarean, when there is foetal compromise or maternal instability",
-      "Continuous cardiotocographic monitoring to detect foetal distress and uterine hypertonus",
-      "Correction of coagulopathy and disseminated intravascular coagulation with fresh frozen plasma, cryoprecipitate, fibrinogen and platelets",
-      "Antenatal corticosteroids and expectant management for small stable abruptions remote from term",
-      "Anti-D immunoglobulin guided by the Kleihauer test in rhesus-negative women",
-      "Anticipation and active management of postpartum haemorrhage with uterotonics for a poorly contracting Couvelaire uterus",
-      "Treatment of underlying hypertension or pre-eclampsia with follow-up given the recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Being falsely reassured by minimal external bleeding when concealed haemorrhage is severe",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for placental abruption."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "placental-abruption-diagram",
+   "title": "Placental abruption: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

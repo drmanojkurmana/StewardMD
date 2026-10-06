@@ -1,80 +1,175 @@
 {
-  "id": "stonefish_envenomation",
-  "name": "Stonefish envenomation",
-  "aliases": [
-    "Synanceia sting",
-    "stonefish sting",
-    "stinging fish envenomation",
-    "reef stonefish injury",
-    "venomous fish spine injury"
+ "id": "stonefish_envenomation",
+ "name": "Stonefish envenomation",
+ "aliases": [
+  "Synanceia sting",
+  "stonefish sting",
+  "stinging fish envenomation",
+  "reef stonefish injury",
+  "venomous fish spine injury"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Envenomation",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Stonefish (Synanceia) have dorsal spines that inject venom when trodden on, causing immediate and often excruciating pain out of proportion to the wound",
+   "Local effects include intense pain, rapid swelling, discolouration and sometimes tissue necrosis, with retained spine fragments a common complication",
+   "Hot-water immersion of the affected part at a tolerable temperature is a key first-aid measure, as the venom is heat-labile and this can relieve pain",
+   "Systemic features may include nausea, sweating, weakness and, uncommonly, cardiovascular and respiratory effects with severe envenomation",
+   "Stonefish antivenom is available and used for severe pain or systemic envenomation; wound exploration for retained spine and foreign material is important",
+   "Secondary wound infection is common, so wound care, tetanus prophylaxis and monitoring for infection including marine organisms are essential",
+   "Distinguish envenomation pain and swelling from evolving secondary soft-tissue infection during follow-up"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Envenomation",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Stonefish (Synanceia) have dorsal spines that inject venom when trodden on, causing immediate and often excruciating pain out of proportion to the wound",
-      "Local effects include intense pain, rapid swelling, discolouration and sometimes tissue necrosis, with retained spine fragments a common complication",
-      "Hot-water immersion of the affected part at a tolerable temperature is a key first-aid measure, as the venom is heat-labile and this can relieve pain",
-      "Systemic features may include nausea, sweating, weakness and, uncommonly, cardiovascular and respiratory effects with severe envenomation",
-      "Stonefish antivenom is available and used for severe pain or systemic envenomation; wound exploration for retained spine and foreign material is important",
-      "Secondary wound infection is common, so wound care, tetanus prophylaxis and monitoring for infection including marine organisms are essential",
-      "Distinguish envenomation pain and swelling from evolving secondary soft-tissue infection during follow-up"
+  "pathophysiology": "Stonefish venom, delivered through grooved dorsal spines, contains a pore-forming protein (verrucotoxin/stonustoxin family) that disrupts cell membranes and causes intense local pain, oedema and potential tissue necrosis. Systemic absorption can produce cardiovascular effects including hypotension and arrhythmia, and the venom has actions on skeletal and cardiac muscle. Many venom components are heat-labile, which underlies the analgesic benefit of hot-water immersion. Puncture wounds frequently retain spine fragments and are prone to secondary infection by marine and skin flora.",
+  "additionalDifferentials": [
+   "Other venomous fish spine injury (lionfish, scorpionfish, weeverfish, stingray)",
+   "Sea urchin spine injury",
+   "Simple puncture wound with secondary infection",
+   "Cellulitis or necrotising soft-tissue infection",
+   "Retained foreign body without envenomation",
+   "Marine bacterial infection (e.g. Vibrio, Mycobacterium marinum)"
+  ],
+  "additionalInvestigations": [
+   "Wound imaging (ultrasound or radiography) to detect retained spine fragments",
+   "Assessment of neurovascular status of the affected limb",
+   "Electrocardiography and monitoring in systemic envenomation",
+   "Inflammatory markers and wound cultures if infection is suspected",
+   "Renal function and creatine kinase in severe systemic cases"
+  ],
+  "redFlags": [
+   "Systemic features such as hypotension, arrhythmia or respiratory compromise",
+   "Signs of compartment syndrome or extensive necrosis",
+   "Spreading soft-tissue infection or systemic sepsis",
+   "Retained deep foreign material near neurovascular structures",
+   "Uncontrolled severe pain despite first aid"
+  ],
+  "prognosis": "Most stings cause severe transient pain that improves with hot-water immersion and analgesia, with full recovery. Complications arise chiefly from retained spines, secondary infection and, rarely, systemic envenomation; delayed or inadequate wound care prolongs morbidity.",
+  "pitfalls": [
+   "Using very hot water that scalds the anaesthetised, painful limb",
+   "Missing retained spine fragments leading to persistent pain and infection",
+   "Neglecting tetanus prophylaxis and marine wound care",
+   "Attributing later worsening solely to venom rather than recognising secondary infection"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Australian marine envenomation management guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate hot-water immersion at a tolerable temperature to inactivate the heat-labile venom and relieve pain",
+   "Stonefish antivenom for severe pain unresponsive to immersion or for systemic envenomation",
+   "Local anaesthetic infiltration or regional block with systemic analgesia for pain control",
+   "Wound exploration and removal of retained spine fragments and foreign material",
+   "Tetanus prophylaxis and antibiotics covering marine organisms where infection risk is high or established",
+   "Cardiac monitoring and supportive care for cardiovascular and respiratory effects in systemic envenomation",
+   "Surgical review for deep wounds and ongoing monitoring for secondary infection and necrosis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "stonefish_envenomation-pathway",
+   "title": "Stonefish envenomation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Stonefish (Synanceia) have dorsal spines that inject venom when trodden on, causing immediate and often excruciating pain out of proportion to the wound",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Systemic features such as hypotension, arrhythmia or respiratory compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Wound imaging (ultrasound or radiography) to detect retained spine fragments, Assessment of neurovascular status of the affected limb, Electrocardiography and monitoring in systemic envenomation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate hot-water immersion at a tolerable temperature to inactivate the heat-labile venom and relieve pain"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Using very hot water that scalds the anaesthetised, painful limb"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of stonefish envenomation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "stonefish_envenomation-matrix",
+   "title": "Stonefish envenomation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Stonefish (Synanceia) have dorsal spines that inject venom when trodden on, causing immediate and often excruciating pain out of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Stonefish venom, delivered through grooved dorsal spines, contains a pore-forming protein (verrucotoxin/stonustoxin family) that disrupts cell membranes and causes intense local pain, oedema and potential tissue necrosis. Systemic absorption can produce cardiovascular effects including hypotension and arrhythmia, and the venom has actions on skeletal and cardiac muscle. Many venom components are heat-labile, which underlies the analgesic benefit of hot-water immersion. Puncture wounds frequently retain spine fragments and are prone to secondary infection by marine and skin flora.",
-    "additionalDifferentials": [
-      "Other venomous fish spine injury (lionfish, scorpionfish, weeverfish, stingray)",
-      "Sea urchin spine injury",
-      "Simple puncture wound with secondary infection",
-      "Cellulitis or necrotising soft-tissue infection",
-      "Retained foreign body without envenomation",
-      "Marine bacterial infection (e.g. Vibrio, Mycobacterium marinum)"
+    [
+     "Key Investigations",
+     "Wound imaging (ultrasound or radiography) to detect retained spine fragments, Assessment of neurovascular status of the affected",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Wound imaging (ultrasound or radiography) to detect retained spine fragments",
-      "Assessment of neurovascular status of the affected limb",
-      "Electrocardiography and monitoring in systemic envenomation",
-      "Inflammatory markers and wound cultures if infection is suspected",
-      "Renal function and creatine kinase in severe systemic cases"
+    [
+     "Primary Differentials",
+     "Other venomous fish spine injury (lionfish, scorpionfish, weeverfish, stingray), Sea urchin spine injury, Simple puncture wound",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Systemic features such as hypotension, arrhythmia or respiratory compromise",
-      "Signs of compartment syndrome or extensive necrosis",
-      "Spreading soft-tissue infection or systemic sepsis",
-      "Retained deep foreign material near neurovascular structures",
-      "Uncontrolled severe pain despite first aid"
+    [
+     "Management Strategy",
+     "Immediate hot-water immersion at a tolerable temperature to inactivate the heat-labile venom and relieve pain",
+     "Core treatment modality"
     ],
-    "prognosis": "Most stings cause severe transient pain that improves with hot-water immersion and analgesia, with full recovery. Complications arise chiefly from retained spines, secondary infection and, rarely, systemic envenomation; delayed or inadequate wound care prolongs morbidity.",
-    "pitfalls": [
-      "Using very hot water that scalds the anaesthetised, painful limb",
-      "Missing retained spine fragments leading to persistent pain and infection",
-      "Neglecting tetanus prophylaxis and marine wound care",
-      "Attributing later worsening solely to venom rather than recognising secondary infection"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Australian marine envenomation management guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate hot-water immersion at a tolerable temperature to inactivate the heat-labile venom and relieve pain",
-      "Stonefish antivenom for severe pain unresponsive to immersion or for systemic envenomation",
-      "Local anaesthetic infiltration or regional block with systemic analgesia for pain control",
-      "Wound exploration and removal of retained spine fragments and foreign material",
-      "Tetanus prophylaxis and antibiotics covering marine organisms where infection risk is high or established",
-      "Cardiac monitoring and supportive care for cardiovascular and respiratory effects in systemic envenomation",
-      "Surgical review for deep wounds and ongoing monitoring for secondary infection and necrosis"
+    [
+     "Clinical Pitfall",
+     "Using very hot water that scalds the anaesthetised, painful limb",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for stonefish envenomation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "stonefish-envenomation-diagram",
+   "title": "Stonefish envenomation: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

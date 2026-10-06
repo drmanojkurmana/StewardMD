@@ -1,79 +1,174 @@
 {
-  "id": "adrenal_incidentaloma",
-  "name": "Adrenal incidentaloma",
-  "aliases": [
-    "incidental adrenal mass",
-    "adrenal nodule",
-    "adrenal incidental lesion"
+ "id": "adrenal_incidentaloma",
+ "name": "Adrenal incidentaloma",
+ "aliases": [
+  "incidental adrenal mass",
+  "adrenal nodule",
+  "adrenal incidental lesion"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine surgery",
+ "specialty": "General Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An adrenal incidentaloma is an adrenal mass discovered unexpectedly on imaging performed for an unrelated reason, and its evaluation centres on two questions: is it functional, and is it malignant",
+   "Every incidentaloma should be screened biochemically for cortisol excess, phaeochromocytoma, and, in hypertensive or hypokalaemic patients, primary aldosteronism",
+   "Unenhanced CT attenuation is key: a lipid-rich lesion with low Hounsfield values strongly favours a benign adenoma, while high attenuation warrants further characterisation",
+   "Large size and imaging features such as irregular margins, heterogeneity, and delayed contrast washout raise concern for adrenocortical carcinoma",
+   "Phaeochromocytoma must be excluded before any biopsy or surgery to avoid a catastrophic hypertensive crisis",
+   "Surgery (usually laparoscopic adrenalectomy) is indicated for functional tumours, lesions with malignant features, and masses above a threshold size, while smaller non-functioning benign lesions are monitored",
+   "Biopsy of an adrenal mass is rarely helpful and is reserved for suspected metastasis or infiltrative disease after phaeochromocytoma has been ruled out"
   ],
-  "class": "non_infective",
-  "system": "Endocrine surgery",
-  "specialty": "General Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An adrenal incidentaloma is an adrenal mass discovered unexpectedly on imaging performed for an unrelated reason, and its evaluation centres on two questions: is it functional, and is it malignant",
-      "Every incidentaloma should be screened biochemically for cortisol excess, phaeochromocytoma, and, in hypertensive or hypokalaemic patients, primary aldosteronism",
-      "Unenhanced CT attenuation is key: a lipid-rich lesion with low Hounsfield values strongly favours a benign adenoma, while high attenuation warrants further characterisation",
-      "Large size and imaging features such as irregular margins, heterogeneity, and delayed contrast washout raise concern for adrenocortical carcinoma",
-      "Phaeochromocytoma must be excluded before any biopsy or surgery to avoid a catastrophic hypertensive crisis",
-      "Surgery (usually laparoscopic adrenalectomy) is indicated for functional tumours, lesions with malignant features, and masses above a threshold size, while smaller non-functioning benign lesions are monitored",
-      "Biopsy of an adrenal mass is rarely helpful and is reserved for suspected metastasis or infiltrative disease after phaeochromocytoma has been ruled out"
+  "pathophysiology": "Adrenal incidentalomas are a heterogeneous group. Most are benign non-functioning cortical adenomas, but the differential spans hormonally active adenomas (secreting cortisol or aldosterone), phaeochromocytomas arising from the adrenal medulla, adrenocortical carcinoma, myelolipomas, cysts, and metastatic deposits. Functional lesions cause disease through autonomous hormone secretion: cortisol excess produces subclinical or overt Cushing syndrome, aldosterone excess produces hypertension and hypokalaemia, and catecholamine excess from a phaeochromocytoma causes paroxysmal hypertension and its complications. Malignant potential correlates with size, growth rate, and imaging characteristics reflecting lipid content and vascularity.",
+  "additionalDifferentials": [
+   "Non-functioning cortical adenoma",
+   "Cortisol-secreting adenoma (Cushing syndrome)",
+   "Aldosterone-producing adenoma (Conn syndrome)",
+   "Phaeochromocytoma",
+   "Adrenocortical carcinoma",
+   "Adrenal metastasis or myelolipoma or adrenal cyst"
+  ],
+  "additionalInvestigations": [
+   "Overnight dexamethasone suppression test (and where indicated late-night salivary or 24-hour urinary cortisol) for autonomous cortisol secretion",
+   "Plasma or urinary metanephrines to exclude phaeochromocytoma",
+   "Plasma aldosterone-to-renin ratio in hypertensive or hypokalaemic patients",
+   "Unenhanced CT for attenuation, with contrast washout study or MRI chemical-shift imaging to characterise indeterminate lesions",
+   "Serial imaging surveillance for non-operated lesions to assess growth",
+   "Consideration of adrenal vein sampling when lateralising aldosterone excess before surgery"
+  ],
+  "redFlags": [
+   "Undiagnosed phaeochromocytoma before intervention, risking a life-threatening hypertensive crisis on biopsy or induction",
+   "Large or rapidly enlarging mass with heterogeneous, high-attenuation, poorly washing-out features suggesting adrenocortical carcinoma",
+   "Severe or resistant hypertension with hypokalaemia indicating a functioning tumour",
+   "Known extra-adrenal malignancy with a new adrenal lesion suggesting metastasis"
+  ],
+  "prognosis": "Most incidentalomas are benign and non-functioning with an excellent outlook and stable behaviour on surveillance. Functional lesions generally do well after adrenalectomy with resolution or improvement of hormone excess, whereas adrenocortical carcinoma carries a poor prognosis, strongly influenced by stage and completeness of resection.",
+  "pitfalls": [
+   "Proceeding to biopsy or surgery without first excluding a phaeochromocytoma",
+   "Labelling a mass non-functioning without complete biochemical screening, missing subclinical cortisol excess",
+   "Underestimating malignant potential by relying on size alone and ignoring washout and morphology",
+   "Inadequate perioperative alpha- (then beta-) blockade when operating on a catecholamine-secreting tumour",
+   "Failing to plan perioperative glucocorticoid cover when removing a cortisol-secreting adenoma with a suppressed contralateral gland"
+  ],
+  "references": [
+   "Bailey & Love's Short Practice of Surgery",
+   "Sabiston Textbook of Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Screen every incidentaloma biochemically for autonomous cortisol secretion, phaeochromocytoma, and primary aldosteronism in hypertensive or hypokalaemic patients",
+   "Characterise the lesion with unenhanced CT attenuation, using contrast washout or chemical-shift MRI for indeterminate masses",
+   "Exclude and, where present, medically prepare a phaeochromocytoma with alpha-blockade before any biopsy or surgery",
+   "Refer for adrenalectomy, usually laparoscopic, for functional tumours, imaging features suspicious for malignancy, or masses above a threshold size",
+   "Undertake adrenal vein sampling to lateralise aldosterone excess before surgery when indicated",
+   "Monitor non-operated benign non-functioning lesions with interval imaging and biochemical review",
+   "Coordinate assessment through endocrinology and endocrine surgery"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "adrenal_incidentaloma-pathway",
+   "title": "Adrenal incidentaloma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An adrenal incidentaloma is an adrenal mass discovered unexpectedly on imaging performed for an unrelated reason, and its evaluation centres on two questions: is it functional, and is it malignant",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Undiagnosed phaeochromocytoma before intervention, risking a life-threatening hypertensive crisis on biopsy or induction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Overnight dexamethasone suppression test (and where indicated late-night salivary or 24-hour urinary cortisol) for autonomous cortisol secretion, Plasma or urinary metanephrines to exclude phaeochromocytoma, Plasma"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Screen every incidentaloma biochemically for autonomous cortisol secretion, phaeochromocytoma, and primary aldosteronism in hypertensive or hypokalaemic patients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Proceeding to biopsy or surgery without first excluding a phaeochromocytoma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of adrenal incidentaloma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adrenal_incidentaloma-matrix",
+   "title": "Adrenal incidentaloma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An adrenal incidentaloma is an adrenal mass discovered unexpectedly on imaging performed for an unrelated reason, and its",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Adrenal incidentalomas are a heterogeneous group. Most are benign non-functioning cortical adenomas, but the differential spans hormonally active adenomas (secreting cortisol or aldosterone), phaeochromocytomas arising from the adrenal medulla, adrenocortical carcinoma, myelolipomas, cysts, and metastatic deposits. Functional lesions cause disease through autonomous hormone secretion: cortisol excess produces subclinical or overt Cushing syndrome, aldosterone excess produces hypertension and hypokalaemia, and catecholamine excess from a phaeochromocytoma causes paroxysmal hypertension and its complications. Malignant potential correlates with size, growth rate, and imaging characteristics reflecting lipid content and vascularity.",
-    "additionalDifferentials": [
-      "Non-functioning cortical adenoma",
-      "Cortisol-secreting adenoma (Cushing syndrome)",
-      "Aldosterone-producing adenoma (Conn syndrome)",
-      "Phaeochromocytoma",
-      "Adrenocortical carcinoma",
-      "Adrenal metastasis or myelolipoma or adrenal cyst"
+    [
+     "Key Investigations",
+     "Overnight dexamethasone suppression test (and where indicated late-night salivary or 24-hour urinary cortisol) for autonomous",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Overnight dexamethasone suppression test (and where indicated late-night salivary or 24-hour urinary cortisol) for autonomous cortisol secretion",
-      "Plasma or urinary metanephrines to exclude phaeochromocytoma",
-      "Plasma aldosterone-to-renin ratio in hypertensive or hypokalaemic patients",
-      "Unenhanced CT for attenuation, with contrast washout study or MRI chemical-shift imaging to characterise indeterminate lesions",
-      "Serial imaging surveillance for non-operated lesions to assess growth",
-      "Consideration of adrenal vein sampling when lateralising aldosterone excess before surgery"
+    [
+     "Primary Differentials",
+     "Non-functioning cortical adenoma, Cortisol-secreting adenoma (Cushing syndrome), Aldosterone-producing adenoma (Conn syndrome)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Undiagnosed phaeochromocytoma before intervention, risking a life-threatening hypertensive crisis on biopsy or induction",
-      "Large or rapidly enlarging mass with heterogeneous, high-attenuation, poorly washing-out features suggesting adrenocortical carcinoma",
-      "Severe or resistant hypertension with hypokalaemia indicating a functioning tumour",
-      "Known extra-adrenal malignancy with a new adrenal lesion suggesting metastasis"
+    [
+     "Management Strategy",
+     "Screen every incidentaloma biochemically for autonomous cortisol secretion, phaeochromocytoma, and primary aldosteronism in",
+     "Core treatment modality"
     ],
-    "prognosis": "Most incidentalomas are benign and non-functioning with an excellent outlook and stable behaviour on surveillance. Functional lesions generally do well after adrenalectomy with resolution or improvement of hormone excess, whereas adrenocortical carcinoma carries a poor prognosis, strongly influenced by stage and completeness of resection.",
-    "pitfalls": [
-      "Proceeding to biopsy or surgery without first excluding a phaeochromocytoma",
-      "Labelling a mass non-functioning without complete biochemical screening, missing subclinical cortisol excess",
-      "Underestimating malignant potential by relying on size alone and ignoring washout and morphology",
-      "Inadequate perioperative alpha- (then beta-) blockade when operating on a catecholamine-secreting tumour",
-      "Failing to plan perioperative glucocorticoid cover when removing a cortisol-secreting adenoma with a suppressed contralateral gland"
-    ],
-    "references": [
-      "Bailey & Love's Short Practice of Surgery",
-      "Sabiston Textbook of Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Screen every incidentaloma biochemically for autonomous cortisol secretion, phaeochromocytoma, and primary aldosteronism in hypertensive or hypokalaemic patients",
-      "Characterise the lesion with unenhanced CT attenuation, using contrast washout or chemical-shift MRI for indeterminate masses",
-      "Exclude and, where present, medically prepare a phaeochromocytoma with alpha-blockade before any biopsy or surgery",
-      "Refer for adrenalectomy, usually laparoscopic, for functional tumours, imaging features suspicious for malignancy, or masses above a threshold size",
-      "Undertake adrenal vein sampling to lateralise aldosterone excess before surgery when indicated",
-      "Monitor non-operated benign non-functioning lesions with interval imaging and biochemical review",
-      "Coordinate assessment through endocrinology and endocrine surgery"
+    [
+     "Clinical Pitfall",
+     "Proceeding to biopsy or surgery without first excluding a phaeochromocytoma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for adrenal incidentaloma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "adrenal-incidentaloma-diagram",
+   "title": "Adrenal incidentaloma: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

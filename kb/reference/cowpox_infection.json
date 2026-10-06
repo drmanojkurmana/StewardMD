@@ -1,79 +1,174 @@
 {
-  "id": "cowpox_infection",
-  "name": "Cowpox infection",
-  "aliases": [
-    "cowpox virus",
-    "orthopoxvirus infection",
-    "catpox",
-    "CPXV infection"
+ "id": "cowpox_infection",
+ "name": "Cowpox infection",
+ "aliases": [
+  "cowpox virus",
+  "orthopoxvirus infection",
+  "catpox",
+  "CPXV infection"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A zoonotic orthopoxvirus infection whose natural reservoir is wild rodents, with domestic cats and less often cattle acting as incidental transmitting hosts",
+   "Most human cases now follow contact with an infected pet cat rather than cattle, despite the historical name",
+   "Lesions are usually solitary and localised to the hands or face, evolving through macule, papule, vesicle, and haemorrhagic pustule to a black eschar over several weeks",
+   "Painful regional lymphadenopathy and a flu-like constitutional illness commonly accompany the skin lesion",
+   "Diagnosis relies on the exposure history plus laboratory confirmation by PCR, viral culture, or electron microscopy of lesion material",
+   "In immunocompetent people the disease is self-limiting and managed supportively, but the deep eschar can be alarming and slow to heal",
+   "Extensive, disseminated, or eczema-associated infection can occur in immunocompromised or atopic patients and may need antiviral therapy"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A zoonotic orthopoxvirus infection whose natural reservoir is wild rodents, with domestic cats and less often cattle acting as incidental transmitting hosts",
-      "Most human cases now follow contact with an infected pet cat rather than cattle, despite the historical name",
-      "Lesions are usually solitary and localised to the hands or face, evolving through macule, papule, vesicle, and haemorrhagic pustule to a black eschar over several weeks",
-      "Painful regional lymphadenopathy and a flu-like constitutional illness commonly accompany the skin lesion",
-      "Diagnosis relies on the exposure history plus laboratory confirmation by PCR, viral culture, or electron microscopy of lesion material",
-      "In immunocompetent people the disease is self-limiting and managed supportively, but the deep eschar can be alarming and slow to heal",
-      "Extensive, disseminated, or eczema-associated infection can occur in immunocompromised or atopic patients and may need antiviral therapy"
+  "pathophysiology": "Cowpox virus is an orthopoxvirus maintained in wild rodent populations, from which it spills over into cats and occasionally cattle and humans. Infection follows inoculation of the virus through broken skin during contact with an infected animal, most often a scratch or bite from a pet cat carrying the virus. The virus replicates locally in the epidermis and dermis, producing an evolving pox lesion that becomes vesicular, then pustular and haemorrhagic, before forming a firm black eschar as the tissue necroses. A vigorous local and systemic immune response accounts for the accompanying lymphadenopathy and constitutional symptoms. Because orthopoxviruses share antigens, previous smallpox vaccination offers some cross-protection, and disseminated disease is more likely where immunity or the skin barrier is impaired, as in atopic dermatitis.",
+  "additionalDifferentials": [
+   "Orf and milker's nodule (parapoxvirus infections)",
+   "Mpox (monkeypox) and other orthopoxvirus infections",
+   "Cutaneous anthrax",
+   "Herpetic whitlow or herpes simplex infection",
+   "Bacterial pyoderma, ecthyma, or abscess",
+   "Cutaneous tularaemia or other ulceroglandular zoonoses"
+  ],
+  "additionalInvestigations": [
+   "Detailed exposure history focusing on contact with cats or rodents",
+   "PCR for orthopoxvirus DNA from lesion swab or crust, with species confirmation",
+   "Viral culture of lesion material",
+   "Electron microscopy showing brick-shaped orthopoxvirus particles",
+   "Skin biopsy for histology in atypical presentations",
+   "Assessment of immune status and skin barrier (for example atopic dermatitis) in extensive disease"
+  ],
+  "redFlags": [
+   "Disseminated or rapidly spreading lesions suggesting immunocompromise",
+   "Widespread infection in a patient with atopic dermatitis (eczema-like spread)",
+   "Ocular involvement threatening sight",
+   "Severe systemic illness or signs of secondary bacterial infection"
+  ],
+  "prognosis": "In healthy people cowpox is self-limiting and heals over several weeks, often leaving a scar; disseminated infection in immunocompromised or severely atopic patients can be serious and occasionally life-threatening.",
+  "pitfalls": [
+   "Mistaking the haemorrhagic eschar for cutaneous anthrax or a necrotising bacterial infection",
+   "Failing to distinguish cowpox from mpox during outbreaks, delaying appropriate public health action",
+   "Overlooking cat contact as the usual modern source of infection",
+   "Underestimating the risk of dissemination in atopic or immunocompromised patients"
+  ],
+  "references": [
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+   "UpToDate: Cowpox and other orthopoxvirus infections"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive management in immunocompetent patients, as disease is self-limiting, with local wound care, analgesia and allowing the eschar to heal",
+   "Keep the lesion clean and covered, and treat any secondary bacterial infection with antibiotics",
+   "Avoid unnecessary surgical debridement, which may delay healing",
+   "In severe or disseminated disease, particularly with immunocompromise or extensive atopic dermatitis, consider antiviral therapy such as tecovirimat or brincidofovir with infectious diseases input",
+   "Consider vaccinia immune globulin for severe orthopoxvirus infection under specialist guidance",
+   "Advise on the zoonotic source, including safe handling of infected cats, hand hygiene, and avoiding autoinoculation and contact with vulnerable people",
+   "Assess immune status and skin-barrier integrity in extensive disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cowpox_infection-pathway",
+   "title": "Cowpox infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A zoonotic orthopoxvirus infection whose natural reservoir is wild rodents, with domestic cats and less often cattle acting as incidental transmitting hosts",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Disseminated or rapidly spreading lesions suggesting immunocompromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed exposure history focusing on contact with cats or rodents, PCR for orthopoxvirus DNA from lesion swab or crust, with species confirmation, Viral culture of lesion material"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive management in immunocompetent patients, as disease is self-limiting, with local wound care, analgesia and allowing the eschar to heal"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the haemorrhagic eschar for cutaneous anthrax or a necrotising bacterial infection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cowpox infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cowpox_infection-matrix",
+   "title": "Cowpox infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A zoonotic orthopoxvirus infection whose natural reservoir is wild rodents, with domestic cats and less often cattle acting as",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cowpox virus is an orthopoxvirus maintained in wild rodent populations, from which it spills over into cats and occasionally cattle and humans. Infection follows inoculation of the virus through broken skin during contact with an infected animal, most often a scratch or bite from a pet cat carrying the virus. The virus replicates locally in the epidermis and dermis, producing an evolving pox lesion that becomes vesicular, then pustular and haemorrhagic, before forming a firm black eschar as the tissue necroses. A vigorous local and systemic immune response accounts for the accompanying lymphadenopathy and constitutional symptoms. Because orthopoxviruses share antigens, previous smallpox vaccination offers some cross-protection, and disseminated disease is more likely where immunity or the skin barrier is impaired, as in atopic dermatitis.",
-    "additionalDifferentials": [
-      "Orf and milker's nodule (parapoxvirus infections)",
-      "Mpox (monkeypox) and other orthopoxvirus infections",
-      "Cutaneous anthrax",
-      "Herpetic whitlow or herpes simplex infection",
-      "Bacterial pyoderma, ecthyma, or abscess",
-      "Cutaneous tularaemia or other ulceroglandular zoonoses"
+    [
+     "Key Investigations",
+     "Detailed exposure history focusing on contact with cats or rodents, PCR for orthopoxvirus DNA from lesion swab or crust, with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed exposure history focusing on contact with cats or rodents",
-      "PCR for orthopoxvirus DNA from lesion swab or crust, with species confirmation",
-      "Viral culture of lesion material",
-      "Electron microscopy showing brick-shaped orthopoxvirus particles",
-      "Skin biopsy for histology in atypical presentations",
-      "Assessment of immune status and skin barrier (for example atopic dermatitis) in extensive disease"
+    [
+     "Primary Differentials",
+     "Orf and milker's nodule (parapoxvirus infections), Mpox (monkeypox) and other orthopoxvirus infections, Cutaneous anthrax",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Disseminated or rapidly spreading lesions suggesting immunocompromise",
-      "Widespread infection in a patient with atopic dermatitis (eczema-like spread)",
-      "Ocular involvement threatening sight",
-      "Severe systemic illness or signs of secondary bacterial infection"
+    [
+     "Management Strategy",
+     "Supportive management in immunocompetent patients, as disease is self-limiting, with local wound care, analgesia and allowing the",
+     "Core treatment modality"
     ],
-    "prognosis": "In healthy people cowpox is self-limiting and heals over several weeks, often leaving a scar; disseminated infection in immunocompromised or severely atopic patients can be serious and occasionally life-threatening.",
-    "pitfalls": [
-      "Mistaking the haemorrhagic eschar for cutaneous anthrax or a necrotising bacterial infection",
-      "Failing to distinguish cowpox from mpox during outbreaks, delaying appropriate public health action",
-      "Overlooking cat contact as the usual modern source of infection",
-      "Underestimating the risk of dissemination in atopic or immunocompromised patients"
-    ],
-    "references": [
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-      "UpToDate: Cowpox and other orthopoxvirus infections"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive management in immunocompetent patients, as disease is self-limiting, with local wound care, analgesia and allowing the eschar to heal",
-      "Keep the lesion clean and covered, and treat any secondary bacterial infection with antibiotics",
-      "Avoid unnecessary surgical debridement, which may delay healing",
-      "In severe or disseminated disease, particularly with immunocompromise or extensive atopic dermatitis, consider antiviral therapy such as tecovirimat or brincidofovir with infectious diseases input",
-      "Consider vaccinia immune globulin for severe orthopoxvirus infection under specialist guidance",
-      "Advise on the zoonotic source, including safe handling of infected cats, hand hygiene, and avoiding autoinoculation and contact with vulnerable people",
-      "Assess immune status and skin-barrier integrity in extensive disease"
+    [
+     "Clinical Pitfall",
+     "Mistaking the haemorrhagic eschar for cutaneous anthrax or a necrotising bacterial infection",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cowpox infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cowpox-infection-diagram",
+   "title": "Cowpox infection: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

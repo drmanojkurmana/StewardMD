@@ -1,82 +1,177 @@
 {
-  "id": "theophylline_toxicity",
-  "name": "Theophylline toxicity",
-  "aliases": [
-    "theophylline poisoning",
-    "theophylline overdose",
-    "aminophylline toxicity",
-    "methylxanthine toxicity"
+ "id": "theophylline_toxicity",
+ "name": "Theophylline toxicity",
+ "aliases": [
+  "theophylline poisoning",
+  "theophylline overdose",
+  "aminophylline toxicity",
+  "methylxanthine toxicity"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Theophylline has a narrow therapeutic window and toxicity may be acute or chronic, with the two presenting differently",
+   "Chronic toxicity, often in older patients or after a change in metabolism or an interacting drug, causes serious effects at lower concentrations than acute overdose",
+   "Prominent features are vomiting, tremor, agitation, tachycardia and, in severe cases, seizures and arrhythmias",
+   "Hypokalaemia, hypomagnesaemia, hyperglycaemia and a metabolic (lactic) acidosis reflect intense beta-adrenergic and metabolic stimulation",
+   "Seizures in significant theophylline poisoning can be refractory and portend a poor outcome",
+   "Slow-release preparations cause delayed and prolonged absorption, so levels should be measured serially and can continue to rise",
+   "Multiple-dose activated charcoal enhances elimination, and extracorporeal removal such as haemodialysis is indicated for very high concentrations or severe clinical toxicity",
+   "Beta-blockade may be considered cautiously for tachydysrhythmias driven by beta-adrenergic excess, under specialist guidance"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Theophylline has a narrow therapeutic window and toxicity may be acute or chronic, with the two presenting differently",
-      "Chronic toxicity, often in older patients or after a change in metabolism or an interacting drug, causes serious effects at lower concentrations than acute overdose",
-      "Prominent features are vomiting, tremor, agitation, tachycardia and, in severe cases, seizures and arrhythmias",
-      "Hypokalaemia, hypomagnesaemia, hyperglycaemia and a metabolic (lactic) acidosis reflect intense beta-adrenergic and metabolic stimulation",
-      "Seizures in significant theophylline poisoning can be refractory and portend a poor outcome",
-      "Slow-release preparations cause delayed and prolonged absorption, so levels should be measured serially and can continue to rise",
-      "Multiple-dose activated charcoal enhances elimination, and extracorporeal removal such as haemodialysis is indicated for very high concentrations or severe clinical toxicity",
-      "Beta-blockade may be considered cautiously for tachydysrhythmias driven by beta-adrenergic excess, under specialist guidance"
+  "pathophysiology": "Theophylline is a methylxanthine that inhibits phosphodiesterase, raising intracellular cyclic adenosine monophosphate, and antagonises adenosine receptors. It also releases endogenous catecholamines, producing a state of intense beta-adrenergic stimulation. The result is central nervous system excitation with tremor, agitation and seizures, cardiovascular effects including tachycardia and dysrhythmias, and metabolic disturbances such as hypokalaemia from intracellular potassium shift, hyperglycaemia and lactic acidosis. Adenosine antagonism lowers the seizure threshold. In chronic toxicity, accumulation from impaired clearance produces serious effects at lower measured concentrations than in acute single overdose.",
+  "additionalDifferentials": [
+   "Sympathomimetic poisoning (e.g. amphetamines, cocaine)",
+   "Caffeine or other methylxanthine toxicity",
+   "Thyroid storm",
+   "Sepsis with lactic acidosis",
+   "Salicylate poisoning",
+   "Serotonin syndrome or other agitated hyperadrenergic states"
+  ],
+  "additionalInvestigations": [
+   "Serial serum theophylline concentrations, especially with modified-release preparations",
+   "Serum potassium, magnesium, glucose and other electrolytes",
+   "Arterial blood gas and lactate",
+   "Electrocardiogram and continuous cardiac monitoring for arrhythmia",
+   "Renal and liver function to assess clearance",
+   "Paracetamol and salicylate levels in intentional overdose"
+  ],
+  "redFlags": [
+   "Seizures, particularly if recurrent or refractory",
+   "Ventricular or unstable supraventricular arrhythmia",
+   "Very high serum concentration, especially after modified-release ingestion",
+   "Severe hypokalaemia, acidosis or haemodynamic instability",
+   "Chronic toxicity in an older or comorbid patient even at moderate levels"
+  ],
+  "prognosis": "Mild toxicity generally resolves with supportive care and gastrointestinal decontamination, but severe poisoning with seizures or arrhythmias, and chronic toxicity in vulnerable patients, carries significant mortality; prompt enhanced elimination improves outcome in severe cases.",
+  "pitfalls": [
+   "Relying on a single level and missing continued absorption from slow-release tablets",
+   "Underestimating chronic toxicity because the concentration seems only modestly raised",
+   "Neglecting to correct hypokalaemia and hypomagnesaemia driving arrhythmia",
+   "Delaying extracorporeal removal in severe or very high-level poisoning",
+   "Using unopposed agents that worsen catecholamine-driven cardiovascular effects"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Theophylline poisoning"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Stop theophylline and give multi-dose activated charcoal to enhance elimination by interrupting enterohepatic recirculation, with whole-bowel irrigation considered for modified-release preparations",
+   "Correct metabolic disturbance — replace potassium (recognising it reflects intracellular shift) and magnesium, and treat hypoglycaemia or acidosis",
+   "Control seizures with benzodiazepines then barbiturates; phenytoin is ineffective and should be avoided",
+   "Give antiemetics for the prominent vomiting and treat tachyarrhythmias, using a beta-blocker cautiously for beta-adrenergic-driven supraventricular arrhythmia with haemodynamic compromise",
+   "Institute haemodialysis for severe poisoning — refractory seizures, life-threatening arrhythmia, markedly elevated or rising concentrations, or chronic toxicity in vulnerable patients",
+   "Measure serial theophylline concentrations, especially with slow-release preparations where absorption is delayed and prolonged",
+   "Manage in a monitored critical care setting with continuous cardiac monitoring and early escalation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "theophylline_toxicity-pathway",
+   "title": "Theophylline toxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Theophylline has a narrow therapeutic window and toxicity may be acute or chronic, with the two presenting differently",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Seizures, particularly if recurrent or refractory",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial serum theophylline concentrations, especially with modified-release preparations, Serum potassium, magnesium, glucose and other electrolytes, Arterial blood gas and lactate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Stop theophylline and give multi-dose activated charcoal to enhance elimination by interrupting enterohepatic recirculation, with whole-bowel irrigation considered for modified-release preparations"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on a single level and missing continued absorption from slow-release tablets"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of theophylline toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "theophylline_toxicity-matrix",
+   "title": "Theophylline toxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Theophylline has a narrow therapeutic window and toxicity may be acute or chronic, with the two presenting differently",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Theophylline is a methylxanthine that inhibits phosphodiesterase, raising intracellular cyclic adenosine monophosphate, and antagonises adenosine receptors. It also releases endogenous catecholamines, producing a state of intense beta-adrenergic stimulation. The result is central nervous system excitation with tremor, agitation and seizures, cardiovascular effects including tachycardia and dysrhythmias, and metabolic disturbances such as hypokalaemia from intracellular potassium shift, hyperglycaemia and lactic acidosis. Adenosine antagonism lowers the seizure threshold. In chronic toxicity, accumulation from impaired clearance produces serious effects at lower measured concentrations than in acute single overdose.",
-    "additionalDifferentials": [
-      "Sympathomimetic poisoning (e.g. amphetamines, cocaine)",
-      "Caffeine or other methylxanthine toxicity",
-      "Thyroid storm",
-      "Sepsis with lactic acidosis",
-      "Salicylate poisoning",
-      "Serotonin syndrome or other agitated hyperadrenergic states"
+    [
+     "Key Investigations",
+     "Serial serum theophylline concentrations, especially with modified-release preparations, Serum potassium, magnesium, glucose and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial serum theophylline concentrations, especially with modified-release preparations",
-      "Serum potassium, magnesium, glucose and other electrolytes",
-      "Arterial blood gas and lactate",
-      "Electrocardiogram and continuous cardiac monitoring for arrhythmia",
-      "Renal and liver function to assess clearance",
-      "Paracetamol and salicylate levels in intentional overdose"
+    [
+     "Primary Differentials",
+     "Sympathomimetic poisoning (e.g. amphetamines, cocaine), Caffeine or other methylxanthine toxicity, Thyroid storm",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Seizures, particularly if recurrent or refractory",
-      "Ventricular or unstable supraventricular arrhythmia",
-      "Very high serum concentration, especially after modified-release ingestion",
-      "Severe hypokalaemia, acidosis or haemodynamic instability",
-      "Chronic toxicity in an older or comorbid patient even at moderate levels"
+    [
+     "Management Strategy",
+     "Stop theophylline and give multi-dose activated charcoal to enhance elimination by interrupting enterohepatic recirculation, with",
+     "Core treatment modality"
     ],
-    "prognosis": "Mild toxicity generally resolves with supportive care and gastrointestinal decontamination, but severe poisoning with seizures or arrhythmias, and chronic toxicity in vulnerable patients, carries significant mortality; prompt enhanced elimination improves outcome in severe cases.",
-    "pitfalls": [
-      "Relying on a single level and missing continued absorption from slow-release tablets",
-      "Underestimating chronic toxicity because the concentration seems only modestly raised",
-      "Neglecting to correct hypokalaemia and hypomagnesaemia driving arrhythmia",
-      "Delaying extracorporeal removal in severe or very high-level poisoning",
-      "Using unopposed agents that worsen catecholamine-driven cardiovascular effects"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Theophylline poisoning"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Stop theophylline and give multi-dose activated charcoal to enhance elimination by interrupting enterohepatic recirculation, with whole-bowel irrigation considered for modified-release preparations",
-      "Correct metabolic disturbance — replace potassium (recognising it reflects intracellular shift) and magnesium, and treat hypoglycaemia or acidosis",
-      "Control seizures with benzodiazepines then barbiturates; phenytoin is ineffective and should be avoided",
-      "Give antiemetics for the prominent vomiting and treat tachyarrhythmias, using a beta-blocker cautiously for beta-adrenergic-driven supraventricular arrhythmia with haemodynamic compromise",
-      "Institute haemodialysis for severe poisoning — refractory seizures, life-threatening arrhythmia, markedly elevated or rising concentrations, or chronic toxicity in vulnerable patients",
-      "Measure serial theophylline concentrations, especially with slow-release preparations where absorption is delayed and prolonged",
-      "Manage in a monitored critical care setting with continuous cardiac monitoring and early escalation"
+    [
+     "Clinical Pitfall",
+     "Relying on a single level and missing continued absorption from slow-release tablets",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for theophylline toxicity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "theophylline-toxicity-diagram",
+   "title": "Theophylline toxicity: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

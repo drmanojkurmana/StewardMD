@@ -6,7 +6,19 @@
  "basis": "india",
  "counterpart": "gestational-diabetes-international",
  "setting": "Antenatal clinic, PHC to district hospital, labour room",
- "aliases": ["GDM", "DIPSI", "gestational diabetes", "hyperglycaemia in pregnancy", "HIP", "75 g OGTT pregnancy", "diabetes in pregnancy", "MNT", "metformin in pregnancy", "insulin in pregnancy", "postpartum OGTT"],
+ "aliases": [
+  "GDM",
+  "DIPSI",
+  "gestational diabetes",
+  "hyperglycaemia in pregnancy",
+  "HIP",
+  "75 g OGTT pregnancy",
+  "diabetes in pregnancy",
+  "MNT",
+  "metformin in pregnancy",
+  "insulin in pregnancy",
+  "postpartum OGTT"
+ ],
  "summary": "Test every pregnant woman with a single-step 75 g oral glucose load, fasting or not; GDM if the 2-hour plasma glucose is 140 mg/dL (7.8 mmol/L) or more. Start MNT and exercise for 2 weeks, then add insulin (any gestation) or metformin (from 20 weeks) if 2-hour PPBS stays 120 mg/dL (6.7 mmol/L) or more.",
  "sections": [
   {
@@ -88,14 +100,138 @@
   }
  ],
  "drugs": [
-  { "name": "Human premix insulin 30/70", "dose": "Start 4, 6 or 8 units SC 30 minutes before breakfast (PPBS 120 to 160, 160 to 200, above 200 mg/dL); adjust by 2 units every 3rd day; split with a pre-dinner dose if FBS is raised", "notes": "MoHFW first-choice drug. Refer if more than 20 units/day. Use 40 IU/mL vials with 40 IU syringes." },
-  { "name": "Metformin", "dose": "500 mg orally twice daily with meals, titrate to maximum 2 g/day", "notes": "Only from 20 weeks. Add insulin if targets not met. GI upset common." },
-  { "name": "Oral glucose (hypoglycaemia)", "dose": "15 to 20 g glucose in water; repeat if still below 70 mg/dL after 15 minutes, then a snack", "notes": "Women on insulin should keep glucose or sugar at home." },
-  { "name": "Dexamethasone (if preterm birth expected)", "dose": "6 mg IM every 12 hours for 4 doses", "notes": "24 to 34 weeks. Expect hyperglycaemia for about 72 hours; increase monitoring and insulin." }
+  {
+   "name": "Human premix insulin 30/70",
+   "dose": "Start 4, 6 or 8 units SC 30 minutes before breakfast (PPBS 120 to 160, 160 to 200, above 200 mg/dL); adjust by 2 units every 3rd day; split with a pre-dinner dose if FBS is raised",
+   "notes": "MoHFW first-choice drug. Refer if more than 20 units/day. Use 40 IU/mL vials with 40 IU syringes."
+  },
+  {
+   "name": "Metformin",
+   "dose": "500 mg orally twice daily with meals, titrate to maximum 2 g/day",
+   "notes": "Only from 20 weeks. Add insulin if targets not met. GI upset common."
+  },
+  {
+   "name": "Oral glucose (hypoglycaemia)",
+   "dose": "15 to 20 g glucose in water; repeat if still below 70 mg/dL after 15 minutes, then a snack",
+   "notes": "Women on insulin should keep glucose or sugar at home."
+  },
+  {
+   "name": "Dexamethasone (if preterm birth expected)",
+   "dose": "6 mg IM every 12 hours for 4 doses",
+   "notes": "24 to 34 weeks. Expect hyperglycaemia for about 72 hours; increase monitoring and insulin."
+  }
  ],
  "sources": [
-  { "org": "MoHFW, Government of India", "title": "Diagnosis and management of gestational diabetes mellitus: technical and operational guidelines", "year": 2018, "url": "https://nhm.gov.in/New_Updates_2018/NHM_Components/RMNCH_MH_Guidelines/Gestational-Diabetes-Mellitus.pdf" },
-  { "org": "American Diabetes Association", "title": "15. Management of diabetes in pregnancy: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690181/" }
+  {
+   "org": "MoHFW, Government of India",
+   "title": "Diagnosis and management of gestational diabetes mellitus: technical and operational guidelines",
+   "year": 2018,
+   "url": "https://nhm.gov.in/New_Updates_2018/NHM_Components/RMNCH_MH_Guidelines/Gestational-Diabetes-Mellitus.pdf"
+  },
+  {
+   "org": "American Diabetes Association",
+   "title": "15. Management of diabetes in pregnancy: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690181/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "gestational-diabetes-pathway",
+   "title": "Gestational diabetes mellitus (GDM): India DIPSI pathway Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Universal testing: at the first antenatal contact (as early as possible) and again at 24 to 28 weeks if the first test is negative, at least 4 weeks apart. If first seen after 28 weeks, test once at first contact.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Method: 75 g glucose dissolved in about 300 mL water, drunk within 5 to 10 minutes, whether fasting or not and irrespective of the last meal. Measure plasma glucose at 2 hours (plasma-calibrated glucometer acceptable). If she vomits within",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "GDM: 2-hour plasma glucose 140 mg/dL (7.8 mmol/L) or more."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "PPBS 120 mg/dL or more after 2 weeks of MNT: add insulin or metformin to MNT."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "FBS and 2-hour PPBS every 3rd day while adjusting insulin (twice weekly while adjusting metformin), then at least monthly once stable."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for gestational diabetes mellitus (gdm): india dipsi pathway."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gestational-diabetes-summary-matrix",
+   "title": "Gestational diabetes mellitus (GDM): India DIPSI pathway Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Universal testing: at the first antenatal contact (as early as possible) and again at 24 to 28 weeks if the first test is negative, at",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "PPBS 120 mg/dL or more after 2 weeks of MNT: add insulin or metformin to MNT.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Human premix insulin 30/70: Start 4, 6 or 8 units SC 30 minutes before breakfast (PPBS 120 to 160, 160 to 200, above 200 mg/dL); adjust by",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Sending women away because they are not fasting: the DIPSI test is done in the fed or fasting state.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for gestational diabetes mellitus (gdm): india dipsi pathway."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gestational-diabetes-diagram",
+   "title": "Gestational diabetes mellitus (GDM): India DIPSI pathway: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "otulipenia",
-  "name": "Otulipenia (OTULIN deficiency)",
-  "aliases": [
-    "OTULIN-related autoinflammatory syndrome",
-    "ORAS",
-    "OTULIN deficiency",
-    "OTULIN"
+ "id": "otulipenia",
+ "name": "Otulipenia (OTULIN deficiency)",
+ "aliases": [
+  "OTULIN-related autoinflammatory syndrome",
+  "ORAS",
+  "OTULIN deficiency",
+  "OTULIN"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Autoinflammatory",
+ "specialty": "Clinical Immunology / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A recessive autoinflammatory disease caused by loss-of-function mutations in OTULIN, a deubiquitinating enzyme regulating linear ubiquitin chains",
+   "Presents in early infancy with recurrent fevers, painful nodular panniculitis, and failure to thrive",
+   "Neutrophilic panniculitis produces tender subcutaneous nodules and erythematous skin lesions",
+   "Additional features include diarrhoea, joint swelling, and marked systemic inflammation",
+   "Loss of OTULIN function dysregulates nuclear factor kappa B signalling, producing a pro-inflammatory state involving tumour necrosis factor",
+   "Anti-tumour necrosis factor therapy can be strikingly effective, and interleukin-1 blockade is also used",
+   "Early diagnosis and cytokine-directed treatment are important given the severity of infantile systemic inflammation"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Autoinflammatory",
-  "specialty": "Clinical Immunology / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A recessive autoinflammatory disease caused by loss-of-function mutations in OTULIN, a deubiquitinating enzyme regulating linear ubiquitin chains",
-      "Presents in early infancy with recurrent fevers, painful nodular panniculitis, and failure to thrive",
-      "Neutrophilic panniculitis produces tender subcutaneous nodules and erythematous skin lesions",
-      "Additional features include diarrhoea, joint swelling, and marked systemic inflammation",
-      "Loss of OTULIN function dysregulates nuclear factor kappa B signalling, producing a pro-inflammatory state involving tumour necrosis factor",
-      "Anti-tumour necrosis factor therapy can be strikingly effective, and interleukin-1 blockade is also used",
-      "Early diagnosis and cytokine-directed treatment are important given the severity of infantile systemic inflammation"
+  "pathophysiology": "Otulipenia results from biallelic loss-of-function mutations in OTULIN, an enzyme that removes linear (methionine-1 linked) ubiquitin chains and thereby restrains the linear ubiquitin chain assembly complex and downstream nuclear factor kappa B signalling. Without functional OTULIN, linear ubiquitination accumulates and inflammatory signalling is inappropriately amplified, with increased production of tumour necrosis factor and other pro-inflammatory cytokines. This unrestrained signalling drives neutrophilic panniculitis, recurrent fevers, and multi-organ inflammation in infancy. The central role of tumour necrosis factor explains the marked response to anti-tumour necrosis factor therapy.",
+  "additionalDifferentials": [
+   "Other panniculitis-associated autoinflammatory diseases such as CANDLE",
+   "Deficiency of adenosine deaminase 2 (DADA2)",
+   "Neonatal-onset multisystem inflammatory disease (NOMID/CINCA)",
+   "Infective panniculitis or cellulitis",
+   "Systemic juvenile idiopathic arthritis",
+   "Erythema nodosum from other causes"
+  ],
+  "additionalInvestigations": [
+   "Genetic testing for OTULIN mutations",
+   "Skin biopsy demonstrating neutrophilic panniculitis",
+   "Acute-phase reactants, which are markedly raised",
+   "Full blood count and inflammatory markers to monitor systemic activity",
+   "Cultures to exclude infective panniculitis",
+   "Assessment of growth and gastrointestinal symptoms"
+  ],
+  "redFlags": [
+   "Severe systemic inflammation with haemodynamic instability in infancy",
+   "Profound failure to thrive despite treatment",
+   "Features suggesting evolving macrophage activation or multi-organ dysfunction",
+   "Extensive skin and soft-tissue inflammation with secondary infection"
+  ],
+  "prognosis": "Otulipenia is a severe infantile-onset disease, but recognition and cytokine-directed therapy, particularly tumour necrosis factor blockade, can induce marked improvement and allow catch-up growth.",
+  "pitfalls": [
+   "Mistaking neutrophilic panniculitis for infective cellulitis and delaying immunomodulation",
+   "Not distinguishing otulipenia from other panniculitis-associated autoinflammatory diseases",
+   "Overlooking the strong response to anti-tumour necrosis factor therapy",
+   "Delaying genetic testing in an infant with recurrent fevers and panniculitis"
+  ],
+  "references": [
+   "Textbook of Autoinflammation",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Anti-tumour necrosis factor biologic therapy as the mainstay, targeting the dysregulated nuclear factor kappa B-driven cytokine excess and often strikingly effective",
+   "Interleukin-1 blockade as an alternative or adjunctive cytokine-directed treatment",
+   "Corticosteroids to control acute severe systemic inflammation and panniculitic flares",
+   "Nutritional support with monitoring of growth to enable catch-up growth once inflammation is controlled",
+   "Serial acute-phase reactants and full blood count to monitor disease activity and treatment response",
+   "Exclude infective panniculitis with cultures before and during immunosuppression, with vigilance for infection on biologic therapy",
+   "Clinical genetics referral for autosomal recessive OTULIN counselling and family testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "otulipenia-pathway",
+   "title": "Otulipenia (OTULIN deficiency): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A recessive autoinflammatory disease caused by loss-of-function mutations in OTULIN, a deubiquitinating enzyme regulating linear ubiquitin chains",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe systemic inflammation with haemodynamic instability in infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Genetic testing for OTULIN mutations, Skin biopsy demonstrating neutrophilic panniculitis, Acute-phase reactants, which are markedly raised"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Anti-tumour necrosis factor biologic therapy as the mainstay, targeting the dysregulated nuclear factor kappa B-driven cytokine excess and often strikingly effective"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking neutrophilic panniculitis for infective cellulitis and delaying immunomodulation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of otulipenia (otulin deficiency)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "otulipenia-matrix",
+   "title": "Otulipenia (OTULIN deficiency): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A recessive autoinflammatory disease caused by loss-of-function mutations in OTULIN, a deubiquitinating enzyme regulating linear",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Otulipenia results from biallelic loss-of-function mutations in OTULIN, an enzyme that removes linear (methionine-1 linked) ubiquitin chains and thereby restrains the linear ubiquitin chain assembly complex and downstream nuclear factor kappa B signalling. Without functional OTULIN, linear ubiquitination accumulates and inflammatory signalling is inappropriately amplified, with increased production of tumour necrosis factor and other pro-inflammatory cytokines. This unrestrained signalling drives neutrophilic panniculitis, recurrent fevers, and multi-organ inflammation in infancy. The central role of tumour necrosis factor explains the marked response to anti-tumour necrosis factor therapy.",
-    "additionalDifferentials": [
-      "Other panniculitis-associated autoinflammatory diseases such as CANDLE",
-      "Deficiency of adenosine deaminase 2 (DADA2)",
-      "Neonatal-onset multisystem inflammatory disease (NOMID/CINCA)",
-      "Infective panniculitis or cellulitis",
-      "Systemic juvenile idiopathic arthritis",
-      "Erythema nodosum from other causes"
+    [
+     "Key Investigations",
+     "Genetic testing for OTULIN mutations, Skin biopsy demonstrating neutrophilic panniculitis, Acute-phase reactants, which are",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Genetic testing for OTULIN mutations",
-      "Skin biopsy demonstrating neutrophilic panniculitis",
-      "Acute-phase reactants, which are markedly raised",
-      "Full blood count and inflammatory markers to monitor systemic activity",
-      "Cultures to exclude infective panniculitis",
-      "Assessment of growth and gastrointestinal symptoms"
+    [
+     "Primary Differentials",
+     "Other panniculitis-associated autoinflammatory diseases such as CANDLE, Deficiency of adenosine deaminase 2 (DADA2),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe systemic inflammation with haemodynamic instability in infancy",
-      "Profound failure to thrive despite treatment",
-      "Features suggesting evolving macrophage activation or multi-organ dysfunction",
-      "Extensive skin and soft-tissue inflammation with secondary infection"
+    [
+     "Management Strategy",
+     "Anti-tumour necrosis factor biologic therapy as the mainstay, targeting the dysregulated nuclear factor kappa B-driven cytokine",
+     "Core treatment modality"
     ],
-    "prognosis": "Otulipenia is a severe infantile-onset disease, but recognition and cytokine-directed therapy, particularly tumour necrosis factor blockade, can induce marked improvement and allow catch-up growth.",
-    "pitfalls": [
-      "Mistaking neutrophilic panniculitis for infective cellulitis and delaying immunomodulation",
-      "Not distinguishing otulipenia from other panniculitis-associated autoinflammatory diseases",
-      "Overlooking the strong response to anti-tumour necrosis factor therapy",
-      "Delaying genetic testing in an infant with recurrent fevers and panniculitis"
-    ],
-    "references": [
-      "Textbook of Autoinflammation",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Anti-tumour necrosis factor biologic therapy as the mainstay, targeting the dysregulated nuclear factor kappa B-driven cytokine excess and often strikingly effective",
-      "Interleukin-1 blockade as an alternative or adjunctive cytokine-directed treatment",
-      "Corticosteroids to control acute severe systemic inflammation and panniculitic flares",
-      "Nutritional support with monitoring of growth to enable catch-up growth once inflammation is controlled",
-      "Serial acute-phase reactants and full blood count to monitor disease activity and treatment response",
-      "Exclude infective panniculitis with cultures before and during immunosuppression, with vigilance for infection on biologic therapy",
-      "Clinical genetics referral for autosomal recessive OTULIN counselling and family testing"
+    [
+     "Clinical Pitfall",
+     "Mistaking neutrophilic panniculitis for infective cellulitis and delaying immunomodulation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for otulipenia (otulin deficiency)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "otulipenia-diagram",
+   "title": "Otulipenia (OTULIN deficiency): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

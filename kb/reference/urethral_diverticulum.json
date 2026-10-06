@@ -1,79 +1,174 @@
 {
-  "id": "urethral_diverticulum",
-  "name": "Urethral diverticulum",
-  "aliases": [
-    "UD",
-    "female urethral diverticulum",
-    "periurethral diverticulum"
+ "id": "urethral_diverticulum",
+ "name": "Urethral diverticulum",
+ "aliases": [
+  "UD",
+  "female urethral diverticulum",
+  "periurethral diverticulum"
+ ],
+ "class": "non_infective",
+ "system": "Urology / Andrology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An epithelium-lined outpouching arising from the urethra, most commonly in women along the mid or distal posterior urethra",
+   "The classic triad (the 'three Ds') is dysuria, dyspareunia, and post-void dribbling, though presentations vary widely",
+   "A tender anterior vaginal wall mass that may express pus or urine from the meatus on compression is characteristic",
+   "Symptoms are often chronic and non-specific, so diagnosis is frequently delayed and the condition is mistaken for recurrent cystitis or vaginitis",
+   "MRI of the pelvis and urethra is the most sensitive imaging test and best defines the anatomy; voiding cystourethrography, ultrasound, and urethroscopy also contribute",
+   "Management is surgical excision (diverticulectomy) with urethral reconstruction for symptomatic cases, while small asymptomatic diverticula may be observed",
+   "Complications include recurrent infection, stone formation within the diverticulum, and, rarely, malignancy arising in the diverticular lining"
   ],
-  "class": "non_infective",
-  "system": "Urology / Andrology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An epithelium-lined outpouching arising from the urethra, most commonly in women along the mid or distal posterior urethra",
-      "The classic triad (the 'three Ds') is dysuria, dyspareunia, and post-void dribbling, though presentations vary widely",
-      "A tender anterior vaginal wall mass that may express pus or urine from the meatus on compression is characteristic",
-      "Symptoms are often chronic and non-specific, so diagnosis is frequently delayed and the condition is mistaken for recurrent cystitis or vaginitis",
-      "MRI of the pelvis and urethra is the most sensitive imaging test and best defines the anatomy; voiding cystourethrography, ultrasound, and urethroscopy also contribute",
-      "Management is surgical excision (diverticulectomy) with urethral reconstruction for symptomatic cases, while small asymptomatic diverticula may be observed",
-      "Complications include recurrent infection, stone formation within the diverticulum, and, rarely, malignancy arising in the diverticular lining"
+  "pathophysiology": "Most acquired female urethral diverticula are thought to arise from the periurethral (paraurethral or Skene's) glands. Repeated infection and obstruction of these glands lead to abscess formation, which then ruptures into the urethral lumen and leaves an epithelium-lined cavity communicating with the urethra through a neck. Urine and debris collect in this sac and drain intermittently, producing post-void dribbling and recurrent infection, while stasis predisposes to stone formation and, rarely, malignant change. The size and location of the sac and its ostium determine the clinical picture and the surgical approach.",
+  "additionalDifferentials": [
+   "Recurrent urinary tract infection or cystitis",
+   "Urethral caruncle",
+   "Skene's gland cyst or abscess",
+   "Vaginal wall (Gartner's duct) cyst",
+   "Urethral or vaginal carcinoma",
+   "Cystocele",
+   "Ectopic ureterocele"
+  ],
+  "additionalInvestigations": [
+   "MRI of the urethra and pelvis",
+   "Voiding cystourethrography",
+   "Transvaginal or transperineal ultrasound",
+   "Urethroscopy and cystoscopy",
+   "Urinalysis and urine culture",
+   "Double-balloon positive-pressure urethrography where MRI is unavailable"
+  ],
+  "redFlags": [
+   "A firm or fixed mass or a solid component suggesting malignancy within the diverticulum",
+   "Haematuria",
+   "Rapid enlargement",
+   "A stone within the diverticulum with severe pain",
+   "Recurrent sepsis"
+  ],
+  "prognosis": "Good after complete surgical excision, with most patients gaining symptom relief; recurrence, urethrovaginal fistula, or stress incontinence can complicate surgery, and rare diverticular malignancy worsens the outlook.",
+  "pitfalls": [
+   "Repeatedly treating 'recurrent cystitis' without considering a diverticulum as the underlying cause",
+   "Relying on examination alone and not obtaining dedicated MRI to define the anatomy",
+   "Missing a malignancy or a stone arising within the diverticulum",
+   "Incomplete excision leaving a residual sac and causing recurrence or fistula"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "Blandy's Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Perform transvaginal diverticulectomy with complete excision of the sac and multilayer urethral reconstruction as the definitive treatment for symptomatic disease",
+   "Treat recurrent urinary tract infection with antibiotics and drain any associated periurethral abscess before elective repair",
+   "Observe small, incidental, asymptomatic diverticula",
+   "Excise and manage any calculus or malignancy identified within the diverticulum",
+   "Plan surgery with MRI of the urethra and pelvis to define sac and ostium anatomy, and use an interposition flap where fistula risk is high",
+   "Monitor for post-operative complications including recurrence, urethrovaginal fistula and de novo stress incontinence, managing through a specialist urology or urogynaecology service"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "urethral_diverticulum-pathway",
+   "title": "Urethral diverticulum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An epithelium-lined outpouching arising from the urethra, most commonly in women along the mid or distal posterior urethra",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A firm or fixed mass or a solid component suggesting malignancy within the diverticulum",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the urethra and pelvis, Voiding cystourethrography, Transvaginal or transperineal ultrasound"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Perform transvaginal diverticulectomy with complete excision of the sac and multilayer urethral reconstruction as the definitive treatment for symptomatic disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Repeatedly treating 'recurrent cystitis' without considering a diverticulum as the underlying cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of urethral diverticulum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urethral_diverticulum-matrix",
+   "title": "Urethral diverticulum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An epithelium-lined outpouching arising from the urethra, most commonly in women along the mid or distal posterior urethra",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Most acquired female urethral diverticula are thought to arise from the periurethral (paraurethral or Skene's) glands. Repeated infection and obstruction of these glands lead to abscess formation, which then ruptures into the urethral lumen and leaves an epithelium-lined cavity communicating with the urethra through a neck. Urine and debris collect in this sac and drain intermittently, producing post-void dribbling and recurrent infection, while stasis predisposes to stone formation and, rarely, malignant change. The size and location of the sac and its ostium determine the clinical picture and the surgical approach.",
-    "additionalDifferentials": [
-      "Recurrent urinary tract infection or cystitis",
-      "Urethral caruncle",
-      "Skene's gland cyst or abscess",
-      "Vaginal wall (Gartner's duct) cyst",
-      "Urethral or vaginal carcinoma",
-      "Cystocele",
-      "Ectopic ureterocele"
+    [
+     "Key Investigations",
+     "MRI of the urethra and pelvis, Voiding cystourethrography, Transvaginal or transperineal ultrasound",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the urethra and pelvis",
-      "Voiding cystourethrography",
-      "Transvaginal or transperineal ultrasound",
-      "Urethroscopy and cystoscopy",
-      "Urinalysis and urine culture",
-      "Double-balloon positive-pressure urethrography where MRI is unavailable"
+    [
+     "Primary Differentials",
+     "Recurrent urinary tract infection or cystitis, Urethral caruncle, Skene's gland cyst or abscess",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A firm or fixed mass or a solid component suggesting malignancy within the diverticulum",
-      "Haematuria",
-      "Rapid enlargement",
-      "A stone within the diverticulum with severe pain",
-      "Recurrent sepsis"
+    [
+     "Management Strategy",
+     "Perform transvaginal diverticulectomy with complete excision of the sac and multilayer urethral reconstruction as the definitive",
+     "Core treatment modality"
     ],
-    "prognosis": "Good after complete surgical excision, with most patients gaining symptom relief; recurrence, urethrovaginal fistula, or stress incontinence can complicate surgery, and rare diverticular malignancy worsens the outlook.",
-    "pitfalls": [
-      "Repeatedly treating 'recurrent cystitis' without considering a diverticulum as the underlying cause",
-      "Relying on examination alone and not obtaining dedicated MRI to define the anatomy",
-      "Missing a malignancy or a stone arising within the diverticulum",
-      "Incomplete excision leaving a residual sac and causing recurrence or fistula"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "Blandy's Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Perform transvaginal diverticulectomy with complete excision of the sac and multilayer urethral reconstruction as the definitive treatment for symptomatic disease",
-      "Treat recurrent urinary tract infection with antibiotics and drain any associated periurethral abscess before elective repair",
-      "Observe small, incidental, asymptomatic diverticula",
-      "Excise and manage any calculus or malignancy identified within the diverticulum",
-      "Plan surgery with MRI of the urethra and pelvis to define sac and ostium anatomy, and use an interposition flap where fistula risk is high",
-      "Monitor for post-operative complications including recurrence, urethrovaginal fistula and de novo stress incontinence, managing through a specialist urology or urogynaecology service"
+    [
+     "Clinical Pitfall",
+     "Repeatedly treating 'recurrent cystitis' without considering a diverticulum as the underlying cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for urethral diverticulum."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "urethral-diverticulum-diagram",
+   "title": "Urethral diverticulum: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

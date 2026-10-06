@@ -1,80 +1,175 @@
 {
-  "id": "sanfilippo_syndrome",
-  "name": "Sanfilippo syndrome (MPS III)",
-  "aliases": [
-    "MPS III",
-    "mucopolysaccharidosis type III",
-    "heparan sulfate storage disease",
-    "Sanfilippo A B C D",
-    "sulfamidase / NAGLU / HGSNAT / GNS deficiency"
+ "id": "sanfilippo_syndrome",
+ "name": "Sanfilippo syndrome (MPS III)",
+ "aliases": [
+  "MPS III",
+  "mucopolysaccharidosis type III",
+  "heparan sulfate storage disease",
+  "Sanfilippo A B C D",
+  "sulfamidase / NAGLU / HGSNAT / GNS deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Dominated by progressive neurodegeneration and severe behavioural disturbance, with comparatively mild somatic and skeletal features",
+   "Comprises four biochemical subtypes (A, B, C, D), each from deficiency of a distinct enzyme in the heparan sulfate degradation pathway",
+   "Typical course is an initial period of near-normal development followed by developmental regression, hyperactivity, aggression, and sleep disturbance",
+   "Coarse facial features and organomegaly are subtle compared with other mucopolysaccharidoses, which frequently delays diagnosis",
+   "Only heparan sulfate accumulates and is excreted in excess, unlike the mixed glycosaminoglycan pattern of MPS I and II",
+   "Enzyme assays identify the specific subtype after urinary heparan sulfate points to the diagnosis",
+   "Progressive dementia, seizures, and loss of mobility mark the later stages"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Dominated by progressive neurodegeneration and severe behavioural disturbance, with comparatively mild somatic and skeletal features",
-      "Comprises four biochemical subtypes (A, B, C, D), each from deficiency of a distinct enzyme in the heparan sulfate degradation pathway",
-      "Typical course is an initial period of near-normal development followed by developmental regression, hyperactivity, aggression, and sleep disturbance",
-      "Coarse facial features and organomegaly are subtle compared with other mucopolysaccharidoses, which frequently delays diagnosis",
-      "Only heparan sulfate accumulates and is excreted in excess, unlike the mixed glycosaminoglycan pattern of MPS I and II",
-      "Enzyme assays identify the specific subtype after urinary heparan sulfate points to the diagnosis",
-      "Progressive dementia, seizures, and loss of mobility mark the later stages"
+  "pathophysiology": "Sanfilippo syndrome is caused by deficiency of one of four lysosomal enzymes required for the sequential degradation of heparan sulfate: heparan-N-sulfatase (type A, SGSH), alpha-N-acetylglucosaminidase (type B, NAGLU), acetyl-CoA:alpha-glucosaminide N-acetyltransferase (type C, HGSNAT), and N-acetylglucosamine-6-sulfatase (type D, GNS). The resulting block leads to lysosomal accumulation of heparan sulfate, which is particularly toxic to neurons, producing the profound central nervous system degeneration that characterises the disorder. Somatic tissues are relatively spared because dermatan sulfate metabolism is intact. Excess heparan sulfate is excreted in the urine. All four subtypes are inherited in an autosomal recessive manner and are clinically indistinguishable, requiring enzymatic or molecular testing to separate them.",
+  "additionalDifferentials": [
+   "Other mucopolysaccharidoses, especially Hunter syndrome (MPS II)",
+   "Idiopathic autism spectrum disorder or attention deficit hyperactivity disorder",
+   "Rett syndrome and other neurodevelopmental regression disorders",
+   "Neuronal ceroid lipofuscinoses",
+   "Other lysosomal storage disorders with dementia",
+   "Non-syndromic intellectual disability with behavioural problems"
+  ],
+  "additionalInvestigations": [
+   "Quantitative urinary glycosaminoglycan analysis showing isolated heparan sulfate elevation",
+   "Enzyme assays for the four candidate enzymes to determine subtype",
+   "Molecular testing of SGSH, NAGLU, HGSNAT, or GNS genes",
+   "Brain MRI to document white matter and atrophic changes",
+   "Electroencephalography where seizures are suspected",
+   "Developmental and neuropsychological assessment to track regression"
+  ],
+  "redFlags": [
+   "Progressive developmental regression after a period of normal milestones",
+   "Escalating behavioural disturbance with severe sleep disruption",
+   "New-onset seizures signalling advancing neurodegeneration",
+   "Loss of ambulation and swallowing difficulty in later stages"
+  ],
+  "prognosis": "The disorder is relentlessly progressive, with most patients declining into severe dementia and immobility, and survival typically limited to the second or third decade. No disease-modifying therapy is established, so management is supportive.",
+  "pitfalls": [
+   "Attributing early behavioural symptoms solely to a primary neurodevelopmental disorder and missing the storage disease",
+   "Expecting prominent coarse facies or organomegaly and dismissing the diagnosis when they are mild",
+   "Relying on a single enzyme assay without confirming the specific subtype",
+   "Overlooking heparan sulfate on urinary screening if only total glycosaminoglycan is measured"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics",
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive, symptom-directed care as no disease-modifying therapy is established, with enzyme replacement ineffective against the central nervous system disease",
+   "Behavioural management of hyperactivity, aggression and severe sleep disturbance, including melatonin and a structured environment",
+   "Antiepileptic drugs for seizures as the neurodegeneration advances",
+   "Physiotherapy, occupational therapy and mobility support to maintain function and manage progressive motor decline",
+   "Nutritional and feeding support, including safe swallowing assessment and gastrostomy feeding in late disease",
+   "Coordinated multidisciplinary and palliative care addressing the relentless neurological decline",
+   "Genetic counselling for this autosomal recessive disorder, with subtype-specific gene testing and screening of relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sanfilippo_syndrome-pathway",
+   "title": "Sanfilippo syndrome (MPS III): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Dominated by progressive neurodegeneration and severe behavioural disturbance, with comparatively mild somatic and skeletal features",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive developmental regression after a period of normal milestones",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Quantitative urinary glycosaminoglycan analysis showing isolated heparan sulfate elevation, Enzyme assays for the four candidate enzymes to determine subtype, Molecular testing of SGSH, NAGLU, HGSNAT, or GNS genes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive, symptom-directed care as no disease-modifying therapy is established, with enzyme replacement ineffective against the central nervous system disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing early behavioural symptoms solely to a primary neurodevelopmental disorder and missing the storage disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sanfilippo syndrome (mps iii)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sanfilippo_syndrome-matrix",
+   "title": "Sanfilippo syndrome (MPS III): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Dominated by progressive neurodegeneration and severe behavioural disturbance, with comparatively mild somatic and skeletal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sanfilippo syndrome is caused by deficiency of one of four lysosomal enzymes required for the sequential degradation of heparan sulfate: heparan-N-sulfatase (type A, SGSH), alpha-N-acetylglucosaminidase (type B, NAGLU), acetyl-CoA:alpha-glucosaminide N-acetyltransferase (type C, HGSNAT), and N-acetylglucosamine-6-sulfatase (type D, GNS). The resulting block leads to lysosomal accumulation of heparan sulfate, which is particularly toxic to neurons, producing the profound central nervous system degeneration that characterises the disorder. Somatic tissues are relatively spared because dermatan sulfate metabolism is intact. Excess heparan sulfate is excreted in the urine. All four subtypes are inherited in an autosomal recessive manner and are clinically indistinguishable, requiring enzymatic or molecular testing to separate them.",
-    "additionalDifferentials": [
-      "Other mucopolysaccharidoses, especially Hunter syndrome (MPS II)",
-      "Idiopathic autism spectrum disorder or attention deficit hyperactivity disorder",
-      "Rett syndrome and other neurodevelopmental regression disorders",
-      "Neuronal ceroid lipofuscinoses",
-      "Other lysosomal storage disorders with dementia",
-      "Non-syndromic intellectual disability with behavioural problems"
+    [
+     "Key Investigations",
+     "Quantitative urinary glycosaminoglycan analysis showing isolated heparan sulfate elevation, Enzyme assays for the four candidate",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Quantitative urinary glycosaminoglycan analysis showing isolated heparan sulfate elevation",
-      "Enzyme assays for the four candidate enzymes to determine subtype",
-      "Molecular testing of SGSH, NAGLU, HGSNAT, or GNS genes",
-      "Brain MRI to document white matter and atrophic changes",
-      "Electroencephalography where seizures are suspected",
-      "Developmental and neuropsychological assessment to track regression"
+    [
+     "Primary Differentials",
+     "Other mucopolysaccharidoses, especially Hunter syndrome (MPS II), Idiopathic autism spectrum disorder or attention deficit",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive developmental regression after a period of normal milestones",
-      "Escalating behavioural disturbance with severe sleep disruption",
-      "New-onset seizures signalling advancing neurodegeneration",
-      "Loss of ambulation and swallowing difficulty in later stages"
+    [
+     "Management Strategy",
+     "Supportive, symptom-directed care as no disease-modifying therapy is established, with enzyme replacement ineffective against the",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is relentlessly progressive, with most patients declining into severe dementia and immobility, and survival typically limited to the second or third decade. No disease-modifying therapy is established, so management is supportive.",
-    "pitfalls": [
-      "Attributing early behavioural symptoms solely to a primary neurodevelopmental disorder and missing the storage disease",
-      "Expecting prominent coarse facies or organomegaly and dismissing the diagnosis when they are mild",
-      "Relying on a single enzyme assay without confirming the specific subtype",
-      "Overlooking heparan sulfate on urinary screening if only total glycosaminoglycan is measured"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics",
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive, symptom-directed care as no disease-modifying therapy is established, with enzyme replacement ineffective against the central nervous system disease",
-      "Behavioural management of hyperactivity, aggression and severe sleep disturbance, including melatonin and a structured environment",
-      "Antiepileptic drugs for seizures as the neurodegeneration advances",
-      "Physiotherapy, occupational therapy and mobility support to maintain function and manage progressive motor decline",
-      "Nutritional and feeding support, including safe swallowing assessment and gastrostomy feeding in late disease",
-      "Coordinated multidisciplinary and palliative care addressing the relentless neurological decline",
-      "Genetic counselling for this autosomal recessive disorder, with subtype-specific gene testing and screening of relatives"
+    [
+     "Clinical Pitfall",
+     "Attributing early behavioural symptoms solely to a primary neurodevelopmental disorder and missing the storage disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sanfilippo syndrome (mps iii)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sanfilippo-syndrome-diagram",
+   "title": "Sanfilippo syndrome (MPS III): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

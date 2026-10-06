@@ -1,78 +1,173 @@
 {
-  "id": "retinal_macroaneurysm",
-  "name": "Retinal arterial macroaneurysm",
-  "aliases": [
-    "RAM",
-    "retinal macroaneurysm",
-    "arterial macroaneurysm"
+ "id": "retinal_macroaneurysm",
+ "name": "Retinal arterial macroaneurysm",
+ "aliases": [
+  "RAM",
+  "retinal macroaneurysm",
+  "arterial macroaneurysm"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Retina",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acquired focal dilatation of a retinal arteriole, usually within the first three orders of branching and often along the superotemporal arcade",
+   "Typically affects elderly, hypertensive patients and is more common in women",
+   "May be asymptomatic and found incidentally, or cause visual loss through exudative maculopathy or haemorrhage",
+   "The hallmark of a ruptured macroaneurysm is haemorrhage at multiple retinal levels simultaneously, which may be sub-retinal, intraretinal, sub-internal limiting membrane (pre-retinal) and into the vitreous",
+   "The exudative form produces macular oedema and a ring of hard exudate that can threaten the fovea",
+   "Fluorescein angiography shows a fusiform or round dilatation of the arteriole with variable leakage",
+   "Many lesions thrombose and involute spontaneously, so management ranges from observation to focal laser or intravitreal anti-VEGF therapy when the macula is threatened"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Retina",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acquired focal dilatation of a retinal arteriole, usually within the first three orders of branching and often along the superotemporal arcade",
-      "Typically affects elderly, hypertensive patients and is more common in women",
-      "May be asymptomatic and found incidentally, or cause visual loss through exudative maculopathy or haemorrhage",
-      "The hallmark of a ruptured macroaneurysm is haemorrhage at multiple retinal levels simultaneously, which may be sub-retinal, intraretinal, sub-internal limiting membrane (pre-retinal) and into the vitreous",
-      "The exudative form produces macular oedema and a ring of hard exudate that can threaten the fovea",
-      "Fluorescein angiography shows a fusiform or round dilatation of the arteriole with variable leakage",
-      "Many lesions thrombose and involute spontaneously, so management ranges from observation to focal laser or intravitreal anti-VEGF therapy when the macula is threatened"
+  "pathophysiology": "Chronic hypertension and arteriosclerosis weaken the wall of a retinal arteriole, producing a focal saccular or fusiform dilatation. The abnormal vessel may leak plasma, causing macular oedema and hard exudate, or it may rupture, releasing blood that can dissect into several retinal planes at once, giving the characteristic multilevel haemorrhage. Some macroaneurysms undergo spontaneous thrombosis and sclerosis, involuting without treatment.",
+  "additionalDifferentials": [
+   "Neovascular (wet) age-related macular degeneration",
+   "Diabetic maculopathy",
+   "Branch retinal vein occlusion",
+   "Retinal capillary haemangioma",
+   "Coats disease and other retinal telangiectasia",
+   "Vitreous haemorrhage from another cause"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination to locate the arteriolar dilatation and characterise the haemorrhage",
+   "Optical coherence tomography to assess macular oedema and the level of haemorrhage",
+   "Fluorescein angiography to confirm the fusiform arteriolar dilatation and demonstrate leakage",
+   "Optical coherence tomography angiography or indocyanine green angiography when the view is obscured by blood",
+   "Blood pressure measurement and cardiovascular risk assessment",
+   "B-scan ultrasound if dense vitreous haemorrhage prevents fundus examination"
+  ],
+  "redFlags": [
+   "Dense vitreous haemorrhage obscuring the fundus",
+   "Submacular haemorrhage threatening the fovea",
+   "Associated uncontrolled hypertension",
+   "Multiple or bilateral lesions suggesting significant systemic vascular disease"
+  ],
+  "prognosis": "The outlook is often favourable, as many macroaneurysms involute spontaneously; the visual outcome depends chiefly on whether the fovea is involved by exudate or haemorrhage.",
+  "pitfalls": [
+   "Mistaking the lesion for wet age-related macular degeneration and committing to unnecessary long-term injections",
+   "Failing to identify and treat underlying hypertension",
+   "Misattributing an unexplained vitreous haemorrhage in an elderly patient",
+   "Over-treating a lesion that is already thrombosing and involuting"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Ryan's Retina",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe asymptomatic or non-foveal lesions, as many macroaneurysms thrombose and involute spontaneously",
+   "Control the underlying hypertension and cardiovascular risk factors that drive arteriolar wall damage",
+   "Treat sight-threatening exudative maculopathy with focal laser photocoagulation and/or intravitreal anti-VEGF therapy",
+   "Manage dense vitreous haemorrhage by observation or pars plana vitrectomy, and consider Nd:YAG membranotomy or pneumatic displacement for premacular haemorrhage",
+   "Monitor with optical coherence tomography and fundus examination for macular oedema and resolution",
+   "Refer to a medical retina specialist for treatment decisions and to address systemic vascular risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "retinal_macroaneurysm-pathway",
+   "title": "Retinal arterial macroaneurysm: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acquired focal dilatation of a retinal arteriole, usually within the first three orders of branching and often along the superotemporal arcade",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Dense vitreous haemorrhage obscuring the fundus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination to locate the arteriolar dilatation and characterise the haemorrhage, Optical coherence tomography to assess macular oedema and the level of haemorrhage, Fluorescein angiography to confirm the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe asymptomatic or non-foveal lesions, as many macroaneurysms thrombose and involute spontaneously"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the lesion for wet age-related macular degeneration and committing to unnecessary long-term injections"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of retinal arterial macroaneurysm."
+  }
+ ],
+ "tables": [
+  {
+   "id": "retinal_macroaneurysm-matrix",
+   "title": "Retinal arterial macroaneurysm: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acquired focal dilatation of a retinal arteriole, usually within the first three orders of branching and often along the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic hypertension and arteriosclerosis weaken the wall of a retinal arteriole, producing a focal saccular or fusiform dilatation. The abnormal vessel may leak plasma, causing macular oedema and hard exudate, or it may rupture, releasing blood that can dissect into several retinal planes at once, giving the characteristic multilevel haemorrhage. Some macroaneurysms undergo spontaneous thrombosis and sclerosis, involuting without treatment.",
-    "additionalDifferentials": [
-      "Neovascular (wet) age-related macular degeneration",
-      "Diabetic maculopathy",
-      "Branch retinal vein occlusion",
-      "Retinal capillary haemangioma",
-      "Coats disease and other retinal telangiectasia",
-      "Vitreous haemorrhage from another cause"
+    [
+     "Key Investigations",
+     "Dilated fundus examination to locate the arteriolar dilatation and characterise the haemorrhage, Optical coherence tomography to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination to locate the arteriolar dilatation and characterise the haemorrhage",
-      "Optical coherence tomography to assess macular oedema and the level of haemorrhage",
-      "Fluorescein angiography to confirm the fusiform arteriolar dilatation and demonstrate leakage",
-      "Optical coherence tomography angiography or indocyanine green angiography when the view is obscured by blood",
-      "Blood pressure measurement and cardiovascular risk assessment",
-      "B-scan ultrasound if dense vitreous haemorrhage prevents fundus examination"
+    [
+     "Primary Differentials",
+     "Neovascular (wet) age-related macular degeneration, Diabetic maculopathy, Branch retinal vein occlusion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Dense vitreous haemorrhage obscuring the fundus",
-      "Submacular haemorrhage threatening the fovea",
-      "Associated uncontrolled hypertension",
-      "Multiple or bilateral lesions suggesting significant systemic vascular disease"
+    [
+     "Management Strategy",
+     "Observe asymptomatic or non-foveal lesions, as many macroaneurysms thrombose and involute spontaneously",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is often favourable, as many macroaneurysms involute spontaneously; the visual outcome depends chiefly on whether the fovea is involved by exudate or haemorrhage.",
-    "pitfalls": [
-      "Mistaking the lesion for wet age-related macular degeneration and committing to unnecessary long-term injections",
-      "Failing to identify and treat underlying hypertension",
-      "Misattributing an unexplained vitreous haemorrhage in an elderly patient",
-      "Over-treating a lesion that is already thrombosing and involuting"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Ryan's Retina",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe asymptomatic or non-foveal lesions, as many macroaneurysms thrombose and involute spontaneously",
-      "Control the underlying hypertension and cardiovascular risk factors that drive arteriolar wall damage",
-      "Treat sight-threatening exudative maculopathy with focal laser photocoagulation and/or intravitreal anti-VEGF therapy",
-      "Manage dense vitreous haemorrhage by observation or pars plana vitrectomy, and consider Nd:YAG membranotomy or pneumatic displacement for premacular haemorrhage",
-      "Monitor with optical coherence tomography and fundus examination for macular oedema and resolution",
-      "Refer to a medical retina specialist for treatment decisions and to address systemic vascular risk"
+    [
+     "Clinical Pitfall",
+     "Mistaking the lesion for wet age-related macular degeneration and committing to unnecessary long-term injections",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for retinal arterial macroaneurysm."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "retinal-macroaneurysm-diagram",
+   "title": "Retinal arterial macroaneurysm: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

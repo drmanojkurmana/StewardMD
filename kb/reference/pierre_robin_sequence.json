@@ -1,81 +1,176 @@
 {
-  "id": "pierre_robin_sequence",
-  "name": "Pierre Robin sequence",
-  "aliases": [
-    "Robin sequence",
-    "Pierre Robin syndrome",
-    "Pierre Robin malformation sequence",
-    "PRS"
+ "id": "pierre_robin_sequence",
+ "name": "Pierre Robin sequence",
+ "aliases": [
+  "Robin sequence",
+  "Pierre Robin syndrome",
+  "Pierre Robin malformation sequence",
+  "PRS"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Craniofacial",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by the triad of micrognathia, glossoptosis (posterior tongue displacement), and consequent upper airway obstruction, frequently with a U-shaped cleft palate",
+   "It is a sequence rather than a syndrome, meaning one initiating event (mandibular hypoplasia) cascades into the other features",
+   "Airway obstruction is often positional and may improve with prone or lateral positioning in milder cases",
+   "Feeding difficulty is common and closely linked to the degree of airway compromise",
+   "It may be isolated or part of a broader syndrome, most commonly Stickler syndrome, so systemic and ophthalmological review is important",
+   "Mandibular catch-up growth over the first years often improves airway and feeding without major surgery in milder cases",
+   "Severity ranges from mild positional obstruction to critical airway compromise requiring surgical intervention"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Craniofacial",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by the triad of micrognathia, glossoptosis (posterior tongue displacement), and consequent upper airway obstruction, frequently with a U-shaped cleft palate",
-      "It is a sequence rather than a syndrome, meaning one initiating event (mandibular hypoplasia) cascades into the other features",
-      "Airway obstruction is often positional and may improve with prone or lateral positioning in milder cases",
-      "Feeding difficulty is common and closely linked to the degree of airway compromise",
-      "It may be isolated or part of a broader syndrome, most commonly Stickler syndrome, so systemic and ophthalmological review is important",
-      "Mandibular catch-up growth over the first years often improves airway and feeding without major surgery in milder cases",
-      "Severity ranges from mild positional obstruction to critical airway compromise requiring surgical intervention"
+  "pathophysiology": "The sequence is initiated by early hypoplasia of the mandible. The small jaw leaves insufficient room in the oral cavity, so the tongue is displaced posteriorly and superiorly (glossoptosis), which in turn obstructs the airway and, during palatal shelf fusion, mechanically prevents the shelves meeting, producing the characteristic wide U-shaped cleft palate. The initiating mandibular deficiency may result from intrinsic developmental disturbance of the first branchial arch or from extrinsic constraint such as oligohydramnios limiting jaw movement in utero. Because a single early anomaly drives the downstream features, the condition is classified as a malformation sequence, and it may occur in isolation or as a component of a recognisable syndrome.",
+  "additionalDifferentials": [
+   "Stickler syndrome (commonest associated syndrome)",
+   "Treacher Collins syndrome",
+   "22q11.2 deletion (velocardiofacial) syndrome",
+   "Cornelia de Lange syndrome",
+   "Isolated cleft palate without micrognathia",
+   "Neuromuscular causes of glossoptosis and hypotonia"
+  ],
+  "additionalInvestigations": [
+   "Sleep study or overnight oximetry to quantify obstructive events and desaturation",
+   "Flexible nasendoscopy to characterise the level and mechanism of airway obstruction",
+   "Feeding and swallowing assessment with monitoring of weight gain",
+   "Ophthalmological review and genetic evaluation to identify Stickler and other syndromes",
+   "Echocardiography where a syndromic association is suspected",
+   "Molecular or chromosomal testing guided by associated anomalies"
+  ],
+  "redFlags": [
+   "Severe or worsening obstructive apnoea with desaturation or cor pulmonale",
+   "Failure to thrive from inability to feed safely",
+   "Cyanotic episodes or respiratory distress unrelieved by positioning",
+   "Recurrent aspiration",
+   "Signs of a wider syndrome requiring urgent multisystem evaluation"
+  ],
+  "prognosis": "Isolated Robin sequence generally has a favourable outlook as mandibular growth improves the airway over time, whereas syndromic cases and those with severe obstruction carry greater morbidity and depend on the associated condition.",
+  "pitfalls": [
+   "Treating it as a fixed syndrome rather than recognising an initiating sequence",
+   "Failing to look for an underlying syndrome, especially Stickler",
+   "Underestimating airway obstruction because the infant appears settled when prone",
+   "Overlooking feeding failure as a marker of significant obstruction",
+   "Delaying escalation when non-surgical measures are insufficient"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Robin Sequence and Stickler Syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Secure the airway with prone or lateral positioning as first-line for milder positional obstruction, escalating to a nasopharyngeal airway when needed",
+   "For severe or persistent obstruction, offer surgical airway interventions such as tongue-lip adhesion, mandibular distraction osteogenesis, or tracheostomy as a last resort",
+   "Support feeding with specialised teats, positioning and nasogastric tube feeding, monitoring weight gain closely as it tracks airway compromise",
+   "Undertake staged surgical repair of the U-shaped cleft palate once airway and growth allow",
+   "Quantify obstruction with sleep study or overnight oximetry and characterise the level with flexible nasendoscopy to guide intervention",
+   "Coordinate multidisciplinary craniofacial, ENT, feeding and clinical genetics input, screening for Stickler syndrome with ophthalmology review",
+   "Reassess over the first years as mandibular catch-up growth often relieves obstruction, reserving intervention for those who fail to improve"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pierre_robin_sequence-pathway",
+   "title": "Pierre Robin sequence: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by the triad of micrognathia, glossoptosis (posterior tongue displacement), and consequent upper airway obstruction, frequently with a U-shaped cleft palate",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or worsening obstructive apnoea with desaturation or cor pulmonale",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Sleep study or overnight oximetry to quantify obstructive events and desaturation, Flexible nasendoscopy to characterise the level and mechanism of airway obstruction, Feeding and swallowing assessment with monitoring of"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Secure the airway with prone or lateral positioning as first-line for milder positional obstruction, escalating to a nasopharyngeal airway when needed"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating it as a fixed syndrome rather than recognising an initiating sequence"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pierre robin sequence."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pierre_robin_sequence-matrix",
+   "title": "Pierre Robin sequence: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by the triad of micrognathia, glossoptosis (posterior tongue displacement), and consequent upper airway obstruction,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The sequence is initiated by early hypoplasia of the mandible. The small jaw leaves insufficient room in the oral cavity, so the tongue is displaced posteriorly and superiorly (glossoptosis), which in turn obstructs the airway and, during palatal shelf fusion, mechanically prevents the shelves meeting, producing the characteristic wide U-shaped cleft palate. The initiating mandibular deficiency may result from intrinsic developmental disturbance of the first branchial arch or from extrinsic constraint such as oligohydramnios limiting jaw movement in utero. Because a single early anomaly drives the downstream features, the condition is classified as a malformation sequence, and it may occur in isolation or as a component of a recognisable syndrome.",
-    "additionalDifferentials": [
-      "Stickler syndrome (commonest associated syndrome)",
-      "Treacher Collins syndrome",
-      "22q11.2 deletion (velocardiofacial) syndrome",
-      "Cornelia de Lange syndrome",
-      "Isolated cleft palate without micrognathia",
-      "Neuromuscular causes of glossoptosis and hypotonia"
+    [
+     "Key Investigations",
+     "Sleep study or overnight oximetry to quantify obstructive events and desaturation, Flexible nasendoscopy to characterise the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Sleep study or overnight oximetry to quantify obstructive events and desaturation",
-      "Flexible nasendoscopy to characterise the level and mechanism of airway obstruction",
-      "Feeding and swallowing assessment with monitoring of weight gain",
-      "Ophthalmological review and genetic evaluation to identify Stickler and other syndromes",
-      "Echocardiography where a syndromic association is suspected",
-      "Molecular or chromosomal testing guided by associated anomalies"
+    [
+     "Primary Differentials",
+     "Stickler syndrome (commonest associated syndrome), Treacher Collins syndrome, 22q11.2 deletion (velocardiofacial) syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or worsening obstructive apnoea with desaturation or cor pulmonale",
-      "Failure to thrive from inability to feed safely",
-      "Cyanotic episodes or respiratory distress unrelieved by positioning",
-      "Recurrent aspiration",
-      "Signs of a wider syndrome requiring urgent multisystem evaluation"
+    [
+     "Management Strategy",
+     "Secure the airway with prone or lateral positioning as first-line for milder positional obstruction, escalating to a",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated Robin sequence generally has a favourable outlook as mandibular growth improves the airway over time, whereas syndromic cases and those with severe obstruction carry greater morbidity and depend on the associated condition.",
-    "pitfalls": [
-      "Treating it as a fixed syndrome rather than recognising an initiating sequence",
-      "Failing to look for an underlying syndrome, especially Stickler",
-      "Underestimating airway obstruction because the infant appears settled when prone",
-      "Overlooking feeding failure as a marker of significant obstruction",
-      "Delaying escalation when non-surgical measures are insufficient"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Robin Sequence and Stickler Syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Secure the airway with prone or lateral positioning as first-line for milder positional obstruction, escalating to a nasopharyngeal airway when needed",
-      "For severe or persistent obstruction, offer surgical airway interventions such as tongue-lip adhesion, mandibular distraction osteogenesis, or tracheostomy as a last resort",
-      "Support feeding with specialised teats, positioning and nasogastric tube feeding, monitoring weight gain closely as it tracks airway compromise",
-      "Undertake staged surgical repair of the U-shaped cleft palate once airway and growth allow",
-      "Quantify obstruction with sleep study or overnight oximetry and characterise the level with flexible nasendoscopy to guide intervention",
-      "Coordinate multidisciplinary craniofacial, ENT, feeding and clinical genetics input, screening for Stickler syndrome with ophthalmology review",
-      "Reassess over the first years as mandibular catch-up growth often relieves obstruction, reserving intervention for those who fail to improve"
+    [
+     "Clinical Pitfall",
+     "Treating it as a fixed syndrome rather than recognising an initiating sequence",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pierre robin sequence."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pierre-robin-sequence-diagram",
+   "title": "Pierre Robin sequence: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

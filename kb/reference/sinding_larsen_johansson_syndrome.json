@@ -1,79 +1,174 @@
 {
-  "id": "sinding_larsen_johansson_syndrome",
-  "name": "Sinding-Larsen-Johansson syndrome",
-  "aliases": [
-    "Sinding-Larsen-Johansson disease",
-    "inferior patellar pole apophysitis",
-    "jumper's knee of the growing patella",
-    "patellar apophysitis"
+ "id": "sinding_larsen_johansson_syndrome",
+ "name": "Sinding-Larsen-Johansson syndrome",
+ "aliases": [
+  "Sinding-Larsen-Johansson disease",
+  "inferior patellar pole apophysitis",
+  "jumper's knee of the growing patella",
+  "patellar apophysitis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Orthopaedics",
+ "specialty": "Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A traction apophysitis at the inferior pole of the patella rather than a true osteonecrosis",
+   "Affected site is the lower pole of the patella at the origin of the proximal patellar tendon",
+   "Typically affects active children and young adolescents, roughly ten to fourteen years of age",
+   "Presents with anterior knee pain and tenderness localised to the inferior patellar pole, aggravated by running, jumping and stair climbing",
+   "The radiographic hallmark is fragmentation or calcification at the inferior pole of the patella",
+   "It is essentially the patellar counterpart of Osgood-Schlatter disease, occurring at the opposite (proximal) end of the extensor mechanism",
+   "Pain is reproduced by resisted knee extension and by palpation of the distal patellar pole",
+   "Management is conservative with activity modification, extensor mechanism stretching and strengthening, and physiotherapy as needed"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Orthopaedics",
-  "specialty": "Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A traction apophysitis at the inferior pole of the patella rather than a true osteonecrosis",
-      "Affected site is the lower pole of the patella at the origin of the proximal patellar tendon",
-      "Typically affects active children and young adolescents, roughly ten to fourteen years of age",
-      "Presents with anterior knee pain and tenderness localised to the inferior patellar pole, aggravated by running, jumping and stair climbing",
-      "The radiographic hallmark is fragmentation or calcification at the inferior pole of the patella",
-      "It is essentially the patellar counterpart of Osgood-Schlatter disease, occurring at the opposite (proximal) end of the extensor mechanism",
-      "Pain is reproduced by resisted knee extension and by palpation of the distal patellar pole",
-      "Management is conservative with activity modification, extensor mechanism stretching and strengthening, and physiotherapy as needed"
+  "pathophysiology": "Sinding-Larsen-Johansson syndrome is a traction apophysitis affecting the inferior pole of the patella, where the proximal fibres of the patellar tendon attach to the still-developing lower patellar margin. Repetitive, forceful contraction of the quadriceps during jumping and running transmits tension through the patellar tendon to this immature bone-tendon junction. The repeated microtrauma produces small avulsive injuries, inflammation and reactive calcification or fragmentation at the inferior patellar pole. It is analogous to Osgood-Schlatter disease but occurs at the proximal rather than the distal attachment of the patellar tendon, and it typically resolves as the patella matures and the traction stresses of rapid growth subside.",
+  "additionalDifferentials": [
+   "Osgood-Schlatter disease at the tibial tubercle",
+   "Patellar tendinopathy (jumper's knee)",
+   "Patellofemoral pain syndrome",
+   "Bipartite patella",
+   "Patellar sleeve or inferior pole avulsion fracture",
+   "Prepatellar or infrapatellar bursitis"
+  ],
+  "additionalInvestigations": [
+   "Clinical examination localising tenderness to the inferior patellar pole",
+   "Lateral knee radiographs showing fragmentation or calcification at the lower patellar pole",
+   "Ultrasound to assess the proximal patellar tendon and inferior pole",
+   "Magnetic resonance imaging in atypical or persistent cases",
+   "Assessment of quadriceps and hamstring flexibility and lower limb alignment",
+   "Comparison with the contralateral knee to distinguish from a bipartite patella"
+  ],
+  "redFlags": [
+   "Acute severe pain with an extensor lag suggesting a patellar sleeve or avulsion fracture",
+   "Rest pain, night pain or systemic features raising concern for infection or malignancy",
+   "A joint effusion or mechanical locking pointing to intra-articular pathology",
+   "Failure to improve with conservative measures prompting reassessment of the diagnosis"
+  ],
+  "prognosis": "The prognosis is favourable; symptoms are self-limiting and typically resolve as the patella matures and traction loads decrease, with activity modification and rehabilitation controlling pain and no significant long-term sequelae.",
+  "pitfalls": [
+   "Confusing the condition with Osgood-Schlatter disease at the opposite end of the extensor mechanism",
+   "Mistaking a bipartite patella or an avulsion fracture for the apophysitis",
+   "Overlooking a patellar sleeve fracture in a child with acute severe anterior knee pain",
+   "Failing to correct extensor mechanism tightness that perpetuates the traction injury"
+  ],
+  "references": [
+   "Tachdjian's Pediatric Orthopaedics",
+   "Campbell's Operative Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Activity modification with relative rest from jumping and running to offload the inferior patellar pole, the mainstay given the self-limiting course",
+   "Simple analgesia or non-steroidal anti-inflammatory drugs and local ice for pain control",
+   "Physiotherapy with quadriceps and hamstring stretching and progressive strengthening, correcting inflexibility of the extensor mechanism",
+   "Patellar tendon strap or taping and a graded return-to-sport programme",
+   "Reassurance that symptoms resolve as the patella matures and traction loads decline",
+   "Reassessment with imaging in atypical or persistent cases to exclude other anterior knee pathology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sinding_larsen_johansson_syndrome-pathway",
+   "title": "Sinding-Larsen-Johansson syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A traction apophysitis at the inferior pole of the patella rather than a true osteonecrosis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute severe pain with an extensor lag suggesting a patellar sleeve or avulsion fracture",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical examination localising tenderness to the inferior patellar pole, Lateral knee radiographs showing fragmentation or calcification at the lower patellar pole, Ultrasound to assess the proximal patellar tendon and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Activity modification with relative rest from jumping and running to offload the inferior patellar pole, the mainstay given the self-limiting course"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the condition with Osgood-Schlatter disease at the opposite end of the extensor mechanism"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sinding-larsen-johansson syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sinding_larsen_johansson_syndrome-matrix",
+   "title": "Sinding-Larsen-Johansson syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A traction apophysitis at the inferior pole of the patella rather than a true osteonecrosis",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sinding-Larsen-Johansson syndrome is a traction apophysitis affecting the inferior pole of the patella, where the proximal fibres of the patellar tendon attach to the still-developing lower patellar margin. Repetitive, forceful contraction of the quadriceps during jumping and running transmits tension through the patellar tendon to this immature bone-tendon junction. The repeated microtrauma produces small avulsive injuries, inflammation and reactive calcification or fragmentation at the inferior patellar pole. It is analogous to Osgood-Schlatter disease but occurs at the proximal rather than the distal attachment of the patellar tendon, and it typically resolves as the patella matures and the traction stresses of rapid growth subside.",
-    "additionalDifferentials": [
-      "Osgood-Schlatter disease at the tibial tubercle",
-      "Patellar tendinopathy (jumper's knee)",
-      "Patellofemoral pain syndrome",
-      "Bipartite patella",
-      "Patellar sleeve or inferior pole avulsion fracture",
-      "Prepatellar or infrapatellar bursitis"
+    [
+     "Key Investigations",
+     "Clinical examination localising tenderness to the inferior patellar pole, Lateral knee radiographs showing fragmentation or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical examination localising tenderness to the inferior patellar pole",
-      "Lateral knee radiographs showing fragmentation or calcification at the lower patellar pole",
-      "Ultrasound to assess the proximal patellar tendon and inferior pole",
-      "Magnetic resonance imaging in atypical or persistent cases",
-      "Assessment of quadriceps and hamstring flexibility and lower limb alignment",
-      "Comparison with the contralateral knee to distinguish from a bipartite patella"
+    [
+     "Primary Differentials",
+     "Osgood-Schlatter disease at the tibial tubercle, Patellar tendinopathy (jumper's knee), Patellofemoral pain syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute severe pain with an extensor lag suggesting a patellar sleeve or avulsion fracture",
-      "Rest pain, night pain or systemic features raising concern for infection or malignancy",
-      "A joint effusion or mechanical locking pointing to intra-articular pathology",
-      "Failure to improve with conservative measures prompting reassessment of the diagnosis"
+    [
+     "Management Strategy",
+     "Activity modification with relative rest from jumping and running to offload the inferior patellar pole, the mainstay given the",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is favourable; symptoms are self-limiting and typically resolve as the patella matures and traction loads decrease, with activity modification and rehabilitation controlling pain and no significant long-term sequelae.",
-    "pitfalls": [
-      "Confusing the condition with Osgood-Schlatter disease at the opposite end of the extensor mechanism",
-      "Mistaking a bipartite patella or an avulsion fracture for the apophysitis",
-      "Overlooking a patellar sleeve fracture in a child with acute severe anterior knee pain",
-      "Failing to correct extensor mechanism tightness that perpetuates the traction injury"
-    ],
-    "references": [
-      "Tachdjian's Pediatric Orthopaedics",
-      "Campbell's Operative Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Activity modification with relative rest from jumping and running to offload the inferior patellar pole, the mainstay given the self-limiting course",
-      "Simple analgesia or non-steroidal anti-inflammatory drugs and local ice for pain control",
-      "Physiotherapy with quadriceps and hamstring stretching and progressive strengthening, correcting inflexibility of the extensor mechanism",
-      "Patellar tendon strap or taping and a graded return-to-sport programme",
-      "Reassurance that symptoms resolve as the patella matures and traction loads decline",
-      "Reassessment with imaging in atypical or persistent cases to exclude other anterior knee pathology"
+    [
+     "Clinical Pitfall",
+     "Confusing the condition with Osgood-Schlatter disease at the opposite end of the extensor mechanism",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sinding-larsen-johansson syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sinding-larsen-johansson-syndrome-diagram",
+   "title": "Sinding-Larsen-Johansson syndrome: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

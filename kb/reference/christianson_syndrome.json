@@ -1,78 +1,173 @@
 {
-  "id": "christianson_syndrome",
-  "name": "Christianson syndrome (SLC9A6)",
-  "aliases": [
-    "SLC9A6",
-    "NHE6 deficiency",
-    "X-linked Angelman-like syndrome",
-    "Christianson"
+ "id": "christianson_syndrome",
+ "name": "Christianson syndrome (SLC9A6)",
+ "aliases": [
+  "SLC9A6",
+  "NHE6 deficiency",
+  "X-linked Angelman-like syndrome",
+  "Christianson"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Clinical Genetics / Neurodevelopmental",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An X-linked disorder in males often described as Angelman-like, with severe intellectual disability, absent speech and a happy demeanour",
+   "Features include postnatal microcephaly, ataxia, epilepsy and a characteristic ocular finding of abnormal eye movements",
+   "Eye-movement abnormalities such as ophthalmoplegia and difficulty with voluntary gaze, along with truncal ataxia, are useful pointers",
+   "There is often progressive neurological decline over childhood, with loss of skills and cerebellar atrophy on imaging, unlike the static course of Angelman syndrome",
+   "Marked feeding difficulty, drooling and gastrointestinal problems are common",
+   "Caused by loss-of-function variants in SLC9A6, encoding the endosomal sodium-hydrogen exchanger NHE6; carrier females may show milder features",
+   "The combination of an Angelman-like phenotype with regression and eye-movement disorder suggests SLC9A6 rather than a classic Angelman cause"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Clinical Genetics / Neurodevelopmental",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An X-linked disorder in males often described as Angelman-like, with severe intellectual disability, absent speech and a happy demeanour",
-      "Features include postnatal microcephaly, ataxia, epilepsy and a characteristic ocular finding of abnormal eye movements",
-      "Eye-movement abnormalities such as ophthalmoplegia and difficulty with voluntary gaze, along with truncal ataxia, are useful pointers",
-      "There is often progressive neurological decline over childhood, with loss of skills and cerebellar atrophy on imaging, unlike the static course of Angelman syndrome",
-      "Marked feeding difficulty, drooling and gastrointestinal problems are common",
-      "Caused by loss-of-function variants in SLC9A6, encoding the endosomal sodium-hydrogen exchanger NHE6; carrier females may show milder features",
-      "The combination of an Angelman-like phenotype with regression and eye-movement disorder suggests SLC9A6 rather than a classic Angelman cause"
+  "pathophysiology": "SLC9A6 encodes NHE6, a sodium-hydrogen exchanger located in the membranes of early and recycling endosomes, where it regulates intracellular (endosomal) pH and thereby the trafficking and signalling of receptors important for neuronal development and maintenance. Loss-of-function variants disturb endosomal acidification, impairing processes such as neurotrophin (TrkB) signalling and leading to accumulation of abnormal material and neuronal dysfunction. The result is a neurodevelopmental and neurodegenerative picture with intellectual disability, epilepsy, ataxia, eye-movement disorder and progressive cerebellar atrophy. Because the gene is X-linked, males are affected while carrier females show variable, usually milder features.",
+  "additionalDifferentials": [
+   "Angelman syndrome (UBE3A)",
+   "Rett syndrome and Rett-like disorders",
+   "Mowat-Wilson syndrome",
+   "Pitt-Hopkins syndrome",
+   "Other X-linked intellectual disability with ataxia",
+   "Neurodegenerative disorders of childhood"
+  ],
+  "additionalInvestigations": [
+   "Brain MRI to detect cerebellar atrophy, sometimes progressive",
+   "EEG to characterise epilepsy",
+   "Ophthalmological and eye-movement assessment",
+   "Methylation and UBE3A studies to exclude Angelman syndrome",
+   "Targeted SLC9A6 sequencing or an X-linked intellectual-disability gene panel or exome sequencing"
+  ],
+  "redFlags": [
+   "Progressive loss of previously acquired skills",
+   "Drug-resistant seizures or status epilepticus",
+   "Feeding failure with aspiration and faltering growth",
+   "Rapid neurological deterioration"
+  ],
+  "prognosis": "Christianson syndrome causes severe intellectual disability with a progressive neurodegenerative course, including cerebellar atrophy and worsening movement and feeding problems over time. Prognosis is guarded, and management is supportive and multidisciplinary.",
+  "pitfalls": [
+   "Diagnosing Angelman syndrome clinically and stopping the workup when methylation testing is normal",
+   "Overlooking the progressive, neurodegenerative nature and cerebellar atrophy",
+   "Missing the characteristic eye-movement disorder",
+   "Assuming carrier females are always unaffected"
+  ],
+  "references": [
+   "GeneReviews: Christianson Syndrome",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control epilepsy with appropriate antiseizure medication tailored to the seizure types",
+   "Support feeding and nutrition with speech-and-language feeding assessment, management of drooling with antimuscarinic measures, gastrostomy where oral intake is unsafe, and treatment of reflux and constipation",
+   "Provide developmental therapies — physiotherapy, occupational therapy and speech-and-language input with augmentative communication aids for the absent speech",
+   "Manage ataxia and movement difficulty with mobility aids and physiotherapy, monitoring for progressive neurological decline and cerebellar atrophy",
+   "Arrange ophthalmological assessment and support for the eye-movement disorder",
+   "Offer genetic counselling with carrier testing of female relatives, explaining X-linked inheritance and variable carrier features",
+   "Coordinate lifelong care through a paediatric neurology and neurodisability multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "christianson_syndrome-pathway",
+   "title": "Christianson syndrome (SLC9A6): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An X-linked disorder in males often described as Angelman-like, with severe intellectual disability, absent speech and a happy demeanour",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive loss of previously acquired skills",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Brain MRI to detect cerebellar atrophy, sometimes progressive, EEG to characterise epilepsy, Ophthalmological and eye-movement assessment"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control epilepsy with appropriate antiseizure medication tailored to the seizure types"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing Angelman syndrome clinically and stopping the workup when methylation testing is normal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of christianson syndrome (slc9a6)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "christianson_syndrome-matrix",
+   "title": "Christianson syndrome (SLC9A6): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An X-linked disorder in males often described as Angelman-like, with severe intellectual disability, absent speech and a happy",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SLC9A6 encodes NHE6, a sodium-hydrogen exchanger located in the membranes of early and recycling endosomes, where it regulates intracellular (endosomal) pH and thereby the trafficking and signalling of receptors important for neuronal development and maintenance. Loss-of-function variants disturb endosomal acidification, impairing processes such as neurotrophin (TrkB) signalling and leading to accumulation of abnormal material and neuronal dysfunction. The result is a neurodevelopmental and neurodegenerative picture with intellectual disability, epilepsy, ataxia, eye-movement disorder and progressive cerebellar atrophy. Because the gene is X-linked, males are affected while carrier females show variable, usually milder features.",
-    "additionalDifferentials": [
-      "Angelman syndrome (UBE3A)",
-      "Rett syndrome and Rett-like disorders",
-      "Mowat-Wilson syndrome",
-      "Pitt-Hopkins syndrome",
-      "Other X-linked intellectual disability with ataxia",
-      "Neurodegenerative disorders of childhood"
+    [
+     "Key Investigations",
+     "Brain MRI to detect cerebellar atrophy, sometimes progressive, EEG to characterise epilepsy, Ophthalmological and eye-movement",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Brain MRI to detect cerebellar atrophy, sometimes progressive",
-      "EEG to characterise epilepsy",
-      "Ophthalmological and eye-movement assessment",
-      "Methylation and UBE3A studies to exclude Angelman syndrome",
-      "Targeted SLC9A6 sequencing or an X-linked intellectual-disability gene panel or exome sequencing"
+    [
+     "Primary Differentials",
+     "Angelman syndrome (UBE3A), Rett syndrome and Rett-like disorders, Mowat-Wilson syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive loss of previously acquired skills",
-      "Drug-resistant seizures or status epilepticus",
-      "Feeding failure with aspiration and faltering growth",
-      "Rapid neurological deterioration"
+    [
+     "Management Strategy",
+     "Control epilepsy with appropriate antiseizure medication tailored to the seizure types",
+     "Core treatment modality"
     ],
-    "prognosis": "Christianson syndrome causes severe intellectual disability with a progressive neurodegenerative course, including cerebellar atrophy and worsening movement and feeding problems over time. Prognosis is guarded, and management is supportive and multidisciplinary.",
-    "pitfalls": [
-      "Diagnosing Angelman syndrome clinically and stopping the workup when methylation testing is normal",
-      "Overlooking the progressive, neurodegenerative nature and cerebellar atrophy",
-      "Missing the characteristic eye-movement disorder",
-      "Assuming carrier females are always unaffected"
-    ],
-    "references": [
-      "GeneReviews: Christianson Syndrome",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control epilepsy with appropriate antiseizure medication tailored to the seizure types",
-      "Support feeding and nutrition with speech-and-language feeding assessment, management of drooling with antimuscarinic measures, gastrostomy where oral intake is unsafe, and treatment of reflux and constipation",
-      "Provide developmental therapies — physiotherapy, occupational therapy and speech-and-language input with augmentative communication aids for the absent speech",
-      "Manage ataxia and movement difficulty with mobility aids and physiotherapy, monitoring for progressive neurological decline and cerebellar atrophy",
-      "Arrange ophthalmological assessment and support for the eye-movement disorder",
-      "Offer genetic counselling with carrier testing of female relatives, explaining X-linked inheritance and variable carrier features",
-      "Coordinate lifelong care through a paediatric neurology and neurodisability multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Diagnosing Angelman syndrome clinically and stopping the workup when methylation testing is normal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for christianson syndrome (slc9a6)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "christianson-syndrome-diagram",
+   "title": "Christianson syndrome (SLC9A6): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

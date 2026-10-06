@@ -132,5 +132,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "h7ebecc0e"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "dic-dx-algo",
+      "title": "Disseminated intravascular coagulation: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "DIC is an acquired syndrome of intravascular activation of coagulation with loss of localization, which can damage the microvasculature and, if severe enough, cause organ dysfunction (ISTH 2001 definition) (p.976).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hemodynamic instability and shock are common in acute DIC; mortality ranges from 30% to over 80% (p.977).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: ISTH overt-DIC score using platelet count, d-dimer, PT prolongation, and fibrinogen (p.977)., Peripheral blood smear for schistocytes (red cell fragmentation) (p.977)., Serial/repeated PT, aPTT, fibrinogen, d-dimer"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: ISTH overt-DIC score: Platelets >100x10^9/L = 0, 50-100 = 1, 6 s = 2; fibrinogen >1 g/L = 0, 5 = overt DIC (repeat labs daily). Not for use in pregnant patients (p.977)."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Distinguishing DIC from severe liver disease is challenging and requires serial laboratory measurements - both share thrombocytopenia, reduced factor synthesis, and elevated d-dimer, but liver-disease values do not"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for disseminated intravascular coagulation."
+    }
+  ],
+  "tables": [
+    {
+      "id": "dic-matrix",
+      "title": "Disseminated intravascular coagulation: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "DIC is an acquired syndrome of intravascular activation of coagulation with loss of localization, which can damage the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "ISTH overt-DIC score using platelet count, d-dimer, PT prolongation, and fibrinogen (p.977)., Peripheral blood smear for",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Severe liver disease (thrombocytopenia from sequestration/portal hypertension/hypersplenism, decreased factor and",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hemodynamic instability and shock are common in acute DIC; mortality ranges from 30% to over 80% (p.977).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Distinguishing DIC from severe liver disease is challenging and requires serial laboratory measurements - both share",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for disseminated intravascular coagulation."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "dic-diagram",
+      "title": "Disseminated intravascular coagulation: Peripheral Blood Smear & Haematological Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+      "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+      "annotations": [
+        {
+          "label": "Erythrocytes",
+          "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+        },
+        {
+          "label": "Leukocyte Differential",
+          "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+        },
+        {
+          "label": "Hemostatic Markers",
+          "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+        }
+      ]
+    }
+  ]
 }

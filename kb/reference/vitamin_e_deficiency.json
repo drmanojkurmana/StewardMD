@@ -1,73 +1,168 @@
 {
-  "id": "vitamin_e_deficiency",
-  "name": "Vitamin E deficiency",
-  "aliases": [
-    "tocopherol deficiency"
+ "id": "vitamin_e_deficiency",
+ "name": "Vitamin E deficiency",
+ "aliases": [
+  "tocopherol deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Nutritional",
+ "specialty": "Neurology / Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nutrition and neurology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A fat-soluble vitamin deficiency that chiefly causes a progressive neurological syndrome",
+   "Features resemble Friedreich ataxia: spinocerebellar ataxia, loss of proprioception and vibration sense, and areflexia",
+   "A pigmentary retinopathy and, in infants, haemolysis can occur",
+   "Dietary deficiency is rare; most cases result from fat malabsorption (for example cholestasis, cystic fibrosis, short bowel) or from the inherited disorder ataxia with vitamin E deficiency",
+   "Abetalipoproteinaemia is an important cause in which vitamin E cannot be transported",
+   "Serum vitamin E is measured relative to lipids, and treatment is supplementation with correction of malabsorption"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Nutritional",
-  "specialty": "Neurology / Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nutrition and neurology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A fat-soluble vitamin deficiency that chiefly causes a progressive neurological syndrome",
-      "Features resemble Friedreich ataxia: spinocerebellar ataxia, loss of proprioception and vibration sense, and areflexia",
-      "A pigmentary retinopathy and, in infants, haemolysis can occur",
-      "Dietary deficiency is rare; most cases result from fat malabsorption (for example cholestasis, cystic fibrosis, short bowel) or from the inherited disorder ataxia with vitamin E deficiency",
-      "Abetalipoproteinaemia is an important cause in which vitamin E cannot be transported",
-      "Serum vitamin E is measured relative to lipids, and treatment is supplementation with correction of malabsorption"
+  "pathophysiology": "Vitamin E (alpha-tocopherol) is a lipid-soluble antioxidant that protects cell membranes, particularly of neurons, from oxidative damage. Deficiency, usually from fat malabsorption or defective tocopherol transport, leads to oxidative injury of the large myelinated sensory neurons and spinocerebellar and posterior column pathways, producing a sensory ataxic neuropathy. Because absorption depends on normal fat digestion and lipoprotein handling, disorders of these processes, or the genetic ataxia with vitamin E deficiency, are the usual causes.",
+  "additionalDifferentials": [
+   "Friedreich ataxia",
+   "Subacute combined degeneration (vitamin B12 deficiency)",
+   "Other spinocerebellar ataxias",
+   "Copper deficiency myeloneuropathy",
+   "Abetalipoproteinaemia"
+  ],
+  "additionalInvestigations": [
+   "Serum vitamin E interpreted relative to serum lipids",
+   "Assessment for fat malabsorption and its cause",
+   "Lipid profile and lipoprotein studies (for abetalipoproteinaemia)",
+   "Neurological examination and, where needed, nerve conduction studies",
+   "Genetic testing for ataxia with vitamin E deficiency in suggestive cases"
+  ],
+  "redFlags": [
+   "Progressive ataxia and sensory loss",
+   "Visual decline from retinopathy",
+   "Underlying severe malabsorptive disease",
+   "Infantile haemolysis"
+  ],
+  "prognosis": "Early supplementation can halt and partially reverse neurological features, but established deficits may be permanent if treatment is delayed.",
+  "pitfalls": [
+   "Interpreting vitamin E levels without correcting for lipids",
+   "Missing the treatable genetic cause (ataxia with vitamin E deficiency) mimicking Friedreich ataxia",
+   "Overlooking underlying fat malabsorption",
+   "Delaying replacement until deficits are irreversible"
+  ],
+  "references": [
+   "Nutrition reference texts (standard reference)",
+   "Neurology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supplementation with oral alpha-tocopherol, at high doses in malabsorption, using parenteral vitamin E if oral repletion fails",
+   "Treat the underlying cause of fat malabsorption such as cholestasis, cystic fibrosis or short bowel, using water-miscible preparations",
+   "In abetalipoproteinaemia, large-dose fat-soluble vitamin supplementation alongside dietary fat restriction",
+   "Concurrent replacement of the other fat-soluble vitamins, which are often co-deficient",
+   "Early treatment to halt and partly reverse the sensory ataxic neuropathy, with physiotherapy and neuro-rehabilitation for established deficits",
+   "Monitor serum vitamin E interpreted relative to serum lipids, with periodic neurological review",
+   "Genetic testing and counselling where ataxia with vitamin E deficiency is confirmed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "vitamin_e_deficiency-pathway",
+   "title": "Vitamin E deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A fat-soluble vitamin deficiency that chiefly causes a progressive neurological syndrome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive ataxia and sensory loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum vitamin E interpreted relative to serum lipids, Assessment for fat malabsorption and its cause, Lipid profile and lipoprotein studies (for abetalipoproteinaemia)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supplementation with oral alpha-tocopherol, at high doses in malabsorption, using parenteral vitamin E if oral repletion fails"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting vitamin E levels without correcting for lipids"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of vitamin e deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vitamin_e_deficiency-matrix",
+   "title": "Vitamin E deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A fat-soluble vitamin deficiency that chiefly causes a progressive neurological syndrome",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Vitamin E (alpha-tocopherol) is a lipid-soluble antioxidant that protects cell membranes, particularly of neurons, from oxidative damage. Deficiency, usually from fat malabsorption or defective tocopherol transport, leads to oxidative injury of the large myelinated sensory neurons and spinocerebellar and posterior column pathways, producing a sensory ataxic neuropathy. Because absorption depends on normal fat digestion and lipoprotein handling, disorders of these processes, or the genetic ataxia with vitamin E deficiency, are the usual causes.",
-    "additionalDifferentials": [
-      "Friedreich ataxia",
-      "Subacute combined degeneration (vitamin B12 deficiency)",
-      "Other spinocerebellar ataxias",
-      "Copper deficiency myeloneuropathy",
-      "Abetalipoproteinaemia"
+    [
+     "Key Investigations",
+     "Serum vitamin E interpreted relative to serum lipids, Assessment for fat malabsorption and its cause, Lipid profile and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum vitamin E interpreted relative to serum lipids",
-      "Assessment for fat malabsorption and its cause",
-      "Lipid profile and lipoprotein studies (for abetalipoproteinaemia)",
-      "Neurological examination and, where needed, nerve conduction studies",
-      "Genetic testing for ataxia with vitamin E deficiency in suggestive cases"
+    [
+     "Primary Differentials",
+     "Friedreich ataxia, Subacute combined degeneration (vitamin B12 deficiency), Other spinocerebellar ataxias",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive ataxia and sensory loss",
-      "Visual decline from retinopathy",
-      "Underlying severe malabsorptive disease",
-      "Infantile haemolysis"
+    [
+     "Management Strategy",
+     "Supplementation with oral alpha-tocopherol, at high doses in malabsorption, using parenteral vitamin E if oral repletion fails",
+     "Core treatment modality"
     ],
-    "prognosis": "Early supplementation can halt and partially reverse neurological features, but established deficits may be permanent if treatment is delayed.",
-    "pitfalls": [
-      "Interpreting vitamin E levels without correcting for lipids",
-      "Missing the treatable genetic cause (ataxia with vitamin E deficiency) mimicking Friedreich ataxia",
-      "Overlooking underlying fat malabsorption",
-      "Delaying replacement until deficits are irreversible"
-    ],
-    "references": [
-      "Nutrition reference texts (standard reference)",
-      "Neurology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supplementation with oral alpha-tocopherol, at high doses in malabsorption, using parenteral vitamin E if oral repletion fails",
-      "Treat the underlying cause of fat malabsorption such as cholestasis, cystic fibrosis or short bowel, using water-miscible preparations",
-      "In abetalipoproteinaemia, large-dose fat-soluble vitamin supplementation alongside dietary fat restriction",
-      "Concurrent replacement of the other fat-soluble vitamins, which are often co-deficient",
-      "Early treatment to halt and partly reverse the sensory ataxic neuropathy, with physiotherapy and neuro-rehabilitation for established deficits",
-      "Monitor serum vitamin E interpreted relative to serum lipids, with periodic neurological review",
-      "Genetic testing and counselling where ataxia with vitamin E deficiency is confirmed"
+    [
+     "Clinical Pitfall",
+     "Interpreting vitamin E levels without correcting for lipids",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for vitamin e deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "vitamin-e-deficiency-diagram",
+   "title": "Vitamin E deficiency: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

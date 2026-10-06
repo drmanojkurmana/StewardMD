@@ -1,74 +1,169 @@
 {
-  "id": "bone_marrow_oedema_syndrome",
-  "name": "Bone marrow oedema syndrome",
-  "aliases": [
-    "transient bone marrow oedema syndrome",
-    "regional migratory osteoporosis"
+ "id": "bone_marrow_oedema_syndrome",
+ "name": "Bone marrow oedema syndrome",
+ "aliases": [
+  "transient bone marrow oedema syndrome",
+  "regional migratory osteoporosis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Orthopaedics / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Orthopaedic and rheumatology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A self-limiting syndrome of joint pain with MRI bone marrow oedema and no identifiable structural cause",
+   "It is an umbrella that includes transient osteoporosis of the hip and regional migratory osteoporosis",
+   "It typically affects weight-bearing joints of the lower limb and can migrate between sites over time",
+   "MRI shows marrow oedema without the subchondral necrosis of avascular necrosis or a fracture line",
+   "The main differentials are early avascular necrosis, subchondral insufficiency fracture and infection",
+   "It resolves spontaneously over months, and management is supportive with protected weight bearing and analgesia"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Orthopaedics / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Orthopaedic and rheumatology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A self-limiting syndrome of joint pain with MRI bone marrow oedema and no identifiable structural cause",
-      "It is an umbrella that includes transient osteoporosis of the hip and regional migratory osteoporosis",
-      "It typically affects weight-bearing joints of the lower limb and can migrate between sites over time",
-      "MRI shows marrow oedema without the subchondral necrosis of avascular necrosis or a fracture line",
-      "The main differentials are early avascular necrosis, subchondral insufficiency fracture and infection",
-      "It resolves spontaneously over months, and management is supportive with protected weight bearing and analgesia"
+  "pathophysiology": "Bone marrow oedema syndrome denotes reversible accumulation of interstitial fluid within bone marrow producing pain and characteristic MRI signal change, without an underlying tumour, infection, established osteonecrosis or fracture. The mechanism is uncertain and probably multifactorial, involving transient alterations in local perfusion, increased intraosseous pressure and a reparative or neurovascular response. Its migratory and self-limiting nature and the absence of necrosis distinguish it from avascular necrosis, though the two may overlap on a spectrum.",
+  "additionalDifferentials": [
+   "Avascular necrosis (early)",
+   "Subchondral insufficiency fracture",
+   "Osteomyelitis",
+   "Inflammatory arthritis",
+   "Complex regional pain syndrome",
+   "Bone neoplasm"
+  ],
+  "additionalInvestigations": [
+   "MRI demonstrating marrow oedema without necrosis or fracture",
+   "Radiographs and, where needed, follow-up imaging",
+   "Inflammatory markers to exclude infection",
+   "Assessment of osteoporosis risk and secondary causes",
+   "Exclusion of malignancy where features are atypical"
+  ],
+  "redFlags": [
+   "Imaging evidence of osteonecrosis with impending collapse",
+   "A subchondral insufficiency fracture",
+   "Features of infection or malignancy",
+   "Progressive rather than resolving course"
+  ],
+  "prognosis": "The syndrome is benign and self-limiting, generally resolving over several months, though symptoms may migrate to other joints before settling.",
+  "pitfalls": [
+   "Confusing it with avascular necrosis and over-treating",
+   "Missing a subchondral insufficiency fracture or malignancy",
+   "Overlooking infection",
+   "Not protecting the affected weight-bearing bone"
+  ],
+  "references": [
+   "Orthopaedic reference texts (standard reference)",
+   "Rheumatology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive care with protected weight bearing and analgesia while the syndrome resolves spontaneously over months",
+   "Bisphosphonates or a prostacyclin analogue such as iloprost to accelerate resolution of pain and marrow oedema in more severe or persistent cases",
+   "Physiotherapy to maintain joint range of movement and muscle strength",
+   "Assess and treat osteoporosis and secondary causes of bone marrow oedema",
+   "Follow-up MRI to confirm resolution and exclude progression to avascular necrosis or a subchondral insufficiency fracture",
+   "Core decompression considered for refractory hip disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bone_marrow_oedema_syndrome-pathway",
+   "title": "Bone marrow oedema syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A self-limiting syndrome of joint pain with MRI bone marrow oedema and no identifiable structural cause",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Imaging evidence of osteonecrosis with impending collapse",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI demonstrating marrow oedema without necrosis or fracture, Radiographs and, where needed, follow-up imaging, Inflammatory markers to exclude infection"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive care with protected weight bearing and analgesia while the syndrome resolves spontaneously over months"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with avascular necrosis and over-treating"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bone marrow oedema syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bone_marrow_oedema_syndrome-matrix",
+   "title": "Bone marrow oedema syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A self-limiting syndrome of joint pain with MRI bone marrow oedema and no identifiable structural cause",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bone marrow oedema syndrome denotes reversible accumulation of interstitial fluid within bone marrow producing pain and characteristic MRI signal change, without an underlying tumour, infection, established osteonecrosis or fracture. The mechanism is uncertain and probably multifactorial, involving transient alterations in local perfusion, increased intraosseous pressure and a reparative or neurovascular response. Its migratory and self-limiting nature and the absence of necrosis distinguish it from avascular necrosis, though the two may overlap on a spectrum.",
-    "additionalDifferentials": [
-      "Avascular necrosis (early)",
-      "Subchondral insufficiency fracture",
-      "Osteomyelitis",
-      "Inflammatory arthritis",
-      "Complex regional pain syndrome",
-      "Bone neoplasm"
+    [
+     "Key Investigations",
+     "MRI demonstrating marrow oedema without necrosis or fracture, Radiographs and, where needed, follow-up imaging, Inflammatory",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI demonstrating marrow oedema without necrosis or fracture",
-      "Radiographs and, where needed, follow-up imaging",
-      "Inflammatory markers to exclude infection",
-      "Assessment of osteoporosis risk and secondary causes",
-      "Exclusion of malignancy where features are atypical"
+    [
+     "Primary Differentials",
+     "Avascular necrosis (early), Subchondral insufficiency fracture, Osteomyelitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Imaging evidence of osteonecrosis with impending collapse",
-      "A subchondral insufficiency fracture",
-      "Features of infection or malignancy",
-      "Progressive rather than resolving course"
+    [
+     "Management Strategy",
+     "Supportive care with protected weight bearing and analgesia while the syndrome resolves spontaneously over months",
+     "Core treatment modality"
     ],
-    "prognosis": "The syndrome is benign and self-limiting, generally resolving over several months, though symptoms may migrate to other joints before settling.",
-    "pitfalls": [
-      "Confusing it with avascular necrosis and over-treating",
-      "Missing a subchondral insufficiency fracture or malignancy",
-      "Overlooking infection",
-      "Not protecting the affected weight-bearing bone"
-    ],
-    "references": [
-      "Orthopaedic reference texts (standard reference)",
-      "Rheumatology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive care with protected weight bearing and analgesia while the syndrome resolves spontaneously over months",
-      "Bisphosphonates or a prostacyclin analogue such as iloprost to accelerate resolution of pain and marrow oedema in more severe or persistent cases",
-      "Physiotherapy to maintain joint range of movement and muscle strength",
-      "Assess and treat osteoporosis and secondary causes of bone marrow oedema",
-      "Follow-up MRI to confirm resolution and exclude progression to avascular necrosis or a subchondral insufficiency fracture",
-      "Core decompression considered for refractory hip disease"
+    [
+     "Clinical Pitfall",
+     "Confusing it with avascular necrosis and over-treating",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bone marrow oedema syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bone-marrow-oedema-syndrome-diagram",
+   "title": "Bone marrow oedema syndrome: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

@@ -123,5 +123,100 @@
       "importedAt": "2026-06-29T13:28:11Z",
       "contentHash": "heeed2c0f"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "organophosphate-dx-algo",
+      "title": "Organophosphate / cholinergic poisoning: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Belongs to the depressed physiologic state / cholinergic toxidrome; miosis is common and is most pronounced in opioid and cholinergic poisoning, distinguished from other depressant syndromes by muscarinic and nicotinic signs (p.3705).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Bronchorrhoea, wheezing and excessive secretions with progression to respiratory failure - the usual cause of death (p.3712)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Cholinesterase activity in plasma and red cells is <50% of normal in acetylcholinesterase-inhibitor poisoning (p.3712), ECG - may show bradycardia and atrioventricular block (p.3706), EMG/nerve conduction studies in"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison grades poisoning by degree of physiologic depression rather than by a disease-specific scale: grade 1 - arousable by voice/touch, can converse and follow commands; grade 2 - responds to pain but not voice,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Vital signs may be discordant: muscarinic effects cause bradycardia while nicotinic stimulation can cause hypertension and tachycardia, so a 'normal' or mixed heart rate does not exclude poisoning (p.3712)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for organophosphate / cholinergic poisoning."
+    }
+  ],
+  "tables": [
+    {
+      "id": "organophosphate-matrix",
+      "title": "Organophosphate / cholinergic poisoning: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Belongs to the depressed physiologic state / cholinergic toxidrome; miosis is common and is most pronounced in opioid and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Cholinesterase activity in plasma and red cells is <50% of normal in acetylcholinesterase-inhibitor poisoning (p.3712), ECG - may",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Carbamate insecticide poisoning (aldicarb, carbaryl, propoxur) - same cholinergic mechanism (p.3712), Other acetylcholinesterase",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Bronchorrhoea, wheezing and excessive secretions with progression to respiratory failure - the usual cause of death (p.3712)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Vital signs may be discordant: muscarinic effects cause bradycardia while nicotinic stimulation can cause hypertension and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for organophosphate / cholinergic poisoning."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "organophosphate-diagram",
+      "title": "Organophosphate / cholinergic poisoning: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

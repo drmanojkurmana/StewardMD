@@ -1,84 +1,179 @@
 {
-  "id": "grey_platelet_syndrome",
-  "name": "Grey Platelet Syndrome",
-  "aliases": [
-    "GPS",
-    "Alpha-granule deficiency",
-    "NBEAL2-related thrombocytopenia"
+ "id": "grey_platelet_syndrome",
+ "name": "Grey Platelet Syndrome",
+ "aliases": [
+  "GPS",
+  "Alpha-granule deficiency",
+  "NBEAL2-related thrombocytopenia"
+ ],
+ "class": "non_infective",
+ "system": "Haematological / Coagulation",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Haematology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Rare inherited platelet disorder defined by absent or markedly reduced alpha-granules, producing large, agranular platelets that appear pale grey on a Romanowsky-stained film.",
+   "Most cases are autosomal recessive due to biallelic NBEAL2 mutations; the platelets fail to package alpha-granule cargo such as von Willebrand factor, fibrinogen, platelet factor 4 and thrombospondin.",
+   "Presents with lifelong mild-to-moderate mucocutaneous bleeding, easy bruising, epistaxis and menorrhagia, with excessive bleeding at surgery or childbirth.",
+   "Thrombocytopenia is usually mild to moderate and tends to worsen slowly over decades; platelets are characteristically enlarged.",
+   "Progressive myelofibrosis and splenomegaly are recognised evolving features, thought to reflect leakage of granule contents and growth factors into the marrow.",
+   "The blood film is the key diagnostic clue, and low serum vitamin B12 or elevated levels of granule-derived proteins may be seen; electron microscopy confirms alpha-granule deficiency.",
+   "Autosomal dominant forms linked to GFI1B and other genes exist and may show additional red-cell or granulocyte abnormalities.",
+   "Management is supportive with antifibrinolytics, hormonal control of menorrhagia and judicious platelet transfusion for major bleeding or surgery."
   ],
-  "class": "non_infective",
-  "system": "Haematological / Coagulation",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Haematology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Rare inherited platelet disorder defined by absent or markedly reduced alpha-granules, producing large, agranular platelets that appear pale grey on a Romanowsky-stained film.",
-      "Most cases are autosomal recessive due to biallelic NBEAL2 mutations; the platelets fail to package alpha-granule cargo such as von Willebrand factor, fibrinogen, platelet factor 4 and thrombospondin.",
-      "Presents with lifelong mild-to-moderate mucocutaneous bleeding, easy bruising, epistaxis and menorrhagia, with excessive bleeding at surgery or childbirth.",
-      "Thrombocytopenia is usually mild to moderate and tends to worsen slowly over decades; platelets are characteristically enlarged.",
-      "Progressive myelofibrosis and splenomegaly are recognised evolving features, thought to reflect leakage of granule contents and growth factors into the marrow.",
-      "The blood film is the key diagnostic clue, and low serum vitamin B12 or elevated levels of granule-derived proteins may be seen; electron microscopy confirms alpha-granule deficiency.",
-      "Autosomal dominant forms linked to GFI1B and other genes exist and may show additional red-cell or granulocyte abnormalities.",
-      "Management is supportive with antifibrinolytics, hormonal control of menorrhagia and judicious platelet transfusion for major bleeding or surgery."
+  "pathophysiology": "Grey platelet syndrome arises from a failure of megakaryocytes to form and retain functional alpha-granules, the storage organelles that normally concentrate haemostatic and adhesive proteins including von Willebrand factor, fibrinogen, factor V, platelet factor 4, thrombospondin, platelet-derived growth factor and P-selectin. In the classical autosomal recessive form, loss-of-function mutations in NBEAL2 (a BEACH-domain protein essential for granule biogenesis and cargo retention) mean that although some granule proteins are synthesised or endocytosed, they are not stably packaged and are lost, leaving empty vacuoles and agranular platelets that stain pale grey. The consequent deficit in granule release blunts platelet activation, aggregation and the local delivery of adhesive and procoagulant proteins, producing a functional platelet defect superimposed on variable thrombocytopenia caused by ineffective thrombopoiesis and shortened platelet survival. Uncontrolled release of granule-derived growth factors, particularly platelet-derived growth factor and transforming growth factor beta, into the marrow microenvironment is believed to drive the progressive reticulin and collagen fibrosis and splenomegaly that characterise the evolving disease. Autosomal dominant variants, notably those due to GFI1B mutations, disturb megakaryocyte transcriptional programmes and may additionally affect erythropoiesis.",
+  "additionalDifferentials": [
+   "Immune thrombocytopenia with large platelets",
+   "MYH9-related disorders (May-Hegglin anomaly and related conditions)",
+   "Quebec platelet disorder",
+   "Paris-Trousseau / Jacobsen syndrome thrombocytopenia",
+   "Congenital amegakaryocytic thrombocytopenia and inherited macrothrombocytopenias",
+   "Primary myelofibrosis (when marrow fibrosis dominates the picture)",
+   "von Willebrand disease and other inherited platelet function defects"
+  ],
+  "additionalInvestigations": [
+   "Peripheral blood film review for large agranular grey platelets",
+   "Platelet electron microscopy demonstrating absent or reduced alpha-granules",
+   "Platelet aggregometry and secretion studies",
+   "Flow cytometry for granule markers such as P-selectin expression on activation",
+   "Bone marrow examination with reticulin staining to assess fibrosis",
+   "Targeted or panel genetic testing (NBEAL2, GFI1B and related genes)",
+   "Assays of granule-derived proteins and serum vitamin B12"
+  ],
+  "redFlags": [
+   "Major or life-threatening haemorrhage, including intracranial bleeding after trauma",
+   "Rapidly progressive splenomegaly with worsening cytopenias suggesting advancing myelofibrosis",
+   "Peripartum or perioperative bleeding requiring urgent haemostatic support",
+   "Severe menorrhagia causing symptomatic anaemia",
+   "New leucoerythroblastic film or transfusion dependence indicating marrow failure"
+  ],
+  "prognosis": "Most patients have a mild to moderate lifelong bleeding tendency compatible with a normal lifespan when haemostasis is supported around surgery and childbirth. The main long-term concerns are slowly progressive thrombocytopenia and myelofibrosis, which in a minority lead to significant splenomegaly and transfusion dependence.",
+  "pitfalls": [
+   "Misdiagnosing the large platelets and thrombocytopenia as immune thrombocytopenia and giving unnecessary immunosuppression or splenectomy",
+   "Overlooking the grey agranular platelets because automated counters may misclassify or exclude them",
+   "Attributing the marrow fibrosis to a primary myeloproliferative disorder rather than the underlying platelet defect",
+   "Failing to plan haemostatic cover before elective procedures or delivery",
+   "Assuming a normal platelet count excludes a clinically important functional platelet defect"
+  ],
+  "references": [
+   "Williams Hematology (standard reference)",
+   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood (standard reference)",
+   "ISTH guidance on inherited platelet disorders (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage bleeding episodes and cover surgery and childbirth with the antifibrinolytic tranexamic acid and platelet transfusions when needed",
+   "Control menorrhagia with antifibrinolytics and hormonal therapy such as a combined oral contraceptive or a levonorgestrel intrauterine system",
+   "Avoid aspirin, other non-steroidal anti-inflammatory drugs and antiplatelet agents that worsen the bleeding tendency",
+   "Give iron replacement for bleeding-related iron-deficiency anaemia and ensure hepatitis B immunisation before transfusion exposure",
+   "Monitor with serial full blood counts for progressive thrombocytopenia and periodic assessment for splenomegaly and evolving marrow myelofibrosis",
+   "Refer to haematology and reserve splenectomy for severe refractory thrombocytopenia",
+   "Offer genetic counselling and family testing for autosomal recessive NBEAL2-related disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "grey_platelet_syndrome-pathway",
+   "title": "Grey Platelet Syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Rare inherited platelet disorder defined by absent or markedly reduced alpha-granules, producing large, agranular platelets that appear pale grey on a Romanowsky-stained film.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Major or life-threatening haemorrhage, including intracranial bleeding after trauma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Peripheral blood film review for large agranular grey platelets, Platelet electron microscopy demonstrating absent or reduced alpha-granules, Platelet aggregometry and secretion studies"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage bleeding episodes and cover surgery and childbirth with the antifibrinolytic tranexamic acid and platelet transfusions when needed"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the large platelets and thrombocytopenia as immune thrombocytopenia and giving unnecessary immunosuppression or splenectomy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of grey platelet syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "grey_platelet_syndrome-matrix",
+   "title": "Grey Platelet Syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rare inherited platelet disorder defined by absent or markedly reduced alpha-granules, producing large, agranular platelets that",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Grey platelet syndrome arises from a failure of megakaryocytes to form and retain functional alpha-granules, the storage organelles that normally concentrate haemostatic and adhesive proteins including von Willebrand factor, fibrinogen, factor V, platelet factor 4, thrombospondin, platelet-derived growth factor and P-selectin. In the classical autosomal recessive form, loss-of-function mutations in NBEAL2 (a BEACH-domain protein essential for granule biogenesis and cargo retention) mean that although some granule proteins are synthesised or endocytosed, they are not stably packaged and are lost, leaving empty vacuoles and agranular platelets that stain pale grey. The consequent deficit in granule release blunts platelet activation, aggregation and the local delivery of adhesive and procoagulant proteins, producing a functional platelet defect superimposed on variable thrombocytopenia caused by ineffective thrombopoiesis and shortened platelet survival. Uncontrolled release of granule-derived growth factors, particularly platelet-derived growth factor and transforming growth factor beta, into the marrow microenvironment is believed to drive the progressive reticulin and collagen fibrosis and splenomegaly that characterise the evolving disease. Autosomal dominant variants, notably those due to GFI1B mutations, disturb megakaryocyte transcriptional programmes and may additionally affect erythropoiesis.",
-    "additionalDifferentials": [
-      "Immune thrombocytopenia with large platelets",
-      "MYH9-related disorders (May-Hegglin anomaly and related conditions)",
-      "Quebec platelet disorder",
-      "Paris-Trousseau / Jacobsen syndrome thrombocytopenia",
-      "Congenital amegakaryocytic thrombocytopenia and inherited macrothrombocytopenias",
-      "Primary myelofibrosis (when marrow fibrosis dominates the picture)",
-      "von Willebrand disease and other inherited platelet function defects"
+    [
+     "Key Investigations",
+     "Peripheral blood film review for large agranular grey platelets, Platelet electron microscopy demonstrating absent or reduced",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Peripheral blood film review for large agranular grey platelets",
-      "Platelet electron microscopy demonstrating absent or reduced alpha-granules",
-      "Platelet aggregometry and secretion studies",
-      "Flow cytometry for granule markers such as P-selectin expression on activation",
-      "Bone marrow examination with reticulin staining to assess fibrosis",
-      "Targeted or panel genetic testing (NBEAL2, GFI1B and related genes)",
-      "Assays of granule-derived proteins and serum vitamin B12"
+    [
+     "Primary Differentials",
+     "Immune thrombocytopenia with large platelets, MYH9-related disorders (May-Hegglin anomaly and related conditions), Quebec",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Major or life-threatening haemorrhage, including intracranial bleeding after trauma",
-      "Rapidly progressive splenomegaly with worsening cytopenias suggesting advancing myelofibrosis",
-      "Peripartum or perioperative bleeding requiring urgent haemostatic support",
-      "Severe menorrhagia causing symptomatic anaemia",
-      "New leucoerythroblastic film or transfusion dependence indicating marrow failure"
+    [
+     "Management Strategy",
+     "Manage bleeding episodes and cover surgery and childbirth with the antifibrinolytic tranexamic acid and platelet transfusions",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients have a mild to moderate lifelong bleeding tendency compatible with a normal lifespan when haemostasis is supported around surgery and childbirth. The main long-term concerns are slowly progressive thrombocytopenia and myelofibrosis, which in a minority lead to significant splenomegaly and transfusion dependence.",
-    "pitfalls": [
-      "Misdiagnosing the large platelets and thrombocytopenia as immune thrombocytopenia and giving unnecessary immunosuppression or splenectomy",
-      "Overlooking the grey agranular platelets because automated counters may misclassify or exclude them",
-      "Attributing the marrow fibrosis to a primary myeloproliferative disorder rather than the underlying platelet defect",
-      "Failing to plan haemostatic cover before elective procedures or delivery",
-      "Assuming a normal platelet count excludes a clinically important functional platelet defect"
-    ],
-    "references": [
-      "Williams Hematology (standard reference)",
-      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood (standard reference)",
-      "ISTH guidance on inherited platelet disorders (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage bleeding episodes and cover surgery and childbirth with the antifibrinolytic tranexamic acid and platelet transfusions when needed",
-      "Control menorrhagia with antifibrinolytics and hormonal therapy such as a combined oral contraceptive or a levonorgestrel intrauterine system",
-      "Avoid aspirin, other non-steroidal anti-inflammatory drugs and antiplatelet agents that worsen the bleeding tendency",
-      "Give iron replacement for bleeding-related iron-deficiency anaemia and ensure hepatitis B immunisation before transfusion exposure",
-      "Monitor with serial full blood counts for progressive thrombocytopenia and periodic assessment for splenomegaly and evolving marrow myelofibrosis",
-      "Refer to haematology and reserve splenectomy for severe refractory thrombocytopenia",
-      "Offer genetic counselling and family testing for autosomal recessive NBEAL2-related disease"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the large platelets and thrombocytopenia as immune thrombocytopenia and giving unnecessary immunosuppression or",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for grey platelet syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "grey-platelet-syndrome-diagram",
+   "title": "Grey Platelet Syndrome: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

@@ -1,81 +1,176 @@
 {
-  "id": "maple_syrup_urine_disease",
-  "name": "Maple Syrup Urine Disease",
-  "aliases": [
-    "MSUD",
-    "branched-chain ketoaciduria",
-    "BCKD deficiency"
+ "id": "maple_syrup_urine_disease",
+ "name": "Maple Syrup Urine Disease",
+ "aliases": [
+  "MSUD",
+  "branched-chain ketoaciduria",
+  "BCKD deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Genetic-metabolic",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal recessive disorder caused by deficiency of the branched-chain alpha-ketoacid dehydrogenase complex, impairing breakdown of the branched-chain amino acids leucine, isoleucine, and valine.",
+   "The classic severe form presents in the first week of life with poor feeding, vomiting, lethargy, and worsening encephalopathy after protein feeding begins.",
+   "Neurological signs may include fluctuating tone, dystonic posturing, a boxing or bicycling movement pattern, and progression to seizures and coma.",
+   "The urine, sweat, or cerumen may carry a characteristic sweet, maple-syrup or burnt-sugar odour.",
+   "Leucine and its ketoacid accumulation is the principal driver of neurotoxicity and cerebral oedema.",
+   "Newborn screening detects elevated branched-chain amino acids; diagnosis is confirmed by the plasma amino acid pattern (notably raised leucine and the presence of alloisoleucine) and molecular testing.",
+   "Acute management centres on halting protein intake, promoting anabolism with adequate energy, and rapidly lowering branched-chain amino acid levels, with dialysis or haemofiltration in severe crises.",
+   "Long-term treatment is a carefully monitored diet restricting branched-chain amino acids while providing enough protein and energy for growth.",
+   "Intercurrent illness, fasting, or catabolic stress can precipitate metabolic crises even in previously stable, treated children."
   ],
-  "class": "non_infective",
-  "system": "Genetic-metabolic",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal recessive disorder caused by deficiency of the branched-chain alpha-ketoacid dehydrogenase complex, impairing breakdown of the branched-chain amino acids leucine, isoleucine, and valine.",
-      "The classic severe form presents in the first week of life with poor feeding, vomiting, lethargy, and worsening encephalopathy after protein feeding begins.",
-      "Neurological signs may include fluctuating tone, dystonic posturing, a boxing or bicycling movement pattern, and progression to seizures and coma.",
-      "The urine, sweat, or cerumen may carry a characteristic sweet, maple-syrup or burnt-sugar odour.",
-      "Leucine and its ketoacid accumulation is the principal driver of neurotoxicity and cerebral oedema.",
-      "Newborn screening detects elevated branched-chain amino acids; diagnosis is confirmed by the plasma amino acid pattern (notably raised leucine and the presence of alloisoleucine) and molecular testing.",
-      "Acute management centres on halting protein intake, promoting anabolism with adequate energy, and rapidly lowering branched-chain amino acid levels, with dialysis or haemofiltration in severe crises.",
-      "Long-term treatment is a carefully monitored diet restricting branched-chain amino acids while providing enough protein and energy for growth.",
-      "Intercurrent illness, fasting, or catabolic stress can precipitate metabolic crises even in previously stable, treated children."
+  "pathophysiology": "A defect in the branched-chain alpha-ketoacid dehydrogenase complex blocks the oxidative decarboxylation of the ketoacids derived from leucine, isoleucine, and valine. As a result these branched-chain amino acids and their corresponding ketoacids accumulate in blood, urine, and tissues. Leucine and its ketoacid are particularly neurotoxic, disturbing neurotransmitter balance, cerebral amino acid transport, and cellular osmolarity, which produces cerebral oedema and encephalopathy. During catabolic states, endogenous protein breakdown releases further branched-chain amino acids, precipitating acute, potentially life-threatening metabolic decompensation.",
+  "additionalDifferentials": [
+   "Neonatal sepsis",
+   "Hypoxic-ischaemic encephalopathy",
+   "Urea cycle disorders",
+   "Organic acidemias",
+   "Nonketotic hyperglycinemia",
+   "Other causes of neonatal encephalopathy and seizures"
+  ],
+  "additionalInvestigations": [
+   "Newborn screening result and confirmatory plasma amino acid profile (elevated leucine, presence of alloisoleucine)",
+   "Urine organic acids and detection of branched-chain ketoacids",
+   "Molecular genetic testing of the BCKD complex genes",
+   "Blood gas, glucose, ammonia, and ketone assessment during crises",
+   "Neuroimaging if cerebral oedema is suspected"
+  ],
+  "redFlags": [
+   "Rapidly progressive encephalopathy with lethargy, abnormal movements, and coma in a neonate",
+   "Signs of cerebral oedema and raised intracranial pressure",
+   "Metabolic crisis precipitated by intercurrent illness or fasting",
+   "Marked elevation of leucine requiring emergency clearance",
+   "Seizures or apnoea in a decompensating infant"
+  ],
+  "prognosis": "Outcome depends on how quickly the diagnosis is made and metabolic control is achieved; early treatment and avoidance of crises support near-normal development, whereas repeated or severe decompensations and prolonged high leucine levels risk permanent neurological damage. Lifelong dietary management and prompt sick-day protocols are essential.",
+  "pitfalls": [
+   "Mistaking early presentation for neonatal sepsis and delaying metabolic evaluation",
+   "Not recognising the characteristic sweet odour as a diagnostic clue",
+   "Continuing protein feeds during an acute crisis instead of stopping them and driving anabolism",
+   "Underestimating how rapidly catabolic stress can trigger dangerous decompensation",
+   "Failing to establish sick-day plans and long-term dietary monitoring"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute lifelong dietary management with branched-chain amino acid restriction using a leucine-restricted diet and a branched-chain-free medical formula, while providing sufficient isoleucine and valine",
+   "Provide an emergency regimen during illness or catabolism with high-energy, branched-chain-free intake to promote anabolism and prevent a leucine surge",
+   "Treat acute crisis by reversing catabolism with intravenous glucose and insulin, removing leucine, and using haemodialysis or haemofiltration for markedly raised leucine with encephalopathy",
+   "Manage cerebral oedema actively during decompensation",
+   "Monitor plasma amino acids, particularly leucine, to guide dietary adjustment",
+   "Trial thiamine in the thiamine-responsive variant",
+   "Coordinate care with a metabolic multidisciplinary team and dietitian, considering liver transplantation for difficult classic disease",
+   "Offer genetic counselling for autosomal recessive inheritance with newborn screening and family testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "maple_syrup_urine_disease-pathway",
+   "title": "Maple Syrup Urine Disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal recessive disorder caused by deficiency of the branched-chain alpha-ketoacid dehydrogenase complex, impairing breakdown of the branched-chain amino acids leucine, isoleucine, and valine.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy with lethargy, abnormal movements, and coma in a neonate",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Newborn screening result and confirmatory plasma amino acid profile (elevated leucine, presence of alloisoleucine), Urine organic acids and detection of branched-chain ketoacids, Molecular genetic testing of the BCKD"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute lifelong dietary management with branched-chain amino acid restriction using a leucine-restricted diet and a branched-chain-free medical formula, while providing sufficient isoleucine and valine"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking early presentation for neonatal sepsis and delaying metabolic evaluation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of maple syrup urine disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "maple_syrup_urine_disease-matrix",
+   "title": "Maple Syrup Urine Disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal recessive disorder caused by deficiency of the branched-chain alpha-ketoacid dehydrogenase complex, impairing",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A defect in the branched-chain alpha-ketoacid dehydrogenase complex blocks the oxidative decarboxylation of the ketoacids derived from leucine, isoleucine, and valine. As a result these branched-chain amino acids and their corresponding ketoacids accumulate in blood, urine, and tissues. Leucine and its ketoacid are particularly neurotoxic, disturbing neurotransmitter balance, cerebral amino acid transport, and cellular osmolarity, which produces cerebral oedema and encephalopathy. During catabolic states, endogenous protein breakdown releases further branched-chain amino acids, precipitating acute, potentially life-threatening metabolic decompensation.",
-    "additionalDifferentials": [
-      "Neonatal sepsis",
-      "Hypoxic-ischaemic encephalopathy",
-      "Urea cycle disorders",
-      "Organic acidemias",
-      "Nonketotic hyperglycinemia",
-      "Other causes of neonatal encephalopathy and seizures"
+    [
+     "Key Investigations",
+     "Newborn screening result and confirmatory plasma amino acid profile (elevated leucine, presence of alloisoleucine), Urine organic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Newborn screening result and confirmatory plasma amino acid profile (elevated leucine, presence of alloisoleucine)",
-      "Urine organic acids and detection of branched-chain ketoacids",
-      "Molecular genetic testing of the BCKD complex genes",
-      "Blood gas, glucose, ammonia, and ketone assessment during crises",
-      "Neuroimaging if cerebral oedema is suspected"
+    [
+     "Primary Differentials",
+     "Neonatal sepsis, Hypoxic-ischaemic encephalopathy, Urea cycle disorders",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive encephalopathy with lethargy, abnormal movements, and coma in a neonate",
-      "Signs of cerebral oedema and raised intracranial pressure",
-      "Metabolic crisis precipitated by intercurrent illness or fasting",
-      "Marked elevation of leucine requiring emergency clearance",
-      "Seizures or apnoea in a decompensating infant"
+    [
+     "Management Strategy",
+     "Institute lifelong dietary management with branched-chain amino acid restriction using a leucine-restricted diet and a",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on how quickly the diagnosis is made and metabolic control is achieved; early treatment and avoidance of crises support near-normal development, whereas repeated or severe decompensations and prolonged high leucine levels risk permanent neurological damage. Lifelong dietary management and prompt sick-day protocols are essential.",
-    "pitfalls": [
-      "Mistaking early presentation for neonatal sepsis and delaying metabolic evaluation",
-      "Not recognising the characteristic sweet odour as a diagnostic clue",
-      "Continuing protein feeds during an acute crisis instead of stopping them and driving anabolism",
-      "Underestimating how rapidly catabolic stress can trigger dangerous decompensation",
-      "Failing to establish sick-day plans and long-term dietary monitoring"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute lifelong dietary management with branched-chain amino acid restriction using a leucine-restricted diet and a branched-chain-free medical formula, while providing sufficient isoleucine and valine",
-      "Provide an emergency regimen during illness or catabolism with high-energy, branched-chain-free intake to promote anabolism and prevent a leucine surge",
-      "Treat acute crisis by reversing catabolism with intravenous glucose and insulin, removing leucine, and using haemodialysis or haemofiltration for markedly raised leucine with encephalopathy",
-      "Manage cerebral oedema actively during decompensation",
-      "Monitor plasma amino acids, particularly leucine, to guide dietary adjustment",
-      "Trial thiamine in the thiamine-responsive variant",
-      "Coordinate care with a metabolic multidisciplinary team and dietitian, considering liver transplantation for difficult classic disease",
-      "Offer genetic counselling for autosomal recessive inheritance with newborn screening and family testing"
+    [
+     "Clinical Pitfall",
+     "Mistaking early presentation for neonatal sepsis and delaying metabolic evaluation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for maple syrup urine disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "maple-syrup-urine-disease-diagram",
+   "title": "Maple Syrup Urine Disease: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

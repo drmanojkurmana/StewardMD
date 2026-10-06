@@ -142,5 +142,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "hce12d99"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "svc_obstruction-dx-algo",
+      "title": "Superior vena cava obstruction: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "SVC syndrome is a clinical diagnosis: dusky/cyanotic head and neck with grossly elevated venous pressure but no visible pulsations should prompt the diagnosis.",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Signs/symptoms of cerebral and/or laryngeal oedema - rare but carry a poorer prognosis and demand urgent evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Chest radiograph - superior mediastinal widening (most often right-sided) is the most significant finding; a normal film does not exclude SVCS if other features present, CT of the thorax - most reliable view of mediastinal"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not provide a formal severity grading scale. Severity is described clinically by features such as presence of cerebral/laryngeal oedema, proptosis, glossal/laryngeal oedema, obtundation, postural"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not assume SVCS is always malignant - benign device/catheter-related causes now account for at least 40% of cases."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for superior vena cava obstruction."
+    }
+  ],
+  "tables": [
+    {
+      "id": "svc_obstruction-matrix",
+      "title": "Superior vena cava obstruction: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "SVC syndrome is a clinical diagnosis: dusky/cyanotic head and neck with grossly elevated venous pressure but no visible",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph - superior mediastinal widening (most often right-sided) is the most significant finding; a normal film does not",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Lung cancer (small-cell and squamous-cell predominate among malignant causes), Malignant lymphoma (leading cause in young adults;",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Signs/symptoms of cerebral and/or laryngeal oedema - rare but carry a poorer prognosis and demand urgent evaluation",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not assume SVCS is always malignant - benign device/catheter-related causes now account for at least 40% of cases.",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for superior vena cava obstruction."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "svc-obstruction-diagram",
+      "title": "Superior vena cava obstruction: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

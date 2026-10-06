@@ -227,5 +227,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hc230d4f2"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "device_infection-dx-algo",
+      "title": "Device-Related Infection (CIED / Vascular Catheter): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "CIED-related endocarditis (CIED-IE) involves either the device hardware itself or the endothelium at points of device contact, and occasionally coexists with concurrent valvular infection (Harrison 22e p.1078).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: S. aureus bacteremia in a patient with a CIED with no alternative source (Harrison 22e p.1084)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Transesophageal echocardiography (TEE): detects vegetations in >90% of patients with definite IE; an initial study may be falsely negative in a minority, so a negative TEE when IE is likely should be repeated in 7-10 days"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison distinguishes generator pocket infection without bacteremia (more localized) from bacteremic CIED infection and CIED-IE (more severe, with risk of coincident left-sided valve infection or remote metastatic"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating an infected CIED with antibiotics alone (salvage/suppression) usually fails and should not be the default approach (Harrison 22e p.1084)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for device-related infection (cied / vascular catheter)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "device_infection-matrix",
+      "title": "Device-Related Infection (CIED / Vascular Catheter): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "CIED-related endocarditis (CIED-IE) involves either the device hardware itself or the endothelium at points of device contact,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Transesophageal echocardiography (TEE): detects vegetations in >90% of patients with definite IE; an initial study may be falsely",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Left-sided native-valve or prosthetic-valve endocarditis (may coexist with or be mistaken for CIED-IE) (Harrison 22e p.1078,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "S. aureus bacteremia in a patient with a CIED with no alternative source (Harrison 22e p.1084)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an infected CIED with antibiotics alone (salvage/suppression) usually fails and should not be the default approach",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for device-related infection (cied / vascular catheter)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "device-infection-diagram",
+      "title": "Device-Related Infection (CIED / Vascular Catheter): Cardiovascular & Hemodynamic Diagnostic Schematic",
+      "type": "ecg",
+      "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+      "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+      "annotations": [
+        {
+          "label": "Conduction System",
+          "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+        },
+        {
+          "label": "Coronary Perfusion",
+          "description": "Epicardial arterial distribution and regional myocardial supply zones."
+        },
+        {
+          "label": "Hemodynamics",
+          "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+        }
+      ]
+    }
+  ]
 }

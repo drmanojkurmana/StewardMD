@@ -1,79 +1,174 @@
 {
-  "id": "slc39a8_cdg",
-  "name": "SLC39A8-CDG (ZIP8 Deficiency, CDG Type IIn)",
-  "aliases": [
-    "SLC39A8-CDG",
-    "ZIP8 deficiency",
-    "CDG-IIn",
-    "manganese transporter ZIP8 deficiency"
+ "id": "slc39a8_cdg",
+ "name": "SLC39A8-CDG (ZIP8 Deficiency, CDG Type IIn)",
+ "aliases": [
+  "SLC39A8-CDG",
+  "ZIP8 deficiency",
+  "CDG-IIn",
+  "manganese transporter ZIP8 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Glycosylation",
+ "specialty": "Metabolic medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Congenital disorders of glycosylation references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive type II congenital disorder of glycosylation caused by biallelic SLC39A8 variants, which encode the divalent metal transporter ZIP8 that supplies manganese and zinc to cells.",
+   "Manganese is an obligate cofactor for several Golgi glycosyltransferases, notably beta-1,4-galactosyltransferase, so cellular manganese deficiency drives a secondary defect of galactosylation and sialylation.",
+   "Severe infantile presentation with developmental delay, hypotonia, seizures, dystonia and cerebellar atrophy, sometimes with a Leigh-like picture.",
+   "Low whole-blood or serum manganese is a key diagnostic clue that distinguishes it from most other glycosylation disorders.",
+   "Cranial and skeletal features, short stature and sensorineural hearing loss may be present.",
+   "It is one of the rare treatable CDGs: oral galactose and carefully monitored manganese supplementation can improve glycosylation and clinical status in some patients.",
+   "Transferrin isoelectric focusing shows a type II pattern with loss of terminal galactose and sialic acid residues."
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Glycosylation",
-  "specialty": "Metabolic medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Congenital disorders of glycosylation references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive type II congenital disorder of glycosylation caused by biallelic SLC39A8 variants, which encode the divalent metal transporter ZIP8 that supplies manganese and zinc to cells.",
-      "Manganese is an obligate cofactor for several Golgi glycosyltransferases, notably beta-1,4-galactosyltransferase, so cellular manganese deficiency drives a secondary defect of galactosylation and sialylation.",
-      "Severe infantile presentation with developmental delay, hypotonia, seizures, dystonia and cerebellar atrophy, sometimes with a Leigh-like picture.",
-      "Low whole-blood or serum manganese is a key diagnostic clue that distinguishes it from most other glycosylation disorders.",
-      "Cranial and skeletal features, short stature and sensorineural hearing loss may be present.",
-      "It is one of the rare treatable CDGs: oral galactose and carefully monitored manganese supplementation can improve glycosylation and clinical status in some patients.",
-      "Transferrin isoelectric focusing shows a type II pattern with loss of terminal galactose and sialic acid residues."
+  "pathophysiology": "SLC39A8 encodes ZIP8 (Zrt/Irt-like protein 8), a transmembrane transporter that mediates cellular uptake of manganese and zinc. Biallelic hypomorphic variants reduce intracellular manganese, and because manganese is the essential cofactor of several Golgi glycosyltransferases, in particular beta-1,4-galactosyltransferase and the enzymes adding terminal galactose and sialic acid, N- and O-glycan maturation fails and a type II pattern of hypoglycosylation results. Systemic manganese deficiency also impairs other manganese-dependent enzymes such as arginase and mitochondrial superoxide dismutase, and the combination of hypoglycosylation with broader manganese-dependent metabolic disturbance underlies the neurodevelopmental, cerebellar and skeletal phenotype; supplementation that restores intracellular manganese can partially correct the galactosylation defect.",
+  "additionalDifferentials": [
+   "TMEM165-CDG (Golgi manganese/calcium homeostasis defect that is also galactose-responsive)",
+   "SLC35A2-CDG and other type II galactosylation/sialylation glycosylation disorders",
+   "SLC39A14-related manganese-transport disorder (manganese overload with dystonia-parkinsonism, the mirror-image transporter defect)",
+   "Congenital cerebellar atrophy syndromes and Leigh syndrome / primary mitochondrial disease",
+   "ATP6-group glycosylation disorders presenting with epilepsy and dystonia",
+   "SLC30A10-related hypermanganesaemia as a contrasting manganese disorder"
+  ],
+  "additionalInvestigations": [
+   "Serum and whole-blood manganese (typically low) and zinc",
+   "Serum transferrin isoelectric focusing / glycoform analysis (type II pattern)",
+   "Molecular testing of SLC39A8 with a CDG panel or exome sequencing",
+   "Brain MRI (cerebellar atrophy and, in some, Leigh-like changes)",
+   "N-glycan mass spectrometry demonstrating undergalactosylation",
+   "Monitored trial of galactose and manganese supplementation with serial transferrin glycoform assessment"
+  ],
+  "redFlags": [
+   "Rapid neurological deterioration or Leigh-like metabolic decompensation",
+   "Refractory seizures in an infant with hypotonia and dystonia",
+   "Manganese supplementation given without monitoring, risking manganese neurotoxicity and overload",
+   "Progressive loss of motor and cerebellar function"
+  ],
+  "prognosis": "The natural history is severe with substantial neurodisability, but a subset of patients show meaningful biochemical and clinical improvement with galactose and carefully monitored manganese supplementation, so early recognition is worthwhile.",
+  "pitfalls": [
+   "Missing the low manganese because it is not part of routine metabolic panels.",
+   "Giving manganese supplementation without monitoring, risking manganese accumulation and toxicity.",
+   "Dismissing the type II transferrin pattern as non-specific and not pursuing the specific gene.",
+   "Confusing it with the SLC39A14 and SLC30A10 manganese-overload disorders, which require the opposite (chelation) approach."
+  ],
+  "references": [
+   "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
+   "Congenital disorders of glycosylation: clinical and diagnostic reviews",
+   "Trace-element and manganese metabolism reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give carefully monitored oral manganese supplementation to restore the cofactor for Golgi glycosyltransferases, combined with galactose supplementation to improve glycosylation",
+   "Undertake serial monitoring of whole-blood manganese and transferrin glycoforms to guide dosing and avoid manganese toxicity",
+   "Control seizures with antiseizure medication and manage dystonia for the neurological features",
+   "Provide rehabilitative support with physiotherapy and occupational and speech therapy for hypotonia and developmental delay",
+   "Arrange audiology surveillance and hearing support for sensorineural hearing loss, with neuroimaging follow-up of cerebellar or Leigh-like changes",
+   "Offer genetic counselling and family testing given autosomal recessive inheritance within multidisciplinary metabolic and neurology care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "slc39a8_cdg-pathway",
+   "title": "SLC39A8-CDG (ZIP8 Deficiency, CDG Type IIn): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive type II congenital disorder of glycosylation caused by biallelic SLC39A8 variants, which encode the divalent metal transporter ZIP8 that supplies manganese and zinc to cells.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid neurological deterioration or Leigh-like metabolic decompensation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum and whole-blood manganese (typically low) and zinc, Serum transferrin isoelectric focusing / glycoform analysis (type II pattern), Molecular testing of SLC39A8 with a CDG panel or exome sequencing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give carefully monitored oral manganese supplementation to restore the cofactor for Golgi glycosyltransferases, combined with galactose supplementation to improve glycosylation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the low manganese because it is not part of routine metabolic panels."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of slc39a8-cdg (zip8 deficiency, cdg type iin)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "slc39a8_cdg-matrix",
+   "title": "SLC39A8-CDG (ZIP8 Deficiency, CDG Type IIn): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive type II congenital disorder of glycosylation caused by biallelic SLC39A8 variants, which encode the divalent",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SLC39A8 encodes ZIP8 (Zrt/Irt-like protein 8), a transmembrane transporter that mediates cellular uptake of manganese and zinc. Biallelic hypomorphic variants reduce intracellular manganese, and because manganese is the essential cofactor of several Golgi glycosyltransferases, in particular beta-1,4-galactosyltransferase and the enzymes adding terminal galactose and sialic acid, N- and O-glycan maturation fails and a type II pattern of hypoglycosylation results. Systemic manganese deficiency also impairs other manganese-dependent enzymes such as arginase and mitochondrial superoxide dismutase, and the combination of hypoglycosylation with broader manganese-dependent metabolic disturbance underlies the neurodevelopmental, cerebellar and skeletal phenotype; supplementation that restores intracellular manganese can partially correct the galactosylation defect.",
-    "additionalDifferentials": [
-      "TMEM165-CDG (Golgi manganese/calcium homeostasis defect that is also galactose-responsive)",
-      "SLC35A2-CDG and other type II galactosylation/sialylation glycosylation disorders",
-      "SLC39A14-related manganese-transport disorder (manganese overload with dystonia-parkinsonism, the mirror-image transporter defect)",
-      "Congenital cerebellar atrophy syndromes and Leigh syndrome / primary mitochondrial disease",
-      "ATP6-group glycosylation disorders presenting with epilepsy and dystonia",
-      "SLC30A10-related hypermanganesaemia as a contrasting manganese disorder"
+    [
+     "Key Investigations",
+     "Serum and whole-blood manganese (typically low) and zinc, Serum transferrin isoelectric focusing / glycoform analysis (type II",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum and whole-blood manganese (typically low) and zinc",
-      "Serum transferrin isoelectric focusing / glycoform analysis (type II pattern)",
-      "Molecular testing of SLC39A8 with a CDG panel or exome sequencing",
-      "Brain MRI (cerebellar atrophy and, in some, Leigh-like changes)",
-      "N-glycan mass spectrometry demonstrating undergalactosylation",
-      "Monitored trial of galactose and manganese supplementation with serial transferrin glycoform assessment"
+    [
+     "Primary Differentials",
+     "TMEM165-CDG (Golgi manganese/calcium homeostasis defect that is also galactose-responsive), SLC35A2-CDG and other type II",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid neurological deterioration or Leigh-like metabolic decompensation",
-      "Refractory seizures in an infant with hypotonia and dystonia",
-      "Manganese supplementation given without monitoring, risking manganese neurotoxicity and overload",
-      "Progressive loss of motor and cerebellar function"
+    [
+     "Management Strategy",
+     "Give carefully monitored oral manganese supplementation to restore the cofactor for Golgi glycosyltransferases, combined with",
+     "Core treatment modality"
     ],
-    "prognosis": "The natural history is severe with substantial neurodisability, but a subset of patients show meaningful biochemical and clinical improvement with galactose and carefully monitored manganese supplementation, so early recognition is worthwhile.",
-    "pitfalls": [
-      "Missing the low manganese because it is not part of routine metabolic panels.",
-      "Giving manganese supplementation without monitoring, risking manganese accumulation and toxicity.",
-      "Dismissing the type II transferrin pattern as non-specific and not pursuing the specific gene.",
-      "Confusing it with the SLC39A14 and SLC30A10 manganese-overload disorders, which require the opposite (chelation) approach."
-    ],
-    "references": [
-      "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
-      "Congenital disorders of glycosylation: clinical and diagnostic reviews",
-      "Trace-element and manganese metabolism reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give carefully monitored oral manganese supplementation to restore the cofactor for Golgi glycosyltransferases, combined with galactose supplementation to improve glycosylation",
-      "Undertake serial monitoring of whole-blood manganese and transferrin glycoforms to guide dosing and avoid manganese toxicity",
-      "Control seizures with antiseizure medication and manage dystonia for the neurological features",
-      "Provide rehabilitative support with physiotherapy and occupational and speech therapy for hypotonia and developmental delay",
-      "Arrange audiology surveillance and hearing support for sensorineural hearing loss, with neuroimaging follow-up of cerebellar or Leigh-like changes",
-      "Offer genetic counselling and family testing given autosomal recessive inheritance within multidisciplinary metabolic and neurology care"
+    [
+     "Clinical Pitfall",
+     "Missing the low manganese because it is not part of routine metabolic panels.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for slc39a8-cdg (zip8 deficiency, cdg type iin)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "slc39a8-cdg-diagram",
+   "title": "SLC39A8-CDG (ZIP8 Deficiency, CDG Type IIn): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

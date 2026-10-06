@@ -215,5 +215,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8513e121"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "brain_abscess-dx-algo",
+      "title": "Brain Abscess: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic triad of headache, fever, and a focal neurologic deficit is present in fewer than half of cases, so its absence does not exclude the diagnosis (p.1178).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Lumbar puncture should NOT be performed when a focal intracranial infection such as abscess or empyema is known or suspected, because CSF analysis adds nothing and LP increases the risk of herniation (p.1179).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: MRI is preferred over CT, being superior for detecting early (cerebritis-stage) lesions and posterior fossa abscesses (p.1178)., Diffusion-weighted imaging with apparent diffusion coefficient mapping to separate abscess"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison describes a staged histopathologic/radiologic evolution rather than a clinical severity score: early cerebritis (days 1-3), late cerebritis (days 4-9), early capsule formation (days 10-13, when ring enhancement"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on the classic triad: headache, fever, and focal deficit coexist in fewer than half of patients (p.1178)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for brain abscess."
+    }
+  ],
+  "tables": [
+    {
+      "id": "brain_abscess-matrix",
+      "title": "Brain Abscess: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad of headache, fever, and a focal neurologic deficit is present in fewer than half of cases, so its absence does",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "MRI is preferred over CT, being superior for detecting early (cerebritis-stage) lesions and posterior fossa abscesses (p.1178).,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Subdural empyema, Bacterial meningitis, Viral meningoencephalitis",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Lumbar puncture should NOT be performed when a focal intracranial infection such as abscess or empyema is known or suspected,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on the classic triad: headache, fever, and focal deficit coexist in fewer than half of patients (p.1178).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for brain abscess."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "brain-abscess-diagram",
+      "title": "Brain Abscess: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

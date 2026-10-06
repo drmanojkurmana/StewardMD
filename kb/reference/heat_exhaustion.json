@@ -1,78 +1,173 @@
 {
-  "id": "heat_exhaustion",
-  "name": "Heat exhaustion",
-  "aliases": [
-    "heat prostration",
-    "heat collapse",
-    "exertional heat exhaustion"
+ "id": "heat_exhaustion",
+ "name": "Heat exhaustion",
+ "aliases": [
+  "heat prostration",
+  "heat collapse",
+  "exertional heat exhaustion"
+ ],
+ "class": "non_infective",
+ "system": "Environmental / Emergency",
+ "specialty": "Emergency & Wilderness Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A heat illness of intermediate severity, presenting with fatigue, weakness, headache, dizziness, nausea, and often profuse sweating after exertion or exposure in a hot environment",
+   "Core temperature is usually normal or only mildly raised (generally below the threshold used to define heat stroke) and, crucially, mentation remains intact",
+   "The presence of confusion, agitation, seizures, or any altered mental state signals progression to heat stroke and mandates aggressive cooling",
+   "Reflects a combination of volume depletion and electrolyte loss from sweating together with cardiovascular strain from peripheral vasodilation",
+   "Management centres on moving to a cool environment, rest, removing excess clothing, and oral or intravenous rehydration",
+   "Measuring an accurate core (rectal) temperature is the key step in distinguishing heat exhaustion from early heat stroke",
+   "Most patients recover rapidly once cooled and rehydrated, and can often be managed without hospital admission",
+   "Risk factors include poor acclimatisation, high humidity, extremes of age, dehydration, and certain medications that impair thermoregulation"
   ],
-  "class": "non_infective",
-  "system": "Environmental / Emergency",
-  "specialty": "Emergency & Wilderness Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A heat illness of intermediate severity, presenting with fatigue, weakness, headache, dizziness, nausea, and often profuse sweating after exertion or exposure in a hot environment",
-      "Core temperature is usually normal or only mildly raised (generally below the threshold used to define heat stroke) and, crucially, mentation remains intact",
-      "The presence of confusion, agitation, seizures, or any altered mental state signals progression to heat stroke and mandates aggressive cooling",
-      "Reflects a combination of volume depletion and electrolyte loss from sweating together with cardiovascular strain from peripheral vasodilation",
-      "Management centres on moving to a cool environment, rest, removing excess clothing, and oral or intravenous rehydration",
-      "Measuring an accurate core (rectal) temperature is the key step in distinguishing heat exhaustion from early heat stroke",
-      "Most patients recover rapidly once cooled and rehydrated, and can often be managed without hospital admission",
-      "Risk factors include poor acclimatisation, high humidity, extremes of age, dehydration, and certain medications that impair thermoregulation"
+  "pathophysiology": "Heat exhaustion arises when prolonged heat stress and sweating deplete water and electrolytes while peripheral vasodilation, undertaken to shed heat, redistributes blood volume to the skin. The resulting relative hypovolaemia and reduced central circulating volume produce the characteristic weakness, dizziness, and tachycardia. Thermoregulation is still largely functional, so the core temperature stays normal or only modestly elevated and the central nervous system is spared, which is what separates it from heat stroke, where thermoregulatory failure allows core temperature to climb and causes encephalopathy and multi-organ injury.",
+  "additionalDifferentials": [
+   "Heat stroke (defined by marked hyperthermia with central nervous system dysfunction)",
+   "Simple dehydration from other causes",
+   "Hyponatraemia from excessive hypotonic fluid intake during exertion",
+   "Hypoglycaemia",
+   "Sepsis or other febrile illness",
+   "Cardiac or vasovagal syncope"
+  ],
+  "additionalInvestigations": [
+   "Accurate core (rectal) temperature measurement to exclude heat stroke",
+   "Serum electrolytes, particularly sodium, to detect exertional hyponatraemia",
+   "Blood glucose",
+   "Renal function and, where exertion is severe, creatine kinase to screen for rhabdomyolysis",
+   "Clinical assessment of mental status and hydration"
+  ],
+  "redFlags": [
+   "Any alteration in mental status (confusion, agitation, seizure, collapse) indicating heat stroke",
+   "Core temperature at or above the heat stroke threshold",
+   "Persistent hypotension or failure to improve with cooling and rehydration",
+   "Signs of end-organ dysfunction such as dark urine, oliguria, or bleeding"
+  ],
+  "prognosis": "With prompt removal from the heat, rest, and rehydration the outlook is excellent and full recovery is the norm; the main danger is unrecognised progression to heat stroke, which carries substantial morbidity and mortality.",
+  "pitfalls": [
+   "Relying on peripheral or oral temperature and missing true hyperthermia",
+   "Assuming intact sweating excludes serious heat illness",
+   "Overlooking exertional hyponatraemia and giving large volumes of plain water",
+   "Discharging before mentation and vital signs have clearly normalised"
+  ],
+  "references": [
+   "Auerbach's Wilderness Medicine",
+   "Bove and Davis' Diving Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Move the patient to a cool environment, rest them, and remove excess clothing",
+   "Rehydrate with oral electrolyte solution, using intravenous fluids where oral intake is not tolerated or depletion is severe",
+   "Apply active cooling measures to bring down any modest temperature elevation",
+   "Measure an accurate core (rectal) temperature to distinguish heat exhaustion from early heat stroke",
+   "Monitor mental status, serum sodium for exertional hyponatraemia, blood glucose, and creatine kinase and renal function after heavy exertion",
+   "Escalate immediately to aggressive cooling if confusion, agitation, or seizures signal progression to heat stroke",
+   "Advise acclimatisation and adequate hydration and salt replacement to prevent recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "heat_exhaustion-pathway",
+   "title": "Heat exhaustion: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A heat illness of intermediate severity, presenting with fatigue, weakness, headache, dizziness, nausea, and often profuse sweating after exertion or exposure in a hot environment",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Any alteration in mental status (confusion, agitation, seizure, collapse) indicating heat stroke",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Accurate core (rectal) temperature measurement to exclude heat stroke, Serum electrolytes, particularly sodium, to detect exertional hyponatraemia, Blood glucose"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Move the patient to a cool environment, rest them, and remove excess clothing"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on peripheral or oral temperature and missing true hyperthermia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of heat exhaustion."
+  }
+ ],
+ "tables": [
+  {
+   "id": "heat_exhaustion-matrix",
+   "title": "Heat exhaustion: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A heat illness of intermediate severity, presenting with fatigue, weakness, headache, dizziness, nausea, and often profuse",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Heat exhaustion arises when prolonged heat stress and sweating deplete water and electrolytes while peripheral vasodilation, undertaken to shed heat, redistributes blood volume to the skin. The resulting relative hypovolaemia and reduced central circulating volume produce the characteristic weakness, dizziness, and tachycardia. Thermoregulation is still largely functional, so the core temperature stays normal or only modestly elevated and the central nervous system is spared, which is what separates it from heat stroke, where thermoregulatory failure allows core temperature to climb and causes encephalopathy and multi-organ injury.",
-    "additionalDifferentials": [
-      "Heat stroke (defined by marked hyperthermia with central nervous system dysfunction)",
-      "Simple dehydration from other causes",
-      "Hyponatraemia from excessive hypotonic fluid intake during exertion",
-      "Hypoglycaemia",
-      "Sepsis or other febrile illness",
-      "Cardiac or vasovagal syncope"
+    [
+     "Key Investigations",
+     "Accurate core (rectal) temperature measurement to exclude heat stroke, Serum electrolytes, particularly sodium, to detect",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Accurate core (rectal) temperature measurement to exclude heat stroke",
-      "Serum electrolytes, particularly sodium, to detect exertional hyponatraemia",
-      "Blood glucose",
-      "Renal function and, where exertion is severe, creatine kinase to screen for rhabdomyolysis",
-      "Clinical assessment of mental status and hydration"
+    [
+     "Primary Differentials",
+     "Heat stroke (defined by marked hyperthermia with central nervous system dysfunction), Simple dehydration from other causes,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Any alteration in mental status (confusion, agitation, seizure, collapse) indicating heat stroke",
-      "Core temperature at or above the heat stroke threshold",
-      "Persistent hypotension or failure to improve with cooling and rehydration",
-      "Signs of end-organ dysfunction such as dark urine, oliguria, or bleeding"
+    [
+     "Management Strategy",
+     "Move the patient to a cool environment, rest them, and remove excess clothing",
+     "Core treatment modality"
     ],
-    "prognosis": "With prompt removal from the heat, rest, and rehydration the outlook is excellent and full recovery is the norm; the main danger is unrecognised progression to heat stroke, which carries substantial morbidity and mortality.",
-    "pitfalls": [
-      "Relying on peripheral or oral temperature and missing true hyperthermia",
-      "Assuming intact sweating excludes serious heat illness",
-      "Overlooking exertional hyponatraemia and giving large volumes of plain water",
-      "Discharging before mentation and vital signs have clearly normalised"
-    ],
-    "references": [
-      "Auerbach's Wilderness Medicine",
-      "Bove and Davis' Diving Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Move the patient to a cool environment, rest them, and remove excess clothing",
-      "Rehydrate with oral electrolyte solution, using intravenous fluids where oral intake is not tolerated or depletion is severe",
-      "Apply active cooling measures to bring down any modest temperature elevation",
-      "Measure an accurate core (rectal) temperature to distinguish heat exhaustion from early heat stroke",
-      "Monitor mental status, serum sodium for exertional hyponatraemia, blood glucose, and creatine kinase and renal function after heavy exertion",
-      "Escalate immediately to aggressive cooling if confusion, agitation, or seizures signal progression to heat stroke",
-      "Advise acclimatisation and adequate hydration and salt replacement to prevent recurrence"
+    [
+     "Clinical Pitfall",
+     "Relying on peripheral or oral temperature and missing true hyperthermia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for heat exhaustion."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "heat-exhaustion-diagram",
+   "title": "Heat exhaustion: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

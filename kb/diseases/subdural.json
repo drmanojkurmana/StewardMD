@@ -140,5 +140,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hd535bd0b"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "subdural-dx-algo",
+      "title": "Subdural haematoma: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Direct cranial trauma may be minor and is not always required for an acute subdural bleed, particularly in the elderly and those on anticoagulants; acceleration forces alone (e.g. whiplash) can suffice (p.3572).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Stupor or coma, hemiparesis, and unilateral pupillary enlargement indicate a larger acute haematoma (p.3572)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: MRI reliably identifies both subacute and chronic subdural haematomas and is useful when CT is equivocal (p.3573), Contrast-enhanced imaging demonstrates enhancement of the vascular fibrous capsule surrounding a chronic"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames subdural haematoma by acuity and imaging appearance rather than a numeric grade: ACUTE - non-contrast CT shows a hyperdense crescentic clot with an irregular brain interface; SUBACUTE (~2-6 weeks) - clot"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Subacute pitfall: between roughly 2 and 6 weeks after the initial bleed the clot becomes isodense relative to adjacent brain on non-contrast CT and may be inapparent/missed (p.3573)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for subdural haematoma."
+    }
+  ],
+  "tables": [
+    {
+      "id": "subdural-matrix",
+      "title": "Subdural haematoma: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Direct cranial trauma may be minor and is not always required for an acute subdural bleed, particularly in the elderly and those",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "MRI reliably identifies both subacute and chronic subdural haematomas and is useful when CT is equivocal (p.3573),",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Epidural haematoma (lenticular/lens-shaped on CT, usually arterial from a torn middle meningeal artery, classic lucid interval,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Stupor or coma, hemiparesis, and unilateral pupillary enlargement indicate a larger acute haematoma (p.3572)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Subacute pitfall: between roughly 2 and 6 weeks after the initial bleed the clot becomes isodense relative to adjacent brain on",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for subdural haematoma."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "subdural-diagram",
+      "title": "Subdural haematoma: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

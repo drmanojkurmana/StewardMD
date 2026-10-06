@@ -1,80 +1,175 @@
 {
-  "id": "tracheoesophageal_fistula",
-  "name": "Tracheoesophageal Fistula",
-  "aliases": [
-    "TEF",
-    "TOF/TEF",
-    "esophageal atresia with tracheoesophageal fistula",
-    "EA/TEF"
+ "id": "tracheoesophageal_fistula",
+ "name": "Tracheoesophageal Fistula",
+ "aliases": [
+  "TEF",
+  "TOF/TEF",
+  "esophageal atresia with tracheoesophageal fistula",
+  "EA/TEF"
+ ],
+ "class": "non_infective",
+ "system": "Neonatology",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "An abnormal congenital communication between the trachea and oesophagus, most often occurring together with oesophageal atresia; the commonest anatomical type is proximal oesophageal atresia with a distal tracheoesophageal fistula.",
+   "Typical newborn features include excessive drooling and frothy secretions, choking, coughing, and cyanosis with feeds, and inability to pass a nasogastric tube into the stomach.",
+   "A characteristic radiographic clue is a feeding tube coiling in the upper oesophageal pouch; gas in the stomach and bowel indicates a distal fistula, while a gasless abdomen suggests atresia without a distal fistula.",
+   "Aspiration of saliva and, via the fistula, gastric contents into the airway causes respiratory compromise and pneumonitis.",
+   "An isolated H-type fistula without atresia may present later with recurrent coughing during feeds, cyanotic spells, and recurrent respiratory infections.",
+   "Initial management protects the airway and lungs: keep the infant nil by mouth, apply continuous suction to the upper pouch, and position to reduce aspiration and reflux through the fistula.",
+   "It is frequently part of the VACTERL association, so evaluation for vertebral, anorectal, cardiac, renal, and limb anomalies is important.",
+   "Definitive treatment is surgical division of the fistula and repair of the oesophageal atresia, timed according to the infant's stability and anatomy.",
+   "Long-term issues can include anastomotic stricture, gastro-oesophageal reflux, tracheomalacia, and dysphagia requiring ongoing follow-up."
   ],
-  "class": "non_infective",
-  "system": "Neonatology",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "An abnormal congenital communication between the trachea and oesophagus, most often occurring together with oesophageal atresia; the commonest anatomical type is proximal oesophageal atresia with a distal tracheoesophageal fistula.",
-      "Typical newborn features include excessive drooling and frothy secretions, choking, coughing, and cyanosis with feeds, and inability to pass a nasogastric tube into the stomach.",
-      "A characteristic radiographic clue is a feeding tube coiling in the upper oesophageal pouch; gas in the stomach and bowel indicates a distal fistula, while a gasless abdomen suggests atresia without a distal fistula.",
-      "Aspiration of saliva and, via the fistula, gastric contents into the airway causes respiratory compromise and pneumonitis.",
-      "An isolated H-type fistula without atresia may present later with recurrent coughing during feeds, cyanotic spells, and recurrent respiratory infections.",
-      "Initial management protects the airway and lungs: keep the infant nil by mouth, apply continuous suction to the upper pouch, and position to reduce aspiration and reflux through the fistula.",
-      "It is frequently part of the VACTERL association, so evaluation for vertebral, anorectal, cardiac, renal, and limb anomalies is important.",
-      "Definitive treatment is surgical division of the fistula and repair of the oesophageal atresia, timed according to the infant's stability and anatomy.",
-      "Long-term issues can include anastomotic stricture, gastro-oesophageal reflux, tracheomalacia, and dysphagia requiring ongoing follow-up."
+  "pathophysiology": "Abnormal separation of the primitive foregut into trachea and oesophagus during embryogenesis leaves an abnormal connection between the two and, commonly, a discontinuous oesophagus (atresia). In the common configuration, the upper oesophagus ends in a blind pouch while the lower oesophagus connects to the trachea. Swallowed secretions collect in and overflow from the upper pouch into the airway, and the distal fistula allows gastric contents to reflux into the trachea and air to distend the stomach. These mechanisms produce aspiration, chemical pneumonitis, and, with a large distal fistula, gaseous abdominal distension that further impairs ventilation.",
+  "additionalDifferentials": [
+   "Isolated oesophageal atresia without fistula",
+   "Laryngeal cleft",
+   "Choanal atresia",
+   "Severe gastro-oesophageal reflux with aspiration",
+   "Vascular ring causing feeding difficulty",
+   "Swallowing dysfunction of neurological origin"
+  ],
+  "additionalInvestigations": [
+   "Attempted passage of a nasogastric tube with radiograph showing tube coiling in the upper pouch",
+   "Chest and abdominal radiograph to assess the pouch and bowel gas pattern",
+   "Echocardiography to identify cardiac anomalies and aortic arch side before surgery",
+   "Renal ultrasound and spinal and limb assessment for VACTERL anomalies",
+   "Bronchoscopy or contrast study to define an H-type fistula when suspected"
+  ],
+  "redFlags": [
+   "Choking, cyanosis, and respiratory distress with attempted feeding",
+   "Aspiration pneumonitis from overflow of secretions or reflux through the fistula",
+   "Progressive gastric and bowel distension impairing ventilation via a large distal fistula",
+   "Recurrent respiratory infections and cyanotic spells suggesting a missed H-type fistula",
+   "Associated critical cardiac or other major anomalies within the VACTERL spectrum"
+  ],
+  "prognosis": "With early diagnosis and surgical repair the outlook is generally favourable, and prognosis is influenced strongly by prematurity, birth weight, and associated anomalies, particularly cardiac lesions. Many children require management of later complications such as strictures, reflux, and tracheomalacia but achieve good long-term function.",
+  "pitfalls": [
+   "Feeding a newborn with excessive drooling before excluding oesophageal atresia, precipitating aspiration",
+   "Missing a delayed-presenting H-type fistula in a child with recurrent feeding-related respiratory symptoms",
+   "Failing to search for associated VACTERL anomalies, especially cardiac lesions, before surgery",
+   "Overlooking that a gasless abdomen indicates atresia without a distal fistula",
+   "Underestimating long-term reflux, stricture, and tracheomalacia complications requiring follow-up"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate airway and lung protection: keep the infant nil by mouth, apply continuous suction to the upper oesophageal pouch with a Replogle tube, and nurse head-up to limit aspiration and reflux through the fistula",
+   "Definitive surgical correction with ligation and division of the tracheoesophageal fistula and primary oesophageal anastomosis",
+   "Preoperative echocardiography to define cardiac anomalies and aortic arch side, with screening for associated VACTERL anomalies",
+   "Respiratory support and treatment of aspiration pneumonitis, ventilating carefully to avoid distending the stomach through a distal fistula",
+   "Anticipate and manage postoperative complications, dilating anastomotic strictures endoscopically, controlling gastro-oesophageal reflux with acid suppression or fundoplication, and treating residual tracheomalacia",
+   "Manage within a paediatric surgical and neonatal multidisciplinary team, with long-term follow-up of feeding, growth and respiratory status"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tracheoesophageal_fistula-pathway",
+   "title": "Tracheoesophageal Fistula: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An abnormal congenital communication between the trachea and oesophagus, most often occurring together with oesophageal atresia; the commonest anatomical type is proximal oesophageal atresia with a distal tracheoesophageal fistula.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Choking, cyanosis, and respiratory distress with attempted feeding",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Attempted passage of a nasogastric tube with radiograph showing tube coiling in the upper pouch, Chest and abdominal radiograph to assess the pouch and bowel gas pattern, Echocardiography to identify cardiac anomalies and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate airway and lung protection: keep the infant nil by mouth, apply continuous suction to the upper oesophageal pouch with a Replogle tube, and nurse head-up to limit aspiration and reflux through the fistula"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Feeding a newborn with excessive drooling before excluding oesophageal atresia, precipitating aspiration"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tracheoesophageal fistula."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tracheoesophageal_fistula-matrix",
+   "title": "Tracheoesophageal Fistula: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An abnormal congenital communication between the trachea and oesophagus, most often occurring together with oesophageal atresia;",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Abnormal separation of the primitive foregut into trachea and oesophagus during embryogenesis leaves an abnormal connection between the two and, commonly, a discontinuous oesophagus (atresia). In the common configuration, the upper oesophagus ends in a blind pouch while the lower oesophagus connects to the trachea. Swallowed secretions collect in and overflow from the upper pouch into the airway, and the distal fistula allows gastric contents to reflux into the trachea and air to distend the stomach. These mechanisms produce aspiration, chemical pneumonitis, and, with a large distal fistula, gaseous abdominal distension that further impairs ventilation.",
-    "additionalDifferentials": [
-      "Isolated oesophageal atresia without fistula",
-      "Laryngeal cleft",
-      "Choanal atresia",
-      "Severe gastro-oesophageal reflux with aspiration",
-      "Vascular ring causing feeding difficulty",
-      "Swallowing dysfunction of neurological origin"
+    [
+     "Key Investigations",
+     "Attempted passage of a nasogastric tube with radiograph showing tube coiling in the upper pouch, Chest and abdominal radiograph",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Attempted passage of a nasogastric tube with radiograph showing tube coiling in the upper pouch",
-      "Chest and abdominal radiograph to assess the pouch and bowel gas pattern",
-      "Echocardiography to identify cardiac anomalies and aortic arch side before surgery",
-      "Renal ultrasound and spinal and limb assessment for VACTERL anomalies",
-      "Bronchoscopy or contrast study to define an H-type fistula when suspected"
+    [
+     "Primary Differentials",
+     "Isolated oesophageal atresia without fistula, Laryngeal cleft, Choanal atresia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Choking, cyanosis, and respiratory distress with attempted feeding",
-      "Aspiration pneumonitis from overflow of secretions or reflux through the fistula",
-      "Progressive gastric and bowel distension impairing ventilation via a large distal fistula",
-      "Recurrent respiratory infections and cyanotic spells suggesting a missed H-type fistula",
-      "Associated critical cardiac or other major anomalies within the VACTERL spectrum"
+    [
+     "Management Strategy",
+     "Immediate airway and lung protection: keep the infant nil by mouth, apply continuous suction to the upper oesophageal pouch with",
+     "Core treatment modality"
     ],
-    "prognosis": "With early diagnosis and surgical repair the outlook is generally favourable, and prognosis is influenced strongly by prematurity, birth weight, and associated anomalies, particularly cardiac lesions. Many children require management of later complications such as strictures, reflux, and tracheomalacia but achieve good long-term function.",
-    "pitfalls": [
-      "Feeding a newborn with excessive drooling before excluding oesophageal atresia, precipitating aspiration",
-      "Missing a delayed-presenting H-type fistula in a child with recurrent feeding-related respiratory symptoms",
-      "Failing to search for associated VACTERL anomalies, especially cardiac lesions, before surgery",
-      "Overlooking that a gasless abdomen indicates atresia without a distal fistula",
-      "Underestimating long-term reflux, stricture, and tracheomalacia complications requiring follow-up"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate airway and lung protection: keep the infant nil by mouth, apply continuous suction to the upper oesophageal pouch with a Replogle tube, and nurse head-up to limit aspiration and reflux through the fistula",
-      "Definitive surgical correction with ligation and division of the tracheoesophageal fistula and primary oesophageal anastomosis",
-      "Preoperative echocardiography to define cardiac anomalies and aortic arch side, with screening for associated VACTERL anomalies",
-      "Respiratory support and treatment of aspiration pneumonitis, ventilating carefully to avoid distending the stomach through a distal fistula",
-      "Anticipate and manage postoperative complications, dilating anastomotic strictures endoscopically, controlling gastro-oesophageal reflux with acid suppression or fundoplication, and treating residual tracheomalacia",
-      "Manage within a paediatric surgical and neonatal multidisciplinary team, with long-term follow-up of feeding, growth and respiratory status"
+    [
+     "Clinical Pitfall",
+     "Feeding a newborn with excessive drooling before excluding oesophageal atresia, precipitating aspiration",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tracheoesophageal fistula."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tracheoesophageal-fistula-diagram",
+   "title": "Tracheoesophageal Fistula: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

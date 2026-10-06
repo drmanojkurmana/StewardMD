@@ -1,80 +1,175 @@
 {
-  "id": "coccydynia",
-  "name": "Coccydynia",
-  "aliases": [
-    "coccygodynia",
-    "tailbone pain",
-    "coccygeal pain",
-    "coccyx pain"
+ "id": "coccydynia",
+ "name": "Coccydynia",
+ "aliases": [
+  "coccygodynia",
+  "tailbone pain",
+  "coccygeal pain",
+  "coccyx pain"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Spine",
+ "specialty": "Spinal Surgery / Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rothman-Simeone and Herkowitz's The Spine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Pain localised to the coccyx (tailbone), classically exacerbated by sitting, especially on hard surfaces, and by rising from sitting",
+   "More common in women and frequently follows a fall onto the buttocks or childbirth, though some cases are idiopathic",
+   "Both obesity and, conversely, a very low body-mass index are recognised risk factors that alter how the coccyx is loaded when seated",
+   "Point tenderness is elicited directly over the coccyx, and a rectal examination can assess mobility and reproduce the pain",
+   "Dynamic sit-stand lateral radiographs can reveal abnormal coccygeal hypermobility or subluxation",
+   "Persistent or atypical coccydynia warrants imaging to exclude a rare presacral or coccygeal tumour such as a chordoma",
+   "Most cases settle with conservative care including a ring or wedge cushion, analgesia, and physiotherapy",
+   "Refractory cases may respond to image-guided local injection, and coccygectomy is a last resort in carefully selected patients"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Spine",
-  "specialty": "Spinal Surgery / Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rothman-Simeone and Herkowitz's The Spine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Pain localised to the coccyx (tailbone), classically exacerbated by sitting, especially on hard surfaces, and by rising from sitting",
-      "More common in women and frequently follows a fall onto the buttocks or childbirth, though some cases are idiopathic",
-      "Both obesity and, conversely, a very low body-mass index are recognised risk factors that alter how the coccyx is loaded when seated",
-      "Point tenderness is elicited directly over the coccyx, and a rectal examination can assess mobility and reproduce the pain",
-      "Dynamic sit-stand lateral radiographs can reveal abnormal coccygeal hypermobility or subluxation",
-      "Persistent or atypical coccydynia warrants imaging to exclude a rare presacral or coccygeal tumour such as a chordoma",
-      "Most cases settle with conservative care including a ring or wedge cushion, analgesia, and physiotherapy",
-      "Refractory cases may respond to image-guided local injection, and coccygectomy is a last resort in carefully selected patients"
+  "pathophysiology": "Coccydynia is pain arising from the coccyx and its surrounding soft tissues. It often follows direct trauma such as a backward fall, or the strain of childbirth, which can produce coccygeal hypermobility, subluxation, or dislocation and inflammation of the sacrococcygeal joint and its ligamentous and muscular attachments. Abnormal sitting biomechanics, influenced by body habitus, concentrate load on the coccyx. In many patients no cause is identified (idiopathic), and rarely local pathology such as a tumour or infection underlies the pain.",
+  "additionalDifferentials": [
+   "Pilonidal disease or other perianal and perirectal pathology",
+   "Sacral or coccygeal fracture",
+   "Presacral or coccygeal tumour such as chordoma or teratoma",
+   "Referred pain from the lumbosacral spine or sacroiliac joint",
+   "Levator ani syndrome or pelvic floor dysfunction",
+   "Perineural (Tarlov) cyst"
+  ],
+  "additionalInvestigations": [
+   "Dynamic sit-stand lateral radiographs to assess coccygeal mobility and subluxation",
+   "MRI of the pelvis and sacrococcygeal region to exclude tumour or infection in persistent cases",
+   "Clinical rectal examination to assess mobility and reproduce pain",
+   "CT if bony detail is needed to characterise a fracture or destructive change",
+   "Diagnostic local anaesthetic injection to confirm the coccyx as the pain source"
+  ],
+  "redFlags": [
+   "Night pain, weight loss, or a palpable presacral mass suggesting a tumour such as chordoma",
+   "Fever or signs of local infection",
+   "Progressive neurological or sphincter symptoms"
+  ],
+  "prognosis": "The great majority of patients improve within weeks to months with conservative measures; a minority have persistent pain, but even these often respond to injection or, ultimately, coccygectomy.",
+  "pitfalls": [
+   "Failing to exclude a presacral tumour in chronic, treatment-resistant coccydynia",
+   "Attributing pain to the coccyx when the source is the lumbosacral spine or pelvic floor",
+   "Proceeding to surgery without confirming the coccyx as the pain generator"
+  ],
+  "references": [
+   "Rothman-Simeone and Herkowitz's The Spine",
+   "Foye: Coccydynia review, Physical Medicine and Rehabilitation Clinics of North America"
+  ],
+  "crossLinks": [
+   "sacroiliac_joint_dysfunction",
+   "tarlov_cyst"
+  ],
+  "management": [
+   "First-line conservative care with oral non-steroidal anti-inflammatory drugs, activity and posture modification, and a wedge-shaped cushion to offload the coccyx when seated",
+   "Physiotherapy including pelvic-floor work, coccygeal manipulation and mobilisation, and stretching",
+   "Image-guided local corticosteroid and anaesthetic injection into the sacrococcygeal joint for pain unresponsive to conservative measures",
+   "Ganglion impar block or, in selected cases, radiofrequency ablation or neuromodulation for refractory pain",
+   "Coccygectomy reserved for carefully selected patients with persistent, disabling pain that has failed non-operative treatment",
+   "Investigate atypical or persistent pain with MRI to exclude a presacral or coccygeal tumour such as chordoma before invasive treatment",
+   "Multidisciplinary input from spinal surgery, pain medicine and physiotherapy for chronic cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "coccydynia-pathway",
+   "title": "Coccydynia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Pain localised to the coccyx (tailbone), classically exacerbated by sitting, especially on hard surfaces, and by rising from sitting",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Night pain, weight loss, or a palpable presacral mass suggesting a tumour such as chordoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dynamic sit-stand lateral radiographs to assess coccygeal mobility and subluxation, MRI of the pelvis and sacrococcygeal region to exclude tumour or infection in persistent cases, Clinical rectal examination to assess"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line conservative care with oral non-steroidal anti-inflammatory drugs, activity and posture modification, and a wedge-shaped cushion to offload the coccyx when seated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to exclude a presacral tumour in chronic, treatment-resistant coccydynia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of coccydynia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "coccydynia-matrix",
+   "title": "Coccydynia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Pain localised to the coccyx (tailbone), classically exacerbated by sitting, especially on hard surfaces, and by rising from",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Coccydynia is pain arising from the coccyx and its surrounding soft tissues. It often follows direct trauma such as a backward fall, or the strain of childbirth, which can produce coccygeal hypermobility, subluxation, or dislocation and inflammation of the sacrococcygeal joint and its ligamentous and muscular attachments. Abnormal sitting biomechanics, influenced by body habitus, concentrate load on the coccyx. In many patients no cause is identified (idiopathic), and rarely local pathology such as a tumour or infection underlies the pain.",
-    "additionalDifferentials": [
-      "Pilonidal disease or other perianal and perirectal pathology",
-      "Sacral or coccygeal fracture",
-      "Presacral or coccygeal tumour such as chordoma or teratoma",
-      "Referred pain from the lumbosacral spine or sacroiliac joint",
-      "Levator ani syndrome or pelvic floor dysfunction",
-      "Perineural (Tarlov) cyst"
+    [
+     "Key Investigations",
+     "Dynamic sit-stand lateral radiographs to assess coccygeal mobility and subluxation, MRI of the pelvis and sacrococcygeal region",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dynamic sit-stand lateral radiographs to assess coccygeal mobility and subluxation",
-      "MRI of the pelvis and sacrococcygeal region to exclude tumour or infection in persistent cases",
-      "Clinical rectal examination to assess mobility and reproduce pain",
-      "CT if bony detail is needed to characterise a fracture or destructive change",
-      "Diagnostic local anaesthetic injection to confirm the coccyx as the pain source"
+    [
+     "Primary Differentials",
+     "Pilonidal disease or other perianal and perirectal pathology, Sacral or coccygeal fracture, Presacral or coccygeal tumour such as",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Night pain, weight loss, or a palpable presacral mass suggesting a tumour such as chordoma",
-      "Fever or signs of local infection",
-      "Progressive neurological or sphincter symptoms"
+    [
+     "Management Strategy",
+     "First-line conservative care with oral non-steroidal anti-inflammatory drugs, activity and posture modification, and a",
+     "Core treatment modality"
     ],
-    "prognosis": "The great majority of patients improve within weeks to months with conservative measures; a minority have persistent pain, but even these often respond to injection or, ultimately, coccygectomy.",
-    "pitfalls": [
-      "Failing to exclude a presacral tumour in chronic, treatment-resistant coccydynia",
-      "Attributing pain to the coccyx when the source is the lumbosacral spine or pelvic floor",
-      "Proceeding to surgery without confirming the coccyx as the pain generator"
-    ],
-    "references": [
-      "Rothman-Simeone and Herkowitz's The Spine",
-      "Foye: Coccydynia review, Physical Medicine and Rehabilitation Clinics of North America"
-    ],
-    "crossLinks": [
-      "sacroiliac_joint_dysfunction",
-      "tarlov_cyst"
-    ],
-    "management": [
-      "First-line conservative care with oral non-steroidal anti-inflammatory drugs, activity and posture modification, and a wedge-shaped cushion to offload the coccyx when seated",
-      "Physiotherapy including pelvic-floor work, coccygeal manipulation and mobilisation, and stretching",
-      "Image-guided local corticosteroid and anaesthetic injection into the sacrococcygeal joint for pain unresponsive to conservative measures",
-      "Ganglion impar block or, in selected cases, radiofrequency ablation or neuromodulation for refractory pain",
-      "Coccygectomy reserved for carefully selected patients with persistent, disabling pain that has failed non-operative treatment",
-      "Investigate atypical or persistent pain with MRI to exclude a presacral or coccygeal tumour such as chordoma before invasive treatment",
-      "Multidisciplinary input from spinal surgery, pain medicine and physiotherapy for chronic cases"
+    [
+     "Clinical Pitfall",
+     "Failing to exclude a presacral tumour in chronic, treatment-resistant coccydynia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for coccydynia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "coccydynia-diagram",
+   "title": "Coccydynia: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

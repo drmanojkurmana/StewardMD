@@ -1,85 +1,180 @@
 {
-  "id": "cholangiocarcinoma",
-  "name": "Cholangiocarcinoma",
-  "aliases": [
-    "bile duct cancer",
-    "CCA",
-    "cholangiocarcinoma",
-    "Klatskin tumour"
+ "id": "cholangiocarcinoma",
+ "name": "Cholangiocarcinoma",
+ "aliases": [
+  "bile duct cancer",
+  "CCA",
+  "cholangiocarcinoma",
+  "Klatskin tumour"
+ ],
+ "class": "non_infective",
+ "system": "Oncology",
+ "specialty": "Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Classified by anatomical site as intrahepatic, perihilar (Klatskin), or distal, and location strongly influences presentation, surgical approach, and outcome",
+   "Perihilar and distal tumours typically present with painless obstructive jaundice, pruritus, pale stools, and dark urine, whereas intrahepatic tumours often present later as a liver mass with vague abdominal pain or weight loss",
+   "Primary sclerosing cholangitis is a major predisposing condition, along with chronic biliary inflammation, liver fluke infestation in endemic regions, biliary tract stones, and choledochal cysts",
+   "CA 19-9 is a useful supportive marker but is neither sensitive nor specific and can be elevated by biliary obstruction or cholangitis alone",
+   "Tissue diagnosis and biliary anatomy are best defined with MRCP and, where needed, ERCP with brushings or cholangioscopy, taking care to avoid seeding and cholangitis",
+   "Only a minority of patients are candidates for curative resection, which may require major liver resection with biliary reconstruction depending on tumour location",
+   "For unresectable or metastatic disease, gemcitabine plus platinum chemotherapy is the systemic backbone, and molecular profiling for targetable alterations such as FGFR2 fusions and IDH1 mutations can guide targeted therapy",
+   "Relieving biliary obstruction with stenting is central to palliation and to controlling cholangitis and pruritus"
   ],
-  "class": "non_infective",
-  "system": "Oncology",
-  "specialty": "Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Classified by anatomical site as intrahepatic, perihilar (Klatskin), or distal, and location strongly influences presentation, surgical approach, and outcome",
-      "Perihilar and distal tumours typically present with painless obstructive jaundice, pruritus, pale stools, and dark urine, whereas intrahepatic tumours often present later as a liver mass with vague abdominal pain or weight loss",
-      "Primary sclerosing cholangitis is a major predisposing condition, along with chronic biliary inflammation, liver fluke infestation in endemic regions, biliary tract stones, and choledochal cysts",
-      "CA 19-9 is a useful supportive marker but is neither sensitive nor specific and can be elevated by biliary obstruction or cholangitis alone",
-      "Tissue diagnosis and biliary anatomy are best defined with MRCP and, where needed, ERCP with brushings or cholangioscopy, taking care to avoid seeding and cholangitis",
-      "Only a minority of patients are candidates for curative resection, which may require major liver resection with biliary reconstruction depending on tumour location",
-      "For unresectable or metastatic disease, gemcitabine plus platinum chemotherapy is the systemic backbone, and molecular profiling for targetable alterations such as FGFR2 fusions and IDH1 mutations can guide targeted therapy",
-      "Relieving biliary obstruction with stenting is central to palliation and to controlling cholangitis and pruritus"
+  "pathophysiology": "Cholangiocarcinoma is a malignancy of the epithelial cells lining the intrahepatic or extrahepatic bile ducts, most often adenocarcinoma. Chronic inflammation and cholestasis, as seen in primary sclerosing cholangitis, chronic infection, or biliary stones, produce repeated epithelial injury and repair that promotes dysplasia and malignant transformation. The tumours are frequently desmoplastic and grow along the bile ducts, causing obstruction; perihilar lesions readily invade the portal structures and liver, while intrahepatic tumours behave as mass-forming liver cancers with early lymphatic and vascular spread.",
+  "additionalDifferentials": [
+   "Pancreatic head adenocarcinoma causing distal biliary obstruction",
+   "Gallbladder carcinoma extending into the biliary tree",
+   "Hepatocellular carcinoma for intrahepatic mass lesions",
+   "Benign biliary stricture, including primary sclerosing cholangitis without malignancy",
+   "Choledocholithiasis with obstructive jaundice",
+   "Metastatic adenocarcinoma to the liver or porta hepatis"
+  ],
+  "additionalInvestigations": [
+   "MRI with MRCP to map biliary anatomy and assess vascular and parenchymal involvement",
+   "Contrast-enhanced CT of chest, abdomen, and pelvis for local staging and distant metastases",
+   "ERCP or percutaneous cholangiography with brush cytology or biopsy for tissue diagnosis and drainage",
+   "Serum CA 19-9 and CEA as supportive and monitoring markers",
+   "Molecular and genomic profiling of tumour tissue for FGFR2 fusions, IDH1 mutations, and other actionable targets"
+  ],
+  "redFlags": [
+   "Progressive painless obstructive jaundice with weight loss",
+   "Cholangitis with fever and rigors on a background of biliary stricture",
+   "New dominant biliary stricture in a patient with primary sclerosing cholangitis",
+   "Rapidly enlarging intrahepatic mass with vascular involvement on imaging"
+  ],
+  "prognosis": "Prognosis is generally poor because most patients present with unresectable disease; complete resection with negative margins offers the best survival, while advanced disease treated with systemic therapy has limited long-term survival though molecularly targeted agents can extend it in selected patients.",
+  "pitfalls": [
+   "Assuming obstructive jaundice is benign and delaying malignancy workup",
+   "Relying on a normal or mildly raised CA 19-9 to exclude cancer",
+   "Aggressive biliary instrumentation causing cholangitis before definitive staging",
+   "Missing a dominant malignant stricture within primary sclerosing cholangitis"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "DeVita's Cancer: Principles & Practice of Oncology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm anatomic subtype (intrahepatic, perihilar, or distal) and discuss in a multidisciplinary hepatobiliary tumour board, since surgical options and staging diverge by subtype.",
+   "For resectable disease, surgery with an R0 margin is the only curative modality; staging laparoscopy is commonly used first to rule out occult peritoneal or distant spread.",
+   "Resection extent depends on subtype: nonanatomic to formal lobectomy for intrahepatic disease, hepatic lobectomy with extrahepatic bile duct and periportal lymphadenectomy for perihilar disease, and a pancreaticoduodenectomy-type approach for distal disease.",
+   "Consider liver transplantation only for carefully selected, early-stage unresectable perihilar tumours using a neoadjuvant chemoradiation plus staging laparoscopy protocol; transplantation is not routinely used for intrahepatic disease given poor results.",
+   "Offer adjuvant capecitabine after resection, which has shown a survival and recurrence-free survival benefit, while noting that trial evidence pools mixed biliary tract cancer populations; adjuvant gemcitabine-based regimens have not shown clear benefit.",
+   "For unresectable disease confined to the liver, consider local-regional therapies such as arterial embolization or ablation, and radiation therapy (including stereotactic approaches) for local control, recognizing limited randomized evidence.",
+   "Photodynamic therapy with biliary stenting may be considered at experienced centres for unresectable perihilar disease, but evidence is conflicting given a later trial showing shorter survival, so it should not be presented as an established survival benefit.",
+   "Use a platinum-gemcitabine doublet as first-line systemic therapy for advanced or metastatic disease, or enroll in a clinical trial.",
+   "Use a fluoropyrimidine-oxaliplatin combination as second-line therapy after progression on first-line gemcitabine-platinum therapy.",
+   "Pursue genomic profiling, especially for intrahepatic disease, to identify targetable alterations including FGFR2 fusions, IDH1 mutations, BRAF V600E, NTRK fusions, and HER2 amplification, and refer to a molecular tumour board or clinical trial for selective inhibitor therapy.",
+   "Provide biliary decompression via ERCP or PTC for obstructive jaundice or cholangitis regardless of resectability, and avoid EUS-FNA of a hilar lesion if transplantation is being considered due to tumour seeding risk.",
+   "Monitor after resection with liver function tests, CA 19-9, and cross-sectional imaging at roughly three-month intervals for the first two years and six-month intervals thereafter, since no formally validated surveillance guideline exists; a rising CA 19-9 may precede radiologic recurrence.",
+   "Refer patients with primary sclerosing cholangitis or choledochal cysts for ongoing surveillance given their markedly increased lifetime risk of cholangiocarcinoma."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cholangiocarcinoma-pathway",
+   "title": "Cholangiocarcinoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Classified by anatomical site as intrahepatic, perihilar (Klatskin), or distal, and location strongly influences presentation, surgical approach, and outcome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive painless obstructive jaundice with weight loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI with MRCP to map biliary anatomy and assess vascular and parenchymal involvement, Contrast-enhanced CT of chest, abdomen, and pelvis for local staging and distant metastases, ERCP or percutaneous cholangiography with"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm anatomic subtype (intrahepatic, perihilar, or distal) and discuss in a multidisciplinary hepatobiliary tumour board, since surgical options and staging diverge by subtype."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming obstructive jaundice is benign and delaying malignancy workup"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cholangiocarcinoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cholangiocarcinoma-matrix",
+   "title": "Cholangiocarcinoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classified by anatomical site as intrahepatic, perihilar (Klatskin), or distal, and location strongly influences presentation,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cholangiocarcinoma is a malignancy of the epithelial cells lining the intrahepatic or extrahepatic bile ducts, most often adenocarcinoma. Chronic inflammation and cholestasis, as seen in primary sclerosing cholangitis, chronic infection, or biliary stones, produce repeated epithelial injury and repair that promotes dysplasia and malignant transformation. The tumours are frequently desmoplastic and grow along the bile ducts, causing obstruction; perihilar lesions readily invade the portal structures and liver, while intrahepatic tumours behave as mass-forming liver cancers with early lymphatic and vascular spread.",
-    "additionalDifferentials": [
-      "Pancreatic head adenocarcinoma causing distal biliary obstruction",
-      "Gallbladder carcinoma extending into the biliary tree",
-      "Hepatocellular carcinoma for intrahepatic mass lesions",
-      "Benign biliary stricture, including primary sclerosing cholangitis without malignancy",
-      "Choledocholithiasis with obstructive jaundice",
-      "Metastatic adenocarcinoma to the liver or porta hepatis"
+    [
+     "Key Investigations",
+     "MRI with MRCP to map biliary anatomy and assess vascular and parenchymal involvement, Contrast-enhanced CT of chest, abdomen, and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI with MRCP to map biliary anatomy and assess vascular and parenchymal involvement",
-      "Contrast-enhanced CT of chest, abdomen, and pelvis for local staging and distant metastases",
-      "ERCP or percutaneous cholangiography with brush cytology or biopsy for tissue diagnosis and drainage",
-      "Serum CA 19-9 and CEA as supportive and monitoring markers",
-      "Molecular and genomic profiling of tumour tissue for FGFR2 fusions, IDH1 mutations, and other actionable targets"
+    [
+     "Primary Differentials",
+     "Pancreatic head adenocarcinoma causing distal biliary obstruction, Gallbladder carcinoma extending into the biliary tree,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive painless obstructive jaundice with weight loss",
-      "Cholangitis with fever and rigors on a background of biliary stricture",
-      "New dominant biliary stricture in a patient with primary sclerosing cholangitis",
-      "Rapidly enlarging intrahepatic mass with vascular involvement on imaging"
+    [
+     "Management Strategy",
+     "Confirm anatomic subtype (intrahepatic, perihilar, or distal) and discuss in a multidisciplinary hepatobiliary tumour board,",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is generally poor because most patients present with unresectable disease; complete resection with negative margins offers the best survival, while advanced disease treated with systemic therapy has limited long-term survival though molecularly targeted agents can extend it in selected patients.",
-    "pitfalls": [
-      "Assuming obstructive jaundice is benign and delaying malignancy workup",
-      "Relying on a normal or mildly raised CA 19-9 to exclude cancer",
-      "Aggressive biliary instrumentation causing cholangitis before definitive staging",
-      "Missing a dominant malignant stricture within primary sclerosing cholangitis"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "DeVita's Cancer: Principles & Practice of Oncology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm anatomic subtype (intrahepatic, perihilar, or distal) and discuss in a multidisciplinary hepatobiliary tumour board, since surgical options and staging diverge by subtype.",
-      "For resectable disease, surgery with an R0 margin is the only curative modality; staging laparoscopy is commonly used first to rule out occult peritoneal or distant spread.",
-      "Resection extent depends on subtype: nonanatomic to formal lobectomy for intrahepatic disease, hepatic lobectomy with extrahepatic bile duct and periportal lymphadenectomy for perihilar disease, and a pancreaticoduodenectomy-type approach for distal disease.",
-      "Consider liver transplantation only for carefully selected, early-stage unresectable perihilar tumours using a neoadjuvant chemoradiation plus staging laparoscopy protocol; transplantation is not routinely used for intrahepatic disease given poor results.",
-      "Offer adjuvant capecitabine after resection, which has shown a survival and recurrence-free survival benefit, while noting that trial evidence pools mixed biliary tract cancer populations; adjuvant gemcitabine-based regimens have not shown clear benefit.",
-      "For unresectable disease confined to the liver, consider local-regional therapies such as arterial embolization or ablation, and radiation therapy (including stereotactic approaches) for local control, recognizing limited randomized evidence.",
-      "Photodynamic therapy with biliary stenting may be considered at experienced centres for unresectable perihilar disease, but evidence is conflicting given a later trial showing shorter survival, so it should not be presented as an established survival benefit.",
-      "Use a platinum-gemcitabine doublet as first-line systemic therapy for advanced or metastatic disease, or enroll in a clinical trial.",
-      "Use a fluoropyrimidine-oxaliplatin combination as second-line therapy after progression on first-line gemcitabine-platinum therapy.",
-      "Pursue genomic profiling, especially for intrahepatic disease, to identify targetable alterations including FGFR2 fusions, IDH1 mutations, BRAF V600E, NTRK fusions, and HER2 amplification, and refer to a molecular tumour board or clinical trial for selective inhibitor therapy.",
-      "Provide biliary decompression via ERCP or PTC for obstructive jaundice or cholangitis regardless of resectability, and avoid EUS-FNA of a hilar lesion if transplantation is being considered due to tumour seeding risk.",
-      "Monitor after resection with liver function tests, CA 19-9, and cross-sectional imaging at roughly three-month intervals for the first two years and six-month intervals thereafter, since no formally validated surveillance guideline exists; a rising CA 19-9 may precede radiologic recurrence.",
-      "Refer patients with primary sclerosing cholangitis or choledochal cysts for ongoing surveillance given their markedly increased lifetime risk of cholangiocarcinoma."
+    [
+     "Clinical Pitfall",
+     "Assuming obstructive jaundice is benign and delaying malignancy workup",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cholangiocarcinoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cholangiocarcinoma-diagram",
+   "title": "Cholangiocarcinoma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

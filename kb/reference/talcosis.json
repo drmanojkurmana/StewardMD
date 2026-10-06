@@ -1,81 +1,176 @@
 {
-  "id": "talcosis",
-  "name": "Talcosis",
-  "aliases": [
-    "talc pneumoconiosis",
-    "talco-silicosis",
-    "intravenous talcosis",
-    "talc granulomatosis"
+ "id": "talcosis",
+ "name": "Talcosis",
+ "aliases": [
+  "talc pneumoconiosis",
+  "talco-silicosis",
+  "intravenous talcosis",
+  "talc granulomatosis"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory Medicine / Occupational Lung Disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Occupational and Environmental Respiratory Medicine reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by exposure to talc (hydrated magnesium silicate), either inhaled occupationally (mining, milling, ceramics, cosmetics, rubber) or introduced intravenously",
+   "Intravenous talcosis occurs when injection drug users inject crushed oral tablets containing talc filler, producing foreign-body granulomas around vascular deposits",
+   "Occupational talc is often contaminated with silica or asbestos fibres, so disease may reflect talco-silicosis or talco-asbestosis rather than pure talc effect",
+   "Birefringent talc particles are seen under polarised light within granulomas and giant cells on biopsy",
+   "Intravenous disease characteristically causes lower-zone or perihilar micronodularity that may coalesce into masses resembling progressive massive fibrosis",
+   "Panacinar lower-zone emphysema is a recognised feature of intravenous talcosis, particularly with methylphenidate injection",
+   "Pulmonary hypertension can develop from vascular talc granulomas obstructing small pulmonary arteries"
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory Medicine / Occupational Lung Disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Occupational and Environmental Respiratory Medicine reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by exposure to talc (hydrated magnesium silicate), either inhaled occupationally (mining, milling, ceramics, cosmetics, rubber) or introduced intravenously",
-      "Intravenous talcosis occurs when injection drug users inject crushed oral tablets containing talc filler, producing foreign-body granulomas around vascular deposits",
-      "Occupational talc is often contaminated with silica or asbestos fibres, so disease may reflect talco-silicosis or talco-asbestosis rather than pure talc effect",
-      "Birefringent talc particles are seen under polarised light within granulomas and giant cells on biopsy",
-      "Intravenous disease characteristically causes lower-zone or perihilar micronodularity that may coalesce into masses resembling progressive massive fibrosis",
-      "Panacinar lower-zone emphysema is a recognised feature of intravenous talcosis, particularly with methylphenidate injection",
-      "Pulmonary hypertension can develop from vascular talc granulomas obstructing small pulmonary arteries"
+  "pathophysiology": "Talc particles reaching the lung, whether inhaled or delivered intravenously, are engulfed by macrophages and provoke a foreign-body granulomatous reaction with multinucleated giant cells surrounding birefringent crystals. In inhalational disease the particles deposit in airways and interstitium, and any accompanying silica or asbestos amplifies fibrosis. In intravenous talcosis, filler particles lodge in pulmonary arterioles and capillaries, seeding perivascular granulomas that can coalesce into fibrotic conglomerate masses, obliterate the vasculature to cause pulmonary hypertension, and, through mechanisms not fully understood, promote basal panacinar emphysema. Progressive interstitial fibrosis may result from ongoing exposure.",
+  "additionalDifferentials": [
+   "Silicosis and mixed-dust pneumoconiosis",
+   "Asbestosis",
+   "Sarcoidosis",
+   "Progressive massive fibrosis from other dusts",
+   "Metastatic malignancy (masses)",
+   "Other causes of pulmonary hypertension",
+   "Hypersensitivity pneumonitis"
+  ],
+  "additionalInvestigations": [
+   "High-resolution CT to define micronodularity, conglomerate masses, and emphysema distribution",
+   "Occupational history and, where relevant, a sensitive history of injection drug use",
+   "Lung biopsy with polarised-light microscopy demonstrating birefringent talc crystals",
+   "Bronchoalveolar lavage in selected cases",
+   "Pulmonary function tests and diffusing capacity",
+   "Echocardiography or right heart assessment for pulmonary hypertension"
+  ],
+  "redFlags": [
+   "Progressive pulmonary hypertension and right heart strain",
+   "Rapidly enlarging masses requiring exclusion of malignancy",
+   "Severe basal emphysema with respiratory failure in injection drug users",
+   "Signs of ongoing injection drug use with attendant infective risks"
+  ],
+  "prognosis": "Pure occupational talcosis is often indolent, but intravenous talcosis and talc-silicosis can progress to disabling fibrosis, emphysema, pulmonary hypertension, and respiratory failure; cessation of exposure or drug injection is essential to limit progression.",
+  "pitfalls": [
+   "Failing to elicit a history of injection drug use in a patient with unexplained micronodular disease",
+   "Attributing conglomerate masses to malignancy without considering talcosis",
+   "Assuming occupational talc disease is pure when silica or asbestos contamination is common",
+   "Overlooking developing pulmonary hypertension in intravenous talcosis"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "Parkes' Occupational Lung Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Eliminate ongoing exposure by removing the patient from occupational talc and supporting cessation of injection drug use, the essential step to limit progression",
+   "Offer addiction support and harm-reduction services where intravenous disease relates to injection of crushed oral tablets",
+   "Provide symptomatic support with supplemental oxygen for hypoxaemia, bronchodilators and pulmonary rehabilitation",
+   "Consider a trial of corticosteroids for progressive granulomatous inflammation, recognising the evidence is limited",
+   "Encourage smoking cessation and give influenza and pneumococcal vaccination to protect remaining lung function",
+   "Screen for and manage pulmonary hypertension arising from vascular obliteration",
+   "Refer advanced fibrotic or emphysematous disease for lung transplantation assessment",
+   "Manage through respiratory and occupational lung disease specialists"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "talcosis-pathway",
+   "title": "Talcosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by exposure to talc (hydrated magnesium silicate), either inhaled occupationally (mining, milling, ceramics, cosmetics, rubber) or introduced intravenously",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive pulmonary hypertension and right heart strain",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution CT to define micronodularity, conglomerate masses, and emphysema distribution, Occupational history and, where relevant, a sensitive history of injection drug use, Lung biopsy with polarised-light"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Eliminate ongoing exposure by removing the patient from occupational talc and supporting cessation of injection drug use, the essential step to limit progression"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to elicit a history of injection drug use in a patient with unexplained micronodular disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of talcosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "talcosis-matrix",
+   "title": "Talcosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by exposure to talc (hydrated magnesium silicate), either inhaled occupationally (mining, milling, ceramics, cosmetics,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Talc particles reaching the lung, whether inhaled or delivered intravenously, are engulfed by macrophages and provoke a foreign-body granulomatous reaction with multinucleated giant cells surrounding birefringent crystals. In inhalational disease the particles deposit in airways and interstitium, and any accompanying silica or asbestos amplifies fibrosis. In intravenous talcosis, filler particles lodge in pulmonary arterioles and capillaries, seeding perivascular granulomas that can coalesce into fibrotic conglomerate masses, obliterate the vasculature to cause pulmonary hypertension, and, through mechanisms not fully understood, promote basal panacinar emphysema. Progressive interstitial fibrosis may result from ongoing exposure.",
-    "additionalDifferentials": [
-      "Silicosis and mixed-dust pneumoconiosis",
-      "Asbestosis",
-      "Sarcoidosis",
-      "Progressive massive fibrosis from other dusts",
-      "Metastatic malignancy (masses)",
-      "Other causes of pulmonary hypertension",
-      "Hypersensitivity pneumonitis"
+    [
+     "Key Investigations",
+     "High-resolution CT to define micronodularity, conglomerate masses, and emphysema distribution, Occupational history and, where",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution CT to define micronodularity, conglomerate masses, and emphysema distribution",
-      "Occupational history and, where relevant, a sensitive history of injection drug use",
-      "Lung biopsy with polarised-light microscopy demonstrating birefringent talc crystals",
-      "Bronchoalveolar lavage in selected cases",
-      "Pulmonary function tests and diffusing capacity",
-      "Echocardiography or right heart assessment for pulmonary hypertension"
+    [
+     "Primary Differentials",
+     "Silicosis and mixed-dust pneumoconiosis, Asbestosis, Sarcoidosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive pulmonary hypertension and right heart strain",
-      "Rapidly enlarging masses requiring exclusion of malignancy",
-      "Severe basal emphysema with respiratory failure in injection drug users",
-      "Signs of ongoing injection drug use with attendant infective risks"
+    [
+     "Management Strategy",
+     "Eliminate ongoing exposure by removing the patient from occupational talc and supporting cessation of injection drug use, the",
+     "Core treatment modality"
     ],
-    "prognosis": "Pure occupational talcosis is often indolent, but intravenous talcosis and talc-silicosis can progress to disabling fibrosis, emphysema, pulmonary hypertension, and respiratory failure; cessation of exposure or drug injection is essential to limit progression.",
-    "pitfalls": [
-      "Failing to elicit a history of injection drug use in a patient with unexplained micronodular disease",
-      "Attributing conglomerate masses to malignancy without considering talcosis",
-      "Assuming occupational talc disease is pure when silica or asbestos contamination is common",
-      "Overlooking developing pulmonary hypertension in intravenous talcosis"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "Parkes' Occupational Lung Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Eliminate ongoing exposure by removing the patient from occupational talc and supporting cessation of injection drug use, the essential step to limit progression",
-      "Offer addiction support and harm-reduction services where intravenous disease relates to injection of crushed oral tablets",
-      "Provide symptomatic support with supplemental oxygen for hypoxaemia, bronchodilators and pulmonary rehabilitation",
-      "Consider a trial of corticosteroids for progressive granulomatous inflammation, recognising the evidence is limited",
-      "Encourage smoking cessation and give influenza and pneumococcal vaccination to protect remaining lung function",
-      "Screen for and manage pulmonary hypertension arising from vascular obliteration",
-      "Refer advanced fibrotic or emphysematous disease for lung transplantation assessment",
-      "Manage through respiratory and occupational lung disease specialists"
+    [
+     "Clinical Pitfall",
+     "Failing to elicit a history of injection drug use in a patient with unexplained micronodular disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for talcosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "talcosis-diagram",
+   "title": "Talcosis: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

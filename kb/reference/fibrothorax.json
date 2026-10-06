@@ -1,76 +1,171 @@
 {
-  "id": "fibrothorax",
-  "name": "Fibrothorax",
-  "aliases": [
-    "pleural peel",
-    "restrictive pleural fibrosis",
-    "trapped lung from fibrosis"
+ "id": "fibrothorax",
+ "name": "Fibrothorax",
+ "aliases": [
+  "pleural peel",
+  "restrictive pleural fibrosis",
+  "trapped lung from fibrosis"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory / Thoracic",
+ "specialty": "Respiratory / Thoracic Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Shields' General Thoracic Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Dense fibrous scarring that fuses the visceral and parietal pleura into a thick, often calcified peel encasing the lung",
+   "Classically follows organisation of an empyema, a haemothorax, or a long-standing exudative effusion, and may follow tuberculous pleuritis",
+   "Produces a restrictive ventilatory defect with progressive exertional breathlessness and a reduced, retracted hemithorax",
+   "Examination shows reduced chest wall movement, dull percussion, and diminished breath sounds on the affected side",
+   "Imaging demonstrates a thick, sometimes calcified pleural rind that prevents the lung from expanding to the chest wall",
+   "Decortication, surgical removal of the constricting peel, is the definitive treatment when the underlying lung is salvageable",
+   "Early drainage and clearance of empyema or haemothorax helps prevent progression to an established fibrothorax"
   ],
-  "class": "non_infective",
-  "system": "Respiratory / Thoracic",
-  "specialty": "Respiratory / Thoracic Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Shields' General Thoracic Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Dense fibrous scarring that fuses the visceral and parietal pleura into a thick, often calcified peel encasing the lung",
-      "Classically follows organisation of an empyema, a haemothorax, or a long-standing exudative effusion, and may follow tuberculous pleuritis",
-      "Produces a restrictive ventilatory defect with progressive exertional breathlessness and a reduced, retracted hemithorax",
-      "Examination shows reduced chest wall movement, dull percussion, and diminished breath sounds on the affected side",
-      "Imaging demonstrates a thick, sometimes calcified pleural rind that prevents the lung from expanding to the chest wall",
-      "Decortication, surgical removal of the constricting peel, is the definitive treatment when the underlying lung is salvageable",
-      "Early drainage and clearance of empyema or haemothorax helps prevent progression to an established fibrothorax"
+  "pathophysiology": "When blood, pus, or a protein-rich exudate persists in the pleural space, the initial fibrinous layer becomes organised by ingrowth of fibroblasts and capillaries. Instead of resolving, the fibrin matures into dense collagenous tissue that binds the visceral and parietal pleura together as a rigid peel. This inelastic layer mechanically traps the lung, restricts expansion of the hemithorax, and impairs ventilation, and with time it may calcify. The result is a fixed restrictive defect that persists until the constricting rind is surgically removed.",
+  "additionalDifferentials": [
+   "Malignant pleural mesothelioma",
+   "Diffuse pleural thickening from asbestos exposure",
+   "Chronic organising empyema",
+   "Trapped lung from an unexpandable visceral peel without generalised fibrosis",
+   "Extensive pleural metastatic disease",
+   "Prior tuberculous or fungal pleuritis with residual thickening"
+  ],
+  "additionalInvestigations": [
+   "Chest radiograph showing a contracted hemithorax and pleural thickening or calcification",
+   "CT of the thorax to define the extent and thickness of the pleural peel and assess the underlying lung",
+   "Pulmonary function tests confirming a restrictive pattern",
+   "MRI or ultrasound to help distinguish fibrous peel from fluid or tumour",
+   "Pleural sampling or biopsy where malignancy or ongoing infection is suspected"
+  ],
+  "redFlags": [
+   "Progressive breathlessness with a shrinking, immobile hemithorax",
+   "Features suggesting underlying malignancy such as an enlarging mass or bloody effusion",
+   "Signs of ongoing or recurrent pleural infection",
+   "Contralateral mediastinal shift with worsening respiratory compromise"
+  ],
+  "prognosis": "If the trapped lung is otherwise healthy, decortication can restore substantial lung expansion and function; outcomes are poorer when there is coexisting parenchymal disease, unresolved infection, or an underlying malignancy.",
+  "pitfalls": [
+   "Delaying drainage of an empyema or haemothorax until an irreversible peel has formed",
+   "Attempting decortication when the underlying lung is destroyed and cannot re-expand",
+   "Mistaking a malignant pleural process for benign post-inflammatory fibrothorax",
+   "Overlooking active infection beneath the fibrous peel before surgery"
+  ],
+  "references": [
+   "Shields' General Thoracic Surgery",
+   "Murray & Nadel's Textbook of Respiratory Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical decortication to remove the constricting pleural peel is the definitive treatment when the trapped lung is salvageable",
+   "Treatment of the underlying cause: complete drainage of empyema or retained haemothorax and antituberculous chemotherapy where tuberculous pleuritis is implicated",
+   "Chest physiotherapy, lung-expansion techniques and analgesia to optimise ventilation and re-expansion",
+   "Pulmonary rehabilitation to improve exertional breathlessness and functional capacity",
+   "Serial pulmonary function testing and imaging to monitor the restrictive defect and response to intervention",
+   "Thoracic surgical referral for assessment of decortication candidacy and pre-operative evaluation of the underlying lung"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "fibrothorax-pathway",
+   "title": "Fibrothorax: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Dense fibrous scarring that fuses the visceral and parietal pleura into a thick, often calcified peel encasing the lung",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive breathlessness with a shrinking, immobile hemithorax",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chest radiograph showing a contracted hemithorax and pleural thickening or calcification, CT of the thorax to define the extent and thickness of the pleural peel and assess the underlying lung, Pulmonary function tests"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical decortication to remove the constricting pleural peel is the definitive treatment when the trapped lung is salvageable"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying drainage of an empyema or haemothorax until an irreversible peel has formed"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of fibrothorax."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fibrothorax-matrix",
+   "title": "Fibrothorax: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Dense fibrous scarring that fuses the visceral and parietal pleura into a thick, often calcified peel encasing the lung",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "When blood, pus, or a protein-rich exudate persists in the pleural space, the initial fibrinous layer becomes organised by ingrowth of fibroblasts and capillaries. Instead of resolving, the fibrin matures into dense collagenous tissue that binds the visceral and parietal pleura together as a rigid peel. This inelastic layer mechanically traps the lung, restricts expansion of the hemithorax, and impairs ventilation, and with time it may calcify. The result is a fixed restrictive defect that persists until the constricting rind is surgically removed.",
-    "additionalDifferentials": [
-      "Malignant pleural mesothelioma",
-      "Diffuse pleural thickening from asbestos exposure",
-      "Chronic organising empyema",
-      "Trapped lung from an unexpandable visceral peel without generalised fibrosis",
-      "Extensive pleural metastatic disease",
-      "Prior tuberculous or fungal pleuritis with residual thickening"
+    [
+     "Key Investigations",
+     "Chest radiograph showing a contracted hemithorax and pleural thickening or calcification, CT of the thorax to define the extent",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chest radiograph showing a contracted hemithorax and pleural thickening or calcification",
-      "CT of the thorax to define the extent and thickness of the pleural peel and assess the underlying lung",
-      "Pulmonary function tests confirming a restrictive pattern",
-      "MRI or ultrasound to help distinguish fibrous peel from fluid or tumour",
-      "Pleural sampling or biopsy where malignancy or ongoing infection is suspected"
+    [
+     "Primary Differentials",
+     "Malignant pleural mesothelioma, Diffuse pleural thickening from asbestos exposure, Chronic organising empyema",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive breathlessness with a shrinking, immobile hemithorax",
-      "Features suggesting underlying malignancy such as an enlarging mass or bloody effusion",
-      "Signs of ongoing or recurrent pleural infection",
-      "Contralateral mediastinal shift with worsening respiratory compromise"
+    [
+     "Management Strategy",
+     "Surgical decortication to remove the constricting pleural peel is the definitive treatment when the trapped lung is salvageable",
+     "Core treatment modality"
     ],
-    "prognosis": "If the trapped lung is otherwise healthy, decortication can restore substantial lung expansion and function; outcomes are poorer when there is coexisting parenchymal disease, unresolved infection, or an underlying malignancy.",
-    "pitfalls": [
-      "Delaying drainage of an empyema or haemothorax until an irreversible peel has formed",
-      "Attempting decortication when the underlying lung is destroyed and cannot re-expand",
-      "Mistaking a malignant pleural process for benign post-inflammatory fibrothorax",
-      "Overlooking active infection beneath the fibrous peel before surgery"
-    ],
-    "references": [
-      "Shields' General Thoracic Surgery",
-      "Murray & Nadel's Textbook of Respiratory Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical decortication to remove the constricting pleural peel is the definitive treatment when the trapped lung is salvageable",
-      "Treatment of the underlying cause: complete drainage of empyema or retained haemothorax and antituberculous chemotherapy where tuberculous pleuritis is implicated",
-      "Chest physiotherapy, lung-expansion techniques and analgesia to optimise ventilation and re-expansion",
-      "Pulmonary rehabilitation to improve exertional breathlessness and functional capacity",
-      "Serial pulmonary function testing and imaging to monitor the restrictive defect and response to intervention",
-      "Thoracic surgical referral for assessment of decortication candidacy and pre-operative evaluation of the underlying lung"
+    [
+     "Clinical Pitfall",
+     "Delaying drainage of an empyema or haemothorax until an irreversible peel has formed",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for fibrothorax."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fibrothorax-diagram",
+   "title": "Fibrothorax: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

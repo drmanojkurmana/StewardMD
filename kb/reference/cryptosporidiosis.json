@@ -1,82 +1,177 @@
 {
-  "id": "cryptosporidiosis",
-  "name": "Cryptosporidiosis",
-  "aliases": [
-    "Cryptosporidium infection",
-    "crypto",
-    "cryptosporidial diarrhoea"
+ "id": "cryptosporidiosis",
+ "name": "Cryptosporidiosis",
+ "aliases": [
+  "Cryptosporidium infection",
+  "crypto",
+  "cryptosporidial diarrhoea"
+ ],
+ "class": "infective",
+ "system": "Infectious / Tropical",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A protozoal infection caused by Cryptosporidium species, transmitted faecal-orally through contaminated water, food or contact, with a very low infectious dose",
+   "In immunocompetent hosts it causes a self-limiting watery diarrhoea, but in the immunocompromised, especially advanced HIV, it can cause severe, chronic and life-threatening diarrhoea",
+   "A recognised cause of waterborne outbreaks because the oocysts are highly resistant to routine chlorination",
+   "An important contributor to childhood diarrhoea and to malnutrition and growth faltering in Indian children",
+   "In profound immunosuppression infection may extend beyond the gut to the biliary tract, causing sclerosing cholangitis, and to the respiratory tract",
+   "Restoration of immune function, particularly antiretroviral therapy in HIV, is central to control in immunocompromised patients",
+   "Diagnosis requires specific tests: modified acid-fast staining of stool, antigen detection or PCR, as the oocysts are missed on routine microscopy",
+   "Management emphasises rehydration; antiprotozoal drug options are limited and work best when immunity is restored"
   ],
-  "class": "infective",
-  "system": "Infectious / Tropical",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A protozoal infection caused by Cryptosporidium species, transmitted faecal-orally through contaminated water, food or contact, with a very low infectious dose",
-      "In immunocompetent hosts it causes a self-limiting watery diarrhoea, but in the immunocompromised, especially advanced HIV, it can cause severe, chronic and life-threatening diarrhoea",
-      "A recognised cause of waterborne outbreaks because the oocysts are highly resistant to routine chlorination",
-      "An important contributor to childhood diarrhoea and to malnutrition and growth faltering in Indian children",
-      "In profound immunosuppression infection may extend beyond the gut to the biliary tract, causing sclerosing cholangitis, and to the respiratory tract",
-      "Restoration of immune function, particularly antiretroviral therapy in HIV, is central to control in immunocompromised patients",
-      "Diagnosis requires specific tests: modified acid-fast staining of stool, antigen detection or PCR, as the oocysts are missed on routine microscopy",
-      "Management emphasises rehydration; antiprotozoal drug options are limited and work best when immunity is restored"
+  "pathophysiology": "Ingested Cryptosporidium oocysts release sporozoites that invade the apical surface of intestinal epithelial cells, residing in an intracellular but extracytoplasmic compartment. Infection blunts villi, impairs absorption and increases secretion, producing a watery, non-bloody diarrhoea. In immunocompetent people a robust cellular immune response clears the parasite, but when T-cell immunity is deficient the organism proliferates unchecked, causing high-volume chronic diarrhoea, malabsorption and spread to biliary and respiratory epithelium.",
+  "additionalDifferentials": [
+   "Other protozoal enteritides (giardiasis, cyclosporiasis, microsporidiosis)",
+   "Bacterial and viral gastroenteritis",
+   "Other opportunistic enteric infections in HIV",
+   "Inflammatory bowel disease",
+   "Non-infective malabsorption syndromes"
+  ],
+  "infectionMimics": [
+   "Other opportunistic causes of chronic diarrhoea in advanced HIV",
+   "Small bowel malabsorption of non-infective cause",
+   "Secretory diarrhoea from other pathogens"
+  ],
+  "additionalInvestigations": [
+   "Modified acid-fast (Kinyoun) staining of stool for oocysts",
+   "Stool antigen detection or PCR for sensitive diagnosis",
+   "HIV testing and CD4 count assessment when severe or chronic",
+   "Evaluation of hydration and electrolyte status",
+   "Imaging or biliary studies if cholangiopathy is suspected in the immunocompromised"
+  ],
+  "redFlags": [
+   "Severe or high-volume dehydrating diarrhoea, especially in infants or the immunocompromised",
+   "Chronic diarrhoea with weight loss in a patient with advanced HIV/AIDS",
+   "Right upper quadrant pain and cholestasis suggesting biliary involvement",
+   "Failure of diarrhoea to settle, signalling underlying immunodeficiency"
+  ],
+  "prognosis": "In immunocompetent individuals the illness resolves spontaneously over one to two weeks. In severely immunocompromised patients it can be chronic, debilitating and fatal unless immune function is restored, and outcome is closely tied to recovery of cellular immunity.",
+  "pitfalls": [
+   "Failing to request specific staining, antigen or PCR tests, so oocysts are missed on routine stool microscopy",
+   "Not testing for HIV in a patient with severe or persistent cryptosporidial diarrhoea",
+   "Relying on antiprotozoal drugs alone in the immunocompromised without addressing the underlying immune deficit",
+   "Underestimating waterborne outbreak potential given oocyst resistance to chlorination"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral or intravenous rehydration and electrolyte correction as the mainstay of supportive care",
+   "Nitazoxanide antiparasitic therapy to shorten illness, most useful in immunocompetent and malnourished hosts",
+   "Restoration of cellular immunity is central in the immunocompromised, above all antiretroviral therapy to raise the CD4 count in HIV",
+   "Nutritional support and attention to growth faltering in affected children",
+   "Manage biliary complications such as sclerosing cholangitis, including endoscopic intervention, when infection spreads beyond the gut",
+   "Infection-control and public-health measures including hand hygiene, boiling or filtering water and avoiding swimming, recognising oocysts resist chlorination",
+   "Escalate for severe dehydration, high-volume chronic diarrhoea or extra-intestinal spread"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cryptosporidiosis-pathway",
+   "title": "Cryptosporidiosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A protozoal infection caused by Cryptosporidium species, transmitted faecal-orally through contaminated water, food or contact, with a very low infectious dose",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or high-volume dehydrating diarrhoea, especially in infants or the immunocompromised",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Modified acid-fast (Kinyoun) staining of stool for oocysts, Stool antigen detection or PCR for sensitive diagnosis, HIV testing and CD4 count assessment when severe or chronic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral or intravenous rehydration and electrolyte correction as the mainstay of supportive care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to request specific staining, antigen or PCR tests, so oocysts are missed on routine stool microscopy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cryptosporidiosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cryptosporidiosis-matrix",
+   "title": "Cryptosporidiosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A protozoal infection caused by Cryptosporidium species, transmitted faecal-orally through contaminated water, food or contact,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ingested Cryptosporidium oocysts release sporozoites that invade the apical surface of intestinal epithelial cells, residing in an intracellular but extracytoplasmic compartment. Infection blunts villi, impairs absorption and increases secretion, producing a watery, non-bloody diarrhoea. In immunocompetent people a robust cellular immune response clears the parasite, but when T-cell immunity is deficient the organism proliferates unchecked, causing high-volume chronic diarrhoea, malabsorption and spread to biliary and respiratory epithelium.",
-    "additionalDifferentials": [
-      "Other protozoal enteritides (giardiasis, cyclosporiasis, microsporidiosis)",
-      "Bacterial and viral gastroenteritis",
-      "Other opportunistic enteric infections in HIV",
-      "Inflammatory bowel disease",
-      "Non-infective malabsorption syndromes"
+    [
+     "Key Investigations",
+     "Modified acid-fast (Kinyoun) staining of stool for oocysts, Stool antigen detection or PCR for sensitive diagnosis, HIV testing",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Other opportunistic causes of chronic diarrhoea in advanced HIV",
-      "Small bowel malabsorption of non-infective cause",
-      "Secretory diarrhoea from other pathogens"
+    [
+     "Primary Differentials",
+     "Other protozoal enteritides (giardiasis, cyclosporiasis, microsporidiosis), Bacterial and viral gastroenteritis, Other",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "Modified acid-fast (Kinyoun) staining of stool for oocysts",
-      "Stool antigen detection or PCR for sensitive diagnosis",
-      "HIV testing and CD4 count assessment when severe or chronic",
-      "Evaluation of hydration and electrolyte status",
-      "Imaging or biliary studies if cholangiopathy is suspected in the immunocompromised"
+    [
+     "Management Strategy",
+     "Oral or intravenous rehydration and electrolyte correction as the mainstay of supportive care",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Severe or high-volume dehydrating diarrhoea, especially in infants or the immunocompromised",
-      "Chronic diarrhoea with weight loss in a patient with advanced HIV/AIDS",
-      "Right upper quadrant pain and cholestasis suggesting biliary involvement",
-      "Failure of diarrhoea to settle, signalling underlying immunodeficiency"
-    ],
-    "prognosis": "In immunocompetent individuals the illness resolves spontaneously over one to two weeks. In severely immunocompromised patients it can be chronic, debilitating and fatal unless immune function is restored, and outcome is closely tied to recovery of cellular immunity.",
-    "pitfalls": [
-      "Failing to request specific staining, antigen or PCR tests, so oocysts are missed on routine stool microscopy",
-      "Not testing for HIV in a patient with severe or persistent cryptosporidial diarrhoea",
-      "Relying on antiprotozoal drugs alone in the immunocompromised without addressing the underlying immune deficit",
-      "Underestimating waterborne outbreak potential given oocyst resistance to chlorination"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral or intravenous rehydration and electrolyte correction as the mainstay of supportive care",
-      "Nitazoxanide antiparasitic therapy to shorten illness, most useful in immunocompetent and malnourished hosts",
-      "Restoration of cellular immunity is central in the immunocompromised, above all antiretroviral therapy to raise the CD4 count in HIV",
-      "Nutritional support and attention to growth faltering in affected children",
-      "Manage biliary complications such as sclerosing cholangitis, including endoscopic intervention, when infection spreads beyond the gut",
-      "Infection-control and public-health measures including hand hygiene, boiling or filtering water and avoiding swimming, recognising oocysts resist chlorination",
-      "Escalate for severe dehydration, high-volume chronic diarrhoea or extra-intestinal spread"
+    [
+     "Clinical Pitfall",
+     "Failing to request specific staining, antigen or PCR tests, so oocysts are missed on routine stool microscopy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cryptosporidiosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cryptosporidiosis-diagram",
+   "title": "Cryptosporidiosis: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

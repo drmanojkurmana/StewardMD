@@ -1,84 +1,179 @@
 {
-  "id": "kyasanur_forest_disease",
-  "name": "Kyasanur Forest disease",
-  "aliases": [
-    "KFD",
-    "monkey fever",
-    "Kyasanur forest disease virus infection"
+ "id": "kyasanur_forest_disease",
+ "name": "Kyasanur Forest disease",
+ "aliases": [
+  "KFD",
+  "monkey fever",
+  "Kyasanur forest disease virus infection"
+ ],
+ "class": "infective",
+ "system": "Infectious Diseases",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A tick-borne flaviviral haemorrhagic fever endemic to India, first recognised in the Kyasanur forest of Karnataka and now reported across several Western Ghats states",
+   "Transmitted mainly by Haemaphysalis ticks, with monkeys serving as amplifying hosts, so the disease clusters among forest workers, farmers, and people with rural forest exposure",
+   "Illness typically begins abruptly with high fever, severe headache, myalgia, and prostration, often with conjunctival injection and gastrointestinal symptoms",
+   "A haemorrhagic phase with bleeding from gums, nose, or gut and thrombocytopenia may develop, and a subset of patients experience a biphasic course with a later neurological phase",
+   "The second phase, after an afebrile interval, can bring meningoencephalitic features such as headache, tremor, and altered mentation",
+   "Laboratory clues include leukopenia, thrombocytopenia, and raised transaminases; diagnosis is confirmed by RT-PCR early and serology later, handled with appropriate biosafety",
+   "Management is supportive; a vaccine has been used in endemic districts of Karnataka, and tick-bite avoidance is central to prevention"
   ],
-  "class": "infective",
-  "system": "Infectious Diseases",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A tick-borne flaviviral haemorrhagic fever endemic to India, first recognised in the Kyasanur forest of Karnataka and now reported across several Western Ghats states",
-      "Transmitted mainly by Haemaphysalis ticks, with monkeys serving as amplifying hosts, so the disease clusters among forest workers, farmers, and people with rural forest exposure",
-      "Illness typically begins abruptly with high fever, severe headache, myalgia, and prostration, often with conjunctival injection and gastrointestinal symptoms",
-      "A haemorrhagic phase with bleeding from gums, nose, or gut and thrombocytopenia may develop, and a subset of patients experience a biphasic course with a later neurological phase",
-      "The second phase, after an afebrile interval, can bring meningoencephalitic features such as headache, tremor, and altered mentation",
-      "Laboratory clues include leukopenia, thrombocytopenia, and raised transaminases; diagnosis is confirmed by RT-PCR early and serology later, handled with appropriate biosafety",
-      "Management is supportive; a vaccine has been used in endemic districts of Karnataka, and tick-bite avoidance is central to prevention"
+  "pathophysiology": "Kyasanur Forest disease virus is an RNA flavivirus transmitted to humans through the bite of infected hard ticks, with monkeys acting as amplifying hosts during epizootics. After inoculation the virus disseminates and infects multiple organs, producing viraemia with a systemic inflammatory response, increased vascular permeability, and haemorrhagic manifestations together with cytopenias and hepatic involvement. In some patients the virus involves the central nervous system during a second phase, producing meningoencephalitis.",
+  "additionalDifferentials": [
+   "Crimean-Congo haemorrhagic fever",
+   "Severe dengue",
+   "Leptospirosis",
+   "Severe malaria",
+   "Scrub typhus and other rickettsial infections",
+   "Other viral encephalitides (for the neurological phase)"
+  ],
+  "infectionMimics": [
+   "Dengue haemorrhagic fever",
+   "Leptospirosis",
+   "Scrub typhus",
+   "Severe malaria",
+   "Crimean-Congo haemorrhagic fever"
+  ],
+  "additionalInvestigations": [
+   "RT-PCR for KFD viral RNA during the early viraemic phase",
+   "KFD-specific IgM and IgG serology in the later course",
+   "Full blood count, liver function, and coagulation studies to assess severity",
+   "CSF examination and neuroimaging if the neurological second phase is suspected",
+   "Exclusion of dengue, malaria, leptospirosis, and scrub typhus given the endemic overlap in India"
+  ],
+  "redFlags": [
+   "Mucosal or gastrointestinal bleeding with progressive thrombocytopenia",
+   "Return of fever with neurological features such as altered mentation, tremor, or meningism marking the second phase",
+   "Hypotension, dehydration, or signs of multi-organ involvement",
+   "Severe hepatic derangement or coagulopathy indicating a complicated course"
+  ],
+  "prognosis": "Most patients recover with supportive care, though the illness can be severe with haemorrhagic and neurological complications and a meaningful case-fatality rate; the biphasic form with encephalitis tends to have a more protracted recovery.",
+  "pitfalls": [
+   "Attributing a forest-exposed febrile patient's illness to dengue or malaria and missing KFD in an endemic Western Ghats setting",
+   "Interpreting the afebrile interval as recovery and discharging before the neurological second phase declares itself",
+   "Neglecting biosafety precautions when handling blood and specimens from a suspected haemorrhagic fever",
+   "Overlooking occupational and vaccination history in patients from endemic districts"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide supportive care as there is no specific antiviral, with careful fluid and electrolyte balance and haemodynamic support",
+   "Manage haemorrhagic complications with transfusion of blood components such as platelets and fresh frozen plasma as bleeding or thrombocytopenia dictate",
+   "Monitor for the biphasic neurological phase and treat meningoencephalitis supportively, including seizure control",
+   "Apply infection-control and biosafety precautions when handling blood and clinical samples",
+   "Emphasise prevention through the KFD vaccine in endemic areas, tick-bite avoidance and use of repellents and protective clothing",
+   "Exclude and treat co-endemic mimics such as dengue, malaria, leptospirosis and scrub typhus",
+   "Escalate to intensive care for severe haemorrhage, shock or encephalitic deterioration"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kyasanur_forest_disease-pathway",
+   "title": "Kyasanur Forest disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A tick-borne flaviviral haemorrhagic fever endemic to India, first recognised in the Kyasanur forest of Karnataka and now reported across several Western Ghats states",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Mucosal or gastrointestinal bleeding with progressive thrombocytopenia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: RT-PCR for KFD viral RNA during the early viraemic phase, KFD-specific IgM and IgG serology in the later course, Full blood count, liver function, and coagulation studies to assess severity"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide supportive care as there is no specific antiviral, with careful fluid and electrolyte balance and haemodynamic support"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a forest-exposed febrile patient's illness to dengue or malaria and missing KFD in an endemic Western Ghats setting"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kyasanur forest disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kyasanur_forest_disease-matrix",
+   "title": "Kyasanur Forest disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A tick-borne flaviviral haemorrhagic fever endemic to India, first recognised in the Kyasanur forest of Karnataka and now",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Kyasanur Forest disease virus is an RNA flavivirus transmitted to humans through the bite of infected hard ticks, with monkeys acting as amplifying hosts during epizootics. After inoculation the virus disseminates and infects multiple organs, producing viraemia with a systemic inflammatory response, increased vascular permeability, and haemorrhagic manifestations together with cytopenias and hepatic involvement. In some patients the virus involves the central nervous system during a second phase, producing meningoencephalitis.",
-    "additionalDifferentials": [
-      "Crimean-Congo haemorrhagic fever",
-      "Severe dengue",
-      "Leptospirosis",
-      "Severe malaria",
-      "Scrub typhus and other rickettsial infections",
-      "Other viral encephalitides (for the neurological phase)"
+    [
+     "Key Investigations",
+     "RT-PCR for KFD viral RNA during the early viraemic phase, KFD-specific IgM and IgG serology in the later course, Full blood",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Dengue haemorrhagic fever",
-      "Leptospirosis",
-      "Scrub typhus",
-      "Severe malaria",
-      "Crimean-Congo haemorrhagic fever"
+    [
+     "Primary Differentials",
+     "Crimean-Congo haemorrhagic fever, Severe dengue, Leptospirosis",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "RT-PCR for KFD viral RNA during the early viraemic phase",
-      "KFD-specific IgM and IgG serology in the later course",
-      "Full blood count, liver function, and coagulation studies to assess severity",
-      "CSF examination and neuroimaging if the neurological second phase is suspected",
-      "Exclusion of dengue, malaria, leptospirosis, and scrub typhus given the endemic overlap in India"
+    [
+     "Management Strategy",
+     "Provide supportive care as there is no specific antiviral, with careful fluid and electrolyte balance and haemodynamic support",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Mucosal or gastrointestinal bleeding with progressive thrombocytopenia",
-      "Return of fever with neurological features such as altered mentation, tremor, or meningism marking the second phase",
-      "Hypotension, dehydration, or signs of multi-organ involvement",
-      "Severe hepatic derangement or coagulopathy indicating a complicated course"
-    ],
-    "prognosis": "Most patients recover with supportive care, though the illness can be severe with haemorrhagic and neurological complications and a meaningful case-fatality rate; the biphasic form with encephalitis tends to have a more protracted recovery.",
-    "pitfalls": [
-      "Attributing a forest-exposed febrile patient's illness to dengue or malaria and missing KFD in an endemic Western Ghats setting",
-      "Interpreting the afebrile interval as recovery and discharging before the neurological second phase declares itself",
-      "Neglecting biosafety precautions when handling blood and specimens from a suspected haemorrhagic fever",
-      "Overlooking occupational and vaccination history in patients from endemic districts"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide supportive care as there is no specific antiviral, with careful fluid and electrolyte balance and haemodynamic support",
-      "Manage haemorrhagic complications with transfusion of blood components such as platelets and fresh frozen plasma as bleeding or thrombocytopenia dictate",
-      "Monitor for the biphasic neurological phase and treat meningoencephalitis supportively, including seizure control",
-      "Apply infection-control and biosafety precautions when handling blood and clinical samples",
-      "Emphasise prevention through the KFD vaccine in endemic areas, tick-bite avoidance and use of repellents and protective clothing",
-      "Exclude and treat co-endemic mimics such as dengue, malaria, leptospirosis and scrub typhus",
-      "Escalate to intensive care for severe haemorrhage, shock or encephalitic deterioration"
+    [
+     "Clinical Pitfall",
+     "Attributing a forest-exposed febrile patient's illness to dengue or malaria and missing KFD in an endemic Western Ghats setting",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kyasanur forest disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "kyasanur-forest-disease-diagram",
+   "title": "Kyasanur Forest disease: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

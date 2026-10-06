@@ -1,78 +1,173 @@
 {
-  "id": "gastroparesis",
-  "name": "Gastroparesis",
-  "aliases": [
-    "delayed gastric emptying",
-    "gastric stasis",
-    "diabetic gastroparesis",
-    "gastroparetic syndrome"
+ "id": "gastroparesis",
+ "name": "Gastroparesis",
+ "aliases": [
+  "delayed gastric emptying",
+  "gastric stasis",
+  "diabetic gastroparesis",
+  "gastroparetic syndrome"
+ ],
+ "class": "non_infective",
+ "system": "GI / Hepatology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Gastroparesis is delayed gastric emptying in the absence of mechanical obstruction, presenting with nausea, vomiting, early satiety, bloating, and postprandial fullness",
+   "The commonest identifiable causes are diabetes mellitus and prior gastric or vagal surgery, but many cases are idiopathic and some follow a viral illness",
+   "Mechanical obstruction must be excluded, typically by endoscopy, before the diagnosis is made",
+   "A scintigraphic gastric emptying study of a solid meal is the standard confirmatory test, with wireless motility capsule and breath tests as alternatives",
+   "Medications that slow gastric emptying, especially opioids and GLP-1 receptor agonists, can cause or worsen symptoms and should be reviewed",
+   "Management combines dietary modification toward small, low-fat, low-fibre meals with prokinetic and antiemetic therapy",
+   "Refractory disease may require enteral feeding beyond the stomach, gastric electrical stimulation, or endoscopic pyloric procedures"
   ],
-  "class": "non_infective",
-  "system": "GI / Hepatology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Gastroparesis is delayed gastric emptying in the absence of mechanical obstruction, presenting with nausea, vomiting, early satiety, bloating, and postprandial fullness",
-      "The commonest identifiable causes are diabetes mellitus and prior gastric or vagal surgery, but many cases are idiopathic and some follow a viral illness",
-      "Mechanical obstruction must be excluded, typically by endoscopy, before the diagnosis is made",
-      "A scintigraphic gastric emptying study of a solid meal is the standard confirmatory test, with wireless motility capsule and breath tests as alternatives",
-      "Medications that slow gastric emptying, especially opioids and GLP-1 receptor agonists, can cause or worsen symptoms and should be reviewed",
-      "Management combines dietary modification toward small, low-fat, low-fibre meals with prokinetic and antiemetic therapy",
-      "Refractory disease may require enteral feeding beyond the stomach, gastric electrical stimulation, or endoscopic pyloric procedures"
+  "pathophysiology": "Gastroparesis arises from impaired neuromuscular coordination of gastric emptying. Injury to the vagus nerve, abnormalities of the interstitial cells of Cajal that pace gastric contractions, smooth muscle dysfunction, and autonomic neuropathy disrupt fundic accommodation, antral contractility, and pyloric relaxation. In diabetes, chronic hyperglycaemia and autonomic neuropathy impair motility, and acute hyperglycaemia itself further slows emptying. The result is retained gastric contents, which produce nausea, vomiting, and impaired nutrient and drug absorption.",
+  "additionalDifferentials": [
+   "Mechanical gastric outlet obstruction",
+   "Functional dyspepsia",
+   "Cyclic vomiting syndrome or cannabinoid hyperemesis",
+   "Rumination syndrome",
+   "Small bowel dysmotility or pseudo-obstruction",
+   "Peptic ulcer disease or malignancy"
+  ],
+  "additionalInvestigations": [
+   "Upper endoscopy to exclude mechanical obstruction",
+   "Scintigraphic solid-meal gastric emptying study",
+   "Wireless motility capsule or breath test as alternatives",
+   "Blood glucose and HbA1c assessment in diabetic patients",
+   "Review of medications affecting gastric motility",
+   "Nutritional and electrolyte assessment in severe or chronic disease"
+  ],
+  "redFlags": [
+   "Intractable vomiting with dehydration and electrolyte disturbance",
+   "Significant weight loss or malnutrition",
+   "Features suggesting mechanical obstruction or malignancy",
+   "Marked or unstable glycaemic control complicating diabetic gastroparesis"
+  ],
+  "prognosis": "Gastroparesis is often a chronic, fluctuating condition; many patients achieve reasonable symptom control with diet and medication, but a subset have refractory, disabling symptoms with recurrent hospitalisation and nutritional compromise.",
+  "pitfalls": [
+   "Diagnosing gastroparesis without first excluding mechanical obstruction",
+   "Overlooking opioids or GLP-1 receptor agonists as reversible contributors",
+   "Ignoring hyperglycaemia, which acutely delays emptying and undermines treatment",
+   "Missing alternative diagnoses such as rumination or cyclic vomiting that mimic gastroparesis"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Dietary modification toward small, frequent, low-fat and low-fibre meals, with liquid or blended nutrition when solids are poorly tolerated",
+   "Optimise glycaemic control in diabetic gastroparesis, since hyperglycaemia further slows gastric emptying",
+   "Prokinetic therapy such as metoclopramide, domperidone or erythromycin to accelerate emptying, balanced against extrapyramidal and cardiac risks",
+   "Antiemetic therapy for nausea and vomiting, and review and withdrawal of drugs that impair motility, notably opioids and GLP-1 receptor agonists",
+   "Correct dehydration, electrolyte disturbance and nutritional deficiency, escalating to enteral jejunal feeding or parenteral support in severe disease",
+   "Consider pyloric-directed intervention (intrapyloric botulinum toxin or gastric per-oral endoscopic myotomy), gastric electrical stimulation or venting gastrostomy in refractory cases",
+   "Refer to gastroenterology and a specialist motility or nutrition service for disabling or treatment-resistant symptoms"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gastroparesis-pathway",
+   "title": "Gastroparesis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Gastroparesis is delayed gastric emptying in the absence of mechanical obstruction, presenting with nausea, vomiting, early satiety, bloating, and postprandial fullness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Intractable vomiting with dehydration and electrolyte disturbance",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper endoscopy to exclude mechanical obstruction, Scintigraphic solid-meal gastric emptying study, Wireless motility capsule or breath test as alternatives"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Dietary modification toward small, frequent, low-fat and low-fibre meals, with liquid or blended nutrition when solids are poorly tolerated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing gastroparesis without first excluding mechanical obstruction"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gastroparesis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gastroparesis-matrix",
+   "title": "Gastroparesis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Gastroparesis is delayed gastric emptying in the absence of mechanical obstruction, presenting with nausea, vomiting, early",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Gastroparesis arises from impaired neuromuscular coordination of gastric emptying. Injury to the vagus nerve, abnormalities of the interstitial cells of Cajal that pace gastric contractions, smooth muscle dysfunction, and autonomic neuropathy disrupt fundic accommodation, antral contractility, and pyloric relaxation. In diabetes, chronic hyperglycaemia and autonomic neuropathy impair motility, and acute hyperglycaemia itself further slows emptying. The result is retained gastric contents, which produce nausea, vomiting, and impaired nutrient and drug absorption.",
-    "additionalDifferentials": [
-      "Mechanical gastric outlet obstruction",
-      "Functional dyspepsia",
-      "Cyclic vomiting syndrome or cannabinoid hyperemesis",
-      "Rumination syndrome",
-      "Small bowel dysmotility or pseudo-obstruction",
-      "Peptic ulcer disease or malignancy"
+    [
+     "Key Investigations",
+     "Upper endoscopy to exclude mechanical obstruction, Scintigraphic solid-meal gastric emptying study, Wireless motility capsule or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper endoscopy to exclude mechanical obstruction",
-      "Scintigraphic solid-meal gastric emptying study",
-      "Wireless motility capsule or breath test as alternatives",
-      "Blood glucose and HbA1c assessment in diabetic patients",
-      "Review of medications affecting gastric motility",
-      "Nutritional and electrolyte assessment in severe or chronic disease"
+    [
+     "Primary Differentials",
+     "Mechanical gastric outlet obstruction, Functional dyspepsia, Cyclic vomiting syndrome or cannabinoid hyperemesis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Intractable vomiting with dehydration and electrolyte disturbance",
-      "Significant weight loss or malnutrition",
-      "Features suggesting mechanical obstruction or malignancy",
-      "Marked or unstable glycaemic control complicating diabetic gastroparesis"
+    [
+     "Management Strategy",
+     "Dietary modification toward small, frequent, low-fat and low-fibre meals, with liquid or blended nutrition when solids are poorly",
+     "Core treatment modality"
     ],
-    "prognosis": "Gastroparesis is often a chronic, fluctuating condition; many patients achieve reasonable symptom control with diet and medication, but a subset have refractory, disabling symptoms with recurrent hospitalisation and nutritional compromise.",
-    "pitfalls": [
-      "Diagnosing gastroparesis without first excluding mechanical obstruction",
-      "Overlooking opioids or GLP-1 receptor agonists as reversible contributors",
-      "Ignoring hyperglycaemia, which acutely delays emptying and undermines treatment",
-      "Missing alternative diagnoses such as rumination or cyclic vomiting that mimic gastroparesis"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Dietary modification toward small, frequent, low-fat and low-fibre meals, with liquid or blended nutrition when solids are poorly tolerated",
-      "Optimise glycaemic control in diabetic gastroparesis, since hyperglycaemia further slows gastric emptying",
-      "Prokinetic therapy such as metoclopramide, domperidone or erythromycin to accelerate emptying, balanced against extrapyramidal and cardiac risks",
-      "Antiemetic therapy for nausea and vomiting, and review and withdrawal of drugs that impair motility, notably opioids and GLP-1 receptor agonists",
-      "Correct dehydration, electrolyte disturbance and nutritional deficiency, escalating to enteral jejunal feeding or parenteral support in severe disease",
-      "Consider pyloric-directed intervention (intrapyloric botulinum toxin or gastric per-oral endoscopic myotomy), gastric electrical stimulation or venting gastrostomy in refractory cases",
-      "Refer to gastroenterology and a specialist motility or nutrition service for disabling or treatment-resistant symptoms"
+    [
+     "Clinical Pitfall",
+     "Diagnosing gastroparesis without first excluding mechanical obstruction",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gastroparesis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gastroparesis-diagram",
+   "title": "Gastroparesis: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

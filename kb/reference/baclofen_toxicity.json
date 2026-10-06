@@ -1,82 +1,177 @@
 {
-  "id": "baclofen_toxicity",
-  "name": "Baclofen toxicity",
-  "aliases": [
-    "baclofen poisoning",
-    "baclofen overdose",
-    "intrathecal baclofen toxicity",
-    "baclofen withdrawal"
+ "id": "baclofen_toxicity",
+ "name": "Baclofen toxicity",
+ "aliases": [
+  "baclofen poisoning",
+  "baclofen overdose",
+  "intrathecal baclofen toxicity",
+  "baclofen withdrawal"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Overdose typically causes profound central nervous system and respiratory depression, hypotonia and coma, often requiring airway protection and ventilation",
+   "The depth of coma can mimic a devastating neurological event, including loss of brainstem reflexes, yet is usually reversible with supportive care",
+   "Paradoxically, seizures can occur despite baclofen being a central nervous system depressant",
+   "Bradycardia and hypotension, or occasionally hypertension and tachycardia, may accompany the toxidrome",
+   "There is no specific antidote, so management is meticulous supportive and intensive care with airway control and ventilation as needed",
+   "Recovery may be prolonged, particularly in renal impairment or after large ingestions, so a normal appearance should not prompt premature extubation or discharge",
+   "Abrupt cessation, especially failure of an intrathecal pump, causes a dangerous withdrawal syndrome with rebound spasticity, hyperthermia, autonomic instability and delirium that can be life-threatening",
+   "Baclofen withdrawal can resemble severe sepsis, serotonin syndrome or neuroleptic malignant syndrome and is treated by urgently restoring baclofen and providing supportive care"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Overdose typically causes profound central nervous system and respiratory depression, hypotonia and coma, often requiring airway protection and ventilation",
-      "The depth of coma can mimic a devastating neurological event, including loss of brainstem reflexes, yet is usually reversible with supportive care",
-      "Paradoxically, seizures can occur despite baclofen being a central nervous system depressant",
-      "Bradycardia and hypotension, or occasionally hypertension and tachycardia, may accompany the toxidrome",
-      "There is no specific antidote, so management is meticulous supportive and intensive care with airway control and ventilation as needed",
-      "Recovery may be prolonged, particularly in renal impairment or after large ingestions, so a normal appearance should not prompt premature extubation or discharge",
-      "Abrupt cessation, especially failure of an intrathecal pump, causes a dangerous withdrawal syndrome with rebound spasticity, hyperthermia, autonomic instability and delirium that can be life-threatening",
-      "Baclofen withdrawal can resemble severe sepsis, serotonin syndrome or neuroleptic malignant syndrome and is treated by urgently restoring baclofen and providing supportive care"
+  "pathophysiology": "Baclofen is a structural analogue of the inhibitory neurotransmitter gamma-aminobutyric acid and acts as an agonist at gamma-aminobutyric-acid type B receptors, predominantly in the spinal cord, reducing excitatory neurotransmission and muscle tone. In overdose, excessive receptor stimulation causes marked central nervous system depression, hypotonia, respiratory depression and coma, with cardiovascular effects and a lowered seizure threshold in some patients. Baclofen is largely renally eliminated, so impaired renal function prolongs and intensifies toxicity. Sudden withdrawal removes chronic inhibitory tone, producing a hyperexcitable rebound state with severe spasticity and autonomic dysregulation.",
+  "additionalDifferentials": [
+   "Other sedative-hypnotic or gamma-hydroxybutyrate poisoning",
+   "Opioid toxicity",
+   "Structural or ischaemic brainstem event",
+   "Metabolic or hypoglycaemic coma",
+   "For withdrawal: sepsis, serotonin syndrome, neuroleptic malignant syndrome or malignant hyperthermia",
+   "Central nervous system infection"
+  ],
+  "additionalInvestigations": [
+   "Arterial blood gas and continuous oxygen saturation to assess ventilation",
+   "Renal function and electrolytes, given renal elimination",
+   "Blood glucose to exclude hypoglycaemia",
+   "Electrocardiogram for bradycardia and conduction disturbance",
+   "Creatine kinase and temperature monitoring, particularly in withdrawal",
+   "Neuroimaging if a structural cause of coma cannot be excluded"
+  ],
+  "redFlags": [
+   "Respiratory depression or apnoea requiring airway support",
+   "Deep coma with loss of brainstem reflexes",
+   "Seizures",
+   "Haemodynamic instability or significant bradycardia",
+   "Suspected intrathecal pump failure or withdrawal with hyperthermia and autonomic instability"
+  ],
+  "prognosis": "Overdose generally has a good prognosis with supportive care and mechanical ventilation, with full neurological recovery even after profound coma, though recovery may be slow in renal impairment; unrecognised withdrawal, especially from intrathecal therapy, can be fatal.",
+  "pitfalls": [
+   "Mistaking reversible deep coma with absent brainstem reflexes for irreversible brain injury",
+   "Extubating or discharging prematurely before prolonged effects resolve",
+   "Overlooking impaired renal clearance that prolongs toxicity",
+   "Failing to recognise and urgently treat baclofen withdrawal",
+   "Attributing withdrawal to sepsis or another hyperthermic syndrome and delaying baclofen restoration"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Baclofen poisoning and withdrawal"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No specific antidote exists, so management centres on meticulous supportive and intensive care",
+   "Secure the airway and provide mechanical ventilation for respiratory depression and coma",
+   "Support the circulation with intravenous fluids and vasoactive agents for hypotension, and treat symptomatic bradycardia",
+   "Treat seizures with benzodiazepines",
+   "Consider haemodialysis to enhance elimination in severe poisoning with renal impairment, given the drug's renal clearance",
+   "In abrupt withdrawal, especially from intrathecal therapy, urgently reinstate baclofen and control autonomic instability and rebound spasticity with benzodiazepines",
+   "Avoid premature extubation or discharge as recovery may be prolonged, monitoring renal function, temperature and creatine kinase"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "baclofen_toxicity-pathway",
+   "title": "Baclofen toxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Overdose typically causes profound central nervous system and respiratory depression, hypotonia and coma, often requiring airway protection and ventilation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Respiratory depression or apnoea requiring airway support",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Arterial blood gas and continuous oxygen saturation to assess ventilation, Renal function and electrolytes, given renal elimination, Blood glucose to exclude hypoglycaemia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No specific antidote exists, so management centres on meticulous supportive and intensive care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking reversible deep coma with absent brainstem reflexes for irreversible brain injury"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of baclofen toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "baclofen_toxicity-matrix",
+   "title": "Baclofen toxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Overdose typically causes profound central nervous system and respiratory depression, hypotonia and coma, often requiring airway",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Baclofen is a structural analogue of the inhibitory neurotransmitter gamma-aminobutyric acid and acts as an agonist at gamma-aminobutyric-acid type B receptors, predominantly in the spinal cord, reducing excitatory neurotransmission and muscle tone. In overdose, excessive receptor stimulation causes marked central nervous system depression, hypotonia, respiratory depression and coma, with cardiovascular effects and a lowered seizure threshold in some patients. Baclofen is largely renally eliminated, so impaired renal function prolongs and intensifies toxicity. Sudden withdrawal removes chronic inhibitory tone, producing a hyperexcitable rebound state with severe spasticity and autonomic dysregulation.",
-    "additionalDifferentials": [
-      "Other sedative-hypnotic or gamma-hydroxybutyrate poisoning",
-      "Opioid toxicity",
-      "Structural or ischaemic brainstem event",
-      "Metabolic or hypoglycaemic coma",
-      "For withdrawal: sepsis, serotonin syndrome, neuroleptic malignant syndrome or malignant hyperthermia",
-      "Central nervous system infection"
+    [
+     "Key Investigations",
+     "Arterial blood gas and continuous oxygen saturation to assess ventilation, Renal function and electrolytes, given renal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Arterial blood gas and continuous oxygen saturation to assess ventilation",
-      "Renal function and electrolytes, given renal elimination",
-      "Blood glucose to exclude hypoglycaemia",
-      "Electrocardiogram for bradycardia and conduction disturbance",
-      "Creatine kinase and temperature monitoring, particularly in withdrawal",
-      "Neuroimaging if a structural cause of coma cannot be excluded"
+    [
+     "Primary Differentials",
+     "Other sedative-hypnotic or gamma-hydroxybutyrate poisoning, Opioid toxicity, Structural or ischaemic brainstem event",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Respiratory depression or apnoea requiring airway support",
-      "Deep coma with loss of brainstem reflexes",
-      "Seizures",
-      "Haemodynamic instability or significant bradycardia",
-      "Suspected intrathecal pump failure or withdrawal with hyperthermia and autonomic instability"
+    [
+     "Management Strategy",
+     "No specific antidote exists, so management centres on meticulous supportive and intensive care",
+     "Core treatment modality"
     ],
-    "prognosis": "Overdose generally has a good prognosis with supportive care and mechanical ventilation, with full neurological recovery even after profound coma, though recovery may be slow in renal impairment; unrecognised withdrawal, especially from intrathecal therapy, can be fatal.",
-    "pitfalls": [
-      "Mistaking reversible deep coma with absent brainstem reflexes for irreversible brain injury",
-      "Extubating or discharging prematurely before prolonged effects resolve",
-      "Overlooking impaired renal clearance that prolongs toxicity",
-      "Failing to recognise and urgently treat baclofen withdrawal",
-      "Attributing withdrawal to sepsis or another hyperthermic syndrome and delaying baclofen restoration"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Baclofen poisoning and withdrawal"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No specific antidote exists, so management centres on meticulous supportive and intensive care",
-      "Secure the airway and provide mechanical ventilation for respiratory depression and coma",
-      "Support the circulation with intravenous fluids and vasoactive agents for hypotension, and treat symptomatic bradycardia",
-      "Treat seizures with benzodiazepines",
-      "Consider haemodialysis to enhance elimination in severe poisoning with renal impairment, given the drug's renal clearance",
-      "In abrupt withdrawal, especially from intrathecal therapy, urgently reinstate baclofen and control autonomic instability and rebound spasticity with benzodiazepines",
-      "Avoid premature extubation or discharge as recovery may be prolonged, monitoring renal function, temperature and creatine kinase"
+    [
+     "Clinical Pitfall",
+     "Mistaking reversible deep coma with absent brainstem reflexes for irreversible brain injury",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for baclofen toxicity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "baclofen-toxicity-diagram",
+   "title": "Baclofen toxicity: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

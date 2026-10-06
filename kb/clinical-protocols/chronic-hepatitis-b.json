@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, hepatology, antenatal clinic",
- "aliases": ["CHB", "HBV", "hepatitis B", "HBsAg positive", "tenofovir", "entecavir", "TAF", "TDF", "HBV DNA", "APRI", "mother-to-child transmission", "PMTCT hepatitis B"],
+ "aliases": [
+  "CHB",
+  "HBV",
+  "hepatitis B",
+  "HBsAg positive",
+  "tenofovir",
+  "entecavir",
+  "TAF",
+  "TDF",
+  "HBV DNA",
+  "APRI",
+  "mother-to-child transmission",
+  "PMTCT hepatitis B"
+ ],
  "summary": "Assess every HBsAg-positive adult with ALT, HBV DNA, APRI or elastography and coinfection tests. WHO 2024 expands treatment to anyone with significant fibrosis, HBV DNA above 2000 IU/mL with raised ALT, or key risk conditions, using tenofovir disoproxil or entecavir long term. Give tenofovir in pregnancy when HBV DNA is 200,000 IU/mL or more.",
  "sections": [
   {
@@ -93,15 +106,144 @@
   }
  ],
  "drugs": [
-  { "name": "Tenofovir disoproxil fumarate (TDF)", "dose": "300 mg orally once daily", "notes": "CrCl 30 to 49: 300 mg every 48 hours; 10 to 29: every 72 to 96 hours; haemodialysis: every 7 days after dialysis. Monitor renal function." },
-  { "name": "Entecavir", "dose": "0.5 mg orally once daily on an empty stomach; 1 mg once daily in decompensated liver disease", "notes": "CrCl 30 to 49: 0.25 mg daily; 10 to 29: 0.15 mg daily; below 10 or dialysis: 0.05 mg daily (oral solution) or equivalent interval extension. Not for lamivudine-resistant HBV." },
-  { "name": "Tenofovir alafenamide (TAF)", "dose": "25 mg orally once daily with food", "notes": "Preferred with osteoporosis or renal impairment; no adjustment if CrCl 15 mL/min or more; not recommended below 15 unless on haemodialysis." },
-  { "name": "Tenofovir disoproxil (pregnancy prophylaxis)", "dose": "300 mg orally once daily from the second trimester (by 28 weeks) until at least delivery", "notes": "HBV DNA 200,000 IU/mL or more, HBeAg positive, or all HBsAg-positive women where testing is unavailable." }
+  {
+   "name": "Tenofovir disoproxil fumarate (TDF)",
+   "dose": "300 mg orally once daily",
+   "notes": "CrCl 30 to 49: 300 mg every 48 hours; 10 to 29: every 72 to 96 hours; haemodialysis: every 7 days after dialysis. Monitor renal function."
+  },
+  {
+   "name": "Entecavir",
+   "dose": "0.5 mg orally once daily on an empty stomach; 1 mg once daily in decompensated liver disease",
+   "notes": "CrCl 30 to 49: 0.25 mg daily; 10 to 29: 0.15 mg daily; below 10 or dialysis: 0.05 mg daily (oral solution) or equivalent interval extension. Not for lamivudine-resistant HBV."
+  },
+  {
+   "name": "Tenofovir alafenamide (TAF)",
+   "dose": "25 mg orally once daily with food",
+   "notes": "Preferred with osteoporosis or renal impairment; no adjustment if CrCl 15 mL/min or more; not recommended below 15 unless on haemodialysis."
+  },
+  {
+   "name": "Tenofovir disoproxil (pregnancy prophylaxis)",
+   "dose": "300 mg orally once daily from the second trimester (by 28 weeks) until at least delivery",
+   "notes": "HBV DNA 200,000 IU/mL or more, HBeAg positive, or all HBsAg-positive women where testing is unavailable."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Guidelines for the prevention, diagnosis, care and treatment for people with chronic hepatitis B infection (March 2024)", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240090903" },
-  { "org": "AASLD / IDSA", "title": "AASLD-IDSA Practice Guideline on treatment of chronic hepatitis B (Hepatology 2025)", "year": 2025, "url": "https://journals.lww.com/hep/fulltext/10.1097/hep.0000000000001549~aasld-idsa-practice-guideline-on-treatment-of-chronic" },
-  { "org": "AASLD", "title": "Update on prevention, diagnosis, and treatment of chronic hepatitis B: AASLD 2018 hepatitis B guidance", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29405329/" }
+  {
+   "org": "WHO",
+   "title": "Guidelines for the prevention, diagnosis, care and treatment for people with chronic hepatitis B infection (March 2024)",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240090903"
+  },
+  {
+   "org": "AASLD / IDSA",
+   "title": "AASLD-IDSA Practice Guideline on treatment of chronic hepatitis B (Hepatology 2025)",
+   "year": 2025,
+   "url": "https://journals.lww.com/hep/fulltext/10.1097/hep.0000000000001549~aasld-idsa-practice-guideline-on-treatment-of-chronic"
+  },
+  {
+   "org": "AASLD",
+   "title": "Update on prevention, diagnosis, and treatment of chronic hepatitis B: AASLD 2018 hepatitis B guidance",
+   "year": 2018,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/29405329/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chronic-hepatitis-b-pathway",
+   "title": "Chronic hepatitis B (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Chronic infection: HBsAg positive (persisting 6 months or more). Test HBeAg and anti-HBe, HBV DNA (quantitative), ALT, AST, full blood count, creatinine, and APRI or transient elastography.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "ALT upper limit of normal (WHO 2024): 30 U/L for men and 19 U/L for women. ALT fluctuates, so decisions use at least two values over 6 to 12 months.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Significant fibrosis (F2): APRI above 0.5 or elastography above 7 kPa. Cirrhosis (F4): clinical features, APRI above 1, or elastography above 12.5 kPa (FibroScan cut-offs)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Preferred: tenofovir disoproxil fumarate (TDF) or entecavir (ETV), both with a high barrier to resistance."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "On treatment: at least annually ALT, AST, HBV DNA, HBsAg, HBeAg and anti-HBe, and APRI or elastography; every 3 to 6 months in the first year, in cirrhosis, HIV coinfection, renal impairment or poor adherence. Check adherence at every"
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chronic hepatitis b (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic-hepatitis-b-summary-matrix",
+   "title": "Chronic hepatitis B (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Chronic infection: HBsAg positive (persisting 6 months or more). Test HBeAg and anti-HBe, HBV DNA (quantitative), ALT, AST, full blood",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Preferred: tenofovir disoproxil fumarate (TDF) or entecavir (ETV), both with a high barrier to resistance.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tenofovir disoproxil fumarate (TDF): 300 mg orally once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using a single normal ALT or the older ALT limit of 40 U/L to deny treatment.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chronic hepatitis b (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-hepatitis-b-diagram",
+   "title": "Chronic hepatitis B (adult): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

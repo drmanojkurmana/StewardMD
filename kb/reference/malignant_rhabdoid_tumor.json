@@ -1,91 +1,186 @@
 {
-  "id": "malignant_rhabdoid_tumor",
-  "name": "Malignant rhabdoid tumour (SMARCB1)",
-  "aliases": [
-    "MRT",
-    "malignant rhabdoid tumor",
-    "extrarenal rhabdoid tumour",
-    "SMARCB1-deficient tumour",
-    "INI1-deficient tumour",
-    "atypical teratoid/rhabdoid tumour"
+ "id": "malignant_rhabdoid_tumor",
+ "name": "Malignant rhabdoid tumour (SMARCB1)",
+ "aliases": [
+  "MRT",
+  "malignant rhabdoid tumor",
+  "extrarenal rhabdoid tumour",
+  "SMARCB1-deficient tumour",
+  "INI1-deficient tumour",
+  "atypical teratoid/rhabdoid tumour"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Sarcoma",
+ "specialty": "Medical/Surgical Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours of Soft Tissue and Bone",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A highly aggressive malignancy of infancy and early childhood, occurring in the kidney, central nervous system (as atypical teratoid/rhabdoid tumour), and soft tissue",
+   "Named for the characteristic rhabdoid cells with eccentric nuclei, prominent nucleoli, and eosinophilic cytoplasmic inclusions",
+   "Defined by loss of function of the SMARCB1 (INI1) gene, part of the SWI/SNF chromatin-remodelling complex, with rare cases showing SMARCA4 loss",
+   "Loss of nuclear INI1 (SMARCB1) expression on immunohistochemistry is the diagnostic hallmark",
+   "May occur as part of the rhabdoid tumour predisposition syndrome, so germline SMARCB1 testing and genetic counselling should be considered, particularly in the very young or with multifocal disease",
+   "Frequently presents with disseminated disease, and central nervous system involvement should be actively sought",
+   "Treatment involves intensive multimodality therapy combining surgery, multi-agent chemotherapy, and radiotherapy, though outcomes remain poor",
+   "Staging requires cross-sectional imaging of the primary, chest CT, whole-body assessment, and neuraxis imaging"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Sarcoma",
-  "specialty": "Medical/Surgical Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours of Soft Tissue and Bone",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A highly aggressive malignancy of infancy and early childhood, occurring in the kidney, central nervous system (as atypical teratoid/rhabdoid tumour), and soft tissue",
-      "Named for the characteristic rhabdoid cells with eccentric nuclei, prominent nucleoli, and eosinophilic cytoplasmic inclusions",
-      "Defined by loss of function of the SMARCB1 (INI1) gene, part of the SWI/SNF chromatin-remodelling complex, with rare cases showing SMARCA4 loss",
-      "Loss of nuclear INI1 (SMARCB1) expression on immunohistochemistry is the diagnostic hallmark",
-      "May occur as part of the rhabdoid tumour predisposition syndrome, so germline SMARCB1 testing and genetic counselling should be considered, particularly in the very young or with multifocal disease",
-      "Frequently presents with disseminated disease, and central nervous system involvement should be actively sought",
-      "Treatment involves intensive multimodality therapy combining surgery, multi-agent chemotherapy, and radiotherapy, though outcomes remain poor",
-      "Staging requires cross-sectional imaging of the primary, chest CT, whole-body assessment, and neuraxis imaging"
+  "pathophysiology": "Malignant rhabdoid tumour is defined by biallelic inactivation of the SMARCB1 (INI1) tumour-suppressor gene, a core subunit of the SWI/SNF (BAF) chromatin-remodelling complex; a small subset instead show SMARCA4 loss. Loss of this subunit disrupts the complex's control of gene expression, impairing differentiation and permitting unchecked proliferation despite an otherwise remarkably simple, stable genome. This single epigenetic driver, often present in the germline in the predisposition syndrome, explains why the tumour arises in very young children and its shared biology across renal, central nervous system, and soft-tissue sites. Loss of nuclear INI1 staining directly reflects the underlying genetic defect.",
+  "additionalDifferentials": [
+   "Other small round cell and undifferentiated tumours of childhood",
+   "Rhabdomyosarcoma",
+   "Wilms tumour and other paediatric renal tumours",
+   "Neuroblastoma",
+   "Epithelioid sarcoma (also INI1-deficient)",
+   "Medulloblastoma and other embryonal central nervous system tumours"
+  ],
+  "additionalInvestigations": [
+   "MRI or CT of the primary site to define extent",
+   "Neuraxis MRI to detect synchronous central nervous system disease",
+   "Chest CT for pulmonary metastases",
+   "Whole-body functional imaging and, where relevant, cerebrospinal fluid assessment for staging",
+   "Biopsy with immunohistochemistry demonstrating loss of nuclear INI1 (SMARCB1)",
+   "Germline SMARCB1 (and, if indicated, SMARCA4) testing with genetic counselling"
+  ],
+  "redFlags": [
+   "A rapidly growing mass in an infant or young child",
+   "Neurological signs suggesting central nervous system involvement",
+   "Multifocal or disseminated disease at presentation",
+   "A family history suggesting a rhabdoid tumour predisposition syndrome",
+   "Rapid clinical deterioration reflecting aggressive tumour biology"
+  ],
+  "prognosis": "Malignant rhabdoid tumour carries a poor prognosis, particularly in very young children and those with metastatic, central nervous system, or germline-associated disease; despite intensive multimodality treatment, survival remains limited, though outcomes are somewhat better in older children with localised, completely resected tumours.",
+  "pitfalls": [
+   "Failing to test for INI1 (SMARCB1) loss when a rhabdoid or undifferentiated paediatric tumour is encountered",
+   "Overlooking synchronous central nervous system disease by omitting neuraxis imaging",
+   "Not arranging germline testing and genetic counselling for a possible predisposition syndrome",
+   "Confusing the tumour with other small round cell tumours without appropriate immunohistochemistry",
+   "Underestimating the aggressive course and delaying intensive multimodality therapy"
+  ],
+  "references": [
+   "WHO Classification of Tumours of Soft Tissue and Bone",
+   "Enzinger and Weiss's Soft Tissue Tumors"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with curative-intent multimodality therapy where feasible, given the aggressive natural history (general oncology standard, not from DeVita's section on this disease, needs manual sourcing against a paediatric-specific AT/RT reference before clinical reliance).",
+   "For localised, completely resectable disease, pursue maximal safe surgical resection followed by multi-agent chemotherapy, adding radiotherapy for local control depending on age and site (general oncology standard, not from DeVita's section on this disease).",
+   "For metastatic or disseminated disease, including synchronous CNS involvement, intensify systemic multi-agent chemotherapy and coordinate care across all sites, adding intrathecal therapy when the CNS is involved; prognosis is markedly worse (general oncology standard, not from DeVita's section on this disease).",
+   "In very young infants, individualise radiotherapy timing and volume, balancing substantial long-term neurodevelopmental toxicity against the risk of under-treating an aggressive tumour (general oncology standard, not from DeVita's section on this disease).",
+   "Consider clinical trial enrolment whenever available, given that outcomes with conventional therapy remain poor, including trials of EZH2-targeting agents for SMARCB1-deficient neoplasms such as this tumour (the EZH2 trial point is DeVita-grounded via the polycomb/EZH2-dependence rationale; the rest is general oncology standard, not from DeVita's section on this disease).",
+   "Consider high-dose chemotherapy with autologous stem-cell rescue in some protocols, particularly for high-risk or relapsed disease (general oncology standard, not from DeVita's section on this disease).",
+   "At relapse, prioritise clinical trial enrolment where one is open, as options are otherwise limited and outcomes poor (general oncology standard, not from DeVita's section on this disease).",
+   "Coordinate comprehensive paediatric supportive care throughout treatment given the intensity of therapy and young patient age (general oncology standard, not from DeVita's section on this disease).",
+   "At diagnosis, obtain full staging with cross-sectional imaging of the primary site, chest imaging for pulmonary metastases, neuraxis imaging, and cerebrospinal fluid assessment where indicated (general oncology standard, not from DeVita's section on this disease).",
+   "During and after treatment, continue surveillance imaging of the primary site, chest, and neuraxis given the propensity for disseminated and CNS spread (general oncology standard, not from DeVita's section on this disease).",
+   "Arrange germline SMARCB1 (and SMARCA4 where indicated) testing with genetic counselling, considering family screening if a predisposition syndrome is confirmed (general oncology standard, not from DeVita's section on this disease).",
+   "In long-term follow-up, monitor neurodevelopmental and endocrine sequelae of intensive multimodality therapy in survivors (general oncology standard, not from DeVita's section on this disease).",
+   "Refer all suspected or confirmed cases promptly to a paediatric oncology centre experienced with rhabdoid tumours, and to clinical genetics when germline SMARCB1/SMARCA4 involvement is suspected (general oncology standard, not from DeVita's section on this disease).",
+   "Refer to a centre with an open clinical trial whenever available given the limited efficacy of conventional therapy (general oncology standard for trial referral pathway; the EZH2 trial fact itself is DeVita-grounded)."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "malignant_rhabdoid_tumor-pathway",
+   "title": "Malignant rhabdoid tumour (SMARCB1): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A highly aggressive malignancy of infancy and early childhood, occurring in the kidney, central nervous system (as atypical teratoid/rhabdoid tumour), and soft tissue",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A rapidly growing mass in an infant or young child",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI or CT of the primary site to define extent, Neuraxis MRI to detect synchronous central nervous system disease, Chest CT for pulmonary metastases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with curative-intent multimodality therapy where feasible, given the aggressive natural history (general oncology standard, not from DeVita's section on this disease, needs manual sourcing against a"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to test for INI1 (SMARCB1) loss when a rhabdoid or undifferentiated paediatric tumour is encountered"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of malignant rhabdoid tumour (smarcb1)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malignant_rhabdoid_tumor-matrix",
+   "title": "Malignant rhabdoid tumour (SMARCB1): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A highly aggressive malignancy of infancy and early childhood, occurring in the kidney, central nervous system (as atypical",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Malignant rhabdoid tumour is defined by biallelic inactivation of the SMARCB1 (INI1) tumour-suppressor gene, a core subunit of the SWI/SNF (BAF) chromatin-remodelling complex; a small subset instead show SMARCA4 loss. Loss of this subunit disrupts the complex's control of gene expression, impairing differentiation and permitting unchecked proliferation despite an otherwise remarkably simple, stable genome. This single epigenetic driver, often present in the germline in the predisposition syndrome, explains why the tumour arises in very young children and its shared biology across renal, central nervous system, and soft-tissue sites. Loss of nuclear INI1 staining directly reflects the underlying genetic defect.",
-    "additionalDifferentials": [
-      "Other small round cell and undifferentiated tumours of childhood",
-      "Rhabdomyosarcoma",
-      "Wilms tumour and other paediatric renal tumours",
-      "Neuroblastoma",
-      "Epithelioid sarcoma (also INI1-deficient)",
-      "Medulloblastoma and other embryonal central nervous system tumours"
+    [
+     "Key Investigations",
+     "MRI or CT of the primary site to define extent, Neuraxis MRI to detect synchronous central nervous system disease, Chest CT for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI or CT of the primary site to define extent",
-      "Neuraxis MRI to detect synchronous central nervous system disease",
-      "Chest CT for pulmonary metastases",
-      "Whole-body functional imaging and, where relevant, cerebrospinal fluid assessment for staging",
-      "Biopsy with immunohistochemistry demonstrating loss of nuclear INI1 (SMARCB1)",
-      "Germline SMARCB1 (and, if indicated, SMARCA4) testing with genetic counselling"
+    [
+     "Primary Differentials",
+     "Other small round cell and undifferentiated tumours of childhood, Rhabdomyosarcoma, Wilms tumour and other paediatric renal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A rapidly growing mass in an infant or young child",
-      "Neurological signs suggesting central nervous system involvement",
-      "Multifocal or disseminated disease at presentation",
-      "A family history suggesting a rhabdoid tumour predisposition syndrome",
-      "Rapid clinical deterioration reflecting aggressive tumour biology"
+    [
+     "Management Strategy",
+     "Treat with curative-intent multimodality therapy where feasible, given the aggressive natural history (general oncology standard,",
+     "Core treatment modality"
     ],
-    "prognosis": "Malignant rhabdoid tumour carries a poor prognosis, particularly in very young children and those with metastatic, central nervous system, or germline-associated disease; despite intensive multimodality treatment, survival remains limited, though outcomes are somewhat better in older children with localised, completely resected tumours.",
-    "pitfalls": [
-      "Failing to test for INI1 (SMARCB1) loss when a rhabdoid or undifferentiated paediatric tumour is encountered",
-      "Overlooking synchronous central nervous system disease by omitting neuraxis imaging",
-      "Not arranging germline testing and genetic counselling for a possible predisposition syndrome",
-      "Confusing the tumour with other small round cell tumours without appropriate immunohistochemistry",
-      "Underestimating the aggressive course and delaying intensive multimodality therapy"
-    ],
-    "references": [
-      "WHO Classification of Tumours of Soft Tissue and Bone",
-      "Enzinger and Weiss's Soft Tissue Tumors"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with curative-intent multimodality therapy where feasible, given the aggressive natural history (general oncology standard, not from DeVita's section on this disease, needs manual sourcing against a paediatric-specific AT/RT reference before clinical reliance).",
-      "For localised, completely resectable disease, pursue maximal safe surgical resection followed by multi-agent chemotherapy, adding radiotherapy for local control depending on age and site (general oncology standard, not from DeVita's section on this disease).",
-      "For metastatic or disseminated disease, including synchronous CNS involvement, intensify systemic multi-agent chemotherapy and coordinate care across all sites, adding intrathecal therapy when the CNS is involved; prognosis is markedly worse (general oncology standard, not from DeVita's section on this disease).",
-      "In very young infants, individualise radiotherapy timing and volume, balancing substantial long-term neurodevelopmental toxicity against the risk of under-treating an aggressive tumour (general oncology standard, not from DeVita's section on this disease).",
-      "Consider clinical trial enrolment whenever available, given that outcomes with conventional therapy remain poor, including trials of EZH2-targeting agents for SMARCB1-deficient neoplasms such as this tumour (the EZH2 trial point is DeVita-grounded via the polycomb/EZH2-dependence rationale; the rest is general oncology standard, not from DeVita's section on this disease).",
-      "Consider high-dose chemotherapy with autologous stem-cell rescue in some protocols, particularly for high-risk or relapsed disease (general oncology standard, not from DeVita's section on this disease).",
-      "At relapse, prioritise clinical trial enrolment where one is open, as options are otherwise limited and outcomes poor (general oncology standard, not from DeVita's section on this disease).",
-      "Coordinate comprehensive paediatric supportive care throughout treatment given the intensity of therapy and young patient age (general oncology standard, not from DeVita's section on this disease).",
-      "At diagnosis, obtain full staging with cross-sectional imaging of the primary site, chest imaging for pulmonary metastases, neuraxis imaging, and cerebrospinal fluid assessment where indicated (general oncology standard, not from DeVita's section on this disease).",
-      "During and after treatment, continue surveillance imaging of the primary site, chest, and neuraxis given the propensity for disseminated and CNS spread (general oncology standard, not from DeVita's section on this disease).",
-      "Arrange germline SMARCB1 (and SMARCA4 where indicated) testing with genetic counselling, considering family screening if a predisposition syndrome is confirmed (general oncology standard, not from DeVita's section on this disease).",
-      "In long-term follow-up, monitor neurodevelopmental and endocrine sequelae of intensive multimodality therapy in survivors (general oncology standard, not from DeVita's section on this disease).",
-      "Refer all suspected or confirmed cases promptly to a paediatric oncology centre experienced with rhabdoid tumours, and to clinical genetics when germline SMARCB1/SMARCA4 involvement is suspected (general oncology standard, not from DeVita's section on this disease).",
-      "Refer to a centre with an open clinical trial whenever available given the limited efficacy of conventional therapy (general oncology standard for trial referral pathway; the EZH2 trial fact itself is DeVita-grounded)."
+    [
+     "Clinical Pitfall",
+     "Failing to test for INI1 (SMARCB1) loss when a rhabdoid or undifferentiated paediatric tumour is encountered",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for malignant rhabdoid tumour (smarcb1)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malignant-rhabdoid-tumor-diagram",
+   "title": "Malignant rhabdoid tumour (SMARCB1): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "mulvihill_smith_syndrome",
-  "name": "Mulvihill-Smith syndrome",
-  "aliases": [
-    "Mulvihill-Smith progeroid syndrome",
-    "progeroid syndrome with pigmented naevi and immunodeficiency",
-    "MSS"
+ "id": "mulvihill_smith_syndrome",
+ "name": "Mulvihill-Smith syndrome",
+ "aliases": [
+  "Mulvihill-Smith progeroid syndrome",
+  "progeroid syndrome with pigmented naevi and immunodeficiency",
+  "MSS"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / clinical dysmorphology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare progeroid (premature-ageing) syndrome combining a prematurely aged facial appearance, short stature, and low birth weight",
+   "Multiple pigmented naevi are a characteristic dermatological feature",
+   "Patients typically have a high-pitched voice, microcephaly, sensorineural hearing loss, and lack of subcutaneous fat contributing to the aged look",
+   "Progressive cognitive impairment or intellectual disability is often reported",
+   "An associated immunodeficiency predisposes to recurrent infections",
+   "Metabolic and endocrine disturbances, including features of insulin resistance and impaired glucose handling, may occur",
+   "The molecular basis remains incompletely defined, so diagnosis is clinical, based on the recognisable constellation of findings",
+   "There is a reported predisposition to neoplasia, warranting clinical surveillance; care is otherwise supportive"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / clinical dysmorphology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare progeroid (premature-ageing) syndrome combining a prematurely aged facial appearance, short stature, and low birth weight",
-      "Multiple pigmented naevi are a characteristic dermatological feature",
-      "Patients typically have a high-pitched voice, microcephaly, sensorineural hearing loss, and lack of subcutaneous fat contributing to the aged look",
-      "Progressive cognitive impairment or intellectual disability is often reported",
-      "An associated immunodeficiency predisposes to recurrent infections",
-      "Metabolic and endocrine disturbances, including features of insulin resistance and impaired glucose handling, may occur",
-      "The molecular basis remains incompletely defined, so diagnosis is clinical, based on the recognisable constellation of findings",
-      "There is a reported predisposition to neoplasia, warranting clinical surveillance; care is otherwise supportive"
+  "pathophysiology": "Mulvihill-Smith syndrome is a segmental progeroid disorder in which affected individuals display features of accelerated ageing alongside growth failure, immune dysfunction, and multiple pigmented naevi. The underlying molecular defect has not been firmly established, and the condition is regarded as clinically defined rather than genetically confirmed. The phenotype suggests disturbance of pathways governing growth, tissue maintenance, and genome or cellular stability, producing loss of subcutaneous fat, a prematurely aged appearance, immunodeficiency with susceptibility to infection, and a reported increased risk of malignancy. Endocrine and metabolic abnormalities such as insulin resistance are described, consistent with the broader tendency of progeroid syndromes to disturb metabolic homeostasis.",
+  "additionalDifferentials": [
+   "Werner syndrome and other adult progeroid syndromes",
+   "Hutchinson-Gilford progeria syndrome",
+   "Cockayne syndrome",
+   "Bloom syndrome and other genome-instability disorders",
+   "Neonatal progeroid (Wiedemann-Rautenstrauch) syndrome",
+   "Other syndromic short-stature disorders with lipodystrophy"
+  ],
+  "additionalInvestigations": [
+   "Detailed clinical and dysmorphological assessment",
+   "Immunological evaluation for humoral and cellular immunodeficiency",
+   "Metabolic and endocrine screen including glucose and insulin studies",
+   "Audiometry for sensorineural hearing loss",
+   "Dermatological review and monitoring of pigmented naevi",
+   "Genetic testing to exclude defined progeroid and genome-instability syndromes"
+  ],
+  "redFlags": [
+   "Recurrent or severe infection reflecting significant immunodeficiency",
+   "New or changing pigmented lesions or other features suggesting malignancy",
+   "Marked failure to thrive and growth arrest",
+   "Progressive neurological or cognitive decline"
+  ],
+  "prognosis": "A chronic disorder with significant morbidity from immunodeficiency, growth failure, and reported cancer predisposition; prognosis is guarded and depends on the severity of complications.",
+  "pitfalls": [
+   "Assuming a confirmed molecular diagnosis when the condition remains clinically defined",
+   "Overlooking immunodeficiency as a treatable contributor to recurrent infection",
+   "Failing to arrange dermatological and malignancy surveillance",
+   "Confusing it with other progeroid syndromes that have distinct management and prognosis"
+  ],
+  "references": [
+   "Emery and Rimoin's Principles and Practice of Medical Genetics",
+   "Clinical dysmorphology reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No specific or curative therapy exists; management is supportive and directed at the individual features",
+   "Immunological management of the associated immunodeficiency, with prompt treatment of infections, appropriate immunisation and immunoglobulin replacement where humoral deficiency is demonstrated",
+   "Nutritional support and growth monitoring for growth failure and loss of subcutaneous fat",
+   "Metabolic management of insulin resistance and impaired glucose handling with lifestyle measures and glucose-lowering therapy as required",
+   "Hearing rehabilitation with aids for sensorineural hearing loss, and developmental and educational support for cognitive impairment",
+   "Dermatological surveillance of the multiple pigmented naevi with vigilance for malignancy given the reported cancer predisposition",
+   "Genetic counselling and coordinated specialist multidisciplinary follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mulvihill_smith_syndrome-pathway",
+   "title": "Mulvihill-Smith syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare progeroid (premature-ageing) syndrome combining a prematurely aged facial appearance, short stature, and low birth weight",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent or severe infection reflecting significant immunodeficiency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed clinical and dysmorphological assessment, Immunological evaluation for humoral and cellular immunodeficiency, Metabolic and endocrine screen including glucose and insulin studies"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No specific or curative therapy exists; management is supportive and directed at the individual features"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a confirmed molecular diagnosis when the condition remains clinically defined"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mulvihill-smith syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mulvihill_smith_syndrome-matrix",
+   "title": "Mulvihill-Smith syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare progeroid (premature-ageing) syndrome combining a prematurely aged facial appearance, short stature, and low birth weight",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mulvihill-Smith syndrome is a segmental progeroid disorder in which affected individuals display features of accelerated ageing alongside growth failure, immune dysfunction, and multiple pigmented naevi. The underlying molecular defect has not been firmly established, and the condition is regarded as clinically defined rather than genetically confirmed. The phenotype suggests disturbance of pathways governing growth, tissue maintenance, and genome or cellular stability, producing loss of subcutaneous fat, a prematurely aged appearance, immunodeficiency with susceptibility to infection, and a reported increased risk of malignancy. Endocrine and metabolic abnormalities such as insulin resistance are described, consistent with the broader tendency of progeroid syndromes to disturb metabolic homeostasis.",
-    "additionalDifferentials": [
-      "Werner syndrome and other adult progeroid syndromes",
-      "Hutchinson-Gilford progeria syndrome",
-      "Cockayne syndrome",
-      "Bloom syndrome and other genome-instability disorders",
-      "Neonatal progeroid (Wiedemann-Rautenstrauch) syndrome",
-      "Other syndromic short-stature disorders with lipodystrophy"
+    [
+     "Key Investigations",
+     "Detailed clinical and dysmorphological assessment, Immunological evaluation for humoral and cellular immunodeficiency, Metabolic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed clinical and dysmorphological assessment",
-      "Immunological evaluation for humoral and cellular immunodeficiency",
-      "Metabolic and endocrine screen including glucose and insulin studies",
-      "Audiometry for sensorineural hearing loss",
-      "Dermatological review and monitoring of pigmented naevi",
-      "Genetic testing to exclude defined progeroid and genome-instability syndromes"
+    [
+     "Primary Differentials",
+     "Werner syndrome and other adult progeroid syndromes, Hutchinson-Gilford progeria syndrome, Cockayne syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent or severe infection reflecting significant immunodeficiency",
-      "New or changing pigmented lesions or other features suggesting malignancy",
-      "Marked failure to thrive and growth arrest",
-      "Progressive neurological or cognitive decline"
+    [
+     "Management Strategy",
+     "No specific or curative therapy exists; management is supportive and directed at the individual features",
+     "Core treatment modality"
     ],
-    "prognosis": "A chronic disorder with significant morbidity from immunodeficiency, growth failure, and reported cancer predisposition; prognosis is guarded and depends on the severity of complications.",
-    "pitfalls": [
-      "Assuming a confirmed molecular diagnosis when the condition remains clinically defined",
-      "Overlooking immunodeficiency as a treatable contributor to recurrent infection",
-      "Failing to arrange dermatological and malignancy surveillance",
-      "Confusing it with other progeroid syndromes that have distinct management and prognosis"
-    ],
-    "references": [
-      "Emery and Rimoin's Principles and Practice of Medical Genetics",
-      "Clinical dysmorphology reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No specific or curative therapy exists; management is supportive and directed at the individual features",
-      "Immunological management of the associated immunodeficiency, with prompt treatment of infections, appropriate immunisation and immunoglobulin replacement where humoral deficiency is demonstrated",
-      "Nutritional support and growth monitoring for growth failure and loss of subcutaneous fat",
-      "Metabolic management of insulin resistance and impaired glucose handling with lifestyle measures and glucose-lowering therapy as required",
-      "Hearing rehabilitation with aids for sensorineural hearing loss, and developmental and educational support for cognitive impairment",
-      "Dermatological surveillance of the multiple pigmented naevi with vigilance for malignancy given the reported cancer predisposition",
-      "Genetic counselling and coordinated specialist multidisciplinary follow-up"
+    [
+     "Clinical Pitfall",
+     "Assuming a confirmed molecular diagnosis when the condition remains clinically defined",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mulvihill-smith syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mulvihill-smith-syndrome-diagram",
+   "title": "Mulvihill-Smith syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

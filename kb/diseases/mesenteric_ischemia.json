@@ -138,5 +138,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h4738e3f"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "mesenteric_ischemia-dx-algo",
+      "title": "Acute mesenteric ischemia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Severe, acute, non-remitting abdominal pain that is strikingly out of proportion to physical findings is the most common complaint in arterial acute mesenteric ischaemia, present in about 95% of cases; pain precedes signs because ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Pain out of proportion to examination with a high-risk cardiac source (AF, recent MI, endocarditis) - embolic acute mesenteric ischaemia until proven otherwise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Thin-cut (1 mm or thinner) CT angiography is the gold standard for detecting mesenteric arterial occlusive (embolic/thrombotic) disease and for assessing bowel; venous-phase imaging detects mesenteric venous thrombosis"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison classifies intestinal ischaemia into chronic mesenteric ischaemia (CMI) and acute mesenteric ischaemia (AMI). Acute mesenteric vascular insufficiency is subdivided into (1) arterio-occlusive mesenteric ischaemia"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating pain out of proportion to examination as benign - early ischaemia produces severe pain with deceptively unremarkable abdominal signs because injury starts in the mucosa (p.2588)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute mesenteric ischemia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "mesenteric_ischemia-matrix",
+      "title": "Acute mesenteric ischemia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Severe, acute, non-remitting abdominal pain that is strikingly out of proportion to physical findings is the most common",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Thin-cut (1 mm or thinner) CT angiography is the gold standard for detecting mesenteric arterial occlusive (embolic/thrombotic)",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Chronic mesenteric ischaemia / intestinal angina (postprandial pain, weight loss, fear of eating), Ischaemic colitis (notably",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Pain out of proportion to examination with a high-risk cardiac source (AF, recent MI, endocarditis) - embolic acute mesenteric",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating pain out of proportion to examination as benign - early ischaemia produces severe pain with deceptively unremarkable",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute mesenteric ischemia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "mesenteric-ischemia-diagram",
+      "title": "Acute mesenteric ischemia: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

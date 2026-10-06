@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, orthopaedic ward, theatre recovery, ICU",
- "aliases": ["compartment syndrome", "ACS limb", "fasciotomy", "delta pressure", "compartment pressure", "crush injury", "tight cast", "BOAST compartment syndrome"],
+ "aliases": [
+  "compartment syndrome",
+  "ACS limb",
+  "fasciotomy",
+  "delta pressure",
+  "compartment pressure",
+  "crush injury",
+  "tight cast",
+  "BOAST compartment syndrome"
+ ],
  "summary": "Suspect it with pain out of proportion to the injury and pain on passive stretch; release every circumferential dressing and cast down to skin, measure compartment pressure when examination is unreliable (delta pressure below 30 mmHg supports the diagnosis), and perform immediate fasciotomy of all involved compartments once diagnosed (BOAST 2025).",
  "sections": [
   {
@@ -74,8 +83,131 @@
   }
  ],
  "sources": [
-  { "org": "British Orthopaedic Association", "title": "BOAST: Diagnosis and management of compartment syndrome of the extremities (revised July 2025)", "year": 2025, "url": "https://www.boa.ac.uk/asset/D0432D40%2D5D99%2D4B64%2D9952F6EB1B60C166/" },
-  { "org": "NICE", "title": "Fractures (complex): assessment and management (NG37)", "year": 2016, "url": "https://www.nice.org.uk/guidance/NG37/chapter/recommendations" }
+  {
+   "org": "British Orthopaedic Association",
+   "title": "BOAST: Diagnosis and management of compartment syndrome of the extremities (revised July 2025)",
+   "year": 2025,
+   "url": "https://www.boa.ac.uk/asset/D0432D40%2D5D99%2D4B64%2D9952F6EB1B60C166/"
+  },
+  {
+   "org": "NICE",
+   "title": "Fractures (complex): assessment and management (NG37)",
+   "year": 2016,
+   "url": "https://www.nice.org.uk/guidance/NG37/chapter/recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "algorithms": [
+  {
+   "id": "acs-decompression-algo",
+   "title": "Acute Compartment Syndrome Assessment and Decompression Pathway",
+   "steps": [
+    {
+     "step": "Clinical Suspicion and High-Risk Context",
+     "action": "Patient with fracture, crush injury, tight cast, or reperfusion presenting with severe pain out of proportion to injury.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Mechanical Decompression",
+     "action": "Immediately bivalve and completely remove all circumferential casts, splints, and compressive dressings down to bare skin. Maintain limb at heart level (do not elevate).",
+     "critical": true
+    },
+    {
+     "step": "Intracompartmental Pressure Measurement",
+     "branch": "Equivocal or Unconscious Patient",
+     "action": "Measure compartment pressure with needle manometry. Calculate delta pressure = Diastolic BP minus measured Compartment Pressure."
+    },
+    {
+     "step": "Diagnostic Threshold Evaluation",
+     "branch": "Delta P <= 30 mmHg",
+     "action": "Confirms Acute Compartment Syndrome. Inadequate tissue perfusion and evolving myonecrosis.",
+     "critical": true
+    },
+    {
+     "step": "Emergency Surgical Decompression",
+     "action": "Emergent multi-compartment fasciotomy. For lower leg: 2-incision 4-compartment release (anterolateral and posteromedial). Delaying surgery > 6 hours causes irreversible neuromuscular disability.",
+     "critical": true
+    }
+   ],
+   "caption": "Algorithm aligned with BOAST 2025 and British Orthopaedic Association guidance."
+  }
+ ],
+ "tables": [
+  {
+   "id": "compartment-syndrome-signs",
+   "title": "Clinical Signs Sensitivity, Timing, and Diagnostic Value",
+   "headers": [
+    "Sign or Symptom",
+    "Diagnostic Value and Sensitivity",
+    "Timeline and Clinical Significance"
+   ],
+   "rows": [
+    [
+     "Pain out of proportion",
+     "High sensitivity (earliest reliable finding)",
+     "Earliest symptom; unresponsive to escalating opioid analgesia"
+    ],
+    [
+     "Pain on passive stretch",
+     "Highest clinical sensitivity (approximately 90%)",
+     "Tension on ischaemic muscle fibres; crucial early sign in alert patients"
+    ],
+    [
+     "Palpable tenseness / firmness",
+     "High specificity (wood-like compartment feel)",
+     "Direct physical sign of elevated intracompartmental hydrostatic pressure"
+    ],
+    [
+     "Paraesthesia / Hypoaesthesia",
+     "Moderate sensitivity (nerve ischaemia)",
+     "Sensory deficit in distribution of traversing nerves (e.g. webspace 1)"
+    ],
+    [
+     "Paresis / Paralysis",
+     "Late finding",
+     "Indicates advanced motor nerve and muscle ischaemia; heralds irreversible tissue damage"
+    ],
+    [
+     "Pulselessness and Pallor",
+     "Very low sensitivity (absent in most cases)",
+     "Terminal sign of complete arterial occlusion; never wait for pulselessness to diagnose"
+    ]
+   ],
+   "caption": "Diagnosis is primarily clinical; irreversible muscle necrosis occurs within 6 to 8 hours."
+  }
+ ],
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "calculators": [
+  {
+   "id": "calc-delta-p",
+   "title": "Delta Pressure (Perfusion Pressure) Calculator",
+   "linkId": "delta_pressure",
+   "description": "Calculates delta P (Diastolic BP minus Compartment Pressure); delta P <= 30 mmHg indicates tissue ischaemia and need for fasciotomy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-compartment-syndrome-diagram",
+   "title": "Acute compartment syndrome of the limb: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

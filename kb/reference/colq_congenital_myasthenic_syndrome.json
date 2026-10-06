@@ -1,78 +1,173 @@
 {
-  "id": "colq_congenital_myasthenic_syndrome",
-  "name": "COLQ-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency)",
-  "aliases": [
-    "Endplate acetylcholinesterase deficiency",
-    "COLQ-CMS",
-    "AChE deficiency CMS"
+ "id": "colq_congenital_myasthenic_syndrome",
+ "name": "COLQ-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency)",
+ "aliases": [
+  "Endplate acetylcholinesterase deficiency",
+  "COLQ-CMS",
+  "AChE deficiency CMS"
+ ],
+ "class": "non_infective",
+ "system": "Neuromuscular junction",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "COLQ encodes the collagenic tail (ColQ) that anchors acetylcholinesterase within the synaptic basal lamina; loss of function produces a synaptic (endplate) acetylcholinesterase deficiency rather than a receptor or presynaptic defect.",
+   "Presents typically in the neonatal period or infancy with axial and limb-girdle weakness, hypotonia, ptosis, ophthalmoparesis, delayed motor milestones and fatigable weakness that worsens through the day.",
+   "A characteristic slow, sluggishly reactive pupil (delayed pupillary light response) is a well-recognised clue and helps distinguish this subtype from most other congenital myasthenic syndromes.",
+   "Repetitive compound muscle action potential on a single supramaximal nerve stimulus (a repetitive CMAP) reflects prolonged acetylcholine action from absent esterase and is a hallmark electrophysiological finding.",
+   "Crucially, acetylcholinesterase inhibitors (pyridostigmine and related agents) are ineffective and typically harmful or even dangerous, as further prolonging acetylcholine dwell time worsens endplate injury.",
+   "Sympathomimetic and ephedrine-type agents, and salbutamol/albuterol, are the mainstay of pharmacological benefit in this subtype.",
+   "Spinal deformity, notably scoliosis with a rigid spine, and respiratory insufficiency may evolve over time and warrant proactive surveillance."
   ],
-  "class": "non_infective",
-  "system": "Neuromuscular junction",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "COLQ encodes the collagenic tail (ColQ) that anchors acetylcholinesterase within the synaptic basal lamina; loss of function produces a synaptic (endplate) acetylcholinesterase deficiency rather than a receptor or presynaptic defect.",
-      "Presents typically in the neonatal period or infancy with axial and limb-girdle weakness, hypotonia, ptosis, ophthalmoparesis, delayed motor milestones and fatigable weakness that worsens through the day.",
-      "A characteristic slow, sluggishly reactive pupil (delayed pupillary light response) is a well-recognised clue and helps distinguish this subtype from most other congenital myasthenic syndromes.",
-      "Repetitive compound muscle action potential on a single supramaximal nerve stimulus (a repetitive CMAP) reflects prolonged acetylcholine action from absent esterase and is a hallmark electrophysiological finding.",
-      "Crucially, acetylcholinesterase inhibitors (pyridostigmine and related agents) are ineffective and typically harmful or even dangerous, as further prolonging acetylcholine dwell time worsens endplate injury.",
-      "Sympathomimetic and ephedrine-type agents, and salbutamol/albuterol, are the mainstay of pharmacological benefit in this subtype.",
-      "Spinal deformity, notably scoliosis with a rigid spine, and respiratory insufficiency may evolve over time and warrant proactive surveillance."
+  "pathophysiology": "COLQ-related congenital myasthenic syndrome is a synaptic (endplate) disorder caused by biallelic loss-of-function variants in COLQ, the gene encoding the collagen-like tail subunit that tethers the catalytic subunits of acetylcholinesterase to the synaptic basal lamina of the neuromuscular junction. ColQ both anchors the enzyme in the synaptic cleft, via interaction with perlecan/dystroglycan and MuSK, and clusters it opposite the postsynaptic folds. When ColQ is absent or non-functional, acetylcholinesterase cannot be positioned in the cleft, so released acetylcholine is not hydrolysed and lingers, repeatedly reactivating acetylcholine receptors. This causes cationic (particularly calcium) overload of the postsynaptic region, desensitisation and depolarisation block of receptors, and a slow degenerative endplate myopathy with loss of junctional folds and nerve-terminal encroachment. The net effect is impaired safety margin of neuromuscular transmission producing fatigable weakness, compounded by structural endplate damage; because the primary problem is failure to clear acetylcholine, anticholinesterase drugs aggravate rather than relieve the defect.",
+  "additionalDifferentials": [
+   "Other congenital myasthenic syndromes, particularly the slow-channel syndrome, which shares a repetitive CMAP and worsens with anticholinesterases",
+   "DOK7 and other postsynaptic limb-girdle congenital myasthenic syndromes",
+   "Autoimmune myasthenia gravis (seronegative in young children) and neonatal transient myasthenia",
+   "Spinal muscular atrophy and other early-onset motor neuron or anterior horn disorders",
+   "Congenital myopathies and congenital muscular dystrophies presenting with hypotonia and ptosis",
+   "Infantile botulism and other presynaptic transmission disorders"
+  ],
+  "additionalInvestigations": [
+   "Repetitive nerve stimulation showing a decremental response and, characteristically, a repetitive CMAP after a single stimulus",
+   "Single-fibre electromyography demonstrating increased jitter and blocking",
+   "Targeted COLQ sequencing within a congenital myasthenic syndrome gene panel and confirmatory biallelic variant analysis",
+   "Slit-lamp or bedside assessment of the pupillary light response to document the slow pupil",
+   "Serum acetylcholine receptor and MuSK antibodies to exclude autoimmune myasthenia",
+   "Spine imaging and formal respiratory function testing including overnight oximetry where indicated"
+  ],
+  "redFlags": [
+   "Clinical deterioration or cholinergic crisis after a trial of anticholinesterase medication",
+   "Progressive respiratory insufficiency, nocturnal hypoventilation or recurrent aspiration",
+   "Rapidly progressive scoliosis or rigid-spine deformity compromising ventilation",
+   "Bulbar weakness with feeding difficulty and failure to thrive in infancy"
+  ],
+  "prognosis": "Long-term outlook is variable and depends on disease severity and respiratory involvement; many patients stabilise or improve with sympathomimetic therapy, but some experience progressive weakness, spinal deformity and respiratory compromise requiring ventilatory support. Avoidance of anticholinesterase drugs is essential to prevent iatrogenic deterioration.",
+  "pitfalls": [
+   "Misdiagnosing the disorder as autoimmune myasthenia and prescribing an anticholinesterase, which characteristically worsens COLQ-CMS.",
+   "Interpreting a repetitive CMAP as artefact rather than recognising it as a diagnostic clue shared only with the slow-channel syndrome.",
+   "Overlooking the slow pupillary light response, a useful and easily missed bedside sign.",
+   "Failing to distinguish this synaptic subtype from postsynaptic subtypes such as DOK7 that also respond to salbutamol but tolerate different adjuncts."
+  ],
+  "references": [
+   "Standard neurology and neuromuscular textbooks",
+   "Peripheral nerve and neuromuscular junction disorder references",
+   "Congenital myasthenic syndrome clinical practice guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Sympathomimetic therapy with salbutamol or ephedrine as the pharmacological mainstay",
+   "Strictly avoid acetylcholinesterase inhibitors such as pyridostigmine, which are ineffective and worsen endplate injury",
+   "Respiratory surveillance with overnight oximetry and lung-function testing, and non-invasive ventilation for hypoventilation or crises",
+   "Physiotherapy and orthopaedic management of scoliosis and contractures",
+   "Confirm the diagnosis by biallelic COLQ analysis and provide genetic counselling for this autosomal recessive disorder",
+   "Coordinated care through a specialist neuromuscular multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "colq_congenital_myasthenic_syndrome-pathway",
+   "title": "COLQ-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "COLQ encodes the collagenic tail (ColQ) that anchors acetylcholinesterase within the synaptic basal lamina; loss of function produces a synaptic (endplate) acetylcholinesterase deficiency rather than a receptor or presynaptic defect.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Clinical deterioration or cholinergic crisis after a trial of anticholinesterase medication",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Repetitive nerve stimulation showing a decremental response and, characteristically, a repetitive CMAP after a single stimulus, Single-fibre electromyography demonstrating increased jitter and blocking, Targeted COLQ"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Sympathomimetic therapy with salbutamol or ephedrine as the pharmacological mainstay"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the disorder as autoimmune myasthenia and prescribing an anticholinesterase, which characteristically worsens COLQ-CMS."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of colq-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "colq_congenital_myasthenic_syndrome-matrix",
+   "title": "COLQ-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "COLQ encodes the collagenic tail (ColQ) that anchors acetylcholinesterase within the synaptic basal lamina; loss of function",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "COLQ-related congenital myasthenic syndrome is a synaptic (endplate) disorder caused by biallelic loss-of-function variants in COLQ, the gene encoding the collagen-like tail subunit that tethers the catalytic subunits of acetylcholinesterase to the synaptic basal lamina of the neuromuscular junction. ColQ both anchors the enzyme in the synaptic cleft, via interaction with perlecan/dystroglycan and MuSK, and clusters it opposite the postsynaptic folds. When ColQ is absent or non-functional, acetylcholinesterase cannot be positioned in the cleft, so released acetylcholine is not hydrolysed and lingers, repeatedly reactivating acetylcholine receptors. This causes cationic (particularly calcium) overload of the postsynaptic region, desensitisation and depolarisation block of receptors, and a slow degenerative endplate myopathy with loss of junctional folds and nerve-terminal encroachment. The net effect is impaired safety margin of neuromuscular transmission producing fatigable weakness, compounded by structural endplate damage; because the primary problem is failure to clear acetylcholine, anticholinesterase drugs aggravate rather than relieve the defect.",
-    "additionalDifferentials": [
-      "Other congenital myasthenic syndromes, particularly the slow-channel syndrome, which shares a repetitive CMAP and worsens with anticholinesterases",
-      "DOK7 and other postsynaptic limb-girdle congenital myasthenic syndromes",
-      "Autoimmune myasthenia gravis (seronegative in young children) and neonatal transient myasthenia",
-      "Spinal muscular atrophy and other early-onset motor neuron or anterior horn disorders",
-      "Congenital myopathies and congenital muscular dystrophies presenting with hypotonia and ptosis",
-      "Infantile botulism and other presynaptic transmission disorders"
+    [
+     "Key Investigations",
+     "Repetitive nerve stimulation showing a decremental response and, characteristically, a repetitive CMAP after a single stimulus,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Repetitive nerve stimulation showing a decremental response and, characteristically, a repetitive CMAP after a single stimulus",
-      "Single-fibre electromyography demonstrating increased jitter and blocking",
-      "Targeted COLQ sequencing within a congenital myasthenic syndrome gene panel and confirmatory biallelic variant analysis",
-      "Slit-lamp or bedside assessment of the pupillary light response to document the slow pupil",
-      "Serum acetylcholine receptor and MuSK antibodies to exclude autoimmune myasthenia",
-      "Spine imaging and formal respiratory function testing including overnight oximetry where indicated"
+    [
+     "Primary Differentials",
+     "Other congenital myasthenic syndromes, particularly the slow-channel syndrome, which shares a repetitive CMAP and worsens with",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Clinical deterioration or cholinergic crisis after a trial of anticholinesterase medication",
-      "Progressive respiratory insufficiency, nocturnal hypoventilation or recurrent aspiration",
-      "Rapidly progressive scoliosis or rigid-spine deformity compromising ventilation",
-      "Bulbar weakness with feeding difficulty and failure to thrive in infancy"
+    [
+     "Management Strategy",
+     "Sympathomimetic therapy with salbutamol or ephedrine as the pharmacological mainstay",
+     "Core treatment modality"
     ],
-    "prognosis": "Long-term outlook is variable and depends on disease severity and respiratory involvement; many patients stabilise or improve with sympathomimetic therapy, but some experience progressive weakness, spinal deformity and respiratory compromise requiring ventilatory support. Avoidance of anticholinesterase drugs is essential to prevent iatrogenic deterioration.",
-    "pitfalls": [
-      "Misdiagnosing the disorder as autoimmune myasthenia and prescribing an anticholinesterase, which characteristically worsens COLQ-CMS.",
-      "Interpreting a repetitive CMAP as artefact rather than recognising it as a diagnostic clue shared only with the slow-channel syndrome.",
-      "Overlooking the slow pupillary light response, a useful and easily missed bedside sign.",
-      "Failing to distinguish this synaptic subtype from postsynaptic subtypes such as DOK7 that also respond to salbutamol but tolerate different adjuncts."
-    ],
-    "references": [
-      "Standard neurology and neuromuscular textbooks",
-      "Peripheral nerve and neuromuscular junction disorder references",
-      "Congenital myasthenic syndrome clinical practice guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Sympathomimetic therapy with salbutamol or ephedrine as the pharmacological mainstay",
-      "Strictly avoid acetylcholinesterase inhibitors such as pyridostigmine, which are ineffective and worsen endplate injury",
-      "Respiratory surveillance with overnight oximetry and lung-function testing, and non-invasive ventilation for hypoventilation or crises",
-      "Physiotherapy and orthopaedic management of scoliosis and contractures",
-      "Confirm the diagnosis by biallelic COLQ analysis and provide genetic counselling for this autosomal recessive disorder",
-      "Coordinated care through a specialist neuromuscular multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the disorder as autoimmune myasthenia and prescribing an anticholinesterase, which characteristically worsens",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for colq-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "colq-congenital-myasthenic-syndrome-diagram",
+   "title": "COLQ-related congenital myasthenic syndrome (endplate acetylcholinesterase deficiency): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

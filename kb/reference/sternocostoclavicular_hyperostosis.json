@@ -1,79 +1,174 @@
 {
-  "id": "sternocostoclavicular_hyperostosis",
-  "name": "Sternocostoclavicular hyperostosis",
-  "aliases": [
-    "SCCH",
-    "sternoclavicular hyperostosis",
-    "acquired hyperostosis syndrome",
-    "anterior chest wall hyperostosis"
+ "id": "sternocostoclavicular_hyperostosis",
+ "name": "Sternocostoclavicular hyperostosis",
+ "aliases": [
+  "SCCH",
+  "sternoclavicular hyperostosis",
+  "acquired hyperostosis syndrome",
+  "anterior chest wall hyperostosis"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Musculoskeletal",
+ "specialty": "Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Firestein & Kelley's Textbook of Rheumatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A chronic hyperostotic and osteitic process centred on the sternum, medial clavicles and first ribs, causing anterior chest wall pain and bony swelling",
+   "Considered by many to be the anterior chest wall expression of SAPHO syndrome, and frequently accompanied by palmoplantar pustulosis",
+   "Presents with recurrent episodes of anterior chest pain and firm swelling over the sternoclavicular region, sometimes with restricted shoulder girdle movement",
+   "Bone scintigraphy classically demonstrates increased tracer uptake in the 'bull's head' distribution across the sternoclavicular joints",
+   "The process is sterile; cultures are negative and it is not a pyogenic infection despite the osteitis",
+   "Ossification and hyperostosis can compress adjacent structures, occasionally causing subclavian vein compression and venous congestion of the arm",
+   "Managed like SAPHO with NSAIDs first-line, and bisphosphonates or DMARDs including TNF inhibition for refractory disease"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Musculoskeletal",
-  "specialty": "Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Firestein & Kelley's Textbook of Rheumatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A chronic hyperostotic and osteitic process centred on the sternum, medial clavicles and first ribs, causing anterior chest wall pain and bony swelling",
-      "Considered by many to be the anterior chest wall expression of SAPHO syndrome, and frequently accompanied by palmoplantar pustulosis",
-      "Presents with recurrent episodes of anterior chest pain and firm swelling over the sternoclavicular region, sometimes with restricted shoulder girdle movement",
-      "Bone scintigraphy classically demonstrates increased tracer uptake in the 'bull's head' distribution across the sternoclavicular joints",
-      "The process is sterile; cultures are negative and it is not a pyogenic infection despite the osteitis",
-      "Ossification and hyperostosis can compress adjacent structures, occasionally causing subclavian vein compression and venous congestion of the arm",
-      "Managed like SAPHO with NSAIDs first-line, and bisphosphonates or DMARDs including TNF inhibition for refractory disease"
+  "pathophysiology": "Sternocostoclavicular hyperostosis is a chronic sterile osteitis with reactive new bone formation affecting the sternum, medial clavicles and first ribs, and their connecting joints and ligaments. It is regarded as part of the SAPHO/autoinflammatory spectrum, in which dysregulated innate immunity drives neutrophilic bone inflammation and progressive hyperostosis and ossification of the anterior chest wall soft tissues and joints. The association with palmoplantar pustulosis and severe acne, and the proposed role of skin commensals such as Cutibacterium acnes as immune triggers, mirror the mechanisms of SAPHO syndrome. Progressive ossification produces bony expansion that can bridge joints and encroach on neurovascular structures at the thoracic inlet.",
+  "additionalDifferentials": [
+   "SAPHO syndrome (broader multifocal disease)",
+   "Sternoclavicular septic arthritis or osteomyelitis",
+   "Metastatic disease of the sternum or clavicle",
+   "Paget disease of bone",
+   "Condensing osteitis of the clavicle",
+   "Ankylosing spondylitis with anterior chest wall involvement"
+  ],
+  "additionalInvestigations": [
+   "Bone scintigraphy to demonstrate the anterior chest wall 'bull's head' uptake pattern",
+   "CT of the anterior chest wall to define hyperostosis, sclerosis and ossification",
+   "MRI to assess active osteitis and adjacent soft-tissue involvement",
+   "Inflammatory markers (ESR, CRP), often mildly to moderately raised",
+   "Venography or vascular imaging if subclavian vein compression is suspected"
+  ],
+  "redFlags": [
+   "Features of true infection (fever, rigors, positive cultures) requiring exclusion of septic arthritis or osteomyelitis",
+   "Destructive lesion or mass raising concern for malignancy",
+   "Arm swelling and venous distension suggesting subclavian vein compression or thrombosis",
+   "Rapidly progressive deformity or neurological symptoms at the thoracic inlet"
+  ],
+  "prognosis": "The condition follows a chronic relapsing course; pain and swelling often persist over years, and although it is benign, progressive hyperostosis can cause lasting anterior chest wall discomfort and occasionally vascular compression.",
+  "pitfalls": [
+   "Misdiagnosing sterile osteitis as pyogenic infection and giving prolonged antibiotics or surgery",
+   "Failing to recognise the link with SAPHO syndrome and palmoplantar pustulosis",
+   "Overlooking subclavian vein compression as a cause of arm swelling",
+   "Attributing anterior chest pain to a cardiac cause and missing the bone pathology"
+  ],
+  "references": [
+   "Firestein & Kelley's Textbook of Rheumatology",
+   "Oxford Textbook of Rheumatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "NSAIDs as first-line anti-inflammatory analgesia for anterior chest wall pain and osteitis",
+   "Bisphosphonates (e.g. pamidronate) to suppress bone inflammation and reduce hyperostotic pain in refractory disease",
+   "Treat associated skin disease, particularly palmoplantar pustulosis and severe acne, given the SAPHO/autoinflammatory link",
+   "Conventional DMARDs (methotrexate, sulfasalazine) or TNF-alpha inhibitors for disease unresponsive to NSAIDs and bisphosphonates",
+   "Trial of prolonged antibiotics targeting Cutibacterium acnes in selected cases as an immune trigger, recognising the process is sterile",
+   "Physiotherapy to maintain shoulder girdle mobility and limit functional restriction",
+   "Surveillance for subclavian vein compression, with vascular or thoracic surgical referral if venous congestion of the arm develops",
+   "Rheumatology-led multidisciplinary care with dermatology input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sternocostoclavicular_hyperostosis-pathway",
+   "title": "Sternocostoclavicular hyperostosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A chronic hyperostotic and osteitic process centred on the sternum, medial clavicles and first ribs, causing anterior chest wall pain and bony swelling",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features of true infection (fever, rigors, positive cultures) requiring exclusion of septic arthritis or osteomyelitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bone scintigraphy to demonstrate the anterior chest wall 'bull's head' uptake pattern, CT of the anterior chest wall to define hyperostosis, sclerosis and ossification, MRI to assess active osteitis and adjacent"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: NSAIDs as first-line anti-inflammatory analgesia for anterior chest wall pain and osteitis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing sterile osteitis as pyogenic infection and giving prolonged antibiotics or surgery"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sternocostoclavicular hyperostosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sternocostoclavicular_hyperostosis-matrix",
+   "title": "Sternocostoclavicular hyperostosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A chronic hyperostotic and osteitic process centred on the sternum, medial clavicles and first ribs, causing anterior chest wall",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sternocostoclavicular hyperostosis is a chronic sterile osteitis with reactive new bone formation affecting the sternum, medial clavicles and first ribs, and their connecting joints and ligaments. It is regarded as part of the SAPHO/autoinflammatory spectrum, in which dysregulated innate immunity drives neutrophilic bone inflammation and progressive hyperostosis and ossification of the anterior chest wall soft tissues and joints. The association with palmoplantar pustulosis and severe acne, and the proposed role of skin commensals such as Cutibacterium acnes as immune triggers, mirror the mechanisms of SAPHO syndrome. Progressive ossification produces bony expansion that can bridge joints and encroach on neurovascular structures at the thoracic inlet.",
-    "additionalDifferentials": [
-      "SAPHO syndrome (broader multifocal disease)",
-      "Sternoclavicular septic arthritis or osteomyelitis",
-      "Metastatic disease of the sternum or clavicle",
-      "Paget disease of bone",
-      "Condensing osteitis of the clavicle",
-      "Ankylosing spondylitis with anterior chest wall involvement"
+    [
+     "Key Investigations",
+     "Bone scintigraphy to demonstrate the anterior chest wall 'bull's head' uptake pattern, CT of the anterior chest wall to define",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bone scintigraphy to demonstrate the anterior chest wall 'bull's head' uptake pattern",
-      "CT of the anterior chest wall to define hyperostosis, sclerosis and ossification",
-      "MRI to assess active osteitis and adjacent soft-tissue involvement",
-      "Inflammatory markers (ESR, CRP), often mildly to moderately raised",
-      "Venography or vascular imaging if subclavian vein compression is suspected"
+    [
+     "Primary Differentials",
+     "SAPHO syndrome (broader multifocal disease), Sternoclavicular septic arthritis or osteomyelitis, Metastatic disease of the",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features of true infection (fever, rigors, positive cultures) requiring exclusion of septic arthritis or osteomyelitis",
-      "Destructive lesion or mass raising concern for malignancy",
-      "Arm swelling and venous distension suggesting subclavian vein compression or thrombosis",
-      "Rapidly progressive deformity or neurological symptoms at the thoracic inlet"
+    [
+     "Management Strategy",
+     "NSAIDs as first-line anti-inflammatory analgesia for anterior chest wall pain and osteitis",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition follows a chronic relapsing course; pain and swelling often persist over years, and although it is benign, progressive hyperostosis can cause lasting anterior chest wall discomfort and occasionally vascular compression.",
-    "pitfalls": [
-      "Misdiagnosing sterile osteitis as pyogenic infection and giving prolonged antibiotics or surgery",
-      "Failing to recognise the link with SAPHO syndrome and palmoplantar pustulosis",
-      "Overlooking subclavian vein compression as a cause of arm swelling",
-      "Attributing anterior chest pain to a cardiac cause and missing the bone pathology"
-    ],
-    "references": [
-      "Firestein & Kelley's Textbook of Rheumatology",
-      "Oxford Textbook of Rheumatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "NSAIDs as first-line anti-inflammatory analgesia for anterior chest wall pain and osteitis",
-      "Bisphosphonates (e.g. pamidronate) to suppress bone inflammation and reduce hyperostotic pain in refractory disease",
-      "Treat associated skin disease, particularly palmoplantar pustulosis and severe acne, given the SAPHO/autoinflammatory link",
-      "Conventional DMARDs (methotrexate, sulfasalazine) or TNF-alpha inhibitors for disease unresponsive to NSAIDs and bisphosphonates",
-      "Trial of prolonged antibiotics targeting Cutibacterium acnes in selected cases as an immune trigger, recognising the process is sterile",
-      "Physiotherapy to maintain shoulder girdle mobility and limit functional restriction",
-      "Surveillance for subclavian vein compression, with vascular or thoracic surgical referral if venous congestion of the arm develops",
-      "Rheumatology-led multidisciplinary care with dermatology input"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing sterile osteitis as pyogenic infection and giving prolonged antibiotics or surgery",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sternocostoclavicular hyperostosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sternocostoclavicular-hyperostosis-diagram",
+   "title": "Sternocostoclavicular hyperostosis: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

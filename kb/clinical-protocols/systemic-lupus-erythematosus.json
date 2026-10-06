@@ -5,7 +5,23 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient rheumatology clinic, ward",
- "aliases": ["SLE", "lupus", "lupus flare", "lupus nephritis", "LN", "hydroxychloroquine", "HCQ", "belimumab", "anifrolumab", "ANA", "anti-dsDNA", "antiphospholipid", "APS", "LLDAS", "EULAR 2023 SLE"],
+ "aliases": [
+  "SLE",
+  "lupus",
+  "lupus flare",
+  "lupus nephritis",
+  "LN",
+  "hydroxychloroquine",
+  "HCQ",
+  "belimumab",
+  "anifrolumab",
+  "ANA",
+  "anti-dsDNA",
+  "antiphospholipid",
+  "APS",
+  "LLDAS",
+  "EULAR 2023 SLE"
+ ],
  "summary": "Give hydroxychloroquine to every patient (up to 5 mg/kg actual body weight daily), keep maintenance prednisolone at 5 mg/day or less and stop it if possible, add immunosuppressants or biologics (belimumab, anifrolumab) early to spare steroids, and refer suspected lupus nephritis urgently for biopsy.",
  "sections": [
   {
@@ -92,19 +108,164 @@
   }
  ],
  "drugs": [
-  { "name": "Hydroxychloroquine", "dose": "200 to 400 mg orally daily; do not exceed 5 mg/kg actual body weight/day long term", "notes": "All patients. Reduce in CKD. Retinal screening." },
-  { "name": "Methylprednisolone (IV pulse)", "dose": "250 to 1000 mg IV once daily for 1 to 3 days", "notes": "Moderate to severe or organ-threatening flares; follow with oral taper." },
-  { "name": "Prednisolone", "dose": "About 0.3 to 0.5 mg/kg/day orally after pulses, tapered to 5 mg/day or less (ideally stopped)", "notes": "ACR 2025: reach 5 mg/day or less within 6 months. Bone protection." },
-  { "name": "Mycophenolate mofetil", "dose": "2 to 3 g/day orally in 2 divided doses for lupus nephritis induction; lower doses for maintenance", "notes": "Teratogenic: effective contraception; stop at least 6 weeks before conception. CBC monitoring." },
-  { "name": "Cyclophosphamide (Euro-Lupus low dose)", "dose": "500 mg IV every 2 weeks for 6 doses", "notes": "Nephritis or severe organ disease, then maintenance with mycophenolate or azathioprine. Gonadotoxic; discuss fertility preservation." },
-  { "name": "Azathioprine", "dose": "1 to 2 mg/kg/day orally (check TPMT activity first)", "notes": "Compatible with pregnancy. Avoid with allopurinol or febuxostat unless dose is reduced." },
-  { "name": "Belimumab", "dose": "10 mg/kg IV at weeks 0, 2 and 4, then every 4 weeks; or 200 mg subcutaneously weekly", "notes": "Add-on for active SLE and lupus nephritis." },
-  { "name": "Anifrolumab", "dose": "300 mg IV every 4 weeks", "notes": "Add-on for moderate to severe non-renal SLE, especially skin and joints; more herpes zoster." }
+  {
+   "name": "Hydroxychloroquine",
+   "dose": "200 to 400 mg orally daily; do not exceed 5 mg/kg actual body weight/day long term",
+   "notes": "All patients. Reduce in CKD. Retinal screening."
+  },
+  {
+   "name": "Methylprednisolone (IV pulse)",
+   "dose": "250 to 1000 mg IV once daily for 1 to 3 days",
+   "notes": "Moderate to severe or organ-threatening flares; follow with oral taper."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "About 0.3 to 0.5 mg/kg/day orally after pulses, tapered to 5 mg/day or less (ideally stopped)",
+   "notes": "ACR 2025: reach 5 mg/day or less within 6 months. Bone protection."
+  },
+  {
+   "name": "Mycophenolate mofetil",
+   "dose": "2 to 3 g/day orally in 2 divided doses for lupus nephritis induction; lower doses for maintenance",
+   "notes": "Teratogenic: effective contraception; stop at least 6 weeks before conception. CBC monitoring."
+  },
+  {
+   "name": "Cyclophosphamide (Euro-Lupus low dose)",
+   "dose": "500 mg IV every 2 weeks for 6 doses",
+   "notes": "Nephritis or severe organ disease, then maintenance with mycophenolate or azathioprine. Gonadotoxic; discuss fertility preservation."
+  },
+  {
+   "name": "Azathioprine",
+   "dose": "1 to 2 mg/kg/day orally (check TPMT activity first)",
+   "notes": "Compatible with pregnancy. Avoid with allopurinol or febuxostat unless dose is reduced."
+  },
+  {
+   "name": "Belimumab",
+   "dose": "10 mg/kg IV at weeks 0, 2 and 4, then every 4 weeks; or 200 mg subcutaneously weekly",
+   "notes": "Add-on for active SLE and lupus nephritis."
+  },
+  {
+   "name": "Anifrolumab",
+   "dose": "300 mg IV every 4 weeks",
+   "notes": "Add-on for moderate to severe non-renal SLE, especially skin and joints; more herpes zoster."
+  }
  ],
  "sources": [
-  { "org": "EULAR", "title": "EULAR recommendations for the management of systemic lupus erythematosus: 2023 update", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37827694/" },
-  { "org": "American College of Rheumatology", "title": "2025 American College of Rheumatology (ACR) guideline for the treatment of systemic lupus erythematosus", "year": 2025, "url": "https://pubmed.ncbi.nlm.nih.gov/41182321/" },
-  { "org": "Mediterranean Journal of Rheumatology", "title": "EULAR 2023 recommendations for the management of systemic lupus erythematosus: one step forward (editorial)", "year": 2024, "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11082770/" }
+  {
+   "org": "EULAR",
+   "title": "EULAR recommendations for the management of systemic lupus erythematosus: 2023 update",
+   "year": 2023,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/37827694/"
+  },
+  {
+   "org": "American College of Rheumatology",
+   "title": "2025 American College of Rheumatology (ACR) guideline for the treatment of systemic lupus erythematosus",
+   "year": 2025,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/41182321/"
+  },
+  {
+   "org": "Mediterranean Journal of Rheumatology",
+   "title": "EULAR 2023 recommendations for the management of systemic lupus erythematosus: one step forward (editorial)",
+   "year": 2024,
+   "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11082770/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "systemic-lupus-erythematosus-pathway",
+   "title": "Systemic lupus erythematosus (SLE): diagnosis and treatment Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Multisystem autoimmune disease, mostly in women aged 15 to 45: fatigue, fever, inflammatory arthritis, photosensitive or malar rash, oral ulcers, non-scarring alopecia, serositis, Raynaud phenomenon, cytopenias, nephritis and",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "2019 EULAR/ACR classification: ANA titre 1:80 or more is the entry criterion, then weighted clinical and immunological criteria totalling 10 or more points. A negative ANA makes SLE very unlikely.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "ANA, anti-dsDNA, anti-Sm, anti-Ro/SSA and anti-La/SSB, C3 and C4, antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta2 glycoprotein I)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Lupus nephritis: urgent nephrology referral. Induction with mycophenolate or low-dose IV cyclophosphamide (Euro-Lupus) plus glucocorticoid pulses; consider add-on belimumab or a calcineurin inhibitor (voclosporin or tacrolimus) (EULAR"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Assess disease activity at every visit (for example SLEDAI-2K) and damage annually. Target remission or low disease activity on the lowest glucocorticoid dose, ideally 5 mg/day or less."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for systemic lupus erythematosus (sle): diagnosis and treatment."
+  }
+ ],
+ "tables": [
+  {
+   "id": "systemic-lupus-erythematosus-summary-matrix",
+   "title": "Systemic lupus erythematosus (SLE): diagnosis and treatment Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Multisystem autoimmune disease, mostly in women aged 15 to 45: fatigue, fever, inflammatory arthritis, photosensitive or malar rash, oral",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Lupus nephritis: urgent nephrology referral. Induction with mycophenolate or low-dose IV cyclophosphamide (Euro-Lupus) plus glucocorticoid",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "ANA, anti-dsDNA, anti-Sm, anti-Ro/SSA and anti-La/SSB, C3 and C4, antiphospholipid antibodies (lupus anticoagulant, anticardiolipin,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Hydroxychloroquine: 200 to 400 mg orally daily; do not exceed 5 mg/kg actual body weight/day long term",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Attributing fever to a flare without excluding infection.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for systemic lupus erythematosus (sle): diagnosis and treatment."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "systemic-lupus-erythematosus-diagram",
+   "title": "Systemic lupus erythematosus (SLE): diagnosis and treatment: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

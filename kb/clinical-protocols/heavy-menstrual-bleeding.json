@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, gynaecology outpatient",
- "aliases": ["HMB", "menorrhagia", "heavy periods", "AUB", "abnormal uterine bleeding", "PALM-COEIN", "LNG-IUS for HMB", "Mirena", "tranexamic acid", "fibroids", "adenomyosis", "NG88"],
+ "aliases": [
+  "HMB",
+  "menorrhagia",
+  "heavy periods",
+  "AUB",
+  "abnormal uterine bleeding",
+  "PALM-COEIN",
+  "LNG-IUS for HMB",
+  "Mirena",
+  "tranexamic acid",
+  "fibroids",
+  "adenomyosis",
+  "NG88"
+ ],
  "summary": "HMB is menstrual loss that interferes with quality of life. Check FBC in all, start drug treatment without investigation when risk of pathology is low, offer an LNG-IUS first line, otherwise tranexamic acid, NSAIDs, combined hormonal contraception or cyclical progestogen; use hysteroscopy or ultrasound when structural or endometrial pathology is suspected.",
  "sections": [
   {
@@ -85,16 +98,148 @@
   }
  ],
  "drugs": [
-  { "name": "Tranexamic acid", "dose": "1 g orally three times daily for up to 4 days per cycle, starting at the onset of bleeding (maximum 4 g per day)", "notes": "Non-hormonal. Avoid with active or previous thromboembolism; reduce dose in renal impairment." },
-  { "name": "Mefenamic acid", "dose": "500 mg orally three times daily from the first day of bleeding until heavy bleeding settles", "notes": "NSAID; also relieves dysmenorrhoea. Avoid with peptic ulcer or renal impairment." },
-  { "name": "Levonorgestrel intrauterine system", "dose": "52 mg intrauterine system", "notes": "First line for HMB without significant pathology. Replace according to the product licence." },
-  { "name": "Combined oral contraceptive", "dose": "Monophasic COC (for example ethinylestradiol 30 micrograms with levonorgestrel 150 micrograms) daily; packets can be taken back to back", "notes": "Check medical eligibility (UKMEC or WHO MEC) first." },
-  { "name": "Norethisterone (cyclical)", "dose": "5 mg orally three times daily from day 5 to day 26 of the cycle", "notes": "Cyclical oral progestogen; not a reliable contraceptive." },
-  { "name": "Ulipristal acetate (fibroids)", "dose": "5 mg orally once daily in intermittent courses of up to 3 months (up to 4 courses)", "notes": "Only when surgery and embolisation are unsuitable or failed. Liver function before, monthly for the first 2 courses, and before each course." }
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g orally three times daily for up to 4 days per cycle, starting at the onset of bleeding (maximum 4 g per day)",
+   "notes": "Non-hormonal. Avoid with active or previous thromboembolism; reduce dose in renal impairment."
+  },
+  {
+   "name": "Mefenamic acid",
+   "dose": "500 mg orally three times daily from the first day of bleeding until heavy bleeding settles",
+   "notes": "NSAID; also relieves dysmenorrhoea. Avoid with peptic ulcer or renal impairment."
+  },
+  {
+   "name": "Levonorgestrel intrauterine system",
+   "dose": "52 mg intrauterine system",
+   "notes": "First line for HMB without significant pathology. Replace according to the product licence."
+  },
+  {
+   "name": "Combined oral contraceptive",
+   "dose": "Monophasic COC (for example ethinylestradiol 30 micrograms with levonorgestrel 150 micrograms) daily; packets can be taken back to back",
+   "notes": "Check medical eligibility (UKMEC or WHO MEC) first."
+  },
+  {
+   "name": "Norethisterone (cyclical)",
+   "dose": "5 mg orally three times daily from day 5 to day 26 of the cycle",
+   "notes": "Cyclical oral progestogen; not a reliable contraceptive."
+  },
+  {
+   "name": "Ulipristal acetate (fibroids)",
+   "dose": "5 mg orally once daily in intermittent courses of up to 3 months (up to 4 courses)",
+   "notes": "Only when surgery and embolisation are unsuitable or failed. Liver function before, monthly for the first 2 courses, and before each course."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Heavy menstrual bleeding: assessment and management (NG88)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng88/chapter/recommendations" },
-  { "org": "FIGO", "title": "The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions", "year": 2018, "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1002/ijgo.12666" }
+  {
+   "org": "NICE",
+   "title": "Heavy menstrual bleeding: assessment and management (NG88)",
+   "year": 2018,
+   "url": "https://www.nice.org.uk/guidance/ng88/chapter/recommendations"
+  },
+  {
+   "org": "FIGO",
+   "title": "The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions",
+   "year": 2018,
+   "url": "https://obgyn.onlinelibrary.wiley.com/doi/10.1002/ijgo.12666"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "heavy-menstrual-bleeding-pathway",
+   "title": "Heavy menstrual bleeding (HMB) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "HMB: excessive menstrual blood loss that interferes with physical, social, emotional or material quality of life. Aim to improve quality of life rather than measured blood loss.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "History: nature of bleeding; intermenstrual or postcoital bleeding; pelvic pain or pressure (fibroids, adenomyosis, polyps, endometrial pathology); impact; comorbidities; previous treatment; contraceptive and fertility wishes.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "FBC for all women with HMB, alongside treatment; treat iron deficiency."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Refer for specialist assessment. While waiting, offer tranexamic acid and/or NSAIDs."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Blind endometrial biopsy instead of hysteroscopy-directed sampling in women at risk of endometrial pathology."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for heavy menstrual bleeding (hmb)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "heavy-menstrual-bleeding-summary-matrix",
+   "title": "Heavy menstrual bleeding (HMB) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "HMB: excessive menstrual blood loss that interferes with physical, social, emotional or material quality of life. Aim to improve quality of",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Refer for specialist assessment. While waiting, offer tranexamic acid and/or NSAIDs.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "FBC for all women with HMB, alongside treatment; treat iron deficiency.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tranexamic acid: 1 g orally three times daily for up to 4 days per cycle, starting at the onset of bleeding (maximum 4 g per day)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Blind endometrial biopsy instead of hysteroscopy-directed sampling in women at risk of endometrial pathology.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for heavy menstrual bleeding (hmb)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "heavy-menstrual-bleeding-diagram",
+   "title": "Heavy menstrual bleeding (HMB): Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

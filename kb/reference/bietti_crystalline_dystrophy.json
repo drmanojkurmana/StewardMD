@@ -1,79 +1,174 @@
 {
-  "id": "bietti_crystalline_dystrophy",
-  "name": "Bietti crystalline dystrophy",
-  "aliases": [
-    "Bietti crystalline corneoretinal dystrophy",
-    "BCD",
-    "CYP4V2",
-    "crystalline retinopathy"
+ "id": "bietti_crystalline_dystrophy",
+ "name": "Bietti crystalline dystrophy",
+ "aliases": [
+  "Bietti crystalline corneoretinal dystrophy",
+  "BCD",
+  "CYP4V2",
+  "crystalline retinopathy"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive dystrophy caused by mutations in CYP4V2, a fatty-acid metabolism gene, with relatively high prevalence in East Asian populations",
+   "Characterised by numerous glistening yellow-white crystalline deposits scattered throughout the posterior pole, with retinal pigment epithelium and choriocapillaris atrophy",
+   "Crystals may also be seen at the corneoscleral limbus, and lipid crystalline inclusions can be found in circulating lymphocytes and other cells",
+   "Patients present in early adulthood with declining acuity, nyctalopia and progressive visual field constriction",
+   "Electroretinography deteriorates over time and can show a cone-rod or rod-cone pattern depending on stage",
+   "Optical coherence tomography demonstrates hyper-reflective crystalline dots with progressive outer retinal, retinal pigment epithelium and choroidal thinning",
+   "Management is supportive with genetic counselling and low-vision rehabilitation, with gene-directed therapy under investigation"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive dystrophy caused by mutations in CYP4V2, a fatty-acid metabolism gene, with relatively high prevalence in East Asian populations",
-      "Characterised by numerous glistening yellow-white crystalline deposits scattered throughout the posterior pole, with retinal pigment epithelium and choriocapillaris atrophy",
-      "Crystals may also be seen at the corneoscleral limbus, and lipid crystalline inclusions can be found in circulating lymphocytes and other cells",
-      "Patients present in early adulthood with declining acuity, nyctalopia and progressive visual field constriction",
-      "Electroretinography deteriorates over time and can show a cone-rod or rod-cone pattern depending on stage",
-      "Optical coherence tomography demonstrates hyper-reflective crystalline dots with progressive outer retinal, retinal pigment epithelium and choroidal thinning",
-      "Management is supportive with genetic counselling and low-vision rehabilitation, with gene-directed therapy under investigation"
+  "pathophysiology": "Bietti crystalline dystrophy results from biallelic mutations in CYP4V2, which encodes a cytochrome P450 enzyme involved in fatty-acid and corticosteroid metabolism. Impaired lipid processing leads to accumulation of crystalline lipid deposits within the retina, retinal pigment epithelium and other tissues, with secondary degeneration of photoreceptors, retinal pigment epithelium and the underlying choriocapillaris. Progressive atrophy of the outer retina and choroid produces the characteristic slowly advancing chorioretinal degeneration and visual decline.",
+  "additionalDifferentials": [
+   "Drug-induced crystalline retinopathy (for example tamoxifen, canthaxanthin)",
+   "Oxalosis and other metabolic crystalline retinopathies",
+   "Talc retinopathy from intravenous drug use",
+   "Retinitis pigmentosa and other rod-cone dystrophies",
+   "Choroideremia and gyrate atrophy",
+   "Cystinosis-related crystal deposition"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination documenting posterior pole crystalline deposits and atrophy",
+   "Optical coherence tomography for hyper-reflective crystals and outer retinal/choroidal thinning",
+   "Fundus autofluorescence to map retinal pigment epithelium and photoreceptor loss",
+   "Full-field electroretinography to assess and monitor cone and rod function",
+   "Molecular genetic testing for CYP4V2 mutations",
+   "Slit-lamp assessment for limbal crystals"
+  ],
+  "redFlags": [
+   "Progressive constriction of visual fields and night blindness indicating advancing degeneration",
+   "Rapid central acuity loss requiring reassessment and counselling",
+   "Systemic or drug history suggesting a treatable acquired crystalline retinopathy instead",
+   "Affected siblings who warrant screening given recessive inheritance"
+  ],
+  "prognosis": "The disorder is progressive, with gradual decline in acuity and visual field over decades and eventual severe visual impairment in many patients, though the rate is variable.",
+  "pitfalls": [
+   "Mistaking the crystalline deposits for a benign incidental finding or a drug-induced retinopathy without a full history",
+   "Assuming limbal crystals are always present, as they may be subtle or absent",
+   "Failing to counsel about recessive inheritance and sibling risk",
+   "Attributing early symptoms to refractive error rather than a retinal dystrophy"
+  ],
+  "references": [
+   "Ryan's Retina",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No established disease-modifying therapy; supportive low-vision rehabilitation with visual aids and support services",
+   "Regular monitoring with optical coherence tomography, fundus autofluorescence and electroretinography to track chorioretinal and photoreceptor loss",
+   "Detect and treat complications such as choroidal neovascularisation with anti-VEGF therapy, and manage cataract surgically",
+   "Photoprotection with ultraviolet-blocking eyewear and general retinal-health advice",
+   "Gene-directed therapy targeting CYP4V2 as an investigational, emerging option through specialist research pathways",
+   "Genetic counselling for autosomal recessive CYP4V2 inheritance with testing of at-risk relatives",
+   "Social support and registration for visual impairment as sight declines"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bietti_crystalline_dystrophy-pathway",
+   "title": "Bietti crystalline dystrophy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive dystrophy caused by mutations in CYP4V2, a fatty-acid metabolism gene, with relatively high prevalence in East Asian populations",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive constriction of visual fields and night blindness indicating advancing degeneration",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination documenting posterior pole crystalline deposits and atrophy, Optical coherence tomography for hyper-reflective crystals and outer retinal/choroidal thinning, Fundus autofluorescence to map"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No established disease-modifying therapy; supportive low-vision rehabilitation with visual aids and support services"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the crystalline deposits for a benign incidental finding or a drug-induced retinopathy without a full history"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bietti crystalline dystrophy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bietti_crystalline_dystrophy-matrix",
+   "title": "Bietti crystalline dystrophy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive dystrophy caused by mutations in CYP4V2, a fatty-acid metabolism gene, with relatively high prevalence in",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bietti crystalline dystrophy results from biallelic mutations in CYP4V2, which encodes a cytochrome P450 enzyme involved in fatty-acid and corticosteroid metabolism. Impaired lipid processing leads to accumulation of crystalline lipid deposits within the retina, retinal pigment epithelium and other tissues, with secondary degeneration of photoreceptors, retinal pigment epithelium and the underlying choriocapillaris. Progressive atrophy of the outer retina and choroid produces the characteristic slowly advancing chorioretinal degeneration and visual decline.",
-    "additionalDifferentials": [
-      "Drug-induced crystalline retinopathy (for example tamoxifen, canthaxanthin)",
-      "Oxalosis and other metabolic crystalline retinopathies",
-      "Talc retinopathy from intravenous drug use",
-      "Retinitis pigmentosa and other rod-cone dystrophies",
-      "Choroideremia and gyrate atrophy",
-      "Cystinosis-related crystal deposition"
+    [
+     "Key Investigations",
+     "Dilated fundus examination documenting posterior pole crystalline deposits and atrophy, Optical coherence tomography for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination documenting posterior pole crystalline deposits and atrophy",
-      "Optical coherence tomography for hyper-reflective crystals and outer retinal/choroidal thinning",
-      "Fundus autofluorescence to map retinal pigment epithelium and photoreceptor loss",
-      "Full-field electroretinography to assess and monitor cone and rod function",
-      "Molecular genetic testing for CYP4V2 mutations",
-      "Slit-lamp assessment for limbal crystals"
+    [
+     "Primary Differentials",
+     "Drug-induced crystalline retinopathy (for example tamoxifen, canthaxanthin), Oxalosis and other metabolic crystalline",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive constriction of visual fields and night blindness indicating advancing degeneration",
-      "Rapid central acuity loss requiring reassessment and counselling",
-      "Systemic or drug history suggesting a treatable acquired crystalline retinopathy instead",
-      "Affected siblings who warrant screening given recessive inheritance"
+    [
+     "Management Strategy",
+     "No established disease-modifying therapy; supportive low-vision rehabilitation with visual aids and support services",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is progressive, with gradual decline in acuity and visual field over decades and eventual severe visual impairment in many patients, though the rate is variable.",
-    "pitfalls": [
-      "Mistaking the crystalline deposits for a benign incidental finding or a drug-induced retinopathy without a full history",
-      "Assuming limbal crystals are always present, as they may be subtle or absent",
-      "Failing to counsel about recessive inheritance and sibling risk",
-      "Attributing early symptoms to refractive error rather than a retinal dystrophy"
-    ],
-    "references": [
-      "Ryan's Retina",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No established disease-modifying therapy; supportive low-vision rehabilitation with visual aids and support services",
-      "Regular monitoring with optical coherence tomography, fundus autofluorescence and electroretinography to track chorioretinal and photoreceptor loss",
-      "Detect and treat complications such as choroidal neovascularisation with anti-VEGF therapy, and manage cataract surgically",
-      "Photoprotection with ultraviolet-blocking eyewear and general retinal-health advice",
-      "Gene-directed therapy targeting CYP4V2 as an investigational, emerging option through specialist research pathways",
-      "Genetic counselling for autosomal recessive CYP4V2 inheritance with testing of at-risk relatives",
-      "Social support and registration for visual impairment as sight declines"
+    [
+     "Clinical Pitfall",
+     "Mistaking the crystalline deposits for a benign incidental finding or a drug-induced retinopathy without a full history",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bietti crystalline dystrophy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bietti-crystalline-dystrophy-diagram",
+   "title": "Bietti crystalline dystrophy: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

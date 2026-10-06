@@ -165,5 +165,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "severe-acute-malnutrition-pathway",
+   "title": "Severe acute malnutrition: inpatient care Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "SAM (6 to 59 months): weight-for-height or length below -3 SD, or MUAC below 11.5 cm (115 mm), or bilateral pitting oedema of the feet.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Hypoglycaemia is blood glucose below 54 mg/dL (3 mmol/L); if it cannot be measured, assume it is present. Give 50 mL of 10% glucose or sucrose orally or by NG tube, then F-75 as soon as possible and every 2 hours day and night.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Uncomplicated SAM (good appetite, alert, no complications) can be treated as an outpatient with RUTF and oral amoxicillin."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Stabilisation: F-75 at 130 mL/kg/day (100 mL/kg/day with severe oedema), about 100 kcal/kg/day: 11 mL/kg every 2 hours on days 1 and 2, 16 mL/kg every 3 hours on days 3 to 5, 22 mL/kg every 4 hours from day 6. Continue breastfeeding."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Monitor temperature, pulse, respiration, glucose, feed intake, vomiting and stools closely in the first 48 hours; weigh daily at the same time."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for severe acute malnutrition: inpatient care."
+  }
+ ],
+ "tables": [
+  {
+   "id": "severe-acute-malnutrition-summary-matrix",
+   "title": "Severe acute malnutrition: inpatient care Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "SAM (6 to 59 months): weight-for-height or length below -3 SD, or MUAC below 11.5 cm (115 mm), or bilateral pitting oedema of the feet.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Hypoglycaemia is blood glucose below 54 mg/dL (3 mmol/L); if it cannot be measured, assume it is present. Give 50 mL of 10% glucose or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "10% glucose: 50 mL orally or by NG tube if conscious; 5 mL/kg IV if unconscious or convulsing",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Standard ORS or rapid IV boluses as for well-nourished children: causes sodium overload and heart failure.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for severe acute malnutrition: inpatient care."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "severe-acute-malnutrition-diagram",
+   "title": "Severe acute malnutrition: inpatient care: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

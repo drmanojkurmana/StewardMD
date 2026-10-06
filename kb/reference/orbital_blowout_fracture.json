@@ -1,74 +1,169 @@
 {
-  "id": "orbital_blowout_fracture",
-  "name": "Orbital blowout fracture",
-  "aliases": [
-    "orbital floor fracture",
-    "blowout fracture"
+ "id": "orbital_blowout_fracture",
+ "name": "Orbital blowout fracture",
+ "aliases": [
+  "orbital floor fracture",
+  "blowout fracture"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Orbit and adnexa",
+ "specialty": "Ophthalmology / Oculoplastics / Maxillofacial surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / oculoplastic and maxillofacial references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A fracture of the orbital wall, most often the floor or medial wall, from blunt trauma without fracture of the orbital rim",
+   "Features include periorbital bruising, diplopia, restricted eye movements (especially vertical), enophthalmos and infraorbital numbness",
+   "Vertical diplopia from inferior rectus tethering is typical, and pain or nausea on upgaze suggests muscle entrapment",
+   "In children a white-eyed blowout fracture with muscle entrapment and marked oculocardiac reflex is a surgical emergency",
+   "CT of the orbit defines the fracture and any herniated or entrapped tissue",
+   "Many fractures are managed conservatively, with surgery for significant entrapment, enophthalmos or persistent diplopia"
   ],
-  "class": "non_infective",
-  "system": "Eye / Orbit and adnexa",
-  "specialty": "Ophthalmology / Oculoplastics / Maxillofacial surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / oculoplastic and maxillofacial references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A fracture of the orbital wall, most often the floor or medial wall, from blunt trauma without fracture of the orbital rim",
-      "Features include periorbital bruising, diplopia, restricted eye movements (especially vertical), enophthalmos and infraorbital numbness",
-      "Vertical diplopia from inferior rectus tethering is typical, and pain or nausea on upgaze suggests muscle entrapment",
-      "In children a white-eyed blowout fracture with muscle entrapment and marked oculocardiac reflex is a surgical emergency",
-      "CT of the orbit defines the fracture and any herniated or entrapped tissue",
-      "Many fractures are managed conservatively, with surgery for significant entrapment, enophthalmos or persistent diplopia"
+  "pathophysiology": "An orbital blowout fracture occurs when blunt force raises intra-orbital pressure or buckles the orbital walls, fracturing the thin floor or medial wall while sparing the sturdier rim. Orbital fat and the inferior rectus or its surrounding tissue can prolapse or become entrapped in the fracture, causing restricted motility and diplopia, while loss of orbital volume support leads to enophthalmos. Injury to the infraorbital nerve produces cheek and upper-lip numbness. In children the more elastic bone can snap shut and trap muscle (a trapdoor mechanism), causing ischaemia and a marked oculocardiac reflex.",
+  "additionalDifferentials": [
+   "Orbital rim or complex facial fracture",
+   "Traumatic extraocular muscle palsy without entrapment",
+   "Retrobulbar haemorrhage",
+   "Globe rupture or other ocular trauma",
+   "Orbital cellulitis (if delayed presentation with swelling)"
+  ],
+  "additionalInvestigations": [
+   "CT of the orbits and facial bones",
+   "Full ophthalmic assessment to exclude globe injury",
+   "Assessment of ocular motility, diplopia and enophthalmos",
+   "Testing of infraorbital nerve sensation",
+   "Monitoring for the oculocardiac reflex, especially in children"
+  ],
+  "redFlags": [
+   "White-eyed blowout fracture with entrapment and bradycardia in a child (surgical emergency)",
+   "Signs of globe rupture or retrobulbar haemorrhage with visual loss",
+   "Non-resolving diplopia or significant enophthalmos",
+   "A relative afferent pupillary defect indicating optic nerve injury"
+  ],
+  "prognosis": "Many blowout fractures do well with conservative care and resolution of early diplopia; timely surgery for entrapment or significant volume change gives good outcomes, whereas delayed treatment of paediatric entrapment risks permanent motility problems.",
+  "pitfalls": [
+   "Missing a paediatric trapdoor entrapment that needs urgent surgery",
+   "Overlooking an associated globe injury",
+   "Attributing early diplopia solely to swelling and not reassessing",
+   "Failing to warn against nose-blowing, which can cause orbital emphysema"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Maxillofacial trauma references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage many fractures conservatively: advise against nose-blowing, give nasal decongestants, cold compresses and analgesia, and add antibiotics where there is sinus involvement",
+   "Undertake surgical orbital wall reconstruction with an implant for significant enophthalmos, large defects or persistent symptomatic diplopia",
+   "Treat a paediatric white-eyed trapdoor fracture with muscle entrapment as a surgical emergency requiring prompt release to prevent ischaemic muscle damage",
+   "Perform full ophthalmic assessment to exclude globe injury, retinal damage and traumatic optic neuropathy",
+   "Monitor ocular motility, diplopia, enophthalmos and infraorbital nerve sensation serially",
+   "Watch for the oculocardiac reflex (bradycardia, nausea), particularly in children with entrapment",
+   "Refer to oculoplastic and maxillofacial surgery for operative planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "orbital_blowout_fracture-pathway",
+   "title": "Orbital blowout fracture: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A fracture of the orbital wall, most often the floor or medial wall, from blunt trauma without fracture of the orbital rim",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: White-eyed blowout fracture with entrapment and bradycardia in a child (surgical emergency)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT of the orbits and facial bones, Full ophthalmic assessment to exclude globe injury, Assessment of ocular motility, diplopia and enophthalmos"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage many fractures conservatively: advise against nose-blowing, give nasal decongestants, cold compresses and analgesia, and add antibiotics where there is sinus involvement"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing a paediatric trapdoor entrapment that needs urgent surgery"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of orbital blowout fracture."
+  }
+ ],
+ "tables": [
+  {
+   "id": "orbital_blowout_fracture-matrix",
+   "title": "Orbital blowout fracture: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A fracture of the orbital wall, most often the floor or medial wall, from blunt trauma without fracture of the orbital rim",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An orbital blowout fracture occurs when blunt force raises intra-orbital pressure or buckles the orbital walls, fracturing the thin floor or medial wall while sparing the sturdier rim. Orbital fat and the inferior rectus or its surrounding tissue can prolapse or become entrapped in the fracture, causing restricted motility and diplopia, while loss of orbital volume support leads to enophthalmos. Injury to the infraorbital nerve produces cheek and upper-lip numbness. In children the more elastic bone can snap shut and trap muscle (a trapdoor mechanism), causing ischaemia and a marked oculocardiac reflex.",
-    "additionalDifferentials": [
-      "Orbital rim or complex facial fracture",
-      "Traumatic extraocular muscle palsy without entrapment",
-      "Retrobulbar haemorrhage",
-      "Globe rupture or other ocular trauma",
-      "Orbital cellulitis (if delayed presentation with swelling)"
+    [
+     "Key Investigations",
+     "CT of the orbits and facial bones, Full ophthalmic assessment to exclude globe injury, Assessment of ocular motility, diplopia",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT of the orbits and facial bones",
-      "Full ophthalmic assessment to exclude globe injury",
-      "Assessment of ocular motility, diplopia and enophthalmos",
-      "Testing of infraorbital nerve sensation",
-      "Monitoring for the oculocardiac reflex, especially in children"
+    [
+     "Primary Differentials",
+     "Orbital rim or complex facial fracture, Traumatic extraocular muscle palsy without entrapment, Retrobulbar haemorrhage",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "White-eyed blowout fracture with entrapment and bradycardia in a child (surgical emergency)",
-      "Signs of globe rupture or retrobulbar haemorrhage with visual loss",
-      "Non-resolving diplopia or significant enophthalmos",
-      "A relative afferent pupillary defect indicating optic nerve injury"
+    [
+     "Management Strategy",
+     "Manage many fractures conservatively: advise against nose-blowing, give nasal decongestants, cold compresses and analgesia, and",
+     "Core treatment modality"
     ],
-    "prognosis": "Many blowout fractures do well with conservative care and resolution of early diplopia; timely surgery for entrapment or significant volume change gives good outcomes, whereas delayed treatment of paediatric entrapment risks permanent motility problems.",
-    "pitfalls": [
-      "Missing a paediatric trapdoor entrapment that needs urgent surgery",
-      "Overlooking an associated globe injury",
-      "Attributing early diplopia solely to swelling and not reassessing",
-      "Failing to warn against nose-blowing, which can cause orbital emphysema"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Maxillofacial trauma references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage many fractures conservatively: advise against nose-blowing, give nasal decongestants, cold compresses and analgesia, and add antibiotics where there is sinus involvement",
-      "Undertake surgical orbital wall reconstruction with an implant for significant enophthalmos, large defects or persistent symptomatic diplopia",
-      "Treat a paediatric white-eyed trapdoor fracture with muscle entrapment as a surgical emergency requiring prompt release to prevent ischaemic muscle damage",
-      "Perform full ophthalmic assessment to exclude globe injury, retinal damage and traumatic optic neuropathy",
-      "Monitor ocular motility, diplopia, enophthalmos and infraorbital nerve sensation serially",
-      "Watch for the oculocardiac reflex (bradycardia, nausea), particularly in children with entrapment",
-      "Refer to oculoplastic and maxillofacial surgery for operative planning"
+    [
+     "Clinical Pitfall",
+     "Missing a paediatric trapdoor entrapment that needs urgent surgery",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for orbital blowout fracture."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "orbital-blowout-fracture-diagram",
+   "title": "Orbital blowout fracture: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

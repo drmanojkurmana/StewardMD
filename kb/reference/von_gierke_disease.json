@@ -1,83 +1,178 @@
 {
-  "id": "von_gierke_disease",
-  "name": "Von Gierke disease (glycogen storage disease type I)",
-  "aliases": [
-    "glycogen storage disease type I",
-    "GSD I",
-    "glucose-6-phosphatase deficiency",
-    "G6PC deficiency",
-    "SLC37A4 deficiency",
-    "GSD Ia",
-    "GSD Ib"
+ "id": "von_gierke_disease",
+ "name": "Von Gierke disease (glycogen storage disease type I)",
+ "aliases": [
+  "glycogen storage disease type I",
+  "GSD I",
+  "glucose-6-phosphatase deficiency",
+  "G6PC deficiency",
+  "SLC37A4 deficiency",
+  "GSD Ia",
+  "GSD Ib"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
+   "Presents in infancy with severe fasting hypoglycaemia, marked hepatomegaly, and a doll-like facies with truncal adiposity",
+   "The biochemical hallmark is fasting hypoglycaemia accompanied by lactic acidosis, hyperuricaemia, and hyperlipidaemia (raised triglycerides and cholesterol)",
+   "Type Ib additionally causes neutropenia and impaired neutrophil function, predisposing to recurrent infections and inflammatory bowel-like disease",
+   "Long-term complications include hepatic adenomas (with malignant potential), nephropathy with proteinuria, gout, growth retardation, and osteopenia",
+   "Cornerstone of management is maintaining euglycaemia with frequent feeds and uncooked cornstarch therapy while restricting galactose and fructose",
+   "Lactate can serve as an alternative cerebral fuel, which may partly protect the brain during hypoglycaemic episodes"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
-      "Presents in infancy with severe fasting hypoglycaemia, marked hepatomegaly, and a doll-like facies with truncal adiposity",
-      "The biochemical hallmark is fasting hypoglycaemia accompanied by lactic acidosis, hyperuricaemia, and hyperlipidaemia (raised triglycerides and cholesterol)",
-      "Type Ib additionally causes neutropenia and impaired neutrophil function, predisposing to recurrent infections and inflammatory bowel-like disease",
-      "Long-term complications include hepatic adenomas (with malignant potential), nephropathy with proteinuria, gout, growth retardation, and osteopenia",
-      "Cornerstone of management is maintaining euglycaemia with frequent feeds and uncooked cornstarch therapy while restricting galactose and fructose",
-      "Lactate can serve as an alternative cerebral fuel, which may partly protect the brain during hypoglycaemic episodes"
+  "pathophysiology": "Glycogen storage disease type I is caused by deficiency of the glucose-6-phosphatase system, which catalyses the final common step releasing free glucose from glucose-6-phosphate in both glycogenolysis and gluconeogenesis. In type Ia the catalytic enzyme glucose-6-phosphatase is deficient, whereas in type Ib the microsomal transporter that moves glucose-6-phosphate into the endoplasmic reticulum is defective. As a result the liver, kidney, and intestine cannot release glucose during fasting, causing profound hypoglycaemia. Accumulating glucose-6-phosphate is diverted into glycolysis and the pentose phosphate and lipogenic pathways, generating excess lactate, uric acid, and triglycerides, while glycogen and fat accumulate in the liver and kidney. In type Ib, impaired glucose-6-phosphate transport also disturbs neutrophil function, producing neutropenia.",
+  "additionalDifferentials": [
+   "Other hepatic glycogen storage diseases (types III, VI, IX)",
+   "Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis defects",
+   "Hereditary fructose intolerance and galactosaemia",
+   "Fatty acid oxidation disorders causing fasting hypoglycaemia",
+   "Hyperinsulinism",
+   "Organic acidaemias with lactic acidosis"
+  ],
+  "additionalInvestigations": [
+   "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting",
+   "Liver ultrasonography and surveillance imaging for hepatic adenomas",
+   "Renal function tests and urinalysis for proteinuria and microalbuminuria",
+   "Full blood count for neutropenia in suspected type Ib",
+   "Molecular genetic testing of G6PC and SLC37A4",
+   "Bone densitometry for osteopenia in longstanding disease"
+  ],
+  "redFlags": [
+   "Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
+   "Severe lactic acidosis during metabolic decompensation",
+   "Rapidly enlarging or bleeding hepatic adenoma or features suggesting malignant transformation",
+   "Serious infection or gut inflammation in neutropenic type Ib patients"
+  ],
+  "prognosis": "With meticulous dietary control to maintain euglycaemia, most patients survive into adulthood with good outcomes; long-term risks of hepatic adenoma with malignant potential, progressive nephropathy, and, in type Ib, infective complications remain the major determinants of prognosis.",
+  "pitfalls": [
+   "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
+   "Overlooking neutropenia and its complications in type Ib",
+   "Missing surveillance for hepatic adenoma and renal disease during long-term follow-up",
+   "Giving galactose- or fructose-containing feeds that worsen the metabolic derangement"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics",
+   "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy",
+   "Restrict galactose and fructose and provide a complex-carbohydrate-based diet to limit lactate and lipid generation, guided by a metabolic dietitian",
+   "Treat metabolic sequelae: allopurinol for hyperuricaemia and gout, lipid-lowering therapy with statins or fibrates for hyperlipidaemia, and citrate supplementation for nephrolithiasis",
+   "In type Ib, correct neutropenia and neutrophil dysfunction with granulocyte colony-stimulating factor and treat the inflammatory-bowel-like disease",
+   "Give prompt intravenous dextrose during intercurrent illness, vomiting or hypoglycaemia to avert acute metabolic decompensation and lactic acidosis",
+   "Structured surveillance with serial hepatic imaging for adenomas, renal function and urinary protein monitoring with an ACE inhibitor for proteinuric nephropathy, and bone densitometry for osteopenia",
+   "Refer for liver transplantation for hepatic adenoma with malignant transformation or intractable metabolic control, and offer renal transplantation for end-stage nephropathy",
+   "Provide genetic counselling for autosomal recessive inheritance with testing of at-risk relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "von_gierke_disease-pathway",
+   "title": "Von Gierke disease (glycogen storage disease type I): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Blood glucose, lactate, uric acid, and lipid profile during controlled fasting, Liver ultrasonography and surveillance imaging for hepatic adenomas, Renal function tests and urinalysis for proteinuria and microalbuminuria"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of von gierke disease (glycogen storage disease type i)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "von_gierke_disease-matrix",
+   "title": "Von Gierke disease (glycogen storage disease type I): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Glycogen storage disease type I is caused by deficiency of the glucose-6-phosphatase system, which catalyses the final common step releasing free glucose from glucose-6-phosphate in both glycogenolysis and gluconeogenesis. In type Ia the catalytic enzyme glucose-6-phosphatase is deficient, whereas in type Ib the microsomal transporter that moves glucose-6-phosphate into the endoplasmic reticulum is defective. As a result the liver, kidney, and intestine cannot release glucose during fasting, causing profound hypoglycaemia. Accumulating glucose-6-phosphate is diverted into glycolysis and the pentose phosphate and lipogenic pathways, generating excess lactate, uric acid, and triglycerides, while glycogen and fat accumulate in the liver and kidney. In type Ib, impaired glucose-6-phosphate transport also disturbs neutrophil function, producing neutropenia.",
-    "additionalDifferentials": [
-      "Other hepatic glycogen storage diseases (types III, VI, IX)",
-      "Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis defects",
-      "Hereditary fructose intolerance and galactosaemia",
-      "Fatty acid oxidation disorders causing fasting hypoglycaemia",
-      "Hyperinsulinism",
-      "Organic acidaemias with lactic acidosis"
+    [
+     "Key Investigations",
+     "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting, Liver ultrasonography and surveillance imaging",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting",
-      "Liver ultrasonography and surveillance imaging for hepatic adenomas",
-      "Renal function tests and urinalysis for proteinuria and microalbuminuria",
-      "Full blood count for neutropenia in suspected type Ib",
-      "Molecular genetic testing of G6PC and SLC37A4",
-      "Bone densitometry for osteopenia in longstanding disease"
+    [
+     "Primary Differentials",
+     "Other hepatic glycogen storage diseases (types III, VI, IX), Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
-      "Severe lactic acidosis during metabolic decompensation",
-      "Rapidly enlarging or bleeding hepatic adenoma or features suggesting malignant transformation",
-      "Serious infection or gut inflammation in neutropenic type Ib patients"
+    [
+     "Management Strategy",
+     "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous",
+     "Core treatment modality"
     ],
-    "prognosis": "With meticulous dietary control to maintain euglycaemia, most patients survive into adulthood with good outcomes; long-term risks of hepatic adenoma with malignant potential, progressive nephropathy, and, in type Ib, infective complications remain the major determinants of prognosis.",
-    "pitfalls": [
-      "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
-      "Overlooking neutropenia and its complications in type Ib",
-      "Missing surveillance for hepatic adenoma and renal disease during long-term follow-up",
-      "Giving galactose- or fructose-containing feeds that worsen the metabolic derangement"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics",
-      "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy",
-      "Restrict galactose and fructose and provide a complex-carbohydrate-based diet to limit lactate and lipid generation, guided by a metabolic dietitian",
-      "Treat metabolic sequelae: allopurinol for hyperuricaemia and gout, lipid-lowering therapy with statins or fibrates for hyperlipidaemia, and citrate supplementation for nephrolithiasis",
-      "In type Ib, correct neutropenia and neutrophil dysfunction with granulocyte colony-stimulating factor and treat the inflammatory-bowel-like disease",
-      "Give prompt intravenous dextrose during intercurrent illness, vomiting or hypoglycaemia to avert acute metabolic decompensation and lactic acidosis",
-      "Structured surveillance with serial hepatic imaging for adenomas, renal function and urinary protein monitoring with an ACE inhibitor for proteinuric nephropathy, and bone densitometry for osteopenia",
-      "Refer for liver transplantation for hepatic adenoma with malignant transformation or intractable metabolic control, and offer renal transplantation for end-stage nephropathy",
-      "Provide genetic counselling for autosomal recessive inheritance with testing of at-risk relatives"
+    [
+     "Clinical Pitfall",
+     "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for von gierke disease (glycogen storage disease type i)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "von-gierke-disease-diagram",
+   "title": "Von Gierke disease (glycogen storage disease type I): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

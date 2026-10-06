@@ -1,77 +1,172 @@
 {
-  "id": "pes_anserine_bursitis",
-  "name": "Pes anserine bursitis",
-  "aliases": [
-    "pes anserinus bursitis",
-    "anserine bursopathy",
-    "medial knee bursitis",
-    "pes anserine pain syndrome"
+ "id": "pes_anserine_bursitis",
+ "name": "Pes anserine bursitis",
+ "aliases": [
+  "pes anserinus bursitis",
+  "anserine bursopathy",
+  "medial knee bursitis",
+  "pes anserine pain syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Soft tissue",
+ "specialty": "Sports Medicine / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Medial knee pain and tenderness below the joint line at the insertion of the pes anserinus (sartorius, gracilis and semitendinosus)",
+   "Common in middle-aged and older people, those with knee osteoarthritis or obesity, and in some athletes, especially with valgus loading",
+   "Pain is typically inferomedial to the joint line, helping distinguish it from medial joint-line pathology",
+   "Frequently overlaps with or is secondary to medial compartment osteoarthritis",
+   "Ultrasound may show bursal fluid, though the diagnosis is largely clinical and imaging often serves to exclude other causes",
+   "Management is conservative with load and activity modification and addressing biomechanics and the hamstrings and adductors with physiotherapy; corticosteroid injection may help resistant cases",
+   "Consider referred pain and intra-articular pathology when the picture is atypical"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Soft tissue",
-  "specialty": "Sports Medicine / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Medial knee pain and tenderness below the joint line at the insertion of the pes anserinus (sartorius, gracilis and semitendinosus)",
-      "Common in middle-aged and older people, those with knee osteoarthritis or obesity, and in some athletes, especially with valgus loading",
-      "Pain is typically inferomedial to the joint line, helping distinguish it from medial joint-line pathology",
-      "Frequently overlaps with or is secondary to medial compartment osteoarthritis",
-      "Ultrasound may show bursal fluid, though the diagnosis is largely clinical and imaging often serves to exclude other causes",
-      "Management is conservative with load and activity modification and addressing biomechanics and the hamstrings and adductors with physiotherapy; corticosteroid injection may help resistant cases",
-      "Consider referred pain and intra-articular pathology when the picture is atypical"
+  "pathophysiology": "The pes anserine bursa lies deep to the conjoined insertion of sartorius, gracilis and semitendinosus on the anteromedial proximal tibia. Friction and overload from repetitive knee flexion and extension, valgus stress, tight hamstrings and altered biomechanics irritate the bursa. It is commonly associated with medial compartment osteoarthritis and with obesity and can be difficult to separate from these, forming part of a medial knee overload picture rather than always an isolated inflammatory bursitis.",
+  "additionalDifferentials": [
+   "Medial compartment knee osteoarthritis",
+   "Medial meniscal pathology",
+   "Medial collateral ligament injury",
+   "Medial tibial stress fracture",
+   "Saphenous nerve (infrapatellar branch) irritation",
+   "Semimembranosus tendinopathy"
+  ],
+  "additionalInvestigations": [
+   "Clinical localisation of tenderness inferomedial to the joint line",
+   "Ultrasound to assess for bursal fluid and adjacent structures",
+   "MRI where meniscal, ligamentous or bony pathology is suspected",
+   "Weight-bearing radiographs to assess medial compartment osteoarthritis",
+   "Assessment of lower-limb biomechanics and alignment"
+  ],
+  "redFlags": [
+   "Features suggesting a fracture such as focal bone tenderness in an at-risk athlete",
+   "Locking or true mechanical symptoms suggesting meniscal pathology",
+   "Systemic features suggesting infection or inflammatory arthritis",
+   "A marked joint effusion suggesting intra-articular pathology"
+  ],
+  "prognosis": "Generally responds to conservative management and correction of contributing factors, although it may persist or recur when associated osteoarthritis or biomechanical factors remain.",
+  "pitfalls": [
+   "Attributing all medial knee pain to the bursa while missing osteoarthritis or meniscal disease",
+   "Over-reliance on imaging when the diagnosis is clinical",
+   "Neglecting biomechanical contributors and weight management",
+   "Repeated injection without addressing the underlying cause"
+  ],
+  "references": [
+   "Brukner and Khan's Clinical Sports Medicine",
+   "British Journal of Sports Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Conservative first-line care with relative rest, activity and load modification, ice and a short course of NSAIDs",
+   "Physiotherapy focused on hamstring and adductor stretching, quadriceps strengthening and correcting lower-limb biomechanics",
+   "Address contributing medial compartment osteoarthritis and reduce weight where obesity is a factor",
+   "Corticosteroid injection into the bursa for cases resistant to conservative measures",
+   "Footwear advice and orthoses to offload the medial knee and correct gait",
+   "Reassess for meniscal, ligamentous or intra-articular pathology if symptoms fail to settle"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pes_anserine_bursitis-pathway",
+   "title": "Pes anserine bursitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Medial knee pain and tenderness below the joint line at the insertion of the pes anserinus (sartorius, gracilis and semitendinosus)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting a fracture such as focal bone tenderness in an at-risk athlete",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical localisation of tenderness inferomedial to the joint line, Ultrasound to assess for bursal fluid and adjacent structures, MRI where meniscal, ligamentous or bony pathology is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Conservative first-line care with relative rest, activity and load modification, ice and a short course of NSAIDs"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing all medial knee pain to the bursa while missing osteoarthritis or meniscal disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pes anserine bursitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pes_anserine_bursitis-matrix",
+   "title": "Pes anserine bursitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Medial knee pain and tenderness below the joint line at the insertion of the pes anserinus (sartorius, gracilis and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The pes anserine bursa lies deep to the conjoined insertion of sartorius, gracilis and semitendinosus on the anteromedial proximal tibia. Friction and overload from repetitive knee flexion and extension, valgus stress, tight hamstrings and altered biomechanics irritate the bursa. It is commonly associated with medial compartment osteoarthritis and with obesity and can be difficult to separate from these, forming part of a medial knee overload picture rather than always an isolated inflammatory bursitis.",
-    "additionalDifferentials": [
-      "Medial compartment knee osteoarthritis",
-      "Medial meniscal pathology",
-      "Medial collateral ligament injury",
-      "Medial tibial stress fracture",
-      "Saphenous nerve (infrapatellar branch) irritation",
-      "Semimembranosus tendinopathy"
+    [
+     "Key Investigations",
+     "Clinical localisation of tenderness inferomedial to the joint line, Ultrasound to assess for bursal fluid and adjacent",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical localisation of tenderness inferomedial to the joint line",
-      "Ultrasound to assess for bursal fluid and adjacent structures",
-      "MRI where meniscal, ligamentous or bony pathology is suspected",
-      "Weight-bearing radiographs to assess medial compartment osteoarthritis",
-      "Assessment of lower-limb biomechanics and alignment"
+    [
+     "Primary Differentials",
+     "Medial compartment knee osteoarthritis, Medial meniscal pathology, Medial collateral ligament injury",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting a fracture such as focal bone tenderness in an at-risk athlete",
-      "Locking or true mechanical symptoms suggesting meniscal pathology",
-      "Systemic features suggesting infection or inflammatory arthritis",
-      "A marked joint effusion suggesting intra-articular pathology"
+    [
+     "Management Strategy",
+     "Conservative first-line care with relative rest, activity and load modification, ice and a short course of NSAIDs",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally responds to conservative management and correction of contributing factors, although it may persist or recur when associated osteoarthritis or biomechanical factors remain.",
-    "pitfalls": [
-      "Attributing all medial knee pain to the bursa while missing osteoarthritis or meniscal disease",
-      "Over-reliance on imaging when the diagnosis is clinical",
-      "Neglecting biomechanical contributors and weight management",
-      "Repeated injection without addressing the underlying cause"
-    ],
-    "references": [
-      "Brukner and Khan's Clinical Sports Medicine",
-      "British Journal of Sports Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Conservative first-line care with relative rest, activity and load modification, ice and a short course of NSAIDs",
-      "Physiotherapy focused on hamstring and adductor stretching, quadriceps strengthening and correcting lower-limb biomechanics",
-      "Address contributing medial compartment osteoarthritis and reduce weight where obesity is a factor",
-      "Corticosteroid injection into the bursa for cases resistant to conservative measures",
-      "Footwear advice and orthoses to offload the medial knee and correct gait",
-      "Reassess for meniscal, ligamentous or intra-articular pathology if symptoms fail to settle"
+    [
+     "Clinical Pitfall",
+     "Attributing all medial knee pain to the bursa while missing osteoarthritis or meniscal disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pes anserine bursitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pes-anserine-bursitis-diagram",
+   "title": "Pes anserine bursitis: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

@@ -146,5 +146,100 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "he7d02b03"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hyponatremia-dx-algo",
+      "title": "Symptomatic hyponatraemia / SIADH: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Hyponatraemia (plasma Na+ <135 mM) is very common, affecting up to ~22% of hospitalised patients (p.390).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Acute symptomatic hyponatraemia is a medical emergency: nausea/headache/vomiting can rapidly progress to seizures, brainstem herniation, coma and death (p.392).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum osmolality, converted to effective osmolality/tonicity by subtracting urea (in mg/dL divided by 2.8) - true hyponatraemia has effective osmolality <275 mOsm/kg; this also excludes pseudohyponatraemia (p.393)., Serum"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: By volume status: hypovolaemic (total body water down, total body Na+ down more), euvolaemic/no oedema (total body water up, Na+ near-normal), and hypervolaemic (total body water up markedly, Na+ up) - Fig. 56-5, p.391."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Hypovolaemic patients may appear clinically euvolaemic, with only a low urine Na+ to reveal the cause (p.390)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for symptomatic hyponatraemia / siadh."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hyponatremia-matrix",
+      "title": "Symptomatic hyponatraemia / SIADH: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hyponatraemia (plasma Na+ <135 mM) is very common, affecting up to ~22% of hospitalised patients (p.390).",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum osmolality, converted to effective osmolality/tonicity by subtracting urea (in mg/dL divided by 2.8) - true hyponatraemia",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hypovolaemic: GI losses (vomiting, diarrhoea, tube drainage) and insensible loss (sweating, burns) with inadequate replacement -",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Acute symptomatic hyponatraemia is a medical emergency: nausea/headache/vomiting can rapidly progress to seizures, brainstem",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Hypovolaemic patients may appear clinically euvolaemic, with only a low urine Na+ to reveal the cause (p.390).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for symptomatic hyponatraemia / siadh."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "hyponatremia-diagram",
+      "title": "Symptomatic hyponatraemia / SIADH: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

@@ -188,5 +188,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h141978b1"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cns_tb-dx-algo",
+      "title": "CNS Tuberculosis (TB Meningitis): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Typically evolves over 1-2 weeks (subacute) - a longer course than typical bacterial meningitis; often begins as headache plus subtle mental changes after a prodrome of weeks of low-grade fever, malaise, anorexia and irritability (p.1389).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Declining level of consciousness / progression toward coma (p.1389)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CSF AFB smear taken from the last LP tube, or from any pellicle/cobweb clot - but smears are positive in only ~10-40% of adult cases (p.1127)., Mycobacterial CSF culture - gold standard, but takes 4-8 weeks and is positive"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison describes a clinical continuum that maps to the British MRC staging used for TB meningitis: an early stage with headache and slight mental changes after a prodrome of low-grade fever/malaise/anorexia, evolving"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Low CSF smear yield (AFB seen on direct smear in only ~10-40% of adult cases) and slow culture (4-8 weeks) mean diagnosis cannot wait for microbiologic confirmation - empiric anti-TB therapy is appropriately started on"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for cns tuberculosis (tb meningitis)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cns_tb-matrix",
+      "title": "CNS Tuberculosis (TB Meningitis): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically evolves over 1-2 weeks (subacute) - a longer course than typical bacterial meningitis; often begins as headache plus",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CSF AFB smear taken from the last LP tube, or from any pellicle/cobweb clot - but smears are positive in only ~10-40% of adult",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Fungal (subacute/chronic) meningitis, e.g. Cryptococcus neoformans, Histoplasma capsulatum, Coccidioides immitis (p.1124, 1127),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Declining level of consciousness / progression toward coma (p.1389)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Low CSF smear yield (AFB seen on direct smear in only ~10-40% of adult cases) and slow culture (4-8 weeks) mean diagnosis cannot",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for cns tuberculosis (tb meningitis)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cns-tb-diagram",
+      "title": "CNS Tuberculosis (TB Meningitis): Pulmonary & Chest Radiograph Diagnostic Schematic",
+      "type": "xray",
+      "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+      "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Airway Tree",
+          "description": "Tracheobronchial branching down to lobar and segmental divisions."
+        },
+        {
+          "label": "Parenchyma",
+          "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+        },
+        {
+          "label": "Pleural Space",
+          "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+        }
+      ]
+    }
+  ]
 }

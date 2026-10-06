@@ -5,7 +5,20 @@
  "population": "Pregnancy",
  "basis": "international",
  "setting": "Primary care, antenatal clinic",
- "aliases": ["ANC", "antenatal care", "prenatal care", "booking visit", "antenatal check-up", "ANC contacts", "8 contacts", "pregnancy supplements", "folic acid pregnancy", "anomaly scan", "aspirin for pre-eclampsia", "NG201"],
+ "aliases": [
+  "ANC",
+  "antenatal care",
+  "prenatal care",
+  "booking visit",
+  "antenatal check-up",
+  "ANC contacts",
+  "8 contacts",
+  "pregnancy supplements",
+  "folic acid pregnancy",
+  "anomaly scan",
+  "aspirin for pre-eclampsia",
+  "NG201"
+ ],
  "summary": "WHO recommends at least 8 antenatal contacts. Book by 10 weeks (NICE), give folic acid, iron and (where intake is low) calcium, screen for anaemia, infections, blood group, bacteriuria and gestational diabetes risk, scan before 24 weeks, give aspirin 75 to 150 mg from 12 weeks if at pre-eclampsia risk, and refer promptly for red flags.",
  "sections": [
   {
@@ -88,18 +101,160 @@
   }
  ],
  "drugs": [
-  { "name": "Folic acid", "dose": "400 micrograms orally daily from preconception to 12 weeks; 5 mg daily if at increased NTD risk", "notes": "Start before conception where possible." },
-  { "name": "Iron with folic acid (WHO)", "dose": "30 to 60 mg elemental iron plus 400 micrograms folic acid orally daily throughout pregnancy", "notes": "Weekly 120 mg iron with 2.8 mg folic acid if daily dosing is not tolerated and anaemia prevalence is under 20%." },
-  { "name": "Calcium", "dose": "1.5 to 2.0 g elemental calcium orally daily in divided doses", "notes": "Where dietary calcium intake is low. Take at a different time from iron." },
-  { "name": "Aspirin (pre-eclampsia prevention)", "dose": "75 to 150 mg orally once daily from 12 weeks until birth", "notes": "1 high-risk factor or more than 1 moderate risk factor (NICE NG133)." },
-  { "name": "Vitamin D", "dose": "10 micrograms (400 IU) orally daily", "notes": "NICE advice; WHO does not recommend routine supplementation." },
-  { "name": "Anti-D immunoglobulin", "dose": "IM at 28 weeks (single-dose regimen) or at 28 and 34 weeks (two-dose regimen), dose per product", "notes": "Non-sensitised RhD-negative women; also after sensitising events such as bleeding after 13 weeks." }
+  {
+   "name": "Folic acid",
+   "dose": "400 micrograms orally daily from preconception to 12 weeks; 5 mg daily if at increased NTD risk",
+   "notes": "Start before conception where possible."
+  },
+  {
+   "name": "Iron with folic acid (WHO)",
+   "dose": "30 to 60 mg elemental iron plus 400 micrograms folic acid orally daily throughout pregnancy",
+   "notes": "Weekly 120 mg iron with 2.8 mg folic acid if daily dosing is not tolerated and anaemia prevalence is under 20%."
+  },
+  {
+   "name": "Calcium",
+   "dose": "1.5 to 2.0 g elemental calcium orally daily in divided doses",
+   "notes": "Where dietary calcium intake is low. Take at a different time from iron."
+  },
+  {
+   "name": "Aspirin (pre-eclampsia prevention)",
+   "dose": "75 to 150 mg orally once daily from 12 weeks until birth",
+   "notes": "1 high-risk factor or more than 1 moderate risk factor (NICE NG133)."
+  },
+  {
+   "name": "Vitamin D",
+   "dose": "10 micrograms (400 IU) orally daily",
+   "notes": "NICE advice; WHO does not recommend routine supplementation."
+  },
+  {
+   "name": "Anti-D immunoglobulin",
+   "dose": "IM at 28 weeks (single-dose regimen) or at 28 and 34 weeks (two-dose regimen), dose per product",
+   "notes": "Non-sensitised RhD-negative women; also after sensitising events such as bleeding after 13 weeks."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO recommendations on antenatal care for a positive pregnancy experience (summary of recommendations)", "year": 2016, "url": "https://www.who.int/docs/default-source/reproductive-health/maternal-health/anc.pdf?sfvrsn=5e2c740e_2" },
-  { "org": "NICE", "title": "Antenatal care (NG201)", "year": 2021, "url": "https://www.nice.org.uk/guidance/ng201" },
-  { "org": "NICE", "title": "Hypertension in pregnancy: diagnosis and management (NG133)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng133/chapter/recommendations" },
-  { "org": "NICE", "title": "Maternal and child nutrition: nutrition and weight management in pregnancy, and nutrition in children up to 5 years (NG247)", "year": 2025, "url": "https://www.nice.org.uk/guidance/ng247/chapter/Recommendations" }
+  {
+   "org": "WHO",
+   "title": "WHO recommendations on antenatal care for a positive pregnancy experience (summary of recommendations)",
+   "year": 2016,
+   "url": "https://www.who.int/docs/default-source/reproductive-health/maternal-health/anc.pdf?sfvrsn=5e2c740e_2"
+  },
+  {
+   "org": "NICE",
+   "title": "Antenatal care (NG201)",
+   "year": 2021,
+   "url": "https://www.nice.org.uk/guidance/ng201"
+  },
+  {
+   "org": "NICE",
+   "title": "Hypertension in pregnancy: diagnosis and management (NG133)",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng133/chapter/recommendations"
+  },
+  {
+   "org": "NICE",
+   "title": "Maternal and child nutrition: nutrition and weight management in pregnancy, and nutrition in children up to 5 years (NG247)",
+   "year": 2025,
+   "url": "https://www.nice.org.uk/guidance/ng247/chapter/Recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "routine-antenatal-care-pathway",
+   "title": "Routine antenatal care (uncomplicated pregnancy) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "WHO 2016: at least 8 contacts, the first by 12 weeks, then at 20, 26, 30, 34, 36, 38 and 40 weeks (return at 41 weeks if not delivered).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "NICE NG201: booking with a midwife by 10+0 weeks (within 2 weeks if referred after 9+0 weeks); plan 10 routine appointments for nulliparous and 7 for parous women.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Booking bloods: FBC, blood group, RhD status and red cell antibodies; HIV, syphilis and hepatitis B; sickle cell and thalassaemia screening per local programme. Repeat FBC and antibodies at 28 weeks (NICE)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Folic acid 400 micrograms daily from before conception to 12 weeks. Use 5 mg daily if at higher neural tube defect risk: previous or family history of NTD, type 1 or 2 diabetes, sickle cell disease or thalassaemia, antiepileptic or"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Blood pressure with a device validated for pregnancy, and urine dipstick for protein, at every routine appointment (NICE)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for routine antenatal care (uncomplicated pregnancy)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "routine-antenatal-care-summary-matrix",
+   "title": "Routine antenatal care (uncomplicated pregnancy) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "WHO 2016: at least 8 contacts, the first by 12 weeks, then at 20, 26, 30, 34, 36, 38 and 40 weeks (return at 41 weeks if not delivered).",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Folic acid 400 micrograms daily from before conception to 12 weeks. Use 5 mg daily if at higher neural tube defect risk: previous or family",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Booking bloods: FBC, blood group, RhD status and red cell antibodies; HIV, syphilis and hepatitis B; sickle cell and thalassaemia screening",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Folic acid: 400 micrograms orally daily from preconception to 12 weeks; 5 mg daily if at increased NTD risk",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using urine dipstick instead of culture to screen for asymptomatic bacteriuria.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for routine antenatal care (uncomplicated pregnancy)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "routine-antenatal-care-diagram",
+   "title": "Routine antenatal care (uncomplicated pregnancy): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

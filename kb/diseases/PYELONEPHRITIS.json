@@ -228,5 +228,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8b46aeb8"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pyelonephritis-dx-algo",
+      "title": "Acute Pyelonephritis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Fever is the principal feature distinguishing pyelonephritis from simple cystitis; presence of fever, back/flank pain, rigors, nausea or vomiting signals infection that has extended beyond the bladder (Harrison 22e p.1086-1090, 1133).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Acute papillary necrosis with sloughed papillae obstructing the ureter, producing obstructive uropathy that requires intervention to relieve obstruction and preserve renal function (Harrison 22e p.1090, 1137)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Upper-tract imaging (CT or renal ultrasound) to evaluate for obstruction, abscess, or anatomic abnormality, especially in men, in patients not responding within 72 hours, or when complicated infection is suspected"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison describes a clinical spectrum rather than a formal score: mild pyelonephritis (low-grade fever, with or without lower back or costovertebral angle pain) versus severe pyelonephritis (high fever, rigors, nausea,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating presumed UTI when the true cause is an STI (e.g., C. trachomatis); vaginal discharge should prompt STI consideration since symptoms alone do not reliably distinguish them (Harrison 22e p.1133-1134)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute pyelonephritis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pyelonephritis-matrix",
+      "title": "Acute Pyelonephritis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fever is the principal feature distinguishing pyelonephritis from simple cystitis; presence of fever, back/flank pain, rigors,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Upper-tract imaging (CT or renal ultrasound) to evaluate for obstruction, abscess, or anatomic abnormality, especially in men, in",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute prostatitis in men presenting with febrile UTI (Harrison 22e p.1137), Complicated UTI (fever in a patient with",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Acute papillary necrosis with sloughed papillae obstructing the ureter, producing obstructive uropathy that requires intervention",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating presumed UTI when the true cause is an STI (e.g., C. trachomatis); vaginal discharge should prompt STI consideration",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute pyelonephritis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pyelonephritis-diagram",
+      "title": "Acute Pyelonephritis: Renal & Urinary Tract Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+      "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+        },
+        {
+          "label": "Tubular Apparatus",
+          "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+        }
+      ]
+    }
+  ]
 }

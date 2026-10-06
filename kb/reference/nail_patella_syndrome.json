@@ -1,79 +1,174 @@
 {
-  "id": "nail_patella_syndrome",
-  "name": "Nail-patella syndrome",
-  "aliases": [
-    "LMX1B",
-    "hereditary osteo-onychodysplasia",
-    "HOOD syndrome",
-    "Fong disease",
-    "iliac horn syndrome"
+ "id": "nail_patella_syndrome",
+ "name": "Nail-patella syndrome",
+ "aliases": [
+  "LMX1B",
+  "hereditary osteo-onychodysplasia",
+  "HOOD syndrome",
+  "Fong disease",
+  "iliac horn syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics / Skeletal Dysplasia",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant disorder caused by variants in LMX1B, a transcription factor for dorsoventral limb patterning",
+   "The classic tetrad is dysplastic or absent nails, absent or hypoplastic patellae, elbow abnormalities and iliac horns",
+   "Nail changes are usually the earliest and most consistent sign: hypoplastic, ridged, or split nails, often with triangular lunulae, most marked on the thumbs",
+   "Absent or small patellae cause recurrent patellar dislocation, knee instability and early degenerative change",
+   "Iliac horns, bony spurs projecting posteriorly from the ilia, are pathognomonic and asymptomatic",
+   "Elbow involvement includes limited extension, radial head subluxation/dislocation and hypoplastic capitellum",
+   "Nephropathy and open-angle glaucoma are important extraskeletal complications that require lifelong monitoring"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics / Skeletal Dysplasia",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant disorder caused by variants in LMX1B, a transcription factor for dorsoventral limb patterning",
-      "The classic tetrad is dysplastic or absent nails, absent or hypoplastic patellae, elbow abnormalities and iliac horns",
-      "Nail changes are usually the earliest and most consistent sign: hypoplastic, ridged, or split nails, often with triangular lunulae, most marked on the thumbs",
-      "Absent or small patellae cause recurrent patellar dislocation, knee instability and early degenerative change",
-      "Iliac horns, bony spurs projecting posteriorly from the ilia, are pathognomonic and asymptomatic",
-      "Elbow involvement includes limited extension, radial head subluxation/dislocation and hypoplastic capitellum",
-      "Nephropathy and open-angle glaucoma are important extraskeletal complications that require lifelong monitoring"
+  "pathophysiology": "Nail-patella syndrome is caused by heterozygous loss-of-function variants in LMX1B, a LIM-homeodomain transcription factor essential for dorsal patterning of the developing limb and for the differentiation of structures including the glomerular basement membrane and the anterior segment of the eye. Haploinsufficiency disrupts dorsalisation, producing nail hypoplasia, patellar and elbow malformations, and the iliac horns. In the kidney, defective podocyte and basement membrane development can lead to proteinuria and progressive nephropathy, while impaired anterior-segment development predisposes to glaucoma.",
+  "additionalDifferentials": [
+   "Isolated congenital patellar dislocation or aplasia",
+   "Small patella syndrome",
+   "Other nail dysplasias (e.g. ectodermal dysplasias)",
+   "DOOR syndrome",
+   "Coffin-Siris syndrome",
+   "Other causes of hereditary nephropathy"
+  ],
+  "additionalInvestigations": [
+   "Skeletal radiographs of pelvis (iliac horns), knees (patellae) and elbows",
+   "LMX1B molecular genetic testing",
+   "Urinalysis for proteinuria and monitoring of renal function for nephropathy",
+   "Ophthalmological assessment including intraocular pressure for glaucoma",
+   "Family assessment given autosomal dominant inheritance"
+  ],
+  "redFlags": [
+   "Proteinuria or declining renal function heralding progressive nephropathy",
+   "Raised intraocular pressure or visual field loss from glaucoma",
+   "Recurrent patellar dislocation with disabling knee instability",
+   "Signs of nephrotic-range proteinuria requiring nephrology input"
+  ],
+  "prognosis": "Most affected individuals have a normal lifespan; morbidity comes from musculoskeletal deformity and, in a subset, from progressive nephropathy that can lead to renal failure, and from glaucoma, both of which are the main determinants of long-term outcome.",
+  "pitfalls": [
+   "Treating it as a purely orthopaedic disorder and failing to monitor for nephropathy and glaucoma",
+   "Missing the diagnosis because iliac horns are asymptomatic and not sought on imaging",
+   "Overlooking subtle nail changes as the earliest clue",
+   "Not screening family members despite clear dominant inheritance"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Nail-Patella Syndrome (LMX1B-related)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage musculoskeletal manifestations with physiotherapy, bracing and orthopaedic surgery for recurrent patellar dislocation, knee instability and elbow deformity",
+   "Monitor renal function with regular urinalysis for proteinuria and treat nephropathy with renin-angiotensin blockade using ACE inhibitors or angiotensin-receptor blockers to reduce proteinuria",
+   "Screen for progressive nephropathy and escalate to renal replacement therapy or transplantation in renal failure",
+   "Undertake lifelong ophthalmological surveillance for glaucoma with intraocular-pressure monitoring and appropriate glaucoma therapy",
+   "Provide analgesia and joint-protection strategies for degenerative joint disease",
+   "Offer genetic counselling for autosomal dominant LMX1B disease with molecular confirmation and family assessment",
+   "Coordinate multidisciplinary follow-up across orthopaedics, nephrology, ophthalmology and clinical genetics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "nail_patella_syndrome-pathway",
+   "title": "Nail-patella syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant disorder caused by variants in LMX1B, a transcription factor for dorsoventral limb patterning",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Proteinuria or declining renal function heralding progressive nephropathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skeletal radiographs of pelvis (iliac horns), knees (patellae) and elbows, LMX1B molecular genetic testing, Urinalysis for proteinuria and monitoring of renal function for nephropathy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage musculoskeletal manifestations with physiotherapy, bracing and orthopaedic surgery for recurrent patellar dislocation, knee instability and elbow deformity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating it as a purely orthopaedic disorder and failing to monitor for nephropathy and glaucoma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of nail-patella syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nail_patella_syndrome-matrix",
+   "title": "Nail-patella syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant disorder caused by variants in LMX1B, a transcription factor for dorsoventral limb patterning",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Nail-patella syndrome is caused by heterozygous loss-of-function variants in LMX1B, a LIM-homeodomain transcription factor essential for dorsal patterning of the developing limb and for the differentiation of structures including the glomerular basement membrane and the anterior segment of the eye. Haploinsufficiency disrupts dorsalisation, producing nail hypoplasia, patellar and elbow malformations, and the iliac horns. In the kidney, defective podocyte and basement membrane development can lead to proteinuria and progressive nephropathy, while impaired anterior-segment development predisposes to glaucoma.",
-    "additionalDifferentials": [
-      "Isolated congenital patellar dislocation or aplasia",
-      "Small patella syndrome",
-      "Other nail dysplasias (e.g. ectodermal dysplasias)",
-      "DOOR syndrome",
-      "Coffin-Siris syndrome",
-      "Other causes of hereditary nephropathy"
+    [
+     "Key Investigations",
+     "Skeletal radiographs of pelvis (iliac horns), knees (patellae) and elbows, LMX1B molecular genetic testing, Urinalysis for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skeletal radiographs of pelvis (iliac horns), knees (patellae) and elbows",
-      "LMX1B molecular genetic testing",
-      "Urinalysis for proteinuria and monitoring of renal function for nephropathy",
-      "Ophthalmological assessment including intraocular pressure for glaucoma",
-      "Family assessment given autosomal dominant inheritance"
+    [
+     "Primary Differentials",
+     "Isolated congenital patellar dislocation or aplasia, Small patella syndrome, Other nail dysplasias (e.g. ectodermal dysplasias)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Proteinuria or declining renal function heralding progressive nephropathy",
-      "Raised intraocular pressure or visual field loss from glaucoma",
-      "Recurrent patellar dislocation with disabling knee instability",
-      "Signs of nephrotic-range proteinuria requiring nephrology input"
+    [
+     "Management Strategy",
+     "Manage musculoskeletal manifestations with physiotherapy, bracing and orthopaedic surgery for recurrent patellar dislocation,",
+     "Core treatment modality"
     ],
-    "prognosis": "Most affected individuals have a normal lifespan; morbidity comes from musculoskeletal deformity and, in a subset, from progressive nephropathy that can lead to renal failure, and from glaucoma, both of which are the main determinants of long-term outcome.",
-    "pitfalls": [
-      "Treating it as a purely orthopaedic disorder and failing to monitor for nephropathy and glaucoma",
-      "Missing the diagnosis because iliac horns are asymptomatic and not sought on imaging",
-      "Overlooking subtle nail changes as the earliest clue",
-      "Not screening family members despite clear dominant inheritance"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Nail-Patella Syndrome (LMX1B-related)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage musculoskeletal manifestations with physiotherapy, bracing and orthopaedic surgery for recurrent patellar dislocation, knee instability and elbow deformity",
-      "Monitor renal function with regular urinalysis for proteinuria and treat nephropathy with renin-angiotensin blockade using ACE inhibitors or angiotensin-receptor blockers to reduce proteinuria",
-      "Screen for progressive nephropathy and escalate to renal replacement therapy or transplantation in renal failure",
-      "Undertake lifelong ophthalmological surveillance for glaucoma with intraocular-pressure monitoring and appropriate glaucoma therapy",
-      "Provide analgesia and joint-protection strategies for degenerative joint disease",
-      "Offer genetic counselling for autosomal dominant LMX1B disease with molecular confirmation and family assessment",
-      "Coordinate multidisciplinary follow-up across orthopaedics, nephrology, ophthalmology and clinical genetics"
+    [
+     "Clinical Pitfall",
+     "Treating it as a purely orthopaedic disorder and failing to monitor for nephropathy and glaucoma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for nail-patella syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "nail-patella-syndrome-diagram",
+   "title": "Nail-patella syndrome: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

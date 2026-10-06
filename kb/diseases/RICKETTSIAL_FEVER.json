@@ -205,5 +205,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "he4faf791"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "rickettsial_fever-dx-algo",
+      "title": "Rickettsial Fever (Spotted Fever Group): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "All acute rickettsial illnesses look alike for roughly the first 5 days: fever, headache, and myalgias, often with nausea, vomiting, or cough; the distinguishing features (rash, eschar, pneumonitis, meningoencephalitis) emerge only as the",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypotension/septic-shock presentation and multiorgan failure (p.1454, p.1457)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Indirect immunofluorescence assay (IFA) for SFG IgG - the most common confirmatory test; sensitivity 89-100% and specificity 99-100%, but a reactive titer (>=64) is not detectable until 7-10 days after onset and is usually"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a formal grading scale, but stratifies along a spectrum: (1) self-limited febrile illness that resolves without evolution; (2) classic disease with rash and/or eschar; and (3) severe/complicated"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Waiting for serology before treating: SFG serology is typically negative at presentation and only turns positive at 7-10 days, so therapy must be started empirically on clinical and epidemiologic suspicion and never"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for rickettsial fever (spotted fever group)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "rickettsial_fever-matrix",
+      "title": "Rickettsial Fever (Spotted Fever Group): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "All acute rickettsial illnesses look alike for roughly the first 5 days: fever, headache, and myalgias, often with nausea,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Indirect immunofluorescence assay (IFA) for SFG IgG - the most common confirmatory test; sensitivity 89-100% and specificity",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Human monocytotropic ehrlichiosis (Ehrlichia chaffeensis) and human granulocytotropic anaplasmosis (Anaplasma phagocytophilum) -",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypotension/septic-shock presentation and multiorgan failure (p.1454, p.1457)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Waiting for serology before treating: SFG serology is typically negative at presentation and only turns positive at 7-10 days, so",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for rickettsial fever (spotted fever group)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "rickettsial-fever-diagram",
+      "title": "Rickettsial Fever (Spotted Fever Group): Infectious Pathogenesis & Host Response Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+      "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+      "annotations": [
+        {
+          "label": "Pathogen Inoculum",
+          "description": "Microbial virulence, antigen expression, and cellular tropism."
+        },
+        {
+          "label": "Host Cascade",
+          "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+        }
+      ]
+    }
+  ]
 }

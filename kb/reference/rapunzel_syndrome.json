@@ -1,76 +1,171 @@
 {
-  "id": "rapunzel_syndrome",
-  "name": "Rapunzel syndrome (trichobezoar)",
-  "aliases": [
-    "trichobezoar with tail",
-    "gastric trichobezoar",
-    "hair bezoar syndrome"
+ "id": "rapunzel_syndrome",
+ "name": "Rapunzel syndrome (trichobezoar)",
+ "aliases": [
+  "trichobezoar with tail",
+  "gastric trichobezoar",
+  "hair bezoar syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare form of trichobezoar in which a gastric hair mass has a tail extending through the pylorus into the small bowel",
+   "Almost always occurs in young females with underlying trichotillomania (hair-pulling) and trichophagia (hair-eating)",
+   "Presents with epigastric pain, early satiety, a palpable abdominal mass, weight loss, and sometimes halitosis",
+   "Complications include gastric ulceration, obstruction, perforation, and, rarely, intussusception or pancreatitis",
+   "A firm, mobile, mouldable epigastric mass on examination is a valuable clue",
+   "Cross-sectional imaging or endoscopy demonstrates the intragastric mass with its characteristic small-bowel tail",
+   "Definitive management is surgical or endoscopic removal together with psychiatric treatment of the underlying hair-pulling disorder to prevent recurrence"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare form of trichobezoar in which a gastric hair mass has a tail extending through the pylorus into the small bowel",
-      "Almost always occurs in young females with underlying trichotillomania (hair-pulling) and trichophagia (hair-eating)",
-      "Presents with epigastric pain, early satiety, a palpable abdominal mass, weight loss, and sometimes halitosis",
-      "Complications include gastric ulceration, obstruction, perforation, and, rarely, intussusception or pancreatitis",
-      "A firm, mobile, mouldable epigastric mass on examination is a valuable clue",
-      "Cross-sectional imaging or endoscopy demonstrates the intragastric mass with its characteristic small-bowel tail",
-      "Definitive management is surgical or endoscopic removal together with psychiatric treatment of the underlying hair-pulling disorder to prevent recurrence"
+  "pathophysiology": "Rapunzel syndrome arises when compulsively ingested hair (trichophagia), which is indigestible and slippery, becomes trapped in the gastric folds and enmeshes with mucus and food debris to form a trichobezoar. Over time the mass conforms to the shape of the stomach and a long tail extends through the pylorus into the small intestine. The accumulating mass impairs gastric emptying, causes mucosal pressure necrosis and ulceration, and can precipitate obstruction or perforation; the behavioural substrate is an impulse-control/psychiatric disorder driving repeated hair ingestion.",
+  "additionalDifferentials": [
+   "Gastric outlet obstruction from other causes",
+   "Other bezoar types (phytobezoar, pharmacobezoar)",
+   "Gastric or abdominal neoplasm presenting as a mass",
+   "Peptic ulcer disease",
+   "Gastroparesis",
+   "Small-bowel obstruction of another aetiology"
+  ],
+  "additionalInvestigations": [
+   "Upper endoscopy to visualise and characterise the bezoar",
+   "CT of the abdomen to define the mass, its tail, and complications",
+   "Upper gastrointestinal contrast study demonstrating a mobile intraluminal filling defect",
+   "Full blood count and iron studies to assess anaemia and nutritional status",
+   "Psychiatric assessment for trichotillomania and trichophagia"
+  ],
+  "redFlags": [
+   "Signs of gastrointestinal perforation or peritonitis",
+   "Complete gastric outlet or small-bowel obstruction",
+   "Significant gastrointestinal bleeding from mucosal ulceration",
+   "Severe malnutrition or weight loss"
+  ],
+  "prognosis": "With complete removal of the bezoar and effective treatment of the underlying psychiatric disorder the prognosis is good, but failure to address the hair-pulling behaviour commonly leads to recurrence.",
+  "pitfalls": [
+   "Removing the bezoar without treating the underlying trichotillomania, inviting recurrence",
+   "Underestimating the extent of the small-bowel tail before intervention",
+   "Missing complications such as ulceration, obstruction, or perforation",
+   "Failing to consider the diagnosis in a young woman with an epigastric mass and weight loss"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Maingot's Abdominal Operations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical removal of the trichobezoar, usually by laparotomy given the size and small-bowel tail, with endoscopic removal reserved for small masses",
+   "Management of complications such as gastric ulceration, obstruction or perforation at the time of intervention",
+   "Correction of anaemia and nutritional deficiency with iron and dietary support",
+   "Psychiatric treatment of the underlying trichotillomania and trichophagia with habit-reversal behavioural therapy and consideration of an SSRI",
+   "Long-term psychiatric and family follow-up to detect and prevent recurrence, which is common if the behaviour is not addressed",
+   "Combined surgical and psychiatric multidisciplinary management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "rapunzel_syndrome-pathway",
+   "title": "Rapunzel syndrome (trichobezoar): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare form of trichobezoar in which a gastric hair mass has a tail extending through the pylorus into the small bowel",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of gastrointestinal perforation or peritonitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper endoscopy to visualise and characterise the bezoar, CT of the abdomen to define the mass, its tail, and complications, Upper gastrointestinal contrast study demonstrating a mobile intraluminal filling defect"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical removal of the trichobezoar, usually by laparotomy given the size and small-bowel tail, with endoscopic removal reserved for small masses"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Removing the bezoar without treating the underlying trichotillomania, inviting recurrence"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rapunzel syndrome (trichobezoar)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rapunzel_syndrome-matrix",
+   "title": "Rapunzel syndrome (trichobezoar): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare form of trichobezoar in which a gastric hair mass has a tail extending through the pylorus into the small bowel",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rapunzel syndrome arises when compulsively ingested hair (trichophagia), which is indigestible and slippery, becomes trapped in the gastric folds and enmeshes with mucus and food debris to form a trichobezoar. Over time the mass conforms to the shape of the stomach and a long tail extends through the pylorus into the small intestine. The accumulating mass impairs gastric emptying, causes mucosal pressure necrosis and ulceration, and can precipitate obstruction or perforation; the behavioural substrate is an impulse-control/psychiatric disorder driving repeated hair ingestion.",
-    "additionalDifferentials": [
-      "Gastric outlet obstruction from other causes",
-      "Other bezoar types (phytobezoar, pharmacobezoar)",
-      "Gastric or abdominal neoplasm presenting as a mass",
-      "Peptic ulcer disease",
-      "Gastroparesis",
-      "Small-bowel obstruction of another aetiology"
+    [
+     "Key Investigations",
+     "Upper endoscopy to visualise and characterise the bezoar, CT of the abdomen to define the mass, its tail, and complications,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper endoscopy to visualise and characterise the bezoar",
-      "CT of the abdomen to define the mass, its tail, and complications",
-      "Upper gastrointestinal contrast study demonstrating a mobile intraluminal filling defect",
-      "Full blood count and iron studies to assess anaemia and nutritional status",
-      "Psychiatric assessment for trichotillomania and trichophagia"
+    [
+     "Primary Differentials",
+     "Gastric outlet obstruction from other causes, Other bezoar types (phytobezoar, pharmacobezoar), Gastric or abdominal neoplasm",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of gastrointestinal perforation or peritonitis",
-      "Complete gastric outlet or small-bowel obstruction",
-      "Significant gastrointestinal bleeding from mucosal ulceration",
-      "Severe malnutrition or weight loss"
+    [
+     "Management Strategy",
+     "Surgical removal of the trichobezoar, usually by laparotomy given the size and small-bowel tail, with endoscopic removal reserved",
+     "Core treatment modality"
     ],
-    "prognosis": "With complete removal of the bezoar and effective treatment of the underlying psychiatric disorder the prognosis is good, but failure to address the hair-pulling behaviour commonly leads to recurrence.",
-    "pitfalls": [
-      "Removing the bezoar without treating the underlying trichotillomania, inviting recurrence",
-      "Underestimating the extent of the small-bowel tail before intervention",
-      "Missing complications such as ulceration, obstruction, or perforation",
-      "Failing to consider the diagnosis in a young woman with an epigastric mass and weight loss"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Maingot's Abdominal Operations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical removal of the trichobezoar, usually by laparotomy given the size and small-bowel tail, with endoscopic removal reserved for small masses",
-      "Management of complications such as gastric ulceration, obstruction or perforation at the time of intervention",
-      "Correction of anaemia and nutritional deficiency with iron and dietary support",
-      "Psychiatric treatment of the underlying trichotillomania and trichophagia with habit-reversal behavioural therapy and consideration of an SSRI",
-      "Long-term psychiatric and family follow-up to detect and prevent recurrence, which is common if the behaviour is not addressed",
-      "Combined surgical and psychiatric multidisciplinary management"
+    [
+     "Clinical Pitfall",
+     "Removing the bezoar without treating the underlying trichotillomania, inviting recurrence",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rapunzel syndrome (trichobezoar)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rapunzel-syndrome-diagram",
+   "title": "Rapunzel syndrome (trichobezoar): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

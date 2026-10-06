@@ -1,82 +1,177 @@
 {
-  "id": "gnao1_encephalopathy",
-  "name": "GNAO1 encephalopathy",
-  "aliases": [
-    "GNAO1",
-    "GNAO1-related neurodevelopmental disorder",
-    "Galpha-o encephalopathy",
-    "EIEE17",
-    "NEDIM"
+ "id": "gnao1_encephalopathy",
+ "name": "GNAO1 encephalopathy",
+ "aliases": [
+  "GNAO1",
+  "GNAO1-related neurodevelopmental disorder",
+  "Galpha-o encephalopathy",
+  "EIEE17",
+  "NEDIM"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Epileptology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / ILAE",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by variants in GNAO1, which encodes the alpha subunit of the inhibitory heterotrimeric G-protein Galpha-o, abundant in the developing brain and central to neurotransmitter signalling",
+   "Presents along a spectrum from an early infantile epileptic encephalopathy to a predominant movement disorder without prominent seizures",
+   "The movement disorder is a hallmark: chorea, dystonia, and choreoathetosis that can escalate into life-threatening dystonic or choreic storms requiring intensive care",
+   "Seizures, when present, begin in infancy and can be focal, tonic, or epileptic spasms, often with a poorly organised or suppression-burst electroencephalogram",
+   "Development is typically impaired with hypotonia, poor head control, and later feeding and communication difficulties",
+   "Movement exacerbations may be provoked by illness, stress, or changes in medication and can require sedation, dopamine-pathway agents, or deep brain stimulation of the globus pallidus in refractory cases",
+   "Genotype influences phenotype, with certain variants biased towards epilepsy-predominant and others towards movement-disorder-predominant disease"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Epileptology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / ILAE",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by variants in GNAO1, which encodes the alpha subunit of the inhibitory heterotrimeric G-protein Galpha-o, abundant in the developing brain and central to neurotransmitter signalling",
-      "Presents along a spectrum from an early infantile epileptic encephalopathy to a predominant movement disorder without prominent seizures",
-      "The movement disorder is a hallmark: chorea, dystonia, and choreoathetosis that can escalate into life-threatening dystonic or choreic storms requiring intensive care",
-      "Seizures, when present, begin in infancy and can be focal, tonic, or epileptic spasms, often with a poorly organised or suppression-burst electroencephalogram",
-      "Development is typically impaired with hypotonia, poor head control, and later feeding and communication difficulties",
-      "Movement exacerbations may be provoked by illness, stress, or changes in medication and can require sedation, dopamine-pathway agents, or deep brain stimulation of the globus pallidus in refractory cases",
-      "Genotype influences phenotype, with certain variants biased towards epilepsy-predominant and others towards movement-disorder-predominant disease"
+  "pathophysiology": "GNAO1 encodes Galpha-o, the most abundant G-protein alpha subunit in the mammalian brain, which couples to numerous G-protein-coupled receptors and modulates neurotransmitter release and downstream signalling, including adenylate cyclase and calcium and potassium channel regulation. Disease variants disturb this signalling through loss- or gain-of-function-like effects on the G-protein cycle, perturbing the balance of inhibitory and excitatory transmission in basal ganglia and cortical circuits. This disruption produces both the epileptic and the striking hyperkinetic movement features, and the particular variant helps determine whether epilepsy or movement disorder dominates.",
+  "additionalDifferentials": [
+   "ADCY5-related dyskinesia",
+   "FOXG1 syndrome",
+   "GNB1 encephalopathy",
+   "PDE10A and other genetic chorea syndromes",
+   "STXBP1 encephalopathy with movement disorder",
+   "Mitochondrial and metabolic encephalopathies with dystonia",
+   "Cerebral palsy of dyskinetic type"
+  ],
+  "additionalInvestigations": [
+   "Gene panel or whole-exome sequencing to confirm the GNAO1 variant",
+   "Video electroencephalography where seizures are suspected",
+   "Brain magnetic resonance imaging to exclude structural and metabolic causes",
+   "Movement disorder characterisation, including video documentation of chorea and dystonia",
+   "Metabolic screen to exclude treatable mimics",
+   "Assessment for deep brain stimulation candidacy in refractory movement disorder"
+  ],
+  "redFlags": [
+   "Dystonic or choreic storm with hyperthermia, rhabdomyolysis, or cardiorespiratory compromise",
+   "Status epilepticus in the epilepsy-predominant phenotype",
+   "Rapid feeding deterioration with aspiration risk",
+   "Escalating involuntary movements unresponsive to standard therapy"
+  ],
+  "prognosis": "Most affected children have significant intellectual disability and persistent movement disorder; life-threatening dyskinetic crises contribute to morbidity, and while deep brain stimulation can markedly reduce refractory movements, cognitive impairment usually persists.",
+  "pitfalls": [
+   "Mistaking the dyskinetic phenotype for dyskinetic cerebral palsy and missing the genetic diagnosis",
+   "Under-recognising a dystonic storm as an emergency requiring escalation and intensive support",
+   "Focusing only on seizures while neglecting the disabling movement disorder",
+   "Failing to consider deep brain stimulation in medically refractory dyskinesia"
+  ],
+  "references": [
+   "GeneReviews: GNAO1-Related Neurodevelopmental Disorder",
+   "ILAE and movement disorder society resources on GNAO1 encephalopathy"
+  ],
+  "crossLinks": [
+   "gnb1_encephalopathy"
+  ],
+  "management": [
+   "Treat seizures with broad-spectrum antiseizure medication titrated to the seizure type and electroencephalographic pattern",
+   "Manage chorea and dystonia with dopamine-depleting or dopamine-blocking agents such as tetrabenazine and other movement-disorder drugs",
+   "Recognise and treat life-threatening dystonic or choreic storms as emergencies with benzodiazepines, sedation and intensive care support",
+   "Consider deep brain stimulation of the globus pallidus internus for refractory, disabling movement disorder",
+   "Provide developmental and rehabilitative support with physiotherapy, occupational and speech therapy and feeding support or gastrostomy",
+   "Identify and avoid exacerbating triggers such as intercurrent illness, stress and abrupt medication change, and offer genetic counselling given usually de novo variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gnao1_encephalopathy-pathway",
+   "title": "GNAO1 encephalopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by variants in GNAO1, which encodes the alpha subunit of the inhibitory heterotrimeric G-protein Galpha-o, abundant in the developing brain and central to neurotransmitter signalling",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Dystonic or choreic storm with hyperthermia, rhabdomyolysis, or cardiorespiratory compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Gene panel or whole-exome sequencing to confirm the GNAO1 variant, Video electroencephalography where seizures are suspected, Brain magnetic resonance imaging to exclude structural and metabolic causes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat seizures with broad-spectrum antiseizure medication titrated to the seizure type and electroencephalographic pattern"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the dyskinetic phenotype for dyskinetic cerebral palsy and missing the genetic diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gnao1 encephalopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gnao1_encephalopathy-matrix",
+   "title": "GNAO1 encephalopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by variants in GNAO1, which encodes the alpha subunit of the inhibitory heterotrimeric G-protein Galpha-o, abundant in the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "GNAO1 encodes Galpha-o, the most abundant G-protein alpha subunit in the mammalian brain, which couples to numerous G-protein-coupled receptors and modulates neurotransmitter release and downstream signalling, including adenylate cyclase and calcium and potassium channel regulation. Disease variants disturb this signalling through loss- or gain-of-function-like effects on the G-protein cycle, perturbing the balance of inhibitory and excitatory transmission in basal ganglia and cortical circuits. This disruption produces both the epileptic and the striking hyperkinetic movement features, and the particular variant helps determine whether epilepsy or movement disorder dominates.",
-    "additionalDifferentials": [
-      "ADCY5-related dyskinesia",
-      "FOXG1 syndrome",
-      "GNB1 encephalopathy",
-      "PDE10A and other genetic chorea syndromes",
-      "STXBP1 encephalopathy with movement disorder",
-      "Mitochondrial and metabolic encephalopathies with dystonia",
-      "Cerebral palsy of dyskinetic type"
+    [
+     "Key Investigations",
+     "Gene panel or whole-exome sequencing to confirm the GNAO1 variant, Video electroencephalography where seizures are suspected,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Gene panel or whole-exome sequencing to confirm the GNAO1 variant",
-      "Video electroencephalography where seizures are suspected",
-      "Brain magnetic resonance imaging to exclude structural and metabolic causes",
-      "Movement disorder characterisation, including video documentation of chorea and dystonia",
-      "Metabolic screen to exclude treatable mimics",
-      "Assessment for deep brain stimulation candidacy in refractory movement disorder"
+    [
+     "Primary Differentials",
+     "ADCY5-related dyskinesia, FOXG1 syndrome, GNB1 encephalopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Dystonic or choreic storm with hyperthermia, rhabdomyolysis, or cardiorespiratory compromise",
-      "Status epilepticus in the epilepsy-predominant phenotype",
-      "Rapid feeding deterioration with aspiration risk",
-      "Escalating involuntary movements unresponsive to standard therapy"
+    [
+     "Management Strategy",
+     "Treat seizures with broad-spectrum antiseizure medication titrated to the seizure type and electroencephalographic pattern",
+     "Core treatment modality"
     ],
-    "prognosis": "Most affected children have significant intellectual disability and persistent movement disorder; life-threatening dyskinetic crises contribute to morbidity, and while deep brain stimulation can markedly reduce refractory movements, cognitive impairment usually persists.",
-    "pitfalls": [
-      "Mistaking the dyskinetic phenotype for dyskinetic cerebral palsy and missing the genetic diagnosis",
-      "Under-recognising a dystonic storm as an emergency requiring escalation and intensive support",
-      "Focusing only on seizures while neglecting the disabling movement disorder",
-      "Failing to consider deep brain stimulation in medically refractory dyskinesia"
-    ],
-    "references": [
-      "GeneReviews: GNAO1-Related Neurodevelopmental Disorder",
-      "ILAE and movement disorder society resources on GNAO1 encephalopathy"
-    ],
-    "crossLinks": [
-      "gnb1_encephalopathy"
-    ],
-    "management": [
-      "Treat seizures with broad-spectrum antiseizure medication titrated to the seizure type and electroencephalographic pattern",
-      "Manage chorea and dystonia with dopamine-depleting or dopamine-blocking agents such as tetrabenazine and other movement-disorder drugs",
-      "Recognise and treat life-threatening dystonic or choreic storms as emergencies with benzodiazepines, sedation and intensive care support",
-      "Consider deep brain stimulation of the globus pallidus internus for refractory, disabling movement disorder",
-      "Provide developmental and rehabilitative support with physiotherapy, occupational and speech therapy and feeding support or gastrostomy",
-      "Identify and avoid exacerbating triggers such as intercurrent illness, stress and abrupt medication change, and offer genetic counselling given usually de novo variants"
+    [
+     "Clinical Pitfall",
+     "Mistaking the dyskinetic phenotype for dyskinetic cerebral palsy and missing the genetic diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gnao1 encephalopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gnao1-encephalopathy-diagram",
+   "title": "GNAO1 encephalopathy: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

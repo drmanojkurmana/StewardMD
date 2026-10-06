@@ -1,75 +1,170 @@
 {
-  "id": "triple_x_syndrome",
-  "name": "Triple X syndrome (47,XXX)",
-  "aliases": [
-    "trisomy X",
-    "47,XXX",
-    "triplo-X syndrome",
-    "XXX syndrome"
+ "id": "triple_x_syndrome",
+ "name": "Triple X syndrome (47,XXX)",
+ "aliases": [
+  "trisomy X",
+  "47,XXX",
+  "triplo-X syndrome",
+  "XXX syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Often clinically unremarkable and frequently undiagnosed, so many affected females are never identified",
+   "Tall stature, especially long legs, is the most consistent physical feature",
+   "Learning difficulties, particularly language-based, and delayed speech are common, though IQ usually lies within the normal range while being somewhat lower than that of siblings",
+   "There is an increased risk of motor coordination difficulties and of behavioural and emotional problems, including anxiety",
+   "Fertility is usually normal, although premature ovarian insufficiency is somewhat more frequent",
+   "Most cases arise from maternal meiotic non-disjunction, with a mild maternal-age effect",
+   "Each additional X chromosome tends to be associated with a further reduction in IQ and more physical features, reflecting the general sex-chromosome aneuploidy trend"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Often clinically unremarkable and frequently undiagnosed, so many affected females are never identified",
-      "Tall stature, especially long legs, is the most consistent physical feature",
-      "Learning difficulties, particularly language-based, and delayed speech are common, though IQ usually lies within the normal range while being somewhat lower than that of siblings",
-      "There is an increased risk of motor coordination difficulties and of behavioural and emotional problems, including anxiety",
-      "Fertility is usually normal, although premature ovarian insufficiency is somewhat more frequent",
-      "Most cases arise from maternal meiotic non-disjunction, with a mild maternal-age effect",
-      "Each additional X chromosome tends to be associated with a further reduction in IQ and more physical features, reflecting the general sex-chromosome aneuploidy trend"
+  "pathophysiology": "Triple X syndrome results from an additional X chromosome in a female, usually from maternal meiotic non-disjunction. Although the surplus X chromosomes are largely inactivated, genes that escape X-inactivation are present in extra dosage, which is thought to underlie the tall stature and the neurodevelopmental effects on language and learning. Phenotypic severity broadly increases with the number of extra X chromosomes, and mosaicism can attenuate the picture.",
+  "additionalDifferentials": [
+   "Constitutional or familial tall stature",
+   "Marfan syndrome and other overgrowth syndromes, for tall stature",
+   "Other sex-chromosome aneuploidies, including higher-grade X polysomies",
+   "Idiopathic developmental language disorder",
+   "Fragile X syndrome and other causes of learning difficulty"
+  ],
+  "additionalInvestigations": [
+   "Karyotype, which is diagnostic and often prompted by a prenatal screening result or a learning or behavioural assessment",
+   "Chromosomal microarray, which will detect the extra X",
+   "Developmental, speech and language, and educational assessment",
+   "Assessment of ovarian function if there is menstrual irregularity or subfertility",
+   "Mental-health assessment where indicated"
+  ],
+  "redFlags": [
+   "Significant emotional or behavioural disturbance or a mental-health crisis",
+   "Features suggesting premature ovarian insufficiency",
+   "Marked developmental delay out of keeping with expectation, prompting a search for an additional diagnosis"
+  ],
+  "prognosis": "Generally good; most individuals live independent lives with a normal lifespan, though learning and emotional support is often beneficial, and outcomes are better with earlier recognition and support.",
+  "pitfalls": [
+   "Assuming all individuals are affected equally, when many are asymptomatic",
+   "Overstating the severity to families and causing unnecessary alarm after an incidental prenatal finding",
+   "Missing language-based learning difficulties that respond to early intervention",
+   "Neglecting to counsel about the usually normal fertility and the small risk of ovarian insufficiency"
+  ],
+  "references": [
+   "GeneReviews",
+   "Smith's Recognizable Patterns of Human Malformation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide early speech and language therapy and individualised educational support for language-based learning difficulties",
+   "Offer occupational therapy and physiotherapy for motor coordination difficulties",
+   "Provide mental-health support and monitoring for anxiety and emotional or behavioural problems",
+   "Monitor ovarian function and menstrual pattern given the increased risk of premature ovarian insufficiency, with fertility counselling as needed",
+   "Offer genetic counselling, reassuring that most cases arise sporadically from non-disjunction with low recurrence risk",
+   "Coordinate developmental follow-up so difficulties are recognised and supported early, which improves outcomes"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "triple_x_syndrome-pathway",
+   "title": "Triple X syndrome (47,XXX): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Often clinically unremarkable and frequently undiagnosed, so many affected females are never identified",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Significant emotional or behavioural disturbance or a mental-health crisis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Karyotype, which is diagnostic and often prompted by a prenatal screening result or a learning or behavioural assessment, Chromosomal microarray, which will detect the extra X, Developmental, speech and language, and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide early speech and language therapy and individualised educational support for language-based learning difficulties"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all individuals are affected equally, when many are asymptomatic"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of triple x syndrome (47,xxx)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "triple_x_syndrome-matrix",
+   "title": "Triple X syndrome (47,XXX): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Often clinically unremarkable and frequently undiagnosed, so many affected females are never identified",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Triple X syndrome results from an additional X chromosome in a female, usually from maternal meiotic non-disjunction. Although the surplus X chromosomes are largely inactivated, genes that escape X-inactivation are present in extra dosage, which is thought to underlie the tall stature and the neurodevelopmental effects on language and learning. Phenotypic severity broadly increases with the number of extra X chromosomes, and mosaicism can attenuate the picture.",
-    "additionalDifferentials": [
-      "Constitutional or familial tall stature",
-      "Marfan syndrome and other overgrowth syndromes, for tall stature",
-      "Other sex-chromosome aneuploidies, including higher-grade X polysomies",
-      "Idiopathic developmental language disorder",
-      "Fragile X syndrome and other causes of learning difficulty"
+    [
+     "Key Investigations",
+     "Karyotype, which is diagnostic and often prompted by a prenatal screening result or a learning or behavioural assessment,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Karyotype, which is diagnostic and often prompted by a prenatal screening result or a learning or behavioural assessment",
-      "Chromosomal microarray, which will detect the extra X",
-      "Developmental, speech and language, and educational assessment",
-      "Assessment of ovarian function if there is menstrual irregularity or subfertility",
-      "Mental-health assessment where indicated"
+    [
+     "Primary Differentials",
+     "Constitutional or familial tall stature, Marfan syndrome and other overgrowth syndromes, for tall stature, Other sex-chromosome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Significant emotional or behavioural disturbance or a mental-health crisis",
-      "Features suggesting premature ovarian insufficiency",
-      "Marked developmental delay out of keeping with expectation, prompting a search for an additional diagnosis"
+    [
+     "Management Strategy",
+     "Provide early speech and language therapy and individualised educational support for language-based learning difficulties",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally good; most individuals live independent lives with a normal lifespan, though learning and emotional support is often beneficial, and outcomes are better with earlier recognition and support.",
-    "pitfalls": [
-      "Assuming all individuals are affected equally, when many are asymptomatic",
-      "Overstating the severity to families and causing unnecessary alarm after an incidental prenatal finding",
-      "Missing language-based learning difficulties that respond to early intervention",
-      "Neglecting to counsel about the usually normal fertility and the small risk of ovarian insufficiency"
-    ],
-    "references": [
-      "GeneReviews",
-      "Smith's Recognizable Patterns of Human Malformation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide early speech and language therapy and individualised educational support for language-based learning difficulties",
-      "Offer occupational therapy and physiotherapy for motor coordination difficulties",
-      "Provide mental-health support and monitoring for anxiety and emotional or behavioural problems",
-      "Monitor ovarian function and menstrual pattern given the increased risk of premature ovarian insufficiency, with fertility counselling as needed",
-      "Offer genetic counselling, reassuring that most cases arise sporadically from non-disjunction with low recurrence risk",
-      "Coordinate developmental follow-up so difficulties are recognised and supported early, which improves outcomes"
+    [
+     "Clinical Pitfall",
+     "Assuming all individuals are affected equally, when many are asymptomatic",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for triple x syndrome (47,xxx)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "triple-x-syndrome-diagram",
+   "title": "Triple X syndrome (47,XXX): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

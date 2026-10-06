@@ -1,82 +1,177 @@
 {
-  "id": "acute_urinary_retention",
-  "name": "Acute urinary retention",
-  "aliases": [
-    "AUR",
-    "acute retention of urine",
-    "acute bladder outlet obstruction"
+ "id": "acute_urinary_retention",
+ "name": "Acute urinary retention",
+ "aliases": [
+  "AUR",
+  "acute retention of urine",
+  "acute bladder outlet obstruction"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary / Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as the sudden, painful inability to pass urine with a palpable, tender, distended bladder that is dull to percussion",
+   "In men the commonest precipitant is benign prostatic obstruction, often triggered by infection, constipation, alcohol, immobility, or anticholinergic and sympathomimetic drugs",
+   "Immediate management is urgent bladder decompression with a urethral catheter; suprapubic catheterisation is used when urethral access fails or is contraindicated",
+   "Painless retention with a grossly distended bladder suggests chronic-on-acute (high-pressure or high-residual) retention rather than a purely acute event",
+   "Record the drained volume; a large residual and any renal impairment point toward chronic high-pressure retention with risk of post-obstructive diuresis",
+   "Post-obstructive diuresis after decompression can cause marked fluid and electrolyte losses, requiring monitoring of urine output, weight, and electrolytes",
+   "A trial without catheter, often facilitated by an alpha-blocker, is appropriate once the precipitant is treated; failure indicates need for ongoing catheterisation or definitive surgery",
+   "Always exclude and treat urinary infection, and consider spinal cord compression or cauda equina when neurological features accompany retention"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary / Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as the sudden, painful inability to pass urine with a palpable, tender, distended bladder that is dull to percussion",
-      "In men the commonest precipitant is benign prostatic obstruction, often triggered by infection, constipation, alcohol, immobility, or anticholinergic and sympathomimetic drugs",
-      "Immediate management is urgent bladder decompression with a urethral catheter; suprapubic catheterisation is used when urethral access fails or is contraindicated",
-      "Painless retention with a grossly distended bladder suggests chronic-on-acute (high-pressure or high-residual) retention rather than a purely acute event",
-      "Record the drained volume; a large residual and any renal impairment point toward chronic high-pressure retention with risk of post-obstructive diuresis",
-      "Post-obstructive diuresis after decompression can cause marked fluid and electrolyte losses, requiring monitoring of urine output, weight, and electrolytes",
-      "A trial without catheter, often facilitated by an alpha-blocker, is appropriate once the precipitant is treated; failure indicates need for ongoing catheterisation or definitive surgery",
-      "Always exclude and treat urinary infection, and consider spinal cord compression or cauda equina when neurological features accompany retention"
+  "pathophysiology": "Acute urinary retention is the abrupt failure to empty the bladder, arising from mechanical obstruction (most often prostatic enlargement, but also urethral stricture, clot, or stone), increased outlet tone, impaired detrusor contractility, or neurogenic causes. Bladder overdistension raises intravesical pressure and, in high-pressure chronic retention, is transmitted to the upper tracts causing hydronephrosis and renal impairment. Precipitating factors such as anticholinergic drugs, alpha-agonists, infection, pain, and prostatic congestion tip a compensated bladder into decompensation and acute failure to void.",
+  "additionalDifferentials": [
+   "Benign prostatic hyperplasia with decompensation",
+   "Prostate cancer causing outlet obstruction",
+   "Urethral stricture",
+   "Blood clot retention (clot from haematuria)",
+   "Neurogenic bladder / cauda equina syndrome",
+   "Constipation or pelvic mass causing extrinsic compression",
+   "Drug-induced retention (anticholinergics, opioids, sympathomimetics)"
+  ],
+  "additionalInvestigations": [
+   "Bladder ultrasound to confirm distension and measure retained volume",
+   "Urinalysis and culture to identify infection",
+   "Serum creatinine and electrolytes to detect obstructive renal impairment",
+   "Renal tract ultrasound to assess for hydronephrosis in suspected chronic retention",
+   "PSA (interpreted with caution, as retention and catheterisation raise levels)",
+   "Neurological assessment and spinal imaging when cauda equina or cord compression is suspected"
+  ],
+  "redFlags": [
+   "Acute urinary retention is itself a urological emergency requiring immediate bladder decompression",
+   "High-pressure chronic retention with hydronephrosis and renal impairment",
+   "Post-obstructive diuresis causing dehydration and electrolyte disturbance after decompression",
+   "Retention with saddle anaesthesia, bilateral leg symptoms, or bowel dysfunction suggesting cauda equina syndrome",
+   "Associated fever or urosepsis in an obstructed system"
+  ],
+  "prognosis": "Prompt decompression relieves symptoms rapidly; many men can eventually void after a trial without catheter and treatment of precipitants, but recurrent retention often signals the need for definitive prostatic surgery, and delayed relief risks lasting renal damage.",
+  "pitfalls": [
+   "Delaying catheterisation and allowing prolonged painful overdistension",
+   "Missing high-pressure chronic retention by not measuring residual volume or checking renal function",
+   "Failing to anticipate and monitor for post-obstructive diuresis",
+   "Overlooking neurological causes such as cauda equina compression",
+   "Rapid complete decompression without awareness of possible haematuria ex vacuo"
+  ],
+  "references": [
+   "Smith & Tanagho's General Urology",
+   "Campbell-Walsh Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Relieve retention immediately by draining the bladder with a urethral catheter, using suprapubic catheterisation when urethral access fails or is contraindicated",
+   "Identify and reverse precipitants: stop anticholinergic and sympathomimetic drugs, relieve constipation, and treat infection and pain",
+   "Start an alpha-blocker such as tamsulosin before a trial without catheter in men with benign prostatic obstruction, adding a 5-alpha-reductase inhibitor for a large prostate",
+   "Anticipate and manage post-obstructive diuresis with monitoring of urine output, weight and electrolytes and appropriate fluid replacement",
+   "Record the drained volume and check renal function and the upper tracts to identify high-pressure chronic retention",
+   "Arrange a trial without catheter and refer for definitive prostatic surgery such as transurethral resection when this fails or retention recurs",
+   "Escalate to urgent neurosurgical or spinal assessment when cauda equina or cord compression is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acute_urinary_retention-pathway",
+   "title": "Acute urinary retention: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as the sudden, painful inability to pass urine with a palpable, tender, distended bladder that is dull to percussion",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute urinary retention is itself a urological emergency requiring immediate bladder decompression",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bladder ultrasound to confirm distension and measure retained volume, Urinalysis and culture to identify infection, Serum creatinine and electrolytes to detect obstructive renal impairment"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Relieve retention immediately by draining the bladder with a urethral catheter, using suprapubic catheterisation when urethral access fails or is contraindicated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying catheterisation and allowing prolonged painful overdistension"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acute urinary retention."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute_urinary_retention-matrix",
+   "title": "Acute urinary retention: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as the sudden, painful inability to pass urine with a palpable, tender, distended bladder that is dull to percussion",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Acute urinary retention is the abrupt failure to empty the bladder, arising from mechanical obstruction (most often prostatic enlargement, but also urethral stricture, clot, or stone), increased outlet tone, impaired detrusor contractility, or neurogenic causes. Bladder overdistension raises intravesical pressure and, in high-pressure chronic retention, is transmitted to the upper tracts causing hydronephrosis and renal impairment. Precipitating factors such as anticholinergic drugs, alpha-agonists, infection, pain, and prostatic congestion tip a compensated bladder into decompensation and acute failure to void.",
-    "additionalDifferentials": [
-      "Benign prostatic hyperplasia with decompensation",
-      "Prostate cancer causing outlet obstruction",
-      "Urethral stricture",
-      "Blood clot retention (clot from haematuria)",
-      "Neurogenic bladder / cauda equina syndrome",
-      "Constipation or pelvic mass causing extrinsic compression",
-      "Drug-induced retention (anticholinergics, opioids, sympathomimetics)"
+    [
+     "Key Investigations",
+     "Bladder ultrasound to confirm distension and measure retained volume, Urinalysis and culture to identify infection, Serum",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bladder ultrasound to confirm distension and measure retained volume",
-      "Urinalysis and culture to identify infection",
-      "Serum creatinine and electrolytes to detect obstructive renal impairment",
-      "Renal tract ultrasound to assess for hydronephrosis in suspected chronic retention",
-      "PSA (interpreted with caution, as retention and catheterisation raise levels)",
-      "Neurological assessment and spinal imaging when cauda equina or cord compression is suspected"
+    [
+     "Primary Differentials",
+     "Benign prostatic hyperplasia with decompensation, Prostate cancer causing outlet obstruction, Urethral stricture",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute urinary retention is itself a urological emergency requiring immediate bladder decompression",
-      "High-pressure chronic retention with hydronephrosis and renal impairment",
-      "Post-obstructive diuresis causing dehydration and electrolyte disturbance after decompression",
-      "Retention with saddle anaesthesia, bilateral leg symptoms, or bowel dysfunction suggesting cauda equina syndrome",
-      "Associated fever or urosepsis in an obstructed system"
+    [
+     "Management Strategy",
+     "Relieve retention immediately by draining the bladder with a urethral catheter, using suprapubic catheterisation when urethral",
+     "Core treatment modality"
     ],
-    "prognosis": "Prompt decompression relieves symptoms rapidly; many men can eventually void after a trial without catheter and treatment of precipitants, but recurrent retention often signals the need for definitive prostatic surgery, and delayed relief risks lasting renal damage.",
-    "pitfalls": [
-      "Delaying catheterisation and allowing prolonged painful overdistension",
-      "Missing high-pressure chronic retention by not measuring residual volume or checking renal function",
-      "Failing to anticipate and monitor for post-obstructive diuresis",
-      "Overlooking neurological causes such as cauda equina compression",
-      "Rapid complete decompression without awareness of possible haematuria ex vacuo"
-    ],
-    "references": [
-      "Smith & Tanagho's General Urology",
-      "Campbell-Walsh Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Relieve retention immediately by draining the bladder with a urethral catheter, using suprapubic catheterisation when urethral access fails or is contraindicated",
-      "Identify and reverse precipitants: stop anticholinergic and sympathomimetic drugs, relieve constipation, and treat infection and pain",
-      "Start an alpha-blocker such as tamsulosin before a trial without catheter in men with benign prostatic obstruction, adding a 5-alpha-reductase inhibitor for a large prostate",
-      "Anticipate and manage post-obstructive diuresis with monitoring of urine output, weight and electrolytes and appropriate fluid replacement",
-      "Record the drained volume and check renal function and the upper tracts to identify high-pressure chronic retention",
-      "Arrange a trial without catheter and refer for definitive prostatic surgery such as transurethral resection when this fails or retention recurs",
-      "Escalate to urgent neurosurgical or spinal assessment when cauda equina or cord compression is suspected"
+    [
+     "Clinical Pitfall",
+     "Delaying catheterisation and allowing prolonged painful overdistension",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acute urinary retention."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-urinary-retention-diagram",
+   "title": "Acute urinary retention: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

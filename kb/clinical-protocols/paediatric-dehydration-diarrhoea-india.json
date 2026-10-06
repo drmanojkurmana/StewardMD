@@ -6,7 +6,24 @@
  "basis": "india",
  "counterpart": "paediatric-dehydration-diarrhoea",
  "setting": "Home, primary care, clinic, emergency department, ward",
- "aliases": ["acute watery diarrhoea", "AWD", "acute gastroenteritis", "AGE", "dehydration", "ORS", "low osmolarity ORS", "plan A", "plan B", "plan C", "zinc diarrhoea", "IAP STG diarrhoea", "ICMR STW diarrhoea", "dysentery", "cholera", "ReSoMal"],
+ "aliases": [
+  "acute watery diarrhoea",
+  "AWD",
+  "acute gastroenteritis",
+  "AGE",
+  "dehydration",
+  "ORS",
+  "low osmolarity ORS",
+  "plan A",
+  "plan B",
+  "plan C",
+  "zinc diarrhoea",
+  "IAP STG diarrhoea",
+  "ICMR STW diarrhoea",
+  "dysentery",
+  "cholera",
+  "ReSoMal"
+ ],
  "summary": "Classify dehydration, rehydrate with low osmolarity ORS (Plan A at home, Plan B 75 mL/kg over 4 hours) or Ringer lactate for severe dehydration (Plan C), give zinc for 14 days, keep feeding, and reserve antibiotics for dysentery, cholera and other specific indications.",
  "sections": [
   {
@@ -102,20 +119,168 @@
   }
  ],
  "drugs": [
-  { "name": "Low osmolarity ORS (sodium 75 mmol/L)", "dose": "Plan A: 10 mL/kg (or 50 to 100 mL under 2 years, 100 to 200 mL at 2 to 10 years) after each loose stool. Plan B: 75 mL/kg over 4 hours", "notes": "First-line for all dehydration short of shock. Modified dilution in SAM." },
-  { "name": "Ringer lactate", "dose": "Infant: 30 mL/kg over 1 hour then 70 mL/kg over 5 hours. Over 1 year: 30 mL/kg over 30 minutes then 70 mL/kg over 2.5 hours", "notes": "Plan C. Normal saline if RL unavailable. Not for SAM without shock." },
-  { "name": "Zinc", "dose": "2 to 6 months: 10 mg/day; 6 months to 5 years: 20 mg/day; for 14 days", "notes": "Zinc sulphate, acetate or gluconate." },
-  { "name": "Ondansetron", "dose": "0.15 mg/kg per dose orally or IV, maximum 8 mg", "notes": "Only to enable oral rehydration." },
-  { "name": "Ceftriaxone", "dose": "Shigella: 50 mg/kg IV or IM daily for 2 to 5 days. High-risk non-typhoidal Salmonella: 50 to 100 mg/kg/day", "notes": "Parenteral first choice for invasive or severe dysentery." },
-  { "name": "Ciprofloxacin", "dose": "15 mg/kg twice daily for 3 days (ICMR dysentery); IAP alternative 20 to 30 mg/kg/day", "notes": "Review at 48 hours; switch if no improvement." },
-  { "name": "Cefixime", "dose": "8 mg/kg/day (IAP) or 10 mg/kg/day in 2 divided doses (ICMR) for 3 to 5 days", "notes": "Oral second line for dysentery." },
-  { "name": "Azithromycin", "dose": "10 mg/kg/day for 3 days (ETEC); single dose 20 mg/kg for cholera", "notes": "Also an alternative for high-risk non-typhoidal Salmonella (10 mg/kg/day)." },
-  { "name": "Doxycycline", "dose": "Single dose 2 to 4 mg/kg", "notes": "Cholera in children over 2 years." },
-  { "name": "Metronidazole", "dose": "Amoebiasis: 10 mg/kg per dose 8-hourly for 7 to 10 days. Giardiasis: 5 mg/kg per dose 8-hourly for 5 to 7 days", "notes": "Only when trophozoites or cysts are seen." }
+  {
+   "name": "Low osmolarity ORS (sodium 75 mmol/L)",
+   "dose": "Plan A: 10 mL/kg (or 50 to 100 mL under 2 years, 100 to 200 mL at 2 to 10 years) after each loose stool. Plan B: 75 mL/kg over 4 hours",
+   "notes": "First-line for all dehydration short of shock. Modified dilution in SAM."
+  },
+  {
+   "name": "Ringer lactate",
+   "dose": "Infant: 30 mL/kg over 1 hour then 70 mL/kg over 5 hours. Over 1 year: 30 mL/kg over 30 minutes then 70 mL/kg over 2.5 hours",
+   "notes": "Plan C. Normal saline if RL unavailable. Not for SAM without shock."
+  },
+  {
+   "name": "Zinc",
+   "dose": "2 to 6 months: 10 mg/day; 6 months to 5 years: 20 mg/day; for 14 days",
+   "notes": "Zinc sulphate, acetate or gluconate."
+  },
+  {
+   "name": "Ondansetron",
+   "dose": "0.15 mg/kg per dose orally or IV, maximum 8 mg",
+   "notes": "Only to enable oral rehydration."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "Shigella: 50 mg/kg IV or IM daily for 2 to 5 days. High-risk non-typhoidal Salmonella: 50 to 100 mg/kg/day",
+   "notes": "Parenteral first choice for invasive or severe dysentery."
+  },
+  {
+   "name": "Ciprofloxacin",
+   "dose": "15 mg/kg twice daily for 3 days (ICMR dysentery); IAP alternative 20 to 30 mg/kg/day",
+   "notes": "Review at 48 hours; switch if no improvement."
+  },
+  {
+   "name": "Cefixime",
+   "dose": "8 mg/kg/day (IAP) or 10 mg/kg/day in 2 divided doses (ICMR) for 3 to 5 days",
+   "notes": "Oral second line for dysentery."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "10 mg/kg/day for 3 days (ETEC); single dose 20 mg/kg for cholera",
+   "notes": "Also an alternative for high-risk non-typhoidal Salmonella (10 mg/kg/day)."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "Single dose 2 to 4 mg/kg",
+   "notes": "Cholera in children over 2 years."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "Amoebiasis: 10 mg/kg per dose 8-hourly for 7 to 10 days. Giardiasis: 5 mg/kg per dose 8-hourly for 5 to 7 days",
+   "notes": "Only when trophozoites or cysts are seen."
+  }
  ],
  "sources": [
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Acute watery diarrhea", "year": 2022, "url": "https://iapindia.org/pdf/Ch-020-STG-Acute-Watery-Diarrhea.pdf" },
-  { "org": "ICMR / DHR, MoHFW", "title": "Standard Treatment Workflow for the management of acute diarrhea (paediatrics)", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952338_paediatrics_diarrhea.pdf" }
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Acute watery diarrhea",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/Ch-020-STG-Acute-Watery-Diarrhea.pdf"
+  },
+  {
+   "org": "ICMR / DHR, MoHFW",
+   "title": "Standard Treatment Workflow for the management of acute diarrhea (paediatrics)",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1725952338_paediatrics_diarrhea.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "paediatric-dehydration-diarrhoea-india-pathway",
+   "title": "Acute diarrhoea with dehydration in children (India, IAP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute watery diarrhoea: loose or liquid stools and/or 3 or more stools in 24 hours, with or without fever or vomiting, lasting 7 days or less (IAP). ICMR: acute below 14 days, persistent 14 days or more, dysentery if blood in stool.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Start IV Ringer lactate at once (0.9% saline or half-strength Darrow solution if RL is unavailable). If the child can drink, give ORS by mouth while the drip is set up.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Some dehydration (2 or more): restless and irritable, sunken eyes, drinks eagerly and thirsty. Deficit 5 to 10% (50 to 100 mL/kg): Plan B."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "No routine antibiotics for acute watery diarrhoea. Consider them in infants under 3 months, chronic illness or immunodeficiency, SAM, invasive bacterial infection, or proven Shigella, enterotoxigenic E. coli, Vibrio cholerae or Yersinia."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Giving antibiotics or antimotility drugs for simple watery diarrhoea."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute diarrhoea with dehydration in children (india, iap)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paediatric-dehydration-diarrhoea-india-summary-matrix",
+   "title": "Acute diarrhoea with dehydration in children (India, IAP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute watery diarrhoea: loose or liquid stools and/or 3 or more stools in 24 hours, with or without fever or vomiting, lasting 7 days or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start IV Ringer lactate at once (0.9% saline or half-strength Darrow solution if RL is unavailable). If the child can drink, give ORS by",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Low osmolarity ORS (sodium 75 mmol/L): Plan A: 10 mL/kg (or 50 to 100 mL under 2 years, 100 to 200 mL at 2 to 10 years) after each loose",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving antibiotics or antimotility drugs for simple watery diarrhoea.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute diarrhoea with dehydration in children (india, iap)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "paediatric-dehydration-diarrhoea-india-diagram",
+   "title": "Acute diarrhoea with dehydration in children (India, IAP): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

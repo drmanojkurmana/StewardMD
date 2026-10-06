@@ -1,83 +1,178 @@
 {
-  "id": "superwarfarin_poisoning",
-  "name": "Superwarfarin (long-acting anticoagulant rodenticide) poisoning",
-  "aliases": [
-    "long-acting anticoagulant rodenticide poisoning",
-    "brodifacoum poisoning",
-    "superwarfarin toxicity",
-    "bromadiolone poisoning",
-    "long-acting vitamin K antagonist poisoning"
+ "id": "superwarfarin_poisoning",
+ "name": "Superwarfarin (long-acting anticoagulant rodenticide) poisoning",
+ "aliases": [
+  "long-acting anticoagulant rodenticide poisoning",
+  "brodifacoum poisoning",
+  "superwarfarin toxicity",
+  "bromadiolone poisoning",
+  "long-acting vitamin K antagonist poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Superwarfarins such as brodifacoum are far more potent and vastly longer acting than warfarin, so coagulopathy can persist for weeks to months",
+   "Coagulopathy is delayed, typically appearing a day or two after ingestion, because existing clotting factors must first be depleted",
+   "A single acute exploratory ingestion by a child rarely causes clinically significant coagulopathy, whereas large or repeated ingestion can",
+   "Consider covert or intentional exposure in an adult with unexplained prolonged coagulation and no prescribed anticoagulant",
+   "Bleeding can be occult, so haematuria, bruising, gum bleeding, gastrointestinal or intracranial haemorrhage should prompt assessment of coagulation",
+   "Vitamin K1 (phytomenadione) is the specific antidote and must often be continued in high oral doses for a prolonged period given the long half-life",
+   "Acute major bleeding is treated with factor replacement such as prothrombin complex concentrate or fresh frozen plasma in addition to vitamin K",
+   "Prophylactic vitamin K should not be started routinely after a trivial ingestion, as it can mask evolving coagulopathy; the INR is followed instead"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Superwarfarins such as brodifacoum are far more potent and vastly longer acting than warfarin, so coagulopathy can persist for weeks to months",
-      "Coagulopathy is delayed, typically appearing a day or two after ingestion, because existing clotting factors must first be depleted",
-      "A single acute exploratory ingestion by a child rarely causes clinically significant coagulopathy, whereas large or repeated ingestion can",
-      "Consider covert or intentional exposure in an adult with unexplained prolonged coagulation and no prescribed anticoagulant",
-      "Bleeding can be occult, so haematuria, bruising, gum bleeding, gastrointestinal or intracranial haemorrhage should prompt assessment of coagulation",
-      "Vitamin K1 (phytomenadione) is the specific antidote and must often be continued in high oral doses for a prolonged period given the long half-life",
-      "Acute major bleeding is treated with factor replacement such as prothrombin complex concentrate or fresh frozen plasma in addition to vitamin K",
-      "Prophylactic vitamin K should not be started routinely after a trivial ingestion, as it can mask evolving coagulopathy; the INR is followed instead"
+  "pathophysiology": "Superwarfarins inhibit vitamin K epoxide reductase, the enzyme that regenerates reduced vitamin K, which is the essential cofactor for gamma-carboxylation of clotting factors II, VII, IX and X and of proteins C and S. Without functional vitamin K these factors cannot be activated, producing an anticoagulant state. Because factor VII has the shortest half-life, the prothrombin time and INR prolong first, but full coagulopathy is delayed until preformed factors are consumed. Unlike warfarin, superwarfarins are highly lipophilic, extensively tissue-bound and slowly eliminated, so their anticoagulant effect is markedly prolonged.",
+  "additionalDifferentials": [
+   "Therapeutic warfarin over-anticoagulation",
+   "Direct oral anticoagulant or heparin effect",
+   "Liver disease with impaired synthetic function",
+   "Disseminated intravascular coagulation",
+   "Vitamin K deficiency from malabsorption or poor intake",
+   "Inherited or acquired factor deficiency"
+  ],
+  "additionalInvestigations": [
+   "Prothrombin time and INR, measured serially over an appropriate delayed window",
+   "Activated partial thromboplastin time and fibrinogen",
+   "Full blood count to assess for anaemia from blood loss",
+   "Specific clotting factor assays and mixing studies where the cause is unclear",
+   "Superwarfarin concentration in plasma where available to confirm and monitor",
+   "Investigations for the site of bleeding, including imaging when haemorrhage is suspected"
+  ],
+  "redFlags": [
+   "Active bleeding, especially intracranial or gastrointestinal haemorrhage",
+   "Markedly prolonged INR with clinical bleeding",
+   "Large deliberate ingestion or repeated exposure",
+   "Falling haemoglobin or haemodynamic instability",
+   "Rebound coagulopathy when vitamin K is reduced or stopped too early"
+  ],
+  "prognosis": "With adequate and sustained vitamin K therapy and treatment of any acute bleeding, prognosis is generally good, although therapy and monitoring may be required for weeks to months; life-threatening haemorrhage before treatment carries significant risk.",
+  "pitfalls": [
+   "Checking coagulation only at presentation and missing delayed coagulopathy",
+   "Stopping vitamin K prematurely and allowing rebound anticoagulation",
+   "Giving prophylactic vitamin K after a trivial ingestion, masking evolving coagulopathy",
+   "Relying on vitamin K alone in major bleeding rather than replacing clotting factors",
+   "Failing to consider covert or intentional poisoning in unexplained coagulopathy"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Anticoagulant rodenticide (long-acting) poisoning"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give vitamin K1 (phytomenadione) as the specific antidote, typically in high oral doses continued for a prolonged period because of the drug's long half-life",
+   "Reverse active or life-threatening haemorrhage urgently with prothrombin complex concentrate or fresh frozen plasma",
+   "Consider activated charcoal for a recent substantial ingestion presenting early",
+   "Monitor prothrombin time and INR serially over an extended window, titrating and tapering vitamin K to the coagulation response rather than treating pre-emptively",
+   "Identify and manage the site of bleeding and provide transfusion support where anaemia results",
+   "Arrange psychiatric assessment for intentional ingestion and a safeguarding review for childhood exposure, and identify the source",
+   "Involve clinical toxicology and haematology in ongoing management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "superwarfarin_poisoning-pathway",
+   "title": "Superwarfarin (long-acting anticoagulant rodenticide) poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Superwarfarins such as brodifacoum are far more potent and vastly longer acting than warfarin, so coagulopathy can persist for weeks to months",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Active bleeding, especially intracranial or gastrointestinal haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Prothrombin time and INR, measured serially over an appropriate delayed window, Activated partial thromboplastin time and fibrinogen, Full blood count to assess for anaemia from blood loss"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give vitamin K1 (phytomenadione) as the specific antidote, typically in high oral doses continued for a prolonged period because of the drug's long half-life"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Checking coagulation only at presentation and missing delayed coagulopathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of superwarfarin (long-acting anticoagulant rodenticide) poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "superwarfarin_poisoning-matrix",
+   "title": "Superwarfarin (long-acting anticoagulant rodenticide) poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Superwarfarins such as brodifacoum are far more potent and vastly longer acting than warfarin, so coagulopathy can persist for",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Superwarfarins inhibit vitamin K epoxide reductase, the enzyme that regenerates reduced vitamin K, which is the essential cofactor for gamma-carboxylation of clotting factors II, VII, IX and X and of proteins C and S. Without functional vitamin K these factors cannot be activated, producing an anticoagulant state. Because factor VII has the shortest half-life, the prothrombin time and INR prolong first, but full coagulopathy is delayed until preformed factors are consumed. Unlike warfarin, superwarfarins are highly lipophilic, extensively tissue-bound and slowly eliminated, so their anticoagulant effect is markedly prolonged.",
-    "additionalDifferentials": [
-      "Therapeutic warfarin over-anticoagulation",
-      "Direct oral anticoagulant or heparin effect",
-      "Liver disease with impaired synthetic function",
-      "Disseminated intravascular coagulation",
-      "Vitamin K deficiency from malabsorption or poor intake",
-      "Inherited or acquired factor deficiency"
+    [
+     "Key Investigations",
+     "Prothrombin time and INR, measured serially over an appropriate delayed window, Activated partial thromboplastin time and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Prothrombin time and INR, measured serially over an appropriate delayed window",
-      "Activated partial thromboplastin time and fibrinogen",
-      "Full blood count to assess for anaemia from blood loss",
-      "Specific clotting factor assays and mixing studies where the cause is unclear",
-      "Superwarfarin concentration in plasma where available to confirm and monitor",
-      "Investigations for the site of bleeding, including imaging when haemorrhage is suspected"
+    [
+     "Primary Differentials",
+     "Therapeutic warfarin over-anticoagulation, Direct oral anticoagulant or heparin effect, Liver disease with impaired synthetic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Active bleeding, especially intracranial or gastrointestinal haemorrhage",
-      "Markedly prolonged INR with clinical bleeding",
-      "Large deliberate ingestion or repeated exposure",
-      "Falling haemoglobin or haemodynamic instability",
-      "Rebound coagulopathy when vitamin K is reduced or stopped too early"
+    [
+     "Management Strategy",
+     "Give vitamin K1 (phytomenadione) as the specific antidote, typically in high oral doses continued for a prolonged period because",
+     "Core treatment modality"
     ],
-    "prognosis": "With adequate and sustained vitamin K therapy and treatment of any acute bleeding, prognosis is generally good, although therapy and monitoring may be required for weeks to months; life-threatening haemorrhage before treatment carries significant risk.",
-    "pitfalls": [
-      "Checking coagulation only at presentation and missing delayed coagulopathy",
-      "Stopping vitamin K prematurely and allowing rebound anticoagulation",
-      "Giving prophylactic vitamin K after a trivial ingestion, masking evolving coagulopathy",
-      "Relying on vitamin K alone in major bleeding rather than replacing clotting factors",
-      "Failing to consider covert or intentional poisoning in unexplained coagulopathy"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Anticoagulant rodenticide (long-acting) poisoning"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give vitamin K1 (phytomenadione) as the specific antidote, typically in high oral doses continued for a prolonged period because of the drug's long half-life",
-      "Reverse active or life-threatening haemorrhage urgently with prothrombin complex concentrate or fresh frozen plasma",
-      "Consider activated charcoal for a recent substantial ingestion presenting early",
-      "Monitor prothrombin time and INR serially over an extended window, titrating and tapering vitamin K to the coagulation response rather than treating pre-emptively",
-      "Identify and manage the site of bleeding and provide transfusion support where anaemia results",
-      "Arrange psychiatric assessment for intentional ingestion and a safeguarding review for childhood exposure, and identify the source",
-      "Involve clinical toxicology and haematology in ongoing management"
+    [
+     "Clinical Pitfall",
+     "Checking coagulation only at presentation and missing delayed coagulopathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for superwarfarin (long-acting anticoagulant rodenticide) poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "superwarfarin-poisoning-diagram",
+   "title": "Superwarfarin (long-acting anticoagulant rodenticide) poisoning: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

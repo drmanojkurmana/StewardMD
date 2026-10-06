@@ -1,78 +1,173 @@
 {
-  "id": "orbital_apex_syndrome",
-  "name": "Orbital apex syndrome",
-  "aliases": [
-    "Jacod syndrome",
-    "orbital apex-optic canal syndrome"
+ "id": "orbital_apex_syndrome",
+ "name": "Orbital apex syndrome",
+ "aliases": [
+  "Jacod syndrome",
+  "orbital apex-optic canal syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves together with visual loss from optic nerve involvement",
+   "The distinguishing feature from superior orbital fissure syndrome is the addition of optic neuropathy, since the optic canal lies at the apex",
+   "Sensory loss follows the ophthalmic division of the trigeminal nerve, and proptosis may be present with an orbital mass",
+   "A relative afferent pupillary defect and reduced acuity or colour vision reflect the optic nerve component",
+   "Common causes include invasive infection such as mucormycosis and aspergillosis, tumour, and inflammatory disease",
+   "Aggressive fungal orbital apex infection must be considered urgently in diabetic or immunocompromised patients",
+   "Imaging of the orbit and skull base is essential to define the responsible lesion"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves together with visual loss from optic nerve involvement",
-      "The distinguishing feature from superior orbital fissure syndrome is the addition of optic neuropathy, since the optic canal lies at the apex",
-      "Sensory loss follows the ophthalmic division of the trigeminal nerve, and proptosis may be present with an orbital mass",
-      "A relative afferent pupillary defect and reduced acuity or colour vision reflect the optic nerve component",
-      "Common causes include invasive infection such as mucormycosis and aspergillosis, tumour, and inflammatory disease",
-      "Aggressive fungal orbital apex infection must be considered urgently in diabetic or immunocompromised patients",
-      "Imaging of the orbit and skull base is essential to define the responsible lesion"
+  "pathophysiology": "The orbital apex is the crowded posterior region of the orbit where the superior orbital fissure and the optic canal converge, transmitting the optic nerve and ophthalmic artery alongside the ocular motor nerves, the ophthalmic trigeminal branches, and sympathetic fibres. A lesion here compresses or infiltrates these structures, combining an ophthalmoplegia and trigeminal sensory disturbance with an optic neuropathy that causes visual loss. Responsible processes include invasive fungal and bacterial infection, neoplasm, granulomatous and other inflammatory disease, trauma, and vascular lesions.",
+  "additionalDifferentials": [
+   "Superior orbital fissure syndrome without optic nerve involvement",
+   "Cavernous sinus syndrome",
+   "Tolosa-Hunt granulomatous inflammation",
+   "Orbital cellulitis or subperiosteal abscess",
+   "Thyroid eye disease with apical crowding",
+   "Idiopathic orbital inflammatory disease",
+   "Orbital tumour or metastasis"
+  ],
+  "additionalInvestigations": [
+   "MRI of the orbit and skull base with contrast",
+   "CT of the orbit and paranasal sinuses to assess bone and sinus disease",
+   "Nasoendoscopy and biopsy where invasive fungal infection is suspected",
+   "Inflammatory markers and infection screen",
+   "Blood glucose and immune status assessment",
+   "Visual field testing and assessment of the afferent pupillary pathway"
+  ],
+  "redFlags": [
+   "Rapidly progressive signs in a diabetic or immunocompromised patient suggesting invasive fungal infection needing emergency management",
+   "Acute visual loss requiring urgent evaluation of the optic nerve",
+   "Signs of orbital cellulitis or abscess",
+   "Features of malignant infiltration of the skull base"
+  ],
+  "prognosis": "Prognosis depends heavily on the cause and speed of treatment; invasive infection carries high morbidity and mortality without prompt intervention, whereas inflammatory causes may respond to treatment, though optic nerve damage can leave permanent visual loss.",
+  "pitfalls": [
+   "Failing to recognise optic nerve involvement that distinguishes it from superior orbital fissure syndrome",
+   "Delaying diagnosis of invasive fungal infection in an at-risk patient",
+   "Attributing the picture to inflammation and giving steroids before excluding infection and tumour",
+   "Underestimating the urgency of associated visual loss"
+  ],
+  "references": [
+   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the underlying cause, guided by urgent contrast imaging and biopsy",
+   "For invasive fungal infection (mucormycosis, aspergillosis) give emergency systemic antifungal therapy (liposomal amphotericin B) with surgical debridement and correction of diabetes, ketoacidosis and immunosuppression",
+   "Treat bacterial infection with broad-spectrum intravenous antibiotics and drainage of any collection",
+   "Treat inflammatory or granulomatous causes (idiopathic orbital inflammation, IgG4-related disease, sarcoidosis, granulomatosis with polyangiitis) with systemic corticosteroids and steroid-sparing immunosuppression as needed",
+   "Manage neoplastic causes with tissue diagnosis followed by surgery, radiotherapy or chemotherapy as appropriate",
+   "Monitor visual acuity, colour vision and the afferent pupillary pathway for optic-nerve compromise",
+   "Coordinate multidisciplinary care across ophthalmology, ENT, neurology and oncology with urgent escalation for aggressive infection"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "orbital_apex_syndrome-pathway",
+   "title": "Orbital apex syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves together with visual loss from optic nerve involvement",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive signs in a diabetic or immunocompromised patient suggesting invasive fungal infection needing emergency management",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the orbit and skull base with contrast, CT of the orbit and paranasal sinuses to assess bone and sinus disease, Nasoendoscopy and biopsy where invasive fungal infection is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the underlying cause, guided by urgent contrast imaging and biopsy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to recognise optic nerve involvement that distinguishes it from superior orbital fissure syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of orbital apex syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "orbital_apex_syndrome-matrix",
+   "title": "Orbital apex syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by ophthalmoplegia from involvement of the third, fourth, and sixth cranial nerves together with visual loss from",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The orbital apex is the crowded posterior region of the orbit where the superior orbital fissure and the optic canal converge, transmitting the optic nerve and ophthalmic artery alongside the ocular motor nerves, the ophthalmic trigeminal branches, and sympathetic fibres. A lesion here compresses or infiltrates these structures, combining an ophthalmoplegia and trigeminal sensory disturbance with an optic neuropathy that causes visual loss. Responsible processes include invasive fungal and bacterial infection, neoplasm, granulomatous and other inflammatory disease, trauma, and vascular lesions.",
-    "additionalDifferentials": [
-      "Superior orbital fissure syndrome without optic nerve involvement",
-      "Cavernous sinus syndrome",
-      "Tolosa-Hunt granulomatous inflammation",
-      "Orbital cellulitis or subperiosteal abscess",
-      "Thyroid eye disease with apical crowding",
-      "Idiopathic orbital inflammatory disease",
-      "Orbital tumour or metastasis"
+    [
+     "Key Investigations",
+     "MRI of the orbit and skull base with contrast, CT of the orbit and paranasal sinuses to assess bone and sinus disease,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the orbit and skull base with contrast",
-      "CT of the orbit and paranasal sinuses to assess bone and sinus disease",
-      "Nasoendoscopy and biopsy where invasive fungal infection is suspected",
-      "Inflammatory markers and infection screen",
-      "Blood glucose and immune status assessment",
-      "Visual field testing and assessment of the afferent pupillary pathway"
+    [
+     "Primary Differentials",
+     "Superior orbital fissure syndrome without optic nerve involvement, Cavernous sinus syndrome, Tolosa-Hunt granulomatous",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive signs in a diabetic or immunocompromised patient suggesting invasive fungal infection needing emergency management",
-      "Acute visual loss requiring urgent evaluation of the optic nerve",
-      "Signs of orbital cellulitis or abscess",
-      "Features of malignant infiltration of the skull base"
+    [
+     "Management Strategy",
+     "Direct treatment at the underlying cause, guided by urgent contrast imaging and biopsy",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends heavily on the cause and speed of treatment; invasive infection carries high morbidity and mortality without prompt intervention, whereas inflammatory causes may respond to treatment, though optic nerve damage can leave permanent visual loss.",
-    "pitfalls": [
-      "Failing to recognise optic nerve involvement that distinguishes it from superior orbital fissure syndrome",
-      "Delaying diagnosis of invasive fungal infection in an at-risk patient",
-      "Attributing the picture to inflammation and giving steroids before excluding infection and tumour",
-      "Underestimating the urgency of associated visual loss"
-    ],
-    "references": [
-      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the underlying cause, guided by urgent contrast imaging and biopsy",
-      "For invasive fungal infection (mucormycosis, aspergillosis) give emergency systemic antifungal therapy (liposomal amphotericin B) with surgical debridement and correction of diabetes, ketoacidosis and immunosuppression",
-      "Treat bacterial infection with broad-spectrum intravenous antibiotics and drainage of any collection",
-      "Treat inflammatory or granulomatous causes (idiopathic orbital inflammation, IgG4-related disease, sarcoidosis, granulomatosis with polyangiitis) with systemic corticosteroids and steroid-sparing immunosuppression as needed",
-      "Manage neoplastic causes with tissue diagnosis followed by surgery, radiotherapy or chemotherapy as appropriate",
-      "Monitor visual acuity, colour vision and the afferent pupillary pathway for optic-nerve compromise",
-      "Coordinate multidisciplinary care across ophthalmology, ENT, neurology and oncology with urgent escalation for aggressive infection"
+    [
+     "Clinical Pitfall",
+     "Failing to recognise optic nerve involvement that distinguishes it from superior orbital fissure syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for orbital apex syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "orbital-apex-syndrome-diagram",
+   "title": "Orbital apex syndrome: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

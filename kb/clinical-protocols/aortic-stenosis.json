@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient clinic, ward, preoperative assessment",
- "aliases": ["AS", "aortic valve stenosis", "calcific aortic stenosis", "severe aortic stenosis", "TAVI", "TAVR", "SAVR", "aortic valve replacement", "AVR", "low-flow low-gradient AS", "bicuspid aortic valve"],
+ "aliases": [
+  "AS",
+  "aortic valve stenosis",
+  "calcific aortic stenosis",
+  "severe aortic stenosis",
+  "TAVI",
+  "TAVR",
+  "SAVR",
+  "aortic valve replacement",
+  "AVR",
+  "low-flow low-gradient AS",
+  "bicuspid aortic valve"
+ ],
  "summary": "Severe AS is mean gradient 40 mmHg or more, Vmax 4.0 m/s or more and AVA 1.0 cm2 or less; intervene when symptomatic or LVEF is below 50%, consider early intervention if asymptomatic at low risk, with TAVI at 70 years or older and SAVR below 70 at low surgical risk (ESC/EACTS 2025).",
  "sections": [
   {
@@ -89,14 +101,138 @@
   }
  ],
  "drugs": [
-  { "name": "Aspirin (after TAVI)", "dose": "75 to 100 mg orally once daily for 12 months, then long-term should be considered", "notes": "Patients without an indication for oral anticoagulation. Routine DAPT is not recommended." },
-  { "name": "Furosemide", "dose": "20 to 40 mg orally or IV, titrated to congestion", "notes": "Use cautiously: excessive diuresis reduces preload and can cause hypotension." },
-  { "name": "Ramipril", "dose": "Start 1.25 to 2.5 mg orally once daily, titrate slowly", "notes": "For coexisting hypertension; avoid symptomatic hypotension. Check potassium and creatinine." },
-  { "name": "Amoxicillin (endocarditis prophylaxis)", "dose": "2 g orally 30 to 60 minutes before the dental procedure", "notes": "Only for prosthetic valves (including TAVI) and other high-risk groups. Penicillin allergy: azithromycin or clarithromycin 500 mg, or doxycycline 100 mg." }
+  {
+   "name": "Aspirin (after TAVI)",
+   "dose": "75 to 100 mg orally once daily for 12 months, then long-term should be considered",
+   "notes": "Patients without an indication for oral anticoagulation. Routine DAPT is not recommended."
+  },
+  {
+   "name": "Furosemide",
+   "dose": "20 to 40 mg orally or IV, titrated to congestion",
+   "notes": "Use cautiously: excessive diuresis reduces preload and can cause hypotension."
+  },
+  {
+   "name": "Ramipril",
+   "dose": "Start 1.25 to 2.5 mg orally once daily, titrate slowly",
+   "notes": "For coexisting hypertension; avoid symptomatic hypotension. Check potassium and creatinine."
+  },
+  {
+   "name": "Amoxicillin (endocarditis prophylaxis)",
+   "dose": "2 g orally 30 to 60 minutes before the dental procedure",
+   "notes": "Only for prosthetic valves (including TAVI) and other high-risk groups. Penicillin allergy: azithromycin or clarithromycin 500 mg, or doxycycline 100 mg."
+  }
  ],
  "sources": [
-  { "org": "ESC / EACTS", "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease", "year": 2025, "url": "https://academic.oup.com/eurheartj/article/46/44/4635/8234488" },
-  { "org": "ESC", "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease (guideline resources page)", "year": 2025, "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/valvular-heart-disease/" }
+  {
+   "org": "ESC / EACTS",
+   "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease",
+   "year": 2025,
+   "url": "https://academic.oup.com/eurheartj/article/46/44/4635/8234488"
+  },
+  {
+   "org": "ESC",
+   "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease (guideline resources page)",
+   "year": 2025,
+   "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/valvular-heart-disease/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "aortic-stenosis-pathway",
+   "title": "Aortic stenosis (adult): assessment and timing of intervention Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms: exertional breathlessness, angina, exertional dizziness or syncope, and falling exercise tolerance. Once symptoms appear, prognosis without valve intervention is poor.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Signs: slow-rising low-volume pulse, ejection systolic murmur radiating to the carotids, soft or absent second heart sound, narrow pulse pressure. The murmur can soften as the ventricle fails.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Severe high-gradient AS: mean gradient 40 mmHg or more, Vmax 4.0 m/s or more, AVA 1.0 cm2 or less (indexed 0.6 cm2/m2 or less), severe regardless of LV function or flow. Moderate AS: AVA 1.0 to 1.5 cm2 (or mean gradient 25 to 40 mmHg) with"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Decide the mode of intervention in a Heart Team at a Heart Valve Centre, using age, life expectancy, anatomy, surgical risk (STS-PROM, EuroSCORE II) and lifetime management."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Asymptomatic severe AS under surveillance: review at least every 6 months (symptoms, echo, natriuretic peptide), and immediately if symptoms appear."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for aortic stenosis (adult): assessment and timing of intervention."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aortic-stenosis-summary-matrix",
+   "title": "Aortic stenosis (adult): assessment and timing of intervention Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms: exertional breathlessness, angina, exertional dizziness or syncope, and falling exercise tolerance. Once symptoms appear,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Decide the mode of intervention in a Heart Team at a Heart Valve Centre, using age, life expectancy, anatomy, surgical risk (STS-PROM,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Severe high-gradient AS: mean gradient 40 mmHg or more, Vmax 4.0 m/s or more, AVA 1.0 cm2 or less (indexed 0.6 cm2/m2 or less), severe",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Aspirin (after TAVI): 75 to 100 mg orally once daily for 12 months, then long-term should be considered",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Calling low-gradient AS moderate without checking stroke volume index, LVEF and the calcium score.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for aortic stenosis (adult): assessment and timing of intervention."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "aortic-stenosis-diagram",
+   "title": "Aortic stenosis (adult): assessment and timing of intervention: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

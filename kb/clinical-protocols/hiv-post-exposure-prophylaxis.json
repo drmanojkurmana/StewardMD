@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, occupational health, ICTC or ART centre",
- "aliases": ["PEP", "HIV PEP", "nPEP", "needle-stick injury", "NSI", "sharps injury", "occupational exposure", "TLD", "sexual assault PEP", "hepatitis B exposure", "HBIG"],
+ "aliases": [
+  "PEP",
+  "HIV PEP",
+  "nPEP",
+  "needle-stick injury",
+  "NSI",
+  "sharps injury",
+  "occupational exposure",
+  "TLD",
+  "sexual assault PEP",
+  "hepatitis B exposure",
+  "HBIG"
+ ],
  "summary": "After a significant exposure, give first aid and start TLD (tenofovir DF, lamivudine, dolutegravir) one tablet daily for 28 days as soon as possible and no later than 72 hours; test at baseline and follow-up, and manage hepatitis B by vaccination and anti-HBs status.",
  "sections": [
   {
@@ -82,18 +94,160 @@
   }
  ],
  "drugs": [
-  { "name": "TLD (tenofovir DF + lamivudine + dolutegravir)", "dose": "300 mg + 300 mg + 50 mg, one tablet orally once daily for 28 days", "notes": "Preferred PEP regimen. Needs creatinine clearance of 50 mL/min or more for standard dosing." },
-  { "name": "Raltegravir", "dose": "400 mg orally twice daily for 28 days (with tenofovir DF + lamivudine)", "notes": "Alternative third drug if dolutegravir cannot be used." },
-  { "name": "Atazanavir/ritonavir", "dose": "300/100 mg orally once daily for 28 days (with tenofovir DF + lamivudine)", "notes": "Alternative third drug; many drug interactions; jaundice from unconjugated bilirubin is benign." },
-  { "name": "Hepatitis B immunoglobulin (HBIG)", "dose": "0.06 mL/kg IM once, ideally within 24 hours", "notes": "Non-immune person exposed to an HBsAg-positive or unknown source; 2 doses 1 month apart in vaccine non-responders." },
-  { "name": "Hepatitis B vaccine (adult)", "dose": "20 mcg (1 mL) IM deltoid at 0, 1 and 6 months", "notes": "Start at the same visit as HBIG, at a different site." },
-  { "name": "Levonorgestrel", "dose": "1.5 mg orally, single dose, within 72 hours", "notes": "Emergency contraception after sexual assault." }
+  {
+   "name": "TLD (tenofovir DF + lamivudine + dolutegravir)",
+   "dose": "300 mg + 300 mg + 50 mg, one tablet orally once daily for 28 days",
+   "notes": "Preferred PEP regimen. Needs creatinine clearance of 50 mL/min or more for standard dosing."
+  },
+  {
+   "name": "Raltegravir",
+   "dose": "400 mg orally twice daily for 28 days (with tenofovir DF + lamivudine)",
+   "notes": "Alternative third drug if dolutegravir cannot be used."
+  },
+  {
+   "name": "Atazanavir/ritonavir",
+   "dose": "300/100 mg orally once daily for 28 days (with tenofovir DF + lamivudine)",
+   "notes": "Alternative third drug; many drug interactions; jaundice from unconjugated bilirubin is benign."
+  },
+  {
+   "name": "Hepatitis B immunoglobulin (HBIG)",
+   "dose": "0.06 mL/kg IM once, ideally within 24 hours",
+   "notes": "Non-immune person exposed to an HBsAg-positive or unknown source; 2 doses 1 month apart in vaccine non-responders."
+  },
+  {
+   "name": "Hepatitis B vaccine (adult)",
+   "dose": "20 mcg (1 mL) IM deltoid at 0, 1 and 6 months",
+   "notes": "Start at the same visit as HBIG, at a different site."
+  },
+  {
+   "name": "Levonorgestrel",
+   "dose": "1.5 mg orally, single dose, within 72 hours",
+   "notes": "Emergency contraception after sexual assault."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Guidelines for HIV post-exposure prophylaxis", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240095137" },
-  { "org": "NACO, MoHFW", "title": "National Guidelines for HIV Care and Treatment 2021 (section 2.10: post exposure prophylaxis)", "year": 2021, "url": "https://www.aidsdatahub.org/sites/default/files/resource/naco-national-guidelines-hiv-care-and-treatment-2021.pdf" },
-  { "org": "CDC", "title": "Antiretroviral postexposure prophylaxis after sexual, injection drug use, or other nonoccupational exposure to HIV: CDC recommendations, United States, 2025", "year": 2025, "url": "https://www.cdc.gov/mmwr/volumes/74/rr/rr7401a1.htm" },
-  { "org": "CDC / ACIP", "title": "Prevention of hepatitis B virus infection in the United States: recommendations of the ACIP", "year": 2018, "url": "https://www.cdc.gov/mmwr/volumes/67/rr/rr6701a1.htm" }
+  {
+   "org": "WHO",
+   "title": "Guidelines for HIV post-exposure prophylaxis",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240095137"
+  },
+  {
+   "org": "NACO, MoHFW",
+   "title": "National Guidelines for HIV Care and Treatment 2021 (section 2.10: post exposure prophylaxis)",
+   "year": 2021,
+   "url": "https://www.aidsdatahub.org/sites/default/files/resource/naco-national-guidelines-hiv-care-and-treatment-2021.pdf"
+  },
+  {
+   "org": "CDC",
+   "title": "Antiretroviral postexposure prophylaxis after sexual, injection drug use, or other nonoccupational exposure to HIV: CDC recommendations, United States, 2025",
+   "year": 2025,
+   "url": "https://www.cdc.gov/mmwr/volumes/74/rr/rr7401a1.htm"
+  },
+  {
+   "org": "CDC / ACIP",
+   "title": "Prevention of hepatitis B virus infection in the United States: recommendations of the ACIP",
+   "year": 2018,
+   "url": "https://www.cdc.gov/mmwr/volumes/67/rr/rr6701a1.htm"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hiv-post-exposure-prophylaxis-pathway",
+   "title": "HIV post-exposure prophylaxis and hepatitis B exposure (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Significant exposure: percutaneous injury, or mucous membrane or non-intact skin contact with blood, visibly bloody fluid, semen, vaginal secretions, CSF, or synovial, pleural, peritoneal, pericardial or amniotic fluid; or condomless anal",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Wash the wound or skin at once with soap and running water. Do not scrub, squeeze, suck or apply bleach or antiseptic into the wound. Flush eyes or mucous membranes with water or saline; rinse the mouth and spit.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Baseline (exposed person): HIV test (rapid or antigen/antibody), HBsAg and anti-HBs, anti-HCV, serum creatinine, ALT, and a pregnancy test in women of reproductive age. After sexual exposure add syphilis serology and gonorrhoea and"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Vaccinated with a documented anti-HBs of 10 mIU/mL or more at any time: no hepatitis B prophylaxis is needed, whatever the source status."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Delaying the first dose while waiting for source results or for a specialist."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hiv post-exposure prophylaxis and hepatitis b exposure (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hiv-post-exposure-prophylaxis-summary-matrix",
+   "title": "HIV post-exposure prophylaxis and hepatitis B exposure (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Significant exposure: percutaneous injury, or mucous membrane or non-intact skin contact with blood, visibly bloody fluid, semen, vaginal",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Wash the wound or skin at once with soap and running water. Do not scrub, squeeze, suck or apply bleach or antiseptic into the wound. Flush",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Baseline (exposed person): HIV test (rapid or antigen/antibody), HBsAg and anti-HBs, anti-HCV, serum creatinine, ALT, and a pregnancy test",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "TLD (tenofovir DF + lamivudine + dolutegravir): 300 mg + 300 mg + 50 mg, one tablet orally once daily for 28 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying the first dose while waiting for source results or for a specialist.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hiv post-exposure prophylaxis and hepatitis b exposure (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hiv-post-exposure-prophylaxis-diagram",
+   "title": "HIV post-exposure prophylaxis and hepatitis B exposure (adult): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "pure_red_cell_aplasia",
-  "name": "Pure red cell aplasia",
-  "aliases": [
-    "PRCA",
-    "erythroblastopenia",
-    "acquired pure red cell aplasia",
-    "Diamond-Blackfan anaemia (congenital form)"
+ "id": "pure_red_cell_aplasia",
+ "name": "Pure red cell aplasia",
+ "aliases": [
+  "PRCA",
+  "erythroblastopenia",
+  "acquired pure red cell aplasia",
+  "Diamond-Blackfan anaemia (congenital form)"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A selective failure of erythropoiesis producing severe anaemia with reticulocytopenia while white cells and platelets are preserved",
+   "The bone marrow shows a marked reduction or absence of erythroid precursors with otherwise normal cellularity",
+   "Parvovirus B19 is a classic cause, especially in immunocompromised patients or those with a shortened red cell lifespan such as haemolytic anaemias",
+   "A strong association exists with thymoma, and cross-sectional chest imaging should be performed to look for a mediastinal mass",
+   "Other secondary causes include lymphoproliferative disorders (notably large granular lymphocytic leukaemia), autoimmune disease, drugs and pregnancy",
+   "Anti-erythropoietin antibodies are a recognised cause in patients previously treated with erythropoiesis-stimulating agents",
+   "Management addresses the underlying cause, for example thymectomy, antiviral immunoglobulin for parvovirus, or immunosuppression for immune-mediated disease"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A selective failure of erythropoiesis producing severe anaemia with reticulocytopenia while white cells and platelets are preserved",
-      "The bone marrow shows a marked reduction or absence of erythroid precursors with otherwise normal cellularity",
-      "Parvovirus B19 is a classic cause, especially in immunocompromised patients or those with a shortened red cell lifespan such as haemolytic anaemias",
-      "A strong association exists with thymoma, and cross-sectional chest imaging should be performed to look for a mediastinal mass",
-      "Other secondary causes include lymphoproliferative disorders (notably large granular lymphocytic leukaemia), autoimmune disease, drugs and pregnancy",
-      "Anti-erythropoietin antibodies are a recognised cause in patients previously treated with erythropoiesis-stimulating agents",
-      "Management addresses the underlying cause, for example thymectomy, antiviral immunoglobulin for parvovirus, or immunosuppression for immune-mediated disease"
+  "pathophysiology": "Pure red cell aplasia results from a selective arrest of erythroid precursor development in the bone marrow, sparing the granulocytic and megakaryocytic lineages. Several mechanisms converge on this outcome: direct viral cytotoxicity to erythroid progenitors by parvovirus B19, which infects them via the P antigen; T-cell or antibody-mediated immune attack on erythroid precursors as in thymoma-associated and large granular lymphocytic leukaemia-associated disease; and neutralising antibodies against erythropoietin or its receptor. The congenital form, Diamond-Blackfan anaemia, arises from ribosomal protein gene defects impairing erythroid maturation. The common endpoint is failed red cell production with preserved reticulocyte-poor anaemia.",
+  "additionalDifferentials": [
+   "Aplastic anaemia (pancytopenia rather than isolated anaemia)",
+   "Myelodysplastic syndrome",
+   "Acute parvovirus B19 aplastic crisis in haemolytic anaemia",
+   "Anaemia of chronic disease or renal failure",
+   "Nutritional anaemia (B12 or folate deficiency)",
+   "Congenital Diamond-Blackfan anaemia in the young"
+  ],
+  "additionalInvestigations": [
+   "Reticulocyte count confirming reticulocytopenia",
+   "Bone marrow aspirate and trephine showing absent erythroid precursors",
+   "Parvovirus B19 PCR, particularly in immunocompromised patients",
+   "Cross-sectional chest imaging to detect thymoma",
+   "Peripheral blood immunophenotyping and T-cell clonality for large granular lymphocytic leukaemia",
+   "Autoimmune screen and review of drug and erythropoietin exposure"
+  ],
+  "redFlags": [
+   "Profound symptomatic anaemia requiring urgent transfusion",
+   "A mediastinal mass on imaging suggesting thymoma",
+   "Features of an underlying lymphoproliferative or autoimmune disorder",
+   "Persistent aplasia despite treatment suggesting a missed cause"
+  ],
+  "prognosis": "Prognosis depends on the cause; parvovirus-related and drug-related cases often recover once the trigger is removed or treated, thymoma-associated disease may improve after thymectomy, and idiopathic or immune forms frequently need ongoing immunosuppression.",
+  "pitfalls": [
+   "Overlooking thymoma by not imaging the chest",
+   "Missing parvovirus B19 in an immunocompromised or haemolytic patient",
+   "Failing to identify an underlying large granular lymphocytic leukaemia",
+   "Not reviewing recent drugs or erythropoietin exposure as a reversible cause"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause: intravenous immunoglobulin for parvovirus B19-associated aplasia in immunocompromised patients, and withdraw any culprit drug or erythropoiesis-stimulating agent where anti-erythropoietin antibodies are implicated",
+   "Refer for thymectomy when an associated thymoma is identified, as removal may induce remission",
+   "For idiopathic or immune-mediated disease give immunosuppression such as corticosteroids, ciclosporin or ciclophosphamide, with T-cell-directed therapy for large granular lymphocytic leukaemia-associated cases",
+   "Provide supportive red cell transfusion for symptomatic anaemia",
+   "Institute iron chelation to manage transfusional iron overload",
+   "Monitor the reticulocyte count and haemoglobin to gauge treatment response and detect relapse",
+   "Refer to haematology for coordinated diagnosis and disease-specific management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pure_red_cell_aplasia-pathway",
+   "title": "Pure red cell aplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A selective failure of erythropoiesis producing severe anaemia with reticulocytopenia while white cells and platelets are preserved",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound symptomatic anaemia requiring urgent transfusion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Reticulocyte count confirming reticulocytopenia, Bone marrow aspirate and trephine showing absent erythroid precursors, Parvovirus B19 PCR, particularly in immunocompromised patients"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause: intravenous immunoglobulin for parvovirus B19-associated aplasia in immunocompromised patients, and withdraw any culprit drug or erythropoiesis-stimulating agent where anti-erythropoietin"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking thymoma by not imaging the chest"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pure red cell aplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pure_red_cell_aplasia-matrix",
+   "title": "Pure red cell aplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A selective failure of erythropoiesis producing severe anaemia with reticulocytopenia while white cells and platelets are",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pure red cell aplasia results from a selective arrest of erythroid precursor development in the bone marrow, sparing the granulocytic and megakaryocytic lineages. Several mechanisms converge on this outcome: direct viral cytotoxicity to erythroid progenitors by parvovirus B19, which infects them via the P antigen; T-cell or antibody-mediated immune attack on erythroid precursors as in thymoma-associated and large granular lymphocytic leukaemia-associated disease; and neutralising antibodies against erythropoietin or its receptor. The congenital form, Diamond-Blackfan anaemia, arises from ribosomal protein gene defects impairing erythroid maturation. The common endpoint is failed red cell production with preserved reticulocyte-poor anaemia.",
-    "additionalDifferentials": [
-      "Aplastic anaemia (pancytopenia rather than isolated anaemia)",
-      "Myelodysplastic syndrome",
-      "Acute parvovirus B19 aplastic crisis in haemolytic anaemia",
-      "Anaemia of chronic disease or renal failure",
-      "Nutritional anaemia (B12 or folate deficiency)",
-      "Congenital Diamond-Blackfan anaemia in the young"
+    [
+     "Key Investigations",
+     "Reticulocyte count confirming reticulocytopenia, Bone marrow aspirate and trephine showing absent erythroid precursors,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Reticulocyte count confirming reticulocytopenia",
-      "Bone marrow aspirate and trephine showing absent erythroid precursors",
-      "Parvovirus B19 PCR, particularly in immunocompromised patients",
-      "Cross-sectional chest imaging to detect thymoma",
-      "Peripheral blood immunophenotyping and T-cell clonality for large granular lymphocytic leukaemia",
-      "Autoimmune screen and review of drug and erythropoietin exposure"
+    [
+     "Primary Differentials",
+     "Aplastic anaemia (pancytopenia rather than isolated anaemia), Myelodysplastic syndrome, Acute parvovirus B19 aplastic crisis in",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound symptomatic anaemia requiring urgent transfusion",
-      "A mediastinal mass on imaging suggesting thymoma",
-      "Features of an underlying lymphoproliferative or autoimmune disorder",
-      "Persistent aplasia despite treatment suggesting a missed cause"
+    [
+     "Management Strategy",
+     "Treat the underlying cause: intravenous immunoglobulin for parvovirus B19-associated aplasia in immunocompromised patients, and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the cause; parvovirus-related and drug-related cases often recover once the trigger is removed or treated, thymoma-associated disease may improve after thymectomy, and idiopathic or immune forms frequently need ongoing immunosuppression.",
-    "pitfalls": [
-      "Overlooking thymoma by not imaging the chest",
-      "Missing parvovirus B19 in an immunocompromised or haemolytic patient",
-      "Failing to identify an underlying large granular lymphocytic leukaemia",
-      "Not reviewing recent drugs or erythropoietin exposure as a reversible cause"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause: intravenous immunoglobulin for parvovirus B19-associated aplasia in immunocompromised patients, and withdraw any culprit drug or erythropoiesis-stimulating agent where anti-erythropoietin antibodies are implicated",
-      "Refer for thymectomy when an associated thymoma is identified, as removal may induce remission",
-      "For idiopathic or immune-mediated disease give immunosuppression such as corticosteroids, ciclosporin or ciclophosphamide, with T-cell-directed therapy for large granular lymphocytic leukaemia-associated cases",
-      "Provide supportive red cell transfusion for symptomatic anaemia",
-      "Institute iron chelation to manage transfusional iron overload",
-      "Monitor the reticulocyte count and haemoglobin to gauge treatment response and detect relapse",
-      "Refer to haematology for coordinated diagnosis and disease-specific management"
+    [
+     "Clinical Pitfall",
+     "Overlooking thymoma by not imaging the chest",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pure red cell aplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pure-red-cell-aplasia-diagram",
+   "title": "Pure red cell aplasia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

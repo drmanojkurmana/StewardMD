@@ -1,77 +1,172 @@
 {
-  "id": "muscle_tension_dysphonia",
-  "name": "Muscle tension dysphonia",
-  "aliases": [
-    "MTD",
-    "functional dysphonia",
-    "hyperfunctional dysphonia",
-    "primary muscle tension dysphonia"
+ "id": "muscle_tension_dysphonia",
+ "name": "Muscle tension dysphonia",
+ "aliases": [
+  "MTD",
+  "functional dysphonia",
+  "hyperfunctional dysphonia",
+  "primary muscle tension dysphonia"
+ ],
+ "class": "non_infective",
+ "system": "Ear-Nose-Throat / Laryngology",
+ "specialty": "Otolaryngology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Cummings Otolaryngology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A disorder of excessive or maladaptive laryngeal muscle activity during voicing in the absence of a structural or neurological lesion",
+   "Fundamentally a diagnosis of exclusion, made only after organic pathology has been ruled out on laryngeal examination",
+   "Primary muscle tension dysphonia occurs with normal vocal folds, whereas the secondary form is a compensatory pattern layered on an underlying lesion or reflux",
+   "Presents with a strained, effortful, or rough voice, vocal fatigue, and often neck and laryngeal discomfort",
+   "Laryngoscopy may show supraglottic squeeze, such as anteroposterior or mediolateral compression, with a posterior glottic chink",
+   "Voice therapy is the mainstay of treatment, retraining phonation and reducing laryngeal hyperfunction",
+   "Coexisting reflux, stress, and vocally demanding occupations are common contributors that should be addressed"
   ],
-  "class": "non_infective",
-  "system": "Ear-Nose-Throat / Laryngology",
-  "specialty": "Otolaryngology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Cummings Otolaryngology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A disorder of excessive or maladaptive laryngeal muscle activity during voicing in the absence of a structural or neurological lesion",
-      "Fundamentally a diagnosis of exclusion, made only after organic pathology has been ruled out on laryngeal examination",
-      "Primary muscle tension dysphonia occurs with normal vocal folds, whereas the secondary form is a compensatory pattern layered on an underlying lesion or reflux",
-      "Presents with a strained, effortful, or rough voice, vocal fatigue, and often neck and laryngeal discomfort",
-      "Laryngoscopy may show supraglottic squeeze, such as anteroposterior or mediolateral compression, with a posterior glottic chink",
-      "Voice therapy is the mainstay of treatment, retraining phonation and reducing laryngeal hyperfunction",
-      "Coexisting reflux, stress, and vocally demanding occupations are common contributors that should be addressed"
+  "pathophysiology": "Muscle tension dysphonia reflects an imbalance in the coordination of the intrinsic and extrinsic laryngeal muscles during phonation, with excessive and inefficient recruitment producing a hyperfunctional voicing pattern. In the primary form no structural or neurological abnormality underlies the disorder, and psychological stress, vocal overuse, or learned maladaptive technique drive the excess muscular effort. In the secondary form the hyperfunction develops as a compensatory strategy to overcome an underlying problem such as a vocal fold lesion, reflux irritation, or glottic insufficiency. The resulting supraglottic constriction and abnormal glottic configuration degrade the efficiency of vibration, producing effortful, strained, and fatiguing voice.",
+  "additionalDifferentials": [
+   "Adductor spasmodic dysphonia",
+   "Vocal fold paralysis or paresis",
+   "Benign vocal fold lesions such as nodules or polyps",
+   "Laryngopharyngeal reflux-related dysphonia",
+   "Vocal tremor",
+   "Psychogenic (conversion) aphonia"
+  ],
+  "additionalInvestigations": [
+   "Flexible fibreoptic laryngoscopy to exclude structural and neurological causes",
+   "Videostroboscopy to assess the mucosal wave and reveal subtle lesions or glottic insufficiency",
+   "Perceptual and acoustic voice assessment by a speech and language therapist",
+   "Assessment for laryngopharyngeal reflux as a contributing factor",
+   "Trial of voice therapy, with response supporting the functional diagnosis"
+  ],
+  "redFlags": [
+   "Persistent dysphonia in a smoker or with other risk factors, mandating exclusion of malignancy before a functional label",
+   "Impaired vocal fold mobility suggesting a neurogenic cause rather than tension",
+   "Task-specific voice breaks characteristic of spasmodic dysphonia",
+   "Progressive symptoms with neurological signs beyond the larynx"
+  ],
+  "prognosis": "The outlook is generally good, with many patients improving substantially through voice therapy, though relapse can occur if underlying vocal demands, stress, or reflux persist; secondary cases depend on treating the primary lesion.",
+  "pitfalls": [
+   "Diagnosing muscle tension dysphonia without first excluding organic disease by adequate laryngeal examination",
+   "Overlooking an underlying lesion driving a secondary compensatory pattern",
+   "Confusing it with spasmodic dysphonia and mismanaging accordingly",
+   "Neglecting contributory reflux, stress, or occupational vocal load"
+  ],
+  "references": [
+   "Cummings Otolaryngology: Head and Neck Surgery",
+   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Voice therapy delivered by a speech and language therapist is the mainstay, retraining phonation and reducing laryngeal hyperfunction",
+   "Vocal hygiene advice, hydration and reduction of vocal overuse and strain",
+   "In secondary muscle tension dysphonia, treat the underlying cause by managing any vocal fold lesion and treating laryngopharyngeal reflux with lifestyle measures and acid-suppressing proton pump inhibitors",
+   "Address contributing psychological stress with relaxation techniques and psychological support where appropriate",
+   "Ensure structural and neurological pathology has been excluded on laryngoscopy before confirming the functional diagnosis",
+   "Laryngology follow-up and reassessment, as relapse can occur if vocal demands, stress or reflux persist"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "muscle_tension_dysphonia-pathway",
+   "title": "Muscle tension dysphonia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A disorder of excessive or maladaptive laryngeal muscle activity during voicing in the absence of a structural or neurological lesion",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent dysphonia in a smoker or with other risk factors, mandating exclusion of malignancy before a functional label",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flexible fibreoptic laryngoscopy to exclude structural and neurological causes, Videostroboscopy to assess the mucosal wave and reveal subtle lesions or glottic insufficiency, Perceptual and acoustic voice assessment by a"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Voice therapy delivered by a speech and language therapist is the mainstay, retraining phonation and reducing laryngeal hyperfunction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing muscle tension dysphonia without first excluding organic disease by adequate laryngeal examination"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of muscle tension dysphonia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "muscle_tension_dysphonia-matrix",
+   "title": "Muscle tension dysphonia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A disorder of excessive or maladaptive laryngeal muscle activity during voicing in the absence of a structural or neurological",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Muscle tension dysphonia reflects an imbalance in the coordination of the intrinsic and extrinsic laryngeal muscles during phonation, with excessive and inefficient recruitment producing a hyperfunctional voicing pattern. In the primary form no structural or neurological abnormality underlies the disorder, and psychological stress, vocal overuse, or learned maladaptive technique drive the excess muscular effort. In the secondary form the hyperfunction develops as a compensatory strategy to overcome an underlying problem such as a vocal fold lesion, reflux irritation, or glottic insufficiency. The resulting supraglottic constriction and abnormal glottic configuration degrade the efficiency of vibration, producing effortful, strained, and fatiguing voice.",
-    "additionalDifferentials": [
-      "Adductor spasmodic dysphonia",
-      "Vocal fold paralysis or paresis",
-      "Benign vocal fold lesions such as nodules or polyps",
-      "Laryngopharyngeal reflux-related dysphonia",
-      "Vocal tremor",
-      "Psychogenic (conversion) aphonia"
+    [
+     "Key Investigations",
+     "Flexible fibreoptic laryngoscopy to exclude structural and neurological causes, Videostroboscopy to assess the mucosal wave and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flexible fibreoptic laryngoscopy to exclude structural and neurological causes",
-      "Videostroboscopy to assess the mucosal wave and reveal subtle lesions or glottic insufficiency",
-      "Perceptual and acoustic voice assessment by a speech and language therapist",
-      "Assessment for laryngopharyngeal reflux as a contributing factor",
-      "Trial of voice therapy, with response supporting the functional diagnosis"
+    [
+     "Primary Differentials",
+     "Adductor spasmodic dysphonia, Vocal fold paralysis or paresis, Benign vocal fold lesions such as nodules or polyps",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent dysphonia in a smoker or with other risk factors, mandating exclusion of malignancy before a functional label",
-      "Impaired vocal fold mobility suggesting a neurogenic cause rather than tension",
-      "Task-specific voice breaks characteristic of spasmodic dysphonia",
-      "Progressive symptoms with neurological signs beyond the larynx"
+    [
+     "Management Strategy",
+     "Voice therapy delivered by a speech and language therapist is the mainstay, retraining phonation and reducing laryngeal",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is generally good, with many patients improving substantially through voice therapy, though relapse can occur if underlying vocal demands, stress, or reflux persist; secondary cases depend on treating the primary lesion.",
-    "pitfalls": [
-      "Diagnosing muscle tension dysphonia without first excluding organic disease by adequate laryngeal examination",
-      "Overlooking an underlying lesion driving a secondary compensatory pattern",
-      "Confusing it with spasmodic dysphonia and mismanaging accordingly",
-      "Neglecting contributory reflux, stress, or occupational vocal load"
-    ],
-    "references": [
-      "Cummings Otolaryngology: Head and Neck Surgery",
-      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Voice therapy delivered by a speech and language therapist is the mainstay, retraining phonation and reducing laryngeal hyperfunction",
-      "Vocal hygiene advice, hydration and reduction of vocal overuse and strain",
-      "In secondary muscle tension dysphonia, treat the underlying cause by managing any vocal fold lesion and treating laryngopharyngeal reflux with lifestyle measures and acid-suppressing proton pump inhibitors",
-      "Address contributing psychological stress with relaxation techniques and psychological support where appropriate",
-      "Ensure structural and neurological pathology has been excluded on laryngoscopy before confirming the functional diagnosis",
-      "Laryngology follow-up and reassessment, as relapse can occur if vocal demands, stress or reflux persist"
+    [
+     "Clinical Pitfall",
+     "Diagnosing muscle tension dysphonia without first excluding organic disease by adequate laryngeal examination",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for muscle tension dysphonia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "muscle-tension-dysphonia-diagram",
+   "title": "Muscle tension dysphonia: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "superior_laryngeal_neuralgia",
-  "name": "Superior laryngeal neuralgia",
-  "aliases": [
-    "SLN neuralgia",
-    "laryngeal neuralgia",
-    "superior laryngeal nerve neuralgia"
+ "id": "superior_laryngeal_neuralgia",
+ "name": "Superior laryngeal neuralgia",
+ "aliases": [
+  "SLN neuralgia",
+  "laryngeal neuralgia",
+  "superior laryngeal nerve neuralgia"
+ ],
+ "class": "non_infective",
+ "system": "Ear-Nose-Throat / Neurology",
+ "specialty": "Otolaryngology / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Cummings Otolaryngology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Causes paroxysms of sharp, shooting pain in the lateral neck, over the thyrohyoid membrane, radiating to the angle of the jaw, ear, and supraclavicular region",
+   "Attacks are triggered by swallowing, phonation, coughing, yawning, or turning the head",
+   "A tender trigger point is often found over the thyrohyoid membrane where the internal branch of the superior laryngeal nerve pierces it",
+   "It may follow upper respiratory infection, neck surgery (including thyroid surgery and endarterectomy), or trauma",
+   "Diagnostic and therapeutic superior laryngeal nerve block at the trigger point relieving the pain strongly supports the diagnosis",
+   "First-line medical therapy uses anticonvulsants such as carbamazepine; repeated nerve blocks or nerve sectioning help refractory cases",
+   "The distribution and swallow-triggered pattern distinguish it from glossopharyngeal neuralgia and carotidynia"
   ],
-  "class": "non_infective",
-  "system": "Ear-Nose-Throat / Neurology",
-  "specialty": "Otolaryngology / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Cummings Otolaryngology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Causes paroxysms of sharp, shooting pain in the lateral neck, over the thyrohyoid membrane, radiating to the angle of the jaw, ear, and supraclavicular region",
-      "Attacks are triggered by swallowing, phonation, coughing, yawning, or turning the head",
-      "A tender trigger point is often found over the thyrohyoid membrane where the internal branch of the superior laryngeal nerve pierces it",
-      "It may follow upper respiratory infection, neck surgery (including thyroid surgery and endarterectomy), or trauma",
-      "Diagnostic and therapeutic superior laryngeal nerve block at the trigger point relieving the pain strongly supports the diagnosis",
-      "First-line medical therapy uses anticonvulsants such as carbamazepine; repeated nerve blocks or nerve sectioning help refractory cases",
-      "The distribution and swallow-triggered pattern distinguish it from glossopharyngeal neuralgia and carotidynia"
+  "pathophysiology": "Superior laryngeal neuralgia is a paroxysmal neuralgia of the superior laryngeal nerve, usually its internal branch, which supplies sensation to the supraglottic larynx and pierces the thyrohyoid membrane. Irritation, entrapment, or injury of the nerve, sometimes after infection, surgery, or trauma to the neck, is thought to generate ectopic afferent discharges triggered by laryngeal movement during swallowing and phonation. The resulting lancinating pain is referred throughout the sensory field of the nerve, and a focal trigger point overlying its entry through the thyrohyoid membrane is characteristic.",
+  "additionalDifferentials": [
+   "Glossopharyngeal neuralgia",
+   "Carotidynia",
+   "Eagle syndrome",
+   "Thyroid pathology (thyroiditis or nodular disease)",
+   "Laryngeal or hypopharyngeal malignancy",
+   "Cervical spine referred pain",
+   "Post-surgical neuroma of the neck"
+  ],
+  "additionalInvestigations": [
+   "Palpation for a trigger point over the thyrohyoid membrane reproducing the pain",
+   "Diagnostic superior laryngeal nerve block with local anaesthetic",
+   "Flexible laryngoscopy to exclude a mucosal or supraglottic lesion",
+   "Ultrasound of the neck and thyroid to exclude local pathology",
+   "MRI or CT of the neck if a structural or neoplastic cause is suspected",
+   "Review of any prior neck or thyroid surgery"
+  ],
+  "redFlags": [
+   "A neck or laryngeal mass suggesting malignancy",
+   "Progressive hoarseness, stridor, or dysphagia",
+   "Constant rather than paroxysmal pain with systemic features",
+   "New cranial nerve deficits"
+  ],
+  "prognosis": "The condition is benign and frequently responds to anticonvulsant medication or superior laryngeal nerve blocks, with many cases settling over time; refractory pain can be controlled by repeated blocks or nerve sectioning.",
+  "pitfalls": [
+   "Confusing it with glossopharyngeal neuralgia given overlapping triggers",
+   "Overlooking laryngeal or thyroid malignancy as a cause of lateral neck pain",
+   "Failing to seek and test the thyrohyoid trigger point",
+   "Attributing the referred otalgia to primary ear disease"
+  ],
+  "references": [
+   "Cummings Otolaryngology: Head and Neck Surgery",
+   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start an anticonvulsant such as carbamazepine as first-line medical therapy",
+   "Perform a superior laryngeal nerve block with local anaesthetic at the trigger point, which is both diagnostic and therapeutic",
+   "Offer repeated nerve blocks for pain that recurs after an initial response",
+   "Consider nerve sectioning or ablation of the superior laryngeal nerve for refractory pain",
+   "Exclude a mucosal or supraglottic lesion with flexible laryngoscopy and treat any identified precipitant such as prior neck surgery or infection",
+   "Refer to combined ENT, neurology and pain services for resistant cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "superior_laryngeal_neuralgia-pathway",
+   "title": "Superior laryngeal neuralgia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Causes paroxysms of sharp, shooting pain in the lateral neck, over the thyrohyoid membrane, radiating to the angle of the jaw, ear, and supraclavicular region",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A neck or laryngeal mass suggesting malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Palpation for a trigger point over the thyrohyoid membrane reproducing the pain, Diagnostic superior laryngeal nerve block with local anaesthetic, Flexible laryngoscopy to exclude a mucosal or supraglottic lesion"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start an anticonvulsant such as carbamazepine as first-line medical therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with glossopharyngeal neuralgia given overlapping triggers"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of superior laryngeal neuralgia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "superior_laryngeal_neuralgia-matrix",
+   "title": "Superior laryngeal neuralgia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Causes paroxysms of sharp, shooting pain in the lateral neck, over the thyrohyoid membrane, radiating to the angle of the jaw,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Superior laryngeal neuralgia is a paroxysmal neuralgia of the superior laryngeal nerve, usually its internal branch, which supplies sensation to the supraglottic larynx and pierces the thyrohyoid membrane. Irritation, entrapment, or injury of the nerve, sometimes after infection, surgery, or trauma to the neck, is thought to generate ectopic afferent discharges triggered by laryngeal movement during swallowing and phonation. The resulting lancinating pain is referred throughout the sensory field of the nerve, and a focal trigger point overlying its entry through the thyrohyoid membrane is characteristic.",
-    "additionalDifferentials": [
-      "Glossopharyngeal neuralgia",
-      "Carotidynia",
-      "Eagle syndrome",
-      "Thyroid pathology (thyroiditis or nodular disease)",
-      "Laryngeal or hypopharyngeal malignancy",
-      "Cervical spine referred pain",
-      "Post-surgical neuroma of the neck"
+    [
+     "Key Investigations",
+     "Palpation for a trigger point over the thyrohyoid membrane reproducing the pain, Diagnostic superior laryngeal nerve block with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Palpation for a trigger point over the thyrohyoid membrane reproducing the pain",
-      "Diagnostic superior laryngeal nerve block with local anaesthetic",
-      "Flexible laryngoscopy to exclude a mucosal or supraglottic lesion",
-      "Ultrasound of the neck and thyroid to exclude local pathology",
-      "MRI or CT of the neck if a structural or neoplastic cause is suspected",
-      "Review of any prior neck or thyroid surgery"
+    [
+     "Primary Differentials",
+     "Glossopharyngeal neuralgia, Carotidynia, Eagle syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A neck or laryngeal mass suggesting malignancy",
-      "Progressive hoarseness, stridor, or dysphagia",
-      "Constant rather than paroxysmal pain with systemic features",
-      "New cranial nerve deficits"
+    [
+     "Management Strategy",
+     "Start an anticonvulsant such as carbamazepine as first-line medical therapy",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and frequently responds to anticonvulsant medication or superior laryngeal nerve blocks, with many cases settling over time; refractory pain can be controlled by repeated blocks or nerve sectioning.",
-    "pitfalls": [
-      "Confusing it with glossopharyngeal neuralgia given overlapping triggers",
-      "Overlooking laryngeal or thyroid malignancy as a cause of lateral neck pain",
-      "Failing to seek and test the thyrohyoid trigger point",
-      "Attributing the referred otalgia to primary ear disease"
-    ],
-    "references": [
-      "Cummings Otolaryngology: Head and Neck Surgery",
-      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start an anticonvulsant such as carbamazepine as first-line medical therapy",
-      "Perform a superior laryngeal nerve block with local anaesthetic at the trigger point, which is both diagnostic and therapeutic",
-      "Offer repeated nerve blocks for pain that recurs after an initial response",
-      "Consider nerve sectioning or ablation of the superior laryngeal nerve for refractory pain",
-      "Exclude a mucosal or supraglottic lesion with flexible laryngoscopy and treat any identified precipitant such as prior neck surgery or infection",
-      "Refer to combined ENT, neurology and pain services for resistant cases"
+    [
+     "Clinical Pitfall",
+     "Confusing it with glossopharyngeal neuralgia given overlapping triggers",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for superior laryngeal neuralgia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "superior-laryngeal-neuralgia-diagram",
+   "title": "Superior laryngeal neuralgia: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

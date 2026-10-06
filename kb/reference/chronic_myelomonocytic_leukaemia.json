@@ -1,73 +1,168 @@
 {
-  "id": "chronic_myelomonocytic_leukaemia",
-  "name": "Chronic myelomonocytic leukaemia",
-  "aliases": [
-    "CMML"
+ "id": "chronic_myelomonocytic_leukaemia",
+ "name": "Chronic myelomonocytic leukaemia",
+ "aliases": [
+  "CMML"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO haematolymphoid classification / haematology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A clonal disorder with overlapping myelodysplastic and myeloproliferative features, defined by persistent peripheral blood monocytosis",
+   "It occurs mainly in older adults and presents with cytopenias, monocytosis, splenomegaly or constitutional symptoms",
+   "Diagnosis requires sustained monocytosis with monocytes forming a significant fraction of the white cells, and exclusion of other causes",
+   "The BCR-ABL1 fusion must be absent, distinguishing it from chronic myeloid leukaemia",
+   "Common mutations include TET2, SRSF2 and ASXL1, and prognostic scores guide management",
+   "It carries a risk of progression to acute myeloid leukaemia"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO haematolymphoid classification / haematology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A clonal disorder with overlapping myelodysplastic and myeloproliferative features, defined by persistent peripheral blood monocytosis",
-      "It occurs mainly in older adults and presents with cytopenias, monocytosis, splenomegaly or constitutional symptoms",
-      "Diagnosis requires sustained monocytosis with monocytes forming a significant fraction of the white cells, and exclusion of other causes",
-      "The BCR-ABL1 fusion must be absent, distinguishing it from chronic myeloid leukaemia",
-      "Common mutations include TET2, SRSF2 and ASXL1, and prognostic scores guide management",
-      "It carries a risk of progression to acute myeloid leukaemia"
+  "pathophysiology": "Chronic myelomonocytic leukaemia is a clonal haematopoietic stem cell neoplasm with both dysplastic (ineffective haematopoiesis causing cytopenias) and proliferative (monocytosis, sometimes leucocytosis and organomegaly) features. Recurrent mutations in epigenetic regulators and splicing genes such as TET2, SRSF2 and ASXL1 drive the clonal expansion and the characteristic monocyte proliferation. Ineffective and dysplastic maturation produces the peripheral cytopenias, and accumulation of blasts over time can culminate in transformation to acute myeloid leukaemia.",
+  "additionalDifferentials": [
+   "Reactive monocytosis (infection, inflammation, malignancy)",
+   "Chronic myeloid leukaemia (BCR-ABL1 positive)",
+   "Myelodysplastic syndrome",
+   "Atypical chronic myeloid leukaemia",
+   "Juvenile myelomonocytic leukaemia (in children)"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and film confirming sustained monocytosis",
+   "Bone marrow aspirate and trephine with cytogenetics",
+   "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
+   "Molecular panel (for example TET2, SRSF2, ASXL1)",
+   "Assessment for reactive causes of monocytosis"
+  ],
+  "redFlags": [
+   "Rising blast count indicating progression to acute leukaemia",
+   "Worsening cytopenias with bleeding or infection",
+   "Rapidly enlarging spleen or proliferative features",
+   "Severe constitutional symptoms"
+  ],
+  "prognosis": "The course is heterogeneous; prognosis depends on blast percentage, cytogenetics, mutations and blood counts, ranging from indolent disease to rapid progression to acute myeloid leukaemia.",
+  "pitfalls": [
+   "Attributing persistent monocytosis to a reactive cause without excluding CMML",
+   "Not testing for BCR-ABL1 to exclude chronic myeloid leukaemia",
+   "Underusing prognostic scoring to guide therapy",
+   "Missing progression to acute leukaemia"
+  ],
+  "references": [
+   "WHO classification of haematolymphoid tumours",
+   "Haematology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Risk-adapted management using prognostic scoring, with hypomethylating agents (azacitidine or decitabine) for higher-risk or dysplastic disease",
+   "Allogeneic haematopoietic stem cell transplantation as the only curative option for eligible higher-risk patients",
+   "Cytoreduction with hydroxycarbamide to control the proliferative phenotype, symptomatic leucocytosis and splenomegaly",
+   "Supportive care with red-cell transfusion and erythropoiesis-stimulating agents for anaemia, and prompt treatment of infection during cytopenias",
+   "Serial monitoring of blood counts and marrow blast percentage for disease progression",
+   "Surveillance for transformation to acute myeloid leukaemia",
+   "Haematology-led multidisciplinary care with consideration of clinical trials"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chronic_myelomonocytic_leukaemia-pathway",
+   "title": "Chronic myelomonocytic leukaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A clonal disorder with overlapping myelodysplastic and myeloproliferative features, defined by persistent peripheral blood monocytosis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rising blast count indicating progression to acute leukaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and film confirming sustained monocytosis, Bone marrow aspirate and trephine with cytogenetics, BCR-ABL1 testing to exclude chronic myeloid leukaemia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Risk-adapted management using prognostic scoring, with hypomethylating agents (azacitidine or decitabine) for higher-risk or dysplastic disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing persistent monocytosis to a reactive cause without excluding CMML"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chronic myelomonocytic leukaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic_myelomonocytic_leukaemia-matrix",
+   "title": "Chronic myelomonocytic leukaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A clonal disorder with overlapping myelodysplastic and myeloproliferative features, defined by persistent peripheral blood",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic myelomonocytic leukaemia is a clonal haematopoietic stem cell neoplasm with both dysplastic (ineffective haematopoiesis causing cytopenias) and proliferative (monocytosis, sometimes leucocytosis and organomegaly) features. Recurrent mutations in epigenetic regulators and splicing genes such as TET2, SRSF2 and ASXL1 drive the clonal expansion and the characteristic monocyte proliferation. Ineffective and dysplastic maturation produces the peripheral cytopenias, and accumulation of blasts over time can culminate in transformation to acute myeloid leukaemia.",
-    "additionalDifferentials": [
-      "Reactive monocytosis (infection, inflammation, malignancy)",
-      "Chronic myeloid leukaemia (BCR-ABL1 positive)",
-      "Myelodysplastic syndrome",
-      "Atypical chronic myeloid leukaemia",
-      "Juvenile myelomonocytic leukaemia (in children)"
+    [
+     "Key Investigations",
+     "Full blood count and film confirming sustained monocytosis, Bone marrow aspirate and trephine with cytogenetics, BCR-ABL1 testing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and film confirming sustained monocytosis",
-      "Bone marrow aspirate and trephine with cytogenetics",
-      "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
-      "Molecular panel (for example TET2, SRSF2, ASXL1)",
-      "Assessment for reactive causes of monocytosis"
+    [
+     "Primary Differentials",
+     "Reactive monocytosis (infection, inflammation, malignancy), Chronic myeloid leukaemia (BCR-ABL1 positive), Myelodysplastic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rising blast count indicating progression to acute leukaemia",
-      "Worsening cytopenias with bleeding or infection",
-      "Rapidly enlarging spleen or proliferative features",
-      "Severe constitutional symptoms"
+    [
+     "Management Strategy",
+     "Risk-adapted management using prognostic scoring, with hypomethylating agents (azacitidine or decitabine) for higher-risk or",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is heterogeneous; prognosis depends on blast percentage, cytogenetics, mutations and blood counts, ranging from indolent disease to rapid progression to acute myeloid leukaemia.",
-    "pitfalls": [
-      "Attributing persistent monocytosis to a reactive cause without excluding CMML",
-      "Not testing for BCR-ABL1 to exclude chronic myeloid leukaemia",
-      "Underusing prognostic scoring to guide therapy",
-      "Missing progression to acute leukaemia"
-    ],
-    "references": [
-      "WHO classification of haematolymphoid tumours",
-      "Haematology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Risk-adapted management using prognostic scoring, with hypomethylating agents (azacitidine or decitabine) for higher-risk or dysplastic disease",
-      "Allogeneic haematopoietic stem cell transplantation as the only curative option for eligible higher-risk patients",
-      "Cytoreduction with hydroxycarbamide to control the proliferative phenotype, symptomatic leucocytosis and splenomegaly",
-      "Supportive care with red-cell transfusion and erythropoiesis-stimulating agents for anaemia, and prompt treatment of infection during cytopenias",
-      "Serial monitoring of blood counts and marrow blast percentage for disease progression",
-      "Surveillance for transformation to acute myeloid leukaemia",
-      "Haematology-led multidisciplinary care with consideration of clinical trials"
+    [
+     "Clinical Pitfall",
+     "Attributing persistent monocytosis to a reactive cause without excluding CMML",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chronic myelomonocytic leukaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-myelomonocytic-leukaemia-diagram",
+   "title": "Chronic myelomonocytic leukaemia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "scombroid_poisoning",
-  "name": "Scombroid (histamine) fish poisoning",
-  "aliases": [
-    "scombroid",
-    "histamine fish poisoning",
-    "scombrotoxism",
-    "mahi-mahi/tuna histamine poisoning"
+ "id": "scombroid_poisoning",
+ "name": "Scombroid (histamine) fish poisoning",
+ "aliases": [
+  "scombroid",
+  "histamine fish poisoning",
+  "scombrotoxism",
+  "mahi-mahi/tuna histamine poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Envenomation",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Results from eating fish (typically dark-fleshed species such as tuna, mackerel, mahi-mahi, sardines) that have been inadequately refrigerated, allowing bacterial conversion of histidine to histamine",
+   "Onset is rapid, usually within minutes to an hour, mimicking an allergic reaction despite being a toxin-mediated illness",
+   "Features include flushing of the face and upper body, headache, palpitations, urticaria, sweating, and gastrointestinal upset; a peppery or metallic taste to the fish may be reported",
+   "Because it mimics IgE-mediated allergy, it is often misdiagnosed as a seafood allergy, which has implications for future advice",
+   "Management is largely supportive with antihistamines; severe reactions with bronchospasm or hypotension are treated as for anaphylaxis, including adrenaline",
+   "Multiple diners becoming ill after the same fish, or normal tolerance of the same species previously, points to scombroid rather than true allergy",
+   "The fish often looks and smells normal, and the histamine is heat-stable, so cooking does not prevent poisoning"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Envenomation",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Results from eating fish (typically dark-fleshed species such as tuna, mackerel, mahi-mahi, sardines) that have been inadequately refrigerated, allowing bacterial conversion of histidine to histamine",
-      "Onset is rapid, usually within minutes to an hour, mimicking an allergic reaction despite being a toxin-mediated illness",
-      "Features include flushing of the face and upper body, headache, palpitations, urticaria, sweating, and gastrointestinal upset; a peppery or metallic taste to the fish may be reported",
-      "Because it mimics IgE-mediated allergy, it is often misdiagnosed as a seafood allergy, which has implications for future advice",
-      "Management is largely supportive with antihistamines; severe reactions with bronchospasm or hypotension are treated as for anaphylaxis, including adrenaline",
-      "Multiple diners becoming ill after the same fish, or normal tolerance of the same species previously, points to scombroid rather than true allergy",
-      "The fish often looks and smells normal, and the histamine is heat-stable, so cooking does not prevent poisoning"
+  "pathophysiology": "When scombroid and related fish are stored at inadequate temperatures, bacteria decarboxylate the naturally abundant amino acid histidine in the flesh into histamine and other biogenic amines. Ingesting this preformed histamine produces a pharmacological reaction that mimics an allergic response, with vasodilatation, flushing, increased vascular permeability and, in severe cases, bronchospasm and hypotension. The reaction is not immunologically mediated and does not require prior sensitisation, and because histamine is heat-stable it is not removed by cooking; other amines may potentiate the effect by inhibiting histamine breakdown.",
+  "additionalDifferentials": [
+   "True IgE-mediated seafood allergy or anaphylaxis",
+   "Ciguatera fish poisoning",
+   "Anaphylaxis to another allergen",
+   "Carcinoid or other flushing syndrome",
+   "Panic attack or vasomotor flushing",
+   "Medication or alcohol-related flushing reaction"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis based on rapid onset after fish and characteristic flushing",
+   "Corroborating history of others affected by the same meal",
+   "Observation of response to antihistamines to support the diagnosis",
+   "Electrocardiography and monitoring if palpitations or hypotension occur",
+   "Measurement of histamine in the implicated fish where laboratory capability exists"
+  ],
+  "redFlags": [
+   "Airway compromise, stridor or severe bronchospasm",
+   "Hypotension or shock",
+   "Rapidly progressive symptoms requiring treatment as anaphylaxis",
+   "Reaction in a patient with significant cardiac or respiratory comorbidity",
+   "Severe or persistent symptoms despite antihistamines"
+  ],
+  "prognosis": "Scombroid poisoning is usually mild and self-limiting, resolving within hours, and responds well to antihistamines; severe reactions are uncommon but can resemble anaphylaxis and require the same emergency treatment.",
+  "pitfalls": [
+   "Mislabelling the patient as fish-allergic, leading to unnecessary lifelong avoidance",
+   "Assuming cooking or the fish smelling normal excludes the diagnosis, as histamine is heat-stable",
+   "Under-treating a severe reaction that warrants adrenaline as for anaphylaxis",
+   "Failing to consider a common-source outbreak and report a food-safety issue"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "WHO/food-safety guidance on histamine fish poisoning"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with antihistamines, using both H1 and H2 antagonists, as the mainstay for this histamine-mediated reaction",
+   "Manage severe reactions with bronchospasm or hypotension as for anaphylaxis, including intramuscular adrenaline, oxygen, and intravenous fluids",
+   "Provide supportive care and cardiorespiratory monitoring where palpitations or hypotension occur",
+   "Reassure that the illness is self-limiting and explain it is a toxin rather than a seafood allergy, so the fish need not be avoided lifelong",
+   "Advise on prevention through proper refrigeration and cold-chain handling of susceptible fish",
+   "Report suspected outbreaks to public and environmental health authorities"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "scombroid_poisoning-pathway",
+   "title": "Scombroid (histamine) fish poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Results from eating fish (typically dark-fleshed species such as tuna, mackerel, mahi-mahi, sardines) that have been inadequately refrigerated, allowing bacterial conversion of histidine to histamine",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Airway compromise, stridor or severe bronchospasm",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis based on rapid onset after fish and characteristic flushing, Corroborating history of others affected by the same meal, Observation of response to antihistamines to support the diagnosis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with antihistamines, using both H1 and H2 antagonists, as the mainstay for this histamine-mediated reaction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling the patient as fish-allergic, leading to unnecessary lifelong avoidance"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of scombroid (histamine) fish poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "scombroid_poisoning-matrix",
+   "title": "Scombroid (histamine) fish poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Results from eating fish (typically dark-fleshed species such as tuna, mackerel, mahi-mahi, sardines) that have been inadequately",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "When scombroid and related fish are stored at inadequate temperatures, bacteria decarboxylate the naturally abundant amino acid histidine in the flesh into histamine and other biogenic amines. Ingesting this preformed histamine produces a pharmacological reaction that mimics an allergic response, with vasodilatation, flushing, increased vascular permeability and, in severe cases, bronchospasm and hypotension. The reaction is not immunologically mediated and does not require prior sensitisation, and because histamine is heat-stable it is not removed by cooking; other amines may potentiate the effect by inhibiting histamine breakdown.",
-    "additionalDifferentials": [
-      "True IgE-mediated seafood allergy or anaphylaxis",
-      "Ciguatera fish poisoning",
-      "Anaphylaxis to another allergen",
-      "Carcinoid or other flushing syndrome",
-      "Panic attack or vasomotor flushing",
-      "Medication or alcohol-related flushing reaction"
+    [
+     "Key Investigations",
+     "Clinical diagnosis based on rapid onset after fish and characteristic flushing, Corroborating history of others affected by the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis based on rapid onset after fish and characteristic flushing",
-      "Corroborating history of others affected by the same meal",
-      "Observation of response to antihistamines to support the diagnosis",
-      "Electrocardiography and monitoring if palpitations or hypotension occur",
-      "Measurement of histamine in the implicated fish where laboratory capability exists"
+    [
+     "Primary Differentials",
+     "True IgE-mediated seafood allergy or anaphylaxis, Ciguatera fish poisoning, Anaphylaxis to another allergen",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Airway compromise, stridor or severe bronchospasm",
-      "Hypotension or shock",
-      "Rapidly progressive symptoms requiring treatment as anaphylaxis",
-      "Reaction in a patient with significant cardiac or respiratory comorbidity",
-      "Severe or persistent symptoms despite antihistamines"
+    [
+     "Management Strategy",
+     "Treat with antihistamines, using both H1 and H2 antagonists, as the mainstay for this histamine-mediated reaction",
+     "Core treatment modality"
     ],
-    "prognosis": "Scombroid poisoning is usually mild and self-limiting, resolving within hours, and responds well to antihistamines; severe reactions are uncommon but can resemble anaphylaxis and require the same emergency treatment.",
-    "pitfalls": [
-      "Mislabelling the patient as fish-allergic, leading to unnecessary lifelong avoidance",
-      "Assuming cooking or the fish smelling normal excludes the diagnosis, as histamine is heat-stable",
-      "Under-treating a severe reaction that warrants adrenaline as for anaphylaxis",
-      "Failing to consider a common-source outbreak and report a food-safety issue"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "WHO/food-safety guidance on histamine fish poisoning"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with antihistamines, using both H1 and H2 antagonists, as the mainstay for this histamine-mediated reaction",
-      "Manage severe reactions with bronchospasm or hypotension as for anaphylaxis, including intramuscular adrenaline, oxygen, and intravenous fluids",
-      "Provide supportive care and cardiorespiratory monitoring where palpitations or hypotension occur",
-      "Reassure that the illness is self-limiting and explain it is a toxin rather than a seafood allergy, so the fish need not be avoided lifelong",
-      "Advise on prevention through proper refrigeration and cold-chain handling of susceptible fish",
-      "Report suspected outbreaks to public and environmental health authorities"
+    [
+     "Clinical Pitfall",
+     "Mislabelling the patient as fish-allergic, leading to unnecessary lifelong avoidance",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for scombroid (histamine) fish poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "scombroid-poisoning-diagram",
+   "title": "Scombroid (histamine) fish poisoning: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

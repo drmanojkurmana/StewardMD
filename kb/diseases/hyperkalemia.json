@@ -135,5 +135,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h4338b4c9"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hyperkalemia-dx-algo",
+      "title": "Hyperkalaemia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Hyperkalaemia (plasma K+ ≥5.5 mM) occurs in up to 10% of hospitalised patients; severe hyperkalaemia (>6.0 mM) in ~1% and carries significantly increased mortality (p.401).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hyperkalaemia is a medical emergency because of its cardiac effects - arrhythmias include sinus bradycardia, sinus arrest, slow idioventricular rhythms, VT, VF and asystole (p.402-403).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum electrolytes, BUN, creatinine, serum osmolality, Mg2+ and Ca2+, complete blood count (p.403), Urinary pH, osmolality, creatinine and electrolytes (urine Na+ 7-8 in hyperkalaemia; values <8 suggest tubular"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: By plasma K+: hyperkalaemia ≥5.5 mM; severe >6.0 mM (markedly increased mortality). ECG-correlated severity bands: peaked T waves 5.5-6.5 mM; loss of P waves 6.5-7.5 mM; widened QRS 7.0-8.0 mM; sine-wave pattern >8.0 mM."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating a falsely high K+: failing to exclude pseudohyperkalaemia before intervening (haemolysed sample, fist clenching, extreme thrombo/leuko/erythrocytosis, cold storage) (p.401-402)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hyperkalaemia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hyperkalemia-matrix",
+      "title": "Hyperkalaemia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hyperkalaemia (plasma K+ ≥5.5 mM) occurs in up to 10% of hospitalised patients; severe hyperkalaemia (>6.0 mM) in ~1% and carries",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes, BUN, creatinine, serum osmolality, Mg2+ and Ca2+, complete blood count (p.403), Urinary pH, osmolality,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hyporeninaemic hypoaldosteronism - common in diabetics, the elderly and renal insufficiency; classically suppressed renin and",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hyperkalaemia is a medical emergency because of its cardiac effects - arrhythmias include sinus bradycardia, sinus arrest, slow",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a falsely high K+: failing to exclude pseudohyperkalaemia before intervening (haemolysed sample, fist clenching, extreme",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hyperkalaemia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "hyperkalemia-diagram",
+      "title": "Hyperkalaemia: Renal & Urinary Tract Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+      "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+        },
+        {
+          "label": "Tubular Apparatus",
+          "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+        }
+      ]
+    }
+  ]
 }

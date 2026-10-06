@@ -3,7 +3,11 @@
   "name": "Acute Limb Ischaemia",
   "class": "non_infective",
   "system": "Vascular",
-  "coding": { "icd10": "I74.3", "icd11": null, "snomed": null },
+  "coding": {
+    "icd10": "I74.3",
+    "icd11": null,
+    "snomed": null
+  },
   "matching": {
     "find": {
       "peripheralVascularDisease": 22,
@@ -26,19 +30,131 @@
     "Systemic anticoagulate immediately unless contraindicated; urgent vascular referral"
   ],
   "investigations": [
-    { "test": "Handheld Doppler of distal pulses + ankle pressures" },
-    { "test": "Urgent CT/MR/catheter angiography to localise occlusion" },
-    { "test": "ECG (atrial fibrillation), FBC, coagulation, group-and-save" }
+    {
+      "test": "Handheld Doppler of distal pulses + ankle pressures"
+    },
+    {
+      "test": "Urgent CT/MR/catheter angiography to localise occlusion"
+    },
+    {
+      "test": "ECG (atrial fibrillation), FBC, coagulation, group-and-save"
+    }
   ],
   "treatmentRef": null,
   "policyRef": null,
   "calculatorRefs": [],
   "icuModuleRefs": [],
   "drugRefs": [],
-  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
-  "review": { "status": "approved", "reviewedBy": "Dr. Manoj Kurmana", "reviewedAt": "2026-07-03" },
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": "Dr. Manoj Kurmana",
+    "reviewedAt": "2026-07-03"
+  },
   "version": 1,
   "contentHash": null,
-  "references": ["Harrison 22e — Vascular Diseases of the Extremities"],
-  "provenanceNote": "Recall Tier-4 (Group B) new diagnosable entity. AI-drafted; PENDING clinician sign-off. Uses only existing governed finding keys (no vocabulary change)."
+  "references": [
+    "Harrison 22e — Vascular Diseases of the Extremities"
+  ],
+  "provenanceNote": "Recall Tier-4 (Group B) new diagnosable entity. AI-drafted; PENDING clinician sign-off. Uses only existing governed finding keys (no vocabulary change).",
+  "algorithms": [
+    {
+      "id": "acute_limb_ischemia-dx-algo",
+      "title": "Acute Limb Ischaemia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Evaluate acute presentation and core clinical features of Acute Limb Ischaemia.",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Time-critical - irreversible tissue loss within ~6 h; pain, pallor, pulselessness, paraesthesia, paralysis, poikilothermia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Handheld Doppler of distal pulses + ankle pressures, Urgent CT/MR/catheter angiography to localise occlusion, ECG (atrial fibrillation), FBC, coagulation, group-and-save"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Initiate guideline-directed medical therapy and monitor clinical progress."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute limb ischaemia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "acute_limb_ischemia-matrix",
+      "title": "Acute Limb Ischaemia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardinal presentation of Acute Limb Ischaemia",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Handheld Doppler of distal pulses + ankle pressures, Urgent CT/MR/catheter angiography to localise occlusion, ECG (atrial",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Time-critical - irreversible tissue loss within ~6 h; pain, pallor, pulselessness, paraesthesia, paralysis, poikilothermia",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delayed recognition of atypical presentations",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute limb ischaemia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "acute-limb-ischemia-diagram",
+      "title": "Acute Limb Ischaemia: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

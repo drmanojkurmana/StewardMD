@@ -97,5 +97,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-30"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-pericardiocentesis-pathway",
+   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main risk. Mechanical tip damage and hypertonic fluid are both implicated.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous approach is safer and more reliable.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Technique: insert a 22G peripheral cannula below the xiphoid, aim toward the left shoulder and aspirate as you advance, under ultrasound guidance. One preterm case used a 21-gauge needle on a 10 mL syringe and improved after 4 mL of air"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17 mL of chylous fluid in one PICC case)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pericardiocentesis in neonates (tamponade, pneumopericardium)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-pericardiocentesis-summary-matrix",
+   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Central catheters (UVC or PICC) can perforate the thin preterm myocardium or vessel wall; a tip in or against the right atrium is the main",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "When echo shows chamber compression, restricted filling and low cardiac output, do pericardiocentesis promptly. The subxiphoid percutaneous",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Use bedside echo (POCUS): it shows the effusion, chamber compression and the catheter tip (subxiphoid and parasternal views).",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Targeted Treatment",
+     "Specialist consultation and organ support",
+     "Definitive care pathway"
+    ],
+    [
+     "Monitoring Goal",
+     "Send the fluid for biochemistry: effusions from central lines are often parenteral nutrition (35 mL of TPN-like fluid in one UVC case; 17",
+     "Early detection of decompensation"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pericardiocentesis in neonates (tamponade, pneumopericardium)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-pericardiocentesis-diagram",
+   "title": "Pericardiocentesis in neonates (tamponade, pneumopericardium): Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

@@ -1,73 +1,168 @@
 {
-  "id": "medial_collateral_ligament_injury",
-  "name": "Medial collateral ligament injury",
-  "aliases": [
-    "MCL sprain",
-    "medial collateral ligament tear",
-    "tibial collateral ligament injury"
+ "id": "medial_collateral_ligament_injury",
+ "name": "Medial collateral ligament injury",
+ "aliases": [
+  "MCL sprain",
+  "medial collateral ligament tear",
+  "tibial collateral ligament injury"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Trauma",
+ "specialty": "Orthopaedics / Sports Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
+   "Graded I-III by the degree of medial laxity on valgus stress at 30 degrees of flexion",
+   "Pain and tenderness localise along the medial joint line and femoral or tibial attachment",
+   "The great majority of isolated MCL injuries heal without surgery owing to the ligament's good blood supply",
+   "Valgus laxity in full extension implies a more severe injury with cruciate or capsular involvement",
+   "Part of the 'unhappy triad' alongside ACL and medial meniscus injury",
+   "A Pellegrini-Stieda lesion (calcification at the femoral origin) can follow chronic proximal MCL injury"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Trauma",
-  "specialty": "Orthopaedics / Sports Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
-      "Graded I-III by the degree of medial laxity on valgus stress at 30 degrees of flexion",
-      "Pain and tenderness localise along the medial joint line and femoral or tibial attachment",
-      "The great majority of isolated MCL injuries heal without surgery owing to the ligament's good blood supply",
-      "Valgus laxity in full extension implies a more severe injury with cruciate or capsular involvement",
-      "Part of the 'unhappy triad' alongside ACL and medial meniscus injury",
-      "A Pellegrini-Stieda lesion (calcification at the femoral origin) can follow chronic proximal MCL injury"
+  "pathophysiology": "The superficial MCL is the primary restraint to valgus stress. A laterally directed blow or valgus load stretches or tears its fibres, most often at the femoral origin. Because the ligament is extra-articular with a rich blood supply, isolated tears typically heal with conservative management; combined injury to the cruciates or posteromedial corner produces greater instability and worse healing.",
+  "additionalDifferentials": [
+   "Medial meniscal tear",
+   "ACL injury (unhappy triad)",
+   "Pes anserine bursitis",
+   "Medial patellofemoral ligament injury after patellar dislocation",
+   "Physeal injury in skeletally immature patients"
+  ],
+  "additionalInvestigations": [
+   "Valgus stress testing at 0 and 30 degrees",
+   "MRI to grade the tear and detect associated injuries",
+   "Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury",
+   "Stress radiographs in skeletally immature patients to distinguish physeal fracture"
+  ],
+  "redFlags": [
+   "Valgus laxity in full extension indicating combined ligamentous injury",
+   "Multiligament injury or knee dislocation",
+   "Physeal fracture mimicking ligament injury in children"
+  ],
+  "prognosis": "Isolated MCL injuries of all grades usually recover well with bracing and rehabilitation; outcomes are less predictable when the injury is combined with cruciate or posteromedial corner damage.",
+  "pitfalls": [
+   "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
+   "Missing a paediatric distal femoral physeal fracture that mimics MCL laxity",
+   "Overlooking a concurrent ACL or meniscal tear",
+   "Immobilising rigidly when early protected motion aids healing"
+  ],
+  "references": [
+   "Miller's Review of Orthopaedics",
+   "Brukner and Khan's Clinical Sports Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia",
+   "Progressive physiotherapy to restore range of motion, quadriceps and hamstring strength and proprioception",
+   "Graded, criteria-based return to sport once stability and strength are regained",
+   "Surgical repair or reconstruction reserved for combined cruciate or posteromedial-corner injuries or persistent high-grade valgus instability",
+   "Grade the injury and identify associated ligament or meniscal damage with valgus stress testing and MRI",
+   "In skeletally immature patients, distinguish and manage physeal injury with stress radiographs"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "medial_collateral_ligament_injury-pathway",
+   "title": "Medial collateral ligament injury: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Valgus laxity in full extension indicating combined ligamentous injury",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Valgus stress testing at 0 and 30 degrees, MRI to grade the tear and detect associated injuries, Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of medial collateral ligament injury."
+  }
+ ],
+ "tables": [
+  {
+   "id": "medial_collateral_ligament_injury-matrix",
+   "title": "Medial collateral ligament injury: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most commonly injured knee ligament, typically from a valgus force to the lateral knee",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The superficial MCL is the primary restraint to valgus stress. A laterally directed blow or valgus load stretches or tears its fibres, most often at the femoral origin. Because the ligament is extra-articular with a rich blood supply, isolated tears typically heal with conservative management; combined injury to the cruciates or posteromedial corner produces greater instability and worse healing.",
-    "additionalDifferentials": [
-      "Medial meniscal tear",
-      "ACL injury (unhappy triad)",
-      "Pes anserine bursitis",
-      "Medial patellofemoral ligament injury after patellar dislocation",
-      "Physeal injury in skeletally immature patients"
+    [
+     "Key Investigations",
+     "Valgus stress testing at 0 and 30 degrees, MRI to grade the tear and detect associated injuries, Radiographs to exclude fracture",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Valgus stress testing at 0 and 30 degrees",
-      "MRI to grade the tear and detect associated injuries",
-      "Radiographs to exclude fracture and detect Pellegrini-Stieda calcification or physeal injury",
-      "Stress radiographs in skeletally immature patients to distinguish physeal fracture"
+    [
+     "Primary Differentials",
+     "Medial meniscal tear, ACL injury (unhappy triad), Pes anserine bursitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Valgus laxity in full extension indicating combined ligamentous injury",
-      "Multiligament injury or knee dislocation",
-      "Physeal fracture mimicking ligament injury in children"
+    [
+     "Management Strategy",
+     "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated MCL injuries of all grades usually recover well with bracing and rehabilitation; outcomes are less predictable when the injury is combined with cruciate or posteromedial corner damage.",
-    "pitfalls": [
-      "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
-      "Missing a paediatric distal femoral physeal fracture that mimics MCL laxity",
-      "Overlooking a concurrent ACL or meniscal tear",
-      "Immobilising rigidly when early protected motion aids healing"
-    ],
-    "references": [
-      "Miller's Review of Orthopaedics",
-      "Brukner and Khan's Clinical Sports Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Non-operative management for isolated tears with a hinged knee brace, early protected weight-bearing and initial rest, ice and analgesia",
-      "Progressive physiotherapy to restore range of motion, quadriceps and hamstring strength and proprioception",
-      "Graded, criteria-based return to sport once stability and strength are regained",
-      "Surgical repair or reconstruction reserved for combined cruciate or posteromedial-corner injuries or persistent high-grade valgus instability",
-      "Grade the injury and identify associated ligament or meniscal damage with valgus stress testing and MRI",
-      "In skeletally immature patients, distinguish and manage physeal injury with stress radiographs"
+    [
+     "Clinical Pitfall",
+     "Assuming an isolated MCL injury when valgus laxity in extension signals a combined injury",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for medial collateral ligament injury."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "medial-collateral-ligament-injury-diagram",
+   "title": "Medial collateral ligament injury: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

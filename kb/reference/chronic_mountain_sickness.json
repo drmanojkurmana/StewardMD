@@ -1,74 +1,169 @@
 {
-  "id": "chronic_mountain_sickness",
-  "name": "Chronic mountain sickness",
-  "aliases": [
-    "Monge disease",
-    "chronic high-altitude polycythaemia"
+ "id": "chronic_mountain_sickness",
+ "name": "Chronic mountain sickness",
+ "aliases": [
+  "Monge disease",
+  "chronic high-altitude polycythaemia"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory / Haematology / Cardiovascular",
+ "specialty": "High-altitude medicine / Respiratory medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "High-altitude medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
+   "Symptoms include headache, dizziness, breathlessness, sleep disturbance, cyanosis and mental slowing",
+   "Marked polycythaemia raises blood viscosity and predisposes to thrombosis and pulmonary hypertension",
+   "Over time it can progress to pulmonary hypertension and right heart failure (cor pulmonale)",
+   "It is distinguished from acute altitude illness by its chronic course in acclimatised long-term dwellers",
+   "Descent to lower altitude is the most effective treatment, with phlebotomy and respiratory stimulants as adjuncts"
   ],
-  "class": "non_infective",
-  "system": "Respiratory / Haematology / Cardiovascular",
-  "specialty": "High-altitude medicine / Respiratory medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "High-altitude medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
-      "Symptoms include headache, dizziness, breathlessness, sleep disturbance, cyanosis and mental slowing",
-      "Marked polycythaemia raises blood viscosity and predisposes to thrombosis and pulmonary hypertension",
-      "Over time it can progress to pulmonary hypertension and right heart failure (cor pulmonale)",
-      "It is distinguished from acute altitude illness by its chronic course in acclimatised long-term dwellers",
-      "Descent to lower altitude is the most effective treatment, with phlebotomy and respiratory stimulants as adjuncts"
+  "pathophysiology": "Chronic mountain sickness develops in some long-term high-altitude residents who lose adequate ventilatory and other adaptations, leading to accentuated hypoxaemia. The chronic hypoxia drives excessive erythropoietin-mediated red-cell production, producing severe polycythaemia that increases blood viscosity and impairs oxygen delivery. Sustained hypoxic pulmonary vasoconstriction and vascular remodelling cause pulmonary hypertension, which ultimately strains the right heart. The combination of hypoxaemia, hyperviscosity and pulmonary hypertension underlies the symptoms and complications.",
+  "additionalDifferentials": [
+   "Secondary polycythaemia from chronic lung or cardiac disease",
+   "Polycythaemia vera",
+   "Obstructive sleep apnoea with hypoxaemia",
+   "High-altitude pulmonary hypertension",
+   "Chronic obstructive pulmonary disease"
+  ],
+  "additionalInvestigations": [
+   "Full blood count documenting excessive erythrocytosis",
+   "Oxygen saturation and arterial blood gas showing hypoxaemia",
+   "Echocardiography for pulmonary hypertension and right heart function",
+   "Assessment for coexisting sleep-disordered breathing or lung disease",
+   "Exclusion of primary polycythaemia where appropriate"
+  ],
+  "redFlags": [
+   "Signs of right heart failure or severe pulmonary hypertension",
+   "Thrombotic complications",
+   "Very high haematocrit with hyperviscosity symptoms",
+   "Progressive cognitive or functional decline"
+  ],
+  "prognosis": "Symptoms and erythrocytosis typically improve substantially with descent; if residence at altitude continues, progression to pulmonary hypertension and right heart failure worsens the outlook.",
+  "pitfalls": [
+   "Attributing the polycythaemia to a primary haematological disorder",
+   "Overlooking coexisting sleep apnoea worsening hypoxaemia",
+   "Relying on phlebotomy without addressing altitude exposure",
+   "Missing early pulmonary hypertension"
+  ],
+  "references": [
+   "High-altitude medicine references (standard reference)",
+   "Respiratory medicine reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis",
+   "Isovolaemic venesection (phlebotomy) to reduce excessive red-cell mass and blood viscosity when descent is not feasible",
+   "Respiratory stimulant therapy with acetazolamide to enhance ventilation, improve oxygenation and lower the haematocrit",
+   "Supplemental oxygen, particularly nocturnal, to counter hypoxaemia and blunt erythropoietin-driven erythrocytosis",
+   "Treatment of pulmonary hypertension and right heart strain, with pulmonary vasodilators where cor pulmonale develops",
+   "Identification and treatment of coexisting sleep-disordered breathing and chronic lung disease that aggravate hypoxaemia",
+   "Surveillance with serial full blood count, oximetry or arterial blood gases and echocardiography for progression to pulmonary hypertension, with high-altitude and respiratory specialist referral"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chronic_mountain_sickness-pathway",
+   "title": "Chronic mountain sickness: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of right heart failure or severe pulmonary hypertension",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count documenting excessive erythrocytosis, Oxygen saturation and arterial blood gas showing hypoxaemia, Echocardiography for pulmonary hypertension and right heart function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the polycythaemia to a primary haematological disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chronic mountain sickness."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic_mountain_sickness-matrix",
+   "title": "Chronic mountain sickness: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic mountain sickness develops in some long-term high-altitude residents who lose adequate ventilatory and other adaptations, leading to accentuated hypoxaemia. The chronic hypoxia drives excessive erythropoietin-mediated red-cell production, producing severe polycythaemia that increases blood viscosity and impairs oxygen delivery. Sustained hypoxic pulmonary vasoconstriction and vascular remodelling cause pulmonary hypertension, which ultimately strains the right heart. The combination of hypoxaemia, hyperviscosity and pulmonary hypertension underlies the symptoms and complications.",
-    "additionalDifferentials": [
-      "Secondary polycythaemia from chronic lung or cardiac disease",
-      "Polycythaemia vera",
-      "Obstructive sleep apnoea with hypoxaemia",
-      "High-altitude pulmonary hypertension",
-      "Chronic obstructive pulmonary disease"
+    [
+     "Key Investigations",
+     "Full blood count documenting excessive erythrocytosis, Oxygen saturation and arterial blood gas showing hypoxaemia,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count documenting excessive erythrocytosis",
-      "Oxygen saturation and arterial blood gas showing hypoxaemia",
-      "Echocardiography for pulmonary hypertension and right heart function",
-      "Assessment for coexisting sleep-disordered breathing or lung disease",
-      "Exclusion of primary polycythaemia where appropriate"
+    [
+     "Primary Differentials",
+     "Secondary polycythaemia from chronic lung or cardiac disease, Polycythaemia vera, Obstructive sleep apnoea with hypoxaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of right heart failure or severe pulmonary hypertension",
-      "Thrombotic complications",
-      "Very high haematocrit with hyperviscosity symptoms",
-      "Progressive cognitive or functional decline"
+    [
+     "Management Strategy",
+     "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the",
+     "Core treatment modality"
     ],
-    "prognosis": "Symptoms and erythrocytosis typically improve substantially with descent; if residence at altitude continues, progression to pulmonary hypertension and right heart failure worsens the outlook.",
-    "pitfalls": [
-      "Attributing the polycythaemia to a primary haematological disorder",
-      "Overlooking coexisting sleep apnoea worsening hypoxaemia",
-      "Relying on phlebotomy without addressing altitude exposure",
-      "Missing early pulmonary hypertension"
-    ],
-    "references": [
-      "High-altitude medicine references (standard reference)",
-      "Respiratory medicine reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis",
-      "Isovolaemic venesection (phlebotomy) to reduce excessive red-cell mass and blood viscosity when descent is not feasible",
-      "Respiratory stimulant therapy with acetazolamide to enhance ventilation, improve oxygenation and lower the haematocrit",
-      "Supplemental oxygen, particularly nocturnal, to counter hypoxaemia and blunt erythropoietin-driven erythrocytosis",
-      "Treatment of pulmonary hypertension and right heart strain, with pulmonary vasodilators where cor pulmonale develops",
-      "Identification and treatment of coexisting sleep-disordered breathing and chronic lung disease that aggravate hypoxaemia",
-      "Surveillance with serial full blood count, oximetry or arterial blood gases and echocardiography for progression to pulmonary hypertension, with high-altitude and respiratory specialist referral"
+    [
+     "Clinical Pitfall",
+     "Attributing the polycythaemia to a primary haematological disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chronic mountain sickness."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-mountain-sickness-diagram",
+   "title": "Chronic mountain sickness: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

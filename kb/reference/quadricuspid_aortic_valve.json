@@ -1,78 +1,173 @@
 {
-  "id": "quadricuspid_aortic_valve",
-  "name": "Quadricuspid aortic valve",
-  "aliases": [
-    "QAV",
-    "four-cusped aortic valve",
-    "quadricuspid aortic valve anomaly"
+ "id": "quadricuspid_aortic_valve",
+ "name": "Quadricuspid aortic valve",
+ "aliases": [
+  "QAV",
+  "four-cusped aortic valve",
+  "quadricuspid aortic valve anomaly"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Congenital",
+ "specialty": "Congenital Cardiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare congenital malformation in which the aortic valve has four cusps instead of the normal three",
+   "Cusps are classified by their relative sizes, with configurations ranging from four equal cusps to one with three equal and one smaller cusp",
+   "Aortic regurgitation is the dominant functional lesion, usually developing gradually because the asymmetric cusps coapt imperfectly",
+   "Many patients are asymptomatic in early life and are diagnosed incidentally on echocardiography or at surgery",
+   "Progressive regurgitation can cause left ventricular volume loading, dilatation and eventual symptoms of heart failure",
+   "Associated anomalies include coronary artery ostial displacement, which is relevant if surgery is planned",
+   "Management follows aortic valve disease principles, with surveillance of regurgitation severity and valve repair or replacement when indicated"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Congenital",
-  "specialty": "Congenital Cardiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare congenital malformation in which the aortic valve has four cusps instead of the normal three",
-      "Cusps are classified by their relative sizes, with configurations ranging from four equal cusps to one with three equal and one smaller cusp",
-      "Aortic regurgitation is the dominant functional lesion, usually developing gradually because the asymmetric cusps coapt imperfectly",
-      "Many patients are asymptomatic in early life and are diagnosed incidentally on echocardiography or at surgery",
-      "Progressive regurgitation can cause left ventricular volume loading, dilatation and eventual symptoms of heart failure",
-      "Associated anomalies include coronary artery ostial displacement, which is relevant if surgery is planned",
-      "Management follows aortic valve disease principles, with surveillance of regurgitation severity and valve repair or replacement when indicated"
+  "pathophysiology": "A quadricuspid aortic valve arises from abnormal septation of the truncal cushions during valvulogenesis, producing four cusps rather than three. The supernumerary and often unequally sized cusps close incompletely, so the valve tends towards regurgitation over time as repeated imperfect coaptation causes cusp fibrosis and prolapse. The resulting chronic aortic regurgitation imposes a volume load on the left ventricle, which dilates and hypertrophies to compensate before contractile function eventually declines. Stenosis is much less common. Because the abnormal cusp arrangement can be associated with displacement of the coronary ostia, coronary anatomy is an important consideration when intervention is contemplated.",
+  "additionalDifferentials": [
+   "Bicuspid aortic valve",
+   "Tricuspid aortic valve with degenerative regurgitation",
+   "Rheumatic aortic valve disease",
+   "Aortic root dilatation causing regurgitation",
+   "Infective endocarditis of the aortic valve",
+   "Unicuspid aortic valve"
+  ],
+  "additionalInvestigations": [
+   "Transthoracic echocardiography to count cusps and grade regurgitation",
+   "Transoesophageal echocardiography for detailed cusp morphology when transthoracic views are limited",
+   "Cardiac MRI to quantify regurgitant volume and left ventricular size and function",
+   "Cardiac CT to assess valve anatomy and coronary ostial position before surgery",
+   "Electrocardiogram for left ventricular hypertrophy",
+   "Serial imaging to monitor progression of regurgitation and ventricular remodelling"
+  ],
+  "redFlags": [
+   "Severe aortic regurgitation with progressive left ventricular dilatation or dysfunction",
+   "New symptoms of heart failure or exertional intolerance",
+   "Superimposed infective endocarditis on the abnormal valve",
+   "Displaced coronary ostia complicating planned intervention"
+  ],
+  "prognosis": "Many patients remain well for decades, but a substantial proportion develop significant aortic regurgitation requiring valve surgery in adulthood; outcomes after timely repair or replacement are generally good.",
+  "pitfalls": [
+   "Miscounting cusps and mistaking the valve for a bicuspid or tricuspid valve on limited imaging",
+   "Underestimating slowly progressive regurgitation and delaying surveillance",
+   "Overlooking coronary ostial anomalies before surgery",
+   "Attributing regurgitation solely to root dilatation without recognising the cusp anomaly"
+  ],
+  "references": [
+   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+   "Braunwald's Heart Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage most patients with surveillance, as many remain asymptomatic for decades",
+   "Refer for aortic valve repair or replacement when regurgitation becomes severe, symptoms develop, or left ventricular dilatation or dysfunction appears",
+   "Assess coronary ostial position with cardiac CT before surgery given the association with ostial displacement",
+   "Use afterload-reducing and heart-failure therapy such as ACE inhibitors to manage symptomatic regurgitation and left ventricular volume loading",
+   "Monitor with serial echocardiography, and cardiac MRI to quantify regurgitant volume and ventricular size and function",
+   "Advise good dental hygiene and endocarditis awareness, reserving antibiotic prophylaxis for those meeting high-risk criteria such as prosthetic valves",
+   "Refer to congenital cardiology for long-term follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "quadricuspid_aortic_valve-pathway",
+   "title": "Quadricuspid aortic valve: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare congenital malformation in which the aortic valve has four cusps instead of the normal three",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe aortic regurgitation with progressive left ventricular dilatation or dysfunction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transthoracic echocardiography to count cusps and grade regurgitation, Transoesophageal echocardiography for detailed cusp morphology when transthoracic views are limited, Cardiac MRI to quantify regurgitant volume and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage most patients with surveillance, as many remain asymptomatic for decades"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Miscounting cusps and mistaking the valve for a bicuspid or tricuspid valve on limited imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of quadricuspid aortic valve."
+  }
+ ],
+ "tables": [
+  {
+   "id": "quadricuspid_aortic_valve-matrix",
+   "title": "Quadricuspid aortic valve: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare congenital malformation in which the aortic valve has four cusps instead of the normal three",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A quadricuspid aortic valve arises from abnormal septation of the truncal cushions during valvulogenesis, producing four cusps rather than three. The supernumerary and often unequally sized cusps close incompletely, so the valve tends towards regurgitation over time as repeated imperfect coaptation causes cusp fibrosis and prolapse. The resulting chronic aortic regurgitation imposes a volume load on the left ventricle, which dilates and hypertrophies to compensate before contractile function eventually declines. Stenosis is much less common. Because the abnormal cusp arrangement can be associated with displacement of the coronary ostia, coronary anatomy is an important consideration when intervention is contemplated.",
-    "additionalDifferentials": [
-      "Bicuspid aortic valve",
-      "Tricuspid aortic valve with degenerative regurgitation",
-      "Rheumatic aortic valve disease",
-      "Aortic root dilatation causing regurgitation",
-      "Infective endocarditis of the aortic valve",
-      "Unicuspid aortic valve"
+    [
+     "Key Investigations",
+     "Transthoracic echocardiography to count cusps and grade regurgitation, Transoesophageal echocardiography for detailed cusp",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transthoracic echocardiography to count cusps and grade regurgitation",
-      "Transoesophageal echocardiography for detailed cusp morphology when transthoracic views are limited",
-      "Cardiac MRI to quantify regurgitant volume and left ventricular size and function",
-      "Cardiac CT to assess valve anatomy and coronary ostial position before surgery",
-      "Electrocardiogram for left ventricular hypertrophy",
-      "Serial imaging to monitor progression of regurgitation and ventricular remodelling"
+    [
+     "Primary Differentials",
+     "Bicuspid aortic valve, Tricuspid aortic valve with degenerative regurgitation, Rheumatic aortic valve disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe aortic regurgitation with progressive left ventricular dilatation or dysfunction",
-      "New symptoms of heart failure or exertional intolerance",
-      "Superimposed infective endocarditis on the abnormal valve",
-      "Displaced coronary ostia complicating planned intervention"
+    [
+     "Management Strategy",
+     "Manage most patients with surveillance, as many remain asymptomatic for decades",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients remain well for decades, but a substantial proportion develop significant aortic regurgitation requiring valve surgery in adulthood; outcomes after timely repair or replacement are generally good.",
-    "pitfalls": [
-      "Miscounting cusps and mistaking the valve for a bicuspid or tricuspid valve on limited imaging",
-      "Underestimating slowly progressive regurgitation and delaying surveillance",
-      "Overlooking coronary ostial anomalies before surgery",
-      "Attributing regurgitation solely to root dilatation without recognising the cusp anomaly"
-    ],
-    "references": [
-      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-      "Braunwald's Heart Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage most patients with surveillance, as many remain asymptomatic for decades",
-      "Refer for aortic valve repair or replacement when regurgitation becomes severe, symptoms develop, or left ventricular dilatation or dysfunction appears",
-      "Assess coronary ostial position with cardiac CT before surgery given the association with ostial displacement",
-      "Use afterload-reducing and heart-failure therapy such as ACE inhibitors to manage symptomatic regurgitation and left ventricular volume loading",
-      "Monitor with serial echocardiography, and cardiac MRI to quantify regurgitant volume and ventricular size and function",
-      "Advise good dental hygiene and endocarditis awareness, reserving antibiotic prophylaxis for those meeting high-risk criteria such as prosthetic valves",
-      "Refer to congenital cardiology for long-term follow-up"
+    [
+     "Clinical Pitfall",
+     "Miscounting cusps and mistaking the valve for a bicuspid or tricuspid valve on limited imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for quadricuspid aortic valve."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "quadricuspid-aortic-valve-diagram",
+   "title": "Quadricuspid aortic valve: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "intraosseous_lipoma",
-  "name": "Intraosseous lipoma",
-  "aliases": [
-    "Intramedullary lipoma",
-    "Bone lipoma"
+ "id": "intraosseous_lipoma",
+ "name": "Intraosseous lipoma",
+ "aliases": [
+  "Intramedullary lipoma",
+  "Bone lipoma"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Orthopaedics / Musculoskeletal radiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Resnick, Diagnosis of Bone and Joint Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare benign tumour of mature adipose tissue arising within the medullary cavity, with a striking predilection for the calcaneus, and also seen in the intertrochanteric femur and long-bone metaphyses.",
+   "In the calcaneus it typically occupies the neutral triangle, the region of sparse trabeculae, and is usually an incidental finding.",
+   "Radiographs show a well-defined lucent lesion with a thin sclerotic rim, frequently containing a central focus of dystrophic calcification producing a target or cockade appearance.",
+   "CT demonstrating fat attenuation (negative Hounsfield values) and MRI showing signal that follows subcutaneous fat on all sequences and suppresses with fat saturation are effectively diagnostic.",
+   "The Milgram staging reflects natural involution: stage 1 viable fat, stage 2 partial fat necrosis with calcification, and stage 3 extensive necrosis with cyst formation, calcification and ossification.",
+   "Advanced involuted lesions may become cystic and calcified and mimic a simple bone cyst or bone infarct.",
+   "Most lesions require no treatment; curettage and grafting are reserved for persistent pain or fracture risk.",
+   "Malignant transformation to liposarcoma is exceedingly rare and remains debated."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Orthopaedics / Musculoskeletal radiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Resnick, Diagnosis of Bone and Joint Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare benign tumour of mature adipose tissue arising within the medullary cavity, with a striking predilection for the calcaneus, and also seen in the intertrochanteric femur and long-bone metaphyses.",
-      "In the calcaneus it typically occupies the neutral triangle, the region of sparse trabeculae, and is usually an incidental finding.",
-      "Radiographs show a well-defined lucent lesion with a thin sclerotic rim, frequently containing a central focus of dystrophic calcification producing a target or cockade appearance.",
-      "CT demonstrating fat attenuation (negative Hounsfield values) and MRI showing signal that follows subcutaneous fat on all sequences and suppresses with fat saturation are effectively diagnostic.",
-      "The Milgram staging reflects natural involution: stage 1 viable fat, stage 2 partial fat necrosis with calcification, and stage 3 extensive necrosis with cyst formation, calcification and ossification.",
-      "Advanced involuted lesions may become cystic and calcified and mimic a simple bone cyst or bone infarct.",
-      "Most lesions require no treatment; curettage and grafting are reserved for persistent pain or fracture risk.",
-      "Malignant transformation to liposarcoma is exceedingly rare and remains debated."
+  "pathophysiology": "Intraosseous lipoma is a benign neoplasm composed of lobules of mature adipocytes that replace the medullary bone and its haematopoietic marrow. Its behaviour is characterised by a tendency to spontaneous involution, described in the Milgram stages: initially viable fat, then progressive fat necrosis with dystrophic calcification, and finally cystic degeneration with reactive ossification, which explains the variable and sometimes confusing imaging appearance. The calcaneal predilection is attributed to the biomechanically determined region of sparse trabeculae, and the fatty composition gives the lesion its characteristic low CT attenuation and fat-matched MRI signal that permit confident non-invasive diagnosis.",
+  "additionalDifferentials": [
+   "Simple (unicameral) bone cyst",
+   "Calcaneal pseudocyst (normal trabecular lucency)",
+   "Bone infarct (medullary osteonecrosis)",
+   "Fibrous dysplasia",
+   "Intraosseous ganglion",
+   "Aneurysmal bone cyst"
+  ],
+  "additionalInvestigations": [
+   "Plain radiographs demonstrating a lucent lesion with a sclerotic rim and possible central calcification",
+   "MRI to confirm fat signal on all sequences",
+   "CT to document fat attenuation with negative Hounsfield values",
+   "Fat-suppressed MRI sequences to prove suppression of the fatty component",
+   "Comparison with prior imaging to confirm stability",
+   "Biopsy only in the rare lesion with atypical or aggressive features"
+  ],
+  "redFlags": [
+   "Aggressive imaging features such as cortical destruction or ill-defined margins",
+   "Soft-tissue extension beyond the bone",
+   "Rapid interval growth",
+   "New or escalating pain localised to the lesion",
+   "Loss of the characteristic fatty signal or attenuation"
+  ],
+  "prognosis": "The prognosis is excellent; the lesion is benign, frequently involutes spontaneously and rarely requires intervention.",
+  "pitfalls": [
+   "Confusing the lesion with a simple bone cyst or the normal calcaneal pseudocyst and intervening unnecessarily",
+   "Misreading an involuted, calcified stage 3 lesion as an aggressive process",
+   "Failing to obtain fat-specific imaging that would establish the diagnosis non-invasively",
+   "Overtreating an asymptomatic incidental lesion"
+  ],
+  "references": [
+   "Resnick, Diagnosis of Bone and Joint Disorders",
+   "Greenspan, Orthopedic Imaging: A Practical Approach",
+   "WHO Classification of Tumours of Soft Tissue and Bone (current edition)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe conservatively asymptomatic, incidentally found lesions given the benign, often self-involuting nature",
+   "Confirm the diagnosis non-invasively with CT fat attenuation and fat-suppressed MRI to avoid unnecessary intervention",
+   "Obtain serial imaging to document stability where the diagnosis is confident",
+   "Reserve curettage and bone grafting for symptomatic, enlarging or structurally weakened lesions at fracture risk",
+   "Biopsy only lesions with atypical or aggressive features to exclude other pathology",
+   "Provide orthopaedic and musculoskeletal radiology follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "intraosseous_lipoma-pathway",
+   "title": "Intraosseous lipoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare benign tumour of mature adipose tissue arising within the medullary cavity, with a striking predilection for the calcaneus, and also seen in the intertrochanteric femur and long-bone metaphyses.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Aggressive imaging features such as cortical destruction or ill-defined margins",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plain radiographs demonstrating a lucent lesion with a sclerotic rim and possible central calcification, MRI to confirm fat signal on all sequences, CT to document fat attenuation with negative Hounsfield values"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe conservatively asymptomatic, incidentally found lesions given the benign, often self-involuting nature"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the lesion with a simple bone cyst or the normal calcaneal pseudocyst and intervening unnecessarily"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of intraosseous lipoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "intraosseous_lipoma-matrix",
+   "title": "Intraosseous lipoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare benign tumour of mature adipose tissue arising within the medullary cavity, with a striking predilection for the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Intraosseous lipoma is a benign neoplasm composed of lobules of mature adipocytes that replace the medullary bone and its haematopoietic marrow. Its behaviour is characterised by a tendency to spontaneous involution, described in the Milgram stages: initially viable fat, then progressive fat necrosis with dystrophic calcification, and finally cystic degeneration with reactive ossification, which explains the variable and sometimes confusing imaging appearance. The calcaneal predilection is attributed to the biomechanically determined region of sparse trabeculae, and the fatty composition gives the lesion its characteristic low CT attenuation and fat-matched MRI signal that permit confident non-invasive diagnosis.",
-    "additionalDifferentials": [
-      "Simple (unicameral) bone cyst",
-      "Calcaneal pseudocyst (normal trabecular lucency)",
-      "Bone infarct (medullary osteonecrosis)",
-      "Fibrous dysplasia",
-      "Intraosseous ganglion",
-      "Aneurysmal bone cyst"
+    [
+     "Key Investigations",
+     "Plain radiographs demonstrating a lucent lesion with a sclerotic rim and possible central calcification, MRI to confirm fat",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plain radiographs demonstrating a lucent lesion with a sclerotic rim and possible central calcification",
-      "MRI to confirm fat signal on all sequences",
-      "CT to document fat attenuation with negative Hounsfield values",
-      "Fat-suppressed MRI sequences to prove suppression of the fatty component",
-      "Comparison with prior imaging to confirm stability",
-      "Biopsy only in the rare lesion with atypical or aggressive features"
+    [
+     "Primary Differentials",
+     "Simple (unicameral) bone cyst, Calcaneal pseudocyst (normal trabecular lucency), Bone infarct (medullary osteonecrosis)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Aggressive imaging features such as cortical destruction or ill-defined margins",
-      "Soft-tissue extension beyond the bone",
-      "Rapid interval growth",
-      "New or escalating pain localised to the lesion",
-      "Loss of the characteristic fatty signal or attenuation"
+    [
+     "Management Strategy",
+     "Observe conservatively asymptomatic, incidentally found lesions given the benign, often self-involuting nature",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent; the lesion is benign, frequently involutes spontaneously and rarely requires intervention.",
-    "pitfalls": [
-      "Confusing the lesion with a simple bone cyst or the normal calcaneal pseudocyst and intervening unnecessarily",
-      "Misreading an involuted, calcified stage 3 lesion as an aggressive process",
-      "Failing to obtain fat-specific imaging that would establish the diagnosis non-invasively",
-      "Overtreating an asymptomatic incidental lesion"
-    ],
-    "references": [
-      "Resnick, Diagnosis of Bone and Joint Disorders",
-      "Greenspan, Orthopedic Imaging: A Practical Approach",
-      "WHO Classification of Tumours of Soft Tissue and Bone (current edition)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe conservatively asymptomatic, incidentally found lesions given the benign, often self-involuting nature",
-      "Confirm the diagnosis non-invasively with CT fat attenuation and fat-suppressed MRI to avoid unnecessary intervention",
-      "Obtain serial imaging to document stability where the diagnosis is confident",
-      "Reserve curettage and bone grafting for symptomatic, enlarging or structurally weakened lesions at fracture risk",
-      "Biopsy only lesions with atypical or aggressive features to exclude other pathology",
-      "Provide orthopaedic and musculoskeletal radiology follow-up"
+    [
+     "Clinical Pitfall",
+     "Confusing the lesion with a simple bone cyst or the normal calcaneal pseudocyst and intervening unnecessarily",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for intraosseous lipoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "intraosseous-lipoma-diagram",
+   "title": "Intraosseous lipoma: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

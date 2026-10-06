@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "india",
  "setting": "Emergency department, gastroenterology, endoscopy unit, cardiology liaison",
- "aliases": ["GI bleed on aspirin", "GI bleed on clopidogrel", "DAPT and GI bleeding", "warfarin GI bleed", "DOAC GI bleed", "anticoagulant endoscopy", "antiplatelet endoscopy", "bridging LMWH endoscopy", "ISG CSI position statement", "restart anticoagulation after GI bleed", "high bleeding risk endoscopy", "thrombotic risk"],
+ "aliases": [
+  "GI bleed on aspirin",
+  "GI bleed on clopidogrel",
+  "DAPT and GI bleeding",
+  "warfarin GI bleed",
+  "DOAC GI bleed",
+  "anticoagulant endoscopy",
+  "antiplatelet endoscopy",
+  "bridging LMWH endoscopy",
+  "ISG CSI position statement",
+  "restart anticoagulation after GI bleed",
+  "high bleeding risk endoscopy",
+  "thrombotic risk"
+ ],
  "summary": "Grade the bleed and the patient's thrombotic risk. Keep aspirin for secondary prevention, stop the second antiplatelet and anticoagulants until haemostasis, avoid platelet transfusion, reverse anticoagulation only for severe bleeding, and restart DAPT within 5 days, DOACs at 3 days and warfarin at 3 to 7 days. Plan endoscopy by urgency and procedural bleeding risk.",
  "sections": [
   {
@@ -78,13 +91,132 @@
   }
  ],
  "drugs": [
-  { "name": "Vitamin K (phytomenadione)", "dose": "2 to 5 mg orally or IV", "notes": "Warfarin reversal over 24 to 48 hours; not for rapid haemostasis." },
-  { "name": "Four-factor prothrombin complex concentrate or FFP", "dose": "Consider for severe bleeding on any anticoagulant (FFP especially if INR above 3)", "notes": "The position statement does not specify doses; dose per product and INR." },
-  { "name": "Activated charcoal", "dose": "50 g orally, single dose", "notes": "If a DOAC was taken within 2 to 4 hours." },
-  { "name": "Proton pump inhibitor", "dose": "Once daily with resumed aspirin or DAPT", "notes": "Secondary prevention of rebleeding." }
+  {
+   "name": "Vitamin K (phytomenadione)",
+   "dose": "2 to 5 mg orally or IV",
+   "notes": "Warfarin reversal over 24 to 48 hours; not for rapid haemostasis."
+  },
+  {
+   "name": "Four-factor prothrombin complex concentrate or FFP",
+   "dose": "Consider for severe bleeding on any anticoagulant (FFP especially if INR above 3)",
+   "notes": "The position statement does not specify doses; dose per product and INR."
+  },
+  {
+   "name": "Activated charcoal",
+   "dose": "50 g orally, single dose",
+   "notes": "If a DOAC was taken within 2 to 4 hours."
+  },
+  {
+   "name": "Proton pump inhibitor",
+   "dose": "Once daily with resumed aspirin or DAPT",
+   "notes": "Secondary prevention of rebleeding."
+  }
  ],
  "sources": [
-  { "org": "Indian Society of Gastroenterology, Cardiological Society of India, Indian Academy of Neurology, Vascular Society of India", "title": "Position statement on gastrointestinal bleeding and endoscopic procedures in patients on antiplatelet and/or anticoagulant therapy. Indian J Gastroenterol 2023", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10240467/" }
+  {
+   "org": "Indian Society of Gastroenterology, Cardiological Society of India, Indian Academy of Neurology, Vascular Society of India",
+   "title": "Position statement on gastrointestinal bleeding and endoscopic procedures in patients on antiplatelet and/or anticoagulant therapy. Indian J Gastroenterol 2023",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10240467/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "antithrombotics-gi-bleeding-endoscopy-india-pathway",
+   "title": "Antiplatelets and anticoagulants in GI bleeding and endoscopy (India, ISG and CSI) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "GI bleeding: haematemesis, melaena, haematochezia or positive nasogastric aspirate. Classify as upper (within reach of a gastroscope), colonic, or small bowel.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Resuscitate first; protect the airway if consciousness is reduced. Transfuse red cells at Hb below 7 g/dL (below 9 g/dL with severe comorbidity) and perform endoscopy within 24 hours.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Take a detailed drug history: single or dual antiplatelets, warfarin or acenocoumarol, heparins, DOACs, combinations, and NSAIDs, with the indication for each."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Classify urgency: urgent within 24 hours (for example CBD stenting in cholangitis), semi-urgent within 2 to 7 days (CBD stone removal), elective deferrable for weeks to months (POEM)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Stopping aspirin in a patient with a recent stent or ACS, raising the risk of stent thrombosis."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for antiplatelets and anticoagulants in gi bleeding and endoscopy (india, isg and csi)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "antithrombotics-gi-bleeding-endoscopy-india-summary-matrix",
+   "title": "Antiplatelets and anticoagulants in GI bleeding and endoscopy (India, ISG and CSI) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "GI bleeding: haematemesis, melaena, haematochezia or positive nasogastric aspirate. Classify as upper (within reach of a gastroscope),",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Resuscitate first; protect the airway if consciousness is reduced. Transfuse red cells at Hb below 7 g/dL (below 9 g/dL with severe",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Vitamin K (phytomenadione): 2 to 5 mg orally or IV",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Stopping aspirin in a patient with a recent stent or ACS, raising the risk of stent thrombosis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for antiplatelets and anticoagulants in gi bleeding and endoscopy (india, isg and csi)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "antithrombotics-gi-bleeding-endoscopy-india-diagram",
+   "title": "Antiplatelets and anticoagulants in GI bleeding and endoscopy (India, ISG and CSI): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -1,77 +1,172 @@
 {
-  "id": "juvenile_myoclonic_epilepsy",
-  "name": "Juvenile Myoclonic Epilepsy",
-  "aliases": [
-    "JME",
-    "Janz syndrome"
+ "id": "juvenile_myoclonic_epilepsy",
+ "name": "Juvenile Myoclonic Epilepsy",
+ "aliases": [
+  "JME",
+  "Janz syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Neurological",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "A common idiopathic (genetic) generalised epilepsy syndrome, usually beginning in adolescence.",
+   "The defining seizure type is myoclonic jerks, typically of the arms and shoulders, occurring soon after waking.",
+   "Most patients also have generalised tonic-clonic seizures, and a subset have absence seizures.",
+   "Early morning clumsiness, such as dropping objects like a toothbrush or cup, is a classic historical clue that is often overlooked.",
+   "Seizures are strongly provoked by sleep deprivation, alcohol, and sometimes photic stimulation.",
+   "The interictal EEG characteristically shows generalised polyspike-and-wave discharges, and a photoparoxysmal response may be seen.",
+   "Development and intelligence are typically normal, and neuroimaging is usually unremarkable.",
+   "Seizures are generally well controlled with appropriate broad-spectrum treatment, but the condition usually requires long-term therapy as relapse on withdrawal is common; certain narrow-spectrum antiseizure medicines can worsen it."
   ],
-  "class": "non_infective",
-  "system": "Neurological",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "A common idiopathic (genetic) generalised epilepsy syndrome, usually beginning in adolescence.",
-      "The defining seizure type is myoclonic jerks, typically of the arms and shoulders, occurring soon after waking.",
-      "Most patients also have generalised tonic-clonic seizures, and a subset have absence seizures.",
-      "Early morning clumsiness, such as dropping objects like a toothbrush or cup, is a classic historical clue that is often overlooked.",
-      "Seizures are strongly provoked by sleep deprivation, alcohol, and sometimes photic stimulation.",
-      "The interictal EEG characteristically shows generalised polyspike-and-wave discharges, and a photoparoxysmal response may be seen.",
-      "Development and intelligence are typically normal, and neuroimaging is usually unremarkable.",
-      "Seizures are generally well controlled with appropriate broad-spectrum treatment, but the condition usually requires long-term therapy as relapse on withdrawal is common; certain narrow-spectrum antiseizure medicines can worsen it."
+  "pathophysiology": "JME is a genetically determined generalised epilepsy involving abnormal thalamocortical network excitability and synchronisation rather than a focal structural lesion. Inherited susceptibility, likely polygenic in most cases, produces a lowered threshold for generalised epileptiform discharges. The characteristic myoclonus and generalised seizures arise from these hyperexcitable cortico-thalamic circuits, and the strong link with the sleep-wake transition reflects state-dependent changes in cortical excitability.",
+  "additionalDifferentials": [
+   "Other idiopathic generalised epilepsies (childhood or juvenile absence epilepsy)",
+   "Progressive myoclonic epilepsies",
+   "Focal epilepsy with secondary generalisation",
+   "Benign physiological (hypnagogic) myoclonus",
+   "Non-epileptic movements or tics",
+   "Psychogenic non-epileptic events"
+  ],
+  "additionalInvestigations": [
+   "EEG, ideally including a recording after sleep deprivation and on awakening",
+   "Photic stimulation during EEG to elicit a photoparoxysmal response",
+   "MRI brain, mainly to exclude structural or progressive causes in atypical cases",
+   "Detailed history focusing on early-morning jerks and provoking factors",
+   "Metabolic or genetic testing when a progressive myoclonic epilepsy is suspected"
+  ],
+  "redFlags": [
+   "Progressive cognitive decline or neurological deterioration suggesting a progressive myoclonic epilepsy",
+   "Focal neurological signs or focal features on EEG or imaging",
+   "Seizures worsening after starting treatment (possible inappropriate narrow-spectrum drug)",
+   "Frequent generalised tonic-clonic seizures or status epilepticus",
+   "Recurrent seizures driven by unrecognised sleep deprivation or non-adherence"
+  ],
+  "prognosis": "Prognosis for seizure control is favourable with suitable therapy and lifestyle measures, and cognition is preserved, but JME is generally a lifelong tendency; most patients relapse if medication is stopped, so long-term or indefinite treatment is often needed.",
+  "pitfalls": [
+   "Missing the diagnosis by not asking specifically about early-morning myoclonic jerks",
+   "Misclassifying generalised seizures as focal and selecting a drug that aggravates myoclonus and absences",
+   "Underestimating the impact of sleep deprivation, alcohol, and poor adherence on seizure control",
+   "Attempting early withdrawal of treatment and precipitating relapse",
+   "Overlooking coexisting absence seizures"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control seizures with a broad-spectrum antiseizure medication, using sodium valproate for efficacy or levetiracetam and lamotrigine where valproate is unsuitable",
+   "Avoid narrow-spectrum agents such as carbamazepine and phenytoin that can aggravate myoclonus and absences",
+   "Advise lifestyle measures, avoiding sleep deprivation and excess alcohol and managing photic triggers",
+   "Counsel that treatment is usually long-term or indefinite because relapse is common on withdrawal, and reinforce adherence",
+   "Provide preconception counselling to women of childbearing potential given the teratogenicity of valproate and adjust therapy accordingly",
+   "Reassess the diagnosis and consider a progressive myoclonic epilepsy if seizures prove drug-resistant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "juvenile_myoclonic_epilepsy-pathway",
+   "title": "Juvenile Myoclonic Epilepsy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A common idiopathic (genetic) generalised epilepsy syndrome, usually beginning in adolescence.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive cognitive decline or neurological deterioration suggesting a progressive myoclonic epilepsy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: EEG, ideally including a recording after sleep deprivation and on awakening, Photic stimulation during EEG to elicit a photoparoxysmal response, MRI brain, mainly to exclude structural or progressive causes in atypical"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control seizures with a broad-spectrum antiseizure medication, using sodium valproate for efficacy or levetiracetam and lamotrigine where valproate is unsuitable"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis by not asking specifically about early-morning myoclonic jerks"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of juvenile myoclonic epilepsy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "juvenile_myoclonic_epilepsy-matrix",
+   "title": "Juvenile Myoclonic Epilepsy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A common idiopathic (genetic) generalised epilepsy syndrome, usually beginning in adolescence.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "JME is a genetically determined generalised epilepsy involving abnormal thalamocortical network excitability and synchronisation rather than a focal structural lesion. Inherited susceptibility, likely polygenic in most cases, produces a lowered threshold for generalised epileptiform discharges. The characteristic myoclonus and generalised seizures arise from these hyperexcitable cortico-thalamic circuits, and the strong link with the sleep-wake transition reflects state-dependent changes in cortical excitability.",
-    "additionalDifferentials": [
-      "Other idiopathic generalised epilepsies (childhood or juvenile absence epilepsy)",
-      "Progressive myoclonic epilepsies",
-      "Focal epilepsy with secondary generalisation",
-      "Benign physiological (hypnagogic) myoclonus",
-      "Non-epileptic movements or tics",
-      "Psychogenic non-epileptic events"
+    [
+     "Key Investigations",
+     "EEG, ideally including a recording after sleep deprivation and on awakening, Photic stimulation during EEG to elicit a",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "EEG, ideally including a recording after sleep deprivation and on awakening",
-      "Photic stimulation during EEG to elicit a photoparoxysmal response",
-      "MRI brain, mainly to exclude structural or progressive causes in atypical cases",
-      "Detailed history focusing on early-morning jerks and provoking factors",
-      "Metabolic or genetic testing when a progressive myoclonic epilepsy is suspected"
+    [
+     "Primary Differentials",
+     "Other idiopathic generalised epilepsies (childhood or juvenile absence epilepsy), Progressive myoclonic epilepsies, Focal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive cognitive decline or neurological deterioration suggesting a progressive myoclonic epilepsy",
-      "Focal neurological signs or focal features on EEG or imaging",
-      "Seizures worsening after starting treatment (possible inappropriate narrow-spectrum drug)",
-      "Frequent generalised tonic-clonic seizures or status epilepticus",
-      "Recurrent seizures driven by unrecognised sleep deprivation or non-adherence"
+    [
+     "Management Strategy",
+     "Control seizures with a broad-spectrum antiseizure medication, using sodium valproate for efficacy or levetiracetam and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis for seizure control is favourable with suitable therapy and lifestyle measures, and cognition is preserved, but JME is generally a lifelong tendency; most patients relapse if medication is stopped, so long-term or indefinite treatment is often needed.",
-    "pitfalls": [
-      "Missing the diagnosis by not asking specifically about early-morning myoclonic jerks",
-      "Misclassifying generalised seizures as focal and selecting a drug that aggravates myoclonus and absences",
-      "Underestimating the impact of sleep deprivation, alcohol, and poor adherence on seizure control",
-      "Attempting early withdrawal of treatment and precipitating relapse",
-      "Overlooking coexisting absence seizures"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control seizures with a broad-spectrum antiseizure medication, using sodium valproate for efficacy or levetiracetam and lamotrigine where valproate is unsuitable",
-      "Avoid narrow-spectrum agents such as carbamazepine and phenytoin that can aggravate myoclonus and absences",
-      "Advise lifestyle measures, avoiding sleep deprivation and excess alcohol and managing photic triggers",
-      "Counsel that treatment is usually long-term or indefinite because relapse is common on withdrawal, and reinforce adherence",
-      "Provide preconception counselling to women of childbearing potential given the teratogenicity of valproate and adjust therapy accordingly",
-      "Reassess the diagnosis and consider a progressive myoclonic epilepsy if seizures prove drug-resistant"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis by not asking specifically about early-morning myoclonic jerks",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for juvenile myoclonic epilepsy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "juvenile-myoclonic-epilepsy-diagram",
+   "title": "Juvenile Myoclonic Epilepsy: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

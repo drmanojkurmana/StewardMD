@@ -158,5 +158,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h7151b315"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pancreatitis-dx-algo",
+      "title": "Acute pancreatitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Diagnosis requires 2 of 3: typical epigastric pain radiating to the back, serum lipase/amylase >=3x ULN, or characteristic findings on cross-sectional imaging (Harrison 22e p.2745).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Persistent organ failure >48 h (respiratory, cardiovascular or renal) - hallmark of severe disease (Harrison 22e p.2746)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum lipase (>3x ULN) - preferred enzyme; more specific than amylase; remains elevated 7-14 days (Harrison 22e p.2740, p.2745), Liver profile incl. ALT - ALT >3x ULN supports gallstone aetiology (Harrison 22e p.2745),"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Revised Atlanta classification (Banks et al., Gut 2013). PHASES: early (2 weeks; imaging for local complications). SEVERITY: (1) Mild - no local complications and no organ failure (most interstitial cases; self-limited"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Enzyme magnitude does NOT track severity - degree or serial trend of lipase/amylase does not correlate with how severe the pancreatitis is (Harrison 22e p.2745)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute pancreatitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pancreatitis-matrix",
+      "title": "Acute pancreatitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diagnosis requires 2 of 3: typical epigastric pain radiating to the back, serum lipase/amylase >=3x ULN, or characteristic",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum lipase (>3x ULN) - preferred enzyme; more specific than amylase; remains elevated 7-14 days (Harrison 22e p.2740, p.2745),",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Perforated viscus, especially peptic ulcer, Acute cholecystitis / biliary colic, Acute intestinal obstruction",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Persistent organ failure >48 h (respiratory, cardiovascular or renal) - hallmark of severe disease (Harrison 22e p.2746)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Enzyme magnitude does NOT track severity - degree or serial trend of lipase/amylase does not correlate with how severe the",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute pancreatitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pancreatitis-diagram",
+      "title": "Acute pancreatitis: Abdominal & Hepatobiliary Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+      "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+      "annotations": [
+        {
+          "label": "Hepatobiliary Axis",
+          "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+        },
+        {
+          "label": "Pancreaticoduodenal",
+          "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+        },
+        {
+          "label": "Enteric Loops",
+          "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

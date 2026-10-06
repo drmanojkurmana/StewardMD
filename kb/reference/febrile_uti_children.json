@@ -1,77 +1,172 @@
 {
-  "id": "febrile_uti_children",
-  "name": "Febrile Urinary Tract Infection in Children",
-  "aliases": [
-    "febrile UTI",
-    "paediatric pyelonephritis",
-    "upper urinary tract infection in children"
+ "id": "febrile_uti_children",
+ "name": "Febrile Urinary Tract Infection in Children",
+ "aliases": [
+  "febrile UTI",
+  "paediatric pyelonephritis",
+  "upper urinary tract infection in children"
+ ],
+ "class": "infective",
+ "system": "Genitourinary",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Fever with a urinary tract infection in a young child usually indicates upper tract involvement (pyelonephritis) and should be taken seriously because of the risk of renal scarring.",
+   "In infants and preverbal children, features are non-specific, so urinary tract infection must be considered in any young child with unexplained fever.",
+   "A properly collected urine specimen is essential; contamination from bag or non-clean-catch samples is a frequent source of misleading results.",
+   "Diagnosis rests on the combination of pyuria and a significant growth of a single uropathogen on culture from an appropriately obtained specimen.",
+   "Escherichia coli is the predominant pathogen, and prompt appropriate antibiotic treatment reduces the likelihood of renal injury.",
+   "Imaging, typically renal and bladder ultrasound, is used to detect structural abnormalities, with further studies such as voiding cystourethrography reserved for selected children.",
+   "Vesicoureteral reflux and other urinary tract abnormalities predispose to recurrent infection and scarring and should be considered, especially after atypical or recurrent infections.",
+   "Recurrent febrile infections and any resulting renal scarring can contribute to later hypertension and reduced renal function, so follow-up matters."
   ],
-  "class": "infective",
-  "system": "Genitourinary",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Fever with a urinary tract infection in a young child usually indicates upper tract involvement (pyelonephritis) and should be taken seriously because of the risk of renal scarring.",
-      "In infants and preverbal children, features are non-specific, so urinary tract infection must be considered in any young child with unexplained fever.",
-      "A properly collected urine specimen is essential; contamination from bag or non-clean-catch samples is a frequent source of misleading results.",
-      "Diagnosis rests on the combination of pyuria and a significant growth of a single uropathogen on culture from an appropriately obtained specimen.",
-      "Escherichia coli is the predominant pathogen, and prompt appropriate antibiotic treatment reduces the likelihood of renal injury.",
-      "Imaging, typically renal and bladder ultrasound, is used to detect structural abnormalities, with further studies such as voiding cystourethrography reserved for selected children.",
-      "Vesicoureteral reflux and other urinary tract abnormalities predispose to recurrent infection and scarring and should be considered, especially after atypical or recurrent infections.",
-      "Recurrent febrile infections and any resulting renal scarring can contribute to later hypertension and reduced renal function, so follow-up matters."
+  "pathophysiology": "Most urinary tract infections are ascending: bowel-derived uropathogens, chiefly Escherichia coli, colonise the perineum, ascend the urethra, and multiply in the bladder. When bacteria and inflammation reach the kidney, pyelonephritis develops with fever and systemic signs. Bacterial virulence factors and host factors, including urinary stasis, incomplete bladder emptying, and vesicoureteral reflux that carries infected urine toward the kidney, promote upper tract infection. The inflammatory response within the renal parenchyma can injure tissue and, particularly with delayed treatment or recurrent episodes, lead to permanent scarring.",
+  "additionalDifferentials": [
+   "Other sources of occult fever (e.g., bacteraemia, pneumonia)",
+   "Viral illness with incidental contaminated urine sample",
+   "Vulvovaginitis or balanitis",
+   "Appendicitis or other intra-abdominal infection",
+   "Contaminated specimen giving a false-positive culture"
+  ],
+  "additionalInvestigations": [
+   "Urinalysis or dipstick (leucocyte esterase, nitrites) and microscopy for pyuria",
+   "Urine culture from an appropriately collected specimen",
+   "Inflammatory markers and blood culture when systemically unwell",
+   "Renal and bladder ultrasound",
+   "Voiding cystourethrography or renal scintigraphy in selected or recurrent cases"
+  ],
+  "redFlags": [
+   "Toxic appearance, signs of sepsis, or haemodynamic instability",
+   "Very young infant with fever",
+   "Inability to tolerate oral fluids or oral antibiotics",
+   "Failure to improve on appropriate treatment",
+   "Known or suspected urinary tract abnormality or recurrent febrile infections"
+  ],
+  "prognosis": "Most children with a promptly treated first febrile urinary tract infection recover fully, but recurrent infections, significant vesicoureteral reflux, or renal scarring carry a risk of long-term complications including hypertension and impaired renal function.",
+  "pitfalls": [
+   "Diagnosing infection from a contaminated bag specimen instead of a properly collected sample",
+   "Failing to consider urinary tract infection in an infant with unexplained fever",
+   "Treating asymptomatic bacteriuria as if it were true infection",
+   "Neglecting follow-up imaging or evaluation after atypical or recurrent febrile infections"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start prompt empirical antibiotics targeting Escherichia coli and common uropathogens, guided by local resistance patterns and narrowed once urine culture sensitivities return",
+   "Use parenteral antibiotics for infants and children who are systemically unwell, vomiting or unable to tolerate oral therapy, switching to oral once clinically improving",
+   "Ensure adequate hydration and give antipyretics and analgesia such as paracetamol for fever and discomfort",
+   "Arrange renal and bladder ultrasound to detect structural abnormality, obstruction or hydronephrosis",
+   "Reserve voiding cystourethrography or DMSA scintigraphy for atypical, recurrent infection or abnormal ultrasound to assess vesicoureteral reflux and scarring",
+   "Consider antibiotic prophylaxis and refer to paediatric nephrology or urology for significant reflux, recurrent infection or established renal scarring",
+   "Institute long-term blood pressure and renal function surveillance where scarring is confirmed, and give clear safety-net advice to re-present urgently with recurrent fever or deterioration"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "febrile_uti_children-pathway",
+   "title": "Febrile Urinary Tract Infection in Children: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Fever with a urinary tract infection in a young child usually indicates upper tract involvement (pyelonephritis) and should be taken seriously because of the risk of renal scarring.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Toxic appearance, signs of sepsis, or haemodynamic instability",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urinalysis or dipstick (leucocyte esterase, nitrites) and microscopy for pyuria, Urine culture from an appropriately collected specimen, Inflammatory markers and blood culture when systemically unwell"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start prompt empirical antibiotics targeting Escherichia coli and common uropathogens, guided by local resistance patterns and narrowed once urine culture sensitivities return"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing infection from a contaminated bag specimen instead of a properly collected sample"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of febrile urinary tract infection in children."
+  }
+ ],
+ "tables": [
+  {
+   "id": "febrile_uti_children-matrix",
+   "title": "Febrile Urinary Tract Infection in Children: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fever with a urinary tract infection in a young child usually indicates upper tract involvement (pyelonephritis) and should be",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Most urinary tract infections are ascending: bowel-derived uropathogens, chiefly Escherichia coli, colonise the perineum, ascend the urethra, and multiply in the bladder. When bacteria and inflammation reach the kidney, pyelonephritis develops with fever and systemic signs. Bacterial virulence factors and host factors, including urinary stasis, incomplete bladder emptying, and vesicoureteral reflux that carries infected urine toward the kidney, promote upper tract infection. The inflammatory response within the renal parenchyma can injure tissue and, particularly with delayed treatment or recurrent episodes, lead to permanent scarring.",
-    "additionalDifferentials": [
-      "Other sources of occult fever (e.g., bacteraemia, pneumonia)",
-      "Viral illness with incidental contaminated urine sample",
-      "Vulvovaginitis or balanitis",
-      "Appendicitis or other intra-abdominal infection",
-      "Contaminated specimen giving a false-positive culture"
+    [
+     "Key Investigations",
+     "Urinalysis or dipstick (leucocyte esterase, nitrites) and microscopy for pyuria, Urine culture from an appropriately collected",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urinalysis or dipstick (leucocyte esterase, nitrites) and microscopy for pyuria",
-      "Urine culture from an appropriately collected specimen",
-      "Inflammatory markers and blood culture when systemically unwell",
-      "Renal and bladder ultrasound",
-      "Voiding cystourethrography or renal scintigraphy in selected or recurrent cases"
+    [
+     "Primary Differentials",
+     "Other sources of occult fever (e.g., bacteraemia, pneumonia), Viral illness with incidental contaminated urine sample,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Toxic appearance, signs of sepsis, or haemodynamic instability",
-      "Very young infant with fever",
-      "Inability to tolerate oral fluids or oral antibiotics",
-      "Failure to improve on appropriate treatment",
-      "Known or suspected urinary tract abnormality or recurrent febrile infections"
+    [
+     "Management Strategy",
+     "Start prompt empirical antibiotics targeting Escherichia coli and common uropathogens, guided by local resistance patterns and",
+     "Core treatment modality"
     ],
-    "prognosis": "Most children with a promptly treated first febrile urinary tract infection recover fully, but recurrent infections, significant vesicoureteral reflux, or renal scarring carry a risk of long-term complications including hypertension and impaired renal function.",
-    "pitfalls": [
-      "Diagnosing infection from a contaminated bag specimen instead of a properly collected sample",
-      "Failing to consider urinary tract infection in an infant with unexplained fever",
-      "Treating asymptomatic bacteriuria as if it were true infection",
-      "Neglecting follow-up imaging or evaluation after atypical or recurrent febrile infections"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start prompt empirical antibiotics targeting Escherichia coli and common uropathogens, guided by local resistance patterns and narrowed once urine culture sensitivities return",
-      "Use parenteral antibiotics for infants and children who are systemically unwell, vomiting or unable to tolerate oral therapy, switching to oral once clinically improving",
-      "Ensure adequate hydration and give antipyretics and analgesia such as paracetamol for fever and discomfort",
-      "Arrange renal and bladder ultrasound to detect structural abnormality, obstruction or hydronephrosis",
-      "Reserve voiding cystourethrography or DMSA scintigraphy for atypical, recurrent infection or abnormal ultrasound to assess vesicoureteral reflux and scarring",
-      "Consider antibiotic prophylaxis and refer to paediatric nephrology or urology for significant reflux, recurrent infection or established renal scarring",
-      "Institute long-term blood pressure and renal function surveillance where scarring is confirmed, and give clear safety-net advice to re-present urgently with recurrent fever or deterioration"
+    [
+     "Clinical Pitfall",
+     "Diagnosing infection from a contaminated bag specimen instead of a properly collected sample",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for febrile urinary tract infection in children."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "febrile-uti-children-diagram",
+   "title": "Febrile Urinary Tract Infection in Children: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

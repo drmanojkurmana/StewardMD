@@ -143,5 +143,100 @@
       "importedAt": "2026-06-29T13:34:16Z",
       "contentHash": "hf92f0327"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "erysipelas-dx-algo",
+      "title": "Erysipelas: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Abrupt onset of fiery-red swelling of the face or extremities, with well-defined indurated margins (notably along the nasolabial fold), rapid progression, and intense pain (Harrison 22e p.1052).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Edema with purple bullae, ecchymosis, and cutaneous anesthesia suggests loss of vascular integrity and necessitates exploration of deeper structures for necrotizing fasciitis or myonecrosis (Harrison 22e p.1051).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: None routinely required, Blood cultures (if systemically unwell)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Atypical erysipelas may involve an unusual anatomic site, appear less intensely red, fade into surrounding skin, or cause only mild systemic illness, in which case a specific clinical diagnosis cannot reliably be made"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for erysipelas."
+    }
+  ],
+  "tables": [
+    {
+      "id": "erysipelas-matrix",
+      "title": "Erysipelas: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Abrupt onset of fiery-red swelling of the face or extremities, with well-defined indurated margins (notably along the nasolabial",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "None routinely required, Blood cultures (if systemically unwell)",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Edema with purple bullae, ecchymosis, and cutaneous anesthesia suggests loss of vascular integrity and necessitates exploration",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Atypical erysipelas may involve an unusual anatomic site, appear less intensely red, fade into surrounding skin, or cause only",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for erysipelas."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "erysipelas-diagram",
+      "title": "Erysipelas: Cutaneous Architecture & Histological Layer Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+      "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+      "annotations": [
+        {
+          "label": "Epidermal Layer",
+          "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+        },
+        {
+          "label": "Dermal Architecture",
+          "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+        },
+        {
+          "label": "Subcutis",
+          "description": "Adipose lobules, septal architecture, and fascial boundaries."
+        }
+      ]
+    }
+  ]
 }

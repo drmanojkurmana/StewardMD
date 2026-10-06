@@ -154,5 +154,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "hf1ecd56f"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "myeloma-dx-algo",
+      "title": "Multiple myeloma: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Bone pain is the most common presenting symptom, affecting nearly 70% of patients; lesions are purely lytic (osteoblast suppression by DKK-1), so a radioisotope bone scan is LESS useful than plain radiography (p.886-887).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Spinal cord compression from vertebral collapse or plasmacytoma - radicular pain, loss of bowel/bladder control (oncologic emergency) (p.887)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Bone marrow aspirate AND core biopsy with kappa/lambda clonality (flow cytometry or immunohistochemistry); marrow plasma cells are CD138+ (p.887, Table 116-2), Serum protein electrophoresis with immunofixation;"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Diagnosis (IMWG, Table 116-1): clonal marrow plasma cells (or biopsy-proven plasmacytoma) PLUS >=1 myeloma-defining event. CRAB end-organ damage: hyperCalcemia (>2.75 mmol/L or >0.25 mmol/L above ULN); Renal"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on urine dipstick (detects albumin, not light chains) or the Bence Jones heat test (false-negative ~50%) to exclude light-chain myeloma - use 24-h urine immunofixation and serum free light chains (p.888-889)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for multiple myeloma."
+    }
+  ],
+  "tables": [
+    {
+      "id": "myeloma-matrix",
+      "title": "Multiple myeloma: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bone pain is the most common presenting symptom, affecting nearly 70% of patients; lesions are purely lytic (osteoblast",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Bone marrow aspirate AND core biopsy with kappa/lambda clonality (flow cytometry or immunohistochemistry); marrow plasma cells",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Monoclonal gammopathy of undetermined significance (MGUS) - serum M protein =30 g/L or urine M protein >=500 mg/24h and/or marrow",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Spinal cord compression from vertebral collapse or plasmacytoma - radicular pain, loss of bowel/bladder control (oncologic",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on urine dipstick (detects albumin, not light chains) or the Bence Jones heat test (false-negative ~50%) to exclude",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for multiple myeloma."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "myeloma-diagram",
+      "title": "Multiple myeloma: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

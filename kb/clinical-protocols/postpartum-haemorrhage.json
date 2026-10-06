@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "postpartum-haemorrhage-india",
  "setting": "Labour room, operating theatre, postnatal ward, emergency department",
- "aliases": ["PPH", "E-MOTIVE", "MOTIVE bundle", "atonic PPH", "uterine atony", "obstetric haemorrhage", "4 Ts", "tranexamic acid PPH", "carboprost", "calibrated drape", "massive obstetric haemorrhage"],
+ "aliases": [
+  "PPH",
+  "E-MOTIVE",
+  "MOTIVE bundle",
+  "atonic PPH",
+  "uterine atony",
+  "obstetric haemorrhage",
+  "4 Ts",
+  "tranexamic acid PPH",
+  "carboprost",
+  "calibrated drape",
+  "massive obstetric haemorrhage"
+ ],
  "summary": "Measure blood loss objectively and act at 300 mL with an abnormal vital sign or at 500 mL. Start the whole first-response bundle within 15 minutes: uterine massage, IV oxytocin, tranexamic acid 1 g within 3 hours of birth, IV crystalloid, genital tract examination and escalation.",
  "sections": [
   {
@@ -101,18 +113,160 @@
   }
  ],
  "drugs": [
-  { "name": "Oxytocin", "dose": "Treatment: 10 IU IV diluted, slowly over 1 to 2 minutes, then 10 to 20 IU in crystalloid over 4 hours titrated to tone. Prevention: 10 IU IM or slow IV", "notes": "First-line for prevention and treatment. Repeat dosing is safe after prophylaxis. Never give as a rapid undiluted IV bolus (hypotension)." },
-  { "name": "Tranexamic acid", "dose": "1 g IV over 10 minutes; second 1 g if bleeding continues after 30 minutes or restarts within 24 hours", "notes": "Start within 3 hours of birth for every PPH. Not for routine prevention. Avoid with a known thromboembolic event in this pregnancy." },
-  { "name": "Methylergometrine", "dose": "0.2 mg IM or slow IV; may repeat after 15 minutes, then every 2 to 4 hours if needed; maximum 5 doses (1 mg in total)", "notes": "Contraindicated in hypertension (including gestational hypertension, pre-eclampsia and eclampsia) and heart disease." },
-  { "name": "Carboprost (15-methyl PGF2 alpha)", "dose": "250 mcg deep IM every 15 minutes as needed; maximum 8 doses (2 mg)", "notes": "Contraindicated in asthma. Diarrhoea, vomiting, fever and bronchospasm are common." },
-  { "name": "Misoprostol", "dose": "Treatment: 800 mcg sublingual once. Prevention: 400 or 600 mcg orally once", "notes": "Use when injectable uterotonics are unavailable. Shivering and pyrexia common." },
-  { "name": "Carbetocin (heat-stable)", "dose": "100 mcg IM or IV once, for prevention only", "notes": "Alternative to oxytocin where the cold chain cannot be guaranteed. Not for treatment after prophylactic carbetocin." }
+  {
+   "name": "Oxytocin",
+   "dose": "Treatment: 10 IU IV diluted, slowly over 1 to 2 minutes, then 10 to 20 IU in crystalloid over 4 hours titrated to tone. Prevention: 10 IU IM or slow IV",
+   "notes": "First-line for prevention and treatment. Repeat dosing is safe after prophylaxis. Never give as a rapid undiluted IV bolus (hypotension)."
+  },
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g IV over 10 minutes; second 1 g if bleeding continues after 30 minutes or restarts within 24 hours",
+   "notes": "Start within 3 hours of birth for every PPH. Not for routine prevention. Avoid with a known thromboembolic event in this pregnancy."
+  },
+  {
+   "name": "Methylergometrine",
+   "dose": "0.2 mg IM or slow IV; may repeat after 15 minutes, then every 2 to 4 hours if needed; maximum 5 doses (1 mg in total)",
+   "notes": "Contraindicated in hypertension (including gestational hypertension, pre-eclampsia and eclampsia) and heart disease."
+  },
+  {
+   "name": "Carboprost (15-methyl PGF2 alpha)",
+   "dose": "250 mcg deep IM every 15 minutes as needed; maximum 8 doses (2 mg)",
+   "notes": "Contraindicated in asthma. Diarrhoea, vomiting, fever and bronchospasm are common."
+  },
+  {
+   "name": "Misoprostol",
+   "dose": "Treatment: 800 mcg sublingual once. Prevention: 400 or 600 mcg orally once",
+   "notes": "Use when injectable uterotonics are unavailable. Shivering and pyrexia common."
+  },
+  {
+   "name": "Carbetocin (heat-stable)",
+   "dose": "100 mcg IM or IV once, for prevention only",
+   "notes": "Alternative to oxytocin where the cold chain cannot be guaranteed. Not for treatment after prophylactic carbetocin."
+  }
  ],
  "sources": [
-  { "org": "WHO / FIGO / ICM", "title": "Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage", "year": 2025, "url": "https://www.who.int/publications/i/item/9789240115637" },
-  { "org": "WHO", "title": "WHO recommendations on the assessment of postpartum blood loss and use of a treatment bundle for postpartum haemorrhage", "year": 2023, "url": "https://www.who.int/publications/i/item/9789240085398" },
-  { "org": "E-MOTIVE Trial Collaborators (NEJM)", "title": "Randomized trial of early detection and treatment of postpartum hemorrhage", "year": 2023, "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2303966" },
-  { "org": "FIGO", "title": "FIGO recommendations on the management of postpartum hemorrhage 2022", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9313855/" }
+  {
+   "org": "WHO / FIGO / ICM",
+   "title": "Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage",
+   "year": 2025,
+   "url": "https://www.who.int/publications/i/item/9789240115637"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO recommendations on the assessment of postpartum blood loss and use of a treatment bundle for postpartum haemorrhage",
+   "year": 2023,
+   "url": "https://www.who.int/publications/i/item/9789240085398"
+  },
+  {
+   "org": "E-MOTIVE Trial Collaborators (NEJM)",
+   "title": "Randomized trial of early detection and treatment of postpartum hemorrhage",
+   "year": 2023,
+   "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2303966"
+  },
+  {
+   "org": "FIGO",
+   "title": "FIGO recommendations on the management of postpartum hemorrhage 2022",
+   "year": 2022,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9313855/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "postpartum-haemorrhage-pathway",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Measure blood loss objectively at every birth (calibrated under-buttock drape at vaginal birth). Visual estimation consistently underestimates loss.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call for help (senior obstetrician, anaesthetist, midwife). Two large-bore IV cannulae; send group and crossmatch, CBC, coagulation screen and fibrinogen. Empty the bladder with a catheter.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Be most vigilant in the first 2 hours after birth, but keep checking for revealed or concealed bleeding for 24 hours. Palpate uterine tone routinely in every woman."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Decide on transfusion from the clinical picture and ongoing loss, not a single haemoglobin; early Hb is falsely reassuring. Activate the massive transfusion protocol for ongoing loss of 1000 mL or more with unstable vital signs."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Pulse, BP, respiratory rate, SpO2, uterine tone and vaginal loss every 15 minutes initially, then at reducing intervals for 24 hours; hourly urine output via catheter and a strict fluid balance chart."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for postpartum haemorrhage (pph): first response and escalation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "postpartum-haemorrhage-summary-matrix",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Measure blood loss objectively at every birth (calibrated under-buttock drape at vaginal birth). Visual estimation consistently",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call for help (senior obstetrician, anaesthetist, midwife). Two large-bore IV cannulae; send group and crossmatch, CBC, coagulation screen",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oxytocin: Treatment: 10 IU IV diluted, slowly over 1 to 2 minutes, then 10 to 20 IU in crystalloid over 4 hours titrated to tone.",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for 500 mL, hypotension or a falling Hb before acting, or relying on visual estimation.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for postpartum haemorrhage (pph): first response and escalation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "postpartum-haemorrhage-diagram",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "trismus_pseudocamptodactyly_syndrome",
-  "name": "Trismus-pseudocamptodactyly syndrome",
-  "aliases": [
-    "distal arthrogryposis type 7",
-    "DA7",
-    "Hecht syndrome",
-    "Dutch-Kentucky syndrome",
-    "MYH8"
+ "id": "trismus_pseudocamptodactyly_syndrome",
+ "name": "Trismus-pseudocamptodactyly syndrome",
+ "aliases": [
+  "distal arthrogryposis type 7",
+  "DA7",
+  "Hecht syndrome",
+  "Dutch-Kentucky syndrome",
+  "MYH8"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A distal arthrogryposis characterised by limited mouth opening (trismus) and pseudocamptodactyly, in which the fingers flex only when the wrist is extended",
+   "The finger flexion is 'pseudo' because it is provoked by dorsiflexing the wrist and disappears when the wrist is flexed, reflecting short flexor tendons rather than fixed joint contracture",
+   "Trismus limits mouth opening and can impede dental care, feeding and intubation",
+   "Foot deformities such as talipes and short muscles may also occur",
+   "Caused by autosomal dominant variants in MYH8, encoding perinatal myosin heavy chain",
+   "Intellect is normal and the condition is non-progressive",
+   "Management is supportive with physiotherapy, stretching and occasional surgical release of tendons or the temporomandibular apparatus"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Gorlin's Syndromes of the Head and Neck",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A distal arthrogryposis characterised by limited mouth opening (trismus) and pseudocamptodactyly, in which the fingers flex only when the wrist is extended",
-      "The finger flexion is 'pseudo' because it is provoked by dorsiflexing the wrist and disappears when the wrist is flexed, reflecting short flexor tendons rather than fixed joint contracture",
-      "Trismus limits mouth opening and can impede dental care, feeding and intubation",
-      "Foot deformities such as talipes and short muscles may also occur",
-      "Caused by autosomal dominant variants in MYH8, encoding perinatal myosin heavy chain",
-      "Intellect is normal and the condition is non-progressive",
-      "Management is supportive with physiotherapy, stretching and occasional surgical release of tendons or the temporomandibular apparatus"
+  "pathophysiology": "Trismus-pseudocamptodactyly syndrome is caused by autosomal dominant variants in MYH8, which encodes perinatal myosin heavy chain expressed in developing and neonatal skeletal muscle. Abnormal myosin function alters muscle length and tone during development, leaving the long finger flexors and the muscles of mastication functionally short. The short flexor-digitorum tendons produce the characteristic wrist-dependent finger flexion (pseudocamptodactyly), while shortening around the temporomandibular apparatus limits mouth opening (trismus). Unlike true camptodactyly there is no fixed interphalangeal joint contracture, and the condition remains static after birth.",
+  "additionalDifferentials": [
+   "Other distal arthrogryposis subtypes with true camptodactyly",
+   "Isolated congenital trismus or temporomandibular joint ankylosis",
+   "Schwartz-Jampel syndrome",
+   "Freeman-Sheldon syndrome with microstomia",
+   "Camptodactyly from other causes",
+   "Dupuytren-like contractures"
+  ],
+  "additionalInvestigations": [
+   "Clinical demonstration of wrist-dependent finger flexion and measurement of maximal mouth opening",
+   "Molecular genetic testing for MYH8 and a distal arthrogryposis panel",
+   "Three-generation pedigree and examination of relatives",
+   "Radiographs or imaging of the temporomandibular joint and hands where surgery is considered",
+   "Dental and maxillofacial assessment for trismus",
+   "Airway/anaesthetic evaluation before procedures given limited mouth opening"
+  ],
+  "redFlags": [
+   "Anticipated difficult intubation from restricted mouth opening",
+   "Impaired dental hygiene and access leading to dental disease",
+   "Feeding difficulty in infancy",
+   "Progressive limitation of hand or jaw function"
+  ],
+  "prognosis": "The prognosis is good, with normal intellect and lifespan; symptoms are static and functional limitations from trismus and finger tightness can be improved with stretching, physiotherapy and, in selected cases, surgery.",
+  "pitfalls": [
+   "Mistaking pseudocamptodactyly for a fixed joint contracture and misdirecting treatment",
+   "Proceeding to anaesthesia without planning for the restricted mouth opening",
+   "Overlooking the autosomal dominant inheritance in counselling",
+   "Neglecting dental access problems caused by trismus"
+  ],
+  "references": [
+   "Emery and Rimoin's Principles and Practice of Medical Genetics",
+   "Gorlin's Syndromes of the Head and Neck"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use stretching exercises and physiotherapy to improve mouth opening and reduce finger flexor tightness",
+   "Consider surgical lengthening of the short finger flexor tendons or release procedures in selected cases with functional limitation",
+   "Correct associated foot deformities such as talipes with orthopaedic input where present",
+   "Provide dental and maxillofacial care adapted to the limited mouth opening",
+   "Flag the difficult airway from restricted mouth opening and plan anaesthesia carefully before any procedure",
+   "Offer genetic counselling and family assessment for the autosomal dominant MYH8 variant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "trismus_pseudocamptodactyly_syndrome-pathway",
+   "title": "Trismus-pseudocamptodactyly syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A distal arthrogryposis characterised by limited mouth opening (trismus) and pseudocamptodactyly, in which the fingers flex only when the wrist is extended",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Anticipated difficult intubation from restricted mouth opening",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical demonstration of wrist-dependent finger flexion and measurement of maximal mouth opening, Molecular genetic testing for MYH8 and a distal arthrogryposis panel, Three-generation pedigree and examination of relatives"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use stretching exercises and physiotherapy to improve mouth opening and reduce finger flexor tightness"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking pseudocamptodactyly for a fixed joint contracture and misdirecting treatment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of trismus-pseudocamptodactyly syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "trismus_pseudocamptodactyly_syndrome-matrix",
+   "title": "Trismus-pseudocamptodactyly syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A distal arthrogryposis characterised by limited mouth opening (trismus) and pseudocamptodactyly, in which the fingers flex only",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Trismus-pseudocamptodactyly syndrome is caused by autosomal dominant variants in MYH8, which encodes perinatal myosin heavy chain expressed in developing and neonatal skeletal muscle. Abnormal myosin function alters muscle length and tone during development, leaving the long finger flexors and the muscles of mastication functionally short. The short flexor-digitorum tendons produce the characteristic wrist-dependent finger flexion (pseudocamptodactyly), while shortening around the temporomandibular apparatus limits mouth opening (trismus). Unlike true camptodactyly there is no fixed interphalangeal joint contracture, and the condition remains static after birth.",
-    "additionalDifferentials": [
-      "Other distal arthrogryposis subtypes with true camptodactyly",
-      "Isolated congenital trismus or temporomandibular joint ankylosis",
-      "Schwartz-Jampel syndrome",
-      "Freeman-Sheldon syndrome with microstomia",
-      "Camptodactyly from other causes",
-      "Dupuytren-like contractures"
+    [
+     "Key Investigations",
+     "Clinical demonstration of wrist-dependent finger flexion and measurement of maximal mouth opening, Molecular genetic testing for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical demonstration of wrist-dependent finger flexion and measurement of maximal mouth opening",
-      "Molecular genetic testing for MYH8 and a distal arthrogryposis panel",
-      "Three-generation pedigree and examination of relatives",
-      "Radiographs or imaging of the temporomandibular joint and hands where surgery is considered",
-      "Dental and maxillofacial assessment for trismus",
-      "Airway/anaesthetic evaluation before procedures given limited mouth opening"
+    [
+     "Primary Differentials",
+     "Other distal arthrogryposis subtypes with true camptodactyly, Isolated congenital trismus or temporomandibular joint ankylosis,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Anticipated difficult intubation from restricted mouth opening",
-      "Impaired dental hygiene and access leading to dental disease",
-      "Feeding difficulty in infancy",
-      "Progressive limitation of hand or jaw function"
+    [
+     "Management Strategy",
+     "Use stretching exercises and physiotherapy to improve mouth opening and reduce finger flexor tightness",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is good, with normal intellect and lifespan; symptoms are static and functional limitations from trismus and finger tightness can be improved with stretching, physiotherapy and, in selected cases, surgery.",
-    "pitfalls": [
-      "Mistaking pseudocamptodactyly for a fixed joint contracture and misdirecting treatment",
-      "Proceeding to anaesthesia without planning for the restricted mouth opening",
-      "Overlooking the autosomal dominant inheritance in counselling",
-      "Neglecting dental access problems caused by trismus"
-    ],
-    "references": [
-      "Emery and Rimoin's Principles and Practice of Medical Genetics",
-      "Gorlin's Syndromes of the Head and Neck"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use stretching exercises and physiotherapy to improve mouth opening and reduce finger flexor tightness",
-      "Consider surgical lengthening of the short finger flexor tendons or release procedures in selected cases with functional limitation",
-      "Correct associated foot deformities such as talipes with orthopaedic input where present",
-      "Provide dental and maxillofacial care adapted to the limited mouth opening",
-      "Flag the difficult airway from restricted mouth opening and plan anaesthesia carefully before any procedure",
-      "Offer genetic counselling and family assessment for the autosomal dominant MYH8 variant"
+    [
+     "Clinical Pitfall",
+     "Mistaking pseudocamptodactyly for a fixed joint contracture and misdirecting treatment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for trismus-pseudocamptodactyly syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "trismus-pseudocamptodactyly-syndrome-diagram",
+   "title": "Trismus-pseudocamptodactyly syndrome: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

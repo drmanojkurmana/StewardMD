@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, HDU, ICU",
- "aliases": ["NMS", "neuroleptic malignant", "antipsychotic hyperthermia", "lead-pipe rigidity", "dantrolene", "bromocriptine", "haloperidol reaction", "malignant catatonia"],
+ "aliases": [
+  "NMS",
+  "neuroleptic malignant",
+  "antipsychotic hyperthermia",
+  "lead-pipe rigidity",
+  "dantrolene",
+  "bromocriptine",
+  "haloperidol reaction",
+  "malignant catatonia"
+ ],
  "summary": "Suspect NMS with fever, lead-pipe rigidity, altered mental status, autonomic instability and raised CK after a dopamine antagonist or withdrawal of dopaminergic drugs. Stop the causative drug at once, give intensive supportive care with cooling and fluids, benzodiazepines, and dantrolene and/or bromocriptine for moderate to severe cases; ECT if refractory.",
  "sections": [
   {
@@ -80,12 +89,132 @@
   }
  ],
  "drugs": [
-  { "name": "Dantrolene", "dose": "1 to 2.5 mg/kg IV, repeat as needed up to 10 mg/kg/day", "notes": "Severe rigidity and hyperthermia; hepatotoxicity with prolonged use." },
-  { "name": "Bromocriptine", "dose": "2.5 mg orally or via nasogastric tube three times daily; increase by 2.5 to 7.5 mg/day to a maximum of 45 mg/day", "notes": "May worsen psychosis; watch BP and vomiting." },
-  { "name": "Lorazepam", "dose": "1 to 2 mg IV or IM every 4 to 6 hours", "notes": "Mild NMS, agitation, catatonic features." }
+  {
+   "name": "Dantrolene",
+   "dose": "1 to 2.5 mg/kg IV, repeat as needed up to 10 mg/kg/day",
+   "notes": "Severe rigidity and hyperthermia; hepatotoxicity with prolonged use."
+  },
+  {
+   "name": "Bromocriptine",
+   "dose": "2.5 mg orally or via nasogastric tube three times daily; increase by 2.5 to 7.5 mg/day to a maximum of 45 mg/day",
+   "notes": "May worsen psychosis; watch BP and vomiting."
+  },
+  {
+   "name": "Lorazepam",
+   "dose": "1 to 2 mg IV or IM every 4 to 6 hours",
+   "notes": "Mild NMS, agitation, catatonic features."
+  }
  ],
  "sources": [
-  { "org": "Curr Neuropharmacol (Tse et al.)", "title": "Neuroleptic Malignant Syndrome: A Review from a Clinically Oriented Perspective", "year": 2015, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4812801/" }
+  {
+   "org": "Curr Neuropharmacol (Tse et al.)",
+   "title": "Neuroleptic Malignant Syndrome: A Review from a Clinically Oriented Perspective",
+   "year": 2015,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4812801/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "nms-management-algo",
+   "title": "NMS Recognition and Emergent Resuscitation Algorithm",
+   "steps": [
+    {
+     "step": "Trigger Identification and Cessation",
+     "action": "Immediately discontinue all dopamine receptor antagonists (antipsychotics, metoclopramide) or resume stopped dopamine agonists (levodopa in Parkinson disease).",
+     "critical": true
+    },
+    {
+     "step": "Emergency Airway and Hemodynamic Support",
+     "action": "Assess for severe chest wall rigidity and hyperthermia. Secure airway early if GCS reduced or respiratory failure. Aggressive IV fluid resuscitation targeting urine output > 2 mL/kg/h to protect kidneys from rhabdomyolysis.",
+     "critical": true
+    },
+    {
+     "step": "Active External Cooling",
+     "action": "Institute aggressive physical cooling (ice packs, cooling blankets, evaporative cooling) for core temperature > 38.5 C. Antipyretics are ineffective as fever is centrally mediated and muscular."
+    },
+    {
+     "step": "Pharmacotherapy for Moderate to Severe NMS",
+     "branch": "Severe Rigidity / Hyperthermia",
+     "action": "Administer IV Dantrolene 1 to 2.5 mg/kg bolus (up to 10 mg/kg/day) for severe muscle rigidity, and Bromocriptine 2.5 to 5 mg orally/NG 8-hourly to reverse central dopamine blockade."
+    },
+    {
+     "step": "Refractory NMS Escalation",
+     "branch": "Refractory to Medical Therapy at 48 hours",
+     "action": "Urgent psychiatric and ICU evaluation for Electroconvulsive Therapy (ECT). ECT is highly effective in drug-refractory NMS."
+    }
+   ],
+   "caption": "Algorithm aligned with emergency consensus guidelines for neuroleptic malignant syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nms-diagnostic-criteria",
+   "title": "International Consensus Diagnostic Criteria for NMS",
+   "headers": [
+    "Diagnostic Domain",
+    "Clinical Finding / Threshold",
+    "Laboratory or Physical Indicator"
+   ],
+   "rows": [
+    [
+     "Exposure",
+     "Recent dopamine antagonist exposure or dopamine agonist withdrawal",
+     "Typically within 1 to 14 days of antipsychotic initiation or dose change"
+    ],
+    [
+     "Hyperthermia",
+     "Core body temperature > 38.0 C on at least two occasions",
+     "Centrally driven autonomic and peripheral thermogenesis"
+    ],
+    [
+     "Neuromuscular Rigidity",
+     "Severe generalized lead-pipe or cogwheel muscle rigidity",
+     "Severe generalized resistance to passive limb movement"
+    ],
+    [
+     "Mental Status Change",
+     "Altered sensorium: delirium, stupor, mutism, or coma",
+     "Fluctuating encephalopathy preceding or accompanying motor signs"
+    ],
+    [
+     "Autonomic Instability",
+     "Tachycardia, labile blood pressure, tachypnea, profuse diaphoresis",
+     "Sympathetic hyperactivity with wide BP swings and incontinence"
+    ],
+    [
+     "Biochemical Biomarkers",
+     "Serum Creatine Kinase (CK) elevation > 4x upper limit of normal",
+     "Rhabdomyolysis with secondary risk of acute tubular necrosis and myoglobinuria"
+    ]
+   ],
+   "caption": "Diagnosis requires exposure plus hyperthermia, rigidity, and at least two autonomic or laboratory criteria."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neuroleptic-malignant-syndrome-diagram",
+   "title": "Neuroleptic malignant syndrome: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

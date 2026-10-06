@@ -5,7 +5,27 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, STI clinic, emergency department",
- "aliases": ["STI", "STD", "gonorrhoea", "gonorrhea", "chlamydia", "syphilis", "trichomonas", "trichomoniasis", "PID", "pelvic inflammatory disease", "urethral discharge", "vaginal discharge", "genital ulcer", "syndromic management", "EPT", "NGU", "bacterial vaginosis", "LGV", "chancroid"],
+ "aliases": [
+  "STI",
+  "STD",
+  "gonorrhoea",
+  "gonorrhea",
+  "chlamydia",
+  "syphilis",
+  "trichomonas",
+  "trichomoniasis",
+  "PID",
+  "pelvic inflammatory disease",
+  "urethral discharge",
+  "vaginal discharge",
+  "genital ulcer",
+  "syndromic management",
+  "EPT",
+  "NGU",
+  "bacterial vaginosis",
+  "LGV",
+  "chancroid"
+ ],
  "summary": "Test and treat at the same visit: gonorrhoea with ceftriaxone 500 mg IM (1 g if 150 kg or more), chlamydia with doxycycline for 7 days, syphilis with benzathine penicillin by stage, trichomonas with metronidazole, and PID with a 14-day triple regimen, plus HIV testing and partner treatment.",
  "sections": [
   {
@@ -103,19 +123,164 @@
   }
  ],
  "drugs": [
-  { "name": "Ceftriaxone", "dose": "Gonorrhoea 500 mg IM single dose (1 g if 150 kg or more); PID inpatient 1 g IV every 24 hours", "notes": "WHO 2024 uses 1 g IM for gonorrhoea. Chancroid 250 mg IM single dose." },
-  { "name": "Doxycycline", "dose": "100 mg orally twice daily: 7 days (chlamydia, NGU), 14 days (PID, early syphilis if penicillin allergic), 21 days (LGV), 28 days (late syphilis if allergic)", "notes": "Avoid in pregnancy." },
-  { "name": "Azithromycin", "dose": "1 g orally single dose (chlamydia in pregnancy, chancroid); 2 g single dose with gentamicin for gonorrhoea if cephalosporin allergic", "notes": "Not for gonorrhoea monotherapy or syphilis." },
-  { "name": "Benzathine penicillin G", "dose": "2.4 million units IM single dose (early syphilis); weekly for 3 weeks (late latent or unknown duration)", "notes": "Only effective treatment in pregnancy." },
-  { "name": "Aqueous crystalline penicillin G", "dose": "18 to 24 million units/day IV (3 to 4 million units 4-hourly) for 10 to 14 days", "notes": "Neurosyphilis, ocular and otosyphilis." },
-  { "name": "Metronidazole", "dose": "500 mg orally twice daily for 7 days (trichomonas in women, BV) or 14 days (PID); 2 g single dose (trichomonas in men)", "notes": "Safe in pregnancy." },
-  { "name": "Gentamicin + azithromycin", "dose": "Gentamicin 240 mg IM + azithromycin 2 g orally, single doses", "notes": "Gonorrhoea with cephalosporin allergy; not reliable for pharyngeal infection." },
-  { "name": "Cefixime", "dose": "800 mg orally single dose", "notes": "Gonorrhoea if ceftriaxone unavailable, or expedited partner therapy; test of cure advised." }
+  {
+   "name": "Ceftriaxone",
+   "dose": "Gonorrhoea 500 mg IM single dose (1 g if 150 kg or more); PID inpatient 1 g IV every 24 hours",
+   "notes": "WHO 2024 uses 1 g IM for gonorrhoea. Chancroid 250 mg IM single dose."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally twice daily: 7 days (chlamydia, NGU), 14 days (PID, early syphilis if penicillin allergic), 21 days (LGV), 28 days (late syphilis if allergic)",
+   "notes": "Avoid in pregnancy."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "1 g orally single dose (chlamydia in pregnancy, chancroid); 2 g single dose with gentamicin for gonorrhoea if cephalosporin allergic",
+   "notes": "Not for gonorrhoea monotherapy or syphilis."
+  },
+  {
+   "name": "Benzathine penicillin G",
+   "dose": "2.4 million units IM single dose (early syphilis); weekly for 3 weeks (late latent or unknown duration)",
+   "notes": "Only effective treatment in pregnancy."
+  },
+  {
+   "name": "Aqueous crystalline penicillin G",
+   "dose": "18 to 24 million units/day IV (3 to 4 million units 4-hourly) for 10 to 14 days",
+   "notes": "Neurosyphilis, ocular and otosyphilis."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg orally twice daily for 7 days (trichomonas in women, BV) or 14 days (PID); 2 g single dose (trichomonas in men)",
+   "notes": "Safe in pregnancy."
+  },
+  {
+   "name": "Gentamicin + azithromycin",
+   "dose": "Gentamicin 240 mg IM + azithromycin 2 g orally, single doses",
+   "notes": "Gonorrhoea with cephalosporin allergy; not reliable for pharyngeal infection."
+  },
+  {
+   "name": "Cefixime",
+   "dose": "800 mg orally single dose",
+   "notes": "Gonorrhoea if ceftriaxone unavailable, or expedited partner therapy; test of cure advised."
+  }
  ],
  "sources": [
-  { "org": "CDC", "title": "Sexually Transmitted Infections Treatment Guidelines, 2021 (MMWR Recommendations and Reports)", "year": 2021, "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm" },
-  { "org": "WHO", "title": "Updated recommendations for the treatment of Neisseria gonorrhoeae, Chlamydia trachomatis and Treponema pallidum (syphilis) and new recommendations on syphilis testing and partner services", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240090767" },
-  { "org": "WHO", "title": "Guidelines for the management of symptomatic sexually transmitted infections", "year": 2021, "url": "https://www.ncbi.nlm.nih.gov/books/NBK572659/" }
+  {
+   "org": "CDC",
+   "title": "Sexually Transmitted Infections Treatment Guidelines, 2021 (MMWR Recommendations and Reports)",
+   "year": 2021,
+   "url": "https://www.cdc.gov/mmwr/volumes/70/rr/rr7004a1.htm"
+  },
+  {
+   "org": "WHO",
+   "title": "Updated recommendations for the treatment of Neisseria gonorrhoeae, Chlamydia trachomatis and Treponema pallidum (syphilis) and new recommendations on syphilis testing and partner services",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240090767"
+  },
+  {
+   "org": "WHO",
+   "title": "Guidelines for the management of symptomatic sexually transmitted infections",
+   "year": 2021,
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK572659/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "sexually-transmitted-infections-pathway",
+   "title": "Sexually transmitted infections: treatment and partner management (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Urethral discharge or dysuria in men: treat for gonorrhoea and chlamydia at the first visit, testing by NAAT where available.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Vaginal discharge: usually bacterial vaginosis, candida or trichomonas; consider cervicitis (gonorrhoea, chlamydia) when risk factors or mucopurulent cervical discharge are present.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "NAAT for gonorrhoea and chlamydia: first-void urine (men), vaginal swab (women), plus rectal and pharyngeal swabs by exposure. Gonococcal culture with susceptibility if treatment fails."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Trichomonas: women metronidazole 500 mg orally twice daily for 7 days; men metronidazole 2 g orally single dose. Alternative: tinidazole 2 g single dose (avoid in pregnancy). Treat all current partners."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Treating gonorrhoea with azithromycin alone or with ciprofloxacin: resistance is widespread."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for sexually transmitted infections: treatment and partner management (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sexually-transmitted-infections-summary-matrix",
+   "title": "Sexually transmitted infections: treatment and partner management (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Urethral discharge or dysuria in men: treat for gonorrhoea and chlamydia at the first visit, testing by NAAT where available.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Trichomonas: women metronidazole 500 mg orally twice daily for 7 days; men metronidazole 2 g orally single dose. Alternative: tinidazole 2",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "NAAT for gonorrhoea and chlamydia: first-void urine (men), vaginal swab (women), plus rectal and pharyngeal swabs by exposure. Gonococcal",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ceftriaxone: Gonorrhoea 500 mg IM single dose (1 g if 150 kg or more); PID inpatient 1 g IV every 24 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating gonorrhoea with azithromycin alone or with ciprofloxacin: resistance is widespread.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for sexually transmitted infections: treatment and partner management (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sexually-transmitted-infections-diagram",
+   "title": "Sexually transmitted infections: treatment and partner management (adult): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

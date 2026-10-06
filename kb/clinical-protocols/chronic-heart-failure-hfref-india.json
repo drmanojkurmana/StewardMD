@@ -6,7 +6,27 @@
  "basis": "india",
  "counterpart": "chronic-heart-failure-hfref",
  "setting": "Outpatient clinic, cardiology, ward before discharge",
- "aliases": ["HFrEF", "heart failure", "CHF", "LV dysfunction", "four pillars", "GDMT", "ARNI", "sacubitril valsartan", "SGLT2 inhibitor heart failure", "dapagliflozin", "empagliflozin", "MRA", "spironolactone", "beta-blocker heart failure", "vericiguat", "ivabradine", "ferric carboxymaltose", "HFAI 2025", "NT-proBNP"],
+ "aliases": [
+  "HFrEF",
+  "heart failure",
+  "CHF",
+  "LV dysfunction",
+  "four pillars",
+  "GDMT",
+  "ARNI",
+  "sacubitril valsartan",
+  "SGLT2 inhibitor heart failure",
+  "dapagliflozin",
+  "empagliflozin",
+  "MRA",
+  "spironolactone",
+  "beta-blocker heart failure",
+  "vericiguat",
+  "ivabradine",
+  "ferric carboxymaltose",
+  "HFAI 2025",
+  "NT-proBNP"
+ ],
  "summary": "HFrEF is LVEF 40% or below. Start all four pillars (ARNI or ACEI/ARB, beta-blocker, MRA, SGLT2 inhibitor) at low dose as early as possible, preferably before discharge, and titrate to target or maximum tolerated doses within 4 to 6 weeks, using loop diuretics only for congestion.",
  "sections": [
   {
@@ -110,19 +130,162 @@
   }
  ],
  "drugs": [
-  { "name": "Bisoprolol", "dose": "Start 1.25 mg once daily; target 10 mg once daily", "notes": "Start when euvolaemic; titrate every 2 weeks." },
-  { "name": "Carvedilol", "dose": "Start 3.125 mg twice daily; target 25 mg twice daily", "notes": "Start when euvolaemic; titrate every 2 weeks." },
-  { "name": "Metoprolol succinate (CR/XL)", "dose": "Start 12.5 to 25 mg once daily; target 200 mg once daily", "notes": "Preferred beta-blocker in pregnancy." },
-  { "name": "Spironolactone", "dose": "25 mg once daily", "notes": "Stop if potassium above 5.5 mEq/L." },
-  { "name": "Eplerenone", "dose": "Start 25 mg once daily; target 50 mg once daily", "notes": "Check potassium and creatinine at each titration." },
-  { "name": "Dapagliflozin or empagliflozin", "dose": "10 mg orally once daily (start and target)", "notes": "Avoid if eGFR below 20; withhold peri-operatively." },
-  { "name": "Enalapril", "dose": "Start 2.5 mg twice daily; target 10 mg twice daily", "notes": "If ARNI unavailable or unaffordable." },
-  { "name": "Ramipril", "dose": "Start 1.25 mg once daily; target 10 mg once daily", "notes": "Alternative to ARNI; check creatinine and potassium." },
-  { "name": "Vericiguat", "dose": "2.5 mg once daily, then 5 mg, then 10 mg once daily at about 2-week steps", "notes": "Worsening HF with EF below 45%. Not with PDE5 inhibitors." },
-  { "name": "Ferric carboxymaltose", "dose": "500 to 1000 mg IV in 50 mL saline over 10 to 15 minutes", "notes": "Iron deficiency; reassess at 2 to 3 months." }
+  {
+   "name": "Bisoprolol",
+   "dose": "Start 1.25 mg once daily; target 10 mg once daily",
+   "notes": "Start when euvolaemic; titrate every 2 weeks."
+  },
+  {
+   "name": "Carvedilol",
+   "dose": "Start 3.125 mg twice daily; target 25 mg twice daily",
+   "notes": "Start when euvolaemic; titrate every 2 weeks."
+  },
+  {
+   "name": "Metoprolol succinate (CR/XL)",
+   "dose": "Start 12.5 to 25 mg once daily; target 200 mg once daily",
+   "notes": "Preferred beta-blocker in pregnancy."
+  },
+  {
+   "name": "Spironolactone",
+   "dose": "25 mg once daily",
+   "notes": "Stop if potassium above 5.5 mEq/L."
+  },
+  {
+   "name": "Eplerenone",
+   "dose": "Start 25 mg once daily; target 50 mg once daily",
+   "notes": "Check potassium and creatinine at each titration."
+  },
+  {
+   "name": "Dapagliflozin or empagliflozin",
+   "dose": "10 mg orally once daily (start and target)",
+   "notes": "Avoid if eGFR below 20; withhold peri-operatively."
+  },
+  {
+   "name": "Enalapril",
+   "dose": "Start 2.5 mg twice daily; target 10 mg twice daily",
+   "notes": "If ARNI unavailable or unaffordable."
+  },
+  {
+   "name": "Ramipril",
+   "dose": "Start 1.25 mg once daily; target 10 mg once daily",
+   "notes": "Alternative to ARNI; check creatinine and potassium."
+  },
+  {
+   "name": "Vericiguat",
+   "dose": "2.5 mg once daily, then 5 mg, then 10 mg once daily at about 2-week steps",
+   "notes": "Worsening HF with EF below 45%. Not with PDE5 inhibitors."
+  },
+  {
+   "name": "Ferric carboxymaltose",
+   "dose": "500 to 1000 mg IV in 50 mL saline over 10 to 15 minutes",
+   "notes": "Iron deficiency; reassess at 2 to 3 months."
+  }
  ],
  "sources": [
-  { "org": "Heart Failure Association of India (HFAI)", "title": "2025 HFAI guidelines for diagnosis and management of heart failure (Heart Fail J India 2025;3 Suppl 1:S1-48)", "year": 2025, "url": "https://hfai.co.in/wp-content/uploads/2025/07/HFAI-Guidelines.pdf" }
+  {
+   "org": "Heart Failure Association of India (HFAI)",
+   "title": "2025 HFAI guidelines for diagnosis and management of heart failure (Heart Fail J India 2025;3 Suppl 1:S1-48)",
+   "year": 2025,
+   "url": "https://hfai.co.in/wp-content/uploads/2025/07/HFAI-Guidelines.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chronic-heart-failure-hfref-india-pathway",
+   "title": "Chronic heart failure with reduced ejection fraction (India, HFAI) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Classify by LVEF on echo: HFrEF 40% or below; HFmrEF 41 to 49% (treated largely like HFrEF); HFpEF 50% or above; HF with improved EF: baseline 40% or below, a rise of 10 points or more and a second LVEF above 40%.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Specific signs: raised JVP, hepatojugular reflux, third heart sound, displaced apex. Look for congestion (orthopnoea, bendopnoea, oedema) and low output (cold peripheries).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Outpatients with breathlessness: BNP below 35 pg/mL or NT-proBNP below 125 pg/mL makes HF unlikely."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Iron deficiency (ferritin below 100 microgram/L, or 100 to 300 with transferrin saturation below 20%): IV ferric carboxymaltose 500 to 1000 mg in 50 mL saline over 10 to 15 minutes; recheck iron after 2 to 3 months and repeat if still low."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "A creatinine rise of up to 20% from baseline is not a reason to stop ACEI, ARB or ARNI. Be cautious as creatinine approaches 2 to 2.5 mg/dL; above 2.5 mg/dL, reduce or temporarily stop."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chronic heart failure with reduced ejection fraction (india, hfai)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic-heart-failure-hfref-india-summary-matrix",
+   "title": "Chronic heart failure with reduced ejection fraction (India, HFAI) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classify by LVEF on echo: HFrEF 40% or below; HFmrEF 41 to 49% (treated largely like HFrEF); HFpEF 50% or above; HF with improved EF:",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Iron deficiency (ferritin below 100 microgram/L, or 100 to 300 with transferrin saturation below 20%): IV ferric carboxymaltose 500 to 1000",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Bisoprolol: Start 1.25 mg once daily; target 10 mg once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting to reach target doses of one drug before starting the next class.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chronic heart failure with reduced ejection fraction (india, hfai)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-heart-failure-hfref-india-diagram",
+   "title": "Chronic heart failure with reduced ejection fraction (India, HFAI): Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

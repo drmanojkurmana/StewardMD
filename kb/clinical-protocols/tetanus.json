@@ -5,7 +5,19 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["tetanus prophylaxis", "Td", "TT", "tetanus toxoid", "TIG", "HTIG", "tetanus immunoglobulin", "lockjaw", "trismus", "neonatal tetanus", "wound management tetanus"],
+ "aliases": [
+  "tetanus prophylaxis",
+  "Td",
+  "TT",
+  "tetanus toxoid",
+  "TIG",
+  "HTIG",
+  "tetanus immunoglobulin",
+  "lockjaw",
+  "trismus",
+  "neonatal tetanus",
+  "wound management tetanus"
+ ],
  "summary": "Wounds: give Td if fewer than 3 prior doses, unknown history, or last dose 10 years ago (5 years for dirty wounds); add TIG 250 IU (500 IU if delayed or heavily contaminated) for dirty wounds in the incompletely vaccinated or immunodeficient. Established tetanus: human TIG, wound debridement, metronidazole, benzodiazepines and magnesium for spasms, early airway control, then complete vaccination.",
  "sections": [
   {
@@ -94,20 +106,170 @@
   }
  ],
  "drugs": [
-  { "name": "Td vaccine (tetanus and diphtheria toxoid)", "dose": "0.5 mL IM", "notes": "Age 7 years and over; DPT or DTaP under 7 years. Separate site from TIG." },
-  { "name": "Human tetanus immunoglobulin (prophylaxis)", "dose": "250 IU IM, single dose; 500 IU if more than 24 hours since injury, heavy contamination or burns", "notes": "Dirty or major wounds with unknown or fewer than 3 prior doses, HIV or severe immunodeficiency. Separate syringe and site from the vaccine." },
-  { "name": "Human tetanus immunoglobulin (treatment)", "dose": "500 IU IM or IV (per preparation), single dose, as early as possible", "notes": "WHO dose; 3000 to 6000 IU IM is also used. Give before wound debridement." },
-  { "name": "Metronidazole", "dose": "500 mg IV or orally 6-hourly for 7 to 10 days; children 7.5 mg/kg 6-hourly (maximum 500 mg per dose)", "notes": "Preferred antibiotic." },
-  { "name": "Benzylpenicillin (penicillin G)", "dose": "100,000 to 200,000 IU/kg/day IV in 2 to 4 divided doses", "notes": "Alternative to metronidazole." },
-  { "name": "Diazepam", "dose": "Adults 5 mg IV increments titrated to effect; children 0.1 to 0.2 mg/kg every 2 to 6 hours", "notes": "Up to 600 mg/day may be needed; ensure airway and ventilation." },
-  { "name": "Lorazepam", "dose": "Adults 2 mg IV increments titrated to spasm control", "notes": "Alternative benzodiazepine." },
-  { "name": "Magnesium sulphate", "dose": "5 g (or 75 mg/kg) IV loading dose, then 2 to 3 g per hour", "notes": "Monitor patellar reflex; reduce if areflexic (about 4 mmol/L). Watch respiration." }
+  {
+   "name": "Td vaccine (tetanus and diphtheria toxoid)",
+   "dose": "0.5 mL IM",
+   "notes": "Age 7 years and over; DPT or DTaP under 7 years. Separate site from TIG."
+  },
+  {
+   "name": "Human tetanus immunoglobulin (prophylaxis)",
+   "dose": "250 IU IM, single dose; 500 IU if more than 24 hours since injury, heavy contamination or burns",
+   "notes": "Dirty or major wounds with unknown or fewer than 3 prior doses, HIV or severe immunodeficiency. Separate syringe and site from the vaccine."
+  },
+  {
+   "name": "Human tetanus immunoglobulin (treatment)",
+   "dose": "500 IU IM or IV (per preparation), single dose, as early as possible",
+   "notes": "WHO dose; 3000 to 6000 IU IM is also used. Give before wound debridement."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg IV or orally 6-hourly for 7 to 10 days; children 7.5 mg/kg 6-hourly (maximum 500 mg per dose)",
+   "notes": "Preferred antibiotic."
+  },
+  {
+   "name": "Benzylpenicillin (penicillin G)",
+   "dose": "100,000 to 200,000 IU/kg/day IV in 2 to 4 divided doses",
+   "notes": "Alternative to metronidazole."
+  },
+  {
+   "name": "Diazepam",
+   "dose": "Adults 5 mg IV increments titrated to effect; children 0.1 to 0.2 mg/kg every 2 to 6 hours",
+   "notes": "Up to 600 mg/day may be needed; ensure airway and ventilation."
+  },
+  {
+   "name": "Lorazepam",
+   "dose": "Adults 2 mg IV increments titrated to spasm control",
+   "notes": "Alternative benzodiazepine."
+  },
+  {
+   "name": "Magnesium sulphate",
+   "dose": "5 g (or 75 mg/kg) IV loading dose, then 2 to 3 g per hour",
+   "notes": "Monitor patellar reflex; reduce if areflexic (about 4 mmol/L). Watch respiration."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Current recommendations for treatment of tetanus during humanitarian emergencies (WHO technical note)", "year": 2010, "url": "https://iris.who.int/server/api/core/bitstreams/f9f77952-80b0-4a25-92d7-edce3241af13/content" },
-  { "org": "CDC", "title": "Clinical Guidance for Wound Management to Prevent Tetanus", "year": 2026, "url": "https://www.cdc.gov/tetanus/hcp/clinical-guidance/index.html" },
-  { "org": "UKHSA", "title": "Guidance on the management of suspected tetanus cases and the assessment and management of tetanus-prone wounds", "year": 2026, "url": "https://www.gov.uk/government/publications/tetanus-advice-for-health-professionals/guidance-on-the-management-of-suspected-tetanus-cases-and-the-assessment-and-management-of-tetanus-prone-wounds" },
-  { "org": "WHO", "title": "Tetanus fact sheet", "year": 2026, "url": "https://www.who.int/news-room/fact-sheets/detail/tetanus" }
+  {
+   "org": "WHO",
+   "title": "Current recommendations for treatment of tetanus during humanitarian emergencies (WHO technical note)",
+   "year": 2010,
+   "url": "https://iris.who.int/server/api/core/bitstreams/f9f77952-80b0-4a25-92d7-edce3241af13/content"
+  },
+  {
+   "org": "CDC",
+   "title": "Clinical Guidance for Wound Management to Prevent Tetanus",
+   "year": 2026,
+   "url": "https://www.cdc.gov/tetanus/hcp/clinical-guidance/index.html"
+  },
+  {
+   "org": "UKHSA",
+   "title": "Guidance on the management of suspected tetanus cases and the assessment and management of tetanus-prone wounds",
+   "year": 2026,
+   "url": "https://www.gov.uk/government/publications/tetanus-advice-for-health-professionals/guidance-on-the-management-of-suspected-tetanus-cases-and-the-assessment-and-management-of-tetanus-prone-wounds"
+  },
+  {
+   "org": "WHO",
+   "title": "Tetanus fact sheet",
+   "year": 2026,
+   "url": "https://www.who.int/news-room/fact-sheets/detail/tetanus"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "tetanus-pathway",
+   "title": "Tetanus: wound prophylaxis and established disease Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Clinical diagnosis; there is no confirmatory test. Trismus (lockjaw) or risus sardonicus, or painful muscle spasms, usually with a history of a wound, which may have been trivial or forgotten.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Assess the airway immediately; laryngeal spasm and aspiration are the early killers. Admit to ICU or HDU; if spasms threaten ventilation, intubate and ventilate. Early tracheostomy is preferred for prolonged ventilation because the",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Generalised spasms and opisthotonus are triggered by touch, noise and light; consciousness is preserved. Laryngeal spasm can cause sudden airway obstruction."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Benzodiazepines first line: adults diazepam 5 mg IV or lorazepam 2 mg IV increments, titrated to spasm control without excessive sedation; children 0.1 to 0.2 mg/kg every 2 to 6 hours, titrated upward. Very large doses (up to 600 mg/day of"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Continuous ECG, BP (arterial line if autonomic storm), SpO2 and respiratory rate; spasm frequency and sedation score."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for tetanus: wound prophylaxis and established disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tetanus-summary-matrix",
+   "title": "Tetanus: wound prophylaxis and established disease Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Clinical diagnosis; there is no confirmatory test. Trismus (lockjaw) or risus sardonicus, or painful muscle spasms, usually with a history",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Assess the airway immediately; laryngeal spasm and aspiration are the early killers. Admit to ICU or HDU; if spasms threaten ventilation,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Td vaccine (tetanus and diphtheria toxoid): 0.5 mL IM",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving TIG for clean minor wounds, or omitting it for dirty wounds in the unvaccinated.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for tetanus: wound prophylaxis and established disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tetanus-diagram",
+   "title": "Tetanus: wound prophylaxis and established disease: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

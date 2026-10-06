@@ -125,5 +125,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "bronchiolitis-pathway",
+   "title": "Bronchiolitis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Child under 2 years (most in the first year, peak 3 to 6 months) with coryza for 1 to 3 days followed by persistent cough, tachypnoea or chest recession, and wheeze or crackles.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Emergency referral: apnoea, child looks seriously unwell, severe distress (grunting, marked recession or respiratory rate over 70/min) or central cyanosis.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Measure SpO2 in every child with suspected bronchiolitis using a correctly placed paediatric probe; oximeters can overestimate saturation in darker skin."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Oxygen only if SpO2 is persistently below 90% (6 weeks or older) or below 92% (under 6 weeks or comorbidity). AAP 2014 likewise allows no oxygen at 90% or above. Brief dips are not a reason to start oxygen."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Observe respiratory rate, work of breathing, SpO2, apnoea, feeding and hydration; expect the worst around day 3 to 5 of illness."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for bronchiolitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bronchiolitis-summary-matrix",
+   "title": "Bronchiolitis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Child under 2 years (most in the first year, peak 3 to 6 months) with coryza for 1 to 3 days followed by persistent cough, tachypnoea or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Emergency referral: apnoea, child looks seriously unwell, severe distress (grunting, marked recession or respiratory rate over 70/min) or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Measure SpO2 in every child with suspected bronchiolitis using a correctly placed paediatric probe; oximeters can overestimate saturation",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oxygen (nasal prongs or high-flow nasal cannula): Start only if SpO2 persistently below 90% (below 92% under 6 weeks or with comorbidity);",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating with bronchodilators, steroids or antibiotics because of wheeze or fever.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for bronchiolitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bronchiolitis-diagram",
+   "title": "Bronchiolitis: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

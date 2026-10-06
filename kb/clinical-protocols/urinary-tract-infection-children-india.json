@@ -6,7 +6,23 @@
  "basis": "india",
  "counterpart": "urinary-tract-infection-children",
  "setting": "Primary care, paediatric outpatients, emergency department, ward",
- "aliases": ["UTI child", "paediatric UTI", "pediatric UTI", "febrile UTI", "acute pyelonephritis child", "cystitis child", "VUR", "vesicoureteric reflux", "MCU", "MCUG", "DMSA scan", "bladder bowel dysfunction", "BBD", "ISPN 2023", "antibiotic prophylaxis UTI"],
+ "aliases": [
+  "UTI child",
+  "paediatric UTI",
+  "pediatric UTI",
+  "febrile UTI",
+  "acute pyelonephritis child",
+  "cystitis child",
+  "VUR",
+  "vesicoureteric reflux",
+  "MCU",
+  "MCUG",
+  "DMSA scan",
+  "bladder bowel dysfunction",
+  "BBD",
+  "ISPN 2023",
+  "antibiotic prophylaxis UTI"
+ ],
  "summary": "Screen with dipstick and confirm by culture of a properly collected sample. Treat febrile UTI promptly with an oral third-generation cephalosporin or co-amoxiclav for 7 to 10 days, do an ultrasound for all, reserve MCU for selected children, and limit prophylaxis to high-grade VUR or recurrent UTI with bladder-bowel dysfunction.",
  "sections": [
   {
@@ -87,17 +103,153 @@
   }
  ],
  "drugs": [
-  { "name": "Cefixime", "dose": "10 mg/kg/day orally in 2 divided doses for 7 to 10 days", "notes": "Good empirical oral choice for febrile UTI." },
-  { "name": "Co-amoxiclav (amoxicillin-clavulanate)", "dose": "30 to 50 mg/kg/day (amoxicillin) orally in 2 divided doses", "notes": "Febrile UTI or adolescent cystitis." },
-  { "name": "Cephalexin", "dose": "Treatment 30 to 50 mg/kg/day in 3 divided doses; prophylaxis 10 mg/kg once daily", "notes": "Cystitis in adolescents; prophylaxis in young infants." },
-  { "name": "Ceftriaxone", "dose": "75 to 100 mg/kg/day IV in 1 to 2 doses", "notes": "Infants under 2 months, sick or vomiting children." },
-  { "name": "Amikacin", "dose": "10 to 15 mg/kg/day IV once daily", "notes": "Alternative parenteral agent; monitor renal function." },
-  { "name": "Cotrimoxazole (prophylaxis)", "dose": "1 to 2 mg/kg of trimethoprim once daily", "notes": "Over 3 months; avoid in G6PD deficiency." },
-  { "name": "Nitrofurantoin (prophylaxis)", "dose": "1 to 2 mg/kg once daily", "notes": "First-line prophylaxis over 3 months." }
+  {
+   "name": "Cefixime",
+   "dose": "10 mg/kg/day orally in 2 divided doses for 7 to 10 days",
+   "notes": "Good empirical oral choice for febrile UTI."
+  },
+  {
+   "name": "Co-amoxiclav (amoxicillin-clavulanate)",
+   "dose": "30 to 50 mg/kg/day (amoxicillin) orally in 2 divided doses",
+   "notes": "Febrile UTI or adolescent cystitis."
+  },
+  {
+   "name": "Cephalexin",
+   "dose": "Treatment 30 to 50 mg/kg/day in 3 divided doses; prophylaxis 10 mg/kg once daily",
+   "notes": "Cystitis in adolescents; prophylaxis in young infants."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "75 to 100 mg/kg/day IV in 1 to 2 doses",
+   "notes": "Infants under 2 months, sick or vomiting children."
+  },
+  {
+   "name": "Amikacin",
+   "dose": "10 to 15 mg/kg/day IV once daily",
+   "notes": "Alternative parenteral agent; monitor renal function."
+  },
+  {
+   "name": "Cotrimoxazole (prophylaxis)",
+   "dose": "1 to 2 mg/kg of trimethoprim once daily",
+   "notes": "Over 3 months; avoid in G6PD deficiency."
+  },
+  {
+   "name": "Nitrofurantoin (prophylaxis)",
+   "dose": "1 to 2 mg/kg once daily",
+   "notes": "First-line prophylaxis over 3 months."
+  }
  ],
  "sources": [
-  { "org": "Indian Society of Pediatric Nephrology (ISPN)", "title": "Management of urinary tract infections and vesicoureteric reflux: key updates from revised ISPN guidelines 2023. Indian J Nephrol 2024;34:442-7", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11450833/" },
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Urinary tract infection in children", "year": 2022, "url": "https://iapindia.org/pdf/STG-06-Urinary-Tract-Infection-in-Children.pdf" }
+  {
+   "org": "Indian Society of Pediatric Nephrology (ISPN)",
+   "title": "Management of urinary tract infections and vesicoureteric reflux: key updates from revised ISPN guidelines 2023. Indian J Nephrol 2024;34:442-7",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11450833/"
+  },
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Urinary tract infection in children",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/STG-06-Urinary-Tract-Infection-in-Children.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "urinary-tract-infection-children-india-pathway",
+   "title": "Urinary tract infection in children (India, ISPN) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Fever for more than 48 hours without a focus in children under 24 months, or dysuria, frequency, urgency, abdominal or flank pain in older children. Infants may have only fever, vomiting, diarrhoea or poor weight gain.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Febrile UTI: temperature 38°C or more with a significant growth of a single uropathogen. Cystitis: dysuria, frequency, urgency and suprapubic tenderness without fever. Recurrent UTI: 2 episodes at any time in childhood.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Kidney, ureter and bladder ultrasound after an episode of UTI in all children."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start as soon as possible, preferably within 48 to 72 hours of fever onset, to limit kidney scarring."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Aim for sustained resolution of fever and symptoms; check urinalysis during later febrile illnesses in children with risk factors."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for urinary tract infection in children (india, ispn)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urinary-tract-infection-children-india-summary-matrix",
+   "title": "Urinary tract infection in children (India, ISPN) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fever for more than 48 hours without a focus in children under 24 months, or dysuria, frequency, urgency, abdominal or flank pain in older",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start as soon as possible, preferably within 48 to 72 hours of fever onset, to limit kidney scarring.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Kidney, ureter and bladder ultrasound after an episode of UTI in all children.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Cefixime: 10 mg/kg/day orally in 2 divided doses for 7 to 10 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Culturing bag or urobag samples, or delaying transport to the laboratory.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for urinary tract infection in children (india, ispn)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "urinary-tract-infection-children-india-diagram",
+   "title": "Urinary tract infection in children (India, ISPN): Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "craniosynostosis",
-  "name": "Craniosynostosis",
-  "aliases": [
-    "premature suture fusion",
-    "scaphocephaly",
-    "plagiocephaly (synostotic)",
-    "syndromic craniosynostosis"
+ "id": "craniosynostosis",
+ "name": "Craniosynostosis",
+ "aliases": [
+  "premature suture fusion",
+  "scaphocephaly",
+  "plagiocephaly (synostotic)",
+  "syndromic craniosynostosis"
+ ],
+ "class": "non_infective",
+ "system": "Neurosurgery / Neurology",
+ "specialty": "Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Craniosynostosis is premature fusion of one or more cranial sutures, restricting skull growth perpendicular to the fused suture and producing a characteristic head shape",
+   "Sagittal suture fusion gives a long, narrow head (scaphocephaly) and is the most common single-suture form",
+   "The head-shape abnormality is typically present at or soon after birth and progresses, unlike positional plagiocephaly which usually improves with repositioning",
+   "A palpable ridge along the affected suture and an abnormal skull contour are important clinical clues",
+   "Most single-suture cases are non-syndromic and isolated, but multi-suture or syndromic forms (such as Apert, Crouzon, or Pfeiffer) carry higher risks and associated anomalies",
+   "Multi-suture involvement can raise intracranial pressure and threaten vision and neurodevelopment, so fundoscopy and developmental monitoring are important",
+   "Cranial CT with three-dimensional reconstruction confirms the diagnosis and defines the sutures involved when clinical assessment is uncertain",
+   "Treatment is usually surgical remodelling to correct the deformity and allow normal brain growth, with timing and approach tailored to the sutures affected and the child's age"
   ],
-  "class": "non_infective",
-  "system": "Neurosurgery / Neurology",
-  "specialty": "Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Craniosynostosis is premature fusion of one or more cranial sutures, restricting skull growth perpendicular to the fused suture and producing a characteristic head shape",
-      "Sagittal suture fusion gives a long, narrow head (scaphocephaly) and is the most common single-suture form",
-      "The head-shape abnormality is typically present at or soon after birth and progresses, unlike positional plagiocephaly which usually improves with repositioning",
-      "A palpable ridge along the affected suture and an abnormal skull contour are important clinical clues",
-      "Most single-suture cases are non-syndromic and isolated, but multi-suture or syndromic forms (such as Apert, Crouzon, or Pfeiffer) carry higher risks and associated anomalies",
-      "Multi-suture involvement can raise intracranial pressure and threaten vision and neurodevelopment, so fundoscopy and developmental monitoring are important",
-      "Cranial CT with three-dimensional reconstruction confirms the diagnosis and defines the sutures involved when clinical assessment is uncertain",
-      "Treatment is usually surgical remodelling to correct the deformity and allow normal brain growth, with timing and approach tailored to the sutures affected and the child's age"
+  "pathophysiology": "Craniosynostosis arises when one or more cranial sutures fuse prematurely, before the underlying brain has finished its rapid early growth. Because bone cannot expand across the fused suture, compensatory growth occurs at the remaining open sutures, distorting the skull into a predictable shape determined by which suture is involved. When several sutures fuse, the overall cranial volume may become inadequate for the growing brain, leading to raised intracranial pressure. Syndromic forms are often driven by identifiable genetic mutations affecting fibroblast growth factor signalling and are associated with midface and limb anomalies.",
+  "additionalDifferentials": [
+   "Positional (deformational) plagiocephaly",
+   "Microcephaly with a small but normally shaped skull",
+   "Normal cranial shape variants",
+   "Metabolic bone disease affecting the skull",
+   "Syndromic craniofacial disorders"
+  ],
+  "additionalInvestigations": [
+   "Clinical examination of head shape, suture ridging, and head circumference trend",
+   "Cranial CT with 3D reconstruction to confirm fused sutures and plan surgery",
+   "Fundoscopy to detect papilloedema suggesting raised intracranial pressure",
+   "Genetic assessment when a syndromic form or multiple sutures are involved",
+   "Developmental and ophthalmological surveillance"
+  ],
+  "redFlags": [
+   "Multi-suture fusion with signs of raised intracranial pressure such as papilloedema",
+   "Progressive skull deformity with developmental delay or visual compromise",
+   "Features of a craniofacial syndrome with airway or midface concerns",
+   "Rapidly abnormal head growth or a bulging appearance suggesting elevated pressure"
+  ],
+  "prognosis": "Isolated single-suture craniosynostosis generally has an excellent outcome after timely surgical correction; multi-suture and syndromic forms are more complex, carry a greater risk of raised intracranial pressure and neurodevelopmental problems, and often require staged, multidisciplinary management.",
+  "pitfalls": [
+   "Confusing positional plagiocephaly, which improves with repositioning, with true synostosis",
+   "Missing raised intracranial pressure in multi-suture disease by omitting fundoscopy",
+   "Underestimating associated anomalies and genetic implications in syndromic cases",
+   "Delaying referral so that the optimal surgical window is missed"
+  ],
+  "references": [
+   "Youmans & Winn Neurological Surgery",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical correction by cranial vault remodelling, or minimally invasive strip craniectomy with post-operative helmet moulding, to relieve constraint and correct skull shape",
+   "Tailor the timing and technique to the suture involved, the child's age and the presence of raised intracranial pressure",
+   "Monitor for and treat raised intracranial pressure, using staged surgery in multi-suture and syndromic forms",
+   "Fundoscopy and ophthalmological surveillance for papilloedema and visual compromise",
+   "Developmental surveillance with early intervention for neurodevelopmental delay",
+   "Genetic assessment and counselling for syndromic and multi-suture forms such as fibroblast growth factor receptor-related Apert, Crouzon and Pfeiffer syndromes",
+   "Multidisciplinary craniofacial team management including airway and midface assessment in syndromic cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "craniosynostosis-pathway",
+   "title": "Craniosynostosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Craniosynostosis is premature fusion of one or more cranial sutures, restricting skull growth perpendicular to the fused suture and producing a characteristic head shape",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Multi-suture fusion with signs of raised intracranial pressure such as papilloedema",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical examination of head shape, suture ridging, and head circumference trend, Cranial CT with 3D reconstruction to confirm fused sutures and plan surgery, Fundoscopy to detect papilloedema suggesting raised"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical correction by cranial vault remodelling, or minimally invasive strip craniectomy with post-operative helmet moulding, to relieve constraint and correct skull shape"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing positional plagiocephaly, which improves with repositioning, with true synostosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of craniosynostosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "craniosynostosis-matrix",
+   "title": "Craniosynostosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Craniosynostosis is premature fusion of one or more cranial sutures, restricting skull growth perpendicular to the fused suture",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Craniosynostosis arises when one or more cranial sutures fuse prematurely, before the underlying brain has finished its rapid early growth. Because bone cannot expand across the fused suture, compensatory growth occurs at the remaining open sutures, distorting the skull into a predictable shape determined by which suture is involved. When several sutures fuse, the overall cranial volume may become inadequate for the growing brain, leading to raised intracranial pressure. Syndromic forms are often driven by identifiable genetic mutations affecting fibroblast growth factor signalling and are associated with midface and limb anomalies.",
-    "additionalDifferentials": [
-      "Positional (deformational) plagiocephaly",
-      "Microcephaly with a small but normally shaped skull",
-      "Normal cranial shape variants",
-      "Metabolic bone disease affecting the skull",
-      "Syndromic craniofacial disorders"
+    [
+     "Key Investigations",
+     "Clinical examination of head shape, suture ridging, and head circumference trend, Cranial CT with 3D reconstruction to confirm",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical examination of head shape, suture ridging, and head circumference trend",
-      "Cranial CT with 3D reconstruction to confirm fused sutures and plan surgery",
-      "Fundoscopy to detect papilloedema suggesting raised intracranial pressure",
-      "Genetic assessment when a syndromic form or multiple sutures are involved",
-      "Developmental and ophthalmological surveillance"
+    [
+     "Primary Differentials",
+     "Positional (deformational) plagiocephaly, Microcephaly with a small but normally shaped skull, Normal cranial shape variants",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Multi-suture fusion with signs of raised intracranial pressure such as papilloedema",
-      "Progressive skull deformity with developmental delay or visual compromise",
-      "Features of a craniofacial syndrome with airway or midface concerns",
-      "Rapidly abnormal head growth or a bulging appearance suggesting elevated pressure"
+    [
+     "Management Strategy",
+     "Surgical correction by cranial vault remodelling, or minimally invasive strip craniectomy with post-operative helmet moulding, to",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated single-suture craniosynostosis generally has an excellent outcome after timely surgical correction; multi-suture and syndromic forms are more complex, carry a greater risk of raised intracranial pressure and neurodevelopmental problems, and often require staged, multidisciplinary management.",
-    "pitfalls": [
-      "Confusing positional plagiocephaly, which improves with repositioning, with true synostosis",
-      "Missing raised intracranial pressure in multi-suture disease by omitting fundoscopy",
-      "Underestimating associated anomalies and genetic implications in syndromic cases",
-      "Delaying referral so that the optimal surgical window is missed"
-    ],
-    "references": [
-      "Youmans & Winn Neurological Surgery",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical correction by cranial vault remodelling, or minimally invasive strip craniectomy with post-operative helmet moulding, to relieve constraint and correct skull shape",
-      "Tailor the timing and technique to the suture involved, the child's age and the presence of raised intracranial pressure",
-      "Monitor for and treat raised intracranial pressure, using staged surgery in multi-suture and syndromic forms",
-      "Fundoscopy and ophthalmological surveillance for papilloedema and visual compromise",
-      "Developmental surveillance with early intervention for neurodevelopmental delay",
-      "Genetic assessment and counselling for syndromic and multi-suture forms such as fibroblast growth factor receptor-related Apert, Crouzon and Pfeiffer syndromes",
-      "Multidisciplinary craniofacial team management including airway and midface assessment in syndromic cases"
+    [
+     "Clinical Pitfall",
+     "Confusing positional plagiocephaly, which improves with repositioning, with true synostosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for craniosynostosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "craniosynostosis-diagram",
+   "title": "Craniosynostosis: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

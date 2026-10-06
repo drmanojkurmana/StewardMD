@@ -1,86 +1,181 @@
 {
-  "id": "amegakaryocytic_thrombocytopenia",
-  "name": "Congenital amegakaryocytic thrombocytopenia",
-  "aliases": [
-    "CAMT",
-    "MPL-related amegakaryocytic thrombocytopenia",
-    "MPL-related thrombocytopenia",
-    "amegakaryocytic thrombocytopenia",
-    "c-MPL deficiency",
-    "congenital amegakaryocytic thrombocytopenia"
+ "id": "amegakaryocytic_thrombocytopenia",
+ "name": "Congenital amegakaryocytic thrombocytopenia",
+ "aliases": [
+  "CAMT",
+  "MPL-related amegakaryocytic thrombocytopenia",
+  "MPL-related thrombocytopenia",
+  "amegakaryocytic thrombocytopenia",
+  "c-MPL deficiency",
+  "congenital amegakaryocytic thrombocytopenia"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Clinical genetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive inherited bone marrow failure syndrome caused by biallelic loss-of-function variants in MPL, the receptor for thrombopoietin, resulting in absent or markedly reduced megakaryocytes.",
+   "Presents in the neonatal period or early infancy with isolated severe thrombocytopenia and bleeding (petechiae, purpura, mucosal or intracranial haemorrhage) without the limb or radial anomalies seen in thrombocytopenia-absent-radius syndrome.",
+   "Unlike thrombocytopenia-absent-radius syndrome, the thumbs are present and there are no characteristic skeletal malformations, an important early distinguishing feature.",
+   "Bone marrow shows absent or greatly reduced megakaryocytes with initially preserved erythroid and myeloid lineages.",
+   "A defining natural-history feature is progression from isolated thrombocytopenia to trilineage bone marrow failure (aplastic anaemia) during childhood.",
+   "There is a recognised predisposition to clonal evolution, including myelodysplastic syndrome and acute leukaemia, warranting long-term haematological surveillance.",
+   "Allogeneic haematopoietic stem cell transplantation is the only curative therapy; thrombopoietin-receptor agonists are ineffective because the receptor itself is defective."
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Clinical genetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive inherited bone marrow failure syndrome caused by biallelic loss-of-function variants in MPL, the receptor for thrombopoietin, resulting in absent or markedly reduced megakaryocytes.",
-      "Presents in the neonatal period or early infancy with isolated severe thrombocytopenia and bleeding (petechiae, purpura, mucosal or intracranial haemorrhage) without the limb or radial anomalies seen in thrombocytopenia-absent-radius syndrome.",
-      "Unlike thrombocytopenia-absent-radius syndrome, the thumbs are present and there are no characteristic skeletal malformations, an important early distinguishing feature.",
-      "Bone marrow shows absent or greatly reduced megakaryocytes with initially preserved erythroid and myeloid lineages.",
-      "A defining natural-history feature is progression from isolated thrombocytopenia to trilineage bone marrow failure (aplastic anaemia) during childhood.",
-      "There is a recognised predisposition to clonal evolution, including myelodysplastic syndrome and acute leukaemia, warranting long-term haematological surveillance.",
-      "Allogeneic haematopoietic stem cell transplantation is the only curative therapy; thrombopoietin-receptor agonists are ineffective because the receptor itself is defective."
+  "pathophysiology": "Congenital amegakaryocytic thrombocytopenia is an inherited bone marrow failure syndrome caused by biallelic variants in MPL, which encodes the thrombopoietin receptor (c-MPL) expressed on megakaryocytes and haematopoietic stem cells. Thrombopoietin signalling through MPL is essential not only for megakaryocyte proliferation and platelet production but also for the maintenance and self-renewal of the haematopoietic stem cell pool. Complete loss-of-function variants abolish receptor signalling and produce severe, early, persistent thrombocytopenia with virtually absent megakaryocytes, whereas variants retaining partial signalling can give a somewhat milder, more transient early course. Because MPL signalling supports stem cells beyond the megakaryocyte lineage, the initially isolated thrombocytopenia characteristically evolves into progressive pancytopenia and generalised marrow aplasia, and the stressed, genomically vulnerable marrow carries an increased risk of clonal transformation to myelodysplasia and acute leukaemia.",
+  "additionalDifferentials": [
+   "Thrombocytopenia-absent-radius (TAR) syndrome",
+   "Neonatal alloimmune or autoimmune thrombocytopenia",
+   "Fanconi anaemia and other inherited bone marrow failure syndromes",
+   "Wiskott-Aldrich syndrome and other inherited thrombocytopenias",
+   "MYH9-related disorders and other congenital macrothrombocytopenias",
+   "Congenital infection with marrow suppression",
+   "Acquired aplastic anaemia"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and blood film confirming isolated thrombocytopenia with normal platelet morphology",
+   "Bone marrow aspirate and trephine showing absent/reduced megakaryocytes",
+   "Biallelic MPL molecular genetic testing",
+   "Serum thrombopoietin level (characteristically elevated)",
+   "Chromosome breakage testing to exclude Fanconi anaemia",
+   "Cytogenetics and marrow surveillance for clonal evolution/myelodysplasia",
+   "HLA typing of patient and potential related donors for transplantation"
+  ],
+  "redFlags": [
+   "Neonatal severe thrombocytopenia with mucosal or intracranial haemorrhage",
+   "Emerging anaemia or neutropenia signalling progression to marrow failure",
+   "Cytogenetic abnormality or dysplasia suggesting clonal evolution",
+   "Life-threatening bleeding at any site",
+   "Rising transfusion requirement or transfusion refractoriness"
+  ],
+  "prognosis": "Untreated, the disorder carries a poor prognosis owing to bleeding, progression to aplastic anaemia and risk of leukaemic transformation. Allogeneic haematopoietic stem cell transplantation, particularly when performed early from a well-matched donor, can be curative and offers the best long-term outcome.",
+  "pitfalls": [
+   "Assuming thrombopoietin-receptor agonists will help; they are ineffective because the receptor is defective",
+   "Confusing the condition with thrombocytopenia-absent-radius syndrome despite the presence of normal thumbs and radii",
+   "Regarding it as isolated thrombocytopenia and failing to anticipate and monitor for trilineage marrow failure",
+   "Missing the leukaemic predisposition by omitting long-term cytogenetic surveillance",
+   "Overlooking Fanconi anaemia without chromosome breakage testing in a child with marrow failure"
+  ],
+  "references": [
+   "Standard textbook of paediatric haematology",
+   "Clinical genetics reference texts on inherited bone marrow failure syndromes",
+   "Consensus guidelines on inherited thrombocytopenias"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer allogeneic haematopoietic stem cell transplantation, ideally early from a well-matched donor, as the only curative treatment",
+   "Control bleeding with platelet transfusions using irradiated leucodepleted products, transfusing judiciously to limit alloimmunisation before transplant",
+   "Consider a thrombopoietin-receptor agonist such as eltrombopag as a temporising measure to raise the platelet count",
+   "Use antifibrinolytic therapy such as tranexamic acid for mucosal bleeding alongside general bleeding-precaution advice",
+   "Undertake regular marrow surveillance with cytogenetics for progression to aplastic anaemia and clonal evolution to myelodysplasia or leukaemia",
+   "Exclude Fanconi anaemia with chromosome breakage testing before transplant planning",
+   "Provide genetic counselling and family testing given autosomal recessive MPL inheritance, including donor screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "amegakaryocytic_thrombocytopenia-pathway",
+   "title": "Congenital amegakaryocytic thrombocytopenia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive inherited bone marrow failure syndrome caused by biallelic loss-of-function variants in MPL, the receptor for thrombopoietin, resulting in absent or markedly reduced megakaryocytes.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal severe thrombocytopenia with mucosal or intracranial haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and blood film confirming isolated thrombocytopenia with normal platelet morphology, Bone marrow aspirate and trephine showing absent/reduced megakaryocytes, Biallelic MPL molecular genetic testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer allogeneic haematopoietic stem cell transplantation, ideally early from a well-matched donor, as the only curative treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming thrombopoietin-receptor agonists will help; they are ineffective because the receptor is defective"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital amegakaryocytic thrombocytopenia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "amegakaryocytic_thrombocytopenia-matrix",
+   "title": "Congenital amegakaryocytic thrombocytopenia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive inherited bone marrow failure syndrome caused by biallelic loss-of-function variants in MPL, the receptor for",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Congenital amegakaryocytic thrombocytopenia is an inherited bone marrow failure syndrome caused by biallelic variants in MPL, which encodes the thrombopoietin receptor (c-MPL) expressed on megakaryocytes and haematopoietic stem cells. Thrombopoietin signalling through MPL is essential not only for megakaryocyte proliferation and platelet production but also for the maintenance and self-renewal of the haematopoietic stem cell pool. Complete loss-of-function variants abolish receptor signalling and produce severe, early, persistent thrombocytopenia with virtually absent megakaryocytes, whereas variants retaining partial signalling can give a somewhat milder, more transient early course. Because MPL signalling supports stem cells beyond the megakaryocyte lineage, the initially isolated thrombocytopenia characteristically evolves into progressive pancytopenia and generalised marrow aplasia, and the stressed, genomically vulnerable marrow carries an increased risk of clonal transformation to myelodysplasia and acute leukaemia.",
-    "additionalDifferentials": [
-      "Thrombocytopenia-absent-radius (TAR) syndrome",
-      "Neonatal alloimmune or autoimmune thrombocytopenia",
-      "Fanconi anaemia and other inherited bone marrow failure syndromes",
-      "Wiskott-Aldrich syndrome and other inherited thrombocytopenias",
-      "MYH9-related disorders and other congenital macrothrombocytopenias",
-      "Congenital infection with marrow suppression",
-      "Acquired aplastic anaemia"
+    [
+     "Key Investigations",
+     "Full blood count and blood film confirming isolated thrombocytopenia with normal platelet morphology, Bone marrow aspirate and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and blood film confirming isolated thrombocytopenia with normal platelet morphology",
-      "Bone marrow aspirate and trephine showing absent/reduced megakaryocytes",
-      "Biallelic MPL molecular genetic testing",
-      "Serum thrombopoietin level (characteristically elevated)",
-      "Chromosome breakage testing to exclude Fanconi anaemia",
-      "Cytogenetics and marrow surveillance for clonal evolution/myelodysplasia",
-      "HLA typing of patient and potential related donors for transplantation"
+    [
+     "Primary Differentials",
+     "Thrombocytopenia-absent-radius (TAR) syndrome, Neonatal alloimmune or autoimmune thrombocytopenia, Fanconi anaemia and other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal severe thrombocytopenia with mucosal or intracranial haemorrhage",
-      "Emerging anaemia or neutropenia signalling progression to marrow failure",
-      "Cytogenetic abnormality or dysplasia suggesting clonal evolution",
-      "Life-threatening bleeding at any site",
-      "Rising transfusion requirement or transfusion refractoriness"
+    [
+     "Management Strategy",
+     "Offer allogeneic haematopoietic stem cell transplantation, ideally early from a well-matched donor, as the only curative treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated, the disorder carries a poor prognosis owing to bleeding, progression to aplastic anaemia and risk of leukaemic transformation. Allogeneic haematopoietic stem cell transplantation, particularly when performed early from a well-matched donor, can be curative and offers the best long-term outcome.",
-    "pitfalls": [
-      "Assuming thrombopoietin-receptor agonists will help; they are ineffective because the receptor is defective",
-      "Confusing the condition with thrombocytopenia-absent-radius syndrome despite the presence of normal thumbs and radii",
-      "Regarding it as isolated thrombocytopenia and failing to anticipate and monitor for trilineage marrow failure",
-      "Missing the leukaemic predisposition by omitting long-term cytogenetic surveillance",
-      "Overlooking Fanconi anaemia without chromosome breakage testing in a child with marrow failure"
-    ],
-    "references": [
-      "Standard textbook of paediatric haematology",
-      "Clinical genetics reference texts on inherited bone marrow failure syndromes",
-      "Consensus guidelines on inherited thrombocytopenias"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer allogeneic haematopoietic stem cell transplantation, ideally early from a well-matched donor, as the only curative treatment",
-      "Control bleeding with platelet transfusions using irradiated leucodepleted products, transfusing judiciously to limit alloimmunisation before transplant",
-      "Consider a thrombopoietin-receptor agonist such as eltrombopag as a temporising measure to raise the platelet count",
-      "Use antifibrinolytic therapy such as tranexamic acid for mucosal bleeding alongside general bleeding-precaution advice",
-      "Undertake regular marrow surveillance with cytogenetics for progression to aplastic anaemia and clonal evolution to myelodysplasia or leukaemia",
-      "Exclude Fanconi anaemia with chromosome breakage testing before transplant planning",
-      "Provide genetic counselling and family testing given autosomal recessive MPL inheritance, including donor screening"
+    [
+     "Clinical Pitfall",
+     "Assuming thrombopoietin-receptor agonists will help; they are ineffective because the receptor is defective",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital amegakaryocytic thrombocytopenia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "amegakaryocytic-thrombocytopenia-diagram",
+   "title": "Congenital amegakaryocytic thrombocytopenia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

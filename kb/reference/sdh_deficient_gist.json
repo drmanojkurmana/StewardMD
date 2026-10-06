@@ -1,91 +1,186 @@
 {
-  "id": "sdh_deficient_gist",
-  "name": "SDH-deficient gastrointestinal stromal tumour",
-  "aliases": [
-    "succinate dehydrogenase-deficient GIST",
-    "SDH-deficient GIST",
-    "paediatric-type GIST",
-    "KIT/PDGFRA wild-type SDH-deficient GIST",
-    "SDHB-deficient gastrointestinal stromal tumour"
+ "id": "sdh_deficient_gist",
+ "name": "SDH-deficient gastrointestinal stromal tumour",
+ "aliases": [
+  "succinate dehydrogenase-deficient GIST",
+  "SDH-deficient GIST",
+  "paediatric-type GIST",
+  "KIT/PDGFRA wild-type SDH-deficient GIST",
+  "SDHB-deficient gastrointestinal stromal tumour"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Pathology",
+ "specialty": "Surgical Pathology / Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A distinct subset of gastrointestinal stromal tumours lacking KIT and PDGFRA mutations, driven instead by loss of succinate dehydrogenase complex function (SDHA, SDHB, SDHC or SDHD)",
+   "Almost always arises in the stomach and shows a characteristic multinodular or plexiform growth pattern with epithelioid or mixed cytology",
+   "Predominantly affects children, adolescents and young adults, with a female predominance, and is the typical GIST of the young",
+   "Loss of SDHB immunohistochemical staining is the unifying diagnostic feature regardless of which subunit gene is affected; loss of SDHA staining specifically indicates an SDHA mutation",
+   "Frequently harbours germline SDH mutations, so identification should prompt genetic counselling and evaluation for hereditary paraganglioma-phaeochromocytoma syndromes",
+   "Associated with the Carney triad (gastric GIST, paraganglioma and pulmonary chondroma) and the Carney-Stratakis dyad (GIST and paraganglioma with germline SDH mutation)",
+   "Behaves differently from conventional GIST, with frequent lymph node metastasis yet often an indolent, protracted course even with metastatic disease",
+   "Characteristically resistant to standard imatinib therapy because it does not depend on KIT or PDGFRA signalling"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Pathology",
-  "specialty": "Surgical Pathology / Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A distinct subset of gastrointestinal stromal tumours lacking KIT and PDGFRA mutations, driven instead by loss of succinate dehydrogenase complex function (SDHA, SDHB, SDHC or SDHD)",
-      "Almost always arises in the stomach and shows a characteristic multinodular or plexiform growth pattern with epithelioid or mixed cytology",
-      "Predominantly affects children, adolescents and young adults, with a female predominance, and is the typical GIST of the young",
-      "Loss of SDHB immunohistochemical staining is the unifying diagnostic feature regardless of which subunit gene is affected; loss of SDHA staining specifically indicates an SDHA mutation",
-      "Frequently harbours germline SDH mutations, so identification should prompt genetic counselling and evaluation for hereditary paraganglioma-phaeochromocytoma syndromes",
-      "Associated with the Carney triad (gastric GIST, paraganglioma and pulmonary chondroma) and the Carney-Stratakis dyad (GIST and paraganglioma with germline SDH mutation)",
-      "Behaves differently from conventional GIST, with frequent lymph node metastasis yet often an indolent, protracted course even with metastatic disease",
-      "Characteristically resistant to standard imatinib therapy because it does not depend on KIT or PDGFRA signalling"
+  "pathophysiology": "SDH-deficient GIST results from loss of function of the mitochondrial succinate dehydrogenase complex, through germline or somatic mutation of one of its subunit genes or, in some cases, epigenetic silencing of SDHC. Failure of this enzyme causes accumulation of succinate, which inhibits prolyl hydroxylases and stabilises hypoxia-inducible factors, producing a pseudohypoxic state that drives angiogenesis and tumour growth. Because the disease is independent of KIT and PDGFRA activation, it forms a biologically separate group with distinct morphology, natural history and treatment response.",
+  "additionalDifferentials": [
+   "Conventional KIT or PDGFRA-mutant gastrointestinal stromal tumour",
+   "NF1-associated gastrointestinal stromal tumour",
+   "Gastrointestinal leiomyoma or leiomyosarcoma",
+   "Gastric schwannoma",
+   "Gastric glomus tumour",
+   "Neuroendocrine tumour of the stomach",
+   "Metastatic paraganglioma"
+  ],
+  "additionalInvestigations": [
+   "SDHB immunohistochemistry, with SDHA staining to identify SDHA-mutant cases",
+   "Mutational testing confirming absence of KIT and PDGFRA mutations",
+   "Germline SDH gene testing with referral for genetic counselling",
+   "Screening for paraganglioma and phaeochromocytoma, including biochemical catecholamine studies and imaging",
+   "Evaluation for pulmonary chondroma when a Carney triad is suspected",
+   "Cross-sectional imaging to assess multifocality, nodal and hepatic metastases"
+  ],
+  "redFlags": [
+   "Young patient with a gastric mass and multifocal or nodal disease",
+   "Coexisting paraganglioma or phaeochromocytoma suggesting a hereditary syndrome",
+   "Family history of paraganglioma, phaeochromocytoma or GIST",
+   "Progressive metastatic disease despite the typically indolent course",
+   "Symptomatic gastrointestinal bleeding from an ulcerating gastric tumour"
+  ],
+  "prognosis": "SDH-deficient GIST tends to follow an indolent, protracted course, and patients may live for many years even with lymph node or liver metastases; conventional tyrosine kinase inhibitors are largely ineffective, so complete surgical resection is the mainstay, and lifelong surveillance is needed because of multifocality and the risk of associated syndromic tumours.",
+  "pitfalls": [
+   "Assuming all GISTs will respond to imatinib and overlooking the wild-type, SDH-deficient subset",
+   "Not performing SDHB immunohistochemistry in a young patient with a gastric GIST",
+   "Failing to recognise the hereditary implications and omitting germline testing and family screening",
+   "Applying conventional GIST risk-stratification schemes, which do not reliably predict behaviour in this subset",
+   "Interpreting nodal metastasis as necessarily indicating a poor outcome"
+  ],
+  "references": [
+   "WHO Classification of Tumours: Digestive System Tumours",
+   "WHO Classification of Tumours: Soft Tissue and Bone Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm diagnosis with negative SDHB immunohistochemistry (and SDHA if SDHB negative) after excluding KIT and PDGFRA mutations",
+   "Complete surgical resection is the mainstay of treatment, typically wedge or segmental gastric resection, individualised to the extent of disease",
+   "Routine lymphadenectomy is not required, resect nodes only when clinically suspicious",
+   "Preoperative TKI downsizing is not established for this subtype given its resistance to standard TKIs",
+   "Adjuvant TKI therapy is not currently recommended for SDH-deficient GIST given its relative imatinib insensitivity and often indolent course",
+   "In metastatic or unresectable disease, this subtype is largely insensitive to imatinib; sunitinib or regorafenib can be considered given reported activity in SDH-deficient GIST",
+   "Observation or staged, judicious resection of individual metastatic lesions may be reasonable in appropriately selected patients rather than reflexive continuous TKI therapy",
+   "Manage within a specialist sarcoma multidisciplinary team given the rarity and syndromic associations",
+   "Pursue genetic counselling and germline SDHX testing in all confirmed SDH-deficient patients, given links to Carney triad and Carney-Stratakis syndrome",
+   "Screen for paraganglioma and phaeochromocytoma with biochemical testing and periodic whole-body imaging such as annual MRI",
+   "Evaluate for pulmonary chondroma if Carney triad is suspected",
+   "Offer cascade genetic testing of at-risk relatives when a germline SDHX mutation is confirmed",
+   "Provide lifelong surveillance imaging given the persistent but often indolent metastatic potential of this subtype",
+   "Monitor response to any systemic therapy closely, with PET imaging able to show responsiveness within weeks when trialled"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sdh_deficient_gist-pathway",
+   "title": "SDH-deficient gastrointestinal stromal tumour: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A distinct subset of gastrointestinal stromal tumours lacking KIT and PDGFRA mutations, driven instead by loss of succinate dehydrogenase complex function (SDHA, SDHB, SDHC or SDHD)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Young patient with a gastric mass and multifocal or nodal disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: SDHB immunohistochemistry, with SDHA staining to identify SDHA-mutant cases, Mutational testing confirming absence of KIT and PDGFRA mutations, Germline SDH gene testing with referral for genetic counselling"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm diagnosis with negative SDHB immunohistochemistry (and SDHA if SDHB negative) after excluding KIT and PDGFRA mutations"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all GISTs will respond to imatinib and overlooking the wild-type, SDH-deficient subset"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sdh-deficient gastrointestinal stromal tumour."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sdh_deficient_gist-matrix",
+   "title": "SDH-deficient gastrointestinal stromal tumour: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A distinct subset of gastrointestinal stromal tumours lacking KIT and PDGFRA mutations, driven instead by loss of succinate",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SDH-deficient GIST results from loss of function of the mitochondrial succinate dehydrogenase complex, through germline or somatic mutation of one of its subunit genes or, in some cases, epigenetic silencing of SDHC. Failure of this enzyme causes accumulation of succinate, which inhibits prolyl hydroxylases and stabilises hypoxia-inducible factors, producing a pseudohypoxic state that drives angiogenesis and tumour growth. Because the disease is independent of KIT and PDGFRA activation, it forms a biologically separate group with distinct morphology, natural history and treatment response.",
-    "additionalDifferentials": [
-      "Conventional KIT or PDGFRA-mutant gastrointestinal stromal tumour",
-      "NF1-associated gastrointestinal stromal tumour",
-      "Gastrointestinal leiomyoma or leiomyosarcoma",
-      "Gastric schwannoma",
-      "Gastric glomus tumour",
-      "Neuroendocrine tumour of the stomach",
-      "Metastatic paraganglioma"
+    [
+     "Key Investigations",
+     "SDHB immunohistochemistry, with SDHA staining to identify SDHA-mutant cases, Mutational testing confirming absence of KIT and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "SDHB immunohistochemistry, with SDHA staining to identify SDHA-mutant cases",
-      "Mutational testing confirming absence of KIT and PDGFRA mutations",
-      "Germline SDH gene testing with referral for genetic counselling",
-      "Screening for paraganglioma and phaeochromocytoma, including biochemical catecholamine studies and imaging",
-      "Evaluation for pulmonary chondroma when a Carney triad is suspected",
-      "Cross-sectional imaging to assess multifocality, nodal and hepatic metastases"
+    [
+     "Primary Differentials",
+     "Conventional KIT or PDGFRA-mutant gastrointestinal stromal tumour, NF1-associated gastrointestinal stromal tumour,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Young patient with a gastric mass and multifocal or nodal disease",
-      "Coexisting paraganglioma or phaeochromocytoma suggesting a hereditary syndrome",
-      "Family history of paraganglioma, phaeochromocytoma or GIST",
-      "Progressive metastatic disease despite the typically indolent course",
-      "Symptomatic gastrointestinal bleeding from an ulcerating gastric tumour"
+    [
+     "Management Strategy",
+     "Confirm diagnosis with negative SDHB immunohistochemistry (and SDHA if SDHB negative) after excluding KIT and PDGFRA mutations",
+     "Core treatment modality"
     ],
-    "prognosis": "SDH-deficient GIST tends to follow an indolent, protracted course, and patients may live for many years even with lymph node or liver metastases; conventional tyrosine kinase inhibitors are largely ineffective, so complete surgical resection is the mainstay, and lifelong surveillance is needed because of multifocality and the risk of associated syndromic tumours.",
-    "pitfalls": [
-      "Assuming all GISTs will respond to imatinib and overlooking the wild-type, SDH-deficient subset",
-      "Not performing SDHB immunohistochemistry in a young patient with a gastric GIST",
-      "Failing to recognise the hereditary implications and omitting germline testing and family screening",
-      "Applying conventional GIST risk-stratification schemes, which do not reliably predict behaviour in this subset",
-      "Interpreting nodal metastasis as necessarily indicating a poor outcome"
-    ],
-    "references": [
-      "WHO Classification of Tumours: Digestive System Tumours",
-      "WHO Classification of Tumours: Soft Tissue and Bone Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm diagnosis with negative SDHB immunohistochemistry (and SDHA if SDHB negative) after excluding KIT and PDGFRA mutations",
-      "Complete surgical resection is the mainstay of treatment, typically wedge or segmental gastric resection, individualised to the extent of disease",
-      "Routine lymphadenectomy is not required, resect nodes only when clinically suspicious",
-      "Preoperative TKI downsizing is not established for this subtype given its resistance to standard TKIs",
-      "Adjuvant TKI therapy is not currently recommended for SDH-deficient GIST given its relative imatinib insensitivity and often indolent course",
-      "In metastatic or unresectable disease, this subtype is largely insensitive to imatinib; sunitinib or regorafenib can be considered given reported activity in SDH-deficient GIST",
-      "Observation or staged, judicious resection of individual metastatic lesions may be reasonable in appropriately selected patients rather than reflexive continuous TKI therapy",
-      "Manage within a specialist sarcoma multidisciplinary team given the rarity and syndromic associations",
-      "Pursue genetic counselling and germline SDHX testing in all confirmed SDH-deficient patients, given links to Carney triad and Carney-Stratakis syndrome",
-      "Screen for paraganglioma and phaeochromocytoma with biochemical testing and periodic whole-body imaging such as annual MRI",
-      "Evaluate for pulmonary chondroma if Carney triad is suspected",
-      "Offer cascade genetic testing of at-risk relatives when a germline SDHX mutation is confirmed",
-      "Provide lifelong surveillance imaging given the persistent but often indolent metastatic potential of this subtype",
-      "Monitor response to any systemic therapy closely, with PET imaging able to show responsiveness within weeks when trialled"
+    [
+     "Clinical Pitfall",
+     "Assuming all GISTs will respond to imatinib and overlooking the wild-type, SDH-deficient subset",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sdh-deficient gastrointestinal stromal tumour."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sdh-deficient-gist-diagram",
+   "title": "SDH-deficient gastrointestinal stromal tumour: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

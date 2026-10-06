@@ -6,7 +6,20 @@
  "basis": "international",
  "counterpart": "gestational-diabetes",
  "setting": "Antenatal clinic, labour ward, postnatal",
- "aliases": ["GDM", "gestational diabetes mellitus", "OGTT", "75 g OGTT", "IADPSG", "one-step", "two-step", "Carpenter-Coustan", "diabetes in pregnancy", "hyperglycaemia in pregnancy", "NICE NG3", "WHO 2013 criteria"],
+ "aliases": [
+  "GDM",
+  "gestational diabetes mellitus",
+  "OGTT",
+  "75 g OGTT",
+  "IADPSG",
+  "one-step",
+  "two-step",
+  "Carpenter-Coustan",
+  "diabetes in pregnancy",
+  "hyperglycaemia in pregnancy",
+  "NICE NG3",
+  "WHO 2013 criteria"
+ ],
  "summary": "Exclude overt diabetes early, then diagnose GDM at 24 to 28 weeks with the one-step 75 g OGTT (WHO 2013 and IADPSG, preferred by ADA), a two-step test, or NICE risk-based testing. Treat with nutrition, activity and glucose monitoring; add insulin (ADA first line) or metformin (NICE first drug) if targets are missed, and retest after birth.",
  "sections": [
   {
@@ -98,16 +111,150 @@
   }
  ],
  "drugs": [
-  { "name": "Insulin (NPH or glargine basal; aspart or lispro prandial)", "dose": "Individualised subcutaneous dosing guided by self-monitoring, titrated every 2 to 3 days to targets", "notes": "ADA first-line drug. Basal insulin for fasting hyperglycaemia, rapid-acting before meals for postprandial peaks. Stop after birth." },
-  { "name": "Metformin", "dose": "500 mg orally once or twice daily with meals, increased weekly to effect; usual maximum 2 to 2.5 g/day in divided doses", "notes": "NICE first drug if lifestyle fails for 1 to 2 weeks; ADA second line. Crosses the placenta; add insulin if targets are not met. Stop after birth." },
-  { "name": "Oral glucose (hypoglycaemia)", "dose": "15 to 20 g fast-acting glucose orally; repeat if still below 70 mg/dL (3.9 mmol/L) after 15 minutes, then a snack", "notes": "Women on insulin should carry glucose." },
-  { "name": "Dexamethasone (if preterm birth expected)", "dose": "6 mg IM every 12 hours for 4 doses", "notes": "Not contraindicated in diabetes; expect hyperglycaemia for several days and increase insulin by protocol." }
+  {
+   "name": "Insulin (NPH or glargine basal; aspart or lispro prandial)",
+   "dose": "Individualised subcutaneous dosing guided by self-monitoring, titrated every 2 to 3 days to targets",
+   "notes": "ADA first-line drug. Basal insulin for fasting hyperglycaemia, rapid-acting before meals for postprandial peaks. Stop after birth."
+  },
+  {
+   "name": "Metformin",
+   "dose": "500 mg orally once or twice daily with meals, increased weekly to effect; usual maximum 2 to 2.5 g/day in divided doses",
+   "notes": "NICE first drug if lifestyle fails for 1 to 2 weeks; ADA second line. Crosses the placenta; add insulin if targets are not met. Stop after birth."
+  },
+  {
+   "name": "Oral glucose (hypoglycaemia)",
+   "dose": "15 to 20 g fast-acting glucose orally; repeat if still below 70 mg/dL (3.9 mmol/L) after 15 minutes, then a snack",
+   "notes": "Women on insulin should carry glucose."
+  },
+  {
+   "name": "Dexamethasone (if preterm birth expected)",
+   "dose": "6 mg IM every 12 hours for 4 doses",
+   "notes": "Not contraindicated in diabetes; expect hyperglycaemia for several days and increase insulin by protocol."
+  }
  ],
  "sources": [
-  { "org": "American Diabetes Association", "title": "15. Management of diabetes in pregnancy: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690181/" },
-  { "org": "American Diabetes Association", "title": "2. Diagnosis and classification of diabetes: Standards of Care in Diabetes 2026 (Table 2.8, GDM screening and diagnosis)", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690183/" },
-  { "org": "NICE", "title": "Diabetes in pregnancy: management from preconception to the postnatal period (NG3)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng3/chapter/Recommendations" },
-  { "org": "WHO", "title": "Diagnostic criteria and classification of hyperglycaemia first detected in pregnancy", "year": 2013, "url": "https://www.who.int/publications/i/item/WHO-NMH-MND-13.2" }
+  {
+   "org": "American Diabetes Association",
+   "title": "15. Management of diabetes in pregnancy: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690181/"
+  },
+  {
+   "org": "American Diabetes Association",
+   "title": "2. Diagnosis and classification of diabetes: Standards of Care in Diabetes 2026 (Table 2.8, GDM screening and diagnosis)",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690183/"
+  },
+  {
+   "org": "NICE",
+   "title": "Diabetes in pregnancy: management from preconception to the postnatal period (NG3)",
+   "year": 2020,
+   "url": "https://www.nice.org.uk/guidance/ng3/chapter/Recommendations"
+  },
+  {
+   "org": "WHO",
+   "title": "Diagnostic criteria and classification of hyperglycaemia first detected in pregnancy",
+   "year": 2013,
+   "url": "https://www.who.int/publications/i/item/WHO-NMH-MND-13.2"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "gestational-diabetes-international-pathway",
+   "title": "Gestational diabetes (ADA, NICE and WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "ADA 2026: before 15 weeks, test people with risk factors (and consider testing everyone) for undiagnosed diabetes using standard non-pregnant criteria; screen all others for GDM at 24 to 28 weeks. The IADPSG and two-step criteria were not",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Diabetes in pregnancy (WHO 2013), managed as pre-existing diabetes: fasting 126 mg/dL (7.0 mmol/L) or more, 2-hour 200 mg/dL (11.1 mmol/L) or more after 75 g glucose, or random 200 mg/dL (11.1 mmol/L) or more with symptoms.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "One-step (ADA preferred; WHO 2013 and IADPSG): 75 g OGTT in the morning after an overnight fast of at least 8 hours. GDM if any value is met or exceeded: fasting 92 mg/dL (5.1 mmol/L), 1-hour 180 mg/dL (10.0 mmol/L), 2-hour 153 mg/dL (8.5"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "ADA 2026: insulin is the preferred drug for GDM. Metformin and glyburide are not first line because they cross the placenta, long-term offspring data are limited, and they fail to achieve targets in about 23 to 28% of women. Sulfonylureas"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Ultrasound of fetal growth and liquor volume every 4 weeks from 28 to 36 weeks (NICE); routine fetal wellbeing tests before 38 weeks are not needed unless growth restriction is suspected."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for gestational diabetes (ada, nice and who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gestational-diabetes-international-summary-matrix",
+   "title": "Gestational diabetes (ADA, NICE and WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "ADA 2026: before 15 weeks, test people with risk factors (and consider testing everyone) for undiagnosed diabetes using standard",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ADA 2026: insulin is the preferred drug for GDM. Metformin and glyburide are not first line because they cross the placenta, long-term",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "One-step (ADA preferred; WHO 2013 and IADPSG): 75 g OGTT in the morning after an overnight fast of at least 8 hours. GDM if any value is",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Insulin (NPH or glargine basal; aspart or lispro prandial): Individualised subcutaneous dosing guided by self-monitoring, titrated every 2",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Applying IADPSG or two-step criteria before 24 weeks, or missing overt diabetes in early pregnancy.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for gestational diabetes (ada, nice and who)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gestational-diabetes-international-diagram",
+   "title": "Gestational diabetes (ADA, NICE and WHO): Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

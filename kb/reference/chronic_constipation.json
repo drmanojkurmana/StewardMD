@@ -1,80 +1,175 @@
 {
-  "id": "chronic_constipation",
-  "name": "Chronic constipation",
-  "aliases": [
-    "chronic idiopathic constipation",
-    "functional constipation",
-    "slow-transit constipation",
-    "defecatory dysfunction"
+ "id": "chronic_constipation",
+ "name": "Chronic constipation",
+ "aliases": [
+  "chronic idiopathic constipation",
+  "functional constipation",
+  "slow-transit constipation",
+  "defecatory dysfunction"
+ ],
+ "class": "non_infective",
+ "system": "GI / Hepatology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Constipation is defined by symptoms including infrequent stools, straining, hard stools, and a sense of incomplete evacuation rather than by stool frequency alone",
+   "Most chronic constipation is functional and can be categorised as normal-transit, slow-transit, or a defecatory (pelvic floor) disorder",
+   "A careful history and rectal examination are essential and can reveal a defecatory disorder such as dyssynergic defaecation",
+   "Secondary causes including hypothyroidism, hypercalcaemia, diabetes, neurological disease, and constipating medications should be identified and treated",
+   "Increasing dietary fibre and fluid with graded use of osmotic and stimulant laxatives is the mainstay for most patients",
+   "Defecatory disorders respond poorly to laxatives alone and are best treated with biofeedback-directed pelvic floor retraining",
+   "Anorectal manometry with a balloon expulsion test and, where needed, transit studies guide management of refractory cases"
   ],
-  "class": "non_infective",
-  "system": "GI / Hepatology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Constipation is defined by symptoms including infrequent stools, straining, hard stools, and a sense of incomplete evacuation rather than by stool frequency alone",
-      "Most chronic constipation is functional and can be categorised as normal-transit, slow-transit, or a defecatory (pelvic floor) disorder",
-      "A careful history and rectal examination are essential and can reveal a defecatory disorder such as dyssynergic defaecation",
-      "Secondary causes including hypothyroidism, hypercalcaemia, diabetes, neurological disease, and constipating medications should be identified and treated",
-      "Increasing dietary fibre and fluid with graded use of osmotic and stimulant laxatives is the mainstay for most patients",
-      "Defecatory disorders respond poorly to laxatives alone and are best treated with biofeedback-directed pelvic floor retraining",
-      "Anorectal manometry with a balloon expulsion test and, where needed, transit studies guide management of refractory cases"
+  "pathophysiology": "Chronic constipation reflects disordered colonic transit, defecatory mechanics, or both. In slow-transit constipation, reduced colonic propulsive activity, often linked to abnormalities of enteric neurons and interstitial cells of Cajal, delays stool passage. In defecatory disorders, impaired coordination of the pelvic floor and anal sphincter (dyssynergia) or structural pelvic floor abnormalities prevent effective evacuation. Normal-transit constipation, the most common type, involves normal stool movement with perceived difficulty, often overlapping with irritable bowel syndrome. Secondary causes act through metabolic, endocrine, neurological, or pharmacological effects on gut motility.",
+  "additionalDifferentials": [
+   "Colorectal cancer or luminal obstruction",
+   "Hypothyroidism, hypercalcaemia, or hypokalaemia",
+   "Diabetic or other autonomic neuropathy",
+   "Neurological disease such as Parkinson disease or spinal cord lesions",
+   "Medication effects (opioids, anticholinergics, calcium and iron supplements)",
+   "Irritable bowel syndrome with constipation",
+   "Pelvic floor dyssynergia or rectal prolapse"
+  ],
+  "additionalInvestigations": [
+   "Digital rectal examination to assess sphincter tone and defecatory function",
+   "Blood tests including thyroid function, calcium, glucose, and electrolytes",
+   "Colonoscopy when alarm features or age-appropriate screening indications are present",
+   "Colonic transit study for suspected slow transit",
+   "Anorectal manometry and balloon expulsion test for suspected defecatory disorder",
+   "Defecography in selected refractory cases"
+  ],
+  "redFlags": [
+   "Rectal bleeding or iron-deficiency anaemia",
+   "Unintentional weight loss",
+   "New or progressive constipation in an older patient",
+   "Family history of colorectal cancer or inflammatory bowel disease",
+   "Features of obstruction such as severe pain, distension, and vomiting"
+  ],
+  "prognosis": "Chronic constipation is generally benign but frequently persistent and can significantly reduce quality of life; most patients improve with lifestyle measures and laxatives, and biofeedback is effective for defecatory disorders, though a minority remain refractory.",
+  "pitfalls": [
+   "Escalating laxatives without recognising an underlying defecatory disorder that needs biofeedback",
+   "Failing to exclude secondary and structural causes before treating symptomatically",
+   "Overlooking constipating medications, particularly opioids",
+   "Omitting the rectal examination, which often reveals the mechanism of constipation"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
+   "Graded use of osmotic laxatives such as macrogol, adding stimulant laxatives when fibre and osmotic agents are insufficient",
+   "Secretagogues and prokinetics such as prucalopride, linaclotide or lubiprostone for refractory or slow-transit constipation",
+   "Biofeedback-directed pelvic floor retraining for defecatory dyssynergic disorders, which respond poorly to laxatives alone",
+   "Identification and treatment of secondary causes including hypothyroidism, hypercalcaemia, diabetes and neurological disease, with review and withdrawal of constipating medications",
+   "Colonoscopy where alarm features or age-appropriate screening indications are present",
+   "Specialist referral for anorectal manometry and transit studies, reserving surgery for carefully selected refractory slow-transit cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chronic_constipation-pathway",
+   "title": "Chronic constipation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Constipation is defined by symptoms including infrequent stools, straining, hard stools, and a sense of incomplete evacuation rather than by stool frequency alone",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rectal bleeding or iron-deficiency anaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Digital rectal examination to assess sphincter tone and defecatory function, Blood tests including thyroid function, calcium, glucose, and electrolytes, Colonoscopy when alarm features or age-appropriate screening"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Escalating laxatives without recognising an underlying defecatory disorder that needs biofeedback"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chronic constipation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic_constipation-matrix",
+   "title": "Chronic constipation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Constipation is defined by symptoms including infrequent stools, straining, hard stools, and a sense of incomplete evacuation",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic constipation reflects disordered colonic transit, defecatory mechanics, or both. In slow-transit constipation, reduced colonic propulsive activity, often linked to abnormalities of enteric neurons and interstitial cells of Cajal, delays stool passage. In defecatory disorders, impaired coordination of the pelvic floor and anal sphincter (dyssynergia) or structural pelvic floor abnormalities prevent effective evacuation. Normal-transit constipation, the most common type, involves normal stool movement with perceived difficulty, often overlapping with irritable bowel syndrome. Secondary causes act through metabolic, endocrine, neurological, or pharmacological effects on gut motility.",
-    "additionalDifferentials": [
-      "Colorectal cancer or luminal obstruction",
-      "Hypothyroidism, hypercalcaemia, or hypokalaemia",
-      "Diabetic or other autonomic neuropathy",
-      "Neurological disease such as Parkinson disease or spinal cord lesions",
-      "Medication effects (opioids, anticholinergics, calcium and iron supplements)",
-      "Irritable bowel syndrome with constipation",
-      "Pelvic floor dyssynergia or rectal prolapse"
+    [
+     "Key Investigations",
+     "Digital rectal examination to assess sphincter tone and defecatory function, Blood tests including thyroid function, calcium,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Digital rectal examination to assess sphincter tone and defecatory function",
-      "Blood tests including thyroid function, calcium, glucose, and electrolytes",
-      "Colonoscopy when alarm features or age-appropriate screening indications are present",
-      "Colonic transit study for suspected slow transit",
-      "Anorectal manometry and balloon expulsion test for suspected defecatory disorder",
-      "Defecography in selected refractory cases"
+    [
+     "Primary Differentials",
+     "Colorectal cancer or luminal obstruction, Hypothyroidism, hypercalcaemia, or hypokalaemia, Diabetic or other autonomic neuropathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rectal bleeding or iron-deficiency anaemia",
-      "Unintentional weight loss",
-      "New or progressive constipation in an older patient",
-      "Family history of colorectal cancer or inflammatory bowel disease",
-      "Features of obstruction such as severe pain, distension, and vomiting"
+    [
+     "Management Strategy",
+     "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
+     "Core treatment modality"
     ],
-    "prognosis": "Chronic constipation is generally benign but frequently persistent and can significantly reduce quality of life; most patients improve with lifestyle measures and laxatives, and biofeedback is effective for defecatory disorders, though a minority remain refractory.",
-    "pitfalls": [
-      "Escalating laxatives without recognising an underlying defecatory disorder that needs biofeedback",
-      "Failing to exclude secondary and structural causes before treating symptomatically",
-      "Overlooking constipating medications, particularly opioids",
-      "Omitting the rectal examination, which often reveals the mechanism of constipation"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "First-line lifestyle measures with increased dietary fibre, adequate fluid intake and physical activity",
-      "Graded use of osmotic laxatives such as macrogol, adding stimulant laxatives when fibre and osmotic agents are insufficient",
-      "Secretagogues and prokinetics such as prucalopride, linaclotide or lubiprostone for refractory or slow-transit constipation",
-      "Biofeedback-directed pelvic floor retraining for defecatory dyssynergic disorders, which respond poorly to laxatives alone",
-      "Identification and treatment of secondary causes including hypothyroidism, hypercalcaemia, diabetes and neurological disease, with review and withdrawal of constipating medications",
-      "Colonoscopy where alarm features or age-appropriate screening indications are present",
-      "Specialist referral for anorectal manometry and transit studies, reserving surgery for carefully selected refractory slow-transit cases"
+    [
+     "Clinical Pitfall",
+     "Escalating laxatives without recognising an underlying defecatory disorder that needs biofeedback",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chronic constipation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-constipation-diagram",
+   "title": "Chronic constipation: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -165,5 +165,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hc406d5ae"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "seizure_epilepsy-dx-algo",
+      "title": "Seizure / epilepsy: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "A seizure is a transient event from abnormal excessive or synchronous neuronal activity; epilepsy is the distinct condition of recurrent unprovoked seizures from a chronic underlying process. A single seizure, or seizures due to a",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Generalized convulsive status epilepticus - immediate emergency due to risk of cardiorespiratory failure, hyperthermia, metabolic derangement, and irreversible CNS injury (p.3425-3426)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Complete blood count, magnesium, liver and renal function tests, and urinalysis in addition to glucose/electrolytes/calcium to find metabolic causes (p.3416), Toxicology screen of blood and urine, especially when no clear"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Seizures are classified (ILAE 2017) by onset: (1) Focal onset (with intact or impaired awareness; motor or nonmotor onset; may evolve to bilateral tonic-clonic); (2) Generalized onset - motor (tonic-clonic, or other such"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to exclude a treatable provoking cause (metabolic, toxic, structural, or infective) before labeling a patient as having epilepsy - many such seizures need only correction of the underlying problem, not chronic"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for seizure / epilepsy."
+    }
+  ],
+  "tables": [
+    {
+      "id": "seizure_epilepsy-matrix",
+      "title": "Seizure / epilepsy: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A seizure is a transient event from abnormal excessive or synchronous neuronal activity; epilepsy is the distinct condition of",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Complete blood count, magnesium, liver and renal function tests, and urinalysis in addition to glucose/electrolytes/calcium to",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Syncope (vasovagal, cardiac arrhythmia, valvular heart disease, cardiac failure, orthostatic hypotension) - the most frequent",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Generalized convulsive status epilepticus - immediate emergency due to risk of cardiorespiratory failure, hyperthermia, metabolic",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude a treatable provoking cause (metabolic, toxic, structural, or infective) before labeling a patient as having",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for seizure / epilepsy."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "seizure-epilepsy-diagram",
+      "title": "Seizure / epilepsy: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

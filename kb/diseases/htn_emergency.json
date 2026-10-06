@@ -133,5 +133,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8329c05b"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "htn_emergency-dx-algo",
+      "title": "Hypertensive emergency: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The threshold prompting concern for a crisis is typically a markedly elevated BP, often described as SBP/DBP at or above ~180/100-120 mmHg; however the level alone does not define an emergency - the presence of acute, ongoing end-organ",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypertensive encephalopathy - headache, visual disturbance, nausea/vomiting, seizures, altered consciousness (p.2148).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Funduscopy for hypertensive end-organ change - arteriolar sclerosis/narrowing, splinter (flame) hemorrhages, cotton-wool spots (nerve-fiber-layer infarcts), hard exudates into the macula, and papilledema (p.227, p.190).,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Hypertensive urgency = markedly elevated BP (e.g., SBP/DBP >=180/100 mmHg) in an asymptomatic patient WITHOUT evidence of acute ongoing end-organ damage - manage with oral agents as outpatient. Hypertensive emergency ="
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating an asymptomatic high BP (urgency) with aggressive IV agents as though it were an emergency, risking harm from over-rapid lowering (p.2148)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hypertensive emergency."
+    }
+  ],
+  "tables": [
+    {
+      "id": "htn_emergency-matrix",
+      "title": "Hypertensive emergency: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The threshold prompting concern for a crisis is typically a markedly elevated BP, often described as SBP/DBP at or above",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Funduscopy for hypertensive end-organ change - arteriolar sclerosis/narrowing, splinter (flame) hemorrhages, cotton-wool spots",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Scleroderma renal crisis - accelerated hypertension with AKI, clinically indistinguishable from malignant hypertension; consider",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypertensive encephalopathy - headache, visual disturbance, nausea/vomiting, seizures, altered consciousness (p.2148).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an asymptomatic high BP (urgency) with aggressive IV agents as though it were an emergency, risking harm from over-rapid",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hypertensive emergency."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "htn-emergency-diagram",
+      "title": "Hypertensive emergency: Cardiovascular & Hemodynamic Diagnostic Schematic",
+      "type": "ecg",
+      "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+      "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+      "annotations": [
+        {
+          "label": "Conduction System",
+          "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+        },
+        {
+          "label": "Coronary Perfusion",
+          "description": "Epicardial arterial distribution and regional myocardial supply zones."
+        },
+        {
+          "label": "Hemodynamics",
+          "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+        }
+      ]
+    }
+  ]
 }

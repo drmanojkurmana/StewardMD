@@ -1,79 +1,174 @@
 {
-  "id": "polytrauma",
-  "name": "Polytrauma",
-  "aliases": [
-    "multiple trauma",
-    "multisystem trauma",
-    "major trauma"
+ "id": "polytrauma",
+ "name": "Polytrauma",
+ "aliases": [
+  "multiple trauma",
+  "multisystem trauma",
+  "major trauma"
+ ],
+ "class": "non_infective",
+ "system": "Emergency / Trauma / Critical care",
+ "specialty": "Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Assess and resuscitate simultaneously using the primary survey sequence: airway with cervical spine protection, breathing, circulation with haemorrhage control, disability, and exposure with environment control",
+   "Life threats identified during the primary survey are treated as they are found, before moving to the next step",
+   "The most common preventable cause of early death is uncontrolled haemorrhage, so external bleeding is compressed and internal sources are sought promptly",
+   "Permissive hypotension and balanced resuscitation with blood products help avoid dilutional coagulopathy in bleeding patients until definitive control is achieved",
+   "The lethal triad of hypothermia, acidosis, and coagulopathy worsens outcomes and guides damage-control strategies",
+   "A structured secondary survey (head-to-toe examination and history) is performed only once the patient is stabilised, to detect injuries missed initially",
+   "Reassess frequently, as trauma physiology is dynamic and deterioration can be rapid",
+   "Adjuncts such as focused ultrasound, chest and pelvic imaging, and blood gases are integrated into the primary survey"
   ],
-  "class": "non_infective",
-  "system": "Emergency / Trauma / Critical care",
-  "specialty": "Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Assess and resuscitate simultaneously using the primary survey sequence: airway with cervical spine protection, breathing, circulation with haemorrhage control, disability, and exposure with environment control",
-      "Life threats identified during the primary survey are treated as they are found, before moving to the next step",
-      "The most common preventable cause of early death is uncontrolled haemorrhage, so external bleeding is compressed and internal sources are sought promptly",
-      "Permissive hypotension and balanced resuscitation with blood products help avoid dilutional coagulopathy in bleeding patients until definitive control is achieved",
-      "The lethal triad of hypothermia, acidosis, and coagulopathy worsens outcomes and guides damage-control strategies",
-      "A structured secondary survey (head-to-toe examination and history) is performed only once the patient is stabilised, to detect injuries missed initially",
-      "Reassess frequently, as trauma physiology is dynamic and deterioration can be rapid",
-      "Adjuncts such as focused ultrasound, chest and pelvic imaging, and blood gases are integrated into the primary survey"
+  "pathophysiology": "Polytrauma involves injury to two or more body regions or systems, at least one of which is life-threatening. Simultaneous tissue damage triggers haemorrhage, hypovolaemic shock, and a systemic inflammatory response. Hypoperfusion causes tissue hypoxia and lactic acidosis, while ongoing bleeding and crystalloid dilution impair clotting. Hypothermia further inhibits enzymatic coagulation, and the resulting lethal triad of hypothermia, acidosis, and coagulopathy establishes a self-reinforcing cycle. Later, immune activation predisposes to systemic inflammatory response syndrome, acute respiratory distress, and multi-organ dysfunction.",
+  "additionalDifferentials": [
+   "Isolated major haemorrhage from a single cavity (chest, abdomen, pelvis, long bones)",
+   "Neurogenic shock from spinal cord injury",
+   "Cardiac tamponade or tension pneumothorax as the cause of shock",
+   "Medical collapse (e.g. cardiac event, seizure) preceding a traumatic mechanism",
+   "Toxicological or metabolic contribution to altered consciousness"
+  ],
+  "additionalInvestigations": [
+   "Focused assessment with sonography for trauma (FAST/eFAST) to detect free fluid and pneumothorax",
+   "Chest and pelvic radiographs as primary-survey adjuncts",
+   "Whole-body CT (trauma pan-scan) in the stabilised patient to map injuries",
+   "Arterial blood gas with lactate and base deficit to gauge shock severity",
+   "Group and crossmatch, coagulation studies, and viscoelastic testing to guide transfusion"
+  ],
+  "redFlags": [
+   "Persistent or recurrent hypotension despite resuscitation, indicating ongoing haemorrhage requiring immediate surgical or interventional control",
+   "Rising lactate or worsening base deficit signalling inadequate perfusion",
+   "Signs of the lethal triad (hypothermia, acidosis, coagulopathy) mandating damage-control resuscitation",
+   "Deteriorating conscious level suggesting evolving brain injury or shock",
+   "Mechanism or examination suggesting occult truncal or pelvic bleeding"
+  ],
+  "prognosis": "Outcome depends on injury burden, time to haemorrhage control, and physiological reserve. Early definitive control of bleeding and correction of the lethal triad improve survival, whereas prolonged shock and multi-organ dysfunction carry high mortality.",
+  "pitfalls": [
+   "Completing the secondary survey before life threats in the primary survey are addressed",
+   "Over-resuscitation with crystalloid worsening dilutional coagulopathy and hypothermia",
+   "Anchoring on an obvious dramatic injury while missing a silent source of shock",
+   "Failing to reassess after each intervention as physiology evolves",
+   "Neglecting active warming and haemostatic resuscitation in the bleeding patient"
+  ],
+  "references": [
+   "ATLS (Advanced Trauma Life Support)",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Simultaneous assessment and resuscitation by the primary survey sequence, treating life threats to airway, breathing and circulation as they are found with cervical spine protection",
+   "Immediate control of catastrophic external haemorrhage and prompt identification of internal bleeding, with damage-control surgery to arrest it",
+   "Damage-control resuscitation using balanced blood-product transfusion, permissive hypotension and early tranexamic acid until bleeding is controlled",
+   "Aggressive correction of the lethal triad by active rewarming, restoring perfusion to reverse acidosis and correcting coagulopathy guided by viscoelastic testing",
+   "Structured secondary survey once stabilised to detect missed injuries, followed by definitive fracture fixation and organ repair",
+   "Critical care support for shock, acute respiratory distress and multi-organ dysfunction",
+   "Early rehabilitation and multidisciplinary trauma team coordination across the surgical specialties"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "polytrauma-pathway",
+   "title": "Polytrauma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Assess and resuscitate simultaneously using the primary survey sequence: airway with cervical spine protection, breathing, circulation with haemorrhage control, disability, and exposure with environment control",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent or recurrent hypotension despite resuscitation, indicating ongoing haemorrhage requiring immediate surgical or interventional control",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Focused assessment with sonography for trauma (FAST/eFAST) to detect free fluid and pneumothorax, Chest and pelvic radiographs as primary-survey adjuncts, Whole-body CT (trauma pan-scan) in the stabilised patient to map"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Simultaneous assessment and resuscitation by the primary survey sequence, treating life threats to airway, breathing and circulation as they are found with cervical spine protection"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Completing the secondary survey before life threats in the primary survey are addressed"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of polytrauma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "polytrauma-matrix",
+   "title": "Polytrauma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Assess and resuscitate simultaneously using the primary survey sequence: airway with cervical spine protection, breathing,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Polytrauma involves injury to two or more body regions or systems, at least one of which is life-threatening. Simultaneous tissue damage triggers haemorrhage, hypovolaemic shock, and a systemic inflammatory response. Hypoperfusion causes tissue hypoxia and lactic acidosis, while ongoing bleeding and crystalloid dilution impair clotting. Hypothermia further inhibits enzymatic coagulation, and the resulting lethal triad of hypothermia, acidosis, and coagulopathy establishes a self-reinforcing cycle. Later, immune activation predisposes to systemic inflammatory response syndrome, acute respiratory distress, and multi-organ dysfunction.",
-    "additionalDifferentials": [
-      "Isolated major haemorrhage from a single cavity (chest, abdomen, pelvis, long bones)",
-      "Neurogenic shock from spinal cord injury",
-      "Cardiac tamponade or tension pneumothorax as the cause of shock",
-      "Medical collapse (e.g. cardiac event, seizure) preceding a traumatic mechanism",
-      "Toxicological or metabolic contribution to altered consciousness"
+    [
+     "Key Investigations",
+     "Focused assessment with sonography for trauma (FAST/eFAST) to detect free fluid and pneumothorax, Chest and pelvic radiographs as",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Focused assessment with sonography for trauma (FAST/eFAST) to detect free fluid and pneumothorax",
-      "Chest and pelvic radiographs as primary-survey adjuncts",
-      "Whole-body CT (trauma pan-scan) in the stabilised patient to map injuries",
-      "Arterial blood gas with lactate and base deficit to gauge shock severity",
-      "Group and crossmatch, coagulation studies, and viscoelastic testing to guide transfusion"
+    [
+     "Primary Differentials",
+     "Isolated major haemorrhage from a single cavity (chest, abdomen, pelvis, long bones), Neurogenic shock from spinal cord injury,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent or recurrent hypotension despite resuscitation, indicating ongoing haemorrhage requiring immediate surgical or interventional control",
-      "Rising lactate or worsening base deficit signalling inadequate perfusion",
-      "Signs of the lethal triad (hypothermia, acidosis, coagulopathy) mandating damage-control resuscitation",
-      "Deteriorating conscious level suggesting evolving brain injury or shock",
-      "Mechanism or examination suggesting occult truncal or pelvic bleeding"
+    [
+     "Management Strategy",
+     "Simultaneous assessment and resuscitation by the primary survey sequence, treating life threats to airway, breathing and",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on injury burden, time to haemorrhage control, and physiological reserve. Early definitive control of bleeding and correction of the lethal triad improve survival, whereas prolonged shock and multi-organ dysfunction carry high mortality.",
-    "pitfalls": [
-      "Completing the secondary survey before life threats in the primary survey are addressed",
-      "Over-resuscitation with crystalloid worsening dilutional coagulopathy and hypothermia",
-      "Anchoring on an obvious dramatic injury while missing a silent source of shock",
-      "Failing to reassess after each intervention as physiology evolves",
-      "Neglecting active warming and haemostatic resuscitation in the bleeding patient"
-    ],
-    "references": [
-      "ATLS (Advanced Trauma Life Support)",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Simultaneous assessment and resuscitation by the primary survey sequence, treating life threats to airway, breathing and circulation as they are found with cervical spine protection",
-      "Immediate control of catastrophic external haemorrhage and prompt identification of internal bleeding, with damage-control surgery to arrest it",
-      "Damage-control resuscitation using balanced blood-product transfusion, permissive hypotension and early tranexamic acid until bleeding is controlled",
-      "Aggressive correction of the lethal triad by active rewarming, restoring perfusion to reverse acidosis and correcting coagulopathy guided by viscoelastic testing",
-      "Structured secondary survey once stabilised to detect missed injuries, followed by definitive fracture fixation and organ repair",
-      "Critical care support for shock, acute respiratory distress and multi-organ dysfunction",
-      "Early rehabilitation and multidisciplinary trauma team coordination across the surgical specialties"
+    [
+     "Clinical Pitfall",
+     "Completing the secondary survey before life threats in the primary survey are addressed",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for polytrauma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "polytrauma-diagram",
+   "title": "Polytrauma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

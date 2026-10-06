@@ -1,77 +1,172 @@
 {
-  "id": "anton_syndrome",
-  "name": "Anton syndrome",
-  "aliases": [
-    "Anton-Babinski syndrome",
-    "visual anosognosia",
-    "denial of cortical blindness"
+ "id": "anton_syndrome",
+ "name": "Anton syndrome",
+ "aliases": [
+  "Anton-Babinski syndrome",
+  "visual anosognosia",
+  "denial of cortical blindness"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The patient is cortically blind yet denies the visual loss and behaves as though sighted (visual anosognosia)",
+   "Patients often confabulate descriptions of their surroundings and may bump into objects while insisting they can see",
+   "Pupillary light responses are preserved because the reflex arc does not depend on the visual cortex",
+   "Cortical blindness results from bilateral damage to the occipital visual cortex, most often from posterior circulation infarction",
+   "The denial is thought to reflect disconnection of visual areas from the systems that monitor awareness",
+   "Other causes include hypoxic-ischaemic injury, posterior reversible encephalopathy, trauma, and neurodegeneration",
+   "A normal ocular examination with dense visual loss and preserved pupils should raise suspicion of a cortical cause"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The patient is cortically blind yet denies the visual loss and behaves as though sighted (visual anosognosia)",
-      "Patients often confabulate descriptions of their surroundings and may bump into objects while insisting they can see",
-      "Pupillary light responses are preserved because the reflex arc does not depend on the visual cortex",
-      "Cortical blindness results from bilateral damage to the occipital visual cortex, most often from posterior circulation infarction",
-      "The denial is thought to reflect disconnection of visual areas from the systems that monitor awareness",
-      "Other causes include hypoxic-ischaemic injury, posterior reversible encephalopathy, trauma, and neurodegeneration",
-      "A normal ocular examination with dense visual loss and preserved pupils should raise suspicion of a cortical cause"
+  "pathophysiology": "Anton syndrome is a form of visual anosognosia occurring with cortical blindness, usually from bilateral destruction of the primary visual cortex in the occipital lobes, most commonly by posterior cerebral artery infarction. Vision is lost while the anterior visual pathway and pupillary reflexes remain intact. The striking denial of blindness is attributed to disconnection of the damaged visual cortex from higher monitoring and language systems, so the brain confabulates visual experience. Hypoxic injury, eclampsia-related posterior reversible encephalopathy, trauma, and neurodegenerative disease can produce the same picture.",
+  "additionalDifferentials": [
+   "Cortical blindness without denial",
+   "Balint syndrome from bilateral parieto-occipital damage",
+   "Bilateral ocular or optic nerve disease causing blindness",
+   "Non-organic (functional) visual loss",
+   "Delirium or dementia with confabulation",
+   "Posterior reversible encephalopathy syndrome"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain focused on the occipital lobes",
+   "Vascular imaging for posterior circulation infarction",
+   "Assessment of pupillary responses and anterior visual pathway to confirm a cortical cause",
+   "Blood pressure and evaluation for posterior reversible encephalopathy",
+   "Cognitive assessment for associated confabulation and awareness deficits",
+   "Investigation for hypoxic-ischaemic or neurodegenerative causes as indicated"
+  ],
+  "redFlags": [
+   "Acute bilateral visual loss suggesting posterior circulation stroke requiring urgent assessment",
+   "Severe hypertension suggesting posterior reversible encephalopathy",
+   "Preceding cardiac arrest or hypoxic event",
+   "Rapidly progressive cortical signs needing prompt imaging"
+  ],
+  "prognosis": "Prognosis depends on the cause and extent of cortical damage; some recovery of vision and awareness may occur after ischaemic or reversible causes, but bilateral established infarction often leaves permanent blindness.",
+  "pitfalls": [
+   "Accepting the patient's insistence that vision is normal and missing profound cortical blindness",
+   "Attributing the denial to confusion or a psychiatric cause",
+   "Overlooking preserved pupils as a clue to a cortical rather than ocular cause",
+   "Failing to identify a reversible cause such as hypertensive encephalopathy"
+  ],
+  "references": [
+   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause of cortical blindness: deliver acute ischaemic stroke care with reperfusion (thrombolysis or thrombectomy) where the patient presents within the treatment window, and correct hypoxia",
+   "Where posterior reversible encephalopathy is responsible, control blood pressure, manage eclampsia with magnesium and delivery, and withdraw precipitating agents",
+   "Institute secondary stroke prevention with antiplatelet or anticoagulant therapy as appropriate, a statin, and vascular risk-factor control",
+   "Provide visual and neurorehabilitation with occupational therapy and environmental safety measures to reduce falls and injury given the denial of blindness",
+   "Offer neuropsychological support addressing the anosognosia and confabulation, and educate carers",
+   "Coordinate follow-up through neurology, neuro-ophthalmology and rehabilitation, monitoring for recovery of vision and awareness"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "anton_syndrome-pathway",
+   "title": "Anton syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The patient is cortically blind yet denies the visual loss and behaves as though sighted (visual anosognosia)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute bilateral visual loss suggesting posterior circulation stroke requiring urgent assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain focused on the occipital lobes, Vascular imaging for posterior circulation infarction, Assessment of pupillary responses and anterior visual pathway to confirm a cortical cause"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause of cortical blindness: deliver acute ischaemic stroke care with reperfusion (thrombolysis or thrombectomy) where the patient presents within the treatment window, and correct hypoxia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Accepting the patient's insistence that vision is normal and missing profound cortical blindness"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of anton syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anton_syndrome-matrix",
+   "title": "Anton syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The patient is cortically blind yet denies the visual loss and behaves as though sighted (visual anosognosia)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Anton syndrome is a form of visual anosognosia occurring with cortical blindness, usually from bilateral destruction of the primary visual cortex in the occipital lobes, most commonly by posterior cerebral artery infarction. Vision is lost while the anterior visual pathway and pupillary reflexes remain intact. The striking denial of blindness is attributed to disconnection of the damaged visual cortex from higher monitoring and language systems, so the brain confabulates visual experience. Hypoxic injury, eclampsia-related posterior reversible encephalopathy, trauma, and neurodegenerative disease can produce the same picture.",
-    "additionalDifferentials": [
-      "Cortical blindness without denial",
-      "Balint syndrome from bilateral parieto-occipital damage",
-      "Bilateral ocular or optic nerve disease causing blindness",
-      "Non-organic (functional) visual loss",
-      "Delirium or dementia with confabulation",
-      "Posterior reversible encephalopathy syndrome"
+    [
+     "Key Investigations",
+     "MRI of the brain focused on the occipital lobes, Vascular imaging for posterior circulation infarction, Assessment of pupillary",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain focused on the occipital lobes",
-      "Vascular imaging for posterior circulation infarction",
-      "Assessment of pupillary responses and anterior visual pathway to confirm a cortical cause",
-      "Blood pressure and evaluation for posterior reversible encephalopathy",
-      "Cognitive assessment for associated confabulation and awareness deficits",
-      "Investigation for hypoxic-ischaemic or neurodegenerative causes as indicated"
+    [
+     "Primary Differentials",
+     "Cortical blindness without denial, Balint syndrome from bilateral parieto-occipital damage, Bilateral ocular or optic nerve",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute bilateral visual loss suggesting posterior circulation stroke requiring urgent assessment",
-      "Severe hypertension suggesting posterior reversible encephalopathy",
-      "Preceding cardiac arrest or hypoxic event",
-      "Rapidly progressive cortical signs needing prompt imaging"
+    [
+     "Management Strategy",
+     "Treat the underlying cause of cortical blindness: deliver acute ischaemic stroke care with reperfusion (thrombolysis or",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the cause and extent of cortical damage; some recovery of vision and awareness may occur after ischaemic or reversible causes, but bilateral established infarction often leaves permanent blindness.",
-    "pitfalls": [
-      "Accepting the patient's insistence that vision is normal and missing profound cortical blindness",
-      "Attributing the denial to confusion or a psychiatric cause",
-      "Overlooking preserved pupils as a clue to a cortical rather than ocular cause",
-      "Failing to identify a reversible cause such as hypertensive encephalopathy"
-    ],
-    "references": [
-      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause of cortical blindness: deliver acute ischaemic stroke care with reperfusion (thrombolysis or thrombectomy) where the patient presents within the treatment window, and correct hypoxia",
-      "Where posterior reversible encephalopathy is responsible, control blood pressure, manage eclampsia with magnesium and delivery, and withdraw precipitating agents",
-      "Institute secondary stroke prevention with antiplatelet or anticoagulant therapy as appropriate, a statin, and vascular risk-factor control",
-      "Provide visual and neurorehabilitation with occupational therapy and environmental safety measures to reduce falls and injury given the denial of blindness",
-      "Offer neuropsychological support addressing the anosognosia and confabulation, and educate carers",
-      "Coordinate follow-up through neurology, neuro-ophthalmology and rehabilitation, monitoring for recovery of vision and awareness"
+    [
+     "Clinical Pitfall",
+     "Accepting the patient's insistence that vision is normal and missing profound cortical blindness",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for anton syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "anton-syndrome-diagram",
+   "title": "Anton syndrome: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,80 +1,175 @@
 {
-  "id": "schindler_disease",
-  "name": "Schindler disease",
-  "aliases": [
-    "alpha-N-acetylgalactosaminidase deficiency",
-    "alpha-NAGA deficiency",
-    "NAGA deficiency",
-    "Kanzaki disease (type II)",
-    "neuroaxonal dystrophy, Schindler type"
+ "id": "schindler_disease",
+ "name": "Schindler disease",
+ "aliases": [
+  "alpha-N-acetylgalactosaminidase deficiency",
+  "alpha-NAGA deficiency",
+  "NAGA deficiency",
+  "Kanzaki disease (type II)",
+  "neuroaxonal dystrophy, Schindler type"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by deficiency of the lysosomal enzyme alpha-N-acetylgalactosaminidase, leading to accumulation of glycopeptides and glycolipids with terminal N-acetylgalactosamine",
+   "Type I is a severe infantile neuroaxonal dystrophy with developmental regression, seizures, and cortical visual impairment",
+   "Type II (Kanzaki disease) is a milder adult-onset form with angiokeratoma corporis diffusum and mild cognitive changes",
+   "Intermediate phenotypes between the two extremes are also recognised",
+   "Angiokeratomas in the adult form can mimic those seen in Fabry disease, an important distinguishing point",
+   "Urinary oligosaccharide and glycopeptide screening supports the diagnosis",
+   "Confirmation rests on deficient alpha-N-acetylgalactosaminidase activity and NAGA gene testing"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by deficiency of the lysosomal enzyme alpha-N-acetylgalactosaminidase, leading to accumulation of glycopeptides and glycolipids with terminal N-acetylgalactosamine",
-      "Type I is a severe infantile neuroaxonal dystrophy with developmental regression, seizures, and cortical visual impairment",
-      "Type II (Kanzaki disease) is a milder adult-onset form with angiokeratoma corporis diffusum and mild cognitive changes",
-      "Intermediate phenotypes between the two extremes are also recognised",
-      "Angiokeratomas in the adult form can mimic those seen in Fabry disease, an important distinguishing point",
-      "Urinary oligosaccharide and glycopeptide screening supports the diagnosis",
-      "Confirmation rests on deficient alpha-N-acetylgalactosaminidase activity and NAGA gene testing"
+  "pathophysiology": "Schindler disease is caused by biallelic pathogenic variants in NAGA, encoding lysosomal alpha-N-acetylgalactosaminidase. This enzyme removes terminal alpha-N-acetylgalactosamine residues from glycoproteins, glycopeptides, and glycolipids during lysosomal degradation. Its deficiency leads to accumulation of these incompletely degraded compounds and their excretion in the urine. The mechanism linking substrate storage to the severe infantile neuroaxonal dystrophy of type I remains incompletely understood, but the phenotype features widespread axonal swellings (spheroids). Type II (Kanzaki disease) presents in adulthood with cutaneous angiokeratomas and only mild neurological involvement, and intermediate presentations occur. Inheritance is autosomal recessive.",
+  "additionalDifferentials": [
+   "Fabry disease, given overlapping angiokeratoma corporis diffusum in the adult form",
+   "Infantile neuroaxonal dystrophy from other causes (e.g. PLA2G6-related)",
+   "Neuronal ceroid lipofuscinoses",
+   "Other oligosaccharidoses such as fucosidosis and alpha-mannosidosis",
+   "GM1 and GM2 gangliosidoses",
+   "Other causes of early developmental regression with seizures"
+  ],
+  "additionalInvestigations": [
+   "Leucocyte or fibroblast alpha-N-acetylgalactosaminidase enzyme assay",
+   "Urinary oligosaccharide and glycopeptide analysis",
+   "NAGA gene sequencing",
+   "Brain MRI for infantile forms",
+   "Skin biopsy of angiokeratomas in the adult form",
+   "Neurophysiology and developmental assessment where regression is present"
+  ],
+  "redFlags": [
+   "Progressive developmental regression with seizures in infancy",
+   "Cortical visual impairment",
+   "Loss of previously acquired motor and cognitive skills",
+   "New angiokeratomas prompting distinction from Fabry disease"
+  ],
+  "prognosis": "The infantile type I form is severe with profound neurological deterioration and a poor outlook, whereas the adult type II form follows a much milder course compatible with long survival. No disease-modifying therapy is established.",
+  "pitfalls": [
+   "Confusing the adult angiokeratoma phenotype with Fabry disease without appropriate enzyme testing",
+   "Overlooking the diagnosis in infantile neuroaxonal dystrophy without metabolic screening",
+   "Relying only on glycosaminoglycan screening and missing the oligosaccharide pattern",
+   "Assuming a single uniform phenotype given the wide clinical spectrum"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics",
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-modifying therapy such as enzyme replacement or substrate reduction is established, so management is supportive and tailored to phenotype",
+   "In the infantile type I form, control seizures with antiseizure medication, provide feeding support, and treat spasticity and the consequences of neurodevelopmental regression",
+   "Support cortical visual impairment with physiotherapy and occupational therapy, and introduce palliative care planning in the severe infantile form",
+   "In adult type II (Kanzaki) disease, reassure and manage cutaneous angiokeratomas conservatively, using laser therapy for cosmetically troublesome lesions",
+   "Distinguish from Fabry disease, whose angiokeratomas overlap, to avoid inappropriate Fabry-directed enzyme therapy",
+   "Coordinate multidisciplinary care through metabolic medicine, neurology, dermatology and developmental services",
+   "Offer genetic counselling for this autosomal recessive NAGA disorder and screen at-risk family members"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "schindler_disease-pathway",
+   "title": "Schindler disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by deficiency of the lysosomal enzyme alpha-N-acetylgalactosaminidase, leading to accumulation of glycopeptides and glycolipids with terminal N-acetylgalactosamine",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive developmental regression with seizures in infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Leucocyte or fibroblast alpha-N-acetylgalactosaminidase enzyme assay, Urinary oligosaccharide and glycopeptide analysis, NAGA gene sequencing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-modifying therapy such as enzyme replacement or substrate reduction is established, so management is supportive and tailored to phenotype"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the adult angiokeratoma phenotype with Fabry disease without appropriate enzyme testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of schindler disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "schindler_disease-matrix",
+   "title": "Schindler disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by deficiency of the lysosomal enzyme alpha-N-acetylgalactosaminidase, leading to accumulation of glycopeptides and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Schindler disease is caused by biallelic pathogenic variants in NAGA, encoding lysosomal alpha-N-acetylgalactosaminidase. This enzyme removes terminal alpha-N-acetylgalactosamine residues from glycoproteins, glycopeptides, and glycolipids during lysosomal degradation. Its deficiency leads to accumulation of these incompletely degraded compounds and their excretion in the urine. The mechanism linking substrate storage to the severe infantile neuroaxonal dystrophy of type I remains incompletely understood, but the phenotype features widespread axonal swellings (spheroids). Type II (Kanzaki disease) presents in adulthood with cutaneous angiokeratomas and only mild neurological involvement, and intermediate presentations occur. Inheritance is autosomal recessive.",
-    "additionalDifferentials": [
-      "Fabry disease, given overlapping angiokeratoma corporis diffusum in the adult form",
-      "Infantile neuroaxonal dystrophy from other causes (e.g. PLA2G6-related)",
-      "Neuronal ceroid lipofuscinoses",
-      "Other oligosaccharidoses such as fucosidosis and alpha-mannosidosis",
-      "GM1 and GM2 gangliosidoses",
-      "Other causes of early developmental regression with seizures"
+    [
+     "Key Investigations",
+     "Leucocyte or fibroblast alpha-N-acetylgalactosaminidase enzyme assay, Urinary oligosaccharide and glycopeptide analysis, NAGA",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Leucocyte or fibroblast alpha-N-acetylgalactosaminidase enzyme assay",
-      "Urinary oligosaccharide and glycopeptide analysis",
-      "NAGA gene sequencing",
-      "Brain MRI for infantile forms",
-      "Skin biopsy of angiokeratomas in the adult form",
-      "Neurophysiology and developmental assessment where regression is present"
+    [
+     "Primary Differentials",
+     "Fabry disease, given overlapping angiokeratoma corporis diffusum in the adult form, Infantile neuroaxonal dystrophy from other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive developmental regression with seizures in infancy",
-      "Cortical visual impairment",
-      "Loss of previously acquired motor and cognitive skills",
-      "New angiokeratomas prompting distinction from Fabry disease"
+    [
+     "Management Strategy",
+     "No disease-modifying therapy such as enzyme replacement or substrate reduction is established, so management is supportive and",
+     "Core treatment modality"
     ],
-    "prognosis": "The infantile type I form is severe with profound neurological deterioration and a poor outlook, whereas the adult type II form follows a much milder course compatible with long survival. No disease-modifying therapy is established.",
-    "pitfalls": [
-      "Confusing the adult angiokeratoma phenotype with Fabry disease without appropriate enzyme testing",
-      "Overlooking the diagnosis in infantile neuroaxonal dystrophy without metabolic screening",
-      "Relying only on glycosaminoglycan screening and missing the oligosaccharide pattern",
-      "Assuming a single uniform phenotype given the wide clinical spectrum"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics",
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-modifying therapy such as enzyme replacement or substrate reduction is established, so management is supportive and tailored to phenotype",
-      "In the infantile type I form, control seizures with antiseizure medication, provide feeding support, and treat spasticity and the consequences of neurodevelopmental regression",
-      "Support cortical visual impairment with physiotherapy and occupational therapy, and introduce palliative care planning in the severe infantile form",
-      "In adult type II (Kanzaki) disease, reassure and manage cutaneous angiokeratomas conservatively, using laser therapy for cosmetically troublesome lesions",
-      "Distinguish from Fabry disease, whose angiokeratomas overlap, to avoid inappropriate Fabry-directed enzyme therapy",
-      "Coordinate multidisciplinary care through metabolic medicine, neurology, dermatology and developmental services",
-      "Offer genetic counselling for this autosomal recessive NAGA disorder and screen at-risk family members"
+    [
+     "Clinical Pitfall",
+     "Confusing the adult angiokeratoma phenotype with Fabry disease without appropriate enzyme testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for schindler disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "schindler-disease-diagram",
+   "title": "Schindler disease: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

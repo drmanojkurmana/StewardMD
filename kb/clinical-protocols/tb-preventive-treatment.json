@@ -6,7 +6,23 @@
  "basis": "india",
  "counterpart": "tb-preventive-treatment-international",
  "setting": "Outpatient, TB unit, ART centre, primary care",
- "aliases": ["TPT", "latent TB", "LTBI", "TB infection", "TBI", "IPT", "isoniazid preventive therapy", "3HP", "6H", "1HP", "3RH", "4R", "6Lfx", "PMTPT", "household contact TB"],
+ "aliases": [
+  "TPT",
+  "latent TB",
+  "LTBI",
+  "TB infection",
+  "TBI",
+  "IPT",
+  "isoniazid preventive therapy",
+  "3HP",
+  "6H",
+  "1HP",
+  "3RH",
+  "4R",
+  "6Lfx",
+  "PMTPT",
+  "household contact TB"
+ ],
  "summary": "Rule out active TB (symptoms, chest X-ray, NAAT if symptomatic), then give TPT to people with HIV, all household contacts of pulmonary TB (testing for infection when available but never a barrier) and tested high-risk groups, using 3HP or 6H (or 1HP, 3RH), with 6Lfx or 4R for contacts of drug-resistant TB.",
  "sections": [
   {
@@ -76,19 +92,165 @@
   }
  ],
  "drugs": [
-  { "name": "Isoniazid (6H)", "dose": "Age 10 years and older: 5 mg/kg orally once daily (maximum 300 mg). Under 10 years: 10 mg/kg once daily (range 7 to 15 mg/kg, maximum 300 mg). For 6 months", "notes": "Safe in pregnancy. Add pyridoxine if at risk of neuropathy." },
-  { "name": "3HP: isoniazid plus rifapentine weekly", "dose": "Over 14 years (30 kg and more): isoniazid 900 mg (3 x 300 mg) plus rifapentine 900 mg (6 x 150 mg), or 3 tablets of HP FDC 300/300 mg, once weekly for 12 weeks. Age 2 to 14 years weekly: 10 to 15 kg H 300 mg + P 300 mg; 16 to 23 kg H 500 mg + P 450 mg; 24 to 30 kg H 600 mg + P 600 mg; 31 kg and above H 700 mg + P 750 mg", "notes": "Supervised doses; flu-like and hypersensitivity reactions; not known safe in pregnancy." },
-  { "name": "1HP: isoniazid plus rifapentine daily", "dose": "Age 13 years and older: isoniazid 300 mg plus rifapentine 600 mg orally once daily for 28 days", "notes": "Same interaction profile as 3HP." },
-  { "name": "3RH: rifampicin plus isoniazid daily", "dose": "Under 15 years for 3 months: rifampicin 15 mg/kg (range 10 to 20) and isoniazid 10 mg/kg (range 7 to 15) daily if under 10 years; 10 mg/kg and 5 mg/kg if 10 years or older. RH 75/50 mg dispersible FDC: 4 to 7 kg 1 tablet; 8 to 11 kg 2; 12 to 15 kg 3; 16 to 24 kg 4; 25 kg and above adult formulation", "notes": "NTEP 3RH addendum." },
-  { "name": "Rifampicin (4R)", "dose": "Age 10 years and older: 10 mg/kg orally once daily (maximum 600 mg). Under 10 years: 15 mg/kg once daily (range 10 to 20 mg/kg, maximum 600 mg). For 4 months", "notes": "Contacts of isoniazid-resistant, rifampicin-sensitive TB." },
-  { "name": "Levofloxacin (6Lfx)", "dose": "Over 14 years: below 45 kg 750 mg once daily; 45 kg and above 1 g once daily. Under 15 years (about 15 to 20 mg/kg/day): 5 to 9 kg 150 mg; 10 to 15 kg 200 to 300 mg; 16 to 23 kg 300 to 400 mg; 24 to 34 kg 500 to 750 mg once daily. For 6 months", "notes": "Contacts of MDR/RR-TB with fluoroquinolone-sensitive index. Watch for tendon and joint problems." },
-  { "name": "Pyridoxine (vitamin B6)", "dose": "Children 10 mg, adults 25 mg, adults with HIV 50 mg orally once daily during isoniazid-containing TPT", "notes": "Treat established neuropathy with higher doses and stop isoniazid." }
+  {
+   "name": "Isoniazid (6H)",
+   "dose": "Age 10 years and older: 5 mg/kg orally once daily (maximum 300 mg). Under 10 years: 10 mg/kg once daily (range 7 to 15 mg/kg, maximum 300 mg). For 6 months",
+   "notes": "Safe in pregnancy. Add pyridoxine if at risk of neuropathy."
+  },
+  {
+   "name": "3HP: isoniazid plus rifapentine weekly",
+   "dose": "Over 14 years (30 kg and more): isoniazid 900 mg (3 x 300 mg) plus rifapentine 900 mg (6 x 150 mg), or 3 tablets of HP FDC 300/300 mg, once weekly for 12 weeks. Age 2 to 14 years weekly: 10 to 15 kg H 300 mg + P 300 mg; 16 to 23 kg H 500 mg + P 450 mg; 24 to 30 kg H 600 mg + P 600 mg; 31 kg and above H 700 mg + P 750 mg",
+   "notes": "Supervised doses; flu-like and hypersensitivity reactions; not known safe in pregnancy."
+  },
+  {
+   "name": "1HP: isoniazid plus rifapentine daily",
+   "dose": "Age 13 years and older: isoniazid 300 mg plus rifapentine 600 mg orally once daily for 28 days",
+   "notes": "Same interaction profile as 3HP."
+  },
+  {
+   "name": "3RH: rifampicin plus isoniazid daily",
+   "dose": "Under 15 years for 3 months: rifampicin 15 mg/kg (range 10 to 20) and isoniazid 10 mg/kg (range 7 to 15) daily if under 10 years; 10 mg/kg and 5 mg/kg if 10 years or older. RH 75/50 mg dispersible FDC: 4 to 7 kg 1 tablet; 8 to 11 kg 2; 12 to 15 kg 3; 16 to 24 kg 4; 25 kg and above adult formulation",
+   "notes": "NTEP 3RH addendum."
+  },
+  {
+   "name": "Rifampicin (4R)",
+   "dose": "Age 10 years and older: 10 mg/kg orally once daily (maximum 600 mg). Under 10 years: 15 mg/kg once daily (range 10 to 20 mg/kg, maximum 600 mg). For 4 months",
+   "notes": "Contacts of isoniazid-resistant, rifampicin-sensitive TB."
+  },
+  {
+   "name": "Levofloxacin (6Lfx)",
+   "dose": "Over 14 years: below 45 kg 750 mg once daily; 45 kg and above 1 g once daily. Under 15 years (about 15 to 20 mg/kg/day): 5 to 9 kg 150 mg; 10 to 15 kg 200 to 300 mg; 16 to 23 kg 300 to 400 mg; 24 to 34 kg 500 to 750 mg once daily. For 6 months",
+   "notes": "Contacts of MDR/RR-TB with fluoroquinolone-sensitive index. Watch for tendon and joint problems."
+  },
+  {
+   "name": "Pyridoxine (vitamin B6)",
+   "dose": "Children 10 mg, adults 25 mg, adults with HIV 50 mg orally once daily during isoniazid-containing TPT",
+   "notes": "Treat established neuropathy with higher doses and stop isoniazid."
+  }
  ],
  "sources": [
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "Guidelines for Programmatic Management of TB Preventive Treatment in India", "year": 2021, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/Guidelines-for-Programmatic-Management-of-Tuberculosis-Preventive-Treatment-in-India.pdf" },
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "Technical and operational guidance on 1HP TPT regimen (addendum to national PMTPT guidelines)", "year": 2024, "url": "https://tbcindia.nikshay.in/wp-content/uploads/2024/12/Technical-and-Operational-Guidance-on-1HP-TPT-regimen_addendum-to-National-PMTPT-guidelines.pdf" },
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "Technical and operational guidance on 3RH TPT regimen (addendum to national PMTPT guidelines)", "year": 2024, "url": "https://tbcindia.nikshay.in/wp-content/uploads/2024/12/Technical-and-Operational-Guidance-on-3RH-TPT-regimen_addendum-to-national-PMTPT-guidelines.pdf" },
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "D.O. letter: Expansion of TB Preventive Treatment (6Lfx and 4R for DR-TB contacts, paediatric 3HP)", "year": 2025, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/08/DO-Letter_Expansion-of-TB-Preventive-Treatment-TPT.pdf" }
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "Guidelines for Programmatic Management of TB Preventive Treatment in India",
+   "year": 2021,
+   "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/Guidelines-for-Programmatic-Management-of-Tuberculosis-Preventive-Treatment-in-India.pdf"
+  },
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "Technical and operational guidance on 1HP TPT regimen (addendum to national PMTPT guidelines)",
+   "year": 2024,
+   "url": "https://tbcindia.nikshay.in/wp-content/uploads/2024/12/Technical-and-Operational-Guidance-on-1HP-TPT-regimen_addendum-to-National-PMTPT-guidelines.pdf"
+  },
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "Technical and operational guidance on 3RH TPT regimen (addendum to national PMTPT guidelines)",
+   "year": 2024,
+   "url": "https://tbcindia.nikshay.in/wp-content/uploads/2024/12/Technical-and-Operational-Guidance-on-3RH-TPT-regimen_addendum-to-national-PMTPT-guidelines.pdf"
+  },
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "D.O. letter: Expansion of TB Preventive Treatment (6Lfx and 4R for DR-TB contacts, paediatric 3HP)",
+   "year": 2025,
+   "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/08/DO-Letter_Expansion-of-TB-Preventive-Treatment-TPT.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "tb-preventive-treatment-pathway",
+   "title": "TB preventive treatment (NTEP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "People living with HIV, adults and children over 12 months: TPT for all once active TB is excluded, irrespective of CD4 count, ART status, previous TB treatment or pregnancy. Infants under 12 months with HIV: TPT (6H) only if they are",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Symptom screen: people with HIV use the 4-symptom screen (current cough, fever, weight loss, night sweats). Others: any cough, fever, night sweats, haemoptysis, weight loss, chest pain, breathlessness or fatigue; in children under 5 also",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Other risk groups (immunosuppressive or anti-TNF therapy, silicosis, dialysis, preparing for organ or haematological transplant): test for TB infection first and give TPT only if positive with a normal chest X-ray."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "6Lfx: daily levofloxacin for 6 months for contacts of rifampicin-resistant, fluoroquinolone-sensitive TB. Watch children for joint problems; levofloxacin 100 mg dispersible tablets are available."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review monthly (or at every contact): adherence, TB symptoms, adverse effects (hepatitis, rash, neuropathy, flu-like illness with 3HP), interacting drugs. Stop and seek review for jaundice, dark urine, abdominal pain or vomiting."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for tb preventive treatment (ntep)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tb-preventive-treatment-summary-matrix",
+   "title": "TB preventive treatment (NTEP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "People living with HIV, adults and children over 12 months: TPT for all once active TB is excluded, irrespective of CD4 count, ART status,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Symptom screen: people with HIV use the 4-symptom screen (current cough, fever, weight loss, night sweats). Others: any cough, fever, night",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Isoniazid (6H): Age 10 years and older: 5 mg/kg orally once daily (maximum 300 mg). Under 10 years: 10 mg/kg once daily (range 7 to 15",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving isoniazid alone to someone with undiagnosed active TB, which breeds resistance: always screen symptoms and do an X-ray or NAAT when",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for tb preventive treatment (ntep)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tb-preventive-treatment-diagram",
+   "title": "TB preventive treatment (NTEP): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

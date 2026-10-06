@@ -1,80 +1,175 @@
 {
-  "id": "perioral_dermatitis",
-  "name": "perioral dermatitis",
-  "aliases": [
-    "periorificial dermatitis",
-    "muzzle rash"
+ "id": "perioral_dermatitis",
+ "name": "perioral dermatitis",
+ "aliases": [
+  "periorificial dermatitis",
+  "muzzle rash"
+ ],
+ "class": "non_infective",
+ "system": "Skin and integumentary",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as grouped erythematous papules, papulopustules and fine scaling around the mouth with characteristic sparing of a narrow zone immediately adjacent to the vermilion border.",
+   "Predominantly affects young women, and also occurs in children as periorificial dermatitis around the mouth, nose and eyes.",
+   "Strongly associated with topical corticosteroid use on the face, and also with inhaled and intranasal corticosteroids.",
+   "A rebound flare on withdrawal of topical steroids is characteristic and should be anticipated and explained to the patient.",
+   "First-line management is 'zero therapy' — stopping all topical corticosteroids, heavy cosmetics and occlusive skin care.",
+   "Oral tetracyclines are effective in adults, while macrolides are preferred in young children and pregnancy where tetracyclines are contraindicated.",
+   "A granulomatous variant occurs particularly in children and shows non-caseating granulomas on histology.",
+   "Fluorinated toothpaste, occlusive cosmetics and Demodex have been implicated as contributory factors."
   ],
-  "class": "non_infective",
-  "system": "Skin and integumentary",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as grouped erythematous papules, papulopustules and fine scaling around the mouth with characteristic sparing of a narrow zone immediately adjacent to the vermilion border.",
-      "Predominantly affects young women, and also occurs in children as periorificial dermatitis around the mouth, nose and eyes.",
-      "Strongly associated with topical corticosteroid use on the face, and also with inhaled and intranasal corticosteroids.",
-      "A rebound flare on withdrawal of topical steroids is characteristic and should be anticipated and explained to the patient.",
-      "First-line management is 'zero therapy' — stopping all topical corticosteroids, heavy cosmetics and occlusive skin care.",
-      "Oral tetracyclines are effective in adults, while macrolides are preferred in young children and pregnancy where tetracyclines are contraindicated.",
-      "A granulomatous variant occurs particularly in children and shows non-caseating granulomas on histology.",
-      "Fluorinated toothpaste, occlusive cosmetics and Demodex have been implicated as contributory factors."
+  "pathophysiology": "Perioral dermatitis is a multifactorial follicular and epidermal barrier disorder rather than a true eczema. Impairment of the epidermal barrier and a follicular inflammatory reaction are provoked or aggravated by topical, inhaled or intranasal corticosteroids, occlusive cosmetics and skin care products, and fluorinated dental products. Follicular micro-organisms including Demodex mites and fusobacteria have been implicated in perpetuating the inflammation, and the periorificial distribution reflects the involvement of facial pilosebaceous units.",
+  "additionalDifferentials": [
+   "Acne vulgaris",
+   "Rosacea",
+   "Seborrhoeic dermatitis",
+   "Allergic or irritant contact dermatitis",
+   "Lip-lick (irritant) dermatitis",
+   "Cutaneous sarcoidosis (granulomatous variant)",
+   "Steroid-induced acneiform eruption"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis based on morphology and distribution in most cases",
+   "Detailed history of topical, inhaled and intranasal corticosteroid and cosmetic exposure",
+   "Skin swab if secondary bacterial infection or marked pustulation is suspected",
+   "Patch testing when allergic contact dermatitis is a differential",
+   "Skin biopsy in atypical or granulomatous presentations",
+   "Skin scraping or examination for Demodex in refractory cases"
+  ],
+  "redFlags": [
+   "Ocular involvement with blepharitis or conjunctivitis requiring ophthalmology assessment",
+   "Failure to respond to appropriate therapy, prompting reconsideration of the diagnosis",
+   "Granulomatous features raising the possibility of cutaneous sarcoidosis",
+   "Progressive facial swelling or systemic symptoms"
+  ],
+  "prognosis": "The prognosis is good, with resolution over weeks to a few months once corticosteroids are withdrawn and antibiotic therapy is given, although relapse can occur if provoking factors are reintroduced.",
+  "pitfalls": [
+   "Treating with topical corticosteroids, which briefly improve then worsen the eruption and cause rebound flares.",
+   "Misdiagnosing the condition as acne and missing the steroid or cosmetic trigger.",
+   "Overlooking inhaled or intranasal corticosteroids as an ongoing source.",
+   "Not warning the patient about the expected rebound flare on steroid cessation, leading to loss of adherence."
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine",
+   "British Association of Dermatologists guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute 'zero therapy' first by stopping all topical corticosteroids and heavy occlusive cosmetics and skin-care products",
+   "Anticipate and explain the characteristic rebound flare on withdrawal of topical corticosteroids and manage it supportively",
+   "Prescribe a topical anti-inflammatory agent such as metronidazole, azelaic acid or a topical calcineurin inhibitor",
+   "Give an oral tetracycline for moderate, severe or refractory disease in adults",
+   "Use a macrolide instead in young children and in pregnancy, where tetracyclines are contraindicated",
+   "Advise gentle skin care and avoidance of fluorinated dental products and provoking factors to reduce relapse",
+   "Consider treatment directed at Demodex in refractory cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "perioral_dermatitis-pathway",
+   "title": "perioral dermatitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as grouped erythematous papules, papulopustules and fine scaling around the mouth with characteristic sparing of a narrow zone immediately adjacent to the vermilion border.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Ocular involvement with blepharitis or conjunctivitis requiring ophthalmology assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis based on morphology and distribution in most cases, Detailed history of topical, inhaled and intranasal corticosteroid and cosmetic exposure, Skin swab if secondary bacterial infection or marked"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute 'zero therapy' first by stopping all topical corticosteroids and heavy occlusive cosmetics and skin-care products"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating with topical corticosteroids, which briefly improve then worsen the eruption and cause rebound flares."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of perioral dermatitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "perioral_dermatitis-matrix",
+   "title": "perioral dermatitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as grouped erythematous papules, papulopustules and fine scaling around the mouth with characteristic sparing of a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Perioral dermatitis is a multifactorial follicular and epidermal barrier disorder rather than a true eczema. Impairment of the epidermal barrier and a follicular inflammatory reaction are provoked or aggravated by topical, inhaled or intranasal corticosteroids, occlusive cosmetics and skin care products, and fluorinated dental products. Follicular micro-organisms including Demodex mites and fusobacteria have been implicated in perpetuating the inflammation, and the periorificial distribution reflects the involvement of facial pilosebaceous units.",
-    "additionalDifferentials": [
-      "Acne vulgaris",
-      "Rosacea",
-      "Seborrhoeic dermatitis",
-      "Allergic or irritant contact dermatitis",
-      "Lip-lick (irritant) dermatitis",
-      "Cutaneous sarcoidosis (granulomatous variant)",
-      "Steroid-induced acneiform eruption"
+    [
+     "Key Investigations",
+     "Clinical diagnosis based on morphology and distribution in most cases, Detailed history of topical, inhaled and intranasal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis based on morphology and distribution in most cases",
-      "Detailed history of topical, inhaled and intranasal corticosteroid and cosmetic exposure",
-      "Skin swab if secondary bacterial infection or marked pustulation is suspected",
-      "Patch testing when allergic contact dermatitis is a differential",
-      "Skin biopsy in atypical or granulomatous presentations",
-      "Skin scraping or examination for Demodex in refractory cases"
+    [
+     "Primary Differentials",
+     "Acne vulgaris, Rosacea, Seborrhoeic dermatitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Ocular involvement with blepharitis or conjunctivitis requiring ophthalmology assessment",
-      "Failure to respond to appropriate therapy, prompting reconsideration of the diagnosis",
-      "Granulomatous features raising the possibility of cutaneous sarcoidosis",
-      "Progressive facial swelling or systemic symptoms"
+    [
+     "Management Strategy",
+     "Institute 'zero therapy' first by stopping all topical corticosteroids and heavy occlusive cosmetics and skin-care products",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is good, with resolution over weeks to a few months once corticosteroids are withdrawn and antibiotic therapy is given, although relapse can occur if provoking factors are reintroduced.",
-    "pitfalls": [
-      "Treating with topical corticosteroids, which briefly improve then worsen the eruption and cause rebound flares.",
-      "Misdiagnosing the condition as acne and missing the steroid or cosmetic trigger.",
-      "Overlooking inhaled or intranasal corticosteroids as an ongoing source.",
-      "Not warning the patient about the expected rebound flare on steroid cessation, leading to loss of adherence."
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine",
-      "British Association of Dermatologists guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute 'zero therapy' first by stopping all topical corticosteroids and heavy occlusive cosmetics and skin-care products",
-      "Anticipate and explain the characteristic rebound flare on withdrawal of topical corticosteroids and manage it supportively",
-      "Prescribe a topical anti-inflammatory agent such as metronidazole, azelaic acid or a topical calcineurin inhibitor",
-      "Give an oral tetracycline for moderate, severe or refractory disease in adults",
-      "Use a macrolide instead in young children and in pregnancy, where tetracyclines are contraindicated",
-      "Advise gentle skin care and avoidance of fluorinated dental products and provoking factors to reduce relapse",
-      "Consider treatment directed at Demodex in refractory cases"
+    [
+     "Clinical Pitfall",
+     "Treating with topical corticosteroids, which briefly improve then worsen the eruption and cause rebound flares.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for perioral dermatitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "perioral-dermatitis-diagram",
+   "title": "perioral dermatitis: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

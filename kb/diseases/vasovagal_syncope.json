@@ -136,5 +136,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hb9805ab7"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "vasovagal_syncope-dx-algo",
+      "title": "Vasovagal / orthostatic syncope: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Syncope is a transient, self-limited loss of consciousness from acute global cerebral hypoperfusion, with rapid onset, brief duration, and spontaneous complete recovery; reorientation is almost immediate after a syncopal event.",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Syncope during exertion, or while seated or supine.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: 12-lead ECG when arrhythmia or underlying cardiac disease is suspected; look for brady-/tachyarrhythmias, AV block, acute or old myocardial ischemia/infarction, long QT, and bundle branch block., Supine and standing (3"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison categorizes syncope by mechanism rather than a graded severity score: (1) neurally mediated (reflex/vasovagal) syncope, (2) orthostatic hypotension, and (3) cardiac syncope. For risk stratification, Table 23-1"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Convulsive syncope mimics seizure: myoclonic and other movements occur in up to ~90% of syncopal episodes, but syncope-related jerks are typically arrhythmic, multifocal/generalized, and brief (<30 s), with mild"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for vasovagal / orthostatic syncope."
+    }
+  ],
+  "tables": [
+    {
+      "id": "vasovagal_syncope-matrix",
+      "title": "Vasovagal / orthostatic syncope: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Syncope is a transient, self-limited loss of consciousness from acute global cerebral hypoperfusion, with rapid onset, brief",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG when arrhythmia or underlying cardiac disease is suspected; look for brady-/tachyarrhythmias, AV block, acute or old",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Generalized and partial/partial-complex seizures (with secondary generalization, usually preceded by an aura such as an",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Syncope during exertion, or while seated or supine.",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Convulsive syncope mimics seizure: myoclonic and other movements occur in up to ~90% of syncopal episodes, but syncope-related",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for vasovagal / orthostatic syncope."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "vasovagal-syncope-diagram",
+      "title": "Vasovagal / orthostatic syncope: Cardiovascular & Hemodynamic Diagnostic Schematic",
+      "type": "ecg",
+      "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+      "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+      "annotations": [
+        {
+          "label": "Conduction System",
+          "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+        },
+        {
+          "label": "Coronary Perfusion",
+          "description": "Epicardial arterial distribution and regional myocardial supply zones."
+        },
+        {
+          "label": "Hemodynamics",
+          "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+        }
+      ]
+    }
+  ]
 }

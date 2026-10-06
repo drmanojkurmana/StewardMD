@@ -6,7 +6,27 @@
  "basis": "india",
  "counterpart": "type-2-diabetes-management",
  "setting": "Primary care, NCD clinic, diabetes clinic",
- "aliases": ["T2DM", "type 2 diabetes", "diabetes mellitus", "DM2", "RSSDI 2022", "prediabetes", "IFG", "IGT", "HbA1c target", "postprandial hyperglycaemia", "PPG", "metformin", "SGLT2 inhibitor", "DPP-4 inhibitor", "sulfonylurea", "basal insulin", "premix insulin", "diabetes remission", "ICMR STW diabetes"],
+ "aliases": [
+  "T2DM",
+  "type 2 diabetes",
+  "diabetes mellitus",
+  "DM2",
+  "RSSDI 2022",
+  "prediabetes",
+  "IFG",
+  "IGT",
+  "HbA1c target",
+  "postprandial hyperglycaemia",
+  "PPG",
+  "metformin",
+  "SGLT2 inhibitor",
+  "DPP-4 inhibitor",
+  "sulfonylurea",
+  "basal insulin",
+  "premix insulin",
+  "diabetes remission",
+  "ICMR STW diabetes"
+ ],
  "summary": "Diagnose with FPG 126 mg/dL, 2-hour OGTT glucose 200 mg/dL or HbA1c 6.5% or more. Start lifestyle therapy and metformin at diagnosis, escalate by HbA1c (dual therapy, then a third agent or basal insulin), prefer SGLT2 inhibitors or GLP-1 RAs with ASCVD, heart failure or kidney disease, and aim for HbA1c below 7%, BP below 130/80 and LDL-C below 100 mg/dL.",
  "sections": [
   {
@@ -108,15 +128,143 @@
   }
  ],
  "drugs": [
-  { "name": "Metformin", "dose": "First line from diagnosis; RSSDI dose for prediabetes is 500 mg orally twice daily", "notes": "Stop the night before surgery; do not restart if renal function is impaired." },
-  { "name": "Basal, premix or co-formulation insulin", "dose": "Once daily basal (or once or twice daily premix); titrate by 2 to 4 units weekly or every 2 weeks to pre-meal glucose below 115 mg/dL", "notes": "Use higher goals (below 130 and 180 mg/dL) if hypoglycaemia risk is high." },
-  { "name": "SGLT2 inhibitor", "dose": "Add-on or first choice with ASCVD, heart failure or DKD", "notes": "Genital infections; ketoacidosis risk. RSSDI suggests use up to about 70 years in the elderly." },
-  { "name": "Oral glucose", "dose": "15 to 20 g; repeat after 15 minutes if still below 70 mg/dL", "notes": "Follow with a meal or snack." },
-  { "name": "Glucagon", "dose": "IM or SC; repeat 0.5 mg if no improvement", "notes": "Severe hypoglycaemia when IV glucose is not possible." }
+  {
+   "name": "Metformin",
+   "dose": "First line from diagnosis; RSSDI dose for prediabetes is 500 mg orally twice daily",
+   "notes": "Stop the night before surgery; do not restart if renal function is impaired."
+  },
+  {
+   "name": "Basal, premix or co-formulation insulin",
+   "dose": "Once daily basal (or once or twice daily premix); titrate by 2 to 4 units weekly or every 2 weeks to pre-meal glucose below 115 mg/dL",
+   "notes": "Use higher goals (below 130 and 180 mg/dL) if hypoglycaemia risk is high."
+  },
+  {
+   "name": "SGLT2 inhibitor",
+   "dose": "Add-on or first choice with ASCVD, heart failure or DKD",
+   "notes": "Genital infections; ketoacidosis risk. RSSDI suggests use up to about 70 years in the elderly."
+  },
+  {
+   "name": "Oral glucose",
+   "dose": "15 to 20 g; repeat after 15 minutes if still below 70 mg/dL",
+   "notes": "Follow with a meal or snack."
+  },
+  {
+   "name": "Glucagon",
+   "dose": "IM or SC; repeat 0.5 mg if no improvement",
+   "notes": "Severe hypoglycaemia when IV glucose is not possible."
+  }
  ],
  "sources": [
-  { "org": "Research Society for the Study of Diabetes in India (RSSDI)", "title": "RSSDI Clinical Practice Recommendations for the Management of Type 2 Diabetes Mellitus 2022 (summary document)", "year": 2022, "url": "https://www.rssdi.in/newwebsite/RSSDI-Clinical-Practice-Recommendations-2022%20(1).pdf" },
-  { "org": "ICMR / DHR, MoHFW", "title": "Standard Treatment Workflow: Diabetes mellitus type 2", "year": 2022, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1726567245_diabetes_mellitus_type_2.pdf" }
+  {
+   "org": "Research Society for the Study of Diabetes in India (RSSDI)",
+   "title": "RSSDI Clinical Practice Recommendations for the Management of Type 2 Diabetes Mellitus 2022 (summary document)",
+   "year": 2022,
+   "url": "https://www.rssdi.in/newwebsite/RSSDI-Clinical-Practice-Recommendations-2022%20(1).pdf"
+  },
+  {
+   "org": "ICMR / DHR, MoHFW",
+   "title": "Standard Treatment Workflow: Diabetes mellitus type 2",
+   "year": 2022,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1726567245_diabetes_mellitus_type_2.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "type-2-diabetes-management-india-pathway",
+   "title": "Type 2 diabetes: outpatient management (India, RSSDI) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Diabetes: fasting plasma glucose 126 mg/dL (7.0 mmol/L) or more, 2-hour plasma glucose on 75 g OGTT 200 mg/dL (11.1 mmol/L) or more, HbA1c 6.5% or more, or random glucose 200 mg/dL or more with classic symptoms. Repeat an abnormal test in",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Alert value below 70 mg/dL (3.9 mmol/L); clinically significant below 54 mg/dL (3.0 mmol/L). Warn every patient on insulin, sulfonylureas or glinides.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Weight, BMI, waist, BP, peripheral pulses, foot, skin and oral examination, and dilated fundus examination at diagnosis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Initiate once-daily basal insulin, once-daily premix or co-formulation, or twice-daily premix, with matched meal timing, and teach SMBG and hypoglycaemia recognition."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "ABC targets: HbA1c below 7%, BP below 130/80 mmHg (below 140/80 in the elderly), LDL-C below 100 mg/dL. Post-meal glucose target 160 mg/dL provided hypoglycaemia is avoided. Relax the HbA1c target after unacceptable hypoglycaemia; tighten"
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for type 2 diabetes: outpatient management (india, rssdi)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "type-2-diabetes-management-india-summary-matrix",
+   "title": "Type 2 diabetes: outpatient management (India, RSSDI) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Diabetes: fasting plasma glucose 126 mg/dL (7.0 mmol/L) or more, 2-hour plasma glucose on 75 g OGTT 200 mg/dL (11.1 mmol/L) or more, HbA1c",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Alert value below 70 mg/dL (3.9 mmol/L); clinically significant below 54 mg/dL (3.0 mmol/L). Warn every patient on insulin, sulfonylureas",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Weight, BMI, waist, BP, peripheral pulses, foot, skin and oral examination, and dilated fundus examination at diagnosis.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Metformin: First line from diagnosis; RSSDI dose for prediabetes is 500 mg orally twice daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Relying on fasting glucose alone and missing post-load hyperglycaemia common in Indians.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for type 2 diabetes: outpatient management (india, rssdi)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "type-2-diabetes-management-india-diagram",
+   "title": "Type 2 diabetes: outpatient management (India, RSSDI): Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

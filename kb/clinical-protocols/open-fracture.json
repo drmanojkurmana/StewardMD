@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, orthopaedic and orthoplastic services",
- "aliases": ["compound fracture", "open fracture", "Gustilo", "Gustilo-Anderson", "BOAST open fractures", "orthoplastic", "open tibia fracture", "open fracture antibiotics"],
+ "aliases": [
+  "compound fracture",
+  "open fracture",
+  "Gustilo",
+  "Gustilo-Anderson",
+  "BOAST open fractures",
+  "orthoplastic",
+  "open tibia fracture",
+  "open fracture antibiotics"
+ ],
  "summary": "IV antibiotics within 1 hour of injury, tetanus prophylaxis, photograph then cover the wound with saline-soaked gauze and an occlusive film, realign and splint with repeated neurovascular checks, and arrange orthoplastic debridement: immediately if highly contaminated or ischaemic, within 12 hours if high-energy, otherwise within 24 hours.",
  "sections": [
   {
@@ -74,16 +83,148 @@
   }
  ],
  "drugs": [
-  { "name": "Cefazolin", "dose": "2 g IV every 8 hours (3 g if 120 kg or more)", "notes": "First dose within 1 hour of injury." },
-  { "name": "Gentamicin", "dose": "5 mg/kg IV once daily", "notes": "Add for Gustilo III or heavy contamination; monitor creatinine and levels; use adjusted weight in obesity." },
-  { "name": "Benzylpenicillin", "dose": "2 to 4 million units (1.2 to 2.4 g) IV every 4 to 6 hours", "notes": "Add for farmyard, soil or sewage contamination (clostridial risk)." },
-  { "name": "Clindamycin", "dose": "600 to 900 mg IV every 8 hours", "notes": "Severe beta-lactam allergy." },
-  { "name": "Td vaccine", "dose": "0.5 mL IM", "notes": "If immunisation incomplete, unknown, or last dose more than 5 years ago." },
-  { "name": "Human tetanus immunoglobulin", "dose": "250 IU IM at a separate site", "notes": "If immunisation incomplete or unknown." }
+  {
+   "name": "Cefazolin",
+   "dose": "2 g IV every 8 hours (3 g if 120 kg or more)",
+   "notes": "First dose within 1 hour of injury."
+  },
+  {
+   "name": "Gentamicin",
+   "dose": "5 mg/kg IV once daily",
+   "notes": "Add for Gustilo III or heavy contamination; monitor creatinine and levels; use adjusted weight in obesity."
+  },
+  {
+   "name": "Benzylpenicillin",
+   "dose": "2 to 4 million units (1.2 to 2.4 g) IV every 4 to 6 hours",
+   "notes": "Add for farmyard, soil or sewage contamination (clostridial risk)."
+  },
+  {
+   "name": "Clindamycin",
+   "dose": "600 to 900 mg IV every 8 hours",
+   "notes": "Severe beta-lactam allergy."
+  },
+  {
+   "name": "Td vaccine",
+   "dose": "0.5 mL IM",
+   "notes": "If immunisation incomplete, unknown, or last dose more than 5 years ago."
+  },
+  {
+   "name": "Human tetanus immunoglobulin",
+   "dose": "250 IU IM at a separate site",
+   "notes": "If immunisation incomplete or unknown."
+  }
  ],
  "sources": [
-  { "org": "British Orthopaedic Association / BAPRAS", "title": "BOAST: Open Fractures", "year": 2017, "url": "https://www.boa.ac.uk/asset/3B91AD0A%2D9081%2D4253%2D92F7D90E8DF0FB2C/" },
-  { "org": "NICE", "title": "Fractures (complex): assessment and management (NG37)", "year": 2016, "url": "https://www.nice.org.uk/guidance/NG37/chapter/recommendations" }
+  {
+   "org": "British Orthopaedic Association / BAPRAS",
+   "title": "BOAST: Open Fractures",
+   "year": 2017,
+   "url": "https://www.boa.ac.uk/asset/3B91AD0A%2D9081%2D4253%2D92F7D90E8DF0FB2C/"
+  },
+  {
+   "org": "NICE",
+   "title": "Fractures (complex): assessment and management (NG37)",
+   "year": 2016,
+   "url": "https://www.nice.org.uk/guidance/NG37/chapter/recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "open-fracture-pathway",
+   "title": "Open fractures: emergency management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Treat any wound near a fracture as an open fracture until proven otherwise; a small inside-out puncture wound still counts.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Give IV antibiotics as soon as possible, ideally within 1 hour of injury; do not wait for theatre (BOAST 2017, NICE NG37).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Gustilo-Anderson grade (final grade is assigned at debridement): I wound 1 cm or less and clean; II wound over 1 cm without extensive soft tissue damage; IIIA high-energy injury with adequate soft tissue cover; IIIB periosteal stripping"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Debridement (wound excision) immediately for highly contaminated wounds (agricultural, aquatic, sewage) or vascular compromise; within 12 hours of injury for high-energy fractures (likely Gustilo IIIA or IIIB); within 24 hours for all"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Delaying the first antibiotic dose until the patient reaches theatre."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for open fractures: emergency management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "open-fracture-summary-matrix",
+   "title": "Open fractures: emergency management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Treat any wound near a fracture as an open fracture until proven otherwise; a small inside-out puncture wound still counts.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Give IV antibiotics as soon as possible, ideally within 1 hour of injury; do not wait for theatre (BOAST 2017, NICE NG37).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Cefazolin: 2 g IV every 8 hours (3 g if 120 kg or more)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying the first antibiotic dose until the patient reaches theatre.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for open fractures: emergency management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "open-fracture-diagram",
+   "title": "Open fractures: emergency management: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "bile_reflux_gastritis",
-  "name": "Bile reflux gastritis",
-  "aliases": [
-    "alkaline reflux gastritis",
-    "biliary gastritis",
-    "duodenogastric reflux gastritis",
-    "reactive gastropathy"
+ "id": "bile_reflux_gastritis",
+ "name": "Bile reflux gastritis",
+ "aliases": [
+  "alkaline reflux gastritis",
+  "biliary gastritis",
+  "duodenogastric reflux gastritis",
+  "reactive gastropathy"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by reflux of alkaline duodenal contents, bile, and pancreatic secretions into the stomach, damaging the mucosa",
+   "Classically follows gastric surgery, particularly Billroth II reconstruction or pyloroplasty, where the pylorus no longer prevents duodenogastric reflux",
+   "Presents with persistent burning epigastric pain, bilious vomiting, and sometimes weight loss, with pain that is characteristically not relieved by acid suppression or antacids",
+   "Endoscopy shows bile pooling, mucosal erythema and oedema, and friability, chiefly around the stoma or in the gastric remnant",
+   "Histology reveals reactive (chemical) gastropathy with foveolar hyperplasia, oedema, and vasodilatation but little active inflammation",
+   "Bile-binding agents and prokinetics may help, and surgical diversion (such as conversion to a Roux-en-Y loop) is considered for severe, refractory disease",
+   "Long-standing bile reflux in the gastric remnant is associated with an increased risk of mucosal metaplasia and stump carcinoma"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by reflux of alkaline duodenal contents, bile, and pancreatic secretions into the stomach, damaging the mucosa",
-      "Classically follows gastric surgery, particularly Billroth II reconstruction or pyloroplasty, where the pylorus no longer prevents duodenogastric reflux",
-      "Presents with persistent burning epigastric pain, bilious vomiting, and sometimes weight loss, with pain that is characteristically not relieved by acid suppression or antacids",
-      "Endoscopy shows bile pooling, mucosal erythema and oedema, and friability, chiefly around the stoma or in the gastric remnant",
-      "Histology reveals reactive (chemical) gastropathy with foveolar hyperplasia, oedema, and vasodilatation but little active inflammation",
-      "Bile-binding agents and prokinetics may help, and surgical diversion (such as conversion to a Roux-en-Y loop) is considered for severe, refractory disease",
-      "Long-standing bile reflux in the gastric remnant is associated with an increased risk of mucosal metaplasia and stump carcinoma"
+  "pathophysiology": "Bile reflux gastritis develops when duodenal contents rich in bile acids, lysolecithin, and pancreatic enzymes pass retrogradely into the stomach and disrupt the gastric mucosal barrier. This is most likely after operations that ablate or bypass the pyloric mechanism, allowing free duodenogastric reflux. The detergent action of bile salts injures surface epithelial cells and increases mucosal permeability, provoking a reactive (chemical) gastropathy characterised by foveolar hyperplasia, oedema, and capillary dilatation rather than a dense inflammatory infiltrate, and chronic injury predisposes to intestinal metaplasia.",
+  "additionalDifferentials": [
+   "Helicobacter pylori-associated gastritis",
+   "Non-steroidal anti-inflammatory drug-induced gastropathy",
+   "Peptic ulcer disease or recurrent stomal ulceration",
+   "Afferent loop syndrome after gastric surgery",
+   "Gastroparesis or delayed gastric emptying",
+   "Functional dyspepsia"
+  ],
+  "additionalInvestigations": [
+   "Upper gastrointestinal endoscopy showing bile pooling and mucosal changes, with biopsies confirming reactive gastropathy",
+   "Helicobacter pylori testing to exclude a co-existing cause",
+   "Hepatobiliary iminodiacetic acid scintigraphy to demonstrate enterogastric bile reflux",
+   "Gastric emptying study where delayed emptying is suspected",
+   "Cross-sectional imaging or contrast study to assess post-surgical anatomy and afferent loop",
+   "Full blood count and nutritional assessment where weight loss is present"
+  ],
+  "redFlags": [
+   "Progressive weight loss or a mass in the gastric remnant suggesting stump carcinoma",
+   "Gastrointestinal bleeding or persistent anaemia",
+   "Intractable bilious vomiting causing dehydration or malnutrition",
+   "New dysplasia or metaplasia on surveillance biopsy of the remnant"
+  ],
+  "prognosis": "Symptoms are often chronic and can be difficult to control medically; surgical bile diversion helps selected patients but carries its own morbidity, and long-standing reflux in a gastric remnant warrants awareness of the elevated risk of malignancy.",
+  "pitfalls": [
+   "Persisting with acid-suppressing therapy that does not relieve alkaline reflux symptoms",
+   "Overlooking Helicobacter pylori or drug-induced injury as an alternative explanation",
+   "Attributing bilious vomiting to reflux gastritis when afferent loop obstruction is responsible",
+   "Neglecting surveillance for metaplasia and carcinoma in the long-term gastric remnant"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Yamada's Textbook of Gastroenterology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Bile-binding agents such as colestyramine and mucosal protectants such as sucralfate to bind refluxed bile and shield the gastric mucosa",
+   "Prokinetics such as metoclopramide or domperidone to accelerate gastric and duodenal clearance and reduce duodenogastric reflux",
+   "Ursodeoxycholic acid to replace injurious bile acids with a less toxic species and relieve symptoms",
+   "Recognise that acid suppression and antacids are typically ineffective, and test for and eradicate any coexisting Helicobacter pylori",
+   "Surgical bile diversion, such as conversion to a Roux-en-Y loop, for severe refractory disease",
+   "Endoscopic surveillance of the gastric remnant given the raised long-term malignancy risk, with nutritional support where weight loss occurs"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bile_reflux_gastritis-pathway",
+   "title": "Bile reflux gastritis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by reflux of alkaline duodenal contents, bile, and pancreatic secretions into the stomach, damaging the mucosa",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive weight loss or a mass in the gastric remnant suggesting stump carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Upper gastrointestinal endoscopy showing bile pooling and mucosal changes, with biopsies confirming reactive gastropathy, Helicobacter pylori testing to exclude a co-existing cause, Hepatobiliary iminodiacetic acid"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Bile-binding agents such as colestyramine and mucosal protectants such as sucralfate to bind refluxed bile and shield the gastric mucosa"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Persisting with acid-suppressing therapy that does not relieve alkaline reflux symptoms"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bile reflux gastritis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bile_reflux_gastritis-matrix",
+   "title": "Bile reflux gastritis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by reflux of alkaline duodenal contents, bile, and pancreatic secretions into the stomach, damaging the mucosa",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bile reflux gastritis develops when duodenal contents rich in bile acids, lysolecithin, and pancreatic enzymes pass retrogradely into the stomach and disrupt the gastric mucosal barrier. This is most likely after operations that ablate or bypass the pyloric mechanism, allowing free duodenogastric reflux. The detergent action of bile salts injures surface epithelial cells and increases mucosal permeability, provoking a reactive (chemical) gastropathy characterised by foveolar hyperplasia, oedema, and capillary dilatation rather than a dense inflammatory infiltrate, and chronic injury predisposes to intestinal metaplasia.",
-    "additionalDifferentials": [
-      "Helicobacter pylori-associated gastritis",
-      "Non-steroidal anti-inflammatory drug-induced gastropathy",
-      "Peptic ulcer disease or recurrent stomal ulceration",
-      "Afferent loop syndrome after gastric surgery",
-      "Gastroparesis or delayed gastric emptying",
-      "Functional dyspepsia"
+    [
+     "Key Investigations",
+     "Upper gastrointestinal endoscopy showing bile pooling and mucosal changes, with biopsies confirming reactive gastropathy,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Upper gastrointestinal endoscopy showing bile pooling and mucosal changes, with biopsies confirming reactive gastropathy",
-      "Helicobacter pylori testing to exclude a co-existing cause",
-      "Hepatobiliary iminodiacetic acid scintigraphy to demonstrate enterogastric bile reflux",
-      "Gastric emptying study where delayed emptying is suspected",
-      "Cross-sectional imaging or contrast study to assess post-surgical anatomy and afferent loop",
-      "Full blood count and nutritional assessment where weight loss is present"
+    [
+     "Primary Differentials",
+     "Helicobacter pylori-associated gastritis, Non-steroidal anti-inflammatory drug-induced gastropathy, Peptic ulcer disease or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive weight loss or a mass in the gastric remnant suggesting stump carcinoma",
-      "Gastrointestinal bleeding or persistent anaemia",
-      "Intractable bilious vomiting causing dehydration or malnutrition",
-      "New dysplasia or metaplasia on surveillance biopsy of the remnant"
+    [
+     "Management Strategy",
+     "Bile-binding agents such as colestyramine and mucosal protectants such as sucralfate to bind refluxed bile and shield the gastric",
+     "Core treatment modality"
     ],
-    "prognosis": "Symptoms are often chronic and can be difficult to control medically; surgical bile diversion helps selected patients but carries its own morbidity, and long-standing reflux in a gastric remnant warrants awareness of the elevated risk of malignancy.",
-    "pitfalls": [
-      "Persisting with acid-suppressing therapy that does not relieve alkaline reflux symptoms",
-      "Overlooking Helicobacter pylori or drug-induced injury as an alternative explanation",
-      "Attributing bilious vomiting to reflux gastritis when afferent loop obstruction is responsible",
-      "Neglecting surveillance for metaplasia and carcinoma in the long-term gastric remnant"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Yamada's Textbook of Gastroenterology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Bile-binding agents such as colestyramine and mucosal protectants such as sucralfate to bind refluxed bile and shield the gastric mucosa",
-      "Prokinetics such as metoclopramide or domperidone to accelerate gastric and duodenal clearance and reduce duodenogastric reflux",
-      "Ursodeoxycholic acid to replace injurious bile acids with a less toxic species and relieve symptoms",
-      "Recognise that acid suppression and antacids are typically ineffective, and test for and eradicate any coexisting Helicobacter pylori",
-      "Surgical bile diversion, such as conversion to a Roux-en-Y loop, for severe refractory disease",
-      "Endoscopic surveillance of the gastric remnant given the raised long-term malignancy risk, with nutritional support where weight loss occurs"
+    [
+     "Clinical Pitfall",
+     "Persisting with acid-suppressing therapy that does not relieve alkaline reflux symptoms",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bile reflux gastritis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bile-reflux-gastritis-diagram",
+   "title": "Bile reflux gastritis: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

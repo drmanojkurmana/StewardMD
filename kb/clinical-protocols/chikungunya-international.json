@@ -6,7 +6,16 @@
  "basis": "international",
  "counterpart": "chikungunya",
  "setting": "Outpatient, ward",
- "aliases": ["CHIKV", "chikungunya fever", "chronic chikungunya arthritis", "post-chikungunya rheumatism", "arboviral arthritis", "WHO arboviral guideline 2025", "PAHO 2022", "alphavirus"],
+ "aliases": [
+  "CHIKV",
+  "chikungunya fever",
+  "chronic chikungunya arthritis",
+  "post-chikungunya rheumatism",
+  "arboviral arthritis",
+  "WHO arboviral guideline 2025",
+  "PAHO 2022",
+  "alphavirus"
+ ],
  "summary": "Fever with disabling polyarthralgia. Acute phase: fluids, paracetamol or metamizole, and no NSAIDs or steroids until dengue is excluded. Confirmed chikungunya with persistent arthritis: NSAIDs, then a short low-dose steroid course for severe post-acute disease; chronic inflammatory arthritis beyond 3 months needs rheumatology and DMARDs (usually methotrexate).",
  "sections": [
   {
@@ -98,19 +107,165 @@
   }
  ],
  "drugs": [
-  { "name": "Paracetamol", "dose": "Adults over 50 kg 500 mg to 1 g every 4 to 6 hours, maximum 4 g/day; children 10 to 15 mg/kg every 4 to 6 hours, maximum 60 mg/kg/day", "notes": "First line in the acute phase and in pregnancy." },
-  { "name": "Metamizole (dipyrone)", "dose": "Adults 500 mg to 1 g per dose (maximum 4 g/day); children 10 mg/kg per dose up to 4 times daily", "notes": "Alternative where licensed. Agranulocytosis; not in the third trimester." },
-  { "name": "Tramadol", "dose": "Adults 50 to 100 mg orally every 4 to 6 hours, maximum 400 mg/day", "notes": "Uncontrolled pain in adults. Not in children under 12 years." },
-  { "name": "Ibuprofen", "dose": "Adults 400 to 600 mg orally 3 times daily with food, maximum 2.4 g/day", "notes": "Only after dengue is excluded; confirmed chikungunya with persistent arthralgia." },
-  { "name": "Prednisolone", "dose": "Usually 10 to 20 mg/day orally (up to 0.5 mg/kg/day in severe cases), tapered, total about 4 weeks or less", "notes": "Post-acute severe polyarthritis or tenosynovitis despite NSAIDs. Not in the acute phase." },
-  { "name": "Methotrexate", "dose": "7.5 mg orally once weekly, increased as needed to a maximum of 25 mg once weekly, with folic acid", "notes": "Chronic inflammatory arthritis under rheumatology; monitor FBC, liver and renal function. Contraindicated in pregnancy." },
-  { "name": "Hydroxychloroquine", "dose": "200 to 400 mg orally daily (not above 5 mg/kg/day actual body weight)", "notes": "Milder chronic inflammatory arthritis or in combination; retinal screening with long-term use." }
+  {
+   "name": "Paracetamol",
+   "dose": "Adults over 50 kg 500 mg to 1 g every 4 to 6 hours, maximum 4 g/day; children 10 to 15 mg/kg every 4 to 6 hours, maximum 60 mg/kg/day",
+   "notes": "First line in the acute phase and in pregnancy."
+  },
+  {
+   "name": "Metamizole (dipyrone)",
+   "dose": "Adults 500 mg to 1 g per dose (maximum 4 g/day); children 10 mg/kg per dose up to 4 times daily",
+   "notes": "Alternative where licensed. Agranulocytosis; not in the third trimester."
+  },
+  {
+   "name": "Tramadol",
+   "dose": "Adults 50 to 100 mg orally every 4 to 6 hours, maximum 400 mg/day",
+   "notes": "Uncontrolled pain in adults. Not in children under 12 years."
+  },
+  {
+   "name": "Ibuprofen",
+   "dose": "Adults 400 to 600 mg orally 3 times daily with food, maximum 2.4 g/day",
+   "notes": "Only after dengue is excluded; confirmed chikungunya with persistent arthralgia."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "Usually 10 to 20 mg/day orally (up to 0.5 mg/kg/day in severe cases), tapered, total about 4 weeks or less",
+   "notes": "Post-acute severe polyarthritis or tenosynovitis despite NSAIDs. Not in the acute phase."
+  },
+  {
+   "name": "Methotrexate",
+   "dose": "7.5 mg orally once weekly, increased as needed to a maximum of 25 mg once weekly, with folic acid",
+   "notes": "Chronic inflammatory arthritis under rheumatology; monitor FBC, liver and renal function. Contraindicated in pregnancy."
+  },
+  {
+   "name": "Hydroxychloroquine",
+   "dose": "200 to 400 mg orally daily (not above 5 mg/kg/day actual body weight)",
+   "notes": "Milder chronic inflammatory arthritis or in combination; retinal screening with long-term use."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever", "year": 2025, "url": "https://iris.who.int/handle/10665/381804" },
-  { "org": "PAHO", "title": "Evidence synthesis: guidelines for diagnosis and treatment of dengue, chikungunya, and zika in the Region of the Americas", "year": 2022, "url": "https://journal.paho.org/en/articles/evidence-synthesis-guidelines-diagnosis-and-treatment-dengue-chikungunya-and-zika-region" },
-  { "org": "CDC", "title": "Treatment and Prevention of Chikungunya Virus Disease", "year": 2026, "url": "https://www.cdc.gov/chikungunya/hcp/treatment-prevention/index.html" },
-  { "org": "eClinicalMedicine", "title": "An evaluation of global Chikungunya clinical management guidelines: a systematic review", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9526181/" }
+  {
+   "org": "WHO",
+   "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever",
+   "year": 2025,
+   "url": "https://iris.who.int/handle/10665/381804"
+  },
+  {
+   "org": "PAHO",
+   "title": "Evidence synthesis: guidelines for diagnosis and treatment of dengue, chikungunya, and zika in the Region of the Americas",
+   "year": 2022,
+   "url": "https://journal.paho.org/en/articles/evidence-synthesis-guidelines-diagnosis-and-treatment-dengue-chikungunya-and-zika-region"
+  },
+  {
+   "org": "CDC",
+   "title": "Treatment and Prevention of Chikungunya Virus Disease",
+   "year": 2026,
+   "url": "https://www.cdc.gov/chikungunya/hcp/treatment-prevention/index.html"
+  },
+  {
+   "org": "eClinicalMedicine",
+   "title": "An evaluation of global Chikungunya clinical management guidelines: a systematic review",
+   "year": 2022,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9526181/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chikungunya-international-pathway",
+   "title": "Chikungunya: acute, subacute and chronic (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Abrupt fever with severe, often incapacitating, symmetrical polyarthralgia of the hands, wrists and ankles, with joint swelling, myalgia, headache, fatigue and rash, usually 4 to 8 days after the mosquito bite.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Phases used by most guidelines: acute (first 3 weeks), post-acute or subacute (3 weeks to 3 months) and chronic (beyond 3 months). Joint pain may last weeks, months or years.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "RT-PCR for CHIKV RNA in the first week; IgM (ELISA or RDT) from the end of the first week, detectable for about 2 months. IgM cross-reacts with other alphaviruses such as Mayaro and O'nyong-nyong."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "If IV fluid is needed, use crystalloid rather than colloid, guided by capillary refill time and lactate; give smaller volumes with frequent reassessment in infants, older adults and suspected myocarditis."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Giving NSAIDs or aspirin before dengue is excluded."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chikungunya: acute, subacute and chronic (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chikungunya-international-summary-matrix",
+   "title": "Chikungunya: acute, subacute and chronic (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Abrupt fever with severe, often incapacitating, symmetrical polyarthralgia of the hands, wrists and ankles, with joint swelling, myalgia,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "If IV fluid is needed, use crystalloid rather than colloid, guided by capillary refill time and lactate; give smaller volumes with frequent",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "RT-PCR for CHIKV RNA in the first week; IgM (ELISA or RDT) from the end of the first week, detectable for about 2 months. IgM cross-reacts",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Paracetamol: Adults over 50 kg 500 mg to 1 g every 4 to 6 hours, maximum 4 g/day; children 10 to 15 mg/kg every 4 to 6 hours, maximum 60",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving NSAIDs or aspirin before dengue is excluded.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chikungunya: acute, subacute and chronic (who)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chikungunya-international-diagram",
+   "title": "Chikungunya: acute, subacute and chronic (WHO): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

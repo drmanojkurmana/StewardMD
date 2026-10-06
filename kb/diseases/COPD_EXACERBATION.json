@@ -222,5 +222,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h9847f930"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "copd_exacerbation-dx-algo",
+      "title": "Acute COPD Exacerbation: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "An exacerbation is defined clinically as an episodic acute worsening of respiratory symptoms (increased dyspnea, cough, and/or a change in sputum volume and character), usually evolving over fewer than 14 days; it may or may not be",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Respiratory acidosis with hypercarbia (PCO2 >45 mmHg, pH <=7.35) - an indication for noninvasive positive-pressure ventilation, which reduces mortality, need for intubation, complications, and length of stay",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Arterial blood gas in patients with advanced COPD, a history of hypercarbia, altered mental status (confusion, sleepiness), or significant distress; hypercarbia is defined as PCO2 >45 mmHg and carries treatment"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Assessment should grade both the severity of the acute exacerbation and the severity of preexisting COPD; the more severe either component, the greater the likelihood of needing hospital admission. An expert consensus"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Withholding needed supplemental oxygen for fear of CO2 retention is an error; oxygen should be titrated to 88-92% saturation to correct hypoxemia despite a possible modest PCO2 rise (p.2302)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute copd exacerbation."
+    }
+  ],
+  "tables": [
+    {
+      "id": "copd_exacerbation-matrix",
+      "title": "Acute COPD Exacerbation: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An exacerbation is defined clinically as an episodic acute worsening of respiratory symptoms (increased dyspnea, cough, and/or a",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gas in patients with advanced COPD, a history of hypercarbia, altered mental status (confusion, sleepiness), or",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Respiratory acidosis with hypercarbia (PCO2 >45 mmHg, pH <=7.35) - an indication for noninvasive positive-pressure ventilation,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding needed supplemental oxygen for fear of CO2 retention is an error; oxygen should be titrated to 88-92% saturation to",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute copd exacerbation."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "copd-exacerbation-diagram",
+      "title": "Acute COPD Exacerbation: Pulmonary & Chest Radiograph Diagnostic Schematic",
+      "type": "xray",
+      "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+      "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Airway Tree",
+          "description": "Tracheobronchial branching down to lobar and segmental divisions."
+        },
+        {
+          "label": "Parenchyma",
+          "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+        },
+        {
+          "label": "Pleural Space",
+          "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+        }
+      ]
+    }
+  ]
 }

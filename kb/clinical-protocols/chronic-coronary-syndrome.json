@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient clinic, ward",
- "aliases": ["CCS", "stable angina", "chronic stable angina", "stable CAD", "IHD", "ischaemic heart disease", "angina pectoris", "ANOCA", "INOCA", "ESC 2024 CCS"],
+ "aliases": [
+  "CCS",
+  "stable angina",
+  "chronic stable angina",
+  "stable CAD",
+  "IHD",
+  "ischaemic heart disease",
+  "angina pectoris",
+  "ANOCA",
+  "INOCA",
+  "ESC 2024 CCS"
+ ],
  "summary": "Estimate pre-test likelihood, then use CCTA (likelihood above 5 to 50%) or functional imaging (above 15 to 85%); give sublingual nitrate plus a beta-blocker and/or CCB, lifelong aspirin or clopidogrel, high-intensity statin to LDL-C below 55 mg/dL, and revascularise for refractory angina or high-risk anatomy (ESC 2024).",
  "sections": [
   {
@@ -96,21 +107,179 @@
   }
  ],
  "drugs": [
-  { "name": "Glyceryl trinitrate (GTN), sublingual", "dose": "300 to 600 mcg tablet or 400 mcg spray (1 to 2 puffs) sublingually at onset; repeat after 5 minutes", "notes": "Also before exertion. Avoid with PDE5 inhibitors and in HCM with outflow obstruction." },
-  { "name": "Bisoprolol", "dose": "Start 2.5 to 5 mg orally once daily; titrate to 10 mg once daily (max 20 mg)", "notes": "Aim for a resting heart rate around 55 to 60 bpm. Avoid in marked bradycardia, high-grade AV block, decompensated heart failure." },
-  { "name": "Amlodipine", "dose": "5 mg orally once daily, up to 10 mg once daily", "notes": "Safe to combine with a beta-blocker. Ankle oedema is common." },
-  { "name": "Ranolazine (prolonged release)", "dose": "375 mg orally twice daily; after 2 to 4 weeks 500 mg twice daily, up to 750 mg twice daily", "notes": "Contraindicated with strong CYP3A4 inhibitors, CrCl below 30 mL/min, moderate or severe hepatic impairment. Prolongs QT." },
-  { "name": "Ivabradine", "dose": "5 mg orally twice daily (2.5 mg twice daily if 75 years or older); after 3 to 4 weeks up to 7.5 mg twice daily", "notes": "Sinus rhythm with resting HR 70 bpm or more and LVEF below 40%. Reduce if HR falls below 50 bpm. Not with verapamil or diltiazem." },
-  { "name": "Aspirin", "dose": "75 to 100 mg orally once daily, lifelong", "notes": "Clopidogrel 75 mg daily if aspirin is not tolerated or as an equal alternative." },
-  { "name": "Clopidogrel", "dose": "75 mg orally once daily (600 mg loading dose before elective PCI)", "notes": "Default P2Y12 inhibitor with aspirin for up to 6 months after elective PCI, and with an OAC after PCI." },
-  { "name": "Rivaroxaban (vascular dose)", "dose": "2.5 mg orally twice daily with aspirin 75 to 100 mg once daily", "notes": "High ischaemic risk without high bleeding risk. Not an anticoagulant dose for AF or VTE." },
-  { "name": "Atorvastatin", "dose": "40 to 80 mg orally once daily (or rosuvastatin 20 to 40 mg once daily)", "notes": "Target LDL-C below 55 mg/dL (1.4 mmol/L) and at least 50% reduction; add ezetimibe 10 mg daily if not at target." },
-  { "name": "Colchicine (low dose)", "dose": "0.5 mg orally once daily", "notes": "Should be considered in atherosclerotic CAD. Avoid in severe renal or hepatic impairment and with strong CYP3A4 or P-gp inhibitors (for example clarithromycin)." }
+  {
+   "name": "Glyceryl trinitrate (GTN), sublingual",
+   "dose": "300 to 600 mcg tablet or 400 mcg spray (1 to 2 puffs) sublingually at onset; repeat after 5 minutes",
+   "notes": "Also before exertion. Avoid with PDE5 inhibitors and in HCM with outflow obstruction."
+  },
+  {
+   "name": "Bisoprolol",
+   "dose": "Start 2.5 to 5 mg orally once daily; titrate to 10 mg once daily (max 20 mg)",
+   "notes": "Aim for a resting heart rate around 55 to 60 bpm. Avoid in marked bradycardia, high-grade AV block, decompensated heart failure."
+  },
+  {
+   "name": "Amlodipine",
+   "dose": "5 mg orally once daily, up to 10 mg once daily",
+   "notes": "Safe to combine with a beta-blocker. Ankle oedema is common."
+  },
+  {
+   "name": "Ranolazine (prolonged release)",
+   "dose": "375 mg orally twice daily; after 2 to 4 weeks 500 mg twice daily, up to 750 mg twice daily",
+   "notes": "Contraindicated with strong CYP3A4 inhibitors, CrCl below 30 mL/min, moderate or severe hepatic impairment. Prolongs QT."
+  },
+  {
+   "name": "Ivabradine",
+   "dose": "5 mg orally twice daily (2.5 mg twice daily if 75 years or older); after 3 to 4 weeks up to 7.5 mg twice daily",
+   "notes": "Sinus rhythm with resting HR 70 bpm or more and LVEF below 40%. Reduce if HR falls below 50 bpm. Not with verapamil or diltiazem."
+  },
+  {
+   "name": "Aspirin",
+   "dose": "75 to 100 mg orally once daily, lifelong",
+   "notes": "Clopidogrel 75 mg daily if aspirin is not tolerated or as an equal alternative."
+  },
+  {
+   "name": "Clopidogrel",
+   "dose": "75 mg orally once daily (600 mg loading dose before elective PCI)",
+   "notes": "Default P2Y12 inhibitor with aspirin for up to 6 months after elective PCI, and with an OAC after PCI."
+  },
+  {
+   "name": "Rivaroxaban (vascular dose)",
+   "dose": "2.5 mg orally twice daily with aspirin 75 to 100 mg once daily",
+   "notes": "High ischaemic risk without high bleeding risk. Not an anticoagulant dose for AF or VTE."
+  },
+  {
+   "name": "Atorvastatin",
+   "dose": "40 to 80 mg orally once daily (or rosuvastatin 20 to 40 mg once daily)",
+   "notes": "Target LDL-C below 55 mg/dL (1.4 mmol/L) and at least 50% reduction; add ezetimibe 10 mg daily if not at target."
+  },
+  {
+   "name": "Colchicine (low dose)",
+   "dose": "0.5 mg orally once daily",
+   "notes": "Should be considered in atherosclerotic CAD. Avoid in severe renal or hepatic impairment and with strong CYP3A4 or P-gp inhibitors (for example clarithromycin)."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2024 ESC Guidelines for the management of chronic coronary syndromes", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/36/3415/7743115" },
-  { "org": "ESC", "title": "2024 ESC Guidelines for the management of chronic coronary syndromes (guideline resources page)", "year": 2024, "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/chronic-coronary-syndromes/" },
-  { "org": "European Heart Journal: Cardiovascular Pharmacotherapy", "title": "2024 ESC guidelines on chronic coronary syndromes: what is new in pharmacotherapy?", "year": 2024, "url": "https://academic.oup.com/ehjcvp/article/10/7/572/7759705" }
+  {
+   "org": "ESC",
+   "title": "2024 ESC Guidelines for the management of chronic coronary syndromes",
+   "year": 2024,
+   "url": "https://academic.oup.com/eurheartj/article/45/36/3415/7743115"
+  },
+  {
+   "org": "ESC",
+   "title": "2024 ESC Guidelines for the management of chronic coronary syndromes (guideline resources page)",
+   "year": 2024,
+   "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/chronic-coronary-syndromes/"
+  },
+  {
+   "org": "European Heart Journal: Cardiovascular Pharmacotherapy",
+   "title": "2024 ESC guidelines on chronic coronary syndromes: what is new in pharmacotherapy?",
+   "year": 2024,
+   "url": "https://academic.oup.com/ehjcvp/article/10/7/572/7759705"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "ccs-workup-algo",
+   "title": "Chronic Coronary Syndrome Diagnostic and Antianginal Optimization Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & Basic Assessment",
+     "action": "Assess chest pain characteristics (typical vs atypical vs non-cardiac). Perform 12-lead resting ECG, baseline biochemistry, and resting echocardiography (assess LV ejection fraction and regional wall motion).",
+     "critical": true
+    },
+    {
+     "step": "Pre-test Likelihood (PTP) Calculation",
+     "action": "Calculate pre-test likelihood based on ESC 2024 age, sex, and symptom criteria. If PTP < 5%, defer non-invasive testing and investigate non-cardiac causes."
+    },
+    {
+     "step": "Non-Invasive Diagnostic Testing Branch",
+     "branch": "PTP 5% to 15% or Low Clinical Likelihood",
+     "action": "Coronary CT Angiography (CCTA) is preferred first-line to rule out anatomical obstructive CAD with high negative predictive value."
+    },
+    {
+     "step": "Functional Ischemia Testing Branch",
+     "branch": "High Clinical Likelihood or Prior Revascularization",
+     "action": "Stress imaging (stress echocardiography, CMR, or PET/SPECT MPI) is preferred to document and quantify myocardial ischemia (> 10% LV ischemia triggers invasive angiography)."
+    },
+    {
+     "step": "Stepwise Guideline-Directed Medical Therapy",
+     "action": "Initiate first-line antianginal: Beta-blocker (bisoprolol 5 to 10 mg or metoprolol) titrated to resting HR 55 to 60 bpm PLUS high-intensity statin (atorvastatin 80 mg) and Aspirin 75 to 100 mg daily."
+    }
+   ],
+   "caption": "Algorithm aligned with ESC 2024 Guidelines for the management of chronic coronary syndromes."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ccs-drug-titration-matrix",
+   "title": "Guideline-Directed Medical Therapy: Antianginal Class Hierarchy and Hemodynamic Tailoring",
+   "headers": [
+    "Drug Class / Agent",
+    "Hemodynamic Effect (HR / BP)",
+    "First-Line Clinical Indications",
+    "Key Contraindications & Clinical Cautions"
+   ],
+   "rows": [
+    [
+     "Beta-blockers (Bisoprolol, Metoprolol succinate)",
+     "Lowers HR, lowers BP, reduces myocardial contractility",
+     "First-line for all CCS patients, especially post-MI or LVEF <= 40%",
+     "Severe bradycardia (HR < 50), high-grade AV block, decompensated acute heart failure, severe asthma"
+    ],
+    [
+     "Dihydropyridine CCBs (Amlodipine, Felodipine)",
+     "Lowers BP, arterial vasodilation; neutral HR",
+     "First-line alternative or combination with beta-blockers; useful in hypertensive angina",
+     "Severe aortic stenosis; causes dose-dependent peripheral ankle edema"
+    ],
+    [
+     "Non-dihydropyridine CCBs (Diltiazem, Verapamil)",
+     "Lowers HR, lowers BP, slows AV conduction",
+     "First-line alternative when beta-blockers are contraindicated and LVEF is preserved",
+     "Heart failure with reduced ejection fraction (LVEF < 40%), bradycardia, AV block; do not combine with beta-blockers"
+    ],
+    [
+     "Long-acting Nitrates (Isosorbide mononitrate)",
+     "Venodilation, reduces cardiac preload; neutral HR",
+     "Second-line add-on for persistent angina symptoms",
+     "Severe aortic stenosis, hypertrophic obstructive cardiomyopathy; strict absolute contraindication with PDE-5 inhibitors (sildenafil/tadalafil) within 24 to 48 hours"
+    ],
+    [
+     "Metabolic / Late Na Channel Blocker (Ranolazine)",
+     "Inhibits late inward sodium current; neutral HR and neutral BP",
+     "Second-line add-on in patients with low baseline HR or BP who cannot tolerate beta-blocker titration",
+     "End-stage renal disease (CrCl < 30 mL/min), hepatic cirrhosis, baseline severe baseline QT prolongation"
+    ]
+   ],
+   "caption": "Choice of antianginal combination must be personalized to patient baseline heart rate, blood pressure, and left ventricular function."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-coronary-syndrome-diagram",
+   "title": "Chronic coronary syndrome (stable angina): Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

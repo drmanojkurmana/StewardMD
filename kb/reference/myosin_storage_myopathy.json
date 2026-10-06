@@ -1,78 +1,173 @@
 {
-  "id": "myosin_storage_myopathy",
-  "name": "Myosin storage myopathy",
-  "aliases": [
-    "Hyaline body myopathy",
-    "MYH7-related myosin storage myopathy"
+ "id": "myosin_storage_myopathy",
+ "name": "Myosin storage myopathy",
+ "aliases": [
+  "Hyaline body myopathy",
+  "MYH7-related myosin storage myopathy"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal system",
+ "specialty": "Neuromuscular medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dubowitz's Muscle Disorders in Childhood",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by mutations in MYH7 encoding slow or beta-cardiac myosin heavy chain, typically within the distal light-meromyosin rod domain.",
+   "The pathological hallmark is subsarcolemmal hyaline bodies of accumulated slow myosin that are eosinophilic on haematoxylin and eosin and stain strongly for slow-myosin ATPase.",
+   "Weakness ranges from a scapuloperoneal to a limb-girdle distribution, often with prominent scapular and foot-dorsiflexor involvement.",
+   "Cardiomyopathy, whether hypertrophic or dilated, may coexist because of the shared MYH7 gene and warrants active surveillance.",
+   "Inheritance is usually autosomal dominant, with recessive and de novo cases described.",
+   "Onset ranges from childhood to adulthood, with generally slow progression.",
+   "Clinically and genetically it overlaps with Laing distal myopathy and MYH7-related cardiomyopathies."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal system",
-  "specialty": "Neuromuscular medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dubowitz's Muscle Disorders in Childhood",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by mutations in MYH7 encoding slow or beta-cardiac myosin heavy chain, typically within the distal light-meromyosin rod domain.",
-      "The pathological hallmark is subsarcolemmal hyaline bodies of accumulated slow myosin that are eosinophilic on haematoxylin and eosin and stain strongly for slow-myosin ATPase.",
-      "Weakness ranges from a scapuloperoneal to a limb-girdle distribution, often with prominent scapular and foot-dorsiflexor involvement.",
-      "Cardiomyopathy, whether hypertrophic or dilated, may coexist because of the shared MYH7 gene and warrants active surveillance.",
-      "Inheritance is usually autosomal dominant, with recessive and de novo cases described.",
-      "Onset ranges from childhood to adulthood, with generally slow progression.",
-      "Clinically and genetically it overlaps with Laing distal myopathy and MYH7-related cardiomyopathies."
+  "pathophysiology": "MYH7 encodes the slow beta-myosin heavy chain expressed in type 1 skeletal fibres and in myocardium. Mutations, frequently in the rod domain, impair thick-filament assembly and stability, so myosin aggregates into hyaline bodies within type 1 fibres and sarcomeric contraction is disrupted. Because the same isoform is expressed in the heart, a cardiomyopathy may accompany the skeletal phenotype.",
+  "additionalDifferentials": [
+   "Laing distal myopathy (MYH7)",
+   "Myofibrillar myopathies (desmin, myotilin)",
+   "Scapuloperoneal muscular dystrophy",
+   "Limb-girdle muscular dystrophies",
+   "Nemaline and cap myopathy",
+   "Facioscapulohumeral muscular dystrophy"
+  ],
+  "additionalInvestigations": [
+   "MYH7 gene sequencing",
+   "Muscle biopsy with slow-myosin immunostaining and electron microscopy",
+   "Serum creatine kinase",
+   "Electrocardiography and echocardiography, with cardiac MRI if needed",
+   "Electromyography",
+   "Muscle MRI to define the selective involvement pattern",
+   "Respiratory function testing"
+  ],
+  "redFlags": [
+   "New arrhythmia, syncope or symptoms of heart failure",
+   "Progressive respiratory muscle weakness",
+   "Family history of sudden cardiac death"
+  ],
+  "prognosis": "Skeletal weakness is generally slowly progressive with ambulation preserved for many years. The overall outlook is strongly influenced by any associated cardiomyopathy, making cardiac surveillance essential.",
+  "pitfalls": [
+   "Failing to screen for and monitor cardiomyopathy.",
+   "Mistaking hyaline bodies for other protein aggregates without slow-myosin immunostaining.",
+   "Overlooking the clinical overlap with Laing distal myopathy.",
+   "Not offering cascade cardiac and neurological screening to relatives."
+  ],
+  "references": [
+   "Dubowitz V, Sewry CA, Oldfors A. Muscle Biopsy: A Practical Approach",
+   "Standard textbook of neuromuscular disorders",
+   "International consensus guidance on the congenital myopathies"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Undertake cardiac surveillance with electrocardiography and echocardiography, adding cardiac magnetic resonance imaging as needed, for MYH7-related hypertrophic or dilated cardiomyopathy and treat heart failure or arrhythmia accordingly",
+   "Maintain muscle function and mobility with physiotherapy and ankle-foot orthoses for foot-drop",
+   "Provide occupational therapy and aids for scapular and scapuloperoneal weakness",
+   "Monitor respiratory function and support with non-invasive ventilation if weakness progresses",
+   "Confirm the diagnosis by MYH7 sequencing and correlate the genotype",
+   "Offer genetic counselling for the usually autosomal dominant inheritance and cardiac screening of relatives",
+   "Coordinate care through neuromuscular and cardiology specialists"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "myosin_storage_myopathy-pathway",
+   "title": "Myosin storage myopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by mutations in MYH7 encoding slow or beta-cardiac myosin heavy chain, typically within the distal light-meromyosin rod domain.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New arrhythmia, syncope or symptoms of heart failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MYH7 gene sequencing, Muscle biopsy with slow-myosin immunostaining and electron microscopy, Serum creatine kinase"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Undertake cardiac surveillance with electrocardiography and echocardiography, adding cardiac magnetic resonance imaging as needed, for MYH7-related hypertrophic or dilated cardiomyopathy and treat heart failure or"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to screen for and monitor cardiomyopathy."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of myosin storage myopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "myosin_storage_myopathy-matrix",
+   "title": "Myosin storage myopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by mutations in MYH7 encoding slow or beta-cardiac myosin heavy chain, typically within the distal light-meromyosin rod",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "MYH7 encodes the slow beta-myosin heavy chain expressed in type 1 skeletal fibres and in myocardium. Mutations, frequently in the rod domain, impair thick-filament assembly and stability, so myosin aggregates into hyaline bodies within type 1 fibres and sarcomeric contraction is disrupted. Because the same isoform is expressed in the heart, a cardiomyopathy may accompany the skeletal phenotype.",
-    "additionalDifferentials": [
-      "Laing distal myopathy (MYH7)",
-      "Myofibrillar myopathies (desmin, myotilin)",
-      "Scapuloperoneal muscular dystrophy",
-      "Limb-girdle muscular dystrophies",
-      "Nemaline and cap myopathy",
-      "Facioscapulohumeral muscular dystrophy"
+    [
+     "Key Investigations",
+     "MYH7 gene sequencing, Muscle biopsy with slow-myosin immunostaining and electron microscopy, Serum creatine kinase",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MYH7 gene sequencing",
-      "Muscle biopsy with slow-myosin immunostaining and electron microscopy",
-      "Serum creatine kinase",
-      "Electrocardiography and echocardiography, with cardiac MRI if needed",
-      "Electromyography",
-      "Muscle MRI to define the selective involvement pattern",
-      "Respiratory function testing"
+    [
+     "Primary Differentials",
+     "Laing distal myopathy (MYH7), Myofibrillar myopathies (desmin, myotilin), Scapuloperoneal muscular dystrophy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New arrhythmia, syncope or symptoms of heart failure",
-      "Progressive respiratory muscle weakness",
-      "Family history of sudden cardiac death"
+    [
+     "Management Strategy",
+     "Undertake cardiac surveillance with electrocardiography and echocardiography, adding cardiac magnetic resonance imaging as",
+     "Core treatment modality"
     ],
-    "prognosis": "Skeletal weakness is generally slowly progressive with ambulation preserved for many years. The overall outlook is strongly influenced by any associated cardiomyopathy, making cardiac surveillance essential.",
-    "pitfalls": [
-      "Failing to screen for and monitor cardiomyopathy.",
-      "Mistaking hyaline bodies for other protein aggregates without slow-myosin immunostaining.",
-      "Overlooking the clinical overlap with Laing distal myopathy.",
-      "Not offering cascade cardiac and neurological screening to relatives."
-    ],
-    "references": [
-      "Dubowitz V, Sewry CA, Oldfors A. Muscle Biopsy: A Practical Approach",
-      "Standard textbook of neuromuscular disorders",
-      "International consensus guidance on the congenital myopathies"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Undertake cardiac surveillance with electrocardiography and echocardiography, adding cardiac magnetic resonance imaging as needed, for MYH7-related hypertrophic or dilated cardiomyopathy and treat heart failure or arrhythmia accordingly",
-      "Maintain muscle function and mobility with physiotherapy and ankle-foot orthoses for foot-drop",
-      "Provide occupational therapy and aids for scapular and scapuloperoneal weakness",
-      "Monitor respiratory function and support with non-invasive ventilation if weakness progresses",
-      "Confirm the diagnosis by MYH7 sequencing and correlate the genotype",
-      "Offer genetic counselling for the usually autosomal dominant inheritance and cardiac screening of relatives",
-      "Coordinate care through neuromuscular and cardiology specialists"
+    [
+     "Clinical Pitfall",
+     "Failing to screen for and monitor cardiomyopathy.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for myosin storage myopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "myosin-storage-myopathy-diagram",
+   "title": "Myosin storage myopathy: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

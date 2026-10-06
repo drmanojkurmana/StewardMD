@@ -1,74 +1,169 @@
 {
-  "id": "ectropion",
-  "name": "Ectropion",
-  "aliases": [
-    "outturned eyelid",
-    "everted eyelid"
+ "id": "ectropion",
+ "name": "Ectropion",
+ "aliases": [
+  "outturned eyelid",
+  "everted eyelid"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The eyelid margin turns outward away from the globe, most often affecting the lower lid, leading to tearing, irritation, and a red, exposed conjunctiva",
+   "Involutional ectropion from age-related horizontal lid laxity is the commonest form",
+   "Paralytic ectropion follows facial nerve palsy with loss of orbicularis tone and is often accompanied by lagophthalmos",
+   "Cicatricial ectropion results from vertical shortening of the anterior lamella due to skin scarring, burns, or actinic damage",
+   "Chronic exposure causes conjunctival keratinisation, punctal eversion with epiphora, and risk of exposure keratopathy",
+   "Interim management centres on lubrication and protecting the ocular surface, with taping or moisture chambers for exposure",
+   "Definitive treatment is surgical and directed at the specific cause, such as lid-tightening for involutional disease or skin grafting for cicatricial cases"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The eyelid margin turns outward away from the globe, most often affecting the lower lid, leading to tearing, irritation, and a red, exposed conjunctiva",
-      "Involutional ectropion from age-related horizontal lid laxity is the commonest form",
-      "Paralytic ectropion follows facial nerve palsy with loss of orbicularis tone and is often accompanied by lagophthalmos",
-      "Cicatricial ectropion results from vertical shortening of the anterior lamella due to skin scarring, burns, or actinic damage",
-      "Chronic exposure causes conjunctival keratinisation, punctal eversion with epiphora, and risk of exposure keratopathy",
-      "Interim management centres on lubrication and protecting the ocular surface, with taping or moisture chambers for exposure",
-      "Definitive treatment is surgical and directed at the specific cause, such as lid-tightening for involutional disease or skin grafting for cicatricial cases"
+  "pathophysiology": "Ectropion is outward rotation of the eyelid margin. Involutional ectropion stems from horizontal lid laxity and weakening of the canthal tendons and retractors with age. Paralytic ectropion follows loss of orbicularis oculi function in facial nerve palsy, so the lid sags and everts. Cicatricial ectropion arises when scarring and contracture of the eyelid skin (anterior lamella) mechanically pull the margin away from the eye. Mechanical ectropion is caused by a mass or oedema everting the lid. Eversion disrupts the normal tear drainage and exposes the cornea and conjunctiva to drying and keratinisation.",
+  "additionalDifferentials": [
+   "Involutional versus cicatricial versus paralytic subtypes",
+   "Eyelid retraction (e.g. thyroid eye disease)",
+   "Floppy eyelid syndrome",
+   "Mechanical eversion from an eyelid or orbital mass",
+   "Punctal stenosis as an alternative cause of epiphora"
+  ],
+  "additionalInvestigations": [
+   "Slit-lamp examination to assess corneal exposure and conjunctival keratinisation",
+   "Fluorescein staining to detect exposure keratopathy",
+   "Assessment of lid laxity and canthal tendon integrity",
+   "Evaluation of facial nerve function in suspected paralytic ectropion",
+   "Examination of eyelid skin for scarring or actinic change in cicatricial cases"
+  ],
+  "redFlags": [
+   "Exposure keratopathy with corneal breakdown threatening vision, particularly with associated lagophthalmos",
+   "New facial nerve palsy requiring evaluation of its cause",
+   "A causative eyelid mass needing exclusion of malignancy",
+   "Progressive cicatricial change from an underlying dermatological or systemic disorder"
+  ],
+  "prognosis": "Surgical correction usually restores lid position and relieves symptoms with good outcomes; untreated ectropion can lead to persistent epiphora, chronic conjunctival changes, and exposure-related corneal damage.",
+  "pitfalls": [
+   "Managing epiphora without recognising the underlying lid malposition",
+   "Overlooking corneal exposure in paralytic ectropion until keratopathy develops",
+   "Failing to address anterior lamella shortening in cicatricial cases, leading to recurrence",
+   "Missing an eyelid tumour causing mechanical eversion"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive treatment is surgical correction tailored to cause, using horizontal lid tightening such as a lateral tarsal strip for involutional disease and skin grafting or flaps to release cicatricial ectropion",
+   "Protect the ocular surface with lubricating drops and ointment, moisture chambers and lid taping as interim and adjunctive care",
+   "For paralytic ectropion, treat the underlying facial nerve palsy and guard against lagophthalmos-related exposure with taping and, where needed, canthoplasty",
+   "Relieve mechanical ectropion by removing or treating the causative mass or oedema",
+   "Actively treat exposure keratopathy and monitor with slit-lamp examination and fluorescein staining to prevent corneal damage",
+   "Refer to ophthalmology or oculoplastic surgery for assessment and surgical planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ectropion-pathway",
+   "title": "Ectropion: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The eyelid margin turns outward away from the globe, most often affecting the lower lid, leading to tearing, irritation, and a red, exposed conjunctiva",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Exposure keratopathy with corneal breakdown threatening vision, particularly with associated lagophthalmos",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Slit-lamp examination to assess corneal exposure and conjunctival keratinisation, Fluorescein staining to detect exposure keratopathy, Assessment of lid laxity and canthal tendon integrity"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive treatment is surgical correction tailored to cause, using horizontal lid tightening such as a lateral tarsal strip for involutional disease and skin grafting or flaps to release cicatricial ectropion"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Managing epiphora without recognising the underlying lid malposition"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ectropion."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ectropion-matrix",
+   "title": "Ectropion: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The eyelid margin turns outward away from the globe, most often affecting the lower lid, leading to tearing, irritation, and a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ectropion is outward rotation of the eyelid margin. Involutional ectropion stems from horizontal lid laxity and weakening of the canthal tendons and retractors with age. Paralytic ectropion follows loss of orbicularis oculi function in facial nerve palsy, so the lid sags and everts. Cicatricial ectropion arises when scarring and contracture of the eyelid skin (anterior lamella) mechanically pull the margin away from the eye. Mechanical ectropion is caused by a mass or oedema everting the lid. Eversion disrupts the normal tear drainage and exposes the cornea and conjunctiva to drying and keratinisation.",
-    "additionalDifferentials": [
-      "Involutional versus cicatricial versus paralytic subtypes",
-      "Eyelid retraction (e.g. thyroid eye disease)",
-      "Floppy eyelid syndrome",
-      "Mechanical eversion from an eyelid or orbital mass",
-      "Punctal stenosis as an alternative cause of epiphora"
+    [
+     "Key Investigations",
+     "Slit-lamp examination to assess corneal exposure and conjunctival keratinisation, Fluorescein staining to detect exposure",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Slit-lamp examination to assess corneal exposure and conjunctival keratinisation",
-      "Fluorescein staining to detect exposure keratopathy",
-      "Assessment of lid laxity and canthal tendon integrity",
-      "Evaluation of facial nerve function in suspected paralytic ectropion",
-      "Examination of eyelid skin for scarring or actinic change in cicatricial cases"
+    [
+     "Primary Differentials",
+     "Involutional versus cicatricial versus paralytic subtypes, Eyelid retraction (e.g. thyroid eye disease), Floppy eyelid syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Exposure keratopathy with corneal breakdown threatening vision, particularly with associated lagophthalmos",
-      "New facial nerve palsy requiring evaluation of its cause",
-      "A causative eyelid mass needing exclusion of malignancy",
-      "Progressive cicatricial change from an underlying dermatological or systemic disorder"
+    [
+     "Management Strategy",
+     "Definitive treatment is surgical correction tailored to cause, using horizontal lid tightening such as a lateral tarsal strip for",
+     "Core treatment modality"
     ],
-    "prognosis": "Surgical correction usually restores lid position and relieves symptoms with good outcomes; untreated ectropion can lead to persistent epiphora, chronic conjunctival changes, and exposure-related corneal damage.",
-    "pitfalls": [
-      "Managing epiphora without recognising the underlying lid malposition",
-      "Overlooking corneal exposure in paralytic ectropion until keratopathy develops",
-      "Failing to address anterior lamella shortening in cicatricial cases, leading to recurrence",
-      "Missing an eyelid tumour causing mechanical eversion"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive treatment is surgical correction tailored to cause, using horizontal lid tightening such as a lateral tarsal strip for involutional disease and skin grafting or flaps to release cicatricial ectropion",
-      "Protect the ocular surface with lubricating drops and ointment, moisture chambers and lid taping as interim and adjunctive care",
-      "For paralytic ectropion, treat the underlying facial nerve palsy and guard against lagophthalmos-related exposure with taping and, where needed, canthoplasty",
-      "Relieve mechanical ectropion by removing or treating the causative mass or oedema",
-      "Actively treat exposure keratopathy and monitor with slit-lamp examination and fluorescein staining to prevent corneal damage",
-      "Refer to ophthalmology or oculoplastic surgery for assessment and surgical planning"
+    [
+     "Clinical Pitfall",
+     "Managing epiphora without recognising the underlying lid malposition",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ectropion."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ectropion-diagram",
+   "title": "Ectropion: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

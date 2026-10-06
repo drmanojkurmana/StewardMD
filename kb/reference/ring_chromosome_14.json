@@ -1,79 +1,174 @@
 {
-  "id": "ring_chromosome_14",
-  "name": "Ring chromosome 14 syndrome",
-  "aliases": [
-    "r(14) syndrome",
-    "ring 14 syndrome",
-    "ring chromosome 14"
+ "id": "ring_chromosome_14",
+ "name": "Ring chromosome 14 syndrome",
+ "aliases": [
+  "r(14) syndrome",
+  "ring 14 syndrome",
+  "ring chromosome 14"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Early-onset, drug-resistant epilepsy is the hallmark and often the presenting feature, frequently beginning in the first two years of life",
+   "Moderate-to-severe intellectual disability with delayed speech and motor milestones is almost universal",
+   "A distinctive progressive retinal pigmentary change is characteristic and helps distinguish it from a simple terminal 14q deletion",
+   "Microcephaly and relatively non-specific facial features (broad nasal bridge, epicanthic folds, downturned mouth) are common",
+   "Recurrent respiratory and other infections point to an accompanying tendency to immune dysfunction",
+   "Seizures often persist even when the deleted 14q material is minimal, implicating the ring structure itself rather than gene loss alone",
+   "The ring is mitotically unstable, so somatic mosaicism from ring loss or double rings is frequent and can influence severity"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Early-onset, drug-resistant epilepsy is the hallmark and often the presenting feature, frequently beginning in the first two years of life",
-      "Moderate-to-severe intellectual disability with delayed speech and motor milestones is almost universal",
-      "A distinctive progressive retinal pigmentary change is characteristic and helps distinguish it from a simple terminal 14q deletion",
-      "Microcephaly and relatively non-specific facial features (broad nasal bridge, epicanthic folds, downturned mouth) are common",
-      "Recurrent respiratory and other infections point to an accompanying tendency to immune dysfunction",
-      "Seizures often persist even when the deleted 14q material is minimal, implicating the ring structure itself rather than gene loss alone",
-      "The ring is mitotically unstable, so somatic mosaicism from ring loss or double rings is frequent and can influence severity"
+  "pathophysiology": "Ring chromosome 14 arises when the two ends of chromosome 14 fuse, usually with loss of the distal segments, to form a circular chromosome. The resulting phenotype reflects both haploinsufficiency of terminal 14q genes and a distinctive ring effect: continuing mitotic instability produces daughter cells with variable ring loss or duplication, generating dynamic tissue mosaicism. Because the severity of the epilepsy correlates poorly with the amount of deleted material, disruption of chromosome architecture and unstable copy number, rather than loss of a single gene, are thought to drive the neurological picture.",
+  "additionalDifferentials": [
+   "Terminal 14q deletion syndrome without a ring",
+   "Other ring chromosome syndromes",
+   "Early-infantile developmental and epileptic encephalopathies of single-gene origin",
+   "Angelman syndrome and other syndromic epilepsies",
+   "Mitochondrial or metabolic epileptic encephalopathy",
+   "Neuronal ceroid lipofuscinosis, given the combination of epilepsy and retinopathy"
+  ],
+  "additionalInvestigations": [
+   "Conventional karyotype to identify the ring and assess the degree of mosaicism",
+   "Chromosomal microarray to define any deleted segment, recognising it may not reveal the ring configuration itself",
+   "EEG to characterise seizure types",
+   "MRI of the brain for structural anomalies",
+   "Ophthalmological assessment including detailed retinal examination",
+   "Immunological review and infection surveillance where recurrent infections occur",
+   "Developmental and cognitive assessment"
+  ],
+  "redFlags": [
+   "Refractory seizures or episodes of status epilepticus",
+   "Progressive visual impairment from retinal degeneration",
+   "Recurrent or severe infections raising concern about immune dysfunction"
+  ],
+  "prognosis": "Epilepsy is frequently lifelong and difficult to control, and most affected individuals have significant intellectual disability; life expectancy is variable and influenced by the seizure burden, infections, and any associated malformations.",
+  "pitfalls": [
+   "Relying solely on microarray, which may detect a terminal deletion but miss the ring configuration and its instability",
+   "Underestimating somatic mosaicism when only a small number of cells is analysed",
+   "Attributing seizure severity purely to deletion size and overlooking the ring-specific effect",
+   "Missing progressive retinopathy because vision is hard to assess in a child with intellectual disability"
+  ],
+  "references": [
+   "GeneReviews",
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Gardner and Sutherland's Chromosome Abnormalities and Genetic Counseling"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control the drug-resistant epilepsy with antiepileptic drugs, escalating to combination regimens, as it is the dominant clinical problem",
+   "Provide early developmental intervention with speech, physical and occupational therapy and special education for the intellectual disability",
+   "Ophthalmological surveillance for the progressive retinal pigmentary change",
+   "Immunological review and infection surveillance for the recurrent respiratory and other infections",
+   "Serial EEG and brain MRI to characterise seizures and structural anomalies",
+   "Coordinated neurology, clinical genetics and paediatric care",
+   "Genetic counselling with parental karyotyping, noting that ring chromosomes usually arise de novo with a low recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ring_chromosome_14-pathway",
+   "title": "Ring chromosome 14 syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Early-onset, drug-resistant epilepsy is the hallmark and often the presenting feature, frequently beginning in the first two years of life",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Refractory seizures or episodes of status epilepticus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Conventional karyotype to identify the ring and assess the degree of mosaicism, Chromosomal microarray to define any deleted segment, recognising it may not reveal the ring configuration itself, EEG to characterise seizure"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control the drug-resistant epilepsy with antiepileptic drugs, escalating to combination regimens, as it is the dominant clinical problem"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying solely on microarray, which may detect a terminal deletion but miss the ring configuration and its instability"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ring chromosome 14 syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ring_chromosome_14-matrix",
+   "title": "Ring chromosome 14 syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Early-onset, drug-resistant epilepsy is the hallmark and often the presenting feature, frequently beginning in the first two",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ring chromosome 14 arises when the two ends of chromosome 14 fuse, usually with loss of the distal segments, to form a circular chromosome. The resulting phenotype reflects both haploinsufficiency of terminal 14q genes and a distinctive ring effect: continuing mitotic instability produces daughter cells with variable ring loss or duplication, generating dynamic tissue mosaicism. Because the severity of the epilepsy correlates poorly with the amount of deleted material, disruption of chromosome architecture and unstable copy number, rather than loss of a single gene, are thought to drive the neurological picture.",
-    "additionalDifferentials": [
-      "Terminal 14q deletion syndrome without a ring",
-      "Other ring chromosome syndromes",
-      "Early-infantile developmental and epileptic encephalopathies of single-gene origin",
-      "Angelman syndrome and other syndromic epilepsies",
-      "Mitochondrial or metabolic epileptic encephalopathy",
-      "Neuronal ceroid lipofuscinosis, given the combination of epilepsy and retinopathy"
+    [
+     "Key Investigations",
+     "Conventional karyotype to identify the ring and assess the degree of mosaicism, Chromosomal microarray to define any deleted",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Conventional karyotype to identify the ring and assess the degree of mosaicism",
-      "Chromosomal microarray to define any deleted segment, recognising it may not reveal the ring configuration itself",
-      "EEG to characterise seizure types",
-      "MRI of the brain for structural anomalies",
-      "Ophthalmological assessment including detailed retinal examination",
-      "Immunological review and infection surveillance where recurrent infections occur",
-      "Developmental and cognitive assessment"
+    [
+     "Primary Differentials",
+     "Terminal 14q deletion syndrome without a ring, Other ring chromosome syndromes, Early-infantile developmental and epileptic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Refractory seizures or episodes of status epilepticus",
-      "Progressive visual impairment from retinal degeneration",
-      "Recurrent or severe infections raising concern about immune dysfunction"
+    [
+     "Management Strategy",
+     "Control the drug-resistant epilepsy with antiepileptic drugs, escalating to combination regimens, as it is the dominant clinical",
+     "Core treatment modality"
     ],
-    "prognosis": "Epilepsy is frequently lifelong and difficult to control, and most affected individuals have significant intellectual disability; life expectancy is variable and influenced by the seizure burden, infections, and any associated malformations.",
-    "pitfalls": [
-      "Relying solely on microarray, which may detect a terminal deletion but miss the ring configuration and its instability",
-      "Underestimating somatic mosaicism when only a small number of cells is analysed",
-      "Attributing seizure severity purely to deletion size and overlooking the ring-specific effect",
-      "Missing progressive retinopathy because vision is hard to assess in a child with intellectual disability"
-    ],
-    "references": [
-      "GeneReviews",
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Gardner and Sutherland's Chromosome Abnormalities and Genetic Counseling"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control the drug-resistant epilepsy with antiepileptic drugs, escalating to combination regimens, as it is the dominant clinical problem",
-      "Provide early developmental intervention with speech, physical and occupational therapy and special education for the intellectual disability",
-      "Ophthalmological surveillance for the progressive retinal pigmentary change",
-      "Immunological review and infection surveillance for the recurrent respiratory and other infections",
-      "Serial EEG and brain MRI to characterise seizures and structural anomalies",
-      "Coordinated neurology, clinical genetics and paediatric care",
-      "Genetic counselling with parental karyotyping, noting that ring chromosomes usually arise de novo with a low recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Relying solely on microarray, which may detect a terminal deletion but miss the ring configuration and its instability",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ring chromosome 14 syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ring-chromosome-14-diagram",
+   "title": "Ring chromosome 14 syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

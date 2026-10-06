@@ -1,77 +1,172 @@
 {
-  "id": "temple_syndrome",
-  "name": "Temple syndrome (maternal UPD14)",
-  "aliases": [
-    "TS14",
-    "maternal UPD14 syndrome",
-    "Temple syndrome"
+ "id": "temple_syndrome",
+ "name": "Temple syndrome (maternal UPD14)",
+ "aliases": [
+  "TS14",
+  "maternal UPD14 syndrome",
+  "Temple syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by loss of the paternally expressed 14q32 genes, through maternal uniparental disomy 14, a paternal 14q32 deletion, or an imprinting defect",
+   "Pre- and postnatal growth restriction with short stature and small hands and feet is typical",
+   "Neonatal hypotonia and feeding difficulty overlap strongly with Prader-Willi syndrome in infancy",
+   "Precocious or early puberty is characteristic and a useful distinguishing clue",
+   "Truncal obesity and increased weight tend to develop in later childhood",
+   "Motor delay is usually mild and intellectual disability mild or absent, while a triangular face and frontal bossing may resemble Silver-Russell syndrome",
+   "It is often under-diagnosed because it overlaps phenotypically with both Prader-Willi and Silver-Russell syndromes"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by loss of the paternally expressed 14q32 genes, through maternal uniparental disomy 14, a paternal 14q32 deletion, or an imprinting defect",
-      "Pre- and postnatal growth restriction with short stature and small hands and feet is typical",
-      "Neonatal hypotonia and feeding difficulty overlap strongly with Prader-Willi syndrome in infancy",
-      "Precocious or early puberty is characteristic and a useful distinguishing clue",
-      "Truncal obesity and increased weight tend to develop in later childhood",
-      "Motor delay is usually mild and intellectual disability mild or absent, while a triangular face and frontal bossing may resemble Silver-Russell syndrome",
-      "It is often under-diagnosed because it overlaps phenotypically with both Prader-Willi and Silver-Russell syndromes"
+  "pathophysiology": "Temple syndrome is an imprinting disorder caused by absent expression of the paternally expressed genes at the imprinted 14q32 locus, such as DLK1 and RTL1, with relative excess of the maternally expressed gene MEG3. This most commonly results from maternal uniparental disomy 14, but the identical picture follows a paternal deletion of 14q32 or a primary imprinting (methylation) defect. Disturbed dosage of these growth- and metabolism-related imprinted genes produces the growth restriction, hypotonia, early puberty, and later obesity.",
+  "additionalDifferentials": [
+   "Prader-Willi syndrome, the major infancy mimic",
+   "Silver-Russell syndrome, given growth restriction and a triangular face",
+   "Kagami-Ogata syndrome, the reciprocal paternal-UPD14 disorder",
+   "Other causes of precocious puberty",
+   "Constitutional or idiopathic short stature"
+  ],
+  "additionalInvestigations": [
+   "Methylation analysis of the 14q32 (MEG3/DLK1) differentially methylated region as the first-line test",
+   "Microsatellite or SNP analysis to confirm maternal uniparental disomy 14 and distinguish it from deletion or epimutation",
+   "Karyotype to detect a Robertsonian translocation involving chromosome 14",
+   "Chromosomal microarray, usually normal but useful to exclude deletions and duplications",
+   "Growth monitoring and endocrine or pubertal assessment, including bone age",
+   "Developmental assessment"
+  ],
+  "redFlags": [
+   "Precocious puberty requiring endocrine intervention",
+   "Severe neonatal hypotonia with feeding failure",
+   "Rapid weight gain with obesity-related complications"
+  ],
+  "prognosis": "Generally favourable, with usually mild or no intellectual disability; the main issues are early puberty, short stature, and a tendency to obesity, all of which respond to appropriate endocrine and dietary management.",
+  "pitfalls": [
+   "Missing the diagnosis because it mimics Prader-Willi and Silver-Russell syndromes",
+   "Relying on karyotype or microarray, which miss uniparental disomy and imprinting defects",
+   "Overlooking precocious puberty as a distinguishing feature",
+   "Failing to test for uniparental disomy 14 when a chromosome 14 Robertsonian translocation is present"
+  ],
+  "references": [
+   "GeneReviews",
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Cassidy and Allanson's Management of Genetic Syndromes"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Support neonatal feeding difficulty and hypotonia with assisted or nasogastric feeding and early physiotherapy until oromotor function improves",
+   "Monitor growth closely and consider growth hormone therapy for the associated short stature under endocrine supervision",
+   "Treat precocious or early puberty with a GnRH analogue to arrest premature pubertal progression and protect adult height",
+   "Institute early dietary and lifestyle measures to prevent the truncal obesity that emerges in later childhood",
+   "Provide developmental assessment with physiotherapy and educational support for motor delay",
+   "Coordinate multidisciplinary paediatric, endocrine and dietetic follow-up",
+   "Offer genetic counselling clarifying recurrence risk according to the underlying mechanism of uniparental disomy, deletion or imprinting defect, and test for a Robertsonian translocation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "temple_syndrome-pathway",
+   "title": "Temple syndrome (maternal UPD14): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by loss of the paternally expressed 14q32 genes, through maternal uniparental disomy 14, a paternal 14q32 deletion, or an imprinting defect",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Precocious puberty requiring endocrine intervention",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Methylation analysis of the 14q32 (MEG3/DLK1) differentially methylated region as the first-line test, Microsatellite or SNP analysis to confirm maternal uniparental disomy 14 and distinguish it from deletion or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Support neonatal feeding difficulty and hypotonia with assisted or nasogastric feeding and early physiotherapy until oromotor function improves"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis because it mimics Prader-Willi and Silver-Russell syndromes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of temple syndrome (maternal upd14)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "temple_syndrome-matrix",
+   "title": "Temple syndrome (maternal UPD14): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by loss of the paternally expressed 14q32 genes, through maternal uniparental disomy 14, a paternal 14q32 deletion, or an",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Temple syndrome is an imprinting disorder caused by absent expression of the paternally expressed genes at the imprinted 14q32 locus, such as DLK1 and RTL1, with relative excess of the maternally expressed gene MEG3. This most commonly results from maternal uniparental disomy 14, but the identical picture follows a paternal deletion of 14q32 or a primary imprinting (methylation) defect. Disturbed dosage of these growth- and metabolism-related imprinted genes produces the growth restriction, hypotonia, early puberty, and later obesity.",
-    "additionalDifferentials": [
-      "Prader-Willi syndrome, the major infancy mimic",
-      "Silver-Russell syndrome, given growth restriction and a triangular face",
-      "Kagami-Ogata syndrome, the reciprocal paternal-UPD14 disorder",
-      "Other causes of precocious puberty",
-      "Constitutional or idiopathic short stature"
+    [
+     "Key Investigations",
+     "Methylation analysis of the 14q32 (MEG3/DLK1) differentially methylated region as the first-line test, Microsatellite or SNP",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Methylation analysis of the 14q32 (MEG3/DLK1) differentially methylated region as the first-line test",
-      "Microsatellite or SNP analysis to confirm maternal uniparental disomy 14 and distinguish it from deletion or epimutation",
-      "Karyotype to detect a Robertsonian translocation involving chromosome 14",
-      "Chromosomal microarray, usually normal but useful to exclude deletions and duplications",
-      "Growth monitoring and endocrine or pubertal assessment, including bone age",
-      "Developmental assessment"
+    [
+     "Primary Differentials",
+     "Prader-Willi syndrome, the major infancy mimic, Silver-Russell syndrome, given growth restriction and a triangular face,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Precocious puberty requiring endocrine intervention",
-      "Severe neonatal hypotonia with feeding failure",
-      "Rapid weight gain with obesity-related complications"
+    [
+     "Management Strategy",
+     "Support neonatal feeding difficulty and hypotonia with assisted or nasogastric feeding and early physiotherapy until oromotor",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally favourable, with usually mild or no intellectual disability; the main issues are early puberty, short stature, and a tendency to obesity, all of which respond to appropriate endocrine and dietary management.",
-    "pitfalls": [
-      "Missing the diagnosis because it mimics Prader-Willi and Silver-Russell syndromes",
-      "Relying on karyotype or microarray, which miss uniparental disomy and imprinting defects",
-      "Overlooking precocious puberty as a distinguishing feature",
-      "Failing to test for uniparental disomy 14 when a chromosome 14 Robertsonian translocation is present"
-    ],
-    "references": [
-      "GeneReviews",
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Cassidy and Allanson's Management of Genetic Syndromes"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Support neonatal feeding difficulty and hypotonia with assisted or nasogastric feeding and early physiotherapy until oromotor function improves",
-      "Monitor growth closely and consider growth hormone therapy for the associated short stature under endocrine supervision",
-      "Treat precocious or early puberty with a GnRH analogue to arrest premature pubertal progression and protect adult height",
-      "Institute early dietary and lifestyle measures to prevent the truncal obesity that emerges in later childhood",
-      "Provide developmental assessment with physiotherapy and educational support for motor delay",
-      "Coordinate multidisciplinary paediatric, endocrine and dietetic follow-up",
-      "Offer genetic counselling clarifying recurrence risk according to the underlying mechanism of uniparental disomy, deletion or imprinting defect, and test for a Robertsonian translocation"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis because it mimics Prader-Willi and Silver-Russell syndromes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for temple syndrome (maternal upd14)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "temple-syndrome-diagram",
+   "title": "Temple syndrome (maternal UPD14): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

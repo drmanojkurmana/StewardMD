@@ -1,72 +1,167 @@
 {
-  "id": "drug_induced_immune_haemolytic_anaemia",
-  "name": "Drug-induced immune haemolytic anaemia",
-  "aliases": [
-    "DIIHA"
+ "id": "drug_induced_immune_haemolytic_anaemia",
+ "name": "Drug-induced immune haemolytic anaemia",
+ "aliases": [
+  "DIIHA"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Haematology and transfusion references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Immune-mediated red cell destruction triggered by a drug or its metabolites",
+   "It can mimic warm autoimmune haemolytic anaemia clinically and serologically",
+   "Implicated drugs classically include some cephalosporins, penicillins and, historically, methyldopa, among others",
+   "Mechanisms include drug-dependent antibodies (drug adsorption or immune-complex types) and true drug-independent autoantibodies",
+   "The direct antiglobulin test is usually positive, and identifying the culprit drug is central",
+   "The mainstay of treatment is stopping the offending drug, with supportive care and transfusion if required"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Haematology and transfusion references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Immune-mediated red cell destruction triggered by a drug or its metabolites",
-      "It can mimic warm autoimmune haemolytic anaemia clinically and serologically",
-      "Implicated drugs classically include some cephalosporins, penicillins and, historically, methyldopa, among others",
-      "Mechanisms include drug-dependent antibodies (drug adsorption or immune-complex types) and true drug-independent autoantibodies",
-      "The direct antiglobulin test is usually positive, and identifying the culprit drug is central",
-      "The mainstay of treatment is stopping the offending drug, with supportive care and transfusion if required"
+  "pathophysiology": "Drug-induced immune haemolytic anaemia arises when a drug provokes an antibody response that leads to red cell destruction. In the drug-adsorption mechanism the drug binds firmly to the red cell membrane and antibodies target the drug-coated cell; in the immune-complex mechanism drug-antibody complexes attach to red cells and activate complement; and some drugs induce true autoantibodies indistinguishable from those of warm autoimmune haemolytic anaemia. The result is accelerated clearance of antibody- or complement-coated red cells, causing extravascular or, with strong complement activation, intravascular haemolysis.",
+  "additionalDifferentials": [
+   "Warm autoimmune haemolytic anaemia",
+   "Cold agglutinin disease",
+   "Glucose-6-phosphate dehydrogenase deficiency (oxidative drug haemolysis)",
+   "Microangiopathic haemolytic anaemia",
+   "Delayed haemolytic transfusion reaction"
+  ],
+  "additionalInvestigations": [
+   "Direct antiglobulin test and drug-dependent antibody studies",
+   "Detailed drug history including recent additions",
+   "Full blood count, reticulocytes and haemolysis markers",
+   "Blood film",
+   "Rechallenge avoidance and documentation of the culprit drug"
+  ],
+  "redFlags": [
+   "Severe or intravascular haemolysis after a new drug",
+   "Haemodynamic compromise from rapid anaemia",
+   "Renal impairment from intravascular haemolysis",
+   "Ongoing exposure to the culprit drug"
+  ],
+  "prognosis": "Haemolysis usually resolves after withdrawal of the offending drug, though it can be severe acutely; recovery is generally complete once the drug is stopped and avoided.",
+  "pitfalls": [
+   "Failing to take a thorough drug history and identify the culprit",
+   "Mistaking it for idiopathic warm autoimmune haemolytic anaemia",
+   "Overlooking oxidative (G6PD-related) drug haemolysis, which is a different mechanism",
+   "Re-exposing the patient to the offending drug"
+  ],
+  "references": [
+   "Haematology reference texts (standard reference)",
+   "Transfusion medicine references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediately stop the implicated drug, the mainstay of treatment, and permanently avoid rechallenge",
+   "Provide supportive care with red-cell transfusion for symptomatic or severe anaemia and folate supplementation for ongoing haemolysis",
+   "Consider corticosteroids where a drug-independent, true-autoantibody (warm-type) mechanism is identified, as this form behaves like warm autoimmune haemolytic anaemia",
+   "Monitor haemoglobin, reticulocytes, the direct antiglobulin test and haemolysis markers to confirm recovery",
+   "Support renal function and give intravenous fluids during severe intravascular haemolysis",
+   "Clearly document the culprit drug and inform the patient to prevent recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "drug_induced_immune_haemolytic_anaemia-pathway",
+   "title": "Drug-induced immune haemolytic anaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Immune-mediated red cell destruction triggered by a drug or its metabolites",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or intravascular haemolysis after a new drug",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Direct antiglobulin test and drug-dependent antibody studies, Detailed drug history including recent additions, Full blood count, reticulocytes and haemolysis markers"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediately stop the implicated drug, the mainstay of treatment, and permanently avoid rechallenge"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to take a thorough drug history and identify the culprit"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of drug-induced immune haemolytic anaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "drug_induced_immune_haemolytic_anaemia-matrix",
+   "title": "Drug-induced immune haemolytic anaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Immune-mediated red cell destruction triggered by a drug or its metabolites",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Drug-induced immune haemolytic anaemia arises when a drug provokes an antibody response that leads to red cell destruction. In the drug-adsorption mechanism the drug binds firmly to the red cell membrane and antibodies target the drug-coated cell; in the immune-complex mechanism drug-antibody complexes attach to red cells and activate complement; and some drugs induce true autoantibodies indistinguishable from those of warm autoimmune haemolytic anaemia. The result is accelerated clearance of antibody- or complement-coated red cells, causing extravascular or, with strong complement activation, intravascular haemolysis.",
-    "additionalDifferentials": [
-      "Warm autoimmune haemolytic anaemia",
-      "Cold agglutinin disease",
-      "Glucose-6-phosphate dehydrogenase deficiency (oxidative drug haemolysis)",
-      "Microangiopathic haemolytic anaemia",
-      "Delayed haemolytic transfusion reaction"
+    [
+     "Key Investigations",
+     "Direct antiglobulin test and drug-dependent antibody studies, Detailed drug history including recent additions, Full blood count,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Direct antiglobulin test and drug-dependent antibody studies",
-      "Detailed drug history including recent additions",
-      "Full blood count, reticulocytes and haemolysis markers",
-      "Blood film",
-      "Rechallenge avoidance and documentation of the culprit drug"
+    [
+     "Primary Differentials",
+     "Warm autoimmune haemolytic anaemia, Cold agglutinin disease, Glucose-6-phosphate dehydrogenase deficiency (oxidative drug",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or intravascular haemolysis after a new drug",
-      "Haemodynamic compromise from rapid anaemia",
-      "Renal impairment from intravascular haemolysis",
-      "Ongoing exposure to the culprit drug"
+    [
+     "Management Strategy",
+     "Immediately stop the implicated drug, the mainstay of treatment, and permanently avoid rechallenge",
+     "Core treatment modality"
     ],
-    "prognosis": "Haemolysis usually resolves after withdrawal of the offending drug, though it can be severe acutely; recovery is generally complete once the drug is stopped and avoided.",
-    "pitfalls": [
-      "Failing to take a thorough drug history and identify the culprit",
-      "Mistaking it for idiopathic warm autoimmune haemolytic anaemia",
-      "Overlooking oxidative (G6PD-related) drug haemolysis, which is a different mechanism",
-      "Re-exposing the patient to the offending drug"
-    ],
-    "references": [
-      "Haematology reference texts (standard reference)",
-      "Transfusion medicine references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediately stop the implicated drug, the mainstay of treatment, and permanently avoid rechallenge",
-      "Provide supportive care with red-cell transfusion for symptomatic or severe anaemia and folate supplementation for ongoing haemolysis",
-      "Consider corticosteroids where a drug-independent, true-autoantibody (warm-type) mechanism is identified, as this form behaves like warm autoimmune haemolytic anaemia",
-      "Monitor haemoglobin, reticulocytes, the direct antiglobulin test and haemolysis markers to confirm recovery",
-      "Support renal function and give intravenous fluids during severe intravascular haemolysis",
-      "Clearly document the culprit drug and inform the patient to prevent recurrence"
+    [
+     "Clinical Pitfall",
+     "Failing to take a thorough drug history and identify the culprit",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for drug-induced immune haemolytic anaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "drug-induced-immune-haemolytic-anaemia-diagram",
+   "title": "Drug-induced immune haemolytic anaemia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

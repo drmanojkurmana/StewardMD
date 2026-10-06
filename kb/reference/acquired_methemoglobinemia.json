@@ -1,84 +1,179 @@
 {
-  "id": "acquired_methemoglobinemia",
-  "name": "Acquired methaemoglobinaemia",
-  "aliases": [
-    "acquired methaemoglobinaemia",
-    "acquired methemoglobinemia",
-    "drug-induced methaemoglobinaemia",
-    "drug-induced methemoglobinemia",
-    "methaemoglobinaemia",
-    "methaemoglobinaemia acquired",
-    "toxic methaemoglobinaemia"
+ "id": "acquired_methemoglobinemia",
+ "name": "Acquired methaemoglobinaemia",
+ "aliases": [
+  "acquired methaemoglobinaemia",
+  "acquired methemoglobinemia",
+  "drug-induced methaemoglobinaemia",
+  "drug-induced methemoglobinemia",
+  "methaemoglobinaemia",
+  "methaemoglobinaemia acquired",
+  "toxic methaemoglobinaemia"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Suspect methaemoglobinaemia when cyanosis fails to improve with supplemental oxygen and the arterial partial pressure of oxygen is normal",
+   "A characteristic 'saturation gap' exists between a low pulse oximeter reading and a normal or high calculated saturation from the blood gas",
+   "Pulse oximetry tends to be unreliable and often plateaus around the mid-eighties as methaemoglobin rises, so co-oximetry is required for accuracy",
+   "Blood may appear chocolate-brown and does not turn red on exposure to air",
+   "Common precipitants include topical and local anaesthetics such as benzocaine, dapsone, nitrites, some antimalarials and aniline dyes",
+   "Symptom severity broadly tracks the methaemoglobin fraction, ranging from headache and fatigue to dyspnoea, acidosis, arrhythmia and coma at high levels",
+   "Methylene blue is the specific antidote for significant or symptomatic cases, together with removal of the offending agent and oxygen",
+   "Methylene blue is ineffective and potentially harmful in glucose-6-phosphate dehydrogenase deficiency, where alternative measures and haematology input are needed"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Suspect methaemoglobinaemia when cyanosis fails to improve with supplemental oxygen and the arterial partial pressure of oxygen is normal",
-      "A characteristic 'saturation gap' exists between a low pulse oximeter reading and a normal or high calculated saturation from the blood gas",
-      "Pulse oximetry tends to be unreliable and often plateaus around the mid-eighties as methaemoglobin rises, so co-oximetry is required for accuracy",
-      "Blood may appear chocolate-brown and does not turn red on exposure to air",
-      "Common precipitants include topical and local anaesthetics such as benzocaine, dapsone, nitrites, some antimalarials and aniline dyes",
-      "Symptom severity broadly tracks the methaemoglobin fraction, ranging from headache and fatigue to dyspnoea, acidosis, arrhythmia and coma at high levels",
-      "Methylene blue is the specific antidote for significant or symptomatic cases, together with removal of the offending agent and oxygen",
-      "Methylene blue is ineffective and potentially harmful in glucose-6-phosphate dehydrogenase deficiency, where alternative measures and haematology input are needed"
+  "pathophysiology": "Methaemoglobin is haemoglobin in which the haem iron is oxidised from the ferrous to the ferric state, which cannot bind oxygen and shifts the oxygen-dissociation curve leftward so remaining ferrous sites release oxygen less readily. Oxidant drugs and chemicals accelerate iron oxidation beyond the capacity of the physiological reducing systems, chiefly cytochrome b5 reductase and, as a reserve pathway, NADPH methaemoglobin reductase. The net effect is functional anaemia and impaired tissue oxygen delivery despite adequate arterial oxygen tension, producing cyanosis and, at high fractions, metabolic acidosis and organ dysfunction.",
+  "additionalDifferentials": [
+   "Hypoxaemia from cardiopulmonary disease",
+   "Sulphaemoglobinaemia",
+   "Carbon monoxide poisoning",
+   "Congenital methaemoglobinaemia (cytochrome b5 reductase deficiency or haemoglobin M)",
+   "Cyanotic congenital heart disease",
+   "Shock or low cardiac output causing peripheral cyanosis"
+  ],
+  "additionalInvestigations": [
+   "Co-oximetry to measure the methaemoglobin fraction directly",
+   "Arterial blood gas demonstrating a normal partial pressure of oxygen with a saturation gap",
+   "Full blood count and film looking for haemolysis or Heinz bodies",
+   "Glucose-6-phosphate dehydrogenase status before or alongside methylene blue therapy",
+   "Renal and liver function and lactate to assess systemic effect",
+   "Medication and exposure review to identify the oxidant precipitant"
+  ],
+  "redFlags": [
+   "Cyanosis unresponsive to high-flow oxygen with a normal arterial oxygen tension",
+   "High methaemoglobin fraction with dyspnoea, chest pain or altered consciousness",
+   "Metabolic acidosis, arrhythmia or haemodynamic instability",
+   "Concurrent haemolysis, especially in glucose-6-phosphate dehydrogenase deficiency",
+   "Failure to respond to initial methylene blue, raising suspicion of ongoing oxidant exposure or enzyme deficiency"
+  ],
+  "prognosis": "Mild toxic methaemoglobinaemia usually resolves once the oxidant is withdrawn, and symptomatic cases generally respond promptly to methylene blue; severe or unrecognised poisoning, or cases complicated by enzyme deficiency, can be fatal.",
+  "pitfalls": [
+   "Trusting the pulse oximeter reading rather than obtaining co-oximetry",
+   "Giving methylene blue in glucose-6-phosphate dehydrogenase deficiency and precipitating haemolysis",
+   "Failing to identify and stop the causative agent, allowing rebound",
+   "Overlooking topical anaesthetic sprays and teething or dermatological preparations as sources",
+   "Attributing refractory cyanosis to cardiopulmonary disease and missing the saturation gap"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Methemoglobinemia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Withdraw the precipitating oxidant drug or chemical, such as topical anaesthetics like benzocaine, dapsone, nitrites, antimalarials or aniline dyes",
+   "Administer methylthioninium chloride (methylene blue) for symptomatic or high-fraction methaemoglobinaemia",
+   "Provide supplemental oxygen and supportive care, recognising cyanosis that is unresponsive to oxygen",
+   "Determine glucose-6-phosphate dehydrogenase status, since methylene blue may be ineffective or harmful in deficiency, where ascorbic acid or exchange transfusion is preferred",
+   "Track the methaemoglobin fraction with co-oximetry given the unreliability of pulse oximetry",
+   "Consider exchange transfusion or hyperbaric oxygen for life-threatening or refractory poisoning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acquired_methemoglobinemia-pathway",
+   "title": "Acquired methaemoglobinaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Suspect methaemoglobinaemia when cyanosis fails to improve with supplemental oxygen and the arterial partial pressure of oxygen is normal",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Cyanosis unresponsive to high-flow oxygen with a normal arterial oxygen tension",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Co-oximetry to measure the methaemoglobin fraction directly, Arterial blood gas demonstrating a normal partial pressure of oxygen with a saturation gap, Full blood count and film looking for haemolysis or Heinz bodies"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Withdraw the precipitating oxidant drug or chemical, such as topical anaesthetics like benzocaine, dapsone, nitrites, antimalarials or aniline dyes"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Trusting the pulse oximeter reading rather than obtaining co-oximetry"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acquired methaemoglobinaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acquired_methemoglobinemia-matrix",
+   "title": "Acquired methaemoglobinaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect methaemoglobinaemia when cyanosis fails to improve with supplemental oxygen and the arterial partial pressure of oxygen",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Methaemoglobin is haemoglobin in which the haem iron is oxidised from the ferrous to the ferric state, which cannot bind oxygen and shifts the oxygen-dissociation curve leftward so remaining ferrous sites release oxygen less readily. Oxidant drugs and chemicals accelerate iron oxidation beyond the capacity of the physiological reducing systems, chiefly cytochrome b5 reductase and, as a reserve pathway, NADPH methaemoglobin reductase. The net effect is functional anaemia and impaired tissue oxygen delivery despite adequate arterial oxygen tension, producing cyanosis and, at high fractions, metabolic acidosis and organ dysfunction.",
-    "additionalDifferentials": [
-      "Hypoxaemia from cardiopulmonary disease",
-      "Sulphaemoglobinaemia",
-      "Carbon monoxide poisoning",
-      "Congenital methaemoglobinaemia (cytochrome b5 reductase deficiency or haemoglobin M)",
-      "Cyanotic congenital heart disease",
-      "Shock or low cardiac output causing peripheral cyanosis"
+    [
+     "Key Investigations",
+     "Co-oximetry to measure the methaemoglobin fraction directly, Arterial blood gas demonstrating a normal partial pressure of oxygen",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Co-oximetry to measure the methaemoglobin fraction directly",
-      "Arterial blood gas demonstrating a normal partial pressure of oxygen with a saturation gap",
-      "Full blood count and film looking for haemolysis or Heinz bodies",
-      "Glucose-6-phosphate dehydrogenase status before or alongside methylene blue therapy",
-      "Renal and liver function and lactate to assess systemic effect",
-      "Medication and exposure review to identify the oxidant precipitant"
+    [
+     "Primary Differentials",
+     "Hypoxaemia from cardiopulmonary disease, Sulphaemoglobinaemia, Carbon monoxide poisoning",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Cyanosis unresponsive to high-flow oxygen with a normal arterial oxygen tension",
-      "High methaemoglobin fraction with dyspnoea, chest pain or altered consciousness",
-      "Metabolic acidosis, arrhythmia or haemodynamic instability",
-      "Concurrent haemolysis, especially in glucose-6-phosphate dehydrogenase deficiency",
-      "Failure to respond to initial methylene blue, raising suspicion of ongoing oxidant exposure or enzyme deficiency"
+    [
+     "Management Strategy",
+     "Withdraw the precipitating oxidant drug or chemical, such as topical anaesthetics like benzocaine, dapsone, nitrites,",
+     "Core treatment modality"
     ],
-    "prognosis": "Mild toxic methaemoglobinaemia usually resolves once the oxidant is withdrawn, and symptomatic cases generally respond promptly to methylene blue; severe or unrecognised poisoning, or cases complicated by enzyme deficiency, can be fatal.",
-    "pitfalls": [
-      "Trusting the pulse oximeter reading rather than obtaining co-oximetry",
-      "Giving methylene blue in glucose-6-phosphate dehydrogenase deficiency and precipitating haemolysis",
-      "Failing to identify and stop the causative agent, allowing rebound",
-      "Overlooking topical anaesthetic sprays and teething or dermatological preparations as sources",
-      "Attributing refractory cyanosis to cardiopulmonary disease and missing the saturation gap"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Methemoglobinemia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Withdraw the precipitating oxidant drug or chemical, such as topical anaesthetics like benzocaine, dapsone, nitrites, antimalarials or aniline dyes",
-      "Administer methylthioninium chloride (methylene blue) for symptomatic or high-fraction methaemoglobinaemia",
-      "Provide supplemental oxygen and supportive care, recognising cyanosis that is unresponsive to oxygen",
-      "Determine glucose-6-phosphate dehydrogenase status, since methylene blue may be ineffective or harmful in deficiency, where ascorbic acid or exchange transfusion is preferred",
-      "Track the methaemoglobin fraction with co-oximetry given the unreliability of pulse oximetry",
-      "Consider exchange transfusion or hyperbaric oxygen for life-threatening or refractory poisoning"
+    [
+     "Clinical Pitfall",
+     "Trusting the pulse oximeter reading rather than obtaining co-oximetry",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acquired methaemoglobinaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acquired-methemoglobinemia-diagram",
+   "title": "Acquired methaemoglobinaemia: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

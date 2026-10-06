@@ -1,77 +1,172 @@
 {
-  "id": "acquired_von_willebrand_syndrome",
-  "name": "Acquired von Willebrand syndrome",
-  "aliases": [
-    "AVWS",
-    "acquired von Willebrand disease",
-    "acquired VWF deficiency"
+ "id": "acquired_von_willebrand_syndrome",
+ "name": "Acquired von Willebrand syndrome",
+ "aliases": [
+  "AVWS",
+  "acquired von Willebrand disease",
+  "acquired VWF deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A late-onset mucocutaneous bleeding disorder from acquired loss of von Willebrand factor function, arising without a personal or family bleeding history",
+   "Bleeding is typically mucosal and cutaneous, with epistaxis, bruising, and gastrointestinal blood loss, sometimes from associated angiodysplasia",
+   "Classically associated with lymphoproliferative and plasma-cell disorders (paraprotein), myeloproliferative neoplasms, and high-shear cardiac lesions such as severe aortic stenosis",
+   "Heyde syndrome links severe aortic stenosis to loss of high-molecular-weight von Willebrand multimers and gastrointestinal angiodysplasia bleeding",
+   "Laboratory findings mirror inherited von Willebrand disease with a disproportionately low von Willebrand factor activity relative to antigen and loss of high-molecular-weight multimers",
+   "Mechanisms include antibody-mediated clearance, adsorption onto malignant or platelet surfaces, and shear-induced proteolysis of multimers",
+   "Treatment is directed at the underlying cause, with von Willebrand factor-containing replacement or immunomodulatory measures used to control bleeding"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A late-onset mucocutaneous bleeding disorder from acquired loss of von Willebrand factor function, arising without a personal or family bleeding history",
-      "Bleeding is typically mucosal and cutaneous, with epistaxis, bruising, and gastrointestinal blood loss, sometimes from associated angiodysplasia",
-      "Classically associated with lymphoproliferative and plasma-cell disorders (paraprotein), myeloproliferative neoplasms, and high-shear cardiac lesions such as severe aortic stenosis",
-      "Heyde syndrome links severe aortic stenosis to loss of high-molecular-weight von Willebrand multimers and gastrointestinal angiodysplasia bleeding",
-      "Laboratory findings mirror inherited von Willebrand disease with a disproportionately low von Willebrand factor activity relative to antigen and loss of high-molecular-weight multimers",
-      "Mechanisms include antibody-mediated clearance, adsorption onto malignant or platelet surfaces, and shear-induced proteolysis of multimers",
-      "Treatment is directed at the underlying cause, with von Willebrand factor-containing replacement or immunomodulatory measures used to control bleeding"
+  "pathophysiology": "Acquired von Willebrand syndrome develops when a previously normal von Willebrand factor system is disrupted by an underlying disorder. Autoantibodies may accelerate clearance or neutralise function, malignant cells or activated platelets may adsorb the protein, and high shear stress across stenotic valves or in myeloproliferative states can unfold von Willebrand factor and expose it to excessive proteolysis by ADAMTS13. The common consequence is selective loss of the largest, most haemostatically active multimers, impairing platelet adhesion and producing a bleeding phenotype resembling inherited von Willebrand disease.",
+  "additionalDifferentials": [
+   "Inherited von Willebrand disease",
+   "Platelet function disorders",
+   "Acquired haemophilia A",
+   "Immune or drug-induced thrombocytopenia",
+   "Liver disease with impaired haemostasis",
+   "Angiodysplasia bleeding of other cause"
+  ],
+  "additionalInvestigations": [
+   "Von Willebrand factor activity (platelet-binding assay) and antigen with calculation of their ratio",
+   "Von Willebrand factor multimer analysis to demonstrate loss of high-molecular-weight forms",
+   "Factor VIII activity, which may be reduced in parallel",
+   "Serum protein electrophoresis and immunofixation to detect a paraprotein",
+   "Full blood count and marrow or clonality studies for lympho- or myeloproliferative disease",
+   "Echocardiography when a high-shear cardiac lesion such as aortic stenosis is suspected"
+  ],
+  "redFlags": [
+   "Major or recurrent gastrointestinal bleeding, especially with suspected angiodysplasia",
+   "New mucocutaneous bleeding in a patient with a known paraprotein or myeloproliferative neoplasm",
+   "Bleeding with severe aortic stenosis suggesting Heyde syndrome",
+   "Bleeding refractory to standard replacement, implying rapid clearance"
+  ],
+  "prognosis": "Outcome tracks the underlying disorder, and bleeding often resolves when that condition is treated, for example after valve replacement or control of a clonal disorder. Persistent or untreated causes can lead to recurrent and difficult-to-manage haemorrhage.",
+  "pitfalls": [
+   "Misdiagnosing it as new-onset inherited von Willebrand disease despite the late presentation",
+   "Failing to search for a paraprotein, myeloproliferative neoplasm, or aortic stenosis",
+   "Expecting a durable response to replacement when antibody-mediated clearance is rapid",
+   "Overlooking angiodysplasia as the bleeding source in Heyde syndrome"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Hoffman: Hematology - Basic Principles and Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause — valve replacement for severe aortic stenosis (Heyde syndrome), or control of a myeloproliferative, lymphoproliferative or plasma-cell disorder",
+   "Manage acute bleeding with desmopressin, von Willebrand factor/factor VIII concentrates, and antifibrinolytics such as tranexamic acid for mucosal bleeding",
+   "Intravenous immunoglobulin for antibody-mediated disease, particularly where there is an associated paraprotein",
+   "Address gastrointestinal angiodysplasia bleeding, which may respond to correcting the multimer defect",
+   "Monitor von Willebrand factor activity, antigen and factor VIII to guide replacement",
+   "Haematology-led coordination with therapy directed at the associated condition"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acquired_von_willebrand_syndrome-pathway",
+   "title": "Acquired von Willebrand syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A late-onset mucocutaneous bleeding disorder from acquired loss of von Willebrand factor function, arising without a personal or family bleeding history",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Major or recurrent gastrointestinal bleeding, especially with suspected angiodysplasia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Von Willebrand factor activity (platelet-binding assay) and antigen with calculation of their ratio, Von Willebrand factor multimer analysis to demonstrate loss of high-molecular-weight forms, Factor VIII activity, which"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause - valve replacement for severe aortic stenosis (Heyde syndrome), or control of a myeloproliferative, lymphoproliferative or plasma-cell disorder"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing it as new-onset inherited von Willebrand disease despite the late presentation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acquired von willebrand syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acquired_von_willebrand_syndrome-matrix",
+   "title": "Acquired von Willebrand syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A late-onset mucocutaneous bleeding disorder from acquired loss of von Willebrand factor function, arising without a personal or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Acquired von Willebrand syndrome develops when a previously normal von Willebrand factor system is disrupted by an underlying disorder. Autoantibodies may accelerate clearance or neutralise function, malignant cells or activated platelets may adsorb the protein, and high shear stress across stenotic valves or in myeloproliferative states can unfold von Willebrand factor and expose it to excessive proteolysis by ADAMTS13. The common consequence is selective loss of the largest, most haemostatically active multimers, impairing platelet adhesion and producing a bleeding phenotype resembling inherited von Willebrand disease.",
-    "additionalDifferentials": [
-      "Inherited von Willebrand disease",
-      "Platelet function disorders",
-      "Acquired haemophilia A",
-      "Immune or drug-induced thrombocytopenia",
-      "Liver disease with impaired haemostasis",
-      "Angiodysplasia bleeding of other cause"
+    [
+     "Key Investigations",
+     "Von Willebrand factor activity (platelet-binding assay) and antigen with calculation of their ratio, Von Willebrand factor",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Von Willebrand factor activity (platelet-binding assay) and antigen with calculation of their ratio",
-      "Von Willebrand factor multimer analysis to demonstrate loss of high-molecular-weight forms",
-      "Factor VIII activity, which may be reduced in parallel",
-      "Serum protein electrophoresis and immunofixation to detect a paraprotein",
-      "Full blood count and marrow or clonality studies for lympho- or myeloproliferative disease",
-      "Echocardiography when a high-shear cardiac lesion such as aortic stenosis is suspected"
+    [
+     "Primary Differentials",
+     "Inherited von Willebrand disease, Platelet function disorders, Acquired haemophilia A",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Major or recurrent gastrointestinal bleeding, especially with suspected angiodysplasia",
-      "New mucocutaneous bleeding in a patient with a known paraprotein or myeloproliferative neoplasm",
-      "Bleeding with severe aortic stenosis suggesting Heyde syndrome",
-      "Bleeding refractory to standard replacement, implying rapid clearance"
+    [
+     "Management Strategy",
+     "Treat the underlying cause - valve replacement for severe aortic stenosis (Heyde syndrome), or control of a myeloproliferative,",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome tracks the underlying disorder, and bleeding often resolves when that condition is treated, for example after valve replacement or control of a clonal disorder. Persistent or untreated causes can lead to recurrent and difficult-to-manage haemorrhage.",
-    "pitfalls": [
-      "Misdiagnosing it as new-onset inherited von Willebrand disease despite the late presentation",
-      "Failing to search for a paraprotein, myeloproliferative neoplasm, or aortic stenosis",
-      "Expecting a durable response to replacement when antibody-mediated clearance is rapid",
-      "Overlooking angiodysplasia as the bleeding source in Heyde syndrome"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Hoffman: Hematology - Basic Principles and Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause — valve replacement for severe aortic stenosis (Heyde syndrome), or control of a myeloproliferative, lymphoproliferative or plasma-cell disorder",
-      "Manage acute bleeding with desmopressin, von Willebrand factor/factor VIII concentrates, and antifibrinolytics such as tranexamic acid for mucosal bleeding",
-      "Intravenous immunoglobulin for antibody-mediated disease, particularly where there is an associated paraprotein",
-      "Address gastrointestinal angiodysplasia bleeding, which may respond to correcting the multimer defect",
-      "Monitor von Willebrand factor activity, antigen and factor VIII to guide replacement",
-      "Haematology-led coordination with therapy directed at the associated condition"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing it as new-onset inherited von Willebrand disease despite the late presentation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acquired von willebrand syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acquired-von-willebrand-syndrome-diagram",
+   "title": "Acquired von Willebrand syndrome: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

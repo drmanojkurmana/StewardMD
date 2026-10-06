@@ -1,79 +1,174 @@
 {
-  "id": "tarsal_tunnel_syndrome",
-  "name": "Tarsal tunnel syndrome",
-  "aliases": [
-    "posterior tibial nerve entrapment",
-    "tibial nerve compression at the ankle",
-    "posterior tarsal tunnel syndrome"
+ "id": "tarsal_tunnel_syndrome",
+ "name": "Tarsal tunnel syndrome",
+ "aliases": [
+  "posterior tibial nerve entrapment",
+  "tibial nerve compression at the ankle",
+  "posterior tarsal tunnel syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Hand & Peripheral nerve",
+ "specialty": "Orthopaedics / Hand Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Entrapment of the posterior tibial nerve or its branches beneath the flexor retinaculum (laciniate ligament) behind and below the medial malleolus",
+   "Presents with burning pain, paraesthesiae and numbness of the sole and toes, often worse on standing or walking and sometimes nocturnal",
+   "A Tinel sign behind the medial malleolus that radiates into the foot supports the diagnosis",
+   "The tunnel contents from anterior to posterior are tibialis posterior, flexor digitorum longus, the posterior tibial artery and vein, the tibial nerve and flexor hallucis longus",
+   "A space-occupying lesion such as a ganglion, varicosities, lipoma, accessory muscle or tenosynovitis is identifiable in a large proportion of cases",
+   "The nerve divides into medial and lateral plantar and calcaneal branches, so symptoms may be confined to part of the sole depending on the branch involved",
+   "A dorsiflexion-eversion manoeuvre that tightens the tunnel can reproduce symptoms",
+   "Generic management includes orthoses and activity modification, corticosteroid injection, and surgical tarsal tunnel release, especially when a space-occupying lesion is present"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Hand & Peripheral nerve",
-  "specialty": "Orthopaedics / Hand Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Entrapment of the posterior tibial nerve or its branches beneath the flexor retinaculum (laciniate ligament) behind and below the medial malleolus",
-      "Presents with burning pain, paraesthesiae and numbness of the sole and toes, often worse on standing or walking and sometimes nocturnal",
-      "A Tinel sign behind the medial malleolus that radiates into the foot supports the diagnosis",
-      "The tunnel contents from anterior to posterior are tibialis posterior, flexor digitorum longus, the posterior tibial artery and vein, the tibial nerve and flexor hallucis longus",
-      "A space-occupying lesion such as a ganglion, varicosities, lipoma, accessory muscle or tenosynovitis is identifiable in a large proportion of cases",
-      "The nerve divides into medial and lateral plantar and calcaneal branches, so symptoms may be confined to part of the sole depending on the branch involved",
-      "A dorsiflexion-eversion manoeuvre that tightens the tunnel can reproduce symptoms",
-      "Generic management includes orthoses and activity modification, corticosteroid injection, and surgical tarsal tunnel release, especially when a space-occupying lesion is present"
+  "pathophysiology": "Tarsal tunnel syndrome results from compression of the tibial nerve within the fibro-osseous tunnel behind the medial malleolus, deep to the flexor retinaculum. Raised pressure within this confined space may arise from space-occupying lesions, hindfoot valgus or other deformity, post-traumatic scarring, tenosynovitis or venous engorgement. Sustained compression impairs axonal transport and causes local demyelination, producing sensory disturbance in the plantar distribution and, in advanced cases, weakness and wasting of the intrinsic foot muscles.",
+  "additionalDifferentials": [
+   "Plantar fasciitis",
+   "Peripheral polyneuropathy, for example diabetic neuropathy",
+   "S1 lumbosacral radiculopathy",
+   "Morton (interdigital) neuroma",
+   "Distal medial plantar nerve entrapment (jogger's foot)",
+   "Referred pain or peripheral vascular claudication"
+  ],
+  "additionalInvestigations": [
+   "Nerve conduction studies and electromyography, recognising that results can be less reliable than at other sites",
+   "MRI to identify a space-occupying lesion or accessory muscle within the tunnel",
+   "Ultrasound to assess the nerve and surrounding structures dynamically",
+   "Weightbearing plain radiographs for bony deformity, coalition or osteophytes",
+   "Clinical provocative testing with the Tinel sign and dorsiflexion-eversion manoeuvre",
+   "Screening for diabetes mellitus or other systemic causes of neuropathy"
+  ],
+  "redFlags": [
+   "A mass lesion within the tunnel that may represent a tumour",
+   "Rapidly progressive motor loss or intrinsic foot muscle wasting",
+   "Features suggesting a systemic neuropathy that requires separate investigation",
+   "Evidence of infection or acute trauma around the medial ankle"
+  ],
+  "prognosis": "Outcomes are good when a discrete compressive cause such as a ganglion is identified and released, whereas idiopathic cases are less predictable and may have incomplete relief of symptoms.",
+  "pitfalls": [
+   "Confusing the condition with plantar fasciitis or a generalised polyneuropathy and treating the wrong diagnosis",
+   "Failing to image the tunnel and missing a space-occupying lesion",
+   "Relying on nerve conduction studies, which can be falsely normal, to exclude the diagnosis",
+   "Incomplete surgical release that leaves the distal medial and lateral plantar branches decompressed inadequately"
+  ],
+  "references": [
+   "Campbell's Operative Orthopaedics",
+   "Green's Operative Hand Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Excise an identifiable space-occupying lesion such as a ganglion, lipoma, varicosities or accessory muscle, which affords the most reliable outcome",
+   "Correct hindfoot deformity and biomechanical factors with orthoses and appropriate footwear",
+   "Offer conservative care with activity modification, non-steroidal anti-inflammatory analgesia and neuropathic pain medication",
+   "Consider a corticosteroid injection into the tunnel for inflammatory or milder cases",
+   "Perform surgical decompression by division of the flexor retinaculum when conservative treatment fails",
+   "Screen for and treat diabetes mellitus and other systemic neuropathies contributing to nerve vulnerability",
+   "Refer to hand or foot and ankle surgery, counselling that idiopathic cases respond less predictably"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tarsal_tunnel_syndrome-pathway",
+   "title": "Tarsal tunnel syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Entrapment of the posterior tibial nerve or its branches beneath the flexor retinaculum (laciniate ligament) behind and below the medial malleolus",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A mass lesion within the tunnel that may represent a tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Nerve conduction studies and electromyography, recognising that results can be less reliable than at other sites, MRI to identify a space-occupying lesion or accessory muscle within the tunnel, Ultrasound to assess the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Excise an identifiable space-occupying lesion such as a ganglion, lipoma, varicosities or accessory muscle, which affords the most reliable outcome"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the condition with plantar fasciitis or a generalised polyneuropathy and treating the wrong diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tarsal tunnel syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tarsal_tunnel_syndrome-matrix",
+   "title": "Tarsal tunnel syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Entrapment of the posterior tibial nerve or its branches beneath the flexor retinaculum (laciniate ligament) behind and below the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Tarsal tunnel syndrome results from compression of the tibial nerve within the fibro-osseous tunnel behind the medial malleolus, deep to the flexor retinaculum. Raised pressure within this confined space may arise from space-occupying lesions, hindfoot valgus or other deformity, post-traumatic scarring, tenosynovitis or venous engorgement. Sustained compression impairs axonal transport and causes local demyelination, producing sensory disturbance in the plantar distribution and, in advanced cases, weakness and wasting of the intrinsic foot muscles.",
-    "additionalDifferentials": [
-      "Plantar fasciitis",
-      "Peripheral polyneuropathy, for example diabetic neuropathy",
-      "S1 lumbosacral radiculopathy",
-      "Morton (interdigital) neuroma",
-      "Distal medial plantar nerve entrapment (jogger's foot)",
-      "Referred pain or peripheral vascular claudication"
+    [
+     "Key Investigations",
+     "Nerve conduction studies and electromyography, recognising that results can be less reliable than at other sites, MRI to identify",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Nerve conduction studies and electromyography, recognising that results can be less reliable than at other sites",
-      "MRI to identify a space-occupying lesion or accessory muscle within the tunnel",
-      "Ultrasound to assess the nerve and surrounding structures dynamically",
-      "Weightbearing plain radiographs for bony deformity, coalition or osteophytes",
-      "Clinical provocative testing with the Tinel sign and dorsiflexion-eversion manoeuvre",
-      "Screening for diabetes mellitus or other systemic causes of neuropathy"
+    [
+     "Primary Differentials",
+     "Plantar fasciitis, Peripheral polyneuropathy, for example diabetic neuropathy, S1 lumbosacral radiculopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A mass lesion within the tunnel that may represent a tumour",
-      "Rapidly progressive motor loss or intrinsic foot muscle wasting",
-      "Features suggesting a systemic neuropathy that requires separate investigation",
-      "Evidence of infection or acute trauma around the medial ankle"
+    [
+     "Management Strategy",
+     "Excise an identifiable space-occupying lesion such as a ganglion, lipoma, varicosities or accessory muscle, which affords the",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcomes are good when a discrete compressive cause such as a ganglion is identified and released, whereas idiopathic cases are less predictable and may have incomplete relief of symptoms.",
-    "pitfalls": [
-      "Confusing the condition with plantar fasciitis or a generalised polyneuropathy and treating the wrong diagnosis",
-      "Failing to image the tunnel and missing a space-occupying lesion",
-      "Relying on nerve conduction studies, which can be falsely normal, to exclude the diagnosis",
-      "Incomplete surgical release that leaves the distal medial and lateral plantar branches decompressed inadequately"
-    ],
-    "references": [
-      "Campbell's Operative Orthopaedics",
-      "Green's Operative Hand Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Excise an identifiable space-occupying lesion such as a ganglion, lipoma, varicosities or accessory muscle, which affords the most reliable outcome",
-      "Correct hindfoot deformity and biomechanical factors with orthoses and appropriate footwear",
-      "Offer conservative care with activity modification, non-steroidal anti-inflammatory analgesia and neuropathic pain medication",
-      "Consider a corticosteroid injection into the tunnel for inflammatory or milder cases",
-      "Perform surgical decompression by division of the flexor retinaculum when conservative treatment fails",
-      "Screen for and treat diabetes mellitus and other systemic neuropathies contributing to nerve vulnerability",
-      "Refer to hand or foot and ankle surgery, counselling that idiopathic cases respond less predictably"
+    [
+     "Clinical Pitfall",
+     "Confusing the condition with plantar fasciitis or a generalised polyneuropathy and treating the wrong diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tarsal tunnel syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tarsal-tunnel-syndrome-diagram",
+   "title": "Tarsal tunnel syndrome: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

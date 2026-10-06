@@ -1,77 +1,172 @@
 {
-  "id": "frank_ter_haar_syndrome",
-  "name": "Frank-ter Haar syndrome",
-  "aliases": [
-    "SH3PXD2B",
-    "Ter Haar syndrome",
-    "megalocornea-multiple skeletal anomalies syndrome"
+ "id": "frank_ter_haar_syndrome",
+ "name": "Frank-ter Haar syndrome",
+ "aliases": [
+  "SH3PXD2B",
+  "Ter Haar syndrome",
+  "megalocornea-multiple skeletal anomalies syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare autosomal recessive disorder chiefly caused by variants in SH3PXD2B, affecting bone, eye and heart development",
+   "Craniofacial features include brachycephaly, a prominent forehead, wide fontanelles, hypertelorism and full cheeks",
+   "The characteristic eye finding is megalocornea, often with congenital glaucoma, threatening vision if unrecognised",
+   "Skeletal features include bowing of the long bones, prominent coccyx, flexion deformities and generalised joint or bone anomalies",
+   "Congenital heart defects are frequent and contribute to morbidity",
+   "It overlaps with Melnick-Needles syndrome and other frontometaphyseal/otopalatodigital-spectrum disorders, which enter the differential",
+   "Management is supportive with early ophthalmic assessment for glaucoma, cardiac evaluation and orthopaedic care"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare autosomal recessive disorder chiefly caused by variants in SH3PXD2B, affecting bone, eye and heart development",
-      "Craniofacial features include brachycephaly, a prominent forehead, wide fontanelles, hypertelorism and full cheeks",
-      "The characteristic eye finding is megalocornea, often with congenital glaucoma, threatening vision if unrecognised",
-      "Skeletal features include bowing of the long bones, prominent coccyx, flexion deformities and generalised joint or bone anomalies",
-      "Congenital heart defects are frequent and contribute to morbidity",
-      "It overlaps with Melnick-Needles syndrome and other frontometaphyseal/otopalatodigital-spectrum disorders, which enter the differential",
-      "Management is supportive with early ophthalmic assessment for glaucoma, cardiac evaluation and orthopaedic care"
+  "pathophysiology": "Frank-ter Haar syndrome is most often caused by biallelic loss-of-function variants in SH3PXD2B, an adaptor protein that organises podosomes, the actin-rich structures cells use to remodel the extracellular matrix. Impaired podosome function disturbs matrix turnover in developing bone, eye and cardiovascular tissue. This produces the skeletal anomalies with bowing and flexion deformities, the megalocornea and glaucoma from abnormal anterior-segment development, and the congenital cardiac defects that together define the phenotype.",
+  "additionalDifferentials": [
+   "Melnick-Needles syndrome",
+   "Otopalatodigital spectrum disorders",
+   "Frontometaphyseal dysplasia",
+   "Serpentine fibula-polycystic kidney syndrome",
+   "Isolated congenital glaucoma with megalocornea",
+   "Other syndromic skeletal dysplasias with eye involvement"
+  ],
+  "additionalInvestigations": [
+   "SH3PXD2B sequencing, ideally within a relevant gene panel",
+   "Ophthalmic examination for megalocornea and intraocular pressure measurement for glaucoma",
+   "Echocardiography for congenital heart disease",
+   "Skeletal survey for bowing, flexion deformities and other bone anomalies",
+   "Craniofacial imaging where indicated",
+   "Developmental and growth assessment"
+  ],
+  "redFlags": [
+   "Congenital glaucoma with raised intraocular pressure risking irreversible visual loss",
+   "Haemodynamically significant congenital heart disease",
+   "Progressive skeletal deformity affecting function",
+   "Respiratory or feeding difficulty in infancy"
+  ],
+  "prognosis": "Outlook varies with the severity of cardiac and skeletal involvement; some infants have serious complications early in life, while others survive into childhood and beyond with careful multidisciplinary management, and vision depends on prompt glaucoma treatment.",
+  "pitfalls": [
+   "Missing congenital glaucoma behind an apparently large, clear cornea",
+   "Confusing it with Melnick-Needles or other otopalatodigital-spectrum disorders",
+   "Overlooking a significant congenital heart defect",
+   "Failing to arrange molecular confirmation to guide recurrence-risk counselling"
+  ],
+  "references": [
+   "OMIM / GeneReviews: Frank-ter Haar Syndrome",
+   "Smith's Recognizable Patterns of Human Malformation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Urgent ophthalmological management of congenital glaucoma with intraocular-pressure-lowering therapy and glaucoma surgery to preserve vision, with lifelong monitoring of the megalocornea",
+   "Cardiological assessment and treatment of congenital heart defects, including surgical correction where indicated",
+   "Orthopaedic and physiotherapy management of long-bone bowing, flexion deformities and joint contractures, with corrective surgery as needed",
+   "Regular surveillance of growth, development and progression of skeletal deformity",
+   "Multidisciplinary coordination across clinical genetics, ophthalmology, cardiology and orthopaedics",
+   "Genetic counselling for the autosomal recessive SH3PXD2B-related disorder, with carrier testing and recurrence-risk discussion"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "frank_ter_haar_syndrome-pathway",
+   "title": "Frank-ter Haar syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare autosomal recessive disorder chiefly caused by variants in SH3PXD2B, affecting bone, eye and heart development",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Congenital glaucoma with raised intraocular pressure risking irreversible visual loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: SH3PXD2B sequencing, ideally within a relevant gene panel, Ophthalmic examination for megalocornea and intraocular pressure measurement for glaucoma, Echocardiography for congenital heart disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Urgent ophthalmological management of congenital glaucoma with intraocular-pressure-lowering therapy and glaucoma surgery to preserve vision, with lifelong monitoring of the megalocornea"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing congenital glaucoma behind an apparently large, clear cornea"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of frank-ter haar syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "frank_ter_haar_syndrome-matrix",
+   "title": "Frank-ter Haar syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare autosomal recessive disorder chiefly caused by variants in SH3PXD2B, affecting bone, eye and heart development",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Frank-ter Haar syndrome is most often caused by biallelic loss-of-function variants in SH3PXD2B, an adaptor protein that organises podosomes, the actin-rich structures cells use to remodel the extracellular matrix. Impaired podosome function disturbs matrix turnover in developing bone, eye and cardiovascular tissue. This produces the skeletal anomalies with bowing and flexion deformities, the megalocornea and glaucoma from abnormal anterior-segment development, and the congenital cardiac defects that together define the phenotype.",
-    "additionalDifferentials": [
-      "Melnick-Needles syndrome",
-      "Otopalatodigital spectrum disorders",
-      "Frontometaphyseal dysplasia",
-      "Serpentine fibula-polycystic kidney syndrome",
-      "Isolated congenital glaucoma with megalocornea",
-      "Other syndromic skeletal dysplasias with eye involvement"
+    [
+     "Key Investigations",
+     "SH3PXD2B sequencing, ideally within a relevant gene panel, Ophthalmic examination for megalocornea and intraocular pressure",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "SH3PXD2B sequencing, ideally within a relevant gene panel",
-      "Ophthalmic examination for megalocornea and intraocular pressure measurement for glaucoma",
-      "Echocardiography for congenital heart disease",
-      "Skeletal survey for bowing, flexion deformities and other bone anomalies",
-      "Craniofacial imaging where indicated",
-      "Developmental and growth assessment"
+    [
+     "Primary Differentials",
+     "Melnick-Needles syndrome, Otopalatodigital spectrum disorders, Frontometaphyseal dysplasia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Congenital glaucoma with raised intraocular pressure risking irreversible visual loss",
-      "Haemodynamically significant congenital heart disease",
-      "Progressive skeletal deformity affecting function",
-      "Respiratory or feeding difficulty in infancy"
+    [
+     "Management Strategy",
+     "Urgent ophthalmological management of congenital glaucoma with intraocular-pressure-lowering therapy and glaucoma surgery to",
+     "Core treatment modality"
     ],
-    "prognosis": "Outlook varies with the severity of cardiac and skeletal involvement; some infants have serious complications early in life, while others survive into childhood and beyond with careful multidisciplinary management, and vision depends on prompt glaucoma treatment.",
-    "pitfalls": [
-      "Missing congenital glaucoma behind an apparently large, clear cornea",
-      "Confusing it with Melnick-Needles or other otopalatodigital-spectrum disorders",
-      "Overlooking a significant congenital heart defect",
-      "Failing to arrange molecular confirmation to guide recurrence-risk counselling"
-    ],
-    "references": [
-      "OMIM / GeneReviews: Frank-ter Haar Syndrome",
-      "Smith's Recognizable Patterns of Human Malformation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Urgent ophthalmological management of congenital glaucoma with intraocular-pressure-lowering therapy and glaucoma surgery to preserve vision, with lifelong monitoring of the megalocornea",
-      "Cardiological assessment and treatment of congenital heart defects, including surgical correction where indicated",
-      "Orthopaedic and physiotherapy management of long-bone bowing, flexion deformities and joint contractures, with corrective surgery as needed",
-      "Regular surveillance of growth, development and progression of skeletal deformity",
-      "Multidisciplinary coordination across clinical genetics, ophthalmology, cardiology and orthopaedics",
-      "Genetic counselling for the autosomal recessive SH3PXD2B-related disorder, with carrier testing and recurrence-risk discussion"
+    [
+     "Clinical Pitfall",
+     "Missing congenital glaucoma behind an apparently large, clear cornea",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for frank-ter haar syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "frank-ter-haar-syndrome-diagram",
+   "title": "Frank-ter Haar syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

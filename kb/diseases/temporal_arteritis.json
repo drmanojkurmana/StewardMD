@@ -132,5 +132,100 @@
       "importedAt": "2026-06-29T13:45:37Z",
       "contentHash": "h938d30bf"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "temporal_arteritis-dx-algo",
+      "title": "Giant cell (temporal) arteritis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Occurs almost exclusively in people over 50; mean age of onset around 70, with women making up roughly two-thirds of cases. Rare in Black patients; higher incidence in Scandinavian populations (Harrison 22e p.115, p.2902).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Ischemic optic neuropathy is the dreaded complication; about half of untreated patients develop blindness from ophthalmic-artery involvement, and arteritic AION is the leading cause of rapidly developing",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Temporal artery biopsy: yield improved by harvesting a long segment (3-5 cm) with serial sectioning because involvement is segmental/patchy; biopsy may still show vasculitis even after about 14 days of glucocorticoids, but"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Migraine - common in the elderly (more prevalent than GCA) and may improve with prednisone, so a steroid response does not by itself confirm GCA (Harrison 22e p.115)., Nonarteritic anterior ischemic optic"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: A normal ESR does not rule out GCA (Harrison 22e p.115)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for giant cell (temporal) arteritis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "temporal_arteritis-matrix",
+      "title": "Giant cell (temporal) arteritis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs almost exclusively in people over 50; mean age of onset around 70, with women making up roughly two-thirds of cases. Rare",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Temporal artery biopsy: yield improved by harvesting a long segment (3-5 cm) with serial sectioning because involvement is",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Migraine - common in the elderly (more prevalent than GCA) and may improve with prednisone, so a steroid response does not by",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Ischemic optic neuropathy is the dreaded complication; about half of untreated patients develop blindness from ophthalmic-artery",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal ESR does not rule out GCA (Harrison 22e p.115).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for giant cell (temporal) arteritis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "temporal-arteritis-diagram",
+      "title": "Giant cell (temporal) arteritis: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

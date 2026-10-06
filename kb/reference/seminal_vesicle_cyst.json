@@ -1,81 +1,176 @@
 {
-  "id": "seminal_vesicle_cyst",
-  "name": "Seminal vesicle cyst",
-  "aliases": [
-    "seminal vesicle cyst",
-    "congenital seminal vesicle cyst",
-    "acquired seminal vesicle cyst"
+ "id": "seminal_vesicle_cyst",
+ "name": "Seminal vesicle cyst",
+ "aliases": [
+  "seminal vesicle cyst",
+  "congenital seminal vesicle cyst",
+  "acquired seminal vesicle cyst"
+ ],
+ "class": "non_infective",
+ "system": "Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology / EAU Guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "May be congenital, often with ipsilateral renal or mesonephric duct anomalies as in Zinner syndrome, or acquired secondary to ejaculatory duct obstruction, infection or prior surgery",
+   "Located laterally, off the midline, which distinguishes it from midline mullerian duct and prostatic utricle cysts",
+   "Frequently asymptomatic; larger cysts may cause perineal discomfort, painful ejaculation, haematospermia, dysuria, or infertility",
+   "Congenital cysts commonly present between the second and fourth decades as they gradually enlarge",
+   "Transrectal ultrasound and pelvic MRI characterise the lesion and its relationship to the ejaculatory ducts and the seminal vesicle",
+   "An association with renal agenesis should always prompt a search for the complete Zinner triad",
+   "Small asymptomatic cysts are observed, whereas symptomatic ones may be aspirated or excised"
   ],
-  "class": "non_infective",
-  "system": "Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology / EAU Guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "May be congenital, often with ipsilateral renal or mesonephric duct anomalies as in Zinner syndrome, or acquired secondary to ejaculatory duct obstruction, infection or prior surgery",
-      "Located laterally, off the midline, which distinguishes it from midline mullerian duct and prostatic utricle cysts",
-      "Frequently asymptomatic; larger cysts may cause perineal discomfort, painful ejaculation, haematospermia, dysuria, or infertility",
-      "Congenital cysts commonly present between the second and fourth decades as they gradually enlarge",
-      "Transrectal ultrasound and pelvic MRI characterise the lesion and its relationship to the ejaculatory ducts and the seminal vesicle",
-      "An association with renal agenesis should always prompt a search for the complete Zinner triad",
-      "Small asymptomatic cysts are observed, whereas symptomatic ones may be aspirated or excised"
+  "pathophysiology": "Congenital seminal vesicle cysts result from maldevelopment of the distal mesonephric duct with atresia or obstruction of the ejaculatory duct, causing cystic dilatation of the seminal vesicle and frequently coexisting ipsilateral renal maldevelopment. Acquired cysts arise when inflammation, previous surgery or chronic obstruction impedes seminal vesicle drainage, leading to retention of secretions and progressive cystic expansion.",
+  "additionalDifferentials": [
+   "Midline mullerian duct cyst",
+   "Midline prostatic utricle cyst",
+   "Ejaculatory duct cyst",
+   "Zinner syndrome when renal agenesis is present",
+   "Bladder or ureteric diverticulum",
+   "Prostatic or pelvic cystic neoplasm"
+  ],
+  "additionalInvestigations": [
+   "Transrectal ultrasound to localise and measure the cyst",
+   "Pelvic MRI for detailed anatomy and to assess contents, which may be haemorrhagic or proteinaceous",
+   "Renal tract imaging to exclude ipsilateral renal agenesis",
+   "Semen analysis if fertility is affected",
+   "Cyst aspiration for cytology or culture where infection or diagnostic uncertainty exists",
+   "Cross-sectional imaging to exclude a solid or neoplastic component"
+  ],
+  "redFlags": [
+   "Features suggesting infection, abscess or malignancy within or adjacent to the cyst",
+   "An associated renal anomaly with a compromised solitary kidney",
+   "Rapid growth or solid components on imaging",
+   "Refractory pain, infertility or recurrent haematospermia"
+  ],
+  "prognosis": "Generally benign with an excellent outlook; asymptomatic cysts tend to remain stable, and symptomatic lesions usually resolve after aspiration or excision, although recurrence can follow simple aspiration.",
+  "pitfalls": [
+   "Failing to look for associated renal agenesis and the full Zinner triad",
+   "Misclassifying a lateral cyst as a midline mullerian or utricle cyst",
+   "Attributing haematospermia solely to the cyst without excluding other causes",
+   "Choosing simple aspiration where recurrence is likely and excision would be more definitive"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "EAU Guidelines"
+  ],
+  "crossLinks": [
+   "zinner_syndrome",
+   "mullerian_duct_cyst",
+   "utricle_cyst"
+  ],
+  "management": [
+   "Manage small asymptomatic cysts conservatively with surveillance imaging rather than intervention",
+   "Treat symptomatic cysts by transrectal or transperineal aspiration, or by definitive surgical excision such as laparoscopic or robotic seminal vesiculectomy",
+   "Treat superimposed infection with an appropriate antibiotic course",
+   "Address associated ejaculatory duct obstruction and infertility with transurethral resection of the ejaculatory ducts or assisted reproductive techniques",
+   "Investigate for ipsilateral renal agenesis and the wider Zinner triad, arranging renal tract surveillance where a congenital anomaly is confirmed",
+   "Refer to urology and counsel that simple aspiration carries a risk of recurrence, favouring excision for definitive cure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "seminal_vesicle_cyst-pathway",
+   "title": "Seminal vesicle cyst: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "May be congenital, often with ipsilateral renal or mesonephric duct anomalies as in Zinner syndrome, or acquired secondary to ejaculatory duct obstruction, infection or prior surgery",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting infection, abscess or malignancy within or adjacent to the cyst",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transrectal ultrasound to localise and measure the cyst, Pelvic MRI for detailed anatomy and to assess contents, which may be haemorrhagic or proteinaceous, Renal tract imaging to exclude ipsilateral renal agenesis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage small asymptomatic cysts conservatively with surveillance imaging rather than intervention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to look for associated renal agenesis and the full Zinner triad"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of seminal vesicle cyst."
+  }
+ ],
+ "tables": [
+  {
+   "id": "seminal_vesicle_cyst-matrix",
+   "title": "Seminal vesicle cyst: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "May be congenital, often with ipsilateral renal or mesonephric duct anomalies as in Zinner syndrome, or acquired secondary to",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Congenital seminal vesicle cysts result from maldevelopment of the distal mesonephric duct with atresia or obstruction of the ejaculatory duct, causing cystic dilatation of the seminal vesicle and frequently coexisting ipsilateral renal maldevelopment. Acquired cysts arise when inflammation, previous surgery or chronic obstruction impedes seminal vesicle drainage, leading to retention of secretions and progressive cystic expansion.",
-    "additionalDifferentials": [
-      "Midline mullerian duct cyst",
-      "Midline prostatic utricle cyst",
-      "Ejaculatory duct cyst",
-      "Zinner syndrome when renal agenesis is present",
-      "Bladder or ureteric diverticulum",
-      "Prostatic or pelvic cystic neoplasm"
+    [
+     "Key Investigations",
+     "Transrectal ultrasound to localise and measure the cyst, Pelvic MRI for detailed anatomy and to assess contents, which may be",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transrectal ultrasound to localise and measure the cyst",
-      "Pelvic MRI for detailed anatomy and to assess contents, which may be haemorrhagic or proteinaceous",
-      "Renal tract imaging to exclude ipsilateral renal agenesis",
-      "Semen analysis if fertility is affected",
-      "Cyst aspiration for cytology or culture where infection or diagnostic uncertainty exists",
-      "Cross-sectional imaging to exclude a solid or neoplastic component"
+    [
+     "Primary Differentials",
+     "Midline mullerian duct cyst, Midline prostatic utricle cyst, Ejaculatory duct cyst",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting infection, abscess or malignancy within or adjacent to the cyst",
-      "An associated renal anomaly with a compromised solitary kidney",
-      "Rapid growth or solid components on imaging",
-      "Refractory pain, infertility or recurrent haematospermia"
+    [
+     "Management Strategy",
+     "Manage small asymptomatic cysts conservatively with surveillance imaging rather than intervention",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally benign with an excellent outlook; asymptomatic cysts tend to remain stable, and symptomatic lesions usually resolve after aspiration or excision, although recurrence can follow simple aspiration.",
-    "pitfalls": [
-      "Failing to look for associated renal agenesis and the full Zinner triad",
-      "Misclassifying a lateral cyst as a midline mullerian or utricle cyst",
-      "Attributing haematospermia solely to the cyst without excluding other causes",
-      "Choosing simple aspiration where recurrence is likely and excision would be more definitive"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "EAU Guidelines"
-    ],
-    "crossLinks": [
-      "zinner_syndrome",
-      "mullerian_duct_cyst",
-      "utricle_cyst"
-    ],
-    "management": [
-      "Manage small asymptomatic cysts conservatively with surveillance imaging rather than intervention",
-      "Treat symptomatic cysts by transrectal or transperineal aspiration, or by definitive surgical excision such as laparoscopic or robotic seminal vesiculectomy",
-      "Treat superimposed infection with an appropriate antibiotic course",
-      "Address associated ejaculatory duct obstruction and infertility with transurethral resection of the ejaculatory ducts or assisted reproductive techniques",
-      "Investigate for ipsilateral renal agenesis and the wider Zinner triad, arranging renal tract surveillance where a congenital anomaly is confirmed",
-      "Refer to urology and counsel that simple aspiration carries a risk of recurrence, favouring excision for definitive cure"
+    [
+     "Clinical Pitfall",
+     "Failing to look for associated renal agenesis and the full Zinner triad",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for seminal vesicle cyst."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "seminal-vesicle-cyst-diagram",
+   "title": "Seminal vesicle cyst: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

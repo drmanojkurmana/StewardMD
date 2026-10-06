@@ -1,78 +1,173 @@
 {
-  "id": "t_cell_prolymphocytic_leukemia",
-  "name": "T-cell prolymphocytic leukaemia",
-  "aliases": [
-    "T-PLL",
-    "prolymphocytic leukaemia T-cell type",
-    "TCL1-rearranged T-cell leukaemia"
+ "id": "t_cell_prolymphocytic_leukemia",
+ "name": "T-cell prolymphocytic leukaemia",
+ "aliases": [
+  "T-PLL",
+  "prolymphocytic leukaemia T-cell type",
+  "TCL1-rearranged T-cell leukaemia"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An aggressive mature T-cell leukaemia typically presenting with a very high lymphocyte count, hepatosplenomegaly and generalised lymphadenopathy",
+   "Skin infiltration and serous effusions are recognised and relatively distinctive extranodal features",
+   "The blood film shows small to medium prolymphocytes with a visible nucleolus and characteristic cytoplasmic blebbing or protrusions",
+   "The cells are usually mature T cells expressing CD2, CD3, CD5 and CD7, most often CD4 positive, and frequently co-express CD4 and CD8",
+   "Rearrangement or overexpression of the TCL1 oncogene, commonly through inversion or translocation of chromosome 14, is the defining molecular lesion",
+   "Association with ataxia-telangiectasia and somatic ATM abnormalities is well recognised",
+   "The course is usually rapidly progressive, and durable control generally requires monoclonal antibody therapy followed by allogeneic transplantation in fit patients"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An aggressive mature T-cell leukaemia typically presenting with a very high lymphocyte count, hepatosplenomegaly and generalised lymphadenopathy",
-      "Skin infiltration and serous effusions are recognised and relatively distinctive extranodal features",
-      "The blood film shows small to medium prolymphocytes with a visible nucleolus and characteristic cytoplasmic blebbing or protrusions",
-      "The cells are usually mature T cells expressing CD2, CD3, CD5 and CD7, most often CD4 positive, and frequently co-express CD4 and CD8",
-      "Rearrangement or overexpression of the TCL1 oncogene, commonly through inversion or translocation of chromosome 14, is the defining molecular lesion",
-      "Association with ataxia-telangiectasia and somatic ATM abnormalities is well recognised",
-      "The course is usually rapidly progressive, and durable control generally requires monoclonal antibody therapy followed by allogeneic transplantation in fit patients"
+  "pathophysiology": "T-cell prolymphocytic leukaemia is a clonal malignancy of mature post-thymic T lymphocytes. The hallmark oncogenic event is aberrant activation of the TCL1 family of oncogenes, most often through chromosome 14 inversions or translocations that juxtapose TCL1 with T-cell receptor regulatory elements, driving proliferation via enhanced AKT signalling. Additional abnormalities of the ATM gene on chromosome 11, echoing the germline defect of ataxia-telangiectasia, impair DNA damage responses and contribute to genomic instability. The resulting rapidly dividing clone accumulates in blood, marrow, spleen, liver, lymph nodes and skin.",
+  "additionalDifferentials": [
+   "B-cell prolymphocytic leukaemia",
+   "Chronic lymphocytic leukaemia with increased prolymphocytes",
+   "Adult T-cell leukaemia/lymphoma",
+   "Sezary syndrome",
+   "T-cell large granular lymphocytic leukaemia",
+   "Mantle cell lymphoma in leukaemic phase"
+  ],
+  "additionalInvestigations": [
+   "Peripheral blood film to identify prolymphocyte morphology",
+   "Flow cytometry immunophenotyping including CD4/CD8 and TCL1 expression",
+   "Cytogenetics and FISH for chromosome 14 (TCL1) and chromosome 11 (ATM) abnormalities",
+   "T-cell receptor gene rearrangement to confirm clonality",
+   "Cross-sectional imaging to assess organomegaly and effusions",
+   "Bone marrow examination to document infiltration"
+  ],
+  "redFlags": [
+   "Rapidly doubling lymphocyte count with progressive organomegaly",
+   "Development of effusions or symptomatic skin infiltration",
+   "Marrow failure with cytopenias and infection or bleeding",
+   "Central nervous system or other extranodal spread"
+  ],
+  "prognosis": "T-cell prolymphocytic leukaemia is aggressive with historically short survival; monoclonal antibody induction can produce remission, but long-term disease control usually depends on allogeneic transplantation in eligible patients.",
+  "pitfalls": [
+   "Mislabelling it as an atypical B-cell chronic lymphocytic leukaemia without immunophenotyping",
+   "Adopting a watch-and-wait strategy suited to indolent disease in this aggressive entity",
+   "Overlooking TCL1 and ATM testing that confirm the diagnosis",
+   "Underestimating the poor prognosis when counselling and planning transplant early"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Intravenous alemtuzumab, an anti-CD52 monoclonal antibody, as induction of choice to achieve remission",
+   "Allogeneic haematopoietic stem cell transplantation to consolidate remission in eligible, fit patients",
+   "Antimicrobial prophylaxis against Pneumocystis, cytomegalovirus and fungal infection during profound alemtuzumab-induced immunosuppression, with cytomegalovirus viral-load monitoring",
+   "Blood-product support and management of cytopenias and organomegaly-related symptoms",
+   "Consideration of novel agents or clinical trials, such as BCL2 inhibition, for relapsed or refractory disease",
+   "Regular monitoring for relapse given the high relapse rate after remission",
+   "Management within a specialist haematology and transplant centre"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "t_cell_prolymphocytic_leukemia-pathway",
+   "title": "T-cell prolymphocytic leukaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An aggressive mature T-cell leukaemia typically presenting with a very high lymphocyte count, hepatosplenomegaly and generalised lymphadenopathy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly doubling lymphocyte count with progressive organomegaly",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Peripheral blood film to identify prolymphocyte morphology, Flow cytometry immunophenotyping including CD4/CD8 and TCL1 expression, Cytogenetics and FISH for chromosome 14 (TCL1) and chromosome 11 (ATM) abnormalities"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Intravenous alemtuzumab, an anti-CD52 monoclonal antibody, as induction of choice to achieve remission"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling it as an atypical B-cell chronic lymphocytic leukaemia without immunophenotyping"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of t-cell prolymphocytic leukaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "t_cell_prolymphocytic_leukemia-matrix",
+   "title": "T-cell prolymphocytic leukaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An aggressive mature T-cell leukaemia typically presenting with a very high lymphocyte count, hepatosplenomegaly and generalised",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "T-cell prolymphocytic leukaemia is a clonal malignancy of mature post-thymic T lymphocytes. The hallmark oncogenic event is aberrant activation of the TCL1 family of oncogenes, most often through chromosome 14 inversions or translocations that juxtapose TCL1 with T-cell receptor regulatory elements, driving proliferation via enhanced AKT signalling. Additional abnormalities of the ATM gene on chromosome 11, echoing the germline defect of ataxia-telangiectasia, impair DNA damage responses and contribute to genomic instability. The resulting rapidly dividing clone accumulates in blood, marrow, spleen, liver, lymph nodes and skin.",
-    "additionalDifferentials": [
-      "B-cell prolymphocytic leukaemia",
-      "Chronic lymphocytic leukaemia with increased prolymphocytes",
-      "Adult T-cell leukaemia/lymphoma",
-      "Sezary syndrome",
-      "T-cell large granular lymphocytic leukaemia",
-      "Mantle cell lymphoma in leukaemic phase"
+    [
+     "Key Investigations",
+     "Peripheral blood film to identify prolymphocyte morphology, Flow cytometry immunophenotyping including CD4/CD8 and TCL1",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Peripheral blood film to identify prolymphocyte morphology",
-      "Flow cytometry immunophenotyping including CD4/CD8 and TCL1 expression",
-      "Cytogenetics and FISH for chromosome 14 (TCL1) and chromosome 11 (ATM) abnormalities",
-      "T-cell receptor gene rearrangement to confirm clonality",
-      "Cross-sectional imaging to assess organomegaly and effusions",
-      "Bone marrow examination to document infiltration"
+    [
+     "Primary Differentials",
+     "B-cell prolymphocytic leukaemia, Chronic lymphocytic leukaemia with increased prolymphocytes, Adult T-cell leukaemia/lymphoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly doubling lymphocyte count with progressive organomegaly",
-      "Development of effusions or symptomatic skin infiltration",
-      "Marrow failure with cytopenias and infection or bleeding",
-      "Central nervous system or other extranodal spread"
+    [
+     "Management Strategy",
+     "Intravenous alemtuzumab, an anti-CD52 monoclonal antibody, as induction of choice to achieve remission",
+     "Core treatment modality"
     ],
-    "prognosis": "T-cell prolymphocytic leukaemia is aggressive with historically short survival; monoclonal antibody induction can produce remission, but long-term disease control usually depends on allogeneic transplantation in eligible patients.",
-    "pitfalls": [
-      "Mislabelling it as an atypical B-cell chronic lymphocytic leukaemia without immunophenotyping",
-      "Adopting a watch-and-wait strategy suited to indolent disease in this aggressive entity",
-      "Overlooking TCL1 and ATM testing that confirm the diagnosis",
-      "Underestimating the poor prognosis when counselling and planning transplant early"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Intravenous alemtuzumab, an anti-CD52 monoclonal antibody, as induction of choice to achieve remission",
-      "Allogeneic haematopoietic stem cell transplantation to consolidate remission in eligible, fit patients",
-      "Antimicrobial prophylaxis against Pneumocystis, cytomegalovirus and fungal infection during profound alemtuzumab-induced immunosuppression, with cytomegalovirus viral-load monitoring",
-      "Blood-product support and management of cytopenias and organomegaly-related symptoms",
-      "Consideration of novel agents or clinical trials, such as BCL2 inhibition, for relapsed or refractory disease",
-      "Regular monitoring for relapse given the high relapse rate after remission",
-      "Management within a specialist haematology and transplant centre"
+    [
+     "Clinical Pitfall",
+     "Mislabelling it as an atypical B-cell chronic lymphocytic leukaemia without immunophenotyping",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for t-cell prolymphocytic leukaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "t-cell-prolymphocytic-leukemia-diagram",
+   "title": "T-cell prolymphocytic leukaemia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

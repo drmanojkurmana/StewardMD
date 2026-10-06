@@ -150,5 +150,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hb1d84cf"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "asthma_exac-dx-algo",
+      "title": "Asthma exacerbation: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "An exacerbation is an episode of acute bronchospasm that may be severe enough to require emergency care or hospitalization and can be fatal (p.2216).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Silent chest with loss of breath sounds (life-threatening) (p.2222)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Peak expiratory flow rate (PEFR) and FEV1 to quantify obstruction and guide disposition; PEFR >60% predicted predicts response to beta2-agonists alone (p.2222-2223, p.2227), Arterial blood gas / PaCO2 monitoring:"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison stratifies acute deteriorations practically rather than by a fixed table. Mild-to-moderate deteriorations can initially be managed with frequent beta2-agonists; failure to control with hourly beta2-agonists for"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Interpreting a 'silent chest' or quieting wheeze as improvement when it actually signals worsening, life-threatening obstruction (p.2222)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for asthma exacerbation."
+    }
+  ],
+  "tables": [
+    {
+      "id": "asthma_exac-matrix",
+      "title": "Asthma exacerbation: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An exacerbation is an episode of acute bronchospasm that may be severe enough to require emergency care or hospitalization and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Peak expiratory flow rate (PEFR) and FEV1 to quantify obstruction and guide disposition; PEFR >60% predicted predicts response to",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Heart failure (overlapping symptoms; can produce obstructive pulmonary function) (p.2222), Chronic obstructive pulmonary disease",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Silent chest with loss of breath sounds (life-threatening) (p.2222)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a 'silent chest' or quieting wheeze as improvement when it actually signals worsening, life-threatening obstruction",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for asthma exacerbation."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "asthma-exac-diagram",
+      "title": "Asthma exacerbation: Pulmonary & Chest Radiograph Diagnostic Schematic",
+      "type": "xray",
+      "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+      "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Airway Tree",
+          "description": "Tracheobronchial branching down to lobar and segmental divisions."
+        },
+        {
+          "label": "Parenchyma",
+          "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+        },
+        {
+          "label": "Pleural Space",
+          "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+        }
+      ]
+    }
+  ]
 }

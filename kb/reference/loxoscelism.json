@@ -1,73 +1,168 @@
 {
-  "id": "loxoscelism",
-  "name": "Loxoscelism (recluse spider envenomation)",
-  "aliases": [
-    "brown recluse spider bite",
-    "necrotic arachnidism"
+ "id": "loxoscelism",
+ "name": "Loxoscelism (recluse spider envenomation)",
+ "aliases": [
+  "brown recluse spider bite",
+  "necrotic arachnidism"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Toxicology",
+ "specialty": "Emergency medicine / Toxicology / Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Recluse spider bites can cause a locally necrotic skin lesion (cutaneous loxoscelism) and, less often, a systemic (viscerocutaneous) illness",
+   "The lesion often evolves over days from an erythematous area to a central blister and then a dark eschar with surrounding pallor and redness",
+   "Systemic loxoscelism can include haemolysis, disseminated intravascular coagulation and acute kidney injury, more often in children",
+   "Definitive diagnosis is difficult because the spider is rarely captured and many necrotic lesions are wrongly blamed on spiders",
+   "Most cutaneous lesions heal with supportive wound care alone",
+   "Because presentation overlaps with infection, careful reassessment is needed before attributing necrosis to a spider"
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Toxicology",
-  "specialty": "Emergency medicine / Toxicology / Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Recluse spider bites can cause a locally necrotic skin lesion (cutaneous loxoscelism) and, less often, a systemic (viscerocutaneous) illness",
-      "The lesion often evolves over days from an erythematous area to a central blister and then a dark eschar with surrounding pallor and redness",
-      "Systemic loxoscelism can include haemolysis, disseminated intravascular coagulation and acute kidney injury, more often in children",
-      "Definitive diagnosis is difficult because the spider is rarely captured and many necrotic lesions are wrongly blamed on spiders",
-      "Most cutaneous lesions heal with supportive wound care alone",
-      "Because presentation overlaps with infection, careful reassessment is needed before attributing necrosis to a spider"
+  "pathophysiology": "Recluse spider venom contains sphingomyelinase D, which damages cell membranes and activates complement and neutrophils, producing local dermonecrosis and, when venom effects are systemic, intravascular haemolysis and a coagulopathy. The characteristic necrotic ulcer results from vascular injury, thrombosis and inflammatory tissue destruction at the bite site. Systemic loxoscelism reflects widespread red-cell membrane injury and immune activation.",
+  "additionalDifferentials": [
+   "Bacterial skin and soft-tissue infection or abscess",
+   "Necrotising fasciitis",
+   "Cutaneous anthrax or other necrotic infections",
+   "Pyoderma gangrenosum",
+   "Vasculitis or other causes of skin necrosis"
+  ],
+  "additionalInvestigations": [
+   "Serial wound examination and documentation of lesion evolution",
+   "Full blood count and haemolysis markers where systemic illness is suspected",
+   "Coagulation studies and renal function in suspected viscerocutaneous loxoscelism",
+   "Urinalysis for haemoglobinuria",
+   "Microbiological assessment to exclude infective mimics"
+  ],
+  "redFlags": [
+   "Haemolysis, dark urine or falling haemoglobin",
+   "Features of disseminated intravascular coagulation or acute kidney injury",
+   "Rapidly spreading necrosis or systemic sepsis suggesting necrotising infection",
+   "Systemic illness in a child"
+  ],
+  "prognosis": "Most cutaneous cases heal over weeks with supportive care, though large lesions may scar; systemic loxoscelism is uncommon but can be serious, particularly in children.",
+  "pitfalls": [
+   "Diagnosing a spider bite for any necrotic ulcer without a confirmed exposure",
+   "Missing a necrotising soft-tissue infection masquerading as loxoscelism",
+   "Overlooking systemic haemolysis, especially in children",
+   "Performing early aggressive surgery on an evolving lesion"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage most cutaneous lesions with supportive wound care, cleansing, analgesia, elevation and tetanus prophylaxis, allowing the eschar to demarcate before any debridement",
+   "Delay surgical debridement or reconstruction until the necrotic lesion has fully declared, as early excision worsens outcomes",
+   "Monitor for systemic (viscerocutaneous) loxoscelism with serial haemolysis markers, coagulation studies and renal function, particularly in children",
+   "Treat systemic disease supportively with intravenous fluids, transfusion for significant haemolysis, and management of disseminated intravascular coagulation and acute kidney injury",
+   "Reassess to exclude infective mimics before attributing necrosis to a spider, and treat secondary infection if it develops",
+   "Escalate to critical care for severe haemolysis, coagulopathy or renal failure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "loxoscelism-pathway",
+   "title": "Loxoscelism (recluse spider envenomation): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Recluse spider bites can cause a locally necrotic skin lesion (cutaneous loxoscelism) and, less often, a systemic (viscerocutaneous) illness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Haemolysis, dark urine or falling haemoglobin",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial wound examination and documentation of lesion evolution, Full blood count and haemolysis markers where systemic illness is suspected, Coagulation studies and renal function in suspected viscerocutaneous loxoscelism"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage most cutaneous lesions with supportive wound care, cleansing, analgesia, elevation and tetanus prophylaxis, allowing the eschar to demarcate before any debridement"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing a spider bite for any necrotic ulcer without a confirmed exposure"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of loxoscelism (recluse spider envenomation)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "loxoscelism-matrix",
+   "title": "Loxoscelism (recluse spider envenomation): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Recluse spider bites can cause a locally necrotic skin lesion (cutaneous loxoscelism) and, less often, a systemic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Recluse spider venom contains sphingomyelinase D, which damages cell membranes and activates complement and neutrophils, producing local dermonecrosis and, when venom effects are systemic, intravascular haemolysis and a coagulopathy. The characteristic necrotic ulcer results from vascular injury, thrombosis and inflammatory tissue destruction at the bite site. Systemic loxoscelism reflects widespread red-cell membrane injury and immune activation.",
-    "additionalDifferentials": [
-      "Bacterial skin and soft-tissue infection or abscess",
-      "Necrotising fasciitis",
-      "Cutaneous anthrax or other necrotic infections",
-      "Pyoderma gangrenosum",
-      "Vasculitis or other causes of skin necrosis"
+    [
+     "Key Investigations",
+     "Serial wound examination and documentation of lesion evolution, Full blood count and haemolysis markers where systemic illness is",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial wound examination and documentation of lesion evolution",
-      "Full blood count and haemolysis markers where systemic illness is suspected",
-      "Coagulation studies and renal function in suspected viscerocutaneous loxoscelism",
-      "Urinalysis for haemoglobinuria",
-      "Microbiological assessment to exclude infective mimics"
+    [
+     "Primary Differentials",
+     "Bacterial skin and soft-tissue infection or abscess, Necrotising fasciitis, Cutaneous anthrax or other necrotic infections",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Haemolysis, dark urine or falling haemoglobin",
-      "Features of disseminated intravascular coagulation or acute kidney injury",
-      "Rapidly spreading necrosis or systemic sepsis suggesting necrotising infection",
-      "Systemic illness in a child"
+    [
+     "Management Strategy",
+     "Manage most cutaneous lesions with supportive wound care, cleansing, analgesia, elevation and tetanus prophylaxis, allowing the",
+     "Core treatment modality"
     ],
-    "prognosis": "Most cutaneous cases heal over weeks with supportive care, though large lesions may scar; systemic loxoscelism is uncommon but can be serious, particularly in children.",
-    "pitfalls": [
-      "Diagnosing a spider bite for any necrotic ulcer without a confirmed exposure",
-      "Missing a necrotising soft-tissue infection masquerading as loxoscelism",
-      "Overlooking systemic haemolysis, especially in children",
-      "Performing early aggressive surgery on an evolving lesion"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage most cutaneous lesions with supportive wound care, cleansing, analgesia, elevation and tetanus prophylaxis, allowing the eschar to demarcate before any debridement",
-      "Delay surgical debridement or reconstruction until the necrotic lesion has fully declared, as early excision worsens outcomes",
-      "Monitor for systemic (viscerocutaneous) loxoscelism with serial haemolysis markers, coagulation studies and renal function, particularly in children",
-      "Treat systemic disease supportively with intravenous fluids, transfusion for significant haemolysis, and management of disseminated intravascular coagulation and acute kidney injury",
-      "Reassess to exclude infective mimics before attributing necrosis to a spider, and treat secondary infection if it develops",
-      "Escalate to critical care for severe haemolysis, coagulopathy or renal failure"
+    [
+     "Clinical Pitfall",
+     "Diagnosing a spider bite for any necrotic ulcer without a confirmed exposure",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for loxoscelism (recluse spider envenomation)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "loxoscelism-diagram",
+   "title": "Loxoscelism (recluse spider envenomation): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

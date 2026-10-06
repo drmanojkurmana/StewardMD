@@ -214,5 +214,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h1ea5e74c"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "prostatitis-dx-algo",
+      "title": "Acute Bacterial Prostatitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Acute bacterial prostatitis (ABP) typically presents as a severe illness with dysuria, urinary frequency, and pain in the prostatic, pelvic, or perineal region, and may be accompanied by fever, rigors, and/or bladder outlet obstruction",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Bladder outlet obstruction or urinary retention accompanying ABP (Harrison 22e p.1089).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Urine culture in all male UTI - documenting bacteriuria differentiates bacterial prostatitis from chronic pelvic pain syndrome; dipstick and/or microscopy alone are not sufficient (Harrison 22e p.1089)., Cross-sectional"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Prostatitis is categorized as acute bacterial prostatitis (ABP) versus chronic bacterial prostatitis (CBP). ABP is a typically severe illness with systemic features (fever, rigors, possible bladder outlet obstruction);"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not attribute prostatic-type symptoms to bacterial prostatitis without bacteriuria; absence of bacteriuria points to chronic pelvic pain syndrome, which will not respond to antibiotics (Harrison 22e p.1089)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute bacterial prostatitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "prostatitis-matrix",
+      "title": "Acute Bacterial Prostatitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute bacterial prostatitis (ABP) typically presents as a severe illness with dysuria, urinary frequency, and pain in the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Urine culture in all male UTI - documenting bacteriuria differentiates bacterial prostatitis from chronic pelvic pain syndrome;",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Chronic bacterial prostatitis (CBP) - presents insidiously as recurrent episodes of cystitis, sometimes with pelvic and perineal",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Bladder outlet obstruction or urinary retention accompanying ABP (Harrison 22e p.1089).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not attribute prostatic-type symptoms to bacterial prostatitis without bacteriuria; absence of bacteriuria points to chronic",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute bacterial prostatitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "prostatitis-diagram",
+      "title": "Acute Bacterial Prostatitis: Renal & Urinary Tract Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+      "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+        },
+        {
+          "label": "Tubular Apparatus",
+          "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+        }
+      ]
+    }
+  ]
 }

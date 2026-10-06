@@ -170,5 +170,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "hae47cf7e"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "febrile_neutropenia-dx-algo",
+      "title": "Febrile Neutropenia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Susceptibility to infection rises sharply once the neutrophil count drops below 1000/uL, and worsens markedly at lower thresholds (Harrison 22e p.499).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypotension or hemodynamic instability accompanying fever and neutropenia (Harrison 22e)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serial absolute neutrophil count (band forms plus mature neutrophils) to track depth and duration of neutropenia (Harrison 22e p.499), Skin examination for ecthyma gangrenosum suggesting Pseudomonas bacteremia (Harrison"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Febrile neutropenia is defined by fever together with neutropenia (granulocytes below ~1500/uL, with clinically significant risk concentrated at ANC <500/uL and severe impairment of host defense at ANC <200/uL) (Harrison"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Classic signs of infection and inflammation are blunted or absent in profound neutropenia (local inflammatory response is essentially lost below ANC 200/uL), so the usual physical findings of focal infection may be"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for febrile neutropenia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "febrile_neutropenia-matrix",
+      "title": "Febrile Neutropenia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Susceptibility to infection rises sharply once the neutrophil count drops below 1000/uL, and worsens markedly at lower thresholds",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serial absolute neutrophil count (band forms plus mature neutrophils) to track depth and duration of neutropenia (Harrison 22e",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypotension or hemodynamic instability accompanying fever and neutropenia (Harrison 22e)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Classic signs of infection and inflammation are blunted or absent in profound neutropenia (local inflammatory response is",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for febrile neutropenia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "febrile-neutropenia-diagram",
+      "title": "Febrile Neutropenia: Cardiovascular & Hemodynamic Diagnostic Schematic",
+      "type": "ecg",
+      "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+      "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+      "annotations": [
+        {
+          "label": "Conduction System",
+          "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+        },
+        {
+          "label": "Coronary Perfusion",
+          "description": "Epicardial arterial distribution and regional myocardial supply zones."
+        },
+        {
+          "label": "Hemodynamics",
+          "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+        }
+      ]
+    }
+  ]
 }

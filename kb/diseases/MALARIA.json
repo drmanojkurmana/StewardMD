@@ -239,5 +239,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "h7fec9f50"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "malaria-dx-algo",
+      "title": "Malaria: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Malaria is not a clinical diagnosis: any patient in or from an endemic area with fever needs thick and thin blood smears (or a rapid test if reliable microscopy is unavailable) to confirm infection and identify the species (Harrison 22e",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Impaired consciousness, delirium, abnormal behavior, or unarousable coma (cerebral malaria) (Harrison 22e pp.1763-1764)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Thick blood film (concentrates parasites ~40-100x over thin film, increasing sensitivity; examine 100-200 fields before calling negative) (Harrison 22e pp.1766-1767), Thin blood film for species identification and parasite"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Severe falciparum malaria (WHO-based criteria, Harrison 22e Table 231-2, p.1764) is defined by one or more of: unarousable coma/cerebral malaria (no localizing response, coma >30 min after a generalized convulsion,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating malaria as a clinical diagnosis; confirmation by smear or rapid test is required (Harrison 22e p.1766)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for malaria."
+    }
+  ],
+  "tables": [
+    {
+      "id": "malaria-matrix",
+      "title": "Malaria: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Malaria is not a clinical diagnosis: any patient in or from an endemic area with fever needs thick and thin blood smears (or a",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Thick blood film (concentrates parasites ~40-100x over thin film, increasing sensitivity; examine 100-200 fields before calling",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute viral illness / minor febrile viral syndrome (early nonspecific malaria mimics this) (Harrison 22e p.1763), Bacterial",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Impaired consciousness, delirium, abnormal behavior, or unarousable coma (cerebral malaria) (Harrison 22e pp.1763-1764)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating malaria as a clinical diagnosis; confirmation by smear or rapid test is required (Harrison 22e p.1766).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for malaria."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "malaria-diagram",
+      "title": "Malaria: Infectious Pathogenesis & Host Response Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+      "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+      "annotations": [
+        {
+          "label": "Pathogen Inoculum",
+          "description": "Microbial virulence, antigen expression, and cellular tropism."
+        },
+        {
+          "label": "Host Cascade",
+          "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+        }
+      ]
+    }
+  ]
 }

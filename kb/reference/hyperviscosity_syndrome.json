@@ -1,82 +1,177 @@
 {
-  "id": "hyperviscosity_syndrome",
-  "name": "hyperviscosity syndrome",
-  "aliases": [
-    "serum hyperviscosity syndrome",
-    "Waldenstrom hyperviscosity"
+ "id": "hyperviscosity_syndrome",
+ "name": "hyperviscosity syndrome",
+ "aliases": [
+  "serum hyperviscosity syndrome",
+  "Waldenstrom hyperviscosity"
+ ],
+ "class": "non_infective",
+ "system": "Haematological",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "British Committee for Standards in Haematology guidance on Waldenstrom macroglobulinaemia and hyperviscosity",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The classic clinical triad is mucosal bleeding, visual disturbance and neurological symptoms (headache, vertigo, confusion, or reduced consciousness in severe cases).",
+   "Waldenstrom macroglobulinaemia is the commonest cause because pentameric IgM is large and largely confined to the intravascular space, disproportionately raising serum viscosity; IgA and IgG3 myeloma are less frequent causes.",
+   "Fundoscopy is a bedside diagnostic tool, revealing dilated, tortuous 'sausage-string' or 'box-car' retinal veins, flame haemorrhages and papilloedema.",
+   "Serum viscosity should be measured; symptoms usually appear above about four centipoise, but the threshold varies between individuals so clinical correlation is essential.",
+   "A markedly raised ESR, rouleaux on the blood film and a spuriously widened anion or protein gap are clues to a high paraprotein load.",
+   "Plasmapheresis produces prompt relief in paraprotein-driven disease because IgM is predominantly intravascular and efficiently removed; it is a temporising measure pending definitive therapy.",
+   "Red-cell transfusion should be deferred until viscosity is lowered, as raising the haematocrit acutely worsens whole-blood viscosity and can precipitate deterioration.",
+   "Definitive control requires treating the underlying clone (chemoimmunotherapy for Waldenstrom, anti-myeloma therapy for myeloma); leucapheresis is the analogous emergency treatment when hyperviscosity is due to hyperleucocytosis."
   ],
-  "class": "non_infective",
-  "system": "Haematological",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "British Committee for Standards in Haematology guidance on Waldenstrom macroglobulinaemia and hyperviscosity",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The classic clinical triad is mucosal bleeding, visual disturbance and neurological symptoms (headache, vertigo, confusion, or reduced consciousness in severe cases).",
-      "Waldenstrom macroglobulinaemia is the commonest cause because pentameric IgM is large and largely confined to the intravascular space, disproportionately raising serum viscosity; IgA and IgG3 myeloma are less frequent causes.",
-      "Fundoscopy is a bedside diagnostic tool, revealing dilated, tortuous 'sausage-string' or 'box-car' retinal veins, flame haemorrhages and papilloedema.",
-      "Serum viscosity should be measured; symptoms usually appear above about four centipoise, but the threshold varies between individuals so clinical correlation is essential.",
-      "A markedly raised ESR, rouleaux on the blood film and a spuriously widened anion or protein gap are clues to a high paraprotein load.",
-      "Plasmapheresis produces prompt relief in paraprotein-driven disease because IgM is predominantly intravascular and efficiently removed; it is a temporising measure pending definitive therapy.",
-      "Red-cell transfusion should be deferred until viscosity is lowered, as raising the haematocrit acutely worsens whole-blood viscosity and can precipitate deterioration.",
-      "Definitive control requires treating the underlying clone (chemoimmunotherapy for Waldenstrom, anti-myeloma therapy for myeloma); leucapheresis is the analogous emergency treatment when hyperviscosity is due to hyperleucocytosis."
+  "pathophysiology": "An excess of large or aggregating plasma components—most often pentameric IgM, but also high concentrations of IgA or IgG3, or a very high cellular count—raises the intrinsic viscosity of blood. Increased viscosity impairs microcirculatory flow, causing sluggish perfusion, venous distension and endothelial hypoxia in the retina, central nervous system and mucosae. Expansion of plasma volume by the osmotically active paraprotein and interference with platelet function and coagulation factors compound bleeding tendency, while retinal and cerebral venous congestion account for the visual and neurological manifestations.",
+  "additionalDifferentials": [
+   "Leukostasis from hyperleucocytosis",
+   "Polycythaemia vera or secondary erythrocytosis",
+   "Cryoglobulinaemia",
+   "Thrombotic thrombocytopenic purpura",
+   "Hypertensive emergency with retinopathy",
+   "Diabetic proliferative retinopathy",
+   "Central nervous system vasculitis"
+  ],
+  "additionalInvestigations": [
+   "Serum viscosity measurement",
+   "Serum protein electrophoresis, immunofixation and immunoglobulin quantification",
+   "Full blood count and blood film for rouleaux",
+   "Dilated fundoscopy",
+   "Serum free light chains",
+   "Bone marrow aspirate and trephine for the underlying clone",
+   "Renal function and calcium to assess end-organ effects"
+  ],
+  "redFlags": [
+   "Reduced consciousness, seizures or coma",
+   "Acute or rapidly progressive visual loss",
+   "Uncontrolled mucosal or gastrointestinal haemorrhage",
+   "High-output cardiac failure",
+   "Rapidly progressive neurological deficit"
+  ],
+  "prognosis": "Acute symptoms respond rapidly to plasmapheresis, and prognosis then depends on the underlying disorder; Waldenstrom macroglobulinaemia is typically an indolent, treatable condition. Untreated severe hyperviscosity can be fatal through cerebral haemorrhage or infarction.",
+  "pitfalls": [
+   "Transfusing red cells before plasmapheresis and acutely worsening viscosity",
+   "Delaying fundoscopy, which can provide immediate diagnostic confirmation",
+   "Misattributing a widened anion gap or spurious biochemistry to another cause",
+   "Assuming a normal-appearing viscosity excludes the syndrome when symptoms are typical",
+   "Treating the syndrome without arranging definitive therapy for the underlying clone"
+  ],
+  "references": [
+   "British Committee for Standards in Haematology guideline on Waldenstrom macroglobulinaemia",
+   "Wintrobe's Clinical Hematology",
+   "Oxford Handbook of Clinical Haematology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Urgent plasmapheresis to remove the offending paraprotein and rapidly relieve symptoms in immunoglobulin-driven disease",
+   "Leukapheresis and cytoreduction where extreme leucocytosis is the cause",
+   "Treat the underlying clone, with chemo-immunotherapy such as rituximab-based regimens or a BTK inhibitor for Waldenstrom macroglobulinaemia and directed therapy for myeloma",
+   "Cautious rehydration and avoidance of red-cell transfusion until viscosity is lowered, as transfusion can precipitate deterioration",
+   "Supportive management of mucosal bleeding and visual or neurological compromise",
+   "Monitor serum viscosity, symptoms and fundoscopic appearance, with haematology referral for definitive care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hyperviscosity_syndrome-pathway",
+   "title": "hyperviscosity syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The classic clinical triad is mucosal bleeding, visual disturbance and neurological symptoms (headache, vertigo, confusion, or reduced consciousness in severe cases).",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Reduced consciousness, seizures or coma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum viscosity measurement, Serum protein electrophoresis, immunofixation and immunoglobulin quantification, Full blood count and blood film for rouleaux"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Urgent plasmapheresis to remove the offending paraprotein and rapidly relieve symptoms in immunoglobulin-driven disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Transfusing red cells before plasmapheresis and acutely worsening viscosity"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hyperviscosity syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hyperviscosity_syndrome-matrix",
+   "title": "hyperviscosity syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The classic clinical triad is mucosal bleeding, visual disturbance and neurological symptoms (headache, vertigo, confusion, or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An excess of large or aggregating plasma components—most often pentameric IgM, but also high concentrations of IgA or IgG3, or a very high cellular count—raises the intrinsic viscosity of blood. Increased viscosity impairs microcirculatory flow, causing sluggish perfusion, venous distension and endothelial hypoxia in the retina, central nervous system and mucosae. Expansion of plasma volume by the osmotically active paraprotein and interference with platelet function and coagulation factors compound bleeding tendency, while retinal and cerebral venous congestion account for the visual and neurological manifestations.",
-    "additionalDifferentials": [
-      "Leukostasis from hyperleucocytosis",
-      "Polycythaemia vera or secondary erythrocytosis",
-      "Cryoglobulinaemia",
-      "Thrombotic thrombocytopenic purpura",
-      "Hypertensive emergency with retinopathy",
-      "Diabetic proliferative retinopathy",
-      "Central nervous system vasculitis"
+    [
+     "Key Investigations",
+     "Serum viscosity measurement, Serum protein electrophoresis, immunofixation and immunoglobulin quantification, Full blood count",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum viscosity measurement",
-      "Serum protein electrophoresis, immunofixation and immunoglobulin quantification",
-      "Full blood count and blood film for rouleaux",
-      "Dilated fundoscopy",
-      "Serum free light chains",
-      "Bone marrow aspirate and trephine for the underlying clone",
-      "Renal function and calcium to assess end-organ effects"
+    [
+     "Primary Differentials",
+     "Leukostasis from hyperleucocytosis, Polycythaemia vera or secondary erythrocytosis, Cryoglobulinaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Reduced consciousness, seizures or coma",
-      "Acute or rapidly progressive visual loss",
-      "Uncontrolled mucosal or gastrointestinal haemorrhage",
-      "High-output cardiac failure",
-      "Rapidly progressive neurological deficit"
+    [
+     "Management Strategy",
+     "Urgent plasmapheresis to remove the offending paraprotein and rapidly relieve symptoms in immunoglobulin-driven disease",
+     "Core treatment modality"
     ],
-    "prognosis": "Acute symptoms respond rapidly to plasmapheresis, and prognosis then depends on the underlying disorder; Waldenstrom macroglobulinaemia is typically an indolent, treatable condition. Untreated severe hyperviscosity can be fatal through cerebral haemorrhage or infarction.",
-    "pitfalls": [
-      "Transfusing red cells before plasmapheresis and acutely worsening viscosity",
-      "Delaying fundoscopy, which can provide immediate diagnostic confirmation",
-      "Misattributing a widened anion gap or spurious biochemistry to another cause",
-      "Assuming a normal-appearing viscosity excludes the syndrome when symptoms are typical",
-      "Treating the syndrome without arranging definitive therapy for the underlying clone"
-    ],
-    "references": [
-      "British Committee for Standards in Haematology guideline on Waldenstrom macroglobulinaemia",
-      "Wintrobe's Clinical Hematology",
-      "Oxford Handbook of Clinical Haematology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Urgent plasmapheresis to remove the offending paraprotein and rapidly relieve symptoms in immunoglobulin-driven disease",
-      "Leukapheresis and cytoreduction where extreme leucocytosis is the cause",
-      "Treat the underlying clone, with chemo-immunotherapy such as rituximab-based regimens or a BTK inhibitor for Waldenstrom macroglobulinaemia and directed therapy for myeloma",
-      "Cautious rehydration and avoidance of red-cell transfusion until viscosity is lowered, as transfusion can precipitate deterioration",
-      "Supportive management of mucosal bleeding and visual or neurological compromise",
-      "Monitor serum viscosity, symptoms and fundoscopic appearance, with haematology referral for definitive care"
+    [
+     "Clinical Pitfall",
+     "Transfusing red cells before plasmapheresis and acutely worsening viscosity",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hyperviscosity syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hyperviscosity-syndrome-diagram",
+   "title": "hyperviscosity syndrome: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

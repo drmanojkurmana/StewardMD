@@ -1,75 +1,170 @@
 {
-  "id": "corneal_abrasion",
-  "name": "Corneal abrasion",
-  "aliases": [
-    "corneal epithelial defect",
-    "scratched cornea"
+ "id": "corneal_abrasion",
+ "name": "Corneal abrasion",
+ "aliases": [
+  "corneal epithelial defect",
+  "scratched cornea"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with sudden severe pain, foreign body sensation, tearing, photophobia, and blepharospasm, usually after minor trauma such as a fingernail, branch, or contact lens",
+   "Fluorescein staining under cobalt blue light reveals the epithelial defect as a bright green area",
+   "Always evert the upper lid and inspect for a retained subtarsal foreign body, especially with vertical linear (ice-rink) abrasions",
+   "Topical anaesthetic aids examination but must never be prescribed for ongoing use as it delays healing and masks damage",
+   "Small uncomplicated abrasions heal within one to two days; treatment is supportive with lubrication and topical antibiotic prophylaxis",
+   "Contact lens-related abrasions and those from vegetable or organic matter carry higher infection risk and warrant closer follow-up",
+   "Patching is generally avoided, particularly in contact lens wearers, as it may promote infection"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with sudden severe pain, foreign body sensation, tearing, photophobia, and blepharospasm, usually after minor trauma such as a fingernail, branch, or contact lens",
-      "Fluorescein staining under cobalt blue light reveals the epithelial defect as a bright green area",
-      "Always evert the upper lid and inspect for a retained subtarsal foreign body, especially with vertical linear (ice-rink) abrasions",
-      "Topical anaesthetic aids examination but must never be prescribed for ongoing use as it delays healing and masks damage",
-      "Small uncomplicated abrasions heal within one to two days; treatment is supportive with lubrication and topical antibiotic prophylaxis",
-      "Contact lens-related abrasions and those from vegetable or organic matter carry higher infection risk and warrant closer follow-up",
-      "Patching is generally avoided, particularly in contact lens wearers, as it may promote infection"
+  "pathophysiology": "A corneal abrasion is a defect in the corneal epithelium, most often from mechanical trauma. Loss of the epithelial barrier exposes richly innervated subepithelial nerve endings, producing intense pain and reflex tearing and blepharospasm. The epithelium normally regenerates rapidly by sliding and mitosis of surrounding cells. Contamination, retained foreign material, or contact lens wear can convert a simple abrasion into a microbial keratitis, and repeated or poorly healing defects may reflect an underlying epithelial basement membrane dystrophy causing recurrent erosions.",
+  "additionalDifferentials": [
+   "Microbial (bacterial) keratitis",
+   "Herpes simplex dendritic keratitis",
+   "Recurrent corneal erosion syndrome",
+   "Retained corneal or subtarsal foreign body",
+   "Ultraviolet (arc eye) photokeratitis",
+   "Corneal ulcer"
+  ],
+  "additionalInvestigations": [
+   "Fluorescein staining to delineate the epithelial defect",
+   "Upper lid eversion to exclude a retained subtarsal foreign body",
+   "Slit-lamp examination to assess depth and look for infiltrate suggesting infection",
+   "Contact lens history and, if infiltrate present, corneal scrape for microbiology"
+  ],
+  "redFlags": [
+   "A white corneal infiltrate, mucopurulent discharge, or anterior chamber reaction suggesting microbial keratitis",
+   "Contact lens wearers with pain out of proportion, indicating possible Pseudomonas or Acanthamoeba infection",
+   "Failure to heal within expected time or worsening pain and redness",
+   "Suspicion of penetrating injury or high-velocity foreign body"
+  ],
+  "prognosis": "Simple abrasions heal quickly with no lasting visual effect, but infection, deep central lesions, or recurrent erosions can cause scarring and reduced vision.",
+  "pitfalls": [
+   "Sending patients home with topical anaesthetic, which delays healing and can cause severe corneal damage",
+   "Failing to evert the lid and missing a retained foreign body",
+   "Patching a contact lens wearer and precipitating infection",
+   "Assuming all painful epithelial defects are simple abrasions and missing herpetic or microbial keratitis"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prescribe topical antibiotic prophylaxis, using an agent with anti-pseudomonal cover such as a fluoroquinolone for contact lens-related abrasions",
+   "Provide analgesia with oral analgesics and a topical cycloplegic to ease ciliary spasm and photophobia, supplemented by ocular lubricants",
+   "Remove any foreign body and always evert the upper lid to exclude a retained subtarsal foreign body",
+   "Never prescribe topical anaesthetics for ongoing use as they delay healing and mask damage, and avoid patching contact lens-related abrasions",
+   "Advise cessation of contact lens wear until the epithelium has fully healed",
+   "Arrange follow-up and refer to ophthalmology for non-healing defects, a stromal infiltrate suggesting microbial keratitis, or organic-matter injury",
+   "Manage recurrent erosions with prolonged lubrication and hypertonic saline ointment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "corneal_abrasion-pathway",
+   "title": "Corneal abrasion: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with sudden severe pain, foreign body sensation, tearing, photophobia, and blepharospasm, usually after minor trauma such as a fingernail, branch, or contact lens",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A white corneal infiltrate, mucopurulent discharge, or anterior chamber reaction suggesting microbial keratitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Fluorescein staining to delineate the epithelial defect, Upper lid eversion to exclude a retained subtarsal foreign body, Slit-lamp examination to assess depth and look for infiltrate suggesting infection"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prescribe topical antibiotic prophylaxis, using an agent with anti-pseudomonal cover such as a fluoroquinolone for contact lens-related abrasions"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Sending patients home with topical anaesthetic, which delays healing and can cause severe corneal damage"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of corneal abrasion."
+  }
+ ],
+ "tables": [
+  {
+   "id": "corneal_abrasion-matrix",
+   "title": "Corneal abrasion: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with sudden severe pain, foreign body sensation, tearing, photophobia, and blepharospasm, usually after minor trauma",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A corneal abrasion is a defect in the corneal epithelium, most often from mechanical trauma. Loss of the epithelial barrier exposes richly innervated subepithelial nerve endings, producing intense pain and reflex tearing and blepharospasm. The epithelium normally regenerates rapidly by sliding and mitosis of surrounding cells. Contamination, retained foreign material, or contact lens wear can convert a simple abrasion into a microbial keratitis, and repeated or poorly healing defects may reflect an underlying epithelial basement membrane dystrophy causing recurrent erosions.",
-    "additionalDifferentials": [
-      "Microbial (bacterial) keratitis",
-      "Herpes simplex dendritic keratitis",
-      "Recurrent corneal erosion syndrome",
-      "Retained corneal or subtarsal foreign body",
-      "Ultraviolet (arc eye) photokeratitis",
-      "Corneal ulcer"
+    [
+     "Key Investigations",
+     "Fluorescein staining to delineate the epithelial defect, Upper lid eversion to exclude a retained subtarsal foreign body,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Fluorescein staining to delineate the epithelial defect",
-      "Upper lid eversion to exclude a retained subtarsal foreign body",
-      "Slit-lamp examination to assess depth and look for infiltrate suggesting infection",
-      "Contact lens history and, if infiltrate present, corneal scrape for microbiology"
+    [
+     "Primary Differentials",
+     "Microbial (bacterial) keratitis, Herpes simplex dendritic keratitis, Recurrent corneal erosion syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A white corneal infiltrate, mucopurulent discharge, or anterior chamber reaction suggesting microbial keratitis",
-      "Contact lens wearers with pain out of proportion, indicating possible Pseudomonas or Acanthamoeba infection",
-      "Failure to heal within expected time or worsening pain and redness",
-      "Suspicion of penetrating injury or high-velocity foreign body"
+    [
+     "Management Strategy",
+     "Prescribe topical antibiotic prophylaxis, using an agent with anti-pseudomonal cover such as a fluoroquinolone for contact",
+     "Core treatment modality"
     ],
-    "prognosis": "Simple abrasions heal quickly with no lasting visual effect, but infection, deep central lesions, or recurrent erosions can cause scarring and reduced vision.",
-    "pitfalls": [
-      "Sending patients home with topical anaesthetic, which delays healing and can cause severe corneal damage",
-      "Failing to evert the lid and missing a retained foreign body",
-      "Patching a contact lens wearer and precipitating infection",
-      "Assuming all painful epithelial defects are simple abrasions and missing herpetic or microbial keratitis"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prescribe topical antibiotic prophylaxis, using an agent with anti-pseudomonal cover such as a fluoroquinolone for contact lens-related abrasions",
-      "Provide analgesia with oral analgesics and a topical cycloplegic to ease ciliary spasm and photophobia, supplemented by ocular lubricants",
-      "Remove any foreign body and always evert the upper lid to exclude a retained subtarsal foreign body",
-      "Never prescribe topical anaesthetics for ongoing use as they delay healing and mask damage, and avoid patching contact lens-related abrasions",
-      "Advise cessation of contact lens wear until the epithelium has fully healed",
-      "Arrange follow-up and refer to ophthalmology for non-healing defects, a stromal infiltrate suggesting microbial keratitis, or organic-matter injury",
-      "Manage recurrent erosions with prolonged lubrication and hypertonic saline ointment"
+    [
+     "Clinical Pitfall",
+     "Sending patients home with topical anaesthetic, which delays healing and can cause severe corneal damage",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for corneal abrasion."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "corneal-abrasion-diagram",
+   "title": "Corneal abrasion: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

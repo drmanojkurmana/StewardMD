@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["serotonin toxicity", "serotonergic toxicity", "Hunter criteria", "cyproheptadine", "SSRI toxicity", "MAOI interaction", "linezolid serotonin", "tramadol serotonin", "clonus"],
+ "aliases": [
+  "serotonin toxicity",
+  "serotonergic toxicity",
+  "Hunter criteria",
+  "cyproheptadine",
+  "SSRI toxicity",
+  "MAOI interaction",
+  "linezolid serotonin",
+  "tramadol serotonin",
+  "clonus"
+ ],
  "summary": "Diagnose clinically with the Hunter criteria (clonus, hyperreflexia, tremor with agitation or sweating), stop all serotonergic drugs and give benzodiazepines with supportive care. Cyproheptadine 12 mg then 2 mg every 2 hours may help moderate cases; severe hyperthermia with rigidity needs rapid cooling, paralysis and ventilation.",
  "sections": [
   {
@@ -73,14 +83,157 @@
   }
  ],
  "drugs": [
-  { "name": "Cyproheptadine", "dose": "12 mg orally or via nasogastric tube, then 2 mg every 2 hours while symptomatic; maintenance 8 mg every 6 hours", "notes": "Oral only; sedating; weak evidence; not a substitute for supportive care." },
-  { "name": "Diazepam", "dose": "5 to 10 mg orally or IV, repeat as needed", "notes": "Agitation and muscle activity." },
-  { "name": "Lorazepam", "dose": "1 to 2 mg IV, repeat as needed", "notes": "Alternative benzodiazepine." },
-  { "name": "Chlorpromazine", "dose": "12.5 to 100 mg IM or slow IV (reported range)", "notes": "Limited evidence; hypotension; avoid if NMS possible." }
+  {
+   "name": "Cyproheptadine",
+   "dose": "12 mg orally or via nasogastric tube, then 2 mg every 2 hours while symptomatic; maintenance 8 mg every 6 hours",
+   "notes": "Oral only; sedating; weak evidence; not a substitute for supportive care."
+  },
+  {
+   "name": "Diazepam",
+   "dose": "5 to 10 mg orally or IV, repeat as needed",
+   "notes": "Agitation and muscle activity."
+  },
+  {
+   "name": "Lorazepam",
+   "dose": "1 to 2 mg IV, repeat as needed",
+   "notes": "Alternative benzodiazepine."
+  },
+  {
+   "name": "Chlorpromazine",
+   "dose": "12.5 to 100 mg IM or slow IV (reported range)",
+   "notes": "Limited evidence; hypotension; avoid if NMS possible."
+  }
  ],
  "sources": [
-  { "org": "Br J Clin Pharmacol (Chiew and Isbister)", "title": "Management of serotonin syndrome (toxicity)", "year": 2025, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11862804/" },
-  { "org": "Curr Neuropharmacol (Tse et al.)", "title": "Neuroleptic Malignant Syndrome: A Review from a Clinically Oriented Perspective", "year": 2015, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4812801/" }
+  {
+   "org": "Br J Clin Pharmacol (Chiew and Isbister)",
+   "title": "Management of serotonin syndrome (toxicity)",
+   "year": 2025,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11862804/"
+  },
+  {
+   "org": "Curr Neuropharmacol (Tse et al.)",
+   "title": "Neuroleptic Malignant Syndrome: A Review from a Clinically Oriented Perspective",
+   "year": 2015,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4812801/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "algorithms": [
+  {
+   "id": "hunter-criteria-algo",
+   "title": "Hunter Serotonin Toxicity Criteria Decision Tree",
+   "steps": [
+    {
+     "step": "Serotonergic Agent Exposure",
+     "action": "Confirm therapeutic exposure, dose escalation, or overdose with a serotonergic drug (SSRI, SNRI, MAOI, tramadol, linezolid).",
+     "critical": true
+    },
+    {
+     "step": "Primary Clonus Assessment",
+     "branch": "Spontaneous Clonus Present",
+     "action": "Definitive Serotonin Toxicity confirmed. Discontinue all serotonergic agents immediately and start supportive care."
+    },
+    {
+     "step": "Inducible Clonus Check",
+     "branch": "Inducible Clonus + Agitation or Diaphoresis",
+     "action": "Meets Hunter criteria for Serotonin Toxicity. Administer IV benzodiazepines (diazepam or lorazepam) for neuromuscular hyperactivity."
+    },
+    {
+     "step": "Ocular Clonus Check",
+     "branch": "Ocular Clonus + Agitation or Diaphoresis",
+     "action": "Meets Hunter criteria for Serotonin Toxicity. Monitor core temperature and start aggressive cooling if > 38.5 C."
+    },
+    {
+     "step": "Tremor and Hyperreflexia",
+     "branch": "Tremor + Hyperreflexia",
+     "action": "Meets Hunter criteria for Serotonin Toxicity. Start oral cyproheptadine 12 mg if mild to moderate and supportive care is insufficient."
+    },
+    {
+     "step": "Severe Toxicity Escalation",
+     "branch": "Rigidity + Temperature > 38.5 C",
+     "action": "Severe life-threatening toxicity. Immediate endotracheal intubation, neuromuscular paralysis with vecuronium or rocuronium, and ICU admission. Never use succinylcholine.",
+     "critical": true
+    }
+   ],
+   "caption": "Hunter criteria: 84% sensitivity and 97% specificity for serotonin toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ss-vs-nms-diff",
+   "title": "Differential Matrix: Serotonin Syndrome vs NMS vs Malignant Hyperthermia",
+   "headers": [
+    "Clinical Feature",
+    "Serotonin Syndrome",
+    "Neuroleptic Malignant Syndrome",
+    "Malignant Hyperthermia"
+   ],
+   "rows": [
+    [
+     "Causative Class",
+     "Serotonergic drugs (SSRI, SNRI, MAOI)",
+     "Dopamine D2 antagonists (antipsychotics)",
+     "Volatile anesthetics, succinylcholine"
+    ],
+    [
+     "Onset Profile",
+     "Rapid (often within 6 to 24 hours)",
+     "Insidious (days to 1 to 2 weeks)",
+     "Hyperacute (minutes to hours in OR or PACU)"
+    ],
+    [
+     "Neuromuscular Tone",
+     "Hyperreflexia, spontaneous or ocular clonus, tremor",
+     "Lead-pipe rigidity, hyporeflexia, bradykinesia",
+     "Severe generalized muscle rigidity, masseter spasm"
+    ],
+    [
+     "Pupillary Exam",
+     "Mydriasis is common",
+     "Typically normal size and reactive",
+     "Normal or dilated late in course"
+    ],
+    [
+     "Bowel Sounds",
+     "Hyperactive, diarrhea, cramping",
+     "Normal to hypoactive",
+     "Hypoactive to absent"
+    ],
+    [
+     "Primary Antidote",
+     "Cyproheptadine, IV benzodiazepines",
+     "Dantrolene, bromocriptine",
+     "IV dantrolene immediately (2.5 mg/kg bolus)"
+    ]
+   ],
+   "caption": "Key high-contrast clinical features differentiating hyperthermic drug syndromes."
+  }
+ ],
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "diagrams": [
+  {
+   "id": "serotonin-syndrome-diagram",
+   "title": "Serotonin syndrome (serotonin toxicity): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

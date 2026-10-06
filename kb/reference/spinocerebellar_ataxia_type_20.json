@@ -1,79 +1,174 @@
 {
-  "id": "spinocerebellar_ataxia_type_20",
-  "name": "Spinocerebellar ataxia type 20",
-  "aliases": [
-    "SCA20",
-    "11q12 duplication ataxia"
+ "id": "spinocerebellar_ataxia_type_20",
+ "name": "Spinocerebellar ataxia type 20",
+ "aliases": [
+  "SCA20",
+  "11q12 duplication ataxia"
+ ],
+ "class": "non_infective",
+ "system": "Neurology / Hereditary ataxia",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant ataxia whose hallmark is early, prominent dysphonia — a strained, spasmodic voice that often precedes or overshadows limb ataxia.",
+   "Palatal tremor (palatal myoclonus) is a characteristic and unusual accompanying feature.",
+   "Calcification of the dentate nucleus is frequently visible on CT and provides a valuable radiological clue.",
+   "Caused by a small contiguous duplication (a copy-number gain) on chromosome 11q12, rather than by a repeat expansion.",
+   "Progression is slow, and gaze-evoked nystagmus and mild pyramidal signs may be present.",
+   "The phenotype was originally described in an Australian family of Anglo-Celtic descent.",
+   "Because the early voice change can resemble primary spasmodic dysphonia, the diagnosis may be missed before ataxia becomes evident."
   ],
-  "class": "non_infective",
-  "system": "Neurology / Hereditary ataxia",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant ataxia whose hallmark is early, prominent dysphonia — a strained, spasmodic voice that often precedes or overshadows limb ataxia.",
-      "Palatal tremor (palatal myoclonus) is a characteristic and unusual accompanying feature.",
-      "Calcification of the dentate nucleus is frequently visible on CT and provides a valuable radiological clue.",
-      "Caused by a small contiguous duplication (a copy-number gain) on chromosome 11q12, rather than by a repeat expansion.",
-      "Progression is slow, and gaze-evoked nystagmus and mild pyramidal signs may be present.",
-      "The phenotype was originally described in an Australian family of Anglo-Celtic descent.",
-      "Because the early voice change can resemble primary spasmodic dysphonia, the diagnosis may be missed before ataxia becomes evident."
+  "pathophysiology": "Spinocerebellar ataxia type 20 is an autosomal dominant cerebellar ataxia caused by a small contiguous duplication, a copy-number gain, on chromosome 11q12, which distinguishes it mechanistically from the trinucleotide and pentanucleotide repeat-expansion ataxias. The gene or genes responsible for the phenotype through a dosage effect are not fully defined, with overexpression of genes within the duplicated segment (a proposed candidate being DAGLA, which encodes diacylglycerol lipase alpha) implicated. The disorder is marked radiologically by calcification of the dentate nucleus and clinically by early bulbar involvement — spasmodic dysphonia and palatal tremor — together with slowly progressive cerebellar ataxia.",
+  "additionalDifferentials": [
+   "Other autosomal dominant SCAs presenting with early dysarthria, such as SCA1",
+   "SCA36, which can produce bulbar features and tongue involvement",
+   "Progressive ataxia with palatal tremor of other genetic or sporadic cause",
+   "Primary or idiopathic spasmodic dysphonia before cerebellar signs emerge",
+   "Primary familial brain calcification and other causes of intracranial calcification",
+   "Dominant ataxias featuring cortical or action myoclonus"
+  ],
+  "additionalInvestigations": [
+   "CT head to detect calcification of the dentate nucleus",
+   "MRI brain to assess cerebellar atrophy",
+   "Molecular testing by chromosomal microarray or MLPA to detect the 11q12 duplication (dosage-sensitive methods)",
+   "Hereditary ataxia gene panel to exclude repeat-expansion subtypes",
+   "Laryngoscopy and formal voice assessment for the dysphonia",
+   "Evaluation for other causes of intracranial calcification (calcium-phosphate and parathyroid indices)",
+   "Family pedigree analysis with genetic counselling"
+  ],
+  "redFlags": [
+   "Rapidly worsening dysphonia or dysphagia with aspiration risk.",
+   "New cognitive, psychiatric or extrapyramidal features suggesting an alternative diagnosis.",
+   "Frequent falls as cerebellar ataxia advances.",
+   "Extensive intracranial calcification beyond the dentate raising other metabolic disorders."
+  ],
+  "prognosis": "Slowly progressive over years to decades, with disability dominated by cerebellar ataxia and bulbar dysfunction; lifespan is usually preserved.",
+  "pitfalls": [
+   "Attributing the early voice change to a primary laryngeal disorder and missing the underlying ataxia.",
+   "Expecting a repeat expansion and failing to test for the duplication, which requires dosage-sensitive or array methods.",
+   "Overlooking dentate nucleus calcification on imaging.",
+   "Confusing the condition with sporadic progressive ataxia with palatal tremor."
+  ],
+  "references": [
+   "Neurogenetics reference texts on autosomal dominant spinocerebellar ataxias",
+   "Standard neurology textbook chapters on inherited ataxias",
+   "Consensus reviews of copy-number and non-repeat cerebellar ataxias"
+  ],
+  "crossLinks": [],
+  "management": [
+   "With no disease-modifying therapy, anchor care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy",
+   "Treat the spasmodic dysphonia with laryngeal botulinum toxin injections alongside ENT/laryngology and voice therapy",
+   "Manage palatal tremor symptomatically where it is troublesome or causes ear click",
+   "Institute falls prevention and provide mobility aids for progressive gait ataxia",
+   "Confirm the dentate calcification is not attributable to a treatable metabolic cause by checking calcium, phosphate and parathyroid status",
+   "Monitor for bulbar dysfunction with periodic swallow assessment",
+   "Offer genetic counselling and cascade testing using dosage-sensitive methods (chromosomal microarray or MLPA) to detect the 11q12 duplication"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "spinocerebellar_ataxia_type_20-pathway",
+   "title": "Spinocerebellar ataxia type 20: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant ataxia whose hallmark is early, prominent dysphonia - a strained, spasmodic voice that often precedes or overshadows limb ataxia.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly worsening dysphonia or dysphagia with aspiration risk.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT head to detect calcification of the dentate nucleus, MRI brain to assess cerebellar atrophy, Molecular testing by chromosomal microarray or MLPA to detect the 11q12 duplication (dosage-sensitive methods)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: With no disease-modifying therapy, anchor care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the early voice change to a primary laryngeal disorder and missing the underlying ataxia."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 20."
+  }
+ ],
+ "tables": [
+  {
+   "id": "spinocerebellar_ataxia_type_20-matrix",
+   "title": "Spinocerebellar ataxia type 20: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant ataxia whose hallmark is early, prominent dysphonia - a strained, spasmodic voice that often precedes or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Spinocerebellar ataxia type 20 is an autosomal dominant cerebellar ataxia caused by a small contiguous duplication, a copy-number gain, on chromosome 11q12, which distinguishes it mechanistically from the trinucleotide and pentanucleotide repeat-expansion ataxias. The gene or genes responsible for the phenotype through a dosage effect are not fully defined, with overexpression of genes within the duplicated segment (a proposed candidate being DAGLA, which encodes diacylglycerol lipase alpha) implicated. The disorder is marked radiologically by calcification of the dentate nucleus and clinically by early bulbar involvement — spasmodic dysphonia and palatal tremor — together with slowly progressive cerebellar ataxia.",
-    "additionalDifferentials": [
-      "Other autosomal dominant SCAs presenting with early dysarthria, such as SCA1",
-      "SCA36, which can produce bulbar features and tongue involvement",
-      "Progressive ataxia with palatal tremor of other genetic or sporadic cause",
-      "Primary or idiopathic spasmodic dysphonia before cerebellar signs emerge",
-      "Primary familial brain calcification and other causes of intracranial calcification",
-      "Dominant ataxias featuring cortical or action myoclonus"
+    [
+     "Key Investigations",
+     "CT head to detect calcification of the dentate nucleus, MRI brain to assess cerebellar atrophy, Molecular testing by chromosomal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT head to detect calcification of the dentate nucleus",
-      "MRI brain to assess cerebellar atrophy",
-      "Molecular testing by chromosomal microarray or MLPA to detect the 11q12 duplication (dosage-sensitive methods)",
-      "Hereditary ataxia gene panel to exclude repeat-expansion subtypes",
-      "Laryngoscopy and formal voice assessment for the dysphonia",
-      "Evaluation for other causes of intracranial calcification (calcium-phosphate and parathyroid indices)",
-      "Family pedigree analysis with genetic counselling"
+    [
+     "Primary Differentials",
+     "Other autosomal dominant SCAs presenting with early dysarthria, such as SCA1, SCA36, which can produce bulbar features and tongue",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly worsening dysphonia or dysphagia with aspiration risk.",
-      "New cognitive, psychiatric or extrapyramidal features suggesting an alternative diagnosis.",
-      "Frequent falls as cerebellar ataxia advances.",
-      "Extensive intracranial calcification beyond the dentate raising other metabolic disorders."
+    [
+     "Management Strategy",
+     "With no disease-modifying therapy, anchor care on physiotherapy for gait and balance, occupational therapy, and speech and",
+     "Core treatment modality"
     ],
-    "prognosis": "Slowly progressive over years to decades, with disability dominated by cerebellar ataxia and bulbar dysfunction; lifespan is usually preserved.",
-    "pitfalls": [
-      "Attributing the early voice change to a primary laryngeal disorder and missing the underlying ataxia.",
-      "Expecting a repeat expansion and failing to test for the duplication, which requires dosage-sensitive or array methods.",
-      "Overlooking dentate nucleus calcification on imaging.",
-      "Confusing the condition with sporadic progressive ataxia with palatal tremor."
-    ],
-    "references": [
-      "Neurogenetics reference texts on autosomal dominant spinocerebellar ataxias",
-      "Standard neurology textbook chapters on inherited ataxias",
-      "Consensus reviews of copy-number and non-repeat cerebellar ataxias"
-    ],
-    "crossLinks": [],
-    "management": [
-      "With no disease-modifying therapy, anchor care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy",
-      "Treat the spasmodic dysphonia with laryngeal botulinum toxin injections alongside ENT/laryngology and voice therapy",
-      "Manage palatal tremor symptomatically where it is troublesome or causes ear click",
-      "Institute falls prevention and provide mobility aids for progressive gait ataxia",
-      "Confirm the dentate calcification is not attributable to a treatable metabolic cause by checking calcium, phosphate and parathyroid status",
-      "Monitor for bulbar dysfunction with periodic swallow assessment",
-      "Offer genetic counselling and cascade testing using dosage-sensitive methods (chromosomal microarray or MLPA) to detect the 11q12 duplication"
+    [
+     "Clinical Pitfall",
+     "Attributing the early voice change to a primary laryngeal disorder and missing the underlying ataxia.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for spinocerebellar ataxia type 20."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "spinocerebellar-ataxia-type-20-diagram",
+   "title": "Spinocerebellar ataxia type 20: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

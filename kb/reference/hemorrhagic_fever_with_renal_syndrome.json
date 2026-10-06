@@ -1,82 +1,177 @@
 {
-  "id": "hemorrhagic_fever_with_renal_syndrome",
-  "name": "Haemorrhagic fever with renal syndrome",
-  "aliases": [
-    "HFRS",
-    "Old World hantavirus infection",
-    "Hantaan virus infection",
-    "Puumala virus infection",
-    "nephropathia epidemica",
-    "epidemic haemorrhagic fever"
+ "id": "hemorrhagic_fever_with_renal_syndrome",
+ "name": "Haemorrhagic fever with renal syndrome",
+ "aliases": [
+  "HFRS",
+  "Old World hantavirus infection",
+  "Hantaan virus infection",
+  "Puumala virus infection",
+  "nephropathia epidemica",
+  "epidemic haemorrhagic fever"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by Old World hantaviruses (Hantaan, Seoul, Dobrava, and the milder Puumala causing nephropathia epidemica) acquired by inhaling aerosolised rodent excreta across Europe and Asia",
+   "The classic course progresses through febrile, hypotensive, oliguric, diuretic, and convalescent phases, though milder Puumala infection may not show all stages",
+   "Capillary leak drives retroperitoneal and renal interstitial oedema, and acute kidney injury with proteinuria and haematuria is the hallmark, distinguishing it from the pulmonary-predominant New World disease",
+   "Thrombocytopenia, elevated haematocrit from plasma leak, and haemorrhagic manifestations such as conjunctival haemorrhage and petechiae are common",
+   "Sudden severe lumbar and abdominal pain with blurred or transient myopia is a characteristic clue in Puumala infection",
+   "Management is supportive with careful fluid and electrolyte balance and renal replacement therapy when needed; some authorities have used ribavirin for severe early Hantaan disease",
+   "Diagnosis is confirmed by hantavirus serology and RT-PCR, interpreted alongside a rodent-exposure history in an endemic area"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by Old World hantaviruses (Hantaan, Seoul, Dobrava, and the milder Puumala causing nephropathia epidemica) acquired by inhaling aerosolised rodent excreta across Europe and Asia",
-      "The classic course progresses through febrile, hypotensive, oliguric, diuretic, and convalescent phases, though milder Puumala infection may not show all stages",
-      "Capillary leak drives retroperitoneal and renal interstitial oedema, and acute kidney injury with proteinuria and haematuria is the hallmark, distinguishing it from the pulmonary-predominant New World disease",
-      "Thrombocytopenia, elevated haematocrit from plasma leak, and haemorrhagic manifestations such as conjunctival haemorrhage and petechiae are common",
-      "Sudden severe lumbar and abdominal pain with blurred or transient myopia is a characteristic clue in Puumala infection",
-      "Management is supportive with careful fluid and electrolyte balance and renal replacement therapy when needed; some authorities have used ribavirin for severe early Hantaan disease",
-      "Diagnosis is confirmed by hantavirus serology and RT-PCR, interpreted alongside a rodent-exposure history in an endemic area"
+  "pathophysiology": "Inhaled virus from persistently infected rodent reservoirs infects vascular endothelium, and an immune-mediated increase in vascular permeability produces plasma leakage. In contrast to the pulmonary tropism of New World strains, Old World hantaviruses preferentially injure the renal microvasculature and interstitium, causing acute kidney injury with oliguria followed by a polyuric recovery phase. Platelet consumption and endothelial dysfunction underlie the bleeding tendency, and severity ranges from mild (Puumala) to severe (Hantaan and Dobrava).",
+  "additionalDifferentials": [
+   "Leptospirosis with renal involvement",
+   "Acute glomerulonephritis or other causes of acute kidney injury",
+   "Sepsis with disseminated intravascular coagulation",
+   "Other viral haemorrhagic fevers depending on geography",
+   "Thrombotic microangiopathy (haemolytic uraemic syndrome or thrombotic thrombocytopenic purpura)",
+   "Acute pyelonephritis"
+  ],
+  "additionalInvestigations": [
+   "Hantavirus serology for IgM and IgG antibodies",
+   "RT-PCR for viral RNA during the early febrile phase",
+   "Renal function tests, urinalysis, and quantification of proteinuria and haematuria",
+   "Full blood count monitoring platelets and haematocrit",
+   "Coagulation studies to assess for disseminated intravascular coagulation",
+   "Ultrasound of the kidneys showing enlarged, oedematous kidneys in nephropathia epidemica"
+  ],
+  "redFlags": [
+   "Progression to anuria or hyperkalaemia requiring urgent renal replacement therapy",
+   "Shock during the hypotensive phase from capillary leak",
+   "Significant haemorrhage with worsening thrombocytopenia",
+   "Overhydration precipitating pulmonary oedema during the oliguric phase",
+   "Neurological deterioration suggesting central nervous system involvement or severe electrolyte disturbance"
+  ],
+  "prognosis": "Puumala-associated nephropathia epidemica is usually self-limiting with full renal recovery, whereas Hantaan and Dobrava infections carry appreciable mortality and greater risk of severe acute kidney injury; most survivors recover normal renal function.",
+  "pitfalls": [
+   "Missing the diagnosis in the febrile phase before renal features appear",
+   "Aggressive fluid loading during the oliguric phase, precipitating volume overload",
+   "Attributing acute kidney injury solely to sepsis or nephrotoxins without considering hantavirus exposure",
+   "Underestimating the transition to the diuretic phase, risking hypovolaemia and electrolyte loss",
+   "Overlooking the rodent-exposure or rural travel history"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "World Health Organization guidance on haemorrhagic fever with renal syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide meticulous supportive care with phase-specific fluid and electrolyte management, restricting fluids during the oliguric phase and replacing losses during the polyuric phase",
+   "Consider ribavirin in severe, early Hantaan or Dobrava infection, recognising its uncertain benefit",
+   "Institute renal replacement therapy for oliguric acute kidney injury, fluid overload, or refractory electrolyte disturbance",
+   "Manage haemorrhagic complications and disseminated intravascular coagulation with blood-product support, and avoid nephrotoxic drugs",
+   "Monitor renal function, platelet count, haematocrit, blood pressure, and urine output closely through the disease phases",
+   "Refer to infectious diseases and nephrology, and advise rodent-exposure avoidance and control for prevention"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hemorrhagic_fever_with_renal_syndrome-pathway",
+   "title": "Haemorrhagic fever with renal syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by Old World hantaviruses (Hantaan, Seoul, Dobrava, and the milder Puumala causing nephropathia epidemica) acquired by inhaling aerosolised rodent excreta across Europe and Asia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progression to anuria or hyperkalaemia requiring urgent renal replacement therapy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Hantavirus serology for IgM and IgG antibodies, RT-PCR for viral RNA during the early febrile phase, Renal function tests, urinalysis, and quantification of proteinuria and haematuria"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide meticulous supportive care with phase-specific fluid and electrolyte management, restricting fluids during the oliguric phase and replacing losses during the polyuric phase"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis in the febrile phase before renal features appear"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of haemorrhagic fever with renal syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hemorrhagic_fever_with_renal_syndrome-matrix",
+   "title": "Haemorrhagic fever with renal syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by Old World hantaviruses (Hantaan, Seoul, Dobrava, and the milder Puumala causing nephropathia epidemica) acquired by",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Inhaled virus from persistently infected rodent reservoirs infects vascular endothelium, and an immune-mediated increase in vascular permeability produces plasma leakage. In contrast to the pulmonary tropism of New World strains, Old World hantaviruses preferentially injure the renal microvasculature and interstitium, causing acute kidney injury with oliguria followed by a polyuric recovery phase. Platelet consumption and endothelial dysfunction underlie the bleeding tendency, and severity ranges from mild (Puumala) to severe (Hantaan and Dobrava).",
-    "additionalDifferentials": [
-      "Leptospirosis with renal involvement",
-      "Acute glomerulonephritis or other causes of acute kidney injury",
-      "Sepsis with disseminated intravascular coagulation",
-      "Other viral haemorrhagic fevers depending on geography",
-      "Thrombotic microangiopathy (haemolytic uraemic syndrome or thrombotic thrombocytopenic purpura)",
-      "Acute pyelonephritis"
+    [
+     "Key Investigations",
+     "Hantavirus serology for IgM and IgG antibodies, RT-PCR for viral RNA during the early febrile phase, Renal function tests,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Hantavirus serology for IgM and IgG antibodies",
-      "RT-PCR for viral RNA during the early febrile phase",
-      "Renal function tests, urinalysis, and quantification of proteinuria and haematuria",
-      "Full blood count monitoring platelets and haematocrit",
-      "Coagulation studies to assess for disseminated intravascular coagulation",
-      "Ultrasound of the kidneys showing enlarged, oedematous kidneys in nephropathia epidemica"
+    [
+     "Primary Differentials",
+     "Leptospirosis with renal involvement, Acute glomerulonephritis or other causes of acute kidney injury, Sepsis with disseminated",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progression to anuria or hyperkalaemia requiring urgent renal replacement therapy",
-      "Shock during the hypotensive phase from capillary leak",
-      "Significant haemorrhage with worsening thrombocytopenia",
-      "Overhydration precipitating pulmonary oedema during the oliguric phase",
-      "Neurological deterioration suggesting central nervous system involvement or severe electrolyte disturbance"
+    [
+     "Management Strategy",
+     "Provide meticulous supportive care with phase-specific fluid and electrolyte management, restricting fluids during the oliguric",
+     "Core treatment modality"
     ],
-    "prognosis": "Puumala-associated nephropathia epidemica is usually self-limiting with full renal recovery, whereas Hantaan and Dobrava infections carry appreciable mortality and greater risk of severe acute kidney injury; most survivors recover normal renal function.",
-    "pitfalls": [
-      "Missing the diagnosis in the febrile phase before renal features appear",
-      "Aggressive fluid loading during the oliguric phase, precipitating volume overload",
-      "Attributing acute kidney injury solely to sepsis or nephrotoxins without considering hantavirus exposure",
-      "Underestimating the transition to the diuretic phase, risking hypovolaemia and electrolyte loss",
-      "Overlooking the rodent-exposure or rural travel history"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "World Health Organization guidance on haemorrhagic fever with renal syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide meticulous supportive care with phase-specific fluid and electrolyte management, restricting fluids during the oliguric phase and replacing losses during the polyuric phase",
-      "Consider ribavirin in severe, early Hantaan or Dobrava infection, recognising its uncertain benefit",
-      "Institute renal replacement therapy for oliguric acute kidney injury, fluid overload, or refractory electrolyte disturbance",
-      "Manage haemorrhagic complications and disseminated intravascular coagulation with blood-product support, and avoid nephrotoxic drugs",
-      "Monitor renal function, platelet count, haematocrit, blood pressure, and urine output closely through the disease phases",
-      "Refer to infectious diseases and nephrology, and advise rodent-exposure avoidance and control for prevention"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis in the febrile phase before renal features appear",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for haemorrhagic fever with renal syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hemorrhagic-fever-with-renal-syndrome-diagram",
+   "title": "Haemorrhagic fever with renal syndrome: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,81 +1,176 @@
 {
-  "id": "anorexia_nervosa",
-  "name": "Anorexia nervosa",
-  "aliases": [
-    "anorexia",
-    "AN"
+ "id": "anorexia_nervosa",
+ "name": "Anorexia nervosa",
+ "aliases": [
+  "anorexia",
+  "AN"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by restriction of energy intake leading to significantly low body weight, intense fear of weight gain, and a disturbance in how body weight or shape is experienced",
+   "Two patterns are recognised: a restricting type and a binge-eating/purging type",
+   "Physical consequences include amenorrhoea, bradycardia, hypotension, hypothermia, lanugo hair, and osteopenia",
+   "Purging behaviours can cause electrolyte disturbances such as hypokalaemia, metabolic alkalosis, and dental erosion",
+   "Management principles centre on structured nutritional rehabilitation and weight restoration alongside psychotherapy, with family-based treatment favoured for adolescents",
+   "Medical stabilisation takes priority in severe cases; feeding must be advanced cautiously to avoid refeeding syndrome",
+   "Comorbid depression, anxiety, and obsessive-compulsive features are common, and suicide risk is elevated",
+   "Weigh patients and monitor electrolytes and cardiac status, since bradycardia and QT prolongation can be dangerous"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by restriction of energy intake leading to significantly low body weight, intense fear of weight gain, and a disturbance in how body weight or shape is experienced",
-      "Two patterns are recognised: a restricting type and a binge-eating/purging type",
-      "Physical consequences include amenorrhoea, bradycardia, hypotension, hypothermia, lanugo hair, and osteopenia",
-      "Purging behaviours can cause electrolyte disturbances such as hypokalaemia, metabolic alkalosis, and dental erosion",
-      "Management principles centre on structured nutritional rehabilitation and weight restoration alongside psychotherapy, with family-based treatment favoured for adolescents",
-      "Medical stabilisation takes priority in severe cases; feeding must be advanced cautiously to avoid refeeding syndrome",
-      "Comorbid depression, anxiety, and obsessive-compulsive features are common, and suicide risk is elevated",
-      "Weigh patients and monitor electrolytes and cardiac status, since bradycardia and QT prolongation can be dangerous"
+  "pathophysiology": "Anorexia nervosa arises from an interaction of genetic and temperamental vulnerability (perfectionism, anxiety, harm avoidance), sociocultural pressures, and neurobiological factors including altered reward and interoceptive processing and serotonergic and dopaminergic dysregulation. Starvation itself perpetuates the disorder through neuroendocrine and cognitive changes, and complications reflect the systemic effects of chronic malnutrition.",
+  "additionalDifferentials": [
+   "Bulimia nervosa",
+   "Avoidant/restrictive food intake disorder",
+   "Major depressive disorder with appetite loss",
+   "Hyperthyroidism",
+   "Malabsorption and gastrointestinal disease",
+   "Malignancy or chronic infection causing weight loss",
+   "Body dysmorphic disorder"
+  ],
+  "additionalInvestigations": [
+   "Weight, height, and body mass index with growth trajectory in young people",
+   "Electrolytes including potassium, phosphate, and magnesium",
+   "ECG to assess for bradycardia and QT prolongation",
+   "Full blood count, renal and liver function, and glucose",
+   "Bone density assessment in prolonged illness",
+   "Assessment for refeeding risk before and during nutritional rehabilitation"
+  ],
+  "redFlags": [
+   "Severe bradycardia, hypotension, hypothermia, or arrhythmia indicating cardiac instability",
+   "Dangerous electrolyte derangement, particularly hypokalaemia and hypophosphataemia",
+   "Refeeding syndrome during nutritional restoration",
+   "Rapid or extreme weight loss and very low body mass index",
+   "Suicidal ideation"
+  ],
+  "prognosis": "Anorexia nervosa has one of the highest mortality rates among psychiatric disorders, from both medical complications and suicide. Many patients recover, particularly with early intervention in adolescence, but a substantial proportion follow a chronic or relapsing course.",
+  "pitfalls": [
+   "Refeeding too rapidly and precipitating life-threatening refeeding syndrome",
+   "Focusing on weight alone while neglecting electrolyte and cardiac monitoring",
+   "Underestimating suicide risk",
+   "Being reassured by a normal weight in the binge-purge type despite dangerous electrolyte disturbance",
+   "Delaying medical stabilisation while awaiting psychiatric transfer"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Make structured nutritional rehabilitation and weight restoration the cornerstone of care, advancing feeding cautiously to avoid refeeding syndrome",
+   "Prevent refeeding syndrome by monitoring and replacing phosphate, potassium, and magnesium and giving thiamine before and during refeeding",
+   "Deliver psychological therapy, with family-based treatment favoured for adolescents and specialist eating-disorder-focused therapy for adults",
+   "Medically stabilise severe cases with attention to bradycardia, hypotension, hypothermia, and electrolyte disturbances such as hypokalaemia",
+   "Address bone health with attention to osteopenia and adequate calcium and vitamin D",
+   "Treat comorbid depression and anxiety and monitor suicide risk, recognising no drug is a primary treatment",
+   "Manage through a multidisciplinary team and consider inpatient or compulsory treatment when the illness is life-threatening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "anorexia_nervosa-pathway",
+   "title": "Anorexia nervosa: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by restriction of energy intake leading to significantly low body weight, intense fear of weight gain, and a disturbance in how body weight or shape is experienced",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe bradycardia, hypotension, hypothermia, or arrhythmia indicating cardiac instability",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Weight, height, and body mass index with growth trajectory in young people, Electrolytes including potassium, phosphate, and magnesium, ECG to assess for bradycardia and QT prolongation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Make structured nutritional rehabilitation and weight restoration the cornerstone of care, advancing feeding cautiously to avoid refeeding syndrome"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Refeeding too rapidly and precipitating life-threatening refeeding syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of anorexia nervosa."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anorexia_nervosa-matrix",
+   "title": "Anorexia nervosa: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by restriction of energy intake leading to significantly low body weight, intense fear of weight gain, and a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Anorexia nervosa arises from an interaction of genetic and temperamental vulnerability (perfectionism, anxiety, harm avoidance), sociocultural pressures, and neurobiological factors including altered reward and interoceptive processing and serotonergic and dopaminergic dysregulation. Starvation itself perpetuates the disorder through neuroendocrine and cognitive changes, and complications reflect the systemic effects of chronic malnutrition.",
-    "additionalDifferentials": [
-      "Bulimia nervosa",
-      "Avoidant/restrictive food intake disorder",
-      "Major depressive disorder with appetite loss",
-      "Hyperthyroidism",
-      "Malabsorption and gastrointestinal disease",
-      "Malignancy or chronic infection causing weight loss",
-      "Body dysmorphic disorder"
+    [
+     "Key Investigations",
+     "Weight, height, and body mass index with growth trajectory in young people, Electrolytes including potassium, phosphate, and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Weight, height, and body mass index with growth trajectory in young people",
-      "Electrolytes including potassium, phosphate, and magnesium",
-      "ECG to assess for bradycardia and QT prolongation",
-      "Full blood count, renal and liver function, and glucose",
-      "Bone density assessment in prolonged illness",
-      "Assessment for refeeding risk before and during nutritional rehabilitation"
+    [
+     "Primary Differentials",
+     "Bulimia nervosa, Avoidant/restrictive food intake disorder, Major depressive disorder with appetite loss",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe bradycardia, hypotension, hypothermia, or arrhythmia indicating cardiac instability",
-      "Dangerous electrolyte derangement, particularly hypokalaemia and hypophosphataemia",
-      "Refeeding syndrome during nutritional restoration",
-      "Rapid or extreme weight loss and very low body mass index",
-      "Suicidal ideation"
+    [
+     "Management Strategy",
+     "Make structured nutritional rehabilitation and weight restoration the cornerstone of care, advancing feeding cautiously to avoid",
+     "Core treatment modality"
     ],
-    "prognosis": "Anorexia nervosa has one of the highest mortality rates among psychiatric disorders, from both medical complications and suicide. Many patients recover, particularly with early intervention in adolescence, but a substantial proportion follow a chronic or relapsing course.",
-    "pitfalls": [
-      "Refeeding too rapidly and precipitating life-threatening refeeding syndrome",
-      "Focusing on weight alone while neglecting electrolyte and cardiac monitoring",
-      "Underestimating suicide risk",
-      "Being reassured by a normal weight in the binge-purge type despite dangerous electrolyte disturbance",
-      "Delaying medical stabilisation while awaiting psychiatric transfer"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Make structured nutritional rehabilitation and weight restoration the cornerstone of care, advancing feeding cautiously to avoid refeeding syndrome",
-      "Prevent refeeding syndrome by monitoring and replacing phosphate, potassium, and magnesium and giving thiamine before and during refeeding",
-      "Deliver psychological therapy, with family-based treatment favoured for adolescents and specialist eating-disorder-focused therapy for adults",
-      "Medically stabilise severe cases with attention to bradycardia, hypotension, hypothermia, and electrolyte disturbances such as hypokalaemia",
-      "Address bone health with attention to osteopenia and adequate calcium and vitamin D",
-      "Treat comorbid depression and anxiety and monitor suicide risk, recognising no drug is a primary treatment",
-      "Manage through a multidisciplinary team and consider inpatient or compulsory treatment when the illness is life-threatening"
+    [
+     "Clinical Pitfall",
+     "Refeeding too rapidly and precipitating life-threatening refeeding syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for anorexia nervosa."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "anorexia-nervosa-diagram",
+   "title": "Anorexia nervosa: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

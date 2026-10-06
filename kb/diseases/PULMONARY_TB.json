@@ -247,5 +247,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3aa75e87"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pulmonary_tb-dx-algo",
+      "title": "Pulmonary Tuberculosis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Pulmonary TB is traditionally split into primary (soon after initial infection, often middle/lower lung zones, common in children) and postprimary/adult-type (reactivation or recent reinfection, apical-posterior upper lobes); molecular",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Massive hemoptysis from erosion of a vessel in a cavity wall or rupture of a Rasmussen's aneurysm - potentially life-threatening (p.1386)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Xpert MTB/RIF Ultra (next-generation NAAT with higher sensitivity in smear-negative and HIV-positive cases) (p.1392), Truenat MTB / MTB Plus and Truenat MTB-Rif Dx - portable, battery-operated molecular tests for"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames severity primarily by disease form and host rather than a numeric score: primary vs postprimary (cavitary) pulmonary disease; pulmonary vs extrapulmonary vs disseminated (miliary) TB; and by"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating on clinical/radiographic grounds alone: CXR has high sensitivity but poor specificity and no pattern (including a normal film) is pathognomonic in the HIV era - bacteriologic confirmation must always be pursued"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for pulmonary tuberculosis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_tb-matrix",
+      "title": "Pulmonary Tuberculosis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pulmonary TB is traditionally split into primary (soon after initial infection, often middle/lower lung zones, common in",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Xpert MTB/RIF Ultra (next-generation NAAT with higher sensitivity in smear-negative and HIV-positive cases) (p.1392), Truenat MTB",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Bronchogenic carcinoma (lung cancer) - upper-lobe mass/cavity, hemoptysis, weight loss; patients with such radiographic findings",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Massive hemoptysis from erosion of a vessel in a cavity wall or rupture of a Rasmussen's aneurysm - potentially life-threatening",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating on clinical/radiographic grounds alone: CXR has high sensitivity but poor specificity and no pattern (including a normal",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for pulmonary tuberculosis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pulmonary-tb-diagram",
+      "title": "Pulmonary Tuberculosis: Pulmonary & Chest Radiograph Diagnostic Schematic",
+      "type": "xray",
+      "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+      "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Airway Tree",
+          "description": "Tracheobronchial branching down to lobar and segmental divisions."
+        },
+        {
+          "label": "Parenchyma",
+          "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+        },
+        {
+          "label": "Pleural Space",
+          "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+        }
+      ]
+    }
+  ]
 }

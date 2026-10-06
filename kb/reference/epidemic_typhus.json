@@ -1,82 +1,177 @@
 {
-  "id": "epidemic_typhus",
-  "name": "Epidemic (louse-borne) typhus",
-  "aliases": [
-    "louse-borne typhus",
-    "Rickettsia prowazekii infection",
-    "classic typhus",
-    "jail fever",
-    "Brill-Zinsser disease (recrudescent form)"
+ "id": "epidemic_typhus",
+ "name": "Epidemic (louse-borne) typhus",
+ "aliases": [
+  "louse-borne typhus",
+  "Rickettsia prowazekii infection",
+  "classic typhus",
+  "jail fever",
+  "Brill-Zinsser disease (recrudescent form)"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by Rickettsia prowazekii and transmitted by the human body louse (Pediculus humanus corporis); infection occurs when louse faeces are scratched into the bite site or contact mucosae, not directly from the bite",
+   "Classically epidemic in conditions of overcrowding, cold, war, famine and poor hygiene where body lice thrive, hence historical names such as jail and camp fever",
+   "After an incubation of about 1-2 weeks there is abrupt high fever, severe headache, myalgia and prostration, often with marked neurological features",
+   "A rash typically begins on the trunk in the axillae and spreads centrifugally to the limbs, usually sparing the palms, soles and face, and may become petechial",
+   "Doxycycline is highly effective, often with a single-dose response, and should be given empirically on clinical and epidemiological suspicion",
+   "Brill-Zinsser disease is a milder recrudescence occurring years later from latent organisms and can seed new louse-borne outbreaks",
+   "Humans are the main reservoir, and flying squirrels are recognised as a sylvatic reservoir in North America"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by Rickettsia prowazekii and transmitted by the human body louse (Pediculus humanus corporis); infection occurs when louse faeces are scratched into the bite site or contact mucosae, not directly from the bite",
-      "Classically epidemic in conditions of overcrowding, cold, war, famine and poor hygiene where body lice thrive, hence historical names such as jail and camp fever",
-      "After an incubation of about 1-2 weeks there is abrupt high fever, severe headache, myalgia and prostration, often with marked neurological features",
-      "A rash typically begins on the trunk in the axillae and spreads centrifugally to the limbs, usually sparing the palms, soles and face, and may become petechial",
-      "Doxycycline is highly effective, often with a single-dose response, and should be given empirically on clinical and epidemiological suspicion",
-      "Brill-Zinsser disease is a milder recrudescence occurring years later from latent organisms and can seed new louse-borne outbreaks",
-      "Humans are the main reservoir, and flying squirrels are recognised as a sylvatic reservoir in North America"
+  "pathophysiology": "Rickettsia prowazekii is an obligate intracellular bacterium that, once inoculated through louse-faeces contamination of broken skin, invades vascular endothelial cells and multiplies until the cell ruptures. Progressive endothelial infection produces a widespread small-vessel vasculitis with increased permeability, perivascular inflammation and microthrombus formation. This vasculitis affects the skin, brain, myocardium, kidneys and other organs, accounting for the rash, encephalitic features, hypovolaemia and multi-organ dysfunction of severe disease. Latent survival of organisms explains later recrudescence as Brill-Zinsser disease.",
+  "additionalDifferentials": [
+   "Murine (endemic) typhus",
+   "Spotted fever group rickettsioses",
+   "Meningococcaemia",
+   "Typhoid fever",
+   "Relapsing fever",
+   "Leptospirosis",
+   "Viral haemorrhagic fever in endemic areas"
+  ],
+  "additionalInvestigations": [
+   "Indirect immunofluorescence antibody serology on paired sera",
+   "PCR of blood or tissue where available",
+   "Full blood count and film",
+   "Renal function and liver enzymes",
+   "Serum sodium to detect hyponatraemia",
+   "Examination of clothing and body for lice to support the epidemiological diagnosis"
+  ],
+  "redFlags": [
+   "Altered consciousness, delirium, seizures or coma indicating encephalitic involvement",
+   "Petechial or purpuric rash with hypotension and shock",
+   "Gangrene of digits or extremities from severe vasculitis",
+   "Occurrence in a refugee, prison or disaster setting signalling outbreak potential",
+   "Acute kidney injury or myocardial involvement"
+  ],
+  "prognosis": "Untreated epidemic typhus carries a high mortality that rises with age, but prompt doxycycline is dramatically effective; recrudescent Brill-Zinsser disease is generally milder.",
+  "pitfalls": [
+   "Not considering the diagnosis outside historical contexts despite ongoing risk in crowded, impoverished and displaced populations",
+   "Waiting for serology before treating in a clinically suspicious case",
+   "Confusing the centrifugal, palm-and-sole-sparing rash with a spotted fever",
+   "Overlooking Brill-Zinsser disease as a source of new outbreaks",
+   "Neglecting delousing and public-health measures alongside treatment"
+  ],
+  "references": [
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+   "Harrison's Principles of Internal Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prompt empirical doxycycline on clinical and epidemiological suspicion, without waiting for serological confirmation",
+   "Chloramphenicol as an alternative where doxycycline is contraindicated",
+   "Supportive care with rehydration, correction of hyponatraemia, antipyretics and attentive nursing",
+   "Delousing of the patient, clothing and close contacts with topical insecticides, alongside hygiene measures to interrupt transmission",
+   "Monitor for and manage complications such as encephalopathy, myocarditis, renal impairment and hypovolaemia, with organ support and critical care in severe disease",
+   "Public-health notification and outbreak control, with vigilance for later Brill-Zinsser recrudescence that can seed new outbreaks"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "epidemic_typhus-pathway",
+   "title": "Epidemic (louse-borne) typhus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by Rickettsia prowazekii and transmitted by the human body louse (Pediculus humanus corporis); infection occurs when louse faeces are scratched into the bite site or contact mucosae, not directly from the bite",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Altered consciousness, delirium, seizures or coma indicating encephalitic involvement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired sera, PCR of blood or tissue where available, Full blood count and film"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prompt empirical doxycycline on clinical and epidemiological suspicion, without waiting for serological confirmation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not considering the diagnosis outside historical contexts despite ongoing risk in crowded, impoverished and displaced populations"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of epidemic (louse-borne) typhus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "epidemic_typhus-matrix",
+   "title": "Epidemic (louse-borne) typhus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by Rickettsia prowazekii and transmitted by the human body louse (Pediculus humanus corporis); infection occurs when louse",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rickettsia prowazekii is an obligate intracellular bacterium that, once inoculated through louse-faeces contamination of broken skin, invades vascular endothelial cells and multiplies until the cell ruptures. Progressive endothelial infection produces a widespread small-vessel vasculitis with increased permeability, perivascular inflammation and microthrombus formation. This vasculitis affects the skin, brain, myocardium, kidneys and other organs, accounting for the rash, encephalitic features, hypovolaemia and multi-organ dysfunction of severe disease. Latent survival of organisms explains later recrudescence as Brill-Zinsser disease.",
-    "additionalDifferentials": [
-      "Murine (endemic) typhus",
-      "Spotted fever group rickettsioses",
-      "Meningococcaemia",
-      "Typhoid fever",
-      "Relapsing fever",
-      "Leptospirosis",
-      "Viral haemorrhagic fever in endemic areas"
+    [
+     "Key Investigations",
+     "Indirect immunofluorescence antibody serology on paired sera, PCR of blood or tissue where available, Full blood count and film",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Indirect immunofluorescence antibody serology on paired sera",
-      "PCR of blood or tissue where available",
-      "Full blood count and film",
-      "Renal function and liver enzymes",
-      "Serum sodium to detect hyponatraemia",
-      "Examination of clothing and body for lice to support the epidemiological diagnosis"
+    [
+     "Primary Differentials",
+     "Murine (endemic) typhus, Spotted fever group rickettsioses, Meningococcaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Altered consciousness, delirium, seizures or coma indicating encephalitic involvement",
-      "Petechial or purpuric rash with hypotension and shock",
-      "Gangrene of digits or extremities from severe vasculitis",
-      "Occurrence in a refugee, prison or disaster setting signalling outbreak potential",
-      "Acute kidney injury or myocardial involvement"
+    [
+     "Management Strategy",
+     "Prompt empirical doxycycline on clinical and epidemiological suspicion, without waiting for serological confirmation",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated epidemic typhus carries a high mortality that rises with age, but prompt doxycycline is dramatically effective; recrudescent Brill-Zinsser disease is generally milder.",
-    "pitfalls": [
-      "Not considering the diagnosis outside historical contexts despite ongoing risk in crowded, impoverished and displaced populations",
-      "Waiting for serology before treating in a clinically suspicious case",
-      "Confusing the centrifugal, palm-and-sole-sparing rash with a spotted fever",
-      "Overlooking Brill-Zinsser disease as a source of new outbreaks",
-      "Neglecting delousing and public-health measures alongside treatment"
-    ],
-    "references": [
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-      "Harrison's Principles of Internal Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prompt empirical doxycycline on clinical and epidemiological suspicion, without waiting for serological confirmation",
-      "Chloramphenicol as an alternative where doxycycline is contraindicated",
-      "Supportive care with rehydration, correction of hyponatraemia, antipyretics and attentive nursing",
-      "Delousing of the patient, clothing and close contacts with topical insecticides, alongside hygiene measures to interrupt transmission",
-      "Monitor for and manage complications such as encephalopathy, myocarditis, renal impairment and hypovolaemia, with organ support and critical care in severe disease",
-      "Public-health notification and outbreak control, with vigilance for later Brill-Zinsser recrudescence that can seed new outbreaks"
+    [
+     "Clinical Pitfall",
+     "Not considering the diagnosis outside historical contexts despite ongoing risk in crowded, impoverished and displaced populations",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for epidemic (louse-borne) typhus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "epidemic-typhus-diagram",
+   "title": "Epidemic (louse-borne) typhus: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

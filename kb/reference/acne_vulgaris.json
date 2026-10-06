@@ -1,77 +1,172 @@
 {
-  "id": "acne_vulgaris",
-  "name": "Acne vulgaris",
-  "aliases": [
-    "acne",
-    "common acne",
-    "pimples"
+ "id": "acne_vulgaris",
+ "name": "Acne vulgaris",
+ "aliases": [
+  "acne",
+  "common acne",
+  "pimples"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A disorder of the pilosebaceous unit affecting the face, chest, and back, typically beginning around puberty",
+   "The hallmark non-inflammatory lesion is the comedo (open blackheads and closed whiteheads); its presence distinguishes acne from other papulopustular eruptions like rosacea",
+   "Inflammatory lesions range from papules and pustules to deep nodules and cysts, and severe forms lead to scarring and post-inflammatory pigmentation",
+   "Treatment is chosen by severity: topical retinoids and benzoyl peroxide for comedonal and mild inflammatory disease, adding topical or oral antibacterials for moderate disease",
+   "Combining benzoyl peroxide with antibacterials reduces bacterial resistance, and antibacterials should not be used as prolonged monotherapy",
+   "Systemic retinoid therapy is reserved for severe, nodulocystic, or scarring acne resistant to other measures and requires careful monitoring and strict pregnancy precautions given teratogenicity",
+   "Hormonal therapy can help women with acne linked to androgen excess; consider investigating for hyperandrogenism when there are virilising features or menstrual irregularity",
+   "Sudden severe nodular acne with fever and joint pain (acne fulminans) is a systemic emergency needing urgent specialist care"
   ],
-  "class": "non_infective",
-  "system": "Skin / Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A disorder of the pilosebaceous unit affecting the face, chest, and back, typically beginning around puberty",
-      "The hallmark non-inflammatory lesion is the comedo (open blackheads and closed whiteheads); its presence distinguishes acne from other papulopustular eruptions like rosacea",
-      "Inflammatory lesions range from papules and pustules to deep nodules and cysts, and severe forms lead to scarring and post-inflammatory pigmentation",
-      "Treatment is chosen by severity: topical retinoids and benzoyl peroxide for comedonal and mild inflammatory disease, adding topical or oral antibacterials for moderate disease",
-      "Combining benzoyl peroxide with antibacterials reduces bacterial resistance, and antibacterials should not be used as prolonged monotherapy",
-      "Systemic retinoid therapy is reserved for severe, nodulocystic, or scarring acne resistant to other measures and requires careful monitoring and strict pregnancy precautions given teratogenicity",
-      "Hormonal therapy can help women with acne linked to androgen excess; consider investigating for hyperandrogenism when there are virilising features or menstrual irregularity",
-      "Sudden severe nodular acne with fever and joint pain (acne fulminans) is a systemic emergency needing urgent specialist care"
+  "pathophysiology": "Acne results from four interacting processes within the pilosebaceous unit: increased sebum production driven by androgens, abnormal keratinisation of the follicular lining producing microcomedones, proliferation of Cutibacterium acnes, and inflammation. Trapped sebum and keratin form comedones; bacterial activity and the host immune response generate inflammatory mediators that produce papules, pustules, and deeper nodules. Rupture of the follicular wall extends inflammation into the dermis, and disordered wound healing can result in atrophic or hypertrophic scarring. Hormonal influences, genetic predisposition, and certain drugs modulate severity.",
+  "additionalDifferentials": [
+   "Rosacea (lacks comedones, features flushing and telangiectasia)",
+   "Perioral dermatitis",
+   "Folliculitis (bacterial or fungal)",
+   "Keratosis pilaris",
+   "Drug-induced acneiform eruptions (e.g. corticosteroids)",
+   "Hidradenitis suppurativa when lesions involve flexures"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis; investigations rarely needed for typical presentations",
+   "Hormonal workup (androgens, and related endocrine tests) when hyperandrogenism or polycystic ovary syndrome is suspected",
+   "Pregnancy testing and lipid and liver monitoring before and during systemic retinoid therapy",
+   "Swabs when Gram-negative folliculitis or resistant infection is suspected"
+  ],
+  "redFlags": [
+   "Acne fulminans: abrupt severe ulcerating nodular acne with fever, malaise, and arthralgia",
+   "Signs of underlying endocrine disorder such as virilisation or rapid-onset severe acne",
+   "Extensive scarring or psychological distress requiring escalation of care",
+   "Suspected retinoid-associated mood disturbance during systemic treatment"
+  ],
+  "prognosis": "Acne usually improves after adolescence but may persist into adulthood, particularly in women; early effective treatment limits permanent scarring and psychosocial impact.",
+  "pitfalls": [
+   "Prolonged antibacterial monotherapy promoting resistance and relapse",
+   "Under-treating scarring or nodular acne and delaying referral for systemic retinoid therapy",
+   "Overlooking the significant psychological burden and risk of low mood",
+   "Failing to enforce pregnancy prevention during teratogenic systemic retinoid use"
+  ],
+  "references": [
+   "Fitzpatrick's Dermatology",
+   "Rook's Textbook of Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Topical retinoids and benzoyl peroxide as first-line treatment for comedonal and mild inflammatory acne",
+   "Add a topical or oral antibacterial such as a tetracycline for moderate inflammatory disease, always combined with benzoyl peroxide and never used as prolonged monotherapy, to limit bacterial resistance",
+   "Hormonal therapy with a combined oral contraceptive or an anti-androgen such as spironolactone in appropriate women",
+   "Oral isotretinoin for severe, nodulocystic or scarring acne resistant to other measures, with monitoring and strict pregnancy-prevention measures given its teratogenicity",
+   "General measures with adherence support, non-comedogenic skin care and avoidance of aggravating factors",
+   "Treat and prevent sequelae such as scarring and post-inflammatory pigmentation and address the psychosocial impact",
+   "Dermatology referral for severe, scarring or treatment-resistant disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acne_vulgaris-pathway",
+   "title": "Acne vulgaris: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A disorder of the pilosebaceous unit affecting the face, chest, and back, typically beginning around puberty",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acne fulminans: abrupt severe ulcerating nodular acne with fever, malaise, and arthralgia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis; investigations rarely needed for typical presentations, Hormonal workup (androgens, and related endocrine tests) when hyperandrogenism or polycystic ovary syndrome is suspected, Pregnancy testing and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Topical retinoids and benzoyl peroxide as first-line treatment for comedonal and mild inflammatory acne"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Prolonged antibacterial monotherapy promoting resistance and relapse"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acne vulgaris."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acne_vulgaris-matrix",
+   "title": "Acne vulgaris: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A disorder of the pilosebaceous unit affecting the face, chest, and back, typically beginning around puberty",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Acne results from four interacting processes within the pilosebaceous unit: increased sebum production driven by androgens, abnormal keratinisation of the follicular lining producing microcomedones, proliferation of Cutibacterium acnes, and inflammation. Trapped sebum and keratin form comedones; bacterial activity and the host immune response generate inflammatory mediators that produce papules, pustules, and deeper nodules. Rupture of the follicular wall extends inflammation into the dermis, and disordered wound healing can result in atrophic or hypertrophic scarring. Hormonal influences, genetic predisposition, and certain drugs modulate severity.",
-    "additionalDifferentials": [
-      "Rosacea (lacks comedones, features flushing and telangiectasia)",
-      "Perioral dermatitis",
-      "Folliculitis (bacterial or fungal)",
-      "Keratosis pilaris",
-      "Drug-induced acneiform eruptions (e.g. corticosteroids)",
-      "Hidradenitis suppurativa when lesions involve flexures"
+    [
+     "Key Investigations",
+     "Clinical diagnosis; investigations rarely needed for typical presentations, Hormonal workup (androgens, and related endocrine",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis; investigations rarely needed for typical presentations",
-      "Hormonal workup (androgens, and related endocrine tests) when hyperandrogenism or polycystic ovary syndrome is suspected",
-      "Pregnancy testing and lipid and liver monitoring before and during systemic retinoid therapy",
-      "Swabs when Gram-negative folliculitis or resistant infection is suspected"
+    [
+     "Primary Differentials",
+     "Rosacea (lacks comedones, features flushing and telangiectasia), Perioral dermatitis, Folliculitis (bacterial or fungal)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acne fulminans: abrupt severe ulcerating nodular acne with fever, malaise, and arthralgia",
-      "Signs of underlying endocrine disorder such as virilisation or rapid-onset severe acne",
-      "Extensive scarring or psychological distress requiring escalation of care",
-      "Suspected retinoid-associated mood disturbance during systemic treatment"
+    [
+     "Management Strategy",
+     "Topical retinoids and benzoyl peroxide as first-line treatment for comedonal and mild inflammatory acne",
+     "Core treatment modality"
     ],
-    "prognosis": "Acne usually improves after adolescence but may persist into adulthood, particularly in women; early effective treatment limits permanent scarring and psychosocial impact.",
-    "pitfalls": [
-      "Prolonged antibacterial monotherapy promoting resistance and relapse",
-      "Under-treating scarring or nodular acne and delaying referral for systemic retinoid therapy",
-      "Overlooking the significant psychological burden and risk of low mood",
-      "Failing to enforce pregnancy prevention during teratogenic systemic retinoid use"
-    ],
-    "references": [
-      "Fitzpatrick's Dermatology",
-      "Rook's Textbook of Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Topical retinoids and benzoyl peroxide as first-line treatment for comedonal and mild inflammatory acne",
-      "Add a topical or oral antibacterial such as a tetracycline for moderate inflammatory disease, always combined with benzoyl peroxide and never used as prolonged monotherapy, to limit bacterial resistance",
-      "Hormonal therapy with a combined oral contraceptive or an anti-androgen such as spironolactone in appropriate women",
-      "Oral isotretinoin for severe, nodulocystic or scarring acne resistant to other measures, with monitoring and strict pregnancy-prevention measures given its teratogenicity",
-      "General measures with adherence support, non-comedogenic skin care and avoidance of aggravating factors",
-      "Treat and prevent sequelae such as scarring and post-inflammatory pigmentation and address the psychosocial impact",
-      "Dermatology referral for severe, scarring or treatment-resistant disease"
+    [
+     "Clinical Pitfall",
+     "Prolonged antibacterial monotherapy promoting resistance and relapse",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acne vulgaris."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acne-vulgaris-diagram",
+   "title": "Acne vulgaris: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

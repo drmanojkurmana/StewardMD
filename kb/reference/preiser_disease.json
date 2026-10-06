@@ -1,73 +1,168 @@
 {
-  "id": "preiser_disease",
-  "name": "Preiser disease",
-  "aliases": [
-    "avascular necrosis of the scaphoid",
-    "idiopathic scaphoid osteonecrosis"
+ "id": "preiser_disease",
+ "name": "Preiser disease",
+ "aliases": [
+  "avascular necrosis of the scaphoid",
+  "idiopathic scaphoid osteonecrosis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Hand surgery / Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Hand surgery and orthopaedic references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Avascular necrosis of the scaphoid in the absence of a preceding acute fracture",
+   "It presents with insidious radial-sided wrist pain and tenderness, worse with activity and loading",
+   "It is distinguished from scaphoid fracture nonunion, in which osteonecrosis follows a known fracture",
+   "Associations include corticosteroid use, chemotherapy and other causes of osteonecrosis, though many cases are idiopathic",
+   "MRI is the most sensitive investigation and shows loss of the scaphoid blood supply and marrow changes",
+   "Management ranges from immobilisation in early disease to surgical options for advanced collapse and arthritis"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Hand surgery / Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Hand surgery and orthopaedic references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Avascular necrosis of the scaphoid in the absence of a preceding acute fracture",
-      "It presents with insidious radial-sided wrist pain and tenderness, worse with activity and loading",
-      "It is distinguished from scaphoid fracture nonunion, in which osteonecrosis follows a known fracture",
-      "Associations include corticosteroid use, chemotherapy and other causes of osteonecrosis, though many cases are idiopathic",
-      "MRI is the most sensitive investigation and shows loss of the scaphoid blood supply and marrow changes",
-      "Management ranges from immobilisation in early disease to surgical options for advanced collapse and arthritis"
+  "pathophysiology": "Preiser disease is osteonecrosis of the scaphoid arising without an antecedent fracture, attributed to compromise of its already precarious blood supply, which enters predominantly distally so that the proximal pole is vulnerable to ischaemia. Impaired perfusion causes bone death, and with continued loading the necrotic scaphoid can fragment and collapse, altering carpal mechanics and leading to degenerative wrist arthritis. Systemic risk factors for osteonecrosis contribute in some cases, while others remain idiopathic.",
+  "additionalDifferentials": [
+   "Scaphoid fracture nonunion with osteonecrosis",
+   "Kienbock disease (lunate osteonecrosis)",
+   "Scaphotrapeziotrapezoid or radiocarpal osteoarthritis",
+   "De Quervain tenosynovitis",
+   "Inflammatory arthritis of the wrist"
+  ],
+  "additionalInvestigations": [
+   "MRI to detect osteonecrosis and assess viability",
+   "Radiographs for sclerosis, fragmentation and collapse",
+   "History for corticosteroid, chemotherapy or other osteonecrosis risk factors",
+   "CT to define bony collapse where surgery is considered",
+   "Exclusion of an occult prior fracture"
+  ],
+  "redFlags": [
+   "Scaphoid fragmentation or collapse",
+   "Established carpal arthritis",
+   "Rapid progression of pain and deformity",
+   "Features suggesting an alternative aggressive bone lesion"
+  ],
+  "prognosis": "Outcomes vary; early disease may stabilise with conservative treatment or revascularisation, but progressive collapse leads to arthritis that may require salvage surgery.",
+  "pitfalls": [
+   "Confusing it with scaphoid fracture nonunion",
+   "Missing the diagnosis on early radiographs before MRI changes",
+   "Overlooking systemic osteonecrosis risk factors",
+   "Delaying treatment until collapse and arthritis are established"
+  ],
+  "references": [
+   "Hand surgery reference texts (standard reference)",
+   "Orthopaedic reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-specific drug therapy exists; early disease is managed conservatively with wrist immobilisation, activity modification and analgesia including NSAIDs",
+   "Joint-preserving surgery such as revascularisation with a vascularised bone graft for viable but ischaemic scaphoids in early disease",
+   "Salvage procedures such as proximal row carpectomy, partial wrist fusion or wrist denervation for scaphoid collapse and established arthritis",
+   "Address contributing osteonecrosis risk factors such as corticosteroid or chemotherapy exposure",
+   "Serial MRI to assess scaphoid vascularity, disease progression and treatment response",
+   "Referral to hand surgery for staging and surgical planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "preiser_disease-pathway",
+   "title": "Preiser disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Avascular necrosis of the scaphoid in the absence of a preceding acute fracture",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Scaphoid fragmentation or collapse",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI to detect osteonecrosis and assess viability, Radiographs for sclerosis, fragmentation and collapse, History for corticosteroid, chemotherapy or other osteonecrosis risk factors"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-specific drug therapy exists; early disease is managed conservatively with wrist immobilisation, activity modification and analgesia including NSAIDs"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with scaphoid fracture nonunion"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of preiser disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "preiser_disease-matrix",
+   "title": "Preiser disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Avascular necrosis of the scaphoid in the absence of a preceding acute fracture",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Preiser disease is osteonecrosis of the scaphoid arising without an antecedent fracture, attributed to compromise of its already precarious blood supply, which enters predominantly distally so that the proximal pole is vulnerable to ischaemia. Impaired perfusion causes bone death, and with continued loading the necrotic scaphoid can fragment and collapse, altering carpal mechanics and leading to degenerative wrist arthritis. Systemic risk factors for osteonecrosis contribute in some cases, while others remain idiopathic.",
-    "additionalDifferentials": [
-      "Scaphoid fracture nonunion with osteonecrosis",
-      "Kienbock disease (lunate osteonecrosis)",
-      "Scaphotrapeziotrapezoid or radiocarpal osteoarthritis",
-      "De Quervain tenosynovitis",
-      "Inflammatory arthritis of the wrist"
+    [
+     "Key Investigations",
+     "MRI to detect osteonecrosis and assess viability, Radiographs for sclerosis, fragmentation and collapse, History for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI to detect osteonecrosis and assess viability",
-      "Radiographs for sclerosis, fragmentation and collapse",
-      "History for corticosteroid, chemotherapy or other osteonecrosis risk factors",
-      "CT to define bony collapse where surgery is considered",
-      "Exclusion of an occult prior fracture"
+    [
+     "Primary Differentials",
+     "Scaphoid fracture nonunion with osteonecrosis, Kienbock disease (lunate osteonecrosis), Scaphotrapeziotrapezoid or radiocarpal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Scaphoid fragmentation or collapse",
-      "Established carpal arthritis",
-      "Rapid progression of pain and deformity",
-      "Features suggesting an alternative aggressive bone lesion"
+    [
+     "Management Strategy",
+     "No disease-specific drug therapy exists; early disease is managed conservatively with wrist immobilisation, activity modification",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcomes vary; early disease may stabilise with conservative treatment or revascularisation, but progressive collapse leads to arthritis that may require salvage surgery.",
-    "pitfalls": [
-      "Confusing it with scaphoid fracture nonunion",
-      "Missing the diagnosis on early radiographs before MRI changes",
-      "Overlooking systemic osteonecrosis risk factors",
-      "Delaying treatment until collapse and arthritis are established"
-    ],
-    "references": [
-      "Hand surgery reference texts (standard reference)",
-      "Orthopaedic reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-specific drug therapy exists; early disease is managed conservatively with wrist immobilisation, activity modification and analgesia including NSAIDs",
-      "Joint-preserving surgery such as revascularisation with a vascularised bone graft for viable but ischaemic scaphoids in early disease",
-      "Salvage procedures such as proximal row carpectomy, partial wrist fusion or wrist denervation for scaphoid collapse and established arthritis",
-      "Address contributing osteonecrosis risk factors such as corticosteroid or chemotherapy exposure",
-      "Serial MRI to assess scaphoid vascularity, disease progression and treatment response",
-      "Referral to hand surgery for staging and surgical planning"
+    [
+     "Clinical Pitfall",
+     "Confusing it with scaphoid fracture nonunion",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for preiser disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "preiser-disease-diagram",
+   "title": "Preiser disease: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

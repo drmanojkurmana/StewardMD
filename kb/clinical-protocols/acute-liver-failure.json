@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ICU, liver transplant centre",
- "aliases": ["ALF", "fulminant hepatic failure", "FHF", "acute hepatic failure", "paracetamol liver failure", "acetaminophen hepatotoxicity", "King's College criteria", "KCC", "cerebral oedema liver failure", "N-acetylcysteine", "NAC", "hepatitis E liver failure"],
+ "aliases": [
+  "ALF",
+  "fulminant hepatic failure",
+  "FHF",
+  "acute hepatic failure",
+  "paracetamol liver failure",
+  "acetaminophen hepatotoxicity",
+  "King's College criteria",
+  "KCC",
+  "cerebral oedema liver failure",
+  "N-acetylcysteine",
+  "NAC",
+  "hepatitis E liver failure"
+ ],
  "summary": "INR 1.5 or more with any encephalopathy and no prior liver disease: contact a transplant centre early, give IV N-acetylcysteine (paracetamol and early-grade non-paracetamol ALF), move to ICU at grade 2 encephalopathy, protect against cerebral oedema (sodium 145 to 150 mmol/L, early CRRT for hyperammonaemia) and apply King's College criteria.",
  "sections": [
   {
@@ -99,20 +112,169 @@
   }
  ],
  "drugs": [
-  { "name": "N-acetylcysteine, paracetamol toxicity (21-hour IV regimen)", "dose": "150 mg/kg IV over 15 to 60 minutes, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours", "notes": "In ALF continue at 100 mg/kg per 16 hours (6.25 mg/kg/h) until INR below 1.5 and improving. Cap dosing weight at 100 kg (product labelling)." },
-  { "name": "N-acetylcysteine, non-paracetamol ALF (72-hour regimen)", "dose": "150 mg/kg/h IV for 1 hour, then 12.5 mg/kg/h for 4 hours, then 6.25 mg/kg/h for 67 hours", "notes": "Regimen from the US ALF Study Group trial (Lee 2009); benefit in encephalopathy grade 1 to 2." },
-  { "name": "Activated charcoal", "dose": "50 g orally, single dose", "notes": "Paracetamol ingestion within 4 hours, with a protected or safe airway." },
-  { "name": "Dextrose 10%", "dose": "Continuous IV infusion titrated to blood glucose 150 to 180 mg/dL (8.3 to 10 mmol/L)", "notes": "Hypoglycaemia is common and worsens encephalopathy." },
-  { "name": "Hypertonic saline 3%", "dose": "250 to 500 mL IV bolus or continuous infusion to serum sodium 145 to 150 mmol/L (keep below 160 mmol/L)", "notes": "Prevention and treatment of cerebral oedema; central access preferred for infusion." },
-  { "name": "Mannitol 20%", "dose": "0.5 to 1 g/kg IV bolus", "notes": "Surges of intracranial pressure; avoid in anuria unless on CRRT; check serum osmolality." },
-  { "name": "Aciclovir", "dose": "10 mg/kg IV every 8 hours", "notes": "Empirical for suspected HSV or VZV hepatitis until PCR results; adjust for renal function." },
-  { "name": "Tenofovir disoproxil or entecavir", "dose": "Tenofovir disoproxil 300 mg orally once daily, or entecavir 0.5 mg orally once daily", "notes": "HBV reactivation or severe acute HBV; adjust for renal function." },
-  { "name": "Noradrenaline (norepinephrine)", "dose": "IV infusion titrated to MAP (cerebral perfusion pressure 60 to 80 mmHg)", "notes": "First-line vasopressor; add vasopressin if refractory." }
+  {
+   "name": "N-acetylcysteine, paracetamol toxicity (21-hour IV regimen)",
+   "dose": "150 mg/kg IV over 15 to 60 minutes, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours",
+   "notes": "In ALF continue at 100 mg/kg per 16 hours (6.25 mg/kg/h) until INR below 1.5 and improving. Cap dosing weight at 100 kg (product labelling)."
+  },
+  {
+   "name": "N-acetylcysteine, non-paracetamol ALF (72-hour regimen)",
+   "dose": "150 mg/kg/h IV for 1 hour, then 12.5 mg/kg/h for 4 hours, then 6.25 mg/kg/h for 67 hours",
+   "notes": "Regimen from the US ALF Study Group trial (Lee 2009); benefit in encephalopathy grade 1 to 2."
+  },
+  {
+   "name": "Activated charcoal",
+   "dose": "50 g orally, single dose",
+   "notes": "Paracetamol ingestion within 4 hours, with a protected or safe airway."
+  },
+  {
+   "name": "Dextrose 10%",
+   "dose": "Continuous IV infusion titrated to blood glucose 150 to 180 mg/dL (8.3 to 10 mmol/L)",
+   "notes": "Hypoglycaemia is common and worsens encephalopathy."
+  },
+  {
+   "name": "Hypertonic saline 3%",
+   "dose": "250 to 500 mL IV bolus or continuous infusion to serum sodium 145 to 150 mmol/L (keep below 160 mmol/L)",
+   "notes": "Prevention and treatment of cerebral oedema; central access preferred for infusion."
+  },
+  {
+   "name": "Mannitol 20%",
+   "dose": "0.5 to 1 g/kg IV bolus",
+   "notes": "Surges of intracranial pressure; avoid in anuria unless on CRRT; check serum osmolality."
+  },
+  {
+   "name": "Aciclovir",
+   "dose": "10 mg/kg IV every 8 hours",
+   "notes": "Empirical for suspected HSV or VZV hepatitis until PCR results; adjust for renal function."
+  },
+  {
+   "name": "Tenofovir disoproxil or entecavir",
+   "dose": "Tenofovir disoproxil 300 mg orally once daily, or entecavir 0.5 mg orally once daily",
+   "notes": "HBV reactivation or severe acute HBV; adjust for renal function."
+  },
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "IV infusion titrated to MAP (cerebral perfusion pressure 60 to 80 mmHg)",
+   "notes": "First-line vasopressor; add vasopressin if refractory."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "Acute Liver Failure Guidelines (Shingina et al., Am J Gastroenterol)", "year": 2023, "url": "https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000002340~acute-liver-failure-guidelines" },
-  { "org": "AASLD", "title": "Introduction to the revised AASLD Position Paper on acute liver failure 2011 (Hepatology)", "year": 2012, "url": "https://www.ovid.com/jnls/hep/fulltext/10.1002/hep.25551~introduction-to-the-revised-american-association-for-the" },
-  { "org": "US Acute Liver Failure Study Group", "title": "Intravenous N-acetylcysteine improves transplant-free survival in early stage non-acetaminophen acute liver failure (Lee et al., Gastroenterology)", "year": 2009, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3189485/" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "Acute Liver Failure Guidelines (Shingina et al., Am J Gastroenterol)",
+   "year": 2023,
+   "url": "https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000002340~acute-liver-failure-guidelines"
+  },
+  {
+   "org": "AASLD",
+   "title": "Introduction to the revised AASLD Position Paper on acute liver failure 2011 (Hepatology)",
+   "year": 2012,
+   "url": "https://www.ovid.com/jnls/hep/fulltext/10.1002/hep.25551~introduction-to-the-revised-american-association-for-the"
+  },
+  {
+   "org": "US Acute Liver Failure Study Group",
+   "title": "Intravenous N-acetylcysteine improves transplant-free survival in early stage non-acetaminophen acute liver failure (Lee et al., Gastroenterology)",
+   "year": 2009,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3189485/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-liver-failure-pathway",
+   "title": "Acute liver failure Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Definition: liver injury with coagulopathy (INR 1.5 or more) and any degree of encephalopathy, illness under 26 weeks, in a patient without pre-existing liver disease. Wilson disease, autoimmune hepatitis and Budd-Chiari syndrome can",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Discuss with a liver transplant centre as soon as ALF (or severe acute liver injury with rising INR) is identified; transfer early, because patients deteriorate quickly.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "INR, bilirubin, ALT, AST, ALP, albumin, glucose, sodium, potassium, phosphate, magnesium, creatinine, CBC, arterial blood gas with lactate, arterial ammonia, amylase or lipase."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Arterial ammonia above 200 micromol/L predicts intracranial hypertension; below 75 micromol/L it is rare (AASLD). Start early CRRT for hyperammonaemia in grade 2 or higher encephalopathy even without a conventional renal indication (ACG"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Neurological observations (GCS, pupils) and glucose every 1 to 2 hours in encephalopathy."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute liver failure."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-liver-failure-summary-matrix",
+   "title": "Acute liver failure Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Definition: liver injury with coagulopathy (INR 1.5 or more) and any degree of encephalopathy, illness under 26 weeks, in a patient without",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Discuss with a liver transplant centre as soon as ALF (or severe acute liver injury with rising INR) is identified; transfer early, because",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "INR, bilirubin, ALT, AST, ALP, albumin, glucose, sodium, potassium, phosphate, magnesium, creatinine, CBC, arterial blood gas with lactate,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "N-acetylcysteine, paracetamol toxicity (21-hour IV regimen): 150 mg/kg IV over 15 to 60 minutes, then 50 mg/kg over 4 hours, then 100 mg/kg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Correcting INR with FFP: it masks the key prognostic marker and adds volume.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute liver failure."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-liver-failure-diagram",
+   "title": "Acute liver failure: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

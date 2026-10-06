@@ -148,5 +148,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "h5ae464e9"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "chikungunya-dx-algo",
+      "title": "Chikungunya: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Chikungunya virus (CHIKV) is an arthritogenic alphavirus transmitted by Aedes (yellow-fever and Asian tiger) mosquitoes; after a 2-10 day incubation it causes abrupt high fever, sometimes with a saddleback pattern, plus severe arthralgia",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Cardiorespiratory, neurologic, renal, or ocular complications in severe acute disease (uncommon but reported, typically in hospitalized patients) (Harrison 22e p.1712)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Chikungunya IgM serology / RT-PCR (early illness), Dengue NS1/serology (concurrent testing), CBC"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not label CHIKV as a viral hemorrhagic fever despite occasional petechiae/epistaxis; apparent 'hemorrhagic' cases historically reflected concurrent dengue infection (Harrison 22e p.1712, p.1706)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for chikungunya."
+    }
+  ],
+  "tables": [
+    {
+      "id": "chikungunya-matrix",
+      "title": "Chikungunya: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chikungunya virus (CHIKV) is an arthritogenic alphavirus transmitted by Aedes (yellow-fever and Asian tiger) mosquitoes; after a",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Chikungunya IgM serology / RT-PCR (early illness), Dengue NS1/serology (concurrent testing), CBC",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Cardiorespiratory, neurologic, renal, or ocular complications in severe acute disease (uncommon but reported, typically in",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not label CHIKV as a viral hemorrhagic fever despite occasional petechiae/epistaxis; apparent 'hemorrhagic' cases historically",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for chikungunya."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "chikungunya-diagram",
+      "title": "Chikungunya: Infectious Pathogenesis & Host Response Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+      "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+      "annotations": [
+        {
+          "label": "Pathogen Inoculum",
+          "description": "Microbial virulence, antigen expression, and cellular tropism."
+        },
+        {
+          "label": "Host Cascade",
+          "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+        }
+      ]
+    }
+  ]
 }

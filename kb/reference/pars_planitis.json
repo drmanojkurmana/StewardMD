@@ -1,78 +1,173 @@
 {
-  "id": "pars_planitis",
-  "name": "Pars planitis",
-  "aliases": [
-    "pars planitis",
-    "idiopathic intermediate uveitis with snowbanking"
+ "id": "pars_planitis",
+ "name": "Pars planitis",
+ "aliases": [
+  "pars planitis",
+  "idiopathic intermediate uveitis with snowbanking"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Retina",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A subset of intermediate uveitis defined by snowbanking over the pars plana in the absence of an identifiable systemic infective or inflammatory cause",
+   "Characteristically affects children and young adults and is commonly bilateral",
+   "Presents with floaters and painless blurring of vision in a quiet-looking eye",
+   "Snowballs in the inferior vitreous and a confluent snowbank over the inferior pars plana and ora serrata are typical",
+   "Cystoid macular oedema is the chief cause of reduced vision",
+   "Neovascularisation of the snowbank may develop and cause vitreous haemorrhage",
+   "There is a recognised association with multiple sclerosis, and treatment follows a stepladder of corticosteroids and immunosuppression aimed at controlling macular oedema"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Retina",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A subset of intermediate uveitis defined by snowbanking over the pars plana in the absence of an identifiable systemic infective or inflammatory cause",
-      "Characteristically affects children and young adults and is commonly bilateral",
-      "Presents with floaters and painless blurring of vision in a quiet-looking eye",
-      "Snowballs in the inferior vitreous and a confluent snowbank over the inferior pars plana and ora serrata are typical",
-      "Cystoid macular oedema is the chief cause of reduced vision",
-      "Neovascularisation of the snowbank may develop and cause vitreous haemorrhage",
-      "There is a recognised association with multiple sclerosis, and treatment follows a stepladder of corticosteroids and immunosuppression aimed at controlling macular oedema"
+  "pathophysiology": "Pars planitis is an idiopathic, chronic, T-cell mediated inflammation of the pars plana and peripheral retina. Organised inflammatory exudate accumulates as a snowbank over the inferior pars plana and ora serrata, while cellular aggregates form snowballs in the vitreous. Persistent inflammation and breakdown of the blood-retinal barrier drive cystoid macular oedema and occasionally peripheral retinal neovascularisation. The condition overlaps with the demyelinating spectrum, hence its association with multiple sclerosis.",
+  "additionalDifferentials": [
+   "Sarcoid uveitis",
+   "Lyme disease",
+   "Tuberculous uveitis",
+   "Primary intraocular lymphoma",
+   "Ocular toxocariasis",
+   "Fuchs uveitis syndrome",
+   "Other causes of intermediate uveitis"
+  ],
+  "additionalInvestigations": [
+   "Indirect ophthalmoscopy with scleral indentation to demonstrate the inferior snowbank",
+   "Optical coherence tomography of the macula for cystoid macular oedema",
+   "Fluorescein angiography to detect peripheral leakage and neovascularisation",
+   "Magnetic resonance imaging of the brain to assess for demyelination",
+   "Infective screen including Lyme, syphilis and tuberculosis testing",
+   "Sarcoidosis workup to exclude a secondary cause before labelling the disease idiopathic"
+  ],
+  "redFlags": [
+   "Vitreous haemorrhage from snowbank neovascularisation",
+   "Tractional retinal detachment",
+   "Neurological symptoms suggesting multiple sclerosis",
+   "Refractory cystoid macular oedema threatening central vision"
+  ],
+  "prognosis": "The course is typically chronic and relapsing; vision is generally preserved when cystoid macular oedema is controlled, although complications such as cataract, glaucoma and retinal detachment may reduce the final outcome.",
+  "pitfalls": [
+   "Labelling the disease as pars planitis without first excluding sarcoidosis, Lyme disease and tuberculosis",
+   "Missing an association with multiple sclerosis",
+   "Overlooking peripheral neovascularisation of the snowbank",
+   "Under-treating chronic cystoid macular oedema"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Ryan's Retina",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control inflammation and cystoid macular oedema with corticosteroids delivered periocularly, intravitreally, or systemically according to severity",
+   "Introduce steroid-sparing immunomodulation such as methotrexate, mycophenolate, or azathioprine for chronic or bilateral disease, escalating to anti-TNF biologics such as adalimumab if refractory",
+   "Apply peripheral retinal laser photocoagulation or cryotherapy to the snowbank when neovascularisation develops",
+   "Consider pars plana vitrectomy for non-clearing vitreous haemorrhage or persistent inflammation",
+   "Monitor visual acuity and macular status with optical coherence tomography, watching for cataract, glaucoma, and retinal detachment",
+   "Arrange neurology referral and MRI surveillance given the association with demyelination and multiple sclerosis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pars_planitis-pathway",
+   "title": "Pars planitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A subset of intermediate uveitis defined by snowbanking over the pars plana in the absence of an identifiable systemic infective or inflammatory cause",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Vitreous haemorrhage from snowbank neovascularisation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Indirect ophthalmoscopy with scleral indentation to demonstrate the inferior snowbank, Optical coherence tomography of the macula for cystoid macular oedema, Fluorescein angiography to detect peripheral leakage and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control inflammation and cystoid macular oedema with corticosteroids delivered periocularly, intravitreally, or systemically according to severity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the disease as pars planitis without first excluding sarcoidosis, Lyme disease and tuberculosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pars planitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pars_planitis-matrix",
+   "title": "Pars planitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A subset of intermediate uveitis defined by snowbanking over the pars plana in the absence of an identifiable systemic infective",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pars planitis is an idiopathic, chronic, T-cell mediated inflammation of the pars plana and peripheral retina. Organised inflammatory exudate accumulates as a snowbank over the inferior pars plana and ora serrata, while cellular aggregates form snowballs in the vitreous. Persistent inflammation and breakdown of the blood-retinal barrier drive cystoid macular oedema and occasionally peripheral retinal neovascularisation. The condition overlaps with the demyelinating spectrum, hence its association with multiple sclerosis.",
-    "additionalDifferentials": [
-      "Sarcoid uveitis",
-      "Lyme disease",
-      "Tuberculous uveitis",
-      "Primary intraocular lymphoma",
-      "Ocular toxocariasis",
-      "Fuchs uveitis syndrome",
-      "Other causes of intermediate uveitis"
+    [
+     "Key Investigations",
+     "Indirect ophthalmoscopy with scleral indentation to demonstrate the inferior snowbank, Optical coherence tomography of the macula",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Indirect ophthalmoscopy with scleral indentation to demonstrate the inferior snowbank",
-      "Optical coherence tomography of the macula for cystoid macular oedema",
-      "Fluorescein angiography to detect peripheral leakage and neovascularisation",
-      "Magnetic resonance imaging of the brain to assess for demyelination",
-      "Infective screen including Lyme, syphilis and tuberculosis testing",
-      "Sarcoidosis workup to exclude a secondary cause before labelling the disease idiopathic"
+    [
+     "Primary Differentials",
+     "Sarcoid uveitis, Lyme disease, Tuberculous uveitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Vitreous haemorrhage from snowbank neovascularisation",
-      "Tractional retinal detachment",
-      "Neurological symptoms suggesting multiple sclerosis",
-      "Refractory cystoid macular oedema threatening central vision"
+    [
+     "Management Strategy",
+     "Control inflammation and cystoid macular oedema with corticosteroids delivered periocularly, intravitreally, or systemically",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is typically chronic and relapsing; vision is generally preserved when cystoid macular oedema is controlled, although complications such as cataract, glaucoma and retinal detachment may reduce the final outcome.",
-    "pitfalls": [
-      "Labelling the disease as pars planitis without first excluding sarcoidosis, Lyme disease and tuberculosis",
-      "Missing an association with multiple sclerosis",
-      "Overlooking peripheral neovascularisation of the snowbank",
-      "Under-treating chronic cystoid macular oedema"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Ryan's Retina",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control inflammation and cystoid macular oedema with corticosteroids delivered periocularly, intravitreally, or systemically according to severity",
-      "Introduce steroid-sparing immunomodulation such as methotrexate, mycophenolate, or azathioprine for chronic or bilateral disease, escalating to anti-TNF biologics such as adalimumab if refractory",
-      "Apply peripheral retinal laser photocoagulation or cryotherapy to the snowbank when neovascularisation develops",
-      "Consider pars plana vitrectomy for non-clearing vitreous haemorrhage or persistent inflammation",
-      "Monitor visual acuity and macular status with optical coherence tomography, watching for cataract, glaucoma, and retinal detachment",
-      "Arrange neurology referral and MRI surveillance given the association with demyelination and multiple sclerosis"
+    [
+     "Clinical Pitfall",
+     "Labelling the disease as pars planitis without first excluding sarcoidosis, Lyme disease and tuberculosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pars planitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pars-planitis-diagram",
+   "title": "Pars planitis: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

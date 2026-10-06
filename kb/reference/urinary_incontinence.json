@@ -1,81 +1,176 @@
 {
-  "id": "urinary_incontinence",
-  "name": "Urinary incontinence",
-  "aliases": [
-    "UI",
-    "involuntary urine leakage",
-    "loss of bladder control"
+ "id": "urinary_incontinence",
+ "name": "Urinary incontinence",
+ "aliases": [
+  "UI",
+  "involuntary urine leakage",
+  "loss of bladder control"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary / Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Urinary incontinence is any involuntary leakage of urine, and classifying the type guides management: stress, urgency, mixed, overflow, and functional (continuous) incontinence",
+   "Stress incontinence is leakage with raised intra-abdominal pressure (coughing, laughing, exertion) due to sphincter or pelvic floor weakness, common after childbirth and in men after prostatectomy",
+   "Urgency incontinence is leakage accompanied by a sudden compelling desire to void, usually from detrusor overactivity, and is part of the overactive bladder syndrome",
+   "Overflow incontinence is dribbling from a chronically distended, poorly emptying bladder, often due to outlet obstruction or an underactive detrusor, and must not be missed",
+   "A focused history, examination (including pelvic and neurological), a bladder (frequency-volume) diary, and post-void residual measurement usually clarify the type",
+   "First-line management of stress incontinence is pelvic floor muscle training, while urgency incontinence is treated with bladder training and antimuscarinic or beta-3 agonist therapy",
+   "Reversible contributors summarised by the DIAPPERS concept (delirium, infection, atrophic changes, pharmaceuticals, psychological, excess output, restricted mobility, stool impaction) should be sought and corrected",
+   "Surgical options such as mid-urethral slings or colposuspension are considered for stress incontinence, and intravesical botulinum toxin or neuromodulation for refractory urgency incontinence"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary / Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Urinary incontinence is any involuntary leakage of urine, and classifying the type guides management: stress, urgency, mixed, overflow, and functional (continuous) incontinence",
-      "Stress incontinence is leakage with raised intra-abdominal pressure (coughing, laughing, exertion) due to sphincter or pelvic floor weakness, common after childbirth and in men after prostatectomy",
-      "Urgency incontinence is leakage accompanied by a sudden compelling desire to void, usually from detrusor overactivity, and is part of the overactive bladder syndrome",
-      "Overflow incontinence is dribbling from a chronically distended, poorly emptying bladder, often due to outlet obstruction or an underactive detrusor, and must not be missed",
-      "A focused history, examination (including pelvic and neurological), a bladder (frequency-volume) diary, and post-void residual measurement usually clarify the type",
-      "First-line management of stress incontinence is pelvic floor muscle training, while urgency incontinence is treated with bladder training and antimuscarinic or beta-3 agonist therapy",
-      "Reversible contributors summarised by the DIAPPERS concept (delirium, infection, atrophic changes, pharmaceuticals, psychological, excess output, restricted mobility, stool impaction) should be sought and corrected",
-      "Surgical options such as mid-urethral slings or colposuspension are considered for stress incontinence, and intravesical botulinum toxin or neuromodulation for refractory urgency incontinence"
+  "pathophysiology": "Continence requires coordinated bladder storage at low pressure with a competent, closed outlet, governed by autonomic and somatic innervation. Stress incontinence arises from a weakened pelvic floor and urethral sphincter (from childbirth, ageing, or prostatic surgery) so that raised abdominal pressure overcomes closure. Urgency incontinence results from involuntary detrusor contractions (detrusor overactivity), which may be idiopathic or neurogenic. Overflow incontinence occurs when a chronically overdistended bladder leaks around an obstruction or fails to contract effectively, as in outlet obstruction or an underactive/neurogenic detrusor. Mixed incontinence combines these mechanisms.",
+  "additionalDifferentials": [
+   "Stress urinary incontinence",
+   "Urgency incontinence / overactive bladder",
+   "Mixed incontinence",
+   "Overflow incontinence from obstruction or detrusor underactivity",
+   "Neurogenic bladder",
+   "Urinary tract infection",
+   "Vesicovaginal or other urinary fistula (continuous leakage)"
+  ],
+  "additionalInvestigations": [
+   "Urinalysis to exclude infection and haematuria",
+   "Bladder (frequency-volume) diary",
+   "Post-void residual volume measurement",
+   "Cough stress test and pelvic examination (assessing prolapse and pelvic floor)",
+   "Urodynamic studies in complex, mixed, or pre-surgical cases",
+   "Cystoscopy or imaging when fistula, malignancy, or structural abnormality is suspected"
+  ],
+  "redFlags": [
+   "Associated haematuria requiring exclusion of urinary tract malignancy",
+   "New incontinence with neurological signs suggesting cord compression or cauda equina syndrome",
+   "Overflow incontinence from unrecognised chronic retention with risk of renal impairment",
+   "Continuous leakage suggesting a urinary fistula",
+   "Recurrent urinary infection or significant post-void residual"
+  ],
+  "prognosis": "Many patients improve substantially with conservative measures and correction of reversible factors; stress and urgency incontinence respond well to targeted therapy, and surgery offers durable benefit for refractory stress incontinence, though outcomes vary with cause and comorbidity.",
+  "pitfalls": [
+   "Mislabelling overflow incontinence as urgency and prescribing antimuscarinics that worsen retention",
+   "Failing to measure post-void residual before treating",
+   "Overlooking reversible causes such as infection, medications, or stool impaction",
+   "Missing haematuria or a neurological cause behind new incontinence",
+   "Recommending surgery without adequate assessment of the incontinence type"
+  ],
+  "references": [
+   "Smith & Tanagho's General Urology",
+   "Campbell-Walsh Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Classify the incontinence type and correct reversible contributors, advising weight loss, caffeine and fluid moderation, and treatment of constipation",
+   "Treat stress incontinence first with supervised pelvic floor muscle training, adding duloxetine as an adjunct and reserving mid-urethral sling, colposuspension or urethral bulking agents, and an artificial urinary sphincter after prostatectomy, for refractory cases",
+   "Treat urgency incontinence and overactive bladder with bladder retraining plus an antimuscarinic or a beta-3 agonist such as mirabegron",
+   "Escalate refractory urgency incontinence to intravesical botulinum toxin, percutaneous tibial nerve stimulation, or sacral neuromodulation",
+   "Manage overflow incontinence by relieving outlet obstruction and using clean intermittent self-catheterisation for an underactive or neurogenic detrusor",
+   "Provide containment aids and skin care, and refer for urodynamic assessment in complex, mixed, neurogenic or pre-surgical cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "urinary_incontinence-pathway",
+   "title": "Urinary incontinence: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Urinary incontinence is any involuntary leakage of urine, and classifying the type guides management: stress, urgency, mixed, overflow, and functional (continuous) incontinence",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Associated haematuria requiring exclusion of urinary tract malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urinalysis to exclude infection and haematuria, Bladder (frequency-volume) diary, Post-void residual volume measurement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Classify the incontinence type and correct reversible contributors, advising weight loss, caffeine and fluid moderation, and treatment of constipation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling overflow incontinence as urgency and prescribing antimuscarinics that worsen retention"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of urinary incontinence."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urinary_incontinence-matrix",
+   "title": "Urinary incontinence: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Urinary incontinence is any involuntary leakage of urine, and classifying the type guides management: stress, urgency, mixed,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Continence requires coordinated bladder storage at low pressure with a competent, closed outlet, governed by autonomic and somatic innervation. Stress incontinence arises from a weakened pelvic floor and urethral sphincter (from childbirth, ageing, or prostatic surgery) so that raised abdominal pressure overcomes closure. Urgency incontinence results from involuntary detrusor contractions (detrusor overactivity), which may be idiopathic or neurogenic. Overflow incontinence occurs when a chronically overdistended bladder leaks around an obstruction or fails to contract effectively, as in outlet obstruction or an underactive/neurogenic detrusor. Mixed incontinence combines these mechanisms.",
-    "additionalDifferentials": [
-      "Stress urinary incontinence",
-      "Urgency incontinence / overactive bladder",
-      "Mixed incontinence",
-      "Overflow incontinence from obstruction or detrusor underactivity",
-      "Neurogenic bladder",
-      "Urinary tract infection",
-      "Vesicovaginal or other urinary fistula (continuous leakage)"
+    [
+     "Key Investigations",
+     "Urinalysis to exclude infection and haematuria, Bladder (frequency-volume) diary, Post-void residual volume measurement",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urinalysis to exclude infection and haematuria",
-      "Bladder (frequency-volume) diary",
-      "Post-void residual volume measurement",
-      "Cough stress test and pelvic examination (assessing prolapse and pelvic floor)",
-      "Urodynamic studies in complex, mixed, or pre-surgical cases",
-      "Cystoscopy or imaging when fistula, malignancy, or structural abnormality is suspected"
+    [
+     "Primary Differentials",
+     "Stress urinary incontinence, Urgency incontinence / overactive bladder, Mixed incontinence",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Associated haematuria requiring exclusion of urinary tract malignancy",
-      "New incontinence with neurological signs suggesting cord compression or cauda equina syndrome",
-      "Overflow incontinence from unrecognised chronic retention with risk of renal impairment",
-      "Continuous leakage suggesting a urinary fistula",
-      "Recurrent urinary infection or significant post-void residual"
+    [
+     "Management Strategy",
+     "Classify the incontinence type and correct reversible contributors, advising weight loss, caffeine and fluid moderation, and",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients improve substantially with conservative measures and correction of reversible factors; stress and urgency incontinence respond well to targeted therapy, and surgery offers durable benefit for refractory stress incontinence, though outcomes vary with cause and comorbidity.",
-    "pitfalls": [
-      "Mislabelling overflow incontinence as urgency and prescribing antimuscarinics that worsen retention",
-      "Failing to measure post-void residual before treating",
-      "Overlooking reversible causes such as infection, medications, or stool impaction",
-      "Missing haematuria or a neurological cause behind new incontinence",
-      "Recommending surgery without adequate assessment of the incontinence type"
-    ],
-    "references": [
-      "Smith & Tanagho's General Urology",
-      "Campbell-Walsh Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Classify the incontinence type and correct reversible contributors, advising weight loss, caffeine and fluid moderation, and treatment of constipation",
-      "Treat stress incontinence first with supervised pelvic floor muscle training, adding duloxetine as an adjunct and reserving mid-urethral sling, colposuspension or urethral bulking agents, and an artificial urinary sphincter after prostatectomy, for refractory cases",
-      "Treat urgency incontinence and overactive bladder with bladder retraining plus an antimuscarinic or a beta-3 agonist such as mirabegron",
-      "Escalate refractory urgency incontinence to intravesical botulinum toxin, percutaneous tibial nerve stimulation, or sacral neuromodulation",
-      "Manage overflow incontinence by relieving outlet obstruction and using clean intermittent self-catheterisation for an underactive or neurogenic detrusor",
-      "Provide containment aids and skin care, and refer for urodynamic assessment in complex, mixed, neurogenic or pre-surgical cases"
+    [
+     "Clinical Pitfall",
+     "Mislabelling overflow incontinence as urgency and prescribing antimuscarinics that worsen retention",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for urinary incontinence."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "urinary-incontinence-diagram",
+   "title": "Urinary incontinence: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

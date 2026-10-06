@@ -1,87 +1,182 @@
 {
-  "id": "ocular_surface_squamous_neoplasia",
-  "name": "Ocular surface squamous neoplasia",
-  "aliases": [
-    "OSSN",
-    "conjunctival intraepithelial neoplasia",
-    "corneal-conjunctival intraepithelial neoplasia",
-    "conjunctival squamous cell carcinoma spectrum"
+ "id": "ocular_surface_squamous_neoplasia",
+ "name": "Ocular surface squamous neoplasia",
+ "aliases": [
+  "OSSN",
+  "conjunctival intraepithelial neoplasia",
+  "corneal-conjunctival intraepithelial neoplasia",
+  "conjunctival squamous cell carcinoma spectrum"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmic Oncology",
+ "specialty": "Dermatopathology / Ophthalmic Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / WHO Classification of Eye Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An umbrella term for a spectrum of squamous dysplasia of the conjunctiva and cornea, ranging from mild intraepithelial dysplasia to invasive squamous cell carcinoma",
+   "Typically arises at the limbus within the interpalpebral fissure, presenting as a gelatinous, papilliform, or leukoplakic lesion often with prominent feeder vessels",
+   "Major risk factors are ultraviolet exposure, older age, fair skin, human papillomavirus, and immunosuppression including HIV, which drives more aggressive disease in younger patients",
+   "The disease progresses along a continuum from intraepithelial dysplasia through carcinoma in situ to frankly invasive squamous cell carcinoma breaching the basement membrane",
+   "Rose bengal or lissamine green staining and anterior-segment optical coherence tomography aid non-invasive assessment, but histology confirms the diagnosis and invasion status",
+   "Treatment options include complete surgical excision with a no-touch technique and adjunctive cryotherapy, or medical therapy with topical chemotherapy or interferon",
+   "Wide margins and cryotherapy to the surgical edges reduce recurrence, and diffuse or recurrent disease may be managed medically"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmic Oncology",
-  "specialty": "Dermatopathology / Ophthalmic Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / WHO Classification of Eye Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An umbrella term for a spectrum of squamous dysplasia of the conjunctiva and cornea, ranging from mild intraepithelial dysplasia to invasive squamous cell carcinoma",
-      "Typically arises at the limbus within the interpalpebral fissure, presenting as a gelatinous, papilliform, or leukoplakic lesion often with prominent feeder vessels",
-      "Major risk factors are ultraviolet exposure, older age, fair skin, human papillomavirus, and immunosuppression including HIV, which drives more aggressive disease in younger patients",
-      "The disease progresses along a continuum from intraepithelial dysplasia through carcinoma in situ to frankly invasive squamous cell carcinoma breaching the basement membrane",
-      "Rose bengal or lissamine green staining and anterior-segment optical coherence tomography aid non-invasive assessment, but histology confirms the diagnosis and invasion status",
-      "Treatment options include complete surgical excision with a no-touch technique and adjunctive cryotherapy, or medical therapy with topical chemotherapy or interferon",
-      "Wide margins and cryotherapy to the surgical edges reduce recurrence, and diffuse or recurrent disease may be managed medically"
+  "pathophysiology": "Ocular surface squamous neoplasia encompasses a continuum of squamous epithelial dysplasia of the conjunctiva and cornea. Chronic ultraviolet damage, alongside cofactors such as human papillomavirus infection, immunosuppression, and older age, induces mutations in limbal epithelial stem cells, the presumed cells of origin at the interpalpebral limbus. Disordered proliferation begins as partial-thickness dysplasia, advances to full-thickness carcinoma in situ while the basement membrane remains intact, and, if the basement membrane is breached, becomes invasive squamous cell carcinoma with potential for deeper ocular and, less commonly, regional spread. The intraepithelial phases are typically indolent and amenable to topical therapy, whereas invasion signifies a more serious tumour requiring definitive surgical management.",
+  "additionalDifferentials": [
+   "Pterygium and pinguecula",
+   "Conjunctival papilloma",
+   "Pyogenic granuloma of the conjunctiva",
+   "Conjunctival melanoma or primary acquired melanosis",
+   "Benign conjunctival intraepithelial dyskeratosis",
+   "Amelanotic conjunctival naevus",
+   "Limbal dermoid"
+  ],
+  "additionalInvestigations": [
+   "Slit-lamp examination documenting limbal location, feeder vessels, and leukoplakia",
+   "Vital-dye staining (rose bengal or lissamine green) to highlight abnormal epithelium",
+   "Anterior-segment optical coherence tomography showing thickened hyper-reflective epithelium with an abrupt transition",
+   "Impression cytology or incisional/excisional biopsy for histological confirmation",
+   "Assessment of invasion depth and margins on histopathology",
+   "Evaluation of immune status including HIV testing in aggressive or young-onset disease"
+  ],
+  "redFlags": [
+   "Fixation of the lesion to underlying sclera or intraocular extension suggesting invasive carcinoma",
+   "Rapidly enlarging or recurrent lesion despite treatment",
+   "Aggressive disease in a young or immunosuppressed patient prompting HIV testing",
+   "Regional lymphadenopathy suggesting metastatic spread"
+  ],
+  "prognosis": "Most intraepithelial disease is controlled with complete excision or topical therapy and carries an excellent prognosis, though recurrence is not uncommon after narrow-margin surgery; invasive squamous cell carcinoma has a more guarded outlook with risk of ocular invasion and, rarely, regional or distant spread.",
+  "pitfalls": [
+   "Mistaking the lesion for a pterygium and excising it without histology, missing dysplasia or invasion",
+   "Performing narrow-margin excision without adjunctive cryotherapy, increasing recurrence",
+   "Failing to test for immunosuppression in aggressive or young-onset cases",
+   "Assuming intraepithelial disease when unrecognised invasion is present"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "WHO Classification of Eye Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm the diagnosis with biopsy and histology before any destructive or excisional treatment, including for atypical or recurrent pterygium-like lesions",
+   "For intraepithelial disease (dysplasia to carcinoma in situ), treat with curative intent using either complete excisional biopsy with a no touch technique and wide margins plus adjunctive cryotherapy (with alcohol epitheliectomy if the cornea is involved), or primary topical chemotherapy or immunotherapy",
+   "Topical agent classes used include interferon alfa-2b, mitomycin C, and 5-fluorouracil, chosen without an established consensus preference over surgery",
+   "Use topical therapy adjuvantly after surgery when margins are involved or close, or when disease is too diffuse for complete excision without excessive tissue loss",
+   "For recurrent or refractory intraepithelial disease, consider repeat excision with cryotherapy, switching or adding a different topical agent class, or combining surgery with topical therapy",
+   "For invasive squamous cell carcinoma, perform wider surgical excision as the mainstay, escalating extent of surgery to match depth of invasion",
+   "Add adjuvant plaque brachytherapy or external beam radiotherapy when margins cannot be cleared or invasion is deeper",
+   "Reserve enucleation or exenteration as a last resort for extensive intraocular or orbital invasion that cannot be controlled by more conservative resection, given the impact on vision and cosmesis",
+   "Do not use systemic chemotherapy routinely for localised disease; reserve systemic therapy and multidisciplinary tumour board input for rare regional or distant metastatic presentations",
+   "Provide long-term slit-lamp follow-up after any treatment, since recurrence is common, especially after narrow-margin excision without cryotherapy or after topical therapy alone",
+   "Use vital-dye staining and anterior-segment optical coherence tomography at follow-up to detect subclinical recurrence",
+   "Rebiopsy any suspicious regrowth, new leukoplakia, or scleral fixation rather than assuming superficial recurrence",
+   "Counsel patients on lifelong ultraviolet protection to reduce risk of new lesions and recurrence",
+   "Evaluate for underlying immunosuppression including HIV testing in aggressive, young-onset, or treatment-refractory disease, and refer promptly to ophthalmic oncology or medical oncology when invasion, scleral fixation, or metastatic spread is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ocular_surface_squamous_neoplasia-pathway",
+   "title": "Ocular surface squamous neoplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An umbrella term for a spectrum of squamous dysplasia of the conjunctiva and cornea, ranging from mild intraepithelial dysplasia to invasive squamous cell carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Fixation of the lesion to underlying sclera or intraocular extension suggesting invasive carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Slit-lamp examination documenting limbal location, feeder vessels, and leukoplakia, Vital-dye staining (rose bengal or lissamine green) to highlight abnormal epithelium, Anterior-segment optical coherence tomography"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm the diagnosis with biopsy and histology before any destructive or excisional treatment, including for atypical or recurrent pterygium-like lesions"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the lesion for a pterygium and excising it without histology, missing dysplasia or invasion"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ocular surface squamous neoplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ocular_surface_squamous_neoplasia-matrix",
+   "title": "Ocular surface squamous neoplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An umbrella term for a spectrum of squamous dysplasia of the conjunctiva and cornea, ranging from mild intraepithelial dysplasia",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ocular surface squamous neoplasia encompasses a continuum of squamous epithelial dysplasia of the conjunctiva and cornea. Chronic ultraviolet damage, alongside cofactors such as human papillomavirus infection, immunosuppression, and older age, induces mutations in limbal epithelial stem cells, the presumed cells of origin at the interpalpebral limbus. Disordered proliferation begins as partial-thickness dysplasia, advances to full-thickness carcinoma in situ while the basement membrane remains intact, and, if the basement membrane is breached, becomes invasive squamous cell carcinoma with potential for deeper ocular and, less commonly, regional spread. The intraepithelial phases are typically indolent and amenable to topical therapy, whereas invasion signifies a more serious tumour requiring definitive surgical management.",
-    "additionalDifferentials": [
-      "Pterygium and pinguecula",
-      "Conjunctival papilloma",
-      "Pyogenic granuloma of the conjunctiva",
-      "Conjunctival melanoma or primary acquired melanosis",
-      "Benign conjunctival intraepithelial dyskeratosis",
-      "Amelanotic conjunctival naevus",
-      "Limbal dermoid"
+    [
+     "Key Investigations",
+     "Slit-lamp examination documenting limbal location, feeder vessels, and leukoplakia, Vital-dye staining (rose bengal or lissamine",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Slit-lamp examination documenting limbal location, feeder vessels, and leukoplakia",
-      "Vital-dye staining (rose bengal or lissamine green) to highlight abnormal epithelium",
-      "Anterior-segment optical coherence tomography showing thickened hyper-reflective epithelium with an abrupt transition",
-      "Impression cytology or incisional/excisional biopsy for histological confirmation",
-      "Assessment of invasion depth and margins on histopathology",
-      "Evaluation of immune status including HIV testing in aggressive or young-onset disease"
+    [
+     "Primary Differentials",
+     "Pterygium and pinguecula, Conjunctival papilloma, Pyogenic granuloma of the conjunctiva",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Fixation of the lesion to underlying sclera or intraocular extension suggesting invasive carcinoma",
-      "Rapidly enlarging or recurrent lesion despite treatment",
-      "Aggressive disease in a young or immunosuppressed patient prompting HIV testing",
-      "Regional lymphadenopathy suggesting metastatic spread"
+    [
+     "Management Strategy",
+     "Confirm the diagnosis with biopsy and histology before any destructive or excisional treatment, including for atypical or",
+     "Core treatment modality"
     ],
-    "prognosis": "Most intraepithelial disease is controlled with complete excision or topical therapy and carries an excellent prognosis, though recurrence is not uncommon after narrow-margin surgery; invasive squamous cell carcinoma has a more guarded outlook with risk of ocular invasion and, rarely, regional or distant spread.",
-    "pitfalls": [
-      "Mistaking the lesion for a pterygium and excising it without histology, missing dysplasia or invasion",
-      "Performing narrow-margin excision without adjunctive cryotherapy, increasing recurrence",
-      "Failing to test for immunosuppression in aggressive or young-onset cases",
-      "Assuming intraepithelial disease when unrecognised invasion is present"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "WHO Classification of Eye Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm the diagnosis with biopsy and histology before any destructive or excisional treatment, including for atypical or recurrent pterygium-like lesions",
-      "For intraepithelial disease (dysplasia to carcinoma in situ), treat with curative intent using either complete excisional biopsy with a no touch technique and wide margins plus adjunctive cryotherapy (with alcohol epitheliectomy if the cornea is involved), or primary topical chemotherapy or immunotherapy",
-      "Topical agent classes used include interferon alfa-2b, mitomycin C, and 5-fluorouracil, chosen without an established consensus preference over surgery",
-      "Use topical therapy adjuvantly after surgery when margins are involved or close, or when disease is too diffuse for complete excision without excessive tissue loss",
-      "For recurrent or refractory intraepithelial disease, consider repeat excision with cryotherapy, switching or adding a different topical agent class, or combining surgery with topical therapy",
-      "For invasive squamous cell carcinoma, perform wider surgical excision as the mainstay, escalating extent of surgery to match depth of invasion",
-      "Add adjuvant plaque brachytherapy or external beam radiotherapy when margins cannot be cleared or invasion is deeper",
-      "Reserve enucleation or exenteration as a last resort for extensive intraocular or orbital invasion that cannot be controlled by more conservative resection, given the impact on vision and cosmesis",
-      "Do not use systemic chemotherapy routinely for localised disease; reserve systemic therapy and multidisciplinary tumour board input for rare regional or distant metastatic presentations",
-      "Provide long-term slit-lamp follow-up after any treatment, since recurrence is common, especially after narrow-margin excision without cryotherapy or after topical therapy alone",
-      "Use vital-dye staining and anterior-segment optical coherence tomography at follow-up to detect subclinical recurrence",
-      "Rebiopsy any suspicious regrowth, new leukoplakia, or scleral fixation rather than assuming superficial recurrence",
-      "Counsel patients on lifelong ultraviolet protection to reduce risk of new lesions and recurrence",
-      "Evaluate for underlying immunosuppression including HIV testing in aggressive, young-onset, or treatment-refractory disease, and refer promptly to ophthalmic oncology or medical oncology when invasion, scleral fixation, or metastatic spread is suspected"
+    [
+     "Clinical Pitfall",
+     "Mistaking the lesion for a pterygium and excising it without histology, missing dysplasia or invasion",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ocular surface squamous neoplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ocular-surface-squamous-neoplasia-diagram",
+   "title": "Ocular surface squamous neoplasia: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

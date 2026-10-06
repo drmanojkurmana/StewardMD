@@ -6,7 +6,19 @@
  "basis": "india",
  "counterpart": "dengue-international",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["dengue fever", "DF", "DHF", "DSS", "dengue shock syndrome", "severe dengue", "dengue warning signs", "NS1", "thrombocytopenia", "platelet transfusion dengue", "NCVBDC dengue 2023"],
+ "aliases": [
+  "dengue fever",
+  "DF",
+  "DHF",
+  "DSS",
+  "dengue shock syndrome",
+  "severe dengue",
+  "dengue warning signs",
+  "NS1",
+  "thrombocytopenia",
+  "platelet transfusion dengue",
+  "NCVBDC dengue 2023"
+ ],
  "summary": "Classify as dengue without warning signs, with warning signs, or severe dengue. Give paracetamol and oral fluids, never NSAIDs. Use haematocrit-guided isotonic crystalloid boluses with stepwise tapering for warning signs and shock, stop IV fluids by 24 to 48 hours, and do not transfuse platelets prophylactically.",
  "sections": [
   {
@@ -110,15 +122,143 @@
   }
  ],
  "drugs": [
-  { "name": "Paracetamol", "dose": "10 to 15 mg/kg orally per dose, no more often than 6-hourly; adults 500 mg to 1 g per dose, maximum 4 g/day", "notes": "Only antipyretic to use. Avoid aspirin and all NSAIDs." },
-  { "name": "Isotonic crystalloid (0.9% saline or Ringer lactate)", "dose": "Warning signs: 7 to 10 mL/kg over 1 hour (children 5 to 10 mL/kg). Compensated shock: 10 to 20 mL/kg over 1 hour. Hypotensive shock: 20 mL/kg over 15 minutes", "notes": "Taper stepwise by haematocrit and clinical response; stop by 24 to 48 hours. Use ideal body weight in obesity." },
-  { "name": "Whole blood or packed red cells", "dose": "Whole blood 10 mL/kg or packed red cells 5 mL/kg per aliquot", "notes": "Shock with falling haematocrit or overt severe bleeding." },
-  { "name": "Platelet concentrate", "dose": "Only for active bleeding; consider prophylaxis only below 10,000/mm3 or before emergency surgery", "notes": "Prophylactic transfusion does not prevent bleeding and causes adverse events." },
-  { "name": "Furosemide", "dose": "1 mg/kg IV", "notes": "Fluid overload once haemodynamically stable; monitor vital signs every 15 minutes for 1 hour afterwards." }
+  {
+   "name": "Paracetamol",
+   "dose": "10 to 15 mg/kg orally per dose, no more often than 6-hourly; adults 500 mg to 1 g per dose, maximum 4 g/day",
+   "notes": "Only antipyretic to use. Avoid aspirin and all NSAIDs."
+  },
+  {
+   "name": "Isotonic crystalloid (0.9% saline or Ringer lactate)",
+   "dose": "Warning signs: 7 to 10 mL/kg over 1 hour (children 5 to 10 mL/kg). Compensated shock: 10 to 20 mL/kg over 1 hour. Hypotensive shock: 20 mL/kg over 15 minutes",
+   "notes": "Taper stepwise by haematocrit and clinical response; stop by 24 to 48 hours. Use ideal body weight in obesity."
+  },
+  {
+   "name": "Whole blood or packed red cells",
+   "dose": "Whole blood 10 mL/kg or packed red cells 5 mL/kg per aliquot",
+   "notes": "Shock with falling haematocrit or overt severe bleeding."
+  },
+  {
+   "name": "Platelet concentrate",
+   "dose": "Only for active bleeding; consider prophylaxis only below 10,000/mm3 or before emergency surgery",
+   "notes": "Prophylactic transfusion does not prevent bleeding and causes adverse events."
+  },
+  {
+   "name": "Furosemide",
+   "dose": "1 mg/kg IV",
+   "notes": "Fluid overload once haemodynamically stable; monitor vital signs every 15 minutes for 1 hour afterwards."
+  }
  ],
  "sources": [
-  { "org": "NCVBDC, MoHFW", "title": "National Guidelines for Clinical Management of Dengue Fever 2023", "year": 2023, "url": "https://ncvbdc.mohfw.gov.in/Doc/National%20Guidelines%20for%20Clinical%20Management%20of%20Dengue%20Fever%202023.pdf" },
-  { "org": "WHO", "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever", "year": 2025, "url": "https://iris.who.int/handle/10665/381804" }
+  {
+   "org": "NCVBDC, MoHFW",
+   "title": "National Guidelines for Clinical Management of Dengue Fever 2023",
+   "year": 2023,
+   "url": "https://ncvbdc.mohfw.gov.in/Doc/National%20Guidelines%20for%20Clinical%20Management%20of%20Dengue%20Fever%202023.pdf"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever",
+   "year": 2025,
+   "url": "https://iris.who.int/handle/10665/381804"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "dengue-pathway",
+   "title": "Dengue: assessment and fluid management (India, NCVBDC) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Phases: febrile (2 to 7 days), critical (plasma leak around defervescence, usually 24 to 48 hours), recovery (2 to 3 days, reabsorption and risk of fluid overload).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Compensated shock: isotonic crystalloid 10 to 20 mL/kg over 1 hour. If improving, reduce to 7 to 10 mL/kg/h for 1 to 2 hours, 5 to 7 mL/kg/h for 1 to 2 hours, 3 to 5 mL/kg/h for 2 to 4 hours, 2 to 3 mL/kg/h, continuing for up to 24 to 48",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Severe dengue: shock or fluid accumulation with respiratory distress from plasma leak, severe bleeding, AST or ALT 1000 U/L or more, impaired consciousness, or other severe organ involvement."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Platelet count does not predict bleeding. No prophylactic platelet transfusion (WHO 2025: not for counts below 50,000/mm3 without active bleeding)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Vital signs and peripheral perfusion every 2 to 4 hours without shock, every 1 to 2 hours in shock, and every 5 to 30 minutes during resuscitation."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for dengue: assessment and fluid management (india, ncvbdc)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dengue-summary-matrix",
+   "title": "Dengue: assessment and fluid management (India, NCVBDC) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Phases: febrile (2 to 7 days), critical (plasma leak around defervescence, usually 24 to 48 hours), recovery (2 to 3 days, reabsorption and",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Compensated shock: isotonic crystalloid 10 to 20 mL/kg over 1 hour. If improving, reduce to 7 to 10 mL/kg/h for 1 to 2 hours, 5 to 7",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Paracetamol: 10 to 15 mg/kg orally per dose, no more often than 6-hourly; adults 500 mg to 1 g per dose, maximum 4 g/day",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating the platelet count instead of the haematocrit and perfusion.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for dengue: assessment and fluid management (india, ncvbdc)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dengue-diagram",
+   "title": "Dengue: assessment and fluid management (India, NCVBDC): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

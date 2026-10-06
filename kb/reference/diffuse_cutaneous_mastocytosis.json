@@ -1,73 +1,168 @@
 {
-  "id": "diffuse_cutaneous_mastocytosis",
-  "name": "Diffuse cutaneous mastocytosis",
-  "aliases": [
-    "DCM"
+ "id": "diffuse_cutaneous_mastocytosis",
+ "name": "Diffuse cutaneous mastocytosis",
+ "aliases": [
+  "DCM"
+ ],
+ "class": "non_infective",
+ "system": "Skin",
+ "specialty": "Dermatology / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dermatology references / mastocytosis literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare, severe form of cutaneous mastocytosis of infancy with diffuse mast cell infiltration of the whole skin",
+   "The skin is thickened with a doughy or leathery texture rather than discrete lesions",
+   "Extensive blistering and erythroderma can occur, and the large mast cell burden risks severe mediator release",
+   "Massive histamine release can cause flushing, hypotension and life-threatening reactions, sometimes triggered by handling or medications",
+   "Baseline tryptase is often markedly elevated reflecting the high mast cell load",
+   "Careful trigger avoidance, anaphylaxis preparedness and mediator-targeted therapy are essential"
   ],
-  "class": "non_infective",
-  "system": "Skin",
-  "specialty": "Dermatology / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dermatology references / mastocytosis literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare, severe form of cutaneous mastocytosis of infancy with diffuse mast cell infiltration of the whole skin",
-      "The skin is thickened with a doughy or leathery texture rather than discrete lesions",
-      "Extensive blistering and erythroderma can occur, and the large mast cell burden risks severe mediator release",
-      "Massive histamine release can cause flushing, hypotension and life-threatening reactions, sometimes triggered by handling or medications",
-      "Baseline tryptase is often markedly elevated reflecting the high mast cell load",
-      "Careful trigger avoidance, anaphylaxis preparedness and mediator-targeted therapy are essential"
+  "pathophysiology": "In diffuse cutaneous mastocytosis, clonal mast cells infiltrate the entire dermis rather than forming discrete lesions, giving generalised skin thickening. The very large cutaneous mast cell burden means that degranulation, provoked by mechanical trauma, temperature change, drugs or infection, can release enough mediator to cause extensive blistering and dangerous systemic effects including hypotension and shock. The high mast cell mass is reflected in a markedly raised tryptase, and affected infants are vulnerable to severe, potentially fatal mediator crises.",
+  "additionalDifferentials": [
+   "Other cutaneous mastocytosis (urticaria pigmentosa, mastocytoma)",
+   "Epidermolysis bullosa or other blistering disorders of infancy",
+   "Staphylococcal scalded skin syndrome",
+   "Erythroderma of other cause",
+   "Systemic mastocytosis"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing dense diffuse dermal mast cell infiltration",
+   "Serum baseline tryptase (often very high)",
+   "Assessment for systemic involvement",
+   "Identification of triggers and a documented anaphylaxis plan",
+   "Monitoring for complications during illness or procedures"
+  ],
+  "redFlags": [
+   "Hypotension, extensive blistering or shock from mediator release",
+   "Severe reactions triggered by handling, drugs or infection",
+   "Very high tryptase with systemic symptoms",
+   "Failure to thrive or systemic involvement"
+  ],
+  "prognosis": "The condition can improve over childhood, but the infantile course may be complicated by dangerous mediator crises; with careful management and avoidance of triggers, many children improve with age.",
+  "pitfalls": [
+   "Underestimating the risk of catastrophic mediator release",
+   "Using known mast cell-degranulating drugs without caution",
+   "Confusing extensive blistering with a primary bullous disease",
+   "Failing to equip carers with an anaphylaxis plan"
+  ],
+  "references": [
+   "Dermatology reference texts (standard reference)",
+   "Mastocytosis clinical guidelines (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute strict avoidance of mast cell degranulation triggers such as mechanical friction, temperature change and culprit drugs including opioids and NSAIDs",
+   "Control mediator symptoms with H1 and H2 antihistamines and mast cell stabilisers such as sodium cromoglicate",
+   "Provide adrenaline auto-injectors and a documented anaphylaxis action plan given the risk of life-threatening mediator crises",
+   "Treat acute mediator crises and hypotension urgently with adrenaline, antihistamines and fluid resuscitation",
+   "Give meticulous skin care and manage blistering and erythroderma to protect the skin barrier",
+   "Monitor baseline tryptase and assess for systemic involvement, taking precautions around intercurrent illness and procedures",
+   "Refer to specialist dermatology and paediatric mastocytosis services and premedicate before procedures and anaesthesia"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "diffuse_cutaneous_mastocytosis-pathway",
+   "title": "Diffuse cutaneous mastocytosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare, severe form of cutaneous mastocytosis of infancy with diffuse mast cell infiltration of the whole skin",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Hypotension, extensive blistering or shock from mediator release",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing dense diffuse dermal mast cell infiltration, Serum baseline tryptase (often very high), Assessment for systemic involvement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute strict avoidance of mast cell degranulation triggers such as mechanical friction, temperature change and culprit drugs including opioids and NSAIDs"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating the risk of catastrophic mediator release"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of diffuse cutaneous mastocytosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "diffuse_cutaneous_mastocytosis-matrix",
+   "title": "Diffuse cutaneous mastocytosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare, severe form of cutaneous mastocytosis of infancy with diffuse mast cell infiltration of the whole skin",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In diffuse cutaneous mastocytosis, clonal mast cells infiltrate the entire dermis rather than forming discrete lesions, giving generalised skin thickening. The very large cutaneous mast cell burden means that degranulation, provoked by mechanical trauma, temperature change, drugs or infection, can release enough mediator to cause extensive blistering and dangerous systemic effects including hypotension and shock. The high mast cell mass is reflected in a markedly raised tryptase, and affected infants are vulnerable to severe, potentially fatal mediator crises.",
-    "additionalDifferentials": [
-      "Other cutaneous mastocytosis (urticaria pigmentosa, mastocytoma)",
-      "Epidermolysis bullosa or other blistering disorders of infancy",
-      "Staphylococcal scalded skin syndrome",
-      "Erythroderma of other cause",
-      "Systemic mastocytosis"
+    [
+     "Key Investigations",
+     "Skin biopsy showing dense diffuse dermal mast cell infiltration, Serum baseline tryptase (often very high), Assessment for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing dense diffuse dermal mast cell infiltration",
-      "Serum baseline tryptase (often very high)",
-      "Assessment for systemic involvement",
-      "Identification of triggers and a documented anaphylaxis plan",
-      "Monitoring for complications during illness or procedures"
+    [
+     "Primary Differentials",
+     "Other cutaneous mastocytosis (urticaria pigmentosa, mastocytoma), Epidermolysis bullosa or other blistering disorders of infancy,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Hypotension, extensive blistering or shock from mediator release",
-      "Severe reactions triggered by handling, drugs or infection",
-      "Very high tryptase with systemic symptoms",
-      "Failure to thrive or systemic involvement"
+    [
+     "Management Strategy",
+     "Institute strict avoidance of mast cell degranulation triggers such as mechanical friction, temperature change and culprit drugs",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition can improve over childhood, but the infantile course may be complicated by dangerous mediator crises; with careful management and avoidance of triggers, many children improve with age.",
-    "pitfalls": [
-      "Underestimating the risk of catastrophic mediator release",
-      "Using known mast cell-degranulating drugs without caution",
-      "Confusing extensive blistering with a primary bullous disease",
-      "Failing to equip carers with an anaphylaxis plan"
-    ],
-    "references": [
-      "Dermatology reference texts (standard reference)",
-      "Mastocytosis clinical guidelines (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute strict avoidance of mast cell degranulation triggers such as mechanical friction, temperature change and culprit drugs including opioids and NSAIDs",
-      "Control mediator symptoms with H1 and H2 antihistamines and mast cell stabilisers such as sodium cromoglicate",
-      "Provide adrenaline auto-injectors and a documented anaphylaxis action plan given the risk of life-threatening mediator crises",
-      "Treat acute mediator crises and hypotension urgently with adrenaline, antihistamines and fluid resuscitation",
-      "Give meticulous skin care and manage blistering and erythroderma to protect the skin barrier",
-      "Monitor baseline tryptase and assess for systemic involvement, taking precautions around intercurrent illness and procedures",
-      "Refer to specialist dermatology and paediatric mastocytosis services and premedicate before procedures and anaesthesia"
+    [
+     "Clinical Pitfall",
+     "Underestimating the risk of catastrophic mediator release",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for diffuse cutaneous mastocytosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "diffuse-cutaneous-mastocytosis-diagram",
+   "title": "Diffuse cutaneous mastocytosis: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

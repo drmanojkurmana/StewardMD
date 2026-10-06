@@ -153,5 +153,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h34696e7b"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ich-dx-algo",
+      "title": "Intracerebral hemorrhage: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "ICH typically presents as abrupt-onset focal deficit; compared with ischaemic stroke, headache is more common, but imaging is still required to distinguish the two (p.3453).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: 'Spot sign' on CTA/post-contrast CT - associated with increased haematoma expansion, higher mortality and lower likelihood of favourable outcome (p.3455)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Non-contrast CT head - highly sensitive/specific for acute intracranial blood and defines location; preferred for acute stroke evaluation (p.3453,3455), Platelet count, prothrombin time, partial thromboplastin time and INR"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: ICH Score (Hemphill et al., Stroke 2001) - validated grading scale for mortality/outcome stratification, summing five factors: age >=80 (1 pt), haematoma volume >=30 cc (1 pt), intraventricular haemorrhage present (1"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Cerebellar haemorrhage can deteriorate precipitously from brainstem compression or obstructive hydrocephalus; immediate surgical evacuation before severe brainstem compression may be lifesaving, and hydrocephalus from a"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for intracerebral hemorrhage."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ich-matrix",
+      "title": "Intracerebral hemorrhage: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ICH typically presents as abrupt-onset focal deficit; compared with ischaemic stroke, headache is more common, but imaging is",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Non-contrast CT head - highly sensitive/specific for acute intracranial blood and defines location; preferred for acute stroke",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hypertensive deep ICH (putamen, globus pallidus, thalamus, cerebellar hemisphere, pons) (p.3453), Lobar ICH from cerebral amyloid",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "'Spot sign' on CTA/post-contrast CT - associated with increased haematoma expansion, higher mortality and lower likelihood of",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Cerebellar haemorrhage can deteriorate precipitously from brainstem compression or obstructive hydrocephalus; immediate surgical",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for intracerebral hemorrhage."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ich-diagram",
+      "title": "Intracerebral hemorrhage: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

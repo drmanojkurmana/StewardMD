@@ -1,86 +1,181 @@
 {
-  "id": "carney_stratakis_syndrome",
-  "name": "Carney-Stratakis syndrome",
-  "aliases": [
-    "SDHx",
-    "Carney-Stratakis dyad",
-    "familial paraganglioma and gastric stromal sarcoma",
-    "GIST-paraganglioma syndrome"
+ "id": "carney_stratakis_syndrome",
+ "name": "Carney-Stratakis syndrome",
+ "aliases": [
+  "SDHx",
+  "Carney-Stratakis dyad",
+  "familial paraganglioma and gastric stromal sarcoma",
+  "GIST-paraganglioma syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Genetics",
+ "specialty": "Medical Genetics / Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by germline variants in succinate dehydrogenase subunit genes (most often SDHB, SDHC or SDHD), inherited in an autosomal dominant pattern with incomplete penetrance",
+   "Defined by the dyad of gastrointestinal stromal tumour (GIST) and paraganglioma or phaeochromocytoma occurring in the same individual or family",
+   "It should be distinguished from the non-hereditary Carney triad, which additionally includes pulmonary chondroma and is not caused by germline SDHx variants",
+   "The GISTs are succinate dehydrogenase-deficient, typically gastric, multifocal, occur in younger patients and characteristically lack KIT and PDGFRA driver mutations",
+   "These wild-type GISTs generally respond poorly to standard KIT-directed tyrosine kinase inhibitors, so treatment expectations differ from conventional GIST",
+   "Loss of SDHB expression on immunohistochemistry in a GIST is a key clue that flags an underlying succinate dehydrogenase defect",
+   "Management combines surgical treatment of tumours with biochemical and imaging surveillance for paragangliomas and phaeochromocytomas"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Genetics",
-  "specialty": "Medical Genetics / Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by germline variants in succinate dehydrogenase subunit genes (most often SDHB, SDHC or SDHD), inherited in an autosomal dominant pattern with incomplete penetrance",
-      "Defined by the dyad of gastrointestinal stromal tumour (GIST) and paraganglioma or phaeochromocytoma occurring in the same individual or family",
-      "It should be distinguished from the non-hereditary Carney triad, which additionally includes pulmonary chondroma and is not caused by germline SDHx variants",
-      "The GISTs are succinate dehydrogenase-deficient, typically gastric, multifocal, occur in younger patients and characteristically lack KIT and PDGFRA driver mutations",
-      "These wild-type GISTs generally respond poorly to standard KIT-directed tyrosine kinase inhibitors, so treatment expectations differ from conventional GIST",
-      "Loss of SDHB expression on immunohistochemistry in a GIST is a key clue that flags an underlying succinate dehydrogenase defect",
-      "Management combines surgical treatment of tumours with biochemical and imaging surveillance for paragangliomas and phaeochromocytomas"
+  "pathophysiology": "The syndrome results from germline loss-of-function variants in genes encoding subunits of the succinate dehydrogenase complex, a mitochondrial enzyme shared by the tricarboxylic acid cycle and the electron transport chain. Inactivation of the complex causes succinate to accumulate, which inhibits alpha-ketoglutarate-dependent dioxygenases and stabilises hypoxia-inducible factors, producing a pseudohypoxic, pro-angiogenic state and widespread epigenetic changes. These effects promote the development of succinate dehydrogenase-deficient gastrointestinal stromal tumours and paragangliomas that characterise the condition.",
+  "additionalDifferentials": [
+   "Carney triad (non-hereditary GIST, paraganglioma and pulmonary chondroma)",
+   "Hereditary paraganglioma-phaeochromocytoma syndrome without GIST",
+   "KIT or PDGFRA-mutated sporadic gastrointestinal stromal tumour",
+   "Neurofibromatosis type 1 with GIST",
+   "Von Hippel-Lindau disease",
+   "Multiple endocrine neoplasia type 2"
+  ],
+  "additionalInvestigations": [
+   "Germline sequencing and deletion/duplication analysis of the SDHx genes",
+   "Tumour SDHB immunohistochemistry and testing for absence of KIT/PDGFRA mutations",
+   "Plasma or urinary metanephrines and normetanephrines for catecholamine excess",
+   "Whole-body MRI or functional imaging to localise paragangliomas and phaeochromocytomas",
+   "Endoscopy and cross-sectional imaging to characterise gastric stromal tumours",
+   "Histopathological review confirming succinate dehydrogenase-deficient GIST"
+  ],
+  "redFlags": [
+   "Paroxysmal hypertension, palpitations and headache indicating a catecholamine-secreting tumour",
+   "Gastrointestinal bleeding or a gastric mass from a stromal tumour",
+   "A rapidly enlarging or metastatic tumour",
+   "A hypertensive crisis during a procedure in an unblocked patient"
+  ],
+  "prognosis": "Succinate dehydrogenase-deficient GISTs tend to be indolent but can metastasise, notably to lymph nodes and liver, and respond poorly to standard targeted therapy, so surgery is central to management. Paragangliomas vary in behaviour, and with lifelong surveillance and appropriate perioperative preparation overall outcomes are often reasonable.",
+  "pitfalls": [
+   "Confusing the syndrome with the non-hereditary Carney triad and missing the germline SDHx cause",
+   "Expecting a succinate dehydrogenase-deficient GIST to respond like a KIT-mutated tumour to standard inhibitors",
+   "Operating on a secretory paraganglioma without adequate preoperative adrenergic blockade",
+   "Failing to screen for paraganglioma when a young patient presents with a wild-type gastric GIST"
+  ],
+  "references": [
+   "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
+   "NCCN Guidelines: Gastrointestinal Stromal Tumours and Neuroendocrine Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm molecular subtype: SDHB immunohistochemistry on any KIT/PDGFRA-negative GIST, followed by germline SDHx testing and genetic counseling if SDHB is negative.",
+   "Coordinate care between a sarcoma-experienced surgical/medical oncology team and an endocrine oncology team, with genetic counseling involved from diagnosis onward.",
+   "For localized GIST, surgical resection is primary treatment, with the extent individualized given typically multifocal, gastric-confined SDH-deficient disease.",
+   "SDH-deficient GIST is largely insensitive to imatinib, so adjuvant tyrosine kinase inhibitor therapy is not routinely used after resection in this subtype.",
+   "For metastatic or unresectable GIST, sunitinib or regorafenib are the systemic options with the most support, since imatinib is unreliable in SDH-deficient disease.",
+   "Given the often indolent course of SDH-deficient GIST, consider observation of asymptomatic low-volume metastatic disease and case-by-case resection of limited resectable metastases rather than defaulting to immediate systemic therapy.",
+   "For resectable, hormonally active or potentially active paraganglioma, surgery is treatment of choice, but only after preoperative alpha-adrenergic blockade (such as phenoxybenzamine, prazosin, or doxazosin) with salt and fluid loading over roughly ten to fourteen days; a beta-blocker may be added afterward for tachycardia only once alpha-blockade is established, to avoid unopposed alpha stimulation.",
+   "Provide invasive intraoperative blood pressure monitoring with rapidly acting antihypertensives, and close postoperative monitoring, typically in an intensive care setting.",
+   "For metastatic paraganglioma, especially SDHB-associated disease that is often asymptomatic and slowly progressive, a watch-and-wait approach with symptom control is often appropriate.",
+   "For symptomatic or progressive metastatic paraganglioma, options include debulking or metastasectomy, locoregional techniques such as radiofrequency ablation or transarterial chemoembolization, external-beam radiation, radiopharmaceutical therapy (MIBG or DOTATATE based on avidity), and cytotoxic chemotherapy regimens such as cyclophosphamide-dacarbazine-vincristine or capecitabine-temozolomide, all requiring adequate preoperative alpha-blockade before any procedure.",
+   "Maintain supportive alpha- and if needed beta-blockade for catecholamine-driven hypertension, plus antiresorptive therapy for bone metastases.",
+   "Provide lifelong surveillance for both tumor types given the risk of metachronous and multifocal disease, using biochemical testing (plasma free metanephrines/normetanephrines or 24-hour urine catecholamines) as the primary paraganglioma surveillance tool once secretory status is known, and periodic imaging of the at-risk field for GIST.",
+   "Offer genetic counseling and SDHx testing to at-risk first-degree relatives given the autosomal dominant inheritance.",
+   "Refer to specialized sarcoma or endocrine oncology/surgery teams and to genetic counseling at diagnosis of either tumor type, and to a center experienced in rare hereditary tumor syndromes for complex multifocal, recurrent, or advanced disease decisions."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carney_stratakis_syndrome-pathway",
+   "title": "Carney-Stratakis syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by germline variants in succinate dehydrogenase subunit genes (most often SDHB, SDHC or SDHD), inherited in an autosomal dominant pattern with incomplete penetrance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Paroxysmal hypertension, palpitations and headache indicating a catecholamine-secreting tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Germline sequencing and deletion/duplication analysis of the SDHx genes, Tumour SDHB immunohistochemistry and testing for absence of KIT/PDGFRA mutations, Plasma or urinary metanephrines and normetanephrines for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm molecular subtype: SDHB immunohistochemistry on any KIT/PDGFRA-negative GIST, followed by germline SDHx testing and genetic counseling if SDHB is negative."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the syndrome with the non-hereditary Carney triad and missing the germline SDHx cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carney-stratakis syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carney_stratakis_syndrome-matrix",
+   "title": "Carney-Stratakis syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by germline variants in succinate dehydrogenase subunit genes (most often SDHB, SDHC or SDHD), inherited in an autosomal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The syndrome results from germline loss-of-function variants in genes encoding subunits of the succinate dehydrogenase complex, a mitochondrial enzyme shared by the tricarboxylic acid cycle and the electron transport chain. Inactivation of the complex causes succinate to accumulate, which inhibits alpha-ketoglutarate-dependent dioxygenases and stabilises hypoxia-inducible factors, producing a pseudohypoxic, pro-angiogenic state and widespread epigenetic changes. These effects promote the development of succinate dehydrogenase-deficient gastrointestinal stromal tumours and paragangliomas that characterise the condition.",
-    "additionalDifferentials": [
-      "Carney triad (non-hereditary GIST, paraganglioma and pulmonary chondroma)",
-      "Hereditary paraganglioma-phaeochromocytoma syndrome without GIST",
-      "KIT or PDGFRA-mutated sporadic gastrointestinal stromal tumour",
-      "Neurofibromatosis type 1 with GIST",
-      "Von Hippel-Lindau disease",
-      "Multiple endocrine neoplasia type 2"
+    [
+     "Key Investigations",
+     "Germline sequencing and deletion/duplication analysis of the SDHx genes, Tumour SDHB immunohistochemistry and testing for absence",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Germline sequencing and deletion/duplication analysis of the SDHx genes",
-      "Tumour SDHB immunohistochemistry and testing for absence of KIT/PDGFRA mutations",
-      "Plasma or urinary metanephrines and normetanephrines for catecholamine excess",
-      "Whole-body MRI or functional imaging to localise paragangliomas and phaeochromocytomas",
-      "Endoscopy and cross-sectional imaging to characterise gastric stromal tumours",
-      "Histopathological review confirming succinate dehydrogenase-deficient GIST"
+    [
+     "Primary Differentials",
+     "Carney triad (non-hereditary GIST, paraganglioma and pulmonary chondroma), Hereditary paraganglioma-phaeochromocytoma syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Paroxysmal hypertension, palpitations and headache indicating a catecholamine-secreting tumour",
-      "Gastrointestinal bleeding or a gastric mass from a stromal tumour",
-      "A rapidly enlarging or metastatic tumour",
-      "A hypertensive crisis during a procedure in an unblocked patient"
+    [
+     "Management Strategy",
+     "Confirm molecular subtype: SDHB immunohistochemistry on any KIT/PDGFRA-negative GIST, followed by germline SDHx testing and",
+     "Core treatment modality"
     ],
-    "prognosis": "Succinate dehydrogenase-deficient GISTs tend to be indolent but can metastasise, notably to lymph nodes and liver, and respond poorly to standard targeted therapy, so surgery is central to management. Paragangliomas vary in behaviour, and with lifelong surveillance and appropriate perioperative preparation overall outcomes are often reasonable.",
-    "pitfalls": [
-      "Confusing the syndrome with the non-hereditary Carney triad and missing the germline SDHx cause",
-      "Expecting a succinate dehydrogenase-deficient GIST to respond like a KIT-mutated tumour to standard inhibitors",
-      "Operating on a secretory paraganglioma without adequate preoperative adrenergic blockade",
-      "Failing to screen for paraganglioma when a young patient presents with a wild-type gastric GIST"
-    ],
-    "references": [
-      "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
-      "NCCN Guidelines: Gastrointestinal Stromal Tumours and Neuroendocrine Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm molecular subtype: SDHB immunohistochemistry on any KIT/PDGFRA-negative GIST, followed by germline SDHx testing and genetic counseling if SDHB is negative.",
-      "Coordinate care between a sarcoma-experienced surgical/medical oncology team and an endocrine oncology team, with genetic counseling involved from diagnosis onward.",
-      "For localized GIST, surgical resection is primary treatment, with the extent individualized given typically multifocal, gastric-confined SDH-deficient disease.",
-      "SDH-deficient GIST is largely insensitive to imatinib, so adjuvant tyrosine kinase inhibitor therapy is not routinely used after resection in this subtype.",
-      "For metastatic or unresectable GIST, sunitinib or regorafenib are the systemic options with the most support, since imatinib is unreliable in SDH-deficient disease.",
-      "Given the often indolent course of SDH-deficient GIST, consider observation of asymptomatic low-volume metastatic disease and case-by-case resection of limited resectable metastases rather than defaulting to immediate systemic therapy.",
-      "For resectable, hormonally active or potentially active paraganglioma, surgery is treatment of choice, but only after preoperative alpha-adrenergic blockade (such as phenoxybenzamine, prazosin, or doxazosin) with salt and fluid loading over roughly ten to fourteen days; a beta-blocker may be added afterward for tachycardia only once alpha-blockade is established, to avoid unopposed alpha stimulation.",
-      "Provide invasive intraoperative blood pressure monitoring with rapidly acting antihypertensives, and close postoperative monitoring, typically in an intensive care setting.",
-      "For metastatic paraganglioma, especially SDHB-associated disease that is often asymptomatic and slowly progressive, a watch-and-wait approach with symptom control is often appropriate.",
-      "For symptomatic or progressive metastatic paraganglioma, options include debulking or metastasectomy, locoregional techniques such as radiofrequency ablation or transarterial chemoembolization, external-beam radiation, radiopharmaceutical therapy (MIBG or DOTATATE based on avidity), and cytotoxic chemotherapy regimens such as cyclophosphamide-dacarbazine-vincristine or capecitabine-temozolomide, all requiring adequate preoperative alpha-blockade before any procedure.",
-      "Maintain supportive alpha- and if needed beta-blockade for catecholamine-driven hypertension, plus antiresorptive therapy for bone metastases.",
-      "Provide lifelong surveillance for both tumor types given the risk of metachronous and multifocal disease, using biochemical testing (plasma free metanephrines/normetanephrines or 24-hour urine catecholamines) as the primary paraganglioma surveillance tool once secretory status is known, and periodic imaging of the at-risk field for GIST.",
-      "Offer genetic counseling and SDHx testing to at-risk first-degree relatives given the autosomal dominant inheritance.",
-      "Refer to specialized sarcoma or endocrine oncology/surgery teams and to genetic counseling at diagnosis of either tumor type, and to a center experienced in rare hereditary tumor syndromes for complex multifocal, recurrent, or advanced disease decisions."
+    [
+     "Clinical Pitfall",
+     "Confusing the syndrome with the non-hereditary Carney triad and missing the germline SDHx cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carney-stratakis syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carney-stratakis-syndrome-diagram",
+   "title": "Carney-Stratakis syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

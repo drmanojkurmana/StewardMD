@@ -6,7 +6,24 @@
  "basis": "india",
  "counterpart": "postpartum-haemorrhage",
  "setting": "Labour room, PHC to district hospital, operating theatre, referral transport",
- "aliases": ["PPH", "atonic PPH", "traumatic PPH", "retained placenta", "obstetric haemorrhage", "shock index", "oxytocin drip", "methylergometrine", "methergine", "carboprost", "misoprostol PPH", "tranexamic acid PPH", "condom catheter tamponade", "UBT", "NASG", "ICMR STW PPH"],
+ "aliases": [
+  "PPH",
+  "atonic PPH",
+  "traumatic PPH",
+  "retained placenta",
+  "obstetric haemorrhage",
+  "shock index",
+  "oxytocin drip",
+  "methylergometrine",
+  "methergine",
+  "carboprost",
+  "misoprostol PPH",
+  "tranexamic acid PPH",
+  "condom catheter tamponade",
+  "UBT",
+  "NASG",
+  "ICMR STW PPH"
+ ],
  "summary": "PPH is blood loss over 500 mL or any bleeding that deranges vital signs. Call for help, resuscitate through two wide-bore lines, start an oxytocin infusion, massage the uterus, give tranexamic acid 1 g IV within 3 hours of birth, identify the cause, and escalate through uterotonics, balloon tamponade and surgery or referral.",
  "sections": [
   {
@@ -85,15 +102,142 @@
   }
  ],
  "drugs": [
-  { "name": "Oxytocin", "dose": "10 IU IM if not given at birth. Infusion 20 IU in 500 mL RL or NS at 40 to 60 drops/min; 10 to 20 units/h during bimanual compression; 5 to 10 units/h once controlled", "notes": "No IV bolus. Maximum 100 IU in 24 hours." },
-  { "name": "Tranexamic acid", "dose": "1 g slow IV over 10 minutes; repeat once after 30 minutes if bleeding persists", "notes": "For all PPH, as early as possible and within 3 hours of birth." },
-  { "name": "Methylergometrine", "dose": "0.2 mg IM or slow IV, repeat after 15 minutes, maximum 5 doses (1 mg)", "notes": "Contraindicated in hypertension (including pre-eclampsia), severe anaemia, heart disease." },
-  { "name": "Carboprost (15-methyl PGF2 alpha)", "dose": "250 micrograms IM, repeat every 20 minutes, maximum 8 doses (2 mg)", "notes": "Contraindicated in asthma." },
-  { "name": "Misoprostol", "dose": "800 micrograms rectally or sublingually", "notes": "Useful where injectables or cold chain are limited." },
-  { "name": "Ringer lactate or normal saline", "dose": "1 litre in 15 to 20 minutes initially", "notes": "Replace with blood and components as soon as available." }
+  {
+   "name": "Oxytocin",
+   "dose": "10 IU IM if not given at birth. Infusion 20 IU in 500 mL RL or NS at 40 to 60 drops/min; 10 to 20 units/h during bimanual compression; 5 to 10 units/h once controlled",
+   "notes": "No IV bolus. Maximum 100 IU in 24 hours."
+  },
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g slow IV over 10 minutes; repeat once after 30 minutes if bleeding persists",
+   "notes": "For all PPH, as early as possible and within 3 hours of birth."
+  },
+  {
+   "name": "Methylergometrine",
+   "dose": "0.2 mg IM or slow IV, repeat after 15 minutes, maximum 5 doses (1 mg)",
+   "notes": "Contraindicated in hypertension (including pre-eclampsia), severe anaemia, heart disease."
+  },
+  {
+   "name": "Carboprost (15-methyl PGF2 alpha)",
+   "dose": "250 micrograms IM, repeat every 20 minutes, maximum 8 doses (2 mg)",
+   "notes": "Contraindicated in asthma."
+  },
+  {
+   "name": "Misoprostol",
+   "dose": "800 micrograms rectally or sublingually",
+   "notes": "Useful where injectables or cold chain are limited."
+  },
+  {
+   "name": "Ringer lactate or normal saline",
+   "dose": "1 litre in 15 to 20 minutes initially",
+   "notes": "Replace with blood and components as soon as available."
+  }
  ],
  "sources": [
-  { "org": "ICMR / DHR, MoHFW", "title": "Standard Treatment Workflow: Postpartum haemorrhage (updated December 2025)", "year": 2025, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf" }
+  {
+   "org": "ICMR / DHR, MoHFW",
+   "title": "Standard Treatment Workflow: Postpartum haemorrhage (updated December 2025)",
+   "year": 2025,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1768382528_updatedpostpartumhaemorrhage.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "postpartum-haemorrhage-india-pathway",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation (India, ICMR) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "PPH: more than 500 mL blood loss, or any amount of bleeding that causes derangement of vital parameters.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call for help. Rapid assessment of pulse, BP, respiratory rate and temperature; check vitals and blood loss at least every 15 minutes.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Find the cause: uterus flabby (atony); uterus well contracted but still bleeding (genital tract trauma, retained tissue, rupture); placenta not delivered; or bleeding with no apparent cause (coagulopathy)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Bimanual uterine compression plus pharmacotherapy, and increase the oxytocin infusion to 10 to 20 units/h."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Uterine massage every 15 minutes for the first 2 hours."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for postpartum haemorrhage (pph): first response and escalation (india, icmr)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "postpartum-haemorrhage-india-summary-matrix",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation (India, ICMR) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "PPH: more than 500 mL blood loss, or any amount of bleeding that causes derangement of vital parameters.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call for help. Rapid assessment of pulse, BP, respiratory rate and temperature; check vitals and blood loss at least every 15 minutes.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oxytocin: 10 IU IM if not given at birth. Infusion 20 IU in 500 mL RL or NS at 40 to 60 drops/min; 10 to 20 units/h during bimanual",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving oxytocin as an IV bolus (can cause hypotension).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for postpartum haemorrhage (pph): first response and escalation (india, icmr)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "postpartum-haemorrhage-india-diagram",
+   "title": "Postpartum haemorrhage (PPH): first response and escalation (India, ICMR): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

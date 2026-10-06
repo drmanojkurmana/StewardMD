@@ -6,7 +6,25 @@
  "basis": "india",
  "counterpart": "neonatal-jaundice",
  "setting": "Labour room, postnatal ward, SNCU, NICU, newborn follow-up clinic",
- "aliases": ["neonatal hyperbilirubinaemia", "newborn jaundice", "physiological jaundice", "phototherapy", "exchange transfusion", "EBT", "TSB", "TcB", "Kramer zones", "kernicterus", "acute bilirubin encephalopathy", "ABO incompatibility", "Rh isoimmunisation", "G6PD deficiency", "prolonged jaundice", "IAP STG jaundice", "ICMR STW jaundice"],
+ "aliases": [
+  "neonatal hyperbilirubinaemia",
+  "newborn jaundice",
+  "physiological jaundice",
+  "phototherapy",
+  "exchange transfusion",
+  "EBT",
+  "TSB",
+  "TcB",
+  "Kramer zones",
+  "kernicterus",
+  "acute bilirubin encephalopathy",
+  "ABO incompatibility",
+  "Rh isoimmunisation",
+  "G6PD deficiency",
+  "prolonged jaundice",
+  "IAP STG jaundice",
+  "ICMR STW jaundice"
+ ],
  "summary": "Examine every newborn for jaundice at least every 12 hours for the first 3 to 5 days and before discharge. Jaundice in the first 24 hours, yellow palms and soles or signs of encephalopathy are serious: start intensive phototherapy, measure TSB, plot it on hour-specific charts, and refer early for exchange transfusion when indicated.",
  "sections": [
   {
@@ -83,12 +101,128 @@
   }
  ],
  "drugs": [
-  { "name": "Intensive phototherapy", "dose": "Blue light, irradiance above 30 microW/cm2 per nm, maximum skin exposure", "notes": "Stop when TSB is 2 to 3 mg/dL below the treatment line." },
-  { "name": "Exchange blood transfusion", "dose": "Twice the estimated blood volume (2 x 80 to 100 mL/kg)", "notes": "Cross-matched with maternal blood; group choice depends on Rh or ABO isoimmunisation." }
+  {
+   "name": "Intensive phototherapy",
+   "dose": "Blue light, irradiance above 30 microW/cm2 per nm, maximum skin exposure",
+   "notes": "Stop when TSB is 2 to 3 mg/dL below the treatment line."
+  },
+  {
+   "name": "Exchange blood transfusion",
+   "dose": "Twice the estimated blood volume (2 x 80 to 100 mL/kg)",
+   "notes": "Cross-matched with maternal blood; group choice depends on Rh or ABO isoimmunisation."
+  }
  ],
  "sources": [
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Neonatal jaundice", "year": 2022, "url": "https://iapindia.org/pdf/Ch-079-Neonatal-Jaundice.pdf" },
-  { "org": "ICMR / DHR, MoHFW", "title": "Standard Treatment Workflow: Neonatal jaundice in infants 35 weeks or more", "year": 2020, "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1726568620_neonatal_jaundice.pdf" }
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Neonatal jaundice",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/Ch-079-Neonatal-Jaundice.pdf"
+  },
+  {
+   "org": "ICMR / DHR, MoHFW",
+   "title": "Standard Treatment Workflow: Neonatal jaundice in infants 35 weeks or more",
+   "year": 2020,
+   "url": "https://www.icmr.gov.in/icmrobject/uploads/STWs/1726568620_neonatal_jaundice.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-jaundice-india-pathway",
+   "title": "Neonatal jaundice (India, IAP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Physiological jaundice appears after 24 hours, falls after day 5 to 6, is gone by 14 days and seldom exceeds 15 mg/dL.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Serious jaundice: visible in the first 24 hours; yellow palms and soles at any time; TSB above the 95th centile (or at the phototherapy line) on hour-specific AAP or NICE charts; or signs of acute bilirubin encephalopathy.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Examine the naked baby in bright natural or white fluorescent light, pressing the skin to blanch it, at least every 12 hours during the first 3 to 5 days. Kramer zones (approximate TSB): face and neck 4 to 6 mg/dL; chest and upper abdomen"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start intensive phototherapy at once (after sending TSB) for serious jaundice, and whenever TSB is at or above the phototherapy cut-off for age in hours and risk on AAP or NICE charts."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Using sunlight to treat jaundice."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for neonatal jaundice (india, iap)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-jaundice-india-summary-matrix",
+   "title": "Neonatal jaundice (India, IAP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Physiological jaundice appears after 24 hours, falls after day 5 to 6, is gone by 14 days and seldom exceeds 15 mg/dL.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start intensive phototherapy at once (after sending TSB) for serious jaundice, and whenever TSB is at or above the phototherapy cut-off for",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Examine the naked baby in bright natural or white fluorescent light, pressing the skin to blanch it, at least every 12 hours during the",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Intensive phototherapy: Blue light, irradiance above 30 microW/cm2 per nm, maximum skin exposure",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using sunlight to treat jaundice.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for neonatal jaundice (india, iap)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-jaundice-india-diagram",
+   "title": "Neonatal jaundice (India, IAP): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

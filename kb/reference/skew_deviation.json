@@ -1,73 +1,168 @@
 {
-  "id": "skew_deviation",
-  "name": "Skew deviation",
-  "aliases": [
-    "skew deviation with ocular tilt reaction"
+ "id": "skew_deviation",
+ "name": "Skew deviation",
+ "aliases": [
+  "skew deviation with ocular tilt reaction"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acquired vertical misalignment of the eyes caused by disturbance of the otolithic (utricular) vestibular pathways, not by a single ocular muscle palsy",
+   "It may occur alone or as part of the ocular tilt reaction with head tilt, ocular torsion and skew toward the lower eye",
+   "It is an important mimic of fourth nerve palsy and of other causes of vertical diplopia",
+   "The upright-supine test helps distinguish it: a skew deviation typically decreases when the patient lies supine",
+   "It usually signals brainstem or cerebellar disease, so acute skew with other signs may indicate stroke",
+   "Within the HINTS assessment of acute vestibular syndrome, skew deviation is a central (worrying) sign"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acquired vertical misalignment of the eyes caused by disturbance of the otolithic (utricular) vestibular pathways, not by a single ocular muscle palsy",
-      "It may occur alone or as part of the ocular tilt reaction with head tilt, ocular torsion and skew toward the lower eye",
-      "It is an important mimic of fourth nerve palsy and of other causes of vertical diplopia",
-      "The upright-supine test helps distinguish it: a skew deviation typically decreases when the patient lies supine",
-      "It usually signals brainstem or cerebellar disease, so acute skew with other signs may indicate stroke",
-      "Within the HINTS assessment of acute vestibular syndrome, skew deviation is a central (worrying) sign"
+  "pathophysiology": "Skew deviation results from an imbalance in the graviceptive otolithic pathways that project from the utricle through the brainstem to the ocular motor nuclei, producing a vertical divergence of the visual axes. Lesions of these pathways in the pons, medulla, midbrain or cerebellum disturb the normal tonic balance that keeps the eyes level, and when the full ocular tilt reaction occurs the head tilt, ocular torsion and hypotropia all deviate toward the side of a lower pontomedullary lesion (or opposite a higher one). Because these pathways lie in the posterior circulation, skew deviation frequently accompanies brainstem or cerebellar ischaemia.",
+  "additionalDifferentials": [
+   "Fourth nerve (superior oblique) palsy",
+   "Partial third nerve palsy",
+   "Myasthenia gravis",
+   "Thyroid eye disease",
+   "Orbital restrictive disease",
+   "Dissociated vertical deviation"
+  ],
+  "additionalInvestigations": [
+   "HINTS examination in acute vestibular syndrome",
+   "Upright-supine test to demonstrate reduction of the deviation when supine",
+   "MRI of the brain with attention to the brainstem and cerebellum",
+   "Orthoptic assessment including measurement of ocular torsion",
+   "Vascular risk-factor evaluation when stroke is suspected"
+  ],
+  "redFlags": [
+   "Acute onset with vertigo, ataxia or other brainstem signs",
+   "Direction-changing or gaze-evoked nystagmus",
+   "Any feature suggesting posterior circulation stroke",
+   "Reduced conscious level or rapidly evolving deficits"
+  ],
+  "prognosis": "Prognosis depends on the underlying cause; skew from a self-limiting or treatable lesion may resolve, but as a sign of brainstem or cerebellar stroke it carries the prognosis of that event.",
+  "pitfalls": [
+   "Misdiagnosing skew as a benign fourth nerve palsy and missing a stroke",
+   "Failing to perform HINTS in acute vestibular syndrome",
+   "Overlooking the associated ocular tilt reaction",
+   "Attributing vertical diplopia to orbital disease without considering a central cause"
+  ],
+  "references": [
+   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause as the priority, activating an urgent stroke pathway when acute skew occurs with other central signs on HINTS assessment",
+   "Direct management of the causative posterior fossa lesion, whether ischaemia, demyelination, tumour or haemorrhage, with the relevant specialist team",
+   "Relieve vertical diplopia symptomatically with prisms or temporary monocular occlusion while awaiting resolution",
+   "Address vascular risk factors with antiplatelet or anticoagulant therapy and blood pressure and lipid control when an ischaemic cause is confirmed",
+   "Arrange orthoptic follow-up to monitor the deviation and ocular torsion, reserving strabismus surgery for stable, persistent misalignment",
+   "Refer for multidisciplinary neurology and neuro-ophthalmology assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "skew_deviation-pathway",
+   "title": "Skew deviation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acquired vertical misalignment of the eyes caused by disturbance of the otolithic (utricular) vestibular pathways, not by a single ocular muscle palsy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute onset with vertigo, ataxia or other brainstem signs",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: HINTS examination in acute vestibular syndrome, Upright-supine test to demonstrate reduction of the deviation when supine, MRI of the brain with attention to the brainstem and cerebellum"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause as the priority, activating an urgent stroke pathway when acute skew occurs with other central signs on HINTS assessment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing skew as a benign fourth nerve palsy and missing a stroke"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of skew deviation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "skew_deviation-matrix",
+   "title": "Skew deviation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acquired vertical misalignment of the eyes caused by disturbance of the otolithic (utricular) vestibular pathways, not by a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Skew deviation results from an imbalance in the graviceptive otolithic pathways that project from the utricle through the brainstem to the ocular motor nuclei, producing a vertical divergence of the visual axes. Lesions of these pathways in the pons, medulla, midbrain or cerebellum disturb the normal tonic balance that keeps the eyes level, and when the full ocular tilt reaction occurs the head tilt, ocular torsion and hypotropia all deviate toward the side of a lower pontomedullary lesion (or opposite a higher one). Because these pathways lie in the posterior circulation, skew deviation frequently accompanies brainstem or cerebellar ischaemia.",
-    "additionalDifferentials": [
-      "Fourth nerve (superior oblique) palsy",
-      "Partial third nerve palsy",
-      "Myasthenia gravis",
-      "Thyroid eye disease",
-      "Orbital restrictive disease",
-      "Dissociated vertical deviation"
+    [
+     "Key Investigations",
+     "HINTS examination in acute vestibular syndrome, Upright-supine test to demonstrate reduction of the deviation when supine, MRI of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "HINTS examination in acute vestibular syndrome",
-      "Upright-supine test to demonstrate reduction of the deviation when supine",
-      "MRI of the brain with attention to the brainstem and cerebellum",
-      "Orthoptic assessment including measurement of ocular torsion",
-      "Vascular risk-factor evaluation when stroke is suspected"
+    [
+     "Primary Differentials",
+     "Fourth nerve (superior oblique) palsy, Partial third nerve palsy, Myasthenia gravis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute onset with vertigo, ataxia or other brainstem signs",
-      "Direction-changing or gaze-evoked nystagmus",
-      "Any feature suggesting posterior circulation stroke",
-      "Reduced conscious level or rapidly evolving deficits"
+    [
+     "Management Strategy",
+     "Treat the underlying cause as the priority, activating an urgent stroke pathway when acute skew occurs with other central signs",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the underlying cause; skew from a self-limiting or treatable lesion may resolve, but as a sign of brainstem or cerebellar stroke it carries the prognosis of that event.",
-    "pitfalls": [
-      "Misdiagnosing skew as a benign fourth nerve palsy and missing a stroke",
-      "Failing to perform HINTS in acute vestibular syndrome",
-      "Overlooking the associated ocular tilt reaction",
-      "Attributing vertical diplopia to orbital disease without considering a central cause"
-    ],
-    "references": [
-      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause as the priority, activating an urgent stroke pathway when acute skew occurs with other central signs on HINTS assessment",
-      "Direct management of the causative posterior fossa lesion, whether ischaemia, demyelination, tumour or haemorrhage, with the relevant specialist team",
-      "Relieve vertical diplopia symptomatically with prisms or temporary monocular occlusion while awaiting resolution",
-      "Address vascular risk factors with antiplatelet or anticoagulant therapy and blood pressure and lipid control when an ischaemic cause is confirmed",
-      "Arrange orthoptic follow-up to monitor the deviation and ocular torsion, reserving strabismus surgery for stable, persistent misalignment",
-      "Refer for multidisciplinary neurology and neuro-ophthalmology assessment"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing skew as a benign fourth nerve palsy and missing a stroke",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for skew deviation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "skew-deviation-diagram",
+   "title": "Skew deviation: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

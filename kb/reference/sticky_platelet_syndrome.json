@@ -1,78 +1,173 @@
 {
-  "id": "sticky_platelet_syndrome",
-  "name": "Sticky platelet syndrome",
-  "aliases": [
-    "SPS",
-    "platelet hyperaggregability syndrome",
-    "hereditary platelet hyperreactivity"
+ "id": "sticky_platelet_syndrome",
+ "name": "Sticky platelet syndrome",
+ "aliases": [
+  "SPS",
+  "platelet hyperaggregability syndrome",
+  "hereditary platelet hyperreactivity"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A proposed inherited thrombophilia characterised by platelet hyperaggregability in response to low concentrations of ADP and adrenaline (epinephrine)",
+   "Associated in the literature with arterial and venous thrombosis, often at a young age and sometimes precipitated by emotional or physical stress",
+   "Reported clinical events include unexplained stroke, myocardial infarction, and recurrent pregnancy loss in the absence of other thrombophilias",
+   "The defining laboratory feature is increased platelet aggregation to low-dose agonists on light transmission aggregometry",
+   "It remains a debated and incompletely standardised entity, with no consensus genetic marker and variable diagnostic criteria",
+   "It is a diagnosis of exclusion, made after established inherited and acquired thrombophilias have been considered",
+   "When treatment is used, it is typically directed at reducing platelet reactivity with antiplatelet therapy rather than anticoagulation alone"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A proposed inherited thrombophilia characterised by platelet hyperaggregability in response to low concentrations of ADP and adrenaline (epinephrine)",
-      "Associated in the literature with arterial and venous thrombosis, often at a young age and sometimes precipitated by emotional or physical stress",
-      "Reported clinical events include unexplained stroke, myocardial infarction, and recurrent pregnancy loss in the absence of other thrombophilias",
-      "The defining laboratory feature is increased platelet aggregation to low-dose agonists on light transmission aggregometry",
-      "It remains a debated and incompletely standardised entity, with no consensus genetic marker and variable diagnostic criteria",
-      "It is a diagnosis of exclusion, made after established inherited and acquired thrombophilias have been considered",
-      "When treatment is used, it is typically directed at reducing platelet reactivity with antiplatelet therapy rather than anticoagulation alone"
+  "pathophysiology": "Sticky platelet syndrome is described as a heritable tendency of platelets to aggregate excessively when exposed to low concentrations of ADP and adrenaline, suggesting heightened responsiveness of platelet activation pathways. This hyperreactivity is proposed to promote platelet-driven thrombus formation in both the arterial and venous circulations, particularly under conditions of physiological stress with catecholamine surges. The precise molecular basis is unresolved, no single causative gene has been established, and the entity remains debated, so it is best regarded as a clinico-laboratory phenotype pending further validation.",
+  "additionalDifferentials": [
+   "Factor V Leiden and prothrombin G20210A thrombophilias",
+   "Antithrombin, protein C, and protein S deficiencies",
+   "Antiphospholipid syndrome",
+   "Myeloproliferative neoplasms causing thrombocytosis and thrombosis",
+   "Hyperhomocysteinaemia",
+   "Acquired prothrombotic states such as malignancy or oestrogen exposure"
+  ],
+  "additionalInvestigations": [
+   "Light transmission platelet aggregometry using low concentrations of ADP and adrenaline",
+   "Comprehensive inherited thrombophilia screen (factor V Leiden, prothrombin G20210A, antithrombin, protein C and S)",
+   "Antiphospholipid antibody testing",
+   "Full blood count to exclude a myeloproliferative neoplasm",
+   "Homocysteine measurement",
+   "Imaging to confirm and characterise a suspected thrombotic event"
+  ],
+  "redFlags": [
+   "Arterial thrombosis such as stroke or myocardial infarction in a young patient",
+   "Recurrent venous thromboembolism without an obvious cause",
+   "Recurrent pregnancy loss after exclusion of other causes",
+   "Thrombosis recurring despite an otherwise negative thrombophilia workup"
+  ],
+  "prognosis": "Because the entity is not firmly established, prognosis is uncertain; reported cases suggest that reducing platelet reactivity can lessen thrombotic events, but the evidence base is limited. Outcomes are strongly influenced by coexisting, better-defined thrombotic risk factors.",
+  "pitfalls": [
+   "Diagnosing it without first excluding established inherited and acquired thrombophilias",
+   "Relying on non-standardised aggregometry protocols with variable cut-offs",
+   "Overinterpreting transient platelet hyperreactivity from recent stress or sampling artefact",
+   "Attributing all thrombotic events to it while missing a coexisting definitive cause"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Hoffman: Hematology - Basic Principles and Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Low-dose aspirin as the mainstay to reduce platelet hyperaggregability and prevent thrombotic events",
+   "Standard anticoagulation for an established acute venous thromboembolic event",
+   "Treat acute arterial events such as stroke or myocardial infarction along standard antiplatelet-based pathways",
+   "Aspirin-based thromboprophylaxis in pregnancy for those with recurrent pregnancy loss",
+   "Modify coexisting cardiovascular and thrombotic risk factors, including smoking cessation and avoidance of catecholaminergic stimulants",
+   "Exclude and treat established inherited and acquired thrombophilias before attributing events to this entity",
+   "Haematology referral for aggregometry-guided assessment and long-term management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sticky_platelet_syndrome-pathway",
+   "title": "Sticky platelet syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A proposed inherited thrombophilia characterised by platelet hyperaggregability in response to low concentrations of ADP and adrenaline (epinephrine)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Arterial thrombosis such as stroke or myocardial infarction in a young patient",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Light transmission platelet aggregometry using low concentrations of ADP and adrenaline, Comprehensive inherited thrombophilia screen (factor V Leiden, prothrombin G20210A, antithrombin, protein C and S), Antiphospholipid"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Low-dose aspirin as the mainstay to reduce platelet hyperaggregability and prevent thrombotic events"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing it without first excluding established inherited and acquired thrombophilias"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sticky platelet syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sticky_platelet_syndrome-matrix",
+   "title": "Sticky platelet syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A proposed inherited thrombophilia characterised by platelet hyperaggregability in response to low concentrations of ADP and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sticky platelet syndrome is described as a heritable tendency of platelets to aggregate excessively when exposed to low concentrations of ADP and adrenaline, suggesting heightened responsiveness of platelet activation pathways. This hyperreactivity is proposed to promote platelet-driven thrombus formation in both the arterial and venous circulations, particularly under conditions of physiological stress with catecholamine surges. The precise molecular basis is unresolved, no single causative gene has been established, and the entity remains debated, so it is best regarded as a clinico-laboratory phenotype pending further validation.",
-    "additionalDifferentials": [
-      "Factor V Leiden and prothrombin G20210A thrombophilias",
-      "Antithrombin, protein C, and protein S deficiencies",
-      "Antiphospholipid syndrome",
-      "Myeloproliferative neoplasms causing thrombocytosis and thrombosis",
-      "Hyperhomocysteinaemia",
-      "Acquired prothrombotic states such as malignancy or oestrogen exposure"
+    [
+     "Key Investigations",
+     "Light transmission platelet aggregometry using low concentrations of ADP and adrenaline, Comprehensive inherited thrombophilia",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Light transmission platelet aggregometry using low concentrations of ADP and adrenaline",
-      "Comprehensive inherited thrombophilia screen (factor V Leiden, prothrombin G20210A, antithrombin, protein C and S)",
-      "Antiphospholipid antibody testing",
-      "Full blood count to exclude a myeloproliferative neoplasm",
-      "Homocysteine measurement",
-      "Imaging to confirm and characterise a suspected thrombotic event"
+    [
+     "Primary Differentials",
+     "Factor V Leiden and prothrombin G20210A thrombophilias, Antithrombin, protein C, and protein S deficiencies, Antiphospholipid",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Arterial thrombosis such as stroke or myocardial infarction in a young patient",
-      "Recurrent venous thromboembolism without an obvious cause",
-      "Recurrent pregnancy loss after exclusion of other causes",
-      "Thrombosis recurring despite an otherwise negative thrombophilia workup"
+    [
+     "Management Strategy",
+     "Low-dose aspirin as the mainstay to reduce platelet hyperaggregability and prevent thrombotic events",
+     "Core treatment modality"
     ],
-    "prognosis": "Because the entity is not firmly established, prognosis is uncertain; reported cases suggest that reducing platelet reactivity can lessen thrombotic events, but the evidence base is limited. Outcomes are strongly influenced by coexisting, better-defined thrombotic risk factors.",
-    "pitfalls": [
-      "Diagnosing it without first excluding established inherited and acquired thrombophilias",
-      "Relying on non-standardised aggregometry protocols with variable cut-offs",
-      "Overinterpreting transient platelet hyperreactivity from recent stress or sampling artefact",
-      "Attributing all thrombotic events to it while missing a coexisting definitive cause"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Hoffman: Hematology - Basic Principles and Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Low-dose aspirin as the mainstay to reduce platelet hyperaggregability and prevent thrombotic events",
-      "Standard anticoagulation for an established acute venous thromboembolic event",
-      "Treat acute arterial events such as stroke or myocardial infarction along standard antiplatelet-based pathways",
-      "Aspirin-based thromboprophylaxis in pregnancy for those with recurrent pregnancy loss",
-      "Modify coexisting cardiovascular and thrombotic risk factors, including smoking cessation and avoidance of catecholaminergic stimulants",
-      "Exclude and treat established inherited and acquired thrombophilias before attributing events to this entity",
-      "Haematology referral for aggregometry-guided assessment and long-term management"
+    [
+     "Clinical Pitfall",
+     "Diagnosing it without first excluding established inherited and acquired thrombophilias",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sticky platelet syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sticky-platelet-syndrome-diagram",
+   "title": "Sticky platelet syndrome: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

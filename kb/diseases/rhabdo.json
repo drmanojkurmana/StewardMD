@@ -119,5 +119,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h1f7df660"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "rhabdo-dx-algo",
+      "title": "Rhabdomyolysis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Myoglobinuria characteristically produces a positive urine dipstick for blood while urine microscopy shows no (or few) red cells - a key clue distinguishing pigment nephropathy from true haematuria (Harrison 22e p.343).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hyperkalaemia from release of intracellular potassium during muscle necrosis - predictable and potentially life-threatening (Harrison 22e p.359).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Urine dipstick for blood with microscopy - dipstick blood-positive but RBC-negative supports myoglobinuria rather than true haematuria (Harrison 22e p.343)., Urine sediment / microscopy for muddy-brown (pigmented) granular"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Apply evidence-based criteria to classify disease severity and organ dysfunction."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Interpreting a dipstick-positive 'haematuria' as bleeding from the urinary tract when no RBCs are seen on microscopy - this pattern reflects myoglobinuria in rhabdomyolysis (Harrison 22e p.343)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for rhabdomyolysis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "rhabdo-matrix",
+      "title": "Rhabdomyolysis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Myoglobinuria characteristically produces a positive urine dipstick for blood while urine microscopy shows no (or few) red cells",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Urine dipstick for blood with microscopy - dipstick blood-positive but RBC-negative supports myoglobinuria rather than true",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hyperkalaemia from release of intracellular potassium during muscle necrosis - predictable and potentially life-threatening",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a dipstick-positive 'haematuria' as bleeding from the urinary tract when no RBCs are seen on microscopy - this",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for rhabdomyolysis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "rhabdo-diagram",
+      "title": "Rhabdomyolysis: Abdominal & Hepatobiliary Diagnostic Schematic",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+      "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+      "annotations": [
+        {
+          "label": "Hepatobiliary Axis",
+          "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+        },
+        {
+          "label": "Pancreaticoduodenal",
+          "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+        },
+        {
+          "label": "Enteric Loops",
+          "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

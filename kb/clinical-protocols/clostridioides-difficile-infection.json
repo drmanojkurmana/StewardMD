@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, ICU, outpatient",
- "aliases": ["CDI", "C. diff", "C difficile", "Clostridium difficile", "CDAD", "pseudomembranous colitis", "antibiotic-associated diarrhoea", "fidaxomicin", "oral vancomycin"],
+ "aliases": [
+  "CDI",
+  "C. diff",
+  "C difficile",
+  "Clostridium difficile",
+  "CDAD",
+  "pseudomembranous colitis",
+  "antibiotic-associated diarrhoea",
+  "fidaxomicin",
+  "oral vancomycin"
+ ],
  "summary": "Test only new unexplained diarrhoea (3 or more unformed stools in 24 hours), stop the inciting antibiotic, and treat with fidaxomicin 200 mg twice daily or oral vancomycin 125 mg four times daily for 10 days. Fulminant disease needs high-dose enteral vancomycin, IV metronidazole and early surgical review.",
  "sections": [
   {
@@ -88,16 +98,148 @@
   }
  ],
  "drugs": [
-  { "name": "Fidaxomicin", "dose": "200 mg orally twice daily for 10 days; extended-pulsed: 200 mg twice daily days 1 to 5, then 200 mg once daily on alternate days days 7 to 25", "notes": "Preferred for initial and recurrent CDI (IDSA/SHEA 2021)." },
-  { "name": "Vancomycin (oral)", "dose": "125 mg orally four times daily for 10 days; fulminant: 500 mg orally or by nasogastric tube four times daily", "notes": "IV formulation can be reconstituted for oral use. Minimal systemic absorption." },
-  { "name": "Vancomycin (rectal)", "dose": "500 mg in about 100 mL 0.9% saline per rectum every 6 hours", "notes": "Fulminant CDI with ileus, in addition to oral or nasogastric vancomycin." },
-  { "name": "Metronidazole", "dose": "500 mg orally three times daily for 10 days (non-severe, only if others unavailable); 500 mg IV every 8 hours (fulminant, with enteral vancomycin)", "notes": "Neurotoxicity with repeated or prolonged use." },
-  { "name": "Rifaximin", "dose": "400 mg orally three times daily for 20 days", "notes": "After a 10-day vancomycin course for multiple recurrences." },
-  { "name": "Bezlotoxumab", "dose": "10 mg/kg IV, single infusion", "notes": "Adjunct for recurrence risk, where available; caution in heart failure." }
+  {
+   "name": "Fidaxomicin",
+   "dose": "200 mg orally twice daily for 10 days; extended-pulsed: 200 mg twice daily days 1 to 5, then 200 mg once daily on alternate days days 7 to 25",
+   "notes": "Preferred for initial and recurrent CDI (IDSA/SHEA 2021)."
+  },
+  {
+   "name": "Vancomycin (oral)",
+   "dose": "125 mg orally four times daily for 10 days; fulminant: 500 mg orally or by nasogastric tube four times daily",
+   "notes": "IV formulation can be reconstituted for oral use. Minimal systemic absorption."
+  },
+  {
+   "name": "Vancomycin (rectal)",
+   "dose": "500 mg in about 100 mL 0.9% saline per rectum every 6 hours",
+   "notes": "Fulminant CDI with ileus, in addition to oral or nasogastric vancomycin."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg orally three times daily for 10 days (non-severe, only if others unavailable); 500 mg IV every 8 hours (fulminant, with enteral vancomycin)",
+   "notes": "Neurotoxicity with repeated or prolonged use."
+  },
+  {
+   "name": "Rifaximin",
+   "dose": "400 mg orally three times daily for 20 days",
+   "notes": "After a 10-day vancomycin course for multiple recurrences."
+  },
+  {
+   "name": "Bezlotoxumab",
+   "dose": "10 mg/kg IV, single infusion",
+   "notes": "Adjunct for recurrence risk, where available; caution in heart failure."
+  }
  ],
  "sources": [
-  { "org": "IDSA / SHEA", "title": "Clinical practice guideline: 2021 focused update on management of Clostridioides difficile infection in adults", "year": 2021, "url": "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/" },
-  { "org": "IDSA / SHEA", "title": "Clinical practice guidelines for Clostridium difficile infection in adults and children: 2017 update", "year": 2018, "url": "https://www.idsociety.org/practice-guideline/clostridium-difficile/" }
+  {
+   "org": "IDSA / SHEA",
+   "title": "Clinical practice guideline: 2021 focused update on management of Clostridioides difficile infection in adults",
+   "year": 2021,
+   "url": "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/"
+  },
+  {
+   "org": "IDSA / SHEA",
+   "title": "Clinical practice guidelines for Clostridium difficile infection in adults and children: 2017 update",
+   "year": 2018,
+   "url": "https://www.idsociety.org/practice-guideline/clostridium-difficile/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "clostridioides-difficile-infection-pathway",
+   "title": "Clostridioides difficile infection (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect CDI with new unexplained diarrhoea (3 or more unformed stools in 24 hours) after antibiotics in the past 3 months or a hospital stay, especially in older, immunocompromised or PPI-treated patients.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Stop the inciting antibiotic as soon as possible; if antibiotics must continue, use the narrowest effective agent.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Test only unformed stool, and not within 48 hours of a laxative. Do not test asymptomatic patients, do not repeat within 7 days, and do not do a test of cure."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "First recurrence: fidaxomicin, either standard 10 days or extended-pulsed (200 mg twice daily on days 1 to 5, then 200 mg once daily on alternate days from day 7 to day 25), or a vancomycin taper and pulse."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Oral metronidazole for severe or fulminant CDI."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for clostridioides difficile infection (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "clostridioides-difficile-infection-summary-matrix",
+   "title": "Clostridioides difficile infection (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect CDI with new unexplained diarrhoea (3 or more unformed stools in 24 hours) after antibiotics in the past 3 months or a hospital",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Stop the inciting antibiotic as soon as possible; if antibiotics must continue, use the narrowest effective agent.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Test only unformed stool, and not within 48 hours of a laxative. Do not test asymptomatic patients, do not repeat within 7 days, and do not",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Fidaxomicin: 200 mg orally twice daily for 10 days; extended-pulsed: 200 mg twice daily days 1 to 5, then 200 mg once daily on alternate",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Oral metronidazole for severe or fulminant CDI.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for clostridioides difficile infection (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "clostridioides-difficile-infection-diagram",
+   "title": "Clostridioides difficile infection (adult): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

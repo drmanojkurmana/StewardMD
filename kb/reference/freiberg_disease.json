@@ -1,73 +1,168 @@
 {
-  "id": "freiberg_disease",
-  "name": "Freiberg disease",
-  "aliases": [
-    "Freiberg infraction",
-    "osteochondrosis of the metatarsal head"
+ "id": "freiberg_disease",
+ "name": "Freiberg disease",
+ "aliases": [
+  "Freiberg infraction",
+  "osteochondrosis of the metatarsal head"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Orthopaedics / Podiatric surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Orthopaedic references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An osteochondrosis (avascular necrosis) of a metatarsal head, most often the second metatarsal",
+   "It is the only osteochondrosis more common in females and typically presents in adolescence",
+   "Presents with forefoot pain, swelling and stiffness of the metatarsophalangeal joint, worse on weight bearing",
+   "Radiographs show flattening, sclerosis and later collapse and widening of the metatarsal head",
+   "Repetitive stress and the vulnerability of the metatarsal head blood supply are implicated",
+   "Early disease is managed conservatively with offloading; advanced disease with joint damage may need surgery"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Orthopaedics / Podiatric surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Orthopaedic references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An osteochondrosis (avascular necrosis) of a metatarsal head, most often the second metatarsal",
-      "It is the only osteochondrosis more common in females and typically presents in adolescence",
-      "Presents with forefoot pain, swelling and stiffness of the metatarsophalangeal joint, worse on weight bearing",
-      "Radiographs show flattening, sclerosis and later collapse and widening of the metatarsal head",
-      "Repetitive stress and the vulnerability of the metatarsal head blood supply are implicated",
-      "Early disease is managed conservatively with offloading; advanced disease with joint damage may need surgery"
+  "pathophysiology": "Freiberg disease is an osteochondrosis in which the subchondral bone of a metatarsal head (usually the second, the longest and most loaded) undergoes avascular necrosis. Repetitive microtrauma and mechanical overload, together with the tenuous blood supply of the metatarsal head, are thought to cause subchondral ischaemia, leading to bone collapse, articular surface flattening and fragmentation. Progressive joint incongruity results in pain, stiffness and secondary osteoarthritis of the metatarsophalangeal joint.",
+  "additionalDifferentials": [
+   "Metatarsal stress fracture",
+   "Morton neuroma",
+   "Metatarsophalangeal joint synovitis or osteoarthritis",
+   "Sesamoiditis",
+   "Inflammatory arthritis"
+  ],
+  "additionalInvestigations": [
+   "Weight-bearing foot radiographs",
+   "MRI in early disease before radiographic change",
+   "Clinical assessment of the affected metatarsophalangeal joint",
+   "Exclusion of stress fracture and neuroma",
+   "Assessment of foot biomechanics and footwear"
+  ],
+  "redFlags": [
+   "Advanced joint collapse and secondary arthritis",
+   "Features suggesting infection or inflammatory arthritis",
+   "Severe pain limiting weight bearing",
+   "Diagnostic uncertainty with stress fracture"
+  ],
+  "prognosis": "Early disease often responds to conservative offloading with a good outcome, whereas advanced collapse can cause persistent pain and metatarsophalangeal arthritis requiring surgery.",
+  "pitfalls": [
+   "Confusing it with a metatarsal stress fracture or Morton neuroma",
+   "Delaying diagnosis until joint collapse",
+   "Overlooking footwear and biomechanical contributors",
+   "Not imaging early forefoot pain with MRI when radiographs are normal"
+  ],
+  "references": [
+   "Orthopaedic reference texts (standard reference)",
+   "Foot and ankle surgery references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Conservative offloading in early disease with activity modification, stiff-soled footwear, metatarsal bars or pads and orthoses to reduce metatarsal head loading",
+   "A period of immobilisation or protected weight-bearing to allow revascularisation and healing",
+   "Simple analgesia and non-steroidal anti-inflammatory drugs for pain and synovitis",
+   "Surgical intervention for advanced disease with joint debridement, removal of loose bodies, dorsal closing-wedge osteotomy to bring healthy cartilage into the joint, or arthroplasty",
+   "Attention to foot biomechanics and footwear to prevent recurrent overload",
+   "Orthopaedic or podiatric follow-up to monitor for progression to metatarsophalangeal osteoarthritis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "freiberg_disease-pathway",
+   "title": "Freiberg disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An osteochondrosis (avascular necrosis) of a metatarsal head, most often the second metatarsal",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Advanced joint collapse and secondary arthritis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Weight-bearing foot radiographs, MRI in early disease before radiographic change, Clinical assessment of the affected metatarsophalangeal joint"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Conservative offloading in early disease with activity modification, stiff-soled footwear, metatarsal bars or pads and orthoses to reduce metatarsal head loading"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with a metatarsal stress fracture or Morton neuroma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of freiberg disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "freiberg_disease-matrix",
+   "title": "Freiberg disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An osteochondrosis (avascular necrosis) of a metatarsal head, most often the second metatarsal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Freiberg disease is an osteochondrosis in which the subchondral bone of a metatarsal head (usually the second, the longest and most loaded) undergoes avascular necrosis. Repetitive microtrauma and mechanical overload, together with the tenuous blood supply of the metatarsal head, are thought to cause subchondral ischaemia, leading to bone collapse, articular surface flattening and fragmentation. Progressive joint incongruity results in pain, stiffness and secondary osteoarthritis of the metatarsophalangeal joint.",
-    "additionalDifferentials": [
-      "Metatarsal stress fracture",
-      "Morton neuroma",
-      "Metatarsophalangeal joint synovitis or osteoarthritis",
-      "Sesamoiditis",
-      "Inflammatory arthritis"
+    [
+     "Key Investigations",
+     "Weight-bearing foot radiographs, MRI in early disease before radiographic change, Clinical assessment of the affected",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Weight-bearing foot radiographs",
-      "MRI in early disease before radiographic change",
-      "Clinical assessment of the affected metatarsophalangeal joint",
-      "Exclusion of stress fracture and neuroma",
-      "Assessment of foot biomechanics and footwear"
+    [
+     "Primary Differentials",
+     "Metatarsal stress fracture, Morton neuroma, Metatarsophalangeal joint synovitis or osteoarthritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Advanced joint collapse and secondary arthritis",
-      "Features suggesting infection or inflammatory arthritis",
-      "Severe pain limiting weight bearing",
-      "Diagnostic uncertainty with stress fracture"
+    [
+     "Management Strategy",
+     "Conservative offloading in early disease with activity modification, stiff-soled footwear, metatarsal bars or pads and orthoses",
+     "Core treatment modality"
     ],
-    "prognosis": "Early disease often responds to conservative offloading with a good outcome, whereas advanced collapse can cause persistent pain and metatarsophalangeal arthritis requiring surgery.",
-    "pitfalls": [
-      "Confusing it with a metatarsal stress fracture or Morton neuroma",
-      "Delaying diagnosis until joint collapse",
-      "Overlooking footwear and biomechanical contributors",
-      "Not imaging early forefoot pain with MRI when radiographs are normal"
-    ],
-    "references": [
-      "Orthopaedic reference texts (standard reference)",
-      "Foot and ankle surgery references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Conservative offloading in early disease with activity modification, stiff-soled footwear, metatarsal bars or pads and orthoses to reduce metatarsal head loading",
-      "A period of immobilisation or protected weight-bearing to allow revascularisation and healing",
-      "Simple analgesia and non-steroidal anti-inflammatory drugs for pain and synovitis",
-      "Surgical intervention for advanced disease with joint debridement, removal of loose bodies, dorsal closing-wedge osteotomy to bring healthy cartilage into the joint, or arthroplasty",
-      "Attention to foot biomechanics and footwear to prevent recurrent overload",
-      "Orthopaedic or podiatric follow-up to monitor for progression to metatarsophalangeal osteoarthritis"
+    [
+     "Clinical Pitfall",
+     "Confusing it with a metatarsal stress fracture or Morton neuroma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for freiberg disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "freiberg-disease-diagram",
+   "title": "Freiberg disease: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

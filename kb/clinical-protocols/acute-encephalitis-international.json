@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "acute-encephalitis-syndrome",
  "setting": "Emergency department, ward, ICU, PICU",
- "aliases": ["encephalitis", "HSV encephalitis", "herpes simplex encephalitis", "viral encephalitis", "aciclovir", "acyclovir", "autoimmune encephalitis", "anti-NMDA receptor encephalitis", "ADEM", "IDSA encephalitis", "ABN BIA encephalitis"],
+ "aliases": [
+  "encephalitis",
+  "HSV encephalitis",
+  "herpes simplex encephalitis",
+  "viral encephalitis",
+  "aciclovir",
+  "acyclovir",
+  "autoimmune encephalitis",
+  "anti-NMDA receptor encephalitis",
+  "ADEM",
+  "IDSA encephalitis",
+  "ABN BIA encephalitis"
+ ],
  "summary": "Altered mental status for 24 hours or more with fever, seizures, focal signs, CSF pleocytosis or imaging change. Start IV aciclovir 10 mg/kg 8-hourly (500 mg/m2 in children 3 months to 12 years, 20 mg/kg in neonates) at once, add antibacterials if meningitis is possible, do LP and MRI promptly, and treat confirmed HSV for 14 to 21 days.",
  "sections": [
   {
@@ -95,19 +107,165 @@
   }
  ],
  "drugs": [
-  { "name": "Aciclovir", "dose": "Adults and children over 12 years 10 mg/kg IV over 1 hour every 8 hours; children 3 months to 12 years 500 mg/m2 every 8 hours; neonates 20 mg/kg every 8 hours", "notes": "HSV: 14 to 21 days (21 days in neonates, children and the immunocompromised). Hydrate; reduce for renal impairment." },
-  { "name": "Aciclovir (VZV encephalitis)", "dose": "10 to 15 mg/kg IV every 8 hours for 10 to 14 days", "notes": "IDSA." },
-  { "name": "Ceftriaxone", "dose": "Adults 2 g IV every 12 hours; children 50 mg/kg every 12 hours (maximum 2 g per dose)", "notes": "Until bacterial meningitis is excluded." },
-  { "name": "Amoxicillin", "dose": "2 g IV every 4 hours", "notes": "Listeria cover in older or immunocompromised adults when meningitis is possible." },
-  { "name": "Doxycycline", "dose": "Adults 100 mg every 12 hours", "notes": "Suspected rickettsial or ehrlichial infection." },
-  { "name": "Ganciclovir plus foscarnet", "dose": "Ganciclovir 5 mg/kg IV every 12 hours plus foscarnet 60 mg/kg IV every 8 hours or 90 mg/kg IV every 12 hours, for 3 weeks", "notes": "CMV encephalitis, then maintenance. Renal dosing." },
-  { "name": "Methylprednisolone", "dose": "1 g IV once daily for 3 to 5 days", "notes": "ADEM; also first-line immunotherapy in autoimmune encephalitis under neurology." }
+  {
+   "name": "Aciclovir",
+   "dose": "Adults and children over 12 years 10 mg/kg IV over 1 hour every 8 hours; children 3 months to 12 years 500 mg/m2 every 8 hours; neonates 20 mg/kg every 8 hours",
+   "notes": "HSV: 14 to 21 days (21 days in neonates, children and the immunocompromised). Hydrate; reduce for renal impairment."
+  },
+  {
+   "name": "Aciclovir (VZV encephalitis)",
+   "dose": "10 to 15 mg/kg IV every 8 hours for 10 to 14 days",
+   "notes": "IDSA."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "Adults 2 g IV every 12 hours; children 50 mg/kg every 12 hours (maximum 2 g per dose)",
+   "notes": "Until bacterial meningitis is excluded."
+  },
+  {
+   "name": "Amoxicillin",
+   "dose": "2 g IV every 4 hours",
+   "notes": "Listeria cover in older or immunocompromised adults when meningitis is possible."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "Adults 100 mg every 12 hours",
+   "notes": "Suspected rickettsial or ehrlichial infection."
+  },
+  {
+   "name": "Ganciclovir plus foscarnet",
+   "dose": "Ganciclovir 5 mg/kg IV every 12 hours plus foscarnet 60 mg/kg IV every 8 hours or 90 mg/kg IV every 12 hours, for 3 weeks",
+   "notes": "CMV encephalitis, then maintenance. Renal dosing."
+  },
+  {
+   "name": "Methylprednisolone",
+   "dose": "1 g IV once daily for 3 to 5 days",
+   "notes": "ADEM; also first-line immunotherapy in autoimmune encephalitis under neurology."
+  }
  ],
  "sources": [
-  { "org": "IDSA", "title": "The management of encephalitis: clinical practice guidelines by the Infectious Diseases Society of America", "year": 2008, "url": "https://academic.oup.com/cid/article/47/3/303/313455" },
-  { "org": "ABN / BIA", "title": "Management of suspected viral encephalitis in adults: Association of British Neurologists and British Infection Association national guidelines", "year": 2012, "url": "https://doi.org/10.1016/j.jinf.2011.11.014" },
-  { "org": "ABN / BPAIIG", "title": "Management of suspected viral encephalitis in children: national guidelines", "year": 2012, "url": "https://doi.org/10.1016/j.jinf.2011.11.013" },
-  { "org": "International Encephalitis Consortium", "title": "Case definitions, diagnostic algorithms, and priorities in encephalitis: consensus statement", "year": 2013, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3783060/" }
+  {
+   "org": "IDSA",
+   "title": "The management of encephalitis: clinical practice guidelines by the Infectious Diseases Society of America",
+   "year": 2008,
+   "url": "https://academic.oup.com/cid/article/47/3/303/313455"
+  },
+  {
+   "org": "ABN / BIA",
+   "title": "Management of suspected viral encephalitis in adults: Association of British Neurologists and British Infection Association national guidelines",
+   "year": 2012,
+   "url": "https://doi.org/10.1016/j.jinf.2011.11.014"
+  },
+  {
+   "org": "ABN / BPAIIG",
+   "title": "Management of suspected viral encephalitis in children: national guidelines",
+   "year": 2012,
+   "url": "https://doi.org/10.1016/j.jinf.2011.11.013"
+  },
+  {
+   "org": "International Encephalitis Consortium",
+   "title": "Case definitions, diagnostic algorithms, and priorities in encephalitis: consensus statement",
+   "year": 2013,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3783060/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-encephalitis-international-pathway",
+   "title": "Acute encephalitis (IDSA and BIA/ABN) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Major criterion: altered mental status (reduced or altered consciousness, lethargy or personality change) lasting 24 hours or more with no alternative cause.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Airway, breathing and circulation; check capillary glucose; treat seizures with a benzodiazepine then a second-line agent. Intubate for GCS 8 or less, loss of airway reflexes or status epilepticus.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Lumbar puncture as soon as it is safe, aiming within 6 hours (BIA/ABN). Image first if consciousness is reduced or fluctuating, there are focal signs, papilloedema, continuous or uncontrolled seizures, or immunocompromise; correct"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Confirmed HSV encephalitis: aciclovir 10 mg/kg IV 8-hourly for 14 to 21 days (IDSA); BIA/ABN advise at least 14 days in immunocompetent adults and 21 days if immunocompromised, repeating LP at the end and continuing if HSV PCR is still"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Neurological observations with GCS; continuous EEG where available if consciousness is unexplained or fluctuating."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute encephalitis (idsa and bia/abn)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-encephalitis-international-summary-matrix",
+   "title": "Acute encephalitis (IDSA and BIA/ABN) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Major criterion: altered mental status (reduced or altered consciousness, lethargy or personality change) lasting 24 hours or more with no",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Airway, breathing and circulation; check capillary glucose; treat seizures with a benzodiazepine then a second-line agent. Intubate for GCS",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Lumbar puncture as soon as it is safe, aiming within 6 hours (BIA/ABN). Image first if consciousness is reduced or fluctuating, there are",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Aciclovir: Adults and children over 12 years 10 mg/kg IV over 1 hour every 8 hours; children 3 months to 12 years 500 mg/m2 every 8 hours;",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying aciclovir for CT, LP or MRI.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute encephalitis (idsa and bia/abn)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-encephalitis-international-diagram",
+   "title": "Acute encephalitis (IDSA and BIA/ABN): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, outpatient, travel clinic",
- "aliases": ["returned traveller", "returning traveler", "imported fever", "travel fever", "febrile traveller", "imported malaria", "VHF", "viral haemorrhagic fever", "HCID", "Ebola", "Lassa", "tropical fever"],
+ "aliases": [
+  "returned traveller",
+  "returning traveler",
+  "imported fever",
+  "travel fever",
+  "febrile traveller",
+  "imported malaria",
+  "VHF",
+  "viral haemorrhagic fever",
+  "HCID",
+  "Ebola",
+  "Lassa",
+  "tropical fever"
+ ],
  "summary": "Exclude malaria first in anyone febrile after travel to an endemic area in the past year, risk-assess for viral haemorrhagic fever if illness began within 21 days of exposure, use itinerary and incubation period to target dengue, enteric fever and rickettsial infection, and admit readily.",
  "sections": [
   {
@@ -100,21 +113,175 @@
   }
  ],
  "drugs": [
-  { "name": "Artesunate", "dose": "2.4 mg/kg IV at 0, 12 and 24 hours", "notes": "Severe malaria of any species; complete with a full oral course once parasitaemia is 1% or less." },
-  { "name": "Artemether-lumefantrine", "dose": "4 tablets (20/120 mg each) per dose: 0 and 8 hours, then twice daily; CDC now 5 days (10 doses) for P. falciparum", "notes": "Take with fatty food. Other guidelines may still use a 3-day course; follow local guidance." },
-  { "name": "Atovaquone-proguanil", "dose": "4 adult tablets (250/100 mg each) orally once daily for 3 days", "notes": "Uncomplicated falciparum; take with fatty food." },
-  { "name": "Chloroquine", "dose": "600 mg base, then 300 mg base at 6, 24 and 48 hours", "notes": "Vivax or ovale from chloroquine-sensitive areas." },
-  { "name": "Primaquine", "dose": "30 mg base orally daily for 14 days", "notes": "Radical cure of vivax or ovale; check G6PD; not in pregnancy." },
-  { "name": "Ceftriaxone", "dose": "2 g IV once daily", "notes": "Suspected enteric fever or sepsis; meningitis needs meningitis dosing." },
-  { "name": "Azithromycin", "dose": "1 g orally once daily", "notes": "Uncomplicated enteric fever, including XDR typhoid from Pakistan." },
-  { "name": "Meropenem", "dose": "1 g IV 8-hourly", "notes": "Complicated XDR typhoid; adjust for renal function." },
-  { "name": "Doxycycline", "dose": "100 mg orally twice daily", "notes": "Rickettsial infection, scrub typhus, leptospirosis." }
+  {
+   "name": "Artesunate",
+   "dose": "2.4 mg/kg IV at 0, 12 and 24 hours",
+   "notes": "Severe malaria of any species; complete with a full oral course once parasitaemia is 1% or less."
+  },
+  {
+   "name": "Artemether-lumefantrine",
+   "dose": "4 tablets (20/120 mg each) per dose: 0 and 8 hours, then twice daily; CDC now 5 days (10 doses) for P. falciparum",
+   "notes": "Take with fatty food. Other guidelines may still use a 3-day course; follow local guidance."
+  },
+  {
+   "name": "Atovaquone-proguanil",
+   "dose": "4 adult tablets (250/100 mg each) orally once daily for 3 days",
+   "notes": "Uncomplicated falciparum; take with fatty food."
+  },
+  {
+   "name": "Chloroquine",
+   "dose": "600 mg base, then 300 mg base at 6, 24 and 48 hours",
+   "notes": "Vivax or ovale from chloroquine-sensitive areas."
+  },
+  {
+   "name": "Primaquine",
+   "dose": "30 mg base orally daily for 14 days",
+   "notes": "Radical cure of vivax or ovale; check G6PD; not in pregnancy."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV once daily",
+   "notes": "Suspected enteric fever or sepsis; meningitis needs meningitis dosing."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "1 g orally once daily",
+   "notes": "Uncomplicated enteric fever, including XDR typhoid from Pakistan."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV 8-hourly",
+   "notes": "Complicated XDR typhoid; adjust for renal function."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally twice daily",
+   "notes": "Rickettsial infection, scrub typhus, leptospirosis."
+  }
  ],
  "sources": [
-  { "org": "CDC", "title": "Post-travel evaluation of the ill traveler, CDC Yellow Book 2026", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/post-travel-evaluation-of-the-ill-traveler.html" },
-  { "org": "UK DHSC / ACDP", "title": "Viral haemorrhagic fever: ACDP algorithm and guidance on management of patients", "year": 2026, "url": "https://www.gov.uk/government/publications/viral-haemorrhagic-fever-algorithm-and-guidance-on-management-of-patients" },
-  { "org": "CDC", "title": "Malaria clinical guidance: treatment tables (Appendix A)", "year": 2026, "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html" },
-  { "org": "CDC", "title": "Typhoid and paratyphoid fever, CDC Yellow Book 2026", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html" }
+  {
+   "org": "CDC",
+   "title": "Post-travel evaluation of the ill traveler, CDC Yellow Book 2026",
+   "year": 2025,
+   "url": "https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/post-travel-evaluation-of-the-ill-traveler.html"
+  },
+  {
+   "org": "UK DHSC / ACDP",
+   "title": "Viral haemorrhagic fever: ACDP algorithm and guidance on management of patients",
+   "year": 2026,
+   "url": "https://www.gov.uk/government/publications/viral-haemorrhagic-fever-algorithm-and-guidance-on-management-of-patients"
+  },
+  {
+   "org": "CDC",
+   "title": "Malaria clinical guidance: treatment tables (Appendix A)",
+   "year": 2026,
+   "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html"
+  },
+  {
+   "org": "CDC",
+   "title": "Typhoid and paratyphoid fever, CDC Yellow Book 2026",
+   "year": 2025,
+   "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "fever-in-returned-traveller-pathway",
+   "title": "Fever in the returned traveller (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Itinerary at sub-national level with dates, accommodation, activities (freshwater, animals, insect or tick bites, sex, healthcare abroad), malaria chemoprophylaxis adherence and vaccinations. Over 90% of US residents with travel-associated",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Before routine work-up, assess VHF risk: travel to a VHF area, contact with a case or their body fluids, or laboratory work with VHF agents within 21 days before onset. Many VHF patients are afebrile at presentation, so include any acute",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CBC with differential, creatinine, electrolytes, liver tests, glucose, coagulation screen, CRP and urinalysis. Leucopenia and thrombocytopenia suggest dengue, malaria or rickettsial infection."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Suspected enteric fever after blood cultures: fluoroquinolone resistance is usual in South Asia, so use ceftriaxone 2 g IV once daily or azithromycin 1 g orally once daily."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Excluding malaria on a single negative film, or because the traveller took prophylaxis."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for fever in the returned traveller (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fever-in-returned-traveller-summary-matrix",
+   "title": "Fever in the returned traveller (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Itinerary at sub-national level with dates, accommodation, activities (freshwater, animals, insect or tick bites, sex, healthcare abroad),",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Before routine work-up, assess VHF risk: travel to a VHF area, contact with a case or their body fluids, or laboratory work with VHF agents",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CBC with differential, creatinine, electrolytes, liver tests, glucose, coagulation screen, CRP and urinalysis. Leucopenia and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Artesunate: 2.4 mg/kg IV at 0, 12 and 24 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Excluding malaria on a single negative film, or because the traveller took prophylaxis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for fever in the returned traveller (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fever-in-returned-traveller-diagram",
+   "title": "Fever in the returned traveller (adult): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

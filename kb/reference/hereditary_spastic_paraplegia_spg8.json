@@ -1,80 +1,175 @@
 {
-  "id": "hereditary_spastic_paraplegia_spg8",
-  "name": "HSP SPG8 (WASHC5)",
-  "aliases": [
-    "SPG8",
-    "WASHC5-related hereditary spastic paraplegia",
-    "strumpellin",
-    "KIAA0196",
-    "locus 8q24.13"
+ "id": "hereditary_spastic_paraplegia_spg8",
+ "name": "HSP SPG8 (WASHC5)",
+ "aliases": [
+  "SPG8",
+  "WASHC5-related hereditary spastic paraplegia",
+  "strumpellin",
+  "KIAA0196",
+  "locus 8q24.13"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Bradley Neurology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant, typically pure spastic paraplegia caused by variants in WASHC5, which encodes strumpellin, a component of the endosomal WASH complex",
+   "Presentation is usually adult-onset with progressive lower-limb spasticity, weakness and urinary urgency",
+   "SPG8 is often described as relatively severe and comparatively rapidly progressive within the pure HSP group",
+   "Reduced vibration sense at the ankles is common, but overt sensory ataxia is unusual",
+   "Strumpellin participates in actin-mediated endosomal sorting and recycling, tying SPG8 to intracellular trafficking defects",
+   "Diagnosis rests on gene-panel testing once acquired myelopathies have been excluded",
+   "Treatment is symptomatic, with physiotherapy, spasticity control, orthoses and bladder management"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Bradley Neurology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant, typically pure spastic paraplegia caused by variants in WASHC5, which encodes strumpellin, a component of the endosomal WASH complex",
-      "Presentation is usually adult-onset with progressive lower-limb spasticity, weakness and urinary urgency",
-      "SPG8 is often described as relatively severe and comparatively rapidly progressive within the pure HSP group",
-      "Reduced vibration sense at the ankles is common, but overt sensory ataxia is unusual",
-      "Strumpellin participates in actin-mediated endosomal sorting and recycling, tying SPG8 to intracellular trafficking defects",
-      "Diagnosis rests on gene-panel testing once acquired myelopathies have been excluded",
-      "Treatment is symptomatic, with physiotherapy, spasticity control, orthoses and bladder management"
+  "pathophysiology": "SPG8 is caused by heterozygous variants in WASHC5, the gene for strumpellin, a scaffolding subunit of the WASH (Wiskott-Aldrich syndrome protein and SCAR homologue) complex. This complex nucleates branched actin on endosomal membranes to drive sorting and recycling of receptors and other cargo. Disruption of strumpellin impairs endosomal trafficking and membrane homeostasis within neurons, and the longest corticospinal axons are especially dependent on efficient cargo handling. The resulting distal axonopathy underlies the progressive, often relatively severe spastic paraparesis characteristic of SPG8.",
+  "additionalDifferentials": [
+   "SPG4 and other pure autosomal dominant hereditary spastic paraplegias",
+   "Primary lateral sclerosis",
+   "Compressive cervical or thoracic myelopathy",
+   "Multiple sclerosis with a progressive spinal course",
+   "Adrenomyeloneuropathy",
+   "Vitamin B12 or copper deficiency myelopathy"
+  ],
+  "additionalInvestigations": [
+   "WASHC5 sequencing within a hereditary spastic paraplegia gene panel",
+   "MRI of brain and whole spine to exclude structural and demyelinating disease",
+   "Nerve conduction studies and evoked potentials to characterise long-tract involvement",
+   "Vitamin B12, copper and metabolic myelopathy screen",
+   "Urodynamic evaluation for bladder symptoms",
+   "Family assessment to confirm the dominant pattern"
+  ],
+  "redFlags": [
+   "Rapid loss of ambulation prompting exclusion of a treatable structural cause",
+   "A distinct sensory level suggesting an acquired myelopathy",
+   "Bulbar involvement or fasciculations raising concern for motor neurone disease",
+   "Acute urinary retention requiring urgent assessment"
+  ],
+  "prognosis": "SPG8 is generally slowly progressive but is regarded as one of the more disabling pure hereditary spastic paraplegias, and a proportion of patients need walking aids within one to two decades of onset.",
+  "pitfalls": [
+   "Assuming all pure HSP is slowly progressive and delaying supportive input in a more aggressive SPG8 course",
+   "Failing to exclude a compressive myelopathy before attributing symptoms to a genetic cause",
+   "Overlooking WASHC5 on smaller gene panels focused on the commonest loci",
+   "Misinterpreting mild sensory signs as evidence against hereditary spastic paraplegia"
+  ],
+  "references": [
+   "GeneReviews: Hereditary Spastic Paraplegia Overview",
+   "Bradley and Daroff's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-modifying treatment is available; reduce spasticity with oral agents such as baclofen or tizanidine, focal botulinum toxin for spastic muscles, and consider intrathecal baclofen in severe disability",
+   "Structured physiotherapy with stretching, strengthening, ankle-foot orthoses and mobility aids to maintain gait and prevent contractures",
+   "Manage the characteristic urinary urgency with antimuscarinic therapy, urodynamic assessment and continence support",
+   "Occupational therapy and home-adaptation input given the comparatively rapid, disabling progression of this subtype",
+   "Surveillance of walking capacity, falls risk and bladder function to time provision of aids and interventions",
+   "Multidisciplinary follow-up across neurology, physiotherapy, occupational therapy and orthotics",
+   "Offer genetic counselling and predictive testing of relatives, reflecting autosomal dominant inheritance of WASHC5 variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg8-pathway",
+   "title": "HSP SPG8 (WASHC5): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant, typically pure spastic paraplegia caused by variants in WASHC5, which encodes strumpellin, a component of the endosomal WASH complex",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid loss of ambulation prompting exclusion of a treatable structural cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: WASHC5 sequencing within a hereditary spastic paraplegia gene panel, MRI of brain and whole spine to exclude structural and demyelinating disease, Nerve conduction studies and evoked potentials to characterise long-tract"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-modifying treatment is available; reduce spasticity with oral agents such as baclofen or tizanidine, focal botulinum toxin for spastic muscles, and consider intrathecal baclofen in severe disability"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all pure HSP is slowly progressive and delaying supportive input in a more aggressive SPG8 course"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hsp spg8 (washc5)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg8-matrix",
+   "title": "HSP SPG8 (WASHC5): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant, typically pure spastic paraplegia caused by variants in WASHC5, which encodes strumpellin, a component of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SPG8 is caused by heterozygous variants in WASHC5, the gene for strumpellin, a scaffolding subunit of the WASH (Wiskott-Aldrich syndrome protein and SCAR homologue) complex. This complex nucleates branched actin on endosomal membranes to drive sorting and recycling of receptors and other cargo. Disruption of strumpellin impairs endosomal trafficking and membrane homeostasis within neurons, and the longest corticospinal axons are especially dependent on efficient cargo handling. The resulting distal axonopathy underlies the progressive, often relatively severe spastic paraparesis characteristic of SPG8.",
-    "additionalDifferentials": [
-      "SPG4 and other pure autosomal dominant hereditary spastic paraplegias",
-      "Primary lateral sclerosis",
-      "Compressive cervical or thoracic myelopathy",
-      "Multiple sclerosis with a progressive spinal course",
-      "Adrenomyeloneuropathy",
-      "Vitamin B12 or copper deficiency myelopathy"
+    [
+     "Key Investigations",
+     "WASHC5 sequencing within a hereditary spastic paraplegia gene panel, MRI of brain and whole spine to exclude structural and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "WASHC5 sequencing within a hereditary spastic paraplegia gene panel",
-      "MRI of brain and whole spine to exclude structural and demyelinating disease",
-      "Nerve conduction studies and evoked potentials to characterise long-tract involvement",
-      "Vitamin B12, copper and metabolic myelopathy screen",
-      "Urodynamic evaluation for bladder symptoms",
-      "Family assessment to confirm the dominant pattern"
+    [
+     "Primary Differentials",
+     "SPG4 and other pure autosomal dominant hereditary spastic paraplegias, Primary lateral sclerosis, Compressive cervical or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid loss of ambulation prompting exclusion of a treatable structural cause",
-      "A distinct sensory level suggesting an acquired myelopathy",
-      "Bulbar involvement or fasciculations raising concern for motor neurone disease",
-      "Acute urinary retention requiring urgent assessment"
+    [
+     "Management Strategy",
+     "No disease-modifying treatment is available; reduce spasticity with oral agents such as baclofen or tizanidine, focal botulinum",
+     "Core treatment modality"
     ],
-    "prognosis": "SPG8 is generally slowly progressive but is regarded as one of the more disabling pure hereditary spastic paraplegias, and a proportion of patients need walking aids within one to two decades of onset.",
-    "pitfalls": [
-      "Assuming all pure HSP is slowly progressive and delaying supportive input in a more aggressive SPG8 course",
-      "Failing to exclude a compressive myelopathy before attributing symptoms to a genetic cause",
-      "Overlooking WASHC5 on smaller gene panels focused on the commonest loci",
-      "Misinterpreting mild sensory signs as evidence against hereditary spastic paraplegia"
-    ],
-    "references": [
-      "GeneReviews: Hereditary Spastic Paraplegia Overview",
-      "Bradley and Daroff's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-modifying treatment is available; reduce spasticity with oral agents such as baclofen or tizanidine, focal botulinum toxin for spastic muscles, and consider intrathecal baclofen in severe disability",
-      "Structured physiotherapy with stretching, strengthening, ankle-foot orthoses and mobility aids to maintain gait and prevent contractures",
-      "Manage the characteristic urinary urgency with antimuscarinic therapy, urodynamic assessment and continence support",
-      "Occupational therapy and home-adaptation input given the comparatively rapid, disabling progression of this subtype",
-      "Surveillance of walking capacity, falls risk and bladder function to time provision of aids and interventions",
-      "Multidisciplinary follow-up across neurology, physiotherapy, occupational therapy and orthotics",
-      "Offer genetic counselling and predictive testing of relatives, reflecting autosomal dominant inheritance of WASHC5 variants"
+    [
+     "Clinical Pitfall",
+     "Assuming all pure HSP is slowly progressive and delaying supportive input in a more aggressive SPG8 course",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hsp spg8 (washc5)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-spastic-paraplegia-spg8-diagram",
+   "title": "HSP SPG8 (WASHC5): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

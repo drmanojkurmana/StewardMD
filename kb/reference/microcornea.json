@@ -1,72 +1,167 @@
 {
-  "id": "microcornea",
-  "name": "Microcornea",
-  "aliases": [
-    "small cornea"
+ "id": "microcornea",
+ "name": "Microcornea",
+ "aliases": [
+  "small cornea"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Anterior segment",
+ "specialty": "Ophthalmology / Paediatric ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Paediatric ophthalmology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A congenitally small cornea (reduced horizontal diameter) in an eye that is otherwise of relatively normal size",
+   "It is distinct from microphthalmos, in which the whole globe is small, and from nanophthalmos",
+   "The cornea is usually clear and often flatter than normal, tending toward hyperopia",
+   "It may be isolated or associated with other anterior segment anomalies and syndromes",
+   "There is an increased long-term risk of angle-closure and other glaucoma",
+   "Management centres on refractive correction, amblyopia treatment and lifelong glaucoma surveillance"
   ],
-  "class": "non_infective",
-  "system": "Eye / Anterior segment",
-  "specialty": "Ophthalmology / Paediatric ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Paediatric ophthalmology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A congenitally small cornea (reduced horizontal diameter) in an eye that is otherwise of relatively normal size",
-      "It is distinct from microphthalmos, in which the whole globe is small, and from nanophthalmos",
-      "The cornea is usually clear and often flatter than normal, tending toward hyperopia",
-      "It may be isolated or associated with other anterior segment anomalies and syndromes",
-      "There is an increased long-term risk of angle-closure and other glaucoma",
-      "Management centres on refractive correction, amblyopia treatment and lifelong glaucoma surveillance"
+  "pathophysiology": "Microcornea arises from arrest of corneal growth in the fifth month of gestation or from overgrowth of the surrounding optic cup rim, producing a cornea of reduced diameter. The small, often flat cornea reduces refractive power, typically causing hyperopia, and the associated crowded anterior segment anatomy predisposes to angle-closure glaucoma. It can occur in isolation or as part of anterior segment dysgenesis and various systemic syndromes, reflecting shared developmental pathways.",
+  "additionalDifferentials": [
+   "Microphthalmos or nanophthalmos",
+   "Anterior segment dysgenesis syndromes",
+   "Congenital glaucoma (which enlarges the cornea, the opposite finding)",
+   "Sclerocornea",
+   "Syndromic associations (for example with cataract or coloboma)"
+  ],
+  "additionalInvestigations": [
+   "Measurement of corneal diameter and axial length to distinguish from microphthalmos",
+   "Refraction and cycloplegic assessment",
+   "Gonioscopy and intraocular pressure for glaucoma risk",
+   "Assessment for associated ocular and systemic anomalies",
+   "Amblyopia evaluation in children"
+  ],
+  "redFlags": [
+   "Signs of angle-closure or other glaucoma",
+   "Associated cataract, coloboma or dysgenesis",
+   "Amblyopia in childhood",
+   "Syndromic features"
+  ],
+  "prognosis": "Isolated microcornea generally has good vision with refractive correction; the main long-term concern is glaucoma, and prognosis worsens with associated anomalies.",
+  "pitfalls": [
+   "Confusing microcornea with microphthalmos",
+   "Overlooking the elevated glaucoma risk",
+   "Neglecting amblyopia management",
+   "Missing associated anterior segment or systemic anomalies"
+  ],
+  "references": [
+   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Correct the associated refractive error, commonly hyperopia, with spectacles or contact lenses",
+   "Detect and treat amblyopia early in children with refractive correction and occlusion (patching) therapy",
+   "Undertake lifelong glaucoma surveillance with intraocular pressure measurement and gonioscopy given the angle-closure risk",
+   "Treat established glaucoma with topical pressure-lowering agents, and consider laser peripheral iridotomy or surgery for angle closure",
+   "Screen for and manage associated anterior segment dysgenesis and systemic syndromic features",
+   "Provide long-term paediatric ophthalmology follow-up to safeguard visual development"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "microcornea-pathway",
+   "title": "Microcornea: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A congenitally small cornea (reduced horizontal diameter) in an eye that is otherwise of relatively normal size",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of angle-closure or other glaucoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Measurement of corneal diameter and axial length to distinguish from microphthalmos, Refraction and cycloplegic assessment, Gonioscopy and intraocular pressure for glaucoma risk"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Correct the associated refractive error, commonly hyperopia, with spectacles or contact lenses"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing microcornea with microphthalmos"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of microcornea."
+  }
+ ],
+ "tables": [
+  {
+   "id": "microcornea-matrix",
+   "title": "Microcornea: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A congenitally small cornea (reduced horizontal diameter) in an eye that is otherwise of relatively normal size",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Microcornea arises from arrest of corneal growth in the fifth month of gestation or from overgrowth of the surrounding optic cup rim, producing a cornea of reduced diameter. The small, often flat cornea reduces refractive power, typically causing hyperopia, and the associated crowded anterior segment anatomy predisposes to angle-closure glaucoma. It can occur in isolation or as part of anterior segment dysgenesis and various systemic syndromes, reflecting shared developmental pathways.",
-    "additionalDifferentials": [
-      "Microphthalmos or nanophthalmos",
-      "Anterior segment dysgenesis syndromes",
-      "Congenital glaucoma (which enlarges the cornea, the opposite finding)",
-      "Sclerocornea",
-      "Syndromic associations (for example with cataract or coloboma)"
+    [
+     "Key Investigations",
+     "Measurement of corneal diameter and axial length to distinguish from microphthalmos, Refraction and cycloplegic assessment,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Measurement of corneal diameter and axial length to distinguish from microphthalmos",
-      "Refraction and cycloplegic assessment",
-      "Gonioscopy and intraocular pressure for glaucoma risk",
-      "Assessment for associated ocular and systemic anomalies",
-      "Amblyopia evaluation in children"
+    [
+     "Primary Differentials",
+     "Microphthalmos or nanophthalmos, Anterior segment dysgenesis syndromes, Congenital glaucoma (which enlarges the cornea, the",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of angle-closure or other glaucoma",
-      "Associated cataract, coloboma or dysgenesis",
-      "Amblyopia in childhood",
-      "Syndromic features"
+    [
+     "Management Strategy",
+     "Correct the associated refractive error, commonly hyperopia, with spectacles or contact lenses",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated microcornea generally has good vision with refractive correction; the main long-term concern is glaucoma, and prognosis worsens with associated anomalies.",
-    "pitfalls": [
-      "Confusing microcornea with microphthalmos",
-      "Overlooking the elevated glaucoma risk",
-      "Neglecting amblyopia management",
-      "Missing associated anterior segment or systemic anomalies"
-    ],
-    "references": [
-      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Correct the associated refractive error, commonly hyperopia, with spectacles or contact lenses",
-      "Detect and treat amblyopia early in children with refractive correction and occlusion (patching) therapy",
-      "Undertake lifelong glaucoma surveillance with intraocular pressure measurement and gonioscopy given the angle-closure risk",
-      "Treat established glaucoma with topical pressure-lowering agents, and consider laser peripheral iridotomy or surgery for angle closure",
-      "Screen for and manage associated anterior segment dysgenesis and systemic syndromic features",
-      "Provide long-term paediatric ophthalmology follow-up to safeguard visual development"
+    [
+     "Clinical Pitfall",
+     "Confusing microcornea with microphthalmos",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for microcornea."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "microcornea-diagram",
+   "title": "Microcornea: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

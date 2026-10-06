@@ -5,7 +5,18 @@
  "population": "Adults and children",
  "basis": "india",
  "setting": "Primary health centre, emergency department, PICU/ICU",
- "aliases": ["scorpion bite", "scorpion envenomation", "Indian red scorpion", "Mesobuthus tamulus", "prazosin", "scorpion antivenom", "SAV", "anti scorpion venom", "autonomic storm", "scorpion pulmonary oedema"],
+ "aliases": [
+  "scorpion bite",
+  "scorpion envenomation",
+  "Indian red scorpion",
+  "Mesobuthus tamulus",
+  "prazosin",
+  "scorpion antivenom",
+  "SAV",
+  "anti scorpion venom",
+  "autonomic storm",
+  "scorpion pulmonary oedema"
+ ],
  "summary": "Indian red scorpion stings cause an autonomic storm with myocardial dysfunction and pulmonary oedema, most dangerous in children. Give oral prazosin (30 mcg/kg in children, 500 mcg in adults, repeated 3-hourly by response) and scorpion antivenom 3 vials IV for grade 2 or higher; treat pulmonary oedema with dobutamine and vasodilators.",
  "sections": [
   {
@@ -82,18 +93,159 @@
   }
  ],
  "drugs": [
-  { "name": "Prazosin", "dose": "Children 30 mcg/kg orally; adults 500 mcg (0.5 mg) orally; repeat every 3 hours according to response", "notes": "Plain 1 mg tablets; keep supine after doses; usually 4 doses or fewer." },
-  { "name": "Scorpion antivenom (Haffkine monovalent)", "dose": "30 mL (3 vials) in 100 mL 0.9% saline IV over 30 minutes, single dose", "notes": "Grade 2 and above, any age or weight." },
-  { "name": "Dobutamine", "dose": "5 to 15 mcg/kg/min IV infusion", "notes": "Myocardial dysfunction, cardiogenic shock." },
-  { "name": "Sodium nitroprusside", "dose": "0.3 to 5 mcg/kg/min IV infusion", "notes": "Pulmonary oedema; start prazosin 1 hour before stopping." },
-  { "name": "Nitroglycerine", "dose": "Adults 10 mcg/min IV, double every 5 minutes to effect; children 0.1 to 1 mcg/kg/min", "notes": "Keep systolic BP above 90 mmHg in adults." },
-  { "name": "Paracetamol", "dose": "15 mg/kg orally or IV every 4 to 6 hours (adult 1 g; max 4 g/day)", "notes": "Local pain." },
-  { "name": "Midazolam", "dose": "0.05 to 0.1 mg/kg IV", "notes": "Agitation; watch breathing." }
+  {
+   "name": "Prazosin",
+   "dose": "Children 30 mcg/kg orally; adults 500 mcg (0.5 mg) orally; repeat every 3 hours according to response",
+   "notes": "Plain 1 mg tablets; keep supine after doses; usually 4 doses or fewer."
+  },
+  {
+   "name": "Scorpion antivenom (Haffkine monovalent)",
+   "dose": "30 mL (3 vials) in 100 mL 0.9% saline IV over 30 minutes, single dose",
+   "notes": "Grade 2 and above, any age or weight."
+  },
+  {
+   "name": "Dobutamine",
+   "dose": "5 to 15 mcg/kg/min IV infusion",
+   "notes": "Myocardial dysfunction, cardiogenic shock."
+  },
+  {
+   "name": "Sodium nitroprusside",
+   "dose": "0.3 to 5 mcg/kg/min IV infusion",
+   "notes": "Pulmonary oedema; start prazosin 1 hour before stopping."
+  },
+  {
+   "name": "Nitroglycerine",
+   "dose": "Adults 10 mcg/min IV, double every 5 minutes to effect; children 0.1 to 1 mcg/kg/min",
+   "notes": "Keep systolic BP above 90 mmHg in adults."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "15 mg/kg orally or IV every 4 to 6 hours (adult 1 g; max 4 g/day)",
+   "notes": "Local pain."
+  },
+  {
+   "name": "Midazolam",
+   "dose": "0.05 to 0.1 mg/kg IV",
+   "notes": "Agitation; watch breathing."
+  }
  ],
  "sources": [
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Scorpion Envenomation", "year": 2022, "url": "https://iapindia.org/pdf/Ch-085-Scorpion-Envenomation.pdf" },
-  { "org": "NEJM (Isbister and Bawaskar)", "title": "Scorpion Envenomation", "year": 2014, "url": "https://www.nejm.org/doi/full/10.1056/NEJMra1401108" },
-  { "org": "Arch Dis Child (Pandi et al., JIPMER)", "title": "Efficacy of scorpion antivenom plus prazosin versus prazosin alone for Mesobuthus tamulus scorpion sting envenomation in children: a randomised controlled trial", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/24550184/" }
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Scorpion Envenomation",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/Ch-085-Scorpion-Envenomation.pdf"
+  },
+  {
+   "org": "NEJM (Isbister and Bawaskar)",
+   "title": "Scorpion Envenomation",
+   "year": 2014,
+   "url": "https://www.nejm.org/doi/full/10.1056/NEJMra1401108"
+  },
+  {
+   "org": "Arch Dis Child (Pandi et al., JIPMER)",
+   "title": "Efficacy of scorpion antivenom plus prazosin versus prazosin alone for Mesobuthus tamulus scorpion sting envenomation in children: a randomised controlled trial",
+   "year": 2014,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/24550184/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "scorpion-sting-pathway",
+   "title": "Scorpion sting (Indian red scorpion) envenoming Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Severe local pain and paraesthesia at the sting site. Systemic effects evolve within 30 minutes to 6 hours and usually settle within 1 to 2 days.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Pain: paracetamol 15 mg/kg (adult 1 g) orally or IV every 4 to 6 hours; ice packs and local infiltration of lignocaine without adrenaline for severe pain.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "ECG (tachycardia, ST-T changes, ischaemic patterns), chest X-ray and echocardiography to detect myocardial dysfunction and pulmonary oedema."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Oxygen, sit up, and non-invasive or mechanical ventilation as needed."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Discharging a child with sweating and vomiting: grade 2 can progress to pulmonary oedema within hours."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for scorpion sting (indian red scorpion) envenoming."
+  }
+ ],
+ "tables": [
+  {
+   "id": "scorpion-sting-summary-matrix",
+   "title": "Scorpion sting (Indian red scorpion) envenoming Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severe local pain and paraesthesia at the sting site. Systemic effects evolve within 30 minutes to 6 hours and usually settle within 1 to 2",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Pain: paracetamol 15 mg/kg (adult 1 g) orally or IV every 4 to 6 hours; ice packs and local infiltration of lignocaine without adrenaline",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "ECG (tachycardia, ST-T changes, ischaemic patterns), chest X-ray and echocardiography to detect myocardial dysfunction and pulmonary oedema.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Prazosin: Children 30 mcg/kg orally; adults 500 mcg (0.5 mg) orally; repeat every 3 hours according to response",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Discharging a child with sweating and vomiting: grade 2 can progress to pulmonary oedema within hours.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for scorpion sting (indian red scorpion) envenoming."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "scorpion-sting-diagram",
+   "title": "Scorpion sting (Indian red scorpion) envenoming: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -1,80 +1,175 @@
 {
-  "id": "dejerine_sottas_disease",
-  "name": "Dejerine-Sottas disease (CMT3)",
-  "aliases": [
-    "Dejerine-Sottas syndrome",
-    "CMT3",
-    "hereditary motor and sensory neuropathy type III",
-    "PMP22",
-    "MPZ"
+ "id": "dejerine_sottas_disease",
+ "name": "Dejerine-Sottas disease (CMT3)",
+ "aliases": [
+  "Dejerine-Sottas syndrome",
+  "CMT3",
+  "hereditary motor and sensory neuropathy type III",
+  "PMP22",
+  "MPZ"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuromuscular",
+ "specialty": "Neurology / Neuromuscular",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Bradley and Daroff Neurology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Severe, early-onset demyelinating hereditary neuropathy presenting in infancy or early childhood, historically labelled CMT3",
+   "Caused by variants in the same genes that cause CMT1, most often PMP22, MPZ, EGR2 or PRX, usually as de novo dominant or recessive changes",
+   "Children show delayed motor milestones, marked hypotonia, distal and sometimes proximal weakness, and prominent sensory loss with sensory ataxia",
+   "Peripheral nerves may be palpably hypertrophied owing to repeated demyelination and remyelination",
+   "Nerve conduction studies reveal extremely slow motor conduction velocities, among the slowest seen in any neuropathy",
+   "Skeletal deformities such as scoliosis and severe pes cavus are common because of the early and severe muscle imbalance",
+   "Diagnosis rests on severe demyelinating electrophysiology with genetic confirmation, viewing the condition as the severe end of the CMT1 spectrum"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuromuscular",
-  "specialty": "Neurology / Neuromuscular",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Bradley and Daroff Neurology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Severe, early-onset demyelinating hereditary neuropathy presenting in infancy or early childhood, historically labelled CMT3",
-      "Caused by variants in the same genes that cause CMT1, most often PMP22, MPZ, EGR2 or PRX, usually as de novo dominant or recessive changes",
-      "Children show delayed motor milestones, marked hypotonia, distal and sometimes proximal weakness, and prominent sensory loss with sensory ataxia",
-      "Peripheral nerves may be palpably hypertrophied owing to repeated demyelination and remyelination",
-      "Nerve conduction studies reveal extremely slow motor conduction velocities, among the slowest seen in any neuropathy",
-      "Skeletal deformities such as scoliosis and severe pes cavus are common because of the early and severe muscle imbalance",
-      "Diagnosis rests on severe demyelinating electrophysiology with genetic confirmation, viewing the condition as the severe end of the CMT1 spectrum"
+  "pathophysiology": "Dejerine-Sottas disease represents the severe end of the hereditary demyelinating neuropathy spectrum, arising from variants in peripheral myelin genes such as PMP22, MPZ, EGR2 and PRX. These variants profoundly disrupt Schwann cell myelination from early development, producing marked hypomyelination and repeated cycles of demyelination and remyelination with abundant onion-bulb formation and nerve hypertrophy. The severe and diffuse myelin failure causes profound slowing of conduction and early secondary axonal loss, accounting for the early-onset weakness, sensory ataxia and disability. Many cases result from de novo dominant variants, so a negative family history is common.",
+  "additionalDifferentials": [
+   "Congenital hypomyelinating neuropathy",
+   "CMT type 1 (milder demyelinating forms)",
+   "CMT type 4 (recessive demyelinating)",
+   "Chronic inflammatory demyelinating polyradiculoneuropathy of childhood",
+   "Metabolic leukodystrophies with neuropathy",
+   "Congenital myopathies presenting with hypotonia"
+  ],
+  "additionalInvestigations": [
+   "Nerve conduction studies demonstrating profoundly slow velocities",
+   "Sequencing of PMP22, MPZ, EGR2 and PRX or a broad hereditary neuropathy panel",
+   "Sural nerve biopsy showing hypomyelination and onion bulbs in selected cases",
+   "Spinal imaging and orthopaedic assessment for scoliosis and foot deformity",
+   "Exclusion of acquired inflammatory neuropathy of childhood",
+   "Developmental and multidisciplinary assessment given early-onset disability"
+  ],
+  "redFlags": [
+   "Respiratory compromise from severe early neuromuscular weakness",
+   "Rapidly progressive scoliosis affecting breathing",
+   "Subacute deterioration suggesting a treatable inflammatory neuropathy",
+   "Feeding or bulbar difficulty in an affected infant"
+  ],
+  "prognosis": "Course is severe with early and substantial disability; many affected children have limited independent ambulation, although the degree varies with the specific gene and variant. Respiratory and skeletal complications may affect long-term outcome.",
+  "pitfalls": [
+   "Excluding a genetic cause because there is no family history, when many cases are de novo",
+   "Mistaking severe inherited demyelination for acquired inflammatory neuropathy, or vice versa",
+   "Overlooking nerve hypertrophy as a diagnostic clue",
+   "Neglecting orthopaedic and respiratory surveillance in a severely affected child"
+  ],
+  "references": [
+   "GeneReviews: Charcot-Marie-Tooth Neuropathy Type 1 and Related Disorders",
+   "Bradley and Daroff's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive, multidisciplinary care as there is no disease-specific pharmacotherapy, centred on physiotherapy to maintain mobility and prevent contractures",
+   "Orthotic and mobility support with ankle-foot orthoses, custom footwear and wheelchairs for progressive distal and proximal weakness and sensory ataxia",
+   "Orthopaedic surgical management of severe pes cavus and scoliosis arising from early muscle imbalance",
+   "Surveillance and support of respiratory function, which may determine long-term outcome",
+   "Neuropathic pain management with neuropathic agents, and avoidance of neurotoxic drugs such as vincristine",
+   "Multidisciplinary neuromuscular, rehabilitation and developmental support given early-onset disability",
+   "Genetic counselling and molecular confirmation across PMP22, MPZ, EGR2 and PRX with family testing, recognising frequent de novo dominant variants"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dejerine_sottas_disease-pathway",
+   "title": "Dejerine-Sottas disease (CMT3): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Severe, early-onset demyelinating hereditary neuropathy presenting in infancy or early childhood, historically labelled CMT3",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Respiratory compromise from severe early neuromuscular weakness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Nerve conduction studies demonstrating profoundly slow velocities, Sequencing of PMP22, MPZ, EGR2 and PRX or a broad hereditary neuropathy panel, Sural nerve biopsy showing hypomyelination and onion bulbs in selected cases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive, multidisciplinary care as there is no disease-specific pharmacotherapy, centred on physiotherapy to maintain mobility and prevent contractures"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding a genetic cause because there is no family history, when many cases are de novo"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dejerine-sottas disease (cmt3)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dejerine_sottas_disease-matrix",
+   "title": "Dejerine-Sottas disease (CMT3): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severe, early-onset demyelinating hereditary neuropathy presenting in infancy or early childhood, historically labelled CMT3",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Dejerine-Sottas disease represents the severe end of the hereditary demyelinating neuropathy spectrum, arising from variants in peripheral myelin genes such as PMP22, MPZ, EGR2 and PRX. These variants profoundly disrupt Schwann cell myelination from early development, producing marked hypomyelination and repeated cycles of demyelination and remyelination with abundant onion-bulb formation and nerve hypertrophy. The severe and diffuse myelin failure causes profound slowing of conduction and early secondary axonal loss, accounting for the early-onset weakness, sensory ataxia and disability. Many cases result from de novo dominant variants, so a negative family history is common.",
-    "additionalDifferentials": [
-      "Congenital hypomyelinating neuropathy",
-      "CMT type 1 (milder demyelinating forms)",
-      "CMT type 4 (recessive demyelinating)",
-      "Chronic inflammatory demyelinating polyradiculoneuropathy of childhood",
-      "Metabolic leukodystrophies with neuropathy",
-      "Congenital myopathies presenting with hypotonia"
+    [
+     "Key Investigations",
+     "Nerve conduction studies demonstrating profoundly slow velocities, Sequencing of PMP22, MPZ, EGR2 and PRX or a broad hereditary",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Nerve conduction studies demonstrating profoundly slow velocities",
-      "Sequencing of PMP22, MPZ, EGR2 and PRX or a broad hereditary neuropathy panel",
-      "Sural nerve biopsy showing hypomyelination and onion bulbs in selected cases",
-      "Spinal imaging and orthopaedic assessment for scoliosis and foot deformity",
-      "Exclusion of acquired inflammatory neuropathy of childhood",
-      "Developmental and multidisciplinary assessment given early-onset disability"
+    [
+     "Primary Differentials",
+     "Congenital hypomyelinating neuropathy, CMT type 1 (milder demyelinating forms), CMT type 4 (recessive demyelinating)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Respiratory compromise from severe early neuromuscular weakness",
-      "Rapidly progressive scoliosis affecting breathing",
-      "Subacute deterioration suggesting a treatable inflammatory neuropathy",
-      "Feeding or bulbar difficulty in an affected infant"
+    [
+     "Management Strategy",
+     "Supportive, multidisciplinary care as there is no disease-specific pharmacotherapy, centred on physiotherapy to maintain mobility",
+     "Core treatment modality"
     ],
-    "prognosis": "Course is severe with early and substantial disability; many affected children have limited independent ambulation, although the degree varies with the specific gene and variant. Respiratory and skeletal complications may affect long-term outcome.",
-    "pitfalls": [
-      "Excluding a genetic cause because there is no family history, when many cases are de novo",
-      "Mistaking severe inherited demyelination for acquired inflammatory neuropathy, or vice versa",
-      "Overlooking nerve hypertrophy as a diagnostic clue",
-      "Neglecting orthopaedic and respiratory surveillance in a severely affected child"
-    ],
-    "references": [
-      "GeneReviews: Charcot-Marie-Tooth Neuropathy Type 1 and Related Disorders",
-      "Bradley and Daroff's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive, multidisciplinary care as there is no disease-specific pharmacotherapy, centred on physiotherapy to maintain mobility and prevent contractures",
-      "Orthotic and mobility support with ankle-foot orthoses, custom footwear and wheelchairs for progressive distal and proximal weakness and sensory ataxia",
-      "Orthopaedic surgical management of severe pes cavus and scoliosis arising from early muscle imbalance",
-      "Surveillance and support of respiratory function, which may determine long-term outcome",
-      "Neuropathic pain management with neuropathic agents, and avoidance of neurotoxic drugs such as vincristine",
-      "Multidisciplinary neuromuscular, rehabilitation and developmental support given early-onset disability",
-      "Genetic counselling and molecular confirmation across PMP22, MPZ, EGR2 and PRX with family testing, recognising frequent de novo dominant variants"
+    [
+     "Clinical Pitfall",
+     "Excluding a genetic cause because there is no family history, when many cases are de novo",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dejerine-sottas disease (cmt3)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dejerine-sottas-disease-diagram",
+   "title": "Dejerine-Sottas disease (CMT3): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

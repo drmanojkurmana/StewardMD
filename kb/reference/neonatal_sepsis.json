@@ -1,83 +1,178 @@
 {
-  "id": "neonatal_sepsis",
-  "name": "Neonatal sepsis",
-  "aliases": [
-    "sepsis neonatorum",
-    "newborn sepsis",
-    "early-onset neonatal sepsis",
-    "late-onset neonatal sepsis",
-    "EOS",
-    "LOS"
+ "id": "neonatal_sepsis",
+ "name": "Neonatal sepsis",
+ "aliases": [
+  "sepsis neonatorum",
+  "newborn sepsis",
+  "early-onset neonatal sepsis",
+  "late-onset neonatal sepsis",
+  "EOS",
+  "LOS"
+ ],
+ "class": "infective",
+ "system": "Neonatology",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently nosocomial or community-acquired).",
+   "Signs are notoriously nonspecific: temperature instability (fever or hypothermia), poor feeding, lethargy or irritability, respiratory distress, apnoea, tachycardia, and abdominal distension.",
+   "Group B Streptococcus and Escherichia coli dominate early-onset disease; coagulase-negative staphylococci, Staphylococcus aureus, and Gram-negative organisms are common in late-onset disease, especially in preterm infants with indwelling lines.",
+   "Maternal risk factors include prolonged rupture of membranes, chorioamnionitis, maternal fever, and GBS colonisation without adequate intrapartum prophylaxis.",
+   "Blood culture is the diagnostic gold standard; a lumbar puncture should be considered because meningitis frequently coexists and may be missed.",
+   "Empirical broad-spectrum antibiotics must be started promptly after cultures because deterioration can be rapid; the regimen is later narrowed to culture results.",
+   "Supportive care (thermoregulation, respiratory and haemodynamic support, glucose management) is as important as antimicrobials.",
+   "A low threshold for treatment is appropriate given nonspecific signs, but antibiotics are stopped early when cultures remain negative and the infant is well."
   ],
-  "class": "infective",
-  "system": "Neonatology",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently nosocomial or community-acquired).",
-      "Signs are notoriously nonspecific: temperature instability (fever or hypothermia), poor feeding, lethargy or irritability, respiratory distress, apnoea, tachycardia, and abdominal distension.",
-      "Group B Streptococcus and Escherichia coli dominate early-onset disease; coagulase-negative staphylococci, Staphylococcus aureus, and Gram-negative organisms are common in late-onset disease, especially in preterm infants with indwelling lines.",
-      "Maternal risk factors include prolonged rupture of membranes, chorioamnionitis, maternal fever, and GBS colonisation without adequate intrapartum prophylaxis.",
-      "Blood culture is the diagnostic gold standard; a lumbar puncture should be considered because meningitis frequently coexists and may be missed.",
-      "Empirical broad-spectrum antibiotics must be started promptly after cultures because deterioration can be rapid; the regimen is later narrowed to culture results.",
-      "Supportive care (thermoregulation, respiratory and haemodynamic support, glucose management) is as important as antimicrobials.",
-      "A low threshold for treatment is appropriate given nonspecific signs, but antibiotics are stopped early when cultures remain negative and the infant is well."
+  "pathophysiology": "Neonates are relatively immunocompromised, with immature innate and adaptive defences, low immunoglobulin levels, and impaired neutrophil function. Organisms reach the infant by ascending or intrapartum transmission from the maternal genital tract in early-onset disease, or from the postnatal environment and invasive devices in late-onset disease. Once bloodstream invasion occurs, bacterial products trigger a systemic inflammatory response with cytokine release, endothelial injury, capillary leak, and impaired perfusion that can progress to septic shock, disseminated intravascular coagulation, and multi-organ dysfunction. The immature blood-brain barrier and limited containment of infection predispose to meningitis.",
+  "additionalDifferentials": [
+   "Transient tachypnoea of the newborn",
+   "Respiratory distress syndrome",
+   "Congenital heart disease with poor perfusion",
+   "Inborn errors of metabolism",
+   "Neonatal encephalopathy / birth asphyxia",
+   "Congenital viral infection (e.g. herpes simplex, cytomegalovirus)"
+  ],
+  "additionalInvestigations": [
+   "Blood culture before starting antibiotics",
+   "Complete blood count with differential and immature-to-total neutrophil ratio",
+   "C-reactive protein and/or procalcitonin, ideally serially",
+   "Lumbar puncture with CSF cell count, protein, glucose and culture",
+   "Urine culture (more relevant in late-onset disease)",
+   "Chest radiograph if respiratory signs are present",
+   "Blood glucose, electrolytes and blood gas to assess metabolic status"
+  ],
+  "redFlags": [
+   "Septic shock: poor perfusion, hypotension, prolonged capillary refill",
+   "Apnoea or worsening respiratory failure requiring support",
+   "Bulging fontanelle, seizures, or other signs suggesting meningitis",
+   "Petechiae, purpura, or bleeding suggesting disseminated intravascular coagulation",
+   "Persistent hypoglycaemia or profound metabolic acidosis"
+  ],
+  "prognosis": "Outcome depends on gestational age, organism, and speed of treatment; prompt therapy usually leads to recovery, but meningitis, shock, and prematurity carry higher mortality and risk of neurodevelopmental sequelae.",
+  "pitfalls": [
+   "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
+   "Omitting a lumbar puncture and missing coexisting meningitis",
+   "Relying on a single normal inflammatory marker to exclude sepsis early in the illness",
+   "Failing to remove or consider infected central venous catheters in late-onset disease"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid",
+   "Tailor late-onset cover to likely nosocomial organisms and local patterns, adding anti-staphylococcal or glycopeptide cover, and broaden to a cephalosporin when meningitis is suspected",
+   "Narrow the regimen to culture and sensitivity results and add antifungal therapy if invasive fungal infection is identified",
+   "Provide supportive intensive care with fluid resuscitation, inotropes for septic shock, respiratory support and correction of disseminated intravascular coagulation",
+   "Perform lumbar puncture and treat coexisting meningitis with an appropriate agent and duration",
+   "Monitor blood cultures, inflammatory markers and clinical response to guide duration and de-escalation",
+   "Reinforce prevention through intrapartum antibiotic prophylaxis for maternal group B streptococcus colonisation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neonatal_sepsis-pathway",
+   "title": "Neonatal sepsis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Septic shock: poor perfusion, hypotension, prolonged capillary refill",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Blood culture before starting antibiotics, Complete blood count with differential and immature-to-total neutrophil ratio, C-reactive protein and/or procalcitonin, ideally serially"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal sepsis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal_sepsis-matrix",
+   "title": "Neonatal sepsis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Neonates are relatively immunocompromised, with immature innate and adaptive defences, low immunoglobulin levels, and impaired neutrophil function. Organisms reach the infant by ascending or intrapartum transmission from the maternal genital tract in early-onset disease, or from the postnatal environment and invasive devices in late-onset disease. Once bloodstream invasion occurs, bacterial products trigger a systemic inflammatory response with cytokine release, endothelial injury, capillary leak, and impaired perfusion that can progress to septic shock, disseminated intravascular coagulation, and multi-organ dysfunction. The immature blood-brain barrier and limited containment of infection predispose to meningitis.",
-    "additionalDifferentials": [
-      "Transient tachypnoea of the newborn",
-      "Respiratory distress syndrome",
-      "Congenital heart disease with poor perfusion",
-      "Inborn errors of metabolism",
-      "Neonatal encephalopathy / birth asphyxia",
-      "Congenital viral infection (e.g. herpes simplex, cytomegalovirus)"
+    [
+     "Key Investigations",
+     "Blood culture before starting antibiotics, Complete blood count with differential and immature-to-total neutrophil ratio,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Blood culture before starting antibiotics",
-      "Complete blood count with differential and immature-to-total neutrophil ratio",
-      "C-reactive protein and/or procalcitonin, ideally serially",
-      "Lumbar puncture with CSF cell count, protein, glucose and culture",
-      "Urine culture (more relevant in late-onset disease)",
-      "Chest radiograph if respiratory signs are present",
-      "Blood glucose, electrolytes and blood gas to assess metabolic status"
+    [
+     "Primary Differentials",
+     "Transient tachypnoea of the newborn, Respiratory distress syndrome, Congenital heart disease with poor perfusion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Septic shock: poor perfusion, hypotension, prolonged capillary refill",
-      "Apnoea or worsening respiratory failure requiring support",
-      "Bulging fontanelle, seizures, or other signs suggesting meningitis",
-      "Petechiae, purpura, or bleeding suggesting disseminated intravascular coagulation",
-      "Persistent hypoglycaemia or profound metabolic acidosis"
+    [
+     "Management Strategy",
+     "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on gestational age, organism, and speed of treatment; prompt therapy usually leads to recovery, but meningitis, shock, and prematurity carry higher mortality and risk of neurodevelopmental sequelae.",
-    "pitfalls": [
-      "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
-      "Omitting a lumbar puncture and missing coexisting meningitis",
-      "Relying on a single normal inflammatory marker to exclude sepsis early in the illness",
-      "Failing to remove or consider infected central venous catheters in late-onset disease"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid",
-      "Tailor late-onset cover to likely nosocomial organisms and local patterns, adding anti-staphylococcal or glycopeptide cover, and broaden to a cephalosporin when meningitis is suspected",
-      "Narrow the regimen to culture and sensitivity results and add antifungal therapy if invasive fungal infection is identified",
-      "Provide supportive intensive care with fluid resuscitation, inotropes for septic shock, respiratory support and correction of disseminated intravascular coagulation",
-      "Perform lumbar puncture and treat coexisting meningitis with an appropriate agent and duration",
-      "Monitor blood cultures, inflammatory markers and clinical response to guide duration and de-escalation",
-      "Reinforce prevention through intrapartum antibiotic prophylaxis for maternal group B streptococcus colonisation"
+    [
+     "Clinical Pitfall",
+     "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal sepsis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-sepsis-diagram",
+   "title": "Neonatal sepsis: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

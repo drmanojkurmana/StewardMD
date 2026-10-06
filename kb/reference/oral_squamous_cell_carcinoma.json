@@ -1,79 +1,174 @@
 {
-  "id": "oral_squamous_cell_carcinoma",
-  "name": "Oral squamous cell carcinoma",
-  "aliases": [
-    "oral cancer",
-    "oral SCC",
-    "mouth cancer",
-    "squamous cell carcinoma of the oral cavity"
+ "id": "oral_squamous_cell_carcinoma",
+ "name": "Oral squamous cell carcinoma",
+ "aliases": [
+  "oral cancer",
+  "oral SCC",
+  "mouth cancer",
+  "squamous cell carcinoma of the oral cavity"
+ ],
+ "class": "non_infective",
+ "system": "Oral / Dental / Maxillofacial",
+ "specialty": "Dentistry / OMFS",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard oral medicine & OMFS references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Oral squamous cell carcinoma is the most common malignancy of the oral cavity and often presents as a non-healing ulcer, lump, or persistent red or white patch",
+   "Classic worrying features are an indurated ulcer with rolled margins, fixation to underlying tissue, and failure to heal beyond two to three weeks",
+   "Tobacco in all forms, areca nut, and alcohol are the dominant risk factors and act synergistically",
+   "The lateral and ventral tongue and the floor of mouth are high-risk sites, though any oral surface can be affected",
+   "Early lesions may be painless, so any persistent oral abnormality warrants a high index of suspicion and referral",
+   "Cervical lymphadenopathy, especially firm or fixed nodes, may indicate regional metastatic spread",
+   "Definitive diagnosis requires biopsy, and staging guides treatment involving surgery, radiotherapy, and chemotherapy as appropriate",
+   "Prognosis depends heavily on stage at diagnosis, underscoring the value of early detection and opportunistic screening"
   ],
-  "class": "non_infective",
-  "system": "Oral / Dental / Maxillofacial",
-  "specialty": "Dentistry / OMFS",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard oral medicine & OMFS references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Oral squamous cell carcinoma is the most common malignancy of the oral cavity and often presents as a non-healing ulcer, lump, or persistent red or white patch",
-      "Classic worrying features are an indurated ulcer with rolled margins, fixation to underlying tissue, and failure to heal beyond two to three weeks",
-      "Tobacco in all forms, areca nut, and alcohol are the dominant risk factors and act synergistically",
-      "The lateral and ventral tongue and the floor of mouth are high-risk sites, though any oral surface can be affected",
-      "Early lesions may be painless, so any persistent oral abnormality warrants a high index of suspicion and referral",
-      "Cervical lymphadenopathy, especially firm or fixed nodes, may indicate regional metastatic spread",
-      "Definitive diagnosis requires biopsy, and staging guides treatment involving surgery, radiotherapy, and chemotherapy as appropriate",
-      "Prognosis depends heavily on stage at diagnosis, underscoring the value of early detection and opportunistic screening"
+  "pathophysiology": "Oral squamous cell carcinoma develops through the accumulation of genetic and epigenetic alterations in oral keratinocytes, typically driven by chronic exposure to carcinogens such as tobacco, areca nut, and alcohol. Many tumours arise within or adjacent to potentially malignant disorders such as leukoplakia or erythroplakia, progressing through increasing grades of epithelial dysplasia to carcinoma in situ and then invasive disease when malignant cells breach the basement membrane. The invasive tumour infiltrates local tissue, can destroy bone, and spreads via lymphatics to cervical nodes, with distant metastasis in advanced disease. Field change means the whole mucosa is at risk of further primaries.",
+  "additionalDifferentials": [
+   "Traumatic ulcer",
+   "Recurrent aphthous ulceration",
+   "Oral leukoplakia or erythroplakia without invasion",
+   "Chronic infective ulcers such as tuberculosis or syphilis",
+   "Erosive lichen planus",
+   "Salivary gland or other oral malignancy"
+  ],
+  "additionalInvestigations": [
+   "Incisional biopsy of the lesion for histological diagnosis and grading",
+   "Examination and imaging of the neck for lymph node involvement",
+   "Cross-sectional imaging (CT, MRI) to assess local extent and staging",
+   "Assessment for distant metastasis and synchronous primaries",
+   "Multidisciplinary evaluation for treatment planning"
+  ],
+  "redFlags": [
+   "Any oral ulcer or lesion persisting beyond two to three weeks requires urgent specialist referral to exclude cancer",
+   "Induration, fixation, rolled margins, or spontaneous bleeding of a lesion",
+   "Unexplained firm or fixed cervical lymphadenopathy",
+   "Persistent unexplained pain, numbness, loosening of teeth, or difficulty swallowing"
+  ],
+  "prognosis": "Outcome is strongly stage-dependent, with early localised disease carrying a favourable prognosis, whereas advanced tumours with nodal involvement have substantially poorer survival and higher morbidity from treatment.",
+  "pitfalls": [
+   "Attributing a persistent ulcer to trauma or denture irritation and delaying biopsy",
+   "Reassurance because a lesion is painless, since early cancers are often symptomless",
+   "Failing to examine and palpate the neck for nodal disease",
+   "Overlooking the risk of second primaries in a field-changed mucosa"
+  ],
+  "references": [
+   "Burket's Oral Medicine",
+   "Standard OMFS references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Perform wide surgical excision with tumour-free margins as the primary treatment, with neck dissection for nodal disease and microvascular reconstruction",
+   "Add adjuvant radiotherapy, with concurrent cisplatin-based chemoradiotherapy for adverse features such as positive margins or extracapsular extension",
+   "Use definitive radiotherapy or chemoradiotherapy where the tumour is unresectable or surgery is declined",
+   "Offer palliative systemic therapy with cetuximab or immune checkpoint inhibitors for recurrent or metastatic disease",
+   "Enforce cessation of tobacco, areca nut and alcohol, with pre-treatment dental review, nutritional optimisation and prosthetic, speech and swallowing rehabilitation",
+   "Manage within a head and neck multidisciplinary team for staging and treatment planning",
+   "Provide structured surveillance for locoregional recurrence and metachronous second primaries owing to field change"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "oral_squamous_cell_carcinoma-pathway",
+   "title": "Oral squamous cell carcinoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Oral squamous cell carcinoma is the most common malignancy of the oral cavity and often presents as a non-healing ulcer, lump, or persistent red or white patch",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Any oral ulcer or lesion persisting beyond two to three weeks requires urgent specialist referral to exclude cancer",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Incisional biopsy of the lesion for histological diagnosis and grading, Examination and imaging of the neck for lymph node involvement, Cross-sectional imaging (CT, MRI) to assess local extent and staging"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Perform wide surgical excision with tumour-free margins as the primary treatment, with neck dissection for nodal disease and microvascular reconstruction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a persistent ulcer to trauma or denture irritation and delaying biopsy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of oral squamous cell carcinoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "oral_squamous_cell_carcinoma-matrix",
+   "title": "Oral squamous cell carcinoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Oral squamous cell carcinoma is the most common malignancy of the oral cavity and often presents as a non-healing ulcer, lump, or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Oral squamous cell carcinoma develops through the accumulation of genetic and epigenetic alterations in oral keratinocytes, typically driven by chronic exposure to carcinogens such as tobacco, areca nut, and alcohol. Many tumours arise within or adjacent to potentially malignant disorders such as leukoplakia or erythroplakia, progressing through increasing grades of epithelial dysplasia to carcinoma in situ and then invasive disease when malignant cells breach the basement membrane. The invasive tumour infiltrates local tissue, can destroy bone, and spreads via lymphatics to cervical nodes, with distant metastasis in advanced disease. Field change means the whole mucosa is at risk of further primaries.",
-    "additionalDifferentials": [
-      "Traumatic ulcer",
-      "Recurrent aphthous ulceration",
-      "Oral leukoplakia or erythroplakia without invasion",
-      "Chronic infective ulcers such as tuberculosis or syphilis",
-      "Erosive lichen planus",
-      "Salivary gland or other oral malignancy"
+    [
+     "Key Investigations",
+     "Incisional biopsy of the lesion for histological diagnosis and grading, Examination and imaging of the neck for lymph node",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Incisional biopsy of the lesion for histological diagnosis and grading",
-      "Examination and imaging of the neck for lymph node involvement",
-      "Cross-sectional imaging (CT, MRI) to assess local extent and staging",
-      "Assessment for distant metastasis and synchronous primaries",
-      "Multidisciplinary evaluation for treatment planning"
+    [
+     "Primary Differentials",
+     "Traumatic ulcer, Recurrent aphthous ulceration, Oral leukoplakia or erythroplakia without invasion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Any oral ulcer or lesion persisting beyond two to three weeks requires urgent specialist referral to exclude cancer",
-      "Induration, fixation, rolled margins, or spontaneous bleeding of a lesion",
-      "Unexplained firm or fixed cervical lymphadenopathy",
-      "Persistent unexplained pain, numbness, loosening of teeth, or difficulty swallowing"
+    [
+     "Management Strategy",
+     "Perform wide surgical excision with tumour-free margins as the primary treatment, with neck dissection for nodal disease and",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is strongly stage-dependent, with early localised disease carrying a favourable prognosis, whereas advanced tumours with nodal involvement have substantially poorer survival and higher morbidity from treatment.",
-    "pitfalls": [
-      "Attributing a persistent ulcer to trauma or denture irritation and delaying biopsy",
-      "Reassurance because a lesion is painless, since early cancers are often symptomless",
-      "Failing to examine and palpate the neck for nodal disease",
-      "Overlooking the risk of second primaries in a field-changed mucosa"
-    ],
-    "references": [
-      "Burket's Oral Medicine",
-      "Standard OMFS references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Perform wide surgical excision with tumour-free margins as the primary treatment, with neck dissection for nodal disease and microvascular reconstruction",
-      "Add adjuvant radiotherapy, with concurrent cisplatin-based chemoradiotherapy for adverse features such as positive margins or extracapsular extension",
-      "Use definitive radiotherapy or chemoradiotherapy where the tumour is unresectable or surgery is declined",
-      "Offer palliative systemic therapy with cetuximab or immune checkpoint inhibitors for recurrent or metastatic disease",
-      "Enforce cessation of tobacco, areca nut and alcohol, with pre-treatment dental review, nutritional optimisation and prosthetic, speech and swallowing rehabilitation",
-      "Manage within a head and neck multidisciplinary team for staging and treatment planning",
-      "Provide structured surveillance for locoregional recurrence and metachronous second primaries owing to field change"
+    [
+     "Clinical Pitfall",
+     "Attributing a persistent ulcer to trauma or denture irritation and delaying biopsy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for oral squamous cell carcinoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "oral-squamous-cell-carcinoma-diagram",
+   "title": "Oral squamous cell carcinoma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

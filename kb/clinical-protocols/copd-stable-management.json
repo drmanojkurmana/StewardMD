@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, primary care, respiratory clinic",
- "aliases": ["COPD", "chronic obstructive pulmonary disease", "GOLD 2026", "GOLD ABE", "LAMA LABA", "triple therapy", "COPD inhalers", "emphysema", "chronic bronchitis", "pulmonary rehabilitation", "LTOT"],
+ "aliases": [
+  "COPD",
+  "chronic obstructive pulmonary disease",
+  "GOLD 2026",
+  "GOLD ABE",
+  "LAMA LABA",
+  "triple therapy",
+  "COPD inhalers",
+  "emphysema",
+  "chronic bronchitis",
+  "pulmonary rehabilitation",
+  "LTOT"
+ ],
  "summary": "Confirm COPD with post-bronchodilator FEV1/FVC below 0.7, classify into GOLD group A, B or E, start a bronchodilator (A) or LABA+LAMA (B and E), add ICS only for exacerbations with blood eosinophils of 100 cells/microL or more (initially if 300 or more), and give smoking cessation, vaccination and pulmonary rehabilitation to all.",
  "sections": [
   {
@@ -82,19 +94,163 @@
   }
  ],
  "drugs": [
-  { "name": "Tiotropium (LAMA)", "dose": "18 mcg by dry-powder inhaler once daily, or 5 mcg (2 puffs of 2.5 mcg) by soft mist inhaler once daily", "notes": "Caution in urinary retention and narrow-angle glaucoma." },
-  { "name": "Formoterol (LABA)", "dose": "12 mcg by inhaler twice daily", "notes": "Use as part of LABA+LAMA; not as monotherapy in anyone with asthma features." },
-  { "name": "Indacaterol-glycopyrronium (LABA+LAMA)", "dose": "110/50 mcg by inhaler once daily", "notes": "Group B and E initial choice where available." },
-  { "name": "Umeclidinium-vilanterol (LAMA+LABA)", "dose": "62.5/25 mcg by inhaler once daily", "notes": "Alternative LABA+LAMA combination." },
-  { "name": "Fluticasone furoate-umeclidinium-vilanterol (triple)", "dose": "100/62.5/25 mcg by inhaler once daily", "notes": "Exacerbations on LABA+LAMA with eosinophils 100 cells/microL or more." },
-  { "name": "Azithromycin", "dose": "250 mg orally once daily, or 500 mg three times a week, for 1 year", "notes": "Non-smokers with continued exacerbations; check QTc and hearing; consider resistance." },
-  { "name": "Roflumilast", "dose": "500 mcg orally once daily", "notes": "FEV1 below 50%, chronic bronchitis, prior hospitalised exacerbation. Diarrhoea, weight loss; caution in depression." },
-  { "name": "Dupilumab", "dose": "300 mg subcutaneously every 2 weeks", "notes": "On triple therapy, chronic bronchitis, eosinophils 300 cells/microL or more." },
-  { "name": "Mepolizumab", "dose": "100 mg subcutaneously every 4 weeks", "notes": "On triple therapy with eosinophilic phenotype." }
+  {
+   "name": "Tiotropium (LAMA)",
+   "dose": "18 mcg by dry-powder inhaler once daily, or 5 mcg (2 puffs of 2.5 mcg) by soft mist inhaler once daily",
+   "notes": "Caution in urinary retention and narrow-angle glaucoma."
+  },
+  {
+   "name": "Formoterol (LABA)",
+   "dose": "12 mcg by inhaler twice daily",
+   "notes": "Use as part of LABA+LAMA; not as monotherapy in anyone with asthma features."
+  },
+  {
+   "name": "Indacaterol-glycopyrronium (LABA+LAMA)",
+   "dose": "110/50 mcg by inhaler once daily",
+   "notes": "Group B and E initial choice where available."
+  },
+  {
+   "name": "Umeclidinium-vilanterol (LAMA+LABA)",
+   "dose": "62.5/25 mcg by inhaler once daily",
+   "notes": "Alternative LABA+LAMA combination."
+  },
+  {
+   "name": "Fluticasone furoate-umeclidinium-vilanterol (triple)",
+   "dose": "100/62.5/25 mcg by inhaler once daily",
+   "notes": "Exacerbations on LABA+LAMA with eosinophils 100 cells/microL or more."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "250 mg orally once daily, or 500 mg three times a week, for 1 year",
+   "notes": "Non-smokers with continued exacerbations; check QTc and hearing; consider resistance."
+  },
+  {
+   "name": "Roflumilast",
+   "dose": "500 mcg orally once daily",
+   "notes": "FEV1 below 50%, chronic bronchitis, prior hospitalised exacerbation. Diarrhoea, weight loss; caution in depression."
+  },
+  {
+   "name": "Dupilumab",
+   "dose": "300 mg subcutaneously every 2 weeks",
+   "notes": "On triple therapy, chronic bronchitis, eosinophils 300 cells/microL or more."
+  },
+  {
+   "name": "Mepolizumab",
+   "dose": "100 mg subcutaneously every 4 weeks",
+   "notes": "On triple therapy with eosinophilic phenotype."
+  }
  ],
  "sources": [
-  { "org": "GOLD", "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD, 2026 report", "year": 2026, "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf" },
-  { "org": "GOLD", "title": "GOLD 2026 Pocket Guide", "year": 2026, "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf" }
+  {
+   "org": "GOLD",
+   "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD, 2026 report",
+   "year": 2026,
+   "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
+  },
+  {
+   "org": "GOLD",
+   "title": "GOLD 2026 Pocket Guide",
+   "year": 2026,
+   "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-Pocket-Guide-2026-v1.1-20Nov2025_WMV2.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "copd-stable-management-pathway",
+   "title": "COPD stable management (GOLD ABE) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Spirometry is required: post-bronchodilator FEV1/FVC below 0.7 in a patient with symptoms and exposure (tobacco, biomass smoke, occupational dust). Airflow grade: GOLD 1 FEV1 80% or more, GOLD 2 50 to 79%, GOLD 3 30 to 49%, GOLD 4 below",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Group A: 0 moderate or severe exacerbations in the past year and mMRC 0 to 1 or CAAT below 10. Group B: 0 exacerbations and mMRC 2 or more or CAAT 10 or more.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Group E (GOLD 2026): 1 or more moderate or severe exacerbations in the previous year, regardless of symptoms (a single moderate exacerbation now qualifies)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Review, assess technique and adherence, then adjust. Follow the exacerbation pathway if both dyspnoea and exacerbations are problems."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "At each visit record symptoms (mMRC or CAAT), exacerbation frequency and severity, inhaler technique, adherence, side-effects and smoking status."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for copd stable management (gold abe)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "copd-stable-management-summary-matrix",
+   "title": "COPD stable management (GOLD ABE) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Spirometry is required: post-bronchodilator FEV1/FVC below 0.7 in a patient with symptoms and exposure (tobacco, biomass smoke,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Review, assess technique and adherence, then adjust. Follow the exacerbation pathway if both dyspnoea and exacerbations are problems.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tiotropium (LAMA): 18 mcg by dry-powder inhaler once daily, or 5 mcg (2 puffs of 2.5 mcg) by soft mist inhaler once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Diagnosing COPD without spirometry, or missing asthma, bronchiectasis or post-TB lung disease.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for copd stable management (gold abe)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "copd-stable-management-diagram",
+   "title": "COPD stable management (GOLD ABE): Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

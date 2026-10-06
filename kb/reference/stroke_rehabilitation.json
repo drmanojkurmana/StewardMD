@@ -1,79 +1,174 @@
 {
-  "id": "stroke_rehabilitation",
-  "name": "Stroke rehabilitation",
-  "aliases": [
-    "post-stroke rehabilitation",
-    "CVA rehabilitation",
-    "cerebrovascular accident rehabilitation"
+ "id": "stroke_rehabilitation",
+ "name": "Stroke rehabilitation",
+ "aliases": [
+  "post-stroke rehabilitation",
+  "CVA rehabilitation",
+  "cerebrovascular accident rehabilitation"
+ ],
+ "class": "non_infective",
+ "system": "Rehabilitation / Pain",
+ "specialty": "Rehabilitation Medicine (PM&R)",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Rehabilitation should begin as soon as the patient is medically stable, with early coordinated multidisciplinary care in a dedicated stroke unit improving survival and functional independence",
+   "Recovery is driven by neuroplasticity, and gains are greatest through task-specific, repetitive, high-intensity practice directed at meaningful functional goals",
+   "A structured team assessment should cover motor function, sensation, tone, balance, swallowing, communication, cognition, mood, vision, and continence",
+   "Dysphagia screening before oral intake is essential to reduce the risk of aspiration pneumonia, with formal swallowing assessment where concerns arise",
+   "Common complications requiring proactive management include spasticity, shoulder subluxation and pain, falls, pressure injury, venous thromboembolism, post-stroke depression, and central post-stroke pain",
+   "Standardised outcome measures such as the modified Rankin Scale, Barthel Index, and Functional Independence Measure help track progress and guide discharge planning",
+   "Constraint-induced movement therapy, mirror therapy, and increasingly technologies such as robotics and functional electrical stimulation can augment recovery of the affected limb",
+   "Secondary prevention, patient and carer education, and planning for community reintegration and vocational return are integral to the rehabilitation programme"
   ],
-  "class": "non_infective",
-  "system": "Rehabilitation / Pain",
-  "specialty": "Rehabilitation Medicine (PM&R)",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Rehabilitation should begin as soon as the patient is medically stable, with early coordinated multidisciplinary care in a dedicated stroke unit improving survival and functional independence",
-      "Recovery is driven by neuroplasticity, and gains are greatest through task-specific, repetitive, high-intensity practice directed at meaningful functional goals",
-      "A structured team assessment should cover motor function, sensation, tone, balance, swallowing, communication, cognition, mood, vision, and continence",
-      "Dysphagia screening before oral intake is essential to reduce the risk of aspiration pneumonia, with formal swallowing assessment where concerns arise",
-      "Common complications requiring proactive management include spasticity, shoulder subluxation and pain, falls, pressure injury, venous thromboembolism, post-stroke depression, and central post-stroke pain",
-      "Standardised outcome measures such as the modified Rankin Scale, Barthel Index, and Functional Independence Measure help track progress and guide discharge planning",
-      "Constraint-induced movement therapy, mirror therapy, and increasingly technologies such as robotics and functional electrical stimulation can augment recovery of the affected limb",
-      "Secondary prevention, patient and carer education, and planning for community reintegration and vocational return are integral to the rehabilitation programme"
+  "pathophysiology": "Stroke causes focal brain injury through either ischaemia or haemorrhage, producing loss of function referable to the affected vascular territory. The initial deficit reflects both the infarct or haematoma core and the surrounding penumbra and oedema. Functional recovery over subsequent weeks and months depends on resolution of oedema and diaschisis together with neuroplastic reorganisation, including recruitment of perilesional and contralateral networks, synaptic remodelling, and cortical remapping. Rehabilitation harnesses these adaptive processes through repetitive, goal-directed activity, while maladaptive changes such as spasticity and learned non-use can impede recovery.",
+  "additionalDifferentials": [
+   "Recurrent or extending stroke",
+   "Post-stroke seizure with transient worsening",
+   "Metabolic or toxic encephalopathy mimicking decline",
+   "Systemic infection causing functional deterioration",
+   "Depression or delirium presenting as reduced engagement",
+   "Subdural haematoma after a fall"
+  ],
+  "additionalInvestigations": [
+   "Bedside dysphagia screening followed by formal videofluoroscopy or endoscopic swallow evaluation when indicated",
+   "Standardised functional and impairment scales such as the modified Rankin Scale, Barthel Index, and FIM",
+   "Cognitive, mood, and communication assessments including screening for post-stroke depression and aphasia",
+   "Neuroimaging repeated if there is unexplained neurological deterioration",
+   "Investigations for secondary prevention including cardiac rhythm monitoring, carotid imaging, and vascular risk profiling"
+  ],
+  "redFlags": [
+   "New or worsening neurological deficit suggesting recurrent or extending stroke or haemorrhagic transformation",
+   "Signs of aspiration or pneumonia in a patient with dysphagia",
+   "Symptoms of pulmonary embolism or deep vein thrombosis in an immobile patient",
+   "Sudden severe headache, reduced consciousness, or new seizures",
+   "Rapidly developing pressure injury or sepsis"
+  ],
+  "prognosis": "Recovery is most rapid in the first weeks to months and can continue for a year or more, though the extent varies with stroke size, location, initial severity, age, and comorbidity. Early, intensive, multidisciplinary rehabilitation improves functional outcome, while persisting severe deficits, cognitive impairment, and depression predict greater long-term disability.",
+  "pitfalls": [
+   "Allowing oral intake before dysphagia screening and risking aspiration",
+   "Delaying rehabilitation until the patient is deemed fully stable, losing the early window for gains",
+   "Neglecting shoulder positioning and support, leading to painful subluxation",
+   "Overlooking post-stroke depression and cognitive impairment that limit engagement",
+   "Failing to address secondary prevention and carer support alongside physical recovery"
+  ],
+  "references": [
+   "Braddom's Physical Medicine and Rehabilitation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early coordinated multidisciplinary rehabilitation in a dedicated stroke unit, begun as soon as the patient is medically stable",
+   "Task-specific, repetitive, high-intensity practice directed at meaningful functional goals, delivered through physiotherapy, occupational therapy, and speech and language therapy",
+   "Dysphagia screening before oral intake, with modified diet or textures and enteral feeding where needed to prevent aspiration pneumonia",
+   "Manage spasticity with stretching, splinting, botulinum toxin and antispasticity agents, and treat shoulder subluxation and pain",
+   "Proactively prevent and treat complications: venous thromboembolism prophylaxis, pressure-injury care, falls prevention, and treatment of post-stroke depression and central post-stroke pain",
+   "Secondary prevention with antiplatelet or anticoagulant therapy, blood-pressure and lipid control, and management of atrial fibrillation or carotid disease",
+   "Track progress with standardised measures such as the modified Rankin Scale and Barthel Index, planning discharge with community rehabilitation and carer support"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "stroke_rehabilitation-pathway",
+   "title": "Stroke rehabilitation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Rehabilitation should begin as soon as the patient is medically stable, with early coordinated multidisciplinary care in a dedicated stroke unit improving survival and functional independence",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New or worsening neurological deficit suggesting recurrent or extending stroke or haemorrhagic transformation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bedside dysphagia screening followed by formal videofluoroscopy or endoscopic swallow evaluation when indicated, Standardised functional and impairment scales such as the modified Rankin Scale, Barthel Index, and FIM,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early coordinated multidisciplinary rehabilitation in a dedicated stroke unit, begun as soon as the patient is medically stable"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Allowing oral intake before dysphagia screening and risking aspiration"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of stroke rehabilitation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "stroke_rehabilitation-matrix",
+   "title": "Stroke rehabilitation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rehabilitation should begin as soon as the patient is medically stable, with early coordinated multidisciplinary care in a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Stroke causes focal brain injury through either ischaemia or haemorrhage, producing loss of function referable to the affected vascular territory. The initial deficit reflects both the infarct or haematoma core and the surrounding penumbra and oedema. Functional recovery over subsequent weeks and months depends on resolution of oedema and diaschisis together with neuroplastic reorganisation, including recruitment of perilesional and contralateral networks, synaptic remodelling, and cortical remapping. Rehabilitation harnesses these adaptive processes through repetitive, goal-directed activity, while maladaptive changes such as spasticity and learned non-use can impede recovery.",
-    "additionalDifferentials": [
-      "Recurrent or extending stroke",
-      "Post-stroke seizure with transient worsening",
-      "Metabolic or toxic encephalopathy mimicking decline",
-      "Systemic infection causing functional deterioration",
-      "Depression or delirium presenting as reduced engagement",
-      "Subdural haematoma after a fall"
+    [
+     "Key Investigations",
+     "Bedside dysphagia screening followed by formal videofluoroscopy or endoscopic swallow evaluation when indicated, Standardised",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bedside dysphagia screening followed by formal videofluoroscopy or endoscopic swallow evaluation when indicated",
-      "Standardised functional and impairment scales such as the modified Rankin Scale, Barthel Index, and FIM",
-      "Cognitive, mood, and communication assessments including screening for post-stroke depression and aphasia",
-      "Neuroimaging repeated if there is unexplained neurological deterioration",
-      "Investigations for secondary prevention including cardiac rhythm monitoring, carotid imaging, and vascular risk profiling"
+    [
+     "Primary Differentials",
+     "Recurrent or extending stroke, Post-stroke seizure with transient worsening, Metabolic or toxic encephalopathy mimicking decline",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New or worsening neurological deficit suggesting recurrent or extending stroke or haemorrhagic transformation",
-      "Signs of aspiration or pneumonia in a patient with dysphagia",
-      "Symptoms of pulmonary embolism or deep vein thrombosis in an immobile patient",
-      "Sudden severe headache, reduced consciousness, or new seizures",
-      "Rapidly developing pressure injury or sepsis"
+    [
+     "Management Strategy",
+     "Early coordinated multidisciplinary rehabilitation in a dedicated stroke unit, begun as soon as the patient is medically stable",
+     "Core treatment modality"
     ],
-    "prognosis": "Recovery is most rapid in the first weeks to months and can continue for a year or more, though the extent varies with stroke size, location, initial severity, age, and comorbidity. Early, intensive, multidisciplinary rehabilitation improves functional outcome, while persisting severe deficits, cognitive impairment, and depression predict greater long-term disability.",
-    "pitfalls": [
-      "Allowing oral intake before dysphagia screening and risking aspiration",
-      "Delaying rehabilitation until the patient is deemed fully stable, losing the early window for gains",
-      "Neglecting shoulder positioning and support, leading to painful subluxation",
-      "Overlooking post-stroke depression and cognitive impairment that limit engagement",
-      "Failing to address secondary prevention and carer support alongside physical recovery"
-    ],
-    "references": [
-      "Braddom's Physical Medicine and Rehabilitation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early coordinated multidisciplinary rehabilitation in a dedicated stroke unit, begun as soon as the patient is medically stable",
-      "Task-specific, repetitive, high-intensity practice directed at meaningful functional goals, delivered through physiotherapy, occupational therapy, and speech and language therapy",
-      "Dysphagia screening before oral intake, with modified diet or textures and enteral feeding where needed to prevent aspiration pneumonia",
-      "Manage spasticity with stretching, splinting, botulinum toxin and antispasticity agents, and treat shoulder subluxation and pain",
-      "Proactively prevent and treat complications: venous thromboembolism prophylaxis, pressure-injury care, falls prevention, and treatment of post-stroke depression and central post-stroke pain",
-      "Secondary prevention with antiplatelet or anticoagulant therapy, blood-pressure and lipid control, and management of atrial fibrillation or carotid disease",
-      "Track progress with standardised measures such as the modified Rankin Scale and Barthel Index, planning discharge with community rehabilitation and carer support"
+    [
+     "Clinical Pitfall",
+     "Allowing oral intake before dysphagia screening and risking aspiration",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for stroke rehabilitation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "stroke-rehabilitation-diagram",
+   "title": "Stroke rehabilitation: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

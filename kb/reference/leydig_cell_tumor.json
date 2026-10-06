@@ -1,81 +1,176 @@
 {
-  "id": "leydig_cell_tumor",
-  "name": "Leydig cell tumour",
-  "aliases": [
-    "Leydig cell tumor",
-    "interstitial cell tumour",
-    "testicular Leydig cell tumour",
-    "hilus cell tumour"
+ "id": "leydig_cell_tumor",
+ "name": "Leydig cell tumour",
+ "aliases": [
+  "Leydig cell tumor",
+  "interstitial cell tumour",
+  "testicular Leydig cell tumour",
+  "hilus cell tumour"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Reproductive",
+ "specialty": "Paediatric & Reproductive Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / Nelson",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A sex cord-stromal tumour of the testicular interstitial (Leydig) cells, and rarely of the ovarian hilus cells, that is often hormonally active",
+   "In boys it typically secretes testosterone autonomously, producing gonadotropin-independent precocious pseudopuberty with virilisation and, characteristically, a unilateral testicular enlargement or nodule",
+   "Because the androgen production is independent of the pituitary, gonadotropins are suppressed and the GnRH stimulation test remains prepubertal, distinguishing it from central precocious puberty",
+   "Some tumours also aromatise androgens to oestrogens and can cause gynaecomastia",
+   "The classic clue in a boy is asymmetric testicular enlargement disproportionate to the degree of virilisation, prompting scrotal examination and ultrasound",
+   "It must be distinguished from Leydig cell hyperplasia (for example due to chronic hCG or LH-receptor stimulation, or the testicular adrenal rest tissue of poorly controlled congenital adrenal hyperplasia) and from familial testotoxicosis",
+   "Most childhood Leydig cell tumours are benign, and testis-sparing surgery is often possible, with orchidectomy reserved for larger or suspicious lesions"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Reproductive",
-  "specialty": "Paediatric & Reproductive Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / Nelson",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A sex cord-stromal tumour of the testicular interstitial (Leydig) cells, and rarely of the ovarian hilus cells, that is often hormonally active",
-      "In boys it typically secretes testosterone autonomously, producing gonadotropin-independent precocious pseudopuberty with virilisation and, characteristically, a unilateral testicular enlargement or nodule",
-      "Because the androgen production is independent of the pituitary, gonadotropins are suppressed and the GnRH stimulation test remains prepubertal, distinguishing it from central precocious puberty",
-      "Some tumours also aromatise androgens to oestrogens and can cause gynaecomastia",
-      "The classic clue in a boy is asymmetric testicular enlargement disproportionate to the degree of virilisation, prompting scrotal examination and ultrasound",
-      "It must be distinguished from Leydig cell hyperplasia (for example due to chronic hCG or LH-receptor stimulation, or the testicular adrenal rest tissue of poorly controlled congenital adrenal hyperplasia) and from familial testotoxicosis",
-      "Most childhood Leydig cell tumours are benign, and testis-sparing surgery is often possible, with orchidectomy reserved for larger or suspicious lesions"
+  "pathophysiology": "A Leydig cell tumour arises from the testosterone-producing interstitial cells of the testis (or the analogous hilus cells of the ovary) and commonly retains steroidogenic activity, secreting androgens autonomously and sometimes aromatising them to oestrogens. The resulting sex-steroid excess is independent of pituitary gonadotropin drive, so the axis is suppressed and the clinical picture is one of precocious pseudopuberty rather than true, centrally mediated puberty. In boys this manifests as virilisation with an enlarged or nodular testis, whereas oestrogen production can cause gynaecomastia. The principal differential considerations are conditions that expand or stimulate Leydig cells without a true neoplasm, such as hyperplasia from chronic gonadotropin or LH-receptor stimulation, testicular adrenal rest tumours in congenital adrenal hyperplasia, and the activating LH-receptor disorder of familial testotoxicosis.",
+  "additionalDifferentials": [
+   "Familial male-limited precocious puberty (testotoxicosis) from an activating LHCGR mutation",
+   "Leydig cell hyperplasia from chronic hCG or LH-receptor stimulation",
+   "Testicular adrenal rest tumour in congenital adrenal hyperplasia",
+   "Other sex cord-stromal or germ cell tumours of the testis",
+   "Central precocious puberty",
+   "Adrenal androgen-secreting tumour",
+   "hCG-secreting tumour causing peripheral precocity"
+  ],
+  "additionalInvestigations": [
+   "Serum testosterone (and oestradiol where gynaecomastia is present) with basal LH and FSH (suppressed)",
+   "GnRH (LHRH) stimulation test demonstrating a prepubertal, suppressed response",
+   "Scrotal ultrasound to identify and characterise a testicular mass",
+   "Adrenal androgen profile including 17-hydroxyprogesterone to exclude congenital adrenal hyperplasia and rest tumours",
+   "Beta-hCG measurement to exclude an hCG-driven process",
+   "Histological examination of the resected lesion to confirm the diagnosis and assess for atypical features"
+  ],
+  "redFlags": [
+   "A distinct testicular mass or asymmetric enlargement in a boy with signs of androgen excess",
+   "Histological features suggesting malignancy (more common in adults than children), such as large size, necrosis, or vascular invasion",
+   "Rapidly progressive virilisation with markedly elevated testosterone",
+   "Persistence or recurrence of hormonal signs after surgery, suggesting residual or recurrent tumour"
+  ],
+  "prognosis": "The great majority of Leydig cell tumours in childhood are benign, and removal (often testis-sparing) reverses the hormonal effects with an excellent outcome; malignant behaviour is uncommon in children but requires more extensive surgery and surveillance when present.",
+  "pitfalls": [
+   "Mistaking the tumour for familial testotoxicosis or Leydig cell hyperplasia and thereby missing a resectable mass",
+   "Failing to examine and image the testes in a boy with gonadotropin-independent precocity",
+   "Overlooking testicular adrenal rest tissue of congenital adrenal hyperplasia, which mimics a tumour but responds to glucocorticoid control",
+   "Performing orchidectomy when testis-sparing surgery would suffice for a benign lesion",
+   "Not confirming gonadotropin independence with a stimulation test before attributing signs to a central cause"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Testis-sparing surgical excision (enucleation) as the definitive treatment, reversing the sex-steroid excess",
+   "Radical inguinal orchidectomy where organ preservation is not feasible or malignancy is suspected",
+   "Histological confirmation with assessment for atypical or malignant features",
+   "Distinguish preoperatively from Leydig cell hyperplasia, testicular adrenal rest tumours and familial testotoxicosis",
+   "Monitor resolution of virilisation or gynaecomastia and recovery of the suppressed gonadotropin axis",
+   "Assessment and management of accelerated bone age and predicted final height",
+   "Paediatric endocrinology and urology multidisciplinary care with postoperative surveillance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "leydig_cell_tumor-pathway",
+   "title": "Leydig cell tumour: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A sex cord-stromal tumour of the testicular interstitial (Leydig) cells, and rarely of the ovarian hilus cells, that is often hormonally active",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A distinct testicular mass or asymmetric enlargement in a boy with signs of androgen excess",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum testosterone (and oestradiol where gynaecomastia is present) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test demonstrating a prepubertal, suppressed response, Scrotal ultrasound to identify and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Testis-sparing surgical excision (enucleation) as the definitive treatment, reversing the sex-steroid excess"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the tumour for familial testotoxicosis or Leydig cell hyperplasia and thereby missing a resectable mass"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of leydig cell tumour."
+  }
+ ],
+ "tables": [
+  {
+   "id": "leydig_cell_tumor-matrix",
+   "title": "Leydig cell tumour: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A sex cord-stromal tumour of the testicular interstitial (Leydig) cells, and rarely of the ovarian hilus cells, that is often",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A Leydig cell tumour arises from the testosterone-producing interstitial cells of the testis (or the analogous hilus cells of the ovary) and commonly retains steroidogenic activity, secreting androgens autonomously and sometimes aromatising them to oestrogens. The resulting sex-steroid excess is independent of pituitary gonadotropin drive, so the axis is suppressed and the clinical picture is one of precocious pseudopuberty rather than true, centrally mediated puberty. In boys this manifests as virilisation with an enlarged or nodular testis, whereas oestrogen production can cause gynaecomastia. The principal differential considerations are conditions that expand or stimulate Leydig cells without a true neoplasm, such as hyperplasia from chronic gonadotropin or LH-receptor stimulation, testicular adrenal rest tumours in congenital adrenal hyperplasia, and the activating LH-receptor disorder of familial testotoxicosis.",
-    "additionalDifferentials": [
-      "Familial male-limited precocious puberty (testotoxicosis) from an activating LHCGR mutation",
-      "Leydig cell hyperplasia from chronic hCG or LH-receptor stimulation",
-      "Testicular adrenal rest tumour in congenital adrenal hyperplasia",
-      "Other sex cord-stromal or germ cell tumours of the testis",
-      "Central precocious puberty",
-      "Adrenal androgen-secreting tumour",
-      "hCG-secreting tumour causing peripheral precocity"
+    [
+     "Key Investigations",
+     "Serum testosterone (and oestradiol where gynaecomastia is present) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum testosterone (and oestradiol where gynaecomastia is present) with basal LH and FSH (suppressed)",
-      "GnRH (LHRH) stimulation test demonstrating a prepubertal, suppressed response",
-      "Scrotal ultrasound to identify and characterise a testicular mass",
-      "Adrenal androgen profile including 17-hydroxyprogesterone to exclude congenital adrenal hyperplasia and rest tumours",
-      "Beta-hCG measurement to exclude an hCG-driven process",
-      "Histological examination of the resected lesion to confirm the diagnosis and assess for atypical features"
+    [
+     "Primary Differentials",
+     "Familial male-limited precocious puberty (testotoxicosis) from an activating LHCGR mutation, Leydig cell hyperplasia from chronic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A distinct testicular mass or asymmetric enlargement in a boy with signs of androgen excess",
-      "Histological features suggesting malignancy (more common in adults than children), such as large size, necrosis, or vascular invasion",
-      "Rapidly progressive virilisation with markedly elevated testosterone",
-      "Persistence or recurrence of hormonal signs after surgery, suggesting residual or recurrent tumour"
+    [
+     "Management Strategy",
+     "Testis-sparing surgical excision (enucleation) as the definitive treatment, reversing the sex-steroid excess",
+     "Core treatment modality"
     ],
-    "prognosis": "The great majority of Leydig cell tumours in childhood are benign, and removal (often testis-sparing) reverses the hormonal effects with an excellent outcome; malignant behaviour is uncommon in children but requires more extensive surgery and surveillance when present.",
-    "pitfalls": [
-      "Mistaking the tumour for familial testotoxicosis or Leydig cell hyperplasia and thereby missing a resectable mass",
-      "Failing to examine and image the testes in a boy with gonadotropin-independent precocity",
-      "Overlooking testicular adrenal rest tissue of congenital adrenal hyperplasia, which mimics a tumour but responds to glucocorticoid control",
-      "Performing orchidectomy when testis-sparing surgery would suffice for a benign lesion",
-      "Not confirming gonadotropin independence with a stimulation test before attributing signs to a central cause"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Testis-sparing surgical excision (enucleation) as the definitive treatment, reversing the sex-steroid excess",
-      "Radical inguinal orchidectomy where organ preservation is not feasible or malignancy is suspected",
-      "Histological confirmation with assessment for atypical or malignant features",
-      "Distinguish preoperatively from Leydig cell hyperplasia, testicular adrenal rest tumours and familial testotoxicosis",
-      "Monitor resolution of virilisation or gynaecomastia and recovery of the suppressed gonadotropin axis",
-      "Assessment and management of accelerated bone age and predicted final height",
-      "Paediatric endocrinology and urology multidisciplinary care with postoperative surveillance"
+    [
+     "Clinical Pitfall",
+     "Mistaking the tumour for familial testotoxicosis or Leydig cell hyperplasia and thereby missing a resectable mass",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for leydig cell tumour."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "leydig-cell-tumor-diagram",
+   "title": "Leydig cell tumour: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

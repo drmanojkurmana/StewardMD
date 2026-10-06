@@ -241,5 +241,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h75c80d91"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ie-dx-algo",
+      "title": "Infective Endocarditis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "IE spans a clinical continuum from acute to subacute, and the causative organism largely dictates the tempo: beta-hemolytic streptococci, S. aureus and pneumococci tend to produce an acute, rapidly destructive course, whereas viridans",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Congestive heart failure or pulmonary edema/cardiogenic shock from valve dysfunction or intracardiac fistula (develops in 30-40%) - a surgical emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Transesophageal echocardiography (TEE) detects vegetations in over 90% of definite IE and is preferred over TTE, which misses vegetations under 2 mm and yields inadequate images in about 20% of patients; a negative TEE"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Diagnosis uses the 2023 Duke-International Society for Cardiovascular Infectious Diseases (Duke-ISCVID) update of the modified Duke criteria (sensitivity 80-93%). MAJOR criteria: (1) Microbiologic - a typical IE organism"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on a new/worsening murmur alone - it is a physical-exam minor criterion only; a major imaging criterion requires echocardiographic evidence of new valvular regurgitation, not auscultation."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for infective endocarditis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ie-matrix",
+      "title": "Infective Endocarditis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "IE spans a clinical continuum from acute to subacute, and the causative organism largely dictates the tempo: beta-hemolytic",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Transesophageal echocardiography (TEE) detects vegetations in over 90% of definite IE and is preferred over TTE, which misses",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Marantic (nonbacterial thrombotic) endocarditis associated with malignancy and chronic wasting disease, Atrial myxoma,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Congestive heart failure or pulmonary edema/cardiogenic shock from valve dysfunction or intracardiac fistula (develops in 30-40%)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a new/worsening murmur alone - it is a physical-exam minor criterion only; a major imaging criterion requires",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for infective endocarditis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ie-diagram",
+      "title": "Infective Endocarditis: Cardiovascular & Hemodynamic Diagnostic Schematic",
+      "type": "ecg",
+      "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+      "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+      "annotations": [
+        {
+          "label": "Conduction System",
+          "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+        },
+        {
+          "label": "Coronary Perfusion",
+          "description": "Epicardial arterial distribution and regional myocardial supply zones."
+        },
+        {
+          "label": "Hemodynamics",
+          "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+        }
+      ]
+    }
+  ]
 }

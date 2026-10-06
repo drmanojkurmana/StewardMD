@@ -126,5 +126,100 @@
       "importedAt": "2026-06-29T13:28:11Z",
       "contentHash": "h904eab97"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "salicylate_tox-dx-algo",
+      "title": "Salicylate toxicity: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Classic course: early nausea/vomiting and hyperventilation with respiratory alkalosis and alkaline urine, evolving to a mixed respiratory alkalosis plus high-anion-gap metabolic acidosis with paradoxical aciduria; late stages show acidemia",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Coma, seizures, cerebral edema (p.3714)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serial quantitative serum salicylate level (guides management) (p.3706), Anion gap and serum lactate (lactate typically lower than the anion gap in salicylate vs near-equal in shock/organ failure) (p.3705), Serum glucose"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Stages by clinical/acid-base course: (1) early respiratory alkalosis with alkalemia, alkaluria, nausea/vomiting and hyperventilation; (2) mixed respiratory alkalosis plus high-anion-gap metabolic acidosis with"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Vigorous gastric lavage, if used, should be with isotonic saline, NOT NaHCO3 (p.370)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for salicylate toxicity."
+    }
+  ],
+  "tables": [
+    {
+      "id": "salicylate_tox-matrix",
+      "title": "Salicylate toxicity: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic course: early nausea/vomiting and hyperventilation with respiratory alkalosis and alkaline urine, evolving to a mixed",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serial quantitative serum salicylate level (guides management) (p.3706), Anion gap and serum lactate (lactate typically lower",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Coma, seizures, cerebral edema (p.3714)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Vigorous gastric lavage, if used, should be with isotonic saline, NOT NaHCO3 (p.370).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for salicylate toxicity."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "salicylate-tox-diagram",
+      "title": "Salicylate toxicity: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

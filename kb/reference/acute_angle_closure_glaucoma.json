@@ -1,79 +1,174 @@
 {
-  "id": "acute_angle_closure_glaucoma",
-  "name": "Acute angle-closure glaucoma",
-  "aliases": [
-    "AACG",
-    "acute angle closure",
-    "acute primary angle closure",
-    "acute closed-angle glaucoma",
-    "angle-closure crisis"
+ "id": "acute_angle_closure_glaucoma",
+ "name": "Acute angle-closure glaucoma",
+ "aliases": [
+  "AACG",
+  "acute angle closure",
+  "acute primary angle closure",
+  "acute closed-angle glaucoma",
+  "angle-closure crisis"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with sudden severe unilateral eye pain, marked blurring, and haloes around lights, often with nausea, vomiting, and headache that can mimic a systemic illness",
+   "The affected eye is red with circumcorneal (ciliary) injection, a hazy oedematous cornea, and a fixed mid-dilated oval pupil",
+   "Intraocular pressure is markedly elevated, frequently well above 40 mmHg, and the globe feels stony hard to gentle palpation",
+   "Typically affects hypermetropic (long-sighted) eyes with shallow anterior chambers, and is often precipitated in dim light, by stress, or by pupil-dilating drugs",
+   "Immediate goal is to lower intraocular pressure with combined topical and systemic pressure-lowering therapy plus a topical miotic to break the attack",
+   "Definitive treatment is laser peripheral iridotomy once the cornea clears, and the fellow eye should receive prophylactic iridotomy because it is anatomically at risk",
+   "Gonioscopy of both eyes confirms a closed or occludable angle and distinguishes it from open-angle mechanisms"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with sudden severe unilateral eye pain, marked blurring, and haloes around lights, often with nausea, vomiting, and headache that can mimic a systemic illness",
-      "The affected eye is red with circumcorneal (ciliary) injection, a hazy oedematous cornea, and a fixed mid-dilated oval pupil",
-      "Intraocular pressure is markedly elevated, frequently well above 40 mmHg, and the globe feels stony hard to gentle palpation",
-      "Typically affects hypermetropic (long-sighted) eyes with shallow anterior chambers, and is often precipitated in dim light, by stress, or by pupil-dilating drugs",
-      "Immediate goal is to lower intraocular pressure with combined topical and systemic pressure-lowering therapy plus a topical miotic to break the attack",
-      "Definitive treatment is laser peripheral iridotomy once the cornea clears, and the fellow eye should receive prophylactic iridotomy because it is anatomically at risk",
-      "Gonioscopy of both eyes confirms a closed or occludable angle and distinguishes it from open-angle mechanisms"
+  "pathophysiology": "In predisposed eyes with a shallow anterior chamber and short axial length, the peripheral iris crowds the drainage angle. When the pupil becomes mid-dilated, relative pupillary block impedes aqueous flow from the posterior to the anterior chamber, so pressure builds behind the iris and bows it forward against the trabecular meshwork. This apposition abruptly obstructs aqueous outflow, causing a rapid and severe rise in intraocular pressure that compromises the optic nerve head and corneal endothelium if not relieved promptly.",
+  "additionalDifferentials": [
+   "Acute anterior uveitis",
+   "Acute bacterial conjunctivitis",
+   "Corneal abrasion or ulcer",
+   "Scleritis",
+   "Endophthalmitis",
+   "Cluster headache or migraine (for the pain component)"
+  ],
+  "additionalInvestigations": [
+   "Applanation or non-contact tonometry to quantify the raised intraocular pressure",
+   "Slit-lamp examination to assess corneal oedema, chamber depth, and pupil reaction",
+   "Gonioscopy of both eyes to demonstrate the occludable/closed angle",
+   "Optic disc assessment for glaucomatous cupping once the media clear",
+   "Anterior segment OCT or ultrasound biomicroscopy to document angle configuration"
+  ],
+  "redFlags": [
+   "Sight-threatening ophthalmic emergency — irreversible optic nerve damage can occur within hours of sustained high pressure",
+   "Stony-hard eye with a fixed mid-dilated pupil and corneal haze requires immediate ophthalmology referral",
+   "Systemic nausea and vomiting can mask the ocular origin and delay treatment",
+   "Failure of the fellow eye to receive prophylactic iridotomy risks a subsequent contralateral attack"
+  ],
+  "prognosis": "Prompt reduction of pressure and timely iridotomy usually preserve vision, but delayed treatment can cause permanent optic nerve damage and irreversible loss of sight.",
+  "pitfalls": [
+   "Mistaking the vomiting and headache for a gastrointestinal or neurological illness and missing the ocular cause",
+   "Pharmacologically dilating a shallow-chambered eye and precipitating an attack",
+   "Forgetting prophylactic treatment of the anatomically predisposed fellow eye",
+   "Assuming a normal pressure once the acute attack settles without confirming the angle is open"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate intraocular pressure lowering with combined topical agents (a beta-blocker, alpha-agonist and prostaglandin analogue) plus systemic acetazolamide, adding an intravenous hyperosmotic such as mannitol if needed",
+   "Topical pilocarpine as a miotic to constrict the pupil and break the pupillary block once pressure begins to fall",
+   "Topical corticosteroids to reduce the associated intraocular inflammation",
+   "Analgesia and antiemetics for the pain and vomiting that accompany the attack",
+   "Definitive laser peripheral iridotomy once the cornea clears, with lens extraction as an alternative definitive option",
+   "Prophylactic laser peripheral iridotomy to the anatomically at-risk fellow eye",
+   "Urgent ophthalmology referral, with ongoing intraocular pressure and optic disc monitoring"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acute_angle_closure_glaucoma-pathway",
+   "title": "Acute angle-closure glaucoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with sudden severe unilateral eye pain, marked blurring, and haloes around lights, often with nausea, vomiting, and headache that can mimic a systemic illness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sight-threatening ophthalmic emergency - irreversible optic nerve damage can occur within hours of sustained high pressure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Applanation or non-contact tonometry to quantify the raised intraocular pressure, Slit-lamp examination to assess corneal oedema, chamber depth, and pupil reaction, Gonioscopy of both eyes to demonstrate the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate intraocular pressure lowering with combined topical agents (a beta-blocker, alpha-agonist and prostaglandin analogue) plus systemic acetazolamide, adding an intravenous hyperosmotic such as mannitol if needed"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the vomiting and headache for a gastrointestinal or neurological illness and missing the ocular cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acute angle-closure glaucoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute_angle_closure_glaucoma-matrix",
+   "title": "Acute angle-closure glaucoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with sudden severe unilateral eye pain, marked blurring, and haloes around lights, often with nausea, vomiting, and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In predisposed eyes with a shallow anterior chamber and short axial length, the peripheral iris crowds the drainage angle. When the pupil becomes mid-dilated, relative pupillary block impedes aqueous flow from the posterior to the anterior chamber, so pressure builds behind the iris and bows it forward against the trabecular meshwork. This apposition abruptly obstructs aqueous outflow, causing a rapid and severe rise in intraocular pressure that compromises the optic nerve head and corneal endothelium if not relieved promptly.",
-    "additionalDifferentials": [
-      "Acute anterior uveitis",
-      "Acute bacterial conjunctivitis",
-      "Corneal abrasion or ulcer",
-      "Scleritis",
-      "Endophthalmitis",
-      "Cluster headache or migraine (for the pain component)"
+    [
+     "Key Investigations",
+     "Applanation or non-contact tonometry to quantify the raised intraocular pressure, Slit-lamp examination to assess corneal oedema,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Applanation or non-contact tonometry to quantify the raised intraocular pressure",
-      "Slit-lamp examination to assess corneal oedema, chamber depth, and pupil reaction",
-      "Gonioscopy of both eyes to demonstrate the occludable/closed angle",
-      "Optic disc assessment for glaucomatous cupping once the media clear",
-      "Anterior segment OCT or ultrasound biomicroscopy to document angle configuration"
+    [
+     "Primary Differentials",
+     "Acute anterior uveitis, Acute bacterial conjunctivitis, Corneal abrasion or ulcer",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sight-threatening ophthalmic emergency — irreversible optic nerve damage can occur within hours of sustained high pressure",
-      "Stony-hard eye with a fixed mid-dilated pupil and corneal haze requires immediate ophthalmology referral",
-      "Systemic nausea and vomiting can mask the ocular origin and delay treatment",
-      "Failure of the fellow eye to receive prophylactic iridotomy risks a subsequent contralateral attack"
+    [
+     "Management Strategy",
+     "Immediate intraocular pressure lowering with combined topical agents (a beta-blocker, alpha-agonist and prostaglandin analogue)",
+     "Core treatment modality"
     ],
-    "prognosis": "Prompt reduction of pressure and timely iridotomy usually preserve vision, but delayed treatment can cause permanent optic nerve damage and irreversible loss of sight.",
-    "pitfalls": [
-      "Mistaking the vomiting and headache for a gastrointestinal or neurological illness and missing the ocular cause",
-      "Pharmacologically dilating a shallow-chambered eye and precipitating an attack",
-      "Forgetting prophylactic treatment of the anatomically predisposed fellow eye",
-      "Assuming a normal pressure once the acute attack settles without confirming the angle is open"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate intraocular pressure lowering with combined topical agents (a beta-blocker, alpha-agonist and prostaglandin analogue) plus systemic acetazolamide, adding an intravenous hyperosmotic such as mannitol if needed",
-      "Topical pilocarpine as a miotic to constrict the pupil and break the pupillary block once pressure begins to fall",
-      "Topical corticosteroids to reduce the associated intraocular inflammation",
-      "Analgesia and antiemetics for the pain and vomiting that accompany the attack",
-      "Definitive laser peripheral iridotomy once the cornea clears, with lens extraction as an alternative definitive option",
-      "Prophylactic laser peripheral iridotomy to the anatomically at-risk fellow eye",
-      "Urgent ophthalmology referral, with ongoing intraocular pressure and optic disc monitoring"
+    [
+     "Clinical Pitfall",
+     "Mistaking the vomiting and headache for a gastrointestinal or neurological illness and missing the ocular cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acute angle-closure glaucoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-angle-closure-glaucoma-diagram",
+   "title": "Acute angle-closure glaucoma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

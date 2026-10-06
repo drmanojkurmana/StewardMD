@@ -155,5 +155,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hce148a63"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "serotonin_nms-dx-algo",
+      "title": "Serotonin syndrome / NMS: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Serotonin syndrome and NMS overlap closely (both cause fever, altered mental status, rigidity and autonomic instability), but prominent myoclonus is characteristically a feature of serotonin syndrome and helps separate it from NMS (p.3517).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hyperthermia - sustained core temperature elevation predicts poor outcome and can progress to irreversible cellular injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Core temperature measurement (most reliable prognosticator of poor outcome in stimulant/withdrawal-type toxidromes), Creatine kinase (markedly elevated in NMS; rhabdomyolysis complicates both), Lactate / arterial blood gas"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames severity by the physiologic toxidrome state (stimulated vs depressed vs discordant) and by the degree of physiologic derangement on serial vital signs; escalating findings - hyperthermia, lactic acidosis,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Mistaking one syndrome for the other: rapid-onset hyperreflexia/myoclonus/clonus after a serotonergic drug points to serotonin syndrome, whereas slow (days-to-weeks) lead-pipe rigidity with bradyreflexia after a"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for serotonin syndrome / nms."
+    }
+  ],
+  "tables": [
+    {
+      "id": "serotonin_nms-matrix",
+      "title": "Serotonin syndrome / NMS: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Serotonin syndrome and NMS overlap closely (both cause fever, altered mental status, rigidity and autonomic instability), but",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Core temperature measurement (most reliable prognosticator of poor outcome in stimulant/withdrawal-type toxidromes), Creatine",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Neuroleptic malignant syndrome vs serotonin syndrome (mutual differential; distinguish by onset speed, neuromuscular pattern and",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hyperthermia - sustained core temperature elevation predicts poor outcome and can progress to irreversible cellular injury",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking one syndrome for the other: rapid-onset hyperreflexia/myoclonus/clonus after a serotonergic drug points to serotonin",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for serotonin syndrome / nms."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "serotonin-nms-diagram",
+      "title": "Serotonin syndrome / NMS: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

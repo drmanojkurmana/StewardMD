@@ -143,5 +143,100 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "h7c9aff9d"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hypercalcemia-dx-algo",
+      "title": "Hypercalcaemia of malignancy: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Humoral hypercalcaemia of malignancy (HHM) occurs in up to ~20% of cancer patients; the typical picture is a patient with known malignancy found hypercalcaemic on routine labs, though occasionally hypercalcaemia is the presenting feature",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Markedly elevated calcium (>14 mg/dL / >3.5 mmol/L) with progressive lethargy, stupor or coma (p.363-364, 737)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Intact PTH by two-site assay - the key second test; suppressed in HHM, inappropriately normal/elevated in primary hyperparathyroidism (p.363-364), PTHrP level - to confirm hypercalcaemia of malignancy when needed (p.364,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: By total serum calcium: mild 10.5-11.9 mg/dL (often asymptomatic); moderate >=12-14 mg/dL; severe >=14 mg/dL (progressive lethargy, stupor or coma, prominent GI symptoms and acute renal failure) (Harrison 22e p.363-364)."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to correct calcium for albumin can produce pseudohypercalcaemia or pseudohypocalcaemia and a false diagnosis (p.363)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hypercalcaemia of malignancy."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hypercalcemia-matrix",
+      "title": "Hypercalcaemia of malignancy: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Humoral hypercalcaemia of malignancy (HHM) occurs in up to ~20% of cancer patients; the typical picture is a patient with known",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Intact PTH by two-site assay - the key second test; suppressed in HHM, inappropriately normal/elevated in primary",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Primary hyperparathyroidism (the other most common cause of hypercalcaemia; chronic, often with low/low-normal phosphate and",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Markedly elevated calcium (>14 mg/dL / >3.5 mmol/L) with progressive lethargy, stupor or coma (p.363-364, 737)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to correct calcium for albumin can produce pseudohypercalcaemia or pseudohypocalcaemia and a false diagnosis (p.363).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hypercalcaemia of malignancy."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "hypercalcemia-diagram",
+      "title": "Hypercalcaemia of malignancy: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

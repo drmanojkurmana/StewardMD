@@ -78,6 +78,10 @@ done
 # in the bundle, else the native WebView can't reach the CDN and every ligature icon
 # renders as its text name ("monitor_heart"…). @font-face lives in redesign-system.css. ─
 if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$WWW/assets/fonts/" 2>/dev/null || true; fi
+# Knowledge Base clinical diagrams (kb-protocols.js "diagrams": annotated ECG/X-ray/CT SVGs under
+# assets/kb-diagrams/, referenced as /assets/kb-diagrams/<name>.svg). Small vector files, so they
+# ship in the bundle and render offline; without this the reader's <img> 404s on-device.
+if [ -d assets/kb-diagrams ]; then mkdir -p "$WWW/assets/kb-diagrams"; cp assets/kb-diagrams/*.svg "$WWW/assets/kb-diagrams/" 2>/dev/null || true; fi
 # Learn-ECG atlas images (bundled ECGs for kardiox-content-pack.js lessons)
 # Learn-ECG atlas images (~182 MB, 1,007 lessons) are intentionally NOT bundled — that would
 # bloat the native download. They are served on-demand from Pages (stewardmd.in/assets/kardiox-learn);

@@ -1,78 +1,173 @@
 {
-  "id": "cadasil",
-  "name": "CADASIL",
-  "aliases": [
-    "cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy",
-    "NOTCH3 arteriopathy",
-    "hereditary multi-infarct dementia"
+ "id": "cadasil",
+ "name": "CADASIL",
+ "aliases": [
+  "cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy",
+  "NOTCH3 arteriopathy",
+  "hereditary multi-infarct dementia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Cerebrovascular",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Adams and Victor's Principles of Neurology / cerebral small vessel disease literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant small-vessel arteriopathy caused by NOTCH3 mutations on chromosome 19",
+   "Migraine with aura is often the earliest feature, typically beginning in early adulthood",
+   "Recurrent lacunar strokes and transient ischaemic attacks lead to stepwise cognitive decline and subcortical dementia",
+   "Mood disturbance, apathy, and pseudobulbar features are common, and there is usually no vascular risk-factor explanation",
+   "MRI shows confluent white-matter hyperintensities with characteristic involvement of the anterior temporal poles and external capsule",
+   "Skin biopsy may reveal granular osmiophilic material in vessel walls, and NOTCH3 genetic testing confirms the diagnosis",
+   "Management is supportive with stroke risk-factor control and antiplatelet use considered cautiously because there is no disease-specific therapy"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Cerebrovascular",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Adams and Victor's Principles of Neurology / cerebral small vessel disease literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant small-vessel arteriopathy caused by NOTCH3 mutations on chromosome 19",
-      "Migraine with aura is often the earliest feature, typically beginning in early adulthood",
-      "Recurrent lacunar strokes and transient ischaemic attacks lead to stepwise cognitive decline and subcortical dementia",
-      "Mood disturbance, apathy, and pseudobulbar features are common, and there is usually no vascular risk-factor explanation",
-      "MRI shows confluent white-matter hyperintensities with characteristic involvement of the anterior temporal poles and external capsule",
-      "Skin biopsy may reveal granular osmiophilic material in vessel walls, and NOTCH3 genetic testing confirms the diagnosis",
-      "Management is supportive with stroke risk-factor control and antiplatelet use considered cautiously because there is no disease-specific therapy"
+  "pathophysiology": "CADASIL results from mutations in the NOTCH3 gene, which is expressed in vascular smooth muscle cells of small and medium arteries. The mutant NOTCH3 ectodomain accumulates with granular osmiophilic material in the walls of penetrating cerebral arterioles, causing degeneration of smooth muscle cells, vessel wall thickening, and progressive luminal narrowing. This non-atherosclerotic, non-amyloid arteriopathy impairs cerebral perfusion and autoregulation, producing recurrent subcortical ischaemic events and a diffuse leukoencephalopathy that underlies the migraine, strokes, mood changes, and cognitive decline.",
+  "additionalDifferentials": [
+   "Sporadic hypertensive small-vessel disease",
+   "Multiple sclerosis and other demyelinating leukoencephalopathies",
+   "CARASIL and other hereditary small-vessel arteriopathies",
+   "Mitochondrial disease such as MELAS",
+   "Primary angiitis of the central nervous system",
+   "Cerebral amyloid angiopathy"
+  ],
+  "additionalInvestigations": [
+   "Brain MRI highlighting anterior temporal pole and external capsule white-matter change and lacunar infarcts",
+   "NOTCH3 genetic testing as the confirmatory investigation",
+   "Skin biopsy with electron microscopy for granular osmiophilic material",
+   "Family history documentation and cascade screening of relatives",
+   "Vascular risk assessment to exclude alternative or contributory causes"
+  ],
+  "redFlags": [
+   "Recurrent strokes at a young age without conventional vascular risk factors",
+   "Rapid cognitive decline or new focal deficits",
+   "Severe or atypical migraine with prolonged aura",
+   "Emerging pseudobulbar palsy or gait deterioration"
+  ],
+  "prognosis": "CADASIL is progressive, with accumulating disability, dementia, and loss of independence typically over one to several decades; life expectancy is reduced, though the rate of decline varies within and between families.",
+  "pitfalls": [
+   "Mistaking the white-matter changes for multiple sclerosis and starting inappropriate therapy",
+   "Attributing strokes to conventional risk factors and missing the hereditary diagnosis",
+   "Overlooking the family history that points to an autosomal dominant condition",
+   "Assuming a negative skin biopsy excludes the disorder when genetic testing is definitive"
+  ],
+  "references": [
+   "Adams and Victor's Principles of Neurology",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Aggressively control vascular risk factors, especially blood pressure and smoking cessation, to slow ischaemic injury.",
+   "Consider antiplatelet therapy for secondary stroke prevention while avoiding anticoagulation given the microhaemorrhage risk.",
+   "Manage migraine with aura using prophylaxis, avoiding vasoconstrictive triptans and ergot derivatives.",
+   "Treat mood disturbance and apathy with antidepressants and psychological support.",
+   "Provide cognitive rehabilitation and support for progressive subcortical dementia, with occupational therapy and carer support.",
+   "Monitor with periodic clinical and MRI review for accumulating subcortical ischaemic burden.",
+   "Offer genetic counselling for autosomal dominant NOTCH3 inheritance and cascade screening of relatives.",
+   "Coordinate multidisciplinary neurology, psychiatry and rehabilitation input."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cadasil-pathway",
+   "title": "CADASIL: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant small-vessel arteriopathy caused by NOTCH3 mutations on chromosome 19",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent strokes at a young age without conventional vascular risk factors",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Brain MRI highlighting anterior temporal pole and external capsule white-matter change and lacunar infarcts, NOTCH3 genetic testing as the confirmatory investigation, Skin biopsy with electron microscopy for granular"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Aggressively control vascular risk factors, especially blood pressure and smoking cessation, to slow ischaemic injury."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the white-matter changes for multiple sclerosis and starting inappropriate therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cadasil."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cadasil-matrix",
+   "title": "CADASIL: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant small-vessel arteriopathy caused by NOTCH3 mutations on chromosome 19",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "CADASIL results from mutations in the NOTCH3 gene, which is expressed in vascular smooth muscle cells of small and medium arteries. The mutant NOTCH3 ectodomain accumulates with granular osmiophilic material in the walls of penetrating cerebral arterioles, causing degeneration of smooth muscle cells, vessel wall thickening, and progressive luminal narrowing. This non-atherosclerotic, non-amyloid arteriopathy impairs cerebral perfusion and autoregulation, producing recurrent subcortical ischaemic events and a diffuse leukoencephalopathy that underlies the migraine, strokes, mood changes, and cognitive decline.",
-    "additionalDifferentials": [
-      "Sporadic hypertensive small-vessel disease",
-      "Multiple sclerosis and other demyelinating leukoencephalopathies",
-      "CARASIL and other hereditary small-vessel arteriopathies",
-      "Mitochondrial disease such as MELAS",
-      "Primary angiitis of the central nervous system",
-      "Cerebral amyloid angiopathy"
+    [
+     "Key Investigations",
+     "Brain MRI highlighting anterior temporal pole and external capsule white-matter change and lacunar infarcts, NOTCH3 genetic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Brain MRI highlighting anterior temporal pole and external capsule white-matter change and lacunar infarcts",
-      "NOTCH3 genetic testing as the confirmatory investigation",
-      "Skin biopsy with electron microscopy for granular osmiophilic material",
-      "Family history documentation and cascade screening of relatives",
-      "Vascular risk assessment to exclude alternative or contributory causes"
+    [
+     "Primary Differentials",
+     "Sporadic hypertensive small-vessel disease, Multiple sclerosis and other demyelinating leukoencephalopathies, CARASIL and other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent strokes at a young age without conventional vascular risk factors",
-      "Rapid cognitive decline or new focal deficits",
-      "Severe or atypical migraine with prolonged aura",
-      "Emerging pseudobulbar palsy or gait deterioration"
+    [
+     "Management Strategy",
+     "Aggressively control vascular risk factors, especially blood pressure and smoking cessation, to slow ischaemic injury.",
+     "Core treatment modality"
     ],
-    "prognosis": "CADASIL is progressive, with accumulating disability, dementia, and loss of independence typically over one to several decades; life expectancy is reduced, though the rate of decline varies within and between families.",
-    "pitfalls": [
-      "Mistaking the white-matter changes for multiple sclerosis and starting inappropriate therapy",
-      "Attributing strokes to conventional risk factors and missing the hereditary diagnosis",
-      "Overlooking the family history that points to an autosomal dominant condition",
-      "Assuming a negative skin biopsy excludes the disorder when genetic testing is definitive"
-    ],
-    "references": [
-      "Adams and Victor's Principles of Neurology",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Aggressively control vascular risk factors, especially blood pressure and smoking cessation, to slow ischaemic injury.",
-      "Consider antiplatelet therapy for secondary stroke prevention while avoiding anticoagulation given the microhaemorrhage risk.",
-      "Manage migraine with aura using prophylaxis, avoiding vasoconstrictive triptans and ergot derivatives.",
-      "Treat mood disturbance and apathy with antidepressants and psychological support.",
-      "Provide cognitive rehabilitation and support for progressive subcortical dementia, with occupational therapy and carer support.",
-      "Monitor with periodic clinical and MRI review for accumulating subcortical ischaemic burden.",
-      "Offer genetic counselling for autosomal dominant NOTCH3 inheritance and cascade screening of relatives.",
-      "Coordinate multidisciplinary neurology, psychiatry and rehabilitation input."
+    [
+     "Clinical Pitfall",
+     "Mistaking the white-matter changes for multiple sclerosis and starting inappropriate therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cadasil."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cadasil-diagram",
+   "title": "CADASIL: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

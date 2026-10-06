@@ -1,81 +1,176 @@
 {
-  "id": "age_related_macular_degeneration",
-  "name": "Age-related macular degeneration",
-  "aliases": [
-    "ARMD",
-    "AMD",
-    "macular degeneration",
-    "senile macular degeneration",
-    "dry AMD",
-    "wet AMD",
-    "neovascular AMD"
+ "id": "age_related_macular_degeneration",
+ "name": "Age-related macular degeneration",
+ "aliases": [
+  "ARMD",
+  "AMD",
+  "macular degeneration",
+  "senile macular degeneration",
+  "dry AMD",
+  "wet AMD",
+  "neovascular AMD"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A leading cause of irreversible central visual loss in older adults, affecting fine detail, reading, and face recognition while peripheral vision is spared",
+   "Dry (non-exudative) form is commonest and progresses slowly with drusen and retinal pigment epithelial changes, culminating in geographic atrophy",
+   "Wet (neovascular/exudative) form is less common but causes rapid, severe loss due to choroidal neovascularisation, haemorrhage, and fluid",
+   "New distortion of straight lines (metamorphopsia) or a central blur/scotoma, often monitored with an Amsler grid, suggests conversion to wet AMD and warrants urgent referral",
+   "Smoking is the most important modifiable risk factor; age, family history, and pale iris/light exposure also contribute",
+   "Intravitreal anti-VEGF injection is the mainstay for neovascular AMD and can stabilise or improve vision",
+   "Dietary antioxidant and zinc supplementation can reduce progression risk in intermediate dry AMD"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A leading cause of irreversible central visual loss in older adults, affecting fine detail, reading, and face recognition while peripheral vision is spared",
-      "Dry (non-exudative) form is commonest and progresses slowly with drusen and retinal pigment epithelial changes, culminating in geographic atrophy",
-      "Wet (neovascular/exudative) form is less common but causes rapid, severe loss due to choroidal neovascularisation, haemorrhage, and fluid",
-      "New distortion of straight lines (metamorphopsia) or a central blur/scotoma, often monitored with an Amsler grid, suggests conversion to wet AMD and warrants urgent referral",
-      "Smoking is the most important modifiable risk factor; age, family history, and pale iris/light exposure also contribute",
-      "Intravitreal anti-VEGF injection is the mainstay for neovascular AMD and can stabilise or improve vision",
-      "Dietary antioxidant and zinc supplementation can reduce progression risk in intermediate dry AMD"
+  "pathophysiology": "Age-related macular degeneration results from cumulative damage to the retinal pigment epithelium, Bruch's membrane, and choriocapillaris at the macula. Impaired clearance of metabolic debris leads to drusen deposition, and oxidative stress, complement-mediated inflammation, and lipofuscin accumulation injure the photoreceptor-RPE complex. In the atrophic form this causes progressive loss of central photoreceptors, whereas in the neovascular form ischaemia and VEGF release drive abnormal choroidal new vessels that leak and bleed beneath and within the retina, rapidly destroying central vision.",
+  "additionalDifferentials": [
+   "Diabetic maculopathy",
+   "Central serous chorioretinopathy",
+   "Macular dystrophy or pattern dystrophy",
+   "Myopic macular degeneration",
+   "Polypoidal choroidal vasculopathy",
+   "Cystoid macular oedema"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination and colour fundus photography",
+   "Optical coherence tomography to detect intraretinal/subretinal fluid and atrophy",
+   "OCT angiography or fluorescein angiography to identify choroidal neovascularisation",
+   "Amsler grid for self-monitoring of distortion",
+   "Visual acuity and near vision testing"
+  ],
+  "redFlags": [
+   "Sudden central distortion, blurring, or a new scotoma suggesting conversion to neovascular AMD — urgent referral",
+   "Sudden severe drop in central vision from submacular haemorrhage",
+   "Rapid progression in the second eye of a patient with unilateral wet AMD",
+   "Any acute change while on anti-VEGF therapy indicating recurrent activity"
+  ],
+  "prognosis": "Dry AMD progresses slowly and central vision may remain functional for years, whereas untreated wet AMD can cause rapid severe central loss; prompt anti-VEGF therapy substantially improves outcomes, though peripheral vision is preserved in all forms.",
+  "pitfalls": [
+   "Dismissing new metamorphopsia as needing new glasses and delaying urgent referral for wet AMD",
+   "Failing to advise smoking cessation as a key modifiable risk",
+   "Assuming peripheral vision loss is due to AMD, when it points elsewhere",
+   "Not checking and monitoring the fellow eye, which is at high risk"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat neovascular (wet) disease with intravitreal anti-VEGF injections such as ranibizumab, aflibercept or bevacizumab on a regular or treat-and-extend regimen",
+   "Offer antioxidant and zinc supplementation of an AREDS-type formulation to slow progression in intermediate or advanced dry disease",
+   "Strongly advise smoking cessation as the most important modifiable risk factor, and address diet and cardiovascular risk",
+   "Arrange Amsler grid self-monitoring with urgent re-referral for new distortion or central scotoma signalling conversion to wet disease",
+   "Monitor with optical coherence tomography to guide retreatment and detect recurrent fluid",
+   "Provide low-vision rehabilitation, magnifiers and registration as sight-impaired for those with established central loss",
+   "Refer promptly to ophthalmology, urgently when neovascular conversion is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "age_related_macular_degeneration-pathway",
+   "title": "Age-related macular degeneration: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A leading cause of irreversible central visual loss in older adults, affecting fine detail, reading, and face recognition while peripheral vision is spared",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden central distortion, blurring, or a new scotoma suggesting conversion to neovascular AMD - urgent referral",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination and colour fundus photography, Optical coherence tomography to detect intraretinal/subretinal fluid and atrophy, OCT angiography or fluorescein angiography to identify choroidal neovascularisation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat neovascular (wet) disease with intravitreal anti-VEGF injections such as ranibizumab, aflibercept or bevacizumab on a regular or treat-and-extend regimen"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing new metamorphopsia as needing new glasses and delaying urgent referral for wet AMD"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of age-related macular degeneration."
+  }
+ ],
+ "tables": [
+  {
+   "id": "age_related_macular_degeneration-matrix",
+   "title": "Age-related macular degeneration: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A leading cause of irreversible central visual loss in older adults, affecting fine detail, reading, and face recognition while",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Age-related macular degeneration results from cumulative damage to the retinal pigment epithelium, Bruch's membrane, and choriocapillaris at the macula. Impaired clearance of metabolic debris leads to drusen deposition, and oxidative stress, complement-mediated inflammation, and lipofuscin accumulation injure the photoreceptor-RPE complex. In the atrophic form this causes progressive loss of central photoreceptors, whereas in the neovascular form ischaemia and VEGF release drive abnormal choroidal new vessels that leak and bleed beneath and within the retina, rapidly destroying central vision.",
-    "additionalDifferentials": [
-      "Diabetic maculopathy",
-      "Central serous chorioretinopathy",
-      "Macular dystrophy or pattern dystrophy",
-      "Myopic macular degeneration",
-      "Polypoidal choroidal vasculopathy",
-      "Cystoid macular oedema"
+    [
+     "Key Investigations",
+     "Dilated fundus examination and colour fundus photography, Optical coherence tomography to detect intraretinal/subretinal fluid",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination and colour fundus photography",
-      "Optical coherence tomography to detect intraretinal/subretinal fluid and atrophy",
-      "OCT angiography or fluorescein angiography to identify choroidal neovascularisation",
-      "Amsler grid for self-monitoring of distortion",
-      "Visual acuity and near vision testing"
+    [
+     "Primary Differentials",
+     "Diabetic maculopathy, Central serous chorioretinopathy, Macular dystrophy or pattern dystrophy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden central distortion, blurring, or a new scotoma suggesting conversion to neovascular AMD — urgent referral",
-      "Sudden severe drop in central vision from submacular haemorrhage",
-      "Rapid progression in the second eye of a patient with unilateral wet AMD",
-      "Any acute change while on anti-VEGF therapy indicating recurrent activity"
+    [
+     "Management Strategy",
+     "Treat neovascular (wet) disease with intravitreal anti-VEGF injections such as ranibizumab, aflibercept or bevacizumab on a",
+     "Core treatment modality"
     ],
-    "prognosis": "Dry AMD progresses slowly and central vision may remain functional for years, whereas untreated wet AMD can cause rapid severe central loss; prompt anti-VEGF therapy substantially improves outcomes, though peripheral vision is preserved in all forms.",
-    "pitfalls": [
-      "Dismissing new metamorphopsia as needing new glasses and delaying urgent referral for wet AMD",
-      "Failing to advise smoking cessation as a key modifiable risk",
-      "Assuming peripheral vision loss is due to AMD, when it points elsewhere",
-      "Not checking and monitoring the fellow eye, which is at high risk"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat neovascular (wet) disease with intravitreal anti-VEGF injections such as ranibizumab, aflibercept or bevacizumab on a regular or treat-and-extend regimen",
-      "Offer antioxidant and zinc supplementation of an AREDS-type formulation to slow progression in intermediate or advanced dry disease",
-      "Strongly advise smoking cessation as the most important modifiable risk factor, and address diet and cardiovascular risk",
-      "Arrange Amsler grid self-monitoring with urgent re-referral for new distortion or central scotoma signalling conversion to wet disease",
-      "Monitor with optical coherence tomography to guide retreatment and detect recurrent fluid",
-      "Provide low-vision rehabilitation, magnifiers and registration as sight-impaired for those with established central loss",
-      "Refer promptly to ophthalmology, urgently when neovascular conversion is suspected"
+    [
+     "Clinical Pitfall",
+     "Dismissing new metamorphopsia as needing new glasses and delaying urgent referral for wet AMD",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for age-related macular degeneration."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "age-related-macular-degeneration-diagram",
+   "title": "Age-related macular degeneration: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

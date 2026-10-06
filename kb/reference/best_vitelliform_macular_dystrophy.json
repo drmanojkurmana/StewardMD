@@ -1,89 +1,184 @@
 {
-  "id": "best_vitelliform_macular_dystrophy",
-  "name": "Best Vitelliform Macular Dystrophy",
-  "aliases": [
-    "BEST1",
-    "BVMD",
-    "Best disease",
-    "Best macular dystrophy",
-    "Best vitelliform macular dystrophy",
-    "VMD2",
-    "Vitelliform macular dystrophy type 2",
-    "best vitelliform dystrophy",
-    "bestrophinopathy",
-    "vitelliform macular dystrophy type 2"
+ "id": "best_vitelliform_macular_dystrophy",
+ "name": "Best Vitelliform Macular Dystrophy",
+ "aliases": [
+  "BEST1",
+  "BVMD",
+  "Best disease",
+  "Best macular dystrophy",
+  "Best vitelliform macular dystrophy",
+  "VMD2",
+  "Vitelliform macular dystrophy type 2",
+  "best vitelliform dystrophy",
+  "bestrophinopathy",
+  "vitelliform macular dystrophy type 2"
+ ],
+ "class": "non_infective",
+ "system": "Ophthalmology",
+ "specialty": "Medical retina / Ocular genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Ophthalmology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant dystrophy caused by BEST1 mutations encoding bestrophin-1, a calcium-activated chloride channel on the basolateral membrane of the retinal pigment epithelium.",
+   "The pathognomonic combination is an abnormal electro-oculogram (reduced light rise, giving a low Arden ratio) with a normal full-field electroretinogram.",
+   "The classic egg-yolk (vitelliform) macular lesion evolves through recognised stages: previtelliform, vitelliform, pseudohypopyon, vitelliruptive (scrambled-egg), atrophic and cicatricial.",
+   "Central vision is often preserved for years or decades despite a striking fundus appearance, and the condition is frequently bilateral.",
+   "Choroidal neovascularisation is the principal sight-threatening complication and can arise even in younger patients.",
+   "Fundus autofluorescence shows markedly hyperautofluorescent vitelliform material owing to lipofuscin-like accumulation.",
+   "Penetrance and expressivity are variable, so relatives with a normal fundus may still show an abnormal electro-oculogram, aiding cascade assessment.",
+   "Biallelic BEST1 mutations cause a distinct recessive bestrophinopathy with a different, often more severe phenotype."
   ],
-  "class": "non_infective",
-  "system": "Ophthalmology",
-  "specialty": "Medical retina / Ocular genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Ophthalmology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant dystrophy caused by BEST1 mutations encoding bestrophin-1, a calcium-activated chloride channel on the basolateral membrane of the retinal pigment epithelium.",
-      "The pathognomonic combination is an abnormal electro-oculogram (reduced light rise, giving a low Arden ratio) with a normal full-field electroretinogram.",
-      "The classic egg-yolk (vitelliform) macular lesion evolves through recognised stages: previtelliform, vitelliform, pseudohypopyon, vitelliruptive (scrambled-egg), atrophic and cicatricial.",
-      "Central vision is often preserved for years or decades despite a striking fundus appearance, and the condition is frequently bilateral.",
-      "Choroidal neovascularisation is the principal sight-threatening complication and can arise even in younger patients.",
-      "Fundus autofluorescence shows markedly hyperautofluorescent vitelliform material owing to lipofuscin-like accumulation.",
-      "Penetrance and expressivity are variable, so relatives with a normal fundus may still show an abnormal electro-oculogram, aiding cascade assessment.",
-      "Biallelic BEST1 mutations cause a distinct recessive bestrophinopathy with a different, often more severe phenotype."
+  "pathophysiology": "Best vitelliform macular dystrophy results from mutations in BEST1, which encodes bestrophin-1, a calcium-activated chloride channel located on the basolateral membrane of the retinal pigment epithelium. Loss of normal channel function disturbs transepithelial ion and fluid movement and the generation of the light-evoked standing potential, which is why the electro-oculogram light rise is characteristically reduced while the photoreceptor-driven electroretinogram remains normal. Impaired retinal pigment epithelial handling of shed photoreceptor outer segments leads to accumulation of lipofuscin-like material within and beneath the epithelium at the macula, producing the yellow vitelliform lesion. Over time this material breaks down and disperses, and progressive dysfunction of the retinal pigment epithelium and overlying photoreceptors culminates in atrophy and, in some eyes, secondary choroidal neovascularisation and fibrosis with loss of central acuity.",
+  "additionalDifferentials": [
+   "Adult-onset foveomacular vitelliform dystrophy (a pattern dystrophy)",
+   "Age-related macular degeneration with vitelliform or drusenoid change",
+   "Autosomal recessive bestrophinopathy",
+   "Stargardt disease and fundus flavimaculatus",
+   "Central serous chorioretinopathy",
+   "Basal laminar (cuticular) drusen with vitelliform detachment",
+   "Acquired vitelliform lesions secondary to other maculopathies"
+  ],
+  "additionalInvestigations": [
+   "Electro-oculogram demonstrating a reduced light-peak to dark-trough (Arden) ratio",
+   "Full-field electroretinogram (characteristically normal)",
+   "Optical coherence tomography of the macula showing subretinal vitelliform material",
+   "Fundus autofluorescence imaging",
+   "Fluorescein angiography where choroidal neovascularisation is suspected",
+   "Molecular genetic testing of BEST1",
+   "Microperimetry to map central retinal sensitivity"
+  ],
+  "redFlags": [
+   "Sudden reduction in vision, metamorphopsia or a new central scotoma suggesting choroidal neovascularisation",
+   "Rapidly enlarging subretinal haemorrhage or exudate at the macula",
+   "Progressive bilateral central atrophy threatening reading vision",
+   "New distortion on home Amsler-grid monitoring"
+  ],
+  "prognosis": "The long-term outlook is generally favourable, with useful central vision often retained into later adulthood; significant visual loss usually reflects macular atrophy or choroidal neovascularisation, and legal blindness, though possible, is uncommon.",
+  "pitfalls": [
+   "Misattributing the maculopathy to age-related macular degeneration in older patients and missing the underlying dystrophy.",
+   "Being falsely reassured by a normal electroretinogram; the electro-oculogram is the discriminating test.",
+   "Overlooking early choroidal neovascularisation as simply progression of the vitelliform lesion.",
+   "Assuming an unaffected fundus excludes carrier status without electrophysiology or genetic testing.",
+   "Confusing the condition with adult-onset foveomacular vitelliform dystrophy, which has a distinct course and inheritance."
+  ],
+  "references": [
+   "Ryan's Retina (standard reference)",
+   "Kanski's Clinical Ophthalmology (standard reference)",
+   "American Academy of Ophthalmology Basic and Clinical Science Course (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Adopt observation with regular macular imaging, as there is no established treatment to alter the underlying BEST1-related dysfunction",
+   "Treat choroidal neovascularisation, the main threat to sight, with intravitreal anti-VEGF injections, including in younger patients",
+   "Surveil both eyes with serial optical coherence tomography and fundus autofluorescence given the typically bilateral course",
+   "Give Amsler-grid instructions for self-detection of new metamorphopsia prompting urgent assessment",
+   "Arrange low-vision support and occupational adjustment if atrophy or cicatricial change reduces acuity",
+   "Confirm the diagnosis with electro-oculography and BEST1 testing, and provide genetic counselling and family screening for this autosomal dominant condition"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "best_vitelliform_macular_dystrophy-pathway",
+   "title": "Best Vitelliform Macular Dystrophy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant dystrophy caused by BEST1 mutations encoding bestrophin-1, a calcium-activated chloride channel on the basolateral membrane of the retinal pigment epithelium.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden reduction in vision, metamorphopsia or a new central scotoma suggesting choroidal neovascularisation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Electro-oculogram demonstrating a reduced light-peak to dark-trough (Arden) ratio, Full-field electroretinogram (characteristically normal), Optical coherence tomography of the macula showing subretinal vitelliform material"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Adopt observation with regular macular imaging, as there is no established treatment to alter the underlying BEST1-related dysfunction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misattributing the maculopathy to age-related macular degeneration in older patients and missing the underlying dystrophy."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of best vitelliform macular dystrophy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "best_vitelliform_macular_dystrophy-matrix",
+   "title": "Best Vitelliform Macular Dystrophy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant dystrophy caused by BEST1 mutations encoding bestrophin-1, a calcium-activated chloride channel on the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Best vitelliform macular dystrophy results from mutations in BEST1, which encodes bestrophin-1, a calcium-activated chloride channel located on the basolateral membrane of the retinal pigment epithelium. Loss of normal channel function disturbs transepithelial ion and fluid movement and the generation of the light-evoked standing potential, which is why the electro-oculogram light rise is characteristically reduced while the photoreceptor-driven electroretinogram remains normal. Impaired retinal pigment epithelial handling of shed photoreceptor outer segments leads to accumulation of lipofuscin-like material within and beneath the epithelium at the macula, producing the yellow vitelliform lesion. Over time this material breaks down and disperses, and progressive dysfunction of the retinal pigment epithelium and overlying photoreceptors culminates in atrophy and, in some eyes, secondary choroidal neovascularisation and fibrosis with loss of central acuity.",
-    "additionalDifferentials": [
-      "Adult-onset foveomacular vitelliform dystrophy (a pattern dystrophy)",
-      "Age-related macular degeneration with vitelliform or drusenoid change",
-      "Autosomal recessive bestrophinopathy",
-      "Stargardt disease and fundus flavimaculatus",
-      "Central serous chorioretinopathy",
-      "Basal laminar (cuticular) drusen with vitelliform detachment",
-      "Acquired vitelliform lesions secondary to other maculopathies"
+    [
+     "Key Investigations",
+     "Electro-oculogram demonstrating a reduced light-peak to dark-trough (Arden) ratio, Full-field electroretinogram",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Electro-oculogram demonstrating a reduced light-peak to dark-trough (Arden) ratio",
-      "Full-field electroretinogram (characteristically normal)",
-      "Optical coherence tomography of the macula showing subretinal vitelliform material",
-      "Fundus autofluorescence imaging",
-      "Fluorescein angiography where choroidal neovascularisation is suspected",
-      "Molecular genetic testing of BEST1",
-      "Microperimetry to map central retinal sensitivity"
+    [
+     "Primary Differentials",
+     "Adult-onset foveomacular vitelliform dystrophy (a pattern dystrophy), Age-related macular degeneration with vitelliform or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden reduction in vision, metamorphopsia or a new central scotoma suggesting choroidal neovascularisation",
-      "Rapidly enlarging subretinal haemorrhage or exudate at the macula",
-      "Progressive bilateral central atrophy threatening reading vision",
-      "New distortion on home Amsler-grid monitoring"
+    [
+     "Management Strategy",
+     "Adopt observation with regular macular imaging, as there is no established treatment to alter the underlying BEST1-related",
+     "Core treatment modality"
     ],
-    "prognosis": "The long-term outlook is generally favourable, with useful central vision often retained into later adulthood; significant visual loss usually reflects macular atrophy or choroidal neovascularisation, and legal blindness, though possible, is uncommon.",
-    "pitfalls": [
-      "Misattributing the maculopathy to age-related macular degeneration in older patients and missing the underlying dystrophy.",
-      "Being falsely reassured by a normal electroretinogram; the electro-oculogram is the discriminating test.",
-      "Overlooking early choroidal neovascularisation as simply progression of the vitelliform lesion.",
-      "Assuming an unaffected fundus excludes carrier status without electrophysiology or genetic testing.",
-      "Confusing the condition with adult-onset foveomacular vitelliform dystrophy, which has a distinct course and inheritance."
-    ],
-    "references": [
-      "Ryan's Retina (standard reference)",
-      "Kanski's Clinical Ophthalmology (standard reference)",
-      "American Academy of Ophthalmology Basic and Clinical Science Course (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Adopt observation with regular macular imaging, as there is no established treatment to alter the underlying BEST1-related dysfunction",
-      "Treat choroidal neovascularisation, the main threat to sight, with intravitreal anti-VEGF injections, including in younger patients",
-      "Surveil both eyes with serial optical coherence tomography and fundus autofluorescence given the typically bilateral course",
-      "Give Amsler-grid instructions for self-detection of new metamorphopsia prompting urgent assessment",
-      "Arrange low-vision support and occupational adjustment if atrophy or cicatricial change reduces acuity",
-      "Confirm the diagnosis with electro-oculography and BEST1 testing, and provide genetic counselling and family screening for this autosomal dominant condition"
+    [
+     "Clinical Pitfall",
+     "Misattributing the maculopathy to age-related macular degeneration in older patients and missing the underlying dystrophy.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for best vitelliform macular dystrophy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "best-vitelliform-macular-dystrophy-diagram",
+   "title": "Best Vitelliform Macular Dystrophy: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

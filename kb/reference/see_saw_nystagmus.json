@@ -1,74 +1,169 @@
 {
-  "id": "see_saw_nystagmus",
-  "name": "See-saw nystagmus",
-  "aliases": [
-    "seesaw nystagmus"
+ "id": "see_saw_nystagmus",
+ "name": "See-saw nystagmus",
+ "aliases": [
+  "seesaw nystagmus"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A distinctive nystagmus in which one eye rises and intorts while the other falls and extorts, then the cycle reverses, resembling a see-saw",
+   "The pendular form is classically associated with parasellar or suprasellar masses compressing the chiasm and optic pathways",
+   "A bitemporal hemianopia frequently accompanies the pendular form because of chiasmal involvement",
+   "The jerk (hemi-see-saw) form points to a mesodiencephalic lesion, often in the region of the interstitial nucleus of Cajal",
+   "It may also occur with severe congenital visual loss and some retinal dystrophies",
+   "MRI directed at the sellar, suprasellar and mesodiencephalic regions is central to the workup"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A distinctive nystagmus in which one eye rises and intorts while the other falls and extorts, then the cycle reverses, resembling a see-saw",
-      "The pendular form is classically associated with parasellar or suprasellar masses compressing the chiasm and optic pathways",
-      "A bitemporal hemianopia frequently accompanies the pendular form because of chiasmal involvement",
-      "The jerk (hemi-see-saw) form points to a mesodiencephalic lesion, often in the region of the interstitial nucleus of Cajal",
-      "It may also occur with severe congenital visual loss and some retinal dystrophies",
-      "MRI directed at the sellar, suprasellar and mesodiencephalic regions is central to the workup"
+  "pathophysiology": "See-saw nystagmus arises from disruption of the vestibulo-ocular and visual pathways that coordinate torsional and vertical eye movements, particularly around the diencephalon and rostral midbrain. The pendular form is linked to large parasellar or suprasellar lesions that damage the chiasm and adjacent structures, plausibly removing visual and vestibular stabilising signals, whereas the jerk hemi-see-saw form reflects a focal lesion of the interstitial nucleus of Cajal and its connections. The result is the conjugate torsional and disjunctive vertical oscillation that defines the sign.",
+  "additionalDifferentials": [
+   "Pituitary or other parasellar mass",
+   "Craniopharyngioma",
+   "Mesodiencephalic stroke or lesion",
+   "Congenital or retinal-dystrophy-associated nystagmus",
+   "Other acquired pendular nystagmus (for example demyelinating)",
+   "Oculopalatal tremor"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain focused on the sellar, suprasellar and mesodiencephalic regions",
+   "Formal visual field testing for a bitemporal hemianopia",
+   "Neuro-ophthalmological and orthoptic assessment",
+   "Endocrine evaluation if a sellar mass is found",
+   "Electroretinography when a retinal cause is suspected"
+  ],
+  "redFlags": [
+   "Bitemporal hemianopia or other chiasmal field loss",
+   "Signs of a sellar or suprasellar mass, including endocrine disturbance",
+   "Additional brainstem or diencephalic signs",
+   "Progressive visual loss"
+  ],
+  "prognosis": "Prognosis depends on the underlying cause; the nystagmus may improve if a compressive lesion is treated, but it can persist, and associated visual field loss may not fully recover.",
+  "pitfalls": [
+   "Failing to image the sella and chiasm when see-saw nystagmus is identified",
+   "Overlooking an accompanying bitemporal hemianopia",
+   "Not distinguishing the pendular from the jerk (hemi-see-saw) form and their different localisations",
+   "Missing a congenital or retinal cause in a child"
+  ],
+  "references": [
+   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the underlying cause, such as resection (often transsphenoidal) or radiotherapy of a compressive parasellar or suprasellar mass",
+   "Treat an underlying mesodiencephalic structural lesion according to its nature",
+   "Offer symptomatic pharmacological treatment for troublesome oscillopsia with agents such as gabapentin, memantine or clonazepam",
+   "Replace deficient pituitary hormones when a sellar mass causes hypopituitarism",
+   "Provide neuro-ophthalmological and orthoptic review and low-vision support",
+   "Monitor visual fields for chiasmal bitemporal field loss",
+   "Refer to neurosurgery and endocrinology as guided by imaging"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "see_saw_nystagmus-pathway",
+   "title": "See-saw nystagmus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A distinctive nystagmus in which one eye rises and intorts while the other falls and extorts, then the cycle reverses, resembling a see-saw",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Bitemporal hemianopia or other chiasmal field loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain focused on the sellar, suprasellar and mesodiencephalic regions, Formal visual field testing for a bitemporal hemianopia, Neuro-ophthalmological and orthoptic assessment"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the underlying cause, such as resection (often transsphenoidal) or radiotherapy of a compressive parasellar or suprasellar mass"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to image the sella and chiasm when see-saw nystagmus is identified"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of see-saw nystagmus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "see_saw_nystagmus-matrix",
+   "title": "See-saw nystagmus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A distinctive nystagmus in which one eye rises and intorts while the other falls and extorts, then the cycle reverses, resembling",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "See-saw nystagmus arises from disruption of the vestibulo-ocular and visual pathways that coordinate torsional and vertical eye movements, particularly around the diencephalon and rostral midbrain. The pendular form is linked to large parasellar or suprasellar lesions that damage the chiasm and adjacent structures, plausibly removing visual and vestibular stabilising signals, whereas the jerk hemi-see-saw form reflects a focal lesion of the interstitial nucleus of Cajal and its connections. The result is the conjugate torsional and disjunctive vertical oscillation that defines the sign.",
-    "additionalDifferentials": [
-      "Pituitary or other parasellar mass",
-      "Craniopharyngioma",
-      "Mesodiencephalic stroke or lesion",
-      "Congenital or retinal-dystrophy-associated nystagmus",
-      "Other acquired pendular nystagmus (for example demyelinating)",
-      "Oculopalatal tremor"
+    [
+     "Key Investigations",
+     "MRI of the brain focused on the sellar, suprasellar and mesodiencephalic regions, Formal visual field testing for a bitemporal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain focused on the sellar, suprasellar and mesodiencephalic regions",
-      "Formal visual field testing for a bitemporal hemianopia",
-      "Neuro-ophthalmological and orthoptic assessment",
-      "Endocrine evaluation if a sellar mass is found",
-      "Electroretinography when a retinal cause is suspected"
+    [
+     "Primary Differentials",
+     "Pituitary or other parasellar mass, Craniopharyngioma, Mesodiencephalic stroke or lesion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Bitemporal hemianopia or other chiasmal field loss",
-      "Signs of a sellar or suprasellar mass, including endocrine disturbance",
-      "Additional brainstem or diencephalic signs",
-      "Progressive visual loss"
+    [
+     "Management Strategy",
+     "Direct treatment at the underlying cause, such as resection (often transsphenoidal) or radiotherapy of a compressive parasellar",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the underlying cause; the nystagmus may improve if a compressive lesion is treated, but it can persist, and associated visual field loss may not fully recover.",
-    "pitfalls": [
-      "Failing to image the sella and chiasm when see-saw nystagmus is identified",
-      "Overlooking an accompanying bitemporal hemianopia",
-      "Not distinguishing the pendular from the jerk (hemi-see-saw) form and their different localisations",
-      "Missing a congenital or retinal cause in a child"
-    ],
-    "references": [
-      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the underlying cause, such as resection (often transsphenoidal) or radiotherapy of a compressive parasellar or suprasellar mass",
-      "Treat an underlying mesodiencephalic structural lesion according to its nature",
-      "Offer symptomatic pharmacological treatment for troublesome oscillopsia with agents such as gabapentin, memantine or clonazepam",
-      "Replace deficient pituitary hormones when a sellar mass causes hypopituitarism",
-      "Provide neuro-ophthalmological and orthoptic review and low-vision support",
-      "Monitor visual fields for chiasmal bitemporal field loss",
-      "Refer to neurosurgery and endocrinology as guided by imaging"
+    [
+     "Clinical Pitfall",
+     "Failing to image the sella and chiasm when see-saw nystagmus is identified",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for see-saw nystagmus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "see-saw-nystagmus-diagram",
+   "title": "See-saw nystagmus: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

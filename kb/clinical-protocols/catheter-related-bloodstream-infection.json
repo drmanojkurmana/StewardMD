@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, ICU, dialysis unit, oncology",
- "aliases": ["CRBSI", "CLABSI", "central line infection", "line sepsis", "PICC infection", "dialysis catheter infection", "port infection", "catheter bacteraemia"],
+ "aliases": [
+  "CRBSI",
+  "CLABSI",
+  "central line infection",
+  "line sepsis",
+  "PICC infection",
+  "dialysis catheter infection",
+  "port infection",
+  "catheter bacteraemia"
+ ],
  "summary": "Take paired catheter and peripheral blood cultures, start vancomycin plus gram-negative cover guided by severity and local resistance, remove the catheter for S. aureus, Pseudomonas, Candida or complicated infection, and set duration by organism and complications.",
  "sections": [
   {
@@ -91,17 +100,153 @@
   }
  ],
  "drugs": [
-  { "name": "Vancomycin", "dose": "Loading 20 to 35 mg/kg IV (actual body weight, maximum 3 g) in critical illness, then 15 to 20 mg/kg every 8 to 12 hours", "notes": "AUC-guided (400 to 600 mg.h/L) or trough monitoring; adjust to renal function." },
-  { "name": "Cefazolin", "dose": "2 g IV every 8 hours", "notes": "MSSA definitive therapy." },
-  { "name": "Daptomycin", "dose": "6 mg/kg IV once daily (8 to 10 mg/kg often used for S. aureus bacteraemia)", "notes": "MRSA with high vancomycin MIC or vancomycin intolerance. Check CK weekly." },
-  { "name": "Cefepime", "dose": "2 g IV every 8 hours", "notes": "Empirical gram-negative including Pseudomonas; renal adjustment." },
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 hours", "notes": "Empirical gram-negative including Pseudomonas; renal adjustment." },
-  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "ESBL risk or colonisation; renal adjustment." },
-  { "name": "Caspofungin", "dose": "70 mg IV loading, then 50 mg IV daily", "notes": "Suspected or proven candidaemia." }
+  {
+   "name": "Vancomycin",
+   "dose": "Loading 20 to 35 mg/kg IV (actual body weight, maximum 3 g) in critical illness, then 15 to 20 mg/kg every 8 to 12 hours",
+   "notes": "AUC-guided (400 to 600 mg.h/L) or trough monitoring; adjust to renal function."
+  },
+  {
+   "name": "Cefazolin",
+   "dose": "2 g IV every 8 hours",
+   "notes": "MSSA definitive therapy."
+  },
+  {
+   "name": "Daptomycin",
+   "dose": "6 mg/kg IV once daily (8 to 10 mg/kg often used for S. aureus bacteraemia)",
+   "notes": "MRSA with high vancomycin MIC or vancomycin intolerance. Check CK weekly."
+  },
+  {
+   "name": "Cefepime",
+   "dose": "2 g IV every 8 hours",
+   "notes": "Empirical gram-negative including Pseudomonas; renal adjustment."
+  },
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 hours",
+   "notes": "Empirical gram-negative including Pseudomonas; renal adjustment."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV every 8 hours",
+   "notes": "ESBL risk or colonisation; renal adjustment."
+  },
+  {
+   "name": "Caspofungin",
+   "dose": "70 mg IV loading, then 50 mg IV daily",
+   "notes": "Suspected or proven candidaemia."
+  }
  ],
  "sources": [
-  { "org": "IDSA", "title": "Clinical practice guidelines for the diagnosis and management of intravascular catheter-related infection: 2009 update", "year": 2009, "url": "https://academic.oup.com/cid/article/49/1/1/288390" },
-  { "org": "IDSA / ESCMID", "title": "Consensus statements on Staphylococcus aureus bacteremia, part 1", "year": 2026, "url": "https://www.idsociety.org/practice-guideline/staphylococcus-aureus-bacteremia/" }
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guidelines for the diagnosis and management of intravascular catheter-related infection: 2009 update",
+   "year": 2009,
+   "url": "https://academic.oup.com/cid/article/49/1/1/288390"
+  },
+  {
+   "org": "IDSA / ESCMID",
+   "title": "Consensus statements on Staphylococcus aureus bacteremia, part 1",
+   "year": 2026,
+   "url": "https://www.idsociety.org/practice-guideline/staphylococcus-aureus-bacteremia/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "catheter-related-bloodstream-infection-pathway",
+   "title": "Catheter-related bloodstream infection (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect CRBSI in a patient with a central venous catheter, PICC, dialysis catheter or port who has fever, rigors (especially on flushing or dialysis), hypotension or sepsis with no other source.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Exit site erythema or pus, tunnel tenderness or port pocket infection are specific but often absent.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Before antibiotics, take paired blood cultures of equal volume: one through the catheter hub (each lumen if possible) and one from a peripheral vein, labelled by site."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Count duration from the first negative blood culture."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Taking only line cultures, or giving antibiotics before paired cultures."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for catheter-related bloodstream infection (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "catheter-related-bloodstream-infection-summary-matrix",
+   "title": "Catheter-related bloodstream infection (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect CRBSI in a patient with a central venous catheter, PICC, dialysis catheter or port who has fever, rigors (especially on flushing or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Count duration from the first negative blood culture.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Before antibiotics, take paired blood cultures of equal volume: one through the catheter hub (each lumen if possible) and one from a",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Vancomycin: Loading 20 to 35 mg/kg IV (actual body weight, maximum 3 g) in critical illness, then 15 to 20 mg/kg every 8 to 12 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Taking only line cultures, or giving antibiotics before paired cultures.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for catheter-related bloodstream infection (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "catheter-related-bloodstream-infection-diagram",
+   "title": "Catheter-related bloodstream infection (adult): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

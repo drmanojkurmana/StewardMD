@@ -1,81 +1,176 @@
 {
-  "id": "orbital_myositis",
-  "name": "Orbital myositis",
-  "aliases": [
-    "idiopathic orbital myositis",
-    "myositic orbital inflammation",
-    "extraocular muscle myositis",
-    "inflammatory orbital myositis"
+ "id": "orbital_myositis",
+ "name": "Orbital myositis",
+ "aliases": [
+  "idiopathic orbital myositis",
+  "myositic orbital inflammation",
+  "extraocular muscle myositis",
+  "inflammatory orbital myositis"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An inflammatory disorder of one or more extraocular muscles, usually considered a myositic subtype of idiopathic orbital inflammation",
+   "Typical presentation is with acute painful diplopia, pain worsened by eye movement, redness over the involved muscle insertion, and restricted motility",
+   "It is frequently unilateral and often affects a single muscle, most commonly a horizontal rectus",
+   "On orbital imaging the affected muscle is enlarged with characteristic involvement of the tendon, in contrast to the tendon-sparing enlargement of thyroid eye disease",
+   "Injection and swelling are often most marked over the insertion of the inflamed muscle",
+   "Most cases respond briskly to systemic corticosteroids, with relief of pain and improvement in movement, though recurrence can occur",
+   "Atypical, recurrent, bilateral, or treatment-resistant cases warrant investigation and sometimes biopsy to exclude specific inflammations, IgG4-related disease, vasculitis, and lymphoma",
+   "The key clinical distinction from thyroid eye disease is the pain, tendon involvement, and usually single-muscle pattern"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An inflammatory disorder of one or more extraocular muscles, usually considered a myositic subtype of idiopathic orbital inflammation",
-      "Typical presentation is with acute painful diplopia, pain worsened by eye movement, redness over the involved muscle insertion, and restricted motility",
-      "It is frequently unilateral and often affects a single muscle, most commonly a horizontal rectus",
-      "On orbital imaging the affected muscle is enlarged with characteristic involvement of the tendon, in contrast to the tendon-sparing enlargement of thyroid eye disease",
-      "Injection and swelling are often most marked over the insertion of the inflamed muscle",
-      "Most cases respond briskly to systemic corticosteroids, with relief of pain and improvement in movement, though recurrence can occur",
-      "Atypical, recurrent, bilateral, or treatment-resistant cases warrant investigation and sometimes biopsy to exclude specific inflammations, IgG4-related disease, vasculitis, and lymphoma",
-      "The key clinical distinction from thyroid eye disease is the pain, tendon involvement, and usually single-muscle pattern"
+  "pathophysiology": "Orbital myositis is inflammation localised to the extraocular muscles, with an infiltrate of lymphocytes and other inflammatory cells causing the muscle belly and, characteristically, its tendon of insertion to swell. The inflamed, oedematous muscle contracts and moves poorly, producing pain on eye movement, diplopia, and restriction, while overlying congestion causes redness at the insertion. It is regarded as a form of idiopathic orbital inflammation confined to muscle, and some cases fall within the IgG4-related disease spectrum or accompany systemic inflammatory disorders. The immune-mediated nature explains the typically rapid response to corticosteroids, whereas persistent or recurrent inflammation can lead to fibrosis with fixed restriction.",
+  "additionalDifferentials": [
+   "Thyroid eye disease (tendon-sparing muscle enlargement)",
+   "Idiopathic orbital inflammation of other patterns",
+   "Orbital cellulitis",
+   "Carotid-cavernous fistula",
+   "Orbital metastasis or lymphoma involving muscle",
+   "Systemic vasculitis or IgG4-related orbital disease"
+  ],
+  "additionalInvestigations": [
+   "Orbital CT or MRI demonstrating enlargement of the affected muscle with tendon involvement",
+   "Assessment of ocular motility, diplopia, and pain on eye movement",
+   "Visual acuity, colour vision, and pupil assessment to exclude optic-nerve involvement",
+   "Bloods including inflammatory markers, thyroid function and autoantibodies, and serum IgG4 to exclude mimics",
+   "ANCA and systemic workup where vasculitis or systemic disease is suspected",
+   "Biopsy in atypical, recurrent, or steroid-unresponsive cases"
+  ],
+  "redFlags": [
+   "Poor or absent response to corticosteroids suggesting an alternative diagnosis such as lymphoma",
+   "Bilateral or recurrent myositis pointing to a systemic or IgG4-related cause",
+   "Signs of optic-nerve compromise or marked proptosis",
+   "Features suggesting infection or a carotid-cavernous fistula rather than sterile inflammation"
+  ],
+  "prognosis": "The prognosis is generally good, with most single-muscle cases responding promptly to corticosteroids, but recurrences are common and repeated or chronic inflammation may cause muscle fibrosis with persistent diplopia and restriction needing further treatment.",
+  "pitfalls": [
+   "Confusing it with thyroid eye disease by overlooking the pain and tendon involvement",
+   "Mistaking it for orbital cellulitis and treating with antibiotics alone",
+   "Attributing a poor steroid response to underdosing rather than reconsidering the diagnosis",
+   "Failing to investigate recurrent or bilateral disease for a systemic cause",
+   "Missing IgG4-related disease or vasculitis underlying the myositis"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Shields' Textbook of Glaucoma"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use systemic corticosteroids as the mainstay, which usually produce brisk relief of pain and restriction",
+   "Consider NSAIDs alone for mild, isolated disease",
+   "Add steroid-sparing immunosuppression (methotrexate, mycophenolate) or biologic therapy for recurrent, steroid-dependent or refractory cases",
+   "Reserve low-dose orbital radiotherapy for disease refractory to immunosuppression",
+   "Confirm the diagnosis with orbital imaging and exclude mimics such as thyroid eye disease and IgG4-related disease before committing to long-term therapy",
+   "Monitor for recurrence and fibrosis, and manage residual diplopia with prisms or strabismus surgery once stable",
+   "Provide ophthalmology and orbital-specialist follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "orbital_myositis-pathway",
+   "title": "Orbital myositis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An inflammatory disorder of one or more extraocular muscles, usually considered a myositic subtype of idiopathic orbital inflammation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Poor or absent response to corticosteroids suggesting an alternative diagnosis such as lymphoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Orbital CT or MRI demonstrating enlargement of the affected muscle with tendon involvement, Assessment of ocular motility, diplopia, and pain on eye movement, Visual acuity, colour vision, and pupil assessment to exclude"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use systemic corticosteroids as the mainstay, which usually produce brisk relief of pain and restriction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with thyroid eye disease by overlooking the pain and tendon involvement"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of orbital myositis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "orbital_myositis-matrix",
+   "title": "Orbital myositis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An inflammatory disorder of one or more extraocular muscles, usually considered a myositic subtype of idiopathic orbital",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Orbital myositis is inflammation localised to the extraocular muscles, with an infiltrate of lymphocytes and other inflammatory cells causing the muscle belly and, characteristically, its tendon of insertion to swell. The inflamed, oedematous muscle contracts and moves poorly, producing pain on eye movement, diplopia, and restriction, while overlying congestion causes redness at the insertion. It is regarded as a form of idiopathic orbital inflammation confined to muscle, and some cases fall within the IgG4-related disease spectrum or accompany systemic inflammatory disorders. The immune-mediated nature explains the typically rapid response to corticosteroids, whereas persistent or recurrent inflammation can lead to fibrosis with fixed restriction.",
-    "additionalDifferentials": [
-      "Thyroid eye disease (tendon-sparing muscle enlargement)",
-      "Idiopathic orbital inflammation of other patterns",
-      "Orbital cellulitis",
-      "Carotid-cavernous fistula",
-      "Orbital metastasis or lymphoma involving muscle",
-      "Systemic vasculitis or IgG4-related orbital disease"
+    [
+     "Key Investigations",
+     "Orbital CT or MRI demonstrating enlargement of the affected muscle with tendon involvement, Assessment of ocular motility,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Orbital CT or MRI demonstrating enlargement of the affected muscle with tendon involvement",
-      "Assessment of ocular motility, diplopia, and pain on eye movement",
-      "Visual acuity, colour vision, and pupil assessment to exclude optic-nerve involvement",
-      "Bloods including inflammatory markers, thyroid function and autoantibodies, and serum IgG4 to exclude mimics",
-      "ANCA and systemic workup where vasculitis or systemic disease is suspected",
-      "Biopsy in atypical, recurrent, or steroid-unresponsive cases"
+    [
+     "Primary Differentials",
+     "Thyroid eye disease (tendon-sparing muscle enlargement), Idiopathic orbital inflammation of other patterns, Orbital cellulitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Poor or absent response to corticosteroids suggesting an alternative diagnosis such as lymphoma",
-      "Bilateral or recurrent myositis pointing to a systemic or IgG4-related cause",
-      "Signs of optic-nerve compromise or marked proptosis",
-      "Features suggesting infection or a carotid-cavernous fistula rather than sterile inflammation"
+    [
+     "Management Strategy",
+     "Use systemic corticosteroids as the mainstay, which usually produce brisk relief of pain and restriction",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally good, with most single-muscle cases responding promptly to corticosteroids, but recurrences are common and repeated or chronic inflammation may cause muscle fibrosis with persistent diplopia and restriction needing further treatment.",
-    "pitfalls": [
-      "Confusing it with thyroid eye disease by overlooking the pain and tendon involvement",
-      "Mistaking it for orbital cellulitis and treating with antibiotics alone",
-      "Attributing a poor steroid response to underdosing rather than reconsidering the diagnosis",
-      "Failing to investigate recurrent or bilateral disease for a systemic cause",
-      "Missing IgG4-related disease or vasculitis underlying the myositis"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Shields' Textbook of Glaucoma"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use systemic corticosteroids as the mainstay, which usually produce brisk relief of pain and restriction",
-      "Consider NSAIDs alone for mild, isolated disease",
-      "Add steroid-sparing immunosuppression (methotrexate, mycophenolate) or biologic therapy for recurrent, steroid-dependent or refractory cases",
-      "Reserve low-dose orbital radiotherapy for disease refractory to immunosuppression",
-      "Confirm the diagnosis with orbital imaging and exclude mimics such as thyroid eye disease and IgG4-related disease before committing to long-term therapy",
-      "Monitor for recurrence and fibrosis, and manage residual diplopia with prisms or strabismus surgery once stable",
-      "Provide ophthalmology and orbital-specialist follow-up"
+    [
+     "Clinical Pitfall",
+     "Confusing it with thyroid eye disease by overlooking the pain and tendon involvement",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for orbital myositis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "orbital-myositis-diagram",
+   "title": "Orbital myositis: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

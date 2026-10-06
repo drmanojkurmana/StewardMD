@@ -1,81 +1,176 @@
 {
-  "id": "apeced",
-  "name": "APECED",
-  "aliases": [
-    "APECED",
-    "autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy",
-    "APS-1",
-    "autoimmune polyendocrine syndrome type 1",
-    "AIRE deficiency"
+ "id": "apeced",
+ "name": "APECED",
+ "aliases": [
+  "APECED",
+  "autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy",
+  "APS-1",
+  "autoimmune polyendocrine syndrome type 1",
+  "AIRE deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Immunology",
+ "specialty": "Clinical Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "APECED is an autosomal recessive disorder caused by mutations in the AIRE gene, which governs central immune tolerance in the thymus",
+   "It is classically defined by a triad of chronic mucocutaneous candidiasis, hypoparathyroidism, and primary adrenal insufficiency (Addison disease), with diagnosis usually requiring two of the three",
+   "Chronic mucocutaneous candidiasis is often the earliest feature and is driven by autoantibodies against Th17-related cytokines (such as IL-17 and IL-22)",
+   "The candidiasis reflects immune dysregulation rather than a classical phagocyte or T-cell deficiency, and is largely limited to skin, nails, and mucosa without systemic dissemination",
+   "A wide range of additional autoimmune conditions can occur, including gonadal failure, type 1 diabetes, autoimmune thyroid disease, hepatitis, pernicious anaemia, and vitiligo",
+   "A useful diagnostic marker is the presence of high-titre autoantibodies against type 1 interferons, which are highly characteristic of the condition",
+   "Chronic oral candidiasis carries a long-term risk of oral squamous cell carcinoma, warranting surveillance",
+   "Management involves hormone replacement for the endocrine deficiencies, antifungal treatment for candidiasis, and monitoring for the emergence of new autoimmune components over time"
   ],
-  "class": "non_infective",
-  "system": "Immunology",
-  "specialty": "Clinical Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "APECED is an autosomal recessive disorder caused by mutations in the AIRE gene, which governs central immune tolerance in the thymus",
-      "It is classically defined by a triad of chronic mucocutaneous candidiasis, hypoparathyroidism, and primary adrenal insufficiency (Addison disease), with diagnosis usually requiring two of the three",
-      "Chronic mucocutaneous candidiasis is often the earliest feature and is driven by autoantibodies against Th17-related cytokines (such as IL-17 and IL-22)",
-      "The candidiasis reflects immune dysregulation rather than a classical phagocyte or T-cell deficiency, and is largely limited to skin, nails, and mucosa without systemic dissemination",
-      "A wide range of additional autoimmune conditions can occur, including gonadal failure, type 1 diabetes, autoimmune thyroid disease, hepatitis, pernicious anaemia, and vitiligo",
-      "A useful diagnostic marker is the presence of high-titre autoantibodies against type 1 interferons, which are highly characteristic of the condition",
-      "Chronic oral candidiasis carries a long-term risk of oral squamous cell carcinoma, warranting surveillance",
-      "Management involves hormone replacement for the endocrine deficiencies, antifungal treatment for candidiasis, and monitoring for the emergence of new autoimmune components over time"
+  "pathophysiology": "APECED results from biallelic mutations in AIRE (the autoimmune regulator), a transcriptional regulator expressed by medullary thymic epithelial cells that drives the display of tissue-specific self antigens during T-cell development. Defective AIRE function impairs negative selection, allowing autoreactive T cells to escape into the periphery and mount organ-specific autoimmune attacks. The result is progressive autoimmune destruction of endocrine and other tissues. The characteristic mucocutaneous candidiasis is explained by the generation of neutralising autoantibodies against Th17 cytokines that are essential for mucosal antifungal defence, and neutralising autoantibodies against type 1 interferons serve as a highly specific biomarker.",
+  "additionalDifferentials": [
+   "Autoimmune polyendocrine syndrome type 2 (polygenic, adult onset)",
+   "IPEX syndrome and IPEX-like disorders",
+   "Isolated chronic mucocutaneous candidiasis due to other genetic causes (for example STAT1 gain-of-function)",
+   "Isolated Addison disease or hypoparathyroidism",
+   "Other combined causes of endocrine autoimmunity"
+  ],
+  "additionalInvestigations": [
+   "AIRE genetic testing",
+   "Autoantibodies against type 1 interferons and against Th17 cytokines",
+   "Organ-specific autoantibody panels and endocrine function tests (calcium, parathyroid hormone, adrenal axis, thyroid, glucose)",
+   "Fungal cultures and clinical assessment of mucocutaneous candidiasis",
+   "Periodic screening for evolving autoimmune components",
+   "Surveillance for oral squamous cell carcinoma in chronic oral candidiasis"
+  ],
+  "redFlags": [
+   "Adrenal crisis from unrecognised or undertreated primary adrenal insufficiency requiring emergency treatment",
+   "Symptomatic hypocalcaemia from hypoparathyroidism",
+   "New oral lesions raising concern for squamous cell carcinoma",
+   "Autoimmune hepatitis progressing to liver failure",
+   "Emergence of a new autoimmune endocrinopathy needing prompt recognition"
+  ],
+  "prognosis": "With appropriate hormone replacement and antifungal therapy the prognosis is generally reasonable, but outcome is shaped by the cumulative burden of autoimmune organ damage, the risk of unrecognised adrenal crisis, and the long-term risk of oral malignancy, so lifelong monitoring is required.",
+  "pitfalls": [
+   "Treating individual endocrinopathies in isolation without recognising the unifying syndrome",
+   "Missing evolving components, since the full picture develops over years",
+   "Overlooking adrenal insufficiency, with the danger of a precipitated crisis",
+   "Failing to survey chronic oral candidiasis for malignant change",
+   "Confusing APECED with IPEX, which is X-linked, FOXP3-related, and presents in infancy"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Replace failing endocrine axes: glucocorticoid and mineralocorticoid for adrenal insufficiency, calcium with an activated vitamin D analogue (alfacalcidol or calcitriol) for hypoparathyroidism, levothyroxine for hypothyroidism, insulin for type 1 diabetes, and sex-hormone replacement for gonadal failure",
+   "Treat chronic mucocutaneous candidiasis with azole antifungals such as fluconazole, cycling agents to manage emerging azole resistance",
+   "Prevent and treat adrenal crisis with parenteral hydrocortisone and fluids, plus patient stress-dosing education, an emergency steroid card and an injection kit",
+   "Manage other autoimmune components as they arise, for example immunosuppression for autoimmune hepatitis and vitamin B12 replacement for pernicious anaemia",
+   "Undertake lifelong periodic screening for evolving endocrine and organ-specific autoimmunity, and surveillance for oral squamous cell carcinoma in chronic candidiasis",
+   "Coordinate care through endocrinology, clinical immunology and dermatology",
+   "Offer genetic counselling for this autosomal recessive AIRE disorder and screen affected siblings"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "apeced-pathway",
+   "title": "APECED: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "APECED is an autosomal recessive disorder caused by mutations in the AIRE gene, which governs central immune tolerance in the thymus",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Adrenal crisis from unrecognised or undertreated primary adrenal insufficiency requiring emergency treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: AIRE genetic testing, Autoantibodies against type 1 interferons and against Th17 cytokines, Organ-specific autoantibody panels and endocrine function tests (calcium, parathyroid hormone, adrenal axis, thyroid, glucose)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Replace failing endocrine axes: glucocorticoid and mineralocorticoid for adrenal insufficiency, calcium with an activated vitamin D analogue (alfacalcidol or calcitriol) for hypoparathyroidism, levothyroxine for"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating individual endocrinopathies in isolation without recognising the unifying syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of apeced."
+  }
+ ],
+ "tables": [
+  {
+   "id": "apeced-matrix",
+   "title": "APECED: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "APECED is an autosomal recessive disorder caused by mutations in the AIRE gene, which governs central immune tolerance in the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "APECED results from biallelic mutations in AIRE (the autoimmune regulator), a transcriptional regulator expressed by medullary thymic epithelial cells that drives the display of tissue-specific self antigens during T-cell development. Defective AIRE function impairs negative selection, allowing autoreactive T cells to escape into the periphery and mount organ-specific autoimmune attacks. The result is progressive autoimmune destruction of endocrine and other tissues. The characteristic mucocutaneous candidiasis is explained by the generation of neutralising autoantibodies against Th17 cytokines that are essential for mucosal antifungal defence, and neutralising autoantibodies against type 1 interferons serve as a highly specific biomarker.",
-    "additionalDifferentials": [
-      "Autoimmune polyendocrine syndrome type 2 (polygenic, adult onset)",
-      "IPEX syndrome and IPEX-like disorders",
-      "Isolated chronic mucocutaneous candidiasis due to other genetic causes (for example STAT1 gain-of-function)",
-      "Isolated Addison disease or hypoparathyroidism",
-      "Other combined causes of endocrine autoimmunity"
+    [
+     "Key Investigations",
+     "AIRE genetic testing, Autoantibodies against type 1 interferons and against Th17 cytokines, Organ-specific autoantibody panels",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "AIRE genetic testing",
-      "Autoantibodies against type 1 interferons and against Th17 cytokines",
-      "Organ-specific autoantibody panels and endocrine function tests (calcium, parathyroid hormone, adrenal axis, thyroid, glucose)",
-      "Fungal cultures and clinical assessment of mucocutaneous candidiasis",
-      "Periodic screening for evolving autoimmune components",
-      "Surveillance for oral squamous cell carcinoma in chronic oral candidiasis"
+    [
+     "Primary Differentials",
+     "Autoimmune polyendocrine syndrome type 2 (polygenic, adult onset), IPEX syndrome and IPEX-like disorders, Isolated chronic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Adrenal crisis from unrecognised or undertreated primary adrenal insufficiency requiring emergency treatment",
-      "Symptomatic hypocalcaemia from hypoparathyroidism",
-      "New oral lesions raising concern for squamous cell carcinoma",
-      "Autoimmune hepatitis progressing to liver failure",
-      "Emergence of a new autoimmune endocrinopathy needing prompt recognition"
+    [
+     "Management Strategy",
+     "Replace failing endocrine axes: glucocorticoid and mineralocorticoid for adrenal insufficiency, calcium with an activated vitamin",
+     "Core treatment modality"
     ],
-    "prognosis": "With appropriate hormone replacement and antifungal therapy the prognosis is generally reasonable, but outcome is shaped by the cumulative burden of autoimmune organ damage, the risk of unrecognised adrenal crisis, and the long-term risk of oral malignancy, so lifelong monitoring is required.",
-    "pitfalls": [
-      "Treating individual endocrinopathies in isolation without recognising the unifying syndrome",
-      "Missing evolving components, since the full picture develops over years",
-      "Overlooking adrenal insufficiency, with the danger of a precipitated crisis",
-      "Failing to survey chronic oral candidiasis for malignant change",
-      "Confusing APECED with IPEX, which is X-linked, FOXP3-related, and presents in infancy"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Replace failing endocrine axes: glucocorticoid and mineralocorticoid for adrenal insufficiency, calcium with an activated vitamin D analogue (alfacalcidol or calcitriol) for hypoparathyroidism, levothyroxine for hypothyroidism, insulin for type 1 diabetes, and sex-hormone replacement for gonadal failure",
-      "Treat chronic mucocutaneous candidiasis with azole antifungals such as fluconazole, cycling agents to manage emerging azole resistance",
-      "Prevent and treat adrenal crisis with parenteral hydrocortisone and fluids, plus patient stress-dosing education, an emergency steroid card and an injection kit",
-      "Manage other autoimmune components as they arise, for example immunosuppression for autoimmune hepatitis and vitamin B12 replacement for pernicious anaemia",
-      "Undertake lifelong periodic screening for evolving endocrine and organ-specific autoimmunity, and surveillance for oral squamous cell carcinoma in chronic candidiasis",
-      "Coordinate care through endocrinology, clinical immunology and dermatology",
-      "Offer genetic counselling for this autosomal recessive AIRE disorder and screen affected siblings"
+    [
+     "Clinical Pitfall",
+     "Treating individual endocrinopathies in isolation without recognising the unifying syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for apeced."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "apeced-diagram",
+   "title": "APECED: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

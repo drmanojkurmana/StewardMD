@@ -1,80 +1,175 @@
 {
-  "id": "drug_allergy",
-  "name": "Drug allergy",
-  "aliases": [
-    "drug hypersensitivity",
-    "medication allergy",
-    "adverse drug reaction (immune-mediated)"
+ "id": "drug_allergy",
+ "name": "Drug allergy",
+ "aliases": [
+  "drug hypersensitivity",
+  "medication allergy",
+  "adverse drug reaction (immune-mediated)"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Allergy",
+ "specialty": "Allergy & Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "True drug allergy is an immune-mediated subset of adverse drug reactions and must be distinguished from predictable dose-related side effects and non-immune intolerance",
+   "The Gell and Coombs framework is useful: immediate IgE-mediated reactions (type I) cause urticaria, angioedema, and anaphylaxis, while delayed T-cell-mediated reactions (type IV) cause most drug-induced rashes",
+   "The tempo matters: immediate reactions arise within minutes to an hour of exposure, whereas delayed maculopapular eruptions and severe cutaneous reactions typically appear days into a course",
+   "Beta-lactam antibiotics are the commonest cause of drug-induced anaphylaxis, but a reported penicillin allergy is frequently inaccurate and unnecessarily drives use of broader, more toxic alternatives",
+   "Severe cutaneous adverse reactions such as Stevens-Johnson syndrome, toxic epidermal necrolysis, and DRESS are potentially fatal and are suggested by mucosal involvement, skin pain, blistering, fever, facial oedema, and organ dysfunction",
+   "Skin testing is validated mainly for penicillins and perioperative agents; specific IgE and in-vitro tests are limited, so the supervised graded challenge remains the definitive test for many drugs",
+   "Management principles are immediate cessation of the culprit drug, treatment of the reaction, clear documentation and patient warning, and selection of a structurally unrelated alternative",
+   "Desensitisation can allow temporary tolerance when a culprit drug is essential and no alternative exists, but it is contraindicated in severe cutaneous reactions such as SJS/TEN and DRESS",
+   "Careful de-labelling of unverified penicillin allergy through history and, where appropriate, challenge is an important antimicrobial-stewardship intervention"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Allergy",
-  "specialty": "Allergy & Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "True drug allergy is an immune-mediated subset of adverse drug reactions and must be distinguished from predictable dose-related side effects and non-immune intolerance",
-      "The Gell and Coombs framework is useful: immediate IgE-mediated reactions (type I) cause urticaria, angioedema, and anaphylaxis, while delayed T-cell-mediated reactions (type IV) cause most drug-induced rashes",
-      "The tempo matters: immediate reactions arise within minutes to an hour of exposure, whereas delayed maculopapular eruptions and severe cutaneous reactions typically appear days into a course",
-      "Beta-lactam antibiotics are the commonest cause of drug-induced anaphylaxis, but a reported penicillin allergy is frequently inaccurate and unnecessarily drives use of broader, more toxic alternatives",
-      "Severe cutaneous adverse reactions such as Stevens-Johnson syndrome, toxic epidermal necrolysis, and DRESS are potentially fatal and are suggested by mucosal involvement, skin pain, blistering, fever, facial oedema, and organ dysfunction",
-      "Skin testing is validated mainly for penicillins and perioperative agents; specific IgE and in-vitro tests are limited, so the supervised graded challenge remains the definitive test for many drugs",
-      "Management principles are immediate cessation of the culprit drug, treatment of the reaction, clear documentation and patient warning, and selection of a structurally unrelated alternative",
-      "Desensitisation can allow temporary tolerance when a culprit drug is essential and no alternative exists, but it is contraindicated in severe cutaneous reactions such as SJS/TEN and DRESS",
-      "Careful de-labelling of unverified penicillin allergy through history and, where appropriate, challenge is an important antimicrobial-stewardship intervention"
+  "pathophysiology": "Immune-mediated drug reactions occur when a drug or its reactive metabolite, often after binding host protein as a hapten, is recognised by the adaptive immune system. Type I reactions involve drug-specific IgE on mast cells and basophils, producing immediate mediator release. Type II reactions are antibody-mediated cytotoxicity against drug-coated cells (e.g. immune haemolysis, thrombocytopenia), and type III reactions involve immune-complex deposition (serum sickness, vasculitis). Type IV delayed reactions are T-cell-driven and range from benign exanthems to severe cutaneous reactions; the p-i concept describes direct, non-covalent drug interaction with immune receptors, and specific HLA alleles predispose to particular severe reactions.",
+  "additionalDifferentials": [
+   "Non-immune (pharmacologic) intolerance and dose-related toxicity",
+   "Viral exanthem coinciding with drug therapy",
+   "Direct mast-cell activation (e.g. by opioids, vancomycin infusion reaction)",
+   "NSAID- or ACE-inhibitor-induced angioedema through non-IgE mechanisms",
+   "Underlying autoimmune or infectious disease producing rash or organ dysfunction",
+   "Chronic spontaneous urticaria unrelated to the drug"
+  ],
+  "additionalInvestigations": [
+   "Skin prick and intradermal testing where validated (penicillins, perioperative agents)",
+   "Serum drug-specific IgE where available and serum tryptase during acute reactions",
+   "Supervised graded drug challenge to confirm or exclude allergy",
+   "Delayed-reading intradermal or patch testing for suspected type IV reactions",
+   "HLA genotyping before selected high-risk drugs where guidelines recommend it",
+   "Blood count, eosinophils, liver and renal function in suspected DRESS or systemic involvement"
+  ],
+  "redFlags": [
+   "Anaphylaxis with hypotension or airway compromise requiring immediate intramuscular adrenaline",
+   "Mucosal erosions, skin blistering or pain, or positive Nikolsky sign suggesting SJS/TEN",
+   "Fever, facial oedema, lymphadenopathy, eosinophilia, and organ involvement suggesting DRESS",
+   "Any severe cutaneous adverse reaction, in which re-exposure or desensitisation is contraindicated"
+  ],
+  "prognosis": "Most benign exanthems and immediate reactions resolve fully once the drug is withdrawn and future exposure avoided. Severe cutaneous adverse reactions carry significant morbidity and mortality, particularly toxic epidermal necrolysis, and require urgent specialist and supportive care.",
+  "pitfalls": [
+   "Accepting an unverified allergy label and defaulting to broader, more toxic alternatives",
+   "Attempting desensitisation or re-challenge after a severe cutaneous reaction",
+   "Mistaking a viral rash or predictable side effect for true allergy, or vice versa",
+   "Failing to document the reaction clearly and counsel the patient about cross-reacting agents"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "Middleton's Allergy: Principles and Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediately withdraw and clearly document the suspected culprit drug, and counsel the patient to avoid it and cross-reacting agents in future",
+   "Treat anaphylaxis with intramuscular adrenaline as first-line, together with oxygen, fluid resuscitation and airway support, using antihistamines and corticosteroids only as adjuncts",
+   "Recognise severe cutaneous adverse reactions (Stevens-Johnson syndrome, toxic epidermal necrolysis, DRESS) as emergencies requiring urgent drug cessation and supportive care in a specialist or burns unit, with systemic immunomodulation as indicated",
+   "Manage milder immediate or delayed reactions symptomatically with antihistamines and topical or oral corticosteroids",
+   "Confirm or refute the diagnosis with allergy testing, using skin prick and intradermal testing for penicillins and perioperative agents and a supervised graded challenge, to enable de-labelling of inaccurate penicillin-allergy records",
+   "Consider supervised drug desensitisation where an implicated drug is essential and irreplaceable",
+   "Refer to allergy and immunology, provide written allergy documentation and a patient alert, and check HLA genotyping before selected high-risk drugs where guidelines advise"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "drug_allergy-pathway",
+   "title": "Drug allergy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "True drug allergy is an immune-mediated subset of adverse drug reactions and must be distinguished from predictable dose-related side effects and non-immune intolerance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Anaphylaxis with hypotension or airway compromise requiring immediate intramuscular adrenaline",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin prick and intradermal testing where validated (penicillins, perioperative agents), Serum drug-specific IgE where available and serum tryptase during acute reactions, Supervised graded drug challenge to confirm or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediately withdraw and clearly document the suspected culprit drug, and counsel the patient to avoid it and cross-reacting agents in future"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Accepting an unverified allergy label and defaulting to broader, more toxic alternatives"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of drug allergy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "drug_allergy-matrix",
+   "title": "Drug allergy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "True drug allergy is an immune-mediated subset of adverse drug reactions and must be distinguished from predictable dose-related",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Immune-mediated drug reactions occur when a drug or its reactive metabolite, often after binding host protein as a hapten, is recognised by the adaptive immune system. Type I reactions involve drug-specific IgE on mast cells and basophils, producing immediate mediator release. Type II reactions are antibody-mediated cytotoxicity against drug-coated cells (e.g. immune haemolysis, thrombocytopenia), and type III reactions involve immune-complex deposition (serum sickness, vasculitis). Type IV delayed reactions are T-cell-driven and range from benign exanthems to severe cutaneous reactions; the p-i concept describes direct, non-covalent drug interaction with immune receptors, and specific HLA alleles predispose to particular severe reactions.",
-    "additionalDifferentials": [
-      "Non-immune (pharmacologic) intolerance and dose-related toxicity",
-      "Viral exanthem coinciding with drug therapy",
-      "Direct mast-cell activation (e.g. by opioids, vancomycin infusion reaction)",
-      "NSAID- or ACE-inhibitor-induced angioedema through non-IgE mechanisms",
-      "Underlying autoimmune or infectious disease producing rash or organ dysfunction",
-      "Chronic spontaneous urticaria unrelated to the drug"
+    [
+     "Key Investigations",
+     "Skin prick and intradermal testing where validated (penicillins, perioperative agents), Serum drug-specific IgE where available",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin prick and intradermal testing where validated (penicillins, perioperative agents)",
-      "Serum drug-specific IgE where available and serum tryptase during acute reactions",
-      "Supervised graded drug challenge to confirm or exclude allergy",
-      "Delayed-reading intradermal or patch testing for suspected type IV reactions",
-      "HLA genotyping before selected high-risk drugs where guidelines recommend it",
-      "Blood count, eosinophils, liver and renal function in suspected DRESS or systemic involvement"
+    [
+     "Primary Differentials",
+     "Non-immune (pharmacologic) intolerance and dose-related toxicity, Viral exanthem coinciding with drug therapy, Direct mast-cell",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Anaphylaxis with hypotension or airway compromise requiring immediate intramuscular adrenaline",
-      "Mucosal erosions, skin blistering or pain, or positive Nikolsky sign suggesting SJS/TEN",
-      "Fever, facial oedema, lymphadenopathy, eosinophilia, and organ involvement suggesting DRESS",
-      "Any severe cutaneous adverse reaction, in which re-exposure or desensitisation is contraindicated"
+    [
+     "Management Strategy",
+     "Immediately withdraw and clearly document the suspected culprit drug, and counsel the patient to avoid it and cross-reacting",
+     "Core treatment modality"
     ],
-    "prognosis": "Most benign exanthems and immediate reactions resolve fully once the drug is withdrawn and future exposure avoided. Severe cutaneous adverse reactions carry significant morbidity and mortality, particularly toxic epidermal necrolysis, and require urgent specialist and supportive care.",
-    "pitfalls": [
-      "Accepting an unverified allergy label and defaulting to broader, more toxic alternatives",
-      "Attempting desensitisation or re-challenge after a severe cutaneous reaction",
-      "Mistaking a viral rash or predictable side effect for true allergy, or vice versa",
-      "Failing to document the reaction clearly and counsel the patient about cross-reacting agents"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "Middleton's Allergy: Principles and Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediately withdraw and clearly document the suspected culprit drug, and counsel the patient to avoid it and cross-reacting agents in future",
-      "Treat anaphylaxis with intramuscular adrenaline as first-line, together with oxygen, fluid resuscitation and airway support, using antihistamines and corticosteroids only as adjuncts",
-      "Recognise severe cutaneous adverse reactions (Stevens-Johnson syndrome, toxic epidermal necrolysis, DRESS) as emergencies requiring urgent drug cessation and supportive care in a specialist or burns unit, with systemic immunomodulation as indicated",
-      "Manage milder immediate or delayed reactions symptomatically with antihistamines and topical or oral corticosteroids",
-      "Confirm or refute the diagnosis with allergy testing, using skin prick and intradermal testing for penicillins and perioperative agents and a supervised graded challenge, to enable de-labelling of inaccurate penicillin-allergy records",
-      "Consider supervised drug desensitisation where an implicated drug is essential and irreplaceable",
-      "Refer to allergy and immunology, provide written allergy documentation and a patient alert, and check HLA genotyping before selected high-risk drugs where guidelines advise"
+    [
+     "Clinical Pitfall",
+     "Accepting an unverified allergy label and defaulting to broader, more toxic alternatives",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for drug allergy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "drug-allergy-diagram",
+   "title": "Drug allergy: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

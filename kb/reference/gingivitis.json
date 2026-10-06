@@ -1,75 +1,170 @@
 {
-  "id": "gingivitis",
-  "name": "Gingivitis",
-  "aliases": [
-    "gum inflammation",
-    "plaque-induced gingivitis",
-    "marginal gingivitis"
+ "id": "gingivitis",
+ "name": "Gingivitis",
+ "aliases": [
+  "gum inflammation",
+  "plaque-induced gingivitis",
+  "marginal gingivitis"
+ ],
+ "class": "infective",
+ "system": "Oral / Dental / Maxillofacial",
+ "specialty": "Dentistry / OMFS",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard oral medicine & OMFS references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Gingivitis is reversible inflammation confined to the gingiva without loss of periodontal attachment or bone",
+   "The cardinal sign is bleeding on gentle probing or brushing, alongside redness, swelling, and loss of the normal stippled contour",
+   "It is overwhelmingly plaque-induced, so improved oral hygiene and professional cleaning usually reverse it within days to weeks",
+   "Hormonal changes in pregnancy and puberty, and certain medications, can exaggerate the gingival response to plaque",
+   "Unlike periodontitis, probing depths remain shallow and there is no true pocketing or attachment loss",
+   "Untreated gingivitis is a risk state that may progress to periodontitis in susceptible individuals",
+   "Necrotising gingivitis is a distinct painful form with ulcerated, punched-out interdental papillae and characteristic malodour",
+   "Persistent gingival inflammation despite good hygiene should prompt consideration of systemic or drug-related causes"
   ],
-  "class": "infective",
-  "system": "Oral / Dental / Maxillofacial",
-  "specialty": "Dentistry / OMFS",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard oral medicine & OMFS references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Gingivitis is reversible inflammation confined to the gingiva without loss of periodontal attachment or bone",
-      "The cardinal sign is bleeding on gentle probing or brushing, alongside redness, swelling, and loss of the normal stippled contour",
-      "It is overwhelmingly plaque-induced, so improved oral hygiene and professional cleaning usually reverse it within days to weeks",
-      "Hormonal changes in pregnancy and puberty, and certain medications, can exaggerate the gingival response to plaque",
-      "Unlike periodontitis, probing depths remain shallow and there is no true pocketing or attachment loss",
-      "Untreated gingivitis is a risk state that may progress to periodontitis in susceptible individuals",
-      "Necrotising gingivitis is a distinct painful form with ulcerated, punched-out interdental papillae and characteristic malodour",
-      "Persistent gingival inflammation despite good hygiene should prompt consideration of systemic or drug-related causes"
+  "pathophysiology": "Plaque-induced gingivitis develops when microbial biofilm accumulates at the gingival margin and triggers a localised host inflammatory response. Vasodilation and increased vascular permeability cause the classic erythema, oedema, and bleeding tendency, while the junctional epithelium remains intact and attachment is preserved, making the condition reversible. If the biofilm persists, the chronic inflammatory infiltrate can, in susceptible hosts and under modifying influences such as hormonal changes, systemic disease, or medications, evolve toward the attachment and bone loss that define periodontitis.",
+  "additionalDifferentials": [
+   "Early periodontitis with attachment loss",
+   "Necrotising ulcerative gingivitis",
+   "Drug-influenced gingival enlargement",
+   "Desquamative gingivitis from mucocutaneous disease",
+   "Gingival manifestations of leukaemia or other systemic illness"
+  ],
+  "additionalInvestigations": [
+   "Assessment of bleeding on probing and plaque indices",
+   "Periodontal probing to confirm absence of attachment loss",
+   "Review of medications and hormonal or systemic factors",
+   "Radiographs when needed to exclude bone loss",
+   "Blood investigations if systemic disease is suspected"
+  ],
+  "redFlags": [
+   "Spontaneous gingival bleeding or florid enlargement suggesting leukaemia or a bleeding disorder",
+   "Painful necrotising gingivitis, particularly in immunocompromised patients",
+   "Gingival changes that fail to resolve with good hygiene, indicating an underlying systemic cause"
+  ],
+  "prognosis": "Plaque-induced gingivitis is fully reversible with effective plaque control, but if neglected it can act as a precursor to irreversible periodontitis in susceptible people.",
+  "pitfalls": [
+   "Assuming all gingival inflammation is simple plaque-induced gingivitis and missing early periodontitis",
+   "Overlooking systemic, hormonal, or drug-related contributors to gingival changes",
+   "Attributing spontaneous bleeding to local causes when a haematological disorder is present",
+   "Failing to reinforce oral hygiene, leading to recurrence"
+  ],
+  "references": [
+   "Burket's Oral Medicine",
+   "Standard OMFS references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Mechanical biofilm removal is the mainstay, with professional scaling and supragingival debridement to disrupt plaque at the gingival margin",
+   "Reinforce daily plaque control through effective toothbrushing and interdental cleaning, which usually reverses the inflammation within days to weeks",
+   "Short-term adjunctive antiseptic mouthrinse such as chlorhexidine where mechanical control is temporarily inadequate",
+   "Identify and modify aggravating factors, reviewing implicated medications and managing hormonal or systemic contributors such as pregnancy or diabetes",
+   "Structured dental recall with reassessment of bleeding on probing and plaque indices to confirm resolution",
+   "Refer to a dental hygienist or periodontist and escalate to periodontal probing if attachment loss or true pocketing emerges, signalling progression to periodontitis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gingivitis-pathway",
+   "title": "Gingivitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Gingivitis is reversible inflammation confined to the gingiva without loss of periodontal attachment or bone",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Spontaneous gingival bleeding or florid enlargement suggesting leukaemia or a bleeding disorder",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Assessment of bleeding on probing and plaque indices, Periodontal probing to confirm absence of attachment loss, Review of medications and hormonal or systemic factors"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Mechanical biofilm removal is the mainstay, with professional scaling and supragingival debridement to disrupt plaque at the gingival margin"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all gingival inflammation is simple plaque-induced gingivitis and missing early periodontitis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gingivitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gingivitis-matrix",
+   "title": "Gingivitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Gingivitis is reversible inflammation confined to the gingiva without loss of periodontal attachment or bone",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Plaque-induced gingivitis develops when microbial biofilm accumulates at the gingival margin and triggers a localised host inflammatory response. Vasodilation and increased vascular permeability cause the classic erythema, oedema, and bleeding tendency, while the junctional epithelium remains intact and attachment is preserved, making the condition reversible. If the biofilm persists, the chronic inflammatory infiltrate can, in susceptible hosts and under modifying influences such as hormonal changes, systemic disease, or medications, evolve toward the attachment and bone loss that define periodontitis.",
-    "additionalDifferentials": [
-      "Early periodontitis with attachment loss",
-      "Necrotising ulcerative gingivitis",
-      "Drug-influenced gingival enlargement",
-      "Desquamative gingivitis from mucocutaneous disease",
-      "Gingival manifestations of leukaemia or other systemic illness"
+    [
+     "Key Investigations",
+     "Assessment of bleeding on probing and plaque indices, Periodontal probing to confirm absence of attachment loss, Review of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Assessment of bleeding on probing and plaque indices",
-      "Periodontal probing to confirm absence of attachment loss",
-      "Review of medications and hormonal or systemic factors",
-      "Radiographs when needed to exclude bone loss",
-      "Blood investigations if systemic disease is suspected"
+    [
+     "Primary Differentials",
+     "Early periodontitis with attachment loss, Necrotising ulcerative gingivitis, Drug-influenced gingival enlargement",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Spontaneous gingival bleeding or florid enlargement suggesting leukaemia or a bleeding disorder",
-      "Painful necrotising gingivitis, particularly in immunocompromised patients",
-      "Gingival changes that fail to resolve with good hygiene, indicating an underlying systemic cause"
+    [
+     "Management Strategy",
+     "Mechanical biofilm removal is the mainstay, with professional scaling and supragingival debridement to disrupt plaque at the",
+     "Core treatment modality"
     ],
-    "prognosis": "Plaque-induced gingivitis is fully reversible with effective plaque control, but if neglected it can act as a precursor to irreversible periodontitis in susceptible people.",
-    "pitfalls": [
-      "Assuming all gingival inflammation is simple plaque-induced gingivitis and missing early periodontitis",
-      "Overlooking systemic, hormonal, or drug-related contributors to gingival changes",
-      "Attributing spontaneous bleeding to local causes when a haematological disorder is present",
-      "Failing to reinforce oral hygiene, leading to recurrence"
-    ],
-    "references": [
-      "Burket's Oral Medicine",
-      "Standard OMFS references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Mechanical biofilm removal is the mainstay, with professional scaling and supragingival debridement to disrupt plaque at the gingival margin",
-      "Reinforce daily plaque control through effective toothbrushing and interdental cleaning, which usually reverses the inflammation within days to weeks",
-      "Short-term adjunctive antiseptic mouthrinse such as chlorhexidine where mechanical control is temporarily inadequate",
-      "Identify and modify aggravating factors, reviewing implicated medications and managing hormonal or systemic contributors such as pregnancy or diabetes",
-      "Structured dental recall with reassessment of bleeding on probing and plaque indices to confirm resolution",
-      "Refer to a dental hygienist or periodontist and escalate to periodontal probing if attachment loss or true pocketing emerges, signalling progression to periodontitis"
+    [
+     "Clinical Pitfall",
+     "Assuming all gingival inflammation is simple plaque-induced gingivitis and missing early periodontitis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gingivitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gingivitis-diagram",
+   "title": "Gingivitis: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

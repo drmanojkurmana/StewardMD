@@ -1,80 +1,175 @@
 {
-  "id": "ectodermal_dysplasia_skin_fragility_syndrome",
-  "name": "Ectodermal Dysplasia-Skin Fragility Syndrome",
-  "aliases": [
-    "EDSFS",
-    "McGrath syndrome",
-    "PKP1 deficiency"
+ "id": "ectodermal_dysplasia_skin_fragility_syndrome",
+ "name": "Ectodermal Dysplasia-Skin Fragility Syndrome",
+ "aliases": [
+  "EDSFS",
+  "McGrath syndrome",
+  "PKP1 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dermatology genodermatosis references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive genodermatosis caused by biallelic loss-of-function variants in PKP1 (plakophilin-1); the first human disease attributed to a desmosomal plaque protein.",
+   "Combines trauma-induced skin fragility with the appendage features of ectodermal dysplasia.",
+   "Painful palmoplantar keratoderma with deep fissuring is a prominent and disabling feature.",
+   "Hair is sparse and often described as astrakhan-fur-like, and the nails are dystrophic.",
+   "Perioral cracking and cheilitis are characteristic.",
+   "Electron microscopy shows small, poorly formed desmosomes with widened intercellular spaces between keratinocytes.",
+   "Failure to thrive may occur from cutaneous fluid and protein loss together with feeding difficulty."
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dermatology genodermatosis references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive genodermatosis caused by biallelic loss-of-function variants in PKP1 (plakophilin-1); the first human disease attributed to a desmosomal plaque protein.",
-      "Combines trauma-induced skin fragility with the appendage features of ectodermal dysplasia.",
-      "Painful palmoplantar keratoderma with deep fissuring is a prominent and disabling feature.",
-      "Hair is sparse and often described as astrakhan-fur-like, and the nails are dystrophic.",
-      "Perioral cracking and cheilitis are characteristic.",
-      "Electron microscopy shows small, poorly formed desmosomes with widened intercellular spaces between keratinocytes.",
-      "Failure to thrive may occur from cutaneous fluid and protein loss together with feeding difficulty."
+  "pathophysiology": "The syndrome results from biallelic loss-of-function variants in PKP1, encoding plakophilin-1, an armadillo-family protein of the desmosomal plaque that clusters desmosomal cadherins and desmoplakin and anchors the keratin intermediate-filament cytoskeleton. Absence of functional plakophilin-1 impairs desmosome assembly and reduces desmosome size and number, weakening keratinocyte-to-keratinocyte adhesion; the resulting widened intercellular spaces explain the suprabasal skin fragility, while defective ectodermal appendage development produces the associated sparse hair, nail dystrophy and palmoplantar keratoderma.",
+  "additionalDifferentials": [
+   "Epidermolysis bullosa simplex",
+   "SAM syndrome (DSG1-related severe dermatitis, multiple allergies and metabolic wasting)",
+   "Striate palmoplantar keratoderma (DSP or DSG1)",
+   "Netherton syndrome",
+   "Other ectodermal dysplasias",
+   "Keratitis-ichthyosis-deafness syndrome",
+   "Peeling skin syndromes"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy with light microscopy and transmission electron microscopy of desmosomes",
+   "Immunofluorescence antigen mapping demonstrating absent plakophilin-1",
+   "Molecular testing of PKP1",
+   "Hair-shaft microscopy",
+   "Dental assessment",
+   "Growth and nutritional monitoring"
+  ],
+  "redFlags": [
+   "Failure to thrive",
+   "Secondary cutaneous infection with risk of sepsis through eroded skin",
+   "Fluid and protein loss from extensive erosions",
+   "Disabling, painful plantar fissures limiting mobility"
+  ],
+  "prognosis": "A chronic condition that is generally non-scarring and tends to stabilise or improve with age, though the painful keratoderma and skin fragility carry a substantial quality-of-life burden.",
+  "pitfalls": [
+   "Easily misdiagnosed as epidermolysis bullosa simplex.",
+   "The painful palmoplantar keratoderma is a major morbidity that is frequently undertreated.",
+   "Should be distinguished from other desmosomal disorders such as SAM syndrome (DSG1-related).",
+   "Hair, nail and dental involvement should prompt recognition of the ectodermal dysplasia component."
+  ],
+  "references": [
+   "Dermatology genodermatosis references",
+   "Paediatric dermatology references",
+   "Medical genetics references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-specific therapy exists; base care on skin protection with gentle handling, emollients and prompt wound care to minimise trauma-induced erosions",
+   "Manage the painful palmoplantar keratoderma with keratolytics such as topical urea or salicylic acid, emollients, mechanical debridement and adapted footwear or orthotics",
+   "Treat and prevent secondary skin infection with antiseptics and topical or systemic antibacterials as needed",
+   "Support any hypohidrosis-related overheating with cooling measures and environmental temperature control",
+   "Provide dental care for the ectodermal appendage defects, and monitor growth and nutrition, addressing feeding difficulty and cheilitis",
+   "Coordinate multidisciplinary care led by dermatology with paediatric and dental input",
+   "Offer genetic counselling and family screening given the autosomal recessive PKP1 inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ectodermal_dysplasia_skin_fragility_syndrome-pathway",
+   "title": "Ectodermal Dysplasia-Skin Fragility Syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive genodermatosis caused by biallelic loss-of-function variants in PKP1 (plakophilin-1); the first human disease attributed to a desmosomal plaque protein.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Failure to thrive",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy with light microscopy and transmission electron microscopy of desmosomes, Immunofluorescence antigen mapping demonstrating absent plakophilin-1, Molecular testing of PKP1"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-specific therapy exists; base care on skin protection with gentle handling, emollients and prompt wound care to minimise trauma-induced erosions"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Easily misdiagnosed as epidermolysis bullosa simplex."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ectodermal dysplasia-skin fragility syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ectodermal_dysplasia_skin_fragility_syndrome-matrix",
+   "title": "Ectodermal Dysplasia-Skin Fragility Syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive genodermatosis caused by biallelic loss-of-function variants in PKP1 (plakophilin-1); the first human disease",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The syndrome results from biallelic loss-of-function variants in PKP1, encoding plakophilin-1, an armadillo-family protein of the desmosomal plaque that clusters desmosomal cadherins and desmoplakin and anchors the keratin intermediate-filament cytoskeleton. Absence of functional plakophilin-1 impairs desmosome assembly and reduces desmosome size and number, weakening keratinocyte-to-keratinocyte adhesion; the resulting widened intercellular spaces explain the suprabasal skin fragility, while defective ectodermal appendage development produces the associated sparse hair, nail dystrophy and palmoplantar keratoderma.",
-    "additionalDifferentials": [
-      "Epidermolysis bullosa simplex",
-      "SAM syndrome (DSG1-related severe dermatitis, multiple allergies and metabolic wasting)",
-      "Striate palmoplantar keratoderma (DSP or DSG1)",
-      "Netherton syndrome",
-      "Other ectodermal dysplasias",
-      "Keratitis-ichthyosis-deafness syndrome",
-      "Peeling skin syndromes"
+    [
+     "Key Investigations",
+     "Skin biopsy with light microscopy and transmission electron microscopy of desmosomes, Immunofluorescence antigen mapping",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy with light microscopy and transmission electron microscopy of desmosomes",
-      "Immunofluorescence antigen mapping demonstrating absent plakophilin-1",
-      "Molecular testing of PKP1",
-      "Hair-shaft microscopy",
-      "Dental assessment",
-      "Growth and nutritional monitoring"
+    [
+     "Primary Differentials",
+     "Epidermolysis bullosa simplex, SAM syndrome (DSG1-related severe dermatitis, multiple allergies and metabolic wasting), Striate",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Failure to thrive",
-      "Secondary cutaneous infection with risk of sepsis through eroded skin",
-      "Fluid and protein loss from extensive erosions",
-      "Disabling, painful plantar fissures limiting mobility"
+    [
+     "Management Strategy",
+     "No disease-specific therapy exists; base care on skin protection with gentle handling, emollients and prompt wound care to",
+     "Core treatment modality"
     ],
-    "prognosis": "A chronic condition that is generally non-scarring and tends to stabilise or improve with age, though the painful keratoderma and skin fragility carry a substantial quality-of-life burden.",
-    "pitfalls": [
-      "Easily misdiagnosed as epidermolysis bullosa simplex.",
-      "The painful palmoplantar keratoderma is a major morbidity that is frequently undertreated.",
-      "Should be distinguished from other desmosomal disorders such as SAM syndrome (DSG1-related).",
-      "Hair, nail and dental involvement should prompt recognition of the ectodermal dysplasia component."
-    ],
-    "references": [
-      "Dermatology genodermatosis references",
-      "Paediatric dermatology references",
-      "Medical genetics references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-specific therapy exists; base care on skin protection with gentle handling, emollients and prompt wound care to minimise trauma-induced erosions",
-      "Manage the painful palmoplantar keratoderma with keratolytics such as topical urea or salicylic acid, emollients, mechanical debridement and adapted footwear or orthotics",
-      "Treat and prevent secondary skin infection with antiseptics and topical or systemic antibacterials as needed",
-      "Support any hypohidrosis-related overheating with cooling measures and environmental temperature control",
-      "Provide dental care for the ectodermal appendage defects, and monitor growth and nutrition, addressing feeding difficulty and cheilitis",
-      "Coordinate multidisciplinary care led by dermatology with paediatric and dental input",
-      "Offer genetic counselling and family screening given the autosomal recessive PKP1 inheritance"
+    [
+     "Clinical Pitfall",
+     "Easily misdiagnosed as epidermolysis bullosa simplex.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ectodermal dysplasia-skin fragility syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ectodermal-dysplasia-skin-fragility-syndrome-diagram",
+   "title": "Ectodermal Dysplasia-Skin Fragility Syndrome: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "congenital_ptosis",
-  "name": "Congenital ptosis",
-  "aliases": [
-    "congenital blepharoptosis",
-    "congenital drooping eyelid",
-    "myogenic congenital ptosis"
+ "id": "congenital_ptosis",
+ "name": "Congenital ptosis",
+ "aliases": [
+  "congenital blepharoptosis",
+  "congenital drooping eyelid",
+  "myogenic congenital ptosis"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Drooping of the upper eyelid present from birth, most often due to localised dysgenesis of the levator palpebrae superioris muscle",
+   "Poor levator function and a reduced or absent upper lid skin crease are typical, and the affected lid often lags behind on downgaze",
+   "Usually unilateral, non-familial and isolated, but can be bilateral or part of a syndrome such as blepharophimosis syndrome",
+   "The main threats to vision are stimulus-deprivation amblyopia if the lid covers the visual axis and astigmatic amblyopia from lid pressure on the cornea",
+   "A compensatory chin-up head posture and brow action indicate the child is using accessory means to clear the visual axis",
+   "Marcus Gunn jaw-winking should be excluded by observing lid movement during sucking or jaw movement",
+   "Timing of surgery balances the amblyogenic risk against the need to assess levator function accurately, using a levator resection or a frontalis suspension when function is poor"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Drooping of the upper eyelid present from birth, most often due to localised dysgenesis of the levator palpebrae superioris muscle",
-      "Poor levator function and a reduced or absent upper lid skin crease are typical, and the affected lid often lags behind on downgaze",
-      "Usually unilateral, non-familial and isolated, but can be bilateral or part of a syndrome such as blepharophimosis syndrome",
-      "The main threats to vision are stimulus-deprivation amblyopia if the lid covers the visual axis and astigmatic amblyopia from lid pressure on the cornea",
-      "A compensatory chin-up head posture and brow action indicate the child is using accessory means to clear the visual axis",
-      "Marcus Gunn jaw-winking should be excluded by observing lid movement during sucking or jaw movement",
-      "Timing of surgery balances the amblyogenic risk against the need to assess levator function accurately, using a levator resection or a frontalis suspension when function is poor"
+  "pathophysiology": "Congenital ptosis most commonly reflects a developmental dystrophy of the levator palpebrae superioris, in which muscle fibres are replaced by fibrous and fatty tissue, reducing both the muscle's contractile power (poor lifting) and its ability to relax (lid lag on downgaze). The absent or high skin crease reflects deficient levator aponeurotic attachment to the skin. Less commonly the ptosis is neurogenic, aponeurotic or part of a syndrome. The functional consequences depend on whether the lid obscures the visual axis or induces corneal astigmatism, either of which can cause amblyopia in the developing visual system.",
+  "additionalDifferentials": [
+   "Marcus Gunn jaw-winking synkinesis",
+   "Congenital third nerve palsy",
+   "Congenital Horner syndrome",
+   "Blepharophimosis-ptosis-epicanthus inversus syndrome",
+   "Congenital myasthenic syndrome",
+   "Pseudoptosis from microphthalmos, anophthalmos or hypotropia",
+   "Congenital fibrosis of the extraocular muscles"
+  ],
+  "additionalInvestigations": [
+   "Measurement of levator function, margin-reflex distance and palpebral fissure height",
+   "Assessment of lid crease position and lid lag on downgaze",
+   "Observation for jaw-winking during feeding or jaw movement",
+   "Cycloplegic refraction and amblyopia and astigmatism assessment",
+   "Pupil examination to exclude Horner or third nerve involvement",
+   "Consideration of myasthenia testing or genetic evaluation in atypical or syndromic cases"
+  ],
+  "redFlags": [
+   "Anisocoria suggesting Horner syndrome, which may signal an underlying neuroblastoma",
+   "Associated ophthalmoplegia or pupil involvement indicating a third nerve palsy",
+   "Fatigable or variable ptosis pointing to a myasthenic disorder",
+   "Occlusion of the visual axis with developing amblyopia requiring prompt intervention"
+  ],
+  "prognosis": "With appropriate timing of surgery and amblyopia management the outlook is good, and most children achieve a functional and cosmetically acceptable lid position, though undercorrection or recurrence can require revision.",
+  "pitfalls": [
+   "Overlooking amblyopia while focusing on the lid position",
+   "Missing jaw-winking synkinesis before planning surgery",
+   "Failing to detect Horner syndrome and its possible sinister cause",
+   "Misjudging levator function and choosing an inappropriate procedure"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Ptosis surgery with levator resection or advancement, or a frontalis sling where levator function is poor, timed according to severity",
+   "Urgent surgical intervention when the lid obscures the visual axis to prevent stimulus-deprivation amblyopia",
+   "Active amblyopia treatment with refractive correction and occlusion patching for astigmatic or deprivation amblyopia",
+   "Cycloplegic refraction and orthoptic monitoring of the developing visual system",
+   "Exclude Marcus Gunn jaw-winking and neurogenic Horner or third-nerve and myasthenic causes before planning surgery",
+   "Ophthalmology follow-up to detect undercorrection or recurrence requiring revision",
+   "Genetic evaluation and counselling where syndromic, such as blepharophimosis syndrome"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_ptosis-pathway",
+   "title": "Congenital ptosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Drooping of the upper eyelid present from birth, most often due to localised dysgenesis of the levator palpebrae superioris muscle",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Anisocoria suggesting Horner syndrome, which may signal an underlying neuroblastoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Measurement of levator function, margin-reflex distance and palpebral fissure height, Assessment of lid crease position and lid lag on downgaze, Observation for jaw-winking during feeding or jaw movement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Ptosis surgery with levator resection or advancement, or a frontalis sling where levator function is poor, timed according to severity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking amblyopia while focusing on the lid position"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital ptosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_ptosis-matrix",
+   "title": "Congenital ptosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Drooping of the upper eyelid present from birth, most often due to localised dysgenesis of the levator palpebrae superioris muscle",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Congenital ptosis most commonly reflects a developmental dystrophy of the levator palpebrae superioris, in which muscle fibres are replaced by fibrous and fatty tissue, reducing both the muscle's contractile power (poor lifting) and its ability to relax (lid lag on downgaze). The absent or high skin crease reflects deficient levator aponeurotic attachment to the skin. Less commonly the ptosis is neurogenic, aponeurotic or part of a syndrome. The functional consequences depend on whether the lid obscures the visual axis or induces corneal astigmatism, either of which can cause amblyopia in the developing visual system.",
-    "additionalDifferentials": [
-      "Marcus Gunn jaw-winking synkinesis",
-      "Congenital third nerve palsy",
-      "Congenital Horner syndrome",
-      "Blepharophimosis-ptosis-epicanthus inversus syndrome",
-      "Congenital myasthenic syndrome",
-      "Pseudoptosis from microphthalmos, anophthalmos or hypotropia",
-      "Congenital fibrosis of the extraocular muscles"
+    [
+     "Key Investigations",
+     "Measurement of levator function, margin-reflex distance and palpebral fissure height, Assessment of lid crease position and lid",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Measurement of levator function, margin-reflex distance and palpebral fissure height",
-      "Assessment of lid crease position and lid lag on downgaze",
-      "Observation for jaw-winking during feeding or jaw movement",
-      "Cycloplegic refraction and amblyopia and astigmatism assessment",
-      "Pupil examination to exclude Horner or third nerve involvement",
-      "Consideration of myasthenia testing or genetic evaluation in atypical or syndromic cases"
+    [
+     "Primary Differentials",
+     "Marcus Gunn jaw-winking synkinesis, Congenital third nerve palsy, Congenital Horner syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Anisocoria suggesting Horner syndrome, which may signal an underlying neuroblastoma",
-      "Associated ophthalmoplegia or pupil involvement indicating a third nerve palsy",
-      "Fatigable or variable ptosis pointing to a myasthenic disorder",
-      "Occlusion of the visual axis with developing amblyopia requiring prompt intervention"
+    [
+     "Management Strategy",
+     "Ptosis surgery with levator resection or advancement, or a frontalis sling where levator function is poor, timed according to",
+     "Core treatment modality"
     ],
-    "prognosis": "With appropriate timing of surgery and amblyopia management the outlook is good, and most children achieve a functional and cosmetically acceptable lid position, though undercorrection or recurrence can require revision.",
-    "pitfalls": [
-      "Overlooking amblyopia while focusing on the lid position",
-      "Missing jaw-winking synkinesis before planning surgery",
-      "Failing to detect Horner syndrome and its possible sinister cause",
-      "Misjudging levator function and choosing an inappropriate procedure"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Ptosis surgery with levator resection or advancement, or a frontalis sling where levator function is poor, timed according to severity",
-      "Urgent surgical intervention when the lid obscures the visual axis to prevent stimulus-deprivation amblyopia",
-      "Active amblyopia treatment with refractive correction and occlusion patching for astigmatic or deprivation amblyopia",
-      "Cycloplegic refraction and orthoptic monitoring of the developing visual system",
-      "Exclude Marcus Gunn jaw-winking and neurogenic Horner or third-nerve and myasthenic causes before planning surgery",
-      "Ophthalmology follow-up to detect undercorrection or recurrence requiring revision",
-      "Genetic evaluation and counselling where syndromic, such as blepharophimosis syndrome"
+    [
+     "Clinical Pitfall",
+     "Overlooking amblyopia while focusing on the lid position",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital ptosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "congenital-ptosis-diagram",
+   "title": "Congenital ptosis: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

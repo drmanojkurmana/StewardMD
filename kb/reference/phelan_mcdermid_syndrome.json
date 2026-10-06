@@ -1,78 +1,173 @@
 {
-  "id": "phelan_mcdermid_syndrome",
-  "name": "Phelan-McDermid syndrome",
-  "aliases": [
-    "22q13 deletion syndrome",
-    "SHANK3-related disorder",
-    "PMS"
+ "id": "phelan_mcdermid_syndrome",
+ "name": "Phelan-McDermid syndrome",
+ "aliases": [
+  "22q13 deletion syndrome",
+  "SHANK3-related disorder",
+  "PMS"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A neurodevelopmental disorder with global developmental delay, intellectual disability, and severely delayed or absent expressive speech",
+   "Neonatal hypotonia, autism spectrum disorder, and reduced perception of pain or altered sensory responses are characteristic",
+   "Minor dysmorphic features include a long face, full brow, dolichocephaly, large fleshy hands, and dysplastic toenails, but these can be subtle",
+   "Caused by deletion of the distal long arm of chromosome 22 (22q13.3) or by pathogenic SHANK3 variants, since loss of SHANK3 drives the core neurological phenotype",
+   "Most cases are de novo, but a proportion arise from an unbalanced translocation, so parental karyotype or array is important for recurrence-risk counselling",
+   "Regression, including loss of skills and psychiatric features such as bipolar-type illness or catatonia, can occur in adolescence or adulthood",
+   "Diagnosis relies on chromosomal microarray to size the deletion, with sequencing to detect intragenic SHANK3 variants when the array is normal"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A neurodevelopmental disorder with global developmental delay, intellectual disability, and severely delayed or absent expressive speech",
-      "Neonatal hypotonia, autism spectrum disorder, and reduced perception of pain or altered sensory responses are characteristic",
-      "Minor dysmorphic features include a long face, full brow, dolichocephaly, large fleshy hands, and dysplastic toenails, but these can be subtle",
-      "Caused by deletion of the distal long arm of chromosome 22 (22q13.3) or by pathogenic SHANK3 variants, since loss of SHANK3 drives the core neurological phenotype",
-      "Most cases are de novo, but a proportion arise from an unbalanced translocation, so parental karyotype or array is important for recurrence-risk counselling",
-      "Regression, including loss of skills and psychiatric features such as bipolar-type illness or catatonia, can occur in adolescence or adulthood",
-      "Diagnosis relies on chromosomal microarray to size the deletion, with sequencing to detect intragenic SHANK3 variants when the array is normal"
+  "pathophysiology": "Phelan-McDermid syndrome results from loss of functional SHANK3 at chromosome 22q13.3, either through a terminal deletion of varying size or a pathogenic sequence variant. SHANK3 encodes a scaffolding protein at the postsynaptic density of excitatory synapses that organises glutamatergic signalling, so its haploinsufficiency impairs synapse formation and function, producing hypotonia, developmental delay, absent speech, and autistic features. Larger deletions remove additional genes, contributing to more extensive systemic and dysmorphic features and greater phenotypic severity.",
+  "additionalDifferentials": [
+   "Idiopathic autism spectrum disorder",
+   "Angelman syndrome",
+   "Pitt-Hopkins syndrome",
+   "Rett syndrome and MECP2-related disorders",
+   "Kleefstra syndrome",
+   "Other 22q microdeletion or duplication disorders"
+  ],
+  "additionalInvestigations": [
+   "Chromosomal microarray to detect and size the 22q13.3 deletion",
+   "SHANK3 sequencing when microarray is normal but the phenotype is suggestive",
+   "Parental chromosome/array studies to identify a balanced translocation and refine recurrence risk",
+   "Developmental, speech, and autism assessments",
+   "Renal ultrasound and echocardiography for associated structural anomalies",
+   "Neurological review and, where regression occurs, psychiatric assessment"
+  ],
+  "redFlags": [
+   "Developmental or behavioural regression, or new catatonia or psychiatric illness in adolescence or adulthood",
+   "New seizures requiring evaluation",
+   "Absent pain perception masking serious injury or intra-abdominal pathology",
+   "Significant renal or cardiac anomaly identified on screening"
+  ],
+  "prognosis": "Developmental disability and speech impairment are lifelong and most individuals need substantial support, while the risk of adolescent or adult regression and psychiatric illness adds long-term uncertainty. Larger deletions tend to correlate with greater severity, and multidisciplinary care improves quality of life.",
+  "pitfalls": [
+   "Labelling the presentation as idiopathic autism without performing microarray and SHANK3 testing",
+   "Missing a parental balanced translocation and giving incorrect recurrence-risk advice",
+   "Overlooking reduced pain perception, which can delay recognition of injury or illness",
+   "Not anticipating and monitoring for regression and psychiatric change in later life"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Phelan-McDermid Syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early developmental intervention with speech and language therapy including augmentative and alternative communication, physiotherapy and occupational therapy for hypotonia, delay and absent speech",
+   "Educational and behavioural support tailored to intellectual disability and autism spectrum disorder",
+   "Surveillance for and management of adolescent or adult regression, including psychiatric assessment and treatment of bipolar-type illness or catatonia",
+   "Screening for associated structural anomalies with renal ultrasound and echocardiography, and management of any detected",
+   "Monitoring for altered pain perception with attention to its safety implications, and management of seizures where present",
+   "Clinical genetics referral with chromosomal microarray and SHANK3 testing plus parental studies to define recurrence risk and provide family counselling",
+   "Coordinated multidisciplinary follow-up across paediatrics, neurology, genetics and allied health"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "phelan_mcdermid_syndrome-pathway",
+   "title": "Phelan-McDermid syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A neurodevelopmental disorder with global developmental delay, intellectual disability, and severely delayed or absent expressive speech",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Developmental or behavioural regression, or new catatonia or psychiatric illness in adolescence or adulthood",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chromosomal microarray to detect and size the 22q13.3 deletion, SHANK3 sequencing when microarray is normal but the phenotype is suggestive, Parental chromosome/array studies to identify a balanced translocation and refine"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early developmental intervention with speech and language therapy including augmentative and alternative communication, physiotherapy and occupational therapy for hypotonia, delay and absent speech"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the presentation as idiopathic autism without performing microarray and SHANK3 testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of phelan-mcdermid syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "phelan_mcdermid_syndrome-matrix",
+   "title": "Phelan-McDermid syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A neurodevelopmental disorder with global developmental delay, intellectual disability, and severely delayed or absent expressive",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Phelan-McDermid syndrome results from loss of functional SHANK3 at chromosome 22q13.3, either through a terminal deletion of varying size or a pathogenic sequence variant. SHANK3 encodes a scaffolding protein at the postsynaptic density of excitatory synapses that organises glutamatergic signalling, so its haploinsufficiency impairs synapse formation and function, producing hypotonia, developmental delay, absent speech, and autistic features. Larger deletions remove additional genes, contributing to more extensive systemic and dysmorphic features and greater phenotypic severity.",
-    "additionalDifferentials": [
-      "Idiopathic autism spectrum disorder",
-      "Angelman syndrome",
-      "Pitt-Hopkins syndrome",
-      "Rett syndrome and MECP2-related disorders",
-      "Kleefstra syndrome",
-      "Other 22q microdeletion or duplication disorders"
+    [
+     "Key Investigations",
+     "Chromosomal microarray to detect and size the 22q13.3 deletion, SHANK3 sequencing when microarray is normal but the phenotype is",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chromosomal microarray to detect and size the 22q13.3 deletion",
-      "SHANK3 sequencing when microarray is normal but the phenotype is suggestive",
-      "Parental chromosome/array studies to identify a balanced translocation and refine recurrence risk",
-      "Developmental, speech, and autism assessments",
-      "Renal ultrasound and echocardiography for associated structural anomalies",
-      "Neurological review and, where regression occurs, psychiatric assessment"
+    [
+     "Primary Differentials",
+     "Idiopathic autism spectrum disorder, Angelman syndrome, Pitt-Hopkins syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Developmental or behavioural regression, or new catatonia or psychiatric illness in adolescence or adulthood",
-      "New seizures requiring evaluation",
-      "Absent pain perception masking serious injury or intra-abdominal pathology",
-      "Significant renal or cardiac anomaly identified on screening"
+    [
+     "Management Strategy",
+     "Early developmental intervention with speech and language therapy including augmentative and alternative communication,",
+     "Core treatment modality"
     ],
-    "prognosis": "Developmental disability and speech impairment are lifelong and most individuals need substantial support, while the risk of adolescent or adult regression and psychiatric illness adds long-term uncertainty. Larger deletions tend to correlate with greater severity, and multidisciplinary care improves quality of life.",
-    "pitfalls": [
-      "Labelling the presentation as idiopathic autism without performing microarray and SHANK3 testing",
-      "Missing a parental balanced translocation and giving incorrect recurrence-risk advice",
-      "Overlooking reduced pain perception, which can delay recognition of injury or illness",
-      "Not anticipating and monitoring for regression and psychiatric change in later life"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Phelan-McDermid Syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early developmental intervention with speech and language therapy including augmentative and alternative communication, physiotherapy and occupational therapy for hypotonia, delay and absent speech",
-      "Educational and behavioural support tailored to intellectual disability and autism spectrum disorder",
-      "Surveillance for and management of adolescent or adult regression, including psychiatric assessment and treatment of bipolar-type illness or catatonia",
-      "Screening for associated structural anomalies with renal ultrasound and echocardiography, and management of any detected",
-      "Monitoring for altered pain perception with attention to its safety implications, and management of seizures where present",
-      "Clinical genetics referral with chromosomal microarray and SHANK3 testing plus parental studies to define recurrence risk and provide family counselling",
-      "Coordinated multidisciplinary follow-up across paediatrics, neurology, genetics and allied health"
+    [
+     "Clinical Pitfall",
+     "Labelling the presentation as idiopathic autism without performing microarray and SHANK3 testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for phelan-mcdermid syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "phelan-mcdermid-syndrome-diagram",
+   "title": "Phelan-McDermid syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

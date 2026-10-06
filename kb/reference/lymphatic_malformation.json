@@ -1,81 +1,176 @@
 {
-  "id": "lymphatic_malformation",
-  "name": "Lymphatic malformation",
-  "aliases": [
-    "Lymphangioma",
-    "Cystic hygroma",
-    "Macrocystic/microcystic lymphatic malformation"
+ "id": "lymphatic_malformation",
+ "name": "Lymphatic malformation",
+ "aliases": [
+  "Lymphangioma",
+  "Cystic hygroma",
+  "Macrocystic/microcystic lymphatic malformation"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Vascular",
+ "specialty": "Dermatology / Vascular anomalies / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Slow-flow malformation of dysplastic lymphatic channels, classified as macrocystic, microcystic or combined.",
+   "Macrocystic lesions are soft, transilluminant and often cervicofacial or axillary (historically termed cystic hygroma); microcystic lesions are ill-defined and infiltrative.",
+   "Somatic activating PIK3CA mutations underlie most lesions, placing them within the PIK3CA-related overgrowth spectrum.",
+   "Sudden enlargement typically follows intralesional bleeding or infection.",
+   "Superficial microcystic mucosal or cutaneous lesions produce characteristic clear or blood-filled vesicles resembling frogspawn.",
+   "Sclerotherapy is first-line for macrocystic disease; microcystic disease is harder to treat and sirolimus is increasingly used.",
+   "Large cervicofacial lesions can compromise the airway and may require antenatal airway planning such as an EXIT procedure.",
+   "Antenatally detected cystic hygroma is associated with chromosomal abnormalities such as Turner syndrome and with other structural anomalies."
   ],
-  "class": "non_infective",
-  "system": "Skin / Vascular",
-  "specialty": "Dermatology / Vascular anomalies / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Slow-flow malformation of dysplastic lymphatic channels, classified as macrocystic, microcystic or combined.",
-      "Macrocystic lesions are soft, transilluminant and often cervicofacial or axillary (historically termed cystic hygroma); microcystic lesions are ill-defined and infiltrative.",
-      "Somatic activating PIK3CA mutations underlie most lesions, placing them within the PIK3CA-related overgrowth spectrum.",
-      "Sudden enlargement typically follows intralesional bleeding or infection.",
-      "Superficial microcystic mucosal or cutaneous lesions produce characteristic clear or blood-filled vesicles resembling frogspawn.",
-      "Sclerotherapy is first-line for macrocystic disease; microcystic disease is harder to treat and sirolimus is increasingly used.",
-      "Large cervicofacial lesions can compromise the airway and may require antenatal airway planning such as an EXIT procedure.",
-      "Antenatally detected cystic hygroma is associated with chromosomal abnormalities such as Turner syndrome and with other structural anomalies."
+  "pathophysiology": "Lymphatic malformation results from abnormal embryonic development of lymphatic channels that fail to establish normal connections with the venous system, producing dilated, endothelium-lined cystic spaces filled with lymph. Most sporadic lesions carry somatic activating mutations in PIK3CA, driving PI3K/AKT/mTOR signalling and abnormal lymphatic endothelial growth. Because the channels drain poorly they are prone to stasis, intralesional haemorrhage and infection, which cause abrupt and sometimes dramatic enlargement.",
+  "additionalDifferentials": [
+   "Venous malformation",
+   "Infantile haemangioma",
+   "Thyroglossal or branchial cyst for cervical lesions",
+   "Teratoma",
+   "Kaposiform lymphangiomatosis",
+   "Combined lymphaticovenous malformation"
+  ],
+  "additionalInvestigations": [
+   "Ultrasound distinguishing macrocystic from microcystic disease",
+   "Contrast-enhanced MRI (T2-bright cysts with fluid-fluid levels after bleeding)",
+   "Antenatal ultrasound and, where indicated, fetal karyotyping",
+   "Aspiration and analysis of cyst fluid when the diagnosis is unclear",
+   "PIK3CA mutation testing",
+   "Airway assessment with nasendoscopy or imaging for cervicofacial lesions"
+  ],
+  "redFlags": [
+   "Airway compromise from a cervicofacial lesion",
+   "Rapid enlargement from intralesional haemorrhage or infection",
+   "Orbital lesions threatening vision",
+   "Sepsis arising within an infected malformation",
+   "Chylous effusions or generalised lymphatic anomaly"
+  ],
+  "prognosis": "Prognosis depends on site and type. Well-defined macrocystic lesions respond well to sclerotherapy, whereas diffuse microcystic and cervicofacial disease tends to recur and cause chronic morbidity, although mTOR inhibition has improved control.",
+  "pitfalls": [
+   "Attributing sudden swelling to malignancy rather than to bleeding or infection.",
+   "Expecting sclerotherapy to be as effective for microcystic as for macrocystic disease.",
+   "Incomplete excision leading to recurrence.",
+   "Overlooking airway planning in a large antenatally detected cervical lesion."
+  ],
+  "references": [
+   "Standard textbook of paediatric dermatology",
+   "ISSVA classification of vascular anomalies",
+   "Consensus guidance on management of lymphatic malformations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Sclerotherapy as first-line treatment for macrocystic lesions",
+   "mTOR inhibition with sirolimus for extensive, microcystic or complicated disease not amenable to sclerotherapy",
+   "Surgical resection or debulking for localised or functionally troublesome lesions",
+   "Prompt antibiotics for infective flares and management of intralesional haemorrhage causing sudden enlargement",
+   "Emergency airway assessment and protection for large cervicofacial lesions",
+   "Emerging targeted PIK3CA-pathway inhibition, such as alpelisib, for refractory PIK3CA-driven disease",
+   "Coordinate care through a multidisciplinary vascular anomalies team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lymphatic_malformation-pathway",
+   "title": "Lymphatic malformation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Slow-flow malformation of dysplastic lymphatic channels, classified as macrocystic, microcystic or combined.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Airway compromise from a cervicofacial lesion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Ultrasound distinguishing macrocystic from microcystic disease, Contrast-enhanced MRI (T2-bright cysts with fluid-fluid levels after bleeding), Antenatal ultrasound and, where indicated, fetal karyotyping"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Sclerotherapy as first-line treatment for macrocystic lesions"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing sudden swelling to malignancy rather than to bleeding or infection."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lymphatic malformation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lymphatic_malformation-matrix",
+   "title": "Lymphatic malformation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Slow-flow malformation of dysplastic lymphatic channels, classified as macrocystic, microcystic or combined.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lymphatic malformation results from abnormal embryonic development of lymphatic channels that fail to establish normal connections with the venous system, producing dilated, endothelium-lined cystic spaces filled with lymph. Most sporadic lesions carry somatic activating mutations in PIK3CA, driving PI3K/AKT/mTOR signalling and abnormal lymphatic endothelial growth. Because the channels drain poorly they are prone to stasis, intralesional haemorrhage and infection, which cause abrupt and sometimes dramatic enlargement.",
-    "additionalDifferentials": [
-      "Venous malformation",
-      "Infantile haemangioma",
-      "Thyroglossal or branchial cyst for cervical lesions",
-      "Teratoma",
-      "Kaposiform lymphangiomatosis",
-      "Combined lymphaticovenous malformation"
+    [
+     "Key Investigations",
+     "Ultrasound distinguishing macrocystic from microcystic disease, Contrast-enhanced MRI (T2-bright cysts with fluid-fluid levels",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Ultrasound distinguishing macrocystic from microcystic disease",
-      "Contrast-enhanced MRI (T2-bright cysts with fluid-fluid levels after bleeding)",
-      "Antenatal ultrasound and, where indicated, fetal karyotyping",
-      "Aspiration and analysis of cyst fluid when the diagnosis is unclear",
-      "PIK3CA mutation testing",
-      "Airway assessment with nasendoscopy or imaging for cervicofacial lesions"
+    [
+     "Primary Differentials",
+     "Venous malformation, Infantile haemangioma, Thyroglossal or branchial cyst for cervical lesions",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Airway compromise from a cervicofacial lesion",
-      "Rapid enlargement from intralesional haemorrhage or infection",
-      "Orbital lesions threatening vision",
-      "Sepsis arising within an infected malformation",
-      "Chylous effusions or generalised lymphatic anomaly"
+    [
+     "Management Strategy",
+     "Sclerotherapy as first-line treatment for macrocystic lesions",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on site and type. Well-defined macrocystic lesions respond well to sclerotherapy, whereas diffuse microcystic and cervicofacial disease tends to recur and cause chronic morbidity, although mTOR inhibition has improved control.",
-    "pitfalls": [
-      "Attributing sudden swelling to malignancy rather than to bleeding or infection.",
-      "Expecting sclerotherapy to be as effective for microcystic as for macrocystic disease.",
-      "Incomplete excision leading to recurrence.",
-      "Overlooking airway planning in a large antenatally detected cervical lesion."
-    ],
-    "references": [
-      "Standard textbook of paediatric dermatology",
-      "ISSVA classification of vascular anomalies",
-      "Consensus guidance on management of lymphatic malformations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Sclerotherapy as first-line treatment for macrocystic lesions",
-      "mTOR inhibition with sirolimus for extensive, microcystic or complicated disease not amenable to sclerotherapy",
-      "Surgical resection or debulking for localised or functionally troublesome lesions",
-      "Prompt antibiotics for infective flares and management of intralesional haemorrhage causing sudden enlargement",
-      "Emergency airway assessment and protection for large cervicofacial lesions",
-      "Emerging targeted PIK3CA-pathway inhibition, such as alpelisib, for refractory PIK3CA-driven disease",
-      "Coordinate care through a multidisciplinary vascular anomalies team"
+    [
+     "Clinical Pitfall",
+     "Attributing sudden swelling to malignancy rather than to bleeding or infection.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lymphatic malformation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lymphatic-malformation-diagram",
+   "title": "Lymphatic malformation: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

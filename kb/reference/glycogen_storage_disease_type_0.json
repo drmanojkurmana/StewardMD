@@ -1,77 +1,172 @@
 {
-  "id": "glycogen_storage_disease_type_0",
-  "name": "Glycogen storage disease type 0 (glycogen synthase)",
-  "aliases": [
-    "GSD 0",
-    "GSD type 0",
-    "glycogen synthase deficiency",
-    "GYS2 (hepatic) / GYS1 (muscle) deficiency"
+ "id": "glycogen_storage_disease_type_0",
+ "name": "Glycogen storage disease type 0 (glycogen synthase)",
+ "aliases": [
+  "GSD 0",
+  "GSD type 0",
+  "glycogen synthase deficiency",
+  "GYS2 (hepatic) / GYS1 (muscle) deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Glycogen storage disease type 0 is an autosomal recessive defect of glycogen synthase, and unlike other GSDs it is a disorder of impaired glycogen synthesis rather than storage",
+   "The hepatic form (GYS2) presents in infancy or early childhood with fasting ketotic hypoglycaemia, often in the morning before breakfast",
+   "Paradoxically, feeding produces postprandial hyperglycaemia and lactic acidosis because glucose cannot be stored as glycogen",
+   "The liver is characteristically not enlarged, distinguishing it from the hepatomegalic glycogenoses",
+   "A separate muscle form (GYS1) causes exercise intolerance, cardiomyopathy, and risk of sudden death rather than hypoglycaemia",
+   "Management of the hepatic form centres on avoiding prolonged fasting, providing frequent protein-rich meals, and using uncooked cornstarch to maintain overnight glucose",
+   "Prognosis is generally good with dietary control, and cognitive outcome improves when hypoglycaemia is prevented"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Glycogen storage disease type 0 is an autosomal recessive defect of glycogen synthase, and unlike other GSDs it is a disorder of impaired glycogen synthesis rather than storage",
-      "The hepatic form (GYS2) presents in infancy or early childhood with fasting ketotic hypoglycaemia, often in the morning before breakfast",
-      "Paradoxically, feeding produces postprandial hyperglycaemia and lactic acidosis because glucose cannot be stored as glycogen",
-      "The liver is characteristically not enlarged, distinguishing it from the hepatomegalic glycogenoses",
-      "A separate muscle form (GYS1) causes exercise intolerance, cardiomyopathy, and risk of sudden death rather than hypoglycaemia",
-      "Management of the hepatic form centres on avoiding prolonged fasting, providing frequent protein-rich meals, and using uncooked cornstarch to maintain overnight glucose",
-      "Prognosis is generally good with dietary control, and cognitive outcome improves when hypoglycaemia is prevented"
+  "pathophysiology": "Glycogen synthase catalyses the addition of glucose units to the growing glycogen chain. In GSD type 0, biallelic variants in GYS2 (liver isoform) or GYS1 (muscle isoform) reduce or abolish enzyme activity, so glycogen synthesis is deficient rather than glycogen being over-accumulated. In the hepatic form the liver cannot lay down glycogen stores during feeding, so during fasting there is no glycogen to mobilise, producing hypoglycaemia with ketosis; ingested glucose is diverted toward lactate, causing postprandial hyperglycaemia and hyperlactataemia. In the muscle form, deficient glycogen limits substrate for exercising muscle and impairs cardiac and skeletal muscle energetics.",
+  "additionalDifferentials": [
+   "Other hepatic glycogen storage diseases (GSD I, III, VI, IX)",
+   "Ketotic hypoglycaemia of childhood",
+   "Fatty acid oxidation and ketogenesis defects",
+   "Gluconeogenesis disorders",
+   "Growth hormone or cortisol deficiency causing fasting hypoglycaemia",
+   "Congenital disorders of glycosylation"
+  ],
+  "additionalInvestigations": [
+   "Paired fasting and postprandial glucose, lactate, and ketone measurements to demonstrate fasting ketotic hypoglycaemia with postprandial hyperlactataemia",
+   "Molecular genetic testing of GYS2 (hepatic) or GYS1 (muscle)",
+   "Liver ultrasound, typically showing a non-enlarged liver",
+   "Metabolic screen including acylcarnitine profile to exclude fatty acid oxidation defects",
+   "In the muscle form, echocardiography and assessment of exercise tolerance"
+  ],
+  "redFlags": [
+   "Recurrent symptomatic hypoglycaemia with seizures or impaired consciousness",
+   "Developmental delay suggesting repeated unrecognised hypoglycaemic episodes",
+   "Exertional syncope, chest symptoms, or cardiomyopathy in the muscle form",
+   "Severe lactic acidosis after carbohydrate loading"
+  ],
+  "prognosis": "The hepatic form has a good prognosis when fasting is avoided and overnight glucose is maintained, with normal growth and neurodevelopment; the muscle form carries a risk of cardiomyopathy and sudden cardiac death and warrants cardiac surveillance.",
+  "pitfalls": [
+   "Overlooking GSD 0 because the liver is not enlarged, unlike most hepatic glycogenoses",
+   "Misattributing morning symptoms to idiopathic ketotic hypoglycaemia without paired biochemistry",
+   "Failing to recognise postprandial hyperglycaemia and lactic acidosis as a diagnostic clue",
+   "Not distinguishing the hepatic and muscle forms, which differ in presentation and risks"
+  ],
+  "references": [
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+   "GeneReviews: Glycogen Storage Disease Type 0"
+  ],
+  "crossLinks": [],
+  "management": [
+   "In the hepatic form, prevent fasting ketotic hypoglycaemia by avoiding prolonged fasting, giving frequent protein-rich meals and uncooked cornstarch to maintain overnight glucose",
+   "Limit large high-glycaemic carbohydrate loads that provoke postprandial hyperglycaemia and lactic acidosis",
+   "Monitor blood glucose, lactate, ketones and growth, adjusting feed timing and composition accordingly",
+   "In the muscle form due to GYS1 variants, undertake cardiac surveillance with echocardiography and advise against strenuous exertion given the risk of cardiomyopathy and sudden death",
+   "Coordinate care through a specialist metabolic team and dietitian",
+   "Offer genetic counselling for autosomal recessive inheritance of GYS2 or GYS1 variants with family testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "glycogen_storage_disease_type_0-pathway",
+   "title": "Glycogen storage disease type 0 (glycogen synthase): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Glycogen storage disease type 0 is an autosomal recessive defect of glycogen synthase, and unlike other GSDs it is a disorder of impaired glycogen synthesis rather than storage",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent symptomatic hypoglycaemia with seizures or impaired consciousness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Paired fasting and postprandial glucose, lactate, and ketone measurements to demonstrate fasting ketotic hypoglycaemia with postprandial hyperlactataemia, Molecular genetic testing of GYS2 (hepatic) or GYS1 (muscle), Liver"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: In the hepatic form, prevent fasting ketotic hypoglycaemia by avoiding prolonged fasting, giving frequent protein-rich meals and uncooked cornstarch to maintain overnight glucose"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking GSD 0 because the liver is not enlarged, unlike most hepatic glycogenoses"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of glycogen storage disease type 0 (glycogen synthase)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "glycogen_storage_disease_type_0-matrix",
+   "title": "Glycogen storage disease type 0 (glycogen synthase): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Glycogen storage disease type 0 is an autosomal recessive defect of glycogen synthase, and unlike other GSDs it is a disorder of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Glycogen synthase catalyses the addition of glucose units to the growing glycogen chain. In GSD type 0, biallelic variants in GYS2 (liver isoform) or GYS1 (muscle isoform) reduce or abolish enzyme activity, so glycogen synthesis is deficient rather than glycogen being over-accumulated. In the hepatic form the liver cannot lay down glycogen stores during feeding, so during fasting there is no glycogen to mobilise, producing hypoglycaemia with ketosis; ingested glucose is diverted toward lactate, causing postprandial hyperglycaemia and hyperlactataemia. In the muscle form, deficient glycogen limits substrate for exercising muscle and impairs cardiac and skeletal muscle energetics.",
-    "additionalDifferentials": [
-      "Other hepatic glycogen storage diseases (GSD I, III, VI, IX)",
-      "Ketotic hypoglycaemia of childhood",
-      "Fatty acid oxidation and ketogenesis defects",
-      "Gluconeogenesis disorders",
-      "Growth hormone or cortisol deficiency causing fasting hypoglycaemia",
-      "Congenital disorders of glycosylation"
+    [
+     "Key Investigations",
+     "Paired fasting and postprandial glucose, lactate, and ketone measurements to demonstrate fasting ketotic hypoglycaemia with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Paired fasting and postprandial glucose, lactate, and ketone measurements to demonstrate fasting ketotic hypoglycaemia with postprandial hyperlactataemia",
-      "Molecular genetic testing of GYS2 (hepatic) or GYS1 (muscle)",
-      "Liver ultrasound, typically showing a non-enlarged liver",
-      "Metabolic screen including acylcarnitine profile to exclude fatty acid oxidation defects",
-      "In the muscle form, echocardiography and assessment of exercise tolerance"
+    [
+     "Primary Differentials",
+     "Other hepatic glycogen storage diseases (GSD I, III, VI, IX), Ketotic hypoglycaemia of childhood, Fatty acid oxidation and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent symptomatic hypoglycaemia with seizures or impaired consciousness",
-      "Developmental delay suggesting repeated unrecognised hypoglycaemic episodes",
-      "Exertional syncope, chest symptoms, or cardiomyopathy in the muscle form",
-      "Severe lactic acidosis after carbohydrate loading"
+    [
+     "Management Strategy",
+     "In the hepatic form, prevent fasting ketotic hypoglycaemia by avoiding prolonged fasting, giving frequent protein-rich meals and",
+     "Core treatment modality"
     ],
-    "prognosis": "The hepatic form has a good prognosis when fasting is avoided and overnight glucose is maintained, with normal growth and neurodevelopment; the muscle form carries a risk of cardiomyopathy and sudden cardiac death and warrants cardiac surveillance.",
-    "pitfalls": [
-      "Overlooking GSD 0 because the liver is not enlarged, unlike most hepatic glycogenoses",
-      "Misattributing morning symptoms to idiopathic ketotic hypoglycaemia without paired biochemistry",
-      "Failing to recognise postprandial hyperglycaemia and lactic acidosis as a diagnostic clue",
-      "Not distinguishing the hepatic and muscle forms, which differ in presentation and risks"
-    ],
-    "references": [
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-      "GeneReviews: Glycogen Storage Disease Type 0"
-    ],
-    "crossLinks": [],
-    "management": [
-      "In the hepatic form, prevent fasting ketotic hypoglycaemia by avoiding prolonged fasting, giving frequent protein-rich meals and uncooked cornstarch to maintain overnight glucose",
-      "Limit large high-glycaemic carbohydrate loads that provoke postprandial hyperglycaemia and lactic acidosis",
-      "Monitor blood glucose, lactate, ketones and growth, adjusting feed timing and composition accordingly",
-      "In the muscle form due to GYS1 variants, undertake cardiac surveillance with echocardiography and advise against strenuous exertion given the risk of cardiomyopathy and sudden death",
-      "Coordinate care through a specialist metabolic team and dietitian",
-      "Offer genetic counselling for autosomal recessive inheritance of GYS2 or GYS1 variants with family testing"
+    [
+     "Clinical Pitfall",
+     "Overlooking GSD 0 because the liver is not enlarged, unlike most hepatic glycogenoses",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for glycogen storage disease type 0 (glycogen synthase)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "glycogen-storage-disease-type-0-diagram",
+   "title": "Glycogen storage disease type 0 (glycogen synthase): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

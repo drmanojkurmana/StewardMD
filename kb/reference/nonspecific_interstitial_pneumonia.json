@@ -1,80 +1,175 @@
 {
-  "id": "nonspecific_interstitial_pneumonia",
-  "name": "Nonspecific interstitial pneumonia",
-  "aliases": [
-    "NSIP",
-    "Cellular and fibrotic NSIP"
+ "id": "nonspecific_interstitial_pneumonia",
+ "name": "Nonspecific interstitial pneumonia",
+ "aliases": [
+  "NSIP",
+  "Cellular and fibrotic NSIP"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Murray & Nadel's Textbook of Respiratory Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The second most common idiopathic interstitial pneumonia; more often affects middle-aged women and non-smokers.",
+   "Strongly associated with connective tissue disease, particularly systemic sclerosis, polymyositis/dermatomyositis and Sjögren syndrome, and may be its first manifestation.",
+   "Idiopathic NSIP is a diagnosis of exclusion made only after a thorough search for connective tissue disease, drug exposure and hypersensitivity pneumonitis.",
+   "Two histological subtypes exist: cellular (predominantly inflammatory, better prognosis) and fibrotic (worse prognosis).",
+   "HRCT shows bilateral, symmetrical, basal-predominant ground-glass opacity with fine reticulation and traction bronchiectasis; relative subpleural sparing is characteristic.",
+   "Honeycombing is absent or minimal, which helps distinguish NSIP from the UIP pattern of IPF.",
+   "Temporal uniformity on histology, with all areas of the same apparent age, contrasts with the spatial and temporal heterogeneity of UIP.",
+   "Unlike IPF, disease commonly responds to corticosteroids with or without steroid-sparing immunosuppression."
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Murray & Nadel's Textbook of Respiratory Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The second most common idiopathic interstitial pneumonia; more often affects middle-aged women and non-smokers.",
-      "Strongly associated with connective tissue disease, particularly systemic sclerosis, polymyositis/dermatomyositis and Sjögren syndrome, and may be its first manifestation.",
-      "Idiopathic NSIP is a diagnosis of exclusion made only after a thorough search for connective tissue disease, drug exposure and hypersensitivity pneumonitis.",
-      "Two histological subtypes exist: cellular (predominantly inflammatory, better prognosis) and fibrotic (worse prognosis).",
-      "HRCT shows bilateral, symmetrical, basal-predominant ground-glass opacity with fine reticulation and traction bronchiectasis; relative subpleural sparing is characteristic.",
-      "Honeycombing is absent or minimal, which helps distinguish NSIP from the UIP pattern of IPF.",
-      "Temporal uniformity on histology, with all areas of the same apparent age, contrasts with the spatial and temporal heterogeneity of UIP.",
-      "Unlike IPF, disease commonly responds to corticosteroids with or without steroid-sparing immunosuppression."
+  "pathophysiology": "NSIP is characterised by a temporally uniform interstitial process combining varying proportions of chronic inflammation and interstitial fibrosis that preserves the underlying alveolar architecture, lacking the fibroblastic foci and honeycombing of UIP. In many patients it represents a pulmonary manifestation of systemic autoimmune disease, in which immune-mediated alveolar septal injury and repair produce diffuse septal thickening and ground-glass change.",
+  "additionalDifferentials": [
+   "Idiopathic pulmonary fibrosis / UIP pattern",
+   "Hypersensitivity pneumonitis",
+   "Connective tissue disease-associated interstitial lung disease",
+   "Organising pneumonia",
+   "Drug-induced pneumonitis",
+   "Desquamative interstitial pneumonia",
+   "Pulmonary alveolar proteinosis presenting with ground-glass change"
+  ],
+  "additionalInvestigations": [
+   "HRCT thorax assessing distribution and degree of ground-glass and reticulation",
+   "Pulmonary function tests with transfer factor (restrictive defect with reduced DLCO)",
+   "Comprehensive autoimmune and myositis serology including antisynthetase antibodies",
+   "Detailed environmental, occupational and drug exposure history",
+   "Bronchoalveolar lavage where lymphocytosis may support cellular NSIP or an alternative diagnosis",
+   "Surgical lung biopsy when the diagnosis remains unclear after multidisciplinary review",
+   "Assessment for extrapulmonary connective tissue disease including nailfold capillaroscopy, creatine kinase and rheumatology referral"
+  ],
+  "redFlags": [
+   "Rapid clinical decline or an acute exacerbation",
+   "Features of associated connective tissue disease requiring systemic treatment, such as scleroderma renal or cardiac involvement",
+   "Progressive hypoxaemia",
+   "Clinical signs of pulmonary hypertension"
+  ],
+  "prognosis": "Cellular NSIP has an excellent outlook with treatment, whereas fibrotic NSIP behaves intermediately between cellular NSIP and IPF, and a subset progresses despite therapy.",
+  "pitfalls": [
+   "Labelling disease as idiopathic without a thorough connective tissue disease and exposure work-up",
+   "Confusing fibrotic NSIP with UIP, leading to incorrect prognosis and management",
+   "Withholding immunosuppression that could benefit inflammatory disease",
+   "Missing antisynthetase syndrome presenting initially as interstitial lung disease"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "ATS/ERS international multidisciplinary classification of the idiopathic interstitial pneumonias"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with corticosteroids, adding a steroid-sparing immunosuppressant such as mycophenolate or azathioprine, particularly for the cellular inflammatory subtype which responds well",
+   "Identify and treat any underlying connective tissue disease, coordinating immunosuppression including rituximab in selected cases with rheumatology",
+   "Consider antifibrotic therapy with nintedanib for a progressive fibrotic phenotype behaving like fibrotic disease",
+   "Provide supportive care with supplemental oxygen for hypoxaemia, pulmonary rehabilitation and vaccination against respiratory pathogens",
+   "Remove ongoing drug or environmental exposures identified as contributory",
+   "Monitor with serial lung function including transfer factor and interval HRCT to detect progression",
+   "Refer progressive treatment-refractory disease for lung transplantation assessment and manage complex cases through a multidisciplinary interstitial lung disease team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "nonspecific_interstitial_pneumonia-pathway",
+   "title": "Nonspecific interstitial pneumonia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The second most common idiopathic interstitial pneumonia; more often affects middle-aged women and non-smokers.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid clinical decline or an acute exacerbation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: HRCT thorax assessing distribution and degree of ground-glass and reticulation, Pulmonary function tests with transfer factor (restrictive defect with reduced DLCO), Comprehensive autoimmune and myositis serology including"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with corticosteroids, adding a steroid-sparing immunosuppressant such as mycophenolate or azathioprine, particularly for the cellular inflammatory subtype which responds well"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling disease as idiopathic without a thorough connective tissue disease and exposure work-up"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of nonspecific interstitial pneumonia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nonspecific_interstitial_pneumonia-matrix",
+   "title": "Nonspecific interstitial pneumonia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The second most common idiopathic interstitial pneumonia; more often affects middle-aged women and non-smokers.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "NSIP is characterised by a temporally uniform interstitial process combining varying proportions of chronic inflammation and interstitial fibrosis that preserves the underlying alveolar architecture, lacking the fibroblastic foci and honeycombing of UIP. In many patients it represents a pulmonary manifestation of systemic autoimmune disease, in which immune-mediated alveolar septal injury and repair produce diffuse septal thickening and ground-glass change.",
-    "additionalDifferentials": [
-      "Idiopathic pulmonary fibrosis / UIP pattern",
-      "Hypersensitivity pneumonitis",
-      "Connective tissue disease-associated interstitial lung disease",
-      "Organising pneumonia",
-      "Drug-induced pneumonitis",
-      "Desquamative interstitial pneumonia",
-      "Pulmonary alveolar proteinosis presenting with ground-glass change"
+    [
+     "Key Investigations",
+     "HRCT thorax assessing distribution and degree of ground-glass and reticulation, Pulmonary function tests with transfer factor",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "HRCT thorax assessing distribution and degree of ground-glass and reticulation",
-      "Pulmonary function tests with transfer factor (restrictive defect with reduced DLCO)",
-      "Comprehensive autoimmune and myositis serology including antisynthetase antibodies",
-      "Detailed environmental, occupational and drug exposure history",
-      "Bronchoalveolar lavage where lymphocytosis may support cellular NSIP or an alternative diagnosis",
-      "Surgical lung biopsy when the diagnosis remains unclear after multidisciplinary review",
-      "Assessment for extrapulmonary connective tissue disease including nailfold capillaroscopy, creatine kinase and rheumatology referral"
+    [
+     "Primary Differentials",
+     "Idiopathic pulmonary fibrosis / UIP pattern, Hypersensitivity pneumonitis, Connective tissue disease-associated interstitial lung",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid clinical decline or an acute exacerbation",
-      "Features of associated connective tissue disease requiring systemic treatment, such as scleroderma renal or cardiac involvement",
-      "Progressive hypoxaemia",
-      "Clinical signs of pulmonary hypertension"
+    [
+     "Management Strategy",
+     "Treat with corticosteroids, adding a steroid-sparing immunosuppressant such as mycophenolate or azathioprine, particularly for",
+     "Core treatment modality"
     ],
-    "prognosis": "Cellular NSIP has an excellent outlook with treatment, whereas fibrotic NSIP behaves intermediately between cellular NSIP and IPF, and a subset progresses despite therapy.",
-    "pitfalls": [
-      "Labelling disease as idiopathic without a thorough connective tissue disease and exposure work-up",
-      "Confusing fibrotic NSIP with UIP, leading to incorrect prognosis and management",
-      "Withholding immunosuppression that could benefit inflammatory disease",
-      "Missing antisynthetase syndrome presenting initially as interstitial lung disease"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "ATS/ERS international multidisciplinary classification of the idiopathic interstitial pneumonias"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with corticosteroids, adding a steroid-sparing immunosuppressant such as mycophenolate or azathioprine, particularly for the cellular inflammatory subtype which responds well",
-      "Identify and treat any underlying connective tissue disease, coordinating immunosuppression including rituximab in selected cases with rheumatology",
-      "Consider antifibrotic therapy with nintedanib for a progressive fibrotic phenotype behaving like fibrotic disease",
-      "Provide supportive care with supplemental oxygen for hypoxaemia, pulmonary rehabilitation and vaccination against respiratory pathogens",
-      "Remove ongoing drug or environmental exposures identified as contributory",
-      "Monitor with serial lung function including transfer factor and interval HRCT to detect progression",
-      "Refer progressive treatment-refractory disease for lung transplantation assessment and manage complex cases through a multidisciplinary interstitial lung disease team"
+    [
+     "Clinical Pitfall",
+     "Labelling disease as idiopathic without a thorough connective tissue disease and exposure work-up",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for nonspecific interstitial pneumonia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "nonspecific-interstitial-pneumonia-diagram",
+   "title": "Nonspecific interstitial pneumonia: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

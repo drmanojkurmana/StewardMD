@@ -1,80 +1,175 @@
 {
-  "id": "potocki_shaffer_syndrome",
-  "name": "Potocki-Shaffer syndrome (11p11.2 deletion)",
-  "aliases": [
-    "11p11.2 contiguous gene deletion syndrome",
-    "proximal 11p deletion syndrome",
-    "DEFECT11 syndrome",
-    "PSS"
+ "id": "potocki_shaffer_syndrome",
+ "name": "Potocki-Shaffer syndrome (11p11.2 deletion)",
+ "aliases": [
+  "11p11.2 contiguous gene deletion syndrome",
+  "proximal 11p deletion syndrome",
+  "DEFECT11 syndrome",
+  "PSS"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A contiguous gene deletion of chromosome 11p11.2 producing a combination of skeletal, cranial, and neurodevelopmental features",
+   "Multiple cartilaginous exostoses arise from deletion of EXT2, the same gene implicated in hereditary multiple exostoses",
+   "Enlarged parietal foramina, defects of membranous skull ossification, result from loss of ALX4",
+   "Intellectual disability and developmental delay are usual and reflect deletion of additional genes in the interval",
+   "Craniofacial features may include brachycephaly, a broad forehead, and midface differences",
+   "The size of the deletion correlates broadly with the range of features, as a larger interval removes more contiguous genes",
+   "Exostoses carry a small lifelong risk of malignant transformation and merit orthopaedic surveillance",
+   "Diagnosis is by chromosomal microarray defining the extent of the 11p11.2 deletion"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A contiguous gene deletion of chromosome 11p11.2 producing a combination of skeletal, cranial, and neurodevelopmental features",
-      "Multiple cartilaginous exostoses arise from deletion of EXT2, the same gene implicated in hereditary multiple exostoses",
-      "Enlarged parietal foramina, defects of membranous skull ossification, result from loss of ALX4",
-      "Intellectual disability and developmental delay are usual and reflect deletion of additional genes in the interval",
-      "Craniofacial features may include brachycephaly, a broad forehead, and midface differences",
-      "The size of the deletion correlates broadly with the range of features, as a larger interval removes more contiguous genes",
-      "Exostoses carry a small lifelong risk of malignant transformation and merit orthopaedic surveillance",
-      "Diagnosis is by chromosomal microarray defining the extent of the 11p11.2 deletion"
+  "pathophysiology": "Potocki-Shaffer syndrome is a contiguous gene deletion disorder in which loss of a segment of chromosome 11p11.2 removes several dosage-sensitive genes together. Haploinsufficiency of EXT2 impairs heparan sulfate biosynthesis in the growth plate and underlies the multiple exostoses, while loss of ALX4 disrupts the ossification of the cranial vault and produces enlarged parietal foramina. Deletion of further genes within the interval contributes to intellectual disability and the craniofacial phenotype. Because the manifestations arise from the combined effect of adjacent genes, the breadth and severity of the picture depend on which genes the individual deletion encompasses.",
+  "additionalDifferentials": [
+   "Hereditary multiple exostoses from an isolated EXT2 or EXT1 variant",
+   "Isolated enlarged parietal foramina from an ALX4 or MSX2 variant",
+   "Other contiguous gene deletion syndromes detected on microarray",
+   "WAGR and other 11p deletion disorders",
+   "Craniosynostosis and cranial ossification syndromes",
+   "Non-specific intellectual disability of alternative genetic cause"
+  ],
+  "additionalInvestigations": [
+   "Chromosomal microarray to confirm the 11p11.2 deletion and delineate its boundaries",
+   "Skeletal survey to document exostoses and their distribution",
+   "Skull imaging to characterise parietal foramina and ossification defects",
+   "Developmental assessment and neuropsychological evaluation",
+   "Orthopaedic review with ongoing surveillance of exostoses",
+   "Parental testing and genetic counselling regarding recurrence risk"
+  ],
+  "redFlags": [
+   "Rapid growth, pain, or change in an exostosis suggesting malignant transformation to chondrosarcoma",
+   "Neurological compromise from an exostosis impinging on nerves or the spinal cord",
+   "Large parietal skull defect leaving the underlying brain vulnerable to injury",
+   "Significant developmental regression warranting reassessment"
+  ],
+  "prognosis": "Lifespan is generally normal, and the outlook depends on the degree of intellectual disability and the burden of skeletal disease; exostoses may require surgical treatment and carry a small but real risk of malignant change, so lifelong orthopaedic surveillance is advised, while cranial ossification defects are usually of cosmetic and protective rather than functional concern.",
+  "pitfalls": [
+   "Diagnosing isolated hereditary multiple exostoses and missing the wider contiguous deletion syndrome",
+   "Failing to arrange orthopaedic surveillance for malignant transformation of exostoses",
+   "Overlooking the protective implications of large parietal skull defects",
+   "Using low-resolution cytogenetics that cannot reliably size the deletion"
+  ],
+  "references": [
+   "GeneReviews: Potocki-Shaffer syndrome",
+   "Smith's Recognizable Patterns of Human Malformation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-specific pharmacotherapy exists; care is directed at the skeletal, cranial and neurodevelopmental manifestations",
+   "Orthopaedic surveillance of multiple exostoses with surgical excision of lesions causing pain, deformity, nerve or vessel compression, or restricted movement",
+   "Long-term monitoring of exostoses for malignant transformation to chondrosarcoma",
+   "Protection and, where required, surgical or supportive management of enlarged parietal foramina and cranial ossification defects",
+   "Early developmental intervention and individualised educational support for intellectual disability and developmental delay",
+   "Multidisciplinary follow-up spanning clinical genetics, orthopaedics, neurology and developmental paediatrics",
+   "Genetic counselling with parental testing to establish recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "potocki_shaffer_syndrome-pathway",
+   "title": "Potocki-Shaffer syndrome (11p11.2 deletion): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A contiguous gene deletion of chromosome 11p11.2 producing a combination of skeletal, cranial, and neurodevelopmental features",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid growth, pain, or change in an exostosis suggesting malignant transformation to chondrosarcoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chromosomal microarray to confirm the 11p11.2 deletion and delineate its boundaries, Skeletal survey to document exostoses and their distribution, Skull imaging to characterise parietal foramina and ossification defects"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-specific pharmacotherapy exists; care is directed at the skeletal, cranial and neurodevelopmental manifestations"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing isolated hereditary multiple exostoses and missing the wider contiguous deletion syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of potocki-shaffer syndrome (11p11.2 deletion)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "potocki_shaffer_syndrome-matrix",
+   "title": "Potocki-Shaffer syndrome (11p11.2 deletion): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A contiguous gene deletion of chromosome 11p11.2 producing a combination of skeletal, cranial, and neurodevelopmental features",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Potocki-Shaffer syndrome is a contiguous gene deletion disorder in which loss of a segment of chromosome 11p11.2 removes several dosage-sensitive genes together. Haploinsufficiency of EXT2 impairs heparan sulfate biosynthesis in the growth plate and underlies the multiple exostoses, while loss of ALX4 disrupts the ossification of the cranial vault and produces enlarged parietal foramina. Deletion of further genes within the interval contributes to intellectual disability and the craniofacial phenotype. Because the manifestations arise from the combined effect of adjacent genes, the breadth and severity of the picture depend on which genes the individual deletion encompasses.",
-    "additionalDifferentials": [
-      "Hereditary multiple exostoses from an isolated EXT2 or EXT1 variant",
-      "Isolated enlarged parietal foramina from an ALX4 or MSX2 variant",
-      "Other contiguous gene deletion syndromes detected on microarray",
-      "WAGR and other 11p deletion disorders",
-      "Craniosynostosis and cranial ossification syndromes",
-      "Non-specific intellectual disability of alternative genetic cause"
+    [
+     "Key Investigations",
+     "Chromosomal microarray to confirm the 11p11.2 deletion and delineate its boundaries, Skeletal survey to document exostoses and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chromosomal microarray to confirm the 11p11.2 deletion and delineate its boundaries",
-      "Skeletal survey to document exostoses and their distribution",
-      "Skull imaging to characterise parietal foramina and ossification defects",
-      "Developmental assessment and neuropsychological evaluation",
-      "Orthopaedic review with ongoing surveillance of exostoses",
-      "Parental testing and genetic counselling regarding recurrence risk"
+    [
+     "Primary Differentials",
+     "Hereditary multiple exostoses from an isolated EXT2 or EXT1 variant, Isolated enlarged parietal foramina from an ALX4 or MSX2",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid growth, pain, or change in an exostosis suggesting malignant transformation to chondrosarcoma",
-      "Neurological compromise from an exostosis impinging on nerves or the spinal cord",
-      "Large parietal skull defect leaving the underlying brain vulnerable to injury",
-      "Significant developmental regression warranting reassessment"
+    [
+     "Management Strategy",
+     "No disease-specific pharmacotherapy exists; care is directed at the skeletal, cranial and neurodevelopmental manifestations",
+     "Core treatment modality"
     ],
-    "prognosis": "Lifespan is generally normal, and the outlook depends on the degree of intellectual disability and the burden of skeletal disease; exostoses may require surgical treatment and carry a small but real risk of malignant change, so lifelong orthopaedic surveillance is advised, while cranial ossification defects are usually of cosmetic and protective rather than functional concern.",
-    "pitfalls": [
-      "Diagnosing isolated hereditary multiple exostoses and missing the wider contiguous deletion syndrome",
-      "Failing to arrange orthopaedic surveillance for malignant transformation of exostoses",
-      "Overlooking the protective implications of large parietal skull defects",
-      "Using low-resolution cytogenetics that cannot reliably size the deletion"
-    ],
-    "references": [
-      "GeneReviews: Potocki-Shaffer syndrome",
-      "Smith's Recognizable Patterns of Human Malformation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-specific pharmacotherapy exists; care is directed at the skeletal, cranial and neurodevelopmental manifestations",
-      "Orthopaedic surveillance of multiple exostoses with surgical excision of lesions causing pain, deformity, nerve or vessel compression, or restricted movement",
-      "Long-term monitoring of exostoses for malignant transformation to chondrosarcoma",
-      "Protection and, where required, surgical or supportive management of enlarged parietal foramina and cranial ossification defects",
-      "Early developmental intervention and individualised educational support for intellectual disability and developmental delay",
-      "Multidisciplinary follow-up spanning clinical genetics, orthopaedics, neurology and developmental paediatrics",
-      "Genetic counselling with parental testing to establish recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Diagnosing isolated hereditary multiple exostoses and missing the wider contiguous deletion syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for potocki-shaffer syndrome (11p11.2 deletion)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "potocki-shaffer-syndrome-diagram",
+   "title": "Potocki-Shaffer syndrome (11p11.2 deletion): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

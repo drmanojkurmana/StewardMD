@@ -6,7 +6,24 @@
  "basis": "india",
  "counterpart": "malaria-international",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["P. vivax", "P. falciparum", "Pv", "Pf", "mixed malaria", "severe malaria", "cerebral malaria", "ACT", "ACT-SP", "ACT-AL", "artemether lumefantrine", "artesunate", "primaquine", "chloroquine", "NVBDCP", "NCVBDC drug policy"],
+ "aliases": [
+  "P. vivax",
+  "P. falciparum",
+  "Pv",
+  "Pf",
+  "mixed malaria",
+  "severe malaria",
+  "cerebral malaria",
+  "ACT",
+  "ACT-SP",
+  "ACT-AL",
+  "artemether lumefantrine",
+  "artesunate",
+  "primaquine",
+  "chloroquine",
+  "NVBDCP",
+  "NCVBDC drug policy"
+ ],
  "summary": "Confirm every case by microscopy or RDT. Vivax: chloroquine 3 days plus primaquine 0.25 mg/kg for 14 days. Falciparum: ACT-AL in the North-East, ACT-SP elsewhere, plus single-dose primaquine. Severe malaria: IV artesunate 2.4 mg/kg (3 mg/kg under 20 kg) at 0, 12 and 24 hours, then daily.",
  "sections": [
   {
@@ -98,22 +115,180 @@
   }
  ],
  "drugs": [
-  { "name": "Chloroquine (150 mg base tablets)", "dose": "25 mg base/kg over 3 days: 10 mg/kg day 1, 10 mg/kg day 2, 5 mg/kg day 3", "notes": "Tablets on days 1, 2, 3 by age: under 1 year 0.5, 0.5, 0.25; 1 to 4 years 1, 1, 0.5; 5 to 8 years 2, 2, 1; 9 to 14 years 3, 3, 1.5; 15 years and over 4, 4, 2." },
-  { "name": "Primaquine (radical cure, vivax or mixed)", "dose": "0.25 mg/kg orally once daily for 14 days, supervised", "notes": "Daily dose by age: under 1 year nil; 1 to 4 years 2.5 mg; 5 to 8 years 5 mg; 9 to 14 years 10 mg; 15 years and over 15 mg. Not in pregnancy, lactation or G6PD deficiency." },
-  { "name": "Primaquine (falciparum, gametocytocidal)", "dose": "0.75 mg/kg orally, single dose on day 2", "notes": "By age: 1 to 4 years 7.5 mg; 5 to 8 years 15 mg; 9 to 14 years 30 mg; 15 years and over 45 mg. Not under 1 year or in pregnancy. WHO uses 0.25 mg/kg; follow national policy." },
-  { "name": "ACT-SP (artesunate plus sulfadoxine-pyrimethamine)", "dose": "Artesunate 4 mg/kg once daily for 3 days plus sulfadoxine 25 mg/kg and pyrimethamine 1.25 mg/kg on day 1", "notes": "Age packs (artesunate daily; SP day 1): 0 to 1 year 25 mg, 250 plus 12.5 mg; 1 to 4 years 50 mg, 500 plus 25 mg; 5 to 8 years 100 mg, 750 plus 37.5 mg; 9 to 14 years 150 mg, 1000 plus 50 mg; 15 years and over 200 mg, 1500 plus 75 mg. Not under 5 months." },
-  { "name": "Artemether-lumefantrine (ACT-AL, 20/120 mg tablets)", "dose": "Twice daily for 3 days (6 doses; first two doses 8 hours apart): 5 to 14 kg 1 tablet, 15 to 24 kg 2 tablets, 25 to 34 kg 3 tablets, over 34 kg 4 tablets per dose", "notes": "North-Eastern states and mixed infections. Take with fatty food or milk. Not under 5 kg in national policy." },
-  { "name": "Artesunate injection", "dose": "2.4 mg/kg IV (or IM) at 0, 12 and 24 hours, then once daily; 3 mg/kg per dose in children under 20 kg", "notes": "Minimum 24 hours parenteral, then full oral ACT course. Monitor Hb for delayed haemolysis." },
-  { "name": "Quinine dihydrochloride injection", "dose": "20 mg salt/kg IV over 4 hours in 5% dextrose, then 10 mg/kg IV every 8 hours", "notes": "Maximum infusion rate 5 mg/kg/h. Omit loading dose if quinine already received. Reduce to 7 mg/kg 8-hourly if IV therapy continues beyond 48 hours. Hypoglycaemia risk." },
-  { "name": "Quinine (oral)", "dose": "10 mg salt/kg orally 3 times daily for 7 days", "notes": "First-trimester falciparum (national policy), or to complete 7 days after IV quinine together with doxycycline or clindamycin 10 mg/kg 12-hourly." },
-  { "name": "Artemether injection", "dose": "3.2 mg/kg IM on admission, then 1.6 mg/kg IM once daily", "notes": "Alternative when IV artesunate is not available; follow with full oral ACT." },
-  { "name": "Doxycycline", "dose": "Prophylaxis 100 mg orally daily (children over 8 years 1.5 mg/kg); with quinine 3 mg/kg (100 mg in adults) once daily for 7 days", "notes": "Contraindicated in pregnancy, lactation and children under 8 years." }
+  {
+   "name": "Chloroquine (150 mg base tablets)",
+   "dose": "25 mg base/kg over 3 days: 10 mg/kg day 1, 10 mg/kg day 2, 5 mg/kg day 3",
+   "notes": "Tablets on days 1, 2, 3 by age: under 1 year 0.5, 0.5, 0.25; 1 to 4 years 1, 1, 0.5; 5 to 8 years 2, 2, 1; 9 to 14 years 3, 3, 1.5; 15 years and over 4, 4, 2."
+  },
+  {
+   "name": "Primaquine (radical cure, vivax or mixed)",
+   "dose": "0.25 mg/kg orally once daily for 14 days, supervised",
+   "notes": "Daily dose by age: under 1 year nil; 1 to 4 years 2.5 mg; 5 to 8 years 5 mg; 9 to 14 years 10 mg; 15 years and over 15 mg. Not in pregnancy, lactation or G6PD deficiency."
+  },
+  {
+   "name": "Primaquine (falciparum, gametocytocidal)",
+   "dose": "0.75 mg/kg orally, single dose on day 2",
+   "notes": "By age: 1 to 4 years 7.5 mg; 5 to 8 years 15 mg; 9 to 14 years 30 mg; 15 years and over 45 mg. Not under 1 year or in pregnancy. WHO uses 0.25 mg/kg; follow national policy."
+  },
+  {
+   "name": "ACT-SP (artesunate plus sulfadoxine-pyrimethamine)",
+   "dose": "Artesunate 4 mg/kg once daily for 3 days plus sulfadoxine 25 mg/kg and pyrimethamine 1.25 mg/kg on day 1",
+   "notes": "Age packs (artesunate daily; SP day 1): 0 to 1 year 25 mg, 250 plus 12.5 mg; 1 to 4 years 50 mg, 500 plus 25 mg; 5 to 8 years 100 mg, 750 plus 37.5 mg; 9 to 14 years 150 mg, 1000 plus 50 mg; 15 years and over 200 mg, 1500 plus 75 mg. Not under 5 months."
+  },
+  {
+   "name": "Artemether-lumefantrine (ACT-AL, 20/120 mg tablets)",
+   "dose": "Twice daily for 3 days (6 doses; first two doses 8 hours apart): 5 to 14 kg 1 tablet, 15 to 24 kg 2 tablets, 25 to 34 kg 3 tablets, over 34 kg 4 tablets per dose",
+   "notes": "North-Eastern states and mixed infections. Take with fatty food or milk. Not under 5 kg in national policy."
+  },
+  {
+   "name": "Artesunate injection",
+   "dose": "2.4 mg/kg IV (or IM) at 0, 12 and 24 hours, then once daily; 3 mg/kg per dose in children under 20 kg",
+   "notes": "Minimum 24 hours parenteral, then full oral ACT course. Monitor Hb for delayed haemolysis."
+  },
+  {
+   "name": "Quinine dihydrochloride injection",
+   "dose": "20 mg salt/kg IV over 4 hours in 5% dextrose, then 10 mg/kg IV every 8 hours",
+   "notes": "Maximum infusion rate 5 mg/kg/h. Omit loading dose if quinine already received. Reduce to 7 mg/kg 8-hourly if IV therapy continues beyond 48 hours. Hypoglycaemia risk."
+  },
+  {
+   "name": "Quinine (oral)",
+   "dose": "10 mg salt/kg orally 3 times daily for 7 days",
+   "notes": "First-trimester falciparum (national policy), or to complete 7 days after IV quinine together with doxycycline or clindamycin 10 mg/kg 12-hourly."
+  },
+  {
+   "name": "Artemether injection",
+   "dose": "3.2 mg/kg IM on admission, then 1.6 mg/kg IM once daily",
+   "notes": "Alternative when IV artesunate is not available; follow with full oral ACT."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "Prophylaxis 100 mg orally daily (children over 8 years 1.5 mg/kg); with quinine 3 mg/kg (100 mg in adults) once daily for 7 days",
+   "notes": "Contraindicated in pregnancy, lactation and children under 8 years."
+  }
  ],
  "sources": [
-  { "org": "NCVBDC, MoHFW", "title": "Guidelines for Diagnosis and Treatment of Malaria in India 2014", "year": 2014, "url": "https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/20627628441542176662.pdf" },
-  { "org": "NCVBDC, MoHFW", "title": "National Drug Policy on Malaria 2013", "year": 2013, "url": "https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/National-Drug-Policy-2013.pdf" },
-  { "org": "NCVBDC, MoHFW", "title": "Malaria Training Module for MPHW 2025 (treatment tables)", "year": 2025, "url": "https://ncvbdc.mohfw.gov.in/Doc/Malaria-Training-Module-MPHW-2025.pdf" },
-  { "org": "WHO", "title": "WHO guidelines for malaria", "year": 2026, "url": "https://www.who.int/publications/i/item/guidelines-for-malaria" }
+  {
+   "org": "NCVBDC, MoHFW",
+   "title": "Guidelines for Diagnosis and Treatment of Malaria in India 2014",
+   "year": 2014,
+   "url": "https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/20627628441542176662.pdf"
+  },
+  {
+   "org": "NCVBDC, MoHFW",
+   "title": "National Drug Policy on Malaria 2013",
+   "year": 2013,
+   "url": "https://ncvbdc.mohfw.gov.in/WriteReadData/l892s/National-Drug-Policy-2013.pdf"
+  },
+  {
+   "org": "NCVBDC, MoHFW",
+   "title": "Malaria Training Module for MPHW 2025 (treatment tables)",
+   "year": 2025,
+   "url": "https://ncvbdc.mohfw.gov.in/Doc/Malaria-Training-Module-MPHW-2025.pdf"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO guidelines for malaria",
+   "year": 2026,
+   "url": "https://www.who.int/publications/i/item/guidelines-for-malaria"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "malaria-pathway",
+   "title": "Malaria: uncomplicated and severe (India) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Test every fever in an endemic area or after travel with microscopy or a bivalent RDT before treating; treat by species. If no test is available, give full-dose chloroquine and complete species-specific treatment when the result arrives.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "IV artesunate 2.4 mg/kg (3 mg/kg in children under 20 kg) at 0, 12 and 24 hours, then once daily. Reconstitute with the 5% sodium bicarbonate supplied. IV is preferred; IM is acceptable if IV access fails.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Severe malaria (any one, with parasitaemia): impaired consciousness or coma, repeated generalised convulsions, creatinine above 3 mg/dL, bilirubin above 3 mg/dL, Hb below 5 g/dL, pulmonary oedema or ARDS, glucose below 40 mg/dL (2.2"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "North-Eastern states (Arunachal Pradesh, Assam, Manipur, Meghalaya, Mizoram, Nagaland, Tripura): artemether-lumefantrine (ACT-AL) for 3 days plus primaquine 0.75 mg/kg single dose on day 2."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Check blood glucose frequently and on any deterioration; hypoglycaemia is common with quinine and in pregnancy. Treat values below 40 mg/dL (2.2 mmol/L) with IV dextrose."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for malaria: uncomplicated and severe (india)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malaria-summary-matrix",
+   "title": "Malaria: uncomplicated and severe (India) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Test every fever in an endemic area or after travel with microscopy or a bivalent RDT before treating; treat by species. If no test is",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "IV artesunate 2.4 mg/kg (3 mg/kg in children under 20 kg) at 0, 12 and 24 hours, then once daily. Reconstitute with the 5% sodium",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Chloroquine (150 mg base tablets): 25 mg base/kg over 3 days: 10 mg/kg day 1, 10 mg/kg day 2, 5 mg/kg day 3",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using ACT-SP for mixed infection in the North-East, or for any patient from the North-East where SP failure is documented.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for malaria: uncomplicated and severe (india)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malaria-diagram",
+   "title": "Malaria: uncomplicated and severe (India): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

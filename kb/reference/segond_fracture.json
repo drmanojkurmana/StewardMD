@@ -1,73 +1,168 @@
 {
-  "id": "segond_fracture",
-  "name": "Segond fracture",
-  "aliases": [
-    "lateral capsular avulsion fracture",
-    "lateral tibial rim avulsion",
-    "anterolateral ligament avulsion"
+ "id": "segond_fracture",
+ "name": "Segond fracture",
+ "aliases": [
+  "lateral capsular avulsion fracture",
+  "lateral tibial rim avulsion",
+  "anterolateral ligament avulsion"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Trauma",
+ "specialty": "Orthopaedics / Sports Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A small avulsion fracture off the lateral margin of the proximal tibia, just distal to the joint line",
+   "It results from internal rotation and varus stress and represents avulsion of the anterolateral capsuloligamentous complex",
+   "Its great importance is as a radiographic marker: it is strongly associated with (nearly pathognomonic of) anterior cruciate ligament rupture",
+   "It is frequently accompanied by meniscal injury as well as the ACL tear",
+   "A reverse Segond (medial tibial rim avulsion) is instead associated with PCL and medial meniscal injury",
+   "The fleck of bone can be subtle on radiographs, so its recognition should trigger MRI of the knee",
+   "Treatment is directed at the associated intra-articular injuries rather than the small bony fragment itself"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Trauma",
-  "specialty": "Orthopaedics / Sports Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A small avulsion fracture off the lateral margin of the proximal tibia, just distal to the joint line",
-      "It results from internal rotation and varus stress and represents avulsion of the anterolateral capsuloligamentous complex",
-      "Its great importance is as a radiographic marker: it is strongly associated with (nearly pathognomonic of) anterior cruciate ligament rupture",
-      "It is frequently accompanied by meniscal injury as well as the ACL tear",
-      "A reverse Segond (medial tibial rim avulsion) is instead associated with PCL and medial meniscal injury",
-      "The fleck of bone can be subtle on radiographs, so its recognition should trigger MRI of the knee",
-      "Treatment is directed at the associated intra-articular injuries rather than the small bony fragment itself"
+  "pathophysiology": "Excessive internal rotation and varus loading of the knee places tension on the anterolateral structures of the proximal tibia, avulsing a small cortical fragment at their insertion. The same mechanism ruptures the anterior cruciate ligament, which is why the Segond fragment is a reliable secondary sign of ACL injury; the bony fragment itself is usually clinically insignificant compared with the associated ligamentous and meniscal damage.",
+  "additionalDifferentials": [
+   "Arcuate (fibular head avulsion) fracture indicating posterolateral corner injury",
+   "Reverse Segond (medial avulsion) with PCL injury",
+   "Tibial plateau fracture",
+   "Iliotibial band or biceps femoris avulsion",
+   "Isolated ACL rupture without avulsion"
+  ],
+  "additionalInvestigations": [
+   "Radiographs of the knee (the fragment is best seen on the AP view)",
+   "MRI to confirm ACL rupture and detect meniscal injury",
+   "Lachman and pivot-shift examination for anterior instability",
+   "Assessment for associated posterolateral corner injury"
+  ],
+  "redFlags": [
+   "Multiligament injury or a reduced knee dislocation with vascular risk",
+   "Locked knee suggesting a displaced meniscal fragment",
+   "Gross rotatory instability implying posterolateral corner involvement"
+  ],
+  "prognosis": "The fracture itself heals without specific treatment; the outcome is determined by the associated ACL and meniscal injuries and their management.",
+  "pitfalls": [
+   "Overlooking the subtle bony fleck and thereby missing the associated ACL rupture",
+   "Treating the fragment in isolation while ignoring intra-articular injury",
+   "Confusing it with an arcuate fracture that signals posterolateral corner injury",
+   "Failing to obtain MRI after identifying the sign"
+  ],
+  "references": [
+   "Miller's Review of Orthopaedics",
+   "Rockwood and Green's Fractures in Adults"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Recognise the fragment as a marker of anterior cruciate ligament rupture and image the knee with MRI to define the ligamentous and meniscal injury",
+   "Manage the bony avulsion itself non-operatively, as it heals without specific fixation",
+   "Provide initial symptomatic care with rest, ice, analgesia and bracing or protected weight-bearing",
+   "Treat the associated ACL rupture with reconstruction in active or unstable patients, or with rehabilitation in lower-demand patients",
+   "Address concurrent meniscal or posterolateral corner injury surgically as indicated",
+   "Undertake structured physiotherapy and graded return to activity, with orthopaedic and sports medicine follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "segond_fracture-pathway",
+   "title": "Segond fracture: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A small avulsion fracture off the lateral margin of the proximal tibia, just distal to the joint line",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Multiligament injury or a reduced knee dislocation with vascular risk",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Radiographs of the knee (the fragment is best seen on the AP view), MRI to confirm ACL rupture and detect meniscal injury, Lachman and pivot-shift examination for anterior instability"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Recognise the fragment as a marker of anterior cruciate ligament rupture and image the knee with MRI to define the ligamentous and meniscal injury"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking the subtle bony fleck and thereby missing the associated ACL rupture"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of segond fracture."
+  }
+ ],
+ "tables": [
+  {
+   "id": "segond_fracture-matrix",
+   "title": "Segond fracture: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A small avulsion fracture off the lateral margin of the proximal tibia, just distal to the joint line",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Excessive internal rotation and varus loading of the knee places tension on the anterolateral structures of the proximal tibia, avulsing a small cortical fragment at their insertion. The same mechanism ruptures the anterior cruciate ligament, which is why the Segond fragment is a reliable secondary sign of ACL injury; the bony fragment itself is usually clinically insignificant compared with the associated ligamentous and meniscal damage.",
-    "additionalDifferentials": [
-      "Arcuate (fibular head avulsion) fracture indicating posterolateral corner injury",
-      "Reverse Segond (medial avulsion) with PCL injury",
-      "Tibial plateau fracture",
-      "Iliotibial band or biceps femoris avulsion",
-      "Isolated ACL rupture without avulsion"
+    [
+     "Key Investigations",
+     "Radiographs of the knee (the fragment is best seen on the AP view), MRI to confirm ACL rupture and detect meniscal injury,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Radiographs of the knee (the fragment is best seen on the AP view)",
-      "MRI to confirm ACL rupture and detect meniscal injury",
-      "Lachman and pivot-shift examination for anterior instability",
-      "Assessment for associated posterolateral corner injury"
+    [
+     "Primary Differentials",
+     "Arcuate (fibular head avulsion) fracture indicating posterolateral corner injury, Reverse Segond (medial avulsion) with PCL",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Multiligament injury or a reduced knee dislocation with vascular risk",
-      "Locked knee suggesting a displaced meniscal fragment",
-      "Gross rotatory instability implying posterolateral corner involvement"
+    [
+     "Management Strategy",
+     "Recognise the fragment as a marker of anterior cruciate ligament rupture and image the knee with MRI to define the ligamentous",
+     "Core treatment modality"
     ],
-    "prognosis": "The fracture itself heals without specific treatment; the outcome is determined by the associated ACL and meniscal injuries and their management.",
-    "pitfalls": [
-      "Overlooking the subtle bony fleck and thereby missing the associated ACL rupture",
-      "Treating the fragment in isolation while ignoring intra-articular injury",
-      "Confusing it with an arcuate fracture that signals posterolateral corner injury",
-      "Failing to obtain MRI after identifying the sign"
-    ],
-    "references": [
-      "Miller's Review of Orthopaedics",
-      "Rockwood and Green's Fractures in Adults"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Recognise the fragment as a marker of anterior cruciate ligament rupture and image the knee with MRI to define the ligamentous and meniscal injury",
-      "Manage the bony avulsion itself non-operatively, as it heals without specific fixation",
-      "Provide initial symptomatic care with rest, ice, analgesia and bracing or protected weight-bearing",
-      "Treat the associated ACL rupture with reconstruction in active or unstable patients, or with rehabilitation in lower-demand patients",
-      "Address concurrent meniscal or posterolateral corner injury surgically as indicated",
-      "Undertake structured physiotherapy and graded return to activity, with orthopaedic and sports medicine follow-up"
+    [
+     "Clinical Pitfall",
+     "Overlooking the subtle bony fleck and thereby missing the associated ACL rupture",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for segond fracture."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "segond-fracture-diagram",
+   "title": "Segond fracture: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

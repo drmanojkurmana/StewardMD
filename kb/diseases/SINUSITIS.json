@@ -223,5 +223,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h366634e2"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "sinusitis-dx-algo",
+      "title": "Acute Sinusitis (Rhinosinusitis): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The vast majority of acute sinusitis cases are caused by respiratory viruses; fewer than 2% of episodes are bacterial, yet antibiotics are prescribed at over 70% of office visits, making sinusitis a leading driver of unnecessary antibiotic",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Confusion (possible intracranial complication) (p. 299)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: No imaging or laboratory testing is routinely required for uncomplicated acute sinusitis; diagnosis is clinical (pp. 299-300)., Sinus transillumination is NOT accurate for diagnosing sinusitis and should not be relied upon"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Antibiotic-prescribing indications (Harrison Table 37-2, p. 299): Persistent = symptoms lasting >=10 days; Severe = fever >102 degrees F with either purulent nasal discharge or nasal pain for at least 3-4 consecutive"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating acute sinusitis as bacterial by default - the large majority are viral, and antibiotics are over-prescribed; reserve antibiotics for patients meeting persistent (>=10 days), severe, or worsening criteria (p."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute sinusitis (rhinosinusitis)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sinusitis-matrix",
+      "title": "Acute Sinusitis (Rhinosinusitis): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The vast majority of acute sinusitis cases are caused by respiratory viruses; fewer than 2% of episodes are bacterial, yet",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "No imaging or laboratory testing is routinely required for uncomplicated acute sinusitis; diagnosis is clinical (pp. 299-300).,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Common cold / nonspecific upper respiratory infection (p. 298), Allergic rhinitis (p. 298), Vasomotor rhinitis (p. 298)",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Confusion (possible intracranial complication) (p. 299)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating acute sinusitis as bacterial by default - the large majority are viral, and antibiotics are over-prescribed; reserve",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute sinusitis (rhinosinusitis)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sinusitis-diagram",
+      "title": "Acute Sinusitis (Rhinosinusitis): Pulmonary & Chest Radiograph Diagnostic Schematic",
+      "type": "xray",
+      "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+      "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Airway Tree",
+          "description": "Tracheobronchial branching down to lobar and segmental divisions."
+        },
+        {
+          "label": "Parenchyma",
+          "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+        },
+        {
+          "label": "Pleural Space",
+          "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+        }
+      ]
+    }
+  ]
 }

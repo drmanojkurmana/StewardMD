@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, outpatient clinic",
- "aliases": ["syncope", "fainting", "blackout", "transient loss of consciousness", "TLOC", "vasovagal", "reflex syncope", "orthostatic hypotension", "cardiac syncope", "collapse"],
+ "aliases": [
+  "syncope",
+  "fainting",
+  "blackout",
+  "transient loss of consciousness",
+  "TLOC",
+  "vasovagal",
+  "reflex syncope",
+  "orthostatic hypotension",
+  "cardiac syncope",
+  "collapse"
+ ],
  "summary": "Confirm true syncope, then do a history, examination with lying and standing BP, and ECG; identify high-risk features suggesting cardiac syncope needing admission or urgent evaluation, and discharge low-risk reflex or orthostatic syncope with education and follow-up.",
  "sections": [
   {
@@ -80,12 +91,128 @@
   }
  ],
  "drugs": [
-  { "name": "Midodrine", "dose": "2.5 to 10 mg orally three times daily (last dose at least 4 hours before bedtime)", "notes": "Orthostatic hypotension or refractory reflex syncope. Supine hypertension, urinary retention." },
-  { "name": "Fludrocortisone", "dose": "0.1 to 0.3 mg orally once daily", "notes": "Orthostatic hypotension or young patients with reflex syncope and low normal BP. Hypokalaemia, supine hypertension, oedema; avoid in heart failure." }
+  {
+   "name": "Midodrine",
+   "dose": "2.5 to 10 mg orally three times daily (last dose at least 4 hours before bedtime)",
+   "notes": "Orthostatic hypotension or refractory reflex syncope. Supine hypertension, urinary retention."
+  },
+  {
+   "name": "Fludrocortisone",
+   "dose": "0.1 to 0.3 mg orally once daily",
+   "notes": "Orthostatic hypotension or young patients with reflex syncope and low normal BP. Hypokalaemia, supine hypertension, oedema; avoid in heart failure."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2018 ESC Guidelines for the diagnosis and management of syncope", "year": 2018, "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehy037" },
-  { "org": "ACC / AHA / HRS", "title": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope", "year": 2017, "url": "https://www.jacc.org/doi/10.1016/j.jacc.2017.03.003" }
+  {
+   "org": "ESC",
+   "title": "2018 ESC Guidelines for the diagnosis and management of syncope",
+   "year": 2018,
+   "url": "https://academic.oup.com/eurheartj/article-lookup/doi/10.1093/eurheartj/ehy037"
+  },
+  {
+   "org": "ACC / AHA / HRS",
+   "title": "2017 ACC/AHA/HRS Guideline for the Evaluation and Management of Patients With Syncope",
+   "year": 2017,
+   "url": "https://www.jacc.org/doi/10.1016/j.jacc.2017.03.003"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "syncope-evaluation-pathway",
+   "title": "Syncope: initial evaluation and risk stratification Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Syncope: transient loss of consciousness from cerebral hypoperfusion, with rapid onset, short duration and spontaneous complete recovery.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Detailed history from patient and witness: posture, trigger, prodrome, exertion, palpitations, chest pain, injury, recovery, previous episodes, medicines, family history of sudden death.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Echocardiography when structural heart disease is suspected. Exercise testing for syncope during or shortly after exertion."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Reflex syncope: explanation and reassurance, avoid triggers, adequate fluid and salt intake, physical counter-pressure manoeuvres (leg crossing, hand grip, squatting) at the onset of prodrome."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Labelling exertional syncope, syncope while supine or syncope with palpitations as vasovagal."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for syncope: initial evaluation and risk stratification."
+  }
+ ],
+ "tables": [
+  {
+   "id": "syncope-evaluation-summary-matrix",
+   "title": "Syncope: initial evaluation and risk stratification Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Syncope: transient loss of consciousness from cerebral hypoperfusion, with rapid onset, short duration and spontaneous complete recovery.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Detailed history from patient and witness: posture, trigger, prodrome, exertion, palpitations, chest pain, injury, recovery, previous",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Echocardiography when structural heart disease is suspected. Exercise testing for syncope during or shortly after exertion.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Midodrine: 2.5 to 10 mg orally three times daily (last dose at least 4 hours before bedtime)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling exertional syncope, syncope while supine or syncope with palpitations as vasovagal.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for syncope: initial evaluation and risk stratification."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "syncope-evaluation-diagram",
+   "title": "Syncope: initial evaluation and risk stratification: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

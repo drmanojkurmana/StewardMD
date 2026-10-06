@@ -150,5 +150,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "paediatric-dka-pathway",
+   "title": "Diabetic ketoacidosis (child) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Diagnosis: blood glucose above 200 mg/dL (11 mmol/L), venous pH below 7.3 or bicarbonate below 18 mmol/L, and ketonaemia (beta-hydroxybutyrate 3 mmol/L or more) or moderate to large ketonuria.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "ABC; oxygen if circulation is impaired; two peripheral IV lines (avoid central lines); cardiac monitor; weigh the child. Protect the airway if consciousness is severely reduced.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Clinical: dehydration, deep sighing (Kussmaul) breathing, vomiting, abdominal pain that can mimic an acute abdomen, drowsiness. Weak or impalpable pulses, hypotension or oliguria suggest dehydration of 10% or more."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Regular (soluble) insulin IV 0.05 to 0.1 units/kg/h; 0.05 units/kg/h is enough if pH is above 7.15, and 0.03 units/kg/h may suffice in mild DKA under 5 years. Example: 50 units in 50 mL 0.9% saline (1 unit/mL); flush the tubing with the"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Hourly: heart rate, respiratory rate, blood pressure, GCS and neurological observations, insulin dose, all fluid input and output, and capillary glucose (cross-check with laboratory glucose)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for diabetic ketoacidosis (child)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paediatric-dka-summary-matrix",
+   "title": "Diabetic ketoacidosis (child) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Diagnosis: blood glucose above 200 mg/dL (11 mmol/L), venous pH below 7.3 or bicarbonate below 18 mmol/L, and ketonaemia",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ABC; oxygen if circulation is impaired; two peripheral IV lines (avoid central lines); cardiac monitor; weigh the child. Protect the airway",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "0.9% sodium chloride (bolus): 10 to 20 mL/kg IV over 20 to 30 minutes; 20 mL/kg boluses as fast as possible if in shock",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving an insulin bolus or starting insulin before fluids.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for diabetic ketoacidosis (child)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "paediatric-dka-diagram",
+   "title": "Diabetic ketoacidosis (child): Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

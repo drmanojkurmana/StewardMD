@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Surgical wards, pre-assessment, orthopaedics, day surgery",
- "aliases": ["thromboprophylaxis", "DVT prophylaxis", "surgical VTE prophylaxis", "Caprini", "enoxaparin prophylaxis", "LMWH prophylaxis", "extended prophylaxis", "arthroplasty thromboprophylaxis", "hip replacement DVT", "knee replacement DVT", "NICE NG89"],
+ "aliases": [
+  "thromboprophylaxis",
+  "DVT prophylaxis",
+  "surgical VTE prophylaxis",
+  "Caprini",
+  "enoxaparin prophylaxis",
+  "LMWH prophylaxis",
+  "extended prophylaxis",
+  "arthroplasty thromboprophylaxis",
+  "hip replacement DVT",
+  "knee replacement DVT",
+  "NICE NG89"
+ ],
  "summary": "Assess VTE and bleeding risk on admission (Caprini score), start mechanical prophylaxis, add LMWH or UFH when VTE risk outweighs bleeding risk, and extend prophylaxis to 28 days after major abdominal or pelvic cancer surgery and to 4 to 5 weeks after hip arthroplasty or hip fracture.",
  "sections": [
   {
@@ -86,19 +98,165 @@
   }
  ],
  "drugs": [
-  { "name": "Enoxaparin", "dose": "40 mg SC once daily", "notes": "20 mg once daily if CrCl below 30 mL/min. Start 12 hours before or 6 to 12 hours after surgery. Widely available in India." },
-  { "name": "Dalteparin", "dose": "5000 units SC once daily", "notes": "Alternative LMWH." },
-  { "name": "Unfractionated heparin", "dose": "5000 units SC every 8 to 12 hours", "notes": "Preferred in severe renal impairment; monitor platelets." },
-  { "name": "Fondaparinux", "dose": "2.5 mg SC once daily, first dose 6 hours after surgery", "notes": "If LMWH contraindicated; avoid in severe renal impairment." },
-  { "name": "Rivaroxaban", "dose": "10 mg orally once daily, starting 6 to 10 hours after surgery", "notes": "About 5 weeks after hip and 2 weeks after knee replacement." },
-  { "name": "Apixaban", "dose": "2.5 mg orally twice daily, starting 12 to 24 hours after surgery", "notes": "32 to 38 days after hip and 10 to 14 days after knee replacement." },
-  { "name": "Aspirin", "dose": "75 or 150 mg orally once daily", "notes": "Knee replacement 14 days; after 10 days of LMWH for 28 days in hip replacement (NICE)." }
+  {
+   "name": "Enoxaparin",
+   "dose": "40 mg SC once daily",
+   "notes": "20 mg once daily if CrCl below 30 mL/min. Start 12 hours before or 6 to 12 hours after surgery. Widely available in India."
+  },
+  {
+   "name": "Dalteparin",
+   "dose": "5000 units SC once daily",
+   "notes": "Alternative LMWH."
+  },
+  {
+   "name": "Unfractionated heparin",
+   "dose": "5000 units SC every 8 to 12 hours",
+   "notes": "Preferred in severe renal impairment; monitor platelets."
+  },
+  {
+   "name": "Fondaparinux",
+   "dose": "2.5 mg SC once daily, first dose 6 hours after surgery",
+   "notes": "If LMWH contraindicated; avoid in severe renal impairment."
+  },
+  {
+   "name": "Rivaroxaban",
+   "dose": "10 mg orally once daily, starting 6 to 10 hours after surgery",
+   "notes": "About 5 weeks after hip and 2 weeks after knee replacement."
+  },
+  {
+   "name": "Apixaban",
+   "dose": "2.5 mg orally twice daily, starting 12 to 24 hours after surgery",
+   "notes": "32 to 38 days after hip and 10 to 14 days after knee replacement."
+  },
+  {
+   "name": "Aspirin",
+   "dose": "75 or 150 mg orally once daily",
+   "notes": "Knee replacement 14 days; after 10 days of LMWH for 28 days in hip replacement (NICE)."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism (NG89, updated 2019)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng89/chapter/Recommendations" },
-  { "org": "American Society of Hematology", "title": "ASH 2019 guidelines for management of VTE: prevention of VTE in surgical hospitalized patients", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963238/" },
-  { "org": "ACCP", "title": "Prevention of VTE in nonorthopedic surgical patients: Antithrombotic Therapy and Prevention of Thrombosis, 9th ed (Gould et al.)", "year": 2012, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3278061/" },
-  { "org": "ACCP", "title": "Prevention of VTE in orthopedic surgery patients: Antithrombotic Therapy and Prevention of Thrombosis, 9th ed (Falck-Ytter et al.)", "year": 2012, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3278063/" }
+  {
+   "org": "NICE",
+   "title": "Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism (NG89, updated 2019)",
+   "year": 2018,
+   "url": "https://www.nice.org.uk/guidance/ng89/chapter/Recommendations"
+  },
+  {
+   "org": "American Society of Hematology",
+   "title": "ASH 2019 guidelines for management of VTE: prevention of VTE in surgical hospitalized patients",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963238/"
+  },
+  {
+   "org": "ACCP",
+   "title": "Prevention of VTE in nonorthopedic surgical patients: Antithrombotic Therapy and Prevention of Thrombosis, 9th ed (Gould et al.)",
+   "year": 2012,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3278061/"
+  },
+  {
+   "org": "ACCP",
+   "title": "Prevention of VTE in orthopedic surgery patients: Antithrombotic Therapy and Prevention of Thrombosis, 9th ed (Falck-Ytter et al.)",
+   "year": 2012,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3278063/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "perioperative-vte-prophylaxis-pathway",
+   "title": "VTE prophylaxis in surgical patients Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Assess every surgical patient on admission or by first consultant review, and reassess after surgery or any clinical change.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Caprini score (ACCP 2012): 0 very low (under 0.5% VTE risk), 1 to 2 low (about 1.5%), 3 to 4 moderate (about 3%), 5 or more high (about 6%).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Risk factors: surgery over 90 minutes (over 60 minutes if pelvic or lower limb), cancer, previous VTE, thrombophilia, age over 60, obesity, immobility, oestrogen therapy, pregnancy or postpartum, arthroplasty, hip fracture, major trauma."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start pharmacological prophylaxis as soon as possible and within 14 hours of the decision to admit, unless a procedure-specific timing applies."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Check platelets at baseline; if UFH is used or there has been heparin exposure in the last 100 days, monitor platelets for heparin-induced thrombocytopenia (days 4 to 14)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for vte prophylaxis in surgical patients."
+  }
+ ],
+ "tables": [
+  {
+   "id": "perioperative-vte-prophylaxis-summary-matrix",
+   "title": "VTE prophylaxis in surgical patients Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Assess every surgical patient on admission or by first consultant review, and reassess after surgery or any clinical change.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start pharmacological prophylaxis as soon as possible and within 14 hours of the decision to admit, unless a procedure-specific timing",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Enoxaparin: 40 mg SC once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "No documented risk assessment, or no reassessment after surgery.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for vte prophylaxis in surgical patients."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "perioperative-vte-prophylaxis-diagram",
+   "title": "VTE prophylaxis in surgical patients: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

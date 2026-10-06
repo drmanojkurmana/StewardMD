@@ -1,80 +1,175 @@
 {
-  "id": "achilles_tendinopathy",
-  "name": "Achilles tendinopathy",
-  "aliases": [
-    "Achilles tendinosis",
-    "Achilles tendinitis",
-    "mid-portion Achilles tendinopathy",
-    "insertional Achilles tendinopathy"
+ "id": "achilles_tendinopathy",
+ "name": "Achilles tendinopathy",
+ "aliases": [
+  "Achilles tendinosis",
+  "Achilles tendinitis",
+  "mid-portion Achilles tendinopathy",
+  "insertional Achilles tendinopathy"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Sports & Musculoskeletal Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Apley & Solomon / standard sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with posterior heel or lower-calf pain and stiffness that is worst on starting activity and after rest, with local tendon thickening and tenderness",
+   "It is divided into mid-portion disease (a few centimetres above the insertion) and insertional disease at the calcaneal attachment, which are managed differently",
+   "The mid-portion tendon has a relatively hypovascular zone that predisposes it to degenerative failure under repetitive load",
+   "It is a degenerative tendinopathy with disorganised collagen and neovascularisation rather than true tendinitis",
+   "Always distinguish tendinopathy from a complete rupture; a positive Thompson (calf squeeze) test and a palpable gap indicate rupture and need urgent referral",
+   "Progressive eccentric or heavy slow-resistance calf loading is the cornerstone of treatment for mid-portion disease",
+   "Insertional disease may respond less well to full-range eccentric loading and often needs modified, reduced-dorsiflexion exercises and heel lifts",
+   "Corticosteroid injection into or around the tendon is generally avoided because of the risk of rupture",
+   "Fluoroquinolone antibiotics are associated with tendinopathy and tendon rupture and should be considered in the history"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Sports & Musculoskeletal Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Apley & Solomon / standard sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with posterior heel or lower-calf pain and stiffness that is worst on starting activity and after rest, with local tendon thickening and tenderness",
-      "It is divided into mid-portion disease (a few centimetres above the insertion) and insertional disease at the calcaneal attachment, which are managed differently",
-      "The mid-portion tendon has a relatively hypovascular zone that predisposes it to degenerative failure under repetitive load",
-      "It is a degenerative tendinopathy with disorganised collagen and neovascularisation rather than true tendinitis",
-      "Always distinguish tendinopathy from a complete rupture; a positive Thompson (calf squeeze) test and a palpable gap indicate rupture and need urgent referral",
-      "Progressive eccentric or heavy slow-resistance calf loading is the cornerstone of treatment for mid-portion disease",
-      "Insertional disease may respond less well to full-range eccentric loading and often needs modified, reduced-dorsiflexion exercises and heel lifts",
-      "Corticosteroid injection into or around the tendon is generally avoided because of the risk of rupture",
-      "Fluoroquinolone antibiotics are associated with tendinopathy and tendon rupture and should be considered in the history"
+  "pathophysiology": "Achilles tendinopathy is an overuse condition in which repetitive loading exceeds the tendon's capacity to adapt, causing microtears and a failed healing response. Histology shows collagen disorganisation, increased ground substance, and neovascularisation with accompanying nerve ingrowth rather than inflammatory cells. The mid-portion watershed zone of relative hypovascularity is vulnerable, while insertional disease involves the enthesis and may be associated with a Haglund deformity or retrocalcaneal bursitis.",
+  "additionalDifferentials": [
+   "Complete or partial Achilles tendon rupture",
+   "Retrocalcaneal or superficial calcaneal bursitis",
+   "Haglund deformity",
+   "Posterior ankle impingement or os trigonum",
+   "Calcaneal stress fracture",
+   "Sural nerve irritation",
+   "Systemic enthesitis from seronegative spondyloarthropathy"
+  ],
+  "additionalInvestigations": [
+   "Largely a clinical diagnosis",
+   "Ultrasound to show tendon thickening, hypoechoic areas, neovascularity, and to detect partial tears",
+   "MRI for detailed assessment in refractory or surgical cases and to characterise insertional pathology",
+   "Plain radiographs for insertional disease to identify calcification, a Haglund deformity, or spur",
+   "Consider metabolic and inflammatory screening in atypical, bilateral, or young patients"
+  ],
+  "redFlags": [
+   "Sudden pain with a palpable gap and positive Thompson test indicating tendon rupture",
+   "Recent fluoroquinolone use raising rupture risk",
+   "Night pain, systemic symptoms, or a mass suggesting infection or tumour",
+   "Inflammatory or bilateral enthesitis suggesting spondyloarthropathy"
+  ],
+  "prognosis": "Most patients improve over three to six months with structured loading, though symptoms can be slow to settle and recurrence is common; insertional disease is generally more resistant to conservative treatment than mid-portion disease.",
+  "pitfalls": [
+   "Missing a tendon rupture by not performing the Thompson test",
+   "Injecting corticosteroid into or around the tendon and precipitating rupture",
+   "Applying mid-portion eccentric protocols to insertional disease and worsening symptoms",
+   "Advancing loading too quickly and provoking flares, or ignoring contributory training errors"
+  ],
+  "references": [
+   "Apley & Solomon's System of Orthopaedics and Fractures"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Progressive mechanical loading as the cornerstone: eccentric or heavy slow-resistance calf loading for mid-portion disease, with limited-dorsiflexion loading for insertional disease",
+   "Relative rest with load and activity modification and graded return, plus simple analgesia and short-term NSAIDs for pain",
+   "Address footwear and contributory factors, including a heel raise for insertional disease and correction of training errors and biomechanical faults",
+   "Extracorporeal shockwave therapy as an adjunct for refractory cases",
+   "Use injections cautiously, avoiding intratendinous corticosteroid because of rupture risk, and consider high-volume or sclerosing injection in selected cases",
+   "Distinguish and urgently refer a suspected complete rupture indicated by a positive Thompson calf-squeeze test and a palpable gap",
+   "Surgery such as tendon debridement, or excision of a Haglund deformity in insertional disease, for cases failing prolonged conservative treatment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "achilles_tendinopathy-pathway",
+   "title": "Achilles tendinopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with posterior heel or lower-calf pain and stiffness that is worst on starting activity and after rest, with local tendon thickening and tenderness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden pain with a palpable gap and positive Thompson test indicating tendon rupture",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Largely a clinical diagnosis, Ultrasound to show tendon thickening, hypoechoic areas, neovascularity, and to detect partial tears, MRI for detailed assessment in refractory or surgical cases and to characterise insertional"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Progressive mechanical loading as the cornerstone: eccentric or heavy slow-resistance calf loading for mid-portion disease, with limited-dorsiflexion loading for insertional disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing a tendon rupture by not performing the Thompson test"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of achilles tendinopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "achilles_tendinopathy-matrix",
+   "title": "Achilles tendinopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with posterior heel or lower-calf pain and stiffness that is worst on starting activity and after rest, with local",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Achilles tendinopathy is an overuse condition in which repetitive loading exceeds the tendon's capacity to adapt, causing microtears and a failed healing response. Histology shows collagen disorganisation, increased ground substance, and neovascularisation with accompanying nerve ingrowth rather than inflammatory cells. The mid-portion watershed zone of relative hypovascularity is vulnerable, while insertional disease involves the enthesis and may be associated with a Haglund deformity or retrocalcaneal bursitis.",
-    "additionalDifferentials": [
-      "Complete or partial Achilles tendon rupture",
-      "Retrocalcaneal or superficial calcaneal bursitis",
-      "Haglund deformity",
-      "Posterior ankle impingement or os trigonum",
-      "Calcaneal stress fracture",
-      "Sural nerve irritation",
-      "Systemic enthesitis from seronegative spondyloarthropathy"
+    [
+     "Key Investigations",
+     "Largely a clinical diagnosis, Ultrasound to show tendon thickening, hypoechoic areas, neovascularity, and to detect partial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Largely a clinical diagnosis",
-      "Ultrasound to show tendon thickening, hypoechoic areas, neovascularity, and to detect partial tears",
-      "MRI for detailed assessment in refractory or surgical cases and to characterise insertional pathology",
-      "Plain radiographs for insertional disease to identify calcification, a Haglund deformity, or spur",
-      "Consider metabolic and inflammatory screening in atypical, bilateral, or young patients"
+    [
+     "Primary Differentials",
+     "Complete or partial Achilles tendon rupture, Retrocalcaneal or superficial calcaneal bursitis, Haglund deformity",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden pain with a palpable gap and positive Thompson test indicating tendon rupture",
-      "Recent fluoroquinolone use raising rupture risk",
-      "Night pain, systemic symptoms, or a mass suggesting infection or tumour",
-      "Inflammatory or bilateral enthesitis suggesting spondyloarthropathy"
+    [
+     "Management Strategy",
+     "Progressive mechanical loading as the cornerstone: eccentric or heavy slow-resistance calf loading for mid-portion disease, with",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients improve over three to six months with structured loading, though symptoms can be slow to settle and recurrence is common; insertional disease is generally more resistant to conservative treatment than mid-portion disease.",
-    "pitfalls": [
-      "Missing a tendon rupture by not performing the Thompson test",
-      "Injecting corticosteroid into or around the tendon and precipitating rupture",
-      "Applying mid-portion eccentric protocols to insertional disease and worsening symptoms",
-      "Advancing loading too quickly and provoking flares, or ignoring contributory training errors"
-    ],
-    "references": [
-      "Apley & Solomon's System of Orthopaedics and Fractures"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Progressive mechanical loading as the cornerstone: eccentric or heavy slow-resistance calf loading for mid-portion disease, with limited-dorsiflexion loading for insertional disease",
-      "Relative rest with load and activity modification and graded return, plus simple analgesia and short-term NSAIDs for pain",
-      "Address footwear and contributory factors, including a heel raise for insertional disease and correction of training errors and biomechanical faults",
-      "Extracorporeal shockwave therapy as an adjunct for refractory cases",
-      "Use injections cautiously, avoiding intratendinous corticosteroid because of rupture risk, and consider high-volume or sclerosing injection in selected cases",
-      "Distinguish and urgently refer a suspected complete rupture indicated by a positive Thompson calf-squeeze test and a palpable gap",
-      "Surgery such as tendon debridement, or excision of a Haglund deformity in insertional disease, for cases failing prolonged conservative treatment"
+    [
+     "Clinical Pitfall",
+     "Missing a tendon rupture by not performing the Thompson test",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for achilles tendinopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "achilles-tendinopathy-diagram",
+   "title": "Achilles tendinopathy: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

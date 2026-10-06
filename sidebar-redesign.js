@@ -25,6 +25,7 @@
   try { window.SMD_SBR = true; } catch (e) {}
 
   var ICON = {
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',
     atlas: '<circle cx="12" cy="4.6" r="2.4"/><path d="M12 7v9M8.2 10h7.6M9.6 16 8 21M14.4 16 16 21"/>',
     pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
     interact: '<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>',
@@ -89,7 +90,7 @@
     },
     appearance: function () {
       // Opens the full Display & Accessibility sheet (font size, font family, theme, density…).
-      if (window.SMD_openDisplay) return SMD_openDisplay();
+      if (window.SMD_openDisplay) return SMD_openDisplay({ onClose: openSettingsPage });
       if (window.SMD_openAppearance) return SMD_openAppearance();
       if (window.SB && SB.toggleTheme) return SB.toggleTheme();
       document.body.classList.toggle("dark");
@@ -127,8 +128,8 @@
     // made this switch DISPLAY off while the module was actually on.
     { id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" },
     { id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: true, key: "smd_clinix_tutor" },
-    { id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
-    { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
+    { id: "surgx", title: "SURGˣ · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
+    { id: "surgxdraft", title: "SURGˣ draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
@@ -352,7 +353,7 @@
     try {
       if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) {
         html += '<button data-sbr-act="offlinedb" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:none;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui)">' + svg("pills") +
-          '<span style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
+          '<span class="sbr-lbl" style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
       }
     } catch (e) {}
     // Owner-only: the hello@maiknowledge.com mailbox (mail.js). Gated by SMD_MAIL.enabled(), which
@@ -360,7 +361,7 @@
     try {
       if (window.SMD_MAIL && SMD_MAIL.enabled()) {
         html += '<button class="sbr-row" data-sbr-act="mail">' + svg("mail") +
-          '<span style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
+          '<span class="sbr-lbl" style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     // Owner-only: review + approve/decline hospital-add requests.
@@ -368,7 +369,7 @@
       var _oe = ((window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || "").toLowerCase();
       if (["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"].indexOf(_oe) >= 0) {
         html += '<button class="sbr-row" data-sbr-act="hospadmin">' + svg("shield") +
-          '<span style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
+          '<span class="sbr-lbl" style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     html += '<div class="sbr-note">Clinical engine settings for this device.</div>';
@@ -620,8 +621,8 @@
       '<div class="sbr-card">' +
         toggle({ id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" }) +
         toggle({ id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when free keyword grade cannot judge", def: true, key: "smd_clinix_tutor" }) +
-        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
-        toggle({ id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
+        toggle({ id: "surgx", title: "SURGˣ · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "surgxdraft", title: "SURGˣ draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
       '</div>' +
 
       '<div class="sbr-sec">Neonatal (Beta)</div>' +
@@ -643,9 +644,11 @@
       '<div class="sbr-note">Reload the app after changing feature flags to update navigation and home tiles.</div>';
   }
 
+  var settingsOpener = null, experimentalOpener = null;
   function closeExperimentalPage() {
     var ov = document.getElementById("sbrExperimental");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    if (ov && experimentalOpener && experimentalOpener.isConnected) experimentalOpener.focus({ preventScroll: true });
     if (!document.getElementById("sbrSettings")) {
       document.body.classList.remove("sbr-set-open");
     }
@@ -654,6 +657,7 @@
   function openExperimentalPage() {
     injectCSS();
     closeExperimentalPage();
+    experimentalOpener = document.activeElement;
     var ov = document.createElement("div");
     ov.id = "sbrExperimental";
     ov.className = "sbr-set-ov sbr-exp-ov";
@@ -664,6 +668,7 @@
         expBodyHTML() +
       '</div>';
     document.body.classList.add("sbr-set-open");
+    if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
 
     try {
       if (window.SMD_XACCESS && SMD_XACCESS.onChange) {
@@ -721,7 +726,7 @@
       '<span class="sbr-chev">▸</span></button>' +
       '<div class="sbr-card">' +
         toggle({ id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" }) +
-        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "surgx", title: "SURGˣ · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
         toggle({ id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }) +
         toggle({ id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" }) +
       '</div>' +
@@ -737,11 +742,17 @@
     var ov = document.getElementById("sbrSettings");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
     document.body.classList.remove("sbr-set-open");
+    if (ov) {
+      var target = settingsOpener;
+      if (!target || !target.isConnected || target.closest('#hvSheet,#sbDrawer')) target = document.querySelector('#homeV2 [data-act="menu"]');
+      if (target) target.focus({ preventScroll: true });
+    }
   }
 
   function openSettingsPage() {
     injectCSS();
     closeSettingsPage();
+    settingsOpener = document.activeElement;
     var ov = document.createElement("div"); ov.id = "sbrSettings"; ov.className = "sbr-set-ov"; document.body.appendChild(ov);
     ov.innerHTML =
       '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
@@ -764,6 +775,7 @@
         expSectionHTML() +
       "</div>";
     document.body.classList.add("sbr-set-open");
+    if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
     // let the Image Engine + Voice wire their controls inside the page (same seams as the old block)
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}

@@ -148,5 +148,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-sepsis-pathway",
+   "title": "Neonatal sepsis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Early-onset sepsis (EOS) starts before 72 hours of life and late-onset sepsis (LOS) at 72 hours or later; in India organisms and resistance often overlap between the two.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Stabilise airway, breathing and circulation; correct hypoglycaemia and hypothermia. Treat shock early with a senior, avoiding repeated blind fluid boluses (especially in preterm babies) and starting vasoactive support early.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Blood culture in all before antibiotics. NNF advises against routine CRP for diagnosing late-onset sepsis (it may be used to help rule out sepsis in level 2 units without culture facilities); procalcitonin offers no advantage over CRP."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Started for suspected EOS: stop at 36 hours if the blood culture is sterile, the baby is stable and there are no signs of sepsis (NNF)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Monitor temperature, perfusion, heart rate, apnoea, glucose, feeding and urine output; repeat blood culture if persistently positive or not improving."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for neonatal sepsis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-sepsis-summary-matrix",
+   "title": "Neonatal sepsis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Early-onset sepsis (EOS) starts before 72 hours of life and late-onset sepsis (LOS) at 72 hours or later; in India organisms and resistance",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Stabilise airway, breathing and circulation; correct hypoglycaemia and hypothermia. Treat shock early with a senior, avoiding repeated",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Blood culture in all before antibiotics. NNF advises against routine CRP for diagnosing late-onset sepsis (it may be used to help rule out",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ampicillin: 50 mg/kg per dose IV or IM every 12 hours in the first week of life, every 8 hours after the first week",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using third-generation cephalosporins with amikacin or carbapenems as routine first line in SNCUs, which drives resistance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for neonatal sepsis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-sepsis-diagram",
+   "title": "Neonatal sepsis: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

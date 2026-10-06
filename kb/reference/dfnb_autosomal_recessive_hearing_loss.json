@@ -1,80 +1,175 @@
 {
-  "id": "dfnb_autosomal_recessive_hearing_loss",
-  "name": "Autosomal recessive non-syndromic hearing loss (DFNB)",
-  "aliases": [
-    "DFNB",
-    "autosomal recessive deafness",
-    "congenital recessive SNHL",
-    "SLC26A4-related DFNB4",
-    "MYO15A-related hearing loss"
+ "id": "dfnb_autosomal_recessive_hearing_loss",
+ "name": "Autosomal recessive non-syndromic hearing loss (DFNB)",
+ "aliases": [
+  "DFNB",
+  "autosomal recessive deafness",
+  "congenital recessive SNHL",
+  "SLC26A4-related DFNB4",
+  "MYO15A-related hearing loss"
+ ],
+ "class": "non_infective",
+ "system": "Ear / Audiology",
+ "specialty": "Otology / Audiovestibular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Cummings Otolaryngology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "DFNB loci underlie the majority of severe congenital hereditary sensorineural hearing loss, usually presenting prelingually",
+   "Inheritance is autosomal recessive, so parents are typically unaffected carriers and consanguinity increases risk",
+   "DFNB1 (GJB2/GJB6) is by far the commonest locus, but many other genes such as SLC26A4, MYO15A, and OTOF contribute",
+   "Most forms are stable, though SLC26A4-related DFNB4 (with enlarged vestibular aqueduct) fluctuates and progresses",
+   "The phenotype is usually bilateral and symmetrical without systemic features, distinguishing it from syndromic deafness",
+   "Vestibular involvement is uncommon in most loci but occurs with particular genes",
+   "Early identification enables timely amplification or cochlear implantation with generally good language outcomes"
   ],
-  "class": "non_infective",
-  "system": "Ear / Audiology",
-  "specialty": "Otology / Audiovestibular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Cummings Otolaryngology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "DFNB loci underlie the majority of severe congenital hereditary sensorineural hearing loss, usually presenting prelingually",
-      "Inheritance is autosomal recessive, so parents are typically unaffected carriers and consanguinity increases risk",
-      "DFNB1 (GJB2/GJB6) is by far the commonest locus, but many other genes such as SLC26A4, MYO15A, and OTOF contribute",
-      "Most forms are stable, though SLC26A4-related DFNB4 (with enlarged vestibular aqueduct) fluctuates and progresses",
-      "The phenotype is usually bilateral and symmetrical without systemic features, distinguishing it from syndromic deafness",
-      "Vestibular involvement is uncommon in most loci but occurs with particular genes",
-      "Early identification enables timely amplification or cochlear implantation with generally good language outcomes"
+  "pathophysiology": "The DFNB group encompasses numerous loci in which biallelic loss-of-function variants disrupt proteins essential to cochlear development or function, including gap-junction proteins, hair cell stereocilia and motor proteins, and ion transporters. Because both alleles must be affected, heterozygous carriers are typically asymptomatic and disease appears in the offspring of two carriers. The resulting lesion is usually cochlear and often severe and congenital, reflecting failure of hair cell mechanotransduction, endolymph homeostasis, or synaptic transmission depending on the gene involved. The central auditory pathway is generally intact, which is why direct cochlear stimulation is effective.",
+  "additionalDifferentials": [
+   "Syndromic recessive hearing loss (Usher, Pendred, Jervell and Lange-Nielsen)",
+   "Congenital cytomegalovirus-related hearing loss",
+   "Auditory neuropathy spectrum disorder including OTOF-related forms",
+   "Inner-ear malformations such as incomplete partition",
+   "Autosomal dominant (DFNA) hearing loss where inheritance is unclear",
+   "Acquired perinatal ototoxic or hypoxic injury"
+  ],
+  "additionalInvestigations": [
+   "Newborn screening followed by diagnostic behavioural or objective audiometry",
+   "Otoacoustic emissions and auditory brainstem response to define the lesion",
+   "Deafness gene panel or exome sequencing beginning with DFNB1 testing",
+   "Temporal bone imaging to detect malformations and plan implantation",
+   "Congenital cytomegalovirus testing to exclude an acquired cause",
+   "Assessment for syndromic features including ophthalmology, thyroid, renal, and cardiac review as indicated"
+  ],
+  "redFlags": [
+   "Progression or fluctuation suggesting SLC26A4-related disease with an enlarged vestibular aqueduct",
+   "Emerging visual, thyroid, renal, or cardiac features indicating a syndrome",
+   "Delayed speech and language from under-recognised loss",
+   "Cardiac syncope or prolonged QT raising concern for Jervell and Lange-Nielsen syndrome"
+  ],
+  "prognosis": "Most DFNB forms are stable, and with early amplification or cochlear implantation and structured habilitation children typically develop good spoken language; fluctuating SLC26A4-related disease carries a more variable course.",
+  "pitfalls": [
+   "Stopping at a single GJB2 variant without excluding a GJB6 deletion or another locus",
+   "Missing an evolving syndrome by not screening for extra-auditory features",
+   "Overlooking congenital cytomegalovirus as a treatable or coexisting cause",
+   "Delaying intervention while awaiting complete genetic results"
+  ],
+  "references": [
+   "Cummings Otolaryngology",
+   "GeneReviews: Nonsyndromic Hearing Loss and Deafness, Genetic Overview"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early hearing-aid fitting after newborn screening and diagnostic audiometry to support language development",
+   "Cochlear implantation for severe-to-profound loss, exploiting the intact central auditory pathway",
+   "Structured aural habilitation with speech-and-language therapy and family communication support",
+   "Genetic testing beginning with DFNB1 (GJB2/GJB6), with counselling on recessive inheritance and carrier and family screening",
+   "Monitor SLC26A4-related disease with enlarged vestibular aqueduct for fluctuation and progression and counsel on head-trauma avoidance",
+   "Exclude syndromic and acquired causes with congenital cytomegalovirus testing and ophthalmology, thyroid, renal and cardiac review to guide wider care",
+   "Refer to a paediatric audiology and otology multidisciplinary team, escalating for implant candidacy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dfnb_autosomal_recessive_hearing_loss-pathway",
+   "title": "Autosomal recessive non-syndromic hearing loss (DFNB): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "DFNB loci underlie the majority of severe congenital hereditary sensorineural hearing loss, usually presenting prelingually",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progression or fluctuation suggesting SLC26A4-related disease with an enlarged vestibular aqueduct",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Newborn screening followed by diagnostic behavioural or objective audiometry, Otoacoustic emissions and auditory brainstem response to define the lesion, Deafness gene panel or exome sequencing beginning with DFNB1 testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early hearing-aid fitting after newborn screening and diagnostic audiometry to support language development"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Stopping at a single GJB2 variant without excluding a GJB6 deletion or another locus"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of autosomal recessive non-syndromic hearing loss (dfnb)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dfnb_autosomal_recessive_hearing_loss-matrix",
+   "title": "Autosomal recessive non-syndromic hearing loss (DFNB): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "DFNB loci underlie the majority of severe congenital hereditary sensorineural hearing loss, usually presenting prelingually",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The DFNB group encompasses numerous loci in which biallelic loss-of-function variants disrupt proteins essential to cochlear development or function, including gap-junction proteins, hair cell stereocilia and motor proteins, and ion transporters. Because both alleles must be affected, heterozygous carriers are typically asymptomatic and disease appears in the offspring of two carriers. The resulting lesion is usually cochlear and often severe and congenital, reflecting failure of hair cell mechanotransduction, endolymph homeostasis, or synaptic transmission depending on the gene involved. The central auditory pathway is generally intact, which is why direct cochlear stimulation is effective.",
-    "additionalDifferentials": [
-      "Syndromic recessive hearing loss (Usher, Pendred, Jervell and Lange-Nielsen)",
-      "Congenital cytomegalovirus-related hearing loss",
-      "Auditory neuropathy spectrum disorder including OTOF-related forms",
-      "Inner-ear malformations such as incomplete partition",
-      "Autosomal dominant (DFNA) hearing loss where inheritance is unclear",
-      "Acquired perinatal ototoxic or hypoxic injury"
+    [
+     "Key Investigations",
+     "Newborn screening followed by diagnostic behavioural or objective audiometry, Otoacoustic emissions and auditory brainstem",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Newborn screening followed by diagnostic behavioural or objective audiometry",
-      "Otoacoustic emissions and auditory brainstem response to define the lesion",
-      "Deafness gene panel or exome sequencing beginning with DFNB1 testing",
-      "Temporal bone imaging to detect malformations and plan implantation",
-      "Congenital cytomegalovirus testing to exclude an acquired cause",
-      "Assessment for syndromic features including ophthalmology, thyroid, renal, and cardiac review as indicated"
+    [
+     "Primary Differentials",
+     "Syndromic recessive hearing loss (Usher, Pendred, Jervell and Lange-Nielsen), Congenital cytomegalovirus-related hearing loss,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progression or fluctuation suggesting SLC26A4-related disease with an enlarged vestibular aqueduct",
-      "Emerging visual, thyroid, renal, or cardiac features indicating a syndrome",
-      "Delayed speech and language from under-recognised loss",
-      "Cardiac syncope or prolonged QT raising concern for Jervell and Lange-Nielsen syndrome"
+    [
+     "Management Strategy",
+     "Early hearing-aid fitting after newborn screening and diagnostic audiometry to support language development",
+     "Core treatment modality"
     ],
-    "prognosis": "Most DFNB forms are stable, and with early amplification or cochlear implantation and structured habilitation children typically develop good spoken language; fluctuating SLC26A4-related disease carries a more variable course.",
-    "pitfalls": [
-      "Stopping at a single GJB2 variant without excluding a GJB6 deletion or another locus",
-      "Missing an evolving syndrome by not screening for extra-auditory features",
-      "Overlooking congenital cytomegalovirus as a treatable or coexisting cause",
-      "Delaying intervention while awaiting complete genetic results"
-    ],
-    "references": [
-      "Cummings Otolaryngology",
-      "GeneReviews: Nonsyndromic Hearing Loss and Deafness, Genetic Overview"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early hearing-aid fitting after newborn screening and diagnostic audiometry to support language development",
-      "Cochlear implantation for severe-to-profound loss, exploiting the intact central auditory pathway",
-      "Structured aural habilitation with speech-and-language therapy and family communication support",
-      "Genetic testing beginning with DFNB1 (GJB2/GJB6), with counselling on recessive inheritance and carrier and family screening",
-      "Monitor SLC26A4-related disease with enlarged vestibular aqueduct for fluctuation and progression and counsel on head-trauma avoidance",
-      "Exclude syndromic and acquired causes with congenital cytomegalovirus testing and ophthalmology, thyroid, renal and cardiac review to guide wider care",
-      "Refer to a paediatric audiology and otology multidisciplinary team, escalating for implant candidacy"
+    [
+     "Clinical Pitfall",
+     "Stopping at a single GJB2 variant without excluding a GJB6 deletion or another locus",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for autosomal recessive non-syndromic hearing loss (dfnb)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dfnb-autosomal-recessive-hearing-loss-diagram",
+   "title": "Autosomal recessive non-syndromic hearing loss (DFNB): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

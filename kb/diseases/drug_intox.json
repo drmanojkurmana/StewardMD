@@ -132,5 +132,100 @@
       "importedAt": "2026-06-29T13:28:11Z",
       "contentHash": "h1424b03a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "drug_intox-dx-algo",
+      "title": "Drug intoxication / poisoning: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Diagnosis of an unknown poisoning rests on pattern recognition: first classify the overall physiologic state as stimulated, depressed, discordant, or normal, then look for a recognizable toxidrome (p.3704).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Temperature elevation (grade 4 stimulation) - most reliable predictor of poor outcome in stimulant poisoning and withdrawal (p.3704)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Characterise overall physiologic state and toxidrome from vital signs and neuromuscular exam (p.3704), Anion gap (raised AGMA in methanol, ethylene glycol, salicylate, or any poisoning causing organ failure, seizures or"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison grades physiologic stimulation and depression in poisoning/withdrawal: Stimulation - grade 1 anxious/tremulous with normal vital signs; grade 2 agitated, mildly-moderately raised vitals but can follow commands;"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Rapid hospital urine drug-of-abuse screens are screening tests only, cannot confirm the exact substance, and are not diagnostic or forensic; false positives (e.g. fluoroquinolones triggering false-positive opiate"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for drug intoxication / poisoning."
+    }
+  ],
+  "tables": [
+    {
+      "id": "drug_intox-matrix",
+      "title": "Drug intoxication / poisoning: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diagnosis of an unknown poisoning rests on pattern recognition: first classify the overall physiologic state as stimulated,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Characterise overall physiologic state and toxidrome from vital signs and neuromuscular exam (p.3704), Anion gap (raised AGMA in",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Temperature elevation (grade 4 stimulation) - most reliable predictor of poor outcome in stimulant poisoning and withdrawal",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Rapid hospital urine drug-of-abuse screens are screening tests only, cannot confirm the exact substance, and are not diagnostic",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for drug intoxication / poisoning."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "drug-intox-diagram",
+      "title": "Drug intoxication / poisoning: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

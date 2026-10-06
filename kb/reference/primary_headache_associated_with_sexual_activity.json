@@ -1,75 +1,170 @@
 {
-  "id": "primary_headache_associated_with_sexual_activity",
-  "name": "Primary headache associated with sexual activity",
-  "aliases": [
-    "orgasmic headache",
-    "pre-orgasmic headache",
-    "coital cephalalgia"
+ "id": "primary_headache_associated_with_sexual_activity",
+ "name": "Primary headache associated with sexual activity",
+ "aliases": [
+  "orgasmic headache",
+  "pre-orgasmic headache",
+  "coital cephalalgia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "International Classification of Headache Disorders (ICHD-3)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Headache precipitated by sexual activity, occurring either as a dull bilateral ache that builds with arousal or as an explosive headache at orgasm",
+   "The explosive orgasmic form can be indistinguishable from the thunderclap headache of subarachnoid haemorrhage on first presentation",
+   "A first or severe episode therefore mandates exclusion of subarachnoid haemorrhage and other vascular causes",
+   "Reversible cerebral vasoconstriction syndrome is an important cause of recurrent orgasmic thunderclap headache",
+   "It is more common in men and in people who also have migraine",
+   "The primary form is often self-limiting but may recur in bouts and can respond to preventive treatment"
   ],
-  "class": "non_infective",
-  "system": "Nervous system",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "International Classification of Headache Disorders (ICHD-3)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Headache precipitated by sexual activity, occurring either as a dull bilateral ache that builds with arousal or as an explosive headache at orgasm",
-      "The explosive orgasmic form can be indistinguishable from the thunderclap headache of subarachnoid haemorrhage on first presentation",
-      "A first or severe episode therefore mandates exclusion of subarachnoid haemorrhage and other vascular causes",
-      "Reversible cerebral vasoconstriction syndrome is an important cause of recurrent orgasmic thunderclap headache",
-      "It is more common in men and in people who also have migraine",
-      "The primary form is often self-limiting but may recur in bouts and can respond to preventive treatment"
+  "pathophysiology": "Primary headache associated with sexual activity is linked to the abrupt rises in blood pressure, heart rate and muscular and intracranial pressure that accompany sexual excitement and orgasm, in the absence of a structural lesion. The explosive subtype coincides with the autonomic surge at orgasm. Because the same haemodynamic stress can precipitate aneurysmal rupture or reversible vasoconstriction, secondary causes must be excluded before the primary diagnosis is accepted.",
+  "additionalDifferentials": [
+   "Subarachnoid haemorrhage",
+   "Reversible cerebral vasoconstriction syndrome",
+   "Cervical or intracranial arterial dissection",
+   "Primary exercise headache",
+   "Cerebral venous sinus thrombosis",
+   "Phaeochromocytoma-related headache"
+  ],
+  "additionalInvestigations": [
+   "Urgent CT of the head and, if non-diagnostic, lumbar puncture for the first severe episode",
+   "CT or MR angiography and venography for vascular causes",
+   "MRI of the brain where indicated",
+   "Repeat vascular imaging if reversible cerebral vasoconstriction is suspected"
+  ],
+  "redFlags": [
+   "First explosive orgasmic headache (treat as possible subarachnoid haemorrhage)",
+   "Focal neurological deficit, seizures or reduced consciousness",
+   "Recurrent thunderclap episodes suggesting vasoconstriction syndrome",
+   "Neck pain suggesting dissection"
+  ],
+  "prognosis": "Once secondary causes are excluded the primary form is benign and frequently remits over weeks to months, though it may recur; preventive treatment can help during symptomatic bouts.",
+  "pitfalls": [
+   "Assuming a benign cause for a first explosive orgasmic headache without imaging",
+   "Failing to consider reversible cerebral vasoconstriction syndrome in recurrent cases",
+   "Overlooking arterial dissection when there is neck pain",
+   "Not re-evaluating if the headache pattern changes"
+  ],
+  "references": [
+   "International Classification of Headache Disorders (ICHD-3)",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Preventive treatment during symptomatic bouts with a beta-blocker such as propranolol to suppress the exertional headache",
+   "On-demand prophylaxis with indometacin or a triptan taken shortly before sexual activity to abort the orgasmic headache",
+   "Behavioural advice to reduce exertion, adopt a more passive role and temporarily abstain during a symptomatic cluster",
+   "Optimise cardiovascular risk factors and control any coexisting hypertension that amplifies the orgasmic pressure surge",
+   "Mandatory exclusion of subarachnoid haemorrhage and other vascular causes on the first or a severe episode before the primary label is accepted",
+   "Actively investigate for reversible cerebral vasoconstriction syndrome in recurrent orgasmic thunderclap attacks, with a calcium channel blocker such as nimodipine if confirmed",
+   "Reassure regarding the benign, frequently self-remitting course, with neurology referral if attacks are refractory or the picture is atypical"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "primary_headache_associated_with_sexual_activity-pathway",
+   "title": "Primary headache associated with sexual activity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Headache precipitated by sexual activity, occurring either as a dull bilateral ache that builds with arousal or as an explosive headache at orgasm",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: First explosive orgasmic headache (treat as possible subarachnoid haemorrhage)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urgent CT of the head and, if non-diagnostic, lumbar puncture for the first severe episode, CT or MR angiography and venography for vascular causes, MRI of the brain where indicated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Preventive treatment during symptomatic bouts with a beta-blocker such as propranolol to suppress the exertional headache"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a benign cause for a first explosive orgasmic headache without imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of primary headache associated with sexual activity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "primary_headache_associated_with_sexual_activity-matrix",
+   "title": "Primary headache associated with sexual activity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Headache precipitated by sexual activity, occurring either as a dull bilateral ache that builds with arousal or as an explosive",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Primary headache associated with sexual activity is linked to the abrupt rises in blood pressure, heart rate and muscular and intracranial pressure that accompany sexual excitement and orgasm, in the absence of a structural lesion. The explosive subtype coincides with the autonomic surge at orgasm. Because the same haemodynamic stress can precipitate aneurysmal rupture or reversible vasoconstriction, secondary causes must be excluded before the primary diagnosis is accepted.",
-    "additionalDifferentials": [
-      "Subarachnoid haemorrhage",
-      "Reversible cerebral vasoconstriction syndrome",
-      "Cervical or intracranial arterial dissection",
-      "Primary exercise headache",
-      "Cerebral venous sinus thrombosis",
-      "Phaeochromocytoma-related headache"
+    [
+     "Key Investigations",
+     "Urgent CT of the head and, if non-diagnostic, lumbar puncture for the first severe episode, CT or MR angiography and venography",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urgent CT of the head and, if non-diagnostic, lumbar puncture for the first severe episode",
-      "CT or MR angiography and venography for vascular causes",
-      "MRI of the brain where indicated",
-      "Repeat vascular imaging if reversible cerebral vasoconstriction is suspected"
+    [
+     "Primary Differentials",
+     "Subarachnoid haemorrhage, Reversible cerebral vasoconstriction syndrome, Cervical or intracranial arterial dissection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "First explosive orgasmic headache (treat as possible subarachnoid haemorrhage)",
-      "Focal neurological deficit, seizures or reduced consciousness",
-      "Recurrent thunderclap episodes suggesting vasoconstriction syndrome",
-      "Neck pain suggesting dissection"
+    [
+     "Management Strategy",
+     "Preventive treatment during symptomatic bouts with a beta-blocker such as propranolol to suppress the exertional headache",
+     "Core treatment modality"
     ],
-    "prognosis": "Once secondary causes are excluded the primary form is benign and frequently remits over weeks to months, though it may recur; preventive treatment can help during symptomatic bouts.",
-    "pitfalls": [
-      "Assuming a benign cause for a first explosive orgasmic headache without imaging",
-      "Failing to consider reversible cerebral vasoconstriction syndrome in recurrent cases",
-      "Overlooking arterial dissection when there is neck pain",
-      "Not re-evaluating if the headache pattern changes"
-    ],
-    "references": [
-      "International Classification of Headache Disorders (ICHD-3)",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Preventive treatment during symptomatic bouts with a beta-blocker such as propranolol to suppress the exertional headache",
-      "On-demand prophylaxis with indometacin or a triptan taken shortly before sexual activity to abort the orgasmic headache",
-      "Behavioural advice to reduce exertion, adopt a more passive role and temporarily abstain during a symptomatic cluster",
-      "Optimise cardiovascular risk factors and control any coexisting hypertension that amplifies the orgasmic pressure surge",
-      "Mandatory exclusion of subarachnoid haemorrhage and other vascular causes on the first or a severe episode before the primary label is accepted",
-      "Actively investigate for reversible cerebral vasoconstriction syndrome in recurrent orgasmic thunderclap attacks, with a calcium channel blocker such as nimodipine if confirmed",
-      "Reassure regarding the benign, frequently self-remitting course, with neurology referral if attacks are refractory or the picture is atypical"
+    [
+     "Clinical Pitfall",
+     "Assuming a benign cause for a first explosive orgasmic headache without imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for primary headache associated with sexual activity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "primary-headache-associated-with-sexual-activity-diagram",
+   "title": "Primary headache associated with sexual activity: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

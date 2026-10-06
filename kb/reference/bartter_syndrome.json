@@ -1,78 +1,173 @@
 {
-  "id": "bartter_syndrome",
-  "name": "Bartter syndrome",
-  "aliases": [
-    "Bartter's syndrome",
-    "salt-wasting tubulopathy",
-    "loop-type salt-wasting nephropathy"
+ "id": "bartter_syndrome",
+ "name": "Bartter syndrome",
+ "aliases": [
+  "Bartter's syndrome",
+  "salt-wasting tubulopathy",
+  "loop-type salt-wasting nephropathy"
+ ],
+ "class": "non_infective",
+ "system": "Renal",
+ "specialty": "Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / KDIGO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Bartter syndrome is an inherited salt-wasting tubulopathy that behaves as if the patient were chronically taking a loop diuretic, because the defect lies in transport at the thick ascending limb of the loop of Henle",
+   "The typical biochemistry is hypokalaemia, metabolic alkalosis, and renal salt wasting with normal or low blood pressure despite high renin and aldosterone",
+   "Unlike Gitelman syndrome, urinary calcium excretion is usually normal or increased, and nephrocalcinosis may develop",
+   "Antenatal and neonatal forms present early with polyhydramnios, prematurity, and severe volume depletion, whereas the classic form presents later in childhood",
+   "Renin, aldosterone, and urinary prostaglandin levels are elevated, reflecting the compensatory response to persistent volume and chloride loss",
+   "Blood pressure is characteristically normal or low, which helps distinguish it from hyperaldosteronism where hypertension is expected",
+   "Management principles include generous potassium and salt repletion, potassium-sparing strategies, and blockade of prostaglandin synthesis to reduce salt wasting"
   ],
-  "class": "non_infective",
-  "system": "Renal",
-  "specialty": "Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / KDIGO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Bartter syndrome is an inherited salt-wasting tubulopathy that behaves as if the patient were chronically taking a loop diuretic, because the defect lies in transport at the thick ascending limb of the loop of Henle",
-      "The typical biochemistry is hypokalaemia, metabolic alkalosis, and renal salt wasting with normal or low blood pressure despite high renin and aldosterone",
-      "Unlike Gitelman syndrome, urinary calcium excretion is usually normal or increased, and nephrocalcinosis may develop",
-      "Antenatal and neonatal forms present early with polyhydramnios, prematurity, and severe volume depletion, whereas the classic form presents later in childhood",
-      "Renin, aldosterone, and urinary prostaglandin levels are elevated, reflecting the compensatory response to persistent volume and chloride loss",
-      "Blood pressure is characteristically normal or low, which helps distinguish it from hyperaldosteronism where hypertension is expected",
-      "Management principles include generous potassium and salt repletion, potassium-sparing strategies, and blockade of prostaglandin synthesis to reduce salt wasting"
+  "pathophysiology": "Bartter syndrome comprises a group of autosomal recessive defects in the ion transporters of the thick ascending limb of the loop of Henle, the site of action of loop diuretics. Loss of function in the sodium-potassium-chloride cotransporter or its associated potassium and chloride channels impairs sodium chloride reabsorption, causing renal salt and water wasting. The resulting volume contraction activates the renin-angiotensin-aldosterone axis, and the combination of increased distal sodium delivery and high aldosterone drives potassium and hydrogen secretion, producing hypokalaemia and metabolic alkalosis. Because the transporter normally contributes to the electrochemical gradient favouring calcium reabsorption, its loss leaves calcium excretion normal or elevated. Overproduction of prostaglandins amplifies the salt wasting and the activation of renin.",
+  "additionalDifferentials": [
+   "Gitelman syndrome",
+   "Surreptitious loop diuretic use",
+   "Chronic vomiting or bulimia",
+   "Laxative abuse",
+   "Primary hyperaldosteronism (distinguished by hypertension)",
+   "Congenital chloride diarrhoea"
+  ],
+  "additionalInvestigations": [
+   "Serum potassium, bicarbonate, magnesium, and chloride to characterise the alkalosis and electrolyte losses",
+   "Plasma renin and aldosterone, typically both elevated",
+   "Urinary calcium-to-creatinine ratio to separate it from Gitelman syndrome",
+   "Urine electrolytes and screening for surreptitious diuretic use",
+   "Renal ultrasound for nephrocalcinosis",
+   "Genetic testing when the diagnosis is uncertain or for family counselling"
+  ],
+  "redFlags": [
+   "Severe hypokalaemia causing arrhythmia or profound weakness",
+   "Marked volume depletion and dehydration, especially in neonates",
+   "Failure to thrive or growth retardation in children",
+   "Progressive nephrocalcinosis with declining renal function"
+  ],
+  "prognosis": "With consistent electrolyte and fluid replacement and prostaglandin inhibition, most patients maintain reasonable growth and function, though lifelong therapy is required. Severe antenatal forms carry higher perinatal risk, and chronic hypokalaemia and nephrocalcinosis can gradually impair renal function.",
+  "pitfalls": [
+   "Mistaking surreptitious diuretic or laxative abuse for a genetic tubulopathy without appropriate screening",
+   "Confusing Bartter with Gitelman syndrome by not checking urinary calcium and serum magnesium",
+   "Overlooking the diagnosis in a normotensive patient with unexplained hypokalaemic alkalosis",
+   "Inadequate potassium and magnesium repletion leaving the patient symptomatic"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "KDIGO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral potassium supplementation to correct chronic hypokalaemia",
+   "Potassium-sparing diuretics such as spironolactone or amiloride to reduce renal potassium wasting",
+   "Prostaglandin synthetase inhibition with an NSAID such as indometacin to reduce salt wasting, polyuria and the metabolic alkalosis",
+   "Generous sodium chloride and fluid replacement to counter renal salt wasting",
+   "Magnesium supplementation where hypomagnesaemia coexists",
+   "Monitoring of electrolytes, renal function and growth, with renal ultrasound surveillance for nephrocalcinosis",
+   "Genetic counselling for autosomal recessive inheritance and family assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bartter_syndrome-pathway",
+   "title": "Bartter syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Bartter syndrome is an inherited salt-wasting tubulopathy that behaves as if the patient were chronically taking a loop diuretic, because the defect lies in transport at the thick ascending limb of the loop of Henle",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe hypokalaemia causing arrhythmia or profound weakness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum potassium, bicarbonate, magnesium, and chloride to characterise the alkalosis and electrolyte losses, Plasma renin and aldosterone, typically both elevated, Urinary calcium-to-creatinine ratio to separate it from"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral potassium supplementation to correct chronic hypokalaemia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking surreptitious diuretic or laxative abuse for a genetic tubulopathy without appropriate screening"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bartter syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bartter_syndrome-matrix",
+   "title": "Bartter syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Bartter syndrome is an inherited salt-wasting tubulopathy that behaves as if the patient were chronically taking a loop diuretic,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bartter syndrome comprises a group of autosomal recessive defects in the ion transporters of the thick ascending limb of the loop of Henle, the site of action of loop diuretics. Loss of function in the sodium-potassium-chloride cotransporter or its associated potassium and chloride channels impairs sodium chloride reabsorption, causing renal salt and water wasting. The resulting volume contraction activates the renin-angiotensin-aldosterone axis, and the combination of increased distal sodium delivery and high aldosterone drives potassium and hydrogen secretion, producing hypokalaemia and metabolic alkalosis. Because the transporter normally contributes to the electrochemical gradient favouring calcium reabsorption, its loss leaves calcium excretion normal or elevated. Overproduction of prostaglandins amplifies the salt wasting and the activation of renin.",
-    "additionalDifferentials": [
-      "Gitelman syndrome",
-      "Surreptitious loop diuretic use",
-      "Chronic vomiting or bulimia",
-      "Laxative abuse",
-      "Primary hyperaldosteronism (distinguished by hypertension)",
-      "Congenital chloride diarrhoea"
+    [
+     "Key Investigations",
+     "Serum potassium, bicarbonate, magnesium, and chloride to characterise the alkalosis and electrolyte losses, Plasma renin and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum potassium, bicarbonate, magnesium, and chloride to characterise the alkalosis and electrolyte losses",
-      "Plasma renin and aldosterone, typically both elevated",
-      "Urinary calcium-to-creatinine ratio to separate it from Gitelman syndrome",
-      "Urine electrolytes and screening for surreptitious diuretic use",
-      "Renal ultrasound for nephrocalcinosis",
-      "Genetic testing when the diagnosis is uncertain or for family counselling"
+    [
+     "Primary Differentials",
+     "Gitelman syndrome, Surreptitious loop diuretic use, Chronic vomiting or bulimia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe hypokalaemia causing arrhythmia or profound weakness",
-      "Marked volume depletion and dehydration, especially in neonates",
-      "Failure to thrive or growth retardation in children",
-      "Progressive nephrocalcinosis with declining renal function"
+    [
+     "Management Strategy",
+     "Oral potassium supplementation to correct chronic hypokalaemia",
+     "Core treatment modality"
     ],
-    "prognosis": "With consistent electrolyte and fluid replacement and prostaglandin inhibition, most patients maintain reasonable growth and function, though lifelong therapy is required. Severe antenatal forms carry higher perinatal risk, and chronic hypokalaemia and nephrocalcinosis can gradually impair renal function.",
-    "pitfalls": [
-      "Mistaking surreptitious diuretic or laxative abuse for a genetic tubulopathy without appropriate screening",
-      "Confusing Bartter with Gitelman syndrome by not checking urinary calcium and serum magnesium",
-      "Overlooking the diagnosis in a normotensive patient with unexplained hypokalaemic alkalosis",
-      "Inadequate potassium and magnesium repletion leaving the patient symptomatic"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "KDIGO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral potassium supplementation to correct chronic hypokalaemia",
-      "Potassium-sparing diuretics such as spironolactone or amiloride to reduce renal potassium wasting",
-      "Prostaglandin synthetase inhibition with an NSAID such as indometacin to reduce salt wasting, polyuria and the metabolic alkalosis",
-      "Generous sodium chloride and fluid replacement to counter renal salt wasting",
-      "Magnesium supplementation where hypomagnesaemia coexists",
-      "Monitoring of electrolytes, renal function and growth, with renal ultrasound surveillance for nephrocalcinosis",
-      "Genetic counselling for autosomal recessive inheritance and family assessment"
+    [
+     "Clinical Pitfall",
+     "Mistaking surreptitious diuretic or laxative abuse for a genetic tubulopathy without appropriate screening",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bartter syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bartter-syndrome-diagram",
+   "title": "Bartter syndrome: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

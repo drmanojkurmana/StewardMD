@@ -1,76 +1,171 @@
 {
-  "id": "factor_v_leiden",
-  "name": "Factor V Leiden",
-  "aliases": [
-    "FVL",
-    "activated protein C resistance",
-    "factor V Leiden thrombophilia"
+ "id": "factor_v_leiden",
+ "name": "Factor V Leiden",
+ "aliases": [
+  "FVL",
+  "activated protein C resistance",
+  "factor V Leiden thrombophilia"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Transfusion",
+ "specialty": "Transfusion & Haemostasis Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common inherited thrombophilia in people of European ancestry, arising from a single point mutation in the factor V gene",
+   "The mutated factor Va resists inactivation by activated protein C, so thrombin generation continues unchecked",
+   "Heterozygotes have a modestly increased risk of venous thromboembolism, while homozygotes carry a substantially higher risk",
+   "Risk rises markedly when the variant is combined with other factors such as oestrogen use, pregnancy, surgery, or immobility",
+   "It predisposes mainly to venous rather than arterial thrombosis and is associated with some pregnancy complications",
+   "Screening begins with a functional activated protein C resistance assay, confirmed by genetic testing for the specific mutation",
+   "A positive result seldom alters the intensity or standard duration of anticoagulation after a first provoked event, so testing should be reserved for situations where it will change management"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Transfusion",
-  "specialty": "Transfusion & Haemostasis Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common inherited thrombophilia in people of European ancestry, arising from a single point mutation in the factor V gene",
-      "The mutated factor Va resists inactivation by activated protein C, so thrombin generation continues unchecked",
-      "Heterozygotes have a modestly increased risk of venous thromboembolism, while homozygotes carry a substantially higher risk",
-      "Risk rises markedly when the variant is combined with other factors such as oestrogen use, pregnancy, surgery, or immobility",
-      "It predisposes mainly to venous rather than arterial thrombosis and is associated with some pregnancy complications",
-      "Screening begins with a functional activated protein C resistance assay, confirmed by genetic testing for the specific mutation",
-      "A positive result seldom alters the intensity or standard duration of anticoagulation after a first provoked event, so testing should be reserved for situations where it will change management"
+  "pathophysiology": "Factor V Leiden results from a guanine-to-adenine substitution that changes an arginine residue at a cleavage site in factor V. Activated protein C normally inactivates factor Va at this site to dampen coagulation; the mutation removes this cleavage site, so factor Va persists and continues to support thrombin generation. This state of activated protein C resistance shifts haemostasis toward clot formation. Because the defect is a gain of prothrombotic function rather than loss of an anticoagulant protein, its per-copy thrombotic risk is lower than for antithrombin, protein C, or protein S deficiency, but its high population frequency makes it the commonest inherited contributor to venous thrombosis.",
+  "additionalDifferentials": [
+   "Prothrombin G20210A variant",
+   "Protein C or protein S deficiency",
+   "Antithrombin deficiency",
+   "Antiphospholipid syndrome",
+   "Acquired activated protein C resistance from pregnancy or oestrogen therapy"
+  ],
+  "additionalInvestigations": [
+   "Functional activated protein C resistance assay as an initial screen",
+   "Genetic testing confirming the factor V Leiden mutation and zygosity",
+   "Assessment for coexisting thrombophilias where clinically relevant",
+   "Evaluation of provoking factors surrounding any thrombotic event",
+   "Family history review and selective counselling before relative testing"
+  ],
+  "redFlags": [
+   "Venous thromboembolism, especially extensive or at an unusual site, in a homozygous individual",
+   "Thrombosis provoked by oestrogen therapy or pregnancy in a known carrier",
+   "Recurrent events despite anticoagulation, prompting reassessment",
+   "Combined thrombophilic defects amplifying thrombotic risk"
+  ],
+  "prognosis": "Most heterozygous carriers remain asymptomatic throughout life; overall prognosis is favourable, though thrombotic risk increases with homozygosity, additional thrombophilic defects, and transient provoking factors such as hormonal therapy or surgery.",
+  "pitfalls": [
+   "Testing during pregnancy or oestrogen use when acquired activated protein C resistance can confound the functional assay",
+   "Extending anticoagulation solely on the basis of a heterozygous result after a provoked event",
+   "Advising against all oestrogen exposure without individualised risk assessment",
+   "Screening asymptomatic relatives without clear benefit or counselling"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "AABB Technical Manual"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No treatment and no primary prophylactic anticoagulation for asymptomatic carriers",
+   "Standard anticoagulation for an acute venous thromboembolic event, with heparin or low-molecular-weight heparin transitioning to a direct oral anticoagulant or warfarin",
+   "Individualised anticoagulation duration, with extended therapy considered for unprovoked, recurrent or homozygous disease",
+   "Situational thromboprophylaxis during high-risk periods such as surgery, immobility and the peripartum period",
+   "Counselling to avoid oestrogen-containing contraception and hormone replacement therapy, offering alternatives",
+   "Modification of additional thrombotic risk factors including obesity, smoking and immobility",
+   "Genetic counselling with selective family testing rather than universal screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "factor_v_leiden-pathway",
+   "title": "Factor V Leiden: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common inherited thrombophilia in people of European ancestry, arising from a single point mutation in the factor V gene",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Venous thromboembolism, especially extensive or at an unusual site, in a homozygous individual",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Functional activated protein C resistance assay as an initial screen, Genetic testing confirming the factor V Leiden mutation and zygosity, Assessment for coexisting thrombophilias where clinically relevant"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No treatment and no primary prophylactic anticoagulation for asymptomatic carriers"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Testing during pregnancy or oestrogen use when acquired activated protein C resistance can confound the functional assay"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of factor v leiden."
+  }
+ ],
+ "tables": [
+  {
+   "id": "factor_v_leiden-matrix",
+   "title": "Factor V Leiden: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common inherited thrombophilia in people of European ancestry, arising from a single point mutation in the factor V gene",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Factor V Leiden results from a guanine-to-adenine substitution that changes an arginine residue at a cleavage site in factor V. Activated protein C normally inactivates factor Va at this site to dampen coagulation; the mutation removes this cleavage site, so factor Va persists and continues to support thrombin generation. This state of activated protein C resistance shifts haemostasis toward clot formation. Because the defect is a gain of prothrombotic function rather than loss of an anticoagulant protein, its per-copy thrombotic risk is lower than for antithrombin, protein C, or protein S deficiency, but its high population frequency makes it the commonest inherited contributor to venous thrombosis.",
-    "additionalDifferentials": [
-      "Prothrombin G20210A variant",
-      "Protein C or protein S deficiency",
-      "Antithrombin deficiency",
-      "Antiphospholipid syndrome",
-      "Acquired activated protein C resistance from pregnancy or oestrogen therapy"
+    [
+     "Key Investigations",
+     "Functional activated protein C resistance assay as an initial screen, Genetic testing confirming the factor V Leiden mutation and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Functional activated protein C resistance assay as an initial screen",
-      "Genetic testing confirming the factor V Leiden mutation and zygosity",
-      "Assessment for coexisting thrombophilias where clinically relevant",
-      "Evaluation of provoking factors surrounding any thrombotic event",
-      "Family history review and selective counselling before relative testing"
+    [
+     "Primary Differentials",
+     "Prothrombin G20210A variant, Protein C or protein S deficiency, Antithrombin deficiency",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Venous thromboembolism, especially extensive or at an unusual site, in a homozygous individual",
-      "Thrombosis provoked by oestrogen therapy or pregnancy in a known carrier",
-      "Recurrent events despite anticoagulation, prompting reassessment",
-      "Combined thrombophilic defects amplifying thrombotic risk"
+    [
+     "Management Strategy",
+     "No treatment and no primary prophylactic anticoagulation for asymptomatic carriers",
+     "Core treatment modality"
     ],
-    "prognosis": "Most heterozygous carriers remain asymptomatic throughout life; overall prognosis is favourable, though thrombotic risk increases with homozygosity, additional thrombophilic defects, and transient provoking factors such as hormonal therapy or surgery.",
-    "pitfalls": [
-      "Testing during pregnancy or oestrogen use when acquired activated protein C resistance can confound the functional assay",
-      "Extending anticoagulation solely on the basis of a heterozygous result after a provoked event",
-      "Advising against all oestrogen exposure without individualised risk assessment",
-      "Screening asymptomatic relatives without clear benefit or counselling"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "AABB Technical Manual"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No treatment and no primary prophylactic anticoagulation for asymptomatic carriers",
-      "Standard anticoagulation for an acute venous thromboembolic event, with heparin or low-molecular-weight heparin transitioning to a direct oral anticoagulant or warfarin",
-      "Individualised anticoagulation duration, with extended therapy considered for unprovoked, recurrent or homozygous disease",
-      "Situational thromboprophylaxis during high-risk periods such as surgery, immobility and the peripartum period",
-      "Counselling to avoid oestrogen-containing contraception and hormone replacement therapy, offering alternatives",
-      "Modification of additional thrombotic risk factors including obesity, smoking and immobility",
-      "Genetic counselling with selective family testing rather than universal screening"
+    [
+     "Clinical Pitfall",
+     "Testing during pregnancy or oestrogen use when acquired activated protein C resistance can confound the functional assay",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for factor v leiden."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "factor-v-leiden-diagram",
+   "title": "Factor V Leiden: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

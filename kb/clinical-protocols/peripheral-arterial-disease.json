@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient clinic, emergency department, vascular ward",
- "aliases": ["PAD", "PVD", "peripheral vascular disease", "LEAD", "intermittent claudication", "claudication", "CLTI", "critical limb ischaemia", "acute limb ischaemia", "ALI", "ABI", "ankle brachial index"],
+ "aliases": [
+  "PAD",
+  "PVD",
+  "peripheral vascular disease",
+  "LEAD",
+  "intermittent claudication",
+  "claudication",
+  "CLTI",
+  "critical limb ischaemia",
+  "acute limb ischaemia",
+  "ALI",
+  "ABI",
+  "ankle brachial index"
+ ],
  "summary": "Confirm PAD with ABI 0.90 or less (toe-brachial index if ABI above 1.40); give single antiplatelet or rivaroxaban 2.5 mg twice daily plus aspirin, high-intensity statin, BP and smoking control, supervised exercise for claudication, and refer CLTI urgently and acute limb ischaemia as an emergency with IV heparin.",
  "sections": [
   {
@@ -102,16 +115,148 @@
   }
  ],
  "drugs": [
-  { "name": "Aspirin", "dose": "75 to 100 mg orally once daily", "notes": "ACC/AHA range 75 to 325 mg. Alternative: clopidogrel." },
-  { "name": "Clopidogrel", "dose": "75 mg orally once daily", "notes": "Single antiplatelet option in symptomatic PAD; short-term with aspirin after endovascular revascularisation." },
-  { "name": "Rivaroxaban (vascular dose)", "dose": "2.5 mg orally twice daily with aspirin 75 to 100 mg once daily", "notes": "Symptomatic PAD at high ischaemic risk, or after revascularisation once haemostasis is secure. Avoid with high bleeding risk or CrCl below 15 mL/min." },
-  { "name": "Atorvastatin", "dose": "40 to 80 mg orally once daily (or rosuvastatin 20 to 40 mg once daily)", "notes": "High intensity for all patients; add ezetimibe 10 mg daily if LDL-C not at goal." },
-  { "name": "Cilostazol", "dose": "100 mg orally twice daily, 30 minutes before or 2 hours after food", "notes": "Claudication only. Contraindicated in heart failure. 50 mg twice daily with strong CYP3A4 or CYP2C19 inhibitors. Stop if no benefit at 3 months." },
-  { "name": "Unfractionated heparin", "dose": "80 units/kg IV bolus, then 18 units/kg/h infusion titrated to aPTT or anti-Xa", "notes": "Acute limb ischaemia on diagnosis unless contraindicated." }
+  {
+   "name": "Aspirin",
+   "dose": "75 to 100 mg orally once daily",
+   "notes": "ACC/AHA range 75 to 325 mg. Alternative: clopidogrel."
+  },
+  {
+   "name": "Clopidogrel",
+   "dose": "75 mg orally once daily",
+   "notes": "Single antiplatelet option in symptomatic PAD; short-term with aspirin after endovascular revascularisation."
+  },
+  {
+   "name": "Rivaroxaban (vascular dose)",
+   "dose": "2.5 mg orally twice daily with aspirin 75 to 100 mg once daily",
+   "notes": "Symptomatic PAD at high ischaemic risk, or after revascularisation once haemostasis is secure. Avoid with high bleeding risk or CrCl below 15 mL/min."
+  },
+  {
+   "name": "Atorvastatin",
+   "dose": "40 to 80 mg orally once daily (or rosuvastatin 20 to 40 mg once daily)",
+   "notes": "High intensity for all patients; add ezetimibe 10 mg daily if LDL-C not at goal."
+  },
+  {
+   "name": "Cilostazol",
+   "dose": "100 mg orally twice daily, 30 minutes before or 2 hours after food",
+   "notes": "Claudication only. Contraindicated in heart failure. 50 mg twice daily with strong CYP3A4 or CYP2C19 inhibitors. Stop if no benefit at 3 months."
+  },
+  {
+   "name": "Unfractionated heparin",
+   "dose": "80 units/kg IV bolus, then 18 units/kg/h infusion titrated to aPTT or anti-Xa",
+   "notes": "Acute limb ischaemia on diagnosis unless contraindicated."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2024 ESC Guidelines for the management of peripheral arterial and aortic diseases", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/36/3538/7738955" },
-  { "org": "ACC / AHA and partner societies", "title": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease", "year": 2024, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001251" }
+  {
+   "org": "ESC",
+   "title": "2024 ESC Guidelines for the management of peripheral arterial and aortic diseases",
+   "year": 2024,
+   "url": "https://academic.oup.com/eurheartj/article/45/36/3538/7738955"
+  },
+  {
+   "org": "ACC / AHA and partner societies",
+   "title": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease",
+   "year": 2024,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001251"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "peripheral-arterial-disease-pathway",
+   "title": "Lower limb peripheral arterial disease (PAD) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Claudication: reproducible pain, cramping or fatigue in the buttock, thigh or calf on walking, relieved within about 10 minutes of rest. Many patients with PAD have atypical or no leg symptoms but still have high cardiovascular risk.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Acutely cold, painful, pulseless limb: urgent assessment of motor and sensory function and arterial and venous Doppler signals by a vascular specialist. Do not delay a threatened limb for imaging.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Resting ABI with Doppler: 0.90 or less abnormal (PAD), 0.91 to 0.99 borderline, 1.00 to 1.40 normal, above 1.40 non-compressible (common in diabetes and CKD)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Supervised exercise therapy first: intermittent walking to moderate or maximal claudication pain with rest periods, 30 to 45 minutes per session, at least 3 times a week for at least 12 weeks. A structured home-based walking programme is"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Every visit: symptoms, walking ability, pulses, full foot inspection, and progress on lipid, BP, glucose and smoking targets."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for lower limb peripheral arterial disease (pad)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "peripheral-arterial-disease-summary-matrix",
+   "title": "Lower limb peripheral arterial disease (PAD) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Claudication: reproducible pain, cramping or fatigue in the buttock, thigh or calf on walking, relieved within about 10 minutes of rest.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Acutely cold, painful, pulseless limb: urgent assessment of motor and sensory function and arterial and venous Doppler signals by a",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Resting ABI with Doppler: 0.90 or less abnormal (PAD), 0.91 to 0.99 borderline, 1.00 to 1.40 normal, above 1.40 non-compressible (common in",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Aspirin: 75 to 100 mg orally once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Trusting a normal or high ABI in diabetes or CKD: calcified arteries give ABI above 1.40, so check toe pressures.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for lower limb peripheral arterial disease (pad)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "peripheral-arterial-disease-diagram",
+   "title": "Lower limb peripheral arterial disease (PAD): Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

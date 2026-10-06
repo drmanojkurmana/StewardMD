@@ -151,5 +151,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hcd6d6bac"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cord_compression-dx-algo",
+      "title": "Spinal cord compression: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "A horizontally demarcated sensory level (identified by moving a pinprick or cold stimulus up the trunk) below which sensory, motor and autonomic function is impaired is the hallmark of a cord lesion; for the spinothalamic tract the true",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Established motor deficit (paraplegia/quadriplegia) present >12 h rarely improves, and beyond 48 h the prognosis for meaningful motor recovery is poor - urgency is measured in hours (p.3606)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: MRI with gadolinium centred on the suspected level is the initial procedure; imaging the entire spine is important because up to ~40% with compression at one level have asymptomatic epidural metastases elsewhere (and"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames management decisions for malignant compression using the NOMS framework (Memorial Sloan Kettering): Neurologic status (degree of epidural compression, myelopathy, functional radiculopathy), Oncologic"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Mistaking a myelopathy for polyneuropathy or Guillain-Barre syndrome: ascending paraesthesias suggest neuropathy, but a sharply demarcated sensory level plus bladder disturbance points to a cord origin (pp.213, 3605)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for spinal cord compression."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cord_compression-matrix",
+      "title": "Spinal cord compression: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A horizontally demarcated sensory level (identified by moving a pinprick or cold stimulus up the trunk) below which sensory,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "MRI with gadolinium centred on the suspected level is the initial procedure; imaging the entire spine is important because up to",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Intradural extramedullary tumours (meningioma, neurofibroma/schwannoma) - usually slow-growing and benign; long symptom duration",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Established motor deficit (paraplegia/quadriplegia) present >12 h rarely improves, and beyond 48 h the prognosis for meaningful",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a myelopathy for polyneuropathy or Guillain-Barre syndrome: ascending paraesthesias suggest neuropathy, but a sharply",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for spinal cord compression."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cord-compression-diagram",
+      "title": "Spinal cord compression: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

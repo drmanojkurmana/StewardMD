@@ -1,81 +1,176 @@
 {
-  "id": "utricle_cyst",
-  "name": "Prostatic utricle cyst",
-  "aliases": [
-    "prostatic utricle cyst",
-    "utricular cyst",
-    "enlarged prostatic utricle"
+ "id": "utricle_cyst",
+ "name": "Prostatic utricle cyst",
+ "aliases": [
+  "prostatic utricle cyst",
+  "utricular cyst",
+  "enlarged prostatic utricle"
+ ],
+ "class": "non_infective",
+ "system": "Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology / EAU Guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A midline cyst arising from dilatation of the prostatic utricle, which opens into the prostatic urethra at the verumontanum",
+   "Strongly associated with genitourinary anomalies such as hypospadias, cryptorchidism, unilateral renal agenesis and disorders of sex development",
+   "It usually presents in childhood or adolescence, in contrast to mullerian duct cysts, which present later",
+   "Because it communicates with the urethra it may contain spermatozoa, unlike a mullerian duct cyst",
+   "It can cause recurrent urinary tract infection, post-void dribbling, epididymitis, stone formation within the cyst, or infertility",
+   "Voiding cystourethrography may show the cyst filling from the urethra, while MRI defines the surrounding anatomy",
+   "Small asymptomatic cysts are observed, whereas symptomatic ones may need transurethral or surgical treatment"
   ],
-  "class": "non_infective",
-  "system": "Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology / EAU Guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A midline cyst arising from dilatation of the prostatic utricle, which opens into the prostatic urethra at the verumontanum",
-      "Strongly associated with genitourinary anomalies such as hypospadias, cryptorchidism, unilateral renal agenesis and disorders of sex development",
-      "It usually presents in childhood or adolescence, in contrast to mullerian duct cysts, which present later",
-      "Because it communicates with the urethra it may contain spermatozoa, unlike a mullerian duct cyst",
-      "It can cause recurrent urinary tract infection, post-void dribbling, epididymitis, stone formation within the cyst, or infertility",
-      "Voiding cystourethrography may show the cyst filling from the urethra, while MRI defines the surrounding anatomy",
-      "Small asymptomatic cysts are observed, whereas symptomatic ones may need transurethral or surgical treatment"
+  "pathophysiology": "The prostatic utricle is a small midline mullerian remnant that opens into the prostatic urethra at the verumontanum. Incomplete regression, often linked with under-virilisation, allows it to dilate into a cyst. Because it communicates with the urethra, urine can reflux into it, predisposing to stasis, infection and stone formation, and when spermatozoa enter it the cyst may contain sperm.",
+  "additionalDifferentials": [
+   "Mullerian duct cyst, which has no urethral communication",
+   "Ejaculatory duct cyst",
+   "Seminal vesicle cyst, which is laterally placed",
+   "Bladder diverticulum",
+   "Posterior urethral pathology",
+   "Cystic prostatic mass"
+  ],
+  "additionalInvestigations": [
+   "Voiding cystourethrography to demonstrate communication with the urethra",
+   "Pelvic MRI for midline anatomy and associated anomalies",
+   "Retrograde urethrography or urethroscopy to view the utricular opening",
+   "Cyst fluid analysis for spermatozoa",
+   "Renal tract imaging for associated anomalies",
+   "Assessment for disorders of sex development where indicated"
+  ],
+  "redFlags": [
+   "Recurrent infection, abscess or stone formation within the cyst",
+   "Association with disorders of sex development requiring endocrine and genetic evaluation",
+   "Obstructive symptoms or upper urinary tract compromise",
+   "Rare malignant change in long-standing cysts"
+  ],
+  "prognosis": "Generally good; small cysts are asymptomatic and stable, while symptomatic utricle cysts respond to endoscopic or surgical treatment, although proximity to the ejaculatory ducts and continence structures requires care.",
+  "pitfalls": [
+   "Confusing a utricle cyst, which communicates with the urethra and may contain sperm, with a mullerian duct cyst",
+   "Missing associated hypospadias, cryptorchidism, renal agenesis or a disorder of sex development",
+   "Damaging the ejaculatory ducts or continence mechanism during intervention",
+   "Overlooking the cyst as a cause of recurrent urinary tract infection or epididymitis in a boy"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "EAU Guidelines"
+  ],
+  "crossLinks": [
+   "mullerian_duct_cyst",
+   "seminal_vesicle_cyst"
+  ],
+  "management": [
+   "Conservative observation for small, asymptomatic cysts",
+   "Antimicrobial treatment of associated recurrent urinary tract infection and epididymitis",
+   "Endoscopic transurethral incision or de-roofing for symptomatic cysts",
+   "Open, laparoscopic or robotic excision for large or recurrent cysts, taking care to preserve the ejaculatory ducts and continence mechanism",
+   "Removal or treatment of any intracystic calculi",
+   "Evaluation and management of associated genitourinary anomalies such as hypospadias, cryptorchidism and renal agenesis",
+   "Assessment for disorders of sex development with appropriate referral and fertility counselling"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "utricle_cyst-pathway",
+   "title": "Prostatic utricle cyst: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A midline cyst arising from dilatation of the prostatic utricle, which opens into the prostatic urethra at the verumontanum",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent infection, abscess or stone formation within the cyst",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Voiding cystourethrography to demonstrate communication with the urethra, Pelvic MRI for midline anatomy and associated anomalies, Retrograde urethrography or urethroscopy to view the utricular opening"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Conservative observation for small, asymptomatic cysts"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing a utricle cyst, which communicates with the urethra and may contain sperm, with a mullerian duct cyst"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of prostatic utricle cyst."
+  }
+ ],
+ "tables": [
+  {
+   "id": "utricle_cyst-matrix",
+   "title": "Prostatic utricle cyst: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A midline cyst arising from dilatation of the prostatic utricle, which opens into the prostatic urethra at the verumontanum",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The prostatic utricle is a small midline mullerian remnant that opens into the prostatic urethra at the verumontanum. Incomplete regression, often linked with under-virilisation, allows it to dilate into a cyst. Because it communicates with the urethra, urine can reflux into it, predisposing to stasis, infection and stone formation, and when spermatozoa enter it the cyst may contain sperm.",
-    "additionalDifferentials": [
-      "Mullerian duct cyst, which has no urethral communication",
-      "Ejaculatory duct cyst",
-      "Seminal vesicle cyst, which is laterally placed",
-      "Bladder diverticulum",
-      "Posterior urethral pathology",
-      "Cystic prostatic mass"
+    [
+     "Key Investigations",
+     "Voiding cystourethrography to demonstrate communication with the urethra, Pelvic MRI for midline anatomy and associated",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Voiding cystourethrography to demonstrate communication with the urethra",
-      "Pelvic MRI for midline anatomy and associated anomalies",
-      "Retrograde urethrography or urethroscopy to view the utricular opening",
-      "Cyst fluid analysis for spermatozoa",
-      "Renal tract imaging for associated anomalies",
-      "Assessment for disorders of sex development where indicated"
+    [
+     "Primary Differentials",
+     "Mullerian duct cyst, which has no urethral communication, Ejaculatory duct cyst, Seminal vesicle cyst, which is laterally placed",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent infection, abscess or stone formation within the cyst",
-      "Association with disorders of sex development requiring endocrine and genetic evaluation",
-      "Obstructive symptoms or upper urinary tract compromise",
-      "Rare malignant change in long-standing cysts"
+    [
+     "Management Strategy",
+     "Conservative observation for small, asymptomatic cysts",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally good; small cysts are asymptomatic and stable, while symptomatic utricle cysts respond to endoscopic or surgical treatment, although proximity to the ejaculatory ducts and continence structures requires care.",
-    "pitfalls": [
-      "Confusing a utricle cyst, which communicates with the urethra and may contain sperm, with a mullerian duct cyst",
-      "Missing associated hypospadias, cryptorchidism, renal agenesis or a disorder of sex development",
-      "Damaging the ejaculatory ducts or continence mechanism during intervention",
-      "Overlooking the cyst as a cause of recurrent urinary tract infection or epididymitis in a boy"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "EAU Guidelines"
-    ],
-    "crossLinks": [
-      "mullerian_duct_cyst",
-      "seminal_vesicle_cyst"
-    ],
-    "management": [
-      "Conservative observation for small, asymptomatic cysts",
-      "Antimicrobial treatment of associated recurrent urinary tract infection and epididymitis",
-      "Endoscopic transurethral incision or de-roofing for symptomatic cysts",
-      "Open, laparoscopic or robotic excision for large or recurrent cysts, taking care to preserve the ejaculatory ducts and continence mechanism",
-      "Removal or treatment of any intracystic calculi",
-      "Evaluation and management of associated genitourinary anomalies such as hypospadias, cryptorchidism and renal agenesis",
-      "Assessment for disorders of sex development with appropriate referral and fertility counselling"
+    [
+     "Clinical Pitfall",
+     "Confusing a utricle cyst, which communicates with the urethra and may contain sperm, with a mullerian duct cyst",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for prostatic utricle cyst."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "utricle-cyst-diagram",
+   "title": "Prostatic utricle cyst: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "waldenstrom_macroglobulinemia",
-  "name": "Waldenstrom macroglobulinaemia",
-  "aliases": [
-    "lymphoplasmacytic lymphoma with IgM paraprotein",
-    "WM",
-    "MYD88 L265P-associated lymphoma",
-    "macroglobulinaemia of Waldenstrom"
+ "id": "waldenstrom_macroglobulinemia",
+ "name": "Waldenstrom macroglobulinaemia",
+ "aliases": [
+  "lymphoplasmacytic lymphoma with IgM paraprotein",
+  "WM",
+  "MYD88 L265P-associated lymphoma",
+  "macroglobulinaemia of Waldenstrom"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A lymphoplasmacytic lymphoma involving the bone marrow together with a monoclonal IgM paraprotein in the serum",
+   "The circulating IgM can produce hyperviscosity, causing headache, visual disturbance, mucosal bleeding and neurological symptoms",
+   "Fundoscopy may show dilated, tortuous retinal veins with haemorrhages in symptomatic hyperviscosity",
+   "Anaemia, fatigue, lymphadenopathy and hepatosplenomegaly are common, and constitutional symptoms may occur",
+   "The somatic MYD88 L265P mutation is present in the large majority of cases and strongly supports the diagnosis",
+   "IgM-related complications include peripheral neuropathy, cryoglobulinaemia and cold agglutinin activity",
+   "Asymptomatic disease is often monitored, while symptomatic disease is treated with regimens that may include BTK inhibition or rituximab-based therapy"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A lymphoplasmacytic lymphoma involving the bone marrow together with a monoclonal IgM paraprotein in the serum",
-      "The circulating IgM can produce hyperviscosity, causing headache, visual disturbance, mucosal bleeding and neurological symptoms",
-      "Fundoscopy may show dilated, tortuous retinal veins with haemorrhages in symptomatic hyperviscosity",
-      "Anaemia, fatigue, lymphadenopathy and hepatosplenomegaly are common, and constitutional symptoms may occur",
-      "The somatic MYD88 L265P mutation is present in the large majority of cases and strongly supports the diagnosis",
-      "IgM-related complications include peripheral neuropathy, cryoglobulinaemia and cold agglutinin activity",
-      "Asymptomatic disease is often monitored, while symptomatic disease is treated with regimens that may include BTK inhibition or rituximab-based therapy"
+  "pathophysiology": "Waldenstrom macroglobulinaemia is a clonal B-cell disorder in which lymphoplasmacytic cells, spanning small lymphocytes to plasma cells, infiltrate the bone marrow and sometimes lymphoid organs and secrete a monoclonal immunoglobulin M. The recurrent MYD88 L265P mutation activates downstream NF-kappaB signalling through the Bruton tyrosine kinase pathway, promoting tumour survival, and CXCR4 mutations modify disease behaviour and treatment response. The large pentameric IgM molecule raises serum viscosity and can behave as a cryoglobulin, cold agglutinin or autoantibody, so many clinical features stem from the physical and immunological properties of the paraprotein rather than tumour bulk alone.",
+  "additionalDifferentials": [
+   "IgM monoclonal gammopathy of undetermined significance",
+   "Multiple myeloma (particularly IgM myeloma)",
+   "Marginal zone lymphoma with plasmacytic differentiation",
+   "Chronic lymphocytic leukaemia",
+   "Other low-grade B-cell lymphomas with paraprotein",
+   "AL amyloidosis with an IgM clone"
+  ],
+  "additionalInvestigations": [
+   "Serum protein electrophoresis and immunofixation to characterise the IgM paraprotein",
+   "Serum viscosity measurement when hyperviscosity is suspected",
+   "Bone marrow aspirate and trephine with immunophenotyping",
+   "Molecular testing for MYD88 L265P (and CXCR4) mutations",
+   "Fundoscopy to assess for hyperviscosity retinopathy",
+   "Assessment for cryoglobulins, cold agglutinins and neuropathy-associated antibodies"
+  ],
+  "redFlags": [
+   "Symptomatic hyperviscosity with neurological or visual compromise requiring urgent plasmapheresis",
+   "Severe anaemia or cytopenias from marrow infiltration",
+   "Progressive peripheral neuropathy",
+   "Transformation to a high-grade lymphoma with rapid clinical deterioration"
+  ],
+  "prognosis": "Waldenstrom macroglobulinaemia is generally an indolent, treatable but incurable disorder with prolonged survival for many patients; outcome is influenced by age, cytopenias, paraprotein level and molecular features, and hyperviscosity is usually reversible with plasmapheresis.",
+  "pitfalls": [
+   "Attributing symptoms to anaemia alone and missing hyperviscosity that needs urgent plasmapheresis",
+   "Spurious laboratory results, including pseudohyponatraemia and interference, from a high IgM level",
+   "Failing to distinguish it from IgM myeloma or marginal zone lymphoma",
+   "Overlooking MYD88 testing that clarifies the diagnosis and predicts therapy response"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe asymptomatic disease with active monitoring, reserving treatment for symptomatic or progressive disease",
+   "Give first-line systemic therapy with rituximab-based combinations such as rituximab with bendamustine or with cyclophosphamide and dexamethasone",
+   "Use a Bruton tyrosine kinase inhibitor such as ibrutinib or zanubrutinib, particularly in MYD88-mutated disease",
+   "Perform plasma exchange promptly for symptomatic hyperviscosity and withhold single-agent rituximab when the IgM is high to avoid a paraprotein flare precipitating hyperviscosity",
+   "Provide supportive care with transfusion for symptomatic anaemia, and manage IgM-related peripheral neuropathy, cryoglobulinaemia and cold agglutinin disease including cold avoidance",
+   "Monitor IgM level and serum viscosity and maintain surveillance for histological transformation",
+   "Coordinate care through a specialist haematology multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "waldenstrom_macroglobulinemia-pathway",
+   "title": "Waldenstrom macroglobulinaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A lymphoplasmacytic lymphoma involving the bone marrow together with a monoclonal IgM paraprotein in the serum",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Symptomatic hyperviscosity with neurological or visual compromise requiring urgent plasmapheresis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum protein electrophoresis and immunofixation to characterise the IgM paraprotein, Serum viscosity measurement when hyperviscosity is suspected, Bone marrow aspirate and trephine with immunophenotyping"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe asymptomatic disease with active monitoring, reserving treatment for symptomatic or progressive disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing symptoms to anaemia alone and missing hyperviscosity that needs urgent plasmapheresis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of waldenstrom macroglobulinaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "waldenstrom_macroglobulinemia-matrix",
+   "title": "Waldenstrom macroglobulinaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A lymphoplasmacytic lymphoma involving the bone marrow together with a monoclonal IgM paraprotein in the serum",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Waldenstrom macroglobulinaemia is a clonal B-cell disorder in which lymphoplasmacytic cells, spanning small lymphocytes to plasma cells, infiltrate the bone marrow and sometimes lymphoid organs and secrete a monoclonal immunoglobulin M. The recurrent MYD88 L265P mutation activates downstream NF-kappaB signalling through the Bruton tyrosine kinase pathway, promoting tumour survival, and CXCR4 mutations modify disease behaviour and treatment response. The large pentameric IgM molecule raises serum viscosity and can behave as a cryoglobulin, cold agglutinin or autoantibody, so many clinical features stem from the physical and immunological properties of the paraprotein rather than tumour bulk alone.",
-    "additionalDifferentials": [
-      "IgM monoclonal gammopathy of undetermined significance",
-      "Multiple myeloma (particularly IgM myeloma)",
-      "Marginal zone lymphoma with plasmacytic differentiation",
-      "Chronic lymphocytic leukaemia",
-      "Other low-grade B-cell lymphomas with paraprotein",
-      "AL amyloidosis with an IgM clone"
+    [
+     "Key Investigations",
+     "Serum protein electrophoresis and immunofixation to characterise the IgM paraprotein, Serum viscosity measurement when",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum protein electrophoresis and immunofixation to characterise the IgM paraprotein",
-      "Serum viscosity measurement when hyperviscosity is suspected",
-      "Bone marrow aspirate and trephine with immunophenotyping",
-      "Molecular testing for MYD88 L265P (and CXCR4) mutations",
-      "Fundoscopy to assess for hyperviscosity retinopathy",
-      "Assessment for cryoglobulins, cold agglutinins and neuropathy-associated antibodies"
+    [
+     "Primary Differentials",
+     "IgM monoclonal gammopathy of undetermined significance, Multiple myeloma (particularly IgM myeloma), Marginal zone lymphoma with",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Symptomatic hyperviscosity with neurological or visual compromise requiring urgent plasmapheresis",
-      "Severe anaemia or cytopenias from marrow infiltration",
-      "Progressive peripheral neuropathy",
-      "Transformation to a high-grade lymphoma with rapid clinical deterioration"
+    [
+     "Management Strategy",
+     "Observe asymptomatic disease with active monitoring, reserving treatment for symptomatic or progressive disease",
+     "Core treatment modality"
     ],
-    "prognosis": "Waldenstrom macroglobulinaemia is generally an indolent, treatable but incurable disorder with prolonged survival for many patients; outcome is influenced by age, cytopenias, paraprotein level and molecular features, and hyperviscosity is usually reversible with plasmapheresis.",
-    "pitfalls": [
-      "Attributing symptoms to anaemia alone and missing hyperviscosity that needs urgent plasmapheresis",
-      "Spurious laboratory results, including pseudohyponatraemia and interference, from a high IgM level",
-      "Failing to distinguish it from IgM myeloma or marginal zone lymphoma",
-      "Overlooking MYD88 testing that clarifies the diagnosis and predicts therapy response"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe asymptomatic disease with active monitoring, reserving treatment for symptomatic or progressive disease",
-      "Give first-line systemic therapy with rituximab-based combinations such as rituximab with bendamustine or with cyclophosphamide and dexamethasone",
-      "Use a Bruton tyrosine kinase inhibitor such as ibrutinib or zanubrutinib, particularly in MYD88-mutated disease",
-      "Perform plasma exchange promptly for symptomatic hyperviscosity and withhold single-agent rituximab when the IgM is high to avoid a paraprotein flare precipitating hyperviscosity",
-      "Provide supportive care with transfusion for symptomatic anaemia, and manage IgM-related peripheral neuropathy, cryoglobulinaemia and cold agglutinin disease including cold avoidance",
-      "Monitor IgM level and serum viscosity and maintain surveillance for histological transformation",
-      "Coordinate care through a specialist haematology multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Attributing symptoms to anaemia alone and missing hyperviscosity that needs urgent plasmapheresis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for waldenstrom macroglobulinaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "waldenstrom-macroglobulinemia-diagram",
+   "title": "Waldenstrom macroglobulinaemia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

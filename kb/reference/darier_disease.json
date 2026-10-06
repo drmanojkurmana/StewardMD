@@ -1,77 +1,172 @@
 {
-  "id": "darier_disease",
-  "name": "Darier disease",
-  "aliases": [
-    "ATP2A2",
-    "Darier-White disease",
-    "keratosis follicularis",
-    "dyskeratosis follicularis"
+ "id": "darier_disease",
+ "name": "Darier disease",
+ "aliases": [
+  "ATP2A2",
+  "Darier-White disease",
+  "keratosis follicularis",
+  "dyskeratosis follicularis"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant disorder caused by variants in ATP2A2, which encodes the SERCA2 endoplasmic reticulum calcium pump",
+   "Presents in adolescence with greasy, warty, malodorous keratotic papules coalescing in seborrhoeic distribution (chest, back, scalp margins, flexures)",
+   "Nail changes are highly characteristic: alternating red and white longitudinal bands with distal V-shaped nicks",
+   "Palmar pits and punctate keratoses, plus mucosal cobblestone papules, support the diagnosis",
+   "Heat, sweating, sunlight, and friction typically exacerbate the eruption, so flares are common in summer",
+   "Neuropsychiatric associations, including mood disorders, are recognised in affected families",
+   "Superimposed herpes simplex (Kaposi varicelliform eruption) can cause abrupt, painful deterioration"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant disorder caused by variants in ATP2A2, which encodes the SERCA2 endoplasmic reticulum calcium pump",
-      "Presents in adolescence with greasy, warty, malodorous keratotic papules coalescing in seborrhoeic distribution (chest, back, scalp margins, flexures)",
-      "Nail changes are highly characteristic: alternating red and white longitudinal bands with distal V-shaped nicks",
-      "Palmar pits and punctate keratoses, plus mucosal cobblestone papules, support the diagnosis",
-      "Heat, sweating, sunlight, and friction typically exacerbate the eruption, so flares are common in summer",
-      "Neuropsychiatric associations, including mood disorders, are recognised in affected families",
-      "Superimposed herpes simplex (Kaposi varicelliform eruption) can cause abrupt, painful deterioration"
+  "pathophysiology": "Darier disease results from loss-of-function variants in ATP2A2, encoding the SERCA2 pump that transports calcium into the endoplasmic reticulum of keratinocytes. Impaired intracellular calcium regulation disrupts the calcium-dependent assembly and function of desmosomal adhesion complexes. The consequence is loss of cohesion between keratinocytes (acantholysis) together with abnormal keratinisation of individual cells (dyskeratosis), giving the histological hallmarks of suprabasal acantholysis with corps ronds and grains. Environmental triggers such as heat, ultraviolet light, and mechanical friction further destabilise the fragile epidermis and precipitate clinical flares.",
+  "additionalDifferentials": [
+   "Hailey-Hailey disease",
+   "Seborrhoeic dermatitis",
+   "Grover disease (transient acantholytic dermatosis)",
+   "Pemphigus (vegetans/foliaceus) in flexural or eroded forms",
+   "Confluent and reticulated papillomatosis",
+   "Acrokeratosis verruciformis of Hopf"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing suprabasal acantholysis with dyskeratotic corps ronds and grains",
+   "ATP2A2 molecular genetic testing",
+   "Viral swab or PCR for herpes simplex when sudden painful worsening occurs",
+   "Bacterial swabs of malodorous or eroded lesions",
+   "Family history and examination of nails and mucosa for corroborating signs"
+  ],
+  "redFlags": [
+   "Sudden painful monomorphic vesicles or erosions suggesting Kaposi varicelliform eruption from herpes superinfection",
+   "Widespread erosions with systemic upset and secondary bacterial infection",
+   "Rapidly enlarging or ulcerated lesion raising concern for squamous change"
+  ],
+  "prognosis": "It is a chronic, relapsing condition that persists lifelong with seasonal flares, but most patients maintain reasonable control with skin care, avoidance of triggers, and oral retinoids in severe cases; it does not shorten life expectancy.",
+  "pitfalls": [
+   "Missing herpes superinfection and attributing a painful flare simply to disease activity",
+   "Mistaking flexural involvement for intertrigo or fungal infection",
+   "Overlooking the characteristic nail and palmar signs that clinch the diagnosis",
+   "Failing to advise on heat, sweat, and sun avoidance that reduces flares"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Advise avoidance of triggers such as heat, sweating, sunlight and friction, with cool loose clothing, sun protection and regular emollients",
+   "Treat mild to moderate disease with topical retinoids, topical corticosteroids and keratolytics",
+   "Use oral retinoids such as acitretin for severe or widespread disease",
+   "Treat secondary bacterial infection with antibiotics, and superimposed herpes simplex (Kaposi varicelliform eruption) promptly with antiviral therapy",
+   "Manage malodour and maceration in flexures with antiseptics and topical antimicrobials",
+   "Screen for and support associated neuropsychiatric conditions such as mood disorders",
+   "Offer genetic counselling for this autosomal dominant ATP2A2 disorder, and consider dermatological surgery or laser for resistant localised disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "darier_disease-pathway",
+   "title": "Darier disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant disorder caused by variants in ATP2A2, which encodes the SERCA2 endoplasmic reticulum calcium pump",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden painful monomorphic vesicles or erosions suggesting Kaposi varicelliform eruption from herpes superinfection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing suprabasal acantholysis with dyskeratotic corps ronds and grains, ATP2A2 molecular genetic testing, Viral swab or PCR for herpes simplex when sudden painful worsening occurs"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Advise avoidance of triggers such as heat, sweating, sunlight and friction, with cool loose clothing, sun protection and regular emollients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing herpes superinfection and attributing a painful flare simply to disease activity"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of darier disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "darier_disease-matrix",
+   "title": "Darier disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant disorder caused by variants in ATP2A2, which encodes the SERCA2 endoplasmic reticulum calcium pump",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Darier disease results from loss-of-function variants in ATP2A2, encoding the SERCA2 pump that transports calcium into the endoplasmic reticulum of keratinocytes. Impaired intracellular calcium regulation disrupts the calcium-dependent assembly and function of desmosomal adhesion complexes. The consequence is loss of cohesion between keratinocytes (acantholysis) together with abnormal keratinisation of individual cells (dyskeratosis), giving the histological hallmarks of suprabasal acantholysis with corps ronds and grains. Environmental triggers such as heat, ultraviolet light, and mechanical friction further destabilise the fragile epidermis and precipitate clinical flares.",
-    "additionalDifferentials": [
-      "Hailey-Hailey disease",
-      "Seborrhoeic dermatitis",
-      "Grover disease (transient acantholytic dermatosis)",
-      "Pemphigus (vegetans/foliaceus) in flexural or eroded forms",
-      "Confluent and reticulated papillomatosis",
-      "Acrokeratosis verruciformis of Hopf"
+    [
+     "Key Investigations",
+     "Skin biopsy showing suprabasal acantholysis with dyskeratotic corps ronds and grains, ATP2A2 molecular genetic testing, Viral",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing suprabasal acantholysis with dyskeratotic corps ronds and grains",
-      "ATP2A2 molecular genetic testing",
-      "Viral swab or PCR for herpes simplex when sudden painful worsening occurs",
-      "Bacterial swabs of malodorous or eroded lesions",
-      "Family history and examination of nails and mucosa for corroborating signs"
+    [
+     "Primary Differentials",
+     "Hailey-Hailey disease, Seborrhoeic dermatitis, Grover disease (transient acantholytic dermatosis)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden painful monomorphic vesicles or erosions suggesting Kaposi varicelliform eruption from herpes superinfection",
-      "Widespread erosions with systemic upset and secondary bacterial infection",
-      "Rapidly enlarging or ulcerated lesion raising concern for squamous change"
+    [
+     "Management Strategy",
+     "Advise avoidance of triggers such as heat, sweating, sunlight and friction, with cool loose clothing, sun protection and regular",
+     "Core treatment modality"
     ],
-    "prognosis": "It is a chronic, relapsing condition that persists lifelong with seasonal flares, but most patients maintain reasonable control with skin care, avoidance of triggers, and oral retinoids in severe cases; it does not shorten life expectancy.",
-    "pitfalls": [
-      "Missing herpes superinfection and attributing a painful flare simply to disease activity",
-      "Mistaking flexural involvement for intertrigo or fungal infection",
-      "Overlooking the characteristic nail and palmar signs that clinch the diagnosis",
-      "Failing to advise on heat, sweat, and sun avoidance that reduces flares"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Advise avoidance of triggers such as heat, sweating, sunlight and friction, with cool loose clothing, sun protection and regular emollients",
-      "Treat mild to moderate disease with topical retinoids, topical corticosteroids and keratolytics",
-      "Use oral retinoids such as acitretin for severe or widespread disease",
-      "Treat secondary bacterial infection with antibiotics, and superimposed herpes simplex (Kaposi varicelliform eruption) promptly with antiviral therapy",
-      "Manage malodour and maceration in flexures with antiseptics and topical antimicrobials",
-      "Screen for and support associated neuropsychiatric conditions such as mood disorders",
-      "Offer genetic counselling for this autosomal dominant ATP2A2 disorder, and consider dermatological surgery or laser for resistant localised disease"
+    [
+     "Clinical Pitfall",
+     "Missing herpes superinfection and attributing a painful flare simply to disease activity",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for darier disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "darier-disease-diagram",
+   "title": "Darier disease: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

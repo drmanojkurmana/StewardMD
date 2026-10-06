@@ -1,81 +1,176 @@
 {
-  "id": "adrenal_cyst",
-  "name": "Adrenal cyst",
-  "aliases": [
-    "adrenal cyst",
-    "adrenal pseudocyst",
-    "endothelial adrenal cyst"
+ "id": "adrenal_cyst",
+ "name": "Adrenal cyst",
+ "aliases": [
+  "adrenal cyst",
+  "adrenal pseudocyst",
+  "endothelial adrenal cyst"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Adrenal",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An uncommon adrenal lesion, usually found incidentally, classified pathologically as endothelial (lymphangiomatous or vascular), pseudocyst, epithelial, or parasitic",
+   "Most are asymptomatic, but large cysts can cause flank or abdominal pain or a palpable mass",
+   "Pseudocysts often follow previous adrenal haemorrhage and lack a true epithelial lining",
+   "Imaging typically shows a well-defined, fluid-density, non-enhancing lesion, and wall calcification is common",
+   "Complex features such as thick walls, septations, soft-tissue components or enhancement raise concern for cystic malignancy or, in endemic areas, hydatid disease",
+   "Hormonal evaluation remains appropriate as part of the incidentaloma workup, even though most cysts are non-functioning",
+   "Simple asymptomatic cysts are observed, whereas large, symptomatic or complex cysts may require aspiration or excision"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Adrenal",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An uncommon adrenal lesion, usually found incidentally, classified pathologically as endothelial (lymphangiomatous or vascular), pseudocyst, epithelial, or parasitic",
-      "Most are asymptomatic, but large cysts can cause flank or abdominal pain or a palpable mass",
-      "Pseudocysts often follow previous adrenal haemorrhage and lack a true epithelial lining",
-      "Imaging typically shows a well-defined, fluid-density, non-enhancing lesion, and wall calcification is common",
-      "Complex features such as thick walls, septations, soft-tissue components or enhancement raise concern for cystic malignancy or, in endemic areas, hydatid disease",
-      "Hormonal evaluation remains appropriate as part of the incidentaloma workup, even though most cysts are non-functioning",
-      "Simple asymptomatic cysts are observed, whereas large, symptomatic or complex cysts may require aspiration or excision"
+  "pathophysiology": "Adrenal cysts arise by several mechanisms. Endothelial cysts result from dilatation of lymphatic or vascular channels; pseudocysts follow organisation and liquefaction of prior haemorrhage or infarction and have no epithelial lining; epithelial cysts derive from glandular or embryonic remnants; and parasitic cysts arise chiefly from Echinococcus. Enlargement produces mass effect, while a haemorrhagic origin explains the frequent finding of a calcified wall.",
+  "additionalDifferentials": [
+   "Adrenal pseudocyst after haemorrhage",
+   "Cystic phaeochromocytoma",
+   "Cystic adrenocortical neoplasm, benign or malignant",
+   "Adrenal abscess",
+   "Hydatid (parasitic) cyst",
+   "Exophytic renal or hepatic cyst mimicking an adrenal cyst"
+  ],
+  "additionalInvestigations": [
+   "CT or MRI to confirm fluid density and assess wall thickness, septations and enhancement",
+   "Hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio as for any incidentaloma",
+   "Serology for Echinococcus where hydatid disease is possible",
+   "Interval imaging for indeterminate lesions",
+   "Cyst aspiration and fluid analysis in selected complex cases",
+   "Surgical referral for large or complex or suspicious cysts"
+  ],
+  "redFlags": [
+   "Complex features such as a thick or enhancing wall, septa or a soft-tissue nodule suggesting malignancy",
+   "Rapid enlargement or new symptoms",
+   "A suspected phaeochromocytoma presenting as a cystic mass",
+   "A possible hydatid cyst where percutaneous intervention risks spillage"
+  ],
+  "prognosis": "Very good for simple, non-functioning cysts, which are benign and stable; the outcome depends on excluding the minority that are complex, malignant or parasitic.",
+  "pitfalls": [
+   "Aspirating a cystic phaeochromocytoma without prior biochemical exclusion",
+   "Percutaneous puncture of an unrecognised hydatid cyst causing spillage and anaphylaxis",
+   "Assuming all cystic adrenal lesions are benign and missing a cystic malignancy",
+   "Skipping hormonal screening in an adrenal cyst"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas"
+  ],
+  "crossLinks": [
+   "adrenal_adenoma_nonfunctioning",
+   "adrenal_myelolipoma_large",
+   "adrenal_hemorrhage_neonatal"
+  ],
+  "management": [
+   "Manage simple, non-functioning, imaging-typical cysts conservatively without intervention",
+   "Perform incidentaloma hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio",
+   "Characterise the lesion with CT or MRI, assessing wall thickness, septations and enhancement",
+   "Treat parasitic (hydatid) cysts with antihelminthic therapy such as albendazole and surgery where appropriate, guided by Echinococcus serology",
+   "Undertake interval imaging for indeterminate lesions and consider aspiration with fluid analysis in selected complex cases",
+   "Refer for surgical excision of large, symptomatic, complex or suspicious cysts"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "adrenal_cyst-pathway",
+   "title": "Adrenal cyst: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An uncommon adrenal lesion, usually found incidentally, classified pathologically as endothelial (lymphangiomatous or vascular), pseudocyst, epithelial, or parasitic",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Complex features such as a thick or enhancing wall, septa or a soft-tissue nodule suggesting malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT or MRI to confirm fluid density and assess wall thickness, septations and enhancement, Hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio as for any incidentaloma, Serology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage simple, non-functioning, imaging-typical cysts conservatively without intervention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Aspirating a cystic phaeochromocytoma without prior biochemical exclusion"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of adrenal cyst."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adrenal_cyst-matrix",
+   "title": "Adrenal cyst: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An uncommon adrenal lesion, usually found incidentally, classified pathologically as endothelial (lymphangiomatous or vascular),",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Adrenal cysts arise by several mechanisms. Endothelial cysts result from dilatation of lymphatic or vascular channels; pseudocysts follow organisation and liquefaction of prior haemorrhage or infarction and have no epithelial lining; epithelial cysts derive from glandular or embryonic remnants; and parasitic cysts arise chiefly from Echinococcus. Enlargement produces mass effect, while a haemorrhagic origin explains the frequent finding of a calcified wall.",
-    "additionalDifferentials": [
-      "Adrenal pseudocyst after haemorrhage",
-      "Cystic phaeochromocytoma",
-      "Cystic adrenocortical neoplasm, benign or malignant",
-      "Adrenal abscess",
-      "Hydatid (parasitic) cyst",
-      "Exophytic renal or hepatic cyst mimicking an adrenal cyst"
+    [
+     "Key Investigations",
+     "CT or MRI to confirm fluid density and assess wall thickness, septations and enhancement, Hormonal screening with dexamethasone",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT or MRI to confirm fluid density and assess wall thickness, septations and enhancement",
-      "Hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio as for any incidentaloma",
-      "Serology for Echinococcus where hydatid disease is possible",
-      "Interval imaging for indeterminate lesions",
-      "Cyst aspiration and fluid analysis in selected complex cases",
-      "Surgical referral for large or complex or suspicious cysts"
+    [
+     "Primary Differentials",
+     "Adrenal pseudocyst after haemorrhage, Cystic phaeochromocytoma, Cystic adrenocortical neoplasm, benign or malignant",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Complex features such as a thick or enhancing wall, septa or a soft-tissue nodule suggesting malignancy",
-      "Rapid enlargement or new symptoms",
-      "A suspected phaeochromocytoma presenting as a cystic mass",
-      "A possible hydatid cyst where percutaneous intervention risks spillage"
+    [
+     "Management Strategy",
+     "Manage simple, non-functioning, imaging-typical cysts conservatively without intervention",
+     "Core treatment modality"
     ],
-    "prognosis": "Very good for simple, non-functioning cysts, which are benign and stable; the outcome depends on excluding the minority that are complex, malignant or parasitic.",
-    "pitfalls": [
-      "Aspirating a cystic phaeochromocytoma without prior biochemical exclusion",
-      "Percutaneous puncture of an unrecognised hydatid cyst causing spillage and anaphylaxis",
-      "Assuming all cystic adrenal lesions are benign and missing a cystic malignancy",
-      "Skipping hormonal screening in an adrenal cyst"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas"
-    ],
-    "crossLinks": [
-      "adrenal_adenoma_nonfunctioning",
-      "adrenal_myelolipoma_large",
-      "adrenal_hemorrhage_neonatal"
-    ],
-    "management": [
-      "Manage simple, non-functioning, imaging-typical cysts conservatively without intervention",
-      "Perform incidentaloma hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio",
-      "Characterise the lesion with CT or MRI, assessing wall thickness, septations and enhancement",
-      "Treat parasitic (hydatid) cysts with antihelminthic therapy such as albendazole and surgery where appropriate, guided by Echinococcus serology",
-      "Undertake interval imaging for indeterminate lesions and consider aspiration with fluid analysis in selected complex cases",
-      "Refer for surgical excision of large, symptomatic, complex or suspicious cysts"
+    [
+     "Clinical Pitfall",
+     "Aspirating a cystic phaeochromocytoma without prior biochemical exclusion",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for adrenal cyst."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "adrenal-cyst-diagram",
+   "title": "Adrenal cyst: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

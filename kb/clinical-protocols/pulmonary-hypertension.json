@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient clinic, ward",
- "aliases": ["PH", "PAH", "pulmonary arterial hypertension", "CTEPH", "chronic thromboembolic pulmonary hypertension", "cor pulmonale", "right heart failure", "raised PA pressure", "ESC/ERS 2022 PH"],
+ "aliases": [
+  "PH",
+  "PAH",
+  "pulmonary arterial hypertension",
+  "CTEPH",
+  "chronic thromboembolic pulmonary hypertension",
+  "cor pulmonale",
+  "right heart failure",
+  "raised PA pressure",
+  "ESC/ERS 2022 PH"
+ ],
  "summary": "PH is mPAP above 20 mmHg at right heart catheterisation. Estimate probability by echo (TR velocity plus RV and PA signs), classify into groups 1 to 5, treat the underlying heart or lung disease, screen for CTEPH with a V/Q scan, and refer suspected PAH or CTEPH to a PH centre (ESC/ERS 2022).",
  "sections": [
   {
@@ -89,17 +99,153 @@
   }
  ],
  "drugs": [
-  { "name": "Sildenafil", "dose": "20 mg orally three times daily", "notes": "PAH, PH-centre initiated. Contraindicated with nitrates or riociguat." },
-  { "name": "Tadalafil", "dose": "40 mg orally once daily", "notes": "Start 20 mg daily in mild to moderate renal or hepatic impairment; avoid in severe impairment. Not with nitrates or riociguat." },
-  { "name": "Ambrisentan", "dose": "5 mg orally once daily, increase to 10 mg once daily if tolerated", "notes": "Teratogenic: exclude pregnancy and use contraception. Peripheral oedema, anaemia. Not for PH with IPF." },
-  { "name": "Macitentan", "dose": "10 mg orally once daily", "notes": "Teratogenic. Check haemoglobin and liver tests." },
-  { "name": "Riociguat", "dose": "1 mg orally three times daily, increased by 0.5 mg every 2 weeks to a maximum of 2.5 mg three times daily", "notes": "Inoperable or residual CTEPH, and PAH. Never with PDE5 inhibitors or nitrates. Hold up-titration if SBP is below 95 mmHg." },
-  { "name": "Furosemide", "dose": "20 to 40 mg orally or IV daily, titrated to weight and congestion", "notes": "Right heart failure with fluid retention; monitor potassium and creatinine." },
-  { "name": "Anticoagulation for CTEPH", "dose": "Warfarin to INR 2.0 to 3.0, or a DOAC at full treatment dose, lifelong", "notes": "Use a VKA, not a DOAC, in antiphospholipid syndrome." }
+  {
+   "name": "Sildenafil",
+   "dose": "20 mg orally three times daily",
+   "notes": "PAH, PH-centre initiated. Contraindicated with nitrates or riociguat."
+  },
+  {
+   "name": "Tadalafil",
+   "dose": "40 mg orally once daily",
+   "notes": "Start 20 mg daily in mild to moderate renal or hepatic impairment; avoid in severe impairment. Not with nitrates or riociguat."
+  },
+  {
+   "name": "Ambrisentan",
+   "dose": "5 mg orally once daily, increase to 10 mg once daily if tolerated",
+   "notes": "Teratogenic: exclude pregnancy and use contraception. Peripheral oedema, anaemia. Not for PH with IPF."
+  },
+  {
+   "name": "Macitentan",
+   "dose": "10 mg orally once daily",
+   "notes": "Teratogenic. Check haemoglobin and liver tests."
+  },
+  {
+   "name": "Riociguat",
+   "dose": "1 mg orally three times daily, increased by 0.5 mg every 2 weeks to a maximum of 2.5 mg three times daily",
+   "notes": "Inoperable or residual CTEPH, and PAH. Never with PDE5 inhibitors or nitrates. Hold up-titration if SBP is below 95 mmHg."
+  },
+  {
+   "name": "Furosemide",
+   "dose": "20 to 40 mg orally or IV daily, titrated to weight and congestion",
+   "notes": "Right heart failure with fluid retention; monitor potassium and creatinine."
+  },
+  {
+   "name": "Anticoagulation for CTEPH",
+   "dose": "Warfarin to INR 2.0 to 3.0, or a DOAC at full treatment dose, lifelong",
+   "notes": "Use a VKA, not a DOAC, in antiphospholipid syndrome."
+  }
  ],
  "sources": [
-  { "org": "ESC / ERS", "title": "2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension", "year": 2022, "url": "https://academic.oup.com/eurheartj/article/43/38/3618/6673929" },
-  { "org": "ESC / ERS", "title": "2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension (PubMed record)", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/36028254/" }
+  {
+   "org": "ESC / ERS",
+   "title": "2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension",
+   "year": 2022,
+   "url": "https://academic.oup.com/eurheartj/article/43/38/3618/6673929"
+  },
+  {
+   "org": "ESC / ERS",
+   "title": "2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension (PubMed record)",
+   "year": 2022,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/36028254/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "pulmonary-hypertension-pathway",
+   "title": "Pulmonary hypertension: recognition, referral and basic management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms are non-specific: progressive exertional breathlessness, fatigue, exertional chest pain, presyncope or syncope; later ankle oedema, ascites, raised JVP, loud P2, RV heave and a TR murmur.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Haemodynamic definition (RHC): mPAP above 20 mmHg at rest. Pre-capillary: PAWP 15 mmHg or less and PVR above 2 Wood units. Isolated post-capillary: PAWP above 15 mmHg and PVR 2 WU or less; combined: PAWP above 15 mmHg and PVR above 2 WU.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "First line: ECG, chest X-ray, BNP or NT-proBNP, spirometry and lung volumes with DLCO, arterial blood gas, and transthoracic echocardiography."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Positive vasoreactivity test (idiopathic, heritable or drug-associated PAH): high-dose calcium channel blocker with close reassessment of response."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Diagnosing PH from echo alone: echo only gives a probability; RHC confirms."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pulmonary hypertension: recognition, referral and basic management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pulmonary-hypertension-summary-matrix",
+   "title": "Pulmonary hypertension: recognition, referral and basic management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms are non-specific: progressive exertional breathlessness, fatigue, exertional chest pain, presyncope or syncope; later ankle",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Positive vasoreactivity test (idiopathic, heritable or drug-associated PAH): high-dose calcium channel blocker with close reassessment of",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "First line: ECG, chest X-ray, BNP or NT-proBNP, spirometry and lung volumes with DLCO, arterial blood gas, and transthoracic",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sildenafil: 20 mg orally three times daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Diagnosing PH from echo alone: echo only gives a probability; RHC confirms.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pulmonary hypertension: recognition, referral and basic management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pulmonary-hypertension-diagram",
+   "title": "Pulmonary hypertension: recognition, referral and basic management: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

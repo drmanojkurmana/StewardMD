@@ -6,7 +6,20 @@
  "basis": "international",
  "counterpart": "chronic-heart-failure-hfref-india",
  "setting": "Outpatient clinic, ward before discharge",
- "aliases": ["HFrEF", "heart failure", "CHF", "LV systolic dysfunction", "GDMT", "foundational medical therapy", "four pillars", "ARNI", "sacubitril valsartan", "SGLT2 inhibitor", "MRA", "HFmrEF"],
+ "aliases": [
+  "HFrEF",
+  "heart failure",
+  "CHF",
+  "LV systolic dysfunction",
+  "GDMT",
+  "foundational medical therapy",
+  "four pillars",
+  "ARNI",
+  "sacubitril valsartan",
+  "SGLT2 inhibitor",
+  "MRA",
+  "HFmrEF"
+ ],
  "summary": "Start all four foundational drug classes early (ARNI or ACE inhibitor or ARB, beta-blocker, MRA, SGLT2 inhibitor), up-titrate every 1 to 2 weeks to target or highest tolerated doses with potassium and creatinine checks, use diuretics only for congestion, and add iron, devices or other agents where indicated.",
  "sections": [
   {
@@ -85,21 +98,173 @@
   }
  ],
  "drugs": [
-  { "name": "Sacubitril/valsartan (ARNI)", "dose": "Start 49/51 mg orally twice daily (24/26 mg twice daily if ACE inhibitor or ARB naive, low BP, eGFR below 30 or elderly); target 97/103 mg twice daily", "notes": "36-hour washout after an ACE inhibitor. Contraindicated with previous angioedema." },
-  { "name": "ACE inhibitors", "dose": "Enalapril 2.5 mg twice daily to target 10 to 20 mg twice daily; ramipril 2.5 mg twice daily to target 5 mg twice daily; lisinopril 2.5 to 5 mg once daily to target 20 to 35 mg once daily", "notes": "If ARNI is unavailable or unaffordable." },
-  { "name": "ARBs", "dose": "Candesartan 4 mg once daily to target 32 mg once daily; losartan 50 mg once daily to target 150 mg once daily; valsartan 40 mg twice daily to target 160 mg twice daily", "notes": "If ACE inhibitor and ARNI are not tolerated." },
-  { "name": "Beta-blockers", "dose": "Bisoprolol 1.25 mg once daily to target 10 mg once daily; carvedilol 3.125 mg twice daily to target 25 mg twice daily (50 mg twice daily if over 85 kg); metoprolol succinate 12.5 to 25 mg once daily to target 200 mg once daily; nebivolol 1.25 mg once daily to target 10 mg once daily", "notes": "Double the dose every 2 weeks or more slowly as tolerated." },
-  { "name": "Spironolactone", "dose": "Start 12.5 to 25 mg orally once daily; target 50 mg once daily", "notes": "Gynaecomastia: switch to eplerenone. Check potassium and creatinine." },
-  { "name": "Eplerenone", "dose": "Start 25 mg orally once daily; target 50 mg once daily" },
-  { "name": "Dapagliflozin or empagliflozin", "dose": "10 mg orally once daily (no titration)", "notes": "Genital mycotic infection, volume depletion; hold during acute illness or fasting." },
-  { "name": "Ivabradine", "dose": "Start 5 mg orally twice daily (2.5 mg twice daily if 75 years or older); target 7.5 mg twice daily", "notes": "Sinus rhythm only. Aim resting heart rate around 50 to 60/min." },
-  { "name": "Ferric carboxymaltose", "dose": "IV, total dose by weight and haemoglobin; maximum single infusion 1000 mg (or 20 mg/kg)", "notes": "For iron deficiency as defined; recheck iron studies after about 3 months." },
-  { "name": "Other agents", "dose": "Vericiguat 2.5 mg once daily, doubled every 2 weeks to 10 mg once daily; digoxin 62.5 to 125 mcg once daily; hydralazine 37.5 mg with isosorbide dinitrate 20 mg three times daily, to target 75 mg with 40 mg three times daily", "notes": "Digoxin: lower doses in elderly or CKD; level 0.5 to 0.9 ng/mL." }
+  {
+   "name": "Sacubitril/valsartan (ARNI)",
+   "dose": "Start 49/51 mg orally twice daily (24/26 mg twice daily if ACE inhibitor or ARB naive, low BP, eGFR below 30 or elderly); target 97/103 mg twice daily",
+   "notes": "36-hour washout after an ACE inhibitor. Contraindicated with previous angioedema."
+  },
+  {
+   "name": "ACE inhibitors",
+   "dose": "Enalapril 2.5 mg twice daily to target 10 to 20 mg twice daily; ramipril 2.5 mg twice daily to target 5 mg twice daily; lisinopril 2.5 to 5 mg once daily to target 20 to 35 mg once daily",
+   "notes": "If ARNI is unavailable or unaffordable."
+  },
+  {
+   "name": "ARBs",
+   "dose": "Candesartan 4 mg once daily to target 32 mg once daily; losartan 50 mg once daily to target 150 mg once daily; valsartan 40 mg twice daily to target 160 mg twice daily",
+   "notes": "If ACE inhibitor and ARNI are not tolerated."
+  },
+  {
+   "name": "Beta-blockers",
+   "dose": "Bisoprolol 1.25 mg once daily to target 10 mg once daily; carvedilol 3.125 mg twice daily to target 25 mg twice daily (50 mg twice daily if over 85 kg); metoprolol succinate 12.5 to 25 mg once daily to target 200 mg once daily; nebivolol 1.25 mg once daily to target 10 mg once daily",
+   "notes": "Double the dose every 2 weeks or more slowly as tolerated."
+  },
+  {
+   "name": "Spironolactone",
+   "dose": "Start 12.5 to 25 mg orally once daily; target 50 mg once daily",
+   "notes": "Gynaecomastia: switch to eplerenone. Check potassium and creatinine."
+  },
+  {
+   "name": "Eplerenone",
+   "dose": "Start 25 mg orally once daily; target 50 mg once daily"
+  },
+  {
+   "name": "Dapagliflozin or empagliflozin",
+   "dose": "10 mg orally once daily (no titration)",
+   "notes": "Genital mycotic infection, volume depletion; hold during acute illness or fasting."
+  },
+  {
+   "name": "Ivabradine",
+   "dose": "Start 5 mg orally twice daily (2.5 mg twice daily if 75 years or older); target 7.5 mg twice daily",
+   "notes": "Sinus rhythm only. Aim resting heart rate around 50 to 60/min."
+  },
+  {
+   "name": "Ferric carboxymaltose",
+   "dose": "IV, total dose by weight and haemoglobin; maximum single infusion 1000 mg (or 20 mg/kg)",
+   "notes": "For iron deficiency as defined; recheck iron studies after about 3 months."
+  },
+  {
+   "name": "Other agents",
+   "dose": "Vericiguat 2.5 mg once daily, doubled every 2 weeks to 10 mg once daily; digoxin 62.5 to 125 mcg once daily; hydralazine 37.5 mg with isosorbide dinitrate 20 mg three times daily, to target 75 mg with 40 mg three times daily",
+   "notes": "Digoxin: lower doses in elderly or CKD; level 0.5 to 0.9 ng/mL."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2026 ESC Guidelines for the management of heart failure", "year": 2026, "url": "https://academic.oup.com/eurheartj/advance-article/doi/10.1093/eurheartj/ehag100/8766302" },
-  { "org": "ESC", "title": "2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure", "year": 2021, "url": "https://academic.oup.com/eurheartj/article/42/36/3599/6358045" },
-  { "org": "AHA / ACC / HFSA", "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure", "year": 2022, "url": "https://www.jacc.org/doi/10.1016/j.jacc.2021.12.012" }
+  {
+   "org": "ESC",
+   "title": "2026 ESC Guidelines for the management of heart failure",
+   "year": 2026,
+   "url": "https://academic.oup.com/eurheartj/advance-article/doi/10.1093/eurheartj/ehag100/8766302"
+  },
+  {
+   "org": "ESC",
+   "title": "2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure",
+   "year": 2021,
+   "url": "https://academic.oup.com/eurheartj/article/42/36/3599/6358045"
+  },
+  {
+   "org": "AHA / ACC / HFSA",
+   "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure",
+   "year": 2022,
+   "url": "https://www.jacc.org/doi/10.1016/j.jacc.2021.12.012"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chronic-heart-failure-hfref-pathway",
+   "title": "Chronic heart failure with reduced ejection fraction (HFrEF) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms (breathlessness, orthopnoea, fatigue, ankle swelling) and signs (raised JVP, third heart sound, displaced apex, crackles, oedema) with objective evidence of cardiac dysfunction on echocardiography.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Non-acute natriuretic peptide: NT-proBNP 125 pg/mL or more or BNP 35 pg/mL or more supports HF; lower values make HF unlikely.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "12-lead ECG, echocardiography (LVEF, valves, RV function, filling pressures), chest X-ray."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Iron deficiency (ferritin below 100 mcg/L, or 100 to 299 mcg/L with TSAT below 20%): IV ferric carboxymaltose or ferric derisomaltose to improve symptoms and reduce HF hospitalisation. Oral iron does not replete stores effectively."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Check creatinine and potassium 1 to 2 weeks after starting or increasing an ACE inhibitor, ARB, ARNI or MRA, and after the final dose step, then about every 4 months when stable."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chronic heart failure with reduced ejection fraction (hfref)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic-heart-failure-hfref-summary-matrix",
+   "title": "Chronic heart failure with reduced ejection fraction (HFrEF) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms (breathlessness, orthopnoea, fatigue, ankle swelling) and signs (raised JVP, third heart sound, displaced apex, crackles, oedema)",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Iron deficiency (ferritin below 100 mcg/L, or 100 to 299 mcg/L with TSAT below 20%): IV ferric carboxymaltose or ferric derisomaltose to",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "12-lead ECG, echocardiography (LVEF, valves, RV function, filling pressures), chest X-ray.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sacubitril/valsartan (ARNI): Start 49/51 mg orally twice daily (24/26 mg twice daily if ACE inhibitor or ARB naive, low BP, eGFR below 30",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Avoid NSAIDs, diltiazem, verapamil, thiazolidinediones and saxagliptin in HFrEF.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chronic heart failure with reduced ejection fraction (hfref)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-heart-failure-hfref-diagram",
+   "title": "Chronic heart failure with reduced ejection fraction (HFrEF): Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

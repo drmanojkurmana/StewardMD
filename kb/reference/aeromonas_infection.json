@@ -1,79 +1,174 @@
 {
-  "id": "aeromonas_infection",
-  "name": "Aeromonas infection",
-  "aliases": [
-    "Aeromonas hydrophila infection",
-    "Aeromonas",
-    "aeromoniasis",
-    "aeromonas gastroenteritis"
+ "id": "aeromonas_infection",
+ "name": "Aeromonas infection",
+ "aliases": [
+  "Aeromonas hydrophila infection",
+  "Aeromonas",
+  "aeromoniasis",
+  "aeromonas gastroenteritis"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Aeromonas species are Gram-negative bacilli widespread in fresh and brackish water, soil and aquatic animals",
+   "The two commonest syndromes are watery or dysenteric gastroenteritis and wound infection following freshwater exposure or injury",
+   "Classic wound scenarios include lacerations sustained in lakes or rivers and infections after therapeutic or accidental leech application",
+   "Soft-tissue infection can progress from cellulitis to necrotising fasciitis and myonecrosis, particularly in immunocompromised or cirrhotic patients",
+   "Bacteraemia occurs mainly in hosts with liver disease or malignancy and may be rapidly progressive",
+   "Many isolates produce inducible beta-lactamases, so fluoroquinolones, third-generation cephalosporins, aminoglycosides or trimethoprim-sulfamethoxazole are commonly used, guided by susceptibility",
+   "Necrotising soft-tissue disease requires prompt surgical debridement in addition to antibiotics"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Aeromonas species are Gram-negative bacilli widespread in fresh and brackish water, soil and aquatic animals",
-      "The two commonest syndromes are watery or dysenteric gastroenteritis and wound infection following freshwater exposure or injury",
-      "Classic wound scenarios include lacerations sustained in lakes or rivers and infections after therapeutic or accidental leech application",
-      "Soft-tissue infection can progress from cellulitis to necrotising fasciitis and myonecrosis, particularly in immunocompromised or cirrhotic patients",
-      "Bacteraemia occurs mainly in hosts with liver disease or malignancy and may be rapidly progressive",
-      "Many isolates produce inducible beta-lactamases, so fluoroquinolones, third-generation cephalosporins, aminoglycosides or trimethoprim-sulfamethoxazole are commonly used, guided by susceptibility",
-      "Necrotising soft-tissue disease requires prompt surgical debridement in addition to antibiotics"
+  "pathophysiology": "Aeromonas organisms are ubiquitous aquatic bacteria that cause disease after ingestion of contaminated water or food, or through direct wound inoculation from freshwater or aquatic animals such as leeches and fish. They elaborate a range of virulence factors, including cytotoxic and haemolytic enterotoxins, proteases and adhesins, which disrupt intestinal epithelium to cause diarrhoea and degrade soft tissue to produce spreading cellulitis and necrosis. In hosts with impaired defences, particularly those with chronic liver disease or malignancy, the organism can invade the bloodstream, and its production of inducible beta-lactamases contributes to treatment difficulty.",
+  "additionalDifferentials": [
+   "Vibrio vulnificus wound infection and sepsis",
+   "Group A streptococcal or clostridial necrotising soft-tissue infection",
+   "Bacterial gastroenteritis from Salmonella, Shigella or Campylobacter",
+   "Pseudomonas soft-tissue infection",
+   "Enterotoxigenic Escherichia coli travellers' diarrhoea",
+   "Other Gram-negative bacteraemia in the cirrhotic patient"
+  ],
+  "additionalInvestigations": [
+   "Stool culture on selective media in diarrhoeal illness",
+   "Culture of wound aspirate, tissue or blood in soft-tissue and systemic disease",
+   "Gram stain of exudate showing Gram-negative bacilli",
+   "Antimicrobial susceptibility testing given inducible beta-lactamase production",
+   "Imaging of the affected soft tissues to assess depth and necrosis",
+   "Liver function tests and assessment for immunosuppression to identify risk factors"
+  ],
+  "redFlags": [
+   "Rapidly spreading cellulitis with bullae or crepitus after freshwater or leech exposure",
+   "Sepsis in a patient with cirrhosis or malignancy following aquatic contact",
+   "Severe or bloody diarrhoea with dehydration",
+   "Imaging or operative findings of necrotising fasciitis"
+  ],
+  "prognosis": "Self-limited gastroenteritis and localised wound infections generally do well, whereas necrotising soft-tissue disease and bacteraemia in immunocompromised hosts carry significant mortality without prompt antibiotics and surgery.",
+  "pitfalls": [
+   "Overlooking Aeromonas in wound infections related to leech therapy",
+   "Empirical use of aminopenicillins that are typically ineffective",
+   "Underestimating the speed of soft-tissue progression in vulnerable hosts",
+   "Failing to obtain cultures before starting antibiotics"
+  ],
+  "references": [
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+   "Manson's Tropical Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat established infection with a fluoroquinolone, third-generation cephalosporin, aminoglycoside or trimethoprim-sulfamethoxazole, guided by susceptibility testing",
+   "Avoid reliance on penicillins and early-generation cephalosporins because inducible beta-lactamases render them unreliable",
+   "Manage self-limiting gastroenteritis mainly with oral or intravenous rehydration, reserving antibiotics for severe, dysenteric or prolonged illness and immunocompromised hosts",
+   "Undertake urgent surgical debridement for necrotising fasciitis or myonecrosis alongside broad-spectrum antibiotics",
+   "Provide sepsis resuscitation and source control for bacteraemia, particularly in cirrhotic or immunocompromised patients",
+   "Send wound, tissue or blood cultures with susceptibility testing to direct and de-escalate therapy",
+   "Assess and address host risk factors such as chronic liver disease, malignancy and immunosuppression"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "aeromonas_infection-pathway",
+   "title": "Aeromonas infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Aeromonas species are Gram-negative bacilli widespread in fresh and brackish water, soil and aquatic animals",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly spreading cellulitis with bullae or crepitus after freshwater or leech exposure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Stool culture on selective media in diarrhoeal illness, Culture of wound aspirate, tissue or blood in soft-tissue and systemic disease, Gram stain of exudate showing Gram-negative bacilli"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat established infection with a fluoroquinolone, third-generation cephalosporin, aminoglycoside or trimethoprim-sulfamethoxazole, guided by susceptibility testing"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking Aeromonas in wound infections related to leech therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of aeromonas infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aeromonas_infection-matrix",
+   "title": "Aeromonas infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Aeromonas species are Gram-negative bacilli widespread in fresh and brackish water, soil and aquatic animals",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Aeromonas organisms are ubiquitous aquatic bacteria that cause disease after ingestion of contaminated water or food, or through direct wound inoculation from freshwater or aquatic animals such as leeches and fish. They elaborate a range of virulence factors, including cytotoxic and haemolytic enterotoxins, proteases and adhesins, which disrupt intestinal epithelium to cause diarrhoea and degrade soft tissue to produce spreading cellulitis and necrosis. In hosts with impaired defences, particularly those with chronic liver disease or malignancy, the organism can invade the bloodstream, and its production of inducible beta-lactamases contributes to treatment difficulty.",
-    "additionalDifferentials": [
-      "Vibrio vulnificus wound infection and sepsis",
-      "Group A streptococcal or clostridial necrotising soft-tissue infection",
-      "Bacterial gastroenteritis from Salmonella, Shigella or Campylobacter",
-      "Pseudomonas soft-tissue infection",
-      "Enterotoxigenic Escherichia coli travellers' diarrhoea",
-      "Other Gram-negative bacteraemia in the cirrhotic patient"
+    [
+     "Key Investigations",
+     "Stool culture on selective media in diarrhoeal illness, Culture of wound aspirate, tissue or blood in soft-tissue and systemic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Stool culture on selective media in diarrhoeal illness",
-      "Culture of wound aspirate, tissue or blood in soft-tissue and systemic disease",
-      "Gram stain of exudate showing Gram-negative bacilli",
-      "Antimicrobial susceptibility testing given inducible beta-lactamase production",
-      "Imaging of the affected soft tissues to assess depth and necrosis",
-      "Liver function tests and assessment for immunosuppression to identify risk factors"
+    [
+     "Primary Differentials",
+     "Vibrio vulnificus wound infection and sepsis, Group A streptococcal or clostridial necrotising soft-tissue infection, Bacterial",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly spreading cellulitis with bullae or crepitus after freshwater or leech exposure",
-      "Sepsis in a patient with cirrhosis or malignancy following aquatic contact",
-      "Severe or bloody diarrhoea with dehydration",
-      "Imaging or operative findings of necrotising fasciitis"
+    [
+     "Management Strategy",
+     "Treat established infection with a fluoroquinolone, third-generation cephalosporin, aminoglycoside or",
+     "Core treatment modality"
     ],
-    "prognosis": "Self-limited gastroenteritis and localised wound infections generally do well, whereas necrotising soft-tissue disease and bacteraemia in immunocompromised hosts carry significant mortality without prompt antibiotics and surgery.",
-    "pitfalls": [
-      "Overlooking Aeromonas in wound infections related to leech therapy",
-      "Empirical use of aminopenicillins that are typically ineffective",
-      "Underestimating the speed of soft-tissue progression in vulnerable hosts",
-      "Failing to obtain cultures before starting antibiotics"
-    ],
-    "references": [
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-      "Manson's Tropical Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat established infection with a fluoroquinolone, third-generation cephalosporin, aminoglycoside or trimethoprim-sulfamethoxazole, guided by susceptibility testing",
-      "Avoid reliance on penicillins and early-generation cephalosporins because inducible beta-lactamases render them unreliable",
-      "Manage self-limiting gastroenteritis mainly with oral or intravenous rehydration, reserving antibiotics for severe, dysenteric or prolonged illness and immunocompromised hosts",
-      "Undertake urgent surgical debridement for necrotising fasciitis or myonecrosis alongside broad-spectrum antibiotics",
-      "Provide sepsis resuscitation and source control for bacteraemia, particularly in cirrhotic or immunocompromised patients",
-      "Send wound, tissue or blood cultures with susceptibility testing to direct and de-escalate therapy",
-      "Assess and address host risk factors such as chronic liver disease, malignancy and immunosuppression"
+    [
+     "Clinical Pitfall",
+     "Overlooking Aeromonas in wound infections related to leech therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for aeromonas infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "aeromonas-infection-diagram",
+   "title": "Aeromonas infection: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

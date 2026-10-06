@@ -1,87 +1,182 @@
 {
-  "id": "rhabdomyosarcoma",
-  "name": "Rhabdomyosarcoma (embryonal/alveolar)",
-  "aliases": [
-    "RMS",
-    "embryonal rhabdomyosarcoma",
-    "alveolar rhabdomyosarcoma",
-    "PAX3-FOXO1 fusion sarcoma",
-    "PAX7-FOXO1 fusion sarcoma",
-    "botryoid rhabdomyosarcoma"
+ "id": "rhabdomyosarcoma",
+ "name": "Rhabdomyosarcoma (embryonal/alveolar)",
+ "aliases": [
+  "RMS",
+  "embryonal rhabdomyosarcoma",
+  "alveolar rhabdomyosarcoma",
+  "PAX3-FOXO1 fusion sarcoma",
+  "PAX7-FOXO1 fusion sarcoma",
+  "botryoid rhabdomyosarcoma"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Sarcoma",
+ "specialty": "Medical/Surgical Oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours of Soft Tissue and Bone",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest soft-tissue sarcoma of childhood, with the embryonal subtype predominating in young children and the alveolar subtype more common in older children and adolescents",
+   "Site varies with subtype: head and neck (including orbit and parameningeal), genitourinary tract, and extremities are typical, and presentation reflects local mass effect",
+   "The botryoid variant of embryonal rhabdomyosarcoma forms grape-like polypoid masses in hollow, mucosa-lined organs such as the vagina or bladder",
+   "Fusion status is prognostically decisive: PAX3-FOXO1 or PAX7-FOXO1 fusion-positive tumours (usually alveolar morphology) behave more aggressively than fusion-negative tumours",
+   "Diagnosis rests on skeletal muscle differentiation shown by desmin, myogenin, and MyoD1 immunohistochemistry alongside morphology and molecular testing",
+   "Treatment is risk-stratified multimodality therapy combining multi-agent chemotherapy with surgery and/or radiotherapy for local control",
+   "Parameningeal tumours can extend intracranially and require careful evaluation for meningeal and central nervous system involvement",
+   "Staging includes primary-site MRI, regional nodal assessment, chest CT, whole-body functional imaging, and bone-marrow examination"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Sarcoma",
-  "specialty": "Medical/Surgical Oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours of Soft Tissue and Bone",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest soft-tissue sarcoma of childhood, with the embryonal subtype predominating in young children and the alveolar subtype more common in older children and adolescents",
-      "Site varies with subtype: head and neck (including orbit and parameningeal), genitourinary tract, and extremities are typical, and presentation reflects local mass effect",
-      "The botryoid variant of embryonal rhabdomyosarcoma forms grape-like polypoid masses in hollow, mucosa-lined organs such as the vagina or bladder",
-      "Fusion status is prognostically decisive: PAX3-FOXO1 or PAX7-FOXO1 fusion-positive tumours (usually alveolar morphology) behave more aggressively than fusion-negative tumours",
-      "Diagnosis rests on skeletal muscle differentiation shown by desmin, myogenin, and MyoD1 immunohistochemistry alongside morphology and molecular testing",
-      "Treatment is risk-stratified multimodality therapy combining multi-agent chemotherapy with surgery and/or radiotherapy for local control",
-      "Parameningeal tumours can extend intracranially and require careful evaluation for meningeal and central nervous system involvement",
-      "Staging includes primary-site MRI, regional nodal assessment, chest CT, whole-body functional imaging, and bone-marrow examination"
+  "pathophysiology": "Rhabdomyosarcoma is a malignancy of primitive mesenchymal cells committed to skeletal muscle differentiation but arrested before maturation. The alveolar subtype is characteristically driven by a PAX3-FOXO1 or PAX7-FOXO1 fusion gene that generates a potent chimeric transcription factor promoting proliferation and blocking myogenic maturation. Embryonal tumours generally lack these fusions and instead show a range of alterations, frequently involving the RAS pathway and loss of imprinting at chromosome 11p15. Because fusion status correlates better with behaviour than morphology alone, molecular classification into fusion-positive and fusion-negative disease now guides risk assessment.",
+  "additionalDifferentials": [
+   "Ewing sarcoma and other small round cell tumours",
+   "Neuroblastoma (in infants and young children)",
+   "Lymphoma",
+   "Undifferentiated soft-tissue sarcoma",
+   "Infantile fibrosarcoma and other paediatric spindle-cell tumours",
+   "Benign lesions such as haemangioma or lymphangioma at soft-tissue sites"
+  ],
+  "additionalInvestigations": [
+   "MRI of the primary site to delineate extent and relation to critical structures",
+   "Chest CT for pulmonary metastases",
+   "Whole-body functional imaging for nodal and distant staging",
+   "Bone-marrow aspirate and trephine to detect marrow involvement",
+   "Lumbar puncture and dedicated neuroimaging for parameningeal tumours to assess central nervous system spread",
+   "Biopsy with immunohistochemistry (desmin, myogenin, MyoD1) and molecular testing for FOXO1 fusions"
+  ],
+  "redFlags": [
+   "A parameningeal tumour with cranial nerve palsies, headache, or signs of intracranial extension",
+   "Rapidly growing painless mass in a child, especially at head and neck or genitourinary sites",
+   "Airway or urinary obstruction from a botryoid or pelvic mass",
+   "Features of disseminated disease such as bone pain or cytopenias suggesting marrow involvement"
+  ],
+  "prognosis": "Prognosis is determined by fusion status, stage and clinical group, primary site, patient age, and histological subtype; localised, fusion-negative embryonal tumours at favourable sites do well, whereas fusion-positive, metastatic, or unfavourable-site disease carries a substantially worse outlook.",
+  "pitfalls": [
+   "Assuming morphology alone predicts behaviour rather than confirming fusion status by molecular testing",
+   "Underestimating central nervous system risk in parameningeal disease and omitting appropriate neuraxis staging",
+   "Inadequate biopsy planning that jeopardises subsequent local control",
+   "Overlooking regional lymph node assessment, which is particularly important at extremity and paratesticular sites",
+   "Neglecting long-term surveillance for late effects of chemotherapy and radiotherapy in survivors"
+  ],
+  "references": [
+   "WHO Classification of Tumours of Soft Tissue and Bone",
+   "Enzinger and Weiss's Soft Tissue Tumors"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treatment requires multimodal therapy combining surgery, radiation, and systemic chemotherapy rather than any single modality alone; the chemotherapy backbone described is a vincristine, dactinomycin, and cyclophosphamide combination.",
+   "Refer any suspected or confirmed rhabdomyosarcoma to a multidisciplinary sarcoma or pediatric oncology team before biopsy or definitive local therapy, given the reliance on combined chemotherapy, surgery, and radiation and on fusion status testing to guide treatment.",
+   "For embryonal rhabdomyosarcoma, chemotherapy and radiation are very effective in pediatric disease even when metastatic; in adults, tumors usually regress with chemotherapy but overall survival is worse than in children, and metastasis at presentation or poor chemotherapy response predicts worse outcome.",
+   "For alveolar rhabdomyosarcoma, confirm fusion status with FISH and/or molecular testing (PAX3-FOXO1 versus PAX7-FOXO1) to help guide treatment, since PAX3-FOXO1 fusions may carry a worse prognosis.",
+   "For pleomorphic rhabdomyosarcoma, treatment is primarily surgical since these tumors are less sensitive to systemic therapy; because prognosis is poor, eligible patients receive adjuvant radiation and chemotherapy, with some response reported to anthracycline-and-ifosfamide-based regimens and anecdotal response to gemcitabine-based chemotherapy.",
+   "Radiation therapy is used for local control alongside or instead of surgery depending on site and resectability, and as adjuvant treatment in pleomorphic disease given its poor prognosis.",
+   "Apply risk-stratified treatment intensity based on fusion status, stage, clinical group, primary site, age, and histology, as this is standard oncology practice even though it is not a formal algorithm detailed in the grounding source.",
+   "Do not infer a specific second-line or relapse regimen for embryonal or alveolar disease from this narrative; treat that gap as needing separate, explicitly sourced content.",
+   "Provide ongoing monitoring after chemotherapy, radiation, and/or surgery for treatment response and recurrence, plus surveillance for late treatment effects, as standard oncology practice, though no specific imaging or follow-up interval schedule is specified here.",
+   "Manage adult patients with embryonal, alveolar, or pleomorphic disease with clinicians experienced in this disease given generally worse adult outcomes compared with children and the poor prognosis of pleomorphic disease.",
+   "Spindle cell and sclerosing rhabdomyosarcoma, associated with MYOD1 mutation or VGLL2-related fusions, are a rare subgroup for which a distinct treatment approach was not described in the grounding source."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "rhabdomyosarcoma-pathway",
+   "title": "Rhabdomyosarcoma (embryonal/alveolar): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest soft-tissue sarcoma of childhood, with the embryonal subtype predominating in young children and the alveolar subtype more common in older children and adolescents",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A parameningeal tumour with cranial nerve palsies, headache, or signs of intracranial extension",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the primary site to delineate extent and relation to critical structures, Chest CT for pulmonary metastases, Whole-body functional imaging for nodal and distant staging"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treatment requires multimodal therapy combining surgery, radiation, and systemic chemotherapy rather than any single modality alone; the chemotherapy backbone described is a vincristine, dactinomycin, and"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming morphology alone predicts behaviour rather than confirming fusion status by molecular testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rhabdomyosarcoma (embryonal/alveolar)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rhabdomyosarcoma-matrix",
+   "title": "Rhabdomyosarcoma (embryonal/alveolar): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest soft-tissue sarcoma of childhood, with the embryonal subtype predominating in young children and the alveolar",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rhabdomyosarcoma is a malignancy of primitive mesenchymal cells committed to skeletal muscle differentiation but arrested before maturation. The alveolar subtype is characteristically driven by a PAX3-FOXO1 or PAX7-FOXO1 fusion gene that generates a potent chimeric transcription factor promoting proliferation and blocking myogenic maturation. Embryonal tumours generally lack these fusions and instead show a range of alterations, frequently involving the RAS pathway and loss of imprinting at chromosome 11p15. Because fusion status correlates better with behaviour than morphology alone, molecular classification into fusion-positive and fusion-negative disease now guides risk assessment.",
-    "additionalDifferentials": [
-      "Ewing sarcoma and other small round cell tumours",
-      "Neuroblastoma (in infants and young children)",
-      "Lymphoma",
-      "Undifferentiated soft-tissue sarcoma",
-      "Infantile fibrosarcoma and other paediatric spindle-cell tumours",
-      "Benign lesions such as haemangioma or lymphangioma at soft-tissue sites"
+    [
+     "Key Investigations",
+     "MRI of the primary site to delineate extent and relation to critical structures, Chest CT for pulmonary metastases, Whole-body",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the primary site to delineate extent and relation to critical structures",
-      "Chest CT for pulmonary metastases",
-      "Whole-body functional imaging for nodal and distant staging",
-      "Bone-marrow aspirate and trephine to detect marrow involvement",
-      "Lumbar puncture and dedicated neuroimaging for parameningeal tumours to assess central nervous system spread",
-      "Biopsy with immunohistochemistry (desmin, myogenin, MyoD1) and molecular testing for FOXO1 fusions"
+    [
+     "Primary Differentials",
+     "Ewing sarcoma and other small round cell tumours, Neuroblastoma (in infants and young children), Lymphoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A parameningeal tumour with cranial nerve palsies, headache, or signs of intracranial extension",
-      "Rapidly growing painless mass in a child, especially at head and neck or genitourinary sites",
-      "Airway or urinary obstruction from a botryoid or pelvic mass",
-      "Features of disseminated disease such as bone pain or cytopenias suggesting marrow involvement"
+    [
+     "Management Strategy",
+     "Treatment requires multimodal therapy combining surgery, radiation, and systemic chemotherapy rather than any single modality",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is determined by fusion status, stage and clinical group, primary site, patient age, and histological subtype; localised, fusion-negative embryonal tumours at favourable sites do well, whereas fusion-positive, metastatic, or unfavourable-site disease carries a substantially worse outlook.",
-    "pitfalls": [
-      "Assuming morphology alone predicts behaviour rather than confirming fusion status by molecular testing",
-      "Underestimating central nervous system risk in parameningeal disease and omitting appropriate neuraxis staging",
-      "Inadequate biopsy planning that jeopardises subsequent local control",
-      "Overlooking regional lymph node assessment, which is particularly important at extremity and paratesticular sites",
-      "Neglecting long-term surveillance for late effects of chemotherapy and radiotherapy in survivors"
-    ],
-    "references": [
-      "WHO Classification of Tumours of Soft Tissue and Bone",
-      "Enzinger and Weiss's Soft Tissue Tumors"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treatment requires multimodal therapy combining surgery, radiation, and systemic chemotherapy rather than any single modality alone; the chemotherapy backbone described is a vincristine, dactinomycin, and cyclophosphamide combination.",
-      "Refer any suspected or confirmed rhabdomyosarcoma to a multidisciplinary sarcoma or pediatric oncology team before biopsy or definitive local therapy, given the reliance on combined chemotherapy, surgery, and radiation and on fusion status testing to guide treatment.",
-      "For embryonal rhabdomyosarcoma, chemotherapy and radiation are very effective in pediatric disease even when metastatic; in adults, tumors usually regress with chemotherapy but overall survival is worse than in children, and metastasis at presentation or poor chemotherapy response predicts worse outcome.",
-      "For alveolar rhabdomyosarcoma, confirm fusion status with FISH and/or molecular testing (PAX3-FOXO1 versus PAX7-FOXO1) to help guide treatment, since PAX3-FOXO1 fusions may carry a worse prognosis.",
-      "For pleomorphic rhabdomyosarcoma, treatment is primarily surgical since these tumors are less sensitive to systemic therapy; because prognosis is poor, eligible patients receive adjuvant radiation and chemotherapy, with some response reported to anthracycline-and-ifosfamide-based regimens and anecdotal response to gemcitabine-based chemotherapy.",
-      "Radiation therapy is used for local control alongside or instead of surgery depending on site and resectability, and as adjuvant treatment in pleomorphic disease given its poor prognosis.",
-      "Apply risk-stratified treatment intensity based on fusion status, stage, clinical group, primary site, age, and histology, as this is standard oncology practice even though it is not a formal algorithm detailed in the grounding source.",
-      "Do not infer a specific second-line or relapse regimen for embryonal or alveolar disease from this narrative; treat that gap as needing separate, explicitly sourced content.",
-      "Provide ongoing monitoring after chemotherapy, radiation, and/or surgery for treatment response and recurrence, plus surveillance for late treatment effects, as standard oncology practice, though no specific imaging or follow-up interval schedule is specified here.",
-      "Manage adult patients with embryonal, alveolar, or pleomorphic disease with clinicians experienced in this disease given generally worse adult outcomes compared with children and the poor prognosis of pleomorphic disease.",
-      "Spindle cell and sclerosing rhabdomyosarcoma, associated with MYOD1 mutation or VGLL2-related fusions, are a rare subgroup for which a distinct treatment approach was not described in the grounding source."
+    [
+     "Clinical Pitfall",
+     "Assuming morphology alone predicts behaviour rather than confirming fusion status by molecular testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rhabdomyosarcoma (embryonal/alveolar)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rhabdomyosarcoma-diagram",
+   "title": "Rhabdomyosarcoma (embryonal/alveolar): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

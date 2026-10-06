@@ -1,76 +1,171 @@
 {
-  "id": "gastroesophageal_reflux_disease",
-  "name": "Gastro-oesophageal reflux disease",
-  "aliases": [
-    "GORD",
-    "GERD",
-    "acid reflux disease"
+ "id": "gastroesophageal_reflux_disease",
+ "name": "Gastro-oesophageal reflux disease",
+ "aliases": [
+  "GORD",
+  "GERD",
+  "acid reflux disease"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Gastroenterology references and reflux guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Troublesome symptoms or complications arising from reflux of gastric contents into the oesophagus",
+   "The cardinal symptoms are heartburn and acid regurgitation, and there may be atypical or extra-oesophageal features such as chest pain, chronic cough or laryngeal symptoms",
+   "It is broadly divided into erosive oesophagitis and non-erosive reflux disease based on endoscopic findings",
+   "Typical uncomplicated symptoms are often managed empirically with lifestyle measures and acid suppression without initial endoscopy",
+   "Alarm features such as dysphagia, weight loss, bleeding or anaemia warrant prompt endoscopy",
+   "Complications include peptic stricture, Barrett oesophagus and, rarely, oesophageal adenocarcinoma"
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Gastroenterology references and reflux guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Troublesome symptoms or complications arising from reflux of gastric contents into the oesophagus",
-      "The cardinal symptoms are heartburn and acid regurgitation, and there may be atypical or extra-oesophageal features such as chest pain, chronic cough or laryngeal symptoms",
-      "It is broadly divided into erosive oesophagitis and non-erosive reflux disease based on endoscopic findings",
-      "Typical uncomplicated symptoms are often managed empirically with lifestyle measures and acid suppression without initial endoscopy",
-      "Alarm features such as dysphagia, weight loss, bleeding or anaemia warrant prompt endoscopy",
-      "Complications include peptic stricture, Barrett oesophagus and, rarely, oesophageal adenocarcinoma"
+  "pathophysiology": "Gastro-oesophageal reflux disease results from excessive reflux of gastric contents across a dysfunctional anti-reflux barrier at the gastro-oesophageal junction. Transient lower oesophageal sphincter relaxations, a hypotensive sphincter, hiatus hernia and impaired oesophageal clearance allow acidic (and sometimes non-acidic) refluxate to contact the oesophageal mucosa. Prolonged acid exposure injures the mucosa, causing oesophagitis and, over time, metaplastic and stricturing changes, while symptoms also depend on mucosal sensitivity.",
+  "additionalDifferentials": [
+   "Functional heartburn",
+   "Reflux hypersensitivity",
+   "Eosinophilic oesophagitis",
+   "Peptic ulcer disease",
+   "Cardiac chest pain",
+   "Oesophageal motility disorder or malignancy"
+  ],
+  "additionalInvestigations": [
+   "Empirical trial of acid suppression for typical symptoms",
+   "Upper gastrointestinal endoscopy for alarm features or refractory symptoms",
+   "Ambulatory reflux (pH or pH-impedance) monitoring to confirm reflux and correlate symptoms",
+   "Oesophageal manometry before anti-reflux surgery",
+   "Biopsy to assess for Barrett oesophagus or eosinophilic oesophagitis"
+  ],
+  "redFlags": [
+   "Dysphagia or odynophagia",
+   "Weight loss or gastrointestinal bleeding",
+   "Iron-deficiency anaemia",
+   "New symptoms in an older patient or a suspicious mass"
+  ],
+  "prognosis": "Most patients achieve good symptom control with lifestyle measures and acid suppression; a minority develop complications such as stricture or Barrett oesophagus that require ongoing surveillance or intervention.",
+  "pitfalls": [
+   "Attributing symptoms to reflux without confirming it in refractory cases",
+   "Missing eosinophilic oesophagitis as a cause of reflux-like symptoms and dysphagia",
+   "Overlooking cardiac causes of chest pain",
+   "Ignoring alarm features that mandate endoscopy"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Reflux disease clinical guidelines (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute lifestyle measures: weight reduction, head-of-bed elevation, avoidance of late meals and dietary triggers, and smoking cessation",
+   "Acid suppression with a proton-pump inhibitor is the pharmacological mainstay, with H2-receptor antagonists and alginate or antacid preparations as adjuncts or for milder disease",
+   "Arrange prompt upper GI endoscopy for alarm features such as dysphagia, weight loss, bleeding or anaemia, or for refractory symptoms",
+   "Confirm reflux with ambulatory pH-impedance monitoring and assess motility with oesophageal manometry before considering surgery",
+   "Offer anti-reflux surgery such as fundoplication, or an endoscopic anti-reflux procedure, for refractory or regurgitation-predominant disease",
+   "Undertake endoscopic dilatation of peptic strictures and surveillance of Barrett oesophagus for dysplasia",
+   "Continue long-term acid suppression at the lowest effective dose for relapsing or complicated disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gastroesophageal_reflux_disease-pathway",
+   "title": "Gastro-oesophageal reflux disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Troublesome symptoms or complications arising from reflux of gastric contents into the oesophagus",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Dysphagia or odynophagia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Empirical trial of acid suppression for typical symptoms, Upper gastrointestinal endoscopy for alarm features or refractory symptoms, Ambulatory reflux (pH or pH-impedance) monitoring to confirm reflux and correlate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute lifestyle measures: weight reduction, head-of-bed elevation, avoidance of late meals and dietary triggers, and smoking cessation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing symptoms to reflux without confirming it in refractory cases"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gastro-oesophageal reflux disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gastroesophageal_reflux_disease-matrix",
+   "title": "Gastro-oesophageal reflux disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Troublesome symptoms or complications arising from reflux of gastric contents into the oesophagus",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Gastro-oesophageal reflux disease results from excessive reflux of gastric contents across a dysfunctional anti-reflux barrier at the gastro-oesophageal junction. Transient lower oesophageal sphincter relaxations, a hypotensive sphincter, hiatus hernia and impaired oesophageal clearance allow acidic (and sometimes non-acidic) refluxate to contact the oesophageal mucosa. Prolonged acid exposure injures the mucosa, causing oesophagitis and, over time, metaplastic and stricturing changes, while symptoms also depend on mucosal sensitivity.",
-    "additionalDifferentials": [
-      "Functional heartburn",
-      "Reflux hypersensitivity",
-      "Eosinophilic oesophagitis",
-      "Peptic ulcer disease",
-      "Cardiac chest pain",
-      "Oesophageal motility disorder or malignancy"
+    [
+     "Key Investigations",
+     "Empirical trial of acid suppression for typical symptoms, Upper gastrointestinal endoscopy for alarm features or refractory",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Empirical trial of acid suppression for typical symptoms",
-      "Upper gastrointestinal endoscopy for alarm features or refractory symptoms",
-      "Ambulatory reflux (pH or pH-impedance) monitoring to confirm reflux and correlate symptoms",
-      "Oesophageal manometry before anti-reflux surgery",
-      "Biopsy to assess for Barrett oesophagus or eosinophilic oesophagitis"
+    [
+     "Primary Differentials",
+     "Functional heartburn, Reflux hypersensitivity, Eosinophilic oesophagitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Dysphagia or odynophagia",
-      "Weight loss or gastrointestinal bleeding",
-      "Iron-deficiency anaemia",
-      "New symptoms in an older patient or a suspicious mass"
+    [
+     "Management Strategy",
+     "Institute lifestyle measures: weight reduction, head-of-bed elevation, avoidance of late meals and dietary triggers, and smoking",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients achieve good symptom control with lifestyle measures and acid suppression; a minority develop complications such as stricture or Barrett oesophagus that require ongoing surveillance or intervention.",
-    "pitfalls": [
-      "Attributing symptoms to reflux without confirming it in refractory cases",
-      "Missing eosinophilic oesophagitis as a cause of reflux-like symptoms and dysphagia",
-      "Overlooking cardiac causes of chest pain",
-      "Ignoring alarm features that mandate endoscopy"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Reflux disease clinical guidelines (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute lifestyle measures: weight reduction, head-of-bed elevation, avoidance of late meals and dietary triggers, and smoking cessation",
-      "Acid suppression with a proton-pump inhibitor is the pharmacological mainstay, with H2-receptor antagonists and alginate or antacid preparations as adjuncts or for milder disease",
-      "Arrange prompt upper GI endoscopy for alarm features such as dysphagia, weight loss, bleeding or anaemia, or for refractory symptoms",
-      "Confirm reflux with ambulatory pH-impedance monitoring and assess motility with oesophageal manometry before considering surgery",
-      "Offer anti-reflux surgery such as fundoplication, or an endoscopic anti-reflux procedure, for refractory or regurgitation-predominant disease",
-      "Undertake endoscopic dilatation of peptic strictures and surveillance of Barrett oesophagus for dysplasia",
-      "Continue long-term acid suppression at the lowest effective dose for relapsing or complicated disease"
+    [
+     "Clinical Pitfall",
+     "Attributing symptoms to reflux without confirming it in refractory cases",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gastro-oesophageal reflux disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gastroesophageal-reflux-disease-diagram",
+   "title": "Gastro-oesophageal reflux disease: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

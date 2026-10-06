@@ -1,77 +1,172 @@
 {
-  "id": "cyclic_neutropenia",
-  "name": "Cyclic neutropenia",
-  "aliases": [
-    "cyclical neutropenia",
-    "ELANE-related cyclic neutropenia",
-    "periodic neutropenia"
+ "id": "cyclic_neutropenia",
+ "name": "Cyclic neutropenia",
+ "aliases": [
+  "cyclical neutropenia",
+  "ELANE-related cyclic neutropenia",
+  "periodic neutropenia"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Genetics",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant disorder caused by ELANE mutations in which neutrophil counts oscillate, typically with a regular cycle of about three weeks",
+   "During the nadir, patients develop recurrent fever, mouth ulcers, gingivitis, cervical adenopathy, and skin or respiratory infections",
+   "The characteristic periodicity distinguishes it from severe congenital neutropenia, which is persistent rather than oscillating",
+   "Diagnosis requires serial blood counts two or three times weekly for six to eight weeks to capture the cyclical pattern",
+   "Unlike severe congenital neutropenia, cyclic neutropenia carries little or no increased risk of leukaemic transformation",
+   "G-CSF shortens and shallows the neutrophil nadir and reduces infection during vulnerable periods",
+   "Monocytes and other cell lines often oscillate reciprocally, and symptoms tend to lessen with age"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Genetics",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant disorder caused by ELANE mutations in which neutrophil counts oscillate, typically with a regular cycle of about three weeks",
-      "During the nadir, patients develop recurrent fever, mouth ulcers, gingivitis, cervical adenopathy, and skin or respiratory infections",
-      "The characteristic periodicity distinguishes it from severe congenital neutropenia, which is persistent rather than oscillating",
-      "Diagnosis requires serial blood counts two or three times weekly for six to eight weeks to capture the cyclical pattern",
-      "Unlike severe congenital neutropenia, cyclic neutropenia carries little or no increased risk of leukaemic transformation",
-      "G-CSF shortens and shallows the neutrophil nadir and reduces infection during vulnerable periods",
-      "Monocytes and other cell lines often oscillate reciprocally, and symptoms tend to lessen with age"
+  "pathophysiology": "Cyclic neutropenia is caused by heterozygous mutations in ELANE, the gene for neutrophil elastase, which produce a misfolded protein that stresses developing myeloid precursors and periodically curtails granulopoiesis. The oscillation reflects a disturbance in the feedback regulation of the haematopoietic stem and progenitor compartment, so neutrophil production rises and falls in a regular rhythm of roughly three weeks. During each production trough the circulating neutrophil count falls to very low levels, leaving the patient transiently susceptible to bacterial infection and mucosal ulceration, before recovering as the next wave of granulopoiesis emerges. Although the same gene is implicated in severe congenital neutropenia, the mutational spectrum and cellular consequences differ, which is thought to explain why cyclic disease does not share the marked predisposition to myeloid malignancy.",
+  "additionalDifferentials": [
+   "Severe congenital neutropenia (persistent, not cyclical)",
+   "Autoimmune neutropenia",
+   "Chronic idiopathic neutropenia",
+   "PFAPA and other periodic fever syndromes",
+   "Infection- or drug-induced transient neutropenia",
+   "Large granular lymphocyte-associated neutropenia"
+  ],
+  "additionalInvestigations": [
+   "Serial full blood counts two to three times weekly over six to eight weeks to document the cycle",
+   "ELANE genetic testing to confirm the diagnosis",
+   "Bone marrow examination in atypical cases to assess maturation and exclude other pathology",
+   "Antineutrophil antibody testing to exclude autoimmune neutropenia",
+   "Inflammatory markers and cultures during febrile episodes to guide infection management",
+   "Dental and oral assessment for recurrent gingivitis and ulceration"
+  ],
+  "redFlags": [
+   "Serious deep-seated infection or sepsis during a neutrophil nadir",
+   "Clostridial or necrotising soft-tissue infection, a recognised hazard during severe nadirs",
+   "Failure of counts to recover between cycles, prompting reconsideration of severe congenital neutropenia",
+   "Persistent oral or perianal infection despite treatment"
+  ],
+  "prognosis": "Cyclic neutropenia generally has a good long-term outlook, symptoms often attenuate with age, and it lacks the marked leukaemic risk of severe congenital neutropenia, though infections during nadirs can occasionally be life-threatening.",
+  "pitfalls": [
+   "Making the diagnosis from a single blood count rather than serial sampling across a cycle",
+   "Confusing it with severe congenital neutropenia and overstating the leukaemia risk",
+   "Underestimating the danger of clostridial or necrotising infection during a deep nadir",
+   "Attributing recurrent mouth ulcers to an unrelated cause and missing the periodicity"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use granulocyte colony-stimulating factor to shorten and shallow the neutrophil nadir and reduce infections during vulnerable troughs",
+   "Maintain meticulous oral and dental hygiene with antiseptic mouthwash to limit recurrent gingivitis and mucosal ulceration",
+   "Treat febrile episodes during the nadir promptly, taking cultures and starting broad-spectrum antibiotics as for febrile neutropenia",
+   "Track the cycle with serial full blood counts and adjust prophylaxis around predictable troughs",
+   "Provide genetic counselling for this autosomal dominant ELANE-related disorder and offer testing to affected relatives",
+   "Coordinate care between haematology and dentistry, with reassurance that leukaemic transformation risk is low unlike severe congenital neutropenia"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cyclic_neutropenia-pathway",
+   "title": "Cyclic neutropenia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant disorder caused by ELANE mutations in which neutrophil counts oscillate, typically with a regular cycle of about three weeks",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Serious deep-seated infection or sepsis during a neutrophil nadir",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial full blood counts two to three times weekly over six to eight weeks to document the cycle, ELANE genetic testing to confirm the diagnosis, Bone marrow examination in atypical cases to assess maturation and exclude"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use granulocyte colony-stimulating factor to shorten and shallow the neutrophil nadir and reduce infections during vulnerable troughs"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Making the diagnosis from a single blood count rather than serial sampling across a cycle"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cyclic neutropenia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cyclic_neutropenia-matrix",
+   "title": "Cyclic neutropenia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant disorder caused by ELANE mutations in which neutrophil counts oscillate, typically with a regular cycle of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cyclic neutropenia is caused by heterozygous mutations in ELANE, the gene for neutrophil elastase, which produce a misfolded protein that stresses developing myeloid precursors and periodically curtails granulopoiesis. The oscillation reflects a disturbance in the feedback regulation of the haematopoietic stem and progenitor compartment, so neutrophil production rises and falls in a regular rhythm of roughly three weeks. During each production trough the circulating neutrophil count falls to very low levels, leaving the patient transiently susceptible to bacterial infection and mucosal ulceration, before recovering as the next wave of granulopoiesis emerges. Although the same gene is implicated in severe congenital neutropenia, the mutational spectrum and cellular consequences differ, which is thought to explain why cyclic disease does not share the marked predisposition to myeloid malignancy.",
-    "additionalDifferentials": [
-      "Severe congenital neutropenia (persistent, not cyclical)",
-      "Autoimmune neutropenia",
-      "Chronic idiopathic neutropenia",
-      "PFAPA and other periodic fever syndromes",
-      "Infection- or drug-induced transient neutropenia",
-      "Large granular lymphocyte-associated neutropenia"
+    [
+     "Key Investigations",
+     "Serial full blood counts two to three times weekly over six to eight weeks to document the cycle, ELANE genetic testing to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial full blood counts two to three times weekly over six to eight weeks to document the cycle",
-      "ELANE genetic testing to confirm the diagnosis",
-      "Bone marrow examination in atypical cases to assess maturation and exclude other pathology",
-      "Antineutrophil antibody testing to exclude autoimmune neutropenia",
-      "Inflammatory markers and cultures during febrile episodes to guide infection management",
-      "Dental and oral assessment for recurrent gingivitis and ulceration"
+    [
+     "Primary Differentials",
+     "Severe congenital neutropenia (persistent, not cyclical), Autoimmune neutropenia, Chronic idiopathic neutropenia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Serious deep-seated infection or sepsis during a neutrophil nadir",
-      "Clostridial or necrotising soft-tissue infection, a recognised hazard during severe nadirs",
-      "Failure of counts to recover between cycles, prompting reconsideration of severe congenital neutropenia",
-      "Persistent oral or perianal infection despite treatment"
+    [
+     "Management Strategy",
+     "Use granulocyte colony-stimulating factor to shorten and shallow the neutrophil nadir and reduce infections during vulnerable",
+     "Core treatment modality"
     ],
-    "prognosis": "Cyclic neutropenia generally has a good long-term outlook, symptoms often attenuate with age, and it lacks the marked leukaemic risk of severe congenital neutropenia, though infections during nadirs can occasionally be life-threatening.",
-    "pitfalls": [
-      "Making the diagnosis from a single blood count rather than serial sampling across a cycle",
-      "Confusing it with severe congenital neutropenia and overstating the leukaemia risk",
-      "Underestimating the danger of clostridial or necrotising infection during a deep nadir",
-      "Attributing recurrent mouth ulcers to an unrelated cause and missing the periodicity"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use granulocyte colony-stimulating factor to shorten and shallow the neutrophil nadir and reduce infections during vulnerable troughs",
-      "Maintain meticulous oral and dental hygiene with antiseptic mouthwash to limit recurrent gingivitis and mucosal ulceration",
-      "Treat febrile episodes during the nadir promptly, taking cultures and starting broad-spectrum antibiotics as for febrile neutropenia",
-      "Track the cycle with serial full blood counts and adjust prophylaxis around predictable troughs",
-      "Provide genetic counselling for this autosomal dominant ELANE-related disorder and offer testing to affected relatives",
-      "Coordinate care between haematology and dentistry, with reassurance that leukaemic transformation risk is low unlike severe congenital neutropenia"
+    [
+     "Clinical Pitfall",
+     "Making the diagnosis from a single blood count rather than serial sampling across a cycle",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cyclic neutropenia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cyclic-neutropenia-diagram",
+   "title": "Cyclic neutropenia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

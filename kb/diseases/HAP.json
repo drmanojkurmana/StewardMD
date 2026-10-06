@@ -199,5 +199,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hbf7e6a4f"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hap-dx-algo",
+      "title": "Hospital Acquired Pneumonia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "VAP is defined as pneumonia with onset 48 hours or more after the start of mechanical ventilation; research on HAP has centred on VAP, but the same principles extend to ventilated HAP and to non-ICU HAP (p.1072).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: New or worsening hypoxaemia / serial decline in oxygenation in a ventilated patient (may herald pneumonia before other signs) (p.1073)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Quantitative culture of deep respiratory tract samples to separate colonisation from true infection; the more distal the sample, the more specific the result and the lower the colony-count threshold (e.g., endotracheal"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames empirical management around two risk axes rather than a discrete severity score: (1) presence or absence of risk factors for MDR pathogens (prior antibiotic therapy, prior hospitalisation, local"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Applying CAP-type clinical criteria to ventilated patients consistently overdiagnoses VAP, owing to frequent tracheal colonisation, multiple alternative causes of radiographic infiltrates, and many other sources of fever"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hospital acquired pneumonia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hap-matrix",
+      "title": "Hospital Acquired Pneumonia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "VAP is defined as pneumonia with onset 48 hours or more after the start of mechanical ventilation; research on HAP has centred on",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Quantitative culture of deep respiratory tract samples to separate colonisation from true infection; the more distal the sample,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Purulent tracheobronchitis (notably in chronic ventilator units, where it can impede weaning) (p.1073)",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "New or worsening hypoxaemia / serial decline in oxygenation in a ventilated patient (may herald pneumonia before other signs)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Applying CAP-type clinical criteria to ventilated patients consistently overdiagnoses VAP, owing to frequent tracheal",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hospital acquired pneumonia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "hap-diagram",
+      "title": "Hospital Acquired Pneumonia: Pulmonary & Chest Radiograph Diagnostic Schematic",
+      "type": "xray",
+      "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+      "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Airway Tree",
+          "description": "Tracheobronchial branching down to lobar and segmental divisions."
+        },
+        {
+          "label": "Parenchyma",
+          "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+        },
+        {
+          "label": "Pleural Space",
+          "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+        }
+      ]
+    }
+  ]
 }

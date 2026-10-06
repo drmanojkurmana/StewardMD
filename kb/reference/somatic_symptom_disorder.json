@@ -1,80 +1,175 @@
 {
-  "id": "somatic_symptom_disorder",
-  "name": "Somatic symptom disorder",
-  "aliases": [
-    "SSD",
-    "somatization",
-    "somatisation disorder",
-    "somatoform disorder"
+ "id": "somatic_symptom_disorder",
+ "name": "Somatic symptom disorder",
+ "aliases": [
+  "SSD",
+  "somatization",
+  "somatisation disorder",
+  "somatoform disorder"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by one or more distressing physical symptoms accompanied by excessive thoughts, feelings, or behaviours related to those symptoms",
+   "The diagnosis rests on the disproportionate and persistent nature of the response, not on whether the symptoms are medically explained",
+   "Features include disproportionate and persistent worry about the seriousness of symptoms, high health-related anxiety, and excessive time and energy devoted to symptoms or health concerns",
+   "Symptoms are typically persistent (often more than six months) even if individual complaints vary over time",
+   "Distinguish from illness anxiety disorder (preoccupation with having illness with few or no somatic symptoms) and from conversion disorder (neurological symptoms incompatible with recognised disease)",
+   "Management principles emphasise a consistent single coordinating clinician, regular scheduled visits, limiting unnecessary tests and referrals, and validating distress while gently shifting focus toward functioning",
+   "Cognitive behavioural therapy is the best-supported psychotherapy; treat comorbid depression and anxiety, where SSRIs or SNRIs may help",
+   "A genuine coexisting medical illness does not exclude the diagnosis, so maintain appropriate but restrained medical vigilance"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by one or more distressing physical symptoms accompanied by excessive thoughts, feelings, or behaviours related to those symptoms",
-      "The diagnosis rests on the disproportionate and persistent nature of the response, not on whether the symptoms are medically explained",
-      "Features include disproportionate and persistent worry about the seriousness of symptoms, high health-related anxiety, and excessive time and energy devoted to symptoms or health concerns",
-      "Symptoms are typically persistent (often more than six months) even if individual complaints vary over time",
-      "Distinguish from illness anxiety disorder (preoccupation with having illness with few or no somatic symptoms) and from conversion disorder (neurological symptoms incompatible with recognised disease)",
-      "Management principles emphasise a consistent single coordinating clinician, regular scheduled visits, limiting unnecessary tests and referrals, and validating distress while gently shifting focus toward functioning",
-      "Cognitive behavioural therapy is the best-supported psychotherapy; treat comorbid depression and anxiety, where SSRIs or SNRIs may help",
-      "A genuine coexisting medical illness does not exclude the diagnosis, so maintain appropriate but restrained medical vigilance"
+  "pathophysiology": "Somatic symptom disorder is understood through a biopsychosocial model in which heightened attention to and amplification of bodily sensations, cognitive misinterpretation of benign symptoms as dangerous, and autonomic and stress responses interact. Predisposing factors include early adverse experiences, trauma, comorbid anxiety and depression, and learned illness behaviour, with reinforcement from repeated medical attention perpetuating the pattern.",
+  "additionalDifferentials": [
+   "Illness anxiety disorder",
+   "Conversion disorder (functional neurological symptom disorder)",
+   "Factitious disorder and malingering",
+   "Major depressive disorder and anxiety disorders with somatic features",
+   "Panic disorder",
+   "Undiagnosed genuine medical illness",
+   "Body dysmorphic disorder"
+  ],
+  "additionalInvestigations": [
+   "Focused, proportionate medical evaluation guided by objective findings rather than repeated broad testing",
+   "Review of prior investigations to avoid duplication",
+   "Screening for comorbid depression and anxiety",
+   "Assessment of functional impairment and healthcare utilisation patterns"
+  ],
+  "redFlags": [
+   "New objective clinical signs suggesting an emergent genuine medical condition",
+   "Suicidal ideation associated with comorbid depression",
+   "Escalating analgesic or sedative use and dependence",
+   "Iatrogenic harm from repeated invasive investigations or procedures"
+  ],
+  "prognosis": "Somatic symptom disorder is often chronic and fluctuating, but consistent, coordinated care can reduce distress, unnecessary investigations, and healthcare costs while improving function. Prognosis is worse with prolonged illness, multiple comorbidities, and ongoing reinforcement through repeated medical intervention.",
+  "pitfalls": [
+   "Ordering repeated investigations and referrals that reinforce illness behaviour and risk iatrogenic harm",
+   "Dismissing symptoms as not real, which damages the therapeutic alliance",
+   "Assuming the diagnosis excludes genuine disease and missing a new medical problem",
+   "Failing to identify and treat comorbid depression and anxiety",
+   "Lack of a single coordinating clinician leading to fragmented, duplicated care"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Establish a single coordinating clinician offering regular, scheduled appointments rather than visits driven by symptom escalation",
+   "Limit unnecessary investigations, referrals and interventions while validating the reality of the patient's distress",
+   "Cognitive behavioural therapy as the core psychological treatment to reframe catastrophic interpretation of bodily symptoms",
+   "Treat comorbid depression and anxiety, including with antidepressants such as SSRIs or SNRIs where indicated",
+   "Shift the focus of care from eliminating symptoms towards improving daily functioning and coping",
+   "Encourage graded activity and structured exercise as rehabilitative measures",
+   "Coordinate care across primary care, psychiatry and relevant specialists to avoid fragmented, duplicated management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "somatic_symptom_disorder-pathway",
+   "title": "Somatic symptom disorder: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by one or more distressing physical symptoms accompanied by excessive thoughts, feelings, or behaviours related to those symptoms",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New objective clinical signs suggesting an emergent genuine medical condition",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Focused, proportionate medical evaluation guided by objective findings rather than repeated broad testing, Review of prior investigations to avoid duplication, Screening for comorbid depression and anxiety"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Establish a single coordinating clinician offering regular, scheduled appointments rather than visits driven by symptom escalation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Ordering repeated investigations and referrals that reinforce illness behaviour and risk iatrogenic harm"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of somatic symptom disorder."
+  }
+ ],
+ "tables": [
+  {
+   "id": "somatic_symptom_disorder-matrix",
+   "title": "Somatic symptom disorder: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by one or more distressing physical symptoms accompanied by excessive thoughts, feelings, or behaviours related to those",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Somatic symptom disorder is understood through a biopsychosocial model in which heightened attention to and amplification of bodily sensations, cognitive misinterpretation of benign symptoms as dangerous, and autonomic and stress responses interact. Predisposing factors include early adverse experiences, trauma, comorbid anxiety and depression, and learned illness behaviour, with reinforcement from repeated medical attention perpetuating the pattern.",
-    "additionalDifferentials": [
-      "Illness anxiety disorder",
-      "Conversion disorder (functional neurological symptom disorder)",
-      "Factitious disorder and malingering",
-      "Major depressive disorder and anxiety disorders with somatic features",
-      "Panic disorder",
-      "Undiagnosed genuine medical illness",
-      "Body dysmorphic disorder"
+    [
+     "Key Investigations",
+     "Focused, proportionate medical evaluation guided by objective findings rather than repeated broad testing, Review of prior",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Focused, proportionate medical evaluation guided by objective findings rather than repeated broad testing",
-      "Review of prior investigations to avoid duplication",
-      "Screening for comorbid depression and anxiety",
-      "Assessment of functional impairment and healthcare utilisation patterns"
+    [
+     "Primary Differentials",
+     "Illness anxiety disorder, Conversion disorder (functional neurological symptom disorder), Factitious disorder and malingering",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New objective clinical signs suggesting an emergent genuine medical condition",
-      "Suicidal ideation associated with comorbid depression",
-      "Escalating analgesic or sedative use and dependence",
-      "Iatrogenic harm from repeated invasive investigations or procedures"
+    [
+     "Management Strategy",
+     "Establish a single coordinating clinician offering regular, scheduled appointments rather than visits driven by symptom escalation",
+     "Core treatment modality"
     ],
-    "prognosis": "Somatic symptom disorder is often chronic and fluctuating, but consistent, coordinated care can reduce distress, unnecessary investigations, and healthcare costs while improving function. Prognosis is worse with prolonged illness, multiple comorbidities, and ongoing reinforcement through repeated medical intervention.",
-    "pitfalls": [
-      "Ordering repeated investigations and referrals that reinforce illness behaviour and risk iatrogenic harm",
-      "Dismissing symptoms as not real, which damages the therapeutic alliance",
-      "Assuming the diagnosis excludes genuine disease and missing a new medical problem",
-      "Failing to identify and treat comorbid depression and anxiety",
-      "Lack of a single coordinating clinician leading to fragmented, duplicated care"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Establish a single coordinating clinician offering regular, scheduled appointments rather than visits driven by symptom escalation",
-      "Limit unnecessary investigations, referrals and interventions while validating the reality of the patient's distress",
-      "Cognitive behavioural therapy as the core psychological treatment to reframe catastrophic interpretation of bodily symptoms",
-      "Treat comorbid depression and anxiety, including with antidepressants such as SSRIs or SNRIs where indicated",
-      "Shift the focus of care from eliminating symptoms towards improving daily functioning and coping",
-      "Encourage graded activity and structured exercise as rehabilitative measures",
-      "Coordinate care across primary care, psychiatry and relevant specialists to avoid fragmented, duplicated management"
+    [
+     "Clinical Pitfall",
+     "Ordering repeated investigations and referrals that reinforce illness behaviour and risk iatrogenic harm",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for somatic symptom disorder."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "somatic-symptom-disorder-diagram",
+   "title": "Somatic symptom disorder: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

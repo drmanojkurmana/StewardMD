@@ -1,81 +1,176 @@
 {
-  "id": "malignant_hyperthermia_susceptibility",
-  "name": "Malignant hyperthermia susceptibility",
-  "aliases": [
-    "MH",
-    "MHS",
-    "malignant hyperpyrexia",
-    "RYR1",
-    "CACNA1S",
-    "anaesthetic-triggered hypermetabolic crisis"
+ "id": "malignant_hyperthermia_susceptibility",
+ "name": "Malignant hyperthermia susceptibility",
+ "aliases": [
+  "MH",
+  "MHS",
+  "malignant hyperpyrexia",
+  "RYR1",
+  "CACNA1S",
+  "anaesthetic-triggered hypermetabolic crisis"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuromuscular",
+ "specialty": "Neurology / Neuromuscular",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A pharmacogenetic disorder of skeletal muscle in which exposure to volatile anaesthetic agents or the depolarising relaxant succinylcholine can trigger a life-threatening hypermetabolic crisis",
+   "A developing crisis shows a rising end-tidal carbon dioxide, tachycardia, muscle rigidity (sometimes masseter spasm), hyperthermia that is often a late sign, and metabolic acidosis with hyperkalaemia and rhabdomyolysis",
+   "Most susceptibility is autosomal dominant and linked to mutations in RYR1, encoding the ryanodine receptor calcium-release channel, with a minority linked to CACNA1S",
+   "Emergency management is immediate withdrawal of triggering agents, dantrolene, and aggressive supportive cooling and correction of acidosis and hyperkalaemia, alongside a switch to a trigger-free anaesthetic technique",
+   "The in-vitro (caffeine-halothane) contracture test on freshly biopsied muscle remains the diagnostic reference standard, complemented by genetic testing",
+   "Susceptibility overlaps with certain RYR1-related myopathies such as central core disease, and a personal or family history of anaesthetic death or unexplained rigidity is an important clue",
+   "Patients and relatives should carry documentation of their status and be referred to a specialist malignant hyperthermia unit for family investigation"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuromuscular",
-  "specialty": "Neurology / Neuromuscular",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A pharmacogenetic disorder of skeletal muscle in which exposure to volatile anaesthetic agents or the depolarising relaxant succinylcholine can trigger a life-threatening hypermetabolic crisis",
-      "A developing crisis shows a rising end-tidal carbon dioxide, tachycardia, muscle rigidity (sometimes masseter spasm), hyperthermia that is often a late sign, and metabolic acidosis with hyperkalaemia and rhabdomyolysis",
-      "Most susceptibility is autosomal dominant and linked to mutations in RYR1, encoding the ryanodine receptor calcium-release channel, with a minority linked to CACNA1S",
-      "Emergency management is immediate withdrawal of triggering agents, dantrolene, and aggressive supportive cooling and correction of acidosis and hyperkalaemia, alongside a switch to a trigger-free anaesthetic technique",
-      "The in-vitro (caffeine-halothane) contracture test on freshly biopsied muscle remains the diagnostic reference standard, complemented by genetic testing",
-      "Susceptibility overlaps with certain RYR1-related myopathies such as central core disease, and a personal or family history of anaesthetic death or unexplained rigidity is an important clue",
-      "Patients and relatives should carry documentation of their status and be referred to a specialist malignant hyperthermia unit for family investigation"
+  "pathophysiology": "Malignant hyperthermia susceptibility most often results from mutations in RYR1, the gene encoding the ryanodine receptor that releases calcium from the sarcoplasmic reticulum during excitation-contraction coupling, and less often from mutations in the CACNA1S calcium channel that triggers it. The abnormal channel is hypersensitive, so on exposure to volatile anaesthetics or succinylcholine it releases uncontrolled calcium into the myoplasm. Sustained high calcium drives continuous muscle contraction and a runaway increase in aerobic and anaerobic metabolism, generating heat, carbon dioxide and lactate, depleting adenosine triphosphate, and causing membrane breakdown with rhabdomyolysis, hyperkalaemia and acidosis. Without prompt treatment this hypermetabolic cascade progresses to multi-organ failure.",
+  "additionalDifferentials": [
+   "Neuroleptic malignant syndrome",
+   "Serotonin syndrome",
+   "Sepsis or thyroid storm causing intraoperative hyperthermia",
+   "Exertional or drug-induced rhabdomyolysis",
+   "Inadequate anaesthesia or ventilation causing hypercapnia and tachycardia",
+   "Other RYR1-related myopathies with anaesthetic sensitivity"
+  ],
+  "additionalInvestigations": [
+   "In-vitro contracture testing (caffeine-halothane) on freshly biopsied skeletal muscle at a specialist unit",
+   "Targeted RYR1 and CACNA1S genetic testing",
+   "Creatine kinase and myoglobin, with arterial blood gases and potassium during a suspected crisis",
+   "Electrocardiography and continuous monitoring for hyperkalaemic and acidotic changes",
+   "Muscle biopsy histology where an associated core myopathy is suspected",
+   "Detailed personal and family anaesthetic history"
+  ],
+  "redFlags": [
+   "Unexplained rising end-tidal carbon dioxide with tachycardia and rigidity under anaesthesia",
+   "Masseter spasm after succinylcholine",
+   "Rapidly rising core temperature with metabolic acidosis, hyperkalaemia or dark myoglobinuric urine",
+   "Family history of anaesthetic death or unexplained perioperative crisis"
+  ],
+  "prognosis": "With early recognition, prompt dantrolene and modern supportive care the mortality of an acute crisis is now low, and susceptible individuals can undergo safe anaesthesia using trigger-free agents, but an unrecognised or untreated crisis remains rapidly fatal.",
+  "pitfalls": [
+   "Waiting for hyperthermia, which is frequently a late sign, before acting on rising carbon dioxide and rigidity",
+   "Confusing a crisis with neuroleptic malignant or serotonin syndrome and delaying dantrolene",
+   "Assuming a previously uneventful anaesthetic excludes susceptibility, since crises can occur on later exposures",
+   "Failing to refer the patient and family for contracture and genetic testing and to document trigger-agent avoidance"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "GeneReviews: Malignant Hyperthermia Susceptibility"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Plan trigger-free anaesthesia using total intravenous techniques and non-depolarising relaxants, avoiding all volatile agents and succinylcholine",
+   "Prepare a vapour-free or thoroughly flushed anaesthetic machine and ensure an adequate dantrolene supply is immediately available",
+   "Confirm susceptibility with in-vitro caffeine-halothane contracture testing and targeted RYR1 and CACNA1S genetic testing",
+   "Should a crisis occur, withdraw triggers, give dantrolene and provide aggressive supportive cooling with correction of acidosis and hyperkalaemia",
+   "Document susceptibility clearly, issue medical-alert identification and inform future anaesthetic teams",
+   "Genetic counselling and cascade family screening given autosomal dominant inheritance",
+   "Recognise overlap with RYR1-related myopathies such as central core disease and screen accordingly"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "malignant_hyperthermia_susceptibility-pathway",
+   "title": "Malignant hyperthermia susceptibility: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A pharmacogenetic disorder of skeletal muscle in which exposure to volatile anaesthetic agents or the depolarising relaxant succinylcholine can trigger a life-threatening hypermetabolic crisis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Unexplained rising end-tidal carbon dioxide with tachycardia and rigidity under anaesthesia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: In-vitro contracture testing (caffeine-halothane) on freshly biopsied skeletal muscle at a specialist unit, Targeted RYR1 and CACNA1S genetic testing, Creatine kinase and myoglobin, with arterial blood gases and potassium"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Plan trigger-free anaesthesia using total intravenous techniques and non-depolarising relaxants, avoiding all volatile agents and succinylcholine"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Waiting for hyperthermia, which is frequently a late sign, before acting on rising carbon dioxide and rigidity"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of malignant hyperthermia susceptibility."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malignant_hyperthermia_susceptibility-matrix",
+   "title": "Malignant hyperthermia susceptibility: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A pharmacogenetic disorder of skeletal muscle in which exposure to volatile anaesthetic agents or the depolarising relaxant",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Malignant hyperthermia susceptibility most often results from mutations in RYR1, the gene encoding the ryanodine receptor that releases calcium from the sarcoplasmic reticulum during excitation-contraction coupling, and less often from mutations in the CACNA1S calcium channel that triggers it. The abnormal channel is hypersensitive, so on exposure to volatile anaesthetics or succinylcholine it releases uncontrolled calcium into the myoplasm. Sustained high calcium drives continuous muscle contraction and a runaway increase in aerobic and anaerobic metabolism, generating heat, carbon dioxide and lactate, depleting adenosine triphosphate, and causing membrane breakdown with rhabdomyolysis, hyperkalaemia and acidosis. Without prompt treatment this hypermetabolic cascade progresses to multi-organ failure.",
-    "additionalDifferentials": [
-      "Neuroleptic malignant syndrome",
-      "Serotonin syndrome",
-      "Sepsis or thyroid storm causing intraoperative hyperthermia",
-      "Exertional or drug-induced rhabdomyolysis",
-      "Inadequate anaesthesia or ventilation causing hypercapnia and tachycardia",
-      "Other RYR1-related myopathies with anaesthetic sensitivity"
+    [
+     "Key Investigations",
+     "In-vitro contracture testing (caffeine-halothane) on freshly biopsied skeletal muscle at a specialist unit, Targeted RYR1 and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "In-vitro contracture testing (caffeine-halothane) on freshly biopsied skeletal muscle at a specialist unit",
-      "Targeted RYR1 and CACNA1S genetic testing",
-      "Creatine kinase and myoglobin, with arterial blood gases and potassium during a suspected crisis",
-      "Electrocardiography and continuous monitoring for hyperkalaemic and acidotic changes",
-      "Muscle biopsy histology where an associated core myopathy is suspected",
-      "Detailed personal and family anaesthetic history"
+    [
+     "Primary Differentials",
+     "Neuroleptic malignant syndrome, Serotonin syndrome, Sepsis or thyroid storm causing intraoperative hyperthermia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Unexplained rising end-tidal carbon dioxide with tachycardia and rigidity under anaesthesia",
-      "Masseter spasm after succinylcholine",
-      "Rapidly rising core temperature with metabolic acidosis, hyperkalaemia or dark myoglobinuric urine",
-      "Family history of anaesthetic death or unexplained perioperative crisis"
+    [
+     "Management Strategy",
+     "Plan trigger-free anaesthesia using total intravenous techniques and non-depolarising relaxants, avoiding all volatile agents and",
+     "Core treatment modality"
     ],
-    "prognosis": "With early recognition, prompt dantrolene and modern supportive care the mortality of an acute crisis is now low, and susceptible individuals can undergo safe anaesthesia using trigger-free agents, but an unrecognised or untreated crisis remains rapidly fatal.",
-    "pitfalls": [
-      "Waiting for hyperthermia, which is frequently a late sign, before acting on rising carbon dioxide and rigidity",
-      "Confusing a crisis with neuroleptic malignant or serotonin syndrome and delaying dantrolene",
-      "Assuming a previously uneventful anaesthetic excludes susceptibility, since crises can occur on later exposures",
-      "Failing to refer the patient and family for contracture and genetic testing and to document trigger-agent avoidance"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "GeneReviews: Malignant Hyperthermia Susceptibility"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Plan trigger-free anaesthesia using total intravenous techniques and non-depolarising relaxants, avoiding all volatile agents and succinylcholine",
-      "Prepare a vapour-free or thoroughly flushed anaesthetic machine and ensure an adequate dantrolene supply is immediately available",
-      "Confirm susceptibility with in-vitro caffeine-halothane contracture testing and targeted RYR1 and CACNA1S genetic testing",
-      "Should a crisis occur, withdraw triggers, give dantrolene and provide aggressive supportive cooling with correction of acidosis and hyperkalaemia",
-      "Document susceptibility clearly, issue medical-alert identification and inform future anaesthetic teams",
-      "Genetic counselling and cascade family screening given autosomal dominant inheritance",
-      "Recognise overlap with RYR1-related myopathies such as central core disease and screen accordingly"
+    [
+     "Clinical Pitfall",
+     "Waiting for hyperthermia, which is frequently a late sign, before acting on rising carbon dioxide and rigidity",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for malignant hyperthermia susceptibility."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malignant-hyperthermia-susceptibility-diagram",
+   "title": "Malignant hyperthermia susceptibility: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -5,7 +5,22 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, surgical ward, ICU, endoscopy",
- "aliases": ["cholecystitis", "cholangitis", "ascending cholangitis", "Tokyo Guidelines", "TG18", "Charcot triad", "Reynolds pentad", "biliary sepsis", "ERCP", "gallstones", "lap chole", "cholecystostomy", "PTGBD", "CBD stones"],
+ "aliases": [
+  "cholecystitis",
+  "cholangitis",
+  "ascending cholangitis",
+  "Tokyo Guidelines",
+  "TG18",
+  "Charcot triad",
+  "Reynolds pentad",
+  "biliary sepsis",
+  "ERCP",
+  "gallstones",
+  "lap chole",
+  "cholecystostomy",
+  "PTGBD",
+  "CBD stones"
+ ],
  "summary": "Diagnose and grade severity with the Tokyo Guidelines 2018, resuscitate and start antibiotics, perform early laparoscopic cholecystectomy (within 7 days of admission and 10 days of symptoms) for cholecystitis, and arrange biliary drainage, usually ERCP, timed to cholangitis severity.",
  "sections": [
   {
@@ -83,14 +98,137 @@
   }
  ],
  "drugs": [
-  { "name": "Ceftriaxone", "dose": "2 g IV once daily", "notes": "Grade I and II community-acquired biliary infection." },
-  { "name": "Metronidazole", "dose": "500 mg IV every 8 hours", "notes": "Anaerobic cover; add when a biliary-enteric anastomosis is present." },
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 hours", "notes": "Grade III or healthcare-associated; reduce dose in renal impairment." },
-  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "ESBL risk or Grade III sepsis; reduce dose in renal impairment." },
-  { "name": "Vancomycin", "dose": "15 mg/kg IV every 12 hours, adjusted to levels", "notes": "Enterococcus cover in Grade III or healthcare-associated infection; adjust for renal function." }
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV once daily",
+   "notes": "Grade I and II community-acquired biliary infection."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg IV every 8 hours",
+   "notes": "Anaerobic cover; add when a biliary-enteric anastomosis is present."
+  },
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 hours",
+   "notes": "Grade III or healthcare-associated; reduce dose in renal impairment."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV every 8 hours",
+   "notes": "ESBL risk or Grade III sepsis; reduce dose in renal impairment."
+  },
+  {
+   "name": "Vancomycin",
+   "dose": "15 mg/kg IV every 12 hours, adjusted to levels",
+   "notes": "Enterococcus cover in Grade III or healthcare-associated infection; adjust for renal function."
+  }
  ],
  "sources": [
-  { "org": "WSES", "title": "2020 WSES updated guidelines for the diagnosis and treatment of acute calculus cholecystitis", "year": 2020, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643471/" }
+  {
+   "org": "WSES",
+   "title": "2020 WSES updated guidelines for the diagnosis and treatment of acute calculus cholecystitis",
+   "year": 2020,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643471/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-cholecystitis-cholangitis-pathway",
+   "title": "Acute cholecystitis and acute cholangitis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute cholecystitis: A local signs (Murphy sign, RUQ pain, mass or tenderness); B systemic signs (fever, raised CRP, raised WBC); C imaging findings of cholecystitis. Suspected: one A plus one B. Definite: A plus B plus C.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Acute cholangitis: A inflammation (fever above 38°C or rigors; WBC below 4000 or above 10,000 per microlitre, or CRP 1 mg/dL or more); B cholestasis (bilirubin 2 mg/dL or more, or ALP, GGT, AST or ALT above 1.5 times the upper limit); C",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "FBC, CRP, bilirubin, ALP, GGT, AST, ALT, lipase or amylase, creatinine, electrolytes, coagulation, lactate, and 2 sets of blood cultures before antibiotics in suspected cholangitis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Send blood cultures, and bile cultures at drainage. Start antibiotics promptly: within 1 hour in septic shock."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Treating cholangitis with antibiotics alone while delaying drainage."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute cholecystitis and acute cholangitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-cholecystitis-cholangitis-summary-matrix",
+   "title": "Acute cholecystitis and acute cholangitis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute cholecystitis: A local signs (Murphy sign, RUQ pain, mass or tenderness); B systemic signs (fever, raised CRP, raised WBC); C imaging",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Send blood cultures, and bile cultures at drainage. Start antibiotics promptly: within 1 hour in septic shock.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "FBC, CRP, bilirubin, ALP, GGT, AST, ALT, lipase or amylase, creatinine, electrolytes, coagulation, lactate, and 2 sets of blood cultures",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ceftriaxone: 2 g IV once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating cholangitis with antibiotics alone while delaying drainage.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute cholecystitis and acute cholangitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-cholecystitis-cholangitis-diagram",
+   "title": "Acute cholecystitis and acute cholangitis: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

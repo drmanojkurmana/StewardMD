@@ -1,88 +1,183 @@
 {
-  "id": "cutaneous_b_cell_lymphoma",
-  "name": "cutaneous b cell lymphoma",
-  "aliases": [
-    "primary cutaneous B-cell lymphoma",
-    "CBCL",
-    "primary cutaneous marginal zone / follicle centre / leg-type lymphoma"
+ "id": "cutaneous_b_cell_lymphoma",
+ "name": "cutaneous b cell lymphoma",
+ "aliases": [
+  "primary cutaneous B-cell lymphoma",
+  "CBCL",
+  "primary cutaneous marginal zone / follicle centre / leg-type lymphoma"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Haematolymphoid",
+ "specialty": "Dermatology / Haemato-oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO-EORTC classification of cutaneous lymphomas / Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Primary cutaneous B-cell lymphomas are non-Hodgkin lymphomas that arise in and are confined to the skin at presentation, so accurate staging to exclude systemic lymphoma with secondary cutaneous spread is essential before labelling disease as primary cutaneous",
+   "The WHO-EORTC scheme recognises three principal entities: primary cutaneous marginal zone lymphoma and primary cutaneous follicle centre lymphoma, both indolent, and primary cutaneous diffuse large B-cell lymphoma, leg type, which is aggressive",
+   "Indolent forms present as solitary or clustered erythematous to violaceous papules, plaques or nodules, favouring the trunk and scalp in follicle centre lymphoma and the trunk and arms in marginal zone lymphoma",
+   "Leg-type diffuse large B-cell lymphoma typically affects elderly women as rapidly growing red-blue tumours on one or both lower legs and carries a markedly worse outlook, though morphologically identical tumours can arise elsewhere",
+   "Immunophenotype separates the subtypes: follicle centre lymphoma is BCL6 positive with variable CD10 and usually lacks strong BCL2, marginal zone lymphoma shows monotypic light-chain restriction with plasmacytic differentiation, and leg type expresses strong BCL2, MUM1/IRF4 and FOXP1",
+   "Primary cutaneous marginal zone lymphoma has been linked to Borrelia burgdorferi infection in some endemic regions, and antibiotic therapy has occasionally induced regression",
+   "Indolent forms are treated with skin-directed measures such as excision, radiotherapy or intralesional therapy, whereas leg type requires systemic anthracycline-based chemoimmunotherapy"
   ],
-  "class": "non_infective",
-  "system": "Skin / Haematolymphoid",
-  "specialty": "Dermatology / Haemato-oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO-EORTC classification of cutaneous lymphomas / Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Primary cutaneous B-cell lymphomas are non-Hodgkin lymphomas that arise in and are confined to the skin at presentation, so accurate staging to exclude systemic lymphoma with secondary cutaneous spread is essential before labelling disease as primary cutaneous",
-      "The WHO-EORTC scheme recognises three principal entities: primary cutaneous marginal zone lymphoma and primary cutaneous follicle centre lymphoma, both indolent, and primary cutaneous diffuse large B-cell lymphoma, leg type, which is aggressive",
-      "Indolent forms present as solitary or clustered erythematous to violaceous papules, plaques or nodules, favouring the trunk and scalp in follicle centre lymphoma and the trunk and arms in marginal zone lymphoma",
-      "Leg-type diffuse large B-cell lymphoma typically affects elderly women as rapidly growing red-blue tumours on one or both lower legs and carries a markedly worse outlook, though morphologically identical tumours can arise elsewhere",
-      "Immunophenotype separates the subtypes: follicle centre lymphoma is BCL6 positive with variable CD10 and usually lacks strong BCL2, marginal zone lymphoma shows monotypic light-chain restriction with plasmacytic differentiation, and leg type expresses strong BCL2, MUM1/IRF4 and FOXP1",
-      "Primary cutaneous marginal zone lymphoma has been linked to Borrelia burgdorferi infection in some endemic regions, and antibiotic therapy has occasionally induced regression",
-      "Indolent forms are treated with skin-directed measures such as excision, radiotherapy or intralesional therapy, whereas leg type requires systemic anthracycline-based chemoimmunotherapy"
+  "pathophysiology": "Cutaneous B-cell lymphomas result from clonal proliferation of B lymphocytes at differing stages of maturation that home to and expand within the skin. Marginal zone lymphoma derives from post-germinal-centre marginal zone / memory B cells and may be driven by chronic antigenic stimulation, including Borrelia in endemic areas. Follicle centre lymphoma arises from germinal-centre B cells but, unlike its nodal follicular counterpart, usually lacks the t(14;18) BCL2 rearrangement. Leg-type diffuse large B-cell lymphoma originates from activated non-germinal-centre B cells, characteristically over-expressing BCL2 and MUM1/IRF4 and frequently harbouring MYD88 mutation and other lesions that drive constitutive NF-kB signalling, underlying its aggressive behaviour.",
+  "additionalDifferentials": [
+   "Cutaneous T-cell lymphoma, including mycosis fungoides and CD30-positive lymphoproliferative disorders",
+   "Systemic nodal B-cell lymphoma with secondary cutaneous involvement",
+   "Cutaneous lymphoid hyperplasia (pseudolymphoma)",
+   "Leukaemia cutis or B-lymphoblastic lymphoma involving skin",
+   "Cutaneous plasmacytoma",
+   "Cutaneous sarcoidosis or other granulomatous infiltrates",
+   "Persistent arthropod-bite reaction or nodular scabies"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy with histology and a broad immunohistochemical panel (CD20, CD79a, BCL2, BCL6, CD10, MUM1/IRF4, FOXP1, kappa and lambda light chains)",
+   "B-cell clonality assessment by immunoglobulin heavy-chain gene rearrangement studies",
+   "Staging cross-sectional imaging or PET-CT to exclude nodal or visceral lymphoma",
+   "Bone marrow aspirate and trephine, particularly for leg type or when systemic disease is suspected",
+   "Full blood count, lactate dehydrogenase and serum protein electrophoresis",
+   "Borrelia burgdorferi serology or tissue PCR in marginal zone lymphoma from endemic regions",
+   "MYD88 mutation analysis in suspected leg-type diffuse large B-cell lymphoma"
+  ],
+  "redFlags": [
+   "Rapidly enlarging red-blue tumour on the lower leg of an elderly patient, suggesting aggressive leg-type disease",
+   "Ulceration, systemic B symptoms or a rising lactate dehydrogenase",
+   "Lymphadenopathy or organomegaly indicating possible systemic dissemination",
+   "Extracutaneous involvement detected on staging investigations"
+  ],
+  "prognosis": "Primary cutaneous marginal zone and follicle centre lymphomas are indolent with excellent long-term survival despite frequent cutaneous relapses, whereas primary cutaneous diffuse large B-cell lymphoma, leg type, has a substantially poorer prognosis, worsened by multiple lesions and leg location.",
+  "pitfalls": [
+   "Misclassifying a systemic lymphoma with skin involvement as primary cutaneous by omitting adequate staging",
+   "Confusing reactive cutaneous lymphoid hyperplasia with a low-grade B-cell lymphoma",
+   "Over-treating indolent disease with aggressive systemic chemotherapy",
+   "Assuming BCL2 positivity necessarily indicates nodal follicular lymphoma",
+   "Missing leg-type diffuse large B-cell lymphoma when the tumours arise outside the lower legs"
+  ],
+  "references": [
+   "WHO-EORTC classification of cutaneous lymphomas",
+   "Rook's Textbook of Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm histologic subtype and exclude systemic lymphoma with secondary skin involvement before planning treatment, since indolent and aggressive subtypes are managed very differently.",
+   "For indolent subtypes (marginal zone or follicle centre lymphoma of the skin), manage conservatively with radiotherapy, surgical excision, or observation, chosen by lesion number, site, and patient preference.",
+   "Use short courses of low-dose radiotherapy for indolent disease, mirroring the technique used for mycosis fungoides, which can achieve palliative benefit and complete response given the radiosensitivity of these clones.",
+   "Where marginal zone lymphoma of the skin is associated with Borrelia burgdorferi, consider antibiotic therapy directed at the organism as a reasonable first step in appropriate regions before radiotherapy or excision.",
+   "Reserve rituximab, an anti-CD20 monoclonal antibody, for multifocal or relapsed indolent disease rather than as a default first-line option, since supporting evidence is anecdotal.",
+   "Counsel that localized indolent disease has excellent outcomes with complete response in most patients, though cutaneous relapse is common and should not itself be equated with treatment failure.",
+   "Treat diffuse large B-cell lymphoma, leg type, more aggressively with combined modality therapy, following the anthracycline-based, rituximab-containing immunochemotherapy plus regional radiotherapy paradigm used for nodal diffuse large B-cell lymphoma.",
+   "For diffuse large B-cell lymphoma histology outside the leg-type presentation, radiotherapy alone can be considered as sole therapy, escalating to combined modality if disease is multifocal or bulky.",
+   "Reserve systemic therapy for widespread indolent disease or as part of combined modality treatment of leg-type disease, and defer specific regimen selection to current haemato-oncology and NCCN guidance rather than a fixed protocol.",
+   "Perform regular skin surveillance after treatment given the meaningful rate of cutaneous relapse in indolent disease.",
+   "Before escalating therapy for a skin-only relapse of indolent disease, re-stage to confirm the disease remains skin-confined rather than assuming systemic progression.",
+   "Monitor leg-type disease following the pattern used for nodal diffuse large B-cell lymphoma, watching for both local and systemic relapse.",
+   "Refer to haemato-oncology for subtype confirmation, exclusion of systemic disease, and any consideration of rituximab-based or combined systemic therapy.",
+   "Involve radiation oncology whenever radiotherapy is being considered, particularly for combined modality planning in leg-type disease."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cutaneous_b_cell_lymphoma-pathway",
+   "title": "cutaneous b cell lymphoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Primary cutaneous B-cell lymphomas are non-Hodgkin lymphomas that arise in and are confined to the skin at presentation, so accurate staging to exclude systemic lymphoma with secondary cutaneous spread is essential before labelling disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly enlarging red-blue tumour on the lower leg of an elderly patient, suggesting aggressive leg-type disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy with histology and a broad immunohistochemical panel (CD20, CD79a, BCL2, BCL6, CD10, MUM1/IRF4, FOXP1, kappa and lambda light chains), B-cell clonality assessment by immunoglobulin heavy-chain gene"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm histologic subtype and exclude systemic lymphoma with secondary skin involvement before planning treatment, since indolent and aggressive subtypes are managed very differently."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying a systemic lymphoma with skin involvement as primary cutaneous by omitting adequate staging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cutaneous b cell lymphoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cutaneous_b_cell_lymphoma-matrix",
+   "title": "cutaneous b cell lymphoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Primary cutaneous B-cell lymphomas are non-Hodgkin lymphomas that arise in and are confined to the skin at presentation, so",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cutaneous B-cell lymphomas result from clonal proliferation of B lymphocytes at differing stages of maturation that home to and expand within the skin. Marginal zone lymphoma derives from post-germinal-centre marginal zone / memory B cells and may be driven by chronic antigenic stimulation, including Borrelia in endemic areas. Follicle centre lymphoma arises from germinal-centre B cells but, unlike its nodal follicular counterpart, usually lacks the t(14;18) BCL2 rearrangement. Leg-type diffuse large B-cell lymphoma originates from activated non-germinal-centre B cells, characteristically over-expressing BCL2 and MUM1/IRF4 and frequently harbouring MYD88 mutation and other lesions that drive constitutive NF-kB signalling, underlying its aggressive behaviour.",
-    "additionalDifferentials": [
-      "Cutaneous T-cell lymphoma, including mycosis fungoides and CD30-positive lymphoproliferative disorders",
-      "Systemic nodal B-cell lymphoma with secondary cutaneous involvement",
-      "Cutaneous lymphoid hyperplasia (pseudolymphoma)",
-      "Leukaemia cutis or B-lymphoblastic lymphoma involving skin",
-      "Cutaneous plasmacytoma",
-      "Cutaneous sarcoidosis or other granulomatous infiltrates",
-      "Persistent arthropod-bite reaction or nodular scabies"
+    [
+     "Key Investigations",
+     "Skin biopsy with histology and a broad immunohistochemical panel (CD20, CD79a, BCL2, BCL6, CD10, MUM1/IRF4, FOXP1, kappa and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy with histology and a broad immunohistochemical panel (CD20, CD79a, BCL2, BCL6, CD10, MUM1/IRF4, FOXP1, kappa and lambda light chains)",
-      "B-cell clonality assessment by immunoglobulin heavy-chain gene rearrangement studies",
-      "Staging cross-sectional imaging or PET-CT to exclude nodal or visceral lymphoma",
-      "Bone marrow aspirate and trephine, particularly for leg type or when systemic disease is suspected",
-      "Full blood count, lactate dehydrogenase and serum protein electrophoresis",
-      "Borrelia burgdorferi serology or tissue PCR in marginal zone lymphoma from endemic regions",
-      "MYD88 mutation analysis in suspected leg-type diffuse large B-cell lymphoma"
+    [
+     "Primary Differentials",
+     "Cutaneous T-cell lymphoma, including mycosis fungoides and CD30-positive lymphoproliferative disorders, Systemic nodal B-cell",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly enlarging red-blue tumour on the lower leg of an elderly patient, suggesting aggressive leg-type disease",
-      "Ulceration, systemic B symptoms or a rising lactate dehydrogenase",
-      "Lymphadenopathy or organomegaly indicating possible systemic dissemination",
-      "Extracutaneous involvement detected on staging investigations"
+    [
+     "Management Strategy",
+     "Confirm histologic subtype and exclude systemic lymphoma with secondary skin involvement before planning treatment, since",
+     "Core treatment modality"
     ],
-    "prognosis": "Primary cutaneous marginal zone and follicle centre lymphomas are indolent with excellent long-term survival despite frequent cutaneous relapses, whereas primary cutaneous diffuse large B-cell lymphoma, leg type, has a substantially poorer prognosis, worsened by multiple lesions and leg location.",
-    "pitfalls": [
-      "Misclassifying a systemic lymphoma with skin involvement as primary cutaneous by omitting adequate staging",
-      "Confusing reactive cutaneous lymphoid hyperplasia with a low-grade B-cell lymphoma",
-      "Over-treating indolent disease with aggressive systemic chemotherapy",
-      "Assuming BCL2 positivity necessarily indicates nodal follicular lymphoma",
-      "Missing leg-type diffuse large B-cell lymphoma when the tumours arise outside the lower legs"
-    ],
-    "references": [
-      "WHO-EORTC classification of cutaneous lymphomas",
-      "Rook's Textbook of Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm histologic subtype and exclude systemic lymphoma with secondary skin involvement before planning treatment, since indolent and aggressive subtypes are managed very differently.",
-      "For indolent subtypes (marginal zone or follicle centre lymphoma of the skin), manage conservatively with radiotherapy, surgical excision, or observation, chosen by lesion number, site, and patient preference.",
-      "Use short courses of low-dose radiotherapy for indolent disease, mirroring the technique used for mycosis fungoides, which can achieve palliative benefit and complete response given the radiosensitivity of these clones.",
-      "Where marginal zone lymphoma of the skin is associated with Borrelia burgdorferi, consider antibiotic therapy directed at the organism as a reasonable first step in appropriate regions before radiotherapy or excision.",
-      "Reserve rituximab, an anti-CD20 monoclonal antibody, for multifocal or relapsed indolent disease rather than as a default first-line option, since supporting evidence is anecdotal.",
-      "Counsel that localized indolent disease has excellent outcomes with complete response in most patients, though cutaneous relapse is common and should not itself be equated with treatment failure.",
-      "Treat diffuse large B-cell lymphoma, leg type, more aggressively with combined modality therapy, following the anthracycline-based, rituximab-containing immunochemotherapy plus regional radiotherapy paradigm used for nodal diffuse large B-cell lymphoma.",
-      "For diffuse large B-cell lymphoma histology outside the leg-type presentation, radiotherapy alone can be considered as sole therapy, escalating to combined modality if disease is multifocal or bulky.",
-      "Reserve systemic therapy for widespread indolent disease or as part of combined modality treatment of leg-type disease, and defer specific regimen selection to current haemato-oncology and NCCN guidance rather than a fixed protocol.",
-      "Perform regular skin surveillance after treatment given the meaningful rate of cutaneous relapse in indolent disease.",
-      "Before escalating therapy for a skin-only relapse of indolent disease, re-stage to confirm the disease remains skin-confined rather than assuming systemic progression.",
-      "Monitor leg-type disease following the pattern used for nodal diffuse large B-cell lymphoma, watching for both local and systemic relapse.",
-      "Refer to haemato-oncology for subtype confirmation, exclusion of systemic disease, and any consideration of rituximab-based or combined systemic therapy.",
-      "Involve radiation oncology whenever radiotherapy is being considered, particularly for combined modality planning in leg-type disease."
+    [
+     "Clinical Pitfall",
+     "Misclassifying a systemic lymphoma with skin involvement as primary cutaneous by omitting adequate staging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cutaneous b cell lymphoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cutaneous-b-cell-lymphoma-diagram",
+   "title": "cutaneous b cell lymphoma: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

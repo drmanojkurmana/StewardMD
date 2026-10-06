@@ -1,80 +1,175 @@
 {
-  "id": "lymphedema_distichiasis",
-  "name": "Lymphoedema-distichiasis syndrome",
-  "aliases": [
-    "lymphedema-distichiasis syndrome",
-    "LDS",
-    "FOXC2-related lymphoedema-distichiasis"
+ "id": "lymphedema_distichiasis",
+ "name": "Lymphoedema-distichiasis syndrome",
+ "aliases": [
+  "lymphedema-distichiasis syndrome",
+  "LDS",
+  "FOXC2-related lymphoedema-distichiasis"
+ ],
+ "class": "non_infective",
+ "system": "Vascular anomalies / Dermatology",
+ "specialty": "Vascular Anomalies",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant primary lymphoedema caused by loss-of-function variants in FOXC2",
+   "The two defining features are lower-limb lymphoedema and distichiasis, an accessory row of eyelashes arising from the meibomian gland openings",
+   "Lymphoedema characteristically appears later than in Milroy disease, typically around puberty or in early adulthood, and predominantly affects the legs",
+   "Distichiasis may cause ocular irritation, corneal changes and photophobia, and can be present from birth even before oedema develops",
+   "Associated features include varicose veins (often of early onset), ptosis, cleft palate and, importantly, congenital heart disease",
+   "Unlike Milroy disease, the lymphatic defect is thought to involve lymphatic valve dysfunction and reflux rather than simple hypoplasia",
+   "Diagnosis combines the clinical dyad with family history and FOXC2 genetic testing, supported by lymphoscintigraphy",
+   "Management is supportive lymphoedema care with compression and skin care, ophthalmic treatment of distichiasis, and cardiac evaluation"
   ],
-  "class": "non_infective",
-  "system": "Vascular anomalies / Dermatology",
-  "specialty": "Vascular Anomalies",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant primary lymphoedema caused by loss-of-function variants in FOXC2",
-      "The two defining features are lower-limb lymphoedema and distichiasis, an accessory row of eyelashes arising from the meibomian gland openings",
-      "Lymphoedema characteristically appears later than in Milroy disease, typically around puberty or in early adulthood, and predominantly affects the legs",
-      "Distichiasis may cause ocular irritation, corneal changes and photophobia, and can be present from birth even before oedema develops",
-      "Associated features include varicose veins (often of early onset), ptosis, cleft palate and, importantly, congenital heart disease",
-      "Unlike Milroy disease, the lymphatic defect is thought to involve lymphatic valve dysfunction and reflux rather than simple hypoplasia",
-      "Diagnosis combines the clinical dyad with family history and FOXC2 genetic testing, supported by lymphoscintigraphy",
-      "Management is supportive lymphoedema care with compression and skin care, ophthalmic treatment of distichiasis, and cardiac evaluation"
+  "pathophysiology": "Lymphoedema-distichiasis syndrome is an autosomal dominant primary lymphatic disorder caused by loss-of-function variants in the transcription factor FOXC2, which is essential for normal development of lymphatic valves and vessels. The resulting valvular dysfunction leads to lymphatic reflux and impaired drainage, producing lower-limb lymphoedema, and the same developmental disturbance affects venous valves (accounting for varicose veins) and eyelash follicles (distichiasis). FOXC2 also contributes to eyelid, palatal and cardiac development, explaining the associated anomalies.",
+  "additionalDifferentials": [
+   "Milroy disease (congenital VEGFR3-related lymphoedema without distichiasis)",
+   "Other primary lymphoedemas (e.g. Meige/late-onset lymphoedema)",
+   "Secondary lymphoedema (post-surgical, infective, malignant)",
+   "Chronic venous insufficiency with oedema",
+   "Lipoedema",
+   "Systemic causes of leg oedema (cardiac, renal, hepatic)"
+  ],
+  "additionalInvestigations": [
+   "FOXC2 molecular genetic testing",
+   "Slit-lamp examination to confirm distichiasis and assess corneal effects",
+   "Lymphoscintigraphy to characterise lymphatic drainage and reflux",
+   "Echocardiography to screen for congenital heart disease",
+   "Venous duplex assessment for varicose veins and reflux",
+   "Family history review and cascade screening"
+  ],
+  "redFlags": [
+   "Recurrent cellulitis of the lymphoedematous limb",
+   "Corneal damage or visual compromise from distichiasis",
+   "Undiagnosed congenital heart disease",
+   "Rapidly progressive or unilateral limb swelling warranting exclusion of secondary cause",
+   "Signs of significant venous complications"
+  ],
+  "prognosis": "The condition is chronic but generally compatible with a normal lifespan; lymphoedema is manageable with sustained conservative care, and distichiasis is treatable, though recurrent infection, progressive swelling and any associated cardiac disease influence long-term outcome.",
+  "pitfalls": [
+   "Missing distichiasis, which may be subtle and requires careful eyelid examination",
+   "Attributing leg swelling to venous disease alone and overlooking the lymphatic diagnosis",
+   "Failing to screen for associated congenital heart disease",
+   "Not recognising the autosomal dominant inheritance and offering family screening"
+  ],
+  "references": [
+   "ISSVA Classification of Vascular Anomalies",
+   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage the lymphoedema with complex decongestive therapy, compression garments and skin care as for other primary lymphoedemas",
+   "Treat distichiasis with lubrication and definitive follicle ablation by electrolysis, cryotherapy or laser to relieve corneal irritation",
+   "Prompt antibiotics for cellulitis and prophylaxis for recurrent episodes",
+   "Screen for and manage associated congenital heart disease, varicose veins, ptosis and cleft palate",
+   "Ophthalmology referral for corneal protection and management of the aberrant eyelashes",
+   "Genetic counselling and cascade family screening for the autosomal dominant FOXC2 variant",
+   "Coordinate care across vascular anomalies, ophthalmology and cardiology services"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lymphedema_distichiasis-pathway",
+   "title": "Lymphoedema-distichiasis syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant primary lymphoedema caused by loss-of-function variants in FOXC2",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent cellulitis of the lymphoedematous limb",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: FOXC2 molecular genetic testing, Slit-lamp examination to confirm distichiasis and assess corneal effects, Lymphoscintigraphy to characterise lymphatic drainage and reflux"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage the lymphoedema with complex decongestive therapy, compression garments and skin care as for other primary lymphoedemas"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing distichiasis, which may be subtle and requires careful eyelid examination"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lymphoedema-distichiasis syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lymphedema_distichiasis-matrix",
+   "title": "Lymphoedema-distichiasis syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant primary lymphoedema caused by loss-of-function variants in FOXC2",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lymphoedema-distichiasis syndrome is an autosomal dominant primary lymphatic disorder caused by loss-of-function variants in the transcription factor FOXC2, which is essential for normal development of lymphatic valves and vessels. The resulting valvular dysfunction leads to lymphatic reflux and impaired drainage, producing lower-limb lymphoedema, and the same developmental disturbance affects venous valves (accounting for varicose veins) and eyelash follicles (distichiasis). FOXC2 also contributes to eyelid, palatal and cardiac development, explaining the associated anomalies.",
-    "additionalDifferentials": [
-      "Milroy disease (congenital VEGFR3-related lymphoedema without distichiasis)",
-      "Other primary lymphoedemas (e.g. Meige/late-onset lymphoedema)",
-      "Secondary lymphoedema (post-surgical, infective, malignant)",
-      "Chronic venous insufficiency with oedema",
-      "Lipoedema",
-      "Systemic causes of leg oedema (cardiac, renal, hepatic)"
+    [
+     "Key Investigations",
+     "FOXC2 molecular genetic testing, Slit-lamp examination to confirm distichiasis and assess corneal effects, Lymphoscintigraphy to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "FOXC2 molecular genetic testing",
-      "Slit-lamp examination to confirm distichiasis and assess corneal effects",
-      "Lymphoscintigraphy to characterise lymphatic drainage and reflux",
-      "Echocardiography to screen for congenital heart disease",
-      "Venous duplex assessment for varicose veins and reflux",
-      "Family history review and cascade screening"
+    [
+     "Primary Differentials",
+     "Milroy disease (congenital VEGFR3-related lymphoedema without distichiasis), Other primary lymphoedemas (e.g. Meige/late-onset",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent cellulitis of the lymphoedematous limb",
-      "Corneal damage or visual compromise from distichiasis",
-      "Undiagnosed congenital heart disease",
-      "Rapidly progressive or unilateral limb swelling warranting exclusion of secondary cause",
-      "Signs of significant venous complications"
+    [
+     "Management Strategy",
+     "Manage the lymphoedema with complex decongestive therapy, compression garments and skin care as for other primary lymphoedemas",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is chronic but generally compatible with a normal lifespan; lymphoedema is manageable with sustained conservative care, and distichiasis is treatable, though recurrent infection, progressive swelling and any associated cardiac disease influence long-term outcome.",
-    "pitfalls": [
-      "Missing distichiasis, which may be subtle and requires careful eyelid examination",
-      "Attributing leg swelling to venous disease alone and overlooking the lymphatic diagnosis",
-      "Failing to screen for associated congenital heart disease",
-      "Not recognising the autosomal dominant inheritance and offering family screening"
-    ],
-    "references": [
-      "ISSVA Classification of Vascular Anomalies",
-      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage the lymphoedema with complex decongestive therapy, compression garments and skin care as for other primary lymphoedemas",
-      "Treat distichiasis with lubrication and definitive follicle ablation by electrolysis, cryotherapy or laser to relieve corneal irritation",
-      "Prompt antibiotics for cellulitis and prophylaxis for recurrent episodes",
-      "Screen for and manage associated congenital heart disease, varicose veins, ptosis and cleft palate",
-      "Ophthalmology referral for corneal protection and management of the aberrant eyelashes",
-      "Genetic counselling and cascade family screening for the autosomal dominant FOXC2 variant",
-      "Coordinate care across vascular anomalies, ophthalmology and cardiology services"
+    [
+     "Clinical Pitfall",
+     "Missing distichiasis, which may be subtle and requires careful eyelid examination",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lymphoedema-distichiasis syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lymphedema-distichiasis-diagram",
+   "title": "Lymphoedema-distichiasis syndrome: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

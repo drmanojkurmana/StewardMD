@@ -1,78 +1,173 @@
 {
-  "id": "delirium_postoperative",
-  "name": "Postoperative delirium",
-  "aliases": [
-    "POD",
-    "postoperative confusion",
-    "acute postoperative brain dysfunction"
+ "id": "delirium_postoperative",
+ "name": "Postoperative delirium",
+ "aliases": [
+  "POD",
+  "postoperative confusion",
+  "acute postoperative brain dysfunction"
+ ],
+ "class": "non_infective",
+ "system": "Anaesthesia / Perioperative",
+ "specialty": "Anaesthesiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Anesthesia / standard perioperative references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acute, fluctuating disturbance of attention and awareness developing after surgery, often within the first few postoperative days",
+   "It may be hyperactive with agitation, hypoactive with withdrawal and drowsiness (frequently missed), or mixed, and the hypoactive form carries a worse prognosis",
+   "Key predisposing factors include older age, pre-existing cognitive impairment or dementia, frailty, sensory impairment, and multiple comorbidities",
+   "Common precipitants include pain, infection, metabolic and electrolyte disturbance, hypoxia, dehydration, urinary retention, constipation, and deliriogenic medications",
+   "Prevention through multicomponent non-pharmacological measures (reorientation, early mobilisation, sleep hygiene, sensory aids, hydration, and pain control) is the most effective strategy",
+   "Screening tools such as the Confusion Assessment Method aid recognition, and diagnosis requires distinguishing delirium from dementia and depression",
+   "Management focuses on identifying and treating underlying causes and using supportive measures; antipsychotics are reserved for severe agitation posing a safety risk",
+   "Benzodiazepines and anticholinergic drugs generally worsen delirium and should be minimised except for specific indications such as alcohol withdrawal"
   ],
-  "class": "non_infective",
-  "system": "Anaesthesia / Perioperative",
-  "specialty": "Anaesthesiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Anesthesia / standard perioperative references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acute, fluctuating disturbance of attention and awareness developing after surgery, often within the first few postoperative days",
-      "It may be hyperactive with agitation, hypoactive with withdrawal and drowsiness (frequently missed), or mixed, and the hypoactive form carries a worse prognosis",
-      "Key predisposing factors include older age, pre-existing cognitive impairment or dementia, frailty, sensory impairment, and multiple comorbidities",
-      "Common precipitants include pain, infection, metabolic and electrolyte disturbance, hypoxia, dehydration, urinary retention, constipation, and deliriogenic medications",
-      "Prevention through multicomponent non-pharmacological measures (reorientation, early mobilisation, sleep hygiene, sensory aids, hydration, and pain control) is the most effective strategy",
-      "Screening tools such as the Confusion Assessment Method aid recognition, and diagnosis requires distinguishing delirium from dementia and depression",
-      "Management focuses on identifying and treating underlying causes and using supportive measures; antipsychotics are reserved for severe agitation posing a safety risk",
-      "Benzodiazepines and anticholinergic drugs generally worsen delirium and should be minimised except for specific indications such as alcohol withdrawal"
+  "pathophysiology": "Postoperative delirium reflects acute global brain dysfunction arising from the interaction of a vulnerable brain and perioperative stressors. Proposed mechanisms include neuroinflammation from the surgical stress response, neurotransmitter imbalance (notably cholinergic deficiency and dopamine excess), impaired cerebral oxygen delivery, disrupted sleep-wake regulation, and the effects of sedative and analgesic drugs. Patients with reduced cognitive reserve are more susceptible, so relatively minor insults can precipitate delirium. The condition is typically multifactorial, and cumulative contributions from pain, infection, metabolic derangement, and medications drive the acute confusional state.",
+  "additionalDifferentials": [
+   "Dementia or pre-existing cognitive impairment",
+   "Depression or acute psychiatric illness",
+   "Non-convulsive seizure activity",
+   "Stroke or other acute neurological event",
+   "Drug or alcohol withdrawal",
+   "Residual anaesthetic or sedative effect"
+  ],
+  "additionalInvestigations": [
+   "Delirium screening with a validated tool such as the Confusion Assessment Method",
+   "Screening for infection, hypoxia, and metabolic or electrolyte disturbance",
+   "Medication review for deliriogenic drugs",
+   "Assessment for urinary retention, constipation, and pain",
+   "Neuroimaging or EEG only if a focal neurological cause or seizures are suspected"
+  ],
+  "redFlags": [
+   "Sudden confusion with focal neurological signs suggesting a stroke",
+   "Delirium accompanied by hypoxia, sepsis, or severe metabolic derangement",
+   "Features suggesting alcohol or sedative withdrawal with autonomic instability",
+   "Severe agitation posing a risk of harm to the patient or others"
+  ],
+  "prognosis": "Delirium is often reversible when precipitants are treated, but it is associated with longer hospital stay, functional decline, increased risk of long-term cognitive impairment, and higher mortality, particularly in the hypoactive form.",
+  "pitfalls": [
+   "Missing hypoactive delirium because the patient is quiet rather than agitated",
+   "Mislabelling delirium as dementia and failing to seek reversible causes",
+   "Using benzodiazepines or anticholinergics that worsen confusion",
+   "Reaching for antipsychotics before addressing underlying precipitants",
+   "Neglecting non-pharmacological preventive measures in high-risk patients"
+  ],
+  "references": [
+   "Miller's Anesthesia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prevention through multicomponent non-pharmacological measures — reorientation, early mobilisation, sleep hygiene, sensory aids, hydration and adequate pain control — as the most effective strategy",
+   "Identify and treat precipitants including pain, infection, hypoxia, metabolic and electrolyte disturbance, dehydration, urinary retention and constipation",
+   "Optimise perioperative care by minimising deliriogenic and sedative drugs, using opioid-sparing multimodal analgesia, and removing unnecessary lines and catheters",
+   "Reserve short-term low-dose antipsychotics for severe agitation or distress with a safety risk, avoiding routine pharmacological treatment",
+   "Screen systematically with a validated tool such as the Confusion Assessment Method, distinguishing delirium from dementia and depression",
+   "Ensure safety and support with attention to hydration and nutrition and involvement of family or carers, avoiding restraint",
+   "Multidisciplinary and geriatric input for high-risk patients, with follow-up for cognitive and functional recovery"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "delirium_postoperative-pathway",
+   "title": "Postoperative delirium: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acute, fluctuating disturbance of attention and awareness developing after surgery, often within the first few postoperative days",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden confusion with focal neurological signs suggesting a stroke",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Delirium screening with a validated tool such as the Confusion Assessment Method, Screening for infection, hypoxia, and metabolic or electrolyte disturbance, Medication review for deliriogenic drugs"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prevention through multicomponent non-pharmacological measures - reorientation, early mobilisation, sleep hygiene, sensory aids, hydration and adequate pain control - as the most effective strategy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing hypoactive delirium because the patient is quiet rather than agitated"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of postoperative delirium."
+  }
+ ],
+ "tables": [
+  {
+   "id": "delirium_postoperative-matrix",
+   "title": "Postoperative delirium: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acute, fluctuating disturbance of attention and awareness developing after surgery, often within the first few postoperative",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Postoperative delirium reflects acute global brain dysfunction arising from the interaction of a vulnerable brain and perioperative stressors. Proposed mechanisms include neuroinflammation from the surgical stress response, neurotransmitter imbalance (notably cholinergic deficiency and dopamine excess), impaired cerebral oxygen delivery, disrupted sleep-wake regulation, and the effects of sedative and analgesic drugs. Patients with reduced cognitive reserve are more susceptible, so relatively minor insults can precipitate delirium. The condition is typically multifactorial, and cumulative contributions from pain, infection, metabolic derangement, and medications drive the acute confusional state.",
-    "additionalDifferentials": [
-      "Dementia or pre-existing cognitive impairment",
-      "Depression or acute psychiatric illness",
-      "Non-convulsive seizure activity",
-      "Stroke or other acute neurological event",
-      "Drug or alcohol withdrawal",
-      "Residual anaesthetic or sedative effect"
+    [
+     "Key Investigations",
+     "Delirium screening with a validated tool such as the Confusion Assessment Method, Screening for infection, hypoxia, and metabolic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Delirium screening with a validated tool such as the Confusion Assessment Method",
-      "Screening for infection, hypoxia, and metabolic or electrolyte disturbance",
-      "Medication review for deliriogenic drugs",
-      "Assessment for urinary retention, constipation, and pain",
-      "Neuroimaging or EEG only if a focal neurological cause or seizures are suspected"
+    [
+     "Primary Differentials",
+     "Dementia or pre-existing cognitive impairment, Depression or acute psychiatric illness, Non-convulsive seizure activity",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden confusion with focal neurological signs suggesting a stroke",
-      "Delirium accompanied by hypoxia, sepsis, or severe metabolic derangement",
-      "Features suggesting alcohol or sedative withdrawal with autonomic instability",
-      "Severe agitation posing a risk of harm to the patient or others"
+    [
+     "Management Strategy",
+     "Prevention through multicomponent non-pharmacological measures - reorientation, early mobilisation, sleep hygiene, sensory aids,",
+     "Core treatment modality"
     ],
-    "prognosis": "Delirium is often reversible when precipitants are treated, but it is associated with longer hospital stay, functional decline, increased risk of long-term cognitive impairment, and higher mortality, particularly in the hypoactive form.",
-    "pitfalls": [
-      "Missing hypoactive delirium because the patient is quiet rather than agitated",
-      "Mislabelling delirium as dementia and failing to seek reversible causes",
-      "Using benzodiazepines or anticholinergics that worsen confusion",
-      "Reaching for antipsychotics before addressing underlying precipitants",
-      "Neglecting non-pharmacological preventive measures in high-risk patients"
-    ],
-    "references": [
-      "Miller's Anesthesia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prevention through multicomponent non-pharmacological measures — reorientation, early mobilisation, sleep hygiene, sensory aids, hydration and adequate pain control — as the most effective strategy",
-      "Identify and treat precipitants including pain, infection, hypoxia, metabolic and electrolyte disturbance, dehydration, urinary retention and constipation",
-      "Optimise perioperative care by minimising deliriogenic and sedative drugs, using opioid-sparing multimodal analgesia, and removing unnecessary lines and catheters",
-      "Reserve short-term low-dose antipsychotics for severe agitation or distress with a safety risk, avoiding routine pharmacological treatment",
-      "Screen systematically with a validated tool such as the Confusion Assessment Method, distinguishing delirium from dementia and depression",
-      "Ensure safety and support with attention to hydration and nutrition and involvement of family or carers, avoiding restraint",
-      "Multidisciplinary and geriatric input for high-risk patients, with follow-up for cognitive and functional recovery"
+    [
+     "Clinical Pitfall",
+     "Missing hypoactive delirium because the patient is quiet rather than agitated",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for postoperative delirium."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "delirium-postoperative-diagram",
+   "title": "Postoperative delirium: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

@@ -5,7 +5,24 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, urogynaecology, urology outpatient",
- "aliases": ["urinary incontinence", "stress incontinence", "SUI", "urge incontinence", "UUI", "mixed incontinence", "MUI", "overactive bladder", "OAB", "pelvic floor muscle training", "PFMT", "bladder training", "mirabegron", "solifenacin", "oxybutynin", "NG123"],
+ "aliases": [
+  "urinary incontinence",
+  "stress incontinence",
+  "SUI",
+  "urge incontinence",
+  "UUI",
+  "mixed incontinence",
+  "MUI",
+  "overactive bladder",
+  "OAB",
+  "pelvic floor muscle training",
+  "PFMT",
+  "bladder training",
+  "mirabegron",
+  "solifenacin",
+  "oxybutynin",
+  "NG123"
+ ],
  "summary": "Classify incontinence as stress, urgency (overactive bladder) or mixed and treat the predominant type: supervised pelvic floor training for at least 3 months for stress or mixed, bladder training for at least 6 weeks for urgency, then an OAB medicine (weighing anticholinergic burden in older women) or a beta-3 agonist, and refer when conservative care fails or red flags are present.",
  "sections": [
   {
@@ -84,17 +101,152 @@
   }
  ],
  "drugs": [
-  { "name": "Solifenacin", "dose": "5 mg orally once daily, increased to 10 mg if needed", "notes": "Anticholinergic. Dry mouth, constipation; caution with cognitive impairment and poor bladder emptying." },
-  { "name": "Oxybutynin (immediate release)", "dose": "5 mg orally two or three times daily (start 2.5 mg twice daily in older women)", "notes": "Low cost but most anticholinergic effects; avoid in frail older women. Transdermal patch if oral not tolerated." },
-  { "name": "Tolterodine", "dose": "2 mg orally twice daily (1 mg twice daily if poorly tolerated or hepatic impairment)", "notes": "Anticholinergic." },
-  { "name": "Trospium", "dose": "20 mg orally twice daily before food", "notes": "Anticholinergic; reduce dose in renal impairment." },
-  { "name": "Mirabegron", "dose": "50 mg orally once daily (25 mg in moderate renal or hepatic impairment)", "notes": "Beta-3 agonist without anticholinergic burden. Contraindicated in severe uncontrolled hypertension; monitor BP." },
-  { "name": "Vaginal oestradiol", "dose": "10 microgram vaginal tablet daily for 2 weeks, then twice weekly", "notes": "OAB with genitourinary syndrome of menopause." },
-  { "name": "Botulinum toxin type A (intravesical)", "dose": "100 units by bladder wall injection; 200 units for later treatments if response is inadequate or short-lived", "notes": "Specialist use after MDT review; she must accept possible clean intermittent self-catheterisation." },
-  { "name": "Duloxetine", "dose": "40 mg orally twice daily", "notes": "Second line for stress incontinence only. Nausea common; taper when stopping." }
+  {
+   "name": "Solifenacin",
+   "dose": "5 mg orally once daily, increased to 10 mg if needed",
+   "notes": "Anticholinergic. Dry mouth, constipation; caution with cognitive impairment and poor bladder emptying."
+  },
+  {
+   "name": "Oxybutynin (immediate release)",
+   "dose": "5 mg orally two or three times daily (start 2.5 mg twice daily in older women)",
+   "notes": "Low cost but most anticholinergic effects; avoid in frail older women. Transdermal patch if oral not tolerated."
+  },
+  {
+   "name": "Tolterodine",
+   "dose": "2 mg orally twice daily (1 mg twice daily if poorly tolerated or hepatic impairment)",
+   "notes": "Anticholinergic."
+  },
+  {
+   "name": "Trospium",
+   "dose": "20 mg orally twice daily before food",
+   "notes": "Anticholinergic; reduce dose in renal impairment."
+  },
+  {
+   "name": "Mirabegron",
+   "dose": "50 mg orally once daily (25 mg in moderate renal or hepatic impairment)",
+   "notes": "Beta-3 agonist without anticholinergic burden. Contraindicated in severe uncontrolled hypertension; monitor BP."
+  },
+  {
+   "name": "Vaginal oestradiol",
+   "dose": "10 microgram vaginal tablet daily for 2 weeks, then twice weekly",
+   "notes": "OAB with genitourinary syndrome of menopause."
+  },
+  {
+   "name": "Botulinum toxin type A (intravesical)",
+   "dose": "100 units by bladder wall injection; 200 units for later treatments if response is inadequate or short-lived",
+   "notes": "Specialist use after MDT review; she must accept possible clean intermittent self-catheterisation."
+  },
+  {
+   "name": "Duloxetine",
+   "dose": "40 mg orally twice daily",
+   "notes": "Second line for stress incontinence only. Nausea common; taper when stopping."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Urinary incontinence and pelvic organ prolapse in women: management (NG123)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng123/chapter/Recommendations" }
+  {
+   "org": "NICE",
+   "title": "Urinary incontinence and pelvic organ prolapse in women: management (NG123)",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng123/chapter/Recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "urinary-incontinence-women-pathway",
+   "title": "Urinary incontinence and overactive bladder in women Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Classify at the first assessment: stress (leakage on effort, coughing or sneezing), urgency or overactive bladder (urgency with or without leakage, frequency, nocturia), or mixed; direct initial treatment at the predominant symptom.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Look for contributing factors: UTI, constipation, diuretics and other drugs, diabetes, high fluid or caffeine intake, obesity, reduced mobility, cognitive impairment, genitourinary syndrome of menopause and prolapse.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Urine dipstick in all women for blood, glucose, protein, leucocytes and nitrites."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Before starting, explain likely benefit, dry mouth and constipation, that full benefit may take 4 weeks, and that long-term effects of anticholinergics on cognition are uncertain."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review 4 weeks after starting or changing an OAB medicine (sooner if side effects are intolerable); change dose or drug if response is poor and review again after 4 weeks."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for urinary incontinence and overactive bladder in women."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urinary-incontinence-women-summary-matrix",
+   "title": "Urinary incontinence and overactive bladder in women Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classify at the first assessment: stress (leakage on effort, coughing or sneezing), urgency or overactive bladder (urgency with or without",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Before starting, explain likely benefit, dry mouth and constipation, that full benefit may take 4 weeks, and that long-term effects of",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Urine dipstick in all women for blood, glucose, protein, leucocytes and nitrites.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Solifenacin: 5 mg orally once daily, increased to 10 mg if needed",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Adding an anticholinergic in an older woman already on other anticholinergic drugs or with cognitive impairment.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for urinary incontinence and overactive bladder in women."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "urinary-incontinence-women-diagram",
+   "title": "Urinary incontinence and overactive bladder in women: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

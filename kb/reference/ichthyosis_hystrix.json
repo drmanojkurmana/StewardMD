@@ -1,77 +1,172 @@
 {
-  "id": "ichthyosis_hystrix",
-  "name": "Ichthyosis hystrix",
-  "aliases": [
-    "ichthyosis hystrix Curth-Macklin type",
-    "porcupine skin",
-    "KRT1"
+ "id": "ichthyosis_hystrix",
+ "name": "Ichthyosis hystrix",
+ "aliases": [
+  "ichthyosis hystrix Curth-Macklin type",
+  "porcupine skin",
+  "KRT1"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A descriptive term for severe hyperkeratotic disorders producing thick, spiny, verrucous scale that resembles porcupine quills",
+   "The Curth-Macklin type is an autosomal dominant condition caused by variants in KRT1 (keratin 1)",
+   "Unlike epidermolytic ichthyosis, the Curth-Macklin form typically lacks widespread blistering despite prominent hyperkeratosis",
+   "Lesions may be generalised or arranged in a linear or systematised naevoid pattern following the lines of Blaschko when the disorder is mosaic",
+   "A severe palmoplantar keratoderma is frequently present and can cause functional impairment",
+   "Diagnosis is clinical and histological; electron microscopy classically shows perinuclear shells of keratin filaments, and molecular testing can identify the KRT1 variant",
+   "Management is supportive with intensive emollients and keratolytics, and oral retinoids may reduce the burden of hyperkeratosis in severe disease"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A descriptive term for severe hyperkeratotic disorders producing thick, spiny, verrucous scale that resembles porcupine quills",
-      "The Curth-Macklin type is an autosomal dominant condition caused by variants in KRT1 (keratin 1)",
-      "Unlike epidermolytic ichthyosis, the Curth-Macklin form typically lacks widespread blistering despite prominent hyperkeratosis",
-      "Lesions may be generalised or arranged in a linear or systematised naevoid pattern following the lines of Blaschko when the disorder is mosaic",
-      "A severe palmoplantar keratoderma is frequently present and can cause functional impairment",
-      "Diagnosis is clinical and histological; electron microscopy classically shows perinuclear shells of keratin filaments, and molecular testing can identify the KRT1 variant",
-      "Management is supportive with intensive emollients and keratolytics, and oral retinoids may reduce the burden of hyperkeratosis in severe disease"
+  "pathophysiology": "Ichthyosis hystrix of the Curth-Macklin type is caused by variants in KRT1, which encodes keratin 1, a component of the suprabasal keratin intermediate filament network. The variants disrupt normal filament assembly, producing aggregated perinuclear keratin shells and abnormal terminal differentiation of keratinocytes. This leads to gross retention hyperkeratosis with the characteristic spiny, verrucous scale, while the specific filament defect accounts for the relative absence of the fragility and blistering seen in classical epidermolytic ichthyosis from other keratin variants.",
+  "additionalDifferentials": [
+   "Epidermolytic ichthyosis (bullous congenital ichthyosiform erythroderma)",
+   "Epidermal naevus and systematised epidermolytic naevus",
+   "Lamellar ichthyosis",
+   "Erythrokeratodermia variabilis",
+   "Pityriasis rubra pilaris",
+   "Confluent and reticulated papillomatosis"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing marked hyperkeratosis and abnormal keratinocyte differentiation",
+   "Electron microscopy for perinuclear keratin shells (Curth-Macklin type)",
+   "Molecular genetic testing of KRT1 and related keratin genes",
+   "Family history and pedigree analysis",
+   "Assessment of palmoplantar involvement and function",
+   "Screening for secondary infection of fissured hyperkeratosis"
+  ],
+  "redFlags": [
+   "Extensive barrier failure with recurrent infection and fluid or temperature dysregulation",
+   "Disabling palmoplantar keratoderma with deep painful fissures",
+   "Rapid change in an established lesion suggesting alternative pathology",
+   "Signs of secondary cutaneous or systemic infection"
+  ],
+  "prognosis": "The disorder is lifelong and can be physically and cosmetically disabling, but with sustained emollient and keratolytic care, and retinoids where appropriate, many patients achieve worthwhile reduction in scale.",
+  "pitfalls": [
+   "Assuming all severe keratin-related ichthyoses blister and overlooking the non-blistering Curth-Macklin type",
+   "Not recognising a systematised naevoid variant as a mosaic form of the disorder",
+   "Neglecting the disabling palmoplantar component",
+   "Underusing emollients and keratolytics before considering systemic therapy"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harper's Textbook of Paediatric Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduce the thick spiny scale with sustained emollient and keratolytic therapy (urea, lactic acid, salicylic acid) as the mainstay",
+   "Offer systemic retinoids for severe disease under specialist supervision, weighing modest benefit against side effects",
+   "Manage severe palmoplantar keratoderma with keratolytics, regular paring or debridement and podiatry to preserve function",
+   "Screen for and treat secondary infection of fissured hyperkeratosis",
+   "Confirm the diagnosis by histology and electron microscopy (perinuclear keratin shells) with KRT1 testing",
+   "Provide genetic counselling for autosomal dominant inheritance, including mosaic Blaschko-distributed disease, within dermatology and clinical genetics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ichthyosis_hystrix-pathway",
+   "title": "Ichthyosis hystrix: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A descriptive term for severe hyperkeratotic disorders producing thick, spiny, verrucous scale that resembles porcupine quills",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Extensive barrier failure with recurrent infection and fluid or temperature dysregulation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing marked hyperkeratosis and abnormal keratinocyte differentiation, Electron microscopy for perinuclear keratin shells (Curth-Macklin type), Molecular genetic testing of KRT1 and related keratin genes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduce the thick spiny scale with sustained emollient and keratolytic therapy (urea, lactic acid, salicylic acid) as the mainstay"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all severe keratin-related ichthyoses blister and overlooking the non-blistering Curth-Macklin type"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ichthyosis hystrix."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ichthyosis_hystrix-matrix",
+   "title": "Ichthyosis hystrix: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A descriptive term for severe hyperkeratotic disorders producing thick, spiny, verrucous scale that resembles porcupine quills",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ichthyosis hystrix of the Curth-Macklin type is caused by variants in KRT1, which encodes keratin 1, a component of the suprabasal keratin intermediate filament network. The variants disrupt normal filament assembly, producing aggregated perinuclear keratin shells and abnormal terminal differentiation of keratinocytes. This leads to gross retention hyperkeratosis with the characteristic spiny, verrucous scale, while the specific filament defect accounts for the relative absence of the fragility and blistering seen in classical epidermolytic ichthyosis from other keratin variants.",
-    "additionalDifferentials": [
-      "Epidermolytic ichthyosis (bullous congenital ichthyosiform erythroderma)",
-      "Epidermal naevus and systematised epidermolytic naevus",
-      "Lamellar ichthyosis",
-      "Erythrokeratodermia variabilis",
-      "Pityriasis rubra pilaris",
-      "Confluent and reticulated papillomatosis"
+    [
+     "Key Investigations",
+     "Skin biopsy showing marked hyperkeratosis and abnormal keratinocyte differentiation, Electron microscopy for perinuclear keratin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing marked hyperkeratosis and abnormal keratinocyte differentiation",
-      "Electron microscopy for perinuclear keratin shells (Curth-Macklin type)",
-      "Molecular genetic testing of KRT1 and related keratin genes",
-      "Family history and pedigree analysis",
-      "Assessment of palmoplantar involvement and function",
-      "Screening for secondary infection of fissured hyperkeratosis"
+    [
+     "Primary Differentials",
+     "Epidermolytic ichthyosis (bullous congenital ichthyosiform erythroderma), Epidermal naevus and systematised epidermolytic naevus,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Extensive barrier failure with recurrent infection and fluid or temperature dysregulation",
-      "Disabling palmoplantar keratoderma with deep painful fissures",
-      "Rapid change in an established lesion suggesting alternative pathology",
-      "Signs of secondary cutaneous or systemic infection"
+    [
+     "Management Strategy",
+     "Reduce the thick spiny scale with sustained emollient and keratolytic therapy (urea, lactic acid, salicylic acid) as the mainstay",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is lifelong and can be physically and cosmetically disabling, but with sustained emollient and keratolytic care, and retinoids where appropriate, many patients achieve worthwhile reduction in scale.",
-    "pitfalls": [
-      "Assuming all severe keratin-related ichthyoses blister and overlooking the non-blistering Curth-Macklin type",
-      "Not recognising a systematised naevoid variant as a mosaic form of the disorder",
-      "Neglecting the disabling palmoplantar component",
-      "Underusing emollients and keratolytics before considering systemic therapy"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harper's Textbook of Paediatric Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduce the thick spiny scale with sustained emollient and keratolytic therapy (urea, lactic acid, salicylic acid) as the mainstay",
-      "Offer systemic retinoids for severe disease under specialist supervision, weighing modest benefit against side effects",
-      "Manage severe palmoplantar keratoderma with keratolytics, regular paring or debridement and podiatry to preserve function",
-      "Screen for and treat secondary infection of fissured hyperkeratosis",
-      "Confirm the diagnosis by histology and electron microscopy (perinuclear keratin shells) with KRT1 testing",
-      "Provide genetic counselling for autosomal dominant inheritance, including mosaic Blaschko-distributed disease, within dermatology and clinical genetics"
+    [
+     "Clinical Pitfall",
+     "Assuming all severe keratin-related ichthyoses blister and overlooking the non-blistering Curth-Macklin type",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ichthyosis hystrix."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ichthyosis-hystrix-diagram",
+   "title": "Ichthyosis hystrix: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

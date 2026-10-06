@@ -1,74 +1,169 @@
 {
-  "id": "zoon_balanitis",
-  "name": "Zoon balanitis",
-  "aliases": [
-    "plasma cell balanitis",
-    "balanitis circumscripta plasmacellularis"
+ "id": "zoon_balanitis",
+ "name": "Zoon balanitis",
+ "aliases": [
+  "plasma cell balanitis",
+  "balanitis circumscripta plasmacellularis"
+ ],
+ "class": "non_infective",
+ "system": "Genitourinary / Skin",
+ "specialty": "Dermatology / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dermatology and urology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign chronic inflammatory dermatosis of the glans and prepuce, occurring almost exclusively in uncircumcised men",
+   "It presents as a well-demarcated, shiny, red-orange plaque, sometimes with pinpoint (cayenne pepper) spots",
+   "It is a diagnosis often confirmed by biopsy showing a dense plasma-cell infiltrate",
+   "Chronic irritation under the foreskin, with poor aeration and retained smegma, is thought to drive it",
+   "The main concern is to exclude erythroplasia of Queyrat (penile carcinoma in situ) and lichen planus",
+   "It often responds to improved hygiene, topical anti-inflammatory treatment, and definitively to circumcision"
   ],
-  "class": "non_infective",
-  "system": "Genitourinary / Skin",
-  "specialty": "Dermatology / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dermatology and urology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign chronic inflammatory dermatosis of the glans and prepuce, occurring almost exclusively in uncircumcised men",
-      "It presents as a well-demarcated, shiny, red-orange plaque, sometimes with pinpoint (cayenne pepper) spots",
-      "It is a diagnosis often confirmed by biopsy showing a dense plasma-cell infiltrate",
-      "Chronic irritation under the foreskin, with poor aeration and retained smegma, is thought to drive it",
-      "The main concern is to exclude erythroplasia of Queyrat (penile carcinoma in situ) and lichen planus",
-      "It often responds to improved hygiene, topical anti-inflammatory treatment, and definitively to circumcision"
+  "pathophysiology": "Zoon balanitis is a chronic reactive mucosal inflammation of the glans and prepuce characterised histologically by a band-like dermal infiltrate rich in plasma cells. It is thought to result from chronic low-grade irritation, friction, moisture and retained smegma beneath the foreskin, since it occurs in uncircumcised men and typically resolves after circumcision. It is not an infection or a premalignant condition, though its appearance overlaps with penile carcinoma in situ, necessitating exclusion of the latter.",
+  "additionalDifferentials": [
+   "Erythroplasia of Queyrat (penile carcinoma in situ)",
+   "Lichen planus of the glans",
+   "Psoriasis",
+   "Candidal or other infective balanitis",
+   "Fixed drug eruption",
+   "Lichen sclerosus"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment of the characteristic plaque",
+   "Biopsy to confirm plasma-cell infiltrate and exclude carcinoma in situ",
+   "Swabs to exclude infective balanitis where relevant",
+   "Assessment of foreskin and hygiene factors",
+   "Follow-up to ensure resolution and exclude malignancy"
+  ],
+  "redFlags": [
+   "Features suggesting erythroplasia of Queyrat or invasive carcinoma",
+   "Failure to respond to conservative treatment",
+   "Ulceration or induration",
+   "Progressive or atypical lesion"
+  ],
+  "prognosis": "The condition is benign and often resolves with conservative measures or circumcision, though it can be chronic and relapsing if predisposing factors persist.",
+  "pitfalls": [
+   "Missing penile carcinoma in situ, which can look similar",
+   "Treating it as candidal balanitis without response",
+   "Not biopsying a persistent or atypical lesion",
+   "Overlooking the role of the foreskin and hygiene"
+  ],
+  "references": [
+   "Dermatology reference texts (standard reference)",
+   "Urology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Circumcision offers definitive cure by removing the retained smegma, moisture and friction that drive the inflammation, and is the treatment of choice for persistent or relapsing disease",
+   "Optimise local hygiene as first-line conservative care, with regular gentle retraction and cleansing, drying of the glans and preputial sac, and reduction of friction and smegma retention",
+   "Topical anti-inflammatory therapy with corticosteroids, sometimes combined with an antimicrobial, or topical calcineurin inhibitors as a steroid-sparing option for symptomatic plaques",
+   "Confirm the diagnosis by biopsy showing the band-like plasma-cell infiltrate and actively exclude erythroplasia of Queyrat (penile carcinoma in situ) and lichen planus before committing to long-term conservative treatment",
+   "Identify and treat any co-existing infective balanitis, whether candidal or bacterial, contributing to preputial inflammation",
+   "Refer to dermatology or urology for diagnostic uncertainty, atypical or non-resolving lesions and for circumcision, keeping lesions under review with re-biopsy of any that fail to resolve to exclude malignancy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "zoon_balanitis-pathway",
+   "title": "Zoon balanitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign chronic inflammatory dermatosis of the glans and prepuce, occurring almost exclusively in uncircumcised men",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting erythroplasia of Queyrat or invasive carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment of the characteristic plaque, Biopsy to confirm plasma-cell infiltrate and exclude carcinoma in situ, Swabs to exclude infective balanitis where relevant"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Circumcision offers definitive cure by removing the retained smegma, moisture and friction that drive the inflammation, and is the treatment of choice for persistent or relapsing disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing penile carcinoma in situ, which can look similar"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of zoon balanitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "zoon_balanitis-matrix",
+   "title": "Zoon balanitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign chronic inflammatory dermatosis of the glans and prepuce, occurring almost exclusively in uncircumcised men",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Zoon balanitis is a chronic reactive mucosal inflammation of the glans and prepuce characterised histologically by a band-like dermal infiltrate rich in plasma cells. It is thought to result from chronic low-grade irritation, friction, moisture and retained smegma beneath the foreskin, since it occurs in uncircumcised men and typically resolves after circumcision. It is not an infection or a premalignant condition, though its appearance overlaps with penile carcinoma in situ, necessitating exclusion of the latter.",
-    "additionalDifferentials": [
-      "Erythroplasia of Queyrat (penile carcinoma in situ)",
-      "Lichen planus of the glans",
-      "Psoriasis",
-      "Candidal or other infective balanitis",
-      "Fixed drug eruption",
-      "Lichen sclerosus"
+    [
+     "Key Investigations",
+     "Clinical assessment of the characteristic plaque, Biopsy to confirm plasma-cell infiltrate and exclude carcinoma in situ, Swabs",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment of the characteristic plaque",
-      "Biopsy to confirm plasma-cell infiltrate and exclude carcinoma in situ",
-      "Swabs to exclude infective balanitis where relevant",
-      "Assessment of foreskin and hygiene factors",
-      "Follow-up to ensure resolution and exclude malignancy"
+    [
+     "Primary Differentials",
+     "Erythroplasia of Queyrat (penile carcinoma in situ), Lichen planus of the glans, Psoriasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting erythroplasia of Queyrat or invasive carcinoma",
-      "Failure to respond to conservative treatment",
-      "Ulceration or induration",
-      "Progressive or atypical lesion"
+    [
+     "Management Strategy",
+     "Circumcision offers definitive cure by removing the retained smegma, moisture and friction that drive the inflammation, and is",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and often resolves with conservative measures or circumcision, though it can be chronic and relapsing if predisposing factors persist.",
-    "pitfalls": [
-      "Missing penile carcinoma in situ, which can look similar",
-      "Treating it as candidal balanitis without response",
-      "Not biopsying a persistent or atypical lesion",
-      "Overlooking the role of the foreskin and hygiene"
-    ],
-    "references": [
-      "Dermatology reference texts (standard reference)",
-      "Urology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Circumcision offers definitive cure by removing the retained smegma, moisture and friction that drive the inflammation, and is the treatment of choice for persistent or relapsing disease",
-      "Optimise local hygiene as first-line conservative care, with regular gentle retraction and cleansing, drying of the glans and preputial sac, and reduction of friction and smegma retention",
-      "Topical anti-inflammatory therapy with corticosteroids, sometimes combined with an antimicrobial, or topical calcineurin inhibitors as a steroid-sparing option for symptomatic plaques",
-      "Confirm the diagnosis by biopsy showing the band-like plasma-cell infiltrate and actively exclude erythroplasia of Queyrat (penile carcinoma in situ) and lichen planus before committing to long-term conservative treatment",
-      "Identify and treat any co-existing infective balanitis, whether candidal or bacterial, contributing to preputial inflammation",
-      "Refer to dermatology or urology for diagnostic uncertainty, atypical or non-resolving lesions and for circumcision, keeping lesions under review with re-biopsy of any that fail to resolve to exclude malignancy"
+    [
+     "Clinical Pitfall",
+     "Missing penile carcinoma in situ, which can look similar",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for zoon balanitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "zoon-balanitis-diagram",
+   "title": "Zoon balanitis: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -177,5 +177,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h516c6a9"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "heart_failure-dx-algo",
+      "title": "Acute heart failure / pulmonary edema: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "HF is a clinical syndrome, not a single disease; it is the common final pathway for most chronic cardiovascular conditions, especially hypertension, coronary artery disease and valvular disease (p.1975).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Acute pulmonary oedema with pink frothy sputum reflects marked elevation of pulmonary capillary wedge pressure (p.1982)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Comprehensive metabolic panel, complete blood count, coagulation studies and urinalysis as baseline; targeted testing for diabetes, lipids and thyroid function (p.1984), Serum sodium and potassium (hyponatraemia is an"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: HFrEF/HFmrEF/HFpEF phenotype by EF: reduced EF (HFrEF) =50%; LVEF >=50% is considered normal systolic function (p.1977-1978, p.1984). NYHA functional class I-IV grades symptoms by the activity that provokes them: class I"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Abandon the old terms systolic and diastolic HF: most HF patients, regardless of EF, have both systolic and diastolic abnormalities (p.1977)"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute heart failure / pulmonary edema."
+    }
+  ],
+  "tables": [
+    {
+      "id": "heart_failure-matrix",
+      "title": "Acute heart failure / pulmonary edema: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "HF is a clinical syndrome, not a single disease; it is the common final pathway for most chronic cardiovascular conditions,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Comprehensive metabolic panel, complete blood count, coagulation studies and urinalysis as baseline; targeted testing for",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Chronic lung disease (orthopnoea and nocturnal dyspnoea can mimic HF; relieved by coughing/expectoration rather than sitting",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Acute pulmonary oedema with pink frothy sputum reflects marked elevation of pulmonary capillary wedge pressure (p.1982)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Abandon the old terms systolic and diastolic HF: most HF patients, regardless of EF, have both systolic and diastolic",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute heart failure / pulmonary edema."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "heart-failure-diagram",
+      "title": "Acute heart failure / pulmonary edema: Cardiovascular & Hemodynamic Diagnostic Schematic",
+      "type": "ecg",
+      "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+      "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+      "annotations": [
+        {
+          "label": "Conduction System",
+          "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+        },
+        {
+          "label": "Coronary Perfusion",
+          "description": "Epicardial arterial distribution and regional myocardial supply zones."
+        },
+        {
+          "label": "Hemodynamics",
+          "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+        }
+      ]
+    }
+  ]
 }

@@ -1,84 +1,179 @@
 {
-  "id": "adpkd",
-  "name": "Autosomal dominant polycystic kidney disease",
-  "aliases": [
-    "ADPKD",
-    "Autosomal dominant polycystic kidney disease (PKD1/PKD2)",
-    "PKD1",
-    "PKD2",
-    "adult polycystic kidney disease",
-    "autosomal dominant polycystic kidney disease",
-    "polycystic kidney disease",
-    "polycystin"
+ "id": "adpkd",
+ "name": "Autosomal dominant polycystic kidney disease",
+ "aliases": [
+  "ADPKD",
+  "Autosomal dominant polycystic kidney disease (PKD1/PKD2)",
+  "PKD1",
+  "PKD2",
+  "adult polycystic kidney disease",
+  "autosomal dominant polycystic kidney disease",
+  "polycystic kidney disease",
+  "polycystin"
+ ],
+ "class": "non_infective",
+ "system": "Renal",
+ "specialty": "Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / KDIGO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "ADPKD is the most common inherited kidney disease and is characterised by progressive bilateral cyst formation that gradually replaces functioning renal tissue",
+   "Most cases result from mutations in one of two genes, with the more common mutation generally causing earlier and more severe disease than the other",
+   "Common presentations include hypertension, flank or abdominal pain, haematuria, kidney stones, urinary infections, and a family history of kidney disease",
+   "Diagnosis is usually established by ultrasound using age-adjusted criteria for the number of cysts, with a positive family history strengthening the diagnosis",
+   "Extrarenal manifestations are important and include hepatic cysts, intracranial aneurysms, cardiac valve abnormalities, and abdominal wall hernias",
+   "Screening for intracranial aneurysms is targeted rather than universal, focusing on those with a family history of aneurysm or subarachnoid haemorrhage or high-risk occupations",
+   "Blood pressure control with renin-angiotensin system blockade and generous water intake are core management principles, and a vasopressin antagonist can slow cyst growth in selected rapidly progressing patients",
+   "Total kidney volume and the specific genotype help predict the rate of progression and identify candidates for disease-modifying therapy"
   ],
-  "class": "non_infective",
-  "system": "Renal",
-  "specialty": "Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / KDIGO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "ADPKD is the most common inherited kidney disease and is characterised by progressive bilateral cyst formation that gradually replaces functioning renal tissue",
-      "Most cases result from mutations in one of two genes, with the more common mutation generally causing earlier and more severe disease than the other",
-      "Common presentations include hypertension, flank or abdominal pain, haematuria, kidney stones, urinary infections, and a family history of kidney disease",
-      "Diagnosis is usually established by ultrasound using age-adjusted criteria for the number of cysts, with a positive family history strengthening the diagnosis",
-      "Extrarenal manifestations are important and include hepatic cysts, intracranial aneurysms, cardiac valve abnormalities, and abdominal wall hernias",
-      "Screening for intracranial aneurysms is targeted rather than universal, focusing on those with a family history of aneurysm or subarachnoid haemorrhage or high-risk occupations",
-      "Blood pressure control with renin-angiotensin system blockade and generous water intake are core management principles, and a vasopressin antagonist can slow cyst growth in selected rapidly progressing patients",
-      "Total kidney volume and the specific genotype help predict the rate of progression and identify candidates for disease-modifying therapy"
+  "pathophysiology": "ADPKD is caused by mutations in genes encoding polycystin proteins, which are located in the primary cilium and are important for sensing tubular flow and regulating tubular cell proliferation and differentiation. Loss of normal polycystin function disrupts intracellular calcium signalling and increases cyclic AMP, promoting abnormal epithelial proliferation and fluid secretion into forming cysts. Cysts arise from tubular segments, enlarge progressively, and detach from the parent tubule, expanding relentlessly and compressing adjacent normal parenchyma. Vasopressin-driven cyclic AMP signalling is a key driver of cyst fluid secretion and growth, which underlies the therapeutic role of vasopressin blockade. Progressive cyst expansion, interstitial inflammation, and fibrosis gradually reduce functioning nephron mass, while activation of the renin-angiotensin system contributes to the early and often severe hypertension.",
+  "additionalDifferentials": [
+   "Autosomal recessive polycystic kidney disease",
+   "Acquired cystic kidney disease of chronic renal failure",
+   "Simple renal cysts",
+   "Tuberous sclerosis or von Hippel-Lindau associated cystic disease",
+   "Autosomal dominant tubulointerstitial kidney disease",
+   "Medullary cystic disease"
+  ],
+  "additionalInvestigations": [
+   "Renal ultrasound applying age-adjusted cyst count criteria",
+   "Cross-sectional imaging and total kidney volume measurement to assess prognosis",
+   "Blood pressure monitoring and assessment of renal function",
+   "Urinalysis for haematuria, proteinuria, and infection",
+   "Liver imaging for hepatic cysts when relevant",
+   "Targeted cerebral vascular imaging for aneurysm screening in high-risk patients; genetic testing when the diagnosis is uncertain"
+  ],
+  "redFlags": [
+   "Sudden severe headache suggesting rupture of an intracranial aneurysm",
+   "Cyst infection or haemorrhage causing fever and severe flank pain",
+   "Rapidly declining renal function or refractory hypertension",
+   "Obstructing or infected kidney stones"
+  ],
+  "prognosis": "ADPKD typically progresses over decades, with many patients reaching end-stage kidney disease in mid to later adult life, though the rate varies widely with genotype and total kidney volume. Blood pressure control, treatment of complications, and disease-modifying therapy in appropriate patients can slow progression, and outcomes on dialysis and after transplantation are generally good. Intracranial aneurysm rupture is a serious extrarenal risk in susceptible individuals.",
+  "pitfalls": [
+   "Applying uniform ultrasound cyst criteria without adjusting for the patient's age",
+   "Recommending universal aneurysm screening rather than targeting high-risk patients",
+   "Missing a cyst infection because it can present without the usual urinary findings",
+   "Failing to identify rapidly progressing patients who might benefit from disease-modifying therapy"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "KDIGO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer the vasopressin V2-receptor antagonist tolvaptan to slow cyst growth in those with rapidly progressive disease",
+   "Control blood pressure with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor blocker",
+   "Advise generous fluid intake, dietary sodium restriction and avoidance of nephrotoxins",
+   "Manage complications including cyst haemorrhage, nephrolithiasis and cyst infection with lipophilic antibiotics that penetrate cyst fluid",
+   "Monitor renal function, blood pressure and total kidney volume, and screen for intracranial aneurysm in high-risk patients such as those with a family history of aneurysm or subarachnoid haemorrhage",
+   "Prepare for renal replacement therapy and transplantation as kidney failure approaches",
+   "Provide genetic counselling and family screening given autosomal dominant inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "adpkd-pathway",
+   "title": "Autosomal dominant polycystic kidney disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "ADPKD is the most common inherited kidney disease and is characterised by progressive bilateral cyst formation that gradually replaces functioning renal tissue",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden severe headache suggesting rupture of an intracranial aneurysm",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Renal ultrasound applying age-adjusted cyst count criteria, Cross-sectional imaging and total kidney volume measurement to assess prognosis, Blood pressure monitoring and assessment of renal function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer the vasopressin V2-receptor antagonist tolvaptan to slow cyst growth in those with rapidly progressive disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Applying uniform ultrasound cyst criteria without adjusting for the patient's age"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of autosomal dominant polycystic kidney disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adpkd-matrix",
+   "title": "Autosomal dominant polycystic kidney disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "ADPKD is the most common inherited kidney disease and is characterised by progressive bilateral cyst formation that gradually",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "ADPKD is caused by mutations in genes encoding polycystin proteins, which are located in the primary cilium and are important for sensing tubular flow and regulating tubular cell proliferation and differentiation. Loss of normal polycystin function disrupts intracellular calcium signalling and increases cyclic AMP, promoting abnormal epithelial proliferation and fluid secretion into forming cysts. Cysts arise from tubular segments, enlarge progressively, and detach from the parent tubule, expanding relentlessly and compressing adjacent normal parenchyma. Vasopressin-driven cyclic AMP signalling is a key driver of cyst fluid secretion and growth, which underlies the therapeutic role of vasopressin blockade. Progressive cyst expansion, interstitial inflammation, and fibrosis gradually reduce functioning nephron mass, while activation of the renin-angiotensin system contributes to the early and often severe hypertension.",
-    "additionalDifferentials": [
-      "Autosomal recessive polycystic kidney disease",
-      "Acquired cystic kidney disease of chronic renal failure",
-      "Simple renal cysts",
-      "Tuberous sclerosis or von Hippel-Lindau associated cystic disease",
-      "Autosomal dominant tubulointerstitial kidney disease",
-      "Medullary cystic disease"
+    [
+     "Key Investigations",
+     "Renal ultrasound applying age-adjusted cyst count criteria, Cross-sectional imaging and total kidney volume measurement to assess",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Renal ultrasound applying age-adjusted cyst count criteria",
-      "Cross-sectional imaging and total kidney volume measurement to assess prognosis",
-      "Blood pressure monitoring and assessment of renal function",
-      "Urinalysis for haematuria, proteinuria, and infection",
-      "Liver imaging for hepatic cysts when relevant",
-      "Targeted cerebral vascular imaging for aneurysm screening in high-risk patients; genetic testing when the diagnosis is uncertain"
+    [
+     "Primary Differentials",
+     "Autosomal recessive polycystic kidney disease, Acquired cystic kidney disease of chronic renal failure, Simple renal cysts",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden severe headache suggesting rupture of an intracranial aneurysm",
-      "Cyst infection or haemorrhage causing fever and severe flank pain",
-      "Rapidly declining renal function or refractory hypertension",
-      "Obstructing or infected kidney stones"
+    [
+     "Management Strategy",
+     "Offer the vasopressin V2-receptor antagonist tolvaptan to slow cyst growth in those with rapidly progressive disease",
+     "Core treatment modality"
     ],
-    "prognosis": "ADPKD typically progresses over decades, with many patients reaching end-stage kidney disease in mid to later adult life, though the rate varies widely with genotype and total kidney volume. Blood pressure control, treatment of complications, and disease-modifying therapy in appropriate patients can slow progression, and outcomes on dialysis and after transplantation are generally good. Intracranial aneurysm rupture is a serious extrarenal risk in susceptible individuals.",
-    "pitfalls": [
-      "Applying uniform ultrasound cyst criteria without adjusting for the patient's age",
-      "Recommending universal aneurysm screening rather than targeting high-risk patients",
-      "Missing a cyst infection because it can present without the usual urinary findings",
-      "Failing to identify rapidly progressing patients who might benefit from disease-modifying therapy"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "KDIGO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer the vasopressin V2-receptor antagonist tolvaptan to slow cyst growth in those with rapidly progressive disease",
-      "Control blood pressure with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor blocker",
-      "Advise generous fluid intake, dietary sodium restriction and avoidance of nephrotoxins",
-      "Manage complications including cyst haemorrhage, nephrolithiasis and cyst infection with lipophilic antibiotics that penetrate cyst fluid",
-      "Monitor renal function, blood pressure and total kidney volume, and screen for intracranial aneurysm in high-risk patients such as those with a family history of aneurysm or subarachnoid haemorrhage",
-      "Prepare for renal replacement therapy and transplantation as kidney failure approaches",
-      "Provide genetic counselling and family screening given autosomal dominant inheritance"
+    [
+     "Clinical Pitfall",
+     "Applying uniform ultrasound cyst criteria without adjusting for the patient's age",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for autosomal dominant polycystic kidney disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "adpkd-diagram",
+   "title": "Autosomal dominant polycystic kidney disease: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

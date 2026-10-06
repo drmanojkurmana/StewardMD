@@ -1,80 +1,175 @@
 {
-  "id": "gallbladder_polyp",
-  "name": "Gallbladder polyp",
-  "aliases": [
-    "gallbladder polypoid lesion",
-    "polypoid lesion of the gallbladder",
-    "cholesterol polyp"
+ "id": "gallbladder_polyp",
+ "name": "Gallbladder polyp",
+ "aliases": [
+  "gallbladder polypoid lesion",
+  "polypoid lesion of the gallbladder",
+  "cholesterol polyp"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology / Hepatobiliary",
+ "specialty": "Hepatobiliary / Pancreatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A projection from the gallbladder wall found commonly and usually incidentally on ultrasound, most often benign",
+   "The great majority are non-neoplastic cholesterol polyps or inflammatory or adenomyomatous lesions rather than true neoplasms",
+   "True adenomas are premalignant, and the main clinical task is stratifying the small risk of malignancy or malignant potential",
+   "Polyp size is the key risk marker: larger polyps carry a higher likelihood of neoplasia, and a threshold around one centimetre is widely used to prompt consideration of surgery",
+   "Additional risk features include a solitary sessile polyp, rapid growth on surveillance, older age, coexisting gallstones, and primary sclerosing cholangitis",
+   "Cholesterol polyps are frequently multiple, small, and pedunculated with an echogenic appearance on ultrasound",
+   "Management follows a risk-based strategy: cholecystectomy for polyps with concerning features and ultrasound surveillance for small low-risk lesions, with guidelines defining thresholds and intervals"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology / Hepatobiliary",
-  "specialty": "Hepatobiliary / Pancreatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A projection from the gallbladder wall found commonly and usually incidentally on ultrasound, most often benign",
-      "The great majority are non-neoplastic cholesterol polyps or inflammatory or adenomyomatous lesions rather than true neoplasms",
-      "True adenomas are premalignant, and the main clinical task is stratifying the small risk of malignancy or malignant potential",
-      "Polyp size is the key risk marker: larger polyps carry a higher likelihood of neoplasia, and a threshold around one centimetre is widely used to prompt consideration of surgery",
-      "Additional risk features include a solitary sessile polyp, rapid growth on surveillance, older age, coexisting gallstones, and primary sclerosing cholangitis",
-      "Cholesterol polyps are frequently multiple, small, and pedunculated with an echogenic appearance on ultrasound",
-      "Management follows a risk-based strategy: cholecystectomy for polyps with concerning features and ultrasound surveillance for small low-risk lesions, with guidelines defining thresholds and intervals"
+  "pathophysiology": "Gallbladder polyps are a heterogeneous group of mucosal elevations. Most are pseudopolyps: cholesterol polyps formed by focal accumulation of cholesterol-laden macrophages within the mucosa, inflammatory polyps from chronic inflammation, or localised adenomyomatosis. A minority are true epithelial neoplasms, chiefly adenomas, which can progress through an adenoma-to-carcinoma sequence to gallbladder adenocarcinoma. The probability that a polyp is neoplastic and potentially malignant rises with increasing size and with certain morphological and clinical features, which is why size and growth on serial imaging drive management. Coexisting gallstones and chronic inflammation, as well as conditions such as primary sclerosing cholangitis, further raise the risk of malignancy.",
+  "additionalDifferentials": [
+   "Adherent gallstone or tumefactive sludge",
+   "Adenomyomatosis of the gallbladder",
+   "Gallbladder adenoma",
+   "Gallbladder adenocarcinoma",
+   "Metastasis or other rare gallbladder tumour",
+   "Inflammatory or fibrous polyp"
+  ],
+  "additionalInvestigations": [
+   "Transabdominal ultrasound to measure size, number, and morphology and to detect gallstones",
+   "Endoscopic ultrasound for detailed characterisation of indeterminate or larger polyps",
+   "Contrast-enhanced ultrasound or MRI when malignancy is suspected",
+   "Serial ultrasound surveillance to assess growth of small polyps",
+   "Liver function tests and CA 19-9 if malignancy is a concern",
+   "Assessment for primary sclerosing cholangitis in relevant patients"
+  ],
+  "redFlags": [
+   "A polyp at or above the size threshold that prompts consideration of surgery",
+   "Documented growth of a polyp during surveillance",
+   "A solitary sessile polyp or focal wall thickening at the polyp base",
+   "Older age, coexisting gallstones, or primary sclerosing cholangitis increasing malignant risk",
+   "Symptoms or biochemical changes suggesting malignancy"
+  ],
+  "prognosis": "Small non-neoplastic polyps have an excellent prognosis and rarely progress, while adenomas and early carcinomas identified and resected promptly can be cured; outcomes are poor once invasive gallbladder carcinoma is advanced, underscoring the value of appropriate risk stratification.",
+  "pitfalls": [
+   "Mistaking an adherent stone or sludge ball for a fixed polyp",
+   "Failing to act on a polyp that meets size or growth criteria for surgery",
+   "Over-treating numerous tiny cholesterol polyps that pose negligible risk",
+   "Neglecting the heightened malignant risk in primary sclerosing cholangitis",
+   "Abandoning surveillance of small polyps that warrant continued follow-up"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Joint European guidelines on the management of gallbladder polyps",
+   "Reviews of gallbladder polyp malignancy risk stratification"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cholecystectomy, usually laparoscopic, for polyps meeting high-risk criteria such as a large or enlarging polyp, solitary sessile morphology, older age, or coexisting primary sclerosing cholangitis",
+   "Cholecystectomy for symptomatic polyps or those with symptomatic coexisting gallstones",
+   "Serial ultrasound surveillance of small, low-risk polyps to detect growth",
+   "Endoscopic ultrasound or contrast-enhanced imaging to characterise indeterminate or larger lesions",
+   "Risk stratification incorporating age, polyp number and morphology and coexisting gallstones to guide surgery versus surveillance",
+   "Referral to hepatobiliary surgery for polyps meeting resection criteria"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gallbladder_polyp-pathway",
+   "title": "Gallbladder polyp: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A projection from the gallbladder wall found commonly and usually incidentally on ultrasound, most often benign",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A polyp at or above the size threshold that prompts consideration of surgery",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transabdominal ultrasound to measure size, number, and morphology and to detect gallstones, Endoscopic ultrasound for detailed characterisation of indeterminate or larger polyps, Contrast-enhanced ultrasound or MRI when"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cholecystectomy, usually laparoscopic, for polyps meeting high-risk criteria such as a large or enlarging polyp, solitary sessile morphology, older age, or coexisting primary sclerosing cholangitis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking an adherent stone or sludge ball for a fixed polyp"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gallbladder polyp."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gallbladder_polyp-matrix",
+   "title": "Gallbladder polyp: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A projection from the gallbladder wall found commonly and usually incidentally on ultrasound, most often benign",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Gallbladder polyps are a heterogeneous group of mucosal elevations. Most are pseudopolyps: cholesterol polyps formed by focal accumulation of cholesterol-laden macrophages within the mucosa, inflammatory polyps from chronic inflammation, or localised adenomyomatosis. A minority are true epithelial neoplasms, chiefly adenomas, which can progress through an adenoma-to-carcinoma sequence to gallbladder adenocarcinoma. The probability that a polyp is neoplastic and potentially malignant rises with increasing size and with certain morphological and clinical features, which is why size and growth on serial imaging drive management. Coexisting gallstones and chronic inflammation, as well as conditions such as primary sclerosing cholangitis, further raise the risk of malignancy.",
-    "additionalDifferentials": [
-      "Adherent gallstone or tumefactive sludge",
-      "Adenomyomatosis of the gallbladder",
-      "Gallbladder adenoma",
-      "Gallbladder adenocarcinoma",
-      "Metastasis or other rare gallbladder tumour",
-      "Inflammatory or fibrous polyp"
+    [
+     "Key Investigations",
+     "Transabdominal ultrasound to measure size, number, and morphology and to detect gallstones, Endoscopic ultrasound for detailed",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transabdominal ultrasound to measure size, number, and morphology and to detect gallstones",
-      "Endoscopic ultrasound for detailed characterisation of indeterminate or larger polyps",
-      "Contrast-enhanced ultrasound or MRI when malignancy is suspected",
-      "Serial ultrasound surveillance to assess growth of small polyps",
-      "Liver function tests and CA 19-9 if malignancy is a concern",
-      "Assessment for primary sclerosing cholangitis in relevant patients"
+    [
+     "Primary Differentials",
+     "Adherent gallstone or tumefactive sludge, Adenomyomatosis of the gallbladder, Gallbladder adenoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A polyp at or above the size threshold that prompts consideration of surgery",
-      "Documented growth of a polyp during surveillance",
-      "A solitary sessile polyp or focal wall thickening at the polyp base",
-      "Older age, coexisting gallstones, or primary sclerosing cholangitis increasing malignant risk",
-      "Symptoms or biochemical changes suggesting malignancy"
+    [
+     "Management Strategy",
+     "Cholecystectomy, usually laparoscopic, for polyps meeting high-risk criteria such as a large or enlarging polyp, solitary sessile",
+     "Core treatment modality"
     ],
-    "prognosis": "Small non-neoplastic polyps have an excellent prognosis and rarely progress, while adenomas and early carcinomas identified and resected promptly can be cured; outcomes are poor once invasive gallbladder carcinoma is advanced, underscoring the value of appropriate risk stratification.",
-    "pitfalls": [
-      "Mistaking an adherent stone or sludge ball for a fixed polyp",
-      "Failing to act on a polyp that meets size or growth criteria for surgery",
-      "Over-treating numerous tiny cholesterol polyps that pose negligible risk",
-      "Neglecting the heightened malignant risk in primary sclerosing cholangitis",
-      "Abandoning surveillance of small polyps that warrant continued follow-up"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Joint European guidelines on the management of gallbladder polyps",
-      "Reviews of gallbladder polyp malignancy risk stratification"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cholecystectomy, usually laparoscopic, for polyps meeting high-risk criteria such as a large or enlarging polyp, solitary sessile morphology, older age, or coexisting primary sclerosing cholangitis",
-      "Cholecystectomy for symptomatic polyps or those with symptomatic coexisting gallstones",
-      "Serial ultrasound surveillance of small, low-risk polyps to detect growth",
-      "Endoscopic ultrasound or contrast-enhanced imaging to characterise indeterminate or larger lesions",
-      "Risk stratification incorporating age, polyp number and morphology and coexisting gallstones to guide surgery versus surveillance",
-      "Referral to hepatobiliary surgery for polyps meeting resection criteria"
+    [
+     "Clinical Pitfall",
+     "Mistaking an adherent stone or sludge ball for a fixed polyp",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gallbladder polyp."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gallbladder-polyp-diagram",
+   "title": "Gallbladder polyp: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

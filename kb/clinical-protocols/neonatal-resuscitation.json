@@ -140,5 +140,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-resuscitation-pathway",
+   "title": "Neonatal resuscitation at birth Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Every birth needs a trained person with a checked bag and mask, suction, warmer and timer. Brief the team and assign roles when risk factors are present (preterm, meconium-stained liquor, fetal distress, multiple birth, maternal infection).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Receive in warm dry linen, dry thoroughly, remove wet linen, position the head neutral or slightly extended and stimulate by rubbing the back. Suction mouth then nose only if the airway looks obstructed.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Babies not needing resuscitation (term and preterm): defer cord clamping for at least 60 seconds. Non-vigorous babies of 35 weeks or more: intact cord milking may be reasonable. Never milk the cord below 28 weeks."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Start chest compressions only if heart rate remains below 60/min after at least 30 seconds of effective ventilation that moves the chest (after MR SOPA corrections), preferably through an endotracheal tube or laryngeal mask. Increase"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Preductal SpO2 targets after birth: 1 min 60 to 65%, 2 min 65 to 70%, 3 min 70 to 75%, 4 min 75 to 80%, 5 min 80 to 85%, 10 min 85 to 95%. Avoid hyperoxia; wean oxygen as saturation rises."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for neonatal resuscitation at birth."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-resuscitation-summary-matrix",
+   "title": "Neonatal resuscitation at birth Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Every birth needs a trained person with a checked bag and mask, suction, warmer and timer. Brief the team and assign roles when risk",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Receive in warm dry linen, dry thoroughly, remove wet linen, position the head neutral or slightly extended and stimulate by rubbing the",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adrenaline (epinephrine) 0.1 mg/mL (1 mg in 10 mL): 0.01 to 0.03 mg/kg (0.1 to 0.3 mL/kg) IV or IO, repeat every 3 to 5 minutes while heart",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Moving to compressions or drugs before ventilation is effective: most bradycardic newborns respond to good ventilation alone.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for neonatal resuscitation at birth."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-resuscitation-diagram",
+   "title": "Neonatal resuscitation at birth: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

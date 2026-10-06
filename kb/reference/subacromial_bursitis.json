@@ -1,76 +1,171 @@
 {
-  "id": "subacromial_bursitis",
-  "name": "Subacromial bursitis",
-  "aliases": [
-    "subdeltoid bursitis",
-    "subacromial-subdeltoid bursitis",
-    "SASD bursitis"
+ "id": "subacromial_bursitis",
+ "name": "Subacromial bursitis",
+ "aliases": [
+  "subdeltoid bursitis",
+  "subacromial-subdeltoid bursitis",
+  "SASD bursitis"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Soft tissue",
+ "specialty": "Sports Medicine / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Inflammation or thickening of the subacromial-subdeltoid bursa, usually secondary to rotator cuff pathology rather than an isolated process",
+   "Presents with lateral shoulder pain on overhead activity, often with a painful arc and positive impingement signs",
+   "Frequently coexists with rotator cuff tendinopathy and shares its clinical picture, so the two are often inseparable",
+   "Ultrasound demonstrates bursal thickening or fluid and can show dynamic impingement",
+   "A diagnostic and therapeutic subacromial injection can confirm the pain source and relieve symptoms, but repeated corticosteroid use should be limited",
+   "Management targets the underlying cuff disorder with relative rest, load management and physiotherapy",
+   "Isolated septic subacromial bursitis is uncommon but must be considered when systemic features are present"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Soft tissue",
-  "specialty": "Sports Medicine / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Inflammation or thickening of the subacromial-subdeltoid bursa, usually secondary to rotator cuff pathology rather than an isolated process",
-      "Presents with lateral shoulder pain on overhead activity, often with a painful arc and positive impingement signs",
-      "Frequently coexists with rotator cuff tendinopathy and shares its clinical picture, so the two are often inseparable",
-      "Ultrasound demonstrates bursal thickening or fluid and can show dynamic impingement",
-      "A diagnostic and therapeutic subacromial injection can confirm the pain source and relieve symptoms, but repeated corticosteroid use should be limited",
-      "Management targets the underlying cuff disorder with relative rest, load management and physiotherapy",
-      "Isolated septic subacromial bursitis is uncommon but must be considered when systemic features are present"
+  "pathophysiology": "The subacromial-subdeltoid bursa reduces friction between the rotator cuff and the overlying acromion and deltoid. With repetitive overhead loading, adjacent cuff tendinopathy, or mechanical irritation in a narrowed subacromial space, the bursa becomes thickened and inflamed. It is usually a secondary phenomenon accompanying rotator cuff related shoulder pain rather than a standalone diagnosis, and clinically the two are often indistinguishable. Rarely the bursa is involved in an inflammatory arthropathy or becomes infected, typically after a breach of overlying tissues.",
+  "additionalDifferentials": [
+   "Rotator cuff tendinopathy or tear",
+   "Calcific tendinitis",
+   "Adhesive capsulitis",
+   "Glenohumeral or acromioclavicular arthritis",
+   "Septic bursitis or septic arthritis",
+   "Cervical radiculopathy referring to the shoulder"
+  ],
+  "additionalInvestigations": [
+   "Ultrasound to assess bursal fluid and thickening and cuff integrity",
+   "Diagnostic subacromial local anaesthetic injection",
+   "Plain radiographs for acromial shape, arthritis and calcification",
+   "MRI where a cuff tear or other pathology is suspected",
+   "Inflammatory markers and bursal aspiration if infection is suspected"
+  ],
+  "redFlags": [
+   "Fever, erythema and marked tenderness suggesting septic bursitis",
+   "Acute loss of active movement after trauma suggesting a cuff tear",
+   "Systemic upset or immunosuppression raising infection risk",
+   "Progressive night pain unresponsive to treatment"
+  ],
+  "prognosis": "Usually settles with treatment of the underlying cuff disorder and activity modification; recurrence relates to ongoing overload or unaddressed cuff pathology.",
+  "pitfalls": [
+   "Treating bursitis in isolation while ignoring the underlying cuff tendinopathy",
+   "Repeated corticosteroid injections without addressing load",
+   "Missing septic bursitis in an atypically hot, swollen presentation",
+   "Over-reliance on imaging findings that may be incidental"
+  ],
+  "references": [
+   "Brukner and Khan's Clinical Sports Medicine",
+   "British Journal of Sports Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying rotator cuff disorder with relative rest, activity and load modification, and structured physiotherapy for cuff and scapular strengthening",
+   "Simple analgesia and NSAIDs for pain and inflammation",
+   "Subacromial corticosteroid injection for diagnostic confirmation and symptom relief, limiting repeated corticosteroid use",
+   "Ultrasound assessment of bursal thickening or fluid and cuff integrity to guide treatment",
+   "Aspiration and culture-directed antibiotics if septic bursitis is suspected",
+   "Referral for a surgical opinion regarding subacromial decompression where symptoms persist despite conservative treatment or a significant cuff tear is present"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "subacromial_bursitis-pathway",
+   "title": "Subacromial bursitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Inflammation or thickening of the subacromial-subdeltoid bursa, usually secondary to rotator cuff pathology rather than an isolated process",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Fever, erythema and marked tenderness suggesting septic bursitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Ultrasound to assess bursal fluid and thickening and cuff integrity, Diagnostic subacromial local anaesthetic injection, Plain radiographs for acromial shape, arthritis and calcification"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying rotator cuff disorder with relative rest, activity and load modification, and structured physiotherapy for cuff and scapular strengthening"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating bursitis in isolation while ignoring the underlying cuff tendinopathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of subacromial bursitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "subacromial_bursitis-matrix",
+   "title": "Subacromial bursitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Inflammation or thickening of the subacromial-subdeltoid bursa, usually secondary to rotator cuff pathology rather than an",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The subacromial-subdeltoid bursa reduces friction between the rotator cuff and the overlying acromion and deltoid. With repetitive overhead loading, adjacent cuff tendinopathy, or mechanical irritation in a narrowed subacromial space, the bursa becomes thickened and inflamed. It is usually a secondary phenomenon accompanying rotator cuff related shoulder pain rather than a standalone diagnosis, and clinically the two are often indistinguishable. Rarely the bursa is involved in an inflammatory arthropathy or becomes infected, typically after a breach of overlying tissues.",
-    "additionalDifferentials": [
-      "Rotator cuff tendinopathy or tear",
-      "Calcific tendinitis",
-      "Adhesive capsulitis",
-      "Glenohumeral or acromioclavicular arthritis",
-      "Septic bursitis or septic arthritis",
-      "Cervical radiculopathy referring to the shoulder"
+    [
+     "Key Investigations",
+     "Ultrasound to assess bursal fluid and thickening and cuff integrity, Diagnostic subacromial local anaesthetic injection, Plain",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Ultrasound to assess bursal fluid and thickening and cuff integrity",
-      "Diagnostic subacromial local anaesthetic injection",
-      "Plain radiographs for acromial shape, arthritis and calcification",
-      "MRI where a cuff tear or other pathology is suspected",
-      "Inflammatory markers and bursal aspiration if infection is suspected"
+    [
+     "Primary Differentials",
+     "Rotator cuff tendinopathy or tear, Calcific tendinitis, Adhesive capsulitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Fever, erythema and marked tenderness suggesting septic bursitis",
-      "Acute loss of active movement after trauma suggesting a cuff tear",
-      "Systemic upset or immunosuppression raising infection risk",
-      "Progressive night pain unresponsive to treatment"
+    [
+     "Management Strategy",
+     "Treat the underlying rotator cuff disorder with relative rest, activity and load modification, and structured physiotherapy for",
+     "Core treatment modality"
     ],
-    "prognosis": "Usually settles with treatment of the underlying cuff disorder and activity modification; recurrence relates to ongoing overload or unaddressed cuff pathology.",
-    "pitfalls": [
-      "Treating bursitis in isolation while ignoring the underlying cuff tendinopathy",
-      "Repeated corticosteroid injections without addressing load",
-      "Missing septic bursitis in an atypically hot, swollen presentation",
-      "Over-reliance on imaging findings that may be incidental"
-    ],
-    "references": [
-      "Brukner and Khan's Clinical Sports Medicine",
-      "British Journal of Sports Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying rotator cuff disorder with relative rest, activity and load modification, and structured physiotherapy for cuff and scapular strengthening",
-      "Simple analgesia and NSAIDs for pain and inflammation",
-      "Subacromial corticosteroid injection for diagnostic confirmation and symptom relief, limiting repeated corticosteroid use",
-      "Ultrasound assessment of bursal thickening or fluid and cuff integrity to guide treatment",
-      "Aspiration and culture-directed antibiotics if septic bursitis is suspected",
-      "Referral for a surgical opinion regarding subacromial decompression where symptoms persist despite conservative treatment or a significant cuff tear is present"
+    [
+     "Clinical Pitfall",
+     "Treating bursitis in isolation while ignoring the underlying cuff tendinopathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for subacromial bursitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "subacromial-bursitis-diagram",
+   "title": "Subacromial bursitis: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

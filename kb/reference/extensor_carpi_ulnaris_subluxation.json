@@ -1,80 +1,175 @@
 {
-  "id": "extensor_carpi_ulnaris_subluxation",
-  "name": "extensor carpi ulnaris subluxation",
-  "aliases": [
-    "ECU tendon instability",
-    "ECU subluxation",
-    "sixth compartment instability"
+ "id": "extensor_carpi_ulnaris_subluxation",
+ "name": "extensor carpi ulnaris subluxation",
+ "aliases": [
+  "ECU tendon instability",
+  "ECU subluxation",
+  "sixth compartment instability"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Hand and wrist surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Instability of the extensor carpi ulnaris tendon results from disruption of its fibro-osseous subsheath within the groove on the distal ulna.",
+   "Patients report a painful snap over the ulnar wrist, provoked by forearm supination, wrist flexion and ulnar deviation.",
+   "The tendon subluxates volarly and ulnarly out of its groove during supination and relocates on pronation.",
+   "Dynamic ultrasound during active supination and pronation is the investigation of choice to demonstrate the subluxation.",
+   "Acute subsheath injury may be treated with immobilisation in pronation and slight extension, whereas chronic cases often require subsheath reconstruction.",
+   "It is a frequently overlooked cause of ulnar-sided wrist pain, especially in racquet and stick sports.",
+   "Because the extensor carpi ulnaris also acts as a dynamic stabiliser of the distal radioulnar joint, instability may coexist with DRUJ symptoms."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Hand and wrist surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Instability of the extensor carpi ulnaris tendon results from disruption of its fibro-osseous subsheath within the groove on the distal ulna.",
-      "Patients report a painful snap over the ulnar wrist, provoked by forearm supination, wrist flexion and ulnar deviation.",
-      "The tendon subluxates volarly and ulnarly out of its groove during supination and relocates on pronation.",
-      "Dynamic ultrasound during active supination and pronation is the investigation of choice to demonstrate the subluxation.",
-      "Acute subsheath injury may be treated with immobilisation in pronation and slight extension, whereas chronic cases often require subsheath reconstruction.",
-      "It is a frequently overlooked cause of ulnar-sided wrist pain, especially in racquet and stick sports.",
-      "Because the extensor carpi ulnaris also acts as a dynamic stabiliser of the distal radioulnar joint, instability may coexist with DRUJ symptoms."
+  "pathophysiology": "The extensor carpi ulnaris occupies the sixth dorsal compartment, held within a groove on the dorsal-ulnar aspect of the distal ulna by a dedicated fibro-osseous subsheath that is distinct from the overlying extensor retinaculum. Forceful or repetitive supination, palmar flexion and ulnar deviation stress this subsheath, and a tear allows the tendon to escape the groove and snap over the ulnar border. Because the subsheath does not readily heal once torn or attenuated, instability tends to become recurrent, and chronic subluxation can produce tendon degeneration and tenosynovitis.",
+  "additionalDifferentials": [
+   "Triangular fibrocartilage complex (TFCC) tear",
+   "Distal radioulnar joint instability",
+   "Extensor carpi ulnaris tendinopathy or tenosynovitis",
+   "Lunotriquetral ligament injury",
+   "Ulnar impaction syndrome",
+   "Pisotriquetral arthritis",
+   "Ulnar styloid nonunion"
+  ],
+  "additionalInvestigations": [
+   "Dynamic ultrasound during active supination and pronation",
+   "MRI showing the extensor carpi ulnaris tendon displaced from its groove",
+   "Plain radiographs to assess the ulnar groove and exclude bony pathology",
+   "MR arthrography if a concomitant TFCC injury is suspected",
+   "Comparison examination of the contralateral wrist",
+   "Diagnostic local anaesthetic infiltration of the sixth compartment"
+  ],
+  "redFlags": [
+   "Locking or fixed dislocation of the tendon",
+   "Associated distal radioulnar joint instability",
+   "Progressive tendon degeneration or attritional rupture",
+   "Failure to improve after appropriate immobilisation"
+  ],
+  "prognosis": "Acute injuries immobilised appropriately can settle, while chronic symptomatic subluxation generally responds well to subsheath reconstruction with return to sport in most patients.",
+  "pitfalls": [
+   "Attributing the snapping solely to a TFCC tear and missing tendon instability.",
+   "Relying on static imaging, which may appear normal when the tendon is reduced.",
+   "Immobilising acutely in the wrong forearm position, such as supination rather than pronation.",
+   "Overlooking the tendon's role in distal radioulnar joint stability."
+  ],
+  "references": [
+   "Green's Operative Hand Surgery",
+   "Rockwood and Green's Fractures in Adults",
+   "Wheeless' Textbook of Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Acute subsheath injury: immobilise the wrist in pronation with slight extension in a cast or splint to allow the fibro-osseous subsheath to heal",
+   "Activity modification with avoidance of provocative supination, wrist flexion and ulnar deviation",
+   "Analgesia and non-steroidal anti-inflammatory drugs for pain and associated tenosynovitis",
+   "Chronic or recurrent instability: surgical subsheath reconstruction or stabilisation of the sixth compartment",
+   "Address any concomitant triangular fibrocartilage complex injury at the time of treatment",
+   "Graduated rehabilitation and staged return to sport after immobilisation or surgery",
+   "Refer to hand and wrist surgery for persistent or recurrent subluxation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "extensor_carpi_ulnaris_subluxation-pathway",
+   "title": "extensor carpi ulnaris subluxation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Instability of the extensor carpi ulnaris tendon results from disruption of its fibro-osseous subsheath within the groove on the distal ulna.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Locking or fixed dislocation of the tendon",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dynamic ultrasound during active supination and pronation, MRI showing the extensor carpi ulnaris tendon displaced from its groove, Plain radiographs to assess the ulnar groove and exclude bony pathology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Acute subsheath injury: immobilise the wrist in pronation with slight extension in a cast or splint to allow the fibro-osseous subsheath to heal"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the snapping solely to a TFCC tear and missing tendon instability."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of extensor carpi ulnaris subluxation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "extensor_carpi_ulnaris_subluxation-matrix",
+   "title": "extensor carpi ulnaris subluxation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Instability of the extensor carpi ulnaris tendon results from disruption of its fibro-osseous subsheath within the groove on the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The extensor carpi ulnaris occupies the sixth dorsal compartment, held within a groove on the dorsal-ulnar aspect of the distal ulna by a dedicated fibro-osseous subsheath that is distinct from the overlying extensor retinaculum. Forceful or repetitive supination, palmar flexion and ulnar deviation stress this subsheath, and a tear allows the tendon to escape the groove and snap over the ulnar border. Because the subsheath does not readily heal once torn or attenuated, instability tends to become recurrent, and chronic subluxation can produce tendon degeneration and tenosynovitis.",
-    "additionalDifferentials": [
-      "Triangular fibrocartilage complex (TFCC) tear",
-      "Distal radioulnar joint instability",
-      "Extensor carpi ulnaris tendinopathy or tenosynovitis",
-      "Lunotriquetral ligament injury",
-      "Ulnar impaction syndrome",
-      "Pisotriquetral arthritis",
-      "Ulnar styloid nonunion"
+    [
+     "Key Investigations",
+     "Dynamic ultrasound during active supination and pronation, MRI showing the extensor carpi ulnaris tendon displaced from its",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dynamic ultrasound during active supination and pronation",
-      "MRI showing the extensor carpi ulnaris tendon displaced from its groove",
-      "Plain radiographs to assess the ulnar groove and exclude bony pathology",
-      "MR arthrography if a concomitant TFCC injury is suspected",
-      "Comparison examination of the contralateral wrist",
-      "Diagnostic local anaesthetic infiltration of the sixth compartment"
+    [
+     "Primary Differentials",
+     "Triangular fibrocartilage complex (TFCC) tear, Distal radioulnar joint instability, Extensor carpi ulnaris tendinopathy or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Locking or fixed dislocation of the tendon",
-      "Associated distal radioulnar joint instability",
-      "Progressive tendon degeneration or attritional rupture",
-      "Failure to improve after appropriate immobilisation"
+    [
+     "Management Strategy",
+     "Acute subsheath injury: immobilise the wrist in pronation with slight extension in a cast or splint to allow the fibro-osseous",
+     "Core treatment modality"
     ],
-    "prognosis": "Acute injuries immobilised appropriately can settle, while chronic symptomatic subluxation generally responds well to subsheath reconstruction with return to sport in most patients.",
-    "pitfalls": [
-      "Attributing the snapping solely to a TFCC tear and missing tendon instability.",
-      "Relying on static imaging, which may appear normal when the tendon is reduced.",
-      "Immobilising acutely in the wrong forearm position, such as supination rather than pronation.",
-      "Overlooking the tendon's role in distal radioulnar joint stability."
-    ],
-    "references": [
-      "Green's Operative Hand Surgery",
-      "Rockwood and Green's Fractures in Adults",
-      "Wheeless' Textbook of Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Acute subsheath injury: immobilise the wrist in pronation with slight extension in a cast or splint to allow the fibro-osseous subsheath to heal",
-      "Activity modification with avoidance of provocative supination, wrist flexion and ulnar deviation",
-      "Analgesia and non-steroidal anti-inflammatory drugs for pain and associated tenosynovitis",
-      "Chronic or recurrent instability: surgical subsheath reconstruction or stabilisation of the sixth compartment",
-      "Address any concomitant triangular fibrocartilage complex injury at the time of treatment",
-      "Graduated rehabilitation and staged return to sport after immobilisation or surgery",
-      "Refer to hand and wrist surgery for persistent or recurrent subluxation"
+    [
+     "Clinical Pitfall",
+     "Attributing the snapping solely to a TFCC tear and missing tendon instability.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for extensor carpi ulnaris subluxation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "extensor-carpi-ulnaris-subluxation-diagram",
+   "title": "extensor carpi ulnaris subluxation: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

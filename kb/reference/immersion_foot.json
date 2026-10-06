@@ -1,76 +1,171 @@
 {
-  "id": "immersion_foot",
-  "name": "Immersion foot",
-  "aliases": [
-    "warm water immersion foot",
-    "tropical immersion foot",
-    "paddy foot"
+ "id": "immersion_foot",
+ "name": "Immersion foot",
+ "aliases": [
+  "warm water immersion foot",
+  "tropical immersion foot",
+  "paddy foot"
+ ],
+ "class": "non_infective",
+ "system": "Environmental / Emergency",
+ "specialty": "Emergency & Wilderness Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Results from prolonged immersion of the feet in water, causing maceration and injury of the skin and underlying soft tissue",
+   "Warm water immersion foot causes painful, white, wrinkled, macerated soles after prolonged exposure, while cold water forms overlap with non-freezing cold injury (trench foot)",
+   "The prolonged damp exposure and skin barrier breakdown predispose to secondary bacterial and fungal infection",
+   "The feet are typically tender, swollen, and blanched or wrinkled, with discomfort on walking",
+   "Management is drying the feet thoroughly, rest, elevation, and allowing the skin to recover, with treatment of any secondary infection",
+   "Keeping feet dry, changing wet socks and footwear frequently, and airing the feet are the cornerstones of prevention",
+   "Warm water immersion foot generally recovers quickly once the feet are kept dry, unlike the more prolonged course of cold non-freezing injury"
   ],
-  "class": "non_infective",
-  "system": "Environmental / Emergency",
-  "specialty": "Emergency & Wilderness Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Results from prolonged immersion of the feet in water, causing maceration and injury of the skin and underlying soft tissue",
-      "Warm water immersion foot causes painful, white, wrinkled, macerated soles after prolonged exposure, while cold water forms overlap with non-freezing cold injury (trench foot)",
-      "The prolonged damp exposure and skin barrier breakdown predispose to secondary bacterial and fungal infection",
-      "The feet are typically tender, swollen, and blanched or wrinkled, with discomfort on walking",
-      "Management is drying the feet thoroughly, rest, elevation, and allowing the skin to recover, with treatment of any secondary infection",
-      "Keeping feet dry, changing wet socks and footwear frequently, and airing the feet are the cornerstones of prevention",
-      "Warm water immersion foot generally recovers quickly once the feet are kept dry, unlike the more prolonged course of cold non-freezing injury"
+  "pathophysiology": "Immersion foot develops when the feet are kept wet for prolonged periods, leading to maceration of the epidermis, disruption of the skin barrier, and softening of the horny layer. In warm water exposure the predominant problem is skin breakdown, oedema, and secondary infection, whereas prolonged cold wet exposure adds cold-induced vasoconstriction and microvascular injury that overlaps with trench foot. The waterlogged, damaged skin loses its protective function, causing pain, swelling, and susceptibility to bacterial and fungal invasion.",
+  "additionalDifferentials": [
+   "Trench foot (cold non-freezing injury)",
+   "Frostbite",
+   "Tinea pedis and other fungal skin infection",
+   "Cellulitis or soft tissue infection",
+   "Contact dermatitis",
+   "Chilblains (pernio)"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from history of prolonged water exposure and characteristic macerated feet",
+   "Examination for maceration, blistering, secondary infection, and neurovascular status",
+   "Skin swabs or scrapings if bacterial or fungal infection is suspected",
+   "Inflammatory markers where cellulitis or systemic infection is a concern",
+   "Assessment for coexisting cold injury when exposure was in cold water"
+  ],
+  "redFlags": [
+   "Spreading cellulitis, abscess, or systemic signs of infection",
+   "Deep tissue necrosis or ulceration",
+   "Features of coexisting freezing injury after cold exposure",
+   "Severe pain or neurovascular compromise"
+  ],
+  "prognosis": "Warm water immersion foot usually resolves within days once the feet are dried and rested; the main complication is secondary infection, while cold water forms overlapping with non-freezing cold injury can have a more protracted recovery.",
+  "pitfalls": [
+   "Failing to keep the feet dry, allowing the injury to persist or worsen",
+   "Missing secondary bacterial or fungal infection",
+   "Not distinguishing warm from cold water forms, which differ in course and management",
+   "Overlooking preventive foot care in those with ongoing wet exposure"
+  ],
+  "references": [
+   "Auerbach's Wilderness Medicine",
+   "Bove and Davis' Diving Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Remove the feet from the wet environment and thoroughly dry, warm and rest them to allow the macerated skin barrier to recover",
+   "Elevate the limb to reduce oedema and provide analgesia for pain, which may be neuropathic in the cold-water (non-freezing cold injury) form",
+   "Treat secondary bacterial infection with antistaphylococcal and antistreptococcal antibiotics, and use topical antifungal agents for superimposed dermatophyte or candidal infection",
+   "Meticulous wound care with regular inspection for blistering, cellulitis and tissue breakdown",
+   "Prevent recurrence by keeping the feet dry, changing wet socks and footwear frequently and airing the feet",
+   "Assess for and manage coexisting cold injury when exposure was in cold water, using gradual rewarming rather than rapid heat"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "immersion_foot-pathway",
+   "title": "Immersion foot: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Results from prolonged immersion of the feet in water, causing maceration and injury of the skin and underlying soft tissue",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Spreading cellulitis, abscess, or systemic signs of infection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from history of prolonged water exposure and characteristic macerated feet, Examination for maceration, blistering, secondary infection, and neurovascular status, Skin swabs or scrapings if bacterial or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Remove the feet from the wet environment and thoroughly dry, warm and rest them to allow the macerated skin barrier to recover"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to keep the feet dry, allowing the injury to persist or worsen"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of immersion foot."
+  }
+ ],
+ "tables": [
+  {
+   "id": "immersion_foot-matrix",
+   "title": "Immersion foot: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Results from prolonged immersion of the feet in water, causing maceration and injury of the skin and underlying soft tissue",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Immersion foot develops when the feet are kept wet for prolonged periods, leading to maceration of the epidermis, disruption of the skin barrier, and softening of the horny layer. In warm water exposure the predominant problem is skin breakdown, oedema, and secondary infection, whereas prolonged cold wet exposure adds cold-induced vasoconstriction and microvascular injury that overlaps with trench foot. The waterlogged, damaged skin loses its protective function, causing pain, swelling, and susceptibility to bacterial and fungal invasion.",
-    "additionalDifferentials": [
-      "Trench foot (cold non-freezing injury)",
-      "Frostbite",
-      "Tinea pedis and other fungal skin infection",
-      "Cellulitis or soft tissue infection",
-      "Contact dermatitis",
-      "Chilblains (pernio)"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from history of prolonged water exposure and characteristic macerated feet, Examination for maceration,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from history of prolonged water exposure and characteristic macerated feet",
-      "Examination for maceration, blistering, secondary infection, and neurovascular status",
-      "Skin swabs or scrapings if bacterial or fungal infection is suspected",
-      "Inflammatory markers where cellulitis or systemic infection is a concern",
-      "Assessment for coexisting cold injury when exposure was in cold water"
+    [
+     "Primary Differentials",
+     "Trench foot (cold non-freezing injury), Frostbite, Tinea pedis and other fungal skin infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Spreading cellulitis, abscess, or systemic signs of infection",
-      "Deep tissue necrosis or ulceration",
-      "Features of coexisting freezing injury after cold exposure",
-      "Severe pain or neurovascular compromise"
+    [
+     "Management Strategy",
+     "Remove the feet from the wet environment and thoroughly dry, warm and rest them to allow the macerated skin barrier to recover",
+     "Core treatment modality"
     ],
-    "prognosis": "Warm water immersion foot usually resolves within days once the feet are dried and rested; the main complication is secondary infection, while cold water forms overlapping with non-freezing cold injury can have a more protracted recovery.",
-    "pitfalls": [
-      "Failing to keep the feet dry, allowing the injury to persist or worsen",
-      "Missing secondary bacterial or fungal infection",
-      "Not distinguishing warm from cold water forms, which differ in course and management",
-      "Overlooking preventive foot care in those with ongoing wet exposure"
-    ],
-    "references": [
-      "Auerbach's Wilderness Medicine",
-      "Bove and Davis' Diving Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Remove the feet from the wet environment and thoroughly dry, warm and rest them to allow the macerated skin barrier to recover",
-      "Elevate the limb to reduce oedema and provide analgesia for pain, which may be neuropathic in the cold-water (non-freezing cold injury) form",
-      "Treat secondary bacterial infection with antistaphylococcal and antistreptococcal antibiotics, and use topical antifungal agents for superimposed dermatophyte or candidal infection",
-      "Meticulous wound care with regular inspection for blistering, cellulitis and tissue breakdown",
-      "Prevent recurrence by keeping the feet dry, changing wet socks and footwear frequently and airing the feet",
-      "Assess for and manage coexisting cold injury when exposure was in cold water, using gradual rewarming rather than rapid heat"
+    [
+     "Clinical Pitfall",
+     "Failing to keep the feet dry, allowing the injury to persist or worsen",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for immersion foot."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "immersion-foot-diagram",
+   "title": "Immersion foot: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

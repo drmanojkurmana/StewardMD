@@ -1,79 +1,174 @@
 {
-  "id": "leukocyte_adhesion_deficiency",
-  "name": "Leukocyte adhesion deficiency",
-  "aliases": [
-    "LAD",
-    "LAD-1",
-    "leucocyte adhesion deficiency"
+ "id": "leukocyte_adhesion_deficiency",
+ "name": "Leukocyte adhesion deficiency",
+ "aliases": [
+  "LAD",
+  "LAD-1",
+  "leucocyte adhesion deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Immunology",
+ "specialty": "Clinical Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Leukocyte adhesion deficiency is a group of autosomal recessive disorders in which neutrophils cannot adhere to and migrate across the vascular endothelium to reach sites of infection",
+   "The most common form, LAD-1, results from defects in the beta-2 integrin common chain (CD18), impairing firm adhesion of leucocytes",
+   "A cardinal clinical clue is delayed separation of the umbilical cord accompanied by omphalitis in the newborn period",
+   "Recurrent bacterial and fungal soft-tissue infections occur characteristically without pus formation, because neutrophils fail to enter the tissues",
+   "A persistently high blood neutrophil count (marked leucocytosis) is typical, since neutrophils remain in the circulation rather than migrating out",
+   "Severe gingivitis, periodontitis, and poor wound healing are frequent features",
+   "LAD-2 involves defective fucosylation of selectin ligands and is associated with the Bombay blood group and developmental abnormalities, while LAD-3 combines adhesion failure with a bleeding tendency due to impaired integrin activation in platelets",
+   "Management includes aggressive treatment of infections and antimicrobial prophylaxis, with haematopoietic stem cell transplantation offering cure in severe LAD-1"
   ],
-  "class": "non_infective",
-  "system": "Immunology",
-  "specialty": "Clinical Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Leukocyte adhesion deficiency is a group of autosomal recessive disorders in which neutrophils cannot adhere to and migrate across the vascular endothelium to reach sites of infection",
-      "The most common form, LAD-1, results from defects in the beta-2 integrin common chain (CD18), impairing firm adhesion of leucocytes",
-      "A cardinal clinical clue is delayed separation of the umbilical cord accompanied by omphalitis in the newborn period",
-      "Recurrent bacterial and fungal soft-tissue infections occur characteristically without pus formation, because neutrophils fail to enter the tissues",
-      "A persistently high blood neutrophil count (marked leucocytosis) is typical, since neutrophils remain in the circulation rather than migrating out",
-      "Severe gingivitis, periodontitis, and poor wound healing are frequent features",
-      "LAD-2 involves defective fucosylation of selectin ligands and is associated with the Bombay blood group and developmental abnormalities, while LAD-3 combines adhesion failure with a bleeding tendency due to impaired integrin activation in platelets",
-      "Management includes aggressive treatment of infections and antimicrobial prophylaxis, with haematopoietic stem cell transplantation offering cure in severe LAD-1"
+  "pathophysiology": "Leukocyte adhesion deficiency arises from defects in the adhesion cascade that normally allows leucocytes to roll along, firmly adhere to, and transmigrate across activated endothelium. In LAD-1, mutations in ITGB2 reduce or abolish the shared CD18 subunit of the beta-2 integrins, so neutrophils cannot form the firm adhesion needed to exit the bloodstream, leaving tissues undefended despite abundant circulating neutrophils. LAD-2 results from a defect in GDP-fucose transport that impairs synthesis of sialyl-Lewis X, the selectin ligand required for rolling, and also causes the rare Bombay phenotype and neurodevelopmental problems. LAD-3 stems from defective inside-out signalling (kindlin-3/FERMT3) that prevents activation of integrins on both leucocytes and platelets, combining infection susceptibility with a Glanzmann-like bleeding disorder.",
+  "additionalDifferentials": [
+   "Chronic granulomatous disease",
+   "Congenital or cyclic neutropenia",
+   "Chediak-Higashi syndrome",
+   "Other neutrophil functional disorders",
+   "Glanzmann thrombasthenia (for the bleeding seen in LAD-3)"
+  ],
+  "additionalInvestigations": [
+   "Flow cytometry for CD18 and CD11 expression on neutrophils (reduced or absent in LAD-1)",
+   "Full blood count demonstrating marked neutrophil leucocytosis",
+   "Genetic testing (ITGB2 for LAD-1, SLC35C1 for LAD-2, FERMT3 for LAD-3)",
+   "Neutrophil adhesion and chemotaxis functional assays",
+   "Assessment of sialyl-Lewis X expression and blood group testing where LAD-2 is suspected",
+   "Platelet aggregation studies when LAD-3 is considered"
+  ],
+  "redFlags": [
+   "Delayed umbilical cord separation with omphalitis in a neonate requiring urgent evaluation",
+   "Severe soft-tissue or invasive infection without pus formation requiring prompt antimicrobial therapy",
+   "Life-threatening sepsis given the severe impairment of neutrophil migration",
+   "Live vaccines and non-irradiated blood products should be approached cautiously, especially peri-transplant",
+   "Bleeding episodes in suspected LAD-3"
+  ],
+  "prognosis": "Severe LAD-1 with very low CD18 expression carries a high risk of early fatal infection unless corrected by haematopoietic stem cell transplantation, whereas moderate phenotypes with partial expression can survive longer with vigilant infection control; LAD-2 tends to have a milder infectious course dominated by developmental issues, and LAD-3 combines infection and bleeding risks.",
+  "pitfalls": [
+   "Interpreting the high neutrophil count as ongoing bacterial infection rather than a diagnostic clue to impaired migration",
+   "Expecting pus and abscess formation and being falsely reassured by its absence",
+   "Missing the neonatal sign of delayed cord separation",
+   "Failing to distinguish the LAD subtypes, which differ in associated features and management",
+   "Delaying transplant referral in severe LAD-1"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Allogeneic haematopoietic stem cell transplantation as the definitive curative treatment for severe LAD-1",
+   "Prompt aggressive antimicrobial therapy for bacterial and fungal soft-tissue infections with broad-spectrum antibiotics and antifungals",
+   "Long-term antibacterial and antifungal prophylaxis to reduce recurrent infection",
+   "Oral fucose supplementation as specific therapy in LAD-2",
+   "Meticulous oral and periodontal care and careful wound management given impaired healing",
+   "Vigilant surveillance for infection, and management of the bleeding tendency in LAD-3",
+   "Genetic counselling and family screening (ITGB2, SLC35C1, FERMT3), with consideration of gene therapy where available, under clinical immunology multidisciplinary care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "leukocyte_adhesion_deficiency-pathway",
+   "title": "Leukocyte adhesion deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Leukocyte adhesion deficiency is a group of autosomal recessive disorders in which neutrophils cannot adhere to and migrate across the vascular endothelium to reach sites of infection",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Delayed umbilical cord separation with omphalitis in a neonate requiring urgent evaluation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flow cytometry for CD18 and CD11 expression on neutrophils (reduced or absent in LAD-1), Full blood count demonstrating marked neutrophil leucocytosis, Genetic testing (ITGB2 for LAD-1, SLC35C1 for LAD-2, FERMT3 for LAD-3)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation as the definitive curative treatment for severe LAD-1"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting the high neutrophil count as ongoing bacterial infection rather than a diagnostic clue to impaired migration"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of leukocyte adhesion deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "leukocyte_adhesion_deficiency-matrix",
+   "title": "Leukocyte adhesion deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Leukocyte adhesion deficiency is a group of autosomal recessive disorders in which neutrophils cannot adhere to and migrate",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Leukocyte adhesion deficiency arises from defects in the adhesion cascade that normally allows leucocytes to roll along, firmly adhere to, and transmigrate across activated endothelium. In LAD-1, mutations in ITGB2 reduce or abolish the shared CD18 subunit of the beta-2 integrins, so neutrophils cannot form the firm adhesion needed to exit the bloodstream, leaving tissues undefended despite abundant circulating neutrophils. LAD-2 results from a defect in GDP-fucose transport that impairs synthesis of sialyl-Lewis X, the selectin ligand required for rolling, and also causes the rare Bombay phenotype and neurodevelopmental problems. LAD-3 stems from defective inside-out signalling (kindlin-3/FERMT3) that prevents activation of integrins on both leucocytes and platelets, combining infection susceptibility with a Glanzmann-like bleeding disorder.",
-    "additionalDifferentials": [
-      "Chronic granulomatous disease",
-      "Congenital or cyclic neutropenia",
-      "Chediak-Higashi syndrome",
-      "Other neutrophil functional disorders",
-      "Glanzmann thrombasthenia (for the bleeding seen in LAD-3)"
+    [
+     "Key Investigations",
+     "Flow cytometry for CD18 and CD11 expression on neutrophils (reduced or absent in LAD-1), Full blood count demonstrating marked",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flow cytometry for CD18 and CD11 expression on neutrophils (reduced or absent in LAD-1)",
-      "Full blood count demonstrating marked neutrophil leucocytosis",
-      "Genetic testing (ITGB2 for LAD-1, SLC35C1 for LAD-2, FERMT3 for LAD-3)",
-      "Neutrophil adhesion and chemotaxis functional assays",
-      "Assessment of sialyl-Lewis X expression and blood group testing where LAD-2 is suspected",
-      "Platelet aggregation studies when LAD-3 is considered"
+    [
+     "Primary Differentials",
+     "Chronic granulomatous disease, Congenital or cyclic neutropenia, Chediak-Higashi syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Delayed umbilical cord separation with omphalitis in a neonate requiring urgent evaluation",
-      "Severe soft-tissue or invasive infection without pus formation requiring prompt antimicrobial therapy",
-      "Life-threatening sepsis given the severe impairment of neutrophil migration",
-      "Live vaccines and non-irradiated blood products should be approached cautiously, especially peri-transplant",
-      "Bleeding episodes in suspected LAD-3"
+    [
+     "Management Strategy",
+     "Allogeneic haematopoietic stem cell transplantation as the definitive curative treatment for severe LAD-1",
+     "Core treatment modality"
     ],
-    "prognosis": "Severe LAD-1 with very low CD18 expression carries a high risk of early fatal infection unless corrected by haematopoietic stem cell transplantation, whereas moderate phenotypes with partial expression can survive longer with vigilant infection control; LAD-2 tends to have a milder infectious course dominated by developmental issues, and LAD-3 combines infection and bleeding risks.",
-    "pitfalls": [
-      "Interpreting the high neutrophil count as ongoing bacterial infection rather than a diagnostic clue to impaired migration",
-      "Expecting pus and abscess formation and being falsely reassured by its absence",
-      "Missing the neonatal sign of delayed cord separation",
-      "Failing to distinguish the LAD subtypes, which differ in associated features and management",
-      "Delaying transplant referral in severe LAD-1"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Allogeneic haematopoietic stem cell transplantation as the definitive curative treatment for severe LAD-1",
-      "Prompt aggressive antimicrobial therapy for bacterial and fungal soft-tissue infections with broad-spectrum antibiotics and antifungals",
-      "Long-term antibacterial and antifungal prophylaxis to reduce recurrent infection",
-      "Oral fucose supplementation as specific therapy in LAD-2",
-      "Meticulous oral and periodontal care and careful wound management given impaired healing",
-      "Vigilant surveillance for infection, and management of the bleeding tendency in LAD-3",
-      "Genetic counselling and family screening (ITGB2, SLC35C1, FERMT3), with consideration of gene therapy where available, under clinical immunology multidisciplinary care"
+    [
+     "Clinical Pitfall",
+     "Interpreting the high neutrophil count as ongoing bacterial infection rather than a diagnostic clue to impaired migration",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for leukocyte adhesion deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "leukocyte-adhesion-deficiency-diagram",
+   "title": "Leukocyte adhesion deficiency: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

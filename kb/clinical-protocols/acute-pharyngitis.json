@@ -5,7 +5,20 @@
  "population": "Adults and children",
  "basis": "international",
  "setting": "Primary care, emergency department",
- "aliases": ["sore throat", "tonsillitis", "strep throat", "GAS pharyngitis", "group A streptococcus", "streptococcal pharyngitis", "Centor", "McIsaac", "FeverPAIN", "quinsy", "peritonsillar abscess", "scarlet fever"],
+ "aliases": [
+  "sore throat",
+  "tonsillitis",
+  "strep throat",
+  "GAS pharyngitis",
+  "group A streptococcus",
+  "streptococcal pharyngitis",
+  "Centor",
+  "McIsaac",
+  "FeverPAIN",
+  "quinsy",
+  "peritonsillar abscess",
+  "scarlet fever"
+ ],
  "summary": "Most sore throats are viral and settle within a week. Use Centor or FeverPAIN to decide who to test or treat, confirm group A streptococcus by rapid test or culture where available, and treat it with penicillin V or amoxicillin for 10 days (IDSA). Refer quinsy, airway compromise or sepsis the same day.",
  "sections": [
   {
@@ -84,18 +97,159 @@
   }
  ],
  "drugs": [
-  { "name": "Penicillin V (phenoxymethylpenicillin)", "dose": "Children: 250 mg orally two or three times daily; adolescents and adults: 250 mg four times daily or 500 mg twice daily; for 10 days", "notes": "IDSA first line. NICE adults: 500 mg four times daily or 1 g twice daily for 5 to 10 days." },
-  { "name": "Amoxicillin", "dose": "50 mg/kg orally once daily (max 1 g), or 25 mg/kg twice daily (max 500 mg per dose), for 10 days", "notes": "IDSA first line; once-daily dosing helps adherence. Avoid if mononucleosis is likely." },
-  { "name": "Benzathine penicillin G", "dose": "Single IM dose: 600 000 units under 27 kg; 1 200 000 units at 27 kg and over", "notes": "When adherence to a 10-day oral course is doubtful." },
-  { "name": "Cefalexin", "dose": "20 mg/kg orally twice daily (max 500 mg per dose) for 10 days", "notes": "Non-anaphylactic penicillin allergy." },
-  { "name": "Clindamycin", "dose": "7 mg/kg orally three times daily (max 300 mg per dose) for 10 days", "notes": "Anaphylactic penicillin allergy." },
-  { "name": "Azithromycin", "dose": "12 mg/kg orally once daily (max 500 mg) for 5 days", "notes": "Penicillin allergy; GAS macrolide resistance varies by region." },
-  { "name": "Clarithromycin", "dose": "7.5 mg/kg orally twice daily (max 250 mg per dose) for 10 days", "notes": "IDSA alternative in penicillin allergy; NICE uses a 5-day course." }
+  {
+   "name": "Penicillin V (phenoxymethylpenicillin)",
+   "dose": "Children: 250 mg orally two or three times daily; adolescents and adults: 250 mg four times daily or 500 mg twice daily; for 10 days",
+   "notes": "IDSA first line. NICE adults: 500 mg four times daily or 1 g twice daily for 5 to 10 days."
+  },
+  {
+   "name": "Amoxicillin",
+   "dose": "50 mg/kg orally once daily (max 1 g), or 25 mg/kg twice daily (max 500 mg per dose), for 10 days",
+   "notes": "IDSA first line; once-daily dosing helps adherence. Avoid if mononucleosis is likely."
+  },
+  {
+   "name": "Benzathine penicillin G",
+   "dose": "Single IM dose: 600 000 units under 27 kg; 1 200 000 units at 27 kg and over",
+   "notes": "When adherence to a 10-day oral course is doubtful."
+  },
+  {
+   "name": "Cefalexin",
+   "dose": "20 mg/kg orally twice daily (max 500 mg per dose) for 10 days",
+   "notes": "Non-anaphylactic penicillin allergy."
+  },
+  {
+   "name": "Clindamycin",
+   "dose": "7 mg/kg orally three times daily (max 300 mg per dose) for 10 days",
+   "notes": "Anaphylactic penicillin allergy."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "12 mg/kg orally once daily (max 500 mg) for 5 days",
+   "notes": "Penicillin allergy; GAS macrolide resistance varies by region."
+  },
+  {
+   "name": "Clarithromycin",
+   "dose": "7.5 mg/kg orally twice daily (max 250 mg per dose) for 10 days",
+   "notes": "IDSA alternative in penicillin allergy; NICE uses a 5-day course."
+  }
  ],
  "sources": [
-  { "org": "IDSA", "title": "Clinical practice guideline for the diagnosis and management of group A streptococcal pharyngitis: 2012 update", "year": 2012, "url": "https://academic.oup.com/cid/article/55/10/e86/321183" },
-  { "org": "IDSA", "title": "Clinical practice guideline update on group A streptococcal pharyngitis, part 1: risk assessment using clinical scoring systems", "year": 2025, "url": "https://www.idsociety.org/practice-guideline/streptococcal-pharyngitis2/" },
-  { "org": "NICE", "title": "Sore throat (acute): antimicrobial prescribing (NG84)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng84/chapter/recommendations" }
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guideline for the diagnosis and management of group A streptococcal pharyngitis: 2012 update",
+   "year": 2012,
+   "url": "https://academic.oup.com/cid/article/55/10/e86/321183"
+  },
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guideline update on group A streptococcal pharyngitis, part 1: risk assessment using clinical scoring systems",
+   "year": 2025,
+   "url": "https://www.idsociety.org/practice-guideline/streptococcal-pharyngitis2/"
+  },
+  {
+   "org": "NICE",
+   "title": "Sore throat (acute): antimicrobial prescribing (NG84)",
+   "year": 2018,
+   "url": "https://www.nice.org.uk/guidance/ng84/chapter/recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-pharyngitis-pathway",
+   "title": "Acute pharyngitis and tonsillitis (sore throat) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Viral features make group A streptococcus (GAS) unlikely: cough, rhinorrhoea, hoarseness, oral ulcers. GAS causes up to 30% of sore throats in children and up to 15% in adults (IDSA 2025).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Centor (1 point each): tonsillar exudate, tender anterior cervical nodes or lymphadenitis, history of fever above 38 °C, absence of cough. Score 3 or 4: 32 to 56% chance of isolating streptococcus.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "IDSA 2025 suggests a clinical score to decide who to test: a low score means testing is unlikely to help. Test high-risk patients even with a low score: household GAS contact, past rheumatic fever, or suspected complicated GAS infection"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Paracetamol or ibuprofen for pain and fever, with adequate fluids. Avoid aspirin in children (Reye syndrome)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Prescribing antibiotics for sore throat with clear viral features."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute pharyngitis and tonsillitis (sore throat)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-pharyngitis-summary-matrix",
+   "title": "Acute pharyngitis and tonsillitis (sore throat) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Viral features make group A streptococcus (GAS) unlikely: cough, rhinorrhoea, hoarseness, oral ulcers. GAS causes up to 30% of sore throats",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Paracetamol or ibuprofen for pain and fever, with adequate fluids. Avoid aspirin in children (Reye syndrome).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "IDSA 2025 suggests a clinical score to decide who to test: a low score means testing is unlikely to help. Test high-risk patients even with",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Penicillin V (phenoxymethylpenicillin): Children: 250 mg orally two or three times daily; adolescents and adults: 250 mg four times daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Prescribing antibiotics for sore throat with clear viral features.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute pharyngitis and tonsillitis (sore throat)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-pharyngitis-diagram",
+   "title": "Acute pharyngitis and tonsillitis (sore throat): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

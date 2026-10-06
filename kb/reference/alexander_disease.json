@@ -1,77 +1,172 @@
 {
-  "id": "alexander_disease",
-  "name": "Alexander disease",
-  "aliases": [
-    "AxD",
-    "fibrinoid leukodystrophy",
-    "GFAP-related leukodystrophy"
+ "id": "alexander_disease",
+ "name": "Alexander disease",
+ "aliases": [
+  "AxD",
+  "fibrinoid leukodystrophy",
+  "GFAP-related leukodystrophy"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare astrocytic leukodystrophy caused predominantly by de novo dominant mutations in the GFAP gene encoding glial fibrillary acidic protein",
+   "The infantile form presents with macrocephaly, developmental delay or regression, seizures, and spasticity in the first years of life",
+   "Juvenile and adult forms tend to present with bulbar and brainstem signs, ataxia, and spasticity, often with a more indolent course",
+   "The pathological hallmark is widespread deposition of Rosenthal fibres, eosinophilic inclusions within astrocytes",
+   "MRI often shows a frontal-predominant white matter abnormality with involvement of basal ganglia and brainstem, and characteristic patterns aid recognition",
+   "Most cases arise from spontaneous mutations rather than inherited transmission, so a negative family history does not exclude the diagnosis",
+   "Adult-onset disease can mimic other conditions with prominent brainstem and cerebellar signs and may show tadpole-like atrophy of the medulla and cervical cord on imaging",
+   "Genetic testing for GFAP mutations is the principal confirmatory investigation and has largely replaced biopsy"
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare astrocytic leukodystrophy caused predominantly by de novo dominant mutations in the GFAP gene encoding glial fibrillary acidic protein",
-      "The infantile form presents with macrocephaly, developmental delay or regression, seizures, and spasticity in the first years of life",
-      "Juvenile and adult forms tend to present with bulbar and brainstem signs, ataxia, and spasticity, often with a more indolent course",
-      "The pathological hallmark is widespread deposition of Rosenthal fibres, eosinophilic inclusions within astrocytes",
-      "MRI often shows a frontal-predominant white matter abnormality with involvement of basal ganglia and brainstem, and characteristic patterns aid recognition",
-      "Most cases arise from spontaneous mutations rather than inherited transmission, so a negative family history does not exclude the diagnosis",
-      "Adult-onset disease can mimic other conditions with prominent brainstem and cerebellar signs and may show tadpole-like atrophy of the medulla and cervical cord on imaging",
-      "Genetic testing for GFAP mutations is the principal confirmatory investigation and has largely replaced biopsy"
+  "pathophysiology": "Alexander disease is caused by gain-of-function mutations in GFAP, the gene for the main intermediate filament protein of astrocytes. Mutant protein accumulates and forms Rosenthal fibres within astrocytes, disturbing astrocyte function and secondarily impairing myelin maintenance, producing a leukodystrophy. The astrocytic dysfunction is considered the primary event, distinguishing this from disorders that primarily affect oligodendrocytes or myelin, and the distribution of pathology accounts for the frontal-predominant cerebral and brainstem clinical features.",
+  "additionalDifferentials": [
+   "Other leukodystrophies including Canavan disease and megalencephalic leukoencephalopathy",
+   "Metachromatic leukodystrophy and Krabbe disease",
+   "Mitochondrial leukoencephalopathies",
+   "Brainstem glioma (for adult brainstem-predominant presentations)",
+   "Multiple sclerosis and other demyelinating disease in adults"
+  ],
+  "additionalInvestigations": [
+   "GFAP gene sequencing as the definitive diagnostic test",
+   "Brain and spinal cord MRI to identify characteristic white matter and brainstem patterns",
+   "EEG in patients with seizures",
+   "Developmental and neurocognitive assessment in children",
+   "Historically brain biopsy demonstrating Rosenthal fibres, now rarely required"
+  ],
+  "redFlags": [
+   "Rapid developmental regression with seizures and progressive macrocephaly in an infant",
+   "Progressive bulbar dysfunction threatening airway and swallowing safety",
+   "Brainstem atrophy with respiratory or autonomic compromise",
+   "Acute deterioration superimposed on a chronic course"
+  ],
+  "prognosis": "The infantile form generally carries the poorest prognosis with progressive deterioration over a few years, whereas juvenile and adult forms often follow a slower, more variable course; management remains supportive as no curative therapy exists.",
+  "pitfalls": [
+   "Excluding the diagnosis because there is no family history, despite the predominance of de novo mutations",
+   "Misreading adult brainstem-predominant disease as a tumour or demyelinating disorder",
+   "Overlooking the diagnostic value of characteristic MRI patterns",
+   "Delaying genetic testing while pursuing invasive investigations"
+  ],
+  "references": [
+   "Bradley's Neurology in Clinical Practice",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No curative therapy is available; management is supportive and tailored to disease stage",
+   "Anticonvulsant therapy for seizures, selected according to seizure type",
+   "Spasticity management with antispasticity agents and physiotherapy, with orthoses to limit contractures",
+   "Nutritional and feeding support including swallow assessment and gastrostomy when needed",
+   "Neurosurgical assessment for hydrocephalus or raised intracranial pressure where macrocephaly reflects obstruction",
+   "Surveillance for aspiration and respiratory complications, with multidisciplinary neurodisability and palliative care",
+   "Genetic counselling; most cases are de novo dominant GFAP variants, with recurrence risk chiefly from gonadal mosaicism"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "alexander_disease-pathway",
+   "title": "Alexander disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare astrocytic leukodystrophy caused predominantly by de novo dominant mutations in the GFAP gene encoding glial fibrillary acidic protein",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid developmental regression with seizures and progressive macrocephaly in an infant",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: GFAP gene sequencing as the definitive diagnostic test, Brain and spinal cord MRI to identify characteristic white matter and brainstem patterns, EEG in patients with seizures"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No curative therapy is available; management is supportive and tailored to disease stage"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis because there is no family history, despite the predominance of de novo mutations"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of alexander disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "alexander_disease-matrix",
+   "title": "Alexander disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare astrocytic leukodystrophy caused predominantly by de novo dominant mutations in the GFAP gene encoding glial fibrillary",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Alexander disease is caused by gain-of-function mutations in GFAP, the gene for the main intermediate filament protein of astrocytes. Mutant protein accumulates and forms Rosenthal fibres within astrocytes, disturbing astrocyte function and secondarily impairing myelin maintenance, producing a leukodystrophy. The astrocytic dysfunction is considered the primary event, distinguishing this from disorders that primarily affect oligodendrocytes or myelin, and the distribution of pathology accounts for the frontal-predominant cerebral and brainstem clinical features.",
-    "additionalDifferentials": [
-      "Other leukodystrophies including Canavan disease and megalencephalic leukoencephalopathy",
-      "Metachromatic leukodystrophy and Krabbe disease",
-      "Mitochondrial leukoencephalopathies",
-      "Brainstem glioma (for adult brainstem-predominant presentations)",
-      "Multiple sclerosis and other demyelinating disease in adults"
+    [
+     "Key Investigations",
+     "GFAP gene sequencing as the definitive diagnostic test, Brain and spinal cord MRI to identify characteristic white matter and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "GFAP gene sequencing as the definitive diagnostic test",
-      "Brain and spinal cord MRI to identify characteristic white matter and brainstem patterns",
-      "EEG in patients with seizures",
-      "Developmental and neurocognitive assessment in children",
-      "Historically brain biopsy demonstrating Rosenthal fibres, now rarely required"
+    [
+     "Primary Differentials",
+     "Other leukodystrophies including Canavan disease and megalencephalic leukoencephalopathy, Metachromatic leukodystrophy and Krabbe",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid developmental regression with seizures and progressive macrocephaly in an infant",
-      "Progressive bulbar dysfunction threatening airway and swallowing safety",
-      "Brainstem atrophy with respiratory or autonomic compromise",
-      "Acute deterioration superimposed on a chronic course"
+    [
+     "Management Strategy",
+     "No curative therapy is available; management is supportive and tailored to disease stage",
+     "Core treatment modality"
     ],
-    "prognosis": "The infantile form generally carries the poorest prognosis with progressive deterioration over a few years, whereas juvenile and adult forms often follow a slower, more variable course; management remains supportive as no curative therapy exists.",
-    "pitfalls": [
-      "Excluding the diagnosis because there is no family history, despite the predominance of de novo mutations",
-      "Misreading adult brainstem-predominant disease as a tumour or demyelinating disorder",
-      "Overlooking the diagnostic value of characteristic MRI patterns",
-      "Delaying genetic testing while pursuing invasive investigations"
-    ],
-    "references": [
-      "Bradley's Neurology in Clinical Practice",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No curative therapy is available; management is supportive and tailored to disease stage",
-      "Anticonvulsant therapy for seizures, selected according to seizure type",
-      "Spasticity management with antispasticity agents and physiotherapy, with orthoses to limit contractures",
-      "Nutritional and feeding support including swallow assessment and gastrostomy when needed",
-      "Neurosurgical assessment for hydrocephalus or raised intracranial pressure where macrocephaly reflects obstruction",
-      "Surveillance for aspiration and respiratory complications, with multidisciplinary neurodisability and palliative care",
-      "Genetic counselling; most cases are de novo dominant GFAP variants, with recurrence risk chiefly from gonadal mosaicism"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis because there is no family history, despite the predominance of de novo mutations",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for alexander disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "alexander-disease-diagram",
+   "title": "Alexander disease: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

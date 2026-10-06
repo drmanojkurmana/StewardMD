@@ -201,5 +201,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "h3455e623"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "scrub_typhus-dx-algo",
+      "title": "Scrub Typhus: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic triad of an inoculation eschar at the chigger feeding site, regional lymphadenopathy, and a maculopapular rash is the textbook description, but these signs are seldom seen in indigenous (local endemic) patients (Harrison 22e",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Altered mental status / encephalitis (meningoencephalitis is a feature of severe disease) (Harrison 22e p.1035, p.1455).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serology is the mainstay of laboratory diagnosis: indirect fluorescent antibody, indirect immunoperoxidase, enzyme immunoassays, and rapid lateral-flow chromatographic tests (Harrison 22e p.1460)., PCR amplification of"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a formal severity score; it contrasts mild/self-limiting illness with severe disease. Severe scrub typhus is marked by encephalitis/meningoencephalitis and interstitial pneumonia due to vascular"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on the classic triad: eschar, rash, and lymphadenopathy are frequently absent (eschar <50% and rash <40% of travelers; signs seldom seen in indigenous patients), so a negative skin exam does not exclude scrub"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for scrub typhus."
+    }
+  ],
+  "tables": [
+    {
+      "id": "scrub_typhus-matrix",
+      "title": "Scrub Typhus: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad of an inoculation eschar at the chigger feeding site, regional lymphadenopathy, and a maculopapular rash is the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serology is the mainstay of laboratory diagnosis: indirect fluorescent antibody, indirect immunoperoxidase, enzyme immunoassays,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Alternative etiologies in this class",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Altered mental status / encephalitis (meningoencephalitis is a feature of severe disease) (Harrison 22e p.1035, p.1455).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on the classic triad: eschar, rash, and lymphadenopathy are frequently absent (eschar <50% and rash <40% of travelers;",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for scrub typhus."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "scrub-typhus-diagram",
+      "title": "Scrub Typhus: Infectious Pathogenesis & Host Response Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+      "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+      "annotations": [
+        {
+          "label": "Pathogen Inoculum",
+          "description": "Microbial virulence, antigen expression, and cellular tropism."
+        },
+        {
+          "label": "Host Cascade",
+          "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+        }
+      ]
+    }
+  ]
 }

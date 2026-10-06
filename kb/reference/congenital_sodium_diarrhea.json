@@ -1,77 +1,172 @@
 {
-  "id": "congenital_sodium_diarrhea",
-  "name": "Congenital sodium diarrhoea",
-  "aliases": [
-    "SLC9A3",
-    "GUCY2C",
-    "CSD",
-    "congenital sodium diarrhea"
+ "id": "congenital_sodium_diarrhea",
+ "name": "Congenital sodium diarrhoea",
+ "aliases": [
+  "SLC9A3",
+  "GUCY2C",
+  "CSD",
+  "congenital sodium diarrhea"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology / Genetics",
+ "specialty": "Gastroenterology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Congenital secretory diarrhoea caused by defective intestinal sodium handling, with isolated forms linked to SLC9A3 and activating GUCY2C variants",
+   "Presents in the neonatal period with profuse watery diarrhoea and heavy faecal sodium loss",
+   "The biochemical picture is high faecal sodium with hyponatraemia and metabolic acidosis, distinguishing it from the alkalosis of congenital chloride diarrhoea",
+   "May be preceded antenatally by polyhydramnios and distended bowel loops",
+   "A syndromic form associated with SPINT2 features additional congenital anomalies such as choanal or anal atresia",
+   "Management relies on aggressive sodium, fluid and bicarbonate replacement to restore balance and support growth",
+   "Some patients tolerate gradual weaning of supplementation as intestinal adaptation occurs"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology / Genetics",
-  "specialty": "Gastroenterology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Congenital secretory diarrhoea caused by defective intestinal sodium handling, with isolated forms linked to SLC9A3 and activating GUCY2C variants",
-      "Presents in the neonatal period with profuse watery diarrhoea and heavy faecal sodium loss",
-      "The biochemical picture is high faecal sodium with hyponatraemia and metabolic acidosis, distinguishing it from the alkalosis of congenital chloride diarrhoea",
-      "May be preceded antenatally by polyhydramnios and distended bowel loops",
-      "A syndromic form associated with SPINT2 features additional congenital anomalies such as choanal or anal atresia",
-      "Management relies on aggressive sodium, fluid and bicarbonate replacement to restore balance and support growth",
-      "Some patients tolerate gradual weaning of supplementation as intestinal adaptation occurs"
+  "pathophysiology": "Congenital sodium diarrhoea reflects failure of electroneutral sodium absorption across the intestinal epithelium. Loss-of-function variants in SLC9A3, which encodes the apical sodium/hydrogen exchanger NHE3, impair sodium and fluid reabsorption. Activating variants in GUCY2C (guanylate cyclase 2C) raise intracellular cyclic GMP, inhibiting NHE3 and promoting chloride and fluid secretion, mimicking an enterotoxin-driven state. In both routes luminal sodium and water are retained, producing a secretory diarrhoea with high faecal sodium, systemic sodium depletion, and metabolic acidosis from bicarbonate loss. The SPINT2-associated syndromic form combines the enteropathy with developmental anomalies.",
+  "additionalDifferentials": [
+   "Congenital chloride diarrhoea",
+   "Microvillus inclusion disease and tufting enteropathy",
+   "Enteroendocrine cell dysgenesis (NEUROG3)",
+   "Autoimmune enteropathy and IPEX syndrome",
+   "Cystic fibrosis with intestinal salt loss",
+   "Secondary secretory diarrhoea from infection or hormone-secreting tumours"
+  ],
+  "additionalInvestigations": [
+   "Stool electrolytes showing elevated faecal sodium",
+   "Serum electrolytes and acid-base analysis demonstrating hyponatraemia and metabolic acidosis",
+   "Faecal osmotic gap to confirm a secretory pattern",
+   "Molecular genetic testing for SLC9A3, GUCY2C and SPINT2 variants",
+   "Assessment for congenital anomalies in suspected syndromic disease"
+  ],
+  "redFlags": [
+   "Severe hyponatraemia and dehydration threatening circulation in the neonate",
+   "Significant metabolic acidosis requiring correction",
+   "Associated congenital anomalies indicating the syndromic form",
+   "Growth failure from inadequate sodium replacement"
+  ],
+  "prognosis": "Adequate and sustained sodium, fluid and bicarbonate replacement generally permits satisfactory growth, and some children reduce supplementation over time with intestinal adaptation. Syndromic disease carries added morbidity from associated anomalies.",
+  "pitfalls": [
+   "Confusing the acidotic, high-sodium picture with congenital chloride diarrhoea",
+   "Underestimating ongoing sodium losses and under-replacing, causing chronic depletion and poor growth",
+   "Overlooking the diagnosis in a neonate with diarrhoea attributed to feed intolerance",
+   "Failing to look for associated anomalies that suggest the SPINT2-related syndrome"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics",
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide aggressive oral and intravenous sodium, fluid and bicarbonate replacement to correct the hyponatraemia, dehydration and metabolic acidosis and restore sodium balance",
+   "Optimise nutrition to support normal growth, matching sodium supplementation to ongoing urinary and faecal losses",
+   "Monitor serum electrolytes, acid-base status, urinary sodium and growth serially, reducing supplementation over time as intestinal adaptation allows",
+   "Identify and surgically manage associated anomalies in the SPINT2 syndromic form, such as choanal or anal atresia",
+   "Coordinate care through a multidisciplinary team of paediatric gastroenterology, clinical genetics and dietetics",
+   "Offer genetic counselling with molecular confirmation of the SLC9A3, GUCY2C or SPINT2 variant to the family"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_sodium_diarrhea-pathway",
+   "title": "Congenital sodium diarrhoea: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Congenital secretory diarrhoea caused by defective intestinal sodium handling, with isolated forms linked to SLC9A3 and activating GUCY2C variants",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe hyponatraemia and dehydration threatening circulation in the neonate",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Stool electrolytes showing elevated faecal sodium, Serum electrolytes and acid-base analysis demonstrating hyponatraemia and metabolic acidosis, Faecal osmotic gap to confirm a secretory pattern"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide aggressive oral and intravenous sodium, fluid and bicarbonate replacement to correct the hyponatraemia, dehydration and metabolic acidosis and restore sodium balance"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the acidotic, high-sodium picture with congenital chloride diarrhoea"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital sodium diarrhoea."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_sodium_diarrhea-matrix",
+   "title": "Congenital sodium diarrhoea: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Congenital secretory diarrhoea caused by defective intestinal sodium handling, with isolated forms linked to SLC9A3 and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Congenital sodium diarrhoea reflects failure of electroneutral sodium absorption across the intestinal epithelium. Loss-of-function variants in SLC9A3, which encodes the apical sodium/hydrogen exchanger NHE3, impair sodium and fluid reabsorption. Activating variants in GUCY2C (guanylate cyclase 2C) raise intracellular cyclic GMP, inhibiting NHE3 and promoting chloride and fluid secretion, mimicking an enterotoxin-driven state. In both routes luminal sodium and water are retained, producing a secretory diarrhoea with high faecal sodium, systemic sodium depletion, and metabolic acidosis from bicarbonate loss. The SPINT2-associated syndromic form combines the enteropathy with developmental anomalies.",
-    "additionalDifferentials": [
-      "Congenital chloride diarrhoea",
-      "Microvillus inclusion disease and tufting enteropathy",
-      "Enteroendocrine cell dysgenesis (NEUROG3)",
-      "Autoimmune enteropathy and IPEX syndrome",
-      "Cystic fibrosis with intestinal salt loss",
-      "Secondary secretory diarrhoea from infection or hormone-secreting tumours"
+    [
+     "Key Investigations",
+     "Stool electrolytes showing elevated faecal sodium, Serum electrolytes and acid-base analysis demonstrating hyponatraemia and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Stool electrolytes showing elevated faecal sodium",
-      "Serum electrolytes and acid-base analysis demonstrating hyponatraemia and metabolic acidosis",
-      "Faecal osmotic gap to confirm a secretory pattern",
-      "Molecular genetic testing for SLC9A3, GUCY2C and SPINT2 variants",
-      "Assessment for congenital anomalies in suspected syndromic disease"
+    [
+     "Primary Differentials",
+     "Congenital chloride diarrhoea, Microvillus inclusion disease and tufting enteropathy, Enteroendocrine cell dysgenesis (NEUROG3)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe hyponatraemia and dehydration threatening circulation in the neonate",
-      "Significant metabolic acidosis requiring correction",
-      "Associated congenital anomalies indicating the syndromic form",
-      "Growth failure from inadequate sodium replacement"
+    [
+     "Management Strategy",
+     "Provide aggressive oral and intravenous sodium, fluid and bicarbonate replacement to correct the hyponatraemia, dehydration and",
+     "Core treatment modality"
     ],
-    "prognosis": "Adequate and sustained sodium, fluid and bicarbonate replacement generally permits satisfactory growth, and some children reduce supplementation over time with intestinal adaptation. Syndromic disease carries added morbidity from associated anomalies.",
-    "pitfalls": [
-      "Confusing the acidotic, high-sodium picture with congenital chloride diarrhoea",
-      "Underestimating ongoing sodium losses and under-replacing, causing chronic depletion and poor growth",
-      "Overlooking the diagnosis in a neonate with diarrhoea attributed to feed intolerance",
-      "Failing to look for associated anomalies that suggest the SPINT2-related syndrome"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics",
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide aggressive oral and intravenous sodium, fluid and bicarbonate replacement to correct the hyponatraemia, dehydration and metabolic acidosis and restore sodium balance",
-      "Optimise nutrition to support normal growth, matching sodium supplementation to ongoing urinary and faecal losses",
-      "Monitor serum electrolytes, acid-base status, urinary sodium and growth serially, reducing supplementation over time as intestinal adaptation allows",
-      "Identify and surgically manage associated anomalies in the SPINT2 syndromic form, such as choanal or anal atresia",
-      "Coordinate care through a multidisciplinary team of paediatric gastroenterology, clinical genetics and dietetics",
-      "Offer genetic counselling with molecular confirmation of the SLC9A3, GUCY2C or SPINT2 variant to the family"
+    [
+     "Clinical Pitfall",
+     "Confusing the acidotic, high-sodium picture with congenital chloride diarrhoea",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital sodium diarrhoea."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "congenital-sodium-diarrhea-diagram",
+   "title": "Congenital sodium diarrhoea: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

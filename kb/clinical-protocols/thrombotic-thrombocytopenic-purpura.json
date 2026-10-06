@@ -5,7 +5,22 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, haematology unit, ICU",
- "aliases": ["TTP", "iTTP", "immune TTP", "acquired TTP", "congenital TTP", "ADAMTS13", "PLASMIC score", "plasma exchange", "TPE", "PEX", "caplacizumab", "thrombotic microangiopathy", "TMA", "MAHA"],
+ "aliases": [
+  "TTP",
+  "iTTP",
+  "immune TTP",
+  "acquired TTP",
+  "congenital TTP",
+  "ADAMTS13",
+  "PLASMIC score",
+  "plasma exchange",
+  "TPE",
+  "PEX",
+  "caplacizumab",
+  "thrombotic microangiopathy",
+  "TMA",
+  "MAHA"
+ ],
  "summary": "Suspect TTP in microangiopathic haemolytic anaemia with severe thrombocytopenia; send ADAMTS13 before treatment, use the PLASMIC score, start urgent plasma exchange with corticosteroids, add rituximab and caplacizumab where available, and avoid platelet transfusion unless bleeding is life-threatening.",
  "sections": [
   {
@@ -85,16 +100,149 @@
   }
  ],
  "drugs": [
-  { "name": "Therapeutic plasma exchange", "dose": "1.5 plasma volumes daily initially, then 1.0 plasma volume daily, with FFP or solvent-detergent plasma", "notes": "Start urgently; continue daily until platelet recovery under haematology guidance." },
-  { "name": "Methylprednisolone", "dose": "1 g IV once daily for 3 days, then prednisolone 1 mg/kg/day orally with taper", "notes": "Alternatively prednisolone 1 mg/kg/day from the start." },
-  { "name": "Rituximab", "dose": "375 mg/m2 IV once weekly for 4 doses", "notes": "Give after a TPE session. Screen for hepatitis B first." },
-  { "name": "Caplacizumab", "dose": "10 mg IV before the first TPE, then 10 mg SC once daily after each TPE and for 30 days after the last TPE", "notes": "Extend while ADAMTS13 remains suppressed. Increases bleeding risk; hold before procedures." },
-  { "name": "Folic acid", "dose": "5 mg orally once daily", "notes": "During haemolysis." }
+  {
+   "name": "Therapeutic plasma exchange",
+   "dose": "1.5 plasma volumes daily initially, then 1.0 plasma volume daily, with FFP or solvent-detergent plasma",
+   "notes": "Start urgently; continue daily until platelet recovery under haematology guidance."
+  },
+  {
+   "name": "Methylprednisolone",
+   "dose": "1 g IV once daily for 3 days, then prednisolone 1 mg/kg/day orally with taper",
+   "notes": "Alternatively prednisolone 1 mg/kg/day from the start."
+  },
+  {
+   "name": "Rituximab",
+   "dose": "375 mg/m2 IV once weekly for 4 doses",
+   "notes": "Give after a TPE session. Screen for hepatitis B first."
+  },
+  {
+   "name": "Caplacizumab",
+   "dose": "10 mg IV before the first TPE, then 10 mg SC once daily after each TPE and for 30 days after the last TPE",
+   "notes": "Extend while ADAMTS13 remains suppressed. Increases bleeding risk; hold before procedures."
+  },
+  {
+   "name": "Folic acid",
+   "dose": "5 mg orally once daily",
+   "notes": "During haemolysis."
+  }
  ],
  "sources": [
-  { "org": "ISTH", "title": "2025 focused update of the 2020 ISTH guidelines for management of thrombotic thrombocytopenic purpura", "year": 2025, "url": "https://www.sciencedirect.com/science/article/pii/S1538783625003605" },
-  { "org": "ISTH", "title": "ISTH guidelines for treatment of thrombotic thrombocytopenic purpura", "year": 2020, "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jth.15010" },
-  { "org": "ISTH", "title": "ISTH guidelines for the diagnosis of thrombotic thrombocytopenic purpura", "year": 2020, "url": "https://onlinelibrary.wiley.com/doi/10.1111/jth.15006" }
+  {
+   "org": "ISTH",
+   "title": "2025 focused update of the 2020 ISTH guidelines for management of thrombotic thrombocytopenic purpura",
+   "year": 2025,
+   "url": "https://www.sciencedirect.com/science/article/pii/S1538783625003605"
+  },
+  {
+   "org": "ISTH",
+   "title": "ISTH guidelines for treatment of thrombotic thrombocytopenic purpura",
+   "year": 2020,
+   "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jth.15010"
+  },
+  {
+   "org": "ISTH",
+   "title": "ISTH guidelines for the diagnosis of thrombotic thrombocytopenic purpura",
+   "year": 2020,
+   "url": "https://onlinelibrary.wiley.com/doi/10.1111/jth.15006"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "thrombotic-thrombocytopenic-purpura-pathway",
+   "title": "Thrombotic thrombocytopenic purpura (TTP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Microangiopathic haemolytic anaemia (schistocytes, raised LDH, low haptoglobin, raised indirect bilirubin and reticulocytes, DAT negative) with thrombocytopenia, often below 30 x 10^9/L.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Medical emergency: involve haematology at once and transfer to a centre with plasma exchange capability. Start plasma exchange without waiting for ADAMTS13 when clinical probability is high.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Take a sample for ADAMTS13 activity and inhibitor or antibody BEFORE plasma exchange or plasma infusion."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Folic acid 5 mg daily; red cell transfusion for symptomatic anaemia."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Daily FBC, LDH, reticulocytes, renal function and neurological status; troponin if cardiac involvement."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for thrombotic thrombocytopenic purpura (ttp)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "thrombotic-thrombocytopenic-purpura-summary-matrix",
+   "title": "Thrombotic thrombocytopenic purpura (TTP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Microangiopathic haemolytic anaemia (schistocytes, raised LDH, low haptoglobin, raised indirect bilirubin and reticulocytes, DAT negative)",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Medical emergency: involve haematology at once and transfer to a centre with plasma exchange capability. Start plasma exchange without",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Take a sample for ADAMTS13 activity and inhibitor or antibody BEFORE plasma exchange or plasma infusion.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Therapeutic plasma exchange: 1.5 plasma volumes daily initially, then 1.0 plasma volume daily, with FFP or solvent-detergent plasma",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Transfusing platelets before the diagnosis is considered.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for thrombotic thrombocytopenic purpura (ttp)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "thrombotic-thrombocytopenic-purpura-diagram",
+   "title": "Thrombotic thrombocytopenic purpura (TTP): Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

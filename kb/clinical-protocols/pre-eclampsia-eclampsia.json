@@ -6,7 +6,22 @@
  "basis": "international",
  "counterpart": "pre-eclampsia-eclampsia-india",
  "setting": "Antenatal clinic, labour room, emergency department, obstetric HDU",
- "aliases": ["pre-eclampsia", "preeclampsia", "PIH", "PET", "eclampsia", "HELLP", "severe pre-eclampsia", "gestational hypertension", "HDP", "hypertensive disorders of pregnancy", "MgSO4", "magnesium sulphate", "Pritchard regimen", "Zuspan regimen"],
+ "aliases": [
+  "pre-eclampsia",
+  "preeclampsia",
+  "PIH",
+  "PET",
+  "eclampsia",
+  "HELLP",
+  "severe pre-eclampsia",
+  "gestational hypertension",
+  "HDP",
+  "hypertensive disorders of pregnancy",
+  "MgSO4",
+  "magnesium sulphate",
+  "Pritchard regimen",
+  "Zuspan regimen"
+ ],
  "summary": "Treat BP of 160/110 mmHg or more within 30 to 60 minutes (IV labetalol, oral nifedipine or IV hydralazine), give magnesium sulphate for severe features or eclampsia (Pritchard or Zuspan), and plan birth: 37 weeks without severe features, 34 weeks with severe features, after stabilisation for eclampsia.",
  "sections": [
   {
@@ -101,20 +116,170 @@
   }
  ],
  "drugs": [
-  { "name": "Labetalol (IV)", "dose": "20 mg IV over 2 minutes, then 40 mg, then 80 mg at 10-minute intervals if BP stays 160/110 or more; maximum cumulative 300 mg. Or infusion 1 to 2 mg/min", "notes": "Avoid in asthma, heart failure, heart block, bradycardia." },
-  { "name": "Nifedipine immediate-release (oral)", "dose": "10 mg orally; if still severe at 20 minutes give 20 mg, repeat 20 mg after 20 minutes; maximum 180 mg/day", "notes": "Swallow whole; never sublingual, bitten or crushed. Maintenance with extended-release nifedipine." },
-  { "name": "Hydralazine", "dose": "5 mg IV or IM, then 5 to 10 mg IV every 20 to 40 minutes; maximum cumulative 20 mg IV or 30 mg IM. Infusion 0.5 to 10 mg/h", "notes": "More maternal hypotension and fetal heart rate abnormalities." },
-  { "name": "Magnesium sulphate (Pritchard)", "dose": "Loading 4 g IV (20% solution slowly over 5 to 15 minutes) plus 5 g of 50% deep IM in each buttock; maintenance 5 g of 50% deep IM every 4 hours, alternate buttocks, for 24 hours after birth or last seizure", "notes": "Before each dose check patellar reflexes present, respiratory rate 16/min or more, urine 30 mL/h or more (100 mL per 4 hours). Calcium gluconate at the bedside." },
-  { "name": "Magnesium sulphate (Zuspan)", "dose": "Loading 4 g IV over 5 to 15 minutes, then 1 g/h IV infusion for 24 hours after birth or last seizure", "notes": "Recurrent seizure: further 2 g IV over 5 minutes. Reduce maintenance in renal impairment." },
-  { "name": "Calcium gluconate 10%", "dose": "10 mL (1 g) IV slowly over 10 minutes", "notes": "Antidote for magnesium toxicity (respiratory depression, absent reflexes). Keep at the bedside during magnesium therapy. ECG monitoring." },
-  { "name": "Labetalol (oral maintenance)", "dose": "200 mg twice daily, increasing up to 800 mg every 8 to 12 hours; maximum 2400 mg/day", "notes": "First-line maintenance (NICE)." },
-  { "name": "Aspirin (prophylaxis)", "dose": "75 to 150 mg orally once daily from 12 weeks (ideally before 16 weeks) until birth", "notes": "For high-risk women or those with more than one moderate risk factor." }
+  {
+   "name": "Labetalol (IV)",
+   "dose": "20 mg IV over 2 minutes, then 40 mg, then 80 mg at 10-minute intervals if BP stays 160/110 or more; maximum cumulative 300 mg. Or infusion 1 to 2 mg/min",
+   "notes": "Avoid in asthma, heart failure, heart block, bradycardia."
+  },
+  {
+   "name": "Nifedipine immediate-release (oral)",
+   "dose": "10 mg orally; if still severe at 20 minutes give 20 mg, repeat 20 mg after 20 minutes; maximum 180 mg/day",
+   "notes": "Swallow whole; never sublingual, bitten or crushed. Maintenance with extended-release nifedipine."
+  },
+  {
+   "name": "Hydralazine",
+   "dose": "5 mg IV or IM, then 5 to 10 mg IV every 20 to 40 minutes; maximum cumulative 20 mg IV or 30 mg IM. Infusion 0.5 to 10 mg/h",
+   "notes": "More maternal hypotension and fetal heart rate abnormalities."
+  },
+  {
+   "name": "Magnesium sulphate (Pritchard)",
+   "dose": "Loading 4 g IV (20% solution slowly over 5 to 15 minutes) plus 5 g of 50% deep IM in each buttock; maintenance 5 g of 50% deep IM every 4 hours, alternate buttocks, for 24 hours after birth or last seizure",
+   "notes": "Before each dose check patellar reflexes present, respiratory rate 16/min or more, urine 30 mL/h or more (100 mL per 4 hours). Calcium gluconate at the bedside."
+  },
+  {
+   "name": "Magnesium sulphate (Zuspan)",
+   "dose": "Loading 4 g IV over 5 to 15 minutes, then 1 g/h IV infusion for 24 hours after birth or last seizure",
+   "notes": "Recurrent seizure: further 2 g IV over 5 minutes. Reduce maintenance in renal impairment."
+  },
+  {
+   "name": "Calcium gluconate 10%",
+   "dose": "10 mL (1 g) IV slowly over 10 minutes",
+   "notes": "Antidote for magnesium toxicity (respiratory depression, absent reflexes). Keep at the bedside during magnesium therapy. ECG monitoring."
+  },
+  {
+   "name": "Labetalol (oral maintenance)",
+   "dose": "200 mg twice daily, increasing up to 800 mg every 8 to 12 hours; maximum 2400 mg/day",
+   "notes": "First-line maintenance (NICE)."
+  },
+  {
+   "name": "Aspirin (prophylaxis)",
+   "dose": "75 to 150 mg orally once daily from 12 weeks (ideally before 16 weeks) until birth",
+   "notes": "For high-risk women or those with more than one moderate risk factor."
+  }
  ],
  "sources": [
-  { "org": "ACOG", "title": "Gestational hypertension and preeclampsia: ACOG Practice Bulletin No. 222", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/32443079/" },
-  { "org": "NICE", "title": "Hypertension in pregnancy: diagnosis and management (NG133)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng133/chapter/recommendations" },
-  { "org": "WHO", "title": "WHO recommendations for prevention and treatment of pre-eclampsia and eclampsia", "year": 2011, "url": "https://www.ncbi.nlm.nih.gov/books/NBK140561/" },
-  { "org": "FOGSI / Gestosis / ICOG", "title": "Good clinical practice recommendations: hypertensive disorders in pregnancy", "year": 2019, "url": "https://www.fogsi.org/fogsi-hdp-gcpr-2019/" }
+  {
+   "org": "ACOG",
+   "title": "Gestational hypertension and preeclampsia: ACOG Practice Bulletin No. 222",
+   "year": 2020,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/32443079/"
+  },
+  {
+   "org": "NICE",
+   "title": "Hypertension in pregnancy: diagnosis and management (NG133)",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng133/chapter/recommendations"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO recommendations for prevention and treatment of pre-eclampsia and eclampsia",
+   "year": 2011,
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK140561/"
+  },
+  {
+   "org": "FOGSI / Gestosis / ICOG",
+   "title": "Good clinical practice recommendations: hypertensive disorders in pregnancy",
+   "year": 2019,
+   "url": "https://www.fogsi.org/fogsi-hdp-gcpr-2019/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "pre-eclampsia-eclampsia-pathway",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Gestational hypertension: BP 140/90 mmHg or more on two occasions at least 4 hours apart after 20 weeks in a previously normotensive woman. Severe range is systolic 160 or more or diastolic 110 or more; confirm within 15 minutes and treat,",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call for help. Left lateral position, protect from injury, clear the airway, suction, oxygen, SpO2 monitoring. Do not use diazepam or phenytoin as first-line; give the magnesium sulphate loading dose.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Severe features: BP 160/110 or more; platelets below 100,000/microlitre; transaminases above twice normal or severe persistent right upper quadrant or epigastric pain; creatinine above 1.1 mg/dL or doubled; pulmonary oedema; new headache"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Indications: eclampsia, and pre-eclampsia or gestational hypertension with severe features, for prevention of seizures. Continue for 24 hours after birth or after the last seizure, whichever is later; at caesarean, run it before, during"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "BP every 15 to 30 minutes until below 160/110 mmHg; hourly urine output and fluid balance; SpO2 and respiratory rate; symptoms of headache, visual change and epigastric pain."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pre-eclampsia, severe hypertension in pregnancy and eclampsia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pre-eclampsia-eclampsia-summary-matrix",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Gestational hypertension: BP 140/90 mmHg or more on two occasions at least 4 hours apart after 20 weeks in a previously normotensive woman.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call for help. Left lateral position, protect from injury, clear the airway, suction, oxygen, SpO2 monitoring. Do not use diazepam or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Labetalol (IV): 20 mg IV over 2 minutes, then 40 mg, then 80 mg at 10-minute intervals if BP stays 160/110 or more; maximum cumulative 300",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Delaying treatment of confirmed severe BP beyond 60 minutes, or ignoring isolated severe systolic hypertension (stroke risk).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pre-eclampsia, severe hypertension in pregnancy and eclampsia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pre-eclampsia-eclampsia-diagram",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

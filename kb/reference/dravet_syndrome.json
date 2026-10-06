@@ -1,78 +1,173 @@
 {
-  "id": "dravet_syndrome",
-  "name": "Dravet syndrome",
-  "aliases": [
-    "SCN1A",
-    "severe myoclonic epilepsy of infancy",
-    "SMEI",
-    "polymorphic epilepsy of infancy"
+ "id": "dravet_syndrome",
+ "name": "Dravet syndrome",
+ "aliases": [
+  "SCN1A",
+  "severe myoclonic epilepsy of infancy",
+  "SMEI",
+  "polymorphic epilepsy of infancy"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Epileptology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ILAE classification / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents in a previously healthy infant, typically in the first year of life, with prolonged febrile and afebrile hemiclonic or generalised seizures often triggered by fever, illness or vaccination",
+   "The great majority of cases are caused by loss-of-function variants in the SCN1A gene encoding a voltage-gated sodium channel alpha subunit",
+   "Seizures are characteristically sensitive to temperature elevation and can be precipitated by hot baths, exertion or environmental heat",
+   "Multiple seizure types emerge over the second year, including myoclonic, atypical absence, focal and atonic seizures, with a tendency to status epilepticus",
+   "Development is usually normal at onset but slows or regresses from the second year, with later intellectual disability, ataxia and behavioural difficulties",
+   "Sodium-channel-blocking antiseizure medications should generally be avoided because they typically aggravate seizures in this channelopathy",
+   "There is a heightened risk of sudden unexpected death in epilepsy (SUDEP), so seizure control and safety counselling are priorities"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Epileptology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ILAE classification / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents in a previously healthy infant, typically in the first year of life, with prolonged febrile and afebrile hemiclonic or generalised seizures often triggered by fever, illness or vaccination",
-      "The great majority of cases are caused by loss-of-function variants in the SCN1A gene encoding a voltage-gated sodium channel alpha subunit",
-      "Seizures are characteristically sensitive to temperature elevation and can be precipitated by hot baths, exertion or environmental heat",
-      "Multiple seizure types emerge over the second year, including myoclonic, atypical absence, focal and atonic seizures, with a tendency to status epilepticus",
-      "Development is usually normal at onset but slows or regresses from the second year, with later intellectual disability, ataxia and behavioural difficulties",
-      "Sodium-channel-blocking antiseizure medications should generally be avoided because they typically aggravate seizures in this channelopathy",
-      "There is a heightened risk of sudden unexpected death in epilepsy (SUDEP), so seizure control and safety counselling are priorities"
+  "pathophysiology": "Dravet syndrome is a developmental and epileptic encephalopathy caused in most patients by heterozygous loss-of-function variants in SCN1A, which encodes the Nav1.1 voltage-gated sodium channel. Nav1.1 is expressed preferentially in inhibitory GABAergic interneurons, so reduced channel function impairs interneuron firing and disinhibits cortical and hippocampal networks, producing hyperexcitability and a low threshold for seizures, particularly with rises in body temperature. The same interneuron dysfunction is thought to underlie the associated cognitive, motor and behavioural impairments that define the encephalopathy.",
+  "additionalDifferentials": [
+   "Simple or complex febrile seizures",
+   "Genetic epilepsy with febrile seizures plus (GEFS+)",
+   "PCDH19-related epilepsy",
+   "Other early-onset developmental and epileptic encephalopathies (e.g. KCNQ2, SCN2A)",
+   "Mitochondrial or metabolic epilepsies",
+   "Structural focal epilepsy on neuroimaging"
+  ],
+  "additionalInvestigations": [
+   "Targeted or panel gene testing for SCN1A and related epilepsy genes",
+   "Prolonged or video EEG, which may be normal early and later shows generalised or multifocal epileptiform discharges",
+   "Brain MRI, typically normal early but useful to exclude structural causes",
+   "Metabolic screening where an inborn error of metabolism is considered",
+   "Assessment of development and cognition to document the encephalopathic trajectory"
+  ],
+  "redFlags": [
+   "Prolonged or repeated febrile seizures progressing to convulsive status epilepticus",
+   "Developmental slowing or regression in the second year of life",
+   "Seizure aggravation after introduction of a sodium-channel-blocking agent",
+   "Features suggesting elevated SUDEP risk such as frequent nocturnal convulsions"
+  ],
+  "prognosis": "Seizures typically persist into adulthood and are often drug-resistant, with associated intellectual disability, gait disturbance and behavioural problems. Mortality is elevated, largely from SUDEP and status epilepticus, so long-term multidisciplinary care and safety planning are essential.",
+  "pitfalls": [
+   "Dismissing early prolonged febrile seizures as simple febrile convulsions and delaying genetic testing",
+   "Prescribing sodium-channel blockers, which commonly worsen seizures in this condition",
+   "Assuming a normal early EEG or MRI excludes the diagnosis",
+   "Overlooking fever, illness and heat as consistent seizure triggers requiring aggressive fever management"
+  ],
+  "references": [
+   "ILAE classification of the epilepsies",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Base antiseizure treatment on agents effective in this syndrome, with sodium valproate and clobazam first-line and stiripentol, fenfluramine or cannabidiol added for refractory seizures",
+   "Avoid sodium-channel-blocking antiseizure drugs (carbamazepine, oxcarbazepine, phenytoin, lamotrigine), which aggravate seizures in this channelopathy",
+   "Provide a home rescue plan with buccal midazolam or rectal diazepam and a clear status epilepticus protocol, given the strong tendency to prolonged seizures",
+   "Minimise seizure triggers with prompt antipyresis during febrile illness and avoidance of overheating such as hot baths, while still recommending vaccination with pre-emptive fever control",
+   "Support the developmental and epileptic encephalopathy with developmental therapies and management of ataxia and behavioural difficulties",
+   "Counsel on the elevated risk of SUDEP and status epilepticus and put safety and long-term multidisciplinary care planning in place",
+   "Offer clinical genetics input with SCN1A counselling and family assessment, as most cases arise de novo"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dravet_syndrome-pathway",
+   "title": "Dravet syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents in a previously healthy infant, typically in the first year of life, with prolonged febrile and afebrile hemiclonic or generalised seizures often triggered by fever, illness or vaccination",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Prolonged or repeated febrile seizures progressing to convulsive status epilepticus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted or panel gene testing for SCN1A and related epilepsy genes, Prolonged or video EEG, which may be normal early and later shows generalised or multifocal epileptiform discharges, Brain MRI, typically normal early"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Base antiseizure treatment on agents effective in this syndrome, with sodium valproate and clobazam first-line and stiripentol, fenfluramine or cannabidiol added for refractory seizures"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing early prolonged febrile seizures as simple febrile convulsions and delaying genetic testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dravet syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dravet_syndrome-matrix",
+   "title": "Dravet syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents in a previously healthy infant, typically in the first year of life, with prolonged febrile and afebrile hemiclonic or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Dravet syndrome is a developmental and epileptic encephalopathy caused in most patients by heterozygous loss-of-function variants in SCN1A, which encodes the Nav1.1 voltage-gated sodium channel. Nav1.1 is expressed preferentially in inhibitory GABAergic interneurons, so reduced channel function impairs interneuron firing and disinhibits cortical and hippocampal networks, producing hyperexcitability and a low threshold for seizures, particularly with rises in body temperature. The same interneuron dysfunction is thought to underlie the associated cognitive, motor and behavioural impairments that define the encephalopathy.",
-    "additionalDifferentials": [
-      "Simple or complex febrile seizures",
-      "Genetic epilepsy with febrile seizures plus (GEFS+)",
-      "PCDH19-related epilepsy",
-      "Other early-onset developmental and epileptic encephalopathies (e.g. KCNQ2, SCN2A)",
-      "Mitochondrial or metabolic epilepsies",
-      "Structural focal epilepsy on neuroimaging"
+    [
+     "Key Investigations",
+     "Targeted or panel gene testing for SCN1A and related epilepsy genes, Prolonged or video EEG, which may be normal early and later",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted or panel gene testing for SCN1A and related epilepsy genes",
-      "Prolonged or video EEG, which may be normal early and later shows generalised or multifocal epileptiform discharges",
-      "Brain MRI, typically normal early but useful to exclude structural causes",
-      "Metabolic screening where an inborn error of metabolism is considered",
-      "Assessment of development and cognition to document the encephalopathic trajectory"
+    [
+     "Primary Differentials",
+     "Simple or complex febrile seizures, Genetic epilepsy with febrile seizures plus (GEFS+), PCDH19-related epilepsy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Prolonged or repeated febrile seizures progressing to convulsive status epilepticus",
-      "Developmental slowing or regression in the second year of life",
-      "Seizure aggravation after introduction of a sodium-channel-blocking agent",
-      "Features suggesting elevated SUDEP risk such as frequent nocturnal convulsions"
+    [
+     "Management Strategy",
+     "Base antiseizure treatment on agents effective in this syndrome, with sodium valproate and clobazam first-line and stiripentol,",
+     "Core treatment modality"
     ],
-    "prognosis": "Seizures typically persist into adulthood and are often drug-resistant, with associated intellectual disability, gait disturbance and behavioural problems. Mortality is elevated, largely from SUDEP and status epilepticus, so long-term multidisciplinary care and safety planning are essential.",
-    "pitfalls": [
-      "Dismissing early prolonged febrile seizures as simple febrile convulsions and delaying genetic testing",
-      "Prescribing sodium-channel blockers, which commonly worsen seizures in this condition",
-      "Assuming a normal early EEG or MRI excludes the diagnosis",
-      "Overlooking fever, illness and heat as consistent seizure triggers requiring aggressive fever management"
-    ],
-    "references": [
-      "ILAE classification of the epilepsies",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Base antiseizure treatment on agents effective in this syndrome, with sodium valproate and clobazam first-line and stiripentol, fenfluramine or cannabidiol added for refractory seizures",
-      "Avoid sodium-channel-blocking antiseizure drugs (carbamazepine, oxcarbazepine, phenytoin, lamotrigine), which aggravate seizures in this channelopathy",
-      "Provide a home rescue plan with buccal midazolam or rectal diazepam and a clear status epilepticus protocol, given the strong tendency to prolonged seizures",
-      "Minimise seizure triggers with prompt antipyresis during febrile illness and avoidance of overheating such as hot baths, while still recommending vaccination with pre-emptive fever control",
-      "Support the developmental and epileptic encephalopathy with developmental therapies and management of ataxia and behavioural difficulties",
-      "Counsel on the elevated risk of SUDEP and status epilepticus and put safety and long-term multidisciplinary care planning in place",
-      "Offer clinical genetics input with SCN1A counselling and family assessment, as most cases arise de novo"
+    [
+     "Clinical Pitfall",
+     "Dismissing early prolonged febrile seizures as simple febrile convulsions and delaying genetic testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dravet syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dravet-syndrome-diagram",
+   "title": "Dravet syndrome: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

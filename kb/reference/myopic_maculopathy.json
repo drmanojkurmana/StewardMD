@@ -1,82 +1,177 @@
 {
-  "id": "myopic_maculopathy",
-  "name": "Myopic maculopathy",
-  "aliases": [
-    "myopic macular degeneration",
-    "pathological myopia maculopathy",
-    "degenerative myopia maculopathy"
+ "id": "myopic_maculopathy",
+ "name": "Myopic maculopathy",
+ "aliases": [
+  "myopic macular degeneration",
+  "pathological myopia maculopathy",
+  "degenerative myopia maculopathy"
+ ],
+ "class": "non_infective",
+ "system": "Special senses / Eye (macula)",
+ "specialty": "Ophthalmology / Medical retina",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A sight-threatening complication of pathological (degenerative) myopia driven by progressive axial elongation of the globe and formation of a posterior staphyloma",
+   "The META-PM classification grades categories from tessellated fundus through diffuse and patchy chorioretinal atrophy to macular atrophy, with three 'plus' lesions: lacquer cracks, myopic choroidal neovascularisation and Fuchs spot",
+   "Lacquer cracks are breaks in Bruch's membrane that predispose to myopic choroidal neovascularisation and subretinal haemorrhage",
+   "Myopic choroidal neovascularisation is typically small, grey and subfoveal or juxtafoveal and may leave a pigmented scar (Fuchs or Forster-Fuchs spot); anti-VEGF therapy is the mainstay of treatment",
+   "Myopic traction maculopathy, including foveoschisis, results from inward traction on a stretched, non-compliant retina overlying a staphyloma and may progress to macular hole and detachment",
+   "Dome-shaped macula and peripapillary changes such as myopic conus, peripapillary atrophy and tilted disc are recognised associated features that can complicate glaucoma assessment",
+   "OCT is essential for detecting neovascularisation, foveoschisis, macular hole and dome-shaped macula, and OCT-angiography aids detection of myopic choroidal neovascularisation",
+   "Because early myopic neovascularisation is very treatable, patients benefit from education about warning symptoms and often Amsler grid monitoring"
   ],
-  "class": "non_infective",
-  "system": "Special senses / Eye (macula)",
-  "specialty": "Ophthalmology / Medical retina",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A sight-threatening complication of pathological (degenerative) myopia driven by progressive axial elongation of the globe and formation of a posterior staphyloma",
-      "The META-PM classification grades categories from tessellated fundus through diffuse and patchy chorioretinal atrophy to macular atrophy, with three 'plus' lesions: lacquer cracks, myopic choroidal neovascularisation and Fuchs spot",
-      "Lacquer cracks are breaks in Bruch's membrane that predispose to myopic choroidal neovascularisation and subretinal haemorrhage",
-      "Myopic choroidal neovascularisation is typically small, grey and subfoveal or juxtafoveal and may leave a pigmented scar (Fuchs or Forster-Fuchs spot); anti-VEGF therapy is the mainstay of treatment",
-      "Myopic traction maculopathy, including foveoschisis, results from inward traction on a stretched, non-compliant retina overlying a staphyloma and may progress to macular hole and detachment",
-      "Dome-shaped macula and peripapillary changes such as myopic conus, peripapillary atrophy and tilted disc are recognised associated features that can complicate glaucoma assessment",
-      "OCT is essential for detecting neovascularisation, foveoschisis, macular hole and dome-shaped macula, and OCT-angiography aids detection of myopic choroidal neovascularisation",
-      "Because early myopic neovascularisation is very treatable, patients benefit from education about warning symptoms and often Amsler grid monitoring"
+  "pathophysiology": "Pathological myopia is characterised by excessive axial elongation of the eye and development of a posterior staphyloma, an outpouching of the wall of the globe. Progressive mechanical stretching thins the retina, retinal pigment epithelium, Bruch's membrane and choroid, producing chorioretinal atrophy and breaks in Bruch's membrane known as lacquer cracks. These breaks together with the attenuated choroid predispose to myopic choroidal neovascularisation and subsequent scarring (Fuchs spot). Over the rigid, non-compliant posterior pole, persistent vitreoretinal and epiretinal traction on a stretched retina causes myopic traction maculopathy and foveoschisis, which may progress to full-thickness macular hole and retinal detachment. The combination of atrophy, neovascularisation and traction accounts for the central visual loss.",
+  "additionalDifferentials": [
+   "Neovascular age-related macular degeneration",
+   "Angioid streaks with choroidal neovascularisation",
+   "Central serous chorioretinopathy",
+   "Choroidal neovascularisation of inflammatory or idiopathic origin",
+   "Macular hole or vitreomacular traction of other aetiology",
+   "Tilted disc syndrome with associated maculopathy",
+   "Punctate inner choroidopathy and other inflammatory chorioretinopathies in young myopes"
+  ],
+  "additionalInvestigations": [
+   "OCT of the macula for neovascularisation, foveoschisis, macular hole and dome-shaped macula",
+   "OCT-angiography and/or fundus fluorescein angiography to detect and characterise myopic choroidal neovascularisation",
+   "Fundus autofluorescence and colour imaging to map chorioretinal atrophy and lacquer cracks",
+   "Measurement of axial length and refraction to confirm the degree of myopia",
+   "Amsler grid for symptom self-monitoring",
+   "Wide-field imaging and peripheral retinal examination, as high myopes are also at risk of peripheral breaks and detachment"
+  ],
+  "redFlags": [
+   "New metamorphopsia, a central scotoma or sudden drop in central vision suggesting neovascularisation or subretinal haemorrhage",
+   "Flashes, floaters or a field defect suggesting retinal detachment, to which high myopes are predisposed",
+   "Progressive distortion suggesting foveoschisis advancing towards a macular hole",
+   "Fresh subretinal haemorrhage at the fovea"
+  ],
+  "prognosis": "Myopic maculopathy is a leading cause of irreversible central visual impairment in high myopia and tends to progress with age and increasing axial length. Nonetheless, early detection and prompt anti-VEGF treatment of myopic choroidal neovascularisation gives a relatively favourable visual outcome compared with untreated disease.",
+  "pitfalls": [
+   "Attributing reduced vision solely to refractive error and missing treatable myopic choroidal neovascularisation",
+   "Misinterpreting myopic disc and peripapillary changes, leading to over- or under-diagnosis of glaucoma",
+   "Overlooking foveoschisis on clinical examination when OCT would reveal it",
+   "Failing to examine the peripheral retina for breaks in a high myope",
+   "Confusing myopic neovascularisation with neovascular AMD, which differs in lesion size, behaviour and treatment response"
+  ],
+  "references": [
+   "Ryan's Retina",
+   "Kanski's Clinical Ophthalmology: A Systematic Approach",
+   "International photographic classification and grading system for myopic maculopathy (META-PM)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat myopic choroidal neovascularisation promptly with intravitreal anti-VEGF injections as the mainstay of therapy",
+   "Consider vitreoretinal surgery, such as vitrectomy with internal limiting membrane peeling, for myopic traction maculopathy, foveoschisis and macular hole",
+   "Repair associated retinal detachment surgically and treat peripheral retinal breaks",
+   "Monitor with serial optical coherence tomography and OCT-angiography, and provide an Amsler grid for symptom self-monitoring",
+   "Optimise refractive correction and provide low-vision aids and rehabilitation for irreversible central visual loss",
+   "Surveil for and manage coexisting glaucoma, allowing for the difficult optic disc assessment in high myopia",
+   "Refer to medical retina and advise prompt review of any new distortion or scotoma"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "myopic_maculopathy-pathway",
+   "title": "Myopic maculopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A sight-threatening complication of pathological (degenerative) myopia driven by progressive axial elongation of the globe and formation of a posterior staphyloma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New metamorphopsia, a central scotoma or sudden drop in central vision suggesting neovascularisation or subretinal haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: OCT of the macula for neovascularisation, foveoschisis, macular hole and dome-shaped macula, OCT-angiography and/or fundus fluorescein angiography to detect and characterise myopic choroidal neovascularisation, Fundus"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat myopic choroidal neovascularisation promptly with intravitreal anti-VEGF injections as the mainstay of therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing reduced vision solely to refractive error and missing treatable myopic choroidal neovascularisation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of myopic maculopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "myopic_maculopathy-matrix",
+   "title": "Myopic maculopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A sight-threatening complication of pathological (degenerative) myopia driven by progressive axial elongation of the globe and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pathological myopia is characterised by excessive axial elongation of the eye and development of a posterior staphyloma, an outpouching of the wall of the globe. Progressive mechanical stretching thins the retina, retinal pigment epithelium, Bruch's membrane and choroid, producing chorioretinal atrophy and breaks in Bruch's membrane known as lacquer cracks. These breaks together with the attenuated choroid predispose to myopic choroidal neovascularisation and subsequent scarring (Fuchs spot). Over the rigid, non-compliant posterior pole, persistent vitreoretinal and epiretinal traction on a stretched retina causes myopic traction maculopathy and foveoschisis, which may progress to full-thickness macular hole and retinal detachment. The combination of atrophy, neovascularisation and traction accounts for the central visual loss.",
-    "additionalDifferentials": [
-      "Neovascular age-related macular degeneration",
-      "Angioid streaks with choroidal neovascularisation",
-      "Central serous chorioretinopathy",
-      "Choroidal neovascularisation of inflammatory or idiopathic origin",
-      "Macular hole or vitreomacular traction of other aetiology",
-      "Tilted disc syndrome with associated maculopathy",
-      "Punctate inner choroidopathy and other inflammatory chorioretinopathies in young myopes"
+    [
+     "Key Investigations",
+     "OCT of the macula for neovascularisation, foveoschisis, macular hole and dome-shaped macula, OCT-angiography and/or fundus",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "OCT of the macula for neovascularisation, foveoschisis, macular hole and dome-shaped macula",
-      "OCT-angiography and/or fundus fluorescein angiography to detect and characterise myopic choroidal neovascularisation",
-      "Fundus autofluorescence and colour imaging to map chorioretinal atrophy and lacquer cracks",
-      "Measurement of axial length and refraction to confirm the degree of myopia",
-      "Amsler grid for symptom self-monitoring",
-      "Wide-field imaging and peripheral retinal examination, as high myopes are also at risk of peripheral breaks and detachment"
+    [
+     "Primary Differentials",
+     "Neovascular age-related macular degeneration, Angioid streaks with choroidal neovascularisation, Central serous chorioretinopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New metamorphopsia, a central scotoma or sudden drop in central vision suggesting neovascularisation or subretinal haemorrhage",
-      "Flashes, floaters or a field defect suggesting retinal detachment, to which high myopes are predisposed",
-      "Progressive distortion suggesting foveoschisis advancing towards a macular hole",
-      "Fresh subretinal haemorrhage at the fovea"
+    [
+     "Management Strategy",
+     "Treat myopic choroidal neovascularisation promptly with intravitreal anti-VEGF injections as the mainstay of therapy",
+     "Core treatment modality"
     ],
-    "prognosis": "Myopic maculopathy is a leading cause of irreversible central visual impairment in high myopia and tends to progress with age and increasing axial length. Nonetheless, early detection and prompt anti-VEGF treatment of myopic choroidal neovascularisation gives a relatively favourable visual outcome compared with untreated disease.",
-    "pitfalls": [
-      "Attributing reduced vision solely to refractive error and missing treatable myopic choroidal neovascularisation",
-      "Misinterpreting myopic disc and peripapillary changes, leading to over- or under-diagnosis of glaucoma",
-      "Overlooking foveoschisis on clinical examination when OCT would reveal it",
-      "Failing to examine the peripheral retina for breaks in a high myope",
-      "Confusing myopic neovascularisation with neovascular AMD, which differs in lesion size, behaviour and treatment response"
-    ],
-    "references": [
-      "Ryan's Retina",
-      "Kanski's Clinical Ophthalmology: A Systematic Approach",
-      "International photographic classification and grading system for myopic maculopathy (META-PM)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat myopic choroidal neovascularisation promptly with intravitreal anti-VEGF injections as the mainstay of therapy",
-      "Consider vitreoretinal surgery, such as vitrectomy with internal limiting membrane peeling, for myopic traction maculopathy, foveoschisis and macular hole",
-      "Repair associated retinal detachment surgically and treat peripheral retinal breaks",
-      "Monitor with serial optical coherence tomography and OCT-angiography, and provide an Amsler grid for symptom self-monitoring",
-      "Optimise refractive correction and provide low-vision aids and rehabilitation for irreversible central visual loss",
-      "Surveil for and manage coexisting glaucoma, allowing for the difficult optic disc assessment in high myopia",
-      "Refer to medical retina and advise prompt review of any new distortion or scotoma"
+    [
+     "Clinical Pitfall",
+     "Attributing reduced vision solely to refractive error and missing treatable myopic choroidal neovascularisation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for myopic maculopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "myopic-maculopathy-diagram",
+   "title": "Myopic maculopathy: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

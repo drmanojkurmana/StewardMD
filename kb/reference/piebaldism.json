@@ -1,80 +1,175 @@
 {
-  "id": "piebaldism",
-  "name": "piebaldism",
-  "aliases": [
-    "partial albinism",
-    "piebald trait"
+ "id": "piebaldism",
+ "name": "piebaldism",
+ "aliases": [
+  "partial albinism",
+  "piebald trait"
+ ],
+ "class": "non_infective",
+ "system": "Integumentary",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant congenital leukoderma caused chiefly by loss-of-function mutations in the KIT proto-oncogene, with a minority due to SLUG/SNAI2 defects impairing melanoblast migration from the neural crest.",
+   "The hallmark is a stable white forelock (poliosis) present at birth in most affected individuals, overlying a triangular or diamond-shaped depigmented patch of the central forehead.",
+   "Depigmented patches favour the central forehead, ventral trunk, and mid-extremities, while the hands, feet, back, and a median dorsal strip are characteristically spared.",
+   "Islands of normally pigmented or hyperpigmented macules lie within and at the borders of the amelanotic patches, a feature that helps distinguish piebaldism from vitiligo.",
+   "Lesions are congenital and remain remarkably stable in relative size and distribution throughout life, expanding only in proportion to body growth.",
+   "Histology of affected skin shows an absence or marked reduction of melanocytes, mirroring the failed migration and survival of melanoblasts.",
+   "Overlap with Waardenburg syndrome should be considered; the presence of sensorineural deafness, dystopia canthorum, or heterochromia iridis points away from isolated piebaldism.",
+   "Genotype-phenotype correlation exists: mutations affecting the KIT tyrosine kinase domain tend to produce more extensive depigmentation than those in the extracellular ligand-binding region."
   ],
-  "class": "non_infective",
-  "system": "Integumentary",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant congenital leukoderma caused chiefly by loss-of-function mutations in the KIT proto-oncogene, with a minority due to SLUG/SNAI2 defects impairing melanoblast migration from the neural crest.",
-      "The hallmark is a stable white forelock (poliosis) present at birth in most affected individuals, overlying a triangular or diamond-shaped depigmented patch of the central forehead.",
-      "Depigmented patches favour the central forehead, ventral trunk, and mid-extremities, while the hands, feet, back, and a median dorsal strip are characteristically spared.",
-      "Islands of normally pigmented or hyperpigmented macules lie within and at the borders of the amelanotic patches, a feature that helps distinguish piebaldism from vitiligo.",
-      "Lesions are congenital and remain remarkably stable in relative size and distribution throughout life, expanding only in proportion to body growth.",
-      "Histology of affected skin shows an absence or marked reduction of melanocytes, mirroring the failed migration and survival of melanoblasts.",
-      "Overlap with Waardenburg syndrome should be considered; the presence of sensorineural deafness, dystopia canthorum, or heterochromia iridis points away from isolated piebaldism.",
-      "Genotype-phenotype correlation exists: mutations affecting the KIT tyrosine kinase domain tend to produce more extensive depigmentation than those in the extracellular ligand-binding region."
+  "pathophysiology": "Piebaldism arises from defective embryonic development, migration, proliferation, and survival of melanoblasts derived from the neural crest. The commonest cause is a heterozygous loss-of-function mutation in the KIT gene, which encodes the transmembrane tyrosine kinase receptor for stem cell factor (KIT ligand); reduced KIT signalling impairs the dorsolateral migration and survival of melanoblasts destined for the epidermis, so the affected skin regions never acquire melanocytes. Haploinsufficiency accounts for the dominant inheritance and the correlation between mutation severity and the extent of depigmentation. A smaller subset results from mutations in SNAI2 (SLUG), a transcription factor downstream of KIT signalling. Because the ventral and central regions are the last to be reached by migrating melanoblasts, they are preferentially left amelanotic, explaining the characteristic pattern of sparing of the extremities' extremes and a mid-dorsal strip.",
+  "additionalDifferentials": [
+   "Waardenburg syndrome (types I-IV)",
+   "Segmental or focal vitiligo",
+   "Naevus depigmentosus",
+   "Tuberous sclerosis ash-leaf macules",
+   "Hypomelanosis of Ito",
+   "Naevus anaemicus"
+  ],
+  "additionalInvestigations": [
+   "Wood's lamp examination confirming true depigmentation with sharply demarcated borders and retained pigmented islands",
+   "Molecular genetic testing for KIT and SNAI2 mutations",
+   "Audiological assessment to exclude Waardenburg syndrome when clinical overlap exists",
+   "Ophthalmological review for iris pigmentary changes and dystopia canthorum",
+   "Skin biopsy showing absent or reduced melanocytes in depigmented areas (rarely required)",
+   "Detailed three-generation family pedigree"
+  ],
+  "redFlags": [
+   "Associated sensorineural hearing loss suggesting Waardenburg syndrome rather than isolated piebaldism",
+   "Progressive or acquired depigmentation, which argues against a congenital stable leukoderma",
+   "Broad nasal root, dystopia canthorum, or heterochromia indicating a syndromic diagnosis",
+   "Features of Hirschsprung disease or constipation raising suspicion of Waardenburg type IV"
+  ],
+  "prognosis": "Piebaldism is a benign, non-progressive condition with a normal life expectancy, and the depigmented areas remain cosmetically stable throughout life. The principal long-term concern is photoprotection of amelanotic skin, since these areas lack the melanin defence against ultraviolet-induced damage.",
+  "pitfalls": [
+   "Mislabelling stable congenital piebaldism as vitiligo, leading to inappropriate immunomodulatory therapy",
+   "Overlooking the pigmented islands within depigmented patches, a clue that distinguishes piebaldism from vitiligo",
+   "Failing to screen for deafness and other Waardenburg features when a white forelock is present",
+   "Attributing depigmentation to trauma or inflammation despite its clearly congenital onset",
+   "Assuming amelanotic skin is protected from sunburn and neglecting rigorous photoprotection advice"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology, current edition",
+   "Fitzpatrick's Dermatology in General Medicine, current edition",
+   "Bolognia Dermatology, current edition"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No repigmenting drug therapy exists; rigorous photoprotection of amelanotic skin with broad-spectrum sunscreen, protective clothing and sun avoidance is the mainstay to prevent ultraviolet damage",
+   "Offer cosmetic camouflage and skin-tone-matched cover creams for the white forelock and depigmented patches",
+   "For stable, cosmetically troublesome patches, consider surgical repigmentation with autologous melanocyte-keratinocyte transplantation or minigrafting/punch grafting",
+   "Perform long-term skin surveillance of amelanotic areas for actinic damage and cutaneous malignancy given the absent melanin defence",
+   "Exclude Waardenburg syndrome with audiological and ophthalmological assessment when there is deafness, dystopia canthorum or iris pigmentary change",
+   "Provide genetic counselling for the autosomal dominant KIT/SNAI2 inheritance and construct a three-generation pedigree for family screening",
+   "Reassure regarding the benign, non-progressive nature, with lesions stable in relative size throughout life"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "piebaldism-pathway",
+   "title": "piebaldism: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant congenital leukoderma caused chiefly by loss-of-function mutations in the KIT proto-oncogene, with a minority due to SLUG/SNAI2 defects impairing melanoblast migration from the neural crest.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Associated sensorineural hearing loss suggesting Waardenburg syndrome rather than isolated piebaldism",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Wood's lamp examination confirming true depigmentation with sharply demarcated borders and retained pigmented islands, Molecular genetic testing for KIT and SNAI2 mutations, Audiological assessment to exclude Waardenburg"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No repigmenting drug therapy exists; rigorous photoprotection of amelanotic skin with broad-spectrum sunscreen, protective clothing and sun avoidance is the mainstay to prevent ultraviolet damage"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling stable congenital piebaldism as vitiligo, leading to inappropriate immunomodulatory therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of piebaldism."
+  }
+ ],
+ "tables": [
+  {
+   "id": "piebaldism-matrix",
+   "title": "piebaldism: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant congenital leukoderma caused chiefly by loss-of-function mutations in the KIT proto-oncogene, with a minority",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Piebaldism arises from defective embryonic development, migration, proliferation, and survival of melanoblasts derived from the neural crest. The commonest cause is a heterozygous loss-of-function mutation in the KIT gene, which encodes the transmembrane tyrosine kinase receptor for stem cell factor (KIT ligand); reduced KIT signalling impairs the dorsolateral migration and survival of melanoblasts destined for the epidermis, so the affected skin regions never acquire melanocytes. Haploinsufficiency accounts for the dominant inheritance and the correlation between mutation severity and the extent of depigmentation. A smaller subset results from mutations in SNAI2 (SLUG), a transcription factor downstream of KIT signalling. Because the ventral and central regions are the last to be reached by migrating melanoblasts, they are preferentially left amelanotic, explaining the characteristic pattern of sparing of the extremities' extremes and a mid-dorsal strip.",
-    "additionalDifferentials": [
-      "Waardenburg syndrome (types I-IV)",
-      "Segmental or focal vitiligo",
-      "Naevus depigmentosus",
-      "Tuberous sclerosis ash-leaf macules",
-      "Hypomelanosis of Ito",
-      "Naevus anaemicus"
+    [
+     "Key Investigations",
+     "Wood's lamp examination confirming true depigmentation with sharply demarcated borders and retained pigmented islands, Molecular",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Wood's lamp examination confirming true depigmentation with sharply demarcated borders and retained pigmented islands",
-      "Molecular genetic testing for KIT and SNAI2 mutations",
-      "Audiological assessment to exclude Waardenburg syndrome when clinical overlap exists",
-      "Ophthalmological review for iris pigmentary changes and dystopia canthorum",
-      "Skin biopsy showing absent or reduced melanocytes in depigmented areas (rarely required)",
-      "Detailed three-generation family pedigree"
+    [
+     "Primary Differentials",
+     "Waardenburg syndrome (types I-IV), Segmental or focal vitiligo, Naevus depigmentosus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Associated sensorineural hearing loss suggesting Waardenburg syndrome rather than isolated piebaldism",
-      "Progressive or acquired depigmentation, which argues against a congenital stable leukoderma",
-      "Broad nasal root, dystopia canthorum, or heterochromia indicating a syndromic diagnosis",
-      "Features of Hirschsprung disease or constipation raising suspicion of Waardenburg type IV"
+    [
+     "Management Strategy",
+     "No repigmenting drug therapy exists; rigorous photoprotection of amelanotic skin with broad-spectrum sunscreen, protective",
+     "Core treatment modality"
     ],
-    "prognosis": "Piebaldism is a benign, non-progressive condition with a normal life expectancy, and the depigmented areas remain cosmetically stable throughout life. The principal long-term concern is photoprotection of amelanotic skin, since these areas lack the melanin defence against ultraviolet-induced damage.",
-    "pitfalls": [
-      "Mislabelling stable congenital piebaldism as vitiligo, leading to inappropriate immunomodulatory therapy",
-      "Overlooking the pigmented islands within depigmented patches, a clue that distinguishes piebaldism from vitiligo",
-      "Failing to screen for deafness and other Waardenburg features when a white forelock is present",
-      "Attributing depigmentation to trauma or inflammation despite its clearly congenital onset",
-      "Assuming amelanotic skin is protected from sunburn and neglecting rigorous photoprotection advice"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology, current edition",
-      "Fitzpatrick's Dermatology in General Medicine, current edition",
-      "Bolognia Dermatology, current edition"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No repigmenting drug therapy exists; rigorous photoprotection of amelanotic skin with broad-spectrum sunscreen, protective clothing and sun avoidance is the mainstay to prevent ultraviolet damage",
-      "Offer cosmetic camouflage and skin-tone-matched cover creams for the white forelock and depigmented patches",
-      "For stable, cosmetically troublesome patches, consider surgical repigmentation with autologous melanocyte-keratinocyte transplantation or minigrafting/punch grafting",
-      "Perform long-term skin surveillance of amelanotic areas for actinic damage and cutaneous malignancy given the absent melanin defence",
-      "Exclude Waardenburg syndrome with audiological and ophthalmological assessment when there is deafness, dystopia canthorum or iris pigmentary change",
-      "Provide genetic counselling for the autosomal dominant KIT/SNAI2 inheritance and construct a three-generation pedigree for family screening",
-      "Reassure regarding the benign, non-progressive nature, with lesions stable in relative size throughout life"
+    [
+     "Clinical Pitfall",
+     "Mislabelling stable congenital piebaldism as vitiligo, leading to inappropriate immunomodulatory therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for piebaldism."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "piebaldism-diagram",
+   "title": "piebaldism: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

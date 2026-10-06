@@ -1,77 +1,172 @@
 {
-  "id": "schatzki_ring",
-  "name": "Schatzki ring",
-  "aliases": [
-    "Schatzki's ring",
-    "lower oesophageal mucosal ring",
-    "B ring",
-    "distal oesophageal ring"
+ "id": "schatzki_ring",
+ "name": "Schatzki ring",
+ "aliases": [
+  "Schatzki's ring",
+  "lower oesophageal mucosal ring",
+  "B ring",
+  "distal oesophageal ring"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A thin mucosal ring at the squamocolumnar junction of the distal oesophagus, at the top of a hiatus hernia when present",
+   "Classically causes intermittent dysphagia to solids, often with abrupt food impaction after bolting food or drinking alcohol ('steakhouse syndrome')",
+   "Symptoms typically appear when the luminal diameter narrows below a critical threshold",
+   "Best seen on a barium swallow with the oesophagus fully distended, as it can be overlooked at endoscopy",
+   "Frequently coexists with a hiatus hernia and with gastro-oesophageal reflux, which may contribute to its formation",
+   "Symptomatic rings are treated by endoscopic dilatation, and coexisting reflux is addressed to reduce recurrence",
+   "Distinguished from a proximal web by its location at the gastro-oesophageal junction and its circumferential shape"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A thin mucosal ring at the squamocolumnar junction of the distal oesophagus, at the top of a hiatus hernia when present",
-      "Classically causes intermittent dysphagia to solids, often with abrupt food impaction after bolting food or drinking alcohol ('steakhouse syndrome')",
-      "Symptoms typically appear when the luminal diameter narrows below a critical threshold",
-      "Best seen on a barium swallow with the oesophagus fully distended, as it can be overlooked at endoscopy",
-      "Frequently coexists with a hiatus hernia and with gastro-oesophageal reflux, which may contribute to its formation",
-      "Symptomatic rings are treated by endoscopic dilatation, and coexisting reflux is addressed to reduce recurrence",
-      "Distinguished from a proximal web by its location at the gastro-oesophageal junction and its circumferential shape"
+  "pathophysiology": "A Schatzki ring is a circumferential mucosal ring at the gastro-oesophageal junction, with squamous epithelium above and columnar epithelium below. Its exact cause is debated, but chronic gastro-oesophageal reflux and mechanical factors are implicated in its development and in progressive narrowing. The ring reduces the maximal luminal diameter, so large solid boluses intermittently lodge above it, producing episodic dysphagia and, when a bolus fully obstructs the lumen, acute food impaction.",
+  "additionalDifferentials": [
+   "Oesophageal web",
+   "Peptic stricture",
+   "Eosinophilic oesophagitis with fixed rings",
+   "Oesophageal adenocarcinoma at the junction",
+   "Achalasia and other motility disorders",
+   "Muscular (A) ring of the lower oesophagus"
+  ],
+  "additionalInvestigations": [
+   "Barium swallow with full oesophageal distension and a solid bolus challenge",
+   "Upper endoscopy for confirmation, biopsy, and dilatation",
+   "Oesophageal biopsies to exclude eosinophilic oesophagitis",
+   "Ambulatory reflux monitoring where reflux contribution is uncertain",
+   "Assessment for hiatus hernia"
+  ],
+  "redFlags": [
+   "Progressive dysphagia or weight loss suggesting stricture or malignancy",
+   "Acute food impaction requiring urgent endoscopy",
+   "Odynophagia or bleeding",
+   "Recurrent rings that may indicate untreated reflux or eosinophilic oesophagitis"
+  ],
+  "prognosis": "Dilatation of a symptomatic ring is usually effective and safe, though rings can recur; addressing coexisting reflux may reduce the recurrence rate.",
+  "pitfalls": [
+   "Missing the ring at endoscopy because the oesophagus is inadequately distended",
+   "Overlooking eosinophilic oesophagitis as a cause of recurrent rings and dysphagia",
+   "Failing to treat coexisting reflux, allowing the ring to recur",
+   "Attributing solid-food dysphagia to a ring without excluding malignancy"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Yamada's Textbook of Gastroenterology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat a symptomatic ring with endoscopic dilatation to widen the luminal diameter and relieve dysphagia",
+   "Relieve acute food bolus impaction by endoscopic disimpaction",
+   "Prescribe a proton pump inhibitor to control coexisting gastro-oesophageal reflux and reduce the risk of recurrence",
+   "Exclude eosinophilic oesophagitis with oesophageal biopsies before attributing dysphagia solely to the ring",
+   "Advise careful eating, thorough chewing, and avoiding large boluses and alcohol-associated bolting of food",
+   "Repeat dilatation for symptomatic recurrence, as rings may re-form over time"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "schatzki_ring-pathway",
+   "title": "Schatzki ring: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A thin mucosal ring at the squamocolumnar junction of the distal oesophagus, at the top of a hiatus hernia when present",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive dysphagia or weight loss suggesting stricture or malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Barium swallow with full oesophageal distension and a solid bolus challenge, Upper endoscopy for confirmation, biopsy, and dilatation, Oesophageal biopsies to exclude eosinophilic oesophagitis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat a symptomatic ring with endoscopic dilatation to widen the luminal diameter and relieve dysphagia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the ring at endoscopy because the oesophagus is inadequately distended"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of schatzki ring."
+  }
+ ],
+ "tables": [
+  {
+   "id": "schatzki_ring-matrix",
+   "title": "Schatzki ring: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A thin mucosal ring at the squamocolumnar junction of the distal oesophagus, at the top of a hiatus hernia when present",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A Schatzki ring is a circumferential mucosal ring at the gastro-oesophageal junction, with squamous epithelium above and columnar epithelium below. Its exact cause is debated, but chronic gastro-oesophageal reflux and mechanical factors are implicated in its development and in progressive narrowing. The ring reduces the maximal luminal diameter, so large solid boluses intermittently lodge above it, producing episodic dysphagia and, when a bolus fully obstructs the lumen, acute food impaction.",
-    "additionalDifferentials": [
-      "Oesophageal web",
-      "Peptic stricture",
-      "Eosinophilic oesophagitis with fixed rings",
-      "Oesophageal adenocarcinoma at the junction",
-      "Achalasia and other motility disorders",
-      "Muscular (A) ring of the lower oesophagus"
+    [
+     "Key Investigations",
+     "Barium swallow with full oesophageal distension and a solid bolus challenge, Upper endoscopy for confirmation, biopsy, and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Barium swallow with full oesophageal distension and a solid bolus challenge",
-      "Upper endoscopy for confirmation, biopsy, and dilatation",
-      "Oesophageal biopsies to exclude eosinophilic oesophagitis",
-      "Ambulatory reflux monitoring where reflux contribution is uncertain",
-      "Assessment for hiatus hernia"
+    [
+     "Primary Differentials",
+     "Oesophageal web, Peptic stricture, Eosinophilic oesophagitis with fixed rings",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive dysphagia or weight loss suggesting stricture or malignancy",
-      "Acute food impaction requiring urgent endoscopy",
-      "Odynophagia or bleeding",
-      "Recurrent rings that may indicate untreated reflux or eosinophilic oesophagitis"
+    [
+     "Management Strategy",
+     "Treat a symptomatic ring with endoscopic dilatation to widen the luminal diameter and relieve dysphagia",
+     "Core treatment modality"
     ],
-    "prognosis": "Dilatation of a symptomatic ring is usually effective and safe, though rings can recur; addressing coexisting reflux may reduce the recurrence rate.",
-    "pitfalls": [
-      "Missing the ring at endoscopy because the oesophagus is inadequately distended",
-      "Overlooking eosinophilic oesophagitis as a cause of recurrent rings and dysphagia",
-      "Failing to treat coexisting reflux, allowing the ring to recur",
-      "Attributing solid-food dysphagia to a ring without excluding malignancy"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Yamada's Textbook of Gastroenterology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat a symptomatic ring with endoscopic dilatation to widen the luminal diameter and relieve dysphagia",
-      "Relieve acute food bolus impaction by endoscopic disimpaction",
-      "Prescribe a proton pump inhibitor to control coexisting gastro-oesophageal reflux and reduce the risk of recurrence",
-      "Exclude eosinophilic oesophagitis with oesophageal biopsies before attributing dysphagia solely to the ring",
-      "Advise careful eating, thorough chewing, and avoiding large boluses and alcohol-associated bolting of food",
-      "Repeat dilatation for symptomatic recurrence, as rings may re-form over time"
+    [
+     "Clinical Pitfall",
+     "Missing the ring at endoscopy because the oesophagus is inadequately distended",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for schatzki ring."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "schatzki-ring-diagram",
+   "title": "Schatzki ring: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -142,5 +142,108 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "gbs-monitoring-algo",
+   "title": "GBS Respiratory Monitoring (20/30/40 Rule) and Immunotherapy Pathway",
+   "steps": [
+    {
+     "step": "Recognition & Diagnostic Triage",
+     "action": "Progressive symmetrical ascending flaccid weakness with diminished or absent deep tendon reflexes following a respiratory or gastrointestinal prodrome (Campylobacter).",
+     "critical": true
+    },
+    {
+     "step": "Respiratory Capacity Monitoring (20/30/40 Rule)",
+     "action": "Bedside spirometry every 2 to 4 hours. Critical thresholds: Forced Vital Capacity (FVC) < 20 mL/kg, Maximum Inspiratory Pressure (MIP) < 30 cmH2O, or Maximum Expiratory Pressure (MEP) < 40 cmH2O.",
+     "critical": true
+    },
+    {
+     "step": "Impending Respiratory Failure Escalation",
+     "branch": "FVC < 15 mL/kg or Single Breath Count < 15",
+     "action": "Urgent elective endotracheal intubation and ICU transfer. Never wait for hypercapnia or hypoxia to intubate.",
+     "critical": true
+    },
+    {
+     "step": "Immunomodulatory Therapy Decision",
+     "branch": "Unable to walk unaided or rapid progression",
+     "action": "Initiate IV Immunoglobulin (IVIg) 0.4 g/kg/day for 5 days (total 2 g/kg) OR Plasma Exchange (PE) 5 sessions over 10 to 14 days. Both have equal efficacy; do not combine them.",
+     "critical": true
+    },
+    {
+     "step": "Autonomic & Neuropathic Support",
+     "action": "Continuous cardiac monitoring for severe labile blood pressure and arrhythmias. Screen for urinary retention and ileus. Use gabapentin or pregabalin for radicular back pain. Corticosteroids are contraindicated."
+    }
+   ],
+   "caption": "Algorithm based on Brighton diagnostic criteria and international GBS consensus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gbs-subtypes-matrix",
+   "title": "Major Guillain-Barre Syndrome Subtypes and Clinical Presentations",
+   "headers": [
+    "Subtype",
+    "Underlying Pathophysiology",
+    "Key Distinguishing Clinical Features",
+    "Associated Ganglioside Antibodies"
+   ],
+   "rows": [
+    [
+     "AIDP (Acute Inflammatory Demyelinating Polyradiculoneuropathy)",
+     "T-cell and macrophage mediated demyelination of peripheral nerves and roots",
+     "Ascending symmetrical motor weakness, sensory symptoms (tingling), facial nerve palsy (50%)",
+     "Non-specific; varied antibody response"
+    ],
+    [
+     "AMAN (Acute Motor Axonal Neuropathy)",
+     "Antibody-mediated attack targeting axolemma of motor fibers at nodes of Ranvier",
+     "Pure motor weakness without sensory signs; rapid progression; frequent association with Campylobacter jejuni",
+     "Anti-GM1, anti-GD1a"
+    ],
+    [
+     "AMSAN (Acute Motor-Sensory Axonal Neuropathy)",
+     "Severe antibody attack on motor and sensory axons",
+     "Severe motor and sensory loss; profound muscle wasting; slower and often incomplete recovery",
+     "Anti-GM1, anti-GD1a"
+    ],
+    [
+     "Miller Fisher Syndrome (MFS)",
+     "Immune-mediated targeting of ocular motor nerves and dorsal root ganglia",
+     "Classic clinical triad: Ophthalmoplegia, Ataxia, and Areflexia; typically without prominent limb weakness",
+     "Anti-GQ1b (positive in > 90% of cases)"
+    ],
+    [
+     "Bickerstaff Brainstem Encephalitis (BBE)",
+     "Central extension of Miller Fisher spectrum involving brainstem reticular formation",
+     "Ophthalmoplegia, ataxia, plus altered consciousness (drowsiness or coma) and hyperreflexia or Babinski sign",
+     "Anti-GQ1b (positive in 65% to 75%)"
+    ]
+   ],
+   "caption": "Electrophysiological studies (NCS/EMG) at 1 to 2 weeks confirm demyelinating vs axonal variant."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "guillain-barre-syndrome-diagram",
+   "title": "Guillain-Barré syndrome (GBS): Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

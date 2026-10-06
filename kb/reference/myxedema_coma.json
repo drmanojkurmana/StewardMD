@@ -1,83 +1,178 @@
 {
-  "id": "myxedema_coma",
-  "name": "Myxoedema coma",
-  "aliases": [
-    "myxedema coma",
-    "myxoedema crisis",
-    "decompensated hypothyroidism",
-    "severe decompensated hypothyroidism"
+ "id": "myxedema_coma",
+ "name": "Myxoedema coma",
+ "aliases": [
+  "myxedema coma",
+  "myxoedema crisis",
+  "decompensated hypothyroidism",
+  "severe decompensated hypothyroidism"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / endocrine society guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A life-threatening decompensation of severe hypothyroidism, typically in an elderly patient during winter, precipitated by infection, cold exposure, sedatives or non-compliance",
+   "The cardinal features are hypothermia, decreased consciousness and hypoventilation, often with hyponatraemia and hypoglycaemia",
+   "Coma is frequently a misnomer, as many patients present with lethargy or confusion rather than true unconsciousness",
+   "Look for supporting signs of longstanding hypothyroidism: dry skin, non-pitting oedema, macroglossia, bradycardia, delayed reflex relaxation and a thyroidectomy scar",
+   "Diagnosis is clinical and should not await confirmatory thyroid function tests, as delay increases mortality",
+   "Coexisting adrenal insufficiency must be considered, so stress steroids are given alongside thyroid hormone replacement",
+   "Treatment combines levothyroxine and stress steroids for myxoedema coma with rewarming, ventilatory and haemodynamic support, and treatment of the precipitant"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / endocrine society guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A life-threatening decompensation of severe hypothyroidism, typically in an elderly patient during winter, precipitated by infection, cold exposure, sedatives or non-compliance",
-      "The cardinal features are hypothermia, decreased consciousness and hypoventilation, often with hyponatraemia and hypoglycaemia",
-      "Coma is frequently a misnomer, as many patients present with lethargy or confusion rather than true unconsciousness",
-      "Look for supporting signs of longstanding hypothyroidism: dry skin, non-pitting oedema, macroglossia, bradycardia, delayed reflex relaxation and a thyroidectomy scar",
-      "Diagnosis is clinical and should not await confirmatory thyroid function tests, as delay increases mortality",
-      "Coexisting adrenal insufficiency must be considered, so stress steroids are given alongside thyroid hormone replacement",
-      "Treatment combines levothyroxine and stress steroids for myxoedema coma with rewarming, ventilatory and haemodynamic support, and treatment of the precipitant"
+  "pathophysiology": "Myxoedema coma represents failure of physiological compensation in profound, longstanding hypothyroidism. Severe thyroid-hormone deficiency slows metabolic rate and thermogenesis, producing hypothermia, and depresses respiratory drive with carbon-dioxide retention. Reduced free-water clearance and inappropriate antidiuresis cause hyponatraemia, while impaired gluconeogenesis contributes to hypoglycaemia. Cardiovascular effects include bradycardia, reduced contractility and pericardial effusion, and mucopolysaccharide deposition in tissues produces the characteristic non-pitting oedema. A precipitating stress such as infection or sedation tips the decompensated patient into obtundation and multi-organ dysfunction.",
+  "additionalDifferentials": [
+   "Sepsis with encephalopathy",
+   "Primary hypothermia from environmental exposure",
+   "Sedative or opioid intoxication",
+   "Hyponatraemia or hypoglycaemia of other cause",
+   "Adrenal crisis",
+   "Hypercapnic respiratory failure from other causes",
+   "Stroke or other structural brain injury"
+  ],
+  "additionalInvestigations": [
+   "Thyroid function tests (TSH and free thyroxine) with cortisol before steroid administration",
+   "Core temperature measurement and blood glucose",
+   "Serum sodium and full electrolyte panel",
+   "Arterial blood gas to assess hypoventilation and carbon-dioxide retention",
+   "Septic screen including cultures and chest imaging to identify a precipitant",
+   "Electrocardiogram and, where indicated, echocardiography for effusion",
+   "Creatine kinase and full blood count"
+  ],
+  "redFlags": [
+   "Profound hypothermia unresponsive to rewarming",
+   "Type 2 respiratory failure requiring ventilatory support",
+   "Refractory hypotension or bradyarrhythmia",
+   "Severe hyponatraemia with seizures or worsening coma",
+   "Haemodynamic instability suggesting concurrent adrenal crisis or sepsis"
+  ],
+  "prognosis": "Even with modern intensive care, mortality remains substantial; outcome depends on prompt recognition, early hormone replacement and treatment of the precipitating illness.",
+  "pitfalls": [
+   "Delaying treatment while awaiting thyroid function results",
+   "Giving thyroid hormone without covering possible adrenal insufficiency with steroids",
+   "Aggressive active external rewarming that precipitates vasodilatory collapse",
+   "Overcorrecting hyponatraemia too rapidly",
+   "Missing the precipitating infection or sedative that triggered decompensation"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "Endocrine society guidance on severe hypothyroidism and myxoedema coma"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give intravenous thyroid hormone replacement (levothyroxine, with or without liothyronine) as definitive therapy without awaiting confirmatory thyroid function tests",
+   "Give empirical stress-dose glucocorticoids (hydrocortisone) alongside thyroid hormone until coexisting adrenal insufficiency is excluded",
+   "Provide supportive intensive care with airway protection and ventilatory support for hypoventilation and carbon-dioxide retention",
+   "Correct hypothermia by gradual passive rewarming and manage hyponatraemia, hypoglycaemia and hypotension with cautious fluid and glucose support",
+   "Identify and treat the precipitant, particularly infection with appropriate antimicrobials, and withdraw offending sedative drugs",
+   "Monitor in critical care with cardiac monitoring for bradyarrhythmia and echocardiography for pericardial effusion",
+   "Establish maintenance oral thyroid hormone replacement on recovery and arrange endocrinology follow-up to prevent recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "myxedema_coma-pathway",
+   "title": "Myxoedema coma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A life-threatening decompensation of severe hypothyroidism, typically in an elderly patient during winter, precipitated by infection, cold exposure, sedatives or non-compliance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound hypothermia unresponsive to rewarming",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Thyroid function tests (TSH and free thyroxine) with cortisol before steroid administration, Core temperature measurement and blood glucose, Serum sodium and full electrolyte panel"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give intravenous thyroid hormone replacement (levothyroxine, with or without liothyronine) as definitive therapy without awaiting confirmatory thyroid function tests"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying treatment while awaiting thyroid function results"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of myxoedema coma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "myxedema_coma-matrix",
+   "title": "Myxoedema coma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A life-threatening decompensation of severe hypothyroidism, typically in an elderly patient during winter, precipitated by",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Myxoedema coma represents failure of physiological compensation in profound, longstanding hypothyroidism. Severe thyroid-hormone deficiency slows metabolic rate and thermogenesis, producing hypothermia, and depresses respiratory drive with carbon-dioxide retention. Reduced free-water clearance and inappropriate antidiuresis cause hyponatraemia, while impaired gluconeogenesis contributes to hypoglycaemia. Cardiovascular effects include bradycardia, reduced contractility and pericardial effusion, and mucopolysaccharide deposition in tissues produces the characteristic non-pitting oedema. A precipitating stress such as infection or sedation tips the decompensated patient into obtundation and multi-organ dysfunction.",
-    "additionalDifferentials": [
-      "Sepsis with encephalopathy",
-      "Primary hypothermia from environmental exposure",
-      "Sedative or opioid intoxication",
-      "Hyponatraemia or hypoglycaemia of other cause",
-      "Adrenal crisis",
-      "Hypercapnic respiratory failure from other causes",
-      "Stroke or other structural brain injury"
+    [
+     "Key Investigations",
+     "Thyroid function tests (TSH and free thyroxine) with cortisol before steroid administration, Core temperature measurement and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Thyroid function tests (TSH and free thyroxine) with cortisol before steroid administration",
-      "Core temperature measurement and blood glucose",
-      "Serum sodium and full electrolyte panel",
-      "Arterial blood gas to assess hypoventilation and carbon-dioxide retention",
-      "Septic screen including cultures and chest imaging to identify a precipitant",
-      "Electrocardiogram and, where indicated, echocardiography for effusion",
-      "Creatine kinase and full blood count"
+    [
+     "Primary Differentials",
+     "Sepsis with encephalopathy, Primary hypothermia from environmental exposure, Sedative or opioid intoxication",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound hypothermia unresponsive to rewarming",
-      "Type 2 respiratory failure requiring ventilatory support",
-      "Refractory hypotension or bradyarrhythmia",
-      "Severe hyponatraemia with seizures or worsening coma",
-      "Haemodynamic instability suggesting concurrent adrenal crisis or sepsis"
+    [
+     "Management Strategy",
+     "Give intravenous thyroid hormone replacement (levothyroxine, with or without liothyronine) as definitive therapy without awaiting",
+     "Core treatment modality"
     ],
-    "prognosis": "Even with modern intensive care, mortality remains substantial; outcome depends on prompt recognition, early hormone replacement and treatment of the precipitating illness.",
-    "pitfalls": [
-      "Delaying treatment while awaiting thyroid function results",
-      "Giving thyroid hormone without covering possible adrenal insufficiency with steroids",
-      "Aggressive active external rewarming that precipitates vasodilatory collapse",
-      "Overcorrecting hyponatraemia too rapidly",
-      "Missing the precipitating infection or sedative that triggered decompensation"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "Endocrine society guidance on severe hypothyroidism and myxoedema coma"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give intravenous thyroid hormone replacement (levothyroxine, with or without liothyronine) as definitive therapy without awaiting confirmatory thyroid function tests",
-      "Give empirical stress-dose glucocorticoids (hydrocortisone) alongside thyroid hormone until coexisting adrenal insufficiency is excluded",
-      "Provide supportive intensive care with airway protection and ventilatory support for hypoventilation and carbon-dioxide retention",
-      "Correct hypothermia by gradual passive rewarming and manage hyponatraemia, hypoglycaemia and hypotension with cautious fluid and glucose support",
-      "Identify and treat the precipitant, particularly infection with appropriate antimicrobials, and withdraw offending sedative drugs",
-      "Monitor in critical care with cardiac monitoring for bradyarrhythmia and echocardiography for pericardial effusion",
-      "Establish maintenance oral thyroid hormone replacement on recovery and arrange endocrinology follow-up to prevent recurrence"
+    [
+     "Clinical Pitfall",
+     "Delaying treatment while awaiting thyroid function results",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for myxoedema coma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "myxedema-coma-diagram",
+   "title": "Myxoedema coma: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

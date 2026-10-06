@@ -1,79 +1,174 @@
 {
-  "id": "reactive_perforating_collagenosis",
-  "name": "Reactive perforating collagenosis",
-  "aliases": [
-    "RPC",
-    "acquired reactive perforating collagenosis",
-    "acquired perforating dermatosis"
+ "id": "reactive_perforating_collagenosis",
+ "name": "Reactive perforating collagenosis",
+ "aliases": [
+  "RPC",
+  "acquired reactive perforating collagenosis",
+  "acquired perforating dermatosis"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "One of the perforating dermatoses, characterised by umbilicated papules and nodules with a central keratotic plug through which altered collagen is extruded (transepidermal elimination)",
+   "Lesions are often intensely itchy and show the Koebner phenomenon, appearing in linear arrays along scratch marks",
+   "The acquired adult form is strongly associated with diabetes mellitus and chronic kidney disease, particularly in patients on dialysis",
+   "A rare inherited childhood form exists, precipitated by superficial trauma or cold",
+   "Commonly affects the extensor limbs, trunk, and backs of the hands, with lesions typically resolving over weeks to leave scars or hyperpigmentation as new crops appear",
+   "Diagnosis is confirmed on biopsy showing a cup-shaped epidermal depression with elimination of degenerate, basophilic collagen bundles through the epidermis",
+   "Pruritus and scratching are central to pathogenesis, so lesions cluster where the patient can reach",
+   "Management addresses the underlying disease and the itch, using emollients, topical corticosteroids, keratolytics, antihistamines, phototherapy, and control of pruritus"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "One of the perforating dermatoses, characterised by umbilicated papules and nodules with a central keratotic plug through which altered collagen is extruded (transepidermal elimination)",
-      "Lesions are often intensely itchy and show the Koebner phenomenon, appearing in linear arrays along scratch marks",
-      "The acquired adult form is strongly associated with diabetes mellitus and chronic kidney disease, particularly in patients on dialysis",
-      "A rare inherited childhood form exists, precipitated by superficial trauma or cold",
-      "Commonly affects the extensor limbs, trunk, and backs of the hands, with lesions typically resolving over weeks to leave scars or hyperpigmentation as new crops appear",
-      "Diagnosis is confirmed on biopsy showing a cup-shaped epidermal depression with elimination of degenerate, basophilic collagen bundles through the epidermis",
-      "Pruritus and scratching are central to pathogenesis, so lesions cluster where the patient can reach",
-      "Management addresses the underlying disease and the itch, using emollients, topical corticosteroids, keratolytics, antihistamines, phototherapy, and control of pruritus"
+  "pathophysiology": "Reactive perforating collagenosis is a disorder of transepidermal elimination in which altered dermal collagen is extruded through the epidermis. Superficial trauma and, in acquired cases, the metabolic disturbances of diabetes and renal failure are thought to damage dermal collagen and provoke an epidermal response that channels the degenerate collagen to the surface. Persistent scratching in response to itch perpetuates the trauma and drives the characteristic Koebnerised, umbilicated papules, so that lesions cluster at accessible, frequently scratched sites and continue to recur while itch and the underlying systemic disturbance persist.",
+  "additionalDifferentials": [
+   "Other perforating dermatoses (elastosis perforans serpiginosa, perforating folliculitis, Kyrle disease)",
+   "Prurigo nodularis",
+   "Folliculitis",
+   "Hypertrophic lichen planus",
+   "Perforating granuloma annulare",
+   "Multiple keratoacanthomas",
+   "Dermatofibroma (for a solitary lesion)"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing a cup-shaped epidermal invagination with transepidermal elimination of collagen",
+   "Special stains (such as Masson trichrome and elastic stains) to characterise the eliminated material and distinguish it from elastic-fibre perforating disease",
+   "Fasting glucose and HbA1c to screen for diabetes mellitus",
+   "Renal function tests (urea, creatinine, eGFR) to detect chronic kidney disease",
+   "Assessment of dialysis status and adequacy in renal patients",
+   "Screening for other causes of pruritus (for example liver and thyroid function) where relevant"
+  ],
+  "redFlags": [
+   "Newly diagnosed or poorly controlled diabetes or chronic kidney disease uncovered by the skin findings",
+   "Intractable pruritus with a marked impact on quality of life and sleep",
+   "Secondary infection of excoriated, ulcerated lesions",
+   "Atypical or rapidly growing nodules requiring biopsy to exclude malignancy"
+  ],
+  "prognosis": "The acquired form runs a chronic, relapsing course tied to control of the underlying systemic disease; individual lesions heal, often with scarring, but new crops recur while itch and metabolic disturbance persist.",
+  "pitfalls": [
+   "Overlooking undiagnosed diabetes or renal disease in an adult presenting with perforating papules",
+   "Treating the skin without addressing the underlying itch and metabolic cause",
+   "Confusing it with prurigo nodularis or the other perforating dermatoses without biopsy",
+   "Underestimating the role of scratching in perpetuating lesions"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Optimise glycaemic control and manage the underlying chronic kidney disease and dialysis adequacy, as these metabolic disturbances drive the acquired adult form",
+   "Control pruritus and interrupt the scratch-Koebner cycle with emollients, topical or intralesional corticosteroids and oral antihistamines",
+   "Apply topical keratolytics and retinoids to address the central keratotic plugs, and use narrowband UVB phototherapy for widespread disease",
+   "Consider oral allopurinol or systemic retinoids in refractory or extensive cases",
+   "Advise avoidance of scratching and protection of trauma-prone extensor sites to limit new Koebnerised crops",
+   "Multidisciplinary care with dermatology alongside nephrology and diabetology, with monitoring for recurrence and early treatment of new lesions"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "reactive_perforating_collagenosis-pathway",
+   "title": "Reactive perforating collagenosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "One of the perforating dermatoses, characterised by umbilicated papules and nodules with a central keratotic plug through which altered collagen is extruded (transepidermal elimination)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Newly diagnosed or poorly controlled diabetes or chronic kidney disease uncovered by the skin findings",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing a cup-shaped epidermal invagination with transepidermal elimination of collagen, Special stains (such as Masson trichrome and elastic stains) to characterise the eliminated material and distinguish it"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Optimise glycaemic control and manage the underlying chronic kidney disease and dialysis adequacy, as these metabolic disturbances drive the acquired adult form"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking undiagnosed diabetes or renal disease in an adult presenting with perforating papules"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of reactive perforating collagenosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "reactive_perforating_collagenosis-matrix",
+   "title": "Reactive perforating collagenosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "One of the perforating dermatoses, characterised by umbilicated papules and nodules with a central keratotic plug through which",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Reactive perforating collagenosis is a disorder of transepidermal elimination in which altered dermal collagen is extruded through the epidermis. Superficial trauma and, in acquired cases, the metabolic disturbances of diabetes and renal failure are thought to damage dermal collagen and provoke an epidermal response that channels the degenerate collagen to the surface. Persistent scratching in response to itch perpetuates the trauma and drives the characteristic Koebnerised, umbilicated papules, so that lesions cluster at accessible, frequently scratched sites and continue to recur while itch and the underlying systemic disturbance persist.",
-    "additionalDifferentials": [
-      "Other perforating dermatoses (elastosis perforans serpiginosa, perforating folliculitis, Kyrle disease)",
-      "Prurigo nodularis",
-      "Folliculitis",
-      "Hypertrophic lichen planus",
-      "Perforating granuloma annulare",
-      "Multiple keratoacanthomas",
-      "Dermatofibroma (for a solitary lesion)"
+    [
+     "Key Investigations",
+     "Skin biopsy showing a cup-shaped epidermal invagination with transepidermal elimination of collagen, Special stains (such as",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing a cup-shaped epidermal invagination with transepidermal elimination of collagen",
-      "Special stains (such as Masson trichrome and elastic stains) to characterise the eliminated material and distinguish it from elastic-fibre perforating disease",
-      "Fasting glucose and HbA1c to screen for diabetes mellitus",
-      "Renal function tests (urea, creatinine, eGFR) to detect chronic kidney disease",
-      "Assessment of dialysis status and adequacy in renal patients",
-      "Screening for other causes of pruritus (for example liver and thyroid function) where relevant"
+    [
+     "Primary Differentials",
+     "Other perforating dermatoses (elastosis perforans serpiginosa, perforating folliculitis, Kyrle disease), Prurigo nodularis,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Newly diagnosed or poorly controlled diabetes or chronic kidney disease uncovered by the skin findings",
-      "Intractable pruritus with a marked impact on quality of life and sleep",
-      "Secondary infection of excoriated, ulcerated lesions",
-      "Atypical or rapidly growing nodules requiring biopsy to exclude malignancy"
+    [
+     "Management Strategy",
+     "Optimise glycaemic control and manage the underlying chronic kidney disease and dialysis adequacy, as these metabolic",
+     "Core treatment modality"
     ],
-    "prognosis": "The acquired form runs a chronic, relapsing course tied to control of the underlying systemic disease; individual lesions heal, often with scarring, but new crops recur while itch and metabolic disturbance persist.",
-    "pitfalls": [
-      "Overlooking undiagnosed diabetes or renal disease in an adult presenting with perforating papules",
-      "Treating the skin without addressing the underlying itch and metabolic cause",
-      "Confusing it with prurigo nodularis or the other perforating dermatoses without biopsy",
-      "Underestimating the role of scratching in perpetuating lesions"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Optimise glycaemic control and manage the underlying chronic kidney disease and dialysis adequacy, as these metabolic disturbances drive the acquired adult form",
-      "Control pruritus and interrupt the scratch-Koebner cycle with emollients, topical or intralesional corticosteroids and oral antihistamines",
-      "Apply topical keratolytics and retinoids to address the central keratotic plugs, and use narrowband UVB phototherapy for widespread disease",
-      "Consider oral allopurinol or systemic retinoids in refractory or extensive cases",
-      "Advise avoidance of scratching and protection of trauma-prone extensor sites to limit new Koebnerised crops",
-      "Multidisciplinary care with dermatology alongside nephrology and diabetology, with monitoring for recurrence and early treatment of new lesions"
+    [
+     "Clinical Pitfall",
+     "Overlooking undiagnosed diabetes or renal disease in an adult presenting with perforating papules",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for reactive perforating collagenosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "reactive-perforating-collagenosis-diagram",
+   "title": "Reactive perforating collagenosis: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

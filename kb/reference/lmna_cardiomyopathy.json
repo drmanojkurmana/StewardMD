@@ -1,80 +1,175 @@
 {
-  "id": "lmna_cardiomyopathy",
-  "name": "LMNA cardiomyopathy",
-  "aliases": [
-    "lamin A/C cardiomyopathy",
-    "LMNA-related dilated cardiomyopathy",
-    "laminopathy cardiomyopathy",
-    "LMNA dilated cardiomyopathy with conduction disease"
+ "id": "lmna_cardiomyopathy",
+ "name": "LMNA cardiomyopathy",
+ "aliases": [
+  "lamin A/C cardiomyopathy",
+  "LMNA-related dilated cardiomyopathy",
+  "laminopathy cardiomyopathy",
+  "LMNA dilated cardiomyopathy with conduction disease"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Genetics",
+ "specialty": "Cardiology / Inherited Cardiac Conditions",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard cardiology and inherited cardiac conditions references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by variants in LMNA, encoding the nuclear envelope proteins lamin A and C, and characterised by dilated cardiomyopathy with prominent conduction system disease",
+   "The typical sequence is early atrioventricular conduction disturbance and atrial arrhythmia, followed by ventricular arrhythmia and progressive left ventricular dysfunction",
+   "It carries a notably high risk of malignant ventricular arrhythmia and sudden death, which can precede or exceed the degree of pump failure",
+   "Because sudden death may occur even with only mildly reduced ejection fraction, defibrillator implantation is considered at a lower threshold than in many other cardiomyopathies",
+   "Skeletal muscle involvement (Emery-Dreifuss muscular dystrophy or limb-girdle patterns) may coexist, reflecting the wider laminopathy spectrum",
+   "Recognised high-risk markers include non-sustained ventricular tachycardia, male sex, non-missense variants, and progressive reduction in ejection fraction",
+   "Family screening is essential given autosomal dominant inheritance and the arrhythmic risk in relatives"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Genetics",
-  "specialty": "Cardiology / Inherited Cardiac Conditions",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard cardiology and inherited cardiac conditions references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by variants in LMNA, encoding the nuclear envelope proteins lamin A and C, and characterised by dilated cardiomyopathy with prominent conduction system disease",
-      "The typical sequence is early atrioventricular conduction disturbance and atrial arrhythmia, followed by ventricular arrhythmia and progressive left ventricular dysfunction",
-      "It carries a notably high risk of malignant ventricular arrhythmia and sudden death, which can precede or exceed the degree of pump failure",
-      "Because sudden death may occur even with only mildly reduced ejection fraction, defibrillator implantation is considered at a lower threshold than in many other cardiomyopathies",
-      "Skeletal muscle involvement (Emery-Dreifuss muscular dystrophy or limb-girdle patterns) may coexist, reflecting the wider laminopathy spectrum",
-      "Recognised high-risk markers include non-sustained ventricular tachycardia, male sex, non-missense variants, and progressive reduction in ejection fraction",
-      "Family screening is essential given autosomal dominant inheritance and the arrhythmic risk in relatives"
+  "pathophysiology": "Lamins A and C form a meshwork underlying the inner nuclear membrane that provides structural support to the nucleus and regulates gene expression and mechanotransduction. Pathogenic LMNA variants weaken this nuclear lamina, rendering cardiomyocytes and their conduction-system counterparts vulnerable to mechanical stress and abnormal signalling. This leads to progressive fibrosis and cell loss, first affecting the atria and the specialised conduction tissue, causing conduction block and atrial arrhythmia, and later the ventricular myocardium, producing chamber dilatation, systolic dysfunction and a substrate for re-entrant ventricular arrhythmia. The disproportionate arrhythmic and conduction burden relative to the degree of ventricular impairment is the defining clinical hallmark.",
+  "additionalDifferentials": [
+   "Idiopathic dilated cardiomyopathy of other genetic cause (for example titin)",
+   "Cardiac sarcoidosis",
+   "Arrhythmogenic cardiomyopathy",
+   "Myocarditis with conduction disease",
+   "Progressive cardiac conduction defect (SCN5A)",
+   "Other muscular dystrophies with cardiac involvement"
+  ],
+  "additionalInvestigations": [
+   "Serial 12-lead ECGs to detect evolving conduction disease and atrial arrhythmia",
+   "Ambulatory ECG monitoring for non-sustained ventricular tachycardia",
+   "Echocardiography to assess chamber size and systolic function",
+   "Cardiac MRI to quantify function and detect myocardial fibrosis",
+   "Genetic testing of LMNA with cascade family screening",
+   "Creatine kinase and neurological assessment where skeletal myopathy is suspected"
+  ],
+  "redFlags": [
+   "Non-sustained or sustained ventricular tachycardia",
+   "High-grade atrioventricular block or need for pacing at a young age",
+   "Progressive fall in left ventricular ejection fraction",
+   "Family history of sudden death or LMNA-confirmed disease"
+  ],
+  "prognosis": "LMNA cardiomyopathy is among the more aggressive inherited cardiomyopathies, with high rates of malignant arrhythmia, progressive heart failure and sudden death; outcome is improved by early rhythm surveillance, defibrillator therapy in high-risk patients, and heart failure management, with transplantation for end-stage disease.",
+  "pitfalls": [
+   "Applying standard ejection-fraction-based defibrillator thresholds and underestimating arrhythmic risk",
+   "Attributing early conduction disease to benign causes and missing the underlying laminopathy",
+   "Overlooking coexisting skeletal muscle involvement",
+   "Failing to screen relatives who may harbour the variant and face sudden-death risk"
+  ],
+  "references": [
+   "ESC guidelines on cardiomyopathies and on prevention of sudden cardiac death",
+   "Braunwald's Heart Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Deliver guideline-directed heart failure therapy for left ventricular dysfunction (ACE inhibitor/ARB or ARNI, beta-blocker, mineralocorticoid antagonist and SGLT2 inhibitor)",
+   "Implant a cardioverter-defibrillator at a lower threshold given the high sudden-death risk, even with only mildly reduced ejection fraction",
+   "Manage atrioventricular conduction disease, providing pacing where indicated, preferably within a defibrillator device",
+   "Anticoagulate for atrial arrhythmia and apply rate or rhythm control for atrial fibrillation",
+   "Advise against strenuous competitive exercise and consider antiarrhythmic strategies for ventricular arrhythmia",
+   "Undertake regular rhythm surveillance with ECG and ambulatory monitoring alongside serial imaging of ventricular function",
+   "Arrange genetic testing with cascade family screening and assess for coexisting skeletal myopathy",
+   "Refer for advanced heart failure evaluation and transplantation in end-stage disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lmna_cardiomyopathy-pathway",
+   "title": "LMNA cardiomyopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by variants in LMNA, encoding the nuclear envelope proteins lamin A and C, and characterised by dilated cardiomyopathy with prominent conduction system disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Non-sustained or sustained ventricular tachycardia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial 12-lead ECGs to detect evolving conduction disease and atrial arrhythmia, Ambulatory ECG monitoring for non-sustained ventricular tachycardia, Echocardiography to assess chamber size and systolic function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Deliver guideline-directed heart failure therapy for left ventricular dysfunction (ACE inhibitor/ARB or ARNI, beta-blocker, mineralocorticoid antagonist and SGLT2 inhibitor)"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Applying standard ejection-fraction-based defibrillator thresholds and underestimating arrhythmic risk"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lmna cardiomyopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lmna_cardiomyopathy-matrix",
+   "title": "LMNA cardiomyopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by variants in LMNA, encoding the nuclear envelope proteins lamin A and C, and characterised by dilated cardiomyopathy",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lamins A and C form a meshwork underlying the inner nuclear membrane that provides structural support to the nucleus and regulates gene expression and mechanotransduction. Pathogenic LMNA variants weaken this nuclear lamina, rendering cardiomyocytes and their conduction-system counterparts vulnerable to mechanical stress and abnormal signalling. This leads to progressive fibrosis and cell loss, first affecting the atria and the specialised conduction tissue, causing conduction block and atrial arrhythmia, and later the ventricular myocardium, producing chamber dilatation, systolic dysfunction and a substrate for re-entrant ventricular arrhythmia. The disproportionate arrhythmic and conduction burden relative to the degree of ventricular impairment is the defining clinical hallmark.",
-    "additionalDifferentials": [
-      "Idiopathic dilated cardiomyopathy of other genetic cause (for example titin)",
-      "Cardiac sarcoidosis",
-      "Arrhythmogenic cardiomyopathy",
-      "Myocarditis with conduction disease",
-      "Progressive cardiac conduction defect (SCN5A)",
-      "Other muscular dystrophies with cardiac involvement"
+    [
+     "Key Investigations",
+     "Serial 12-lead ECGs to detect evolving conduction disease and atrial arrhythmia, Ambulatory ECG monitoring for non-sustained",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial 12-lead ECGs to detect evolving conduction disease and atrial arrhythmia",
-      "Ambulatory ECG monitoring for non-sustained ventricular tachycardia",
-      "Echocardiography to assess chamber size and systolic function",
-      "Cardiac MRI to quantify function and detect myocardial fibrosis",
-      "Genetic testing of LMNA with cascade family screening",
-      "Creatine kinase and neurological assessment where skeletal myopathy is suspected"
+    [
+     "Primary Differentials",
+     "Idiopathic dilated cardiomyopathy of other genetic cause (for example titin), Cardiac sarcoidosis, Arrhythmogenic cardiomyopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Non-sustained or sustained ventricular tachycardia",
-      "High-grade atrioventricular block or need for pacing at a young age",
-      "Progressive fall in left ventricular ejection fraction",
-      "Family history of sudden death or LMNA-confirmed disease"
+    [
+     "Management Strategy",
+     "Deliver guideline-directed heart failure therapy for left ventricular dysfunction (ACE inhibitor/ARB or ARNI, beta-blocker,",
+     "Core treatment modality"
     ],
-    "prognosis": "LMNA cardiomyopathy is among the more aggressive inherited cardiomyopathies, with high rates of malignant arrhythmia, progressive heart failure and sudden death; outcome is improved by early rhythm surveillance, defibrillator therapy in high-risk patients, and heart failure management, with transplantation for end-stage disease.",
-    "pitfalls": [
-      "Applying standard ejection-fraction-based defibrillator thresholds and underestimating arrhythmic risk",
-      "Attributing early conduction disease to benign causes and missing the underlying laminopathy",
-      "Overlooking coexisting skeletal muscle involvement",
-      "Failing to screen relatives who may harbour the variant and face sudden-death risk"
-    ],
-    "references": [
-      "ESC guidelines on cardiomyopathies and on prevention of sudden cardiac death",
-      "Braunwald's Heart Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Deliver guideline-directed heart failure therapy for left ventricular dysfunction (ACE inhibitor/ARB or ARNI, beta-blocker, mineralocorticoid antagonist and SGLT2 inhibitor)",
-      "Implant a cardioverter-defibrillator at a lower threshold given the high sudden-death risk, even with only mildly reduced ejection fraction",
-      "Manage atrioventricular conduction disease, providing pacing where indicated, preferably within a defibrillator device",
-      "Anticoagulate for atrial arrhythmia and apply rate or rhythm control for atrial fibrillation",
-      "Advise against strenuous competitive exercise and consider antiarrhythmic strategies for ventricular arrhythmia",
-      "Undertake regular rhythm surveillance with ECG and ambulatory monitoring alongside serial imaging of ventricular function",
-      "Arrange genetic testing with cascade family screening and assess for coexisting skeletal myopathy",
-      "Refer for advanced heart failure evaluation and transplantation in end-stage disease"
+    [
+     "Clinical Pitfall",
+     "Applying standard ejection-fraction-based defibrillator thresholds and underestimating arrhythmic risk",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lmna cardiomyopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lmna-cardiomyopathy-diagram",
+   "title": "LMNA cardiomyopathy: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

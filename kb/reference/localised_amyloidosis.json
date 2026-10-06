@@ -1,80 +1,175 @@
 {
-  "id": "localised_amyloidosis",
-  "name": "Localised Amyloidosis",
-  "aliases": [
-    "Localised AL amyloidosis",
-    "Organ-limited amyloidosis",
-    "Focal amyloidosis"
+ "id": "localised_amyloidosis",
+ "name": "Localised Amyloidosis",
+ "aliases": [
+  "Localised AL amyloidosis",
+  "Organ-limited amyloidosis",
+  "Focal amyloidosis"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Haematology",
+ "specialty": "Haematology / Amyloidosis",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Localised amyloidosis is confined to a single organ or site without systemic deposition, and is most often of immunoglobulin light-chain (AL) type produced by a local clone of plasma cells or B-cells.",
+   "Frequently affected sites include the urinary tract (especially the bladder), larynx, tracheobronchial tree, skin, conjunctiva or orbit, and gastrointestinal tract.",
+   "Presentation reflects the site, with painless haematuria in bladder disease, hoarseness in laryngeal disease, and wheeze or haemoptysis in airway disease.",
+   "Unlike systemic AL amyloidosis, there is usually no significant circulating monoclonal protein and no risk to vital organs such as the heart or kidney.",
+   "Progression to systemic amyloidosis is uncommon, so the prognosis is generally excellent.",
+   "Management is local, using endoscopic or surgical excision, local radiotherapy, or watchful waiting, rather than systemic chemotherapy.",
+   "A thorough evaluation to exclude underlying systemic disease is mandatory before labelling amyloid as localised.",
+   "Cerebral amyloid angiopathy is a distinct organ-limited beta-amyloid form affecting the cerebral vasculature."
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Haematology",
-  "specialty": "Haematology / Amyloidosis",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Localised amyloidosis is confined to a single organ or site without systemic deposition, and is most often of immunoglobulin light-chain (AL) type produced by a local clone of plasma cells or B-cells.",
-      "Frequently affected sites include the urinary tract (especially the bladder), larynx, tracheobronchial tree, skin, conjunctiva or orbit, and gastrointestinal tract.",
-      "Presentation reflects the site, with painless haematuria in bladder disease, hoarseness in laryngeal disease, and wheeze or haemoptysis in airway disease.",
-      "Unlike systemic AL amyloidosis, there is usually no significant circulating monoclonal protein and no risk to vital organs such as the heart or kidney.",
-      "Progression to systemic amyloidosis is uncommon, so the prognosis is generally excellent.",
-      "Management is local, using endoscopic or surgical excision, local radiotherapy, or watchful waiting, rather than systemic chemotherapy.",
-      "A thorough evaluation to exclude underlying systemic disease is mandatory before labelling amyloid as localised.",
-      "Cerebral amyloid angiopathy is a distinct organ-limited beta-amyloid form affecting the cerebral vasculature."
+  "pathophysiology": "In localised AL amyloidosis a small clone of plasma cells or B-lymphocytes resident within the affected tissue secretes amyloidogenic immunoglobulin light chains that misfold and deposit as fibrils in situ. Because the clone and the deposition are confined to that site, there is no meaningful systemic light-chain excess and other organs are spared. The deposits form tumour-like masses or diffuse infiltration that disrupt local function, for example by obstructing or ulcerating the urinary tract or by stiffening the vocal cords. The reasons for the localised behaviour of the clone are incompletely understood, but the process rarely disseminates.",
+  "additionalDifferentials": [
+   "Systemic AL amyloidosis",
+   "Malignancy at the affected site such as bladder or laryngeal carcinoma",
+   "Chronic inflammatory or granulomatous lesions",
+   "Other benign masses",
+   "Lymphoproliferative disease for orbital and conjunctival lesions",
+   "Sarcoidosis"
+  ],
+  "additionalInvestigations": [
+   "Biopsy of the lesion with Congo red staining and amyloid typing by mass spectrometry or immunohistochemistry",
+   "Serum free light chains and serum and urine immunofixation to exclude a systemic clone",
+   "SAP scintigraphy to confirm the absence of systemic deposits",
+   "Bone marrow examination if a systemic clone is suspected",
+   "Site-specific imaging and endoscopy",
+   "Echocardiography with renal and liver function to exclude systemic organ involvement"
+  ],
+  "redFlags": [
+   "Features suggesting systemic disease such as proteinuria, cardiac symptoms or a significant serum monoclonal protein",
+   "Rapid local growth or bleeding",
+   "Airway compromise from laryngeal or tracheal disease",
+   "Recurrent obstruction"
+  ],
+  "prognosis": "Localised amyloidosis carries an excellent prognosis with rare progression to systemic disease. Local recurrence can occur and may require repeat local treatment, but organ-threatening systemic complications are unusual.",
+  "pitfalls": [
+   "Assuming localised disease without excluding systemic amyloidosis",
+   "Giving systemic chemotherapy inappropriately for organ-limited disease",
+   "Missing a co-existing malignancy at the biopsy site",
+   "Failing to type the amyloid and presuming it is AL"
+  ],
+  "references": [
+   "Williams Hematology, chapter on amyloidosis",
+   "Oxford Textbook of Medicine, chapter on amyloidosis",
+   "International Society of Amyloidosis nomenclature guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat locally as the mainstay, with endoscopic or surgical excision of amyloid deposits at the affected site",
+   "Use local radiotherapy for laryngeal, tracheobronchial or other sites less amenable to excision",
+   "Adopt watchful waiting for stable, minimally symptomatic disease",
+   "Exclude systemic amyloidosis with serum free light chains, immunofixation, SAP scintigraphy and organ assessment before deciding management",
+   "Avoid systemic chemotherapy, which is not indicated in truly localised disease",
+   "Apply site-specific supportive measures for manifestations such as haematuria, airway compromise or voice change",
+   "Monitor long term for local recurrence and the uncommon progression to systemic disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "localised_amyloidosis-pathway",
+   "title": "Localised Amyloidosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Localised amyloidosis is confined to a single organ or site without systemic deposition, and is most often of immunoglobulin light-chain (AL) type produced by a local clone of plasma cells or B-cells.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting systemic disease such as proteinuria, cardiac symptoms or a significant serum monoclonal protein",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Biopsy of the lesion with Congo red staining and amyloid typing by mass spectrometry or immunohistochemistry, Serum free light chains and serum and urine immunofixation to exclude a systemic clone, SAP scintigraphy to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat locally as the mainstay, with endoscopic or surgical excision of amyloid deposits at the affected site"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming localised disease without excluding systemic amyloidosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of localised amyloidosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "localised_amyloidosis-matrix",
+   "title": "Localised Amyloidosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Localised amyloidosis is confined to a single organ or site without systemic deposition, and is most often of immunoglobulin",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In localised AL amyloidosis a small clone of plasma cells or B-lymphocytes resident within the affected tissue secretes amyloidogenic immunoglobulin light chains that misfold and deposit as fibrils in situ. Because the clone and the deposition are confined to that site, there is no meaningful systemic light-chain excess and other organs are spared. The deposits form tumour-like masses or diffuse infiltration that disrupt local function, for example by obstructing or ulcerating the urinary tract or by stiffening the vocal cords. The reasons for the localised behaviour of the clone are incompletely understood, but the process rarely disseminates.",
-    "additionalDifferentials": [
-      "Systemic AL amyloidosis",
-      "Malignancy at the affected site such as bladder or laryngeal carcinoma",
-      "Chronic inflammatory or granulomatous lesions",
-      "Other benign masses",
-      "Lymphoproliferative disease for orbital and conjunctival lesions",
-      "Sarcoidosis"
+    [
+     "Key Investigations",
+     "Biopsy of the lesion with Congo red staining and amyloid typing by mass spectrometry or immunohistochemistry, Serum free light",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Biopsy of the lesion with Congo red staining and amyloid typing by mass spectrometry or immunohistochemistry",
-      "Serum free light chains and serum and urine immunofixation to exclude a systemic clone",
-      "SAP scintigraphy to confirm the absence of systemic deposits",
-      "Bone marrow examination if a systemic clone is suspected",
-      "Site-specific imaging and endoscopy",
-      "Echocardiography with renal and liver function to exclude systemic organ involvement"
+    [
+     "Primary Differentials",
+     "Systemic AL amyloidosis, Malignancy at the affected site such as bladder or laryngeal carcinoma, Chronic inflammatory or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting systemic disease such as proteinuria, cardiac symptoms or a significant serum monoclonal protein",
-      "Rapid local growth or bleeding",
-      "Airway compromise from laryngeal or tracheal disease",
-      "Recurrent obstruction"
+    [
+     "Management Strategy",
+     "Treat locally as the mainstay, with endoscopic or surgical excision of amyloid deposits at the affected site",
+     "Core treatment modality"
     ],
-    "prognosis": "Localised amyloidosis carries an excellent prognosis with rare progression to systemic disease. Local recurrence can occur and may require repeat local treatment, but organ-threatening systemic complications are unusual.",
-    "pitfalls": [
-      "Assuming localised disease without excluding systemic amyloidosis",
-      "Giving systemic chemotherapy inappropriately for organ-limited disease",
-      "Missing a co-existing malignancy at the biopsy site",
-      "Failing to type the amyloid and presuming it is AL"
-    ],
-    "references": [
-      "Williams Hematology, chapter on amyloidosis",
-      "Oxford Textbook of Medicine, chapter on amyloidosis",
-      "International Society of Amyloidosis nomenclature guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat locally as the mainstay, with endoscopic or surgical excision of amyloid deposits at the affected site",
-      "Use local radiotherapy for laryngeal, tracheobronchial or other sites less amenable to excision",
-      "Adopt watchful waiting for stable, minimally symptomatic disease",
-      "Exclude systemic amyloidosis with serum free light chains, immunofixation, SAP scintigraphy and organ assessment before deciding management",
-      "Avoid systemic chemotherapy, which is not indicated in truly localised disease",
-      "Apply site-specific supportive measures for manifestations such as haematuria, airway compromise or voice change",
-      "Monitor long term for local recurrence and the uncommon progression to systemic disease"
+    [
+     "Clinical Pitfall",
+     "Assuming localised disease without excluding systemic amyloidosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for localised amyloidosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "localised-amyloidosis-diagram",
+   "title": "Localised Amyloidosis: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

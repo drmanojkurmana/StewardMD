@@ -1,80 +1,175 @@
 {
-  "id": "warm_autoimmune_hemolytic_anemia",
-  "name": "Warm autoimmune haemolytic anaemia",
-  "aliases": [
-    "IgG autoimmune haemolytic anaemia",
-    "warm AIHA",
-    "warm antibody haemolytic anaemia",
-    "warm autoimmune haemolytic anaemia"
+ "id": "warm_autoimmune_hemolytic_anemia",
+ "name": "Warm autoimmune haemolytic anaemia",
+ "aliases": [
+  "IgG autoimmune haemolytic anaemia",
+  "warm AIHA",
+  "warm antibody haemolytic anaemia",
+  "warm autoimmune haemolytic anaemia"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Transfusion",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / AABB technical manual",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest form of autoimmune haemolytic anaemia, caused by IgG autoantibodies that bind red cells optimally at body temperature",
+   "Haemolysis is predominantly extravascular, with antibody-coated cells removed by splenic macrophages",
+   "The blood film characteristically shows spherocytes, polychromasia and a raised reticulocyte count",
+   "The direct antiglobulin test is positive, typically for IgG with or without complement, and is central to the diagnosis",
+   "May be primary or secondary to lymphoproliferative disorders, autoimmune disease such as lupus, or certain drugs",
+   "First-line treatment is corticosteroids, with rituximab and splenectomy among the options for refractory or relapsing disease",
+   "Transfusion can be difficult because the autoantibody reacts with most donor cells and may mask an underlying alloantibody"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Transfusion",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / AABB technical manual",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest form of autoimmune haemolytic anaemia, caused by IgG autoantibodies that bind red cells optimally at body temperature",
-      "Haemolysis is predominantly extravascular, with antibody-coated cells removed by splenic macrophages",
-      "The blood film characteristically shows spherocytes, polychromasia and a raised reticulocyte count",
-      "The direct antiglobulin test is positive, typically for IgG with or without complement, and is central to the diagnosis",
-      "May be primary or secondary to lymphoproliferative disorders, autoimmune disease such as lupus, or certain drugs",
-      "First-line treatment is corticosteroids, with rituximab and splenectomy among the options for refractory or relapsing disease",
-      "Transfusion can be difficult because the autoantibody reacts with most donor cells and may mask an underlying alloantibody"
+  "pathophysiology": "Warm autoimmune haemolytic anaemia is caused by autoantibodies, usually of the IgG class, that bind red-cell membrane antigens most avidly at core body temperature. Antibody-coated red cells are recognised by Fc receptors on splenic macrophages, which remove portions of the membrane, generating spherocytes that are less deformable and are ultimately trapped and destroyed in the spleen. This predominantly extravascular haemolysis raises unconjugated bilirubin, lactate dehydrogenase and reticulocytes while consuming haptoglobin. When complement is also fixed, some intravascular haemolysis and hepatic clearance occur. The autoantibody may be idiopathic or arise secondary to lymphoproliferative disease, connective tissue disorders or drugs, and its broad specificity complicates compatibility testing.",
+  "additionalDifferentials": [
+   "Cold agglutinin disease and other cold autoimmune haemolysis",
+   "Hereditary spherocytosis",
+   "Delayed haemolytic transfusion reaction",
+   "Drug-induced immune haemolysis",
+   "Microangiopathic haemolytic anaemia",
+   "Paroxysmal nocturnal haemoglobinuria"
+  ],
+  "additionalInvestigations": [
+   "Direct antiglobulin test, characteristically positive for IgG with or without complement",
+   "Blood film showing spherocytes, polychromasia and nucleated red cells",
+   "Reticulocyte count, typically raised as a marrow response",
+   "Haemolysis markers including lactate dehydrogenase, haptoglobin and unconjugated bilirubin",
+   "Investigation for secondary causes such as lymphoproliferative disorder, lupus and relevant drugs",
+   "Careful crossmatching to detect any alloantibody masked by the autoantibody"
+  ],
+  "redFlags": [
+   "Rapidly falling haemoglobin with cardiovascular compromise",
+   "Inadequate reticulocyte response suggesting concurrent marrow suppression",
+   "Features of an underlying lymphoma or connective tissue disease",
+   "Difficulty obtaining compatible blood when urgent transfusion is required"
+  ],
+  "prognosis": "Many patients respond to corticosteroids, but relapse is common and some require second-line therapy; the course and outlook are strongly influenced by any underlying secondary cause.",
+  "pitfalls": [
+   "Withholding necessary transfusion for fear of incompatibility when the anaemia is life-threatening",
+   "Failing to search for an underlying lymphoproliferative or autoimmune disorder",
+   "Overlooking a masked alloantibody during compatibility testing",
+   "Attributing spherocytes solely to hereditary spherocytosis without a direct antiglobulin test"
+  ],
+  "references": [
+   "Williams Hematology",
+   "AABB Technical Manual"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start corticosteroids such as prednisolone as first-line immunosuppression to reduce autoantibody-mediated red-cell destruction",
+   "Escalate refractory or relapsing disease to rituximab, splenectomy or agents such as azathioprine, ciclosporin or mycophenolate mofetil",
+   "Supplement folic acid to sustain the brisk marrow erythropoietic response",
+   "Search for and treat an underlying secondary cause, stopping any culprit drug and managing coexisting lymphoproliferative or autoimmune disease",
+   "Reserve transfusion of warmed, best-matched red cells for severe or life-threatening anaemia, warning the laboratory of autoantibody masking of alloantibodies",
+   "Give thromboprophylaxis during periods of active haemolysis",
+   "Track the full blood count and haemolysis markers over time and watch for associated immune thrombocytopenia (Evans syndrome)",
+   "Refer to haematology and escalate promptly for cardiovascular instability or a severe haemolytic crisis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "warm_autoimmune_hemolytic_anemia-pathway",
+   "title": "Warm autoimmune haemolytic anaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest form of autoimmune haemolytic anaemia, caused by IgG autoantibodies that bind red cells optimally at body temperature",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly falling haemoglobin with cardiovascular compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Direct antiglobulin test, characteristically positive for IgG with or without complement, Blood film showing spherocytes, polychromasia and nucleated red cells, Reticulocyte count, typically raised as a marrow response"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start corticosteroids such as prednisolone as first-line immunosuppression to reduce autoantibody-mediated red-cell destruction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Withholding necessary transfusion for fear of incompatibility when the anaemia is life-threatening"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of warm autoimmune haemolytic anaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "warm_autoimmune_hemolytic_anemia-matrix",
+   "title": "Warm autoimmune haemolytic anaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest form of autoimmune haemolytic anaemia, caused by IgG autoantibodies that bind red cells optimally at body",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Warm autoimmune haemolytic anaemia is caused by autoantibodies, usually of the IgG class, that bind red-cell membrane antigens most avidly at core body temperature. Antibody-coated red cells are recognised by Fc receptors on splenic macrophages, which remove portions of the membrane, generating spherocytes that are less deformable and are ultimately trapped and destroyed in the spleen. This predominantly extravascular haemolysis raises unconjugated bilirubin, lactate dehydrogenase and reticulocytes while consuming haptoglobin. When complement is also fixed, some intravascular haemolysis and hepatic clearance occur. The autoantibody may be idiopathic or arise secondary to lymphoproliferative disease, connective tissue disorders or drugs, and its broad specificity complicates compatibility testing.",
-    "additionalDifferentials": [
-      "Cold agglutinin disease and other cold autoimmune haemolysis",
-      "Hereditary spherocytosis",
-      "Delayed haemolytic transfusion reaction",
-      "Drug-induced immune haemolysis",
-      "Microangiopathic haemolytic anaemia",
-      "Paroxysmal nocturnal haemoglobinuria"
+    [
+     "Key Investigations",
+     "Direct antiglobulin test, characteristically positive for IgG with or without complement, Blood film showing spherocytes,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Direct antiglobulin test, characteristically positive for IgG with or without complement",
-      "Blood film showing spherocytes, polychromasia and nucleated red cells",
-      "Reticulocyte count, typically raised as a marrow response",
-      "Haemolysis markers including lactate dehydrogenase, haptoglobin and unconjugated bilirubin",
-      "Investigation for secondary causes such as lymphoproliferative disorder, lupus and relevant drugs",
-      "Careful crossmatching to detect any alloantibody masked by the autoantibody"
+    [
+     "Primary Differentials",
+     "Cold agglutinin disease and other cold autoimmune haemolysis, Hereditary spherocytosis, Delayed haemolytic transfusion reaction",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly falling haemoglobin with cardiovascular compromise",
-      "Inadequate reticulocyte response suggesting concurrent marrow suppression",
-      "Features of an underlying lymphoma or connective tissue disease",
-      "Difficulty obtaining compatible blood when urgent transfusion is required"
+    [
+     "Management Strategy",
+     "Start corticosteroids such as prednisolone as first-line immunosuppression to reduce autoantibody-mediated red-cell destruction",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients respond to corticosteroids, but relapse is common and some require second-line therapy; the course and outlook are strongly influenced by any underlying secondary cause.",
-    "pitfalls": [
-      "Withholding necessary transfusion for fear of incompatibility when the anaemia is life-threatening",
-      "Failing to search for an underlying lymphoproliferative or autoimmune disorder",
-      "Overlooking a masked alloantibody during compatibility testing",
-      "Attributing spherocytes solely to hereditary spherocytosis without a direct antiglobulin test"
-    ],
-    "references": [
-      "Williams Hematology",
-      "AABB Technical Manual"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start corticosteroids such as prednisolone as first-line immunosuppression to reduce autoantibody-mediated red-cell destruction",
-      "Escalate refractory or relapsing disease to rituximab, splenectomy or agents such as azathioprine, ciclosporin or mycophenolate mofetil",
-      "Supplement folic acid to sustain the brisk marrow erythropoietic response",
-      "Search for and treat an underlying secondary cause, stopping any culprit drug and managing coexisting lymphoproliferative or autoimmune disease",
-      "Reserve transfusion of warmed, best-matched red cells for severe or life-threatening anaemia, warning the laboratory of autoantibody masking of alloantibodies",
-      "Give thromboprophylaxis during periods of active haemolysis",
-      "Track the full blood count and haemolysis markers over time and watch for associated immune thrombocytopenia (Evans syndrome)",
-      "Refer to haematology and escalate promptly for cardiovascular instability or a severe haemolytic crisis"
+    [
+     "Clinical Pitfall",
+     "Withholding necessary transfusion for fear of incompatibility when the anaemia is life-threatening",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for warm autoimmune haemolytic anaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "warm-autoimmune-hemolytic-anemia-diagram",
+   "title": "Warm autoimmune haemolytic anaemia: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

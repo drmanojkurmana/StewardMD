@@ -243,5 +243,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hdb40dbc4"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "meningitis-dx-algo",
+      "title": "Acute Bacterial Meningitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic triad of fever, headache and nuchal rigidity is useful but each component occurs in over 80% of adult cases while the full triad is frequently incomplete, so its absence does not exclude bacterial meningitis (p.1119).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Petechial or purpuric rash, which may herald fulminant meningococcal disease that can progress to death within hours of symptom onset (p.1119)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CSF opening pressure measurement: raised (>180 mmH2O) in over 90% of cases, >400 mmH2O in about 20% (p.1120), CSF cell count and differential: PMN pleocytosis, >100 cells/uL in ~90% (p.1120), CSF glucose and CSF/serum"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison 22e does not provide a formal graded severity score for acute bacterial meningitis; it frames the disease as a medical emergency (goal: antibiotics within 60 min of arrival) and lists adverse prognostic markers"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on the complete classic triad or on Kernig's/Brudzinski's signs to rule out meningitis; these are insensitive, particularly in elderly, very young or immunocompromised patients (p.1119-1120)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute bacterial meningitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "meningitis-matrix",
+      "title": "Acute Bacterial Meningitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad of fever, headache and nuchal rigidity is useful but each component occurs in over 80% of adult cases while the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CSF opening pressure measurement: raised (>180 mmH2O) in over 90% of cases, >400 mmH2O in about 20% (p.1120), CSF cell count and",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Herpes simplex virus encephalitis (headache, fever, altered consciousness, focal deficits, seizures; distinguished by CSF",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Petechial or purpuric rash, which may herald fulminant meningococcal disease that can progress to death within hours of symptom",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on the complete classic triad or on Kernig's/Brudzinski's signs to rule out meningitis; these are insensitive,",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute bacterial meningitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "meningitis-diagram",
+      "title": "Acute Bacterial Meningitis: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

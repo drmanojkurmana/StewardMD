@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, emergency department, ward",
- "aliases": ["shingles", "HZ", "herpes zoster ophthalmicus", "HZO", "Ramsay Hunt syndrome", "disseminated zoster", "postherpetic neuralgia", "PHN", "Shingrix", "recombinant zoster vaccine", "RZV"],
+ "aliases": [
+  "shingles",
+  "HZ",
+  "herpes zoster ophthalmicus",
+  "HZO",
+  "Ramsay Hunt syndrome",
+  "disseminated zoster",
+  "postherpetic neuralgia",
+  "PHN",
+  "Shingrix",
+  "recombinant zoster vaccine",
+  "RZV"
+ ],
  "summary": "Start oral valaciclovir, aciclovir or famciclovir within 72 hours of rash onset (later if new lesions, eye or ear involvement, or immunocompromise), refer ophthalmic zoster urgently, give IV aciclovir for disseminated, CNS or severe immunocompromised disease, and offer recombinant zoster vaccine.",
  "sections": [
   {
@@ -81,18 +93,159 @@
   }
  ],
  "drugs": [
-  { "name": "Valaciclovir", "dose": "1 g orally three times daily for 7 days", "notes": "Renal dose adjustment." },
-  { "name": "Aciclovir (oral)", "dose": "800 mg orally five times daily for 7 days", "notes": "Renal dose adjustment." },
-  { "name": "Famciclovir", "dose": "500 mg orally three times daily for 7 days", "notes": "Renal dose adjustment." },
-  { "name": "Aciclovir (IV)", "dose": "10 mg/kg IV every 8 hours (ideal body weight), 7 to 14 days depending on disease", "notes": "Hydrate; adjust to creatinine clearance." },
-  { "name": "Pregabalin", "dose": "75 mg orally twice daily, titrated up to 300 mg twice daily", "notes": "Postherpetic neuralgia; reduce in renal impairment; sedation, dizziness." },
-  { "name": "Amitriptyline", "dose": "10 to 25 mg orally at night, titrated to a maximum of 75 mg", "notes": "Avoid in cardiac conduction disease, glaucoma, urinary retention; caution in the elderly." },
-  { "name": "Recombinant zoster vaccine (Shingrix)", "dose": "0.5 mL IM, 2 doses 2 to 6 months apart", "notes": "Age 50 and older, or 19 and older if immunocompromised." }
+  {
+   "name": "Valaciclovir",
+   "dose": "1 g orally three times daily for 7 days",
+   "notes": "Renal dose adjustment."
+  },
+  {
+   "name": "Aciclovir (oral)",
+   "dose": "800 mg orally five times daily for 7 days",
+   "notes": "Renal dose adjustment."
+  },
+  {
+   "name": "Famciclovir",
+   "dose": "500 mg orally three times daily for 7 days",
+   "notes": "Renal dose adjustment."
+  },
+  {
+   "name": "Aciclovir (IV)",
+   "dose": "10 mg/kg IV every 8 hours (ideal body weight), 7 to 14 days depending on disease",
+   "notes": "Hydrate; adjust to creatinine clearance."
+  },
+  {
+   "name": "Pregabalin",
+   "dose": "75 mg orally twice daily, titrated up to 300 mg twice daily",
+   "notes": "Postherpetic neuralgia; reduce in renal impairment; sedation, dizziness."
+  },
+  {
+   "name": "Amitriptyline",
+   "dose": "10 to 25 mg orally at night, titrated to a maximum of 75 mg",
+   "notes": "Avoid in cardiac conduction disease, glaucoma, urinary retention; caution in the elderly."
+  },
+  {
+   "name": "Recombinant zoster vaccine (Shingrix)",
+   "dose": "0.5 mL IM, 2 doses 2 to 6 months apart",
+   "notes": "Age 50 and older, or 19 and older if immunocompromised."
+  }
  ],
  "sources": [
-  { "org": "CDC", "title": "Clinical overview of shingles (herpes zoster)", "year": 2024, "url": "https://www.cdc.gov/shingles/hcp/clinical-overview/index.html" },
-  { "org": "CDC", "title": "Shingles vaccine recommendations (Shingrix)", "year": 2024, "url": "https://www.cdc.gov/shingles/hcp/vaccine-considerations/index.html" },
-  { "org": "IDSA (Dworkin et al.)", "title": "Recommendations for the management of herpes zoster", "year": 2007, "url": "https://academic.oup.com/cid/article/44/Supplement_1/S1/290669" }
+  {
+   "org": "CDC",
+   "title": "Clinical overview of shingles (herpes zoster)",
+   "year": 2024,
+   "url": "https://www.cdc.gov/shingles/hcp/clinical-overview/index.html"
+  },
+  {
+   "org": "CDC",
+   "title": "Shingles vaccine recommendations (Shingrix)",
+   "year": 2024,
+   "url": "https://www.cdc.gov/shingles/hcp/vaccine-considerations/index.html"
+  },
+  {
+   "org": "IDSA (Dworkin et al.)",
+   "title": "Recommendations for the management of herpes zoster",
+   "year": 2007,
+   "url": "https://academic.oup.com/cid/article/44/Supplement_1/S1/290669"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "herpes-zoster-pathway",
+   "title": "Herpes zoster (shingles), adult Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Prodromal burning or tingling pain, then grouped vesicles on a red base in 1 or 2 adjacent dermatomes on one side; lesions crust in 7 to 10 days and heal in 2 to 4 weeks.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Herpes zoster ophthalmicus: vesicles on the forehead, eyelid, or tip or side of the nose (Hutchinson sign), red or painful eye, photophobia, reduced vision.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Ramsay Hunt syndrome: ear pain, vesicles in the ear canal or on the palate, facial palsy, hearing loss or vertigo."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Aciclovir 10 mg/kg IV every 8 hours (ideal body weight in obesity) for disseminated or visceral zoster, CNS involvement, severe ophthalmic disease, or severe immunocompromise (transplant, advanced HIV, chemotherapy)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing ophthalmic involvement: examine the eye and nose tip in every facial zoster."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for herpes zoster (shingles), adult."
+  }
+ ],
+ "tables": [
+  {
+   "id": "herpes-zoster-summary-matrix",
+   "title": "Herpes zoster (shingles), adult Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Prodromal burning or tingling pain, then grouped vesicles on a red base in 1 or 2 adjacent dermatomes on one side; lesions crust in 7 to 10",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Aciclovir 10 mg/kg IV every 8 hours (ideal body weight in obesity) for disseminated or visceral zoster, CNS involvement, severe ophthalmic",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Valaciclovir: 1 g orally three times daily for 7 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing ophthalmic involvement: examine the eye and nose tip in every facial zoster.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for herpes zoster (shingles), adult."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "herpes-zoster-diagram",
+   "title": "Herpes zoster (shingles), adult: Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

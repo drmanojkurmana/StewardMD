@@ -1,77 +1,172 @@
 {
-  "id": "borderline_personality_disorder",
-  "name": "Borderline personality disorder",
-  "aliases": [
-    "BPD",
-    "emotionally unstable personality disorder"
+ "id": "borderline_personality_disorder",
+ "name": "Borderline personality disorder",
+ "aliases": [
+  "BPD",
+  "emotionally unstable personality disorder"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The disorder is a pervasive pattern of instability in relationships, self-image, and affect, together with marked impulsivity, beginning by early adulthood and evident across contexts",
+   "Characteristic features include frantic efforts to avoid abandonment, intense and unstable relationships that swing between idealisation and devaluation, identity disturbance, and chronic feelings of emptiness",
+   "Recurrent self-harm and suicidal behaviour, affective instability, transient stress-related paranoia or dissociation, and difficulty controlling anger are common and clinically important",
+   "Self-harm and suicide attempts are frequent, so ongoing risk assessment and a clear crisis plan are essential parts of care",
+   "Structured evidence-based psychotherapies, such as dialectical behaviour therapy and mentalisation-based treatment, are the mainstay of management",
+   "Pharmacotherapy is adjunctive and targets specific symptoms or comorbidities rather than the disorder itself, and polypharmacy should be avoided",
+   "A consistent, validating, and boundaried therapeutic stance reduces crises and helps prevent unhelpful splitting among care providers",
+   "Comorbid mood, anxiety, eating, and substance use disorders are common and should be identified and treated"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The disorder is a pervasive pattern of instability in relationships, self-image, and affect, together with marked impulsivity, beginning by early adulthood and evident across contexts",
-      "Characteristic features include frantic efforts to avoid abandonment, intense and unstable relationships that swing between idealisation and devaluation, identity disturbance, and chronic feelings of emptiness",
-      "Recurrent self-harm and suicidal behaviour, affective instability, transient stress-related paranoia or dissociation, and difficulty controlling anger are common and clinically important",
-      "Self-harm and suicide attempts are frequent, so ongoing risk assessment and a clear crisis plan are essential parts of care",
-      "Structured evidence-based psychotherapies, such as dialectical behaviour therapy and mentalisation-based treatment, are the mainstay of management",
-      "Pharmacotherapy is adjunctive and targets specific symptoms or comorbidities rather than the disorder itself, and polypharmacy should be avoided",
-      "A consistent, validating, and boundaried therapeutic stance reduces crises and helps prevent unhelpful splitting among care providers",
-      "Comorbid mood, anxiety, eating, and substance use disorders are common and should be identified and treated"
+  "pathophysiology": "Borderline personality disorder is understood through a biosocial model in which a heritable predisposition to emotional vulnerability and impulsivity interacts with an invalidating or traumatic developmental environment. Neurobiological findings include altered function of limbic structures such as the amygdala and of prefrontal regulatory regions, contributing to heightened emotional reactivity and impaired regulation, with disturbances in serotonergic and stress-response systems.",
+  "additionalDifferentials": [
+   "Bipolar disorder, particularly with rapid mood shifts",
+   "Major depressive disorder or persistent depressive disorder",
+   "Post-traumatic stress disorder and complex trauma presentations",
+   "Other personality disorders such as histrionic or narcissistic",
+   "Substance use disorders causing affective and behavioural instability",
+   "Attention-deficit/hyperactivity disorder with impulsivity"
+  ],
+  "additionalInvestigations": [
+   "Longitudinal history and collateral information to establish the enduring pattern",
+   "Structured suicide and self-harm risk assessment with a crisis plan",
+   "Screening for comorbid mood, anxiety, eating, and substance use disorders",
+   "Trauma history taken sensitively",
+   "Standardised personality assessment tools where appropriate"
+  ],
+  "redFlags": [
+   "Acute suicidal ideation, escalating self-harm, or a recent attempt",
+   "Rapid escalation of impulsive behaviour placing the patient at serious risk",
+   "Emergence of psychotic-level symptoms beyond transient stress-related phenomena",
+   "Severe comorbid substance misuse increasing danger during crises"
+  ],
+  "prognosis": "Contrary to older pessimistic views, many patients with borderline personality disorder show substantial improvement over time, with reduced impulsivity and self-harm and often remission of full criteria, though interpersonal and functional difficulties can persist. Prognosis is better with engagement in structured psychotherapy and stable support, and worse with severe early trauma, persistent substance misuse, and repeated high-lethality self-harm.",
+  "pitfalls": [
+   "Reacting to crises with escalating polypharmacy rather than psychotherapy and structure",
+   "Dismissing chronic suicidality and thereby missing genuine acute risk",
+   "Allowing splitting to divide the treating team through inconsistent boundaries",
+   "Misdiagnosing affective instability as bipolar disorder",
+   "Overlooking comorbid trauma and substance use disorders"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Structured evidence-based psychotherapy such as dialectical behaviour therapy, mentalisation-based treatment, schema-focused or transference-focused therapy as the mainstay of care",
+   "Ongoing structured suicide and self-harm risk assessment with a clear, agreed crisis plan",
+   "Use medication only adjunctively to target specific symptoms or comorbidities, avoiding polypharmacy",
+   "Identify and treat comorbid mood, anxiety, eating and substance use disorders",
+   "A consistent therapeutic alliance with psychoeducation and involvement of family and carers",
+   "Brief, focused crisis intervention that avoids prolonged admission during acute deterioration, with specialist mental-health team follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "borderline_personality_disorder-pathway",
+   "title": "Borderline personality disorder: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The disorder is a pervasive pattern of instability in relationships, self-image, and affect, together with marked impulsivity, beginning by early adulthood and evident across contexts",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute suicidal ideation, escalating self-harm, or a recent attempt",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Longitudinal history and collateral information to establish the enduring pattern, Structured suicide and self-harm risk assessment with a crisis plan, Screening for comorbid mood, anxiety, eating, and substance use"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Structured evidence-based psychotherapy such as dialectical behaviour therapy, mentalisation-based treatment, schema-focused or transference-focused therapy as the mainstay of care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Reacting to crises with escalating polypharmacy rather than psychotherapy and structure"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of borderline personality disorder."
+  }
+ ],
+ "tables": [
+  {
+   "id": "borderline_personality_disorder-matrix",
+   "title": "Borderline personality disorder: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The disorder is a pervasive pattern of instability in relationships, self-image, and affect, together with marked impulsivity,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Borderline personality disorder is understood through a biosocial model in which a heritable predisposition to emotional vulnerability and impulsivity interacts with an invalidating or traumatic developmental environment. Neurobiological findings include altered function of limbic structures such as the amygdala and of prefrontal regulatory regions, contributing to heightened emotional reactivity and impaired regulation, with disturbances in serotonergic and stress-response systems.",
-    "additionalDifferentials": [
-      "Bipolar disorder, particularly with rapid mood shifts",
-      "Major depressive disorder or persistent depressive disorder",
-      "Post-traumatic stress disorder and complex trauma presentations",
-      "Other personality disorders such as histrionic or narcissistic",
-      "Substance use disorders causing affective and behavioural instability",
-      "Attention-deficit/hyperactivity disorder with impulsivity"
+    [
+     "Key Investigations",
+     "Longitudinal history and collateral information to establish the enduring pattern, Structured suicide and self-harm risk",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Longitudinal history and collateral information to establish the enduring pattern",
-      "Structured suicide and self-harm risk assessment with a crisis plan",
-      "Screening for comorbid mood, anxiety, eating, and substance use disorders",
-      "Trauma history taken sensitively",
-      "Standardised personality assessment tools where appropriate"
+    [
+     "Primary Differentials",
+     "Bipolar disorder, particularly with rapid mood shifts, Major depressive disorder or persistent depressive disorder,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute suicidal ideation, escalating self-harm, or a recent attempt",
-      "Rapid escalation of impulsive behaviour placing the patient at serious risk",
-      "Emergence of psychotic-level symptoms beyond transient stress-related phenomena",
-      "Severe comorbid substance misuse increasing danger during crises"
+    [
+     "Management Strategy",
+     "Structured evidence-based psychotherapy such as dialectical behaviour therapy, mentalisation-based treatment, schema-focused or",
+     "Core treatment modality"
     ],
-    "prognosis": "Contrary to older pessimistic views, many patients with borderline personality disorder show substantial improvement over time, with reduced impulsivity and self-harm and often remission of full criteria, though interpersonal and functional difficulties can persist. Prognosis is better with engagement in structured psychotherapy and stable support, and worse with severe early trauma, persistent substance misuse, and repeated high-lethality self-harm.",
-    "pitfalls": [
-      "Reacting to crises with escalating polypharmacy rather than psychotherapy and structure",
-      "Dismissing chronic suicidality and thereby missing genuine acute risk",
-      "Allowing splitting to divide the treating team through inconsistent boundaries",
-      "Misdiagnosing affective instability as bipolar disorder",
-      "Overlooking comorbid trauma and substance use disorders"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Structured evidence-based psychotherapy such as dialectical behaviour therapy, mentalisation-based treatment, schema-focused or transference-focused therapy as the mainstay of care",
-      "Ongoing structured suicide and self-harm risk assessment with a clear, agreed crisis plan",
-      "Use medication only adjunctively to target specific symptoms or comorbidities, avoiding polypharmacy",
-      "Identify and treat comorbid mood, anxiety, eating and substance use disorders",
-      "A consistent therapeutic alliance with psychoeducation and involvement of family and carers",
-      "Brief, focused crisis intervention that avoids prolonged admission during acute deterioration, with specialist mental-health team follow-up"
+    [
+     "Clinical Pitfall",
+     "Reacting to crises with escalating polypharmacy rather than psychotherapy and structure",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for borderline personality disorder."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "borderline-personality-disorder-diagram",
+   "title": "Borderline personality disorder: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

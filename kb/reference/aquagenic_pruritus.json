@@ -1,77 +1,172 @@
 {
-  "id": "aquagenic_pruritus",
-  "name": "Aquagenic pruritus",
-  "aliases": [
-    "water-induced itch",
-    "bath itch"
+ "id": "aquagenic_pruritus",
+ "name": "Aquagenic pruritus",
+ "aliases": [
+  "water-induced itch",
+  "bath itch"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology / Photodermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by intense pricking or burning itch triggered by contact with water at any temperature, developing within minutes and lasting up to an hour, without any visible rash",
+   "The absence of weals distinguishes it from aquagenic urticaria, in which contact with water produces true urticarial lesions",
+   "It has an important association with myeloproliferative disorders, especially polycythaemia vera, where water-induced itch may precede diagnosis by years",
+   "Other reported associations include myelodysplasia and, occasionally, other systemic disease, so new-onset aquagenic pruritus warrants a search for an underlying cause",
+   "The legs are often most affected, and patients frequently learn to limit bathing or dry themselves rapidly to reduce symptoms",
+   "Investigation should include a full blood count and, where indicated, further haematological assessment for a myeloproliferative neoplasm",
+   "Management is challenging and includes measures such as antihistamines, phototherapy and treatment of any underlying disorder"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology / Photodermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by intense pricking or burning itch triggered by contact with water at any temperature, developing within minutes and lasting up to an hour, without any visible rash",
-      "The absence of weals distinguishes it from aquagenic urticaria, in which contact with water produces true urticarial lesions",
-      "It has an important association with myeloproliferative disorders, especially polycythaemia vera, where water-induced itch may precede diagnosis by years",
-      "Other reported associations include myelodysplasia and, occasionally, other systemic disease, so new-onset aquagenic pruritus warrants a search for an underlying cause",
-      "The legs are often most affected, and patients frequently learn to limit bathing or dry themselves rapidly to reduce symptoms",
-      "Investigation should include a full blood count and, where indicated, further haematological assessment for a myeloproliferative neoplasm",
-      "Management is challenging and includes measures such as antihistamines, phototherapy and treatment of any underlying disorder"
+  "pathophysiology": "Aquagenic pruritus is thought to result from water-triggered activation of cutaneous mast cells and sensory nerves, with release of pruritogenic mediators despite the lack of a visible eruption. In association with myeloproliferative disorders such as polycythaemia vera, abnormal mast cell and basophil activity and increased mediator release are proposed to underlie the itch, and heightened fibrinolytic and neurogenic activity in the skin may contribute. The mechanism in idiopathic cases is less well defined but is presumed to share this neuro-mast-cell pathway.",
+  "additionalDifferentials": [
+   "Aquagenic urticaria",
+   "Polycythaemia vera and other myeloproliferative neoplasms presenting with itch",
+   "Cholinergic urticaria triggered by warm water",
+   "Cold or heat urticaria depending on water temperature",
+   "Xerosis-related or senile pruritus aggravated by bathing",
+   "Cholestatic or other systemic pruritus"
+  ],
+  "additionalInvestigations": [
+   "Full blood count to screen for polycythaemia and other haematological abnormality",
+   "Water-provocation to confirm the trigger and demonstrate the absence of weals",
+   "Haematological assessment including JAK2 testing where a myeloproliferative neoplasm is suspected",
+   "Review for cholestasis, renal impairment and other systemic causes of pruritus",
+   "Skin examination to confirm the absence of a primary dermatosis",
+   "Iron studies and other tests as guided by the clinical picture"
+  ],
+  "redFlags": [
+   "A raised haematocrit, splenomegaly or thrombotic history suggesting polycythaemia vera",
+   "Constitutional symptoms such as weight loss, fever or night sweats pointing to systemic disease",
+   "Progressive or refractory itch with abnormal blood counts requiring haematology referral",
+   "Onset in an older patient with other features of an underlying malignancy"
+  ],
+  "prognosis": "Idiopathic aquagenic pruritus tends to be chronic and can be difficult to control, though symptoms may fluctuate; when it is a manifestation of a myeloproliferative disorder, the prognosis and treatment are governed by the underlying condition, and effective management of that disorder often improves the itch.",
+  "pitfalls": [
+   "Failing to check a full blood count and thereby missing an underlying myeloproliferative neoplasm",
+   "Confusing it with aquagenic urticaria despite the absence of weals",
+   "Attributing the itch simply to dry skin and overlooking a systemic cause",
+   "Not reassessing patients over time, since haematological disease may declare itself later"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "British Association of Dermatologists resources on pruritus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Investigate for and treat an underlying myeloproliferative neoplasm such as polycythaemia vera, since controlling it often relieves the itch",
+   "Offer first-line symptomatic relief with antihistamines",
+   "Use skin-directed measures including alkalinisation of bath water with sodium bicarbonate, prompt drying, emollients and reduced water temperature and exposure",
+   "Provide narrowband UVB phototherapy for resistant symptoms",
+   "Consider add-on neuromodulators such as an SSRI for refractory pruritus",
+   "Screen for and correct other systemic causes including cholestasis, renal impairment and iron deficiency",
+   "Refer to haematology with ongoing surveillance where a myeloproliferative neoplasm is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "aquagenic_pruritus-pathway",
+   "title": "Aquagenic pruritus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by intense pricking or burning itch triggered by contact with water at any temperature, developing within minutes and lasting up to an hour, without any visible rash",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A raised haematocrit, splenomegaly or thrombotic history suggesting polycythaemia vera",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count to screen for polycythaemia and other haematological abnormality, Water-provocation to confirm the trigger and demonstrate the absence of weals, Haematological assessment including JAK2 testing where a"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Investigate for and treat an underlying myeloproliferative neoplasm such as polycythaemia vera, since controlling it often relieves the itch"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to check a full blood count and thereby missing an underlying myeloproliferative neoplasm"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of aquagenic pruritus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aquagenic_pruritus-matrix",
+   "title": "Aquagenic pruritus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by intense pricking or burning itch triggered by contact with water at any temperature, developing within minutes",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Aquagenic pruritus is thought to result from water-triggered activation of cutaneous mast cells and sensory nerves, with release of pruritogenic mediators despite the lack of a visible eruption. In association with myeloproliferative disorders such as polycythaemia vera, abnormal mast cell and basophil activity and increased mediator release are proposed to underlie the itch, and heightened fibrinolytic and neurogenic activity in the skin may contribute. The mechanism in idiopathic cases is less well defined but is presumed to share this neuro-mast-cell pathway.",
-    "additionalDifferentials": [
-      "Aquagenic urticaria",
-      "Polycythaemia vera and other myeloproliferative neoplasms presenting with itch",
-      "Cholinergic urticaria triggered by warm water",
-      "Cold or heat urticaria depending on water temperature",
-      "Xerosis-related or senile pruritus aggravated by bathing",
-      "Cholestatic or other systemic pruritus"
+    [
+     "Key Investigations",
+     "Full blood count to screen for polycythaemia and other haematological abnormality, Water-provocation to confirm the trigger and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count to screen for polycythaemia and other haematological abnormality",
-      "Water-provocation to confirm the trigger and demonstrate the absence of weals",
-      "Haematological assessment including JAK2 testing where a myeloproliferative neoplasm is suspected",
-      "Review for cholestasis, renal impairment and other systemic causes of pruritus",
-      "Skin examination to confirm the absence of a primary dermatosis",
-      "Iron studies and other tests as guided by the clinical picture"
+    [
+     "Primary Differentials",
+     "Aquagenic urticaria, Polycythaemia vera and other myeloproliferative neoplasms presenting with itch, Cholinergic urticaria",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A raised haematocrit, splenomegaly or thrombotic history suggesting polycythaemia vera",
-      "Constitutional symptoms such as weight loss, fever or night sweats pointing to systemic disease",
-      "Progressive or refractory itch with abnormal blood counts requiring haematology referral",
-      "Onset in an older patient with other features of an underlying malignancy"
+    [
+     "Management Strategy",
+     "Investigate for and treat an underlying myeloproliferative neoplasm such as polycythaemia vera, since controlling it often",
+     "Core treatment modality"
     ],
-    "prognosis": "Idiopathic aquagenic pruritus tends to be chronic and can be difficult to control, though symptoms may fluctuate; when it is a manifestation of a myeloproliferative disorder, the prognosis and treatment are governed by the underlying condition, and effective management of that disorder often improves the itch.",
-    "pitfalls": [
-      "Failing to check a full blood count and thereby missing an underlying myeloproliferative neoplasm",
-      "Confusing it with aquagenic urticaria despite the absence of weals",
-      "Attributing the itch simply to dry skin and overlooking a systemic cause",
-      "Not reassessing patients over time, since haematological disease may declare itself later"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "British Association of Dermatologists resources on pruritus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Investigate for and treat an underlying myeloproliferative neoplasm such as polycythaemia vera, since controlling it often relieves the itch",
-      "Offer first-line symptomatic relief with antihistamines",
-      "Use skin-directed measures including alkalinisation of bath water with sodium bicarbonate, prompt drying, emollients and reduced water temperature and exposure",
-      "Provide narrowband UVB phototherapy for resistant symptoms",
-      "Consider add-on neuromodulators such as an SSRI for refractory pruritus",
-      "Screen for and correct other systemic causes including cholestasis, renal impairment and iron deficiency",
-      "Refer to haematology with ongoing surveillance where a myeloproliferative neoplasm is suspected"
+    [
+     "Clinical Pitfall",
+     "Failing to check a full blood count and thereby missing an underlying myeloproliferative neoplasm",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for aquagenic pruritus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "aquagenic-pruritus-diagram",
+   "title": "Aquagenic pruritus: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

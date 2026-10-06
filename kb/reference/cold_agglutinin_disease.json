@@ -1,80 +1,175 @@
 {
-  "id": "cold_agglutinin_disease",
-  "name": "Cold agglutinin disease",
-  "aliases": [
-    "CAD",
-    "cold agglutinin syndrome",
-    "cold antibody haemolytic anaemia",
-    "primary cold agglutinin disease"
+ "id": "cold_agglutinin_disease",
+ "name": "Cold agglutinin disease",
+ "aliases": [
+  "CAD",
+  "cold agglutinin syndrome",
+  "cold antibody haemolytic anaemia",
+  "primary cold agglutinin disease"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A form of autoimmune haemolytic anaemia mediated by IgM autoantibodies that bind red cells optimally at cold temperatures",
+   "Symptoms worsen on cold exposure and include acrocyanosis and mottling of the extremities, ears and nose, with haemolytic anaemia",
+   "The direct antiglobulin test is positive for complement (C3d) and negative or weak for IgG, reflecting complement-mediated haemolysis",
+   "Cold agglutinins cause red cell clumping that can spuriously raise the mean cell volume and confound automated counts unless the sample is warmed",
+   "Primary cold agglutinin disease is associated with a clonal low-grade B-cell lymphoproliferative disorder of the bone marrow",
+   "Secondary cold agglutinin syndrome may follow infections such as Mycoplasma pneumoniae or Epstein-Barr virus, or accompany lymphoma",
+   "Cornerstones of management are cold avoidance and keeping the patient warm, with rituximab-based therapy for significant disease"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A form of autoimmune haemolytic anaemia mediated by IgM autoantibodies that bind red cells optimally at cold temperatures",
-      "Symptoms worsen on cold exposure and include acrocyanosis and mottling of the extremities, ears and nose, with haemolytic anaemia",
-      "The direct antiglobulin test is positive for complement (C3d) and negative or weak for IgG, reflecting complement-mediated haemolysis",
-      "Cold agglutinins cause red cell clumping that can spuriously raise the mean cell volume and confound automated counts unless the sample is warmed",
-      "Primary cold agglutinin disease is associated with a clonal low-grade B-cell lymphoproliferative disorder of the bone marrow",
-      "Secondary cold agglutinin syndrome may follow infections such as Mycoplasma pneumoniae or Epstein-Barr virus, or accompany lymphoma",
-      "Cornerstones of management are cold avoidance and keeping the patient warm, with rituximab-based therapy for significant disease"
+  "pathophysiology": "Cold agglutinin disease is caused by monoclonal (in primary disease) or polyclonal (in secondary disease) IgM autoantibodies, usually directed against the I antigen on red cells, that bind most avidly in the cooler peripheral circulation. Antibody binding fixes complement on the red cell surface; as cells return to the warmer core the IgM detaches but deposited complement drives predominantly extravascular clearance by the liver, with some intravascular haemolysis. Agglutination of red cells in cold peripheral vessels also produces the circulatory symptoms. In primary disease a clonal marrow B-cell lymphoproliferative process produces the pathogenic monoclonal IgM.",
+  "additionalDifferentials": [
+   "Warm autoimmune haemolytic anaemia",
+   "Paroxysmal cold haemoglobinuria",
+   "Mixed-type autoimmune haemolytic anaemia",
+   "Cryoglobulinaemia",
+   "Microangiopathic haemolytic anaemia",
+   "Raynaud phenomenon of other cause"
+  ],
+  "additionalInvestigations": [
+   "Direct antiglobulin test with monospecific reagents (C3d and IgG)",
+   "Cold agglutinin titre and thermal amplitude",
+   "Blood film and warmed sample to correct agglutination artefact",
+   "Haemolysis markers (reticulocytes, lactate dehydrogenase, haptoglobin, bilirubin)",
+   "Serum protein electrophoresis and marrow assessment for a clonal B-cell disorder",
+   "Screening for underlying infection or lymphoma in secondary disease"
+  ],
+  "redFlags": [
+   "Severe or rapidly falling haemoglobin requiring transfusion",
+   "Haemoglobinuria indicating brisk intravascular haemolysis",
+   "Acute exacerbation on cold exposure with cardiovascular compromise",
+   "Features suggesting underlying lymphoma requiring investigation"
+  ],
+  "prognosis": "Primary cold agglutinin disease is usually chronic; many patients have mild, manageable haemolysis while others need directed therapy, and prognosis is also shaped by any underlying lymphoproliferative disorder. Secondary post-infectious cases are often self-limiting.",
+  "pitfalls": [
+   "Being misled by spurious red cell indices from cold-induced agglutination in unwarmed samples",
+   "Using warm-antibody treatments such as corticosteroids and splenectomy, which are relatively ineffective here",
+   "Transfusing without warming blood and the patient, worsening haemolysis",
+   "Failing to investigate for an underlying B-cell lymphoproliferative disorder"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cold avoidance and keeping the extremities, head and core warm is the mainstay for mild disease, since haemolysis and agglutination are temperature-driven",
+   "For symptomatic disease, rituximab-based therapy, alone or with bendamustine or fludarabine, targets the underlying clonal B-cell lymphoproliferation",
+   "Complement inhibition with the anti-C1s antibody sutimlimab blocks classical-pathway haemolysis in severe or refractory disease",
+   "Avoid corticosteroids and splenectomy, which are typically ineffective because clearance is complement-mediated and hepatic rather than splenic; give folic acid to support erythropoiesis",
+   "Transfuse when necessary through an in-line blood warmer while keeping the patient warm",
+   "Treat the underlying cause in secondary cold agglutinin syndrome, whether Mycoplasma pneumoniae, Epstein-Barr virus or lymphoma",
+   "Monitor haemoglobin and haemolysis markers, and evaluate for a clonal B-cell disorder with serum protein electrophoresis and marrow assessment",
+   "Escalate acute severe haemolysis with warming, supportive transfusion and haematology input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cold_agglutinin_disease-pathway",
+   "title": "Cold agglutinin disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A form of autoimmune haemolytic anaemia mediated by IgM autoantibodies that bind red cells optimally at cold temperatures",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or rapidly falling haemoglobin requiring transfusion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Direct antiglobulin test with monospecific reagents (C3d and IgG), Cold agglutinin titre and thermal amplitude, Blood film and warmed sample to correct agglutination artefact"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cold avoidance and keeping the extremities, head and core warm is the mainstay for mild disease, since haemolysis and agglutination are temperature-driven"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Being misled by spurious red cell indices from cold-induced agglutination in unwarmed samples"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cold agglutinin disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cold_agglutinin_disease-matrix",
+   "title": "Cold agglutinin disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A form of autoimmune haemolytic anaemia mediated by IgM autoantibodies that bind red cells optimally at cold temperatures",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cold agglutinin disease is caused by monoclonal (in primary disease) or polyclonal (in secondary disease) IgM autoantibodies, usually directed against the I antigen on red cells, that bind most avidly in the cooler peripheral circulation. Antibody binding fixes complement on the red cell surface; as cells return to the warmer core the IgM detaches but deposited complement drives predominantly extravascular clearance by the liver, with some intravascular haemolysis. Agglutination of red cells in cold peripheral vessels also produces the circulatory symptoms. In primary disease a clonal marrow B-cell lymphoproliferative process produces the pathogenic monoclonal IgM.",
-    "additionalDifferentials": [
-      "Warm autoimmune haemolytic anaemia",
-      "Paroxysmal cold haemoglobinuria",
-      "Mixed-type autoimmune haemolytic anaemia",
-      "Cryoglobulinaemia",
-      "Microangiopathic haemolytic anaemia",
-      "Raynaud phenomenon of other cause"
+    [
+     "Key Investigations",
+     "Direct antiglobulin test with monospecific reagents (C3d and IgG), Cold agglutinin titre and thermal amplitude, Blood film and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Direct antiglobulin test with monospecific reagents (C3d and IgG)",
-      "Cold agglutinin titre and thermal amplitude",
-      "Blood film and warmed sample to correct agglutination artefact",
-      "Haemolysis markers (reticulocytes, lactate dehydrogenase, haptoglobin, bilirubin)",
-      "Serum protein electrophoresis and marrow assessment for a clonal B-cell disorder",
-      "Screening for underlying infection or lymphoma in secondary disease"
+    [
+     "Primary Differentials",
+     "Warm autoimmune haemolytic anaemia, Paroxysmal cold haemoglobinuria, Mixed-type autoimmune haemolytic anaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or rapidly falling haemoglobin requiring transfusion",
-      "Haemoglobinuria indicating brisk intravascular haemolysis",
-      "Acute exacerbation on cold exposure with cardiovascular compromise",
-      "Features suggesting underlying lymphoma requiring investigation"
+    [
+     "Management Strategy",
+     "Cold avoidance and keeping the extremities, head and core warm is the mainstay for mild disease, since haemolysis and",
+     "Core treatment modality"
     ],
-    "prognosis": "Primary cold agglutinin disease is usually chronic; many patients have mild, manageable haemolysis while others need directed therapy, and prognosis is also shaped by any underlying lymphoproliferative disorder. Secondary post-infectious cases are often self-limiting.",
-    "pitfalls": [
-      "Being misled by spurious red cell indices from cold-induced agglutination in unwarmed samples",
-      "Using warm-antibody treatments such as corticosteroids and splenectomy, which are relatively ineffective here",
-      "Transfusing without warming blood and the patient, worsening haemolysis",
-      "Failing to investigate for an underlying B-cell lymphoproliferative disorder"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cold avoidance and keeping the extremities, head and core warm is the mainstay for mild disease, since haemolysis and agglutination are temperature-driven",
-      "For symptomatic disease, rituximab-based therapy, alone or with bendamustine or fludarabine, targets the underlying clonal B-cell lymphoproliferation",
-      "Complement inhibition with the anti-C1s antibody sutimlimab blocks classical-pathway haemolysis in severe or refractory disease",
-      "Avoid corticosteroids and splenectomy, which are typically ineffective because clearance is complement-mediated and hepatic rather than splenic; give folic acid to support erythropoiesis",
-      "Transfuse when necessary through an in-line blood warmer while keeping the patient warm",
-      "Treat the underlying cause in secondary cold agglutinin syndrome, whether Mycoplasma pneumoniae, Epstein-Barr virus or lymphoma",
-      "Monitor haemoglobin and haemolysis markers, and evaluate for a clonal B-cell disorder with serum protein electrophoresis and marrow assessment",
-      "Escalate acute severe haemolysis with warming, supportive transfusion and haematology input"
+    [
+     "Clinical Pitfall",
+     "Being misled by spurious red cell indices from cold-induced agglutination in unwarmed samples",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cold agglutinin disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cold-agglutinin-disease-diagram",
+   "title": "Cold agglutinin disease: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

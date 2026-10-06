@@ -1,73 +1,168 @@
 {
-  "id": "chronic_exertional_compartment_syndrome",
-  "name": "Chronic exertional compartment syndrome",
-  "aliases": [
-    "CECS",
-    "exertional compartment syndrome"
+ "id": "chronic_exertional_compartment_syndrome",
+ "name": "Chronic exertional compartment syndrome",
+ "aliases": [
+  "CECS",
+  "exertional compartment syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Sports medicine / Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Exercise-induced pain, tightness and sometimes numbness in a muscle compartment, most often the leg, that predictably comes on at a given level of exertion",
+   "Symptoms are relieved by rest within minutes and recur on resuming activity, unlike acute compartment syndrome",
+   "It commonly affects runners and other endurance athletes and is frequently bilateral",
+   "The anterior compartment of the leg is most often involved, sometimes with foot drop or paraesthesiae during exertion",
+   "Diagnosis is confirmed by measuring raised intracompartmental pressures with exercise",
+   "Activity modification may suffice, but fasciotomy is the definitive treatment for refractory cases"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Sports medicine / Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Exercise-induced pain, tightness and sometimes numbness in a muscle compartment, most often the leg, that predictably comes on at a given level of exertion",
-      "Symptoms are relieved by rest within minutes and recur on resuming activity, unlike acute compartment syndrome",
-      "It commonly affects runners and other endurance athletes and is frequently bilateral",
-      "The anterior compartment of the leg is most often involved, sometimes with foot drop or paraesthesiae during exertion",
-      "Diagnosis is confirmed by measuring raised intracompartmental pressures with exercise",
-      "Activity modification may suffice, but fasciotomy is the definitive treatment for refractory cases"
+  "pathophysiology": "Chronic exertional compartment syndrome arises when exercise-induced expansion of muscle within a relatively non-compliant fascial compartment raises intracompartmental pressure, impairing perfusion and causing reversible ischaemic pain and sometimes nerve dysfunction. Unlike acute compartment syndrome, the pressure rise is transient and resolves with rest, so tissue is not permanently damaged. The mismatch between muscle volume during exercise and the fixed compartment size, sometimes with a thickened or tight fascia, underlies the recurrent symptoms.",
+  "additionalDifferentials": [
+   "Medial tibial stress syndrome",
+   "Tibial stress fracture",
+   "Popliteal artery entrapment syndrome",
+   "Nerve entrapment (for example peroneal)",
+   "Vascular claudication"
+  ],
+  "additionalInvestigations": [
+   "Dynamic intracompartmental pressure measurement before and after exercise",
+   "Clinical reproduction of symptoms with exertion",
+   "MRI or bone imaging to exclude stress fracture",
+   "Vascular studies where arterial entrapment is considered",
+   "Assessment of nerve involvement if there are neurological symptoms"
+  ],
+  "redFlags": [
+   "Symptoms that do not resolve with rest, raising concern for acute compartment syndrome",
+   "Progressive or persistent neurological deficit",
+   "Vascular signs suggesting arterial entrapment",
+   "Features suggesting stress fracture"
+  ],
+  "prognosis": "The condition is not limb-threatening; many manage with activity modification, and fasciotomy provides good relief for those who wish to continue high-level activity, though results vary by compartment.",
+  "pitfalls": [
+   "Confusing it with medial tibial stress syndrome or stress fracture",
+   "Assuming the risk profile of acute compartment syndrome",
+   "Missing popliteal artery entrapment as a vascular mimic",
+   "Diagnosing without objective pressure measurement"
+  ],
+  "references": [
+   "Sports medicine references (standard reference)",
+   "Orthopaedic reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Activity modification and relative rest from the provoking exercise as first-line management",
+   "Gait and running retraining with physiotherapy, including a forefoot-strike technique, to lower intracompartmental pressures",
+   "Trial of orthotics with adjustment of footwear and training surfaces",
+   "Fasciotomy or fasciectomy of the affected compartment as the definitive treatment for refractory cases",
+   "Botulinum toxin injection into the involved muscles as an emerging non-surgical option in selected patients",
+   "Confirmation and localisation with dynamic intracompartmental pressure measurement and exclusion of stress fracture and arterial entrapment before intervention, with sports medicine or orthopaedic follow-up and graded return to activity"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chronic_exertional_compartment_syndrome-pathway",
+   "title": "Chronic exertional compartment syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Exercise-induced pain, tightness and sometimes numbness in a muscle compartment, most often the leg, that predictably comes on at a given level of exertion",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Symptoms that do not resolve with rest, raising concern for acute compartment syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dynamic intracompartmental pressure measurement before and after exercise, Clinical reproduction of symptoms with exertion, MRI or bone imaging to exclude stress fracture"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Activity modification and relative rest from the provoking exercise as first-line management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with medial tibial stress syndrome or stress fracture"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chronic exertional compartment syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic_exertional_compartment_syndrome-matrix",
+   "title": "Chronic exertional compartment syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Exercise-induced pain, tightness and sometimes numbness in a muscle compartment, most often the leg, that predictably comes on at",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic exertional compartment syndrome arises when exercise-induced expansion of muscle within a relatively non-compliant fascial compartment raises intracompartmental pressure, impairing perfusion and causing reversible ischaemic pain and sometimes nerve dysfunction. Unlike acute compartment syndrome, the pressure rise is transient and resolves with rest, so tissue is not permanently damaged. The mismatch between muscle volume during exercise and the fixed compartment size, sometimes with a thickened or tight fascia, underlies the recurrent symptoms.",
-    "additionalDifferentials": [
-      "Medial tibial stress syndrome",
-      "Tibial stress fracture",
-      "Popliteal artery entrapment syndrome",
-      "Nerve entrapment (for example peroneal)",
-      "Vascular claudication"
+    [
+     "Key Investigations",
+     "Dynamic intracompartmental pressure measurement before and after exercise, Clinical reproduction of symptoms with exertion, MRI",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dynamic intracompartmental pressure measurement before and after exercise",
-      "Clinical reproduction of symptoms with exertion",
-      "MRI or bone imaging to exclude stress fracture",
-      "Vascular studies where arterial entrapment is considered",
-      "Assessment of nerve involvement if there are neurological symptoms"
+    [
+     "Primary Differentials",
+     "Medial tibial stress syndrome, Tibial stress fracture, Popliteal artery entrapment syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Symptoms that do not resolve with rest, raising concern for acute compartment syndrome",
-      "Progressive or persistent neurological deficit",
-      "Vascular signs suggesting arterial entrapment",
-      "Features suggesting stress fracture"
+    [
+     "Management Strategy",
+     "Activity modification and relative rest from the provoking exercise as first-line management",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is not limb-threatening; many manage with activity modification, and fasciotomy provides good relief for those who wish to continue high-level activity, though results vary by compartment.",
-    "pitfalls": [
-      "Confusing it with medial tibial stress syndrome or stress fracture",
-      "Assuming the risk profile of acute compartment syndrome",
-      "Missing popliteal artery entrapment as a vascular mimic",
-      "Diagnosing without objective pressure measurement"
-    ],
-    "references": [
-      "Sports medicine references (standard reference)",
-      "Orthopaedic reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Activity modification and relative rest from the provoking exercise as first-line management",
-      "Gait and running retraining with physiotherapy, including a forefoot-strike technique, to lower intracompartmental pressures",
-      "Trial of orthotics with adjustment of footwear and training surfaces",
-      "Fasciotomy or fasciectomy of the affected compartment as the definitive treatment for refractory cases",
-      "Botulinum toxin injection into the involved muscles as an emerging non-surgical option in selected patients",
-      "Confirmation and localisation with dynamic intracompartmental pressure measurement and exclusion of stress fracture and arterial entrapment before intervention, with sports medicine or orthopaedic follow-up and graded return to activity"
+    [
+     "Clinical Pitfall",
+     "Confusing it with medial tibial stress syndrome or stress fracture",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chronic exertional compartment syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-exertional-compartment-syndrome-diagram",
+   "title": "Chronic exertional compartment syndrome: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

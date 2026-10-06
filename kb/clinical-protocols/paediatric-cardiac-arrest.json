@@ -135,5 +135,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "paediatric-cardiac-arrest-pathway",
+   "title": "Paediatric cardiac arrest (PALS) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Unresponsive, not breathing normally (or only gasping) and no definite pulse within 10 seconds: start CPR. Also start compressions if heart rate is below 60/min with poor perfusion despite oxygenation and ventilation.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Compress at 100 to 120/min to at least one-third of the chest depth (about 4 cm in infants, about 5 cm in children, 5 to 6 cm in adolescents), allow full recoil and keep pauses under 10 seconds.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Applies to infants and children up to 18 years, excluding newborns at birth (use the neonatal resuscitation protocol)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Shock at 2 J/kg as soon as possible and resume CPR immediately for 2 minutes; second shock 4 J/kg; later shocks 4 J/kg or more, up to a maximum of 10 J/kg or the adult dose."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Use waveform capnography to monitor CPR quality and detect return of circulation; do not use any single ETCO2 value alone to stop resuscitation."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for paediatric cardiac arrest (pals)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paediatric-cardiac-arrest-summary-matrix",
+   "title": "Paediatric cardiac arrest (PALS) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Unresponsive, not breathing normally (or only gasping) and no definite pulse within 10 seconds: start CPR. Also start compressions if heart",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Compress at 100 to 120/min to at least one-third of the chest depth (about 4 cm in infants, about 5 cm in children, 5 to 6 cm in",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Adrenaline (epinephrine) 0.1 mg/mL: 0.01 mg/kg (0.1 mL/kg) IV/IO every 3 to 5 minutes, max 1 mg per dose",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Long pauses for intubation, line insertion or rhythm checks: keep hands-off time under 10 seconds.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for paediatric cardiac arrest (pals)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "paediatric-cardiac-arrest-diagram",
+   "title": "Paediatric cardiac arrest (PALS): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

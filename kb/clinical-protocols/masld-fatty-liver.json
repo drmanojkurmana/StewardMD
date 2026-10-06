@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "masld-fatty-liver-india",
  "setting": "Outpatient, primary care, diabetes clinic",
- "aliases": ["MASLD", "NAFLD", "fatty liver", "MASH", "NASH", "MetALD", "steatotic liver disease", "FIB-4", "FibroScan", "resmetirom", "hepatic steatosis"],
+ "aliases": [
+  "MASLD",
+  "NAFLD",
+  "fatty liver",
+  "MASH",
+  "NASH",
+  "MetALD",
+  "steatotic liver disease",
+  "FIB-4",
+  "FibroScan",
+  "resmetirom",
+  "hepatic steatosis"
+ ],
  "summary": "Steatosis plus at least one cardiometabolic risk factor with little or no alcohol. Stage fibrosis stepwise with FIB-4 then elastography, treat with weight loss (5% for fat, 7 to 10% for inflammation, 10% or more for fibrosis), manage cardiometabolic risk, and refer intermediate or high fibrosis risk to hepatology for MASH-targeted therapy.",
  "sections": [
   {
@@ -95,16 +107,150 @@
   }
  ],
  "drugs": [
-  { "name": "Resmetirom", "dose": "80 mg orally once daily if under 100 kg; 100 mg once daily if 100 kg or more", "notes": "Non-cirrhotic MASH with F2 to F3 fibrosis, with lifestyle therapy. Avoid with gemfibrozil (strong CYP2C8 inhibitor); limit statin doses per label; monitor liver tests and for gallbladder events." },
-  { "name": "Semaglutide (subcutaneous)", "dose": "Start 0.25 mg once weekly, increase every 4 weeks to a maintenance dose of 2.4 mg once weekly", "notes": "Obesity or non-cirrhotic MASH with F2 to F3 fibrosis; for type 2 diabetes use diabetes dosing. Nausea and vomiting common during titration." },
-  { "name": "Pioglitazone", "dose": "30 mg orally once daily (range 15 to 45 mg)", "notes": "Type 2 diabetes with MASH; weight gain and fluid retention, avoid in heart failure." },
-  { "name": "Vitamin E (RRR-alpha-tocopherol)", "dose": "800 IU orally once daily", "notes": "Selected non-diabetic adults with biopsy-proven MASH (AASLD); not recommended by EASL." }
+  {
+   "name": "Resmetirom",
+   "dose": "80 mg orally once daily if under 100 kg; 100 mg once daily if 100 kg or more",
+   "notes": "Non-cirrhotic MASH with F2 to F3 fibrosis, with lifestyle therapy. Avoid with gemfibrozil (strong CYP2C8 inhibitor); limit statin doses per label; monitor liver tests and for gallbladder events."
+  },
+  {
+   "name": "Semaglutide (subcutaneous)",
+   "dose": "Start 0.25 mg once weekly, increase every 4 weeks to a maintenance dose of 2.4 mg once weekly",
+   "notes": "Obesity or non-cirrhotic MASH with F2 to F3 fibrosis; for type 2 diabetes use diabetes dosing. Nausea and vomiting common during titration."
+  },
+  {
+   "name": "Pioglitazone",
+   "dose": "30 mg orally once daily (range 15 to 45 mg)",
+   "notes": "Type 2 diabetes with MASH; weight gain and fluid retention, avoid in heart failure."
+  },
+  {
+   "name": "Vitamin E (RRR-alpha-tocopherol)",
+   "dose": "800 IU orally once daily",
+   "notes": "Selected non-diabetic adults with biopsy-proven MASH (AASLD); not recommended by EASL."
+  }
  ],
  "sources": [
-  { "org": "American Association for the Study of Liver Diseases", "title": "AASLD Practice Guidance on the clinical assessment and management of nonalcoholic fatty liver disease (Hepatology 2023;77:1797-1835)", "year": 2023, "url": "https://journals.lww.com/hep/fulltext/2023/05000/aasld_practice_guidance_on_the_clinical_assessment.31.aspx" },
-  { "org": "EASL / EASD / EASO", "title": "EASL-EASD-EASO Clinical Practice Guidelines on the management of metabolic dysfunction-associated steatotic liver disease (MASLD)", "year": 2024, "url": "https://www.journal-of-hepatology.eu/article/S0168-8278(24)00329-5/fulltext" },
-  { "org": "EASL / EASD / EASO", "title": "EASL-EASD-EASO Clinical Practice Guidelines on MASLD: Executive Summary", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11519095/" },
-  { "org": "Multisociety Delphi panel (AASLD, EASL, ALEH)", "title": "A multisociety Delphi consensus statement on new fatty liver disease nomenclature", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37364790/" }
+  {
+   "org": "American Association for the Study of Liver Diseases",
+   "title": "AASLD Practice Guidance on the clinical assessment and management of nonalcoholic fatty liver disease (Hepatology 2023;77:1797-1835)",
+   "year": 2023,
+   "url": "https://journals.lww.com/hep/fulltext/2023/05000/aasld_practice_guidance_on_the_clinical_assessment.31.aspx"
+  },
+  {
+   "org": "EASL / EASD / EASO",
+   "title": "EASL-EASD-EASO Clinical Practice Guidelines on the management of metabolic dysfunction-associated steatotic liver disease (MASLD)",
+   "year": 2024,
+   "url": "https://www.journal-of-hepatology.eu/article/S0168-8278(24)00329-5/fulltext"
+  },
+  {
+   "org": "EASL / EASD / EASO",
+   "title": "EASL-EASD-EASO Clinical Practice Guidelines on MASLD: Executive Summary",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11519095/"
+  },
+  {
+   "org": "Multisociety Delphi panel (AASLD, EASL, ALEH)",
+   "title": "A multisociety Delphi consensus statement on new fatty liver disease nomenclature",
+   "year": 2023,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/37364790/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "masld-fatty-liver-pathway",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (MASLD) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "MASLD: hepatic steatosis (imaging or histology) plus at least 1 cardiometabolic criterion, with no other cause and alcohol below 140 g/week (women) or 210 g/week (men).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Cardiometabolic criteria (any one): BMI 25 or more (23 or more in Asians) or raised waist circumference; fasting glucose 100 mg/dL (5.6 mmol/L) or more, HbA1c 5.7% or more, or type 2 diabetes.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Look for MASLD with fibrosis in type 2 diabetes, abdominal obesity with 1 or more other metabolic risk factor, abnormal liver tests, or incidental steatosis on imaging. Do not screen the general population."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Non-cirrhotic MASH with significant fibrosis (F2 to F3): consider resmetirom (EASL 2024, where approved). Semaglutide 2.4 mg weekly also received US FDA approval in August 2025 for this group."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Low risk: repeat FIB-4 every 1 to 3 years. Intermediate or high risk (F2 to F3): reassess annually with non-invasive tests."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for metabolic dysfunction-associated steatotic liver disease (masld)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "masld-fatty-liver-summary-matrix",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (MASLD) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "MASLD: hepatic steatosis (imaging or histology) plus at least 1 cardiometabolic criterion, with no other cause and alcohol below 140 g/week",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Non-cirrhotic MASH with significant fibrosis (F2 to F3): consider resmetirom (EASL 2024, where approved). Semaglutide 2.4 mg weekly also",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Look for MASLD with fibrosis in type 2 diabetes, abdominal obesity with 1 or more other metabolic risk factor, abnormal liver tests, or",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Resmetirom: 80 mg orally once daily if under 100 kg; 100 mg once daily if 100 kg or more",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Reassuring patients because ALT is normal: advanced fibrosis often has normal enzymes.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for metabolic dysfunction-associated steatotic liver disease (masld)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "masld-fatty-liver-diagram",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (MASLD): Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

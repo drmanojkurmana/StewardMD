@@ -1,78 +1,173 @@
 {
-  "id": "neonatal_seizures",
-  "name": "Neonatal Seizures",
-  "aliases": [
-    "seizures in the newborn",
-    "neonatal convulsions",
-    "newborn fits"
+ "id": "neonatal_seizures",
+ "name": "Neonatal Seizures",
+ "aliases": [
+  "seizures in the newborn",
+  "neonatal convulsions",
+  "newborn fits"
+ ],
+ "class": "non_infective",
+ "system": "Neurological",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "Seizures in the newborn period are usually a symptom of an acute underlying brain insult rather than a chronic epilepsy, so the priority is to find and treat the cause.",
+   "Presentations are often subtle: repetitive eye deviation or blinking, lip-smacking or chewing, cycling or boxing limb movements, and apnoea, in addition to clonic or tonic activity.",
+   "Hypoxic-ischaemic encephalopathy is the most common cause; other important causes include stroke, intracranial haemorrhage, infection, metabolic disturbances, and inborn errors of metabolism.",
+   "Because clinical signs are unreliable and electroclinical dissociation is common, EEG or amplitude-integrated EEG monitoring is central to accurate diagnosis.",
+   "Immediate workup should exclude readily treatable causes such as hypoglycaemia and electrolyte abnormalities, correcting these before escalating anticonvulsant therapy.",
+   "Non-epileptic movements like jitteriness can mimic seizures but are stimulus-sensitive, suppressible by gentle restraint, and lack autonomic or ocular features.",
+   "Neuroimaging and, where appropriate, lumbar puncture and metabolic or genetic testing help establish aetiology and guide prognosis.",
+   "Pyridoxine-dependent and other vitamin-responsive epilepsies should be considered when seizures are refractory to standard agents."
   ],
-  "class": "non_infective",
-  "system": "Neurological",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "Seizures in the newborn period are usually a symptom of an acute underlying brain insult rather than a chronic epilepsy, so the priority is to find and treat the cause.",
-      "Presentations are often subtle: repetitive eye deviation or blinking, lip-smacking or chewing, cycling or boxing limb movements, and apnoea, in addition to clonic or tonic activity.",
-      "Hypoxic-ischaemic encephalopathy is the most common cause; other important causes include stroke, intracranial haemorrhage, infection, metabolic disturbances, and inborn errors of metabolism.",
-      "Because clinical signs are unreliable and electroclinical dissociation is common, EEG or amplitude-integrated EEG monitoring is central to accurate diagnosis.",
-      "Immediate workup should exclude readily treatable causes such as hypoglycaemia and electrolyte abnormalities, correcting these before escalating anticonvulsant therapy.",
-      "Non-epileptic movements like jitteriness can mimic seizures but are stimulus-sensitive, suppressible by gentle restraint, and lack autonomic or ocular features.",
-      "Neuroimaging and, where appropriate, lumbar puncture and metabolic or genetic testing help establish aetiology and guide prognosis.",
-      "Pyridoxine-dependent and other vitamin-responsive epilepsies should be considered when seizures are refractory to standard agents."
+  "pathophysiology": "The immature neonatal brain is intrinsically more excitable because excitatory glutamatergic circuits mature earlier than inhibitory GABAergic systems, and GABA can be depolarising early in development. An acute insult, most often hypoxia-ischaemia, disrupts energy metabolism and ion gradients, leading to neuronal depolarisation and synchronised, excessive electrical discharges. Metabolic derangements, structural lesions, infection, or genetic and metabolic disorders lower the seizure threshold further. Frequent dissociation between electrical seizures and visible clinical signs reflects this immaturity and underlies the need for electrographic monitoring.",
+  "additionalDifferentials": [
+   "Jitteriness or benign neonatal sleep myoclonus",
+   "Apnoea of other cause",
+   "Hypoglycaemia or electrolyte disturbance",
+   "Meningitis or encephalitis",
+   "Intracranial haemorrhage or perinatal stroke",
+   "Inborn errors of metabolism and vitamin-responsive epilepsies"
+  ],
+  "additionalInvestigations": [
+   "EEG or amplitude-integrated EEG monitoring",
+   "Blood glucose, electrolytes, calcium, and magnesium",
+   "Cranial imaging (ultrasound and MRI)",
+   "Lumbar puncture and sepsis evaluation when infection is possible",
+   "Metabolic and genetic testing in unexplained or refractory cases"
+  ],
+  "redFlags": [
+   "Status epilepticus or very frequent recurrent seizures",
+   "Seizures refractory to first-line therapy",
+   "Encephalopathy with depressed consciousness and abnormal tone",
+   "Signs of meningitis or sepsis",
+   "Focal neurological deficits suggesting stroke or a structural lesion"
+  ],
+  "prognosis": "Outcome depends largely on the underlying cause and the severity of any brain injury; seizures due to transient metabolic disturbances often resolve well, whereas those from severe hypoxic-ischaemic injury, major structural lesions, or certain genetic-metabolic disorders carry a higher risk of epilepsy and neurodevelopmental impairment.",
+  "pitfalls": [
+   "Relying on clinical observation alone and missing electrographic-only seizures",
+   "Mistaking jitteriness or benign myoclonus for seizures and over-treating",
+   "Escalating anticonvulsants before correcting hypoglycaemia or electrolyte abnormalities",
+   "Failing to consider vitamin-responsive epilepsies in seizures resistant to standard drugs"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and correct readily treatable causes first, giving dextrose for hypoglycaemia and correcting calcium, magnesium and electrolyte disturbances",
+   "Treat electrographic and clinical seizures with anticonvulsants, using phenobarbital first-line and adding phenytoin, levetiracetam or a benzodiazepine",
+   "Offer therapeutic hypothermia for hypoxic-ischaemic encephalopathy, the commonest cause",
+   "Cover suspected infection with antibiotics and aciclovir pending cerebrospinal fluid and culture results",
+   "Trial pyridoxine in refractory seizures to detect vitamin-responsive causes",
+   "Use EEG or amplitude-integrated EEG monitoring to guide diagnosis and treatment given frequent electroclinical dissociation",
+   "Investigate unexplained or refractory cases for inborn errors of metabolism and genetic causes, with neurology referral"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neonatal_seizures-pathway",
+   "title": "Neonatal Seizures: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Seizures in the newborn period are usually a symptom of an acute underlying brain insult rather than a chronic epilepsy, so the priority is to find and treat the cause.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Status epilepticus or very frequent recurrent seizures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: EEG or amplitude-integrated EEG monitoring, Blood glucose, electrolytes, calcium, and magnesium, Cranial imaging (ultrasound and MRI)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and correct readily treatable causes first, giving dextrose for hypoglycaemia and correcting calcium, magnesium and electrolyte disturbances"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on clinical observation alone and missing electrographic-only seizures"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal seizures."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal_seizures-matrix",
+   "title": "Neonatal Seizures: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Seizures in the newborn period are usually a symptom of an acute underlying brain insult rather than a chronic epilepsy, so the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The immature neonatal brain is intrinsically more excitable because excitatory glutamatergic circuits mature earlier than inhibitory GABAergic systems, and GABA can be depolarising early in development. An acute insult, most often hypoxia-ischaemia, disrupts energy metabolism and ion gradients, leading to neuronal depolarisation and synchronised, excessive electrical discharges. Metabolic derangements, structural lesions, infection, or genetic and metabolic disorders lower the seizure threshold further. Frequent dissociation between electrical seizures and visible clinical signs reflects this immaturity and underlies the need for electrographic monitoring.",
-    "additionalDifferentials": [
-      "Jitteriness or benign neonatal sleep myoclonus",
-      "Apnoea of other cause",
-      "Hypoglycaemia or electrolyte disturbance",
-      "Meningitis or encephalitis",
-      "Intracranial haemorrhage or perinatal stroke",
-      "Inborn errors of metabolism and vitamin-responsive epilepsies"
+    [
+     "Key Investigations",
+     "EEG or amplitude-integrated EEG monitoring, Blood glucose, electrolytes, calcium, and magnesium, Cranial imaging (ultrasound and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "EEG or amplitude-integrated EEG monitoring",
-      "Blood glucose, electrolytes, calcium, and magnesium",
-      "Cranial imaging (ultrasound and MRI)",
-      "Lumbar puncture and sepsis evaluation when infection is possible",
-      "Metabolic and genetic testing in unexplained or refractory cases"
+    [
+     "Primary Differentials",
+     "Jitteriness or benign neonatal sleep myoclonus, Apnoea of other cause, Hypoglycaemia or electrolyte disturbance",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Status epilepticus or very frequent recurrent seizures",
-      "Seizures refractory to first-line therapy",
-      "Encephalopathy with depressed consciousness and abnormal tone",
-      "Signs of meningitis or sepsis",
-      "Focal neurological deficits suggesting stroke or a structural lesion"
+    [
+     "Management Strategy",
+     "Identify and correct readily treatable causes first, giving dextrose for hypoglycaemia and correcting calcium, magnesium and",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends largely on the underlying cause and the severity of any brain injury; seizures due to transient metabolic disturbances often resolve well, whereas those from severe hypoxic-ischaemic injury, major structural lesions, or certain genetic-metabolic disorders carry a higher risk of epilepsy and neurodevelopmental impairment.",
-    "pitfalls": [
-      "Relying on clinical observation alone and missing electrographic-only seizures",
-      "Mistaking jitteriness or benign myoclonus for seizures and over-treating",
-      "Escalating anticonvulsants before correcting hypoglycaemia or electrolyte abnormalities",
-      "Failing to consider vitamin-responsive epilepsies in seizures resistant to standard drugs"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and correct readily treatable causes first, giving dextrose for hypoglycaemia and correcting calcium, magnesium and electrolyte disturbances",
-      "Treat electrographic and clinical seizures with anticonvulsants, using phenobarbital first-line and adding phenytoin, levetiracetam or a benzodiazepine",
-      "Offer therapeutic hypothermia for hypoxic-ischaemic encephalopathy, the commonest cause",
-      "Cover suspected infection with antibiotics and aciclovir pending cerebrospinal fluid and culture results",
-      "Trial pyridoxine in refractory seizures to detect vitamin-responsive causes",
-      "Use EEG or amplitude-integrated EEG monitoring to guide diagnosis and treatment given frequent electroclinical dissociation",
-      "Investigate unexplained or refractory cases for inborn errors of metabolism and genetic causes, with neurology referral"
+    [
+     "Clinical Pitfall",
+     "Relying on clinical observation alone and missing electrographic-only seizures",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal seizures."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-seizures-diagram",
+   "title": "Neonatal Seizures: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

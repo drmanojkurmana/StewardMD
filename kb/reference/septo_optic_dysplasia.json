@@ -1,80 +1,175 @@
 {
-  "id": "septo_optic_dysplasia",
-  "name": "Septo-optic dysplasia (de Morsier)",
-  "aliases": [
-    "de Morsier syndrome",
-    "SOD",
-    "septo-optic-pituitary dysplasia",
-    "HESX1"
+ "id": "septo_optic_dysplasia",
+ "name": "Septo-optic dysplasia (de Morsier)",
+ "aliases": [
+  "de Morsier syndrome",
+  "SOD",
+  "septo-optic-pituitary dysplasia",
+  "HESX1"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by a variable triad of optic nerve hypoplasia, midline brain abnormalities (absent septum pellucidum or corpus callosum) and hypothalamic-pituitary dysfunction",
+   "Diagnosis requires at least two of the three components, so presentations range from isolated visual impairment to complex endocrine and neurological disease",
+   "Optic nerve hypoplasia may be unilateral or bilateral and often causes nystagmus and reduced acuity",
+   "Endocrine dysfunction is common and may include growth hormone deficiency, hypothyroidism, adrenal insufficiency and diabetes insipidus",
+   "Rare familial cases are linked to developmental transcription factor genes such as HESX1, but most are sporadic",
+   "Neonatal hypoglycaemia, prolonged jaundice and micropenis can be early clues to pituitary failure",
+   "Coordinated ophthalmology, endocrinology and neurology care is essential"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by a variable triad of optic nerve hypoplasia, midline brain abnormalities (absent septum pellucidum or corpus callosum) and hypothalamic-pituitary dysfunction",
-      "Diagnosis requires at least two of the three components, so presentations range from isolated visual impairment to complex endocrine and neurological disease",
-      "Optic nerve hypoplasia may be unilateral or bilateral and often causes nystagmus and reduced acuity",
-      "Endocrine dysfunction is common and may include growth hormone deficiency, hypothyroidism, adrenal insufficiency and diabetes insipidus",
-      "Rare familial cases are linked to developmental transcription factor genes such as HESX1, but most are sporadic",
-      "Neonatal hypoglycaemia, prolonged jaundice and micropenis can be early clues to pituitary failure",
-      "Coordinated ophthalmology, endocrinology and neurology care is essential"
+  "pathophysiology": "Septo-optic dysplasia is a disorder of early forebrain and midline development in which the optic nerves, septum pellucidum, corpus callosum and hypothalamic-pituitary axis form abnormally. Disruption of the developmental programme, occasionally attributable to mutations in transcription factors such as HESX1 but usually of unknown cause, leads to a spectrum of malformations. Hypoplasia of the optic nerves reduces the ganglion cell axon population, midline defects reflect failed commissural and septal development, and hypothalamic-pituitary maldevelopment produces variable anterior and posterior pituitary hormone deficiencies. The heterogeneous phenotype mirrors which structures are most affected.",
+  "additionalDifferentials": [
+   "Isolated optic nerve hypoplasia",
+   "Holoprosencephaly spectrum disorders",
+   "Isolated congenital hypopituitarism",
+   "Other midline brain malformations",
+   "Congenital nystagmus of other cause",
+   "Leber congenital amaurosis"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain and pituitary region assessing midline structures",
+   "Comprehensive pituitary hormone evaluation and dynamic endocrine testing",
+   "OCT and visual evoked potentials for optic nerve assessment",
+   "Cycloplegic refraction and orthoptic evaluation",
+   "Developmental and neurological assessment",
+   "Genetic testing where a familial or syndromic pattern is suspected"
+  ],
+  "redFlags": [
+   "Neonatal hypoglycaemia or adrenal crisis from cortisol deficiency",
+   "Diabetes insipidus with hypernatraemia and dehydration",
+   "Growth failure and hypothyroidism impairing development",
+   "Seizures or developmental regression suggesting extensive brain involvement",
+   "Temperature dysregulation from hypothalamic dysfunction"
+  ],
+  "prognosis": "Outcome depends on the balance of the three components; visual impairment is usually stable, but timely diagnosis and lifelong hormone replacement are critical to prevent morbidity and mortality from endocrine failure.",
+  "pitfalls": [
+   "Treating optic nerve hypoplasia in isolation and missing life-threatening endocrine deficiency",
+   "Assuming a normal septum pellucidum excludes the diagnosis",
+   "Delaying hormone replacement in a decompensating infant",
+   "Underestimating the neurodevelopmental and hypothalamic components"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide lifelong pituitary hormone replacement tailored to identified deficiencies, including hydrocortisone, levothyroxine, growth hormone, desmopressin for diabetes insipidus, and sex steroids at puberty",
+   "Recognise and urgently treat neonatal hypoglycaemia and adrenal crisis as presenting emergencies",
+   "Offer low-vision support, refractive correction, and orthoptic management of nystagmus for optic nerve hypoplasia",
+   "Provide developmental and neurological therapies for associated impairment",
+   "Undertake regular endocrine surveillance and monitoring of growth and puberty",
+   "Coordinate multidisciplinary care across paediatric endocrinology, ophthalmology, and neurology",
+   "Give stress-dose corticosteroid cover during intercurrent illness and offer genetic counselling where a familial or HESX1-associated pattern is identified"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "septo_optic_dysplasia-pathway",
+   "title": "Septo-optic dysplasia (de Morsier): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by a variable triad of optic nerve hypoplasia, midline brain abnormalities (absent septum pellucidum or corpus callosum) and hypothalamic-pituitary dysfunction",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal hypoglycaemia or adrenal crisis from cortisol deficiency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain and pituitary region assessing midline structures, Comprehensive pituitary hormone evaluation and dynamic endocrine testing, OCT and visual evoked potentials for optic nerve assessment"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide lifelong pituitary hormone replacement tailored to identified deficiencies, including hydrocortisone, levothyroxine, growth hormone, desmopressin for diabetes insipidus, and sex steroids at puberty"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating optic nerve hypoplasia in isolation and missing life-threatening endocrine deficiency"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of septo-optic dysplasia (de morsier)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "septo_optic_dysplasia-matrix",
+   "title": "Septo-optic dysplasia (de Morsier): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by a variable triad of optic nerve hypoplasia, midline brain abnormalities (absent septum pellucidum or corpus callosum)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Septo-optic dysplasia is a disorder of early forebrain and midline development in which the optic nerves, septum pellucidum, corpus callosum and hypothalamic-pituitary axis form abnormally. Disruption of the developmental programme, occasionally attributable to mutations in transcription factors such as HESX1 but usually of unknown cause, leads to a spectrum of malformations. Hypoplasia of the optic nerves reduces the ganglion cell axon population, midline defects reflect failed commissural and septal development, and hypothalamic-pituitary maldevelopment produces variable anterior and posterior pituitary hormone deficiencies. The heterogeneous phenotype mirrors which structures are most affected.",
-    "additionalDifferentials": [
-      "Isolated optic nerve hypoplasia",
-      "Holoprosencephaly spectrum disorders",
-      "Isolated congenital hypopituitarism",
-      "Other midline brain malformations",
-      "Congenital nystagmus of other cause",
-      "Leber congenital amaurosis"
+    [
+     "Key Investigations",
+     "MRI of the brain and pituitary region assessing midline structures, Comprehensive pituitary hormone evaluation and dynamic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain and pituitary region assessing midline structures",
-      "Comprehensive pituitary hormone evaluation and dynamic endocrine testing",
-      "OCT and visual evoked potentials for optic nerve assessment",
-      "Cycloplegic refraction and orthoptic evaluation",
-      "Developmental and neurological assessment",
-      "Genetic testing where a familial or syndromic pattern is suspected"
+    [
+     "Primary Differentials",
+     "Isolated optic nerve hypoplasia, Holoprosencephaly spectrum disorders, Isolated congenital hypopituitarism",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal hypoglycaemia or adrenal crisis from cortisol deficiency",
-      "Diabetes insipidus with hypernatraemia and dehydration",
-      "Growth failure and hypothyroidism impairing development",
-      "Seizures or developmental regression suggesting extensive brain involvement",
-      "Temperature dysregulation from hypothalamic dysfunction"
+    [
+     "Management Strategy",
+     "Provide lifelong pituitary hormone replacement tailored to identified deficiencies, including hydrocortisone, levothyroxine,",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the balance of the three components; visual impairment is usually stable, but timely diagnosis and lifelong hormone replacement are critical to prevent morbidity and mortality from endocrine failure.",
-    "pitfalls": [
-      "Treating optic nerve hypoplasia in isolation and missing life-threatening endocrine deficiency",
-      "Assuming a normal septum pellucidum excludes the diagnosis",
-      "Delaying hormone replacement in a decompensating infant",
-      "Underestimating the neurodevelopmental and hypothalamic components"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide lifelong pituitary hormone replacement tailored to identified deficiencies, including hydrocortisone, levothyroxine, growth hormone, desmopressin for diabetes insipidus, and sex steroids at puberty",
-      "Recognise and urgently treat neonatal hypoglycaemia and adrenal crisis as presenting emergencies",
-      "Offer low-vision support, refractive correction, and orthoptic management of nystagmus for optic nerve hypoplasia",
-      "Provide developmental and neurological therapies for associated impairment",
-      "Undertake regular endocrine surveillance and monitoring of growth and puberty",
-      "Coordinate multidisciplinary care across paediatric endocrinology, ophthalmology, and neurology",
-      "Give stress-dose corticosteroid cover during intercurrent illness and offer genetic counselling where a familial or HESX1-associated pattern is identified"
+    [
+     "Clinical Pitfall",
+     "Treating optic nerve hypoplasia in isolation and missing life-threatening endocrine deficiency",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for septo-optic dysplasia (de morsier)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "septo-optic-dysplasia-diagram",
+   "title": "Septo-optic dysplasia (de Morsier): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

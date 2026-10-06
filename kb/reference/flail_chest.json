@@ -1,76 +1,171 @@
 {
-  "id": "flail_chest",
-  "name": "Flail chest",
-  "aliases": [
-    "flail segment"
+ "id": "flail_chest",
+ "name": "Flail chest",
+ "aliases": [
+  "flail segment"
+ ],
+ "class": "non_infective",
+ "system": "Emergency / Trauma / Critical care",
+ "specialty": "Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
+   "The hallmark is paradoxical movement, where the flail segment moves inward on inspiration and outward on expiration, opposite to the rest of the chest",
+   "The main threat to oxygenation is the underlying lung contusion rather than the chest wall movement itself",
+   "It is identified during the breathing step of the primary survey and demands close monitoring for respiratory deterioration",
+   "Adequate analgesia is central to management, allowing the patient to breathe deeply, cough, and clear secretions",
+   "Deterioration in gas exchange may require escalating respiratory support, including positive-pressure ventilation",
+   "Watch for associated injuries such as pneumothorax, haemothorax, and injury to underlying structures"
   ],
-  "class": "non_infective",
-  "system": "Emergency / Trauma / Critical care",
-  "specialty": "Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
-      "The hallmark is paradoxical movement, where the flail segment moves inward on inspiration and outward on expiration, opposite to the rest of the chest",
-      "The main threat to oxygenation is the underlying lung contusion rather than the chest wall movement itself",
-      "It is identified during the breathing step of the primary survey and demands close monitoring for respiratory deterioration",
-      "Adequate analgesia is central to management, allowing the patient to breathe deeply, cough, and clear secretions",
-      "Deterioration in gas exchange may require escalating respiratory support, including positive-pressure ventilation",
-      "Watch for associated injuries such as pneumothorax, haemothorax, and injury to underlying structures"
+  "pathophysiology": "When several adjacent ribs are each fractured in two or more places, an isolated segment of chest wall loses its bony connection to the rest of the thoracic cage. This segment then moves according to intrapleural pressure rather than muscular effort, producing paradoxical motion that reduces the efficiency of ventilation. More importantly, the force required to cause the injury bruises the lung beneath, and this pulmonary contusion impairs gas exchange, worsening over the first day or two. Pain from the fractures limits chest expansion and coughing, promoting atelectasis and retained secretions, all of which combine to cause hypoxaemia and, in severe cases, respiratory failure.",
+  "additionalDifferentials": [
+   "Multiple rib fractures without a true flail segment",
+   "Isolated pulmonary contusion",
+   "Pneumothorax or haemothorax",
+   "Sternal fracture with associated cardiac contusion",
+   "Diaphragmatic injury"
+  ],
+  "additionalInvestigations": [
+   "Chest radiograph and CT to define rib fractures and pulmonary contusion",
+   "Arterial blood gas to monitor oxygenation and ventilation",
+   "Continuous pulse oximetry and respiratory monitoring",
+   "Assessment for associated pneumothorax or haemothorax",
+   "Serial evaluation as pulmonary contusion typically worsens over the first days"
+  ],
+  "redFlags": [
+   "Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
+   "Increasing respiratory distress and fatigue signalling impending failure",
+   "Associated tension pneumothorax or large haemothorax",
+   "Inadequately controlled pain preventing effective breathing and coughing",
+   "Signs of underlying great-vessel or cardiac injury"
+  ],
+  "prognosis": "Outcome is largely determined by the severity of the underlying lung contusion and associated injuries. With good analgesia, chest physiotherapy, and respiratory support many patients recover, but extensive contusion and respiratory failure increase morbidity and mortality.",
+  "pitfalls": [
+   "Focusing on the chest wall movement while underestimating the underlying lung contusion",
+   "Providing inadequate analgesia, leading to poor ventilation and secretion retention",
+   "Missing an associated pneumothorax or haemothorax",
+   "Assuming a stable early gas exchange will remain stable as contusion evolves",
+   "Excessive fluid administration worsening the pulmonary contusion"
+  ],
+  "references": [
+   "ATLS (Advanced Trauma Life Support)",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance",
+   "Supplemental oxygen and escalating respiratory support, from non-invasive ventilation to intubation and positive-pressure ventilation for respiratory failure",
+   "Chest physiotherapy and pulmonary hygiene to prevent atelectasis and retained secretions",
+   "Surgical rib fixation of the flail segment in selected patients with severe deformity or ventilator dependence",
+   "Drainage of associated pneumothorax or haemothorax with an intercostal chest drain",
+   "Serial monitoring of gas exchange and clinical status, anticipating that the underlying pulmonary contusion worsens over the first days",
+   "Trauma and critical-care involvement with close observation for respiratory deterioration"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "flail_chest-pathway",
+   "title": "Flail chest: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in two or more places",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chest radiograph and CT to define rib fractures and pulmonary contusion, Arterial blood gas to monitor oxygenation and ventilation, Continuous pulse oximetry and respiratory monitoring"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Focusing on the chest wall movement while underestimating the underlying lung contusion"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of flail chest."
+  }
+ ],
+ "tables": [
+  {
+   "id": "flail_chest-matrix",
+   "title": "Flail chest: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Flail chest is defined by a segment of chest wall that has lost bony continuity, typically from multiple ribs each fractured in",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "When several adjacent ribs are each fractured in two or more places, an isolated segment of chest wall loses its bony connection to the rest of the thoracic cage. This segment then moves according to intrapleural pressure rather than muscular effort, producing paradoxical motion that reduces the efficiency of ventilation. More importantly, the force required to cause the injury bruises the lung beneath, and this pulmonary contusion impairs gas exchange, worsening over the first day or two. Pain from the fractures limits chest expansion and coughing, promoting atelectasis and retained secretions, all of which combine to cause hypoxaemia and, in severe cases, respiratory failure.",
-    "additionalDifferentials": [
-      "Multiple rib fractures without a true flail segment",
-      "Isolated pulmonary contusion",
-      "Pneumothorax or haemothorax",
-      "Sternal fracture with associated cardiac contusion",
-      "Diaphragmatic injury"
+    [
+     "Key Investigations",
+     "Chest radiograph and CT to define rib fractures and pulmonary contusion, Arterial blood gas to monitor oxygenation and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chest radiograph and CT to define rib fractures and pulmonary contusion",
-      "Arterial blood gas to monitor oxygenation and ventilation",
-      "Continuous pulse oximetry and respiratory monitoring",
-      "Assessment for associated pneumothorax or haemothorax",
-      "Serial evaluation as pulmonary contusion typically worsens over the first days"
+    [
+     "Primary Differentials",
+     "Multiple rib fractures without a true flail segment, Isolated pulmonary contusion, Pneumothorax or haemothorax",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive hypoxaemia from evolving pulmonary contusion requiring escalation of respiratory support",
-      "Increasing respiratory distress and fatigue signalling impending failure",
-      "Associated tension pneumothorax or large haemothorax",
-      "Inadequately controlled pain preventing effective breathing and coughing",
-      "Signs of underlying great-vessel or cardiac injury"
+    [
+     "Management Strategy",
+     "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is largely determined by the severity of the underlying lung contusion and associated injuries. With good analgesia, chest physiotherapy, and respiratory support many patients recover, but extensive contusion and respiratory failure increase morbidity and mortality.",
-    "pitfalls": [
-      "Focusing on the chest wall movement while underestimating the underlying lung contusion",
-      "Providing inadequate analgesia, leading to poor ventilation and secretion retention",
-      "Missing an associated pneumothorax or haemothorax",
-      "Assuming a stable early gas exchange will remain stable as contusion evolves",
-      "Excessive fluid administration worsening the pulmonary contusion"
-    ],
-    "references": [
-      "ATLS (Advanced Trauma Life Support)",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Aggressive multimodal analgesia, including regional techniques such as thoracic epidural or paravertebral blockade, to enable deep breathing, coughing and secretion clearance",
-      "Supplemental oxygen and escalating respiratory support, from non-invasive ventilation to intubation and positive-pressure ventilation for respiratory failure",
-      "Chest physiotherapy and pulmonary hygiene to prevent atelectasis and retained secretions",
-      "Surgical rib fixation of the flail segment in selected patients with severe deformity or ventilator dependence",
-      "Drainage of associated pneumothorax or haemothorax with an intercostal chest drain",
-      "Serial monitoring of gas exchange and clinical status, anticipating that the underlying pulmonary contusion worsens over the first days",
-      "Trauma and critical-care involvement with close observation for respiratory deterioration"
+    [
+     "Clinical Pitfall",
+     "Focusing on the chest wall movement while underestimating the underlying lung contusion",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for flail chest."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "flail-chest-diagram",
+   "title": "Flail chest: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

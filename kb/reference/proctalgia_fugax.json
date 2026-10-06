@@ -1,77 +1,172 @@
 {
-  "id": "proctalgia_fugax",
-  "name": "Proctalgia fugax",
-  "aliases": [
-    "fleeting proctalgia",
-    "transient anorectal pain",
-    "anal spasm"
+ "id": "proctalgia_fugax",
+ "name": "Proctalgia fugax",
+ "aliases": [
+  "fleeting proctalgia",
+  "transient anorectal pain",
+  "anal spasm"
+ ],
+ "class": "non_infective",
+ "system": "Colorectal / Pelvic floor",
+ "specialty": "Colorectal Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ASCRS Textbook of Colon and Rectal Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by sudden, severe, cramping or stabbing pain in the anus or lower rectum lasting seconds to a few minutes, then resolving completely",
+   "Attacks are infrequent and often nocturnal, waking the patient from sleep, with no symptoms between episodes",
+   "Examination between attacks is normal, and it is a clinical diagnosis of exclusion",
+   "Distinguished from levator ani syndrome by the brevity of the episodes, seconds to minutes rather than twenty minutes or more",
+   "Thought to relate to transient spasm of the anal sphincter or pelvic floor smooth muscle",
+   "Because attacks are brief and self-limiting, treatment is largely reassurance; frequent severe episodes may respond to smooth-muscle relaxants, warm baths, or topical agents",
+   "A familial form associated with hereditary internal anal sphincter myopathy is recognised"
   ],
-  "class": "non_infective",
-  "system": "Colorectal / Pelvic floor",
-  "specialty": "Colorectal Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ASCRS Textbook of Colon and Rectal Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by sudden, severe, cramping or stabbing pain in the anus or lower rectum lasting seconds to a few minutes, then resolving completely",
-      "Attacks are infrequent and often nocturnal, waking the patient from sleep, with no symptoms between episodes",
-      "Examination between attacks is normal, and it is a clinical diagnosis of exclusion",
-      "Distinguished from levator ani syndrome by the brevity of the episodes, seconds to minutes rather than twenty minutes or more",
-      "Thought to relate to transient spasm of the anal sphincter or pelvic floor smooth muscle",
-      "Because attacks are brief and self-limiting, treatment is largely reassurance; frequent severe episodes may respond to smooth-muscle relaxants, warm baths, or topical agents",
-      "A familial form associated with hereditary internal anal sphincter myopathy is recognised"
+  "pathophysiology": "Proctalgia fugax is a functional anorectal pain disorder attributed to paroxysmal spasm of the smooth muscle of the anal canal or pelvic floor, sometimes involving the internal anal sphincter. Attacks are brief and self-limiting with no structural correlate. Triggers include stress, sexual activity, and defecation, and a rare hereditary internal anal sphincter myopathy underlies some familial cases. Between episodes there is no demonstrable abnormality.",
+  "additionalDifferentials": [
+   "Levator ani syndrome",
+   "Anal fissure",
+   "Thrombosed haemorrhoid",
+   "Coccygodynia",
+   "Pudendal neuralgia",
+   "Anorectal abscess"
+  ],
+  "additionalInvestigations": [
+   "History to confirm brief, self-limiting attacks with symptom-free intervals",
+   "Digital rectal examination and proctoscopy between attacks to exclude local pathology",
+   "Anorectal manometry in atypical or frequent cases",
+   "Endoanal ultrasound if hereditary internal sphincter myopathy is suspected (thickened internal sphincter)",
+   "Sigmoidoscopy or colonoscopy where alarm features warrant exclusion of other disease",
+   "Pelvic imaging where a structural or neurological cause is suspected"
+  ],
+  "redFlags": [
+   "Rectal bleeding, weight loss, or a mass suggesting organic disease",
+   "Persistent rather than fleeting pain, pointing to another diagnosis",
+   "Progressive or nocturnal pain with neurological features",
+   "Onset in later life without any prior episodes"
+  ],
+  "prognosis": "A benign condition; although attacks can be intensely painful, they are brief, self-limiting, and cause no lasting harm, with many patients experiencing only occasional episodes.",
+  "pitfalls": [
+   "Confusing the brief attacks with the sustained ache of levator ani syndrome",
+   "Over-investigating a classic, benign presentation",
+   "Missing an anal fissure or thrombosed haemorrhoid as the true cause",
+   "Overlooking the rare hereditary internal anal sphincter myopathy in familial cases"
+  ],
+  "references": [
+   "ASCRS Textbook of Colon and Rectal Surgery",
+   "Rome IV Functional Gastrointestinal Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and explanation of the benign, self-limiting nature is the mainstay, as attacks are usually too brief for acute abortive drug treatment",
+   "For frequent or severe episodes, smooth-muscle relaxants such as topical glyceryl trinitrate or a topical calcium-channel blocker, or inhaled salbutamol, to shorten attacks",
+   "Warm baths and local warmth or digital perineal pressure for symptomatic relief during attacks",
+   "Address contributory triggers including stress and constipation, with stool softening and management of anxiety",
+   "For refractory frequent attacks, consider botulinum toxin injection to the anal sphincter or oral smooth-muscle relaxants under colorectal specialist review",
+   "Confirm normal anorectal examination and exclude structural pathology before reassurance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "proctalgia_fugax-pathway",
+   "title": "Proctalgia fugax: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by sudden, severe, cramping or stabbing pain in the anus or lower rectum lasting seconds to a few minutes, then resolving completely",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or a mass suggesting organic disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: History to confirm brief, self-limiting attacks with symptom-free intervals, Digital rectal examination and proctoscopy between attacks to exclude local pathology, Anorectal manometry in atypical or frequent cases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and explanation of the benign, self-limiting nature is the mainstay, as attacks are usually too brief for acute abortive drug treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the brief attacks with the sustained ache of levator ani syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of proctalgia fugax."
+  }
+ ],
+ "tables": [
+  {
+   "id": "proctalgia_fugax-matrix",
+   "title": "Proctalgia fugax: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by sudden, severe, cramping or stabbing pain in the anus or lower rectum lasting seconds to a few minutes, then",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Proctalgia fugax is a functional anorectal pain disorder attributed to paroxysmal spasm of the smooth muscle of the anal canal or pelvic floor, sometimes involving the internal anal sphincter. Attacks are brief and self-limiting with no structural correlate. Triggers include stress, sexual activity, and defecation, and a rare hereditary internal anal sphincter myopathy underlies some familial cases. Between episodes there is no demonstrable abnormality.",
-    "additionalDifferentials": [
-      "Levator ani syndrome",
-      "Anal fissure",
-      "Thrombosed haemorrhoid",
-      "Coccygodynia",
-      "Pudendal neuralgia",
-      "Anorectal abscess"
+    [
+     "Key Investigations",
+     "History to confirm brief, self-limiting attacks with symptom-free intervals, Digital rectal examination and proctoscopy between",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "History to confirm brief, self-limiting attacks with symptom-free intervals",
-      "Digital rectal examination and proctoscopy between attacks to exclude local pathology",
-      "Anorectal manometry in atypical or frequent cases",
-      "Endoanal ultrasound if hereditary internal sphincter myopathy is suspected (thickened internal sphincter)",
-      "Sigmoidoscopy or colonoscopy where alarm features warrant exclusion of other disease",
-      "Pelvic imaging where a structural or neurological cause is suspected"
+    [
+     "Primary Differentials",
+     "Levator ani syndrome, Anal fissure, Thrombosed haemorrhoid",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rectal bleeding, weight loss, or a mass suggesting organic disease",
-      "Persistent rather than fleeting pain, pointing to another diagnosis",
-      "Progressive or nocturnal pain with neurological features",
-      "Onset in later life without any prior episodes"
+    [
+     "Management Strategy",
+     "Reassurance and explanation of the benign, self-limiting nature is the mainstay, as attacks are usually too brief for acute",
+     "Core treatment modality"
     ],
-    "prognosis": "A benign condition; although attacks can be intensely painful, they are brief, self-limiting, and cause no lasting harm, with many patients experiencing only occasional episodes.",
-    "pitfalls": [
-      "Confusing the brief attacks with the sustained ache of levator ani syndrome",
-      "Over-investigating a classic, benign presentation",
-      "Missing an anal fissure or thrombosed haemorrhoid as the true cause",
-      "Overlooking the rare hereditary internal anal sphincter myopathy in familial cases"
-    ],
-    "references": [
-      "ASCRS Textbook of Colon and Rectal Surgery",
-      "Rome IV Functional Gastrointestinal Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and explanation of the benign, self-limiting nature is the mainstay, as attacks are usually too brief for acute abortive drug treatment",
-      "For frequent or severe episodes, smooth-muscle relaxants such as topical glyceryl trinitrate or a topical calcium-channel blocker, or inhaled salbutamol, to shorten attacks",
-      "Warm baths and local warmth or digital perineal pressure for symptomatic relief during attacks",
-      "Address contributory triggers including stress and constipation, with stool softening and management of anxiety",
-      "For refractory frequent attacks, consider botulinum toxin injection to the anal sphincter or oral smooth-muscle relaxants under colorectal specialist review",
-      "Confirm normal anorectal examination and exclude structural pathology before reassurance"
+    [
+     "Clinical Pitfall",
+     "Confusing the brief attacks with the sustained ache of levator ani syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for proctalgia fugax."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "proctalgia-fugax-diagram",
+   "title": "Proctalgia fugax: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

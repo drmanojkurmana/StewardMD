@@ -1,76 +1,171 @@
 {
-  "id": "sacrococcygeal_teratoma",
-  "name": "Sacrococcygeal teratoma",
-  "aliases": [
-    "SCT",
-    "presacral teratoma"
+ "id": "sacrococcygeal_teratoma",
+ "name": "Sacrococcygeal teratoma",
+ "aliases": [
+  "SCT",
+  "presacral teratoma"
+ ],
+ "class": "non_infective",
+ "system": "Paediatric surgery / Thoracic",
+ "specialty": "Paediatric Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common congenital tumour of the newborn, arising at the base of the coccyx and typically presenting as a large sacral mass, more often in females",
+   "The Altman classification describes the balance of external versus internal (presacral/pelvic) tumour, which affects detectability and surgical difficulty",
+   "Predominantly external tumours are usually recognised at birth, whereas mainly internal lesions may present later with pelvic mass effect, constipation, or urinary symptoms",
+   "Most tumours found in the neonatal period are benign (mature or immature teratoma), but the risk of malignancy rises the later the lesion presents",
+   "Serum alpha-fetoprotein is a useful marker; persistently elevated or rising levels after resection raise concern for malignant (yolk sac) elements or recurrence",
+   "Large vascular tumours detected antenatally can cause high-output cardiac failure and fetal hydrops due to arteriovenous shunting",
+   "Definitive treatment is complete surgical excision including the coccyx, since leaving the coccyx behind markedly increases recurrence",
+   "Long-term follow-up with clinical review and tumour markers is required to detect recurrence and to monitor bowel and bladder function"
   ],
-  "class": "non_infective",
-  "system": "Paediatric surgery / Thoracic",
-  "specialty": "Paediatric Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common congenital tumour of the newborn, arising at the base of the coccyx and typically presenting as a large sacral mass, more often in females",
-      "The Altman classification describes the balance of external versus internal (presacral/pelvic) tumour, which affects detectability and surgical difficulty",
-      "Predominantly external tumours are usually recognised at birth, whereas mainly internal lesions may present later with pelvic mass effect, constipation, or urinary symptoms",
-      "Most tumours found in the neonatal period are benign (mature or immature teratoma), but the risk of malignancy rises the later the lesion presents",
-      "Serum alpha-fetoprotein is a useful marker; persistently elevated or rising levels after resection raise concern for malignant (yolk sac) elements or recurrence",
-      "Large vascular tumours detected antenatally can cause high-output cardiac failure and fetal hydrops due to arteriovenous shunting",
-      "Definitive treatment is complete surgical excision including the coccyx, since leaving the coccyx behind markedly increases recurrence",
-      "Long-term follow-up with clinical review and tumour markers is required to detect recurrence and to monitor bowel and bladder function"
+  "pathophysiology": "Sacrococcygeal teratoma is a germ cell tumour thought to arise from pluripotent cells near the primitive streak (Hensen's node) at the caudal end of the embryo. It therefore contains tissues derived from multiple germ layers and grows at the coccygeal region, extending externally, into the pelvis, or both. Large, highly vascular tumours can act as arteriovenous shunts, causing high-output heart failure and hydrops in the fetus. Malignant transformation, usually to yolk sac tumour, becomes more likely with delayed diagnosis and with predominantly internal, poorly detected lesions.",
+  "additionalDifferentials": [
+   "Myelomeningocele or other neural tube defect",
+   "Anterior meningocele",
+   "Lipoma or lipomeningocele",
+   "Rectal duplication cyst",
+   "Neuroblastoma or other pelvic tumour"
+  ],
+  "additionalInvestigations": [
+   "Antenatal and postnatal ultrasound to assess size, vascularity, and internal extent",
+   "MRI of the pelvis and spine to define intrapelvic extension and exclude a spinal component",
+   "Serum alpha-fetoprotein at baseline and during follow-up",
+   "Fetal echocardiography and monitoring for hydrops in large vascular antenatal lesions",
+   "Histological examination of the resected specimen to grade maturity and detect malignant elements"
+  ],
+  "redFlags": [
+   "Antenatal high-output cardiac failure or hydrops from a large vascular tumour, which is life-threatening",
+   "Rapid tumour growth or haemorrhage requiring urgent surgical planning",
+   "Rising alpha-fetoprotein after resection suggesting malignant recurrence",
+   "Delayed presentation of an internal tumour, which carries higher malignancy risk"
+  ],
+  "prognosis": "Benign lesions completely excised in the neonatal period with removal of the coccyx have an excellent prognosis. Prognosis worsens with malignant histology, incomplete excision, delayed diagnosis, and antenatal complications such as hydrops. Even after benign resection, some children have long-term bowel or bladder dysfunction.",
+  "pitfalls": [
+   "Failing to remove the coccyx, which greatly increases recurrence risk",
+   "Missing a predominantly internal (presacral) tumour on external examination alone",
+   "Neglecting postoperative alpha-fetoprotein surveillance for recurrence",
+   "Overlooking associated anorectal or spinal anomalies and later functional problems"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e",
+   "Bailey & Love's Short Practice of Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Complete surgical excision of the tumour with en bloc removal of the coccyx as the definitive treatment, reducing recurrence risk",
+   "Platinum-based chemotherapy (such as cisplatin, etoposide and bleomycin) for malignant yolk sac elements or unresectable and metastatic disease",
+   "Antenatal foetal surveillance with serial ultrasound and foetal echocardiography, considering early delivery or foetal intervention for large vascular lesions causing high-output failure or hydrops",
+   "Serial serum alpha-fetoprotein monitoring after resection to detect malignant transformation or recurrence",
+   "Histological grading of the resected specimen to assess maturity and identify malignant components guiding adjuvant therapy",
+   "Long-term surveillance for functional sequelae such as bowel and bladder dysfunction after pelvic resection",
+   "Coordinated care through a paediatric surgical, oncology and neonatology multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sacrococcygeal_teratoma-pathway",
+   "title": "Sacrococcygeal teratoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common congenital tumour of the newborn, arising at the base of the coccyx and typically presenting as a large sacral mass, more often in females",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Antenatal high-output cardiac failure or hydrops from a large vascular tumour, which is life-threatening",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antenatal and postnatal ultrasound to assess size, vascularity, and internal extent, MRI of the pelvis and spine to define intrapelvic extension and exclude a spinal component, Serum alpha-fetoprotein at baseline and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Complete surgical excision of the tumour with en bloc removal of the coccyx as the definitive treatment, reducing recurrence risk"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to remove the coccyx, which greatly increases recurrence risk"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sacrococcygeal teratoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sacrococcygeal_teratoma-matrix",
+   "title": "Sacrococcygeal teratoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common congenital tumour of the newborn, arising at the base of the coccyx and typically presenting as a large sacral",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sacrococcygeal teratoma is a germ cell tumour thought to arise from pluripotent cells near the primitive streak (Hensen's node) at the caudal end of the embryo. It therefore contains tissues derived from multiple germ layers and grows at the coccygeal region, extending externally, into the pelvis, or both. Large, highly vascular tumours can act as arteriovenous shunts, causing high-output heart failure and hydrops in the fetus. Malignant transformation, usually to yolk sac tumour, becomes more likely with delayed diagnosis and with predominantly internal, poorly detected lesions.",
-    "additionalDifferentials": [
-      "Myelomeningocele or other neural tube defect",
-      "Anterior meningocele",
-      "Lipoma or lipomeningocele",
-      "Rectal duplication cyst",
-      "Neuroblastoma or other pelvic tumour"
+    [
+     "Key Investigations",
+     "Antenatal and postnatal ultrasound to assess size, vascularity, and internal extent, MRI of the pelvis and spine to define",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antenatal and postnatal ultrasound to assess size, vascularity, and internal extent",
-      "MRI of the pelvis and spine to define intrapelvic extension and exclude a spinal component",
-      "Serum alpha-fetoprotein at baseline and during follow-up",
-      "Fetal echocardiography and monitoring for hydrops in large vascular antenatal lesions",
-      "Histological examination of the resected specimen to grade maturity and detect malignant elements"
+    [
+     "Primary Differentials",
+     "Myelomeningocele or other neural tube defect, Anterior meningocele, Lipoma or lipomeningocele",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Antenatal high-output cardiac failure or hydrops from a large vascular tumour, which is life-threatening",
-      "Rapid tumour growth or haemorrhage requiring urgent surgical planning",
-      "Rising alpha-fetoprotein after resection suggesting malignant recurrence",
-      "Delayed presentation of an internal tumour, which carries higher malignancy risk"
+    [
+     "Management Strategy",
+     "Complete surgical excision of the tumour with en bloc removal of the coccyx as the definitive treatment, reducing recurrence risk",
+     "Core treatment modality"
     ],
-    "prognosis": "Benign lesions completely excised in the neonatal period with removal of the coccyx have an excellent prognosis. Prognosis worsens with malignant histology, incomplete excision, delayed diagnosis, and antenatal complications such as hydrops. Even after benign resection, some children have long-term bowel or bladder dysfunction.",
-    "pitfalls": [
-      "Failing to remove the coccyx, which greatly increases recurrence risk",
-      "Missing a predominantly internal (presacral) tumour on external examination alone",
-      "Neglecting postoperative alpha-fetoprotein surveillance for recurrence",
-      "Overlooking associated anorectal or spinal anomalies and later functional problems"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e",
-      "Bailey & Love's Short Practice of Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Complete surgical excision of the tumour with en bloc removal of the coccyx as the definitive treatment, reducing recurrence risk",
-      "Platinum-based chemotherapy (such as cisplatin, etoposide and bleomycin) for malignant yolk sac elements or unresectable and metastatic disease",
-      "Antenatal foetal surveillance with serial ultrasound and foetal echocardiography, considering early delivery or foetal intervention for large vascular lesions causing high-output failure or hydrops",
-      "Serial serum alpha-fetoprotein monitoring after resection to detect malignant transformation or recurrence",
-      "Histological grading of the resected specimen to assess maturity and identify malignant components guiding adjuvant therapy",
-      "Long-term surveillance for functional sequelae such as bowel and bladder dysfunction after pelvic resection",
-      "Coordinated care through a paediatric surgical, oncology and neonatology multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Failing to remove the coccyx, which greatly increases recurrence risk",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sacrococcygeal teratoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sacrococcygeal-teratoma-diagram",
+   "title": "Sacrococcygeal teratoma: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

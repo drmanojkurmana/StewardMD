@@ -1,81 +1,176 @@
 {
-  "id": "congenital_dyserythropoietic_anemia_type2",
-  "name": "Congenital dyserythropoietic anaemia type II (SEC23B)",
-  "aliases": [
-    "CDA II",
-    "SEC23B",
-    "HEMPAS",
-    "hereditary erythroblastic multinuclearity with positive acidified serum test",
-    "congenital dyserythropoietic anaemia type 2"
+ "id": "congenital_dyserythropoietic_anemia_type2",
+ "name": "Congenital dyserythropoietic anaemia type II (SEC23B)",
+ "aliases": [
+  "CDA II",
+  "SEC23B",
+  "HEMPAS",
+  "hereditary erythroblastic multinuclearity with positive acidified serum test",
+  "congenital dyserythropoietic anaemia type 2"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Genetics",
+ "specialty": "Haematology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / Nathan and Oski",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest congenital dyserythropoietic anaemia, autosomal recessive and caused by biallelic SEC23B mutations",
+   "Historically termed HEMPAS: hereditary erythroblastic multinuclearity with a positive acidified serum (Ham) test",
+   "Marrow shows characteristic bi- and multinucleate late erythroblasts",
+   "Red cells lyse in acidified normal sera due to an unusual membrane antigen, but the patient's own serum does not lyse them (unlike paroxysmal nocturnal haemoglobinuria)",
+   "Band 3 (the anion exchanger) shows a distinctive narrow, faster-migrating band with hypoglycosylation on SDS-PAGE of the red-cell membrane",
+   "Presentation ranges from mild to transfusion-dependent anaemia with jaundice, splenomegaly, and gallstones",
+   "Iron overload develops from ineffective erythropoiesis, independent of transfusion",
+   "Diagnosis is confirmed by SEC23B genetic testing, supported by marrow morphology and membrane protein studies"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Genetics",
-  "specialty": "Haematology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / Nathan and Oski",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest congenital dyserythropoietic anaemia, autosomal recessive and caused by biallelic SEC23B mutations",
-      "Historically termed HEMPAS: hereditary erythroblastic multinuclearity with a positive acidified serum (Ham) test",
-      "Marrow shows characteristic bi- and multinucleate late erythroblasts",
-      "Red cells lyse in acidified normal sera due to an unusual membrane antigen, but the patient's own serum does not lyse them (unlike paroxysmal nocturnal haemoglobinuria)",
-      "Band 3 (the anion exchanger) shows a distinctive narrow, faster-migrating band with hypoglycosylation on SDS-PAGE of the red-cell membrane",
-      "Presentation ranges from mild to transfusion-dependent anaemia with jaundice, splenomegaly, and gallstones",
-      "Iron overload develops from ineffective erythropoiesis, independent of transfusion",
-      "Diagnosis is confirmed by SEC23B genetic testing, supported by marrow morphology and membrane protein studies"
+  "pathophysiology": "SEC23B encodes a component of the COPII vesicle coat that transports cargo from the endoplasmic reticulum to the Golgi. Biallelic loss of function impairs glycoprotein trafficking and glycosylation during erythroid maturation, producing abnormal, hypoglycosylated band 3 and other membrane proteins and the aberrant surface antigen responsible for the positive acidified-serum test. Disordered maturation yields bi- and multinucleated erythroblasts and marked intramedullary destruction (ineffective erythropoiesis); the chronic anaemia suppresses hepcidin and drives progressive iron overload.",
+  "additionalDifferentials": [
+   "Congenital dyserythropoietic anaemia type I (CDAN1)",
+   "Paroxysmal nocturnal haemoglobinuria",
+   "Hereditary spherocytosis and other membrane disorders",
+   "Thalassaemia syndromes",
+   "Myelodysplastic syndrome",
+   "Autoimmune haemolytic anaemia"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and reticulocyte count showing anaemia with inadequate reticulocytosis",
+   "Bone marrow aspirate demonstrating bi- and multinucleate erythroblasts",
+   "Acidified-serum (Ham) test using compatible normal sera, with the patient's own serum as control",
+   "SDS-PAGE of red-cell membrane proteins showing the abnormal band 3 pattern",
+   "Iron studies to assess overload and genetic testing for SEC23B",
+   "Flow cytometry for GPI-anchored proteins to exclude paroxysmal nocturnal haemoglobinuria"
+  ],
+  "redFlags": [
+   "Progressive iron overload with cardiac, hepatic, or endocrine complications",
+   "Transfusion dependence or severe symptomatic anaemia",
+   "Aplastic crisis, for example following parvovirus B19 infection",
+   "Features suggesting an alternative diagnosis such as paroxysmal nocturnal haemoglobinuria"
+  ],
+  "prognosis": "Severity varies widely; milder cases have a near-normal life expectancy, but transfusion dependence and, more importantly, cumulative iron overload determine long-term outcome unless iron status is monitored and managed.",
+  "pitfalls": [
+   "Confusing the positive acidified-serum test with paroxysmal nocturnal haemoglobinuria, which is excluded by flow cytometry and by the negative reaction with the patient's own serum",
+   "Overlooking non-transfusional iron overload and failing to monitor it",
+   "Misinterpreting the dyserythropoietic marrow as myelodysplasia",
+   "Delaying genetic confirmation when morphology and membrane studies are already suggestive"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, as progressive iron overload develops from suppressed hepcidin even without transfusion",
+   "Give folic acid supplementation to sustain chronic ineffective erythropoiesis",
+   "Reserve leucodepleted, phenotype-matched red-cell transfusion for symptomatic or transfusion-dependent anaemia",
+   "Consider splenectomy to reduce haemolysis and transfusion need, with prior vaccination against encapsulated organisms and awareness of thrombotic risk",
+   "Monitor ferritin and hepatic and cardiac iron by MRI, and screen for pigment gallstones and jaundice",
+   "Offer genetic counselling and cascade testing for autosomal recessive SEC23B inheritance",
+   "Refer to specialist haematology and consider allogeneic haematopoietic stem cell transplantation in severe childhood disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_dyserythropoietic_anemia_type2-pathway",
+   "title": "Congenital dyserythropoietic anaemia type II (SEC23B): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest congenital dyserythropoietic anaemia, autosomal recessive and caused by biallelic SEC23B mutations",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive iron overload with cardiac, hepatic, or endocrine complications",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and reticulocyte count showing anaemia with inadequate reticulocytosis, Bone marrow aspirate demonstrating bi- and multinucleate erythroblasts, Acidified-serum (Ham) test using compatible normal sera, with"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, as progressive iron overload develops from suppressed hepcidin even without transfusion"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the positive acidified-serum test with paroxysmal nocturnal haemoglobinuria, which is excluded by flow cytometry and by the negative reaction with the patient's own serum"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital dyserythropoietic anaemia type ii (sec23b)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_dyserythropoietic_anemia_type2-matrix",
+   "title": "Congenital dyserythropoietic anaemia type II (SEC23B): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest congenital dyserythropoietic anaemia, autosomal recessive and caused by biallelic SEC23B mutations",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SEC23B encodes a component of the COPII vesicle coat that transports cargo from the endoplasmic reticulum to the Golgi. Biallelic loss of function impairs glycoprotein trafficking and glycosylation during erythroid maturation, producing abnormal, hypoglycosylated band 3 and other membrane proteins and the aberrant surface antigen responsible for the positive acidified-serum test. Disordered maturation yields bi- and multinucleated erythroblasts and marked intramedullary destruction (ineffective erythropoiesis); the chronic anaemia suppresses hepcidin and drives progressive iron overload.",
-    "additionalDifferentials": [
-      "Congenital dyserythropoietic anaemia type I (CDAN1)",
-      "Paroxysmal nocturnal haemoglobinuria",
-      "Hereditary spherocytosis and other membrane disorders",
-      "Thalassaemia syndromes",
-      "Myelodysplastic syndrome",
-      "Autoimmune haemolytic anaemia"
+    [
+     "Key Investigations",
+     "Full blood count and reticulocyte count showing anaemia with inadequate reticulocytosis, Bone marrow aspirate demonstrating bi-",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and reticulocyte count showing anaemia with inadequate reticulocytosis",
-      "Bone marrow aspirate demonstrating bi- and multinucleate erythroblasts",
-      "Acidified-serum (Ham) test using compatible normal sera, with the patient's own serum as control",
-      "SDS-PAGE of red-cell membrane proteins showing the abnormal band 3 pattern",
-      "Iron studies to assess overload and genetic testing for SEC23B",
-      "Flow cytometry for GPI-anchored proteins to exclude paroxysmal nocturnal haemoglobinuria"
+    [
+     "Primary Differentials",
+     "Congenital dyserythropoietic anaemia type I (CDAN1), Paroxysmal nocturnal haemoglobinuria, Hereditary spherocytosis and other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive iron overload with cardiac, hepatic, or endocrine complications",
-      "Transfusion dependence or severe symptomatic anaemia",
-      "Aplastic crisis, for example following parvovirus B19 infection",
-      "Features suggesting an alternative diagnosis such as paroxysmal nocturnal haemoglobinuria"
+    [
+     "Management Strategy",
+     "Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, as progressive iron overload",
+     "Core treatment modality"
     ],
-    "prognosis": "Severity varies widely; milder cases have a near-normal life expectancy, but transfusion dependence and, more importantly, cumulative iron overload determine long-term outcome unless iron status is monitored and managed.",
-    "pitfalls": [
-      "Confusing the positive acidified-serum test with paroxysmal nocturnal haemoglobinuria, which is excluded by flow cytometry and by the negative reaction with the patient's own serum",
-      "Overlooking non-transfusional iron overload and failing to monitor it",
-      "Misinterpreting the dyserythropoietic marrow as myelodysplasia",
-      "Delaying genetic confirmation when morphology and membrane studies are already suggestive"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Iron chelation with deferasirox, deferiprone or desferrioxamine is the therapeutic mainstay, as progressive iron overload develops from suppressed hepcidin even without transfusion",
-      "Give folic acid supplementation to sustain chronic ineffective erythropoiesis",
-      "Reserve leucodepleted, phenotype-matched red-cell transfusion for symptomatic or transfusion-dependent anaemia",
-      "Consider splenectomy to reduce haemolysis and transfusion need, with prior vaccination against encapsulated organisms and awareness of thrombotic risk",
-      "Monitor ferritin and hepatic and cardiac iron by MRI, and screen for pigment gallstones and jaundice",
-      "Offer genetic counselling and cascade testing for autosomal recessive SEC23B inheritance",
-      "Refer to specialist haematology and consider allogeneic haematopoietic stem cell transplantation in severe childhood disease"
+    [
+     "Clinical Pitfall",
+     "Confusing the positive acidified-serum test with paroxysmal nocturnal haemoglobinuria, which is excluded by flow cytometry and by",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital dyserythropoietic anaemia type ii (sec23b)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "congenital-dyserythropoietic-anemia-type2-diagram",
+   "title": "Congenital dyserythropoietic anaemia type II (SEC23B): Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

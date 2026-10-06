@@ -1,79 +1,174 @@
 {
-  "id": "rotavirus_gastroenteritis",
-  "name": "Rotavirus Gastroenteritis",
-  "aliases": [
-    "rotavirus diarrhoea",
-    "rotavirus infection",
-    "viral gastroenteritis (rotavirus)"
+ "id": "rotavirus_gastroenteritis",
+ "name": "Rotavirus Gastroenteritis",
+ "aliases": [
+  "rotavirus diarrhoea",
+  "rotavirus infection",
+  "viral gastroenteritis (rotavirus)"
+ ],
+ "class": "infective",
+ "system": "Gastrointestinal",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "A leading cause of severe dehydrating diarrhoea in infants and young children, especially between about 3 and 24 months of age.",
+   "Typically presents with abrupt onset of vomiting followed by profuse watery, non-bloody stools, often with fever.",
+   "Spread is faecal-oral; the virus is highly contagious and stable in the environment, so outbreaks in daycare and hospital settings are common.",
+   "Assessment of hydration status guides management far more than laboratory testing, which is rarely needed for diagnosis.",
+   "Oral rehydration therapy is the cornerstone of treatment for mild to moderate dehydration; intravenous fluids are reserved for severe dehydration or failed oral therapy.",
+   "Early refeeding with an age-appropriate diet is encouraged once rehydration is achieved; prolonged fasting and dilute feeds are discouraged.",
+   "Antibiotics and antimotility agents have no role and may be harmful; routine antiemetics are generally avoided in young children.",
+   "Live oral rotavirus vaccines given in infancy substantially reduce severe disease and hospitalisation.",
+   "Antigen immunoassay or PCR on stool can confirm the pathogen when confirmation is required for epidemiologic or infection-control purposes."
   ],
-  "class": "infective",
-  "system": "Gastrointestinal",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "A leading cause of severe dehydrating diarrhoea in infants and young children, especially between about 3 and 24 months of age.",
-      "Typically presents with abrupt onset of vomiting followed by profuse watery, non-bloody stools, often with fever.",
-      "Spread is faecal-oral; the virus is highly contagious and stable in the environment, so outbreaks in daycare and hospital settings are common.",
-      "Assessment of hydration status guides management far more than laboratory testing, which is rarely needed for diagnosis.",
-      "Oral rehydration therapy is the cornerstone of treatment for mild to moderate dehydration; intravenous fluids are reserved for severe dehydration or failed oral therapy.",
-      "Early refeeding with an age-appropriate diet is encouraged once rehydration is achieved; prolonged fasting and dilute feeds are discouraged.",
-      "Antibiotics and antimotility agents have no role and may be harmful; routine antiemetics are generally avoided in young children.",
-      "Live oral rotavirus vaccines given in infancy substantially reduce severe disease and hospitalisation.",
-      "Antigen immunoassay or PCR on stool can confirm the pathogen when confirmation is required for epidemiologic or infection-control purposes."
+  "pathophysiology": "Rotavirus infects the mature enterocytes at the tips of the small intestinal villi, causing villous blunting and loss of absorptive surface. This produces malabsorption of nutrients and water with an osmotic diarrhoea, while the viral nonstructural protein NSP4 acts as an enterotoxin that triggers secretory diarrhoea and disrupts calcium homeostasis. The combination of impaired absorption, secretion, and reduced disaccharidase (including lactase) activity leads to voluminous watery stool and rapid fluid and electrolyte losses.",
+  "additionalDifferentials": [
+   "Norovirus and other viral gastroenteritis",
+   "Bacterial enteritis (Salmonella, Shigella, Campylobacter, enterotoxigenic E. coli)",
+   "Parasitic infection (Giardia, Cryptosporidium)",
+   "Antibiotic-associated diarrhoea",
+   "Systemic infection presenting with diarrhoea (e.g. urinary tract infection, sepsis)",
+   "Surgical abdomen (intussusception) when vomiting and lethargy predominate"
+  ],
+  "additionalInvestigations": [
+   "Stool rotavirus antigen enzyme immunoassay or PCR when confirmation is needed",
+   "Serum electrolytes, urea, and creatinine in moderate to severe dehydration",
+   "Capillary or venous blood gas to assess acid-base status in severe illness",
+   "Blood glucose in a lethargic or severely dehydrated child",
+   "Stool culture if bacterial infection is suspected (blood, mucus, high fever)"
+  ],
+  "redFlags": [
+   "Signs of severe dehydration or hypovolaemic shock",
+   "Persistent vomiting preventing oral rehydration",
+   "Altered consciousness, lethargy, or seizures",
+   "Bloody stools or high fever suggesting alternative or complicating diagnosis",
+   "Abdominal distension or severe pain raising concern for intussusception"
+  ],
+  "prognosis": "Most children recover fully within about a week with appropriate rehydration; mortality is low where fluid therapy is accessible but remains significant in resource-limited settings due to severe dehydration.",
+  "pitfalls": [
+   "Underestimating fluid deficit and failing to reassess hydration during treatment",
+   "Using dilute or lactose-heavy feeds and prolonged fasting instead of prompt refeeding",
+   "Prescribing antibiotics or antimotility drugs that offer no benefit",
+   "Missing intussusception in a child with vomiting, lethargy, and abdominal signs"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral rehydration solution as the cornerstone of treatment for mild-to-moderate dehydration to replace fluid and electrolyte losses",
+   "Intravenous rehydration for severe dehydration, shock or failed oral therapy, with correction of accompanying electrolyte disturbance",
+   "Early refeeding with an age-appropriate diet once rehydration is achieved, avoiding prolonged fasting and dilute feeds",
+   "Zinc supplementation to reduce diarrhoea duration and severity in younger children, particularly in resource-limited settings",
+   "Avoidance of routine antibiotics and antimotility agents, with a single dose of an antiemetic such as ondansetron to support oral rehydration where vomiting limits intake",
+   "Infection control with contact precautions and hand hygiene given high contagiousness, and rotavirus vaccination for prevention",
+   "Monitoring of hydration status, serum electrolytes and blood glucose in significant illness"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "rotavirus_gastroenteritis-pathway",
+   "title": "Rotavirus Gastroenteritis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A leading cause of severe dehydrating diarrhoea in infants and young children, especially between about 3 and 24 months of age.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of severe dehydration or hypovolaemic shock",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Stool rotavirus antigen enzyme immunoassay or PCR when confirmation is needed, Serum electrolytes, urea, and creatinine in moderate to severe dehydration, Capillary or venous blood gas to assess acid-base status in severe"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral rehydration solution as the cornerstone of treatment for mild-to-moderate dehydration to replace fluid and electrolyte losses"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Underestimating fluid deficit and failing to reassess hydration during treatment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rotavirus gastroenteritis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rotavirus_gastroenteritis-matrix",
+   "title": "Rotavirus Gastroenteritis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A leading cause of severe dehydrating diarrhoea in infants and young children, especially between about 3 and 24 months of age.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rotavirus infects the mature enterocytes at the tips of the small intestinal villi, causing villous blunting and loss of absorptive surface. This produces malabsorption of nutrients and water with an osmotic diarrhoea, while the viral nonstructural protein NSP4 acts as an enterotoxin that triggers secretory diarrhoea and disrupts calcium homeostasis. The combination of impaired absorption, secretion, and reduced disaccharidase (including lactase) activity leads to voluminous watery stool and rapid fluid and electrolyte losses.",
-    "additionalDifferentials": [
-      "Norovirus and other viral gastroenteritis",
-      "Bacterial enteritis (Salmonella, Shigella, Campylobacter, enterotoxigenic E. coli)",
-      "Parasitic infection (Giardia, Cryptosporidium)",
-      "Antibiotic-associated diarrhoea",
-      "Systemic infection presenting with diarrhoea (e.g. urinary tract infection, sepsis)",
-      "Surgical abdomen (intussusception) when vomiting and lethargy predominate"
+    [
+     "Key Investigations",
+     "Stool rotavirus antigen enzyme immunoassay or PCR when confirmation is needed, Serum electrolytes, urea, and creatinine in",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Stool rotavirus antigen enzyme immunoassay or PCR when confirmation is needed",
-      "Serum electrolytes, urea, and creatinine in moderate to severe dehydration",
-      "Capillary or venous blood gas to assess acid-base status in severe illness",
-      "Blood glucose in a lethargic or severely dehydrated child",
-      "Stool culture if bacterial infection is suspected (blood, mucus, high fever)"
+    [
+     "Primary Differentials",
+     "Norovirus and other viral gastroenteritis, Bacterial enteritis (Salmonella, Shigella, Campylobacter, enterotoxigenic E. coli),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of severe dehydration or hypovolaemic shock",
-      "Persistent vomiting preventing oral rehydration",
-      "Altered consciousness, lethargy, or seizures",
-      "Bloody stools or high fever suggesting alternative or complicating diagnosis",
-      "Abdominal distension or severe pain raising concern for intussusception"
+    [
+     "Management Strategy",
+     "Oral rehydration solution as the cornerstone of treatment for mild-to-moderate dehydration to replace fluid and electrolyte losses",
+     "Core treatment modality"
     ],
-    "prognosis": "Most children recover fully within about a week with appropriate rehydration; mortality is low where fluid therapy is accessible but remains significant in resource-limited settings due to severe dehydration.",
-    "pitfalls": [
-      "Underestimating fluid deficit and failing to reassess hydration during treatment",
-      "Using dilute or lactose-heavy feeds and prolonged fasting instead of prompt refeeding",
-      "Prescribing antibiotics or antimotility drugs that offer no benefit",
-      "Missing intussusception in a child with vomiting, lethargy, and abdominal signs"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral rehydration solution as the cornerstone of treatment for mild-to-moderate dehydration to replace fluid and electrolyte losses",
-      "Intravenous rehydration for severe dehydration, shock or failed oral therapy, with correction of accompanying electrolyte disturbance",
-      "Early refeeding with an age-appropriate diet once rehydration is achieved, avoiding prolonged fasting and dilute feeds",
-      "Zinc supplementation to reduce diarrhoea duration and severity in younger children, particularly in resource-limited settings",
-      "Avoidance of routine antibiotics and antimotility agents, with a single dose of an antiemetic such as ondansetron to support oral rehydration where vomiting limits intake",
-      "Infection control with contact precautions and hand hygiene given high contagiousness, and rotavirus vaccination for prevention",
-      "Monitoring of hydration status, serum electrolytes and blood glucose in significant illness"
+    [
+     "Clinical Pitfall",
+     "Underestimating fluid deficit and failing to reassess hydration during treatment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rotavirus gastroenteritis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rotavirus-gastroenteritis-diagram",
+   "title": "Rotavirus Gastroenteritis: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

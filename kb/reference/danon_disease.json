@@ -1,81 +1,176 @@
 {
-  "id": "danon_disease",
-  "name": "Danon disease",
-  "aliases": [
-    "LAMP2 cardiomyopathy",
-    "lysosome-associated membrane protein 2 deficiency",
-    "glycogen storage disease with normal acid maltase",
-    "X-linked vacuolar cardiomyopathy and myopathy"
+ "id": "danon_disease",
+ "name": "Danon disease",
+ "aliases": [
+  "LAMP2 cardiomyopathy",
+  "lysosome-associated membrane protein 2 deficiency",
+  "glycogen storage disease with normal acid maltase",
+  "X-linked vacuolar cardiomyopathy and myopathy"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Genetics",
+ "specialty": "Cardiology / Inherited Cardiac Conditions",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ESC/AHA cardiomyopathy guidelines; specialist inherited cardiomyopathy literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An X-linked lysosomal storage disorder caused by variants in the LAMP2 gene, producing a triad of cardiomyopathy, skeletal myopathy and intellectual impairment",
+   "Affected males are usually severely affected and present early, often with a striking hypertrophic cardiomyopathy phenotype and ventricular pre-excitation",
+   "Female carriers are affected more variably and later, frequently with a dilated rather than hypertrophic pattern",
+   "Ventricular pre-excitation (a Wolff-Parkinson-White pattern) and very high QRS voltages are characteristic ECG clues",
+   "A mildly raised creatine kinase, subtle proximal weakness and retinal or visual abnormalities support the diagnosis",
+   "The disease is rapidly progressive in males, and cardiac transplantation is often required at a young age",
+   "Defibrillator therapy is considered because of the high arrhythmic and sudden death risk",
+   "Genetic testing confirms the diagnosis and enables screening of at-risk relatives"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Genetics",
-  "specialty": "Cardiology / Inherited Cardiac Conditions",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ESC/AHA cardiomyopathy guidelines; specialist inherited cardiomyopathy literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An X-linked lysosomal storage disorder caused by variants in the LAMP2 gene, producing a triad of cardiomyopathy, skeletal myopathy and intellectual impairment",
-      "Affected males are usually severely affected and present early, often with a striking hypertrophic cardiomyopathy phenotype and ventricular pre-excitation",
-      "Female carriers are affected more variably and later, frequently with a dilated rather than hypertrophic pattern",
-      "Ventricular pre-excitation (a Wolff-Parkinson-White pattern) and very high QRS voltages are characteristic ECG clues",
-      "A mildly raised creatine kinase, subtle proximal weakness and retinal or visual abnormalities support the diagnosis",
-      "The disease is rapidly progressive in males, and cardiac transplantation is often required at a young age",
-      "Defibrillator therapy is considered because of the high arrhythmic and sudden death risk",
-      "Genetic testing confirms the diagnosis and enables screening of at-risk relatives"
+  "pathophysiology": "Danon disease is caused by variants in LAMP2, which encodes lysosome-associated membrane protein 2, a protein essential for autophagy and lysosomal function. Its deficiency impairs the fusion of autophagosomes with lysosomes, so autophagic vacuoles and glycogen accumulate within cardiac and skeletal muscle and other tissues. This storage and disrupted autophagy lead to progressive cardiomyocyte dysfunction and hypertrophy, conduction tissue involvement causing pre-excitation and arrhythmia, and skeletal muscle weakness. Because the gene is X-linked, hemizygous males are affected early and severely, while heterozygous females show a milder and later phenotype through variable X-inactivation.",
+  "additionalDifferentials": [
+   "Sarcomeric hypertrophic cardiomyopathy",
+   "Pompe disease and other glycogen storage myopathies",
+   "Fabry disease",
+   "PRKAG2 cardiomyopathy with pre-excitation",
+   "Mitochondrial cardiomyopathy",
+   "Other causes of Wolff-Parkinson-White with left ventricular hypertrophy"
+  ],
+  "additionalInvestigations": [
+   "12-lead ECG for pre-excitation and high QRS voltages",
+   "Echocardiography and cardiac MRI to characterise hypertrophy, dilatation and fibrosis",
+   "Serum creatine kinase measurement",
+   "Neurological and ophthalmological assessment for myopathy and retinopathy",
+   "Genetic testing for LAMP2 variants",
+   "Cascade family screening"
+  ],
+  "redFlags": [
+   "Rapidly progressive heart failure in a young male",
+   "Syncope or documented ventricular arrhythmia",
+   "Marked left ventricular hypertrophy with pre-excitation on ECG",
+   "Family history consistent with X-linked inheritance and early cardiac death"
+  ],
+  "prognosis": "The prognosis is poor in affected males, with rapidly progressive cardiomyopathy and high arrhythmic risk often necessitating transplantation in adolescence or early adulthood; female carriers generally have a later and more variable course.",
+  "pitfalls": [
+   "Labelling the cardiomyopathy as ordinary sarcomeric hypertrophic disease and missing the storage aetiology",
+   "Overlooking the diagnostic clues of pre-excitation, raised creatine kinase and mild myopathy",
+   "Underestimating disease severity and the need for early transplant assessment in males",
+   "Assuming female relatives are unaffected rather than at risk of later disease",
+   "Delaying genetic confirmation and family screening"
+  ],
+  "references": [
+   "ESC Guidelines for the management of cardiomyopathies",
+   "GeneReviews: Danon disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage under an inherited cardiac conditions service; with no established disease-specific drug, treatment targets the cardiomyopathy and arrhythmia",
+   "Treat the cardiomyopathy with standard heart-failure pharmacotherapy and monitor progression with serial echocardiography and cardiac MRI",
+   "Assess arrhythmic risk from ventricular pre-excitation and high-voltage cardiomyopathy, with electrophysiology review, implantable cardioverter-defibrillator in those at risk, and accessory-pathway ablation where indicated",
+   "Refer early for cardiac transplantation assessment given rapidly progressive heart failure, particularly in affected males",
+   "Screen for and manage skeletal myopathy and retinopathy with neurology and ophthalmology input",
+   "Offer genetic counselling for this X-linked LAMP2 disorder with cascade family screening, noting the milder, later phenotype in female carriers",
+   "Consider emerging gene-directed (AAV-based) therapy through specialist trial centres"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "danon_disease-pathway",
+   "title": "Danon disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An X-linked lysosomal storage disorder caused by variants in the LAMP2 gene, producing a triad of cardiomyopathy, skeletal myopathy and intellectual impairment",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive heart failure in a young male",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: 12-lead ECG for pre-excitation and high QRS voltages, Echocardiography and cardiac MRI to characterise hypertrophy, dilatation and fibrosis, Serum creatine kinase measurement"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage under an inherited cardiac conditions service; with no established disease-specific drug, treatment targets the cardiomyopathy and arrhythmia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the cardiomyopathy as ordinary sarcomeric hypertrophic disease and missing the storage aetiology"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of danon disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "danon_disease-matrix",
+   "title": "Danon disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An X-linked lysosomal storage disorder caused by variants in the LAMP2 gene, producing a triad of cardiomyopathy, skeletal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Danon disease is caused by variants in LAMP2, which encodes lysosome-associated membrane protein 2, a protein essential for autophagy and lysosomal function. Its deficiency impairs the fusion of autophagosomes with lysosomes, so autophagic vacuoles and glycogen accumulate within cardiac and skeletal muscle and other tissues. This storage and disrupted autophagy lead to progressive cardiomyocyte dysfunction and hypertrophy, conduction tissue involvement causing pre-excitation and arrhythmia, and skeletal muscle weakness. Because the gene is X-linked, hemizygous males are affected early and severely, while heterozygous females show a milder and later phenotype through variable X-inactivation.",
-    "additionalDifferentials": [
-      "Sarcomeric hypertrophic cardiomyopathy",
-      "Pompe disease and other glycogen storage myopathies",
-      "Fabry disease",
-      "PRKAG2 cardiomyopathy with pre-excitation",
-      "Mitochondrial cardiomyopathy",
-      "Other causes of Wolff-Parkinson-White with left ventricular hypertrophy"
+    [
+     "Key Investigations",
+     "12-lead ECG for pre-excitation and high QRS voltages, Echocardiography and cardiac MRI to characterise hypertrophy, dilatation",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "12-lead ECG for pre-excitation and high QRS voltages",
-      "Echocardiography and cardiac MRI to characterise hypertrophy, dilatation and fibrosis",
-      "Serum creatine kinase measurement",
-      "Neurological and ophthalmological assessment for myopathy and retinopathy",
-      "Genetic testing for LAMP2 variants",
-      "Cascade family screening"
+    [
+     "Primary Differentials",
+     "Sarcomeric hypertrophic cardiomyopathy, Pompe disease and other glycogen storage myopathies, Fabry disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive heart failure in a young male",
-      "Syncope or documented ventricular arrhythmia",
-      "Marked left ventricular hypertrophy with pre-excitation on ECG",
-      "Family history consistent with X-linked inheritance and early cardiac death"
+    [
+     "Management Strategy",
+     "Manage under an inherited cardiac conditions service; with no established disease-specific drug, treatment targets the",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is poor in affected males, with rapidly progressive cardiomyopathy and high arrhythmic risk often necessitating transplantation in adolescence or early adulthood; female carriers generally have a later and more variable course.",
-    "pitfalls": [
-      "Labelling the cardiomyopathy as ordinary sarcomeric hypertrophic disease and missing the storage aetiology",
-      "Overlooking the diagnostic clues of pre-excitation, raised creatine kinase and mild myopathy",
-      "Underestimating disease severity and the need for early transplant assessment in males",
-      "Assuming female relatives are unaffected rather than at risk of later disease",
-      "Delaying genetic confirmation and family screening"
-    ],
-    "references": [
-      "ESC Guidelines for the management of cardiomyopathies",
-      "GeneReviews: Danon disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage under an inherited cardiac conditions service; with no established disease-specific drug, treatment targets the cardiomyopathy and arrhythmia",
-      "Treat the cardiomyopathy with standard heart-failure pharmacotherapy and monitor progression with serial echocardiography and cardiac MRI",
-      "Assess arrhythmic risk from ventricular pre-excitation and high-voltage cardiomyopathy, with electrophysiology review, implantable cardioverter-defibrillator in those at risk, and accessory-pathway ablation where indicated",
-      "Refer early for cardiac transplantation assessment given rapidly progressive heart failure, particularly in affected males",
-      "Screen for and manage skeletal myopathy and retinopathy with neurology and ophthalmology input",
-      "Offer genetic counselling for this X-linked LAMP2 disorder with cascade family screening, noting the milder, later phenotype in female carriers",
-      "Consider emerging gene-directed (AAV-based) therapy through specialist trial centres"
+    [
+     "Clinical Pitfall",
+     "Labelling the cardiomyopathy as ordinary sarcomeric hypertrophic disease and missing the storage aetiology",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for danon disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "danon-disease-diagram",
+   "title": "Danon disease: Cardiovascular & Hemodynamic Diagnostic Schematic",
+   "type": "ecg",
+   "src": "/assets/kb-diagrams/cardiovascular-diagram.svg?v=kbdx1",
+   "caption": "Diagnostic schematic showing myocardial chamber architecture, electrical axis conduction pathways, and coronary perfusion territories.",
+   "annotations": [
+    {
+     "label": "Conduction System",
+     "description": "SA to AV nodal axis and ventricular bundle branch activation vector."
+    },
+    {
+     "label": "Coronary Perfusion",
+     "description": "Epicardial arterial distribution and regional myocardial supply zones."
+    },
+    {
+     "label": "Hemodynamics",
+     "description": "Left ventricular stroke work, systemic vascular resistance, and cardiac index."
+    }
+   ]
+  }
+ ]
 }

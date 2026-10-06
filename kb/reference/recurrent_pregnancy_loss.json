@@ -1,77 +1,172 @@
 {
-  "id": "recurrent_pregnancy_loss",
-  "name": "Recurrent pregnancy loss",
-  "aliases": [
-    "RPL",
-    "recurrent miscarriage",
-    "recurrent spontaneous abortion",
-    "habitual abortion"
+ "id": "recurrent_pregnancy_loss",
+ "name": "Recurrent pregnancy loss",
+ "aliases": [
+  "RPL",
+  "recurrent miscarriage",
+  "recurrent spontaneous abortion",
+  "habitual abortion"
+ ],
+ "class": "non_infective",
+ "system": "Reproductive medicine",
+ "specialty": "Reproductive Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Recurrent pregnancy loss is generally defined as two or more consecutive clinical pregnancy losses and warrants systematic evaluation of both partners",
+   "Despite thorough investigation, a large proportion of cases remain unexplained, and even then the prognosis for a future successful pregnancy is often favourable",
+   "Antiphospholipid syndrome is the most important treatable cause and should be specifically excluded, since it is amenable to anticoagulant and antiplatelet therapy",
+   "Sporadic early losses are most often due to embryonic chromosomal abnormalities, whereas recurrent loss prompts a search for maternal and parental factors",
+   "Parental balanced chromosomal rearrangements are an uncommon but important cause identified by karyotyping both partners",
+   "Uterine anatomical abnormalities, endocrine disorders such as thyroid disease and poorly controlled diabetes, and inherited thrombophilias should be considered",
+   "Maternal age and the number of previous losses are the strongest predictors of further loss",
+   "Management combines treatment of any identified cause, notably antiphospholipid syndrome, with supportive early-pregnancy care and reassurance"
   ],
-  "class": "non_infective",
-  "system": "Reproductive medicine",
-  "specialty": "Reproductive Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Recurrent pregnancy loss is generally defined as two or more consecutive clinical pregnancy losses and warrants systematic evaluation of both partners",
-      "Despite thorough investigation, a large proportion of cases remain unexplained, and even then the prognosis for a future successful pregnancy is often favourable",
-      "Antiphospholipid syndrome is the most important treatable cause and should be specifically excluded, since it is amenable to anticoagulant and antiplatelet therapy",
-      "Sporadic early losses are most often due to embryonic chromosomal abnormalities, whereas recurrent loss prompts a search for maternal and parental factors",
-      "Parental balanced chromosomal rearrangements are an uncommon but important cause identified by karyotyping both partners",
-      "Uterine anatomical abnormalities, endocrine disorders such as thyroid disease and poorly controlled diabetes, and inherited thrombophilias should be considered",
-      "Maternal age and the number of previous losses are the strongest predictors of further loss",
-      "Management combines treatment of any identified cause, notably antiphospholipid syndrome, with supportive early-pregnancy care and reassurance"
+  "pathophysiology": "Recurrent pregnancy loss is a heterogeneous problem in which established pregnancies fail repeatedly. Genetic causes include embryonic aneuploidy (rising sharply with maternal age) and inherited parental balanced translocations that yield unbalanced gametes. Antiphospholipid syndrome, an acquired autoimmune thrombophilia, causes loss through placental thrombosis and impaired trophoblast function driven by antibodies such as lupus anticoagulant, anticardiolipin, and anti-beta-2-glycoprotein-I. Anatomical uterine factors (congenital malformations, adhesions, submucosal fibroids, and possibly cervical insufficiency in later loss) impair implantation or placentation. Endocrine disturbances, including thyroid dysfunction and poorly controlled diabetes, disrupt the hormonal environment needed to sustain pregnancy. In many couples no cause is found, and losses are attributed to unrecognised embryonic or implantation factors.",
+  "additionalDifferentials": [
+   "Antiphospholipid syndrome",
+   "Parental balanced chromosomal translocation",
+   "Uterine anomalies, submucosal fibroids, or intrauterine adhesions",
+   "Thyroid dysfunction or poorly controlled diabetes",
+   "Inherited thrombophilia",
+   "Unexplained recurrent loss"
+  ],
+  "additionalInvestigations": [
+   "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein-I) with confirmatory repeat testing",
+   "Parental karyotyping and, where available, cytogenetic analysis of pregnancy tissue",
+   "Pelvic imaging such as ultrasound or hysteroscopy to assess uterine anatomy",
+   "Thyroid function tests and glycaemic assessment",
+   "Selective thrombophilia screening where clinically indicated"
+  ],
+  "redFlags": [
+   "Positive or suspected antiphospholipid syndrome requiring confirmatory testing and antithrombotic management in future pregnancy",
+   "Second-trimester loss suggesting cervical insufficiency or a uterine anomaly",
+   "A parental chromosomal rearrangement necessitating genetic counselling",
+   "Significant psychological distress and grief requiring support"
+  ],
+  "prognosis": "The outlook for a subsequent successful pregnancy is often good, particularly when a treatable cause such as antiphospholipid syndrome is identified and managed, and even most couples with unexplained recurrent loss eventually achieve a live birth, though the chance declines with maternal age and the number of prior losses.",
+  "pitfalls": [
+   "Failing to test for and treat antiphospholipid syndrome, the key reversible cause",
+   "Not confirming antiphospholipid antibodies with appropriately spaced repeat testing",
+   "Omitting parental karyotyping when a chromosomal rearrangement is possible",
+   "Neglecting the substantial psychological impact and need for supportive counselling"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat antiphospholipid syndrome, the key treatable cause, with low-dose aspirin and prophylactic heparin during pregnancy",
+   "Correct endocrine contributors by optimising thyroid dysfunction with levothyroxine and achieving good glycaemic control in diabetes",
+   "Surgically correct significant uterine anatomical defects such as a septum, adhesions or submucosal fibroids, and consider cervical cerclage for cervical insufficiency",
+   "Offer genetic counselling and parental karyotyping, with reproductive options such as preimplantation genetic testing or donor gametes where a parental balanced translocation is found",
+   "Address modifiable factors including smoking cessation, weight optimisation and reducing alcohol and caffeine",
+   "Provide supportive early-pregnancy care and reassurance within a dedicated recurrent-miscarriage clinic, given the favourable prognosis even in unexplained cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "recurrent_pregnancy_loss-pathway",
+   "title": "Recurrent pregnancy loss: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Recurrent pregnancy loss is generally defined as two or more consecutive clinical pregnancy losses and warrants systematic evaluation of both partners",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Positive or suspected antiphospholipid syndrome requiring confirmatory testing and antithrombotic management in future pregnancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein-I) with confirmatory repeat testing, Parental karyotyping and, where available, cytogenetic analysis of pregnancy tissue,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat antiphospholipid syndrome, the key treatable cause, with low-dose aspirin and prophylactic heparin during pregnancy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to test for and treat antiphospholipid syndrome, the key reversible cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of recurrent pregnancy loss."
+  }
+ ],
+ "tables": [
+  {
+   "id": "recurrent_pregnancy_loss-matrix",
+   "title": "Recurrent pregnancy loss: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Recurrent pregnancy loss is generally defined as two or more consecutive clinical pregnancy losses and warrants systematic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Recurrent pregnancy loss is a heterogeneous problem in which established pregnancies fail repeatedly. Genetic causes include embryonic aneuploidy (rising sharply with maternal age) and inherited parental balanced translocations that yield unbalanced gametes. Antiphospholipid syndrome, an acquired autoimmune thrombophilia, causes loss through placental thrombosis and impaired trophoblast function driven by antibodies such as lupus anticoagulant, anticardiolipin, and anti-beta-2-glycoprotein-I. Anatomical uterine factors (congenital malformations, adhesions, submucosal fibroids, and possibly cervical insufficiency in later loss) impair implantation or placentation. Endocrine disturbances, including thyroid dysfunction and poorly controlled diabetes, disrupt the hormonal environment needed to sustain pregnancy. In many couples no cause is found, and losses are attributed to unrecognised embryonic or implantation factors.",
-    "additionalDifferentials": [
-      "Antiphospholipid syndrome",
-      "Parental balanced chromosomal translocation",
-      "Uterine anomalies, submucosal fibroids, or intrauterine adhesions",
-      "Thyroid dysfunction or poorly controlled diabetes",
-      "Inherited thrombophilia",
-      "Unexplained recurrent loss"
+    [
+     "Key Investigations",
+     "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein-I) with confirmatory repeat",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein-I) with confirmatory repeat testing",
-      "Parental karyotyping and, where available, cytogenetic analysis of pregnancy tissue",
-      "Pelvic imaging such as ultrasound or hysteroscopy to assess uterine anatomy",
-      "Thyroid function tests and glycaemic assessment",
-      "Selective thrombophilia screening where clinically indicated"
+    [
+     "Primary Differentials",
+     "Antiphospholipid syndrome, Parental balanced chromosomal translocation, Uterine anomalies, submucosal fibroids, or intrauterine",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Positive or suspected antiphospholipid syndrome requiring confirmatory testing and antithrombotic management in future pregnancy",
-      "Second-trimester loss suggesting cervical insufficiency or a uterine anomaly",
-      "A parental chromosomal rearrangement necessitating genetic counselling",
-      "Significant psychological distress and grief requiring support"
+    [
+     "Management Strategy",
+     "Treat antiphospholipid syndrome, the key treatable cause, with low-dose aspirin and prophylactic heparin during pregnancy",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook for a subsequent successful pregnancy is often good, particularly when a treatable cause such as antiphospholipid syndrome is identified and managed, and even most couples with unexplained recurrent loss eventually achieve a live birth, though the chance declines with maternal age and the number of prior losses.",
-    "pitfalls": [
-      "Failing to test for and treat antiphospholipid syndrome, the key reversible cause",
-      "Not confirming antiphospholipid antibodies with appropriately spaced repeat testing",
-      "Omitting parental karyotyping when a chromosomal rearrangement is possible",
-      "Neglecting the substantial psychological impact and need for supportive counselling"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat antiphospholipid syndrome, the key treatable cause, with low-dose aspirin and prophylactic heparin during pregnancy",
-      "Correct endocrine contributors by optimising thyroid dysfunction with levothyroxine and achieving good glycaemic control in diabetes",
-      "Surgically correct significant uterine anatomical defects such as a septum, adhesions or submucosal fibroids, and consider cervical cerclage for cervical insufficiency",
-      "Offer genetic counselling and parental karyotyping, with reproductive options such as preimplantation genetic testing or donor gametes where a parental balanced translocation is found",
-      "Address modifiable factors including smoking cessation, weight optimisation and reducing alcohol and caffeine",
-      "Provide supportive early-pregnancy care and reassurance within a dedicated recurrent-miscarriage clinic, given the favourable prognosis even in unexplained cases"
+    [
+     "Clinical Pitfall",
+     "Failing to test for and treat antiphospholipid syndrome, the key reversible cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for recurrent pregnancy loss."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "recurrent-pregnancy-loss-diagram",
+   "title": "Recurrent pregnancy loss: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

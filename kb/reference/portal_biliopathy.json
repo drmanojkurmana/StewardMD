@@ -1,80 +1,175 @@
 {
-  "id": "portal_biliopathy",
-  "name": "portal biliopathy",
-  "aliases": [
-    "portal cavernoma cholangiopathy",
-    "portal hypertensive biliopathy"
+ "id": "portal_biliopathy",
+ "name": "portal biliopathy",
+ "aliases": [
+  "portal cavernoma cholangiopathy",
+  "portal hypertensive biliopathy"
+ ],
+ "class": "non_infective",
+ "system": "hepatobiliary",
+ "specialty": "hepatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sherlock's Diseases of the Liver and Biliary System",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Portal biliopathy describes abnormalities of the biliary tree, including strictures, dilatation, angulation and displacement, arising from long-standing portal hypertension, most often chronic extrahepatic portal vein obstruction with cavernoma.",
+   "The term portal cavernoma cholangiopathy is preferred when a cavernoma is the demonstrable cause.",
+   "Two mechanisms operate together: extrinsic compression by dilated paracholedochal veins of Petren and epicholedochal veins of Saint, and ischaemic fibrotic injury from the original thrombotic insult.",
+   "Most patients remain asymptomatic despite striking cholangiographic changes; only a minority develop jaundice, biliary pain, cholangitis or secondary duct stones.",
+   "MRCP combined with MR portovenography is the imaging modality of choice, showing both the biliary changes and the venous collaterals non-invasively.",
+   "ERCP should be reserved for therapy such as stone extraction or stenting rather than diagnosis, because periductal collaterals bleed readily.",
+   "Symptomatic disease is managed stepwise with endoscopic biliary drainage first, portosystemic shunt surgery to decompress the collaterals in refractory cases, and biliary bypass reserved for fixed strictures."
   ],
-  "class": "non_infective",
-  "system": "hepatobiliary",
-  "specialty": "hepatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sherlock's Diseases of the Liver and Biliary System",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Portal biliopathy describes abnormalities of the biliary tree, including strictures, dilatation, angulation and displacement, arising from long-standing portal hypertension, most often chronic extrahepatic portal vein obstruction with cavernoma.",
-      "The term portal cavernoma cholangiopathy is preferred when a cavernoma is the demonstrable cause.",
-      "Two mechanisms operate together: extrinsic compression by dilated paracholedochal veins of Petren and epicholedochal veins of Saint, and ischaemic fibrotic injury from the original thrombotic insult.",
-      "Most patients remain asymptomatic despite striking cholangiographic changes; only a minority develop jaundice, biliary pain, cholangitis or secondary duct stones.",
-      "MRCP combined with MR portovenography is the imaging modality of choice, showing both the biliary changes and the venous collaterals non-invasively.",
-      "ERCP should be reserved for therapy such as stone extraction or stenting rather than diagnosis, because periductal collaterals bleed readily.",
-      "Symptomatic disease is managed stepwise with endoscopic biliary drainage first, portosystemic shunt surgery to decompress the collaterals in refractory cases, and biliary bypass reserved for fixed strictures."
+  "pathophysiology": "Chronic obstruction of the extrahepatic portal vein leads to cavernous transformation, a leash of hepatopetal collateral veins around the obstructed segment. Two venous plexuses that normally drain the bile duct, the paracholedochal veins of Petren and the finer epicholedochal veins of Saint, become grossly dilated within and around the duct wall. These engorged collaterals compress and indent the common bile duct, and over time the sustained pressure together with ischaemia from the original thrombosis provokes fibrotic stricturing and wall thickening. The result is a spectrum ranging from smooth extrinsic indentations to fixed strictures, upstream ductal dilatation and intrahepatic involvement, which may be complicated by biliary stasis, stone formation and recurrent cholangitis.",
+  "additionalDifferentials": [
+   "Primary sclerosing cholangitis",
+   "Cholangiocarcinoma",
+   "Primary choledocholithiasis",
+   "IgG4-related sclerosing cholangitis",
+   "Iatrogenic or post-surgical bile duct stricture",
+   "Recurrent pyogenic cholangitis",
+   "Autoimmune pancreatitis with biliary involvement"
+  ],
+  "additionalInvestigations": [
+   "MRCP with MR portovenography",
+   "Doppler ultrasound of the portal system",
+   "Endoscopic ultrasound to distinguish collaterals from stones or tumour",
+   "Liver function tests with fractionated bilirubin and cholestatic markers",
+   "Thrombophilia and myeloproliferative neoplasm screen for the underlying cause",
+   "ERCP reserved for therapeutic intervention",
+   "Upper gastrointestinal endoscopy to assess varices before any procedure"
+  ],
+  "redFlags": [
+   "Ascending cholangitis with fever, jaundice and right upper quadrant pain",
+   "Progressive obstructive jaundice suggesting a fixed dominant stricture",
+   "Secondary biliary cirrhosis from long-standing obstruction",
+   "Variceal haemorrhage",
+   "Features raising suspicion of superimposed cholangiocarcinoma"
+  ],
+  "prognosis": "Most patients remain asymptomatic with a good long-term outlook, but those who develop symptomatic strictures may progress to recurrent cholangitis and secondary biliary cirrhosis if drainage is inadequate.",
+  "pitfalls": [
+   "Mistaking the cholangiographic appearances for primary sclerosing cholangitis or cholangiocarcinoma.",
+   "Performing diagnostic ERCP and precipitating haemobilia or variceal bleeding from periductal collaterals.",
+   "Attempting biliary surgery without first decompressing the portal system, risking catastrophic intraoperative haemorrhage.",
+   "Overlooking and failing to treat the underlying prothrombotic disorder."
+  ],
+  "references": [
+   "Sherlock's Diseases of the Liver and Biliary System",
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Consensus statements on extrahepatic portal vein obstruction and portal cavernoma cholangiopathy"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observation without intervention for the asymptomatic majority, since striking cholangiographic changes often cause no clinical disease",
+   "Treatment of the underlying portal vein obstruction, including anticoagulation where an active prothrombotic disorder is identified",
+   "Portal decompression by transjugular intrahepatic portosystemic shunt or a surgical portosystemic shunt to relieve the collateral compression, often required before any attempt at biliary drainage",
+   "Endoscopic therapy at ERCP for symptomatic strictures and secondary duct stones, with stenting or stone extraction reserved for treatment rather than diagnosis because periductal collaterals bleed readily",
+   "Antibiotics for episodes of cholangitis, with biliary drainage of obstructed segments",
+   "Management within a multidisciplinary team of hepatology, hepatobiliary surgery and interventional radiology given the bleeding risk of intervention"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "portal_biliopathy-pathway",
+   "title": "portal biliopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Portal biliopathy describes abnormalities of the biliary tree, including strictures, dilatation, angulation and displacement, arising from long-standing portal hypertension, most often chronic extrahepatic portal vein obstruction with",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Ascending cholangitis with fever, jaundice and right upper quadrant pain",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRCP with MR portovenography, Doppler ultrasound of the portal system, Endoscopic ultrasound to distinguish collaterals from stones or tumour"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observation without intervention for the asymptomatic majority, since striking cholangiographic changes often cause no clinical disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the cholangiographic appearances for primary sclerosing cholangitis or cholangiocarcinoma."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of portal biliopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "portal_biliopathy-matrix",
+   "title": "portal biliopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Portal biliopathy describes abnormalities of the biliary tree, including strictures, dilatation, angulation and displacement,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic obstruction of the extrahepatic portal vein leads to cavernous transformation, a leash of hepatopetal collateral veins around the obstructed segment. Two venous plexuses that normally drain the bile duct, the paracholedochal veins of Petren and the finer epicholedochal veins of Saint, become grossly dilated within and around the duct wall. These engorged collaterals compress and indent the common bile duct, and over time the sustained pressure together with ischaemia from the original thrombosis provokes fibrotic stricturing and wall thickening. The result is a spectrum ranging from smooth extrinsic indentations to fixed strictures, upstream ductal dilatation and intrahepatic involvement, which may be complicated by biliary stasis, stone formation and recurrent cholangitis.",
-    "additionalDifferentials": [
-      "Primary sclerosing cholangitis",
-      "Cholangiocarcinoma",
-      "Primary choledocholithiasis",
-      "IgG4-related sclerosing cholangitis",
-      "Iatrogenic or post-surgical bile duct stricture",
-      "Recurrent pyogenic cholangitis",
-      "Autoimmune pancreatitis with biliary involvement"
+    [
+     "Key Investigations",
+     "MRCP with MR portovenography, Doppler ultrasound of the portal system, Endoscopic ultrasound to distinguish collaterals from",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRCP with MR portovenography",
-      "Doppler ultrasound of the portal system",
-      "Endoscopic ultrasound to distinguish collaterals from stones or tumour",
-      "Liver function tests with fractionated bilirubin and cholestatic markers",
-      "Thrombophilia and myeloproliferative neoplasm screen for the underlying cause",
-      "ERCP reserved for therapeutic intervention",
-      "Upper gastrointestinal endoscopy to assess varices before any procedure"
+    [
+     "Primary Differentials",
+     "Primary sclerosing cholangitis, Cholangiocarcinoma, Primary choledocholithiasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Ascending cholangitis with fever, jaundice and right upper quadrant pain",
-      "Progressive obstructive jaundice suggesting a fixed dominant stricture",
-      "Secondary biliary cirrhosis from long-standing obstruction",
-      "Variceal haemorrhage",
-      "Features raising suspicion of superimposed cholangiocarcinoma"
+    [
+     "Management Strategy",
+     "Observation without intervention for the asymptomatic majority, since striking cholangiographic changes often cause no clinical",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients remain asymptomatic with a good long-term outlook, but those who develop symptomatic strictures may progress to recurrent cholangitis and secondary biliary cirrhosis if drainage is inadequate.",
-    "pitfalls": [
-      "Mistaking the cholangiographic appearances for primary sclerosing cholangitis or cholangiocarcinoma.",
-      "Performing diagnostic ERCP and precipitating haemobilia or variceal bleeding from periductal collaterals.",
-      "Attempting biliary surgery without first decompressing the portal system, risking catastrophic intraoperative haemorrhage.",
-      "Overlooking and failing to treat the underlying prothrombotic disorder."
-    ],
-    "references": [
-      "Sherlock's Diseases of the Liver and Biliary System",
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Consensus statements on extrahepatic portal vein obstruction and portal cavernoma cholangiopathy"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observation without intervention for the asymptomatic majority, since striking cholangiographic changes often cause no clinical disease",
-      "Treatment of the underlying portal vein obstruction, including anticoagulation where an active prothrombotic disorder is identified",
-      "Portal decompression by transjugular intrahepatic portosystemic shunt or a surgical portosystemic shunt to relieve the collateral compression, often required before any attempt at biliary drainage",
-      "Endoscopic therapy at ERCP for symptomatic strictures and secondary duct stones, with stenting or stone extraction reserved for treatment rather than diagnosis because periductal collaterals bleed readily",
-      "Antibiotics for episodes of cholangitis, with biliary drainage of obstructed segments",
-      "Management within a multidisciplinary team of hepatology, hepatobiliary surgery and interventional radiology given the bleeding risk of intervention"
+    [
+     "Clinical Pitfall",
+     "Mistaking the cholangiographic appearances for primary sclerosing cholangitis or cholangiocarcinoma.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for portal biliopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "portal-biliopathy-diagram",
+   "title": "portal biliopathy: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

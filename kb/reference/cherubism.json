@@ -1,80 +1,175 @@
 {
-  "id": "cherubism",
-  "name": "Cherubism (SH3BP2)",
-  "aliases": [
-    "familial fibrous dysplasia of the jaws",
-    "cherubic jaw",
-    "SH3BP2",
-    "bilateral giant-cell jaw lesions"
+ "id": "cherubism",
+ "name": "Cherubism (SH3BP2)",
+ "aliases": [
+  "familial fibrous dysplasia of the jaws",
+  "cherubic jaw",
+  "SH3BP2",
+  "bilateral giant-cell jaw lesions"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Metabolic bone",
+ "specialty": "Metabolic Bone / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents in early childhood with progressive, usually symmetrical, painless swelling of the jaws giving the characteristic full-cheeked cherubic facial appearance",
+   "Caused by autosomal dominant gain-of-function variants in SH3BP2, which enhance osteoclast activity and drive fibro-osseous replacement of the jaw bone",
+   "Radiographs show bilateral multilocular radiolucent, cyst-like expansile lesions of the mandible and maxilla",
+   "Histology reveals giant-cell-rich fibro-osseous lesions replacing normal jaw bone",
+   "The lesions are typically confined to the jaws and characteristically stabilise and often regress after puberty",
+   "Complications include dental disturbance with premature loss or displacement of teeth, and, in extensive maxillary disease, orbital involvement affecting the eyes",
+   "Management is often conservative with observation during the growth phase, reserving surgical contouring or curettage for functional or significant cosmetic problems, given the tendency to regress"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Metabolic bone",
-  "specialty": "Metabolic Bone / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents in early childhood with progressive, usually symmetrical, painless swelling of the jaws giving the characteristic full-cheeked cherubic facial appearance",
-      "Caused by autosomal dominant gain-of-function variants in SH3BP2, which enhance osteoclast activity and drive fibro-osseous replacement of the jaw bone",
-      "Radiographs show bilateral multilocular radiolucent, cyst-like expansile lesions of the mandible and maxilla",
-      "Histology reveals giant-cell-rich fibro-osseous lesions replacing normal jaw bone",
-      "The lesions are typically confined to the jaws and characteristically stabilise and often regress after puberty",
-      "Complications include dental disturbance with premature loss or displacement of teeth, and, in extensive maxillary disease, orbital involvement affecting the eyes",
-      "Management is often conservative with observation during the growth phase, reserving surgical contouring or curettage for functional or significant cosmetic problems, given the tendency to regress"
+  "pathophysiology": "Cherubism arises from autosomal dominant gain-of-function variants in SH3BP2, an adaptor protein that modulates signalling in cells of the myeloid and osteoclast lineage. The variants increase SH3BP2 stability and amplify downstream signalling, promoting excessive osteoclast formation and a local inflammatory, fibro-osseous process that replaces normal jaw bone with giant-cell-rich fibrous tissue. This produces the expansile, cyst-like lesions of the mandible and maxilla and the resulting facial swelling. The disease characteristically follows an age-dependent course, expanding through childhood, stabilising around puberty and frequently involuting thereafter as the abnormal osteoclastic drive subsides and the lesions ossify.",
+  "additionalDifferentials": [
+   "Central giant-cell granuloma of the jaw",
+   "Fibrous dysplasia of the jaws (including polyostotic and McCune-Albright)",
+   "Brown tumours of hyperparathyroidism",
+   "Aneurysmal bone cyst of the jaw",
+   "Noonan syndrome with multiple giant-cell lesions",
+   "Odontogenic keratocysts or other cystic jaw lesions"
+  ],
+  "additionalInvestigations": [
+   "Panoramic and cross-sectional jaw imaging demonstrating bilateral multilocular expansile lesions",
+   "Histological assessment where the diagnosis is uncertain, showing giant-cell fibro-osseous tissue",
+   "Serum calcium, phosphate and parathyroid hormone to exclude hyperparathyroidism and brown tumours",
+   "Dental and orthodontic assessment for tooth displacement and eruption problems",
+   "SH3BP2 molecular genetic testing to confirm the diagnosis and inform counselling",
+   "Ophthalmological and orbital assessment in extensive maxillary involvement"
+  ],
+  "redFlags": [
+   "Orbital or ophthalmic involvement threatening vision in extensive maxillary disease",
+   "Airway or feeding compromise from massive jaw expansion",
+   "Rapid or atypical growth raising concern for an alternative aggressive lesion",
+   "Persistent progression well beyond puberty, when regression is expected"
+  ],
+  "prognosis": "The prognosis is generally favourable because the lesions tend to stabilise after puberty and often regress, leaving variable residual jaw deformity; extensive disease with orbital or airway involvement carries greater morbidity.",
+  "pitfalls": [
+   "Undertaking aggressive surgery during the active childhood phase when many lesions regress spontaneously",
+   "Confusing cherubism with brown tumours of hyperparathyroidism without checking calcium and parathyroid hormone",
+   "Overlooking orbital involvement and vision risk in extensive maxillary disease",
+   "Failing to recognise the autosomal dominant inheritance and counsel the family"
+  ],
+  "references": [
+   "Resnick's Diagnosis of Bone and Joint Disorders",
+   "GeneReviews: SH3BP2-related cherubism"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Watchful observation is appropriate for many, given the tendency of lesions to stabilise after puberty and often regress spontaneously",
+   "Surgical contouring or curettage for functionally or cosmetically significant deformity, ideally deferred until the active proliferative phase has subsided to reduce recurrence",
+   "Dental and orthodontic management of tooth displacement, failed eruption and premature tooth loss",
+   "Investigational antiresorptive therapy such as calcitonin or denosumab considered for aggressive, rapidly expanding disease",
+   "Urgent intervention for orbital involvement threatening vision or for airway compromise in extensive maxillary disease",
+   "Ophthalmology assessment where maxillary lesions encroach on the orbit",
+   "Multidisciplinary care across oral and maxillofacial surgery, metabolic bone medicine and clinical genetics",
+   "Genetic counselling for autosomal dominant SH3BP2 disease with family assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cherubism-pathway",
+   "title": "Cherubism (SH3BP2): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents in early childhood with progressive, usually symmetrical, painless swelling of the jaws giving the characteristic full-cheeked cherubic facial appearance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Orbital or ophthalmic involvement threatening vision in extensive maxillary disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Panoramic and cross-sectional jaw imaging demonstrating bilateral multilocular expansile lesions, Histological assessment where the diagnosis is uncertain, showing giant-cell fibro-osseous tissue, Serum calcium, phosphate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Watchful observation is appropriate for many, given the tendency of lesions to stabilise after puberty and often regress spontaneously"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Undertaking aggressive surgery during the active childhood phase when many lesions regress spontaneously"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cherubism (sh3bp2)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cherubism-matrix",
+   "title": "Cherubism (SH3BP2): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents in early childhood with progressive, usually symmetrical, painless swelling of the jaws giving the characteristic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cherubism arises from autosomal dominant gain-of-function variants in SH3BP2, an adaptor protein that modulates signalling in cells of the myeloid and osteoclast lineage. The variants increase SH3BP2 stability and amplify downstream signalling, promoting excessive osteoclast formation and a local inflammatory, fibro-osseous process that replaces normal jaw bone with giant-cell-rich fibrous tissue. This produces the expansile, cyst-like lesions of the mandible and maxilla and the resulting facial swelling. The disease characteristically follows an age-dependent course, expanding through childhood, stabilising around puberty and frequently involuting thereafter as the abnormal osteoclastic drive subsides and the lesions ossify.",
-    "additionalDifferentials": [
-      "Central giant-cell granuloma of the jaw",
-      "Fibrous dysplasia of the jaws (including polyostotic and McCune-Albright)",
-      "Brown tumours of hyperparathyroidism",
-      "Aneurysmal bone cyst of the jaw",
-      "Noonan syndrome with multiple giant-cell lesions",
-      "Odontogenic keratocysts or other cystic jaw lesions"
+    [
+     "Key Investigations",
+     "Panoramic and cross-sectional jaw imaging demonstrating bilateral multilocular expansile lesions, Histological assessment where",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Panoramic and cross-sectional jaw imaging demonstrating bilateral multilocular expansile lesions",
-      "Histological assessment where the diagnosis is uncertain, showing giant-cell fibro-osseous tissue",
-      "Serum calcium, phosphate and parathyroid hormone to exclude hyperparathyroidism and brown tumours",
-      "Dental and orthodontic assessment for tooth displacement and eruption problems",
-      "SH3BP2 molecular genetic testing to confirm the diagnosis and inform counselling",
-      "Ophthalmological and orbital assessment in extensive maxillary involvement"
+    [
+     "Primary Differentials",
+     "Central giant-cell granuloma of the jaw, Fibrous dysplasia of the jaws (including polyostotic and McCune-Albright), Brown tumours",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Orbital or ophthalmic involvement threatening vision in extensive maxillary disease",
-      "Airway or feeding compromise from massive jaw expansion",
-      "Rapid or atypical growth raising concern for an alternative aggressive lesion",
-      "Persistent progression well beyond puberty, when regression is expected"
+    [
+     "Management Strategy",
+     "Watchful observation is appropriate for many, given the tendency of lesions to stabilise after puberty and often regress",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally favourable because the lesions tend to stabilise after puberty and often regress, leaving variable residual jaw deformity; extensive disease with orbital or airway involvement carries greater morbidity.",
-    "pitfalls": [
-      "Undertaking aggressive surgery during the active childhood phase when many lesions regress spontaneously",
-      "Confusing cherubism with brown tumours of hyperparathyroidism without checking calcium and parathyroid hormone",
-      "Overlooking orbital involvement and vision risk in extensive maxillary disease",
-      "Failing to recognise the autosomal dominant inheritance and counsel the family"
-    ],
-    "references": [
-      "Resnick's Diagnosis of Bone and Joint Disorders",
-      "GeneReviews: SH3BP2-related cherubism"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Watchful observation is appropriate for many, given the tendency of lesions to stabilise after puberty and often regress spontaneously",
-      "Surgical contouring or curettage for functionally or cosmetically significant deformity, ideally deferred until the active proliferative phase has subsided to reduce recurrence",
-      "Dental and orthodontic management of tooth displacement, failed eruption and premature tooth loss",
-      "Investigational antiresorptive therapy such as calcitonin or denosumab considered for aggressive, rapidly expanding disease",
-      "Urgent intervention for orbital involvement threatening vision or for airway compromise in extensive maxillary disease",
-      "Ophthalmology assessment where maxillary lesions encroach on the orbit",
-      "Multidisciplinary care across oral and maxillofacial surgery, metabolic bone medicine and clinical genetics",
-      "Genetic counselling for autosomal dominant SH3BP2 disease with family assessment"
+    [
+     "Clinical Pitfall",
+     "Undertaking aggressive surgery during the active childhood phase when many lesions regress spontaneously",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cherubism (sh3bp2)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cherubism-diagram",
+   "title": "Cherubism (SH3BP2): Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

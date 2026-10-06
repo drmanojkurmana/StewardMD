@@ -1,79 +1,174 @@
 {
-  "id": "baastrup_disease",
-  "name": "Baastrup disease (kissing spines)",
-  "aliases": [
-    "kissing spines",
-    "kissing spine syndrome",
-    "interspinous bursitis",
-    "Baastrup syndrome"
+ "id": "baastrup_disease",
+ "name": "Baastrup disease (kissing spines)",
+ "aliases": [
+  "kissing spines",
+  "kissing spine syndrome",
+  "interspinous bursitis",
+  "Baastrup syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Spine",
+ "specialty": "Spinal Surgery / Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rothman-Simeone and Herkowitz's The Spine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Also called kissing spines, it results from contact and impingement between adjacent lumbar spinous processes",
+   "Causes midline axial low back pain that is characteristically worse on extension and relieved by flexion",
+   "Most often affects the lower lumbar spine (around L4/5) in older adults with degenerative disc-height loss and hyperlordosis",
+   "Tenderness is elicited over the affected interspinous region in the midline",
+   "Imaging shows approximation, flattening, sclerosis, and enlargement of the opposing spinous processes, with an interspinous bursa or oedema on MRI",
+   "It is frequently an incidental finding, so its role as the pain generator must be confirmed clinically",
+   "A diagnostic local anaesthetic injection into the interspinous space can help confirm the source",
+   "Management is usually conservative (physiotherapy, postural correction, analgesia, local injection), and surgery such as osteotomy or interspinous procedures is rarely needed"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Spine",
-  "specialty": "Spinal Surgery / Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rothman-Simeone and Herkowitz's The Spine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Also called kissing spines, it results from contact and impingement between adjacent lumbar spinous processes",
-      "Causes midline axial low back pain that is characteristically worse on extension and relieved by flexion",
-      "Most often affects the lower lumbar spine (around L4/5) in older adults with degenerative disc-height loss and hyperlordosis",
-      "Tenderness is elicited over the affected interspinous region in the midline",
-      "Imaging shows approximation, flattening, sclerosis, and enlargement of the opposing spinous processes, with an interspinous bursa or oedema on MRI",
-      "It is frequently an incidental finding, so its role as the pain generator must be confirmed clinically",
-      "A diagnostic local anaesthetic injection into the interspinous space can help confirm the source",
-      "Management is usually conservative (physiotherapy, postural correction, analgesia, local injection), and surgery such as osteotomy or interspinous procedures is rarely needed"
+  "pathophysiology": "Baastrup disease arises when adjacent spinous processes come into abnormal contact (kiss) because of loss of intervertebral disc height and increased lumbar lordosis. Repetitive contact in extension produces bony changes, including flattening, sclerosis, and enlargement of the opposing spinous processes, and inflammation of the interspinous ligament, often with formation of an adventitial interspinous bursa. Stimulation of nociceptors in the inflamed interspinous tissues and periosteum generates midline mechanical pain that worsens with extension.",
+  "additionalDifferentials": [
+   "Facet joint syndrome",
+   "Degenerative disc (discogenic) pain",
+   "Interspinous ligament sprain",
+   "Spinous process fracture",
+   "Lumbar spinal stenosis",
+   "Midline epidural or interspinous cyst"
+  ],
+  "additionalInvestigations": [
+   "MRI showing interspinous bursitis, oedema, and changes of the opposing spinous processes",
+   "Plain radiographs demonstrating approximation and sclerosis of the spinous processes",
+   "CT to characterise bony change such as flattening and sclerosis in detail",
+   "Diagnostic interspinous local anaesthetic injection to confirm the pain source",
+   "Standing or extension radiographs to demonstrate dynamic contact"
+  ],
+  "redFlags": [
+   "New neurological deficit or radicular symptoms",
+   "Constitutional symptoms suggesting infection or malignancy",
+   "Severe pain unresponsive to conservative care warranting re-evaluation"
+  ],
+  "prognosis": "The condition is benign and usually responds to conservative treatment and postural measures; local injections are often helpful, and the rare patient who needs surgery generally does well.",
+  "pitfalls": [
+   "Attributing pain to incidental kissing spines without confirming the source",
+   "Overlooking coexisting facet or discogenic pain",
+   "Proceeding to surgery without a positive diagnostic injection"
+  ],
+  "references": [
+   "Rothman-Simeone and Herkowitz's The Spine",
+   "Resnick: Diagnosis of Bone and Joint Disorders"
+  ],
+  "crossLinks": [
+   "facet_joint_syndrome",
+   "degenerative_disc_disease"
+  ],
+  "management": [
+   "First-line conservative care with activity and posture modification to avoid lumbar extension, plus simple analgesia with paracetamol or a non-steroidal anti-inflammatory drug",
+   "Physiotherapy focused on core stabilisation, flexion-based exercises and correction of hyperlordosis",
+   "Image-guided interspinous local anaesthetic and corticosteroid injection, which is both diagnostic and therapeutic",
+   "Confirm the impinging interspinous level is the true pain generator before intervention, given how often the changes are incidental",
+   "Reserve surgery such as interspinous process excision or decompression for the minority with confirmed, refractory symptoms",
+   "Refer to a spinal service when pain is disabling or persists despite conservative measures"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "baastrup_disease-pathway",
+   "title": "Baastrup disease (kissing spines): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Also called kissing spines, it results from contact and impingement between adjacent lumbar spinous processes",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New neurological deficit or radicular symptoms",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI showing interspinous bursitis, oedema, and changes of the opposing spinous processes, Plain radiographs demonstrating approximation and sclerosis of the spinous processes, CT to characterise bony change such as"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line conservative care with activity and posture modification to avoid lumbar extension, plus simple analgesia with paracetamol or a non-steroidal anti-inflammatory drug"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing pain to incidental kissing spines without confirming the source"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of baastrup disease (kissing spines)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "baastrup_disease-matrix",
+   "title": "Baastrup disease (kissing spines): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Also called kissing spines, it results from contact and impingement between adjacent lumbar spinous processes",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Baastrup disease arises when adjacent spinous processes come into abnormal contact (kiss) because of loss of intervertebral disc height and increased lumbar lordosis. Repetitive contact in extension produces bony changes, including flattening, sclerosis, and enlargement of the opposing spinous processes, and inflammation of the interspinous ligament, often with formation of an adventitial interspinous bursa. Stimulation of nociceptors in the inflamed interspinous tissues and periosteum generates midline mechanical pain that worsens with extension.",
-    "additionalDifferentials": [
-      "Facet joint syndrome",
-      "Degenerative disc (discogenic) pain",
-      "Interspinous ligament sprain",
-      "Spinous process fracture",
-      "Lumbar spinal stenosis",
-      "Midline epidural or interspinous cyst"
+    [
+     "Key Investigations",
+     "MRI showing interspinous bursitis, oedema, and changes of the opposing spinous processes, Plain radiographs demonstrating",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI showing interspinous bursitis, oedema, and changes of the opposing spinous processes",
-      "Plain radiographs demonstrating approximation and sclerosis of the spinous processes",
-      "CT to characterise bony change such as flattening and sclerosis in detail",
-      "Diagnostic interspinous local anaesthetic injection to confirm the pain source",
-      "Standing or extension radiographs to demonstrate dynamic contact"
+    [
+     "Primary Differentials",
+     "Facet joint syndrome, Degenerative disc (discogenic) pain, Interspinous ligament sprain",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New neurological deficit or radicular symptoms",
-      "Constitutional symptoms suggesting infection or malignancy",
-      "Severe pain unresponsive to conservative care warranting re-evaluation"
+    [
+     "Management Strategy",
+     "First-line conservative care with activity and posture modification to avoid lumbar extension, plus simple analgesia with",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and usually responds to conservative treatment and postural measures; local injections are often helpful, and the rare patient who needs surgery generally does well.",
-    "pitfalls": [
-      "Attributing pain to incidental kissing spines without confirming the source",
-      "Overlooking coexisting facet or discogenic pain",
-      "Proceeding to surgery without a positive diagnostic injection"
-    ],
-    "references": [
-      "Rothman-Simeone and Herkowitz's The Spine",
-      "Resnick: Diagnosis of Bone and Joint Disorders"
-    ],
-    "crossLinks": [
-      "facet_joint_syndrome",
-      "degenerative_disc_disease"
-    ],
-    "management": [
-      "First-line conservative care with activity and posture modification to avoid lumbar extension, plus simple analgesia with paracetamol or a non-steroidal anti-inflammatory drug",
-      "Physiotherapy focused on core stabilisation, flexion-based exercises and correction of hyperlordosis",
-      "Image-guided interspinous local anaesthetic and corticosteroid injection, which is both diagnostic and therapeutic",
-      "Confirm the impinging interspinous level is the true pain generator before intervention, given how often the changes are incidental",
-      "Reserve surgery such as interspinous process excision or decompression for the minority with confirmed, refractory symptoms",
-      "Refer to a spinal service when pain is disabling or persists despite conservative measures"
+    [
+     "Clinical Pitfall",
+     "Attributing pain to incidental kissing spines without confirming the source",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for baastrup disease (kissing spines)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "baastrup-disease-diagram",
+   "title": "Baastrup disease (kissing spines): Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

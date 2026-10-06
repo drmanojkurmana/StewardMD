@@ -1,79 +1,174 @@
 {
-  "id": "susac_syndrome",
-  "name": "Susac syndrome",
-  "aliases": [
-    "retinocochleocerebral vasculopathy",
-    "SICRET syndrome",
-    "Susac's syndrome"
+ "id": "susac_syndrome",
+ "name": "Susac syndrome",
+ "aliases": [
+  "retinocochleocerebral vasculopathy",
+  "SICRET syndrome",
+  "Susac's syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Immunology",
+ "specialty": "Rheumatology / Clinical Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by a clinical triad of encephalopathy, branch retinal artery occlusions, and sensorineural hearing loss, though all three are often not present at onset",
+   "Predominantly affects young women and may be misdiagnosed as multiple sclerosis or migraine with aura",
+   "Encephalopathy can include headache, confusion, cognitive and behavioural change, and focal deficits",
+   "MRI characteristically shows central callosal lesions described as 'snowball' or 'icicle' lesions, differing from the peripheral callosal lesions of multiple sclerosis",
+   "Fluorescein angiography reveals branch retinal artery occlusions and arterial wall hyperfluorescence even in asymptomatic segments",
+   "Audiometry typically shows low- to mid-frequency sensorineural hearing loss from cochlear microinfarction",
+   "Early aggressive immunosuppression aims to limit permanent cognitive, visual, and auditory damage"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Immunology",
-  "specialty": "Rheumatology / Clinical Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by a clinical triad of encephalopathy, branch retinal artery occlusions, and sensorineural hearing loss, though all three are often not present at onset",
-      "Predominantly affects young women and may be misdiagnosed as multiple sclerosis or migraine with aura",
-      "Encephalopathy can include headache, confusion, cognitive and behavioural change, and focal deficits",
-      "MRI characteristically shows central callosal lesions described as 'snowball' or 'icicle' lesions, differing from the peripheral callosal lesions of multiple sclerosis",
-      "Fluorescein angiography reveals branch retinal artery occlusions and arterial wall hyperfluorescence even in asymptomatic segments",
-      "Audiometry typically shows low- to mid-frequency sensorineural hearing loss from cochlear microinfarction",
-      "Early aggressive immunosuppression aims to limit permanent cognitive, visual, and auditory damage"
+  "pathophysiology": "Susac syndrome is an immune-mediated microangiopathy (endotheliopathy) affecting the small vessels (precapillary arterioles) of the brain, retina, and inner ear. Antiendothelial cell antibodies and cytotoxic lymphocyte-mediated injury to microvascular endothelium are implicated, producing microvascular occlusion and ischaemic damage in these three organs. Involvement of the corpus callosum microvasculature yields the characteristic central callosal MRI lesions, retinal arteriolar occlusion causes visual deficits, and cochlear microinfarction produces hearing loss and vertigo.",
+  "additionalDifferentials": [
+   "Multiple sclerosis and acute disseminated encephalomyelitis",
+   "Primary central nervous system vasculitis",
+   "Cogan syndrome",
+   "Migraine with aura",
+   "Antiphospholipid syndrome and other thrombotic microangiopathies",
+   "Neuro-Behcet disease"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain looking for central corpus callosum 'snowball' lesions and leptomeningeal enhancement",
+   "Fluorescein angiography to detect branch retinal artery occlusions and arterial wall hyperfluorescence",
+   "Audiometry to identify and monitor sensorineural hearing loss",
+   "Cerebrospinal fluid analysis showing raised protein but usually without oligoclonal bands",
+   "Autoimmune and thrombophilia screen to exclude mimics",
+   "Serial ophthalmological review including retinal imaging"
+  ],
+  "redFlags": [
+   "Rapidly progressive encephalopathy with cognitive decline",
+   "Acute visual loss from retinal artery occlusion",
+   "Sudden or progressive hearing loss",
+   "New focal neurological deficits indicating ongoing microinfarction"
+  ],
+  "prognosis": "The disease is often self-limiting over months to a few years but can leave permanent cognitive impairment, visual field loss, and hearing deficits; early and sustained immunosuppression improves outcomes, though relapses occur.",
+  "pitfalls": [
+   "Misdiagnosing it as multiple sclerosis and missing the distinguishing central callosal lesions",
+   "Not performing fluorescein angiography, thereby missing subclinical retinal artery occlusions",
+   "Overlooking the diagnosis when the full triad is not present at onset",
+   "Under-treating early disease and permitting irreversible organ damage",
+   "Attributing cognitive symptoms to a psychiatric cause"
+  ],
+  "references": [
+   "Firestein & Kelley's Textbook of Rheumatology",
+   "Harrison's Principles of Internal Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute prompt, aggressive immunosuppression with high-dose corticosteroids, usually combined with intravenous immunoglobulin, to halt the microvascular injury",
+   "Add steroid-sparing immunosuppression such as mycophenolate, azathioprine, rituximab or cyclophosphamide in severe or refractory encephalopathic disease",
+   "Escalate to pulse corticosteroids with intravenous immunoglobulin or cyclophosphamide during acute encephalopathic deterioration",
+   "Provide rehabilitation for cognitive deficits and hearing rehabilitation with hearing aids or cochlear implantation for sensorineural loss",
+   "Monitor disease activity with serial brain MRI, fluorescein angiography and audiometry, since subclinical relapse is common",
+   "Manage through a multidisciplinary team spanning neurology, ophthalmology and audiology or ENT",
+   "Continue prolonged immunosuppression and surveillance because relapses occur after apparent remission"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "susac_syndrome-pathway",
+   "title": "Susac syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by a clinical triad of encephalopathy, branch retinal artery occlusions, and sensorineural hearing loss, though all three are often not present at onset",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy with cognitive decline",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain looking for central corpus callosum 'snowball' lesions and leptomeningeal enhancement, Fluorescein angiography to detect branch retinal artery occlusions and arterial wall hyperfluorescence, Audiometry to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute prompt, aggressive immunosuppression with high-dose corticosteroids, usually combined with intravenous immunoglobulin, to halt the microvascular injury"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing it as multiple sclerosis and missing the distinguishing central callosal lesions"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of susac syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "susac_syndrome-matrix",
+   "title": "Susac syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by a clinical triad of encephalopathy, branch retinal artery occlusions, and sensorineural hearing loss, though all three",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Susac syndrome is an immune-mediated microangiopathy (endotheliopathy) affecting the small vessels (precapillary arterioles) of the brain, retina, and inner ear. Antiendothelial cell antibodies and cytotoxic lymphocyte-mediated injury to microvascular endothelium are implicated, producing microvascular occlusion and ischaemic damage in these three organs. Involvement of the corpus callosum microvasculature yields the characteristic central callosal MRI lesions, retinal arteriolar occlusion causes visual deficits, and cochlear microinfarction produces hearing loss and vertigo.",
-    "additionalDifferentials": [
-      "Multiple sclerosis and acute disseminated encephalomyelitis",
-      "Primary central nervous system vasculitis",
-      "Cogan syndrome",
-      "Migraine with aura",
-      "Antiphospholipid syndrome and other thrombotic microangiopathies",
-      "Neuro-Behcet disease"
+    [
+     "Key Investigations",
+     "MRI of the brain looking for central corpus callosum 'snowball' lesions and leptomeningeal enhancement, Fluorescein angiography",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain looking for central corpus callosum 'snowball' lesions and leptomeningeal enhancement",
-      "Fluorescein angiography to detect branch retinal artery occlusions and arterial wall hyperfluorescence",
-      "Audiometry to identify and monitor sensorineural hearing loss",
-      "Cerebrospinal fluid analysis showing raised protein but usually without oligoclonal bands",
-      "Autoimmune and thrombophilia screen to exclude mimics",
-      "Serial ophthalmological review including retinal imaging"
+    [
+     "Primary Differentials",
+     "Multiple sclerosis and acute disseminated encephalomyelitis, Primary central nervous system vasculitis, Cogan syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive encephalopathy with cognitive decline",
-      "Acute visual loss from retinal artery occlusion",
-      "Sudden or progressive hearing loss",
-      "New focal neurological deficits indicating ongoing microinfarction"
+    [
+     "Management Strategy",
+     "Institute prompt, aggressive immunosuppression with high-dose corticosteroids, usually combined with intravenous immunoglobulin,",
+     "Core treatment modality"
     ],
-    "prognosis": "The disease is often self-limiting over months to a few years but can leave permanent cognitive impairment, visual field loss, and hearing deficits; early and sustained immunosuppression improves outcomes, though relapses occur.",
-    "pitfalls": [
-      "Misdiagnosing it as multiple sclerosis and missing the distinguishing central callosal lesions",
-      "Not performing fluorescein angiography, thereby missing subclinical retinal artery occlusions",
-      "Overlooking the diagnosis when the full triad is not present at onset",
-      "Under-treating early disease and permitting irreversible organ damage",
-      "Attributing cognitive symptoms to a psychiatric cause"
-    ],
-    "references": [
-      "Firestein & Kelley's Textbook of Rheumatology",
-      "Harrison's Principles of Internal Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute prompt, aggressive immunosuppression with high-dose corticosteroids, usually combined with intravenous immunoglobulin, to halt the microvascular injury",
-      "Add steroid-sparing immunosuppression such as mycophenolate, azathioprine, rituximab or cyclophosphamide in severe or refractory encephalopathic disease",
-      "Escalate to pulse corticosteroids with intravenous immunoglobulin or cyclophosphamide during acute encephalopathic deterioration",
-      "Provide rehabilitation for cognitive deficits and hearing rehabilitation with hearing aids or cochlear implantation for sensorineural loss",
-      "Monitor disease activity with serial brain MRI, fluorescein angiography and audiometry, since subclinical relapse is common",
-      "Manage through a multidisciplinary team spanning neurology, ophthalmology and audiology or ENT",
-      "Continue prolonged immunosuppression and surveillance because relapses occur after apparent remission"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing it as multiple sclerosis and missing the distinguishing central callosal lesions",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for susac syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "susac-syndrome-diagram",
+   "title": "Susac syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

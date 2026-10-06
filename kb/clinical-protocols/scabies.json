@@ -5,7 +5,20 @@
  "population": "All ages",
  "basis": "international",
  "setting": "Primary care, dermatology, hospitals and care institutions",
- "aliases": ["scabies", "itch mite", "Sarcoptes scabiei", "crusted scabies", "Norwegian scabies", "nodular scabies", "permethrin", "ivermectin", "benzyl benzoate", "scabicide", "burrows", "scabies outbreak"],
+ "aliases": [
+  "scabies",
+  "itch mite",
+  "Sarcoptes scabiei",
+  "crusted scabies",
+  "Norwegian scabies",
+  "nodular scabies",
+  "permethrin",
+  "ivermectin",
+  "benzyl benzoate",
+  "scabicide",
+  "burrows",
+  "scabies outbreak"
+ ],
  "summary": "Treat the patient and all close contacts at the same time with permethrin 5% cream left on for 8 to 12 hours and repeated after 7 to 14 days, or oral ivermectin 200 mcg/kg with food as 2 doses 1 week apart. Crusted scabies needs combined topical and repeated oral ivermectin with isolation.",
  "sections": [
   {
@@ -83,16 +96,150 @@
   }
  ],
  "drugs": [
-  { "name": "Permethrin 5% cream", "dose": "Apply to the whole body (up to 30 g for an adult), leave 8 to 12 hours, then wash off; repeat after 7 to 14 days", "notes": "First line from 2 months of age; safe in pregnancy and breastfeeding." },
-  { "name": "Ivermectin (oral)", "dose": "200 mcg/kg orally with food as 2 doses 1 week apart; crusted scabies: days 1, 2 and 8 (plus 9 and 15, or 9, 15, 22 and 29 if severe)", "notes": "Labelled not for children under 15 kg or pregnancy. May raise INR with warfarin." },
-  { "name": "Benzyl benzoate 25% lotion", "dose": "Adults: apply to the whole body at night on 2 consecutive nights, repeat after 7 days", "notes": "Irritant. Dilute for children and further for infants. Alternative topical for crusted scabies." },
-  { "name": "Precipitated sulphur 6 to 10% ointment", "dose": "Apply to the whole body on 3 successive nights", "notes": "Option for infants under 2 months and pregnancy; messy with an odour." }
+  {
+   "name": "Permethrin 5% cream",
+   "dose": "Apply to the whole body (up to 30 g for an adult), leave 8 to 12 hours, then wash off; repeat after 7 to 14 days",
+   "notes": "First line from 2 months of age; safe in pregnancy and breastfeeding."
+  },
+  {
+   "name": "Ivermectin (oral)",
+   "dose": "200 mcg/kg orally with food as 2 doses 1 week apart; crusted scabies: days 1, 2 and 8 (plus 9 and 15, or 9, 15, 22 and 29 if severe)",
+   "notes": "Labelled not for children under 15 kg or pregnancy. May raise INR with warfarin."
+  },
+  {
+   "name": "Benzyl benzoate 25% lotion",
+   "dose": "Adults: apply to the whole body at night on 2 consecutive nights, repeat after 7 days",
+   "notes": "Irritant. Dilute for children and further for infants. Alternative topical for crusted scabies."
+  },
+  {
+   "name": "Precipitated sulphur 6 to 10% ointment",
+   "dose": "Apply to the whole body on 3 successive nights",
+   "notes": "Option for infants under 2 months and pregnancy; messy with an odour."
+  }
  ],
  "sources": [
-  { "org": "IUSTI / European Academy of Dermatology and Venereology", "title": "2016 European guideline for the management of scabies", "year": 2017, "url": "https://iusti.org/wp-content/uploads/2019/12/Scabies.pdf" },
-  { "org": "CDC", "title": "Sexually transmitted infections treatment guidelines, 2021: ectoparasitic infections (scabies)", "year": 2021, "url": "https://www.cdc.gov/std/treatment-guidelines/ectoparasitic.htm" },
-  { "org": "CDC", "title": "Clinical care of scabies", "year": 2023, "url": "https://www.cdc.gov/scabies/hcp/clinical-care/index.html" },
-  { "org": "WHO", "title": "Scabies fact sheet", "year": 2023, "url": "https://www.who.int/news-room/fact-sheets/detail/scabies" }
+  {
+   "org": "IUSTI / European Academy of Dermatology and Venereology",
+   "title": "2016 European guideline for the management of scabies",
+   "year": 2017,
+   "url": "https://iusti.org/wp-content/uploads/2019/12/Scabies.pdf"
+  },
+  {
+   "org": "CDC",
+   "title": "Sexually transmitted infections treatment guidelines, 2021: ectoparasitic infections (scabies)",
+   "year": 2021,
+   "url": "https://www.cdc.gov/std/treatment-guidelines/ectoparasitic.htm"
+  },
+  {
+   "org": "CDC",
+   "title": "Clinical care of scabies",
+   "year": 2023,
+   "url": "https://www.cdc.gov/scabies/hcp/clinical-care/index.html"
+  },
+  {
+   "org": "WHO",
+   "title": "Scabies fact sheet",
+   "year": 2023,
+   "url": "https://www.who.int/news-room/fact-sheets/detail/scabies"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "scabies-pathway",
+   "title": "Scabies, including crusted scabies Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Intense generalised itch, worse at night, starting 3 to 6 weeks after a first infestation (1 to 3 days after re-infestation), often with itchy household contacts.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Burrows and papules on finger webs, wrists, elbows, axillae, periumbilical skin, waistline, buttocks and genitals (penile and scrotal nodules are highly suggestive) and areolae. Infants often have palm, sole, face and scalp lesions with",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Diagnosis is mainly clinical (2020 IACS consensus criteria). Confirm when possible by dermoscopy (delta or jet-with-contrail sign) or microscopy of skin scrapings (mites, eggs, faeces); a negative scraping does not exclude scabies."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Manage with specialist input, usually admitted: contact precautions (gloves and gowns), single room, and treatment of all contacts and exposed staff."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review 2 weeks after completing treatment (IUSTI). Cure: no active lesions or nocturnal itch 1 week after the end of treatment; new burrows or lesions after 2 to 4 weeks suggest failure or reinfestation."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for scabies, including crusted scabies."
+  }
+ ],
+ "tables": [
+  {
+   "id": "scabies-summary-matrix",
+   "title": "Scabies, including crusted scabies Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Intense generalised itch, worse at night, starting 3 to 6 weeks after a first infestation (1 to 3 days after re-infestation), often with",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Manage with specialist input, usually admitted: contact precautions (gloves and gowns), single room, and treatment of all contacts and",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Diagnosis is mainly clinical (2020 IACS consensus criteria). Confirm when possible by dermoscopy (delta or jet-with-contrail sign) or",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Permethrin 5% cream: Apply to the whole body (up to 30 g for an adult), leave 8 to 12 hours, then wash off; repeat after 7 to 14 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating only the index patient, so untreated contacts reinfest the household.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for scabies, including crusted scabies."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "scabies-diagram",
+   "title": "Scabies, including crusted scabies: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

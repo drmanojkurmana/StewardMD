@@ -1,79 +1,174 @@
 {
-  "id": "nelson_tumor",
-  "name": "Nelson syndrome corticotroph tumour",
-  "aliases": [
-    "Nelson syndrome",
-    "Nelson tumour",
-    "corticotroph tumour progression",
-    "post-adrenalectomy corticotroph adenoma"
+ "id": "nelson_tumor",
+ "name": "Nelson syndrome corticotroph tumour",
+ "aliases": [
+  "Nelson syndrome",
+  "Nelson tumour",
+  "corticotroph tumour progression",
+  "post-adrenalectomy corticotroph adenoma"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Develops after bilateral adrenalectomy for Cushing disease when loss of cortisol negative feedback allows the residual corticotroph adenoma to enlarge",
+   "The classic combination is progressive growth of an ACTH-secreting pituitary tumour, very high plasma ACTH and skin hyperpigmentation",
+   "Hyperpigmentation results from markedly elevated ACTH and other pro-opiomelanocortin-derived peptides stimulating melanocytes",
+   "Mass effect may cause headache, visual field loss such as a bitemporal hemianopia, and hypopituitarism",
+   "Risk is higher in younger patients and in aggressive disease, and prophylactic pituitary irradiation at the time of adrenalectomy reduces the incidence",
+   "The condition is largely avoided by treating the pituitary source directly rather than relying on bilateral adrenalectomy alone",
+   "It is now less common as pituitary-directed therapy has become first-line for Cushing disease",
+   "Management combines transsphenoidal surgery and radiotherapy, and some tumours behave aggressively"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Develops after bilateral adrenalectomy for Cushing disease when loss of cortisol negative feedback allows the residual corticotroph adenoma to enlarge",
-      "The classic combination is progressive growth of an ACTH-secreting pituitary tumour, very high plasma ACTH and skin hyperpigmentation",
-      "Hyperpigmentation results from markedly elevated ACTH and other pro-opiomelanocortin-derived peptides stimulating melanocytes",
-      "Mass effect may cause headache, visual field loss such as a bitemporal hemianopia, and hypopituitarism",
-      "Risk is higher in younger patients and in aggressive disease, and prophylactic pituitary irradiation at the time of adrenalectomy reduces the incidence",
-      "The condition is largely avoided by treating the pituitary source directly rather than relying on bilateral adrenalectomy alone",
-      "It is now less common as pituitary-directed therapy has become first-line for Cushing disease",
-      "Management combines transsphenoidal surgery and radiotherapy, and some tumours behave aggressively"
+  "pathophysiology": "Nelson syndrome arises when bilateral adrenalectomy, performed to control cortisol excess in Cushing disease, removes the cortisol that normally restrains the pituitary corticotroph adenoma. Freed from negative feedback, the corticotroph tumour grows and secretes large amounts of ACTH and other pro-opiomelanocortin derivatives. The excess ACTH and related melanocyte-stimulating peptides cause diffuse skin hyperpigmentation, while tumour enlargement produces local mass effects on the optic chiasm and the normal pituitary. Some corticotroph tumours in this setting are inherently aggressive, with rapid growth and, rarely, malignant transformation.",
+  "additionalDifferentials": [
+   "Other sellar masses causing mass effect such as non-functioning adenoma, craniopharyngioma or meningioma",
+   "Primary adrenal insufficiency, which also causes hyperpigmentation and high ACTH",
+   "Persistent or recurrent Cushing disease before adrenalectomy",
+   "Ectopic ACTH syndrome",
+   "Other causes of hyperpigmentation such as haemochromatosis or drugs"
+  ],
+  "additionalInvestigations": [
+   "Serial plasma ACTH measurement, showing marked and progressive elevation",
+   "Serial pituitary MRI to document corticotroph tumour growth",
+   "Formal visual field assessment by perimetry for chiasmal compression",
+   "Assessment of remaining anterior pituitary function for hypopituitarism",
+   "Confirmation of adequate glucocorticoid and mineralocorticoid replacement after adrenalectomy"
+  ],
+  "redFlags": [
+   "Rapid tumour growth with visual field loss or cranial nerve involvement",
+   "Very high or steeply rising ACTH with deepening pigmentation",
+   "Features suggesting an aggressive or malignant corticotroph tumour",
+   "Adrenal crisis from inadequate replacement in an adrenalectomised patient"
+  ],
+  "prognosis": "Variable: many corticotroph tumours are controlled with surgery and radiotherapy, but a subset behave aggressively with recurrence and rare metastasis; prophylactic radiotherapy and modern pituitary-directed treatment of Cushing disease have reduced the incidence and improved outcomes.",
+  "pitfalls": [
+   "Relying on bilateral adrenalectomy without monitoring ACTH and pituitary imaging for tumour progression",
+   "Attributing new hyperpigmentation to under-replacement alone without imaging the pituitary",
+   "Missing visual field deterioration through infrequent monitoring",
+   "Overlooking the higher risk in children and young patients"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "DeGroot's Endocrinology",
+   "Pituitary Society reviews on Nelson syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Transsphenoidal resection of the ACTH-secreting corticotroph tumour as the mainstay of treatment",
+   "Adjuvant or prophylactic pituitary radiotherapy, given at the time of adrenalectomy in high-risk cases to reduce incidence",
+   "Medical therapy to suppress ACTH and restrain tumour growth, including pasireotide, cabergoline and temozolomide for aggressive or malignant behaviour",
+   "Lifelong glucocorticoid and mineralocorticoid replacement after bilateral adrenalectomy",
+   "Treatment of hypopituitarism with targeted hormone replacement and monitoring for bitemporal hemianopia from chiasmal compression",
+   "Serial plasma ACTH and pituitary MRI surveillance after adrenalectomy for early detection",
+   "Preferential direct pituitary-directed treatment of Cushing disease to avoid the syndrome, coordinated by an endocrine and neurosurgical team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "nelson_tumor-pathway",
+   "title": "Nelson syndrome corticotroph tumour: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Develops after bilateral adrenalectomy for Cushing disease when loss of cortisol negative feedback allows the residual corticotroph adenoma to enlarge",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid tumour growth with visual field loss or cranial nerve involvement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial plasma ACTH measurement, showing marked and progressive elevation, Serial pituitary MRI to document corticotroph tumour growth, Formal visual field assessment by perimetry for chiasmal compression"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Transsphenoidal resection of the ACTH-secreting corticotroph tumour as the mainstay of treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on bilateral adrenalectomy without monitoring ACTH and pituitary imaging for tumour progression"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of nelson syndrome corticotroph tumour."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nelson_tumor-matrix",
+   "title": "Nelson syndrome corticotroph tumour: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Develops after bilateral adrenalectomy for Cushing disease when loss of cortisol negative feedback allows the residual",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Nelson syndrome arises when bilateral adrenalectomy, performed to control cortisol excess in Cushing disease, removes the cortisol that normally restrains the pituitary corticotroph adenoma. Freed from negative feedback, the corticotroph tumour grows and secretes large amounts of ACTH and other pro-opiomelanocortin derivatives. The excess ACTH and related melanocyte-stimulating peptides cause diffuse skin hyperpigmentation, while tumour enlargement produces local mass effects on the optic chiasm and the normal pituitary. Some corticotroph tumours in this setting are inherently aggressive, with rapid growth and, rarely, malignant transformation.",
-    "additionalDifferentials": [
-      "Other sellar masses causing mass effect such as non-functioning adenoma, craniopharyngioma or meningioma",
-      "Primary adrenal insufficiency, which also causes hyperpigmentation and high ACTH",
-      "Persistent or recurrent Cushing disease before adrenalectomy",
-      "Ectopic ACTH syndrome",
-      "Other causes of hyperpigmentation such as haemochromatosis or drugs"
+    [
+     "Key Investigations",
+     "Serial plasma ACTH measurement, showing marked and progressive elevation, Serial pituitary MRI to document corticotroph tumour",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial plasma ACTH measurement, showing marked and progressive elevation",
-      "Serial pituitary MRI to document corticotroph tumour growth",
-      "Formal visual field assessment by perimetry for chiasmal compression",
-      "Assessment of remaining anterior pituitary function for hypopituitarism",
-      "Confirmation of adequate glucocorticoid and mineralocorticoid replacement after adrenalectomy"
+    [
+     "Primary Differentials",
+     "Other sellar masses causing mass effect such as non-functioning adenoma, craniopharyngioma or meningioma, Primary adrenal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid tumour growth with visual field loss or cranial nerve involvement",
-      "Very high or steeply rising ACTH with deepening pigmentation",
-      "Features suggesting an aggressive or malignant corticotroph tumour",
-      "Adrenal crisis from inadequate replacement in an adrenalectomised patient"
+    [
+     "Management Strategy",
+     "Transsphenoidal resection of the ACTH-secreting corticotroph tumour as the mainstay of treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Variable: many corticotroph tumours are controlled with surgery and radiotherapy, but a subset behave aggressively with recurrence and rare metastasis; prophylactic radiotherapy and modern pituitary-directed treatment of Cushing disease have reduced the incidence and improved outcomes.",
-    "pitfalls": [
-      "Relying on bilateral adrenalectomy without monitoring ACTH and pituitary imaging for tumour progression",
-      "Attributing new hyperpigmentation to under-replacement alone without imaging the pituitary",
-      "Missing visual field deterioration through infrequent monitoring",
-      "Overlooking the higher risk in children and young patients"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "DeGroot's Endocrinology",
-      "Pituitary Society reviews on Nelson syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Transsphenoidal resection of the ACTH-secreting corticotroph tumour as the mainstay of treatment",
-      "Adjuvant or prophylactic pituitary radiotherapy, given at the time of adrenalectomy in high-risk cases to reduce incidence",
-      "Medical therapy to suppress ACTH and restrain tumour growth, including pasireotide, cabergoline and temozolomide for aggressive or malignant behaviour",
-      "Lifelong glucocorticoid and mineralocorticoid replacement after bilateral adrenalectomy",
-      "Treatment of hypopituitarism with targeted hormone replacement and monitoring for bitemporal hemianopia from chiasmal compression",
-      "Serial plasma ACTH and pituitary MRI surveillance after adrenalectomy for early detection",
-      "Preferential direct pituitary-directed treatment of Cushing disease to avoid the syndrome, coordinated by an endocrine and neurosurgical team"
+    [
+     "Clinical Pitfall",
+     "Relying on bilateral adrenalectomy without monitoring ACTH and pituitary imaging for tumour progression",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for nelson syndrome corticotroph tumour."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "nelson-tumor-diagram",
+   "title": "Nelson syndrome corticotroph tumour: Endocrine Feedback & Metabolic Control Axis",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/endocrine-diagram.svg?v=kbdx1",
+   "caption": "Hypothalamic-pituitary-end organ endocrine feedback loop schematic detailing hormonal synthesis, receptor regulation, and metabolic homeostasis.",
+   "annotations": [
+    {
+     "label": "Central Axis",
+     "description": "Hypothalamic releasing hormones and pituitary trophic stimulation."
+    },
+    {
+     "label": "Target Gland",
+     "description": "Peripheral endocrine hormone secretion and tissue receptor transduction."
+    },
+    {
+     "label": "Negative Feedback",
+     "description": "Homeostatic regulation governing hormone suppressibility and responsiveness."
+    }
+   ]
+  }
+ ]
 }

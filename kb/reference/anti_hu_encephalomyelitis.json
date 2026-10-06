@@ -1,81 +1,176 @@
 {
-  "id": "anti_hu_encephalomyelitis",
-  "name": "Anti-Hu paraneoplastic encephalomyelitis",
-  "aliases": [
-    "anti-Hu syndrome",
-    "ANNA-1 encephalomyelitis",
-    "paraneoplastic encephalomyelitis",
-    "Hu antibody-associated encephalomyelitis"
+ "id": "anti_hu_encephalomyelitis",
+ "name": "Anti-Hu paraneoplastic encephalomyelitis",
+ "aliases": [
+  "anti-Hu syndrome",
+  "ANNA-1 encephalomyelitis",
+  "paraneoplastic encephalomyelitis",
+  "Hu antibody-associated encephalomyelitis"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Neuropsychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Anti-Hu (ANNA-1) antibodies define a multifocal paraneoplastic syndrome that can affect any level of the nervous system simultaneously",
+   "Manifestations include limbic and brainstem encephalitis, cerebellar degeneration, sensory neuronopathy, autonomic failure, and myelitis, often in combination",
+   "A painful subacute sensory neuronopathy with loss of proprioception and sensory ataxia is a particularly characteristic feature",
+   "Overwhelmingly associated with small-cell lung cancer, which is often occult at presentation",
+   "The neurological syndrome usually precedes the cancer diagnosis and should trigger an intensive tumour search",
+   "Because the target antigens are intracellular and damage is T-cell mediated, neurological recovery is often limited even with treatment",
+   "Management combines treatment of the underlying tumour with immunotherapy"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Neuropsychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Anti-Hu (ANNA-1) antibodies define a multifocal paraneoplastic syndrome that can affect any level of the nervous system simultaneously",
-      "Manifestations include limbic and brainstem encephalitis, cerebellar degeneration, sensory neuronopathy, autonomic failure, and myelitis, often in combination",
-      "A painful subacute sensory neuronopathy with loss of proprioception and sensory ataxia is a particularly characteristic feature",
-      "Overwhelmingly associated with small-cell lung cancer, which is often occult at presentation",
-      "The neurological syndrome usually precedes the cancer diagnosis and should trigger an intensive tumour search",
-      "Because the target antigens are intracellular and damage is T-cell mediated, neurological recovery is often limited even with treatment",
-      "Management combines treatment of the underlying tumour with immunotherapy"
+  "pathophysiology": "Anti-Hu encephalomyelitis is driven by an immune response against Hu antigens, RNA-binding proteins expressed by small-cell lung cancer and also by neurons throughout the central and peripheral nervous system. The cross-reactive immune attack, believed to be predominantly cytotoxic T-cell mediated against these intracellular antigens, produces inflammation and neuronal loss at multiple sites, giving the characteristic multifocal picture. The dorsal root ganglia are frequently targeted, producing sensory neuronopathy, while limbic, brainstem, cerebellar, autonomic, and spinal involvement reflect the widespread neuronal expression of the antigen. The intracellular location of the target and the resulting neuronal destruction account for the generally poor neurological response to immunotherapy.",
+  "additionalDifferentials": [
+   "Other autoimmune limbic encephalitides (e.g. anti-NMDA-receptor, LGI1)",
+   "Infective (herpes simplex) encephalitis",
+   "Paraneoplastic cerebellar degeneration from other antibodies",
+   "Sensory neuronopathy from Sjogren syndrome, cisplatin, or vitamin B6 toxicity",
+   "Guillain-Barre spectrum and chronic inflammatory neuropathies",
+   "Vitamin B12 deficiency with subacute combined degeneration",
+   "Autoimmune or infective myelitis"
+  ],
+  "additionalInvestigations": [
+   "Serum and cerebrospinal fluid anti-Hu (ANNA-1) and broader paraneoplastic antibody panel",
+   "CT chest and FDG-PET to detect occult small-cell lung cancer, with bronchoscopy or biopsy as needed",
+   "MRI brain and spine, which may show medial temporal or brainstem signal change",
+   "Cerebrospinal fluid analysis for pleocytosis and oligoclonal bands",
+   "Nerve conduction studies confirming a sensory neuronopathy",
+   "Electroencephalography where encephalitis or seizures are suspected"
+  ],
+  "redFlags": [
+   "Rapidly progressive encephalitis with seizures or reduced consciousness",
+   "Brainstem or bulbar involvement threatening airway and swallow",
+   "Severe autonomic failure with cardiovascular or gastrointestinal instability",
+   "Positive anti-Hu antibodies indicating a very high probability of underlying malignancy",
+   "Respiratory compromise from neuromuscular or central involvement"
+  ],
+  "prognosis": "The prognosis is generally poor, with neurological deficits often stabilising rather than reversing after treatment; overall outcome is strongly determined by the underlying small-cell lung cancer, though treating the tumour may slow neurological progression.",
+  "pitfalls": [
+   "Overlooking an occult small-cell lung cancer when initial imaging is negative",
+   "Misdiagnosing the sensory neuronopathy as a peripheral neuropathy of other cause",
+   "Expecting substantial neurological recovery from immunotherapy alone",
+   "Failing to recognise the multifocal nature and attributing each deficit separately",
+   "Delaying tumour treatment, which offers the best chance of stabilisation"
+  ],
+  "references": [
+   "Adams and Victor's Principles of Neurology",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Intensive search for and treatment of the underlying small-cell lung cancer, offering the best chance of halting neurological progression",
+   "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, recognising that response is often limited owing to T-cell-mediated neuronal loss",
+   "Antiseizure medication for seizures and symptomatic treatment of the painful sensory neuronopathy with neuropathic-pain agents",
+   "Supportive management of autonomic failure, including orthostatic hypotension and gastrointestinal dysmotility",
+   "Rehabilitation for sensory ataxia and multidisciplinary supportive and palliative care",
+   "Neurology-oncology follow-up with ongoing tumour surveillance where the cancer is initially occult"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "anti_hu_encephalomyelitis-pathway",
+   "title": "Anti-Hu paraneoplastic encephalomyelitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Anti-Hu (ANNA-1) antibodies define a multifocal paraneoplastic syndrome that can affect any level of the nervous system simultaneously",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive encephalitis with seizures or reduced consciousness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum and cerebrospinal fluid anti-Hu (ANNA-1) and broader paraneoplastic antibody panel, CT chest and FDG-PET to detect occult small-cell lung cancer, with bronchoscopy or biopsy as needed, MRI brain and spine, which may"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Intensive search for and treatment of the underlying small-cell lung cancer, offering the best chance of halting neurological progression"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking an occult small-cell lung cancer when initial imaging is negative"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of anti-hu paraneoplastic encephalomyelitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anti_hu_encephalomyelitis-matrix",
+   "title": "Anti-Hu paraneoplastic encephalomyelitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Anti-Hu (ANNA-1) antibodies define a multifocal paraneoplastic syndrome that can affect any level of the nervous system",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Anti-Hu encephalomyelitis is driven by an immune response against Hu antigens, RNA-binding proteins expressed by small-cell lung cancer and also by neurons throughout the central and peripheral nervous system. The cross-reactive immune attack, believed to be predominantly cytotoxic T-cell mediated against these intracellular antigens, produces inflammation and neuronal loss at multiple sites, giving the characteristic multifocal picture. The dorsal root ganglia are frequently targeted, producing sensory neuronopathy, while limbic, brainstem, cerebellar, autonomic, and spinal involvement reflect the widespread neuronal expression of the antigen. The intracellular location of the target and the resulting neuronal destruction account for the generally poor neurological response to immunotherapy.",
-    "additionalDifferentials": [
-      "Other autoimmune limbic encephalitides (e.g. anti-NMDA-receptor, LGI1)",
-      "Infective (herpes simplex) encephalitis",
-      "Paraneoplastic cerebellar degeneration from other antibodies",
-      "Sensory neuronopathy from Sjogren syndrome, cisplatin, or vitamin B6 toxicity",
-      "Guillain-Barre spectrum and chronic inflammatory neuropathies",
-      "Vitamin B12 deficiency with subacute combined degeneration",
-      "Autoimmune or infective myelitis"
+    [
+     "Key Investigations",
+     "Serum and cerebrospinal fluid anti-Hu (ANNA-1) and broader paraneoplastic antibody panel, CT chest and FDG-PET to detect occult",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum and cerebrospinal fluid anti-Hu (ANNA-1) and broader paraneoplastic antibody panel",
-      "CT chest and FDG-PET to detect occult small-cell lung cancer, with bronchoscopy or biopsy as needed",
-      "MRI brain and spine, which may show medial temporal or brainstem signal change",
-      "Cerebrospinal fluid analysis for pleocytosis and oligoclonal bands",
-      "Nerve conduction studies confirming a sensory neuronopathy",
-      "Electroencephalography where encephalitis or seizures are suspected"
+    [
+     "Primary Differentials",
+     "Other autoimmune limbic encephalitides (e.g. anti-NMDA-receptor, LGI1), Infective (herpes simplex) encephalitis, Paraneoplastic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive encephalitis with seizures or reduced consciousness",
-      "Brainstem or bulbar involvement threatening airway and swallow",
-      "Severe autonomic failure with cardiovascular or gastrointestinal instability",
-      "Positive anti-Hu antibodies indicating a very high probability of underlying malignancy",
-      "Respiratory compromise from neuromuscular or central involvement"
+    [
+     "Management Strategy",
+     "Intensive search for and treatment of the underlying small-cell lung cancer, offering the best chance of halting neurological",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally poor, with neurological deficits often stabilising rather than reversing after treatment; overall outcome is strongly determined by the underlying small-cell lung cancer, though treating the tumour may slow neurological progression.",
-    "pitfalls": [
-      "Overlooking an occult small-cell lung cancer when initial imaging is negative",
-      "Misdiagnosing the sensory neuronopathy as a peripheral neuropathy of other cause",
-      "Expecting substantial neurological recovery from immunotherapy alone",
-      "Failing to recognise the multifocal nature and attributing each deficit separately",
-      "Delaying tumour treatment, which offers the best chance of stabilisation"
-    ],
-    "references": [
-      "Adams and Victor's Principles of Neurology",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Intensive search for and treatment of the underlying small-cell lung cancer, offering the best chance of halting neurological progression",
-      "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, recognising that response is often limited owing to T-cell-mediated neuronal loss",
-      "Antiseizure medication for seizures and symptomatic treatment of the painful sensory neuronopathy with neuropathic-pain agents",
-      "Supportive management of autonomic failure, including orthostatic hypotension and gastrointestinal dysmotility",
-      "Rehabilitation for sensory ataxia and multidisciplinary supportive and palliative care",
-      "Neurology-oncology follow-up with ongoing tumour surveillance where the cancer is initially occult"
+    [
+     "Clinical Pitfall",
+     "Overlooking an occult small-cell lung cancer when initial imaging is negative",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for anti-hu paraneoplastic encephalomyelitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "anti-hu-encephalomyelitis-diagram",
+   "title": "Anti-Hu paraneoplastic encephalomyelitis: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

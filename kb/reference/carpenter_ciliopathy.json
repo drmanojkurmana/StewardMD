@@ -1,78 +1,173 @@
 {
-  "id": "carpenter_ciliopathy",
-  "name": "Carpenter syndrome (RAB23, acrocephalopolysyndactyly)",
-  "aliases": [
-    "Carpenter syndrome",
-    "acrocephalopolysyndactyly type II",
-    "ACPS II",
-    "RAB23",
-    "MEGF8"
+ "id": "carpenter_ciliopathy",
+ "name": "Carpenter syndrome (RAB23, acrocephalopolysyndactyly)",
+ "aliases": [
+  "Carpenter syndrome",
+  "acrocephalopolysyndactyly type II",
+  "ACPS II",
+  "RAB23",
+  "MEGF8"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Ciliopathy",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acrocephalopolysyndactyly combining craniosynostosis with polydactyly and syndactyly",
+   "Synostosis of multiple sutures produces a tower-shaped skull and, in severe cases, a cloverleaf skull",
+   "The hands show variable brachydactyly and syndactyly, while the feet typically show preaxial polydactyly",
+   "Obesity, congenital heart disease and genital anomalies are commonly associated",
+   "Developmental outcome is variable, ranging from normal intellect to significant disability",
+   "Caused chiefly by biallelic RAB23 variants, with some cases due to MEGF8, and inherited as an autosomal recessive trait",
+   "RAB23 regulates vesicular trafficking to the cilium and modulates hedgehog signalling, placing the disorder among the ciliopathies"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Ciliopathy",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acrocephalopolysyndactyly combining craniosynostosis with polydactyly and syndactyly",
-      "Synostosis of multiple sutures produces a tower-shaped skull and, in severe cases, a cloverleaf skull",
-      "The hands show variable brachydactyly and syndactyly, while the feet typically show preaxial polydactyly",
-      "Obesity, congenital heart disease and genital anomalies are commonly associated",
-      "Developmental outcome is variable, ranging from normal intellect to significant disability",
-      "Caused chiefly by biallelic RAB23 variants, with some cases due to MEGF8, and inherited as an autosomal recessive trait",
-      "RAB23 regulates vesicular trafficking to the cilium and modulates hedgehog signalling, placing the disorder among the ciliopathies"
+  "pathophysiology": "Carpenter syndrome is caused predominantly by biallelic loss-of-function variants in RAB23, a small GTPase that governs vesicular trafficking to the primary cilium and acts as a negative regulator of hedgehog signalling; a subset of cases result from variants in MEGF8. Because hedgehog signalling at the cilium coordinates cranial suture patterning, limb development and cardiac morphogenesis, its dysregulation produces the multi-suture craniosynostosis with acrocephaly, the preaxial polydactyly and syndactyly, and the congenital heart disease characteristic of the condition. The variable involvement of growth, cognition and the genitalia reflects the broad developmental role of ciliary hedgehog signalling, and the pattern places Carpenter syndrome within the acrocephalopolysyndactyly ciliopathies.",
+  "additionalDifferentials": [
+   "Other acrocephalopolysyndactyly syndromes such as Apert and Pfeiffer syndromes",
+   "Greig cephalopolysyndactyly syndrome",
+   "Bardet-Biedl syndrome",
+   "Saethre-Chotzen syndrome",
+   "Craniosynostosis syndromes without polydactyly",
+   "Other syndromic obesity-polydactyly disorders"
+  ],
+  "additionalInvestigations": [
+   "Cranial imaging with radiographs and CT to define suture synostosis and skull shape",
+   "Radiographs of the hands and feet to characterise polydactyly and syndactyly",
+   "Echocardiography for congenital heart disease",
+   "Ophthalmological and developmental assessment",
+   "Molecular testing of RAB23 and MEGF8"
+  ],
+  "redFlags": [
+   "Raised intracranial pressure from multi-suture craniosynostosis",
+   "Airway compromise or obstructive sleep apnoea",
+   "Haemodynamically significant congenital heart disease"
+  ],
+  "prognosis": "With staged cranial surgery and management of cardiac and airway problems many individuals do well; intellectual outcome is variable, and the presence of associated malformations influences the overall prognosis.",
+  "pitfalls": [
+   "Confusing it with other acrocephalopolysyndactyly craniosynostosis syndromes such as Apert syndrome",
+   "Overlooking raised intracranial pressure in multi-suture synostosis",
+   "Missing associated cardiac or genital anomalies",
+   "Assuming a uniformly poor developmental outcome"
+  ],
+  "references": [
+   "GeneReviews / OMIM: Carpenter Syndrome (RAB23)",
+   "Smith's Recognizable Patterns of Human Malformation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Staged cranial vault expansion and reconstruction to correct multisuture craniosynostosis and relieve raised intracranial pressure",
+   "Monitoring and management of the airway, given the risk of upper-airway obstruction",
+   "Echocardiographic evaluation with medical or surgical treatment of associated congenital heart disease",
+   "Reconstructive hand and foot surgery for the syndactyly and polydactyly",
+   "Ophthalmological assessment for papilloedema and visual complications, with developmental support and weight management for obesity",
+   "Multidisciplinary craniofacial team coordination across neurosurgery, plastic surgery, ophthalmology and paediatrics",
+   "Genetic counselling for autosomal recessive inheritance, with molecular testing of RAB23 and MEGF8 and family screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carpenter_ciliopathy-pathway",
+   "title": "Carpenter syndrome (RAB23, acrocephalopolysyndactyly): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acrocephalopolysyndactyly combining craniosynostosis with polydactyly and syndactyly",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Raised intracranial pressure from multi-suture craniosynostosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Cranial imaging with radiographs and CT to define suture synostosis and skull shape, Radiographs of the hands and feet to characterise polydactyly and syndactyly, Echocardiography for congenital heart disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Staged cranial vault expansion and reconstruction to correct multisuture craniosynostosis and relieve raised intracranial pressure"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with other acrocephalopolysyndactyly craniosynostosis syndromes such as Apert syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carpenter syndrome (rab23, acrocephalopolysyndactyly)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carpenter_ciliopathy-matrix",
+   "title": "Carpenter syndrome (RAB23, acrocephalopolysyndactyly): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acrocephalopolysyndactyly combining craniosynostosis with polydactyly and syndactyly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Carpenter syndrome is caused predominantly by biallelic loss-of-function variants in RAB23, a small GTPase that governs vesicular trafficking to the primary cilium and acts as a negative regulator of hedgehog signalling; a subset of cases result from variants in MEGF8. Because hedgehog signalling at the cilium coordinates cranial suture patterning, limb development and cardiac morphogenesis, its dysregulation produces the multi-suture craniosynostosis with acrocephaly, the preaxial polydactyly and syndactyly, and the congenital heart disease characteristic of the condition. The variable involvement of growth, cognition and the genitalia reflects the broad developmental role of ciliary hedgehog signalling, and the pattern places Carpenter syndrome within the acrocephalopolysyndactyly ciliopathies.",
-    "additionalDifferentials": [
-      "Other acrocephalopolysyndactyly syndromes such as Apert and Pfeiffer syndromes",
-      "Greig cephalopolysyndactyly syndrome",
-      "Bardet-Biedl syndrome",
-      "Saethre-Chotzen syndrome",
-      "Craniosynostosis syndromes without polydactyly",
-      "Other syndromic obesity-polydactyly disorders"
+    [
+     "Key Investigations",
+     "Cranial imaging with radiographs and CT to define suture synostosis and skull shape, Radiographs of the hands and feet to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Cranial imaging with radiographs and CT to define suture synostosis and skull shape",
-      "Radiographs of the hands and feet to characterise polydactyly and syndactyly",
-      "Echocardiography for congenital heart disease",
-      "Ophthalmological and developmental assessment",
-      "Molecular testing of RAB23 and MEGF8"
+    [
+     "Primary Differentials",
+     "Other acrocephalopolysyndactyly syndromes such as Apert and Pfeiffer syndromes, Greig cephalopolysyndactyly syndrome,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Raised intracranial pressure from multi-suture craniosynostosis",
-      "Airway compromise or obstructive sleep apnoea",
-      "Haemodynamically significant congenital heart disease"
+    [
+     "Management Strategy",
+     "Staged cranial vault expansion and reconstruction to correct multisuture craniosynostosis and relieve raised intracranial pressure",
+     "Core treatment modality"
     ],
-    "prognosis": "With staged cranial surgery and management of cardiac and airway problems many individuals do well; intellectual outcome is variable, and the presence of associated malformations influences the overall prognosis.",
-    "pitfalls": [
-      "Confusing it with other acrocephalopolysyndactyly craniosynostosis syndromes such as Apert syndrome",
-      "Overlooking raised intracranial pressure in multi-suture synostosis",
-      "Missing associated cardiac or genital anomalies",
-      "Assuming a uniformly poor developmental outcome"
-    ],
-    "references": [
-      "GeneReviews / OMIM: Carpenter Syndrome (RAB23)",
-      "Smith's Recognizable Patterns of Human Malformation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Staged cranial vault expansion and reconstruction to correct multisuture craniosynostosis and relieve raised intracranial pressure",
-      "Monitoring and management of the airway, given the risk of upper-airway obstruction",
-      "Echocardiographic evaluation with medical or surgical treatment of associated congenital heart disease",
-      "Reconstructive hand and foot surgery for the syndactyly and polydactyly",
-      "Ophthalmological assessment for papilloedema and visual complications, with developmental support and weight management for obesity",
-      "Multidisciplinary craniofacial team coordination across neurosurgery, plastic surgery, ophthalmology and paediatrics",
-      "Genetic counselling for autosomal recessive inheritance, with molecular testing of RAB23 and MEGF8 and family screening"
+    [
+     "Clinical Pitfall",
+     "Confusing it with other acrocephalopolysyndactyly craniosynostosis syndromes such as Apert syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carpenter syndrome (rab23, acrocephalopolysyndactyly)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carpenter-ciliopathy-diagram",
+   "title": "Carpenter syndrome (RAB23, acrocephalopolysyndactyly): Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

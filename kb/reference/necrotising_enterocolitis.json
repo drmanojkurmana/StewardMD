@@ -1,74 +1,169 @@
 {
-  "id": "necrotising_enterocolitis",
-  "name": "Necrotising enterocolitis",
-  "aliases": [
-    "NEC"
+ "id": "necrotising_enterocolitis",
+ "name": "Necrotising enterocolitis",
+ "aliases": [
+  "NEC"
+ ],
+ "class": "non_infective",
+ "system": "Neonatal / Gastrointestinal",
+ "specialty": "Neonatology / Paediatric surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neonatology and paediatric surgery references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A serious neonatal gastrointestinal emergency of bowel inflammation and necrosis, predominantly affecting preterm infants",
+   "Presents with feed intolerance, abdominal distension, bloody stools, bilious aspirates and systemic instability",
+   "Prematurity and formula feeding increase risk, while human breast milk is protective",
+   "The abdominal radiograph may show pneumatosis intestinalis, and portal venous gas or free air indicate advanced disease",
+   "The modified Bell staging system grades severity from suspected disease to established and advanced perforation",
+   "Management ranges from bowel rest, gastric decompression and antibiotics to surgery for perforation or deterioration"
   ],
-  "class": "non_infective",
-  "system": "Neonatal / Gastrointestinal",
-  "specialty": "Neonatology / Paediatric surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neonatology and paediatric surgery references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A serious neonatal gastrointestinal emergency of bowel inflammation and necrosis, predominantly affecting preterm infants",
-      "Presents with feed intolerance, abdominal distension, bloody stools, bilious aspirates and systemic instability",
-      "Prematurity and formula feeding increase risk, while human breast milk is protective",
-      "The abdominal radiograph may show pneumatosis intestinalis, and portal venous gas or free air indicate advanced disease",
-      "The modified Bell staging system grades severity from suspected disease to established and advanced perforation",
-      "Management ranges from bowel rest, gastric decompression and antibiotics to surgery for perforation or deterioration"
+  "pathophysiology": "Necrotising enterocolitis is a multifactorial disorder in which immaturity of the preterm gut, in combination with enteral feeding, an abnormal microbial colonisation pattern and mucosal ischaemia, triggers an exaggerated inflammatory response and breakdown of the intestinal barrier. Bacterial translocation across the compromised mucosa amplifies inflammation, leading to variable bowel-wall necrosis, gas within the bowel wall (pneumatosis) and, in severe cases, full-thickness necrosis with perforation and peritonitis. Although bacteria contribute, it is regarded as a distinct inflammatory-ischaemic disease of the immature gut rather than a simple infection.",
+  "additionalDifferentials": [
+   "Spontaneous intestinal perforation",
+   "Neonatal sepsis with ileus",
+   "Malrotation with volvulus",
+   "Hirschsprung enterocolitis",
+   "Milk protein intolerance",
+   "Anal fissure or swallowed maternal blood (for bloody stool)"
+  ],
+  "additionalInvestigations": [
+   "Abdominal radiographs for pneumatosis intestinalis, portal venous gas and free air",
+   "Full blood count, inflammatory markers and blood culture",
+   "Blood gas, glucose and coagulation studies",
+   "Serial abdominal examination and, where used, abdominal ultrasound",
+   "Surgical review for advanced or deteriorating disease"
+  ],
+  "redFlags": [
+   "Pneumoperitoneum indicating perforation",
+   "Rapid clinical deterioration with shock or disseminated intravascular coagulation",
+   "Abdominal wall erythema or a fixed mass",
+   "Portal venous gas or extensive pneumatosis"
+  ],
+  "prognosis": "Outcome varies with severity; medical disease often resolves, but advanced disease carries significant mortality and long-term risks including short bowel syndrome, strictures and neurodevelopmental impairment.",
+  "pitfalls": [
+   "Continuing feeds despite early warning signs",
+   "Missing perforation by not repeating imaging in a deteriorating baby",
+   "Confusing spontaneous intestinal perforation with necrotising enterocolitis",
+   "Underestimating the risk of later strictures after recovery"
+  ],
+  "references": [
+   "Neonatology reference texts (standard reference)",
+   "Paediatric surgery reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Bowel rest with cessation of enteral feeds and nasogastric decompression",
+   "Broad-spectrum intravenous antibiotics covering enteric organisms, with parenteral nutrition to maintain intake",
+   "Supportive care correcting acidosis, coagulopathy and thrombocytopenia, with fluid resuscitation, inotropes and ventilation for shock",
+   "Serial abdominal radiographs and examination to detect progression to portal venous gas or free air",
+   "Surgical intervention with laparotomy or peritoneal drainage for perforation or full-thickness necrosis",
+   "Prioritisation of human breast milk as protective, with cautious graded reintroduction of feeds on recovery",
+   "Paediatric surgical referral and long-term follow-up for strictures, short bowel syndrome and neurodevelopmental outcome"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "necrotising_enterocolitis-pathway",
+   "title": "Necrotising enterocolitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A serious neonatal gastrointestinal emergency of bowel inflammation and necrosis, predominantly affecting preterm infants",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Pneumoperitoneum indicating perforation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Abdominal radiographs for pneumatosis intestinalis, portal venous gas and free air, Full blood count, inflammatory markers and blood culture, Blood gas, glucose and coagulation studies"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Bowel rest with cessation of enteral feeds and nasogastric decompression"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Continuing feeds despite early warning signs"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of necrotising enterocolitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "necrotising_enterocolitis-matrix",
+   "title": "Necrotising enterocolitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A serious neonatal gastrointestinal emergency of bowel inflammation and necrosis, predominantly affecting preterm infants",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Necrotising enterocolitis is a multifactorial disorder in which immaturity of the preterm gut, in combination with enteral feeding, an abnormal microbial colonisation pattern and mucosal ischaemia, triggers an exaggerated inflammatory response and breakdown of the intestinal barrier. Bacterial translocation across the compromised mucosa amplifies inflammation, leading to variable bowel-wall necrosis, gas within the bowel wall (pneumatosis) and, in severe cases, full-thickness necrosis with perforation and peritonitis. Although bacteria contribute, it is regarded as a distinct inflammatory-ischaemic disease of the immature gut rather than a simple infection.",
-    "additionalDifferentials": [
-      "Spontaneous intestinal perforation",
-      "Neonatal sepsis with ileus",
-      "Malrotation with volvulus",
-      "Hirschsprung enterocolitis",
-      "Milk protein intolerance",
-      "Anal fissure or swallowed maternal blood (for bloody stool)"
+    [
+     "Key Investigations",
+     "Abdominal radiographs for pneumatosis intestinalis, portal venous gas and free air, Full blood count, inflammatory markers and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Abdominal radiographs for pneumatosis intestinalis, portal venous gas and free air",
-      "Full blood count, inflammatory markers and blood culture",
-      "Blood gas, glucose and coagulation studies",
-      "Serial abdominal examination and, where used, abdominal ultrasound",
-      "Surgical review for advanced or deteriorating disease"
+    [
+     "Primary Differentials",
+     "Spontaneous intestinal perforation, Neonatal sepsis with ileus, Malrotation with volvulus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Pneumoperitoneum indicating perforation",
-      "Rapid clinical deterioration with shock or disseminated intravascular coagulation",
-      "Abdominal wall erythema or a fixed mass",
-      "Portal venous gas or extensive pneumatosis"
+    [
+     "Management Strategy",
+     "Bowel rest with cessation of enteral feeds and nasogastric decompression",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome varies with severity; medical disease often resolves, but advanced disease carries significant mortality and long-term risks including short bowel syndrome, strictures and neurodevelopmental impairment.",
-    "pitfalls": [
-      "Continuing feeds despite early warning signs",
-      "Missing perforation by not repeating imaging in a deteriorating baby",
-      "Confusing spontaneous intestinal perforation with necrotising enterocolitis",
-      "Underestimating the risk of later strictures after recovery"
-    ],
-    "references": [
-      "Neonatology reference texts (standard reference)",
-      "Paediatric surgery reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Bowel rest with cessation of enteral feeds and nasogastric decompression",
-      "Broad-spectrum intravenous antibiotics covering enteric organisms, with parenteral nutrition to maintain intake",
-      "Supportive care correcting acidosis, coagulopathy and thrombocytopenia, with fluid resuscitation, inotropes and ventilation for shock",
-      "Serial abdominal radiographs and examination to detect progression to portal venous gas or free air",
-      "Surgical intervention with laparotomy or peritoneal drainage for perforation or full-thickness necrosis",
-      "Prioritisation of human breast milk as protective, with cautious graded reintroduction of feeds on recovery",
-      "Paediatric surgical referral and long-term follow-up for strictures, short bowel syndrome and neurodevelopmental outcome"
+    [
+     "Clinical Pitfall",
+     "Continuing feeds despite early warning signs",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for necrotising enterocolitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "necrotising-enterocolitis-diagram",
+   "title": "Necrotising enterocolitis: Abdominal & Hepatobiliary Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/gastrointestinal-diagram.svg?v=kbdx1",
+   "caption": "Abdominal visceral and cross-sectional schematic displaying hepatobiliary tree, gastroduodenal junction, pancreas, and mesenteric loops.",
+   "annotations": [
+    {
+     "label": "Hepatobiliary Axis",
+     "description": "Hepatic parenchyma, portal venous flow, and biliary drainage system."
+    },
+    {
+     "label": "Pancreaticoduodenal",
+     "description": "Pancreatic ductal anatomy and retroperitoneal fascial planes."
+    },
+    {
+     "label": "Enteric Loops",
+     "description": "Bowel wall caliber, mesenteric perfusion, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

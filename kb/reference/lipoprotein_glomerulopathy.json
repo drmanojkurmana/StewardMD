@@ -1,82 +1,177 @@
 {
-  "id": "lipoprotein_glomerulopathy",
-  "name": "Lipoprotein Glomerulopathy",
-  "aliases": [
-    "LPG"
+ "id": "lipoprotein_glomerulopathy",
+ "name": "Lipoprotein Glomerulopathy",
+ "aliases": [
+  "LPG"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Glomerular",
+ "specialty": "Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nephrology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare glomerular disease defined by intracapillary lipoprotein thrombi that dilate and occlude glomerular capillary loops.",
+   "Strongly associated with mutations in the apolipoprotein E gene, several of which are named after the region where they were first described.",
+   "Reported predominantly in individuals of East Asian ancestry but described worldwide, and it may present sporadically or in families.",
+   "Presents with proteinuria, frequently nephrotic, and progressive renal impairment, often without prominent systemic lipid deposition elsewhere.",
+   "Serum lipids show a type III hyperlipoproteinaemia-like pattern with elevated apolipoprotein E, though xanthomas and premature atheroma are usually absent.",
+   "Diagnosis rests on renal biopsy demonstrating pale, laminated lipoprotein thrombi that stain for lipid within markedly dilated capillary lumina.",
+   "Because it is defined by an apolipoprotein E abnormality, standard immunosuppression is generally ineffective and lipid-directed strategies are preferred.",
+   "The disease characteristically recurs in the transplanted kidney, reflecting its systemic apolipoprotein basis."
   ],
-  "class": "non_infective",
-  "system": "Renal / Glomerular",
-  "specialty": "Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nephrology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare glomerular disease defined by intracapillary lipoprotein thrombi that dilate and occlude glomerular capillary loops.",
-      "Strongly associated with mutations in the apolipoprotein E gene, several of which are named after the region where they were first described.",
-      "Reported predominantly in individuals of East Asian ancestry but described worldwide, and it may present sporadically or in families.",
-      "Presents with proteinuria, frequently nephrotic, and progressive renal impairment, often without prominent systemic lipid deposition elsewhere.",
-      "Serum lipids show a type III hyperlipoproteinaemia-like pattern with elevated apolipoprotein E, though xanthomas and premature atheroma are usually absent.",
-      "Diagnosis rests on renal biopsy demonstrating pale, laminated lipoprotein thrombi that stain for lipid within markedly dilated capillary lumina.",
-      "Because it is defined by an apolipoprotein E abnormality, standard immunosuppression is generally ineffective and lipid-directed strategies are preferred.",
-      "The disease characteristically recurs in the transplanted kidney, reflecting its systemic apolipoprotein basis."
+  "pathophysiology": "Lipoprotein glomerulopathy is driven by abnormalities of apolipoprotein E, most often specific pathogenic variants that alter the protein's structure and its handling of triglyceride-rich lipoproteins. The mutant apolipoprotein E promotes the intraglomerular aggregation of lipoproteins into laminated thrombi that fill and grossly dilate the capillary loops. These thrombi are composed of layered lipid and apolipoprotein material rather than fibrin, and their accumulation obstructs glomerular blood flow, distorts the capillary architecture and progressively damages the filtration barrier, producing heavy proteinuria. The circulating lipid profile typically resembles type III hyperlipoproteinaemia with raised apolipoprotein E, yet, unlike familial dysbetalipoproteinaemia, systemic manifestations such as xanthomas and accelerated atherosclerosis are conspicuously absent, indicating that the injury is peculiarly targeted to the glomerulus. The condition can be inherited, often in an autosomal dominant pattern with incomplete penetrance, or arise sporadically, and because the defect resides in a circulating apolipoprotein the disease reliably recurs after transplantation of a normal kidney into an affected recipient.",
+  "additionalDifferentials": [
+   "Type III hyperlipoproteinaemia (familial dysbetalipoproteinaemia) with lipid-related renal changes",
+   "Thrombotic microangiopathy with capillary thrombi",
+   "Membranoproliferative glomerulonephritis",
+   "Fibrillary or immunotactoid glomerulopathy",
+   "Lecithin-cholesterol acyltransferase deficiency affecting the glomerulus",
+   "Cryoglobulinaemic glomerulonephritis with intracapillary thrombi",
+   "Focal segmental glomerulosclerosis presenting with nephrotic proteinuria"
+  ],
+  "additionalInvestigations": [
+   "Renal biopsy with light microscopy and lipid stains (such as oil red O on frozen tissue) demonstrating laminated intracapillary lipoprotein thrombi",
+   "Electron microscopy showing the layered lipid vacuoles within dilated capillary lumina",
+   "Serum lipid profile and lipoprotein electrophoresis",
+   "Apolipoprotein E genotyping and serum apolipoprotein E level",
+   "Quantification of proteinuria and monitoring of renal function",
+   "Family screening given the hereditary nature",
+   "Exclusion of secondary causes of nephrotic syndrome"
+  ],
+  "redFlags": [
+   "Nephrotic-range proteinuria with progressive oedema and hypoalbuminaemia",
+   "Steady decline in renal function towards kidney failure",
+   "Recurrence of proteinuria and thrombi in a kidney allograft",
+   "Refractoriness to conventional immunosuppression",
+   "Uncontrolled hyperlipidaemia complicating the clinical picture"
+  ],
+  "prognosis": "Without effective lipid-directed treatment the disease tends to progress to kidney failure over years, and it frequently recurs in transplanted kidneys. Some patients improve with intensive lipid-lowering approaches, so prognosis is variable.",
+  "pitfalls": [
+   "Misreading the intracapillary thrombi as fibrin and diagnosing a thrombotic microangiopathy",
+   "Expecting xanthomas or premature atherosclerosis, whose absence can wrongly lower suspicion",
+   "Relying on immunosuppression, which does not address the apolipoprotein defect",
+   "Failing to pursue apolipoprotein E genotyping and family screening",
+   "Not anticipating post-transplant recurrence when counselling patients"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology (standard reference)",
+   "Heptinstall's Pathology of the Kidney (standard reference)",
+   "Brenner and Rector's The Kidney (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Intensive lipid-lowering therapy is the mainstay, with fibrates and statins to lower the triglyceride-rich lipoproteins that form the intracapillary thrombi, an approach that can reduce proteinuria and stabilise renal function",
+   "Reduce proteinuria and control blood pressure with renin-angiotensin system blockade using ACE inhibitors or angiotensin receptor blockers",
+   "Consider lipoprotein apheresis as an additional lipid-directed measure in refractory disease",
+   "Monitor proteinuria and renal function regularly and manage progressive chronic kidney disease with standard measures",
+   "Base the diagnosis on renal biopsy and maintain ongoing nephrology follow-up",
+   "Provide genetic counselling and family screening given the underlying apolipoprotein E variants",
+   "Counsel on the high risk of recurrence in a kidney transplant, continue lipid control after transplantation, and escalate to renal replacement therapy as kidney failure approaches"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lipoprotein_glomerulopathy-pathway",
+   "title": "Lipoprotein Glomerulopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare glomerular disease defined by intracapillary lipoprotein thrombi that dilate and occlude glomerular capillary loops.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Nephrotic-range proteinuria with progressive oedema and hypoalbuminaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Renal biopsy with light microscopy and lipid stains (such as oil red O on frozen tissue) demonstrating laminated intracapillary lipoprotein thrombi, Electron microscopy showing the layered lipid vacuoles within dilated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Intensive lipid-lowering therapy is the mainstay, with fibrates and statins to lower the triglyceride-rich lipoproteins that form the intracapillary thrombi, an approach that can reduce proteinuria and stabilise renal"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misreading the intracapillary thrombi as fibrin and diagnosing a thrombotic microangiopathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lipoprotein glomerulopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lipoprotein_glomerulopathy-matrix",
+   "title": "Lipoprotein Glomerulopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare glomerular disease defined by intracapillary lipoprotein thrombi that dilate and occlude glomerular capillary loops.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lipoprotein glomerulopathy is driven by abnormalities of apolipoprotein E, most often specific pathogenic variants that alter the protein's structure and its handling of triglyceride-rich lipoproteins. The mutant apolipoprotein E promotes the intraglomerular aggregation of lipoproteins into laminated thrombi that fill and grossly dilate the capillary loops. These thrombi are composed of layered lipid and apolipoprotein material rather than fibrin, and their accumulation obstructs glomerular blood flow, distorts the capillary architecture and progressively damages the filtration barrier, producing heavy proteinuria. The circulating lipid profile typically resembles type III hyperlipoproteinaemia with raised apolipoprotein E, yet, unlike familial dysbetalipoproteinaemia, systemic manifestations such as xanthomas and accelerated atherosclerosis are conspicuously absent, indicating that the injury is peculiarly targeted to the glomerulus. The condition can be inherited, often in an autosomal dominant pattern with incomplete penetrance, or arise sporadically, and because the defect resides in a circulating apolipoprotein the disease reliably recurs after transplantation of a normal kidney into an affected recipient.",
-    "additionalDifferentials": [
-      "Type III hyperlipoproteinaemia (familial dysbetalipoproteinaemia) with lipid-related renal changes",
-      "Thrombotic microangiopathy with capillary thrombi",
-      "Membranoproliferative glomerulonephritis",
-      "Fibrillary or immunotactoid glomerulopathy",
-      "Lecithin-cholesterol acyltransferase deficiency affecting the glomerulus",
-      "Cryoglobulinaemic glomerulonephritis with intracapillary thrombi",
-      "Focal segmental glomerulosclerosis presenting with nephrotic proteinuria"
+    [
+     "Key Investigations",
+     "Renal biopsy with light microscopy and lipid stains (such as oil red O on frozen tissue) demonstrating laminated intracapillary",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Renal biopsy with light microscopy and lipid stains (such as oil red O on frozen tissue) demonstrating laminated intracapillary lipoprotein thrombi",
-      "Electron microscopy showing the layered lipid vacuoles within dilated capillary lumina",
-      "Serum lipid profile and lipoprotein electrophoresis",
-      "Apolipoprotein E genotyping and serum apolipoprotein E level",
-      "Quantification of proteinuria and monitoring of renal function",
-      "Family screening given the hereditary nature",
-      "Exclusion of secondary causes of nephrotic syndrome"
+    [
+     "Primary Differentials",
+     "Type III hyperlipoproteinaemia (familial dysbetalipoproteinaemia) with lipid-related renal changes, Thrombotic microangiopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Nephrotic-range proteinuria with progressive oedema and hypoalbuminaemia",
-      "Steady decline in renal function towards kidney failure",
-      "Recurrence of proteinuria and thrombi in a kidney allograft",
-      "Refractoriness to conventional immunosuppression",
-      "Uncontrolled hyperlipidaemia complicating the clinical picture"
+    [
+     "Management Strategy",
+     "Intensive lipid-lowering therapy is the mainstay, with fibrates and statins to lower the triglyceride-rich lipoproteins that form",
+     "Core treatment modality"
     ],
-    "prognosis": "Without effective lipid-directed treatment the disease tends to progress to kidney failure over years, and it frequently recurs in transplanted kidneys. Some patients improve with intensive lipid-lowering approaches, so prognosis is variable.",
-    "pitfalls": [
-      "Misreading the intracapillary thrombi as fibrin and diagnosing a thrombotic microangiopathy",
-      "Expecting xanthomas or premature atherosclerosis, whose absence can wrongly lower suspicion",
-      "Relying on immunosuppression, which does not address the apolipoprotein defect",
-      "Failing to pursue apolipoprotein E genotyping and family screening",
-      "Not anticipating post-transplant recurrence when counselling patients"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology (standard reference)",
-      "Heptinstall's Pathology of the Kidney (standard reference)",
-      "Brenner and Rector's The Kidney (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Intensive lipid-lowering therapy is the mainstay, with fibrates and statins to lower the triglyceride-rich lipoproteins that form the intracapillary thrombi, an approach that can reduce proteinuria and stabilise renal function",
-      "Reduce proteinuria and control blood pressure with renin-angiotensin system blockade using ACE inhibitors or angiotensin receptor blockers",
-      "Consider lipoprotein apheresis as an additional lipid-directed measure in refractory disease",
-      "Monitor proteinuria and renal function regularly and manage progressive chronic kidney disease with standard measures",
-      "Base the diagnosis on renal biopsy and maintain ongoing nephrology follow-up",
-      "Provide genetic counselling and family screening given the underlying apolipoprotein E variants",
-      "Counsel on the high risk of recurrence in a kidney transplant, continue lipid control after transplantation, and escalate to renal replacement therapy as kidney failure approaches"
+    [
+     "Clinical Pitfall",
+     "Misreading the intracapillary thrombi as fibrin and diagnosing a thrombotic microangiopathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lipoprotein glomerulopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lipoprotein-glomerulopathy-diagram",
+   "title": "Lipoprotein Glomerulopathy: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "iga_pemphigus",
-  "name": "IgA pemphigus",
-  "aliases": [
-    "intraepidermal IgA pustulosis",
-    "subcorneal pustular dermatosis-type IgA pemphigus",
-    "intraepidermal neutrophilic IgA dermatosis",
-    "anti-desmocollin pemphigus"
+ "id": "iga_pemphigus",
+ "name": "IgA pemphigus",
+ "aliases": [
+  "intraepidermal IgA pustulosis",
+  "subcorneal pustular dermatosis-type IgA pemphigus",
+  "intraepidermal neutrophilic IgA dermatosis",
+  "anti-desmocollin pemphigus"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare autoimmune blistering disease characterised by intraepidermal IgG-negative, IgA-mediated intercellular deposition",
+   "Presents with flaccid vesicles and pustules, often coalescing into annular or herpetiform patterns with central crusting on the trunk and flexures",
+   "Two main subtypes are recognised: the subcorneal pustular dermatosis (SPD) type and the intraepidermal neutrophilic (IEN) type, differing in the level of pustule formation",
+   "Desmocollin-1 is the principal target antigen in the SPD type, distinguishing it from classic desmoglein-driven pemphigus",
+   "Direct immunofluorescence shows intercellular IgA deposition within the epidermis, the diagnostic hallmark",
+   "Pruritus is frequently prominent, and mucosal involvement is uncommon",
+   "Dapsone is often effective, reflecting the neutrophil-rich nature of the infiltrate; associations with monoclonal gammopathy and inflammatory bowel disease are reported"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare autoimmune blistering disease characterised by intraepidermal IgG-negative, IgA-mediated intercellular deposition",
-      "Presents with flaccid vesicles and pustules, often coalescing into annular or herpetiform patterns with central crusting on the trunk and flexures",
-      "Two main subtypes are recognised: the subcorneal pustular dermatosis (SPD) type and the intraepidermal neutrophilic (IEN) type, differing in the level of pustule formation",
-      "Desmocollin-1 is the principal target antigen in the SPD type, distinguishing it from classic desmoglein-driven pemphigus",
-      "Direct immunofluorescence shows intercellular IgA deposition within the epidermis, the diagnostic hallmark",
-      "Pruritus is frequently prominent, and mucosal involvement is uncommon",
-      "Dapsone is often effective, reflecting the neutrophil-rich nature of the infiltrate; associations with monoclonal gammopathy and inflammatory bowel disease are reported"
+  "pathophysiology": "IgA pemphigus is driven by IgA autoantibodies directed against desmosomal cell-adhesion molecules, most characteristically desmocollin-1 in the subcorneal pustular dermatosis type and less well-defined desmosomal antigens in the intraepidermal neutrophilic type. IgA binding at the keratinocyte surface recruits neutrophils and promotes loss of intercellular adhesion, producing sterile pustules and mild acantholysis at either a subcorneal or a mid-epidermal level. The neutrophil-predominant inflammation underlies the clinical pustulation and the frequent responsiveness to dapsone. Circulating IgA intercellular antibodies may be detectable, and the condition can be associated with gammopathy.",
+  "additionalDifferentials": [
+   "Subcorneal pustular dermatosis (Sneddon-Wilkinson)",
+   "Pemphigus foliaceus",
+   "Dermatitis herpetiformis and linear IgA bullous dermatosis",
+   "Pustular psoriasis",
+   "Acute generalised exanthematous pustulosis",
+   "Bullous impetigo"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy for histology showing intraepidermal pustules with neutrophils and slight acantholysis",
+   "Direct immunofluorescence demonstrating intercellular IgA deposition",
+   "Indirect immunofluorescence for circulating IgA intercellular antibodies",
+   "Antigen-specific testing for anti-desmocollin-1 where available",
+   "Serum protein electrophoresis to screen for monoclonal gammopathy",
+   "Investigations for associated inflammatory bowel disease when clinically suggested"
+  ],
+  "redFlags": [
+   "Extensive pustulation with systemic upset requiring exclusion of pustular psoriasis or infection",
+   "Detection of an underlying monoclonal gammopathy needing haematological assessment",
+   "Secondary bacterial infection of eroded pustular skin",
+   "Poor response to therapy prompting reconsideration of the diagnosis"
+  ],
+  "prognosis": "IgA pemphigus generally follows a more benign and chronic course than classic pemphigus, frequently responding to dapsone, though relapses occur and any associated gammopathy requires ongoing monitoring.",
+  "pitfalls": [
+   "Misclassifying the disease as subcorneal pustular dermatosis without performing direct immunofluorescence",
+   "Assuming desmoglein antibodies are present when desmocollin is the relevant target",
+   "Missing an associated monoclonal gammopathy",
+   "Confusing sterile pustules with infection and treating with antibiotics alone"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use dapsone as first-line therapy, exploiting its suppression of the neutrophilic inflammation that drives the pustules",
+   "Add topical or systemic corticosteroids for disease control, with acitretin an option particularly in the subcorneal pustular dermatosis type",
+   "Consider colchicine or sulfapyridine as adjunctive or steroid-sparing agents in resistant disease",
+   "Screen for G6PD deficiency before dapsone and monitor for haemolysis and methaemoglobinaemia during treatment",
+   "Manage pruritus and provide wound care for eroded pustules",
+   "Screen for and monitor an associated monoclonal gammopathy and investigate for inflammatory bowel disease when suggested",
+   "Follow up for relapse and taper therapy to the minimum needed to maintain remission"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "iga_pemphigus-pathway",
+   "title": "IgA pemphigus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare autoimmune blistering disease characterised by intraepidermal IgG-negative, IgA-mediated intercellular deposition",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Extensive pustulation with systemic upset requiring exclusion of pustular psoriasis or infection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy for histology showing intraepidermal pustules with neutrophils and slight acantholysis, Direct immunofluorescence demonstrating intercellular IgA deposition, Indirect immunofluorescence for circulating IgA"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use dapsone as first-line therapy, exploiting its suppression of the neutrophilic inflammation that drives the pustules"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying the disease as subcorneal pustular dermatosis without performing direct immunofluorescence"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of iga pemphigus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "iga_pemphigus-matrix",
+   "title": "IgA pemphigus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare autoimmune blistering disease characterised by intraepidermal IgG-negative, IgA-mediated intercellular deposition",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "IgA pemphigus is driven by IgA autoantibodies directed against desmosomal cell-adhesion molecules, most characteristically desmocollin-1 in the subcorneal pustular dermatosis type and less well-defined desmosomal antigens in the intraepidermal neutrophilic type. IgA binding at the keratinocyte surface recruits neutrophils and promotes loss of intercellular adhesion, producing sterile pustules and mild acantholysis at either a subcorneal or a mid-epidermal level. The neutrophil-predominant inflammation underlies the clinical pustulation and the frequent responsiveness to dapsone. Circulating IgA intercellular antibodies may be detectable, and the condition can be associated with gammopathy.",
-    "additionalDifferentials": [
-      "Subcorneal pustular dermatosis (Sneddon-Wilkinson)",
-      "Pemphigus foliaceus",
-      "Dermatitis herpetiformis and linear IgA bullous dermatosis",
-      "Pustular psoriasis",
-      "Acute generalised exanthematous pustulosis",
-      "Bullous impetigo"
+    [
+     "Key Investigations",
+     "Skin biopsy for histology showing intraepidermal pustules with neutrophils and slight acantholysis, Direct immunofluorescence",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy for histology showing intraepidermal pustules with neutrophils and slight acantholysis",
-      "Direct immunofluorescence demonstrating intercellular IgA deposition",
-      "Indirect immunofluorescence for circulating IgA intercellular antibodies",
-      "Antigen-specific testing for anti-desmocollin-1 where available",
-      "Serum protein electrophoresis to screen for monoclonal gammopathy",
-      "Investigations for associated inflammatory bowel disease when clinically suggested"
+    [
+     "Primary Differentials",
+     "Subcorneal pustular dermatosis (Sneddon-Wilkinson), Pemphigus foliaceus, Dermatitis herpetiformis and linear IgA bullous",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Extensive pustulation with systemic upset requiring exclusion of pustular psoriasis or infection",
-      "Detection of an underlying monoclonal gammopathy needing haematological assessment",
-      "Secondary bacterial infection of eroded pustular skin",
-      "Poor response to therapy prompting reconsideration of the diagnosis"
+    [
+     "Management Strategy",
+     "Use dapsone as first-line therapy, exploiting its suppression of the neutrophilic inflammation that drives the pustules",
+     "Core treatment modality"
     ],
-    "prognosis": "IgA pemphigus generally follows a more benign and chronic course than classic pemphigus, frequently responding to dapsone, though relapses occur and any associated gammopathy requires ongoing monitoring.",
-    "pitfalls": [
-      "Misclassifying the disease as subcorneal pustular dermatosis without performing direct immunofluorescence",
-      "Assuming desmoglein antibodies are present when desmocollin is the relevant target",
-      "Missing an associated monoclonal gammopathy",
-      "Confusing sterile pustules with infection and treating with antibiotics alone"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use dapsone as first-line therapy, exploiting its suppression of the neutrophilic inflammation that drives the pustules",
-      "Add topical or systemic corticosteroids for disease control, with acitretin an option particularly in the subcorneal pustular dermatosis type",
-      "Consider colchicine or sulfapyridine as adjunctive or steroid-sparing agents in resistant disease",
-      "Screen for G6PD deficiency before dapsone and monitor for haemolysis and methaemoglobinaemia during treatment",
-      "Manage pruritus and provide wound care for eroded pustules",
-      "Screen for and monitor an associated monoclonal gammopathy and investigate for inflammatory bowel disease when suggested",
-      "Follow up for relapse and taper therapy to the minimum needed to maintain remission"
+    [
+     "Clinical Pitfall",
+     "Misclassifying the disease as subcorneal pustular dermatosis without performing direct immunofluorescence",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for iga pemphigus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "iga-pemphigus-diagram",
+   "title": "IgA pemphigus: Cutaneous Architecture & Histological Layer Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/dermatology-diagram.svg?v=kbdx1",
+   "caption": "Dermatological cross-section schematic illustrating epidermal stratification, dermo-epidermal junction, vascular plexuses, and subcutaneous tissue.",
+   "annotations": [
+    {
+     "label": "Epidermal Layer",
+     "description": "Keratinocyte differentiation, stratum corneum integrity, and barrier function."
+    },
+    {
+     "label": "Dermal Architecture",
+     "description": "Superficial and deep vascular plexus, collagen fibers, and inflammatory infiltrates."
+    },
+    {
+     "label": "Subcutis",
+     "description": "Adipose lobules, septal architecture, and fascial boundaries."
+    }
+   ]
+  }
+ ]
 }

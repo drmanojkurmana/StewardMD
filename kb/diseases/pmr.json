@@ -125,5 +125,100 @@
       "importedAt": "2026-06-29T13:45:37Z",
       "contentHash": "h35adceae"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pmr-dx-algo",
+      "title": "Polymyalgia rheumatica: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "PMR causes stiffness, aching, and pain in the muscles of the neck, shoulders, lower back, hips, and thighs in a patient typically aged >50 years (p.2945).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: New or worsening peripheral arthritis pattern - reconsider seronegative RA or another inflammatory arthropathy rather than PMR (p.2946).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Rheumatoid factor and anti-cyclic citrullinated peptide (anti-CCP) should be negative; positive results point toward seronegative-RA spectrum or other inflammatory arthropathy (p.2946)., Serum creatine kinase is NOT"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Seronegative rheumatoid arthritis in the elderly, which can be difficult to distinguish from PMR; RA predominantly affects wrists/hands and ankles/feet at onset whereas PMR is girdle-predominant (p.2920).,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating an IL-6-inhibitor-exposed patient: blockade of IL-6 signaling normalizes CRP and ESR, so these markers can no longer be used to monitor disease activity or detect infection (p.2945)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for polymyalgia rheumatica."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pmr-matrix",
+      "title": "Polymyalgia rheumatica: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "PMR causes stiffness, aching, and pain in the muscles of the neck, shoulders, lower back, hips, and thighs in a patient typically",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Rheumatoid factor and anti-cyclic citrullinated peptide (anti-CCP) should be negative; positive results point toward",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Seronegative rheumatoid arthritis in the elderly, which can be difficult to distinguish from PMR; RA predominantly affects",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "New or worsening peripheral arthritis pattern - reconsider seronegative RA or another inflammatory arthropathy rather than PMR",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an IL-6-inhibitor-exposed patient: blockade of IL-6 signaling normalizes CRP and ESR, so these markers can no longer be",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for polymyalgia rheumatica."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pmr-diagram",
+      "title": "Polymyalgia rheumatica: Systematic Clinical Diagnostic & Triage Pathway",
+      "type": "diagram",
+      "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+      "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+      "annotations": [
+        {
+          "label": "Clinical Triage",
+          "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+        },
+        {
+          "label": "Diagnostic Yield",
+          "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+        },
+        {
+          "label": "Definitive Management",
+          "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+        }
+      ]
+    }
+  ]
 }

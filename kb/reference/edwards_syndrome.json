@@ -1,75 +1,170 @@
 {
-  "id": "edwards_syndrome",
-  "name": "Edwards syndrome",
-  "aliases": [
-    "trisomy 18",
-    "trisomy E",
-    "T18"
+ "id": "edwards_syndrome",
+ "name": "Edwards syndrome",
+ "aliases": [
+  "trisomy 18",
+  "trisomy E",
+  "T18"
+ ],
+ "class": "non_infective",
+ "system": "Genetic / Paediatrics",
+ "specialty": "Medical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Second most common autosomal trisomy after Down syndrome and associated with severe multisystem malformation",
+   "Recognisable features include severe growth restriction, a prominent occiput, small jaw, low-set malformed ears, and clenched hands with overlapping fingers",
+   "Rocker-bottom feet and a short sternum are characteristic musculoskeletal findings",
+   "Major congenital heart defects, especially septal defects, are present in most affected infants",
+   "Marked feeding difficulties, apnoea, and central nervous system malformations contribute to early mortality",
+   "Caused by an extra copy of chromosome 18, most often from meiotic nondisjunction and increasing with maternal age",
+   "Incidence is higher at conception than at birth because many affected pregnancies end in miscarriage or stillbirth",
+   "Mosaic and partial trisomy forms may produce milder and more variable phenotypes"
   ],
-  "class": "non_infective",
-  "system": "Genetic / Paediatrics",
-  "specialty": "Medical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Second most common autosomal trisomy after Down syndrome and associated with severe multisystem malformation",
-      "Recognisable features include severe growth restriction, a prominent occiput, small jaw, low-set malformed ears, and clenched hands with overlapping fingers",
-      "Rocker-bottom feet and a short sternum are characteristic musculoskeletal findings",
-      "Major congenital heart defects, especially septal defects, are present in most affected infants",
-      "Marked feeding difficulties, apnoea, and central nervous system malformations contribute to early mortality",
-      "Caused by an extra copy of chromosome 18, most often from meiotic nondisjunction and increasing with maternal age",
-      "Incidence is higher at conception than at birth because many affected pregnancies end in miscarriage or stillbirth",
-      "Mosaic and partial trisomy forms may produce milder and more variable phenotypes"
+  "pathophysiology": "Edwards syndrome is caused by the presence of an extra copy of chromosome 18, usually a full trisomy resulting from maternal meiotic nondisjunction, with risk rising with advancing maternal age. Less commonly it results from mosaicism or a partial trisomy from an unbalanced translocation. The excess genetic material disrupts normal development across multiple organ systems during embryogenesis, producing the characteristic pattern of growth restriction, craniofacial and limb anomalies, cardiac and renal malformations, and central nervous system defects. The severity of malformations, particularly cardiac and neurological, drives the very high perinatal and infant mortality.",
+  "additionalDifferentials": [
+   "Patau syndrome (trisomy 13)",
+   "Trisomy 18 mosaicism",
+   "Pena-Shokeir phenotype",
+   "Other chromosomal or single-gene multiple malformation syndromes",
+   "CHARGE syndrome"
+  ],
+  "additionalInvestigations": [
+   "Karyotype or chromosomal microarray to confirm trisomy 18 and identify mosaicism or translocation",
+   "Prenatal screening and diagnostic testing including cell-free DNA and, if indicated, amniocentesis or chorionic villus sampling",
+   "Echocardiography to define cardiac anomalies",
+   "Renal and cranial imaging for associated malformations",
+   "Parental karyotyping if a translocation is found"
+  ],
+  "redFlags": [
+   "Life-threatening cardiac and respiratory compromise in the newborn period",
+   "Recurrent apnoea and feeding failure requiring goals-of-care discussion",
+   "Increased risk of certain embryonal tumours in longer-surviving children",
+   "Need for early, compassionate counselling given the high mortality and prognosis"
+  ],
+  "prognosis": "Prognosis is poor, with most affected infants dying in the first weeks or months of life and only a small proportion surviving beyond the first year, typically with profound disability; mosaic forms may fare better.",
+  "pitfalls": [
+   "Failing to confirm mosaicism, which alters prognosis and counselling",
+   "Not offering parents balanced information about survival and quality of life",
+   "Overlooking treatable comfort and feeding issues while planning care",
+   "Missing the diagnosis antenatally when screening is declined or equivocal"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Establish goals of care with the family early, as prognosis is poor, offering either comfort-focused palliative care or, in selected cases, active management of specific anomalies",
+   "Provide supportive care for feeding difficulties with nasogastric or gastrostomy feeding, and manage apnoea and respiratory needs as agreed within the care plan",
+   "Assess congenital heart defects by echocardiography and consider cardiac surgery only in carefully selected infants after multidisciplinary discussion",
+   "Treat complications such as infections, seizures and gastro-oesophageal reflux symptomatically",
+   "Coordinate multidisciplinary support across neonatology, paediatric palliative care, cardiology and allied health",
+   "Confirm the diagnosis with karyotype or microarray, offer genetic counselling, and perform parental karyotyping if a translocation is identified to assess recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "edwards_syndrome-pathway",
+   "title": "Edwards syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Second most common autosomal trisomy after Down syndrome and associated with severe multisystem malformation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Life-threatening cardiac and respiratory compromise in the newborn period",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Karyotype or chromosomal microarray to confirm trisomy 18 and identify mosaicism or translocation, Prenatal screening and diagnostic testing including cell-free DNA and, if indicated, amniocentesis or chorionic villus"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Establish goals of care with the family early, as prognosis is poor, offering either comfort-focused palliative care or, in selected cases, active management of specific anomalies"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to confirm mosaicism, which alters prognosis and counselling"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of edwards syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "edwards_syndrome-matrix",
+   "title": "Edwards syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Second most common autosomal trisomy after Down syndrome and associated with severe multisystem malformation",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Edwards syndrome is caused by the presence of an extra copy of chromosome 18, usually a full trisomy resulting from maternal meiotic nondisjunction, with risk rising with advancing maternal age. Less commonly it results from mosaicism or a partial trisomy from an unbalanced translocation. The excess genetic material disrupts normal development across multiple organ systems during embryogenesis, producing the characteristic pattern of growth restriction, craniofacial and limb anomalies, cardiac and renal malformations, and central nervous system defects. The severity of malformations, particularly cardiac and neurological, drives the very high perinatal and infant mortality.",
-    "additionalDifferentials": [
-      "Patau syndrome (trisomy 13)",
-      "Trisomy 18 mosaicism",
-      "Pena-Shokeir phenotype",
-      "Other chromosomal or single-gene multiple malformation syndromes",
-      "CHARGE syndrome"
+    [
+     "Key Investigations",
+     "Karyotype or chromosomal microarray to confirm trisomy 18 and identify mosaicism or translocation, Prenatal screening and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Karyotype or chromosomal microarray to confirm trisomy 18 and identify mosaicism or translocation",
-      "Prenatal screening and diagnostic testing including cell-free DNA and, if indicated, amniocentesis or chorionic villus sampling",
-      "Echocardiography to define cardiac anomalies",
-      "Renal and cranial imaging for associated malformations",
-      "Parental karyotyping if a translocation is found"
+    [
+     "Primary Differentials",
+     "Patau syndrome (trisomy 13), Trisomy 18 mosaicism, Pena-Shokeir phenotype",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Life-threatening cardiac and respiratory compromise in the newborn period",
-      "Recurrent apnoea and feeding failure requiring goals-of-care discussion",
-      "Increased risk of certain embryonal tumours in longer-surviving children",
-      "Need for early, compassionate counselling given the high mortality and prognosis"
+    [
+     "Management Strategy",
+     "Establish goals of care with the family early, as prognosis is poor, offering either comfort-focused palliative care or, in",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is poor, with most affected infants dying in the first weeks or months of life and only a small proportion surviving beyond the first year, typically with profound disability; mosaic forms may fare better.",
-    "pitfalls": [
-      "Failing to confirm mosaicism, which alters prognosis and counselling",
-      "Not offering parents balanced information about survival and quality of life",
-      "Overlooking treatable comfort and feeding issues while planning care",
-      "Missing the diagnosis antenatally when screening is declined or equivocal"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Establish goals of care with the family early, as prognosis is poor, offering either comfort-focused palliative care or, in selected cases, active management of specific anomalies",
-      "Provide supportive care for feeding difficulties with nasogastric or gastrostomy feeding, and manage apnoea and respiratory needs as agreed within the care plan",
-      "Assess congenital heart defects by echocardiography and consider cardiac surgery only in carefully selected infants after multidisciplinary discussion",
-      "Treat complications such as infections, seizures and gastro-oesophageal reflux symptomatically",
-      "Coordinate multidisciplinary support across neonatology, paediatric palliative care, cardiology and allied health",
-      "Confirm the diagnosis with karyotype or microarray, offer genetic counselling, and perform parental karyotyping if a translocation is identified to assess recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Failing to confirm mosaicism, which alters prognosis and counselling",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for edwards syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "edwards-syndrome-diagram",
+   "title": "Edwards syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

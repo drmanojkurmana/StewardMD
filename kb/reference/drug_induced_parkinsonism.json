@@ -1,79 +1,174 @@
 {
-  "id": "drug_induced_parkinsonism",
-  "name": "drug induced parkinsonism",
-  "aliases": [
-    "iatrogenic parkinsonism",
-    "neuroleptic-induced parkinsonism"
+ "id": "drug_induced_parkinsonism",
+ "name": "drug induced parkinsonism",
+ "aliases": [
+  "iatrogenic parkinsonism",
+  "neuroleptic-induced parkinsonism"
+ ],
+ "class": "non_infective",
+ "system": "nervous system",
+ "specialty": "neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest cause of secondary parkinsonism, produced by dopamine-receptor-blocking or dopamine-depleting drugs, and a leading mimic of idiopathic Parkinson disease.",
+   "Classically more symmetrical than Parkinson disease, with bradykinesia and rigidity predominating; a symmetrical postural and action tremor may occur, though asymmetry does not exclude the diagnosis.",
+   "Onset typically within weeks to a few months of starting or increasing the offending drug, and it is potentially reversible after withdrawal, though recovery may take many months.",
+   "Common culprits include typical and atypical antipsychotics, the antiemetics metoclopramide and prochlorperazine, and dopamine-depleting agents; less-appreciated contributors include some calcium-channel blockers, valproate and certain antidepressants.",
+   "Persistent or progressive symptoms after drug withdrawal should raise suspicion of unmasked underlying Parkinson disease.",
+   "Coexisting tardive dyskinesia or orolingual dyskinesia alongside parkinsonism strongly favours a drug-induced aetiology.",
+   "Dopamine transporter (DaT) imaging is normal in pure drug-induced parkinsonism but abnormal where an underlying degenerative process has been unmasked, aiding difficult cases.",
+   "First-line management is identifying and stopping or substituting the causative agent; where an antipsychotic is essential, switching to a lower-liability agent (such as quetiapine or clozapine) is preferred, and antiparkinsonian drugs are generally reserved for refractory disability."
   ],
-  "class": "non_infective",
-  "system": "nervous system",
-  "specialty": "neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest cause of secondary parkinsonism, produced by dopamine-receptor-blocking or dopamine-depleting drugs, and a leading mimic of idiopathic Parkinson disease.",
-      "Classically more symmetrical than Parkinson disease, with bradykinesia and rigidity predominating; a symmetrical postural and action tremor may occur, though asymmetry does not exclude the diagnosis.",
-      "Onset typically within weeks to a few months of starting or increasing the offending drug, and it is potentially reversible after withdrawal, though recovery may take many months.",
-      "Common culprits include typical and atypical antipsychotics, the antiemetics metoclopramide and prochlorperazine, and dopamine-depleting agents; less-appreciated contributors include some calcium-channel blockers, valproate and certain antidepressants.",
-      "Persistent or progressive symptoms after drug withdrawal should raise suspicion of unmasked underlying Parkinson disease.",
-      "Coexisting tardive dyskinesia or orolingual dyskinesia alongside parkinsonism strongly favours a drug-induced aetiology.",
-      "Dopamine transporter (DaT) imaging is normal in pure drug-induced parkinsonism but abnormal where an underlying degenerative process has been unmasked, aiding difficult cases.",
-      "First-line management is identifying and stopping or substituting the causative agent; where an antipsychotic is essential, switching to a lower-liability agent (such as quetiapine or clozapine) is preferred, and antiparkinsonian drugs are generally reserved for refractory disability."
+  "pathophysiology": "Drug-induced parkinsonism results from functional dopaminergic hypofunction in the nigrostriatal pathway. Dopamine-receptor antagonists (antipsychotics and antiemetics) block striatal postsynaptic D2 receptors, while dopamine-depleting agents reduce presynaptic dopamine availability; both shift the basal ganglia towards the parkinsonian state via overactivity of the indirect pathway and increased inhibitory output from the globus pallidus internus and substantia nigra pars reticulata. Non-dopaminergic mechanisms are implicated for some drugs such as calcium-channel blockers and valproate. Susceptibility increases with older age, higher potency and dose, and in some patients subclinical nigral degeneration lowers the threshold, such that the drug unmasks incipient Parkinson disease.",
+  "additionalDifferentials": [
+   "idiopathic Parkinson disease",
+   "atypical parkinsonian syndromes such as multiple system atrophy and progressive supranuclear palsy",
+   "vascular parkinsonism",
+   "essential tremor",
+   "tardive syndromes coexisting with parkinsonism",
+   "normal-pressure hydrocephalus",
+   "hypothyroidism or depression with psychomotor slowing"
+  ],
+  "additionalInvestigations": [
+   "comprehensive medication review including antiemetics, calcium-channel blockers and antidepressants",
+   "dopamine transporter (DaT) SPECT imaging to distinguish reversible drug effect from underlying nigrostriatal degeneration",
+   "MRI brain to assess for vascular disease, hydrocephalus or atypical parkinsonian features",
+   "thyroid function tests and metabolic screen for treatable mimics",
+   "structured assessment for coexisting tardive dyskinesia and dystonia",
+   "monitored reassessment of parkinsonian signs over months after withdrawal of the offending drug"
+  ],
+  "redFlags": [
+   "markedly asymmetrical or rapidly progressive signs suggesting an underlying degenerative disorder",
+   "rigidity with fever, autonomic instability and altered consciousness indicating possible neuroleptic malignant syndrome",
+   "early falls, prominent autonomic failure or gaze palsy pointing to an atypical parkinsonian syndrome",
+   "failure to improve, or continued progression, after adequate withdrawal of the causative agent"
+  ],
+  "prognosis": "Most patients improve after the offending drug is withdrawn, though resolution can take several months and a proportion have persistent deficits reflecting unmasked underlying Parkinson disease. Early recognition and drug cessation offer the best chance of full recovery.",
+  "pitfalls": [
+   "assuming symmetry is required for the diagnosis and missing drug-induced parkinsonism when signs are asymmetrical",
+   "overlooking hidden culprits such as metoclopramide, prochlorperazine, flunarizine or cinnarizine",
+   "starting levodopa or dopamine agonists rather than removing the causative drug",
+   "expecting immediate resolution and prematurely concluding the drug was not responsible",
+   "failing to arrange DaT imaging or follow-up when symptoms persist, thereby missing unmasked Parkinson disease"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+   "Fahn and Jankovic, Principles and Practice of Movement Disorders, current edition"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Withdraw or reduce the offending dopamine-receptor-blocking or dopamine-depleting drug wherever possible, the definitive treatment, as symptoms are potentially reversible",
+   "Where an antipsychotic remains necessary, switch to a lower-risk agent such as quetiapine or clozapine, and replace metoclopramide or prochlorperazine with a non-dopaminergic antiemetic such as domperidone or ondansetron",
+   "Consider an anticholinergic or amantadine for symptomatic relief while awaiting resolution, weighing adverse effects in older patients",
+   "Reassess parkinsonian signs over the months following withdrawal, as recovery may be slow",
+   "Investigate persistent or progressive signs with dopamine-transporter (DaT) SPECT imaging and manage as idiopathic Parkinson disease if nigrostriatal degeneration has been unmasked",
+   "Refer to neurology where the diagnosis is uncertain or symptoms fail to resolve"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "drug_induced_parkinsonism-pathway",
+   "title": "drug induced parkinsonism: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest cause of secondary parkinsonism, produced by dopamine-receptor-blocking or dopamine-depleting drugs, and a leading mimic of idiopathic Parkinson disease.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: markedly asymmetrical or rapidly progressive signs suggesting an underlying degenerative disorder",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: comprehensive medication review including antiemetics, calcium-channel blockers and antidepressants, dopamine transporter (DaT) SPECT imaging to distinguish reversible drug effect from underlying nigrostriatal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Withdraw or reduce the offending dopamine-receptor-blocking or dopamine-depleting drug wherever possible, the definitive treatment, as symptoms are potentially reversible"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: assuming symmetry is required for the diagnosis and missing drug-induced parkinsonism when signs are asymmetrical"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of drug induced parkinsonism."
+  }
+ ],
+ "tables": [
+  {
+   "id": "drug_induced_parkinsonism-matrix",
+   "title": "drug induced parkinsonism: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest cause of secondary parkinsonism, produced by dopamine-receptor-blocking or dopamine-depleting drugs, and a leading",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Drug-induced parkinsonism results from functional dopaminergic hypofunction in the nigrostriatal pathway. Dopamine-receptor antagonists (antipsychotics and antiemetics) block striatal postsynaptic D2 receptors, while dopamine-depleting agents reduce presynaptic dopamine availability; both shift the basal ganglia towards the parkinsonian state via overactivity of the indirect pathway and increased inhibitory output from the globus pallidus internus and substantia nigra pars reticulata. Non-dopaminergic mechanisms are implicated for some drugs such as calcium-channel blockers and valproate. Susceptibility increases with older age, higher potency and dose, and in some patients subclinical nigral degeneration lowers the threshold, such that the drug unmasks incipient Parkinson disease.",
-    "additionalDifferentials": [
-      "idiopathic Parkinson disease",
-      "atypical parkinsonian syndromes such as multiple system atrophy and progressive supranuclear palsy",
-      "vascular parkinsonism",
-      "essential tremor",
-      "tardive syndromes coexisting with parkinsonism",
-      "normal-pressure hydrocephalus",
-      "hypothyroidism or depression with psychomotor slowing"
+    [
+     "Key Investigations",
+     "comprehensive medication review including antiemetics, calcium-channel blockers and antidepressants, dopamine transporter (DaT)",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "comprehensive medication review including antiemetics, calcium-channel blockers and antidepressants",
-      "dopamine transporter (DaT) SPECT imaging to distinguish reversible drug effect from underlying nigrostriatal degeneration",
-      "MRI brain to assess for vascular disease, hydrocephalus or atypical parkinsonian features",
-      "thyroid function tests and metabolic screen for treatable mimics",
-      "structured assessment for coexisting tardive dyskinesia and dystonia",
-      "monitored reassessment of parkinsonian signs over months after withdrawal of the offending drug"
+    [
+     "Primary Differentials",
+     "idiopathic Parkinson disease, atypical parkinsonian syndromes such as multiple system atrophy and progressive supranuclear palsy,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "markedly asymmetrical or rapidly progressive signs suggesting an underlying degenerative disorder",
-      "rigidity with fever, autonomic instability and altered consciousness indicating possible neuroleptic malignant syndrome",
-      "early falls, prominent autonomic failure or gaze palsy pointing to an atypical parkinsonian syndrome",
-      "failure to improve, or continued progression, after adequate withdrawal of the causative agent"
+    [
+     "Management Strategy",
+     "Withdraw or reduce the offending dopamine-receptor-blocking or dopamine-depleting drug wherever possible, the definitive",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients improve after the offending drug is withdrawn, though resolution can take several months and a proportion have persistent deficits reflecting unmasked underlying Parkinson disease. Early recognition and drug cessation offer the best chance of full recovery.",
-    "pitfalls": [
-      "assuming symmetry is required for the diagnosis and missing drug-induced parkinsonism when signs are asymmetrical",
-      "overlooking hidden culprits such as metoclopramide, prochlorperazine, flunarizine or cinnarizine",
-      "starting levodopa or dopamine agonists rather than removing the causative drug",
-      "expecting immediate resolution and prematurely concluding the drug was not responsible",
-      "failing to arrange DaT imaging or follow-up when symptoms persist, thereby missing unmasked Parkinson disease"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-      "Fahn and Jankovic, Principles and Practice of Movement Disorders, current edition"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Withdraw or reduce the offending dopamine-receptor-blocking or dopamine-depleting drug wherever possible, the definitive treatment, as symptoms are potentially reversible",
-      "Where an antipsychotic remains necessary, switch to a lower-risk agent such as quetiapine or clozapine, and replace metoclopramide or prochlorperazine with a non-dopaminergic antiemetic such as domperidone or ondansetron",
-      "Consider an anticholinergic or amantadine for symptomatic relief while awaiting resolution, weighing adverse effects in older patients",
-      "Reassess parkinsonian signs over the months following withdrawal, as recovery may be slow",
-      "Investigate persistent or progressive signs with dopamine-transporter (DaT) SPECT imaging and manage as idiopathic Parkinson disease if nigrostriatal degeneration has been unmasked",
-      "Refer to neurology where the diagnosis is uncertain or symptoms fail to resolve"
+    [
+     "Clinical Pitfall",
+     "assuming symmetry is required for the diagnosis and missing drug-induced parkinsonism when signs are asymmetrical",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for drug induced parkinsonism."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "drug-induced-parkinsonism-diagram",
+   "title": "drug induced parkinsonism: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

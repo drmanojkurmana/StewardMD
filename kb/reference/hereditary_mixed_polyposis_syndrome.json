@@ -1,77 +1,172 @@
 {
-  "id": "hereditary_mixed_polyposis_syndrome",
-  "name": "Hereditary mixed polyposis syndrome",
-  "aliases": [
-    "HMPS"
+ "id": "hereditary_mixed_polyposis_syndrome",
+ "name": "Hereditary mixed polyposis syndrome",
+ "aliases": [
+  "HMPS"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Cancer predisposition",
+ "specialty": "Clinical genetics / Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Hereditary cancer syndrome references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Rare autosomal dominant colorectal polyposis, first characterised in families of Ashkenazi Jewish ancestry.",
+   "Defined by the development of colorectal polyps of mixed histological types within an individual or family, spanning serrated or hyperplastic, adenomatous, atypical juvenile and mixed-morphology polyps.",
+   "Most cases are caused by a duplication in the regulatory region upstream of GREM1, driving ectopic overexpression of gremlin 1, a bone morphogenetic protein antagonist.",
+   "The syndrome carries a substantially increased risk of colorectal carcinoma, often arising from these atypical polyps.",
+   "Unlike juvenile polyposis, disease is generally confined to the colorectum without the characteristic upper-gastrointestinal or extra-intestinal features.",
+   "Diagnosis rests on the characteristic mixed-polyp phenotype with a compatible family history, supported by identification of the GREM1 duplication.",
+   "Management is based on regular colonoscopic surveillance with polypectomy, reserving surgery for an uncontrollable polyp burden or established malignancy."
   ],
-  "class": "non_infective",
-  "system": "Oncology / Cancer predisposition",
-  "specialty": "Clinical genetics / Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Hereditary cancer syndrome references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Rare autosomal dominant colorectal polyposis, first characterised in families of Ashkenazi Jewish ancestry.",
-      "Defined by the development of colorectal polyps of mixed histological types within an individual or family, spanning serrated or hyperplastic, adenomatous, atypical juvenile and mixed-morphology polyps.",
-      "Most cases are caused by a duplication in the regulatory region upstream of GREM1, driving ectopic overexpression of gremlin 1, a bone morphogenetic protein antagonist.",
-      "The syndrome carries a substantially increased risk of colorectal carcinoma, often arising from these atypical polyps.",
-      "Unlike juvenile polyposis, disease is generally confined to the colorectum without the characteristic upper-gastrointestinal or extra-intestinal features.",
-      "Diagnosis rests on the characteristic mixed-polyp phenotype with a compatible family history, supported by identification of the GREM1 duplication.",
-      "Management is based on regular colonoscopic surveillance with polypectomy, reserving surgery for an uncontrollable polyp burden or established malignancy."
+  "pathophysiology": "Bone morphogenetic protein signalling normally restrains proliferation and promotes differentiation of epithelial cells along the intestinal crypt-villus axis, helping to confine stem-cell activity to the base of the crypt. In hereditary mixed polyposis syndrome a heterozygous duplication of a regulatory element upstream of the GREM1 gene drives ectopic and increased expression of gremlin 1, a secreted antagonist that binds and neutralises bone morphogenetic proteins. Excess gremlin 1 within the epithelial compartment suppresses bone morphogenetic protein signalling, expanding the zone of proliferative, stem-like cells beyond the normal crypt base and promoting ectopic crypt formation. This disturbance of the balance between the bone morphogenetic protein and Wnt pathways favours the growth of polyps with mixed serrated, adenomatous and juvenile-like morphology and predisposes the disordered epithelium to progression towards colorectal carcinoma.",
+  "additionalDifferentials": [
+   "Juvenile polyposis syndrome associated with SMAD4 or BMPR1A mutations",
+   "Serrated polyposis syndrome",
+   "Familial adenomatous polyposis and attenuated familial adenomatous polyposis",
+   "MUTYH-associated polyposis",
+   "Peutz-Jeghers syndrome",
+   "Lynch syndrome for the colorectal cancer family history",
+   "Sporadic multiple colorectal polyps"
+  ],
+  "additionalInvestigations": [
+   "Colonoscopy with careful lesion mapping and polypectomy",
+   "Histopathological assessment of polyps to document the mixed morphology",
+   "Genetic testing for the GREM1 upstream duplication with a broader polyposis-gene panel to exclude alternatives",
+   "Genetic counselling and cascade testing of at-risk relatives",
+   "Upper-gastrointestinal endoscopy to exclude features of other polyposis syndromes where the phenotype is unclear",
+   "Three-generation family cancer pedigree with colorectal cancer risk assessment"
+  ],
+  "redFlags": [
+   "Rectal bleeding, altered bowel habit or iron-deficiency anaemia suggesting colorectal malignancy",
+   "A rapidly increasing polyp burden or a large or advanced polyp found on surveillance",
+   "A new symptomatic mass or obstructive symptoms",
+   "A family history of early-onset colorectal cancer"
+  ],
+  "prognosis": "With adherence to colonoscopic surveillance and polypectomy the colorectal cancer risk can be substantially reduced and the outlook is favourable when malignancy is prevented or detected early. Left unsurveilled, the cumulative cancer risk is significant.",
+  "pitfalls": [
+   "Misclassifying the condition as sporadic polyps, or as juvenile or serrated polyposis, and missing the GREM1 aetiology",
+   "Assuming standard-population colonoscopy intervals are adequate rather than intensified surveillance",
+   "Overlooking the diagnosis when polyp histology is heterogeneous and reported piecemeal",
+   "Failing to offer genetic testing and family cascade screening"
+  ],
+  "references": [
+   "Clinical genetics and hereditary cancer references",
+   "Gastroenterology references",
+   "Colorectal cancer guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Enrol patients in regular colonoscopic surveillance with polypectomy or endoscopic mucosal resection of all polyps to interrupt progression to colorectal carcinoma",
+   "Send resected polyps for histopathological review to document the mixed morphology and detect dysplasia or early malignancy",
+   "Consider prophylactic or therapeutic colectomy (subtotal colectomy or proctocolectomy) when the polyp burden becomes unmanageable endoscopically or high-grade dysplasia or carcinoma develops",
+   "Manage confirmed colorectal cancer through the colorectal multidisciplinary team with oncological resection and adjuvant therapy as indicated",
+   "Coordinate care across gastroenterology, colorectal surgery, histopathology and clinical genetics",
+   "Offer genetic counselling and cascade testing for the GREM1 upstream duplication in at-risk relatives, enrolling confirmed carriers into colonoscopic surveillance from an appropriate age"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_mixed_polyposis_syndrome-pathway",
+   "title": "Hereditary mixed polyposis syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Rare autosomal dominant colorectal polyposis, first characterised in families of Ashkenazi Jewish ancestry.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rectal bleeding, altered bowel habit or iron-deficiency anaemia suggesting colorectal malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Colonoscopy with careful lesion mapping and polypectomy, Histopathological assessment of polyps to document the mixed morphology, Genetic testing for the GREM1 upstream duplication with a broader polyposis-gene panel to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Enrol patients in regular colonoscopic surveillance with polypectomy or endoscopic mucosal resection of all polyps to interrupt progression to colorectal carcinoma"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying the condition as sporadic polyps, or as juvenile or serrated polyposis, and missing the GREM1 aetiology"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hereditary mixed polyposis syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_mixed_polyposis_syndrome-matrix",
+   "title": "Hereditary mixed polyposis syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rare autosomal dominant colorectal polyposis, first characterised in families of Ashkenazi Jewish ancestry.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bone morphogenetic protein signalling normally restrains proliferation and promotes differentiation of epithelial cells along the intestinal crypt-villus axis, helping to confine stem-cell activity to the base of the crypt. In hereditary mixed polyposis syndrome a heterozygous duplication of a regulatory element upstream of the GREM1 gene drives ectopic and increased expression of gremlin 1, a secreted antagonist that binds and neutralises bone morphogenetic proteins. Excess gremlin 1 within the epithelial compartment suppresses bone morphogenetic protein signalling, expanding the zone of proliferative, stem-like cells beyond the normal crypt base and promoting ectopic crypt formation. This disturbance of the balance between the bone morphogenetic protein and Wnt pathways favours the growth of polyps with mixed serrated, adenomatous and juvenile-like morphology and predisposes the disordered epithelium to progression towards colorectal carcinoma.",
-    "additionalDifferentials": [
-      "Juvenile polyposis syndrome associated with SMAD4 or BMPR1A mutations",
-      "Serrated polyposis syndrome",
-      "Familial adenomatous polyposis and attenuated familial adenomatous polyposis",
-      "MUTYH-associated polyposis",
-      "Peutz-Jeghers syndrome",
-      "Lynch syndrome for the colorectal cancer family history",
-      "Sporadic multiple colorectal polyps"
+    [
+     "Key Investigations",
+     "Colonoscopy with careful lesion mapping and polypectomy, Histopathological assessment of polyps to document the mixed morphology,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Colonoscopy with careful lesion mapping and polypectomy",
-      "Histopathological assessment of polyps to document the mixed morphology",
-      "Genetic testing for the GREM1 upstream duplication with a broader polyposis-gene panel to exclude alternatives",
-      "Genetic counselling and cascade testing of at-risk relatives",
-      "Upper-gastrointestinal endoscopy to exclude features of other polyposis syndromes where the phenotype is unclear",
-      "Three-generation family cancer pedigree with colorectal cancer risk assessment"
+    [
+     "Primary Differentials",
+     "Juvenile polyposis syndrome associated with SMAD4 or BMPR1A mutations, Serrated polyposis syndrome, Familial adenomatous",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rectal bleeding, altered bowel habit or iron-deficiency anaemia suggesting colorectal malignancy",
-      "A rapidly increasing polyp burden or a large or advanced polyp found on surveillance",
-      "A new symptomatic mass or obstructive symptoms",
-      "A family history of early-onset colorectal cancer"
+    [
+     "Management Strategy",
+     "Enrol patients in regular colonoscopic surveillance with polypectomy or endoscopic mucosal resection of all polyps to interrupt",
+     "Core treatment modality"
     ],
-    "prognosis": "With adherence to colonoscopic surveillance and polypectomy the colorectal cancer risk can be substantially reduced and the outlook is favourable when malignancy is prevented or detected early. Left unsurveilled, the cumulative cancer risk is significant.",
-    "pitfalls": [
-      "Misclassifying the condition as sporadic polyps, or as juvenile or serrated polyposis, and missing the GREM1 aetiology",
-      "Assuming standard-population colonoscopy intervals are adequate rather than intensified surveillance",
-      "Overlooking the diagnosis when polyp histology is heterogeneous and reported piecemeal",
-      "Failing to offer genetic testing and family cascade screening"
-    ],
-    "references": [
-      "Clinical genetics and hereditary cancer references",
-      "Gastroenterology references",
-      "Colorectal cancer guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Enrol patients in regular colonoscopic surveillance with polypectomy or endoscopic mucosal resection of all polyps to interrupt progression to colorectal carcinoma",
-      "Send resected polyps for histopathological review to document the mixed morphology and detect dysplasia or early malignancy",
-      "Consider prophylactic or therapeutic colectomy (subtotal colectomy or proctocolectomy) when the polyp burden becomes unmanageable endoscopically or high-grade dysplasia or carcinoma develops",
-      "Manage confirmed colorectal cancer through the colorectal multidisciplinary team with oncological resection and adjuvant therapy as indicated",
-      "Coordinate care across gastroenterology, colorectal surgery, histopathology and clinical genetics",
-      "Offer genetic counselling and cascade testing for the GREM1 upstream duplication in at-risk relatives, enrolling confirmed carriers into colonoscopic surveillance from an appropriate age"
+    [
+     "Clinical Pitfall",
+     "Misclassifying the condition as sporadic polyps, or as juvenile or serrated polyposis, and missing the GREM1 aetiology",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hereditary mixed polyposis syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-mixed-polyposis-syndrome-diagram",
+   "title": "Hereditary mixed polyposis syndrome: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

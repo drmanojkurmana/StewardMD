@@ -1,81 +1,176 @@
 {
-  "id": "transient_tachypnea_of_newborn",
-  "name": "Transient Tachypnea of the Newborn",
-  "aliases": [
-    "TTN",
-    "Transient tachypnoea of the newborn",
-    "retained fetal lung fluid",
-    "transient tachypnoea of newborn",
-    "transient tachypnoea of the newborn",
-    "wet lung"
+ "id": "transient_tachypnea_of_newborn",
+ "name": "Transient Tachypnea of the Newborn",
+ "aliases": [
+  "TTN",
+  "Transient tachypnoea of the newborn",
+  "retained fetal lung fluid",
+  "transient tachypnoea of newborn",
+  "transient tachypnoea of the newborn",
+  "wet lung"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "A common, benign, self-limited cause of respiratory distress in term and late-preterm newborns caused by delayed clearance of fetal lung fluid.",
+   "It typically presents soon after birth with tachypnoea, mild grunting, nasal flaring, and mild recession, usually without severe distress.",
+   "Delivery by caesarean section (especially without labour), maternal diabetes, and rapid or precipitous delivery are recognised risk factors.",
+   "The chest radiograph classically shows prominent perihilar vascular markings, fluid in the interlobar fissures, hyperinflation, and sometimes small pleural effusions.",
+   "It is largely a diagnosis of exclusion, and sepsis and pneumonia should be considered, particularly if distress is marked or prolonged.",
+   "Management is supportive with oxygen as required and attention to feeding; the condition usually resolves within the first day or two of life.",
+   "Oxygen requirement is generally modest, and the need for high oxygen or escalating support should prompt reconsideration of the diagnosis.",
+   "Distress persisting well beyond 2-3 days argues against transient tachypnoea and warrants further evaluation."
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "A common, benign, self-limited cause of respiratory distress in term and late-preterm newborns caused by delayed clearance of fetal lung fluid.",
-      "It typically presents soon after birth with tachypnoea, mild grunting, nasal flaring, and mild recession, usually without severe distress.",
-      "Delivery by caesarean section (especially without labour), maternal diabetes, and rapid or precipitous delivery are recognised risk factors.",
-      "The chest radiograph classically shows prominent perihilar vascular markings, fluid in the interlobar fissures, hyperinflation, and sometimes small pleural effusions.",
-      "It is largely a diagnosis of exclusion, and sepsis and pneumonia should be considered, particularly if distress is marked or prolonged.",
-      "Management is supportive with oxygen as required and attention to feeding; the condition usually resolves within the first day or two of life.",
-      "Oxygen requirement is generally modest, and the need for high oxygen or escalating support should prompt reconsideration of the diagnosis.",
-      "Distress persisting well beyond 2-3 days argues against transient tachypnoea and warrants further evaluation."
+  "pathophysiology": "During fetal life the lungs are filled with fluid that is normally cleared around birth by labour-associated catecholamine and hormonal surges that switch alveolar epithelial cells from fluid secretion to sodium-driven absorption, aided by mechanical squeeze during vaginal delivery. When this clearance is delayed or incomplete, residual fluid remains in the interstitium and air spaces, reducing lung compliance and causing tachypnoea and mild hypoxaemia until the fluid is reabsorbed.",
+  "additionalDifferentials": [
+   "Neonatal respiratory distress syndrome",
+   "Early-onset neonatal pneumonia or sepsis",
+   "Meconium aspiration syndrome",
+   "Persistent pulmonary hypertension of the newborn",
+   "Congenital heart disease",
+   "Air-leak syndromes"
+  ],
+  "additionalInvestigations": [
+   "Chest radiograph showing wet-lung features",
+   "Pulse oximetry and monitoring of oxygen requirement",
+   "Blood gas if distress is significant",
+   "Sepsis screen and consideration of antibiotics when infection cannot be excluded",
+   "Blood glucose monitoring"
+  ],
+  "redFlags": [
+   "High or rising oxygen requirement",
+   "Distress persisting beyond the first few days of life",
+   "Marked recession, grunting, or signs of respiratory failure",
+   "Features suggesting sepsis or pneumonia",
+   "Differential pre- and post-ductal saturations suggesting pulmonary hypertension or cardiac disease"
+  ],
+  "prognosis": "The condition is benign and self-limited, resolving within hours to a few days with supportive care and no long-term respiratory sequelae in the great majority of infants.",
+  "pitfalls": [
+   "Anchoring on transient tachypnoea and missing early sepsis or pneumonia",
+   "Overlooking congenital heart disease presenting with tachypnoea",
+   "Failing to reconsider the diagnosis when oxygen needs are high or distress is prolonged",
+   "Unnecessarily delaying feeding or investigation in a stable infant",
+   "Attributing every caesarean-born tachypnoeic infant to TTN without appropriate observation"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive respiratory care with supplemental oxygen titrated to saturations, and continuous positive airway pressure if distress is more marked",
+   "Withhold oral feeds while tachypnoea limits safe feeding, providing nasogastric feeds or intravenous fluids to avoid aspiration",
+   "Continuous pulse oximetry and serial assessment of respiratory effort, with blood gas if distress is significant",
+   "Perform a sepsis screen and start empirical antibiotics until pneumonia or sepsis is confidently excluded, given the overlapping presentation",
+   "Monitor blood glucose, particularly in the infant of a diabetic mother",
+   "Anticipate resolution within the first day or two and escalate, reconsidering the diagnosis including persistent pulmonary hypertension, if the oxygen requirement rises or distress persists"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "transient_tachypnea_of_newborn-pathway",
+   "title": "Transient Tachypnea of the Newborn: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A common, benign, self-limited cause of respiratory distress in term and late-preterm newborns caused by delayed clearance of fetal lung fluid.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: High or rising oxygen requirement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chest radiograph showing wet-lung features, Pulse oximetry and monitoring of oxygen requirement, Blood gas if distress is significant"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive respiratory care with supplemental oxygen titrated to saturations, and continuous positive airway pressure if distress is more marked"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Anchoring on transient tachypnoea and missing early sepsis or pneumonia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of transient tachypnea of the newborn."
+  }
+ ],
+ "tables": [
+  {
+   "id": "transient_tachypnea_of_newborn-matrix",
+   "title": "Transient Tachypnea of the Newborn: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A common, benign, self-limited cause of respiratory distress in term and late-preterm newborns caused by delayed clearance of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During fetal life the lungs are filled with fluid that is normally cleared around birth by labour-associated catecholamine and hormonal surges that switch alveolar epithelial cells from fluid secretion to sodium-driven absorption, aided by mechanical squeeze during vaginal delivery. When this clearance is delayed or incomplete, residual fluid remains in the interstitium and air spaces, reducing lung compliance and causing tachypnoea and mild hypoxaemia until the fluid is reabsorbed.",
-    "additionalDifferentials": [
-      "Neonatal respiratory distress syndrome",
-      "Early-onset neonatal pneumonia or sepsis",
-      "Meconium aspiration syndrome",
-      "Persistent pulmonary hypertension of the newborn",
-      "Congenital heart disease",
-      "Air-leak syndromes"
+    [
+     "Key Investigations",
+     "Chest radiograph showing wet-lung features, Pulse oximetry and monitoring of oxygen requirement, Blood gas if distress is",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chest radiograph showing wet-lung features",
-      "Pulse oximetry and monitoring of oxygen requirement",
-      "Blood gas if distress is significant",
-      "Sepsis screen and consideration of antibiotics when infection cannot be excluded",
-      "Blood glucose monitoring"
+    [
+     "Primary Differentials",
+     "Neonatal respiratory distress syndrome, Early-onset neonatal pneumonia or sepsis, Meconium aspiration syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "High or rising oxygen requirement",
-      "Distress persisting beyond the first few days of life",
-      "Marked recession, grunting, or signs of respiratory failure",
-      "Features suggesting sepsis or pneumonia",
-      "Differential pre- and post-ductal saturations suggesting pulmonary hypertension or cardiac disease"
+    [
+     "Management Strategy",
+     "Supportive respiratory care with supplemental oxygen titrated to saturations, and continuous positive airway pressure if distress",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and self-limited, resolving within hours to a few days with supportive care and no long-term respiratory sequelae in the great majority of infants.",
-    "pitfalls": [
-      "Anchoring on transient tachypnoea and missing early sepsis or pneumonia",
-      "Overlooking congenital heart disease presenting with tachypnoea",
-      "Failing to reconsider the diagnosis when oxygen needs are high or distress is prolonged",
-      "Unnecessarily delaying feeding or investigation in a stable infant",
-      "Attributing every caesarean-born tachypnoeic infant to TTN without appropriate observation"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive respiratory care with supplemental oxygen titrated to saturations, and continuous positive airway pressure if distress is more marked",
-      "Withhold oral feeds while tachypnoea limits safe feeding, providing nasogastric feeds or intravenous fluids to avoid aspiration",
-      "Continuous pulse oximetry and serial assessment of respiratory effort, with blood gas if distress is significant",
-      "Perform a sepsis screen and start empirical antibiotics until pneumonia or sepsis is confidently excluded, given the overlapping presentation",
-      "Monitor blood glucose, particularly in the infant of a diabetic mother",
-      "Anticipate resolution within the first day or two and escalate, reconsidering the diagnosis including persistent pulmonary hypertension, if the oxygen requirement rises or distress persists"
+    [
+     "Clinical Pitfall",
+     "Anchoring on transient tachypnoea and missing early sepsis or pneumonia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for transient tachypnea of the newborn."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "transient-tachypnea-of-newborn-diagram",
+   "title": "Transient Tachypnea of the Newborn: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

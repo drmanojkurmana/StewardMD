@@ -1,87 +1,182 @@
 {
-  "id": "angioimmunoblastic_t_cell_lymphoma",
-  "name": "Angioimmunoblastic T-cell lymphoma",
-  "aliases": [
-    "AITL",
-    "angioimmunoblastic lymphadenopathy",
-    "TFH-cell lymphoma",
-    "nodal T-follicular helper cell lymphoma, angioimmunoblastic type",
-    "CD10/CXCL13/PD-1 positive; EBV-associated B blasts"
+ "id": "angioimmunoblastic_t_cell_lymphoma",
+ "name": "Angioimmunoblastic T-cell lymphoma",
+ "aliases": [
+  "AITL",
+  "angioimmunoblastic lymphadenopathy",
+  "TFH-cell lymphoma",
+  "nodal T-follicular helper cell lymphoma, angioimmunoblastic type",
+  "CD10/CXCL13/PD-1 positive; EBV-associated B blasts"
+ ],
+ "class": "non_infective",
+ "system": "Oncology / Haematologic malignancy",
+ "specialty": "Haematology / Haemato-oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Haematolymphoid Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Typically affects older adults with generalised lymphadenopathy, hepatosplenomegaly, fever, weight loss, and a characteristic skin rash",
+   "Autoimmune-like features are common, including polyclonal hypergammaglobulinaemia, haemolytic anaemia with a positive direct antiglobulin test, arthralgia, and circulating immune complexes",
+   "The neoplastic cell is a T-follicular helper (TFH) lymphocyte expressing CD4 with markers such as CD10, CXCL13, PD-1, ICOS, and BCL6",
+   "Nodes show a polymorphous infiltrate, arborising high endothelial venules, and expanded follicular dendritic cell meshworks, which can obscure the malignant clone",
+   "Epstein-Barr virus-driven B-cell blasts are frequently present and can occasionally transform into a secondary EBV-positive diffuse large B-cell lymphoma",
+   "Recurrent mutations affect TET2, DNMT3A, IDH2, and RHOA, reflecting an origin often shared with age-related clonal haematopoiesis",
+   "Immune dysregulation predisposes to opportunistic infection, which contributes significantly to morbidity"
   ],
-  "class": "non_infective",
-  "system": "Oncology / Haematologic malignancy",
-  "specialty": "Haematology / Haemato-oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Haematolymphoid Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Typically affects older adults with generalised lymphadenopathy, hepatosplenomegaly, fever, weight loss, and a characteristic skin rash",
-      "Autoimmune-like features are common, including polyclonal hypergammaglobulinaemia, haemolytic anaemia with a positive direct antiglobulin test, arthralgia, and circulating immune complexes",
-      "The neoplastic cell is a T-follicular helper (TFH) lymphocyte expressing CD4 with markers such as CD10, CXCL13, PD-1, ICOS, and BCL6",
-      "Nodes show a polymorphous infiltrate, arborising high endothelial venules, and expanded follicular dendritic cell meshworks, which can obscure the malignant clone",
-      "Epstein-Barr virus-driven B-cell blasts are frequently present and can occasionally transform into a secondary EBV-positive diffuse large B-cell lymphoma",
-      "Recurrent mutations affect TET2, DNMT3A, IDH2, and RHOA, reflecting an origin often shared with age-related clonal haematopoiesis",
-      "Immune dysregulation predisposes to opportunistic infection, which contributes significantly to morbidity"
+  "pathophysiology": "Angioimmunoblastic T-cell lymphoma arises from T-follicular helper cells, a subset that normally supports germinal-centre B-cell responses. Early epigenetic mutations in TET2 and DNMT3A may originate in a haematopoietic stem cell, with later acquisition of RHOA and IDH2 changes driving the malignant TFH phenotype. The tumour recreates an aberrant germinal-centre microenvironment, secreting chemokines such as CXCL13 that recruit B cells, plasma cells, eosinophils, and dendritic cells, producing the polymorphous nodal picture. Loss of normal immune regulation explains the prominent autoimmune phenomena, hypergammaglobulinaemia, and reactivation of Epstein-Barr virus in bystander B cells, which can themselves undergo clonal expansion.",
+  "additionalDifferentials": [
+   "Reactive viral lymphadenopathy with immune activation",
+   "Other peripheral T-cell lymphomas, not otherwise specified",
+   "Classic or nodular lymphocyte-predominant Hodgkin lymphoma",
+   "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
+   "Autoimmune disease with lymphadenopathy such as systemic lupus erythematosus",
+   "EBV-positive diffuse large B-cell lymphoma"
+  ],
+  "additionalInvestigations": [
+   "Excisional lymph node biopsy with immunohistochemistry for the TFH panel (CD10, CXCL13, PD-1, ICOS, BCL6)",
+   "In situ hybridisation for EBV-encoded RNA to highlight bystander B blasts",
+   "T-cell receptor clonality studies and often concurrent B-cell clonality assessment",
+   "Molecular testing for TET2, DNMT3A, RHOA, and IDH2 mutations where available",
+   "Direct antiglobulin test, serum immunoglobulins, and autoantibody screen",
+   "Cross-sectional imaging and bone marrow examination for staging"
+  ],
+  "redFlags": [
+   "Rapid clinical deterioration with high fever suggesting aggressive disease or intercurrent opportunistic infection",
+   "Features of haemophagocytic lymphohistiocytosis such as cytopenias, hyperferritinaemia, and rising triglycerides",
+   "Emergence of a rapidly enlarging mass indicating transformation to large B-cell lymphoma",
+   "Severe autoimmune haemolysis causing symptomatic anaemia"
+  ],
+  "prognosis": "The disease is generally aggressive with a guarded outlook; many patients relapse after combination chemotherapy, and older age, poor performance status, and infective complications worsen outcome, though epigenetic-targeted approaches are under evaluation.",
+  "pitfalls": [
+   "Misreading the polymorphous, inflammatory-appearing infiltrate as reactive or as Hodgkin lymphoma and missing the malignant TFH clone",
+   "Attributing systemic symptoms solely to infection or autoimmune disease and delaying biopsy",
+   "Overlooking a secondary EBV-driven B-cell proliferation or transformation",
+   "Failing to anticipate and prevent opportunistic infection during immunosuppressive therapy"
+  ],
+  "references": [
+   "WHO Classification of Haematolymphoid Tumours",
+   "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm diagnosis via excisional lymph node biopsy with a T-follicular helper immunohistochemistry panel, complete staging, and screen for autoimmune and infective complications before starting systemic therapy",
+   "A subset of patients have spontaneous remission or remission with corticosteroids alone during work-up; recognize this to avoid over-treating a stabilizing patient, without delaying definitive therapy in aggressive disease",
+   "For patients needing systemic treatment, use anthracycline-based combination chemotherapy as first-line induction, following the peripheral T-cell lymphoma, not otherwise specified approach",
+   "Consider autologous stem cell transplant consolidation in first remission for younger, fit responders to induction; this is an option, not mandatory, and depends on age, comorbidity, and response depth/durability",
+   "In relapsed or refractory disease, follow peripheral T-cell lymphoma, not otherwise specified salvage approaches, reserving salvage chemotherapy plus autologous transplant for selected chemosensitive relapses",
+   "Consider non-myeloablative allogeneic transplant in selected relapsed/refractory patients for durable disease control, weighing non-relapse mortality, decided at experienced transplant centers after multidisciplinary discussion",
+   "In relapsed/refractory disease, consider histone deacetylase inhibitors, hypomethylating agents, and antifolate therapy (noting antifolate responses are less reliable in AITL than in peripheral T-cell lymphoma generally); consider an anti-CD30 antibody-drug conjugate when the tumor is CD30 positive",
+   "Discuss and pursue clinical trial enrollment early in relapsed/refractory disease given generally modest and often non-durable responses to available agents",
+   "Use corticosteroids and other immunomodulatory measures to manage autoimmune hemolytic anemia, polyarthritis, and other immune-mediated phenomena independent of anti-lymphoma treatment",
+   "Maintain infection prophylaxis and vigilance for opportunistic infection throughout treatment, as this is a recognized cause of death in AITL",
+   "Re-biopsy a rapidly enlarging mass or unexplained deterioration to evaluate for secondary EBV-positive diffuse large B-cell lymphoma transformation rather than assuming AITL progression",
+   "Perform response assessment with standard lymphoma restaging imaging after treatment completion, since achieving complete response is the key determinant of longer-term outcome",
+   "Provide longitudinal surveillance for relapse, secondary EBV-positive large B-cell lymphoma, opportunistic infection, and fluctuating autoimmune phenomena (hemolysis, arthropathy, thyroid dysfunction)",
+   "Manage all patients through a haemato-oncology multidisciplinary team from diagnosis, with prompt transplant assessment referral, early access to clinical trials for relapsed/refractory disease, and early involvement of palliative and supportive care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "angioimmunoblastic_t_cell_lymphoma-pathway",
+   "title": "Angioimmunoblastic T-cell lymphoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Typically affects older adults with generalised lymphadenopathy, hepatosplenomegaly, fever, weight loss, and a characteristic skin rash",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid clinical deterioration with high fever suggesting aggressive disease or intercurrent opportunistic infection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Excisional lymph node biopsy with immunohistochemistry for the TFH panel (CD10, CXCL13, PD-1, ICOS, BCL6), In situ hybridisation for EBV-encoded RNA to highlight bystander B blasts, T-cell receptor clonality studies and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm diagnosis via excisional lymph node biopsy with a T-follicular helper immunohistochemistry panel, complete staging, and screen for autoimmune and infective complications before starting systemic therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misreading the polymorphous, inflammatory-appearing infiltrate as reactive or as Hodgkin lymphoma and missing the malignant TFH clone"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of angioimmunoblastic t-cell lymphoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "angioimmunoblastic_t_cell_lymphoma-matrix",
+   "title": "Angioimmunoblastic T-cell lymphoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typically affects older adults with generalised lymphadenopathy, hepatosplenomegaly, fever, weight loss, and a characteristic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Angioimmunoblastic T-cell lymphoma arises from T-follicular helper cells, a subset that normally supports germinal-centre B-cell responses. Early epigenetic mutations in TET2 and DNMT3A may originate in a haematopoietic stem cell, with later acquisition of RHOA and IDH2 changes driving the malignant TFH phenotype. The tumour recreates an aberrant germinal-centre microenvironment, secreting chemokines such as CXCL13 that recruit B cells, plasma cells, eosinophils, and dendritic cells, producing the polymorphous nodal picture. Loss of normal immune regulation explains the prominent autoimmune phenomena, hypergammaglobulinaemia, and reactivation of Epstein-Barr virus in bystander B cells, which can themselves undergo clonal expansion.",
-    "additionalDifferentials": [
-      "Reactive viral lymphadenopathy with immune activation",
-      "Other peripheral T-cell lymphomas, not otherwise specified",
-      "Classic or nodular lymphocyte-predominant Hodgkin lymphoma",
-      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
-      "Autoimmune disease with lymphadenopathy such as systemic lupus erythematosus",
-      "EBV-positive diffuse large B-cell lymphoma"
+    [
+     "Key Investigations",
+     "Excisional lymph node biopsy with immunohistochemistry for the TFH panel (CD10, CXCL13, PD-1, ICOS, BCL6), In situ hybridisation",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Excisional lymph node biopsy with immunohistochemistry for the TFH panel (CD10, CXCL13, PD-1, ICOS, BCL6)",
-      "In situ hybridisation for EBV-encoded RNA to highlight bystander B blasts",
-      "T-cell receptor clonality studies and often concurrent B-cell clonality assessment",
-      "Molecular testing for TET2, DNMT3A, RHOA, and IDH2 mutations where available",
-      "Direct antiglobulin test, serum immunoglobulins, and autoantibody screen",
-      "Cross-sectional imaging and bone marrow examination for staging"
+    [
+     "Primary Differentials",
+     "Reactive viral lymphadenopathy with immune activation, Other peripheral T-cell lymphomas, not otherwise specified, Classic or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid clinical deterioration with high fever suggesting aggressive disease or intercurrent opportunistic infection",
-      "Features of haemophagocytic lymphohistiocytosis such as cytopenias, hyperferritinaemia, and rising triglycerides",
-      "Emergence of a rapidly enlarging mass indicating transformation to large B-cell lymphoma",
-      "Severe autoimmune haemolysis causing symptomatic anaemia"
+    [
+     "Management Strategy",
+     "Confirm diagnosis via excisional lymph node biopsy with a T-follicular helper immunohistochemistry panel, complete staging, and",
+     "Core treatment modality"
     ],
-    "prognosis": "The disease is generally aggressive with a guarded outlook; many patients relapse after combination chemotherapy, and older age, poor performance status, and infective complications worsen outcome, though epigenetic-targeted approaches are under evaluation.",
-    "pitfalls": [
-      "Misreading the polymorphous, inflammatory-appearing infiltrate as reactive or as Hodgkin lymphoma and missing the malignant TFH clone",
-      "Attributing systemic symptoms solely to infection or autoimmune disease and delaying biopsy",
-      "Overlooking a secondary EBV-driven B-cell proliferation or transformation",
-      "Failing to anticipate and prevent opportunistic infection during immunosuppressive therapy"
-    ],
-    "references": [
-      "WHO Classification of Haematolymphoid Tumours",
-      "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm diagnosis via excisional lymph node biopsy with a T-follicular helper immunohistochemistry panel, complete staging, and screen for autoimmune and infective complications before starting systemic therapy",
-      "A subset of patients have spontaneous remission or remission with corticosteroids alone during work-up; recognize this to avoid over-treating a stabilizing patient, without delaying definitive therapy in aggressive disease",
-      "For patients needing systemic treatment, use anthracycline-based combination chemotherapy as first-line induction, following the peripheral T-cell lymphoma, not otherwise specified approach",
-      "Consider autologous stem cell transplant consolidation in first remission for younger, fit responders to induction; this is an option, not mandatory, and depends on age, comorbidity, and response depth/durability",
-      "In relapsed or refractory disease, follow peripheral T-cell lymphoma, not otherwise specified salvage approaches, reserving salvage chemotherapy plus autologous transplant for selected chemosensitive relapses",
-      "Consider non-myeloablative allogeneic transplant in selected relapsed/refractory patients for durable disease control, weighing non-relapse mortality, decided at experienced transplant centers after multidisciplinary discussion",
-      "In relapsed/refractory disease, consider histone deacetylase inhibitors, hypomethylating agents, and antifolate therapy (noting antifolate responses are less reliable in AITL than in peripheral T-cell lymphoma generally); consider an anti-CD30 antibody-drug conjugate when the tumor is CD30 positive",
-      "Discuss and pursue clinical trial enrollment early in relapsed/refractory disease given generally modest and often non-durable responses to available agents",
-      "Use corticosteroids and other immunomodulatory measures to manage autoimmune hemolytic anemia, polyarthritis, and other immune-mediated phenomena independent of anti-lymphoma treatment",
-      "Maintain infection prophylaxis and vigilance for opportunistic infection throughout treatment, as this is a recognized cause of death in AITL",
-      "Re-biopsy a rapidly enlarging mass or unexplained deterioration to evaluate for secondary EBV-positive diffuse large B-cell lymphoma transformation rather than assuming AITL progression",
-      "Perform response assessment with standard lymphoma restaging imaging after treatment completion, since achieving complete response is the key determinant of longer-term outcome",
-      "Provide longitudinal surveillance for relapse, secondary EBV-positive large B-cell lymphoma, opportunistic infection, and fluctuating autoimmune phenomena (hemolysis, arthropathy, thyroid dysfunction)",
-      "Manage all patients through a haemato-oncology multidisciplinary team from diagnosis, with prompt transplant assessment referral, early access to clinical trials for relapsed/refractory disease, and early involvement of palliative and supportive care"
+    [
+     "Clinical Pitfall",
+     "Misreading the polymorphous, inflammatory-appearing infiltrate as reactive or as Hodgkin lymphoma and missing the malignant TFH",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for angioimmunoblastic t-cell lymphoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "angioimmunoblastic-t-cell-lymphoma-diagram",
+   "title": "Angioimmunoblastic T-cell lymphoma: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

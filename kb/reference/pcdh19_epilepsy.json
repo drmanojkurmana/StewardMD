@@ -1,78 +1,173 @@
 {
-  "id": "pcdh19_epilepsy",
-  "name": "PCDH19-related epilepsy",
-  "aliases": [
-    "PCDH19",
-    "epilepsy in females with mental retardation",
-    "EFMR",
-    "protocadherin-19 clustering epilepsy"
+ "id": "pcdh19_epilepsy",
+ "name": "PCDH19-related epilepsy",
+ "aliases": [
+  "PCDH19",
+  "epilepsy in females with mental retardation",
+  "EFMR",
+  "protocadherin-19 clustering epilepsy"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Epileptology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ILAE classification / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by variants in the X-linked PCDH19 gene, with an unusual inheritance in which heterozygous females are affected while hemizygous males are typically unaffected carriers",
+   "Seizures usually begin in the first years of life, often triggered by fever, and characteristically occur in tight clusters over hours to days",
+   "Focal seizures with prominent fear or affective features are common during clusters",
+   "Development ranges from normal to intellectual disability, and autistic and behavioural features may emerge",
+   "Seizure clusters tend to become less frequent with age, and many patients improve markedly by later childhood",
+   "The condition can resemble Dravet syndrome, but SCN1A testing is negative and PCDH19 testing is diagnostic",
+   "Management focuses on aggressive treatment of clusters and fever control, sometimes with steroid or benzodiazepine strategies during acute clustering"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Epileptology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ILAE classification / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by variants in the X-linked PCDH19 gene, with an unusual inheritance in which heterozygous females are affected while hemizygous males are typically unaffected carriers",
-      "Seizures usually begin in the first years of life, often triggered by fever, and characteristically occur in tight clusters over hours to days",
-      "Focal seizures with prominent fear or affective features are common during clusters",
-      "Development ranges from normal to intellectual disability, and autistic and behavioural features may emerge",
-      "Seizure clusters tend to become less frequent with age, and many patients improve markedly by later childhood",
-      "The condition can resemble Dravet syndrome, but SCN1A testing is negative and PCDH19 testing is diagnostic",
-      "Management focuses on aggressive treatment of clusters and fever control, sometimes with steroid or benzodiazepine strategies during acute clustering"
+  "pathophysiology": "PCDH19-related epilepsy arises from variants in the X-linked PCDH19 gene, which encodes protocadherin-19, a cell-adhesion molecule involved in neuronal migration and network formation. The unusual sex-limited pattern is explained by cellular interference: random X-inactivation in heterozygous females produces a mosaic of cells with and without functional protocadherin-19, disrupting cell-cell communication, whereas hemizygous males express a uniform population and are usually spared. This mosaic disruption of neuronal connectivity underlies the fever-sensitive seizure clusters and the associated cognitive and behavioural features.",
+  "additionalDifferentials": [
+   "Dravet syndrome (SCN1A)",
+   "Genetic epilepsy with febrile seizures plus (GEFS+)",
+   "Complex febrile seizures",
+   "Focal epilepsy of other cause",
+   "Other developmental and epileptic encephalopathies",
+   "Autism spectrum disorder with epilepsy"
+  ],
+  "additionalInvestigations": [
+   "PCDH19 gene testing, often within an epilepsy panel, especially in girls with clustering fever-related seizures",
+   "SCN1A testing to distinguish from Dravet syndrome",
+   "EEG during and between clusters, which may be normal or show focal/generalised discharges",
+   "Brain MRI to exclude structural causes",
+   "Developmental and behavioural assessment"
+  ],
+  "redFlags": [
+   "Prolonged seizure clusters progressing to status epilepticus",
+   "New developmental regression or behavioural deterioration during a cluster",
+   "Fever-triggered clustering in a young girl resembling Dravet syndrome",
+   "Marked affective or fear semiology raising diagnostic uncertainty"
+  ],
+  "prognosis": "Seizure clusters are often severe in early childhood but frequently diminish or remit with age, so the epilepsy prognosis is generally more favourable than in Dravet syndrome. Cognitive and behavioural outcomes vary widely, from normal development to significant intellectual disability and autistic features.",
+  "pitfalls": [
+   "Assuming Dravet syndrome and stopping after a negative SCN1A result without testing PCDH19",
+   "Overlooking the diagnosis in an affected girl with an apparently unaffected carrier father",
+   "Underestimating the intensity of acute clusters and undertreating them",
+   "Attributing behavioural features solely to epilepsy rather than the underlying disorder"
+  ],
+  "references": [
+   "ILAE classification of the epilepsies",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control seizures with broad-spectrum antiseizure medication such as clobazam, sodium valproate or levetiracetam, as no single agent is uniformly effective",
+   "Manage the characteristic clusters aggressively with a home rescue plan using benzodiazepines, and treat intercurrent fever promptly with antipyretics to reduce triggering",
+   "Consider a short course of corticosteroids or clobazam to abort prolonged or refractory clusters",
+   "Explore neurosteroid-directed therapy such as ganaxolone where standard agents fail",
+   "Assess and support development, screening for and managing intellectual disability and autistic and behavioural features with multidisciplinary input",
+   "Provide genetic counselling for the unusual X-linked pattern in which heterozygous girls are affected and hemizygous boys are usually unaffected carriers",
+   "Reassure that clusters often diminish with age while maintaining epilepsy and neurodevelopmental follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pcdh19_epilepsy-pathway",
+   "title": "PCDH19-related epilepsy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by variants in the X-linked PCDH19 gene, with an unusual inheritance in which heterozygous females are affected while hemizygous males are typically unaffected carriers",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Prolonged seizure clusters progressing to status epilepticus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: PCDH19 gene testing, often within an epilepsy panel, especially in girls with clustering fever-related seizures, SCN1A testing to distinguish from Dravet syndrome, EEG during and between clusters, which may be normal or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control seizures with broad-spectrum antiseizure medication such as clobazam, sodium valproate or levetiracetam, as no single agent is uniformly effective"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming Dravet syndrome and stopping after a negative SCN1A result without testing PCDH19"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pcdh19-related epilepsy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pcdh19_epilepsy-matrix",
+   "title": "PCDH19-related epilepsy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by variants in the X-linked PCDH19 gene, with an unusual inheritance in which heterozygous females are affected while",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "PCDH19-related epilepsy arises from variants in the X-linked PCDH19 gene, which encodes protocadherin-19, a cell-adhesion molecule involved in neuronal migration and network formation. The unusual sex-limited pattern is explained by cellular interference: random X-inactivation in heterozygous females produces a mosaic of cells with and without functional protocadherin-19, disrupting cell-cell communication, whereas hemizygous males express a uniform population and are usually spared. This mosaic disruption of neuronal connectivity underlies the fever-sensitive seizure clusters and the associated cognitive and behavioural features.",
-    "additionalDifferentials": [
-      "Dravet syndrome (SCN1A)",
-      "Genetic epilepsy with febrile seizures plus (GEFS+)",
-      "Complex febrile seizures",
-      "Focal epilepsy of other cause",
-      "Other developmental and epileptic encephalopathies",
-      "Autism spectrum disorder with epilepsy"
+    [
+     "Key Investigations",
+     "PCDH19 gene testing, often within an epilepsy panel, especially in girls with clustering fever-related seizures, SCN1A testing to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "PCDH19 gene testing, often within an epilepsy panel, especially in girls with clustering fever-related seizures",
-      "SCN1A testing to distinguish from Dravet syndrome",
-      "EEG during and between clusters, which may be normal or show focal/generalised discharges",
-      "Brain MRI to exclude structural causes",
-      "Developmental and behavioural assessment"
+    [
+     "Primary Differentials",
+     "Dravet syndrome (SCN1A), Genetic epilepsy with febrile seizures plus (GEFS+), Complex febrile seizures",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Prolonged seizure clusters progressing to status epilepticus",
-      "New developmental regression or behavioural deterioration during a cluster",
-      "Fever-triggered clustering in a young girl resembling Dravet syndrome",
-      "Marked affective or fear semiology raising diagnostic uncertainty"
+    [
+     "Management Strategy",
+     "Control seizures with broad-spectrum antiseizure medication such as clobazam, sodium valproate or levetiracetam, as no single",
+     "Core treatment modality"
     ],
-    "prognosis": "Seizure clusters are often severe in early childhood but frequently diminish or remit with age, so the epilepsy prognosis is generally more favourable than in Dravet syndrome. Cognitive and behavioural outcomes vary widely, from normal development to significant intellectual disability and autistic features.",
-    "pitfalls": [
-      "Assuming Dravet syndrome and stopping after a negative SCN1A result without testing PCDH19",
-      "Overlooking the diagnosis in an affected girl with an apparently unaffected carrier father",
-      "Underestimating the intensity of acute clusters and undertreating them",
-      "Attributing behavioural features solely to epilepsy rather than the underlying disorder"
-    ],
-    "references": [
-      "ILAE classification of the epilepsies",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control seizures with broad-spectrum antiseizure medication such as clobazam, sodium valproate or levetiracetam, as no single agent is uniformly effective",
-      "Manage the characteristic clusters aggressively with a home rescue plan using benzodiazepines, and treat intercurrent fever promptly with antipyretics to reduce triggering",
-      "Consider a short course of corticosteroids or clobazam to abort prolonged or refractory clusters",
-      "Explore neurosteroid-directed therapy such as ganaxolone where standard agents fail",
-      "Assess and support development, screening for and managing intellectual disability and autistic and behavioural features with multidisciplinary input",
-      "Provide genetic counselling for the unusual X-linked pattern in which heterozygous girls are affected and hemizygous boys are usually unaffected carriers",
-      "Reassure that clusters often diminish with age while maintaining epilepsy and neurodevelopmental follow-up"
+    [
+     "Clinical Pitfall",
+     "Assuming Dravet syndrome and stopping after a negative SCN1A result without testing PCDH19",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pcdh19-related epilepsy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pcdh19-epilepsy-diagram",
+   "title": "PCDH19-related epilepsy: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }

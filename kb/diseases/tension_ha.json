@@ -125,5 +125,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "ha3a0fb49"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "tension_ha-dx-algo",
+      "title": "Tension-type headache: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "TTH is recognized as bilateral, tight, band-like discomfort that builds gradually, fluctuates in intensity, and can persist near-continuously for days (Harrison 22e p.3514).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Sudden-onset or first severe headache, or the 'worst headache ever' (Harrison 22e p.156-157, Table 17-2)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: TTH is a clinical diagnosis; neuroimaging is not routine but CT or MRI of the brain is indicated when the examination is abnormal or the headache is recent-onset, with CT and MRI being comparably sensitive as initial"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Pain is characteristically mild to moderate, bilateral, tight and band-like, and non-throbbing. By frequency the IHS scheme distinguishes infrequent episodic, frequent episodic, chronic (>=15 days/month), and probable"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Over-applying the TTH label: in chronic headache without neurologic signs, more than 90% of patients actually have migraine, so TTH is frequently overdiagnosed (Harrison 22e p.3514)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for tension-type headache."
+    }
+  ],
+  "tables": [
+    {
+      "id": "tension_ha-matrix",
+      "title": "Tension-type headache: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "TTH is recognized as bilateral, tight, band-like discomfort that builds gradually, fluctuates in intensity, and can persist",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "TTH is a clinical diagnosis; neuroimaging is not routine but CT or MRI of the brain is indicated when the examination is abnormal",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Migraine (the main differential, defined by migrainous accompaniments TTH lacks) (Harrison 22e p.3514), Migraine-TTH overlap /",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Sudden-onset or first severe headache, or the 'worst headache ever' (Harrison 22e p.156-157, Table 17-2)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-applying the TTH label: in chronic headache without neurologic signs, more than 90% of patients actually have migraine, so",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for tension-type headache."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "tension-ha-diagram",
+      "title": "Tension-type headache: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+      "type": "ct",
+      "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+      "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+      "annotations": [
+        {
+          "label": "Cerebral Cortex",
+          "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+        },
+        {
+          "label": "Vascular Territories",
+          "description": "Arterial circulation zones and watershed perfusion boundaries."
+        }
+      ]
+    }
+  ]
 }

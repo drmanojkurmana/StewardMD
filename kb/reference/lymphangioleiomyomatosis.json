@@ -1,79 +1,174 @@
 {
-  "id": "lymphangioleiomyomatosis",
-  "name": "Lymphangioleiomyomatosis",
-  "aliases": [
-    "LAM",
-    "sporadic LAM",
-    "TSC-associated LAM",
-    "pulmonary lymphangioleiomyomatosis"
+ "id": "lymphangioleiomyomatosis",
+ "name": "Lymphangioleiomyomatosis",
+ "aliases": [
+  "LAM",
+  "sporadic LAM",
+  "TSC-associated LAM",
+  "pulmonary lymphangioleiomyomatosis"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory / Genetics",
+ "specialty": "Respiratory Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ATS/ERS lymphangioleiomyomatosis guidance and respiratory texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Consider in a premenopausal woman with progressive breathlessness, recurrent pneumothorax, or unexplained diffuse cystic lung disease",
+   "High-resolution imaging shows numerous thin-walled, round cysts distributed diffusely throughout otherwise normal lung",
+   "LAM occurs sporadically and in association with tuberous sclerosis complex, so examine for skin, renal, and neurological features of that condition",
+   "Renal angiomyolipomas and chylous pleural effusions or ascites support the diagnosis",
+   "A raised serum VEGF-D level can support the diagnosis non-invasively in the right clinical context",
+   "mTOR inhibition is the recognised disease-modifying therapy for progressive disease and for symptomatic angiomyolipomas and chylous complications",
+   "Disease may worsen with oestrogen exposure, and pneumothorax can be recurrent and difficult to manage"
   ],
-  "class": "non_infective",
-  "system": "Respiratory / Genetics",
-  "specialty": "Respiratory Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ATS/ERS lymphangioleiomyomatosis guidance and respiratory texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Consider in a premenopausal woman with progressive breathlessness, recurrent pneumothorax, or unexplained diffuse cystic lung disease",
-      "High-resolution imaging shows numerous thin-walled, round cysts distributed diffusely throughout otherwise normal lung",
-      "LAM occurs sporadically and in association with tuberous sclerosis complex, so examine for skin, renal, and neurological features of that condition",
-      "Renal angiomyolipomas and chylous pleural effusions or ascites support the diagnosis",
-      "A raised serum VEGF-D level can support the diagnosis non-invasively in the right clinical context",
-      "mTOR inhibition is the recognised disease-modifying therapy for progressive disease and for symptomatic angiomyolipomas and chylous complications",
-      "Disease may worsen with oestrogen exposure, and pneumothorax can be recurrent and difficult to manage"
+  "pathophysiology": "Lymphangioleiomyomatosis is driven by inactivating mutations in the TSC1 or TSC2 tumour suppressor genes, which normally restrain the mechanistic target of rapamycin (mTOR) pathway. Loss of this control leads to abnormal proliferation of smooth-muscle-like LAM cells that infiltrate the lung, airways, lymphatics, and blood vessels. These cells drive cystic destruction of lung parenchyma and obstruction of lymphatics, producing progressive airflow obstruction, cyst formation prone to rupture, and chylous fluid collections; the same pathway dysregulation underlies associated renal angiomyolipomas.",
+  "additionalDifferentials": [
+   "Pulmonary Langerhans cell histiocytosis",
+   "Birt-Hogg-Dube syndrome with pulmonary cysts",
+   "Emphysema, especially in younger or non-smoking patients",
+   "Lymphocytic interstitial pneumonia",
+   "Follicular bronchiolitis",
+   "Metastatic cystic lung disease"
+  ],
+  "additionalInvestigations": [
+   "High-resolution chest computed tomography to characterise cysts",
+   "Serum VEGF-D measurement",
+   "Abdominal imaging for renal angiomyolipomas and lymphatic masses",
+   "Assessment for tuberous sclerosis complex including skin, brain, and genetic evaluation",
+   "Pulmonary function tests, typically showing obstruction with reduced gas transfer",
+   "Pleural fluid analysis for chyle where an effusion is present"
+  ],
+  "redFlags": [
+   "Recurrent or tension pneumothorax",
+   "Large or bleeding renal angiomyolipoma",
+   "Rapidly declining lung function or worsening hypoxaemia",
+   "Large chylous effusion causing respiratory compromise"
+  ],
+  "prognosis": "The course is variable but generally slowly progressive; mTOR inhibition can stabilise lung function and shrink angiomyolipomas, and with modern management many patients maintain function for years, though some progress to respiratory failure requiring transplantation.",
+  "pitfalls": [
+   "Dismissing diffuse cystic change in a young woman as emphysema",
+   "Failing to screen for tuberous sclerosis and renal angiomyolipomas",
+   "Overlooking VEGF-D testing that could avoid a lung biopsy",
+   "Not counselling about oestrogen exposure and pneumothorax recurrence risk"
+  ],
+  "references": [
+   "ATS/ERS clinical practice guideline on lymphangioleiomyomatosis",
+   "Standard respiratory medicine texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "mTOR inhibition with sirolimus (or everolimus) as disease-modifying therapy for declining lung function, chylous complications and renal angiomyolipomas",
+   "Bronchodilators for airflow obstruction, supplemental oxygen and pulmonary rehabilitation for symptomatic support",
+   "Avoid oestrogen-containing therapies and counsel on the risks of pregnancy",
+   "Manage recurrent pneumothorax with drainage and early pleurodesis given the high recurrence rate",
+   "Treat renal angiomyolipomas with mTOR inhibition or selective arterial embolisation to prevent haemorrhage",
+   "Monitor with serial pulmonary function tests and screen for tuberous sclerosis complex, with genetic counselling where it is confirmed",
+   "Ensure vaccination and refer for lung transplantation assessment in progressive respiratory failure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lymphangioleiomyomatosis-pathway",
+   "title": "Lymphangioleiomyomatosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Consider in a premenopausal woman with progressive breathlessness, recurrent pneumothorax, or unexplained diffuse cystic lung disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent or tension pneumothorax",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution chest computed tomography to characterise cysts, Serum VEGF-D measurement, Abdominal imaging for renal angiomyolipomas and lymphatic masses"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: mTOR inhibition with sirolimus (or everolimus) as disease-modifying therapy for declining lung function, chylous complications and renal angiomyolipomas"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing diffuse cystic change in a young woman as emphysema"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lymphangioleiomyomatosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lymphangioleiomyomatosis-matrix",
+   "title": "Lymphangioleiomyomatosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Consider in a premenopausal woman with progressive breathlessness, recurrent pneumothorax, or unexplained diffuse cystic lung",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lymphangioleiomyomatosis is driven by inactivating mutations in the TSC1 or TSC2 tumour suppressor genes, which normally restrain the mechanistic target of rapamycin (mTOR) pathway. Loss of this control leads to abnormal proliferation of smooth-muscle-like LAM cells that infiltrate the lung, airways, lymphatics, and blood vessels. These cells drive cystic destruction of lung parenchyma and obstruction of lymphatics, producing progressive airflow obstruction, cyst formation prone to rupture, and chylous fluid collections; the same pathway dysregulation underlies associated renal angiomyolipomas.",
-    "additionalDifferentials": [
-      "Pulmonary Langerhans cell histiocytosis",
-      "Birt-Hogg-Dube syndrome with pulmonary cysts",
-      "Emphysema, especially in younger or non-smoking patients",
-      "Lymphocytic interstitial pneumonia",
-      "Follicular bronchiolitis",
-      "Metastatic cystic lung disease"
+    [
+     "Key Investigations",
+     "High-resolution chest computed tomography to characterise cysts, Serum VEGF-D measurement, Abdominal imaging for renal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution chest computed tomography to characterise cysts",
-      "Serum VEGF-D measurement",
-      "Abdominal imaging for renal angiomyolipomas and lymphatic masses",
-      "Assessment for tuberous sclerosis complex including skin, brain, and genetic evaluation",
-      "Pulmonary function tests, typically showing obstruction with reduced gas transfer",
-      "Pleural fluid analysis for chyle where an effusion is present"
+    [
+     "Primary Differentials",
+     "Pulmonary Langerhans cell histiocytosis, Birt-Hogg-Dube syndrome with pulmonary cysts, Emphysema, especially in younger or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent or tension pneumothorax",
-      "Large or bleeding renal angiomyolipoma",
-      "Rapidly declining lung function or worsening hypoxaemia",
-      "Large chylous effusion causing respiratory compromise"
+    [
+     "Management Strategy",
+     "mTOR inhibition with sirolimus (or everolimus) as disease-modifying therapy for declining lung function, chylous complications",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is variable but generally slowly progressive; mTOR inhibition can stabilise lung function and shrink angiomyolipomas, and with modern management many patients maintain function for years, though some progress to respiratory failure requiring transplantation.",
-    "pitfalls": [
-      "Dismissing diffuse cystic change in a young woman as emphysema",
-      "Failing to screen for tuberous sclerosis and renal angiomyolipomas",
-      "Overlooking VEGF-D testing that could avoid a lung biopsy",
-      "Not counselling about oestrogen exposure and pneumothorax recurrence risk"
-    ],
-    "references": [
-      "ATS/ERS clinical practice guideline on lymphangioleiomyomatosis",
-      "Standard respiratory medicine texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "mTOR inhibition with sirolimus (or everolimus) as disease-modifying therapy for declining lung function, chylous complications and renal angiomyolipomas",
-      "Bronchodilators for airflow obstruction, supplemental oxygen and pulmonary rehabilitation for symptomatic support",
-      "Avoid oestrogen-containing therapies and counsel on the risks of pregnancy",
-      "Manage recurrent pneumothorax with drainage and early pleurodesis given the high recurrence rate",
-      "Treat renal angiomyolipomas with mTOR inhibition or selective arterial embolisation to prevent haemorrhage",
-      "Monitor with serial pulmonary function tests and screen for tuberous sclerosis complex, with genetic counselling where it is confirmed",
-      "Ensure vaccination and refer for lung transplantation assessment in progressive respiratory failure"
+    [
+     "Clinical Pitfall",
+     "Dismissing diffuse cystic change in a young woman as emphysema",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lymphangioleiomyomatosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lymphangioleiomyomatosis-diagram",
+   "title": "Lymphangioleiomyomatosis: Pulmonary & Chest Radiograph Diagnostic Schematic",
+   "type": "xray",
+   "src": "/assets/kb-diagrams/pulmonary-diagram.svg?v=kbdx1",
+   "caption": "Chest radiograph and bronchovascular branching schematic illustrating parenchymal density, air bronchograms, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Airway Tree",
+     "description": "Tracheobronchial branching down to lobar and segmental divisions."
+    },
+    {
+     "label": "Parenchyma",
+     "description": "Alveolar aeration, interstitial vascular markings, and airspace opacification."
+    },
+    {
+     "label": "Pleural Space",
+     "description": "Visceral-parietal pleural interface, costophrenic recesses, and lung volume."
+    }
+   ]
+  }
+ ]
 }

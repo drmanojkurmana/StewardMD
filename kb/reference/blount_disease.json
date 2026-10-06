@@ -1,77 +1,172 @@
 {
-  "id": "blount_disease",
-  "name": "Blount disease",
-  "aliases": [
-    "tibia vara",
-    "osteochondrosis deformans tibiae",
-    "infantile and adolescent tibia vara"
+ "id": "blount_disease",
+ "name": "Blount disease",
+ "aliases": [
+  "tibia vara",
+  "osteochondrosis deformans tibiae",
+  "infantile and adolescent tibia vara"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics / Skeletal Dysplasia",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Tachdjian's Pediatric Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A developmental disorder of the posteromedial proximal tibial physis producing progressive tibia vara (bow legs), distinct from benign physiological bowing",
+   "Classified as infantile (onset before about age three), juvenile and adolescent forms, with the infantile type often bilateral",
+   "Strongly associated with early walking, obesity and, for the adolescent form, high body mass",
+   "The hallmark radiographic finding is depression and beaking of the medial proximal tibial metaphysis with a sharp varus angulation",
+   "The metaphyseal-diaphyseal (Drennan) angle helps distinguish pathological Blount disease from self-resolving physiological bowing",
+   "Unlike physiological bowing, Blount disease is progressive and does not spontaneously correct, so early recognition matters",
+   "Management principles range from bracing in early infantile disease to orthopaedic correction/osteotomy or guided growth for established deformity"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics / Skeletal Dysplasia",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Tachdjian's Pediatric Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A developmental disorder of the posteromedial proximal tibial physis producing progressive tibia vara (bow legs), distinct from benign physiological bowing",
-      "Classified as infantile (onset before about age three), juvenile and adolescent forms, with the infantile type often bilateral",
-      "Strongly associated with early walking, obesity and, for the adolescent form, high body mass",
-      "The hallmark radiographic finding is depression and beaking of the medial proximal tibial metaphysis with a sharp varus angulation",
-      "The metaphyseal-diaphyseal (Drennan) angle helps distinguish pathological Blount disease from self-resolving physiological bowing",
-      "Unlike physiological bowing, Blount disease is progressive and does not spontaneously correct, so early recognition matters",
-      "Management principles range from bracing in early infantile disease to orthopaedic correction/osteotomy or guided growth for established deformity"
+  "pathophysiology": "Blount disease reflects abnormal endochondral ossification and growth suppression at the posteromedial aspect of the proximal tibial growth plate. Excessive mechanical compressive load across the medial physis, favoured by obesity and early weight-bearing, is thought to inhibit growth there while the lateral physis continues, producing progressive varus angulation. The persistent malalignment further increases medial compressive force, creating a self-perpetuating cycle (the Hueter-Volkmann principle) that leads to the characteristic depressed, beaked medial metaphysis.",
+  "additionalDifferentials": [
+   "Physiological genu varum",
+   "Rickets (nutritional or hypophosphataemic)",
+   "Focal fibrocartilaginous dysplasia",
+   "Skeletal dysplasia with bowing (e.g. metaphyseal chondrodysplasia)",
+   "Post-traumatic or post-infective physeal injury",
+   "Osteogenesis imperfecta with bowing"
+  ],
+  "additionalInvestigations": [
+   "Standing full-length lower-limb radiographs to measure varus and the metaphyseal-diaphyseal angle",
+   "Assessment for limb-length discrepancy and internal tibial torsion",
+   "Serum calcium, phosphate, alkaline phosphatase and vitamin D to exclude rickets",
+   "MRI in selected cases to evaluate the physis, cartilage and any bony bar",
+   "Serial imaging to document progression versus spontaneous resolution"
+  ],
+  "redFlags": [
+   "Progressive, worsening deformity failing to resolve as expected for physiological bowing",
+   "Markedly asymmetric or unilateral bowing suggesting a pathological cause",
+   "Biochemical evidence of rickets or metabolic bone disease",
+   "Severe deformity with a physeal bar threatening long-term growth"
+  ],
+  "prognosis": "Early infantile disease may respond to bracing, but established or later-onset deformity usually requires orthopaedic correction; outcomes are good with timely treatment, though delayed intervention risks residual deformity and early degenerative knee change.",
+  "pitfalls": [
+   "Mistaking progressive Blount disease for benign physiological bowing and delaying treatment",
+   "Failing to exclude rickets as a reversible cause of bowing",
+   "Not obtaining standing radiographs, underestimating true alignment",
+   "Overlooking obesity as a modifiable contributor and recurrence risk after surgery"
+  ],
+  "references": [
+   "Tachdjian's Pediatric Orthopaedics",
+   "Rockwood and Wilkins' Fractures in Children"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Knee-ankle-foot orthosis (bracing) for early infantile disease identified while still mild",
+   "Proximal tibial (with or without fibular) osteotomy to realign established or progressive deformity and restore the mechanical axis",
+   "Guided growth by lateral tension-band plating or hemiepiphysiodesis in suitable growing children, with physeal bar resection where a bony bar has formed",
+   "Weight management and lifestyle intervention for the associated obesity",
+   "Serial standing full-length lower-limb radiographs (metaphyseal-diaphyseal angle) to distinguish progression from physiological bowing, time surgery and exclude rickets",
+   "Address any associated limb-length discrepancy and internal tibial torsion",
+   "Ongoing paediatric orthopaedic follow-up given the progressive, non-resolving nature of the deformity"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "blount_disease-pathway",
+   "title": "Blount disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A developmental disorder of the posteromedial proximal tibial physis producing progressive tibia vara (bow legs), distinct from benign physiological bowing",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive, worsening deformity failing to resolve as expected for physiological bowing",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Standing full-length lower-limb radiographs to measure varus and the metaphyseal-diaphyseal angle, Assessment for limb-length discrepancy and internal tibial torsion, Serum calcium, phosphate, alkaline phosphatase and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Knee-ankle-foot orthosis (bracing) for early infantile disease identified while still mild"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking progressive Blount disease for benign physiological bowing and delaying treatment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of blount disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "blount_disease-matrix",
+   "title": "Blount disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A developmental disorder of the posteromedial proximal tibial physis producing progressive tibia vara (bow legs), distinct from",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Blount disease reflects abnormal endochondral ossification and growth suppression at the posteromedial aspect of the proximal tibial growth plate. Excessive mechanical compressive load across the medial physis, favoured by obesity and early weight-bearing, is thought to inhibit growth there while the lateral physis continues, producing progressive varus angulation. The persistent malalignment further increases medial compressive force, creating a self-perpetuating cycle (the Hueter-Volkmann principle) that leads to the characteristic depressed, beaked medial metaphysis.",
-    "additionalDifferentials": [
-      "Physiological genu varum",
-      "Rickets (nutritional or hypophosphataemic)",
-      "Focal fibrocartilaginous dysplasia",
-      "Skeletal dysplasia with bowing (e.g. metaphyseal chondrodysplasia)",
-      "Post-traumatic or post-infective physeal injury",
-      "Osteogenesis imperfecta with bowing"
+    [
+     "Key Investigations",
+     "Standing full-length lower-limb radiographs to measure varus and the metaphyseal-diaphyseal angle, Assessment for limb-length",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Standing full-length lower-limb radiographs to measure varus and the metaphyseal-diaphyseal angle",
-      "Assessment for limb-length discrepancy and internal tibial torsion",
-      "Serum calcium, phosphate, alkaline phosphatase and vitamin D to exclude rickets",
-      "MRI in selected cases to evaluate the physis, cartilage and any bony bar",
-      "Serial imaging to document progression versus spontaneous resolution"
+    [
+     "Primary Differentials",
+     "Physiological genu varum, Rickets (nutritional or hypophosphataemic), Focal fibrocartilaginous dysplasia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive, worsening deformity failing to resolve as expected for physiological bowing",
-      "Markedly asymmetric or unilateral bowing suggesting a pathological cause",
-      "Biochemical evidence of rickets or metabolic bone disease",
-      "Severe deformity with a physeal bar threatening long-term growth"
+    [
+     "Management Strategy",
+     "Knee-ankle-foot orthosis (bracing) for early infantile disease identified while still mild",
+     "Core treatment modality"
     ],
-    "prognosis": "Early infantile disease may respond to bracing, but established or later-onset deformity usually requires orthopaedic correction; outcomes are good with timely treatment, though delayed intervention risks residual deformity and early degenerative knee change.",
-    "pitfalls": [
-      "Mistaking progressive Blount disease for benign physiological bowing and delaying treatment",
-      "Failing to exclude rickets as a reversible cause of bowing",
-      "Not obtaining standing radiographs, underestimating true alignment",
-      "Overlooking obesity as a modifiable contributor and recurrence risk after surgery"
-    ],
-    "references": [
-      "Tachdjian's Pediatric Orthopaedics",
-      "Rockwood and Wilkins' Fractures in Children"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Knee-ankle-foot orthosis (bracing) for early infantile disease identified while still mild",
-      "Proximal tibial (with or without fibular) osteotomy to realign established or progressive deformity and restore the mechanical axis",
-      "Guided growth by lateral tension-band plating or hemiepiphysiodesis in suitable growing children, with physeal bar resection where a bony bar has formed",
-      "Weight management and lifestyle intervention for the associated obesity",
-      "Serial standing full-length lower-limb radiographs (metaphyseal-diaphyseal angle) to distinguish progression from physiological bowing, time surgery and exclude rickets",
-      "Address any associated limb-length discrepancy and internal tibial torsion",
-      "Ongoing paediatric orthopaedic follow-up given the progressive, non-resolving nature of the deformity"
+    [
+     "Clinical Pitfall",
+     "Mistaking progressive Blount disease for benign physiological bowing and delaying treatment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for blount disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "blount-disease-diagram",
+   "title": "Blount disease: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "testicular_lymphoma",
-  "name": "Testicular lymphoma",
-  "aliases": [
-    "primary testicular lymphoma",
-    "testicular diffuse large B-cell lymphoma",
-    "PTL"
+ "id": "testicular_lymphoma",
+ "name": "Testicular lymphoma",
+ "aliases": [
+  "primary testicular lymphoma",
+  "testicular diffuse large B-cell lymphoma",
+  "PTL"
+ ],
+ "class": "non_infective",
+ "system": "Urology / Andrology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Testicular lymphoma is the commonest testicular tumour in men over about 60 years and the most frequent bilateral testicular tumour",
+   "It usually presents as a painless testicular mass, sometimes with B symptoms such as fever, night sweats, or weight loss",
+   "Most cases are diffuse large B-cell lymphoma, and involvement may be a primary extranodal presentation or part of disseminated systemic lymphoma",
+   "Germ cell tumour markers (AFP, beta-hCG) are characteristically normal, which helps distinguish it from germ cell tumours in the older patient",
+   "Radical inguinal orchidectomy provides tissue diagnosis and local control, after which management is systemic and led by haemato-oncology",
+   "There is a notable risk of relapse in sanctuary sites, particularly the central nervous system and the contralateral testis, prompting CNS-directed prophylaxis and consideration of contralateral scrotal radiotherapy",
+   "Staging includes CT of the chest, abdomen, and pelvis, and CNS assessment given the relapse pattern"
   ],
-  "class": "non_infective",
-  "system": "Urology / Andrology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Testicular lymphoma is the commonest testicular tumour in men over about 60 years and the most frequent bilateral testicular tumour",
-      "It usually presents as a painless testicular mass, sometimes with B symptoms such as fever, night sweats, or weight loss",
-      "Most cases are diffuse large B-cell lymphoma, and involvement may be a primary extranodal presentation or part of disseminated systemic lymphoma",
-      "Germ cell tumour markers (AFP, beta-hCG) are characteristically normal, which helps distinguish it from germ cell tumours in the older patient",
-      "Radical inguinal orchidectomy provides tissue diagnosis and local control, after which management is systemic and led by haemato-oncology",
-      "There is a notable risk of relapse in sanctuary sites, particularly the central nervous system and the contralateral testis, prompting CNS-directed prophylaxis and consideration of contralateral scrotal radiotherapy",
-      "Staging includes CT of the chest, abdomen, and pelvis, and CNS assessment given the relapse pattern"
+  "pathophysiology": "Primary testicular lymphoma is a predominantly diffuse large B-cell lymphoma that infiltrates the interstitium between seminiferous tubules, often with vascular invasion. The testis behaves as an immune-privileged sanctuary site, which is thought to contribute to the characteristic pattern of relapse in other sanctuary sites such as the contralateral testis and the central nervous system even after apparent local control. Disease may be confined to the testis at presentation or reflect systemic nodal or extranodal lymphoma.",
+  "additionalDifferentials": [
+   "Germ cell tumour (seminoma or NSGCT)",
+   "Epididymo-orchitis",
+   "Leukaemic infiltration of the testis",
+   "Sex cord-stromal tumour",
+   "Metastasis to the testis",
+   "Granulomatous orchitis"
+  ],
+  "additionalInvestigations": [
+   "Scrotal ultrasound demonstrating diffuse or multifocal hypoechoic infiltration, sometimes bilateral",
+   "Serum AFP and beta-hCG (typically normal) to distinguish from germ cell tumour, plus LDH",
+   "Radical inguinal orchidectomy for histology and immunophenotyping",
+   "CT of the chest, abdomen, and pelvis, often with PET, for systemic staging",
+   "Cerebrospinal fluid examination and CNS imaging given the relapse pattern",
+   "Bone marrow assessment as part of lymphoma staging"
+  ],
+  "redFlags": [
+   "B symptoms or rapid bilateral testicular enlargement suggesting aggressive systemic disease",
+   "Neurological symptoms indicating central nervous system involvement",
+   "Contralateral testicular enlargement suggesting sanctuary-site relapse",
+   "Extensive nodal or extranodal disease on staging"
+  ],
+  "prognosis": "Primary testicular lymphoma tends to behave aggressively with a significant risk of relapse in the central nervous system and contralateral testis; outcomes have improved with combined immunochemotherapy plus CNS prophylaxis and contralateral radiotherapy, but late relapses mean prolonged follow-up is required.",
+  "pitfalls": [
+   "Assuming a testicular mass in an older man is a germ cell tumour and overlooking lymphoma",
+   "Failing to arrange systemic and CNS staging after orchidectomy",
+   "Neglecting CNS prophylaxis and contralateral testicular protection given the relapse pattern",
+   "Attributing bilateral disease to benign inflammation"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "WHO Classification of Tumours: Urinary and Male Genital Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Perform radical inguinal orchidectomy for tissue diagnosis, immunophenotyping and local control",
+   "Treat with systemic immunochemotherapy, combining rituximab with an anthracycline-based regimen such as R-CHOP, as the mainstay for this diffuse large B-cell lymphoma, led by haemato-oncology",
+   "Give central-nervous-system-directed prophylaxis with intrathecal or high-dose methotrexate because of the propensity for CNS sanctuary relapse",
+   "Deliver prophylactic radiotherapy to the contralateral testis, another recognised sanctuary site of relapse",
+   "Complete lymphoma staging including cerebrospinal fluid examination, bone marrow assessment and PET-CT",
+   "Maintain prolonged surveillance for late relapse in the central nervous system and contralateral testis",
+   "Manage within a haemato-oncology multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "testicular_lymphoma-pathway",
+   "title": "Testicular lymphoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Testicular lymphoma is the commonest testicular tumour in men over about 60 years and the most frequent bilateral testicular tumour",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: B symptoms or rapid bilateral testicular enlargement suggesting aggressive systemic disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Scrotal ultrasound demonstrating diffuse or multifocal hypoechoic infiltration, sometimes bilateral, Serum AFP and beta-hCG (typically normal) to distinguish from germ cell tumour, plus LDH, Radical inguinal orchidectomy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Perform radical inguinal orchidectomy for tissue diagnosis, immunophenotyping and local control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a testicular mass in an older man is a germ cell tumour and overlooking lymphoma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of testicular lymphoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "testicular_lymphoma-matrix",
+   "title": "Testicular lymphoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Testicular lymphoma is the commonest testicular tumour in men over about 60 years and the most frequent bilateral testicular",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Primary testicular lymphoma is a predominantly diffuse large B-cell lymphoma that infiltrates the interstitium between seminiferous tubules, often with vascular invasion. The testis behaves as an immune-privileged sanctuary site, which is thought to contribute to the characteristic pattern of relapse in other sanctuary sites such as the contralateral testis and the central nervous system even after apparent local control. Disease may be confined to the testis at presentation or reflect systemic nodal or extranodal lymphoma.",
-    "additionalDifferentials": [
-      "Germ cell tumour (seminoma or NSGCT)",
-      "Epididymo-orchitis",
-      "Leukaemic infiltration of the testis",
-      "Sex cord-stromal tumour",
-      "Metastasis to the testis",
-      "Granulomatous orchitis"
+    [
+     "Key Investigations",
+     "Scrotal ultrasound demonstrating diffuse or multifocal hypoechoic infiltration, sometimes bilateral, Serum AFP and beta-hCG",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Scrotal ultrasound demonstrating diffuse or multifocal hypoechoic infiltration, sometimes bilateral",
-      "Serum AFP and beta-hCG (typically normal) to distinguish from germ cell tumour, plus LDH",
-      "Radical inguinal orchidectomy for histology and immunophenotyping",
-      "CT of the chest, abdomen, and pelvis, often with PET, for systemic staging",
-      "Cerebrospinal fluid examination and CNS imaging given the relapse pattern",
-      "Bone marrow assessment as part of lymphoma staging"
+    [
+     "Primary Differentials",
+     "Germ cell tumour (seminoma or NSGCT), Epididymo-orchitis, Leukaemic infiltration of the testis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "B symptoms or rapid bilateral testicular enlargement suggesting aggressive systemic disease",
-      "Neurological symptoms indicating central nervous system involvement",
-      "Contralateral testicular enlargement suggesting sanctuary-site relapse",
-      "Extensive nodal or extranodal disease on staging"
+    [
+     "Management Strategy",
+     "Perform radical inguinal orchidectomy for tissue diagnosis, immunophenotyping and local control",
+     "Core treatment modality"
     ],
-    "prognosis": "Primary testicular lymphoma tends to behave aggressively with a significant risk of relapse in the central nervous system and contralateral testis; outcomes have improved with combined immunochemotherapy plus CNS prophylaxis and contralateral radiotherapy, but late relapses mean prolonged follow-up is required.",
-    "pitfalls": [
-      "Assuming a testicular mass in an older man is a germ cell tumour and overlooking lymphoma",
-      "Failing to arrange systemic and CNS staging after orchidectomy",
-      "Neglecting CNS prophylaxis and contralateral testicular protection given the relapse pattern",
-      "Attributing bilateral disease to benign inflammation"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "WHO Classification of Tumours: Urinary and Male Genital Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Perform radical inguinal orchidectomy for tissue diagnosis, immunophenotyping and local control",
-      "Treat with systemic immunochemotherapy, combining rituximab with an anthracycline-based regimen such as R-CHOP, as the mainstay for this diffuse large B-cell lymphoma, led by haemato-oncology",
-      "Give central-nervous-system-directed prophylaxis with intrathecal or high-dose methotrexate because of the propensity for CNS sanctuary relapse",
-      "Deliver prophylactic radiotherapy to the contralateral testis, another recognised sanctuary site of relapse",
-      "Complete lymphoma staging including cerebrospinal fluid examination, bone marrow assessment and PET-CT",
-      "Maintain prolonged surveillance for late relapse in the central nervous system and contralateral testis",
-      "Manage within a haemato-oncology multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Assuming a testicular mass in an older man is a germ cell tumour and overlooking lymphoma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for testicular lymphoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "testicular-lymphoma-diagram",
+   "title": "Testicular lymphoma: Peripheral Blood Smear & Haematological Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/haematology-diagram.svg?v=kbdx1",
+   "caption": "Haematological schematic illustrating peripheral blood cellular morphology, erythrocyte indices, white blood cell lineages, and coagulation cascade.",
+   "annotations": [
+    {
+     "label": "Erythrocytes",
+     "description": "Cell size, central pallor, polychromasia, and inclusion bodies."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Granulocytic, lymphocytic, and monocytic lineage maturation."
+    },
+    {
+     "label": "Hemostatic Markers",
+     "description": "Platelet aggregation, coagulation factor activation, and fibrinolysis."
+    }
+   ]
+  }
+ ]
 }

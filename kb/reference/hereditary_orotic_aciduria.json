@@ -1,79 +1,174 @@
 {
-  "id": "hereditary_orotic_aciduria",
-  "name": "Hereditary orotic aciduria",
-  "aliases": [
-    "UMP synthase deficiency",
-    "UMPS deficiency",
-    "orotate phosphoribosyltransferase / OMP decarboxylase deficiency",
-    "type I orotic aciduria"
+ "id": "hereditary_orotic_aciduria",
+ "name": "Hereditary orotic aciduria",
+ "aliases": [
+  "UMP synthase deficiency",
+  "UMPS deficiency",
+  "orotate phosphoribosyltransferase / OMP decarboxylase deficiency",
+  "type I orotic aciduria"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Rare autosomal recessive defect of pyrimidine biosynthesis caused by deficiency of uridine monophosphate synthase (UMPS)",
+   "Classically presents in infancy with a megaloblastic anaemia that does not respond to vitamin B12 or folate",
+   "Additional features include failure to thrive, developmental delay, and increased susceptibility to infection from immune impairment",
+   "The biochemical hallmark is greatly increased urinary orotic acid, which may crystallise and cause orotic acid crystalluria and obstructive uropathy",
+   "The impaired synthesis of pyrimidine nucleotides limits DNA synthesis in the marrow, producing the megaloblastic picture despite normal haematinics",
+   "Diagnosis rests on demonstrating orotic aciduria with the typical anaemia, supported by enzyme assay and UMPS gene testing",
+   "Treatment is oral uridine replacement, which bypasses the enzyme block and typically corrects the anaemia and improves growth"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Rare autosomal recessive defect of pyrimidine biosynthesis caused by deficiency of uridine monophosphate synthase (UMPS)",
-      "Classically presents in infancy with a megaloblastic anaemia that does not respond to vitamin B12 or folate",
-      "Additional features include failure to thrive, developmental delay, and increased susceptibility to infection from immune impairment",
-      "The biochemical hallmark is greatly increased urinary orotic acid, which may crystallise and cause orotic acid crystalluria and obstructive uropathy",
-      "The impaired synthesis of pyrimidine nucleotides limits DNA synthesis in the marrow, producing the megaloblastic picture despite normal haematinics",
-      "Diagnosis rests on demonstrating orotic aciduria with the typical anaemia, supported by enzyme assay and UMPS gene testing",
-      "Treatment is oral uridine replacement, which bypasses the enzyme block and typically corrects the anaemia and improves growth"
+  "pathophysiology": "Hereditary orotic aciduria results from deficiency of uridine monophosphate synthase, the bifunctional enzyme that carries out the final two steps of de novo pyrimidine synthesis (orotate phosphoribosyltransferase and orotidine monophosphate decarboxylase). The block prevents conversion of orotic acid to uridine monophosphate, so pyrimidine nucleotides required for nucleic acid synthesis are deficient while the upstream substrate orotic acid accumulates and is excreted in large amounts. The nucleotide shortage impairs rapidly dividing cells, most evident as megaloblastic anaemia and growth failure, and excess orotic acid can precipitate in the urinary tract. Because uridine is downstream of the block, its provision restores nucleotide supply.",
+  "additionalDifferentials": [
+   "Vitamin B12 and folate deficiency megaloblastic anaemias",
+   "Secondary orotic aciduria from urea cycle disorders (e.g. OTC deficiency)",
+   "Congenital dyserythropoietic anaemias",
+   "Other inherited bone marrow failure syndromes",
+   "Nutritional or malabsorptive causes of failure to thrive",
+   "Lysinuric protein intolerance with orotic aciduria"
+  ],
+  "additionalInvestigations": [
+   "Quantitative urinary orotic acid",
+   "Full blood count and blood film showing megaloblastic changes",
+   "Serum vitamin B12 and folate to exclude nutritional megaloblastosis",
+   "Plasma ammonia and amino acids to distinguish urea cycle causes of orotic aciduria",
+   "Erythrocyte UMP synthase enzyme activity",
+   "Molecular genetic testing of the UMPS gene"
+  ],
+  "redFlags": [
+   "Severe anaemia unresponsive to standard haematinics in an infant",
+   "Orotic acid crystalluria causing urinary obstruction",
+   "Significant developmental delay or failure to thrive",
+   "Recurrent or severe infections suggesting immune compromise"
+  ],
+  "prognosis": "With early recognition and lifelong uridine replacement the haematological and growth abnormalities usually resolve and children can develop normally; untreated disease leads to persistent anaemia, growth failure and developmental impairment.",
+  "pitfalls": [
+   "Assuming a megaloblastic anaemia must be due to B12 or folate deficiency and missing the diagnosis",
+   "Confusing primary orotic aciduria with the secondary orotic aciduria of urea cycle disorders",
+   "Overlooking orotic acid crystalluria as a cause of urinary obstruction",
+   "Discontinuing uridine, as the disorder requires lifelong replacement",
+   "Not offering genetic counselling for this recessive condition"
+  ],
+  "references": [
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+   "Harrison's Principles of Internal Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start lifelong oral uridine replacement (uridine triacetate) to bypass the uridine monophosphate synthase block and restore pyrimidine nucleotide supply, correcting the megaloblastic anaemia and growth failure",
+   "Recognise that the anaemia does not respond to vitamin B12 or folate, so these should not be relied upon as treatment",
+   "Maintain adequate hydration to reduce orotic acid crystalluria and the risk of obstructive uropathy",
+   "Monitor the full blood count, growth and development to titrate uridine therapy, and manage any urinary tract obstruction from orotic acid crystals",
+   "Coordinate care across metabolic medicine, paediatrics and clinical genetics",
+   "Offer genetic counselling for autosomal recessive UMPS inheritance with testing of at-risk family members"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_orotic_aciduria-pathway",
+   "title": "Hereditary orotic aciduria: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Rare autosomal recessive defect of pyrimidine biosynthesis caused by deficiency of uridine monophosphate synthase (UMPS)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe anaemia unresponsive to standard haematinics in an infant",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Quantitative urinary orotic acid, Full blood count and blood film showing megaloblastic changes, Serum vitamin B12 and folate to exclude nutritional megaloblastosis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start lifelong oral uridine replacement (uridine triacetate) to bypass the uridine monophosphate synthase block and restore pyrimidine nucleotide supply, correcting the megaloblastic anaemia and growth failure"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a megaloblastic anaemia must be due to B12 or folate deficiency and missing the diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hereditary orotic aciduria."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_orotic_aciduria-matrix",
+   "title": "Hereditary orotic aciduria: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rare autosomal recessive defect of pyrimidine biosynthesis caused by deficiency of uridine monophosphate synthase (UMPS)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hereditary orotic aciduria results from deficiency of uridine monophosphate synthase, the bifunctional enzyme that carries out the final two steps of de novo pyrimidine synthesis (orotate phosphoribosyltransferase and orotidine monophosphate decarboxylase). The block prevents conversion of orotic acid to uridine monophosphate, so pyrimidine nucleotides required for nucleic acid synthesis are deficient while the upstream substrate orotic acid accumulates and is excreted in large amounts. The nucleotide shortage impairs rapidly dividing cells, most evident as megaloblastic anaemia and growth failure, and excess orotic acid can precipitate in the urinary tract. Because uridine is downstream of the block, its provision restores nucleotide supply.",
-    "additionalDifferentials": [
-      "Vitamin B12 and folate deficiency megaloblastic anaemias",
-      "Secondary orotic aciduria from urea cycle disorders (e.g. OTC deficiency)",
-      "Congenital dyserythropoietic anaemias",
-      "Other inherited bone marrow failure syndromes",
-      "Nutritional or malabsorptive causes of failure to thrive",
-      "Lysinuric protein intolerance with orotic aciduria"
+    [
+     "Key Investigations",
+     "Quantitative urinary orotic acid, Full blood count and blood film showing megaloblastic changes, Serum vitamin B12 and folate to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Quantitative urinary orotic acid",
-      "Full blood count and blood film showing megaloblastic changes",
-      "Serum vitamin B12 and folate to exclude nutritional megaloblastosis",
-      "Plasma ammonia and amino acids to distinguish urea cycle causes of orotic aciduria",
-      "Erythrocyte UMP synthase enzyme activity",
-      "Molecular genetic testing of the UMPS gene"
+    [
+     "Primary Differentials",
+     "Vitamin B12 and folate deficiency megaloblastic anaemias, Secondary orotic aciduria from urea cycle disorders (e.g. OTC",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe anaemia unresponsive to standard haematinics in an infant",
-      "Orotic acid crystalluria causing urinary obstruction",
-      "Significant developmental delay or failure to thrive",
-      "Recurrent or severe infections suggesting immune compromise"
+    [
+     "Management Strategy",
+     "Start lifelong oral uridine replacement (uridine triacetate) to bypass the uridine monophosphate synthase block and restore",
+     "Core treatment modality"
     ],
-    "prognosis": "With early recognition and lifelong uridine replacement the haematological and growth abnormalities usually resolve and children can develop normally; untreated disease leads to persistent anaemia, growth failure and developmental impairment.",
-    "pitfalls": [
-      "Assuming a megaloblastic anaemia must be due to B12 or folate deficiency and missing the diagnosis",
-      "Confusing primary orotic aciduria with the secondary orotic aciduria of urea cycle disorders",
-      "Overlooking orotic acid crystalluria as a cause of urinary obstruction",
-      "Discontinuing uridine, as the disorder requires lifelong replacement",
-      "Not offering genetic counselling for this recessive condition"
-    ],
-    "references": [
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-      "Harrison's Principles of Internal Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start lifelong oral uridine replacement (uridine triacetate) to bypass the uridine monophosphate synthase block and restore pyrimidine nucleotide supply, correcting the megaloblastic anaemia and growth failure",
-      "Recognise that the anaemia does not respond to vitamin B12 or folate, so these should not be relied upon as treatment",
-      "Maintain adequate hydration to reduce orotic acid crystalluria and the risk of obstructive uropathy",
-      "Monitor the full blood count, growth and development to titrate uridine therapy, and manage any urinary tract obstruction from orotic acid crystals",
-      "Coordinate care across metabolic medicine, paediatrics and clinical genetics",
-      "Offer genetic counselling for autosomal recessive UMPS inheritance with testing of at-risk family members"
+    [
+     "Clinical Pitfall",
+     "Assuming a megaloblastic anaemia must be due to B12 or folate deficiency and missing the diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hereditary orotic aciduria."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-orotic-aciduria-diagram",
+   "title": "Hereditary orotic aciduria: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

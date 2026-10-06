@@ -1,81 +1,176 @@
 {
-  "id": "subclinical_cushing_syndrome",
-  "name": "Subclinical (mild autonomous cortisol secretion) Cushing syndrome",
-  "aliases": [
-    "subclinical Cushing syndrome",
-    "mild autonomous cortisol secretion",
-    "MACS",
-    "autonomous cortisol secretion"
+ "id": "subclinical_cushing_syndrome",
+ "name": "Subclinical (mild autonomous cortisol secretion) Cushing syndrome",
+ "aliases": [
+  "subclinical Cushing syndrome",
+  "mild autonomous cortisol secretion",
+  "MACS",
+  "autonomous cortisol secretion"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Adrenal",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Refers to autonomous cortisol secretion from an adrenal adenoma without the overt clinical features of Cushing syndrome; current guidance favours the term mild autonomous cortisol secretion (MACS)",
+   "It is typically identified during evaluation of an adrenal incidentaloma",
+   "The diagnosis is biochemical, resting principally on failure to suppress cortisol after an overnight low-dose dexamethasone suppression test, with a suppressed or low ACTH supporting adrenal autonomy",
+   "Although termed subclinical, it is associated with increased cardiometabolic morbidity, including hypertension, type 2 diabetes, dyslipidaemia, central obesity and reduced bone density",
+   "Post-dexamethasone cortisol thresholds stratify risk, with higher values indicating more definite autonomous secretion",
+   "Management is individualised: treat the associated comorbidities and consider adrenalectomy in younger patients with significant secretion and attributable disease",
+   "Perioperative and post-adrenalectomy glucocorticoid cover is needed because the contralateral adrenal gland may be suppressed"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Adrenal",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Refers to autonomous cortisol secretion from an adrenal adenoma without the overt clinical features of Cushing syndrome; current guidance favours the term mild autonomous cortisol secretion (MACS)",
-      "It is typically identified during evaluation of an adrenal incidentaloma",
-      "The diagnosis is biochemical, resting principally on failure to suppress cortisol after an overnight low-dose dexamethasone suppression test, with a suppressed or low ACTH supporting adrenal autonomy",
-      "Although termed subclinical, it is associated with increased cardiometabolic morbidity, including hypertension, type 2 diabetes, dyslipidaemia, central obesity and reduced bone density",
-      "Post-dexamethasone cortisol thresholds stratify risk, with higher values indicating more definite autonomous secretion",
-      "Management is individualised: treat the associated comorbidities and consider adrenalectomy in younger patients with significant secretion and attributable disease",
-      "Perioperative and post-adrenalectomy glucocorticoid cover is needed because the contralateral adrenal gland may be suppressed"
+  "pathophysiology": "An adrenocortical adenoma secretes cortisol semi-autonomously, partly escaping normal hypothalamic-pituitary feedback. The circulating cortisol, although insufficient to produce classic Cushingoid features, suppresses pituitary ACTH and the contralateral adrenal cortex. Chronic mild cortisol excess drives insulin resistance, hypertension, visceral adiposity and bone loss, which explains the cardiometabolic and skeletal consequences despite the absence of florid clinical signs.",
+  "additionalDifferentials": [
+   "Overt clinical Cushing syndrome",
+   "Non-functioning adrenal adenoma",
+   "Pseudo-Cushing states related to alcohol, depression or obesity",
+   "Exogenous glucocorticoid effect",
+   "Metabolic syndrome of another cause",
+   "Phaeochromocytoma as part of the incidentaloma workup"
+  ],
+  "additionalInvestigations": [
+   "Overnight low-dose dexamethasone suppression test as the key screening test",
+   "Plasma ACTH, expected to be low or suppressed, and DHEAS",
+   "Late-night salivary cortisol and 24-hour urinary free cortisol to gauge overall cortisol burden",
+   "Assessment of comorbidities including blood pressure, glucose or HbA1c, lipids and bone density",
+   "Adrenal CT to characterise the adenoma",
+   "Metanephrines and aldosterone-to-renin ratio as part of the incidentaloma screen"
+  ],
+  "redFlags": [
+   "Progression to overt Cushing syndrome",
+   "Marked post-dexamethasone cortisol elevation together with significant comorbidity",
+   "Imaging features suggesting malignancy in the adrenal lesion",
+   "Unrecognised adrenal insufficiency after adrenalectomy from contralateral suppression"
+  ],
+  "prognosis": "Often stable, but untreated mild autonomous cortisol secretion carries excess cardiometabolic and fracture risk and higher mortality than a non-functioning adenoma; selected patients improve after adrenalectomy.",
+  "pitfalls": [
+   "Dismissing subclinical secretion as clinically irrelevant and neglecting cardiometabolic risk",
+   "Relying on a single test without confirming autonomy and excluding pseudo-Cushing states",
+   "Forgetting perioperative and postoperative steroid cover after adrenalectomy",
+   "Missing contralateral adrenal suppression and precipitating an adrenal crisis"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas"
+  ],
+  "crossLinks": [
+   "adrenal_adenoma_nonfunctioning"
+  ],
+  "management": [
+   "Confirm autonomous cortisol secretion biochemically with the overnight low-dose dexamethasone suppression test and characterise the adenoma before deciding management",
+   "Treat associated cardiometabolic comorbidities: hypertension, type 2 diabetes or glucose intolerance, dyslipidaemia and central obesity",
+   "Assess bone density and treat osteoporosis to reduce fracture risk",
+   "Adrenalectomy considered in younger patients with more definite autonomous secretion and attributable comorbidity",
+   "Perioperative glucocorticoid cover and postoperative steroid replacement for the suppressed contralateral adrenal after adrenalectomy",
+   "Surveillance of patients managed non-operatively, monitoring cortisol secretion, adenoma size and evolving comorbidities",
+   "Endocrinology referral for individualised decision-making"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "subclinical_cushing_syndrome-pathway",
+   "title": "Subclinical (mild autonomous cortisol secretion) Cushing syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Refers to autonomous cortisol secretion from an adrenal adenoma without the overt clinical features of Cushing syndrome; current guidance favours the term mild autonomous cortisol secretion (MACS)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progression to overt Cushing syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Overnight low-dose dexamethasone suppression test as the key screening test, Plasma ACTH, expected to be low or suppressed, and DHEAS, Late-night salivary cortisol and 24-hour urinary free cortisol to gauge overall"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm autonomous cortisol secretion biochemically with the overnight low-dose dexamethasone suppression test and characterise the adenoma before deciding management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing subclinical secretion as clinically irrelevant and neglecting cardiometabolic risk"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of subclinical (mild autonomous cortisol secretion) cushing syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "subclinical_cushing_syndrome-matrix",
+   "title": "Subclinical (mild autonomous cortisol secretion) Cushing syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Refers to autonomous cortisol secretion from an adrenal adenoma without the overt clinical features of Cushing syndrome; current",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An adrenocortical adenoma secretes cortisol semi-autonomously, partly escaping normal hypothalamic-pituitary feedback. The circulating cortisol, although insufficient to produce classic Cushingoid features, suppresses pituitary ACTH and the contralateral adrenal cortex. Chronic mild cortisol excess drives insulin resistance, hypertension, visceral adiposity and bone loss, which explains the cardiometabolic and skeletal consequences despite the absence of florid clinical signs.",
-    "additionalDifferentials": [
-      "Overt clinical Cushing syndrome",
-      "Non-functioning adrenal adenoma",
-      "Pseudo-Cushing states related to alcohol, depression or obesity",
-      "Exogenous glucocorticoid effect",
-      "Metabolic syndrome of another cause",
-      "Phaeochromocytoma as part of the incidentaloma workup"
+    [
+     "Key Investigations",
+     "Overnight low-dose dexamethasone suppression test as the key screening test, Plasma ACTH, expected to be low or suppressed, and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Overnight low-dose dexamethasone suppression test as the key screening test",
-      "Plasma ACTH, expected to be low or suppressed, and DHEAS",
-      "Late-night salivary cortisol and 24-hour urinary free cortisol to gauge overall cortisol burden",
-      "Assessment of comorbidities including blood pressure, glucose or HbA1c, lipids and bone density",
-      "Adrenal CT to characterise the adenoma",
-      "Metanephrines and aldosterone-to-renin ratio as part of the incidentaloma screen"
+    [
+     "Primary Differentials",
+     "Overt clinical Cushing syndrome, Non-functioning adrenal adenoma, Pseudo-Cushing states related to alcohol, depression or obesity",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progression to overt Cushing syndrome",
-      "Marked post-dexamethasone cortisol elevation together with significant comorbidity",
-      "Imaging features suggesting malignancy in the adrenal lesion",
-      "Unrecognised adrenal insufficiency after adrenalectomy from contralateral suppression"
+    [
+     "Management Strategy",
+     "Confirm autonomous cortisol secretion biochemically with the overnight low-dose dexamethasone suppression test and characterise",
+     "Core treatment modality"
     ],
-    "prognosis": "Often stable, but untreated mild autonomous cortisol secretion carries excess cardiometabolic and fracture risk and higher mortality than a non-functioning adenoma; selected patients improve after adrenalectomy.",
-    "pitfalls": [
-      "Dismissing subclinical secretion as clinically irrelevant and neglecting cardiometabolic risk",
-      "Relying on a single test without confirming autonomy and excluding pseudo-Cushing states",
-      "Forgetting perioperative and postoperative steroid cover after adrenalectomy",
-      "Missing contralateral adrenal suppression and precipitating an adrenal crisis"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas"
-    ],
-    "crossLinks": [
-      "adrenal_adenoma_nonfunctioning"
-    ],
-    "management": [
-      "Confirm autonomous cortisol secretion biochemically with the overnight low-dose dexamethasone suppression test and characterise the adenoma before deciding management",
-      "Treat associated cardiometabolic comorbidities: hypertension, type 2 diabetes or glucose intolerance, dyslipidaemia and central obesity",
-      "Assess bone density and treat osteoporosis to reduce fracture risk",
-      "Adrenalectomy considered in younger patients with more definite autonomous secretion and attributable comorbidity",
-      "Perioperative glucocorticoid cover and postoperative steroid replacement for the suppressed contralateral adrenal after adrenalectomy",
-      "Surveillance of patients managed non-operatively, monitoring cortisol secretion, adenoma size and evolving comorbidities",
-      "Endocrinology referral for individualised decision-making"
+    [
+     "Clinical Pitfall",
+     "Dismissing subclinical secretion as clinically irrelevant and neglecting cardiometabolic risk",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for subclinical (mild autonomous cortisol secretion) cushing syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "subclinical-cushing-syndrome-diagram",
+   "title": "Subclinical (mild autonomous cortisol secretion) Cushing syndrome: Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,74 +1,169 @@
 {
-  "id": "little_league_elbow",
-  "name": "Little League elbow",
-  "aliases": [
-    "medial epicondyle apophysitis",
-    "medial elbow overuse injury in throwers"
+ "id": "little_league_elbow",
+ "name": "Little League elbow",
+ "aliases": [
+  "medial epicondyle apophysitis",
+  "medial elbow overuse injury in throwers"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Paediatrics / Sports medicine / Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Paediatric sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A spectrum of overuse injury to the medial elbow in skeletally immature throwing athletes, centred on the medial epicondyle apophysis",
+   "Repetitive valgus stress during the throwing motion causes traction injury at the medial epicondyle",
+   "Presents with medial elbow pain during and after throwing, sometimes with reduced throwing velocity and control",
+   "Severe cases can produce avulsion of the medial epicondyle apophysis",
+   "It is strongly linked to excessive pitching volume, and pitch-count and rest guidelines are central to prevention",
+   "Management is relative rest from throwing, mechanics correction and graded return, with surgery for significant displaced avulsion"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Paediatrics / Sports medicine / Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Paediatric sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A spectrum of overuse injury to the medial elbow in skeletally immature throwing athletes, centred on the medial epicondyle apophysis",
-      "Repetitive valgus stress during the throwing motion causes traction injury at the medial epicondyle",
-      "Presents with medial elbow pain during and after throwing, sometimes with reduced throwing velocity and control",
-      "Severe cases can produce avulsion of the medial epicondyle apophysis",
-      "It is strongly linked to excessive pitching volume, and pitch-count and rest guidelines are central to prevention",
-      "Management is relative rest from throwing, mechanics correction and graded return, with surgery for significant displaced avulsion"
+  "pathophysiology": "Little League elbow results from repetitive valgus forces generated during overhead throwing, which place traction on the medial structures of the immature elbow, particularly the medial epicondyle apophysis where the flexor-pronator muscles and ulnar collateral ligament attach. The growth cartilage is weaker than the adjacent tendon and ligament, so repetitive stress causes apophysitis and, when overload is severe, apophyseal separation or avulsion. Lateral compressive forces can additionally injure the capitellum in the same throwing mechanism.",
+  "additionalDifferentials": [
+   "Osteochondritis dissecans of the capitellum",
+   "Ulnar collateral ligament injury",
+   "Ulnar neuritis",
+   "Medial epicondylitis (in adults)",
+   "Elbow fracture"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment of medial elbow tenderness and throwing history",
+   "Radiographs, including comparison views, for apophyseal widening or avulsion",
+   "MRI where soft-tissue or osteochondral injury is suspected",
+   "Assessment of throwing mechanics and workload",
+   "Evaluation of ulnar nerve function"
+  ],
+  "redFlags": [
+   "Displaced medial epicondyle avulsion",
+   "Locking or mechanical symptoms suggesting osteochondritis dissecans with loose bodies",
+   "Ulnar nerve symptoms",
+   "Persistent pain despite rest"
+  ],
+  "prognosis": "With early recognition and rest most young throwers recover fully, but continued overload risks apophyseal avulsion and longer-term elbow problems; adherence to workload limits is protective.",
+  "pitfalls": [
+   "Allowing continued throwing through pain",
+   "Missing capitellar osteochondritis dissecans as a coexisting lateral injury",
+   "Overlooking a displaced avulsion needing surgery",
+   "Not addressing pitch counts and throwing mechanics"
+  ],
+  "references": [
+   "Paediatric sports medicine references (standard reference)",
+   "Orthopaedic reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute relative rest with cessation of throwing until symptom-free, the mainstay of management",
+   "Provide analgesia and ice for the medial epicondyle apophysitis",
+   "Correct throwing mechanics and enforce pitch-count and rest guidelines to prevent recurrence",
+   "Deliver physiotherapy for flexor-pronator and shoulder-girdle strengthening before a graded, staged return to throwing",
+   "Undertake surgical fixation for significantly displaced medial epicondyle avulsion",
+   "Follow the apophysis radiographically and assess ulnar nerve function",
+   "Educate the athlete, family and coaches on workload limits and early reporting of pain"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "little_league_elbow-pathway",
+   "title": "Little League elbow: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A spectrum of overuse injury to the medial elbow in skeletally immature throwing athletes, centred on the medial epicondyle apophysis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Displaced medial epicondyle avulsion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment of medial elbow tenderness and throwing history, Radiographs, including comparison views, for apophyseal widening or avulsion, MRI where soft-tissue or osteochondral injury is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute relative rest with cessation of throwing until symptom-free, the mainstay of management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Allowing continued throwing through pain"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of little league elbow."
+  }
+ ],
+ "tables": [
+  {
+   "id": "little_league_elbow-matrix",
+   "title": "Little League elbow: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A spectrum of overuse injury to the medial elbow in skeletally immature throwing athletes, centred on the medial epicondyle",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Little League elbow results from repetitive valgus forces generated during overhead throwing, which place traction on the medial structures of the immature elbow, particularly the medial epicondyle apophysis where the flexor-pronator muscles and ulnar collateral ligament attach. The growth cartilage is weaker than the adjacent tendon and ligament, so repetitive stress causes apophysitis and, when overload is severe, apophyseal separation or avulsion. Lateral compressive forces can additionally injure the capitellum in the same throwing mechanism.",
-    "additionalDifferentials": [
-      "Osteochondritis dissecans of the capitellum",
-      "Ulnar collateral ligament injury",
-      "Ulnar neuritis",
-      "Medial epicondylitis (in adults)",
-      "Elbow fracture"
+    [
+     "Key Investigations",
+     "Clinical assessment of medial elbow tenderness and throwing history, Radiographs, including comparison views, for apophyseal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment of medial elbow tenderness and throwing history",
-      "Radiographs, including comparison views, for apophyseal widening or avulsion",
-      "MRI where soft-tissue or osteochondral injury is suspected",
-      "Assessment of throwing mechanics and workload",
-      "Evaluation of ulnar nerve function"
+    [
+     "Primary Differentials",
+     "Osteochondritis dissecans of the capitellum, Ulnar collateral ligament injury, Ulnar neuritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Displaced medial epicondyle avulsion",
-      "Locking or mechanical symptoms suggesting osteochondritis dissecans with loose bodies",
-      "Ulnar nerve symptoms",
-      "Persistent pain despite rest"
+    [
+     "Management Strategy",
+     "Institute relative rest with cessation of throwing until symptom-free, the mainstay of management",
+     "Core treatment modality"
     ],
-    "prognosis": "With early recognition and rest most young throwers recover fully, but continued overload risks apophyseal avulsion and longer-term elbow problems; adherence to workload limits is protective.",
-    "pitfalls": [
-      "Allowing continued throwing through pain",
-      "Missing capitellar osteochondritis dissecans as a coexisting lateral injury",
-      "Overlooking a displaced avulsion needing surgery",
-      "Not addressing pitch counts and throwing mechanics"
-    ],
-    "references": [
-      "Paediatric sports medicine references (standard reference)",
-      "Orthopaedic reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute relative rest with cessation of throwing until symptom-free, the mainstay of management",
-      "Provide analgesia and ice for the medial epicondyle apophysitis",
-      "Correct throwing mechanics and enforce pitch-count and rest guidelines to prevent recurrence",
-      "Deliver physiotherapy for flexor-pronator and shoulder-girdle strengthening before a graded, staged return to throwing",
-      "Undertake surgical fixation for significantly displaced medial epicondyle avulsion",
-      "Follow the apophysis radiographically and assess ulnar nerve function",
-      "Educate the athlete, family and coaches on workload limits and early reporting of pain"
+    [
+     "Clinical Pitfall",
+     "Allowing continued throwing through pain",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for little league elbow."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "little-league-elbow-diagram",
+   "title": "Little League elbow: Musculoskeletal & Synovial Joint Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/musculoskeletal-diagram.svg?v=kbdx1",
+   "caption": "Synovial articulation and musculoskeletal cross-section schematic illustrating articular cartilage, synovial membrane, subchondral bone, and periarticular soft tissues.",
+   "annotations": [
+    {
+     "label": "Articular Cartilage",
+     "description": "Hyaline cartilage contour, joint space preservation, and weight-bearing alignment."
+    },
+    {
+     "label": "Synovial Cavity",
+     "description": "Synovial fluid dynamics, effusions, and inflammatory pannus formation."
+    },
+    {
+     "label": "Subchondral Bone",
+     "description": "Cortical margins, trabecular density, and periosteal continuity."
+    }
+   ]
+  }
+ ]
 }

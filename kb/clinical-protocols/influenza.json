@@ -6,7 +6,20 @@
  "basis": "india",
  "counterpart": "influenza-international",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["flu", "swine flu", "H1N1", "H3N2", "influenza A", "influenza B", "ILI", "influenza-like illness", "SARI", "oseltamivir", "Tamiflu", "category A B C influenza"],
+ "aliases": [
+  "flu",
+  "swine flu",
+  "H1N1",
+  "H3N2",
+  "influenza A",
+  "influenza B",
+  "ILI",
+  "influenza-like illness",
+  "SARI",
+  "oseltamivir",
+  "Tamiflu",
+  "category A B C influenza"
+ ],
  "summary": "Categorise every influenza-like illness as MoHFW Category A (symptomatic care), B (oseltamivir without testing: high fever with severe sore throat, or high-risk group) or C (red flags: test, start oseltamivir empirically, admit). Oseltamivir 75 mg twice daily for 5 days, reduced in renal impairment; no corticosteroids.",
  "sections": [
   {
@@ -82,16 +95,150 @@
   }
  ],
  "drugs": [
-  { "name": "Oseltamivir (treatment)", "dose": "75 mg orally twice daily for 5 days", "notes": "CrCl 31 to 60 mL/min: 30 mg twice daily; 11 to 30: 30 mg once daily; haemodialysis: 30 mg after each session. Nausea and vomiting common; take with food." },
-  { "name": "Oseltamivir (post-exposure prophylaxis)", "dose": "75 mg orally once daily for 7 days after the last exposure", "notes": "Reduce in renal impairment." },
-  { "name": "Oseltamivir (children, NCDC)", "dose": "Twice daily for 5 days: below 15 kg 30 mg; 15 to 23 kg 45 mg; 24 to under 40 kg 60 mg; above 40 kg 75 mg. Infants: under 3 months 12 mg, 3 to 5 months 20 mg, 6 to 11 months 25 mg twice daily", "notes": "Syrup available; CDC infant dose 3 mg/kg twice daily." },
-  { "name": "Paracetamol", "dose": "500 mg to 1 g orally every 6 hours as needed, maximum 4 g/day", "notes": "Avoid salicylates in children." }
+  {
+   "name": "Oseltamivir (treatment)",
+   "dose": "75 mg orally twice daily for 5 days",
+   "notes": "CrCl 31 to 60 mL/min: 30 mg twice daily; 11 to 30: 30 mg once daily; haemodialysis: 30 mg after each session. Nausea and vomiting common; take with food."
+  },
+  {
+   "name": "Oseltamivir (post-exposure prophylaxis)",
+   "dose": "75 mg orally once daily for 7 days after the last exposure",
+   "notes": "Reduce in renal impairment."
+  },
+  {
+   "name": "Oseltamivir (children, NCDC)",
+   "dose": "Twice daily for 5 days: below 15 kg 30 mg; 15 to 23 kg 45 mg; 24 to under 40 kg 60 mg; above 40 kg 75 mg. Infants: under 3 months 12 mg, 3 to 5 months 20 mg, 6 to 11 months 25 mg twice daily",
+   "notes": "Syrup available; CDC infant dose 3 mg/kg twice daily."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "500 mg to 1 g orally every 6 hours as needed, maximum 4 g/day",
+   "notes": "Avoid salicylates in children."
+  }
  ],
  "sources": [
-  { "org": "MoHFW / NCDC", "title": "Guidelines on categorization of seasonal influenza cases during screening for home isolation, testing, treatment and hospitalization", "year": 2019, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/72513234671561442053-1.pdf" },
-  { "org": "MoHFW / NCDC", "title": "Clinical management protocol for seasonal influenza (revised 25.02.2019)", "year": 2019, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/66872871241561442115.pdf" },
-  { "org": "IDSA", "title": "Clinical practice guidelines by IDSA: 2018 update on diagnosis, treatment, chemoprophylaxis and institutional outbreak management of seasonal influenza", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6653685/" },
-  { "org": "CDC", "title": "Influenza antiviral medications: summary for clinicians (renal dosing)", "year": 2026, "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html" }
+  {
+   "org": "MoHFW / NCDC",
+   "title": "Guidelines on categorization of seasonal influenza cases during screening for home isolation, testing, treatment and hospitalization",
+   "year": 2019,
+   "url": "https://ncdc.mohfw.gov.in/uploads/pdf/72513234671561442053-1.pdf"
+  },
+  {
+   "org": "MoHFW / NCDC",
+   "title": "Clinical management protocol for seasonal influenza (revised 25.02.2019)",
+   "year": 2019,
+   "url": "https://ncdc.mohfw.gov.in/uploads/pdf/66872871241561442115.pdf"
+  },
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guidelines by IDSA: 2018 update on diagnosis, treatment, chemoprophylaxis and institutional outbreak management of seasonal influenza",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6653685/"
+  },
+  {
+   "org": "CDC",
+   "title": "Influenza antiviral medications: summary for clinicians (renal dosing)",
+   "year": 2026,
+   "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "influenza-pathway",
+   "title": "Seasonal influenza including H1N1 (adult, India) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Influenza-like illness: sudden cough and sore throat with measured fever of 100.4 F (38 C) or more, onset within 10 days; often myalgia, headache, fatigue, rhinorrhoea, vomiting or diarrhoea.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Category A (mild): mild fever with cough or sore throat, with or without body ache, headache, diarrhoea or vomiting. No test, no oseltamivir; symptomatic care, home isolation, reassess in 24 to 48 hours.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Test Category C and hospitalised patients by real-time RT-PCR or another molecular assay on a nasopharyngeal or throat swab, ideally within 4 days of onset; never delay treatment for the result."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Categories A and B: oral fluids, paracetamol, saline nasal drops, lozenges and steam inhalation; closely monitor the underlying high-risk condition."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Waiting for PCR before treating Category C, pregnant or other high-risk patients."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for seasonal influenza including h1n1 (adult, india)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "influenza-summary-matrix",
+   "title": "Seasonal influenza including H1N1 (adult, India) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Influenza-like illness: sudden cough and sore throat with measured fever of 100.4 F (38 C) or more, onset within 10 days; often myalgia,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Categories A and B: oral fluids, paracetamol, saline nasal drops, lozenges and steam inhalation; closely monitor the underlying high-risk",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Test Category C and hospitalised patients by real-time RT-PCR or another molecular assay on a nasopharyngeal or throat swab, ideally within",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oseltamivir (treatment): 75 mg orally twice daily for 5 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting for PCR before treating Category C, pregnant or other high-risk patients.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for seasonal influenza including h1n1 (adult, india)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "influenza-diagram",
+   "title": "Seasonal influenza including H1N1 (adult, India): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

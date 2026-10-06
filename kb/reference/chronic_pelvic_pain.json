@@ -1,80 +1,175 @@
 {
-  "id": "chronic_pelvic_pain",
-  "name": "Chronic pelvic pain",
-  "aliases": [
-    "CPP",
-    "chronic pelvic pain syndrome",
-    "CPPS"
+ "id": "chronic_pelvic_pain",
+ "name": "Chronic pelvic pain",
+ "aliases": [
+  "CPP",
+  "chronic pelvic pain syndrome",
+  "CPPS"
+ ],
+ "class": "non_infective",
+ "system": "Rehabilitation / Pain",
+ "specialty": "Rehabilitation Medicine (PM&R)",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Chronic pelvic pain is persistent, non-cyclical pain perceived in the pelvis lasting at least several months and often without a single identifiable structural cause",
+   "It frequently reflects overlapping contributions from gynaecological, urological, gastrointestinal, musculoskeletal, neurological, and psychological systems, so evaluation must be broad",
+   "Pelvic floor muscle dysfunction with hypertonicity and myofascial trigger points is a common and treatable contributor that is easily overlooked",
+   "Central sensitisation is often present and helps explain pain that is disproportionate to examination findings and associated with other chronic pain conditions",
+   "A careful history should screen for endometriosis, interstitial cystitis or bladder pain syndrome, irritable bowel syndrome, pudendal neuralgia, and a history of physical or sexual trauma",
+   "Pelvic floor physical therapy is a cornerstone of management, alongside neuropathic pain agents, treatment of identified contributors, and psychological therapies",
+   "A multidisciplinary, biopsychosocial approach with realistic functional goals is more effective than repeated searches for a single surgical cause",
+   "Trigger-point injection and, in selected cases, nerve blocks such as pudendal blocks may be used within a broader programme"
   ],
-  "class": "non_infective",
-  "system": "Rehabilitation / Pain",
-  "specialty": "Rehabilitation Medicine (PM&R)",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Chronic pelvic pain is persistent, non-cyclical pain perceived in the pelvis lasting at least several months and often without a single identifiable structural cause",
-      "It frequently reflects overlapping contributions from gynaecological, urological, gastrointestinal, musculoskeletal, neurological, and psychological systems, so evaluation must be broad",
-      "Pelvic floor muscle dysfunction with hypertonicity and myofascial trigger points is a common and treatable contributor that is easily overlooked",
-      "Central sensitisation is often present and helps explain pain that is disproportionate to examination findings and associated with other chronic pain conditions",
-      "A careful history should screen for endometriosis, interstitial cystitis or bladder pain syndrome, irritable bowel syndrome, pudendal neuralgia, and a history of physical or sexual trauma",
-      "Pelvic floor physical therapy is a cornerstone of management, alongside neuropathic pain agents, treatment of identified contributors, and psychological therapies",
-      "A multidisciplinary, biopsychosocial approach with realistic functional goals is more effective than repeated searches for a single surgical cause",
-      "Trigger-point injection and, in selected cases, nerve blocks such as pudendal blocks may be used within a broader programme"
+  "pathophysiology": "Chronic pelvic pain typically arises from the interaction of peripheral visceral and somatic nociceptive input with central pain processing changes. Viscero-somatic and viscero-visceral convergence in the spinal cord means input from one pelvic organ can amplify and refer pain to others. Persistent nociception promotes peripheral and central sensitisation, with reduced descending inhibition, so pain becomes self-sustaining and disproportionate to any ongoing tissue damage. Pelvic floor muscle overactivity, myofascial trigger points, and psychological factors including anxiety, depression, and prior trauma further modulate and maintain the pain.",
+  "additionalDifferentials": [
+   "Endometriosis or adenomyosis",
+   "Interstitial cystitis / bladder pain syndrome",
+   "Irritable bowel syndrome or inflammatory bowel disease",
+   "Pudendal neuralgia or other nerve entrapment",
+   "Pelvic floor myofascial dysfunction",
+   "Chronic prostatitis / chronic pelvic pain syndrome in men",
+   "Pelvic congestion syndrome or adhesions"
+  ],
+  "additionalInvestigations": [
+   "Thorough pelvic and musculoskeletal examination including assessment of pelvic floor tone and trigger points",
+   "Urinalysis and targeted urological evaluation for bladder pain syndrome",
+   "Pelvic ultrasound and, where indicated, MRI to assess gynaecological and structural causes",
+   "Diagnostic laparoscopy in selected cases where endometriosis or adhesions are suspected",
+   "Assessment for coexisting mood disorder, sleep disturbance, and central sensitisation"
+  ],
+  "redFlags": [
+   "Abnormal vaginal or rectal bleeding, postmenopausal bleeding, or a pelvic mass suggesting malignancy",
+   "Unexplained weight loss, fever, or night sweats",
+   "Acute severe pain with peritonism suggesting a surgical emergency",
+   "Haematuria or new bowel symptoms warranting urgent investigation",
+   "New neurological deficit in the pelvic or lower limb distribution"
+  ],
+  "prognosis": "Chronic pelvic pain often follows a fluctuating long-term course, but many patients achieve meaningful improvement in pain and function with a coordinated multidisciplinary programme that addresses physical, neurological, and psychological contributors. Outcomes are poorer when treatment focuses narrowly on a single organ and ignores central and musculoskeletal factors.",
+  "pitfalls": [
+   "Repeated surgery or invasive procedures in pursuit of a single structural cause when pain is centrally mediated",
+   "Overlooking pelvic floor muscle dysfunction as a treatable contributor",
+   "Ignoring psychological factors and a history of trauma that maintain the pain",
+   "Long-term opioid use, which is generally unhelpful and harmful in this setting",
+   "Failing to screen for red-flag features of malignancy or a surgical emergency"
+  ],
+  "references": [
+   "Braddom's Physical Medicine and Rehabilitation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Pelvic floor physical therapy targeting muscle hypertonicity and myofascial trigger points as a cornerstone of care",
+   "Directed treatment of identified contributors such as endometriosis, bladder pain syndrome, irritable bowel syndrome and pudendal neuralgia",
+   "Neuropathic pain agents such as antidepressants and anticonvulsants for the centrally sensitised component",
+   "Psychological therapies to address central sensitisation, mood and the impact of prior trauma",
+   "Interventional measures including pudendal or other nerve blocks and trigger-point injection in selected patients",
+   "Diagnostic laparoscopy where endometriosis or adhesions are suspected",
+   "Coordinated multidisciplinary management addressing physical, neurological and psychological factors"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chronic_pelvic_pain-pathway",
+   "title": "Chronic pelvic pain: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Chronic pelvic pain is persistent, non-cyclical pain perceived in the pelvis lasting at least several months and often without a single identifiable structural cause",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Abnormal vaginal or rectal bleeding, postmenopausal bleeding, or a pelvic mass suggesting malignancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Thorough pelvic and musculoskeletal examination including assessment of pelvic floor tone and trigger points, Urinalysis and targeted urological evaluation for bladder pain syndrome, Pelvic ultrasound and, where indicated,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Pelvic floor physical therapy targeting muscle hypertonicity and myofascial trigger points as a cornerstone of care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Repeated surgery or invasive procedures in pursuit of a single structural cause when pain is centrally mediated"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chronic pelvic pain."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic_pelvic_pain-matrix",
+   "title": "Chronic pelvic pain: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Chronic pelvic pain is persistent, non-cyclical pain perceived in the pelvis lasting at least several months and often without a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic pelvic pain typically arises from the interaction of peripheral visceral and somatic nociceptive input with central pain processing changes. Viscero-somatic and viscero-visceral convergence in the spinal cord means input from one pelvic organ can amplify and refer pain to others. Persistent nociception promotes peripheral and central sensitisation, with reduced descending inhibition, so pain becomes self-sustaining and disproportionate to any ongoing tissue damage. Pelvic floor muscle overactivity, myofascial trigger points, and psychological factors including anxiety, depression, and prior trauma further modulate and maintain the pain.",
-    "additionalDifferentials": [
-      "Endometriosis or adenomyosis",
-      "Interstitial cystitis / bladder pain syndrome",
-      "Irritable bowel syndrome or inflammatory bowel disease",
-      "Pudendal neuralgia or other nerve entrapment",
-      "Pelvic floor myofascial dysfunction",
-      "Chronic prostatitis / chronic pelvic pain syndrome in men",
-      "Pelvic congestion syndrome or adhesions"
+    [
+     "Key Investigations",
+     "Thorough pelvic and musculoskeletal examination including assessment of pelvic floor tone and trigger points, Urinalysis and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Thorough pelvic and musculoskeletal examination including assessment of pelvic floor tone and trigger points",
-      "Urinalysis and targeted urological evaluation for bladder pain syndrome",
-      "Pelvic ultrasound and, where indicated, MRI to assess gynaecological and structural causes",
-      "Diagnostic laparoscopy in selected cases where endometriosis or adhesions are suspected",
-      "Assessment for coexisting mood disorder, sleep disturbance, and central sensitisation"
+    [
+     "Primary Differentials",
+     "Endometriosis or adenomyosis, Interstitial cystitis / bladder pain syndrome, Irritable bowel syndrome or inflammatory bowel",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Abnormal vaginal or rectal bleeding, postmenopausal bleeding, or a pelvic mass suggesting malignancy",
-      "Unexplained weight loss, fever, or night sweats",
-      "Acute severe pain with peritonism suggesting a surgical emergency",
-      "Haematuria or new bowel symptoms warranting urgent investigation",
-      "New neurological deficit in the pelvic or lower limb distribution"
+    [
+     "Management Strategy",
+     "Pelvic floor physical therapy targeting muscle hypertonicity and myofascial trigger points as a cornerstone of care",
+     "Core treatment modality"
     ],
-    "prognosis": "Chronic pelvic pain often follows a fluctuating long-term course, but many patients achieve meaningful improvement in pain and function with a coordinated multidisciplinary programme that addresses physical, neurological, and psychological contributors. Outcomes are poorer when treatment focuses narrowly on a single organ and ignores central and musculoskeletal factors.",
-    "pitfalls": [
-      "Repeated surgery or invasive procedures in pursuit of a single structural cause when pain is centrally mediated",
-      "Overlooking pelvic floor muscle dysfunction as a treatable contributor",
-      "Ignoring psychological factors and a history of trauma that maintain the pain",
-      "Long-term opioid use, which is generally unhelpful and harmful in this setting",
-      "Failing to screen for red-flag features of malignancy or a surgical emergency"
-    ],
-    "references": [
-      "Braddom's Physical Medicine and Rehabilitation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Pelvic floor physical therapy targeting muscle hypertonicity and myofascial trigger points as a cornerstone of care",
-      "Directed treatment of identified contributors such as endometriosis, bladder pain syndrome, irritable bowel syndrome and pudendal neuralgia",
-      "Neuropathic pain agents such as antidepressants and anticonvulsants for the centrally sensitised component",
-      "Psychological therapies to address central sensitisation, mood and the impact of prior trauma",
-      "Interventional measures including pudendal or other nerve blocks and trigger-point injection in selected patients",
-      "Diagnostic laparoscopy where endometriosis or adhesions are suspected",
-      "Coordinated multidisciplinary management addressing physical, neurological and psychological factors"
+    [
+     "Clinical Pitfall",
+     "Repeated surgery or invasive procedures in pursuit of a single structural cause when pain is centrally mediated",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chronic pelvic pain."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-pelvic-pain-diagram",
+   "title": "Chronic pelvic pain: Systematic Clinical Diagnostic & Triage Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/clinical-diagram.svg?v=kbdx1",
+   "caption": "Multimodal evidence-based clinical reasoning pathway spanning triage, targeted biomarkers, multimodality imaging, and definitive intervention.",
+   "annotations": [
+    {
+     "label": "Clinical Triage",
+     "description": "Early recognition of instability, vital sign thresholds, and emergency stabilization."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Prioritization of laboratory biomarkers, imaging modalities, and invasive testing."
+    },
+    {
+     "label": "Definitive Management",
+     "description": "Protocolized therapy, monitoring milestones, and escalation thresholds."
+    }
+   ]
+  }
+ ]
 }

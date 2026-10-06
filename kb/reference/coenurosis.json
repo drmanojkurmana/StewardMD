@@ -1,79 +1,174 @@
 {
-  "id": "coenurosis",
-  "name": "Coenurosis (Taenia multiceps)",
-  "aliases": [
-    "Taenia multiceps infection",
-    "Multiceps multiceps infection",
-    "coenurus cyst disease",
-    "Taenia serialis coenurosis"
+ "id": "coenurosis",
+ "name": "Coenurosis (Taenia multiceps)",
+ "aliases": [
+  "Taenia multiceps infection",
+  "Multiceps multiceps infection",
+  "coenurus cyst disease",
+  "Taenia serialis coenurosis"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases / Tropical Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Manson's Tropical Diseases / Mandell",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by the larval coenurus stage of Taenia (Multiceps) species, with humans as accidental intermediate hosts after ingesting eggs shed by dogs and other canids",
+   "The coenurus is a fluid-filled bladder containing many invaginated protoscolices, distinguishing it from the single-scolex cysticercus and from hydatid cysts",
+   "Cerebral and spinal coenurosis presents with raised intracranial pressure, seizures, focal deficits or cord compression depending on cyst location",
+   "Subcutaneous and intramuscular coenuri present as slowly enlarging soft-tissue swellings, and ocular disease can threaten vision",
+   "Imaging shows a cystic lesion that may contain multiple scolices, and eosinophilia may be present",
+   "Definitive management is complete surgical excision of the cyst; anthelmintic drugs such as albendazole and corticosteroids may be adjuncts, particularly when surgery is difficult",
+   "Prevention relies on deworming dogs, safe disposal of infected sheep offal and good personal hygiene to avoid ingesting eggs"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases / Tropical Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Manson's Tropical Diseases / Mandell",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by the larval coenurus stage of Taenia (Multiceps) species, with humans as accidental intermediate hosts after ingesting eggs shed by dogs and other canids",
-      "The coenurus is a fluid-filled bladder containing many invaginated protoscolices, distinguishing it from the single-scolex cysticercus and from hydatid cysts",
-      "Cerebral and spinal coenurosis presents with raised intracranial pressure, seizures, focal deficits or cord compression depending on cyst location",
-      "Subcutaneous and intramuscular coenuri present as slowly enlarging soft-tissue swellings, and ocular disease can threaten vision",
-      "Imaging shows a cystic lesion that may contain multiple scolices, and eosinophilia may be present",
-      "Definitive management is complete surgical excision of the cyst; anthelmintic drugs such as albendazole and corticosteroids may be adjuncts, particularly when surgery is difficult",
-      "Prevention relies on deworming dogs, safe disposal of infected sheep offal and good personal hygiene to avoid ingesting eggs"
+  "pathophysiology": "Taenia multiceps and related species are tapeworms whose adults inhabit the intestine of dogs and wild canids, with sheep and other herbivores as usual intermediate hosts. Humans become accidental intermediate hosts by ingesting eggs from canine faeces. Oncospheres hatch in the intestine, penetrate the mucosa and are carried in the blood to tissues, most importantly the brain, spinal cord, eye and subcutaneous tissue, where they develop into a coenurus, a large fluid-filled larval bladder studded with numerous protoscolices. The expanding cyst acts as a space-occupying lesion, causing mass effect, raised intracranial pressure, seizures or cord compression in the nervous system and progressive swelling elsewhere. Surrounding inflammation and, if the cyst ruptures, release of larval contents can intensify the local reaction.",
+  "additionalDifferentials": [
+   "Neurocysticercosis (Taenia solium larval disease)",
+   "Hydatid disease (Echinococcus) of brain or soft tissue",
+   "Cerebral abscess or primary brain tumour",
+   "Arachnoid or other benign intracranial cyst",
+   "Sparganosis and other larval cestode infection",
+   "Soft-tissue lipoma, cyst or abscess"
+  ],
+  "additionalInvestigations": [
+   "MRI or CT to characterise the cystic lesion and detect internal scolices",
+   "Full blood count for eosinophilia",
+   "Serology for cestode infection to help distinguish from cysticercosis and hydatid disease",
+   "Histological examination of the excised cyst confirming the multi-scolex coenurus",
+   "Ophthalmological assessment in suspected ocular disease",
+   "Cerebrospinal fluid examination where clinically appropriate"
+  ],
+  "redFlags": [
+   "Signs of raised intracranial pressure or hydrocephalus",
+   "Seizures or progressive focal neurological deficit",
+   "Spinal cord compression from a spinal cyst",
+   "Visual loss from an ocular or orbital coenurus"
+  ],
+  "prognosis": "Prognosis after complete excision of an accessible cyst is favourable, but cerebral and spinal disease can cause serious morbidity and carries a guarded outlook when the cyst is inoperable or diagnosed late.",
+  "pitfalls": [
+   "Mistaking a coenurus for neurocysticercosis or a hydatid cyst on imaging",
+   "Incomplete excision or intraoperative rupture provoking an inflammatory reaction and relapse",
+   "Relying on medical therapy alone for large space-occupying cysts",
+   "Overlooking the canine egg exposure history in the epidemiological assessment"
+  ],
+  "references": [
+   "Manson's Tropical Diseases",
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive treatment is complete surgical excision of the coenurus cyst, especially for cerebral, spinal, ocular and accessible subcutaneous lesions",
+   "Adjunctive anthelmintic therapy with albendazole combined with corticosteroids to control peri-cyst inflammation, particularly when the cyst is inoperable or excision is incomplete",
+   "Corticosteroids and measures to lower raised intracranial pressure, with anticonvulsants for seizures in cerebral disease",
+   "Ophthalmological management for ocular coenurosis to preserve vision",
+   "Neurosurgical and infectious-diseases or tropical-medicine multidisciplinary care, with histological confirmation of the excised multi-scolex cyst",
+   "Public-health and preventive measures: deworming of dogs, safe disposal of infected offal, and hand and food hygiene to interrupt the canine-herbivore cycle",
+   "Escalate urgently for signs of raised intracranial pressure, hydrocephalus or spinal cord compression"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "coenurosis-pathway",
+   "title": "Coenurosis (Taenia multiceps): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by the larval coenurus stage of Taenia (Multiceps) species, with humans as accidental intermediate hosts after ingesting eggs shed by dogs and other canids",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or hydrocephalus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI or CT to characterise the cystic lesion and detect internal scolices, Full blood count for eosinophilia, Serology for cestode infection to help distinguish from cysticercosis and hydatid disease"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive treatment is complete surgical excision of the coenurus cyst, especially for cerebral, spinal, ocular and accessible subcutaneous lesions"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a coenurus for neurocysticercosis or a hydatid cyst on imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of coenurosis (taenia multiceps)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "coenurosis-matrix",
+   "title": "Coenurosis (Taenia multiceps): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by the larval coenurus stage of Taenia (Multiceps) species, with humans as accidental intermediate hosts after ingesting",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Taenia multiceps and related species are tapeworms whose adults inhabit the intestine of dogs and wild canids, with sheep and other herbivores as usual intermediate hosts. Humans become accidental intermediate hosts by ingesting eggs from canine faeces. Oncospheres hatch in the intestine, penetrate the mucosa and are carried in the blood to tissues, most importantly the brain, spinal cord, eye and subcutaneous tissue, where they develop into a coenurus, a large fluid-filled larval bladder studded with numerous protoscolices. The expanding cyst acts as a space-occupying lesion, causing mass effect, raised intracranial pressure, seizures or cord compression in the nervous system and progressive swelling elsewhere. Surrounding inflammation and, if the cyst ruptures, release of larval contents can intensify the local reaction.",
-    "additionalDifferentials": [
-      "Neurocysticercosis (Taenia solium larval disease)",
-      "Hydatid disease (Echinococcus) of brain or soft tissue",
-      "Cerebral abscess or primary brain tumour",
-      "Arachnoid or other benign intracranial cyst",
-      "Sparganosis and other larval cestode infection",
-      "Soft-tissue lipoma, cyst or abscess"
+    [
+     "Key Investigations",
+     "MRI or CT to characterise the cystic lesion and detect internal scolices, Full blood count for eosinophilia, Serology for cestode",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI or CT to characterise the cystic lesion and detect internal scolices",
-      "Full blood count for eosinophilia",
-      "Serology for cestode infection to help distinguish from cysticercosis and hydatid disease",
-      "Histological examination of the excised cyst confirming the multi-scolex coenurus",
-      "Ophthalmological assessment in suspected ocular disease",
-      "Cerebrospinal fluid examination where clinically appropriate"
+    [
+     "Primary Differentials",
+     "Neurocysticercosis (Taenia solium larval disease), Hydatid disease (Echinococcus) of brain or soft tissue, Cerebral abscess or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of raised intracranial pressure or hydrocephalus",
-      "Seizures or progressive focal neurological deficit",
-      "Spinal cord compression from a spinal cyst",
-      "Visual loss from an ocular or orbital coenurus"
+    [
+     "Management Strategy",
+     "Definitive treatment is complete surgical excision of the coenurus cyst, especially for cerebral, spinal, ocular and accessible",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis after complete excision of an accessible cyst is favourable, but cerebral and spinal disease can cause serious morbidity and carries a guarded outlook when the cyst is inoperable or diagnosed late.",
-    "pitfalls": [
-      "Mistaking a coenurus for neurocysticercosis or a hydatid cyst on imaging",
-      "Incomplete excision or intraoperative rupture provoking an inflammatory reaction and relapse",
-      "Relying on medical therapy alone for large space-occupying cysts",
-      "Overlooking the canine egg exposure history in the epidemiological assessment"
-    ],
-    "references": [
-      "Manson's Tropical Diseases",
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive treatment is complete surgical excision of the coenurus cyst, especially for cerebral, spinal, ocular and accessible subcutaneous lesions",
-      "Adjunctive anthelmintic therapy with albendazole combined with corticosteroids to control peri-cyst inflammation, particularly when the cyst is inoperable or excision is incomplete",
-      "Corticosteroids and measures to lower raised intracranial pressure, with anticonvulsants for seizures in cerebral disease",
-      "Ophthalmological management for ocular coenurosis to preserve vision",
-      "Neurosurgical and infectious-diseases or tropical-medicine multidisciplinary care, with histological confirmation of the excised multi-scolex cyst",
-      "Public-health and preventive measures: deworming of dogs, safe disposal of infected offal, and hand and food hygiene to interrupt the canine-herbivore cycle",
-      "Escalate urgently for signs of raised intracranial pressure, hydrocephalus or spinal cord compression"
+    [
+     "Clinical Pitfall",
+     "Mistaking a coenurus for neurocysticercosis or a hydatid cyst on imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for coenurosis (taenia multiceps)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "coenurosis-diagram",
+   "title": "Coenurosis (Taenia multiceps): Infectious Pathogenesis & Host Response Pathway",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/infectious-diagram.svg?v=kbdx1",
+   "caption": "Microbiological and systemic inflammatory response schematic detailing pathogen entry, immune activation cascade, and biomarker elevation.",
+   "annotations": [
+    {
+     "label": "Pathogen Inoculum",
+     "description": "Microbial virulence, antigen expression, and cellular tropism."
+    },
+    {
+     "label": "Host Cascade",
+     "description": "Cytokine release, endothelial permeability, and leukocyte recruitment."
+    },
+    {
+     "label": "Diagnostic Yield",
+     "description": "Microbiological cultures, PCR amplification, and inflammatory biomarker trends."
+    }
+   ]
+  }
+ ]
 }

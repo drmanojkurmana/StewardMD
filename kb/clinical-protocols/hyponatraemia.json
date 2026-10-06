@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, ICU",
- "aliases": ["hyponatremia", "low sodium", "SIADH", "SIAD", "3% saline", "hypertonic saline", "ODS", "osmotic demyelination", "overcorrection", "tolvaptan"],
+ "aliases": [
+  "hyponatremia",
+  "low sodium",
+  "SIADH",
+  "SIAD",
+  "3% saline",
+  "hypertonic saline",
+  "ODS",
+  "osmotic demyelination",
+  "overcorrection",
+  "tolvaptan"
+ ],
  "summary": "Treat severe symptoms with 150 mL 3% saline boluses aiming for a 5 mmol/L rise, classify by osmolality and volume status, then correct by no more than 10 mmol/L in 24 hours (8 mmol/L in high ODS risk) and re-lower promptly if overcorrected.",
  "sections": [
   {
@@ -87,16 +98,148 @@
   }
  ],
  "drugs": [
-  { "name": "Sodium chloride 3% (hypertonic saline)", "dose": "150 mL IV over 20 minutes, repeated up to twice (three doses) until sodium rises 5 mmol/L", "notes": "Severe symptoms (ESE). US panel alternative: 100 mL over 10 minutes, up to three doses. Consider 2 mL/kg with abnormal body size. A single 150 mL dose for moderately severe symptoms." },
-  { "name": "Sodium chloride 0.9% or balanced crystalloid", "dose": "0.5 to 1.0 mL/kg/h IV", "notes": "Hypovolaemic hyponatraemia; avoid in SIAD." },
-  { "name": "Urea (oral)", "dose": "0.25 to 0.50 g/kg/day orally", "notes": "Second-line for SIAD (ESE), where available." },
-  { "name": "Tolvaptan", "dose": "15 mg orally once daily, titrated to 30 to 60 mg by sodium response", "notes": "US panel option, not ESE. Start in hospital, no fluid restriction for the first 24 hours; avoid in liver disease; not beyond 30 days." },
-  { "name": "Glucose 5% (electrolyte-free water)", "dose": "10 mL/kg IV over 1 hour", "notes": "To re-lower sodium after overcorrection, with expert advice." },
-  { "name": "Desmopressin", "dose": "2 mcg IV, not more often than every 8 hours", "notes": "Overcorrection rescue with expert advice." }
+  {
+   "name": "Sodium chloride 3% (hypertonic saline)",
+   "dose": "150 mL IV over 20 minutes, repeated up to twice (three doses) until sodium rises 5 mmol/L",
+   "notes": "Severe symptoms (ESE). US panel alternative: 100 mL over 10 minutes, up to three doses. Consider 2 mL/kg with abnormal body size. A single 150 mL dose for moderately severe symptoms."
+  },
+  {
+   "name": "Sodium chloride 0.9% or balanced crystalloid",
+   "dose": "0.5 to 1.0 mL/kg/h IV",
+   "notes": "Hypovolaemic hyponatraemia; avoid in SIAD."
+  },
+  {
+   "name": "Urea (oral)",
+   "dose": "0.25 to 0.50 g/kg/day orally",
+   "notes": "Second-line for SIAD (ESE), where available."
+  },
+  {
+   "name": "Tolvaptan",
+   "dose": "15 mg orally once daily, titrated to 30 to 60 mg by sodium response",
+   "notes": "US panel option, not ESE. Start in hospital, no fluid restriction for the first 24 hours; avoid in liver disease; not beyond 30 days."
+  },
+  {
+   "name": "Glucose 5% (electrolyte-free water)",
+   "dose": "10 mL/kg IV over 1 hour",
+   "notes": "To re-lower sodium after overcorrection, with expert advice."
+  },
+  {
+   "name": "Desmopressin",
+   "dose": "2 mcg IV, not more often than every 8 hours",
+   "notes": "Overcorrection rescue with expert advice."
+  }
  ],
  "sources": [
-  { "org": "ESE / ESICM / ERA (ERBP)", "title": "Clinical practice guideline on diagnosis and treatment of hyponatraemia", "year": 2014, "url": "https://academic.oup.com/ejendo/article/170/3/G1/6668028" },
-  { "org": "US Expert Panel (Am J Med)", "title": "Diagnosis, Evaluation, and Treatment of Hyponatremia: Expert Panel Recommendations", "year": 2013, "url": "https://www.amjmed.com/article/S0002-9343(13)00605-0/fulltext" }
+  {
+   "org": "ESE / ESICM / ERA (ERBP)",
+   "title": "Clinical practice guideline on diagnosis and treatment of hyponatraemia",
+   "year": 2014,
+   "url": "https://academic.oup.com/ejendo/article/170/3/G1/6668028"
+  },
+  {
+   "org": "US Expert Panel (Am J Med)",
+   "title": "Diagnosis, Evaluation, and Treatment of Hyponatremia: Expert Panel Recommendations",
+   "year": 2013,
+   "url": "https://www.amjmed.com/article/S0002-9343(13)00605-0/fulltext"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hyponatraemia-pathway",
+   "title": "Hyponatraemia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Hyponatraemia: serum sodium below 135 mmol/L. Mild 130 to 135, moderate 125 to 129, profound below 125 mmol/L (ESE 2014). Acute if documented within 48 hours, otherwise treat as chronic.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Give 150 mL 3% sodium chloride IV over 20 minutes; check sodium at 20 minutes while giving a second 150 mL over the next 20 minutes. Repeat up to two times (three boluses) or until sodium has risen by 5 mmol/L.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Confirm hypotonicity: measured serum osmolality below 275 mOsm/kg. Exclude hyperglycaemia, mannitol and pseudohyponatraemia (severe hyperlipidaemia or paraproteinaemia)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "First line: fluid restriction, for example about 500 mL/day below the 24-hour urine volume (US panel). Likely to fail if urine osmolality is above 500 mOsm/kg or urine sodium plus potassium exceeds serum sodium."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Serum sodium at the intervals above during active treatment, plus hourly urine output and fluid balance."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hyponatraemia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hyponatraemia-summary-matrix",
+   "title": "Hyponatraemia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hyponatraemia: serum sodium below 135 mmol/L. Mild 130 to 135, moderate 125 to 129, profound below 125 mmol/L (ESE 2014). Acute if",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Give 150 mL 3% sodium chloride IV over 20 minutes; check sodium at 20 minutes while giving a second 150 mL over the next 20 minutes. Repeat",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sodium chloride 3% (hypertonic saline): 150 mL IV over 20 minutes, repeated up to twice (three doses) until sodium rises 5 mmol/L",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using 0.9% saline in SIAD: it can lower sodium further when urine osmolality is high.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hyponatraemia (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hyponatraemia-diagram",
+   "title": "Hyponatraemia (adult): Renal & Urinary Tract Diagnostic Schematic",
+   "type": "diagram",
+   "src": "/assets/kb-diagrams/renal-diagram.svg?v=kbdx1",
+   "caption": "Nephrological schematic demonstrating corticomedullary architecture, nephron filtration apparatus, and collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Glomerular filtration rate, corticomedullary differentiation, and parenchymal depth."
+    },
+    {
+     "label": "Tubular Apparatus",
+     "description": "Proximal tubule, loop of Henle, and distal countercurrent exchange dynamics."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Calyces, renal pelvis, and ureteric drainage mechanics."
+    }
+   ]
+  }
+ ]
 }

@@ -1,80 +1,175 @@
 {
-  "id": "charcot_marie_tooth_disease_type_4a",
-  "name": "Charcot-Marie-Tooth disease type 4A",
-  "aliases": [
-    "CMT4A",
-    "GDAP1"
+ "id": "charcot_marie_tooth_disease_type_4a",
+ "name": "Charcot-Marie-Tooth disease type 4A",
+ "aliases": [
+  "CMT4A",
+  "GDAP1"
+ ],
+ "class": "non_infective",
+ "system": "Neurology / Hereditary neuropathy",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive, early childhood-onset neuropathy that is among the more severe CMT forms.",
+   "Electrophysiology is heterogeneous and may be demyelinating, axonal or intermediate, sometimes varying between affected relatives.",
+   "Vocal cord paresis with a hoarse or weak voice and stridor, together with diaphragmatic weakness, are characteristic clues to a GDAP1 cause.",
+   "Progression is comparatively rapid, and loss of independent ambulation is common by adolescence.",
+   "Caused by biallelic GDAP1 mutations affecting mitochondrial fission and outer-membrane function.",
+   "Distal and sometimes proximal weakness, marked foot deformity and scoliosis are usual features.",
+   "Rare dominant GDAP1 variants produce a milder, later-onset axonal neuropathy (designated CMT2K)."
   ],
-  "class": "non_infective",
-  "system": "Neurology / Hereditary neuropathy",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive, early childhood-onset neuropathy that is among the more severe CMT forms.",
-      "Electrophysiology is heterogeneous and may be demyelinating, axonal or intermediate, sometimes varying between affected relatives.",
-      "Vocal cord paresis with a hoarse or weak voice and stridor, together with diaphragmatic weakness, are characteristic clues to a GDAP1 cause.",
-      "Progression is comparatively rapid, and loss of independent ambulation is common by adolescence.",
-      "Caused by biallelic GDAP1 mutations affecting mitochondrial fission and outer-membrane function.",
-      "Distal and sometimes proximal weakness, marked foot deformity and scoliosis are usual features.",
-      "Rare dominant GDAP1 variants produce a milder, later-onset axonal neuropathy (designated CMT2K)."
+  "pathophysiology": "Charcot-Marie-Tooth disease type 4A results from biallelic loss-of-function mutations in GDAP1 (ganglioside-induced differentiation-associated protein 1), which encodes a protein anchored in the outer mitochondrial membrane. GDAP1 promotes mitochondrial fission and helps regulate mitochondrial network dynamics, mitochondrial-endoplasmic reticulum contact sites and calcium homeostasis. Loss of functional protein disturbs the balance of mitochondrial fission and fusion and impairs mitochondrial trafficking and bioenergetics within both Schwann cells and axons. Because the longest peripheral nerves are especially dependent on efficient mitochondrial transport and energy supply, the consequence is a severe, early-onset neuropathy that can show demyelinating, axonal or mixed features depending on the specific mutation.",
+  "additionalDifferentials": [
+   "CMT4B1 (MTMR2) and CMT4B2 (SBF2)",
+   "CMT4C (SH3TC2)",
+   "CMT4D (NDRG1)",
+   "CMT2K (dominant GDAP1 disease)",
+   "Spinal muscular atrophy",
+   "Primary mitochondrial neuropathies",
+   "Dejerine-Sottas syndrome"
+  ],
+  "additionalInvestigations": [
+   "Nerve conduction studies and electromyography, noting demyelinating, axonal or intermediate features",
+   "GDAP1 sequencing within a hereditary neuropathy gene panel",
+   "Laryngoscopy to assess vocal cord function",
+   "Respiratory assessment including sitting and supine pulmonary function to detect diaphragmatic weakness",
+   "Spinal radiographs and orthopaedic review for scoliosis",
+   "Sural nerve biopsy in selected diagnostically unclear cases"
+  ],
+  "redFlags": [
+   "Stridor or vocal cord paralysis",
+   "Respiratory compromise from diaphragmatic weakness, worse when supine",
+   "Rapid loss of ambulation in childhood",
+   "Emerging bulbar signs"
+  ],
+  "prognosis": "Charcot-Marie-Tooth disease type 4A is a severe, progressive neuropathy in which many affected children become wheelchair-dependent by the second decade, and vocal cord and diaphragmatic involvement add substantially to morbidity.",
+  "pitfalls": [
+   "Missing vocal cord or diaphragmatic involvement because voice and breathing were not specifically assessed.",
+   "Expecting uniform electrophysiology and discounting GDAP1 when studies look axonal rather than demyelinating.",
+   "Overlooking recessive inheritance in an apparently isolated childhood case.",
+   "Underestimating respiratory risk during anaesthesia or intercurrent illness."
+  ],
+  "references": [
+   "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
+   "Peripheral neuropathy (Dyck and Thomas)",
+   "Adams and Victor's principles of neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-specific pharmacotherapy; intensive supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+   "Respiratory surveillance with sitting and supine pulmonary function testing and early non-invasive ventilation for diaphragmatic weakness",
+   "Laryngological assessment of vocal cord paresis with airway monitoring and protection against stridor",
+   "Orthopaedic management of scoliosis and foot deformity, with spinal surgery for progressive curves",
+   "Physiotherapy, orthoses and timely wheelchair and mobility provision given frequent early loss of ambulation",
+   "Neuropathic pain management with gabapentinoids or tricyclic agents",
+   "Avoidance of neurotoxic drugs such as vincristine",
+   "Autosomal recessive genetic counselling with carrier testing and family screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "charcot_marie_tooth_disease_type_4a-pathway",
+   "title": "Charcot-Marie-Tooth disease type 4A: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive, early childhood-onset neuropathy that is among the more severe CMT forms.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Stridor or vocal cord paralysis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Nerve conduction studies and electromyography, noting demyelinating, axonal or intermediate features, GDAP1 sequencing within a hereditary neuropathy gene panel, Laryngoscopy to assess vocal cord function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-specific pharmacotherapy; intensive supportive and rehabilitative care through a neuromuscular multidisciplinary team"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing vocal cord or diaphragmatic involvement because voice and breathing were not specifically assessed."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4a."
+  }
+ ],
+ "tables": [
+  {
+   "id": "charcot_marie_tooth_disease_type_4a-matrix",
+   "title": "Charcot-Marie-Tooth disease type 4A: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive, early childhood-onset neuropathy that is among the more severe CMT forms.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Charcot-Marie-Tooth disease type 4A results from biallelic loss-of-function mutations in GDAP1 (ganglioside-induced differentiation-associated protein 1), which encodes a protein anchored in the outer mitochondrial membrane. GDAP1 promotes mitochondrial fission and helps regulate mitochondrial network dynamics, mitochondrial-endoplasmic reticulum contact sites and calcium homeostasis. Loss of functional protein disturbs the balance of mitochondrial fission and fusion and impairs mitochondrial trafficking and bioenergetics within both Schwann cells and axons. Because the longest peripheral nerves are especially dependent on efficient mitochondrial transport and energy supply, the consequence is a severe, early-onset neuropathy that can show demyelinating, axonal or mixed features depending on the specific mutation.",
-    "additionalDifferentials": [
-      "CMT4B1 (MTMR2) and CMT4B2 (SBF2)",
-      "CMT4C (SH3TC2)",
-      "CMT4D (NDRG1)",
-      "CMT2K (dominant GDAP1 disease)",
-      "Spinal muscular atrophy",
-      "Primary mitochondrial neuropathies",
-      "Dejerine-Sottas syndrome"
+    [
+     "Key Investigations",
+     "Nerve conduction studies and electromyography, noting demyelinating, axonal or intermediate features, GDAP1 sequencing within a",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Nerve conduction studies and electromyography, noting demyelinating, axonal or intermediate features",
-      "GDAP1 sequencing within a hereditary neuropathy gene panel",
-      "Laryngoscopy to assess vocal cord function",
-      "Respiratory assessment including sitting and supine pulmonary function to detect diaphragmatic weakness",
-      "Spinal radiographs and orthopaedic review for scoliosis",
-      "Sural nerve biopsy in selected diagnostically unclear cases"
+    [
+     "Primary Differentials",
+     "CMT4B1 (MTMR2) and CMT4B2 (SBF2), CMT4C (SH3TC2), CMT4D (NDRG1)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Stridor or vocal cord paralysis",
-      "Respiratory compromise from diaphragmatic weakness, worse when supine",
-      "Rapid loss of ambulation in childhood",
-      "Emerging bulbar signs"
+    [
+     "Management Strategy",
+     "No disease-specific pharmacotherapy; intensive supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+     "Core treatment modality"
     ],
-    "prognosis": "Charcot-Marie-Tooth disease type 4A is a severe, progressive neuropathy in which many affected children become wheelchair-dependent by the second decade, and vocal cord and diaphragmatic involvement add substantially to morbidity.",
-    "pitfalls": [
-      "Missing vocal cord or diaphragmatic involvement because voice and breathing were not specifically assessed.",
-      "Expecting uniform electrophysiology and discounting GDAP1 when studies look axonal rather than demyelinating.",
-      "Overlooking recessive inheritance in an apparently isolated childhood case.",
-      "Underestimating respiratory risk during anaesthesia or intercurrent illness."
-    ],
-    "references": [
-      "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
-      "Peripheral neuropathy (Dyck and Thomas)",
-      "Adams and Victor's principles of neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-specific pharmacotherapy; intensive supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-      "Respiratory surveillance with sitting and supine pulmonary function testing and early non-invasive ventilation for diaphragmatic weakness",
-      "Laryngological assessment of vocal cord paresis with airway monitoring and protection against stridor",
-      "Orthopaedic management of scoliosis and foot deformity, with spinal surgery for progressive curves",
-      "Physiotherapy, orthoses and timely wheelchair and mobility provision given frequent early loss of ambulation",
-      "Neuropathic pain management with gabapentinoids or tricyclic agents",
-      "Avoidance of neurotoxic drugs such as vincristine",
-      "Autosomal recessive genetic counselling with carrier testing and family screening"
+    [
+     "Clinical Pitfall",
+     "Missing vocal cord or diaphragmatic involvement because voice and breathing were not specifically assessed.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4a."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "charcot-marie-tooth-disease-type-4a-diagram",
+   "title": "Charcot-Marie-Tooth disease type 4A: Cranial CT / MRI Neuroimaging Diagnostic Schematic",
+   "type": "ct",
+   "src": "/assets/kb-diagrams/neurological-diagram.svg?v=kbdx1",
+   "caption": "Axial cranial neuroimaging schematic displaying cerebral hemispheres, ventricular geometry, deep gray nuclei, and neurovascular territories.",
+   "annotations": [
+    {
+     "label": "Cerebral Cortex",
+     "description": "Lobar sulcal-gyral pattern and cortical ribbon integrity."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral and third ventricle symmetry; midline shift evaluation."
+    },
+    {
+     "label": "Vascular Territories",
+     "description": "Arterial circulation zones and watershed perfusion boundaries."
+    }
+   ]
+  }
+ ]
 }
