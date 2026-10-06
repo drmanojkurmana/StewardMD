@@ -144,7 +144,7 @@
     fix: T("Correct intervention", "सही कदम"), alarmOpen: T("Alarm: {x}. Open the alarm card", "अलार्म: {x}। अलार्म कार्ड खोलें"), alarmsH: T("Alarms", "अलार्म"), allAlarms: T("All {n} alarms", "सभी {n} अलार्म"), plusN: T("+{n} more", "+{n} और"),
     finish: T("Finish and debrief", "समाप्त करें और समीक्षा"), debrief: T("Debrief", "समीक्षा"), outOf: T("out of 100", "100 में से"),
     p_mode: T("Mode choice", "मोड चुनाव"), p_initial: T("First settings", "पहली सेटिंग"), p_oxygenation: T("Oxygenation", "ऑक्सीजनेशन"), p_ventilation: T("Ventilation", "वेंटिलेशन"),
-    p_protection: T("Lung protection", "फेफड़े की सुरक्षा"), p_alarms: T("Alarm response", "अलार्म प्रतिक्रिया"), p_abg: T("ABG use", "ABG उपयोग"), p_time: T("Timing", "समय"), p_unsafe: T("Unsafe moments", "असुरक्षित पल"), penalty: T("Penalty", "दंड"),
+    p_protection: T("Lung protection", "फेफड़े की सुरक्षा"), p_alarms: T("Alarm response", "अलार्म प्रतिक्रिया"), p_abg: T("ABG use", "ABG उपयोग"), p_time: T("Timing", "समय"), p_unsafe: T("Unsafe moments", "असुरक्षित पल"), penalty: T("Penalty", "दंड"), notScored: T("Not scored", "गिना नहीं"),
     takeaway: T("What to take away", "क्या सीखें"), atEnd: T("At the end", "अंत में"), met: T("met", "पूरा"), notMet: T("not met", "पूरा नहीं"),
     again: T("Run again", "फिर चलाएँ"), labHome: T("Lab home", "लैब होम"),
     mc_controlled: T("Controlled", "नियंत्रित"), mc_variable: T("Varies", "बदलता है"), mc_guarantees: T("Guarantees", "गारंटी"), mc_dependsOn: T("Depends on", "निर्भर करता है"),
@@ -164,7 +164,8 @@
     hint: T("Hint", "संकेत"), event: T("Event", "घटना"),
     tut: T("Tutorial", "ट्यूटोरियल"), stepOf: T("Step {i} of {n}", "{n} में से चरण {i}"), next: T("Next", "आगे"), done: T("Done", "पूरा"), exitTut: T("Exit tutorial", "ट्यूटोरियल छोड़ें"),
     yourTurn: T("Your turn", "आपकी बारी"), doIt: T("Do it for me", "मेरे लिए करें"), setTo: T("Set {x} to {v}, then confirm.", "{x} को {v} करें, फिर पक्का करें।"),
-    modeTo: T("Switch the mode to {x}, then confirm.", "मोड {x} करें, फिर पक्का करें।"), sawIt: T("You saw it: {x} went {d}.", "आपने देखा: {x} {d}।"),
+    modeTo: T("Switch the mode to {x}, then confirm.", "मोड {x} करें, फिर पक्का करें।"), actTo: T("At the bedside: {x}.", "बेडसाइड पर: {x}।"),
+    abgTo: T("Draw a blood gas.", "एक blood gas लें।"), sawIt: T("You saw it: {x} went {d}.", "आपने देखा: {x} {d}।"),
     waitSee: T("Now move time forward and watch {x}.", "अब समय आगे बढ़ाएँ और {x} देखें।"), doneStep: T("Done", "हो गया"),
     wiPick: T("Pick a question", "एक प्रश्न चुनें"), wiBuild: T("Or build your own", "या अपना बनाएँ"), wiSetting: T("Setting", "सेटिंग"), wiDir: T("Direction", "दिशा"),
     wiUp: T("Increase", "बढ़ाएँ"), wiDown: T("Decrease", "घटाएँ"), wiGo: T("Show before and after", "पहले और बाद दिखाएँ"), wiNow: T("Now", "अभी"), wiAfter: T("After 30 min", "30 मिनट बाद"),
@@ -1064,6 +1065,7 @@
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "abg" });
     var el = $("vlAbg"); if (el) el.innerHTML = abgHtml();
     paintFoot();
+    if (R.tut) { R.tut.did = "abg"; tutCheck(); }
     var b = q("[data-act=vldraw]"); if (b) b.focus({ preventScroll: true });
     I.haptic("tap");
     say(raw("abgSay", { t: clockText(R.s.t), a: fmtN(a.pH), b: fmtN(a.PaCO2), c: fmtN(a.PaO2), d: fmtN(a.HCO3) }));
@@ -1187,6 +1189,7 @@
     var id = b.getAttribute("data-k"), e = E(), a = e.ACTIONS && e.ACTIONS[id];
     if (!a || !safe(function () { return a.available(R.s); }, false)) return;
     var inSheet = !!b.closest(".vl-sheet");
+    if (R.tut) { R.tut.pre = { r: cur(), t: R.s.t }; R.tut.base = null; }
     R.s = e.act(R.s, id);
     R.lastAct = R.s.t || 0.001;
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "act:" + id });
@@ -1195,6 +1198,7 @@
     I.haptic("tap");
     toast("event", s("bedDone", { x: t(a.label) }));
     say(raw("bedDone", { x: t(a.label) }) + (id === "bag100" ? ". " + raw("bagOff") : ""));
+    if (R.tut) { R.tut.did = id; tutCheck(); }
     var n = q('#vlBedW [data-k="' + id + '"]') || q("#vlBedW button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true });
   };
 
@@ -1325,10 +1329,17 @@
   function expMet(sp, base, r) { var d = dirOf(roVal(base, expKey(sp)), roVal(r, expKey(sp))); return sp.expect.direction === "down" ? d < 0 : d > 0; }
   function tutEnter() {
     var sp = tutStep(); if (!sp) return;
-    R.tut.ok = !sp.do || !!sp.do.scenario; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false;
+    R.tut.did = null; R.tut.ok = !sp.do || !!sp.do.scenario || !!sp.do.event; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false;
     if (sp.do && sp.do.scenario && sp.do.scenario !== R.sc.id) { var sc = scById(sp.do.scenario); if (sc) { var tu = R.tut; tu.pre = null; start(noTimeline(sc), tu); return; } }
     if (sp.do && sp.do.key != null && String(R.set[sp.do.key]) === String(sp.do.to)) R.tut.ok = true;
     if (sp.do && sp.do.mode && R.set.mode === sp.do.mode) R.tut.ok = true;
+    // an event step: the coach makes it happen now (the scenario timeline is off in a tutorial)
+    if (sp.do && sp.do.event) {
+      R.tut.pre = { r: cur(), t: R.s.t };
+      R.s = E().inject(R.s, sp.do.event, sp.do);
+      R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "event:" + sp.do.event });
+      if (!sp.expect) refresh(true);
+    }
     if (sp.expect && R.tut.ok) tutObserve(sp);
     var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(cur());
     paintCoach(); tutHighlight();
@@ -1350,6 +1361,8 @@
     var tu = R.tut.tu, sp = tutStep(), n = tu.steps.length, last = R.tut.i >= n - 1, task = "";
     if (sp.do && sp.do.key != null) task = s("setTo", { x: setLabel(sp.do.key), v: setText(sp.do.key, sp.do.to) + (setUnit(sp.do.key) ? " " + setUnit(sp.do.key) : "") });
     else if (sp.do && sp.do.mode) task = s("modeTo", { x: modeShort(sp.do.mode) });
+    else if (sp.do && sp.do.action) task = s("actTo", { x: t(((E().ACTIONS || {})[sp.do.action] || {}).label || sp.do.action) });
+    else if (sp.do && sp.do.abg) task = s("abgTo");
     var exp = "";
     if (sp.expect) {
       if (R.tut.saw) exp = '<p class="vl-co-ok">' + (ico("check") || "") + s("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") }) + "</p>";
@@ -1383,6 +1396,8 @@
     var sp = tutStep(); if (!sp || !sp.do) return;
     if (sp.do.key != null && String(R.set[sp.do.key]) === String(sp.do.to)) R.tut.ok = true;
     if (sp.do.mode && R.set.mode === sp.do.mode) R.tut.ok = true;
+    if (sp.do.action && R.tut.did === sp.do.action) R.tut.ok = true;
+    if (sp.do.abg && R.tut.did === "abg") R.tut.ok = true;
     if (R.tut.ok && sp.expect && !R.tut.base) { R.tut.base = R.tut.pre || { r: cur(), t: R.s.t }; if (expMet(sp, R.tut.base.r, cur())) R.tut.saw = true; }
     paintCoach();
   }
@@ -1393,6 +1408,14 @@
   }
   A.vltutdo = function () {
     var sp = tutStep(); if (!sp || !sp.do) return;
+    var nx;
+    // a bedside action or a gas: done the same way the learner's own tap does it (logged, scored, announced)
+    if (sp.do.action || sp.do.abg) {
+      if (sp.do.abg) A.vldraw();
+      else A.vlbed(q('[data-act=vlbed][data-k="' + sp.do.action + '"]') || { getAttribute: function () { return sp.do.action; }, closest: function () { return null; } });
+      nx = q("[data-act=vltutn]"); if (nx) nx.focus({ preventScroll: true });
+      return;
+    }
     if (sp.do.key != null) R.pend[sp.do.key] = sp.do.to; else if (sp.do.mode) R.pend.mode = sp.do.mode;
     var sEl = $("vlSet"); if (sEl) sEl.outerHTML = setHtml();
     confirmChanges();
@@ -1427,6 +1450,8 @@
     var MX = E().SCORE_MAX || {};
     var parts = Object.keys(sco.parts || {}).map(function (k) {
       var v = +sco.parts[k] || 0, mx = MX[k];
+      // null = not part of this run (no such decision made): say why instead of showing a zero
+      if (sco.parts[k] === null) return '<li class="vl-pna"><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pnote">' + (sco.explain && sco.explain[k] ? tx(sco.explain[k]) : "") + "</span><b>" + s("notScored") + "</b></li>";
       if (k === "unsafe") return v < 0 ? '<li class="vl-pen"><span class="vl-pl">' + s("p_unsafe") + '</span><span class="vl-pnote">' + s("penalty") + "</span><b>" + I.fmt(v) + "</b></li>" : "";
       var pct = mx ? clamp(v / mx * 100, 0, 100) : clamp(v, 0, 100);
       return '<li><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pbar" aria-hidden="true"><i style="width:' + pct.toFixed(0) + '%"></i></span><b>' + I.fmt(v) + (mx ? '<small>/' + mx + "</small>" : "") + "</b></li>";

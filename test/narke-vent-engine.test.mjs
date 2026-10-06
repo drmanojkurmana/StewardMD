@@ -152,7 +152,10 @@ test("alarms fire at their thresholds", () => {
   assert.ok(ids(s, Object.assign({}, st, { veLow: 8 })).includes("veLow"));
   assert.ok(ids(s, Object.assign({}, st, { veHigh: 5 })).includes("veHigh"));
   assert.ok(ids(s, Object.assign({}, st, { rrHigh: 10 })).includes("rrHigh"));
-  assert.ok(ids(s, Object.assign({}, st, { peepHigh: 5 })).includes("peepHigh"));
+  // a PEEP the learner set at the limit is not a high PEEP alarm (that card is about trapping); measured PEEP above the limit is
+  assert.ok(!ids(s, Object.assign({}, st, { peepHigh: 5 })).includes("peepHigh"));
+  const tr = E.init(quiet("asthma"));
+  assert.ok(ids(tr, Object.assign({}, tr.settings, { peepHigh: 8 })).includes("peepHigh"), "trapping above the limit");
   assert.ok(ids(s, Object.assign({}, st, { vt: 800 })).includes("pPlatHigh") || E.readout(s, Object.assign({}, st, { vt: 800 })).vent.pplat <= 30);
   // apnoea in PSV when sedated: alarm after the apnoea time, then backup ventilation
   const deep = quiet("postop-normal"); deep.patient.drive.sedation = 1;
@@ -291,7 +294,12 @@ test("score rewards protective, on-target runs and penalises unsafe ones", () =>
   const good = runOf({ mode: "acvc", vt: 420, rr: 28, peep: 12, fio2: 70, ti: 0.8 }), bad = runOf({ mode: "acvc", vt: 650, rr: 12, peep: 5, fio2: 40 });
   for (const x of [good, bad]) {
     assert.ok(x.total >= 0 && x.total <= 100);
-    for (const k of ["mode", "initial", "oxygenation", "ventilation", "protection", "alarms", "abg", "time", "unsafe"]) assert.equal(typeof x.parts[k], "number", k);
+    // a part is a number when scored and null when the learner made no such decision (A16)
+    for (const k of ["mode", "initial", "oxygenation", "ventilation", "protection", "alarms", "abg", "time", "unsafe"]) {
+      assert.ok(typeof x.parts[k] === "number" || x.parts[k] === null, k);
+      assert.equal(x.scored[k], x.parts[k] !== null, k + " scored flag");
+      assert.ok(x.explain[k] && x.explain[k].en && x.explain[k].hi, k + " explained");
+    }
     assert.ok(x.notes.length && x.notes.every((n) => n.en && n.hi));
   }
   assert.ok(good.total > bad.total + 20, good.total + " vs " + bad.total);
@@ -308,6 +316,9 @@ test("learn.json tutorial expectations hold in the engine (timeline off)", () =>
       const d = step.do || {};
       if (d.scenario) { s = E.init(quiet(d.scenario)); st = Object.assign({}, s.settings); before = null; }
       else if (d.mode || d.key) { before = E.readout(s, st); if (d.mode) st.mode = d.mode; else st[d.key] = d.to; s = E.step(s, st, wait); }
+      // new step kinds: inject an event, take a bedside action (then wait), draw a gas
+      else if (d.event) { before = E.readout(s, st); s = E.step(E.inject(s, d.event, d), st, 60); }
+      else if (d.action) { before = E.readout(s, st); s = E.step(E.act(s, d.action), st, 60); }
       if (!step.expect || !before) return;
       const k = step.expect.key, b = get(before, k), a = get(E.readout(s, st), k);
       assert.notEqual(a, undefined, "readout exposes " + k);
@@ -401,7 +412,8 @@ test("calibration: good practice reaches the scenario goals within 60 minutes (t
 test("calibration: the typical mistake produces the expected harm", () => {
   const HARM = {
     "postop-normal": (r) => r.gas.ph < 7.25 && r.gas.paco2 > 60,
-    "neuromuscular-gbs": (r) => r.gas.paco2 > 50 && r.gas.ph < 7.3 && r.vent.vte < 250,
+    // weak muscles trigger few breaths, so a low set rate is hypoventilation (P10)
+    "neuromuscular-gbs": (r) => r.gas.paco2 > 50 && r.gas.ph < 7.3 && r.vitals.rr <= 10,
     "postop-atelectasis": (r, s) => s.harm.vili > 50 && flagIds(r).includes("vili"),
     pneumonia: (r, s) => s.harm.vili > 50 && r.vent.drivingP > 15,
     "cardiogenic-oedema": (r) => r.vitals.spo2 < 90,
@@ -438,14 +450,20 @@ test("calibration: timeline events behave sensibly under good practice", () => {
   const left = E.step(t20.s, t20.st, 1200), drained = E.step(E.act(t20.s, "decompress"), t20.st, 1200);
   assert.ok(E.readout(left, t20.st).vitals.spo2 < t14.vitals.spo2 - 3, "no self resolution");
   const dr = E.readout(drained, t20.st);
-  assert.ok(dr.vitals.spo2 >= t14.vitals.spo2 - 1 && dr.vitals.map >= 65, "drain " + dr.vitals.spo2 + " " + dr.vitals.map);
-  // COPD: bronchospasm at 20 min raises auto-PEEP; bronchodilators at 40 min undo it
-  const c19 = run("copd", 1140), c30 = run("copd", 1800), c50 = run("copd", 3000);
-  assert.ok(c30.vent.autoPeep > c19.vent.autoPeep + 3 && c50.vent.autoPeep < c19.vent.autoPeep + 1 && c50.vitals.map >= 65, "COPD bronchospasm");
-  // asthma: bronchospasm at 10 min, steroids and bronchodilators at 40 min
-  const a9 = run("asthma", 540), a20 = run("asthma", 1200), a60 = run("asthma", 3600);
-  // the 50 cmH2O peak limit now cuts the breath short in bronchospasm (M4), so CO2 builds until the drugs work
-  assert.ok(a20.vent.ppeak > a9.vent.ppeak + 5 && a20.vent.vte < a9.vent.vte && a60.vent.autoPeep < a20.vent.autoPeep && a60.vitals.map > a20.vitals.map, "asthma");
+  assert.ok(dr.vitals.spo2 >= t14.vitals.spo2 - 1, "drain " + dr.vitals.spo2);
+  // E11: draining the chest does not cure the bleeding; BP stays low until blood is given
+  const bl = E.readout(E.step(E.act(E.act(t20.s, "decompress"), "blood"), t20.st, 1200), t20.st);
+  assert.ok(dr.vitals.map <= t14.vitals.map + 1 && bl.vitals.map > dr.vitals.map + 5, "blood " + dr.vitals.map + " to " + bl.vitals.map);
+  // COPD: a named bronchospasm at 20 min raises peak pressure and auto-PEEP; it stays until the learner gives a bronchodilator
+  const c19 = run("copd", 1140), c30 = at("copd", STRATEGIES.copd.good, 1800, true);
+  assert.ok(c30.r.vent.ppeak > c19.vent.ppeak + 5 && c30.r.vent.autoPeep >= c19.vent.autoPeep, "COPD bronchospasm");
+  assert.ok(c30.r.events.some((e) => e.id === "bronchospasm" && /Airway resistance 22 to 55/.test(e.detail.en)), "the event is named with its numbers (A1, E8)");
+  const untreated = E.readout(E.step(c30.s, c30.st, 1200), c30.st), treated = E.readout(E.step(E.act(c30.s, "bronchodilator"), c30.st, 1200), c30.st);
+  assert.ok(untreated.vent.ppeak > c19.vent.ppeak + 5 && treated.vent.ppeak < c19.vent.ppeak + 1 && treated.vitals.map >= 65, "bronchodilator " + treated.vent.ppeak);
+  // asthma starts tight (E11); steroids and bronchodilators at 40 min ease it
+  const a0 = at("asthma", {}, 0, true).r, a20 = run("asthma", 1200), a60 = run("asthma", 3600);
+  assert.ok(a0.vent.ppeak >= 36 && a0.vent.raw >= 35, "near-fatal asthma starts tight: " + a0.vent.ppeak);
+  assert.ok(a60.vent.ppeak < a20.vent.ppeak - 5 && a60.vent.raw < a20.vent.raw && a60.vitals.map >= a20.vitals.map, "asthma");
   // ARDS: suction disconnect at 40 min derecruits fast; at the same PEEP the lung stays partly closed (see C1 test)
   const r39 = run("ards", 2390), r41 = run("ards", 2460), r60 = run("ards", 3600);
   assert.ok(r41.vitals.spo2 < r39.vitals.spo2 - 5 && r60.vitals.spo2 < r39.vitals.spo2, "ARDS disconnect");
@@ -459,7 +477,7 @@ test("calibration: timeline events behave sensibly under good practice", () => {
 test("ABG cases: the gas comes from the model, the keyed answer works and wrong answers do not look better", () => {
   assert.deepEqual(Object.keys(CASES).sort(), LEARN.cases.map((c) => c.id).sort());
   for (const c of LEARN.cases) {
-    const setup = CASES[c.id], { s, st } = caseState(E, SC.find((x) => x.id === c.scenario), setup), g = E.abg(s), r0 = E.readout(s, st);
+    const setup = CASES[c.id], { s, st } = caseState(E, SC.find((x) => x.id === c.scenario), c.setup), g = E.abg(s), r0 = E.readout(s, st);
     const near = (k, tol) => assert.ok(Math.abs(g[k] - c.abg[k]) <= tol, `${c.id} ${k} case ${c.abg[k]} model ${g[k]}`);
     near("pH", 0.02); near("PaCO2", 2); near("HCO3", 1); near("FiO2", 0.01); near("PaO2", 3 + 0.05 * g.PaO2);
     assert.ok(Math.abs(r0.vitals.spo2 - c.spo2) <= 1, c.id + " SpO2");
@@ -545,7 +563,9 @@ test("M4: the peak pressure alarm ends a volume breath; delivered VT falls and t
 test("M5: dynamic hyperinflation adds dead space, so high rate does not out-clear the slow strategy in asthma and COPD", () => {
   const co2 = (id, ch) => at(id, ch, 3600).r.gas.paco2;
   inside(co2("asthma", {}), [55, 70], "asthma start settings hold PaCO2");
-  assert.ok(co2("copd", {}) >= 60, "COPD start settings do not wash out his CO2");
+  // COPD start settings (VT 600, rate 20) over-ventilate a chronic retainer: post-hypercapnic alkalaemia with trapping (A1)
+  const cs = at("copd", {}, 3600).r;
+  assert.ok(cs.gas.ph > 7.45 && cs.vent.autoPeep >= 3 && cs.vitals.map < 65, "COPD start settings: " + cs.gas.ph);
   for (const id of ["asthma", "copd"]) assert.ok(co2(id, STRATEGIES[id].mistake) >= co2(id, STRATEGIES[id].good), id + " high-rate mistake vs good");
   const g = at("asthma", STRATEGIES.asthma.good, 3600).r;
   assert.ok(g.gas.ph >= 7.2 && g.gas.paco2 > 45, "permissive hypercapnia still holds: " + g.gas.paco2 + " pH " + g.gas.ph);
@@ -592,7 +612,7 @@ test("m9: scripted harmful events are not counted as unsafe in their response wi
 });
 
 test("m9: learner actions: E.ACTIONS and E.act decompress, suction and bag", () => {
-  assert.deepEqual(Object.keys(E.ACTIONS).sort(), ["bag100", "decompress", "suction"]);
+  assert.deepEqual(Object.keys(E.ACTIONS).sort(), ["bag100", "blood", "bronchodilator", "decompress", "disconnect", "fluid", "paralyse", "sedate", "suction"]);
   for (const [id, a] of Object.entries(E.ACTIONS)) { assert.equal(a.id, id); assert.ok(a.label.en && a.label.hi && typeof a.available === "function"); }
   // trauma: the pneumothorax stays until the learner decompresses it
   const sc = byId("trauma-contusion"); assert.ok(!sc.timeline.some((e) => e.event === "improve"), "no scripted drain");
@@ -641,7 +661,7 @@ test("timeline events can wait for a setting or a learner action", () => {
 
 test("m3: no ABG case option repeats the case's current setting", () => {
   for (const c of LEARN.cases) {
-    const { st } = caseState(E, SC.find((x) => x.id === c.scenario), CASES[c.id]);
+    const { st } = caseState(E, SC.find((x) => x.id === c.scenario), c.setup);
     for (const o of c.q2.options) assert.ok(st[o.change.key] !== o.change.to || o.change.also || /^Keep /.test(o.label.en), c.id + " no-op option " + o.label.en);
   }
 });

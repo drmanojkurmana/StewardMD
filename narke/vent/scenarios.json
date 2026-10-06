@@ -14,7 +14,14 @@
     "lung.upperInflection": "plateau pressure in cmH2O above which overdistension lowers compliance",
     "lung.lowVQ": "optional perfusion fraction of low V/Q units (default 0.25 if flow limited, 0.2 if r is 20 or more, else 0.01)",
     "start.abg.PaCO2": "optional presenting PaCO2 from the patient's own breathing before the ventilator; it moves to the new steady state over minutes",
-    "timeline.event": "secretions | bronchospasm | bronchospasmEases | pneumothorax | disconnect | hypotension | fever | fluidBolus | improve"
+    "timeline.event": "secretions | bronchospasm | bronchospasmEases | pneumothorax | plug | disconnect | hypotension | hypovolaemia | fever | fluidBolus | improve",
+    "patient.drive.maxEffort": "optional ceiling on Pmus in cmH2O: weak muscles cannot push harder when CO2 rises",
+    "lung.vqLow": "optional V/Q ratio of the low V/Q units (default 0.1); 0.3 to 0.4 corrects with modest FiO2",
+    "goals.peepTable": "optional: \"ardsnet\" scores the first PEEP against the ARDSNet PEEP/FiO2 tables",
+    "goals.plain": "one plain-language goal line for beginners; goals.detail holds the technical targets",
+    "exam": "bedside findings: crackles none|bibasal|bilateral|right|left, reduced none|bibasal|both|right|left, ptxSide left|right",
+    "goodRun": "what a good run looks like: the target settings, shown in the debrief",
+    "timeline.side": "pneumothorax side, left or right"
   },
   "scenarios": [
     {
@@ -25,30 +32,36 @@
         "en": "Mr Rao is 45 years old. He had a long hip operation under general anaesthesia. His lungs are healthy. He is still sleepy from the drugs, so he stays on the ventilator for a short while.",
         "hi": "श्री राव 45 साल के हैं। General anaesthesia में उनका लंबा hip ऑपरेशन हुआ। उनके फेफड़े स्वस्थ हैं। दवाओं के असर से वे अभी नींद में हैं, इसलिए कुछ देर ventilator पर रहेंगे।"
       },
-      "why": {
-        "en": "Anaesthetic drugs still blunt his drive to breathe. The ventilator breathes for him until the drugs wear off.",
-        "hi": "Anaesthesia की दवाएँ अभी साँस लेने की इच्छा को दबा रही हैं। दवाओं का असर उतरने तक ventilator उनके लिए साँस लेता है।"
-      },
+      "why": { "en": "Anaesthetic drugs still blunt his drive to breathe. The ventilator breathes for him until the drugs wear off.", "hi": "Anaesthesia की दवाएँ अभी साँस लेने की इच्छा को दबा रही हैं। दवाओं का असर उतरने तक ventilator उनके लिए साँस लेता है।" },
       "patient": {
-        "age": 45, "sex": "M", "heightCm": 172, "weightKg": 78,
+        "age": 45,
+        "sex": "M",
+        "heightCm": 172,
+        "weightKg": 78,
         "diagnosis": { "en": "Residual anaesthesia after hip replacement", "hi": "Hip replacement के बाद बचा हुआ anaesthesia असर" },
-        "hb": 12, "temp": 36.4, "volumeStatus": "normal",
-        "metabolic": { "hco3": 24, "lactate": 1.0 },
+        "hb": 12,
+        "temp": 36.4,
+        "volumeStatus": "normal",
+        "metabolic": { "hco3": 24, "lactate": 1 },
         "vco2": 180,
         "drive": { "rate": 12, "effort": 4, "sedation": 0.8 }
       },
       "lung": { "c": 55, "r": 10, "flowLimited": false, "shunt": 0.05, "recruitable": 0.2, "deadSpace": 0.05, "upperInflection": 35 },
-      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 450, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 450, "rr": 14, "ti": 1, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [94, 98], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [94, 98],
+        "paco2": [35, 45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Lower FiO2 to the lowest value that keeps SpO2 in range.", "hi": "FiO2 को उतना कम करें जितने में SpO2 सीमा में रहे।" },
           { "en": "Keep PaCO2 normal, because these lungs and this brain are normal.", "hi": "PaCO2 सामान्य रखें, क्योंकि ये फेफड़े और यह दिमाग़ सामान्य हैं।" }
-        ]
+        ],
+        "plain": { "en": "Keep oxygen saturation 94 to 98%. Keep CO2 normal. Keep each breath gentle.", "hi": "Oxygen saturation 94 से 98% रखें। CO2 सामान्य रखें। हर साँस हल्की रखें।" },
+        "detail": { "en": "SpO2 94 to 98%, PaCO2 35 to 45, plateau 30 or less, VT 6 to 8 mL/kg PBW.", "hi": "SpO2 94 से 98%, PaCO2 35 से 45, plateau 30 या कम, VT 6 से 8 mL/kg PBW।" }
       },
-      "timeline": [
-        { "t": 2700, "event": "improve", "note": { "en": "The drugs are wearing off. He starts to trigger his own breaths.", "hi": "दवाओं का असर उतर रहा है। वे ख़ुद साँसें trigger करने लगे हैं।" } }
-      ],
+      "timeline": [{ "t": 2700, "event": "improve", "note": { "en": "The drugs are wearing off. He starts to trigger his own breaths.", "hi": "दवाओं का असर उतर रहा है। वे ख़ुद साँसें trigger करने लगे हैं।" } }],
       "debrief": [
         { "en": "Tidal volume is set on predicted body weight from height. Here 68 kg, so 410 to 540 mL.", "hi": "Tidal volume लंबाई से निकले predicted body weight पर set होता है। यहाँ 68 kg, यानी 410 से 540 mL।" },
         { "en": "Healthy lungs need little oxygen. A high FiO2 for no reason only adds risk.", "hi": "स्वस्थ फेफड़ों को कम ऑक्सीजन चाहिए। बिना कारण ऊँचा FiO2 केवल जोखिम बढ़ाता है।" },
@@ -58,36 +71,46 @@
         { "label": "Narke lesson as11-mechanical-ventilation (starting settings)", "url": "narke/learn/lessons/as11-mechanical-ventilation.json" },
         { "label": "Hess DR, Kacmarek RM. Essentials of Mechanical Ventilation, 4th ed. McGraw Hill 2019", "url": "" },
         { "label": "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th ed. 2020", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "none", "reduced": "none" },
+      "goodRun": { "en": "A good run: keep VT 450 and rate 14. Lower FiO2 to about 25 to 30%.", "hi": "अच्छा run: VT 450 और rate 14 रखें। FiO2 को लगभग 25 से 30% तक घटाएँ।" }
     },
     {
       "id": "neuromuscular-gbs",
       "level": 1,
       "title": { "en": "Weak muscles: Guillain-Barre syndrome", "hi": "कमज़ोर मांसपेशियाँ: Guillain-Barre syndrome" },
       "story": {
-        "en": "Ms Kaur is 32 years old. Her legs, then arms, then breathing muscles became weak over 5 days. Her vital capacity fell below 15 mL/kg. She was intubated before she tired out.",
-        "hi": "सुश्री कौर 32 साल की हैं। 5 दिनों में पहले पैर, फिर हाथ, फिर साँस की मांसपेशियाँ कमज़ोर हुईं। उनकी vital capacity 15 mL/kg से नीचे गिर गई। थकने से पहले उन्हें intubate किया गया।"
+        "en": "Ms Kaur is 32 years old. Her legs, then arms, then breathing muscles became weak over 5 days. Her vital capacity fell below 15 mL/kg. She was intubated before she tired out. Her muscles are too weak to trigger many breaths, so the set rate is her breathing.",
+        "hi": "सुश्री कौर 32 साल की हैं। 5 दिनों में पहले पैर, फिर हाथ, फिर साँस की मांसपेशियाँ कमज़ोर हुईं। उनकी vital capacity 15 mL/kg से नीचे गिर गई। थकने से पहले उन्हें intubate किया गया। उनकी मांसपेशियाँ इतनी कमज़ोर हैं कि वे कम साँसें trigger करती हैं, इसलिए set rate ही उनकी साँस है।"
       },
-      "why": {
-        "en": "Her lungs are fine, but the pump is weak. The ventilator does the work her muscles cannot do.",
-        "hi": "उनके फेफड़े ठीक हैं, पर pump कमज़ोर है। जो काम मांसपेशियाँ नहीं कर पातीं, वह ventilator करता है।"
-      },
+      "why": { "en": "Her lungs are fine, but the pump is weak. The ventilator does the work her muscles cannot do.", "hi": "उनके फेफड़े ठीक हैं, पर pump कमज़ोर है। जो काम मांसपेशियाँ नहीं कर पातीं, वह ventilator करता है।" },
       "patient": {
-        "age": 32, "sex": "F", "heightCm": 160, "weightKg": 55,
+        "age": 32,
+        "sex": "F",
+        "heightCm": 160,
+        "weightKg": 55,
         "diagnosis": { "en": "Guillain-Barre syndrome with respiratory muscle weakness", "hi": "साँस की मांसपेशियों की कमज़ोरी के साथ Guillain-Barre syndrome" },
-        "hb": 12.5, "temp": 37.0, "volumeStatus": "normal",
-        "metabolic": { "hco3": 25, "lactate": 1.0 },
+        "hb": 12.5,
+        "temp": 37,
+        "volumeStatus": "normal",
+        "metabolic": { "hco3": 25, "lactate": 1 },
         "vco2": 180,
-        "drive": { "rate": 24, "effort": 2, "sedation": 0.3 }
+        "drive": { "rate": 24, "effort": 1, "sedation": 0.3, "maxEffort": 0.5 }
       },
       "lung": { "c": 45, "r": 9, "flowLimited": false, "shunt": 0.08, "recruitable": 0.5, "deadSpace": 0.05, "upperInflection": 32 },
-      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 380, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 380, "rr": 14, "ti": 1, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [94, 98], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [94, 98],
+        "paco2": [35, 45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Give full support. Weak muscles cannot share the work yet.", "hi": "पूरा support दें। कमज़ोर मांसपेशियाँ अभी काम नहीं बाँट सकतीं।" },
           { "en": "Watch the blood pressure. This illness can upset the autonomic nerves.", "hi": "Blood pressure पर नज़र रखें। यह बीमारी autonomic nerves को बिगाड़ सकती है।" }
-        ]
+        ],
+        "plain": { "en": "Keep oxygen saturation 94 to 98%. Keep CO2 normal. Her weak muscles need the machine to do the breathing.", "hi": "Oxygen saturation 94 से 98% रखें। CO2 सामान्य रखें। कमज़ोर मांसपेशियों के लिए साँस मशीन ही देगी।" },
+        "detail": { "en": "SpO2 94 to 98%, PaCO2 35 to 45, set rate 12 to 16 because she triggers few breaths.", "hi": "SpO2 94 से 98%, PaCO2 35 से 45, set rate 12 से 16 क्योंकि वे कम साँसें trigger करती हैं।" }
       },
       "timeline": [
         { "t": 1800, "event": "secretions", "note": { "en": "She cannot cough well. Mucus builds up in the tube and airways.", "hi": "वे ठीक से खाँस नहीं पातीं। Tube और airways में बलगम जमा होता है।" } },
@@ -102,40 +125,48 @@
         { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC (neuromuscular disease)", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
         { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013", "url": "" },
         { "label": "Hess DR, Kacmarek RM. Essentials of Mechanical Ventilation, 4th ed. McGraw Hill 2019", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "none", "reduced": "none" },
+      "goodRun": { "en": "A good run: AC-VC with VT 380 and rate 14. Lower FiO2 to about 25%. Suction when peak pressure rises.", "hi": "अच्छा run: AC-VC में VT 380 और rate 14। FiO2 लगभग 25% तक घटाएँ। Peak pressure बढ़े तो suction करें।" }
     },
     {
       "id": "postop-atelectasis",
-      "level": 2,
+      "level": 1,
       "title": { "en": "After laparotomy: collapsed lung bases", "hi": "Laparotomy के बाद: फेफड़ों के निचले हिस्से बैठे हुए" },
       "story": {
         "en": "Mrs Das is 68 years old, short and heavy. She had emergency surgery for a perforated bowel. Her belly is swollen. The bases of both lungs have collapsed. Someone set 500 mL out of habit.",
         "hi": "श्रीमती दास 68 साल की हैं, क़द छोटा और वज़न ज़्यादा। आँत फटने पर उनकी emergency सर्जरी हुई। पेट फूला है। दोनों फेफड़ों के निचले हिस्से बैठ गए हैं। किसी ने आदतन 500 mL set कर दिया।"
       },
-      "why": {
-        "en": "She is sedated after a big operation. Her oxygen is low because collapsed alveoli get blood but no air.",
-        "hi": "बड़े ऑपरेशन के बाद वे sedated हैं। ऑक्सीजन कम है क्योंकि बैठे alveoli को ख़ून मिलता है पर हवा नहीं।"
-      },
+      "why": { "en": "She is sedated after a big operation. Her oxygen is low because collapsed alveoli get blood but no air.", "hi": "बड़े ऑपरेशन के बाद वे sedated हैं। ऑक्सीजन कम है क्योंकि बैठे alveoli को ख़ून मिलता है पर हवा नहीं।" },
       "patient": {
-        "age": 68, "sex": "F", "heightCm": 155, "weightKg": 82,
+        "age": 68,
+        "sex": "F",
+        "heightCm": 155,
+        "weightKg": 82,
         "diagnosis": { "en": "Basal atelectasis after emergency laparotomy", "hi": "Emergency laparotomy के बाद basal atelectasis" },
-        "hb": 10.5, "temp": 37.8, "volumeStatus": "normal",
+        "hb": 10.5,
+        "temp": 37.8,
+        "volumeStatus": "normal",
         "metabolic": { "hco3": 21, "lactate": 2.2 },
         "vco2": 220,
         "drive": { "rate": 18, "effort": 4, "sedation": 0.7 }
       },
       "lung": { "c": 32, "r": 12, "flowLimited": false, "shunt": 0.25, "recruitable": 0.75, "deadSpace": 0.1, "upperInflection": 30 },
-      "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 5, "vt": 500, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 5, "vt": 500, "rr": 14, "ti": 1, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [92, 96],
+        "paco2": [35, 45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Work out her predicted body weight. It is about 48 kg, not 82 kg.", "hi": "उनका predicted body weight निकालें। यह लगभग 48 kg है, 82 kg नहीं।" },
           { "en": "Use PEEP to reopen the bases, then bring FiO2 down.", "hi": "निचले हिस्से खोलने के लिए PEEP लगाएँ, फिर FiO2 घटाएँ।" }
-        ]
+        ],
+        "plain": { "en": "Bring oxygen saturation up to 92 to 96%. Keep CO2 normal. Give gentle breaths sized for her height.", "hi": "Oxygen saturation 92 से 96% तक लाएँ। CO2 सामान्य रखें। उनकी लंबाई के हिसाब से हल्की साँसें दें।" },
+        "detail": { "en": "SpO2 92 to 96%, PaCO2 35 to 45. VT about 330 mL, 6 to 8 mL/kg PBW. PEEP reopens the bases.", "hi": "SpO2 92 से 96%, PaCO2 35 से 45। VT लगभग 330 mL, यानी 6 से 8 mL/kg PBW। PEEP निचले हिस्से खोलता है।" }
       },
-      "timeline": [
-        { "t": 1200, "event": "hypotension", "note": { "en": "She is a little dry. Watch BP as you raise PEEP.", "hi": "उनमें पानी थोड़ा कम है। PEEP बढ़ाते समय BP देखें।" } }
-      ],
+      "timeline": [],
       "debrief": [
         { "en": "500 mL is over 10 mL/kg for her height. Short women are the most often overdosed.", "hi": "उनकी लंबाई के लिए 500 mL, 10 mL/kg से ज़्यादा है। छोटे क़द की महिलाओं को सबसे अधिक ज़्यादा volume मिलता है।" },
         { "en": "Atelectasis is recruitable shunt. PEEP lifts PaO2 far more than FiO2 does here.", "hi": "Atelectasis खुल सकने वाला shunt है। यहाँ PEEP, FiO2 से कहीं ज़्यादा PaO2 बढ़ाता है।" },
@@ -146,7 +177,9 @@
         { "label": "StewardMD protocol: ARDS lung-protective ventilation (PBW formula)", "url": "kb/clinical-protocols/ards-lung-protective-ventilation.json" },
         { "label": "Hess DR, Kacmarek RM. Essentials of Mechanical Ventilation, 4th ed. McGraw Hill 2019", "url": "" },
         { "label": "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th ed. 2020", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "bibasal", "reduced": "bibasal" },
+      "goodRun": { "en": "A good run: VT 330 and rate 22 to 24, PEEP 10, then FiO2 down to 50%.", "hi": "अच्छा run: VT 330 और rate 22 से 24, PEEP 10, फिर FiO2 घटाकर 50%।" }
     },
     {
       "id": "pneumonia",
@@ -156,14 +189,16 @@
         "en": "Mr Yadav is 55 years old. He had fever and cough for 4 days. His right lower lobe is consolidated. He tired out on high-flow oxygen and was intubated.",
         "hi": "श्री यादव 55 साल के हैं। उन्हें 4 दिन से बुख़ार और खाँसी थी। दाहिना निचला lobe consolidated है। High-flow ऑक्सीजन पर वे थक गए और intubate किए गए।"
       },
-      "why": {
-        "en": "Blood passes the pus-filled lobe without picking up oxygen. That is shunt, and he could not keep up.",
-        "hi": "ख़ून मवाद भरे lobe से बिना ऑक्सीजन लिए गुज़र जाता है। यह shunt है, और वे इसे सँभाल नहीं पाए।"
-      },
+      "why": { "en": "Blood passes the pus-filled lobe without picking up oxygen. That is shunt, and he could not keep up.", "hi": "ख़ून मवाद भरे lobe से बिना ऑक्सीजन लिए गुज़र जाता है। यह shunt है, और वे इसे सँभाल नहीं पाए।" },
       "patient": {
-        "age": 55, "sex": "M", "heightCm": 168, "weightKg": 62,
+        "age": 55,
+        "sex": "M",
+        "heightCm": 168,
+        "weightKg": 62,
         "diagnosis": { "en": "Severe community-acquired pneumonia, right lower lobe", "hi": "गंभीर community-acquired pneumonia, दाहिना निचला lobe" },
-        "hb": 12, "temp": 39.0, "volumeStatus": "normal",
+        "hb": 12,
+        "temp": 39,
+        "volumeStatus": "normal",
         "metabolic": { "hco3": 20, "lactate": 2.5 },
         "vco2": 260,
         "drive": { "rate": 28, "effort": 8, "sedation": 0.6 }
@@ -171,11 +206,17 @@
       "lung": { "c": 38, "r": 12, "flowLimited": false, "shunt": 0.28, "recruitable": 0.25, "deadSpace": 0.12, "upperInflection": 30 },
       "start": { "mode": "acvc", "settings": { "fio2": 70, "peep": 5, "vt": 450, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [92, 96],
+        "paco2": [35, 45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Fever raises CO2 production. Minute ventilation must rise to match it.", "hi": "बुख़ार CO2 बनना बढ़ाता है। उसके बराबर minute ventilation बढ़ाना होगा।" },
           { "en": "Test whether PEEP helps. Solid consolidation may not open.", "hi": "जाँचें कि PEEP मदद करता है या नहीं। ठोस consolidation शायद न खुले।" }
-        ]
+        ],
+        "plain": { "en": "Bring oxygen saturation to 92 to 96%. Keep CO2 normal. Keep each breath gentle.", "hi": "Oxygen saturation 92 से 96% तक लाएँ। CO2 सामान्य रखें। हर साँस हल्की रखें।" },
+        "detail": { "en": "SpO2 92 to 96%, PaCO2 35 to 45. Plateau 30 or less, driving pressure 15 or less, VT 6 to 8 mL/kg PBW.", "hi": "SpO2 92 से 96%, PaCO2 35 से 45। Plateau 30 या कम, driving pressure 15 या कम, VT 6 से 8 mL/kg PBW।" }
       },
       "timeline": [
         { "t": 1500, "event": "secretions", "note": { "en": "Thick sputum partly blocks the tube. Peak pressure climbs.", "hi": "गाढ़ा बलगम tube को कुछ रोकता है। Peak pressure चढ़ता है।" } },
@@ -191,7 +232,9 @@
         { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
         { "label": "StewardMD protocol: sepsis and septic shock", "url": "kb/clinical-protocols/sepsis-septic-shock.json" },
         { "label": "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th ed. 2020", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "right", "reduced": "right" },
+      "goodRun": { "en": "A good run: VT 390, rate 26, PEEP 8, FiO2 about 90%, Ti 0.8 s. Suction when secretions come.", "hi": "अच्छा run: VT 390, rate 26, PEEP 8, FiO2 लगभग 90%, Ti 0.8 s। Secretions आएँ तो suction करें।" }
     },
     {
       "id": "cardiogenic-oedema",
@@ -206,24 +249,40 @@
         "hi": "कमज़ोर left ventricle पानी को फेफड़ों में लौटा देता है। Positive pressure पानी को पीछे धकेलता है और दिल का काम हल्का करता है।"
       },
       "patient": {
-        "age": 70, "sex": "M", "heightCm": 165, "weightKg": 75,
+        "age": 70,
+        "sex": "M",
+        "heightCm": 165,
+        "weightKg": 75,
         "diagnosis": { "en": "Acute cardiogenic pulmonary oedema after myocardial infarction", "hi": "Myocardial infarction के बाद acute cardiogenic pulmonary oedema" },
-        "hb": 13, "temp": 36.8, "volumeStatus": "high",
+        "hb": 13,
+        "temp": 36.8,
+        "volumeStatus": "high",
         "metabolic": { "hco3": 20, "lactate": 2.8 },
         "vco2": 230,
         "drive": { "rate": 32, "effort": 12, "sedation": 0 }
       },
       "lung": { "c": 35, "r": 14, "flowLimited": false, "shunt": 0.32, "recruitable": 0.7, "deadSpace": 0.08, "upperInflection": 32 },
-      "start": { "mode": "niv", "settings": { "fio2": 60, "ipap": 12, "epap": 5, "rr": 12, "ti": 1.0 } },
+      "start": { "mode": "niv", "settings": { "fio2": 60, "ipap": 12, "epap": 5, "rr": 12, "ti": 1 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [92, 96],
+        "paco2": [35, 45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Raise EPAP to reopen flooded alveoli and unload the left ventricle.", "hi": "भरे alveoli खोलने और left ventricle का बोझ घटाने को EPAP बढ़ाएँ।" },
           { "en": "Watch for NIV failure: falling consciousness, shock or worsening gas.", "hi": "NIV failure पर नज़र रखें: घटती चेतना, shock या बिगड़ती gas।" }
-        ]
+        ],
+        "plain": { "en": "Bring oxygen saturation to 92 to 96%. Ease the work of breathing. Watch the blood pressure.", "hi": "Oxygen saturation 92 से 96% तक लाएँ। साँस की मेहनत घटाएँ। Blood pressure पर नज़र रखें।" },
+        "detail": { "en": "SpO2 92 to 96%, PaCO2 35 to 45, EPAP 8 to 10 to reopen flooded alveoli.", "hi": "SpO2 92 से 96%, PaCO2 35 से 45, भरे alveoli खोलने के लिए EPAP 8 से 10।" }
       },
       "timeline": [
-        { "t": 1800, "event": "improve", "requires": [{ "key": "epap", "min": 8 }, { "key": "peep", "min": 8 }], "note": { "en": "Well supported on EPAP or PEEP 8 or more, diuretic and nitrate start to work. Lung water begins to fall.", "hi": "EPAP या PEEP 8 या ज़्यादा के अच्छे support पर diuretic और nitrate असर करने लगे। फेफड़ों का पानी घटने लगा।" } }
+        {
+          "t": 1800,
+          "event": "improve",
+          "requires": [{ "key": "epap", "min": 8 }, { "key": "peep", "min": 8 }],
+          "note": { "en": "Well supported on EPAP or PEEP 8 or more, diuretic and nitrate start to work. Lung water begins to fall.", "hi": "EPAP या PEEP 8 या ज़्यादा के अच्छे support पर diuretic और nitrate असर करने लगे। फेफड़ों का पानी घटने लगा।" }
+        }
       ],
       "debrief": [
         { "en": "CPAP or NIV is first-line in cardiogenic oedema. Many patients avoid intubation.", "hi": "Cardiogenic oedema में CPAP या NIV पहली पसंद है। कई मरीज़ intubation से बच जाते हैं।" },
@@ -235,41 +294,54 @@
         { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC (cardiogenic oedema)", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
         { "label": "ERS/ATS guideline: noninvasive ventilation for acute respiratory failure", "url": "https://doi.org/10.1183/13993003.02426-2016" },
         { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "bilateral", "reduced": "none" },
+      "goodRun": { "en": "A good run: NIV with EPAP 10 and IPAP 16. The breathing rate falls and SpO2 rises.", "hi": "अच्छा run: NIV में EPAP 10 और IPAP 16। साँस की दर घटती है और SpO2 बढ़ती है।" }
     },
     {
       "id": "copd",
-      "level": 3,
+      "level": 2,
       "title": { "en": "COPD: air that cannot get out", "hi": "COPD: हवा जो बाहर नहीं निकल पाती" },
       "story": {
         "en": "Mr Singh is 66 years old and smoked for 40 years. A chest infection made his COPD worse. NIV failed and he became drowsy. He has just been intubated, and his BP is soft.",
         "hi": "श्री सिंह 66 साल के हैं और 40 साल धूम्रपान किया। सीने के infection से उनका COPD बिगड़ा। NIV विफल हुआ और वे ऊँघने लगे। उन्हें अभी intubate किया गया है, और उनका BP कम है।"
       },
-      "why": {
-        "en": "Narrow airways trap air and tire the muscles. CO2 rose until he became drowsy.",
-        "hi": "सँकरी airways हवा फँसाती हैं और मांसपेशियों को थका देती हैं। CO2 तब तक बढ़ा जब तक वे ऊँघने नहीं लगे।"
-      },
+      "why": { "en": "Narrow airways trap air and tire the muscles. CO2 rose until he became drowsy.", "hi": "सँकरी airways हवा फँसाती हैं और मांसपेशियों को थका देती हैं। CO2 तब तक बढ़ा जब तक वे ऊँघने नहीं लगे।" },
       "patient": {
-        "age": 66, "sex": "M", "heightCm": 170, "weightKg": 54,
+        "age": 66,
+        "sex": "M",
+        "heightCm": 170,
+        "weightKg": 54,
         "diagnosis": { "en": "Acute exacerbation of COPD with hypercapnic respiratory failure", "hi": "Hypercapnic respiratory failure के साथ COPD का acute exacerbation" },
-        "hb": 15.5, "temp": 37.5, "volumeStatus": "low",
+        "hb": 15.5,
+        "temp": 37.5,
+        "volumeStatus": "low",
         "metabolic": { "hco3": 34, "lactate": 1.2 },
         "vco2": 220,
         "drive": { "rate": 22, "effort": 8, "sedation": 0.6 }
       },
-      "lung": { "c": 60, "r": 22, "flowLimited": true, "shunt": 0.08, "recruitable": 0.1, "deadSpace": 0.27, "upperInflection": 40 },
-      "start": { "mode": "acvc", "abg": { "PaCO2": 80 }, "settings": { "fio2": 40, "peep": 5, "vt": 600, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2, "pPeakHigh": 50 } },
+      "lung": { "c": 60, "r": 22, "flowLimited": true, "shunt": 0.08, "recruitable": 0.1, "deadSpace": 0.15, "upperInflection": 40, "vqLow": 0.35 },
+      "start": { "mode": "acvc", "abg": { "PaCO2": 80 }, "settings": { "fio2": 40, "peep": 5, "vt": 600, "rr": 20, "ti": 1, "trigType": "flow", "trigFlow": 2, "pPeakHigh": 50 } },
       "goals": {
-        "spo2": [88, 92], "ph": [7.3, 7.4], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [88, 92],
+        "ph": [7.3, 7.4],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Aim for his usual pH, not a normal PaCO2. His kidneys have kept extra bicarbonate.", "hi": "सामान्य PaCO2 नहीं, उनके सामान्य pH का लक्ष्य रखें। उनकी kidneys ने extra bicarbonate रखा है।" },
           { "en": "Give time to breathe out: lower rate, shorter Ti, smaller tidal volume.", "hi": "साँस छोड़ने का समय दें: कम rate, छोटा Ti, छोटा tidal volume।" },
           { "en": "Keep auto-PEEP low and watch BP.", "hi": "Auto-PEEP कम रखें और BP देखें।" }
-        ]
+        ],
+        "plain": { "en": "Keep oxygen saturation 88 to 92%. Give time to breathe out. Aim for his usual pH, not a normal CO2.", "hi": "Oxygen saturation 88 से 92% रखें। साँस छोड़ने का समय दें। सामान्य CO2 नहीं, उनके सामान्य pH का लक्ष्य रखें।" },
+        "detail": { "en": "SpO2 88 to 92%, pH 7.30 to 7.40, auto-PEEP low, VT about 7 mL/kg PBW, rate 10 to 12.", "hi": "SpO2 88 से 92%, pH 7.30 से 7.40, auto-PEEP कम, VT लगभग 7 mL/kg PBW, rate 10 से 12।" }
       },
       "timeline": [
-        { "t": 1200, "event": "bronchospasm", "note": { "en": "Airways tighten. Expiratory flow slows and trapping worsens.", "hi": "Airways सिकुड़ती हैं। साँस छोड़ने का flow धीमा होता है और trapping बढ़ती है।" } },
-        { "t": 2400, "event": "bronchospasmEases", "note": { "en": "Nebulised bronchodilators work. Airway resistance falls back.", "hi": "Nebulised bronchodilators असर करते हैं। Airway resistance वापस घटता है।" } },
+        {
+          "t": 1200,
+          "event": "bronchospasm",
+          "note": { "en": "Bronchospasm: his airways tighten. Peak pressure rises and more air is trapped. A bronchodilator helps.", "hi": "Bronchospasm: उनकी airways सिकुड़ती हैं। Peak pressure बढ़ता है और ज़्यादा हवा फँसती है। Bronchodilator मदद करता है।" }
+        },
         { "t": 3600, "event": "secretions", "note": { "en": "Thick sputum in the tube raises airway resistance.", "hi": "Tube में गाढ़ा बलगम airway resistance बढ़ाता है।" } }
       ],
       "debrief": [
@@ -280,9 +352,14 @@
       ],
       "sources": [
         { "label": "StewardMD protocol: COPD exacerbation", "url": "kb/clinical-protocols/copd-exacerbation.json" },
-        { "label": "BTS/ICS guideline: ventilatory management of acute hypercapnic respiratory failure", "url": "https://www.brit-thoracic.org.uk/document-library/guidelines/niv/btsics-guideline-for-the-ventilatory-management-of-acute-hypercapnic-respiratory-failure-in-adults/" },
+        {
+          "label": "BTS/ICS guideline: ventilatory management of acute hypercapnic respiratory failure",
+          "url": "https://www.brit-thoracic.org.uk/document-library/guidelines/niv/btsics-guideline-for-the-ventilatory-management-of-acute-hypercapnic-respiratory-failure-in-adults/"
+        },
         { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013 (dynamic hyperinflation)", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "none", "reduced": "both" },
+      "goodRun": { "en": "A good run: VT 460, rate 12, Ti 0.8 s, FiO2 about 35%. Give a bronchodilator when bronchospasm starts.", "hi": "अच्छा run: VT 460, rate 12, Ti 0.8 s, FiO2 लगभग 35%। Bronchospasm शुरू हो तो bronchodilator दें।" }
     },
     {
       "id": "asthma",
@@ -292,31 +369,36 @@
         "en": "Priya is 24 years old with asthma since childhood. Tonight her chest went silent and she became drowsy. She was intubated in the emergency room.",
         "hi": "प्रिया 24 साल की हैं और बचपन से asthma है। आज रात उनका सीना silent हो गया और वे ऊँघने लगीं। Emergency में उन्हें intubate किया गया।"
       },
-      "why": {
-        "en": "Her airways were too narrow to move air. A normal CO2 in a breathless asthmatic is a danger sign.",
-        "hi": "उनकी airways हवा चलाने के लिए बहुत सँकरी थीं। हाँफते asthma मरीज़ में सामान्य CO2 ख़तरे का संकेत है।"
-      },
+      "why": { "en": "Her airways were too narrow to move air. A normal CO2 in a breathless asthmatic is a danger sign.", "hi": "उनकी airways हवा चलाने के लिए बहुत सँकरी थीं। हाँफते asthma मरीज़ में सामान्य CO2 ख़तरे का संकेत है।" },
       "patient": {
-        "age": 24, "sex": "F", "heightCm": 158, "weightKg": 50,
+        "age": 24,
+        "sex": "F",
+        "heightCm": 158,
+        "weightKg": 50,
         "diagnosis": { "en": "Near-fatal acute severe asthma", "hi": "जानलेवा acute severe asthma" },
-        "hb": 13, "temp": 37.2, "volumeStatus": "low",
+        "hb": 13,
+        "temp": 37.2,
+        "volumeStatus": "low",
         "metabolic": { "hco3": 24, "lactate": 2.5 },
         "vco2": 190,
         "drive": { "rate": 30, "effort": 12, "sedation": 0.8 }
       },
-      "lung": { "c": 45, "r": 30, "flowLimited": true, "lowVQ": 0.12, "shunt": 0.1, "recruitable": 0.1, "deadSpace": 0.2, "upperInflection": 35 },
-      "start": { "mode": "acvc", "abg": { "PaCO2": 70 }, "settings": { "fio2": 60, "peep": 5, "vt": 450, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2, "pPeakHigh": 50 } },
+      "lung": { "c": 45, "r": 36, "flowLimited": true, "lowVQ": 0.12, "shunt": 0.1, "recruitable": 0.1, "deadSpace": 0.2, "upperInflection": 35 },
+      "start": { "mode": "acvc", "abg": { "PaCO2": 70 }, "settings": { "fio2": 60, "peep": 5, "vt": 450, "rr": 20, "ti": 1, "trigType": "flow", "trigFlow": 2, "pPeakHigh": 50 } },
       "goals": {
-        "spo2": [92, 95], "ph": [7.2, 7.45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [92, 95],
+        "ph": [7.2, 7.45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Use a low rate and a long expiratory time. Accept a high PaCO2.", "hi": "कम rate और लंबा expiratory time रखें। ऊँचा PaCO2 स्वीकार करें।" },
           { "en": "Check auto-PEEP with an expiratory hold. A falling BP may be trapped air.", "hi": "Expiratory hold से auto-PEEP जाँचें। गिरता BP फँसी हवा हो सकता है।" }
-        ]
+        ],
+        "plain": { "en": "Keep oxygen saturation 92 to 95%. Breathe slowly so trapped air can leave. Accept a high CO2.", "hi": "Oxygen saturation 92 से 95% रखें। धीमी साँसें दें ताकि फँसी हवा निकले। ऊँचा CO2 स्वीकार करें।" },
+        "detail": { "en": "SpO2 92 to 95%, pH 7.20 or more, plateau 30 or less, auto-PEEP low, rate 10 to 14.", "hi": "SpO2 92 से 95%, pH 7.20 या ज़्यादा, plateau 30 या कम, auto-PEEP कम, rate 10 से 14।" }
       },
-      "timeline": [
-        { "t": 600, "event": "bronchospasm", "note": { "en": "Bronchospasm worsens. Peak pressure jumps and expiratory flow slows.", "hi": "Bronchospasm बढ़ता है। Peak pressure उछलता है और expiratory flow धीमा होता है।" } },
-        { "t": 2400, "event": "improve", "note": { "en": "Steroids and bronchodilators start to work. Resistance falls.", "hi": "Steroids और bronchodilators असर करने लगे। Resistance घटता है।" } }
-      ],
+      "timeline": [{ "t": 2400, "event": "improve", "note": { "en": "Steroids and bronchodilators start to work. Resistance falls.", "hi": "Steroids और bronchodilators असर करने लगे। Resistance घटता है।" } }],
       "debrief": [
         { "en": "In asthma the danger is gas stacking breath after breath. Rate is the main lever.", "hi": "Asthma में ख़तरा है साँस दर साँस gas का जमा होना। Rate मुख्य lever है।" },
         { "en": "Peak pressure is high from resistance. Plateau and auto-PEEP show the real lung strain.", "hi": "Peak pressure resistance से ऊँचा है। Plateau और auto-PEEP फेफड़े का असली तनाव दिखाते हैं।" },
@@ -327,7 +409,9 @@
         { "label": "StewardMD protocol: acute asthma, adult", "url": "kb/clinical-protocols/acute-asthma-adult.json" },
         { "label": "GINA 2026 Strategy Report", "url": "https://ginasthma.org/wp-content/uploads/2026/05/GINA-2026-Strategy-Report-WMS.pdf" },
         { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013 (ventilation in severe asthma)", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "none", "reduced": "none" },
+      "goodRun": { "en": "A good run: VT 400, rate 12 to 14, Ti 0.8 s, PEEP 5, FiO2 40%, and a bronchodilator.", "hi": "अच्छा run: VT 400, rate 12 से 14, Ti 0.8 s, PEEP 5, FiO2 40%, और bronchodilator।" }
     },
     {
       "id": "metabolic-dka",
@@ -337,30 +421,36 @@
         "en": "Anjali is 22 years old with type 1 diabetes. She has severe DKA and kept vomiting. She was breathing 34 times a minute. Her GCS fell to 7, so she was intubated.",
         "hi": "अंजलि 22 साल की हैं और type 1 diabetes है। उन्हें गंभीर DKA है और बार बार उल्टी हो रही थी। वे मिनट में 34 बार साँस ले रही थीं। GCS 7 तक गिरा, इसलिए intubate किया गया।"
       },
-      "why": {
-        "en": "She could not protect her airway. Her lungs are fine; the acid is in her blood.",
-        "hi": "वे अपना airway नहीं बचा पा रही थीं। फेफड़े ठीक हैं; acid उनके ख़ून में है।"
-      },
+      "why": { "en": "She could not protect her airway. Her lungs are fine; the acid is in her blood.", "hi": "वे अपना airway नहीं बचा पा रही थीं। फेफड़े ठीक हैं; acid उनके ख़ून में है।" },
       "patient": {
-        "age": 22, "sex": "F", "heightCm": 162, "weightKg": 58,
+        "age": 22,
+        "sex": "F",
+        "heightCm": 162,
+        "weightKg": 58,
         "diagnosis": { "en": "Severe diabetic ketoacidosis with reduced consciousness", "hi": "घटी चेतना के साथ गंभीर diabetic ketoacidosis" },
-        "hb": 14, "temp": 36.9, "volumeStatus": "low",
-        "metabolic": { "hco3": 6, "lactate": 2.0 },
+        "hb": 14,
+        "temp": 36.9,
+        "volumeStatus": "low",
+        "metabolic": { "hco3": 6, "lactate": 2 },
         "vco2": 200,
         "drive": { "rate": 34, "effort": 10, "sedation": 0.7 }
       },
       "lung": { "c": 50, "r": 10, "flowLimited": false, "shunt": 0.06, "recruitable": 0.3, "deadSpace": 0.05, "upperInflection": 35 },
       "start": { "mode": "acvc", "abg": { "PaCO2": 18 }, "settings": { "fio2": 40, "peep": 5, "vt": 430, "rr": 14, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [94, 98], "paco2": [16, 26], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [94, 98],
+        "paco2": [16, 26],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "Match the minute ventilation she had before intubation. A normal rate is dangerous here.", "hi": "Intubation से पहले जितना minute ventilation था, उतना रखें। यहाँ सामान्य rate ख़तरनाक है।" },
           { "en": "Expected PaCO2 by Winter's formula is 1.5 x 6 + 8, about 17.", "hi": "Winter's formula से अपेक्षित PaCO2 है 1.5 x 6 + 8, लगभग 17।" }
-        ]
+        ],
+        "plain": { "en": "Keep oxygen saturation 94 to 98%. Keep breathing fast, as she did before the tube.", "hi": "Oxygen saturation 94 से 98% रखें। Tube से पहले की तरह तेज़ साँसें जारी रखें।" },
+        "detail": { "en": "SpO2 94 to 98%, PaCO2 16 to 26 to keep her respiratory compensation, rate about 30.", "hi": "SpO2 94 से 98%, respiratory compensation बनाए रखने को PaCO2 16 से 26, rate लगभग 30।" }
       },
-      "timeline": [
-        { "t": 7200, "event": "improve", "note": { "en": "Insulin and fluids are working. Bicarbonate slowly rises.", "hi": "Insulin और fluids असर कर रहे हैं। Bicarbonate धीरे धीरे बढ़ता है।" } }
-      ],
+      "timeline": [{ "t": 7200, "event": "improve", "note": { "en": "Insulin and fluids are working. Bicarbonate slowly rises.", "hi": "Insulin और fluids असर कर रहे हैं। Bicarbonate धीरे धीरे बढ़ता है।" } }],
       "debrief": [
         { "en": "Her fast breathing was keeping her alive. It blew off CO2 to balance the acid.", "hi": "उनकी तेज़ साँस उन्हें ज़िंदा रख रही थी। वह CO2 निकालकर acid को संतुलित कर रही थी।" },
         { "en": "At rate 14, PaCO2 climbs above 30 within minutes and pH falls below 7.0.", "hi": "Rate 14 पर PaCO2 मिनटों में 30 से ऊपर चढ़ता है और pH 7.0 से नीचे गिरता है।" },
@@ -371,24 +461,28 @@
         { "label": "StewardMD protocol: diabetic ketoacidosis", "url": "kb/clinical-protocols/diabetic-ketoacidosis.json" },
         { "label": "StewardMD protocol: rapid sequence intubation", "url": "kb/clinical-protocols/rapid-sequence-intubation.json" },
         { "label": "Narke lesson asr7-abg (Winter's formula)", "url": "narke/learn/lessons/asr7-abg.json" }
-      ]
+      ],
+      "exam": { "crackles": "none", "reduced": "none" },
+      "goodRun": { "en": "A good run: raise the rate to about 30 at once and lower FiO2 to 30%.", "hi": "अच्छा run: rate तुरंत लगभग 30 करें और FiO2 घटाकर 30% करें।" }
     },
     {
       "id": "ards",
-      "level": 4,
+      "level": 3,
       "title": { "en": "ARDS: a small, stiff lung", "hi": "ARDS: छोटा, सख़्त फेफड़ा" },
       "story": {
         "en": "Mr Khan is 38 years old, tall and heavy. Influenza turned into severe ARDS. Both lungs are white on X-ray. He arrived on 600 mL, set by actual weight.",
         "hi": "श्री ख़ान 38 साल के हैं, लंबे और भारी। Influenza गंभीर ARDS बन गया। X-ray पर दोनों फेफड़े सफ़ेद हैं। वे असली वज़न से set 600 mL पर आए।"
       },
-      "why": {
-        "en": "Leaky capillaries flooded his alveoli. Only a small part of the lung still takes air.",
-        "hi": "रिसती capillaries ने alveoli भर दिए। फेफड़े का छोटा हिस्सा ही अब हवा ले पाता है।"
-      },
+      "why": { "en": "Leaky capillaries flooded his alveoli. Only a small part of the lung still takes air.", "hi": "रिसती capillaries ने alveoli भर दिए। फेफड़े का छोटा हिस्सा ही अब हवा ले पाता है।" },
       "patient": {
-        "age": 38, "sex": "M", "heightCm": 175, "weightKg": 90,
+        "age": 38,
+        "sex": "M",
+        "heightCm": 175,
+        "weightKg": 90,
         "diagnosis": { "en": "Severe ARDS from influenza pneumonia", "hi": "Influenza pneumonia से गंभीर ARDS" },
-        "hb": 12, "temp": 38.8, "volumeStatus": "normal",
+        "hb": 12,
+        "temp": 38.8,
+        "volumeStatus": "normal",
         "metabolic": { "hco3": 20, "lactate": 2.4 },
         "vco2": 240,
         "drive": { "rate": 30, "effort": 10, "sedation": 0.8 }
@@ -396,13 +490,20 @@
       "lung": { "c": 34, "r": 14, "flowLimited": false, "shunt": 0.42, "recruitable": 0.6, "deadSpace": 0.28, "upperInflection": 30 },
       "start": { "mode": "acvc", "settings": { "fio2": 80, "peep": 5, "vt": 600, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [88, 95], "ph": [7.2, 7.45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [4, 8],
+        "spo2": [88, 95],
+        "ph": [7.2, 7.45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [4, 8],
         "other": [
           { "en": "Tidal volume 6 mL/kg predicted body weight, range 4 to 8. Here about 420 mL.", "hi": "Tidal volume 6 mL/kg predicted body weight, सीमा 4 से 8। यहाँ लगभग 420 mL।" },
           { "en": "Plateau below 30 cmH2O and driving pressure as low as possible, ideally 15 or less.", "hi": "Plateau 30 cmH2O से नीचे और driving pressure जितना कम हो सके, आदर्श रूप से 15 या कम।" },
           { "en": "Oxygenation goal PaO2 55 to 80 mmHg or SpO2 88 to 95%.", "hi": "Oxygenation लक्ष्य PaO2 55 से 80 mmHg या SpO2 88 से 95%।" },
           { "en": "Raise the rate up to about 35 and accept permissive hypercapnia.", "hi": "Rate लगभग 35 तक बढ़ाएँ और permissive hypercapnia स्वीकार करें।" }
-        ]
+        ],
+        "plain": { "en": "Keep oxygen saturation 88 to 95%. Give small, gentle breaths. Accept a higher CO2.", "hi": "Oxygen saturation 88 से 95% रखें। छोटी, हल्की साँसें दें। ज़्यादा CO2 स्वीकार करें।" },
+        "detail": { "en": "SpO2 88 to 95%, pH 7.20 or more, VT 6 mL/kg PBW, plateau below 30, driving pressure 15 or less.", "hi": "SpO2 88 से 95%, pH 7.20 या ज़्यादा, VT 6 mL/kg PBW, plateau 30 से कम, driving pressure 15 या कम।" },
+        "peepTable": "ardsnet"
       },
       "timeline": [
         { "t": 2400, "event": "disconnect", "note": { "en": "The circuit was opened for suction. PEEP was lost and alveoli collapsed again.", "hi": "Suction के लिए circuit खोला गया। PEEP चला गया और alveoli फिर बैठ गए।" } },
@@ -419,7 +520,9 @@
         { "label": "ARDS Network. Lower tidal volumes in ALI and ARDS. N Engl J Med 2000;342:1301-1308", "url": "https://doi.org/10.1056/NEJM200005043421801" },
         { "label": "Amato MBP, et al. Driving pressure and survival in ARDS. N Engl J Med 2015;372:747-755", "url": "https://doi.org/10.1056/NEJMsa1410639" },
         { "label": "ATS 2024 ARDS guideline", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10870893/" }
-      ]
+      ],
+      "exam": { "crackles": "bilateral", "reduced": "none" },
+      "goodRun": { "en": "A good run: VT 420, rate 32, PEEP 14 with FiO2 70%, Ti 0.7 s. Plateau stays below 30.", "hi": "अच्छा run: VT 420, rate 32, FiO2 70% के साथ PEEP 14, Ti 0.7 s। Plateau 30 से नीचे रहता है।" }
     },
     {
       "id": "trauma-contusion",
@@ -429,14 +532,16 @@
         "en": "Arjun is 30 years old. His motorbike hit a truck. He has broken left ribs and a bruised left lung. He lost blood and was intubated in the emergency room.",
         "hi": "अर्जुन 30 साल के हैं। उनकी motorbike truck से टकराई। बाईं पसलियाँ टूटी हैं और बायाँ फेफड़ा चोटिल है। ख़ून बहा और emergency में intubate किए गए।"
       },
-      "why": {
-        "en": "Bleeding into the lung causes shunt. Pain and broken ribs stop him breathing deeply.",
-        "hi": "फेफड़े में ख़ून आने से shunt होता है। दर्द और टूटी पसलियाँ गहरी साँस नहीं लेने देतीं।"
-      },
+      "why": { "en": "Bleeding into the lung causes shunt. Pain and broken ribs stop him breathing deeply.", "hi": "फेफड़े में ख़ून आने से shunt होता है। दर्द और टूटी पसलियाँ गहरी साँस नहीं लेने देतीं।" },
       "patient": {
-        "age": 30, "sex": "M", "heightCm": 178, "weightKg": 80,
+        "age": 30,
+        "sex": "M",
+        "heightCm": 178,
+        "weightKg": 80,
         "diagnosis": { "en": "Left pulmonary contusion with rib fractures and blood loss", "hi": "पसली fractures और ख़ून की कमी के साथ बाएँ फेफड़े का contusion" },
-        "hb": 9, "temp": 35.8, "volumeStatus": "low",
+        "hb": 9,
+        "temp": 35.8,
+        "volumeStatus": "low",
         "metabolic": { "hco3": 19, "lactate": 3.5 },
         "vco2": 220,
         "drive": { "rate": 26, "effort": 8, "sedation": 0.7 }
@@ -444,15 +549,20 @@
       "lung": { "c": 35, "r": 12, "flowLimited": false, "shunt": 0.22, "recruitable": 0.4, "deadSpace": 0.15, "upperInflection": 28 },
       "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 8, "vt": 480, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [92, 96],
+        "paco2": [35, 45],
+        "pplatMax": 30,
+        "drivingMax": 15,
+        "vtPerKg": [6, 8],
         "other": [
           { "en": "He is bleeding and dry. High PEEP and auto-PEEP can drop his BP.", "hi": "वे bleed कर रहे हैं और पानी कम है। ऊँचा PEEP और auto-PEEP BP गिरा सकते हैं।" },
           { "en": "Any sudden change: think DOPE, and look for a pneumothorax first.", "hi": "कोई भी अचानक बदलाव: DOPE सोचें, और पहले pneumothorax देखें।" }
-        ]
+        ],
+        "plain": { "en": "Bring oxygen saturation to 92 to 96%. Keep CO2 normal. Protect his blood pressure.", "hi": "Oxygen saturation 92 से 96% तक लाएँ। CO2 सामान्य रखें। उनका blood pressure बचाएँ।" },
+        "detail": { "en": "SpO2 92 to 96%, PaCO2 35 to 45, low PEEP while hypovolaemic, decompress a tension pneumothorax at once.", "hi": "SpO2 92 से 96%, PaCO2 35 से 45, ख़ून कम रहने तक PEEP कम, tension pneumothorax तुरंत decompress करें।" }
       },
       "timeline": [
-        { "t": 900, "event": "pneumothorax", "note": { "en": "A broken rib tears the lung. Air builds up under pressure in the left chest.", "hi": "टूटी पसली फेफड़े को फाड़ती है। बाएँ सीने में दबाव से हवा भरती है।" } },
-        { "t": 1500, "event": "fluidBolus", "note": { "en": "Blood transfusion runs in. His volume status improves.", "hi": "Blood transfusion चढ़ रहा है। उनका volume status सुधरता है।" } },
+        { "t": 900, "event": "pneumothorax", "note": { "en": "A broken rib tears the lung. Air builds up under pressure in the left chest.", "hi": "टूटी पसली फेफड़े को फाड़ती है। बाएँ सीने में दबाव से हवा भरती है।" }, "side": "left" },
         { "t": 2700, "event": "secretions", "note": { "en": "Blood and secretions collect in the airway.", "hi": "Airway में ख़ून और secretions जमा होते हैं।" } }
       ],
       "debrief": [
@@ -466,7 +576,9 @@
         { "label": "StewardMD protocol: acute respiratory failure, NIV and HFNC (chest trauma)", "url": "kb/clinical-protocols/acute-respiratory-failure-niv-hfnc.json" },
         { "label": "StewardMD protocol: ARDS lung-protective ventilation", "url": "kb/clinical-protocols/ards-lung-protective-ventilation.json" },
         { "label": "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd ed. McGraw Hill 2013 (barotrauma)", "url": "" }
-      ]
+      ],
+      "exam": { "crackles": "left", "reduced": "left", "ptxSide": "left" },
+      "goodRun": { "en": "A good run: VT 440, rate 22, PEEP 5, FiO2 80%. Decompress the pneumothorax fast and give blood.", "hi": "अच्छा run: VT 440, rate 22, PEEP 5, FiO2 80%। Pneumothorax जल्दी decompress करें और blood दें।" }
     }
   ]
 }

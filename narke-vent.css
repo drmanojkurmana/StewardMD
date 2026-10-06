@@ -417,6 +417,10 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-parts li { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 46px; }
 .nrk-root .vl-pnote { font-size: 12.5px; color: var(--sp-mut); }
 .nrk-root .vl-pen b { color: var(--nk-bad); }
+/* a score part this run did not test: label and "Not scored" on one line, the reason under them */
+.nrk-root .vl-parts li.vl-pna { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
+.nrk-root .vl-pna b { grid-column: 2; grid-row: 1; font-size: 12.5px; font-weight: 500; color: var(--sp-mut); white-space: nowrap; }
+.nrk-root .vl-pna .vl-pnote { grid-column: 1 / -1; grid-row: 2; }
 /* the coach sits where the toast would; the toast moves to the top while a tutorial runs */
 .nrk-root .vl-coach ~ .vl-toast { bottom: auto; top: calc(env(safe-area-inset-top, 0px) + 116px); }
 .nrk-root .vl-rr { display: flex; align-items: baseline; gap: 6px; margin-top: 4px; }

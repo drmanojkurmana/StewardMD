@@ -1766,8 +1766,15 @@
      "highlight": [
       "abg"
      ]
+    },
+    {
+     "say": {
+      "en": "He is back on his start settings. Nothing about him has changed.",
+      "hi": "वे फिर शुरू की settings पर हैं। उनमें कुछ नहीं बदला।"
+     }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "id": "fio2-peep",
@@ -1778,8 +1785,8 @@
    "steps": [
     {
      "say": {
-      "en": "Mrs Das has collapsed lung bases after abdominal surgery. Her oxygen is low.",
-      "hi": "पेट की सर्जरी के बाद श्रीमती दास के फेफड़ों के निचले हिस्से बैठे हैं। ऑक्सीजन कम है।"
+      "en": "Mrs Das has collapsed lung bases after abdominal surgery. Her oxygen is low. FiO2 and PEEP are the oxygen dials.",
+      "hi": "श्रीमती दास के पेट के ऑपरेशन के बाद फेफड़ों के निचले हिस्से बंद हैं। उनकी oxygen कम है। FiO2 और PEEP oxygen के dials हैं।"
      },
      "do": {
       "scenario": "postop-atelectasis"
@@ -1787,8 +1794,8 @@
     },
     {
      "say": {
-      "en": "First make the tidal volume safe. Her predicted weight is about 48 kg, so use 330 mL, about 7 mL/kg.",
-      "hi": "पहले tidal volume सुरक्षित करें। उनका predicted weight लगभग 48 kg है, इसलिए 330 mL, लगभग 7 mL/kg रखें।"
+      "en": "First make each breath safe for her height. Set tidal volume to 330 mL, about 7 mL/kg.",
+      "hi": "पहले हर साँस उनकी लंबाई के हिसाब से सुरक्षित करें। Tidal volume 330 mL करें, लगभग 7 mL/kg।"
      },
      "do": {
       "key": "vt",
@@ -1801,8 +1808,18 @@
     },
     {
      "say": {
-      "en": "First, more oxygen in the gas. Raise FiO2 to 80%.",
-      "hi": "पहले, गैस में ज़्यादा ऑक्सीजन। FiO2 को 80% करें।"
+      "en": "Smaller breaths clear less CO2. Raise the rate to 22 so the air moved each minute stays the same and CO2 stays near normal.",
+      "hi": "छोटी साँसें कम CO2 निकालती हैं। Rate 22 करें ताकि हर मिनट की हवा उतनी ही रहे और CO2 लगभग सामान्य रहे।"
+     },
+     "do": {
+      "key": "rr",
+      "to": 22
+     }
+    },
+    {
+     "say": {
+      "en": "Now the oxygen dials. Raise FiO2 to 80%.",
+      "hi": "अब oxygen के dials। FiO2 80% करें।"
      },
      "do": {
       "key": "fio2",
@@ -1815,8 +1832,8 @@
     },
     {
      "say": {
-      "en": "It helped a little. Blood still flows past collapsed alveoli that get no air. That is shunt.",
-      "hi": "थोड़ी मदद हुई। ख़ून अब भी बिना हवा वाले बैठे alveoli से गुज़रता है। यही shunt है।"
+      "en": "It helped only a little. Blood still flows past closed air sacs that get no air. That is shunt.",
+      "hi": "इससे थोड़ी ही मदद मिली। ख़ून अब भी बिना हवा वाली बंद थैलियों से गुज़रता है। यही shunt है।"
      },
      "highlight": [
       "shunt"
@@ -1824,8 +1841,8 @@
     },
     {
      "say": {
-      "en": "Now raise PEEP to 10. It holds the air sacs open at the end of each breath.",
-      "hi": "अब PEEP 10 करें। यह हर साँस के अंत में हवा की थैलियाँ खुली रखता है।"
+      "en": "Raise PEEP to 10. It holds the air sacs open at the end of each breath.",
+      "hi": "PEEP 10 करें। यह हर साँस के अंत में हवा की थैलियों को खुला रखता है।"
      },
      "do": {
       "key": "peep",
@@ -1838,18 +1855,20 @@
     },
     {
      "say": {
-      "en": "Reopened alveoli take part again. PaO2 rises more than FiO2 alone could do.",
-      "hi": "खुले alveoli फिर काम में आते हैं। PaO2 अकेले FiO2 से ज़्यादा बढ़ता है।"
+      "en": "Draw a blood gas now. PaO2 rose far more than FiO2 alone could do.",
+      "hi": "अब blood gas भेजें। PaO2 उतना बढ़ा जितना अकेला FiO2 नहीं कर सकता।"
+     },
+     "do": {
+      "abg": true
      },
      "highlight": [
-      "pao2",
-      "spo2"
+      "abg"
      ]
     },
     {
      "say": {
-      "en": "Now we can bring FiO2 down to 50%. Less oxygen means less oxygen injury.",
-      "hi": "अब FiO2 को 50% तक घटा सकते हैं। कम ऑक्सीजन मतलब कम oxygen चोट।"
+      "en": "Now bring FiO2 down to 50%. Less oxygen means less oxygen injury.",
+      "hi": "अब FiO2 घटाकर 50% करें। कम oxygen का मतलब oxygen से कम चोट।"
      },
      "do": {
       "key": "fio2",
@@ -1862,12 +1881,112 @@
     },
     {
      "say": {
-      "en": "Watch the BP. PEEP raises chest pressure and can slow blood returning to the heart.",
-      "hi": "BP देखें। PEEP सीने का दबाव बढ़ाता है और दिल तक लौटते ख़ून को धीमा कर सकता है।"
+      "en": "Where she is now: VT 330, rate 22, PEEP 10, FiO2 50%. SpO2 is on target and CO2 is normal.",
+      "hi": "अब वे कहाँ हैं: VT 330, rate 22, PEEP 10, FiO2 50%। SpO2 लक्ष्य पर है और CO2 सामान्य है।"
+     },
+     "highlight": [
+      "spo2",
+      "abg"
+     ]
+    },
+    {
+     "say": {
+      "en": "The trade off: PEEP raised chest pressure, so her BP fell a little. Always check BP after PEEP.",
+      "hi": "बदले में: PEEP से छाती का दबाव बढ़ा, इसलिए BP थोड़ा गिरा। PEEP के बाद हमेशा BP देखें।"
      },
      "highlight": [
       "map",
       "sbp"
+     ]
+    }
+   ],
+   "level": 1
+  },
+  {
+   "id": "first-alarm",
+   "level": 1,
+   "title": {
+    "en": "Your first alarm",
+    "hi": "आपकी पहली alarm"
+   },
+   "steps": [
+    {
+     "say": {
+      "en": "This is Mr Rao again. His lungs are healthy. Today you will meet your first alarm.",
+      "hi": "यह फिर श्री राव हैं। उनके फेफड़े स्वस्थ हैं। आज आप अपनी पहली alarm देखेंगे।"
+     },
+     "do": {
+      "scenario": "postop-normal"
+     }
+    },
+    {
+     "say": {
+      "en": "Peak pressure is the push each breath needs. It is about 18 now.",
+      "hi": "Peak pressure वह धक्का है जो हर साँस को चाहिए। अभी यह लगभग 18 है।"
+     },
+     "highlight": [
+      "ppeak"
+     ]
+    },
+    {
+     "say": {
+      "en": "Set the high pressure alarm to 25. It will sound if a breath needs much more push.",
+      "hi": "High pressure alarm 25 पर set करें। किसी साँस को बहुत ज़्यादा धक्का चाहिए तो यह बजेगी।"
+     },
+     "do": {
+      "key": "pPeakHigh",
+      "to": 25
+     }
+    },
+    {
+     "say": {
+      "en": "Mucus has built up in his tube. Watch the peak pressure climb.",
+      "hi": "उनकी tube में बलगम जमा हो गया है। Peak pressure बढ़ते देखें।"
+     },
+     "do": {
+      "event": "secretions",
+      "factor": 3
+     },
+     "expect": {
+      "key": "ppeak",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "The alarm sounds. What it means: the tube is narrower, so each breath needs more push.",
+      "hi": "Alarm बजती है। मतलब: tube सँकरी है, इसलिए हर साँस को ज़्यादा धक्का चाहिए।"
+     },
+     "highlight": [
+      "alarms"
+     ]
+    },
+    {
+     "say": {
+      "en": "Look at the patient first. His chest moves less and you hear gurgling in the tube.",
+      "hi": "पहले मरीज़ को देखें। उनकी छाती कम हिलती है और tube में गुड़गुड़ सुनाई देती है।"
+     }
+    },
+    {
+     "say": {
+      "en": "What to try: suction the tube.",
+      "hi": "क्या करें: tube को suction करें।"
+     },
+     "do": {
+      "action": "suction"
+     },
+     "expect": {
+      "key": "ppeak",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "The peak falls and the alarm stops. He is back where he started.",
+      "hi": "Peak गिरता है और alarm रुक जाती है। वे वहीं लौट आए जहाँ से शुरू हुए थे।"
+     },
+     "highlight": [
+      "ppeak"
      ]
     }
    ]
@@ -1961,8 +2080,15 @@
       "key": "pplat",
       "direction": "down"
      }
+    },
+    {
+     "say": {
+      "en": "Mr Rao is back on his start settings: VT 450 and rate 14.",
+      "hi": "श्री राव फिर शुरू की settings पर हैं: VT 450 और rate 14।"
+     }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "id": "pc-vs-vc",
@@ -2055,8 +2181,29 @@
      "highlight": [
       "veLow"
      ]
+    },
+    {
+     "say": {
+      "en": "Set it back to 15. Her breaths return to a safe size.",
+      "hi": "इसे फिर 15 करें। उनकी साँसें सुरक्षित आकार में लौटती हैं।"
+     },
+     "do": {
+      "key": "pinsp",
+      "to": 15
+     },
+     "expect": {
+      "key": "vte",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "She stays in pressure control at 15 above PEEP. Watch her volumes from now on.",
+      "hi": "वे PEEP के ऊपर 15 पर pressure control में रहती हैं। अब से उनके volume पर नज़र रखें।"
+     }
     }
-   ]
+   ],
+   "level": 2
   },
   {
    "id": "waveforms",
@@ -2135,8 +2282,15 @@
      "highlight": [
       "wave-volume"
      ]
+    },
+    {
+     "say": {
+      "en": "Mr Singh is now on rate 12. Less air is trapped each breath.",
+      "hi": "श्री सिंह अब rate 12 पर हैं। हर साँस में कम हवा फँसती है।"
+     }
     }
-   ]
+   ],
+   "level": 2
   },
   {
    "id": "abg-adjust",
@@ -2220,8 +2374,15 @@
       "en": "The rule: CO2 problems, change rate or volume. Oxygen problems, change FiO2 or PEEP.",
       "hi": "नियम: CO2 की समस्या में rate या volume बदलें। ऑक्सीजन की समस्या में FiO2 या PEEP।"
      }
+    },
+    {
+     "say": {
+      "en": "Anjali stays on rate 30 and FiO2 30%. Her pH is climbing back.",
+      "hi": "अंजलि rate 30 और FiO2 30% पर रहती हैं। उनका pH वापस बढ़ रहा है।"
+     }
     }
-   ]
+   ],
+   "level": 3
   },
   {
    "id": "ards",
@@ -2250,8 +2411,8 @@
     },
     {
      "say": {
-      "en": "Look at plateau and driving pressure. Driving pressure is far above 15, and plateau is close to 30.",
-      "hi": "Plateau और driving pressure देखें। Driving pressure 15 से बहुत ऊपर है, और plateau 30 के क़रीब है।"
+      "en": "Look at plateau and driving pressure. Driving pressure = plateau minus PEEP. It is the stretch on the open lung. Keep it 15 or less. His is far above 15.",
+      "hi": "Plateau और driving pressure देखें। Driving pressure = plateau minus PEEP। यह खुले फेफड़े का खिंचाव है। इसे 15 या कम रखें। उनका 15 से बहुत ऊपर है।"
      },
      "highlight": [
       "pplat",
@@ -2320,8 +2481,15 @@
       "spo2",
       "paco2"
      ]
+    },
+    {
+     "say": {
+      "en": "Mr Khan is now on VT 420, rate 28 and PEEP 12. Oxygen is better and the lung is protected.",
+      "hi": "श्री ख़ान अब VT 420, rate 28 और PEEP 12 पर हैं। Oxygen बेहतर है और फेफड़ा सुरक्षित है।"
+     }
     }
-   ]
+   ],
+   "level": 3
   },
   {
    "id": "copd-autopeep",
@@ -2388,12 +2556,12 @@
     },
     {
      "say": {
-      "en": "Third: lower the rate to 16. Each breath now has much more time to empty.",
-      "hi": "तीसरा: rate 16 करें। हर साँस को खाली होने का बहुत ज़्यादा समय मिलता है।"
+      "en": "Third: lower the rate to 12. Each breath now has much more time to empty.",
+      "hi": "तीसरा: rate घटाकर 12 करें। अब हर साँस को खाली होने का बहुत ज़्यादा समय मिलता है।"
      },
      "do": {
       "key": "rr",
-      "to": 16
+      "to": 12
      },
      "expect": {
       "key": "autoPeep",
@@ -2422,8 +2590,15 @@
       "spo2",
       "fio2"
      ]
+    },
+    {
+     "say": {
+      "en": "He is now on Ti 0.8 s, VT 450 and rate 12. Less air is trapped and BP is better.",
+      "hi": "अब वे Ti 0.8 s, VT 450 और rate 12 पर हैं। कम हवा फँसती है और BP बेहतर है।"
+     }
     }
-   ]
+   ],
+   "level": 2
   }
  ],
  "alarms": {
@@ -2487,6 +2662,10 @@
    "fix": {
     "en": "Treat the cause found. Suction a blocked tube, treat bronchospasm, decompress a tension pneumothorax.",
     "hi": "जो कारण मिले उसका इलाज करें। बंद tube को suction करें, bronchospasm का इलाज करें, tension pneumothorax को decompress करें।"
+   },
+   "plain": {
+    "en": "Each breath needs too much push. Look for a blocked tube, mucus, tight airways or a collapsed lung.",
+    "hi": "हर साँस को बहुत धक्का चाहिए। बंद tube, mucus, सँकरी airways या बैठा फेफड़ा देखें।"
    }
   },
   "pPlatHigh": {
@@ -2541,6 +2720,10 @@
    "fix": {
     "en": "Lower the tidal volume towards 4 to 6 mL/kg so plateau stays 30 or less. Raise the rate to hold pH. Treat any pneumothorax.",
     "hi": "Tidal volume 4 से 6 mL/kg की ओर घटाएँ ताकि plateau 30 या कम रहे। pH बनाए रखने के लिए rate बढ़ाएँ। कोई pneumothorax हो तो इलाज करें।"
+   },
+   "plain": {
+    "en": "The lung is stretched too far at the end of the breath. Give smaller breaths.",
+    "hi": "साँस के अंत में फेफड़ा बहुत खिंचा है। छोटी साँसें दें।"
    }
   },
   "vtLow": {
@@ -2595,6 +2778,10 @@
    "fix": {
     "en": "Fix the leak or the obstruction. In pressure control, raise the pressure only within plateau limits.",
     "hi": "Leak या रुकावट ठीक करें। Pressure control में दबाव केवल plateau सीमा के भीतर बढ़ाएँ।"
+   },
+   "plain": {
+    "en": "Each breath is smaller than it should be. Check for a leak or a breath stopped by the pressure limit.",
+    "hi": "हर साँस जितनी चाहिए उससे छोटी है। Leak या pressure limit से रुकी साँस देखें।"
    }
   },
   "veLow": {
@@ -2641,6 +2828,10 @@
    "fix": {
     "en": "Fix any leak. Then give more support: a backup rate, more pressure support, or a controlled mode.",
     "hi": "कोई leak हो तो ठीक करें। फिर ज़्यादा support दें: backup rate, ज़्यादा pressure support, या controlled mode।"
+   },
+   "plain": {
+    "en": "Too little air moves each minute. CO2 will build up.",
+    "hi": "हर मिनट बहुत कम हवा चल रही है। CO2 बढ़ेगा।"
    }
   },
   "veHigh": {
@@ -2687,6 +2878,10 @@
    "fix": {
     "en": "Treat the cause. Never cut ventilation that is compensating for metabolic acidosis.",
     "hi": "कारण का इलाज करें। Metabolic acidosis की भरपाई करती ventilation को कभी न घटाएँ।"
+   },
+   "plain": {
+    "en": "A lot of air moves each minute. The patient may be breathing fast or the settings are high.",
+    "hi": "हर मिनट बहुत हवा चल रही है। मरीज़ तेज़ साँस ले रहा हो या settings ऊँची हों।"
    }
   },
   "apnoea": {
@@ -2733,6 +2928,10 @@
    "fix": {
     "en": "Switch to a mode with a set backup rate until the drive returns.",
     "hi": "जब तक साँस की इच्छा न लौटे, set backup rate वाले mode पर जाएँ।"
+   },
+   "plain": {
+    "en": "No breaths for too long. The machine starts backup breaths.",
+    "hi": "बहुत देर से कोई साँस नहीं। मशीन backup साँसें शुरू करती है।"
    }
   },
   "rrHigh": {
@@ -2779,6 +2978,10 @@
    "fix": {
     "en": "Match support to demand and treat the cause. Fix the setting before adding sedation.",
     "hi": "ज़रूरत के अनुसार support दें और कारण का इलाज करें। Sedation बढ़ाने से पहले setting ठीक करें।"
+   },
+   "plain": {
+    "en": "The patient is breathing very fast. Look for distress, pain, fever or low oxygen.",
+    "hi": "मरीज़ बहुत तेज़ साँस ले रहा है। बेचैनी, दर्द, बुखार या कम oxygen देखें।"
    }
   },
   "fio2Low": {
@@ -2821,6 +3024,10 @@
    "fix": {
     "en": "Restore oxygen supply. Keep a bag and a full cylinder at every ventilated bed.",
     "hi": "Oxygen supply बहाल करें। हर ventilated bed पर bag और भरा cylinder रखें।"
+   },
+   "plain": {
+    "en": "Less oxygen is reaching the patient than you set. Check the oxygen supply.",
+    "hi": "जितनी oxygen set की, उससे कम पहुँच रही है। Oxygen supply जाँचें।"
    }
   },
   "fio2High": {
@@ -2859,6 +3066,10 @@
    "fix": {
     "en": "Restore air supply and recalibrate the sensor. Avoid long hours of FiO2 above 60%.",
     "hi": "Air supply बहाल करें और sensor calibrate करें। लंबे घंटों तक 60% से ज़्यादा FiO2 से बचें।"
+   },
+   "plain": {
+    "en": "More oxygen is being given than you set.",
+    "hi": "जितनी oxygen set की, उससे ज़्यादा दी जा रही है।"
    }
   },
   "peepLow": {
@@ -2897,6 +3108,10 @@
    "fix": {
     "en": "Seal the leak. Lost PEEP lets alveoli collapse, so recheck oxygenation afterwards.",
     "hi": "Leak बंद करें। PEEP खोने से alveoli बंद होती हैं, इसलिए बाद में oxygenation दोबारा देखें।"
+   },
+   "plain": {
+    "en": "Pressure at the end of breathing out is lower than set. Look for a leak or a disconnection.",
+    "hi": "साँस छोड़ने के अंत का दबाव set से कम है। Leak या disconnection देखें।"
    }
   },
   "peepHigh": {
@@ -2915,8 +3130,8 @@
     }
    ],
    "clue": {
-    "en": "The baseline sits above set PEEP. Expiratory flow may not reach zero.",
-    "hi": "Baseline set PEEP से ऊपर रहती है। Expiratory flow शून्य तक नहीं पहुँच सकता।"
+    "en": "Total PEEP is above set PEEP. Expiratory flow does not reach zero before the next breath.",
+    "hi": "Total PEEP set PEEP से ऊपर है। अगली साँस से पहले expiratory flow शून्य तक नहीं पहुँचता।"
    },
    "steps": [
     {
@@ -2935,6 +3150,10 @@
    "fix": {
     "en": "Clear the expiratory path. If gas is trapped, lengthen expiratory time.",
     "hi": "Expiratory रास्ता साफ़ करें। Gas फँसी हो तो expiratory समय बढ़ाएँ।"
+   },
+   "plain": {
+    "en": "Pressure at the end of breathing out is above what you set. Air may be trapped.",
+    "hi": "साँस छोड़ने के अंत का दबाव set से ऊपर है। हवा फँसी हो सकती है।"
    }
   },
   "disconnect": {
@@ -2981,6 +3200,10 @@
    "fix": {
     "en": "Reconnect or re-secure the airway. Then recheck oxygenation, as PEEP was lost.",
     "hi": "फिर से जोड़ें या airway दोबारा सुरक्षित करें। फिर oxygenation देखें, क्योंकि PEEP खो गया था।"
+   },
+   "plain": {
+    "en": "The patient is off the ventilator. Reconnect now, or bag with oxygen.",
+    "hi": "मरीज़ ventilator से अलग है। तुरंत जोड़ें, या oxygen से bag करें।"
    }
   },
   "autoPeep": {
@@ -3027,6 +3250,14 @@
    "fix": {
     "en": "Lengthen expiration: lower rate, smaller tidal volume, shorter Ti. Treat bronchospasm.",
     "hi": "Expiration लंबा करें: rate कम, tidal volume छोटा, Ti छोटा। Bronchospasm का इलाज करें।"
+   },
+   "plain": {
+    "en": "Air is trapped because there is too little time to breathe out. It can drop BP.",
+    "hi": "साँस छोड़ने का समय कम है, इसलिए हवा फँस रही है। इससे BP गिर सकता है।"
+   },
+   "aprv": {
+    "en": "In APRV, short T low keeps the lung open. Set T low so expiratory flow ends at 50 to 75% of peak.",
+    "hi": "APRV में छोटा T low फेफड़े को खुला रखता है। T low ऐसा रखें कि expiratory flow peak के 50 से 75% पर रुके।"
    }
   },
   "dyssync": {
@@ -3073,6 +3304,212 @@
    "fix": {
     "en": "Match the machine to the patient. Fix the setting before adding sedation.",
     "hi": "मशीन को मरीज़ के अनुसार ढालें। Sedation बढ़ाने से पहले setting ठीक करें।"
+   },
+   "plain": {
+    "en": "The patient and the machine are out of step. Look at the patient, then the waves.",
+    "hi": "मरीज़ और मशीन का तालमेल नहीं है। पहले मरीज़ देखें, फिर लहरें।"
+   }
+  },
+  "peepSetHigh": {
+   "plain": {
+    "en": "You raised PEEP. High chest pressure lets less blood return to the heart, so BP falls. Lower PEEP.",
+    "hi": "आपने PEEP ज़्यादा किया है। छाती के अंदर दबाव बढ़ने से खून दिल तक कम लौटता है, BP गिरता है। PEEP घटाएँ।"
+   },
+   "causes": [
+    {
+     "en": "PEEP set higher than this circulation can take.",
+     "hi": "PEEP इतना ऊँचा set है जितना यह circulation सह नहीं सकता।"
+    },
+    {
+     "en": "A dry patient: a little chest pressure drops BP a lot.",
+     "hi": "पानी की कमी वाला मरीज़: थोड़ा दबाव भी BP बहुत गिराता है।"
+    }
+   ],
+   "clue": {
+    "en": "BP fell soon after a PEEP change. Total PEEP equals set PEEP, so no air is trapped.",
+    "hi": "PEEP बदलने के तुरंत बाद BP गिरा। Total PEEP set PEEP के बराबर है, तो हवा नहीं फँसी।"
+   },
+   "steps": [
+    {
+     "en": "Look at the patient and the BP first.",
+     "hi": "पहले मरीज़ और BP देखें।"
+    },
+    {
+     "en": "Lower PEEP toward its start value and watch BP.",
+     "hi": "PEEP को शुरू के मान की ओर घटाएँ और BP देखें।"
+    },
+    {
+     "en": "If oxygen then falls, raise FiO2. If the patient is dry, give fluid.",
+     "hi": "फिर oxygen गिरे तो FiO2 बढ़ाएँ। पानी कम हो तो fluid दें।"
+    }
+   ],
+   "fix": {
+    "en": "Lower PEEP. Healthy lungs gain little from high PEEP.",
+    "hi": "PEEP घटाएँ। स्वस्थ फेफड़ों को ऊँचे PEEP से कम फ़ायदा है।"
+   }
+  },
+  "spo2Low": {
+   "plain": {
+    "en": "Oxygen in the blood is below the target. Look at the patient, then raise FiO2.",
+    "hi": "ख़ून में oxygen लक्ष्य से कम है। मरीज़ देखें, फिर FiO2 बढ़ाएँ।"
+   },
+   "causes": [
+    {
+     "en": "Collapsed or flooded lung: blood passes air sacs with no air.",
+     "hi": "बैठा या भरा फेफड़ा: ख़ून बिना हवा वाली थैलियों से गुज़रता है।"
+    },
+    {
+     "en": "Too little oxygen set, or the oxygen supply failed.",
+     "hi": "बहुत कम oxygen set है, या oxygen supply बंद हुई।"
+    },
+    {
+     "en": "A blocked tube, a pneumothorax or a disconnection.",
+     "hi": "बंद tube, pneumothorax या disconnection।"
+    }
+   ],
+   "clue": {
+    "en": "SpO2 below target with a good trace. Check that the probe reads well.",
+    "hi": "अच्छे trace के साथ SpO2 लक्ष्य से कम। देखें probe ठीक पढ़ रहा है।"
+   },
+   "steps": [
+    {
+     "en": "Look at the patient: is the chest moving, what colour are the lips?",
+     "hi": "मरीज़ देखें: छाती चल रही है, होंठ किस रंग के हैं?"
+    },
+    {
+     "en": "Check the tube and circuit are connected.",
+     "hi": "देखें tube और circuit जुड़े हैं।"
+    },
+    {
+     "en": "Raise FiO2, then think about PEEP.",
+     "hi": "FiO2 बढ़ाएँ, फिर PEEP के बारे में सोचें।"
+    }
+   ],
+   "fix": {
+    "en": "Raise FiO2 now, then find and treat the cause.",
+    "hi": "अभी FiO2 बढ़ाएँ, फिर कारण ढूँढकर इलाज करें।"
+   }
+  },
+  "mapLow": {
+   "plain": {
+    "en": "Blood pressure is low. High chest pressure, trapped air, bleeding or drugs can cause it.",
+    "hi": "Blood pressure कम है। छाती का ऊँचा दबाव, फँसी हवा, bleeding या दवाएँ इसका कारण हो सकती हैं।"
+   },
+   "causes": [
+    {
+     "en": "High PEEP or trapped air squeezing blood away from the heart.",
+     "hi": "ऊँचा PEEP या फँसी हवा दिल तक ख़ून कम पहुँचने देती है।"
+    },
+    {
+     "en": "Too little blood volume: bleeding or dehydration.",
+     "hi": "ख़ून का volume कम: bleeding या पानी की कमी।"
+    },
+    {
+     "en": "Tension pneumothorax or deep sedation.",
+     "hi": "Tension pneumothorax या गहरा sedation।"
+    }
+   ],
+   "clue": {
+    "en": "Mean BP below 65 on the monitor.",
+    "hi": "मॉनिटर पर औसत BP 65 से कम।"
+   },
+   "steps": [
+    {
+     "en": "Check the patient and the BP reading.",
+     "hi": "मरीज़ और BP reading जाँचें।"
+    },
+    {
+     "en": "Look for trapped air and high PEEP.",
+     "hi": "फँसी हवा और ऊँचा PEEP देखें।"
+    },
+    {
+     "en": "Give fluid if dry, blood if bleeding.",
+     "hi": "पानी कम हो तो fluid, bleeding हो तो blood दें।"
+    }
+   ],
+   "fix": {
+    "en": "Treat the cause: lower chest pressure, release trapped air, give fluid or blood.",
+    "hi": "कारण का इलाज करें: छाती का दबाव घटाएँ, फँसी हवा निकालें, fluid या blood दें।"
+   }
+  },
+  "hrHigh": {
+   "plain": {
+    "en": "The heart is beating fast. Low oxygen, high CO2, pain, fever or low BP drive it.",
+    "hi": "दिल तेज़ धड़क रहा है। कम oxygen, ज़्यादा CO2, दर्द, बुखार या कम BP इसका कारण हैं।"
+   },
+   "causes": [
+    {
+     "en": "Low oxygen or high CO2.",
+     "hi": "कम oxygen या ज़्यादा CO2।"
+    },
+    {
+     "en": "Low blood pressure or blood loss.",
+     "hi": "कम blood pressure या ख़ून बहना।"
+    },
+    {
+     "en": "Pain, fever or too light sedation.",
+     "hi": "दर्द, बुखार या बहुत हल्का sedation।"
+    }
+   ],
+   "clue": {
+    "en": "Heart rate above 120 on the monitor.",
+    "hi": "मॉनिटर पर heart rate 120 से ऊपर।"
+   },
+   "steps": [
+    {
+     "en": "Check SpO2 and BP.",
+     "hi": "SpO2 और BP जाँचें।"
+    },
+    {
+     "en": "Look for pain, fever and distress.",
+     "hi": "दर्द, बुखार और बेचैनी देखें।"
+    },
+    {
+     "en": "Draw a blood gas.",
+     "hi": "Blood gas भेजें।"
+    }
+   ],
+   "fix": {
+    "en": "Treat the cause, not the number.",
+    "hi": "संख्या नहीं, कारण का इलाज करें।"
+   }
+  },
+  "hrLow": {
+   "plain": {
+    "en": "The heart is beating slowly. Severe low oxygen does this and is an emergency.",
+    "hi": "दिल धीमा धड़क रहा है। बहुत कम oxygen से ऐसा होता है, यह emergency है।"
+   },
+   "causes": [
+    {
+     "en": "Severe hypoxaemia.",
+     "hi": "बहुत कम oxygen (गंभीर hypoxaemia)।"
+    },
+    {
+     "en": "Deep sedation or drugs.",
+     "hi": "गहरा sedation या दवाएँ।"
+    }
+   ],
+   "clue": {
+    "en": "Heart rate below 50, often with falling SpO2.",
+    "hi": "Heart rate 50 से कम, अक्सर गिरती SpO2 के साथ।"
+   },
+   "steps": [
+    {
+     "en": "Give 100% oxygen now.",
+     "hi": "अभी 100% oxygen दें।"
+    },
+    {
+     "en": "Check the tube and circuit.",
+     "hi": "Tube और circuit जाँचें।"
+    },
+    {
+     "en": "Call for help early.",
+     "hi": "जल्दी मदद बुलाएँ।"
+    }
+   ],
+   "fix": {
+    "en": "Give 100% oxygen and fix the airway first.",
+    "hi": "100% oxygen दें और पहले airway ठीक करें।"
    }
   }
  },
@@ -3362,7 +3799,7 @@
     "HCO3": 25.8,
     "SaO2": 99,
     "BE": -0.4,
-    "lactate": 1.0,
+    "lactate": 1,
     "FiO2": 0.5
    },
    "spo2": 99,
@@ -3373,26 +3810,26 @@
     },
     "options": [
      {
-      "en": "Acute respiratory acidosis",
-      "hi": "Acute respiratory acidosis (अचानक साँस से अम्लता)"
+      "en": "Too much CO2: breathing is not clearing it (acute respiratory acidosis)",
+      "hi": "बहुत ज़्यादा CO2: साँस उसे निकाल नहीं पा रही (acute respiratory acidosis)"
      },
      {
-      "en": "Metabolic acidosis",
-      "hi": "Metabolic acidosis (चयापचय से अम्लता)"
+      "en": "Acid from the body's chemistry (metabolic acidosis)",
+      "hi": "शरीर के रसायन से अम्ल (metabolic acidosis)"
      },
      {
-      "en": "Respiratory alkalosis",
-      "hi": "Respiratory alkalosis (ज़्यादा साँस से क्षारता)"
+      "en": "Too little CO2 (respiratory alkalosis)",
+      "hi": "बहुत कम CO2 (respiratory alkalosis)"
      },
      {
-      "en": "Low oxygen from shunt",
-      "hi": "Shunt के कारण कम oxygen"
+      "en": "Low oxygen from collapsed lung",
+      "hi": "बंद फेफड़े से कम oxygen"
      }
     ],
     "answer": 0,
     "why": {
-     "en": "pH is low and PaCO2 is high. HCO3 is near normal, so the change is acute and respiratory.",
-     "hi": "pH कम है और PaCO2 ऊँचा है। HCO3 लगभग सामान्य है, इसलिए बदलाव acute और respiratory है।"
+     "en": "pH is low and CO2 is high. The blood is acid because CO2 is not being cleared.",
+     "hi": "pH कम है और CO2 ज़्यादा। CO2 नहीं निकल रहा, इसलिए ख़ून अम्लीय है।"
     }
    },
    "q2": {
@@ -3447,7 +3884,35 @@
      "en": "Shivering after surgery raised his CO2 production. More breaths per minute clear more CO2. Oxygen is already fine.",
      "hi": "Surgery के बाद कँपकँपी से CO2 बनना बढ़ा। हर मिनट ज़्यादा साँसें ज़्यादा CO2 निकालती हैं। Oxygen पहले से ठीक है।"
     }
-   }
+   },
+   "level": 1,
+   "vignette": {
+    "en": "Mr Rao after hip surgery. He is shivering as he warms up.",
+    "hi": "श्री राव, hip surgery के बाद। गर्म होते हुए उन्हें कँपकँपी हो रही है।"
+   },
+   "setup": {
+    "patch": {
+     "patient": {
+      "vco2": 260,
+      "metabolic": {
+       "hco3": 25.8
+      }
+     }
+    },
+    "settings": {
+     "fio2": 50
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 450 mL, rate 14, PEEP 5, FiO2 50%.",
+    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 14, PEEP 5, FiO2 50%।"
+   },
+   "shows": [
+    "pH",
+    "PaCO2",
+    "PaO2"
+   ]
   },
   {
    "id": "abg-02",
@@ -3459,7 +3924,7 @@
     "HCO3": 21.6,
     "SaO2": 100,
     "BE": -1.1,
-    "lactate": 1.0,
+    "lactate": 1,
     "FiO2": 0.5
    },
    "spo2": 100,
@@ -3470,16 +3935,16 @@
     },
     "options": [
      {
-      "en": "Metabolic alkalosis",
-      "hi": "Metabolic alkalosis (चयापचय से क्षारता)"
+      "en": "Acid base change from the body's chemistry (metabolic alkalosis)",
+      "hi": "शरीर के रसायन से बदलाव (metabolic alkalosis)"
      },
      {
-      "en": "Acute respiratory alkalosis",
-      "hi": "Acute respiratory alkalosis (अचानक ज़्यादा साँस से क्षारता)"
+      "en": "Too little CO2: the machine breathes too much (respiratory alkalosis)",
+      "hi": "बहुत कम CO2: मशीन ज़्यादा साँस दे रही है (respiratory alkalosis)"
      },
      {
-      "en": "Respiratory acidosis",
-      "hi": "Respiratory acidosis (कम साँस से अम्लता)"
+      "en": "Too much CO2 (respiratory acidosis)",
+      "hi": "बहुत ज़्यादा CO2 (respiratory acidosis)"
      },
      {
       "en": "A normal gas",
@@ -3488,8 +3953,8 @@
     ],
     "answer": 1,
     "why": {
-     "en": "pH is high and PaCO2 is low. The machine is blowing off too much CO2.",
-     "hi": "pH ऊँचा है और PaCO2 कम है। मशीन बहुत ज़्यादा CO2 बाहर निकाल रही है।"
+     "en": "pH is high and CO2 is low. Too many breaths blow off too much CO2.",
+     "hi": "pH ज़्यादा है और CO2 कम। बहुत ज़्यादा साँसें बहुत CO2 निकाल देती हैं।"
     }
    },
    "q2": {
@@ -3544,19 +4009,40 @@
      "en": "Fewer breaths clear less CO2, so PaCO2 rises back towards 40. Low CO2 narrows brain vessels and can cause arrhythmias.",
      "hi": "कम साँसें कम CO2 निकालती हैं, तो PaCO2 वापस 40 की ओर बढ़ता है। कम CO2 दिमाग़ की नसें सिकोड़ता है और arrhythmia कर सकता है।"
     }
-   }
+   },
+   "level": 1,
+   "vignette": {
+    "en": "Mr Rao after hip surgery. Someone raised his rate to 20 an hour ago.",
+    "hi": "श्री राव, hip surgery के बाद। किसी ने एक घंटा पहले उनका rate 20 कर दिया।"
+   },
+   "setup": {
+    "settings": {
+     "fio2": 50,
+     "rr": 20
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 450 mL, rate 20, PEEP 5, FiO2 50%.",
+    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 20, PEEP 5, FiO2 50%।"
+   },
+   "shows": [
+    "pH",
+    "PaCO2",
+    "PaO2"
+   ]
   },
   {
    "id": "abg-03",
    "scenario": "neuromuscular-gbs",
    "abg": {
-    "pH": 7.42,
+    "pH": 7.41,
     "PaCO2": 40,
     "PaO2": 245,
-    "HCO3": 25,
+    "HCO3": 24.4,
     "SaO2": 100,
-    "BE": 0.9,
-    "lactate": 1.0,
+    "BE": 0.2,
+    "lactate": 1,
     "FiO2": 0.6
    },
    "spo2": 100,
@@ -3567,26 +4053,26 @@
     },
     "options": [
      {
-      "en": "Respiratory acidosis",
-      "hi": "Respiratory acidosis (कम साँस से अम्लता)"
+      "en": "Too much CO2 (respiratory acidosis)",
+      "hi": "बहुत ज़्यादा CO2 (respiratory acidosis)"
      },
      {
-      "en": "Hypoxaemia",
-      "hi": "Hypoxaemia (रक्त में कम oxygen)"
+      "en": "Too little oxygen (hypoxaemia)",
+      "hi": "बहुत कम oxygen (hypoxaemia)"
      },
      {
-      "en": "Too much oxygen, with normal acid-base",
-      "hi": "ज़रूरत से ज़्यादा oxygen, acid-base सामान्य"
+      "en": "Too much oxygen; pH and CO2 are normal",
+      "hi": "ज़रूरत से ज़्यादा oxygen; pH और CO2 सामान्य"
      },
      {
-      "en": "Metabolic alkalosis",
-      "hi": "Metabolic alkalosis (चयापचय से क्षारता)"
+      "en": "Acid base change from the body's chemistry",
+      "hi": "शरीर के रसायन से acid base बदलाव"
      }
     ],
     "answer": 2,
     "why": {
-     "en": "pH and PaCO2 are normal. PaO2 of 245 is far above need, which is hyperoxaemia.",
-     "hi": "pH और PaCO2 सामान्य हैं। PaO2 245 ज़रूरत से बहुत ऊपर है, यह hyperoxaemia है।"
+     "en": "pH and CO2 are normal. Oxygen is far above what she needs.",
+     "hi": "pH और CO2 सामान्य हैं। Oxygen ज़रूरत से बहुत ज़्यादा है।"
     }
    },
    "q2": {
@@ -3641,7 +4127,28 @@
      "en": "Her lungs are normal, so 30% still keeps SpO2 above 94. Extra oxygen gives no benefit and can harm.",
      "hi": "उसके फेफड़े सामान्य हैं, तो 30% पर भी SpO2 94 से ऊपर रहता है। अतिरिक्त oxygen से फ़ायदा नहीं, नुकसान हो सकता है।"
     }
-   }
+   },
+   "level": 1,
+   "vignette": {
+    "en": "Ms Kaur with Guillain-Barre syndrome. FiO2 went up for suction and stayed high.",
+    "hi": "Guillain-Barre syndrome वाली सुश्री कौर। Suction के लिए FiO2 बढ़ाया गया और ऊँचा ही रहा।"
+   },
+   "setup": {
+    "settings": {
+     "fio2": 60,
+     "rr": 16
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 380 mL, rate 16, PEEP 5, FiO2 60%.",
+    "hi": "सेटिंग: AC-VC, VT 380 mL, rate 16, PEEP 5, FiO2 60%।"
+   },
+   "shows": [
+    "pH",
+    "PaCO2",
+    "PaO2"
+   ]
   },
   {
    "id": "abg-04",
@@ -3664,26 +4171,26 @@
     },
     "options": [
      {
-      "en": "Respiratory acidosis",
-      "hi": "Respiratory acidosis (कम साँस से अम्लता)"
+      "en": "Too much CO2 (respiratory acidosis)",
+      "hi": "बहुत ज़्यादा CO2 (respiratory acidosis)"
      },
      {
-      "en": "Poor oxygenation from collapsed lung bases",
-      "hi": "फेफड़ों के निचले हिस्से बंद होने से कम oxygenation"
+      "en": "Low oxygen because the lung bases are closed",
+      "hi": "फेफड़ों के निचले हिस्से बंद होने से कम oxygen"
      },
      {
       "en": "Too much oxygen",
       "hi": "ज़रूरत से ज़्यादा oxygen"
      },
      {
-      "en": "Metabolic alkalosis",
-      "hi": "Metabolic alkalosis (चयापचय से क्षारता)"
+      "en": "Acid base change from the body's chemistry",
+      "hi": "शरीर के रसायन से acid base बदलाव"
      }
     ],
     "answer": 1,
     "why": {
-     "en": "PaO2 is only 73 on 60% oxygen. PaO2/FiO2 is about 122. CO2 is normal, so oxygenation is the problem.",
-     "hi": "60% oxygen पर PaO2 सिर्फ़ 73 है। PaO2/FiO2 लगभग 122 है। CO2 सामान्य है, तो समस्या oxygenation की है।"
+     "en": "Oxygen is low even on 60% oxygen. CO2 is normal. Closed air sacs get blood but no air.",
+     "hi": "60% oxygen पर भी oxygen कम है। CO2 सामान्य है। बंद हवा की थैलियों को ख़ून मिलता है, हवा नहीं।"
     }
    },
    "q2": {
@@ -3738,7 +4245,25 @@
      "en": "After laparotomy the lung bases collapse but can reopen. PEEP holds them open, so shunt falls. Watch BP after raising PEEP.",
      "hi": "Laparotomy के बाद निचले हिस्से बंद होते हैं पर फिर खुल सकते हैं। PEEP उन्हें खुला रखता है, shunt घटता है। PEEP बढ़ाकर BP देखें।"
     }
-   }
+   },
+   "level": 1,
+   "vignette": {
+    "en": "Mrs Das after bowel surgery. The bases of both lungs have collapsed.",
+    "hi": "Bowel surgery के बाद श्रीमती दास। दोनों फेफड़ों के निचले हिस्से बंद हो गए हैं।"
+   },
+   "setup": {
+    "settings": {},
+    "pre": 0
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 500 mL, rate 14, PEEP 5, FiO2 60%.",
+    "hi": "सेटिंग: AC-VC, VT 500 mL, rate 14, PEEP 5, FiO2 60%।"
+   },
+   "shows": [
+    "pH",
+    "PaCO2",
+    "PaO2"
+   ]
   },
   {
    "id": "abg-05",
@@ -3835,6 +4360,22 @@
      "en": "Raise FiO2 for now and recheck the gas. A small PEEP trial, 8 to 10, is still reasonable. Watch SpO2 and BP.",
      "hi": "अभी FiO2 बढ़ाएँ और gas दोबारा देखें। PEEP 8 से 10 का छोटा trial अब भी ठीक है। SpO2 और BP देखें।"
     }
+   },
+   "level": 2,
+   "vignette": {
+    "en": "Severe pneumonia of the right lower lobe, one hour on the ventilator.",
+    "hi": "दाहिने निचले lobe का गंभीर pneumonia, ventilator पर एक घंटा।"
+   },
+   "setup": {
+    "settings": {
+     "fio2": 70,
+     "rr": 22
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 450 mL, rate 22, PEEP 5, Ti 0.9 s, FiO2 70%.",
+    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 22, PEEP 5, Ti 0.9 s, FiO2 70%।"
    }
   },
   {
@@ -3932,6 +4473,19 @@
      "en": "EPAP keeps flooded alveoli open. It also lowers the load on a failing left ventricle. Raise IPAP too, to keep the same support.",
      "hi": "EPAP पानी भरी alveoli को खुला रखता है। यह कमज़ोर left ventricle का बोझ भी घटाता है। Support बराबर रखने को IPAP भी बढ़ाएँ।"
     }
+   },
+   "level": 2,
+   "vignette": {
+    "en": "Flooded lungs from heart failure after a heart attack, on NIV.",
+    "hi": "Heart attack के बाद heart failure से भरे फेफड़े, NIV पर।"
+   },
+   "setup": {
+    "settings": {},
+    "pre": 0
+   },
+   "current": {
+    "en": "Settings: NIV, IPAP 12, EPAP 5, backup rate 12, FiO2 60%.",
+    "hi": "सेटिंग: NIV, IPAP 12, EPAP 5, backup rate 12, FiO2 60%।"
    }
   },
   {
@@ -3940,12 +4494,12 @@
    "abg": {
     "pH": 7.27,
     "PaCO2": 72,
-    "PaO2": 59,
+    "PaO2": 61,
     "HCO3": 32.2,
     "SaO2": 85,
     "BE": 5.5,
     "lactate": 1.2,
-    "FiO2": 0.4
+    "FiO2": 0.3
    },
    "spo2": 85,
    "q1": {
@@ -3979,8 +4533,8 @@
    },
    "q2": {
     "ask": {
-     "en": "Expiratory flow does not reach zero. Total PEEP is 7.4 on a set PEEP of 5. Which change fits best?",
-     "hi": "Expiratory flow शून्य तक नहीं पहुँचता। Set PEEP 5 पर total PEEP 7.4 है। कौन सा बदलाव सबसे सही है?"
+     "en": "Expiratory flow does not reach zero. Total PEEP is 7.2 on a set PEEP of 5. Which change fits best?",
+     "hi": "Expiratory flow शून्य तक नहीं पहुँचता। Set PEEP 5 पर total PEEP 7.2 है। कौन सा बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4000,7 +4554,7 @@
       },
       "change": {
        "key": "ti",
-       "to": 2.0
+       "to": 2
       }
      },
      {
@@ -4029,6 +4583,34 @@
      "en": "A shorter inspiration leaves more time to breathe out, so less air is trapped. Aim for his usual pH, not PaCO2 40.",
      "hi": "छोटी inspiration से साँस छोड़ने को ज़्यादा समय मिलता है, कम हवा फँसती है। लक्ष्य उसका सामान्य pH है, PaCO2 40 नहीं।"
     }
+   },
+   "level": 2,
+   "vignette": {
+    "en": "Mr Singh with COPD, in bronchospasm. Expiratory flow does not reach zero.",
+    "hi": "COPD वाले श्री सिंह, bronchospasm में। Expiratory flow शून्य तक नहीं पहुँचता।"
+   },
+   "setup": {
+    "patch": {
+     "patient": {
+      "metabolic": {
+       "hco3": 33
+      }
+     },
+     "lung": {
+      "r": 34
+     }
+    },
+    "settings": {
+     "vt": 400,
+     "rr": 12,
+     "ti": 1.5,
+     "fio2": 30
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 400 mL, rate 12, PEEP 5, Ti 1.5 s, FiO2 30%.",
+    "hi": "सेटिंग: AC-VC, VT 400 mL, rate 12, PEEP 5, Ti 1.5 s, FiO2 30%।"
    }
   },
   {
@@ -4036,15 +4618,15 @@
    "scenario": "copd",
    "abg": {
     "pH": 7.45,
-    "PaCO2": 46,
-    "PaO2": 57,
-    "HCO3": 30.6,
-    "SaO2": 89,
-    "BE": 6.4,
-    "lactate": 1.2,
-    "FiO2": 0.4
+    "PaCO2": 44,
+    "PaO2": 60,
+    "HCO3": 29,
+    "SaO2": 91,
+    "BE": 4.9,
+    "lactate": 1.6,
+    "FiO2": 0.3
    },
-   "spo2": 89,
+   "spo2": 91,
    "q1": {
     "ask": {
      "en": "The rate had been raised to 28. What does the gas show?",
@@ -4092,12 +4674,12 @@
      },
      {
       "label": {
-       "en": "Lower the rate to 18",
-       "hi": "Rate को 18 करें"
+       "en": "Lower the rate to 14",
+       "hi": "Rate घटाकर 14 करें"
       },
       "change": {
        "key": "rr",
-       "to": 18
+       "to": 14
       }
      },
      {
@@ -4126,6 +4708,31 @@
      "en": "A slower rate lets PaCO2 drift back towards his baseline. It also gives longer expiry, so less trapping and better BP.",
      "hi": "धीमा rate PaCO2 को उसके baseline की ओर लौटने देता है। साँस छोड़ने का समय बढ़ता है, trapping घटती है, BP सुधरता है।"
     }
+   },
+   "level": 2,
+   "vignette": {
+    "en": "Mr Singh with COPD. His rate was raised to 28 an hour ago.",
+    "hi": "COPD वाले श्री सिंह। एक घंटा पहले उनका rate 28 किया गया।"
+   },
+   "setup": {
+    "patch": {
+     "patient": {
+      "metabolic": {
+       "hco3": 33
+      }
+     }
+    },
+    "settings": {
+     "vt": 450,
+     "rr": 28,
+     "ti": 0.8,
+     "fio2": 30
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 450 mL, rate 28, PEEP 5, Ti 0.8 s, FiO2 30%.",
+    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 28, PEEP 5, Ti 0.8 s, FiO2 30%।"
    }
   },
   {
@@ -4134,14 +4741,14 @@
    "abg": {
     "pH": 7.16,
     "PaCO2": 70,
-    "PaO2": 92,
+    "PaO2": 87,
     "HCO3": 24,
-    "SaO2": 94,
+    "SaO2": 93,
     "BE": -3.7,
     "lactate": 2.5,
     "FiO2": 0.6
    },
-   "spo2": 94,
+   "spo2": 93,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -4173,8 +4780,8 @@
    },
    "q2": {
     "ask": {
-     "en": "Total PEEP is 9 on a set PEEP of 5, and BP is 83/49. Which change fits best?",
-     "hi": "Set PEEP 5 पर total PEEP 9 है, और BP 83/49 है। कौन सा बदलाव सबसे सही है?"
+     "en": "Total PEEP is 12 on a set PEEP of 5, and BP is 75/46. Which change fits best?",
+     "hi": "Set PEEP 5 पर total PEEP 12 है, और BP 75/46 है। कौन सा बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4223,6 +4830,19 @@
      "en": "Trapped air is squeezing the heart. A slower rate gives time to empty the lungs. A higher CO2 is accepted while pH stays above about 7.20.",
      "hi": "फँसी हवा दिल को दबा रही है। धीमा rate फेफड़े ख़ाली होने का समय देता है। pH लगभग 7.20 से ऊपर रहे तो ऊँचा CO2 स्वीकार है।"
     }
+   },
+   "level": 3,
+   "vignette": {
+    "en": "Priya with near-fatal asthma, just intubated. Her BP is low.",
+    "hi": "जानलेवा asthma वाली प्रिया, अभी intubate हुईं। उनका BP कम है।"
+   },
+   "setup": {
+    "settings": {},
+    "pre": 0
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 450 mL, rate 20, PEEP 5, FiO2 60%.",
+    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 20, PEEP 5, FiO2 60%।"
    }
   },
   {
@@ -4235,7 +4855,7 @@
     "HCO3": 6.7,
     "SaO2": 98,
     "BE": -22.8,
-    "lactate": 2.0,
+    "lactate": 2,
     "FiO2": 0.4
    },
    "spo2": 98,
@@ -4320,6 +4940,19 @@
      "en": "She was breathing 34 times a minute to survive. The ventilator must copy that minute ventilation. A normal rate here is dangerous.",
      "hi": "वह जीने के लिए मिनट में 34 बार साँस ले रही थी। Ventilator को वही minute ventilation देना होगा। यहाँ सामान्य rate ख़तरनाक है।"
     }
+   },
+   "level": 3,
+   "vignette": {
+    "en": "Anjali with severe DKA, 30 minutes after intubation. Before the tube she breathed 34 times a minute.",
+    "hi": "गंभीर DKA वाली अंजलि, intubation के 30 मिनट बाद। Tube से पहले वे मिनट में 34 बार साँस लेती थीं।"
+   },
+   "setup": {
+    "settings": {},
+    "pre": 1800
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 430 mL, rate 14, PEEP 5, Ti 0.9 s, FiO2 40%.",
+    "hi": "सेटिंग: AC-VC, VT 430 mL, rate 14, PEEP 5, Ti 0.9 s, FiO2 40%।"
    }
   },
   {
@@ -4417,6 +5050,25 @@
      "en": "The PEEP/FiO2 table pairs FiO2 0.8 with PEEP about 14. PEEP reopens alveoli. Recheck plateau and BP after the change.",
      "hi": "PEEP/FiO2 table में FiO2 0.8 के साथ PEEP लगभग 14 है। PEEP alveoli फिर से खोलता है। बदलाव के बाद plateau और BP फिर देखें।"
     }
+   },
+   "level": 3,
+   "vignette": {
+    "en": "Mr Khan with severe ARDS from influenza, one hour on the ventilator.",
+    "hi": "Influenza से गंभीर ARDS वाले श्री ख़ान, ventilator पर एक घंटा।"
+   },
+   "setup": {
+    "settings": {
+     "vt": 420,
+     "rr": 28,
+     "ti": 0.8,
+     "peep": 8,
+     "fio2": 80
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 420 mL, rate 28, PEEP 8, Ti 0.8 s, FiO2 80%.",
+    "hi": "सेटिंग: AC-VC, VT 420 mL, rate 28, PEEP 8, Ti 0.8 s, FiO2 80%।"
    }
   },
   {
@@ -4517,6 +5169,24 @@
      "en": "600 mL is about 8.5 mL/kg PBW. 420 mL is 6 mL/kg. Plateau should fall below 30. Raise the rate to limit CO2 rise.",
      "hi": "600 mL लगभग 8.5 mL/kg PBW है। 420 mL, 6 mL/kg है। Plateau 30 से नीचे आना चाहिए। CO2 कम बढ़े, इसलिए rate बढ़ाएँ।"
     }
+   },
+   "level": 3,
+   "vignette": {
+    "en": "Mr Khan with severe ARDS. Someone set 600 mL and PEEP 12.",
+    "hi": "गंभीर ARDS वाले श्री ख़ान। किसी ने 600 mL और PEEP 12 set किया।"
+   },
+   "setup": {
+    "settings": {
+     "vt": 600,
+     "peep": 12,
+     "fio2": 80,
+     "pPeakHigh": 60
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 600 mL, rate 18, PEEP 12, Ti 0.9 s, FiO2 80%.",
+    "hi": "सेटिंग: AC-VC, VT 600 mL, rate 18, PEEP 12, Ti 0.9 s, FiO2 80%।"
    }
   },
   {
@@ -4614,6 +5284,31 @@
      "en": "The ventilator is already compensating. The real fix is blood and stopping the bleeding. High PEEP would drop BP in hypovolaemia.",
      "hi": "Ventilator पहले से compensate कर रहा है। असली इलाज रक्त देना और bleeding रोकना है। Hypovolaemia में ऊँचा PEEP BP गिराएगा।"
     }
+   },
+   "level": 4,
+   "vignette": {
+    "en": "Arjun after a motorbike crash. He has lost blood and his lactate is high.",
+    "hi": "Motorbike दुर्घटना के बाद अर्जुन। उनका ख़ून बहा है और lactate ऊँचा है।"
+   },
+   "setup": {
+    "patch": {
+     "patient": {
+      "metabolic": {
+       "hco3": 15,
+       "lactate": 5.5
+      }
+     }
+    },
+    "settings": {
+     "rr": 26,
+     "fio2": 80
+    },
+    "atInit": true,
+    "pre": 0
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 480 mL, rate 26, PEEP 8, Ti 0.9 s, FiO2 80%.",
+    "hi": "सेटिंग: AC-VC, VT 480 mL, rate 26, PEEP 8, Ti 0.9 s, FiO2 80%।"
    }
   },
   {
@@ -4626,7 +5321,7 @@
     "HCO3": 16.6,
     "SaO2": 93,
     "BE": -11.2,
-    "lactate": 5.0,
+    "lactate": 5,
     "FiO2": 0.8
    },
    "spo2": 93,
@@ -4711,6 +5406,30 @@
      "en": "A faster rate clears CO2 and removes the breathing part of the acidosis. 750 mL would overstretch the bruised lung.",
      "hi": "तेज़ rate CO2 निकालता है और acidosis का साँस वाला हिस्सा हटाता है। 750 mL चोटिल फेफड़े को ज़्यादा खींचेगा।"
     }
+   },
+   "level": 4,
+   "vignette": {
+    "en": "Arjun after a motorbike crash, still bleeding. His CO2 is climbing.",
+    "hi": "Motorbike दुर्घटना के बाद अर्जुन, अब भी bleeding। उनका CO2 बढ़ रहा है।"
+   },
+   "setup": {
+    "patch": {
+     "patient": {
+      "metabolic": {
+       "hco3": 16,
+       "lactate": 5
+      }
+     }
+    },
+    "settings": {
+     "rr": 15,
+     "fio2": 80
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 480 mL, rate 15, PEEP 8, Ti 0.9 s, FiO2 80%.",
+    "hi": "सेटिंग: AC-VC, VT 480 mL, rate 15, PEEP 8, Ti 0.9 s, FiO2 80%।"
    }
   }
  ],
@@ -4726,6 +5445,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You give more oxygen in each breath.",
+      "hi": "आप हर साँस में ज़्यादा oxygen देते हैं।"
+     },
+     "detail": {
       "en": "FiO2 is the oxygen share of each breath. You raise it from room air level towards 100%.",
       "hi": "FiO2 हर साँस में oxygen का हिस्सा है। आप इसे room air से 100% की ओर बढ़ाते हैं।"
      }
@@ -4733,6 +5456,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "The machine mixes in more oxygen. Pressures and volumes stay the same.",
+      "hi": "मशीन ज़्यादा oxygen मिलाती है। दबाव और volume वही रहते हैं।"
+     },
+     "detail": {
       "en": "The blender mixes more oxygen and less air. Pressure, volume and timing stay the same.",
       "hi": "Blender ज़्यादा oxygen और कम air मिलाता है। दबाव, volume और समय वही रहते हैं।"
      }
@@ -4740,6 +5467,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "The lungs move exactly as before.",
+      "hi": "फेफड़े पहले जैसे ही चलते हैं।"
+     },
+     "detail": {
       "en": "Compliance and resistance do not change. Very high FiO2 for long can let poorly ventilated alveoli collapse.",
       "hi": "Compliance और resistance नहीं बदलते। लंबे समय तक बहुत ऊँची FiO2 से कम हवा वाले alveoli सिकुड़ सकते हैं।"
      }
@@ -4747,6 +5478,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "The waves do not change.",
+      "hi": "लहरें नहीं बदलतीं।"
+     },
+     "detail": {
       "en": "Pressure, flow and volume waves look the same as before.",
       "hi": "Pressure, flow और volume की लहरें पहले जैसी दिखती हैं।"
      }
@@ -4754,6 +5489,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "Open air sacs now hold more oxygen. Blood passing closed air sacs gains nothing.",
+      "hi": "खुली हवा की थैलियों में अब ज़्यादा oxygen है। बंद थैलियों से गुज़रा ख़ून कुछ नहीं पाता।"
+     },
+     "detail": {
       "en": "Alveolar oxygen rises, so PaO2 rises. The gain is small when shunt is large, because shunted blood never meets the gas.",
       "hi": "Alveolar oxygen बढ़ती है, इसलिए PaO2 बढ़ता है। Shunt बड़ा हो तो फ़ायदा कम है, क्योंकि shunt वाला रक्त gas से मिलता ही नहीं।"
      }
@@ -4761,6 +5500,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "SpO2 rises over a few minutes, unless it is already near 100.",
+      "hi": "SpO2 कुछ मिनटों में बढ़ती है, जब तक वह पहले से 100 के पास न हो।"
+     },
+     "detail": {
       "en": "SpO2 rises until it nears 100%. Above that point the monitor hides further PaO2 gains.",
       "hi": "SpO2 लगभग 100% तक बढ़ती है। उसके बाद monitor PaO2 की और बढ़त नहीं दिखाता।"
      }
@@ -4768,6 +5511,10 @@
     {
      "step": "abg",
      "text": {
+      "en": "PaO2 rises. CO2 does not change.",
+      "hi": "PaO2 बढ़ता है। CO2 नहीं बदलता।"
+     },
+     "detail": {
       "en": "PaO2 rises. PaCO2 and pH barely change in most patients.",
       "hi": "PaO2 बढ़ता है। ज़्यादातर मरीज़ों में PaCO2 और pH लगभग नहीं बदलते।"
      }
@@ -4775,11 +5522,16 @@
     {
      "step": "patient",
      "text": {
+      "en": "Better oxygen. Too much oxygen for hours can harm the lungs.",
+      "hi": "बेहतर oxygen। घंटों तक बहुत ज़्यादा oxygen फेफड़ों को नुकसान कर सकती है।"
+     },
+     "detail": {
       "en": "Hypoxaemia is corrected quickly. Hours of FiO2 above 60% risk oxygen toxicity, and in COPD PaCO2 can rise.",
       "hi": "Hypoxaemia जल्दी ठीक होती है। घंटों तक 60% से ऊपर FiO2 से oxygen toxicity का ख़तरा है, और COPD में PaCO2 बढ़ सकता है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "fio2",
@@ -4792,6 +5544,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You give less oxygen in each breath.",
+      "hi": "आप हर साँस में कम oxygen देते हैं।"
+     },
+     "detail": {
       "en": "You lower the oxygen share of each breath towards room air.",
       "hi": "आप हर साँस में oxygen का हिस्सा room air की ओर घटाते हैं।"
      }
@@ -4799,6 +5555,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "The machine mixes in less oxygen. Pressures and volumes stay the same.",
+      "hi": "मशीन कम oxygen मिलाती है। दबाव और volume वही रहते हैं।"
+     },
+     "detail": {
       "en": "The blender adds more air and less oxygen. Breath size and timing do not change.",
       "hi": "Blender ज़्यादा air और कम oxygen मिलाता है। साँस का आकार और समय नहीं बदलता।"
      }
@@ -4806,6 +5566,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "The lungs move exactly as before.",
+      "hi": "फेफड़े पहले जैसे ही चलते हैं।"
+     },
+     "detail": {
       "en": "Lung mechanics stay the same.",
       "hi": "फेफड़े की mechanics वही रहती है।"
      }
@@ -4815,11 +5579,19 @@
      "text": {
       "en": "The waves do not change.",
       "hi": "लहरें नहीं बदलतीं।"
+     },
+     "detail": {
+      "en": "The waves do not change.",
+      "hi": "लहरें नहीं बदलतीं।"
      }
     },
     {
      "step": "gasExchange",
      "text": {
+      "en": "Air sacs hold less oxygen, so blood picks up less.",
+      "hi": "हवा की थैलियों में कम oxygen है, इसलिए ख़ून कम लेता है।"
+     },
+     "detail": {
       "en": "Alveolar oxygen falls, so PaO2 falls. Low V/Q units lose oxygen fastest.",
       "hi": "Alveolar oxygen घटती है, इसलिए PaO2 घटता है। कम V/Q वाली इकाइयाँ सबसे पहले oxygen खोती हैं।"
      }
@@ -4827,6 +5599,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "SpO2 may fall over a few minutes. Healthy lungs often stay on target.",
+      "hi": "SpO2 कुछ मिनटों में गिर सकती है। स्वस्थ फेफड़े अक्सर लक्ष्य पर रहते हैं।"
+     },
+     "detail": {
       "en": "SpO2 may stay high at first, then fall once PaO2 drops onto the steep part of the curve.",
       "hi": "SpO2 पहले ऊँची रह सकती है, फिर PaO2 curve के खड़े हिस्से पर आते ही गिरती है।"
      }
@@ -4834,6 +5610,10 @@
     {
      "step": "abg",
      "text": {
+      "en": "PaO2 falls. CO2 does not change.",
+      "hi": "PaO2 घटता है। CO2 नहीं बदलता।"
+     },
+     "detail": {
       "en": "PaO2 falls. PaCO2 and pH change little.",
       "hi": "PaO2 घटता है। PaCO2 और pH थोड़ा ही बदलते हैं।"
      }
@@ -4841,11 +5621,16 @@
     {
      "step": "patient",
      "text": {
+      "en": "Less oxygen injury, as long as SpO2 stays on target.",
+      "hi": "जब तक SpO2 लक्ष्य पर है, oxygen से कम चोट।"
+     },
+     "detail": {
       "en": "Less oxygen exposure is safer for the lung. Falling too low causes hypoxaemia, tachycardia and later bradycardia.",
       "hi": "कम oxygen फेफड़े के लिए सुरक्षित है। बहुत कम होने पर hypoxaemia, तेज़ धड़कन और बाद में धीमी धड़कन होती है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "peep",
@@ -4858,6 +5643,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You keep more pressure in the lungs after each breath out.",
+      "hi": "आप हर साँस छोड़ने के बाद फेफड़ों में ज़्यादा दबाव रखते हैं।"
+     },
+     "detail": {
       "en": "PEEP is the pressure kept in the lungs at the end of breathing out. You raise it.",
       "hi": "PEEP साँस छोड़ने के अंत में फेफड़ों में रखा दबाव है। आप इसे बढ़ाते हैं।"
      }
@@ -4865,6 +5654,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "Every breath now starts from a higher pressure.",
+      "hi": "अब हर साँस ऊँचे दबाव से शुरू होती है।"
+     },
+     "detail": {
       "en": "The expiratory valve closes at a higher pressure. Every breath now starts from a higher baseline.",
       "hi": "Expiratory valve ऊँचे दबाव पर बंद होता है। हर साँस अब ऊँचे आधार से शुरू होती है।"
      }
@@ -4872,6 +5665,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "Closed air sacs may reopen. An open lung only stretches more.",
+      "hi": "बंद हवा की थैलियाँ खुल सकती हैं। खुला फेफड़ा बस ज़्यादा खिंचता है।"
+     },
+     "detail": {
       "en": "Collapsed alveoli reopen and lung volume at rest rises. Compliance may improve, but falls if the lung is pushed past its upper inflection.",
       "hi": "सिकुड़े alveoli खुलते हैं और आराम पर फेफड़े का volume बढ़ता है। Compliance सुधर सकती है, पर upper inflection से आगे खिंचने पर घटती है।"
      }
@@ -4879,6 +5676,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "The pressure wave lifts up. Peak pressure rises.",
+      "hi": "दबाव की लहर ऊपर उठती है। Peak pressure बढ़ता है।"
+     },
+     "detail": {
       "en": "The whole pressure wave lifts up. In volume control the flow wave is unchanged, and peak and plateau rise.",
       "hi": "पूरी pressure लहर ऊपर उठती है। Volume control में flow लहर वही रहती है, और peak और plateau बढ़ते हैं।"
      }
@@ -4886,6 +5687,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "If air sacs reopen, more blood picks up oxygen. Healthy lungs have little to gain.",
+      "hi": "थैलियाँ खुलें तो ज़्यादा ख़ून oxygen लेता है। स्वस्थ फेफड़ों को कम फ़ायदा है।"
+     },
+     "detail": {
       "en": "Shunt falls as alveoli reopen, so PaO2 rises. Overstretched alveoli squeeze capillaries and add dead space.",
       "hi": "Alveoli खुलने से shunt घटता है, इसलिए PaO2 बढ़ता है। ज़्यादा खिंचे alveoli capillaries दबाते हैं और dead space बढ़ाते हैं।"
      }
@@ -4893,6 +5698,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "SpO2 may rise over minutes. BP may fall, because chest pressure slows blood returning to the heart.",
+      "hi": "SpO2 कुछ मिनटों में बढ़ सकती है। BP गिर सकता है, क्योंकि छाती का दबाव दिल तक ख़ून लौटना धीमा करता है।"
+     },
+     "detail": {
       "en": "SpO2 rises over minutes. Blood pressure may fall because venous return drops.",
       "hi": "SpO2 कुछ मिनटों में बढ़ती है। Venous return घटने से blood pressure गिर सकता है।"
      }
@@ -4900,6 +5709,10 @@
     {
      "step": "abg",
      "text": {
+      "en": "PaO2 rises if lung reopens. CO2 changes little.",
+      "hi": "फेफड़ा खुले तो PaO2 बढ़ता है। CO2 थोड़ा ही बदलता है।"
+     },
+     "detail": {
       "en": "PaO2 rises. PaCO2 changes little unless dead space grows.",
       "hi": "PaO2 बढ़ता है। Dead space न बढ़े तो PaCO2 थोड़ा ही बदलता है।"
      }
@@ -4907,11 +5720,16 @@
     {
      "step": "patient",
      "text": {
+      "en": "Less collapse injury. Too much PEEP lowers BP and overstretches the lung.",
+      "hi": "बैठने से होने वाली चोट कम। बहुत ज़्यादा PEEP BP घटाता है और फेफड़ा ज़्यादा खींचता है।"
+     },
+     "detail": {
       "en": "Less collapse and reopening injury. Too much risks low blood pressure and barotrauma.",
       "hi": "बार बार खुलने और बंद होने की चोट कम होती है। बहुत ज़्यादा से कम blood pressure और barotrauma का ख़तरा है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "peep",
@@ -4924,6 +5742,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You let the pressure after breathing out fall.",
+      "hi": "आप साँस छोड़ने के बाद का दबाव घटने देते हैं।"
+     },
+     "detail": {
       "en": "You lower the pressure left in the lungs at the end of breathing out.",
       "hi": "आप साँस छोड़ने के अंत में फेफड़ों में बचा दबाव घटाते हैं।"
      }
@@ -4931,6 +5753,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "Every breath now starts from a lower pressure.",
+      "hi": "अब हर साँस नीचे दबाव से शुरू होती है।"
+     },
+     "detail": {
       "en": "The expiratory valve lets pressure fall closer to zero before the next breath.",
       "hi": "Expiratory valve अगली साँस से पहले दबाव को शून्य के पास गिरने देता है।"
      }
@@ -4938,6 +5764,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "Unstable air sacs may close over minutes. Healthy lungs barely notice.",
+      "hi": "कमज़ोर थैलियाँ कुछ मिनटों में बंद हो सकती हैं। स्वस्थ फेफड़ों पर कम असर।"
+     },
+     "detail": {
       "en": "Unstable alveoli collapse over minutes. Compliance falls in a recruitable lung, but may improve in an overdistended one.",
       "hi": "अस्थिर alveoli कुछ मिनटों में सिकुड़ते हैं। Recruitable फेफड़े में compliance घटती है, पर ज़्यादा खिंचे फेफड़े में सुधर सकती है।"
      }
@@ -4945,6 +5775,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "The pressure wave drops. Peak pressure falls.",
+      "hi": "दबाव की लहर नीचे आती है। Peak pressure घटता है।"
+     },
+     "detail": {
       "en": "The pressure wave baseline drops. Peak and plateau fall by about the same amount if compliance holds.",
       "hi": "Pressure लहर का आधार नीचे आता है। Compliance बनी रहे तो peak और plateau लगभग उतने ही घटते हैं।"
      }
@@ -4952,6 +5786,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "If air sacs close, blood passes them without oxygen.",
+      "hi": "थैलियाँ बंद हों तो ख़ून बिना oxygen लिए गुज़रता है।"
+     },
+     "detail": {
       "en": "More alveoli collapse, so shunt rises and PaO2 falls.",
       "hi": "ज़्यादा alveoli सिकुड़ते हैं, इसलिए shunt बढ़ता है और PaO2 घटता है।"
      }
@@ -4959,6 +5797,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "SpO2 may fall slowly. BP often rises a little.",
+      "hi": "SpO2 धीरे गिर सकती है। BP अक्सर थोड़ा बढ़ता है।"
+     },
+     "detail": {
       "en": "SpO2 may fall slowly. Blood pressure often rises a little as venous return improves.",
       "hi": "SpO2 धीरे गिर सकती है। Venous return सुधरने से blood pressure अक्सर थोड़ा बढ़ता है।"
      }
@@ -4966,6 +5808,10 @@
     {
      "step": "abg",
      "text": {
+      "en": "PaO2 may fall. CO2 changes little.",
+      "hi": "PaO2 घट सकता है। CO2 थोड़ा ही बदलता है।"
+     },
+     "detail": {
       "en": "PaO2 falls. PaCO2 changes little.",
       "hi": "PaO2 घटता है। PaCO2 थोड़ा ही बदलता है।"
      }
@@ -4973,11 +5819,16 @@
     {
      "step": "patient",
      "text": {
+      "en": "Better blood flow to the heart. In a sick lung, repeated collapse injures it.",
+      "hi": "दिल तक बेहतर ख़ून। बीमार फेफड़े में बार बार बैठना उसे चोट देता है।"
+     },
+     "detail": {
       "en": "Better circulation and less overdistension. In a recruitable lung, repeated collapse and reopening injures it.",
       "hi": "बेहतर circulation और कम खिंचाव। Recruitable फेफड़े में बार बार सिकुड़ना और खुलना उसे चोट पहुँचाता है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "vt",
@@ -4990,6 +5841,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You make each breath bigger.",
+      "hi": "आप हर साँस बड़ी करते हैं।"
+     },
+     "detail": {
       "en": "Tidal volume is the size of each breath. You set a bigger breath.",
       "hi": "Tidal volume हर साँस का आकार है। आप बड़ी साँस set करते हैं।"
      }
@@ -4997,6 +5852,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "The machine pushes more air in each breath.",
+      "hi": "मशीन हर साँस में ज़्यादा हवा भेजती है।"
+     },
+     "detail": {
       "en": "In volume control the ventilator pushes more gas, so it needs more pressure to deliver it.",
       "hi": "Volume control में ventilator ज़्यादा gas भेजता है, इसलिए उसे ज़्यादा दबाव चाहिए।"
      }
@@ -5004,6 +5863,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "The lung stretches more. Pressure at the end of the breath rises.",
+      "hi": "फेफड़ा ज़्यादा खिंचता है। साँस के अंत का दबाव बढ़ता है।"
+     },
+     "detail": {
       "en": "Plateau rises by the extra volume divided by compliance. Driving pressure rises too, and overdistension starts near the upper inflection.",
       "hi": "Plateau extra volume को compliance से भाग देने जितना बढ़ता है। Driving pressure भी बढ़ता है, और upper inflection के पास खिंचाव शुरू होता है।"
      }
@@ -5011,6 +5874,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "The pressure and volume waves grow taller.",
+      "hi": "दबाव और volume की लहरें ऊँची होती हैं।"
+     },
+     "detail": {
       "en": "The volume wave grows taller. Peak and plateau on the pressure wave rise.",
       "hi": "Volume लहर ऊँची होती है। Pressure लहर पर peak और plateau बढ़ते हैं।"
      }
@@ -5018,6 +5885,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "More fresh air reaches the air sacs, so more CO2 leaves.",
+      "hi": "ज़्यादा ताज़ी हवा थैलियों तक पहुँचती है, इसलिए ज़्यादा CO2 निकलता है।"
+     },
+     "detail": {
       "en": "Alveolar ventilation rises, so more CO2 leaves. Oxygen improves a little from more open lung.",
       "hi": "Alveolar ventilation बढ़ता है, इसलिए ज़्यादा CO2 निकलती है। ज़्यादा खुले फेफड़े से oxygen थोड़ी सुधरती है।"
      }
@@ -5025,6 +5896,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "CO2 falls over minutes.",
+      "hi": "CO2 कुछ मिनटों में घटता है।"
+     },
+     "detail": {
       "en": "Minute ventilation rises and EtCO2 falls. Watch the plateau and driving pressure readouts.",
       "hi": "Minute ventilation बढ़ता है और EtCO2 घटता है। Plateau और driving pressure देखते रहें।"
      }
@@ -5032,6 +5907,10 @@
     {
      "step": "abg",
      "text": {
+      "en": "PaCO2 falls and pH rises. Oxygen changes little.",
+      "hi": "PaCO2 घटता है और pH बढ़ता है। Oxygen थोड़ा ही बदलता है।"
+     },
+     "detail": {
       "en": "PaCO2 falls and pH rises.",
       "hi": "PaCO2 घटता है और pH बढ़ता है।"
      }
@@ -5039,11 +5918,16 @@
     {
      "step": "patient",
      "text": {
+      "en": "Too big a breath overstretches the lung. Size breaths to height, not weight.",
+      "hi": "बहुत बड़ी साँस फेफड़ा ज़्यादा खींचती है। साँस का आकार लंबाई से तय करें, वज़न से नहीं।"
+     },
+     "detail": {
       "en": "More CO2 clearance, but above 8 mL/kg predicted weight the risk of ventilator lung injury rises.",
       "hi": "CO2 ज़्यादा निकलती है, पर predicted weight के 8 mL/kg से ऊपर ventilator से फेफड़े की चोट का ख़तरा बढ़ता है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "vt",
@@ -5056,6 +5940,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You make each breath smaller.",
+      "hi": "आप हर साँस छोटी करते हैं।"
+     },
+     "detail": {
       "en": "You set a smaller breath.",
       "hi": "आप छोटी साँस set करते हैं।"
      }
@@ -5063,6 +5951,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "The machine pushes less air in each breath.",
+      "hi": "मशीन हर साँस में कम हवा भेजती है।"
+     },
+     "detail": {
       "en": "The ventilator delivers less gas each breath and needs less pressure.",
       "hi": "Ventilator हर साँस में कम gas देता है और कम दबाव चाहिए।"
      }
@@ -5070,6 +5962,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "The lung stretches less. Pressure at the end of the breath falls.",
+      "hi": "फेफड़ा कम खिंचता है। साँस के अंत का दबाव घटता है।"
+     },
+     "detail": {
       "en": "Plateau and driving pressure fall. Less stretch reaches the healthy alveoli.",
       "hi": "Plateau और driving pressure घटते हैं। स्वस्थ alveoli तक कम खिंचाव पहुँचता है।"
      }
@@ -5077,6 +5973,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "The pressure and volume waves get smaller.",
+      "hi": "दबाव और volume की लहरें छोटी होती हैं।"
+     },
+     "detail": {
       "en": "The volume wave is shorter. Peak and plateau fall.",
       "hi": "Volume लहर छोटी होती है। Peak और plateau घटते हैं।"
      }
@@ -5084,6 +5984,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "Less fresh air reaches the air sacs, so CO2 builds up.",
+      "hi": "कम ताज़ी हवा थैलियों तक पहुँचती है, इसलिए CO2 जमा होता है।"
+     },
+     "detail": {
       "en": "Dead space stays fixed, so alveolar ventilation falls more than the breath size. Less CO2 is removed.",
       "hi": "Dead space वही रहता है, इसलिए alveolar ventilation साँस से ज़्यादा घटता है। कम CO2 निकलती है।"
      }
@@ -5091,6 +5995,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "CO2 rises over minutes, unless you raise the rate.",
+      "hi": "CO2 कुछ मिनटों में बढ़ता है, जब तक आप rate न बढ़ाएँ।"
+     },
+     "detail": {
       "en": "Minute ventilation falls. EtCO2 rises unless the rate is raised.",
       "hi": "Minute ventilation घटता है। Rate न बढ़ाएँ तो EtCO2 बढ़ता है।"
      }
@@ -5098,6 +6006,10 @@
     {
      "step": "abg",
      "text": {
+      "en": "PaCO2 rises and pH falls. Oxygen changes little.",
+      "hi": "PaCO2 बढ़ता है और pH घटता है। Oxygen थोड़ा ही बदलता है।"
+     },
+     "detail": {
       "en": "PaCO2 rises and pH falls. This is accepted as permissive hypercapnia in lung protection.",
       "hi": "PaCO2 बढ़ता है और pH घटता है। Lung protection में इसे permissive hypercapnia मानकर स्वीकार किया जाता है।"
      }
@@ -5105,11 +6017,16 @@
     {
      "step": "patient",
      "text": {
+      "en": "Gentler on the lung. Raise the rate if CO2 climbs too high.",
+      "hi": "फेफड़े के लिए हल्का। CO2 बहुत बढ़े तो rate बढ़ाएँ।"
+     },
+     "detail": {
       "en": "Less ventilator lung injury. The patient may feel air hunger and breathe harder.",
       "hi": "Ventilator से फेफड़े की चोट कम होती है। मरीज़ को हवा की कमी लग सकती है और वह ज़ोर से साँस ले सकता है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "rr",
@@ -5122,6 +6039,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You give more breaths each minute.",
+      "hi": "आप हर मिनट ज़्यादा साँसें देते हैं।"
+     },
+     "detail": {
       "en": "You set more breaths each minute.",
       "hi": "आप हर मिनट ज़्यादा साँसें set करते हैं।"
      }
@@ -5129,6 +6050,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "The machine starts breaths more often. Each breath out gets shorter.",
+      "hi": "मशीन साँसें जल्दी जल्दी शुरू करती है। साँस छोड़ने का समय छोटा होता है।"
+     },
+     "detail": {
       "en": "The breath cycle gets shorter. With inspiratory time fixed, expiratory time shrinks.",
       "hi": "साँस का चक्र छोटा होता है। Inspiratory time वही रहे तो expiratory time घटता है।"
      }
@@ -5136,6 +6061,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "Less time to breathe out. Narrow airways may trap air.",
+      "hi": "साँस छोड़ने का समय कम। सँकरी airways हवा फँसा सकती हैं।"
+     },
+     "detail": {
       "en": "If expiration is too short to empty the lung, gas is trapped. This builds auto-PEEP, worst with high resistance.",
       "hi": "साँस छोड़ने का समय कम हो तो फेफड़ा खाली नहीं होता और gas फँसती है। इससे auto-PEEP बनता है, ऊँची resistance में सबसे ज़्यादा।"
      }
@@ -5143,6 +6072,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "Breaths sit closer together. Flow out may not reach zero.",
+      "hi": "साँसें पास पास आती हैं। बाहर का flow शून्य तक नहीं पहुँच सकता।"
+     },
+     "detail": {
       "en": "Breaths come closer together. Expiratory flow may not return to zero before the next breath.",
       "hi": "साँसें पास पास आती हैं। अगली साँस से पहले expiratory flow शून्य तक नहीं लौट सकता।"
      }
@@ -5150,6 +6083,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "More fresh air each minute, so more CO2 leaves.",
+      "hi": "हर मिनट ज़्यादा ताज़ी हवा, इसलिए ज़्यादा CO2 निकलता है।"
+     },
+     "detail": {
       "en": "Alveolar ventilation rises, so PaCO2 falls. Oxygen changes little.",
       "hi": "Alveolar ventilation बढ़ता है, इसलिए PaCO2 घटता है। Oxygen थोड़ी ही बदलती है।"
      }
@@ -5157,6 +6094,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "CO2 falls over minutes. Watch BP if air gets trapped.",
+      "hi": "CO2 कुछ मिनटों में घटता है। हवा फँसे तो BP देखें।"
+     },
+     "detail": {
       "en": "Minute ventilation rises and EtCO2 falls. The I:E ratio narrows.",
       "hi": "Minute ventilation बढ़ता है और EtCO2 घटता है। I:E ratio सिकुड़ता है।"
      }
@@ -5166,16 +6107,25 @@
      "text": {
       "en": "PaCO2 falls and pH rises.",
       "hi": "PaCO2 घटता है और pH बढ़ता है।"
+     },
+     "detail": {
+      "en": "PaCO2 falls and pH rises.",
+      "hi": "PaCO2 घटता है और pH बढ़ता है।"
      }
     },
     {
      "step": "patient",
      "text": {
+      "en": "Clears CO2. Too fast traps air in narrow airways and drops BP.",
+      "hi": "CO2 निकालता है। बहुत तेज़ rate सँकरी airways में हवा फँसाता है और BP गिराता है।"
+     },
+     "detail": {
       "en": "Acidosis eases. In asthma or COPD, trapped gas can drop blood pressure.",
       "hi": "Acidosis कम होता है। Asthma या COPD में फँसी gas blood pressure गिरा सकती है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "rr",
@@ -5188,6 +6138,10 @@
     {
      "step": "setting",
      "text": {
+      "en": "You give fewer breaths each minute.",
+      "hi": "आप हर मिनट कम साँसें देते हैं।"
+     },
+     "detail": {
       "en": "You set fewer breaths each minute.",
       "hi": "आप हर मिनट कम साँसें set करते हैं।"
      }
@@ -5195,6 +6149,10 @@
     {
      "step": "ventilator",
      "text": {
+      "en": "The machine starts breaths less often. Each breath out gets longer.",
+      "hi": "मशीन साँसें कम बार शुरू करती है। साँस छोड़ने का समय लंबा होता है।"
+     },
+     "detail": {
       "en": "Each cycle is longer, so expiratory time grows.",
       "hi": "हर चक्र लंबा होता है, इसलिए expiratory time बढ़ता है।"
      }
@@ -5202,6 +6160,10 @@
     {
      "step": "mechanics",
      "text": {
+      "en": "More time to breathe out, so trapped air can leave.",
+      "hi": "साँस छोड़ने का ज़्यादा समय, इसलिए फँसी हवा निकल सकती है।"
+     },
+     "detail": {
       "en": "The lung has time to empty, so trapped gas and auto-PEEP fall.",
       "hi": "फेफड़े को खाली होने का समय मिलता है, इसलिए फँसी gas और auto-PEEP घटते हैं।"
      }
@@ -5209,6 +6171,10 @@
     {
      "step": "waveforms",
      "text": {
+      "en": "Breaths sit further apart. Flow out reaches zero.",
+      "hi": "साँसें दूर दूर आती हैं। बाहर का flow शून्य तक पहुँचता है।"
+     },
+     "detail": {
       "en": "Breaths spread out. Expiratory flow reaches zero before the next breath.",
       "hi": "साँसें दूर दूर होती हैं। अगली साँस से पहले expiratory flow शून्य तक पहुँचता है।"
      }
@@ -5216,6 +6182,10 @@
     {
      "step": "gasExchange",
      "text": {
+      "en": "Less fresh air each minute, so CO2 builds up.",
+      "hi": "हर मिनट कम ताज़ी हवा, इसलिए CO2 जमा होता है।"
+     },
+     "detail": {
       "en": "Alveolar ventilation falls, so less CO2 leaves.",
       "hi": "Alveolar ventilation घटता है, इसलिए कम CO2 निकलती है।"
      }
@@ -5223,6 +6193,10 @@
     {
      "step": "monitor",
      "text": {
+      "en": "CO2 rises over minutes. BP may improve if air was trapped.",
+      "hi": "CO2 कुछ मिनटों में बढ़ता है। हवा फँसी थी तो BP सुधर सकता है।"
+     },
+     "detail": {
       "en": "Minute ventilation falls and EtCO2 rises. If the patient breathes over the set rate, little may change.",
       "hi": "Minute ventilation घटता है और EtCO2 बढ़ता है। मरीज़ set rate से ज़्यादा साँस ले तो कम बदलाव होगा।"
      }
@@ -5232,16 +6206,25 @@
      "text": {
       "en": "PaCO2 rises and pH falls.",
       "hi": "PaCO2 बढ़ता है और pH घटता है।"
+     },
+     "detail": {
+      "en": "PaCO2 rises and pH falls.",
+      "hi": "PaCO2 बढ़ता है और pH घटता है।"
      }
     },
     {
      "step": "patient",
      "text": {
+      "en": "Helps trapped air in asthma and COPD. Too slow causes acidosis.",
+      "hi": "Asthma और COPD में फँसी हवा में मदद। बहुत धीमा rate acidosis करता है।"
+     },
+     "detail": {
       "en": "Less air trapping protects blood pressure. In metabolic acidosis a low rate removes compensation and is dangerous.",
       "hi": "कम air trapping blood pressure बचाता है। Metabolic acidosis में कम rate compensation हटाता है और ख़तरनाक है।"
      }
     }
-   ]
+   ],
+   "level": 1
   },
   {
    "key": "ti",
@@ -6598,8 +7581,8 @@
    "hi": "अचानक बिगड़ने की checklist: Displacement, Obstruction, Pneumothorax, Equipment।"
   },
   "driving-pressure": {
-   "en": "Plateau pressure minus PEEP. It reflects strain on the open lung.",
-   "hi": "Plateau pressure minus PEEP। यह खुले फेफड़े पर तनाव दिखाता है।"
+   "en": "Driving pressure = plateau minus PEEP. It is the stretch on the open lung. Keep it 15 or less.",
+   "hi": "Driving pressure = plateau minus PEEP। यह खुले फेफड़े का खिंचाव है। इसे 15 या कम रखें।"
   },
   "dyssynchrony": {
    "en": "A mismatch between the patient's own breathing and the ventilator's breaths.",
@@ -6717,5 +7700,181 @@
  "disclaimer": {
   "en": "Educational simulator. Not a real ventilator and not a guide to treating a real patient.",
   "hi": "शैक्षिक simulator। यह असली ventilator नहीं है और असली मरीज़ के इलाज की guide नहीं है।"
+ },
+ "gloss": {
+  "ventilator": {
+   "en": "breathing machine",
+   "hi": "साँस की मशीन"
+  },
+  "tidal volume": {
+   "en": "the air in each breath",
+   "hi": "हर साँस की हवा"
+  },
+  "blood gas": {
+   "en": "blood test for oxygen, CO2 and acid",
+   "hi": "ख़ून की जाँच: oxygen, CO2 और अम्ल"
+  },
+  "ABG": {
+   "en": "blood gas test",
+   "hi": "ख़ून की gas जाँच"
+  },
+  "alveoli": {
+   "en": "tiny air sacs in the lung",
+   "hi": "हवा की थैलियाँ"
+  },
+  "venous return": {
+   "en": "blood flowing back to the heart",
+   "hi": "खून का दिल तक लौटना"
+  },
+  "shunt": {
+   "en": "blood passing closed air sacs without picking up oxygen",
+   "hi": "बंद थैलियों से बिना oxygen लिए गुज़रता ख़ून"
+  },
+  "PEEP": {
+   "en": "pressure kept in the lungs after breathing out",
+   "hi": "साँस छोड़ने के बाद फेफड़ों में रखा दबाव"
+  },
+  "FiO2": {
+   "en": "share of oxygen in the gas",
+   "hi": "गैस में oxygen का हिस्सा"
+  },
+  "SpO2": {
+   "en": "how full the blood's oxygen carriers are",
+   "hi": "ख़ून के oxygen वाहक कितने भरे हैं"
+  },
+  "PaO2": {
+   "en": "oxygen pressure in the blood",
+   "hi": "ख़ून में oxygen का दबाव"
+  },
+  "PaCO2": {
+   "en": "CO2 level in the blood",
+   "hi": "ख़ून में CO2 का स्तर"
+  },
+  "CO2": {
+   "en": "waste gas we breathe out",
+   "hi": "साँस में निकलने वाली गंदी गैस"
+  },
+  "pH": {
+   "en": "how acid the blood is",
+   "hi": "ख़ून कितना अम्लीय है"
+  },
+  "plateau": {
+   "en": "pressure in the lung at the end of a breath",
+   "hi": "साँस के अंत में फेफड़े का दबाव"
+  },
+  "driving pressure": {
+   "en": "stretch on the open lung: plateau minus PEEP",
+   "hi": "खुले फेफड़े का खिंचाव: plateau minus PEEP"
+  },
+  "dead space": {
+   "en": "air that never reaches blood",
+   "hi": "हवा जो ख़ून तक नहीं पहुँचती"
+  },
+  "compliance": {
+   "en": "how easily the lung stretches",
+   "hi": "फेफड़ा कितनी आसानी से फैलता है"
+  },
+  "auto-PEEP": {
+   "en": "pressure from air trapped in the lungs",
+   "hi": "फेफड़ों में फँसी हवा का दबाव"
+  },
+  "minute ventilation": {
+   "en": "air moved in one minute",
+   "hi": "एक मिनट में चली हवा"
+  },
+  "set rate": {
+   "en": "the fewest breaths the machine gives each minute",
+   "hi": "मशीन की हर मिनट कम से कम साँसें"
+  },
+  "mode": {
+   "en": "how the machine decides each breath",
+   "hi": "मशीन हर साँस कैसे तय करती है"
+  },
+  "trigger": {
+   "en": "the patient's pull that starts a breath",
+   "hi": "मरीज़ का खिंचाव जो साँस शुरू करता है"
+  },
+  "suction": {
+   "en": "clearing mucus from the tube",
+   "hi": "tube से बलगम निकालना"
+  },
+  "secretions": {
+   "en": "mucus in the airways",
+   "hi": "airways में बलगम"
+  },
+  "pneumothorax": {
+   "en": "air leaked around the lung, squashing it",
+   "hi": "फेफड़े के बाहर रिसी हवा जो उसे दबाती है"
+  },
+  "atelectasis": {
+   "en": "collapsed lung",
+   "hi": "बैठा हुआ फेफड़ा"
+  },
+  "recruitment": {
+   "en": "reopening collapsed air sacs",
+   "hi": "बंद थैलियों को फिर खोलना"
+  },
+  "sedation": {
+   "en": "calming drugs",
+   "hi": "शांत करने की दवा"
+  },
+  "hypotension": {
+   "en": "low blood pressure",
+   "hi": "कम blood pressure"
+  },
+  "MAP": {
+   "en": "average blood pressure",
+   "hi": "औसत blood pressure"
+  },
+  "acidosis": {
+   "en": "blood too acid",
+   "hi": "ख़ून बहुत अम्लीय"
+  },
+  "alkalosis": {
+   "en": "blood too alkaline",
+   "hi": "ख़ून बहुत क्षारीय"
+  },
+  "lactate": {
+   "en": "sign that tissues lack oxygen",
+   "hi": "tissues में oxygen की कमी का संकेत"
+  },
+  "bronchospasm": {
+   "en": "airways suddenly tightening",
+   "hi": "airways का अचानक सिकुड़ना"
+  },
+  "bronchodilator": {
+   "en": "drug that opens the airways",
+   "hi": "airways खोलने वाली दवा"
+  },
+  "resistance": {
+   "en": "how narrow the airways are",
+   "hi": "airways कितनी सँकरी हैं"
+  },
+  "Ti": {
+   "en": "time for breathing in",
+   "hi": "साँस अंदर लेने का समय"
+  }
+ },
+ "explain": {
+  "pao2VsSpo2": {
+   "en": "SpO2 = how full the blood's oxygen carriers are (monitor). PaO2 = oxygen pressure in the blood (blood gas).",
+   "hi": "SpO2 = ख़ून के oxygen वाहक कितने भरे हैं (मॉनिटर)। PaO2 = ख़ून में oxygen का दबाव (blood gas)।"
+  },
+  "setVsTotalRate": {
+   "en": "Set rate is the fewest breaths the machine gives. The patient can add breaths of their own, so the monitor rate can be higher.",
+   "hi": "Set rate मशीन की सबसे कम साँसें हैं। मरीज़ अपनी साँसें जोड़ सकता है, इसलिए मॉनिटर की rate ज़्यादा हो सकती है।"
+  },
+  "drivingPressure": {
+   "en": "Driving pressure = plateau minus PEEP. It is the stretch on the open lung. Keep it 15 or less.",
+   "hi": "Driving pressure = plateau minus PEEP। यह खुले फेफड़े का खिंचाव है। इसे 15 या कम रखें।"
+  },
+  "notMeasurable": {
+   "en": "In this mode plateau needs an inspiratory hold on a calm patient. Until then it is not measurable.",
+   "hi": "इस mode में plateau के लिए शांत मरीज़ पर inspiratory hold चाहिए। तब तक इसे मापा नहीं जा सकता।"
+  },
+  "arrest": {
+   "en": "The patient arrested. In real life: call for help, start CPR and give 100% oxygen.",
+   "hi": "मरीज़ का arrest हुआ। असली जीवन में: मदद बुलाएँ, CPR शुरू करें और 100% oxygen दें।"
+  }
  }
 }

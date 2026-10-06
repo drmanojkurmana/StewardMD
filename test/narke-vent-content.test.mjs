@@ -17,10 +17,11 @@ const SETTING_KEYS = ["fio2", "peep", "vt", "rr", "pinsp", "ps", "ti", "ie", "tr
   "peepLow", "peepHigh"];
 const MODES = ["vc", "acvc", "pc", "acpc", "simv", "psv", "cpap", "prvc", "niv", "aprv"];
 const ALARMS = ["pPeakHigh", "pPlatHigh", "vtLow", "veLow", "veHigh", "apnoea", "rrHigh", "fio2Low", "fio2High", "peepLow",
-  "peepHigh", "disconnect", "autoPeep", "dyssync"];
+  "peepHigh", "disconnect", "autoPeep", "dyssync", "peepSetHigh", "spo2Low", "mapLow", "hrHigh", "hrLow"];
 const DYSSYNC = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
 const CHAIN = ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"];
-const TUTORIALS = ["how-it-works", "fio2-peep", "vt-rr", "pc-vs-vc", "waveforms", "abg-adjust", "ards", "copd-autopeep"];
+const TUTORIALS = ["how-it-works", "fio2-peep", "first-alarm", "vt-rr", "pc-vs-vc", "waveforms", "abg-adjust", "ards", "copd-autopeep"];
+const ACTION_IDS = ["decompress", "suction", "bag100", "disconnect", "bronchodilator", "sedate", "paralyse", "fluid", "blood"];
 const SCENARIOS = ["postop-normal", "copd", "asthma", "ards", "cardiogenic-oedema", "pneumonia", "postop-atelectasis",
   "neuromuscular-gbs", "metabolic-dka", "trauma-contusion"];
 const MAIN_WHATIF = ["fio2", "peep", "vt", "rr", "ti", "pinsp", "ps", "trigFlow", "cycle", "rise", "ipap", "epap", "phigh", "tlow"];
@@ -168,7 +169,7 @@ test("learn.levels: 4 cumulative levels, level 1 is the beginner set", () => {
   ["waveforms", "alarms", "dope"].forEach((k) => assert.ok(L.levels[3].shows.includes(k), "L4 " + k));
 });
 
-test("learn.tutorials: the 8 tutorials with drivable steps", () => {
+test("learn.tutorials: the 9 tutorials with drivable steps", () => {
   assert.deepEqual(L.tutorials.map((t) => t.id), TUTORIALS);
   for (const t of L.tutorials) {
     assert.ok(bi(t.title) && t.steps.length >= 5, t.id);
@@ -176,14 +177,20 @@ test("learn.tutorials: the 8 tutorials with drivable steps", () => {
     t.steps.forEach((s, i) => {
       assert.ok(bi(s.say), `${t.id}[${i}].say`);
       if (s.do) {
+        // do: load a scenario, set a mode or a setting, inject an event, take a bedside action, or draw a gas
         const ok = (s.do.scenario && SCENARIOS.includes(s.do.scenario)) || (s.do.mode && MODES.includes(s.do.mode)) ||
-          (SETTING_KEYS.includes(s.do.key) && typeof s.do.to === "number");
+          (SETTING_KEYS.includes(s.do.key) && typeof s.do.to === "number") || (s.do.event && EVENTS.concat(["plug"]).includes(s.do.event)) ||
+          ACTION_IDS.includes(s.do.action) || s.do.abg === true;
         assert.ok(ok, `${t.id}[${i}].do`);
       }
       if (s.expect) assert.ok(typeof s.expect.key === "string" && ["up", "down"].includes(s.expect.direction), `${t.id}[${i}].expect`);
       if (s.highlight) assert.ok(Array.isArray(s.highlight) && s.highlight.length);
     });
     assert.ok(t.steps.some((s) => s.expect), t.id + " has at least one checked expectation");
+    // level badge = the level of the patient it loads (A9, E11)
+    const sc0 = S.scenarios.find((x) => x.id === t.steps[0].do.scenario);
+    assert.ok(t.level >= 1 && t.level <= 4 && t.level >= sc0.level, t.id + " level " + t.level);
+    assert.ok(!t.steps[t.steps.length - 1].do || t.steps[t.steps.length - 1].do.key, t.id + " ends by stating or restoring the patient");
   }
 });
 
@@ -191,7 +198,7 @@ test("learn.alarms and learn.dyssync cover every id", () => {
   assert.deepEqual(Object.keys(L.alarms).sort(), [...ALARMS].sort());
   ALARMS.forEach((id) => {
     const a = L.alarms[id];
-    assert.ok(a.causes.length >= 2 && a.causes.every(bi) && bi(a.clue) && a.steps.length >= 3 && a.steps.every(bi) && bi(a.fix), id);
+    assert.ok(a.causes.length >= 2 && a.causes.every(bi) && bi(a.clue) && a.steps.length >= 3 && a.steps.every(bi) && bi(a.fix) && bi(a.plain), id);
   });
   ["pPeakHigh", "disconnect"].forEach((id) => assert.ok(JSON.stringify(L.alarms[id]).includes("DOPE"), id + " teaches DOPE"));
   assert.deepEqual(Object.keys(L.dyssync).sort(), [...DYSSYNC].sort());
@@ -244,7 +251,7 @@ test("M10: abg-07 keyed answer is defensible by the Boston rules", () => {
   assert.ok(g.HCO3 > acute + 1 && g.HCO3 < chronic - 1, `HCO3 ${g.HCO3} between acute ${acute} and chronic ${chronic}: acute on chronic`);
   assert.ok(g.pH < 7.3, "the acute component shows as acidaemia");
   assert.match(c.q1.options[c.q1.answer].en, /Acute respiratory acidosis on top of chronic/);
-  assert.ok(c.q2.ask.en.includes("Total PEEP is 7.4"), "ask quotes the model's total PEEP");
+  assert.match(c.q2.ask.en, /Total PEEP is \d+(\.\d)? on a set PEEP of 5/, "ask quotes the model's total PEEP");
 });
 
 test("m1 to m8: case and card wording from the review", () => {

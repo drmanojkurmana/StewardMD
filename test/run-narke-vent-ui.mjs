@@ -214,6 +214,7 @@ try {
   await click(`[data-act=vlfinish]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-score b') && document.querySelectorAll('#smdNarke .vl-parts li').length >= 3;`), "Finish shows the debrief with the score breakdown");
   ok(await ev(`var X=NARKE_MODELS["vent-engine"].SCORE_MAX, sm=[].map.call(document.querySelectorAll('#smdNarke .vl-parts b small'), function(e){return e.textContent;}); return sm.length>=3 && sm.indexOf('/'+X.protection)>=0 && sm.indexOf('/'+X.oxygenation)>=0;`) === true, "debrief maxima come from the engine's SCORE_MAX");
+  ok(await ev(`var sc=NARKE_VENT_UI.run().score, nul=Object.keys(sc.parts).filter(function(k){return sc.parts[k]===null;}), rows=document.querySelectorAll('#smdNarke .vl-parts li.vl-pna'); return rows.length===nul.length && [].every.call(rows, function(r){ return /Not scored/.test(r.querySelector('b').textContent) && r.querySelector('.vl-pnote').textContent.length > 10; });`) === true, "debrief: a part the run did not test says Not scored, with the reason");
   ok(await noOverflow() === true, "debrief: no horizontal scroll");
   await shot("390-dark-debrief");
   await theme(false); await shot("390-light-debrief"); await theme(true);
@@ -372,9 +373,13 @@ try {
     await shot("390-dark-alarm-action");
     await click(`.vl-sheet [data-act=vlbed][data-k=decompress]`);
     ok(await until(`return !document.querySelector('#smdNarke .vl-sheet-wrap') && document.querySelector('#smdNarke [data-act=vlbed][data-k=decompress]').getAttribute('aria-disabled')==='true' && /drain in place/i.test(document.querySelector('#smdNarke [data-act=vlbed][data-k=decompress]').textContent);`), "Decompress from the alarm card closes it and the drain shows as in place");
+    // the transfusion is now the learner's bedside action, not a timeline event: decompress, then give blood
+    ok(await ev(`return !!document.querySelector('#smdNarke #vlBedW [data-act=vlbed][data-k=blood]');`) === true, "Give blood is offered at the bedside");
+    await click(`#vlBedW [data-act=vlbed][data-k=blood]`);
+    ok(await lastAct("blood") === true, "the transfusion is logged in the run log");
     await skip(1800);
     const sp2 = await num(`#vlSpo2`);
-    ok(sp2 >= 90 && sp2 > sp1 + 5, "after Decompress SpO2 recovers (" + sp1 + " to " + sp2 + ")");
+    ok(sp2 >= 90 && sp2 > sp1 + 5, "after Decompress and blood SpO2 recovers (" + sp1 + " to " + sp2 + ")");
     ok(await lastAct("decompress") === true, "Decompress is logged in the run log");
 
     // ARDS: bag 100% shows the countdown and the off-ventilator state, then the lung has derecruited
