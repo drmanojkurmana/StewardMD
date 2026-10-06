@@ -1,6 +1,6 @@
 # PrepNucleus
 
-Exam question bank for NEET-PG / INI-CET, NEET-SS and USMLE. About 1,750 modules across 19 MBBS subjects and 14
+Exam question bank for NEET-PG / INI-CET, NEET-SS, USMLE and FMGE (FMGE = the MBBS bank as is). About 1,750 modules across 19 MBBS subjects and 14
 SS Medicine groups, laid out as exam tabs, a subject grid, sections with numbered modules, practice with
 explanations, timed tests with a question grid, bookmarks, a custom module, subject search and offline downloads.
 FSRS-6 spaced review through `specialty-core.js`. Students can also turn their own PDF or notes into a deck
@@ -20,6 +20,8 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - Boot: `prep-loader.js` (the only file at boot; loads `prep.css`, `specialty-core.js`, `specialty-bank.js`,
   `prep.js` on first open at one `?v=` token; skips engine files already on the page).
 - App: `prep.js` (screens, store, IndexedDB cache, runner; pure helpers under node), `prep.css` (`.pn-*`, `body.dark`).
+- Plan: `prep-plan.js` + `prep-plan.css` (`window.PREP_PLAN`, loaded after `prep-pyq.js`; onboarding, readiness, Today's
+  plan; `prep.js` forwards `data-act` `p-*`, asks `back()` first). See "Plan, readiness, onboarding, FMGE".
 - Arena client and My stats: `prep-arena.js` (`window.PREP_ARENA`, loaded after `prep.js`, draws through `PREP._host`;
   `prep.js` forwards every `data-act` starting `a-` to it and asks `PREP_ARENA.back()` first on back). See "Arena client".
 - Layer C client: `prep-create.js` and friends draw through `PREP._host`; `prep.js` forwards every `data-act`
@@ -30,9 +32,10 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   cached in IndexedDB `prep-bank` after first open.
 - Server: `functions/api/prep/bank/[[path]].js`, `functions/api/prep/flag.js` (reports, auto-hide, owner list and
   restore), `functions/api/ai/_prep-generate.js` + `functions/_prep-core.js` (Layer C ops and shared gates).
-- Adapt and exam (in `prep.js`): Today card (due reviews, daily goal 20/30/50/100, "Fix my weak areas"),
+- Adapt and exam (in `prep.js`): Today card (due reviews, daily goal; replaced on home by Today's plan from `prep-plan.js`,
+  "Weak areas" is now a Practise row),
   adaptive difficulty for new questions (`targetDifficulty`), My mistakes with tags (`mt`), mock exams per
-  pattern (`MOCKS`: NEET-PG +4/-1, INI-CET +1/-1/3, NEET-SS +4/-1, USMLE block) with per-subject analysis.
+  pattern (`MOCKS`: NEET-PG +4/-1, INI-CET +1/-1/3, NEET-SS +4/-1, USMLE block, FMGE +1/0 in parts of 150) with per-subject analysis.
 - Offline teacher: `prep-teacher.js` ("Why is B wrong? Ask MaiK offline", native with a downloaded pack only;
   answers checked for numbers and drug names against the grounding, else the stored explanation).
 - Edge: `start_mcq` in `edge-router.js` opens `PREP.open({ query, n, mode })` ([[StewardMD Edge]]).
@@ -223,6 +226,44 @@ own (inside `smd_prep`): the home row shows on the NEET-PG tab; data comes from 
   image attachment, merge and bank dedupe, stage requests and gates, dry run with no call, app pure helpers),
   `test/prep-server.test.mjs` (PYQ route whitelist), headless `test/run-prep-pyq-ui.mjs` (`SHOTS=<dir>`, `PN_LIGHT=1`).
 
+## Plan, readiness, onboarding, FMGE (2026-10-06, branch `feat/prep-plan`)
+Plan: [[plans/PrepNucleus-Plan2]] sections 1, 4, 5 phase 1. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus plan".
+No flag of its own (inside `smd_prep`).
+- **Onboarding** (`onboard()`): first plain `PREP.open()` while `pl.ob` is not 1. Exam (NEET-PG, INI-CET, NEET-SS, USMLE,
+  FMGE; INI-CET maps to the NEET-PG tab), exam date (native date input, "Not decided yet"), minutes a day (15/30/60/90/120),
+  reminder time (native time input or none; stored only, the native reminder needs a store build). Skip stores defaults
+  (30 min, no date). "Change plan" on home opens the same fields in a settings sheet; saving re-plans the day.
+- **Store:** `pl { ob, exam, date, min, rem }`; `pt { d, ex, min, items, total }` today's plan per exam tab (rebuilt on a
+  new local day, a tab change or new minutes); `ra` answer log `[module, 1|0]`, newest last, 600 kept (written by
+  `record()` in `prep.js` through `PREP_PLAN.noteAnswer`).
+- **Readiness** (`readiness()`, pure): geometric mean of coverage, retention, accuracy, x 100. Coverage = modules with
+  any answer or card / modules with questions for the exam (taxonomy modules until the subject index loads), weighted
+  per subject by `BLUEPRINT[exam]` (FMGE only: NBEMS bulletin marks; radiotherapy 5 has no bank subject, so 295) else by
+  module count. Retention = mean `SPECIALTY_CORE.retrievability(today - last, s)` of the exam's seen cards. Accuracy =
+  last 200 logged answers in the exam's modules, module totals when the log is empty. Home: one line (score /100, exam,
+  days to the exam when a date is set and the tab matches the chosen exam). Tap: sheet with the three factors, what each
+  counts, the three weakest subjects (score asc, heavier first) and one action each (`subjectAction`: most due ->
+  "Review N due", weakest module under 60% -> "Practise", first untouched -> "Start").
+- **Today's plan** (`planDay()`, pure): reviews 30 s each up to the minutes; a mini mock (50 questions, the chosen exam's
+  pattern) on Saturday/Sunday, or any day within 14 days of the exam, when it fits; a lesson (`pickLesson`: the weakest
+  subject with an unfinished lesson in `prep/lessons/v1/index.json`) when it fits and the exam is more than 14 days away;
+  new questions (exam sec/60 min each, at least 5) in `weakModules`, else where "solve next" points. Rows tick from the
+  store (`itemProgress`: due count dropped since planning, new cards made today since planning, lesson finished today,
+  a mock finished today). Starting: reviews and new questions run here through `HOST.run`; the lesson row is `l-open`;
+  the mock row is `HOST.startMock(id, "mini")`. PYQ papers are not planned yet (data not in R2).
+- **FMGE:** `EXAMS` entry `fmge` with `all: true` (every MBBS subject regardless of its `ex` tags). `MOCKS.fmge`: 300
+  questions, 300 min, 2 parts, +1/0, pass 150; the mock screen offers "One part: 150 questions, 2 h 30 min" and a mini
+  mock; the result names the pass mark. Source: NBEMS "FMGE October 2026 information bulletin" v2.2
+  (https://nbe.edu.in/IB/FMGE%20october%202026%20information%20bulletin%20v2.2.pdf), section 5 (scheme, no negative
+  marking, pass 150/300) and section 12.2 (blueprint), fetched 2026-10-06. The bulletin gives each part as 150+3 min;
+  the mock uses 150. Arena: `SOON.fmge` in `prep-arena.js` ("coming soon"), no server scheme.
+- **Tests:** `test/prep-plan.test.mjs` (readiness factors, blueprint, last-200 window, empty and all-wrong, daysLeft,
+  planner order and budget over every minutes/due/weekend/pace/days combination, lessons, progress, actions, FMGE pattern
+  and blueprint) and headless `test/run-prep-plan-ui.mjs` (onboarding, hero, sheet, plan ticking, settings re-plan, skip,
+  FMGE tab, mock and Arena; `SHOTS=<dir>`, `PN_LIGHT=1`).
+- **Gotcha:** every other headless PrepNucleus test sets `window.SMD_PREP_ONBOARD=false` in its init script, or the first
+  open stops at onboarding. A new UI test needs the same line.
+
 ## Cards (2026-10-06, branch `feat/prep-cards`)
 Module flashcards (Plan 2 phase 2). No flag of its own (inside `smd_prep`): a module screen shows **Cards · n** when
 `prep/cards/v1/index.json` lists the module; home shows **Cards due** once any card was studied. Decision:
@@ -263,13 +304,17 @@ Module flashcards (Plan 2 phase 2). No flag of its own (inside `smd_prep`): a mo
   swipe, cloze, occlusion, end screen, FSRS rows, home Cards due; `SHOTS=<dir>`, `PN_LIGHT=1`).
 
 ## Store
-localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp}` (`ls`/`lsp`: Lessons; `fc`: Cards). FSRS deck key
+localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
+`pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
 `p:<module>` (module cards `p:<module>:c`, Layer C decks `p:deck-<id>`). `hid` is the auto-hidden list, refreshed at most every 6 hours.
+Today's plan counts questions only: its "due reviews" and "new questions" skip card keys `p:<module>:c:<cardId>`
+(`isQ` in `prep-plan.js`); cards due show on the home "Cards due" row, not as a plan item (yet). Readiness retention
+still reads cards and questions together (`recall()` over `p:<module>`).
 
 ## Tests
 `test/prep-app.test.mjs`, `test/prep-build-bank.test.mjs`, `test/prep-server.test.mjs`, `test/prep-core.test.mjs`,
 `test/prep-generate.test.mjs`, `test/prep-layerc-e2e.test.mjs`, `test/prep-create.test.mjs`, `test/prep-teacher.test.mjs`,
-`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
+`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
 Chromium at `/opt/pw-browsers/chromium` by default, `CHROME=` to override).
 
 ## Bank v1 mapping (2026-10-06)

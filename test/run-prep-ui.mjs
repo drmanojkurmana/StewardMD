@@ -4,7 +4,7 @@
  * (an empty module says "Questions coming soon"); practice marks each answer with its explanation and source line and
  * writes FSRS cards; a flagged item and an item on the reported-and-hidden list never show; a report is kept; subject
  * search finds a question and opens it; a wrong answer joins My mistakes with its tag and leaves when answered right;
- * the Today card counts the day and starts a set; a mini mock is marked with the pattern's negative marking and
+ * home shows readiness and Today's plan, whose reviews item starts the due set; a mini mock is marked with the pattern's negative marking and
  * analysed by subject; PREP.open({ query, n }) (Edge start_mcq) starts the best module; a bookmark is counted on home; a timed test runs a clock, marks for
  * review, submits and marks; the NEET-SS tab shows the SS subject; a module opened once loads again with the bank
  * route blocked after a reload (IndexedDB); back() unwinds to home and closes; the Review Desk "PrepNucleus reports"
@@ -62,7 +62,7 @@ try {
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   // Fixture bank instead of the real one; confirm() answers yes. Runs before any page script.
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
   const tile = `return !!document.querySelector('.rnav-tile[data-act=prep]');`;
@@ -166,9 +166,7 @@ try {
   ok(await ev(`return /1 saved/.test(document.querySelector("#smdPrep [data-act=bookmarks]").textContent);`) === true, "home counts the bookmark");
   const nmt = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`);
   ok(nmt > 0 && await ev(`return /${nmt} to fix/.test(document.querySelector("#smdPrep [data-act=mistakes]").textContent);`) === true, "home counts the mistakes: " + nmt);
-  ok(await ev(`return /answered today/.test(document.querySelector("#smdPrep .pn-plan").textContent);`) === true, "the Today card shows the day's count");
-  await click("#smdPrep [data-act=goal]");
-  ok(await ev(`return JSON.parse(localStorage.getItem("smd_prep_v1")).goal;`) === 50, "the goal chip steps the daily goal");
+  ok(await until(`return !!document.querySelector("#smdPrep .pl-hero") && !!document.querySelector("#smdPrep .pl-list [data-k=new]");`, 5000), "home shows the readiness line and Today's plan");
   await click("#smdPrep [data-act=mistakes]");
   await sleep(300); await shot("mistakes");
   ok(await until(`return document.querySelectorAll("#smdPrep .pn-mods .pn-mod").length === ${nmt};`, 5000), "My mistakes lists them");
@@ -193,10 +191,11 @@ try {
   ok(await ev(`var m=JSON.parse(localStorage.getItem("smd_prep_v1")).mh; return m.length===1 && m[0].marks===3 && /mini/.test(m[0].label);`) === true, "the finished mock is kept in the mock history");
   await click("#smdPrep [data-act=donerun]");
   await ev(`PREP.back(); return 1;`);
-  await until(`return !!document.querySelector("#smdPrep .pn-plan");`, 3000);
-  await ev(`var st=PREP._st.store, k=Object.keys(st.cards).filter(function(x){return x.indexOf("p:ana-gametogenesis:")===0;})[0]; st.cards[k][3]=0; PREP._st.stack[PREP._st.stack.length-1](); return 1;`);
-  await click("#smdPrep [data-act=plan]");
-  ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && /Today/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 8000), "Start on the Today card runs a set");
+  await until(`return !!document.querySelector("#smdPrep .pl-hero");`, 3000);
+  await ev(`var st=PREP._st.store, k=Object.keys(st.cards).filter(function(x){return x.indexOf("p:ana-gametogenesis:")===0;})[0]; st.cards[k][3]=0; st.pt=null; PREP._st.stack[PREP._st.stack.length-1](); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep .pl-list [data-k=rev]");`, 5000);
+  await click("#smdPrep .pl-list [data-k=rev]");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && /Today/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 8000), "the reviews item of Today's plan runs the due set");
   await ev(`PREP.close(); PREP.open({ query: "quiz me on brachial plexus", n: 2 }); return 1;`);
   ok(await until(`var r=PREP._st.run; return !!r && r.items.length===2 && r.items.every(function(it){return it._m==="ana-brachial-plexus";});`, 8000), "PREP.open({ query, n }) starts the best-matching module with n questions");
   await ev(`PREP.close(); return 1;`);

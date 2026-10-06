@@ -11417,6 +11417,29 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   guessing keys for answer-only recalls; both are reported as parse failures. **Status:** branch `feat/prepnucleus`;
   no paid stage run (dry run about $0.11), not uploaded to R2 (owner's yes).
 
+## 2026-10-06 - PrepNucleus plan: onboarding, readiness and Today's plan computed on the phone; FMGE on the MBBS bank
+- **Decision** ([[PrepNucleus]], "Plan, readiness, onboarding, FMGE"; Plan 2 phase 1): a new `prep-plan.js` (no flag of
+  its own, inside `smd_prep`) owns onboarding, the readiness line and Today's plan; `prep.js` keeps only small hooks so
+  parallel PrepNucleus work merges cleanly.
+- **Onboarding:** 4 screens on the first plain open (exam, exam date or "not decided", 15/30/60/90/120 minutes, reminder
+  time), skippable, editable later in a settings sheet. No phone number, no tracking prompt, no paywall, no fake loader.
+  Deep links (Edge `start_mcq`, a subject, mistakes) skip it. The reminder time is only stored until a native build adds
+  the reminder.
+- **Readiness = geometric mean of coverage x retention x accuracy, x 100.** Coverage = share of the exam's modules
+  (with questions) attempted, weighted by the published blueprint per subject when one exists (FMGE), else by module
+  count; retention = mean FSRS retrievability today of the seen cards; accuracy = the last 200 answers (a new answer log
+  `ra`; module totals before the log existed). A geometric mean so one weak part cannot hide behind two strong ones.
+  Nothing answered = 0 with a friendly line, never a red score. No ring: one line on home, the formula in a sheet.
+- **Plan v1 is deterministic and explains itself:** due reviews first (30 s each, as many as fit), a weekend mini mock
+  (every day in the last 14 days) when it fits, a lesson in the weakest subject that has one (not in the last 14 days),
+  then new questions in the weak modules (1 min each, 1.5 for USMLE; at least 5). The total never exceeds the minutes.
+  Made once per local day and exam tab, so items tick instead of shifting. PYQ papers are not offered yet (data lives
+  in R2, not uploaded).
+- **FMGE:** an exam tab over the whole MBBS bank (`all: true`), pattern from the NBEMS FMGE October 2026 information
+  bulletin (v2.2, nbe.edu.in/IB): 300 MCQs in 2 parts of 150, 150 min each, +1, no negative marking, pass 150 of 300;
+  readiness weights by its blueprint (section 12.2). A full mock here is one part. Arena: "coming soon" on the client,
+  no server scheme (the arena-server marking test skips FMGE).
+
 ## 2026-10-06 - PrepNucleus Cards: one FSRS store for cards and questions, gated cards from screened explanations
 - **Decision** ([[PrepNucleus]], "Cards"; [[plans/PrepNucleus-Plan2]] section 2 "one memory model"): module flashcards
   write to the same FSRS store as the questions under deck key `p:<module>:c` (card key `p:<module>:c:<cardId>`), so
@@ -11436,3 +11459,13 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `prep/cards/v1/` (pilot only in git; a full run goes to `prep/cards/gen/`, gitignored, then R2).
 - **Not run:** no paid call made. Dry runs (gemini-3.1-flash-lite, Batch): 20-module pilot $0.26 (Rs 25), all 864 MBBS
   modules $8.61 (Rs 826). SS modules have no v1 bank yet and are skipped.
+
+## 2026-10-06 - PrepNucleus plan and Cards merged: Today's plan counts questions only
+- **Decision** ([[PrepNucleus]], "Store"): Today's plan "due reviews" and "new questions" count MCQ keys only
+  (`p:<module>:<qid>`); flashcard keys `p:<module>:c:<cardId>` are skipped (`isQ` in `prep-plan.js`, same rule as
+  `progressByModule` in `prep.js`). Otherwise a card review would tick a question item the student never did, and due
+  cards would inflate the minutes budgeted for question reviews (30 s each).
+- **Not done:** no "Cards due" plan item. It needs a new item kind (minutes per card, progress, start action into
+  `PREP_FLASH`); the home "Cards due" row (prep-flash.js) already shows them. Add it once cards are generated for real.
+- Readiness retention keeps reading cards and questions together (`recall()` over `p:<module>`), as the Cards decision
+  intended. Cache token `prep7`.

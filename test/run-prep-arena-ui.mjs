@@ -128,7 +128,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; ${WS_STUB}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; ${WS_STUB}` });
   await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/arena/*" }] });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await sleep(300); };
@@ -142,7 +142,7 @@ try {
   ok(await openPrep(), "PrepNucleus opens with the fixture bank");
   ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena is OFF by default");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today|Practise|Subjects", "home sections: Today, Practise, Subjects");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects", "home sections: Today's plan, Practise, Subjects");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic svg") && !/[A-Z]{3}/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic").textContent);`) === true, "subject cards carry an SVG icon, not a text monogram");
   await shot("home-off");
   // some local practice so My stats has something to show
@@ -172,7 +172,7 @@ try {
   ok(await until(`var c=document.getElementById("pnCompete"); return !!c && /Live now, ends in 1\\d:\\d\\d/.test(c.textContent) && /Starts in 2 d/.test(c.textContent);`, 8000), "Compete: live daily sprint with its countdown, weekly test coming: " + await ev(`return (document.getElementById("pnCompete")||{}).textContent;`));
   const cd1 = await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`); await sleep(1300);
   ok(await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`) !== cd1, "the countdown ticks");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today|Compete|Practise|Subjects", "home sections: Today, Compete, Practise, Subjects");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Compete|Practise|Subjects", "home sections: Today's plan, Compete, Practise, Subjects");
   await shot("home");
 
   // ---- consent

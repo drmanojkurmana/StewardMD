@@ -17,6 +17,7 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+const LOADER_V = (await import("node:fs")).readFileSync(new URL("../prep-loader.js", import.meta.url), "utf8").match(/var V = "([^"]+)"/)[1];
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8995) + "/").replace(/\/?$/, "/");
 const PORT = +(process.env.CHROME_PORT || 9397), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-pyq-chrome-" + PORT + "-" + Date.now();
@@ -64,7 +65,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
@@ -182,7 +183,7 @@ try {
   // ---- offline copy, network, errors
   ok(await evA(`PREP._host.cacheGet("pyq/index.json").then(function(f){ return !!(f && f.papers && f.papers.length===3); })`) === true, "the PYQ index is kept in IndexedDB");
   ok(await evA(`PREP._host.cacheGet("pyq/items-0f0f0f01.json").then(function(f){ return !!(f && f.items && f.items.length===6); })`) === true, "the PYQ items are kept in IndexedDB");
-  ok(reqs.some((u) => /\/prep-pyq\.js\?v=prep5/.test(u)), "prep-pyq.js loads at the current token");
+  ok(reqs.some((u) => u.includes("/prep-pyq.js?v=" + LOADER_V)), "prep-pyq.js loads at the current token");
   ok(!reqs.some((u) => /\/api\/(ai|prep\/bank)/.test(u)), "no request to /api/ai or the live bank");
   await ev(`PREP.close(); return 1;`);
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));

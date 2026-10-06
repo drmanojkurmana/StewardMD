@@ -165,15 +165,16 @@
     if (e && e.status === 403) A.consent = null;   // consent gone (left on another phone): ask again next time
     return errWord(e && e.status, e && e.body && e.body.error);
   }
-  // Exams whose Arena is not open yet (the server answers 503 bank-empty): NEET-SS until its bank is filled.
-  var SOON = { "neet-ss": 1 };
+  // Exams whose Arena is not open yet, with the reason: NEET-SS until its bank is filled (the server answers 503
+  // bank-empty); FMGE has no Arena events on the server yet.
+  var SOON = { "neet-ss": "open once this exam's question bank is ready", "fmge": "for FMGE come in a later update" };
 
   /* ---------- home: Compete ---------- */
   function homeHtml(host) {
     H = host;
     if (!online()) return '<div class="pn-group">' + H.row("a-retryhome", H.ico("off"), "Needs a connection", "Arena events and battles run online. Practice works offline.") + "</div>";
     if (!user()) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("user") + '</span><span class="pn-rb"><b>Sign in to compete</b><small>Daily sprints, the weekly grand test and 1v1 battles need a StewardMD account. Practice works without one.</small></span></div></div>';
-    if (SOON[exam()]) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles open once this exam's question bank is ready. NEET-PG and USMLE are open.</small></span></div></div>";
+    if (SOON[exam()]) return '<div class="pn-group"><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico("trophy") + '</span><span class="pn-rb"><b>' + esc(H.exam().label) + " Arena: coming soon</b><small>Sprints, grand tests and battles " + SOON[exam()] + ". NEET-PG and USMLE are open.</small></span></div></div>";
     var now = Date.now(), ev = A.events || [], d = pickEvent(ev, "daily", now), w = pickEvent(ev, "weekly", now);
     var line = function (e) { return A.events ? eventLine(e || null, now) : "Loading"; };
     var cdAttr = function (e) { return e ? ' data-cd="' + esc(e.id) + '"' : ""; };

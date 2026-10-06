@@ -16,6 +16,7 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+const LOADER_V = (await import("node:fs")).readFileSync(new URL("../prep-loader.js", import.meta.url), "utf8").match(/var V = "([^"]+)"/)[1];
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8996) + "/").replace(/\/?$/, "/");
 const PORT = +(process.env.CHROME_PORT || 9398), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/prep-lsn-chrome-" + PORT + "-" + Date.now();
@@ -74,7 +75,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;};` + TTS_STUB });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` + TTS_STUB });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
@@ -213,7 +214,7 @@ try {
 
   // ---- offline copy, network, errors
   ok(await evA(`PREP._host.cacheGet("lessons/v1/${MID}.json").then(function(f){ return !!(f && f.steps && f.steps.length===8); })`) === true, "the lesson is kept in IndexedDB for offline");
-  ok(reqs.some((u) => /\/prep-lessons\.js\?v=prep5/.test(u)) && reqs.some((u) => /\/prep\/lessons\/v1\/index\.json/.test(u)), "prep-lessons.js and the lesson index load");
+  ok(reqs.some((u) => u.includes("/prep-lessons.js?v=" + LOADER_V)) && reqs.some((u) => /\/prep\/lessons\/v1\/index\.json/.test(u)), "prep-lessons.js and the lesson index load");
   ok(!reqs.some((u) => /\/api\/(ai|prep\/bank)/.test(u)), "no request to /api/ai or the live bank");
   await ev(`PREP.close(); return 1;`);
   ok(errors.length === 0, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));
