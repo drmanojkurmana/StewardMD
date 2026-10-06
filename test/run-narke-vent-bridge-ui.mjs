@@ -116,6 +116,7 @@ try {
   await tap(`[data-act=vbstyle][data-v=drager]`);
   { const r = await tap(`[data-act=vbtile][data-k=vte]`); ok(r === 1, "a measured number takes a real tap" + (r === 1 ? "" : ": " + r)); }
   ok(await until(`var i=document.getElementById('vbInfo'); return /MEASURED/.test(i.textContent) && i.textContent.indexOf(${JSON.stringify(J.screen.tiles.find((t) => t.id === "vte").name.en)})>=0;`), "VTe explains itself and is marked MEASURED");
+  await sleep(600); // the first tap scrolls the explanation into view: tap again once that scroll has settled
   { const r = await tap(`[data-act=vbtile][data-k=fio2]`);
     ok(r === 1 && await until(`var i=document.getElementById('vbInfo'); return /SET/.test(i.querySelector('.vb-kind').textContent) && /policy/.test(i.textContent);`), "FiO2 is marked SET and carries the local-policy caveat" + (r === 1 ? "" : ": " + r)); }
   ok(await ev(`return /^2 of/.test(document.getElementById('vbOpened').textContent) && document.querySelectorAll('#smdNarke .vb-t.seen').length===2;`) === true, "learned numbers are counted and marked");
@@ -194,7 +195,10 @@ try {
   await tap(`[data-act=vbtile][data-k=ppeak]`);
   ok(await ev(`var i=document.getElementById('vbInfo'); return !i.classList.contains('vb-in') || getComputedStyle(i).animationName==='none';`) === true, "reduced motion: no slide on the explanation");
   await call("Emulation.setEmulatedMedia", { features: [] });
-  await size(1280, 860); await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("12-1280-dark-screen-map"); await size(390, 844);
+  await size(1280, 860); await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("12-1280-dark-screen-map");
+  ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vb-t'), function(b){ return b.scrollWidth <= b.clientWidth + 1; });`) === true, "1280 px: every panel number fits inside its key");
+  await size(390, 844);
+  ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vb-t'), function(b){ return b.scrollWidth <= b.clientWidth + 1; });`) === true, "390 px: every panel number fits inside its key");
 
   const txt = await ev(`return document.getElementById("smdNarke").innerText;`), dm = /[\s\S]{0,60}[–—][\s\S]{0,60}/.exec(txt);
   ok(!dm, "no em or en dash on the bridge screens" + (dm ? ": " + dm[0] : ""));

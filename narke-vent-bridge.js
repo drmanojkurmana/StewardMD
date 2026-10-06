@@ -61,7 +61,7 @@
     nOfM: T("{n} of {m} checked", "{m} में से {n} जाँचे"), clear: T("Clear the ticks", "सारे tick हटाएँ"),
     allDone: T("All checked", "सब जाँच लिया"),
     set: T("SET", "SET"), meas: T("MEASURED", "MEASURED"), setL: T("Set by you", "आप set करते हैं"), measL: T("Measured by the machine", "Machine मापती है"),
-    styleH: T("Panel style", "Panel style"), legendSet: T("SET: your orders, on the keys", "SET: आपके आदेश, keys पर"), legendMeas: T("MEASURED: what happened, by the waves", "MEASURED: जो हुआ, waves के पास"),
+    styleH: T("Panel style", "Panel style"), legendSet: T("your orders, on the keys", "आपके आदेश, keys पर"), legendMeas: T("what happened, beside the waves", "जो हुआ, waves के पास"),
     tapHint: T("Tap any number on the panel to learn it.", "Panel पर किसी भी number को सीखने के लिए tap करें।"),
     opened: T("{n} of {m} numbers learned", "{m} में से {n} numbers सीखे"),
     tileAria: T("{x} {v}, {k}. Learn it", "{x} {v}, {k}। सीखें"),
@@ -219,7 +219,7 @@
     var kind = x.kind === "set" ? "set" : "meas";
     return '<button type="button" class="vb-t vb-' + kind + (learned ? " seen" : "") + '" data-act="vbtile" data-k="' + esc(x.id) + '" aria-pressed="' + (SC.sel === x.id) + '"' +
       ' aria-label="' + esc(t(STR.tileAria).replace("{x}", lab + (x.labels && x.id !== "mode" && x.labels.generic !== lab ? " (" + x.labels.generic + ")" : "")).replace("{v}", val + (x.unit ? " " + x.unit : "")).replace("{k}", t(x.kind === "set" ? STR.setL : STR.measL))) + '">' +
-      '<span class="vb-tl">' + esc(lab) + '</span><span class="vb-tv">' + esc(val) + (x.unit ? '<i>' + esc(x.unit) + "</i>" : "") + "</span></button>";
+      '<span class="vb-tl" translate="no">' + esc(lab) + '</span><span class="vb-tv">' + esc(val) + (x.unit ? '<i>' + esc(x.unit) + "</i>" : "") + "</span></button>";
   }
   // The mode key reads "Mode" with the brand's mode name as its value; every other number keeps its value.
   function tlab(x) { return x.id === "mode" ? t(STR.modeL) : (x.labels && (x.labels[SC.style] || x.labels.generic)) || ""; }
@@ -274,7 +274,7 @@
     var sc = D().screen || {}, st0 = sc.styles || [];
     return '<details class="vl-card vb-labels"><summary>' + s("labelsH") + "</summary>" +
       '<ul class="vb-lrows">' + (sc.labelRows || []).map(function (r) {
-        return '<li><b>' + tx(r.term) + "</b><dl>" + st0.map(function (x) { return "<div><dt>" + tx(x.name) + "</dt><dd>" + esc(r[x.id] || "") + "</dd></div>"; }).join("") + "</dl></li>";
+        return '<li><b>' + tx(r.term) + "</b><dl>" + st0.map(function (x) { return "<div><dt>" + tx(x.name) + "</dt><dd translate=\"no\">" + esc(r[x.id] || "") + "</dd></div>"; }).join("") + "</dl></li>";
       }).join("") + "</ul></details>";
   }
   function scr(focusSel) {
