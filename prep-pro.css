@@ -1,0 +1,37 @@
+/* PrepNucleus Pro (prep-pro.js): pricing screen, win-back card, limit sheet. Reads the prep.css --pn-* tokens (body.dark
+   switches them); the sheet reuses .pn-sheet-wrap / .pn-scrim / .pn-sheet from prep.css. Loaded by prep-loader.js. */
+.pn-root .pp-price { margin: 0; font-size: inherit; font-weight: inherit; line-height: 1.1; }
+.pn-root .pp-why { margin-top: -4px; color: var(--pn-mut); font-size: 14px; font-weight: 600; }
+.pn-root .pp-h { margin: 0; font-weight: 650; text-wrap: balance; }
+.pn-root a.pp-cancel { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+.pn-root a.pp-cancel:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; border-radius: 6px; }
+.pn-root .pp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; }
+.pn-root .pp-price b { font-size: 34px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.pn-root .pp-price span { color: var(--pn-mut); font-size: 15px; }
+.pn-root .pp-strike { color: var(--pn-mut); font-size: 15px; text-decoration-thickness: 1.5px; }
+.pn-root .pp-save { align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-size: 13px; font-weight: 650; }
+.pn-root .pp-plan .pn-btn { margin-top: 4px; }
+.pn-root .pp-offer { border-color: var(--pn-pri); }
+.pn-root .pp-offer-line { font-size: 17px; line-height: 1.45; text-wrap: pretty; }
+.pn-root .pp-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0 4px; }
+.pn-root .pp-inl { min-height: 44px; padding: 0 4px; font-size: 13px; }
+.pn-root .pp-start { justify-content: flex-start; align-self: flex-start; padding: 0; }
+.pn-root .pp-refund { gap: 4px; }
+.pn-root .pp-refund p { line-height: 1.5; }
+.pn-root .pp-cmp { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--pn-card); border: 1px solid var(--pn-line); border-radius: 16px; overflow: hidden; font-size: 14px; }
+.pn-root .pp-cmp th, .pn-root .pp-cmp td { padding: 12px 12px; text-align: left; vertical-align: top; border-top: 1px solid var(--pn-line); }
+.pn-root .pp-cmp thead th { border-top: 0; font-size: 13px; color: var(--pn-mut); font-weight: 650; }
+.pn-root .pp-cmp tbody th { font-weight: 600; }
+.pn-root .pp-cmp td:last-child { color: var(--pn-pri-ink); font-weight: 650; }
+.pn-root .pp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.pn-root .pp-refrow { display: flex; gap: 8px; align-items: stretch; }
+.pn-root .pp-refrow .pn-in { flex: 1 1 auto; min-width: 0; font-size: 16px; }
+.pn-root .pp-used { font-size: 15px; color: var(--pn-mut); }
+.pn-root .pp-used b { color: var(--pn-text); font-variant-numeric: tabular-nums; }
+.pn-root .pp-list { display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.45; }
+.pn-root .pp-refrow .pn-btn { min-height: 44px; }
+.pn-root .pp-inl, .pn-root .pp-start { min-height: 44px; flex: 0 0 auto; }
+.pn-root .pp-cmp tbody th { width: 42%; }
+.pn-root .pp-cmp td:last-child { white-space: nowrap; }
+.pn-root .pp-cmp td { font-variant-numeric: tabular-nums; }
+.pn-root .pp-nw { white-space: nowrap; }

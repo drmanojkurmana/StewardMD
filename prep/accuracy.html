@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PrepNucleus accuracy</title>
+<meta name="description" content="How often PrepNucleus questions are wrong, how AI-written content is checked, and how these numbers are made.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3f6f7">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a1319">
+<link rel="icon" href="/favicon-32x32.png">
+<link rel="stylesheet" href="/prep.css?v=acc1">
+<link rel="stylesheet" href="/prep-social.css?v=acc1">
+<style>
+  html { -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: #f3f6f7; }
+  body.dark { background: #0a1319; }
+  /* prep.css makes .pn-root a fixed overlay; here it is the page. */
+  .pn-root.ps-page { position: static; min-height: 100dvh; overflow: visible; display: block; }
+  .ps-page .ps-top { max-width: 752px; margin: 0 auto; padding: calc(28px + env(safe-area-inset-top, 0px)) 16px 4px; }
+  .ps-page .ps-top h1 { font-size: 28px; font-weight: 750; letter-spacing: -.02em; line-height: 1.15; text-wrap: balance; }
+  .ps-page .ps-top p { margin-top: 6px; color: var(--pn-mut); font-size: 15px; }
+  .ps-page .pn-body { overflow: visible; padding-top: 8px; }
+  .ps-page a { color: var(--pn-pri); text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="pn-root ps-page">
+  <header class="ps-top"><h1>PrepNucleus accuracy</h1><p>How often our questions are wrong, and what we do about it. Part of <a href="/">StewardMD</a>.</p></header>
+  <main class="pn-body ps-acc" id="psAcc"><p class="pn-load" role="status">Loading the numbers</p></main>
+</div>
+<script>
+  (function () {
+    var mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+    function theme() { document.body.classList.toggle("dark", !!(mq && mq.matches)); }
+    theme(); if (mq && mq.addEventListener) mq.addEventListener("change", theme);
+  })();
+</script>
+<script src="/prep-social.js?v=acc1"></script>
+<script>
+  (function () {
+    var box = document.getElementById("psAcc");
+    fetch("accuracy.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) { box.innerHTML = window.PrepSocial.accuracyHtml(j); }, function () { box.innerHTML = window.PrepSocial.accuracyHtml(null); });
+  })();
+</script>
+</body>
+</html>

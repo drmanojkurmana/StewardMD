@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "generated": "2026-10-06",
+ "sources": {
+  "keys": "prep/bank/v1/screen-2026-10-06.json",
+  "questions": "prep/fill/*.json",
+  "lessons": "prep/lessons/v1/*.json",
+  "cards": "prep/cards/v1/*.json"
+ },
+ "keys": {
+  "date": "2026-10-06",
+  "model": "gemini-3.1-flash-lite",
+  "bank": "v1",
+  "screened": 145589,
+  "disputed": 17419,
+  "rate": 0.1196,
+  "subjects": [
+   {
+    "id": "community-medicine",
+    "name": "Community Medicine",
+    "screened": 9421,
+    "disputed": 1557,
+    "rate": 0.1653
+   },
+   {
+    "id": "forensic-medicine",
+    "name": "Forensic Medicine",
+    "screened": 4923,
+    "disputed": 772,
+    "rate": 0.1568
+   },
+   {
+    "id": "surgery",
+    "name": "Surgery",
+    "screened": 11901,
+    "disputed": 1817,
+    "rate": 0.1527
+   },
+   {
+    "id": "obstetrics-gynaecology",
+    "name": "Obstetrics and Gynaecology",
+    "screened": 9178,
+    "disputed": 1357,
+    "rate": 0.1479
+   },
+   {
+    "id": "anaesthesia",
+    "name": "Anaesthesia",
+    "screened": 2909,
+    "disputed": 412,
+    "rate": 0.1416
+   },
+   {
+    "id": "radiology",
+    "name": "Radiology",
+    "screened": 3928,
+    "disputed": 553,
+    "rate": 0.1408
+   },
+   {
+    "id": "paediatrics",
+    "name": "Paediatrics",
+    "screened": 6670,
+    "disputed": 932,
+    "rate": 0.1397
+   },
+   {
+    "id": "ophthalmology",
+    "name": "Ophthalmology",
+    "screened": 5791,
+    "disputed": 782,
+    "rate": 0.135
+   },
+   {
+    "id": "orthopaedics",
+    "name": "Orthopaedics",
+    "screened": 3677,
+    "disputed": 472,
+    "rate": 0.1284
+   },
+   {
+    "id": "medicine",
+    "name": "Medicine",
+    "screened": 15301,
+    "disputed": 1903,
+    "rate": 0.1244
+   },
+   {
+    "id": "ent",
+    "name": "ENT (Otorhinolaryngology)",
+    "screened": 4423,
+    "disputed": 544,
+    "rate": 0.123
+   },
+   {
+    "id": "physiology",
+    "name": "Physiology",
+    "screened": 8053,
+    "disputed": 934,
+    "rate": 0.116
+   },
+   {
+    "id": "anatomy",
+    "name": "Anatomy",
+    "screened": 10585,
+    "disputed": 1214,
+    "rate": 0.1147
+   },
+   {
+    "id": "pathology",
+    "name": "Pathology",
+    "screened": 13207,
+    "disputed": 1274,
+    "rate": 0.0965
+   },
+   {
+    "id": "microbiology",
+    "name": "Microbiology",
+    "screened": 9631,
+    "disputed": 903,
+    "rate": 0.0938
+   },
+   {
+    "id": "psychiatry",
+    "name": "Psychiatry",
+    "screened": 4010,
+    "disputed": 324,
+    "rate": 0.0808
+   },
+   {
+    "id": "biochemistry",
+    "name": "Biochemistry",
+    "screened": 7910,
+    "disputed": 619,
+    "rate": 0.0783
+   },
+   {
+    "id": "dermatology",
+    "name": "Dermatology",
+    "screened": 1772,
+    "disputed": 135,
+    "rate": 0.0762
+   },
+   {
+    "id": "pharmacology",
+    "name": "Pharmacology",
+    "screened": 12299,
+    "disputed": 915,
+    "rate": 0.0744
+   }
+  ]
+ },
+ "reports": {
+  "reported": null,
+  "autoHidden": null,
+  "hideAfter": 3,
+  "note": "Student reports are stored on the server; a published count is not yet exported."
+ },
+ "ai": {
+  "questions": {
+   "modules": 9,
+   "generated": 131,
+   "accepted": 103,
+   "regenerated": 21,
+   "rejected": 28,
+   "passRate": 0.7863,
+   "gates": [
+    {
+     "id": "g1",
+     "label": "Exactly four options",
+     "rejected": 0
+    },
+    {
+     "id": "g2",
+     "label": "Key not repeated as a distractor",
+     "rejected": 0
+    },
+    {
+     "id": "g3",
+     "label": "No duplicate options",
+     "rejected": 0
+    },
+    {
+     "id": "g5",
+     "label": "Key not much longer or shorter than the distractors",
+     "rejected": 15
+    },
+    {
+     "id": "g9b",
+     "label": "Every number in the key is in the source",
+     "rejected": 8
+    },
+    {
+     "id": "g12",
+     "label": "Not too similar to another question",
+     "rejected": 0
+    },
+    {
+     "id": "verbatim",
+     "label": "Does not copy source wording",
+     "rejected": 0
+    },
+    {
+     "id": "book",
+     "label": "Names no book, edition or page",
+     "rejected": 0
+    },
+    {
+     "id": "solve",
+     "label": "An independent solver picks the same answer",
+     "rejected": 5
+    },
+    {
+     "id": "review",
+     "label": "Passes a second review",
+     "rejected": 0
+    }
+   ]
+  },
+  "lessons": {
+   "lessons": 11,
+   "hand": 1,
+   "steps": 54,
+   "redone": 16,
+   "dropped": 2,
+   "firstPass": 0.6786,
+   "passRate": 0.9643,
+   "checks": [
+    "shape",
+    "numbers",
+    "drugs",
+    "verbatim",
+    "selfCheck"
+   ]
+  },
+  "cards": {
+   "decks": 1,
+   "cards": 10,
+   "ai": 0,
+   "hand": 10
+  }
+ },
+ "fixTime": {
+  "medianHours": null,
+  "fixed": 0
+ }
+}

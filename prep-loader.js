@@ -7,14 +7,16 @@
    own flag smd_prep_arena (default OFF, ?arena=1) decides whether the Compete section shows. prep-lessons.js (Lessons) has
    no flag of its own: a module shows its Lesson row only when prep/lessons/v1/index.json lists it. prep-plan.js
    (onboarding, readiness, today's plan) and prep-flash.js (module flashcards) have no flag of their own either.
-   prep-sync.js (opt-in encrypted sync) and prep-native.js (reminder, widget, Live Activity) load with them. */
+   prep-sync.js (opt-in encrypted sync) and prep-native.js (reminder, widget, Live Activity) load with them. prep-pro.js (free tier gates, pricing; flag smd_prep_pro_enforce, default OFF) and prep-social.js are optional: a
+   404 skips them. */
 (function (G) {
   "use strict";
-  var V = "prep9";
+  var V = "prep10";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css"];
-  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
-  var OPTIONAL = { "prep-sync.js": 1 };
+  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css"];
+  var JS = ["specialty-core.js", "specialty-bank.js", "prep.js", "prep-sync.js", "prep-arena.js", "prep-lessons.js", "prep-pyq.js", "prep-plan.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js"];
+  // Optional files: a missing one (404, not yet shipped) is skipped instead of failing PrepNucleus.
+  var OPTIONAL = { "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1 };
   var loading = null;
 
   function enabled() {
@@ -34,8 +36,7 @@
     return new Promise(function (res, rej) {
       var s = G.document.createElement("script");
       s.src = "/" + src + "?v=" + V; s.async = false;
-      // prep-sync.js is optional: without it PrepNucleus still loads, with no sync controls.
-      s.onload = function () { done[src] = 1; res(); }; s.onerror = function () { if (OPTIONAL[src]) res(); else rej(new Error(src)); };
+      s.onload = function () { done[src] = 1; res(); }; s.onerror = function () { if (OPTIONAL[src]) { done[src] = 1; res(); } else rej(new Error(src)); };
       G.document.head.appendChild(s);
     });
   }

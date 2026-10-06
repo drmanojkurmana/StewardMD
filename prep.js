@@ -351,6 +351,7 @@
   function rerender() { var v = st.stack[st.stack.length - 1]; if (v) v(); }
   function back() {
     if (!st.open) return false;
+    if (G.PrepPro && G.PrepPro.back && G.PrepPro.back()) return true;   // PrepNucleus Pro: the limit sheet closes first
     // Arena: a sheet closes first; a live battle asks before it is left.
     if (G.PREP_ARENA && G.PREP_ARENA.back && G.PREP_ARENA.back()) return true;
     if (G.PREP_FLASH && G.PREP_FLASH.back()) return true;
@@ -454,10 +455,13 @@
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
-      (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") + "</div>" +
+      (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
+      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") + "</div>" +
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
+      (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
       '<p class="pn-note">Questions: MedMCQA (MIT licence), cleaned and sorted into modules; AI-generated questions are labelled. Practice and progress stay on this device.</p></div>');
     if (arena) G.PREP_ARENA.homeMounted(HOST);
+    if (G.PrepPro) G.PrepPro.homeMounted(HOST);
     Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       if (!st.open || st.stack[st.stack.length - 1] !== renderHome) return;
       var grid = root.querySelector("#pnGrid");
@@ -560,6 +564,8 @@
   function runQuestions(items, mode, title, opts) {
     var ex = examOf(load().exam);
     opts = opts || {};
+    // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
+    if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
     st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: mode === "exam" ? (opts.limit || items.length * ex.sec) : 0, scheme: opts.scheme || null, custom: opts.custom || null };
     st.stack.push(renderRun);
     renderRun();
@@ -622,6 +628,7 @@
     var s = load(), ok = chosen === it.a, td = today(), dk = deckKey(it._m || it.t);
     C.review(s, dk, it.id, C.gradeFor(ok), td);
     C.recordAnswer(s, dk, String(it.a), String(chosen));
+    if (G.PrepPro) G.PrepPro.use("questions", { items: [it] });
     var ms = s.mod[it._m || it.t] || (s.mod[it._m || it.t] = { t: 0, ok: 0 });
     ms.t++; if (ok) ms.ok++; ms.last = td;
     s.last = { s: it._s, m: it._m || it.t };
@@ -982,6 +989,12 @@
     if (a === "downloads") return push(renderDownloads);
     if (a === "dlget") return download(b.getAttribute("data-s"));
     if (a === "dlrm") return removeDownload(b.getAttribute("data-s"));
+    // PrepNucleus Pro (prep-pro.js): a lesson or card batch checks the free tier before it starts; "pro-" acts are its own.
+    if (G.PrepPro && (a === "l-open" || a === "k-open" || a === "k-due")) { var pf = a === "l-open" ? "lessons" : "cards", pm = b.getAttribute("data-m"); if (!G.PrepPro.can(pf, pm ? { module: pm } : null)) return G.PrepPro.openLimit(pf); if (pf === "lessons") G.PrepPro.use(pf, { module: pm }); }
+    if (a.indexOf("pro-") === 0) return G.PrepPro && G.PrepPro.act(a, b, HOST);
+    // Friends, groups and the accuracy page (prep-social.js).
+    if (a === "soc-open") return G.PrepSocial && G.PrepSocial.open && G.PrepSocial.open(HOST);
+    if (a === "soc-acc") return G.PrepSocial && G.PrepSocial.openAccuracy && G.PrepSocial.openAccuracy(HOST);
     // Layer C (prep-create.js and friends) owns every data-act starting "c-".
     if (a.indexOf("c-") === 0 && G.PREP_C && G.PREP_C.act) return G.PREP_C.act(a, b, HOST);
     // Arena and My stats (prep-arena.js) own every data-act starting "a-".
