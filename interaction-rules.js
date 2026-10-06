@@ -3091,9 +3091,7 @@
       "epc:established_pharmacologic_classes",
       "pgp_inhibitor"
     ],
-    "sarecycline hydrochloride": [
-      "pgp_inhibitor"
-    ],
+    "sarecycline hydrochloride": [],
     "telaprevir": [
       "cyp3a4_inhibitor",
       "cyp3a4_strong_inhibitor",
@@ -4848,7 +4846,6 @@
       "methylxanthine"
     ],
     "zaleplon": [
-      "benzodiazepine",
       "cns_depressant",
       "epc:established_pharmacologic_classes",
       "epc:gamma_aminobutyric_acid_a_receptor_agonist",
@@ -5206,15 +5203,13 @@
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:glinide",
-      "hypoglycemic",
-      "insulin"
+      "hypoglycemic"
     ],
     "repaglinide": [
       "epc:chemical_structure",
       "epc:established_pharmacologic_classes",
       "epc:glinide",
-      "hypoglycemic",
-      "insulin"
+      "hypoglycemic"
     ],
     "levomefolic acid": [
       "epc:antidote",
@@ -16309,8 +16304,7 @@
       "corticosteroid"
     ],
     "buspirone": [
-      "benzodiazepine",
-      "cns_depressant"
+      "serotonergic"
     ],
     "caffeine (caffeine citrate)": [
       "methylxanthine"
@@ -16448,7 +16442,6 @@
       "ssri"
     ],
     "eszopiclone": [
-      "benzodiazepine",
       "cns_depressant"
     ],
     "ethylmorphine": [
@@ -16484,8 +16477,7 @@
       "corticosteroid"
     ],
     "flupirtine (as maleate)": [
-      "cns_depressant",
-      "opioid"
+      "cns_depressant"
     ],
     "fluticasone furoate": [
       "corticosteroid"
@@ -16580,20 +16572,15 @@
       "dihydropyridine_ccb"
     ],
     "levocloperastine (levocloperastine fendizoate/hydrochloride)": [
-      "cns_depressant",
-      "opioid"
+      "cns_depressant"
     ],
-    "levodropropizine": [
-      "cns_depressant",
-      "opioid"
-    ],
+    "levodropropizine": [],
     "levonadifloxacin": [
       "fluoroquinolone",
       "qt_prolonging"
     ],
     "lobeglitazone sulfate": [
-      "hypoglycemic",
-      "insulin"
+      "hypoglycemic"
     ],
     "lomefloxacin": [
       "fluoroquinolone",
@@ -16610,10 +16597,7 @@
       "qt_prolonging",
       "serotonergic"
     ],
-    "metamizole (dipyrone)": [
-      "cns_depressant",
-      "opioid"
-    ],
+    "metamizole (dipyrone)": [],
     "methdilazine": [
       "anticholinergic",
       "antihistamine"
@@ -16645,9 +16629,7 @@
       "qt_prolonging"
     ],
     "nefopam": [
-      "cns_depressant",
-      "nsaid",
-      "opioid"
+      "cns_depressant"
     ],
     "netilmicin sulfate": [
       "aminoglycoside",
@@ -16673,8 +16655,7 @@
       "qt_prolonging"
     ],
     "noscapine": [
-      "cns_depressant",
-      "opioid"
+      "cns_depressant"
     ],
     "olmesartan medoxomil": [
       "arb",
@@ -16724,10 +16705,7 @@
     "prednicarbate": [
       "corticosteroid"
     ],
-    "prenoxdiazine (prenoxdiazine hydrochloride)": [
-      "cns_depressant",
-      "opioid"
-    ],
+    "prenoxdiazine (prenoxdiazine hydrochloride)": [],
     "procyclidine": [
       "anticholinergic"
     ],
@@ -16743,8 +16721,7 @@
       "nsaid"
     ],
     "rosiglitazone (rosiglitazone maleate)": [
-      "hypoglycemic",
-      "insulin"
+      "hypoglycemic"
     ],
     "roxithromycin": [
       "macrolide",
@@ -16866,7 +16843,6 @@
       "nsaid"
     ],
     "zopiclone": [
-      "benzodiazepine",
       "cns_depressant"
     ],
     "sultopride": [

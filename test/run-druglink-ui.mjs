@@ -82,6 +82,19 @@ try {
   const db2 = await page.evaluate(() => { const t = document.querySelector("#dbTitle, .db-title"); return t ? t.textContent : ""; });
   ok(/Ceftriaxone/i.test(db2), "tapping a highlighted drug in an answer opens its monograph: " + db2);
 
+  // combination brands link the combination, never one ingredient (Combiflam is not just ibuprofen)
+  await page.evaluate(() => { try { MEDDB.close(); } catch (e) {} SMD_askMaik(""); });
+  await page.waitForTimeout(900);
+  await page.evaluate(() => { const b = document.createElement("div"); b.className = "maik-b ai"; b.id = "t_combo"; b.innerHTML = "<p>Combiflam 1 tab SOS; continue Entresto 24/26 mg BD and Pan-D before breakfast.</p>"; document.getElementById("maikBody").appendChild(b); });
+  await page.waitForTimeout(700);
+  const combo = await page.evaluate(() => Array.from(document.querySelectorAll("#t_combo .smd-drug")).map((m) => m.textContent + "=" + m.getAttribute("data-smd-drug")));
+  ok(JSON.stringify(combo) === JSON.stringify(["Combiflam=ibuprofen + paracetamol", "Entresto=sacubitril + valsartan", "Pan-D=domperidone + pantoprazole"]), "combination brands link every ingredient: " + combo.join(", "));
+  await page.click("#t_combo .smd-drug");
+  await page.waitForTimeout(2500);
+  const db3 = await page.evaluate(() => { const t = document.querySelector("#dbTitle, .db-title"); const g = document.querySelector("#dbOverlay .db-gen"); return { title: t ? t.textContent : "", gen: g ? g.textContent : "" }; });
+  ok(/Ibuprofen \+ Paracetamol/.test(db3.title), "tapping Combiflam opens the Ibuprofen + Paracetamol composition: " + JSON.stringify(db3));
+  if (SHOTS) await page.screenshot({ path: SHOTS + "/druglink-combo.png" });
+
   // ── Knowledge Library, disease reader, protocol sheet ─────────────────────────────────────────────
   const topIsDb = () => page.evaluate(() => { const e = document.elementFromPoint(innerWidth / 2, innerHeight / 2); return !!(e && e.closest("#dbOverlay")); });
   await page.evaluate(() => { try { MEDDB.close(); } catch (e) {} });

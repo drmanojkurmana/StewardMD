@@ -129,7 +129,8 @@ function bedsideSafetyCheck(svc, rulePack) {
  * above an absolute ceiling is not a judgement the rule content makes: it is arithmetic on the order and the
  * patient's other active orders of the same molecule, and 8 g of paracetamol a day has no reason. Each such
  * finding carries hardStop: true, so a screen labels exactly what the server refuses and nothing else. */
-const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE"]);
+const ORDER_ENTRY_HARD_STOPS = Object.freeze(["DOSE_ABSOLUTE_CEILING", "DOSE_ABSOLUTE_CEILING_DAILY", "DOSE_ABSOLUTE_CEILING_CUMULATIVE",
+  "DOSE_COMBINATION_CEILING"]);   // above the SUM of every ingredient's ceiling: no split of the dose is within limits
 
 /* opts.lactationWindowDays: the hospital's postpartum lactation window (wardsynqConfig). The pregnancy and
  * lactation check reads the maternity record only when the pack has rules for it; `pregnancyLactation.rulesLoaded`

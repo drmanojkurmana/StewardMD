@@ -38,7 +38,7 @@ try {
   await call("Runtime.enable", {}); await call("Page.navigate", { url: BASE });
   let ready = false; for (let i = 0; i < 60; i++) { await sleep(400); if (await ev(`return !!(window.INTERACTIONS && INTERACTIONS.checkInteractions)`) === true) { ready = true; break; } }
   if (!ready) throw new Error("INTERACTIONS not loaded");
-  await ev(`return window.smdLazy ? window.smdLazy('/interaction-rules.js?v=gold363') : Promise.resolve()`);
+  await ev(`return window.smdLazy ? window.smdLazy('/interaction-rules.js?v=ddisync20261002') : Promise.resolve()`);
 
   // 1. warfarin + aspirin + ibuprofen -> critical OR major bleeding finding
   const r1 = await check([{ generic: "warfarin" }, { generic: "aspirin" }, { generic: "ibuprofen" }]);

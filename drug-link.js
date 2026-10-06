@@ -5,7 +5,9 @@
  * opens). In MaiK, a question that names a drug first offers the monograph (home.js send()).
  *
  * Detection is local and deterministic, so it works offline and today:
- *   - drug-lexicon.js   2,200+ generics + brands from data/interaction-rules.json (public domain)
+ *   - drug-lexicon.js   2,200+ generics + brands from data/interaction-rules.json (public domain), and
+ *                       combination brands with every ingredient (Combiflam -> "ibuprofen + paracetamol",
+ *                       the Drug Index's own composition name, so a tap opens the combination's page)
  *   - MEDDRUGS._list    the Drug Index formulary (generic + brand names)
  *   - SMD_BRANDS        the app's brand-to-generic map
  *   - learn(names)      names from the OpenMed drug tagger (openmed-ner.js) once that pack is enabled
@@ -38,7 +40,7 @@
     laxatives: 1, antibiotic: 1, antibiotics: 1, "beta blocker": 1, "h2 blocker": 1, diuretic: 1, anticoagulant: 1 };
 
   // ── Index: first word -> phrases (longest first) ────────────────────────────────────────────────
-  var idx = null, fuzzyVocab = [], learned = {}, sig = "";
+  var idx = null, fuzzyVocab = [], learned = {}, sig = "", parts = {};   // parts: combination -> ingredients
   function sources() {
     var L = (W && W.SMD_DRUG_LEXICON) || null, M = (W && W.MEDDRUGS && W.MEDDRUGS._list) || [], B = (W && W.SMD_BRANDS && W.SMD_BRANDS.BRANDS) || {};
     return { L: L, M: M, B: B, s: (L ? L.generics.length : 0) + "|" + M.length + "|" + Object.keys(B).length + "|" + Object.keys(learned).length };
@@ -59,6 +61,9 @@
     if (S.L) {
       S.L.generics.forEach(function (g) { add(g, g); });
       for (var b in S.L.brands) if (Object.prototype.hasOwnProperty.call(S.L.brands, b)) add(b, S.L.brands[b]);
+      // Before the Drug Index below, which lists e.g. combiflam under Ibuprofen alone: first add wins.
+      var C = S.L.combos || {};
+      for (var cb in C) if (Object.prototype.hasOwnProperty.call(C, cb)) { parts[C[cb].join(" + ")] = C[cb]; add(cb, C[cb].join(" + ")); }
     }
     S.M.forEach(function (d) {
       add(d.generic, d.generic);
@@ -80,7 +85,8 @@
 
   // ── Detection ───────────────────────────────────────────────────────────────────────────────────
   var WORD = /[A-Za-z][A-Za-z0-9]*/g;   // hyphens separate words; multi-word names match across " " or "-"
-  /** Drug mentions in text: [{start, end, text, generic, fuzzy}] in order, non-overlapping. */
+  /** Drug mentions in text: [{start, end, text, generic, generics, fuzzy}] in order, non-overlapping.
+   *  generics lists every ingredient: [generic] for one drug, both for a combination brand. */
   function find(text, opts) {
     opts = opts || {};
     var s = String(text == null ? "" : text), out = [];
@@ -98,14 +104,15 @@
         }
       }
       if (hit) {
-        out.push({ start: toks[i].s, end: toks[i + hit.n - 1].e, text: s.slice(toks[i].s, toks[i + hit.n - 1].e), generic: hit.generic, fuzzy: false });
+        out.push({ start: toks[i].s, end: toks[i + hit.n - 1].e, text: s.slice(toks[i].s, toks[i + hit.n - 1].e), generic: hit.generic, generics: parts[hit.generic] || [hit.generic], fuzzy: false });
         i += hit.n - 1;
         continue;
       }
       if (opts.fuzzy && toks[i].w.length >= 6 && /^[a-z]+$/.test(toks[i].w)) {
         var DF = W && W.DrugFuzzy;
         var bm = DF && DF.bestGenericMatch ? DF.bestGenericMatch(toks[i].w, fuzzyVocab, { minLen: 6, maxDist: 2 }) : null;
-        if (bm && bm.distance > 0) out.push({ start: toks[i].s, end: toks[i].e, text: s.slice(toks[i].s, toks[i].e), generic: fuzzyVocab.gen[bm.generic] || bm.generic, fuzzy: true });
+        var fg = fuzzyVocab.gen[bm && bm.generic] || (bm && bm.generic);
+        if (bm && bm.distance > 0) out.push({ start: toks[i].s, end: toks[i].e, text: s.slice(toks[i].s, toks[i].e), generic: fg, generics: parts[fg] || [fg], fuzzy: true });
       }
     }
     return out;
@@ -113,7 +120,7 @@
   /** Unique generics named in text, in order (for the MaiK prompt). */
   function drugsIn(text, opts) {
     var seen = {}, out = [];
-    find(text, opts).forEach(function (h) { if (!seen[h.generic]) { seen[h.generic] = 1; out.push({ generic: h.generic, name: title(h.generic), typed: h.text, fuzzy: h.fuzzy }); } });
+    find(text, opts).forEach(function (h) { if (!seen[h.generic]) { seen[h.generic] = 1; out.push({ generic: h.generic, generics: h.generics, name: title(h.generic), typed: h.text, fuzzy: h.fuzzy }); } });
     return out;
   }
 

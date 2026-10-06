@@ -10055,3 +10055,124 @@ From an early independent review (7/10) of the rebuilt module. Each is implement
 - **Enterococcal gentamicin is high-level only when the paper says so**; otherwise it stays intrinsic.
 - **Ambiguous cells are left out, not shown with a guess** (RMLIMS 2017 urine Klebsiella/Proteus
   colistin and ofloxacin: a possible column shift in the source).
+
+## 2026-10-02 · Drug-link: a combination brand links every ingredient, never one
+
+**Decision.** `data/interaction-rules.json` maps brand -> ONE generic, so the lexicon sent Combiflam to
+ibuprofen (hiding the paracetamol, a double-dose risk alongside Crocin/Calpol) and Entresto to the
+valsartan monograph. `drug-lexicon.js` (version 2) now carries a separate `combos` map, brand ->
+every ingredient, sorted, and those brands are removed from `brands`. A separate field, not array
+values in `brands`, so a consumer that does not know about combinations simply does not recognise the
+brand instead of reading `"ibuprofen,paracetamol"` as one name. The list is curated in
+`scripts/druglink/build-drug-lexicon.py` (`COMBOS`), clinician-confirmed by the owner against
+`api.stewardmd.in/brand-search`: Combiflam, Deriphyllin, Dynapar (the plain tablet is diclofenac +
+paracetamol), Entresto, Pan-D, Ultracet, Zituvimet (not in the brand API; owner confirmed). Inspra stays
+eplerenone (the Indian Inspra is flupentixol + melitracen; owner kept the source mapping).
+
+`drug-link.js` links a combination to its Drug Index composition name ("ibuprofen + paracetamol", the
+exact name `MEDDB.openComposition` resolves) and exposes `generics` (every ingredient) on `find()` /
+`drugsIn()` hits. `maik-grounding.js` reads a combination brand as the combination, so a Combiflam dose
+is not grounded by an ibuprofen-only passage. R2: its lexicon scan skipped any name opening with a word
+under 4 letters, so "Pan-D" (and co-trimoxazole, L-arginine) were never seen and a Pan-D dose was
+grounded by a domperidone-only passage; the 4-letter floor now applies to single-word names only. Adding a combination is a clinical change: owner sign-off,
+then update `COMBOS` and `test/drug-lexicon-combos.test.mjs` together.
+
+**Not covered.** Suffix variants the lexicon does not list ("Pantocid D", "Brufen P", "Omecip-D")
+still link the base brand's single ingredient. `drugs.js` still lists combiflam/ultracet/pan-d under a
+single generic (drug-link adds the lexicon first, so it wins there).
+
+**WardSynq (same day).** WardSynq's rule pack read the same `raw.brands`, so Combiflam was checked as
+ibuprofen alone: Combiflam on top of Crocin raised no duplicate paracetamol, Zituvimet lost its
+sitagliptin, Ultracet and Dynapar lost their paracetamol. `buildRulePack` now merges the lexicon's
+`combos` into its brand map (`loadStewardMDRulePack` and the Worker's `functions/_wardsynq/rulepack.js`
+import `drug-lexicon.js`), and `raw.brands` no longer aliases a combination brand: the existing rule
+decides (two or more checkable molecules go to `combinations`, so every one is checked and
+`resolveGeneric` returns null like Bactrim; exactly one checkable stays an alias). `resolveComponents`
+now tries the leading word as written, so "Pan-D 40" and "Pan D 40" are pan-d, not "pan"
+(pantoprazole alone). Entresto and Deriphyllin stay single: sacubitril and etofylline are not in the
+pack, so the sacubitril + ACE-inhibitor angioedema contraindication still has NO rule (only the
+valsartan + ACEi dual-RAAS one fires). Test: `test/wardsynq-safety.test.mjs` "a combination BRAND is
+checked for every ingredient". After R1 (NO-GO, then fixed): active meds are resolved per component
+too (warfarin ordered on an active Combiflam was silently dropped), `unresolvedActiveMeds` counts a
+combination as checked, and a combination order with a ceiling on any ingredient gets
+`DOSE_COMBINATION_UNCHECKED` instead of nothing: overridable when there is no numeric dose or the product
+dose is above an ingredient's single ceiling, informational otherwise. Owner (R1 re-review): above the
+SUM of every ingredient's single ceiling (Combiflam 800 + 1000 mg) no split keeps every ingredient within
+its limit, so that is `DOSE_COMBINATION_CEILING`, a BLOCK added to `ORDER_ENTRY_HARD_STOPS`
+(functions/_wardsynq/migrate-emar.js) so the server refuses it as it refused the old ibuprofen ceiling.
+Only when every ingredient has a ceiling in the dose's unit (Ultracet: tramadol has none, so never a block).
+Known residual: line extensions share the bare brand ("Dynapar AQ" is diclofenac alone but resolves as
+the tablet combination); errs towards an extra paracetamol warning, needs an owner-curated variant list.
+
+## 2026-10-02 · "Non-opioid" is not an opioid: class keyword negation
+
+**Decision.** `scripts/interactions/build_gold.py` tagged drugs by keyword over the gold monograph
+class text, and matched negated or qualified phrasings: "Non-opioid analgesic" made paracetamol
+opioid + cns_depressant (paracetamol + midazolam fired MAJOR opioid + benzodiazepine), likewise
+metamizole, nefopam (also "non-NSAID" -> nsaid, firing warfarin + NSAID), flupirtine, noscapine,
+levodropropizine, levocloperastine, prenoxdiazine; "Opioid antagonist" made naloxone an opioid;
+"non-benzodiazepine" made buspirone and the Z-drugs benzodiazepines; "insulin secretagogue/sensitizer"
+gave glinides and glitazones the insulin tag; "Non-dihydropyridine" made verapamil a DHP. The keyword
+stage now skips a match preceded by "non" or qualified as secretagogue/sensitizer, and states those
+phrasings correctly (non-DHP CCB, hypoglycemic, Z-drug cns_depressant). Owner decisions: the central
+four (nefopam, flupirtine, noscapine, levocloperastine) keep cns_depressant (pinned in
+`curated_overrides.json`); buspirone is not a benzodiazepine or CNS depressant but IS pinned serotonergic
+(R1: removing its tags otherwise left it alert-free; it now alerts serotonin syndrome with tramadol and
+SSRIs/SNRIs, contraindicated with MAOIs/linezolid; buspirone + fentanyl/methadone is silent because those
+opioids are not tagged serotonergic, a pre-existing gap); naloxone denied; naltrexone deliberately
+left tagged and verapamil's DHP tag deliberately pinned, because each wrong tag is today the only alert
+for a real interaction (naltrexone + opioid; verapamil + clarithromycin in the JSON) until a signed-off
+rule exists. No build cache exists, so the same delta was applied to both generated artifacts by
+round-trip-verified edit (byte-identical except the changed classes). A future rebuild will not
+reproduce these files exactly: the new keywords also ADD tags (Z-drugs cns_depressant, glinides
+hypoglycemic, verapamil non_dihydropyridine_ccb) that the hand-applied delta did not need to add. Test:
+`test/interaction-class-negation.test.mjs` (both artifacts, app checker and WardSynq).
+
+**Found, not fixed here (owner: separate task).** The August R1-reviewed DDI fixes (CR1-CR3, HIGH,
+MEDIUM) were hand-edited into `interaction-rules.js` only: `data/interaction-rules.json` (WardSynq,
+Worker) lacks 20 rules and ~29 class fixes, and `curated/` lacks all of them, so a pipeline rebuild
+would erase them from the app. The app already had paracetamol, naloxone and verapamil right.
+
+## 2026-10-02 · One interaction dataset: August fixes ported to curated/, JSON resynced
+
+**Decision.** The August 2026 R1-reviewed DDI fixes (CR1-CR3, HIGH, MEDIUM; `qa-report/clinical_safety.md`)
+lived only in `interaction-rules.js`. On 2026-09-25 `bff7a7c14` synced them into
+`data/interaction-rules.json` and `fb824261c` reverted that 8 minutes later ("Preserve WardSynq rule-pack
+classifications") without a stated reason; the only WardSynq test that breaks on a synced JSON is the one
+asserting bare "insulin" stays unresolved, which is the likely cause. Owner decisions:
+- **Synced.** The JSON is now byte-for-byte the app's payload. Measured on 98 common drugs (all pairs,
+  WardSynq engine): 127 alerts gained (DOAC + P-gp, warfarin + CYP2C9 / fluoroquinolone, colchicine
+  contraindications, systemic steroid + NSAID, phenytoin / carbamazepine / theophylline, lithium +
+  diuretics, QT duplication with cotrimoxazole), no true alert lost.
+- **The 4 superseded legacy rules are retired** (pair-allopurinol-azathioprine, pair-digoxin-amiodarone,
+  pair-digoxin-verapamil, pair-warfarin-aspirin; replaced by their class rules in H1/H2/H5), recorded in
+  `legacy_rules.json` `_retired_2026_10_02`.
+- **Bare "insulin" resolves in WardSynq** as its own class-level entry (insulin + hypoglycemic tags only),
+  so "Insulin" + a sulfonylurea alerts as in the app; it never becomes one specific insulin. The
+  "class name stays unresolved" test keeps nsaid/ppi/statin/arb/lmwh/doac and documents the exception.
+- **Sign-off.** The 19 major / contraindicated rules among the 20 are recorded in `signoff.json` as
+  `pending` (R1-reviewed 2026-08-05, awaiting clinician sign-off): validate.py warns, does not fail.
+
+**Ported to curated/.** `mechanism_rules.json` +20 rules (identical content); class fixes as pins and
+denies in `curated_overrides.json` (`_notes_august_2026_ddi_fixes`); the verapamil DHP pin from earlier
+the same day is replaced by a deny, since `mech-cyp3a4strong-nondhp-ccb` now ships in both. Verified
+without the gitignored build cache: `build_rules.build()` reproduces the app's 73 non-generated rules
+exactly; the overrides applied to the pipeline output reproduce the app's class map exactly;
+`validate.validate()` gives 0 errors and 19 pending sign-off warnings. A rebuild drops 6 drugs whose class
+list is now empty (all remain in `generics`, so still resolvable). Guard:
+`test/interaction-data-sync.test.mjs` (JSON = JS; every shipped rule in curated/; every pin and deny
+shipped; every shipped major/contraindicated mechanism rule in the sign-off manifest).
+
+**After R1 (NO-GO, then fixed).** Bare "insulin" as a class-level entry made "Insulin Actrapid 10 IU" resolve
+to "insulin" before "actrapid", so a second order of the same regular insulin fell from SAME_DRUG_ACTIVE
+(reason required) to a dup-hypoglycemic warning. `resolveGeneric` now treats a class-level entry (a key that
+is one of its own class tags: insulin, lithium) as the last resort after every more specific match. Owner
+policy for WardSynq order entry, in the adapter's `WARDSYNQ_RULE_POLICY` (shared data and app text unchanged):
+colchicine + P-gp / strong CYP3A4 inhibitor stays contraindicated but is overridable (the auto-derived P-gp
+class includes ticagrelor; low-dose colchicine post-MI is accepted practice); aspirin never fills the NSAID
+slot of `combo-bleeding-triad` (heparin/enoxaparin + aspirin + clopidogrel, standard ACS therapy, was a
+non-overridable block; the pairwise anticoagulant + antiplatelet major still fires). Sarecycline
+hydrochloride denied pgp_inhibitor like sarecycline. Deferred to a separate task (owner): route-aware steroid +
+NSAID, low-dose aspirin in NSAID rules, prophylaxis severity, weak P-gp inhibitors, and the coverage gaps R1
+listed (valproate, insulin brands, febuxostat severity, sacubitril + ACEi). `mech-pde5i-nondhp-ccb` is moderate,
+which the sign-off gate does not cover, so it has no manifest entry.
