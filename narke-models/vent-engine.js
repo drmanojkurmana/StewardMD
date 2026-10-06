@@ -105,7 +105,12 @@
       shunt, C). bag100: 60 s of hand bagging off the circuit at FiO2 1.0, about 7 mL/kg PBW x 12 a minute, no
       PEEP valve (so a recruitable lung derecruits); the ventilator shows a disconnect alarm and VTe 0.
    12. SCORE. VT per kg PBW is scored only in modes where the ventilator sets the breath (not psv, cpap, niv).
-      Unsafe moments are not counted for 5 min (plus the event's duration) after a scripted harmful event.
+      Unsafe moments are not counted for 5 min (plus the event's duration) after a scripted harmful event. Round 2:
+      time-weighted, half time on target and half end state, honest goals-met reporting (see score()).
+   13. ALARMS. Priorities follow IEC 60601-1-8 (danger = high, warn = medium); each alarm carries a bedside checklist
+      and its bedside actions (planOf). High EtCO2 (capnograph, limit 50 or the scenario's monitor.etco2High) shows
+      hypoventilation before a blood gas. readout().oxygenHelp says why SpO2 is below goal (fixed vs recruitable
+      shunt) and what to try next.
    Settings also accept flowPattern "square" | "decel" for volume breaths (not in SETTINGS until learn.json covers it).
    Integration: step() sub-steps at 10 s or less with exact exponential updates, so dt from 1 s to 3600 s is stable.
    Teaching gains marked above are model choices for a clinical reviewer to tune, not measured patient data.
@@ -247,6 +252,24 @@
     var f = Math.pow(10, 0.024 * (37 - temp) + 0.40 * (ph - 7.40) + 0.06 * log10(40 / Math.max(5, pco2)));
     var p = po2 * f;
     return 1 / (23400 / (p * p * p + 150 * p) + 1);
+  }
+  /* In vivo P50: the PO2 at 50% saturation. Severinghaus' standard P50 is 26.8 (virtual PO2 26.86); pH, temperature
+     and PCO2 move it by the same Kelman factor that sat() applies (Bohr effect: acid blood and fever shift right). */
+  var P50_STD = 26.86;
+  function p50Of(ph, temp, pco2) { return P50_STD / Math.pow(10, 0.024 * (37 - temp) + 0.40 * (ph - 7.40) + 0.06 * log10(40 / Math.max(5, pco2))); }
+  /* One line that explains a shifted curve, so "SaO2 90 at PaO2 78" reads as physiology, not a bug (E4). */
+  function curveNote(pao2, sao2, ph, temp, pco2) {
+    var p50 = p50Of(ph, temp, pco2), std = sat(pao2, 7.4, 37, 40) * 100, why = [], whyH = [];
+    if (Math.abs(p50 - 26.8) < 2 || Math.abs(std - sao2 * 100) < 1.5) return null;
+    if (ph < 7.35) { why.push("acid blood (pH " + fx(ph, 2) + ")"); whyH.push("अम्लीय ख़ून (pH " + fx(ph, 2) + ")"); }
+    if (ph > 7.45) { why.push("alkaline blood (pH " + fx(ph, 2) + ")"); whyH.push("क्षारीय ख़ून (pH " + fx(ph, 2) + ")"); }
+    if (temp >= 38) { why.push("fever (" + fx(temp, 1) + " C)"); whyH.push("बुख़ार (" + fx(temp, 1) + " C)"); }
+    if (temp <= 36) { why.push("a low temperature (" + fx(temp, 1) + " C)"); whyH.push("कम तापमान (" + fx(temp, 1) + " C)"); }
+    if (pco2 >= 50) { why.push("high CO2"); whyH.push("ज़्यादा CO2"); }
+    if (pco2 <= 30) { why.push("low CO2"); whyH.push("कम CO2"); }
+    var right = p50 > 26.8;
+    return T((why.length ? why.join(" and ") : "pH and temperature") + " shift the oxygen curve " + (right ? "right" : "left") + " (P50 " + fx(p50) + " instead of 27). At PaO2 " + fx(pao2) + " the saturation is " + fx(sao2 * 100) + "%, where a normal curve gives " + fx(std) + "%." + (right ? " Blood gives oxygen to the tissues more easily." : " Blood holds on to oxygen more tightly."),
+      (whyH.length ? whyH.join(" और ") : "pH और तापमान") + " oxygen curve को " + (right ? "दाईं" : "बाईं") + " ओर खिसकाते हैं (P50 27 की जगह " + fx(p50) + ")। PaO2 " + fx(pao2) + " पर saturation " + fx(sao2 * 100) + "% है, जहाँ सामान्य curve " + fx(std) + "% देती है।" + (right ? " ख़ून tissues को oxygen आसानी से देता है।" : " ख़ून oxygen को कसकर पकड़े रहता है।"));
   }
   function content(po2, hb, ph, temp, pco2) { return 1.34 * hb * sat(po2, ph, temp, pco2) + 0.003 * po2; }
   function po2From(ca, hb, ph, temp, pco2) {
@@ -542,7 +565,7 @@
         return o;
       }),
       fired: [], harm: { vili: 0, o2h: 0, hypotMin: 0, hypoxMin: 0, baroMin: 0, apHypoMin: 0 }, settings: st, last: null, log: [],
-      goals: { spo2: g.spo2 || [92, 98] }, exam: clone(sc.exam || {}), startSet: clone(st), changes: [], evlog: [], crit: 0, arrest: null, hold: null
+      goals: { spo2: g.spo2 || [92, 98] }, limits: { etco2High: (sc.monitor || {}).etco2High || ETCO2_HIGH }, exam: clone(sc.exam || {}), startSet: clone(st), changes: [], evlog: [], crit: 0, arrest: null, hold: null
     };
     var ab = start.abg || {};
     settle(s, st, typeof ab.PaCO2 === "number" ? clamp(ab.PaCO2, 10, 150) : null);
@@ -580,7 +603,7 @@
     s.prvcP = P;
   }
   function store(s, mo) {
-    s.last = { pao2: mo.pao2, paco2: s.paco2, ph: mo.ph, hco3: mo.hco3, sao2: mo.sao2, be: mo.be, lactate: s.lac, fio2: mo.fio2, spo2: mo.spo2, map: mo.map, pA: mo.PAtarget };
+    s.last = { pao2: mo.pao2, paco2: s.paco2, ph: mo.ph, hco3: mo.hco3, sao2: mo.sao2, be: mo.be, lactate: s.lac, fio2: mo.fio2, spo2: mo.spo2, map: mo.map, pA: mo.PAtarget, temp: mo.temp };
   }
 
   /* Snapshot of the numbers an event or action moves, for its one-line detail (E8). */
@@ -823,6 +846,46 @@
   var SPONT_MODES = ["psv", "cpap", "niv"];
   function holdValid(s) { return !!(s.hold && s.hold.kind === "insp" && s.hold.passive && s.t - s.hold.t <= 120); }
   var ARREST_TXT = { hypoxia: T("Cardiac arrest from severe hypoxaemia", "गंभीर hypoxaemia से cardiac arrest"), shock: T("Cardiac arrest from circulatory collapse", "रक्त संचार बैठने से cardiac arrest") };
+  /* oxygenHelp (E6): when SpO2 is below the goal, why, and what to try next, from the model's own shunt split.
+     kind: "secretions" | "pneumothorax" | "disconnected" | "moreOxygen" | "recruitable" | "notRecruiting".
+     Fixed shunt (consolidation, events) does not open with PEEP; collapsed shunt does (recruitable lung).
+     Returns null when SpO2 is on goal. Fields: kind, reason {en, hi}, next [{en, hi}], callSenior, fio2AtMax,
+     shunt {fixed, collapsed} (fractions). */
+  function oxyHelp(state, st, mo) {
+    var gl = (state.goals || {}).spo2 || [92, 98], m = state.m || {}, p = state.p, mc = mo.mech;
+    if (state.arrest || mo.spo2 >= gl[0]) return null;
+    var col = collapsed(state), fixed = clamp(p.shunt0 * (1 - p.recr) + m.shuntAdd, 0, 0.8), atMax = st.fio2 >= 100, kind, reason, next = [];
+    if (mc.disc || mc.bag) {
+      kind = "disconnected";
+      reason = mc.bag ? T("You are hand bagging off the ventilator: no PEEP, so a recruitable lung partly closes.", "आप ventilator हटाकर हाथ से bag कर रहे हैं: PEEP नहीं, इसलिए खुलने वाला फेफड़ा कुछ बंद होता है।")
+        : T("The circuit is disconnected: no ventilation, no PEEP, room air.", "Circuit अलग है: ventilation नहीं, PEEP नहीं, कमरे की हवा।");
+      next.push(STEP.reconnect);
+    } else if (m.ptx > 0) {
+      kind = "pneumothorax";
+      reason = T("A pneumothorax is collapsing one lung: shunt rose and the heart is squeezed.", "Pneumothorax एक फेफड़ा दबा रहा है: shunt बढ़ा और दिल दब रहा है।");
+      next.push(T("Listen to both sides and look at the trachea, then decompress.", "दोनों ओर सुनें और trachea देखें, फिर decompress करें।"));
+    } else if (m.sec > 0 || m.plug > 0) {
+      kind = "secretions";
+      reason = T("Secretions or a mucus plug are blocking airways: the lung behind them gets blood but no air.", "Secretions या mucus plug airways रोक रहे हैं: उनके पीछे के फेफड़े को ख़ून मिलता है, हवा नहीं।");
+      next.push(STEP.suction);
+    } else if (st.fio2 < 60) {
+      kind = "moreOxygen";
+      reason = T("FiO2 is " + st.fio2 + "%: there is room to give more oxygen.", "FiO2 " + st.fio2 + "% है: और oxygen देने की गुंजाइश है।");
+      next.push(fio2Line(st, mo));
+    } else if (col >= 0.05 && col >= 0.5 * fixed) {
+      kind = "recruitable";
+      reason = T("Part of this lung is collapsed and can reopen (collapsed shunt " + fx(col * 100) + "%). Higher PEEP may help.", "इस फेफड़े का हिस्सा सिकुड़ा है और खुल सकता है (सिकुड़ा shunt " + fx(col * 100) + "%)। ज़्यादा PEEP मदद कर सकता है।");
+      next.push(T("Raise PEEP in steps of 2 and watch SpO2 and BP after each step.", "PEEP 2 cmH2O के क़दमों में बढ़ाएँ और हर क़दम के बाद SpO2 और BP देखें।"));
+      if (!atMax) next.push(fio2Line(st, mo));
+    } else {
+      kind = "notRecruiting";
+      reason = T("This lung is not recruiting: most of the shunt (" + fx(fixed * 100) + "%) is solid lung, pus or fluid, that PEEP cannot open. More PEEP mainly lowers BP.", "यह फेफड़ा recruit नहीं हो रहा: ज़्यादातर shunt (" + fx(fixed * 100) + "%) ठोस फेफड़ा, pus या fluid है, जिसे PEEP नहीं खोल सकता। ज़्यादा PEEP मुख्यतः BP गिराता है।");
+      if (!atMax) next.push(fio2Line(st, mo));
+      next.push(T("Check DOPE and suction the tube.", "DOPE जाँचें और tube को suction करें।"));
+      next.push(T("Call your senior: prone positioning, a recruitment trial or a muscle relaxant are senior decisions.", "Senior को बुलाएँ: prone position, recruitment trial या muscle relaxant senior के फ़ैसले हैं।"));
+    }
+    return { kind: kind, reason: reason, next: next, callSenior: mo.spo2 < 85 || atMax || kind === "notRecruiting" || kind === "pneumothorax", fio2AtMax: atMax, shunt: { fixed: r2(fixed), collapsed: r2(col) } };
+  }
   function readout(state, settings) {
     var st = norm(settings || state.settings), mo = model(state, st), mc = mo.mech, ev = [], i;
     for (i = 0; i < (state.evlog || []).length; i++) { var e = state.evlog[i]; if (state.t - e.t <= 600) ev.push(clone(e)); }
@@ -841,16 +904,21 @@
       gas: {
         pao2: r0(mo.pao2), paco2: r0(mo.paco2), ph: r2(mo.ph), hco3: r1(mo.hco3), sao2: r0(mo.sao2 * 100), be: r1(mo.be), lactate: r1(mo.lactate),
         // A-a gradient from the alveolar gas equation at the set FiO2, as a clinician calculates it (E11)
-        pfRatio: r0(mo.pao2 / mo.fio2), aaGradient: r0(Math.max(0, mo.PAtarget - mo.pao2)), vdvt: r2(mo.vdvt), shunt: r2(mo.shunt)
+        pfRatio: r0(mo.pao2 / mo.fio2), aaGradient: r0(Math.max(0, mo.PAtarget - mo.pao2)), vdvt: r2(mo.vdvt), shunt: r2(mo.shunt),
+        p50: r1(p50Of(mo.ph, mo.temp, mo.paco2))
       },
       flags: flagsOf(state, mo),
       events: ev,
-      arrest: state.arrest ? { t: state.arrest.t, cause: state.arrest.cause, label: ARREST_TXT[state.arrest.cause] } : null
+      arrest: state.arrest ? { t: state.arrest.t, cause: state.arrest.cause, label: ARREST_TXT[state.arrest.cause] } : null,
+      oxygenHelp: oxyHelp(state, st, mo)
     };
   }
   function abg(state) {
     var l = state.last;
-    return { pH: r2(l.ph), PaCO2: r0(l.paco2), PaO2: r0(l.pao2), HCO3: r1(l.hco3), SaO2: r0(l.sao2 * 100), BE: r1(l.be), lactate: r1(l.lactate), FiO2: r2(l.fio2), AaDO2: r0(Math.max(0, (l.pA || 0) - l.pao2)), t: state.t };
+    var tp = l.temp != null ? l.temp : state.p.temp + ((state.m || {}).tempAdd || 0);
+    // P50 and curveNote (E4): additive; the UI may show the note beside SaO2 so a right-shifted curve is explained
+    return { pH: r2(l.ph), PaCO2: r0(l.paco2), PaO2: r0(l.pao2), HCO3: r1(l.hco3), SaO2: r0(l.sao2 * 100), BE: r1(l.be), lactate: r1(l.lactate), FiO2: r2(l.fio2), AaDO2: r0(Math.max(0, (l.pA || 0) - l.pao2)), t: state.t,
+      P50: r1(p50Of(l.ph, tp, l.paco2)), curveNote: curveNote(l.pao2, l.sao2, l.ph, tp, l.paco2) };
   }
 
   /* hold(state, settings, "insp"|"exp"): an inspiratory hold measures plateau (so Cstat and driving pressure); an
@@ -923,9 +991,13 @@
     autoPeep: T("Auto-PEEP", "फँसी हवा का दबाव (auto-PEEP)"), dyssync: T("Patient-ventilator dyssynchrony", "मरीज़ और ventilator का तालमेल नहीं (dyssynchrony)"),
     peepSetHigh: T("PEEP set high: blood pressure falling", "PEEP ज़्यादा रखा गया: BP गिर रहा है"),
     spo2Low: T("Low SpO2", "SpO2 कम"), mapLow: T("Low blood pressure", "Blood pressure कम"),
-    hrHigh: T("High heart rate", "Heart rate ज़्यादा"), hrLow: T("Low heart rate", "Heart rate कम")
+    hrHigh: T("High heart rate", "Heart rate ज़्यादा"), hrLow: T("Low heart rate", "Heart rate कम"),
+    etco2High: T("High EtCO2", "EtCO2 ज़्यादा")
   };
-  var MONITOR = { spo2Low: 1, mapLow: 1, hrHigh: 1, hrLow: 1 };
+  var MONITOR = { spo2Low: 1, mapLow: 1, hrHigh: 1, hrLow: 1, etco2High: 1 };
+  /* Capnograph high EtCO2 limit (mmHg): 50 by default (a common monitor default); a scenario may set monitor.etco2High
+     for a patient whose usual CO2 is high (COPD, permissive hypercapnia), as a clinician sets the limit at the bedside. */
+  var ETCO2_HIGH = 50;
   function alarm(id, sev) { var o = { id: id, severity: sev, label: ALARM[id] }; if (MONITOR[id]) { o.monitor = true; o.persistent = true; } return o; }
   function setPeepOf(st) { return st.mode === "niv" ? st.epap : st.mode === "aprv" ? st.plow : st.peep; }
   /* The PEEP a learner who set it too high should go back to: the start PEEP for a lung with little to recruit. */
@@ -966,6 +1038,8 @@
     if (mo.map < 65) a.push(alarm("mapLow", mo.map < 55 ? "danger" : "warn"));
     if (mo.hr > 120) a.push(alarm("hrHigh", mo.hr > 140 ? "danger" : "warn"));
     if (mo.hr < 50) a.push(alarm("hrLow", "danger"));
+    // capnography: hypoventilation shows here before the blood gas (E5); not while disconnected or bagged (no trace)
+    if (!mc.disc && !mc.bag && mo.etco2 > ((state.limits || {}).etco2High || ETCO2_HIGH)) a.push(alarm("etco2High", "warn"));
     return a;
   }
   function hasA(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return true; return false; }
@@ -976,9 +1050,10 @@
     apnoea: ["mode", "ps", "rr"], rrHigh: ["rr", "mode"], fio2Low: ["fio2"], fio2High: ["fio2"], peepLow: ["peep", "epap", "plow"], peepHigh: ["peep", "rr", "vt", "ti", "epap"],
     autoPeep: ["rr", "vt", "ti", "pinsp", "mode", "ps", "cycle"], dyssync: ["trigType", "trigFlow", "trigPress", "cycle", "mode", "ps", "rr", "vt", "ti", "peep"],
     peepSetHigh: ["peep", "epap"], spo2Low: ["fio2", "peep", "epap", "mode", "vt", "rr", "pinsp", "ps", "plow", "phigh", "tlow"],
-    mapLow: ["peep", "epap", "rr", "vt", "ti", "pinsp", "ipap", "mode", "phigh", "plow"], hrHigh: ["peep", "rr", "vt", "ti", "fio2", "mode"], hrLow: ["fio2", "peep", "mode", "rr", "vt"]
+    mapLow: ["peep", "epap", "rr", "vt", "ti", "pinsp", "ipap", "mode", "phigh", "plow"], hrHigh: ["peep", "rr", "vt", "ti", "fio2", "mode"], hrLow: ["fio2", "peep", "mode", "rr", "vt"],
+    etco2High: ["rr", "vt", "pinsp", "ps", "mode", "ipap", "pPeakHigh"]
   };
-  var SLOW_ALARMS = { spo2Low: 1, hrLow: 1, hrHigh: 1 };
+  var SLOW_ALARMS = { spo2Low: 1, hrLow: 1, hrHigh: 1, etco2High: 1 };
   /* causedBy: the newest learner change (within 30 min) whose reversal clears this alarm. Fast alarms are tested on the
      current state; SpO2 and heart rate, which follow oxygen stores, are tested after 10 min at both settings. */
   function causeOf(state, st, id, settled) {
@@ -1006,6 +1081,9 @@
   }
   function alarms(state, settings) {
     var st = norm(settings || state.settings), a = rawAlarms(state, st), i, settled = {};
+    // E7: the bedside response plan rides on each alarm (additive fields, see planOf)
+    var mo = model(state, st), k, pl;
+    for (i = 0; i < a.length; i++) { pl = planOf(state, st, mo, a[i], sugOf(state, a[i])); for (k in pl) if (own(pl, k)) a[i][k] = pl[k]; }
     if (state.arrest) return a;
     for (i = 0; i < a.length; i++) { var c = causeOf(state, st, a[i].id, settled); if (c) a[i].causedBy = c; }
     return a;
@@ -1037,6 +1115,138 @@
     if (ids.mapLow && !ids.peepSetHigh && (m.vs === "low" || m.hypoUntil > state.t)) { add("fluid"); if (state.p.hb < 10 || m.bled) add("blood"); }
     if (ids.spo2Low && mo.spo2 < 85 && !mc.disc) add("bag100");
     return out;
+  }
+
+  /* ---------- alarm response plan (E7) ----------
+     Every alarm from alarms() also carries, additively:
+       priority   "high" | "medium" | "low": IEC 60601-1-8 priority. danger maps to high, warn to medium; no existing
+                  alarm is lowered. "low" (advisory) is reserved and no alarm uses it yet.
+       checklist  ordered bedside steps [{id, text {en, hi}, action?}], patient first; action names an E.ACTIONS id
+                  the UI can offer as a button on that line.
+       actions    E.ACTIONS ids that fit this alarm now: the state-aware cause first (suggestActions), then the
+                  generic bedside response; only actions available in this state.
+       primary    what the card leads with: {kind: "action", id, label} | {kind: "setting", key, to, label} |
+                  {kind: "check", id, label}. Never the alarm limit.
+       fio2Line   (spo2Low, fio2Low) a state-aware FiO2 sentence: says so when FiO2 is already 100%.
+       callNow    true when a call-the-senior trigger is met; callWhy {en, hi} names it.
+     E.alarmPlan(state, id, settings) returns the same fields for any alarm id (also UI-only monitor alarms). */
+  var STEP = {
+    patient: T("Look at the patient first: colour, chest rise, the SpO2 trace.", "पहले मरीज़ को देखें: रंग, छाती का उठना, SpO2 trace।"),
+    probe: T("Check the SpO2 probe: a clean trace on a warm finger. A poor trace can give a false low reading.", "SpO2 probe जाँचें: गर्म उँगली पर साफ़ trace। ख़राब trace से reading झूठी कम आ सकती है।"),
+    circuit: T("Follow the circuit from the tube to the ventilator: every joint connected, no leak, no water in the tubing.", "Tube से ventilator तक circuit देखें: हर जोड़ लगा हो, कोई leak न हो, tubing में पानी न हो।"),
+    reconnect: T("Reconnect the circuit at once. If you cannot find the break, hand bag with 100% oxygen.", "Circuit तुरंत जोड़ें। टूटी जगह न मिले तो 100% oxygen से हाथ से bag करें।"),
+    dope: T("Think DOPE: Displaced tube, Obstructed tube, Pneumothorax, Equipment (circuit, ventilator, oxygen).", "DOPE सोचें: tube खिसकी (Displaced), tube बंद (Obstructed), Pneumothorax, Equipment (circuit, ventilator, oxygen)।"),
+    suction: T("Suction the tube: it clears secretions and shows the tube is open.", "Tube को suction करें: secretions साफ़ होते हैं और पता चलता है कि tube खुली है।"),
+    bag: T("If the patient is unstable or you are unsure: take the patient off the ventilator and hand bag with 100% oxygen.", "मरीज़ unstable हो या आप पक्के न हों: ventilator हटाकर 100% oxygen से हाथ से bag करें।"),
+    senior: T("Call your senior and say: patient, alarm, numbers, what you have done (SBAR).", "Senior को बुलाएँ और बताएँ: मरीज़, alarm, संख्याएँ, आपने क्या किया (SBAR)।"),
+    noLimit: T("Do not raise the alarm limit to stop the sound: that hides the problem, it does not treat the patient.", "आवाज़ बंद करने के लिए alarm limit न बढ़ाएँ: इससे समस्या छिपती है, मरीज़ का इलाज नहीं होता।"),
+    peakPlat: T("Check the plateau with an inspiratory hold. High peak with a normal plateau: the airway (secretions, bitten or kinked tube, bronchospasm). Both high: the lung or chest (pneumothorax, stiff lung).", "Inspiratory hold से plateau देखें। Peak ज़्यादा और plateau सामान्य: airway (secretions, दबी या मुड़ी tube, bronchospasm)। दोनों ज़्यादा: फेफड़ा या छाती (pneumothorax, सख़्त फेफड़ा)।"),
+    lowerVt: T("Lower VT toward 6 mL/kg predicted body weight; raise the rate to hold pH.", "VT को 6 mL/kg predicted body weight की ओर घटाएँ; pH बनाए रखने को rate बढ़ाएँ।"),
+    breathing: T("Is the patient breathing? Check sedation and the drive to breathe. Missing breaths need a mode with a set rate.", "क्या मरीज़ साँस ले रहा है? Sedation और साँस की drive देखें। साँसें छूट रही हों तो तय rate वाला mode चाहिए।"),
+    agitation: T("Look for pain, agitation, hypoxia, fever or a full bladder. Treat the cause before you sedate.", "दर्द, बेचैनी, hypoxia, बुख़ार या भरा bladder देखें। Sedation से पहले कारण का इलाज करें।"),
+    trapping: T("Look at the flow wave: if expiratory flow does not reach zero, air is trapped. Lower the rate or shorten Ti to give time to breathe out.", "Flow wave देखें: expiratory flow zero तक न पहुँचे तो हवा फँसी है। साँस छोड़ने का समय देने को rate घटाएँ या Ti छोटा करें।"),
+    letOut: T("If BP is falling with trapped air: disconnect for a few seconds to let it out.", "फँसी हवा के साथ BP गिर रहा हो: कुछ सेकंड ventilator अलग करके हवा निकलने दें।"),
+    peepBack: T("Your PEEP is lowering the BP: bring it back toward the start PEEP.", "आपका PEEP BP गिरा रहा है: उसे शुरू वाले PEEP की ओर वापस लाएँ।"),
+    bpCheck: T("Feel the pulse and recheck the BP cuff. High chest pressure (PEEP, trapped air) lets less blood return to the heart.", "Pulse देखें और BP cuff दोबारा जाँचें। छाती में ऊँचा दबाव (PEEP, फँसी हवा) दिल तक कम ख़ून लौटने देता है।"),
+    bpTreat: T("Fluids or a vasopressor are your senior's decision: call while you check.", "Fluid या vasopressor का फ़ैसला senior का है: जाँचते हुए बुलाएँ।"),
+    o2supply: T("Check the oxygen supply: wall outlet, cylinder, hose. Hand bag from a separate oxygen source.", "Oxygen supply जाँचें: wall outlet, cylinder, hose। अलग oxygen source से हाथ से bag करें।"),
+    fio2Set: T("Check that the FiO2 setting is the one you meant.", "जाँचें कि FiO2 वही set है जो आप चाहते थे।"),
+    co2: T("Check the minute volume: a low rate, small breaths, a leak or apnoea raise CO2. Fever and shivering make more CO2.", "Minute volume देखें: कम rate, छोटी साँसें, leak या apnoea से CO2 बढ़ता है। बुख़ार और कँपकँपी ज़्यादा CO2 बनाते हैं।"),
+    abg: T("Draw a blood gas: the pH says how urgent a high CO2 is. In COPD or asthma a high CO2 with a safe pH can be accepted: ask your senior.", "Blood gas लें: pH बताता है कि ऊँचा CO2 कितना urgent है। COPD या asthma में सुरक्षित pH के साथ ऊँचा CO2 स्वीकार हो सकता है: senior से पूछें।"),
+    slowHeart: T("A slow heart rate with low oxygen is hypoxia until proved otherwise: hand bag with 100% oxygen now.", "कम oxygen के साथ धीमी धड़कन hypoxia है जब तक उल्टा साबित न हो: अभी 100% oxygen से हाथ से bag करें।")
+  };
+  var STEP_ACT = { suction: "suction", bag: "bag100", slowHeart: "bag100", letOut: "disconnect", reconnect: "bag100" };
+  var PLAN = {
+    pPeakHigh: [["patient", "suction", "peakPlat", "dope", "bag", "noLimit", "senior"], ["suction", "bag100"]],
+    pPlatHigh: [["patient", "peakPlat", "lowerVt", "dope", "senior"], []],
+    vtLow: [["patient", "circuit", "dope", "breathing", "bag", "senior"], ["bag100"]],
+    veLow: [["patient", "circuit", "breathing", "dope", "bag", "senior"], ["bag100"]],
+    veHigh: [["patient", "agitation", "circuit", "senior"], []],
+    apnoea: [["patient", "breathing", "bag", "dope", "senior"], ["bag100"]],
+    rrHigh: [["patient", "agitation", "circuit", "senior"], []],
+    fio2Low: [["patient", "o2supply", "fio2", "bag", "senior"], ["bag100"]],
+    fio2High: [["fio2Set", "patient"], []],
+    peepLow: [["patient", "circuit", "dope", "senior"], []],
+    peepHigh: [["patient", "trapping", "letOut", "senior"], []],
+    disconnect: [["patient", "reconnect", "circuit", "dope", "senior"], ["bag100"]],
+    autoPeep: [["patient", "trapping", "letOut", "senior"], []],
+    dyssync: [["patient", "agitation", "senior"], []],
+    peepSetHigh: [["patient", "peepBack", "senior"], []],
+    spo2Low: [["patient", "probe", "circuit", "fio2", "suction", "dope", "bag", "senior"], ["bag100", "suction"]],
+    mapLow: [["patient", "bpCheck", "trapping", "bpTreat", "senior"], []],
+    hrHigh: [["patient", "agitation", "senior"], []],
+    hrLow: [["patient", "slowHeart", "dope", "senior"], ["bag100"]],
+    etco2High: [["patient", "co2", "abg", "senior"], []]
+  };
+  var PRIO = { danger: "high", warn: "medium", info: "low" };
+  var CHECK_LABEL = {
+    patient: T("Look at the patient", "मरीज़ को देखें"), dope: T("Check DOPE", "DOPE जाँचें"), circuit: T("Check the circuit", "Circuit जाँचें"),
+    reconnect: T("Reconnect the circuit", "Circuit जोड़ें"), peepBack: T("Bring PEEP back down", "PEEP वापस घटाएँ"), o2supply: T("Check the oxygen supply", "Oxygen supply जाँचें"),
+    fio2Set: T("Check the FiO2 setting", "FiO2 setting जाँचें"), co2: T("Check the minute volume", "Minute volume जाँचें"), trapping: T("Give time to breathe out", "साँस छोड़ने का समय दें")
+  };
+  function fio2Line(st, mo) {
+    var f = st.fio2, sp = r0(mo.spo2);
+    if (f >= 100) return T("FiO2 is already 100%: the ventilator cannot give more oxygen. Find the cause (DOPE, suction) and call your senior.", "FiO2 पहले से 100% है: ventilator इससे ज़्यादा oxygen नहीं दे सकता। कारण ढूँढें (DOPE, suction) और senior को बुलाएँ।");
+    if (f >= 60) return T("FiO2 is " + f + "%. Raise it to 100% now while you look for the cause, then wean it once SpO2 is back.", "FiO2 " + f + "% है। कारण ढूँढते हुए अभी 100% करें, SpO2 लौटने पर फिर घटाएँ।");
+    return T("FiO2 is " + f + "%. Raise it (SpO2 " + sp + "%) while you look for the cause.", "FiO2 " + f + "% है। कारण ढूँढते हुए इसे बढ़ाएँ (SpO2 " + sp + "%)।");
+  }
+  function callOf(state, st, mo) {
+    var mc = mo.mech, gl = (state.goals || {}).spo2 || [92, 98], en = [], hi = [];
+    if (mo.spo2 < 85) { en.push("SpO2 below 85%"); hi.push("SpO2 85% से कम"); }
+    else if (mo.spo2 < gl[0] && st.fio2 >= 80) { en.push("SpO2 below target on FiO2 " + st.fio2 + "%"); hi.push("FiO2 " + st.fio2 + "% पर भी SpO2 लक्ष्य से कम"); }
+    if (mo.map < 65) { en.push("mean BP below 65"); hi.push("औसत BP 65 से कम"); }
+    if (mo.hr < 50) { en.push("heart rate below 50"); hi.push("धड़कन 50 से कम"); }
+    if (mo.ph < 7.2) { en.push("pH below 7.20"); hi.push("pH 7.20 से कम"); }
+    if (!mc.aprv && mc.autoPeep >= 10) { en.push("auto-PEEP 10 or more"); hi.push("auto-PEEP 10 या ज़्यादा"); }
+    if (state.m && state.m.ptx > 0) { en.push("a possible pneumothorax"); hi.push("संभावित pneumothorax"); }
+    if (mc.disc && !mc.bag) { en.push("the circuit is disconnected"); hi.push("circuit अलग है"); }
+    return en.length ? T("Call your senior now: " + en.join(", ") + ".", "अभी senior को बुलाएँ: " + hi.join(", ") + "।") : null;
+  }
+  function planOf(state, st, mo, a, sug) {
+    var id = a.id, pl = PLAN[id] || [["patient", "dope", "senior"], []], mc = mo.mech, steps = [], acts = [], i, k;
+    function avail(x) { return !!(ACTIONS[x] && ACTIONS[x].available(state)); }
+    function addAct(x) { if (avail(x) && acts.indexOf(x) < 0) acts.push(x); }
+    for (i = 0; i < sug.length; i++) addAct(sug[i]);
+    for (i = 0; i < pl[1].length; i++) addAct(pl[1][i]);
+    var fl = id === "spo2Low" || id === "fio2Low" ? fio2Line(st, mo) : null;
+    for (i = 0; i < pl[0].length; i++) {
+      k = pl[0][i];
+      if (k === "fio2") { if (fl) steps.push({ id: "fio2", text: fl }); continue; }
+      var o = { id: k, text: STEP[k] };
+      if (STEP_ACT[k] && avail(STEP_ACT[k])) o.action = STEP_ACT[k];
+      steps.push(o);
+    }
+    var prim;
+    function pa(x) { return { kind: "action", id: x, label: ACTIONS[x].label }; }
+    function pc(x) { return { kind: "check", id: x, label: CHECK_LABEL[x] || CHECK_LABEL.patient }; }
+    if (sug.length && avail(sug[0])) prim = pa(sug[0]);
+    else if (id === "pPeakHigh") prim = avail("suction") ? pa("suction") : pc("dope");
+    else if (id === "spo2Low") {
+      if (mo.spo2 < 88 && avail("bag100")) prim = pa("bag100");
+      else if (st.fio2 < 100 && !mc.disc) { var to = Math.min(100, st.fio2 >= 60 ? 100 : st.fio2 + 20); prim = { kind: "setting", key: "fio2", to: to, label: T("Raise FiO2 to " + to + "%", "FiO2 " + to + "% करें") }; }
+      else prim = avail("bag100") ? pa("bag100") : pc("dope");
+    }
+    else if (id === "disconnect") prim = pc(mc.bag ? "patient" : "reconnect");
+    else if (id === "apnoea" || id === "hrLow") prim = avail("bag100") ? pa("bag100") : pc("patient");
+    else if (id === "vtLow" || id === "veLow" || id === "peepLow") prim = pc("circuit");
+    else if (id === "fio2Low") prim = pc("o2supply");
+    else if (id === "fio2High") prim = pc("fio2Set");
+    else if (id === "peepSetHigh") prim = pc("peepBack");
+    else if (id === "autoPeep" || id === "peepHigh") prim = pc("trapping");
+    else if (id === "etco2High") prim = pc("co2");
+    else prim = pc("patient");
+    var call = callOf(state, st, mo), out = { priority: PRIO[a.severity] || "medium", checklist: steps, actions: acts, primary: prim, callNow: !!call };
+    if (call) out.callWhy = call;
+    if (fl) out.fio2Line = fl;
+    return out;
+  }
+  /* suggestions that belong to one alarm (the state-aware cause) */
+  function sugOf(state, a) { var x = suggestActions(state, [a]), o = [], i; for (i = 0; i < x.length; i++) o.push(x[i].id); return o; }
+  function alarmPlan(state, id, settings) {
+    var st = norm(settings || state.settings), mo = model(state, st), list = rawAlarms(state, st, mo), a = null, i;
+    for (i = 0; i < list.length; i++) if (list[i].id === id) a = list[i];
+    a = a || { id: id, severity: "warn" };
+    return planOf(state, st, mo, a, sugOf(state, a));
   }
 
   /* ---------- explanations ---------- */
@@ -1354,20 +1564,44 @@
     return peep >= lo - 2 && peep <= hi + 2;
   }
   function tmin(t) { return Math.round(t / 60); }
+  /* SCORE (round 2: E1, E2, E3, E8).
+     Time on target is weighted by sim time (trapezoid between log samples), so a +30 min skip counts as 30 minutes,
+     not as one sample. Oxygenation, ventilation and protection are half time on target after the first 10 minutes and
+     half the end state, so a run that ends with every goal met scores well even when the fix came late.
+     Unsafe moments count only strictly after the first 10 minutes and outside scripted response windows. A VT above
+     10 mL/kg counts only when the learner set the breath (mode, VT or a pressure changed from the start): the start VT
+     is the presenting problem and is scored under lung protection and named in the notes. The penalty is 5 per episode
+     plus 5 per further 10 min the episode lasts, down to unsafeMin (it was 5 per log sample, so one episode of minute
+     samples reached -30).
+     Goals met together: the first time, whether they still held at the end, and the end misses by name (goals field).
+     run.tutorial marks a practice run: practice true and countsForBest false, so the hub does not count it. */
   function score(run) {
     run = run || {};
     var sc = run.scenario || {}, g = run.goals || sc.goals || {}, pt = sc.patient || {}, log = run.log || [], notes = [];
     var spo2R = g.spo2 || [92, 98], pplatMax = g.pplatMax || 30, drvMax = g.drivingMax || 15, vtR = g.vtPerKg || [4, 8];
     var kg = pt.heightCm ? pbw(pt) : null, n = log.length, i, j;
-    var cnt = 0, oxOK = 0, vOK = 0, prOK = 0, hiFiO2 = 0, lowSp = 0, backup = 0, ineff = 0, tGoal = null, unsafe = 0, unsafeList = [], hemo = null, hemoN = 0;
-    var seen = { pplat: false, drv: false, vt: false }, arrest = null, last = n ? log[n - 1].readout : null;
+    var wsum = 0, oxW = 0, vW = 0, prW = 0, lowSpW = 0, hiFiO2 = 0, backup = 0, ineff = 0, tFirst = null, unsafeList = [], hemo = null, hemoN = 0;
+    var seen = { pplat: false, drv: false, vt: false }, arrest = null, last = n ? log[n - 1].readout : null, end = null, presetS = 0, presetVk = 0;
     var start = n ? log[0].settings || {} : {};
     // windows after scripted harmful events: the learner gets 5 minutes (plus the event's duration) to respond
     var tl = sc.timeline || [], win = [];
     for (i = 0; i < tl.length; i++) if (HARMFUL[tl[i].event]) win.push([tl[i].t, tl[i].t + (tl[i].duration || 0) + 300]);
     function scripted(t) { for (var w = 0; w < win.length; w++) if (t >= win[w][0] && t <= win[w][1]) return true; return false; }
     var useGrace = false;
-    for (i = 0; i < n; i++) if (log[i].t >= GRACE) useGrace = true;
+    for (i = 0; i < n; i++) if (log[i].t > GRACE) useGrace = true;
+    function counted(k) { return !useGrace || log[k].t > GRACE; }
+    // trapezoid weights in seconds over the counted part of the run; equal weights if the run has no length
+    var wt = [], wTot = 0;
+    for (i = 0; i < n; i++) {
+      var w0 = 0;
+      if (counted(i)) {
+        var lo = useGrace ? GRACE : -1e12;
+        w0 = ((i > 0 ? log[i].t - Math.max(lo, log[i - 1].t) : 0) + (i < n - 1 ? log[i + 1].t - log[i].t : 0)) / 2;
+      }
+      wt.push(Math.max(0, w0)); wTot += Math.max(0, w0);
+    }
+    if (wTot <= 0) for (i = 0; i < n; i++) wt[i] = counted(i) ? 1 : 0;
+    var PRESET = ["mode", "vt", "pinsp", "ps", "ipap", "epap", "phigh", "plow"];
     for (i = 0; i < n; i++) {
       var L = log[i], r = L.readout || { vitals: {}, vent: {}, gas: {}, flags: [] }, f = r.flags || [], ls = L.settings || {};
       if (r.arrest && !arrest) arrest = r.arrest;
@@ -1383,30 +1617,37 @@
       // after the learner raised rate, VT or Ti (Raju 3)
       var mine = ls.peep >= 10 && ls.peep > (start.peep || 5) + 2 ? "peep" : r.vent.autoPeep >= 5 && (ls.rr > start.rr || ls.vt > start.vt || ls.ti > start.ti) ? "trap" : null;
       var harm = r.vitals.map < 65 && !!mine;
-      if (harm && L.t >= GRACE) { hemoN++; if (!hemo) hemo = { t: L.t, map: r.vitals.map, kind: mine, peep: ls.peep, from: start.peep }; }
-      if (!useGrace || L.t >= GRACE) {
-        cnt++;
-        if (o) oxOK++; if (v) vOK++; if (pr && !harm) prOK++;
+      if (harm && L.t > GRACE) { hemoN++; if (!hemo) hemo = { t: L.t, map: r.vitals.map, kind: mine, peep: ls.peep, from: start.peep }; }
+      var learnerBreath = false;
+      for (j = 0; j < PRESET.length; j++) if (ls[PRESET[j]] !== start[PRESET[j]]) learnerBreath = true;
+      var w = wt[i];
+      if (counted(i)) {
+        wsum += w;
+        if (o) oxW += w; if (v) vW += w; if (pr && !harm) prW += w;
         if (above && ls.fio2 > 50) hiFiO2++;
-        if (sp < spo2R[0]) lowSp++;
+        if (sp < spo2R[0]) lowSpW += w;
         if (!spont && r.vent.pplat > pplatMax) seen.pplat = true;
         if (!spont && r.vent.drivingP > drvMax) seen.drv = true;
         if (vk !== null && !inR(vk, [vtR[0] - 0.5, vtR[1] + 0.5])) seen.vt = true;
+        if (vk !== null && vk > vtR[1] + 0.5 && !learnerBreath) { presetS += w; presetVk = Math.max(presetVk, vk); }
       }
-      if (o && v && pr && tGoal === null) tGoal = L.t;
-      // unsafe moments: never in the arrival grace window (first 10 sim-min) or a scripted event's response window (E2)
-      if (L.t >= GRACE && !scripted(L.t)) {
+      var all = o && v && pr;
+      if (all && tFirst === null) tFirst = L.t;
+      end = { all: all, o: o, v: v, pr: pr && !harm, harm: harm, sp: sp, fio2: ls.fio2, r: r, vk: vk, spont: spont, above: above };
+      // unsafe moments: strictly after the arrival grace window (first 10 sim-min) and outside a scripted event's
+      // response window (E2); a large VT only when the learner set the breath (E1)
+      if (L.t > GRACE && !scripted(L.t)) {
         var why = r.vent.pplat > 35 ? T("plateau " + fx(r.vent.pplat) + " cmH2O", "plateau " + fx(r.vent.pplat) + " cmH2O") : sp < 85 ? T("SpO2 " + sp + "%", "SpO2 " + sp + "%")
-          : vk !== null && vk > 10 ? T("VT " + fx(vk, 1) + " mL/kg", "VT " + fx(vk, 1) + " mL/kg") : r.vent.autoPeep >= 10 && r.vitals.map < 65 ? T("auto-PEEP " + fx(r.vent.autoPeep) + " with MAP " + r.vitals.map, "auto-PEEP " + fx(r.vent.autoPeep) + " के साथ MAP " + r.vitals.map) : null;
+          : vk !== null && vk > 10 && learnerBreath ? T("VT " + fx(vk, 1) + " mL/kg", "VT " + fx(vk, 1) + " mL/kg") : r.vent.autoPeep >= 10 && r.vitals.map < 65 ? T("auto-PEEP " + fx(r.vent.autoPeep) + " with MAP " + r.vitals.map, "auto-PEEP " + fx(r.vent.autoPeep) + " के साथ MAP " + r.vitals.map) : null;
         if (why) {
-          unsafe++;
           var prev = unsafeList[unsafeList.length - 1];
           if (!prev || prev.what.en.split(" ")[0] !== why.en.split(" ")[0] || L.t - prev.until > 600) unsafeList.push({ t: L.t, until: L.t, minute: tmin(L.t), what: why });
           else prev.until = L.t;
         }
       }
     }
-    var fr = function (x) { return cnt ? x / cnt : 0; };
+    var fr = function (x) { return wsum > 0 ? x / wsum : 0; };
+    var endAll = !!(end && end.all && end.pr);
     var ans = run.answers || [];
     function ansFrac(kind) { var c = 0, t = 0, k; for (k = 0; k < ans.length; k++) if (ans[k] && ans[k].kind === kind) { t++; if (ans[k].correct) c++; } return t ? { f: c / t, c: c, t: t } : null; }
     function did(re) { for (var k = 0; k < n; k++) if (re.test(String(log[k].action || ""))) return log[k]; return null; }
@@ -1430,44 +1671,80 @@
       ex.initial = T("Your first settings were judged on VT per kg, plateau 30 min later" + (g.peepTable === "ardsnet" ? " and the PEEP/FiO2 table." : " and oxygen 30 min later."), "आपकी पहली settings VT per kg, 30 मिनट बाद के plateau" + (g.peepTable === "ardsnet" ? " और PEEP/FiO2 table पर परखी गईं।" : " और 30 मिनट बाद की oxygen पर परखी गईं।"));
     } else ex.initial = T("You did not change the start settings, so first settings were not scored.", "आपने शुरू की settings नहीं बदलीं, इसलिए पहली settings के अंक नहीं गिने गए।");
     var pct = function (x) { return fx(fr(x) * 100); };
-    parts.oxygenation = Math.round(X.oxygenation * fr(oxOK));
-    ex.oxygenation = T("SpO2 was on target " + pct(oxOK) + "% of the time after the first 10 minutes." + (hiFiO2 ? " It was above target on FiO2 above 50%: wean FiO2." : ""), "पहले 10 मिनट के बाद SpO2 " + pct(oxOK) + "% समय लक्ष्य पर रहा।" + (hiFiO2 ? " FiO2 50% से ऊपर पर यह लक्ष्य से ऊपर था: FiO2 घटाएँ।" : ""));
-    parts.ventilation = Math.round(X.ventilation * fr(vOK));
-    ex.ventilation = T((g.ph ? "pH" : "PaCO2") + " was on target " + pct(vOK) + "% of the time after the first 10 minutes.", "पहले 10 मिनट के बाद " + (g.ph ? "pH" : "PaCO2") + " " + pct(vOK) + "% समय लक्ष्य पर रहा।");
-    parts.protection = Math.round(X.protection * fr(prOK));
-    ex.protection = T("Plateau, driving pressure and VT were protective " + pct(prOK) + "% of the time" + (hemoN ? ", minus time your settings dropped BP." : "."), "Plateau, driving pressure और VT " + pct(prOK) + "% समय सुरक्षित रहे" + (hemoN ? ", उस समय को छोड़कर जब आपकी settings से BP गिरा।" : "।"));
-    var aa = ansFrac("alarm");
+    // half time on target, half the end state (E3)
+    var blend = function (x, ok) { return 0.5 * fr(x) + (ok ? 0.5 : 0); };
+    var endTxt = function (ok) { return ok ? T(" At the end it was on target.", " अंत में यह लक्ष्य पर था।") : T(" At the end it was off target.", " अंत में यह लक्ष्य से बाहर था।"); };
+    var eo = end ? end.o : false, ev = end ? end.v : false, ep = end ? end.pr : false;
+    parts.oxygenation = Math.round(X.oxygenation * blend(oxW, eo));
+    var et = endTxt(eo);
+    ex.oxygenation = T("SpO2 was on target " + pct(oxW) + "% of the time after the first 10 minutes." + et.en + (hiFiO2 ? " It was above target on FiO2 above 50%: wean FiO2." : ""), "पहले 10 मिनट के बाद SpO2 " + pct(oxW) + "% समय लक्ष्य पर रहा।" + et.hi + (hiFiO2 ? " FiO2 50% से ऊपर पर यह लक्ष्य से ऊपर था: FiO2 घटाएँ।" : ""));
+    parts.ventilation = Math.round(X.ventilation * blend(vW, ev));
+    et = endTxt(ev);
+    ex.ventilation = T((g.ph ? "pH" : "PaCO2") + " was on target " + pct(vW) + "% of the time after the first 10 minutes." + et.en, "पहले 10 मिनट के बाद " + (g.ph ? "pH" : "PaCO2") + " " + pct(vW) + "% समय लक्ष्य पर रहा।" + et.hi);
+    parts.protection = Math.round(X.protection * blend(prW, ep));
+    et = endTxt(ep);
+    ex.protection = T("Plateau, driving pressure and VT were protective " + pct(prW) + "% of the time" + (hemoN ? ", minus time your settings dropped BP." : ".") + et.en, "Plateau, driving pressure और VT " + pct(prW) + "% समय सुरक्षित रहे" + (hemoN ? ", उस समय को छोड़कर जब आपकी settings से BP गिरा।" : "।") + et.hi);
+    var aa = ansFrac("alarm"), missed = [], mk = {};
+    for (i = 0; i < ans.length; i++) if (ans[i] && ans[i].kind === "alarm" && !ans[i].correct && ans[i].id && !mk[ans[i].id]) { mk[ans[i].id] = 1; missed.push({ id: ans[i].id, label: ALARM[ans[i].id] || T(ans[i].id, ans[i].id) }); }
+    var missEn = missed.map(function (x) { return x.label.en; }).join(", "), missHi = missed.map(function (x) { return x.label.hi; }).join(", ");
     if (arrest) { parts.alarms = 0; ex.alarms = T("The patient arrested, so alarm response scores 0.", "मरीज़ का arrest हुआ, इसलिए alarm response को 0 मिला।"); }
-    else if (aa) { parts.alarms = Math.round(X.alarms * aa.f); ex.alarms = T("You responded to " + aa.c + " of " + aa.t + " alarms in time.", "आपने " + aa.t + " में से " + aa.c + " alarms का समय पर जवाब दिया।"); }
-    else ex.alarms = T("No alarm occurred, so alarm response was not scored.", "कोई alarm नहीं बजा, इसलिए alarm response के अंक नहीं गिने गए।");
+    else if (aa) { parts.alarms = Math.round(X.alarms * aa.f); ex.alarms = T("You responded to " + aa.c + " of " + aa.t + " alarms in time." + (missed.length ? " Not answered within 5 minutes: " + missEn + "." : ""), "आपने " + aa.t + " में से " + aa.c + " alarms का समय पर जवाब दिया।" + (missed.length ? " 5 मिनट में जवाब नहीं दिया: " + missHi + "।" : "")); }
+    else ex.alarms = T("No alarm needed your response: none cleared after something you did, and none stayed unanswered for 5 minutes. Alarm response was not scored.", "किसी alarm को आपके जवाब की ज़रूरत नहीं पड़ी: न कोई आपके किए से हटा, न कोई 5 मिनट बिना जवाब रहा। Alarm response के अंक नहीं गिने गए।");
     var ab = ansFrac("abg"), drew = did(/^abg/);
     if (ab || drew) {
       var onT = last && (g.ph ? inR(last.gas.ph, g.ph) : inR(last.gas.paco2, g.paco2 || [35, 45]));
       parts.abg = Math.round(X.abg * (ab ? ab.f : onT ? 1 : 0));
       ex.abg = ab ? T(ab.c + " of " + ab.t + " gases were drawn at a useful time, 15 min or more after a change.", ab.t + " में से " + ab.c + " gases सही समय पर, बदलाव के 15 मिनट या बाद में ली गईं।") : T("You drew a gas. The last gas " + (onT ? "met" : "missed") + " the target.", "आपने gas ली। आख़िरी gas लक्ष्य " + (onT ? "पर थी।" : "से बाहर थी।"));
     } else ex.abg = T("You did not draw a blood gas, so this was not scored.", "आपने blood gas नहीं ली, इसलिए इसके अंक नहीं गिने गए।");
-    parts.time = tGoal === null ? 0 : Math.round(X.time * clamp(1 - (tGoal - 900) / 2700, 0, 1));
-    ex.time = tGoal === null ? T("All goals were never met at the same time.", "सभी लक्ष्य कभी एक साथ पूरे नहीं हुए।") : T("All goals were met together at " + tmin(tGoal) + " min.", "सभी लक्ष्य " + tmin(tGoal) + " मिनट पर एक साथ पूरे हुए।");
-    parts.unsafe = unsafe ? Math.max(X.unsafeMin, -unsafe * 5) : 0;
-    ex.unsafe = unsafe ? T(unsafeList.length + " unsafe " + (unsafeList.length === 1 ? "moment" : "moments") + " after the first 10 minutes, listed with their times.", "पहले 10 मिनट के बाद " + unsafeList.length + " असुरक्षित पल, समय के साथ सूची में।") : T("No unsafe moments after the first 10 minutes.", "पहले 10 मिनट के बाद कोई असुरक्षित पल नहीं।");
+    // goals met together (E2): the first time, and the end state named honestly
+    var miss = [], mEn = [], mHi = [];
+    if (end) {
+      var er = end.r, gv = er.gas || {}, ve = er.vent || {};
+      if (!end.o) {
+        if (end.above) { miss.push({ key: "spo2", value: end.sp }); mEn.push("SpO2 " + end.sp + "% on FiO2 " + end.fio2 + "% (wean FiO2)"); mHi.push("FiO2 " + end.fio2 + "% पर SpO2 " + end.sp + "% (FiO2 घटाएँ)"); }
+        else { miss.push({ key: "spo2", value: end.sp }); mEn.push("SpO2 " + end.sp + "% (goal " + spo2R[0] + " to " + spo2R[1] + ")"); mHi.push("SpO2 " + end.sp + "% (लक्ष्य " + spo2R[0] + " से " + spo2R[1] + ")"); }
+      }
+      if (!end.v) {
+        if (g.ph) { miss.push({ key: "ph", value: gv.ph }); mEn.push("pH " + gv.ph + " (goal " + g.ph[0] + " to " + g.ph[1] + ")"); mHi.push("pH " + gv.ph + " (लक्ष्य " + g.ph[0] + " से " + g.ph[1] + ")"); }
+        else { var pc_ = g.paco2 || [35, 45]; miss.push({ key: "paco2", value: gv.paco2 }); mEn.push("PaCO2 " + gv.paco2 + " (goal " + pc_[0] + " to " + pc_[1] + ")"); mHi.push("PaCO2 " + gv.paco2 + " (लक्ष्य " + pc_[0] + " से " + pc_[1] + ")"); }
+      }
+      if (!end.spont && ve.pplat > pplatMax) { miss.push({ key: "pplat", value: ve.pplat }); mEn.push("plateau " + fx(ve.pplat) + " (" + pplatMax + " or less)"); mHi.push("plateau " + fx(ve.pplat) + " (" + pplatMax + " या कम)"); }
+      if (!end.spont && ve.drivingP > drvMax) { miss.push({ key: "drivingP", value: ve.drivingP }); mEn.push("driving pressure " + fx(ve.drivingP) + " (" + drvMax + " or less)"); mHi.push("driving pressure " + fx(ve.drivingP) + " (" + drvMax + " या कम)"); }
+      if (end.vk !== null && !inR(end.vk, [vtR[0] - 0.5, vtR[1] + 0.5])) { miss.push({ key: "vt", value: r1(end.vk) }); mEn.push("VT " + fx(end.vk, 1) + " mL/kg (" + vtR[0] + " to " + vtR[1] + ")"); mHi.push("VT " + fx(end.vk, 1) + " mL/kg (" + vtR[0] + " से " + vtR[1] + ")"); }
+      if (end.harm) { miss.push({ key: "map", value: (er.vitals || {}).map }); mEn.push("mean BP " + (er.vitals || {}).map + " from your settings"); mHi.push("आपकी settings से औसत BP " + (er.vitals || {}).map); }
+    }
+    var speed = function (t) { return clamp(1 - (t - 900) / 2700, 0, 1); };
+    parts.time = Math.round(X.time * (endAll ? Math.max(0.3, speed(tFirst)) : tFirst !== null ? 0.5 * speed(tFirst) : 0));
+    var missT = T(mEn.join(", "), mHi.join(", "));
+    ex.time = endAll ? T("All goals were first met together at " + tmin(tFirst) + " min and still held at the end.", "सभी लक्ष्य पहली बार " + tmin(tFirst) + " मिनट पर एक साथ पूरे हुए और अंत तक बने रहे।")
+      : tFirst !== null ? T("All goals were met together at " + tmin(tFirst) + " min, but not at the end: " + missT.en + ".", "सभी लक्ष्य " + tmin(tFirst) + " मिनट पर एक साथ पूरे हुए, पर अंत में नहीं: " + missT.hi + "।")
+      : T("All goals were never met at the same time." + (mEn.length ? " At the end: " + missT.en + "." : ""), "सभी लक्ष्य कभी एक साथ पूरे नहीं हुए।" + (mHi.length ? " अंत में: " + missT.hi + "।" : ""));
+    var pen = 0;
+    for (i = 0; i < unsafeList.length; i++) pen += 5 + 5 * Math.floor((unsafeList[i].until - unsafeList[i].t) / 600);
+    parts.unsafe = pen ? Math.max(X.unsafeMin, -pen) : 0;
+    ex.unsafe = unsafeList.length ? T(unsafeList.length + " unsafe " + (unsafeList.length === 1 ? "moment" : "moments") + " after the first 10 minutes, listed with their times.", "पहले 10 मिनट के बाद " + unsafeList.length + " असुरक्षित पल, समय के साथ सूची में।") : T("No unsafe moments after the first 10 minutes.", "पहले 10 मिनट के बाद कोई असुरक्षित पल नहीं।");
     var earned = 0, maxA = 0, k;
     for (k in X) if (own(X, k) && k !== "unsafeMin") { scored[k] = own(parts, k); if (scored[k]) { earned += parts[k]; maxA += X[k]; } else parts[k] = null; }
     scored.unsafe = true;
     var total = maxA ? Math.round(100 * earned / maxA) + parts.unsafe : 0;
     if (hemo) notes.push(hemo.kind === "peep" ? T("Key lesson: your PEEP " + hemo.peep + " dropped mean BP to " + hemo.map + ". High chest pressure lets less blood return to the heart.", "मुख्य सीख: आपके PEEP " + hemo.peep + " से औसत BP " + hemo.map + " तक गिरा। छाती में ऊँचा दबाव दिल तक कम ख़ून लौटने देता है।")
       : T("Key lesson: your faster or bigger breaths trapped air and dropped mean BP to " + hemo.map + ".", "मुख्य सीख: आपकी तेज़ या बड़ी साँसों ने हवा फँसाई और औसत BP " + hemo.map + " तक गिरा।"));
+    if (presetS >= 300) notes.push(T("The start VT was " + fx(presetVk, 1) + " mL/kg predicted body weight and stayed for " + fx(presetS / 60) + " min. Size VT to height in the first minutes: " + vtR[0] + " to " + vtR[1] + " mL/kg.", "शुरू का VT " + fx(presetVk, 1) + " mL/kg predicted body weight था और " + fx(presetS / 60) + " मिनट रहा। पहले मिनटों में VT लंबाई के हिसाब से रखें: " + vtR[0] + " से " + vtR[1] + " mL/kg।"));
     if (seen.pplat) notes.push(T("Keep plateau at or below " + pplatMax + " cmH2O.", "Plateau " + pplatMax + " cmH2O या कम रखें।"));
     if (seen.drv) notes.push(T("Keep driving pressure at or below " + drvMax + ". Driving pressure is plateau minus PEEP.", "Driving pressure " + drvMax + " या कम रखें। Driving pressure यानी plateau minus PEEP।"));
     if (seen.vt) notes.push(T("Keep VT at " + vtR[0] + " to " + vtR[1] + " mL/kg predicted body weight.", "VT predicted body weight के " + vtR[0] + " से " + vtR[1] + " mL/kg रखें।"));
-    if (fr(lowSp) > 0.2) notes.push(T("SpO2 was below the target range for long periods.", "SpO2 लंबे समय तक target range से नीचे रहा।"));
+    if (fr(lowSpW) > 0.2) notes.push(T("SpO2 was below the target range for long periods.", "SpO2 लंबे समय तक target range से नीचे रहा।"));
     if (hiFiO2) notes.push(T("SpO2 was above target on FiO2 above 50%: wean FiO2.", "FiO2 50% से ऊपर पर SpO2 लक्ष्य से ऊपर था: FiO2 घटाएँ।"));
-    if (fr(vOK) < 0.8 && cnt) notes.push(T("Ventilation goal was not met for much of the run.", "Run के बड़े हिस्से में ventilation लक्ष्य पूरा नहीं हुआ।"));
+    if (fr(vW) < 0.8 && wsum > 0) notes.push(T("Ventilation goal was not met for much of the run.", "Run के बड़े हिस्से में ventilation लक्ष्य पूरा नहीं हुआ।"));
     if (backup) notes.push(T("The patient needed apnoea backup: the mode did not match the drive to breathe.", "मरीज़ को apnoea backup चाहिए था: mode साँस की drive से मेल नहीं खाता था।"));
-    if (unsafe) notes.push(T("Unsafe moments: very high plateau, severe hypoxaemia, large VT or trapping with hypotension.", "असुरक्षित पल: बहुत ऊँचा plateau, गंभीर hypoxaemia, बड़ा VT या trapping के साथ hypotension।"));
+    if (unsafeList.length) notes.push(T("Unsafe moments: very high plateau, severe hypoxaemia, a large VT you set, or trapping with hypotension.", "असुरक्षित पल: बहुत ऊँचा plateau, गंभीर hypoxaemia, आपका रखा बड़ा VT, या trapping के साथ hypotension।"));
     if (arrest) { total = Math.min(total, ARREST_CAP); notes.unshift(T("The patient had a cardiac arrest at " + tmin(arrest.t) + " min. The score is capped at " + ARREST_CAP + ".", "मरीज़ का " + tmin(arrest.t) + " मिनट पर cardiac arrest हुआ। Score " + ARREST_CAP + " पर सीमित है।")); }
-    if (!notes.length) notes.push(T("Goals met safely. Well done.", "लक्ष्य सुरक्षित रूप से पूरे हुए। बहुत अच्छा।"));
-    for (i = 0; i < unsafeList.length; i++) delete unsafeList[i].until;
-    return { total: clamp(Math.round(total), 0, 100), parts: parts, scored: scored, max: X, explain: ex, unsafeList: unsafeList, notes: notes, arrest: !!arrest, goodRun: sc.goodRun || null };
+    if (!notes.length) notes.push(endAll ? T("Goals met safely. Well done.", "लक्ष्य सुरक्षित रूप से पूरे हुए। बहुत अच्छा।") : T("No safety problems. Keep going until every goal is met together.", "कोई सुरक्षा समस्या नहीं। तब तक जारी रखें जब तक सभी लक्ष्य एक साथ पूरे न हों।"));
+    if (run.tutorial) notes.unshift(T("Practice run in a tutorial: it does not count toward your best score.", "Tutorial में अभ्यास run: यह आपके सर्वोत्तम score में नहीं गिना जाता।"));
+    for (i = 0; i < unsafeList.length; i++) { unsafeList[i].toMinute = tmin(unsafeList[i].until); delete unsafeList[i].until; }
+    return { total: clamp(Math.round(total), 0, 100), parts: parts, scored: scored, max: X, explain: ex, unsafeList: unsafeList, notes: notes, arrest: !!arrest, goodRun: sc.goodRun || null,
+      goals: { firstMin: tFirst === null ? null : tmin(tFirst), metAtEnd: endAll, missedAtEnd: miss, missedText: miss.length ? missT : null },
+      missedAlarms: missed, practice: !!run.tutorial, countsForBest: !run.tutorial };
   }
 
   return {
@@ -1478,7 +1755,7 @@
     constants: { kCO2: K_CO2, overdistensionFactor: KOD, neuralTi: TIN, substep: SUB, plateauMax: 30, drivingMax: 15 },
     init: init, step: step, breath: breath, readout: readout, abg: abg, explainDelta: explainDelta, alarms: alarms,
     dyssync: dyssync, whatIf: whatIf, score: score, SCORE_MAX: SCORE_MAX, pbw: pbw, normSettings: norm, ACTIONS: ACTIONS, act: act,
-    hold: hold, exam: exam, suggestActions: suggestActions, whyDrift: whyDrift, caseState: caseState, inject: inject,
+    hold: hold, exam: exam, suggestActions: suggestActions, alarmPlan: alarmPlan, oxygen: { sat: sat, p50: p50Of }, whyDrift: whyDrift, caseState: caseState, inject: inject,
     constants2: { grace: GRACE, arrestSeconds: ARREST_S, arrestScoreCap: ARREST_CAP }
   };
 });

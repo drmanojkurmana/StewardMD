@@ -18,6 +18,8 @@ const SETTING_KEYS = ["fio2", "peep", "vt", "rr", "pinsp", "ps", "ti", "ie", "tr
 const MODES = ["vc", "acvc", "pc", "acpc", "simv", "psv", "cpap", "prvc", "niv", "aprv"];
 const ALARMS = ["pPeakHigh", "pPlatHigh", "vtLow", "veLow", "veHigh", "apnoea", "rrHigh", "fio2Low", "fio2High", "peepLow",
   "peepHigh", "disconnect", "autoPeep", "dyssync", "peepSetHigh", "spo2Low", "mapLow", "hrHigh", "hrLow"];
+// Round 2 engine alarms: the engine carries their bedside checklist (E.alarmPlan); learn.json may add a card for them.
+const ALARMS_R2 = ["etco2High"];
 const DYSSYNC = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
 const CHAIN = ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"];
 const TUTORIALS = ["how-it-works", "fio2-peep", "first-alarm", "vt-rr", "pc-vs-vc", "waveforms", "abg-adjust", "ards", "copd-autopeep"];
@@ -82,6 +84,7 @@ test("scenarios: the 10 required scenarios with full schema", () => {
     assert.ok(g.deadSpace >= 0 && g.deadSpace < 0.6 && g.upperInflection >= 20 && g.upperInflection <= 45, s.id + " dead space/UIP");
     assert.ok(MODES.includes(s.start.mode), s.id + " start mode");
     Object.keys(s.start.settings).forEach((k) => assert.ok(SETTING_KEYS.includes(k), s.id + " start key " + k));
+    if (s.monitor) assert.ok(Object.keys(s.monitor).join() === "etco2High" && s.monitor.etco2High >= 45 && s.monitor.etco2High <= 80, s.id + " monitor limits");
     if (s.start.abg) assert.ok(Object.keys(s.start.abg).join() === "PaCO2" && s.start.abg.PaCO2 >= 10 && s.start.abg.PaCO2 <= 120, s.id + " presenting PaCO2");
     assert.ok(Array.isArray(s.timeline));
     s.timeline.forEach((e) => {
@@ -195,7 +198,8 @@ test("learn.tutorials: the 9 tutorials with drivable steps", () => {
 });
 
 test("learn.alarms and learn.dyssync cover every id", () => {
-  assert.deepEqual(Object.keys(L.alarms).sort(), [...ALARMS].sort());
+  ALARMS.forEach((id) => assert.ok(L.alarms[id], "learn.alarms." + id));
+  Object.keys(L.alarms).forEach((id) => assert.ok(ALARMS.includes(id) || ALARMS_R2.includes(id), "learn.alarms." + id + " is an engine alarm"));
   ALARMS.forEach((id) => {
     const a = L.alarms[id];
     assert.ok(a.causes.length >= 2 && a.causes.every(bi) && bi(a.clue) && a.steps.length >= 3 && a.steps.every(bi) && bi(a.fix) && bi(a.plain), id);

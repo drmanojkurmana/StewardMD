@@ -2,6 +2,7 @@
   "v": 1,
   "review": "ai_drafted",
   "units": {
+    "monitor.etco2High": "capnograph high EtCO2 alarm limit in mmHg, set for this patient (default 50 when absent)",
     "patient.vco2": "mL/min",
     "patient.drive.rate": "spontaneous breaths per minute the brain asks for at normal PaCO2, before sedation",
     "patient.drive.effort": "peak inspiratory muscle pressure (Pmus) in cmH2O at that drive",
@@ -322,6 +323,7 @@
       },
       "lung": { "c": 60, "r": 22, "flowLimited": true, "shunt": 0.08, "recruitable": 0.1, "deadSpace": 0.15, "upperInflection": 40, "vqLow": 0.35 },
       "start": { "mode": "acvc", "abg": { "PaCO2": 80 }, "settings": { "fio2": 40, "peep": 5, "vt": 600, "rr": 20, "ti": 1, "trigType": "flow", "trigFlow": 2, "pPeakHigh": 50 } },
+      "monitor": { "etco2High": 65 },
       "goals": {
         "spo2": [88, 92],
         "ph": [7.3, 7.4],
@@ -385,6 +387,7 @@
       },
       "lung": { "c": 45, "r": 36, "flowLimited": true, "lowVQ": 0.12, "shunt": 0.1, "recruitable": 0.1, "deadSpace": 0.2, "upperInflection": 35 },
       "start": { "mode": "acvc", "abg": { "PaCO2": 70 }, "settings": { "fio2": 60, "peep": 5, "vt": 450, "rr": 20, "ti": 1, "trigType": "flow", "trigFlow": 2, "pPeakHigh": 50 } },
+      "monitor": { "etco2High": 60 },
       "goals": {
         "spo2": [92, 95],
         "ph": [7.2, 7.45],
