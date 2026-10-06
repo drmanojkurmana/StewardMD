@@ -705,10 +705,10 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .sp-scroll:has(.vl-wrap, .vl-done, .vl-case, .vl-dys1) > .sp-draft { display: none; }
 .nrk-root .vl-draft { color: var(--sp-mut); white-space: nowrap; }
 
-/* Event card: floats over the top of the page (JS sets its top under the alarm bar and tab bar); the layout never
-   moves when it appears, so a tap lands on what the finger aimed at (U11). */
+/* Event card: floats over the bottom of the page, docked just above the coach or the footer (JS sets its bottom); the
+   layout never moves when it appears (U11) and the first card under the tabs stays clear (round 4, U1). */
 .nrk-root .vl-toast { position: absolute; left: 8px; right: 8px; z-index: 30; display: flex; border: 1px solid var(--vl-cline); border-radius: 14px;
-  background: color-mix(in srgb, var(--vl-acc) 8%, var(--vl-card)); box-shadow: 0 10px 30px rgba(0, 0, 0, .28); opacity: 0; transform: translateY(-6px); pointer-events: none;
+  background: color-mix(in srgb, var(--vl-acc) 8%, var(--vl-card)); box-shadow: 0 -6px 24px rgba(0, 0, 0, .22); opacity: 0; transform: translateY(6px); pointer-events: none;
   transition: opacity 180ms var(--vl-ease), transform 220ms var(--vl-ease); max-width: 720px; margin: 0 auto; }
 .nrk-root .vl-toast.on { opacity: 1; transform: none; pointer-events: auto; animation: none; }
 @media (prefers-reduced-motion: reduce) { .nrk-root .vl-toast { transform: none; } }
@@ -829,3 +829,28 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-abn-t, .nrk-root .vl-doing abbr, .nrk-root .vl-parts b small { font-size: 12px; }
 /* lab links follow the indigo accent (the host link colour is yellow in the dark theme, the medium-alarm colour here) */
 .nrk-root .vl-scroll, .nrk-root .vl-coach, .nrk-root .vl-sheet-wrap, .nrk-root .vl-home, .nrk-root .vl-done { --sp-link: var(--vl-acc); --sp-link-line: color-mix(in srgb, var(--vl-acc) 45%, transparent); }
+
+/* ================= round 4 ================= */
+/* U6: every lab screen takes the indigo accent for the host's accent too (focus rings, pressed segments, links): yellow
+   stays the medium-alarm colour only. */
+.nrk-root:has(.vl-wrap, .vl-done, .vl-case, .vl-dys1, .vl-home, .vl-wi) { --sp-acc: var(--vl-acc); --sp-acc-soft: var(--vl-acc-soft);
+  --sp-link: var(--vl-acc); --sp-link-line: color-mix(in srgb, var(--vl-acc) 45%, transparent); }
+/* U3: the alarm-limit note sits under the summary */
+.nrk-root .vl-alim-n { margin: 0 0 10px; }
+/* U4: the rate pair under a minute-volume warning: a full-width, quiet action inside the warning */
+.nrk-root .vl-warns li > span:last-child { min-width: 0; }
+.nrk-root .vl-pair { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; margin-top: 8px; padding: 8px 12px; border: 1px solid var(--vl-acc);
+  border-radius: 10px; background: var(--sp-bg); color: var(--sp-text); font: inherit; font-size: 14px; font-weight: 650; text-align: left;
+  touch-action: manipulation; -webkit-user-select: none; user-select: none; transition: transform 120ms var(--vl-ease, ease-out); }
+.nrk-root .vl-pair .smd-ico { width: 18px; height: 18px; flex: 0 0 auto; color: var(--vl-acc); }
+.nrk-root .vl-pair:active { transform: scale(.98); }
+.nrk-root .vl-pair:focus-visible { outline: 2px solid var(--vl-acc); outline-offset: 2px; }
+/* U5: one-sentence verdict at the top of a what-if result and an ABG case answer */
+.nrk-root .vl-verdict { margin: 8px 0 12px; padding: 10px 12px; border-radius: 12px; font-size: 15px; line-height: 1.45; text-wrap: pretty;
+  background: color-mix(in srgb, var(--vl-acc) 10%, var(--vl-card)); }
+.nrk-root .vl-verdict b { font-weight: 750; }
+.nrk-root .vl-verdict.vd-good b { color: var(--nk-ok); }
+.nrk-root .vl-verdict.vd-bad b { color: var(--nk-bad); }
+.nrk-root .vl-verdict.vd-mix b { color: var(--vl-acc); }
+.nrk-root .vl-verdict.vd-none b { color: var(--sp-mut); }
+@media (prefers-reduced-motion: reduce) { .nrk-root .vl-pair { transition: none; } .nrk-root .vl-pair:active { transform: none; } }

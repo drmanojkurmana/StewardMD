@@ -177,7 +177,7 @@
     pattern: T("Pattern {n}", "पैटर्न {n}"), nameIt: T("Which pattern is this?", "यह कौन सा पैटर्न है?"), named: T("Named", "पहचाना"), notNamed: T("Not named yet", "अभी पहचाना नहीं"), dysNext: T("Next pattern", "अगला पैटर्न"),
     dName: T("Name", "नाम"), dClue: T("Clue", "संकेत"), dCause: T("Cause", "कारण"), dFix: T("Fix", "समाधान"),
     dysAria: T("Pressure and flow over two breaths, showing a patient and ventilator out of step.", "दो साँसों में प्रेशर और फ़्लो, मरीज़ और वेंटिलेटर का तालमेल नहीं।"),
-    runs: T("{n} runs, best {b}", "{n} रन, सर्वोत्तम {b}"), none: T("Not started", "अभी शुरू नहीं"),
+    runs: T("{n} runs, best {b}", "{n} रन, सर्वोत्तम {b}"), runs1: T("1 run, best {b}", "1 रन, सर्वोत्तम {b}"), none: T("Not started", "अभी शुरू नहीं"),
     maikQ: T("I ran a ventilator lab simulation", "I ran a ventilator lab simulation"),
     fallbackDisc: T("Educational simulator. Not a real ventilator and not a guide to treating a real patient.", "शैक्षिक सिम्युलेटर। यह असली वेंटिलेटर नहीं है और असली मरीज़ के इलाज की गाइड नहीं है।"),
     // beginner layer: plain words beside the clinical ones (Level 1 and 2)
@@ -204,6 +204,9 @@
     nx2: T("Press Confirm to apply it. A real ventilator waits for this too.", "लागू करने के लिए पक्का करें दबाएँ। असली वेंटिलेटर भी इसका इंतज़ार करता है।"),
     nx3: T("Read the chain, then tap +30 min. Blood gases change slowly.", "चेन पढ़ें, फिर +30 मिनट दबाएँ। ब्लड गैस धीरे बदलती है।"),
     nx4: T("Now Draw ABG again to see what your change did.", "अब फिर ABG लें और देखें आपके बदलाव ने क्या किया।"),
+    nx4b: T("Now Draw ABG to see what your change did.", "अब ABG लें और देखें आपके बदलाव ने क्या किया।"),
+    nx6: T("This gas came soon after your change and has not settled. Tap +30 min, then Draw ABG again.", "यह गैस बदलाव के तुरंत बाद ली गई, अभी स्थिर नहीं हुई। +30 मिनट दबाएँ, फिर दोबारा ABG लें।"),
+    nx7: T("Read this gas against the goals. Then try another change, or Finish.", "इस गैस को लक्ष्यों से मिलाएँ। फिर कोई और बदलाव करें, या समाप्त करें।"),
     nx5: T("Compare Before and Now in the blood gas. Then try another change, or Finish.", "ब्लड गैस में पहले और अभी की तुलना करें। फिर कोई और बदलाव करें, या समाप्त करें।"),
     tutMoved: T("The clock moved on {m} min so you can see it.", "आपको दिखाने के लिए घड़ी {m} मिनट आगे बढ़ी।"),
     tutFlat: T("{x} barely moves in this patient. Go on when ready.", "इस मरीज़ में {x} लगभग नहीं बदलता। तैयार हों तो आगे बढ़ें।"),
@@ -211,6 +214,7 @@
     ex_paco2: T("CO2 in the blood (PaCO2)", "खून में CO2 (PaCO2)"), ex_pao2: T("oxygen in the blood (PaO2)", "खून में ऑक्सीजन (PaO2)"), ex_ph: T("pH", "pH"),
     ex_pplat: T("plateau pressure", "प्लेटो प्रेशर"), ex_map: T("mean blood pressure (MAP)", "औसत ब्लड प्रेशर (MAP)"), ex_vte: T("tidal volume", "टाइडल वॉल्यूम"),
     ex_autoPeep: T("auto-PEEP", "ऑटो-PEEP"), ex_drivingP: T("driving pressure", "ड्राइविंग प्रेशर"), ex_spo2: T("SpO2", "SpO2"),
+    ex_etco2: T("EtCO2 (CO2 at the end of each breath)", "EtCO2 (हर साँस के अंत में CO2)"), ex_rrTotal: T("breathing rate (RR total)", "साँस की दर (कुल RR)"),
     ab_pH: T("acidity: lower is more acid", "अम्लता: कम यानी ज़्यादा एसिड"), ab_PaCO2: T("CO2 in the blood", "खून में CO2"), ab_PaO2: T("oxygen in the blood", "खून में ऑक्सीजन"),
     ab_HCO3: T("bicarbonate, the body's buffer", "बाइकार्बोनेट, शरीर का बफ़र"), ab_SaO2: T("% of haemoglobin carrying oxygen", "ऑक्सीजन ले जा रहा हीमोग्लोबिन %"),
     // persona pass: run tabs, coach, steppers, leave, alarms, holds, projections, debrief
@@ -222,6 +226,8 @@
     restored: T("Starting settings restored.", "शुरुआती सेटिंग वापस आ गईं।"),
     setToL: T("{x} to {v}, then confirm.", "{x} को {v} करें, फिर पक्का करें।"),
     typeVal: T("Type a value for {x}", "{x} का मान लिखें"),
+    typeTip: T("Tap a number to type it; hold + or the minus button to keep turning.", "किसी number पर tap करके सीधे लिखें; लगातार घुमाने के लिए + या घटाने वाला बटन दबाकर रखें।"),
+    limTip: T("A limit only decides when the alarm sounds. Tap the number to type it; + and the minus button move the pressure limit 5 at a time.", "सीमा सिर्फ़ तय करती है कि alarm कब बजे। Number पर tap करके लिखें; + और घटाने वाला बटन pressure सीमा को हर tap पर 5 बदलते हैं।"),
     wHigh: T("{x} {v} is very high for this patient. Check before you confirm.", "{x} {v} इस मरीज़ के लिए बहुत ज़्यादा है। पक्का करने से पहले जाँचें।"),
     wLow: T("{x} {v} is very low for this patient. Check before you confirm.", "{x} {v} इस मरीज़ के लिए बहुत कम है। पक्का करने से पहले जाँचें।"),
     wO2: T("FiO2 {v}% while SpO2 is below target: oxygen will fall further.", "SpO2 लक्ष्य से कम है और FiO2 {v}%: ऑक्सीजन और गिरेगी।"),
@@ -331,6 +337,13 @@
     noAlarms: T("No alarms", "कोई अलार्म नहीं"),
     perKgLine: T("{n} mL/kg PBW", "{n} mL/kg PBW"), perKgSafe: T("Safe band 6 to 8", "सुरक्षित दायरा 6 से 8"),
     scaleTo: T("{a} to {b}", "{a} से {b}"),
+    vd_good: T("Helps", "मदद करता है"), vd_mix: T("Trade off", "फ़ायदा भी, नुकसान भी"), vd_bad: T("Makes it worse", "हालत बिगाड़ता है"), vd_none: T("Little change", "ख़ास बदलाव नहीं"),
+    vdLine: T("in 30 min this {x}.", "30 मिनट में यह बदलाव {x}।"), vdNone: T("in 30 min SpO2, CO2 and blood pressure barely move for this patient.", "30 मिनट में इस मरीज़ का SpO2, CO2 और blood pressure लगभग नहीं बदलता।"),
+    vdUp: T("raises {x} from {a} to {b}", "{x} को {a} से {b} करता है"), vdDn: T("lowers {x} from {a} to {b}", "{x} को {a} से {b} करता है"),
+    vdPlat: T("pushes plateau pressure to {b}, above 30", "plateau pressure को {b} तक ले जाता है, 30 से ऊपर"), vdAnd: T(" and ", " और "),
+    vdMap: T("blood pressure (MAP)", "blood pressure (MAP)"),
+    wVe: T("Smaller breaths at this rate cut the air moved each minute by {p}% ({a} to {b} L/min). CO2 will rise.", "इस rate पर छोटी साँसें हर मिनट की हवा {p}% घटा देंगी ({a} से {b} L/min)। CO2 बढ़ेगा।"),
+    rrPair: T("Also raise rate to {n} to keep minute air the same", "हर मिनट की हवा बराबर रखने के लिए rate भी {n} करें"),
     wRrHigh: T("Rate {v} is fast. Short breaths out can trap air. Check before you confirm.", "Rate {v} तेज़ है। छोटी साँस छोड़ने में हवा फँस सकती है। पक्का करने से पहले जाँचें।"),
     wVtLow: T("{v} mL is only {k} mL/kg PBW. Small breaths let CO2 rise: watch the pH and minute volume.", "{v} mL सिर्फ़ {k} mL/kg PBW है। छोटी साँसों से CO2 बढ़ सकती है: pH और minute volume देखें।"),
     wVtHigh: T("{v} mL is {k} mL/kg PBW, above the 6 to 8 band. Check before you confirm.", "{v} mL यानी {k} mL/kg PBW, 6 से 8 के दायरे से ऊपर। पक्का करने से पहले जाँचें।"),
@@ -755,28 +768,40 @@
 
   /* ---------- toast and status ---------- */
   var TO = { tm: 0 };
-  // A card floating over the top of the page, under the alarm bar and the phone's tab bar: it never moves the layout
-  // (a strip in the flow pushed every control down by its height, and taps landed on the wrong thing).
+  // A card floating at the bottom of the page, just above the coach or the footer: it never moves the layout and never
+  // covers the first card under the tabs (round 4, U1). The page's top is where the eye lands after a tab switch.
   function toastPlace(el) {
-    var r = I.root(), sc = q(".sp-scroll"), tb = q(".vl-tabbar");
-    if (!r || !sc) return;
-    var top = sc.getBoundingClientRect().top - r.getBoundingClientRect().top + (tb && tb.offsetHeight ? tb.offsetHeight : 0);
-    el.style.top = Math.round(top + 6) + "px";
+    var r = I.root(), co = $("vlCoach"), ft = $("vlFoot"), dock = co && co.offsetHeight && G.getComputedStyle(co).position !== "absolute" ? co : ft;
+    if (!r || !dock) return;
+    el.style.top = "auto";
+    el.style.bottom = Math.round(r.getBoundingClientRect().bottom - dock.getBoundingClientRect().top + 8) + "px";
+  }
+  // ~3 s on screen (longer lines a little longer, at most 5 s); the timer pauses while the card has focus or a finger
+  // or pointer rests on it, and restarts when it leaves.
+  function toastMs(el) { var n = (el.textContent || "").length; return n > 90 ? Math.min(5000, 3000 + (n - 90) * 25) : 3000; }
+  function toastArm(el, ms) { G.clearTimeout(TO.tm); TO.tm = G.setTimeout(function () { if (!TO.hold) el.classList.remove("on"); }, ms); }
+  function toastBind(el) {
+    if (el._vlb) return; el._vlb = 1;
+    function hold() { TO.hold = true; G.clearTimeout(TO.tm); }
+    function rel() { TO.hold = false; if (el.classList.contains("on")) toastArm(el, 2000); }
+    el.addEventListener("focusin", hold); el.addEventListener("pointerenter", hold);
+    el.addEventListener("focusout", function (e) { if (!el.contains(e.relatedTarget)) rel(); }); el.addEventListener("pointerleave", rel);
+    // the footer grows with Confirm and its warnings, the coach folds and unfolds: the card stays docked above them
+    try { var ro = new G.ResizeObserver(function () { if (el.classList.contains("on")) toastPlace(el); }); [$("vlFoot"), $("vlCoach")].forEach(function (n) { if (n) ro.observe(n); }); } catch (e) {}
   }
   function toast(kind, html) {
     var el = q(".vl-toast");
     if (!el) return;
     // a hint never replaces an event the learner caused in the last 4 s (their bedside action's result stays readable)
     if (kind === "hint" && TO.kind === "event" && el.classList.contains("on") && Date.now() - TO.at < 4000) return;
-    TO.kind = kind; TO.at = Date.now();
-    toastPlace(el);
+    TO.kind = kind; TO.at = Date.now(); TO.hold = false;
+    toastBind(el); toastPlace(el);
     el.innerHTML = '<span class="vl-toast-k">' + (ico(kind === "hint" ? "spark" : "info")) + "<b>" + s(kind === "hint" ? "hint" : "event") + '</b></span><span class="vl-toast-m">' + html + "</span>" +
       '<button type="button" class="vl-toast-x" data-act="vltoastx" aria-label="' + s("dismiss") + '">' + (ico("close") || "x") + "</button>";
     el.classList.add("on");
-    G.clearTimeout(TO.tm);
-    TO.tm = G.setTimeout(function () { el.classList.remove("on"); }, 9000);
+    toastArm(el, toastMs(el));
   }
-  A.vltoastx = function () { var el = q(".vl-toast"); G.clearTimeout(TO.tm); if (el) el.classList.remove("on"); var n = q(".vl-tabs [aria-pressed=true]") || q(".vl-mode"); if (n) n.focus({ preventScroll: true }); };
+  A.vltoastx = function () { var el = q(".vl-toast"); G.clearTimeout(TO.tm); TO.hold = false; if (el) el.classList.remove("on"); var n = q(".vl-tabs [aria-pressed=true]") || q(".vl-mode"); if (n) n.focus({ preventScroll: true }); };
   // Scroll only the screen's own scroller (scrollIntoView can also pan the page's visual viewport on phones).
   function scrollTo(el, center) {
     var sc = q(".sp-scroll");
@@ -1093,26 +1118,43 @@
   }
 
   /* ---- why is the patient changing: engine E.whyDrift when present, else the numbers that moved with no change ---- */
+  // R.drift keeps the data, not HTML: {why} (the engine's reason), {note} (a timeline event) or {xs, m} (numbers that
+  // moved), written at paint time in the language of the moment (U7, round 4: the line used to stay in the old language).
+  function whyTx(why) {
+    if (!why) return "";
+    if (typeof why === "string") return esc(why);
+    if (Array.isArray(why)) return why.map(function (x) { return x && (x.en || x.hi) ? tx(x) : x && x.because ? tx(x.because) : esc(String(x)); }).join(" ");
+    return why.en || why.hi ? tx(why) : why.because ? tx(why.because) : "";
+  }
+  function driftTx(d) {
+    if (!d) return "";
+    if (typeof d === "string") return d; // a run saved before round 4
+    if (d.note) return tx(d.note);
+    if (d.why) return whyTx(d.why);
+    if (d.xs) return s("driftNone", { x: d.xs.map(function (x) { return raw("dr_" + x[0], { a: fmtN(x[1]), b: fmtN(x[2]) }); }).join(", "), m: d.m });
+    return "";
+  }
   function driftHtml() {
-    var d = R && R.drift;
+    var d = R && driftTx(R.drift);
     return d ? '<p class="vl-drift-p"><b>' + s("driftH") + "</b> <span>" + d + "</span></p>" : "";
   }
-  function setDrift(html) { if (!R) return; R.drift = html; var el = $("vlDrift"); if (el) el.innerHTML = driftHtml(); }
+  function paintDrift() { var el = $("vlDrift"); if (el) { var h = driftHtml(); if (el.innerHTML !== h) el.innerHTML = h; } }
+  function setDrift(d) { if (!R) return; R.drift = d; paintDrift(); }
   function markChange() { R.driftBase = { t: R.s.t, r: cur() }; setDrift(null); }
   function checkDrift(r) {
     var b = R.driftBase;
     if (!b || !b.r) { R.driftBase = { t: R.s.t, r: r }; return; }
     if (R.s.t - b.t < 300) return;
-    var e = E(), why = e.whyDrift ? safe(function () { return e.whyDrift(R.s, R.set, b.r); }, null) : null, txt = null;
-    if (why) txt = typeof why === "string" ? esc(why) : why.en || why.hi ? tx(why) : why.because ? tx(why.because) : Array.isArray(why) ? why.map(function (x) { return x && (x.en || x.hi) ? tx(x) : x && x.because ? tx(x.because) : esc(String(x)); }).join(" ") : null;
-    if (!txt) {
+    var e = E(), why = e.whyDrift ? safe(function () { return e.whyDrift(R.s, R.set, b.r); }, null) : null, d = null;
+    if (why && whyTx(why)) d = { why: why };
+    if (!d) {
       var v0 = b.r.vitals || {}, v1 = r.vitals || {}, g0 = b.r.gas || {}, g1 = r.gas || {}, xs = [];
-      if (Math.abs((v1.spo2 || 0) - (v0.spo2 || 0)) >= 3) xs.push(raw("dr_spo2", { a: fmtN(v0.spo2), b: fmtN(v1.spo2) }));
-      if (Math.abs((v1.map || 0) - (v0.map || 0)) >= 8) xs.push(raw("dr_map", { a: fmtN(v0.map), b: fmtN(v1.map) }));
-      if (Math.abs((g1.paco2 || 0) - (g0.paco2 || 0)) >= 5) xs.push(raw("dr_paco2", { a: fmtN(g0.paco2), b: fmtN(g1.paco2) }));
-      if (xs.length) txt = s("driftNone", { x: xs.join(", "), m: Math.round((R.s.t - b.t) / 60) });
+      if (Math.abs((v1.spo2 || 0) - (v0.spo2 || 0)) >= 3) xs.push(["spo2", v0.spo2, v1.spo2]);
+      if (Math.abs((v1.map || 0) - (v0.map || 0)) >= 8) xs.push(["map", v0.map, v1.map]);
+      if (Math.abs((g1.paco2 || 0) - (g0.paco2 || 0)) >= 5) xs.push(["paco2", g0.paco2, g1.paco2]);
+      if (xs.length) d = { xs: xs, m: Math.round((R.s.t - b.t) / 60) };
     }
-    if (txt) { setDrift(txt); R.driftBase = { t: R.s.t, r: r }; }
+    if (d) { setDrift(d); R.driftBase = { t: R.s.t, r: r }; }
   }
 
   /* ---- ventilator ---- */
@@ -1162,7 +1204,7 @@
       var bits = HOLD_KEYS[kind].filter(function (k) { return h.v[k] != null; }).map(function (k) { return s("ro_" + k) + " <b>" + esc(fmtN(h.v[k])) + "</b> " + esc(RO_UNIT[k] || ""); });
       out.push('<p class="vl-hres"><b>' + s(kind === "insp" ? "holdI" : "holdE") + "</b> " + s("at", { t: clockText(h.t) }) + ": " + bits.join(", ") + "</p>");
     });
-    if (R && R.exam && R.s.t - R.exam.t <= 600) out.push('<div class="vl-exam"><p class="vl-hres"><b>' + s("examH", { t: clockText(R.exam.t) }) + '</b></p><dl>' + R.exam.items.map(function (x) { return "<div><dt>" + x[0] + "</dt><dd>" + x[1] + "</dd></div>"; }).join("") + "</dl></div>");
+    if (R && R.exam && R.s.t - R.exam.t <= 600) out.push('<div class="vl-exam"><p class="vl-hres"><b>' + s("examH", { t: clockText(R.exam.t) }) + '</b></p><dl>' + examRows(R.exam).map(function (x) { return "<div><dt>" + x[0] + "</dt><dd>" + x[1] + "</dd></div>"; }).join("") + "</dl></div>");
     return out.join("");
   }
   A.vlhold = function (b) {
@@ -1183,30 +1225,34 @@
     say(t(STR[kind === "insp" ? "holdI" : "holdE"]) + ". " + (el ? el.textContent : ""));
   };
   // Listen to the chest: E.exam(state) when present ({key: {en, hi}} or [{label, finding}]); else read from the model.
-  function examItems() {
-    var e = E(), x = e.exam ? safe(function () { return e.exam(R.s, R.set); }, null) : null, out = [];
-    if (x) {
-      if (Array.isArray(x)) x.forEach(function (it) { if (it) out.push([it.label ? tx(it.label) : esc(it.key || ""), tx(it.finding || it.text || it.value || "")]); });
-      else Object.keys(x).forEach(function (k) {
-        // the engine's keys (airEntry {left, right}, trachea, wheeze, crackles, chestRise) get labels; its summary
-        // sentence repeats the rows, so it is not shown; an unknown key is never printed raw (U6)
-        var v = x[k];
-        if (k === "summary" || !v || typeof v !== "object") return;
-        if (k === "airEntry" && v.left && v.right) { out.push([s("exl_airEntry"), v.left.en === v.right.en ? tx(v.left) : s("exLR", { a: t(v.left), b: t(v.right) })]); return; }
-        if (v.en || v.hi) { if (STR["exl_" + k]) out.push([s("exl_" + k), tx(v)]); }
-        else if (v.label) out.push([tx(v.label), tx(v.finding || v.text || "")]);
-      });
-      if (out.length) return out;
-    }
+  // The findings are kept as data ({x} the engine's own, or {fb} pairs of string keys) and written at paint time, so a
+  // language switch rewrites them too (U8, round 4); an unknown engine key is never printed raw.
+  function examData() {
+    var e = E(), x = e.exam ? safe(function () { return e.exam(R.s, R.set); }, null) : null;
+    if (x && examRows({ x: x }).length) return { x: x };
     var r = cur(), vv = r.vent || {}, gg = r.gas || {}, ptx = (R.s.m && (R.s.m.ptx || R.s.m.pneumothorax)) || /pneumothorax|tension/i.test(JSON.stringify(r.flags || []));
-    out.push([s("ex_air"), s(ptx ? "exOneSide" : "exEqual")]);
-    out.push([s("ex_trach"), s(ptx ? "exShift" : "exMid")]);
-    out.push([s("ex_move"), s(ptx ? "exOneSide" : "exEven")]);
-    out.push([s("ex_sounds"), (vv.raw || 0) >= 18 || (R.sc.lung && R.sc.lung.flowLimited) ? s("exWheeze") : (gg.shunt || 0) >= 0.15 ? s("exCrackles") : s("exClear")]);
+    return { fb: [["ex_air", ptx ? "exOneSide" : "exEqual"], ["ex_trach", ptx ? "exShift" : "exMid"], ["ex_move", ptx ? "exOneSide" : "exEven"],
+      ["ex_sounds", (vv.raw || 0) >= 18 || (R.sc.lung && R.sc.lung.flowLimited) ? "exWheeze" : (gg.shunt || 0) >= 0.15 ? "exCrackles" : "exClear"]] };
+  }
+  function examRows(d) {
+    var out = [], x = d && d.x;
+    if (d && d.items) return d.items; // a run saved before round 4
+    if (d && d.fb) return d.fb.map(function (p) { return [s(p[0]), s(p[1])]; });
+    if (!x) return out;
+    if (Array.isArray(x)) x.forEach(function (it) { if (it && it.label && (it.finding || it.text || it.value)) out.push([tx(it.label), tx(it.finding || it.text || it.value)]); });
+    else Object.keys(x).forEach(function (k) {
+      // the engine's keys (airEntry {left, right}, trachea, wheeze, crackles, chestRise) get labels; its summary
+      // sentence repeats the rows, so it is not shown; an unknown key is never printed raw (U6)
+      var v = x[k];
+      if (k === "summary" || !v || typeof v !== "object") return;
+      if (k === "airEntry" && v.left && v.right) { out.push([s("exl_airEntry"), v.left.en === v.right.en ? tx(v.left) : s("exLR", { a: t(v.left), b: t(v.right) })]); return; }
+      if (v.en || v.hi) { if (STR["exl_" + k]) out.push([s("exl_" + k), tx(v)]); }
+      else if (v.label && (v.finding || v.text)) out.push([tx(v.label), tx(v.finding || v.text)]);
+    });
     return out;
   }
   A.vlexam = function () {
-    R.exam = { t: R.s.t, items: examItems() };
+    var ed = examData(); ed.t = R.s.t; R.exam = ed;
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "exam" });
     var el = $("vlHold"); if (el) el.innerHTML = holdHtml();
     I.haptic("tap");
@@ -1297,8 +1343,16 @@
   })();
   // Beginner steps (Level 1 and 2): FiO2 in 5s, PEEP and rate in 2s, VT in 50s. A tutorial step that asks for an exact
   // value keeps the fine step for that dial; tap the number to type any value at any level.
-  var COARSE = { fio2: 5, peep: 2, rr: 2, vt: 50, pinsp: 2, ps: 2 };
-  function coarse(k) { var sp = tutStep(); return lv() <= 2 && COARSE[k] && !(sp && sp.do && sp.do.key === k) ? COARSE[k] : 0; }
+  // Round 4 (U3, U6): Level 2 turns VT in 20s and keeps PEEP in 1s; Levels 3 and 4 use the dial's own step. Alarm limits
+  // move in useful jumps at every level (Ppeak limit 5 per tap: 40 to 25 is three taps, not fifteen). A tutorial step
+  // that asks for an exact value keeps the coarse step only when that value sits on its grid.
+  var COARSE = { 1: { fio2: 5, peep: 2, rr: 2, vt: 50, pinsp: 2, ps: 2 }, 2: { fio2: 5, rr: 2, vt: 20, pinsp: 2, ps: 2 } };
+  var ALARM_STEP = { pPeakHigh: 5, rrHigh: 5, veHigh: 1, apnoea: 5 };
+  function coarse(k) {
+    var c = ALARM_STEP[k] || (COARSE[lv()] || {})[k] || 0, sp = tutStep();
+    if (c && sp && sp.do && sp.do.key === k && Math.abs(sp.do.to / c - Math.round(sp.do.to / c)) > 1e-9) return 0;
+    return c;
+  }
   function knob(k) {
     var d = setDef(k), v = R.pend[k] != null ? R.pend[k] : R.set[k], was = R.pend[k] != null ? R.set[k] : null, lab = setLabel(k), unit = setUnit(k);
     var plain = lv() <= 1 && STR["k_" + k] ? '<span class="vl-knob-s">' + s("k_" + k) + "</span>" : "";
@@ -1332,9 +1386,9 @@
   function setHtml() {
     var mode = R.pend.mode || R.set.mode, keys = visSettings(mode, lv()), al = visAlarmKeys(lv());
     return '<section class="vl-card vl-set" data-vl-id="settings" data-g="dials" aria-labelledby="vlSetH" id="vlSet"><div class="vl-sec-h"><h2 class="vl-h" id="vlSetH">' + s("settings") + "</h2>" +
-      '<span class="vl-note">' + s("pendNote") + "</span></div>" +
+      '<span class="vl-note">' + s("pendNote") + " " + s("typeTip") + "</span></div>" +
       '<div class="vl-knobs">' + keys.map(knob).join("") + "</div>" +
-      (al.length ? '<details class="vl-alim"' + (al.some(tutKey) ? " open" : "") + "><summary>" + s("alarmLimits") + '</summary><div class="vl-knobs">' + al.map(knob).join("") + "</div></details>" : "") + "</section>";
+      (al.length ? '<details class="vl-alim"' + (al.some(tutKey) ? " open" : "") + "><summary>" + s("alarmLimits") + '</summary><p class="vl-note vl-alim-n">' + s("limTip") + '</p><div class="vl-knobs">' + al.map(knob).join("") + "</div></details>" : "") + "</section>";
   }
   function refreshKnob(k, focusSel) {
     var el = q('[data-knob="' + k + '"]');
@@ -1424,6 +1478,13 @@
       if (k > 10) W(raw("wVt", { v: o.vt, k: k }));
       else if (k > 8.5) W(raw("wVtHigh", { v: o.vt, k: k }));
       else if (k < 5) W(raw("wVtLow", { v: o.vt, k: k }));
+      // U4 (round 4): a smaller breath at the same rate moves less air each minute. Past a 15 % cut, say so and offer
+      // the rate that keeps minute volume where it was (the safe pair: smaller breaths, more of them).
+      var veB = R.set.vt * R.set.rr, veA = o.vt * o.rr;
+      if (o.vt < R.set.vt && R.set.rr && veA < 0.85 * veB) {
+        var rd = setDef("rr") || {}, need = clamp(Math.ceil(veB / o.vt), rd.min || 4, Math.min(35, rd.max || 40));
+        w.push({ t: raw("wVe", { p: Math.round((1 - veA / veB) * 100), a: fmtN(Math.round(veB / 100) / 10), b: fmtN(Math.round(veA / 100) / 10) }), pair: need > o.rr ? need : null });
+      }
     }
     if (R.pend.pinsp != null && o.pinsp > 30) W(raw("wHigh", { x: setLabel("pinsp"), v: o.pinsp }));
     if (R.pend.fio2 != null && o.fio2 >= 100) w.push({ t: raw("nFio2"), info: true });
@@ -1434,10 +1495,13 @@
   function nextStep() {
     if (lv() > 2 || R.tut) return null;
     if (nPend()) return { k: "nx2", to: "confirm" };
-    var ch = R.lastSet > 0, after = ch && R.abgs.some(function (a) { return a.t >= R.lastSet; });
-    if (!ch) return R.abgs.length ? { k: "nx1", to: "settings" } : { k: "nx0", to: "abg" };
-    if (!after) return R.s.t - R.lastSet < 1500 ? { k: "nx3", to: "chain" } : { k: "nx4", to: "abg" };
-    return { k: "nx5", to: "abg" };
+    var ch = R.lastSet > 0, n = R.abgs.length, last = R.abgs[n - 1], after = ch && last && last.t >= R.lastSet;
+    if (!ch) return n ? { k: "nx1", to: "settings" } : { k: "nx0", to: "abg" };
+    // "again" only when a gas was drawn before (U6, round 4)
+    if (!after) return R.s.t - R.lastSet < 1500 ? { k: "nx3", to: "chain" } : { k: n ? "nx4" : "nx4b", to: "abg" };
+    // a gas drawn too soon after the change has not settled yet; Before and Now need two gases
+    if (last.t - R.lastSet < 900) return { k: "nx6", to: "abg" };
+    return R.abgs.some(function (a) { return a.t < R.lastSet; }) ? { k: "nx5", to: "abg" } : { k: "nx7", to: "abg" };
   }
   function nextHtml() {
     var x = nextStep();
@@ -1457,7 +1521,8 @@
     var n = nPend();
     if (n) {
       var w = warnings(), hard = w.filter(function (x) { return !x.info; }).length;
-      return nextHtml() + (w.length ? '<ul class="vl-warns"' + (hard ? ' role="alert"' : "") + ">" + w.map(function (x) { return '<li class="' + (x.info ? "info" : "") + '">' + (ico(x.info ? "info" : "warn") ? '<span aria-hidden="true">' + ico(x.info ? "info" : "warn") + "</span>" : "") + "<span>" + esc(x.t) + "</span></li>"; }).join("") + "</ul>" : "") +
+      return nextHtml() + (w.length ? '<ul class="vl-warns"' + (hard ? ' role="alert"' : "") + ">" + w.map(function (x) { return '<li class="' + (x.info ? "info" : "") + '">' + (ico(x.info ? "info" : "warn") ? '<span aria-hidden="true">' + ico(x.info ? "info" : "warn") + "</span>" : "") + "<span>" + esc(x.t) +
+        (x.pair ? '<button type="button" class="vl-pair" data-act="vlrrpair" data-v="' + x.pair + '">' + (ico("plus") || "") + "<span>" + s("rrPair", { n: x.pair }) + "</span></button>" : "") + "</span></li>"; }).join("") + "</ul>" : "") +
         '<div class="vl-confirm"><button type="button" class="sp-btn sec" data-act="vlcancel">' + s("cancel") + "</button>" +
         '<button type="button" class="sp-btn pri' + (hard ? " vl-warnbtn" : "") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (hard ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
     }
@@ -1475,6 +1540,13 @@
     var n = ks[0] && q('[data-spin="' + ks[0] + '"]'); if (n) n.focus({ preventScroll: true });
   };
   A.vlconfirm = function () { confirmChanges(); };
+  // "Also raise rate to N": stages the rate beside the smaller breath; both still wait for Confirm.
+  A.vlrrpair = function (b) {
+    stage("rr", +b.getAttribute("data-v"));
+    var sEl = $("vlSet"); if (sEl) sEl.outerHTML = setHtml();
+    paintFoot(); commitBeat(q('[data-knob="rr"] .vl-dial-v b'));
+    var n = q("[data-act=vlconfirm]"); if (n) n.focus({ preventScroll: true });
+  };
 
   // Confirm: the new settings take effect now; mechanics change at once, gases over minutes. The chain shows three
   // labelled columns: now, 30 min on without the change, and 30 min on with it (one baseline for every number).
@@ -2031,7 +2103,7 @@
     tl.forEach(function (ev, i) {
       if (i < R.evSeen || ev.t > R.s.t) return;
       R.evSeen = i + 1;
-      if (ev.note) { toast("event", tx(ev.note)); setDrift(tx(ev.note)); R.driftBase = { t: R.s.t, r: cur() }; }
+      if (ev.note) { toast("event", tx(ev.note)); setDrift({ note: ev.note }); R.driftBase = { t: R.s.t, r: cur() }; }
     });
   }
   /* ---- arrest: the engine's readout.arrest, else SpO2 below 50 or MAP below 40 for 2 sim-min, ends the run ---- */
@@ -2287,18 +2359,28 @@
     if (nw && oldTx != null && oldTx !== nw.textContent && !reduced()) { nw.classList.add("swap"); if (bd) bd.scrollTop = 0; }
     else if (bd) bd.scrollTop = bodyTop;
     var ft = $("vlFoot"); if (ft) el.style.setProperty("--vl-cob", (ft.offsetHeight + 16) + "px");
+    var tt = q(".vl-toast.on"); if (tt) toastPlace(tt);
     if (focus) { var n = $("vlCoSay"); if (n && !R.coMin) n.focus({ preventScroll: true }); }
   }
   // "Show me the control": open its tab (and the folded group it sits in), scroll it into the clear area, focus it.
   A.vltutshow = function () {
     var sp = tutStep(); if (!sp || !sp.do) return;
-    var tg = null;
-    if (sp.do.key != null) { tg = q('[data-knob="' + sp.do.key + '"]'); var det = tg && tg.closest("details"); if (det) det.open = true; }
+    var tg = null, det = null;
+    if (sp.do.key != null) { tg = q('[data-knob="' + sp.do.key + '"]'); det = tg && tg.closest("details"); if (det) det.open = true; }
     else if (sp.do.action) { var bd = q(".vl-bedd"); if (bd) { bd.open = true; R.bedOpen = true; } tg = q('#vlBedW [data-k="' + sp.do.action + '"]'); }
     else if (sp.do.mode) tg = q(".vl-mode");
     if (!tg) return;
     reveal(tg);
-    G.requestAnimationFrame(function () { scrollTo(tg, true); pulse(tg); var f = tg.querySelector ? tg.querySelector(".vl-dial") || tg : tg; try { f.focus({ preventScroll: true }); } catch (e) {} });
+    G.requestAnimationFrame(function () {
+      // Alarm limits (U2, round 4): the whole limits card lands just below the tab bar, its heading in view and the
+      // dial above the coach; if the card is taller than the clear area, the dial itself goes to the top.
+      if (det) {
+        var sc = q(".sp-scroll"), rb = sc && sc.getBoundingClientRect(), tb = q(".vl-tabbar"), off = tb && tb.offsetHeight && sc && sc.contains(tb) ? tb.offsetHeight : 0;
+        var shift = rb ? det.getBoundingClientRect().top - (rb.top + off + 12) : 0;
+        scrollTo(rb && tg.getBoundingClientRect().bottom - shift > rb.bottom - 4 ? tg : det, false);
+      } else scrollTo(tg, true);
+      pulse(tg); var f = tg.querySelector ? tg.querySelector(".vl-dial") || tg : tg; try { f.focus({ preventScroll: true }); } catch (e) {}
+    });
   };
   A.vlcomin = function () { R.coMin = !R.coMin; paintCoach(); var b = q("[data-act=vlcomin]"); if (b) b.focus({ preventScroll: true }); if (!R.coMin) tutHighlight(); };
   // The highlighted target comes into the clear area: its tab opens on a phone, then it scrolls to the middle of the
@@ -2513,9 +2595,36 @@
     var chain = compose({ setB: set0, setA: set1, keys: [key], roB: e.readout(st0, set0), roA: e.readout(st0, set1), now: now, prB: prB, prA: prA, reasons: reasons, wiChain: presetChain });
     return { key: key, from: set0[key], to: to, now: now, before: prB, after: prA, chain: chain };
   }
+  // One-sentence verdict (U5, round 4): what the change does in 30 min to oxygen, CO2 (or pH) and blood pressure, judged
+  // against this patient's own goals: Helps, Trade off, Makes it worse, or Little change. b = without, a = with.
+  function verdictHtml(b, a, g, withPh) {
+    g = g || {};
+    var items = [], good = 0, bad = 0;
+    function dist(x, rg) { return x == null || !rg ? 0 : x < rg[0] ? rg[0] - x : x > rg[1] ? x - rg[1] : 0; }
+    function add(x, va, vb, eps, judge) {
+      if (va == null || vb == null || Math.abs(vb - va) < eps) return;
+      var j = judge(va, vb); if (j > 0) good++; else if (j < 0) bad++;
+      items.push(raw(vb > va ? "vdUp" : "vdDn", { x: x, a: fmtN(va), b: fmtN(vb) }));
+    }
+    var sp = g.spo2 || [92, 98], co = g.paco2 || (g.ph ? null : [35, 45]);
+    add("SpO2", gv(b, "vitals", "spo2"), gv(a, "vitals", "spo2"), 1, function (x, y) { return y > x ? (x < sp[1] ? 1 : 0) : (y < sp[0] ? -1 : 0); });
+    add("PaCO2", gv(b, "gas", "paco2"), gv(a, "gas", "paco2"), 2, function (x, y) {
+      if (co) { var d0 = dist(x, co), d1 = dist(y, co); return d1 < d0 - 1 ? 1 : d1 > d0 + 1 ? -1 : 0; }
+      var p0 = dist(gv(b, "gas", "ph"), g.ph), p1 = dist(gv(a, "gas", "ph"), g.ph); return p1 < p0 - 0.01 ? 1 : p1 > p0 + 0.01 ? -1 : 0;
+    });
+    if (withPh) add("pH", gv(b, "gas", "ph"), gv(a, "gas", "ph"), 0.02, function (x, y) { var r = g.ph || [7.35, 7.45], d0 = dist(x, r), d1 = dist(y, r); return d1 < d0 ? 1 : d1 > d0 ? -1 : 0; });
+    add(raw("vdMap"), gv(b, "vitals", "map"), gv(a, "vitals", "map"), 3, function (x, y) { return y < x ? (y < 65 || x - y >= 8 ? -1 : 0) : (x < 65 ? 1 : 0); });
+    var pl0 = gv(b, "vent", "pplat"), pl1 = gv(a, "vent", "pplat"), pmax = g.pplatMax || 30;
+    if (pl1 != null && pl0 != null && pl1 > pmax && pl1 > pl0 + 1) { bad++; items.push(raw("vdPlat", { b: fmtN(pl1) })); }
+    var tag = !items.length ? "vd_none" : bad && good ? "vd_mix" : bad ? "vd_bad" : good ? "vd_good" : "vd_none";
+    var list = items.length > 1 ? items.slice(0, -1).join(", ") + raw("vdAnd") + items[items.length - 1] : items[0];
+    var line = items.length ? raw("vdLine", { x: list }) : raw("vdNone");
+    return '<p class="vl-verdict vd-' + tag.slice(3) + '"><b>' + s(tag) + ":</b> " + esc(line) + "</p>";
+  }
   function wiResHtml(res) {
     var u = setUnit(res.key);
     return '<h2 class="vl-h vl-wi-h">' + s("cSet", { x: setLabel(res.key), a: setText(res.key, res.from) + (u ? " " + u : ""), b: setText(res.key, res.to) + (u ? " " + u : "") }) + "</h2>" +
+      verdictHtml(res.before, res.after, (scById(WI.sc) || {}).goals) +
       '<div class="vl-wi-grid"><div class="vl-card">' + p3Html(res.now, res.before, res.after, [["Pplat", "vent", "pplat", "cmH2O"], ["Driving P", "vent", "drivingP", "cmH2O"], ["Auto-PEEP", "vent", "autoPeep", "cmH2O"]], "vl-ba") +
       '<p class="sp-small">' + s("simulated") + "</p></div>" +
       '<section class="vl-card vl-chainw" aria-labelledby="vlChH"><h2 class="vl-h" id="vlChH">' + s("chain") + '</h2><div id="vlChain"></div></section></div>';
@@ -2600,7 +2709,7 @@
     }
     if (CS.a2 != null) {
       var rr = CS.res;
-      h += verdict("vl-v2", CS.a2 === q2.answer, q2) +
+      h += verdict("vl-v2", CS.a2 === q2.answer, q2) + (rr && rr.after ? verdictHtml(caseBefore(rr, c), rr.after, sc && sc.goals, true) : "") +
         (q2.why ? '<h3 class="vl-h3">' + s("whyH") + '</h3><p class="vl-whyp">' + txg(q2.why) + "</p>" : "") +
         (rr && rr.applied && rr.applied.length ? '<p class="vl-applied"><b>' + s("applied") + ":</b> " + rr.applied.map(function (x) { return esc(setLabel(x.k)) + " " + esc(setText(x.k, x.a)) + " &rarr; " + esc(setText(x.k, x.b)) + (setUnit(x.k) ? " " + esc(setUnit(x.k)) : ""); }).join(" · ") + "</p>" : "") +
         (rr && rr.after ? '<h3 class="vl-h3">' + s("result") + '</h3><div class="vl-card">' + caseResult(rr, c) + "</div>" : '<p class="vl-empty">' + s("caseNoSim") + "</p>") +
@@ -2610,6 +2719,15 @@
       '<div class="sp-scroll sp-pad"><div class="sp-col vl-case">' + h + '<p class="vl-disc vl-disc-end" role="note"><span>' + disc() + "</span></p></div></div>" +
       (CS.a2 != null ? '<div class="sp-foot"><button type="button" class="sp-btn pri sp-wide" data-act="vlcnext">' + s(CS.i < list.length - 1 ? "nextCase" : "labHome") + "</button></div>" : ""),
       typeof focusSel === "string" ? focusSel : null);
+  }
+  // The verdict reads the same Before as the table: the case's own gas where it has a number, else the engine's.
+  function caseBefore(rr, c) {
+    var ab = c.abg || {}, b = clone(rr.before) || {};
+    b.vitals = b.vitals || {}; b.gas = b.gas || {};
+    if (c.spo2 != null) b.vitals.spo2 = c.spo2;
+    if (ab.PaCO2 != null) b.gas.paco2 = ab.PaCO2;
+    if (ab.pH != null) b.gas.ph = ab.pH;
+    return b;
   }
   // Before = the case's own gas; after = the engine 30 min after the chosen change, from the case's own state.
   function caseResult(rr, c) {
@@ -2731,7 +2849,7 @@
         var b = prefs().best, ks = Object.keys(b), best = 0, nt = Object.keys(prefs().tuts).length, mt = (learn().tutorials || []).length, out = [];
         ks.forEach(function (k) { best = Math.max(best, b[k]); });
         if (nt) out.push(mt ? s("tutsDone", { n: I.fmt(nt), m: I.fmt(mt) }) : s("tutsN", { n: I.fmt(nt) }));
-        if (r && r.n) out.push(s("runs", { n: I.fmt(r.n), b: I.fmt(best) }));
+        if (r && r.n) out.push(s(r.n === 1 ? "runs1" : "runs", { n: I.fmt(r.n), b: I.fmt(best) }));
         return out.length ? out.join(" · ") : s("none");
       },
       open: openLab });
