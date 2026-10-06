@@ -137,7 +137,7 @@ try {
   await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/social/*" }, { urlPattern: "*/api/prep/arena/*" }] });
   await call("Page.navigate", { url: BASE + "?prep=1&tour=0" });
   await until(`return !!(window.PREP && window.SMD_showHome);`, 30000);
-  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_arena"); localStorage.setItem("smd_onboarding_tour","0");}catch(e){} return 1;`);
+  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.setItem("smd_prep_arena","0"); localStorage.setItem("smd_onboarding_tour","0");}catch(e){} return 1;`);
   await ev(SIGN_IN);
   await until(`return !!window.PrepSocial;`, 5000); // prep-loader.js loads it once the prep-pro entry is in; else inject
   await ev(INJECT);
@@ -241,7 +241,7 @@ try {
   await ev(`PrepSocial.openAccuracy(); return 1;`);
   ok(await until(`var b=document.querySelector("#smdPrep .ps-acc"); return !!b && document.querySelectorAll("#smdPrep .ps-bars li").length>=10 && /Not yet published/.test(b.textContent) && /How these numbers are made/.test(b.textContent) && /Generated \\d{4}-\\d{2}-\\d{2}/.test(b.textContent);`, 15000), "in-app accuracy: per subject bars, Not yet published, how made, generation date");
   const acc = JSON.parse(fs.readFileSync(join(HERE, "..", "prep/accuracy.json"), "utf8"));
-  ok(await ev(`return document.querySelector("#smdPrep .ps-acc").textContent;`).then((t) => t.includes(acc.keys.disputed.toLocaleString("en-IN")) && t.includes(acc.ai.questions.accepted + "")), "the figures shown are accuracy.json's");
+  ok(await ev(`return document.querySelector("#smdPrep .ps-acc").textContent;`).then((t) => t.includes(acc.keys.disputed.toLocaleString("en-IN")) && t.includes(acc.ai.questions.accepted.toLocaleString("en-IN"))), "the figures shown are accuracy.json's");
   await shot("accuracy-app");
   await ev(`PREP.close(); return 1;`);
 

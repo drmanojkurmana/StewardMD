@@ -135,13 +135,13 @@ try {
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await sleep(300); };
   const openPrep = async () => { await ev(`PREP.close(); PREP.open(); return 1;`); return until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] small") && /MCQs/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] small").textContent);`, 20000); };
 
-  // ---- flag default: prep on, arena off
+  // ---- prep on, arena off per device (smd_prep_arena="0"; default ON since 2026-10-06)
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
-  await ev(`try{localStorage.removeItem("smd_prep_arena"); localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
+  await ev(`try{localStorage.setItem("smd_prep_arena","0"); localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await load(BASE + "?prep=1");
   await ev(SIGN_IN);
   ok(await openPrep(), "PrepNucleus opens with the fixture bank");
-  ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena is OFF by default");
+  ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena=0 turns the Arena off");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|Practise|Subjects", "home sections: Today's plan, Practise, Subjects");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic svg") && !/[A-Z]{3}/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic").textContent);`) === true, "subject cards carry an SVG icon, not a text monogram");
