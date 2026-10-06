@@ -7,6 +7,7 @@
   function bad(en, hi) { return { ok: false, error: { en: en, hi: hi } }; }
   function num(v) { if (typeof v === "string" && v.replace(/\s/g, "") !== "") v = +v; return typeof v === "number" && isFinite(v) ? v : null; }
   function r2(x) { return Math.round(x * 100) / 100; }
+  function half(x) { return Math.floor(r2(x) * 2) / 2; }
   function o(v, en, hi) { return { value: v, label: { en: en, hi: hi } }; }
   return {
     id: "paeds-ett", kind: "tool", group: "anaesthesia", level: "mbbs", review: "ai_drafted",
@@ -39,21 +40,21 @@
       if (v.mode !== "child") return bad("Choose child or newborn.", "बच्चा या नवजात चुनें।");
       var a = num(v.age);
       if (a === null || a < 1 || a > 10) return bad("Enter the child's age, 1 to 10 years.", "बच्चे की आयु दें, 1 से 10 वर्ष।");
-      var un = r2(a / 4 + 4), cu = r2(a / 4 + 3.5), oral = r2(a / 2 + 12), nasal = r2(a / 2 + 15);
-      return { ok: true, value: un, unit: "mm ID", depth: oral, label: { en: "Uncuffed " + un + " mm, cuffed " + cu + " mm ID", hi: "बिना कफ़ " + un + " mm, कफ़ वाली " + cu + " mm ID" },
+      var un = half(a / 4 + 4), cu = half(a / 4 + 3.5), oral = r2(a / 2 + 12), nasal = r2(a / 2 + 15);
+      return { ok: true, value: un, unit: "mm ID", depth: oral, label: { en: "Uncuffed " + un.toFixed(1) + " mm, cuffed " + cu.toFixed(1) + " mm ID", hi: "बिना कफ़ " + un.toFixed(1) + " mm, कफ़ वाली " + cu.toFixed(1) + " mm ID" },
         lines: [
           { en: "Oral depth at the lips " + oral + " cm; nasal depth " + nasal + " cm.", hi: "होंठ पर मुँह की गहराई " + oral + " cm; नाक से गहराई " + nasal + " cm।" },
-          { en: "Pick the nearest half size. Keep a half size smaller and larger ready.", hi: "निकटतम आधा साइज़ चुनें। आधा साइज़ छोटी और बड़ी ट्यूब भी तैयार रखें।" },
+          { en: "Sizes are rounded down to the nearest 0.5 mm. Keep a half size smaller and larger ready.", hi: "साइज़ नीचे की ओर निकटतम 0.5 mm तक गोल किए गए हैं। आधा साइज़ छोटी और बड़ी ट्यूब भी तैयार रखें।" },
           { en: "Some use age/4 + 3 for cuffed tubes. Check cuff pressure and the leak.", hi: "कुछ लोग कफ़ वाली ट्यूब के लिए age/4 + 3 लेते हैं। कफ़ प्रेशर और लीक जाँचें।" },
           { en: "Formulas are estimates. Confirm position with capnography, auscultation and chest movement.", hi: "सूत्र केवल अनुमान हैं। कैप्नोग्राफी, ऑस्कल्टेशन और छाती की गति से स्थिति की पुष्टि करें।" }
         ],
-        rule: { en: "Over 1 year: uncuffed ID = age/4 + 4; cuffed ID = age/4 + 3.5; oral depth = age/2 + 12 cm; nasal depth = age/2 + 15 cm.",
-          hi: "1 वर्ष से ऊपर: बिना कफ़ ID = आयु/4 + 4; कफ़ वाली ID = आयु/4 + 3.5; मुँह की गहराई = आयु/2 + 12 cm; नाक की गहराई = आयु/2 + 15 cm।" } };
+        rule: { en: "Over 1 year: uncuffed ID = age/4 + 4; cuffed ID = age/4 + 3.5; oral depth = age/2 + 12 cm; nasal depth = age/2 + 15 cm. Tube sizes round down to the nearest 0.5 mm.",
+          hi: "1 वर्ष से ऊपर: बिना कफ़ ID = आयु/4 + 4; कफ़ वाली ID = आयु/4 + 3.5; मुँह की गहराई = आयु/2 + 12 cm; नाक की गहराई = आयु/2 + 15 cm। ट्यूब साइज़ नीचे की ओर निकटतम 0.5 mm तक गोल।" } };
     },
     examples: [
       { values: { mode: "child", age: 2 }, expect: { value: 4.5, depth: 13 } },
       { values: { mode: "child", age: 6 }, expect: { value: 5.5, depth: 15 } },
-      { values: { mode: "child", age: 5 }, expect: { value: 5.25, depth: 14.5 } },
+      { values: { mode: "child", age: 5 }, expect: { value: 5, depth: 14.5, label: "Uncuffed 5.0 mm, cuffed 4.5 mm ID" } },
       { values: { mode: "neonate", weight: 0.8 }, expect: { value: 2.5, depth: 6.8 } },
       { values: { mode: "neonate", weight: 1.5 }, expect: { value: 3, depth: 7.5 } },
       { values: { mode: "neonate", weight: 3.5 }, expect: { value: 3.5, depth: 9.5 } }

@@ -55,8 +55,9 @@
     return { ok: true, depth: id, name: NAMES[id], reads: READS[id], residual: id !== "recovered", qualitativeBlind: id === "minimal", rank: DEPTHS.indexOf(id) };
   }
 
-  /* reverse(depthId, drug, kg): drug "aminosteroid" (rocuronium, vecuronium) or "benzyl" (atracurium, cisatracurium). */
-  function reverse(id, drug, kg) {
+  /* reverse(depthId, drug, kg, count): drug "aminosteroid" (rocuronium, vecuronium) or "benzyl" (atracurium, cisatracurium).
+     count (TOF count) splits moderate block: count 1 gets 4 mg/kg, count 2 to 3 gets 2 mg/kg; unknown count defaults to 4 mg/kg. */
+  function reverse(id, drug, kg, count) {
     if (DEPTHS.indexOf(id) < 0) return bad("Unknown depth.", "अज्ञात depth।");
     if (drug !== "aminosteroid" && drug !== "benzyl") return bad("Pick the blocker family.", "Blocker का परिवार चुनें।");
     var w = typeof kg === "number" && kg > 0 && kg <= 250 ? kg : null;
@@ -71,7 +72,8 @@
       if (id === "intense") return { ok: true, action: "wait-or-immediate", plan: sug(SUG.immediate),
         text: T("Wait for PTC to return. Sugammadex 16 mg/kg is only for immediate reversal soon after rocuronium 1.2 mg/kg.", "PTC लौटने तक रुकें। Sugammadex 16 mg/kg केवल rocuronium 1.2 mg/kg के तुरंत बाद immediate reversal के लिए है।") };
       if (id === "deep") return { ok: true, action: "sugammadex", plan: sug(SUG.deep), text: T("Sugammadex 4 mg/kg. Neostigmine does not work at this depth.", "Sugammadex 4 mg/kg। इस depth पर neostigmine काम नहीं करता।") };
-      if (id === "moderate" || id === "shallow") return { ok: true, action: "sugammadex", plan: sug(SUG.shallow), text: T("Sugammadex 2 mg/kg once T2 has reappeared. Prefer it to neostigmine at this depth.", "T2 लौटने पर sugammadex 2 mg/kg। इस depth पर इसे neostigmine से बेहतर मानें।") };
+      if (id === "moderate") return { ok: true, action: "sugammadex", plan: sug(count >= 2 ? SUG.shallow : SUG.deep), text: T("TOF count 1: sugammadex 4 mg/kg (2 mg/kg only once T2 has reappeared).", "TOF count 1: sugammadex 4 mg/kg (2 mg/kg केवल T2 लौटने पर)।") };
+      if (id === "shallow") return { ok: true, action: "sugammadex", plan: sug(SUG.shallow), text: T("Sugammadex 2 mg/kg once T2 has reappeared. Prefer it to neostigmine at this depth.", "T2 लौटने पर sugammadex 2 mg/kg। इस depth पर इसे neostigmine से बेहतर मानें।") };
       return { ok: true, action: "either", plan: sug(SUG.shallow), alt: neo(), text: T("Sugammadex 2 mg/kg, or neostigmine as a reasonable alternative at this minimal depth.", "Sugammadex 2 mg/kg, या इस minimal depth पर neostigmine एक उचित विकल्प।") };
     }
     // benzylisoquinoliniums: sugammadex does not bind them

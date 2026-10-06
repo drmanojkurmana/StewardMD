@@ -6,7 +6,7 @@
   "review": {
     "status": "ai_drafted",
     "verify": [
-      "Maximum doses from the kb LAST protocol (US-style figures; UK labelling lower)",
+      "Plain lignocaine maximum: UK 3 mg/kg (max 200 mg) as default, US/ASRA 4.5 mg/kg (max 300 mg) as a note",
       "Lipid emulsion regimen"
     ]
   },
@@ -91,8 +91,8 @@
           "hi": "अधिकतम खुराक"
         },
         "note": {
-          "en": "Lignocaine plain 4.5 mg/kg (max 300 mg), with adrenaline 7 mg/kg (max 500 mg). Bupivacaine about 2 mg/kg (max 150 mg). Ropivacaine 3 mg/kg (max 200 mg).",
-          "hi": "Lignocaine सादा 4.5 mg/kg (अधिकतम 300 mg), adrenaline के साथ 7 mg/kg (अधिकतम 500 mg); bupivacaine लगभग 2 mg/kg (अधिकतम 150 mg); ropivacaine 3 mg/kg (अधिकतम 200 mg)।"
+          "en": "Lignocaine plain 3 mg/kg (max 200 mg; US/ASRA 4.5 mg/kg, max 300 mg), with adrenaline 7 mg/kg (max 500 mg). Bupivacaine about 2 mg/kg (max 150 mg). Ropivacaine 3 mg/kg (max 200 mg).",
+          "hi": "Lignocaine सादा 3 mg/kg (अधिकतम 200 mg; US/ASRA 4.5 mg/kg, अधिकतम 300 mg), adrenaline के साथ 7 mg/kg (अधिकतम 500 mg); bupivacaine लगभग 2 mg/kg (अधिकतम 150 mg); ropivacaine 3 mg/kg (अधिकतम 200 mg)।"
         }
       },
       {
@@ -197,8 +197,8 @@
     },
     {
       "q": {
-        "en": "What is the maximum dose of plain lignocaine in the kb protocol?",
-        "hi": "kb प्रोटोकॉल में सादे lignocaine की अधिकतम खुराक क्या है?"
+        "en": "What maximum dose of plain lignocaine does this app use?",
+        "hi": "यह app सादे lignocaine की कौन सी अधिकतम खुराक मानता है?"
       },
       "o": [
         {
@@ -214,14 +214,14 @@
           "hi": "10 mg/kg, अधिकतम 700 mg"
         },
         {
-          "en": "4.5 mg/kg, max 300 mg",
-          "hi": "4.5 mg/kg, अधिकतम 300 mg"
+          "en": "3 mg/kg, max 200 mg",
+          "hi": "3 mg/kg, अधिकतम 200 mg"
         }
       ],
       "a": 3,
       "why": {
-        "en": "Plain lignocaine 4.5 mg/kg (max 300 mg); with adrenaline 7 mg/kg (max 500 mg). UK labelling is lower at 3 mg/kg (max 200 mg).",
-        "hi": "सादा lignocaine 4.5 mg/kg (अधिकतम 300 mg); adrenaline के साथ 7 mg/kg (अधिकतम 500 mg)। UK लेबल कम है, 3 mg/kg (अधिकतम 200 mg)।"
+        "en": "The app uses the UK figure: plain lignocaine 3 mg/kg (max 200 mg); with adrenaline 7 mg/kg (max 500 mg). US/ASRA allow plain 4.5 mg/kg (max 300 mg).",
+        "hi": "App UK सीमा मानता है: सादा lignocaine 3 mg/kg (अधिकतम 200 mg); adrenaline के साथ 7 mg/kg (अधिकतम 500 mg)। US/ASRA सादे के लिए 4.5 mg/kg (अधिकतम 300 mg) मानते हैं।"
       }
     }
   ],

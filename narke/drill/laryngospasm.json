@@ -8,6 +8,7 @@
   "sources": [
     { "label": "Gavel G, Walker RWM. Laryngospasm in anaesthesia. Contin Educ Anaesth Crit Care Pain 2014;14:47-51", "url": "https://academic.oup.com/bjaed/article/14/2/47/271333" },
     { "label": "OpenAnesthesia: Laryngospasm (Chatterjee D, Matava C, 2023)", "url": "https://www.openanesthesia.org/keywords/laryngospasm/" },
+    { "label": "BNF for Children: Suxamethonium chloride", "url": "https://bnfc.nice.org.uk/drugs/suxamethonium-chloride/" },
     { "label": "StewardMD Clinical Protocols: Paediatric cardiac arrest (PALS)", "path": "kb/clinical-protocols/paediatric-cardiac-arrest.json" }
   ],
   "stages": [
@@ -63,13 +64,13 @@
       "prompt": { "en": "Still no air entry after propofol. SpO2 68%, heart rate falling to 72/min. Next?", "hi": "प्रोपोफोल के बाद भी हवा नहीं जा रही। SpO2 68%, हृदय गति गिरकर 72/min। अगला?" },
       "options": [
         { "id": "a", "correct": true, "critical": true, "next": "noiv",
-          "text": { "en": "Suxamethonium IV, with atropine ready for the bradycardia, then ventilate with 100% oxygen.", "hi": "सक्सामेथोनियम IV, ब्रैडीकार्डिया के लिए एट्रोपिन तैयार रखें, फिर 100% ऑक्सीजन से वेंटिलेट करें।" },
-          "feedback": { "en": "Suxamethonium is the drug of choice when propofol fails. IV doses from 0.1 to 2 mg/kg break spasm. Hypoxic children slow their heart.", "hi": "प्रोपोफोल विफल हो तो सक्सामेथोनियम पहली पसंद है। 0.1 से 2 mg/kg की IV खुराक स्पाज़्म तोड़ती है। हाइपोक्सिया में बच्चों की धड़कन धीमी होती है।" } },
+          "text": { "en": "Suxamethonium 1 to 2 mg/kg IV (20 to 40 mg), with atropine 20 micrograms/kg (400 micrograms) ready, then ventilate with 100% oxygen.", "hi": "सक्सामेथोनियम 1 से 2 mg/kg IV (20 से 40 mg), ब्रैडीकार्डिया के लिए एट्रोपिन 20 micrograms/kg (400 micrograms) तैयार रखें, फिर 100% ऑक्सीजन से वेंटिलेट करें।" },
+          "feedback": { "en": "Suxamethonium is the drug of choice when propofol fails. Hypoxic children slow their heart, so have atropine ready.", "hi": "प्रोपोफोल विफल हो तो सक्सामेथोनियम पहली पसंद है। हाइपोक्सिया में बच्चों की धड़कन धीमी होती है, इसलिए एट्रोपिन तैयार रखें।" } },
         { "id": "b", "correct": false, "next": "brady",
           "text": { "en": "Wait one more minute for the propofol to work.", "hi": "प्रोपोफोल के असर के लिए एक मिनट और रुकें।" },
           "feedback": { "en": "Falling heart rate in a hypoxic child is a late sign. Paralyse now.", "hi": "हाइपोक्सिक बच्चे में गिरती हृदय गति देर का संकेत है। अभी पैरालाइज़ करें।" } }
       ] },
-    { "id": "brady", "src": 2, "timeSec": 30,
+    { "id": "brady", "src": 3, "timeSec": 30,
       "vitals": { "hr": 50, "spo2": 52 },
       "prompt": { "en": "Heart rate is 50/min with poor perfusion and SpO2 52%. What now?", "hi": "हृदय गति 50/min, खराब परफ़्यूज़न और SpO2 52% है। अब क्या?" },
       "options": [
@@ -80,11 +81,11 @@
           "text": { "en": "Give atropine only and keep the mask on.", "hi": "केवल एट्रोपिन दें और मास्क लगाए रखें।" },
           "feedback": { "en": "Atropine alone leaves the cords shut. Relieve the obstruction with suxamethonium.", "hi": "केवल एट्रोपिन से कॉर्ड बंद ही रहते हैं। सक्सामेथोनियम से रुकावट हटाएँ।" } }
       ] },
-    { "id": "noiv", "src": 0, "timeSec": 40,
+    { "id": "noiv", "src": 2, "timeSec": 40,
       "prompt": { "en": "Teaching point. If the cannula had failed, how would you give suxamethonium?", "hi": "सीखने का बिंदु। अगर कैनुला काम न करती, तो सक्सामेथोनियम कैसे देते?" },
       "options": [
         { "id": "a", "correct": true, "next": "after",
-          "text": { "en": "IM 4 mg/kg (suggested maximum 200 mg): 80 mg for 20 kg. Intraosseous is an alternative.", "hi": "IM 4 mg/kg (सुझाई गई अधिकतम 200 mg): 20 kg के लिए 80 mg। इंट्राऑसियस एक विकल्प है।" },
+          "text": { "en": "IM 4 mg/kg (maximum 150 mg): 80 mg for 20 kg, with IM atropine 20 micrograms/kg. Intraosseous is an alternative.", "hi": "IM 4 mg/kg (अधिकतम 150 mg): 20 kg के लिए 80 mg, साथ में IM एट्रोपिन 20 micrograms/kg। इंट्राऑसियस एक विकल्प है।" },
           "feedback": { "en": "IM suxamethonium breaks spasm in about a minute. An IO needle also allows resuscitation drugs.", "hi": "IM सक्सामेथोनियम लगभग एक मिनट में स्पाज़्म तोड़ता है। IO सुई से पुनर्जीवन की दवाएँ भी दी जा सकती हैं।" } },
         { "id": "b", "correct": false, "next": "after",
           "text": { "en": "Wait for a new IV line before giving anything.", "hi": "कुछ भी देने से पहले नई IV लाइन का इंतज़ार करें।" },

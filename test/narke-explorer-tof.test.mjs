@@ -24,7 +24,10 @@ test("sugammadex doses match the reviewed RSI protocol", () => {
   assert.match(kb, /16 mg\/kg IV for immediate reversal of rocuronium 1\.2 mg\/kg; 2 to 4 mg\/kg IV for routine reversal \(4 mg\/kg for deep block, 2 mg\/kg once T2 has reappeared\)/);
   assert.deepEqual(M.constants.sugammadex, { shallow: 2, deep: 4, immediate: 16 });
   assert.equal(M.reverse("deep", "aminosteroid", 70).plan.doseMg, 280);
-  assert.equal(M.reverse("moderate", "aminosteroid", 70).plan.mgPerKg, 2);
+  assert.equal(M.reverse("moderate", "aminosteroid", 70, 1).plan.mgPerKg, 4, "TOF count 1 needs 4 mg/kg");
+  assert.equal(M.reverse("moderate", "aminosteroid", 70).plan.mgPerKg, 4, "unknown count defaults to 4 mg/kg");
+  for (const c of [2, 3]) assert.equal(M.reverse("moderate", "aminosteroid", 70, c).plan.mgPerKg, 2, "count " + c);
+  assert.match(M.reverse("moderate", "aminosteroid", 70).text.en, /TOF count 1: sugammadex 4 mg\/kg/);
   assert.equal(M.reverse("intense", "aminosteroid", 70).plan.doseMg, 1120);
   assert.equal(M.reverse("deep", "aminosteroid").plan.doseMg, null, "no weight, no mg");
 });

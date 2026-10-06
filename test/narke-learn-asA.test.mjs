@@ -185,5 +185,5 @@ test("resuscitation numbers match kb/clinical-protocols", () => {
   assert.ok(txt("as2-als-adult").includes("300 mg") && txt("as2-als-adult").includes("150 mg"));
   assert.ok(txt("as2-als-child").includes("0.01 mg/kg") && txt("as2-als-child").includes("2 J/kg") && txt("as2-als-child").includes("5 mg/kg"));
   assert.ok(txt("as2-newborn").includes("0.01 to 0.03 mg/kg"));
-  assert.ok(txt("as5-la-pharmacology").includes("4.5 mg/kg (max 300 mg)") && txt("as5-la-pharmacology").includes("1.5 mL/kg"));
+  assert.ok(txt("as5-la-pharmacology").includes("3 mg/kg (max 200 mg)") && txt("as5-la-pharmacology").includes("US/ASRA") && txt("as5-la-pharmacology").includes("1.5 mL/kg"));
 });

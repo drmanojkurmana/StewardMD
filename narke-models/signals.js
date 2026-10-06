@@ -483,7 +483,7 @@
         P("Sudden hypotension, tachycardia and bronchospasm after a drug suggest anaphylaxis, even without skin signs.", "किसी दवा के बाद अचानक hypotension, टैकीकार्डिया और ब्रोंकोस्पाज़्म एनाफिलेक्सिस दर्शाते हैं, त्वचा के लक्षण न हों तब भी।"),
         P("The shark fin shows bronchospasm. The low EtCO2 shows falling cardiac output.", "शार्क फ़िन ब्रोंकोस्पाज़्म दिखाता है। कम EtCO2 गिरता कार्डियक आउटपुट दिखाता है।"),
         P("Stop the suspected trigger and give 100% oxygen.", "संदिग्ध कारण (trigger) बंद करें और 100% ऑक्सीजन दें।"),
-        P("Give adrenaline at once: IM 0.5 mg in adults, or IV 50 microgram boluses by experienced hands.", "तुरंत adrenaline दें: वयस्क में IM 0.5 mg, या अनुभवी हाथों से IV 50 microgram बोलस।"),
+        P("Give adrenaline at once: IV 50 microgram boluses, titrated to response. Give IM 0.5 mg if IV titration is not possible.", "तुरंत adrenaline दें: IV 50 microgram बोलस, असर के अनुसार titrate करें। IV titration संभव न हो तो IM 0.5 mg दें।"),
         P("Lie the patient flat and give a rapid IV fluid bolus.", "मरीज़ को सीधा लिटाएँ और तेज़ IV fluid बोलस दें।")] },
     bronchospasm: { level: "mbbs", src: ["miller", "morgan"],
       title: P("Bronchospasm", "ब्रोंकोस्पाज़्म"),
