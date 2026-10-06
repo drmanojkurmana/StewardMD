@@ -1,6 +1,9 @@
 /* prep-arena: PrepNucleus Arena live 1v1 battles. Plan: vault/plans/PrepNucleus-Arena.md (server pieces 1 and 4).
  *
- *   wss://<worker>/battle?exam=<neet-pg|neet-ss|usmle>   Sec-WebSocket-Protocol: smd-arena, <Firebase ID token>
+ *   wss://<worker>/battle?exam=<neet-pg|neet-ss|usmle>[&room=<code>]   Sec-WebSocket-Protocol: smd-arena, <Firebase ID token>
+ *
+ * room: a friend challenge (functions/api/prep/social). Only its two players may use it (social_challenges row, not
+ * expired); the challenge's exam wins over ?exam, and the room pairs only with the same room (core.js matchQueue).
  *
  * The Worker verifies the token (functions/_fbauth.js) and the player's consent row in D1 (PREP_ARENA_DB), then hands
  * the socket to the exam's Matchmaker. Matchmaker (one per exam) holds the sockets, the queue and the rate limit, and
@@ -10,7 +13,7 @@
 import { DurableObject } from "cloudflare:workers";
 import { verifyFirebaseClaims } from "../../functions/_fbauth.js";
 import { EXAMS, uidHash, bankFrom, drawItems } from "../../functions/_prep-arena.js";
-import { N_ROUNDS, parseClient, tokenFromProtocol, allowQueue, matchQueue, queueWakeAt, newBattle, battleEvent, wakeAt, sideOf } from "./core.js";
+import { N_ROUNDS, ROOM_RE, parseClient, tokenFromProtocol, allowQueue, matchQueue, queueWakeAt, newBattle, battleEvent, wakeAt, sideOf } from "./core.js";
 
 const text = (s, status) => new Response(s, { status, headers: { "Content-Type": "text/plain", "Cache-Control": "no-store" } });
 
@@ -20,15 +23,22 @@ export default {
     if (url.pathname === "/health") return text("ok", 200);
     if (url.pathname !== "/battle") return text("not found", 404);
     if ((request.headers.get("Upgrade") || "").toLowerCase() !== "websocket") return text("websocket only", 426);
-    const exam = url.searchParams.get("exam") || "";
-    if (EXAMS.indexOf(exam) < 0) return text("bad exam", 400);
+    let exam = url.searchParams.get("exam") || "";
+    const room = url.searchParams.get("room") || "";
+    if (room && !ROOM_RE.test(room)) return text("bad room", 400);
+    if (!room && EXAMS.indexOf(exam) < 0) return text("bad exam", 400);
     const token = tokenFromProtocol(request.headers.get("Sec-WebSocket-Protocol"));
     const claims = token ? await verifyFirebaseClaims(token, env).catch(() => null) : null;
     if (!claims || !claims.sub) return text("sign-in required", 401);
     const uidh = uidHash(claims.sub);
     const pl = await env.PREP_ARENA_DB.prepare("SELECT name, rating FROM arena_players WHERE uidh = ?").bind(uidh).first();
     if (!pl) return text("consent required", 403);
-    const h = new Headers({ Upgrade: "websocket", "X-Arena-Uidh": uidh, "X-Arena-Name": encodeURIComponent(pl.name), "X-Arena-Rating": String(pl.rating), "X-Arena-Exam": exam });
+    if (room) {
+      const c = await env.PREP_ARENA_DB.prepare("SELECT exam FROM social_challenges WHERE room = ? AND (from_uidh = ? OR to_uidh = ?) AND expires_at > ?").bind(room, uidh, uidh, Date.now()).first();
+      if (!c) return text("no such challenge", 403);
+      exam = c.exam;
+    }
+    const h = new Headers({ Upgrade: "websocket", "X-Arena-Uidh": uidh, "X-Arena-Name": encodeURIComponent(pl.name), "X-Arena-Rating": String(pl.rating), "X-Arena-Exam": exam, "X-Arena-Room": room });
     const mm = env.MATCHMAKER.get(env.MATCHMAKER.idFromName(exam));
     return mm.fetch(new Request("https://arena/connect", { headers: h }));
   },
@@ -39,8 +49,8 @@ const send = (ws, msg) => { try { ws.send(JSON.stringify(msg)); } catch (e) {} }
 export class Matchmaker extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
-    this.socks = new Map();     // uidh -> { ws, name, rating }
-    this.waiting = [];          // [{ uidh, rating, at }]
+    this.socks = new Map();     // uidh -> { ws, name, rating, room }
+    this.waiting = [];          // [{ uidh, rating, at, room }]
     this.inMatch = new Map();   // uidh -> match id
     this.rl = {};               // queue joins per uid, last minute
     this.exam = null;
@@ -50,13 +60,13 @@ export class Matchmaker extends DurableObject {
 
   async fetch(request) {
     const uidh = request.headers.get("X-Arena-Uidh"), name = decodeURIComponent(request.headers.get("X-Arena-Name") || "");
-    const rating = Number(request.headers.get("X-Arena-Rating")) || 1200;
+    const rating = Number(request.headers.get("X-Arena-Rating")) || 1200, room = request.headers.get("X-Arena-Room") || null;
     this.exam = request.headers.get("X-Arena-Exam");
     const [client, ws] = Object.values(new WebSocketPair());
     ws.accept();
     const old = this.socks.get(uidh);
-    this.socks.set(uidh, { ws, name, rating });
-    if (old) { try { old.ws.close(4001, "replaced"); } catch (e) {} }   // one socket per player
+    this.socks.set(uidh, { ws, name, rating, room });
+    if (old) { this.waiting = this.waiting.filter((w) => w.uidh !== uidh); try { old.ws.close(4001, "replaced"); } catch (e) {} }   // one socket per player; a new socket re-queues (its room may differ)
     let junk = 0;
     ws.addEventListener("message", (e) => {
       const m = parseClient(e.data);
@@ -80,7 +90,7 @@ export class Matchmaker extends DurableObject {
       if (this.inMatch.has(uidh)) return send(me.ws, { t: "busy" });                  // one active battle per uid
       if (this.waiting.some((w) => w.uidh === uidh)) return send(me.ws, { t: "waiting" });
       if (!allowQueue(this.rl, uidh, Date.now())) return send(me.ws, { t: "slow" });   // 10 joins a minute
-      this.waiting.push({ uidh, rating: me.rating, at: Date.now() });
+      this.waiting.push({ uidh, rating: me.rating, at: Date.now(), room: me.room });
       send(me.ws, { t: "waiting" });
       return this.pump();
     }

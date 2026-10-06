@@ -3,7 +3,7 @@
  *
  * Every call needs a Bearer Firebase ID token (401 otherwise). Players are keyed by sha256(uid) (24 hex), shown by the
  * token's `name` claim (never the email), and only after consent (POST consent). DELETE consent removes the player,
- * every event entry, and their side of past battles.
+ * every event entry, their side of past battles, and every social row (friends, challenges, college, groups).
  *
  *   GET    consent                    -> { joined, name }
  *   POST   consent                    -> { joined: true, name }
@@ -20,6 +20,7 @@
  */
 import { verifiedClaimsFor } from "../../../_fbauth.js";
 import { EXAMS, SCHEMES, uidHash, displayName, markEntry, eventFromId, scheduleFor, submitDeadline, bankFrom, drawItems } from "../../../_prep-arena.js";
+import { socialDeleteStmts } from "../../../_prep-social.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const DAY = 86400e3;
@@ -74,6 +75,7 @@ export async function handle(request, env, path, now = Date.now()) {
         db.prepare("UPDATE arena_battles SET a = 'gone' WHERE a = ?").bind(uidh),
         db.prepare("UPDATE arena_battles SET b = 'gone' WHERE b = ?").bind(uidh),
         db.prepare("UPDATE arena_battles SET winner = 'gone' WHERE winner = ?").bind(uidh),
+        ...socialDeleteStmts(db, uidh),   // friends, challenges, college tag, groups, progress
         db.prepare("DELETE FROM arena_players WHERE uidh = ?").bind(uidh),
       ]);
       return json({ left: true });

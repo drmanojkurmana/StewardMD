@@ -12,6 +12,9 @@ export const LEAD_MS = 3000;          // match screen before the first question
 export const GAP_MS = 2500;           // round result before the next question
 export const GRACE_MS = 10e3;         // disconnect grace, then forfeit
 export const WIDEN_MS = 15e3, NOBODY_MS = 30e3, NEAR = 200;
+export const ROOM_WAIT_MS = 180e3;   // a challenged friend gets 3 minutes to turn up
+export const ROOM_RE = /^[A-HJ-NP-Z2-9]{16}$/;   // functions/_prep-social.js randomCode(16)
+const roomOf = (w) => w.room || null;
 export const QUEUE_PER_MIN = 10;
 
 /* ---------- protocol ---------- */
@@ -39,9 +42,10 @@ export function allowQueue(log, uidh, now, limit = QUEUE_PER_MIN) {
 }
 
 /* ---------- matchmaking ---------- */
-/* waiting: [{uidh, rating, at}] in arrival order. Pairs the oldest waiter with the nearest rating: within NEAR points
- * while both have waited under 15 s, anyone after that. Returns { pairs: [[a, b]], nobody: [uidh] } and removes them;
- * nobody = waited 30 s with no opponent (no bots). */
+/* waiting: [{uidh, rating, at, room?}] in arrival order. Pairs the oldest waiter with the nearest rating: within NEAR
+ * points while both have waited under 15 s, anyone after that. Returns { pairs: [[a, b]], nobody: [uidh] } and removes
+ * them; nobody = waited 30 s with no opponent (no bots). A room (a friend challenge) pairs only with the same room, at
+ * once and at any rating, and waits ROOM_WAIT_MS for the friend; a room-less waiter never pairs into a room. */
 export function matchQueue(waiting, now) {
   const pairs = [], nobody = [];
   for (let i = 0; i < waiting.length; i++) {
@@ -49,18 +53,20 @@ export function matchQueue(waiting, now) {
     let best = -1, bestD = Infinity;
     for (let j = i + 1; j < waiting.length; j++) {
       const b = waiting[j], d = Math.abs(a.rating - b.rating);
+      if (roomOf(a) !== roomOf(b)) continue;
+      if (roomOf(a)) { best = j; break; }
       const wide = now - a.at >= WIDEN_MS || now - b.at >= WIDEN_MS;
       if ((wide || d <= NEAR) && d < bestD) { best = j; bestD = d; }
     }
     if (best >= 0) { pairs.push([a, waiting[best]]); waiting.splice(best, 1); waiting.splice(i, 1); i--; }
   }
-  for (let i = waiting.length - 1; i >= 0; i--) if (now - waiting[i].at >= NOBODY_MS) nobody.unshift(waiting.splice(i, 1)[0].uidh);
+  for (let i = waiting.length - 1; i >= 0; i--) if (now - waiting[i].at >= (roomOf(waiting[i]) ? ROOM_WAIT_MS : NOBODY_MS)) nobody.unshift(waiting.splice(i, 1)[0].uidh);
   return { pairs, nobody };
 }
 // Next moment the queue needs a look (a widen or a timeout), or null when empty.
 export function queueWakeAt(waiting, now) {
   let t = null;
-  for (const w of waiting) for (const x of [w.at + WIDEN_MS, w.at + NOBODY_MS]) if (x > now && (t === null || x < t)) t = x;
+  for (const w of waiting) for (const x of roomOf(w) ? [w.at + ROOM_WAIT_MS] : [w.at + WIDEN_MS, w.at + NOBODY_MS]) if (x > now && (t === null || x < t)) t = x;
   return t;
 }
 
