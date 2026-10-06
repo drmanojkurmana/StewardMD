@@ -83,6 +83,10 @@
     });
     kind("tool").forEach(function (m) { add("tool-" + m.id, N + " calculator: " + m.title.en, (m.sources || []).length + " source" + ((m.sources || []).length === 1 ? "" : "s") + ", " + (m.examples || []).length + " worked examples"); });
     kind("explorer").forEach(function (m) { add("explorer-" + m.id, N + " explorer: " + m.title.en, (m.sources || []).length + " sources, rules and teaching text"); });
+    if (host === "narke") {
+      if (M.signals) { add("clinic-capno", "Narkē clinic: capnography", "Teaching points per pattern, synthetic signals"); add("clinic-monitor", "Narkē clinic: monitor reading", "Teaching points per crisis scenario, synthetic signals"); }
+      return out;
+    }
     if (host !== "tokos") return out;
     add("clinic-fetal-planes", "Tokós clinic: fetal ultrasound planes", "Teaching points per plane (ISUOG), English and Hindi");
     add("clinic-hc-biometry", "Tokós clinic: fetal head circumference", "Teaching points, HC scoring bands and GA from HC");
@@ -159,6 +163,10 @@
       (m.examples || []).forEach(function (e) { rows.push(["Worked example", JSON.stringify(e.values) + " gives " + JSON.stringify(e.expect), ""]); });
       if (m.subtitle) rows.push(["What it shows", tt(m.subtitle).en, tt(m.subtitle).hi]);
       srcs(m.sources);
+    } else if (host === "narke" && /^clinic-(capno|monitor)$/.test(id) && (m = M.signals)) {
+      var T = id === "clinic-capno" ? m.CAPNO : m.MONITOR;
+      Object.keys(T || {}).forEach(function (k) { (T[k].points || []).forEach(function (pt) { rows.push([tt(T[k].title).en, pt.en, pt.hi]); }); });
+      Object.keys(m.SOURCES || {}).forEach(function (k) { rows.push(["Source", m.SOURCES[k].label, ""]); });
     } else if (host === "tokos" && /^clinic-/.test(id) && G.TOKOS_US) {
       var U = G.TOKOS_US;
       if (id === "clinic-fetal-planes") Object.keys(U.PLANES).forEach(function (k) { U.PLANES[k].points.forEach(function (pt) { rows.push([words(k), pt.en, pt.hi]); }); });

@@ -79,3 +79,11 @@ test("every id in narke/models.json has its narke-models file, drill-core first"
   assert.equal(ids[0], "drill-core");
   for (const id of ids) assert.ok(existsSync("narke-models/" + id + ".js"), id);
 });
+
+test("Review Desk lists the Narkē clinics when the signals model is loaded; apply-reviews records them in the ledger", async () => {
+  const R = createRequire(import.meta.url)("../review-desk.js");
+  const ids = R._tokosMore({ models: { signals: { kind: "signals" } } }, "narke").map((x) => x.id);
+  assert.deepEqual(ids, ["clinic-capno", "clinic-monitor"]);
+  const A = await import("../scripts/apply-reviews.mjs");
+  assert.deepEqual(A.tokosTarget("clinic-capno", "/r", () => "{}", () => true, "narke"), { files: [] });
+});

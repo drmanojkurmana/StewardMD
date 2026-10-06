@@ -68,6 +68,7 @@ export function tokosTarget(id, root, read, exists, host = "tokos") {
   if ((m = /^drill-([a-z-]+)$/.exec(id))) return { files: [{ file: join(root, H + "/drill", m[1] + ".json"), how: "string" }], build: "tools/tokos-build-drills.mjs" + (H === "tokos" ? "" : " --host " + H) };
   if (H === "tokos" && id === "sim-labour") return { files: [{ file: join(root, "tokos-models/drill-labour.js"), how: "js" }] };
   if (/^(tool|explorer)-[a-z0-9-]+$/.test(id)) return { files: [{ file: join(root, HM, id + ".js"), how: "js" }] };
+  if (H === "narke" && /^clinic-(capno|monitor)$/.test(id)) return exists(join(root, "narke-models/signals.js")) ? { files: [] } : null; // ledger only
   if (H === "tokos" && (m = /^clinic-(fetal-planes|hc-biometry)$/.exec(id))) return { files: [{ file: join(root, "tokos/decks", m[1] + ".json"), how: "string" }] };
   if ((m = /^bank-([a-z-]+)$/.exec(id))) {
     const f = H + "/decks/mcq/index.json";
