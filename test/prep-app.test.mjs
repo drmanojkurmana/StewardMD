@@ -151,7 +151,7 @@ test("wiring: index.html boots only the loader, at the loader's token; home, bac
 });
 
 test("app text has no em or en dash", () => {
-  for (const f of ["prep.js", "prep-loader.js", "prep.css"]) assert.doesNotMatch(read(f), /[–—]/, f);
+  for (const f of ["prep.js", "prep-loader.js", "prep.css", "prep-arena.js"]) assert.doesNotMatch(read(f), /[–—]/, f);
 });
 
 test("Phase 4: target difficulty and adaptive new picks", () => {
@@ -200,4 +200,85 @@ test("findModule: typed topic to the best module", () => {
   assert.deepEqual(P.findModule(subs, "10 questions on lymphoma"), { subject: "pathology", module: "pat-lymphoma" });
   assert.deepEqual(P.findModule(subs, "quiz me on brachial plexus"), { subject: "anatomy", module: "ana-bp" });
   assert.equal(P.findModule(subs, "astrophysics"), null);
+});
+
+/* ---- Arena client (prep-arena.js) ---- */
+const AR = require("../prep-arena.js");
+
+test("arena flag: OFF by default; smd_prep_arena=1 or ?arena=1 on, ?arena=0 wins; the loader ships prep-arena.js after prep.js", () => {
+  const get = (m) => (k) => (k in m ? m[k] : null);
+  assert.equal(AR.enabled("", get({})), false);
+  assert.equal(AR.enabled("", get({ smd_prep_arena: "1" })), true);
+  assert.equal(AR.enabled("?prep=1&arena=1", get({})), true);
+  assert.equal(AR.enabled("?arena=0", get({ smd_prep_arena: "1" })), false);
+  assert.equal(AR.enabled("", get({ smd_prep: "1" })), false, "smd_prep alone does not turn the Arena on");
+  const L = loaderIn("?prep=1", {}).win.PREP_LOADER;
+  assert.ok(L.JS.indexOf("prep-arena.js") > L.JS.indexOf("prep.js"));
+});
+
+test("arena events: server shape normalised, live before coming, countdown words", () => {
+  const now = 1_800_000_000_000;
+  const evs = AR.eventsFrom({ events: [
+    { role: "current", id: "daily-neet-pg-1", kind: "daily", startsAt: now - 86400e3, endsAt: now - 86400e3 + 1200e3, n: 20, secs: 1200, status: "closed", entry: "submitted" },
+    { role: "next", id: "daily-neet-pg-2", kind: "daily", startsAt: now + 3600e3, endsAt: now + 4800e3, n: 20, secs: 1200, status: "upcoming", entry: null },
+    { role: "current", id: "weekly-neet-pg-1", kind: "weekly", startsAt: (now - 60e3) / 1000, endsAt: (now + 7140e3) / 1000, n: 100, secs: 7200, entry: "started" }] });
+  assert.equal(evs.length, 3);
+  assert.equal(evs[2].start, now - 60e3, "seconds read as seconds");
+  assert.equal(AR.pickEvent(evs, "daily", now).id, "daily-neet-pg-2", "a closed event gives way to the coming one");
+  assert.equal(AR.pickEvent(evs, "weekly", now).id, "weekly-neet-pg-1");
+  assert.equal(AR.eventLine(evs[1], now), "Starts in 1:00:00");
+  assert.equal(AR.eventLine(evs[2], now), "In progress, ends in 1:59:00");
+  assert.equal(AR.eventLine(evs[0], now), "Submitted. See the leaderboard");
+  assert.equal(AR.eventLine(null, now), "No event scheduled");
+  assert.equal(AR.countdown(65e3), "1:05");
+  assert.equal(AR.countdown(2 * 86400e3 + 4 * 3600e3 + 5e3), "2 d 4 h");
+  assert.equal(AR.countdown(-5), "0:00");
+  assert.equal(AR.normEvent({}), null);
+});
+
+test("arena: answers map, signed change, the server's refusals in plain words", () => {
+  assert.deepEqual(AR.answersOf([{ id: "a" }, { id: "b" }, { id: "c" }], [2, -1, 0]), { a: 2, c: 0 });
+  assert.equal(AR.signed(12), "+12"); assert.equal(AR.signed(-8), "minus 8"); assert.equal(AR.signed(0), "0");
+  assert.match(AR.errWord(425, "not-open"), /not opened yet/);
+  assert.match(AR.errWord(410, "too-late"), /Too late/);
+  assert.match(AR.errWord(410, "closed"), /has closed/);
+  assert.match(AR.errWord(409, "already-submitted"), /already taken/);
+  assert.match(AR.errWord(409, "not-started"), /Start the event/);
+  assert.match(AR.errWord(503, "bank-empty"), /Coming soon/);
+  assert.match(AR.errWord(401), /Sign in/);
+});
+
+test("arena local stats: 30 day row oldest first, accuracy by subject weakest first", () => {
+  assert.deepEqual(AR.lastDays({ 100: 5, 98: 2, 70: 9 }, 100, 3), [2, 0, 5]);
+  assert.equal(AR.lastDays({}, 100, 30).length, 30);
+  const acc = AR.accuracyBySubject({ "ana-a": { t: 10, ok: 9 }, "ana-b": { t: 10, ok: 3 }, "phy-a": { t: 4, ok: 1 }, "x-1": { t: 0, ok: 0 }, "zz": { t: 3, ok: 3 } },
+    (m) => ({ ana: "anatomy", phy: "physiology" })[m.split("-")[0]] || null);
+  assert.deepEqual(acc.map((x) => [x.sid, x.t, x.ok, x.pct]), [["physiology", 4, 1, 25], ["anatomy", 20, 12, 60]]);
+});
+
+test("battle state machine: queue, match, rounds, end; busy, slow, nobody, resume, forfeit; bad messages ignored", () => {
+  const t0 = 1000;
+  let b = AR.battleNew();
+  assert.equal(AR.battleStep(b, { t: "q", i: 0, o: ["a", "b"] }, t0), b, "no question before a match");
+  assert.equal(AR.battleStep(b, null, t0), b); assert.equal(AR.battleStep(b, { t: 5 }, t0), b);
+  b = AR.battleStep(b, { t: "waiting" }, t0); assert.equal(b.waiting, true);
+  b = AR.battleStep(b, { t: "match", id: "m1", opp: { name: "R".repeat(60), rating: 1250 }, n: 7, secs: 20 }, t0);
+  assert.equal(b.phase, "match"); assert.equal(b.opp.name.length, 40); assert.equal(AR.liveBattle(b), true);
+  assert.equal(AR.battleStep(b, { t: "busy" }, t0), b, "busy only while queueing (a resume may answer the queue)");
+  b = AR.battleStep(b, { t: "q", i: 0, q: "Q1", o: ["a", "b", "c", "d"], deadline: t0 + 15000 }, t0);
+  assert.equal(b.phase, "q"); assert.equal(b.deadline, t0 + 15000);
+  const skew = AR.battleStep(b, { t: "q", i: 1, q: "Q2", o: ["a", "b"], deadline: t0 + 999999 }, t0);
+  assert.equal(skew.deadline, t0 + 20000, "a far deadline (clock skew) is held to the round length");
+  assert.equal(AR.canPick(b, 2, t0 + 1), true); assert.equal(AR.canPick(b, 9, t0 + 1), false); assert.equal(AR.canPick(b, 1, t0 + 15000), false);
+  assert.equal(AR.battleStep(b, { t: "r", i: 3, a: 0 }, t0), b, "a result for another round is ignored");
+  b = AR.battleStep(b, { t: "r", i: 0, a: 1, you: { k: 1, pts: 18 }, opp: { k: 0, pts: 0 }, score: [18, 0] }, t0);
+  assert.equal(b.phase, "r"); assert.deepEqual(b.score, [18, 0]); assert.equal(b.you.pts, 18);
+  assert.equal(AR.battleStep(b, { t: "end", result: "maybe" }, t0), b);
+  const end = AR.battleStep(b, { t: "end", score: [18, 0], result: "win", rating: { before: 1200, after: 1212 }, forfeit: "opp" }, t0);
+  assert.equal(end.phase, "end"); assert.equal(end.forfeit, "opp"); assert.deepEqual(end.rating, { before: 1200, after: 1212 });
+  assert.equal(AR.battleClosed(end), end, "closing after the end changes nothing");
+  const lost = AR.battleClosed(b); assert.equal(lost.phase, "lost");
+  const back = AR.battleStep(lost, { t: "match", id: "m1", opp: { name: "R", rating: 1250 }, n: 7, secs: 20, resume: true, score: [18, 12] }, t0);
+  assert.equal(back.phase, "match"); assert.equal(back.resumed, true); assert.deepEqual(back.score, [18, 12]);
+  for (const t of ["busy", "slow", "nobody"]) { const x = AR.battleStep(AR.battleNew(), { t }, t0); assert.equal(x.phase, t); assert.equal(AR.battleClosed(x), x); }
 });
