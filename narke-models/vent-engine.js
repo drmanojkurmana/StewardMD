@@ -95,7 +95,8 @@
       cleared; R x0.7, shunt x0.7, c x1.15, sedation -0.3; HCO3 rises toward +6 (up to 24, if below 22) first order,
       tau 20 min). Also plug, cuffLeak, o2Failure, sedationLight, sedationDeep, hypovolaemia, fluidBolus, fatigue,
       bronchospasmEases. A pneumothorax stays until the learner decompresses it. An event may carry requires
-      {key, min} (fires once that setting reaches min) or {action} (fires after that learner action).
+      {key, min} (fires once that setting reaches min) or {action} (fires after that learner action), or a list of
+      these meaning ANY of them (e.g. [{key:"epap",min:8},{key:"peep",min:8}]).
       whatIf() marks pending events as fired, so its 30 min result shows only the one setting change.
       whatIf change may carry also: {key: value} for a combined change (e.g. lower VT and raise rate together).
    11. LEARNER ACTIONS. E.ACTIONS = { decompress, suction, bag100 }, each {id, label {en, hi}, available(state)}.
@@ -601,9 +602,10 @@
     return s;
   }
 
-  /* A timeline event may wait for a condition: requires {key, min} on the settings, or {action} already taken. */
+  /* A timeline event may wait for a condition: requires {key, min} on the settings, or {action} already taken, or a list (any of). */
   function met(s, st, rq) {
     if (!rq) return true;
+    if (Object.prototype.toString.call(rq) === "[object Array]") { for (var k = 0; k < rq.length; k++) if (met(s, st, rq[k])) return true; return rq.length === 0; }
     if (rq.action) { for (var i = 0; i < s.acts.length; i++) if (s.acts[i].id === rq.action) return true; return false; }
     if (rq.key && typeof rq.min === "number") return st[rq.key] >= rq.min;
     return true;

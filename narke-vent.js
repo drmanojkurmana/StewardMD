@@ -100,7 +100,7 @@
     ro_vte: T("VTe", "VTe"), ro_ve: T("VE", "VE"), ro_ppeak: T("Ppeak", "Ppeak"), ro_pplat: T("Pplat", "Pplat"), ro_pmean: T("Pmean", "Pmean"),
     ro_peepTotal: T("PEEP total", "कुल PEEP"), ro_autoPeep: T("Auto-PEEP", "ऑटो-PEEP"), ro_drivingP: T("Driving P", "ड्राइविंग P"), ro_cstat: T("Cstat", "Cstat"),
     ro_pfRatio: T("P/F", "P/F"), ro_shunt: T("Shunt", "शंट"), ro_vdvt: T("Vd/Vt", "Vd/Vt"), ro_aaGradient: T("A-a gradient", "A-a ग्रेडिएंट"),
-    ro_raw: T("Raw", "Raw"), ro_rrTotal: T("RR total", "कुल RR"), ro_ieActual: T("I:E", "I:E"), ro_mechPower: T("Mech power", "मैकेनिकल पावर"),
+    ro_raw: T("Raw", "Raw"), ro_rrTotal: T("RR total", "कुल RR"), ro_ieActual: T("I:E", "I:E"), ro_mechPower: T("Mech power", "मैकेनिकल पावर"), ro_trapV: T("Trapped air", "फँसी हवा"), ro_ineffective: T("Missed breaths", "छूटी साँसें"),
     high: T("high", "ऊँचा"), low: T("low", "कम"), perKg: T("{n} mL/kg PBW", "{n} mL/kg PBW"),
     settings: T("Settings", "सेटिंग"), pendNote: T("Changes wait for Confirm, as on a real ventilator.", "बदलाव Confirm तक रुकते हैं, जैसे असली वेंटिलेटर पर।"),
     info: T("Learn this setting: {x}", "यह सेटिंग सीखें: {x}"), inc: T("Increase {x}", "{x} बढ़ाएँ"), dec: T("Decrease {x}", "{x} घटाएँ"),
@@ -135,6 +135,10 @@
     t5: T("+5 min", "+5 मिनट"), t15: T("+15 min", "+15 मिनट"), t30: T("+30 min", "+30 मिनट"), t60: T("+1 h", "+1 घंटा"),
     skipAria: T("Skip ahead {x}", "{x} आगे बढ़ें"), clock: T("{h} h {m} min", "{h} घंटे {m} मिनट"), simTime: T("Sim time {x}", "सिम समय {x}"),
     skipped: T("{x} later: SpO2 {a}, PaCO2 {b}, MAP {c}.", "{x} बाद: SpO2 {a}, PaCO2 {b}, MAP {c}।"),
+    bedH: T("Bedside actions", "बेडसाइड काम"), bedNote: T("Hands on the patient, not the dials. Each one goes in your run log.", "डायल नहीं, मरीज़ पर हाथ। हर काम आपके run log में दर्ज होता है।"),
+    bedSug: T("The alarm card suggests this", "अलार्म कार्ड यह सुझाता है"), bedDone: T("Done: {x}", "हो गया: {x}"), drainIn: T("Chest drain in place", "Chest drain लगा है"),
+    bagNow: T("Hand bagging, 100% oxygen", "हाथ से bagging, 100% oxygen"), bagOff: T("Off the ventilator, no PEEP valve. A recruitable lung can collapse.", "Ventilator से हटा, PEEP valve नहीं। खुल सकने वाला फेफड़ा बैठ सकता है।"),
+    bagLeft: T("{n} s left", "{n} s बाकी"), bagEnd: T("Bagging over. Back on the ventilator.", "Bagging खत्म। फिर से ventilator पर।"), bagging: T("Bagging", "Bagging चालू"),
     alarmsNone: T("No active alarms", "कोई सक्रिय अलार्म नहीं"), silence: T("Silence 2 min", "2 मिनट चुप करें"), ack: T("Acknowledge", "स्वीकार करें"),
     silenced: T("silenced", "चुप"), causes: T("Likely causes", "संभावित कारण"), clue: T("Waveform clue", "वेवफ़ॉर्म संकेत"), trouble: T("Troubleshooting", "समस्या जाँच"),
     fix: T("Correct intervention", "सही कदम"), alarmOpen: T("Alarm: {x}. Open the alarm card", "अलार्म: {x}। अलार्म कार्ड खोलें"), alarmsH: T("Alarms", "अलार्म"), allAlarms: T("All {n} alarms", "सभी {n} अलार्म"), plusN: T("+{n} more", "+{n} और"),
@@ -165,7 +169,7 @@
     wiPick: T("Pick a question", "एक प्रश्न चुनें"), wiBuild: T("Or build your own", "या अपना बनाएँ"), wiSetting: T("Setting", "सेटिंग"), wiDir: T("Direction", "दिशा"),
     wiUp: T("Increase", "बढ़ाएँ"), wiDown: T("Decrease", "घटाएँ"), wiGo: T("Show before and after", "पहले और बाद दिखाएँ"), wiNow: T("Now", "अभी"), wiAfter: T("After 30 min", "30 मिनट बाद"),
     wiPatient: T("Patient", "मरीज़"), wiEmpty: T("Choose a question above to see what changes, and why.", "क्या बदलता है और क्यों, देखने के लिए ऊपर एक प्रश्न चुनें।"),
-    caseOf: T("Case {i} of {n}", "{n} में से केस {i}"), right: T("Correct", "सही"), wrong: T("Not this one", "यह नहीं"), result: T("Simulated result, 30 min after the change", "बदलाव के 30 मिनट बाद सिम्युलेटेड परिणाम"),
+    caseOf: T("Case {i} of {n}", "{n} में से केस {i}"), right: T("Correct", "सही"), wrong: T("Not this one", "यह नहीं"), result: T("Simulated result, 30 min after the change", "बदलाव के 30 मिनट बाद सिम्युलेटेड परिणाम"), applied: T("Change applied", "लागू बदलाव"),
     nextCase: T("Next case", "अगला केस"), q1: T("Question 1", "प्रश्न 1"), q2: T("Question 2", "प्रश्न 2"), normal: T("Normal {a} to {b}", "सामान्य {a} से {b}"),
     pattern: T("Pattern {n}", "पैटर्न {n}"), nameIt: T("Which pattern is this?", "यह कौन सा पैटर्न है?"), named: T("Named", "पहचाना"), notNamed: T("Not named yet", "अभी पहचाना नहीं"), dysNext: T("Next pattern", "अगला पैटर्न"),
     dName: T("Name", "नाम"), dClue: T("Clue", "संकेत"), dCause: T("Cause", "कारण"), dFix: T("Fix", "समाधान"),
@@ -208,10 +212,10 @@
     ab_HCO3: T("bicarbonate, the body's buffer", "बाइकार्बोनेट, शरीर का बफ़र"), ab_SaO2: T("% of haemoglobin carrying oxygen", "ऑक्सीजन ले जा रहा हीमोग्लोबिन %")
   };
   var MODE_SHORT = { vc: "VC", acvc: "AC-VC", pc: "PC", acpc: "AC-PC", simv: "SIMV", psv: "PSV", cpap: "CPAP", prvc: "PRVC", niv: "NIV", aprv: "APRV" };
-  var RO_UNIT = { pfRatio: "", shunt: "", vdvt: "", aaGradient: "mmHg", vte: "mL", ve: "L/min", ppeak: "cmH2O", pplat: "cmH2O", pmean: "cmH2O", peepTotal: "cmH2O", autoPeep: "cmH2O", drivingP: "cmH2O", cstat: "mL/cmH2O", raw: "cmH2O/L/s", rrTotal: "/min", ieActual: "", mechPower: "J/min" };
-  var RO_ORDER = ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal", "drivingP", "autoPeep", "pmean", "cstat", "raw", "ieActual", "mechPower", "pfRatio", "shunt", "vdvt", "aaGradient"];
+  var RO_UNIT = { pfRatio: "", shunt: "", vdvt: "", aaGradient: "mmHg", vte: "mL", ve: "L/min", ppeak: "cmH2O", pplat: "cmH2O", pmean: "cmH2O", peepTotal: "cmH2O", autoPeep: "cmH2O", drivingP: "cmH2O", cstat: "mL/cmH2O", raw: "cmH2O/L/s", rrTotal: "/min", ieActual: "", mechPower: "J/min", trapV: "mL", ineffective: "/min" };
+  var RO_ORDER = ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal", "ineffective", "drivingP", "autoPeep", "trapV", "pmean", "cstat", "raw", "ieActual", "mechPower", "pfRatio", "shunt", "vdvt", "aaGradient"];
   var RO_DEFAULT = { 1: ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal"], 2: ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal", "drivingP", "cstat", "ieActual"],
-    3: ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal", "drivingP", "autoPeep", "cstat", "raw", "ieActual"], 4: RO_ORDER };
+    3: ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal", "ineffective", "drivingP", "autoPeep", "trapV", "cstat", "raw", "ieActual"], 4: RO_ORDER };
   var ALARM_KEYS = ["pPeakHigh", "veLow", "veHigh", "apnoea", "rrHigh", "fio2Low", "fio2High", "peepLow", "peepHigh"];
   var DYS_KINDS = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
   // What-if moves a setting by a teaching-sized amount in its own units; others move four steps.
@@ -320,7 +324,8 @@
   function visReadouts(n) {
     var sh = shows(n);
     if (!sh) return RO_DEFAULT[n] || RO_DEFAULT[1];
-    return RO_ORDER.filter(function (k) { return sh.indexOf(k) >= 0 || (k === "peepTotal" && sh.indexOf("autoPeep") >= 0) || (k === "rrTotal" && sh.indexOf("ve") >= 0); });
+    // trapped volume sits next to auto-PEEP (Level 2+); missed breaths per minute from Level 3
+    return RO_ORDER.filter(function (k) { return sh.indexOf(k) >= 0 || ((k === "peepTotal" || k === "trapV") && sh.indexOf("autoPeep") >= 0) || (k === "rrTotal" && sh.indexOf("ve") >= 0) || (k === "ineffective" && n >= 3); });
   }
   function ptPbw(sc) { return pbw(sc.patient.sex, sc.patient.heightCm); }
   function lungTags(sc) {
@@ -469,7 +474,7 @@
   var SH = { el: null, prevBack: null, ret: null };
   function setInert(on) {
     var r = I.root();
-    [].forEach.call(r.querySelectorAll(":scope > .sp-top, :scope > .sp-scroll, :scope > .sp-foot, :scope > .vl-alarms, :scope > .vl-coach"), function (n) {
+    [].forEach.call(r.querySelectorAll(":scope > .sp-top, :scope > .sp-scroll, :scope > .sp-foot, :scope > .vl-alarms, :scope > .vl-bagw, :scope > .vl-coach"), function (n) {
       if (on) n.setAttribute("inert", ""); else n.removeAttribute("inert");
     });
   }
@@ -597,9 +602,10 @@
 
   /* ================= the run ================= */
   var R = null;
+  G.NARKE_VENT_UI.run = function () { return R; }; // read-only hook for test/run-narke-vent-ui.mjs
   function start(sc, tut) {
     var e = E(), s0 = e.init(clone(sc), null), set = s0 && s0.settings ? clone(s0.settings) : baseSettings(sc);
-    R = { sc: sc, s: s0, set: set, pend: {}, log: [], abgs: [], answers: [], seen: {}, lastSet: 0, lastLog: 0, chain: null, live: true, sil: {}, ack: {}, hints: [], evSeen: 0, tut: tut || null, side: null, alarmSig: "", bsig: "", msig: "" };
+    R = { sc: sc, s: s0, set: set, pend: {}, log: [], abgs: [], answers: [], seen: {}, lastSet: 0, lastAct: 0, lastLog: 0, bedSig: "", chain: null, live: true, sil: {}, ack: {}, hints: [], evSeen: 0, tut: tut || null, side: null, alarmSig: "", bsig: "", msig: "" };
     R.log.push({ t: 0, settings: clone(set), readout: e.readout(s0, set), action: "start" });
     run();
   }
@@ -617,7 +623,8 @@
     var r = cur(), sc = R.sc;
     I.paint(I.top(t(STR.backLab), tx(sc.title), '<span id="vlClock">' + s("simTime", { x: clockText(R.s.t) }) + "</span>", I.langBtn()) +
       '<div class="vl-alarms" id="vlAlarms" data-vl-id="alarms">' + alarmsHtml() + "</div>" +
-      '<div class="sp-scroll vl-scroll' + (R.tut ? " has-coach" : "") + '"><div class="vl-wrap vl-run">' +
+      '<div class="vl-bagw" id="vlBag">' + bagHtml() + "</div>" +
+      '<div class="sp-scroll vl-scroll' + (R.tut ? " has-coach" : "") + '"><div class="vl-wrap" id="vlBedW">' + bedHtml() + '</div><div class="vl-wrap vl-run">' +
       '<div class="vl-colA">' + ptHtml(r) + monHtml(r) + "</div>" +
       '<div class="vl-colB">' + ventHtml(r) + setHtml() + "</div>" +
       '<div class="vl-colC">' + chainHtml() + '<section class="vl-card vl-ov" data-vl-id="oxvent" aria-labelledby="vlOvH" id="vlOv">' + ovHtml(r) + "</section>" +
@@ -710,6 +717,7 @@
     if (k === "pplat" && v > (g.pplatMax || 30)) return "bad";
     if (k === "drivingP" && v > (g.drivingMax || 15)) return "warn";
     if (k === "autoPeep" && v > 2) return "warn";
+    if (k === "ineffective" && v > 2) return "warn";
     if (k === "ppeak" && v > 40) return "warn";
     if (k === "vte" && g.vtPerKg && v / kg > g.vtPerKg[1] + 0.5) return "warn";
     return "";
@@ -1086,7 +1094,7 @@
     now.forEach(function (a) { ids[a.id] = 1; if (R.seen[a.id] == null) R.seen[a.id] = R.s.t; });
     Object.keys(R.seen).forEach(function (id) {
       if (ids[id]) return;
-      if (R.lastSet >= R.seen[id]) R.answers.push({ kind: "alarm", id: id, correct: true });
+      if (R.lastSet >= R.seen[id] || R.lastAct >= R.seen[id]) R.answers.push({ kind: "alarm", id: id, correct: true });
       delete R.seen[id];
     });
   }
@@ -1109,10 +1117,13 @@
     var list = function (arr) { return arr && arr.length ? "<ul>" + arr.map(function (x) { return "<li>" + tx(x) + "</li>"; }).join("") + "</ul>" : ""; };
     sheet((a ? tx(a.label) : esc(id)),
       '<div class="vl-acard ' + esc((a && a.severity) || "warn") + '">' +
+      // the bedside actions this card's troubleshooting names come first: they are what to do now
+      (function () { var ks = alarmActs(id), acts = E().ACTIONS || {}; return ks.length ? '<h3 class="vl-h3">' + s("bedH") + '</h3><div class="vl-bed-g vl-bed-s">' + ks.map(function (k) { return bedBtn({ id: k, a: acts[k], on: safe(function () { return acts[k].available(R.s); }, false), sug: true }, true); }).join("") + "</div>" : ""; })() +
       (c.causes ? '<h3 class="vl-h3">' + s("causes") + "</h3>" + list(c.causes) : "") +
       (c.clue ? '<h3 class="vl-h3">' + s("clue") + "</h3><p>" + tx(c.clue) + "</p>" : "") +
       (c.steps ? '<h3 class="vl-h3">' + s("trouble") + '</h3><ol class="vl-ol">' + c.steps.map(function (x) { return "<li>" + tx(x) + "</li>"; }).join("") + "</ol>" : "") +
-      (c.fix ? '<h3 class="vl-h3">' + s("fix") + '</h3><p class="vl-fix">' + tx(c.fix) + "</p>" : "") + "</div>",
+      (c.fix ? '<h3 class="vl-h3">' + s("fix") + '</h3><p class="vl-fix">' + tx(c.fix) + "</p>" : "") +
+      "</div>",
       '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + '</button><button type="button" class="sp-btn pri" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
   };
   A.vlalall = function (b) {
@@ -1124,6 +1135,68 @@
   A.vlsil = function (b) { var id = b.getAttribute("data-k"); R.sil[id] = R.s.t + 120; R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "silence:" + id }); closeSheet(true); R.alarmSig = ""; updAlarms(); focusAlarmBar(); };
   A.vlack = function (b) { var id = b.getAttribute("data-k"); R.ack[id] = 1; R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "ack:" + id }); closeSheet(true); R.alarmSig = ""; updAlarms(); focusAlarmBar(); };
   function focusAlarmBar() { var n = q(".vl-alarms button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true }); }
+
+  /* ---- bedside actions (engine E.ACTIONS / E.act) ---- */
+  var BED_ICO = { decompress: "syringe", suction: "droplet", bag100: "lungs" };
+  // Which actions an alarm card suggests: read from its own troubleshooting text in learn.json, not hard-coded here.
+  var BED_RX = { decompress: /decompress|needle|drain/i, suction: /suction/i, bag100: /\bbag/i };
+  function alarmActs(id) {
+    var c = (learn().alarms || {})[id] || {}, txt = (c.steps || []).concat(c.fix ? [c.fix] : []).map(function (x) { return x && x.en ? x.en : String(x || ""); }).join(" ");
+    return Object.keys(BED_RX).filter(function (k) { return E().ACTIONS && E().ACTIONS[k] && BED_RX[k].test(txt); });
+  }
+  function bedSuggested() { var o = {}; activeAlarms().forEach(function (a) { alarmActs(a.id).forEach(function (k) { o[k] = 1; }); }); return o; }
+  function bagLeft() { var m = R.s.m || {}; return m.bagUntil > R.s.t ? Math.ceil(m.bagUntil - R.s.t) : 0; }
+  function bedList() {
+    var acts = (E() && E().ACTIONS) || {}, sug = bedSuggested();
+    return Object.keys(acts).filter(function (k) { return lv() >= 2 || sug[k]; }).map(function (k) {
+      return { id: k, a: acts[k], on: safe(function () { return acts[k].available(R.s); }, false), sug: !!sug[k] };
+    });
+  }
+  function bedBtn(x, inSheet) {
+    var stat = !x.on ? (x.id === "decompress" ? s("drainIn") : x.id === "bag100" ? s("bagging") : "") : x.sug && !inSheet ? s("bedSug") : "";
+    return '<button type="button" class="vl-bedb' + (x.sug ? " sug" : "") + '" data-act="vlbed" data-k="' + esc(x.id) + '"' + (x.on ? "" : ' aria-disabled="true"') + ">" +
+      '<span class="vl-bedb-i" aria-hidden="true">' + ico(BED_ICO[x.id] || "plus") + '</span><span class="vl-bedb-t">' + tx(x.a.label) + (stat ? "<small>" + stat + "</small>" : "") + "</span></button>";
+  }
+  function bedHtml() {
+    var list = bedList();
+    R.bedSig = list.map(function (x) { return x.id + (x.on ? 1 : 0) + (x.sug ? "s" : ""); }).join(",") + "|" + lv() + L();
+    if (!list.length) return "";
+    return '<section class="vl-bed" data-vl-id="bedside" aria-labelledby="vlBedH"><div class="vl-bed-h"><h2 class="vl-h" id="vlBedH">' + s("bedH") + '</h2><p class="vl-bed-n">' + s("bedNote") + "</p></div>" +
+      '<div class="vl-bed-g" role="group" aria-labelledby="vlBedH">' + list.map(function (x) { return bedBtn(x); }).join("") + "</div></section>";
+  }
+  function bagHtml() {
+    var n = bagLeft();
+    return n ? '<div class="vl-bag" role="timer" aria-live="off"><span class="vl-bag-i" aria-hidden="true">' + ico("lungs") + '</span><span class="vl-bag-t"><b>' + s("bagNow") + "</b><small>" + s("bagOff") + '</small></span><b class="vl-bag-n" id="vlBagN">' + s("bagLeft", { n: n }) + '</b><i class="vl-bag-p" style="--p:' + (n / 60).toFixed(3) + '" aria-hidden="true"></i></div>' : "";
+  }
+  function updBed() {
+    var w = $("vlBedW"), b = $("vlBag");
+    if (b) {
+      var n = bagLeft(), had = !!b.firstChild;
+      if (!n) { if (had) { b.innerHTML = ""; say(raw("bagEnd")); } }
+      else if (!had) b.innerHTML = bagHtml();
+      else { var c = $("vlBagN"); if (c) c.textContent = raw("bagLeft", { n: n }); var p = b.querySelector(".vl-bag-p"); if (p) p.style.setProperty("--p", (n / 60).toFixed(3)); }
+    }
+    if (!w) return;
+    var list = bedList(), sig = list.map(function (x) { return x.id + (x.on ? 1 : 0) + (x.sug ? "s" : ""); }).join(",") + "|" + lv() + L();
+    if (sig === R.bedSig) return;
+    var a = G.document.activeElement, keep = a && w.contains(a) ? a.getAttribute("data-k") : null;
+    w.innerHTML = bedHtml();
+    if (keep) { var n2 = w.querySelector('[data-k="' + keep + '"]'); if (n2) n2.focus({ preventScroll: true }); }
+  }
+  A.vlbed = function (b) {
+    var id = b.getAttribute("data-k"), e = E(), a = e.ACTIONS && e.ACTIONS[id];
+    if (!a || !safe(function () { return a.available(R.s); }, false)) return;
+    var inSheet = !!b.closest(".vl-sheet");
+    R.s = e.act(R.s, id);
+    R.lastAct = R.s.t || 0.001;
+    R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "act:" + id });
+    if (inSheet) closeSheet(true);
+    refresh(true);
+    I.haptic("tap");
+    toast("event", s("bedDone", { x: t(a.label) }));
+    say(raw("bedDone", { x: t(a.label) }) + (id === "bag100" ? ". " + raw("bagOff") : ""));
+    var n = q('#vlBedW [data-k="' + id + '"]') || q("#vlBedW button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true });
+  };
 
   /* ---- time ---- */
   var LIVE = { tm: 0 };
@@ -1139,7 +1212,7 @@
     var r = cur();
     updMonitor(r, flash); updVent(r, flash);
     var ov = $("vlOv"); if (ov) ov.innerHTML = ovHtml(r);
-    updAlarms();
+    updAlarms(); updBed();
     var c = $("vlClock"); if (c) c.textContent = raw("simTime", { x: clockText(R.s.t) });
     events();
     if (R.tut) tutWatch(r);
@@ -1487,6 +1560,7 @@
     if (CS.a2 != null) {
       var rr = CS.res;
       h += '<p class="sp-verdict vl-v2 ' + (CS.a2 === q2.answer ? "ok" : "bad") + '" tabindex="-1">' + (ico(CS.a2 === q2.answer ? "check" : "close") || "") + "<span>" + s(CS.a2 === q2.answer ? "right" : "wrong") + "</span></p>" +
+        (rr && rr.applied && rr.applied.length ? '<p class="vl-applied"><b>' + s("applied") + ":</b> " + rr.applied.map(function (x) { return esc(setLabel(x.k)) + " " + esc(setText(x.k, x.a)) + " &rarr; " + esc(setText(x.k, x.b)) + (setUnit(x.k) ? " " + esc(setUnit(x.k)) : ""); }).join(" · ") + "</p>" : "") +
         (rr ? '<h3 class="vl-h3">' + s("result") + '</h3><div class="vl-card">' + caseResult(rr) + "</div>" : "") +
         (q2.why ? '<h3 class="vl-h3">' + s("whyH") + '</h3><p class="vl-whyp">' + tx(q2.why) + "</p>" : "") +
         (rr && rr.reasons.length ? '<ul class="vl-why">' + rr.reasons.map(function (x) { return "<li>" + arrow(x.direction === "down" ? -1 : 1) + "<span><b>" + esc(x.param || "") + "</b> " + tx(x.because) + "</span></li>"; }).join("") + "</ul>" : "");
@@ -1512,9 +1586,13 @@
     if (opt && opt.change && sc) {
       var st0 = e.init(clone(sc), null), set0 = baseSettings(sc), set1 = clone(set0), ch = opt.change;
       if (ch.mode) set1.mode = ch.mode; if (ch.key != null) set1[ch.key] = ch.to;
+      var app = ch.key != null ? [[ch.key, ch.to]] : [], k2;
+      // a combined option (e.g. lower VT and raise the rate together) carries also: {key: value}
+      if (ch.also) for (k2 in ch.also) if (Object.prototype.hasOwnProperty.call(ch.also, k2)) { set1[k2] = ch.also[k2]; app.push([k2, ch.also[k2]]); }
       var wi = ch.key != null ? safe(function () { return e.whatIf(st0, set0, ch); }, null) : null;
       var pB = safe(function () { return e.step(clone(st0), set0, 1800); }, st0), pA = safe(function () { return e.step(clone(st0), set1, 1800); }, st0);
-      CS.res = { before: (wi && wi.before) || e.readout(pB, set0), after: (wi && wi.after) || e.readout(pA, set1), reasons: safe(function () { return e.explainDelta(e.abg(pB), e.abg(pA), set0, set1, pB, pA); }, []) };
+      CS.res = { before: (wi && wi.before) || e.readout(pB, set0), after: (wi && wi.after) || e.readout(pA, set1), reasons: safe(function () { return e.explainDelta(e.abg(pB), e.abg(pA), set0, set1, pB, pA); }, []),
+        applied: app.map(function (x) { return { k: x[0], a: set0[x[0]], b: x[1] }; }) };
     }
     if (j === c.q2.answer) { prefs().cases[c.id] = 1; savePrefs(); }
     I.haptic(j === c.q2.answer ? "success" : "error");

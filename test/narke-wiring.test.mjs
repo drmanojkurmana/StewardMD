@@ -10,9 +10,9 @@ const read = (f) => readFileSync(f, "utf8");
 
 test("app boot loads only narke-loader.js; the loader lists the engine then narke.js at its own token", () => {
   const html = read("index.html");
-  assert.deepEqual(html.match(/narke[-.\w]*\.(js|css)\?v=\w+/g), ["narke-loader.js?v=nrk3"]);
+  assert.deepEqual(html.match(/narke[-.\w]*\.(js|css)\?v=\w+/g), ["narke-loader.js?v=nrk4"]);
   const L = read("narke-loader.js"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "nrk3");
+  assert.equal(v, "nrk4");
   for (const f of ["specialty.css", "narke.css", "specialty-core.js", "specialty-shell.js", "specialty-notes.js", "narke.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-notes.js"') < L.indexOf('"narke.js"'), "engine before the host");
   assert.ok(!/tokos/i.test(L), "no Tokós name in the Narkē loader");

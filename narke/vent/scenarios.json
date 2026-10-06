@@ -223,7 +223,7 @@
         ]
       },
       "timeline": [
-        { "t": 1800, "event": "improve", "requires": { "key": "epap", "min": 8 }, "note": { "en": "Well supported on EPAP 8 or more, diuretic and nitrate start to work. Lung water begins to fall.", "hi": "EPAP 8 या ज़्यादा के अच्छे support पर diuretic और nitrate असर करने लगे। फेफड़ों का पानी घटने लगा।" } }
+        { "t": 1800, "event": "improve", "requires": [{ "key": "epap", "min": 8 }, { "key": "peep", "min": 8 }], "note": { "en": "Well supported on EPAP or PEEP 8 or more, diuretic and nitrate start to work. Lung water begins to fall.", "hi": "EPAP या PEEP 8 या ज़्यादा के अच्छे support पर diuretic और nitrate असर करने लगे। फेफड़ों का पानी घटने लगा।" } }
       ],
       "debrief": [
         { "en": "CPAP or NIV is first-line in cardiogenic oedema. Many patients avoid intubation.", "hi": "Cardiogenic oedema में CPAP या NIV पहली पसंद है। कई मरीज़ intubation से बच जाते हैं।" },

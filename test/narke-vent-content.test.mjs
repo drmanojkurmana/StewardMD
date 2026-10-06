@@ -276,8 +276,9 @@ test("m11 to m14: plateau fix, SpO2 target source, GINA, Hindi patient word", ()
 
 test("M9/m9: conditional timeline events are well formed; trauma has no scripted drain", () => {
   for (const s of S.scenarios) for (const e of s.timeline) if (e.requires) {
-    const r = e.requires;
-    assert.ok((r.action && (!E || E.ACTIONS[r.action])) || (SETTING_KEYS.includes(r.key) && typeof r.min === "number"), s.id + " requires");
+    const list = Array.isArray(e.requires) ? e.requires : [e.requires];
+    assert.ok(list.length > 0, s.id + " requires list is empty");
+    for (const r of list) assert.ok((r.action && (!E || E.ACTIONS[r.action])) || (SETTING_KEYS.includes(r.key) && typeof r.min === "number"), s.id + " requires");
   }
   assert.ok(scBy("cardiogenic-oedema").timeline.find((e) => e.event === "improve").requires, "oedema improvement needs adequate support");
   assert.ok(!scBy("trauma-contusion").timeline.some((e) => e.event === "improve"), "the learner places the drain");

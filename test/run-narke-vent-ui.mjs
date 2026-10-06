@@ -8,7 +8,7 @@
  * USAGE: PORT=<free port> CHROME_PORT=<free port> node test/run-narke-vent-ui.mjs   (SHOTS=<dir> saves screenshots)
  */
 import { spawn } from "node:child_process";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -288,6 +288,17 @@ try {
   await shot("390-dark-case");
   await click(`[data-act=vlcnext]`);
   ok(await until(`return /Case 2/.test(document.querySelector('#smdNarke .sp-title').textContent);`), "Next case moves on");
+  // abg-12: a combined change (lower VT and raise the rate) must apply both settings and explain them
+  { const LEARN = JSON.parse(readFileSync(join(HERE, "../narke/vent/learn.json"), "utf8")), ci = LEARN.cases.findIndex((c) => c.id === "abg-12");
+    const c12 = LEARN.cases[ci], oi = c12.q2.options.findIndex((o) => o.change && o.change.also);
+    for (let i = 1; i < ci; i++) { await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`); await click(`[data-act=vlq2]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlcnext]');`); await click(`[data-act=vlcnext]`); await until(`return /Case ${i + 2} /.test(document.querySelector('#smdNarke .sp-title').textContent + ' ');`); }
+    await click(`[data-act=vlq1]`); await until(`return !!document.querySelector('#smdNarke [data-act=vlq2]');`);
+    await click(`[data-act=vlq2][data-o="${oi}"]`);
+    const S = (await evp(`Promise.resolve(NARKE_MODELS["vent-engine"].SETTINGS)`)) || {};
+    const ap = await until(`var a=document.querySelector('#smdNarke .vl-applied'); return !!a && a.textContent.indexOf(${JSON.stringify(S.vt.label.en)})>=0 && a.textContent.indexOf(${JSON.stringify(S.rr.label.en)})>=0 && /\\b30\\b/.test(a.textContent) && /\\b420\\b/.test(a.textContent);`);
+    ok(ap, "abg-12: the combined option applies VT 420 and rate 30 together and says so: " + (await ev(`var a=document.querySelector('#smdNarke .vl-applied'); return a ? a.textContent : "none";`)));
+    ok(await ev(`return document.querySelectorAll('#smdNarke .vl-case .vl-ba tbody tr').length >= 4 && document.querySelectorAll('#smdNarke .vl-case .vl-why li').length >= 1;`) === true, "abg-12: the combined change has a result gas and reasons");
+    await shot("390-dark-case-combined"); }
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
 
   // dyssynchrony gallery
@@ -316,6 +327,81 @@ try {
   ok(dk !== lt, "dark plate " + dk + ", light paper plate " + lt);
   await shot("390-light-run-top");
   await theme(true);
+
+  // bedside actions (E.ACTIONS / E.act), new readouts and flags
+  const toHome = async () => { for (let i = 0; i < 4 && !(await ev(`return !!document.querySelector('#smdNarke .vl-home');`)); i++) { await ev(`NARKE.back(); return 1;`); await sleep(150); } };
+  const goRun = async (lvl, id) => {
+    await toHome(); await click(`[data-act=vllevel][data-v="${lvl}"]`); await until(`return document.querySelector('#smdNarke .vl-levels [aria-pressed=true]').getAttribute('data-v')==='${lvl}';`);
+    await click(`[data-act=vlgo][data-s="${id}"]`); await until(`return !!document.querySelector('#smdNarke .vl-run');`);
+    await click(`[data-act=vllive]`); // live off: the test moves time itself
+  };
+  const num = (sel) => ev(`var b=document.querySelector('#smdNarke ${sel}'); return b ? parseFloat(b.textContent) : null;`);
+  const skip = async (k) => { await click(`[data-act=vlskip][data-k="${k}"]`); await sleep(150); };
+  const lastAct = (id) => ev(`var R0=NARKE_VENT_UI.run(); return R0.log.some(function(x){return x.action==="act:${id}";});`);
+  {
+    await goRun(1, "postop-normal");
+    ok(await ev(`return !document.querySelector('#smdNarke .vl-bed');`) === true, "Level 1: no bedside actions while no alarm suggests one");
+    await goRun(2, "pneumonia");
+    ok(await ev(`${R} var b=R.querySelectorAll('.vl-bed [data-act=vlbed]'), A=NARKE_MODELS["vent-engine"].ACTIONS; return b.length===Object.keys(A).length && [].every.call(b, function(x){ return x.textContent.indexOf(A[x.getAttribute('data-k')].label.en)>=0; });`) === true, "Level 2: a Bedside actions group shows every engine action with its label");
+    ok(await ev(`${R} return !!R.querySelector('.vl-ro-i[data-vl-id=trapV]') && !!R.querySelector('.vl-ro-i[data-vl-id=autoPeep]') && !R.querySelector('.vl-ro-i[data-vl-id=ineffective]');`) === true, "Level 2: trapped air sits next to auto-PEEP; missed breaths wait for Level 3");
+    await skip(1800);
+    const pk0 = await num(`.vl-ro-i[data-vl-id=ppeak] b`);
+    await click(`[data-act=vlbed][data-k=suction]`); await sleep(150);
+    const pk1 = await num(`.vl-ro-i[data-vl-id=ppeak] b`);
+    ok(pk1 < pk0, "suction after the secretions event lowers peak pressure (" + pk0 + " to " + pk1 + ")");
+    ok(await lastAct("suction") === true, "suction is logged in the run log for the score");
+    await ev(`document.querySelector('#smdNarke .sp-scroll').scrollTop=0; return 1;`); await shot("390-dark-bedside");
+    await click(`[data-act=lang]`); await until(`return document.getElementById('smdNarke').getAttribute('lang')==='hi';`);
+    ok(await ev(`${R} return /[\\u0900-\\u097F]/.test(R.querySelector('.vl-bed').textContent) && [].every.call(R.querySelectorAll('.vl-bedb'), function(b){ return b.scrollWidth <= b.clientWidth + 1; });`) === true, "Hindi: bedside actions speak Hindi and fit");
+    await shot("390-dark-bedside-hindi");
+    await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
+    { const sm = await small(); ok(sm === true, "bedside: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
+    ok(await noOverflow() === true, "bedside: no horizontal scroll at 390 px");
+
+    // trauma: a pneumothorax (timeline on) recovers only after Decompress
+    await goRun(4, "trauma-contusion");
+    ok(await ev(`${R} return !!R.querySelector('.vl-ro-i[data-vl-id=ineffective]') && /Missed breaths/.test(R.querySelector('.vl-ro-i[data-vl-id=ineffective] dt').textContent);`) === true, "Level 4: missed breaths per minute shows with a plain label");
+    await skip(900); await skip(900);
+    const sp0 = await num(`#vlSpo2`);
+    ok(await ev(`return !!document.querySelector('#smdNarke .vl-bedb.sug[data-k=decompress]');`) === true, "after the pneumothorax the alarms point at Decompress");
+    await skip(1800);
+    const sp1 = await num(`#vlSpo2`);
+    ok(sp0 < 90 && sp1 < 90, "without decompression SpO2 stays low (" + sp0 + ", then " + sp1 + " after 30 min)");
+    await click(`.vl-al`); await until(`return !!document.querySelector('#smdNarke .vl-sheet .vl-acard');`);
+    ok(await ev(`return !!document.querySelector('#smdNarke .vl-sheet [data-act=vlbed][data-k=decompress]');`) === true, "the alarm card's troubleshooting links to the Decompress action");
+    await shot("390-dark-alarm-action");
+    await click(`.vl-sheet [data-act=vlbed][data-k=decompress]`);
+    ok(await until(`return !document.querySelector('#smdNarke .vl-sheet-wrap') && document.querySelector('#smdNarke [data-act=vlbed][data-k=decompress]').getAttribute('aria-disabled')==='true' && /drain in place/i.test(document.querySelector('#smdNarke [data-act=vlbed][data-k=decompress]').textContent);`), "Decompress from the alarm card closes it and the drain shows as in place");
+    await skip(1800);
+    const sp2 = await num(`#vlSpo2`);
+    ok(sp2 >= 90 && sp2 > sp1 + 5, "after Decompress SpO2 recovers (" + sp1 + " to " + sp2 + ")");
+    ok(await lastAct("decompress") === true, "Decompress is logged in the run log");
+
+    // ARDS: bag 100% shows the countdown and the off-ventilator state, then the lung has derecruited
+    await goRun(4, "ards");
+    await click(`[data-act=vllive]`); // live on so the countdown ticks
+    await skip(300);
+    const cs0 = await num(`.vl-ro-i[data-vl-id=cstat] b`);
+    await click(`[data-act=vlbed][data-k=bag100]`);
+    ok(await until(`var b=document.querySelector('#smdNarke .vl-bag'); return !!b && /\\d+ s left/.test(b.textContent) && /Off the ventilator/.test(b.textContent);`), "bagging shows a countdown strip and says the patient is off the ventilator");
+    ok(await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=disconnect]') && document.querySelector('#smdNarke [data-act=vlbed][data-k=bag100]').getAttribute('aria-disabled')==='true';`) === true, "while bagging the disconnect alarm sounds and Bag 100% is unavailable");
+    ok(await ev(`var R0=NARKE_VENT_UI.run(), E0=NARKE_MODELS["vent-engine"], f=E0.readout(R0.s,R0.set).flags, t=document.getElementById('vlFlags').textContent; return f.some(function(x){return x.id==="bagging";}) && f.every(function(x){ return t.indexOf(x.label.en)>=0; });`) === true, "the bagging flag (and every engine flag) renders with its label");
+    const c0 = await ev(`return parseInt(document.getElementById('vlBagN').textContent,10);`);
+    await sleep(2300);
+    const c1 = await ev(`return parseInt(document.getElementById('vlBagN').textContent,10);`);
+    ok(c1 < c0, "the bagging countdown ticks (" + c0 + " to " + c1 + " s)");
+    await shot("390-dark-bagging");
+    await theme(false); await shot("390-light-bagging"); await theme(true);
+    await click(`[data-act=vllive]`);
+    await skip(300);
+    const cs1 = await num(`.vl-ro-i[data-vl-id=cstat] b`);
+    ok(await ev(`return !document.querySelector('#smdNarke .vl-bag');`) === true, "the countdown strip goes when bagging ends");
+    ok(cs1 < cs0, "ARDS: 60 s of bagging without PEEP derecruits the lung (Cstat " + cs0 + " to " + cs1 + ")");
+    ok(await lastAct("bag100") === true, "Bag 100% is logged in the run log");
+    // effortsIgnored: put this run's patient (lightly sedated) on plain VC, then let the screen refresh
+    ok(await ev(`var R0=NARKE_VENT_UI.run(), E0=NARKE_MODELS["vent-engine"], sc=JSON.parse(JSON.stringify(R0.sc)); sc.patient.drive.sedation=0.2; sc.timeline=[]; var s0=E0.init(sc,{mode:"vc"}); R0.s=s0; R0.set=JSON.parse(JSON.stringify(s0.settings)); document.querySelector('#smdNarke [data-act=vlskip][data-k="300"]').click(); var f=E0.readout(R0.s,R0.set).flags.filter(function(x){return x.id==="effortsIgnored";})[0]; return f ? document.getElementById('vlFlags').textContent.indexOf(f.label.en)>=0 : "no effortsIgnored flag";`) === true, "the effortsIgnored flag renders with its label in a controlled mode");
+    await goRun(1, "postop-normal"); await click(`[data-act=vllive]`);
+  }
 
   // tablet and desktop layouts, both themes
   for (const [w, h] of [[768, 1024], [1280, 860]]) {

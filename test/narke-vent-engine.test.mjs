@@ -645,3 +645,17 @@ test("m3: no ABG case option repeats the case's current setting", () => {
     for (const o of c.q2.options) assert.ok(st[o.change.key] !== o.change.to || o.change.also || /^Keep /.test(o.label.en), c.id + " no-op option " + o.label.en);
   }
 });
+
+test("timeline requires may be a list meaning any of (cardiogenic oedema improves on EPAP or PEEP 8+)", () => {
+  const sc = quiet("postop-normal");
+  sc.timeline = [{ t: 10, event: "fever", requires: [{ key: "epap", min: 8 }, { key: "peep", min: 8 }], note: { en: "x", hi: "x" } }];
+  const s = E.init(sc), fired = (o) => E.step(s, Object.assign({}, s.settings, o), 60).fired.length;
+  assert.equal(fired({ peep: 5, epap: 4 }), 0);
+  assert.equal(fired({ peep: 8, epap: 4 }), 1);
+  assert.equal(fired({ peep: 5, epap: 8 }), 1);
+  const ev = byId("cardiogenic-oedema").timeline.find((e) => e.event === "improve");
+  assert.ok(Array.isArray(ev.requires) && ev.requires.some((r) => r.key === "peep") && ev.requires.some((r) => r.key === "epap"));
+  // CPAP/PEEP 8 on the real scenario fires the improve event at 30 min
+  const c = byId("cardiogenic-oedema"), c0 = E.init(c), set = Object.assign({}, c0.settings, { mode: "cpap", peep: 8 });
+  assert.ok(E.step(c0, set, 1900).fired.length >= 1);
+});

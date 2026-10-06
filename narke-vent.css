@@ -497,3 +497,39 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-next { touch-action: manipulation; }
 .nrk-root .vl-next:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
 @media (hover: hover) and (pointer: fine) { .nrk-root .vl-next:hover { border-color: var(--nk-acc); } }
+
+/* Bedside actions (E.ACTIONS): hands-on steps, set apart from the dials. Suggested by an active alarm: warn edge. */
+.nrk-root .vl-bed { margin-bottom: 12px; padding: 12px; border: 1px dashed var(--vl-cline); border-radius: 16px; }
+.nrk-root .vl-bed-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-bottom: 10px; }
+.nrk-root .vl-bed-n { margin: 0; font-size: 13px; color: var(--sp-mut); line-height: 1.35; }
+.nrk-root .vl-bed-g { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 560px) { .nrk-root .vl-bed-g:not(.vl-bed-s) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .nrk-root .vl-bed { margin-bottom: 16px; } }
+.nrk-root .vl-bedb { min-height: 52px; display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; text-align: left; border-radius: 12px;
+  border: 1.5px solid var(--vl-cline); background: var(--nk-s2); color: var(--sp-text); font-size: 14px; font-weight: 600; line-height: 1.25;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms ease-out, background-color 150ms ease-out; }
+.nrk-root .vl-bedb:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.nrk-root .vl-bedb-i { flex: 0 0 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; background: var(--vl-card); color: var(--nk-acc); }
+body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
+.nrk-root .vl-bedb-i .smd-ico { width: 20px; height: 20px; }
+.nrk-root .vl-bedb-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nrk-root .vl-bedb small { font-size: 12px; font-weight: 600; color: var(--sp-mut); }
+.nrk-root .vl-bedb.sug { border-color: var(--nk-warn); }
+.nrk-root .vl-bedb.sug small { color: var(--nk-warn); }
+.nrk-root .vl-bedb[aria-disabled="true"] { opacity: .6; cursor: default; }
+.nrk-root .vl-bedb:not([aria-disabled="true"]):active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .nrk-root .vl-bedb:not([aria-disabled="true"]):hover { background: var(--nk-s3); } }
+.nrk-root .vl-bed-s { margin: 4px 0 10px; }
+/* Hand bagging: a strip under the alarms with the 60 s countdown, so the off-ventilator state is never missed. */
+.nrk-root .vl-bagw { flex: 0 0 auto; }
+.nrk-root .vl-bagw:empty { display: none; }
+.nrk-root .vl-bag { position: relative; display: flex; align-items: center; gap: 10px; padding: 8px 12px 10px; border-bottom: 1px solid var(--vl-cline);
+  background: color-mix(in srgb, var(--vl-ox) 14%, var(--sp-bg)); overflow: hidden; }
+.nrk-root .vl-bag-i { flex: 0 0 auto; color: var(--vl-ox); display: grid; }
+.nrk-root .vl-bag-i .smd-ico { width: 22px; height: 22px; }
+.nrk-root .vl-bag-t { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; font-size: 14px; line-height: 1.25; }
+.nrk-root .vl-bag-t small { font-size: 12.5px; color: var(--sp-mut); }
+.nrk-root .vl-bag-n { flex: 0 0 auto; font-size: 20px; font-variant-numeric: tabular-nums; color: var(--vl-ox); }
+.nrk-root .vl-bag-p { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--vl-ox); transform-origin: left; transform: scaleX(var(--p, 1)); }
+@media (prefers-reduced-motion: no-preference) { .nrk-root .vl-bag-p { transition: transform 1s linear; } }
+.nrk-root .vl-applied { margin: 12px 0 0; font-size: 14px; line-height: 1.45; }
