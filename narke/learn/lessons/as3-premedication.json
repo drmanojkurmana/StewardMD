@@ -1,0 +1,234 @@
+{
+  "id": "as3-premedication",
+  "unit": "as3",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Oral midazolam 0.5 mg/kg, maximum 20 mg, about 30 minutes before induction in children (Morgan and Mikhail 7e)",
+      "Sodium citrate before caesarean as named practice"
+    ]
+  },
+  "competencies": [
+    "AS3.6"
+  ],
+  "title": {
+    "en": "Writing the premedication",
+    "hi": "प्रीमेडिकेशन लिखना"
+  },
+  "idea": {
+    "en": "[[premedication]] has clear aims: calm the patient, protect against aspiration, prevent nausea, reduce secretions when needed, and continue the right regular medicines.",
+    "hi": "[[premedication]] के साफ़ लक्ष्य हैं: मरीज़ को शांत करना, एस्पिरेशन से बचाना, मतली रोकना, ज़रूरत पर स्राव घटाना, और सही नियमित दवाएँ जारी रखना।"
+  },
+  "see": {
+    "diagram": "diagrams/as3-premedication.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A prescription sheet with a blue signature-like mark at the top and four coloured rows: blue, amber, green and purple. On the right, a red shape like a worried head, a yellow stomach outline and a small blue tablet.",
+      "hi": "एक प्रिस्क्रिप्शन शीट जिसके ऊपर नीला हस्ताक्षर जैसा निशान और चार रंगीन पंक्तियाँ: नीली, पीली, हरी और बैंगनी। दाईं ओर लाल चिंतित सिर जैसी आकृति, पीली पेट की रूपरेखा और छोटी नीली गोली।"
+    },
+    "caption": {
+      "en": "Each line of the premedication answers one aim: anxiety, aspiration, nausea or usual medicines.",
+      "hi": "प्रीमेडिकेशन की हर पंक्ति एक लक्ष्य पूरा करती है: घबराहट, एस्पिरेशन, मतली या नियमित दवाएँ।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.146,
+        "y": 0.333,
+        "label": {
+          "en": "Anxiolysis",
+          "hi": "घबराहट कम करना"
+        },
+        "note": {
+          "en": "A clear talk at the PAC is the best anxiolytic. If a drug is needed, a benzodiazepine such as midazolam is common.",
+          "hi": "PAC पर साफ़ बातचीत सबसे अच्छी दवा है। दवा चाहिए तो midazolam जैसी बेंज़ोडायज़ेपीन आम है।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.5,
+        "label": {
+          "en": "Aspiration prophylaxis",
+          "hi": "एस्पिरेशन से बचाव"
+        },
+        "note": {
+          "en": "For at-risk patients: an H2 blocker such as famotidine or a proton pump inhibitor, often with metoclopramide. Sodium citrate just before caesarean.",
+          "hi": "जोखिम वाले मरीज़ों में: famotidine जैसा H2 blocker या proton pump inhibitor, अक्सर metoclopramide के साथ; सीज़ेरियन से ठीक पहले sodium citrate।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.667,
+        "label": {
+          "en": "Antisialagogue",
+          "hi": "स्राव घटाने वाली दवा"
+        },
+        "note": {
+          "en": "Glycopyrrolate reduces secretions when needed, as in awake fibreoptic intubation or ketamine use.",
+          "hi": "Glycopyrrolate ज़रूरत पर स्राव घटाता है, जैसे जागते हुए फ़ाइबरऑप्टिक इंट्यूबेशन या ketamine में।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.833,
+        "label": {
+          "en": "Usual medicines",
+          "hi": "नियमित दवाएँ"
+        },
+        "note": {
+          "en": "Write which regular drugs to give on the morning of surgery with a sip of water, and which to hold.",
+          "hi": "लिखिए कौन सी नियमित दवाएँ सर्जरी की सुबह पानी के घूँट से देनी हैं, और कौन सी रोकनी हैं।"
+        }
+      },
+      {
+        "x": 0.781,
+        "y": 0.333,
+        "label": {
+          "en": "Anxious patient",
+          "hi": "घबराया मरीज़"
+        },
+        "note": {
+          "en": "Avoid sedative premedication in the elderly, sleep apnoea, a difficult airway or day-care patients going home soon.",
+          "hi": "बुज़ुर्ग, स्लीप एपनिया, मुश्किल वायुमार्ग या जल्दी घर जाने वाले डे-केयर मरीज़ों में नींद लाने वाली प्रीमेडिकेशन से बचिए।"
+        }
+      },
+      {
+        "x": 0.781,
+        "y": 0.7,
+        "label": {
+          "en": "Stomach",
+          "hi": "पेट"
+        },
+        "note": {
+          "en": "Full-stomach risks: pregnancy, obesity, reflux, diabetes with gastroparesis and emergencies.",
+          "hi": "भरे पेट के जोखिम: गर्भावस्था, मोटापा, रिफ़्लक्स, गैस्ट्रोपेरेसिस वाली डायबिटीज़ और आपात।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Decide the aims for this patient first. Not every patient needs a sedative.",
+        "hi": "पहले इस मरीज़ के लक्ष्य तय कीजिए। हर मरीज़ को नींद की दवा नहीं चाहिए।"
+      },
+      {
+        "en": "Write each drug with name, dose, route, time and the prescriber's signature, as for any prescription.",
+        "hi": "हर दवा का नाम, खुराक, रास्ता, समय और लिखने वाले का हस्ताक्षर लिखिए, किसी भी पर्चे की तरह।"
+      },
+      {
+        "en": "Example in a child: oral midazolam 0.5 mg/kg (maximum 20 mg) about 30 minutes before induction (Morgan and Mikhail).",
+        "hi": "बच्चे में उदाहरण: इंडक्शन से लगभग 30 मिनट पहले मुँह से midazolam 0.5 mg/kg (अधिकतम 20 mg) (Morgan और Mikhail)।"
+      },
+      {
+        "en": "Continue most cardiac drugs and inhalers. Follow protocols for insulin, anticoagulants and antiplatelets.",
+        "hi": "ज़्यादातर हृदय की दवाएँ और इनहेलर जारी रखिए। इंसुलिन, एंटीकोएगुलेंट और एंटीप्लेटलेट के लिए प्रोटोकॉल मानिए।"
+      },
+      {
+        "en": "A sedated patient needs monitoring and must not walk alone; give sedatives after consent is taken.",
+        "hi": "नींद की दवा लिए मरीज़ को निगरानी चाहिए और वह अकेले न चले; नींद की दवा सहमति लेने के बाद दीजिए।"
+      }
+    ],
+    "analogy": {
+      "en": "A premedication is a packing list for a trip. You pack only what this traveller needs, not everything in the cupboard.",
+      "hi": "प्रीमेडिकेशन यात्रा की पैकिंग सूची है। सिर्फ़ वही रखिए जो इस यात्री को चाहिए, अलमारी का सब कुछ नहीं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Sedative premedication can worsen airway obstruction in sleep apnoea.",
+      "hi": "स्लीप एपनिया में नींद की प्रीमेडिकेशन वायुमार्ग की रुकावट बढ़ा सकती है।"
+    },
+    {
+      "en": "Antacid and prokinetic drugs reduce acidity and volume, but do not replace fasting.",
+      "hi": "एंटासिड और प्रोकाइनेटिक दवाएँ अम्लता और मात्रा घटाती हैं, पर उपवास की जगह नहीं लेतीं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write a full premedication order for an obese patient with reflux before laparoscopic cholecystectomy. Ask a senior to check it.",
+      "hi": "रिफ़्लक्स वाले मोटे मरीज़ की लेप्रोस्कोपिक कोलेसिस्टेक्टॉमी के लिए पूरा प्रीमेडिकेशन आदेश लिखिए और किसी सीनियर से जँचवाइए।"
+    }
+  ],
+  "remember": {
+    "en": "Premedicate for a reason: anxiety, aspiration risk, nausea, secretions, and the right usual medicines. Name, dose, route, time, signature.",
+    "hi": "कारण से प्रीमेडिकेशन: घबराहट, एस्पिरेशन जोखिम, मतली, स्राव, और सही नियमित दवाएँ। नाम, खुराक, रास्ता, समय, हस्ताक्षर।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which patient should usually avoid a sedative premedication?",
+        "hi": "आमतौर पर किस मरीज़ को नींद लाने वाली प्रीमेडिकेशन से बचना चाहिए?"
+      },
+      "o": [
+        {
+          "en": "An anxious fit adult for hernia repair",
+          "hi": "हर्निया सर्जरी वाला घबराया स्वस्थ वयस्क"
+        },
+        {
+          "en": "A patient with severe obstructive sleep apnoea",
+          "hi": "गंभीर ऑब्सट्रक्टिव स्लीप एपनिया वाला मरीज़"
+        },
+        {
+          "en": "A fit teenager for tonsillectomy",
+          "hi": "टॉन्सिल सर्जरी वाला स्वस्थ किशोर"
+        },
+        {
+          "en": "A young adult for elective fracture fixation",
+          "hi": "नियोजित फ़्रैक्चर फ़िक्सेशन वाला युवा वयस्क"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Sedatives worsen airway obstruction and breathing in sleep apnoea.",
+        "hi": "नींद की दवाएँ स्लीप एपनिया में वायुमार्ग की रुकावट और साँस को बिगाड़ती हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is the aim of an H2 blocker with metoclopramide before surgery?",
+        "hi": "सर्जरी से पहले H2 blocker के साथ metoclopramide का उद्देश्य क्या है?"
+      },
+      "o": [
+        {
+          "en": "To reduce secretions in the mouth",
+          "hi": "मुँह के स्राव घटाना"
+        },
+        {
+          "en": "To reduce postoperative pain",
+          "hi": "ऑपरेशन के बाद का दर्द घटाना"
+        },
+        {
+          "en": "To relieve preoperative anxiety",
+          "hi": "ऑपरेशन से पहले की घबराहट घटाना"
+        },
+        {
+          "en": "To lower gastric acidity and volume",
+          "hi": "पेट की अम्लता और मात्रा घटाना"
+        }
+      ],
+      "a": 3,
+      "why": {
+        "en": "Together they reduce acid and stomach volume, lowering the harm if aspiration happens.",
+        "hi": "दोनों मिलकर अम्ल और पेट की मात्रा घटाते हैं, जिससे एस्पिरेशन होने पर नुकसान कम होता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "preop",
+    "tool": "apfel"
+  },
+  "glossary": [
+    "premedication",
+    "aspiration"
+  ],
+  "sources": [
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition (2022), Chapter 18: Preoperative assessment, premedication and perioperative documentation.",
+    "Ajay Yadav. A Short Textbook of Anaesthesia, 7th edition (Jaypee): preoperative assessment and premedication.",
+    "Gropper MA (ed). Miller's Anesthesia, 9th edition (2020), Chapter 31: Preoperative evaluation.",
+    "American Society of Anesthesiologists. Practice Guidelines for Preoperative Fasting (2017) and the 2023 focused update on carbohydrate drinks and chewing gum."
+  ]
+}

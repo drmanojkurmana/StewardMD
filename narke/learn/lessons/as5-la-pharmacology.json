@@ -1,0 +1,243 @@
+{
+  "id": "as5-la-pharmacology",
+  "unit": "as5",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Maximum doses from the kb LAST protocol (US-style figures; UK labelling lower)",
+      "Lipid emulsion regimen"
+    ]
+  },
+  "competencies": [
+    "AS5.4"
+  ],
+  "title": {
+    "en": "Local anaesthetics and adjuvants",
+    "hi": "लोकल एनेस्थेटिक और सहायक दवाएँ"
+  },
+  "idea": {
+    "en": "A [[local-anaesthetic]] blocks sodium channels. Know amide versus ester, the maximum safe dose, what adjuvants add, and how to treat [[last]].",
+    "hi": "[[local-anaesthetic]] सोडियम चैनल रोकता है। एमाइड बनाम एस्टर, अधिकतम सुरक्षित खुराक, सहायक दवाएँ क्या जोड़ती हैं, और [[last]] का इलाज जानिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as5-la-pharmacology.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A molecule drawn as a purple hexagon ring joined to a middle link and a green round end. The link has two versions: orange on top and blue below. Below left, a syringe with a scale. On the right, a pale yellow drip bag.",
+      "hi": "एक अणु: बैंगनी षट्भुज छल्ला, बीच की कड़ी और हरा गोल सिरा। कड़ी के दो रूप: ऊपर नारंगी और नीचे नीला। नीचे बाएँ, पैमाने वाली सिरिंज। दाईं ओर हल्का पीला ड्रिप बैग।"
+    },
+    "caption": {
+      "en": "Ring, link and amine; ester or amide link; dose limit and the lipid rescue bag.",
+      "hi": "छल्ला, कड़ी और एमीन; एस्टर या एमाइड कड़ी; खुराक सीमा और लिपिड बचाव बैग।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.2,
+        "y": 0.283,
+        "label": {
+          "en": "Aromatic ring",
+          "hi": "एरोमैटिक छल्ला"
+        },
+        "note": {
+          "en": "Lipid solubility. More lipid soluble means more potent, as with bupivacaine.",
+          "hi": "वसा में घुलनशीलता। ज़्यादा घुलनशील यानी ज़्यादा शक्तिशाली, जैसे bupivacaine।"
+        }
+      },
+      {
+        "x": 0.427,
+        "y": 0.283,
+        "label": {
+          "en": "Ester link",
+          "hi": "एस्टर कड़ी"
+        },
+        "note": {
+          "en": "Procaine, chloroprocaine, tetracaine. Broken by plasma cholinesterase; more allergy via PABA.",
+          "hi": "Procaine, chloroprocaine, tetracaine। प्लाज़्मा कोलिनएस्टरेज़ से टूटते हैं; PABA से ज़्यादा एलर्जी।"
+        }
+      },
+      {
+        "x": 0.427,
+        "y": 0.45,
+        "label": {
+          "en": "Amide link",
+          "hi": "एमाइड कड़ी"
+        },
+        "note": {
+          "en": "Lignocaine, bupivacaine, ropivacaine, levobupivacaine, prilocaine: two letter i's in the name. Broken in the liver.",
+          "hi": "Lignocaine, bupivacaine, ropivacaine, levobupivacaine, prilocaine: नाम में दो i। लिवर में टूटते हैं।"
+        }
+      },
+      {
+        "x": 0.646,
+        "y": 0.367,
+        "label": {
+          "en": "Amine and pKa",
+          "hi": "एमीन और pKa"
+        },
+        "note": {
+          "en": "A pKa closer to body pH means faster onset. Infected tissue is acidic, so blocks work poorly there.",
+          "hi": "pKa शरीर के pH के पास हो तो असर जल्दी। संक्रमित ऊतक अम्लीय है, इसलिए वहाँ ब्लॉक कम असर करता है।"
+        }
+      },
+      {
+        "x": 0.281,
+        "y": 0.71,
+        "label": {
+          "en": "Maximum dose",
+          "hi": "अधिकतम खुराक"
+        },
+        "note": {
+          "en": "Lignocaine plain 4.5 mg/kg (max 300 mg), with adrenaline 7 mg/kg (max 500 mg). Bupivacaine about 2 mg/kg (max 150 mg). Ropivacaine 3 mg/kg (max 200 mg).",
+          "hi": "Lignocaine सादा 4.5 mg/kg (अधिकतम 300 mg), adrenaline के साथ 7 mg/kg (अधिकतम 500 mg); bupivacaine लगभग 2 mg/kg (अधिकतम 150 mg); ropivacaine 3 mg/kg (अधिकतम 200 mg)।"
+        }
+      },
+      {
+        "x": 0.854,
+        "y": 0.717,
+        "label": {
+          "en": "20% lipid emulsion",
+          "hi": "20% लिपिड इमल्शन"
+        },
+        "note": {
+          "en": "For LAST: 1.5 mL/kg IV bolus, then 15 mL/kg/h; repeat boluses if unstable; maximum 12 mL/kg.",
+          "hi": "LAST में: 1.5 mL/kg IV बोलस, फिर 15 mL/kg/h; अस्थिर हो तो बोलस दोहराइए; अधिकतम 12 mL/kg।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Local anaesthetics enter the nerve and block sodium channels from inside. Small, myelinated pain and autonomic fibres block first.",
+        "hi": "लोकल एनेस्थेटिक नस में घुसकर अंदर से सोडियम चैनल रोकते हैं। छोटे, मायलिन वाले दर्द और ऑटोनॉमिक तंतु पहले ब्लॉक होते हैं।"
+      },
+      {
+        "en": "Potency follows lipid solubility, onset follows pKa, and duration follows protein binding.",
+        "hi": "ताक़त वसा-घुलनशीलता से, असर की शुरुआत pKa से, और अवधि प्रोटीन बंधन से तय होती है।"
+      },
+      {
+        "en": "Adrenaline slows absorption, prolongs the block and lowers peak blood levels. It also marks an intravascular injection by raising the heart rate.",
+        "hi": "Adrenaline अवशोषण धीमा करता है, ब्लॉक लंबा करता है और ख़ून में चरम स्तर घटाता है। धड़कन बढ़ाकर नस में इंजेक्शन का संकेत भी देता है।"
+      },
+      {
+        "en": "Adjuvants such as intrathecal fentanyl, dexmedetomidine and clonidine improve or prolong the block; follow your unit's doses.",
+        "hi": "Intrathecal fentanyl, dexmedetomidine और clonidine जैसी सहायक दवाएँ ब्लॉक सुधारती या लंबा करती हैं; अपने विभाग की खुराक मानिए।"
+      },
+      {
+        "en": "Prevent LAST: calculate the dose first, use lean body weight in obesity, aspirate, inject in small aliquots and use ultrasound.",
+        "hi": "LAST रोकिए: पहले खुराक निकालिए, मोटापे में लीन बॉडी वेट लीजिए, एस्पिरेट कीजिए, छोटे हिस्सों में इंजेक्ट कीजिए और अल्ट्रासाउंड लगाइए।"
+      },
+      {
+        "en": "Signs: perioral numbness, metallic taste, tinnitus, then seizures and arrhythmias. Stop injecting, call for help and give lipid early.",
+        "hi": "संकेत: होंठों के आसपास सुन्नपन, धातु जैसा स्वाद, कान में आवाज़, फिर दौरे और अनियमित धड़कन। इंजेक्शन रोकिए, मदद बुलाइए और जल्दी लिपिड दीजिए।"
+      }
+    ],
+    "analogy": {
+      "en": "A local anaesthetic is a cork in the nerve's sodium pipe. The dose limit is the size of the bottle: overfill it and the excess spills into the blood.",
+      "hi": "लोकल एनेस्थेटिक नस की सोडियम नली में कॉर्क है। खुराक सीमा बोतल का आकार है: ज़्यादा भरेंगे तो बाकी ख़ून में छलकेगा।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Doses of two local anaesthetics add up; they are not independent.",
+      "hi": "दो लोकल एनेस्थेटिक की खुराक जुड़ती हैं; वे अलग-अलग नहीं।"
+    },
+    {
+      "en": "Bupivacaine is the most cardiotoxic; resuscitation can take an hour or more.",
+      "hi": "Bupivacaine सबसे ज़्यादा हृदय-विषाक्त है; पुनर्जीवन में एक घंटा या ज़्यादा लग सकता है।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Calculate the maximum volume of 2% lignocaine, plain and with adrenaline, for a 50 kg patient. Check it with the dose tool.",
+      "hi": "50 kg के मरीज़ के लिए lignocaine (2%, सादा और adrenaline के साथ) की अधिकतम मात्रा निकालिए और डोज़ टूल से जाँचिए।"
+    },
+    {
+      "en": "Find the LAST kit with 20% lipid emulsion in your theatre complex.",
+      "hi": "अपने थिएटर परिसर में 20% लिपिड इमल्शन वाली LAST किट ढूँढिए।"
+    }
+  ],
+  "remember": {
+    "en": "Amide has two i's; potency is lipid solubility, onset is pKa, duration is protein binding. Calculate the maximum dose first; lipid 20% for LAST.",
+    "hi": "एमाइड में दो i; ताक़त वसा-घुलनशीलता, शुरुआत pKa, अवधि प्रोटीन बंधन। पहले अधिकतम खुराक निकालिए; LAST में 20% लिपिड।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which local anaesthetic is an ester?",
+        "hi": "कौन सा लोकल एनेस्थेटिक एस्टर है?"
+      },
+      "o": [
+        {
+          "en": "Bupivacaine",
+          "hi": "Bupivacaine"
+        },
+        {
+          "en": "Chloroprocaine",
+          "hi": "Chloroprocaine"
+        },
+        {
+          "en": "Ropivacaine",
+          "hi": "Ropivacaine"
+        },
+        {
+          "en": "Lignocaine",
+          "hi": "Lignocaine"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "Chloroprocaine has one i before -caine and is an ester. Amides have two i's.",
+        "hi": "Chloroprocaine में -caine से पहले एक i है और यह एस्टर है। एमाइड में दो i होते हैं।"
+      }
+    },
+    {
+      "q": {
+        "en": "What is the maximum dose of plain lignocaine in the kb protocol?",
+        "hi": "kb प्रोटोकॉल में सादे lignocaine की अधिकतम खुराक क्या है?"
+      },
+      "o": [
+        {
+          "en": "2 mg/kg, max 150 mg",
+          "hi": "2 mg/kg, अधिकतम 150 mg"
+        },
+        {
+          "en": "7 mg/kg, max 500 mg",
+          "hi": "7 mg/kg, अधिकतम 500 mg"
+        },
+        {
+          "en": "10 mg/kg, max 700 mg",
+          "hi": "10 mg/kg, अधिकतम 700 mg"
+        },
+        {
+          "en": "4.5 mg/kg, max 300 mg",
+          "hi": "4.5 mg/kg, अधिकतम 300 mg"
+        }
+      ],
+      "a": 3,
+      "why": {
+        "en": "Plain lignocaine 4.5 mg/kg (max 300 mg); with adrenaline 7 mg/kg (max 500 mg). UK labelling is lower at 3 mg/kg (max 200 mg).",
+        "hi": "सादा lignocaine 4.5 mg/kg (अधिकतम 300 mg); adrenaline के साथ 7 mg/kg (अधिकतम 500 mg)। UK लेबल कम है, 3 mg/kg (अधिकतम 200 mg)।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "local-regional",
+    "tool": "la-maxdose",
+    "sim": "last"
+  },
+  "glossary": [
+    "local-anaesthetic",
+    "last"
+  ],
+  "sources": [
+    "StewardMD clinical protocol kb/clinical-protocols/local-anaesthetic-systemic-toxicity.json (AAGBI, ASRA 2020): maximum doses, prevention and lipid emulsion.",
+    "Butterworth JF, Mackey DC, Wasnick JD. Morgan and Mikhail's Clinical Anesthesiology, 7th edition (2022), Chapter 16: Local anesthetics.",
+    "Gropper MA (ed). Miller's Anesthesia, 9th edition (2020), Chapter 29: Local anesthetics.",
+    "Ajay Yadav. A Short Textbook of Anaesthesia, 7th edition (Jaypee): local anaesthetics and regional anaesthesia."
+  ]
+}
