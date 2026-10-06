@@ -1,0 +1,268 @@
+{
+  "id": "asr8-cardiac-risk",
+  "unit": "asr8",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "ESC 2022 risk bands and the groups who should have ECG, BNP and troponin",
+      "Two flights of stairs as about 4 METs",
+      "RCRI three or more as high risk"
+    ]
+  },
+  "title": {
+    "en": "Cardiac risk before non-cardiac surgery",
+    "hi": "Non-cardiac surgery से पहले cardiac ख़तरा"
+  },
+  "idea": {
+    "en": "Combine the surgical risk, the patient's risk factors and functional capacity. Order a test only if its result will change the plan. Measure troponin in at-risk patients to catch silent injury.",
+    "hi": "सर्जरी का ख़तरा, रोगी के risk factor और functional capacity को जोड़ें। जाँच तभी करें जब उसका नतीजा योजना बदले। छिपी चोट पकड़ने के लिए जोखिम वाले रोगियों में troponin मापें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr8-cardiac-risk.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Three overlapping translucent circles in teal, amber and violet on the left, a white staircase rising to the right, and a red sample tube with a grey cap.",
+      "hi": "बाईं ओर teal, पीले और बैंगनी तीन एक-दूसरे पर चढ़े पारदर्शी घेरे, दाईं ओर ऊपर चढ़ती सफ़ेद सीढ़ी, और धूसर ढक्कन वाली लाल sample tube।"
+    },
+    "caption": {
+      "en": "Surgical risk, patient risk and functional capacity overlap; stairs and troponin complete the assessment.",
+      "hi": "सर्जरी का ख़तरा, रोगी का ख़तरा और functional capacity एक-दूसरे पर चढ़ते हैं; सीढ़ियाँ और troponin आकलन पूरा करते हैं।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.208,
+        "y": 0.367,
+        "label": {
+          "en": "Surgical risk",
+          "hi": "सर्जरी का ख़तरा"
+        },
+        "note": {
+          "en": "ESC grades 30-day cardiac risk as low (below 1%), intermediate (1 to 5%) or high (above 5%).",
+          "hi": "ESC 30 दिन के cardiac ख़तरे को low (1% से कम), intermediate (1 से 5%) या high (5% से ऊपर) बाँटता है।"
+        }
+      },
+      {
+        "x": 0.521,
+        "y": 0.367,
+        "label": {
+          "en": "Patient risk",
+          "hi": "रोगी का ख़तरा"
+        },
+        "note": {
+          "en": "RCRI factors, age 65 or more, and known cardiovascular disease.",
+          "hi": "RCRI factor, 65 वर्ष या अधिक आयु, और ज्ञात हृदय-वाहिका रोग।"
+        }
+      },
+      {
+        "x": 0.365,
+        "y": 0.817,
+        "label": {
+          "en": "Functional capacity",
+          "hi": "Functional capacity"
+        },
+        "note": {
+          "en": "Unable to climb two flights of stairs suggests capacity below 4 METs.",
+          "hi": "दो मंज़िल सीढ़ियाँ न चढ़ पाना 4 MET से कम क्षमता बताता है।"
+        }
+      },
+      {
+        "x": 0.781,
+        "y": 0.65,
+        "label": {
+          "en": "Two flights of stairs",
+          "hi": "दो मंज़िल सीढ़ियाँ"
+        },
+        "note": {
+          "en": "A simple bedside test that ESC 2022 uses to judge exercise capacity.",
+          "hi": "सरल bedside जाँच जिससे ESC 2022 व्यायाम क्षमता आँकता है।"
+        }
+      },
+      {
+        "x": 0.713,
+        "y": 0.25,
+        "label": {
+          "en": "Troponin",
+          "hi": "Troponin"
+        },
+        "note": {
+          "en": "In at-risk patients measure high-sensitivity troponin before surgery and at 24 and 48 hours after.",
+          "hi": "जोखिम वाले रोगियों में high-sensitivity troponin सर्जरी से पहले और बाद में 24 और 48 घंटे पर मापें।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Surgical risk: ESC 2022 grades the 30-day risk of cardiac death, MI or stroke. Low is below 1%, intermediate 1 to 5%, high above 5%. Aortic and major vascular surgery are high risk.",
+        "hi": "सर्जरी का ख़तरा: ESC 2022 cardiac मृत्यु, MI या stroke के 30 दिन के ख़तरे को low 1% से कम, intermediate 1 से 5%, high 5% से ऊपर बाँटता है। Aortic और बड़ी vascular सर्जरी high risk हैं।"
+      },
+      {
+        "en": "Patient risk: count the six [[rcri]] factors. Each adds risk; three or more marks a high-risk patient.",
+        "hi": "रोगी का ख़तरा: छह [[rcri]] factor गिनें। हर एक ख़तरा बढ़ाता है; तीन या अधिक high-risk रोगी बताते हैं।"
+      },
+      {
+        "en": "Functional capacity: ask about stairs. Being unable to climb two flights suggests below 4 [[mets]] and higher risk.",
+        "hi": "Functional capacity: सीढ़ियों के बारे में पूछें। दो मंज़िल न चढ़ पाना 4 [[mets]] से कम और अधिक ख़तरा बताता है।"
+      },
+      {
+        "en": "Before intermediate or high-risk surgery, take an ECG in patients with cardiovascular disease, risk factors or age 65 or more. Consider BNP or NT-proBNP.",
+        "hi": "ज्ञात हृदय-वाहिका रोग, risk factor या 65 वर्ष या अधिक आयु में intermediate या high-risk सर्जरी से पहले ECG लें और BNP या NT-proBNP पर विचार करें।"
+      },
+      {
+        "en": "In the same group measure high-sensitivity troponin before surgery and at 24 and 48 hours after. This detects [[pmi]].",
+        "hi": "इसी समूह में high-sensitivity troponin सर्जरी से पहले और बाद में 24 और 48 घंटे पर मापें। इससे [[pmi]] पकड़ी जाती है।"
+      },
+      {
+        "en": "Stress imaging is for high-risk surgery with poor functional capacity and high clinical risk, when the result would change management.",
+        "hi": "Stress imaging high-risk सर्जरी, कम functional capacity और ऊँचे clinical ख़तरे में है, जब नतीजा प्रबंधन बदले।"
+      },
+      {
+        "en": "Do not start beta-blockers routinely before surgery. Continue them in patients already taking them. Continue statins.",
+        "hi": "सर्जरी से पहले routine रूप से beta-blocker शुरू न करें। जो पहले से ले रहे हैं उनमें जारी रखें। Statin जारी रखें।"
+      }
+    ],
+    "analogy": {
+      "en": "Cardiac risk is like a weather forecast. Season (surgery), local climate (patient) and house strength (fitness) together set the warning.",
+      "hi": "Cardiac ख़तरा मौसम का पूर्वानुमान है: मौसम (सर्जरी), स्थानीय जलवायु (रोगी) और घर कितना मज़बूत है (फ़िटनेस) मिलकर चेतावनी तय करते हैं।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Breathless on one flight of stairs before major vascular surgery: high risk, think further testing.",
+      "hi": "बड़ी vascular सर्जरी से पहले एक मंज़िल पर साँस फूलना: high risk, आगे की जाँच सोचें।"
+    },
+    {
+      "en": "Troponin rise on day 1 with no chest pain: perioperative myocardial injury, needs cardiology review.",
+      "hi": "पहले दिन बिना सीने के दर्द के troponin बढ़ना: perioperative myocardial injury, cardiology समीक्षा चाहिए।"
+    },
+    {
+      "en": "Unexplained breathlessness or a new murmur: echo before elective surgery.",
+      "hi": "बिना कारण साँस फूलना या नया murmur: elective सर्जरी से पहले echo।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Ask about stairs and daily activity in every preoperative visit.",
+      "hi": "हर preoperative मुलाक़ात में सीढ़ियों और दैनिक गतिविधि के बारे में पूछें।"
+    },
+    {
+      "en": "Calculate RCRI and write it in the notes.",
+      "hi": "RCRI निकालें और notes में लिखें।"
+    },
+    {
+      "en": "Plan postoperative troponin for at-risk patients before surgery starts.",
+      "hi": "सर्जरी शुरू होने से पहले जोखिम वाले रोगियों के लिए postoperative troponin की योजना बनाएँ।"
+    }
+  ],
+  "remember": {
+    "en": "Surgery risk plus patient risk plus stairs. Test only if it changes the plan. Troponin at 24 and 48 hours.",
+    "hi": "सर्जरी का ख़तरा जोड़ रोगी का ख़तरा जोड़ सीढ़ियाँ। जाँच तभी जब योजना बदले। 24 और 48 घंटे पर troponin।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Insulin-treated diabetes, creatinine 2.4 mg/dL, booked for major intraperitoneal surgery. RCRI score?",
+        "hi": "Insulin वाला diabetes, creatinine 2.4 mg/dL, बड़ी intraperitoneal सर्जरी तय। RCRI score?"
+      },
+      "o": [
+        {
+          "en": "3",
+          "hi": "3"
+        },
+        {
+          "en": "1",
+          "hi": "1"
+        },
+        {
+          "en": "2",
+          "hi": "2"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Insulin use, creatinine above 2 mg/dL and intraperitoneal surgery each score 1.",
+        "hi": "Insulin, 2 mg/dL से ऊपर creatinine और intraperitoneal सर्जरी हर एक 1 अंक।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which bedside finding suggests poor functional capacity?",
+        "hi": "कौन सा bedside निष्कर्ष कम functional capacity बताता है?"
+      },
+      "o": [
+        {
+          "en": "Unable to climb two flights of stairs",
+          "hi": "दो मंज़िल सीढ़ियाँ न चढ़ पाना"
+        },
+        {
+          "en": "Walks to the bathroom alone",
+          "hi": "अकेले bathroom तक चलना"
+        },
+        {
+          "en": "Normal resting heart rate",
+          "hi": "आराम में सामान्य हृदय गति"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Two flights of stairs needs about 4 METs. Failure to manage it marks higher risk.",
+        "hi": "दो मंज़िल सीढ़ियों में लगभग 4 MET लगते हैं। न कर पाना अधिक ख़तरा बताता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "A patient on bisoprolol for angina is listed for hip replacement. Plan?",
+        "hi": "Angina के लिए bisoprolol लेने वाला रोगी hip replacement के लिए तय। योजना?"
+      },
+      "o": [
+        {
+          "en": "Continue bisoprolol",
+          "hi": "Bisoprolol जारी रखें"
+        },
+        {
+          "en": "Stop it 1 week before",
+          "hi": "1 सप्ताह पहले बंद करें"
+        },
+        {
+          "en": "Double the dose on the day",
+          "hi": "उस दिन खुराक दोगुनी करें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Continue beta-blockers already prescribed; stopping them causes rebound. Do not start them routinely.",
+        "hi": "पहले से चल रहे beta-blocker जारी रखें; बंद करने से rebound होता है। Routine रूप से शुरू न करें।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "preop",
+    "tool": "rcri"
+  },
+  "deeper": {
+    "note": "asr8-cardiac-risk",
+    "text": {
+      "en": "POISE showed that starting high-dose metoprolol on the day of surgery cut myocardial infarction but increased stroke and death. This is why routine new beta-blockade is avoided. Elective surgery after a recent coronary stent needs a joint plan with cardiology on antiplatelet therapy.",
+      "hi": "POISE ने दिखाया कि सर्जरी के दिन high-dose metoprolol शुरू करने से myocardial infarction घटा पर stroke और मृत्यु बढ़ी। इसीलिए routine नया beta-blockade नहीं दिया जाता। हाल के coronary stent के बाद elective सर्जरी में antiplatelet पर cardiology के साथ संयुक्त योजना चाहिए।"
+    }
+  },
+  "glossary": [
+    "rcri",
+    "mets",
+    "pmi"
+  ],
+  "sources": [
+    "Halvorsen S, Mehilli J, Cassese S, et al. 2022 ESC Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery. Eur Heart J 2022;43:3826-3924.",
+    "Lee TH, Marcantonio ER, Mangione CM, et al. Derivation and prospective validation of a simple index for prediction of cardiac risk of major noncardiac surgery. Circulation 1999;100:1043-1049.",
+    "POISE Study Group. Effects of extended-release metoprolol succinate in patients undergoing non-cardiac surgery (POISE trial). Lancet 2008;371:1839-1847."
+  ],
+  "competencies": [
+    "AS3.1",
+    "AS3.4"
+  ]
+}

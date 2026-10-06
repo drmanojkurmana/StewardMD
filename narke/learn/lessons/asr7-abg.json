@@ -1,0 +1,261 @@
+{
+  "id": "asr7-abg",
+  "unit": "asr7",
+  "level": "resident",
+  "minutes": 7,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Anion gap normal range 8 to 12 mmol/L (analyser dependent)",
+      "Albumin correction of 2.5 per g/dL"
+    ]
+  },
+  "title": {
+    "en": "Arterial blood gas: a five-step reading",
+    "hi": "Arterial blood gas: पाँच कदम में पढ़ना"
+  },
+  "idea": {
+    "en": "Read the pH first, then find the primary process, check the compensation, calculate the anion gap and finally judge oxygenation.",
+    "hi": "पहले pH पढ़ें, फिर मुख्य प्रक्रिया पहचानें, compensation जाँचें, anion gap निकालें और अंत में oxygenation आँकें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr7-abg.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A horizontal bar red on the left, green in the middle and blue on the right with a white pointer over the red part; two columns, one pink and one stacked blue, teal and amber; and a blue air sac above a red capillary with a white arrow between them.",
+      "hi": "एक आड़ी पट्टी, बाईं ओर लाल, बीच में हरी, दाईं ओर नीली, लाल भाग पर सफ़ेद संकेतक; दो कॉलम, एक गुलाबी और एक नीला, teal और पीला परतों में; और लाल capillary के ऊपर नीली air sac, बीच में सफ़ेद तीर।"
+    },
+    "caption": {
+      "en": "The pH scale, the ion columns that give the anion gap, and oxygen moving from alveolus to blood.",
+      "hi": "pH पैमाना, anion gap बताने वाले ion कॉलम, और alveolus से रक्त में जाती ऑक्सीजन।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.25,
+        "y": 0.207,
+        "label": {
+          "en": "Acidaemia",
+          "hi": "Acidaemia"
+        },
+        "note": {
+          "en": "pH below 7.35. Above 7.45 is alkalaemia.",
+          "hi": "pH 7.35 से कम। 7.45 से ऊपर alkalaemia है।"
+        }
+      },
+      {
+        "x": 0.5,
+        "y": 0.207,
+        "label": {
+          "en": "Normal range",
+          "hi": "सामान्य दायरा"
+        },
+        "note": {
+          "en": "pH 7.35 to 7.45, PaCO2 35 to 45 mmHg, bicarbonate 22 to 26 mmol/L.",
+          "hi": "pH 7.35 से 7.45, PaCO2 35 से 45 mmHg, bicarbonate 22 से 26 mmol/L।"
+        }
+      },
+      {
+        "x": 0.302,
+        "y": 0.633,
+        "label": {
+          "en": "Sodium",
+          "hi": "Sodium"
+        },
+        "note": {
+          "en": "The main measured cation. Chloride, bicarbonate and the gap balance it.",
+          "hi": "मुख्य मापा cation। Chloride, bicarbonate और gap इसे संतुलित करते हैं।"
+        }
+      },
+      {
+        "x": 0.531,
+        "y": 0.4,
+        "label": {
+          "en": "Anion gap",
+          "hi": "Anion gap"
+        },
+        "note": {
+          "en": "Na minus (Cl plus HCO3), about 8 to 12 mmol/L on many analysers. Correct for low albumin.",
+          "hi": "Na घटा (Cl जोड़ HCO3), कई analyser पर लगभग 8 से 12 mmol/L। कम albumin के लिए सुधार करें।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.55,
+        "label": {
+          "en": "Alveolus",
+          "hi": "Alveolus"
+        },
+        "note": {
+          "en": "Alveolar gas equation gives PAO2; the A-a gradient shows how well oxygen crosses.",
+          "hi": "Alveolar gas equation से PAO2 मिलता है; A-a gradient बताता है ऑक्सीजन कितनी अच्छी तरह पार होती है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Step 1, pH: below 7.35 is acidaemia, above 7.45 alkalaemia.",
+        "hi": "कदम 1, pH: 7.35 से कम acidaemia, 7.45 से ऊपर alkalaemia।"
+      },
+      {
+        "en": "Step 2, primary process: see whether PaCO2 or bicarbonate explains the pH. A high PaCO2 with low pH is respiratory acidosis.",
+        "hi": "कदम 2, मुख्य प्रक्रिया: देखें PaCO2 या bicarbonate में से कौन pH समझाता है। कम pH के साथ ऊँचा PaCO2 respiratory acidosis है।"
+      },
+      {
+        "en": "Step 3, compensation: in metabolic acidosis the expected PaCO2 is 1.5 x HCO3 + 8, plus or minus 2 (Winter's formula). A higher PaCO2 means added respiratory acidosis.",
+        "hi": "कदम 3, compensation: metabolic acidosis में अपेक्षित PaCO2 = 1.5 x HCO3 + 8, जोड़-घटा 2 (Winter's formula)। ज़्यादा PaCO2 का अर्थ है साथ में respiratory acidosis।"
+      },
+      {
+        "en": "Step 4, [[anion-gap]]: Na minus (Cl plus HCO3). Add about 2.5 for each 1 g/dL that albumin is below 4 g/dL.",
+        "hi": "कदम 4, [[anion-gap]]: Na घटा (Cl जोड़ HCO3)। Albumin 4 g/dL से जितने g/dL कम हो, हर 1 के लिए लगभग 2.5 जोड़ें।"
+      },
+      {
+        "en": "High gap: lactate, ketones, renal failure, and toxins such as methanol, ethylene glycol or salicylate. Normal gap: diarrhoea, renal tubular acidosis or large volumes of 0.9% saline.",
+        "hi": "ऊँचा gap: lactate, ketones, renal failure, और methanol, ethylene glycol या salicylate जैसे toxin। सामान्य gap: diarrhoea, renal tubular acidosis या बड़ी मात्रा में 0.9% saline।"
+      },
+      {
+        "en": "In a high-gap acidosis, compare the rise in gap with the fall in bicarbonate. A much smaller rise suggests a mixed normal-gap acidosis; a much larger one suggests metabolic alkalosis too.",
+        "hi": "ऊँचे gap वाले acidosis में gap की बढ़त की तुलना bicarbonate की गिरावट से करें। बहुत कम बढ़त मिश्रित normal-gap acidosis बताती है; बहुत ज़्यादा बढ़त साथ में metabolic alkalosis बताती है।"
+      },
+      {
+        "en": "Step 5, oxygenation: work out the PaO2/FiO2 ratio and the A-a gradient. PAO2 = FiO2 x (barometric pressure minus 47) minus PaCO2/0.8.",
+        "hi": "कदम 5, oxygenation: PaO2/FiO2 ratio और A-a gradient निकालें। PAO2 = FiO2 x (वायुमंडलीय दबाव घटा 47) घटा PaCO2/0.8।"
+      }
+    ],
+    "analogy": {
+      "en": "Reading a gas is like reading a bank statement: check the balance, find the big transaction, then look for the hidden fees.",
+      "hi": "Gas पढ़ना bank statement पढ़ने जैसा है: बैलेंस देखें, बड़ा लेन-देन खोजें, फिर छिपे शुल्क देखें।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Normal pH with abnormal PaCO2 and bicarbonate: think of two opposing disorders.",
+      "hi": "असामान्य PaCO2 और bicarbonate के साथ सामान्य pH: दो विपरीत विकार सोचें।"
+    },
+    {
+      "en": "High-gap acidosis with a normal lactate in a confused labourer: think of a toxic alcohol and check osmolar gap.",
+      "hi": "भ्रमित मज़दूर में सामान्य lactate के साथ high-gap acidosis: toxic alcohol सोचें और osmolar gap जाँचें।"
+    },
+    {
+      "en": "Hyperchloraemic acidosis after several litres of saline: change to a balanced crystalloid.",
+      "hi": "कई लीटर saline के बाद hyperchloraemic acidosis: balanced crystalloid पर बदलें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write the five steps beside every gas you report.",
+      "hi": "हर रिपोर्ट किए gas के पास पाँचों कदम लिखें।"
+    },
+    {
+      "en": "Send sodium, chloride and albumin with the gas so the gap can be worked out.",
+      "hi": "Gas के साथ sodium, chloride और albumin भेजें ताकि gap निकल सके।"
+    },
+    {
+      "en": "Record the FiO2 with every sample.",
+      "hi": "हर sample के साथ FiO2 दर्ज करें।"
+    }
+  ],
+  "remember": {
+    "en": "pH, primary, compensation (Winter's 1.5 x HCO3 + 8), gap (Na minus Cl plus HCO3), oxygenation.",
+    "hi": "pH, मुख्य, compensation (Winter's 1.5 x HCO3 + 8), gap (Na घटा Cl जोड़ HCO3), oxygenation।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "pH 7.20, PaCO2 23 mmHg, HCO3 10 mmol/L. Interpretation?",
+        "hi": "pH 7.20, PaCO2 23 mmHg, HCO3 10 mmol/L। व्याख्या?"
+      },
+      "o": [
+        {
+          "en": "Metabolic acidosis with appropriate respiratory compensation",
+          "hi": "उचित respiratory compensation के साथ metabolic acidosis"
+        },
+        {
+          "en": "Metabolic acidosis with added respiratory acidosis",
+          "hi": "साथ में respiratory acidosis वाला metabolic acidosis"
+        },
+        {
+          "en": "Primary respiratory alkalosis",
+          "hi": "Primary respiratory alkalosis"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Expected PaCO2 is 1.5 x 10 + 8 = 23, plus or minus 2. The measured 23 fits.",
+        "hi": "अपेक्षित PaCO2 = 1.5 x 10 + 8 = 23, जोड़-घटा 2। मापा गया 23 मेल खाता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Na 140, Cl 100, HCO3 10 mmol/L, albumin normal. Anion gap?",
+        "hi": "Na 140, Cl 100, HCO3 10 mmol/L, albumin सामान्य। Anion gap?"
+      },
+      "o": [
+        {
+          "en": "30, raised",
+          "hi": "30, बढ़ा हुआ"
+        },
+        {
+          "en": "10, normal",
+          "hi": "10, सामान्य"
+        },
+        {
+          "en": "50, raised",
+          "hi": "50, बढ़ा हुआ"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "140 minus 110 is 30. Look for lactate, ketones, renal failure or a toxin.",
+        "hi": "140 घटा 110 बराबर 30। Lactate, ketones, renal failure या toxin खोजें।"
+      }
+    },
+    {
+      "q": {
+        "en": "PaO2 80 mmHg on FiO2 0.4. PaO2/FiO2 ratio?",
+        "hi": "FiO2 0.4 पर PaO2 80 mmHg। PaO2/FiO2 ratio?"
+      },
+      "o": [
+        {
+          "en": "200",
+          "hi": "200"
+        },
+        {
+          "en": "320",
+          "hi": "320"
+        },
+        {
+          "en": "32",
+          "hi": "32"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "80 divided by 0.4 is 200. In ARDS on PEEP this is the mild to moderate border.",
+        "hi": "80 भाग 0.4 बराबर 200। PEEP पर ARDS में यह mild और moderate की सीमा है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "basic-science",
+    "tool": "pf-ratio"
+  },
+  "deeper": {
+    "note": "asr7-abg",
+    "text": {
+      "en": "The Stewart approach explains pH through the strong ion difference, total weak acids (mainly albumin) and PaCO2. It shows why saline causes acidosis: it narrows the strong ion difference. The bicarbonate method with a corrected anion gap gives the same answer at the bedside in most cases.",
+      "hi": "Stewart approach pH को strong ion difference, कुल weak acids (मुख्यतः albumin) और PaCO2 से समझाता है। यह दिखाता है कि saline acidosis क्यों करता है: यह strong ion difference घटाता है। ज़्यादातर मामलों में corrected anion gap वाला bicarbonate तरीका bedside पर यही उत्तर देता है।"
+    }
+  },
+  "glossary": [
+    "anion-gap",
+    "pf-ratio"
+  ],
+  "sources": [
+    "Berend K, de Vries APJ, Gans ROB. Physiological approach to assessment of acid-base disturbances. N Engl J Med 2014;371:1434-1445.",
+    "Kraut JA, Madias NE. Serum anion gap: its uses and limitations in clinical medicine. Clin J Am Soc Nephrol 2007;2:162-174."
+  ]
+}

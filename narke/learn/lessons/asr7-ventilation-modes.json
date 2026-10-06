@@ -1,0 +1,258 @@
+{
+  "id": "asr7-ventilation-modes",
+  "unit": "asr7",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Pressure support cycle-off default of 25% of peak flow"
+    ]
+  },
+  "title": {
+    "en": "Ventilation modes: what you set and what you get",
+    "hi": "Ventilation modes: आप क्या set करते हैं और क्या मिलता है"
+  },
+  "idea": {
+    "en": "In volume control you set the volume and pressure follows the lung. In pressure control you set the pressure and volume follows the lung. In pressure support the patient sets the rate.",
+    "hi": "Volume control में आप volume set करते हैं और दबाव फेफड़े के अनुसार चलता है। Pressure control में आप दबाव set करते हैं और volume फेफड़े के अनुसार। Pressure support में रोगी rate तय करता है।"
+  },
+  "see": {
+    "diagram": "diagrams/asr7-modes.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Three columns of waveforms, each with an amber pressure trace above a blue flow trace. Left: pressure rises to a peak then drops to a lower flat step, with square flow. Middle: square pressure with flow that starts high and falls away. Right: a small dip before a square pressure, with falling flow that stops early.",
+      "hi": "Waveform के तीन कॉलम, हर एक में नीली flow रेखा के ऊपर पीली pressure रेखा। बायाँ: दबाव peak तक चढ़कर नीचे सपाट सीढ़ी पर, square flow के साथ। बीच: square दबाव, flow ऊँचा शुरू होकर घटता। दायाँ: square दबाव से पहले छोटा गड्ढा, घटता flow जो जल्दी रुकता है।"
+    },
+    "caption": {
+      "en": "Pressure and flow over time in volume control, pressure control and pressure support.",
+      "hi": "Volume control, pressure control और pressure support में समय के साथ दबाव और flow।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.171,
+        "y": 0.22,
+        "label": {
+          "en": "Peak and plateau",
+          "hi": "Peak और plateau"
+        },
+        "note": {
+          "en": "Peak includes airway resistance. The lower step during a hold is the plateau, which reflects compliance.",
+          "hi": "Peak में airway resistance शामिल है। Hold के दौरान नीची सीढ़ी plateau है, जो compliance दिखाती है।"
+        }
+      },
+      {
+        "x": 0.146,
+        "y": 0.6,
+        "label": {
+          "en": "Square flow",
+          "hi": "Square flow"
+        },
+        "note": {
+          "en": "In volume control the ventilator delivers a set flow, so volume is guaranteed.",
+          "hi": "Volume control में ventilator तय flow देता है, इसलिए volume निश्चित है।"
+        }
+      },
+      {
+        "x": 0.458,
+        "y": 0.687,
+        "label": {
+          "en": "Decelerating flow",
+          "hi": "Decelerating flow"
+        },
+        "note": {
+          "en": "In pressure control flow falls as the lung fills. Stiffer lungs get less volume.",
+          "hi": "Pressure control में फेफड़ा भरने के साथ flow घटता है। सख़्त फेफड़े को कम volume मिलता है।"
+        }
+      },
+      {
+        "x": 0.71,
+        "y": 0.46,
+        "label": {
+          "en": "Patient trigger",
+          "hi": "Patient trigger"
+        },
+        "note": {
+          "en": "A small negative dip shows the patient's effort starting the breath.",
+          "hi": "छोटा negative गड्ढा दिखाता है कि रोगी के प्रयास से साँस शुरू हुई।"
+        }
+      },
+      {
+        "x": 0.804,
+        "y": 0.693,
+        "label": {
+          "en": "Cycle off",
+          "hi": "Cycle off"
+        },
+        "note": {
+          "en": "A pressure support breath ends when flow falls to a set fraction of peak, often 25%.",
+          "hi": "Pressure support की साँस तब ख़त्म होती है जब flow peak के तय हिस्से तक गिरे, अक्सर 25%।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Volume control: set tidal volume, rate, flow and PEEP. Airway pressure rises if compliance falls or resistance rises.",
+        "hi": "Volume control: tidal volume, rate, flow और PEEP set करें। Compliance घटे या resistance बढ़े तो airway दबाव बढ़ता है।"
+      },
+      {
+        "en": "Peak pressure reflects resistance plus compliance. [[plateau-pressure]], measured with an inspiratory hold, reflects compliance alone.",
+        "hi": "Peak दबाव resistance और compliance दोनों दिखाता है। Inspiratory hold से मापा [[plateau-pressure]] केवल compliance दिखाता है।"
+      },
+      {
+        "en": "Pressure control: set inspiratory pressure, inspiratory time and rate. Volume falls silently if the lungs stiffen, so set volume alarms.",
+        "hi": "Pressure control: inspiratory दबाव, inspiratory समय और rate set करें। फेफड़े सख़्त हों तो volume चुपचाप घटता है, इसलिए volume alarm लगाएँ।"
+      },
+      {
+        "en": "Pressure support: the patient triggers every breath and the ventilator adds a set pressure. There is no backup rate unless apnoea ventilation is set.",
+        "hi": "Pressure support: हर साँस रोगी शुरू करता है और ventilator तय दबाव जोड़ता है। Apnoea ventilation set न हो तो कोई backup rate नहीं।"
+      },
+      {
+        "en": "SIMV mixes set mandatory breaths with spontaneous breaths. Pressure-regulated volume control adjusts pressure breath by breath to reach a target volume.",
+        "hi": "SIMV तय mandatory साँसों को spontaneous साँसों से मिलाता है। Pressure-regulated volume control लक्ष्य volume पाने को हर साँस पर दबाव बदलता है।"
+      },
+      {
+        "en": "High peak with normal plateau: think resistance, such as secretions, bronchospasm or a kinked tube. High peak and high plateau: think stiff lung, pneumothorax or a tight abdomen.",
+        "hi": "ऊँचा peak और सामान्य plateau: resistance सोचें, जैसे secretions, bronchospasm या मुड़ी tube। ऊँचा peak और ऊँचा plateau: सख़्त फेफड़ा, pneumothorax या कसा पेट सोचें।"
+      }
+    ],
+    "analogy": {
+      "en": "Volume control is ordering a fixed amount of water whatever the pipe. Pressure control is setting the tap pressure and accepting what comes out.",
+      "hi": "Volume control पाइप जैसा भी हो, तय मात्रा में पानी माँगना है। Pressure control नल का दबाव तय करके जो निकले उसे स्वीकार करना है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Peak pressure jumps from 25 to 40 with the plateau unchanged: suction the tube and look for bronchospasm.",
+      "hi": "Plateau वही रहते peak दबाव 25 से 40 हो जाए: tube suction करें और bronchospasm देखें।"
+    },
+    {
+      "en": "Falling tidal volume in pressure control: the lung or chest has become stiffer, or there is a leak.",
+      "hi": "Pressure control में घटता tidal volume: फेफड़ा या छाती सख़्त हुई है, या leak है।"
+    },
+    {
+      "en": "Flow does not return to zero before the next breath: gas trapping and intrinsic PEEP.",
+      "hi": "अगली साँस से पहले flow शून्य पर नहीं लौटता: gas trapping और intrinsic PEEP।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Set alarms on the variable you do not control.",
+      "hi": "जिस variable को आप नियंत्रित नहीं करते, उस पर alarm लगाएँ।"
+    },
+    {
+      "en": "Do an inspiratory hold to measure plateau after each change.",
+      "hi": "हर बदलाव के बाद plateau मापने के लिए inspiratory hold करें।"
+    },
+    {
+      "en": "Look at the waveforms for asynchrony, not only at the numbers.",
+      "hi": "केवल संख्याएँ नहीं, asynchrony के लिए waveform भी देखें।"
+    }
+  ],
+  "remember": {
+    "en": "Volume control: volume set, pressure varies. Pressure control: pressure set, volume varies. Peak minus plateau means resistance.",
+    "hi": "Volume control: volume तय, दबाव बदलता। Pressure control: दबाव तय, volume बदलता। Peak घटा plateau यानी resistance।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Volume control. Peak 38, plateau 18 cmH2O. Most likely cause?",
+        "hi": "Volume control। Peak 38, plateau 18 cmH2O। सबसे संभावित कारण?"
+      },
+      "o": [
+        {
+          "en": "Secretions or bronchospasm",
+          "hi": "Secretions या bronchospasm"
+        },
+        {
+          "en": "ARDS",
+          "hi": "ARDS"
+        },
+        {
+          "en": "Pneumothorax",
+          "hi": "Pneumothorax"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "A big gap between peak and plateau means high airway resistance. Compliance problems raise both.",
+        "hi": "Peak और plateau के बीच बड़ा अंतर ऊँचा airway resistance बताता है। Compliance की समस्या दोनों बढ़ाती है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Pressure control. Compliance falls as pulmonary oedema develops. What happens?",
+        "hi": "Pressure control। Pulmonary oedema से compliance घटती है। क्या होगा?"
+      },
+      "o": [
+        {
+          "en": "Tidal volume falls",
+          "hi": "Tidal volume घटेगा"
+        },
+        {
+          "en": "Peak pressure rises",
+          "hi": "Peak दबाव बढ़ेगा"
+        },
+        {
+          "en": "Nothing changes",
+          "hi": "कुछ नहीं बदलेगा"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Pressure is fixed, so a stiffer lung takes in less volume. Volume alarms catch this.",
+        "hi": "दबाव तय है, इसलिए सख़्त फेफड़ा कम volume लेता है। Volume alarm इसे पकड़ता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What ends a pressure support breath?",
+        "hi": "Pressure support की साँस किससे ख़त्म होती है?"
+      },
+      "o": [
+        {
+          "en": "Flow falling to a set fraction of peak",
+          "hi": "Flow का peak के तय हिस्से तक गिरना"
+        },
+        {
+          "en": "A set inspiratory time",
+          "hi": "तय inspiratory समय"
+        },
+        {
+          "en": "A set tidal volume",
+          "hi": "तय tidal volume"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Pressure support is flow-cycled. Many ventilators default to 25% of peak flow.",
+        "hi": "Pressure support flow-cycled है। कई ventilator का default peak flow का 25% है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "explorer": "ventilator"
+  },
+  "deeper": {
+    "note": "asr7-ventilation-modes",
+    "text": {
+      "en": "Asynchrony is common and harmful. Ineffective triggering often means intrinsic PEEP; double triggering means the set breath is too short or small for the patient's demand. Fix the setting before adding sedation.",
+      "hi": "Asynchrony आम और हानिकारक है। Ineffective triggering अक्सर intrinsic PEEP दिखाता है; double triggering का अर्थ है तय साँस रोगी की ज़रूरत से छोटी है। Sedation बढ़ाने से पहले setting ठीक करें।"
+    }
+  },
+  "glossary": [
+    "plateau-pressure"
+  ],
+  "sources": [
+    "Tobin MJ, ed. Principles and Practice of Mechanical Ventilation, 3rd edition. McGraw Hill 2013.",
+    "Gropper MA, ed. Miller's Anesthesia, 9th edition. Elsevier 2020: respiratory care and mechanical ventilation."
+  ],
+  "competencies": [
+    "AS7.4"
+  ]
+}

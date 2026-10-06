@@ -1,0 +1,264 @@
+{
+  "id": "asr8-anticoagulants",
+  "unit": "asr8",
+  "level": "resident",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "DOAC omission days by bleeding risk and dabigatran renal adjustment",
+      "ASRA neuraxial intervals (LMWH 12/24 h, DOAC 72 h, dabigatran 120 h)",
+      "P2Y12 stop intervals"
+    ]
+  },
+  "title": {
+    "en": "Anticoagulants and antiplatelets around surgery and blocks",
+    "hi": "सर्जरी और block के आसपास anticoagulant और antiplatelet"
+  },
+  "idea": {
+    "en": "Weigh clot risk against bleeding risk. Stop warfarin 5 days before, DOACs 1 to 2 days by bleeding risk, bridge only the highest-risk patients, and respect neuraxial intervals.",
+    "hi": "थक्के के ख़तरे को रक्तस्राव के ख़तरे से तौलें। Warfarin 5 दिन पहले, DOAC रक्तस्राव ख़तरे के अनुसार 1 से 2 दिन पहले बंद करें, केवल सबसे ऊँचे ख़तरे वालों में bridge करें, और neuraxial अंतराल का पालन करें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr8-anticoag.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A timeline with nine ticks and a red diamond at the sixth tick. Above it a long blue bar starts at the first tick and a shorter violet bar starts at the third, both ending at the diamond. A green dot sits two ticks after the diamond. Below, three grey vertebrae with a white needle angled between them.",
+      "hi": "नौ निशानों वाली समय-रेखा और छठे निशान पर लाल हीरा। ऊपर लंबी नीली पट्टी पहले निशान से और छोटी बैंगनी पट्टी तीसरे से शुरू होकर हीरे पर ख़त्म। हीरे के दो निशान बाद हरा बिंदु। नीचे तीन धूसर vertebrae और उनके बीच तिरछी सफ़ेद सुई।"
+    },
+    "caption": {
+      "en": "Days 5 before to 3 after surgery: warfarin and DOAC pauses, the day of surgery, restart, and a neuraxial needle.",
+      "hi": "सर्जरी से 5 दिन पहले से 3 दिन बाद तक: warfarin और DOAC का विराम, सर्जरी का दिन, फिर शुरू करना, और neuraxial सुई।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.333,
+        "y": 0.3,
+        "label": {
+          "en": "Warfarin pause",
+          "hi": "Warfarin विराम"
+        },
+        "note": {
+          "en": "Stop 5 days before. Check INR the day before; if above 1.5 many centres give oral vitamin K 1 to 2 mg.",
+          "hi": "5 दिन पहले बंद करें। एक दिन पहले INR जाँचें; 1.5 से ऊपर हो तो कई centre मुँह से vitamin K 1 से 2 mg देते हैं।"
+        }
+      },
+      {
+        "x": 0.444,
+        "y": 0.2,
+        "label": {
+          "en": "DOAC pause",
+          "hi": "DOAC विराम"
+        },
+        "note": {
+          "en": "Apixaban or rivaroxaban before high bleeding-risk surgery: last dose 3 days before (2 days off).",
+          "hi": "High bleeding-risk सर्जरी से पहले apixaban या rivaroxaban: आख़िरी खुराक 3 दिन पहले (2 दिन बंद)।"
+        }
+      },
+      {
+        "x": 0.608,
+        "y": 0.5,
+        "label": {
+          "en": "Day of surgery",
+          "hi": "सर्जरी का दिन"
+        },
+        "note": {
+          "en": "No bridging for AF or for DOACs. Bridge only the highest thrombotic risk.",
+          "hi": "AF या DOAC में bridging नहीं। केवल सबसे ऊँचे thrombotic ख़तरे में bridge।"
+        }
+      },
+      {
+        "x": 0.827,
+        "y": 0.5,
+        "label": {
+          "en": "Restart",
+          "hi": "फिर शुरू"
+        },
+        "note": {
+          "en": "Full dose about 24 hours after low or moderate bleeding-risk surgery, 48 to 72 hours after high-risk surgery.",
+          "hi": "Low या moderate bleeding-risk सर्जरी के लगभग 24 घंटे बाद, high-risk सर्जरी के 48 से 72 घंटे बाद पूरी खुराक।"
+        }
+      },
+      {
+        "x": 0.625,
+        "y": 0.853,
+        "label": {
+          "en": "Neuraxial needle",
+          "hi": "Neuraxial सुई"
+        },
+        "note": {
+          "en": "Prophylactic LMWH 12 hours, therapeutic 24 hours before puncture or catheter removal.",
+          "hi": "Puncture या catheter निकालने से पहले prophylactic LMWH 12 घंटे, therapeutic 24 घंटे।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "First record the drug, dose, indication, last dose, creatinine clearance and platelet count. Then classify bleeding and clot risk.",
+        "hi": "पहले दवा, खुराक, कारण, आख़िरी खुराक, creatinine clearance और platelet count लिखें। फिर रक्तस्राव और थक्के का ख़तरा तय करें।"
+      },
+      {
+        "en": "Warfarin: stop 5 days before. Resume the usual dose the evening of surgery or the next day once haemostasis is secure.",
+        "hi": "Warfarin: 5 दिन पहले बंद करें। Haemostasis सुरक्षित होने पर सर्जरी की शाम या अगले दिन सामान्य खुराक फिर शुरू करें।"
+      },
+      {
+        "en": "CHEST 2022 advises against [[bridging]] in AF. Bridge only the highest-risk patients, such as a mechanical mitral valve or stroke within 3 months, with specialist input.",
+        "hi": "CHEST 2022 AF में [[bridging]] के विरुद्ध है। केवल सबसे ऊँचे ख़तरे वालों में, जैसे mechanical mitral valve या 3 महीने में stroke, विशेषज्ञ सलाह से bridge करें।"
+      },
+      {
+        "en": "Apixaban, rivaroxaban, edoxaban: omit 1 day before low or moderate bleeding-risk surgery and 2 days before high-risk surgery. Dabigatran needs longer when creatinine clearance is below 50.",
+        "hi": "Apixaban, rivaroxaban, edoxaban: low या moderate bleeding-risk सर्जरी से 1 दिन पहले और high-risk सर्जरी से 2 दिन पहले छोड़ें। Creatinine clearance 50 से कम हो तो dabigatran को ज़्यादा समय चाहिए।"
+      },
+      {
+        "en": "Continue aspirin for most surgery. If stopping a P2Y12 inhibitor: clopidogrel 5 days, ticagrelor 3 to 5 days, prasugrel 7 days.",
+        "hi": "ज़्यादातर सर्जरी में aspirin जारी रखें। P2Y12 inhibitor बंद करना हो तो: clopidogrel 5 दिन, ticagrelor 3 से 5 दिन, prasugrel 7 दिन।"
+      },
+      {
+        "en": "Neuraxial blocks (ASRA): LMWH 12 hours after a prophylactic dose and 24 hours after a therapeutic dose. Rivaroxaban, apixaban and edoxaban 72 hours; dabigatran 120 hours.",
+        "hi": "Neuraxial block (ASRA): prophylactic खुराक के 12 घंटे और therapeutic खुराक के 24 घंटे बाद LMWH। Rivaroxaban, apixaban और edoxaban 72 घंटे; dabigatran 120 घंटे।"
+      },
+      {
+        "en": "Never stop aspirin in a patient with a recent coronary stent without cardiology advice.",
+        "hi": "हाल के coronary stent वाले रोगी में cardiology सलाह के बिना aspirin कभी बंद न करें।"
+      }
+    ],
+    "analogy": {
+      "en": "Stopping an anticoagulant is like closing a dam for repairs. Close it in time to work safely, but not so long that clots flood in.",
+      "hi": "Anticoagulant रोकना मरम्मत के लिए बाँध बंद करने जैसा है: इतनी जल्दी बंद करें कि काम सुरक्षित हो, और इतनी देर नहीं कि खेत थक्कों से भर जाएँ।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Patient on dabigatran with creatinine clearance 35: the usual 1 to 2 day pause is too short.",
+      "hi": "Creatinine clearance 35 वाला dabigatran रोगी: सामान्य 1 से 2 दिन का विराम बहुत छोटा है।"
+    },
+    {
+      "en": "Spinal planned on the morning after a therapeutic enoxaparin dose last night: too soon, wait 24 hours.",
+      "hi": "कल रात therapeutic enoxaparin के बाद सुबह spinal तय: बहुत जल्दी, 24 घंटे रुकें।"
+    },
+    {
+      "en": "Drug-eluting stent 2 months ago and elective surgery booked: defer and discuss with cardiology.",
+      "hi": "2 महीने पहले drug-eluting stent और elective सर्जरी तय: टालें और cardiology से चर्चा करें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Write the last dose date and time of every antithrombotic in the preoperative note.",
+      "hi": "Preoperative note में हर antithrombotic की आख़िरी खुराक की तारीख़ और समय लिखें।"
+    },
+    {
+      "en": "Calculate creatinine clearance before planning a DOAC pause.",
+      "hi": "DOAC विराम की योजना से पहले creatinine clearance निकालें।"
+    },
+    {
+      "en": "Agree catheter removal and the next anticoagulant dose with the ward team.",
+      "hi": "Catheter निकालने और अगली anticoagulant खुराक को ward टीम के साथ तय करें।"
+    }
+  ],
+  "remember": {
+    "en": "Warfarin 5 days. DOAC 1 or 2 days. No bridging for AF. LMWH 12 or 24 hours and DOAC 72 hours before a neuraxial block.",
+    "hi": "Warfarin 5 दिन। DOAC 1 या 2 दिन। AF में bridging नहीं। Neuraxial block से पहले LMWH 12 या 24 घंटे और DOAC 72 घंटे।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Apixaban, normal renal function, major cancer surgery. Last dose?",
+        "hi": "Apixaban, सामान्य गुर्दा, बड़ी cancer सर्जरी। आख़िरी खुराक?"
+      },
+      "o": [
+        {
+          "en": "3 days before surgery",
+          "hi": "सर्जरी से 3 दिन पहले"
+        },
+        {
+          "en": "The night before",
+          "hi": "पिछली रात"
+        },
+        {
+          "en": "10 days before",
+          "hi": "10 दिन पहले"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "High bleeding-risk surgery needs 2 full days off, so the last dose is 3 days before.",
+        "hi": "High bleeding-risk सर्जरी में 2 पूरे दिन बंद, इसलिए आख़िरी खुराक 3 दिन पहले।"
+      }
+    },
+    {
+      "q": {
+        "en": "Prophylactic enoxaparin given at 8 pm. Earliest spinal next day?",
+        "hi": "Prophylactic enoxaparin रात 8 बजे दिया। अगले दिन सबसे जल्दी spinal?"
+      },
+      "o": [
+        {
+          "en": "8 am",
+          "hi": "सुबह 8 बजे"
+        },
+        {
+          "en": "2 am",
+          "hi": "रात 2 बजे"
+        },
+        {
+          "en": "8 pm",
+          "hi": "रात 8 बजे"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "ASRA asks for at least 12 hours after a prophylactic dose.",
+        "hi": "ASRA prophylactic खुराक के बाद कम से कम 12 घंटे माँगता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Warfarin for atrial fibrillation, elective hernia repair. Bridging?",
+        "hi": "Atrial fibrillation के लिए warfarin, elective hernia repair। Bridging?"
+      },
+      "o": [
+        {
+          "en": "No bridging",
+          "hi": "Bridging नहीं"
+        },
+        {
+          "en": "Therapeutic LMWH bridging",
+          "hi": "Therapeutic LMWH bridging"
+        },
+        {
+          "en": "IV heparin infusion",
+          "hi": "IV heparin infusion"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "CHEST 2022 recommends against bridging in AF; it adds bleeding without preventing stroke.",
+        "hi": "CHEST 2022 AF में bridging के विरुद्ध है; यह stroke रोके बिना रक्तस्राव बढ़ाता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "preop"
+  },
+  "deeper": {
+    "note": "asr8-anticoagulants",
+    "text": {
+      "en": "Urgent surgery on an anticoagulant needs reversal, not a pause. Use prothrombin complex concentrate with vitamin K for warfarin, idarucizumab for dabigatran, and andexanet or PCC for factor Xa inhibitors. The 2025 ASRA edition also allows drug-level-guided neuraxial decisions; follow local policy.",
+      "hi": "Anticoagulant पर तत्काल सर्जरी में विराम नहीं, reversal चाहिए: warfarin के लिए vitamin K के साथ prothrombin complex concentrate, dabigatran के लिए idarucizumab, और factor Xa inhibitor के लिए andexanet या PCC। ASRA 2025 संस्करण drug level के आधार पर neuraxial निर्णय भी मानता है; स्थानीय नीति अपनाएँ।"
+    }
+  },
+  "glossary": [
+    "bridging"
+  ],
+  "sources": [
+    "Douketis JD, Spyropoulos AC, Murad MH, et al. Perioperative management of antithrombotic therapy: an American College of Chest Physicians clinical practice guideline. Chest 2022;162:e207-e243.",
+    "Horlocker TT, Vandermeuelen E, Kopp SL, et al. Regional anesthesia in the patient receiving antithrombotic or thrombolytic therapy: American Society of Regional Anesthesia and Pain Medicine evidence-based guidelines (fourth edition). Reg Anesth Pain Med 2018;43:263-309.",
+    "StewardMD clinical protocol: perioperative anticoagulation management (kb/clinical-protocols/perioperative-anticoagulation-management.json)."
+  ],
+  "competencies": [
+    "AS3.2"
+  ]
+}

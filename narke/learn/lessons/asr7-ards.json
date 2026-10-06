@@ -1,0 +1,259 @@
+{
+  "id": "asr7-ards",
+  "unit": "asr7",
+  "level": "resident",
+  "minutes": 7,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "2024 global definition severity bands",
+      "ECMO referral threshold PaO2/FiO2 below 80",
+      "Qadir 2024 and Matthay 2024 citation details"
+    ]
+  },
+  "title": {
+    "en": "ARDS: lung-protective ventilation",
+    "hi": "ARDS: lung-protective ventilation"
+  },
+  "idea": {
+    "en": "The ARDS lung is small, not just stiff. Give 6 mL/kg predicted body weight and keep plateau below 30 and driving pressure low. Turn the patient prone early when PaO2/FiO2 stays below 150.",
+    "hi": "ARDS का फेफड़ा छोटा है, केवल सख़्त नहीं। 6 mL/kg predicted body weight दें, plateau 30 से कम और driving pressure कम रखें, और PaO2/FiO2 150 से नीचे रहे तो रोगी को जल्दी prone करें।"
+  },
+  "see": {
+    "diagram": "diagrams/asr7-ards.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A cross-section of the chest with two blue lungs; the lower, back part of each lung is filled dark red. A grey circle marks the spine at the back. On the right a teal curved arrow turns round, and a green bar stops short of a red limit line.",
+      "hi": "छाती का cross-section, दो नीले फेफड़े; हर फेफड़े का निचला, पीछे का भाग गहरा लाल भरा। पीछे spine दिखाता धूसर घेरा। दाईं ओर घूमता teal मुड़ा तीर, और लाल सीमा-रेखा से पहले रुकी हरी पट्टी।"
+    },
+    "caption": {
+      "en": "ARDS on a chest slice: a small aerated lung in front, collapsed lung at the back, prone turning, and the plateau limit.",
+      "hi": "छाती के slice पर ARDS: आगे छोटा हवा भरा फेफड़ा, पीछे सिकुड़ा फेफड़ा, prone करना, और plateau की सीमा।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.219,
+        "y": 0.383,
+        "label": {
+          "en": "Aerated baby lung",
+          "hi": "हवा भरा baby lung"
+        },
+        "note": {
+          "en": "Only this part takes the tidal volume, so large breaths overstretch it.",
+          "hi": "केवल यही भाग tidal volume लेता है, इसलिए बड़ी साँसें इसे ज़्यादा खींचती हैं।"
+        }
+      },
+      {
+        "x": 0.49,
+        "y": 0.667,
+        "label": {
+          "en": "Dependent collapse",
+          "hi": "Dependent collapse"
+        },
+        "note": {
+          "en": "Oedema and weight collapse the back of the lung. PEEP and proning help reopen it.",
+          "hi": "Oedema और वज़न फेफड़े का पिछला भाग सिकोड़ते हैं। PEEP और proning इसे खोलने में मदद करते हैं।"
+        }
+      },
+      {
+        "x": 0.917,
+        "y": 0.367,
+        "label": {
+          "en": "Prone position",
+          "hi": "Prone position"
+        },
+        "note": {
+          "en": "16 hours or more per session when PaO2/FiO2 stays below 150. Improves matching and lowers mortality.",
+          "hi": "PaO2/FiO2 150 से नीचे रहे तो हर session 16 घंटे या अधिक। Matching सुधारता है और मृत्यु घटाता है।"
+        }
+      },
+      {
+        "x": 0.896,
+        "y": 0.707,
+        "label": {
+          "en": "Plateau limit",
+          "hi": "Plateau सीमा"
+        },
+        "note": {
+          "en": "Keep plateau below 30 cmH2O. Lower tidal volume towards 4 mL/kg if it stays high.",
+          "hi": "Plateau 30 cmH2O से कम रखें। ऊँचा रहे तो tidal volume 4 mL/kg की ओर घटाएँ।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "ARDS (2024 global definition): onset within 1 week of a risk factor, bilateral opacities, not mainly cardiac, and PaO2/FiO2 300 or less.",
+        "hi": "ARDS (2024 global definition): risk factor के 1 सप्ताह में शुरुआत, दोनों ओर opacities, मुख्यतः cardiac नहीं, और PaO2/FiO2 300 या कम।"
+      },
+      {
+        "en": "Severity on PEEP 5 or more by [[pf-ratio]]: mild above 200 to 300, moderate above 100 to 200, severe 100 or less.",
+        "hi": "PEEP 5 या अधिक पर [[pf-ratio]] से गंभीरता: mild 200 से ऊपर 300 तक, moderate 100 से ऊपर 200 तक, severe 100 या कम।"
+      },
+      {
+        "en": "Set tidal volume by [[pbw]], never actual weight. Start at 6 mL/kg PBW, range 4 to 8.",
+        "hi": "Tidal volume [[pbw]] से तय करें, असली वज़न से कभी नहीं। 6 mL/kg PBW से शुरू करें, दायरा 4 से 8।"
+      },
+      {
+        "en": "Keep plateau below 30 cmH2O. Keep [[driving-pressure]] as low as possible; above about 15 is linked with higher mortality.",
+        "hi": "Plateau 30 cmH2O से कम रखें। [[driving-pressure]] जितना हो सके कम रखें; लगभग 15 से ऊपर अधिक मृत्यु से जुड़ा है।"
+      },
+      {
+        "en": "Use a PEEP/FiO2 table. Aim PaO2 55 to 80 mmHg or SpO2 88 to 95%. Accept high CO2 unless ICP is raised.",
+        "hi": "PEEP/FiO2 table लें। PaO2 55 से 80 mmHg या SpO2 88 से 95% रखें। ICP बढ़ा न हो तो ऊँचा CO2 स्वीकार करें।"
+      },
+      {
+        "en": "Prone early when PaO2/FiO2 stays below 150 on PEEP 5 or more, for 16 hours or more per session (PROSEVA).",
+        "hi": "PEEP 5 या अधिक पर PaO2/FiO2 150 से नीचे रहे तो जल्दी prone करें, हर session 16 घंटे या अधिक (PROSEVA)।"
+      },
+      {
+        "en": "Severe early ARDS may need neuromuscular blockade and deep sedation. Refer for ECMO if PaO2/FiO2 stays below 80 despite these.",
+        "hi": "गंभीर शुरुआती ARDS में neuromuscular blockade और गहरा sedation चाहिए हो सकता है। इनके बावजूद PaO2/FiO2 80 से नीचे रहे तो ECMO के लिए भेजें।"
+      },
+      {
+        "en": "Once shock resolves, use a conservative fluid strategy and avoid a positive balance.",
+        "hi": "Shock ठीक होने पर conservative fluid रणनीति लें और positive balance से बचें।"
+      }
+    ],
+    "analogy": {
+      "en": "Ventilate the ARDS lung like a child's lung: it is small, so give small breaths.",
+      "hi": "ARDS फेफड़े को बच्चे के फेफड़े जैसा ventilate करें: यह छोटा है, इसलिए छोटी साँसें दें।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Short woman ventilated with 500 mL by habit: likely 8 to 10 mL/kg PBW, recalculate now.",
+      "hi": "आदतन 500 mL पर ventilated छोटे कद की महिला: संभवतः 8 से 10 mL/kg PBW, अभी फिर से गणना करें।"
+    },
+    {
+      "en": "Plateau 32 cmH2O on 6 mL/kg: lower the volume towards 4 mL/kg.",
+      "hi": "6 mL/kg पर plateau 32 cmH2O: volume 4 mL/kg की ओर घटाएँ।"
+    },
+    {
+      "en": "Bilateral infiltrates with a big heart and raised BNP: exclude cardiogenic oedema first.",
+      "hi": "बड़े हृदय और बढ़े BNP के साथ दोनों ओर infiltrates: पहले cardiogenic oedema ख़ारिज करें।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Measure height on day 1 and write the PBW tidal volume on the chart.",
+      "hi": "पहले दिन लंबाई मापें और PBW वाला tidal volume chart पर लिखें।"
+    },
+    {
+      "en": "Check plateau and driving pressure after every change and at least daily.",
+      "hi": "हर बदलाव के बाद और कम से कम रोज़ plateau और driving pressure जाँचें।"
+    },
+    {
+      "en": "Plan proning with enough staff, and protect the tube, lines and pressure points.",
+      "hi": "पर्याप्त स्टाफ़ के साथ proning की योजना बनाएँ, और tube, line व pressure point बचाएँ।"
+    }
+  ],
+  "remember": {
+    "en": "6 mL/kg PBW, plateau below 30, driving pressure below 15, prone 16 hours when PaO2/FiO2 is below 150.",
+    "hi": "6 mL/kg PBW, plateau 30 से कम, driving pressure 15 से कम, PaO2/FiO2 150 से कम हो तो 16 घंटे prone।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "A man is 170 cm tall. Tidal volume at 6 mL/kg PBW?",
+        "hi": "पुरुष की लंबाई 170 cm। 6 mL/kg PBW पर tidal volume?"
+      },
+      "o": [
+        {
+          "en": "About 400 mL",
+          "hi": "लगभग 400 mL"
+        },
+        {
+          "en": "About 600 mL",
+          "hi": "लगभग 600 mL"
+        },
+        {
+          "en": "About 250 mL",
+          "hi": "लगभग 250 mL"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "PBW is 50 + 0.91 x 17.6, about 66 kg. 6 mL/kg gives about 396 mL.",
+        "hi": "PBW = 50 + 0.91 x 17.6, लगभग 66 kg। 6 mL/kg से लगभग 396 mL।"
+      }
+    },
+    {
+      "q": {
+        "en": "PaO2 96 mmHg on FiO2 0.8 with PEEP 10. Next step?",
+        "hi": "PEEP 10 के साथ FiO2 0.8 पर PaO2 96 mmHg। अगला कदम?"
+      },
+      "o": [
+        {
+          "en": "Severe ARDS: prone positioning for 16 hours or more",
+          "hi": "Severe ARDS: 16 घंटे या अधिक prone"
+        },
+        {
+          "en": "Mild ARDS: reduce PEEP",
+          "hi": "Mild ARDS: PEEP घटाएँ"
+        },
+        {
+          "en": "Raise tidal volume to 8 mL/kg",
+          "hi": "Tidal volume 8 mL/kg करें"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "96 divided by 0.8 is 120, below 150, so proning is indicated. It is moderate by grade but meets the prone threshold.",
+        "hi": "96 भाग 0.8 बराबर 120, जो 150 से कम है, इसलिए prone करना है। Grade में यह moderate है पर prone की सीमा पूरी करता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Plateau 28 and PEEP 12 cmH2O. Driving pressure?",
+        "hi": "Plateau 28 और PEEP 12 cmH2O। Driving pressure?"
+      },
+      "o": [
+        {
+          "en": "16 cmH2O, above the 15 target",
+          "hi": "16 cmH2O, 15 के लक्ष्य से ऊपर"
+        },
+        {
+          "en": "40 cmH2O",
+          "hi": "40 cmH2O"
+        },
+        {
+          "en": "12 cmH2O",
+          "hi": "12 cmH2O"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Driving pressure is plateau minus PEEP: 28 minus 12 is 16. Try a smaller tidal volume.",
+        "hi": "Driving pressure = plateau घटा PEEP: 28 घटा 12 बराबर 16। छोटा tidal volume आज़माएँ।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation",
+    "tool": "pf-ratio"
+  },
+  "deeper": {
+    "note": "asr7-ards",
+    "text": {
+      "en": "Guidelines differ on higher PEEP. ATS 2024 suggests it in moderate to severe ARDS; ESICM 2023 made no recommendation either way. Both advise against prolonged high-pressure recruitment manoeuvres. ATS 2024 suggests corticosteroids without a single preferred regimen.",
+      "hi": "Higher PEEP पर guidelines अलग हैं: ATS 2024 moderate से severe ARDS में higher PEEP सुझाता है, जबकि ESICM 2023 ने किसी ओर सलाह नहीं दी। दोनों लंबे high-pressure recruitment manoeuvre के विरुद्ध हैं। ATS 2024 corticosteroid सुझाता है, पर कोई एक पसंदीदा regimen नहीं।"
+    }
+  },
+  "glossary": [
+    "pbw",
+    "pf-ratio",
+    "driving-pressure"
+  ],
+  "sources": [
+    "The Acute Respiratory Distress Syndrome Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med 2000;342:1301-1308.",
+    "Guerin C, Reignier J, Richard JC, et al. Prone positioning in severe acute respiratory distress syndrome (PROSEVA). N Engl J Med 2013;368:2159-2168.",
+    "Amato MBP, Meade MO, Slutsky AS, et al. Driving pressure and survival in the acute respiratory distress syndrome. N Engl J Med 2015;372:747-755.",
+    "Matthay MA, Arabi Y, Arroliga AC, et al. A new global definition of acute respiratory distress syndrome. Am J Respir Crit Care Med 2024;209:37-47.",
+    "Qadir N, Sahetya S, Munshi L, et al. An update on management of adult patients with acute respiratory distress syndrome: an official ATS clinical practice guideline. Am J Respir Crit Care Med 2024;209:24-36.",
+    "StewardMD clinical protocol: ARDS lung-protective ventilation (kb/clinical-protocols/ards-lung-protective-ventilation.json)."
+  ]
+}

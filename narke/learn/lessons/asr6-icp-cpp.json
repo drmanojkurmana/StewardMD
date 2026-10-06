@@ -1,0 +1,262 @@
+{
+  "id": "asr6-icp-cpp",
+  "unit": "asr6",
+  "level": "resident",
+  "minutes": 5,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "ICP threshold 22 mmHg and CPP 60 to 70 mmHg (BTF 4th edition)",
+      "CO2 reactivity of 1 to 2 mL/100 g/min per mmHg PaCO2",
+      "Autoregulation range quoted as MAP 50 to 150 mmHg"
+    ]
+  },
+  "title": {
+    "en": "Intracranial pressure, CPP and autoregulation",
+    "hi": "Intracranial pressure, CPP और autoregulation"
+  },
+  "idea": {
+    "en": "The skull is a fixed box. When one part grows, the others must shrink, until pressure climbs steeply. Protect perfusion: CPP equals MAP minus ICP.",
+    "hi": "खोपड़ी एक स्थिर डिब्बा है। एक भाग बढ़े तो बाकी को सिकुड़ना पड़ता है, फिर दबाव तेज़ी से चढ़ता है। Perfusion बचाएँ: CPP बराबर MAP घटा ICP।"
+  },
+  "see": {
+    "diagram": "diagrams/asr6-icp-curves.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Two graphs. On the left an amber curve stays flat and then turns steeply upward, with a teal dot on the flat part and a red dot on the steep part. On the right a blue line rises, runs flat between two amber dots, then rises again.",
+      "hi": "दो graph। बाईं ओर पीली वक्र रेखा पहले सपाट रहती है फिर तेज़ी से ऊपर मुड़ती है, सपाट भाग पर teal बिंदु और खड़े भाग पर लाल बिंदु। दाईं ओर नीली रेखा चढ़ती है, दो पीले बिंदुओं के बीच सपाट चलती है, फिर चढ़ती है।"
+    },
+    "caption": {
+      "en": "Left: intracranial volume against pressure. Right: cerebral blood flow against perfusion pressure.",
+      "hi": "बाएँ: intracranial volume बनाम दबाव। दाएँ: cerebral blood flow बनाम perfusion दबाव।"
+    },
+    "credit": "Original, MAIKNOWLEDGE LLP",
+    "hotspots": [
+      {
+        "x": 0.188,
+        "y": 0.81,
+        "label": {
+          "en": "Compensated phase",
+          "hi": "Compensated phase"
+        },
+        "note": {
+          "en": "CSF and venous blood leave the skull, so added volume barely raises ICP.",
+          "hi": "CSF और शिरा रक्त खोपड़ी से निकलते हैं, इसलिए बढ़ा volume ICP को मुश्किल से बढ़ाता है।"
+        }
+      },
+      {
+        "x": 0.4,
+        "y": 0.317,
+        "label": {
+          "en": "Decompensated phase",
+          "hi": "Decompensated phase"
+        },
+        "note": {
+          "en": "Buffers are used up. A small rise in volume causes a large rise in ICP.",
+          "hi": "Buffer ख़त्म। Volume में थोड़ी बढ़त से ICP बहुत बढ़ता है।"
+        }
+      },
+      {
+        "x": 0.662,
+        "y": 0.5,
+        "label": {
+          "en": "Lower limit",
+          "hi": "Lower limit"
+        },
+        "note": {
+          "en": "Below it, flow falls with pressure and the brain becomes ischaemic.",
+          "hi": "इसके नीचे दबाव के साथ प्रवाह गिरता है और मस्तिष्क ischaemic होता है।"
+        }
+      },
+      {
+        "x": 0.758,
+        "y": 0.5,
+        "label": {
+          "en": "Autoregulation plateau",
+          "hi": "Autoregulation plateau"
+        },
+        "note": {
+          "en": "Flow stays steady across a range of pressures in a healthy brain.",
+          "hi": "स्वस्थ मस्तिष्क में दबाव के एक दायरे में प्रवाह स्थिर रहता है।"
+        }
+      },
+      {
+        "x": 0.854,
+        "y": 0.5,
+        "label": {
+          "en": "Upper limit",
+          "hi": "Upper limit"
+        },
+        "note": {
+          "en": "Above it, flow rises with pressure and can cause oedema or bleeding.",
+          "hi": "इसके ऊपर दबाव के साथ प्रवाह बढ़ता है और oedema या रक्तस्राव हो सकता है।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "[[monro-kellie]]: brain, blood and CSF share a rigid skull. Early on, CSF and venous blood move out to buffer a growing mass.",
+        "hi": "[[monro-kellie]]: मस्तिष्क, रक्त और CSF एक कठोर खोपड़ी साझा करते हैं। शुरू में बढ़ते mass के लिए CSF और शिरा रक्त बाहर जाते हैं।"
+      },
+      {
+        "en": "When these buffers are used up, small volume rises cause large pressure rises. This is the steep part of the curve.",
+        "hi": "Buffer ख़त्म होने पर छोटे volume बढ़ने से दबाव बहुत बढ़ता है। यह वक्र का खड़ा भाग है।"
+      },
+      {
+        "en": "Normal adult ICP is about 5 to 15 mmHg. The Brain Trauma Foundation treats ICP above 22 mmHg in severe TBI.",
+        "hi": "सामान्य वयस्क ICP लगभग 5 से 15 mmHg है। Brain Trauma Foundation गंभीर TBI में 22 mmHg से ऊपर ICP का इलाज करता है।"
+      },
+      {
+        "en": "[[cpp]] equals MAP minus ICP. In severe TBI the target is a CPP of 60 to 70 mmHg.",
+        "hi": "[[cpp]] बराबर MAP घटा ICP। गंभीर TBI में लक्ष्य CPP 60 से 70 mmHg है।"
+      },
+      {
+        "en": "[[autoregulation]] keeps flow steady over a range of pressures. Injury, tumours and high volatile doses can impair it, so flow then follows pressure.",
+        "hi": "[[autoregulation]] दबाव के एक दायरे में प्रवाह स्थिर रखता है। चोट, tumour और ज़्यादा volatile इसे बिगाड़ सकते हैं, तब प्रवाह दबाव के पीछे चलता है।"
+      },
+      {
+        "en": "CO2 is a strong lever. In the normal range, flow changes by roughly 1 to 2 mL/100 g/min for each mmHg of PaCO2.",
+        "hi": "CO2 एक मज़बूत लीवर है। सामान्य दायरे में PaCO2 के हर mmHg पर प्रवाह लगभग 1 से 2 mL/100 g/min बदलता है।"
+      },
+      {
+        "en": "Hyperventilation lowers ICP fast by constricting vessels, but it can cause ischaemia. Use it only briefly for signs of herniation.",
+        "hi": "Hyperventilation वाहिकाएँ सिकोड़कर ICP जल्दी घटाता है, पर ischaemia कर सकता है। केवल herniation के संकेत पर थोड़ी देर इस्तेमाल करें।"
+      }
+    ],
+    "analogy": {
+      "en": "A packed suitcase: you can squeeze in a shirt at first, but later even one sock bursts the lid.",
+      "hi": "भरा हुआ सूटकेस: शुरू में एक कमीज़ समा जाती है, पर बाद में एक मोज़ा भी ढक्कन खोल देता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Cushing response: hypertension, bradycardia and irregular breathing mean herniation is close.",
+      "hi": "Cushing response: hypertension, bradycardia और अनियमित साँस का अर्थ है herniation पास है।"
+    },
+    {
+      "en": "A fixed dilated pupil with a falling GCS: act at once.",
+      "hi": "गिरते GCS के साथ स्थिर फैली पुतली: तुरंत कार्य करें।"
+    },
+    {
+      "en": "Coughing, head-down tilt or a tight collar can push ICP up.",
+      "hi": "खाँसी, सिर-नीचे झुकाव या कसा collar ICP बढ़ा सकते हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Calculate CPP with the arterial transducer zeroed at the level of the external auditory meatus.",
+      "hi": "Arterial transducer को external auditory meatus के स्तर पर zero करके CPP निकालें।"
+    },
+    {
+      "en": "Keep the head up 30 degrees with the neck neutral.",
+      "hi": "सिर 30 डिग्री ऊपर और गर्दन सीधी रखें।"
+    },
+    {
+      "en": "Keep PaCO2 normal unless there are signs of herniation.",
+      "hi": "Herniation के संकेत न हों तो PaCO2 सामान्य रखें।"
+    }
+  ],
+  "remember": {
+    "en": "CPP = MAP minus ICP. Treat ICP above 22, aim CPP 60 to 70.",
+    "hi": "CPP = MAP घटा ICP। ICP 22 से ऊपर हो तो इलाज, CPP 60 से 70 रखें।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "MAP 85 mmHg and ICP 30 mmHg. CPP and meaning?",
+        "hi": "MAP 85 mmHg और ICP 30 mmHg। CPP और अर्थ?"
+      },
+      "o": [
+        {
+          "en": "55 mmHg, below target",
+          "hi": "55 mmHg, लक्ष्य से कम"
+        },
+        {
+          "en": "115 mmHg, too high",
+          "hi": "115 mmHg, बहुत ज़्यादा"
+        },
+        {
+          "en": "85 mmHg, normal",
+          "hi": "85 mmHg, सामान्य"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "85 minus 30 is 55, below the 60 to 70 mmHg target. ICP is also above 22.",
+        "hi": "85 घटा 30 बराबर 55, जो 60 से 70 mmHg लक्ष्य से कम है। ICP भी 22 से ऊपर है।"
+      }
+    },
+    {
+      "q": {
+        "en": "On the flat part of the pressure-volume curve, adding 5 mL of volume will:",
+        "hi": "Pressure-volume वक्र के सपाट भाग पर 5 mL volume जोड़ने से:"
+      },
+      "o": [
+        {
+          "en": "Barely change ICP",
+          "hi": "ICP मुश्किल से बदलेगा"
+        },
+        {
+          "en": "Double ICP",
+          "hi": "ICP दोगुना होगा"
+        },
+        {
+          "en": "Stop cerebral blood flow",
+          "hi": "Cerebral blood flow रुक जाएगा"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "CSF and venous blood still buffer the change. On the steep part the same volume would raise ICP sharply.",
+        "hi": "CSF और शिरा रक्त अभी भी बदलाव को सँभालते हैं। खड़े भाग पर वही volume ICP तेज़ी से बढ़ाएगा।"
+      }
+    },
+    {
+      "q": {
+        "en": "Why is routine hyperventilation avoided in TBI?",
+        "hi": "TBI में routine hyperventilation से क्यों बचते हैं?"
+      },
+      "o": [
+        {
+          "en": "It constricts vessels and can cause ischaemia",
+          "hi": "यह वाहिकाएँ सिकोड़ता है और ischaemia कर सकता है"
+        },
+        {
+          "en": "It raises ICP",
+          "hi": "यह ICP बढ़ाता है"
+        },
+        {
+          "en": "It causes hyperkalaemia",
+          "hi": "यह hyperkalaemia करता है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Low PaCO2 reduces blood volume and ICP, but also cuts flow to an injured brain.",
+        "hi": "कम PaCO2 रक्त volume और ICP घटाता है, पर घायल मस्तिष्क का प्रवाह भी काटता है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "basic-science"
+  },
+  "deeper": {
+    "note": "asr6-icp-cpp",
+    "text": {
+      "en": "Autoregulation limits are often quoted as a MAP of about 50 to 150 mmHg. The lower limit varies widely and rises in chronic hypertension. Bedside indices such as the pressure reactivity index can estimate an individual best CPP.",
+      "hi": "Autoregulation की सीमाएँ अक्सर MAP लगभग 50 से 150 mmHg बताई जाती हैं, पर lower limit लोगों में बहुत बदलती है और पुराने hypertension में ऊपर खिसकती है। Pressure reactivity index जैसे bedside index किसी व्यक्ति का सबसे अच्छा CPP अनुमानित कर सकते हैं।"
+    }
+  },
+  "glossary": [
+    "monro-kellie",
+    "cpp",
+    "autoregulation"
+  ],
+  "sources": [
+    "Carney N, Totten AM, O'Reilly C, et al. Guidelines for the Management of Severe Traumatic Brain Injury, Fourth Edition. Neurosurgery 2017;80:6-15.",
+    "Gropper MA, ed. Miller's Anesthesia, 9th edition. Elsevier 2020: cerebral physiology and the effects of anesthetic drugs."
+  ]
+}
