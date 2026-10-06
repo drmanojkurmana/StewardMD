@@ -1891,8 +1891,8 @@
     },
     {
      "say": {
-      "en": "The trade off: PEEP raised chest pressure, so her BP fell a little. Always check BP after PEEP.",
-      "hi": "बदले में: PEEP से छाती का दबाव बढ़ा, इसलिए BP थोड़ा गिरा। PEEP के बाद हमेशा BP देखें।"
+      "en": "The trade off: PEEP raises chest pressure, so less blood returns to the heart. Her BP fell a little. Always check BP after PEEP. If MAP falls below 65, bring PEEP back one step and tell your senior. A dry patient may need fluid.",
+      "hi": "Trade off: PEEP छाती का pressure बढ़ाता है, इसलिए दिल तक कम ख़ून लौटता है। उनका BP थोड़ा गिरा। PEEP के बाद हमेशा BP देखें। MAP 65 से नीचे जाए तो PEEP एक कदम घटाएँ और senior को बताएँ। जिस मरीज़ में पानी कम हो उसे fluid चाहिए हो सकता है।"
      },
      "highlight": [
       "map",
@@ -2473,8 +2473,8 @@
     },
     {
      "say": {
-      "en": "Check plateau stays below 30 and driving pressure near 15 or less. Watch the BP.",
-      "hi": "जाँचें plateau 30 से नीचे और driving pressure 15 या कम के पास रहे। BP देखें।"
+      "en": "Check plateau stays below 30 and driving pressure near 15 or less. Watch the BP: higher PEEP can drop it. If MAP falls below 65, bring PEEP back a step and call your senior.",
+      "hi": "देखें कि plateau 30 से नीचे रहे और driving pressure 15 के आसपास या कम। BP देखें: ज़्यादा PEEP उसे गिरा सकता है। MAP 65 से नीचे जाए तो PEEP एक कदम घटाएँ और senior को बुलाएँ।"
      },
      "highlight": [
       "pplat",
@@ -2609,6 +2609,337 @@
     }
    ],
    "level": 2
+  },
+  {
+   "id": "low-spo2",
+   "level": 1,
+   "title": {
+    "en": "Low SpO2: mild, then an emergency",
+    "hi": "SpO2 कम: पहले हल्का, फिर emergency"
+   },
+   "steps": [
+    {
+     "say": {
+      "en": "Mr Rao again, healthy lungs on FiO2 40%. Today his oxygen falls, first a little, then a lot. You will learn what to do at each stage.",
+      "hi": "फिर श्री राव, स्वस्थ फेफड़े, FiO2 40% पर। आज उनकी oxygen गिरेगी, पहले थोड़ी, फिर बहुत। आप सीखेंगे कि हर चरण पर क्या करना है।"
+     },
+     "do": {
+      "scenario": "postop-normal"
+     }
+    },
+    {
+     "say": {
+      "en": "His SpO2 target is 94 to 98%. Below his target but 88 or more is mild. Below 88 is an emergency.",
+      "hi": "उनका SpO2 लक्ष्य 94 से 98% है। लक्ष्य से नीचे पर 88 या ज़्यादा हल्की कमी है। 88 से नीचे emergency है।"
+     },
+     "highlight": [
+      "spo2"
+     ]
+    },
+    {
+     "say": {
+      "en": "Mucus starts to block a small airway. Watch SpO2 dip. It is still in his target, so for now you only watch.",
+      "hi": "बलगम एक छोटी साँस की नली बंद करने लगता है। SpO2 को थोड़ा गिरते देखें। यह अभी लक्ष्य में है, इसलिए अभी सिर्फ़ नज़र रखें।"
+     },
+     "do": {
+      "event": "plug"
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "More mucus. SpO2 drops below 94: mild low SpO2, a yellow alarm. Look at him, check the probe shows a clean trace, then raise FiO2 one step.",
+      "hi": "और बलगम। SpO2 94 से नीचे: हल्की कमी, पीला alarm। मरीज़ को देखें, probe का trace साफ़ है यह जाँचें, फिर FiO2 एक कदम बढ़ाएँ।"
+     },
+     "do": {
+      "event": "plug"
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "down"
+     },
+     "highlight": [
+      "spo2",
+      "alarms"
+     ]
+    },
+    {
+     "say": {
+      "en": "Raise FiO2 to 50%. Oxygen takes a few minutes to show on SpO2.",
+      "hi": "FiO2 को 50% करें। SpO2 पर असर दिखने में कुछ मिनट लगते हैं।"
+     },
+     "do": {
+      "key": "fio2",
+      "to": 50
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "He coughs and more secretions fill the tube. SpO2 falls again.",
+      "hi": "उन्हें खाँसी आती है और tube में और secretions भर जाते हैं। SpO2 फिर गिरता है।"
+     },
+     "do": {
+      "event": "secretions",
+      "factor": 4
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "A big plug. SpO2 falls below 88: an emergency, a red alarm. Do not turn dials one by one. Call for help and hand bag him with 100% oxygen.",
+      "hi": "एक बड़ा plug। SpO2 88 से नीचे: emergency, लाल alarm। एक एक करके dial न घुमाएँ। मदद बुलाएँ और 100% oxygen से हाथ से bag करें।"
+     },
+     "do": {
+      "event": "plug"
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "down"
+     },
+     "highlight": [
+      "spo2",
+      "alarms"
+     ]
+    },
+    {
+     "say": {
+      "en": "Bag with 100% oxygen. Bagging buys time, and you feel how stiff the lung is. SpO2 can keep falling for a short while before the oxygen reaches the blood.",
+      "hi": "100% oxygen से bag करें। Bagging समय देती है, और आपको पता चलता है कि फेफड़ा कितना सख़्त है। Oxygen ख़ून तक पहुँचने से पहले SpO2 थोड़ी देर और गिर सकता है।"
+     },
+     "do": {
+      "action": "bag100"
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "Now think DOPE: Displaced tube, Obstructed tube, Pneumothorax, Equipment. His tube is obstructed with mucus: suction it.",
+      "hi": "अब DOPE सोचें: tube खिसकी (Displaced), tube बंद (Obstructed), Pneumothorax, Equipment। उनकी tube बलगम से बंद है: suction करें।"
+     },
+     "do": {
+      "action": "suction"
+     },
+     "expect": {
+      "key": "spo2",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "SpO2 is back. Mild: look, check the probe, raise FiO2 one step. Below 88: bag with 100% oxygen, think DOPE, and call your senior. Once he is stable, bring FiO2 back down.",
+      "hi": "SpO2 लौट आया। हल्की कमी: देखें, probe जाँचें, FiO2 एक कदम बढ़ाएँ। 88 से नीचे: 100% oxygen से bag करें, DOPE सोचें, और senior को बुलाएँ। मरीज़ स्थिर हो तो FiO2 फिर घटाएँ।"
+     },
+     "highlight": [
+      "spo2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "disconnect",
+   "level": 1,
+   "title": {
+    "en": "The circuit comes apart",
+    "hi": "Circuit अलग हो जाता है"
+   },
+   "steps": [
+    {
+     "say": {
+      "en": "Mr Rao again. Today his circuit comes apart. A disconnect is one of the most common ventilator alarms.",
+      "hi": "फिर श्री राव। आज उनका circuit अलग हो जाता है। Disconnect ventilator के सबसे आम alarms में से एक है।"
+     },
+     "do": {
+      "scenario": "postop-normal"
+     }
+    },
+    {
+     "say": {
+      "en": "The ventilator measures the air that comes back out. VTe is about 450 mL each breath. VE is the air each minute.",
+      "hi": "Ventilator बाहर लौटने वाली हवा मापता है। VTe हर साँस में लगभग 450 mL है। VE हर मिनट की हवा है।"
+     },
+     "highlight": [
+      "vte",
+      "ve"
+     ]
+    },
+    {
+     "say": {
+      "en": "The tube comes off the circuit. Watch the air that comes back fall to almost nothing.",
+      "hi": "Tube circuit से निकल जाती है। लौटने वाली हवा को लगभग शून्य होते देखें।"
+     },
+     "do": {
+      "event": "disconnect",
+      "duration": 90
+     },
+     "expect": {
+      "key": "vte",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "A red alarm: disconnection. No air, no PEEP and no extra oxygen reach him. Never silence this alarm and walk away.",
+      "hi": "लाल alarm: disconnection। उन तक न हवा पहुँचती है, न PEEP, न अतिरिक्त oxygen। यह alarm चुप करके कभी न जाएँ।"
+     },
+     "highlight": [
+      "alarms"
+     ],
+     "alarm": "disconnect",
+     "cleared": {
+      "en": "The disconnect alarm sounded because no air reached him. It has stopped now.",
+      "hi": "Disconnect alarm इसलिए बजी क्योंकि उन तक हवा नहीं पहुँच रही थी। अब वह रुक गई है।"
+     }
+    },
+    {
+     "say": {
+      "en": "Look at him first: no chest rise and a flat capnography trace. Follow the circuit from the tube to the ventilator. Usually one joint has come apart.",
+      "hi": "पहले मरीज़ को देखें: छाती नहीं उठती और capnography trace सपाट है। Tube से ventilator तक circuit देखें। अक्सर कोई एक जोड़ खुला होता है।"
+     },
+     "highlight": [
+      "monitor"
+     ]
+    },
+    {
+     "say": {
+      "en": "If you cannot find the break at once, take him off and hand bag with 100% oxygen. The capnography trace comes back with each squeeze.",
+      "hi": "टूटी जगह तुरंत न मिले तो ventilator हटाकर 100% oxygen से हाथ से bag करें। हर दबाव के साथ capnography trace लौट आता है।"
+     },
+     "do": {
+      "action": "bag100"
+     },
+     "expect": {
+      "key": "etco2",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "Your helper finds the loose joint at the tube and pushes it back in. The ventilator breathes for him again.",
+      "hi": "आपका साथी tube के पास ढीला जोड़ ढूँढकर वापस लगा देता है। Ventilator फिर से उनके लिए साँस देता है।"
+     },
+     "expect": {
+      "key": "ve",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "Disconnect: look at the patient, reconnect, and bag with 100% oxygen if you cannot. Then think DOPE, watch SpO2 while the lung reopens, and tell your senior.",
+      "hi": "Disconnect: मरीज़ को देखें, circuit जोड़ें, और न जुड़े तो 100% oxygen से bag करें। फिर DOPE सोचें, फेफड़ा फिर खुलने तक SpO2 देखें, और senior को बताएँ।"
+     },
+     "highlight": [
+      "alarms"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "apnoea-ps",
+   "level": 2,
+   "title": {
+    "en": "Apnoea on pressure support",
+    "hi": "Pressure support पर apnoea"
+   },
+   "steps": [
+    {
+     "say": {
+      "en": "Mr Rao is waking after surgery. He can breathe on his own, so we let him, with pressure support (PS).",
+      "hi": "श्री राव surgery के बाद जाग रहे हैं। वे ख़ुद साँस ले सकते हैं, इसलिए हम उन्हें pressure support (PS) के साथ ख़ुद साँस लेने देते हैं।"
+     },
+     "do": {
+      "scenario": "postop-normal"
+     }
+    },
+    {
+     "say": {
+      "en": "His sedation wears off and he starts to breathe for himself.",
+      "hi": "उनका sedation हल्का होता है और वे ख़ुद साँस लेने लगते हैं।"
+     },
+     "do": {
+      "event": "sedationLight"
+     }
+    },
+    {
+     "say": {
+      "en": "Switch the mode to PSV. Every breath is now his own; the ventilator adds a push to each one. Watch his own rate.",
+      "hi": "Mode को PSV करें। अब हर साँस उनकी अपनी है; ventilator हर साँस में धक्का जोड़ता है। उनकी अपनी साँस दर देखें।"
+     },
+     "do": {
+      "mode": "psv"
+     },
+     "expect": {
+      "key": "rrTotal",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "PSV has no set rate. If he stops breathing, only the apnoea alarm and its backup breaths protect him.",
+      "hi": "PSV में कोई तय rate नहीं होता। अगर वे साँस लेना बंद कर दें, तो सिर्फ़ apnoea alarm और उसकी backup साँसें उन्हें बचाती हैं।"
+     },
+     "highlight": [
+      "rrTotal",
+      "ve"
+     ]
+    },
+    {
+     "say": {
+      "en": "He is given a large dose of sedative and an opioid for pain. His drive to breathe stops.",
+      "hi": "उन्हें sedative और दर्द के लिए opioid की बड़ी dose दी जाती है। उनकी साँस लेने की इच्छा रुक जाती है।"
+     },
+     "do": {
+      "event": "sedationDeep"
+     },
+     "expect": {
+      "key": "vte",
+      "direction": "down"
+     }
+    },
+    {
+     "say": {
+      "en": "After 20 seconds with no breath the apnoea alarm sounds. The ventilator then gives backup breaths at the set rate and tidal volume.",
+      "hi": "20 सेकंड तक कोई साँस न हो तो apnoea alarm बजता है। फिर ventilator तय rate और tidal volume पर backup साँसें देता है।"
+     },
+     "highlight": [
+      "alarms"
+     ],
+     "expect": {
+      "key": "rrTotal",
+      "direction": "up"
+     }
+    },
+    {
+     "say": {
+      "en": "Backup breaths are a safety net, not a plan. Go back to AC-VC so every breath is guaranteed until the drugs wear off.",
+      "hi": "Backup साँसें सुरक्षा जाल हैं, योजना नहीं। AC-VC पर लौटें ताकि दवा का असर उतरने तक हर साँस पक्की रहे।"
+     },
+     "do": {
+      "mode": "acvc"
+     }
+    },
+    {
+     "say": {
+      "en": "Before a sedative dose on PSV, check the apnoea alarm and its backup settings. If he stops breathing: look at him, give a controlled mode, and tell your senior. Never silence the apnoea alarm and walk away.",
+      "hi": "PSV पर sedative देने से पहले apnoea alarm और उसकी backup सेटिंग जाँचें। साँस रुक जाए तो: मरीज़ को देखें, controlled mode दें, और senior को बताएँ। Apnoea alarm चुप करके कभी न जाएँ।"
+     },
+     "highlight": [
+      "mode"
+     ]
+    }
+   ]
   }
  ],
  "alarms": {
@@ -5486,6 +5817,131 @@
    "current": {
     "en": "Settings: AC-VC, VT 480 mL, rate 15, PEEP 8, Ti 0.9 s, FiO2 80%.",
     "hi": "सेटिंग: AC-VC, VT 480 mL, rate 15, PEEP 8, Ti 0.9 s, FiO2 80%।"
+   }
+  },
+  {
+   "id": "abg-15",
+   "scenario": "pneumonia",
+   "abg": {
+    "pH": 7.19,
+    "PaCO2": 55,
+    "PaO2": 75,
+    "HCO3": 20.5,
+    "SaO2": 88,
+    "BE": -6.5,
+    "lactate": 4,
+    "FiO2": 0.7
+   },
+   "spo2": 88,
+   "q1": {
+    "ask": {
+     "en": "What is happening in this gas?",
+     "hi": "इस gas में क्या हो रहा है?"
+    },
+    "options": [
+     {
+      "en": "Two acids at once: too much CO2 and acid from the body (mixed respiratory and metabolic acidosis), with low oxygen",
+      "hi": "एक साथ दो अम्ल: बहुत ज़्यादा CO2 और शरीर से बना अम्ल (mixed respiratory और metabolic acidosis), साथ में कम oxygen"
+     },
+     {
+      "en": "Only too much CO2 (pure respiratory acidosis)",
+      "hi": "सिर्फ़ बहुत ज़्यादा CO2 (केवल respiratory acidosis)"
+     },
+     {
+      "en": "Only acid from the body (pure metabolic acidosis)",
+      "hi": "सिर्फ़ शरीर से बना अम्ल (केवल metabolic acidosis)"
+     },
+     {
+      "en": "Old CO2 retention that the kidneys have balanced (chronic respiratory acidosis)",
+      "hi": "पुराना जमा CO2 जिसे गुर्दों ने संतुलित कर लिया (chronic respiratory acidosis)"
+     }
+    ],
+    "answer": 0,
+    "why": {
+     "en": "pH is low. CO2 is high, which explains part of it. But HCO3 is low too when it should rise, and lactate is 4. Two acids at once: a mixed respiratory and metabolic acidosis. PaO2 75 on 70% oxygen is also low for the oxygen given.",
+     "hi": "pH कम है। CO2 ज़्यादा है, जो इसका एक हिस्सा समझाता है। पर HCO3 भी कम है जबकि उसे बढ़ना चाहिए था, और lactate 4 है। एक साथ दो अम्ल: mixed respiratory और metabolic acidosis। 70% oxygen पर PaO2 75 भी दी गई oxygen के हिसाब से कम है।"
+    }
+   },
+   "q2": {
+    "ask": {
+     "en": "Which ventilator change fits this simulated patient best?",
+     "hi": "इस simulated मरीज़ के लिए कौन सा ventilator बदलाव सबसे सही है?"
+    },
+    "options": [
+     {
+      "label": {
+       "en": "Raise the rate to 24 and FiO2 to 90%",
+       "hi": "Rate 24 और FiO2 90% करें"
+      },
+      "change": {
+       "key": "rr",
+       "to": 24,
+       "also": {
+        "fio2": 90
+       }
+      }
+     },
+     {
+      "label": {
+       "en": "Raise FiO2 to 100% only",
+       "hi": "सिर्फ़ FiO2 100% करें"
+      },
+      "change": {
+       "key": "fio2",
+       "to": 100
+      }
+     },
+     {
+      "label": {
+       "en": "Raise PEEP to 15",
+       "hi": "PEEP को 15 करें"
+      },
+      "change": {
+       "key": "peep",
+       "to": 15
+      }
+     },
+     {
+      "label": {
+       "en": "Lower the rate to 10 to rest the lungs",
+       "hi": "फेफड़ों को आराम देने के लिए rate 10 करें"
+      },
+      "change": {
+       "key": "rr",
+       "to": 10
+      }
+     }
+    ],
+    "answer": 0,
+    "why": {
+     "en": "The ventilator can fix the CO2 part and the oxygen: more breaths clear CO2 and FiO2 lifts oxygen. The metabolic part needs its cause treated: sepsis, fluids and perfusion. PEEP helps little in a solid lobe and can drop BP.",
+     "hi": "Ventilator CO2 वाला हिस्सा और oxygen ठीक कर सकता है: ज़्यादा साँसें CO2 निकालती हैं और FiO2 oxygen बढ़ाता है। Metabolic हिस्से के लिए उसका कारण ठीक करना होगा: sepsis, fluid और perfusion। ठोस lobe में PEEP कम मदद करता है और BP गिरा सकता है।"
+    }
+   },
+   "level": 2,
+   "vignette": {
+    "en": "Severe pneumonia with sepsis. He is hot, his rate was set low, and his lactate is rising.",
+    "hi": "Sepsis के साथ गंभीर pneumonia। बुख़ार है, rate कम set था, और lactate बढ़ रहा है।"
+   },
+   "setup": {
+    "patch": {
+     "patient": {
+      "vco2": 300,
+      "metabolic": {
+       "hco3": 20.5,
+       "lactate": 4
+      }
+     }
+    },
+    "settings": {
+     "fio2": 70,
+     "rr": 14
+    },
+    "pre": 3600
+   },
+   "current": {
+    "en": "Settings: AC-VC, VT 450 mL, rate 14, PEEP 5, Ti 0.9 s, FiO2 70%.",
+    "hi": "सेटिंग: AC-VC, VT 450 mL, rate 14, PEEP 5, Ti 0.9 s, FiO2 70%।"
    }
   }
  ],

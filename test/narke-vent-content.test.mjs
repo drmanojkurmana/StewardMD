@@ -22,7 +22,7 @@ const ALARMS = ["pPeakHigh", "pPlatHigh", "vtLow", "veLow", "veHigh", "apnoea", 
 const ALARMS_R2 = ["etco2High"];
 const DYSSYNC = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
 const CHAIN = ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"];
-const TUTORIALS = ["how-it-works", "fio2-peep", "first-alarm", "vt-rr", "pc-vs-vc", "waveforms", "abg-adjust", "ards", "copd-autopeep"];
+const TUTORIALS = ["how-it-works", "fio2-peep", "first-alarm", "vt-rr", "pc-vs-vc", "waveforms", "abg-adjust", "ards", "copd-autopeep", "low-spo2", "disconnect", "apnoea-ps"];
 const ACTION_IDS = ["decompress", "suction", "bag100", "disconnect", "bronchodilator", "sedate", "paralyse", "fluid", "blood"];
 const SCENARIOS = ["postop-normal", "copd", "asthma", "ards", "cardiogenic-oedema", "pneumonia", "postop-atelectasis",
   "neuromuscular-gbs", "metabolic-dka", "trauma-contusion"];
@@ -172,7 +172,7 @@ test("learn.levels: 4 cumulative levels, level 1 is the beginner set", () => {
   ["waveforms", "alarms", "dope"].forEach((k) => assert.ok(L.levels[3].shows.includes(k), "L4 " + k));
 });
 
-test("learn.tutorials: the 9 tutorials with drivable steps", () => {
+test("learn.tutorials: the 12 tutorials with drivable steps", () => {
   assert.deepEqual(L.tutorials.map((t) => t.id), TUTORIALS);
   for (const t of L.tutorials) {
     assert.ok(bi(t.title) && t.steps.length >= 5, t.id);
@@ -182,7 +182,7 @@ test("learn.tutorials: the 9 tutorials with drivable steps", () => {
       if (s.do) {
         // do: load a scenario, set a mode or a setting, inject an event, take a bedside action, or draw a gas
         const ok = (s.do.scenario && SCENARIOS.includes(s.do.scenario)) || (s.do.mode && MODES.includes(s.do.mode)) ||
-          (SETTING_KEYS.includes(s.do.key) && typeof s.do.to === "number") || (s.do.event && EVENTS.concat(["plug"]).includes(s.do.event)) ||
+          (SETTING_KEYS.includes(s.do.key) && typeof s.do.to === "number") || (s.do.event && EVENTS.concat(["plug", "sedationLight", "sedationDeep"]).includes(s.do.event)) ||
           ACTION_IDS.includes(s.do.action) || s.do.abg === true;
         assert.ok(ok, `${t.id}[${i}].do`);
       }

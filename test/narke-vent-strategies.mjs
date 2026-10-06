@@ -35,7 +35,9 @@ export const CASES = {
   "abg-12": { score: (r) => (r.vent.pplat <= 30 && r.gas.ph >= 7.15 ? 0 : -100) - r.vent.drivingP,
     claim: (b, a) => a.vent.pplat <= 30 && b.vent.pplat > 30 && a.vent.drivingP < b.vent.drivingP && a.gas.ph >= 7.15 },
   "abg-13": { atInit: true, score: (r) => r.gas.ph + r.vitals.map / 100, claim: (b, a) => Math.abs(a.gas.ph - b.gas.ph) <= 0.01 },
-  "abg-14": { score: (r) => (r.vent.pplat <= 30 && r.vent.drivingP <= 15 ? r.gas.ph : -1e9), claim: (b, a) => a.gas.ph > b.gas.ph + 0.05 && a.vent.pplat <= 30 }
+  "abg-14": { score: (r) => (r.vent.pplat <= 30 && r.vent.drivingP <= 15 ? r.gas.ph : -1e9), claim: (b, a) => a.gas.ph > b.gas.ph + 0.05 && a.vent.pplat <= 30 },
+  // round 4: mixed respiratory and metabolic acidosis with hypoxaemia; the keyed answer clears CO2 and lifts SpO2 together
+  "abg-15": { score: (r) => r.gas.ph + r.vitals.spo2 / 100, claim: (b, a) => a.gas.paco2 < b.gas.paco2 - 5 && a.gas.ph > b.gas.ph && a.vitals.spo2 > b.vitals.spo2 }
 };
 
 // Builds the case state with the shipped engine helper. E is the engine, sc the scenario, setup the learn.json case setup.
