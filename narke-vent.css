@@ -446,7 +446,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 /* a score part this run did not test: label and "Not scored" on one line, the reason under them */
 .nrk-root .vl-parts li.vl-pna { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
 .nrk-root .vl-pna b { grid-column: 2; grid-row: 1; font-size: 12.5px; font-weight: 500; color: var(--sp-mut); white-space: nowrap; }
-.nrk-root .vl-pna .vl-pnote { grid-column: 1 / -1; grid-row: 2; }
+.nrk-root .vl-pna .vl-pnote { grid-column: 1 / -1; grid-row: 2; margin: 0; }
 /* the coach sits where the toast would; the toast moves to the top while a tutorial runs */
 .nrk-root .vl-coach ~ .vl-toast { bottom: auto; top: calc(env(safe-area-inset-top, 0px) + 116px); }
 .nrk-root .vl-rr { display: flex; align-items: baseline; gap: 6px; margin-top: 4px; }
@@ -619,6 +619,8 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root #vlHold:empty { display: none; }
 .nrk-root #vlHold { margin-top: 8px; padding: 10px 12px; border-radius: 12px; background: var(--vl-knob); font-size: 13.5px; line-height: 1.45; }
 .nrk-root .vl-hres { margin: 0 0 4px; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-hbad { color: var(--nk-warn); font-variant-numeric: normal; }
+.nrk-root .vl-hbad b { color: var(--sp-text); }
 .nrk-root .vl-exam dl { margin: 4px 0 0; display: grid; gap: 4px; }
 .nrk-root .vl-exam dl > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px; }
 .nrk-root .vl-exam dt { color: var(--sp-mut); font-weight: 600; }

@@ -465,14 +465,14 @@ try {
     await tap(`[data-act=vltab][data-t=dials]`);
     await tap(`[data-act=vltype][data-k=peep]`);
     ok(await until(`return !!document.querySelector('#smdNarke .vl-type');`), "tapping a dial's number opens a number field");
-    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='20'; return 1;`);
+    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='24'; return 1;`);
     await key("Enter", "Enter", 13, "\r");
-    ok(await until(`return document.querySelector('#smdNarke [data-spin=peep]').getAttribute('aria-valuenow')==='20' && !!document.querySelector('#smdNarke .vl-warns li');`), "typed PEEP 20 is staged and a warning shows before Confirm");
+    ok(await until(`return document.querySelector('#smdNarke [data-spin=peep]').getAttribute('aria-valuenow')==='24' && !!document.querySelector('#smdNarke .vl-warns li');`), "typed PEEP 24 is staged and a warning shows before Confirm");
     ok(await ev(`return /very high/.test(document.querySelector('#smdNarke .vl-warns').textContent) && /Confirm anyway/.test(document.querySelector('#smdNarke [data-act=vlconfirm]').textContent);`) === true, "the warning names the value and Confirm reads Confirm anyway");
     await shot("390-dark-warning");
     await tap(`[data-act=vlconfirm]`);
-    for (let i = 0; i < 6 && !(await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=peepHigh], #smdNarke .vl-al[data-k=mapLow]');`)); i++) await tap(`[data-act=vlskip][data-k="300"]`);
-    const pk = await ev(`var a=document.querySelector('#smdNarke .vl-al[data-k=peepHigh]') || document.querySelector('#smdNarke .vl-al[data-k=mapLow]'); return a ? a.getAttribute('data-k') : "";`);
+    for (let i = 0; i < 6 && !(await ev(`return !!document.querySelector('#smdNarke .vl-al[data-k=peepSetHigh], #smdNarke .vl-al[data-k=peepHigh], #smdNarke .vl-al[data-k=mapLow]');`)); i++) await tap(`[data-act=vlskip][data-k="300"]`);
+    const pk = await ev(`var a=document.querySelector('#smdNarke .vl-al[data-k=peepSetHigh]') || document.querySelector('#smdNarke .vl-al[data-k=peepHigh]') || document.querySelector('#smdNarke .vl-al[data-k=mapLow]'); return a ? a.getAttribute('data-k') : "";`);
     ok(!!pk, "high PEEP raises an alarm (" + pk + ")");
     if (pk) {
       await click(`.vl-al[data-k="${pk}"]`);
@@ -520,23 +520,33 @@ try {
     await tap(`[data-act=vlgo][data-s=pneumonia]`);
     ok(await until(`return !!document.querySelector('#smdNarke .vl-run');`) && await clock() === tr0, "opening the patient resumes the run at " + tr0 + " s");
     await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke [data-act=vlleave]');`);
+    await sleep(450); // the sheet slides in; tap only after it has settled
     await tap(`.vl-sheet [data-act=vlleave]`);
     ok(await until(`return !!document.querySelector('#smdNarke .vl-home') && !document.querySelector('#smdNarke [data-act=vlgo][data-s=pneumonia] .vl-resume');`), "Leave without saving drops the run");
 
-    // holds, chest exam and spontaneous-mode readouts that need a hold
+    // holds, chest exam and spontaneous-mode readouts that need a hold. The engine measures a hold only on a passive
+    // patient: the pneumonia patient breathes against it, so the lab says the number is not reliable and keeps none.
     await goRun(2, "pneumonia");
+    await tap(`[data-act=vltab][data-t=dials]`);
+    ok(await tap(`[data-act=vlhold][data-k=insp]`) === 1 && await ev(`var h=document.getElementById('vlHold').textContent; return /Inspiratory hold/.test(h) && /not reliable/.test(h) && !/Pplat/.test(h);`) === true, "Inspiratory hold on a breathing patient says the number is not reliable and shows no plateau");
+    // a passive patient (post-op, sedated): the hold gives real numbers
+    await goRun(2, "postop-normal");
     await tap(`[data-act=vltab][data-t=dials]`);
     ok(await tap(`[data-act=vlhold][data-k=insp]`) === 1 && await ev(`return /Inspiratory hold/.test(document.getElementById('vlHold').textContent) && /Pplat|Plateau/.test(document.getElementById('vlHold').textContent);`) === true, "Inspiratory hold shows the plateau, driving pressure and compliance");
     ok(await tap(`[data-act=vlhold][data-k=exp]`) === 1 && /Auto-PEEP|PEEP total/.test(await ev(`return document.getElementById('vlHold').textContent;`)), "Expiratory hold shows the trapped pressure");
     ok(await tap(`[data-act=vlexam]`) === 1 && await ev(`return document.querySelectorAll('#vlHold .vl-exam dl > div').length >= 3;`) === true, "Listen to the chest gives air entry, trachea, movement and added sounds");
     await ev(`var h=document.getElementById('vlHold'); h.scrollIntoView({block:"center"}); return 1;`); await shot("390-dark-holds");
-    await ev(`${RU} X.pend={mode:"psv"}; return 1;`); await click(`[data-act=vlconfirm]`);
+    await click(`[data-act=vlmode]`); await until(`return document.querySelectorAll('#smdNarke .vl-mbtn').length >= 3;`);
+    await click(`[data-act=vlmpick][data-k=psv]`); await click(`[data-act=vlmuse]`);
+    await until(`return !!document.querySelector('#smdNarke [data-act=vlconfirm]');`); await click(`[data-act=vlconfirm]`);
     ok(await until(`var p=document.querySelector('#smdNarke .vl-ro-i[data-vl-id=pplat]'); return !!p && /needs a hold/.test(p.textContent);`), "PSV: plateau shows as needs a hold");
-    await tap(`[data-act=vlhold][data-k=insp]`);
+    await tap(`[data-act=vltab][data-t=dials]`); // Confirm opens the What changed tab
+    ok(await tap(`[data-act=vlhold][data-k=insp]`) === 1, "PSV: the inspiratory hold button can be tapped");
     ok(await ev(`var p=document.querySelector('#smdNarke .vl-ro-i[data-vl-id=pplat]'); return !!p && !/needs a hold/.test(p.textContent) && /\\d/.test(p.textContent);`) === true, "after an inspiratory hold the plateau is measured");
     ok(await ev(`return /not scored/.test(document.querySelector('#smdNarke .vl-ro-i[data-vl-id=vte]').textContent);`) === true, "PSV: tidal volume is the patient's own (not scored)");
 
     // bedside action feedback: toast, log line, used state
+    await goRun(2, "pneumonia");
     await click(`[data-act=vltab][data-t=mon]`);
     await tap(`[data-act=vlbed][data-k=suction]`);
     ok(await ev(`return /Done:/.test(document.querySelector('#smdNarke .vl-toast').textContent) && /Your actions/.test(document.querySelector('#smdNarke .vl-bedlog').textContent) && /Used at/.test(document.querySelector('#smdNarke [data-act=vlbed][data-k=suction]').textContent);`) === true, "a bedside action gives a toast, a log line and a used-at time");
@@ -596,7 +606,8 @@ try {
   await toHome();
   ok(await ev(`return NARKE._sims.filter(function(x){return x.id==="ventlab";})[0].line(null).indexOf("tutorials") >= 0;`) === true, "the Narkē Test row counts finished tutorials as progress");
 
-  // tablet and desktop layouts, both themes
+  // tablet and desktop layouts, both themes (the run must be open: the checks above leave the lab home showing)
+  await goRun(2, "pneumonia");
   for (const [w, h] of [[768, 1024], [1280, 860]]) {
     await size(w, h);
     ok(await noOverflow() === true, w + " px: no horizontal scroll on the run");

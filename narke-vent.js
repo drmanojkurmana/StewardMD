@@ -247,6 +247,7 @@
     holdI: T("Inspiratory hold", "इंस्पिरेटरी होल्ड"), holdE: T("Expiratory hold", "एक्सपिरेटरी होल्ड"), holdH: T("Holds and exam", "होल्ड और जाँच"),
     holdINote: T("Pauses at the end of a breath: shows the plateau, driving pressure and compliance.", "साँस के अंत में रुकता है: प्लेटो, ड्राइविंग प्रेशर और कंप्लायंस दिखाता है।"),
     holdENote: T("Pauses before the next breath: shows trapped pressure (auto-PEEP).", "अगली साँस से पहले रुकता है: फँसा दबाव (ऑटो-PEEP) दिखाता है।"),
+    holdUnrel: T("The patient breathed during the hold, so there is no reliable number. Sedate, or wait for a quiet breath.", "Hold के दौरान मरीज़ ने साँस ली, इसलिए कोई भरोसेमंद संख्या नहीं। Sedation दें, या शांत साँस का इंतज़ार करें।"),
     holdRes: T("{x} at {t}", "{t} पर {x}"), needHold: T("needs a hold", "होल्ड चाहिए"), needHoldNote: T("The patient is breathing on their own, so plateau and compliance need an inspiratory hold to measure.", "मरीज़ ख़ुद साँस ले रहा है, इसलिए प्लेटो और कंप्लायंस मापने को इंस्पिरेटरी होल्ड चाहिए।"),
     exam: T("Listen to the chest", "छाती सुनें"), examH: T("Chest exam at {t}", "{t} पर छाती की जाँच"),
     ex_air: T("Air entry", "हवा का प्रवेश"), ex_trach: T("Trachea", "श्वासनली"), ex_sounds: T("Added sounds", "अतिरिक्त आवाज़ें"), ex_move: T("Chest movement", "छाती की हरकत"),
@@ -286,7 +287,7 @@
     arrestLast: T("Your last change: {x} at {t}.", "आपका पिछला बदलाव: {t} पर {x}।"),
     unsafeH: T("Unsafe moments", "असुरक्षित पल"), unsafeNone: T("No unsafe moments after the first 10 min.", "पहले 10 मिनट के बाद कोई असुरक्षित पल नहीं।"),
     us_spo2: T("SpO2 {v} at {t}", "{t} पर SpO2 {v}"), us_map: T("MAP {v} at {t}", "{t} पर MAP {v}"), us_pplat: T("Plateau {v} cmH2O at {t}", "{t} पर प्लेटो {v} cmH2O"),
-    goodH: T("What a good run looked like", "अच्छा रन कैसा दिखता"), notScored: T("patient's own (not scored)", "मरीज़ की अपनी (अंक नहीं)"),
+    goodH: T("What a good run looked like", "अच्छा रन कैसा दिखता"), ownNotScored: T("patient's own (not scored)", "मरीज़ की अपनी (अंक नहीं)"),
     okHigh: T("met (above range on low FiO2 is fine)", "पूरा (कम FiO2 पर ऊपर ठीक है)"), weanO2: T("not met: wean FiO2", "पूरा नहीं: FiO2 घटाएँ"),
     px_mode: T("Points for the mode you chose. Untouched, the scenario's start mode counts.", "आपके चुने मोड के अंक। न बदला तो शुरुआती मोड गिना गया।"),
     px_initial: T("Your first settings judged on themselves: breath size for height, plateau and PEEP for the oxygen.", "आपकी पहली सेटिंग अपने आप में जाँची गई: ऊँचाई के हिसाब से साँस, प्लेटो, और ऑक्सीजन के लिए PEEP।"),
@@ -996,7 +997,8 @@
   }
   function holdVal(k) { var h = holdNow(HOLD_KEYS.insp.indexOf(k) >= 0 ? "insp" : "exp"); return h && h.v[k] != null ? h.v[k] : null; }
   function holdHtml() {
-    var out = [];
+    var out = [], hf = R && R.holdFail;
+    if (hf && hf.sig === holdSig() && R.s.t - hf.t <= 600) out.push('<p class="vl-hres vl-hbad"><b>' + s(hf.kind === "insp" ? "holdI" : "holdE") + "</b> " + s("at", { t: clockText(hf.t) }) + ": " + hf.why + "</p>");
     ["insp", "exp"].forEach(function (kind) {
       var h = holdNow(kind); if (!h) return;
       var bits = HOLD_KEYS[kind].filter(function (k) { return h.v[k] != null; }).map(function (k) { return s("ro_" + k) + " <b>" + esc(fmtN(h.v[k])) + "</b> " + esc(RO_UNIT[k] || ""); });
@@ -1008,9 +1010,14 @@
   A.vlhold = function (b) {
     var kind = b.getAttribute("data-k"), e = E(), r = cur(), res = e.hold ? safe(function () { return e.hold(R.s, R.set, kind); }, null) : null, v = {};
     var src = res ? (res.vent || res) : (r.vent || {});
-    HOLD_KEYS[kind].forEach(function (k) { if (src[k] != null) v[k] = src[k]; });
     if (!R.hold) R.hold = {};
-    R.hold[kind] = { t: R.s.t, sig: holdSig(), v: v };
+    // The engine measures a hold only on a passive patient; an active one breathes against it, so no number is kept.
+    if (res && res.measured === false) { delete R.hold[kind]; R.holdFail = { kind: kind, t: R.s.t, sig: holdSig(), why: res.reason ? tx(res.reason) : s("holdUnrel") }; }
+    else {
+      HOLD_KEYS[kind].forEach(function (k) { if (src[k] != null) v[k] = src[k]; });
+      R.hold[kind] = { t: R.s.t, sig: holdSig(), v: v };
+      if (R.holdFail && R.holdFail.kind === kind) R.holdFail = null;
+    }
     R.log.push({ t: R.s.t, settings: clone(R.set), readout: r, action: "hold:" + kind });
     var el = $("vlHold"); if (el) el.innerHTML = holdHtml();
     var ro = $("vlRo"); if (ro) ro.innerHTML = roHtml(r);
@@ -1066,7 +1073,7 @@
       var nmv = notMeas(r, k), hv = holdVal(k), v = hv != null ? hv : vv[k] != null ? vv[k] : gg[k];
       if (k === "ieActual" && typeof v === "number") v = "1:" + (Math.round(v * 10) / 10);
       var f = !nmv && typeof v === "number" ? roFlag(k, v) : "", big = ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal"].indexOf(k) >= 0;
-      var ex = k === "vte" && typeof v === "number" ? '<span class="vl-ro-x">' + (VOL_MODES[R.set.mode] || !SPONT[R.set.mode] ? s("perKg", { n: Math.round(v / kg * 10) / 10 }) : s("notScored")) + "</span>"
+      var ex = k === "vte" && typeof v === "number" ? '<span class="vl-ro-x">' + (VOL_MODES[R.set.mode] || !SPONT[R.set.mode] ? s("perKg", { n: Math.round(v / kg * 10) / 10 }) : s("ownNotScored")) + "</span>"
         : k === "drivingP" && lv() <= 2 ? '<span class="vl-ro-x">' + s("dpDef") + "</span>" : "";
       return '<div class="vl-ro-i' + (big ? " big" : "") + (f ? " " + f : "") + (nmv ? " nm" : "") + '" data-vl-id="' + k + '"><dt>' + s("ro_" + k) + "</dt><dd>" +
         (nmv ? '<b class="vl-nmv">' + s("needHold") + "</b>" : "<b>" + esc(fmtN(v)) + '</b><span class="vl-u">' + esc(RO_UNIT[k] || "") + "</span>" + (f ? '<span class="vl-flag">' + s("high") + "</span>" : "")) + ex + "</dd></div>";
@@ -1546,7 +1553,7 @@
   }
   // Which setting change most likely raised this alarm: the engine's alarm.causedBy, else the learner's last change
   // (within 30 min before the alarm began) to a setting known to cause it.
-  var CAUSE_KEYS = { peepHigh: ["peep", "epap", "plow"], mapLow: ["peep", "rr", "vt", "ti", "epap", "phigh"], pPeakHigh: ["vt", "pinsp", "rr", "ti", "ipap"], pPlatHigh: ["vt", "pinsp", "peep"],
+  var CAUSE_KEYS = { peepHigh: ["peep", "epap", "plow"], peepSetHigh: ["peep", "epap"], mapLow: ["peep", "rr", "vt", "ti", "epap", "phigh"], pPeakHigh: ["vt", "pinsp", "rr", "ti", "ipap"], pPlatHigh: ["vt", "pinsp", "peep"],
     veLow: ["rr", "vt", "pinsp", "ps", "mode"], vtLow: ["vt", "pinsp", "ps", "mode"], veHigh: ["rr", "vt"], apnoea: ["rr", "mode", "ps"], rrHigh: ["ps", "trigFlow", "trigPress", "mode"],
     autoPeep: ["rr", "vt", "ti"], spo2Low: ["fio2", "peep", "mode"], fio2Low: ["fio2"], fio2High: ["fio2"], peepLow: ["peep"] };
   function causedBy(a) {
@@ -1574,7 +1581,7 @@
     var cb = a ? causedBy(a) : null, top = "";
     if (cb) {
       var u = setUnit(cb.key) ? " " + setUnit(cb.key) : "";
-      top = '<div class="vl-cause"><p>' + (cb.key === "peep" && id === "peepHigh" ? s("peepYou") + " " : "") + s("youChanged", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u, b: setText(cb.key, cb.to) + u, n: cb.minutesAgo != null ? cb.minutesAgo : 0 }) + "</p>" +
+      top = '<div class="vl-cause"><p>' + (cb.key === "peep" && (id === "peepHigh" || id === "peepSetHigh") ? s("peepYou") + " " : "") + s("youChanged", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u, b: setText(cb.key, cb.to) + u, n: cb.minutesAgo != null ? cb.minutesAgo : 0 }) + "</p>" +
         (setDef(cb.key) && String(R.set[cb.key]) === String(cb.to) ? '<button type="button" class="sp-btn pri" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("setBack", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u }) + "</button>" : "") + "</div>";
     }
     var mon = MON_AL[id] && !c.causes && !c.steps ? '<p>' + s(id === "spo2Low" ? "am_spo2Low" : id === "mapLow" ? "am_mapLow" : "am_hr") + "</p>" + (id === "spo2Low" || id === "mapLow" ? '<p class="vl-fix">' + s(id === "spo2Low" ? "ams_spo2Low" : "ams_mapLow") + "</p>" : "") + '<p class="vl-note">' + s("monStays") + "</p>" : "";
@@ -2072,7 +2079,7 @@
     var parts = Object.keys(sco.parts || {}).map(function (k) {
       var v = +sco.parts[k] || 0, mx = MX[k], why = partWhy(k, sco);
       // null = not part of this run (no such decision made): say why instead of showing a zero
-      if (sco.parts[k] === null) return '<li class="vl-pna"><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pnote">' + why + "</span><b>" + s("notScored") + "</b></li>";
+      if (sco.parts[k] === null) return '<li class="vl-pna"><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pnote vl-pwhy">' + why + "</span><b>" + s("notScored") + "</b></li>";
       if (k === "unsafe") return v < 0 ? '<li class="vl-pen"><span class="vl-pl">' + s("p_unsafe") + '</span><span class="vl-pnote">' + s("penalty") + "</span><b>" + I.fmt(v) + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>" : "";
       var pct = mx ? clamp(v / mx * 100, 0, 100) : clamp(v, 0, 100);
       return '<li><span class="vl-pl">' + s("p_" + k) + '</span><span class="vl-pbar" aria-hidden="true"><i style="width:' + pct.toFixed(0) + '%"></i></span><b>' + I.fmt(v) + (mx ? '<small>/' + mx + "</small>" : "") + "</b>" + (why ? '<p class="vl-pwhy">' + why + "</p>" : "") + "</li>";
@@ -2089,7 +2096,7 @@
     if (g.drivingMax && vv.drivingP != null && !SPONT[R.set.mode]) goal("Driving P &le; " + g.drivingMax, fmtN(vv.drivingP), vv.drivingP <= g.drivingMax);
     if (g.vtPerKg && vv.vte) {
       var pk = Math.round(vv.vte / kg * 10) / 10;
-      if (SPONT[R.set.mode] || R.set.mode === "aprv") tg.push('<tr><th scope="row">VT ' + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg</th><td>" + fmtN(pk) + '</td><td class="nsc">' + s("notScored") + "</td></tr>");
+      if (SPONT[R.set.mode] || R.set.mode === "aprv") tg.push('<tr><th scope="row">VT ' + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg</th><td>" + fmtN(pk) + '</td><td class="nsc">' + s("ownNotScored") + "</td></tr>");
       else goal("VT " + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg", fmtN(pk), pk >= g.vtPerKg[0] - 0.3 && pk <= g.vtPerKg[1] + 0.3);
     }
     var us = unsafeList(sco), notes = (sco.notes || []).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
