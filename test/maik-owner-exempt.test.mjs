@@ -38,11 +38,14 @@ test("SAFETY: an exempt owner is still METERED — uncapped is not invisible", (
   assert.doesNotMatch(guarded, /if \(ownerExempt\)/, "recording must never be skipped for owners");
 });
 
-test("SAFETY: the PROJECT-WIDE cost breaker exempts nobody, owners included", () => {
-  // It lives in checkQuota and is evaluated before (and independently of) the `exempt` flag.
+test("owner accounts are unlimited: the project-wide breaker lets an OWNER through (owner, 2026-10-06)", () => {
+  // Owner: "MaiK usage limit reached ... make it unlimited for owner accounts". The breaker still refuses
+  // everyone else, consults ONLY the owner check (not the launch-wide per-user exemption), and owner
+  // calls are still metered (test above), so they still count toward it.
   const blk = USAGE.slice(USAGE.indexOf("global circuit breaker"), USAGE.indexOf("per-user rate limit"));
   assert.match(blk, /reason: "circuit-breaker"/, "the breaker must still be able to refuse");
-  assert.doesNotMatch(blk, /!exempt/, "the project-wide breaker must not consult the per-user exemption");
+  assert.match(blk, /!admin/, "an owner passes the breaker");
+  assert.doesNotMatch(blk, /!exempt/, "the breaker must not consult the launch-wide per-user exemption");
 });
 
 test("the owner check is the SAME one checkQuota uses — one definition of 'owner'", () => {
@@ -62,4 +65,26 @@ test("appending the parameter cannot break existing callers", () => {
   // Several tests call gateAndCount with the shorter signature; ownerExempt must be last and optional.
   assert.match(AIU, /gateAndCount\(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt(, deferRecord)?\)/,
     "ownerExempt must be the LAST parameter so shorter calls still work");
+});
+
+/* Behaviour, not just source shape: trip the project-wide breaker and ask checkQuota itself. */
+test("breaker tripped: an owner is let through, everyone else gets the limit message", async () => {
+  const { checkQuota } = await import("../functions/_usage.js");
+  const { istDay } = await import("../functions/_counters.js");
+  const m = new Map();
+  const kv = { get: async (k, t) => (m.has(k) ? (t === "json" ? JSON.parse(m.get(k)) : m.get(k)) : null), put: async (k, v) => { m.set(k, v); }, list: async () => ({ keys: [], list_complete: true }) };
+  m.set("maik:global:" + istDay(Date.now()), JSON.stringify({ cost: 999999, req: 1, blocked: 0 }));
+  const env = { MAIK_KV: kv, UPDATES_ADMIN_TOKEN: "owner-secret" };
+  const req = (h) => new Request("https://stewardmd.in/api/ai/explain", { method: "POST", headers: h });
+  const user = await checkQuota(env, req({ "X-SMD-Device": "d1" }), "general");
+  assert.equal(user.ok, false); assert.equal(user.reason, "circuit-breaker");
+  const owner = await checkQuota(env, req({ "X-SMD-Device": "d2", "X-Admin-Token": "owner-secret" }), "general");
+  assert.equal(owner.ok, true, "the owner passes the tripped breaker");
+  assert.equal(owner.meter, true, "and is still metered");
+});
+
+test("the per-device daily cap does not block an owner", () => {
+  const src = readFileSync(new URL("../functions/api/ai/[[path]].js", import.meta.url), "utf8");
+  assert.match(src, /if \(!_dc\.ok && !\(await _ownerP\)\) return json\(\{ error: "quota", reason: "device-cap"/);
+  assert.match(src, /const _ownerP = \(_capped \|\| _dcP\)/, "the owner check runs whenever the device cap does");
 });

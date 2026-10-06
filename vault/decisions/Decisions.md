@@ -11335,3 +11335,9 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `tools/tokos-build-drills.mjs --host narke` (copies the shared drill core). Tokós output is byte-identical.
 - **Budget**: Pages caps a deploy at 20,000 files (about 16,850 now); Narkē is capped at 450 files by test.
   [[Narkē]] [[Specialty Engine]]
+- **Owner, 2026-10-06 ("MaiK usage limit reached ... make it unlimited for owner accounts"):** owner
+  accounts (verified owner email, `functions/_adminauth.js ownerOK`, or the admin token) now pass the
+  PROJECT-WIDE daily cost breaker (`functions/_usage.js checkQuota`) and the per-device daily cap
+  (`functions/api/ai/[[path]].js`). This reverses the earlier "the breaker exempts nobody, owners included"
+  rule. Owner calls are still metered, so they show in the dashboards and still count toward the breaker
+  for everyone else. The admin "pause" kill switch still applies to owners. Tests: `test/maik-owner-exempt.test.mjs`.

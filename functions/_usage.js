@@ -209,7 +209,11 @@ export async function checkQuota(env, request, type, opts) {
   // breaker trips reliably instead of undercounting; fall back to KV when D1 is unavailable.
   let breakerCost = g.cost;
   { const d1c = await _d1P; if (d1c != null && d1c > breakerCost) breakerCost = d1c; }
-  if (breakerCost >= hardStop && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
+  /* Owner, 2026-10-06: "MaiK usage limit reached ... make it unlimited for owner accounts". The
+   * breaker used to stop owners too (the one QUOTA_MSG an owner could still see). An OWNER (verified
+   * owner email, functions/_adminauth.js) now passes it; owner calls are still metered below, so
+   * their spend still shows in the dashboards and still counts toward the breaker for everyone else. */
+  if (breakerCost >= hardStop && !admin && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
     return { ok: false, reason: "circuit-breaker", message: QUOTA_MSG, id };
   }
   // per-user rate limit. The "router" type (the always-on semantic parser) is EXEMPT: it is a tiny
