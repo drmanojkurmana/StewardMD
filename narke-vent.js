@@ -312,7 +312,7 @@
     exl_crackles: T("Crackles", "कर्कश आवाज़ (crackles)"), exl_chestRise: T("Chest rise", "छाती का उठना"), exLR: T("Left: {a}. Right: {b}.", "बाईं ओर: {a}। दाईं ओर: {b}।"),
     ex_ppeak: T("peak pressure (Ppeak)", "पीक प्रेशर (Ppeak)"), ex_ve: T("air per minute (VE)", "प्रति मिनट हवा (VE)"), ex_hco3: T("bicarbonate (HCO3)", "बाइकार्बोनेट (HCO3)"),
     went: T("{x} went {d}: {a} to {b}.", "{x} {d}: {a} से {b}।"),
-    sawMove: T("You saw it: {x} {d}, {a} to {b}.", "आपने देखा: {x} {d}, {a} से {b}।"),
+    sawMove: T("You saw it: {x} went {d}, {a} to {b}.", "आपने देखा: {x} {d}, {a} से {b}।"),
     alreadyDid: T("You already did this at {t}. It counts.", "आपने यह {t} पर कर दिया था। यह गिना गया।"),
     showCtl: T("Show me the control", "कंट्रोल दिखाएँ"), openLim: T("Open alarm limits", "अलार्म सीमाएँ खोलें"), openBed: T("Open bedside actions", "बेडसाइड काम खोलें"),
     doNow: T("Do now, in this order", "अभी करें, इसी क्रम में"),
@@ -360,6 +360,8 @@
     return STR[k] ? raw(k) : t(x.because);
   }
   // The bedside actions in a fixed order (never reordered by suggestion, so a hand learns where each one lives).
+  // Clinical short names for the coach's live numbers (never an upper-cased key such as "PACO2")
+  var NUM_LAB = { spo2: "SpO2", map: "MAP", sbp: "SBP", hr: "HR", paco2: "PaCO2", pao2: "PaO2", ph: "pH", hco3: "HCO3", sao2: "SaO2", etco2: "EtCO2", shunt: "Shunt", rr: "RR" };
   var BED_ORDER = ["suction", "bag100", "bronchodilator", "sedate", "paralyse", "fluid", "blood", "disconnect", "decompress"];
   // Alarm card defaults when the engine gives no bedside list for an alarm (E7): the bedside fix leads, never a limit.
   var CARD_ACTS = { pPeakHigh: ["suction", "bag100"], vtLow: ["suction", "bag100"], veLow: ["bag100", "suction"], apnoea: ["bag100"], spo2Low: ["bag100", "suction"], disconnect: ["bag100"], pPlatHigh: [], autoPeep: ["disconnect"] };
@@ -764,6 +766,9 @@
   function toast(kind, html) {
     var el = q(".vl-toast");
     if (!el) return;
+    // a hint never replaces an event the learner caused in the last 4 s (their bedside action's result stays readable)
+    if (kind === "hint" && TO.kind === "event" && el.classList.contains("on") && Date.now() - TO.at < 4000) return;
+    TO.kind = kind; TO.at = Date.now();
     toastPlace(el);
     el.innerHTML = '<span class="vl-toast-k">' + (ico(kind === "hint" ? "spark" : "info")) + "<b>" + s(kind === "hint" ? "hint" : "event") + '</b></span><span class="vl-toast-m">' + html + "</span>" +
       '<button type="button" class="vl-toast-x" data-act="vltoastx" aria-label="' + s("dismiss") + '">' + (ico("close") || "x") + "</button>";
@@ -931,6 +936,7 @@
     if (!R || TABS.indexOf(k) < 0) return;
     R.tab = k;
     var sc = q(".vl-scroll"); if (sc) sc.setAttribute("data-tab", k);
+    var tt = q(".vl-toast.on"); if (tt) toastPlace(tt); // the vitals strip shows on some tabs only: the card moves with it
     [].forEach.call(I.root().querySelectorAll("[data-act=vltab]"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-t") === k)); });
     if (focus) { var n = q('[data-act=vltab][data-t="' + k + '"]'); if (n) n.focus({ preventScroll: true }); }
     G.requestAnimationFrame(function () { WV.plots.forEach(wvSize); wvKick(); });
@@ -1372,7 +1378,7 @@
     try { inp.focus(); inp.select(); } catch (e) {}
   };
   // Press and hold a stepper to keep turning, like a ventilator knob; the click after a hold is not counted again.
-  var HOLD = { tm: 0, iv: 0, fired: false };
+  var HOLD = { tm: 0, iv: 0, fired: false }, UI_N = { n: 0 }; // UI_N counts the learner's presses: delayed moves give way
   function holdStop() { G.clearTimeout(HOLD.tm); G.clearInterval(HOLD.iv); HOLD.tm = HOLD.iv = 0; }
   function holdStart(e) {
     var b = e.target.closest && e.target.closest("[data-act=vlstep]");
@@ -1502,9 +1508,11 @@
         try { c2.focus({ preventScroll: true }); var rc = c2.getBoundingClientRect(), sb = q(".sp-scroll").getBoundingClientRect(); if (rc.top < sb.top || rc.bottom > sb.bottom - 40) scrollTo(c2, false); } catch (x) {}
         var cw = c2.closest(".vl-chainw"); if (cw && !reduced()) { cw.classList.remove("vl-in"); void cw.offsetWidth; cw.classList.add("vl-in"); }
       };
-      if (reduced() || !isPhone()) go(); else G.setTimeout(go, 220);
+      // after the beat the tab opens, unless the learner has already pressed something else (no switch under them)
+      var n0 = UI_N.n;
+      if (reduced() || !isPhone()) go(); else G.setTimeout(function () { if (UI_N.n === n0 && !SH.el) go(); }, 220);
     }
-    G.setTimeout(function () { if (st.view === "vl-run") hint(roA); }, reduced() ? 0 : 1900);
+    var R1 = R; G.setTimeout(function () { if (st.view === "vl-run" && R === R1) hint(roA); }, reduced() ? 0 : 1900);
     if (R.tut) tutCheck();
   }
   // Rows of the three-column projection. Level 1: SpO2, CO2 and blood pressure only.
@@ -1840,6 +1848,7 @@
       }
     }
     var P = planOf(a, id), checks = P ? P.checklist : fallbackChecks(id), acts = P ? (P.actions || []) : fallbackActs(a, id), pr = P && P.primary, lead = !top;
+    if (top && pr && pr.kind !== "action") pr = null; // the cause block above already carries the setting step
     function actBtn(k, isLead) { if (!A0[k]) return ""; var on = safe(function () { return A0[k].available(R.s); }, false), h = bedBtn({ id: k, a: A0[k], on: on, sug: true }, true); return isLead && on ? h.replace('class="vl-bedb', 'class="vl-bedb lead') : h; }
     // the primary step: a bedside action, a setting (never a limit), or a check the learner does with their eyes
     var prim = "", primAct = null;
@@ -1851,7 +1860,7 @@
     var lineActs = {};
     var ol = checks.length ? '<h3 class="vl-h3 vl-now-h">' + s("doNow") + '</h3><ol class="vl-ol vl-now">' + checks.map(function (x) {
       var k = x.action && A0[x.action] && x.action !== primAct ? x.action : null; if (k) lineActs[k] = 1;
-      return "<li><span>" + (x.text ? txg(x.text) : txg(x)) + "</span>" + (k ? actBtn(k, false) : "") + "</li>";
+      return "<li><span>" + (x.text ? tx(x.text) : tx(x)) + "</span>" + (k ? actBtn(k, false) : "") + "</li>";
     }).join("") + "</ol>" : (beg ? '<p class="vl-look">' + s("lookFirst") + "</p>" : "");
     var rest = acts.filter(function (k) { return k !== primAct && !lineActs[k] && A0[k]; });
     var fio2 = !P && id === "spo2Low" ? '<p class="vl-fix vl-fio2l">' + (R.set.fio2 >= 100 ? s("fio2Max") : R.set.fio2 >= 60 ? s("fio2Hi", { v: R.set.fio2 }) : s("ams_spo2Low")) + "</p>" : "";
@@ -2075,7 +2084,7 @@
     var v = r.vitals || {}, g = r.gas || {}, al = activeAlarms().length;
     toast("event", s("skipDone", { x: t(STR[lab]).replace("+", ""), t: clockText(R.s.t) }) + (al ? " " + s("skipAlarm") : ""));
     say(raw("skipped", { x: t(STR[lab]).replace("+", ""), a: fmtN(v.spo2), b: fmtN(g.paco2), c: fmtN(v.map) }));
-    G.setTimeout(function () { if (st.view === "vl-run" && R) hint(r); }, 2600);
+    var R1 = R; G.setTimeout(function () { if (st.view === "vl-run" && R === R1) hint(r); }, 2600);
   };
 
   /* ---- hints: a question that points at the cause without naming the fix (and only for this mode) ---- */
@@ -2154,7 +2163,7 @@
   function expMet(sp, base, r) { var d = dirOf(roVal(base, expKey(sp)), roVal(r, expKey(sp))); return sp.expect.direction === "down" ? d < 0 : d > 0; }
   function tutEnter() {
     var sp = tutStep(); if (!sp) return;
-    R.tut.did = null; R.tut.ok = !sp.do || !!sp.do.scenario || !!sp.do.event; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false; R.tut.early = null;
+    R.tut.did = null; R.tut.ok = !sp.do || !!sp.do.scenario || !!sp.do.event; R.tut.saw = !sp.expect; R.tut.base = null; R.tut.moved = 0; R.tut.flat = false; R.tut.early = null; R.tut.sawV = null;
     if (sp.do && sp.do.scenario && sp.do.scenario !== R.sc.id) { var sc = scById(sp.do.scenario); if (sc) { var tu = R.tut; tu.pre = null; tu.acted = {}; tu.evT = 0; start(tu.tu.keepTimeline ? clone(sc) : noTimeline(sc), tu); return; } }
     if (sp.do && sp.do.key != null && String(R.set[sp.do.key]) === String(sp.do.to)) R.tut.ok = true;
     if (sp.do && sp.do.mode && R.set.mode === sp.do.mode) R.tut.ok = true;
@@ -2211,7 +2220,7 @@
       if (seen[k]) return; seen[k] = 1;
       var v = roVal(r, k);
       if (v == null || typeof v === "object") return;
-      out.push('<span><i>' + (STR["ro_" + k] ? s("ro_" + k) : esc(k === "spo2" ? "SpO2" : k === "map" ? "MAP" : k === "sbp" ? "SBP" : k.toUpperCase().length <= 5 ? k.toUpperCase() : k)) + "</i> " + esc(fmtN(v)) + "</span>");
+      out.push('<span><i>' + (STR["ro_" + k] ? s("ro_" + k) : esc(NUM_LAB[k] || k)) + "</i> " + esc(fmtN(v)) + "</span>");
     });
     return out.length ? '<p class="vl-co-nums"><b>' + s("coNow") + "</b> " + out.slice(0, 4).join("") + "</p>" : "";
   }
@@ -2228,7 +2237,11 @@
     var tu = R.tut.tu, sp = tutStep(), n = tu.steps.length, last = R.tut.i >= n - 1, task = taskText(sp), exp = "";
     var keep = GL.seen; GL.seen = {};
     if (sp.expect) {
-      var bv = R.tut.base ? roVal(R.tut.base.r, expKey(sp)) : null, nv = roVal(cur(), expKey(sp)), d = dirOf(bv, nv);
+      var bv = R.tut.base ? roVal(R.tut.base.r, expKey(sp)) : null, nv = roVal(cur(), expKey(sp));
+      // the evidence is frozen when the change is first seen: a later fix (suction) must not rewrite what was seen
+      if (R.tut.saw && !R.tut.sawV && bv != null && nv != null && dirOf(bv, nv)) R.tut.sawV = { a: bv, b: nv };
+      if (R.tut.sawV) { bv = R.tut.sawV.a; nv = R.tut.sawV.b; }
+      var d = dirOf(bv, nv);
       // the evidence names the real direction and the plain label ("peak pressure (Ppeak) went down, 25 to 17.8")
       if (R.tut.saw) exp = '<p class="vl-co-ok">' + (task ? "" : ico("check") || "") + (bv != null && nv != null && d ? s("sawMove", { x: expName(sp), d: raw(d < 0 ? "down" : "up"), a: fmtN(bv), b: fmtN(nv) }) : s("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") })) + "</p>";
       else if (R.tut.flat) exp = '<p class="vl-co-wait">' + s("tutFlat", { x: expName(sp) }) + "</p>";
@@ -2248,7 +2261,7 @@
     var show = !R.tut.ok && sp.do && (sp.do.key != null || sp.do.action || sp.do.mode) ? '<button type="button" class="vl-co-link vl-co-show" data-act="vltutshow">' +
       s(sp.do.key != null && ALARM_KEYS.indexOf(sp.do.key) >= 0 ? "openLim" : sp.do.action ? "openBed" : "showCtl") + "</button>" : "";
     GL.seen = keep;
-    return '<div class="vl-co-h"><button type="button" class="vl-co-min" data-act="vlcomin" aria-expanded="' + !R.coMin + '" aria-controls="vlCoBody"><span class="vl-co-ht">' + tx(tu.title) + " · " + s("stepOf", { i: R.tut.i + 1, n: n }) +
+    return '<div class="vl-co-h"><button type="button" class="vl-co-min" data-act="vlcomin" aria-expanded="' + !R.coMin + '" aria-controls="vlCoBody"><span class="vl-co-ht"><span class="vl-co-tt">' + tx(tu.title) + '</span><span class="vl-co-st"> · ' + s("stepOf", { i: R.tut.i + 1, n: n }) + "</span>" +
       '</span><span class="vl-co-chev" aria-hidden="true">' + ico("chev") + '</span><span class="sp-sr">' + s(R.coMin ? "coMax" : "coMin") + '</span></button><button type="button" class="vl-co-x" data-act="vltutx">' + s("exitTut") + "</button></div>" +
       '<div class="vl-co-bar" aria-hidden="true"><i style="transform:scaleX(' + ((R.tut.i + 1) / n).toFixed(3) + ')"></i></div>' +
       '<div class="vl-co-body" id="vlCoBody">' +
@@ -2376,7 +2389,7 @@
     var t0 = 0, D = 700;
     function ease(x) { var u = 1 - x; return 1 - u * u * u * u; }
     function f(now) { if (!t0) t0 = now; var x = Math.min(1, (now - t0) / D); b.textContent = I.fmt(Math.round(to * ease(x))); if (x < 1 && st.view === "vl-done") G.requestAnimationFrame(f); else b.textContent = I.fmt(to); }
-    b.textContent = "0"; G.requestAnimationFrame(f);
+    b.setAttribute("aria-label", I.fmt(to)); b.textContent = "0"; G.requestAnimationFrame(f);
     var l = q(".vl-parts"); if (l) l.classList.add("grow");
   }
   function anyTx(v) { return v == null ? "" : typeof v === "string" ? esc(v) : v.en || v.hi ? tx(v) : v.text ? tx(v.text) : v.because ? tx(v.because) : ""; }
@@ -2705,6 +2718,7 @@
     el.addEventListener("change", onSel);
     el.addEventListener("toggle", function (e) { if (R && e.target && e.target.classList && e.target.classList.contains("vl-bedd")) R.bedOpen = e.target.open; }, true);
     el.addEventListener("pointerdown", holdStart);
+    ["pointerdown", "keydown", "click"].forEach(function (x) { el.addEventListener(x, function () { UI_N.n++; }, true); });
     ["pointerup", "pointercancel", "pointerleave"].forEach(function (x) { el.addEventListener(x, holdStop); });
   }
   function openLab() { wire(); home(); }

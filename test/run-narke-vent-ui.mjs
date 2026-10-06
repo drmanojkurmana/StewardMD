@@ -548,8 +548,9 @@ try {
     // bedside action feedback: toast, log line, used state
     await goRun(2, "pneumonia");
     await click(`[data-act=vltab][data-t=mon]`);
-    await tap(`[data-act=vlbed][data-k=suction]`);
-    ok(await ev(`return /Done:/.test(document.querySelector('#smdNarke .vl-toast').textContent) && /Your actions/.test(document.querySelector('#smdNarke .vl-bedlog').textContent) && /Used at/.test(document.querySelector('#smdNarke [data-act=vlbed][data-k=suction]').textContent);`) === true, "a bedside action gives a toast, a log line and a used-at time");
+    { const tr = await tap(`[data-act=vlbed][data-k=suction]`);
+      const fb = await ev(`var t=document.querySelector('#smdNarke .vl-toast').textContent, l=document.querySelector('#smdNarke .vl-bedlog'), b=document.querySelector('#smdNarke [data-act=vlbed][data-k=suction]').textContent; return /Done:/.test(t) && !!l && /Your actions/.test(l.textContent) && /Used at/.test(b) ? true : JSON.stringify({ toast: t.slice(0, 80), log: !!l, btn: b });`);
+      ok(tr === 1 && fb === true, "a bedside action gives a toast, a log line and a used-at time" + (tr === 1 ? "" : " (tap: " + tr + ")") + (fb === true ? "" : ": " + fb)); }
     ok(await ev(`var s=[].filter.call(document.querySelectorAll('#smdNarke .vl-bedb small'), function(x){return /Suggested/.test(x.textContent);}).length, a=document.querySelectorAll('#smdNarke .vl-bedb').length; return s < a;`) === true, "only matching actions are marked Suggested");
     await shot("390-dark-bed-feedback");
     { const sm = await small(); ok(sm === true, "persona screens: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
@@ -622,7 +623,8 @@ try {
         await shot("r2-alarm-card");
         await tap(`.vl-sheet .vl-bedb.lead`);
         ok(await until(`return !document.querySelector('#smdNarke .vl-sheet-wrap') && !document.querySelector('#smdNarke .vl-al[data-k=pPeakHigh]');`), "suction from the card clears the alarm");
-        ok(await ev(`return !/went up/.test(document.querySelector('#smdNarke .vl-coach').textContent) && !/\\bppeak\\b/.test(document.querySelector('#smdNarke .vl-coach').textContent);`) === true, "U6: the coach does not report the wrong direction or a raw key after suction");
+        { const cw = await ev(`var t=document.querySelector('#smdNarke .vl-coach').textContent, m=/went (up|down), ([\\d.]+) to ([\\d.]+)/.exec(t); if (/\\bppeak\\b/.test(t)) return "raw key: " + t; if (!m) return "no evidence line: " + t; var a=+m[2], b=+m[3]; return (m[1]==="up" ? b > a : b < a) ? true : "contradiction: " + m[0];`);
+          ok(cw === true, "U6: after suction the coach's evidence still reads the change it saw, in the right direction, with labels" + (cw === true ? "" : ": " + cw)); }
       }
       if (/Step 5 /.test(st + " ")) ok(await ev(`return /already cleared/.test(document.getElementById('vlCoSay').textContent);`) === true, "U1: step 5 says the alarm is already cleared instead of narrating it");
       if (/Step 7 /.test(st + " ")) {
@@ -679,7 +681,7 @@ try {
     let guard = 0;
     while (guard++ < 8 && !(await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`))) { await click(`[data-act=vltutn]`); await sleep(120); }
     ok(await ev(`var b=document.querySelector('#smdNarke [data-act=vltutn]'), n=document.getElementById('vlCoNeed'); return b.getAttribute('data-wait')==='1' && !!n && /Your turn/.test(n.textContent) && !/First:/.test(document.querySelector('#smdNarke .vl-coach').textContent) && !/Set Set/.test(document.querySelector('#smdNarke .vl-coach').textContent);`) === true, w + " px: a waiting Next says what to press first, and no 'Set Set'");
-    await tap(`[data-act=vltutn]`);
+    await tap(`[data-act=vltutn]`); await sleep(700); // the waiting Next scrolls its control into view smoothly
     const cov = await ev(`var c=document.getElementById('vlCoach').getBoundingClientRect(), hl=[].filter.call(document.querySelectorAll('#smdNarke .vl-hl, #smdNarke [data-knob].vl-chg'), function(e){ var r=e.getBoundingClientRect(); return r.width && r.height; }); if (!hl.length) hl=[document.querySelector('#smdNarke .vl-knob')]; return hl.every(function(e){ var r=e.getBoundingClientRect(); return r.bottom <= c.top + 1 || r.right <= c.left + 1 || r.top >= c.bottom - 1; }) ? true : JSON.stringify([c.top, c.left, hl[0].getBoundingClientRect().top, hl[0].getBoundingClientRect().bottom]);`);
     ok(cov === true, w + " px: the coach never covers the highlighted target" + (cov === true ? "" : ": " + cov));
     ok(await ev(`var c=document.getElementById('vlCoach').getBoundingClientRect(); return ${w < 1000} ? c.height <= innerHeight * 0.56 : c.left > innerWidth - 400;`) === true, w + " px: the coach is " + (w < 1000 ? "a sheet of at most 55 % of the screen" : "docked at the right"));

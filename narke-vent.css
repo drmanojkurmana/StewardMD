@@ -131,8 +131,10 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-al-more.warn { border-color: var(--nk-warn); color: var(--sp-text); }
 /* no active alarm: the bar folds away and a green chip sits under the title (round 2 chrome diet) */
 .nrk-root .vl-alarms.is-none { display: none; }
-.nrk-root .vl-okchip { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; font-size: 12px; font-weight: 650; color: var(--nk-ok); vertical-align: 1px; }
-.nrk-root .vl-okchip[hidden] { display: none; }
+.nrk-root .sp-title #vlClock { display: inline; }
+.nrk-root .sp-title .vl-okchip span { display: inline-flex; overflow: visible; }
+.nrk-root .sp-title .vl-okchip { display: inline-flex; overflow: visible; align-items: center; gap: 4px; margin-left: 8px; font-size: 12px; font-weight: 650; color: var(--nk-ok); vertical-align: 1px; }
+.nrk-root .sp-title .vl-okchip[hidden] { display: none; }
 .nrk-root .vl-okchip .smd-ico { width: 14px; height: 14px; }
 
 /* ---- patient ---- */
@@ -758,7 +760,9 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-coach { display: flex; flex-direction: column; max-height: 55dvh; overflow: hidden; padding-bottom: 8px; }
 .nrk-root .vl-co-h, .nrk-root .vl-co-bar, .nrk-root .vl-co-need, .nrk-root .vl-co-f { flex: 0 0 auto; }
 .nrk-root .vl-co-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 2px; }
-.nrk-root .vl-co-ht { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nrk-root .vl-co-ht { display: flex; min-width: 0; }
+.nrk-root .vl-co-tt { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nrk-root .vl-co-st { flex: 0 0 auto; white-space: pre; }
 .nrk-root .vl-co-show { display: block; }
 .nrk-root .vl-co-say.swap { animation: vl-swap 160ms ease-out; }
 @keyframes vl-swap { from { opacity: 0; filter: blur(2px); } to { opacity: 1; filter: none; } }
@@ -775,13 +779,13 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 
 /* Dials: tidal volume per kg PBW, live, with the 6 to 8 band (U7) */
 .nrk-root .vl-perkg { margin: 2px 6px 6px 0; display: grid; gap: 4px; }
-.nrk-root .vl-perkg-t { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums; }
-.nrk-root .vl-perkg-t b { font-size: 13px; font-weight: 700; color: var(--nk-warn); }
+.nrk-root .vl-perkg-t { display: flex; flex-direction: column; gap: 1px; font-variant-numeric: tabular-nums; }
+.nrk-root .vl-perkg-t b { white-space: nowrap; font-size: 13px; font-weight: 700; color: var(--nk-warn); }
 .nrk-root .vl-perkg.ok .vl-perkg-t b { color: var(--nk-ok); }
 .nrk-root .vl-perkg-t small { font-size: 12px; color: var(--sp-mut); }
 .nrk-root .vl-perkg-s { position: relative; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--sp-mut) 22%, transparent); }
 .nrk-root .vl-perkg-b { position: absolute; left: 33.3%; width: 33.4%; top: 0; bottom: 0; border-radius: 3px; background: color-mix(in srgb, var(--nk-ok) 70%, transparent); }
-.nrk-root .vl-perkg-m { position: absolute; top: -3px; width: 4px; height: 12px; margin-left: -2px; border-radius: 2px; background: var(--sp-text); transition: left 160ms var(--vl-ease); }
+.nrk-root .vl-perkg-m { position: absolute; top: -3px; width: 4px; height: 12px; margin-left: -2px; border-radius: 2px; background: var(--sp-text); }
 
 /* Confirm: the dial's new value takes a short beat where the hand is; the chain fades in (premium 4) */
 @media (prefers-reduced-motion: no-preference) {
@@ -823,3 +827,5 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-live-t small, .nrk-root .vl-ovs .vl-u, .nrk-root .vl-p3 th small { font-size: 11.5px; }
 .nrk-root .vl-scale, .nrk-root .vl-u, .nrk-root .vl-ro-i .vl-u, .nrk-root .vl-ro-x, .nrk-root .vl-abgt thead small, .nrk-root .vl-dial-v small, .nrk-root .vl-flag,
 .nrk-root .vl-abn-t, .nrk-root .vl-doing abbr, .nrk-root .vl-parts b small { font-size: 12px; }
+/* lab links follow the indigo accent (the host link colour is yellow in the dark theme, the medium-alarm colour here) */
+.nrk-root .vl-scroll, .nrk-root .vl-coach, .nrk-root .vl-sheet-wrap, .nrk-root .vl-home, .nrk-root .vl-done { --sp-link: var(--vl-acc); --sp-link-line: color-mix(in srgb, var(--vl-acc) 45%, transparent); }
