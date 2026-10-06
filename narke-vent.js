@@ -342,6 +342,12 @@
     vdUp: T("raises {x} from {a} to {b}", "{x} को {a} से {b} करता है"), vdDn: T("lowers {x} from {a} to {b}", "{x} को {a} से {b} करता है"),
     vdPlat: T("pushes plateau pressure to {b}, above 30", "plateau pressure को {b} तक ले जाता है, 30 से ऊपर"), vdAnd: T(" and ", " और "),
     vdMap: T("blood pressure (MAP)", "blood pressure (MAP)"),
+    band_mild: T("Mild:", "हल्की कमी:"), band_emergency: T("Emergency:", "Emergency:"),
+    bandT_mild: T("SpO2 is below the goal but 88% or more. Look at the patient, check the probe trace, then raise FiO2 one step.", "SpO2 लक्ष्य से कम है पर 88% या ज़्यादा। मरीज़ को देखें, probe trace जाँचें, फिर FiO2 एक कदम बढ़ाएँ।"),
+    bandT_emergency: T("SpO2 is below 88%. Hand bag with 100% oxygen, think DOPE and call your senior now.", "SpO2 88% से कम है। 100% oxygen से हाथ से bag करें, DOPE सोचें और अभी senior को बुलाएँ।"),
+    o2Trend: T("Where SpO2 is heading", "SpO2 किधर जा रहा है"), unsafeBack: T("Why not set it back", "वापस क्यों नहीं"),
+    interpH: T("Reading the gas", "गैस को पढ़ना"), stepByStep: T("Step by step", "क़दम दर क़दम"),
+    worstH: T("Longest time off a goal", "किसी लक्ष्य से सबसे लंबा समय बाहर"), worstLine: T("{x}, from {a} to {b} min ({m} min).", "{x}, {a} से {b} मिनट तक ({m} मिनट)।"),
     wVe: T("Smaller breaths at this rate cut the air moved each minute by {p}% ({a} to {b} L/min). CO2 will rise.", "इस rate पर छोटी साँसें हर मिनट की हवा {p}% घटा देंगी ({a} से {b} L/min)। CO2 बढ़ेगा।"),
     rrPair: T("Also raise rate to {n} to keep minute air the same", "हर मिनट की हवा बराबर रखने के लिए rate भी {n} करें"),
     wRrHigh: T("Rate {v} is fast. Short breaths out can trap air. Check before you confirm.", "Rate {v} तेज़ है। छोटी साँस छोड़ने में हवा फँस सकती है। पक्का करने से पहले जाँचें।"),
@@ -1094,10 +1100,16 @@
   }
   // SpO2 below target: the engine's reason and what to do next (readout.oxygenHelp), e.g. a lung that will not
   // recruit at FiO2 100% (Sameer stalled at 89 with no hint). Shown only while the oxygen is actually low.
+  function trendHtml(r) {
+    var tr = r && r.oxygenTrend;
+    if (!tr || !tr.reason || !(tr.direction === "down" || tr.kind === "shunt" || (bagLeft() && tr.direction !== "steady"))) return "";
+    return '<div class="vl-o2t" role="note"><p class="vl-o2h-h"><b>' + s("o2Trend") + (tr.toward != null ? " · " + arrow(tr.direction === "down" ? -1 : tr.direction === "up" ? 1 : 0) + " " + esc(fmtN(tr.toward)) + "%" : "") + "</b></p><p>" + tx(tr.reason) +
+      (tr.direction === "down" && tr.lag ? " " + tx(tr.lag) : "") + "</p></div>";
+  }
   function o2Html(r) {
-    var h = r && r.oxygenHelp, v = (r && r.vitals) || {};
-    if (!h || !h.reason || !(v.spo2 < spo2Lo())) return "";
-    return '<div class="vl-o2h" role="note"><p class="vl-o2h-h"><b>' + s("o2Why") + "</b></p><p>" + tx(h.reason) + "</p>" +
+    var h = r && r.oxygenHelp, v = (r && r.vitals) || {}, tr = trendHtml(r);
+    if (!h || !h.reason || !(v.spo2 < spo2Lo())) return tr;
+    return tr + '<div class="vl-o2h" role="note"><p class="vl-o2h-h"><b>' + (h.band === "mild" || h.band === "emergency" ? s("band_" + h.band) + " " : "") + s("o2Why") + "</b></p><p>" + tx(h.reason) + "</p>" +
       ((h.next || []).length ? '<ol class="vl-ol">' + h.next.map(function (x) { return "<li>" + tx(x) + "</li>"; }).join("") + "</ol>" : "") +
       (h.callSenior ? '<p class="vl-call">' + s("o2Call") + "</p>" : "") + "</div>";
   }
@@ -1284,11 +1296,13 @@
     return RO_ORDER.filter(function (k) { return (vis.indexOf(k) >= 0 || extra.indexOf(k) >= 0) && (vv[k] != null || gg[k] != null); }).map(function (k) {
       var nmv = notMeas(r, k), hv = holdVal(k), v = hv != null ? hv : vv[k] != null ? vv[k] : gg[k];
       if (k === "ieActual" && typeof v === "number") v = "1:" + (Math.round(v * 10) / 10);
+      if (k === "shunt" && gg.shuntPct != null) v = gg.shuntPct;
       var f = !nmv && typeof v === "number" ? roFlag(k, v) : "", big = ["ppeak", "pplat", "peepTotal", "vte", "ve", "rrTotal"].indexOf(k) >= 0;
       var ex = k === "vte" && typeof v === "number" ? '<span class="vl-ro-x">' + (VOL_MODES[R.set.mode] || !SPONT[R.set.mode] ? s("perKg", { n: Math.round(v / kg * 10) / 10 }) : s("ownNotScored")) + "</span>"
-        : k === "drivingP" && lv() <= 2 ? '<span class="vl-ro-x">' + s("dpDef") + "</span>" : "";
+        : k === "drivingP" && lv() <= 2 ? '<span class="vl-ro-x">' + s("dpDef") + "</span>"
+        : k === "shunt" && gg.shuntPlain ? '<span class="vl-ro-x">' + tx(gg.shuntPlain) + "</span>" : "";
       return '<div class="vl-ro-i' + (big ? " big" : "") + (f ? " " + f : "") + (nmv ? " nm" : "") + '" data-vl-id="' + k + '"><dt>' + s("ro_" + k) + "</dt><dd>" +
-        (nmv ? '<b class="vl-nmv">' + s("needHold") + "</b>" : "<b>" + esc(fmtN(v)) + '</b><span class="vl-u">' + esc(RO_UNIT[k] || "") + "</span>" + (f ? '<span class="vl-flag">' + s("high") + "</span>" : "")) + ex + "</dd></div>";
+        (nmv ? '<b class="vl-nmv">' + s("needHold") + "</b>" : "<b>" + esc(fmtN(v)) + '</b><span class="vl-u">' + esc(k === "shunt" && gg.shuntPct != null ? "%" : RO_UNIT[k] || "") + "</span>" + (f ? '<span class="vl-flag">' + s("high") + "</span>" : "")) + ex + "</dd></div>";
     }).join("");
   }
   function bindWaves(r) {
@@ -1762,7 +1776,14 @@
       (a0 ? '<th scope="col">' + s("before") + "<small>" + esc(clockText(a0.t)) + "</small></th>" : "") +
       '<th scope="col">' + s(a0 ? "now" : "now") + "<small>" + esc(clockText(a1.t)) + "</small></th>" + (a0 ? '<th scope="col"><span class="sp-sr">' + s("whyH") + "</span></th>" : "") + "</tr></thead><tbody>" + rows +
       (pf != null && !beg ? '<tr><th scope="row">' + s("pf") + "</th>" + (a0 ? "<td>" + esc(fmtN(a0.fio2 ? Math.round(a0.abg.PaO2 / (a0.fio2 / 100)) : null)) + "</td>" : "") + "<td><b>" + esc(fmtN(pf)) + "</b></td>" + (a0 ? "<td></td>" : "") + "</tr>" : "") +
-      "</tbody></table>" + (a1.abg.curveNote ? '<p class="vl-plain vl-curve">' + esc(t(a1.abg.curveNote).replace(/^./, function (c) { return c.toUpperCase(); })) + "</p>" : "") + (lv() <= 2 ? '<p class="vl-plain">' + s("pfVsS") + "</p>" : "") + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
+      "</tbody></table>" + interpHtml(a1.abg.interp, beg) + ((beg && a1.abg.curveNoteShort) || a1.abg.curveNote ? '<p class="vl-plain vl-curve">' + esc(t(beg && a1.abg.curveNoteShort ? a1.abg.curveNoteShort : a1.abg.curveNote).replace(/^./, function (c) { return c.toUpperCase(); })) + "</p>" : "") + (lv() <= 2 ? '<p class="vl-plain">' + s("pfVsS") + "</p>" : "") + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
+  }
+  // The engine's reading of a gas (abg().interp or E.interpretAbg): its label, and the steps (folded at Level 1).
+  function interpHtml(ip, fold) {
+    if (!ip || !ip.label) return "";
+    var d = ip.detail ? txg(ip.detail) : "";
+    return '<div class="vl-interp"><p><b>' + s("interpH") + ":</b> " + tx(ip.label) + "</p>" +
+      (d ? fold ? '<details class="vl-more"><summary>' + s("stepByStep") + "</summary><p>" + d + "</p></details>" : '<p class="vl-plain">' + d + "</p>" : "") + "</div>";
   }
   // A reason whose direction disagrees with the numbers it sits next to is dropped, never shown.
   function agree(rs, b, a) {
@@ -1799,8 +1820,14 @@
     if (v.hr != null && v.hr < 45) add("hrLow", "danger");
     return o;
   }
+  function abgCtx() {
+    var g = R && R.abgs && R.abgs[R.abgs.length - 1], x;
+    if (!g || !g.abg) return {};
+    x = clone(g.abg); x.t = g.t;
+    return { lastAbg: x };
+  }
   function allAlarms() {
-    var list = safe(function () { return E().alarms(R.s, R.set); }, []).slice(), have = {};
+    var list = safe(function () { return E().alarms(R.s, R.set, abgCtx()); }, []).slice(), have = {};
     list.forEach(function (a) { have[a.id] = 1; });
     return list.concat(monAlarms(have));
   }
@@ -1890,7 +1917,7 @@
   // hides the alarm, so it sits under "Other causes and checks" and says so. A changed SETTING (PEEP) is a real cause.
   function planOf(a, id) {
     if (a && a.checklist && a.checklist.length) return a;
-    var e = E(), p = e.alarmPlan ? safe(function () { return e.alarmPlan(R.s, id, R.set); }, null) : null;
+    var e = E(), p = e.alarmPlan ? safe(function () { return e.alarmPlan(R.s, id, R.set, abgCtx()); }, null) : null;
     return p && p.checklist && p.checklist.length ? p : null;
   }
   // Without an engine plan (an older engine): the UI's own ordered list and bedside actions.
@@ -1915,8 +1942,13 @@
           (can ? '<button type="button" class="sp-btn sec" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("limBack", { a: setText(cb.key, cb.from) + u }) + "</button>" : "") +
           '<p class="vl-note">' + s("limNote") + "</p></div>";
       } else {
+        // U9 (round 4): "Set X back" only when the old value was safe (engine causedBy.safeBack); otherwise say why not and
+        // offer the engine's safe step instead (the rate pair for a smaller breath, or PEEP 5)
+        var ins = cb.safeBack === false ? cb.instead : null;
         top = '<div class="vl-cause"><p>' + (cb.key === "peep" && (id === "peepHigh" || id === "peepSetHigh") ? s("peepYou") + " " : "") + s("youChanged", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u, b: setText(cb.key, cb.to) + u, n: n0 }) + "</p>" +
-          (can ? '<button type="button" class="sp-btn pri" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("setBack", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u }) + "</button>" : "") + "</div>";
+          (cb.safeBack === false ? (cb.unsafeWhy ? '<p class="vl-unsafe"><b>' + s("unsafeBack") + ":</b> " + txg(cb.unsafeWhy) + "</p>" : "") +
+            (ins && setDef(ins.key) && String(R.set[ins.key]) !== String(ins.to) ? planBtn(ins, "pri") + (ins.why ? '<p class="vl-note vl-prim-why">' + txg(ins.why) + "</p>" : "") : "")
+            : can ? '<button type="button" class="sp-btn pri" data-act="vlsetback" data-k="' + esc(cb.key) + '" data-v="' + esc(cb.from) + '">' + s("setBack", { x: setLabel(cb.key), a: setText(cb.key, cb.from) + u }) + "</button>" : "") + "</div>";
       }
     }
     var P = planOf(a, id), checks = P ? P.checklist : fallbackChecks(id), acts = P ? (P.actions || []) : fallbackActs(a, id), pr = P && P.primary, lead = !top;
@@ -1925,10 +1957,11 @@
     // the primary step: a bedside action, a setting (never a limit), or a check the learner does with their eyes
     var prim = "", primAct = null;
     if (pr && pr.kind === "action" && A0[pr.id]) { primAct = pr.id; prim = '<div class="vl-prim">' + actBtn(pr.id, lead) + "</div>"; }
-    else if (pr && pr.kind === "setting" && setDef(pr.key) && ALARM_KEYS.indexOf(pr.key) < 0 && String(R.set[pr.key]) !== String(pr.to)) prim = '<button type="button" class="sp-btn ' + (lead ? "pri" : "sec") + ' sp-wide vl-prim" data-act="vlplanset" data-k="' + esc(pr.key) + '" data-v="' + esc(pr.to) + '">' + tx(pr.label) + "</button>";
+    else if (pr && pr.kind === "setting" && setDef(pr.key) && ALARM_KEYS.indexOf(pr.key) < 0 && String(R.set[pr.key]) !== String(pr.to)) prim = planBtn(pr, lead ? "pri" : "sec") + (pr.why ? '<p class="vl-note vl-prim-why">' + txg(pr.why) + "</p>" : "");
     else if (pr && pr.label) prim = '<p class="vl-prim vl-prim-c">' + tx(pr.label) + "</p>";
     else if (!P && acts.length) { primAct = acts[0]; prim = '<div class="vl-prim">' + actBtn(acts[0], lead) + "</div>"; }
-    var call = P && P.callNow ? '<p class="vl-call" role="note">' + (P.callWhy ? txg(P.callWhy) : s("ck_senior")) + "</p>" : "";
+    var call = (P && (P.spo2Band === "mild" || P.spo2Band === "emergency") ? '<p class="vl-band vl-band-' + P.spo2Band + '"><b>' + s("band_" + P.spo2Band) + "</b> " + s("bandT_" + P.spo2Band) + "</p>" : "") +
+      (P && P.callNow ? '<p class="vl-call" role="note">' + (P.callWhy ? txg(P.callWhy) : s("ck_senior")) + "</p>" : "");
     var lineActs = {};
     var ol = checks.length ? '<h3 class="vl-h3 vl-now-h">' + s("doNow") + '</h3><ol class="vl-ol vl-now">' + checks.map(function (x) {
       var k = x.action && A0[x.action] && x.action !== primAct ? x.action : null; if (k) lineActs[k] = 1;
@@ -1948,12 +1981,19 @@
       '<div class="vl-acard ' + esc(sev) + '">' + top + now + (more ? '<details class="vl-more"' + (open ? " open" : "") + "><summary>" + s("otherCauses") + "</summary>" + more + "</details>" : "") + "</div>",
       '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + '</button><button type="button" class="sp-btn sec" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
   };
+  // A plan's setting step as a button; `also` (e.g. a shorter Ti with a faster rate) travels with it.
+  function planBtn(x, cls) {
+    var al = x.also && typeof x.also === "object" ? JSON.stringify(x.also) : "";
+    return '<button type="button" class="sp-btn ' + cls + ' sp-wide vl-prim" data-act="vlplanset" data-k="' + esc(x.key) + '" data-v="' + esc(x.to) + '"' + (al ? ' data-also="' + esc(al) + '"' : "") + ">" + tx(x.label) + "</button>";
+  }
   // The plan's primary setting step (e.g. FiO2 to 100% for low SpO2): applied like any change, through Confirm.
   A.vlplanset = function (b) {
-    var k = b.getAttribute("data-k"), v = b.getAttribute("data-v"), d = setDef(k);
+    var k = b.getAttribute("data-k"), v = b.getAttribute("data-v"), d = setDef(k), al = null, k2;
     if (!d || ALARM_KEYS.indexOf(k) >= 0) return;
+    try { al = JSON.parse(b.getAttribute("data-also") || "null"); } catch (e) { al = null; }
     closeSheet(true);
     R.pend = {}; R.pend[k] = d.options ? v : +v;
+    if (al) for (k2 in al) if (Object.prototype.hasOwnProperty.call(al, k2) && setDef(k2) && ALARM_KEYS.indexOf(k2) < 0 && al[k2] != null) R.pend[k2] = setDef(k2).options ? al[k2] : +al[k2];
     confirmChanges();
   };
   A.vlsetback = function (b) {
@@ -2066,7 +2106,8 @@
     if (v0.spo2 !== v1.spo2) eff.push(raw("sawVal", { x: "SpO2", a: fmtN(v0.spo2), b: fmtN(v1.spo2) }));
     if (v0.map !== v1.map) eff.push(raw("sawVal", { x: "MAP", a: fmtN(v0.map), b: fmtN(v1.map) }));
     I.haptic("tap");
-    toast("event", s("bedDone", { x: t(a.label) }) + (eff.length ? ". " + esc(eff.join(", ")) + "." : ""));
+    var trd = r1.oxygenTrend && r1.oxygenTrend.direction === "down" && r1.oxygenTrend.reason ? " " + tx(r1.oxygenTrend.reason) : "";
+    toast("event", s("bedDone", { x: t(a.label) }) + (eff.length ? ". " + esc(eff.join(", ")) + "." : "") + trd);
     say(raw("bedDone", { x: t(a.label) }) + (id === "bag100" ? ". " + raw("bagOff") : ""));
     if (R.tut) { R.tut.did = id; tutCheck(); }
     var n = q('#vlBedW [data-k="' + id + '"]') || q("#vlBedW button") || q(".vl-mode"); if (n) n.focus({ preventScroll: true });
@@ -2291,6 +2332,7 @@
     keys.forEach(function (k) {
       if (seen[k]) return; seen[k] = 1;
       var v = roVal(r, k);
+      if (k === "shunt" && r.gas && r.gas.shuntPct != null) v = r.gas.shuntPct + "%";
       if (v == null || typeof v === "object") return;
       out.push('<span><i>' + (STR["ro_" + k] ? s("ro_" + k) : esc(NUM_LAB[k] || k)) + "</i> " + esc(fmtN(v)) + "</span>");
     });
@@ -2535,14 +2577,16 @@
       if (SPONT[R.set.mode] || R.set.mode === "aprv") tg.push('<tr><th scope="row">VT ' + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg</th><td>" + fmtN(pk) + '</td><td class="nsc">' + s("ownNotScored") + "</td></tr>");
       else goal("VT " + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg", fmtN(pk), pk >= g.vtPerKg[0] - 0.3 && pk <= g.vtPerKg[1] + 0.3);
     }
-    var us = unsafeList(sco), notes = (sco.notes || []).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
+    var ws = sco.worstSpell, wsEn = ws && ws.what ? "Longest time off a goal" : null;
+    var us = unsafeList(sco), notes = (sco.notes || []).filter(function (n) { return !(wsEn && n && n.en && n.en.indexOf(wsEn) === 0); }).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
+    var worst = ws && ws.what ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("worstH") + "</b></p><p>" + s("worstLine", { x: t(ws.what), a: ws.fromMin, b: ws.toMin, m: ws.minutes }) + "</p></div>" : "";
     var key = (sc.debrief || []).map(function (n) { return txg(n); });
     var tone = R.arrest ? "bad" : sco.total >= 80 ? "ok" : sco.total >= 60 ? "mid" : "bad";
     I.paint(I.top(t(STR.backLab), s("debrief"), tx(sc.title), I.langBtn()) +
       '<div class="sp-scroll sp-pad"><div class="sp-col vl-done">' +
       (R.arrest ? '<div class="vl-arrest vl-arrest-d" role="note"><h2 class="vl-h">' + s("arrestH") + "</h2>" + arrestHtml() + "</div>" : "") +
       '<div class="vl-score ' + tone + '" tabindex="-1"><b>' + I.fmt(sco.total || 0) + "</b><span>" + s("outOf") + "</span></div>" +
-      '<ul class="vl-parts">' + parts + "</ul>" +
+      '<ul class="vl-parts">' + parts + "</ul>" + worst +
       '<h2 class="sp-h2">' + s("unsafeH") + "</h2>" + (us.length ? '<ul class="dr-lines vl-notes vl-unsafe">' + us.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" : '<p class="vl-empty">' + s("unsafeNone") + "</p>") +
       (tg.length ? '<h2 class="sp-h2">' + s("atEndT", { t: clockText(R.s.t) }) + '</h2><table class="vl-goals"><tbody>' + tg.join("") + "</tbody></table>" + (sco.goals && sco.goals.missedText ? '<p class="vl-plain">' + anyTx(sco.goals.missedText) + "</p>" : "") : "") +
       (notes.length ? '<h2 class="sp-h2">' + s("takeaway") + '</h2><ul class="dr-lines vl-notes">' + notes.map(function (n) { return "<li>" + n + "</li>"; }).join("") + "</ul>" : "") +
@@ -2704,7 +2748,8 @@
       '<div class="vl-card vl-abgcard" aria-label="ABG"><dl>' + card + "</dl></div>" +
       '<h2 class="sp-h3 vl-q" id="vlQ1">' + s("q1") + ": " + txg(q1.ask) + "</h2>" + opts(q1, "vlq1", CS.a1);
     if (CS.a1 != null) {
-      h += verdict("vl-v1", CS.a1 === q1.answer, q1) + (q1.why ? '<p class="vl-whyp">' + txg(q1.why) + "</p>" : "") +
+      var ipc = E().interpretAbg ? safe(function () { return E().interpretAbg(c.abg); }, null) : null;
+      h += verdict("vl-v1", CS.a1 === q1.answer, q1) + (q1.why ? '<p class="vl-whyp">' + txg(q1.why) + "</p>" : "") + interpHtml(ipc, beg) +
         '<h2 class="sp-h3 vl-q" id="vlQ2">' + s("q2") + ": " + txg(q2.ask) + "</h2>" + opts(q2, "vlq2", CS.a2);
     }
     if (CS.a2 != null) {

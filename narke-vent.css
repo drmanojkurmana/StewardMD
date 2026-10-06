@@ -854,3 +854,17 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-verdict.vd-mix b { color: var(--vl-acc); }
 .nrk-root .vl-verdict.vd-none b { color: var(--sp-mut); }
 @media (prefers-reduced-motion: reduce) { .nrk-root .vl-pair { transition: none; } .nrk-root .vl-pair:active { transform: none; } }
+/* U9: engine round 4 fields on the alarm card, the monitor, the gas view and the debrief */
+.nrk-root .vl-band { margin: 0 0 10px; padding: 10px 12px; border-radius: 12px; font-size: 14.5px; line-height: 1.45; text-wrap: pretty; }
+.nrk-root .vl-band-mild { background: color-mix(in srgb, var(--nk-warn) 14%, transparent); }
+.nrk-root .vl-band-mild b { color: var(--nk-warn); }
+.nrk-root .vl-band-emergency { background: color-mix(in srgb, var(--nk-bad) 14%, transparent); }
+.nrk-root .vl-band-emergency b { color: var(--nk-bad); }
+.nrk-root .vl-unsafe { margin: 0; font-size: 14px; line-height: 1.45; }
+.nrk-root .vl-prim-why { margin: 6px 0 10px; }
+.nrk-root .vl-o2t, .nrk-root .vl-worst { margin: 10px 0 0; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--vl-acc) 10%, transparent); font-size: 14px; line-height: 1.45; }
+.nrk-root .vl-o2t p, .nrk-root .vl-worst p { margin: 0 0 4px; }
+.nrk-root .vl-o2t p:last-child, .nrk-root .vl-worst p:last-child { margin: 0; }
+.nrk-root .vl-worst { margin: 12px 0; }
+.nrk-root .vl-interp { margin: 10px 0 0; font-size: 14.5px; line-height: 1.45; }
+.nrk-root .vl-interp p { margin: 0 0 6px; }
