@@ -1,0 +1,265 @@
+{
+  "id": "as7-icu-monitoring",
+  "unit": "as7",
+  "level": "mbbs",
+  "minutes": 6,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "MAP 65 mmHg, urine 0.5 mL/kg/h, arterial line on vasopressors (kb sepsis-septic-shock).",
+      "RASS -1 to 0 light sedation target; CAM-ICU each shift; propofol or dexmedetomidine over benzodiazepines (kb icu-sedation-analgesia-delirium)."
+    ]
+  },
+  "competencies": [
+    "AS7.5"
+  ],
+  "title": {
+    "en": "Monitoring in the ICU",
+    "hi": "ICU में निगरानी"
+  },
+  "idea": {
+    "en": "ICU monitoring joins machines with bedside checks. Watch trends in pressure, oxygen, carbon dioxide, urine, lactate, pain, sedation and delirium.",
+    "hi": "ICU निगरानी मशीनों को बेडसाइड जाँच से जोड़ती है। दबाव, ऑक्सीजन, carbon dioxide, पेशाब, lactate, दर्द, sedation और delirium के रुझान देखिए।"
+  },
+  "see": {
+    "diagram": "diagrams/as7-icu-monitoring.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "A dark bedside monitor with four waves: green ECG, red arterial pressure, blue pulse oximetry and yellow capnography. On the right hangs a urine bag with yellow urine and scale marks. Along the bottom runs a row of ten coloured blocks from blue through green to red. Two small dark triangles point at the two green blocks.",
+      "hi": "एक काला बेडसाइड मॉनिटर जिस पर चार लहरें हैं: हरी ECG, लाल arterial pressure, नीली pulse oximetry और पीली capnography। दाईं ओर पीले पेशाब और निशानों वाली पेशाब की थैली लटकी है। नीचे नीले से हरे होते हुए लाल तक दस रंगीन खानों की पंक्ति है। दो छोटे काले त्रिकोण दो हरे खानों की ओर इशारा करते हैं।"
+    },
+    "caption": {
+      "en": "Waves on the monitor, urine in the bag and the sedation target on the RASS scale.",
+      "hi": "मॉनिटर पर लहरें, थैली में पेशाब और RASS पैमाने पर sedation का लक्ष्य।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.354,
+        "y": 0.167,
+        "label": {
+          "en": "ECG",
+          "hi": "ECG"
+        },
+        "note": {
+          "en": "Rate and rhythm all the time. Look for new arrhythmias, ischaemia and potassium effects.",
+          "hi": "हर समय दर और लय। नई arrhythmia, ischaemia और potassium के असर खोजिए।"
+        }
+      },
+      {
+        "x": 0.354,
+        "y": 0.333,
+        "label": {
+          "en": "Arterial line",
+          "hi": "Arterial line"
+        },
+        "note": {
+          "en": "Beat-to-beat pressure. Use one as soon as practical in any patient on vasopressors.",
+          "hi": "हर धड़कन का दबाव। vasopressor पर हर मरीज़ में जितनी जल्दी हो सके लगाइए।"
+        }
+      },
+      {
+        "x": 0.354,
+        "y": 0.5,
+        "label": {
+          "en": "SpO2",
+          "hi": "SpO2"
+        },
+        "note": {
+          "en": "Oxygenation trend. A poor waveform means the reading cannot be trusted.",
+          "hi": "ऑक्सीजन का रुझान। ख़राब लहर का मतलब है रीडिंग पर भरोसा नहीं किया जा सकता।"
+        }
+      },
+      {
+        "x": 0.354,
+        "y": 0.64,
+        "label": {
+          "en": "Capnography",
+          "hi": "Capnography"
+        },
+        "note": {
+          "en": "Continuous end-tidal CO2 in every ventilated patient. Loss of the trace means check the tube now.",
+          "hi": "ventilator वाले हर मरीज़ में लगातार end-tidal CO2। लहर ग़ायब हो तो अभी tube जाँचिए।"
+        }
+      },
+      {
+        "x": 0.792,
+        "y": 0.44,
+        "label": {
+          "en": "Urine output",
+          "hi": "पेशाब की मात्रा"
+        },
+        "note": {
+          "en": "Measure hourly. Aim for 0.5 mL/kg/h or more in septic shock.",
+          "hi": "हर घंटे नापिए। septic shock में 0.5 mL/kg/h या ज़्यादा का लक्ष्य रखिए।"
+        }
+      },
+      {
+        "x": 0.533,
+        "y": 0.87,
+        "label": {
+          "en": "RASS sedation target",
+          "hi": "RASS sedation लक्ष्य"
+        },
+        "note": {
+          "en": "Most ventilated adults are kept lightly sedated, RASS -1 to 0: calm and rousable to voice.",
+          "hi": "ज़्यादातर ventilator वाले वयस्कों को हल्की sedation पर रखते हैं, RASS -1 से 0: शांत और आवाज़ पर जागने वाले।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Examine the patient first. Monitors support the bedside check; they do not replace it.",
+        "hi": "पहले मरीज़ की जाँच कीजिए। मॉनिटर बेडसाइड जाँच में मदद करते हैं; उसकी जगह नहीं लेते।"
+      },
+      {
+        "en": "Circulation: ECG, arterial line, MAP 65 mmHg or more, urine 0.5 mL/kg/h or more, falling lactate and capillary refill.",
+        "hi": "Circulation: ECG, arterial line, MAP 65 mmHg या ज़्यादा, पेशाब 0.5 mL/kg/h या ज़्यादा, घटता lactate और capillary refill।"
+      },
+      {
+        "en": "Breathing: SpO2, capnography, ventilator pressures and blood gases.",
+        "hi": "साँस: SpO2, capnography, ventilator pressures और blood gases।"
+      },
+      {
+        "en": "Brain: pain score, [[rass]] each shift and after dose changes, and [[cam-icu]] for delirium each shift.",
+        "hi": "दिमाग़: दर्द का स्कोर, हर शिफ़्ट और खुराक बदलने के बाद [[rass]], और delirium के लिए हर शिफ़्ट [[cam-icu]]।"
+      },
+      {
+        "en": "Treat pain first, then sedate lightly. Prefer propofol or dexmedetomidine over benzodiazepines.",
+        "hi": "पहले दर्द का इलाज, फिर हल्की sedation। benzodiazepines के बजाय propofol या dexmedetomidine बेहतर हैं।"
+      }
+    ],
+    "analogy": {
+      "en": "Monitoring is the dashboard of a car. The gauges help, but the driver still looks at the road.",
+      "hi": "निगरानी कार का dashboard है। मीटर मदद करते हैं, पर ड्राइवर फिर भी सड़क देखता है।"
+    }
+  },
+  "spot": [
+    {
+      "en": "A quiet, still patient may have hypoactive delirium. Only a CAM-ICU test will show it.",
+      "hi": "शांत और स्थिर मरीज़ को hypoactive delirium हो सकता है। सिर्फ़ CAM-ICU जाँच ही इसे दिखाएगी।"
+    },
+    {
+      "en": "Vital signs alone are not a valid pain score. Ask the patient, or use a behavioural scale.",
+      "hi": "सिर्फ़ vital signs दर्द का सही स्कोर नहीं हैं। मरीज़ से पूछिए, या व्यवहार वाला पैमाना इस्तेमाल कीजिए।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "On an ICU round, read each wave on the monitor and name what it measures.",
+      "hi": "ICU राउंड पर मॉनिटर की हर लहर पढ़िए और बताइए कि वह क्या नापती है।"
+    },
+    {
+      "en": "Score RASS for one ventilated patient and compare it with the written target.",
+      "hi": "ventilator वाले एक मरीज़ का RASS गिनिए और लिखे लक्ष्य से मिलाइए।"
+    }
+  ],
+  "remember": {
+    "en": "Examine, then read the trends: MAP 65, urine 0.5 mL/kg/h, lactate falling, RASS -1 to 0, CAM-ICU each shift.",
+    "hi": "जाँचिए, फिर रुझान पढ़िए: MAP 65, पेशाब 0.5 mL/kg/h, lactate घटता, RASS -1 से 0, हर शिफ़्ट CAM-ICU।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "What urine output target is used in septic shock?",
+        "hi": "septic shock में पेशाब का कौन सा लक्ष्य रखते हैं?"
+      },
+      "o": [
+        {
+          "en": "0.1 mL/kg/h or more",
+          "hi": "0.1 mL/kg/h या ज़्यादा"
+        },
+        {
+          "en": "2 mL/kg/h or more",
+          "hi": "2 mL/kg/h या ज़्यादा"
+        },
+        {
+          "en": "5 mL/kg/h or more",
+          "hi": "5 mL/kg/h या ज़्यादा"
+        },
+        {
+          "en": "0.5 mL/kg/h or more",
+          "hi": "0.5 mL/kg/h या ज़्यादा"
+        }
+      ],
+      "a": 3,
+      "why": {
+        "en": "Surviving Sepsis targets include urine output of 0.5 mL/kg/h or more.",
+        "hi": "Surviving Sepsis के लक्ष्यों में 0.5 mL/kg/h या ज़्यादा पेशाब शामिल है।"
+      }
+    },
+    {
+      "q": {
+        "en": "What sedation target suits most ventilated adults?",
+        "hi": "ज़्यादातर ventilator वाले वयस्कों के लिए कौन सा sedation लक्ष्य ठीक है?"
+      },
+      "o": [
+        {
+          "en": "RASS -1 to 0, calm and rousable",
+          "hi": "RASS -1 से 0, शांत और जगाने योग्य"
+        },
+        {
+          "en": "RASS -4, no response to voice",
+          "hi": "RASS -4, आवाज़ पर कोई प्रतिक्रिया नहीं"
+        },
+        {
+          "en": "RASS -5, unrousable to pain",
+          "hi": "RASS -5, दर्द पर भी नहीं जागता"
+        },
+        {
+          "en": "RASS +3, pulling at tubes",
+          "hi": "RASS +3, tubes खींचता है"
+        }
+      ],
+      "a": 0,
+      "why": {
+        "en": "Light sedation shortens ventilation and lowers delirium, unless deep sedation is needed for a reason.",
+        "hi": "हल्की sedation ventilation का समय घटाती है और delirium कम करती है, जब तक गहरी sedation की कोई वजह न हो।"
+      }
+    },
+    {
+      "q": {
+        "en": "A patient is on noradrenaline. How is blood pressure best monitored?",
+        "hi": "मरीज़ noradrenaline पर है। ब्लड प्रेशर सबसे अच्छा कैसे नापें?"
+      },
+      "o": [
+        {
+          "en": "Cuff readings once an hour",
+          "hi": "हर घंटे एक बार cuff से"
+        },
+        {
+          "en": "Invasive arterial line",
+          "hi": "Invasive arterial line"
+        },
+        {
+          "en": "Feeling the radial pulse",
+          "hi": "radial नाड़ी टटोलकर"
+        },
+        {
+          "en": "Capillary refill alone",
+          "hi": "सिर्फ़ capillary refill"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "An arterial line shows every beat, which is needed while titrating vasopressors.",
+        "hi": "arterial line हर धड़कन दिखाती है, जो vasopressor की खुराक बदलते समय ज़रूरी है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "icu-ventilation"
+  },
+  "glossary": [
+    "rass",
+    "cam-icu"
+  ],
+  "sources": [
+    "StewardMD clinical protocol: Sepsis and septic shock, kb/clinical-protocols/sepsis-septic-shock.json: monitoring targets.",
+    "StewardMD clinical protocol: ICU pain, sedation and delirium (PADIS), kb/clinical-protocols/icu-sedation-analgesia-delirium.json (SCCM 2018 and 2025).",
+    "Association of Anaesthetists. Recommendations for standards of monitoring during anaesthesia and recovery 2021: capnography for every airway device."
+  ]
+}

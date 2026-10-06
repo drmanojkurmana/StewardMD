@@ -1,0 +1,268 @@
+{
+  "id": "as6-ponv-pain-temperature",
+  "unit": "as6",
+  "level": "mbbs",
+  "minutes": 5,
+  "review": {
+    "status": "ai_drafted",
+    "verify": [
+      "Apfel simplified score: four factors.",
+      "Rescue antiemetic from a class not used for prophylaxis (Gan 2020).",
+      "Inadvertent perioperative hypothermia: core temperature below 36 C (NICE CG65)."
+    ]
+  },
+  "competencies": [
+    "AS6.3"
+  ],
+  "title": {
+    "en": "Nausea, pain, cold and shivering",
+    "hi": "मतली, दर्द, ठंड और कँपकँपी"
+  },
+  "idea": {
+    "en": "[[ponv]], pain and [[hypothermia]] are the commonest complaints in recovery. Each has a risk score or a target.",
+    "hi": "[[ponv]], दर्द और [[hypothermia]] रिकवरी की सबसे आम शिकायतें हैं। हर एक का एक जोखिम स्कोर या लक्ष्य है।"
+  },
+  "see": {
+    "diagram": "diagrams/as6-ponv-pain-temperature.svg",
+    "w": 480,
+    "h": 300,
+    "alt": {
+      "en": "Four panels. Top left: a blue kidney dish with two green drops above it. Top right: four amber circles hold a female sign, a crossed-out cigarette, two wavy lines and an ampoule. Five bars below them grow taller. Bottom left: a frowning face beside a red zigzag. Bottom right: a thermometer with a low blue column and a blue zigzag. A person lies under a red warming blanket fed by a hose.",
+      "hi": "चार खाने। ऊपर बाएँ: एक नीली kidney dish और उसके ऊपर दो हरी बूँदें। ऊपर दाएँ: चार पीले घेरे जिनमें महिला का चिह्न, कटी हुई सिगरेट, दो लहरदार रेखाएँ और एक ampoule हैं, और उनके नीचे पाँच बढ़ती ऊँचाई की पट्टियाँ। नीचे बाएँ: एक लाल टेढ़ी रेखा के पास एक दुखी चेहरा। नीचे दाएँ: नीचे तक भरा नीला thermometer, एक नीली टेढ़ी रेखा, और लाल warming blanket के नीचे एक व्यक्ति, जिस कंबल में एक डिब्बे से नली आती है।"
+    },
+    "caption": {
+      "en": "Count PONV risk factors, treat pain early and keep the patient warm.",
+      "hi": "PONV के जोखिम गिनिए, दर्द का जल्दी इलाज कीजिए और मरीज़ को गर्म रखिए।"
+    },
+    "credit": "Original diagram, Narkē (MAIKNOWLEDGE LLP)",
+    "hotspots": [
+      {
+        "x": 0.25,
+        "y": 0.333,
+        "label": {
+          "en": "Nausea and vomiting",
+          "hi": "मतली और उल्टी"
+        },
+        "note": {
+          "en": "Turn a drowsy vomiting patient onto the side and suction the mouth. Then give an antiemetic.",
+          "hi": "उल्टी करते ऊँघते मरीज़ को करवट दिलाइए और मुँह का suction कीजिए। फिर antiemetic दीजिए।"
+        }
+      },
+      {
+        "x": 0.733,
+        "y": 0.233,
+        "label": {
+          "en": "Apfel risk factors",
+          "hi": "Apfel जोखिम कारक"
+        },
+        "note": {
+          "en": "Female, non-smoker, past PONV or motion sickness, postoperative opioids. Each adds risk, shown by the rising bars.",
+          "hi": "महिला, धूम्रपान न करना, पहले PONV या motion sickness, सर्जरी के बाद opioids। हर एक जोखिम बढ़ाता है, जैसा बढ़ती पट्टियाँ दिखाती हैं।"
+        }
+      },
+      {
+        "x": 0.271,
+        "y": 0.74,
+        "label": {
+          "en": "Pain",
+          "hi": "दर्द"
+        },
+        "note": {
+          "en": "Ask for a pain score. Treat early with a multimodal plan, then small titrated opioid doses.",
+          "hi": "दर्द का स्कोर पूछिए। multimodal योजना से जल्दी इलाज कीजिए, फिर opioid की छोटी-छोटी खुराकें।"
+        }
+      },
+      {
+        "x": 0.621,
+        "y": 0.713,
+        "label": {
+          "en": "Temperature",
+          "hi": "तापमान"
+        },
+        "note": {
+          "en": "Measure on arrival and before discharge. Below 36 C is hypothermia.",
+          "hi": "आते ही और भेजने से पहले नापिए। 36 C से कम hypothermia है।"
+        }
+      },
+      {
+        "x": 0.713,
+        "y": 0.677,
+        "label": {
+          "en": "Shivering",
+          "hi": "कँपकँपी"
+        },
+        "note": {
+          "en": "Shivering raises oxygen use and is uncomfortable. Give oxygen and warm the patient.",
+          "hi": "कँपकँपी से ऑक्सीजन की खपत बढ़ती है और तकलीफ़ होती है। ऑक्सीजन दीजिए और मरीज़ को गर्म कीजिए।"
+        }
+      },
+      {
+        "x": 0.812,
+        "y": 0.817,
+        "label": {
+          "en": "Forced-air warming",
+          "hi": "Forced-air warming"
+        },
+        "note": {
+          "en": "A warm air blanket and warmed IV fluids bring the core temperature back to 36 C or above.",
+          "hi": "गर्म हवा वाला कंबल और गर्म IV fluids core तापमान को 36 C या ऊपर ले आते हैं।"
+        }
+      }
+    ]
+  },
+  "why": {
+    "steps": [
+      {
+        "en": "Apfel risk factors are female sex, non-smoking, past PONV or motion sickness, and postoperative opioids.",
+        "hi": "Apfel जोखिम कारक हैं: महिला, धूम्रपान न करना, पहले PONV या motion sickness, और सर्जरी के बाद opioids।"
+      },
+      {
+        "en": "More risk factors call for more prevention, using antiemetics from different drug classes.",
+        "hi": "जितने ज़्यादा जोखिम कारक, उतनी ज़्यादा रोकथाम, अलग-अलग वर्ग की antiemetics से।"
+      },
+      {
+        "en": "If vomiting breaks through, give a drug from a class not yet used.",
+        "hi": "अगर फिर भी उल्टी हो, तो ऐसे वर्ग की दवा दीजिए जो अभी तक न दी गई हो।"
+      },
+      {
+        "en": "Treat pain early: paracetamol, an NSAID if safe, a regional block, then small titrated opioid doses.",
+        "hi": "दर्द का जल्दी इलाज कीजिए: paracetamol, सुरक्षित हो तो NSAID, regional block, फिर opioid की छोटी-छोटी खुराकें।"
+      },
+      {
+        "en": "Keep the core temperature at 36 C or above with forced-air warming and warmed fluids.",
+        "hi": "forced-air warming और गर्म fluids से core तापमान 36 C या ऊपर रखिए।"
+      }
+    ],
+    "analogy": {
+      "en": "Antiemetics are keys to different locks. A second key for the same lock adds little.",
+      "hi": "Antiemetics अलग-अलग तालों की चाबियाँ हैं। उसी ताले की दूसरी चाबी से ख़ास फ़ायदा नहीं होता।"
+    }
+  },
+  "spot": [
+    {
+      "en": "Vomiting in a drowsy patient risks aspiration. Turn to the side and suction at once.",
+      "hi": "ऊँघते मरीज़ में उल्टी से aspiration का ख़तरा है। तुरंत करवट दिलाइए और suction कीजिए।"
+    },
+    {
+      "en": "Shivering, cold hands and slow waking suggest hypothermia.",
+      "hi": "कँपकँपी, ठंडे हाथ और देर से जागना hypothermia की ओर इशारा करते हैं।"
+    }
+  ],
+  "todo": [
+    {
+      "en": "Count the Apfel factors at the preoperative visit and write the prevention plan.",
+      "hi": "ऑपरेशन से पहले की जाँच में Apfel कारक गिनिए और रोकथाम की योजना लिखिए।"
+    },
+    {
+      "en": "Measure the temperature on arrival in recovery and again before discharge.",
+      "hi": "रिकवरी में आते ही और भेजने से पहले फिर तापमान नापिए।"
+    }
+  ],
+  "remember": {
+    "en": "Nausea: count Apfel factors. Pain: multimodal and early. Temperature: 36 C or above.",
+    "hi": "मतली: Apfel कारक गिनिए। दर्द: multimodal और जल्दी। तापमान: 36 C या ऊपर।"
+  },
+  "check": [
+    {
+      "q": {
+        "en": "Which set lists the four Apfel risk factors for PONV?",
+        "hi": "कौन सा समूह PONV के चार Apfel जोखिम कारक बताता है?"
+      },
+      "o": [
+        {
+          "en": "Male, smoker, obesity, regional anaesthesia",
+          "hi": "पुरुष, धूम्रपान, मोटापा, regional anaesthesia"
+        },
+        {
+          "en": "Age over 70, diabetes, anaemia, short surgery",
+          "hi": "70 से ज़्यादा उम्र, मधुमेह, एनीमिया, छोटी सर्जरी"
+        },
+        {
+          "en": "Female, smoker, hypertension, spinal block",
+          "hi": "महिला, धूम्रपान, हाई बीपी, spinal block"
+        },
+        {
+          "en": "Female, non-smoker, past PONV, postoperative opioids",
+          "hi": "महिला, धूम्रपान न करना, पहले PONV, सर्जरी के बाद opioids"
+        }
+      ],
+      "a": 3,
+      "why": {
+        "en": "Apfel's simplified score uses exactly these four factors.",
+        "hi": "Apfel का सरल स्कोर ठीक यही चार कारक इस्तेमाल करता है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Ondansetron given during surgery has not prevented vomiting. What is the better rescue?",
+        "hi": "सर्जरी में दिया ondansetron उल्टी नहीं रोक पाया। बेहतर बचाव क्या है?"
+      },
+      "o": [
+        {
+          "en": "A second dose of ondansetron at once",
+          "hi": "तुरंत ondansetron की दूसरी खुराक"
+        },
+        {
+          "en": "An antiemetic from a different class",
+          "hi": "दूसरे वर्ग की antiemetic"
+        },
+        {
+          "en": "No drug, as the vomiting will stop",
+          "hi": "कोई दवा नहीं, उल्टी अपने-आप रुकेगी"
+        },
+        {
+          "en": "Oral fluids to settle the stomach",
+          "hi": "पेट शांत करने के लिए मुँह से fluids"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "A repeat dose of the same class adds little. Use a class not yet given.",
+        "hi": "उसी वर्ग की दोबारा खुराक से कम फ़ायदा होता है। ऐसा वर्ग दीजिए जो अभी न दिया गया हो।"
+      }
+    },
+    {
+      "q": {
+        "en": "What core temperature defines perioperative hypothermia?",
+        "hi": "कौन सा core तापमान perioperative hypothermia बताता है?"
+      },
+      "o": [
+        {
+          "en": "Below 37.5 C",
+          "hi": "37.5 C से कम"
+        },
+        {
+          "en": "Below 36 C",
+          "hi": "36 C से कम"
+        },
+        {
+          "en": "Below 34 C",
+          "hi": "34 C से कम"
+        },
+        {
+          "en": "Below 32 C",
+          "hi": "32 C से कम"
+        }
+      ],
+      "a": 1,
+      "why": {
+        "en": "NICE defines inadvertent perioperative hypothermia as a core temperature below 36 C.",
+        "hi": "NICE के अनुसार core तापमान 36 C से कम होना perioperative hypothermia है।"
+      }
+    }
+  ],
+  "test": {
+    "mcqTopic": "general",
+    "tool": "apfel"
+  },
+  "glossary": [
+    "ponv",
+    "apfel",
+    "hypothermia"
+  ],
+  "sources": [
+    "Apfel CC, Laara E, Koivuranta M, et al. A simplified risk score for predicting postoperative nausea and vomiting. Anesthesiology 1999;91:693-700.",
+    "Gan TJ, Belani KG, Bergese S, et al. Fourth consensus guidelines for the management of postoperative nausea and vomiting. Anesth Analg 2020;131:411-48.",
+    "NICE CG65. Hypothermia: prevention and management in adults having surgery (2008, updated 2016)."
+  ]
+}
