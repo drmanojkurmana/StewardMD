@@ -11469,3 +11469,15 @@ mobile too". `<style id="apple-mobile">` (max-width 760px) plus small JS in `_si
   `PREP_FLASH`); the home "Cards due" row (prep-flash.js) already shows them. Add it once cards are generated for real.
 - Readiness retention keeps reading cards and questions together (`recall()` over `p:<module>`), as the Cards decision
   intended. Cache token `prep7`.
+
+## 2026-10-06 - PrepNucleus sync: account-derived key, event-log merge, opt-in
+- **Decision** ([[PrepNucleus]], "Phase 4 native"): sync is opt-in. The key is HKDF(uid, per-user random salt held in D1),
+  AES-GCM on the phone. No user passphrase: a recovery-code flow costs more UX than the gain, since the server operator
+  could still read data. Stated honestly in the UI and the module note: protects against a database leak, not against
+  the operator.
+- Merge is conflict-free: FSRS cards are recomputed from the union of review events (the store had no log, so
+  `specialty-core.js review()` now logs to `store.rl` only when sync is on); counters are per-device G-counters; settings
+  and maps are LWW with a hybrid clock (an edit made after seeing a value always wins, regardless of clock skew).
+- Storage in the Arena D1 (`prep_sync`), uid hashed with a domain prefix so it cannot be joined to Arena's `uidh`.
+- Widgets and Live Activity reuse the existing `StewardMDWidget` extension and `StewardMDWatchCore` package; a new small
+  plugin `PrepWidgets` writes the App Group data. No Android ongoing notification (owner).

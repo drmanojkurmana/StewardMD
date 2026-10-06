@@ -303,6 +303,43 @@ Module flashcards (Plan 2 phase 2). No flag of its own (inside `smd_prep`): a mo
   call, the 2-stage pipeline on a fake Vertex, sample deck) and headless `test/run-prep-flash-ui.mjs` (flip, grades, key,
   swipe, cloze, occlusion, end screen, FSRS rows, home Cards due; `SHOTS=<dir>`, `PN_LIGHT=1`).
 
+## Phase 4 native: sync, reminders, widgets, Live Activity (2026-10-06, branch `feat/prep-native`, not deployed)
+Owner checklist: [[plans/PrepNucleus-Phase4-OwnerChecklist]]. Cache token `prep8`.
+- **Sync (opt-in, off by default, needs sign-in):** `prep-sync.js` (`window.PREP_SYNC`: `status/enable/disable({wipe})/sync/onChange`),
+  route `functions/api/prep/sync/[[path]].js` (GET/PUT/DELETE, base64 body because native `/api/*` goes through
+  CapacitorHttp string bodies; 256 KB cap; `If-Match` + salt compare-and-set; DELETE returns 200 `{deleted}`), table
+  `prep_sync` in `PREP_ARENA_DB` (`prep-arena-worker/migrations/0001_prep_sync.sql`, NOT applied). Row key
+  sha256("prep-sync|"+uid); the uid is never stored.
+  Crypto: HKDF-SHA256(uid, per-user random server salt) -> AES-GCM-256, gzip (CompressionStream; raw-JSON flag fallback).
+  Merge: `specialty-core.js review()` appends `[key, day, g, ts]` to `store.rl` only when the store has `rl` (sync on);
+  cards = server base + union of review events by id, replayed in time order; events older than 30 days are compacted into
+  the base. `days` and `mod.t/ok` are per-device G-counters (max per slot, sum); `mod.last` max; `exam/goal/last/pl/pt/lsp/ra`
+  and map keys `bm/mt/rep/ls` are LWW with tombstones (hybrid clock, 120-day tombstone prune); `mh` union, newest 20.
+  Device-local, never synced: `conf`, `dl`, `hid`, `fc`, sims. Local sync state: localStorage `smd_prep_sync_v1`.
+  Triggers: PrepNucleus open, a finished set, app visibility change, "Sync now".
+- **Threat model:** protects against a database/backup leak and anyone without the uid. Does NOT protect against the
+  server operator running modified code (sees the uid on each request, holds the salt); closing that needs a
+  user-held secret + recovery code. Server sees blob size, update times, uid hash.
+- **Known approximations:** events from a device offline over 30 days replay on top of the compacted base; over 120 days
+  offline can resurrect a deleted map key; Layer C deck deletion (`purgeStore`) is not synced and counters never decrease;
+  `store.rl` grows while sync is on but offline.
+- **Reminders:** `prep-native.js` (`window.PREP_NATIVE`), `@capacitor/local-notifications` (already installed). One daily
+  notification (id 2147483100) at `pl.rem`, re-scheduled on each open/plan change for the next occurrence only;
+  permission only from the "Remind me daily" switch; on/off per device in localStorage `smd_prep_rem`; tap
+  `extra.route = "prep"` -> `native-push.js` -> `SMD_openRoute("prep")` (home.js).
+- **Widgets + Live Activity:** plugin `@stewardmd/capacitor-prep-widgets` (`local-plugins/capacitor-prep-widgets`, JS
+  `PrepWidgets`: `setData/activityStatus/startActivity/updateActivity/endActivity`). Data JSON `{v, score, exam, daysLeft,
+  done, total, next, day, updated}` in App Group `group.in.stewardmd.app` key `prep.widget` / Android SharedPreferences
+  `prep_widget`/`data`. iOS widget kind `StewardMDPrep` (small + medium) and `PrepLiveActivity` in the existing
+  `ios/App/StewardMDWidget` bundle (`PrepWidgets.swift`); attributes in `Packages/StewardMDWatchCore/.../PrepActivity.swift`.
+  Android `PrepWidgetProvider` (hourly refresh). Taps open `stewardmd://prep`. Live Activity starts on tapping a plan item
+  (only if enabled in system settings), updates as items complete, ends when all done or on the next day's first open.
+  No Android ongoing notification (owner).
+- **Feeds update only after PrepNucleus was opened in that app session** (prep-native.js loads with PrepNucleus).
+- **Tests:** `test/prep-sync.test.mjs` (11), `test/prep-sync-route.test.mjs` (4), `test/prep-native.test.mjs` (5), headless
+  `test/run-prep-native.mjs`; Swift `PrepSnapshotTests` in StewardMDWatchCore.
+- **Not verified:** full iOS app build and `assembleDebug` (disk ran out), anything on a device, real D1 BLOB binding.
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
