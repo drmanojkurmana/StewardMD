@@ -158,6 +158,12 @@ export class BattleRoom extends DurableObject {
 
   async begin({ id, exam, players, items }) {
     if (await this.state()) return [];
+    // fresh ratings: the Matchmaker's copy is from connect time and a socket can play several battles
+    try {
+      const { results } = await this.env.PREP_ARENA_DB.prepare("SELECT uidh, rating FROM arena_players WHERE uidh IN (?, ?)").bind(players[0].uidh, players[1].uidh).all();
+      for (const r of results || []) for (const p of players) if (p.uidh === r.uidh) p.rating = r.rating;
+    } catch (e) {}
+    if (await this.state()) return [];
     const s = (this.s = newBattle({ id, exam, players, items, now: Date.now() }));
     return this.after(s, battleEvent(s, { type: "start" }, Date.now()));
   }
