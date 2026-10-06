@@ -81,9 +81,10 @@ test("scenarios: the 10 required scenarios with full schema", () => {
     assert.ok(g.deadSpace >= 0 && g.deadSpace < 0.6 && g.upperInflection >= 20 && g.upperInflection <= 45, s.id + " dead space/UIP");
     assert.ok(MODES.includes(s.start.mode), s.id + " start mode");
     Object.keys(s.start.settings).forEach((k) => assert.ok(SETTING_KEYS.includes(k), s.id + " start key " + k));
+    if (s.start.abg) assert.ok(Object.keys(s.start.abg).join() === "PaCO2" && s.start.abg.PaCO2 >= 10 && s.start.abg.PaCO2 <= 120, s.id + " presenting PaCO2");
     assert.ok(Array.isArray(s.timeline));
     s.timeline.forEach((e) => {
-      assert.ok(e.t > 0 && EVENTS.includes(e.event) && bi(e.note), s.id + " timeline " + e.event);
+      assert.ok(e.t > 0 && (E ? E.EVENTS[e.event] : EVENTS.includes(e.event)) && bi(e.note), s.id + " timeline " + e.event);
     });
     assert.ok(s.debrief.length >= 3 && s.debrief.every(bi), s.id + " debrief");
     assert.ok(s.sources.length >= 2 && s.sources.every((x) => x.label && typeof x.url === "string"), s.id + " sources");
@@ -98,7 +99,9 @@ test("scenarios: goals are within current guidance", () => {
     assert.ok(g.pplatMax <= 30, s.id + " pplatMax <= 30");
     assert.ok(g.drivingMax <= 15, s.id + " drivingMax <= 15");
     assert.ok(g.vtPerKg[0] >= 4 && g.vtPerKg[1] <= 8, s.id + " vtPerKg inside 4 to 8");
-    assert.ok(g.spo2[0] >= 88 && g.spo2[1] <= 96 && g.spo2[0] < g.spo2[1], s.id + " spo2 band");
+    // BTS 2017: 94 to 98% for most patients, 88 to 92% with hypercapnic risk; lung injury bands sit at 88 to 96.
+    assert.ok(g.spo2[0] >= 88 && g.spo2[1] <= 98 && g.spo2[1] - g.spo2[0] >= 3, s.id + " spo2 band");
+    if (g.spo2[1] > 96) assert.ok(g.spo2[0] >= 94 && s.lung.shunt <= 0.1, s.id + " a 94 to 98 band only for near normal lungs");
     assert.ok(g.paco2 || g.ph, s.id + " has a CO2 or pH goal");
     if (g.ph) assert.ok(g.ph[0] >= 7.15 && g.ph[1] <= 7.45);
     assert.ok(g.other.every(bi));

@@ -12,7 +12,9 @@
     "lung.recruitable": "fraction of the shunt that PEEP and mean airway pressure can reopen",
     "lung.deadSpace": "alveolar dead space as a fraction of tidal volume, added to anatomic dead space",
     "lung.upperInflection": "plateau pressure in cmH2O above which overdistension lowers compliance",
-    "timeline.event": "secretions | bronchospasm | pneumothorax | disconnect | hypotension | fever | improve"
+    "lung.lowVQ": "optional perfusion fraction of low V/Q units (default 0.25 if flow limited, 0.2 if r is 20 or more, else 0.01)",
+    "start.abg.PaCO2": "optional presenting PaCO2 from the patient's own breathing before the ventilator; it moves to the new steady state over minutes",
+    "timeline.event": "secretions | bronchospasm | bronchospasmEases | pneumothorax | disconnect | hypotension | fever | fluidBolus | improve"
   },
   "scenarios": [
     {
@@ -32,13 +34,13 @@
         "diagnosis": { "en": "Residual anaesthesia after hip replacement", "hi": "Hip replacement के बाद बचा हुआ anaesthesia असर" },
         "hb": 12, "temp": 36.4, "volumeStatus": "normal",
         "metabolic": { "hco3": 24, "lactate": 1.0 },
-        "vco2": 200,
+        "vco2": 180,
         "drive": { "rate": 12, "effort": 4, "sedation": 0.8 }
       },
       "lung": { "c": 55, "r": 10, "flowLimited": false, "shunt": 0.05, "recruitable": 0.2, "deadSpace": 0.05, "upperInflection": 35 },
-      "start": { "mode": "acvc", "settings": { "fio2": 50, "peep": 5, "vt": 450, "rr": 12, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 450, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [94, 98], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
         "other": [
           { "en": "Lower FiO2 to the lowest value that keeps SpO2 in range.", "hi": "FiO2 को उतना कम करें जितने में SpO2 सीमा में रहे।" },
           { "en": "Keep PaCO2 normal, because these lungs and this brain are normal.", "hi": "PaCO2 सामान्य रखें, क्योंकि ये फेफड़े और यह दिमाग़ सामान्य हैं।" }
@@ -81,7 +83,7 @@
       "lung": { "c": 45, "r": 9, "flowLimited": false, "shunt": 0.08, "recruitable": 0.5, "deadSpace": 0.05, "upperInflection": 32 },
       "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 380, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [94, 98], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
         "other": [
           { "en": "Give full support. Weak muscles cannot share the work yet.", "hi": "पूरा support दें। कमज़ोर मांसपेशियाँ अभी काम नहीं बाँट सकतीं।" },
           { "en": "Watch the blood pressure. This illness can upset the autonomic nerves.", "hi": "Blood pressure पर नज़र रखें। यह बीमारी autonomic nerves को बिगाड़ सकती है।" }
@@ -117,12 +119,12 @@
       "patient": {
         "age": 68, "sex": "F", "heightCm": 155, "weightKg": 82,
         "diagnosis": { "en": "Basal atelectasis after emergency laparotomy", "hi": "Emergency laparotomy के बाद basal atelectasis" },
-        "hb": 10.5, "temp": 37.8, "volumeStatus": "low",
+        "hb": 10.5, "temp": 37.8, "volumeStatus": "normal",
         "metabolic": { "hco3": 21, "lactate": 2.2 },
         "vco2": 220,
         "drive": { "rate": 18, "effort": 4, "sedation": 0.7 }
       },
-      "lung": { "c": 32, "r": 12, "flowLimited": false, "shunt": 0.18, "recruitable": 0.65, "deadSpace": 0.1, "upperInflection": 30 },
+      "lung": { "c": 32, "r": 12, "flowLimited": false, "shunt": 0.25, "recruitable": 0.75, "deadSpace": 0.1, "upperInflection": 30 },
       "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 5, "vt": 500, "rr": 14, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
         "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
@@ -160,13 +162,13 @@
       "patient": {
         "age": 55, "sex": "M", "heightCm": 168, "weightKg": 62,
         "diagnosis": { "en": "Severe community-acquired pneumonia, right lower lobe", "hi": "गंभीर community-acquired pneumonia, दाहिना निचला lobe" },
-        "hb": 12, "temp": 39.0, "volumeStatus": "low",
+        "hb": 12, "temp": 39.0, "volumeStatus": "normal",
         "metabolic": { "hco3": 20, "lactate": 2.5 },
         "vco2": 260,
         "drive": { "rate": 28, "effort": 8, "sedation": 0.6 }
       },
       "lung": { "c": 38, "r": 12, "flowLimited": false, "shunt": 0.28, "recruitable": 0.25, "deadSpace": 0.12, "upperInflection": 30 },
-      "start": { "mode": "acvc", "settings": { "fio2": 80, "peep": 5, "vt": 450, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
+      "start": { "mode": "acvc", "settings": { "fio2": 70, "peep": 5, "vt": 450, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
         "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
         "other": [
@@ -194,8 +196,8 @@
       "level": 2,
       "title": { "en": "Heart failure: water in the lungs", "hi": "Heart failure: फेफड़ों में पानी" },
       "story": {
-        "en": "Mr Iyer is 70 years old. He had a heart attack this morning. Now he is breathless, sweaty and frothing. His BP is high. He is on NIV with a face mask.",
-        "hi": "श्री अय्यर 70 साल के हैं। आज सुबह उन्हें heart attack हुआ। अब वे हाँफ रहे हैं, पसीने में हैं और झाग आ रहा है। BP ऊँचा है। वे face mask से NIV पर हैं।"
+        "en": "Mr Iyer is 70 years old. He had a heart attack this morning. Now he is breathless, sweaty and frothing. His BP is holding up. He is on NIV with a face mask.",
+        "hi": "श्री अय्यर 70 साल के हैं। आज सुबह उन्हें heart attack हुआ। अब वे हाँफ रहे हैं, पसीने में हैं और झाग आ रहा है। BP ठीक बना हुआ है। वे face mask से NIV पर हैं।"
       },
       "why": {
         "en": "A failing left ventricle backs fluid into the lungs. Positive pressure pushes fluid back and eases the heart's work.",
@@ -209,7 +211,7 @@
         "vco2": 230,
         "drive": { "rate": 32, "effort": 12, "sedation": 0 }
       },
-      "lung": { "c": 35, "r": 14, "flowLimited": false, "shunt": 0.25, "recruitable": 0.7, "deadSpace": 0.08, "upperInflection": 32 },
+      "lung": { "c": 35, "r": 14, "flowLimited": false, "shunt": 0.32, "recruitable": 0.7, "deadSpace": 0.08, "upperInflection": 32 },
       "start": { "mode": "niv", "settings": { "fio2": 60, "ipap": 12, "epap": 5, "rr": 12, "ti": 1.0 } },
       "goals": {
         "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
@@ -237,8 +239,8 @@
       "level": 3,
       "title": { "en": "COPD: air that cannot get out", "hi": "COPD: हवा जो बाहर नहीं निकल पाती" },
       "story": {
-        "en": "Mr Singh is 66 years old and smoked for 40 years. A chest infection made his COPD worse. NIV failed and he became drowsy. He was intubated an hour ago.",
-        "hi": "श्री सिंह 66 साल के हैं और 40 साल धूम्रपान किया। सीने के infection से उनका COPD बिगड़ा। NIV विफल हुआ और वे ऊँघने लगे। एक घंटा पहले intubate किए गए।"
+        "en": "Mr Singh is 66 years old and smoked for 40 years. A chest infection made his COPD worse. NIV failed and he became drowsy. He has just been intubated, and his BP is soft.",
+        "hi": "श्री सिंह 66 साल के हैं और 40 साल धूम्रपान किया। सीने के infection से उनका COPD बिगड़ा। NIV विफल हुआ और वे ऊँघने लगे। उन्हें अभी intubate किया गया है, और उनका BP कम है।"
       },
       "why": {
         "en": "Narrow airways trap air and tire the muscles. CO2 rose until he became drowsy.",
@@ -247,13 +249,13 @@
       "patient": {
         "age": 66, "sex": "M", "heightCm": 170, "weightKg": 54,
         "diagnosis": { "en": "Acute exacerbation of COPD with hypercapnic respiratory failure", "hi": "Hypercapnic respiratory failure के साथ COPD का acute exacerbation" },
-        "hb": 15.5, "temp": 37.5, "volumeStatus": "normal",
-        "metabolic": { "hco3": 32, "lactate": 1.2 },
+        "hb": 15.5, "temp": 37.5, "volumeStatus": "low",
+        "metabolic": { "hco3": 34, "lactate": 1.2 },
         "vco2": 220,
         "drive": { "rate": 22, "effort": 8, "sedation": 0.6 }
       },
-      "lung": { "c": 60, "r": 22, "flowLimited": true, "shunt": 0.08, "recruitable": 0.1, "deadSpace": 0.25, "upperInflection": 40 },
-      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 600, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "lung": { "c": 60, "r": 22, "flowLimited": true, "shunt": 0.08, "recruitable": 0.1, "deadSpace": 0.3, "upperInflection": 40 },
+      "start": { "mode": "acvc", "abg": { "PaCO2": 80 }, "settings": { "fio2": 40, "peep": 5, "vt": 600, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
         "spo2": [88, 92], "ph": [7.3, 7.4], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
         "other": [
@@ -264,7 +266,8 @@
       },
       "timeline": [
         { "t": 1200, "event": "bronchospasm", "note": { "en": "Airways tighten. Expiratory flow slows and trapping worsens.", "hi": "Airways सिकुड़ती हैं। साँस छोड़ने का flow धीमा होता है और trapping बढ़ती है।" } },
-        { "t": 2400, "event": "secretions", "note": { "en": "Thick sputum in the tube raises airway resistance.", "hi": "Tube में गाढ़ा बलगम airway resistance बढ़ाता है।" } }
+        { "t": 2400, "event": "bronchospasmEases", "note": { "en": "Nebulised bronchodilators work. Airway resistance falls back.", "hi": "Nebulised bronchodilators असर करते हैं। Airway resistance वापस घटता है।" } },
+        { "t": 3600, "event": "secretions", "note": { "en": "Thick sputum in the tube raises airway resistance.", "hi": "Tube में गाढ़ा बलगम airway resistance बढ़ाता है।" } }
       ],
       "debrief": [
         { "en": "Flow that does not return to zero means trapped air and auto-PEEP.", "hi": "Flow शून्य पर न लौटे तो हवा फँसी है और auto-PEEP है।" },
@@ -294,12 +297,12 @@
         "age": 24, "sex": "F", "heightCm": 158, "weightKg": 50,
         "diagnosis": { "en": "Near-fatal acute severe asthma", "hi": "जानलेवा acute severe asthma" },
         "hb": 13, "temp": 37.2, "volumeStatus": "low",
-        "metabolic": { "hco3": 22, "lactate": 3.0 },
-        "vco2": 230,
+        "metabolic": { "hco3": 24, "lactate": 2.5 },
+        "vco2": 190,
         "drive": { "rate": 30, "effort": 12, "sedation": 0.8 }
       },
-      "lung": { "c": 45, "r": 35, "flowLimited": true, "shunt": 0.1, "recruitable": 0.1, "deadSpace": 0.2, "upperInflection": 35 },
-      "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 5, "vt": 450, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
+      "lung": { "c": 45, "r": 30, "flowLimited": true, "lowVQ": 0.12, "shunt": 0.1, "recruitable": 0.1, "deadSpace": 0.2, "upperInflection": 35 },
+      "start": { "mode": "acvc", "abg": { "PaCO2": 70 }, "settings": { "fio2": 60, "peep": 5, "vt": 450, "rr": 20, "ti": 1.0, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
         "spo2": [92, 95], "ph": [7.2, 7.45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
         "other": [
@@ -309,7 +312,7 @@
       },
       "timeline": [
         { "t": 600, "event": "bronchospasm", "note": { "en": "Bronchospasm worsens. Peak pressure jumps and expiratory flow slows.", "hi": "Bronchospasm बढ़ता है। Peak pressure उछलता है और expiratory flow धीमा होता है।" } },
-        { "t": 3000, "event": "improve", "note": { "en": "Steroids and bronchodilators start to work. Resistance falls.", "hi": "Steroids और bronchodilators असर करने लगे। Resistance घटता है।" } }
+        { "t": 2400, "event": "improve", "note": { "en": "Steroids and bronchodilators start to work. Resistance falls.", "hi": "Steroids और bronchodilators असर करने लगे। Resistance घटता है।" } }
       ],
       "debrief": [
         { "en": "In asthma the danger is gas stacking breath after breath. Rate is the main lever.", "hi": "Asthma में ख़तरा है साँस दर साँस gas का जमा होना। Rate मुख्य lever है।" },
@@ -340,13 +343,13 @@
         "diagnosis": { "en": "Severe diabetic ketoacidosis with reduced consciousness", "hi": "घटी चेतना के साथ गंभीर diabetic ketoacidosis" },
         "hb": 14, "temp": 36.9, "volumeStatus": "low",
         "metabolic": { "hco3": 6, "lactate": 2.0 },
-        "vco2": 250,
+        "vco2": 200,
         "drive": { "rate": 34, "effort": 10, "sedation": 0.7 }
       },
       "lung": { "c": 50, "r": 10, "flowLimited": false, "shunt": 0.06, "recruitable": 0.3, "deadSpace": 0.05, "upperInflection": 35 },
-      "start": { "mode": "acvc", "settings": { "fio2": 40, "peep": 5, "vt": 400, "rr": 14, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
+      "start": { "mode": "acvc", "abg": { "PaCO2": 18 }, "settings": { "fio2": 40, "peep": 5, "vt": 430, "rr": 14, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
-        "spo2": [92, 96], "paco2": [16, 26], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
+        "spo2": [94, 98], "paco2": [16, 26], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
         "other": [
           { "en": "Match the minute ventilation she had before intubation. A normal rate is dangerous here.", "hi": "Intubation से पहले जितना minute ventilation था, उतना रखें। यहाँ सामान्य rate ख़तरनाक है।" },
           { "en": "Expected PaCO2 by Winter's formula is 1.5 x 6 + 8, about 17.", "hi": "Winter's formula से अपेक्षित PaCO2 है 1.5 x 6 + 8, लगभग 17।" }
@@ -357,7 +360,7 @@
       ],
       "debrief": [
         { "en": "Her fast breathing was keeping her alive. It blew off CO2 to balance the acid.", "hi": "उनकी तेज़ साँस उन्हें ज़िंदा रख रही थी। वह CO2 निकालकर acid को संतुलित कर रही थी।" },
-        { "en": "At rate 14, PaCO2 climbs toward 40 and pH can fall below 7.0.", "hi": "Rate 14 पर PaCO2 40 की ओर चढ़ता है और pH 7.0 से नीचे जा सकता है।" },
+        { "en": "At rate 14, PaCO2 climbs above 30 within minutes and pH falls below 7.0.", "hi": "Rate 14 पर PaCO2 मिनटों में 30 से ऊपर चढ़ता है और pH 7.0 से नीचे गिरता है।" },
         { "en": "Set a high rate from the first breath. Check a gas within 30 minutes.", "hi": "पहली साँस से ऊँचा rate set करें। 30 मिनट में gas जाँचें।" },
         { "en": "The ventilator only buys time. Insulin and fluids treat the acid.", "hi": "Ventilator केवल समय देता है। Acid का इलाज insulin और fluids हैं।" }
       ],
@@ -387,7 +390,7 @@
         "vco2": 240,
         "drive": { "rate": 30, "effort": 10, "sedation": 0.8 }
       },
-      "lung": { "c": 28, "r": 14, "flowLimited": false, "shunt": 0.4, "recruitable": 0.5, "deadSpace": 0.3, "upperInflection": 26 },
+      "lung": { "c": 34, "r": 14, "flowLimited": false, "shunt": 0.42, "recruitable": 0.6, "deadSpace": 0.28, "upperInflection": 30 },
       "start": { "mode": "acvc", "settings": { "fio2": 80, "peep": 5, "vt": 600, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
         "spo2": [88, 95], "ph": [7.2, 7.45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [4, 8],
@@ -435,7 +438,7 @@
         "vco2": 220,
         "drive": { "rate": 26, "effort": 8, "sedation": 0.7 }
       },
-      "lung": { "c": 35, "r": 12, "flowLimited": false, "shunt": 0.25, "recruitable": 0.35, "deadSpace": 0.15, "upperInflection": 28 },
+      "lung": { "c": 35, "r": 12, "flowLimited": false, "shunt": 0.22, "recruitable": 0.4, "deadSpace": 0.15, "upperInflection": 28 },
       "start": { "mode": "acvc", "settings": { "fio2": 60, "peep": 8, "vt": 480, "rr": 18, "ti": 0.9, "trigType": "flow", "trigFlow": 2 } },
       "goals": {
         "spo2": [92, 96], "paco2": [35, 45], "pplatMax": 30, "drivingMax": 15, "vtPerKg": [6, 8],
@@ -446,6 +449,8 @@
       },
       "timeline": [
         { "t": 900, "event": "pneumothorax", "note": { "en": "A broken rib tears the lung. Air builds up under pressure in the left chest.", "hi": "टूटी पसली फेफड़े को फाड़ती है। बाएँ सीने में दबाव से हवा भरती है।" } },
+        { "t": 1500, "event": "improve", "note": { "en": "A chest drain is placed. The lung re-expands and oxygen improves.", "hi": "Chest drain लगाया गया। फेफड़ा फिर फैलता है और oxygen सुधरता है।" } },
+        { "t": 1500, "event": "fluidBolus", "note": { "en": "Blood transfusion runs in. His volume status improves.", "hi": "Blood transfusion चढ़ रहा है। उनका volume status सुधरता है।" } },
         { "t": 2700, "event": "secretions", "note": { "en": "Blood and secretions collect in the airway.", "hi": "Airway में ख़ून और secretions जमा होते हैं।" } }
       ],
       "debrief": [

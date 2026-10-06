@@ -1752,12 +1752,12 @@
     },
     {
      "say": {
-      "en": "Put it back to 12. The monitor shows SpO2, heart rate and BP. The blood gas confirms the story.",
-      "hi": "इसे वापस 12 करें। Monitor पर SpO2, heart rate और BP हैं। Blood gas पूरी कहानी पक्की करती है।"
+      "en": "Put it back to 14. The monitor shows SpO2, heart rate and BP. The blood gas confirms the story.",
+      "hi": "इसे वापस 14 करें। Monitor पर SpO2, heart rate और BP हैं। Blood gas पूरी कहानी पक्की करती है।"
      },
      "do": {
       "key": "rr",
-      "to": 12
+      "to": 14
      },
      "expect": {
       "key": "paco2",
@@ -1899,12 +1899,12 @@
     },
     {
      "say": {
-      "en": "Set the rate back to 12. Now raise tidal volume to 550 mL.",
-      "hi": "Rate वापस 12 करें। अब tidal volume 550 mL करें।"
+      "en": "Set the rate back to 14. Now raise tidal volume to 550 mL.",
+      "hi": "Rate वापस 14 करें। अब tidal volume 550 mL करें।"
      },
      "do": {
       "key": "rr",
-      "to": 12
+      "to": 14
      }
     },
     {
@@ -2162,8 +2162,12 @@
     },
     {
      "say": {
-      "en": "The ventilator rate is only 14. Watch CO2 climb and pH fall.",
-      "hi": "Ventilator rate केवल 14 है। CO2 चढ़ता और pH गिरता देखें।"
+      "en": "Her lungs are healthy, so lower FiO2 to 30%. Then wait: on rate 14, CO2 climbs and pH falls.",
+      "hi": "उनके फेफड़े स्वस्थ हैं, इसलिए FiO2 30% करें। फिर रुकें: rate 14 पर CO2 चढ़ता है और pH गिरता है।"
+     },
+     "do": {
+      "key": "fio2",
+      "to": 30
      },
      "expect": {
       "key": "ph",
@@ -2232,8 +2236,8 @@
     },
     {
      "say": {
-      "en": "Look at plateau and driving pressure. Both are too high.",
-      "hi": "Plateau और driving pressure देखें। दोनों बहुत ऊँचे हैं।"
+      "en": "Look at plateau and driving pressure. Driving pressure is far above 15, and plateau is close to 30.",
+      "hi": "Plateau और driving pressure देखें। Driving pressure 15 से बहुत ऊपर है, और plateau 30 के क़रीब है।"
      },
      "highlight": [
       "pplat",
@@ -2342,12 +2346,12 @@
     },
     {
      "say": {
-      "en": "First lever: lower the rate to 12. This gives the most extra time to breathe out.",
-      "hi": "पहला lever: rate 12 करें। इससे साँस छोड़ने को सबसे ज़्यादा extra समय मिलता है।"
+      "en": "First: shorten Ti to 0.8 s. Expiration gets a little longer.",
+      "hi": "पहला: Ti को 0.8 s करें। Expiration थोड़ा लंबा होता है।"
      },
      "do": {
-      "key": "rr",
-      "to": 12
+      "key": "ti",
+      "to": 0.8
      },
      "expect": {
       "key": "autoPeep",
@@ -2356,8 +2360,8 @@
     },
     {
      "say": {
-      "en": "Second: smaller breaths. Set 450 mL, about 7 mL/kg.",
-      "hi": "दूसरा: छोटी साँसें। 450 mL set करें, लगभग 7 mL/kg।"
+      "en": "Second: smaller breaths. Set 450 mL, about 7 mL/kg. Less air has to leave.",
+      "hi": "दूसरा: छोटी साँसें। 450 mL set करें, लगभग 7 mL/kg। कम हवा बाहर निकालनी पड़ती है।"
      },
      "do": {
       "key": "vt",
@@ -2370,12 +2374,12 @@
     },
     {
      "say": {
-      "en": "Third: shorten Ti to 0.8 s so expiration lasts longer.",
-      "hi": "तीसरा: Ti को 0.8 s करें ताकि expiration ज़्यादा चले।"
+      "en": "Third: lower the rate to 16. Each breath now has much more time to empty.",
+      "hi": "तीसरा: rate 16 करें। हर साँस को खाली होने का बहुत ज़्यादा समय मिलता है।"
      },
      "do": {
-      "key": "ti",
-      "to": 0.8
+      "key": "rr",
+      "to": 16
      },
      "expect": {
       "key": "autoPeep",
@@ -3340,10 +3344,10 @@
    "abg": {
     "pH": 7.27,
     "PaCO2": 58,
-    "PaO2": 160,
-    "HCO3": 26,
-    "SaO2": 99.5,
-    "BE": -1,
+    "PaO2": 177,
+    "HCO3": 25.8,
+    "SaO2": 99,
+    "BE": -0.4,
     "lactate": 1.0,
     "FiO2": 0.5
    },
@@ -3437,14 +3441,14 @@
    "abg": {
     "pH": 7.51,
     "PaCO2": 28,
-    "PaO2": 155,
-    "HCO3": 21.5,
-    "SaO2": 99.5,
-    "BE": -1,
+    "PaO2": 240,
+    "HCO3": 21.6,
+    "SaO2": 100,
+    "BE": -1.1,
     "lactate": 1.0,
     "FiO2": 0.5
    },
-   "spo2": 99,
+   "spo2": 100,
    "q1": {
     "ask": {
      "en": "The rate was raised to 20 earlier. What does the gas show now?",
@@ -3512,12 +3516,12 @@
      },
      {
       "label": {
-       "en": "Lower the rate to 12",
-       "hi": "Rate को 12 करें"
+       "en": "Lower the rate to 14",
+       "hi": "Rate को 14 करें"
       },
       "change": {
        "key": "rr",
-       "to": 12
+       "to": 14
       }
      }
     ],
@@ -3532,13 +3536,13 @@
    "id": "abg-03",
    "scenario": "neuromuscular-gbs",
    "abg": {
-    "pH": 7.4,
+    "pH": 7.42,
     "PaCO2": 40,
-    "PaO2": 290,
-    "HCO3": 24,
+    "PaO2": 245,
+    "HCO3": 25,
     "SaO2": 100,
-    "BE": 0,
-    "lactate": 0.9,
+    "BE": 0.9,
+    "lactate": 1.0,
     "FiO2": 0.6
    },
    "spo2": 100,
@@ -3567,8 +3571,8 @@
     ],
     "answer": 2,
     "why": {
-     "en": "pH and PaCO2 are normal. PaO2 of 290 is far above need, which is hyperoxaemia.",
-     "hi": "pH और PaCO2 सामान्य हैं। PaO2 290 ज़रूरत से बहुत ऊपर है, यह hyperoxaemia है।"
+     "en": "pH and PaCO2 are normal. PaO2 of 245 is far above need, which is hyperoxaemia.",
+     "hi": "pH और PaCO2 सामान्य हैं। PaO2 245 ज़रूरत से बहुत ऊपर है, यह hyperoxaemia है।"
     }
    },
    "q2": {
@@ -3620,8 +3624,8 @@
     ],
     "answer": 0,
     "why": {
-     "en": "Her lungs are normal, so 30% still keeps SpO2 above 92. Extra oxygen gives no benefit and can harm.",
-     "hi": "उसके फेफड़े सामान्य हैं, तो 30% पर भी SpO2 92 से ऊपर रहता है। अतिरिक्त oxygen से फ़ायदा नहीं, नुकसान हो सकता है।"
+     "en": "Her lungs are normal, so 30% still keeps SpO2 above 94. Extra oxygen gives no benefit and can harm.",
+     "hi": "उसके फेफड़े सामान्य हैं, तो 30% पर भी SpO2 94 से ऊपर रहता है। अतिरिक्त oxygen से फ़ायदा नहीं, नुकसान हो सकता है।"
     }
    }
   },
@@ -3629,16 +3633,16 @@
    "id": "abg-04",
    "scenario": "postop-atelectasis",
    "abg": {
-    "pH": 7.34,
-    "PaCO2": 42,
-    "PaO2": 62,
-    "HCO3": 22,
-    "SaO2": 91,
-    "BE": -3,
-    "lactate": 1.8,
+    "pH": 7.35,
+    "PaCO2": 39,
+    "PaO2": 73,
+    "HCO3": 21,
+    "SaO2": 93,
+    "BE": -3.9,
+    "lactate": 2.2,
     "FiO2": 0.6
    },
-   "spo2": 91,
+   "spo2": 93,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -3664,8 +3668,8 @@
     ],
     "answer": 1,
     "why": {
-     "en": "PaO2 is only 62 on 60% oxygen. PaO2/FiO2 is about 103. CO2 is normal, so oxygenation is the problem.",
-     "hi": "60% oxygen पर PaO2 सिर्फ़ 62 है। PaO2/FiO2 लगभग 103 है। CO2 सामान्य है, तो समस्या oxygenation की है।"
+     "en": "PaO2 is only 73 on 60% oxygen. PaO2/FiO2 is about 122. CO2 is normal, so oxygenation is the problem.",
+     "hi": "60% oxygen पर PaO2 सिर्फ़ 73 है। PaO2/FiO2 लगभग 122 है। CO2 सामान्य है, तो समस्या oxygenation की है।"
     }
    },
    "q2": {
@@ -3726,16 +3730,16 @@
    "id": "abg-05",
    "scenario": "pneumonia",
    "abg": {
-    "pH": 7.34,
-    "PaCO2": 38,
-    "PaO2": 58,
-    "HCO3": 20,
-    "SaO2": 89,
-    "BE": -5,
+    "pH": 7.3,
+    "PaCO2": 40,
+    "PaO2": 73,
+    "HCO3": 19.3,
+    "SaO2": 90,
+    "BE": -6.1,
     "lactate": 2.5,
-    "FiO2": 0.8
+    "FiO2": 0.7
    },
-   "spo2": 89,
+   "spo2": 90,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -3761,8 +3765,8 @@
     ],
     "answer": 0,
     "why": {
-     "en": "PaO2 is 58 on 80% oxygen with normal CO2. Blood flows past a consolidated lobe without meeting air. This is shunt.",
-     "hi": "80% oxygen पर PaO2 58 है और CO2 सामान्य है। रक्त consolidated lobe से हवा छुए बिना गुज़रता है। यह shunt है।"
+     "en": "PaO2 is 73 on 70% oxygen with normal CO2. Blood flows past a consolidated lobe without meeting air. This is shunt.",
+     "hi": "70% oxygen पर PaO2 73 है और CO2 सामान्य है। रक्त consolidated lobe से हवा छुए बिना गुज़रता है। यह shunt है।"
     }
    },
    "q2": {
@@ -3814,8 +3818,8 @@
     ],
     "answer": 1,
     "why": {
-     "en": "Pus in the lobe does not open with PEEP. High PEEP overstretches the healthy lung. More FiO2 helps the partly open units.",
-     "hi": "Lobe में भरा pus PEEP से नहीं खुलता। ऊँचा PEEP स्वस्थ फेफड़े को ज़्यादा खींचता है। ज़्यादा FiO2 आंशिक खुली इकाइयों की मदद करता है।"
+     "en": "Pus in the lobe does not open with PEEP. PEEP 15 overstretches the healthy lung and drops BP. FiO2 100% buys time safely.",
+     "hi": "Lobe में भरा pus PEEP से नहीं खुलता। PEEP 15 स्वस्थ फेफड़े को ज़्यादा खींचता है और BP गिराता है। FiO2 100% सुरक्षित रूप से समय देता है।"
     }
    }
   },
@@ -3823,13 +3827,13 @@
    "id": "abg-06",
    "scenario": "cardiogenic-oedema",
    "abg": {
-    "pH": 7.41,
-    "PaCO2": 34,
+    "pH": 7.34,
+    "PaCO2": 38,
     "PaO2": 60,
-    "HCO3": 21,
+    "HCO3": 20,
     "SaO2": 90,
-    "BE": -3,
-    "lactate": 2.0,
+    "BE": -4.9,
+    "lactate": 2.8,
     "FiO2": 0.6
    },
    "spo2": 90,
@@ -3921,15 +3925,15 @@
    "scenario": "copd",
    "abg": {
     "pH": 7.32,
-    "PaCO2": 70,
-    "PaO2": 64,
-    "HCO3": 35,
-    "SaO2": 91,
-    "BE": 8,
+    "PaCO2": 65,
+    "PaO2": 58,
+    "HCO3": 32.5,
+    "SaO2": 86,
+    "BE": 6.4,
     "lactate": 1.2,
     "FiO2": 0.4
    },
-   "spo2": 90,
+   "spo2": 86,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -3955,14 +3959,14 @@
     ],
     "answer": 1,
     "why": {
-     "en": "PaCO2 is 70 but pH is only mildly low. The high HCO3 shows the kidneys compensated over weeks.",
-     "hi": "PaCO2 70 है पर pH थोड़ा ही कम है। ऊँचा HCO3 बताता है कि गुर्दों ने हफ़्तों में compensate किया।"
+     "en": "PaCO2 is 65 but pH is only mildly low. The high HCO3 shows the kidneys compensated over weeks.",
+     "hi": "PaCO2 65 है पर pH थोड़ा ही कम है। ऊँचा HCO3 बताता है कि गुर्दों ने हफ़्तों में compensate किया।"
     }
    },
    "q2": {
     "ask": {
-     "en": "Expiratory flow does not reach zero and auto-PEEP is 9. Which change fits best?",
-     "hi": "Expiratory flow शून्य तक नहीं पहुँचता और auto-PEEP 9 है। कौन सा बदलाव सबसे सही है?"
+     "en": "Expiratory flow does not reach zero. Total PEEP is 7.5 on a set PEEP of 5. Which change fits best?",
+     "hi": "Expiratory flow शून्य तक नहीं पहुँचता। Set PEEP 5 पर total PEEP 7.5 है। कौन सा बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4017,16 +4021,16 @@
    "id": "abg-08",
    "scenario": "copd",
    "abg": {
-    "pH": 7.48,
-    "PaCO2": 42,
-    "PaO2": 70,
+    "pH": 7.46,
+    "PaCO2": 44,
+    "PaO2": 50,
     "HCO3": 30,
-    "SaO2": 94,
+    "SaO2": 86,
     "BE": 6,
-    "lactate": 1.0,
+    "lactate": 1.6,
     "FiO2": 0.4
    },
-   "spo2": 94,
+   "spo2": 86,
    "q1": {
     "ask": {
      "en": "The rate had been raised to 28. What does the gas show?",
@@ -4052,8 +4056,8 @@
     ],
     "answer": 0,
     "why": {
-     "en": "His kidneys keep HCO3 high for a PaCO2 near 65. Bringing PaCO2 to 42 leaves that HCO3 unopposed, so pH rises.",
-     "hi": "उसके गुर्दे PaCO2 लगभग 65 के हिसाब से HCO3 ऊँचा रखते हैं। PaCO2 42 करने पर वह HCO3 अकेला रह जाता है, pH बढ़ता है।"
+     "en": "His kidneys keep HCO3 high for a PaCO2 near 60. Bringing PaCO2 to 44 leaves that HCO3 unopposed, so pH rises.",
+     "hi": "उसके गुर्दे PaCO2 लगभग 60 के हिसाब से HCO3 ऊँचा रखते हैं। PaCO2 44 करने पर वह HCO3 अकेला रह जाता है, pH बढ़ता है।"
     }
    },
    "q2": {
@@ -4074,12 +4078,12 @@
      },
      {
       "label": {
-       "en": "Lower the rate to 14",
-       "hi": "Rate को 14 करें"
+       "en": "Lower the rate to 18",
+       "hi": "Rate को 18 करें"
       },
       "change": {
        "key": "rr",
-       "to": 14
+       "to": 18
       }
      },
      {
@@ -4114,16 +4118,16 @@
    "id": "abg-09",
    "scenario": "asthma",
    "abg": {
-    "pH": 7.21,
-    "PaCO2": 62,
-    "PaO2": 95,
+    "pH": 7.16,
+    "PaCO2": 70,
+    "PaO2": 106,
     "HCO3": 24,
-    "SaO2": 97,
-    "BE": -2,
-    "lactate": 3.0,
+    "SaO2": 96,
+    "BE": -3.7,
+    "lactate": 2.5,
     "FiO2": 0.6
    },
-   "spo2": 97,
+   "spo2": 96,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -4149,14 +4153,14 @@
     ],
     "answer": 3,
     "why": {
-     "en": "pH is low with PaCO2 62. Narrow airways slow breathing out, so CO2 builds up. Oxygen is adequate.",
-     "hi": "PaCO2 62 के साथ pH कम है। सिकुड़ी airways साँस छोड़ना धीमा करती हैं, CO2 जमा होता है। Oxygen पर्याप्त है।"
+     "en": "pH is low with PaCO2 70. Narrow airways slow breathing out, so CO2 builds up. Oxygen is adequate.",
+     "hi": "PaCO2 70 के साथ pH कम है। सिकुड़ी airways साँस छोड़ना धीमा करती हैं, CO2 जमा होता है। Oxygen पर्याप्त है।"
     }
    },
    "q2": {
     "ask": {
-     "en": "Auto-PEEP is 14 and BP is 85/50. Which change fits best?",
-     "hi": "Auto-PEEP 14 है और BP 85/50 है। कौन सा बदलाव सबसे सही है?"
+     "en": "Total PEEP is 9 on a set PEEP of 5, and BP is 83/49. Which change fits best?",
+     "hi": "Set PEEP 5 पर total PEEP 9 है, और BP 83/49 है। कौन सा बदलाव सबसे सही है?"
     },
     "options": [
      {
@@ -4211,16 +4215,16 @@
    "id": "abg-10",
    "scenario": "metabolic-dka",
    "abg": {
-    "pH": 6.82,
-    "PaCO2": 38,
-    "PaO2": 140,
-    "HCO3": 6,
-    "SaO2": 99,
-    "BE": -26,
+    "pH": 6.94,
+    "PaCO2": 32,
+    "PaO2": 167,
+    "HCO3": 6.7,
+    "SaO2": 98,
+    "BE": -22.8,
     "lactate": 2.0,
     "FiO2": 0.4
    },
-   "spo2": 99,
+   "spo2": 98,
    "q1": {
     "ask": {
      "en": "Before intubation PaCO2 was 18. What has happened?",
@@ -4246,8 +4250,8 @@
     ],
     "answer": 1,
     "why": {
-     "en": "Winter's formula expects PaCO2 1.5 x 6 + 8, about 17. A PaCO2 of 38 is far too high. The pH has crashed.",
-     "hi": "Winter's formula से अपेक्षित PaCO2 1.5 x 6 + 8, लगभग 17 है। PaCO2 38 बहुत ज़्यादा है। pH गिर गया है।"
+     "en": "Winter's formula expects PaCO2 1.5 x 6 + 8, about 17. A PaCO2 of 32 is far too high. The pH has crashed.",
+     "hi": "Winter's formula से अपेक्षित PaCO2 1.5 x 6 + 8, लगभग 17 है। PaCO2 32 बहुत ज़्यादा है। pH गिर गया है।"
     }
    },
    "q2": {
@@ -4308,16 +4312,16 @@
    "id": "abg-11",
    "scenario": "ards",
    "abg": {
-    "pH": 7.26,
-    "PaCO2": 48,
-    "PaO2": 58,
-    "HCO3": 21,
-    "SaO2": 88,
-    "BE": -5,
+    "pH": 7.22,
+    "PaCO2": 52,
+    "PaO2": 63,
+    "HCO3": 20.8,
+    "SaO2": 83,
+    "BE": -5.7,
     "lactate": 2.4,
     "FiO2": 0.8
    },
-   "spo2": 88,
+   "spo2": 83,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -4343,8 +4347,8 @@
     ],
     "answer": 2,
     "why": {
-     "en": "PaO2/FiO2 is 58 divided by 0.8, about 72. That is severe ARDS. Much blood passes collapsed alveoli.",
-     "hi": "PaO2/FiO2 है 58 भाग 0.8, लगभग 72। यह severe ARDS है। बहुत सा रक्त बंद alveoli से गुज़रता है।"
+     "en": "PaO2/FiO2 is 63 divided by 0.8, about 79. That is severe ARDS. Much blood passes collapsed alveoli.",
+     "hi": "PaO2/FiO2 है 63 भाग 0.8, लगभग 79। यह severe ARDS है। बहुत सा रक्त बंद alveoli से गुज़रता है।"
     }
    },
    "q2": {
@@ -4405,20 +4409,20 @@
    "id": "abg-12",
    "scenario": "ards",
    "abg": {
-    "pH": 7.32,
-    "PaCO2": 44,
-    "PaO2": 70,
-    "HCO3": 22,
-    "SaO2": 93,
-    "BE": -3,
-    "lactate": 2.0,
-    "FiO2": 0.6
+    "pH": 7.27,
+    "PaCO2": 46,
+    "PaO2": 69,
+    "HCO3": 20.3,
+    "SaO2": 88,
+    "BE": -5.6,
+    "lactate": 2.4,
+    "FiO2": 0.8
    },
-   "spo2": 93,
+   "spo2": 88,
    "q1": {
     "ask": {
-     "en": "Tidal volume is 600 mL, PEEP 12, plateau 34. What does the gas show?",
-     "hi": "Tidal volume 600 mL, PEEP 12, plateau 34 है। Gas क्या दिखाती है?"
+     "en": "Tidal volume is 600 mL, PEEP 12, plateau 35. What does the gas show?",
+     "hi": "Tidal volume 600 mL, PEEP 12, plateau 35 है। Gas क्या दिखाती है?"
     },
     "options": [
      {
@@ -4440,8 +4444,8 @@
     ],
     "answer": 0,
     "why": {
-     "en": "PaO2 70 and SpO2 93 sit inside the target. The danger here is not the gas but the plateau.",
-     "hi": "PaO2 70 और SpO2 93 लक्ष्य के भीतर हैं। यहाँ ख़तरा gas नहीं, plateau है।"
+     "en": "PaO2 69 and SpO2 88 just sit inside the target. The danger here is not the gas but the plateau.",
+     "hi": "PaO2 69 और SpO2 88 बस लक्ष्य के भीतर हैं। यहाँ ख़तरा gas नहीं, plateau है।"
     }
    },
    "q2": {
@@ -4502,16 +4506,16 @@
    "id": "abg-13",
    "scenario": "trauma-contusion",
    "abg": {
-    "pH": 7.32,
-    "PaCO2": 30,
-    "PaO2": 85,
+    "pH": 7.31,
+    "PaCO2": 31,
+    "PaO2": 65,
     "HCO3": 15,
-    "SaO2": 96,
+    "SaO2": 92,
     "BE": -10,
     "lactate": 5.5,
-    "FiO2": 0.6
+    "FiO2": 0.8
    },
-   "spo2": 96,
+   "spo2": 92,
    "q1": {
     "ask": {
      "en": "What is the main problem in this gas?",
@@ -4537,8 +4541,8 @@
     ],
     "answer": 3,
     "why": {
-     "en": "HCO3 is 15 and lactate 5.5 from blood loss. Winter's formula expects PaCO2 about 30. The measured 30 fits.",
-     "hi": "Blood loss से HCO3 15 और lactate 5.5 है। Winter's formula से अपेक्षित PaCO2 लगभग 30 है। मापा 30 मेल खाता है।"
+     "en": "HCO3 is 15 and lactate 5.5 from blood loss. Winter's formula expects PaCO2 about 30. The measured 31 fits.",
+     "hi": "Blood loss से HCO3 15 और lactate 5.5 है। Winter's formula से अपेक्षित PaCO2 लगभग 30 है। मापा 31 मेल खाता है।"
     }
    },
    "q2": {
@@ -4559,12 +4563,12 @@
      },
      {
       "label": {
-       "en": "Keep the rate at 18",
-       "hi": "Rate 18 पर ही रखें"
+       "en": "Keep the rate at 26",
+       "hi": "Rate 26 पर ही रखें"
       },
       "change": {
        "key": "rr",
-       "to": 18
+       "to": 26
       }
      },
      {
@@ -4599,14 +4603,14 @@
    "id": "abg-14",
    "scenario": "trauma-contusion",
    "abg": {
-    "pH": 7.13,
-    "PaCO2": 50,
-    "PaO2": 75,
-    "HCO3": 16,
+    "pH": 7.12,
+    "PaCO2": 53,
+    "PaO2": 81,
+    "HCO3": 16.6,
     "SaO2": 93,
-    "BE": -12,
+    "BE": -11.2,
     "lactate": 5.0,
-    "FiO2": 0.6
+    "FiO2": 0.8
    },
    "spo2": 93,
    "q1": {
@@ -4634,8 +4638,8 @@
     ],
     "answer": 1,
     "why": {
-     "en": "HCO3 16 means metabolic acidosis. Winter's formula expects PaCO2 about 32. A PaCO2 of 50 adds respiratory acidosis.",
-     "hi": "HCO3 16 का मतलब metabolic acidosis है। Winter's formula से अपेक्षित PaCO2 लगभग 32 है। PaCO2 50 respiratory acidosis जोड़ता है।"
+     "en": "HCO3 16 means metabolic acidosis. Winter's formula expects PaCO2 about 32. A PaCO2 of 53 adds respiratory acidosis.",
+     "hi": "HCO3 16 का मतलब metabolic acidosis है। Winter's formula से अपेक्षित PaCO2 लगभग 32 है। PaCO2 53 respiratory acidosis जोड़ता है।"
     }
    },
    "q2": {

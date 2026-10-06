@@ -52,14 +52,18 @@
       with an FRC oxygen store (30 mL/kg PBW x (1 - collapsed) + C x PEEPtotal) washed by VA, so apnoea or disconnection
       desaturates over minutes. Shunt = shunt x (1 - recruitable) + collapsed fraction + events.
       A low V/Q compartment (perfusion fraction lowVQ, V/Q 0.1 of the mean; default 0.25 when flow limited, 0.2 when
-      R is 20 or more, else 0.01) solves its own O2 mass balance: VA_L x 1.16 x (PAO2 - P) = Q_L x 10 x (Cc'(P) - CvO2).
+      R is 20 or more, else 0.01; scenario lung.lowVQ overrides) solves its own O2 mass balance: VA_L x 1.16 x (PAO2 - P) = Q_L x 10 x (Cc'(P) - CvO2).
       CaO2 = sum of compartment contents; CvO2 = CaO2 - VO2 / (10 CO), iterated to a fixed point (West; Nunn).
       Content = 1.34 Hb SO2 + 0.003 PO2. SO2 by Severinghaus 1979 with the Kelman 1966 virtual PO2 correction for pH,
       temperature and PCO2 (same equations as narke-models/explorer-odc.js). VO2 = VCO2 / 0.8. SpO2 = SaO2.
-   7. ACID BASE. HCO3 = scenario HCO3 - (lactate - baseline lactate) + acute CO2 buffering (+1 per 10 mmHg PaCO2 rise,
-      -2 per 10 fall). pH = 6.1 + log10(HCO3 / (0.03 PaCO2)) (Henderson-Hasselbalch).
+   7. ACID BASE. HCO3 = scenario HCO3 - (lactate - baseline lactate) + acute CO2 buffering along the textbook lines
+      (+1 per 10 mmHg PaCO2 above 40, -2 per 10 below 40): buffer(P) = 0.1 (P - 40) above 40, 0.2 (P - 40) below,
+      and HCO3 moves by buffer(PaCO2) - buffer(reference). pH = 6.1 + log10(HCO3 / (0.03 PaCO2)) (Henderson-Hasselbalch).
       Buffering is scaled by HCO3 / 24 below 24 (less buffer base in severe metabolic acidosis; teaching value).
-      The acute buffering reference is the PaCO2 at the start steady state, so scenario HCO3 is the presenting value.
+      The reference is the start PaCO2, so scenario HCO3 is the presenting value. A scenario may give start.abg.PaCO2,
+      the presenting PaCO2 from the patient's own breathing before the ventilator took over (DKA compensation, acute on
+      chronic hypercapnia). init() then holds that PaCO2 at t = 0 and the CO2 store carries it to the new steady state
+      over minutes, so the first gas shows the story and the effect of the start settings appears with time.
       Standard base excess (Van Slyke, CLSI C46): BE = 0.93 (HCO3 - 24.4 + 14.83 (pH - 7.40)).
       Lactate rises 0.1 mmol/L/min per unit stress, stress = max(0, (80 - SpO2) / 20) + max(0, (60 - MAP) / 20);
       without stress it clears to baseline with a 90 min time constant (teaching values).
@@ -80,7 +84,11 @@
       whatIf() marks pending events as fired, so its 30 min result shows only the one setting change.
    Settings also accept flowPattern "square" | "decel" for volume breaths (not in SETTINGS until learn.json covers it).
    Integration: step() sub-steps at 10 s or less with exact exponential updates, so dt from 1 s to 3600 s is stable.
-   Teaching gains marked above are model choices for a clinical reviewer to tune, not measured patient data. */
+   Teaching gains marked above are model choices for a clinical reviewer to tune, not measured patient data.
+   CALIBRATION. Scenario numbers (narke/vent/scenarios.json) are tuned so the t = 0 gas matches each story, a
+   good-practice strategy meets the scenario goals within 60 min and a typical mistake shows its harm. The runs are
+   fixed in test/narke-vent-strategies.mjs, checked by test/narke-vent-engine.test.mjs and printed by
+   tools/narke-vent-audit.mjs. */
 (function (root, factory) {
   var m = factory();
   if (typeof module === "object" && module.exports) module.exports = m;
@@ -114,56 +122,56 @@
 
   var CHAIN_STEPS = ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"];
   var CHAIN_LABELS = {
-    setting: T("Setting", "Setting"), ventilator: T("Ventilator delivers", "Ventilator देता है"),
-    mechanics: T("Lung mechanics", "Lung mechanics"), waveforms: T("Waveforms", "Waveforms"),
-    gasExchange: T("Gas exchange", "Gas exchange"), monitor: T("Monitor", "Monitor"), abg: T("ABG", "ABG"), patient: T("Patient", "मरीज़")
+    setting: T("Setting", "सेटिंग"), ventilator: T("Ventilator delivers", "Ventilator देता है"),
+    mechanics: T("Lung mechanics", "फेफड़े की mechanics"), waveforms: T("Waveforms", "Waveforms (तरंगें)"),
+    gasExchange: T("Gas exchange", "गैस का आदान प्रदान"), monitor: T("Monitor", "मॉनिटर"), abg: T("ABG", "ABG"), patient: T("Patient", "मरीज़")
   };
 
   var TRIG = ["trigType", "trigFlow", "trigPress"];
   function M(id, en, hi, controls, level) { return { id: id, title: T(en, hi), controls: controls, level: level }; }
   var MODES = {
-    vc: M("vc", "Volume control (controlled)", "Volume control (controlled)", ["fio2", "peep", "vt", "rr", "ti"], 1),
-    acvc: M("acvc", "Assist control, volume (AC-VC)", "Assist control, volume (AC-VC)", ["fio2", "peep", "vt", "rr", "ti"].concat(TRIG), 1),
-    pc: M("pc", "Pressure control (controlled)", "Pressure control (controlled)", ["fio2", "peep", "pinsp", "rr", "ti", "rise"], 2),
-    acpc: M("acpc", "Assist control, pressure (AC-PC)", "Assist control, pressure (AC-PC)", ["fio2", "peep", "pinsp", "rr", "ti", "rise"].concat(TRIG), 2),
+    vc: M("vc", "Volume control (controlled)", "Volume control (पूरी तरह मशीन नियंत्रित)", ["fio2", "peep", "vt", "rr", "ti"], 1),
+    acvc: M("acvc", "Assist control, volume (AC-VC)", "Assist control, volume (AC-VC): मरीज़ trigger कर सकता है", ["fio2", "peep", "vt", "rr", "ti"].concat(TRIG), 1),
+    pc: M("pc", "Pressure control (controlled)", "Pressure control (पूरी तरह मशीन नियंत्रित)", ["fio2", "peep", "pinsp", "rr", "ti", "rise"], 2),
+    acpc: M("acpc", "Assist control, pressure (AC-PC)", "Assist control, pressure (AC-PC): मरीज़ trigger कर सकता है", ["fio2", "peep", "pinsp", "rr", "ti", "rise"].concat(TRIG), 2),
     simv: M("simv", "SIMV (volume) with pressure support", "SIMV (volume) और pressure support", ["fio2", "peep", "vt", "rr", "ti", "ps", "cycle"].concat(TRIG), 3),
-    psv: M("psv", "Pressure support (PSV)", "Pressure support (PSV)", ["fio2", "peep", "ps", "cycle", "rise"].concat(TRIG), 2),
+    psv: M("psv", "Pressure support (PSV)", "Pressure support (PSV): हर साँस मरीज़ शुरू करता है", ["fio2", "peep", "ps", "cycle", "rise"].concat(TRIG), 2),
     cpap: M("cpap", "CPAP (no inspiratory support)", "CPAP (inspiratory support नहीं)", ["fio2", "peep"].concat(TRIG), 2),
-    prvc: M("prvc", "Pressure regulated volume control (PRVC)", "Pressure regulated volume control (PRVC)", ["fio2", "peep", "vt", "rr", "ti"].concat(TRIG), 3),
+    prvc: M("prvc", "Pressure regulated volume control (PRVC)", "Pressure regulated volume control (PRVC): pressure से तय volume", ["fio2", "peep", "vt", "rr", "ti"].concat(TRIG), 3),
     niv: M("niv", "Non-invasive BiPAP (IPAP and EPAP)", "Non-invasive BiPAP (IPAP और EPAP)", ["fio2", "ipap", "epap", "rr", "ti", "cycle", "rise"].concat(TRIG), 3),
-    aprv: M("aprv", "Airway pressure release ventilation (APRV)", "Airway pressure release ventilation (APRV)", ["fio2", "phigh", "plow", "thigh", "tlow"], 4)
+    aprv: M("aprv", "Airway pressure release ventilation (APRV)", "Airway pressure release ventilation (APRV): ऊँचे pressure से छोटी release", ["fio2", "phigh", "plow", "thigh", "tlow"], 4)
   };
 
   function S(en, hi, unit, min, max, step, def, level) { return { label: T(en, hi), unit: unit, min: min, max: max, step: step, "default": def, level: level }; }
   var SETTINGS = {
     fio2: S("FiO2", "FiO2", "%", 21, 100, 1, 40, 1),
     peep: S("PEEP", "PEEP", "cmH2O", 0, 24, 1, 5, 1),
-    vt: S("Tidal volume", "Tidal volume", "mL", 200, 1000, 10, 450, 1),
-    rr: S("Set rate", "Set rate", "/min", 4, 40, 1, 14, 1),
+    vt: S("Tidal volume", "हर साँस का volume (tidal volume)", "mL", 200, 1000, 10, 450, 1),
+    rr: S("Set rate", "तय साँस दर (set rate)", "/min", 4, 40, 1, 14, 1),
     pinsp: S("Inspiratory pressure above PEEP", "PEEP के ऊपर inspiratory pressure", "cmH2O", 5, 40, 1, 15, 2),
-    ps: S("Pressure support", "Pressure support", "cmH2O", 0, 30, 1, 10, 2),
-    ti: S("Inspiratory time", "Inspiratory time", "s", 0.4, 3.0, 0.1, 1.0, 2),
-    ie: { label: T("I:E ratio (derived)", "I:E ratio (derived)"), unit: "1:x", min: 0.2, max: 10, step: 0.1, "default": null, level: 2, derived: true },
-    trigType: { label: T("Trigger type", "Trigger type"), unit: "", options: ["flow", "pressure"], "default": "flow", level: 3 },
-    trigFlow: S("Flow trigger", "Flow trigger", "L/min", 0.5, 10, 0.5, 2, 3),
-    trigPress: S("Pressure trigger", "Pressure trigger", "cmH2O", -5, -0.5, 0.5, -2, 3),
-    cycle: S("Expiratory cycle", "Expiratory cycle", "% of peak flow", 5, 80, 5, 25, 3),
-    rise: S("Rise time", "Rise time", "s", 0.05, 0.4, 0.05, 0.1, 3),
-    phigh: S("P high", "P high", "cmH2O", 10, 40, 1, 28, 4),
-    plow: S("P low", "P low", "cmH2O", 0, 15, 1, 0, 4),
-    thigh: S("T high", "T high", "s", 2, 10, 0.5, 4.5, 4),
-    tlow: S("T low", "T low", "s", 0.2, 1.5, 0.1, 0.5, 4),
+    ps: S("Pressure support", "साँस में pressure सहारा (pressure support)", "cmH2O", 0, 30, 1, 10, 2),
+    ti: S("Inspiratory time", "साँस अंदर लेने का समय (Ti)", "s", 0.4, 3.0, 0.1, 1.0, 2),
+    ie: { label: T("I:E ratio (derived)", "I:E अनुपात (गणना से)"), unit: "1:x", min: 0.2, max: 10, step: 0.1, "default": null, level: 2, derived: true },
+    trigType: { label: T("Trigger type", "Trigger का प्रकार"), unit: "", options: ["flow", "pressure"], "default": "flow", level: 3 },
+    trigFlow: S("Flow trigger", "Flow से trigger", "L/min", 0.5, 10, 0.5, 2, 3),
+    trigPress: S("Pressure trigger", "Pressure से trigger", "cmH2O", -5, -0.5, 0.5, -2, 3),
+    cycle: S("Expiratory cycle", "साँस छोड़ने पर cycle (expiratory cycle)", "% of peak flow", 5, 80, 5, 25, 3),
+    rise: S("Rise time", "Pressure चढ़ने का समय (rise time)", "s", 0.05, 0.4, 0.05, 0.1, 3),
+    phigh: S("P high", "ऊँचा pressure (P high)", "cmH2O", 10, 40, 1, 28, 4),
+    plow: S("P low", "नीचा pressure (P low)", "cmH2O", 0, 15, 1, 0, 4),
+    thigh: S("T high", "ऊँचे pressure का समय (T high)", "s", 2, 10, 0.5, 4.5, 4),
+    tlow: S("T low", "नीचे pressure का समय (T low)", "s", 0.2, 1.5, 0.1, 0.5, 4),
     ipap: S("IPAP", "IPAP", "cmH2O", 5, 30, 1, 12, 3),
     epap: S("EPAP", "EPAP", "cmH2O", 3, 15, 1, 5, 3),
-    pPeakHigh: S("Peak pressure alarm", "Peak pressure alarm", "cmH2O", 15, 60, 1, 40, 2),
-    veLow: S("Low minute volume alarm", "Low minute volume alarm", "L/min", 1, 10, 0.5, 3, 2),
-    veHigh: S("High minute volume alarm", "High minute volume alarm", "L/min", 5, 30, 1, 15, 2),
-    apnoea: S("Apnoea alarm time", "Apnoea alarm time", "s", 10, 60, 5, 20, 2),
-    rrHigh: S("High rate alarm", "High rate alarm", "/min", 10, 60, 1, 35, 2),
-    fio2Low: S("Low FiO2 alarm", "Low FiO2 alarm", "%", 18, 95, 1, 18, 3),
-    fio2High: S("High FiO2 alarm", "High FiO2 alarm", "%", 25, 100, 1, 100, 3),
-    peepLow: S("Low PEEP alarm", "Low PEEP alarm", "cmH2O", 0, 20, 1, 0, 3),
-    peepHigh: S("High PEEP alarm", "High PEEP alarm", "cmH2O", 5, 30, 1, 20, 3)
+    pPeakHigh: S("Peak pressure alarm", "Peak pressure की alarm सीमा", "cmH2O", 15, 60, 1, 40, 2),
+    veLow: S("Low minute volume alarm", "कम minute volume की alarm", "L/min", 1, 10, 0.5, 3, 2),
+    veHigh: S("High minute volume alarm", "ज़्यादा minute volume की alarm", "L/min", 5, 30, 1, 15, 2),
+    apnoea: S("Apnoea alarm time", "Apnoea alarm का समय", "s", 10, 60, 5, 20, 2),
+    rrHigh: S("High rate alarm", "ज़्यादा rate की alarm", "/min", 10, 60, 1, 35, 2),
+    fio2Low: S("Low FiO2 alarm", "कम FiO2 की alarm", "%", 18, 95, 1, 18, 3),
+    fio2High: S("High FiO2 alarm", "ज़्यादा FiO2 की alarm", "%", 25, 100, 1, 100, 3),
+    peepLow: S("Low PEEP alarm", "कम PEEP की alarm", "cmH2O", 0, 20, 1, 0, 3),
+    peepHigh: S("High PEEP alarm", "ज़्यादा PEEP की alarm", "cmH2O", 5, 30, 1, 20, 3)
   };
 
   /* Timeline events a scenario can schedule ({t, event, note, duration?}). Unknown ids only show their note. */
@@ -174,8 +182,8 @@
     pneumothorax: T("Pneumothorax: compliance and cardiac output fall", "Pneumothorax: compliance और cardiac output गिरे"),
     plug: T("Mucus plug: lobe collapse, shunt up", "Mucus plug: lobe collapse, shunt बढ़ा"),
     disconnect: T("Circuit disconnected", "Circuit disconnect हुआ"),
-    cuffLeak: T("Cuff leak", "Cuff leak"),
-    o2Failure: T("Oxygen supply failure", "Oxygen supply failure"),
+    cuffLeak: T("Cuff leak", "Cuff से हवा का रिसाव"),
+    o2Failure: T("Oxygen supply failure", "Oxygen supply बंद हुई"),
     sedationLight: T("Sedation lightens: effort returns", "Sedation हल्का: effort लौटा"),
     sedationDeep: T("Deep sedation: no effort", "गहरा sedation: कोई effort नहीं"),
     fever: T("Fever: CO2 production up", "बुखार: CO2 production बढ़ा"),
@@ -183,7 +191,7 @@
     hypotension: T("Hypotension: cardiac output falls for a while", "Hypotension: कुछ समय के लिए cardiac output गिरा"),
     improve: T("Treatment works: resistance, shunt and acidosis ease; sedation lightens", "इलाज असर कर रहा है: resistance, shunt और acidosis घटे; sedation हल्का"),
     fluidBolus: T("Fluid given: volume status up", "Fluid दिया: volume status बढ़ा"),
-    fatigue: T("Respiratory muscle fatigue", "Respiratory muscle fatigue")
+    fatigue: T("Respiratory muscle fatigue", "साँस की मांसपेशियों की थकान")
   };
 
   var NORMAL_SET = { mode: "acvc" };
@@ -249,10 +257,10 @@
   function recTarget(s, peepTot, pmean) { return openOf(0.7 * peepTot + 0.3 * pmean); }
   function collapsed(s) { return clamp(s.p.shunt0 * s.p.recr * (1 - s.rec) / (1 - OPEN5), 0, 0.7); }
   function hco3Of(s, paco2) {
-    var d = paco2 - s.p.pco2Ref;
-    var buf = (d > 0 ? 0.1 * d : 0.2 * d) * Math.min(1, s.p.hco3 / 24);
+    var buf = (bufOf(paco2) - bufOf(s.p.pco2Ref)) * Math.min(1, s.p.hco3 / 24);
     return Math.max(2, s.p.hco3 - (s.lac - s.p.lac0) + buf);
   }
+  function bufOf(p) { return p > 40 ? 0.1 * (p - 40) : 0.2 * (p - 40); }
   function phOf(hco3, paco2) { return 6.1 + log10(hco3 / (0.03 * paco2)); }
 
   function drive(s) {
@@ -441,12 +449,13 @@
       timeline: (sc.timeline || []).map(function (e) { return { t: e.t, event: e.event, duration: e.duration || 0 }; }),
       fired: [], harm: { vili: 0, o2h: 0, hypotMin: 0, hypoxMin: 0, baroMin: 0, apHypoMin: 0 }, settings: st, last: null, log: []
     };
-    settle(s, st);
+    var ab = start.abg || {};
+    settle(s, st, typeof ab.PaCO2 === "number" ? clamp(ab.PaCO2, 10, 150) : null);
     s.settings = st;
     return s;
   }
   /* Solve the steady state at the start settings (fixed point), so the t = 0 ABG reflects them. */
-  function settle(s, st) {
+  function settle(s, st, presenting) {
     var i, mo, a = 0;
     s.apS = 1e9;
     for (i = 0; i < 80; i++) {
@@ -454,7 +463,7 @@
       var tgt = recTarget(s, mo.mech.peepTot, mo.mech.pmean);
       s.rec = 0.5 * s.rec + 0.5 * tgt;
       var pss = mo.va > 0.05 ? clamp(0.863 * mo.vco2 / mo.va, 10, 150) : 150;
-      s.paco2 = 0.6 * s.paco2 + 0.4 * pss;
+      s.paco2 = presenting != null ? presenting : 0.6 * s.paco2 + 0.4 * pss;
       s.p.pco2Ref = s.paco2; // scenario HCO3 is the bicarbonate at the presenting (start) PaCO2
       s.pao2A = mo.PAtarget;
       s.ch = { ph: mo.ph, pao2: mo.pao2 };
@@ -550,12 +559,12 @@
     vili: T("Injurious ventilation: plateau, driving pressure or VT above the protective limit", "Injurious ventilation: plateau, driving pressure या VT protective limit से ऊपर"),
     overdistension: T("Plateau above the upper inflection: overdistension", "Plateau upper inflection से ऊपर: overdistension"),
     baro: T("Plateau above 35 cmH2O: barotrauma risk", "Plateau 35 cmH2O से ऊपर: barotrauma का ख़तरा"),
-    autoPeep: T("Auto-PEEP: gas trapping", "Auto-PEEP: gas trapping"),
+    autoPeep: T("Auto-PEEP: gas trapping", "Auto-PEEP: फेफड़ों में हवा फँस रही है"),
     o2tox: T("FiO2 above 60% for hours: oxygen toxicity risk", "घंटों तक FiO2 60% से ऊपर: oxygen toxicity का ख़तरा"),
     hypotension: T("Hypotension: MAP below 65", "Hypotension: MAP 65 से कम"),
-    hypoxaemia: T("Hypoxaemia", "Hypoxaemia"),
-    acidosis: T("Acidaemia", "Acidaemia"),
-    alkalosis: T("Alkalaemia", "Alkalaemia"),
+    hypoxaemia: T("Hypoxaemia", "ख़ून में oxygen कम (hypoxaemia)"),
+    acidosis: T("Acidaemia", "ख़ून में अम्लता (acidaemia)"),
+    alkalosis: T("Alkalaemia", "ख़ून में क्षारीयता (alkalaemia)"),
     apnoeaBackup: T("Apnoea backup ventilation running", "Apnoea backup ventilation चल रहा है"),
     ineffective: T("Ineffective efforts: the ventilator misses breaths", "Ineffective efforts: ventilator साँसें नहीं पकड़ रहा"),
     leak: T("Leak present", "Leak है"),
@@ -609,9 +618,9 @@
   var ALARM = {
     pPeakHigh: T("High peak pressure", "Peak pressure ज़्यादा"), pPlatHigh: T("Plateau above 30", "Plateau 30 से ऊपर"),
     vtLow: T("Low tidal volume", "Tidal volume कम"), veLow: T("Low minute volume", "Minute volume कम"), veHigh: T("High minute volume", "Minute volume ज़्यादा"),
-    apnoea: T("Apnoea", "Apnoea"), rrHigh: T("High rate", "Rate ज़्यादा"), fio2Low: T("Low FiO2", "FiO2 कम"), fio2High: T("High FiO2", "FiO2 ज़्यादा"),
-    peepLow: T("Low PEEP", "PEEP कम"), peepHigh: T("High PEEP", "PEEP ज़्यादा"), disconnect: T("Disconnection", "Disconnection"),
-    autoPeep: T("Auto-PEEP", "Auto-PEEP"), dyssync: T("Patient-ventilator dyssynchrony", "Patient-ventilator dyssynchrony")
+    apnoea: T("Apnoea", "साँस रुकना (apnoea)"), rrHigh: T("High rate", "Rate ज़्यादा"), fio2Low: T("Low FiO2", "FiO2 कम"), fio2High: T("High FiO2", "FiO2 ज़्यादा"),
+    peepLow: T("Low PEEP", "PEEP कम"), peepHigh: T("High PEEP", "PEEP ज़्यादा"), disconnect: T("Disconnection", "Circuit अलग हुआ"),
+    autoPeep: T("Auto-PEEP", "फँसी हवा का दबाव (auto-PEEP)"), dyssync: T("Patient-ventilator dyssynchrony", "मरीज़ और ventilator का तालमेल नहीं (dyssynchrony)")
   };
   function alarm(id, sev) { return { id: id, severity: sev, label: ALARM[id] }; }
   function alarms(state, settings) {
@@ -795,10 +804,10 @@
   }
 
   var DYS = {
-    doubleTrigger: T("Double trigger", "Double trigger"), ineffectiveTrigger: T("Ineffective trigger", "Ineffective trigger"),
-    autoTrigger: T("Auto-trigger", "Auto-trigger"), flowStarvation: T("Flow starvation", "Flow starvation"),
-    prematureCycle: T("Premature cycling", "Premature cycling"), delayedCycle: T("Delayed cycling", "Delayed cycling"),
-    reverseTrigger: T("Reverse triggering", "Reverse triggering")
+    doubleTrigger: T("Double trigger", "दोहरा trigger (double trigger)"), ineffectiveTrigger: T("Ineffective trigger", "बेअसर trigger (ineffective trigger)"),
+    autoTrigger: T("Auto-trigger", "अपने आप trigger (auto-trigger)"), flowStarvation: T("Flow starvation", "Flow की कमी (flow starvation)"),
+    prematureCycle: T("Premature cycling", "जल्दी cycle होना (premature cycling)"), delayedCycle: T("Delayed cycling", "देर से cycle होना (delayed cycling)"),
+    reverseTrigger: T("Reverse triggering", "उल्टा trigger (reverse triggering)")
   };
   function dyssync(kind, settings) {
     var st = norm(settings), peep = st.peep, C = 45, R = 12, Re = 12, vent = [], ef = [], ev = [], per = 4, k, n = 160;
@@ -840,6 +849,8 @@
 
   /* ---------- score ---------- */
   function inR(x, r) { return r && x >= r[0] && x <= r[1]; }
+  /* Score part maxima (initial is 4 + 3 + 3 points; unsafe is a penalty down to unsafeMin). The UI reads these. */
+  var SCORE_MAX = { mode: 10, initial: 10, oxygenation: 15, ventilation: 15, protection: 20, alarms: 10, abg: 10, time: 10, unsafeMin: -30 };
   function score(run) {
     run = run || {};
     var sc = run.scenario || {}, g = run.goals || sc.goals || {}, pt = sc.patient || {}, log = run.log || [], notes = [];
@@ -864,16 +875,16 @@
     if (first) init = (inR(first.vitals.spo2, [Math.min(spo2R[0], 88), 100]) ? 4 : 0) + (first.vent.pplat <= pplatMax ? 3 : 0) + (kg && inR(first.vent.vte / kg, vtR) || !kg ? 3 : 0);
     var aa = ansFrac("alarm"), ab = ansFrac("abg");
     var last = n ? log[n - 1].readout : null;
-    var parts = {
-      mode: n ? Math.round(10 * (1 - fr(backup)) * (1 - 0.5 * fr(ineff))) : 0,
+    var X = SCORE_MAX, parts = {
+      mode: n ? Math.round(X.mode * (1 - fr(backup)) * (1 - 0.5 * fr(ineff))) : 0,
       initial: init,
-      oxygenation: Math.round(15 * fr(oxOK)),
-      ventilation: Math.round(15 * fr(vOK)),
-      protection: Math.round(20 * fr(prOK)),
-      alarms: Math.round(10 * (aa === null ? fr(alOK) : aa)),
-      abg: Math.round(10 * (ab === null ? (last && (g.ph ? inR(last.gas.ph, g.ph) : inR(last.gas.paco2, g.paco2 || [35, 45])) ? 1 : 0) : ab)),
-      time: tGoal === null ? 0 : Math.round(10 * clamp(1 - (tGoal - 900) / 2700, 0, 1)),
-      unsafe: -Math.min(30, unsafe * 5)
+      oxygenation: Math.round(X.oxygenation * fr(oxOK)),
+      ventilation: Math.round(X.ventilation * fr(vOK)),
+      protection: Math.round(X.protection * fr(prOK)),
+      alarms: Math.round(X.alarms * (aa === null ? fr(alOK) : aa)),
+      abg: Math.round(X.abg * (ab === null ? (last && (g.ph ? inR(last.gas.ph, g.ph) : inR(last.gas.paco2, g.paco2 || [35, 45])) ? 1 : 0) : ab)),
+      time: tGoal === null ? 0 : Math.round(X.time * clamp(1 - (tGoal - 900) / 2700, 0, 1)),
+      unsafe: Math.max(X.unsafeMin, -unsafe * 5)
     };
     var total = 0, k;
     for (k in parts) if (own(parts, k)) total += parts[k];
@@ -888,11 +899,11 @@
 
   return {
     id: "vent-engine", kind: "sim-engine", review: "ai_drafted", version: 1,
-    title: T("Ventilator lab physiology engine", "Ventilator lab physiology engine"),
+    title: T("Ventilator lab physiology engine", "Ventilator lab का physiology engine"),
     disclaimer: T("Educational simulator. Not a real ventilator and not a guide to treating a real patient.", "शैक्षिक simulator। यह असली ventilator नहीं है और असली मरीज़ के इलाज की guide नहीं है।"),
     sources: SOURCES, MODES: MODES, SETTINGS: SETTINGS, EVENTS: EVENTS, CHAIN_STEPS: CHAIN_STEPS, CHAIN_LABELS: CHAIN_LABELS, DYSSYNC: DYS,
     constants: { kCO2: K_CO2, overdistensionFactor: KOD, neuralTi: TIN, substep: SUB, plateauMax: 30, drivingMax: 15 },
     init: init, step: step, breath: breath, readout: readout, abg: abg, explainDelta: explainDelta, alarms: alarms,
-    dyssync: dyssync, whatIf: whatIf, score: score, pbw: pbw, normSettings: norm
+    dyssync: dyssync, whatIf: whatIf, score: score, SCORE_MAX: SCORE_MAX, pbw: pbw, normSettings: norm
   };
 });

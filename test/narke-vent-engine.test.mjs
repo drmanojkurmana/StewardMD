@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
+import { STRATEGIES, CASES, caseState } from "./narke-vent-strategies.mjs";
 const require = createRequire(import.meta.url);
 const file = fileURLToPath(new URL("../narke-models/vent-engine.js", import.meta.url));
 const E = require(file);
@@ -23,7 +24,7 @@ function steady(sc, set, secs = 10800) {
   s = E.step(s, st, secs);
   return { s, st, r: E.readout(s, st) };
 }
-// The content ARDS lung (c 28, UI 26) overdistends at 6 mL/kg with PEEP 15; property tests use a milder recruitable copy.
+// Property tests use a milder, more recruitable copy of the content ARDS lung so their effects are large.
 const ardsMild = () => { const s = quiet("ards"); s.lung.c = 40; s.lung.upperInflection = 30; s.lung.deadSpace = 0.2; return s; };
 const textbook = () => { const s = quiet("postop-normal"); s.lung.shunt = 0.01; s.lung.deadSpace = 0; s.patient.vco2 = 200; return s; };
 
@@ -309,9 +310,8 @@ test("learn.json tutorial expectations hold in the engine (timeline off)", () =>
       if (!step.expect || !before) return;
       const k = step.expect.key, b = get(before, k), a = get(E.readout(s, st), k);
       assert.notEqual(a, undefined, "readout exposes " + k);
-      const tol = 0.1; // a value already at its floor may not move beyond display rounding; it must never move the wrong way
-      if (step.expect.direction === "up") assert.ok(a > b || Math.abs(a - b) <= tol && b === a, `${t.id}[${i}] ${k} ${b} -> ${a}`);
-      else assert.ok(a < b || Math.abs(a - b) <= tol && b === a, `${t.id}[${i}] ${k} ${b} -> ${a}`);
+      // displayed values must move the promised way by at least one display step
+      assert.ok(step.expect.direction === "up" ? a > b : a < b, `${t.id}[${i}] ${k} ${b} -> ${a}`);
       checked++;
     });
   }
@@ -350,4 +350,132 @@ test("ES5 and UMD", () => {
   assert.ok(!/\bfunction\s*\*/.test(code) && !/\basync\b|\bawait\b/.test(code));
   // no function declarations nested inside blocks (illegal in ES5 strict)
   assert.ok(!/(if|for|while)\s*\([^)]*\)\s*\{[^{}]*\bfunction\s+\w+\s*\(/.test(code));
+});
+
+/* ---------- calibration: every scenario behaves like the patient its story describes ----------
+   Strategies and case setups live in test/narke-vent-strategies.mjs; tools/narke-vent-audit.mjs prints the same runs. */
+const at = (id, change, secs, timeline = false) => {
+  const sc = timeline ? byId(id) : quiet(id);
+  let s = E.init(sc);
+  const st = Object.assign({}, s.settings, change);
+  if (secs) s = E.step(s, st, secs);
+  return { s, st, r: E.readout(s, st), sc };
+};
+const flagIds = (r) => r.flags.map((f) => f.id);
+const inside = (x, [lo, hi], msg) => assert.ok(x >= lo && x <= hi, `${msg} ${x} not in ${lo} to ${hi}`);
+
+test("calibration: the t = 0 gas and monitor match each story", () => {
+  const START = {
+    "postop-normal": (r) => { inside(r.gas.paco2, [35, 45], "PaCO2"); inside(r.gas.ph, [7.35, 7.45], "pH"); assert.ok(r.vitals.spo2 >= 96); },
+    "neuromuscular-gbs": (r) => { inside(r.gas.paco2, [35, 45], "PaCO2"); inside(r.gas.ph, [7.35, 7.45], "pH"); assert.ok(r.vitals.spo2 >= 94); },
+    "postop-atelectasis": (r, s) => { inside(r.vitals.spo2, [88, 94], "SpO2"); assert.ok(r.gas.pfRatio < 200 && r.vent.drivingP > 15 && r.vent.vte / s.p.pbw > 8); },
+    pneumonia: (r) => { inside(r.vitals.spo2, [86, 92], "SpO2"); assert.ok(r.gas.pfRatio < 150 && r.gas.ph < 7.35); },
+    "cardiogenic-oedema": (r) => { inside(r.vitals.spo2, [86, 92], "SpO2"); assert.ok(r.gas.pfRatio < 150 && r.vitals.rr >= 28 && r.vitals.map >= 75); },
+    copd: (r) => { inside(r.gas.ph, [7.2, 7.3], "pH"); inside(r.gas.paco2, [70, 90], "PaCO2"); inside(r.gas.hco3, [30, 36], "HCO3"); assert.ok(r.vent.autoPeep >= 2 && r.vitals.map < 65); },
+    asthma: (r) => { inside(r.gas.ph, [7.1, 7.22], "pH"); inside(r.gas.paco2, [60, 80], "PaCO2"); assert.ok(r.vent.autoPeep >= 3 && r.vitals.map < 65 && r.vent.ppeak > 30); },
+    "metabolic-dka": (r) => { inside(r.gas.ph, [7.1, 7.2], "pH"); inside(r.gas.paco2, [15, 20], "PaCO2"); assert.ok(r.gas.hco3 <= 8); },
+    ards: (r, s) => { assert.ok(r.gas.pfRatio < 100 && r.vitals.spo2 < 88 && r.vent.drivingP > 15 && r.vent.vte / s.p.pbw > 8); inside(r.vent.pplat, [26, 32], "plateau"); },
+    "trauma-contusion": (r) => { assert.ok(r.vitals.map < 70 && r.gas.lactate >= 3); inside(r.vitals.spo2, [86, 92], "SpO2"); }
+  };
+  assert.deepEqual(Object.keys(START).sort(), SC.map((x) => x.id).sort());
+  for (const id of Object.keys(START)) {
+    const { s, r } = at(id, {}, 0);
+    try { START[id](r, s); } catch (e) { e.message = id + ": " + e.message; throw e; }
+  }
+});
+
+test("calibration: good practice reaches the scenario goals within 60 minutes (timeline off)", () => {
+  for (const sc of SC) {
+    const g = sc.goals, { s, r } = at(sc.id, STRATEGIES[sc.id].good, 3600), kg = r.vent.vte / s.p.pbw, tag = sc.id + " good: ";
+    inside(r.vitals.spo2, g.spo2, tag + "SpO2");
+    if (g.ph) inside(r.gas.ph, g.ph, tag + "pH"); else inside(r.gas.paco2, g.paco2, tag + "PaCO2");
+    assert.ok(r.vent.pplat <= g.pplatMax && r.vent.drivingP <= g.drivingMax, tag + "plateau " + r.vent.pplat + " driving " + r.vent.drivingP);
+    if (sc.start.mode !== "niv") inside(kg, [g.vtPerKg[0] - 0.5, g.vtPerKg[1] + 0.5], tag + "VT/kg");
+    assert.ok(r.vitals.map >= 65, tag + "MAP " + r.vitals.map);
+    assert.ok(!r.flags.some((f) => ["vili", "baro", "periArrest", "hypotension"].includes(f.id)), tag + flagIds(r));
+    assert.ok(s.harm.vili < 5, tag + "VILI " + s.harm.vili);
+  }
+});
+
+test("calibration: the typical mistake produces the expected harm", () => {
+  const HARM = {
+    "postop-normal": (r) => r.gas.ph < 7.25 && r.gas.paco2 > 60,
+    "neuromuscular-gbs": (r) => r.gas.paco2 > 50 && r.gas.ph < 7.3 && r.vent.vte < 250,
+    "postop-atelectasis": (r, s) => s.harm.vili > 50 && flagIds(r).includes("vili"),
+    pneumonia: (r, s) => s.harm.vili > 50 && r.vent.drivingP > 15,
+    "cardiogenic-oedema": (r) => r.vitals.spo2 < 90,
+    copd: (r) => r.vent.autoPeep >= 10 && r.vitals.map < 65 && r.gas.ph > 7.45,
+    asthma: (r) => r.vent.autoPeep >= 10 && r.vitals.map < 55,
+    "metabolic-dka": (r) => r.gas.ph < 7.0 && r.vitals.map < 65,
+    ards: (r, s) => r.vent.pplat > 30 && s.harm.vili > 100 && r.flags.some((f) => f.id === "vili" && f.severity === "danger"),
+    "trauma-contusion": (r) => r.vitals.map < 55 && r.gas.lactate > 5
+  };
+  for (const sc of SC) {
+    const { s, r } = at(sc.id, STRATEGIES[sc.id].mistake, 3600);
+    assert.ok(HARM[sc.id](r, s), sc.id + " mistake: " + JSON.stringify({ gas: r.gas, vitals: r.vitals, vent: r.vent, vili: s.harm.vili }));
+  }
+  // atelectasis: chasing SpO2 with FiO2 100 also earns the oxygen toxicity flag within hours
+  assert.ok(flagIds(at("postop-atelectasis", STRATEGIES["postop-atelectasis"].mistake, 3 * 3600).r).includes("o2tox"));
+  // DKA: the danger appears over minutes, not at t = 0
+  const d0 = at("metabolic-dka", {}, 0).r.gas.ph, d10 = at("metabolic-dka", {}, 600).r.gas.ph;
+  assert.ok(d0 >= 7.1 && d10 < d0 - 0.1, "DKA pH " + d0 + " to " + d10);
+});
+
+test("calibration: ARDS is winnable with lung protection and worse at 10 mL/kg", () => {
+  const good = at("ards", STRATEGIES.ards.good, 3600).r, big = at("ards", Object.assign({}, STRATEGIES.ards.good, { vt: 700, rr: 20 }), 3600);
+  assert.ok(good.vent.pplat <= 30 && good.vent.drivingP <= 15 && good.gas.ph >= 7.2 && good.vitals.spo2 >= 88 && good.vitals.spo2 <= 95);
+  assert.ok(big.r.vent.pplat > 35 && big.r.vent.drivingP > 20 && big.s.harm.vili > 100 && flagIds(big.r).includes("baro"));
+});
+
+test("calibration: timeline events behave sensibly under good practice", () => {
+  const run = (id, until) => at(id, STRATEGIES[id].good, until, true).r;
+  // trauma: pneumothorax at 15 min drops SpO2 and BP; drain and blood at 25 min bring them back
+  const t14 = run("trauma-contusion", 840), t20 = run("trauma-contusion", 1200), t40 = run("trauma-contusion", 2400);
+  assert.ok(t20.vitals.spo2 < t14.vitals.spo2 - 3 && t20.vitals.map < t14.vitals.map && t20.vent.pplat > t14.vent.pplat, "pneumothorax");
+  assert.ok(t40.vitals.spo2 >= t14.vitals.spo2 && t40.vitals.map >= 65, "drain");
+  // COPD: bronchospasm at 20 min raises auto-PEEP; bronchodilators at 40 min undo it
+  const c19 = run("copd", 1140), c30 = run("copd", 1800), c50 = run("copd", 3000);
+  assert.ok(c30.vent.autoPeep > c19.vent.autoPeep + 3 && c50.vent.autoPeep < c19.vent.autoPeep + 1 && c50.vitals.map >= 65, "COPD bronchospasm");
+  // asthma: bronchospasm at 10 min, steroids and bronchodilators at 40 min
+  const a9 = run("asthma", 540), a20 = run("asthma", 1200), a60 = run("asthma", 3600);
+  assert.ok(a20.vent.ppeak > a9.vent.ppeak + 5 && a60.vent.autoPeep < a20.vent.autoPeep && a60.vitals.map >= 65, "asthma");
+  // ARDS: suction disconnect at 40 min derecruits; 20 min later the lung has reopened
+  const r39 = run("ards", 2390), r41 = run("ards", 2460), r60 = run("ards", 3600);
+  assert.ok(r41.vitals.spo2 < r39.vitals.spo2 && r60.vitals.spo2 >= r39.vitals.spo2 - 1, "ARDS disconnect");
+  // every scenario with its timeline stays finite and physiological for 3 hours
+  for (const sc of SC) {
+    let s = E.init(sc); const st = Object.assign({}, s.settings, STRATEGIES[sc.id].good);
+    for (let t = 0; t < 10800; t += 300) { s = E.step(s, st, 300); const r = E.readout(s, st); finite(r); assert.ok(r.gas.ph > 6.8 && r.vitals.map > 30, sc.id + " t " + s.t); }
+  }
+});
+
+test("ABG cases: the gas comes from the model, the keyed answer works and wrong answers do not look better", () => {
+  assert.deepEqual(Object.keys(CASES).sort(), LEARN.cases.map((c) => c.id).sort());
+  for (const c of LEARN.cases) {
+    const setup = CASES[c.id], { s, st } = caseState(E, SC.find((x) => x.id === c.scenario), setup), g = E.abg(s), r0 = E.readout(s, st);
+    const near = (k, tol) => assert.ok(Math.abs(g[k] - c.abg[k]) <= tol, `${c.id} ${k} case ${c.abg[k]} model ${g[k]}`);
+    near("pH", 0.02); near("PaCO2", 2); near("HCO3", 1); near("FiO2", 0.01); near("PaO2", 3 + 0.05 * g.PaO2);
+    assert.ok(Math.abs(r0.vitals.spo2 - c.spo2) <= 1, c.id + " SpO2");
+    const res = c.q2.options.map((o) => E.whatIf(s, st, o.change));
+    const right = res[c.q2.answer];
+    assert.ok(setup.claim(right.before, right.after), c.id + " keyed answer does what the explanation says");
+    res.forEach((w, i) => {
+      if (i === c.q2.answer) return;
+      const a = setup.score(w.after), b = setup.score(right.after);
+      // abg-13's keyed answer is "change nothing", so a neutral wrong option may tie it
+      assert.ok(setup.atInit ? a <= b : a < b, `${c.id} option ${i} (${c.q2.options[i].label.en}) scores ${a} vs keyed ${b}`);
+    });
+  }
+});
+
+test("Hindi labels are real Hindi, and score maxima add to 100", () => {
+  const s = E.init(byId("ards")), ps = pairs(E).concat(pairs(E.readout(s, s.settings)), pairs(E.alarms(s, s.settings)));
+  const blocks = src.match(/var (FLAG|ALARM) = \{[\s\S]*?\n  \};/g);
+  assert.equal(blocks.length, 2);
+  const lits = [...blocks.join("\n").matchAll(/T\("([^"]*)", "([^"]*)"\)/g)].map((m) => ({ en: m[1], hi: m[2] }));
+  assert.ok(lits.length >= 25, "flag and alarm labels " + lits.length);
+  const abbr = (x) => /^[A-Za-z0-9:]+$/.test(x) && x.replace(/[^A-Z]/g, "").length >= 2; // PEEP, FiO2, IPAP, ABG
+  for (const p of ps.concat(lits)) assert.ok(p.hi !== p.en || abbr(p.en), "Hindi equals English: " + p.en);
+  const M = E.SCORE_MAX, sum = M.mode + M.initial + M.oxygenation + M.ventilation + M.protection + M.alarms + M.abg + M.time;
+  assert.equal(sum, 100); assert.equal(M.unsafeMin, -30);
 });
